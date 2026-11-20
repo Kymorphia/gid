@@ -142,7 +142,6 @@ class VideoTimeCode : gobject.boxed.BoxedWrap!(gst_video_time_code_get_type)
 
   /**
       field_count is 0 for progressive, 1 or 2 for interlaced.
-      latest_daiy_jam reference is stolen from caller.
   
       Params:
         fpsN = Numerator of the frame rate
@@ -318,7 +317,6 @@ class VideoTimeCode : gobject.boxed.BoxedWrap!(gst_video_time_code_get_type)
 
   /**
       field_count is 0 for progressive, 1 or 2 for interlaced.
-      latest_daiy_jam reference is stolen from caller.
       
       Initializes tc with the given values.
       The values are not checked for being in a valid range. To see if your

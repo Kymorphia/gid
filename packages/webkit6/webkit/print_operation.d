@@ -191,8 +191,8 @@ class PrintOperation : gobject.object.ObjectWrap
       is returned and the print operation starts. In this case, the #WebKitPrintOperation::finished
       signal is emitted when the operation finishes. If an error occurs while printing, the signal
       #WebKitPrintOperation::failed is emitted before #WebKitPrintOperation::finished.
-      If the print dialog is not cancelled current print settings and page setup of print_operation
-      are updated with options selected by the user when Print button is pressed in print dialog.
+      If the print dialog is not cancelled, the current print settings and page setup of print_operation
+      are updated with the options selected by the user when the Print button is pressed in the print dialog.
       You can get the updated print settings and page setup by calling
       [webkit.print_operation.PrintOperation.getPrintSettings] and [webkit.print_operation.PrintOperation.getPageSetup]
       after this method.

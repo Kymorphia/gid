@@ -137,6 +137,35 @@ class WebsocketExtension : gobject.object.ObjectWrap
   }
 
   /**
+      Process a message after it's received, without producing more than
+      max_output_size bytes of output.
+      
+      This behaves like [soup.websocket_extension.WebsocketExtension.processIncomingMessage],
+      but extensions that expand their input (such as `permessage-deflate`)
+      stop and return an error with `errorWebsocketError.CLOSE_TOO_BIG`
+      instead of producing output larger than max_output_size. Extensions
+      that don't implement this fall back to
+      [soup.websocket_extension.WebsocketExtension.processIncomingMessage].
+  
+      Params:
+        header = the message header
+        payload = the payload data
+        maxOutputSize = the maximum size in bytes of the processed payload
+      Returns: the message payload data, or null in case of error
+      Throws: [ErrorWrap]
+  */
+  glib.bytes.Bytes processIncomingMessageWithLimit(ref ubyte header, glib.bytes.Bytes payload, ulong maxOutputSize)
+  {
+    GBytes* _cretval;
+    GError *_err;
+    _cretval = soup_websocket_extension_process_incoming_message_with_limit(cast(SoupWebsocketExtension*)this._cPtr, cast(ubyte*)&header, payload ? cast(GBytes*)payload._cPtr(Yes.Dup) : null, maxOutputSize, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
       Process a message before it's sent.
       
       If the payload isn't changed the given payload is just returned, otherwise

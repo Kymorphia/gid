@@ -42,7 +42,7 @@ class ITPFirstParty : gobject.boxed.BoxedWrap!(webkit_itp_first_party_get_type)
   /**
       Get the last time a #WebKitITPThirdParty has been seen under itp_first_party.
       
-      Each WebKitITPFirstParty is created by [webkit.itpthird_party.ITPThirdParty.getFirstParties] and
+      Each #WebKitITPFirstParty is created by [webkit.itpthird_party.ITPThirdParty.getFirstParties] and
       therefore corresponds to exactly one #WebKitITPThirdParty.
       Returns: the last update time as a #GDateTime
   */
@@ -57,7 +57,7 @@ class ITPFirstParty : gobject.boxed.BoxedWrap!(webkit_itp_first_party_get_type)
   /**
       Get whether itp_first_party has granted website data access to its #WebKitITPThirdParty.
       
-      Each WebKitITPFirstParty is created by [webkit.itpthird_party.ITPThirdParty.getFirstParties] and
+      Each #WebKitITPFirstParty is created by [webkit.itpthird_party.ITPThirdParty.getFirstParties] and
       therefore corresponds to exactly one #WebKitITPThirdParty.
       Returns: true if website data access has been granted, or false otherwise
   */

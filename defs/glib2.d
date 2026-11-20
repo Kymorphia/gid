@@ -221,6 +221,10 @@
 //!set function[utf8_to_utf16].return-value.type '<array length="3" zero-terminated="1" c:type="gunichar2*"><type name="guint16" c:type="gunichar2"/></array>'
 //!set record[Hmac].method[get_digest].parameters.parameter[buffer][direction] out
 //!set record[Hmac].method[get_digest].parameters.parameter[buffer][caller-allocates] 1
+//!set record[Hmac].method[get_digest].parameters.parameter[buffer].type '<array length="1" c:type="guint8*"><type name="guint8" c:type="guint8"/></array>'
+//!set record[Hmac].method[get_digest].parameters.parameter[digest_len][direction] inout
+//!set record[Hmac].constructor[new].parameters.parameter[key].type '<array length="2" c:type="const guchar*"><type name="guint8" c:type="guchar"/></array>'
+//!set record[Hmac].method[update].parameters.parameter[data].type '<array length="1" c:type="const guchar*"><type name="guint8" c:type="guchar"/></array>'
 //!set record[IOChannel].method[read].parameters.parameter[buf].type '<array length="1" zero-terminated="0" c:type="guint8*"><type name="guint8" c:type="guint8"/></array>'
 //!set record[IOChannel].method[read].parameters.parameter[buf][caller-allocates] 1
 //!set record[IOChannel].method[read].parameters.parameter[buf][direction] out

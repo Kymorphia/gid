@@ -5166,23 +5166,7 @@ struct GHashTableIter
   void* dummy6;
 }
 
-/**
-    HMACs should be used when producing a cookie or hash based on data
-    and a key. Simple mechanisms for using SHA1 and other algorithms to
-    digest a key and data together are vulnerable to various security
-    issues.
-    [HMAC](http://en.wikipedia.org/wiki/HMAC)
-    uses algorithms like SHA1 in a secure way to produce a digest of a
-    key and data.
-    
-    Both the key and data are arbitrary byte arrays of bytes or characters.
-    
-    Support for HMAC Digests has been added in GLib 2.30, and support for SHA-512
-    in GLib 2.42. Support for SHA-384 was added in GLib 2.52.
-    
-    To create a new [glib.hmac.Hmac], use [glib.hmac.Hmac.new_]. To free a [glib.hmac.Hmac], use
-    [glib.hmac.Hmac.unref].
-*/
+/** */
 struct GHmac;
 
 /**

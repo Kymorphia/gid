@@ -2038,8 +2038,15 @@ struct SoupWebsocketExtensionClass
   */
   extern(C) GBytes* function(SoupWebsocketExtension* extension, ubyte* header, GBytes* payload, GError** _err) processIncomingMessage;
 
+  /**
+      called to process the payload data of
+         a message after it's received without exceeding the requested maximum
+         output size. If unset, @process_incoming_message is used. Since 3.8
+  */
+  extern(C) GBytes* function(SoupWebsocketExtension* extension, ubyte* header, GBytes* payload, ulong maxOutputSize, GError** _err) processIncomingMessageWithLimit;
+
   /** */
-  void*[6] padding;
+  void*[5] padding;
 }
 
 /**

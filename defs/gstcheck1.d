@@ -6,6 +6,7 @@
 
 //# This function is missing its C type "Suite", remove it from the XML
 //!del function[check_run_suite]
+//!del function[check_run_suite_nofork]
 
 //# Set basic parameters to out
 //!set function[check_init].parameters.parameter[argc][direction] inout

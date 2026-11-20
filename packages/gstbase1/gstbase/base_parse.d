@@ -362,6 +362,9 @@ class BaseParse : gst.element.Element
       is used to estimate the total duration of the stream and to estimate
       a seek position, if there's no index and the format is syncable
       (see [gstbase.base_parse.BaseParse.setSyncable]).
+      
+      This value is reset during PAUSED->READY state changes. Subclasses must
+      call this function from #GstBaseParseClass::start if they want to set a static value.
   
       Params:
         bitrate = average bitrate in bits/second
@@ -377,6 +380,9 @@ class BaseParse : gst.element.Element
       duration.  Alternatively, if interval is non-zero (default), then stream
       duration is determined based on estimated bitrate, and updated every interval
       frames.
+      
+      This value is reset during PAUSED->READY state changes. Subclasses must
+      call this function from #GstBaseParseClass::start if they want to set a static value.
   
       Params:
         fmt = #GstFormat.
@@ -394,6 +400,9 @@ class BaseParse : gst.element.Element
       location, a corresponding decoder might need an initial lead_in and a
       following lead_out number of frames to ensure the desired segment is
       entirely filled upon decoding.
+      
+      This value is reset during PAUSED->READY state changes. Subclasses must
+      call this function from #GstBaseParseClass::start if they want to set a static value.
   
       Params:
         fpsNum = frames per second (numerator).
@@ -410,6 +419,9 @@ class BaseParse : gst.element.Element
       Set if frames carry timing information which the subclass can (generally)
       parse and provide.  In particular, intrinsic (rather than estimated) time
       can be obtained following a seek.
+      
+      This value is reset during PAUSED->READY state changes. Subclasses must
+      call this function from #GstBaseParseClass::start if they want to set a static value.
   
       Params:
         hasTiming = whether frames carry timing information
@@ -424,6 +436,9 @@ class BaseParse : gst.element.Element
       versa.  While this is generally correct for audio data, it may not
       be otherwise. Sub-classes implementing such formats should disable
       timestamp inferring.
+      
+      This value is retained over PAUSED->READY state changes. Subclasses
+      can call this function from their instance init function.
   
       Params:
         inferTs = true if parser should infer DTS/PTS from each other
@@ -441,6 +456,9 @@ class BaseParse : gst.element.Element
       If the provided values changed from previously provided ones, this will
       also post a LATENCY message on the bus so the pipeline can reconfigure its
       global latency.
+      
+      This value is retained over PAUSED->READY state changes. Subclasses
+      can call this function from their instance init function.
   
       Params:
         minLatency = minimum parse latency
@@ -454,6 +472,9 @@ class BaseParse : gst.element.Element
   /**
       Subclass can use this function to tell the base class that it needs to
       be given buffers of at least min_size bytes.
+      
+      This value is reset during PAUSED->READY state changes. Subclasses must
+      call this function from #GstBaseParseClass::start if they want to set a static value.
   
       Params:
         minSize = Minimum size in bytes of the data that this base class should
@@ -472,6 +493,9 @@ class BaseParse : gst.element.Element
       will be invoked, but #GstBaseParseClass::pre_push_frame will still be
       invoked, so subclass can perform as much or as little is appropriate for
       passthrough semantics in #GstBaseParseClass::pre_push_frame.
+      
+      This value is reset during PAUSED->READY state changes. Subclasses must
+      call this function from #GstBaseParseClass::start if they want to set a static value.
   
       Params:
         passthrough = true if parser should run in passthrough mode
@@ -486,6 +510,9 @@ class BaseParse : gst.element.Element
       interpolation (previous timestamp + duration), which is incorrect for
       data streams with reordering, where PTS can go backward. Sub-classes
       implementing such formats should disable PTS interpolation.
+      
+      This value is retained over PAUSED->READY state changes. Subclasses
+      can call this function from their instance init function.
   
       Params:
         ptsInterpolate = true if parser should interpolate PTS timestamps
@@ -499,6 +526,9 @@ class BaseParse : gst.element.Element
       Set if frame starts can be identified. This is set by default and
       determines whether seeking based on bitrate averages
       is possible for a format/stream.
+      
+      This value is reset during PAUSED->READY state changes. Subclasses must
+      call this function from #GstBaseParseClass::start if they want to set a static value.
   
       Params:
         syncable = set if frame starts can be identified

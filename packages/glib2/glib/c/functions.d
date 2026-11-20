@@ -1807,8 +1807,10 @@ __gshared extern(C) nothrow
   void function(GError** err, GQuark domain, int code, const(char)* format,  ...) c_g_set_error; ///
   void function(GError** err, GQuark domain, int code, const(char)* message) c_g_set_error_literal; ///
   void function(const(char)* prgname) c_g_set_prgname; ///
+  gboolean function(const(char)* prgname) c_g_set_prgname_once; ///
   GPrintFunc function(GPrintFunc func) c_g_set_print_handler; ///
   GPrintFunc function(GPrintFunc func) c_g_set_printerr_handler; ///
+  void function(const(char)* firstDirType,  ...) c_g_set_user_dirs; ///
   gboolean function(const(char)* variable, const(char)* value, gboolean overwrite) c_g_setenv; ///
   GQuark function() c_g_shell_error_quark; ///
   gboolean function(const(char)* commandLine, int* argcp, char*** argvp, GError** _err) c_g_shell_parse_argv; ///
@@ -7119,10 +7121,16 @@ alias g_set_error_literal = c_g_set_error_literal;
 alias g_set_prgname = c_g_set_prgname;
 
 /** */
+alias g_set_prgname_once = c_g_set_prgname_once;
+
+/** */
 alias g_set_print_handler = c_g_set_print_handler;
 
 /** */
 alias g_set_printerr_handler = c_g_set_printerr_handler;
+
+/** */
+alias g_set_user_dirs = c_g_set_user_dirs;
 
 /** */
 alias g_setenv = c_g_setenv;
@@ -9584,8 +9592,10 @@ shared static this()
   gidLink(cast(void**)&g_set_error, "g_set_error", libs);
   gidLink(cast(void**)&g_set_error_literal, "g_set_error_literal", libs);
   gidLink(cast(void**)&g_set_prgname, "g_set_prgname", libs);
+  gidLink(cast(void**)&g_set_prgname_once, "g_set_prgname_once", libs);
   gidLink(cast(void**)&g_set_print_handler, "g_set_print_handler", libs);
   gidLink(cast(void**)&g_set_printerr_handler, "g_set_printerr_handler", libs);
+  gidLink(cast(void**)&g_set_user_dirs, "g_set_user_dirs", libs);
   gidLink(cast(void**)&g_setenv, "g_setenv", libs);
   gidLink(cast(void**)&g_shell_error_quark, "g_shell_error_quark", libs);
   gidLink(cast(void**)&g_shell_parse_argv, "g_shell_parse_argv", libs);

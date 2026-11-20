@@ -11,17 +11,8 @@ import gst.types;
 /**
     A GParamSpec derived structure for arrays of values.
 */
-class ParamSpecArray : StructWrap!(GstParamSpecArray)
+class ParamSpecArray : gobject.param_spec.ParamSpec
 {
-  /**
-      Create a `param_spec_array.ParamSpecArray` wrap type.
-      Params:
-        elementSpec = the #GParamSpec of the type of values in the array
-  */
-  this(gobject.param_spec.ParamSpec elementSpec = gobject.param_spec.ParamSpec.init) nothrow
-  {
-    this.elementSpec = elementSpec;
-  }
 
   /** */
   this(void* ptr, Flag!"Take" take) nothrow
@@ -30,42 +21,15 @@ class ParamSpecArray : StructWrap!(GstParamSpecArray)
   }
 
   /** */
-  this(void* ptr, Object owner) nothrow
+  static GType _getGType() nothrow
   {
-    super(ptr, owner);
+    import gid.loader : gidSymbolNotFound;
+    return cast(void function())gst_param_spec_array_get_type != &gidSymbolNotFound ? gst_param_spec_array_get_type() : cast(GType)0;
   }
 
-  /**
-      Get `parentInstance` field.
-      Returns: super class
-  */
-  @property gobject.param_spec.ParamSpec parentInstance() nothrow
+  /** */
+  override @property GType _gType() nothrow
   {
-    return cToD!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecArray*)this._cPtr).parentInstance);
-  }
-
-  private gobject.param_spec.ParamSpec _elementSpecRef; // Keeps borrowed field value alive
-
-  /**
-      Get `elementSpec` field.
-      Returns: the #GParamSpec of the type of values in the array
-  */
-  @property gobject.param_spec.ParamSpec elementSpec() nothrow
-  {
-    return cToD!(gobject.param_spec.ParamSpec)(cast(void*)(cast(GstParamSpecArray*)this._cPtr).elementSpec);
-  }
-
-  /**
-      Set `elementSpec` field.
-      Params:
-        propval = the #GParamSpec of the type of values in the array
-  */
-  @property void elementSpec(gobject.param_spec.ParamSpec propval) nothrow
-  {
-    if (_refuseBorrowedStore("elementSpec"))
-      return;
-
-    _elementSpecRef = propval;
-    (cast(GstParamSpecArray*)this._cPtr).elementSpec = propval ? cast(GParamSpec*)propval._cPtr(No.Dup) : null;
+    return _getGType();
   }
 }

@@ -13,17 +13,18 @@ import gobject.gid_builder;
 import gobject.object;
 import webkit.c.functions;
 import webkit.c.types;
+import webkit.image_list;
 import webkit.types;
 
 /**
     Provides access to the icons associated with web sites.
     
-    WebKit will automatically look for available icons in <link>
+    WebKit will automatically look for available icons in `<link>`
     elements on opened pages as well as an existing favicon.ico and
     load the images found into a memory cache if possible. That cache
     is frozen to an on-disk database for persistence.
     
-    If #WebKitSettings:enable-private-browsing is true, new icons
+    If [webkit.website_data_manager.WebsiteDataManager.isEphemeral] is true, new icons
     won't be added to the on-disk database and no existing icons will
     be deleted from it. Nevertheless, WebKit will still store them in
     the in-memory cache during the current execution.
@@ -83,12 +84,16 @@ class FaviconDatabase : gobject.object.ObjectWrap
       Asynchronously obtains a favicon image.
       
       Asynchronously obtains an image of the favicon for the
-      given page URI. It returns the cached icon if it's in the database
-      asynchronously waiting for the icon to be read from the database.
+      given page URI. If the icon is already in the memory cache, its image data
+      is not read from the database again. The result is always delivered
+      asynchronously.
       
       This is an asynchronous method. When the operation is finished, callback will
       be invoked. You can then call [webkit.favicon_database.FaviconDatabase.getFaviconFinish]
       to get the result of the operation.
+      
+      New applications should use [webkit.favicon_database.FaviconDatabase.getPageIcons] and
+      [webkit.favicon_database.FaviconDatabase.getPageIconsFinish] instead.
   
       Params:
         pageUri = URI of the page for which we want to retrieve the favicon
@@ -120,6 +125,9 @@ class FaviconDatabase : gobject.object.ObjectWrap
 
   /**
       Finishes an operation started with [webkit.favicon_database.FaviconDatabase.getFavicon].
+      
+      New applications should use [webkit.favicon_database.FaviconDatabase.getPageIcons] and
+      [webkit.favicon_database.FaviconDatabase.getPageIconsFinish] instead.
   
       Params:
         result = A #GAsyncResult obtained from the #GAsyncReadyCallback passed to [webkit.favicon_database.FaviconDatabase.getFavicon]
@@ -151,6 +159,61 @@ class FaviconDatabase : gobject.object.ObjectWrap
     const(char)* _pageUri = pageUri.toCString!(No.Malloc, No.Nullable);
     _cretval = webkit_favicon_database_get_favicon_uri(cast(WebKitFaviconDatabase*)this._cPtr, _pageUri);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Obtains the set of icons for a page.
+      
+      Starts an asynchronous operation to obtain the set of icons cached in the database for a given
+      page URI. Available icons will be read from the database and provided as a [webkit.image_list.ImageList]
+      that can be retrieved using `idwebkit_favicon_database_get_page_icons_finish` in the completion
+      callback.
+  
+      Params:
+        pageUri = URI of the page to get icons for
+        cancellable = A #GCancellable or null
+        callback = A #GAsyncReadyCallback to invoke when the request
+             is satisfied or null to discard the result.
+  */
+  void getPageIcons(string pageUri, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
+  {
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gio.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    const(char)* _pageUri = pageUri.toCString!(No.Malloc, No.Nullable);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    webkit_favicon_database_get_page_icons(cast(WebKitFaviconDatabase*)this._cPtr, _pageUri, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Finishes an operation started with `idwebkit_favicon_database_get_page_icons`.
+  
+      Params:
+        result = A #GAsyncResult obtained from the #GAsyncReadyCallback passed to `idwebkit_favicon_database_get_page_icons`.
+      Returns: the set of icons for the page, or null in case of error.
+      Throws: [ErrorWrap]
+  */
+  webkit.image_list.ImageList getPageIconsFinish(gio.async_result.AsyncResult result)
+  {
+    WebKitImageList* _cretval;
+    GError *_err;
+    _cretval = webkit_favicon_database_get_page_icons_finish(cast(WebKitFaviconDatabase*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = _cretval ? new webkit.image_list.ImageList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

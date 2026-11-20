@@ -217,7 +217,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   }
 
   /**
-      Determine whether this this is a first attempt or a retry for this authentication challenge.
+      Determine whether this is a first attempt or a retry for this authentication challenge.
       Returns: true if authentication attempt is a retry or false otherwise.
   */
   bool isRetry() nothrow

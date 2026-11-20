@@ -23,14 +23,14 @@ import webkit.types;
       for details): [webkit.feature.Feature.getStatus].
     - A category, which may be used to group features together:
       [webkit.feature.Feature.getCategory].
-    - An optional short “name” which can be presented to an user:
+    - An optional short “name” which can be presented to a user:
       [webkit.feature.Feature.getName].
     - An optional longer “detailed” description:
       [webkit.feature.Feature.getDetails].
     
     The lists of available features can be obtained with
     [webkit.settings.Settings.getAllFeatures], [webkit.settings.Settings.getExperimentalFeatures],
-    and [webkit.settings.Settings.getDevelopmentFeatures]). As a rule of thumb,
+    and [webkit.settings.Settings.getDevelopmentFeatures]. As a rule of thumb,
     applications which may want to allow users (i.e. web developers) to test
     WebKit features should use the list of experimental features. Additionally,
     applications might want to expose development features *when targeting
@@ -98,7 +98,7 @@ class Feature : gobject.boxed.BoxedWrap!(webkit_feature_get_type)
       The returned string is suitable to be displayed to end users, but it
       should not be relied upon being localized.
       
-      Note that some *features may not* have a detailed description, and NULL
+      Note that some *features may not* have a detailed description, and null
       is returned in this case.
       Returns: Feature description.
   */
@@ -128,7 +128,7 @@ class Feature : gobject.boxed.BoxedWrap!(webkit_feature_get_type)
       The returned string is suitable to be displayed to end users, but it
       should not be relied upon being localized.
       
-      Note that some *features may not* have a short name, and NULL
+      Note that some *features may not* have a short name, and null
       is returned in this case.
       Returns: Short feature name.
   */

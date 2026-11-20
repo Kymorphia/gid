@@ -75,10 +75,10 @@ class AutomationSession : gobject.object.ObjectWrap
   }
 
   /**
-      Get the the previously set #WebKitAutomationSession.
+      Get the previously set #WebKitApplicationInfo.
       
-      Get the #WebKitAutomationSession previously set with [webkit.automation_session.AutomationSession.setApplicationInfo].
-      Returns: the #WebKitAutomationSession of session, or null if no one has been set.
+      Get the #WebKitApplicationInfo previously set with [webkit.automation_session.AutomationSession.setApplicationInfo].
+      Returns: the #WebKitApplicationInfo of session, or null if no one has been set.
   */
   webkit.application_info.ApplicationInfo getApplicationInfo() nothrow
   {

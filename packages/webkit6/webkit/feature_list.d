@@ -17,7 +17,7 @@ import webkit.types;
     
     ```c
     g_autoptr(WebKitFeatureList) list = webkit_settings_get_experimental_features();
-    for (gsize i = 0; i < webkit_feature_list_get_length(list): i++) {
+    for (gsize i = 0; i < webkit_feature_list_get_length(list); i++) {
         WebKitFeature *feature = webkit_feature_list_get(list, i);
         // Do something with "feature".
     }
@@ -44,6 +44,23 @@ class FeatureList : gobject.boxed.BoxedWrap!(webkit_feature_list_get_type)
   }
 
   /**
+      Finds a feature given its identifier.
+  
+      Params:
+        identifier = a #WebKitFeature identifier
+      Returns: The feature with the given
+            identifier, or null if it cannot be found.
+  */
+  webkit.feature.Feature find(string identifier) nothrow
+  {
+    WebKitFeature* _cretval;
+    const(char)* _identifier = identifier.toCString!(No.Malloc, No.Nullable);
+    _cretval = webkit_feature_list_find(cast(WebKitFeatureList*)this._cPtr, _identifier);
+    auto _retval = _cretval ? new webkit.feature.Feature(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
       Gets a feature given its index.
   
       Params:
@@ -61,8 +78,6 @@ class FeatureList : gobject.boxed.BoxedWrap!(webkit_feature_list_get_type)
   /**
       Gets the number of elements in the feature list.
       Returns: number of elements.
-        
-        Since 2.42
   */
   size_t getLength() nothrow
   {

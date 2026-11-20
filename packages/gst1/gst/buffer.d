@@ -632,7 +632,7 @@ class Buffer : gobject.boxed.BoxedWrap!(gst_buffer_get_type)
   
       Params:
         offset = the offset to extract
-        size = the size to extract
+        size = the size to extract, G_MAXSIZE (-1) for all data after offset
         dest = A pointer where
            the destination array will be written. Might be null if the size is 0.
   */

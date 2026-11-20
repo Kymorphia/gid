@@ -14,7 +14,7 @@ import webkit.feature_list;
 import webkit.types;
 
 /**
-    Control the behaviour of a #WebKitWebView.
+    Control the behavior of a #WebKitWebView.
     
     #WebKitSettings can be applied to a #WebKitWebView to control text charset,
     color, font sizes, printing mode, script support, loading of images and various
@@ -75,7 +75,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: Whether file access is allowed from file URLs. By default, when
         something is loaded in a #WebKitWebView using a file URI, cross
         origin requests to other file resources are not allowed. This
-        setting allows you to change that behaviour, so that it would be
+        setting allows you to change that behavior, so that it would be
         possible to do a XMLHttpRequest of a local file, for example.
   */
   @property bool allowFileAccessFromFileUrls() nothrow
@@ -89,7 +89,7 @@ class Settings : gobject.object.ObjectWrap
         propval = Whether file access is allowed from file URLs. By default, when
           something is loaded in a #WebKitWebView using a file URI, cross
           origin requests to other file resources are not allowed. This
-          setting allows you to change that behaviour, so that it would be
+          setting allows you to change that behavior, so that it would be
           possible to do a XMLHttpRequest of a local file, for example.
   */
   @property void allowFileAccessFromFileUrls(bool propval) nothrow
@@ -101,7 +101,7 @@ class Settings : gobject.object.ObjectWrap
       Get `allowModalDialogs` property.
       Returns: Determine whether it's allowed to create and run modal dialogs
         from a #WebKitWebView through JavaScript with
-        <function>window.showModalDialog</function>. If it's set to
+        `window.showModalDialog`. If it's set to
         false, the associated #WebKitWebView won't be able to create
         new modal dialogs, so not even the #WebKitWebView::create
         signal will be emitted.
@@ -116,7 +116,7 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = Determine whether it's allowed to create and run modal dialogs
           from a #WebKitWebView through JavaScript with
-          <function>window.showModalDialog</function>. If it's set to
+          `window.showModalDialog`. If it's set to
           false, the associated #WebKitWebView won't be able to create
           new modal dialogs, so not even the #WebKitWebView::create
           signal will be emitted.
@@ -131,7 +131,7 @@ class Settings : gobject.object.ObjectWrap
       Returns: Whether or not the top frame is allowed to navigate to data URLs. It is disabled by default
         due to the risk it poses when loading untrusted URLs, with data URLs being used in scamming
         and phishing attacks. In contrast, a scenario where it could be enabled could be an app that
-        embeds a WebView and you have control of the pages being show instead of a generic browser.
+        embeds a WebView and you have control of the pages being shown instead of a generic browser.
   */
   @property bool allowTopNavigationToDataUrls() nothrow
   {
@@ -144,7 +144,7 @@ class Settings : gobject.object.ObjectWrap
         propval = Whether or not the top frame is allowed to navigate to data URLs. It is disabled by default
           due to the risk it poses when loading untrusted URLs, with data URLs being used in scamming
           and phishing attacks. In contrast, a scenario where it could be enabled could be an app that
-          embeds a WebView and you have control of the pages being show instead of a generic browser.
+          embeds a WebView and you have control of the pages being shown instead of a generic browser.
   */
   @property void allowTopNavigationToDataUrls(bool propval) nothrow
   {
@@ -157,7 +157,7 @@ class Settings : gobject.object.ObjectWrap
         should be allowed to access content from any origin.  By default, when
         something is loaded in a #WebKitWebView using a file scheme URL,
         access to the local file system and arbitrary local storage is not
-        allowed. This setting allows you to change that behaviour, so that
+        allowed. This setting allows you to change that behavior, so that
         it would be possible to use local storage, for example.
   */
   @property bool allowUniversalAccessFromFileUrls() nothrow
@@ -172,7 +172,7 @@ class Settings : gobject.object.ObjectWrap
           should be allowed to access content from any origin.  By default, when
           something is loaded in a #WebKitWebView using a file scheme URL,
           access to the local file system and arbitrary local storage is not
-          allowed. This setting allows you to change that behaviour, so that
+          allowed. This setting allows you to change that behavior, so that
           it would be possible to use local storage, for example.
   */
   @property void allowUniversalAccessFromFileUrls(bool propval) nothrow
@@ -536,7 +536,7 @@ class Settings : gobject.object.ObjectWrap
         simple synchronous storage access.
         
         HTML5 local storage specification is available at
-        http://dev.w3.org/html5/webstorage/.
+        https://html.spec.whatwg.org/multipage/webstorage.html.
   */
   @property bool enableHtml5LocalStorage() nothrow
   {
@@ -550,7 +550,7 @@ class Settings : gobject.object.ObjectWrap
           simple synchronous storage access.
           
           HTML5 local storage specification is available at
-          http://dev.w3.org/html5/webstorage/.
+          https://html.spec.whatwg.org/multipage/webstorage.html.
   */
   @property void enableHtml5LocalStorage(bool propval) nothrow
   {
@@ -883,9 +883,9 @@ class Settings : gobject.object.ObjectWrap
       Returns: Whether to enable Spatial Navigation. This feature consists in the ability
         to navigate between focusable elements in a Web page, such as hyperlinks
         and form controls, by using Left, Right, Up and Down arrow keys.
-        For example, if an user presses the Right key, heuristics determine whether
+        For example, if a user presses the Right key, heuristics determine whether
         there is an element they might be trying to reach towards the right, and if
-        there are multiple elements, which element they probably wants.
+        there are multiple elements, which element they probably want.
   */
   @property bool enableSpatialNavigation() nothrow
   {
@@ -898,9 +898,9 @@ class Settings : gobject.object.ObjectWrap
         propval = Whether to enable Spatial Navigation. This feature consists in the ability
           to navigate between focusable elements in a Web page, such as hyperlinks
           and form controls, by using Left, Right, Up and Down arrow keys.
-          For example, if an user presses the Right key, heuristics determine whether
+          For example, if a user presses the Right key, heuristics determine whether
           there is an element they might be trying to reach towards the right, and if
-          there are multiple elements, which element they probably wants.
+          there are multiple elements, which element they probably want.
   */
   @property void enableSpatialNavigation(bool propval) nothrow
   {
@@ -1160,7 +1160,7 @@ class Settings : gobject.object.ObjectWrap
 
   /**
       Get `mediaContentTypesRequiringHardwareSupport` property.
-      Returns: List of media content types requiring hardware support, split by semicolons (:).
+      Returns: List of media content types requiring hardware support, split by colons (:).
         For example: 'video/webm; codecs="vp*":video/mp4; codecs="avc*":video/&ast; codecs="av1*"'.
   */
   @property string mediaContentTypesRequiringHardwareSupport() nothrow
@@ -1171,7 +1171,7 @@ class Settings : gobject.object.ObjectWrap
   /**
       Set `mediaContentTypesRequiringHardwareSupport` property.
       Params:
-        propval = List of media content types requiring hardware support, split by semicolons (:).
+        propval = List of media content types requiring hardware support, split by colons (:).
           For example: 'video/webm; codecs="vp*":video/mp4; codecs="avc*":video/&ast; codecs="av1*"'.
   */
   @property void mediaContentTypesRequiringHardwareSupport(string propval) nothrow
@@ -1384,8 +1384,8 @@ class Settings : gobject.object.ObjectWrap
       Get `webrtcUdpPortsRange` property.
       Returns: Allow customization of the WebRTC UDP ports range.
         
-        In some constrained environments where a firewall blocks UDP network traffic excepted on a
-        specific port range, this settings can be used to give hints to the WebRTC backend regarding
+        In some constrained environments where a firewall blocks UDP network traffic except on a
+        specific port range, this setting can be used to give hints to the WebRTC backend regarding
         which ports to allocate. The format is min-port:max-port, so for instance 20000:30000. The
         default empty string value means the OS will use no hints from the WebRTC backend. Using 0
         for one of the values is allowed and means the value is unspecified.
@@ -1400,8 +1400,8 @@ class Settings : gobject.object.ObjectWrap
       Params:
         propval = Allow customization of the WebRTC UDP ports range.
           
-          In some constrained environments where a firewall blocks UDP network traffic excepted on a
-          specific port range, this settings can be used to give hints to the WebRTC backend regarding
+          In some constrained environments where a firewall blocks UDP network traffic except on a
+          specific port range, this setting can be used to give hints to the WebRTC backend regarding
           which ports to allocate. The format is min-port:max-port, so for instance 20000:30000. The
           default empty string value means the OS will use no hints from the WebRTC backend. Using 0
           for one of the values is allowed and means the value is unspecified.
@@ -1510,7 +1510,7 @@ class Settings : gobject.object.ObjectWrap
       Gets the list of available development WebKit features.
       
       The returned features are a subset of those returned by
-      [webkit.settings.Settings.getAllFeatures], and includes those which
+      [webkit.settings.Settings.getAllFeatures], and include those which
       web and WebKit developers might find useful, but in general should
       *not* be exposed to end users; see [webkit.types.FeatureStatus] for
       more details.
@@ -1528,7 +1528,7 @@ class Settings : gobject.object.ObjectWrap
       Gets the list of available experimental WebKit features.
       
       The returned features are a subset of those returned by
-      [webkit.settings.Settings.getAllFeatures], and includes those which
+      [webkit.settings.Settings.getAllFeatures], and include those which
       certain applications may want to expose to end users; see
       [webkit.types.FeatureStatus] for more details.
       Returns: List of experimental features.
@@ -1542,7 +1542,7 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /**
-      Reads the contents of the given group_name from the given key_file and apply the value of
+      Reads the contents of the given group_name from the given key_file and applies the value of
       each key/value to the corresponding property on the settings.
       
       Value types have to match with the corresponding setting property type and the group keys have to
@@ -1592,7 +1592,7 @@ class Settings : gobject.object.ObjectWrap
 
   /**
       Get the #WebKitSettings:allow-top-navigation-to-data-urls property.
-      Returns: true If navigation to data URLs from the top frame is allowed or false\
+      Returns: true If navigation to data URLs from the top frame is allowed or false
         otherwise.
   */
   bool getAllowTopNavigationToDataUrls() nothrow
@@ -1717,7 +1717,7 @@ class Settings : gobject.object.ObjectWrap
 
   /**
       Get the #WebKitSettings:enable-back-forward-navigation-gestures property.
-      Returns: true if horizontal swipe gesture will trigger back-forward navigaiton or false otherwise.
+      Returns: true if horizontal swipe gesture will trigger back-forward navigation or false otherwise.
   */
   bool getEnableBackForwardNavigationGestures() nothrow
   {
@@ -1904,7 +1904,7 @@ class Settings : gobject.object.ObjectWrap
 
   /**
       Get the #WebKitSettings:enable-page-cache property.
-      Returns: true if page cache enabled or false otherwise.
+      Returns: true if page cache is enabled or false otherwise.
   */
   bool getEnablePageCache() nothrow
   {
@@ -2029,7 +2029,7 @@ class Settings : gobject.object.ObjectWrap
       Gets whether a feature is enabled.
   
       Params:
-        feature = the feature to toggle.
+        feature = the feature to query.
       Returns: Whether the feature is enabled.
   */
   bool getFeatureEnabled(webkit.feature.Feature feature) nothrow
@@ -2064,7 +2064,7 @@ class Settings : gobject.object.ObjectWrap
 
   /**
       Get the #WebKitSettings:javascript-can-open-windows-automatically property.
-      Returns: true If JavaScript can open window automatically or false otherwise.
+      Returns: true If JavaScript can open windows automatically or false otherwise.
   */
   bool getJavascriptCanOpenWindowsAutomatically() nothrow
   {
@@ -2087,8 +2087,6 @@ class Settings : gobject.object.ObjectWrap
   /**
       Gets the #WebKitSettings:math-font-family property.
       Returns: The default font family used to display content marked with math font.
-        
-        Since 2.52
   */
   string getMathFontFamily() nothrow
   {
@@ -2124,7 +2122,7 @@ class Settings : gobject.object.ObjectWrap
 
   /**
       Get the #WebKitSettings:media-playback-requires-user-gesture property.
-      Returns: true If an user gesture is needed to play or load media
+      Returns: true If a user gesture is needed to play or load media
            or false if no user gesture is needed.
   */
   bool getMediaPlaybackRequiresUserGesture() nothrow
@@ -2760,8 +2758,6 @@ class Settings : gobject.object.ObjectWrap
 
   /**
       Set the #WebKitSettings:math-font-family property.
-      
-      Since 2.52
   
       Params:
         mathFontFamily = the new default math font family
@@ -2776,7 +2772,7 @@ class Settings : gobject.object.ObjectWrap
       Set the #WebKitSettings:media-content-types-requiring-hardware-support property.
   
       Params:
-        contentTypes = list of media content types requiring hardware support split by semicolons (:) or null to use the default value.
+        contentTypes = list of media content types requiring hardware support split by colons (:) or null to use the default value.
   */
   void setMediaContentTypesRequiringHardwareSupport(string contentTypes = null) nothrow
   {
@@ -2892,12 +2888,12 @@ class Settings : gobject.object.ObjectWrap
       Set the #WebKitSettings:user-agent property by appending the application details.
       
       Set the #WebKitSettings:user-agent property by appending the application details to the default user
-      agent. If no application name or version is given, the default user agent used will be used. If only
-      the version is given, the default engine version is used with the given application name.
+      agent. If no application name is given, the default user agent will be used and application_version
+      is ignored. If only the name is given, the default engine version is used with the given application name.
   
       Params:
         applicationName = The application name used for the user agent or null to use the default user agent.
-        applicationVersion = The application version for the user agent or null to user the default version.
+        applicationVersion = The application version for the user agent or null to use the default version.
   */
   void setUserAgentWithApplicationDetails(string applicationName = null, string applicationVersion = null) nothrow
   {
@@ -2940,7 +2936,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether file access is allowed from file URLs. By default, when
           something is loaded in a #WebKitWebView using a file URI, cross
           origin requests to other file resources are not allowed. This
-          setting allows you to change that behaviour, so that it would be
+          setting allows you to change that behavior, so that it would be
           possible to do a XMLHttpRequest of a local file, for example.
       Returns: Builder instance for fluent chaining
   */
@@ -2954,7 +2950,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Params:
         propval = Determine whether it's allowed to create and run modal dialogs
           from a #WebKitWebView through JavaScript with
-          <function>window.showModalDialog</function>. If it's set to
+          `window.showModalDialog`. If it's set to
           false, the associated #WebKitWebView won't be able to create
           new modal dialogs, so not even the #WebKitWebView::create
           signal will be emitted.
@@ -2971,7 +2967,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether or not the top frame is allowed to navigate to data URLs. It is disabled by default
           due to the risk it poses when loading untrusted URLs, with data URLs being used in scamming
           and phishing attacks. In contrast, a scenario where it could be enabled could be an app that
-          embeds a WebView and you have control of the pages being show instead of a generic browser.
+          embeds a WebView and you have control of the pages being shown instead of a generic browser.
       Returns: Builder instance for fluent chaining
   */
   T allowTopNavigationToDataUrls(bool propval) nothrow
@@ -2986,7 +2982,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           should be allowed to access content from any origin.  By default, when
           something is loaded in a #WebKitWebView using a file scheme URL,
           access to the local file system and arbitrary local storage is not
-          allowed. This setting allows you to change that behaviour, so that
+          allowed. This setting allows you to change that behavior, so that
           it would be possible to use local storage, for example.
       Returns: Builder instance for fluent chaining
   */
@@ -3201,7 +3197,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
           simple synchronous storage access.
           
           HTML5 local storage specification is available at
-          http://dev.w3.org/html5/webstorage/.
+          https://html.spec.whatwg.org/multipage/webstorage.html.
       Returns: Builder instance for fluent chaining
   */
   T enableHtml5LocalStorage(bool propval) nothrow
@@ -3395,9 +3391,9 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
         propval = Whether to enable Spatial Navigation. This feature consists in the ability
           to navigate between focusable elements in a Web page, such as hyperlinks
           and form controls, by using Left, Right, Up and Down arrow keys.
-          For example, if an user presses the Right key, heuristics determine whether
+          For example, if a user presses the Right key, heuristics determine whether
           there is an element they might be trying to reach towards the right, and if
-          there are multiple elements, which element they probably wants.
+          there are multiple elements, which element they probably want.
       Returns: Builder instance for fluent chaining
   */
   T enableSpatialNavigation(bool propval) nothrow
@@ -3550,7 +3546,7 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
   /**
       Set `mediaContentTypesRequiringHardwareSupport` property.
       Params:
-        propval = List of media content types requiring hardware support, split by semicolons (:).
+        propval = List of media content types requiring hardware support, split by colons (:).
           For example: 'video/webm; codecs="vp*":video/mp4; codecs="avc*":video/&ast; codecs="av1*"'.
       Returns: Builder instance for fluent chaining
   */
@@ -3678,8 +3674,8 @@ class SettingsGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!T
       Params:
         propval = Allow customization of the WebRTC UDP ports range.
           
-          In some constrained environments where a firewall blocks UDP network traffic excepted on a
-          specific port range, this settings can be used to give hints to the WebRTC backend regarding
+          In some constrained environments where a firewall blocks UDP network traffic except on a
+          specific port range, this setting can be used to give hints to the WebRTC backend regarding
           which ports to allocate. The format is min-port:max-port, so for instance 20000:30000. The
           default empty string value means the OS will use no hints from the WebRTC backend. Using 0
           for one of the values is allowed and means the value is unspecified.

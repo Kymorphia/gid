@@ -32,7 +32,7 @@ class UserScript : gobject.boxed.BoxedWrap!(webkit_user_script_get_type)
       Scripts can be applied to some URIs
       only by passing non-null values for allow_list or block_list. Passing a
       null allow_list implies that all URIs are on the allow_list. The script
-      is applied if an URI matches the allow_list and not the block_list.
+      is applied if a URI matches the allow_list and not the block_list.
       URI patterns must be of the form `[protocol]://[host]/[path]`, where the
       *host* and *path* components can contain the wildcard character (`*`) to
       represent zero or more other characters.

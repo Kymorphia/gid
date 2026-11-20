@@ -74,9 +74,12 @@ class NetworkSession : gobject.object.ObjectWrap
       null is passed, the default directory will be passed to #WebKitWebsiteDataManager
       so that [webkit.website_data_manager.WebsiteDataManager.getBaseDataDirectory] and
       [webkit.website_data_manager.WebsiteDataManager.getBaseCacheDirectory] always return a value for
-      non ephemeral sessions.
+      non-ephemeral sessions.
       
-      It must be passed as construct parameter of a #WebKitWebView.
+      It can be passed as the #WebKitWebView:network-session construct parameter
+      of a #WebKitWebView. A web view created without a network session uses the
+      one of its related view, if any, or the default one returned by
+      [webkit.network_session.NetworkSession.getDefault].
   
       Params:
         dataDirectory = a base directory for data, or null
@@ -141,7 +144,7 @@ class NetworkSession : gobject.object.ObjectWrap
   }
 
   /**
-      Ignore further TLS errors on the host for the certificate present in info.
+      Ignore further TLS errors on the host for certificate.
       
       If host is an IPv6 address, it should not be surrounded by brackets. This
       expectation matches [glib.uri.Uri.getHost].
@@ -159,7 +162,7 @@ class NetworkSession : gobject.object.ObjectWrap
   /**
       Requests downloading of the specified URI string.
       
-      The download operation will not be associated to any #WebKitWebView,
+      The download operation will not be associated with any #WebKitWebView,
       if you are interested in starting a download from a particular #WebKitWebView use
       [webkit.web_view.WebView.downloadUri] instead.
   
@@ -240,7 +243,7 @@ class NetworkSession : gobject.object.ObjectWrap
       Params:
         result = a #GAsyncResult
       Returns: a #GList of #WebKitITPThirdParty.
-           You must free the #GList with [glib.list.List.free] and unref the #WebKitITPThirdParty<!-- -->s with
+           You must free the #GList with [glib.list.List.free] and unref the #WebKitITPThirdParty objects with
            [webkit.itpthird_party.ITPThirdParty.unref] when you're done with them.
       Throws: [ErrorWrap]
   */
@@ -296,7 +299,7 @@ class NetworkSession : gobject.object.ObjectWrap
       Get whether session is ephemeral.
       A #WebKitNetworkSession is ephemeral when its #WebKitWebsiteDataManager is ephemeral.
       See #WebKitWebsiteDataManager:is-ephemeral for more details.
-      Returns: true if session is pehmeral, or false otherwise
+      Returns: true if session is ephemeral, or false otherwise
   */
   bool isEphemeral() nothrow
   {
@@ -324,7 +327,7 @@ class NetworkSession : gobject.object.ObjectWrap
       When ITP is enabled resource load statistics
       are collected and used to decide whether to allow or block third-party cookies and prevent user tracking.
       Note that while ITP is enabled the accept policy [webkit.types.CookieAcceptPolicy.NoThirdParty] is ignored and
-      [webkit.types.CookieAcceptPolicy.Always] is used instead. See also webkit_cookie_session_set_accept_policy().
+      [webkit.types.CookieAcceptPolicy.Always] is used instead. See also [webkit.cookie_manager.CookieManager.setAcceptPolicy].
   
       Params:
         enabled = value to set
@@ -338,7 +341,7 @@ class NetworkSession : gobject.object.ObjectWrap
       Enable or disable persistent credential storage.
       
       When enabled, which is the default for
-      non-ephemeral sessions, the network process will try to read and write HTTP authentiacation
+      non-ephemeral sessions, the network process will try to read and write HTTP authentication
       credentials from persistent storage.
   
       Params:
@@ -350,7 +353,7 @@ class NetworkSession : gobject.object.ObjectWrap
   }
 
   /**
-      Set the network proxy settings to be used by connections started in session session.
+      Set the network proxy settings to be used by connections started in session.
       
       By default [webkit.types.NetworkProxyMode.Default] is used, which means that the
       system settings will be used ([gio.proxy_resolver.ProxyResolver.getDefault]).

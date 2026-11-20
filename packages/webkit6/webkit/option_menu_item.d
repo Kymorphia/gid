@@ -11,7 +11,7 @@ import webkit.types;
 /**
     One item of a #WebKitOptionMenu.
     
-    The #WebKitOptionMenu is composed of WebKitOptionMenuItem<!-- -->s.
+    The #WebKitOptionMenu is composed of WebKitOptionMenuItem objects.
     A WebKitOptionMenuItem always has a label and can contain a tooltip text.
     You can use the WebKitOptionMenuItem of a #WebKitOptionMenu to build your
     own menus.

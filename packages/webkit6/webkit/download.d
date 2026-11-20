@@ -104,7 +104,7 @@ class Download : gobject.object.ObjectWrap
         This value will range from 0.0 to 1.0. The value is an estimate
         based on the total number of bytes expected to be received for
         a download.
-        If you need a more accurate progress information you can connect to
+        If you need more accurate progress information you can connect to
         #WebKitDownload::received-data signal to track the progress.
   */
   @property double estimatedProgress() nothrow
@@ -180,10 +180,9 @@ class Download : gobject.object.ObjectWrap
 
   /**
       Gets the value of the #WebKitDownload:estimated-progress property.
-      Gets the value of the #WebKitDownload:estimated-progress property.
       You can monitor the estimated progress of the download operation by
       connecting to the notify::estimated-progress signal of download.
-      Returns: an estimate of the of the percent complete for a download
+      Returns: an estimate of the percent complete for a download
             as a range from 0.0 to 1.0.
   */
   double getEstimatedProgress() nothrow

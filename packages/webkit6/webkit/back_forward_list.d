@@ -24,7 +24,7 @@ import webkit.types;
     Methods [webkit.web_view.WebView.goBack] and [webkit.web_view.WebView.goForward] move
     the current item backward or forward by one. Method
     [webkit.web_view.WebView.goToBackForwardListItem] sets the current item to the
-    specified item. All other methods returning #WebKitBackForwardListItem<!-- -->s
+    specified item. All other methods returning #WebKitBackForwardListItem objects
     do not change the value of the current item, they just return the requested
     item or items.
 */
@@ -201,7 +201,7 @@ class BackForwardList : gobject.object.ObjectWrap
       This signal is emitted when back_forward_list changes. This happens
         when the current item is updated, a new item is added or one or more
         items are removed. Note that both item_added and items_removed can
-        null when only the current item is updated. Items are only removed
+        be null when only the current item is updated. Items are only removed
         when the list is cleared or the maximum items limit is reached.
   
       Params:
@@ -211,7 +211,7 @@ class BackForwardList : gobject.object.ObjectWrap
   
           `itemAdded` the #WebKitBackForwardListItem added or null (optional)
   
-          `itemsRemoved` a #GList of #WebKitBackForwardListItem<!-- -->s (optional)
+          `itemsRemoved` a #GList of #WebKitBackForwardListItem objects (optional)
   
           `backForwardList` the instance the signal is connected to (optional)
   

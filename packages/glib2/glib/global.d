@@ -7140,6 +7140,23 @@ void setPrgname(string prgname) nothrow
 }
 
 /**
+    If [glib.global.getPrgname] is not set, this is the same as setting
+    the name via [glib.global.setPrgname] and true is returned. Otherwise,
+    does nothing and returns false. This is thread-safe.
+
+    Params:
+      prgname = the name of the program.
+    Returns: whether g_prgname was initialized by the call.
+*/
+bool setPrgnameOnce(string prgname) nothrow
+{
+  bool _retval;
+  const(char)* _prgname = prgname.toCString!(No.Malloc, No.Nullable);
+  _retval = cast(bool)g_set_prgname_once(_prgname);
+  return _retval;
+}
+
+/**
     Sets an environment variable. On UNIX, both the variable's name and
     value can be arbitrary byte strings, except that the variable's name
     cannot contain '='. On Windows, they should be in UTF-8.

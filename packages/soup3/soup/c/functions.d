@@ -459,6 +459,7 @@ __gshared extern(C) nothrow
   char* function(SoupWebsocketExtension* extension) c_soup_websocket_extension_get_request_params; ///
   char* function(SoupWebsocketExtension* extension) c_soup_websocket_extension_get_response_params; ///
   GBytes* function(SoupWebsocketExtension* extension, ubyte* header, GBytes* payload, GError** _err) c_soup_websocket_extension_process_incoming_message; ///
+  GBytes* function(SoupWebsocketExtension* extension, ubyte* header, GBytes* payload, ulong maxOutputSize, GError** _err) c_soup_websocket_extension_process_incoming_message_with_limit; ///
   GBytes* function(SoupWebsocketExtension* extension, ubyte* header, GBytes* payload, GError** _err) c_soup_websocket_extension_process_outgoing_message; ///
 
   // WebsocketExtensionDeflate
@@ -1743,6 +1744,9 @@ alias soup_websocket_extension_get_response_params = c_soup_websocket_extension_
 alias soup_websocket_extension_process_incoming_message = c_soup_websocket_extension_process_incoming_message;
 
 /** */
+alias soup_websocket_extension_process_incoming_message_with_limit = c_soup_websocket_extension_process_incoming_message_with_limit;
+
+/** */
 alias soup_websocket_extension_process_outgoing_message = c_soup_websocket_extension_process_outgoing_message;
 
 // WebsocketExtensionDeflate
@@ -2356,6 +2360,7 @@ shared static this()
   gidLink(cast(void**)&soup_websocket_extension_get_request_params, "soup_websocket_extension_get_request_params", libs);
   gidLink(cast(void**)&soup_websocket_extension_get_response_params, "soup_websocket_extension_get_response_params", libs);
   gidLink(cast(void**)&soup_websocket_extension_process_incoming_message, "soup_websocket_extension_process_incoming_message", libs);
+  gidLink(cast(void**)&soup_websocket_extension_process_incoming_message_with_limit, "soup_websocket_extension_process_incoming_message_with_limit", libs);
   gidLink(cast(void**)&soup_websocket_extension_process_outgoing_message, "soup_websocket_extension_process_outgoing_message", libs);
 
   // WebsocketExtensionDeflate

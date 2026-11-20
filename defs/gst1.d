@@ -113,8 +113,8 @@
 //!set record[Memory].field[mini_object][writable] 0
 //!set record[Message].field[mini_object][writable] 0
 //!set record[Meta].field[info][writable] 0
-//!set record[ParamSpecArray].field[parent_instance][writable] 0
-//!set record[ParamSpecFraction].field[parent_instance][writable] 0
+//!set class[ParamSpecArray].field[parent_instance][writable] 0
+//!set class[ParamSpecFraction].field[parent_instance][writable] 0
 //!set record[ParentBufferMeta].field[parent][writable] 0
 //!set record[Promise].field[parent][writable] 0
 //!set record[ProtectionMeta].field[meta][writable] 0

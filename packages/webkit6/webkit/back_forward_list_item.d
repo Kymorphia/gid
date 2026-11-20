@@ -13,7 +13,7 @@ import webkit.types;
     One item of the #WebKitBackForwardList.
     
     A history item is part of the #WebKitBackForwardList and consists
-    out of a title and a URI.
+    of a title and a URI.
 */
 class BackForwardListItem : gobject.initially_unowned.InitiallyUnowned
 {

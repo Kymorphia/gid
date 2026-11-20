@@ -3832,13 +3832,13 @@ response message.</doc>
               version="1.12">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtsp/gstrtspmessage.c"
-             line="1451">Parses the credentials given in a WWW-Authenticate or Authorization header.</doc>
+             line="1454">Parses the credentials given in a WWW-Authenticate or Authorization header.</doc>
         <source-position filename="gst-libs/gst/rtsp/gstrtspmessage.h"
                          line="325"/>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtsp/gstrtspmessage.c"
-               line="1458">
+               line="1461">
     %NULL-terminated array of GstRTSPAuthCredential or %NULL.</doc>
           <array c:type="GstRTSPAuthCredential**">
             <type name="RTSPAuthCredential" c:type="GstRTSPAuthCredential*"/>
@@ -3848,13 +3848,13 @@ response message.</doc>
           <instance-parameter name="msg" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtsp/gstrtspmessage.c"
-                 line="1453">a #GstRTSPMessage</doc>
+                 line="1456">a #GstRTSPMessage</doc>
             <type name="RTSPMessage" c:type="GstRTSPMessage*"/>
           </instance-parameter>
           <parameter name="field" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtsp/gstrtspmessage.c"
-                 line="1454">a #GstRTSPHeaderField</doc>
+                 line="1457">a #GstRTSPHeaderField</doc>
             <type name="RTSPHeaderField" c:type="GstRTSPHeaderField"/>
           </parameter>
         </parameters>
@@ -7087,7 +7087,7 @@ not equal #GST_RTSP_OK.</doc>
               version="1.12">
       <doc xml:space="preserve"
            filename="gst-libs/gst/rtsp/gstrtspmessage.c"
-           line="1553">Free a %NULL-terminated array of credentials returned from
+           line="1556">Free a %NULL-terminated array of credentials returned from
 gst_rtsp_message_parse_auth_credentials().</doc>
       <source-position filename="gst-libs/gst/rtsp/gstrtspmessage.h"
                        line="328"/>
@@ -7098,7 +7098,7 @@ gst_rtsp_message_parse_auth_credentials().</doc>
         <parameter name="credentials" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtsp/gstrtspmessage.c"
-               line="1555">a %NULL-terminated array of #GstRTSPAuthCredential</doc>
+               line="1558">a %NULL-terminated array of #GstRTSPAuthCredential</doc>
           <type name="RTSPAuthCredential" c:type="GstRTSPAuthCredential**"/>
         </parameter>
       </parameters>

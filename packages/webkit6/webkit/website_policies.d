@@ -13,7 +13,7 @@ import webkit.types;
     View specific website policies.
     
     WebKitWebsitePolicies allows you to configure per-page policies,
-    currently only autoplay policies are supported.
+    currently only autoplay and custom user agent policies are supported.
 */
 class WebsitePolicies : gobject.object.ObjectWrap
 {
@@ -68,6 +68,16 @@ class WebsitePolicies : gobject.object.ObjectWrap
   }
 
   /**
+      Get `customUserAgent` property.
+      Returns: The custom user agent string to send for navigations governed by these
+        #WebKitWebsitePolicies, or null to use the default user agent.
+  */
+  @property string customUserAgent() nothrow
+  {
+    return getCustomUserAgent();
+  }
+
+  /**
       Create a new #WebKitWebsitePolicies.
       Returns: the newly created #WebKitWebsitePolicies
   */
@@ -89,6 +99,19 @@ class WebsitePolicies : gobject.object.ObjectWrap
     webkit.types.AutoplayPolicy _retval = cast(webkit.types.AutoplayPolicy)_cretval;
     return _retval;
   }
+
+  /**
+      Get the #WebKitWebsitePolicies:custom-user-agent property.
+      Returns: the custom user agent string, or null if the default
+           user agent is used
+  */
+  string getCustomUserAgent() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = webkit_website_policies_get_custom_user_agent(cast(WebKitWebsitePolicies*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
 }
 
 /// Fluent builder implementation template for [webkit.website_policies.WebsitePolicies]
@@ -104,6 +127,18 @@ class WebsitePoliciesGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl
   T autoplay(webkit.types.AutoplayPolicy propval) nothrow
   {
     return setProperty("autoplay", propval);
+  }
+
+  /**
+      Set `customUserAgent` property.
+      Params:
+        propval = The custom user agent string to send for navigations governed by these
+          #WebKitWebsitePolicies, or null to use the default user agent.
+      Returns: Builder instance for fluent chaining
+  */
+  T customUserAgent(string propval) nothrow
+  {
+    return setProperty("custom-user-agent", propval);
   }
 }
 

@@ -1116,10 +1116,10 @@ __gshared extern(C) nothrow
   void function(GstPadTemplate* templ, GstPad* pad) c_gst_pad_template_pad_created; ///
   void function(GstPadTemplate* templ, GstCaps* caps) c_gst_pad_template_set_documentation_caps; ///
 
-  // ParamArray
+  // ParamSpecArray
   GType function() c_gst_param_spec_array_get_type; ///
 
-  // ParamFraction
+  // ParamSpecFraction
   GType function() c_gst_param_spec_fraction_get_type; ///
 
   // ParentBufferMeta
@@ -5236,12 +5236,12 @@ alias gst_pad_template_pad_created = c_gst_pad_template_pad_created;
 /** */
 alias gst_pad_template_set_documentation_caps = c_gst_pad_template_set_documentation_caps;
 
-// ParamArray
+// ParamSpecArray
 
 /** */
 alias gst_param_spec_array_get_type = c_gst_param_spec_array_get_type;
 
-// ParamFraction
+// ParamSpecFraction
 
 /** */
 alias gst_param_spec_fraction_get_type = c_gst_param_spec_fraction_get_type;
@@ -9137,10 +9137,10 @@ shared static this()
   gidLink(cast(void**)&gst_pad_template_pad_created, "gst_pad_template_pad_created", libs);
   gidLink(cast(void**)&gst_pad_template_set_documentation_caps, "gst_pad_template_set_documentation_caps", libs);
 
-  // ParamArray
+  // ParamSpecArray
   gidLink(cast(void**)&gst_param_spec_array_get_type, "gst_param_spec_array_get_type", libs);
 
-  // ParamFraction
+  // ParamSpecFraction
   gidLink(cast(void**)&gst_param_spec_fraction_get_type, "gst_param_spec_fraction_get_type", libs);
 
   // ParentBufferMeta

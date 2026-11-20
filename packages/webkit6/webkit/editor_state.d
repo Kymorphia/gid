@@ -144,7 +144,7 @@ class EditorState : gobject.object.ObjectWrap
   /**
       Connect to `Changed` signal.
   
-      Emitted when the #WebKitEdtorState is changed.
+      Emitted when the #WebKitEditorState is changed.
   
       Params:
         callback = signal callback delegate or function to connect

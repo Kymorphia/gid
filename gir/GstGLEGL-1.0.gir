@@ -822,7 +822,7 @@ with #GstGLVideoAllocationParams.</doc>
                 version="1.10">
         <doc xml:space="preserve"
              filename="gst-libs/gst/gl/egl/gstglmemoryegl.c"
-             line="260">Initializes the GL Memory allocator. It is safe to call this function
+             line="266">Initializes the GL Memory allocator. It is safe to call this function
 multiple times.  This must be called before any other GstGLMemoryEGL operation.</doc>
         <source-position filename="gst-libs/gst/gl/egl/gstglmemoryegl.h"
                          line="79"/>
@@ -1359,7 +1359,7 @@ function creates one EGL image for all planes, not one for a single plane.</doc>
               version="1.10">
       <doc xml:space="preserve"
            filename="gst-libs/gst/gl/egl/gstglmemoryegl.c"
-           line="260">Initializes the GL Memory allocator. It is safe to call this function
+           line="266">Initializes the GL Memory allocator. It is safe to call this function
 multiple times.  This must be called before any other GstGLMemoryEGL operation.</doc>
       <source-position filename="gst-libs/gst/gl/egl/gstglmemoryegl.h"
                        line="79"/>

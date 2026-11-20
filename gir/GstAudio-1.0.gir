@@ -1943,7 +1943,7 @@ additional information in the info #GstStructure of the returned sample:
                 default-value="FALSE">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/gstaudioaggregator.c"
-             line="751">Causes the element to aggregate on a timeout even when no live source is
+             line="746">Causes the element to aggregate on a timeout even when no live source is
 connected to its sinks. See #GstAggregator:min-upstream-latency for a
 companion property: in the vast majority of cases where you plan to plug in
 live sources with a non-zero latency, you should set it to a non-zero value.</doc>
@@ -1956,7 +1956,7 @@ live sources with a non-zero latency, you should set it to a non-zero value.</do
                 default-value="FALSE">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/gstaudioaggregator.c"
-             line="731">Don't wait for inactive pads when live. An inactive pad
+             line="726">Don't wait for inactive pads when live. An inactive pad
 is a pad that hasn't yet received a buffer, but that has
 been waited on at least once.
 
@@ -1979,7 +1979,7 @@ but wants to configure it already.</doc>
                 default-value="1/100">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/gstaudioaggregator.c"
-             line="700">Output block size in nanoseconds, expressed as a fraction.</doc>
+             line="695">Output block size in nanoseconds, expressed as a fraction.</doc>
         <type name="Gst.Fraction"/>
       </property>
       <field name="parent">
@@ -4948,7 +4948,7 @@ The object can perform conversion of:
       <constructor name="new" c:identifier="gst_audio_converter_new">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/audio-converter.c"
-             line="1330">Create a new #GstAudioConverter that is able to convert between @in and @out
+             line="1335">Create a new #GstAudioConverter that is able to convert between @in and @out
 audio formats.
 
 @config contains extra configuration options, see `GST_AUDIO_CONVERTER_OPT_*`
@@ -4958,26 +4958,26 @@ parameters for details about the options and values.</doc>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve"
                filename="gst-libs/gst/audio/audio-converter.c"
-               line="1343">a #GstAudioConverter or %NULL if conversion is not possible.</doc>
+               line="1348">a #GstAudioConverter or %NULL if conversion is not possible.</doc>
           <type name="AudioConverter" c:type="GstAudioConverter*"/>
         </return-value>
         <parameters>
           <parameter name="flags" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1332">extra #GstAudioConverterFlags</doc>
+                 line="1337">extra #GstAudioConverterFlags</doc>
             <type name="AudioConverterFlags" c:type="GstAudioConverterFlags"/>
           </parameter>
           <parameter name="in_info" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1333">a source #GstAudioInfo</doc>
+                 line="1338">a source #GstAudioInfo</doc>
             <type name="AudioInfo" c:type="GstAudioInfo*"/>
           </parameter>
           <parameter name="out_info" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1334">a destination #GstAudioInfo</doc>
+                 line="1339">a destination #GstAudioInfo</doc>
             <type name="AudioInfo" c:type="GstAudioInfo*"/>
           </parameter>
           <parameter name="config"
@@ -4986,7 +4986,7 @@ parameters for details about the options and values.</doc>
                      allow-none="1">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1335">a #GstStructure with configuration options</doc>
+                 line="1340">a #GstStructure with configuration options</doc>
             <type name="Gst.Structure" c:type="GstStructure*"/>
           </parameter>
         </parameters>
@@ -4996,7 +4996,7 @@ parameters for details about the options and values.</doc>
               version="1.14">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/audio-converter.c"
-             line="1625">Convenience wrapper around gst_audio_converter_samples(), which will
+             line="1630">Convenience wrapper around gst_audio_converter_samples(), which will
 perform allocation of the output buffer based on the result from
 gst_audio_converter_get_out_frames().</doc>
         <source-position filename="gst-libs/gst/audio/audio-converter.h"
@@ -5004,26 +5004,26 @@ gst_audio_converter_get_out_frames().</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/audio/audio-converter.c"
-               line="1639">%TRUE is the conversion could be performed.</doc>
+               line="1644">%TRUE is the conversion could be performed.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="convert" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1627">a #GstAudioConverter</doc>
+                 line="1632">a #GstAudioConverter</doc>
             <type name="AudioConverter" c:type="GstAudioConverter*"/>
           </instance-parameter>
           <parameter name="flags" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1628">extra #GstAudioConverterFlags</doc>
+                 line="1633">extra #GstAudioConverterFlags</doc>
             <type name="AudioConverterFlags" c:type="GstAudioConverterFlags"/>
           </parameter>
           <parameter name="in" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1629">input data</doc>
+                 line="1634">input data</doc>
             <array length="2" zero-terminated="0" c:type="gpointer">
               <type name="guint8"/>
             </array>
@@ -5031,7 +5031,7 @@ gst_audio_converter_get_out_frames().</doc>
           <parameter name="in_size" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1630">size of @in</doc>
+                 line="1635">size of @in</doc>
             <type name="gsize" c:type="gsize"/>
           </parameter>
           <parameter name="out"
@@ -5040,7 +5040,7 @@ gst_audio_converter_get_out_frames().</doc>
                      transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1631">a pointer where
+                 line="1636">a pointer where
  the output data will be written</doc>
             <array length="4" zero-terminated="0" c:type="gpointer*">
               <type name="guint8"/>
@@ -5052,7 +5052,7 @@ gst_audio_converter_get_out_frames().</doc>
                      transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1633">a pointer where the size of @out will be written</doc>
+                 line="1638">a pointer where the size of @out will be written</doc>
             <type name="gsize" c:type="gsize*"/>
           </parameter>
         </parameters>
@@ -5060,7 +5060,7 @@ gst_audio_converter_get_out_frames().</doc>
       <method name="free" c:identifier="gst_audio_converter_free">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/audio-converter.c"
-             line="1473">Free a previously allocated @convert instance.</doc>
+             line="1478">Free a previously allocated @convert instance.</doc>
         <source-position filename="gst-libs/gst/audio/audio-converter.h"
                          line="146"/>
         <return-value transfer-ownership="none">
@@ -5070,7 +5070,7 @@ gst_audio_converter_get_out_frames().</doc>
           <instance-parameter name="convert" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1475">a #GstAudioConverter</doc>
+                 line="1480">a #GstAudioConverter</doc>
             <type name="AudioConverter" c:type="GstAudioConverter*"/>
           </instance-parameter>
         </parameters>
@@ -5124,27 +5124,27 @@ gst_audio_converter_get_out_frames().</doc>
               c:identifier="gst_audio_converter_get_in_frames">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/audio-converter.c"
-             line="1527">Calculate how many input frames are currently needed by @convert to produce
+             line="1532">Calculate how many input frames are currently needed by @convert to produce
 @out_frames of output frames.</doc>
         <source-position filename="gst-libs/gst/audio/audio-converter.h"
                          line="165"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/audio/audio-converter.c"
-               line="1535">the number of input frames</doc>
+               line="1540">the number of input frames</doc>
           <type name="gsize" c:type="gsize"/>
         </return-value>
         <parameters>
           <instance-parameter name="convert" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1529">a #GstAudioConverter</doc>
+                 line="1534">a #GstAudioConverter</doc>
             <type name="AudioConverter" c:type="GstAudioConverter*"/>
           </instance-parameter>
           <parameter name="out_frames" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1530">number of output frames</doc>
+                 line="1535">number of output frames</doc>
             <type name="gsize" c:type="gsize"/>
           </parameter>
         </parameters>
@@ -5153,14 +5153,14 @@ gst_audio_converter_get_out_frames().</doc>
               c:identifier="gst_audio_converter_get_max_latency">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/audio-converter.c"
-             line="1547">Get the maximum number of input frames that the converter would
+             line="1552">Get the maximum number of input frames that the converter would
 need before producing output.</doc>
         <source-position filename="gst-libs/gst/audio/audio-converter.h"
                          line="169"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/audio/audio-converter.c"
-               line="1554">the latency of @convert as expressed in the number of
+               line="1559">the latency of @convert as expressed in the number of
 frames.</doc>
           <type name="gsize" c:type="gsize"/>
         </return-value>
@@ -5168,7 +5168,7 @@ frames.</doc>
           <instance-parameter name="convert" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1549">a #GstAudioConverter</doc>
+                 line="1554">a #GstAudioConverter</doc>
             <type name="AudioConverter" c:type="GstAudioConverter*"/>
           </instance-parameter>
         </parameters>
@@ -5177,27 +5177,27 @@ frames.</doc>
               c:identifier="gst_audio_converter_get_out_frames">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/audio-converter.c"
-             line="1507">Calculate how many output frames can be produced when @in_frames input
+             line="1512">Calculate how many output frames can be produced when @in_frames input
 frames are given to @convert.</doc>
         <source-position filename="gst-libs/gst/audio/audio-converter.h"
                          line="161"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/audio/audio-converter.c"
-               line="1515">the number of output frames</doc>
+               line="1520">the number of output frames</doc>
           <type name="gsize" c:type="gsize"/>
         </return-value>
         <parameters>
           <instance-parameter name="convert" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1509">a #GstAudioConverter</doc>
+                 line="1514">a #GstAudioConverter</doc>
             <type name="AudioConverter" c:type="GstAudioConverter*"/>
           </instance-parameter>
           <parameter name="in_frames" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1510">number of input frames</doc>
+                 line="1515">number of input frames</doc>
             <type name="gsize" c:type="gsize"/>
           </parameter>
         </parameters>
@@ -5207,14 +5207,14 @@ frames are given to @convert.</doc>
               version="1.16">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/audio-converter.c"
-             line="1681">Returns whether the audio converter will operate in passthrough mode.
+             line="1686">Returns whether the audio converter will operate in passthrough mode.
 The return value would be typically input to gst_base_transform_set_passthrough()</doc>
         <source-position filename="gst-libs/gst/audio/audio-converter.h"
                          line="181"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/audio/audio-converter.c"
-               line="1687">%TRUE when no conversion will actually occur.</doc>
+               line="1692">%TRUE when no conversion will actually occur.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
@@ -5226,7 +5226,7 @@ The return value would be typically input to gst_base_transform_set_passthrough(
       <method name="reset" c:identifier="gst_audio_converter_reset">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/audio-converter.c"
-             line="1566">Reset @convert to the state it was when it was first created, clearing
+             line="1571">Reset @convert to the state it was when it was first created, clearing
 any history it might currently have.</doc>
         <source-position filename="gst-libs/gst/audio/audio-converter.h"
                          line="149"/>
@@ -5237,7 +5237,7 @@ any history it might currently have.</doc>
           <instance-parameter name="convert" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1568">a #GstAudioConverter</doc>
+                 line="1573">a #GstAudioConverter</doc>
             <type name="AudioConverter" c:type="GstAudioConverter*"/>
           </instance-parameter>
         </parameters>
@@ -5247,7 +5247,7 @@ any history it might currently have.</doc>
               introspectable="0">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/audio-converter.c"
-             line="1582">Perform the conversion with @in_frames in @in to @out_frames in @out
+             line="1587">Perform the conversion with @in_frames in @in to @out_frames in @out
 using @convert.
 
 In case the samples are interleaved, @in and @out must point to an
@@ -5268,26 +5268,26 @@ are matching and @in and @out point to enough memory.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/audio/audio-converter.c"
-               line="1608">%TRUE is the conversion could be performed.</doc>
+               line="1613">%TRUE is the conversion could be performed.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="convert" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1584">a #GstAudioConverter</doc>
+                 line="1589">a #GstAudioConverter</doc>
             <type name="AudioConverter" c:type="GstAudioConverter*"/>
           </instance-parameter>
           <parameter name="flags" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1585">extra #GstAudioConverterFlags</doc>
+                 line="1590">extra #GstAudioConverterFlags</doc>
             <type name="AudioConverterFlags" c:type="GstAudioConverterFlags"/>
           </parameter>
           <parameter name="in" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1586">input frames</doc>
+                 line="1591">input frames</doc>
             <array zero-terminated="0" c:type="gpointer*">
               <type name="gpointer"/>
             </array>
@@ -5295,13 +5295,13 @@ are matching and @in and @out point to enough memory.</doc>
           <parameter name="in_frames" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1587">number of input frames</doc>
+                 line="1592">number of input frames</doc>
             <type name="gsize" c:type="gsize"/>
           </parameter>
           <parameter name="out" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1588">output frames</doc>
+                 line="1593">output frames</doc>
             <array zero-terminated="0" c:type="gpointer*">
               <type name="gpointer"/>
             </array>
@@ -5309,7 +5309,7 @@ are matching and @in and @out point to enough memory.</doc>
           <parameter name="out_frames" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1589">number of output frames</doc>
+                 line="1594">number of output frames</doc>
             <type name="gsize" c:type="gsize"/>
           </parameter>
         </parameters>
@@ -5319,21 +5319,21 @@ are matching and @in and @out point to enough memory.</doc>
               version="1.12">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/audio-converter.c"
-             line="1664">Returns whether the audio converter can perform the conversion in-place.
+             line="1669">Returns whether the audio converter can perform the conversion in-place.
 The return value would be typically input to gst_base_transform_set_in_place()</doc>
         <source-position filename="gst-libs/gst/audio/audio-converter.h"
                          line="178"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/audio/audio-converter.c"
-               line="1671">%TRUE when the conversion can be done in place.</doc>
+               line="1676">%TRUE when the conversion can be done in place.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="convert" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/audio/audio-converter.c"
-                 line="1666">a #GstAudioConverter</doc>
+                 line="1671">a #GstAudioConverter</doc>
             <type name="AudioConverter" c:type="GstAudioConverter*"/>
           </instance-parameter>
         </parameters>
@@ -10764,13 +10764,13 @@ Note: This initializes @info first, no values are preserved.</doc>
                 version="1.20">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/gstaudiometa.c"
-             line="660">Return the #GstMetaInfo associated with #GstAudioLevelMeta.</doc>
+             line="765">Return the #GstMetaInfo associated with #GstAudioLevelMeta.</doc>
         <source-position filename="gst-libs/gst/audio/gstaudiometa.h"
                          line="244"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/audio/gstaudiometa.c"
-               line="665">a #GstMetaInfo</doc>
+               line="770">a #GstMetaInfo</doc>
           <type name="Gst.MetaInfo" c:type="const GstMetaInfo*"/>
         </return-value>
       </function>
@@ -16565,7 +16565,7 @@ beginning.</doc>
               version="1.8">
       <doc xml:space="preserve"
            filename="gst-libs/gst/audio/audio-channels.c"
-           line="607">Get the fallback channel-mask for the given number of channels.
+           line="611">Get the fallback channel-mask for the given number of channels.
 
 This function returns a reasonable fallback channel-mask and should be
 called as a last resort when the specific channel map is unknown.</doc>
@@ -16574,7 +16574,7 @@ called as a last resort when the specific channel map is unknown.</doc>
       <return-value transfer-ownership="none">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/audio-channels.c"
-             line="616">a fallback channel-mask for @channels or 0 when there is no
+             line="620">a fallback channel-mask for @channels or 0 when there is no
 mask and mono.</doc>
         <type name="guint64" c:type="guint64"/>
       </return-value>
@@ -16582,7 +16582,7 @@ mask and mono.</doc>
         <parameter name="channels" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/audio/audio-channels.c"
-               line="609">the number of channels</doc>
+               line="613">the number of channels</doc>
           <type name="gint" c:type="gint"/>
         </parameter>
       </parameters>
@@ -16806,14 +16806,14 @@ in the order required by GStreamer.</doc>
               version="1.10">
       <doc xml:space="preserve"
            filename="gst-libs/gst/audio/audio-channels.c"
-           line="705">Converts @position to a human-readable string representation for
+           line="709">Converts @position to a human-readable string representation for
 debugging purposes.</doc>
       <source-position filename="gst-libs/gst/audio/audio-channels.h"
                        line="203"/>
       <return-value transfer-ownership="full">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/audio-channels.c"
-             line="714">a newly allocated string representing
+             line="718">a newly allocated string representing
 @position</doc>
         <type name="utf8" c:type="gchar*"/>
       </return-value>
@@ -16821,7 +16821,7 @@ debugging purposes.</doc>
         <parameter name="position" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/audio/audio-channels.c"
-               line="707">The %GstAudioChannelPositions
+               line="711">The %GstAudioChannelPositions
   to convert.</doc>
           <array length="1"
                  zero-terminated="0"
@@ -16833,7 +16833,7 @@ debugging purposes.</doc>
         <parameter name="channels" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/audio/audio-channels.c"
-               line="709">The number of channels.</doc>
+               line="713">The number of channels.</doc>
           <type name="gint" c:type="gint"/>
         </parameter>
       </parameters>
@@ -17333,13 +17333,13 @@ otherwise.</doc>
               version="1.20">
       <doc xml:space="preserve"
            filename="gst-libs/gst/audio/gstaudiometa.c"
-           line="607">Return the #GType associated with #GstAudioLevelMeta.</doc>
+           line="712">Return the #GType associated with #GstAudioLevelMeta.</doc>
       <source-position filename="gst-libs/gst/audio/gstaudiometa.h"
                        line="241"/>
       <return-value transfer-ownership="none">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/gstaudiometa.c"
-             line="612">a #GType</doc>
+             line="717">a #GType</doc>
         <type name="GType" c:type="GType"/>
       </return-value>
     </function>
@@ -17349,13 +17349,13 @@ otherwise.</doc>
               version="1.20">
       <doc xml:space="preserve"
            filename="gst-libs/gst/audio/gstaudiometa.c"
-           line="660">Return the #GstMetaInfo associated with #GstAudioLevelMeta.</doc>
+           line="765">Return the #GstMetaInfo associated with #GstAudioLevelMeta.</doc>
       <source-position filename="gst-libs/gst/audio/gstaudiometa.h"
                        line="244"/>
       <return-value transfer-ownership="none">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/gstaudiometa.c"
-             line="665">a #GstMetaInfo</doc>
+             line="770">a #GstMetaInfo</doc>
         <type name="Gst.MetaInfo" c:type="const GstMetaInfo*"/>
       </return-value>
     </function>
@@ -17829,32 +17829,32 @@ of the results.</doc>
               version="1.20">
       <doc xml:space="preserve"
            filename="gst-libs/gst/audio/gstaudiometa.c"
-           line="686">Attaches audio level information to @buffer. (RFC 6464)</doc>
+           line="791">Attaches audio level information to @buffer. (RFC 6464)</doc>
       <source-position filename="gst-libs/gst/audio/gstaudiometa.h"
                        line="247"/>
       <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/gstaudiometa.c"
-             line="694">the #GstAudioLevelMeta on @buffer.</doc>
+             line="799">the #GstAudioLevelMeta on @buffer.</doc>
         <type name="AudioLevelMeta" c:type="GstAudioLevelMeta*"/>
       </return-value>
       <parameters>
         <parameter name="buffer" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/audio/gstaudiometa.c"
-               line="688">a #GstBuffer</doc>
+               line="793">a #GstBuffer</doc>
           <type name="Gst.Buffer" c:type="GstBuffer*"/>
         </parameter>
         <parameter name="level" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/audio/gstaudiometa.c"
-               line="689">the -dBov from 0-127 (127 is silence).</doc>
+               line="794">the -dBov from 0-127 (127 is silence).</doc>
           <type name="guint8" c:type="guint8"/>
         </parameter>
         <parameter name="voice_activity" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/audio/gstaudiometa.c"
-               line="690">whether the buffer contains voice activity.</doc>
+               line="795">whether the buffer contains voice activity.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </parameter>
       </parameters>
@@ -17864,7 +17864,7 @@ of the results.</doc>
               version="1.16">
       <doc xml:space="preserve"
            filename="gst-libs/gst/audio/gstaudiometa.c"
-           line="460">Allocates and attaches a #GstAudioMeta on @buffer, which must be writable
+           line="547">Allocates and attaches a #GstAudioMeta on @buffer, which must be writable
 for that purpose. The fields of the #GstAudioMeta are directly populated
 from the arguments of this function.
 
@@ -17887,26 +17887,26 @@ that you must add enough memory on the @buffer before adding this meta.</doc>
       <return-value transfer-ownership="none">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/gstaudiometa.c"
-             line="488">the #GstAudioMeta that was attached on the @buffer</doc>
+             line="575">the #GstAudioMeta that was attached on the @buffer</doc>
         <type name="AudioMeta" c:type="GstAudioMeta*"/>
       </return-value>
       <parameters>
         <parameter name="buffer" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/audio/gstaudiometa.c"
-               line="462">a #GstBuffer</doc>
+               line="549">a #GstBuffer</doc>
           <type name="Gst.Buffer" c:type="GstBuffer*"/>
         </parameter>
         <parameter name="info" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/audio/gstaudiometa.c"
-               line="463">the audio properties of the buffer</doc>
+               line="550">the audio properties of the buffer</doc>
           <type name="AudioInfo" c:type="const GstAudioInfo*"/>
         </parameter>
         <parameter name="samples" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/audio/gstaudiometa.c"
-               line="464">the number of valid samples in the buffer</doc>
+               line="551">the number of valid samples in the buffer</doc>
           <type name="gsize" c:type="gsize"/>
         </parameter>
         <parameter name="offsets"
@@ -17915,7 +17915,7 @@ that you must add enough memory on the @buffer before adding this meta.</doc>
                    allow-none="1">
           <doc xml:space="preserve"
                filename="gst-libs/gst/audio/gstaudiometa.c"
-               line="465">the offsets (in bytes) where each channel plane starts
+               line="552">the offsets (in bytes) where each channel plane starts
   in the buffer or %NULL to calculate it (see below); must be %NULL also
   when @info-&gt;layout is %GST_AUDIO_LAYOUT_INTERLEAVED</doc>
           <array zero-terminated="0" c:type="gsize*">
@@ -18055,13 +18055,13 @@ channel positions.</doc>
               version="1.20">
       <doc xml:space="preserve"
            filename="gst-libs/gst/audio/gstaudiometa.c"
-           line="717">Find the #GstAudioLevelMeta on @buffer.</doc>
+           line="822">Find the #GstAudioLevelMeta on @buffer.</doc>
       <source-position filename="gst-libs/gst/audio/gstaudiometa.h"
                        line="251"/>
       <return-value transfer-ownership="none" nullable="1">
         <doc xml:space="preserve"
              filename="gst-libs/gst/audio/gstaudiometa.c"
-             line="723">the #GstAudioLevelMeta or %NULL when
+             line="828">the #GstAudioLevelMeta or %NULL when
 there is no such metadata on @buffer.</doc>
         <type name="AudioLevelMeta" c:type="GstAudioLevelMeta*"/>
       </return-value>
@@ -18069,7 +18069,7 @@ there is no such metadata on @buffer.</doc>
         <parameter name="buffer" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/audio/gstaudiometa.c"
-               line="719">a #GstBuffer</doc>
+               line="824">a #GstBuffer</doc>
           <type name="Gst.Buffer" c:type="GstBuffer*"/>
         </parameter>
       </parameters>

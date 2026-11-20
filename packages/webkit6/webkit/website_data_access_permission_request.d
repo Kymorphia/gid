@@ -15,7 +15,7 @@ import webkit.types;
     A permission request for accessing website data from third-party domains.
     
     WebKitWebsiteDataAccessPermissionRequest represents a request for
-    permission to allow a third-party domain access its cookies.
+    permission to allow a third-party domain to access its cookies.
     
     When a WebKitWebsiteDataAccessPermissionRequest is not handled by the user,
     it is denied by default.

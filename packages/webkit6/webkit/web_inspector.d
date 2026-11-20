@@ -138,7 +138,7 @@ class WebInspector : gobject.object.ObjectWrap
   }
 
   /**
-      Get the height that the inspector view when attached.
+      Get the height that the inspector view should have when attached.
       
       Get the height that the inspector view should have when
       it's attached. If the inspector view is not attached this
@@ -170,7 +170,7 @@ class WebInspector : gobject.object.ObjectWrap
       
       This can be null if
       nothing has been loaded yet in the inspected view, if the inspector
-      has been closed or when inspected view was loaded from a HTML string
+      has been closed or when the inspected view was loaded from an HTML string
       instead of a URI.
       Returns: the URI that is currently being inspected or null
   */

@@ -7029,18 +7029,6 @@ struct GstPadTemplateClass
 }
 
 /**
-    A fundamental type that describes a #GParamSpec for arrays of
-    values
-*/
-struct GstParamArray;
-
-/**
-    A fundamental type that describes a #GParamSpec for fractional
-    properties
-*/
-struct GstParamFraction;
-
-/**
     A GParamSpec derived structure for arrays of values.
 */
 struct GstParamSpecArray

@@ -2327,7 +2327,7 @@ enum VERSION_MAJOR = 1;
 /**
     The micro version of GStreamer at compile time:
 */
-enum VERSION_MICRO = 2;
+enum VERSION_MICRO = 9;
 
 /**
     The minor version of GStreamer at compile time:

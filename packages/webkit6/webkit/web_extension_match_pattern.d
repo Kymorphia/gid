@@ -115,7 +115,7 @@ class WebExtensionMatchPattern : gobject.boxed.BoxedWrap!(webkit_web_extension_m
   }
 
   /**
-      Gets whether the match pattern matches all host. This happens when
+      Gets whether the match pattern matches all hosts. This happens when
       the pattern is `<all_urls>`, or if `*` is set as the host string.
       Returns: Whether this match pattern matches all hosts.
   */
@@ -179,7 +179,7 @@ class WebExtensionMatchPattern : gobject.boxed.BoxedWrap!(webkit_web_extension_m
   
       Params:
         pattern = The #WebKitWebExtensionMatchPattern to match with matchPattern.
-        options = The #WebKitWebExtensionMatchPatternOptions use while matching.
+        options = The #WebKitWebExtensionMatchPatternOptions to use while matching.
       Returns: Whether the pattern matches the specified pattern.
   */
   bool matchesPattern(webkit.web_extension_match_pattern.WebExtensionMatchPattern pattern, webkit.types.WebExtensionMatchPatternOptions options) nothrow
@@ -194,7 +194,7 @@ class WebExtensionMatchPattern : gobject.boxed.BoxedWrap!(webkit_web_extension_m
   
       Params:
         url = The URL to match against the pattern.
-        options = The #WebKitWebExtensionMatchPatternOptions use while matching.
+        options = The #WebKitWebExtensionMatchPatternOptions to use while matching.
       Returns: Whether the pattern matches the specified URL.
   */
   bool matchesUrl(string url, webkit.types.WebExtensionMatchPatternOptions options) nothrow

@@ -15,14 +15,14 @@ import webkit.web_view;
     Controls text search in a #WebKitWebView.
     
     A #WebKitFindController is used to search text in a #WebKitWebView. You
-    can get a #WebKitWebView<!-- -->'s #WebKitFindController with
+    can get a #WebKitWebView's #WebKitFindController with
     [webkit.web_view.WebView.getFindController], and later use it to search
     for text using [webkit.find_controller.FindController.search], or get the
     number of matches using [webkit.find_controller.FindController.countMatches]. The
     operations are asynchronous and trigger signals when ready, such as
     #WebKitFindController::found-text,
     #WebKitFindController::failed-to-find-text or
-    #WebKitFindController::counted-matches<!-- -->.
+    #WebKitFindController::counted-matches.
 */
 class FindController : gobject.object.ObjectWrap
 {
@@ -96,7 +96,7 @@ class FindController : gobject.object.ObjectWrap
 
   /**
       Get `webView` property.
-      Returns: The #WebKitWebView this controller is associated to.
+      Returns: The #WebKitWebView this controller is associated with.
   */
   @property webkit.web_view.WebView webView() nothrow
   {
@@ -171,7 +171,7 @@ class FindController : gobject.object.ObjectWrap
   }
 
   /**
-      Gets the #WebKitWebView this find controller is associated to.
+      Gets the #WebKitWebView this find controller is associated with.
       
       Do
       not dereference the returned instance as it belongs to the
@@ -419,7 +419,7 @@ class FindControllerGidBuilderImpl(T) : gobject.object.ObjectWrapGidBuilderImpl!
   /**
       Set `webView` property.
       Params:
-        propval = The #WebKitWebView this controller is associated to.
+        propval = The #WebKitWebView this controller is associated with.
       Returns: Builder instance for fluent chaining
   */
   T webView(webkit.web_view.WebView propval) nothrow

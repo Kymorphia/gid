@@ -22,7 +22,7 @@ import webkit.types;
     You can get it from a #WebKitWebsiteDataManager with
     webkit_website_data_manager_get_cookie_manager(), and use it to set where to
     store cookies with [webkit.cookie_manager.CookieManager.setPersistentStorage],
-    or to set the acceptance policy, with [webkit.cookie_manager.CookieManager.getAcceptPolicy].
+    or to set the acceptance policy, with [webkit.cookie_manager.CookieManager.setAcceptPolicy].
 */
 class CookieManager : gobject.object.ObjectWrap
 {
@@ -284,7 +284,7 @@ class CookieManager : gobject.object.ObjectWrap
       [webkit.cookie_manager.CookieManager.getCookiesFinish] to get the result of the operation.
   
       Params:
-        uri = the URI associated to the cookies to be retrieved
+        uri = the URI associated with the cookies to be retrieved
         cancellable = a #GCancellable or null to ignore
         callback = a #GAsyncReadyCallback to call when the request is satisfied
   */
@@ -411,10 +411,10 @@ class CookieManager : gobject.object.ObjectWrap
       By default, cookie_manager doesn't store the cookies persistently, so you need to call this
       method to keep cookies saved across sessions.
       
-      This method should never be called on a #WebKitCookieManager associated to an ephemeral #WebKitWebsiteDataManager.
+      This method should never be called on a #WebKitCookieManager associated with an ephemeral #WebKitWebsiteDataManager.
   
       Params:
-        filename = the filename to read to/write from
+        filename = the filename to read from/write to
         storage = a #WebKitCookiePersistentStorage
   */
   void setPersistentStorage(string filename, webkit.types.CookiePersistentStorage storage) nothrow

@@ -56,7 +56,7 @@ class SecurityOrigin : gobject.boxed.BoxedWrap!(webkit_security_origin_get_type)
   }
 
   /**
-      Create a new security origin from the provided.
+      Create a new security origin from the provided URI.
       
       Create a new security origin from the provided URI. Components of
       uri other than protocol, host, and port do not affect the created

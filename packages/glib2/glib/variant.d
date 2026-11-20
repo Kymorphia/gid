@@ -1285,6 +1285,9 @@ class Variant : ReffedWrap!(GVariant*, g_variant_ref_sink, g_variant_unref) // r
       The semantics of this function are exactly the same as
       [glib.variant.Variant.getData], except that the returned #GBytes holds
       a reference to the variant data.
+      
+      This function cannot fail, even for corrupted variants. In that case
+      it will return a #GBytes filled with nul bytes.
       Returns: A new #GBytes representing the variant data
   */
   glib.bytes.Bytes getDataAsBytes() nothrow

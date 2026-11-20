@@ -738,20 +738,20 @@ the max MTU is exceeded or the number of report blocks is greater than
               version="1.10">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2600">Get the application-dependent data attached to a RTPFB or PSFB @packet.</doc>
+             line="2669">Get the application-dependent data attached to a RTPFB or PSFB @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="524"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2606">A pointer to the data</doc>
+               line="2675">A pointer to the data</doc>
           <type name="guint8" c:type="guint8*"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2602">a valid APP #GstRTCPPacket</doc>
+                 line="2671">a valid APP #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
         </parameters>
@@ -761,15 +761,61 @@ the max MTU is exceeded or the number of report blocks is greater than
               version="1.10">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2539">Get the length of the application-dependent data attached to an APP
+             line="2608">Get the length of the application-dependent data attached to an APP
 @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="518"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2546">The length of data in 32-bit words.</doc>
+               line="2615">The length of data in 32-bit words.</doc>
           <type name="guint16" c:type="guint16"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="packet" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
+                 line="2610">a valid APP #GstRTCPPacket</doc>
+            <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="app_get_name"
+              c:identifier="gst_rtcp_packet_app_get_name"
+              version="1.10">
+        <doc xml:space="preserve"
+             filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
+             line="2587">Get the name field of the APP @packet.</doc>
+        <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
+                         line="515"/>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
+               line="2593">The 4-byte name field, not zero-terminated.</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="packet" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
+                 line="2589">a valid APP #GstRTCPPacket</doc>
+            <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="app_get_ssrc"
+              c:identifier="gst_rtcp_packet_app_get_ssrc"
+              version="1.10">
+        <doc xml:space="preserve"
+             filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
+             line="2539">Get the SSRC/CSRC field of the APP @packet.</doc>
+        <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
+                         line="509"/>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
+               line="2545">The SSRC/CSRC.</doc>
+          <type name="guint32" c:type="guint32"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
@@ -780,71 +826,25 @@ the max MTU is exceeded or the number of report blocks is greater than
           </instance-parameter>
         </parameters>
       </method>
-      <method name="app_get_name"
-              c:identifier="gst_rtcp_packet_app_get_name"
-              version="1.10">
-        <doc xml:space="preserve"
-             filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2518">Get the name field of the APP @packet.</doc>
-        <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
-                         line="515"/>
-        <return-value transfer-ownership="none">
-          <doc xml:space="preserve"
-               filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2524">The 4-byte name field, not zero-terminated.</doc>
-          <type name="utf8" c:type="const gchar*"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="packet" transfer-ownership="none">
-            <doc xml:space="preserve"
-                 filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2520">a valid APP #GstRTCPPacket</doc>
-            <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
-          </instance-parameter>
-        </parameters>
-      </method>
-      <method name="app_get_ssrc"
-              c:identifier="gst_rtcp_packet_app_get_ssrc"
-              version="1.10">
-        <doc xml:space="preserve"
-             filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2470">Get the SSRC/CSRC field of the APP @packet.</doc>
-        <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
-                         line="509"/>
-        <return-value transfer-ownership="none">
-          <doc xml:space="preserve"
-               filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2476">The SSRC/CSRC.</doc>
-          <type name="guint32" c:type="guint32"/>
-        </return-value>
-        <parameters>
-          <instance-parameter name="packet" transfer-ownership="none">
-            <doc xml:space="preserve"
-                 filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2472">a valid APP #GstRTCPPacket</doc>
-            <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
-          </instance-parameter>
-        </parameters>
-      </method>
       <method name="app_get_subtype"
               c:identifier="gst_rtcp_packet_app_get_subtype"
               version="1.10">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2422">Get the subtype field of the APP @packet.</doc>
+             line="2491">Get the subtype field of the APP @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="503"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2428">The subtype.</doc>
+               line="2497">The subtype.</doc>
           <type name="guint8" c:type="guint8"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2424">a valid APP #GstRTCPPacket</doc>
+                 line="2493">a valid APP #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
         </parameters>
@@ -854,14 +854,14 @@ the max MTU is exceeded or the number of report blocks is greater than
               version="1.10">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2565">Set the length of the application-dependent data attached to an APP
+             line="2634">Set the length of the application-dependent data attached to an APP
 @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="521"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2573">%TRUE if there was enough space in the packet to add this much
+               line="2642">%TRUE if there was enough space in the packet to add this much
 data.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -869,13 +869,13 @@ data.</doc>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2567">a valid APP #GstRTCPPacket</doc>
+                 line="2636">a valid APP #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="wordlen" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2568">Length of the data in 32-bit words</doc>
+                 line="2637">Length of the data in 32-bit words</doc>
             <type name="guint16" c:type="guint16"/>
           </parameter>
         </parameters>
@@ -885,7 +885,7 @@ data.</doc>
               version="1.10">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2495">Set the name field of the APP @packet.</doc>
+             line="2564">Set the name field of the APP @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="512"/>
         <return-value transfer-ownership="none">
@@ -895,13 +895,13 @@ data.</doc>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2497">a valid APP #GstRTCPPacket</doc>
+                 line="2566">a valid APP #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="name" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2498">4-byte ASCII name</doc>
+                 line="2567">4-byte ASCII name</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
@@ -911,7 +911,7 @@ data.</doc>
               version="1.10">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2447">Set the SSRC/CSRC field of the APP @packet.</doc>
+             line="2516">Set the SSRC/CSRC field of the APP @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="506"/>
         <return-value transfer-ownership="none">
@@ -921,13 +921,13 @@ data.</doc>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2449">a valid APP #GstRTCPPacket</doc>
+                 line="2518">a valid APP #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="ssrc" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2450">SSRC/CSRC of the packet</doc>
+                 line="2519">SSRC/CSRC of the packet</doc>
             <type name="guint32" c:type="guint32"/>
           </parameter>
         </parameters>
@@ -937,7 +937,7 @@ data.</doc>
               version="1.10">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2399">Set the subtype field of the APP @packet.</doc>
+             line="2468">Set the subtype field of the APP @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="500"/>
         <return-value transfer-ownership="none">
@@ -947,13 +947,13 @@ data.</doc>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2401">a valid APP #GstRTCPPacket</doc>
+                 line="2470">a valid APP #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="subtype" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2402">subtype of the packet</doc>
+                 line="2471">subtype of the packet</doc>
             <type name="guint8" c:type="guint8"/>
           </parameter>
         </parameters>
@@ -961,13 +961,13 @@ data.</doc>
       <method name="bye_add_ssrc" c:identifier="gst_rtcp_packet_bye_add_ssrc">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="1728">Add @ssrc to the BYE @packet.</doc>
+             line="1797">Add @ssrc to the BYE @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="483"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="1735">%TRUE if the ssrc was added. This function can return %FALSE if
+               line="1804">%TRUE if the ssrc was added. This function can return %FALSE if
 the max MTU is exceeded or the number of sources blocks is greater than
 #GST_RTCP_MAX_BYE_SSRC_COUNT.</doc>
           <type name="gboolean" c:type="gboolean"/>
@@ -976,13 +976,13 @@ the max MTU is exceeded or the number of sources blocks is greater than
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1730">a valid BYE #GstRTCPPacket</doc>
+                 line="1799">a valid BYE #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="ssrc" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1731">an SSRC to add</doc>
+                 line="1800">an SSRC to add</doc>
             <type name="guint32" c:type="guint32"/>
           </parameter>
         </parameters>
@@ -991,13 +991,13 @@ the max MTU is exceeded or the number of sources blocks is greater than
               c:identifier="gst_rtcp_packet_bye_add_ssrcs">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="1788">Adds @len SSRCs in @ssrc to BYE @packet.</doc>
+             line="1857">Adds @len SSRCs in @ssrc to BYE @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="486"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="1796">%TRUE if the all the SSRCs were added. This function can return %FALSE if
+               line="1865">%TRUE if the all the SSRCs were added. This function can return %FALSE if
 the max MTU is exceeded or the number of sources blocks is greater than
 #GST_RTCP_MAX_BYE_SSRC_COUNT.</doc>
           <type name="gboolean" c:type="gboolean"/>
@@ -1006,13 +1006,13 @@ the max MTU is exceeded or the number of sources blocks is greater than
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1790">a valid BYE #GstRTCPPacket</doc>
+                 line="1859">a valid BYE #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="ssrc" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1791">an array of SSRCs to add</doc>
+                 line="1860">an array of SSRCs to add</doc>
             <array length="1" zero-terminated="0" c:type="guint32*">
               <type name="guint32" c:type="guint32"/>
             </array>
@@ -1020,7 +1020,7 @@ the max MTU is exceeded or the number of sources blocks is greater than
           <parameter name="len" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1792">number of elements in @ssrc</doc>
+                 line="1861">number of elements in @ssrc</doc>
             <type name="guint" c:type="guint"/>
           </parameter>
         </parameters>
@@ -1029,26 +1029,26 @@ the max MTU is exceeded or the number of sources blocks is greater than
               c:identifier="gst_rtcp_packet_bye_get_nth_ssrc">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="1684">Get the @nth SSRC of the BYE @packet.</doc>
+             line="1753">Get the @nth SSRC of the BYE @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="480"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="1691">The @nth SSRC of @packet.</doc>
+               line="1760">The @nth SSRC of @packet.</doc>
           <type name="guint32" c:type="guint32"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1686">a valid BYE #GstRTCPPacket</doc>
+                 line="1755">a valid BYE #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="nth" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1687">the nth SSRC to get</doc>
+                 line="1756">the nth SSRC to get</doc>
             <type name="guint" c:type="guint"/>
           </parameter>
         </parameters>
@@ -1057,13 +1057,13 @@ the max MTU is exceeded or the number of sources blocks is greater than
               c:identifier="gst_rtcp_packet_bye_get_reason">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="1872">Get the reason in @packet.</doc>
+             line="1941">Get the reason in @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="492"/>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="1878">The reason for the BYE @packet or NULL if the packet did not contain
+               line="1947">The reason for the BYE @packet or NULL if the packet did not contain
 a reason string. The string must be freed with g_free() after usage.</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
@@ -1071,7 +1071,7 @@ a reason string. The string must be freed with g_free() after usage.</doc>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1874">a valid BYE #GstRTCPPacket</doc>
+                 line="1943">a valid BYE #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
         </parameters>
@@ -1080,13 +1080,13 @@ a reason string. The string must be freed with g_free() after usage.</doc>
               c:identifier="gst_rtcp_packet_bye_get_reason_len">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="1843">Get the length of the reason string.</doc>
+             line="1912">Get the length of the reason string.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="489"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="1849">The length of the reason string or 0 when there is no reason string
+               line="1918">The length of the reason string or 0 when there is no reason string
 present.</doc>
           <type name="guint8" c:type="guint8"/>
         </return-value>
@@ -1094,7 +1094,7 @@ present.</doc>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1845">a valid BYE #GstRTCPPacket</doc>
+                 line="1914">a valid BYE #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
         </parameters>
@@ -1103,20 +1103,20 @@ present.</doc>
               c:identifier="gst_rtcp_packet_bye_get_ssrc_count">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="1667">Get the number of SSRC fields in @packet.</doc>
+             line="1736">Get the number of SSRC fields in @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="477"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="1673">The number of SSRC fields in @packet.</doc>
+               line="1742">The number of SSRC fields in @packet.</doc>
           <type name="guint" c:type="guint"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1669">a valid BYE #GstRTCPPacket</doc>
+                 line="1738">a valid BYE #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
         </parameters>
@@ -1125,26 +1125,26 @@ present.</doc>
               c:identifier="gst_rtcp_packet_bye_set_reason">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="1914">Set the reason string to @reason in @packet.</doc>
+             line="1983">Set the reason string to @reason in @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="495"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="1921">TRUE if the string could be set.</doc>
+               line="1990">TRUE if the string could be set.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1916">a valid BYE #GstRTCPPacket</doc>
+                 line="1985">a valid BYE #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="reason" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1917">a reason string</doc>
+                 line="1986">a reason string</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
@@ -1196,20 +1196,20 @@ memory area @data. This must be freed with g_free() after usage.</doc>
       <method name="fb_get_fci" c:identifier="gst_rtcp_packet_fb_get_fci">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2372">Get the Feedback Control Information attached to a RTPFB or PSFB @packet.</doc>
+             line="2441">Get the Feedback Control Information attached to a RTPFB or PSFB @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="553"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2378">a pointer to the FCI</doc>
+               line="2447">a pointer to the FCI</doc>
           <type name="guint8" c:type="guint8*"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2374">a valid RTPFB or PSFB #GstRTCPPacket</doc>
+                 line="2443">a valid RTPFB or PSFB #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
         </parameters>
@@ -1218,21 +1218,21 @@ memory area @data. This must be freed with g_free() after usage.</doc>
               c:identifier="gst_rtcp_packet_fb_get_fci_length">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2314">Get the length of the Feedback Control Information attached to a
+             line="2383">Get the length of the Feedback Control Information attached to a
 RTPFB or PSFB @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="547"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2321">The length of the FCI in 32-bit words.</doc>
+               line="2390">The length of the FCI in 32-bit words.</doc>
           <type name="guint16" c:type="guint16"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2316">a valid RTPFB or PSFB #GstRTCPPacket</doc>
+                 line="2385">a valid RTPFB or PSFB #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
         </parameters>
@@ -1241,20 +1241,20 @@ RTPFB or PSFB @packet.</doc>
               c:identifier="gst_rtcp_packet_fb_get_media_ssrc">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2034">Get the media SSRC field of the RTPFB or PSFB @packet.</doc>
+             line="2103">Get the media SSRC field of the RTPFB or PSFB @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="535"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2040">the media SSRC.</doc>
+               line="2109">the media SSRC.</doc>
           <type name="guint32" c:type="guint32"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2036">a valid RTPFB or PSFB #GstRTCPPacket</doc>
+                 line="2105">a valid RTPFB or PSFB #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
         </parameters>
@@ -1263,20 +1263,20 @@ RTPFB or PSFB @packet.</doc>
               c:identifier="gst_rtcp_packet_fb_get_sender_ssrc">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="1980">Get the sender SSRC field of the RTPFB or PSFB @packet.</doc>
+             line="2049">Get the sender SSRC field of the RTPFB or PSFB @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="529"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="1986">the sender SSRC.</doc>
+               line="2055">the sender SSRC.</doc>
           <type name="guint32" c:type="guint32"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1982">a valid RTPFB or PSFB #GstRTCPPacket</doc>
+                 line="2051">a valid RTPFB or PSFB #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
         </parameters>
@@ -1284,20 +1284,20 @@ RTPFB or PSFB @packet.</doc>
       <method name="fb_get_type" c:identifier="gst_rtcp_packet_fb_get_type">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2088">Get the feedback message type of the FB @packet.</doc>
+             line="2157">Get the feedback message type of the FB @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="541"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2094">The feedback message type.</doc>
+               line="2163">The feedback message type.</doc>
           <type name="RTCPFBType" c:type="GstRTCPFBType"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2090">a valid RTPFB or PSFB #GstRTCPPacket</doc>
+                 line="2159">a valid RTPFB or PSFB #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
         </parameters>
@@ -1306,27 +1306,27 @@ RTPFB or PSFB @packet.</doc>
               c:identifier="gst_rtcp_packet_fb_set_fci_length">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2339">Set the length of the Feedback Control Information attached to a
+             line="2408">Set the length of the Feedback Control Information attached to a
 RTPFB or PSFB @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="550"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2347">%TRUE if there was enough space in the packet to add this much FCI</doc>
+               line="2416">%TRUE if there was enough space in the packet to add this much FCI</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2341">a valid RTPFB or PSFB #GstRTCPPacket</doc>
+                 line="2410">a valid RTPFB or PSFB #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="wordlen" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2342">Length of the FCI in 32-bit words</doc>
+                 line="2411">Length of the FCI in 32-bit words</doc>
             <type name="guint16" c:type="guint16"/>
           </parameter>
         </parameters>
@@ -1335,7 +1335,7 @@ RTPFB or PSFB @packet.</doc>
               c:identifier="gst_rtcp_packet_fb_set_media_ssrc">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2063">Set the media SSRC field of the RTPFB or PSFB @packet.</doc>
+             line="2132">Set the media SSRC field of the RTPFB or PSFB @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="538"/>
         <return-value transfer-ownership="none">
@@ -1345,13 +1345,13 @@ RTPFB or PSFB @packet.</doc>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2065">a valid RTPFB or PSFB #GstRTCPPacket</doc>
+                 line="2134">a valid RTPFB or PSFB #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="ssrc" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2066">a media SSRC</doc>
+                 line="2135">a media SSRC</doc>
             <type name="guint32" c:type="guint32"/>
           </parameter>
         </parameters>
@@ -1360,7 +1360,7 @@ RTPFB or PSFB @packet.</doc>
               c:identifier="gst_rtcp_packet_fb_set_sender_ssrc">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2009">Set the sender SSRC field of the RTPFB or PSFB @packet.</doc>
+             line="2078">Set the sender SSRC field of the RTPFB or PSFB @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="532"/>
         <return-value transfer-ownership="none">
@@ -1370,13 +1370,13 @@ RTPFB or PSFB @packet.</doc>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2011">a valid RTPFB or PSFB #GstRTCPPacket</doc>
+                 line="2080">a valid RTPFB or PSFB #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="ssrc" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2012">a sender SSRC</doc>
+                 line="2081">a sender SSRC</doc>
             <type name="guint32" c:type="guint32"/>
           </parameter>
         </parameters>
@@ -1384,7 +1384,7 @@ RTPFB or PSFB @packet.</doc>
       <method name="fb_set_type" c:identifier="gst_rtcp_packet_fb_set_type">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2106">Set the feedback message type of the FB @packet.</doc>
+             line="2175">Set the feedback message type of the FB @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="544"/>
         <return-value transfer-ownership="none">
@@ -1394,13 +1394,13 @@ RTPFB or PSFB @packet.</doc>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2108">a valid RTPFB or PSFB #GstRTCPPacket</doc>
+                 line="2177">a valid RTPFB or PSFB #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="type" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2109">the #GstRTCPFBType to set</doc>
+                 line="2178">the #GstRTCPFBType to set</doc>
             <type name="RTCPFBType" c:type="GstRTCPFBType"/>
           </parameter>
         </parameters>
@@ -1756,13 +1756,13 @@ function.</doc>
               c:identifier="gst_rtcp_packet_sdes_add_entry">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="1602">Add a new SDES entry to the current item in @packet.</doc>
+             line="1671">Add a new SDES entry to the current item in @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="471"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="1611">%TRUE if the item could be added, %FALSE if the MTU has been
+               line="1680">%TRUE if the item could be added, %FALSE if the MTU has been
 reached.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -1770,25 +1770,25 @@ reached.</doc>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1604">a valid SDES #GstRTCPPacket</doc>
+                 line="1673">a valid SDES #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="type" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1605">the #GstRTCPSDESType of the SDES entry</doc>
+                 line="1674">the #GstRTCPSDESType of the SDES entry</doc>
             <type name="RTCPSDESType" c:type="GstRTCPSDESType"/>
           </parameter>
           <parameter name="len" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1606">the data length</doc>
+                 line="1675">the data length</doc>
             <type name="guint8" c:type="guint8"/>
           </parameter>
           <parameter name="data" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1607">the data</doc>
+                 line="1676">the data</doc>
             <array length="1" zero-terminated="0" c:type="const guint8*">
               <type name="guint8" c:type="guint8"/>
             </array>
@@ -1799,13 +1799,13 @@ reached.</doc>
               c:identifier="gst_rtcp_packet_sdes_add_item">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="1531">Add a new SDES item for @ssrc to @packet.</doc>
+             line="1584">Add a new SDES item for @ssrc to @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="468"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="1538">%TRUE if the item could be added, %FALSE if the maximum amount of
+               line="1591">%TRUE if the item could be added, %FALSE if the maximum amount of
 items has been exceeded for the SDES packet or the MTU has been reached.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
@@ -1813,13 +1813,13 @@ items has been exceeded for the SDES packet or the MTU has been reached.</doc>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1533">a valid SDES #GstRTCPPacket</doc>
+                 line="1586">a valid SDES #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="ssrc" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1534">the SSRC of the new item to add</doc>
+                 line="1587">the SSRC of the new item to add</doc>
             <type name="guint32" c:type="guint32"/>
           </parameter>
         </parameters>
@@ -1828,27 +1828,27 @@ items has been exceeded for the SDES packet or the MTU has been reached.</doc>
               c:identifier="gst_rtcp_packet_sdes_copy_entry">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="1496">This function is like gst_rtcp_packet_sdes_get_entry() but it returns a
+             line="1549">This function is like gst_rtcp_packet_sdes_get_entry() but it returns a
 null-terminated copy of the data instead. use g_free() after usage.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="463"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="1506">%TRUE if there was valid data.</doc>
+               line="1559">%TRUE if there was valid data.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1498">a valid SDES #GstRTCPPacket</doc>
+                 line="1551">a valid SDES #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="type" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1499">result of the entry type</doc>
+                 line="1552">result of the entry type</doc>
             <type name="RTCPSDESType" c:type="GstRTCPSDESType*"/>
           </parameter>
           <parameter name="len"
@@ -1857,7 +1857,7 @@ null-terminated copy of the data instead. use g_free() after usage.</doc>
                      transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1500">result length of the entry data</doc>
+                 line="1553">result length of the entry data</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="data"
@@ -1866,7 +1866,7 @@ null-terminated copy of the data instead. use g_free() after usage.</doc>
                      transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1501">result entry data</doc>
+                 line="1554">result entry data</doc>
             <array length="1" zero-terminated="0" c:type="guint8**">
               <type name="guint8" c:type="guint8*"/>
             </array>
@@ -1877,20 +1877,20 @@ null-terminated copy of the data instead. use g_free() after usage.</doc>
               c:identifier="gst_rtcp_packet_sdes_first_entry">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="1349">Move to the first SDES entry in the current item.</doc>
+             line="1387">Move to the first SDES entry in the current item.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="452"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="1355">%TRUE if there was a first entry.</doc>
+               line="1393">%TRUE if there was a first entry.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1351">a valid SDES #GstRTCPPacket</doc>
+                 line="1389">a valid SDES #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
         </parameters>
@@ -1921,7 +1921,7 @@ null-terminated copy of the data instead. use g_free() after usage.</doc>
               c:identifier="gst_rtcp_packet_sdes_get_entry">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="1438">Get the data of the current SDES item entry. @type (when not NULL) will
+             line="1489">Get the data of the current SDES item entry. @type (when not NULL) will
 contain the type of the entry. @data (when not NULL) will point to @len
 bytes.
 
@@ -1933,20 +1933,20 @@ gst_rtcp_packet_sdes_copy_entry() to get a null-terminated copy of the entry.</d
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="1453">%TRUE if there was valid data.</doc>
+               line="1504">%TRUE if there was valid data.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1440">a valid SDES #GstRTCPPacket</doc>
+                 line="1491">a valid SDES #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="type" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1441">result of the entry type</doc>
+                 line="1492">result of the entry type</doc>
             <type name="RTCPSDESType" c:type="GstRTCPSDESType*"/>
           </parameter>
           <parameter name="len"
@@ -1955,7 +1955,7 @@ gst_rtcp_packet_sdes_copy_entry() to get a null-terminated copy of the entry.</d
                      transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1442">result length of the entry data</doc>
+                 line="1493">result length of the entry data</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="data"
@@ -1964,7 +1964,7 @@ gst_rtcp_packet_sdes_copy_entry() to get a null-terminated copy of the entry.</d
                      transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1443">result entry data</doc>
+                 line="1494">result entry data</doc>
             <array length="1" zero-terminated="0" c:type="guint8**">
               <type name="guint8" c:type="guint8*"/>
             </array>
@@ -1997,20 +1997,20 @@ gst_rtcp_packet_sdes_copy_entry() to get a null-terminated copy of the entry.</d
               c:identifier="gst_rtcp_packet_sdes_get_ssrc">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="1319">Get the SSRC of the current SDES item.</doc>
+             line="1352">Get the SSRC of the current SDES item.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="449"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="1325">the SSRC of the current item.</doc>
+               line="1358">the SSRC of the current item.</doc>
           <type name="guint32" c:type="guint32"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1321">a valid SDES #GstRTCPPacket</doc>
+                 line="1354">a valid SDES #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
         </parameters>
@@ -2019,20 +2019,20 @@ gst_rtcp_packet_sdes_copy_entry() to get a null-terminated copy of the entry.</d
               c:identifier="gst_rtcp_packet_sdes_next_entry">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="1389">Move to the next SDES entry in the current item.</doc>
+             line="1431">Move to the next SDES entry in the current item.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="455"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="1395">%TRUE if there was a next entry.</doc>
+               line="1437">%TRUE if there was a next entry.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1391">a valid SDES #GstRTCPPacket</doc>
+                 line="1433">a valid SDES #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
         </parameters>
@@ -2041,20 +2041,20 @@ gst_rtcp_packet_sdes_copy_entry() to get a null-terminated copy of the entry.</d
               c:identifier="gst_rtcp_packet_sdes_next_item">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="1266">Move to the next SDES item in @packet.</doc>
+             line="1315">Move to the next SDES item in @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="446"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="1272">TRUE if there was a next item.</doc>
+               line="1321">TRUE if there was a next item.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="1268">a valid SDES #GstRTCPPacket</doc>
+                 line="1317">a valid SDES #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
         </parameters>
@@ -2245,20 +2245,20 @@ Note: Not implemented.</doc>
               version="1.16">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2658">Move to the first extended report block in XR @packet.</doc>
+             line="2727">Move to the first extended report block in XR @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="575"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2664">TRUE if there was a first extended report block.</doc>
+               line="2733">TRUE if there was a first extended report block.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2660">a valid XR #GstRTCPPacket</doc>
+                 line="2729">a valid XR #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
         </parameters>
@@ -2271,7 +2271,7 @@ Note: Not implemented.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2792">The number of 32-bit words containing type-specific block
+               line="2861">The number of 32-bit words containing type-specific block
          data from @packet.</doc>
           <type name="guint16" c:type="guint16"/>
         </return-value>
@@ -2279,7 +2279,7 @@ Note: Not implemented.</doc>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2790">a valid XR #GstRTCPPacket</doc>
+                 line="2859">a valid XR #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
         </parameters>
@@ -2289,20 +2289,20 @@ Note: Not implemented.</doc>
               version="1.16">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2735">Get the extended report block type of the XR @packet.</doc>
+             line="2804">Get the extended report block type of the XR @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="581"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2741">The extended report block type.</doc>
+               line="2810">The extended report block type.</doc>
           <type name="RTCPXRType" c:type="GstRTCPXRType"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2737">a valid XR #GstRTCPPacket</doc>
+                 line="2806">a valid XR #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
         </parameters>
@@ -2312,44 +2312,44 @@ Note: Not implemented.</doc>
               version="1.16">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="3041">Parse the extended report block for DLRR report block type.</doc>
+             line="3110">Parse the extended report block for DLRR report block type.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="609"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="3051">%TRUE if the report block is correctly parsed.</doc>
+               line="3120">%TRUE if the report block is correctly parsed.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3043">a valid XR #GstRTCPPacket which has DLRR Report Block.</doc>
+                 line="3112">a valid XR #GstRTCPPacket which has DLRR Report Block.</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="nth" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3044">the index of sub-block to retrieve.</doc>
+                 line="3113">the index of sub-block to retrieve.</doc>
             <type name="guint" c:type="guint"/>
           </parameter>
           <parameter name="ssrc" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3045">the SSRC of the receiver.</doc>
+                 line="3114">the SSRC of the receiver.</doc>
             <type name="guint32" c:type="guint32*"/>
           </parameter>
           <parameter name="last_rr" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3046">the last receiver reference timestamp of @ssrc.</doc>
+                 line="3115">the last receiver reference timestamp of @ssrc.</doc>
             <type name="guint32" c:type="guint32*"/>
           </parameter>
           <parameter name="delay" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3047">the delay since @last_rr.</doc>
+                 line="3116">the delay since @last_rr.</doc>
             <type name="guint32" c:type="guint32*"/>
           </parameter>
         </parameters>
@@ -2359,32 +2359,32 @@ Note: Not implemented.</doc>
               version="1.16">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2968">Retrieve the packet receipt time of @seq which ranges in [begin_seq, end_seq).</doc>
+             line="3037">Retrieve the packet receipt time of @seq which ranges in [begin_seq, end_seq).</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="602"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2976">%TRUE if the report block returns the receipt time correctly.</doc>
+               line="3045">%TRUE if the report block returns the receipt time correctly.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2970">a valid XR #GstRTCPPacket which has the Packet Recept Times Report Block.</doc>
+                 line="3039">a valid XR #GstRTCPPacket which has the Packet Recept Times Report Block.</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="seq" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2971">the sequence to retrieve the time.</doc>
+                 line="3040">the sequence to retrieve the time.</doc>
             <type name="guint16" c:type="guint16"/>
           </parameter>
           <parameter name="receipt_time" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2972">the packet receipt time of @seq.</doc>
+                 line="3041">the packet receipt time of @seq.</doc>
             <type name="guint32" c:type="guint32*"/>
           </parameter>
         </parameters>
@@ -2394,44 +2394,44 @@ Note: Not implemented.</doc>
               version="1.16">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2916">Parse the Packet Recept Times Report Block from a XR @packet</doc>
+             line="2985">Parse the Packet Recept Times Report Block from a XR @packet</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="597"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2926">%TRUE if the report block is correctly parsed.</doc>
+               line="2995">%TRUE if the report block is correctly parsed.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2918">a valid XR #GstRTCPPacket which has a Packet Receipt Times Report Block</doc>
+                 line="2987">a valid XR #GstRTCPPacket which has a Packet Receipt Times Report Block</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="ssrc" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2919">the SSRC of the RTP data packet source being reported upon by this report block.</doc>
+                 line="2988">the SSRC of the RTP data packet source being reported upon by this report block.</doc>
             <type name="guint32" c:type="guint32*"/>
           </parameter>
           <parameter name="thinning" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2920">the amount of thinning performed on the sequence number space.</doc>
+                 line="2989">the amount of thinning performed on the sequence number space.</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="begin_seq" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2921">the first sequence number that this block reports on.</doc>
+                 line="2990">the first sequence number that this block reports on.</doc>
             <type name="guint16" c:type="guint16*"/>
           </parameter>
           <parameter name="end_seq" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2922">the last sequence number that this block reports on plus one.</doc>
+                 line="2991">the last sequence number that this block reports on plus one.</doc>
             <type name="guint16" c:type="guint16*"/>
           </parameter>
         </parameters>
@@ -2441,50 +2441,50 @@ Note: Not implemented.</doc>
               version="1.16">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2817">Parse the extended report block for Loss RLE and Duplicated LRE block type.</doc>
+             line="2886">Parse the extended report block for Loss RLE and Duplicated LRE block type.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="587"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2828">%TRUE if the report block is correctly parsed.</doc>
+               line="2897">%TRUE if the report block is correctly parsed.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2819">a valid XR #GstRTCPPacket which is Loss RLE or Duplicate RLE report.</doc>
+                 line="2888">a valid XR #GstRTCPPacket which is Loss RLE or Duplicate RLE report.</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="ssrc" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2820">the SSRC of the RTP data packet source being reported upon by this report block.</doc>
+                 line="2889">the SSRC of the RTP data packet source being reported upon by this report block.</doc>
             <type name="guint32" c:type="guint32*"/>
           </parameter>
           <parameter name="thinning" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2821">the amount of thinning performed on the sequence number space.</doc>
+                 line="2890">the amount of thinning performed on the sequence number space.</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="begin_seq" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2822">the first sequence number that this block reports on.</doc>
+                 line="2891">the first sequence number that this block reports on.</doc>
             <type name="guint16" c:type="guint16*"/>
           </parameter>
           <parameter name="end_seq" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2823">the last sequence number that this block reports on plus one.</doc>
+                 line="2892">the last sequence number that this block reports on plus one.</doc>
             <type name="guint16" c:type="guint16*"/>
           </parameter>
           <parameter name="chunk_count" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2824">the number of chunks calculated by block length.</doc>
+                 line="2893">the number of chunks calculated by block length.</doc>
             <type name="guint32" c:type="guint32*"/>
           </parameter>
         </parameters>
@@ -2494,32 +2494,32 @@ Note: Not implemented.</doc>
               version="1.16">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2875">Retrieve actual chunk data.</doc>
+             line="2944">Retrieve actual chunk data.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="593"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2883">%TRUE if the report block returns chunk correctly.</doc>
+               line="2952">%TRUE if the report block returns chunk correctly.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2877">a valid XR #GstRTCPPacket which is Loss RLE or Duplicate RLE report.</doc>
+                 line="2946">a valid XR #GstRTCPPacket which is Loss RLE or Duplicate RLE report.</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="nth" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2878">the index of chunk to retrieve.</doc>
+                 line="2947">the index of chunk to retrieve.</doc>
             <type name="guint" c:type="guint"/>
           </parameter>
           <parameter name="chunk" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2879">the @nth chunk.</doc>
+                 line="2948">the @nth chunk.</doc>
             <type name="guint16" c:type="guint16*"/>
           </parameter>
         </parameters>
@@ -2532,20 +2532,20 @@ Note: Not implemented.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="3014">%TRUE if the report block returns the reference time correctly.</doc>
+               line="3083">%TRUE if the report block returns the reference time correctly.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3011">a valid XR #GstRTCPPacket which has the Receiver Reference Time.</doc>
+                 line="3080">a valid XR #GstRTCPPacket which has the Receiver Reference Time.</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="timestamp" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3012">NTP timestamp</doc>
+                 line="3081">NTP timestamp</doc>
             <type name="guint64" c:type="guint64*"/>
           </parameter>
         </parameters>
@@ -2555,20 +2555,20 @@ Note: Not implemented.</doc>
               version="1.16">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2628">Get the ssrc field of the XR @packet.</doc>
+             line="2697">Get the ssrc field of the XR @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="572"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2634">the ssrc.</doc>
+               line="2703">the ssrc.</doc>
           <type name="guint32" c:type="guint32"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2630">a valid XR #GstRTCPPacket</doc>
+                 line="2699">a valid XR #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
         </parameters>
@@ -2578,38 +2578,38 @@ Note: Not implemented.</doc>
               version="1.16">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="3091">Extract a basic information from static summary report block of XR @packet.</doc>
+             line="3160">Extract a basic information from static summary report block of XR @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="614"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="3100">%TRUE if the report block is correctly parsed.</doc>
+               line="3169">%TRUE if the report block is correctly parsed.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3093">a valid XR #GstRTCPPacket which has Statics Summary Report Block.</doc>
+                 line="3162">a valid XR #GstRTCPPacket which has Statics Summary Report Block.</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="ssrc" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3094">the SSRC of the source.</doc>
+                 line="3163">the SSRC of the source.</doc>
             <type name="guint32" c:type="guint32*"/>
           </parameter>
           <parameter name="begin_seq" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3095">the first sequence number that this block reports on.</doc>
+                 line="3164">the first sequence number that this block reports on.</doc>
             <type name="guint16" c:type="guint16*"/>
           </parameter>
           <parameter name="end_seq" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3096">the last sequence number that this block reports on plus one.</doc>
+                 line="3165">the last sequence number that this block reports on plus one.</doc>
             <type name="guint16" c:type="guint16*"/>
           </parameter>
         </parameters>
@@ -2619,45 +2619,45 @@ Note: Not implemented.</doc>
               version="1.16">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="3187">Extract jitter information from the statistics summary. If the jitter flag in
+             line="3256">Extract jitter information from the statistics summary. If the jitter flag in
 a block header is set as zero, all of jitters will be zero.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="622"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="3198">%TRUE if the report block is correctly parsed.</doc>
+               line="3267">%TRUE if the report block is correctly parsed.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3189">a valid XR #GstRTCPPacket which has Statics Summary Report Block.</doc>
+                 line="3258">a valid XR #GstRTCPPacket which has Statics Summary Report Block.</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="min_jitter" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3190">the minimum relative transit time between two sequences.</doc>
+                 line="3259">the minimum relative transit time between two sequences.</doc>
             <type name="guint32" c:type="guint32*"/>
           </parameter>
           <parameter name="max_jitter" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3191">the maximum relative transit time between two sequences.</doc>
+                 line="3260">the maximum relative transit time between two sequences.</doc>
             <type name="guint32" c:type="guint32*"/>
           </parameter>
           <parameter name="mean_jitter" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3192">the mean relative transit time between two sequences.</doc>
+                 line="3261">the mean relative transit time between two sequences.</doc>
             <type name="guint32" c:type="guint32*"/>
           </parameter>
           <parameter name="dev_jitter" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3193">the standard deviation of the relative transit time between two sequences.</doc>
+                 line="3262">the standard deviation of the relative transit time between two sequences.</doc>
             <type name="guint32" c:type="guint32*"/>
           </parameter>
         </parameters>
@@ -2667,33 +2667,33 @@ a block header is set as zero, all of jitters will be zero.</doc>
               version="1.16">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="3137">Get the number of lost or duplicate packets. If the flag in a block header
+             line="3206">Get the number of lost or duplicate packets. If the flag in a block header
 is set as zero, @lost_packets or @dup_packets will be zero.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="618"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="3146">%TRUE if the report block is correctly parsed.</doc>
+               line="3215">%TRUE if the report block is correctly parsed.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3139">a valid XR #GstRTCPPacket which has Statics Summary Report Block.</doc>
+                 line="3208">a valid XR #GstRTCPPacket which has Statics Summary Report Block.</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="lost_packets" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3140">the number of lost packets between begin_seq and end_seq.</doc>
+                 line="3209">the number of lost packets between begin_seq and end_seq.</doc>
             <type name="guint32" c:type="guint32*"/>
           </parameter>
           <parameter name="dup_packets" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3141">the number of duplicate packets between begin_seq and end_seq.</doc>
+                 line="3210">the number of duplicate packets between begin_seq and end_seq.</doc>
             <type name="guint32" c:type="guint32*"/>
           </parameter>
         </parameters>
@@ -2703,50 +2703,50 @@ is set as zero, @lost_packets or @dup_packets will be zero.</doc>
               version="1.16">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="3254">Extract the value of ttl for ipv4, or hop limit for ipv6.</doc>
+             line="3323">Extract the value of ttl for ipv4, or hop limit for ipv6.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="627"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="3265">%TRUE if the report block is correctly parsed.</doc>
+               line="3334">%TRUE if the report block is correctly parsed.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3256">a valid XR #GstRTCPPacket which has Statics Summary Report Block.</doc>
+                 line="3325">a valid XR #GstRTCPPacket which has Statics Summary Report Block.</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="is_ipv4" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3257">the flag to indicate that the return values are ipv4 ttl or ipv6 hop limits.</doc>
+                 line="3326">the flag to indicate that the return values are ipv4 ttl or ipv6 hop limits.</doc>
             <type name="gboolean" c:type="gboolean*"/>
           </parameter>
           <parameter name="min_ttl" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3258">the minimum TTL or Hop Limit value of data packets between two sequences.</doc>
+                 line="3327">the minimum TTL or Hop Limit value of data packets between two sequences.</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="max_ttl" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3259">the maximum TTL or Hop Limit value of data packets between two sequences.</doc>
+                 line="3328">the maximum TTL or Hop Limit value of data packets between two sequences.</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="mean_ttl" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3260">the mean TTL or Hop Limit value of data packets between two sequences.</doc>
+                 line="3329">the mean TTL or Hop Limit value of data packets between two sequences.</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="dev_ttl" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3261">the standard deviation of the TTL or Hop Limit value of data packets between two sequences.</doc>
+                 line="3330">the standard deviation of the TTL or Hop Limit value of data packets between two sequences.</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
         </parameters>
@@ -2759,38 +2759,38 @@ is set as zero, @lost_packets or @dup_packets will be zero.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="3389">%TRUE if the report block is correctly parsed.</doc>
+               line="3458">%TRUE if the report block is correctly parsed.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3383">a valid XR #GstRTCPPacket which has VoIP Metrics Report Block.</doc>
+                 line="3452">a valid XR #GstRTCPPacket which has VoIP Metrics Report Block.</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="burst_density" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3384">the fraction of RTP data packets within burst periods.</doc>
+                 line="3453">the fraction of RTP data packets within burst periods.</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="gap_density" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3385">the fraction of RTP data packets within inter-burst gaps.</doc>
+                 line="3454">the fraction of RTP data packets within inter-burst gaps.</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="burst_duration" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3386">the mean duration(ms) of the burst periods.</doc>
+                 line="3455">the mean duration(ms) of the burst periods.</doc>
             <type name="guint16" c:type="guint16*"/>
           </parameter>
           <parameter name="gap_duration" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3387">the mean duration(ms) of the gap periods.</doc>
+                 line="3456">the mean duration(ms) of the gap periods.</doc>
             <type name="guint16" c:type="guint16*"/>
           </parameter>
         </parameters>
@@ -2803,26 +2803,26 @@ is set as zero, @lost_packets or @dup_packets will be zero.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="3565">%TRUE if the report block is correctly parsed.</doc>
+               line="3634">%TRUE if the report block is correctly parsed.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3561">a valid XR #GstRTCPPacket which has VoIP Metrics Report Block.</doc>
+                 line="3630">a valid XR #GstRTCPPacket which has VoIP Metrics Report Block.</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="gmin" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3562">the gap threshold.</doc>
+                 line="3631">the gap threshold.</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="rx_config" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3563">the receiver configuration byte.</doc>
+                 line="3632">the receiver configuration byte.</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
         </parameters>
@@ -2835,26 +2835,26 @@ is set as zero, @lost_packets or @dup_packets will be zero.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="3435">%TRUE if the report block is correctly parsed.</doc>
+               line="3504">%TRUE if the report block is correctly parsed.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3431">a valid XR #GstRTCPPacket which has VoIP Metrics Report Block.</doc>
+                 line="3500">a valid XR #GstRTCPPacket which has VoIP Metrics Report Block.</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="roundtrip_delay" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3432">the most recently calculated round trip time between RTP interfaces(ms)</doc>
+                 line="3501">the most recently calculated round trip time between RTP interfaces(ms)</doc>
             <type name="guint16" c:type="guint16*"/>
           </parameter>
           <parameter name="end_system_delay" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3433">the most recently estimated end system delay(ms)</doc>
+                 line="3502">the most recently estimated end system delay(ms)</doc>
             <type name="guint16" c:type="guint16*"/>
           </parameter>
         </parameters>
@@ -2867,32 +2867,32 @@ is set as zero, @lost_packets or @dup_packets will be zero.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="3601">%TRUE if the report block is correctly parsed.</doc>
+               line="3670">%TRUE if the report block is correctly parsed.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3596">a valid XR #GstRTCPPacket which has VoIP Metrics Report Block.</doc>
+                 line="3665">a valid XR #GstRTCPPacket which has VoIP Metrics Report Block.</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="jb_nominal" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3597">the current nominal jitter buffer delay(ms)</doc>
+                 line="3666">the current nominal jitter buffer delay(ms)</doc>
             <type name="guint16" c:type="guint16*"/>
           </parameter>
           <parameter name="jb_maximum" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3598">the current maximum jitter buffer delay(ms)</doc>
+                 line="3667">the current maximum jitter buffer delay(ms)</doc>
             <type name="guint16" c:type="guint16*"/>
           </parameter>
           <parameter name="jb_abs_max" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3599">the absolute maximum delay(ms)</doc>
+                 line="3668">the absolute maximum delay(ms)</doc>
             <type name="guint16" c:type="guint16*"/>
           </parameter>
         </parameters>
@@ -2905,20 +2905,20 @@ is set as zero, @lost_packets or @dup_packets will be zero.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="3316">%TRUE if the report block is correctly parsed.</doc>
+               line="3385">%TRUE if the report block is correctly parsed.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3313">a valid XR #GstRTCPPacket which has VoIP Metrics Report Block.</doc>
+                 line="3382">a valid XR #GstRTCPPacket which has VoIP Metrics Report Block.</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="ssrc" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3314">the SSRC of source</doc>
+                 line="3383">the SSRC of source</doc>
             <type name="guint32" c:type="guint32*"/>
           </parameter>
         </parameters>
@@ -2931,26 +2931,26 @@ is set as zero, @lost_packets or @dup_packets will be zero.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="3350">%TRUE if the report block is correctly parsed.</doc>
+               line="3419">%TRUE if the report block is correctly parsed.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3346">a valid XR #GstRTCPPacket which has VoIP Metrics Report Block.</doc>
+                 line="3415">a valid XR #GstRTCPPacket which has VoIP Metrics Report Block.</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="loss_rate" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3347">the fraction of RTP data packets from the source lost.</doc>
+                 line="3416">the fraction of RTP data packets from the source lost.</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="discard_rate" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3348">the fraction of RTP data packets from the source that have been discarded.</doc>
+                 line="3417">the fraction of RTP data packets from the source that have been discarded.</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
         </parameters>
@@ -2963,38 +2963,38 @@ is set as zero, @lost_packets or @dup_packets will be zero.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="3521">%TRUE if the report block is correctly parsed.</doc>
+               line="3590">%TRUE if the report block is correctly parsed.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3515">a valid XR #GstRTCPPacket which has VoIP Metrics Report Block.</doc>
+                 line="3584">a valid XR #GstRTCPPacket which has VoIP Metrics Report Block.</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="r_factor" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3516">the R factor is a voice quality metric describing the segment of the call.</doc>
+                 line="3585">the R factor is a voice quality metric describing the segment of the call.</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="ext_r_factor" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3517">the external R factor is a voice quality metric.</doc>
+                 line="3586">the external R factor is a voice quality metric.</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="mos_lq" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3518">the estimated mean opinion score for listening quality.</doc>
+                 line="3587">the estimated mean opinion score for listening quality.</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="mos_cq" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3519">the estimated mean opinion score for conversational quality.</doc>
+                 line="3588">the estimated mean opinion score for conversational quality.</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
         </parameters>
@@ -3007,38 +3007,38 @@ is set as zero, @lost_packets or @dup_packets will be zero.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="3475">%TRUE if the report block is correctly parsed.</doc>
+               line="3544">%TRUE if the report block is correctly parsed.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3469">a valid XR #GstRTCPPacket which has VoIP Metrics Report Block.</doc>
+                 line="3538">a valid XR #GstRTCPPacket which has VoIP Metrics Report Block.</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
           <parameter name="signal_level" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3470">the ratio of the signal level to a 0 dBm reference.</doc>
+                 line="3539">the ratio of the signal level to a 0 dBm reference.</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="noise_level" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3471">the ratio of the silent period background noise level to a 0 dBm reference.</doc>
+                 line="3540">the ratio of the silent period background noise level to a 0 dBm reference.</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="rerl" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3472">the residual echo return loss value.</doc>
+                 line="3541">the residual echo return loss value.</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="gmin" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="3473">the gap threshold.</doc>
+                 line="3542">the gap threshold.</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
         </parameters>
@@ -3048,20 +3048,20 @@ is set as zero, @lost_packets or @dup_packets will be zero.</doc>
               version="1.16">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2697">Move to the next extended report block in XR @packet.</doc>
+             line="2766">Move to the next extended report block in XR @packet.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h"
                          line="578"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2703">TRUE if there was a next extended report block.</doc>
+               line="2772">TRUE if there was a next extended report block.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="packet" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-                 line="2699">a valid XR #GstRTCPPacket</doc>
+                 line="2768">a valid XR #GstRTCPPacket</doc>
             <type name="RTCPPacket" c:type="GstRTCPPacket*"/>
           </instance-parameter>
         </parameters>
@@ -3956,7 +3956,7 @@ buffer and the output buffer will be pushed out. If this function returns
               version="1.24">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-             line="1979">Called from @GstRTPBaseDepayload.process or
+             line="1985">Called from @GstRTPBaseDepayload.process or
 @GstRTPBaseDepayload.process_rtp_packet when the depayloader needs
 to keep the current input RTP header for use with the next output
 buffer.
@@ -3979,7 +3979,7 @@ Must be called with the stream lock held.</doc>
           <instance-parameter name="depayload" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-                 line="1981">a #GstRTPBaseDepayload</doc>
+                 line="1987">a #GstRTPBaseDepayload</doc>
             <type name="RTPBaseDepayload" c:type="GstRTPBaseDepayload*"/>
           </instance-parameter>
         </parameters>
@@ -3989,7 +3989,7 @@ Must be called with the stream lock held.</doc>
               version="1.24">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-             line="1949">Called from @GstRTPBaseDepayload.process or
+             line="1955">Called from @GstRTPBaseDepayload.process or
 @GstRTPBaseDepayload.process_rtp_packet if the depayloader does not
 use the current buffer for the output buffer. This will either drop
 the delayed buffer or the last buffer from the header extension
@@ -4008,7 +4008,7 @@ Must be called with the stream lock held.</doc>
           <instance-parameter name="depayload" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-                 line="1951">a #GstRTPBaseDepayload</doc>
+                 line="1957">a #GstRTPBaseDepayload</doc>
             <type name="RTPBaseDepayload" c:type="GstRTPBaseDepayload*"/>
           </instance-parameter>
         </parameters>
@@ -4018,7 +4018,7 @@ Must be called with the stream lock held.</doc>
               version="1.24">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-             line="2013">If @GstRTPBaseDepayload.process or
+             line="2019">If @GstRTPBaseDepayload.process or
 @GstRTPBaseDepayload.process_rtp_packet drop an output buffer this
 function tells the base class to flush header extension cache as
 well.
@@ -4043,13 +4043,13 @@ Must be called with the stream lock held.</doc>
           <instance-parameter name="depayload" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-                 line="2015">a #GstRTPBaseDepayload</doc>
+                 line="2021">a #GstRTPBaseDepayload</doc>
             <type name="RTPBaseDepayload" c:type="GstRTPBaseDepayload*"/>
           </instance-parameter>
           <parameter name="keep_current" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-                 line="2016">if the current RTP buffer shall be kept</doc>
+                 line="2022">if the current RTP buffer shall be kept</doc>
             <type name="gboolean" c:type="gboolean"/>
           </parameter>
         </parameters>
@@ -4059,20 +4059,20 @@ Must be called with the stream lock held.</doc>
               version="1.24">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-             line="1932">Queries whether header extensions will be aggregated per depayloaded buffers.</doc>
+             line="1938">Queries whether header extensions will be aggregated per depayloaded buffers.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtpbasedepayload.h"
                          line="141"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-               line="1938">%TRUE if aggregate-header-extension is enabled.</doc>
+               line="1944">%TRUE if aggregate-header-extension is enabled.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="depayload" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-                 line="1934">a #GstRTPBaseDepayload</doc>
+                 line="1940">a #GstRTPBaseDepayload</doc>
             <type name="RTPBaseDepayload" c:type="GstRTPBaseDepayload*"/>
           </instance-parameter>
         </parameters>
@@ -4082,20 +4082,20 @@ Must be called with the stream lock held.</doc>
               version="1.16">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-             line="1898">Queries whether #GstRTPSourceMeta will be added to depayloaded buffers.</doc>
+             line="1904">Queries whether #GstRTPSourceMeta will be added to depayloaded buffers.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtpbasedepayload.h"
                          line="124"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-               line="1904">%TRUE if source-info is enabled.</doc>
+               line="1910">%TRUE if source-info is enabled.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="depayload" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-                 line="1900">a #GstRTPBaseDepayload</doc>
+                 line="1906">a #GstRTPBaseDepayload</doc>
             <type name="RTPBaseDepayload" c:type="GstRTPBaseDepayload*"/>
           </instance-parameter>
         </parameters>
@@ -4103,7 +4103,7 @@ Must be called with the stream lock held.</doc>
       <method name="push" c:identifier="gst_rtp_base_depayload_push">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-             line="1639">Push @out_buf to the peer of @filter. This function takes ownership of
+             line="1645">Push @out_buf to the peer of @filter. This function takes ownership of
 @out_buf.
 
 This function will by default apply the last incoming timestamp on
@@ -4113,20 +4113,20 @@ the outgoing buffer when it didn't have a timestamp already.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-               line="1650">a #GstFlowReturn.</doc>
+               line="1656">a #GstFlowReturn.</doc>
           <type name="Gst.FlowReturn" c:type="GstFlowReturn"/>
         </return-value>
         <parameters>
           <instance-parameter name="filter" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-                 line="1641">a #GstRTPBaseDepayload</doc>
+                 line="1647">a #GstRTPBaseDepayload</doc>
             <type name="RTPBaseDepayload" c:type="GstRTPBaseDepayload*"/>
           </instance-parameter>
           <parameter name="out_buf" transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-                 line="1642">a #GstBuffer</doc>
+                 line="1648">a #GstBuffer</doc>
             <type name="Gst.Buffer" c:type="GstBuffer*"/>
           </parameter>
         </parameters>
@@ -4134,27 +4134,27 @@ the outgoing buffer when it didn't have a timestamp already.</doc>
       <method name="push_list" c:identifier="gst_rtp_base_depayload_push_list">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-             line="1665">Push @out_list to the peer of @filter. This function takes ownership of
+             line="1671">Push @out_list to the peer of @filter. This function takes ownership of
 @out_list.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtpbasedepayload.h"
                          line="121"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-               line="1673">a #GstFlowReturn.</doc>
+               line="1679">a #GstFlowReturn.</doc>
           <type name="Gst.FlowReturn" c:type="GstFlowReturn"/>
         </return-value>
         <parameters>
           <instance-parameter name="filter" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-                 line="1667">a #GstRTPBaseDepayload</doc>
+                 line="1673">a #GstRTPBaseDepayload</doc>
             <type name="RTPBaseDepayload" c:type="GstRTPBaseDepayload*"/>
           </instance-parameter>
           <parameter name="out_list" transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-                 line="1668">a #GstBufferList</doc>
+                 line="1674">a #GstBufferList</doc>
             <type name="Gst.BufferList" c:type="GstBufferList*"/>
           </parameter>
         </parameters>
@@ -4164,7 +4164,7 @@ the outgoing buffer when it didn't have a timestamp already.</doc>
               version="1.24">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-             line="1914">Enable or disable aggregating header extensions.</doc>
+             line="1920">Enable or disable aggregating header extensions.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtpbasedepayload.h"
                          line="144"/>
         <return-value transfer-ownership="none">
@@ -4174,13 +4174,13 @@ the outgoing buffer when it didn't have a timestamp already.</doc>
           <instance-parameter name="depayload" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-                 line="1916">a #GstRTPBaseDepayload</doc>
+                 line="1922">a #GstRTPBaseDepayload</doc>
             <type name="RTPBaseDepayload" c:type="GstRTPBaseDepayload*"/>
           </instance-parameter>
           <parameter name="enable" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-                 line="1917">whether to aggregate header extensions per output buffer</doc>
+                 line="1923">whether to aggregate header extensions per output buffer</doc>
             <type name="gboolean" c:type="gboolean"/>
           </parameter>
         </parameters>
@@ -4190,7 +4190,7 @@ the outgoing buffer when it didn't have a timestamp already.</doc>
               version="1.16">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-             line="1882">Enable or disable adding #GstRTPSourceMeta to depayloaded buffers.</doc>
+             line="1888">Enable or disable adding #GstRTPSourceMeta to depayloaded buffers.</doc>
         <source-position filename="gst-libs/gst/rtp/gstrtpbasedepayload.h"
                          line="127"/>
         <return-value transfer-ownership="none">
@@ -4200,13 +4200,13 @@ the outgoing buffer when it didn't have a timestamp already.</doc>
           <instance-parameter name="depayload" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-                 line="1884">a #GstRTPBaseDepayload</doc>
+                 line="1890">a #GstRTPBaseDepayload</doc>
             <type name="RTPBaseDepayload" c:type="GstRTPBaseDepayload*"/>
           </instance-parameter>
           <parameter name="enable" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="gst-libs/gst/rtp/gstrtpbasedepayload.c"
-                 line="1885">whether to add meta about RTP sources to buffer</doc>
+                 line="1891">whether to add meta about RTP sources to buffer</doc>
             <type name="gboolean" c:type="gboolean"/>
           </parameter>
         </parameters>
@@ -9778,7 +9778,7 @@ gst_rtcp_buffer_validate_reduced().</doc>
     <function name="rtcp_ntp_to_unix" c:identifier="gst_rtcp_ntp_to_unix">
       <doc xml:space="preserve"
            filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-           line="2130">Converts an NTP time to UNIX nanoseconds. @ntptime can typically be
+           line="2199">Converts an NTP time to UNIX nanoseconds. @ntptime can typically be
 the NTP time of an SR RTCP message and contains, in the upper 32 bits, the
 number of seconds since 1900 and, in the lower 32 bits, the fractional
 seconds. The resulting value will be the number of nanoseconds since 1970.</doc>
@@ -9786,14 +9786,14 @@ seconds. The resulting value will be the number of nanoseconds since 1970.</doc>
       <return-value transfer-ownership="none">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2139">the UNIX time for @ntptime in nanoseconds.</doc>
+             line="2208">the UNIX time for @ntptime in nanoseconds.</doc>
         <type name="guint64" c:type="guint64"/>
       </return-value>
       <parameters>
         <parameter name="ntptime" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2132">an NTP timestamp</doc>
+               line="2201">an NTP timestamp</doc>
           <type name="guint64" c:type="guint64"/>
         </parameter>
       </parameters>
@@ -9802,13 +9802,13 @@ seconds. The resulting value will be the number of nanoseconds since 1970.</doc>
               c:identifier="gst_rtcp_sdes_name_to_type">
       <doc xml:space="preserve"
            filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-           line="2253">Convert @name into a @GstRTCPSDESType. @name is typically a key in a
+           line="2322">Convert @name into a @GstRTCPSDESType. @name is typically a key in a
 #GstStructure containing SDES items.</doc>
       <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h" line="567"/>
       <return-value transfer-ownership="none">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2260">the #GstRTCPSDESType for @name or #GST_RTCP_SDES_PRIV when @name
+             line="2329">the #GstRTCPSDESType for @name or #GST_RTCP_SDES_PRIV when @name
 is a private sdes item.</doc>
         <type name="RTCPSDESType" c:type="GstRTCPSDESType"/>
       </return-value>
@@ -9816,7 +9816,7 @@ is a private sdes item.</doc>
         <parameter name="name" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2255">a SDES name</doc>
+               line="2324">a SDES name</doc>
           <type name="utf8" c:type="const gchar*"/>
         </parameter>
       </parameters>
@@ -9825,20 +9825,20 @@ is a private sdes item.</doc>
               c:identifier="gst_rtcp_sdes_type_to_name">
       <doc xml:space="preserve"
            filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-           line="2186">Converts @type to the string equivalent. The string is typically used as a
+           line="2255">Converts @type to the string equivalent. The string is typically used as a
 key in a #GstStructure containing SDES items.</doc>
       <source-position filename="gst-libs/gst/rtp/gstrtcpbuffer.h" line="564"/>
       <return-value transfer-ownership="none">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2193">the string equivalent of @type</doc>
+             line="2262">the string equivalent of @type</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>
       <parameters>
         <parameter name="type" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2188">a #GstRTCPSDESType</doc>
+               line="2257">a #GstRTCPSDESType</doc>
           <type name="RTCPSDESType" c:type="GstRTCPSDESType"/>
         </parameter>
       </parameters>
@@ -9846,7 +9846,7 @@ key in a #GstStructure containing SDES items.</doc>
     <function name="rtcp_unix_to_ntp" c:identifier="gst_rtcp_unix_to_ntp">
       <doc xml:space="preserve"
            filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-           line="2157">Converts a UNIX timestamp in nanoseconds to an NTP time. The caller should
+           line="2226">Converts a UNIX timestamp in nanoseconds to an NTP time. The caller should
 pass a value with nanoseconds since 1970. The NTP time will, in the upper
 32 bits, contain the number of seconds since 1900 and, in the lower 32
 bits, the fractional seconds. The resulting value can be used as an ntptime
@@ -9855,14 +9855,14 @@ for constructing SR RTCP packets.</doc>
       <return-value transfer-ownership="none">
         <doc xml:space="preserve"
              filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-             line="2167">the NTP time for @unixtime.</doc>
+             line="2236">the NTP time for @unixtime.</doc>
         <type name="guint64" c:type="guint64"/>
       </return-value>
       <parameters>
         <parameter name="unixtime" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/rtp/gstrtcpbuffer.c"
-               line="2159">an UNIX timestamp in nanoseconds</doc>
+               line="2228">an UNIX timestamp in nanoseconds</doc>
           <type name="guint64" c:type="guint64"/>
         </parameter>
       </parameters>

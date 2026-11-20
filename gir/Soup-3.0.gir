@@ -1828,7 +1828,7 @@ authentication.</doc>
                    introspectable="0">
         <doc xml:space="preserve"
              filename="libsoup/server/soup-auth-domain-digest.c"
-             line="116">Creates a [class@AuthDomainDigest].
+             line="133">Creates a [class@AuthDomainDigest].
 
 You must set the [property@AuthDomain:realm] property, to indicate the realm name to
 be returned with the authentication challenge to the client. Other parameters
@@ -1838,20 +1838,20 @@ are optional.</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve"
                filename="libsoup/server/soup-auth-domain-digest.c"
-               line="127">the new #SoupAuthDomain</doc>
+               line="144">the new #SoupAuthDomain</doc>
           <type name="AuthDomain" c:type="SoupAuthDomain*"/>
         </return-value>
         <parameters>
           <parameter name="optname1" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/server/soup-auth-domain-digest.c"
-                 line="118">name of first option, or %NULL</doc>
+                 line="135">name of first option, or %NULL</doc>
             <type name="utf8" c:type="const char*"/>
           </parameter>
           <parameter name="..." transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/server/soup-auth-domain-digest.c"
-                 line="119">option name/value pairs</doc>
+                 line="136">option name/value pairs</doc>
             <varargs/>
           </parameter>
         </parameters>
@@ -1860,7 +1860,7 @@ are optional.</doc>
                 c:identifier="soup_auth_domain_digest_encode_password">
         <doc xml:space="preserve"
              filename="libsoup/server/soup-auth-domain-digest.c"
-             line="350">Encodes the username/realm/password triplet for Digest
+             line="421">Encodes the username/realm/password triplet for Digest
 authentication.
 
 That is, it returns a stringified MD5 hash of
@@ -1880,26 +1880,26 @@ the encoded password stored in an Apache .htdigest file.)</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve"
                filename="libsoup/server/soup-auth-domain-digest.c"
-               line="372">the encoded password</doc>
+               line="443">the encoded password</doc>
           <type name="utf8" c:type="char*"/>
         </return-value>
         <parameters>
           <parameter name="username" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/server/soup-auth-domain-digest.c"
-                 line="352">a username</doc>
+                 line="423">a username</doc>
             <type name="utf8" c:type="const char*"/>
           </parameter>
           <parameter name="realm" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/server/soup-auth-domain-digest.c"
-                 line="353">an auth realm name</doc>
+                 line="424">an auth realm name</doc>
             <type name="utf8" c:type="const char*"/>
           </parameter>
           <parameter name="password" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/server/soup-auth-domain-digest.c"
-                 line="354">the password for @username in @realm</doc>
+                 line="425">the password for @username in @realm</doc>
             <type name="utf8" c:type="const char*"/>
           </parameter>
         </parameters>
@@ -1910,7 +1910,7 @@ the encoded password stored in an Apache .htdigest file.)</doc>
         <attribute name="org.gtk.Method.set_property" value="auth-callback"/>
         <doc xml:space="preserve"
              filename="libsoup/server/soup-auth-domain-digest.c"
-             line="163">Sets the callback that @domain will use to authenticate incoming
+             line="180">Sets the callback that @domain will use to authenticate incoming
 requests.
 
 For each request containing authorization, @domain will
@@ -1930,7 +1930,7 @@ set the callback at construct time.</doc>
           <instance-parameter name="domain" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/server/soup-auth-domain-digest.c"
-                 line="165">the domain</doc>
+                 line="182">the domain</doc>
             <type name="AuthDomainDigest" c:type="SoupAuthDomain*"/>
           </instance-parameter>
           <parameter name="callback"
@@ -1940,7 +1940,7 @@ set the callback at construct time.</doc>
                      destroy="2">
             <doc xml:space="preserve"
                  filename="libsoup/server/soup-auth-domain-digest.c"
-                 line="166">the callback</doc>
+                 line="183">the callback</doc>
             <type name="AuthDomainDigestAuthCallback"
                   c:type="SoupAuthDomainDigestAuthCallback"/>
           </parameter>
@@ -1950,13 +1950,13 @@ set the callback at construct time.</doc>
                      allow-none="1">
             <doc xml:space="preserve"
                  filename="libsoup/server/soup-auth-domain-digest.c"
-                 line="167">data to pass to @auth_callback</doc>
+                 line="184">data to pass to @auth_callback</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
           <parameter name="dnotify" transfer-ownership="none" scope="async">
             <doc xml:space="preserve"
                  filename="libsoup/server/soup-auth-domain-digest.c"
-                 line="168">destroy notifier to free @user_data when @domain
+                 line="185">destroy notifier to free @user_data when @domain
   is destroyed</doc>
             <type name="GLib.DestroyNotify" c:type="GDestroyNotify"/>
           </parameter>
@@ -1970,13 +1970,13 @@ set the callback at construct time.</doc>
                    value="soup_auth_domain_digest_set_auth_callback"/>
         <doc xml:space="preserve"
              filename="libsoup/server/soup-auth-domain-digest.c"
-             line="435">The [callback@AuthDomainDigestAuthCallback].</doc>
+             line="506">The [callback@AuthDomainDigestAuthCallback].</doc>
         <type name="AuthDomainDigestAuthCallback" c:type="gpointer"/>
       </property>
       <property name="auth-data" writable="1" transfer-ownership="none">
         <doc xml:space="preserve"
              filename="libsoup/server/soup-auth-domain-digest.c"
-             line="446">The data to pass to the [callback@AuthDomainDigestAuthCallback].</doc>
+             line="517">The data to pass to the [callback@AuthDomainDigestAuthCallback].</doc>
         <type name="gpointer" c:type="gpointer"/>
       </property>
     </class>
@@ -1984,7 +1984,7 @@ set the callback at construct time.</doc>
               c:type="SoupAuthDomainDigestAuthCallback">
       <doc xml:space="preserve"
            filename="libsoup/server/soup-auth-domain-digest.c"
-           line="145">Callback used by [class@AuthDomainDigest] for authentication purposes.
+           line="162">Callback used by [class@AuthDomainDigest] for authentication purposes.
 
 The application should look up @username in its password database,
 and return the corresponding encoded password (see
@@ -1994,7 +1994,7 @@ and return the corresponding encoded password (see
       <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve"
              filename="libsoup/server/soup-auth-domain-digest.c"
-             line="158">the encoded password, or %NULL if
+             line="175">the encoded password, or %NULL if
   @username is not a valid user. @domain will free the password when
   it is done with it.</doc>
         <type name="utf8" c:type="char*"/>
@@ -2003,19 +2003,19 @@ and return the corresponding encoded password (see
         <parameter name="domain" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/server/soup-auth-domain-digest.c"
-               line="147">the domain</doc>
+               line="164">the domain</doc>
           <type name="AuthDomainDigest" c:type="SoupAuthDomain*"/>
         </parameter>
         <parameter name="msg" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/server/soup-auth-domain-digest.c"
-               line="148">the message being authenticated</doc>
+               line="165">the message being authenticated</doc>
           <type name="ServerMessage" c:type="SoupServerMessage*"/>
         </parameter>
         <parameter name="username" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/server/soup-auth-domain-digest.c"
-               line="149">the username provided by the client</doc>
+               line="166">the username provided by the client</doc>
           <type name="utf8" c:type="const char*"/>
         </parameter>
         <parameter name="user_data"
@@ -2025,7 +2025,7 @@ and return the corresponding encoded password (see
                    closure="3">
           <doc xml:space="preserve"
                filename="libsoup/server/soup-auth-domain-digest.c"
-               line="150">the data passed to [method@AuthDomainDigest.set_auth_callback]</doc>
+               line="167">the data passed to [method@AuthDomainDigest.set_auth_callback]</doc>
           <type name="gpointer" c:type="gpointer"/>
         </parameter>
       </parameters>
@@ -2145,7 +2145,7 @@ be worth considering.</doc>
            glib:type-struct="AuthManagerClass">
       <doc xml:space="preserve"
            filename="libsoup/auth/soup-auth-manager.c"
-           line="25">HTTP client-side authentication handler.
+           line="24">HTTP client-side authentication handler.
 
 [class@AuthManager] is the [iface@SessionFeature] that handles HTTP
 authentication for a [class@Session].
@@ -2168,7 +2168,7 @@ always existed in the background, and you can use `g_type_from_name
               c:identifier="soup_auth_manager_clear_cached_credentials">
         <doc xml:space="preserve"
              filename="libsoup/auth/soup-auth-manager.c"
-             line="856">Clear all credentials cached by @manager.</doc>
+             line="836">Clear all credentials cached by @manager.</doc>
         <source-position filename="libsoup/auth/soup-auth-manager.h"
                          line="23"/>
         <return-value transfer-ownership="none">
@@ -2178,7 +2178,7 @@ always existed in the background, and you can use `g_type_from_name
           <instance-parameter name="manager" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/auth/soup-auth-manager.c"
-                 line="858">a #SoupAuthManager</doc>
+                 line="838">a #SoupAuthManager</doc>
             <type name="AuthManager" c:type="SoupAuthManager*"/>
           </instance-parameter>
         </parameters>
@@ -2186,7 +2186,7 @@ always existed in the background, and you can use `g_type_from_name
       <method name="use_auth" c:identifier="soup_auth_manager_use_auth">
         <doc xml:space="preserve"
              filename="libsoup/auth/soup-auth-manager.c"
-             line="826">Records that @auth is to be used under @uri, as though a
+             line="806">Records that @auth is to be used under @uri, as though a
 WWW-Authenticate header had been received at that URI.
 
 This can be used to "preload" @manager's auth cache, to avoid an extra HTTP
@@ -2205,19 +2205,19 @@ from the server. (Eg, Basic or NTLM, but not Digest.)</doc>
           <instance-parameter name="manager" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/auth/soup-auth-manager.c"
-                 line="828">a #SoupAuthManager</doc>
+                 line="808">a #SoupAuthManager</doc>
             <type name="AuthManager" c:type="SoupAuthManager*"/>
           </instance-parameter>
           <parameter name="uri" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/auth/soup-auth-manager.c"
-                 line="829">the #GUri under which @auth is to be used</doc>
+                 line="809">the #GUri under which @auth is to be used</doc>
             <type name="GLib.Uri" c:type="GUri*"/>
           </parameter>
           <parameter name="auth" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/auth/soup-auth-manager.c"
-                 line="830">the #SoupAuth to use</doc>
+                 line="810">the #SoupAuth to use</doc>
             <type name="Auth" c:type="SoupAuth*"/>
           </parameter>
         </parameters>
@@ -2367,12 +2367,12 @@ For use with [ctor@Cookie.new] and [method@Cookie.set_max_age].</doc>
       <constructor name="new" c:identifier="soup_cache_new">
         <doc xml:space="preserve"
              filename="libsoup/cache/soup-cache.c"
-             line="1106">Creates a new #SoupCache.</doc>
+             line="1121">Creates a new #SoupCache.</doc>
         <source-position filename="libsoup/cache/soup-cache.h" line="55"/>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve"
                filename="libsoup/cache/soup-cache.c"
-               line="1116">a new #SoupCache</doc>
+               line="1131">a new #SoupCache</doc>
           <type name="Cache" c:type="SoupCache*"/>
         </return-value>
         <parameters>
@@ -2382,7 +2382,7 @@ For use with [ctor@Cookie.new] and [method@Cookie.set_max_age].</doc>
                      allow-none="1">
             <doc xml:space="preserve"
                  filename="libsoup/cache/soup-cache.c"
-                 line="1108">the directory to store the cached data, or %NULL
+                 line="1123">the directory to store the cached data, or %NULL
   to use the default one. Note that since the cache isn't safe to access for
   multiple processes at once, and the default directory isn't namespaced by
   process, clients are strongly discouraged from passing %NULL.</doc>
@@ -2391,7 +2391,7 @@ For use with [ctor@Cookie.new] and [method@Cookie.set_max_age].</doc>
           <parameter name="cache_type" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/cache/soup-cache.c"
-                 line="1112">the #SoupCacheType of the cache</doc>
+                 line="1127">the #SoupCacheType of the cache</doc>
             <type name="CacheType" c:type="SoupCacheType"/>
           </parameter>
         </parameters>
@@ -2413,7 +2413,7 @@ For use with [ctor@Cookie.new] and [method@Cookie.set_max_age].</doc>
       <method name="clear" c:identifier="soup_cache_clear">
         <doc xml:space="preserve"
              filename="libsoup/cache/soup-cache.c"
-             line="1406">Will remove all entries in the @cache plus all the cache files.
+             line="1421">Will remove all entries in the @cache plus all the cache files.
 
 This is not thread safe and must be called only from the thread that created the [class@Cache]</doc>
         <source-position filename="libsoup/cache/soup-cache.h" line="60"/>
@@ -2424,7 +2424,7 @@ This is not thread safe and must be called only from the thread that created the
           <instance-parameter name="cache" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/cache/soup-cache.c"
-                 line="1408">a #SoupCache</doc>
+                 line="1423">a #SoupCache</doc>
             <type name="Cache" c:type="SoupCache*"/>
           </instance-parameter>
         </parameters>
@@ -2432,7 +2432,7 @@ This is not thread safe and must be called only from the thread that created the
       <method name="dump" c:identifier="soup_cache_dump">
         <doc xml:space="preserve"
              filename="libsoup/cache/soup-cache.c"
-             line="1562">Synchronously writes the cache index out to disk.
+             line="1577">Synchronously writes the cache index out to disk.
 
 Contrast with [method@Cache.flush], which writes pending cache *entries* to
 disk.
@@ -2449,7 +2449,7 @@ This is not thread safe and must be called only from the thread that created the
           <instance-parameter name="cache" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/cache/soup-cache.c"
-                 line="1564">a #SoupCache</doc>
+                 line="1579">a #SoupCache</doc>
             <type name="Cache" c:type="SoupCache*"/>
           </instance-parameter>
         </parameters>
@@ -2457,7 +2457,7 @@ This is not thread safe and must be called only from the thread that created the
       <method name="flush" c:identifier="soup_cache_flush">
         <doc xml:space="preserve"
              filename="libsoup/cache/soup-cache.c"
-             line="1322">Forces all pending writes in the @cache to be
+             line="1337">Forces all pending writes in the @cache to be
 committed to disk.
 
 For doing so it will iterate the [struct@GLib.MainContext] associated with
@@ -2472,7 +2472,7 @@ Contrast with [method@Cache.dump], which writes out the cache index file.</doc>
           <instance-parameter name="cache" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/cache/soup-cache.c"
-                 line="1324">a #SoupCache</doc>
+                 line="1339">a #SoupCache</doc>
             <type name="Cache" c:type="SoupCache*"/>
           </instance-parameter>
         </parameters>
@@ -2480,19 +2480,19 @@ Contrast with [method@Cache.dump], which writes out the cache index file.</doc>
       <method name="get_max_size" c:identifier="soup_cache_get_max_size">
         <doc xml:space="preserve"
              filename="libsoup/cache/soup-cache.c"
-             line="1746">Gets the maximum size of the cache.</doc>
+             line="1761">Gets the maximum size of the cache.</doc>
         <source-position filename="libsoup/cache/soup-cache.h" line="71"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/cache/soup-cache.c"
-               line="1752">the maximum size of the cache, in bytes.</doc>
+               line="1767">the maximum size of the cache, in bytes.</doc>
           <type name="guint" c:type="guint"/>
         </return-value>
         <parameters>
           <instance-parameter name="cache" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/cache/soup-cache.c"
-                 line="1748">a #SoupCache</doc>
+                 line="1763">a #SoupCache</doc>
             <type name="Cache" c:type="SoupCache*"/>
           </instance-parameter>
         </parameters>
@@ -2500,7 +2500,7 @@ Contrast with [method@Cache.dump], which writes out the cache index file.</doc>
       <method name="load" c:identifier="soup_cache_load">
         <doc xml:space="preserve"
              filename="libsoup/cache/soup-cache.c"
-             line="1631">Loads the contents of @cache's index into memory.
+             line="1646">Loads the contents of @cache's index into memory.
 
 This is not thread safe and must be called only from the thread that created the [class@Cache]</doc>
         <source-position filename="libsoup/cache/soup-cache.h" line="65"/>
@@ -2511,7 +2511,7 @@ This is not thread safe and must be called only from the thread that created the
           <instance-parameter name="cache" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/cache/soup-cache.c"
-                 line="1633">a #SoupCache</doc>
+                 line="1648">a #SoupCache</doc>
             <type name="Cache" c:type="SoupCache*"/>
           </instance-parameter>
         </parameters>
@@ -2519,7 +2519,7 @@ This is not thread safe and must be called only from the thread that created the
       <method name="set_max_size" c:identifier="soup_cache_set_max_size">
         <doc xml:space="preserve"
              filename="libsoup/cache/soup-cache.c"
-             line="1730">Sets the maximum size of the cache.</doc>
+             line="1745">Sets the maximum size of the cache.</doc>
         <source-position filename="libsoup/cache/soup-cache.h" line="68"/>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -2528,13 +2528,13 @@ This is not thread safe and must be called only from the thread that created the
           <instance-parameter name="cache" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/cache/soup-cache.c"
-                 line="1732">a #SoupCache</doc>
+                 line="1747">a #SoupCache</doc>
             <type name="Cache" c:type="SoupCache*"/>
           </instance-parameter>
           <parameter name="max_size" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/cache/soup-cache.c"
-                 line="1733">the maximum size of the cache, in bytes</doc>
+                 line="1748">the maximum size of the cache, in bytes</doc>
             <type name="guint" c:type="guint"/>
           </parameter>
         </parameters>
@@ -2546,7 +2546,7 @@ This is not thread safe and must be called only from the thread that created the
                 default-value="NULL">
         <doc xml:space="preserve"
              filename="libsoup/cache/soup-cache.c"
-             line="1068">The directory to store the cache files.</doc>
+             line="1083">The directory to store the cache files.</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
       <property name="cache-type"
@@ -2556,7 +2556,7 @@ This is not thread safe and must be called only from the thread that created the
                 default-value="SOUP_CACHE_SINGLE_USER">
         <doc xml:space="preserve"
              filename="libsoup/cache/soup-cache.c"
-             line="1080">Whether the cache is private or shared.</doc>
+             line="1095">Whether the cache is private or shared.</doc>
         <type name="CacheType"/>
       </property>
       <field name="parent_instance">
@@ -2598,7 +2598,7 @@ This is not thread safe and must be called only from the thread that created the
                  c:type="SoupCacheType">
       <doc xml:space="preserve"
            filename="libsoup/cache/soup-cache.c"
-           line="1096">The type of cache; this affects what kinds of responses will be
+           line="1111">The type of cache; this affects what kinds of responses will be
 saved.</doc>
       <member name="single_user"
               value="0"
@@ -2607,7 +2607,7 @@ saved.</doc>
               glib:name="SOUP_CACHE_SINGLE_USER">
         <doc xml:space="preserve"
              filename="libsoup/cache/soup-cache.c"
-             line="1098">a single-user cache</doc>
+             line="1113">a single-user cache</doc>
       </member>
       <member name="shared"
               value="1"
@@ -2616,7 +2616,7 @@ saved.</doc>
               glib:name="SOUP_CACHE_SHARED">
         <doc xml:space="preserve"
              filename="libsoup/cache/soup-cache.c"
-             line="1099">a shared cache</doc>
+             line="1114">a shared cache</doc>
       </member>
     </enumeration>
     <bitfield name="Cacheability"
@@ -6454,7 +6454,7 @@ redirect or authentication.</doc>
               c:identifier="soup_message_get_connection_id">
         <doc xml:space="preserve"
              filename="libsoup/soup-message.c"
-             line="3105">Returns the unique idenfier for the last connection used.
+             line="3130">Returns the unique idenfier for the last connection used.
 
 This may be 0 if it was a cached resource or it has not gotten
 a connection yet.</doc>
@@ -6462,14 +6462,14 @@ a connection yet.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/soup-message.c"
-               line="3114">An id or 0 if no connection.</doc>
+               line="3139">An id or 0 if no connection.</doc>
           <type name="guint64" c:type="guint64"/>
         </return-value>
         <parameters>
           <instance-parameter name="msg" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/soup-message.c"
-                 line="3107">The #SoupMessage</doc>
+                 line="3132">The #SoupMessage</doc>
             <type name="Message" c:type="SoupMessage*"/>
           </instance-parameter>
         </parameters>
@@ -6525,19 +6525,19 @@ a connection yet.</doc>
               version="3.4">
         <doc xml:space="preserve"
              filename="libsoup/soup-message.c"
-             line="3344">Returns whether HTTP/1 version is currently demanded for the @msg send.</doc>
+             line="3369">Returns whether HTTP/1 version is currently demanded for the @msg send.</doc>
         <source-position filename="libsoup/soup-message.h" line="202"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/soup-message.c"
-               line="3350">%TRUE, when HTTP/1 is demanded, %FALSE otherwise.</doc>
+               line="3375">%TRUE, when HTTP/1 is demanded, %FALSE otherwise.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="msg" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/soup-message.c"
-                 line="3346">The #SoupMessage</doc>
+                 line="3371">The #SoupMessage</doc>
             <type name="Message" c:type="SoupMessage*"/>
           </instance-parameter>
         </parameters>
@@ -6573,19 +6573,19 @@ response.</doc>
               glib:get-property="is-options-ping">
         <doc xml:space="preserve"
              filename="libsoup/soup-message.c"
-             line="3057">Gets whether @msg is intended to be used to send `OPTIONS *` to a server.</doc>
+             line="3082">Gets whether @msg is intended to be used to send `OPTIONS *` to a server.</doc>
         <source-position filename="libsoup/soup-message.h" line="184"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/soup-message.c"
-               line="3063">%TRUE if the message is options ping, or %FALSE otherwise</doc>
+               line="3088">%TRUE if the message is options ping, or %FALSE otherwise</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="msg" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/soup-message.c"
-                 line="3059">a #SoupMessage</doc>
+                 line="3084">a #SoupMessage</doc>
             <type name="Message" c:type="SoupMessage*"/>
           </instance-parameter>
         </parameters>
@@ -6642,7 +6642,7 @@ Used for same-site policy checks.</doc>
       <method name="get_metrics" c:identifier="soup_message_get_metrics">
         <doc xml:space="preserve"
              filename="libsoup/soup-message.c"
-             line="3153">Get the [struct@MessageMetrics] of @msg.
+             line="3178">Get the [struct@MessageMetrics] of @msg.
 
 If the flag %SOUP_MESSAGE_COLLECT_METRICS is not enabled for @msg this will
 return %NULL.</doc>
@@ -6650,14 +6650,14 @@ return %NULL.</doc>
         <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve"
                filename="libsoup/soup-message.c"
-               line="3162">a #SoupMessageMetrics</doc>
+               line="3187">a #SoupMessageMetrics</doc>
           <type name="MessageMetrics" c:type="SoupMessageMetrics*"/>
         </return-value>
         <parameters>
           <instance-parameter name="msg" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/soup-message.c"
-                 line="3155">The #SoupMessage</doc>
+                 line="3180">The #SoupMessage</doc>
             <type name="Message" c:type="SoupMessage*"/>
           </instance-parameter>
         </parameters>
@@ -6714,7 +6714,7 @@ If not set this value defaults to #SOUP_MESSAGE_PRIORITY_NORMAL.</doc>
               glib:get-property="remote-address">
         <doc xml:space="preserve"
              filename="libsoup/soup-message.c"
-             line="3126">Get the remote [class@Gio.SocketAddress] of the connection associated with
+             line="3151">Get the remote [class@Gio.SocketAddress] of the connection associated with
 the message.
 
 The returned address can be %NULL if the connection hasn't been established
@@ -6726,7 +6726,7 @@ connection to the session's remote connectable.</doc>
         <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve"
                filename="libsoup/soup-message.c"
-               line="3139">a #GSocketAddress or %NULL if the connection
+               line="3164">a #GSocketAddress or %NULL if the connection
     hasn't been established</doc>
           <type name="Gio.SocketAddress" c:type="GSocketAddress*"/>
         </return-value>
@@ -6734,7 +6734,7 @@ connection to the session's remote connectable.</doc>
           <instance-parameter name="msg" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/soup-message.c"
-                 line="3128">The #SoupMessage</doc>
+                 line="3153">The #SoupMessage</doc>
             <type name="Message" c:type="SoupMessage*"/>
           </instance-parameter>
         </parameters>
@@ -7112,7 +7112,7 @@ For details of when and how this is used refer to the documentation for
               version="3.4">
         <doc xml:space="preserve"
              filename="libsoup/soup-message.c"
-             line="3323">Sets whether HTTP/1 version should be used when sending this message.
+             line="3348">Sets whether HTTP/1 version should be used when sending this message.
 Some connections can still override it, if needed.
 
 Note the value is unset after the message send is finished.</doc>
@@ -7124,13 +7124,13 @@ Note the value is unset after the message send is finished.</doc>
           <instance-parameter name="msg" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/soup-message.c"
-                 line="3325">The #SoupMessage</doc>
+                 line="3350">The #SoupMessage</doc>
             <type name="Message" c:type="SoupMessage*"/>
           </instance-parameter>
           <parameter name="value" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/soup-message.c"
-                 line="3326">value to set</doc>
+                 line="3351">value to set</doc>
             <type name="gboolean" c:type="gboolean"/>
           </parameter>
         </parameters>
@@ -7140,7 +7140,7 @@ Note the value is unset after the message send is finished.</doc>
               glib:set-property="is-options-ping">
         <doc xml:space="preserve"
              filename="libsoup/soup-message.c"
-             line="3077">Set whether @msg is intended to be used to send `OPTIONS *` to a server.
+             line="3102">Set whether @msg is intended to be used to send `OPTIONS *` to a server.
 
 When set to %TRUE, the path of [property@Message:uri] will be ignored and
 [property@Message:method] set to %SOUP_METHOD_OPTIONS.</doc>
@@ -7152,13 +7152,13 @@ When set to %TRUE, the path of [property@Message:uri] will be ignored and
           <instance-parameter name="msg" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/soup-message.c"
-                 line="3079">a #SoupMessage</doc>
+                 line="3104">a #SoupMessage</doc>
             <type name="Message" c:type="SoupMessage*"/>
           </instance-parameter>
           <parameter name="is_options_ping" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/soup-message.c"
-                 line="3080">the value to set</doc>
+                 line="3105">the value to set</doc>
             <type name="gboolean" c:type="gboolean"/>
           </parameter>
         </parameters>
@@ -7199,7 +7199,7 @@ for more information.</doc>
         <attribute name="org.gtk.Method.set_property" value="method"/>
         <doc xml:space="preserve"
              filename="libsoup/soup-message.c"
-             line="3036">Set @msg's HTTP method to @method.</doc>
+             line="3058">Set @msg's HTTP method to @method.</doc>
         <source-position filename="libsoup/soup-message.h" line="168"/>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
@@ -7208,13 +7208,13 @@ for more information.</doc>
           <instance-parameter name="msg" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/soup-message.c"
-                 line="3038">a #SoupMessage</doc>
+                 line="3060">a #SoupMessage</doc>
             <type name="Message" c:type="SoupMessage*"/>
           </instance-parameter>
           <parameter name="method" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/soup-message.c"
-                 line="3039">the value to set</doc>
+                 line="3061">the value to set</doc>
             <type name="utf8" c:type="const char*"/>
           </parameter>
         </parameters>
@@ -16061,7 +16061,7 @@ You should use `SOUP_AVAILABLE_IN_*` in order to handle versioning.</doc>
                  c:type="SoupURIComponent">
       <doc xml:space="preserve"
            filename="libsoup/soup-uri-utils.c"
-           line="426">Enum values passed to [func@uri_copy] to indicate the components of
+           line="430">Enum values passed to [func@uri_copy] to indicate the components of
 the URI that should be updated with the given values.</doc>
       <member name="none"
               value="0"
@@ -16070,7 +16070,7 @@ the URI that should be updated with the given values.</doc>
               glib:name="SOUP_URI_NONE">
         <doc xml:space="preserve"
              filename="libsoup/soup-uri-utils.c"
-             line="428">no component</doc>
+             line="432">no component</doc>
       </member>
       <member name="scheme"
               value="1"
@@ -16079,7 +16079,7 @@ the URI that should be updated with the given values.</doc>
               glib:name="SOUP_URI_SCHEME">
         <doc xml:space="preserve"
              filename="libsoup/soup-uri-utils.c"
-             line="429">the URI scheme component</doc>
+             line="433">the URI scheme component</doc>
       </member>
       <member name="user"
               value="2"
@@ -16088,7 +16088,7 @@ the URI that should be updated with the given values.</doc>
               glib:name="SOUP_URI_USER">
         <doc xml:space="preserve"
              filename="libsoup/soup-uri-utils.c"
-             line="430">the URI user component</doc>
+             line="434">the URI user component</doc>
       </member>
       <member name="password"
               value="3"
@@ -16097,7 +16097,7 @@ the URI that should be updated with the given values.</doc>
               glib:name="SOUP_URI_PASSWORD">
         <doc xml:space="preserve"
              filename="libsoup/soup-uri-utils.c"
-             line="431">the URI password component</doc>
+             line="435">the URI password component</doc>
       </member>
       <member name="auth_params"
               value="4"
@@ -16106,7 +16106,7 @@ the URI that should be updated with the given values.</doc>
               glib:name="SOUP_URI_AUTH_PARAMS">
         <doc xml:space="preserve"
              filename="libsoup/soup-uri-utils.c"
-             line="432">the URI authentication parameters component</doc>
+             line="436">the URI authentication parameters component</doc>
       </member>
       <member name="host"
               value="5"
@@ -16115,7 +16115,7 @@ the URI that should be updated with the given values.</doc>
               glib:name="SOUP_URI_HOST">
         <doc xml:space="preserve"
              filename="libsoup/soup-uri-utils.c"
-             line="433">the URI host component</doc>
+             line="437">the URI host component</doc>
       </member>
       <member name="port"
               value="6"
@@ -16124,7 +16124,7 @@ the URI that should be updated with the given values.</doc>
               glib:name="SOUP_URI_PORT">
         <doc xml:space="preserve"
              filename="libsoup/soup-uri-utils.c"
-             line="434">the URI port component</doc>
+             line="438">the URI port component</doc>
       </member>
       <member name="path"
               value="7"
@@ -16133,7 +16133,7 @@ the URI that should be updated with the given values.</doc>
               glib:name="SOUP_URI_PATH">
         <doc xml:space="preserve"
              filename="libsoup/soup-uri-utils.c"
-             line="435">the URI path component</doc>
+             line="439">the URI path component</doc>
       </member>
       <member name="query"
               value="8"
@@ -16142,7 +16142,7 @@ the URI that should be updated with the given values.</doc>
               glib:name="SOUP_URI_QUERY">
         <doc xml:space="preserve"
              filename="libsoup/soup-uri-utils.c"
-             line="436">the URI query component</doc>
+             line="440">the URI query component</doc>
       </member>
       <member name="fragment"
               value="9"
@@ -16151,7 +16151,7 @@ the URI that should be updated with the given values.</doc>
               glib:name="SOUP_URI_FRAGMENT">
         <doc xml:space="preserve"
              filename="libsoup/soup-uri-utils.c"
-             line="437">the URI fragment component</doc>
+             line="441">the URI fragment component</doc>
       </member>
     </enumeration>
     <constant name="VERSION_MIN_REQUIRED"
@@ -16341,7 +16341,7 @@ can use [method@WebsocketConnection.send_text] and
       <constructor name="new" c:identifier="soup_websocket_connection_new">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1809">Creates a [class@WebsocketConnection] on @stream with the given active @extensions.
+             line="1933">Creates a [class@WebsocketConnection] on @stream with the given active @extensions.
 
 This should be called after completing the handshake to begin using the WebSocket
 protocol.</doc>
@@ -16350,26 +16350,26 @@ protocol.</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-connection.c"
-               line="1823">a new #SoupWebsocketConnection</doc>
+               line="1947">a new #SoupWebsocketConnection</doc>
           <type name="WebsocketConnection" c:type="SoupWebsocketConnection*"/>
         </return-value>
         <parameters>
           <parameter name="stream" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="1811">a #GIOStream connected to the WebSocket server</doc>
+                 line="1935">a #GIOStream connected to the WebSocket server</doc>
             <type name="Gio.IOStream" c:type="GIOStream*"/>
           </parameter>
           <parameter name="uri" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="1812">the URI of the connection</doc>
+                 line="1936">the URI of the connection</doc>
             <type name="GLib.Uri" c:type="GUri*"/>
           </parameter>
           <parameter name="type" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="1813">the type of connection (client/side)</doc>
+                 line="1937">the type of connection (client/side)</doc>
             <type name="WebsocketConnectionType"
                   c:type="SoupWebsocketConnectionType"/>
           </parameter>
@@ -16379,7 +16379,7 @@ protocol.</doc>
                      allow-none="1">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="1814">the Origin of the client</doc>
+                 line="1938">the Origin of the client</doc>
             <type name="utf8" c:type="const char*"/>
           </parameter>
           <parameter name="protocol"
@@ -16388,13 +16388,13 @@ protocol.</doc>
                      allow-none="1">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="1815">the subprotocol in use</doc>
+                 line="1939">the subprotocol in use</doc>
             <type name="utf8" c:type="const char*"/>
           </parameter>
           <parameter name="extensions" transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="1816">a #GList of #SoupWebsocketExtension objects</doc>
+                 line="1940">a #GList of #SoupWebsocketExtension objects</doc>
             <type name="GLib.List" c:type="GList*">
               <type name="WebsocketExtension"/>
             </type>
@@ -16404,7 +16404,7 @@ protocol.</doc>
       <method name="close" c:identifier="soup_websocket_connection_close">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="2110">Close the connection in an orderly fashion.
+             line="2234">Close the connection in an orderly fashion.
 
 Note that until the [signal@WebsocketConnection::closed] signal fires, the connection
 is not yet completely closed. The close message is not even sent until the
@@ -16423,14 +16423,14 @@ Note that the @data must be UTF-8 valid.</doc>
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2112">the WebSocket</doc>
+                 line="2236">the WebSocket</doc>
             <type name="WebsocketConnection"
                   c:type="SoupWebsocketConnection*"/>
           </instance-parameter>
           <parameter name="code" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2113">close code</doc>
+                 line="2237">close code</doc>
             <type name="gushort" c:type="gushort"/>
           </parameter>
           <parameter name="data"
@@ -16439,7 +16439,7 @@ Note that the @data must be UTF-8 valid.</doc>
                      allow-none="1">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2114">close data</doc>
+                 line="2238">close data</doc>
             <type name="utf8" c:type="const char*"/>
           </parameter>
         </parameters>
@@ -16448,7 +16448,7 @@ Note that the @data must be UTF-8 valid.</doc>
               c:identifier="soup_websocket_connection_get_close_code">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1981">Get the close code received from the WebSocket peer.
+             line="2105">Get the close code received from the WebSocket peer.
 
 This only becomes valid once the WebSocket is in the
 %SOUP_WEBSOCKET_STATE_CLOSED state. The value will often be in the
@@ -16459,14 +16459,14 @@ defined close code.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-connection.c"
-               line="1992">the close code or zero.</doc>
+               line="2116">the close code or zero.</doc>
           <type name="gushort" c:type="gushort"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="1983">the WebSocket</doc>
+                 line="2107">the WebSocket</doc>
             <type name="WebsocketConnection"
                   c:type="SoupWebsocketConnection*"/>
           </instance-parameter>
@@ -16476,7 +16476,7 @@ defined close code.</doc>
               c:identifier="soup_websocket_connection_get_close_data">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="2004">Get the close data received from the WebSocket peer.
+             line="2128">Get the close data received from the WebSocket peer.
 
 This only becomes valid once the WebSocket is in the
 %SOUP_WEBSOCKET_STATE_CLOSED state. The data may be freed once
@@ -16486,14 +16486,14 @@ the main loop is run, so copy it if you need to keep it around.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-connection.c"
-               line="2014">the close data or %NULL</doc>
+               line="2138">the close data or %NULL</doc>
           <type name="utf8" c:type="const char*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2006">the WebSocket</doc>
+                 line="2130">the WebSocket</doc>
             <type name="WebsocketConnection"
                   c:type="SoupWebsocketConnection*"/>
           </instance-parameter>
@@ -16504,13 +16504,13 @@ the main loop is run, so copy it if you need to keep it around.</doc>
               glib:get-property="connection-type">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1865">Get the connection type (client/server) of the connection.</doc>
+             line="1989">Get the connection type (client/server) of the connection.</doc>
         <source-position filename="libsoup/websocket/soup-websocket-connection.h"
                          line="44"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-connection.c"
-               line="1871">the connection type</doc>
+               line="1995">the connection type</doc>
           <type name="WebsocketConnectionType"
                 c:type="SoupWebsocketConnectionType"/>
         </return-value>
@@ -16518,7 +16518,7 @@ the main loop is run, so copy it if you need to keep it around.</doc>
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="1867">the WebSocket</doc>
+                 line="1991">the WebSocket</doc>
             <type name="WebsocketConnection"
                   c:type="SoupWebsocketConnection*"/>
           </instance-parameter>
@@ -16529,13 +16529,13 @@ the main loop is run, so copy it if you need to keep it around.</doc>
               glib:get-property="extensions">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1940">Get the extensions chosen via negotiation with the peer.</doc>
+             line="2064">Get the extensions chosen via negotiation with the peer.</doc>
         <source-position filename="libsoup/websocket/soup-websocket-connection.h"
                          line="56"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-connection.c"
-               line="1946">a #GList of #SoupWebsocketExtension objects</doc>
+               line="2070">a #GList of #SoupWebsocketExtension objects</doc>
           <type name="GLib.List" c:type="GList*">
             <type name="WebsocketExtension"/>
           </type>
@@ -16544,7 +16544,7 @@ the main loop is run, so copy it if you need to keep it around.</doc>
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="1942">the WebSocket</doc>
+                 line="2066">the WebSocket</doc>
             <type name="WebsocketConnection"
                   c:type="SoupWebsocketConnection*"/>
           </instance-parameter>
@@ -16555,20 +16555,20 @@ the main loop is run, so copy it if you need to keep it around.</doc>
               glib:get-property="io-stream">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1847">Get the I/O stream the WebSocket is communicating over.</doc>
+             line="1971">Get the I/O stream the WebSocket is communicating over.</doc>
         <source-position filename="libsoup/websocket/soup-websocket-connection.h"
                          line="41"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-connection.c"
-               line="1853">the WebSocket's I/O stream.</doc>
+               line="1977">the WebSocket's I/O stream.</doc>
           <type name="Gio.IOStream" c:type="GIOStream*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="1849">the WebSocket</doc>
+                 line="1973">the WebSocket</doc>
             <type name="WebsocketConnection"
                   c:type="SoupWebsocketConnection*"/>
           </instance-parameter>
@@ -16579,20 +16579,20 @@ the main loop is run, so copy it if you need to keep it around.</doc>
               glib:get-property="keepalive-interval">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="2189">Gets the keepalive interval in seconds or 0 if disabled.</doc>
+             line="2313">Gets the keepalive interval in seconds or 0 if disabled.</doc>
         <source-position filename="libsoup/websocket/soup-websocket-connection.h"
                          line="92"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-connection.c"
-               line="2195">the keepalive interval.</doc>
+               line="2319">the keepalive interval.</doc>
           <type name="guint" c:type="guint"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2191">the WebSocket</doc>
+                 line="2315">the WebSocket</doc>
             <type name="WebsocketConnection"
                   c:type="SoupWebsocketConnection*"/>
           </instance-parameter>
@@ -16604,20 +16604,20 @@ the main loop is run, so copy it if you need to keep it around.</doc>
               version="3.6">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="2336">Gets the keepalive pong timeout in seconds or 0 if disabled.</doc>
+             line="2460">Gets the keepalive pong timeout in seconds or 0 if disabled.</doc>
         <source-position filename="libsoup/websocket/soup-websocket-connection.h"
                          line="99"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-connection.c"
-               line="2342">the keepalive pong timeout.</doc>
+               line="2466">the keepalive pong timeout.</doc>
           <type name="guint" c:type="guint"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2338">the WebSocket</doc>
+                 line="2462">the WebSocket</doc>
             <type name="WebsocketConnection"
                   c:type="SoupWebsocketConnection*"/>
           </instance-parameter>
@@ -16628,20 +16628,20 @@ the main loop is run, so copy it if you need to keep it around.</doc>
               glib:get-property="max-incoming-payload-size">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="2148">Gets the maximum payload size allowed for incoming packets.</doc>
+             line="2272">Gets the maximum payload size allowed for incoming packets.</doc>
         <source-position filename="libsoup/websocket/soup-websocket-connection.h"
                          line="85"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-connection.c"
-               line="2154">the maximum payload size.</doc>
+               line="2278">the maximum payload size.</doc>
           <type name="guint64" c:type="guint64"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2150">the WebSocket</doc>
+                 line="2274">the WebSocket</doc>
             <type name="WebsocketConnection"
                   c:type="SoupWebsocketConnection*"/>
           </instance-parameter>
@@ -16652,20 +16652,20 @@ the main loop is run, so copy it if you need to keep it around.</doc>
               glib:get-property="origin">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1904">Get the origin of the WebSocket.</doc>
+             line="2028">Get the origin of the WebSocket.</doc>
         <source-position filename="libsoup/websocket/soup-websocket-connection.h"
                          line="50"/>
         <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-connection.c"
-               line="1910">the origin</doc>
+               line="2034">the origin</doc>
           <type name="utf8" c:type="const char*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="1906">the WebSocket</doc>
+                 line="2030">the WebSocket</doc>
             <type name="WebsocketConnection"
                   c:type="SoupWebsocketConnection*"/>
           </instance-parameter>
@@ -16676,20 +16676,20 @@ the main loop is run, so copy it if you need to keep it around.</doc>
               glib:get-property="protocol">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1922">Get the protocol chosen via negotiation with the peer.</doc>
+             line="2046">Get the protocol chosen via negotiation with the peer.</doc>
         <source-position filename="libsoup/websocket/soup-websocket-connection.h"
                          line="53"/>
         <return-value transfer-ownership="none" nullable="1">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-connection.c"
-               line="1928">the chosen protocol</doc>
+               line="2052">the chosen protocol</doc>
           <type name="utf8" c:type="const char*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="1924">the WebSocket</doc>
+                 line="2048">the WebSocket</doc>
             <type name="WebsocketConnection"
                   c:type="SoupWebsocketConnection*"/>
           </instance-parameter>
@@ -16700,20 +16700,20 @@ the main loop is run, so copy it if you need to keep it around.</doc>
               glib:get-property="state">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1958">Get the current state of the WebSocket.</doc>
+             line="2082">Get the current state of the WebSocket.</doc>
         <source-position filename="libsoup/websocket/soup-websocket-connection.h"
                          line="59"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-connection.c"
-               line="1964">the state</doc>
+               line="2088">the state</doc>
           <type name="WebsocketState" c:type="SoupWebsocketState"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="1960">the WebSocket</doc>
+                 line="2084">the WebSocket</doc>
             <type name="WebsocketConnection"
                   c:type="SoupWebsocketConnection*"/>
           </instance-parameter>
@@ -16724,7 +16724,7 @@ the main loop is run, so copy it if you need to keep it around.</doc>
               glib:get-property="uri">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1883">Get the URI of the WebSocket.
+             line="2007">Get the URI of the WebSocket.
 
 For servers this represents the address of the WebSocket, and
 for clients it is the address connected to.</doc>
@@ -16733,14 +16733,14 @@ for clients it is the address connected to.</doc>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-connection.c"
-               line="1892">the URI</doc>
+               line="2016">the URI</doc>
           <type name="GLib.Uri" c:type="GUri*"/>
         </return-value>
         <parameters>
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="1885">the WebSocket</doc>
+                 line="2009">the WebSocket</doc>
             <type name="WebsocketConnection"
                   c:type="SoupWebsocketConnection*"/>
           </instance-parameter>
@@ -16750,7 +16750,7 @@ for clients it is the address connected to.</doc>
               c:identifier="soup_websocket_connection_send_binary">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="2055">Send a binary message to the peer.
+             line="2179">Send a binary message to the peer.
 
 If @length is 0, @data may be %NULL.
 
@@ -16765,7 +16765,7 @@ is run.</doc>
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2057">the WebSocket</doc>
+                 line="2181">the WebSocket</doc>
             <type name="WebsocketConnection"
                   c:type="SoupWebsocketConnection*"/>
           </instance-parameter>
@@ -16775,7 +16775,7 @@ is run.</doc>
                      allow-none="1">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2058">the message contents</doc>
+                 line="2182">the message contents</doc>
             <array length="1" zero-terminated="0" c:type="gconstpointer">
               <type name="guint8"/>
             </array>
@@ -16783,7 +16783,7 @@ is run.</doc>
           <parameter name="length" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2059">the length of @data</doc>
+                 line="2183">the length of @data</doc>
             <type name="gsize" c:type="gsize"/>
           </parameter>
         </parameters>
@@ -16792,7 +16792,7 @@ is run.</doc>
               c:identifier="soup_websocket_connection_send_message">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="2080">Send a message of the given @type to the peer. Note that this method,
+             line="2204">Send a message of the given @type to the peer. Note that this method,
 allows to send text messages containing %NULL characters.
 
 The message is queued to be sent and will be sent when the main loop
@@ -16806,20 +16806,20 @@ is run.</doc>
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2082">the WebSocket</doc>
+                 line="2206">the WebSocket</doc>
             <type name="WebsocketConnection"
                   c:type="SoupWebsocketConnection*"/>
           </instance-parameter>
           <parameter name="type" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2083">the type of message contents</doc>
+                 line="2207">the type of message contents</doc>
             <type name="WebsocketDataType" c:type="SoupWebsocketDataType"/>
           </parameter>
           <parameter name="message" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2084">the message data as #GBytes</doc>
+                 line="2208">the message data as #GBytes</doc>
             <type name="GLib.Bytes" c:type="GBytes*"/>
           </parameter>
         </parameters>
@@ -16828,7 +16828,7 @@ is run.</doc>
               c:identifier="soup_websocket_connection_send_text">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="2026">Send a %NULL-terminated text (UTF-8) message to the peer.
+             line="2150">Send a %NULL-terminated text (UTF-8) message to the peer.
 
 If you need to send text messages containing %NULL characters use
 [method@WebsocketConnection.send_message] instead.
@@ -16844,14 +16844,14 @@ is run.</doc>
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2028">the WebSocket</doc>
+                 line="2152">the WebSocket</doc>
             <type name="WebsocketConnection"
                   c:type="SoupWebsocketConnection*"/>
           </instance-parameter>
           <parameter name="text" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2029">the message contents</doc>
+                 line="2153">the message contents</doc>
             <type name="utf8" c:type="const char*"/>
           </parameter>
         </parameters>
@@ -16861,7 +16861,7 @@ is run.</doc>
               glib:set-property="keepalive-interval">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="2303">Sets the interval in seconds on when to send a ping message which will serve
+             line="2427">Sets the interval in seconds on when to send a ping message which will serve
 as a keepalive message.
 
 If set to 0 the keepalive message is disabled.</doc>
@@ -16874,14 +16874,14 @@ If set to 0 the keepalive message is disabled.</doc>
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2305">the WebSocket</doc>
+                 line="2429">the WebSocket</doc>
             <type name="WebsocketConnection"
                   c:type="SoupWebsocketConnection*"/>
           </instance-parameter>
           <parameter name="interval" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2306">the interval to send a ping message or 0 to disable it</doc>
+                 line="2430">the interval to send a ping message or 0 to disable it</doc>
             <type name="guint" c:type="guint"/>
           </parameter>
         </parameters>
@@ -16892,7 +16892,7 @@ If set to 0 the keepalive message is disabled.</doc>
               version="3.6">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="2356">Set the timeout in seconds for when the absence of a pong from a keepalive
+             line="2480">Set the timeout in seconds for when the absence of a pong from a keepalive
 ping is assumed to be caused by a faulty connection.
 
 If set to 0 then the absence of pongs from keepalive pings is ignored.</doc>
@@ -16905,14 +16905,14 @@ If set to 0 then the absence of pongs from keepalive pings is ignored.</doc>
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2358">the WebSocket</doc>
+                 line="2482">the WebSocket</doc>
             <type name="WebsocketConnection"
                   c:type="SoupWebsocketConnection*"/>
           </instance-parameter>
           <parameter name="pong_timeout" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2359">the timeout in seconds</doc>
+                 line="2483">the timeout in seconds</doc>
             <type name="guint" c:type="guint"/>
           </parameter>
         </parameters>
@@ -16922,7 +16922,7 @@ If set to 0 then the absence of pongs from keepalive pings is ignored.</doc>
               glib:set-property="max-incoming-payload-size">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="2166">Sets the maximum payload size allowed for incoming packets.
+             line="2290">Sets the maximum payload size allowed for incoming packets.
 
 It does not limit the outgoing packet size.</doc>
         <source-position filename="libsoup/websocket/soup-websocket-connection.h"
@@ -16934,7 +16934,7 @@ It does not limit the outgoing packet size.</doc>
           <instance-parameter name="self" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2168">the WebSocket</doc>
+                 line="2292">the WebSocket</doc>
             <type name="WebsocketConnection"
                   c:type="SoupWebsocketConnection*"/>
           </instance-parameter>
@@ -16942,7 +16942,7 @@ It does not limit the outgoing packet size.</doc>
                      transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="2169">the maximum payload size</doc>
+                 line="2293">the maximum payload size</doc>
             <type name="guint64" c:type="guint64"/>
           </parameter>
         </parameters>
@@ -16955,7 +16955,7 @@ It does not limit the outgoing packet size.</doc>
                 default-value="SOUP_WEBSOCKET_CONNECTION_UNKNOWN">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1571">The type of connection (client/server).</doc>
+             line="1695">The type of connection (client/server).</doc>
         <type name="WebsocketConnectionType"/>
       </property>
       <property name="extensions"
@@ -16965,7 +16965,7 @@ It does not limit the outgoing packet size.</doc>
                 getter="get_extensions">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1706">List of [class@WebsocketExtension] objects that are active in the connection.</doc>
+             line="1830">List of [class@WebsocketExtension] objects that are active in the connection.</doc>
         <type name="gpointer" c:type="gpointer"/>
       </property>
       <property name="io-stream"
@@ -16975,7 +16975,7 @@ It does not limit the outgoing packet size.</doc>
                 getter="get_io_stream">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1554">The underlying IO stream the WebSocket is communicating
+             line="1678">The underlying IO stream the WebSocket is communicating
 over.
 
 The input and output streams must be pollable streams.</doc>
@@ -16990,7 +16990,7 @@ The input and output streams must be pollable streams.</doc>
                 default-value="0">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1664">Interval in seconds on when to send a ping message which will
+             line="1788">Interval in seconds on when to send a ping message which will
 serve as a keepalive message.
 
 If set to 0 the keepalive message is disabled.</doc>
@@ -17006,7 +17006,7 @@ If set to 0 the keepalive message is disabled.</doc>
                 default-value="0">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1683">Timeout in seconds for when the absence of a pong from a keepalive
+             line="1807">Timeout in seconds for when the absence of a pong from a keepalive
 ping is assumed to be caused by a faulty connection. The WebSocket
 will be transitioned to a closed state when this happens.
 
@@ -17023,7 +17023,7 @@ ignored.</doc>
                 default-value="131072">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1646">The maximum payload size for incoming packets.
+             line="1770">The maximum payload size for incoming packets.
 
 The protocol expects or 0 to not limit it.</doc>
         <type name="guint64" c:type="guint64"/>
@@ -17036,7 +17036,7 @@ The protocol expects or 0 to not limit it.</doc>
                 default-value="NULL">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1603">The client's Origin.</doc>
+             line="1727">The client's Origin.</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
       <property name="protocol"
@@ -17047,7 +17047,7 @@ The protocol expects or 0 to not limit it.</doc>
                 default-value="NULL">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1617">The chosen protocol, or %NULL if a protocol was not agreed
+             line="1741">The chosen protocol, or %NULL if a protocol was not agreed
 upon.</doc>
         <type name="utf8" c:type="gchar*"/>
       </property>
@@ -17057,7 +17057,7 @@ upon.</doc>
                 default-value="SOUP_WEBSOCKET_STATE_OPEN">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1632">The current state of the WebSocket.</doc>
+             line="1756">The current state of the WebSocket.</doc>
         <type name="WebsocketState"/>
       </property>
       <property name="uri"
@@ -17067,7 +17067,7 @@ upon.</doc>
                 getter="get_uri">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1586">The URI of the WebSocket.
+             line="1710">The URI of the WebSocket.
 
 For servers this represents the address of the WebSocket,
 and for clients it is the address connected to.</doc>
@@ -17076,7 +17076,7 @@ and for clients it is the address connected to.</doc>
       <glib:signal name="closed" when="first">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1770">Emitted when the connection has completely closed.
+             line="1894">Emitted when the connection has completely closed.
 
 This happens either due to an orderly close from the peer, one
 initiated via [method@WebsocketConnection.close] or a fatal error
@@ -17090,7 +17090,7 @@ This signal will be emitted once.</doc>
       <glib:signal name="closing" when="last">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1757">This signal will be emitted during an orderly close.</doc>
+             line="1881">This signal will be emitted during an orderly close.</doc>
         <return-value transfer-ownership="none">
           <type name="none" c:type="void"/>
         </return-value>
@@ -17098,7 +17098,7 @@ This signal will be emitted once.</doc>
       <glib:signal name="error" when="first">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1740">Emitted when an error occurred on the WebSocket.
+             line="1864">Emitted when an error occurred on the WebSocket.
 
 This may be fired multiple times. Fatal errors will be followed by
 the [signal@WebsocketConnection::closed] signal being emitted.</doc>
@@ -17109,7 +17109,7 @@ the [signal@WebsocketConnection::closed] signal being emitted.</doc>
           <parameter name="error" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="1743">the error that occured</doc>
+                 line="1867">the error that occured</doc>
             <type name="GLib.Error"/>
           </parameter>
         </parameters>
@@ -17117,7 +17117,7 @@ the [signal@WebsocketConnection::closed] signal being emitted.</doc>
       <glib:signal name="message" when="first">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1721">Emitted when we receive a message from the peer.
+             line="1845">Emitted when we receive a message from the peer.
 
 As a convenience, the @message data will always be
 %NULL-terminated, but the NUL byte will not be included in
@@ -17129,13 +17129,13 @@ the length count.</doc>
           <parameter name="type" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="1724">the type of message contents</doc>
+                 line="1848">the type of message contents</doc>
             <type name="gint" c:type="gint"/>
           </parameter>
           <parameter name="message" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="1725">the message data</doc>
+                 line="1849">the message data</doc>
             <type name="GLib.Bytes"/>
           </parameter>
         </parameters>
@@ -17143,7 +17143,7 @@ the length count.</doc>
       <glib:signal name="pong" when="first">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-connection.c"
-             line="1789">Emitted when we receive a Pong frame (solicited or
+             line="1913">Emitted when we receive a Pong frame (solicited or
 unsolicited) from the peer.
 
 As a convenience, the @message data will always be
@@ -17156,7 +17156,7 @@ the length count.</doc>
           <parameter name="message" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-connection.c"
-                 line="1792">the application data (if any)</doc>
+                 line="1916">the application data (if any)</doc>
             <type name="GLib.Bytes"/>
           </parameter>
         </parameters>
@@ -17167,7 +17167,7 @@ the length count.</doc>
             glib:is-gtype-struct-for="WebsocketConnection">
       <doc xml:space="preserve"
            filename="libsoup/websocket/soup-websocket-connection.c"
-           line="58">The abstract base class for [class@WebsocketConnection].</doc>
+           line="60">The abstract base class for [class@WebsocketConnection].</doc>
       <source-position filename="libsoup/websocket/soup-websocket-connection.h"
                        line="30"/>
       <field name="parent_class">
@@ -17308,30 +17308,30 @@ the length count.</doc>
 
 [class@WebsocketExtension] is the base class for WebSocket extension objects.</doc>
       <source-position filename="libsoup/websocket/soup-websocket-extension.h"
-                       line="60"/>
+                       line="66"/>
       <virtual-method name="configure" invoker="configure" throws="1">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-extension.c"
-             line="66">Configures @extension with the given @params.</doc>
+             line="69">Configures @extension with the given @params.</doc>
         <source-position filename="libsoup/websocket/soup-websocket-extension.h"
                          line="39"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-extension.c"
-               line="75">%TRUE if extension could be configured with the given parameters, or %FALSE otherwise</doc>
+               line="78">%TRUE if extension could be configured with the given parameters, or %FALSE otherwise</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="extension" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="68">a #SoupWebsocketExtension</doc>
+                 line="71">a #SoupWebsocketExtension</doc>
             <type name="WebsocketExtension" c:type="SoupWebsocketExtension*"/>
           </instance-parameter>
           <parameter name="connection_type" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="69">either %SOUP_WEBSOCKET_CONNECTION_CLIENT or %SOUP_WEBSOCKET_CONNECTION_SERVER</doc>
+                 line="72">either %SOUP_WEBSOCKET_CONNECTION_CLIENT or %SOUP_WEBSOCKET_CONNECTION_SERVER</doc>
             <type name="WebsocketConnectionType"
                   c:type="SoupWebsocketConnectionType"/>
           </parameter>
@@ -17341,7 +17341,7 @@ the length count.</doc>
                      allow-none="1">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="70">the parameters</doc>
+                 line="73">the parameters</doc>
             <type name="GLib.HashTable" c:type="GHashTable*">
               <type name="gpointer" c:type="gpointer"/>
               <type name="gpointer" c:type="gpointer"/>
@@ -17352,7 +17352,7 @@ the length count.</doc>
       <virtual-method name="get_request_params" invoker="get_request_params">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-extension.c"
-             line="96">Get the parameters strings to be included in the request header.
+             line="99">Get the parameters strings to be included in the request header.
 
 If the extension doesn't include any parameter in the request, this function
 returns %NULL.</doc>
@@ -17361,14 +17361,14 @@ returns %NULL.</doc>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-extension.c"
-               line="105">a new allocated string with the parameters</doc>
+               line="108">a new allocated string with the parameters</doc>
           <type name="utf8" c:type="char*"/>
         </return-value>
         <parameters>
           <instance-parameter name="extension" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="98">a #SoupWebsocketExtension</doc>
+                 line="101">a #SoupWebsocketExtension</doc>
             <type name="WebsocketExtension" c:type="SoupWebsocketExtension*"/>
           </instance-parameter>
         </parameters>
@@ -17376,7 +17376,7 @@ returns %NULL.</doc>
       <virtual-method name="get_response_params" invoker="get_response_params">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-extension.c"
-             line="121">Get the parameters strings to be included in the response header.
+             line="124">Get the parameters strings to be included in the response header.
 
 If the extension doesn't include any parameter in the response, this function
 returns %NULL.</doc>
@@ -17385,14 +17385,14 @@ returns %NULL.</doc>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-extension.c"
-               line="130">a new allocated string with the parameters</doc>
+               line="133">a new allocated string with the parameters</doc>
           <type name="utf8" c:type="char*"/>
         </return-value>
         <parameters>
           <instance-parameter name="extension" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="123">a #SoupWebsocketExtension</doc>
+                 line="126">a #SoupWebsocketExtension</doc>
             <type name="WebsocketExtension" c:type="SoupWebsocketExtension*"/>
           </instance-parameter>
         </parameters>
@@ -17402,7 +17402,7 @@ returns %NULL.</doc>
                       throws="1">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-extension.c"
-             line="183">Process a message after it's received.
+             line="186">Process a message after it's received.
 
 If the payload isn't changed the given @payload is just returned, otherwise
 [method@GLib.Bytes.unref] is called on the given @payload and a new
@@ -17414,14 +17414,14 @@ Extensions using reserved bits of the header will reset them in @header.</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-extension.c"
-               line="198">the message payload data, or %NULL in case of error</doc>
+               line="201">the message payload data, or %NULL in case of error</doc>
           <type name="GLib.Bytes" c:type="GBytes*"/>
         </return-value>
         <parameters>
           <instance-parameter name="extension" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="185">a #SoupWebsocketExtension</doc>
+                 line="188">a #SoupWebsocketExtension</doc>
             <type name="WebsocketExtension" c:type="SoupWebsocketExtension*"/>
           </instance-parameter>
           <parameter name="header"
@@ -17430,14 +17430,67 @@ Extensions using reserved bits of the header will reset them in @header.</doc>
                      transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="186">the message header</doc>
+                 line="189">the message header</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="payload" transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="187">the payload data</doc>
+                 line="190">the payload data</doc>
             <type name="GLib.Bytes" c:type="GBytes*"/>
+          </parameter>
+        </parameters>
+      </virtual-method>
+      <virtual-method name="process_incoming_message_with_limit"
+                      invoker="process_incoming_message_with_limit"
+                      version="3.8"
+                      throws="1">
+        <doc xml:space="preserve"
+             filename="libsoup/websocket/soup-websocket-extension.c"
+             line="223">Process a message after it's received, without producing more than
+@max_output_size bytes of output.
+
+This behaves like [method@WebsocketExtension.process_incoming_message],
+but extensions that expand their input (such as `permessage-deflate`)
+stop and return an error with [error@WebsocketError.CLOSE_TOO_BIG]
+instead of producing output larger than @max_output_size. Extensions
+that don't implement this fall back to
+[method@WebsocketExtension.process_incoming_message].</doc>
+        <source-position filename="libsoup/websocket/soup-websocket-extension.h"
+                         line="58"/>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve"
+               filename="libsoup/websocket/soup-websocket-extension.c"
+               line="241">the message payload data, or %NULL in case of error</doc>
+          <type name="GLib.Bytes" c:type="GBytes*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="extension" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="libsoup/websocket/soup-websocket-extension.c"
+                 line="225">a #SoupWebsocketExtension</doc>
+            <type name="WebsocketExtension" c:type="SoupWebsocketExtension*"/>
+          </instance-parameter>
+          <parameter name="header"
+                     direction="inout"
+                     caller-allocates="0"
+                     transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="libsoup/websocket/soup-websocket-extension.c"
+                 line="226">the message header</doc>
+            <type name="guint8" c:type="guint8*"/>
+          </parameter>
+          <parameter name="payload" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="libsoup/websocket/soup-websocket-extension.c"
+                 line="227">the payload data</doc>
+            <type name="GLib.Bytes" c:type="GBytes*"/>
+          </parameter>
+          <parameter name="max_output_size" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="libsoup/websocket/soup-websocket-extension.c"
+                 line="228">the maximum size in bytes of the processed payload</doc>
+            <type name="guint64" c:type="guint64"/>
           </parameter>
         </parameters>
       </virtual-method>
@@ -17446,7 +17499,7 @@ Extensions using reserved bits of the header will reset them in @header.</doc>
                       throws="1">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-extension.c"
-             line="146">Process a message before it's sent.
+             line="149">Process a message before it's sent.
 
 If the payload isn't changed the given @payload is just returned, otherwise
 [method@Glib.Bytes.unref] is called on the given @payload and a new
@@ -17458,14 +17511,14 @@ Extensions using reserved bits of the header will change them in @header.</doc>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-extension.c"
-               line="161">the message payload data, or %NULL in case of error</doc>
+               line="164">the message payload data, or %NULL in case of error</doc>
           <type name="GLib.Bytes" c:type="GBytes*"/>
         </return-value>
         <parameters>
           <instance-parameter name="extension" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="148">a #SoupWebsocketExtension</doc>
+                 line="151">a #SoupWebsocketExtension</doc>
             <type name="WebsocketExtension" c:type="SoupWebsocketExtension*"/>
           </instance-parameter>
           <parameter name="header"
@@ -17474,13 +17527,13 @@ Extensions using reserved bits of the header will change them in @header.</doc>
                      transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="149">the message header</doc>
+                 line="152">the message header</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="payload" transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="150">the payload data</doc>
+                 line="153">the payload data</doc>
             <type name="GLib.Bytes" c:type="GBytes*"/>
           </parameter>
         </parameters>
@@ -17490,26 +17543,26 @@ Extensions using reserved bits of the header will change them in @header.</doc>
               throws="1">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-extension.c"
-             line="66">Configures @extension with the given @params.</doc>
+             line="69">Configures @extension with the given @params.</doc>
         <source-position filename="libsoup/websocket/soup-websocket-extension.h"
-                         line="63"/>
+                         line="69"/>
         <return-value transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-extension.c"
-               line="75">%TRUE if extension could be configured with the given parameters, or %FALSE otherwise</doc>
+               line="78">%TRUE if extension could be configured with the given parameters, or %FALSE otherwise</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="extension" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="68">a #SoupWebsocketExtension</doc>
+                 line="71">a #SoupWebsocketExtension</doc>
             <type name="WebsocketExtension" c:type="SoupWebsocketExtension*"/>
           </instance-parameter>
           <parameter name="connection_type" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="69">either %SOUP_WEBSOCKET_CONNECTION_CLIENT or %SOUP_WEBSOCKET_CONNECTION_SERVER</doc>
+                 line="72">either %SOUP_WEBSOCKET_CONNECTION_CLIENT or %SOUP_WEBSOCKET_CONNECTION_SERVER</doc>
             <type name="WebsocketConnectionType"
                   c:type="SoupWebsocketConnectionType"/>
           </parameter>
@@ -17519,7 +17572,7 @@ Extensions using reserved bits of the header will change them in @header.</doc>
                      allow-none="1">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="70">the parameters</doc>
+                 line="73">the parameters</doc>
             <type name="GLib.HashTable" c:type="GHashTable*">
               <type name="gpointer" c:type="gpointer"/>
               <type name="gpointer" c:type="gpointer"/>
@@ -17531,23 +17584,23 @@ Extensions using reserved bits of the header will change them in @header.</doc>
               c:identifier="soup_websocket_extension_get_request_params">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-extension.c"
-             line="96">Get the parameters strings to be included in the request header.
+             line="99">Get the parameters strings to be included in the request header.
 
 If the extension doesn't include any parameter in the request, this function
 returns %NULL.</doc>
         <source-position filename="libsoup/websocket/soup-websocket-extension.h"
-                         line="68"/>
+                         line="74"/>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-extension.c"
-               line="105">a new allocated string with the parameters</doc>
+               line="108">a new allocated string with the parameters</doc>
           <type name="utf8" c:type="char*"/>
         </return-value>
         <parameters>
           <instance-parameter name="extension" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="98">a #SoupWebsocketExtension</doc>
+                 line="101">a #SoupWebsocketExtension</doc>
             <type name="WebsocketExtension" c:type="SoupWebsocketExtension*"/>
           </instance-parameter>
         </parameters>
@@ -17556,23 +17609,23 @@ returns %NULL.</doc>
               c:identifier="soup_websocket_extension_get_response_params">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-extension.c"
-             line="121">Get the parameters strings to be included in the response header.
+             line="124">Get the parameters strings to be included in the response header.
 
 If the extension doesn't include any parameter in the response, this function
 returns %NULL.</doc>
         <source-position filename="libsoup/websocket/soup-websocket-extension.h"
-                         line="71"/>
+                         line="77"/>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-extension.c"
-               line="130">a new allocated string with the parameters</doc>
+               line="133">a new allocated string with the parameters</doc>
           <type name="utf8" c:type="char*"/>
         </return-value>
         <parameters>
           <instance-parameter name="extension" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="123">a #SoupWebsocketExtension</doc>
+                 line="126">a #SoupWebsocketExtension</doc>
             <type name="WebsocketExtension" c:type="SoupWebsocketExtension*"/>
           </instance-parameter>
         </parameters>
@@ -17582,7 +17635,7 @@ returns %NULL.</doc>
               throws="1">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-extension.c"
-             line="183">Process a message after it's received.
+             line="186">Process a message after it's received.
 
 If the payload isn't changed the given @payload is just returned, otherwise
 [method@GLib.Bytes.unref] is called on the given @payload and a new
@@ -17590,18 +17643,18 @@ If the payload isn't changed the given @payload is just returned, otherwise
 
 Extensions using reserved bits of the header will reset them in @header.</doc>
         <source-position filename="libsoup/websocket/soup-websocket-extension.h"
-                         line="79"/>
+                         line="85"/>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-extension.c"
-               line="198">the message payload data, or %NULL in case of error</doc>
+               line="201">the message payload data, or %NULL in case of error</doc>
           <type name="GLib.Bytes" c:type="GBytes*"/>
         </return-value>
         <parameters>
           <instance-parameter name="extension" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="185">a #SoupWebsocketExtension</doc>
+                 line="188">a #SoupWebsocketExtension</doc>
             <type name="WebsocketExtension" c:type="SoupWebsocketExtension*"/>
           </instance-parameter>
           <parameter name="header"
@@ -17610,14 +17663,67 @@ Extensions using reserved bits of the header will reset them in @header.</doc>
                      transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="186">the message header</doc>
+                 line="189">the message header</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="payload" transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="187">the payload data</doc>
+                 line="190">the payload data</doc>
             <type name="GLib.Bytes" c:type="GBytes*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="process_incoming_message_with_limit"
+              c:identifier="soup_websocket_extension_process_incoming_message_with_limit"
+              version="3.8"
+              throws="1">
+        <doc xml:space="preserve"
+             filename="libsoup/websocket/soup-websocket-extension.c"
+             line="223">Process a message after it's received, without producing more than
+@max_output_size bytes of output.
+
+This behaves like [method@WebsocketExtension.process_incoming_message],
+but extensions that expand their input (such as `permessage-deflate`)
+stop and return an error with [error@WebsocketError.CLOSE_TOO_BIG]
+instead of producing output larger than @max_output_size. Extensions
+that don't implement this fall back to
+[method@WebsocketExtension.process_incoming_message].</doc>
+        <source-position filename="libsoup/websocket/soup-websocket-extension.h"
+                         line="90"/>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve"
+               filename="libsoup/websocket/soup-websocket-extension.c"
+               line="241">the message payload data, or %NULL in case of error</doc>
+          <type name="GLib.Bytes" c:type="GBytes*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="extension" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="libsoup/websocket/soup-websocket-extension.c"
+                 line="225">a #SoupWebsocketExtension</doc>
+            <type name="WebsocketExtension" c:type="SoupWebsocketExtension*"/>
+          </instance-parameter>
+          <parameter name="header"
+                     direction="inout"
+                     caller-allocates="0"
+                     transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="libsoup/websocket/soup-websocket-extension.c"
+                 line="226">the message header</doc>
+            <type name="guint8" c:type="guint8*"/>
+          </parameter>
+          <parameter name="payload" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="libsoup/websocket/soup-websocket-extension.c"
+                 line="227">the payload data</doc>
+            <type name="GLib.Bytes" c:type="GBytes*"/>
+          </parameter>
+          <parameter name="max_output_size" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="libsoup/websocket/soup-websocket-extension.c"
+                 line="228">the maximum size in bytes of the processed payload</doc>
+            <type name="guint64" c:type="guint64"/>
           </parameter>
         </parameters>
       </method>
@@ -17626,7 +17732,7 @@ Extensions using reserved bits of the header will reset them in @header.</doc>
               throws="1">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-extension.c"
-             line="146">Process a message before it's sent.
+             line="149">Process a message before it's sent.
 
 If the payload isn't changed the given @payload is just returned, otherwise
 [method@Glib.Bytes.unref] is called on the given @payload and a new
@@ -17634,18 +17740,18 @@ If the payload isn't changed the given @payload is just returned, otherwise
 
 Extensions using reserved bits of the header will change them in @header.</doc>
         <source-position filename="libsoup/websocket/soup-websocket-extension.h"
-                         line="74"/>
+                         line="80"/>
         <return-value transfer-ownership="full">
           <doc xml:space="preserve"
                filename="libsoup/websocket/soup-websocket-extension.c"
-               line="161">the message payload data, or %NULL in case of error</doc>
+               line="164">the message payload data, or %NULL in case of error</doc>
           <type name="GLib.Bytes" c:type="GBytes*"/>
         </return-value>
         <parameters>
           <instance-parameter name="extension" transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="148">a #SoupWebsocketExtension</doc>
+                 line="151">a #SoupWebsocketExtension</doc>
             <type name="WebsocketExtension" c:type="SoupWebsocketExtension*"/>
           </instance-parameter>
           <parameter name="header"
@@ -17654,13 +17760,13 @@ Extensions using reserved bits of the header will change them in @header.</doc>
                      transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="149">the message header</doc>
+                 line="152">the message header</doc>
             <type name="guint8" c:type="guint8*"/>
           </parameter>
           <parameter name="payload" transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="150">the payload data</doc>
+                 line="153">the payload data</doc>
             <type name="GLib.Bytes" c:type="GBytes*"/>
           </parameter>
         </parameters>
@@ -17676,7 +17782,7 @@ Extensions using reserved bits of the header will change them in @header.</doc>
            filename="libsoup/websocket/soup-websocket-extension.c"
            line="37">The class structure for the [class@WebsocketExtension].</doc>
       <source-position filename="libsoup/websocket/soup-websocket-extension.h"
-                       line="60"/>
+                       line="66"/>
       <field name="parent_class">
         <doc xml:space="preserve"
              filename="libsoup/websocket/soup-websocket-extension.c"
@@ -17699,21 +17805,21 @@ Extensions using reserved bits of the header will change them in @header.</doc>
           <return-value transfer-ownership="none">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="75">%TRUE if extension could be configured with the given parameters, or %FALSE otherwise</doc>
+                 line="78">%TRUE if extension could be configured with the given parameters, or %FALSE otherwise</doc>
             <type name="gboolean" c:type="gboolean"/>
           </return-value>
           <parameters>
             <parameter name="extension" transfer-ownership="none">
               <doc xml:space="preserve"
                    filename="libsoup/websocket/soup-websocket-extension.c"
-                   line="68">a #SoupWebsocketExtension</doc>
+                   line="71">a #SoupWebsocketExtension</doc>
               <type name="WebsocketExtension"
                     c:type="SoupWebsocketExtension*"/>
             </parameter>
             <parameter name="connection_type" transfer-ownership="none">
               <doc xml:space="preserve"
                    filename="libsoup/websocket/soup-websocket-extension.c"
-                   line="69">either %SOUP_WEBSOCKET_CONNECTION_CLIENT or %SOUP_WEBSOCKET_CONNECTION_SERVER</doc>
+                   line="72">either %SOUP_WEBSOCKET_CONNECTION_CLIENT or %SOUP_WEBSOCKET_CONNECTION_SERVER</doc>
               <type name="WebsocketConnectionType"
                     c:type="SoupWebsocketConnectionType"/>
             </parameter>
@@ -17723,7 +17829,7 @@ Extensions using reserved bits of the header will change them in @header.</doc>
                        allow-none="1">
               <doc xml:space="preserve"
                    filename="libsoup/websocket/soup-websocket-extension.c"
-                   line="70">the parameters</doc>
+                   line="73">the parameters</doc>
               <type name="GLib.HashTable" c:type="GHashTable*">
                 <type name="gpointer" c:type="gpointer"/>
                 <type name="gpointer" c:type="gpointer"/>
@@ -17743,14 +17849,14 @@ Extensions using reserved bits of the header will change them in @header.</doc>
           <return-value transfer-ownership="full" nullable="1">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="105">a new allocated string with the parameters</doc>
+                 line="108">a new allocated string with the parameters</doc>
             <type name="utf8" c:type="char*"/>
           </return-value>
           <parameters>
             <parameter name="extension" transfer-ownership="none">
               <doc xml:space="preserve"
                    filename="libsoup/websocket/soup-websocket-extension.c"
-                   line="98">a #SoupWebsocketExtension</doc>
+                   line="101">a #SoupWebsocketExtension</doc>
               <type name="WebsocketExtension"
                     c:type="SoupWebsocketExtension*"/>
             </parameter>
@@ -17768,14 +17874,14 @@ Extensions using reserved bits of the header will change them in @header.</doc>
           <return-value transfer-ownership="full" nullable="1">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="130">a new allocated string with the parameters</doc>
+                 line="133">a new allocated string with the parameters</doc>
             <type name="utf8" c:type="char*"/>
           </return-value>
           <parameters>
             <parameter name="extension" transfer-ownership="none">
               <doc xml:space="preserve"
                    filename="libsoup/websocket/soup-websocket-extension.c"
-                   line="123">a #SoupWebsocketExtension</doc>
+                   line="126">a #SoupWebsocketExtension</doc>
               <type name="WebsocketExtension"
                     c:type="SoupWebsocketExtension*"/>
             </parameter>
@@ -17793,14 +17899,14 @@ Extensions using reserved bits of the header will change them in @header.</doc>
           <return-value transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="161">the message payload data, or %NULL in case of error</doc>
+                 line="164">the message payload data, or %NULL in case of error</doc>
             <type name="GLib.Bytes" c:type="GBytes*"/>
           </return-value>
           <parameters>
             <parameter name="extension" transfer-ownership="none">
               <doc xml:space="preserve"
                    filename="libsoup/websocket/soup-websocket-extension.c"
-                   line="148">a #SoupWebsocketExtension</doc>
+                   line="151">a #SoupWebsocketExtension</doc>
               <type name="WebsocketExtension"
                     c:type="SoupWebsocketExtension*"/>
             </parameter>
@@ -17810,13 +17916,13 @@ Extensions using reserved bits of the header will change them in @header.</doc>
                        transfer-ownership="full">
               <doc xml:space="preserve"
                    filename="libsoup/websocket/soup-websocket-extension.c"
-                   line="149">the message header</doc>
+                   line="152">the message header</doc>
               <type name="guint8" c:type="guint8*"/>
             </parameter>
             <parameter name="payload" transfer-ownership="full">
               <doc xml:space="preserve"
                    filename="libsoup/websocket/soup-websocket-extension.c"
-                   line="150">the payload data</doc>
+                   line="153">the payload data</doc>
               <type name="GLib.Bytes" c:type="GBytes*"/>
             </parameter>
           </parameters>
@@ -17833,14 +17939,14 @@ Extensions using reserved bits of the header will change them in @header.</doc>
           <return-value transfer-ownership="full">
             <doc xml:space="preserve"
                  filename="libsoup/websocket/soup-websocket-extension.c"
-                 line="198">the message payload data, or %NULL in case of error</doc>
+                 line="201">the message payload data, or %NULL in case of error</doc>
             <type name="GLib.Bytes" c:type="GBytes*"/>
           </return-value>
           <parameters>
             <parameter name="extension" transfer-ownership="none">
               <doc xml:space="preserve"
                    filename="libsoup/websocket/soup-websocket-extension.c"
-                   line="185">a #SoupWebsocketExtension</doc>
+                   line="188">a #SoupWebsocketExtension</doc>
               <type name="WebsocketExtension"
                     c:type="SoupWebsocketExtension*"/>
             </parameter>
@@ -17850,20 +17956,67 @@ Extensions using reserved bits of the header will change them in @header.</doc>
                        transfer-ownership="full">
               <doc xml:space="preserve"
                    filename="libsoup/websocket/soup-websocket-extension.c"
-                   line="186">the message header</doc>
+                   line="189">the message header</doc>
               <type name="guint8" c:type="guint8*"/>
             </parameter>
             <parameter name="payload" transfer-ownership="full">
               <doc xml:space="preserve"
                    filename="libsoup/websocket/soup-websocket-extension.c"
-                   line="187">the payload data</doc>
+                   line="190">the payload data</doc>
               <type name="GLib.Bytes" c:type="GBytes*"/>
             </parameter>
           </parameters>
         </callback>
       </field>
+      <field name="process_incoming_message_with_limit">
+        <doc xml:space="preserve"
+             filename="libsoup/websocket/soup-websocket-extension.c"
+             line="50">called to process the payload data of
+   a message after it's received without exceeding the requested maximum
+   output size. If unset, @process_incoming_message is used. Since 3.8</doc>
+        <callback name="process_incoming_message_with_limit" throws="1">
+          <source-position filename="libsoup/websocket/soup-websocket-extension.h"
+                           line="58"/>
+          <return-value transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="libsoup/websocket/soup-websocket-extension.c"
+                 line="241">the message payload data, or %NULL in case of error</doc>
+            <type name="GLib.Bytes" c:type="GBytes*"/>
+          </return-value>
+          <parameters>
+            <parameter name="extension" transfer-ownership="none">
+              <doc xml:space="preserve"
+                   filename="libsoup/websocket/soup-websocket-extension.c"
+                   line="225">a #SoupWebsocketExtension</doc>
+              <type name="WebsocketExtension"
+                    c:type="SoupWebsocketExtension*"/>
+            </parameter>
+            <parameter name="header"
+                       direction="inout"
+                       caller-allocates="0"
+                       transfer-ownership="full">
+              <doc xml:space="preserve"
+                   filename="libsoup/websocket/soup-websocket-extension.c"
+                   line="226">the message header</doc>
+              <type name="guint8" c:type="guint8*"/>
+            </parameter>
+            <parameter name="payload" transfer-ownership="full">
+              <doc xml:space="preserve"
+                   filename="libsoup/websocket/soup-websocket-extension.c"
+                   line="227">the payload data</doc>
+              <type name="GLib.Bytes" c:type="GBytes*"/>
+            </parameter>
+            <parameter name="max_output_size" transfer-ownership="none">
+              <doc xml:space="preserve"
+                   filename="libsoup/websocket/soup-websocket-extension.c"
+                   line="228">the maximum size in bytes of the processed payload</doc>
+              <type name="guint64" c:type="guint64"/>
+            </parameter>
+          </parameters>
+        </callback>
+      </field>
       <field name="padding" readable="0" private="1">
-        <array zero-terminated="0" fixed-size="6">
+        <array zero-terminated="0" fixed-size="5">
           <type name="gpointer" c:type="gpointer"/>
         </array>
       </field>
@@ -19388,7 +19541,7 @@ format).</doc>
     <function name="uri_copy" c:identifier="soup_uri_copy" introspectable="0">
       <doc xml:space="preserve"
            filename="libsoup/soup-uri-utils.c"
-           line="465">As of 3.4.0 this will detect the default ports of HTTP(s) and WS(S)
+           line="469">As of 3.4.0 this will detect the default ports of HTTP(s) and WS(S)
 URIs when copying and set it to the default port of the new scheme.
 So for example copying `http://localhost:80` while changing the scheme to https
 will result in `https://localhost:443`.
@@ -19398,26 +19551,26 @@ Return a copy of @uri with the given components updated.</doc>
       <return-value transfer-ownership="full">
         <doc xml:space="preserve"
              filename="libsoup/soup-uri-utils.c"
-             line="479">a new #GUri</doc>
+             line="483">a new #GUri</doc>
         <type name="GLib.Uri" c:type="GUri*"/>
       </return-value>
       <parameters>
         <parameter name="uri" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/soup-uri-utils.c"
-               line="467">the #GUri to copy</doc>
+               line="471">the #GUri to copy</doc>
           <type name="GLib.Uri" c:type="GUri*"/>
         </parameter>
         <parameter name="first_component" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/soup-uri-utils.c"
-               line="468">first #SoupURIComponent to update</doc>
+               line="472">first #SoupURIComponent to update</doc>
           <type name="URIComponent" c:type="SoupURIComponent"/>
         </parameter>
         <parameter name="..." transfer-ownership="none">
           <doc xml:space="preserve"
                filename="libsoup/soup-uri-utils.c"
-               line="469">value of @first_component  followed by additional
+               line="473">value of @first_component  followed by additional
    components and values, terminated by %SOUP_URI_NONE</doc>
           <varargs/>
         </parameter>

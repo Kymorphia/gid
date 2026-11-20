@@ -20,15 +20,15 @@ import webkit.urischeme_request;
 import webkit.user_message;
 
 /**
-    Manages aspects common to all #WebKitWebView<!-- -->s
+    Manages aspects common to all #WebKitWebView objects
     
     The #WebKitWebContext manages all aspects common to all
-    #WebKitWebView<!-- -->s.
+    #WebKitWebView objects.
     
     You can define the #WebKitCacheModel with
     [webkit.web_context.WebContext.setCacheModel], depending on the needs of
     your application. You can access the #WebKitSecurityManager to specify
-    the behaviour of your application regarding security using
+    the behavior of your application regarding security using
     [webkit.web_context.WebContext.getSecurityManager].
     
     It is also possible to change your preferred language or enable
@@ -214,9 +214,9 @@ class WebContext : gobject.object.ObjectWrap
   }
 
   /**
-      Get the the list of spell checking languages.
+      Get the list of spell checking languages.
       
-      Get the the list of spell checking languages associated with
+      Get the list of spell checking languages associated with
       context, or null if no languages have been previously set.
       
       See [webkit.web_context.WebContext.setSpellCheckingLanguages] for more
@@ -244,7 +244,7 @@ class WebContext : gobject.object.ObjectWrap
 
   /**
       Get the #WebKitWebContext:time-zone-override property.
-      Returns: 
+      Returns: the time zone override, or null if none was set.
   */
   string getTimeZoneOverride() nothrow
   {
@@ -301,7 +301,7 @@ class WebContext : gobject.object.ObjectWrap
   /**
       Register scheme in context.
       
-      Register scheme in context, so that when an URI request with scheme is made in the
+      Register scheme in context, so that when a URI request with scheme is made in the
       #WebKitWebContext, the #WebKitURISchemeRequestCallback registered will be called with a
       #WebKitURISchemeRequest.
       It is possible to handle URI scheme requests asynchronously, by calling [gobject.object.ObjectWrap.ref_] on the
@@ -364,7 +364,7 @@ class WebContext : gobject.object.ObjectWrap
   }
 
   /**
-      Send message to all web process extensions associated to context.
+      Send message to all web process extensions associated with context.
       
       If message is floating, it's consumed.
   
@@ -402,7 +402,7 @@ class WebContext : gobject.object.ObjectWrap
       Specifies a usage model for WebViews, which WebKit will use to
       determine its caching behavior. All web views follow the cache
       model. This cache model determines the RAM and disk space to use
-      for caching previously viewed content .
+      for caching previously viewed content.
       
       Research indicates that users tend to browse within clusters of
       documents that hold resources in common, and to revisit previously

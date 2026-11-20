@@ -9,7 +9,7 @@ import webkit.c.types;
 import webkit.types;
 
 /**
-    A compiled set of rules which applied to resource loads.
+    A compiled set of rules which are applied to resource loads.
 */
 class UserContentFilter : gobject.boxed.BoxedWrap!(webkit_user_content_filter_get_type)
 {

@@ -390,7 +390,7 @@ class Aggregator : gst.element.Element
       aggregate on a timeout even when no live source is connected.
   
       Params:
-        forceLive = 
+        forceLive = The new value
   */
   void setForceLive(bool forceLive) nothrow
   {
@@ -463,7 +463,7 @@ class Aggregator : gst.element.Element
       if it is used at all.
   
       Params:
-        segment = 
+        segment = The new #GstSegment
   */
   void updateSegment(gst.segment.Segment segment) nothrow
   {

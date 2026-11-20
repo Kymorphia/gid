@@ -315,16 +315,23 @@ class InputMethodContext : gobject.object.ObjectWrap
       Connect to `DeleteSurrounding` signal.
   
       Emitted when the input method wants to delete the context surrounding the cursor.
-        If offset is a negative value, it means a position before the cursor.
+        If offset is a negative value, it means a position before the start of the selection,
+        or before the cursor if there is no selection. The text to be deleted can include
+        part of the selection. If n_chars is 0, nothing is deleted and the cursor is moved
+        by offset.
+        
+        Both offset and n_chars are counted in UTF-16 code units, not in characters:
+        a character outside the Basic Multilingual Plane, like most emoji, counts as 2.
+        Note that the indexes passed to [webkit.input_method_context.InputMethodContext.notifySurrounding] are in bytes instead.
   
       Params:
         callback = signal callback delegate or function to connect
   
           `void callback(int offset, uint nChars, webkit.input_method_context.InputMethodContext inputMethodContext)`
   
-          `offset` the character offset from the cursor position of the text to be deleted. (optional)
+          `offset` the offset of the text to be deleted from the start of the selection, in UTF-16 code units (optional)
   
-          `nChars` the number of characters to be deleted (optional)
+          `nChars` the number of UTF-16 code units to be deleted (optional)
   
           `inputMethodContext` the instance the signal is connected to (optional)
   

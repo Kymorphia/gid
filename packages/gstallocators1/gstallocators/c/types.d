@@ -135,6 +135,9 @@ struct GstShmAllocatorClass
     This is a subclass of #GstDmaBufAllocator that implements the
     [gst.allocator.Allocator.alloc] method using `memfd_create()` and `UDMABUF_CREATE`.
     Platforms not supporting that (most non-Linux) will always return null.
+    
+    The allocator can be disabled by setting the GST_DISABLE_UDMABUF environment
+    variable.
 */
 struct GstUdmabufAllocator;
 

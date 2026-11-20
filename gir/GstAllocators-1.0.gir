@@ -854,7 +854,10 @@ gst_shm_allocator_init_once() has not been previously called.</doc>
            filename="gst-libs/gst/allocators/gstudmabufallocator.c"
            line="22">This is a subclass of #GstDmaBufAllocator that implements the
 gst_allocator_alloc() method using `memfd_create()` and `UDMABUF_CREATE`.
-Platforms not supporting that (most non-Linux) will always return %NULL.</doc>
+Platforms not supporting that (most non-Linux) will always return %NULL.
+
+The allocator can be disabled by setting the GST_DISABLE_UDMABUF environment
+variable.</doc>
       <source-position filename="gst-libs/gst/allocators/gstudmabufallocator.h"
                        line="62"/>
       <function name="get"
@@ -862,13 +865,13 @@ Platforms not supporting that (most non-Linux) will always return %NULL.</doc>
                 version="1.28">
         <doc xml:space="preserve"
              filename="gst-libs/gst/allocators/gstudmabufallocator.c"
-             line="250">Get the #GstUdmabufAllocator singleton if available.</doc>
+             line="256">Get the #GstUdmabufAllocator singleton if available.</doc>
         <source-position filename="gst-libs/gst/allocators/gstudmabufallocator.h"
                          line="68"/>
         <return-value transfer-ownership="full" nullable="1">
           <doc xml:space="preserve"
                filename="gst-libs/gst/allocators/gstudmabufallocator.c"
-               line="255">a #GstAllocator or %NULL if
+               line="261">a #GstAllocator or %NULL if
 gst_udmabuf_allocator_init_once() did not register the allocator.</doc>
           <type name="Gst.Allocator" c:type="GstAllocator*"/>
         </return-value>
@@ -878,7 +881,7 @@ gst_udmabuf_allocator_init_once() did not register the allocator.</doc>
                 version="1.28">
         <doc xml:space="preserve"
              filename="gst-libs/gst/allocators/gstudmabufallocator.c"
-             line="219">Register a #GstUdmabufAllocator using gst_allocator_register() with the name
+             line="225">Register a #GstUdmabufAllocator using gst_allocator_register() with the name
 %GST_ALLOCATOR_UDMABUF. This is no-op after the first call.</doc>
         <source-position filename="gst-libs/gst/allocators/gstudmabufallocator.h"
                          line="65"/>

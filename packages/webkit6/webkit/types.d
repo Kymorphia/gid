@@ -159,7 +159,7 @@ alias XRSessionMode = WebKitXRSessionMode;
 // Callbacks
 
 /**
-    Type definition for a function that will be called back when an URI request is
+    Type definition for a function that will be called back when a URI request is
     made for a user registered URI scheme.
 
     Params:
@@ -182,7 +182,7 @@ enum EDITING_COMMAND_COPY = "Copy";
     the current cursor position. If there's a selection, the selected text
     will be used as the link text, otherwise the URL itself will be used.
     It receives the link URL as argument. This command should be executed
-    with [webkit.web_view.WebView.executeEditingCommandWithArgument]
+    with [webkit.web_view.WebView.executeEditingCommandWithArgument].
 */
 enum EDITING_COMMAND_CREATE_LINK = "CreateLink";
 
@@ -198,7 +198,7 @@ enum EDITING_COMMAND_CUT = "Cut";
 
 /**
     The insert image command. Creates an image element that is inserted at
-    the current cursor position. It receives an URI as argument,
+    the current cursor position. It receives a URI as argument,
     that is used as the image source. This command should be executed with
     [webkit.web_view.WebView.executeEditingCommandWithArgument].
 */
@@ -262,11 +262,11 @@ enum MAJOR_VERSION = 2;
     application compile time, rather than from the library linked
     against at application run time.
 */
-enum MICRO_VERSION = 6;
+enum MICRO_VERSION = 2;
 
 /**
     Like [webkit.global.getMinorVersion], but from the headers used at
     application compile time, rather than from the library linked
     against at application run time.
 */
-enum MINOR_VERSION = 52;
+enum MINOR_VERSION = 54;

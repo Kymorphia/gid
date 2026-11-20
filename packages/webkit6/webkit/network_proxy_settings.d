@@ -12,7 +12,7 @@ import webkit.types;
     Configures network proxies.
     
     WebKitNetworkProxySettings can be used to provide a custom proxy configuration
-    to a #WebKitNetworkSession. You need to call webkit_network_session_set_network_proxy_settings()
+    to a #WebKitNetworkSession. You need to call [webkit.network_session.NetworkSession.setProxySettings]
     with [webkit.types.NetworkProxyMode.Custom] and a WebKitNetworkProxySettings.
 */
 class NetworkProxySettings : gobject.boxed.BoxedWrap!(webkit_network_proxy_settings_get_type)
@@ -40,28 +40,19 @@ class NetworkProxySettings : gobject.boxed.BoxedWrap!(webkit_network_proxy_setti
       
       ignore_hosts is a list of hostnames and IP addresses that the resolver should allow direct connections to.
       Entries can be in one of 4 formats:
-      <itemizedlist>
-      <listitem><para>
-      A hostname, such as "example.com", ".example.com", or "*.example.com", any of which match "example.com" or
-      any subdomain of it.
-      </para></listitem>
-      <listitem><para>
-      An IPv4 or IPv6 address, such as "192.168.1.1", which matches only that address.
-      </para></listitem>
-      <listitem><para>
-      A hostname or IP address followed by a port, such as "example.com:80", which matches whatever the hostname or IP
-      address would match, but only for URLs with the (explicitly) indicated port. In the case of an IPv6 address, the address
-      part must appear in brackets: "[::1]:443"
-      </para></listitem>
-      <listitem><para>
-      An IP address range, given by a base address and prefix length, such as "fe80::/10", which matches any address in that range.
-      </para></listitem>
-      </itemizedlist>
+      
+      - A hostname, such as "example.com", ".example.com", or "*.example.com", any of which match "example.com" or
+        any subdomain of it.
+      - An IPv4 or IPv6 address, such as "192.168.1.1", which matches only that address.
+      - A hostname or IP address followed by a port, such as "example.com:80", which matches whatever the hostname or IP
+        address would match, but only for URLs with the (explicitly) indicated port. In the case of an IPv6 address, the address
+        part must appear in brackets: "[::1]:443"
+      - An IP address range, given by a base address and prefix length, such as "fe80::/10", which matches any address in that range.
       
       Note that when dealing with Unicode hostnames, the matching is done against the ASCII form of the name.
       Also note that hostname exclusions apply only to connections made to hosts identified by name, and IP address exclusions apply only
       to connections made to hosts identified by address. That is, if example.com has an address of 192.168.1.1, and ignore_hosts
-      contains only "192.168.1.1", then a connection to "example.com" will use the proxy, and a connection to 192.168.1.1" will not.
+      contains only "192.168.1.1", then a connection to "example.com" will use the proxy, and a connection to "192.168.1.1" will not.
   
       Params:
         defaultProxyUri = the default proxy URI to use, or null.
@@ -82,13 +73,13 @@ class NetworkProxySettings : gobject.boxed.BoxedWrap!(webkit_network_proxy_setti
   /**
       Adds a URI-scheme-specific proxy.
       
-      URIs whose scheme matches uri_scheme will be proxied via proxy_uri.
+      URIs whose scheme matches scheme will be proxied via proxy_uri.
       As with the default proxy URI, if proxy_uri starts with "socks://", it will be treated as referring to
       all three of the socks5, socks4a, and socks4 proxy types.
   
       Params:
         scheme = the URI scheme to add a proxy for
-        proxyUri = the proxy URI to use for uri_scheme
+        proxyUri = the proxy URI to use for scheme
   */
   void addProxyForScheme(string scheme, string proxyUri) nothrow
   {

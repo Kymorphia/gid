@@ -107,7 +107,7 @@ class URISchemeRequest : gobject.object.ObjectWrap
 
   /**
       Get the request body.
-      Returns: (nullable): the body of the request.
+      Returns: the body of the request.
   */
   gio.input_stream.InputStream getHttpBody() nothrow
   {

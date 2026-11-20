@@ -15,7 +15,7 @@ struct MediaError
 
   /**
       Gets the quark for the domain of media errors.
-      Returns: media error domin.
+      Returns: media error domain.
   */
   static glib.types.Quark quark() nothrow
   {

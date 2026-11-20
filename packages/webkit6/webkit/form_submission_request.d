@@ -63,10 +63,10 @@ class FormSubmissionRequest : gobject.object.ObjectWrap
   }
 
   /**
-      Get lists of the text fields contained in the form associated to request.
+      Get lists of the text fields contained in the form associated with request.
       
       Get lists with the names and values of the text fields contained in
-      the form associated to request. Note that names and values may be
+      the form associated with request. Note that names and values may be
       null.
       
       If this function returns false, then both field_names and

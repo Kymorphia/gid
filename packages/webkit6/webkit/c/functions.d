@@ -171,6 +171,8 @@ __gshared extern(C) nothrow
   void function(WebKitFaviconDatabase* database, const(char)* pageUri, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_favicon_database_get_favicon; ///
   GdkTexture* function(WebKitFaviconDatabase* database, GAsyncResult* result, GError** _err) c_webkit_favicon_database_get_favicon_finish; ///
   char* function(WebKitFaviconDatabase* database, const(char)* pageUri) c_webkit_favicon_database_get_favicon_uri; ///
+  void function(WebKitFaviconDatabase* database, const(char)* pageUri, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_favicon_database_get_page_icons; ///
+  WebKitImageList* function(WebKitFaviconDatabase* database, GAsyncResult* result, GError** _err) c_webkit_favicon_database_get_page_icons_finish; ///
 
   // Feature
   GType function() c_webkit_feature_get_type; ///
@@ -185,6 +187,7 @@ __gshared extern(C) nothrow
 
   // FeatureList
   GType function() c_webkit_feature_list_get_type; ///
+  WebKitFeature* function(WebKitFeatureList* featureList, const(char)* identifier) c_webkit_feature_list_find; ///
   WebKitFeature* function(WebKitFeatureList* featureList, size_t index) c_webkit_feature_list_get; ///
   size_t function(WebKitFeatureList* featureList) c_webkit_feature_list_get_length; ///
   WebKitFeatureList* function(WebKitFeatureList* featureList) c_webkit_feature_list_ref; ///
@@ -265,6 +268,20 @@ __gshared extern(C) nothrow
   GList* function(WebKitITPThirdParty* itpThirdParty) c_webkit_itp_third_party_get_first_parties; ///
   WebKitITPThirdParty* function(WebKitITPThirdParty* itpThirdParty) c_webkit_itp_third_party_ref; ///
   void function(WebKitITPThirdParty* itpThirdParty) c_webkit_itp_third_party_unref; ///
+
+  // Image
+  GType function() c_webkit_image_get_type; ///
+  GBytes* function(WebKitImage* image) c_webkit_image_as_bytes; ///
+  int function(WebKitImage* image) c_webkit_image_get_height; ///
+  uint function(WebKitImage* image) c_webkit_image_get_stride; ///
+  int function(WebKitImage* image) c_webkit_image_get_width; ///
+
+  // ImageList
+  GType function() c_webkit_image_list_get_type; ///
+  WebKitImage* function(WebKitImageList* imageList, size_t index) c_webkit_image_list_get; ///
+  size_t function(WebKitImageList* imageList) c_webkit_image_list_get_length; ///
+  WebKitImageList* function(WebKitImageList* imageList) c_webkit_image_list_ref; ///
+  void function(WebKitImageList* imageList) c_webkit_image_list_unref; ///
 
   // InputMethodContext
   GType function() c_webkit_input_method_context_get_type; ///
@@ -820,9 +837,11 @@ __gshared extern(C) nothrow
   WebKitWebInspector* function(WebKitWebView* webView) c_webkit_web_view_get_inspector; ///
   gboolean function(WebKitWebView* webView) c_webkit_web_view_get_is_muted; ///
   gboolean function(WebKitWebView* webView) c_webkit_web_view_get_is_web_process_responsive; ///
+  double function(WebKitWebView* webView) c_webkit_web_view_get_magnification; ///
   WebKitWebResource* function(WebKitWebView* webView) c_webkit_web_view_get_main_resource; ///
   WebKitMediaCaptureState function(WebKitWebView* webView) c_webkit_web_view_get_microphone_capture_state; ///
   WebKitNetworkSession* function(WebKitWebView* webView) c_webkit_web_view_get_network_session; ///
+  WebKitImageList* function(WebKitWebView* webView) c_webkit_web_view_get_page_icons; ///
   ulong function(WebKitWebView* webView) c_webkit_web_view_get_page_id; ///
   WebKitWebViewSessionState* function(WebKitWebView* webView) c_webkit_web_view_get_session_state; ///
   WebKitSettings* function(WebKitWebView* webView) c_webkit_web_view_get_settings; ///
@@ -869,6 +888,7 @@ __gshared extern(C) nothrow
   void function(WebKitWebView* webView, gboolean editable) c_webkit_web_view_set_editable; ///
   void function(WebKitWebView* webView, WebKitInputMethodContext* context) c_webkit_web_view_set_input_method_context; ///
   void function(WebKitWebView* webView, gboolean muted) c_webkit_web_view_set_is_muted; ///
+  void function(WebKitWebView* webView, double magnification) c_webkit_web_view_set_magnification; ///
   void function(WebKitWebView* webView, WebKitMediaCaptureState state) c_webkit_web_view_set_microphone_capture_state; ///
   void function(WebKitWebView* webView, WebKitSettings* settings) c_webkit_web_view_set_settings; ///
   void function(WebKitWebView* webView, double zoomLevel) c_webkit_web_view_set_zoom_level; ///
@@ -921,6 +941,7 @@ __gshared extern(C) nothrow
   WebKitWebsitePolicies* function() c_webkit_website_policies_new; ///
   WebKitWebsitePolicies* function(const(char)* firstPolicyName,  ...) c_webkit_website_policies_new_with_policies; ///
   WebKitAutoplayPolicy function(WebKitWebsitePolicies* policies) c_webkit_website_policies_get_autoplay_policy; ///
+  const(char)* function(WebKitWebsitePolicies* policies) c_webkit_website_policies_get_custom_user_agent; ///
 
   // WindowProperties
   GType function() c_webkit_window_properties_get_type; ///
@@ -1411,6 +1432,12 @@ alias webkit_favicon_database_get_favicon_finish = c_webkit_favicon_database_get
 /** */
 alias webkit_favicon_database_get_favicon_uri = c_webkit_favicon_database_get_favicon_uri;
 
+/** */
+alias webkit_favicon_database_get_page_icons = c_webkit_favicon_database_get_page_icons;
+
+/** */
+alias webkit_favicon_database_get_page_icons_finish = c_webkit_favicon_database_get_page_icons_finish;
+
 // Feature
 
 /** */
@@ -1444,6 +1471,9 @@ alias webkit_feature_unref = c_webkit_feature_unref;
 
 /** */
 alias webkit_feature_list_get_type = c_webkit_feature_list_get_type;
+
+/** */
+alias webkit_feature_list_find = c_webkit_feature_list_find;
 
 /** */
 alias webkit_feature_list_get = c_webkit_feature_list_get;
@@ -1648,6 +1678,40 @@ alias webkit_itp_third_party_ref = c_webkit_itp_third_party_ref;
 
 /** */
 alias webkit_itp_third_party_unref = c_webkit_itp_third_party_unref;
+
+// Image
+
+/** */
+alias webkit_image_get_type = c_webkit_image_get_type;
+
+/** */
+alias webkit_image_as_bytes = c_webkit_image_as_bytes;
+
+/** */
+alias webkit_image_get_height = c_webkit_image_get_height;
+
+/** */
+alias webkit_image_get_stride = c_webkit_image_get_stride;
+
+/** */
+alias webkit_image_get_width = c_webkit_image_get_width;
+
+// ImageList
+
+/** */
+alias webkit_image_list_get_type = c_webkit_image_list_get_type;
+
+/** */
+alias webkit_image_list_get = c_webkit_image_list_get;
+
+/** */
+alias webkit_image_list_get_length = c_webkit_image_list_get_length;
+
+/** */
+alias webkit_image_list_ref = c_webkit_image_list_ref;
+
+/** */
+alias webkit_image_list_unref = c_webkit_image_list_unref;
 
 // InputMethodContext
 
@@ -3155,6 +3219,9 @@ alias webkit_web_view_get_is_muted = c_webkit_web_view_get_is_muted;
 alias webkit_web_view_get_is_web_process_responsive = c_webkit_web_view_get_is_web_process_responsive;
 
 /** */
+alias webkit_web_view_get_magnification = c_webkit_web_view_get_magnification;
+
+/** */
 alias webkit_web_view_get_main_resource = c_webkit_web_view_get_main_resource;
 
 /** */
@@ -3162,6 +3229,9 @@ alias webkit_web_view_get_microphone_capture_state = c_webkit_web_view_get_micro
 
 /** */
 alias webkit_web_view_get_network_session = c_webkit_web_view_get_network_session;
+
+/** */
+alias webkit_web_view_get_page_icons = c_webkit_web_view_get_page_icons;
 
 /** */
 alias webkit_web_view_get_page_id = c_webkit_web_view_get_page_id;
@@ -3302,6 +3372,9 @@ alias webkit_web_view_set_input_method_context = c_webkit_web_view_set_input_met
 alias webkit_web_view_set_is_muted = c_webkit_web_view_set_is_muted;
 
 /** */
+alias webkit_web_view_set_magnification = c_webkit_web_view_set_magnification;
+
+/** */
 alias webkit_web_view_set_microphone_capture_state = c_webkit_web_view_set_microphone_capture_state;
 
 /** */
@@ -3432,6 +3505,9 @@ alias webkit_website_policies_new_with_policies = c_webkit_website_policies_new_
 
 /** */
 alias webkit_website_policies_get_autoplay_policy = c_webkit_website_policies_get_autoplay_policy;
+
+/** */
+alias webkit_website_policies_get_custom_user_agent = c_webkit_website_policies_get_custom_user_agent;
 
 // WindowProperties
 
@@ -3740,6 +3816,8 @@ shared static this()
   gidLink(cast(void**)&webkit_favicon_database_get_favicon, "webkit_favicon_database_get_favicon", libs);
   gidLink(cast(void**)&webkit_favicon_database_get_favicon_finish, "webkit_favicon_database_get_favicon_finish", libs);
   gidLink(cast(void**)&webkit_favicon_database_get_favicon_uri, "webkit_favicon_database_get_favicon_uri", libs);
+  gidLink(cast(void**)&webkit_favicon_database_get_page_icons, "webkit_favicon_database_get_page_icons", libs);
+  gidLink(cast(void**)&webkit_favicon_database_get_page_icons_finish, "webkit_favicon_database_get_page_icons_finish", libs);
 
   // Feature
   gidLink(cast(void**)&webkit_feature_get_type, "webkit_feature_get_type", libs);
@@ -3754,6 +3832,7 @@ shared static this()
 
   // FeatureList
   gidLink(cast(void**)&webkit_feature_list_get_type, "webkit_feature_list_get_type", libs);
+  gidLink(cast(void**)&webkit_feature_list_find, "webkit_feature_list_find", libs);
   gidLink(cast(void**)&webkit_feature_list_get, "webkit_feature_list_get", libs);
   gidLink(cast(void**)&webkit_feature_list_get_length, "webkit_feature_list_get_length", libs);
   gidLink(cast(void**)&webkit_feature_list_ref, "webkit_feature_list_ref", libs);
@@ -3834,6 +3913,20 @@ shared static this()
   gidLink(cast(void**)&webkit_itp_third_party_get_first_parties, "webkit_itp_third_party_get_first_parties", libs);
   gidLink(cast(void**)&webkit_itp_third_party_ref, "webkit_itp_third_party_ref", libs);
   gidLink(cast(void**)&webkit_itp_third_party_unref, "webkit_itp_third_party_unref", libs);
+
+  // Image
+  gidLink(cast(void**)&webkit_image_get_type, "webkit_image_get_type", libs);
+  gidLink(cast(void**)&webkit_image_as_bytes, "webkit_image_as_bytes", libs);
+  gidLink(cast(void**)&webkit_image_get_height, "webkit_image_get_height", libs);
+  gidLink(cast(void**)&webkit_image_get_stride, "webkit_image_get_stride", libs);
+  gidLink(cast(void**)&webkit_image_get_width, "webkit_image_get_width", libs);
+
+  // ImageList
+  gidLink(cast(void**)&webkit_image_list_get_type, "webkit_image_list_get_type", libs);
+  gidLink(cast(void**)&webkit_image_list_get, "webkit_image_list_get", libs);
+  gidLink(cast(void**)&webkit_image_list_get_length, "webkit_image_list_get_length", libs);
+  gidLink(cast(void**)&webkit_image_list_ref, "webkit_image_list_ref", libs);
+  gidLink(cast(void**)&webkit_image_list_unref, "webkit_image_list_unref", libs);
 
   // InputMethodContext
   gidLink(cast(void**)&webkit_input_method_context_get_type, "webkit_input_method_context_get_type", libs);
@@ -4389,9 +4482,11 @@ shared static this()
   gidLink(cast(void**)&webkit_web_view_get_inspector, "webkit_web_view_get_inspector", libs);
   gidLink(cast(void**)&webkit_web_view_get_is_muted, "webkit_web_view_get_is_muted", libs);
   gidLink(cast(void**)&webkit_web_view_get_is_web_process_responsive, "webkit_web_view_get_is_web_process_responsive", libs);
+  gidLink(cast(void**)&webkit_web_view_get_magnification, "webkit_web_view_get_magnification", libs);
   gidLink(cast(void**)&webkit_web_view_get_main_resource, "webkit_web_view_get_main_resource", libs);
   gidLink(cast(void**)&webkit_web_view_get_microphone_capture_state, "webkit_web_view_get_microphone_capture_state", libs);
   gidLink(cast(void**)&webkit_web_view_get_network_session, "webkit_web_view_get_network_session", libs);
+  gidLink(cast(void**)&webkit_web_view_get_page_icons, "webkit_web_view_get_page_icons", libs);
   gidLink(cast(void**)&webkit_web_view_get_page_id, "webkit_web_view_get_page_id", libs);
   gidLink(cast(void**)&webkit_web_view_get_session_state, "webkit_web_view_get_session_state", libs);
   gidLink(cast(void**)&webkit_web_view_get_settings, "webkit_web_view_get_settings", libs);
@@ -4438,6 +4533,7 @@ shared static this()
   gidLink(cast(void**)&webkit_web_view_set_editable, "webkit_web_view_set_editable", libs);
   gidLink(cast(void**)&webkit_web_view_set_input_method_context, "webkit_web_view_set_input_method_context", libs);
   gidLink(cast(void**)&webkit_web_view_set_is_muted, "webkit_web_view_set_is_muted", libs);
+  gidLink(cast(void**)&webkit_web_view_set_magnification, "webkit_web_view_set_magnification", libs);
   gidLink(cast(void**)&webkit_web_view_set_microphone_capture_state, "webkit_web_view_set_microphone_capture_state", libs);
   gidLink(cast(void**)&webkit_web_view_set_settings, "webkit_web_view_set_settings", libs);
   gidLink(cast(void**)&webkit_web_view_set_zoom_level, "webkit_web_view_set_zoom_level", libs);
@@ -4490,6 +4586,7 @@ shared static this()
   gidLink(cast(void**)&webkit_website_policies_new, "webkit_website_policies_new", libs);
   gidLink(cast(void**)&webkit_website_policies_new_with_policies, "webkit_website_policies_new_with_policies", libs);
   gidLink(cast(void**)&webkit_website_policies_get_autoplay_policy, "webkit_website_policies_get_autoplay_policy", libs);
+  gidLink(cast(void**)&webkit_website_policies_get_custom_user_agent, "webkit_website_policies_get_custom_user_agent", libs);
 
   // WindowProperties
   gidLink(cast(void**)&webkit_window_properties_get_type, "webkit_window_properties_get_type", libs);

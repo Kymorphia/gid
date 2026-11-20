@@ -184,6 +184,9 @@ class DeviceMonitor : gst.object.ObjectWrap
   /**
       Gets a list of devices from all of the relevant monitors. This may actually
       probe the hardware if the monitor is not currently started.
+      
+      Since 1.28.3, this function will block until the monitor has finished
+      starting if [gst.device_monitor.DeviceMonitor.start] has been called.
       Returns: a #GList of
           #GstDevice
   */

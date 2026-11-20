@@ -54,6 +54,11 @@ import gstbase.base_sink;
     is stopped or in the EOS state. You can check for the EOS state with the
     "eos" property or with the [gstapp.app_sink.AppSink.isEos] method.
     
+    Serialized events can be pulled along with the samples with
+    [gstapp.app_sink.AppSink.pullObject]. Upstream doesn't send sticky events again after
+    a flush, so the ones that were queued but not pulled yet are kept, as long
+    as the pad still has them.
+    
     The eos signal can also be used to be informed when the EOS state is reached
     to avoid polling.
 */

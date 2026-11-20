@@ -515,9 +515,10 @@ class VideoFormatInfo : StructWrap!(GstVideoFormatInfo)
         plane = a plane number
         components = array used to store component numbers
   */
-  void component(uint plane, out int components) nothrow
+  void component(uint plane, out int[] components) nothrow
   {
-    gst_video_format_info_component(cast(const(GstVideoFormatInfo)*)this._cPtr, plane, cast(int*)&components);
+    components.length = 4;
+    gst_video_format_info_component(cast(const(GstVideoFormatInfo)*)this._cPtr, plane, components.ptr);
   }
 
   /**

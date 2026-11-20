@@ -129,7 +129,7 @@ enum WebKitCacheModel
 
 /**
     Enum values used to denote the stock actions for
-    #WebKitContextMenuItem<!-- -->s
+    #WebKitContextMenuItem objects
 */
 enum WebKitContextMenuAction
 {
@@ -204,7 +204,7 @@ enum WebKitContextMenuAction
   Reload = 13,
 
   /**
-      Copy current selection the clipboard.
+      Copy current selection to the clipboard.
   */
   Copy = 14,
 
@@ -304,12 +304,12 @@ enum WebKitContextMenuAction
   OpenAudioInNewWindow = 33,
 
   /**
-      Copy video link location in to the clipboard.
+      Copy video link location to the clipboard.
   */
   CopyVideoLinkToClipboard = 34,
 
   /**
-      Copy audio link location in to the clipboard.
+      Copy audio link location to the clipboard.
   */
   CopyAudioLinkToClipboard = 35,
 
@@ -503,7 +503,7 @@ enum WebKitFaviconDatabaseError
 }
 
 /**
-    Describes the status of a `struct@WebKitFeature`.
+    Describes the status of a [webkit.feature.Feature].
     
     The status for a given feature can be obtained with
     `id@webkit_feature_get_status`.
@@ -511,9 +511,9 @@ enum WebKitFaviconDatabaseError
 enum WebKitFeatureStatus
 {
   /**
-      Feature that adjust behaviour for
+      Feature that adjusts behavior for
         specific application needs. The feature is not part of a Web platform
-        feature, not a mature feature intended to be always on.
+        feature, nor a mature feature intended to be always on.
   */
   Embedder = 0,
 
@@ -526,7 +526,7 @@ enum WebKitFeatureStatus
 
   /**
       Feature for debugging the WebKit engine.
-        The feature is not generally useful for user or web developers, and
+        The feature is not generally useful for users or web developers, and
         always disabled by default.
   */
   Internal = 2,
@@ -584,7 +584,7 @@ enum WebKitFindOptions : uint
 
   /**
       search text only at the
-        begining of the words.
+        beginning of the words.
   */
   AtWordStarts = 2,
 
@@ -679,7 +679,7 @@ enum WebKitInputHints : uint
   Spellcheck = 1,
 
   /**
-      Suggest to not autocapitlize
+      Suggest to not autocapitalize
   */
   Lowercase = 2,
 
@@ -743,6 +743,11 @@ enum WebKitInputPurpose
       Editable element expects a password
   */
   Password = 6,
+
+  /**
+      Edited field contents will be used for searching data.
+  */
+  Search = 7,
 }
 
 /**
@@ -778,7 +783,7 @@ enum WebKitJavascriptError
   ScriptFailed = 699,
 
   /**
-      An unsupported parameter has been used to call and async function from API. Since 2.40
+      An unsupported parameter has been used to call an async function from API. Since 2.40
   */
   InvalidParameter = 600,
 
@@ -1205,7 +1210,7 @@ enum WebKitUserContentFilterError
 }
 
 /**
-    Specifies in which frames user style sheets are to be inserted in.
+    Specifies in which frames user style sheets are to be inserted.
 */
 enum WebKitUserContentInjectedFrames
 {
@@ -1236,7 +1241,7 @@ enum WebKitUserMessageError
 }
 
 /**
-    Specifies at which place of documents an user script will be inserted.
+    Specifies at which place of documents a user script will be inserted.
 */
 enum WebKitUserScriptInjectionTime
 {
@@ -1254,12 +1259,12 @@ enum WebKitUserScriptInjectionTime
 }
 
 /**
-    Specifies how to treat an user style sheet.
+    Specifies how to treat a user style sheet.
 */
 enum WebKitUserStyleLevel
 {
   /**
-      The style sheet is an user style sheet,
+      The style sheet is a user style sheet,
         its contents always override other style sheets. This is the default.
   */
   User = 0,
@@ -1278,7 +1283,7 @@ enum WebKitUserStyleLevel
 enum WebKitWebExtensionError
 {
   /**
-      An unknown error occured.
+      An unknown error occurred.
   */
   Unknown = 899,
 
@@ -1329,7 +1334,7 @@ enum WebKitWebExtensionError
 enum WebKitWebExtensionMatchPatternError
 {
   /**
-      An unknown error occured.
+      An unknown error occurred.
   */
   Unknown = 899,
 
@@ -1365,7 +1370,7 @@ enum WebKitWebExtensionMatchPatternOptions : uint
   IgnoreSchemes = 2,
 
   /**
-      The host components should be ignored while matching.
+      The path components should be ignored while matching.
   */
   IgnorePaths = 4,
 
@@ -1623,7 +1628,7 @@ struct WebKitAutomationSessionClass
     Methods [webkit.web_view.WebView.goBack] and [webkit.web_view.WebView.goForward] move
     the current item backward or forward by one. Method
     [webkit.web_view.WebView.goToBackForwardListItem] sets the current item to the
-    specified item. All other methods returning #WebKitBackForwardListItem<!-- -->s
+    specified item. All other methods returning #WebKitBackForwardListItem objects
     do not change the value of the current item, they just return the requested
     item or items.
 */
@@ -1640,7 +1645,7 @@ struct WebKitBackForwardListClass
     One item of the #WebKitBackForwardList.
     
     A history item is part of the #WebKitBackForwardList and consists
-    out of a title and a URI.
+    of a title and a URI.
 */
 struct WebKitBackForwardListItem;
 
@@ -1676,7 +1681,7 @@ struct WebKitClipboardPermissionRequestClass
     Whenever the user interacts with an <input type='color' />
     HTML element, WebKit will need to show a dialog to choose a color. For that
     to happen in a general way, instead of just opening a #GtkColorChooser
-    (which might be not desirable in some cases, which could prefer to use their
+    (which might not be desirable for applications that prefer to use their
     own color chooser dialog), WebKit will fire the
     #WebKitWebView::run-color-chooser signal with a #WebKitColorChooserRequest
     object, which will allow the client application to specify the color to be
@@ -1745,7 +1750,7 @@ struct WebKitContextMenuItemClass
     You can get it from a #WebKitWebsiteDataManager with
     webkit_website_data_manager_get_cookie_manager(), and use it to set where to
     store cookies with [webkit.cookie_manager.CookieManager.setPersistentStorage],
-    or to set the acceptance policy, with [webkit.cookie_manager.CookieManager.getAcceptPolicy].
+    or to set the acceptance policy, with [webkit.cookie_manager.CookieManager.setAcceptPolicy].
 */
 struct WebKitCookieManager;
 
@@ -1765,8 +1770,8 @@ struct WebKitCredential;
     A permission request for enumerating the user's media devices
     
     WebKitDeviceInfoPermissionRequest represents a request for
-    permission to whether WebKit should be allowed to access the user's
-    devices information when requested through the MediaDevices.enumerateDevices
+    permission to decide whether WebKit should be allowed to access the user's
+    device information when requested through the MediaDevices.enumerateDevices
     API.
     
     When a WebKitDeviceInfoPermissionRequest is not handled by the user,
@@ -1818,12 +1823,12 @@ struct WebKitEditorStateClass
 /**
     Provides access to the icons associated with web sites.
     
-    WebKit will automatically look for available icons in <link>
+    WebKit will automatically look for available icons in `<link>`
     elements on opened pages as well as an existing favicon.ico and
     load the images found into a memory cache if possible. That cache
     is frozen to an on-disk database for persistence.
     
-    If #WebKitSettings:enable-private-browsing is true, new icons
+    If [webkit.website_data_manager.WebsiteDataManager.isEphemeral] is true, new icons
     won't be added to the on-disk database and no existing icons will
     be deleted from it. Nevertheless, WebKit will still store them in
     the in-memory cache during the current execution.
@@ -1852,14 +1857,14 @@ struct WebKitFaviconDatabaseClass
       for details): [webkit.feature.Feature.getStatus].
     - A category, which may be used to group features together:
       [webkit.feature.Feature.getCategory].
-    - An optional short “name” which can be presented to an user:
+    - An optional short “name” which can be presented to a user:
       [webkit.feature.Feature.getName].
     - An optional longer “detailed” description:
       [webkit.feature.Feature.getDetails].
     
     The lists of available features can be obtained with
     [webkit.settings.Settings.getAllFeatures], [webkit.settings.Settings.getExperimentalFeatures],
-    and [webkit.settings.Settings.getDevelopmentFeatures]). As a rule of thumb,
+    and [webkit.settings.Settings.getDevelopmentFeatures]. As a rule of thumb,
     applications which may want to allow users (i.e. web developers) to test
     WebKit features should use the list of experimental features. Additionally,
     applications might want to expose development features *when targeting
@@ -1882,7 +1887,7 @@ struct WebKitFeature;
     
     ```c
     g_autoptr(WebKitFeatureList) list = webkit_settings_get_experimental_features();
-    for (gsize i = 0; i < webkit_feature_list_get_length(list): i++) {
+    for (gsize i = 0; i < webkit_feature_list_get_length(list); i++) {
         WebKitFeature *feature = webkit_feature_list_get(list, i);
         // Do something with "feature".
     }
@@ -1902,8 +1907,8 @@ struct WebKitFeatureList;
     file type, WebKit will need to show a dialog to choose one or
     more files to be uploaded to the server along with the rest of the
     form data. For that to happen in a general way, instead of just
-    opening a #GtkFileChooserDialog (which might be not desirable in
-    some cases, which could prefer to use their own file chooser
+    opening a #GtkFileChooserDialog (which might not be desirable for
+    applications that prefer to use their own file chooser
     dialog), WebKit will fire the #WebKitWebView::run-file-chooser
     signal with a #WebKitFileChooserRequest object, which will allow
     the client application to specify the files to be selected, to
@@ -1928,14 +1933,14 @@ struct WebKitFileChooserRequestClass
     Controls text search in a #WebKitWebView.
     
     A #WebKitFindController is used to search text in a #WebKitWebView. You
-    can get a #WebKitWebView<!-- -->'s #WebKitFindController with
+    can get a #WebKitWebView's #WebKitFindController with
     [webkit.web_view.WebView.getFindController], and later use it to search
     for text using [webkit.find_controller.FindController.search], or get the
     number of matches using [webkit.find_controller.FindController.countMatches]. The
     operations are asynchronous and trigger signals when ready, such as
     #WebKitFindController::found-text,
     #WebKitFindController::failed-to-find-text or
-    #WebKitFindController::counted-matches<!-- -->.
+    #WebKitFindController::counted-matches.
 */
 struct WebKitFindController;
 
@@ -2067,6 +2072,33 @@ struct WebKitITPFirstParty;
     Describes a third party origin.
 */
 struct WebKitITPThirdParty;
+
+/** */
+struct WebKitImage;
+
+/** */
+struct WebKitImageClass
+{
+  /** */
+  GObjectClass parentClass;
+}
+
+/**
+    Represents a set of related images.
+    
+    The list supports iterating over each [webkit.image.Image]:
+    
+    ```c
+    g_autoptr(WebKitImageList) list = webkit_favicon_database_get_page_icons_finish(database, result, NULL);
+    for (gsize i = 0; i < webkit_image_list_get_length(list); i++) {
+        WebKitImage *image = webkit_image_list_get(list, i);
+        // Do something with "image".
+    }
+    ```
+    
+    Image lists can be obtained as the result of `id@webkit_favicon_database_get_page_icons`.
+*/
+struct WebKitImageList;
 
 /**
     Base class for input method contexts.
@@ -2223,7 +2255,7 @@ struct WebKitInputMethodContextClass
 struct WebKitInputMethodContextPrivate;
 
 /**
-    Range of text in an preedit string to be shown underlined.
+    Range of text in a preedit string to be shown underlined.
 */
 struct WebKitInputMethodUnderline;
 
@@ -2255,10 +2287,10 @@ struct WebKitMediaKeySystemPermissionRequestClass
     #WebKitMemoryPressureSettings is a boxed type that can be used to provide some custom settings
     to control how the memory pressure situations are handled by the different processes.
     
-    The memory pressure system implemented inside the different process will try to keep the memory usage
+    The memory pressure system implemented inside the different processes will try to keep the memory usage
     under the defined memory limit. In order to do that, it will check the used memory with a user defined
     frequency and decide whether it should try to release memory. The thresholds passed will define how urgent
-    is to release that memory.
+    it is to release that memory.
     
     Take into account that badly defined parameters can greatly reduce the performance of the engine. For
     example, setting memory limit too low with a fast poll interval can cause the process to constantly
@@ -2298,7 +2330,7 @@ struct WebKitNavigationPolicyDecisionClass
     Configures network proxies.
     
     WebKitNetworkProxySettings can be used to provide a custom proxy configuration
-    to a #WebKitNetworkSession. You need to call webkit_network_session_set_network_proxy_settings()
+    to a #WebKitNetworkSession. You need to call [webkit.network_session.NetworkSession.setProxySettings]
     with [webkit.types.NetworkProxyMode.Custom] and a WebKitNetworkProxySettings.
 */
 struct WebKitNetworkProxySettings;
@@ -2351,7 +2383,7 @@ struct WebKitNotificationPermissionRequestClass
     
     When a select element in a #WebKitWebView needs to display a dropdown menu, the signal
     #WebKitWebView::show-option-menu is emitted, providing a WebKitOptionMenu with the
-    #WebKitOptionMenuItem<!-- -->s that should be displayed.
+    #WebKitOptionMenuItem objects that should be displayed.
 */
 struct WebKitOptionMenu;
 
@@ -2365,7 +2397,7 @@ struct WebKitOptionMenuClass
 /**
     One item of a #WebKitOptionMenu.
     
-    The #WebKitOptionMenu is composed of WebKitOptionMenuItem<!-- -->s.
+    The #WebKitOptionMenu is composed of WebKitOptionMenuItem objects.
     A WebKitOptionMenuItem always has a label and can contain a tooltip text.
     You can use the WebKitOptionMenuItem of a #WebKitOptionMenu to build your
     own menus.
@@ -2529,7 +2561,7 @@ struct WebKitScriptDialog;
 /**
     A reply for a script message received.
     If no reply has been sent by the user, an automatically generated reply with
-    undefined value with be sent.
+    undefined value will be sent.
 */
 struct WebKitScriptMessageReply;
 
@@ -2566,7 +2598,7 @@ struct WebKitSecurityManagerClass
 struct WebKitSecurityOrigin;
 
 /**
-    Control the behaviour of a #WebKitWebView.
+    Control the behavior of a #WebKitWebView.
     
     #WebKitSettings can be applied to a #WebKitWebView to control text charset,
     color, font sizes, printing mode, script support, loading of images and various
@@ -2649,11 +2681,11 @@ struct WebKitURISchemeRequestClass
     a #WebKitURISchemeRequestCallback. After that, when a URI response
     is made with that particular scheme, your callback will be
     called. There you will be able to provide more response parameters
-    when the methods and properties of a #WebKitURISchemeRequest is not
+    when the methods and properties of a #WebKitURISchemeRequest are not
     enough.
     
     When you finished setting up your #WebKitURISchemeResponse, call
-    webkit_uri_request_finish_with_response() with it to return the response.
+    [webkit.urischeme_request.URISchemeRequest.finishWithResponse] with it to return the response.
 */
 struct WebKitURISchemeResponse;
 
@@ -2665,7 +2697,7 @@ struct WebKitURISchemeResponseClass
 }
 
 /**
-    A compiled set of rules which applied to resource loads.
+    A compiled set of rules which are applied to resource loads.
 */
 struct WebKitUserContentFilter;
 
@@ -2767,15 +2799,15 @@ struct WebKitUserScript;
 struct WebKitUserStyleSheet;
 
 /**
-    Manages aspects common to all #WebKitWebView<!-- -->s
+    Manages aspects common to all #WebKitWebView objects
     
     The #WebKitWebContext manages all aspects common to all
-    #WebKitWebView<!-- -->s.
+    #WebKitWebView objects.
     
     You can define the #WebKitCacheModel with
     [webkit.web_context.WebContext.setCacheModel], depending on the needs of
     your application. You can access the #WebKitSecurityManager to specify
-    the behaviour of your application regarding security using
+    the behavior of your application regarding security using
     [webkit.web_context.WebContext.getSecurityManager].
     
     It is also possible to change your preferred language or enable
@@ -3154,7 +3186,7 @@ struct WebKitWebsiteData;
     A permission request for accessing website data from third-party domains.
     
     WebKitWebsiteDataAccessPermissionRequest represents a request for
-    permission to allow a third-party domain access its cookies.
+    permission to allow a third-party domain to access its cookies.
     
     When a WebKitWebsiteDataAccessPermissionRequest is not handled by the user,
     it is denied by default.
@@ -3173,7 +3205,7 @@ struct WebKitWebsiteDataAccessPermissionRequestClass
     
     You can use WebKitWebsiteDataManager to configure the local directories
     where website data will be stored. Use #WebKitWebsiteDataManager:base-data-directory
-    and #WebKitWebsiteDataManager:base-cache-directory set a common base directory for all
+    and #WebKitWebsiteDataManager:base-cache-directory to set a common base directory for all
     website data and caches.
     
     A WebKitWebsiteDataManager can be ephemeral, in which case all the directory configuration
@@ -3197,7 +3229,7 @@ struct WebKitWebsiteDataManagerClass
     View specific website policies.
     
     WebKitWebsitePolicies allows you to configure per-page policies,
-    currently only autoplay policies are supported.
+    currently only autoplay and custom user agent policies are supported.
 */
 struct WebKitWebsitePolicies;
 

@@ -14,10 +14,10 @@ import webkit.types;
     #WebKitMemoryPressureSettings is a boxed type that can be used to provide some custom settings
     to control how the memory pressure situations are handled by the different processes.
     
-    The memory pressure system implemented inside the different process will try to keep the memory usage
+    The memory pressure system implemented inside the different processes will try to keep the memory usage
     under the defined memory limit. In order to do that, it will check the used memory with a user defined
     frequency and decide whether it should try to release memory. The thresholds passed will define how urgent
-    is to release that memory.
+    it is to release that memory.
     
     Take into account that badly defined parameters can greatly reduce the performance of the engine. For
     example, setting memory limit too low with a fast poll interval can cause the process to constantly
@@ -58,7 +58,7 @@ class MemoryPressureSettings : gobject.boxed.BoxedWrap!(webkit_memory_pressure_s
 
   /**
       Make a copy of settings.
-      Returns: A copy of of the passed #WebKitMemoryPressureSettings.
+      Returns: A copy of the passed #WebKitMemoryPressureSettings.
   */
   webkit.memory_pressure_settings.MemoryPressureSettings copy() nothrow
   {
@@ -145,7 +145,7 @@ class MemoryPressureSettings : gobject.boxed.BoxedWrap!(webkit_memory_pressure_s
       Sets value as the fraction of the defined memory limit where the process will be
       killed.
       
-      The threshold must be a value bigger or equal to 0. A value of 0 means that the process
+      The threshold must be a value bigger than or equal to 0. A value of 0 means that the process
       is never killed. If the threshold is not 0, then it must be bigger than the strict threshold
       defined in settings. The threshold can also have values bigger than 1. The default value is 0.
   
@@ -159,7 +159,7 @@ class MemoryPressureSettings : gobject.boxed.BoxedWrap!(webkit_memory_pressure_s
   }
 
   /**
-      Sets memory_limit the memory limit value to settings.
+      Sets memory_limit as the memory limit value of settings.
       
       The default value is the system's RAM size with a maximum of 3GB.
   

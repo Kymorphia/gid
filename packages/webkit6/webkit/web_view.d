@@ -39,6 +39,7 @@ import webkit.file_chooser_request;
 import webkit.find_controller;
 import webkit.form_submission_request;
 import webkit.hit_test_result;
+import webkit.image_list;
 import webkit.input_method_context;
 import webkit.navigation_action;
 import webkit.network_session;
@@ -140,7 +141,7 @@ class WebView : webkit.web_view_base.WebViewBase
         [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
         
         If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
-        can still re-request the permission to the user. Permission desision caching is left to the
+        can still re-request the permission to the user. Permission decision caching is left to the
         application.
   */
   @property webkit.types.MediaCaptureState cameraCaptureState() nothrow
@@ -160,7 +161,7 @@ class WebView : webkit.web_view_base.WebViewBase
           [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
           
           If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
-          can still re-request the permission to the user. Permission desision caching is left to the
+          can still re-request the permission to the user. Permission decision caching is left to the
           application.
   */
   @property void cameraCaptureState(webkit.types.MediaCaptureState propval) nothrow
@@ -189,7 +190,7 @@ class WebView : webkit.web_view_base.WebViewBase
   /**
       Get `displayCaptureState` property.
       Returns: Capture state of the display device. Whenever the user grants a media-request sent by the web
-        page, requesting screencasting capabilities (`navigator.mediaDevices.getDisplayMedia() this
+        page, requesting screencasting capabilities (`navigator.mediaDevices.getDisplayMedia()`) this
         property will be set to [webkit.types.MediaCaptureState.Active].
         
         The application can monitor this property and provide a visual indicator allowing to
@@ -197,7 +198,7 @@ class WebView : webkit.web_view_base.WebViewBase
         [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
         
         If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
-        can still re-request the permission to the user. Permission desision caching is left to the
+        can still re-request the permission to the user. Permission decision caching is left to the
         application.
   */
   @property webkit.types.MediaCaptureState displayCaptureState() nothrow
@@ -209,7 +210,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Set `displayCaptureState` property.
       Params:
         propval = Capture state of the display device. Whenever the user grants a media-request sent by the web
-          page, requesting screencasting capabilities (`navigator.mediaDevices.getDisplayMedia() this
+          page, requesting screencasting capabilities (`navigator.mediaDevices.getDisplayMedia()`) this
           property will be set to [webkit.types.MediaCaptureState.Active].
           
           The application can monitor this property and provide a visual indicator allowing to
@@ -217,7 +218,7 @@ class WebView : webkit.web_view_base.WebViewBase
           [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
           
           If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
-          can still re-request the permission to the user. Permission desision caching is left to the
+          can still re-request the permission to the user. Permission decision caching is left to the
           application.
   */
   @property void displayCaptureState(webkit.types.MediaCaptureState propval) nothrow
@@ -263,8 +264,10 @@ class WebView : webkit.web_view_base.WebViewBase
 
   /**
       Get `favicon` property.
-      Returns: The favicon currently associated to the #WebKitWebView.
+      Returns: The favicon currently associated with the #WebKitWebView.
         See [webkit.web_view.WebView.getFavicon] for more details.
+        
+        New applications should use [webkit.web_view.WebView.pageIcons] instead.
   */
   @property gdk.texture.Texture favicon() nothrow
   {
@@ -294,11 +297,40 @@ class WebView : webkit.web_view_base.WebViewBase
 
   /**
       Get `isWebProcessResponsive` property.
-      Returns: Whether the web process currently associated to the #WebKitWebView is responsive.
+      Returns: Whether the web process currently associated with the #WebKitWebView is responsive.
   */
   @property bool isWebProcessResponsive() nothrow
   {
     return getIsWebProcessResponsive();
+  }
+
+  /**
+      Get `magnification` property.
+      Returns: The magnification factor of the #WebKitWebView content.
+        
+        The magnification factor represents the visual scaling of the page (similar
+        to pinch-to-zoom). This is independent of the layout zoom level. Setting
+        the magnification factor scales the rendered page visually without affecting
+        page layout or text wrapping.
+  */
+  @property double magnification() nothrow
+  {
+    return getMagnification();
+  }
+
+  /**
+      Set `magnification` property.
+      Params:
+        propval = The magnification factor of the #WebKitWebView content.
+          
+          The magnification factor represents the visual scaling of the page (similar
+          to pinch-to-zoom). This is independent of the layout zoom level. Setting
+          the magnification factor scales the rendered page visually without affecting
+          page layout or text wrapping.
+  */
+  @property void magnification(double propval) nothrow
+  {
+    setMagnification(propval);
   }
 
   /**
@@ -312,7 +344,7 @@ class WebView : webkit.web_view_base.WebViewBase
         [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
         
         If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
-        can still re-request the permission to the user. Permission desision caching is left to the
+        can still re-request the permission to the user. Permission decision caching is left to the
         application.
   */
   @property webkit.types.MediaCaptureState microphoneCaptureState() nothrow
@@ -332,7 +364,7 @@ class WebView : webkit.web_view_base.WebViewBase
           [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
           
           If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
-          can still re-request the permission to the user. Permission desision caching is left to the
+          can still re-request the permission to the user. Permission decision caching is left to the
           application.
   */
   @property void microphoneCaptureState(webkit.types.MediaCaptureState propval) nothrow
@@ -347,6 +379,15 @@ class WebView : webkit.web_view_base.WebViewBase
   @property webkit.network_session.NetworkSession networkSession() nothrow
   {
     return getNetworkSession();
+  }
+
+  /**
+      Get `pageIcons` property.
+      Returns: The page icons (favicons) associated with the currently loaded content, if any.
+  */
+  @property webkit.image_list.ImageList pageIcons() nothrow
+  {
+    return getPageIcons();
   }
 
   /**
@@ -465,9 +506,9 @@ class WebView : webkit.web_view_base.WebViewBase
       
       Creates a new #WebKitWebView with the default #WebKitWebContext and
       no #WebKitUserContentManager associated with it.
-      See also webkit_web_view_new_with_context(),
-      webkit_web_view_new_with_user_content_manager(), and
-      webkit_web_view_new_with_settings().
+      Set the #WebKitWebView:web-context, #WebKitWebView:user-content-manager
+      or #WebKitWebView:settings properties at construction to use a different
+      configuration.
       Returns: The newly created #WebKitWebView widget
   */
   this() nothrow
@@ -481,7 +522,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Asynchronously call body with arguments in the script world with name world_name of the main frame current context in web_view.
       The arguments values must be one of the following types, or contain only the following GVariant types: number, string and dictionary.
       The result of the operation can be a Promise that will be properly passed to the callback.
-      If world_name is null, the default world is used. Any value that is not null is a distin ct world.
+      If world_name is null, the default world is used. Any value that is not null is a distinct world.
       The source_uri will be shown in exceptions and doesn't affect the behavior of the script.
       When not provided, the document URL is used.
       
@@ -512,13 +553,12 @@ class WebView : webkit.web_view_base.WebViewBase
           }
       
           if (jsc_value_is_number (value)) {
-              gint32        int_value = jsc_value_to_string (value);
+              gint32        int_value = jsc_value_to_int32 (value);
               JSCException *exception = jsc_context_get_exception (jsc_value_get_context (value));
               if (exception)
                   g_warning ("Error running javascript: %s", jsc_exception_get_message (exception));
               else
                   g_print ("Script result: %d\n", int_value);
-              g_free (str_value);
           } else {
               g_warning ("Error running javascript: unexpected return value");
           }
@@ -533,7 +573,7 @@ class WebView : webkit.web_view_base.WebViewBase
           g_variant_dict_insert (&dict, "count", "u", 42);
           GVariant *args = g_variant_dict_end (&dict);
           const gchar *body = "return new Promise((resolve) => { resolve(count); });";
-          webkit_web_view_call_async_javascript_function (web_view, body, -1, arguments, NULL, NULL, NULL, web_view_javascript_finished, NULL);
+          webkit_web_view_call_async_javascript_function (web_view, body, -1, args, NULL, NULL, NULL, web_view_javascript_finished, NULL);
       }
       ```
   
@@ -885,7 +925,7 @@ class WebView : webkit.web_view_base.WebViewBase
 
   /**
       Get the camera capture state of a #WebKitWebView.
-      Returns: The #WebKitMediaCaptureState of the camera device. If #WebKitSettings:enable-mediastream
+      Returns: The #WebKitMediaCaptureState of the camera device. If #WebKitSettings:enable-media-stream
         is false, this method will return [webkit.types.MediaCaptureState.None].
   */
   webkit.types.MediaCaptureState getCameraCaptureState() nothrow
@@ -935,7 +975,7 @@ class WebView : webkit.web_view_base.WebViewBase
 
   /**
       Get the display capture state of a #WebKitWebView.
-      Returns: The #WebKitMediaCaptureState of the display device. If #WebKitSettings:enable-mediastream
+      Returns: The #WebKitMediaCaptureState of the display device. If #WebKitSettings:enable-media-stream
         is false, this method will return [webkit.types.MediaCaptureState.None].
   */
   webkit.types.MediaCaptureState getDisplayCaptureState() nothrow
@@ -963,7 +1003,7 @@ class WebView : webkit.web_view_base.WebViewBase
       
       You can monitor the estimated progress of a load operation by
       connecting to the notify::estimated-load-progress signal of web_view.
-      Returns: an estimate of the of the percent complete for a document
+      Returns: an estimate of the percent complete for a document
             load as a range from 0.0 to 1.0.
   */
   double getEstimatedLoadProgress() nothrow
@@ -974,11 +1014,13 @@ class WebView : webkit.web_view_base.WebViewBase
   }
 
   /**
-      Returns favicon currently associated to web_view.
+      Returns favicon currently associated with web_view.
       
-      Returns favicon currently associated to web_view, if any. You can
+      Returns favicon currently associated with web_view, if any. You can
       connect to notify::favicon signal of web_view to be notified when
       the favicon is available.
+      
+      New applications should use [webkit.web_view.WebView.getPageIcons] instead.
       Returns: the favicon image or null if there's no
            icon associated with web_view.
   */
@@ -995,7 +1037,7 @@ class WebView : webkit.web_view_base.WebViewBase
       
       Gets the #WebKitFindController that will allow the caller to query
       the #WebKitWebView for the text to look for.
-      Returns: the #WebKitFindController associated to
+      Returns: the #WebKitFindController associated with
         this particular #WebKitWebView.
   */
   webkit.find_controller.FindController getFindController() nothrow
@@ -1021,7 +1063,7 @@ class WebView : webkit.web_view_base.WebViewBase
   }
 
   /**
-      Get the #WebKitWebInspector associated to web_view
+      Get the #WebKitWebInspector associated with web_view
       Returns: the #WebKitWebInspector of web_view
   */
   webkit.web_inspector.WebInspector getInspector() nothrow
@@ -1034,7 +1076,7 @@ class WebView : webkit.web_view_base.WebViewBase
 
   /**
       Gets the mute state of web_view.
-      Returns: true if web_view audio is muted or false is audio is not muted.
+      Returns: true if web_view audio is muted or false if audio is not muted.
   */
   bool getIsMuted() nothrow
   {
@@ -1055,6 +1097,21 @@ class WebView : webkit.web_view_base.WebViewBase
   }
 
   /**
+      Get the magnification factor of web_view.
+      
+      The magnification factor represents the visual scaling of the page (similar
+      to pinch-to-zoom). This is independent of the layout zoom level (which is
+      obtained with [webkit.web_view.WebView.getZoomLevel]).
+      Returns: the current magnification factor of web_view
+  */
+  double getMagnification() nothrow
+  {
+    double _retval;
+    _retval = webkit_web_view_get_magnification(cast(WebKitWebView*)this._cPtr);
+    return _retval;
+  }
+
+  /**
       Return the main resource of web_view.
       Returns: the main #WebKitWebResource of the view
            or null if nothing has been loaded.
@@ -1069,7 +1126,7 @@ class WebView : webkit.web_view_base.WebViewBase
 
   /**
       Get the microphone capture state of a #WebKitWebView.
-      Returns: The #WebKitMediaCaptureState of the microphone device. If #WebKitSettings:enable-mediastream
+      Returns: The #WebKitMediaCaptureState of the microphone device. If #WebKitSettings:enable-media-stream
         is false, this method will return [webkit.types.MediaCaptureState.None].
   */
   webkit.types.MediaCaptureState getMicrophoneCaptureState() nothrow
@@ -1081,7 +1138,7 @@ class WebView : webkit.web_view_base.WebViewBase
   }
 
   /**
-      Get the #WebKitNetworkSession associated to web_view.
+      Get the #WebKitNetworkSession associated with web_view.
       Returns: a #WebKitNetworkSession
   */
   webkit.network_session.NetworkSession getNetworkSession() nothrow
@@ -1089,6 +1146,23 @@ class WebView : webkit.web_view_base.WebViewBase
     WebKitNetworkSession* _cretval;
     _cretval = webkit_web_view_get_network_session(cast(WebKitWebView*)this._cPtr);
     auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.network_session.NetworkSession)(cast(WebKitNetworkSession*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the page icons for the content loaded in the web view.
+      
+      Gets the page icons associated with the content currently loaded in the
+      web_view, if any, as a [webkit.image_list.ImageList]. Changes to the page icons
+      can be observed by connecting to the `notify::page-icons` signal.
+      Returns: a list of icons, or null if there
+           are no icons for the content loaded in web_view.
+  */
+  webkit.image_list.ImageList getPageIcons() nothrow
+  {
+    WebKitImageList* _cretval;
+    _cretval = webkit_web_view_get_page_icons(cast(WebKitWebView*)this._cPtr);
+    auto _retval = _cretval ? new webkit.image_list.ImageList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -1130,9 +1204,9 @@ class WebView : webkit.web_view_base.WebViewBase
       the desired preferences, and then replace the existing web_view
       settings with [webkit.web_view.WebView.setSettings] or get the existing
       web_view settings and update it directly. #WebKitSettings objects
-      can be shared by multiple #WebKitWebView<!-- -->s, so modifying
+      can be shared by multiple #WebKitWebView objects, so modifying
       the settings of a #WebKitWebView would affect other
-      #WebKitWebView<!-- -->s using the same #WebKitSettings.
+      #WebKitWebView objects using the same #WebKitSettings.
       Returns: the #WebKitSettings attached to web_view
   */
   webkit.settings.Settings getSettings() nothrow
@@ -1269,50 +1343,30 @@ class WebView : webkit.web_view_base.WebViewBase
       The active URI might change during
       a load operation:
       
-      <orderedlist>
-      <listitem><para>
-        When nothing has been loaded yet on web_view the active URI is null.
-      </para></listitem>
-      <listitem><para>
-        When a new load operation starts the active URI is the requested URI:
-        <itemizedlist>
-        <listitem><para>
-          If the load operation was started by [webkit.web_view.WebView.loadUri],
-          the requested URI is the given one.
-        </para></listitem>
-        <listitem><para>
-          If the load operation was started by [webkit.web_view.WebView.loadHtml],
-          the requested URI is "about:blank".
-        </para></listitem>
-        <listitem><para>
-          If the load operation was started by [webkit.web_view.WebView.loadAlternateHtml],
-          the requested URI is content URI provided.
-        </para></listitem>
-        <listitem><para>
-          If the load operation was started by [webkit.web_view.WebView.goBack] or
-          [webkit.web_view.WebView.goForward], the requested URI is the original URI
-          of the previous/next item in the #WebKitBackForwardList of web_view.
-        </para></listitem>
-        <listitem><para>
-          If the load operation was started by
-          [webkit.web_view.WebView.goToBackForwardListItem], the requested URI
-          is the opriginal URI of the given #WebKitBackForwardListItem.
-        </para></listitem>
-        </itemizedlist>
-      </para></listitem>
-      <listitem><para>
-        If there is a server redirection during the load operation,
-        the active URI is the redirected URI. When the signal
-        #WebKitWebView::load-changed is emitted with [webkit.types.LoadEvent.Redirected]
-        event, the active URI is already updated to the redirected URI.
-      </para></listitem>
-      <listitem><para>
-        When the signal #WebKitWebView::load-changed is emitted
-        with [webkit.types.LoadEvent.Committed] event, the active URI is the final
-        one and it will not change unless a new load operation is started
-        or a navigation action within the same page is performed.
-      </para></listitem>
-      </orderedlist>
+      1. When nothing has been loaded yet on web_view the active URI is null.
+      2. When a new load operation starts the active URI is the requested URI:
+      
+         - If the load operation was started by [webkit.web_view.WebView.loadUri],
+           the requested URI is the given one.
+         - If the load operation was started by [webkit.web_view.WebView.loadHtml],
+           the requested URI is "about:blank".
+         - If the load operation was started by [webkit.web_view.WebView.loadAlternateHtml],
+           the requested URI is content URI provided.
+         - If the load operation was started by [webkit.web_view.WebView.goBack] or
+           [webkit.web_view.WebView.goForward], the requested URI is the original URI
+           of the previous/next item in the #WebKitBackForwardList of web_view.
+         - If the load operation was started by
+           [webkit.web_view.WebView.goToBackForwardListItem], the requested URI
+           is the original URI of the given #WebKitBackForwardListItem.
+      
+      3. If there is a server redirection during the load operation,
+         the active URI is the redirected URI. When the signal
+         #WebKitWebView::load-changed is emitted with [webkit.types.LoadEvent.Redirected]
+         event, the active URI is already updated to the redirected URI.
+      4. When the signal #WebKitWebView::load-changed is emitted
+         with [webkit.types.LoadEvent.Committed] event, the active URI is the final
+         one and it will not change unless a new load operation is started
+         or a navigation action within the same page is performed.
       
       You can monitor the active URI by connecting to the notify::uri
       signal of web_view.
@@ -1328,7 +1382,7 @@ class WebView : webkit.web_view_base.WebViewBase
   }
 
   /**
-      Gets the user content manager associated to web_view.
+      Gets the user content manager associated with web_view.
       Returns: the #WebKitUserContentManager associated with the view
   */
   webkit.user_content_manager.UserContentManager getUserContentManager() nothrow
@@ -1386,7 +1440,7 @@ class WebView : webkit.web_view_base.WebViewBase
   }
 
   /**
-      Set the zoom level of web_view.
+      Get the zoom level of web_view.
       
       Get the zoom level of web_view, i.e. the factor by which the
       view contents are scaled with respect to their original size.
@@ -1439,7 +1493,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Get whether a #WebKitWebView was created with #WebKitWebView:is-controlled-by-automation
       property enabled.
       
-      Only #WebKitWebView<!-- -->s controlled by automation can be used in an
+      Only #WebKitWebView objects controlled by automation can be used in an
       automation session.
       Returns: true if web_view is controlled by automation, or false otherwise.
   */
@@ -1486,7 +1540,7 @@ class WebView : webkit.web_view_base.WebViewBase
       
       You can monitor when a #WebKitWebView is loading a page by connecting to
       notify::is-loading signal of web_view. This is useful when you are
-      interesting in knowing when the view is loading something but not in the
+      interested in knowing when the view is loading something but not in the
       details about the status of the load operation, for example to start a spinner
       when the view is loading a page and stop it when it finishes.
       Returns: true if web_view is loading a page or false otherwise.
@@ -1631,7 +1685,7 @@ class WebView : webkit.web_view_base.WebViewBase
       #WebKitWebView::load-changed signal.
   
       Params:
-        uri = an URI string
+        uri = a URI string
   */
   void loadUri(string uri) nothrow
   {
@@ -1672,7 +1726,7 @@ class WebView : webkit.web_view_base.WebViewBase
   /**
       Asynchronously save the current web page.
       
-      Asynchronously save the current web page associated to the
+      Asynchronously save the current web page associated with the
       #WebKitWebView into a self-contained format using the mode
       specified in save_mode.
       
@@ -1729,7 +1783,7 @@ class WebView : webkit.web_view_base.WebViewBase
   /**
       Asynchronously save the current web page.
       
-      Asynchronously save the current web page associated to the
+      Asynchronously save the current web page associated with the
       #WebKitWebView into a self-contained format using the mode
       specified in save_mode and writing it to file.
       
@@ -1793,7 +1847,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Params:
         message = a #WebKitUserMessage
         cancellable = a #GCancellable or null to ignore
-        callback = (nullable): A #GAsyncReadyCallback to call when the request is satisfied or null
+        callback = A #GAsyncReadyCallback to call when the request is satisfied or null
   */
   void sendMessageToPage(webkit.user_message.UserMessage message, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null) nothrow
   {
@@ -1854,7 +1908,7 @@ class WebView : webkit.web_view_base.WebViewBase
   /**
       Set the camera capture state of a #WebKitWebView.
       
-      If #WebKitSettings:enable-mediastream is false, this method will have no visible effect. Once the
+      If #WebKitSettings:enable-media-stream is false, this method will have no visible effect. Once the
       state of the device has been set to [webkit.types.MediaCaptureState.None] it cannot be changed
       anymore. The page can however request capture again using the mediaDevices API.
   
@@ -1915,7 +1969,7 @@ class WebView : webkit.web_view_base.WebViewBase
   /**
       Set the display capture state of a #WebKitWebView.
       
-      If #WebKitSettings:enable-mediastream is false, this method will have no visible effect. Once the
+      If #WebKitSettings:enable-media-stream is false, this method will have no visible effect. Once the
       state of the device has been set to [webkit.types.MediaCaptureState.None] it cannot be changed
       anymore. The page can however request capture again using the mediaDevices API.
   
@@ -1935,7 +1989,7 @@ class WebView : webkit.web_view_base.WebViewBase
       CONTENTEDITABLE attribute has been set on the element or one of its parent
       elements. By default a #WebKitWebView is not editable.
       
-      Normally, a HTML document is not editable unless the elements within the
+      Normally, an HTML document is not editable unless the elements within the
       document are editable. This function provides a way to make the contents
       of a #WebKitWebView editable without altering the document or DOM structure.
   
@@ -1973,9 +2027,26 @@ class WebView : webkit.web_view_base.WebViewBase
   }
 
   /**
+      Set the magnification factor of web_view.
+      
+      The magnification factor represents the visual scaling of the page (similar
+      to pinch-to-zoom). This is independent of the layout zoom level (which is
+      set with [webkit.web_view.WebView.setZoomLevel]). Setting the magnification factor
+      scales the rendered page visually around the center of the view without
+      affecting page layout or text wrapping.
+  
+      Params:
+        magnification = the magnification factor
+  */
+  void setMagnification(double magnification) nothrow
+  {
+    webkit_web_view_set_magnification(cast(WebKitWebView*)this._cPtr, magnification);
+  }
+
+  /**
       Set the microphone capture state of a #WebKitWebView.
       
-      If #WebKitSettings:enable-mediastream is false, this method will have no visible effect. Once the
+      If #WebKitSettings:enable-media-stream is false, this method will have no visible effect. Once the
       state of the device has been set to [webkit.types.MediaCaptureState.None] it cannot be changed
       anymore. The page can however request capture again using the mediaDevices API.
   
@@ -1994,7 +2065,7 @@ class WebView : webkit.web_view_base.WebViewBase
       existing #WebKitSettings of web_view will be replaced by
       settings. New settings are applied immediately on web_view.
       The same #WebKitSettings object can be shared
-      by multiple #WebKitWebView<!-- -->s.
+      by multiple #WebKitWebView objects.
   
       Params:
         settings = a #WebKitSettings
@@ -2032,7 +2103,7 @@ class WebView : webkit.web_view_base.WebViewBase
   }
 
   /**
-      Terminates the web process associated to web_view.
+      Terminates the web process associated with web_view.
       
       When the web process gets terminated
       using this method, the #WebKitWebView::web-process-terminated signal is emitted with
@@ -2126,7 +2197,7 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `Close` signal.
   
       Emitted when closing a #WebKitWebView is requested. This occurs when a
-        call is made from JavaScript's <function>window.close</function> function or
+        call is made from JavaScript's `window.close` function or
         after trying to close the web_view with [webkit.web_view.WebView.tryClose].
         It is the owner's responsibility to handle this signal to hide or
         destroy the #WebKitWebView, if necessary.
@@ -2176,33 +2247,24 @@ class WebView : webkit.web_view_base.WebViewBase
       Emitted when a context menu is about to be displayed to give the application
         a chance to customize the proposed menu, prevent the menu from being displayed,
         or build its own context menu.
-        <itemizedlist>
-        <listitem><para>
-         To customize the proposed menu you can use [webkitwebprocessextension.context_menu.ContextMenu.prepend],
+        
+        - To customize the proposed menu you can use [webkitwebprocessextension.context_menu.ContextMenu.prepend],
          [webkitwebprocessextension.context_menu.ContextMenu.append] or [webkitwebprocessextension.context_menu.ContextMenu.insert] to add new
-         #WebKitContextMenuItem<!-- -->s to context_menu, [webkitwebprocessextension.context_menu.ContextMenu.moveItem]
+         #WebKitContextMenuItem objects to context_menu, [webkitwebprocessextension.context_menu.ContextMenu.moveItem]
          to reorder existing items, or [webkitwebprocessextension.context_menu.ContextMenu.remove] to remove an
          existing item. The signal handler should return false, and the menu represented
          by context_menu will be shown.
-        </para></listitem>
-        <listitem><para>
-         To prevent the menu from being displayed you can just connect to this signal
+        - To prevent the menu from being displayed you can just connect to this signal
          and return true so that the proposed menu will not be shown.
-        </para></listitem>
-        <listitem><para>
-         To build your own menu, you can remove all items from the proposed menu with
+        - To build your own menu, you can remove all items from the proposed menu with
          [webkitwebprocessextension.context_menu.ContextMenu.removeAll], add your own items and return false so
          that the menu will be shown. You can also ignore the proposed #WebKitContextMenu,
-         build your own #GtkMenu and return true to prevent the proposed menu from being shown.
-        </para></listitem>
-        <listitem><para>
-         If you just want the default menu to be shown always, simply don't connect to this
-         signal because showing the proposed context menu is the default behaviour.
-        </para></listitem>
-        </itemizedlist>
+         build your own #GtkPopoverMenu and return true to prevent the proposed menu from being shown.
+        - If you just want the default menu to be shown always, simply don't connect to this
+         signal because showing the proposed context menu is the default behavior.
         
         If the signal handler returns false the context menu represented by context_menu
-        will be shown, if it return true the context menu will not be shown.
+        will be shown, if it returns true the context menu will not be shown.
         
         The proposed #WebKitContextMenu passed in context_menu argument is only valid
         during the signal emission.
@@ -2382,8 +2444,8 @@ class WebView : webkit.web_view_base.WebViewBase
   
       This signal is emitted when WebKit is requesting the client to decide a policy
         decision, such as whether to navigate to a page, open a new window or whether or
-        not to download a resource. The #WebKitNavigationPolicyDecision passed in the
-        decision argument is a generic type, but should be casted to a more
+        not to download a resource. The #WebKitPolicyDecision passed in the
+        decision argument is a generic type, but should be cast to a more
         specific type when making the decision. For example:
         
         ```c
@@ -2420,7 +2482,7 @@ class WebView : webkit.web_view_base.WebViewBase
         If the last reference is removed on a #WebKitPolicyDecision and no decision has been
         made explicitly, [webkit.policy_decision.PolicyDecision.use] will be the default policy decision. The
         default signal handler will simply call [webkit.policy_decision.PolicyDecision.use]. Only the first
-        policy decision chosen for a given #WebKitPolicyDecision will have any affect.
+        policy decision chosen for a given #WebKitPolicyDecision will have any effect.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -2482,10 +2544,10 @@ class WebView : webkit.web_view_base.WebViewBase
       Connect to `EnterFullscreen` signal.
   
       Emitted when JavaScript code calls
-        <function>element.webkitRequestFullScreen</function>. If the
+        `element.webkitRequestFullScreen`. If the
         signal is not handled the #WebKitWebView will proceed to full screen
         its top level window. This signal can be used by client code to
-        request permission to the user prior doing the full screen
+        request permission to the user prior to doing the full screen
         transition and eventually prepare the top-level window
         (e.g. hide some widgets that would otherwise be part of the
         full screen window).
@@ -2954,7 +3016,7 @@ class WebView : webkit.web_view_base.WebViewBase
         operations.
         
         A possible way to use this signal could be through a dialog
-        allowing the user decide what to do with the request:
+        allowing the user to decide what to do with the request:
         
         ```c
         static gboolean permission_request_cb (WebKitWebView *web_view,
@@ -3117,7 +3179,7 @@ class WebView : webkit.web_view_base.WebViewBase
         
         You can handle the query asynchronously by calling [webkit.permission_state_query.PermissionStateQuery.ref_] on
         query and returning true. If the last reference of query is removed and the query has not
-        been handled, the query result will be set to `WEBKIT_QUERY_PERMISSION_PROMPT`.
+        been handled, the query result will be set to [webkit.types.PermissionState.Prompt].
   
       Params:
         callback = signal callback delegate or function to connect
@@ -3281,7 +3343,7 @@ class WebView : webkit.web_view_base.WebViewBase
   
       Emitted after #WebKitWebView::ready-to-show on the newly
         created #WebKitWebView when JavaScript code calls
-        <function>window.showModalDialog</function>. The purpose of
+        `window.showModalDialog`. The purpose of
         this signal is to allow the client application to prepare the
         new view to behave as modal. Once the signal is emitted a new
         main loop will be run to block user interaction in the parent
@@ -3461,30 +3523,21 @@ class WebView : webkit.web_view_base.WebViewBase
   /**
       Connect to `ScriptDialog` signal.
   
-      Emitted when JavaScript code calls <function>window.alert</function>,
-        <function>window.confirm</function> or <function>window.prompt</function>,
-        or when <function>onbeforeunload</function> event is fired.
+      Emitted when JavaScript code calls `window.alert`,
+        `window.confirm` or `window.prompt`,
+        or when `onbeforeunload` event is fired.
         The dialog parameter should be used to build the dialog.
         If the signal is not handled a different dialog will be built and shown depending
         on the dialog type:
-        <itemizedlist>
-        <listitem><para>
-         [webkit.types.ScriptDialogType.Alert]: message dialog with a single Close button.
-        </para></listitem>
-        <listitem><para>
-         [webkit.types.ScriptDialogType.Confirm]: message dialog with OK and Cancel buttons.
-        </para></listitem>
-        <listitem><para>
-         [webkit.types.ScriptDialogType.Prompt]: message dialog with OK and Cancel buttons and
-         a text entry with the default text.
-        </para></listitem>
-        <listitem><para>
-         [webkit.types.ScriptDialogType.BeforeUnloadConfirm]: message dialog with Stay and Leave buttons.
-        </para></listitem>
-        </itemizedlist>
+        
+        - [webkit.types.ScriptDialogType.Alert]: message dialog with a single Close button.
+        - [webkit.types.ScriptDialogType.Confirm]: message dialog with OK and Cancel buttons.
+        - [webkit.types.ScriptDialogType.Prompt]: message dialog with OK and Cancel buttons and
+          a text entry with the default text.
+        - [webkit.types.ScriptDialogType.BeforeUnloadConfirm]: message dialog with Stay and Leave buttons.
         
         It is possible to handle the script dialog request asynchronously, by simply
-        caling [webkit.script_dialog.ScriptDialog.ref_] on the dialog argument and calling
+        calling [webkit.script_dialog.ScriptDialog.ref_] on the dialog argument and calling
         [webkit.script_dialog.ScriptDialog.close] when done.
         If the last reference is removed on a #WebKitScriptDialog and the dialog has not been
         closed, [webkit.script_dialog.ScriptDialog.close] will be called.
@@ -3608,7 +3661,7 @@ class WebView : webkit.web_view_base.WebViewBase
         menu.
         To handle this signal asynchronously you should keep a ref of the menu.
         
-        The default signal handler will pop up a #GtkMenu.
+        The default signal handler will pop up a #GtkPopover.
   
       Params:
         callback = signal callback delegate or function to connect
@@ -3798,7 +3851,7 @@ class WebView : webkit.web_view_base.WebViewBase
   
           `void callback(webkit.types.WebProcessTerminationReason reason, webkit.web_view.WebView webView)`
   
-          `reason` the a #WebKitWebProcessTerminationReason (optional)
+          `reason` a #WebKitWebProcessTerminationReason (optional)
   
           `webView` the instance the signal is connected to (optional)
   
@@ -3870,7 +3923,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
           [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
           
           If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
-          can still re-request the permission to the user. Permission desision caching is left to the
+          can still re-request the permission to the user. Permission decision caching is left to the
           application.
       Returns: Builder instance for fluent chaining
   */
@@ -3903,7 +3956,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
       Set `displayCaptureState` property.
       Params:
         propval = Capture state of the display device. Whenever the user grants a media-request sent by the web
-          page, requesting screencasting capabilities (`navigator.mediaDevices.getDisplayMedia() this
+          page, requesting screencasting capabilities (`navigator.mediaDevices.getDisplayMedia()`) this
           property will be set to [webkit.types.MediaCaptureState.Active].
           
           The application can monitor this property and provide a visual indicator allowing to
@@ -3911,7 +3964,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
           [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
           
           If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
-          can still re-request the permission to the user. Permission desision caching is left to the
+          can still re-request the permission to the user. Permission decision caching is left to the
           application.
       Returns: Builder instance for fluent chaining
   */
@@ -3945,6 +3998,22 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
   }
 
   /**
+      Set `magnification` property.
+      Params:
+        propval = The magnification factor of the #WebKitWebView content.
+          
+          The magnification factor represents the visual scaling of the page (similar
+          to pinch-to-zoom). This is independent of the layout zoom level. Setting
+          the magnification factor scales the rendered page visually without affecting
+          page layout or text wrapping.
+      Returns: Builder instance for fluent chaining
+  */
+  T magnification(double propval) nothrow
+  {
+    return setProperty("magnification", propval);
+  }
+
+  /**
       Set `microphoneCaptureState` property.
       Params:
         propval = Capture state of the microphone device. Whenever the user grants a media-request sent by the web
@@ -3956,7 +4025,7 @@ class WebViewGidBuilderImpl(T) : webkit.web_view_base.WebViewBaseGidBuilderImpl!
           [webkit.types.MediaCaptureState.None] or [webkit.types.MediaCaptureState.Muted].
           
           If the capture state of the device is set to [webkit.types.MediaCaptureState.None] the web-page
-          can still re-request the permission to the user. Permission desision caching is left to the
+          can still re-request the permission to the user. Permission decision caching is left to the
           application.
       Returns: Builder instance for fluent chaining
   */

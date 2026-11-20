@@ -10,7 +10,7 @@ import webkit.c.types;
 import webkit.types;
 
 /**
-    Range of text in an preedit string to be shown underlined.
+    Range of text in a preedit string to be shown underlined.
 */
 class InputMethodUnderline : gobject.boxed.BoxedWrap!(webkit_input_method_underline_get_type)
 {

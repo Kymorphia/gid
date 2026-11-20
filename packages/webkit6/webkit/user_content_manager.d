@@ -142,7 +142,7 @@ class UserContentManager : gobject.object.ObjectWrap
       
       ```c
       WebKitWebView *view = webkit_web_view_new ();
-      WebKitUserContentManager *manager = webkit_web_view_get_user_content_manager ();
+      WebKitUserContentManager *manager = webkit_web_view_get_user_content_manager (view);
       g_signal_connect (manager, "script-message-received::foobar",
                         G_CALLBACK (handle_script_message), NULL);
       webkit_user_content_manager_register_script_message_handler (manager, "foobar", "world");
@@ -229,8 +229,6 @@ class UserContentManager : gobject.object.ObjectWrap
 
   /**
       Removes a filter from the given #WebKitUserContentManager.
-      
-      Since 2.24
   
       Params:
         filter = A #WebKitUserContentFilter
@@ -308,8 +306,8 @@ class UserContentManager : gobject.object.ObjectWrap
       Connect to `ScriptMessageReceived` signal.
   
       This signal is emitted when JavaScript in a web view calls
-        <code>window.webkit.messageHandlers.<name>.postMessage()</code>, after registering
-        <code><name></code> using
+        `window.webkit.messageHandlers.<name>.postMessage()`, after registering
+        `<name>` using
         [webkit.user_content_manager.UserContentManager.registerScriptMessageHandler]
   
       Params:
@@ -362,8 +360,8 @@ class UserContentManager : gobject.object.ObjectWrap
       Connect to `ScriptMessageWithReplyReceived` signal.
   
       This signal is emitted when JavaScript in a web view calls
-        <code>window.webkit.messageHandlers.<name>.postMessage()</code>, after registering
-        <code><name></code> using
+        `window.webkit.messageHandlers.<name>.postMessage()`, after registering
+        `<name>` using
         [webkit.user_content_manager.UserContentManager.registerScriptMessageHandlerWithReply]
         
         The given reply can be used to send a return value with

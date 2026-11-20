@@ -2204,7 +2204,7 @@ more information on image tags in GStreamer.</doc>
               c:identifier="gst_tag_list_from_exif_buffer">
       <doc xml:space="preserve"
            filename="gst-libs/gst/tag/gstexiftag.c"
-           line="1999">Parses the IFD and IFD tags data contained in the buffer and puts it
+           line="1988">Parses the IFD and IFD tags data contained in the buffer and puts it
 on a taglist. The base_offset is used to subtract from the offset in
 the tag entries and be able to get the offset relative to the buffer
 start</doc>
@@ -2212,26 +2212,26 @@ start</doc>
       <return-value transfer-ownership="full">
         <doc xml:space="preserve"
              filename="gst-libs/gst/tag/gstexiftag.c"
-             line="2010">The parsed taglist</doc>
+             line="1999">The parsed taglist</doc>
         <type name="Gst.TagList" c:type="GstTagList*"/>
       </return-value>
       <parameters>
         <parameter name="buffer" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstexiftag.c"
-               line="2001">The exif buffer</doc>
+               line="1990">The exif buffer</doc>
           <type name="Gst.Buffer" c:type="GstBuffer*"/>
         </parameter>
         <parameter name="byte_order" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstexiftag.c"
-               line="2002">byte order of the data</doc>
+               line="1991">byte order of the data</doc>
           <type name="gint" c:type="gint"/>
         </parameter>
         <parameter name="base_offset" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstexiftag.c"
-               line="2003">Offset from the tiff header to this buffer</doc>
+               line="1992">Offset from the tiff header to this buffer</doc>
           <type name="guint32" c:type="guint32"/>
         </parameter>
       </parameters>
@@ -2240,19 +2240,19 @@ start</doc>
               c:identifier="gst_tag_list_from_exif_buffer_with_tiff_header">
       <doc xml:space="preserve"
            filename="gst-libs/gst/tag/gstexiftag.c"
-           line="2035">Parses the exif tags starting with a tiff header structure.</doc>
+           line="2024">Parses the exif tags starting with a tiff header structure.</doc>
       <source-position filename="gst-libs/gst/tag/tag.h" line="601"/>
       <return-value transfer-ownership="full">
         <doc xml:space="preserve"
              filename="gst-libs/gst/tag/gstexiftag.c"
-             line="2041">The taglist</doc>
+             line="2030">The taglist</doc>
         <type name="Gst.TagList" c:type="GstTagList*"/>
       </return-value>
       <parameters>
         <parameter name="buffer" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstexiftag.c"
-               line="2037">The exif buffer</doc>
+               line="2026">The exif buffer</doc>
           <type name="Gst.Buffer" c:type="GstBuffer*"/>
         </parameter>
       </parameters>
@@ -2261,13 +2261,13 @@ start</doc>
               c:identifier="gst_tag_list_from_id3v2_tag">
       <doc xml:space="preserve"
            filename="gst-libs/gst/tag/id3v2.c"
-           line="179">Creates a new tag list that contains the information parsed out of a
+           line="194">Creates a new tag list that contains the information parsed out of a
 ID3 tag.</doc>
       <source-position filename="gst-libs/gst/tag/tag.h" line="567"/>
       <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve"
              filename="gst-libs/gst/tag/id3v2.c"
-             line="186">A new #GstTagList with all tags that could be extracted from the
+             line="201">A new #GstTagList with all tags that could be extracted from the
          given vorbiscomment buffer or NULL on error.</doc>
         <type name="Gst.TagList" c:type="GstTagList*"/>
       </return-value>
@@ -2275,7 +2275,7 @@ ID3 tag.</doc>
         <parameter name="buffer" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/id3v2.c"
-               line="181">buffer to convert</doc>
+               line="196">buffer to convert</doc>
           <type name="Gst.Buffer" c:type="GstBuffer*"/>
         </parameter>
       </parameters>
@@ -2284,13 +2284,13 @@ ID3 tag.</doc>
               c:identifier="gst_tag_list_from_vorbiscomment">
       <doc xml:space="preserve"
            filename="gst-libs/gst/tag/gstvorbistag.c"
-           line="426">Creates a new tag list that contains the information parsed out of a
+           line="441">Creates a new tag list that contains the information parsed out of a
 vorbiscomment packet.</doc>
       <source-position filename="gst-libs/gst/tag/tag.h" line="517"/>
       <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve"
              filename="gst-libs/gst/tag/gstvorbistag.c"
-             line="438">A new #GstTagList with all tags that could be extracted from the
+             line="453">A new #GstTagList with all tags that could be extracted from the
          given vorbiscomment buffer or NULL on error.</doc>
         <type name="Gst.TagList" c:type="GstTagList*"/>
       </return-value>
@@ -2298,7 +2298,7 @@ vorbiscomment packet.</doc>
         <parameter name="data" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstvorbistag.c"
-               line="428">data to convert</doc>
+               line="443">data to convert</doc>
           <array length="1" zero-terminated="0" c:type="const guint8*">
             <type name="guint8" c:type="guint8"/>
           </array>
@@ -2306,13 +2306,13 @@ vorbiscomment packet.</doc>
         <parameter name="size" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstvorbistag.c"
-               line="429">size of @data</doc>
+               line="444">size of @data</doc>
           <type name="gsize" c:type="gsize"/>
         </parameter>
         <parameter name="id_data" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstvorbistag.c"
-               line="430">identification data at start of stream</doc>
+               line="445">identification data at start of stream</doc>
           <array length="3" zero-terminated="0" c:type="const guint8*">
             <type name="guint8" c:type="guint8"/>
           </array>
@@ -2320,7 +2320,7 @@ vorbiscomment packet.</doc>
         <parameter name="id_data_length" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstvorbistag.c"
-               line="431">length of identification data</doc>
+               line="446">length of identification data</doc>
           <type name="guint" c:type="const guint"/>
         </parameter>
         <parameter name="vendor_string"
@@ -2331,7 +2331,7 @@ vorbiscomment packet.</doc>
                    allow-none="1">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstvorbistag.c"
-               line="432">pointer to a string that should take the
+               line="447">pointer to a string that should take the
     vendor string of this vorbis comment or NULL if you don't need it.</doc>
           <type name="utf8" c:type="gchar**"/>
         </parameter>
@@ -2341,13 +2341,13 @@ vorbiscomment packet.</doc>
               c:identifier="gst_tag_list_from_vorbiscomment_buffer">
       <doc xml:space="preserve"
            filename="gst-libs/gst/tag/gstvorbistag.c"
-           line="523">Creates a new tag list that contains the information parsed out of a
+           line="539">Creates a new tag list that contains the information parsed out of a
 vorbiscomment packet.</doc>
       <source-position filename="gst-libs/gst/tag/tag.h" line="524"/>
       <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve"
              filename="gst-libs/gst/tag/gstvorbistag.c"
-             line="534">A new #GstTagList with all tags that could be extracted from the
+             line="550">A new #GstTagList with all tags that could be extracted from the
          given vorbiscomment buffer or NULL on error.</doc>
         <type name="Gst.TagList" c:type="GstTagList*"/>
       </return-value>
@@ -2355,13 +2355,13 @@ vorbiscomment packet.</doc>
         <parameter name="buffer" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstvorbistag.c"
-               line="525">buffer to convert</doc>
+               line="541">buffer to convert</doc>
           <type name="Gst.Buffer" c:type="GstBuffer*"/>
         </parameter>
         <parameter name="id_data" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstvorbistag.c"
-               line="526">identification data at start of stream</doc>
+               line="542">identification data at start of stream</doc>
           <array length="2" zero-terminated="0" c:type="const guint8*">
             <type name="guint8" c:type="guint8"/>
           </array>
@@ -2369,7 +2369,7 @@ vorbiscomment packet.</doc>
         <parameter name="id_data_length" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstvorbistag.c"
-               line="527">length of identification data</doc>
+               line="543">length of identification data</doc>
           <type name="guint" c:type="const guint"/>
         </parameter>
         <parameter name="vendor_string"
@@ -2380,7 +2380,7 @@ vorbiscomment packet.</doc>
                    allow-none="1">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstvorbistag.c"
-               line="528">pointer to a string that should take the
+               line="544">pointer to a string that should take the
     vendor string of this vorbis comment or NULL if you don't need it.</doc>
           <type name="utf8" c:type="gchar**"/>
         </parameter>
@@ -2435,32 +2435,32 @@ parsed data.</doc>
               c:identifier="gst_tag_list_to_exif_buffer">
       <doc xml:space="preserve"
            filename="gst-libs/gst/tag/gstexiftag.c"
-           line="1916">Formats the tags in taglist on exif format. The resulting buffer contains
+           line="1905">Formats the tags in taglist on exif format. The resulting buffer contains
 the tags IFD and is followed by the data pointed by the tag entries.</doc>
       <source-position filename="gst-libs/gst/tag/tag.h" line="588"/>
       <return-value transfer-ownership="full">
         <doc xml:space="preserve"
              filename="gst-libs/gst/tag/gstexiftag.c"
-             line="1925">A GstBuffer containing the tag entries followed by the tag data</doc>
+             line="1914">A GstBuffer containing the tag entries followed by the tag data</doc>
         <type name="Gst.Buffer" c:type="GstBuffer*"/>
       </return-value>
       <parameters>
         <parameter name="taglist" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstexiftag.c"
-               line="1918">The taglist</doc>
+               line="1907">The taglist</doc>
           <type name="Gst.TagList" c:type="const GstTagList*"/>
         </parameter>
         <parameter name="byte_order" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstexiftag.c"
-               line="1919">byte order used in writing (G_LITTLE_ENDIAN or G_BIG_ENDIAN)</doc>
+               line="1908">byte order used in writing (G_LITTLE_ENDIAN or G_BIG_ENDIAN)</doc>
           <type name="gint" c:type="gint"/>
         </parameter>
         <parameter name="base_offset" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstexiftag.c"
-               line="1920">Offset from the tiff header first byte</doc>
+               line="1909">Offset from the tiff header first byte</doc>
           <type name="guint32" c:type="guint32"/>
         </parameter>
       </parameters>
@@ -2469,20 +2469,20 @@ the tags IFD and is followed by the data pointed by the tag entries.</doc>
               c:identifier="gst_tag_list_to_exif_buffer_with_tiff_header">
       <doc xml:space="preserve"
            filename="gst-libs/gst/tag/gstexiftag.c"
-           line="1934">Formats the tags in taglist into exif structure, a tiff header
+           line="1923">Formats the tags in taglist into exif structure, a tiff header
 is put in the beginning of the buffer.</doc>
       <source-position filename="gst-libs/gst/tag/tag.h" line="593"/>
       <return-value transfer-ownership="full">
         <doc xml:space="preserve"
              filename="gst-libs/gst/tag/gstexiftag.c"
-             line="1941">A GstBuffer containing the data</doc>
+             line="1930">A GstBuffer containing the data</doc>
         <type name="Gst.Buffer" c:type="GstBuffer*"/>
       </return-value>
       <parameters>
         <parameter name="taglist" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstexiftag.c"
-               line="1936">The taglist</doc>
+               line="1925">The taglist</doc>
           <type name="Gst.TagList" c:type="const GstTagList*"/>
         </parameter>
       </parameters>
@@ -2491,12 +2491,12 @@ is put in the beginning of the buffer.</doc>
               c:identifier="gst_tag_list_to_vorbiscomment_buffer">
       <doc xml:space="preserve"
            filename="gst-libs/gst/tag/gstvorbistag.c"
-           line="804">Creates a new vorbiscomment buffer from a tag list.</doc>
+           line="820">Creates a new vorbiscomment buffer from a tag list.</doc>
       <source-position filename="gst-libs/gst/tag/tag.h" line="530"/>
       <return-value transfer-ownership="full">
         <doc xml:space="preserve"
              filename="gst-libs/gst/tag/gstvorbistag.c"
-             line="813">A new #GstBuffer containing a vorbiscomment buffer with all tags
+             line="829">A new #GstBuffer containing a vorbiscomment buffer with all tags
          that could be converted from the given tag list.</doc>
         <type name="Gst.Buffer" c:type="GstBuffer*"/>
       </return-value>
@@ -2504,13 +2504,13 @@ is put in the beginning of the buffer.</doc>
         <parameter name="list" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstvorbistag.c"
-               line="806">tag list to convert</doc>
+               line="822">tag list to convert</doc>
           <type name="Gst.TagList" c:type="const GstTagList*"/>
         </parameter>
         <parameter name="id_data" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstvorbistag.c"
-               line="807">identification data at start of stream</doc>
+               line="823">identification data at start of stream</doc>
           <array length="2" zero-terminated="0" c:type="const guint8*">
             <type name="guint8" c:type="guint8"/>
           </array>
@@ -2518,7 +2518,7 @@ is put in the beginning of the buffer.</doc>
         <parameter name="id_data_length" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstvorbistag.c"
-               line="808">length of identification data, may be 0 if @id_data is NULL</doc>
+               line="824">length of identification data, may be 0 if @id_data is NULL</doc>
           <type name="guint" c:type="const guint"/>
         </parameter>
         <parameter name="vendor_string"
@@ -2527,7 +2527,7 @@ is put in the beginning of the buffer.</doc>
                    allow-none="1">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstvorbistag.c"
-               line="809">string that describes the vendor string or NULL</doc>
+               line="825">string that describes the vendor string or NULL</doc>
           <type name="utf8" c:type="const gchar*"/>
         </parameter>
       </parameters>
@@ -2536,33 +2536,33 @@ is put in the beginning of the buffer.</doc>
               c:identifier="gst_tag_list_to_xmp_buffer">
       <doc xml:space="preserve"
            filename="gst-libs/gst/tag/gstxmptag.c"
-           line="1699">Formats a taglist as a xmp packet using only the selected
+           line="1703">Formats a taglist as a xmp packet using only the selected
 schemas. An empty list (%NULL) means that all schemas should
 be used</doc>
       <source-position filename="gst-libs/gst/tag/tag.h" line="578"/>
       <return-value transfer-ownership="full" nullable="1">
         <doc xml:space="preserve"
              filename="gst-libs/gst/tag/gstxmptag.c"
-             line="1710">new buffer or %NULL, unref the buffer when done</doc>
+             line="1714">new buffer or %NULL, unref the buffer when done</doc>
         <type name="Gst.Buffer" c:type="GstBuffer*"/>
       </return-value>
       <parameters>
         <parameter name="list" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstxmptag.c"
-               line="1701">tags</doc>
+               line="1705">tags</doc>
           <type name="Gst.TagList" c:type="const GstTagList*"/>
         </parameter>
         <parameter name="read_only" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstxmptag.c"
-               line="1702">does the container forbid inplace editing</doc>
+               line="1706">does the container forbid inplace editing</doc>
           <type name="gboolean" c:type="gboolean"/>
         </parameter>
         <parameter name="schemas" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstxmptag.c"
-               line="1703">
+               line="1707">
     %NULL terminated array of schemas to be used on serialization</doc>
           <array c:type="const gchar**">
             <type name="utf8" c:type="gchar*"/>
@@ -2670,13 +2670,13 @@ function before using them. Can be called multiple times.</doc>
               c:identifier="gst_tag_to_vorbis_comments">
       <doc xml:space="preserve"
            filename="gst-libs/gst/tag/gstvorbistag.c"
-           line="662">Creates a new tag list that contains the information parsed out of a
+           line="678">Creates a new tag list that contains the information parsed out of a
 vorbiscomment packet.</doc>
       <source-position filename="gst-libs/gst/tag/tag.h" line="511"/>
       <return-value transfer-ownership="full">
         <doc xml:space="preserve"
              filename="gst-libs/gst/tag/gstvorbistag.c"
-             line="670">A #GList of newly-allocated
+             line="686">A #GList of newly-allocated
     key=value strings. Free with g_list_foreach (list, (GFunc) g_free, NULL)
     plus g_list_free (list)</doc>
         <type name="GLib.List" c:type="GList*">
@@ -2687,13 +2687,13 @@ vorbiscomment packet.</doc>
         <parameter name="list" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstvorbistag.c"
-               line="664">a #GstTagList</doc>
+               line="680">a #GstTagList</doc>
           <type name="Gst.TagList" c:type="const GstTagList*"/>
         </parameter>
         <parameter name="tag" transfer-ownership="none">
           <doc xml:space="preserve"
                filename="gst-libs/gst/tag/gstvorbistag.c"
-               line="665">a GStreamer tag identifier, such as #GST_TAG_ARTIST</doc>
+               line="681">a GStreamer tag identifier, such as #GST_TAG_ARTIST</doc>
           <type name="utf8" c:type="const gchar*"/>
         </parameter>
       </parameters>

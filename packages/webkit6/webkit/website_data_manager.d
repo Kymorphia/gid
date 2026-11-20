@@ -22,7 +22,7 @@ import webkit.website_data;
     
     You can use WebKitWebsiteDataManager to configure the local directories
     where website data will be stored. Use #WebKitWebsiteDataManager:base-data-directory
-    and #WebKitWebsiteDataManager:base-cache-directory set a common base directory for all
+    and #WebKitWebsiteDataManager:base-cache-directory to set a common base directory for all
     website data and caches.
     
     A WebKitWebsiteDataManager can be ephemeral, in which case all the directory configuration
@@ -189,7 +189,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
       Params:
         result = a #GAsyncResult
       Returns: a #GList of #WebKitWebsiteData. You must free the #GList with
-           [glib.list.List.free] and unref the #WebKitWebsiteData<!-- -->s with [webkit.website_data.WebsiteData.unref] when you're done with them.
+           [glib.list.List.free] and unref the #WebKitWebsiteData objects with [webkit.website_data.WebsiteData.unref] when you're done with them.
       Throws: [ErrorWrap]
   */
   webkit.website_data.WebsiteData[] fetchFinish(gio.async_result.AsyncResult result)
@@ -292,7 +292,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
       Params:
         result = a #GAsyncResult
       Returns: a #GList of #WebKitITPThirdParty.
-           You must free the #GList with [glib.list.List.free] and unref the #WebKitITPThirdParty<!-- -->s with
+           You must free the #GList with [glib.list.List.free] and unref the #WebKitITPThirdParty objects with
            [webkit.itpthird_party.ITPThirdParty.unref] when you're done with them.
       Throws: [ErrorWrap]
   */

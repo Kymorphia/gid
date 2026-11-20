@@ -87,7 +87,7 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
   /**
       Return the #WebKitURIRequest associated with the response decision.
       
-      Modifications to the returned object are <emphasis>not</emphasis> taken
+      Modifications to the returned object are *not* taken
       into account when the request is sent over the network, and is intended
       only to aid in evaluating whether a response decision should be taken or
       not. To modify requests before they are sent over the network the
@@ -116,7 +116,7 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
 
   /**
       Gets whether the request is the main frame main resource
-      Returns: true if the request is the main frame main resouce or false otherwise
+      Returns: true if the request is the main frame main resource or false otherwise
   */
   bool isMainFrameMainResource() nothrow
   {
