@@ -11,47 +11,71 @@ public import gid.gstvideo1.c.types;
 
 private immutable LIBS = ["gstgl-1.0_0"];
 
-__gshared extern(C) nothrow
-{
-  // EGLImage
-  GType function() c_gst_egl_image_get_type; ///
-  GstEGLImage* function(GstGLContext* context, void* image, GstGLFormat format, void* userData, GstEGLImageDestroyNotify userDataDestroy) c_gst_egl_image_new_wrapped; ///
-  gboolean function(GstEGLImage* image, int* fd, int* stride, size_t* offset) c_gst_egl_image_export_dmabuf; ///
-  void* function(GstEGLImage* image) c_gst_egl_image_get_image; ///
-  gboolean function(GstGLContext* context, GstVideoFormat format) c_gst_egl_image_can_emulate; ///
-  GstEGLImage* function(GstGLContext* context, int dmabuf, const(GstVideoInfo)* inInfo, int plane, size_t offset) c_gst_egl_image_from_dmabuf; ///
-  GstEGLImage* function(GstGLContext* context, int* fd, const(size_t)* offset, const(GstVideoInfo)* inInfo) c_gst_egl_image_from_dmabuf_direct; ///
-  GstEGLImage* function(GstGLContext* context, int* fd, const(size_t)* offset, const(GstVideoInfo)* inInfo, GstGLTextureTarget target) c_gst_egl_image_from_dmabuf_direct_target; ///
-  GstEGLImage* function(GstGLContext* context, uint nPlanes, int* fd, const(size_t)* offset, const(GstVideoInfoDmaDrm)* inInfoDma, GstGLTextureTarget target) c_gst_egl_image_from_dmabuf_direct_target_with_dma_drm; ///
-  GstEGLImage* function(GstGLContext* context, GstGLMemory* glMem, size_t* attribs) c_gst_egl_image_from_texture; ///
+// EGLImage
+private alias c_gst_egl_image_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_egl_image_get_typeFn c_gst_egl_image_get_type; ///
+private alias c_gst_egl_image_new_wrappedFn = extern(C) GstEGLImage* function(GstGLContext* context, void* image, GstGLFormat format, void* userData, GstEGLImageDestroyNotify userDataDestroy) nothrow;
+__gshared c_gst_egl_image_new_wrappedFn c_gst_egl_image_new_wrapped; ///
+private alias c_gst_egl_image_export_dmabufFn = extern(C) gboolean function(GstEGLImage* image, int* fd, int* stride, size_t* offset) nothrow;
+__gshared c_gst_egl_image_export_dmabufFn c_gst_egl_image_export_dmabuf; ///
+private alias c_gst_egl_image_get_imageFn = extern(C) void* function(GstEGLImage* image) nothrow;
+__gshared c_gst_egl_image_get_imageFn c_gst_egl_image_get_image; ///
+private alias c_gst_egl_image_can_emulateFn = extern(C) gboolean function(GstGLContext* context, GstVideoFormat format) nothrow;
+__gshared c_gst_egl_image_can_emulateFn c_gst_egl_image_can_emulate; ///
+private alias c_gst_egl_image_from_dmabufFn = extern(C) GstEGLImage* function(GstGLContext* context, int dmabuf, const(GstVideoInfo)* inInfo, int plane, size_t offset) nothrow;
+__gshared c_gst_egl_image_from_dmabufFn c_gst_egl_image_from_dmabuf; ///
+private alias c_gst_egl_image_from_dmabuf_directFn = extern(C) GstEGLImage* function(GstGLContext* context, int* fd, const(size_t)* offset, const(GstVideoInfo)* inInfo) nothrow;
+__gshared c_gst_egl_image_from_dmabuf_directFn c_gst_egl_image_from_dmabuf_direct; ///
+private alias c_gst_egl_image_from_dmabuf_direct_targetFn = extern(C) GstEGLImage* function(GstGLContext* context, int* fd, const(size_t)* offset, const(GstVideoInfo)* inInfo, GstGLTextureTarget target) nothrow;
+__gshared c_gst_egl_image_from_dmabuf_direct_targetFn c_gst_egl_image_from_dmabuf_direct_target; ///
+private alias c_gst_egl_image_from_dmabuf_direct_target_with_dma_drmFn = extern(C) GstEGLImage* function(GstGLContext* context, uint nPlanes, int* fd, const(size_t)* offset, const(GstVideoInfoDmaDrm)* inInfoDma, GstGLTextureTarget target) nothrow;
+__gshared c_gst_egl_image_from_dmabuf_direct_target_with_dma_drmFn c_gst_egl_image_from_dmabuf_direct_target_with_dma_drm; ///
+private alias c_gst_egl_image_from_textureFn = extern(C) GstEGLImage* function(GstGLContext* context, GstGLMemory* glMem, size_t* attribs) nothrow;
+__gshared c_gst_egl_image_from_textureFn c_gst_egl_image_from_texture; ///
 
-  // GLDisplayEGL
-  GType function() c_gst_gl_display_egl_get_type; ///
-  GstGLDisplayEGL* function() c_gst_gl_display_egl_new; ///
-  GstGLDisplayEGL* function() c_gst_gl_display_egl_new_surfaceless; ///
-  GstGLDisplayEGL* function(void* display) c_gst_gl_display_egl_new_with_egl_display; ///
-  GstGLDisplayEGL* function(GstGLDisplay* display) c_gst_gl_display_egl_from_gl_display; ///
-  void* function(GstGLDisplayType type, size_t display) c_gst_gl_display_egl_get_from_native; ///
-  void function(GstGLDisplayEGL* displayEgl, gboolean foreign) c_gst_gl_display_egl_set_foreign; ///
+// GLDisplayEGL
+private alias c_gst_gl_display_egl_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_gl_display_egl_get_typeFn c_gst_gl_display_egl_get_type; ///
+private alias c_gst_gl_display_egl_newFn = extern(C) GstGLDisplayEGL* function() nothrow;
+__gshared c_gst_gl_display_egl_newFn c_gst_gl_display_egl_new; ///
+private alias c_gst_gl_display_egl_new_surfacelessFn = extern(C) GstGLDisplayEGL* function() nothrow;
+__gshared c_gst_gl_display_egl_new_surfacelessFn c_gst_gl_display_egl_new_surfaceless; ///
+private alias c_gst_gl_display_egl_new_with_egl_displayFn = extern(C) GstGLDisplayEGL* function(void* display) nothrow;
+__gshared c_gst_gl_display_egl_new_with_egl_displayFn c_gst_gl_display_egl_new_with_egl_display; ///
+private alias c_gst_gl_display_egl_from_gl_displayFn = extern(C) GstGLDisplayEGL* function(GstGLDisplay* display) nothrow;
+__gshared c_gst_gl_display_egl_from_gl_displayFn c_gst_gl_display_egl_from_gl_display; ///
+private alias c_gst_gl_display_egl_get_from_nativeFn = extern(C) void* function(GstGLDisplayType type, size_t display) nothrow;
+__gshared c_gst_gl_display_egl_get_from_nativeFn c_gst_gl_display_egl_get_from_native; ///
+private alias c_gst_gl_display_egl_set_foreignFn = extern(C) void function(GstGLDisplayEGL* displayEgl, gboolean foreign) nothrow;
+__gshared c_gst_gl_display_egl_set_foreignFn c_gst_gl_display_egl_set_foreign; ///
 
-  // GLDisplayEGLDevice
-  GType function() c_gst_gl_display_egl_device_get_type; ///
-  GstGLDisplayEGLDevice* function(uint deviceIndex) c_gst_gl_display_egl_device_new; ///
-  GstGLDisplayEGLDevice* function(void* device) c_gst_gl_display_egl_device_new_with_egl_device; ///
+// GLDisplayEGLDevice
+private alias c_gst_gl_display_egl_device_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_gl_display_egl_device_get_typeFn c_gst_gl_display_egl_device_get_type; ///
+private alias c_gst_gl_display_egl_device_newFn = extern(C) GstGLDisplayEGLDevice* function(uint deviceIndex) nothrow;
+__gshared c_gst_gl_display_egl_device_newFn c_gst_gl_display_egl_device_new; ///
+private alias c_gst_gl_display_egl_device_new_with_egl_deviceFn = extern(C) GstGLDisplayEGLDevice* function(void* device) nothrow;
+__gshared c_gst_gl_display_egl_device_new_with_egl_deviceFn c_gst_gl_display_egl_device_new_with_egl_device; ///
 
-  // GLMemoryEGL
-  GType function() c_gst_gl_memory_egl_get_type; ///
-  void* function(GstGLMemoryEGL* mem) c_gst_gl_memory_egl_get_display; ///
-  void* function(GstGLMemoryEGL* mem) c_gst_gl_memory_egl_get_image; ///
-  void function() c_gst_gl_memory_egl_init_once; ///
+// GLMemoryEGL
+private alias c_gst_gl_memory_egl_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_gl_memory_egl_get_typeFn c_gst_gl_memory_egl_get_type; ///
+private alias c_gst_gl_memory_egl_get_displayFn = extern(C) void* function(GstGLMemoryEGL* mem) nothrow;
+__gshared c_gst_gl_memory_egl_get_displayFn c_gst_gl_memory_egl_get_display; ///
+private alias c_gst_gl_memory_egl_get_imageFn = extern(C) void* function(GstGLMemoryEGL* mem) nothrow;
+__gshared c_gst_gl_memory_egl_get_imageFn c_gst_gl_memory_egl_get_image; ///
+private alias c_gst_gl_memory_egl_init_onceFn = extern(C) void function() nothrow;
+__gshared c_gst_gl_memory_egl_init_onceFn c_gst_gl_memory_egl_init_once; ///
 
-  // GLMemoryEGLAllocator
-  GType function() c_gst_gl_memory_egl_allocator_get_type; ///
+// GLMemoryEGLAllocator
+private alias c_gst_gl_memory_egl_allocator_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_gl_memory_egl_allocator_get_typeFn c_gst_gl_memory_egl_allocator_get_type; ///
 
-  // global
-  const(char)* function(int err) c_gst_egl_get_error_string; ///
-  gboolean function(GstMemory* mem) c_gst_is_gl_memory_egl; ///
-}
+// global
+private alias c_gst_egl_get_error_stringFn = extern(C) const(char)* function(int err) nothrow;
+__gshared c_gst_egl_get_error_stringFn c_gst_egl_get_error_string; ///
+private alias c_gst_is_gl_memory_eglFn = extern(C) gboolean function(GstMemory* mem) nothrow;
+__gshared c_gst_is_gl_memory_eglFn c_gst_is_gl_memory_egl; ///
 
 // EGLImage
 

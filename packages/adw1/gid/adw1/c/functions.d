@@ -9,1595 +9,2985 @@ public import gid.gtk4.c.types;
 
 private immutable LIBS = ["adwaita-1_0"];
 
-__gshared extern(C) nothrow
-{
-  // AboutDialog
-  GType function() c_adw_about_dialog_get_type; ///
-  AdwDialog* function() c_adw_about_dialog_new; ///
-  AdwDialog* function(const(char)* resourcePath, const(char)* releaseNotesVersion) c_adw_about_dialog_new_from_appdata; ///
-  void function(AdwAboutDialog* self, const(char)* name, const(char*)* people) c_adw_about_dialog_add_acknowledgement_section; ///
-  void function(AdwAboutDialog* self, const(char)* name, const(char*)* people) c_adw_about_dialog_add_credit_section; ///
-  void function(AdwAboutDialog* self, const(char)* title, const(char)* copyright, GtkLicense licenseType, const(char)* license) c_adw_about_dialog_add_legal_section; ///
-  void function(AdwAboutDialog* self, const(char)* title, const(char)* url) c_adw_about_dialog_add_link; ///
-  void function(AdwAboutDialog* self, const(char)* appid, const(char)* name, const(char)* summary) c_adw_about_dialog_add_other_app; ///
-  const(char)* function(AdwAboutDialog* self) c_adw_about_dialog_get_appdata_resource_path; ///
-  const(char)* function(AdwAboutDialog* self) c_adw_about_dialog_get_application_icon; ///
-  const(char)* function(AdwAboutDialog* self) c_adw_about_dialog_get_application_name; ///
-  const(char*)* function(AdwAboutDialog* self) c_adw_about_dialog_get_artists; ///
-  const(char)* function(AdwAboutDialog* self) c_adw_about_dialog_get_comments; ///
-  const(char)* function(AdwAboutDialog* self) c_adw_about_dialog_get_copyright; ///
-  const(char)* function(AdwAboutDialog* self) c_adw_about_dialog_get_debug_info; ///
-  const(char)* function(AdwAboutDialog* self) c_adw_about_dialog_get_debug_info_filename; ///
-  const(char*)* function(AdwAboutDialog* self) c_adw_about_dialog_get_designers; ///
-  const(char)* function(AdwAboutDialog* self) c_adw_about_dialog_get_developer_name; ///
-  const(char*)* function(AdwAboutDialog* self) c_adw_about_dialog_get_developers; ///
-  const(char*)* function(AdwAboutDialog* self) c_adw_about_dialog_get_documenters; ///
-  const(char)* function(AdwAboutDialog* self) c_adw_about_dialog_get_issue_url; ///
-  const(char)* function(AdwAboutDialog* self) c_adw_about_dialog_get_license; ///
-  GtkLicense function(AdwAboutDialog* self) c_adw_about_dialog_get_license_type; ///
-  const(char)* function(AdwAboutDialog* self) c_adw_about_dialog_get_release_notes; ///
-  const(char)* function(AdwAboutDialog* self) c_adw_about_dialog_get_release_notes_version; ///
-  const(char)* function(AdwAboutDialog* self) c_adw_about_dialog_get_support_url; ///
-  const(char)* function(AdwAboutDialog* self) c_adw_about_dialog_get_translator_credits; ///
-  const(char)* function(AdwAboutDialog* self) c_adw_about_dialog_get_version; ///
-  const(char)* function(AdwAboutDialog* self) c_adw_about_dialog_get_website; ///
-  void function(AdwAboutDialog* self, const(char)* applicationIcon) c_adw_about_dialog_set_application_icon; ///
-  void function(AdwAboutDialog* self, const(char)* applicationName) c_adw_about_dialog_set_application_name; ///
-  void function(AdwAboutDialog* self, const(char*)* artists) c_adw_about_dialog_set_artists; ///
-  void function(AdwAboutDialog* self, const(char)* comments) c_adw_about_dialog_set_comments; ///
-  void function(AdwAboutDialog* self, const(char)* copyright) c_adw_about_dialog_set_copyright; ///
-  void function(AdwAboutDialog* self, const(char)* debugInfo) c_adw_about_dialog_set_debug_info; ///
-  void function(AdwAboutDialog* self, const(char)* filename) c_adw_about_dialog_set_debug_info_filename; ///
-  void function(AdwAboutDialog* self, const(char*)* designers) c_adw_about_dialog_set_designers; ///
-  void function(AdwAboutDialog* self, const(char)* developerName) c_adw_about_dialog_set_developer_name; ///
-  void function(AdwAboutDialog* self, const(char*)* developers) c_adw_about_dialog_set_developers; ///
-  void function(AdwAboutDialog* self, const(char*)* documenters) c_adw_about_dialog_set_documenters; ///
-  void function(AdwAboutDialog* self, const(char)* issueUrl) c_adw_about_dialog_set_issue_url; ///
-  void function(AdwAboutDialog* self, const(char)* license) c_adw_about_dialog_set_license; ///
-  void function(AdwAboutDialog* self, GtkLicense licenseType) c_adw_about_dialog_set_license_type; ///
-  void function(AdwAboutDialog* self, const(char)* releaseNotes) c_adw_about_dialog_set_release_notes; ///
-  void function(AdwAboutDialog* self, const(char)* version_) c_adw_about_dialog_set_release_notes_version; ///
-  void function(AdwAboutDialog* self, const(char)* supportUrl) c_adw_about_dialog_set_support_url; ///
-  void function(AdwAboutDialog* self, const(char)* translatorCredits) c_adw_about_dialog_set_translator_credits; ///
-  void function(AdwAboutDialog* self, const(char)* version_) c_adw_about_dialog_set_version; ///
-  void function(AdwAboutDialog* self, const(char)* website) c_adw_about_dialog_set_website; ///
-
-  // AboutWindow
-  GType function() c_adw_about_window_get_type; ///
-  GtkWidget* function() c_adw_about_window_new; ///
-  GtkWidget* function(const(char)* resourcePath, const(char)* releaseNotesVersion) c_adw_about_window_new_from_appdata; ///
-  void function(AdwAboutWindow* self, const(char)* name, const(char*)* people) c_adw_about_window_add_acknowledgement_section; ///
-  void function(AdwAboutWindow* self, const(char)* name, const(char*)* people) c_adw_about_window_add_credit_section; ///
-  void function(AdwAboutWindow* self, const(char)* title, const(char)* copyright, GtkLicense licenseType, const(char)* license) c_adw_about_window_add_legal_section; ///
-  void function(AdwAboutWindow* self, const(char)* title, const(char)* url) c_adw_about_window_add_link; ///
-  const(char)* function(AdwAboutWindow* self) c_adw_about_window_get_application_icon; ///
-  const(char)* function(AdwAboutWindow* self) c_adw_about_window_get_application_name; ///
-  const(char*)* function(AdwAboutWindow* self) c_adw_about_window_get_artists; ///
-  const(char)* function(AdwAboutWindow* self) c_adw_about_window_get_comments; ///
-  const(char)* function(AdwAboutWindow* self) c_adw_about_window_get_copyright; ///
-  const(char)* function(AdwAboutWindow* self) c_adw_about_window_get_debug_info; ///
-  const(char)* function(AdwAboutWindow* self) c_adw_about_window_get_debug_info_filename; ///
-  const(char*)* function(AdwAboutWindow* self) c_adw_about_window_get_designers; ///
-  const(char)* function(AdwAboutWindow* self) c_adw_about_window_get_developer_name; ///
-  const(char*)* function(AdwAboutWindow* self) c_adw_about_window_get_developers; ///
-  const(char*)* function(AdwAboutWindow* self) c_adw_about_window_get_documenters; ///
-  const(char)* function(AdwAboutWindow* self) c_adw_about_window_get_issue_url; ///
-  const(char)* function(AdwAboutWindow* self) c_adw_about_window_get_license; ///
-  GtkLicense function(AdwAboutWindow* self) c_adw_about_window_get_license_type; ///
-  const(char)* function(AdwAboutWindow* self) c_adw_about_window_get_release_notes; ///
-  const(char)* function(AdwAboutWindow* self) c_adw_about_window_get_release_notes_version; ///
-  const(char)* function(AdwAboutWindow* self) c_adw_about_window_get_support_url; ///
-  const(char)* function(AdwAboutWindow* self) c_adw_about_window_get_translator_credits; ///
-  const(char)* function(AdwAboutWindow* self) c_adw_about_window_get_version; ///
-  const(char)* function(AdwAboutWindow* self) c_adw_about_window_get_website; ///
-  void function(AdwAboutWindow* self, const(char)* applicationIcon) c_adw_about_window_set_application_icon; ///
-  void function(AdwAboutWindow* self, const(char)* applicationName) c_adw_about_window_set_application_name; ///
-  void function(AdwAboutWindow* self, const(char*)* artists) c_adw_about_window_set_artists; ///
-  void function(AdwAboutWindow* self, const(char)* comments) c_adw_about_window_set_comments; ///
-  void function(AdwAboutWindow* self, const(char)* copyright) c_adw_about_window_set_copyright; ///
-  void function(AdwAboutWindow* self, const(char)* debugInfo) c_adw_about_window_set_debug_info; ///
-  void function(AdwAboutWindow* self, const(char)* filename) c_adw_about_window_set_debug_info_filename; ///
-  void function(AdwAboutWindow* self, const(char*)* designers) c_adw_about_window_set_designers; ///
-  void function(AdwAboutWindow* self, const(char)* developerName) c_adw_about_window_set_developer_name; ///
-  void function(AdwAboutWindow* self, const(char*)* developers) c_adw_about_window_set_developers; ///
-  void function(AdwAboutWindow* self, const(char*)* documenters) c_adw_about_window_set_documenters; ///
-  void function(AdwAboutWindow* self, const(char)* issueUrl) c_adw_about_window_set_issue_url; ///
-  void function(AdwAboutWindow* self, const(char)* license) c_adw_about_window_set_license; ///
-  void function(AdwAboutWindow* self, GtkLicense licenseType) c_adw_about_window_set_license_type; ///
-  void function(AdwAboutWindow* self, const(char)* releaseNotes) c_adw_about_window_set_release_notes; ///
-  void function(AdwAboutWindow* self, const(char)* version_) c_adw_about_window_set_release_notes_version; ///
-  void function(AdwAboutWindow* self, const(char)* supportUrl) c_adw_about_window_set_support_url; ///
-  void function(AdwAboutWindow* self, const(char)* translatorCredits) c_adw_about_window_set_translator_credits; ///
-  void function(AdwAboutWindow* self, const(char)* version_) c_adw_about_window_set_version; ///
-  void function(AdwAboutWindow* self, const(char)* website) c_adw_about_window_set_website; ///
-
-  // ActionRow
-  GType function() c_adw_action_row_get_type; ///
-  GtkWidget* function() c_adw_action_row_new; ///
-  void function(AdwActionRow* self) c_adw_action_row_activate; ///
-  void function(AdwActionRow* self, GtkWidget* widget) c_adw_action_row_add_prefix; ///
-  void function(AdwActionRow* self, GtkWidget* widget) c_adw_action_row_add_suffix; ///
-  GtkWidget* function(AdwActionRow* self) c_adw_action_row_get_activatable_widget; ///
-  const(char)* function(AdwActionRow* self) c_adw_action_row_get_icon_name; ///
-  const(char)* function(AdwActionRow* self) c_adw_action_row_get_subtitle; ///
-  int function(AdwActionRow* self) c_adw_action_row_get_subtitle_lines; ///
-  gboolean function(AdwActionRow* self) c_adw_action_row_get_subtitle_selectable; ///
-  int function(AdwActionRow* self) c_adw_action_row_get_title_lines; ///
-  void function(AdwActionRow* self, GtkWidget* widget) c_adw_action_row_remove; ///
-  void function(AdwActionRow* self, GtkWidget* widget) c_adw_action_row_set_activatable_widget; ///
-  void function(AdwActionRow* self, const(char)* iconName) c_adw_action_row_set_icon_name; ///
-  void function(AdwActionRow* self, const(char)* subtitle) c_adw_action_row_set_subtitle; ///
-  void function(AdwActionRow* self, int subtitleLines) c_adw_action_row_set_subtitle_lines; ///
-  void function(AdwActionRow* self, gboolean subtitleSelectable) c_adw_action_row_set_subtitle_selectable; ///
-  void function(AdwActionRow* self, int titleLines) c_adw_action_row_set_title_lines; ///
-
-  // AlertDialog
-  GType function() c_adw_alert_dialog_get_type; ///
-  AdwDialog* function(const(char)* heading, const(char)* body_) c_adw_alert_dialog_new; ///
-  void function(AdwAlertDialog* self, const(char)* id, const(char)* label) c_adw_alert_dialog_add_response; ///
-  void function(AdwAlertDialog* self, const(char)* firstId,  ...) c_adw_alert_dialog_add_responses; ///
-  void function(AdwAlertDialog* self, GtkWidget* parent, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_adw_alert_dialog_choose; ///
-  const(char)* function(AdwAlertDialog* self, GAsyncResult* result) c_adw_alert_dialog_choose_finish; ///
-  void function(AdwAlertDialog* self, const(char)* format,  ...) c_adw_alert_dialog_format_body; ///
-  void function(AdwAlertDialog* self, const(char)* format,  ...) c_adw_alert_dialog_format_body_markup; ///
-  void function(AdwAlertDialog* self, const(char)* format,  ...) c_adw_alert_dialog_format_heading; ///
-  void function(AdwAlertDialog* self, const(char)* format,  ...) c_adw_alert_dialog_format_heading_markup; ///
-  const(char)* function(AdwAlertDialog* self) c_adw_alert_dialog_get_body; ///
-  gboolean function(AdwAlertDialog* self) c_adw_alert_dialog_get_body_use_markup; ///
-  const(char)* function(AdwAlertDialog* self) c_adw_alert_dialog_get_close_response; ///
-  const(char)* function(AdwAlertDialog* self) c_adw_alert_dialog_get_default_response; ///
-  GtkWidget* function(AdwAlertDialog* self) c_adw_alert_dialog_get_extra_child; ///
-  const(char)* function(AdwAlertDialog* self) c_adw_alert_dialog_get_heading; ///
-  gboolean function(AdwAlertDialog* self) c_adw_alert_dialog_get_heading_use_markup; ///
-  gboolean function(AdwAlertDialog* self) c_adw_alert_dialog_get_prefer_wide_layout; ///
-  AdwResponseAppearance function(AdwAlertDialog* self, const(char)* response) c_adw_alert_dialog_get_response_appearance; ///
-  gboolean function(AdwAlertDialog* self, const(char)* response) c_adw_alert_dialog_get_response_enabled; ///
-  const(char)* function(AdwAlertDialog* self, const(char)* response) c_adw_alert_dialog_get_response_label; ///
-  gboolean function(AdwAlertDialog* self, const(char)* response) c_adw_alert_dialog_has_response; ///
-  void function(AdwAlertDialog* self, const(char)* id) c_adw_alert_dialog_remove_response; ///
-  void function(AdwAlertDialog* self, const(char)* body_) c_adw_alert_dialog_set_body; ///
-  void function(AdwAlertDialog* self, gboolean useMarkup) c_adw_alert_dialog_set_body_use_markup; ///
-  void function(AdwAlertDialog* self, const(char)* response) c_adw_alert_dialog_set_close_response; ///
-  void function(AdwAlertDialog* self, const(char)* response) c_adw_alert_dialog_set_default_response; ///
-  void function(AdwAlertDialog* self, GtkWidget* child) c_adw_alert_dialog_set_extra_child; ///
-  void function(AdwAlertDialog* self, const(char)* heading) c_adw_alert_dialog_set_heading; ///
-  void function(AdwAlertDialog* self, gboolean useMarkup) c_adw_alert_dialog_set_heading_use_markup; ///
-  void function(AdwAlertDialog* self, gboolean preferWideLayout) c_adw_alert_dialog_set_prefer_wide_layout; ///
-  void function(AdwAlertDialog* self, const(char)* response, AdwResponseAppearance appearance) c_adw_alert_dialog_set_response_appearance; ///
-  void function(AdwAlertDialog* self, const(char)* response, gboolean enabled) c_adw_alert_dialog_set_response_enabled; ///
-  void function(AdwAlertDialog* self, const(char)* response, const(char)* label) c_adw_alert_dialog_set_response_label; ///
-
-  // Animation
-  GType function() c_adw_animation_get_type; ///
-  gboolean function(AdwAnimation* self) c_adw_animation_get_follow_enable_animations_setting; ///
-  AdwAnimationState function(AdwAnimation* self) c_adw_animation_get_state; ///
-  AdwAnimationTarget* function(AdwAnimation* self) c_adw_animation_get_target; ///
-  double function(AdwAnimation* self) c_adw_animation_get_value; ///
-  GtkWidget* function(AdwAnimation* self) c_adw_animation_get_widget; ///
-  void function(AdwAnimation* self) c_adw_animation_pause; ///
-  void function(AdwAnimation* self) c_adw_animation_play; ///
-  void function(AdwAnimation* self) c_adw_animation_reset; ///
-  void function(AdwAnimation* self) c_adw_animation_resume; ///
-  void function(AdwAnimation* self, gboolean setting) c_adw_animation_set_follow_enable_animations_setting; ///
-  void function(AdwAnimation* self, AdwAnimationTarget* target) c_adw_animation_set_target; ///
-  void function(AdwAnimation* self) c_adw_animation_skip; ///
-
-  // AnimationTarget
-  GType function() c_adw_animation_target_get_type; ///
-
-  // Application
-  GType function() c_adw_application_get_type; ///
-  AdwApplication* function(const(char)* applicationId, GApplicationFlags flags) c_adw_application_new; ///
-  AdwStyleManager* function(AdwApplication* self) c_adw_application_get_style_manager; ///
-
-  // ApplicationWindow
-  GType function() c_adw_application_window_get_type; ///
-  GtkWidget* function(GtkApplication* app) c_adw_application_window_new; ///
-  void function(AdwApplicationWindow* self, AdwBreakpoint* breakpoint) c_adw_application_window_add_breakpoint; ///
-  gboolean function(AdwApplicationWindow* self) c_adw_application_window_get_adaptive_preview; ///
-  GtkWidget* function(AdwApplicationWindow* self) c_adw_application_window_get_content; ///
-  AdwBreakpoint* function(AdwApplicationWindow* self) c_adw_application_window_get_current_breakpoint; ///
-  GListModel* function(AdwApplicationWindow* self) c_adw_application_window_get_dialogs; ///
-  AdwDialog* function(AdwApplicationWindow* self) c_adw_application_window_get_visible_dialog; ///
-  void function(AdwApplicationWindow* self, gboolean adaptivePreview) c_adw_application_window_set_adaptive_preview; ///
-  void function(AdwApplicationWindow* self, GtkWidget* content) c_adw_application_window_set_content; ///
-
-  // Avatar
-  GType function() c_adw_avatar_get_type; ///
-  GtkWidget* function(int size, const(char)* text, gboolean showInitials) c_adw_avatar_new; ///
-  GdkTexture* function(AdwAvatar* self, int scaleFactor) c_adw_avatar_draw_to_texture; ///
-  GdkPaintable* function(AdwAvatar* self) c_adw_avatar_get_custom_image; ///
-  const(char)* function(AdwAvatar* self) c_adw_avatar_get_icon_name; ///
-  gboolean function(AdwAvatar* self) c_adw_avatar_get_show_initials; ///
-  int function(AdwAvatar* self) c_adw_avatar_get_size; ///
-  const(char)* function(AdwAvatar* self) c_adw_avatar_get_text; ///
-  void function(AdwAvatar* self, GdkPaintable* customImage) c_adw_avatar_set_custom_image; ///
-  void function(AdwAvatar* self, const(char)* iconName) c_adw_avatar_set_icon_name; ///
-  void function(AdwAvatar* self, gboolean showInitials) c_adw_avatar_set_show_initials; ///
-  void function(AdwAvatar* self, int size) c_adw_avatar_set_size; ///
-  void function(AdwAvatar* self, const(char)* text) c_adw_avatar_set_text; ///
-
-  // Banner
-  GType function() c_adw_banner_get_type; ///
-  GtkWidget* function(const(char)* title) c_adw_banner_new; ///
-  const(char)* function(AdwBanner* self) c_adw_banner_get_button_label; ///
-  AdwBannerButtonStyle function(AdwBanner* self) c_adw_banner_get_button_style; ///
-  gboolean function(AdwBanner* self) c_adw_banner_get_revealed; ///
-  const(char)* function(AdwBanner* self) c_adw_banner_get_title; ///
-  gboolean function(AdwBanner* self) c_adw_banner_get_use_markup; ///
-  void function(AdwBanner* self, const(char)* label) c_adw_banner_set_button_label; ///
-  void function(AdwBanner* self, AdwBannerButtonStyle style) c_adw_banner_set_button_style; ///
-  void function(AdwBanner* self, gboolean revealed) c_adw_banner_set_revealed; ///
-  void function(AdwBanner* self, const(char)* title) c_adw_banner_set_title; ///
-  void function(AdwBanner* self, gboolean useMarkup) c_adw_banner_set_use_markup; ///
-
-  // Bin
-  GType function() c_adw_bin_get_type; ///
-  GtkWidget* function() c_adw_bin_new; ///
-  GtkWidget* function(AdwBin* self) c_adw_bin_get_child; ///
-  void function(AdwBin* self, GtkWidget* child) c_adw_bin_set_child; ///
-
-  // BottomSheet
-  GType function() c_adw_bottom_sheet_get_type; ///
-  GtkWidget* function() c_adw_bottom_sheet_new; ///
-  float function(AdwBottomSheet* self) c_adw_bottom_sheet_get_align; ///
-  GtkWidget* function(AdwBottomSheet* self) c_adw_bottom_sheet_get_bottom_bar; ///
-  int function(AdwBottomSheet* self) c_adw_bottom_sheet_get_bottom_bar_height; ///
-  gboolean function(AdwBottomSheet* self) c_adw_bottom_sheet_get_can_close; ///
-  gboolean function(AdwBottomSheet* self) c_adw_bottom_sheet_get_can_open; ///
-  GtkWidget* function(AdwBottomSheet* self) c_adw_bottom_sheet_get_content; ///
-  gboolean function(AdwBottomSheet* self) c_adw_bottom_sheet_get_full_width; ///
-  gboolean function(AdwBottomSheet* self) c_adw_bottom_sheet_get_modal; ///
-  gboolean function(AdwBottomSheet* self) c_adw_bottom_sheet_get_open; ///
-  gboolean function(AdwBottomSheet* self) c_adw_bottom_sheet_get_reveal_bottom_bar; ///
-  GtkWidget* function(AdwBottomSheet* self) c_adw_bottom_sheet_get_sheet; ///
-  int function(AdwBottomSheet* self) c_adw_bottom_sheet_get_sheet_height; ///
-  gboolean function(AdwBottomSheet* self) c_adw_bottom_sheet_get_show_drag_handle; ///
-  void function(AdwBottomSheet* self, float align_) c_adw_bottom_sheet_set_align; ///
-  void function(AdwBottomSheet* self, GtkWidget* bottomBar) c_adw_bottom_sheet_set_bottom_bar; ///
-  void function(AdwBottomSheet* self, gboolean canClose) c_adw_bottom_sheet_set_can_close; ///
-  void function(AdwBottomSheet* self, gboolean canOpen) c_adw_bottom_sheet_set_can_open; ///
-  void function(AdwBottomSheet* self, GtkWidget* content) c_adw_bottom_sheet_set_content; ///
-  void function(AdwBottomSheet* self, gboolean fullWidth) c_adw_bottom_sheet_set_full_width; ///
-  void function(AdwBottomSheet* self, gboolean modal) c_adw_bottom_sheet_set_modal; ///
-  void function(AdwBottomSheet* self, gboolean open) c_adw_bottom_sheet_set_open; ///
-  void function(AdwBottomSheet* self, gboolean reveal) c_adw_bottom_sheet_set_reveal_bottom_bar; ///
-  void function(AdwBottomSheet* self, GtkWidget* sheet) c_adw_bottom_sheet_set_sheet; ///
-  void function(AdwBottomSheet* self, gboolean showDragHandle) c_adw_bottom_sheet_set_show_drag_handle; ///
-
-  // Breakpoint
-  GType function() c_adw_breakpoint_get_type; ///
-  AdwBreakpoint* function(AdwBreakpointCondition* condition) c_adw_breakpoint_new; ///
-  void function(AdwBreakpoint* self, GObject* object, const(char)* property, const(GValue)* value) c_adw_breakpoint_add_setter; ///
-  void function(AdwBreakpoint* self, GObject* firstObject, const(char)* firstProperty,  ...) c_adw_breakpoint_add_setters; ///
-  void function(AdwBreakpoint* self, GObject* firstObject, const(char)* firstProperty, void* args) c_adw_breakpoint_add_setters_valist; ///
-  void function(AdwBreakpoint* self, int nSetters, GObject** objects, const(char*)* names, const(GValue*)* values) c_adw_breakpoint_add_settersv; ///
-  AdwBreakpointCondition* function(AdwBreakpoint* self) c_adw_breakpoint_get_condition; ///
-  void function(AdwBreakpoint* self, AdwBreakpointCondition* condition) c_adw_breakpoint_set_condition; ///
-
-  // BreakpointBin
-  GType function() c_adw_breakpoint_bin_get_type; ///
-  GtkWidget* function() c_adw_breakpoint_bin_new; ///
-  void function(AdwBreakpointBin* self, AdwBreakpoint* breakpoint) c_adw_breakpoint_bin_add_breakpoint; ///
-  GtkWidget* function(AdwBreakpointBin* self) c_adw_breakpoint_bin_get_child; ///
-  AdwBreakpoint* function(AdwBreakpointBin* self) c_adw_breakpoint_bin_get_current_breakpoint; ///
-  void function(AdwBreakpointBin* self, AdwBreakpoint* breakpoint) c_adw_breakpoint_bin_remove_breakpoint; ///
-  void function(AdwBreakpointBin* self, GtkWidget* child) c_adw_breakpoint_bin_set_child; ///
-
-  // BreakpointCondition
-  GType function() c_adw_breakpoint_condition_get_type; ///
-  AdwBreakpointCondition* function(AdwBreakpointCondition* condition1, AdwBreakpointCondition* condition2) c_adw_breakpoint_condition_new_and; ///
-  AdwBreakpointCondition* function(AdwBreakpointConditionLengthType type, double value, AdwLengthUnit unit) c_adw_breakpoint_condition_new_length; ///
-  AdwBreakpointCondition* function(AdwBreakpointCondition* condition1, AdwBreakpointCondition* condition2) c_adw_breakpoint_condition_new_or; ///
-  AdwBreakpointCondition* function(AdwBreakpointConditionRatioType type, int width, int height) c_adw_breakpoint_condition_new_ratio; ///
-  AdwBreakpointCondition* function(AdwBreakpointCondition* self) c_adw_breakpoint_condition_copy; ///
-  void function(AdwBreakpointCondition* self) c_adw_breakpoint_condition_free; ///
-  char* function(AdwBreakpointCondition* self) c_adw_breakpoint_condition_to_string; ///
-  AdwBreakpointCondition* function(const(char)* str) c_adw_breakpoint_condition_parse; ///
-
-  // ButtonContent
-  GType function() c_adw_button_content_get_type; ///
-  GtkWidget* function() c_adw_button_content_new; ///
-  gboolean function(AdwButtonContent* self) c_adw_button_content_get_can_shrink; ///
-  const(char)* function(AdwButtonContent* self) c_adw_button_content_get_icon_name; ///
-  const(char)* function(AdwButtonContent* self) c_adw_button_content_get_label; ///
-  gboolean function(AdwButtonContent* self) c_adw_button_content_get_use_underline; ///
-  void function(AdwButtonContent* self, gboolean canShrink) c_adw_button_content_set_can_shrink; ///
-  void function(AdwButtonContent* self, const(char)* iconName) c_adw_button_content_set_icon_name; ///
-  void function(AdwButtonContent* self, const(char)* label) c_adw_button_content_set_label; ///
-  void function(AdwButtonContent* self, gboolean useUnderline) c_adw_button_content_set_use_underline; ///
-
-  // ButtonRow
-  GType function() c_adw_button_row_get_type; ///
-  GtkWidget* function() c_adw_button_row_new; ///
-  const(char)* function(AdwButtonRow* self) c_adw_button_row_get_end_icon_name; ///
-  const(char)* function(AdwButtonRow* self) c_adw_button_row_get_start_icon_name; ///
-  void function(AdwButtonRow* self, const(char)* iconName) c_adw_button_row_set_end_icon_name; ///
-  void function(AdwButtonRow* self, const(char)* iconName) c_adw_button_row_set_start_icon_name; ///
-
-  // CallbackAnimationTarget
-  GType function() c_adw_callback_animation_target_get_type; ///
-  AdwAnimationTarget* function(AdwAnimationTargetFunc callback, void* userData, GDestroyNotify destroy) c_adw_callback_animation_target_new; ///
-
-  // Carousel
-  GType function() c_adw_carousel_get_type; ///
-  GtkWidget* function() c_adw_carousel_new; ///
-  void function(AdwCarousel* self, GtkWidget* child) c_adw_carousel_append; ///
-  gboolean function(AdwCarousel* self) c_adw_carousel_get_allow_long_swipes; ///
-  gboolean function(AdwCarousel* self) c_adw_carousel_get_allow_mouse_drag; ///
-  gboolean function(AdwCarousel* self) c_adw_carousel_get_allow_scroll_wheel; ///
-  gboolean function(AdwCarousel* self) c_adw_carousel_get_interactive; ///
-  uint function(AdwCarousel* self) c_adw_carousel_get_n_pages; ///
-  GtkWidget* function(AdwCarousel* self, uint n) c_adw_carousel_get_nth_page; ///
-  double function(AdwCarousel* self) c_adw_carousel_get_position; ///
-  uint function(AdwCarousel* self) c_adw_carousel_get_reveal_duration; ///
-  AdwSpringParams* function(AdwCarousel* self) c_adw_carousel_get_scroll_params; ///
-  uint function(AdwCarousel* self) c_adw_carousel_get_spacing; ///
-  void function(AdwCarousel* self, GtkWidget* child, int position) c_adw_carousel_insert; ///
-  void function(AdwCarousel* self, GtkWidget* child) c_adw_carousel_prepend; ///
-  void function(AdwCarousel* self, GtkWidget* child) c_adw_carousel_remove; ///
-  void function(AdwCarousel* self, GtkWidget* child, int position) c_adw_carousel_reorder; ///
-  void function(AdwCarousel* self, GtkWidget* widget, gboolean animate) c_adw_carousel_scroll_to; ///
-  void function(AdwCarousel* self, gboolean allowLongSwipes) c_adw_carousel_set_allow_long_swipes; ///
-  void function(AdwCarousel* self, gboolean allowMouseDrag) c_adw_carousel_set_allow_mouse_drag; ///
-  void function(AdwCarousel* self, gboolean allowScrollWheel) c_adw_carousel_set_allow_scroll_wheel; ///
-  void function(AdwCarousel* self, gboolean interactive) c_adw_carousel_set_interactive; ///
-  void function(AdwCarousel* self, uint revealDuration) c_adw_carousel_set_reveal_duration; ///
-  void function(AdwCarousel* self, AdwSpringParams* params) c_adw_carousel_set_scroll_params; ///
-  void function(AdwCarousel* self, uint spacing) c_adw_carousel_set_spacing; ///
-
-  // CarouselIndicatorDots
-  GType function() c_adw_carousel_indicator_dots_get_type; ///
-  GtkWidget* function() c_adw_carousel_indicator_dots_new; ///
-  AdwCarousel* function(AdwCarouselIndicatorDots* self) c_adw_carousel_indicator_dots_get_carousel; ///
-  void function(AdwCarouselIndicatorDots* self, AdwCarousel* carousel) c_adw_carousel_indicator_dots_set_carousel; ///
-
-  // CarouselIndicatorLines
-  GType function() c_adw_carousel_indicator_lines_get_type; ///
-  GtkWidget* function() c_adw_carousel_indicator_lines_new; ///
-  AdwCarousel* function(AdwCarouselIndicatorLines* self) c_adw_carousel_indicator_lines_get_carousel; ///
-  void function(AdwCarouselIndicatorLines* self, AdwCarousel* carousel) c_adw_carousel_indicator_lines_set_carousel; ///
-
-  // Clamp
-  GType function() c_adw_clamp_get_type; ///
-  GtkWidget* function() c_adw_clamp_new; ///
-  GtkWidget* function(AdwClamp* self) c_adw_clamp_get_child; ///
-  int function(AdwClamp* self) c_adw_clamp_get_maximum_size; ///
-  int function(AdwClamp* self) c_adw_clamp_get_tightening_threshold; ///
-  AdwLengthUnit function(AdwClamp* self) c_adw_clamp_get_unit; ///
-  void function(AdwClamp* self, GtkWidget* child) c_adw_clamp_set_child; ///
-  void function(AdwClamp* self, int maximumSize) c_adw_clamp_set_maximum_size; ///
-  void function(AdwClamp* self, int tighteningThreshold) c_adw_clamp_set_tightening_threshold; ///
-  void function(AdwClamp* self, AdwLengthUnit unit) c_adw_clamp_set_unit; ///
-
-  // ClampLayout
-  GType function() c_adw_clamp_layout_get_type; ///
-  GtkLayoutManager* function() c_adw_clamp_layout_new; ///
-  int function(AdwClampLayout* self) c_adw_clamp_layout_get_maximum_size; ///
-  int function(AdwClampLayout* self) c_adw_clamp_layout_get_tightening_threshold; ///
-  AdwLengthUnit function(AdwClampLayout* self) c_adw_clamp_layout_get_unit; ///
-  void function(AdwClampLayout* self, int maximumSize) c_adw_clamp_layout_set_maximum_size; ///
-  void function(AdwClampLayout* self, int tighteningThreshold) c_adw_clamp_layout_set_tightening_threshold; ///
-  void function(AdwClampLayout* self, AdwLengthUnit unit) c_adw_clamp_layout_set_unit; ///
-
-  // ClampScrollable
-  GType function() c_adw_clamp_scrollable_get_type; ///
-  GtkWidget* function() c_adw_clamp_scrollable_new; ///
-  GtkWidget* function(AdwClampScrollable* self) c_adw_clamp_scrollable_get_child; ///
-  int function(AdwClampScrollable* self) c_adw_clamp_scrollable_get_maximum_size; ///
-  int function(AdwClampScrollable* self) c_adw_clamp_scrollable_get_tightening_threshold; ///
-  AdwLengthUnit function(AdwClampScrollable* self) c_adw_clamp_scrollable_get_unit; ///
-  void function(AdwClampScrollable* self, GtkWidget* child) c_adw_clamp_scrollable_set_child; ///
-  void function(AdwClampScrollable* self, int maximumSize) c_adw_clamp_scrollable_set_maximum_size; ///
-  void function(AdwClampScrollable* self, int tighteningThreshold) c_adw_clamp_scrollable_set_tightening_threshold; ///
-  void function(AdwClampScrollable* self, AdwLengthUnit unit) c_adw_clamp_scrollable_set_unit; ///
-
-  // ComboRow
-  GType function() c_adw_combo_row_get_type; ///
-  GtkWidget* function() c_adw_combo_row_new; ///
-  gboolean function(AdwComboRow* self) c_adw_combo_row_get_enable_search; ///
-  GtkExpression* function(AdwComboRow* self) c_adw_combo_row_get_expression; ///
-  GtkListItemFactory* function(AdwComboRow* self) c_adw_combo_row_get_factory; ///
-  GtkListItemFactory* function(AdwComboRow* self) c_adw_combo_row_get_header_factory; ///
-  GtkListItemFactory* function(AdwComboRow* self) c_adw_combo_row_get_list_factory; ///
-  GListModel* function(AdwComboRow* self) c_adw_combo_row_get_model; ///
-  GtkStringFilterMatchMode function(AdwComboRow* self) c_adw_combo_row_get_search_match_mode; ///
-  uint function(AdwComboRow* self) c_adw_combo_row_get_selected; ///
-  GObject* function(AdwComboRow* self) c_adw_combo_row_get_selected_item; ///
-  gboolean function(AdwComboRow* self) c_adw_combo_row_get_use_subtitle; ///
-  void function(AdwComboRow* self, gboolean enableSearch) c_adw_combo_row_set_enable_search; ///
-  void function(AdwComboRow* self, GtkExpression* expression) c_adw_combo_row_set_expression; ///
-  void function(AdwComboRow* self, GtkListItemFactory* factory) c_adw_combo_row_set_factory; ///
-  void function(AdwComboRow* self, GtkListItemFactory* factory) c_adw_combo_row_set_header_factory; ///
-  void function(AdwComboRow* self, GtkListItemFactory* factory) c_adw_combo_row_set_list_factory; ///
-  void function(AdwComboRow* self, GListModel* model) c_adw_combo_row_set_model; ///
-  void function(AdwComboRow* self, GtkStringFilterMatchMode searchMatchMode) c_adw_combo_row_set_search_match_mode; ///
-  void function(AdwComboRow* self, uint position) c_adw_combo_row_set_selected; ///
-  void function(AdwComboRow* self, gboolean useSubtitle) c_adw_combo_row_set_use_subtitle; ///
-
-  // Dialog
-  GType function() c_adw_dialog_get_type; ///
-  AdwDialog* function() c_adw_dialog_new; ///
-  void function(AdwDialog* self, AdwBreakpoint* breakpoint) c_adw_dialog_add_breakpoint; ///
-  gboolean function(AdwDialog* self) c_adw_dialog_close; ///
-  void function(AdwDialog* self) c_adw_dialog_force_close; ///
-  gboolean function(AdwDialog* self) c_adw_dialog_get_can_close; ///
-  GtkWidget* function(AdwDialog* self) c_adw_dialog_get_child; ///
-  int function(AdwDialog* self) c_adw_dialog_get_content_height; ///
-  int function(AdwDialog* self) c_adw_dialog_get_content_width; ///
-  AdwBreakpoint* function(AdwDialog* self) c_adw_dialog_get_current_breakpoint; ///
-  GtkWidget* function(AdwDialog* self) c_adw_dialog_get_default_widget; ///
-  GtkWidget* function(AdwDialog* self) c_adw_dialog_get_focus; ///
-  gboolean function(AdwDialog* self) c_adw_dialog_get_follows_content_size; ///
-  AdwDialogPresentationMode function(AdwDialog* self) c_adw_dialog_get_presentation_mode; ///
-  const(char)* function(AdwDialog* self) c_adw_dialog_get_title; ///
-  void function(AdwDialog* self, GtkWidget* parent) c_adw_dialog_present; ///
-  void function(AdwDialog* self, gboolean canClose) c_adw_dialog_set_can_close; ///
-  void function(AdwDialog* self, GtkWidget* child) c_adw_dialog_set_child; ///
-  void function(AdwDialog* self, int contentHeight) c_adw_dialog_set_content_height; ///
-  void function(AdwDialog* self, int contentWidth) c_adw_dialog_set_content_width; ///
-  void function(AdwDialog* self, GtkWidget* defaultWidget) c_adw_dialog_set_default_widget; ///
-  void function(AdwDialog* self, GtkWidget* focus) c_adw_dialog_set_focus; ///
-  void function(AdwDialog* self, gboolean followsContentSize) c_adw_dialog_set_follows_content_size; ///
-  void function(AdwDialog* self, AdwDialogPresentationMode presentationMode) c_adw_dialog_set_presentation_mode; ///
-  void function(AdwDialog* self, const(char)* title) c_adw_dialog_set_title; ///
-
-  // EntryRow
-  GType function() c_adw_entry_row_get_type; ///
-  GtkWidget* function() c_adw_entry_row_new; ///
-  void function(AdwEntryRow* self, GtkWidget* widget) c_adw_entry_row_add_prefix; ///
-  void function(AdwEntryRow* self, GtkWidget* widget) c_adw_entry_row_add_suffix; ///
-  gboolean function(AdwEntryRow* self) c_adw_entry_row_get_activates_default; ///
-  PangoAttrList* function(AdwEntryRow* self) c_adw_entry_row_get_attributes; ///
-  gboolean function(AdwEntryRow* self) c_adw_entry_row_get_enable_emoji_completion; ///
-  GtkInputHints function(AdwEntryRow* self) c_adw_entry_row_get_input_hints; ///
-  GtkInputPurpose function(AdwEntryRow* self) c_adw_entry_row_get_input_purpose; ///
-  int function(AdwEntryRow* self) c_adw_entry_row_get_max_length; ///
-  gboolean function(AdwEntryRow* self) c_adw_entry_row_get_show_apply_button; ///
-  uint function(AdwEntryRow* self) c_adw_entry_row_get_text_length; ///
-  gboolean function(AdwEntryRow* self) c_adw_entry_row_grab_focus_without_selecting; ///
-  void function(AdwEntryRow* self, GtkWidget* widget) c_adw_entry_row_remove; ///
-  void function(AdwEntryRow* self, gboolean activates) c_adw_entry_row_set_activates_default; ///
-  void function(AdwEntryRow* self, PangoAttrList* attributes) c_adw_entry_row_set_attributes; ///
-  void function(AdwEntryRow* self, gboolean enableEmojiCompletion) c_adw_entry_row_set_enable_emoji_completion; ///
-  void function(AdwEntryRow* self, GtkInputHints hints) c_adw_entry_row_set_input_hints; ///
-  void function(AdwEntryRow* self, GtkInputPurpose purpose) c_adw_entry_row_set_input_purpose; ///
-  void function(AdwEntryRow* self, int maxLength) c_adw_entry_row_set_max_length; ///
-  void function(AdwEntryRow* self, gboolean showApplyButton) c_adw_entry_row_set_show_apply_button; ///
-
-  // EnumListItem
-  GType function() c_adw_enum_list_item_get_type; ///
-  const(char)* function(AdwEnumListItem* self) c_adw_enum_list_item_get_name; ///
-  const(char)* function(AdwEnumListItem* self) c_adw_enum_list_item_get_nick; ///
-  int function(AdwEnumListItem* self) c_adw_enum_list_item_get_value; ///
-
-  // EnumListModel
-  GType function() c_adw_enum_list_model_get_type; ///
-  AdwEnumListModel* function(GType enumType) c_adw_enum_list_model_new; ///
-  uint function(AdwEnumListModel* self, int value) c_adw_enum_list_model_find_position; ///
-  GType function(AdwEnumListModel* self) c_adw_enum_list_model_get_enum_type; ///
-
-  // ExpanderRow
-  GType function() c_adw_expander_row_get_type; ///
-  GtkWidget* function() c_adw_expander_row_new; ///
-  void function(AdwExpanderRow* self, GtkWidget* widget) c_adw_expander_row_add_action; ///
-  void function(AdwExpanderRow* self, GtkWidget* widget) c_adw_expander_row_add_prefix; ///
-  void function(AdwExpanderRow* self, GtkWidget* child) c_adw_expander_row_add_row; ///
-  void function(AdwExpanderRow* self, GtkWidget* widget) c_adw_expander_row_add_suffix; ///
-  gboolean function(AdwExpanderRow* self) c_adw_expander_row_get_enable_expansion; ///
-  gboolean function(AdwExpanderRow* self) c_adw_expander_row_get_expanded; ///
-  const(char)* function(AdwExpanderRow* self) c_adw_expander_row_get_icon_name; ///
-  gboolean function(AdwExpanderRow* self) c_adw_expander_row_get_show_enable_switch; ///
-  const(char)* function(AdwExpanderRow* self) c_adw_expander_row_get_subtitle; ///
-  int function(AdwExpanderRow* self) c_adw_expander_row_get_subtitle_lines; ///
-  int function(AdwExpanderRow* self) c_adw_expander_row_get_title_lines; ///
-  void function(AdwExpanderRow* self, GtkWidget* child) c_adw_expander_row_remove; ///
-  void function(AdwExpanderRow* self, gboolean enableExpansion) c_adw_expander_row_set_enable_expansion; ///
-  void function(AdwExpanderRow* self, gboolean expanded) c_adw_expander_row_set_expanded; ///
-  void function(AdwExpanderRow* self, const(char)* iconName) c_adw_expander_row_set_icon_name; ///
-  void function(AdwExpanderRow* self, gboolean showEnableSwitch) c_adw_expander_row_set_show_enable_switch; ///
-  void function(AdwExpanderRow* self, const(char)* subtitle) c_adw_expander_row_set_subtitle; ///
-  void function(AdwExpanderRow* self, int subtitleLines) c_adw_expander_row_set_subtitle_lines; ///
-  void function(AdwExpanderRow* self, int titleLines) c_adw_expander_row_set_title_lines; ///
-
-  // Flap
-  GType function() c_adw_flap_get_type; ///
-  GtkWidget* function() c_adw_flap_new; ///
-  GtkWidget* function(AdwFlap* self) c_adw_flap_get_content; ///
-  GtkWidget* function(AdwFlap* self) c_adw_flap_get_flap; ///
-  GtkPackType function(AdwFlap* self) c_adw_flap_get_flap_position; ///
-  uint function(AdwFlap* self) c_adw_flap_get_fold_duration; ///
-  AdwFlapFoldPolicy function(AdwFlap* self) c_adw_flap_get_fold_policy; ///
-  AdwFoldThresholdPolicy function(AdwFlap* self) c_adw_flap_get_fold_threshold_policy; ///
-  gboolean function(AdwFlap* self) c_adw_flap_get_folded; ///
-  gboolean function(AdwFlap* self) c_adw_flap_get_locked; ///
-  gboolean function(AdwFlap* self) c_adw_flap_get_modal; ///
-  gboolean function(AdwFlap* self) c_adw_flap_get_reveal_flap; ///
-  AdwSpringParams* function(AdwFlap* self) c_adw_flap_get_reveal_params; ///
-  double function(AdwFlap* self) c_adw_flap_get_reveal_progress; ///
-  GtkWidget* function(AdwFlap* self) c_adw_flap_get_separator; ///
-  gboolean function(AdwFlap* self) c_adw_flap_get_swipe_to_close; ///
-  gboolean function(AdwFlap* self) c_adw_flap_get_swipe_to_open; ///
-  AdwFlapTransitionType function(AdwFlap* self) c_adw_flap_get_transition_type; ///
-  void function(AdwFlap* self, GtkWidget* content) c_adw_flap_set_content; ///
-  void function(AdwFlap* self, GtkWidget* flap) c_adw_flap_set_flap; ///
-  void function(AdwFlap* self, GtkPackType position) c_adw_flap_set_flap_position; ///
-  void function(AdwFlap* self, uint duration) c_adw_flap_set_fold_duration; ///
-  void function(AdwFlap* self, AdwFlapFoldPolicy policy) c_adw_flap_set_fold_policy; ///
-  void function(AdwFlap* self, AdwFoldThresholdPolicy policy) c_adw_flap_set_fold_threshold_policy; ///
-  void function(AdwFlap* self, gboolean locked) c_adw_flap_set_locked; ///
-  void function(AdwFlap* self, gboolean modal) c_adw_flap_set_modal; ///
-  void function(AdwFlap* self, gboolean revealFlap) c_adw_flap_set_reveal_flap; ///
-  void function(AdwFlap* self, AdwSpringParams* params) c_adw_flap_set_reveal_params; ///
-  void function(AdwFlap* self, GtkWidget* separator) c_adw_flap_set_separator; ///
-  void function(AdwFlap* self, gboolean swipeToClose) c_adw_flap_set_swipe_to_close; ///
-  void function(AdwFlap* self, gboolean swipeToOpen) c_adw_flap_set_swipe_to_open; ///
-  void function(AdwFlap* self, AdwFlapTransitionType transitionType) c_adw_flap_set_transition_type; ///
-
-  // HeaderBar
-  GType function() c_adw_header_bar_get_type; ///
-  GtkWidget* function() c_adw_header_bar_new; ///
-  AdwCenteringPolicy function(AdwHeaderBar* self) c_adw_header_bar_get_centering_policy; ///
-  const(char)* function(AdwHeaderBar* self) c_adw_header_bar_get_decoration_layout; ///
-  gboolean function(AdwHeaderBar* self) c_adw_header_bar_get_show_back_button; ///
-  gboolean function(AdwHeaderBar* self) c_adw_header_bar_get_show_end_title_buttons; ///
-  gboolean function(AdwHeaderBar* self) c_adw_header_bar_get_show_start_title_buttons; ///
-  gboolean function(AdwHeaderBar* self) c_adw_header_bar_get_show_title; ///
-  GtkWidget* function(AdwHeaderBar* self) c_adw_header_bar_get_title_widget; ///
-  void function(AdwHeaderBar* self, GtkWidget* child) c_adw_header_bar_pack_end; ///
-  void function(AdwHeaderBar* self, GtkWidget* child) c_adw_header_bar_pack_start; ///
-  void function(AdwHeaderBar* self, GtkWidget* child) c_adw_header_bar_remove; ///
-  void function(AdwHeaderBar* self, AdwCenteringPolicy centeringPolicy) c_adw_header_bar_set_centering_policy; ///
-  void function(AdwHeaderBar* self, const(char)* layout) c_adw_header_bar_set_decoration_layout; ///
-  void function(AdwHeaderBar* self, gboolean showBackButton) c_adw_header_bar_set_show_back_button; ///
-  void function(AdwHeaderBar* self, gboolean setting) c_adw_header_bar_set_show_end_title_buttons; ///
-  void function(AdwHeaderBar* self, gboolean setting) c_adw_header_bar_set_show_start_title_buttons; ///
-  void function(AdwHeaderBar* self, gboolean showTitle) c_adw_header_bar_set_show_title; ///
-  void function(AdwHeaderBar* self, GtkWidget* titleWidget) c_adw_header_bar_set_title_widget; ///
-
-  // InlineViewSwitcher
-  GType function() c_adw_inline_view_switcher_get_type; ///
-  GtkWidget* function() c_adw_inline_view_switcher_new; ///
-  gboolean function(AdwInlineViewSwitcher* self) c_adw_inline_view_switcher_get_can_shrink; ///
-  AdwInlineViewSwitcherDisplayMode function(AdwInlineViewSwitcher* self) c_adw_inline_view_switcher_get_display_mode; ///
-  gboolean function(AdwInlineViewSwitcher* self) c_adw_inline_view_switcher_get_homogeneous; ///
-  AdwViewStack* function(AdwInlineViewSwitcher* self) c_adw_inline_view_switcher_get_stack; ///
-  void function(AdwInlineViewSwitcher* self, gboolean canShrink) c_adw_inline_view_switcher_set_can_shrink; ///
-  void function(AdwInlineViewSwitcher* self, AdwInlineViewSwitcherDisplayMode mode) c_adw_inline_view_switcher_set_display_mode; ///
-  void function(AdwInlineViewSwitcher* self, gboolean homogeneous) c_adw_inline_view_switcher_set_homogeneous; ///
-  void function(AdwInlineViewSwitcher* self, AdwViewStack* stack) c_adw_inline_view_switcher_set_stack; ///
-
-  // Layout
-  GType function() c_adw_layout_get_type; ///
-  AdwLayout* function(GtkWidget* content) c_adw_layout_new; ///
-  GtkWidget* function(AdwLayout* self) c_adw_layout_get_content; ///
-  const(char)* function(AdwLayout* self) c_adw_layout_get_name; ///
-  void function(AdwLayout* self, const(char)* name) c_adw_layout_set_name; ///
-
-  // LayoutSlot
-  GType function() c_adw_layout_slot_get_type; ///
-  GtkWidget* function(const(char)* id) c_adw_layout_slot_new; ///
-  const(char)* function(AdwLayoutSlot* self) c_adw_layout_slot_get_slot_id; ///
-
-  // Leaflet
-  GType function() c_adw_leaflet_get_type; ///
-  GtkWidget* function() c_adw_leaflet_new; ///
-  AdwLeafletPage* function(AdwLeaflet* self, GtkWidget* child) c_adw_leaflet_append; ///
-  GtkWidget* function(AdwLeaflet* self, AdwNavigationDirection direction) c_adw_leaflet_get_adjacent_child; ///
-  gboolean function(AdwLeaflet* self) c_adw_leaflet_get_can_navigate_back; ///
-  gboolean function(AdwLeaflet* self) c_adw_leaflet_get_can_navigate_forward; ///
-  gboolean function(AdwLeaflet* self) c_adw_leaflet_get_can_unfold; ///
-  GtkWidget* function(AdwLeaflet* self, const(char)* name) c_adw_leaflet_get_child_by_name; ///
-  AdwSpringParams* function(AdwLeaflet* self) c_adw_leaflet_get_child_transition_params; ///
-  gboolean function(AdwLeaflet* self) c_adw_leaflet_get_child_transition_running; ///
-  AdwFoldThresholdPolicy function(AdwLeaflet* self) c_adw_leaflet_get_fold_threshold_policy; ///
-  gboolean function(AdwLeaflet* self) c_adw_leaflet_get_folded; ///
-  gboolean function(AdwLeaflet* self) c_adw_leaflet_get_homogeneous; ///
-  uint function(AdwLeaflet* self) c_adw_leaflet_get_mode_transition_duration; ///
-  AdwLeafletPage* function(AdwLeaflet* self, GtkWidget* child) c_adw_leaflet_get_page; ///
-  GtkSelectionModel* function(AdwLeaflet* self) c_adw_leaflet_get_pages; ///
-  AdwLeafletTransitionType function(AdwLeaflet* self) c_adw_leaflet_get_transition_type; ///
-  GtkWidget* function(AdwLeaflet* self) c_adw_leaflet_get_visible_child; ///
-  const(char)* function(AdwLeaflet* self) c_adw_leaflet_get_visible_child_name; ///
-  AdwLeafletPage* function(AdwLeaflet* self, GtkWidget* child, GtkWidget* sibling) c_adw_leaflet_insert_child_after; ///
-  gboolean function(AdwLeaflet* self, AdwNavigationDirection direction) c_adw_leaflet_navigate; ///
-  AdwLeafletPage* function(AdwLeaflet* self, GtkWidget* child) c_adw_leaflet_prepend; ///
-  void function(AdwLeaflet* self, GtkWidget* child) c_adw_leaflet_remove; ///
-  void function(AdwLeaflet* self, GtkWidget* child, GtkWidget* sibling) c_adw_leaflet_reorder_child_after; ///
-  void function(AdwLeaflet* self, gboolean canNavigateBack) c_adw_leaflet_set_can_navigate_back; ///
-  void function(AdwLeaflet* self, gboolean canNavigateForward) c_adw_leaflet_set_can_navigate_forward; ///
-  void function(AdwLeaflet* self, gboolean canUnfold) c_adw_leaflet_set_can_unfold; ///
-  void function(AdwLeaflet* self, AdwSpringParams* params) c_adw_leaflet_set_child_transition_params; ///
-  void function(AdwLeaflet* self, AdwFoldThresholdPolicy policy) c_adw_leaflet_set_fold_threshold_policy; ///
-  void function(AdwLeaflet* self, gboolean homogeneous) c_adw_leaflet_set_homogeneous; ///
-  void function(AdwLeaflet* self, uint duration) c_adw_leaflet_set_mode_transition_duration; ///
-  void function(AdwLeaflet* self, AdwLeafletTransitionType transition) c_adw_leaflet_set_transition_type; ///
-  void function(AdwLeaflet* self, GtkWidget* visibleChild) c_adw_leaflet_set_visible_child; ///
-  void function(AdwLeaflet* self, const(char)* name) c_adw_leaflet_set_visible_child_name; ///
-
-  // LeafletPage
-  GType function() c_adw_leaflet_page_get_type; ///
-  GtkWidget* function(AdwLeafletPage* self) c_adw_leaflet_page_get_child; ///
-  const(char)* function(AdwLeafletPage* self) c_adw_leaflet_page_get_name; ///
-  gboolean function(AdwLeafletPage* self) c_adw_leaflet_page_get_navigatable; ///
-  void function(AdwLeafletPage* self, const(char)* name) c_adw_leaflet_page_set_name; ///
-  void function(AdwLeafletPage* self, gboolean navigatable) c_adw_leaflet_page_set_navigatable; ///
-
-  // MessageDialog
-  GType function() c_adw_message_dialog_get_type; ///
-  GtkWidget* function(GtkWindow* parent, const(char)* heading, const(char)* body_) c_adw_message_dialog_new; ///
-  void function(AdwMessageDialog* self, const(char)* id, const(char)* label) c_adw_message_dialog_add_response; ///
-  void function(AdwMessageDialog* self, const(char)* firstId,  ...) c_adw_message_dialog_add_responses; ///
-  void function(AdwMessageDialog* self, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_adw_message_dialog_choose; ///
-  const(char)* function(AdwMessageDialog* self, GAsyncResult* result) c_adw_message_dialog_choose_finish; ///
-  void function(AdwMessageDialog* self, const(char)* format,  ...) c_adw_message_dialog_format_body; ///
-  void function(AdwMessageDialog* self, const(char)* format,  ...) c_adw_message_dialog_format_body_markup; ///
-  void function(AdwMessageDialog* self, const(char)* format,  ...) c_adw_message_dialog_format_heading; ///
-  void function(AdwMessageDialog* self, const(char)* format,  ...) c_adw_message_dialog_format_heading_markup; ///
-  const(char)* function(AdwMessageDialog* self) c_adw_message_dialog_get_body; ///
-  gboolean function(AdwMessageDialog* self) c_adw_message_dialog_get_body_use_markup; ///
-  const(char)* function(AdwMessageDialog* self) c_adw_message_dialog_get_close_response; ///
-  const(char)* function(AdwMessageDialog* self) c_adw_message_dialog_get_default_response; ///
-  GtkWidget* function(AdwMessageDialog* self) c_adw_message_dialog_get_extra_child; ///
-  const(char)* function(AdwMessageDialog* self) c_adw_message_dialog_get_heading; ///
-  gboolean function(AdwMessageDialog* self) c_adw_message_dialog_get_heading_use_markup; ///
-  AdwResponseAppearance function(AdwMessageDialog* self, const(char)* response) c_adw_message_dialog_get_response_appearance; ///
-  gboolean function(AdwMessageDialog* self, const(char)* response) c_adw_message_dialog_get_response_enabled; ///
-  const(char)* function(AdwMessageDialog* self, const(char)* response) c_adw_message_dialog_get_response_label; ///
-  gboolean function(AdwMessageDialog* self, const(char)* response) c_adw_message_dialog_has_response; ///
-  void function(AdwMessageDialog* self, const(char)* id) c_adw_message_dialog_remove_response; ///
-  void function(AdwMessageDialog* self, const(char)* response) c_adw_message_dialog_response; ///
-  void function(AdwMessageDialog* self, const(char)* body_) c_adw_message_dialog_set_body; ///
-  void function(AdwMessageDialog* self, gboolean useMarkup) c_adw_message_dialog_set_body_use_markup; ///
-  void function(AdwMessageDialog* self, const(char)* response) c_adw_message_dialog_set_close_response; ///
-  void function(AdwMessageDialog* self, const(char)* response) c_adw_message_dialog_set_default_response; ///
-  void function(AdwMessageDialog* self, GtkWidget* child) c_adw_message_dialog_set_extra_child; ///
-  void function(AdwMessageDialog* self, const(char)* heading) c_adw_message_dialog_set_heading; ///
-  void function(AdwMessageDialog* self, gboolean useMarkup) c_adw_message_dialog_set_heading_use_markup; ///
-  void function(AdwMessageDialog* self, const(char)* response, AdwResponseAppearance appearance) c_adw_message_dialog_set_response_appearance; ///
-  void function(AdwMessageDialog* self, const(char)* response, gboolean enabled) c_adw_message_dialog_set_response_enabled; ///
-  void function(AdwMessageDialog* self, const(char)* response, const(char)* label) c_adw_message_dialog_set_response_label; ///
-
-  // MultiLayoutView
-  GType function() c_adw_multi_layout_view_get_type; ///
-  GtkWidget* function() c_adw_multi_layout_view_new; ///
-  void function(AdwMultiLayoutView* self, AdwLayout* layout) c_adw_multi_layout_view_add_layout; ///
-  GtkWidget* function(AdwMultiLayoutView* self, const(char)* id) c_adw_multi_layout_view_get_child; ///
-  AdwLayout* function(AdwMultiLayoutView* self) c_adw_multi_layout_view_get_layout; ///
-  AdwLayout* function(AdwMultiLayoutView* self, const(char)* name) c_adw_multi_layout_view_get_layout_by_name; ///
-  const(char)* function(AdwMultiLayoutView* self) c_adw_multi_layout_view_get_layout_name; ///
-  void function(AdwMultiLayoutView* self, AdwLayout* layout) c_adw_multi_layout_view_remove_layout; ///
-  void function(AdwMultiLayoutView* self, const(char)* id, GtkWidget* child) c_adw_multi_layout_view_set_child; ///
-  void function(AdwMultiLayoutView* self, AdwLayout* layout) c_adw_multi_layout_view_set_layout; ///
-  void function(AdwMultiLayoutView* self, const(char)* name) c_adw_multi_layout_view_set_layout_name; ///
-
-  // NavigationPage
-  GType function() c_adw_navigation_page_get_type; ///
-  AdwNavigationPage* function(GtkWidget* child, const(char)* title) c_adw_navigation_page_new; ///
-  AdwNavigationPage* function(GtkWidget* child, const(char)* title, const(char)* tag) c_adw_navigation_page_new_with_tag; ///
-  gboolean function(AdwNavigationPage* self) c_adw_navigation_page_get_can_pop; ///
-  GtkWidget* function(AdwNavigationPage* self) c_adw_navigation_page_get_child; ///
-  const(char)* function(AdwNavigationPage* self) c_adw_navigation_page_get_tag; ///
-  const(char)* function(AdwNavigationPage* self) c_adw_navigation_page_get_title; ///
-  void function(AdwNavigationPage* self, gboolean canPop) c_adw_navigation_page_set_can_pop; ///
-  void function(AdwNavigationPage* self, GtkWidget* child) c_adw_navigation_page_set_child; ///
-  void function(AdwNavigationPage* self, const(char)* tag) c_adw_navigation_page_set_tag; ///
-  void function(AdwNavigationPage* self, const(char)* title) c_adw_navigation_page_set_title; ///
-
-  // NavigationSplitView
-  GType function() c_adw_navigation_split_view_get_type; ///
-  GtkWidget* function() c_adw_navigation_split_view_new; ///
-  gboolean function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_collapsed; ///
-  AdwNavigationPage* function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_content; ///
-  double function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_max_sidebar_width; ///
-  double function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_min_sidebar_width; ///
-  gboolean function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_show_content; ///
-  AdwNavigationPage* function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_sidebar; ///
-  GtkPackType function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_sidebar_position; ///
-  double function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_sidebar_width_fraction; ///
-  AdwLengthUnit function(AdwNavigationSplitView* self) c_adw_navigation_split_view_get_sidebar_width_unit; ///
-  void function(AdwNavigationSplitView* self, gboolean collapsed) c_adw_navigation_split_view_set_collapsed; ///
-  void function(AdwNavigationSplitView* self, AdwNavigationPage* content) c_adw_navigation_split_view_set_content; ///
-  void function(AdwNavigationSplitView* self, double width) c_adw_navigation_split_view_set_max_sidebar_width; ///
-  void function(AdwNavigationSplitView* self, double width) c_adw_navigation_split_view_set_min_sidebar_width; ///
-  void function(AdwNavigationSplitView* self, gboolean showContent) c_adw_navigation_split_view_set_show_content; ///
-  void function(AdwNavigationSplitView* self, AdwNavigationPage* sidebar) c_adw_navigation_split_view_set_sidebar; ///
-  void function(AdwNavigationSplitView* self, GtkPackType position) c_adw_navigation_split_view_set_sidebar_position; ///
-  void function(AdwNavigationSplitView* self, double fraction) c_adw_navigation_split_view_set_sidebar_width_fraction; ///
-  void function(AdwNavigationSplitView* self, AdwLengthUnit unit) c_adw_navigation_split_view_set_sidebar_width_unit; ///
-
-  // NavigationView
-  GType function() c_adw_navigation_view_get_type; ///
-  GtkWidget* function() c_adw_navigation_view_new; ///
-  void function(AdwNavigationView* self, AdwNavigationPage* page) c_adw_navigation_view_add; ///
-  AdwNavigationPage* function(AdwNavigationView* self, const(char)* tag) c_adw_navigation_view_find_page; ///
-  gboolean function(AdwNavigationView* self) c_adw_navigation_view_get_animate_transitions; ///
-  gboolean function(AdwNavigationView* self) c_adw_navigation_view_get_hhomogeneous; ///
-  GListModel* function(AdwNavigationView* self) c_adw_navigation_view_get_navigation_stack; ///
-  gboolean function(AdwNavigationView* self) c_adw_navigation_view_get_pop_on_escape; ///
-  AdwNavigationPage* function(AdwNavigationView* self, AdwNavigationPage* page) c_adw_navigation_view_get_previous_page; ///
-  gboolean function(AdwNavigationView* self) c_adw_navigation_view_get_vhomogeneous; ///
-  AdwNavigationPage* function(AdwNavigationView* self) c_adw_navigation_view_get_visible_page; ///
-  const(char)* function(AdwNavigationView* self) c_adw_navigation_view_get_visible_page_tag; ///
-  gboolean function(AdwNavigationView* self) c_adw_navigation_view_pop; ///
-  gboolean function(AdwNavigationView* self, AdwNavigationPage* page) c_adw_navigation_view_pop_to_page; ///
-  gboolean function(AdwNavigationView* self, const(char)* tag) c_adw_navigation_view_pop_to_tag; ///
-  void function(AdwNavigationView* self, AdwNavigationPage* page) c_adw_navigation_view_push; ///
-  void function(AdwNavigationView* self, const(char)* tag) c_adw_navigation_view_push_by_tag; ///
-  void function(AdwNavigationView* self, AdwNavigationPage* page) c_adw_navigation_view_remove; ///
-  void function(AdwNavigationView* self, AdwNavigationPage** pages, int nPages) c_adw_navigation_view_replace; ///
-  void function(AdwNavigationView* self, const(char*)* tags, int nTags) c_adw_navigation_view_replace_with_tags; ///
-  void function(AdwNavigationView* self, gboolean animateTransitions) c_adw_navigation_view_set_animate_transitions; ///
-  void function(AdwNavigationView* self, gboolean hhomogeneous) c_adw_navigation_view_set_hhomogeneous; ///
-  void function(AdwNavigationView* self, gboolean popOnEscape) c_adw_navigation_view_set_pop_on_escape; ///
-  void function(AdwNavigationView* self, gboolean vhomogeneous) c_adw_navigation_view_set_vhomogeneous; ///
-
-  // NoneAnimationTarget
-  GType function() c_adw_none_animation_target_get_type; ///
-  AdwAnimationTarget* function() c_adw_none_animation_target_new; ///
-
-  // OverlaySplitView
-  GType function() c_adw_overlay_split_view_get_type; ///
-  GtkWidget* function() c_adw_overlay_split_view_new; ///
-  gboolean function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_collapsed; ///
-  GtkWidget* function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_content; ///
-  gboolean function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_enable_hide_gesture; ///
-  gboolean function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_enable_show_gesture; ///
-  double function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_max_sidebar_width; ///
-  double function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_min_sidebar_width; ///
-  gboolean function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_pin_sidebar; ///
-  gboolean function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_show_sidebar; ///
-  GtkWidget* function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_sidebar; ///
-  GtkPackType function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_sidebar_position; ///
-  double function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_sidebar_width_fraction; ///
-  AdwLengthUnit function(AdwOverlaySplitView* self) c_adw_overlay_split_view_get_sidebar_width_unit; ///
-  void function(AdwOverlaySplitView* self, gboolean collapsed) c_adw_overlay_split_view_set_collapsed; ///
-  void function(AdwOverlaySplitView* self, GtkWidget* content) c_adw_overlay_split_view_set_content; ///
-  void function(AdwOverlaySplitView* self, gboolean enableHideGesture) c_adw_overlay_split_view_set_enable_hide_gesture; ///
-  void function(AdwOverlaySplitView* self, gboolean enableShowGesture) c_adw_overlay_split_view_set_enable_show_gesture; ///
-  void function(AdwOverlaySplitView* self, double width) c_adw_overlay_split_view_set_max_sidebar_width; ///
-  void function(AdwOverlaySplitView* self, double width) c_adw_overlay_split_view_set_min_sidebar_width; ///
-  void function(AdwOverlaySplitView* self, gboolean pinSidebar) c_adw_overlay_split_view_set_pin_sidebar; ///
-  void function(AdwOverlaySplitView* self, gboolean showSidebar) c_adw_overlay_split_view_set_show_sidebar; ///
-  void function(AdwOverlaySplitView* self, GtkWidget* sidebar) c_adw_overlay_split_view_set_sidebar; ///
-  void function(AdwOverlaySplitView* self, GtkPackType position) c_adw_overlay_split_view_set_sidebar_position; ///
-  void function(AdwOverlaySplitView* self, double fraction) c_adw_overlay_split_view_set_sidebar_width_fraction; ///
-  void function(AdwOverlaySplitView* self, AdwLengthUnit unit) c_adw_overlay_split_view_set_sidebar_width_unit; ///
-
-  // PasswordEntryRow
-  GType function() c_adw_password_entry_row_get_type; ///
-  GtkWidget* function() c_adw_password_entry_row_new; ///
-
-  // PreferencesDialog
-  GType function() c_adw_preferences_dialog_get_type; ///
-  AdwDialog* function() c_adw_preferences_dialog_new; ///
-  void function(AdwPreferencesDialog* self, AdwPreferencesPage* page) c_adw_preferences_dialog_add; ///
-  void function(AdwPreferencesDialog* self, AdwToast* toast) c_adw_preferences_dialog_add_toast; ///
-  gboolean function(AdwPreferencesDialog* self) c_adw_preferences_dialog_get_search_enabled; ///
-  AdwPreferencesPage* function(AdwPreferencesDialog* self) c_adw_preferences_dialog_get_visible_page; ///
-  const(char)* function(AdwPreferencesDialog* self) c_adw_preferences_dialog_get_visible_page_name; ///
-  gboolean function(AdwPreferencesDialog* self) c_adw_preferences_dialog_pop_subpage; ///
-  void function(AdwPreferencesDialog* self, AdwNavigationPage* page) c_adw_preferences_dialog_push_subpage; ///
-  void function(AdwPreferencesDialog* self, AdwPreferencesPage* page) c_adw_preferences_dialog_remove; ///
-  void function(AdwPreferencesDialog* self, gboolean searchEnabled) c_adw_preferences_dialog_set_search_enabled; ///
-  void function(AdwPreferencesDialog* self, AdwPreferencesPage* page) c_adw_preferences_dialog_set_visible_page; ///
-  void function(AdwPreferencesDialog* self, const(char)* name) c_adw_preferences_dialog_set_visible_page_name; ///
-
-  // PreferencesGroup
-  GType function() c_adw_preferences_group_get_type; ///
-  GtkWidget* function() c_adw_preferences_group_new; ///
-  void function(AdwPreferencesGroup* self, GtkWidget* child) c_adw_preferences_group_add; ///
-  void function(AdwPreferencesGroup* self, GListModel* model, GtkListBoxCreateWidgetFunc createRowFunc, void* userData, GDestroyNotify userDataFreeFunc) c_adw_preferences_group_bind_model; ///
-  const(char)* function(AdwPreferencesGroup* self) c_adw_preferences_group_get_description; ///
-  GtkWidget* function(AdwPreferencesGroup* self) c_adw_preferences_group_get_header_suffix; ///
-  GtkWidget* function(AdwPreferencesGroup* self, uint index) c_adw_preferences_group_get_row; ///
-  gboolean function(AdwPreferencesGroup* self) c_adw_preferences_group_get_separate_rows; ///
-  const(char)* function(AdwPreferencesGroup* self) c_adw_preferences_group_get_title; ///
-  void function(AdwPreferencesGroup* self, GtkWidget* child) c_adw_preferences_group_remove; ///
-  void function(AdwPreferencesGroup* self, const(char)* description) c_adw_preferences_group_set_description; ///
-  void function(AdwPreferencesGroup* self, GtkWidget* suffix) c_adw_preferences_group_set_header_suffix; ///
-  void function(AdwPreferencesGroup* self, gboolean separateRows) c_adw_preferences_group_set_separate_rows; ///
-  void function(AdwPreferencesGroup* self, const(char)* title) c_adw_preferences_group_set_title; ///
-
-  // PreferencesPage
-  GType function() c_adw_preferences_page_get_type; ///
-  GtkWidget* function() c_adw_preferences_page_new; ///
-  void function(AdwPreferencesPage* self, AdwPreferencesGroup* group) c_adw_preferences_page_add; ///
-  AdwBanner* function(AdwPreferencesPage* self) c_adw_preferences_page_get_banner; ///
-  const(char)* function(AdwPreferencesPage* self) c_adw_preferences_page_get_description; ///
-  gboolean function(AdwPreferencesPage* self) c_adw_preferences_page_get_description_centered; ///
-  AdwPreferencesGroup* function(AdwPreferencesPage* self, uint index) c_adw_preferences_page_get_group; ///
-  const(char)* function(AdwPreferencesPage* self) c_adw_preferences_page_get_icon_name; ///
-  const(char)* function(AdwPreferencesPage* self) c_adw_preferences_page_get_name; ///
-  const(char)* function(AdwPreferencesPage* self) c_adw_preferences_page_get_title; ///
-  gboolean function(AdwPreferencesPage* self) c_adw_preferences_page_get_use_underline; ///
-  void function(AdwPreferencesPage* self, AdwPreferencesGroup* group, int index) c_adw_preferences_page_insert; ///
-  void function(AdwPreferencesPage* self, AdwPreferencesGroup* group) c_adw_preferences_page_remove; ///
-  void function(AdwPreferencesPage* self) c_adw_preferences_page_scroll_to_top; ///
-  void function(AdwPreferencesPage* self, AdwBanner* banner) c_adw_preferences_page_set_banner; ///
-  void function(AdwPreferencesPage* self, const(char)* description) c_adw_preferences_page_set_description; ///
-  void function(AdwPreferencesPage* self, gboolean centered) c_adw_preferences_page_set_description_centered; ///
-  void function(AdwPreferencesPage* self, const(char)* iconName) c_adw_preferences_page_set_icon_name; ///
-  void function(AdwPreferencesPage* self, const(char)* name) c_adw_preferences_page_set_name; ///
-  void function(AdwPreferencesPage* self, const(char)* title) c_adw_preferences_page_set_title; ///
-  void function(AdwPreferencesPage* self, gboolean useUnderline) c_adw_preferences_page_set_use_underline; ///
-
-  // PreferencesRow
-  GType function() c_adw_preferences_row_get_type; ///
-  GtkWidget* function() c_adw_preferences_row_new; ///
-  const(char)* function(AdwPreferencesRow* self) c_adw_preferences_row_get_title; ///
-  gboolean function(AdwPreferencesRow* self) c_adw_preferences_row_get_title_selectable; ///
-  gboolean function(AdwPreferencesRow* self) c_adw_preferences_row_get_use_markup; ///
-  gboolean function(AdwPreferencesRow* self) c_adw_preferences_row_get_use_underline; ///
-  void function(AdwPreferencesRow* self, const(char)* title) c_adw_preferences_row_set_title; ///
-  void function(AdwPreferencesRow* self, gboolean titleSelectable) c_adw_preferences_row_set_title_selectable; ///
-  void function(AdwPreferencesRow* self, gboolean useMarkup) c_adw_preferences_row_set_use_markup; ///
-  void function(AdwPreferencesRow* self, gboolean useUnderline) c_adw_preferences_row_set_use_underline; ///
-
-  // PreferencesWindow
-  GType function() c_adw_preferences_window_get_type; ///
-  GtkWidget* function() c_adw_preferences_window_new; ///
-  void function(AdwPreferencesWindow* self, AdwPreferencesPage* page) c_adw_preferences_window_add; ///
-  void function(AdwPreferencesWindow* self, AdwToast* toast) c_adw_preferences_window_add_toast; ///
-  void function(AdwPreferencesWindow* self) c_adw_preferences_window_close_subpage; ///
-  gboolean function(AdwPreferencesWindow* self) c_adw_preferences_window_get_can_navigate_back; ///
-  gboolean function(AdwPreferencesWindow* self) c_adw_preferences_window_get_search_enabled; ///
-  AdwPreferencesPage* function(AdwPreferencesWindow* self) c_adw_preferences_window_get_visible_page; ///
-  const(char)* function(AdwPreferencesWindow* self) c_adw_preferences_window_get_visible_page_name; ///
-  gboolean function(AdwPreferencesWindow* self) c_adw_preferences_window_pop_subpage; ///
-  void function(AdwPreferencesWindow* self, GtkWidget* subpage) c_adw_preferences_window_present_subpage; ///
-  void function(AdwPreferencesWindow* self, AdwNavigationPage* page) c_adw_preferences_window_push_subpage; ///
-  void function(AdwPreferencesWindow* self, AdwPreferencesPage* page) c_adw_preferences_window_remove; ///
-  void function(AdwPreferencesWindow* self, gboolean canNavigateBack) c_adw_preferences_window_set_can_navigate_back; ///
-  void function(AdwPreferencesWindow* self, gboolean searchEnabled) c_adw_preferences_window_set_search_enabled; ///
-  void function(AdwPreferencesWindow* self, AdwPreferencesPage* page) c_adw_preferences_window_set_visible_page; ///
-  void function(AdwPreferencesWindow* self, const(char)* name) c_adw_preferences_window_set_visible_page_name; ///
-
-  // PropertyAnimationTarget
-  GType function() c_adw_property_animation_target_get_type; ///
-  AdwAnimationTarget* function(GObject* object, const(char)* propertyName) c_adw_property_animation_target_new; ///
-  AdwAnimationTarget* function(GObject* object, GParamSpec* pspec) c_adw_property_animation_target_new_for_pspec; ///
-  GObject* function(AdwPropertyAnimationTarget* self) c_adw_property_animation_target_get_object; ///
-  GParamSpec* function(AdwPropertyAnimationTarget* self) c_adw_property_animation_target_get_pspec; ///
-
-  // ShortcutLabel
-  GType function() c_adw_shortcut_label_get_type; ///
-  GtkWidget* function(const(char)* accelerator) c_adw_shortcut_label_new; ///
-  const(char)* function(AdwShortcutLabel* self) c_adw_shortcut_label_get_accelerator; ///
-  const(char)* function(AdwShortcutLabel* self) c_adw_shortcut_label_get_disabled_text; ///
-  void function(AdwShortcutLabel* self, const(char)* accelerator) c_adw_shortcut_label_set_accelerator; ///
-  void function(AdwShortcutLabel* self, const(char)* disabledText) c_adw_shortcut_label_set_disabled_text; ///
-
-  // ShortcutsDialog
-  GType function() c_adw_shortcuts_dialog_get_type; ///
-  AdwDialog* function() c_adw_shortcuts_dialog_new; ///
-  void function(AdwShortcutsDialog* self, AdwShortcutsSection* section) c_adw_shortcuts_dialog_add; ///
-
-  // ShortcutsItem
-  GType function() c_adw_shortcuts_item_get_type; ///
-  AdwShortcutsItem* function(const(char)* title, const(char)* accelerator) c_adw_shortcuts_item_new; ///
-  AdwShortcutsItem* function(const(char)* title, const(char)* actionName) c_adw_shortcuts_item_new_from_action; ///
-  const(char)* function(AdwShortcutsItem* self) c_adw_shortcuts_item_get_accelerator; ///
-  const(char)* function(AdwShortcutsItem* self) c_adw_shortcuts_item_get_action_name; ///
-  GtkTextDirection function(AdwShortcutsItem* self) c_adw_shortcuts_item_get_direction; ///
-  const(char)* function(AdwShortcutsItem* self) c_adw_shortcuts_item_get_subtitle; ///
-  const(char)* function(AdwShortcutsItem* self) c_adw_shortcuts_item_get_title; ///
-  void function(AdwShortcutsItem* self, const(char)* accelerator) c_adw_shortcuts_item_set_accelerator; ///
-  void function(AdwShortcutsItem* self, const(char)* actionName) c_adw_shortcuts_item_set_action_name; ///
-  void function(AdwShortcutsItem* self, GtkTextDirection direction) c_adw_shortcuts_item_set_direction; ///
-  void function(AdwShortcutsItem* self, const(char)* subtitle) c_adw_shortcuts_item_set_subtitle; ///
-  void function(AdwShortcutsItem* self, const(char)* title) c_adw_shortcuts_item_set_title; ///
-
-  // ShortcutsSection
-  GType function() c_adw_shortcuts_section_get_type; ///
-  AdwShortcutsSection* function(const(char)* title) c_adw_shortcuts_section_new; ///
-  void function(AdwShortcutsSection* self, AdwShortcutsItem* item) c_adw_shortcuts_section_add; ///
-  const(char)* function(AdwShortcutsSection* self) c_adw_shortcuts_section_get_title; ///
-  void function(AdwShortcutsSection* self, const(char)* title) c_adw_shortcuts_section_set_title; ///
-
-  // Sidebar
-  GType function() c_adw_sidebar_get_type; ///
-  GtkWidget* function() c_adw_sidebar_new; ///
-  void function(AdwSidebar* self, AdwSidebarSection* section) c_adw_sidebar_append; ///
-  gboolean function(AdwSidebar* self) c_adw_sidebar_get_drop_preload; ///
-  GtkFilter* function(AdwSidebar* self) c_adw_sidebar_get_filter; ///
-  AdwSidebarItem* function(AdwSidebar* self, uint index) c_adw_sidebar_get_item; ///
-  GtkSelectionModel* function(AdwSidebar* self) c_adw_sidebar_get_items; ///
-  GMenuModel* function(AdwSidebar* self) c_adw_sidebar_get_menu_model; ///
-  AdwSidebarMode function(AdwSidebar* self) c_adw_sidebar_get_mode; ///
-  GtkWidget* function(AdwSidebar* self) c_adw_sidebar_get_placeholder; ///
-  AdwSidebarSection* function(AdwSidebar* self, uint index) c_adw_sidebar_get_section; ///
-  GListModel* function(AdwSidebar* self) c_adw_sidebar_get_sections; ///
-  uint function(AdwSidebar* self) c_adw_sidebar_get_selected; ///
-  AdwSidebarItem* function(AdwSidebar* self) c_adw_sidebar_get_selected_item; ///
-  void function(AdwSidebar* self, AdwSidebarSection* section, int position) c_adw_sidebar_insert; ///
-  void function(AdwSidebar* self, AdwSidebarSection* section) c_adw_sidebar_prepend; ///
-  void function(AdwSidebar* self, AdwSidebarSection* section) c_adw_sidebar_remove; ///
-  void function(AdwSidebar* self) c_adw_sidebar_remove_all; ///
-  void function(AdwSidebar* self, gboolean preload) c_adw_sidebar_set_drop_preload; ///
-  void function(AdwSidebar* self, GtkFilter* filter) c_adw_sidebar_set_filter; ///
-  void function(AdwSidebar* self, GMenuModel* menuModel) c_adw_sidebar_set_menu_model; ///
-  void function(AdwSidebar* self, AdwSidebarMode mode) c_adw_sidebar_set_mode; ///
-  void function(AdwSidebar* self, GtkWidget* placeholder) c_adw_sidebar_set_placeholder; ///
-  void function(AdwSidebar* self, uint selected) c_adw_sidebar_set_selected; ///
-  void function(AdwSidebar* self, GdkDragAction actions, GType* types, size_t nTypes) c_adw_sidebar_setup_drop_target; ///
-
-  // SidebarItem
-  GType function() c_adw_sidebar_item_get_type; ///
-  AdwSidebarItem* function(const(char)* title) c_adw_sidebar_item_new; ///
-  gboolean function(AdwSidebarItem* self) c_adw_sidebar_item_get_drag_motion_activate; ///
-  gboolean function(AdwSidebarItem* self) c_adw_sidebar_item_get_enabled; ///
-  const(char)* function(AdwSidebarItem* self) c_adw_sidebar_item_get_icon_name; ///
-  GdkPaintable* function(AdwSidebarItem* self) c_adw_sidebar_item_get_icon_paintable; ///
-  uint function(AdwSidebarItem* self) c_adw_sidebar_item_get_index; ///
-  AdwSidebarSection* function(AdwSidebarItem* self) c_adw_sidebar_item_get_section; ///
-  uint function(AdwSidebarItem* self) c_adw_sidebar_item_get_section_index; ///
-  const(char)* function(AdwSidebarItem* self) c_adw_sidebar_item_get_subtitle; ///
-  GtkWidget* function(AdwSidebarItem* self) c_adw_sidebar_item_get_suffix; ///
-  const(char)* function(AdwSidebarItem* self) c_adw_sidebar_item_get_title; ///
-  const(char)* function(AdwSidebarItem* self) c_adw_sidebar_item_get_tooltip; ///
-  gboolean function(AdwSidebarItem* self) c_adw_sidebar_item_get_use_underline; ///
-  gboolean function(AdwSidebarItem* self) c_adw_sidebar_item_get_visible; ///
-  void function(AdwSidebarItem* self, gboolean dragMotionActivate) c_adw_sidebar_item_set_drag_motion_activate; ///
-  void function(AdwSidebarItem* self, gboolean enabled) c_adw_sidebar_item_set_enabled; ///
-  void function(AdwSidebarItem* self, const(char)* iconName) c_adw_sidebar_item_set_icon_name; ///
-  void function(AdwSidebarItem* self, GdkPaintable* paintable) c_adw_sidebar_item_set_icon_paintable; ///
-  void function(AdwSidebarItem* self, const(char)* subtitle) c_adw_sidebar_item_set_subtitle; ///
-  void function(AdwSidebarItem* self, GtkWidget* suffix) c_adw_sidebar_item_set_suffix; ///
-  void function(AdwSidebarItem* self, const(char)* title) c_adw_sidebar_item_set_title; ///
-  void function(AdwSidebarItem* self, const(char)* tooltip) c_adw_sidebar_item_set_tooltip; ///
-  void function(AdwSidebarItem* self, gboolean useUnderline) c_adw_sidebar_item_set_use_underline; ///
-  void function(AdwSidebarItem* self, gboolean visible) c_adw_sidebar_item_set_visible; ///
-
-  // SidebarSection
-  GType function() c_adw_sidebar_section_get_type; ///
-  AdwSidebarSection* function() c_adw_sidebar_section_new; ///
-  void function(AdwSidebarSection* self, AdwSidebarItem* item) c_adw_sidebar_section_append; ///
-  void function(AdwSidebarSection* self, GListModel* model, AdwSidebarSectionCreateItemFunc createItemFunc, void* userData, GDestroyNotify userDataFreeFunc) c_adw_sidebar_section_bind_model; ///
-  AdwSidebarItem* function(AdwSidebarSection* self, uint index) c_adw_sidebar_section_get_item; ///
-  GListModel* function(AdwSidebarSection* self) c_adw_sidebar_section_get_items; ///
-  GMenuModel* function(AdwSidebarSection* self) c_adw_sidebar_section_get_menu_model; ///
-  AdwSidebar* function(AdwSidebarSection* self) c_adw_sidebar_section_get_sidebar; ///
-  const(char)* function(AdwSidebarSection* self) c_adw_sidebar_section_get_title; ///
-  void function(AdwSidebarSection* self, AdwSidebarItem* item, int position) c_adw_sidebar_section_insert; ///
-  void function(AdwSidebarSection* self, AdwSidebarItem* item) c_adw_sidebar_section_prepend; ///
-  void function(AdwSidebarSection* self, AdwSidebarItem* item) c_adw_sidebar_section_remove; ///
-  void function(AdwSidebarSection* self) c_adw_sidebar_section_remove_all; ///
-  void function(AdwSidebarSection* self, GMenuModel* menuModel) c_adw_sidebar_section_set_menu_model; ///
-  void function(AdwSidebarSection* self, const(char)* title) c_adw_sidebar_section_set_title; ///
-
-  // SpinRow
-  GType function() c_adw_spin_row_get_type; ///
-  GtkWidget* function(GtkAdjustment* adjustment, double climbRate, uint digits) c_adw_spin_row_new; ///
-  GtkWidget* function(double min, double max, double step) c_adw_spin_row_new_with_range; ///
-  void function(AdwSpinRow* self, GtkAdjustment* adjustment, double climbRate, uint digits) c_adw_spin_row_configure; ///
-  GtkAdjustment* function(AdwSpinRow* self) c_adw_spin_row_get_adjustment; ///
-  double function(AdwSpinRow* self) c_adw_spin_row_get_climb_rate; ///
-  uint function(AdwSpinRow* self) c_adw_spin_row_get_digits; ///
-  gboolean function(AdwSpinRow* self) c_adw_spin_row_get_numeric; ///
-  gboolean function(AdwSpinRow* self) c_adw_spin_row_get_snap_to_ticks; ///
-  GtkSpinButtonUpdatePolicy function(AdwSpinRow* self) c_adw_spin_row_get_update_policy; ///
-  double function(AdwSpinRow* self) c_adw_spin_row_get_value; ///
-  gboolean function(AdwSpinRow* self) c_adw_spin_row_get_wrap; ///
-  void function(AdwSpinRow* self, GtkAdjustment* adjustment) c_adw_spin_row_set_adjustment; ///
-  void function(AdwSpinRow* self, double climbRate) c_adw_spin_row_set_climb_rate; ///
-  void function(AdwSpinRow* self, uint digits) c_adw_spin_row_set_digits; ///
-  void function(AdwSpinRow* self, gboolean numeric) c_adw_spin_row_set_numeric; ///
-  void function(AdwSpinRow* self, double min, double max) c_adw_spin_row_set_range; ///
-  void function(AdwSpinRow* self, gboolean snapToTicks) c_adw_spin_row_set_snap_to_ticks; ///
-  void function(AdwSpinRow* self, GtkSpinButtonUpdatePolicy policy) c_adw_spin_row_set_update_policy; ///
-  void function(AdwSpinRow* self, double value) c_adw_spin_row_set_value; ///
-  void function(AdwSpinRow* self, gboolean wrap) c_adw_spin_row_set_wrap; ///
-  void function(AdwSpinRow* self) c_adw_spin_row_update; ///
-
-  // Spinner
-  GType function() c_adw_spinner_get_type; ///
-  GtkWidget* function() c_adw_spinner_new; ///
-
-  // SpinnerPaintable
-  GType function() c_adw_spinner_paintable_get_type; ///
-  AdwSpinnerPaintable* function(GtkWidget* widget) c_adw_spinner_paintable_new; ///
-  GtkWidget* function(AdwSpinnerPaintable* self) c_adw_spinner_paintable_get_widget; ///
-  void function(AdwSpinnerPaintable* self, GtkWidget* widget) c_adw_spinner_paintable_set_widget; ///
-
-  // SplitButton
-  GType function() c_adw_split_button_get_type; ///
-  GtkWidget* function() c_adw_split_button_new; ///
-  gboolean function(AdwSplitButton* self) c_adw_split_button_get_can_shrink; ///
-  GtkWidget* function(AdwSplitButton* self) c_adw_split_button_get_child; ///
-  GtkArrowType function(AdwSplitButton* self) c_adw_split_button_get_direction; ///
-  const(char)* function(AdwSplitButton* self) c_adw_split_button_get_dropdown_tooltip; ///
-  const(char)* function(AdwSplitButton* self) c_adw_split_button_get_icon_name; ///
-  const(char)* function(AdwSplitButton* self) c_adw_split_button_get_label; ///
-  GMenuModel* function(AdwSplitButton* self) c_adw_split_button_get_menu_model; ///
-  GtkPopover* function(AdwSplitButton* self) c_adw_split_button_get_popover; ///
-  gboolean function(AdwSplitButton* self) c_adw_split_button_get_use_underline; ///
-  void function(AdwSplitButton* self) c_adw_split_button_popdown; ///
-  void function(AdwSplitButton* self) c_adw_split_button_popup; ///
-  void function(AdwSplitButton* self, gboolean canShrink) c_adw_split_button_set_can_shrink; ///
-  void function(AdwSplitButton* self, GtkWidget* child) c_adw_split_button_set_child; ///
-  void function(AdwSplitButton* self, GtkArrowType direction) c_adw_split_button_set_direction; ///
-  void function(AdwSplitButton* self, const(char)* tooltip) c_adw_split_button_set_dropdown_tooltip; ///
-  void function(AdwSplitButton* self, const(char)* iconName) c_adw_split_button_set_icon_name; ///
-  void function(AdwSplitButton* self, const(char)* label) c_adw_split_button_set_label; ///
-  void function(AdwSplitButton* self, GMenuModel* menuModel) c_adw_split_button_set_menu_model; ///
-  void function(AdwSplitButton* self, GtkPopover* popover) c_adw_split_button_set_popover; ///
-  void function(AdwSplitButton* self, gboolean useUnderline) c_adw_split_button_set_use_underline; ///
-
-  // SpringAnimation
-  GType function() c_adw_spring_animation_get_type; ///
-  AdwAnimation* function(GtkWidget* widget, double from, double to, AdwSpringParams* springParams, AdwAnimationTarget* target) c_adw_spring_animation_new; ///
-  double function(AdwSpringAnimation* self, uint time) c_adw_spring_animation_calculate_value; ///
-  double function(AdwSpringAnimation* self, uint time) c_adw_spring_animation_calculate_velocity; ///
-  gboolean function(AdwSpringAnimation* self) c_adw_spring_animation_get_clamp; ///
-  double function(AdwSpringAnimation* self) c_adw_spring_animation_get_epsilon; ///
-  uint function(AdwSpringAnimation* self) c_adw_spring_animation_get_estimated_duration; ///
-  double function(AdwSpringAnimation* self) c_adw_spring_animation_get_initial_velocity; ///
-  AdwSpringParams* function(AdwSpringAnimation* self) c_adw_spring_animation_get_spring_params; ///
-  double function(AdwSpringAnimation* self) c_adw_spring_animation_get_value_from; ///
-  double function(AdwSpringAnimation* self) c_adw_spring_animation_get_value_to; ///
-  double function(AdwSpringAnimation* self) c_adw_spring_animation_get_velocity; ///
-  void function(AdwSpringAnimation* self, gboolean clamp) c_adw_spring_animation_set_clamp; ///
-  void function(AdwSpringAnimation* self, double epsilon) c_adw_spring_animation_set_epsilon; ///
-  void function(AdwSpringAnimation* self, double velocity) c_adw_spring_animation_set_initial_velocity; ///
-  void function(AdwSpringAnimation* self, AdwSpringParams* springParams) c_adw_spring_animation_set_spring_params; ///
-  void function(AdwSpringAnimation* self, double value) c_adw_spring_animation_set_value_from; ///
-  void function(AdwSpringAnimation* self, double value) c_adw_spring_animation_set_value_to; ///
-
-  // SpringParams
-  GType function() c_adw_spring_params_get_type; ///
-  AdwSpringParams* function(double dampingRatio, double mass, double stiffness) c_adw_spring_params_new; ///
-  AdwSpringParams* function(double damping, double mass, double stiffness) c_adw_spring_params_new_full; ///
-  double function(AdwSpringParams* self) c_adw_spring_params_get_damping; ///
-  double function(AdwSpringParams* self) c_adw_spring_params_get_damping_ratio; ///
-  double function(AdwSpringParams* self) c_adw_spring_params_get_mass; ///
-  double function(AdwSpringParams* self) c_adw_spring_params_get_stiffness; ///
-  AdwSpringParams* function(AdwSpringParams* self) c_adw_spring_params_ref; ///
-  void function(AdwSpringParams* self) c_adw_spring_params_unref; ///
-
-  // Squeezer
-  GType function() c_adw_squeezer_get_type; ///
-  GtkWidget* function() c_adw_squeezer_new; ///
-  AdwSqueezerPage* function(AdwSqueezer* self, GtkWidget* child) c_adw_squeezer_add; ///
-  gboolean function(AdwSqueezer* self) c_adw_squeezer_get_allow_none; ///
-  gboolean function(AdwSqueezer* self) c_adw_squeezer_get_homogeneous; ///
-  gboolean function(AdwSqueezer* self) c_adw_squeezer_get_interpolate_size; ///
-  AdwSqueezerPage* function(AdwSqueezer* self, GtkWidget* child) c_adw_squeezer_get_page; ///
-  GtkSelectionModel* function(AdwSqueezer* self) c_adw_squeezer_get_pages; ///
-  AdwFoldThresholdPolicy function(AdwSqueezer* self) c_adw_squeezer_get_switch_threshold_policy; ///
-  uint function(AdwSqueezer* self) c_adw_squeezer_get_transition_duration; ///
-  gboolean function(AdwSqueezer* self) c_adw_squeezer_get_transition_running; ///
-  AdwSqueezerTransitionType function(AdwSqueezer* self) c_adw_squeezer_get_transition_type; ///
-  GtkWidget* function(AdwSqueezer* self) c_adw_squeezer_get_visible_child; ///
-  float function(AdwSqueezer* self) c_adw_squeezer_get_xalign; ///
-  float function(AdwSqueezer* self) c_adw_squeezer_get_yalign; ///
-  void function(AdwSqueezer* self, GtkWidget* child) c_adw_squeezer_remove; ///
-  void function(AdwSqueezer* self, gboolean allowNone) c_adw_squeezer_set_allow_none; ///
-  void function(AdwSqueezer* self, gboolean homogeneous) c_adw_squeezer_set_homogeneous; ///
-  void function(AdwSqueezer* self, gboolean interpolateSize) c_adw_squeezer_set_interpolate_size; ///
-  void function(AdwSqueezer* self, AdwFoldThresholdPolicy policy) c_adw_squeezer_set_switch_threshold_policy; ///
-  void function(AdwSqueezer* self, uint duration) c_adw_squeezer_set_transition_duration; ///
-  void function(AdwSqueezer* self, AdwSqueezerTransitionType transition) c_adw_squeezer_set_transition_type; ///
-  void function(AdwSqueezer* self, float xalign) c_adw_squeezer_set_xalign; ///
-  void function(AdwSqueezer* self, float yalign) c_adw_squeezer_set_yalign; ///
-
-  // SqueezerPage
-  GType function() c_adw_squeezer_page_get_type; ///
-  GtkWidget* function(AdwSqueezerPage* self) c_adw_squeezer_page_get_child; ///
-  gboolean function(AdwSqueezerPage* self) c_adw_squeezer_page_get_enabled; ///
-  void function(AdwSqueezerPage* self, gboolean enabled) c_adw_squeezer_page_set_enabled; ///
-
-  // StatusPage
-  GType function() c_adw_status_page_get_type; ///
-  GtkWidget* function() c_adw_status_page_new; ///
-  GtkWidget* function(AdwStatusPage* self) c_adw_status_page_get_child; ///
-  const(char)* function(AdwStatusPage* self) c_adw_status_page_get_description; ///
-  const(char)* function(AdwStatusPage* self) c_adw_status_page_get_icon_name; ///
-  GdkPaintable* function(AdwStatusPage* self) c_adw_status_page_get_paintable; ///
-  const(char)* function(AdwStatusPage* self) c_adw_status_page_get_title; ///
-  void function(AdwStatusPage* self, GtkWidget* child) c_adw_status_page_set_child; ///
-  void function(AdwStatusPage* self, const(char)* description) c_adw_status_page_set_description; ///
-  void function(AdwStatusPage* self, const(char)* iconName) c_adw_status_page_set_icon_name; ///
-  void function(AdwStatusPage* self, GdkPaintable* paintable) c_adw_status_page_set_paintable; ///
-  void function(AdwStatusPage* self, const(char)* title) c_adw_status_page_set_title; ///
-
-  // StyleManager
-  GType function() c_adw_style_manager_get_type; ///
-  AdwStyleManager* function() c_adw_style_manager_get_default; ///
-  AdwStyleManager* function(GdkDisplay* display) c_adw_style_manager_get_for_display; ///
-  AdwAccentColor function(AdwStyleManager* self) c_adw_style_manager_get_accent_color; ///
-  GdkRGBA* function(AdwStyleManager* self) c_adw_style_manager_get_accent_color_rgba; ///
-  AdwColorScheme function(AdwStyleManager* self) c_adw_style_manager_get_color_scheme; ///
-  gboolean function(AdwStyleManager* self) c_adw_style_manager_get_dark; ///
-  GdkDisplay* function(AdwStyleManager* self) c_adw_style_manager_get_display; ///
-  const(char)* function(AdwStyleManager* self) c_adw_style_manager_get_document_font_name; ///
-  gboolean function(AdwStyleManager* self) c_adw_style_manager_get_high_contrast; ///
-  const(char)* function(AdwStyleManager* self) c_adw_style_manager_get_monospace_font_name; ///
-  gboolean function(AdwStyleManager* self) c_adw_style_manager_get_system_supports_accent_colors; ///
-  gboolean function(AdwStyleManager* self) c_adw_style_manager_get_system_supports_color_schemes; ///
-  void function(AdwStyleManager* self, AdwColorScheme colorScheme) c_adw_style_manager_set_color_scheme; ///
-
-  // SwipeTracker
-  GType function() c_adw_swipe_tracker_get_type; ///
-  AdwSwipeTracker* function(AdwSwipeable* swipeable) c_adw_swipe_tracker_new; ///
-  gboolean function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_allow_long_swipes; ///
-  gboolean function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_allow_mouse_drag; ///
-  gboolean function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_allow_window_handle; ///
-  gboolean function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_enabled; ///
-  gboolean function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_lower_overshoot; ///
-  gboolean function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_reversed; ///
-  AdwSwipeable* function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_swipeable; ///
-  gboolean function(AdwSwipeTracker* self) c_adw_swipe_tracker_get_upper_overshoot; ///
-  void function(AdwSwipeTracker* self, gboolean allowLongSwipes) c_adw_swipe_tracker_set_allow_long_swipes; ///
-  void function(AdwSwipeTracker* self, gboolean allowMouseDrag) c_adw_swipe_tracker_set_allow_mouse_drag; ///
-  void function(AdwSwipeTracker* self, gboolean allowWindowHandle) c_adw_swipe_tracker_set_allow_window_handle; ///
-  void function(AdwSwipeTracker* self, gboolean enabled) c_adw_swipe_tracker_set_enabled; ///
-  void function(AdwSwipeTracker* self, gboolean overshoot) c_adw_swipe_tracker_set_lower_overshoot; ///
-  void function(AdwSwipeTracker* self, gboolean reversed) c_adw_swipe_tracker_set_reversed; ///
-  void function(AdwSwipeTracker* self, gboolean overshoot) c_adw_swipe_tracker_set_upper_overshoot; ///
-  void function(AdwSwipeTracker* self, double delta) c_adw_swipe_tracker_shift_position; ///
-
-  // Swipeable
-  GType function() c_adw_swipeable_get_type; ///
-  double function(AdwSwipeable* self) c_adw_swipeable_get_cancel_progress; ///
-  double function(AdwSwipeable* self) c_adw_swipeable_get_distance; ///
-  double function(AdwSwipeable* self) c_adw_swipeable_get_progress; ///
-  double* function(AdwSwipeable* self, int* nSnapPoints) c_adw_swipeable_get_snap_points; ///
-  void function(AdwSwipeable* self, AdwNavigationDirection navigationDirection, gboolean isDrag, GdkRectangle* rect) c_adw_swipeable_get_swipe_area; ///
-
-  // SwitchRow
-  GType function() c_adw_switch_row_get_type; ///
-  GtkWidget* function() c_adw_switch_row_new; ///
-  gboolean function(AdwSwitchRow* self) c_adw_switch_row_get_active; ///
-  void function(AdwSwitchRow* self, gboolean isActive) c_adw_switch_row_set_active; ///
-
-  // TabBar
-  GType function() c_adw_tab_bar_get_type; ///
-  AdwTabBar* function() c_adw_tab_bar_new; ///
-  gboolean function(AdwTabBar* self) c_adw_tab_bar_get_autohide; ///
-  GtkWidget* function(AdwTabBar* self) c_adw_tab_bar_get_end_action_widget; ///
-  gboolean function(AdwTabBar* self) c_adw_tab_bar_get_expand_tabs; ///
-  GdkDragAction function(AdwTabBar* self) c_adw_tab_bar_get_extra_drag_preferred_action; ///
-  gboolean function(AdwTabBar* self) c_adw_tab_bar_get_extra_drag_preload; ///
-  gboolean function(AdwTabBar* self) c_adw_tab_bar_get_inverted; ///
-  gboolean function(AdwTabBar* self) c_adw_tab_bar_get_is_overflowing; ///
-  GtkWidget* function(AdwTabBar* self) c_adw_tab_bar_get_start_action_widget; ///
-  gboolean function(AdwTabBar* self) c_adw_tab_bar_get_tabs_revealed; ///
-  AdwTabView* function(AdwTabBar* self) c_adw_tab_bar_get_view; ///
-  void function(AdwTabBar* self, gboolean autohide) c_adw_tab_bar_set_autohide; ///
-  void function(AdwTabBar* self, GtkWidget* widget) c_adw_tab_bar_set_end_action_widget; ///
-  void function(AdwTabBar* self, gboolean expandTabs) c_adw_tab_bar_set_expand_tabs; ///
-  void function(AdwTabBar* self, gboolean preload) c_adw_tab_bar_set_extra_drag_preload; ///
-  void function(AdwTabBar* self, gboolean inverted) c_adw_tab_bar_set_inverted; ///
-  void function(AdwTabBar* self, GtkWidget* widget) c_adw_tab_bar_set_start_action_widget; ///
-  void function(AdwTabBar* self, AdwTabView* view) c_adw_tab_bar_set_view; ///
-  void function(AdwTabBar* self, GdkDragAction actions, GType* types, size_t nTypes) c_adw_tab_bar_setup_extra_drop_target; ///
-
-  // TabButton
-  GType function() c_adw_tab_button_get_type; ///
-  GtkWidget* function() c_adw_tab_button_new; ///
-  AdwTabView* function(AdwTabButton* self) c_adw_tab_button_get_view; ///
-  void function(AdwTabButton* self, AdwTabView* view) c_adw_tab_button_set_view; ///
-
-  // TabOverview
-  GType function() c_adw_tab_overview_get_type; ///
-  GtkWidget* function() c_adw_tab_overview_new; ///
-  GtkWidget* function(AdwTabOverview* self) c_adw_tab_overview_get_child; ///
-  gboolean function(AdwTabOverview* self) c_adw_tab_overview_get_enable_new_tab; ///
-  gboolean function(AdwTabOverview* self) c_adw_tab_overview_get_enable_search; ///
-  GdkDragAction function(AdwTabOverview* self) c_adw_tab_overview_get_extra_drag_preferred_action; ///
-  gboolean function(AdwTabOverview* self) c_adw_tab_overview_get_extra_drag_preload; ///
-  gboolean function(AdwTabOverview* self) c_adw_tab_overview_get_inverted; ///
-  gboolean function(AdwTabOverview* self) c_adw_tab_overview_get_open; ///
-  gboolean function(AdwTabOverview* self) c_adw_tab_overview_get_search_active; ///
-  GMenuModel* function(AdwTabOverview* self) c_adw_tab_overview_get_secondary_menu; ///
-  gboolean function(AdwTabOverview* self) c_adw_tab_overview_get_show_end_title_buttons; ///
-  gboolean function(AdwTabOverview* self) c_adw_tab_overview_get_show_start_title_buttons; ///
-  AdwTabView* function(AdwTabOverview* self) c_adw_tab_overview_get_view; ///
-  void function(AdwTabOverview* self, GtkWidget* child) c_adw_tab_overview_set_child; ///
-  void function(AdwTabOverview* self, gboolean enableNewTab) c_adw_tab_overview_set_enable_new_tab; ///
-  void function(AdwTabOverview* self, gboolean enableSearch) c_adw_tab_overview_set_enable_search; ///
-  void function(AdwTabOverview* self, gboolean preload) c_adw_tab_overview_set_extra_drag_preload; ///
-  void function(AdwTabOverview* self, gboolean inverted) c_adw_tab_overview_set_inverted; ///
-  void function(AdwTabOverview* self, gboolean open) c_adw_tab_overview_set_open; ///
-  void function(AdwTabOverview* self, GMenuModel* secondaryMenu) c_adw_tab_overview_set_secondary_menu; ///
-  void function(AdwTabOverview* self, gboolean showEndTitleButtons) c_adw_tab_overview_set_show_end_title_buttons; ///
-  void function(AdwTabOverview* self, gboolean showStartTitleButtons) c_adw_tab_overview_set_show_start_title_buttons; ///
-  void function(AdwTabOverview* self, AdwTabView* view) c_adw_tab_overview_set_view; ///
-  void function(AdwTabOverview* self, GdkDragAction actions, GType* types, size_t nTypes) c_adw_tab_overview_setup_extra_drop_target; ///
-
-  // TabPage
-  GType function() c_adw_tab_page_get_type; ///
-  GtkWidget* function(AdwTabPage* self) c_adw_tab_page_get_child; ///
-  GIcon* function(AdwTabPage* self) c_adw_tab_page_get_icon; ///
-  gboolean function(AdwTabPage* self) c_adw_tab_page_get_indicator_activatable; ///
-  GIcon* function(AdwTabPage* self) c_adw_tab_page_get_indicator_icon; ///
-  const(char)* function(AdwTabPage* self) c_adw_tab_page_get_indicator_tooltip; ///
-  const(char)* function(AdwTabPage* self) c_adw_tab_page_get_keyword; ///
-  gboolean function(AdwTabPage* self) c_adw_tab_page_get_live_thumbnail; ///
-  gboolean function(AdwTabPage* self) c_adw_tab_page_get_loading; ///
-  gboolean function(AdwTabPage* self) c_adw_tab_page_get_needs_attention; ///
-  AdwTabPage* function(AdwTabPage* self) c_adw_tab_page_get_parent; ///
-  gboolean function(AdwTabPage* self) c_adw_tab_page_get_pinned; ///
-  gboolean function(AdwTabPage* self) c_adw_tab_page_get_selected; ///
-  float function(AdwTabPage* self) c_adw_tab_page_get_thumbnail_xalign; ///
-  float function(AdwTabPage* self) c_adw_tab_page_get_thumbnail_yalign; ///
-  const(char)* function(AdwTabPage* self) c_adw_tab_page_get_title; ///
-  const(char)* function(AdwTabPage* self) c_adw_tab_page_get_tooltip; ///
-  void function(AdwTabPage* self) c_adw_tab_page_invalidate_thumbnail; ///
-  void function(AdwTabPage* self, GIcon* icon) c_adw_tab_page_set_icon; ///
-  void function(AdwTabPage* self, gboolean activatable) c_adw_tab_page_set_indicator_activatable; ///
-  void function(AdwTabPage* self, GIcon* indicatorIcon) c_adw_tab_page_set_indicator_icon; ///
-  void function(AdwTabPage* self, const(char)* tooltip) c_adw_tab_page_set_indicator_tooltip; ///
-  void function(AdwTabPage* self, const(char)* keyword) c_adw_tab_page_set_keyword; ///
-  void function(AdwTabPage* self, gboolean liveThumbnail) c_adw_tab_page_set_live_thumbnail; ///
-  void function(AdwTabPage* self, gboolean loading) c_adw_tab_page_set_loading; ///
-  void function(AdwTabPage* self, gboolean needsAttention) c_adw_tab_page_set_needs_attention; ///
-  void function(AdwTabPage* self, float xalign) c_adw_tab_page_set_thumbnail_xalign; ///
-  void function(AdwTabPage* self, float yalign) c_adw_tab_page_set_thumbnail_yalign; ///
-  void function(AdwTabPage* self, const(char)* title) c_adw_tab_page_set_title; ///
-  void function(AdwTabPage* self, const(char)* tooltip) c_adw_tab_page_set_tooltip; ///
-
-  // TabView
-  GType function() c_adw_tab_view_get_type; ///
-  AdwTabView* function() c_adw_tab_view_new; ///
-  AdwTabPage* function(AdwTabView* self, GtkWidget* child, AdwTabPage* parent) c_adw_tab_view_add_page; ///
-  void function(AdwTabView* self, AdwTabViewShortcuts shortcuts) c_adw_tab_view_add_shortcuts; ///
-  AdwTabPage* function(AdwTabView* self, GtkWidget* child) c_adw_tab_view_append; ///
-  AdwTabPage* function(AdwTabView* self, GtkWidget* child) c_adw_tab_view_append_pinned; ///
-  void function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_close_other_pages; ///
-  void function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_close_page; ///
-  void function(AdwTabView* self, AdwTabPage* page, gboolean confirm) c_adw_tab_view_close_page_finish; ///
-  void function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_close_pages_after; ///
-  void function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_close_pages_before; ///
-  GIcon* function(AdwTabView* self) c_adw_tab_view_get_default_icon; ///
-  gboolean function(AdwTabView* self) c_adw_tab_view_get_is_transferring_page; ///
-  GMenuModel* function(AdwTabView* self) c_adw_tab_view_get_menu_model; ///
-  int function(AdwTabView* self) c_adw_tab_view_get_n_pages; ///
-  int function(AdwTabView* self) c_adw_tab_view_get_n_pinned_pages; ///
-  AdwTabPage* function(AdwTabView* self, int position) c_adw_tab_view_get_nth_page; ///
-  AdwTabPage* function(AdwTabView* self, GtkWidget* child) c_adw_tab_view_get_page; ///
-  int function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_get_page_position; ///
-  GtkSelectionModel* function(AdwTabView* self) c_adw_tab_view_get_pages; ///
-  AdwTabPage* function(AdwTabView* self) c_adw_tab_view_get_selected_page; ///
-  AdwTabViewShortcuts function(AdwTabView* self) c_adw_tab_view_get_shortcuts; ///
-  AdwTabPage* function(AdwTabView* self, GtkWidget* child, int position) c_adw_tab_view_insert; ///
-  AdwTabPage* function(AdwTabView* self, GtkWidget* child, int position) c_adw_tab_view_insert_pinned; ///
-  void function(AdwTabView* self) c_adw_tab_view_invalidate_thumbnails; ///
-  AdwTabPage* function(AdwTabView* self, GtkWidget* child) c_adw_tab_view_prepend; ///
-  AdwTabPage* function(AdwTabView* self, GtkWidget* child) c_adw_tab_view_prepend_pinned; ///
-  void function(AdwTabView* self, AdwTabViewShortcuts shortcuts) c_adw_tab_view_remove_shortcuts; ///
-  gboolean function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_reorder_backward; ///
-  gboolean function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_reorder_first; ///
-  gboolean function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_reorder_forward; ///
-  gboolean function(AdwTabView* self, AdwTabPage* page) c_adw_tab_view_reorder_last; ///
-  gboolean function(AdwTabView* self, AdwTabPage* page, int position) c_adw_tab_view_reorder_page; ///
-  gboolean function(AdwTabView* self) c_adw_tab_view_select_next_page; ///
-  gboolean function(AdwTabView* self) c_adw_tab_view_select_previous_page; ///
-  void function(AdwTabView* self, GIcon* defaultIcon) c_adw_tab_view_set_default_icon; ///
-  void function(AdwTabView* self, GMenuModel* menuModel) c_adw_tab_view_set_menu_model; ///
-  void function(AdwTabView* self, AdwTabPage* page, gboolean pinned) c_adw_tab_view_set_page_pinned; ///
-  void function(AdwTabView* self, AdwTabPage* selectedPage) c_adw_tab_view_set_selected_page; ///
-  void function(AdwTabView* self, AdwTabViewShortcuts shortcuts) c_adw_tab_view_set_shortcuts; ///
-  void function(AdwTabView* self, AdwTabPage* page, AdwTabView* otherView, int position) c_adw_tab_view_transfer_page; ///
-
-  // TimedAnimation
-  GType function() c_adw_timed_animation_get_type; ///
-  AdwAnimation* function(GtkWidget* widget, double from, double to, uint duration, AdwAnimationTarget* target) c_adw_timed_animation_new; ///
-  gboolean function(AdwTimedAnimation* self) c_adw_timed_animation_get_alternate; ///
-  uint function(AdwTimedAnimation* self) c_adw_timed_animation_get_duration; ///
-  AdwEasing function(AdwTimedAnimation* self) c_adw_timed_animation_get_easing; ///
-  uint function(AdwTimedAnimation* self) c_adw_timed_animation_get_repeat_count; ///
-  gboolean function(AdwTimedAnimation* self) c_adw_timed_animation_get_reverse; ///
-  double function(AdwTimedAnimation* self) c_adw_timed_animation_get_value_from; ///
-  double function(AdwTimedAnimation* self) c_adw_timed_animation_get_value_to; ///
-  void function(AdwTimedAnimation* self, gboolean alternate) c_adw_timed_animation_set_alternate; ///
-  void function(AdwTimedAnimation* self, uint duration) c_adw_timed_animation_set_duration; ///
-  void function(AdwTimedAnimation* self, AdwEasing easing) c_adw_timed_animation_set_easing; ///
-  void function(AdwTimedAnimation* self, uint repeatCount) c_adw_timed_animation_set_repeat_count; ///
-  void function(AdwTimedAnimation* self, gboolean reverse) c_adw_timed_animation_set_reverse; ///
-  void function(AdwTimedAnimation* self, double value) c_adw_timed_animation_set_value_from; ///
-  void function(AdwTimedAnimation* self, double value) c_adw_timed_animation_set_value_to; ///
-
-  // Toast
-  GType function() c_adw_toast_get_type; ///
-  AdwToast* function(const(char)* title) c_adw_toast_new; ///
-  AdwToast* function(const(char)* format,  ...) c_adw_toast_new_format; ///
-  void function(AdwToast* self) c_adw_toast_dismiss; ///
-  const(char)* function(AdwToast* self) c_adw_toast_get_action_name; ///
-  GVariant* function(AdwToast* self) c_adw_toast_get_action_target_value; ///
-  const(char)* function(AdwToast* self) c_adw_toast_get_button_label; ///
-  GtkWidget* function(AdwToast* self) c_adw_toast_get_custom_title; ///
-  AdwToastPriority function(AdwToast* self) c_adw_toast_get_priority; ///
-  uint function(AdwToast* self) c_adw_toast_get_timeout; ///
-  const(char)* function(AdwToast* self) c_adw_toast_get_title; ///
-  gboolean function(AdwToast* self) c_adw_toast_get_use_markup; ///
-  void function(AdwToast* self, const(char)* actionName) c_adw_toast_set_action_name; ///
-  void function(AdwToast* self, const(char)* formatString,  ...) c_adw_toast_set_action_target; ///
-  void function(AdwToast* self, GVariant* actionTarget) c_adw_toast_set_action_target_value; ///
-  void function(AdwToast* self, const(char)* buttonLabel) c_adw_toast_set_button_label; ///
-  void function(AdwToast* self, GtkWidget* widget) c_adw_toast_set_custom_title; ///
-  void function(AdwToast* self, const(char)* detailedActionName) c_adw_toast_set_detailed_action_name; ///
-  void function(AdwToast* self, AdwToastPriority priority) c_adw_toast_set_priority; ///
-  void function(AdwToast* self, uint timeout) c_adw_toast_set_timeout; ///
-  void function(AdwToast* self, const(char)* title) c_adw_toast_set_title; ///
-  void function(AdwToast* self, gboolean useMarkup) c_adw_toast_set_use_markup; ///
-
-  // ToastOverlay
-  GType function() c_adw_toast_overlay_get_type; ///
-  GtkWidget* function() c_adw_toast_overlay_new; ///
-  void function(AdwToastOverlay* self, AdwToast* toast) c_adw_toast_overlay_add_toast; ///
-  void function(AdwToastOverlay* self) c_adw_toast_overlay_dismiss_all; ///
-  GtkWidget* function(AdwToastOverlay* self) c_adw_toast_overlay_get_child; ///
-  void function(AdwToastOverlay* self, GtkWidget* child) c_adw_toast_overlay_set_child; ///
-
-  // Toggle
-  GType function() c_adw_toggle_get_type; ///
-  AdwToggle* function() c_adw_toggle_new; ///
-  GtkWidget* function(AdwToggle* self) c_adw_toggle_get_child; ///
-  const(char)* function(AdwToggle* self) c_adw_toggle_get_description; ///
-  gboolean function(AdwToggle* self) c_adw_toggle_get_enabled; ///
-  const(char)* function(AdwToggle* self) c_adw_toggle_get_icon_name; ///
-  uint function(AdwToggle* self) c_adw_toggle_get_index; ///
-  const(char)* function(AdwToggle* self) c_adw_toggle_get_label; ///
-  const(char)* function(AdwToggle* self) c_adw_toggle_get_name; ///
-  const(char)* function(AdwToggle* self) c_adw_toggle_get_tooltip; ///
-  gboolean function(AdwToggle* self) c_adw_toggle_get_use_underline; ///
-  void function(AdwToggle* self, GtkWidget* child) c_adw_toggle_set_child; ///
-  void function(AdwToggle* self, const(char)* description) c_adw_toggle_set_description; ///
-  void function(AdwToggle* self, gboolean enabled) c_adw_toggle_set_enabled; ///
-  void function(AdwToggle* self, const(char)* iconName) c_adw_toggle_set_icon_name; ///
-  void function(AdwToggle* self, const(char)* label) c_adw_toggle_set_label; ///
-  void function(AdwToggle* self, const(char)* name) c_adw_toggle_set_name; ///
-  void function(AdwToggle* self, const(char)* tooltip) c_adw_toggle_set_tooltip; ///
-  void function(AdwToggle* self, gboolean useUnderline) c_adw_toggle_set_use_underline; ///
-
-  // ToggleGroup
-  GType function() c_adw_toggle_group_get_type; ///
-  GtkWidget* function() c_adw_toggle_group_new; ///
-  void function(AdwToggleGroup* self, AdwToggle* toggle) c_adw_toggle_group_add; ///
-  uint function(AdwToggleGroup* self) c_adw_toggle_group_get_active; ///
-  const(char)* function(AdwToggleGroup* self) c_adw_toggle_group_get_active_name; ///
-  gboolean function(AdwToggleGroup* self) c_adw_toggle_group_get_can_shrink; ///
-  gboolean function(AdwToggleGroup* self) c_adw_toggle_group_get_homogeneous; ///
-  uint function(AdwToggleGroup* self) c_adw_toggle_group_get_n_toggles; ///
-  AdwToggle* function(AdwToggleGroup* self, uint index) c_adw_toggle_group_get_toggle; ///
-  AdwToggle* function(AdwToggleGroup* self, const(char)* name) c_adw_toggle_group_get_toggle_by_name; ///
-  GtkSelectionModel* function(AdwToggleGroup* self) c_adw_toggle_group_get_toggles; ///
-  void function(AdwToggleGroup* self, AdwToggle* toggle) c_adw_toggle_group_remove; ///
-  void function(AdwToggleGroup* self) c_adw_toggle_group_remove_all; ///
-  void function(AdwToggleGroup* self, uint active) c_adw_toggle_group_set_active; ///
-  void function(AdwToggleGroup* self, const(char)* name) c_adw_toggle_group_set_active_name; ///
-  void function(AdwToggleGroup* self, gboolean canShrink) c_adw_toggle_group_set_can_shrink; ///
-  void function(AdwToggleGroup* self, gboolean homogeneous) c_adw_toggle_group_set_homogeneous; ///
-
-  // ToolbarView
-  GType function() c_adw_toolbar_view_get_type; ///
-  GtkWidget* function() c_adw_toolbar_view_new; ///
-  void function(AdwToolbarView* self, GtkWidget* widget) c_adw_toolbar_view_add_bottom_bar; ///
-  void function(AdwToolbarView* self, GtkWidget* widget) c_adw_toolbar_view_add_top_bar; ///
-  int function(AdwToolbarView* self) c_adw_toolbar_view_get_bottom_bar_height; ///
-  AdwToolbarStyle function(AdwToolbarView* self) c_adw_toolbar_view_get_bottom_bar_style; ///
-  GtkWidget* function(AdwToolbarView* self) c_adw_toolbar_view_get_content; ///
-  gboolean function(AdwToolbarView* self) c_adw_toolbar_view_get_extend_content_to_bottom_edge; ///
-  gboolean function(AdwToolbarView* self) c_adw_toolbar_view_get_extend_content_to_top_edge; ///
-  gboolean function(AdwToolbarView* self) c_adw_toolbar_view_get_reveal_bottom_bars; ///
-  gboolean function(AdwToolbarView* self) c_adw_toolbar_view_get_reveal_top_bars; ///
-  int function(AdwToolbarView* self) c_adw_toolbar_view_get_top_bar_height; ///
-  AdwToolbarStyle function(AdwToolbarView* self) c_adw_toolbar_view_get_top_bar_style; ///
-  void function(AdwToolbarView* self, GtkWidget* widget) c_adw_toolbar_view_remove; ///
-  void function(AdwToolbarView* self, AdwToolbarStyle style) c_adw_toolbar_view_set_bottom_bar_style; ///
-  void function(AdwToolbarView* self, GtkWidget* content) c_adw_toolbar_view_set_content; ///
-  void function(AdwToolbarView* self, gboolean extend) c_adw_toolbar_view_set_extend_content_to_bottom_edge; ///
-  void function(AdwToolbarView* self, gboolean extend) c_adw_toolbar_view_set_extend_content_to_top_edge; ///
-  void function(AdwToolbarView* self, gboolean reveal) c_adw_toolbar_view_set_reveal_bottom_bars; ///
-  void function(AdwToolbarView* self, gboolean reveal) c_adw_toolbar_view_set_reveal_top_bars; ///
-  void function(AdwToolbarView* self, AdwToolbarStyle style) c_adw_toolbar_view_set_top_bar_style; ///
-
-  // ViewStack
-  GType function() c_adw_view_stack_get_type; ///
-  GtkWidget* function() c_adw_view_stack_new; ///
-  AdwViewStackPage* function(AdwViewStack* self, GtkWidget* child) c_adw_view_stack_add; ///
-  AdwViewStackPage* function(AdwViewStack* self, GtkWidget* child, const(char)* name) c_adw_view_stack_add_named; ///
-  AdwViewStackPage* function(AdwViewStack* self, GtkWidget* child, const(char)* name, const(char)* title) c_adw_view_stack_add_titled; ///
-  AdwViewStackPage* function(AdwViewStack* self, GtkWidget* child, const(char)* name, const(char)* title, const(char)* iconName) c_adw_view_stack_add_titled_with_icon; ///
-  GtkWidget* function(AdwViewStack* self, const(char)* name) c_adw_view_stack_get_child_by_name; ///
-  gboolean function(AdwViewStack* self) c_adw_view_stack_get_enable_transitions; ///
-  gboolean function(AdwViewStack* self) c_adw_view_stack_get_hhomogeneous; ///
-  AdwViewStackPage* function(AdwViewStack* self, GtkWidget* child) c_adw_view_stack_get_page; ///
-  GtkSelectionModel* function(AdwViewStack* self) c_adw_view_stack_get_pages; ///
-  uint function(AdwViewStack* self) c_adw_view_stack_get_transition_duration; ///
-  gboolean function(AdwViewStack* self) c_adw_view_stack_get_transition_running; ///
-  gboolean function(AdwViewStack* self) c_adw_view_stack_get_vhomogeneous; ///
-  GtkWidget* function(AdwViewStack* self) c_adw_view_stack_get_visible_child; ///
-  const(char)* function(AdwViewStack* self) c_adw_view_stack_get_visible_child_name; ///
-  void function(AdwViewStack* self, GtkWidget* child) c_adw_view_stack_remove; ///
-  void function(AdwViewStack* self, gboolean enableTransitions) c_adw_view_stack_set_enable_transitions; ///
-  void function(AdwViewStack* self, gboolean hhomogeneous) c_adw_view_stack_set_hhomogeneous; ///
-  void function(AdwViewStack* self, uint duration) c_adw_view_stack_set_transition_duration; ///
-  void function(AdwViewStack* self, gboolean vhomogeneous) c_adw_view_stack_set_vhomogeneous; ///
-  void function(AdwViewStack* self, GtkWidget* child) c_adw_view_stack_set_visible_child; ///
-  void function(AdwViewStack* self, const(char)* name) c_adw_view_stack_set_visible_child_name; ///
-
-  // ViewStackPage
-  GType function() c_adw_view_stack_page_get_type; ///
-  uint function(AdwViewStackPage* self) c_adw_view_stack_page_get_badge_number; ///
-  GtkWidget* function(AdwViewStackPage* self) c_adw_view_stack_page_get_child; ///
-  const(char)* function(AdwViewStackPage* self) c_adw_view_stack_page_get_icon_name; ///
-  const(char)* function(AdwViewStackPage* self) c_adw_view_stack_page_get_name; ///
-  gboolean function(AdwViewStackPage* self) c_adw_view_stack_page_get_needs_attention; ///
-  const(char)* function(AdwViewStackPage* self) c_adw_view_stack_page_get_section_title; ///
-  gboolean function(AdwViewStackPage* self) c_adw_view_stack_page_get_starts_section; ///
-  const(char)* function(AdwViewStackPage* self) c_adw_view_stack_page_get_title; ///
-  gboolean function(AdwViewStackPage* self) c_adw_view_stack_page_get_use_underline; ///
-  gboolean function(AdwViewStackPage* self) c_adw_view_stack_page_get_visible; ///
-  void function(AdwViewStackPage* self, uint badgeNumber) c_adw_view_stack_page_set_badge_number; ///
-  void function(AdwViewStackPage* self, const(char)* iconName) c_adw_view_stack_page_set_icon_name; ///
-  void function(AdwViewStackPage* self, const(char)* name) c_adw_view_stack_page_set_name; ///
-  void function(AdwViewStackPage* self, gboolean needsAttention) c_adw_view_stack_page_set_needs_attention; ///
-  void function(AdwViewStackPage* self, const(char)* sectionTitle) c_adw_view_stack_page_set_section_title; ///
-  void function(AdwViewStackPage* self, gboolean startsSection) c_adw_view_stack_page_set_starts_section; ///
-  void function(AdwViewStackPage* self, const(char)* title) c_adw_view_stack_page_set_title; ///
-  void function(AdwViewStackPage* self, gboolean useUnderline) c_adw_view_stack_page_set_use_underline; ///
-  void function(AdwViewStackPage* self, gboolean visible) c_adw_view_stack_page_set_visible; ///
-
-  // ViewStackPages
-  GType function() c_adw_view_stack_pages_get_type; ///
-  AdwViewStackPage* function(AdwViewStackPages* self) c_adw_view_stack_pages_get_selected_page; ///
-  void function(AdwViewStackPages* self, AdwViewStackPage* page) c_adw_view_stack_pages_set_selected_page; ///
-
-  // ViewSwitcher
-  GType function() c_adw_view_switcher_get_type; ///
-  GtkWidget* function() c_adw_view_switcher_new; ///
-  AdwViewSwitcherPolicy function(AdwViewSwitcher* self) c_adw_view_switcher_get_policy; ///
-  AdwViewStack* function(AdwViewSwitcher* self) c_adw_view_switcher_get_stack; ///
-  void function(AdwViewSwitcher* self, AdwViewSwitcherPolicy policy) c_adw_view_switcher_set_policy; ///
-  void function(AdwViewSwitcher* self, AdwViewStack* stack) c_adw_view_switcher_set_stack; ///
-
-  // ViewSwitcherBar
-  GType function() c_adw_view_switcher_bar_get_type; ///
-  GtkWidget* function() c_adw_view_switcher_bar_new; ///
-  gboolean function(AdwViewSwitcherBar* self) c_adw_view_switcher_bar_get_reveal; ///
-  AdwViewStack* function(AdwViewSwitcherBar* self) c_adw_view_switcher_bar_get_stack; ///
-  void function(AdwViewSwitcherBar* self, gboolean reveal) c_adw_view_switcher_bar_set_reveal; ///
-  void function(AdwViewSwitcherBar* self, AdwViewStack* stack) c_adw_view_switcher_bar_set_stack; ///
-
-  // ViewSwitcherSidebar
-  GType function() c_adw_view_switcher_sidebar_get_type; ///
-  GtkWidget* function() c_adw_view_switcher_sidebar_new; ///
-  GtkFilter* function(AdwViewSwitcherSidebar* self) c_adw_view_switcher_sidebar_get_filter; ///
-  AdwSidebarMode function(AdwViewSwitcherSidebar* self) c_adw_view_switcher_sidebar_get_mode; ///
-  GtkWidget* function(AdwViewSwitcherSidebar* self) c_adw_view_switcher_sidebar_get_placeholder; ///
-  AdwViewStack* function(AdwViewSwitcherSidebar* self) c_adw_view_switcher_sidebar_get_stack; ///
-  void function(AdwViewSwitcherSidebar* self, GtkFilter* filter) c_adw_view_switcher_sidebar_set_filter; ///
-  void function(AdwViewSwitcherSidebar* self, AdwSidebarMode mode) c_adw_view_switcher_sidebar_set_mode; ///
-  void function(AdwViewSwitcherSidebar* self, GtkWidget* placeholder) c_adw_view_switcher_sidebar_set_placeholder; ///
-  void function(AdwViewSwitcherSidebar* self, AdwViewStack* stack) c_adw_view_switcher_sidebar_set_stack; ///
-
-  // ViewSwitcherTitle
-  GType function() c_adw_view_switcher_title_get_type; ///
-  GtkWidget* function() c_adw_view_switcher_title_new; ///
-  AdwViewStack* function(AdwViewSwitcherTitle* self) c_adw_view_switcher_title_get_stack; ///
-  const(char)* function(AdwViewSwitcherTitle* self) c_adw_view_switcher_title_get_subtitle; ///
-  const(char)* function(AdwViewSwitcherTitle* self) c_adw_view_switcher_title_get_title; ///
-  gboolean function(AdwViewSwitcherTitle* self) c_adw_view_switcher_title_get_title_visible; ///
-  gboolean function(AdwViewSwitcherTitle* self) c_adw_view_switcher_title_get_view_switcher_enabled; ///
-  void function(AdwViewSwitcherTitle* self, AdwViewStack* stack) c_adw_view_switcher_title_set_stack; ///
-  void function(AdwViewSwitcherTitle* self, const(char)* subtitle) c_adw_view_switcher_title_set_subtitle; ///
-  void function(AdwViewSwitcherTitle* self, const(char)* title) c_adw_view_switcher_title_set_title; ///
-  void function(AdwViewSwitcherTitle* self, gboolean enabled) c_adw_view_switcher_title_set_view_switcher_enabled; ///
-
-  // Window
-  GType function() c_adw_window_get_type; ///
-  GtkWidget* function() c_adw_window_new; ///
-  void function(AdwWindow* self, AdwBreakpoint* breakpoint) c_adw_window_add_breakpoint; ///
-  gboolean function(AdwWindow* self) c_adw_window_get_adaptive_preview; ///
-  GtkWidget* function(AdwWindow* self) c_adw_window_get_content; ///
-  AdwBreakpoint* function(AdwWindow* self) c_adw_window_get_current_breakpoint; ///
-  GListModel* function(AdwWindow* self) c_adw_window_get_dialogs; ///
-  AdwDialog* function(AdwWindow* self) c_adw_window_get_visible_dialog; ///
-  void function(AdwWindow* self, gboolean adaptivePreview) c_adw_window_set_adaptive_preview; ///
-  void function(AdwWindow* self, GtkWidget* content) c_adw_window_set_content; ///
-
-  // WindowTitle
-  GType function() c_adw_window_title_get_type; ///
-  GtkWidget* function(const(char)* title, const(char)* subtitle) c_adw_window_title_new; ///
-  const(char)* function(AdwWindowTitle* self) c_adw_window_title_get_subtitle; ///
-  const(char)* function(AdwWindowTitle* self) c_adw_window_title_get_title; ///
-  void function(AdwWindowTitle* self, const(char)* subtitle) c_adw_window_title_set_subtitle; ///
-  void function(AdwWindowTitle* self, const(char)* title) c_adw_window_title_set_title; ///
-
-  // WrapBox
-  GType function() c_adw_wrap_box_get_type; ///
-  GtkWidget* function() c_adw_wrap_box_new; ///
-  void function(AdwWrapBox* self, GtkWidget* child) c_adw_wrap_box_append; ///
-  float function(AdwWrapBox* self) c_adw_wrap_box_get_align; ///
-  int function(AdwWrapBox* self) c_adw_wrap_box_get_child_spacing; ///
-  AdwLengthUnit function(AdwWrapBox* self) c_adw_wrap_box_get_child_spacing_unit; ///
-  AdwJustifyMode function(AdwWrapBox* self) c_adw_wrap_box_get_justify; ///
-  gboolean function(AdwWrapBox* self) c_adw_wrap_box_get_justify_last_line; ///
-  gboolean function(AdwWrapBox* self) c_adw_wrap_box_get_line_homogeneous; ///
-  int function(AdwWrapBox* self) c_adw_wrap_box_get_line_spacing; ///
-  AdwLengthUnit function(AdwWrapBox* self) c_adw_wrap_box_get_line_spacing_unit; ///
-  int function(AdwWrapBox* self) c_adw_wrap_box_get_natural_line_length; ///
-  AdwLengthUnit function(AdwWrapBox* self) c_adw_wrap_box_get_natural_line_length_unit; ///
-  AdwPackDirection function(AdwWrapBox* self) c_adw_wrap_box_get_pack_direction; ///
-  AdwWrapPolicy function(AdwWrapBox* self) c_adw_wrap_box_get_wrap_policy; ///
-  gboolean function(AdwWrapBox* self) c_adw_wrap_box_get_wrap_reverse; ///
-  void function(AdwWrapBox* self, GtkWidget* child, GtkWidget* sibling) c_adw_wrap_box_insert_child_after; ///
-  void function(AdwWrapBox* self, GtkWidget* child) c_adw_wrap_box_prepend; ///
-  void function(AdwWrapBox* self, GtkWidget* child) c_adw_wrap_box_remove; ///
-  void function(AdwWrapBox* self) c_adw_wrap_box_remove_all; ///
-  void function(AdwWrapBox* self, GtkWidget* child, GtkWidget* sibling) c_adw_wrap_box_reorder_child_after; ///
-  void function(AdwWrapBox* self, float align_) c_adw_wrap_box_set_align; ///
-  void function(AdwWrapBox* self, int childSpacing) c_adw_wrap_box_set_child_spacing; ///
-  void function(AdwWrapBox* self, AdwLengthUnit unit) c_adw_wrap_box_set_child_spacing_unit; ///
-  void function(AdwWrapBox* self, AdwJustifyMode justify) c_adw_wrap_box_set_justify; ///
-  void function(AdwWrapBox* self, gboolean justifyLastLine) c_adw_wrap_box_set_justify_last_line; ///
-  void function(AdwWrapBox* self, gboolean homogeneous) c_adw_wrap_box_set_line_homogeneous; ///
-  void function(AdwWrapBox* self, int lineSpacing) c_adw_wrap_box_set_line_spacing; ///
-  void function(AdwWrapBox* self, AdwLengthUnit unit) c_adw_wrap_box_set_line_spacing_unit; ///
-  void function(AdwWrapBox* self, int naturalLineLength) c_adw_wrap_box_set_natural_line_length; ///
-  void function(AdwWrapBox* self, AdwLengthUnit unit) c_adw_wrap_box_set_natural_line_length_unit; ///
-  void function(AdwWrapBox* self, AdwPackDirection packDirection) c_adw_wrap_box_set_pack_direction; ///
-  void function(AdwWrapBox* self, AdwWrapPolicy wrapPolicy) c_adw_wrap_box_set_wrap_policy; ///
-  void function(AdwWrapBox* self, gboolean wrapReverse) c_adw_wrap_box_set_wrap_reverse; ///
-
-  // WrapLayout
-  GType function() c_adw_wrap_layout_get_type; ///
-  GtkLayoutManager* function() c_adw_wrap_layout_new; ///
-  float function(AdwWrapLayout* self) c_adw_wrap_layout_get_align; ///
-  int function(AdwWrapLayout* self) c_adw_wrap_layout_get_child_spacing; ///
-  AdwLengthUnit function(AdwWrapLayout* self) c_adw_wrap_layout_get_child_spacing_unit; ///
-  AdwJustifyMode function(AdwWrapLayout* self) c_adw_wrap_layout_get_justify; ///
-  gboolean function(AdwWrapLayout* self) c_adw_wrap_layout_get_justify_last_line; ///
-  gboolean function(AdwWrapLayout* self) c_adw_wrap_layout_get_line_homogeneous; ///
-  int function(AdwWrapLayout* self) c_adw_wrap_layout_get_line_spacing; ///
-  AdwLengthUnit function(AdwWrapLayout* self) c_adw_wrap_layout_get_line_spacing_unit; ///
-  int function(AdwWrapLayout* self) c_adw_wrap_layout_get_natural_line_length; ///
-  AdwLengthUnit function(AdwWrapLayout* self) c_adw_wrap_layout_get_natural_line_length_unit; ///
-  AdwPackDirection function(AdwWrapLayout* self) c_adw_wrap_layout_get_pack_direction; ///
-  AdwWrapPolicy function(AdwWrapLayout* self) c_adw_wrap_layout_get_wrap_policy; ///
-  gboolean function(AdwWrapLayout* self) c_adw_wrap_layout_get_wrap_reverse; ///
-  void function(AdwWrapLayout* self, float align_) c_adw_wrap_layout_set_align; ///
-  void function(AdwWrapLayout* self, int childSpacing) c_adw_wrap_layout_set_child_spacing; ///
-  void function(AdwWrapLayout* self, AdwLengthUnit unit) c_adw_wrap_layout_set_child_spacing_unit; ///
-  void function(AdwWrapLayout* self, AdwJustifyMode justify) c_adw_wrap_layout_set_justify; ///
-  void function(AdwWrapLayout* self, gboolean justifyLastLine) c_adw_wrap_layout_set_justify_last_line; ///
-  void function(AdwWrapLayout* self, gboolean homogeneous) c_adw_wrap_layout_set_line_homogeneous; ///
-  void function(AdwWrapLayout* self, int lineSpacing) c_adw_wrap_layout_set_line_spacing; ///
-  void function(AdwWrapLayout* self, AdwLengthUnit unit) c_adw_wrap_layout_set_line_spacing_unit; ///
-  void function(AdwWrapLayout* self, int naturalLineLength) c_adw_wrap_layout_set_natural_line_length; ///
-  void function(AdwWrapLayout* self, AdwLengthUnit unit) c_adw_wrap_layout_set_natural_line_length_unit; ///
-  void function(AdwWrapLayout* self, AdwPackDirection packDirection) c_adw_wrap_layout_set_pack_direction; ///
-  void function(AdwWrapLayout* self, AdwWrapPolicy wrapPolicy) c_adw_wrap_layout_set_wrap_policy; ///
-  void function(AdwWrapLayout* self, gboolean wrapReverse) c_adw_wrap_layout_set_wrap_reverse; ///
-
-  // global
-  gboolean function(GtkWidget* widget) c_adw_get_enable_animations; ///
-  uint function() c_adw_get_major_version; ///
-  uint function() c_adw_get_micro_version; ///
-  uint function() c_adw_get_minor_version; ///
-  void function() c_adw_init; ///
-  gboolean function() c_adw_is_initialized; ///
-  double function(double a, double b, double t) c_adw_lerp; ///
-  void function(const(GdkRGBA)* rgba, gboolean dark, GdkRGBA* standaloneRgba) c_adw_rgba_to_standalone; ///
-  void function(GtkWidget* parent, const(char)* firstPropertyName,  ...) c_adw_show_about_dialog; ///
-  void function(GtkWidget* parent, const(char)* resourcePath, const(char)* releaseNotesVersion, const(char)* firstPropertyName,  ...) c_adw_show_about_dialog_from_appdata; ///
-  void function(GtkWindow* parent, const(char)* firstPropertyName,  ...) c_adw_show_about_window; ///
-  void function(GtkWindow* parent, const(char)* resourcePath, const(char)* releaseNotesVersion, const(char)* firstPropertyName,  ...) c_adw_show_about_window_from_appdata; ///
-
-  // AccentColor
-  void function(AdwAccentColor self, GdkRGBA* rgba) c_adw_accent_color_to_rgba; ///
-  void function(AdwAccentColor self, gboolean dark, GdkRGBA* rgba) c_adw_accent_color_to_standalone_rgba; ///
-
-  // Easing
-  double function(AdwEasing self, double value) c_adw_easing_ease; ///
-
-  // LengthUnit
-  double function(AdwLengthUnit unit, double value, GtkSettings* settings) c_adw_length_unit_from_px; ///
-  double function(AdwLengthUnit unit, double value, GtkSettings* settings) c_adw_length_unit_to_px; ///
-}
+// AboutDialog
+private alias c_adw_about_dialog_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_about_dialog_get_typeFn c_adw_about_dialog_get_type; ///
+private alias c_adw_about_dialog_newFn = extern(C) AdwDialog* function() nothrow;
+__gshared c_adw_about_dialog_newFn c_adw_about_dialog_new; ///
+private alias c_adw_about_dialog_new_from_appdataFn = extern(C) AdwDialog* function(const(char)* resourcePath, const(char)* releaseNotesVersion) nothrow;
+__gshared c_adw_about_dialog_new_from_appdataFn c_adw_about_dialog_new_from_appdata; ///
+private alias c_adw_about_dialog_add_acknowledgement_sectionFn = extern(C) void function(AdwAboutDialog* self, const(char)* name, const(char*)* people) nothrow;
+__gshared c_adw_about_dialog_add_acknowledgement_sectionFn c_adw_about_dialog_add_acknowledgement_section; ///
+private alias c_adw_about_dialog_add_credit_sectionFn = extern(C) void function(AdwAboutDialog* self, const(char)* name, const(char*)* people) nothrow;
+__gshared c_adw_about_dialog_add_credit_sectionFn c_adw_about_dialog_add_credit_section; ///
+private alias c_adw_about_dialog_add_legal_sectionFn = extern(C) void function(AdwAboutDialog* self, const(char)* title, const(char)* copyright, GtkLicense licenseType, const(char)* license) nothrow;
+__gshared c_adw_about_dialog_add_legal_sectionFn c_adw_about_dialog_add_legal_section; ///
+private alias c_adw_about_dialog_add_linkFn = extern(C) void function(AdwAboutDialog* self, const(char)* title, const(char)* url) nothrow;
+__gshared c_adw_about_dialog_add_linkFn c_adw_about_dialog_add_link; ///
+private alias c_adw_about_dialog_add_other_appFn = extern(C) void function(AdwAboutDialog* self, const(char)* appid, const(char)* name, const(char)* summary) nothrow;
+__gshared c_adw_about_dialog_add_other_appFn c_adw_about_dialog_add_other_app; ///
+private alias c_adw_about_dialog_get_appdata_resource_pathFn = extern(C) const(char)* function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_appdata_resource_pathFn c_adw_about_dialog_get_appdata_resource_path; ///
+private alias c_adw_about_dialog_get_application_iconFn = extern(C) const(char)* function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_application_iconFn c_adw_about_dialog_get_application_icon; ///
+private alias c_adw_about_dialog_get_application_nameFn = extern(C) const(char)* function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_application_nameFn c_adw_about_dialog_get_application_name; ///
+private alias c_adw_about_dialog_get_artistsFn = extern(C) const(char*)* function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_artistsFn c_adw_about_dialog_get_artists; ///
+private alias c_adw_about_dialog_get_commentsFn = extern(C) const(char)* function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_commentsFn c_adw_about_dialog_get_comments; ///
+private alias c_adw_about_dialog_get_copyrightFn = extern(C) const(char)* function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_copyrightFn c_adw_about_dialog_get_copyright; ///
+private alias c_adw_about_dialog_get_debug_infoFn = extern(C) const(char)* function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_debug_infoFn c_adw_about_dialog_get_debug_info; ///
+private alias c_adw_about_dialog_get_debug_info_filenameFn = extern(C) const(char)* function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_debug_info_filenameFn c_adw_about_dialog_get_debug_info_filename; ///
+private alias c_adw_about_dialog_get_designersFn = extern(C) const(char*)* function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_designersFn c_adw_about_dialog_get_designers; ///
+private alias c_adw_about_dialog_get_developer_nameFn = extern(C) const(char)* function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_developer_nameFn c_adw_about_dialog_get_developer_name; ///
+private alias c_adw_about_dialog_get_developersFn = extern(C) const(char*)* function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_developersFn c_adw_about_dialog_get_developers; ///
+private alias c_adw_about_dialog_get_documentersFn = extern(C) const(char*)* function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_documentersFn c_adw_about_dialog_get_documenters; ///
+private alias c_adw_about_dialog_get_issue_urlFn = extern(C) const(char)* function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_issue_urlFn c_adw_about_dialog_get_issue_url; ///
+private alias c_adw_about_dialog_get_licenseFn = extern(C) const(char)* function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_licenseFn c_adw_about_dialog_get_license; ///
+private alias c_adw_about_dialog_get_license_typeFn = extern(C) GtkLicense function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_license_typeFn c_adw_about_dialog_get_license_type; ///
+private alias c_adw_about_dialog_get_release_notesFn = extern(C) const(char)* function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_release_notesFn c_adw_about_dialog_get_release_notes; ///
+private alias c_adw_about_dialog_get_release_notes_versionFn = extern(C) const(char)* function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_release_notes_versionFn c_adw_about_dialog_get_release_notes_version; ///
+private alias c_adw_about_dialog_get_support_urlFn = extern(C) const(char)* function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_support_urlFn c_adw_about_dialog_get_support_url; ///
+private alias c_adw_about_dialog_get_translator_creditsFn = extern(C) const(char)* function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_translator_creditsFn c_adw_about_dialog_get_translator_credits; ///
+private alias c_adw_about_dialog_get_versionFn = extern(C) const(char)* function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_versionFn c_adw_about_dialog_get_version; ///
+private alias c_adw_about_dialog_get_websiteFn = extern(C) const(char)* function(AdwAboutDialog* self) nothrow;
+__gshared c_adw_about_dialog_get_websiteFn c_adw_about_dialog_get_website; ///
+private alias c_adw_about_dialog_set_application_iconFn = extern(C) void function(AdwAboutDialog* self, const(char)* applicationIcon) nothrow;
+__gshared c_adw_about_dialog_set_application_iconFn c_adw_about_dialog_set_application_icon; ///
+private alias c_adw_about_dialog_set_application_nameFn = extern(C) void function(AdwAboutDialog* self, const(char)* applicationName) nothrow;
+__gshared c_adw_about_dialog_set_application_nameFn c_adw_about_dialog_set_application_name; ///
+private alias c_adw_about_dialog_set_artistsFn = extern(C) void function(AdwAboutDialog* self, const(char*)* artists) nothrow;
+__gshared c_adw_about_dialog_set_artistsFn c_adw_about_dialog_set_artists; ///
+private alias c_adw_about_dialog_set_commentsFn = extern(C) void function(AdwAboutDialog* self, const(char)* comments) nothrow;
+__gshared c_adw_about_dialog_set_commentsFn c_adw_about_dialog_set_comments; ///
+private alias c_adw_about_dialog_set_copyrightFn = extern(C) void function(AdwAboutDialog* self, const(char)* copyright) nothrow;
+__gshared c_adw_about_dialog_set_copyrightFn c_adw_about_dialog_set_copyright; ///
+private alias c_adw_about_dialog_set_debug_infoFn = extern(C) void function(AdwAboutDialog* self, const(char)* debugInfo) nothrow;
+__gshared c_adw_about_dialog_set_debug_infoFn c_adw_about_dialog_set_debug_info; ///
+private alias c_adw_about_dialog_set_debug_info_filenameFn = extern(C) void function(AdwAboutDialog* self, const(char)* filename) nothrow;
+__gshared c_adw_about_dialog_set_debug_info_filenameFn c_adw_about_dialog_set_debug_info_filename; ///
+private alias c_adw_about_dialog_set_designersFn = extern(C) void function(AdwAboutDialog* self, const(char*)* designers) nothrow;
+__gshared c_adw_about_dialog_set_designersFn c_adw_about_dialog_set_designers; ///
+private alias c_adw_about_dialog_set_developer_nameFn = extern(C) void function(AdwAboutDialog* self, const(char)* developerName) nothrow;
+__gshared c_adw_about_dialog_set_developer_nameFn c_adw_about_dialog_set_developer_name; ///
+private alias c_adw_about_dialog_set_developersFn = extern(C) void function(AdwAboutDialog* self, const(char*)* developers) nothrow;
+__gshared c_adw_about_dialog_set_developersFn c_adw_about_dialog_set_developers; ///
+private alias c_adw_about_dialog_set_documentersFn = extern(C) void function(AdwAboutDialog* self, const(char*)* documenters) nothrow;
+__gshared c_adw_about_dialog_set_documentersFn c_adw_about_dialog_set_documenters; ///
+private alias c_adw_about_dialog_set_issue_urlFn = extern(C) void function(AdwAboutDialog* self, const(char)* issueUrl) nothrow;
+__gshared c_adw_about_dialog_set_issue_urlFn c_adw_about_dialog_set_issue_url; ///
+private alias c_adw_about_dialog_set_licenseFn = extern(C) void function(AdwAboutDialog* self, const(char)* license) nothrow;
+__gshared c_adw_about_dialog_set_licenseFn c_adw_about_dialog_set_license; ///
+private alias c_adw_about_dialog_set_license_typeFn = extern(C) void function(AdwAboutDialog* self, GtkLicense licenseType) nothrow;
+__gshared c_adw_about_dialog_set_license_typeFn c_adw_about_dialog_set_license_type; ///
+private alias c_adw_about_dialog_set_release_notesFn = extern(C) void function(AdwAboutDialog* self, const(char)* releaseNotes) nothrow;
+__gshared c_adw_about_dialog_set_release_notesFn c_adw_about_dialog_set_release_notes; ///
+private alias c_adw_about_dialog_set_release_notes_versionFn = extern(C) void function(AdwAboutDialog* self, const(char)* version_) nothrow;
+__gshared c_adw_about_dialog_set_release_notes_versionFn c_adw_about_dialog_set_release_notes_version; ///
+private alias c_adw_about_dialog_set_support_urlFn = extern(C) void function(AdwAboutDialog* self, const(char)* supportUrl) nothrow;
+__gshared c_adw_about_dialog_set_support_urlFn c_adw_about_dialog_set_support_url; ///
+private alias c_adw_about_dialog_set_translator_creditsFn = extern(C) void function(AdwAboutDialog* self, const(char)* translatorCredits) nothrow;
+__gshared c_adw_about_dialog_set_translator_creditsFn c_adw_about_dialog_set_translator_credits; ///
+private alias c_adw_about_dialog_set_versionFn = extern(C) void function(AdwAboutDialog* self, const(char)* version_) nothrow;
+__gshared c_adw_about_dialog_set_versionFn c_adw_about_dialog_set_version; ///
+private alias c_adw_about_dialog_set_websiteFn = extern(C) void function(AdwAboutDialog* self, const(char)* website) nothrow;
+__gshared c_adw_about_dialog_set_websiteFn c_adw_about_dialog_set_website; ///
+
+// AboutWindow
+private alias c_adw_about_window_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_about_window_get_typeFn c_adw_about_window_get_type; ///
+private alias c_adw_about_window_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_about_window_newFn c_adw_about_window_new; ///
+private alias c_adw_about_window_new_from_appdataFn = extern(C) GtkWidget* function(const(char)* resourcePath, const(char)* releaseNotesVersion) nothrow;
+__gshared c_adw_about_window_new_from_appdataFn c_adw_about_window_new_from_appdata; ///
+private alias c_adw_about_window_add_acknowledgement_sectionFn = extern(C) void function(AdwAboutWindow* self, const(char)* name, const(char*)* people) nothrow;
+__gshared c_adw_about_window_add_acknowledgement_sectionFn c_adw_about_window_add_acknowledgement_section; ///
+private alias c_adw_about_window_add_credit_sectionFn = extern(C) void function(AdwAboutWindow* self, const(char)* name, const(char*)* people) nothrow;
+__gshared c_adw_about_window_add_credit_sectionFn c_adw_about_window_add_credit_section; ///
+private alias c_adw_about_window_add_legal_sectionFn = extern(C) void function(AdwAboutWindow* self, const(char)* title, const(char)* copyright, GtkLicense licenseType, const(char)* license) nothrow;
+__gshared c_adw_about_window_add_legal_sectionFn c_adw_about_window_add_legal_section; ///
+private alias c_adw_about_window_add_linkFn = extern(C) void function(AdwAboutWindow* self, const(char)* title, const(char)* url) nothrow;
+__gshared c_adw_about_window_add_linkFn c_adw_about_window_add_link; ///
+private alias c_adw_about_window_get_application_iconFn = extern(C) const(char)* function(AdwAboutWindow* self) nothrow;
+__gshared c_adw_about_window_get_application_iconFn c_adw_about_window_get_application_icon; ///
+private alias c_adw_about_window_get_application_nameFn = extern(C) const(char)* function(AdwAboutWindow* self) nothrow;
+__gshared c_adw_about_window_get_application_nameFn c_adw_about_window_get_application_name; ///
+private alias c_adw_about_window_get_artistsFn = extern(C) const(char*)* function(AdwAboutWindow* self) nothrow;
+__gshared c_adw_about_window_get_artistsFn c_adw_about_window_get_artists; ///
+private alias c_adw_about_window_get_commentsFn = extern(C) const(char)* function(AdwAboutWindow* self) nothrow;
+__gshared c_adw_about_window_get_commentsFn c_adw_about_window_get_comments; ///
+private alias c_adw_about_window_get_copyrightFn = extern(C) const(char)* function(AdwAboutWindow* self) nothrow;
+__gshared c_adw_about_window_get_copyrightFn c_adw_about_window_get_copyright; ///
+private alias c_adw_about_window_get_debug_infoFn = extern(C) const(char)* function(AdwAboutWindow* self) nothrow;
+__gshared c_adw_about_window_get_debug_infoFn c_adw_about_window_get_debug_info; ///
+private alias c_adw_about_window_get_debug_info_filenameFn = extern(C) const(char)* function(AdwAboutWindow* self) nothrow;
+__gshared c_adw_about_window_get_debug_info_filenameFn c_adw_about_window_get_debug_info_filename; ///
+private alias c_adw_about_window_get_designersFn = extern(C) const(char*)* function(AdwAboutWindow* self) nothrow;
+__gshared c_adw_about_window_get_designersFn c_adw_about_window_get_designers; ///
+private alias c_adw_about_window_get_developer_nameFn = extern(C) const(char)* function(AdwAboutWindow* self) nothrow;
+__gshared c_adw_about_window_get_developer_nameFn c_adw_about_window_get_developer_name; ///
+private alias c_adw_about_window_get_developersFn = extern(C) const(char*)* function(AdwAboutWindow* self) nothrow;
+__gshared c_adw_about_window_get_developersFn c_adw_about_window_get_developers; ///
+private alias c_adw_about_window_get_documentersFn = extern(C) const(char*)* function(AdwAboutWindow* self) nothrow;
+__gshared c_adw_about_window_get_documentersFn c_adw_about_window_get_documenters; ///
+private alias c_adw_about_window_get_issue_urlFn = extern(C) const(char)* function(AdwAboutWindow* self) nothrow;
+__gshared c_adw_about_window_get_issue_urlFn c_adw_about_window_get_issue_url; ///
+private alias c_adw_about_window_get_licenseFn = extern(C) const(char)* function(AdwAboutWindow* self) nothrow;
+__gshared c_adw_about_window_get_licenseFn c_adw_about_window_get_license; ///
+private alias c_adw_about_window_get_license_typeFn = extern(C) GtkLicense function(AdwAboutWindow* self) nothrow;
+__gshared c_adw_about_window_get_license_typeFn c_adw_about_window_get_license_type; ///
+private alias c_adw_about_window_get_release_notesFn = extern(C) const(char)* function(AdwAboutWindow* self) nothrow;
+__gshared c_adw_about_window_get_release_notesFn c_adw_about_window_get_release_notes; ///
+private alias c_adw_about_window_get_release_notes_versionFn = extern(C) const(char)* function(AdwAboutWindow* self) nothrow;
+__gshared c_adw_about_window_get_release_notes_versionFn c_adw_about_window_get_release_notes_version; ///
+private alias c_adw_about_window_get_support_urlFn = extern(C) const(char)* function(AdwAboutWindow* self) nothrow;
+__gshared c_adw_about_window_get_support_urlFn c_adw_about_window_get_support_url; ///
+private alias c_adw_about_window_get_translator_creditsFn = extern(C) const(char)* function(AdwAboutWindow* self) nothrow;
+__gshared c_adw_about_window_get_translator_creditsFn c_adw_about_window_get_translator_credits; ///
+private alias c_adw_about_window_get_versionFn = extern(C) const(char)* function(AdwAboutWindow* self) nothrow;
+__gshared c_adw_about_window_get_versionFn c_adw_about_window_get_version; ///
+private alias c_adw_about_window_get_websiteFn = extern(C) const(char)* function(AdwAboutWindow* self) nothrow;
+__gshared c_adw_about_window_get_websiteFn c_adw_about_window_get_website; ///
+private alias c_adw_about_window_set_application_iconFn = extern(C) void function(AdwAboutWindow* self, const(char)* applicationIcon) nothrow;
+__gshared c_adw_about_window_set_application_iconFn c_adw_about_window_set_application_icon; ///
+private alias c_adw_about_window_set_application_nameFn = extern(C) void function(AdwAboutWindow* self, const(char)* applicationName) nothrow;
+__gshared c_adw_about_window_set_application_nameFn c_adw_about_window_set_application_name; ///
+private alias c_adw_about_window_set_artistsFn = extern(C) void function(AdwAboutWindow* self, const(char*)* artists) nothrow;
+__gshared c_adw_about_window_set_artistsFn c_adw_about_window_set_artists; ///
+private alias c_adw_about_window_set_commentsFn = extern(C) void function(AdwAboutWindow* self, const(char)* comments) nothrow;
+__gshared c_adw_about_window_set_commentsFn c_adw_about_window_set_comments; ///
+private alias c_adw_about_window_set_copyrightFn = extern(C) void function(AdwAboutWindow* self, const(char)* copyright) nothrow;
+__gshared c_adw_about_window_set_copyrightFn c_adw_about_window_set_copyright; ///
+private alias c_adw_about_window_set_debug_infoFn = extern(C) void function(AdwAboutWindow* self, const(char)* debugInfo) nothrow;
+__gshared c_adw_about_window_set_debug_infoFn c_adw_about_window_set_debug_info; ///
+private alias c_adw_about_window_set_debug_info_filenameFn = extern(C) void function(AdwAboutWindow* self, const(char)* filename) nothrow;
+__gshared c_adw_about_window_set_debug_info_filenameFn c_adw_about_window_set_debug_info_filename; ///
+private alias c_adw_about_window_set_designersFn = extern(C) void function(AdwAboutWindow* self, const(char*)* designers) nothrow;
+__gshared c_adw_about_window_set_designersFn c_adw_about_window_set_designers; ///
+private alias c_adw_about_window_set_developer_nameFn = extern(C) void function(AdwAboutWindow* self, const(char)* developerName) nothrow;
+__gshared c_adw_about_window_set_developer_nameFn c_adw_about_window_set_developer_name; ///
+private alias c_adw_about_window_set_developersFn = extern(C) void function(AdwAboutWindow* self, const(char*)* developers) nothrow;
+__gshared c_adw_about_window_set_developersFn c_adw_about_window_set_developers; ///
+private alias c_adw_about_window_set_documentersFn = extern(C) void function(AdwAboutWindow* self, const(char*)* documenters) nothrow;
+__gshared c_adw_about_window_set_documentersFn c_adw_about_window_set_documenters; ///
+private alias c_adw_about_window_set_issue_urlFn = extern(C) void function(AdwAboutWindow* self, const(char)* issueUrl) nothrow;
+__gshared c_adw_about_window_set_issue_urlFn c_adw_about_window_set_issue_url; ///
+private alias c_adw_about_window_set_licenseFn = extern(C) void function(AdwAboutWindow* self, const(char)* license) nothrow;
+__gshared c_adw_about_window_set_licenseFn c_adw_about_window_set_license; ///
+private alias c_adw_about_window_set_license_typeFn = extern(C) void function(AdwAboutWindow* self, GtkLicense licenseType) nothrow;
+__gshared c_adw_about_window_set_license_typeFn c_adw_about_window_set_license_type; ///
+private alias c_adw_about_window_set_release_notesFn = extern(C) void function(AdwAboutWindow* self, const(char)* releaseNotes) nothrow;
+__gshared c_adw_about_window_set_release_notesFn c_adw_about_window_set_release_notes; ///
+private alias c_adw_about_window_set_release_notes_versionFn = extern(C) void function(AdwAboutWindow* self, const(char)* version_) nothrow;
+__gshared c_adw_about_window_set_release_notes_versionFn c_adw_about_window_set_release_notes_version; ///
+private alias c_adw_about_window_set_support_urlFn = extern(C) void function(AdwAboutWindow* self, const(char)* supportUrl) nothrow;
+__gshared c_adw_about_window_set_support_urlFn c_adw_about_window_set_support_url; ///
+private alias c_adw_about_window_set_translator_creditsFn = extern(C) void function(AdwAboutWindow* self, const(char)* translatorCredits) nothrow;
+__gshared c_adw_about_window_set_translator_creditsFn c_adw_about_window_set_translator_credits; ///
+private alias c_adw_about_window_set_versionFn = extern(C) void function(AdwAboutWindow* self, const(char)* version_) nothrow;
+__gshared c_adw_about_window_set_versionFn c_adw_about_window_set_version; ///
+private alias c_adw_about_window_set_websiteFn = extern(C) void function(AdwAboutWindow* self, const(char)* website) nothrow;
+__gshared c_adw_about_window_set_websiteFn c_adw_about_window_set_website; ///
+
+// ActionRow
+private alias c_adw_action_row_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_action_row_get_typeFn c_adw_action_row_get_type; ///
+private alias c_adw_action_row_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_action_row_newFn c_adw_action_row_new; ///
+private alias c_adw_action_row_activateFn = extern(C) void function(AdwActionRow* self) nothrow;
+__gshared c_adw_action_row_activateFn c_adw_action_row_activate; ///
+private alias c_adw_action_row_add_prefixFn = extern(C) void function(AdwActionRow* self, GtkWidget* widget) nothrow;
+__gshared c_adw_action_row_add_prefixFn c_adw_action_row_add_prefix; ///
+private alias c_adw_action_row_add_suffixFn = extern(C) void function(AdwActionRow* self, GtkWidget* widget) nothrow;
+__gshared c_adw_action_row_add_suffixFn c_adw_action_row_add_suffix; ///
+private alias c_adw_action_row_get_activatable_widgetFn = extern(C) GtkWidget* function(AdwActionRow* self) nothrow;
+__gshared c_adw_action_row_get_activatable_widgetFn c_adw_action_row_get_activatable_widget; ///
+private alias c_adw_action_row_get_icon_nameFn = extern(C) const(char)* function(AdwActionRow* self) nothrow;
+__gshared c_adw_action_row_get_icon_nameFn c_adw_action_row_get_icon_name; ///
+private alias c_adw_action_row_get_subtitleFn = extern(C) const(char)* function(AdwActionRow* self) nothrow;
+__gshared c_adw_action_row_get_subtitleFn c_adw_action_row_get_subtitle; ///
+private alias c_adw_action_row_get_subtitle_linesFn = extern(C) int function(AdwActionRow* self) nothrow;
+__gshared c_adw_action_row_get_subtitle_linesFn c_adw_action_row_get_subtitle_lines; ///
+private alias c_adw_action_row_get_subtitle_selectableFn = extern(C) gboolean function(AdwActionRow* self) nothrow;
+__gshared c_adw_action_row_get_subtitle_selectableFn c_adw_action_row_get_subtitle_selectable; ///
+private alias c_adw_action_row_get_title_linesFn = extern(C) int function(AdwActionRow* self) nothrow;
+__gshared c_adw_action_row_get_title_linesFn c_adw_action_row_get_title_lines; ///
+private alias c_adw_action_row_removeFn = extern(C) void function(AdwActionRow* self, GtkWidget* widget) nothrow;
+__gshared c_adw_action_row_removeFn c_adw_action_row_remove; ///
+private alias c_adw_action_row_set_activatable_widgetFn = extern(C) void function(AdwActionRow* self, GtkWidget* widget) nothrow;
+__gshared c_adw_action_row_set_activatable_widgetFn c_adw_action_row_set_activatable_widget; ///
+private alias c_adw_action_row_set_icon_nameFn = extern(C) void function(AdwActionRow* self, const(char)* iconName) nothrow;
+__gshared c_adw_action_row_set_icon_nameFn c_adw_action_row_set_icon_name; ///
+private alias c_adw_action_row_set_subtitleFn = extern(C) void function(AdwActionRow* self, const(char)* subtitle) nothrow;
+__gshared c_adw_action_row_set_subtitleFn c_adw_action_row_set_subtitle; ///
+private alias c_adw_action_row_set_subtitle_linesFn = extern(C) void function(AdwActionRow* self, int subtitleLines) nothrow;
+__gshared c_adw_action_row_set_subtitle_linesFn c_adw_action_row_set_subtitle_lines; ///
+private alias c_adw_action_row_set_subtitle_selectableFn = extern(C) void function(AdwActionRow* self, gboolean subtitleSelectable) nothrow;
+__gshared c_adw_action_row_set_subtitle_selectableFn c_adw_action_row_set_subtitle_selectable; ///
+private alias c_adw_action_row_set_title_linesFn = extern(C) void function(AdwActionRow* self, int titleLines) nothrow;
+__gshared c_adw_action_row_set_title_linesFn c_adw_action_row_set_title_lines; ///
+
+// AlertDialog
+private alias c_adw_alert_dialog_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_alert_dialog_get_typeFn c_adw_alert_dialog_get_type; ///
+private alias c_adw_alert_dialog_newFn = extern(C) AdwDialog* function(const(char)* heading, const(char)* body_) nothrow;
+__gshared c_adw_alert_dialog_newFn c_adw_alert_dialog_new; ///
+private alias c_adw_alert_dialog_add_responseFn = extern(C) void function(AdwAlertDialog* self, const(char)* id, const(char)* label) nothrow;
+__gshared c_adw_alert_dialog_add_responseFn c_adw_alert_dialog_add_response; ///
+private alias c_adw_alert_dialog_add_responsesFn = extern(C) void function(AdwAlertDialog* self, const(char)* firstId,  ...) nothrow;
+__gshared c_adw_alert_dialog_add_responsesFn c_adw_alert_dialog_add_responses; ///
+private alias c_adw_alert_dialog_chooseFn = extern(C) void function(AdwAlertDialog* self, GtkWidget* parent, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_adw_alert_dialog_chooseFn c_adw_alert_dialog_choose; ///
+private alias c_adw_alert_dialog_choose_finishFn = extern(C) const(char)* function(AdwAlertDialog* self, GAsyncResult* result) nothrow;
+__gshared c_adw_alert_dialog_choose_finishFn c_adw_alert_dialog_choose_finish; ///
+private alias c_adw_alert_dialog_format_bodyFn = extern(C) void function(AdwAlertDialog* self, const(char)* format,  ...) nothrow;
+__gshared c_adw_alert_dialog_format_bodyFn c_adw_alert_dialog_format_body; ///
+private alias c_adw_alert_dialog_format_body_markupFn = extern(C) void function(AdwAlertDialog* self, const(char)* format,  ...) nothrow;
+__gshared c_adw_alert_dialog_format_body_markupFn c_adw_alert_dialog_format_body_markup; ///
+private alias c_adw_alert_dialog_format_headingFn = extern(C) void function(AdwAlertDialog* self, const(char)* format,  ...) nothrow;
+__gshared c_adw_alert_dialog_format_headingFn c_adw_alert_dialog_format_heading; ///
+private alias c_adw_alert_dialog_format_heading_markupFn = extern(C) void function(AdwAlertDialog* self, const(char)* format,  ...) nothrow;
+__gshared c_adw_alert_dialog_format_heading_markupFn c_adw_alert_dialog_format_heading_markup; ///
+private alias c_adw_alert_dialog_get_bodyFn = extern(C) const(char)* function(AdwAlertDialog* self) nothrow;
+__gshared c_adw_alert_dialog_get_bodyFn c_adw_alert_dialog_get_body; ///
+private alias c_adw_alert_dialog_get_body_use_markupFn = extern(C) gboolean function(AdwAlertDialog* self) nothrow;
+__gshared c_adw_alert_dialog_get_body_use_markupFn c_adw_alert_dialog_get_body_use_markup; ///
+private alias c_adw_alert_dialog_get_close_responseFn = extern(C) const(char)* function(AdwAlertDialog* self) nothrow;
+__gshared c_adw_alert_dialog_get_close_responseFn c_adw_alert_dialog_get_close_response; ///
+private alias c_adw_alert_dialog_get_default_responseFn = extern(C) const(char)* function(AdwAlertDialog* self) nothrow;
+__gshared c_adw_alert_dialog_get_default_responseFn c_adw_alert_dialog_get_default_response; ///
+private alias c_adw_alert_dialog_get_extra_childFn = extern(C) GtkWidget* function(AdwAlertDialog* self) nothrow;
+__gshared c_adw_alert_dialog_get_extra_childFn c_adw_alert_dialog_get_extra_child; ///
+private alias c_adw_alert_dialog_get_headingFn = extern(C) const(char)* function(AdwAlertDialog* self) nothrow;
+__gshared c_adw_alert_dialog_get_headingFn c_adw_alert_dialog_get_heading; ///
+private alias c_adw_alert_dialog_get_heading_use_markupFn = extern(C) gboolean function(AdwAlertDialog* self) nothrow;
+__gshared c_adw_alert_dialog_get_heading_use_markupFn c_adw_alert_dialog_get_heading_use_markup; ///
+private alias c_adw_alert_dialog_get_prefer_wide_layoutFn = extern(C) gboolean function(AdwAlertDialog* self) nothrow;
+__gshared c_adw_alert_dialog_get_prefer_wide_layoutFn c_adw_alert_dialog_get_prefer_wide_layout; ///
+private alias c_adw_alert_dialog_get_response_appearanceFn = extern(C) AdwResponseAppearance function(AdwAlertDialog* self, const(char)* response) nothrow;
+__gshared c_adw_alert_dialog_get_response_appearanceFn c_adw_alert_dialog_get_response_appearance; ///
+private alias c_adw_alert_dialog_get_response_enabledFn = extern(C) gboolean function(AdwAlertDialog* self, const(char)* response) nothrow;
+__gshared c_adw_alert_dialog_get_response_enabledFn c_adw_alert_dialog_get_response_enabled; ///
+private alias c_adw_alert_dialog_get_response_labelFn = extern(C) const(char)* function(AdwAlertDialog* self, const(char)* response) nothrow;
+__gshared c_adw_alert_dialog_get_response_labelFn c_adw_alert_dialog_get_response_label; ///
+private alias c_adw_alert_dialog_has_responseFn = extern(C) gboolean function(AdwAlertDialog* self, const(char)* response) nothrow;
+__gshared c_adw_alert_dialog_has_responseFn c_adw_alert_dialog_has_response; ///
+private alias c_adw_alert_dialog_remove_responseFn = extern(C) void function(AdwAlertDialog* self, const(char)* id) nothrow;
+__gshared c_adw_alert_dialog_remove_responseFn c_adw_alert_dialog_remove_response; ///
+private alias c_adw_alert_dialog_set_bodyFn = extern(C) void function(AdwAlertDialog* self, const(char)* body_) nothrow;
+__gshared c_adw_alert_dialog_set_bodyFn c_adw_alert_dialog_set_body; ///
+private alias c_adw_alert_dialog_set_body_use_markupFn = extern(C) void function(AdwAlertDialog* self, gboolean useMarkup) nothrow;
+__gshared c_adw_alert_dialog_set_body_use_markupFn c_adw_alert_dialog_set_body_use_markup; ///
+private alias c_adw_alert_dialog_set_close_responseFn = extern(C) void function(AdwAlertDialog* self, const(char)* response) nothrow;
+__gshared c_adw_alert_dialog_set_close_responseFn c_adw_alert_dialog_set_close_response; ///
+private alias c_adw_alert_dialog_set_default_responseFn = extern(C) void function(AdwAlertDialog* self, const(char)* response) nothrow;
+__gshared c_adw_alert_dialog_set_default_responseFn c_adw_alert_dialog_set_default_response; ///
+private alias c_adw_alert_dialog_set_extra_childFn = extern(C) void function(AdwAlertDialog* self, GtkWidget* child) nothrow;
+__gshared c_adw_alert_dialog_set_extra_childFn c_adw_alert_dialog_set_extra_child; ///
+private alias c_adw_alert_dialog_set_headingFn = extern(C) void function(AdwAlertDialog* self, const(char)* heading) nothrow;
+__gshared c_adw_alert_dialog_set_headingFn c_adw_alert_dialog_set_heading; ///
+private alias c_adw_alert_dialog_set_heading_use_markupFn = extern(C) void function(AdwAlertDialog* self, gboolean useMarkup) nothrow;
+__gshared c_adw_alert_dialog_set_heading_use_markupFn c_adw_alert_dialog_set_heading_use_markup; ///
+private alias c_adw_alert_dialog_set_prefer_wide_layoutFn = extern(C) void function(AdwAlertDialog* self, gboolean preferWideLayout) nothrow;
+__gshared c_adw_alert_dialog_set_prefer_wide_layoutFn c_adw_alert_dialog_set_prefer_wide_layout; ///
+private alias c_adw_alert_dialog_set_response_appearanceFn = extern(C) void function(AdwAlertDialog* self, const(char)* response, AdwResponseAppearance appearance) nothrow;
+__gshared c_adw_alert_dialog_set_response_appearanceFn c_adw_alert_dialog_set_response_appearance; ///
+private alias c_adw_alert_dialog_set_response_enabledFn = extern(C) void function(AdwAlertDialog* self, const(char)* response, gboolean enabled) nothrow;
+__gshared c_adw_alert_dialog_set_response_enabledFn c_adw_alert_dialog_set_response_enabled; ///
+private alias c_adw_alert_dialog_set_response_labelFn = extern(C) void function(AdwAlertDialog* self, const(char)* response, const(char)* label) nothrow;
+__gshared c_adw_alert_dialog_set_response_labelFn c_adw_alert_dialog_set_response_label; ///
+
+// Animation
+private alias c_adw_animation_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_animation_get_typeFn c_adw_animation_get_type; ///
+private alias c_adw_animation_get_follow_enable_animations_settingFn = extern(C) gboolean function(AdwAnimation* self) nothrow;
+__gshared c_adw_animation_get_follow_enable_animations_settingFn c_adw_animation_get_follow_enable_animations_setting; ///
+private alias c_adw_animation_get_stateFn = extern(C) AdwAnimationState function(AdwAnimation* self) nothrow;
+__gshared c_adw_animation_get_stateFn c_adw_animation_get_state; ///
+private alias c_adw_animation_get_targetFn = extern(C) AdwAnimationTarget* function(AdwAnimation* self) nothrow;
+__gshared c_adw_animation_get_targetFn c_adw_animation_get_target; ///
+private alias c_adw_animation_get_valueFn = extern(C) double function(AdwAnimation* self) nothrow;
+__gshared c_adw_animation_get_valueFn c_adw_animation_get_value; ///
+private alias c_adw_animation_get_widgetFn = extern(C) GtkWidget* function(AdwAnimation* self) nothrow;
+__gshared c_adw_animation_get_widgetFn c_adw_animation_get_widget; ///
+private alias c_adw_animation_pauseFn = extern(C) void function(AdwAnimation* self) nothrow;
+__gshared c_adw_animation_pauseFn c_adw_animation_pause; ///
+private alias c_adw_animation_playFn = extern(C) void function(AdwAnimation* self) nothrow;
+__gshared c_adw_animation_playFn c_adw_animation_play; ///
+private alias c_adw_animation_resetFn = extern(C) void function(AdwAnimation* self) nothrow;
+__gshared c_adw_animation_resetFn c_adw_animation_reset; ///
+private alias c_adw_animation_resumeFn = extern(C) void function(AdwAnimation* self) nothrow;
+__gshared c_adw_animation_resumeFn c_adw_animation_resume; ///
+private alias c_adw_animation_set_follow_enable_animations_settingFn = extern(C) void function(AdwAnimation* self, gboolean setting) nothrow;
+__gshared c_adw_animation_set_follow_enable_animations_settingFn c_adw_animation_set_follow_enable_animations_setting; ///
+private alias c_adw_animation_set_targetFn = extern(C) void function(AdwAnimation* self, AdwAnimationTarget* target) nothrow;
+__gshared c_adw_animation_set_targetFn c_adw_animation_set_target; ///
+private alias c_adw_animation_skipFn = extern(C) void function(AdwAnimation* self) nothrow;
+__gshared c_adw_animation_skipFn c_adw_animation_skip; ///
+
+// AnimationTarget
+private alias c_adw_animation_target_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_animation_target_get_typeFn c_adw_animation_target_get_type; ///
+
+// Application
+private alias c_adw_application_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_application_get_typeFn c_adw_application_get_type; ///
+private alias c_adw_application_newFn = extern(C) AdwApplication* function(const(char)* applicationId, GApplicationFlags flags) nothrow;
+__gshared c_adw_application_newFn c_adw_application_new; ///
+private alias c_adw_application_get_style_managerFn = extern(C) AdwStyleManager* function(AdwApplication* self) nothrow;
+__gshared c_adw_application_get_style_managerFn c_adw_application_get_style_manager; ///
+
+// ApplicationWindow
+private alias c_adw_application_window_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_application_window_get_typeFn c_adw_application_window_get_type; ///
+private alias c_adw_application_window_newFn = extern(C) GtkWidget* function(GtkApplication* app) nothrow;
+__gshared c_adw_application_window_newFn c_adw_application_window_new; ///
+private alias c_adw_application_window_add_breakpointFn = extern(C) void function(AdwApplicationWindow* self, AdwBreakpoint* breakpoint) nothrow;
+__gshared c_adw_application_window_add_breakpointFn c_adw_application_window_add_breakpoint; ///
+private alias c_adw_application_window_get_adaptive_previewFn = extern(C) gboolean function(AdwApplicationWindow* self) nothrow;
+__gshared c_adw_application_window_get_adaptive_previewFn c_adw_application_window_get_adaptive_preview; ///
+private alias c_adw_application_window_get_contentFn = extern(C) GtkWidget* function(AdwApplicationWindow* self) nothrow;
+__gshared c_adw_application_window_get_contentFn c_adw_application_window_get_content; ///
+private alias c_adw_application_window_get_current_breakpointFn = extern(C) AdwBreakpoint* function(AdwApplicationWindow* self) nothrow;
+__gshared c_adw_application_window_get_current_breakpointFn c_adw_application_window_get_current_breakpoint; ///
+private alias c_adw_application_window_get_dialogsFn = extern(C) GListModel* function(AdwApplicationWindow* self) nothrow;
+__gshared c_adw_application_window_get_dialogsFn c_adw_application_window_get_dialogs; ///
+private alias c_adw_application_window_get_visible_dialogFn = extern(C) AdwDialog* function(AdwApplicationWindow* self) nothrow;
+__gshared c_adw_application_window_get_visible_dialogFn c_adw_application_window_get_visible_dialog; ///
+private alias c_adw_application_window_set_adaptive_previewFn = extern(C) void function(AdwApplicationWindow* self, gboolean adaptivePreview) nothrow;
+__gshared c_adw_application_window_set_adaptive_previewFn c_adw_application_window_set_adaptive_preview; ///
+private alias c_adw_application_window_set_contentFn = extern(C) void function(AdwApplicationWindow* self, GtkWidget* content) nothrow;
+__gshared c_adw_application_window_set_contentFn c_adw_application_window_set_content; ///
+
+// Avatar
+private alias c_adw_avatar_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_avatar_get_typeFn c_adw_avatar_get_type; ///
+private alias c_adw_avatar_newFn = extern(C) GtkWidget* function(int size, const(char)* text, gboolean showInitials) nothrow;
+__gshared c_adw_avatar_newFn c_adw_avatar_new; ///
+private alias c_adw_avatar_draw_to_textureFn = extern(C) GdkTexture* function(AdwAvatar* self, int scaleFactor) nothrow;
+__gshared c_adw_avatar_draw_to_textureFn c_adw_avatar_draw_to_texture; ///
+private alias c_adw_avatar_get_custom_imageFn = extern(C) GdkPaintable* function(AdwAvatar* self) nothrow;
+__gshared c_adw_avatar_get_custom_imageFn c_adw_avatar_get_custom_image; ///
+private alias c_adw_avatar_get_icon_nameFn = extern(C) const(char)* function(AdwAvatar* self) nothrow;
+__gshared c_adw_avatar_get_icon_nameFn c_adw_avatar_get_icon_name; ///
+private alias c_adw_avatar_get_show_initialsFn = extern(C) gboolean function(AdwAvatar* self) nothrow;
+__gshared c_adw_avatar_get_show_initialsFn c_adw_avatar_get_show_initials; ///
+private alias c_adw_avatar_get_sizeFn = extern(C) int function(AdwAvatar* self) nothrow;
+__gshared c_adw_avatar_get_sizeFn c_adw_avatar_get_size; ///
+private alias c_adw_avatar_get_textFn = extern(C) const(char)* function(AdwAvatar* self) nothrow;
+__gshared c_adw_avatar_get_textFn c_adw_avatar_get_text; ///
+private alias c_adw_avatar_set_custom_imageFn = extern(C) void function(AdwAvatar* self, GdkPaintable* customImage) nothrow;
+__gshared c_adw_avatar_set_custom_imageFn c_adw_avatar_set_custom_image; ///
+private alias c_adw_avatar_set_icon_nameFn = extern(C) void function(AdwAvatar* self, const(char)* iconName) nothrow;
+__gshared c_adw_avatar_set_icon_nameFn c_adw_avatar_set_icon_name; ///
+private alias c_adw_avatar_set_show_initialsFn = extern(C) void function(AdwAvatar* self, gboolean showInitials) nothrow;
+__gshared c_adw_avatar_set_show_initialsFn c_adw_avatar_set_show_initials; ///
+private alias c_adw_avatar_set_sizeFn = extern(C) void function(AdwAvatar* self, int size) nothrow;
+__gshared c_adw_avatar_set_sizeFn c_adw_avatar_set_size; ///
+private alias c_adw_avatar_set_textFn = extern(C) void function(AdwAvatar* self, const(char)* text) nothrow;
+__gshared c_adw_avatar_set_textFn c_adw_avatar_set_text; ///
+
+// Banner
+private alias c_adw_banner_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_banner_get_typeFn c_adw_banner_get_type; ///
+private alias c_adw_banner_newFn = extern(C) GtkWidget* function(const(char)* title) nothrow;
+__gshared c_adw_banner_newFn c_adw_banner_new; ///
+private alias c_adw_banner_get_button_labelFn = extern(C) const(char)* function(AdwBanner* self) nothrow;
+__gshared c_adw_banner_get_button_labelFn c_adw_banner_get_button_label; ///
+private alias c_adw_banner_get_button_styleFn = extern(C) AdwBannerButtonStyle function(AdwBanner* self) nothrow;
+__gshared c_adw_banner_get_button_styleFn c_adw_banner_get_button_style; ///
+private alias c_adw_banner_get_revealedFn = extern(C) gboolean function(AdwBanner* self) nothrow;
+__gshared c_adw_banner_get_revealedFn c_adw_banner_get_revealed; ///
+private alias c_adw_banner_get_titleFn = extern(C) const(char)* function(AdwBanner* self) nothrow;
+__gshared c_adw_banner_get_titleFn c_adw_banner_get_title; ///
+private alias c_adw_banner_get_use_markupFn = extern(C) gboolean function(AdwBanner* self) nothrow;
+__gshared c_adw_banner_get_use_markupFn c_adw_banner_get_use_markup; ///
+private alias c_adw_banner_set_button_labelFn = extern(C) void function(AdwBanner* self, const(char)* label) nothrow;
+__gshared c_adw_banner_set_button_labelFn c_adw_banner_set_button_label; ///
+private alias c_adw_banner_set_button_styleFn = extern(C) void function(AdwBanner* self, AdwBannerButtonStyle style) nothrow;
+__gshared c_adw_banner_set_button_styleFn c_adw_banner_set_button_style; ///
+private alias c_adw_banner_set_revealedFn = extern(C) void function(AdwBanner* self, gboolean revealed) nothrow;
+__gshared c_adw_banner_set_revealedFn c_adw_banner_set_revealed; ///
+private alias c_adw_banner_set_titleFn = extern(C) void function(AdwBanner* self, const(char)* title) nothrow;
+__gshared c_adw_banner_set_titleFn c_adw_banner_set_title; ///
+private alias c_adw_banner_set_use_markupFn = extern(C) void function(AdwBanner* self, gboolean useMarkup) nothrow;
+__gshared c_adw_banner_set_use_markupFn c_adw_banner_set_use_markup; ///
+
+// Bin
+private alias c_adw_bin_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_bin_get_typeFn c_adw_bin_get_type; ///
+private alias c_adw_bin_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_bin_newFn c_adw_bin_new; ///
+private alias c_adw_bin_get_childFn = extern(C) GtkWidget* function(AdwBin* self) nothrow;
+__gshared c_adw_bin_get_childFn c_adw_bin_get_child; ///
+private alias c_adw_bin_set_childFn = extern(C) void function(AdwBin* self, GtkWidget* child) nothrow;
+__gshared c_adw_bin_set_childFn c_adw_bin_set_child; ///
+
+// BottomSheet
+private alias c_adw_bottom_sheet_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_bottom_sheet_get_typeFn c_adw_bottom_sheet_get_type; ///
+private alias c_adw_bottom_sheet_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_bottom_sheet_newFn c_adw_bottom_sheet_new; ///
+private alias c_adw_bottom_sheet_get_alignFn = extern(C) float function(AdwBottomSheet* self) nothrow;
+__gshared c_adw_bottom_sheet_get_alignFn c_adw_bottom_sheet_get_align; ///
+private alias c_adw_bottom_sheet_get_bottom_barFn = extern(C) GtkWidget* function(AdwBottomSheet* self) nothrow;
+__gshared c_adw_bottom_sheet_get_bottom_barFn c_adw_bottom_sheet_get_bottom_bar; ///
+private alias c_adw_bottom_sheet_get_bottom_bar_heightFn = extern(C) int function(AdwBottomSheet* self) nothrow;
+__gshared c_adw_bottom_sheet_get_bottom_bar_heightFn c_adw_bottom_sheet_get_bottom_bar_height; ///
+private alias c_adw_bottom_sheet_get_can_closeFn = extern(C) gboolean function(AdwBottomSheet* self) nothrow;
+__gshared c_adw_bottom_sheet_get_can_closeFn c_adw_bottom_sheet_get_can_close; ///
+private alias c_adw_bottom_sheet_get_can_openFn = extern(C) gboolean function(AdwBottomSheet* self) nothrow;
+__gshared c_adw_bottom_sheet_get_can_openFn c_adw_bottom_sheet_get_can_open; ///
+private alias c_adw_bottom_sheet_get_contentFn = extern(C) GtkWidget* function(AdwBottomSheet* self) nothrow;
+__gshared c_adw_bottom_sheet_get_contentFn c_adw_bottom_sheet_get_content; ///
+private alias c_adw_bottom_sheet_get_full_widthFn = extern(C) gboolean function(AdwBottomSheet* self) nothrow;
+__gshared c_adw_bottom_sheet_get_full_widthFn c_adw_bottom_sheet_get_full_width; ///
+private alias c_adw_bottom_sheet_get_modalFn = extern(C) gboolean function(AdwBottomSheet* self) nothrow;
+__gshared c_adw_bottom_sheet_get_modalFn c_adw_bottom_sheet_get_modal; ///
+private alias c_adw_bottom_sheet_get_openFn = extern(C) gboolean function(AdwBottomSheet* self) nothrow;
+__gshared c_adw_bottom_sheet_get_openFn c_adw_bottom_sheet_get_open; ///
+private alias c_adw_bottom_sheet_get_reveal_bottom_barFn = extern(C) gboolean function(AdwBottomSheet* self) nothrow;
+__gshared c_adw_bottom_sheet_get_reveal_bottom_barFn c_adw_bottom_sheet_get_reveal_bottom_bar; ///
+private alias c_adw_bottom_sheet_get_sheetFn = extern(C) GtkWidget* function(AdwBottomSheet* self) nothrow;
+__gshared c_adw_bottom_sheet_get_sheetFn c_adw_bottom_sheet_get_sheet; ///
+private alias c_adw_bottom_sheet_get_sheet_heightFn = extern(C) int function(AdwBottomSheet* self) nothrow;
+__gshared c_adw_bottom_sheet_get_sheet_heightFn c_adw_bottom_sheet_get_sheet_height; ///
+private alias c_adw_bottom_sheet_get_show_drag_handleFn = extern(C) gboolean function(AdwBottomSheet* self) nothrow;
+__gshared c_adw_bottom_sheet_get_show_drag_handleFn c_adw_bottom_sheet_get_show_drag_handle; ///
+private alias c_adw_bottom_sheet_set_alignFn = extern(C) void function(AdwBottomSheet* self, float align_) nothrow;
+__gshared c_adw_bottom_sheet_set_alignFn c_adw_bottom_sheet_set_align; ///
+private alias c_adw_bottom_sheet_set_bottom_barFn = extern(C) void function(AdwBottomSheet* self, GtkWidget* bottomBar) nothrow;
+__gshared c_adw_bottom_sheet_set_bottom_barFn c_adw_bottom_sheet_set_bottom_bar; ///
+private alias c_adw_bottom_sheet_set_can_closeFn = extern(C) void function(AdwBottomSheet* self, gboolean canClose) nothrow;
+__gshared c_adw_bottom_sheet_set_can_closeFn c_adw_bottom_sheet_set_can_close; ///
+private alias c_adw_bottom_sheet_set_can_openFn = extern(C) void function(AdwBottomSheet* self, gboolean canOpen) nothrow;
+__gshared c_adw_bottom_sheet_set_can_openFn c_adw_bottom_sheet_set_can_open; ///
+private alias c_adw_bottom_sheet_set_contentFn = extern(C) void function(AdwBottomSheet* self, GtkWidget* content) nothrow;
+__gshared c_adw_bottom_sheet_set_contentFn c_adw_bottom_sheet_set_content; ///
+private alias c_adw_bottom_sheet_set_full_widthFn = extern(C) void function(AdwBottomSheet* self, gboolean fullWidth) nothrow;
+__gshared c_adw_bottom_sheet_set_full_widthFn c_adw_bottom_sheet_set_full_width; ///
+private alias c_adw_bottom_sheet_set_modalFn = extern(C) void function(AdwBottomSheet* self, gboolean modal) nothrow;
+__gshared c_adw_bottom_sheet_set_modalFn c_adw_bottom_sheet_set_modal; ///
+private alias c_adw_bottom_sheet_set_openFn = extern(C) void function(AdwBottomSheet* self, gboolean open) nothrow;
+__gshared c_adw_bottom_sheet_set_openFn c_adw_bottom_sheet_set_open; ///
+private alias c_adw_bottom_sheet_set_reveal_bottom_barFn = extern(C) void function(AdwBottomSheet* self, gboolean reveal) nothrow;
+__gshared c_adw_bottom_sheet_set_reveal_bottom_barFn c_adw_bottom_sheet_set_reveal_bottom_bar; ///
+private alias c_adw_bottom_sheet_set_sheetFn = extern(C) void function(AdwBottomSheet* self, GtkWidget* sheet) nothrow;
+__gshared c_adw_bottom_sheet_set_sheetFn c_adw_bottom_sheet_set_sheet; ///
+private alias c_adw_bottom_sheet_set_show_drag_handleFn = extern(C) void function(AdwBottomSheet* self, gboolean showDragHandle) nothrow;
+__gshared c_adw_bottom_sheet_set_show_drag_handleFn c_adw_bottom_sheet_set_show_drag_handle; ///
+
+// Breakpoint
+private alias c_adw_breakpoint_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_breakpoint_get_typeFn c_adw_breakpoint_get_type; ///
+private alias c_adw_breakpoint_newFn = extern(C) AdwBreakpoint* function(AdwBreakpointCondition* condition) nothrow;
+__gshared c_adw_breakpoint_newFn c_adw_breakpoint_new; ///
+private alias c_adw_breakpoint_add_setterFn = extern(C) void function(AdwBreakpoint* self, GObject* object, const(char)* property, const(GValue)* value) nothrow;
+__gshared c_adw_breakpoint_add_setterFn c_adw_breakpoint_add_setter; ///
+private alias c_adw_breakpoint_add_settersFn = extern(C) void function(AdwBreakpoint* self, GObject* firstObject, const(char)* firstProperty,  ...) nothrow;
+__gshared c_adw_breakpoint_add_settersFn c_adw_breakpoint_add_setters; ///
+private alias c_adw_breakpoint_add_setters_valistFn = extern(C) void function(AdwBreakpoint* self, GObject* firstObject, const(char)* firstProperty, void* args) nothrow;
+__gshared c_adw_breakpoint_add_setters_valistFn c_adw_breakpoint_add_setters_valist; ///
+private alias c_adw_breakpoint_add_settersvFn = extern(C) void function(AdwBreakpoint* self, int nSetters, GObject** objects, const(char*)* names, const(GValue*)* values) nothrow;
+__gshared c_adw_breakpoint_add_settersvFn c_adw_breakpoint_add_settersv; ///
+private alias c_adw_breakpoint_get_conditionFn = extern(C) AdwBreakpointCondition* function(AdwBreakpoint* self) nothrow;
+__gshared c_adw_breakpoint_get_conditionFn c_adw_breakpoint_get_condition; ///
+private alias c_adw_breakpoint_set_conditionFn = extern(C) void function(AdwBreakpoint* self, AdwBreakpointCondition* condition) nothrow;
+__gshared c_adw_breakpoint_set_conditionFn c_adw_breakpoint_set_condition; ///
+
+// BreakpointBin
+private alias c_adw_breakpoint_bin_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_breakpoint_bin_get_typeFn c_adw_breakpoint_bin_get_type; ///
+private alias c_adw_breakpoint_bin_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_breakpoint_bin_newFn c_adw_breakpoint_bin_new; ///
+private alias c_adw_breakpoint_bin_add_breakpointFn = extern(C) void function(AdwBreakpointBin* self, AdwBreakpoint* breakpoint) nothrow;
+__gshared c_adw_breakpoint_bin_add_breakpointFn c_adw_breakpoint_bin_add_breakpoint; ///
+private alias c_adw_breakpoint_bin_get_childFn = extern(C) GtkWidget* function(AdwBreakpointBin* self) nothrow;
+__gshared c_adw_breakpoint_bin_get_childFn c_adw_breakpoint_bin_get_child; ///
+private alias c_adw_breakpoint_bin_get_current_breakpointFn = extern(C) AdwBreakpoint* function(AdwBreakpointBin* self) nothrow;
+__gshared c_adw_breakpoint_bin_get_current_breakpointFn c_adw_breakpoint_bin_get_current_breakpoint; ///
+private alias c_adw_breakpoint_bin_remove_breakpointFn = extern(C) void function(AdwBreakpointBin* self, AdwBreakpoint* breakpoint) nothrow;
+__gshared c_adw_breakpoint_bin_remove_breakpointFn c_adw_breakpoint_bin_remove_breakpoint; ///
+private alias c_adw_breakpoint_bin_set_childFn = extern(C) void function(AdwBreakpointBin* self, GtkWidget* child) nothrow;
+__gshared c_adw_breakpoint_bin_set_childFn c_adw_breakpoint_bin_set_child; ///
+
+// BreakpointCondition
+private alias c_adw_breakpoint_condition_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_breakpoint_condition_get_typeFn c_adw_breakpoint_condition_get_type; ///
+private alias c_adw_breakpoint_condition_new_andFn = extern(C) AdwBreakpointCondition* function(AdwBreakpointCondition* condition1, AdwBreakpointCondition* condition2) nothrow;
+__gshared c_adw_breakpoint_condition_new_andFn c_adw_breakpoint_condition_new_and; ///
+private alias c_adw_breakpoint_condition_new_lengthFn = extern(C) AdwBreakpointCondition* function(AdwBreakpointConditionLengthType type, double value, AdwLengthUnit unit) nothrow;
+__gshared c_adw_breakpoint_condition_new_lengthFn c_adw_breakpoint_condition_new_length; ///
+private alias c_adw_breakpoint_condition_new_orFn = extern(C) AdwBreakpointCondition* function(AdwBreakpointCondition* condition1, AdwBreakpointCondition* condition2) nothrow;
+__gshared c_adw_breakpoint_condition_new_orFn c_adw_breakpoint_condition_new_or; ///
+private alias c_adw_breakpoint_condition_new_ratioFn = extern(C) AdwBreakpointCondition* function(AdwBreakpointConditionRatioType type, int width, int height) nothrow;
+__gshared c_adw_breakpoint_condition_new_ratioFn c_adw_breakpoint_condition_new_ratio; ///
+private alias c_adw_breakpoint_condition_copyFn = extern(C) AdwBreakpointCondition* function(AdwBreakpointCondition* self) nothrow;
+__gshared c_adw_breakpoint_condition_copyFn c_adw_breakpoint_condition_copy; ///
+private alias c_adw_breakpoint_condition_freeFn = extern(C) void function(AdwBreakpointCondition* self) nothrow;
+__gshared c_adw_breakpoint_condition_freeFn c_adw_breakpoint_condition_free; ///
+private alias c_adw_breakpoint_condition_to_stringFn = extern(C) char* function(AdwBreakpointCondition* self) nothrow;
+__gshared c_adw_breakpoint_condition_to_stringFn c_adw_breakpoint_condition_to_string; ///
+private alias c_adw_breakpoint_condition_parseFn = extern(C) AdwBreakpointCondition* function(const(char)* str) nothrow;
+__gshared c_adw_breakpoint_condition_parseFn c_adw_breakpoint_condition_parse; ///
+
+// ButtonContent
+private alias c_adw_button_content_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_button_content_get_typeFn c_adw_button_content_get_type; ///
+private alias c_adw_button_content_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_button_content_newFn c_adw_button_content_new; ///
+private alias c_adw_button_content_get_can_shrinkFn = extern(C) gboolean function(AdwButtonContent* self) nothrow;
+__gshared c_adw_button_content_get_can_shrinkFn c_adw_button_content_get_can_shrink; ///
+private alias c_adw_button_content_get_icon_nameFn = extern(C) const(char)* function(AdwButtonContent* self) nothrow;
+__gshared c_adw_button_content_get_icon_nameFn c_adw_button_content_get_icon_name; ///
+private alias c_adw_button_content_get_labelFn = extern(C) const(char)* function(AdwButtonContent* self) nothrow;
+__gshared c_adw_button_content_get_labelFn c_adw_button_content_get_label; ///
+private alias c_adw_button_content_get_use_underlineFn = extern(C) gboolean function(AdwButtonContent* self) nothrow;
+__gshared c_adw_button_content_get_use_underlineFn c_adw_button_content_get_use_underline; ///
+private alias c_adw_button_content_set_can_shrinkFn = extern(C) void function(AdwButtonContent* self, gboolean canShrink) nothrow;
+__gshared c_adw_button_content_set_can_shrinkFn c_adw_button_content_set_can_shrink; ///
+private alias c_adw_button_content_set_icon_nameFn = extern(C) void function(AdwButtonContent* self, const(char)* iconName) nothrow;
+__gshared c_adw_button_content_set_icon_nameFn c_adw_button_content_set_icon_name; ///
+private alias c_adw_button_content_set_labelFn = extern(C) void function(AdwButtonContent* self, const(char)* label) nothrow;
+__gshared c_adw_button_content_set_labelFn c_adw_button_content_set_label; ///
+private alias c_adw_button_content_set_use_underlineFn = extern(C) void function(AdwButtonContent* self, gboolean useUnderline) nothrow;
+__gshared c_adw_button_content_set_use_underlineFn c_adw_button_content_set_use_underline; ///
+
+// ButtonRow
+private alias c_adw_button_row_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_button_row_get_typeFn c_adw_button_row_get_type; ///
+private alias c_adw_button_row_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_button_row_newFn c_adw_button_row_new; ///
+private alias c_adw_button_row_get_end_icon_nameFn = extern(C) const(char)* function(AdwButtonRow* self) nothrow;
+__gshared c_adw_button_row_get_end_icon_nameFn c_adw_button_row_get_end_icon_name; ///
+private alias c_adw_button_row_get_start_icon_nameFn = extern(C) const(char)* function(AdwButtonRow* self) nothrow;
+__gshared c_adw_button_row_get_start_icon_nameFn c_adw_button_row_get_start_icon_name; ///
+private alias c_adw_button_row_set_end_icon_nameFn = extern(C) void function(AdwButtonRow* self, const(char)* iconName) nothrow;
+__gshared c_adw_button_row_set_end_icon_nameFn c_adw_button_row_set_end_icon_name; ///
+private alias c_adw_button_row_set_start_icon_nameFn = extern(C) void function(AdwButtonRow* self, const(char)* iconName) nothrow;
+__gshared c_adw_button_row_set_start_icon_nameFn c_adw_button_row_set_start_icon_name; ///
+
+// CallbackAnimationTarget
+private alias c_adw_callback_animation_target_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_callback_animation_target_get_typeFn c_adw_callback_animation_target_get_type; ///
+private alias c_adw_callback_animation_target_newFn = extern(C) AdwAnimationTarget* function(AdwAnimationTargetFunc callback, void* userData, GDestroyNotify destroy) nothrow;
+__gshared c_adw_callback_animation_target_newFn c_adw_callback_animation_target_new; ///
+
+// Carousel
+private alias c_adw_carousel_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_carousel_get_typeFn c_adw_carousel_get_type; ///
+private alias c_adw_carousel_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_carousel_newFn c_adw_carousel_new; ///
+private alias c_adw_carousel_appendFn = extern(C) void function(AdwCarousel* self, GtkWidget* child) nothrow;
+__gshared c_adw_carousel_appendFn c_adw_carousel_append; ///
+private alias c_adw_carousel_get_allow_long_swipesFn = extern(C) gboolean function(AdwCarousel* self) nothrow;
+__gshared c_adw_carousel_get_allow_long_swipesFn c_adw_carousel_get_allow_long_swipes; ///
+private alias c_adw_carousel_get_allow_mouse_dragFn = extern(C) gboolean function(AdwCarousel* self) nothrow;
+__gshared c_adw_carousel_get_allow_mouse_dragFn c_adw_carousel_get_allow_mouse_drag; ///
+private alias c_adw_carousel_get_allow_scroll_wheelFn = extern(C) gboolean function(AdwCarousel* self) nothrow;
+__gshared c_adw_carousel_get_allow_scroll_wheelFn c_adw_carousel_get_allow_scroll_wheel; ///
+private alias c_adw_carousel_get_interactiveFn = extern(C) gboolean function(AdwCarousel* self) nothrow;
+__gshared c_adw_carousel_get_interactiveFn c_adw_carousel_get_interactive; ///
+private alias c_adw_carousel_get_n_pagesFn = extern(C) uint function(AdwCarousel* self) nothrow;
+__gshared c_adw_carousel_get_n_pagesFn c_adw_carousel_get_n_pages; ///
+private alias c_adw_carousel_get_nth_pageFn = extern(C) GtkWidget* function(AdwCarousel* self, uint n) nothrow;
+__gshared c_adw_carousel_get_nth_pageFn c_adw_carousel_get_nth_page; ///
+private alias c_adw_carousel_get_positionFn = extern(C) double function(AdwCarousel* self) nothrow;
+__gshared c_adw_carousel_get_positionFn c_adw_carousel_get_position; ///
+private alias c_adw_carousel_get_reveal_durationFn = extern(C) uint function(AdwCarousel* self) nothrow;
+__gshared c_adw_carousel_get_reveal_durationFn c_adw_carousel_get_reveal_duration; ///
+private alias c_adw_carousel_get_scroll_paramsFn = extern(C) AdwSpringParams* function(AdwCarousel* self) nothrow;
+__gshared c_adw_carousel_get_scroll_paramsFn c_adw_carousel_get_scroll_params; ///
+private alias c_adw_carousel_get_spacingFn = extern(C) uint function(AdwCarousel* self) nothrow;
+__gshared c_adw_carousel_get_spacingFn c_adw_carousel_get_spacing; ///
+private alias c_adw_carousel_insertFn = extern(C) void function(AdwCarousel* self, GtkWidget* child, int position) nothrow;
+__gshared c_adw_carousel_insertFn c_adw_carousel_insert; ///
+private alias c_adw_carousel_prependFn = extern(C) void function(AdwCarousel* self, GtkWidget* child) nothrow;
+__gshared c_adw_carousel_prependFn c_adw_carousel_prepend; ///
+private alias c_adw_carousel_removeFn = extern(C) void function(AdwCarousel* self, GtkWidget* child) nothrow;
+__gshared c_adw_carousel_removeFn c_adw_carousel_remove; ///
+private alias c_adw_carousel_reorderFn = extern(C) void function(AdwCarousel* self, GtkWidget* child, int position) nothrow;
+__gshared c_adw_carousel_reorderFn c_adw_carousel_reorder; ///
+private alias c_adw_carousel_scroll_toFn = extern(C) void function(AdwCarousel* self, GtkWidget* widget, gboolean animate) nothrow;
+__gshared c_adw_carousel_scroll_toFn c_adw_carousel_scroll_to; ///
+private alias c_adw_carousel_set_allow_long_swipesFn = extern(C) void function(AdwCarousel* self, gboolean allowLongSwipes) nothrow;
+__gshared c_adw_carousel_set_allow_long_swipesFn c_adw_carousel_set_allow_long_swipes; ///
+private alias c_adw_carousel_set_allow_mouse_dragFn = extern(C) void function(AdwCarousel* self, gboolean allowMouseDrag) nothrow;
+__gshared c_adw_carousel_set_allow_mouse_dragFn c_adw_carousel_set_allow_mouse_drag; ///
+private alias c_adw_carousel_set_allow_scroll_wheelFn = extern(C) void function(AdwCarousel* self, gboolean allowScrollWheel) nothrow;
+__gshared c_adw_carousel_set_allow_scroll_wheelFn c_adw_carousel_set_allow_scroll_wheel; ///
+private alias c_adw_carousel_set_interactiveFn = extern(C) void function(AdwCarousel* self, gboolean interactive) nothrow;
+__gshared c_adw_carousel_set_interactiveFn c_adw_carousel_set_interactive; ///
+private alias c_adw_carousel_set_reveal_durationFn = extern(C) void function(AdwCarousel* self, uint revealDuration) nothrow;
+__gshared c_adw_carousel_set_reveal_durationFn c_adw_carousel_set_reveal_duration; ///
+private alias c_adw_carousel_set_scroll_paramsFn = extern(C) void function(AdwCarousel* self, AdwSpringParams* params) nothrow;
+__gshared c_adw_carousel_set_scroll_paramsFn c_adw_carousel_set_scroll_params; ///
+private alias c_adw_carousel_set_spacingFn = extern(C) void function(AdwCarousel* self, uint spacing) nothrow;
+__gshared c_adw_carousel_set_spacingFn c_adw_carousel_set_spacing; ///
+
+// CarouselIndicatorDots
+private alias c_adw_carousel_indicator_dots_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_carousel_indicator_dots_get_typeFn c_adw_carousel_indicator_dots_get_type; ///
+private alias c_adw_carousel_indicator_dots_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_carousel_indicator_dots_newFn c_adw_carousel_indicator_dots_new; ///
+private alias c_adw_carousel_indicator_dots_get_carouselFn = extern(C) AdwCarousel* function(AdwCarouselIndicatorDots* self) nothrow;
+__gshared c_adw_carousel_indicator_dots_get_carouselFn c_adw_carousel_indicator_dots_get_carousel; ///
+private alias c_adw_carousel_indicator_dots_set_carouselFn = extern(C) void function(AdwCarouselIndicatorDots* self, AdwCarousel* carousel) nothrow;
+__gshared c_adw_carousel_indicator_dots_set_carouselFn c_adw_carousel_indicator_dots_set_carousel; ///
+
+// CarouselIndicatorLines
+private alias c_adw_carousel_indicator_lines_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_carousel_indicator_lines_get_typeFn c_adw_carousel_indicator_lines_get_type; ///
+private alias c_adw_carousel_indicator_lines_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_carousel_indicator_lines_newFn c_adw_carousel_indicator_lines_new; ///
+private alias c_adw_carousel_indicator_lines_get_carouselFn = extern(C) AdwCarousel* function(AdwCarouselIndicatorLines* self) nothrow;
+__gshared c_adw_carousel_indicator_lines_get_carouselFn c_adw_carousel_indicator_lines_get_carousel; ///
+private alias c_adw_carousel_indicator_lines_set_carouselFn = extern(C) void function(AdwCarouselIndicatorLines* self, AdwCarousel* carousel) nothrow;
+__gshared c_adw_carousel_indicator_lines_set_carouselFn c_adw_carousel_indicator_lines_set_carousel; ///
+
+// Clamp
+private alias c_adw_clamp_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_clamp_get_typeFn c_adw_clamp_get_type; ///
+private alias c_adw_clamp_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_clamp_newFn c_adw_clamp_new; ///
+private alias c_adw_clamp_get_childFn = extern(C) GtkWidget* function(AdwClamp* self) nothrow;
+__gshared c_adw_clamp_get_childFn c_adw_clamp_get_child; ///
+private alias c_adw_clamp_get_maximum_sizeFn = extern(C) int function(AdwClamp* self) nothrow;
+__gshared c_adw_clamp_get_maximum_sizeFn c_adw_clamp_get_maximum_size; ///
+private alias c_adw_clamp_get_tightening_thresholdFn = extern(C) int function(AdwClamp* self) nothrow;
+__gshared c_adw_clamp_get_tightening_thresholdFn c_adw_clamp_get_tightening_threshold; ///
+private alias c_adw_clamp_get_unitFn = extern(C) AdwLengthUnit function(AdwClamp* self) nothrow;
+__gshared c_adw_clamp_get_unitFn c_adw_clamp_get_unit; ///
+private alias c_adw_clamp_set_childFn = extern(C) void function(AdwClamp* self, GtkWidget* child) nothrow;
+__gshared c_adw_clamp_set_childFn c_adw_clamp_set_child; ///
+private alias c_adw_clamp_set_maximum_sizeFn = extern(C) void function(AdwClamp* self, int maximumSize) nothrow;
+__gshared c_adw_clamp_set_maximum_sizeFn c_adw_clamp_set_maximum_size; ///
+private alias c_adw_clamp_set_tightening_thresholdFn = extern(C) void function(AdwClamp* self, int tighteningThreshold) nothrow;
+__gshared c_adw_clamp_set_tightening_thresholdFn c_adw_clamp_set_tightening_threshold; ///
+private alias c_adw_clamp_set_unitFn = extern(C) void function(AdwClamp* self, AdwLengthUnit unit) nothrow;
+__gshared c_adw_clamp_set_unitFn c_adw_clamp_set_unit; ///
+
+// ClampLayout
+private alias c_adw_clamp_layout_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_clamp_layout_get_typeFn c_adw_clamp_layout_get_type; ///
+private alias c_adw_clamp_layout_newFn = extern(C) GtkLayoutManager* function() nothrow;
+__gshared c_adw_clamp_layout_newFn c_adw_clamp_layout_new; ///
+private alias c_adw_clamp_layout_get_maximum_sizeFn = extern(C) int function(AdwClampLayout* self) nothrow;
+__gshared c_adw_clamp_layout_get_maximum_sizeFn c_adw_clamp_layout_get_maximum_size; ///
+private alias c_adw_clamp_layout_get_tightening_thresholdFn = extern(C) int function(AdwClampLayout* self) nothrow;
+__gshared c_adw_clamp_layout_get_tightening_thresholdFn c_adw_clamp_layout_get_tightening_threshold; ///
+private alias c_adw_clamp_layout_get_unitFn = extern(C) AdwLengthUnit function(AdwClampLayout* self) nothrow;
+__gshared c_adw_clamp_layout_get_unitFn c_adw_clamp_layout_get_unit; ///
+private alias c_adw_clamp_layout_set_maximum_sizeFn = extern(C) void function(AdwClampLayout* self, int maximumSize) nothrow;
+__gshared c_adw_clamp_layout_set_maximum_sizeFn c_adw_clamp_layout_set_maximum_size; ///
+private alias c_adw_clamp_layout_set_tightening_thresholdFn = extern(C) void function(AdwClampLayout* self, int tighteningThreshold) nothrow;
+__gshared c_adw_clamp_layout_set_tightening_thresholdFn c_adw_clamp_layout_set_tightening_threshold; ///
+private alias c_adw_clamp_layout_set_unitFn = extern(C) void function(AdwClampLayout* self, AdwLengthUnit unit) nothrow;
+__gshared c_adw_clamp_layout_set_unitFn c_adw_clamp_layout_set_unit; ///
+
+// ClampScrollable
+private alias c_adw_clamp_scrollable_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_clamp_scrollable_get_typeFn c_adw_clamp_scrollable_get_type; ///
+private alias c_adw_clamp_scrollable_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_clamp_scrollable_newFn c_adw_clamp_scrollable_new; ///
+private alias c_adw_clamp_scrollable_get_childFn = extern(C) GtkWidget* function(AdwClampScrollable* self) nothrow;
+__gshared c_adw_clamp_scrollable_get_childFn c_adw_clamp_scrollable_get_child; ///
+private alias c_adw_clamp_scrollable_get_maximum_sizeFn = extern(C) int function(AdwClampScrollable* self) nothrow;
+__gshared c_adw_clamp_scrollable_get_maximum_sizeFn c_adw_clamp_scrollable_get_maximum_size; ///
+private alias c_adw_clamp_scrollable_get_tightening_thresholdFn = extern(C) int function(AdwClampScrollable* self) nothrow;
+__gshared c_adw_clamp_scrollable_get_tightening_thresholdFn c_adw_clamp_scrollable_get_tightening_threshold; ///
+private alias c_adw_clamp_scrollable_get_unitFn = extern(C) AdwLengthUnit function(AdwClampScrollable* self) nothrow;
+__gshared c_adw_clamp_scrollable_get_unitFn c_adw_clamp_scrollable_get_unit; ///
+private alias c_adw_clamp_scrollable_set_childFn = extern(C) void function(AdwClampScrollable* self, GtkWidget* child) nothrow;
+__gshared c_adw_clamp_scrollable_set_childFn c_adw_clamp_scrollable_set_child; ///
+private alias c_adw_clamp_scrollable_set_maximum_sizeFn = extern(C) void function(AdwClampScrollable* self, int maximumSize) nothrow;
+__gshared c_adw_clamp_scrollable_set_maximum_sizeFn c_adw_clamp_scrollable_set_maximum_size; ///
+private alias c_adw_clamp_scrollable_set_tightening_thresholdFn = extern(C) void function(AdwClampScrollable* self, int tighteningThreshold) nothrow;
+__gshared c_adw_clamp_scrollable_set_tightening_thresholdFn c_adw_clamp_scrollable_set_tightening_threshold; ///
+private alias c_adw_clamp_scrollable_set_unitFn = extern(C) void function(AdwClampScrollable* self, AdwLengthUnit unit) nothrow;
+__gshared c_adw_clamp_scrollable_set_unitFn c_adw_clamp_scrollable_set_unit; ///
+
+// ComboRow
+private alias c_adw_combo_row_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_combo_row_get_typeFn c_adw_combo_row_get_type; ///
+private alias c_adw_combo_row_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_combo_row_newFn c_adw_combo_row_new; ///
+private alias c_adw_combo_row_get_enable_searchFn = extern(C) gboolean function(AdwComboRow* self) nothrow;
+__gshared c_adw_combo_row_get_enable_searchFn c_adw_combo_row_get_enable_search; ///
+private alias c_adw_combo_row_get_expressionFn = extern(C) GtkExpression* function(AdwComboRow* self) nothrow;
+__gshared c_adw_combo_row_get_expressionFn c_adw_combo_row_get_expression; ///
+private alias c_adw_combo_row_get_factoryFn = extern(C) GtkListItemFactory* function(AdwComboRow* self) nothrow;
+__gshared c_adw_combo_row_get_factoryFn c_adw_combo_row_get_factory; ///
+private alias c_adw_combo_row_get_header_factoryFn = extern(C) GtkListItemFactory* function(AdwComboRow* self) nothrow;
+__gshared c_adw_combo_row_get_header_factoryFn c_adw_combo_row_get_header_factory; ///
+private alias c_adw_combo_row_get_list_factoryFn = extern(C) GtkListItemFactory* function(AdwComboRow* self) nothrow;
+__gshared c_adw_combo_row_get_list_factoryFn c_adw_combo_row_get_list_factory; ///
+private alias c_adw_combo_row_get_modelFn = extern(C) GListModel* function(AdwComboRow* self) nothrow;
+__gshared c_adw_combo_row_get_modelFn c_adw_combo_row_get_model; ///
+private alias c_adw_combo_row_get_search_match_modeFn = extern(C) GtkStringFilterMatchMode function(AdwComboRow* self) nothrow;
+__gshared c_adw_combo_row_get_search_match_modeFn c_adw_combo_row_get_search_match_mode; ///
+private alias c_adw_combo_row_get_selectedFn = extern(C) uint function(AdwComboRow* self) nothrow;
+__gshared c_adw_combo_row_get_selectedFn c_adw_combo_row_get_selected; ///
+private alias c_adw_combo_row_get_selected_itemFn = extern(C) GObject* function(AdwComboRow* self) nothrow;
+__gshared c_adw_combo_row_get_selected_itemFn c_adw_combo_row_get_selected_item; ///
+private alias c_adw_combo_row_get_use_subtitleFn = extern(C) gboolean function(AdwComboRow* self) nothrow;
+__gshared c_adw_combo_row_get_use_subtitleFn c_adw_combo_row_get_use_subtitle; ///
+private alias c_adw_combo_row_set_enable_searchFn = extern(C) void function(AdwComboRow* self, gboolean enableSearch) nothrow;
+__gshared c_adw_combo_row_set_enable_searchFn c_adw_combo_row_set_enable_search; ///
+private alias c_adw_combo_row_set_expressionFn = extern(C) void function(AdwComboRow* self, GtkExpression* expression) nothrow;
+__gshared c_adw_combo_row_set_expressionFn c_adw_combo_row_set_expression; ///
+private alias c_adw_combo_row_set_factoryFn = extern(C) void function(AdwComboRow* self, GtkListItemFactory* factory) nothrow;
+__gshared c_adw_combo_row_set_factoryFn c_adw_combo_row_set_factory; ///
+private alias c_adw_combo_row_set_header_factoryFn = extern(C) void function(AdwComboRow* self, GtkListItemFactory* factory) nothrow;
+__gshared c_adw_combo_row_set_header_factoryFn c_adw_combo_row_set_header_factory; ///
+private alias c_adw_combo_row_set_list_factoryFn = extern(C) void function(AdwComboRow* self, GtkListItemFactory* factory) nothrow;
+__gshared c_adw_combo_row_set_list_factoryFn c_adw_combo_row_set_list_factory; ///
+private alias c_adw_combo_row_set_modelFn = extern(C) void function(AdwComboRow* self, GListModel* model) nothrow;
+__gshared c_adw_combo_row_set_modelFn c_adw_combo_row_set_model; ///
+private alias c_adw_combo_row_set_search_match_modeFn = extern(C) void function(AdwComboRow* self, GtkStringFilterMatchMode searchMatchMode) nothrow;
+__gshared c_adw_combo_row_set_search_match_modeFn c_adw_combo_row_set_search_match_mode; ///
+private alias c_adw_combo_row_set_selectedFn = extern(C) void function(AdwComboRow* self, uint position) nothrow;
+__gshared c_adw_combo_row_set_selectedFn c_adw_combo_row_set_selected; ///
+private alias c_adw_combo_row_set_use_subtitleFn = extern(C) void function(AdwComboRow* self, gboolean useSubtitle) nothrow;
+__gshared c_adw_combo_row_set_use_subtitleFn c_adw_combo_row_set_use_subtitle; ///
+
+// Dialog
+private alias c_adw_dialog_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_dialog_get_typeFn c_adw_dialog_get_type; ///
+private alias c_adw_dialog_newFn = extern(C) AdwDialog* function() nothrow;
+__gshared c_adw_dialog_newFn c_adw_dialog_new; ///
+private alias c_adw_dialog_add_breakpointFn = extern(C) void function(AdwDialog* self, AdwBreakpoint* breakpoint) nothrow;
+__gshared c_adw_dialog_add_breakpointFn c_adw_dialog_add_breakpoint; ///
+private alias c_adw_dialog_closeFn = extern(C) gboolean function(AdwDialog* self) nothrow;
+__gshared c_adw_dialog_closeFn c_adw_dialog_close; ///
+private alias c_adw_dialog_force_closeFn = extern(C) void function(AdwDialog* self) nothrow;
+__gshared c_adw_dialog_force_closeFn c_adw_dialog_force_close; ///
+private alias c_adw_dialog_get_can_closeFn = extern(C) gboolean function(AdwDialog* self) nothrow;
+__gshared c_adw_dialog_get_can_closeFn c_adw_dialog_get_can_close; ///
+private alias c_adw_dialog_get_childFn = extern(C) GtkWidget* function(AdwDialog* self) nothrow;
+__gshared c_adw_dialog_get_childFn c_adw_dialog_get_child; ///
+private alias c_adw_dialog_get_content_heightFn = extern(C) int function(AdwDialog* self) nothrow;
+__gshared c_adw_dialog_get_content_heightFn c_adw_dialog_get_content_height; ///
+private alias c_adw_dialog_get_content_widthFn = extern(C) int function(AdwDialog* self) nothrow;
+__gshared c_adw_dialog_get_content_widthFn c_adw_dialog_get_content_width; ///
+private alias c_adw_dialog_get_current_breakpointFn = extern(C) AdwBreakpoint* function(AdwDialog* self) nothrow;
+__gshared c_adw_dialog_get_current_breakpointFn c_adw_dialog_get_current_breakpoint; ///
+private alias c_adw_dialog_get_default_widgetFn = extern(C) GtkWidget* function(AdwDialog* self) nothrow;
+__gshared c_adw_dialog_get_default_widgetFn c_adw_dialog_get_default_widget; ///
+private alias c_adw_dialog_get_focusFn = extern(C) GtkWidget* function(AdwDialog* self) nothrow;
+__gshared c_adw_dialog_get_focusFn c_adw_dialog_get_focus; ///
+private alias c_adw_dialog_get_follows_content_sizeFn = extern(C) gboolean function(AdwDialog* self) nothrow;
+__gshared c_adw_dialog_get_follows_content_sizeFn c_adw_dialog_get_follows_content_size; ///
+private alias c_adw_dialog_get_presentation_modeFn = extern(C) AdwDialogPresentationMode function(AdwDialog* self) nothrow;
+__gshared c_adw_dialog_get_presentation_modeFn c_adw_dialog_get_presentation_mode; ///
+private alias c_adw_dialog_get_titleFn = extern(C) const(char)* function(AdwDialog* self) nothrow;
+__gshared c_adw_dialog_get_titleFn c_adw_dialog_get_title; ///
+private alias c_adw_dialog_presentFn = extern(C) void function(AdwDialog* self, GtkWidget* parent) nothrow;
+__gshared c_adw_dialog_presentFn c_adw_dialog_present; ///
+private alias c_adw_dialog_set_can_closeFn = extern(C) void function(AdwDialog* self, gboolean canClose) nothrow;
+__gshared c_adw_dialog_set_can_closeFn c_adw_dialog_set_can_close; ///
+private alias c_adw_dialog_set_childFn = extern(C) void function(AdwDialog* self, GtkWidget* child) nothrow;
+__gshared c_adw_dialog_set_childFn c_adw_dialog_set_child; ///
+private alias c_adw_dialog_set_content_heightFn = extern(C) void function(AdwDialog* self, int contentHeight) nothrow;
+__gshared c_adw_dialog_set_content_heightFn c_adw_dialog_set_content_height; ///
+private alias c_adw_dialog_set_content_widthFn = extern(C) void function(AdwDialog* self, int contentWidth) nothrow;
+__gshared c_adw_dialog_set_content_widthFn c_adw_dialog_set_content_width; ///
+private alias c_adw_dialog_set_default_widgetFn = extern(C) void function(AdwDialog* self, GtkWidget* defaultWidget) nothrow;
+__gshared c_adw_dialog_set_default_widgetFn c_adw_dialog_set_default_widget; ///
+private alias c_adw_dialog_set_focusFn = extern(C) void function(AdwDialog* self, GtkWidget* focus) nothrow;
+__gshared c_adw_dialog_set_focusFn c_adw_dialog_set_focus; ///
+private alias c_adw_dialog_set_follows_content_sizeFn = extern(C) void function(AdwDialog* self, gboolean followsContentSize) nothrow;
+__gshared c_adw_dialog_set_follows_content_sizeFn c_adw_dialog_set_follows_content_size; ///
+private alias c_adw_dialog_set_presentation_modeFn = extern(C) void function(AdwDialog* self, AdwDialogPresentationMode presentationMode) nothrow;
+__gshared c_adw_dialog_set_presentation_modeFn c_adw_dialog_set_presentation_mode; ///
+private alias c_adw_dialog_set_titleFn = extern(C) void function(AdwDialog* self, const(char)* title) nothrow;
+__gshared c_adw_dialog_set_titleFn c_adw_dialog_set_title; ///
+
+// EntryRow
+private alias c_adw_entry_row_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_entry_row_get_typeFn c_adw_entry_row_get_type; ///
+private alias c_adw_entry_row_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_entry_row_newFn c_adw_entry_row_new; ///
+private alias c_adw_entry_row_add_prefixFn = extern(C) void function(AdwEntryRow* self, GtkWidget* widget) nothrow;
+__gshared c_adw_entry_row_add_prefixFn c_adw_entry_row_add_prefix; ///
+private alias c_adw_entry_row_add_suffixFn = extern(C) void function(AdwEntryRow* self, GtkWidget* widget) nothrow;
+__gshared c_adw_entry_row_add_suffixFn c_adw_entry_row_add_suffix; ///
+private alias c_adw_entry_row_get_activates_defaultFn = extern(C) gboolean function(AdwEntryRow* self) nothrow;
+__gshared c_adw_entry_row_get_activates_defaultFn c_adw_entry_row_get_activates_default; ///
+private alias c_adw_entry_row_get_attributesFn = extern(C) PangoAttrList* function(AdwEntryRow* self) nothrow;
+__gshared c_adw_entry_row_get_attributesFn c_adw_entry_row_get_attributes; ///
+private alias c_adw_entry_row_get_enable_emoji_completionFn = extern(C) gboolean function(AdwEntryRow* self) nothrow;
+__gshared c_adw_entry_row_get_enable_emoji_completionFn c_adw_entry_row_get_enable_emoji_completion; ///
+private alias c_adw_entry_row_get_input_hintsFn = extern(C) GtkInputHints function(AdwEntryRow* self) nothrow;
+__gshared c_adw_entry_row_get_input_hintsFn c_adw_entry_row_get_input_hints; ///
+private alias c_adw_entry_row_get_input_purposeFn = extern(C) GtkInputPurpose function(AdwEntryRow* self) nothrow;
+__gshared c_adw_entry_row_get_input_purposeFn c_adw_entry_row_get_input_purpose; ///
+private alias c_adw_entry_row_get_max_lengthFn = extern(C) int function(AdwEntryRow* self) nothrow;
+__gshared c_adw_entry_row_get_max_lengthFn c_adw_entry_row_get_max_length; ///
+private alias c_adw_entry_row_get_show_apply_buttonFn = extern(C) gboolean function(AdwEntryRow* self) nothrow;
+__gshared c_adw_entry_row_get_show_apply_buttonFn c_adw_entry_row_get_show_apply_button; ///
+private alias c_adw_entry_row_get_text_lengthFn = extern(C) uint function(AdwEntryRow* self) nothrow;
+__gshared c_adw_entry_row_get_text_lengthFn c_adw_entry_row_get_text_length; ///
+private alias c_adw_entry_row_grab_focus_without_selectingFn = extern(C) gboolean function(AdwEntryRow* self) nothrow;
+__gshared c_adw_entry_row_grab_focus_without_selectingFn c_adw_entry_row_grab_focus_without_selecting; ///
+private alias c_adw_entry_row_removeFn = extern(C) void function(AdwEntryRow* self, GtkWidget* widget) nothrow;
+__gshared c_adw_entry_row_removeFn c_adw_entry_row_remove; ///
+private alias c_adw_entry_row_set_activates_defaultFn = extern(C) void function(AdwEntryRow* self, gboolean activates) nothrow;
+__gshared c_adw_entry_row_set_activates_defaultFn c_adw_entry_row_set_activates_default; ///
+private alias c_adw_entry_row_set_attributesFn = extern(C) void function(AdwEntryRow* self, PangoAttrList* attributes) nothrow;
+__gshared c_adw_entry_row_set_attributesFn c_adw_entry_row_set_attributes; ///
+private alias c_adw_entry_row_set_enable_emoji_completionFn = extern(C) void function(AdwEntryRow* self, gboolean enableEmojiCompletion) nothrow;
+__gshared c_adw_entry_row_set_enable_emoji_completionFn c_adw_entry_row_set_enable_emoji_completion; ///
+private alias c_adw_entry_row_set_input_hintsFn = extern(C) void function(AdwEntryRow* self, GtkInputHints hints) nothrow;
+__gshared c_adw_entry_row_set_input_hintsFn c_adw_entry_row_set_input_hints; ///
+private alias c_adw_entry_row_set_input_purposeFn = extern(C) void function(AdwEntryRow* self, GtkInputPurpose purpose) nothrow;
+__gshared c_adw_entry_row_set_input_purposeFn c_adw_entry_row_set_input_purpose; ///
+private alias c_adw_entry_row_set_max_lengthFn = extern(C) void function(AdwEntryRow* self, int maxLength) nothrow;
+__gshared c_adw_entry_row_set_max_lengthFn c_adw_entry_row_set_max_length; ///
+private alias c_adw_entry_row_set_show_apply_buttonFn = extern(C) void function(AdwEntryRow* self, gboolean showApplyButton) nothrow;
+__gshared c_adw_entry_row_set_show_apply_buttonFn c_adw_entry_row_set_show_apply_button; ///
+
+// EnumListItem
+private alias c_adw_enum_list_item_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_enum_list_item_get_typeFn c_adw_enum_list_item_get_type; ///
+private alias c_adw_enum_list_item_get_nameFn = extern(C) const(char)* function(AdwEnumListItem* self) nothrow;
+__gshared c_adw_enum_list_item_get_nameFn c_adw_enum_list_item_get_name; ///
+private alias c_adw_enum_list_item_get_nickFn = extern(C) const(char)* function(AdwEnumListItem* self) nothrow;
+__gshared c_adw_enum_list_item_get_nickFn c_adw_enum_list_item_get_nick; ///
+private alias c_adw_enum_list_item_get_valueFn = extern(C) int function(AdwEnumListItem* self) nothrow;
+__gshared c_adw_enum_list_item_get_valueFn c_adw_enum_list_item_get_value; ///
+
+// EnumListModel
+private alias c_adw_enum_list_model_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_enum_list_model_get_typeFn c_adw_enum_list_model_get_type; ///
+private alias c_adw_enum_list_model_newFn = extern(C) AdwEnumListModel* function(GType enumType) nothrow;
+__gshared c_adw_enum_list_model_newFn c_adw_enum_list_model_new; ///
+private alias c_adw_enum_list_model_find_positionFn = extern(C) uint function(AdwEnumListModel* self, int value) nothrow;
+__gshared c_adw_enum_list_model_find_positionFn c_adw_enum_list_model_find_position; ///
+private alias c_adw_enum_list_model_get_enum_typeFn = extern(C) GType function(AdwEnumListModel* self) nothrow;
+__gshared c_adw_enum_list_model_get_enum_typeFn c_adw_enum_list_model_get_enum_type; ///
+
+// ExpanderRow
+private alias c_adw_expander_row_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_expander_row_get_typeFn c_adw_expander_row_get_type; ///
+private alias c_adw_expander_row_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_expander_row_newFn c_adw_expander_row_new; ///
+private alias c_adw_expander_row_add_actionFn = extern(C) void function(AdwExpanderRow* self, GtkWidget* widget) nothrow;
+__gshared c_adw_expander_row_add_actionFn c_adw_expander_row_add_action; ///
+private alias c_adw_expander_row_add_prefixFn = extern(C) void function(AdwExpanderRow* self, GtkWidget* widget) nothrow;
+__gshared c_adw_expander_row_add_prefixFn c_adw_expander_row_add_prefix; ///
+private alias c_adw_expander_row_add_rowFn = extern(C) void function(AdwExpanderRow* self, GtkWidget* child) nothrow;
+__gshared c_adw_expander_row_add_rowFn c_adw_expander_row_add_row; ///
+private alias c_adw_expander_row_add_suffixFn = extern(C) void function(AdwExpanderRow* self, GtkWidget* widget) nothrow;
+__gshared c_adw_expander_row_add_suffixFn c_adw_expander_row_add_suffix; ///
+private alias c_adw_expander_row_get_enable_expansionFn = extern(C) gboolean function(AdwExpanderRow* self) nothrow;
+__gshared c_adw_expander_row_get_enable_expansionFn c_adw_expander_row_get_enable_expansion; ///
+private alias c_adw_expander_row_get_expandedFn = extern(C) gboolean function(AdwExpanderRow* self) nothrow;
+__gshared c_adw_expander_row_get_expandedFn c_adw_expander_row_get_expanded; ///
+private alias c_adw_expander_row_get_icon_nameFn = extern(C) const(char)* function(AdwExpanderRow* self) nothrow;
+__gshared c_adw_expander_row_get_icon_nameFn c_adw_expander_row_get_icon_name; ///
+private alias c_adw_expander_row_get_show_enable_switchFn = extern(C) gboolean function(AdwExpanderRow* self) nothrow;
+__gshared c_adw_expander_row_get_show_enable_switchFn c_adw_expander_row_get_show_enable_switch; ///
+private alias c_adw_expander_row_get_subtitleFn = extern(C) const(char)* function(AdwExpanderRow* self) nothrow;
+__gshared c_adw_expander_row_get_subtitleFn c_adw_expander_row_get_subtitle; ///
+private alias c_adw_expander_row_get_subtitle_linesFn = extern(C) int function(AdwExpanderRow* self) nothrow;
+__gshared c_adw_expander_row_get_subtitle_linesFn c_adw_expander_row_get_subtitle_lines; ///
+private alias c_adw_expander_row_get_title_linesFn = extern(C) int function(AdwExpanderRow* self) nothrow;
+__gshared c_adw_expander_row_get_title_linesFn c_adw_expander_row_get_title_lines; ///
+private alias c_adw_expander_row_removeFn = extern(C) void function(AdwExpanderRow* self, GtkWidget* child) nothrow;
+__gshared c_adw_expander_row_removeFn c_adw_expander_row_remove; ///
+private alias c_adw_expander_row_set_enable_expansionFn = extern(C) void function(AdwExpanderRow* self, gboolean enableExpansion) nothrow;
+__gshared c_adw_expander_row_set_enable_expansionFn c_adw_expander_row_set_enable_expansion; ///
+private alias c_adw_expander_row_set_expandedFn = extern(C) void function(AdwExpanderRow* self, gboolean expanded) nothrow;
+__gshared c_adw_expander_row_set_expandedFn c_adw_expander_row_set_expanded; ///
+private alias c_adw_expander_row_set_icon_nameFn = extern(C) void function(AdwExpanderRow* self, const(char)* iconName) nothrow;
+__gshared c_adw_expander_row_set_icon_nameFn c_adw_expander_row_set_icon_name; ///
+private alias c_adw_expander_row_set_show_enable_switchFn = extern(C) void function(AdwExpanderRow* self, gboolean showEnableSwitch) nothrow;
+__gshared c_adw_expander_row_set_show_enable_switchFn c_adw_expander_row_set_show_enable_switch; ///
+private alias c_adw_expander_row_set_subtitleFn = extern(C) void function(AdwExpanderRow* self, const(char)* subtitle) nothrow;
+__gshared c_adw_expander_row_set_subtitleFn c_adw_expander_row_set_subtitle; ///
+private alias c_adw_expander_row_set_subtitle_linesFn = extern(C) void function(AdwExpanderRow* self, int subtitleLines) nothrow;
+__gshared c_adw_expander_row_set_subtitle_linesFn c_adw_expander_row_set_subtitle_lines; ///
+private alias c_adw_expander_row_set_title_linesFn = extern(C) void function(AdwExpanderRow* self, int titleLines) nothrow;
+__gshared c_adw_expander_row_set_title_linesFn c_adw_expander_row_set_title_lines; ///
+
+// Flap
+private alias c_adw_flap_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_flap_get_typeFn c_adw_flap_get_type; ///
+private alias c_adw_flap_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_flap_newFn c_adw_flap_new; ///
+private alias c_adw_flap_get_contentFn = extern(C) GtkWidget* function(AdwFlap* self) nothrow;
+__gshared c_adw_flap_get_contentFn c_adw_flap_get_content; ///
+private alias c_adw_flap_get_flapFn = extern(C) GtkWidget* function(AdwFlap* self) nothrow;
+__gshared c_adw_flap_get_flapFn c_adw_flap_get_flap; ///
+private alias c_adw_flap_get_flap_positionFn = extern(C) GtkPackType function(AdwFlap* self) nothrow;
+__gshared c_adw_flap_get_flap_positionFn c_adw_flap_get_flap_position; ///
+private alias c_adw_flap_get_fold_durationFn = extern(C) uint function(AdwFlap* self) nothrow;
+__gshared c_adw_flap_get_fold_durationFn c_adw_flap_get_fold_duration; ///
+private alias c_adw_flap_get_fold_policyFn = extern(C) AdwFlapFoldPolicy function(AdwFlap* self) nothrow;
+__gshared c_adw_flap_get_fold_policyFn c_adw_flap_get_fold_policy; ///
+private alias c_adw_flap_get_fold_threshold_policyFn = extern(C) AdwFoldThresholdPolicy function(AdwFlap* self) nothrow;
+__gshared c_adw_flap_get_fold_threshold_policyFn c_adw_flap_get_fold_threshold_policy; ///
+private alias c_adw_flap_get_foldedFn = extern(C) gboolean function(AdwFlap* self) nothrow;
+__gshared c_adw_flap_get_foldedFn c_adw_flap_get_folded; ///
+private alias c_adw_flap_get_lockedFn = extern(C) gboolean function(AdwFlap* self) nothrow;
+__gshared c_adw_flap_get_lockedFn c_adw_flap_get_locked; ///
+private alias c_adw_flap_get_modalFn = extern(C) gboolean function(AdwFlap* self) nothrow;
+__gshared c_adw_flap_get_modalFn c_adw_flap_get_modal; ///
+private alias c_adw_flap_get_reveal_flapFn = extern(C) gboolean function(AdwFlap* self) nothrow;
+__gshared c_adw_flap_get_reveal_flapFn c_adw_flap_get_reveal_flap; ///
+private alias c_adw_flap_get_reveal_paramsFn = extern(C) AdwSpringParams* function(AdwFlap* self) nothrow;
+__gshared c_adw_flap_get_reveal_paramsFn c_adw_flap_get_reveal_params; ///
+private alias c_adw_flap_get_reveal_progressFn = extern(C) double function(AdwFlap* self) nothrow;
+__gshared c_adw_flap_get_reveal_progressFn c_adw_flap_get_reveal_progress; ///
+private alias c_adw_flap_get_separatorFn = extern(C) GtkWidget* function(AdwFlap* self) nothrow;
+__gshared c_adw_flap_get_separatorFn c_adw_flap_get_separator; ///
+private alias c_adw_flap_get_swipe_to_closeFn = extern(C) gboolean function(AdwFlap* self) nothrow;
+__gshared c_adw_flap_get_swipe_to_closeFn c_adw_flap_get_swipe_to_close; ///
+private alias c_adw_flap_get_swipe_to_openFn = extern(C) gboolean function(AdwFlap* self) nothrow;
+__gshared c_adw_flap_get_swipe_to_openFn c_adw_flap_get_swipe_to_open; ///
+private alias c_adw_flap_get_transition_typeFn = extern(C) AdwFlapTransitionType function(AdwFlap* self) nothrow;
+__gshared c_adw_flap_get_transition_typeFn c_adw_flap_get_transition_type; ///
+private alias c_adw_flap_set_contentFn = extern(C) void function(AdwFlap* self, GtkWidget* content) nothrow;
+__gshared c_adw_flap_set_contentFn c_adw_flap_set_content; ///
+private alias c_adw_flap_set_flapFn = extern(C) void function(AdwFlap* self, GtkWidget* flap) nothrow;
+__gshared c_adw_flap_set_flapFn c_adw_flap_set_flap; ///
+private alias c_adw_flap_set_flap_positionFn = extern(C) void function(AdwFlap* self, GtkPackType position) nothrow;
+__gshared c_adw_flap_set_flap_positionFn c_adw_flap_set_flap_position; ///
+private alias c_adw_flap_set_fold_durationFn = extern(C) void function(AdwFlap* self, uint duration) nothrow;
+__gshared c_adw_flap_set_fold_durationFn c_adw_flap_set_fold_duration; ///
+private alias c_adw_flap_set_fold_policyFn = extern(C) void function(AdwFlap* self, AdwFlapFoldPolicy policy) nothrow;
+__gshared c_adw_flap_set_fold_policyFn c_adw_flap_set_fold_policy; ///
+private alias c_adw_flap_set_fold_threshold_policyFn = extern(C) void function(AdwFlap* self, AdwFoldThresholdPolicy policy) nothrow;
+__gshared c_adw_flap_set_fold_threshold_policyFn c_adw_flap_set_fold_threshold_policy; ///
+private alias c_adw_flap_set_lockedFn = extern(C) void function(AdwFlap* self, gboolean locked) nothrow;
+__gshared c_adw_flap_set_lockedFn c_adw_flap_set_locked; ///
+private alias c_adw_flap_set_modalFn = extern(C) void function(AdwFlap* self, gboolean modal) nothrow;
+__gshared c_adw_flap_set_modalFn c_adw_flap_set_modal; ///
+private alias c_adw_flap_set_reveal_flapFn = extern(C) void function(AdwFlap* self, gboolean revealFlap) nothrow;
+__gshared c_adw_flap_set_reveal_flapFn c_adw_flap_set_reveal_flap; ///
+private alias c_adw_flap_set_reveal_paramsFn = extern(C) void function(AdwFlap* self, AdwSpringParams* params) nothrow;
+__gshared c_adw_flap_set_reveal_paramsFn c_adw_flap_set_reveal_params; ///
+private alias c_adw_flap_set_separatorFn = extern(C) void function(AdwFlap* self, GtkWidget* separator) nothrow;
+__gshared c_adw_flap_set_separatorFn c_adw_flap_set_separator; ///
+private alias c_adw_flap_set_swipe_to_closeFn = extern(C) void function(AdwFlap* self, gboolean swipeToClose) nothrow;
+__gshared c_adw_flap_set_swipe_to_closeFn c_adw_flap_set_swipe_to_close; ///
+private alias c_adw_flap_set_swipe_to_openFn = extern(C) void function(AdwFlap* self, gboolean swipeToOpen) nothrow;
+__gshared c_adw_flap_set_swipe_to_openFn c_adw_flap_set_swipe_to_open; ///
+private alias c_adw_flap_set_transition_typeFn = extern(C) void function(AdwFlap* self, AdwFlapTransitionType transitionType) nothrow;
+__gshared c_adw_flap_set_transition_typeFn c_adw_flap_set_transition_type; ///
+
+// HeaderBar
+private alias c_adw_header_bar_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_header_bar_get_typeFn c_adw_header_bar_get_type; ///
+private alias c_adw_header_bar_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_header_bar_newFn c_adw_header_bar_new; ///
+private alias c_adw_header_bar_get_centering_policyFn = extern(C) AdwCenteringPolicy function(AdwHeaderBar* self) nothrow;
+__gshared c_adw_header_bar_get_centering_policyFn c_adw_header_bar_get_centering_policy; ///
+private alias c_adw_header_bar_get_decoration_layoutFn = extern(C) const(char)* function(AdwHeaderBar* self) nothrow;
+__gshared c_adw_header_bar_get_decoration_layoutFn c_adw_header_bar_get_decoration_layout; ///
+private alias c_adw_header_bar_get_show_back_buttonFn = extern(C) gboolean function(AdwHeaderBar* self) nothrow;
+__gshared c_adw_header_bar_get_show_back_buttonFn c_adw_header_bar_get_show_back_button; ///
+private alias c_adw_header_bar_get_show_end_title_buttonsFn = extern(C) gboolean function(AdwHeaderBar* self) nothrow;
+__gshared c_adw_header_bar_get_show_end_title_buttonsFn c_adw_header_bar_get_show_end_title_buttons; ///
+private alias c_adw_header_bar_get_show_start_title_buttonsFn = extern(C) gboolean function(AdwHeaderBar* self) nothrow;
+__gshared c_adw_header_bar_get_show_start_title_buttonsFn c_adw_header_bar_get_show_start_title_buttons; ///
+private alias c_adw_header_bar_get_show_titleFn = extern(C) gboolean function(AdwHeaderBar* self) nothrow;
+__gshared c_adw_header_bar_get_show_titleFn c_adw_header_bar_get_show_title; ///
+private alias c_adw_header_bar_get_title_widgetFn = extern(C) GtkWidget* function(AdwHeaderBar* self) nothrow;
+__gshared c_adw_header_bar_get_title_widgetFn c_adw_header_bar_get_title_widget; ///
+private alias c_adw_header_bar_pack_endFn = extern(C) void function(AdwHeaderBar* self, GtkWidget* child) nothrow;
+__gshared c_adw_header_bar_pack_endFn c_adw_header_bar_pack_end; ///
+private alias c_adw_header_bar_pack_startFn = extern(C) void function(AdwHeaderBar* self, GtkWidget* child) nothrow;
+__gshared c_adw_header_bar_pack_startFn c_adw_header_bar_pack_start; ///
+private alias c_adw_header_bar_removeFn = extern(C) void function(AdwHeaderBar* self, GtkWidget* child) nothrow;
+__gshared c_adw_header_bar_removeFn c_adw_header_bar_remove; ///
+private alias c_adw_header_bar_set_centering_policyFn = extern(C) void function(AdwHeaderBar* self, AdwCenteringPolicy centeringPolicy) nothrow;
+__gshared c_adw_header_bar_set_centering_policyFn c_adw_header_bar_set_centering_policy; ///
+private alias c_adw_header_bar_set_decoration_layoutFn = extern(C) void function(AdwHeaderBar* self, const(char)* layout) nothrow;
+__gshared c_adw_header_bar_set_decoration_layoutFn c_adw_header_bar_set_decoration_layout; ///
+private alias c_adw_header_bar_set_show_back_buttonFn = extern(C) void function(AdwHeaderBar* self, gboolean showBackButton) nothrow;
+__gshared c_adw_header_bar_set_show_back_buttonFn c_adw_header_bar_set_show_back_button; ///
+private alias c_adw_header_bar_set_show_end_title_buttonsFn = extern(C) void function(AdwHeaderBar* self, gboolean setting) nothrow;
+__gshared c_adw_header_bar_set_show_end_title_buttonsFn c_adw_header_bar_set_show_end_title_buttons; ///
+private alias c_adw_header_bar_set_show_start_title_buttonsFn = extern(C) void function(AdwHeaderBar* self, gboolean setting) nothrow;
+__gshared c_adw_header_bar_set_show_start_title_buttonsFn c_adw_header_bar_set_show_start_title_buttons; ///
+private alias c_adw_header_bar_set_show_titleFn = extern(C) void function(AdwHeaderBar* self, gboolean showTitle) nothrow;
+__gshared c_adw_header_bar_set_show_titleFn c_adw_header_bar_set_show_title; ///
+private alias c_adw_header_bar_set_title_widgetFn = extern(C) void function(AdwHeaderBar* self, GtkWidget* titleWidget) nothrow;
+__gshared c_adw_header_bar_set_title_widgetFn c_adw_header_bar_set_title_widget; ///
+
+// InlineViewSwitcher
+private alias c_adw_inline_view_switcher_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_inline_view_switcher_get_typeFn c_adw_inline_view_switcher_get_type; ///
+private alias c_adw_inline_view_switcher_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_inline_view_switcher_newFn c_adw_inline_view_switcher_new; ///
+private alias c_adw_inline_view_switcher_get_can_shrinkFn = extern(C) gboolean function(AdwInlineViewSwitcher* self) nothrow;
+__gshared c_adw_inline_view_switcher_get_can_shrinkFn c_adw_inline_view_switcher_get_can_shrink; ///
+private alias c_adw_inline_view_switcher_get_display_modeFn = extern(C) AdwInlineViewSwitcherDisplayMode function(AdwInlineViewSwitcher* self) nothrow;
+__gshared c_adw_inline_view_switcher_get_display_modeFn c_adw_inline_view_switcher_get_display_mode; ///
+private alias c_adw_inline_view_switcher_get_homogeneousFn = extern(C) gboolean function(AdwInlineViewSwitcher* self) nothrow;
+__gshared c_adw_inline_view_switcher_get_homogeneousFn c_adw_inline_view_switcher_get_homogeneous; ///
+private alias c_adw_inline_view_switcher_get_stackFn = extern(C) AdwViewStack* function(AdwInlineViewSwitcher* self) nothrow;
+__gshared c_adw_inline_view_switcher_get_stackFn c_adw_inline_view_switcher_get_stack; ///
+private alias c_adw_inline_view_switcher_set_can_shrinkFn = extern(C) void function(AdwInlineViewSwitcher* self, gboolean canShrink) nothrow;
+__gshared c_adw_inline_view_switcher_set_can_shrinkFn c_adw_inline_view_switcher_set_can_shrink; ///
+private alias c_adw_inline_view_switcher_set_display_modeFn = extern(C) void function(AdwInlineViewSwitcher* self, AdwInlineViewSwitcherDisplayMode mode) nothrow;
+__gshared c_adw_inline_view_switcher_set_display_modeFn c_adw_inline_view_switcher_set_display_mode; ///
+private alias c_adw_inline_view_switcher_set_homogeneousFn = extern(C) void function(AdwInlineViewSwitcher* self, gboolean homogeneous) nothrow;
+__gshared c_adw_inline_view_switcher_set_homogeneousFn c_adw_inline_view_switcher_set_homogeneous; ///
+private alias c_adw_inline_view_switcher_set_stackFn = extern(C) void function(AdwInlineViewSwitcher* self, AdwViewStack* stack) nothrow;
+__gshared c_adw_inline_view_switcher_set_stackFn c_adw_inline_view_switcher_set_stack; ///
+
+// Layout
+private alias c_adw_layout_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_layout_get_typeFn c_adw_layout_get_type; ///
+private alias c_adw_layout_newFn = extern(C) AdwLayout* function(GtkWidget* content) nothrow;
+__gshared c_adw_layout_newFn c_adw_layout_new; ///
+private alias c_adw_layout_get_contentFn = extern(C) GtkWidget* function(AdwLayout* self) nothrow;
+__gshared c_adw_layout_get_contentFn c_adw_layout_get_content; ///
+private alias c_adw_layout_get_nameFn = extern(C) const(char)* function(AdwLayout* self) nothrow;
+__gshared c_adw_layout_get_nameFn c_adw_layout_get_name; ///
+private alias c_adw_layout_set_nameFn = extern(C) void function(AdwLayout* self, const(char)* name) nothrow;
+__gshared c_adw_layout_set_nameFn c_adw_layout_set_name; ///
+
+// LayoutSlot
+private alias c_adw_layout_slot_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_layout_slot_get_typeFn c_adw_layout_slot_get_type; ///
+private alias c_adw_layout_slot_newFn = extern(C) GtkWidget* function(const(char)* id) nothrow;
+__gshared c_adw_layout_slot_newFn c_adw_layout_slot_new; ///
+private alias c_adw_layout_slot_get_slot_idFn = extern(C) const(char)* function(AdwLayoutSlot* self) nothrow;
+__gshared c_adw_layout_slot_get_slot_idFn c_adw_layout_slot_get_slot_id; ///
+
+// Leaflet
+private alias c_adw_leaflet_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_leaflet_get_typeFn c_adw_leaflet_get_type; ///
+private alias c_adw_leaflet_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_leaflet_newFn c_adw_leaflet_new; ///
+private alias c_adw_leaflet_appendFn = extern(C) AdwLeafletPage* function(AdwLeaflet* self, GtkWidget* child) nothrow;
+__gshared c_adw_leaflet_appendFn c_adw_leaflet_append; ///
+private alias c_adw_leaflet_get_adjacent_childFn = extern(C) GtkWidget* function(AdwLeaflet* self, AdwNavigationDirection direction) nothrow;
+__gshared c_adw_leaflet_get_adjacent_childFn c_adw_leaflet_get_adjacent_child; ///
+private alias c_adw_leaflet_get_can_navigate_backFn = extern(C) gboolean function(AdwLeaflet* self) nothrow;
+__gshared c_adw_leaflet_get_can_navigate_backFn c_adw_leaflet_get_can_navigate_back; ///
+private alias c_adw_leaflet_get_can_navigate_forwardFn = extern(C) gboolean function(AdwLeaflet* self) nothrow;
+__gshared c_adw_leaflet_get_can_navigate_forwardFn c_adw_leaflet_get_can_navigate_forward; ///
+private alias c_adw_leaflet_get_can_unfoldFn = extern(C) gboolean function(AdwLeaflet* self) nothrow;
+__gshared c_adw_leaflet_get_can_unfoldFn c_adw_leaflet_get_can_unfold; ///
+private alias c_adw_leaflet_get_child_by_nameFn = extern(C) GtkWidget* function(AdwLeaflet* self, const(char)* name) nothrow;
+__gshared c_adw_leaflet_get_child_by_nameFn c_adw_leaflet_get_child_by_name; ///
+private alias c_adw_leaflet_get_child_transition_paramsFn = extern(C) AdwSpringParams* function(AdwLeaflet* self) nothrow;
+__gshared c_adw_leaflet_get_child_transition_paramsFn c_adw_leaflet_get_child_transition_params; ///
+private alias c_adw_leaflet_get_child_transition_runningFn = extern(C) gboolean function(AdwLeaflet* self) nothrow;
+__gshared c_adw_leaflet_get_child_transition_runningFn c_adw_leaflet_get_child_transition_running; ///
+private alias c_adw_leaflet_get_fold_threshold_policyFn = extern(C) AdwFoldThresholdPolicy function(AdwLeaflet* self) nothrow;
+__gshared c_adw_leaflet_get_fold_threshold_policyFn c_adw_leaflet_get_fold_threshold_policy; ///
+private alias c_adw_leaflet_get_foldedFn = extern(C) gboolean function(AdwLeaflet* self) nothrow;
+__gshared c_adw_leaflet_get_foldedFn c_adw_leaflet_get_folded; ///
+private alias c_adw_leaflet_get_homogeneousFn = extern(C) gboolean function(AdwLeaflet* self) nothrow;
+__gshared c_adw_leaflet_get_homogeneousFn c_adw_leaflet_get_homogeneous; ///
+private alias c_adw_leaflet_get_mode_transition_durationFn = extern(C) uint function(AdwLeaflet* self) nothrow;
+__gshared c_adw_leaflet_get_mode_transition_durationFn c_adw_leaflet_get_mode_transition_duration; ///
+private alias c_adw_leaflet_get_pageFn = extern(C) AdwLeafletPage* function(AdwLeaflet* self, GtkWidget* child) nothrow;
+__gshared c_adw_leaflet_get_pageFn c_adw_leaflet_get_page; ///
+private alias c_adw_leaflet_get_pagesFn = extern(C) GtkSelectionModel* function(AdwLeaflet* self) nothrow;
+__gshared c_adw_leaflet_get_pagesFn c_adw_leaflet_get_pages; ///
+private alias c_adw_leaflet_get_transition_typeFn = extern(C) AdwLeafletTransitionType function(AdwLeaflet* self) nothrow;
+__gshared c_adw_leaflet_get_transition_typeFn c_adw_leaflet_get_transition_type; ///
+private alias c_adw_leaflet_get_visible_childFn = extern(C) GtkWidget* function(AdwLeaflet* self) nothrow;
+__gshared c_adw_leaflet_get_visible_childFn c_adw_leaflet_get_visible_child; ///
+private alias c_adw_leaflet_get_visible_child_nameFn = extern(C) const(char)* function(AdwLeaflet* self) nothrow;
+__gshared c_adw_leaflet_get_visible_child_nameFn c_adw_leaflet_get_visible_child_name; ///
+private alias c_adw_leaflet_insert_child_afterFn = extern(C) AdwLeafletPage* function(AdwLeaflet* self, GtkWidget* child, GtkWidget* sibling) nothrow;
+__gshared c_adw_leaflet_insert_child_afterFn c_adw_leaflet_insert_child_after; ///
+private alias c_adw_leaflet_navigateFn = extern(C) gboolean function(AdwLeaflet* self, AdwNavigationDirection direction) nothrow;
+__gshared c_adw_leaflet_navigateFn c_adw_leaflet_navigate; ///
+private alias c_adw_leaflet_prependFn = extern(C) AdwLeafletPage* function(AdwLeaflet* self, GtkWidget* child) nothrow;
+__gshared c_adw_leaflet_prependFn c_adw_leaflet_prepend; ///
+private alias c_adw_leaflet_removeFn = extern(C) void function(AdwLeaflet* self, GtkWidget* child) nothrow;
+__gshared c_adw_leaflet_removeFn c_adw_leaflet_remove; ///
+private alias c_adw_leaflet_reorder_child_afterFn = extern(C) void function(AdwLeaflet* self, GtkWidget* child, GtkWidget* sibling) nothrow;
+__gshared c_adw_leaflet_reorder_child_afterFn c_adw_leaflet_reorder_child_after; ///
+private alias c_adw_leaflet_set_can_navigate_backFn = extern(C) void function(AdwLeaflet* self, gboolean canNavigateBack) nothrow;
+__gshared c_adw_leaflet_set_can_navigate_backFn c_adw_leaflet_set_can_navigate_back; ///
+private alias c_adw_leaflet_set_can_navigate_forwardFn = extern(C) void function(AdwLeaflet* self, gboolean canNavigateForward) nothrow;
+__gshared c_adw_leaflet_set_can_navigate_forwardFn c_adw_leaflet_set_can_navigate_forward; ///
+private alias c_adw_leaflet_set_can_unfoldFn = extern(C) void function(AdwLeaflet* self, gboolean canUnfold) nothrow;
+__gshared c_adw_leaflet_set_can_unfoldFn c_adw_leaflet_set_can_unfold; ///
+private alias c_adw_leaflet_set_child_transition_paramsFn = extern(C) void function(AdwLeaflet* self, AdwSpringParams* params) nothrow;
+__gshared c_adw_leaflet_set_child_transition_paramsFn c_adw_leaflet_set_child_transition_params; ///
+private alias c_adw_leaflet_set_fold_threshold_policyFn = extern(C) void function(AdwLeaflet* self, AdwFoldThresholdPolicy policy) nothrow;
+__gshared c_adw_leaflet_set_fold_threshold_policyFn c_adw_leaflet_set_fold_threshold_policy; ///
+private alias c_adw_leaflet_set_homogeneousFn = extern(C) void function(AdwLeaflet* self, gboolean homogeneous) nothrow;
+__gshared c_adw_leaflet_set_homogeneousFn c_adw_leaflet_set_homogeneous; ///
+private alias c_adw_leaflet_set_mode_transition_durationFn = extern(C) void function(AdwLeaflet* self, uint duration) nothrow;
+__gshared c_adw_leaflet_set_mode_transition_durationFn c_adw_leaflet_set_mode_transition_duration; ///
+private alias c_adw_leaflet_set_transition_typeFn = extern(C) void function(AdwLeaflet* self, AdwLeafletTransitionType transition) nothrow;
+__gshared c_adw_leaflet_set_transition_typeFn c_adw_leaflet_set_transition_type; ///
+private alias c_adw_leaflet_set_visible_childFn = extern(C) void function(AdwLeaflet* self, GtkWidget* visibleChild) nothrow;
+__gshared c_adw_leaflet_set_visible_childFn c_adw_leaflet_set_visible_child; ///
+private alias c_adw_leaflet_set_visible_child_nameFn = extern(C) void function(AdwLeaflet* self, const(char)* name) nothrow;
+__gshared c_adw_leaflet_set_visible_child_nameFn c_adw_leaflet_set_visible_child_name; ///
+
+// LeafletPage
+private alias c_adw_leaflet_page_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_leaflet_page_get_typeFn c_adw_leaflet_page_get_type; ///
+private alias c_adw_leaflet_page_get_childFn = extern(C) GtkWidget* function(AdwLeafletPage* self) nothrow;
+__gshared c_adw_leaflet_page_get_childFn c_adw_leaflet_page_get_child; ///
+private alias c_adw_leaflet_page_get_nameFn = extern(C) const(char)* function(AdwLeafletPage* self) nothrow;
+__gshared c_adw_leaflet_page_get_nameFn c_adw_leaflet_page_get_name; ///
+private alias c_adw_leaflet_page_get_navigatableFn = extern(C) gboolean function(AdwLeafletPage* self) nothrow;
+__gshared c_adw_leaflet_page_get_navigatableFn c_adw_leaflet_page_get_navigatable; ///
+private alias c_adw_leaflet_page_set_nameFn = extern(C) void function(AdwLeafletPage* self, const(char)* name) nothrow;
+__gshared c_adw_leaflet_page_set_nameFn c_adw_leaflet_page_set_name; ///
+private alias c_adw_leaflet_page_set_navigatableFn = extern(C) void function(AdwLeafletPage* self, gboolean navigatable) nothrow;
+__gshared c_adw_leaflet_page_set_navigatableFn c_adw_leaflet_page_set_navigatable; ///
+
+// MessageDialog
+private alias c_adw_message_dialog_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_message_dialog_get_typeFn c_adw_message_dialog_get_type; ///
+private alias c_adw_message_dialog_newFn = extern(C) GtkWidget* function(GtkWindow* parent, const(char)* heading, const(char)* body_) nothrow;
+__gshared c_adw_message_dialog_newFn c_adw_message_dialog_new; ///
+private alias c_adw_message_dialog_add_responseFn = extern(C) void function(AdwMessageDialog* self, const(char)* id, const(char)* label) nothrow;
+__gshared c_adw_message_dialog_add_responseFn c_adw_message_dialog_add_response; ///
+private alias c_adw_message_dialog_add_responsesFn = extern(C) void function(AdwMessageDialog* self, const(char)* firstId,  ...) nothrow;
+__gshared c_adw_message_dialog_add_responsesFn c_adw_message_dialog_add_responses; ///
+private alias c_adw_message_dialog_chooseFn = extern(C) void function(AdwMessageDialog* self, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_adw_message_dialog_chooseFn c_adw_message_dialog_choose; ///
+private alias c_adw_message_dialog_choose_finishFn = extern(C) const(char)* function(AdwMessageDialog* self, GAsyncResult* result) nothrow;
+__gshared c_adw_message_dialog_choose_finishFn c_adw_message_dialog_choose_finish; ///
+private alias c_adw_message_dialog_format_bodyFn = extern(C) void function(AdwMessageDialog* self, const(char)* format,  ...) nothrow;
+__gshared c_adw_message_dialog_format_bodyFn c_adw_message_dialog_format_body; ///
+private alias c_adw_message_dialog_format_body_markupFn = extern(C) void function(AdwMessageDialog* self, const(char)* format,  ...) nothrow;
+__gshared c_adw_message_dialog_format_body_markupFn c_adw_message_dialog_format_body_markup; ///
+private alias c_adw_message_dialog_format_headingFn = extern(C) void function(AdwMessageDialog* self, const(char)* format,  ...) nothrow;
+__gshared c_adw_message_dialog_format_headingFn c_adw_message_dialog_format_heading; ///
+private alias c_adw_message_dialog_format_heading_markupFn = extern(C) void function(AdwMessageDialog* self, const(char)* format,  ...) nothrow;
+__gshared c_adw_message_dialog_format_heading_markupFn c_adw_message_dialog_format_heading_markup; ///
+private alias c_adw_message_dialog_get_bodyFn = extern(C) const(char)* function(AdwMessageDialog* self) nothrow;
+__gshared c_adw_message_dialog_get_bodyFn c_adw_message_dialog_get_body; ///
+private alias c_adw_message_dialog_get_body_use_markupFn = extern(C) gboolean function(AdwMessageDialog* self) nothrow;
+__gshared c_adw_message_dialog_get_body_use_markupFn c_adw_message_dialog_get_body_use_markup; ///
+private alias c_adw_message_dialog_get_close_responseFn = extern(C) const(char)* function(AdwMessageDialog* self) nothrow;
+__gshared c_adw_message_dialog_get_close_responseFn c_adw_message_dialog_get_close_response; ///
+private alias c_adw_message_dialog_get_default_responseFn = extern(C) const(char)* function(AdwMessageDialog* self) nothrow;
+__gshared c_adw_message_dialog_get_default_responseFn c_adw_message_dialog_get_default_response; ///
+private alias c_adw_message_dialog_get_extra_childFn = extern(C) GtkWidget* function(AdwMessageDialog* self) nothrow;
+__gshared c_adw_message_dialog_get_extra_childFn c_adw_message_dialog_get_extra_child; ///
+private alias c_adw_message_dialog_get_headingFn = extern(C) const(char)* function(AdwMessageDialog* self) nothrow;
+__gshared c_adw_message_dialog_get_headingFn c_adw_message_dialog_get_heading; ///
+private alias c_adw_message_dialog_get_heading_use_markupFn = extern(C) gboolean function(AdwMessageDialog* self) nothrow;
+__gshared c_adw_message_dialog_get_heading_use_markupFn c_adw_message_dialog_get_heading_use_markup; ///
+private alias c_adw_message_dialog_get_response_appearanceFn = extern(C) AdwResponseAppearance function(AdwMessageDialog* self, const(char)* response) nothrow;
+__gshared c_adw_message_dialog_get_response_appearanceFn c_adw_message_dialog_get_response_appearance; ///
+private alias c_adw_message_dialog_get_response_enabledFn = extern(C) gboolean function(AdwMessageDialog* self, const(char)* response) nothrow;
+__gshared c_adw_message_dialog_get_response_enabledFn c_adw_message_dialog_get_response_enabled; ///
+private alias c_adw_message_dialog_get_response_labelFn = extern(C) const(char)* function(AdwMessageDialog* self, const(char)* response) nothrow;
+__gshared c_adw_message_dialog_get_response_labelFn c_adw_message_dialog_get_response_label; ///
+private alias c_adw_message_dialog_has_responseFn = extern(C) gboolean function(AdwMessageDialog* self, const(char)* response) nothrow;
+__gshared c_adw_message_dialog_has_responseFn c_adw_message_dialog_has_response; ///
+private alias c_adw_message_dialog_remove_responseFn = extern(C) void function(AdwMessageDialog* self, const(char)* id) nothrow;
+__gshared c_adw_message_dialog_remove_responseFn c_adw_message_dialog_remove_response; ///
+private alias c_adw_message_dialog_responseFn = extern(C) void function(AdwMessageDialog* self, const(char)* response) nothrow;
+__gshared c_adw_message_dialog_responseFn c_adw_message_dialog_response; ///
+private alias c_adw_message_dialog_set_bodyFn = extern(C) void function(AdwMessageDialog* self, const(char)* body_) nothrow;
+__gshared c_adw_message_dialog_set_bodyFn c_adw_message_dialog_set_body; ///
+private alias c_adw_message_dialog_set_body_use_markupFn = extern(C) void function(AdwMessageDialog* self, gboolean useMarkup) nothrow;
+__gshared c_adw_message_dialog_set_body_use_markupFn c_adw_message_dialog_set_body_use_markup; ///
+private alias c_adw_message_dialog_set_close_responseFn = extern(C) void function(AdwMessageDialog* self, const(char)* response) nothrow;
+__gshared c_adw_message_dialog_set_close_responseFn c_adw_message_dialog_set_close_response; ///
+private alias c_adw_message_dialog_set_default_responseFn = extern(C) void function(AdwMessageDialog* self, const(char)* response) nothrow;
+__gshared c_adw_message_dialog_set_default_responseFn c_adw_message_dialog_set_default_response; ///
+private alias c_adw_message_dialog_set_extra_childFn = extern(C) void function(AdwMessageDialog* self, GtkWidget* child) nothrow;
+__gshared c_adw_message_dialog_set_extra_childFn c_adw_message_dialog_set_extra_child; ///
+private alias c_adw_message_dialog_set_headingFn = extern(C) void function(AdwMessageDialog* self, const(char)* heading) nothrow;
+__gshared c_adw_message_dialog_set_headingFn c_adw_message_dialog_set_heading; ///
+private alias c_adw_message_dialog_set_heading_use_markupFn = extern(C) void function(AdwMessageDialog* self, gboolean useMarkup) nothrow;
+__gshared c_adw_message_dialog_set_heading_use_markupFn c_adw_message_dialog_set_heading_use_markup; ///
+private alias c_adw_message_dialog_set_response_appearanceFn = extern(C) void function(AdwMessageDialog* self, const(char)* response, AdwResponseAppearance appearance) nothrow;
+__gshared c_adw_message_dialog_set_response_appearanceFn c_adw_message_dialog_set_response_appearance; ///
+private alias c_adw_message_dialog_set_response_enabledFn = extern(C) void function(AdwMessageDialog* self, const(char)* response, gboolean enabled) nothrow;
+__gshared c_adw_message_dialog_set_response_enabledFn c_adw_message_dialog_set_response_enabled; ///
+private alias c_adw_message_dialog_set_response_labelFn = extern(C) void function(AdwMessageDialog* self, const(char)* response, const(char)* label) nothrow;
+__gshared c_adw_message_dialog_set_response_labelFn c_adw_message_dialog_set_response_label; ///
+
+// MultiLayoutView
+private alias c_adw_multi_layout_view_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_multi_layout_view_get_typeFn c_adw_multi_layout_view_get_type; ///
+private alias c_adw_multi_layout_view_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_multi_layout_view_newFn c_adw_multi_layout_view_new; ///
+private alias c_adw_multi_layout_view_add_layoutFn = extern(C) void function(AdwMultiLayoutView* self, AdwLayout* layout) nothrow;
+__gshared c_adw_multi_layout_view_add_layoutFn c_adw_multi_layout_view_add_layout; ///
+private alias c_adw_multi_layout_view_get_childFn = extern(C) GtkWidget* function(AdwMultiLayoutView* self, const(char)* id) nothrow;
+__gshared c_adw_multi_layout_view_get_childFn c_adw_multi_layout_view_get_child; ///
+private alias c_adw_multi_layout_view_get_layoutFn = extern(C) AdwLayout* function(AdwMultiLayoutView* self) nothrow;
+__gshared c_adw_multi_layout_view_get_layoutFn c_adw_multi_layout_view_get_layout; ///
+private alias c_adw_multi_layout_view_get_layout_by_nameFn = extern(C) AdwLayout* function(AdwMultiLayoutView* self, const(char)* name) nothrow;
+__gshared c_adw_multi_layout_view_get_layout_by_nameFn c_adw_multi_layout_view_get_layout_by_name; ///
+private alias c_adw_multi_layout_view_get_layout_nameFn = extern(C) const(char)* function(AdwMultiLayoutView* self) nothrow;
+__gshared c_adw_multi_layout_view_get_layout_nameFn c_adw_multi_layout_view_get_layout_name; ///
+private alias c_adw_multi_layout_view_remove_layoutFn = extern(C) void function(AdwMultiLayoutView* self, AdwLayout* layout) nothrow;
+__gshared c_adw_multi_layout_view_remove_layoutFn c_adw_multi_layout_view_remove_layout; ///
+private alias c_adw_multi_layout_view_set_childFn = extern(C) void function(AdwMultiLayoutView* self, const(char)* id, GtkWidget* child) nothrow;
+__gshared c_adw_multi_layout_view_set_childFn c_adw_multi_layout_view_set_child; ///
+private alias c_adw_multi_layout_view_set_layoutFn = extern(C) void function(AdwMultiLayoutView* self, AdwLayout* layout) nothrow;
+__gshared c_adw_multi_layout_view_set_layoutFn c_adw_multi_layout_view_set_layout; ///
+private alias c_adw_multi_layout_view_set_layout_nameFn = extern(C) void function(AdwMultiLayoutView* self, const(char)* name) nothrow;
+__gshared c_adw_multi_layout_view_set_layout_nameFn c_adw_multi_layout_view_set_layout_name; ///
+
+// NavigationPage
+private alias c_adw_navigation_page_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_navigation_page_get_typeFn c_adw_navigation_page_get_type; ///
+private alias c_adw_navigation_page_newFn = extern(C) AdwNavigationPage* function(GtkWidget* child, const(char)* title) nothrow;
+__gshared c_adw_navigation_page_newFn c_adw_navigation_page_new; ///
+private alias c_adw_navigation_page_new_with_tagFn = extern(C) AdwNavigationPage* function(GtkWidget* child, const(char)* title, const(char)* tag) nothrow;
+__gshared c_adw_navigation_page_new_with_tagFn c_adw_navigation_page_new_with_tag; ///
+private alias c_adw_navigation_page_get_can_popFn = extern(C) gboolean function(AdwNavigationPage* self) nothrow;
+__gshared c_adw_navigation_page_get_can_popFn c_adw_navigation_page_get_can_pop; ///
+private alias c_adw_navigation_page_get_childFn = extern(C) GtkWidget* function(AdwNavigationPage* self) nothrow;
+__gshared c_adw_navigation_page_get_childFn c_adw_navigation_page_get_child; ///
+private alias c_adw_navigation_page_get_tagFn = extern(C) const(char)* function(AdwNavigationPage* self) nothrow;
+__gshared c_adw_navigation_page_get_tagFn c_adw_navigation_page_get_tag; ///
+private alias c_adw_navigation_page_get_titleFn = extern(C) const(char)* function(AdwNavigationPage* self) nothrow;
+__gshared c_adw_navigation_page_get_titleFn c_adw_navigation_page_get_title; ///
+private alias c_adw_navigation_page_set_can_popFn = extern(C) void function(AdwNavigationPage* self, gboolean canPop) nothrow;
+__gshared c_adw_navigation_page_set_can_popFn c_adw_navigation_page_set_can_pop; ///
+private alias c_adw_navigation_page_set_childFn = extern(C) void function(AdwNavigationPage* self, GtkWidget* child) nothrow;
+__gshared c_adw_navigation_page_set_childFn c_adw_navigation_page_set_child; ///
+private alias c_adw_navigation_page_set_tagFn = extern(C) void function(AdwNavigationPage* self, const(char)* tag) nothrow;
+__gshared c_adw_navigation_page_set_tagFn c_adw_navigation_page_set_tag; ///
+private alias c_adw_navigation_page_set_titleFn = extern(C) void function(AdwNavigationPage* self, const(char)* title) nothrow;
+__gshared c_adw_navigation_page_set_titleFn c_adw_navigation_page_set_title; ///
+
+// NavigationSplitView
+private alias c_adw_navigation_split_view_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_navigation_split_view_get_typeFn c_adw_navigation_split_view_get_type; ///
+private alias c_adw_navigation_split_view_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_navigation_split_view_newFn c_adw_navigation_split_view_new; ///
+private alias c_adw_navigation_split_view_get_collapsedFn = extern(C) gboolean function(AdwNavigationSplitView* self) nothrow;
+__gshared c_adw_navigation_split_view_get_collapsedFn c_adw_navigation_split_view_get_collapsed; ///
+private alias c_adw_navigation_split_view_get_contentFn = extern(C) AdwNavigationPage* function(AdwNavigationSplitView* self) nothrow;
+__gshared c_adw_navigation_split_view_get_contentFn c_adw_navigation_split_view_get_content; ///
+private alias c_adw_navigation_split_view_get_max_sidebar_widthFn = extern(C) double function(AdwNavigationSplitView* self) nothrow;
+__gshared c_adw_navigation_split_view_get_max_sidebar_widthFn c_adw_navigation_split_view_get_max_sidebar_width; ///
+private alias c_adw_navigation_split_view_get_min_sidebar_widthFn = extern(C) double function(AdwNavigationSplitView* self) nothrow;
+__gshared c_adw_navigation_split_view_get_min_sidebar_widthFn c_adw_navigation_split_view_get_min_sidebar_width; ///
+private alias c_adw_navigation_split_view_get_show_contentFn = extern(C) gboolean function(AdwNavigationSplitView* self) nothrow;
+__gshared c_adw_navigation_split_view_get_show_contentFn c_adw_navigation_split_view_get_show_content; ///
+private alias c_adw_navigation_split_view_get_sidebarFn = extern(C) AdwNavigationPage* function(AdwNavigationSplitView* self) nothrow;
+__gshared c_adw_navigation_split_view_get_sidebarFn c_adw_navigation_split_view_get_sidebar; ///
+private alias c_adw_navigation_split_view_get_sidebar_positionFn = extern(C) GtkPackType function(AdwNavigationSplitView* self) nothrow;
+__gshared c_adw_navigation_split_view_get_sidebar_positionFn c_adw_navigation_split_view_get_sidebar_position; ///
+private alias c_adw_navigation_split_view_get_sidebar_width_fractionFn = extern(C) double function(AdwNavigationSplitView* self) nothrow;
+__gshared c_adw_navigation_split_view_get_sidebar_width_fractionFn c_adw_navigation_split_view_get_sidebar_width_fraction; ///
+private alias c_adw_navigation_split_view_get_sidebar_width_unitFn = extern(C) AdwLengthUnit function(AdwNavigationSplitView* self) nothrow;
+__gshared c_adw_navigation_split_view_get_sidebar_width_unitFn c_adw_navigation_split_view_get_sidebar_width_unit; ///
+private alias c_adw_navigation_split_view_set_collapsedFn = extern(C) void function(AdwNavigationSplitView* self, gboolean collapsed) nothrow;
+__gshared c_adw_navigation_split_view_set_collapsedFn c_adw_navigation_split_view_set_collapsed; ///
+private alias c_adw_navigation_split_view_set_contentFn = extern(C) void function(AdwNavigationSplitView* self, AdwNavigationPage* content) nothrow;
+__gshared c_adw_navigation_split_view_set_contentFn c_adw_navigation_split_view_set_content; ///
+private alias c_adw_navigation_split_view_set_max_sidebar_widthFn = extern(C) void function(AdwNavigationSplitView* self, double width) nothrow;
+__gshared c_adw_navigation_split_view_set_max_sidebar_widthFn c_adw_navigation_split_view_set_max_sidebar_width; ///
+private alias c_adw_navigation_split_view_set_min_sidebar_widthFn = extern(C) void function(AdwNavigationSplitView* self, double width) nothrow;
+__gshared c_adw_navigation_split_view_set_min_sidebar_widthFn c_adw_navigation_split_view_set_min_sidebar_width; ///
+private alias c_adw_navigation_split_view_set_show_contentFn = extern(C) void function(AdwNavigationSplitView* self, gboolean showContent) nothrow;
+__gshared c_adw_navigation_split_view_set_show_contentFn c_adw_navigation_split_view_set_show_content; ///
+private alias c_adw_navigation_split_view_set_sidebarFn = extern(C) void function(AdwNavigationSplitView* self, AdwNavigationPage* sidebar) nothrow;
+__gshared c_adw_navigation_split_view_set_sidebarFn c_adw_navigation_split_view_set_sidebar; ///
+private alias c_adw_navigation_split_view_set_sidebar_positionFn = extern(C) void function(AdwNavigationSplitView* self, GtkPackType position) nothrow;
+__gshared c_adw_navigation_split_view_set_sidebar_positionFn c_adw_navigation_split_view_set_sidebar_position; ///
+private alias c_adw_navigation_split_view_set_sidebar_width_fractionFn = extern(C) void function(AdwNavigationSplitView* self, double fraction) nothrow;
+__gshared c_adw_navigation_split_view_set_sidebar_width_fractionFn c_adw_navigation_split_view_set_sidebar_width_fraction; ///
+private alias c_adw_navigation_split_view_set_sidebar_width_unitFn = extern(C) void function(AdwNavigationSplitView* self, AdwLengthUnit unit) nothrow;
+__gshared c_adw_navigation_split_view_set_sidebar_width_unitFn c_adw_navigation_split_view_set_sidebar_width_unit; ///
+
+// NavigationView
+private alias c_adw_navigation_view_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_navigation_view_get_typeFn c_adw_navigation_view_get_type; ///
+private alias c_adw_navigation_view_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_navigation_view_newFn c_adw_navigation_view_new; ///
+private alias c_adw_navigation_view_addFn = extern(C) void function(AdwNavigationView* self, AdwNavigationPage* page) nothrow;
+__gshared c_adw_navigation_view_addFn c_adw_navigation_view_add; ///
+private alias c_adw_navigation_view_find_pageFn = extern(C) AdwNavigationPage* function(AdwNavigationView* self, const(char)* tag) nothrow;
+__gshared c_adw_navigation_view_find_pageFn c_adw_navigation_view_find_page; ///
+private alias c_adw_navigation_view_get_animate_transitionsFn = extern(C) gboolean function(AdwNavigationView* self) nothrow;
+__gshared c_adw_navigation_view_get_animate_transitionsFn c_adw_navigation_view_get_animate_transitions; ///
+private alias c_adw_navigation_view_get_hhomogeneousFn = extern(C) gboolean function(AdwNavigationView* self) nothrow;
+__gshared c_adw_navigation_view_get_hhomogeneousFn c_adw_navigation_view_get_hhomogeneous; ///
+private alias c_adw_navigation_view_get_navigation_stackFn = extern(C) GListModel* function(AdwNavigationView* self) nothrow;
+__gshared c_adw_navigation_view_get_navigation_stackFn c_adw_navigation_view_get_navigation_stack; ///
+private alias c_adw_navigation_view_get_pop_on_escapeFn = extern(C) gboolean function(AdwNavigationView* self) nothrow;
+__gshared c_adw_navigation_view_get_pop_on_escapeFn c_adw_navigation_view_get_pop_on_escape; ///
+private alias c_adw_navigation_view_get_previous_pageFn = extern(C) AdwNavigationPage* function(AdwNavigationView* self, AdwNavigationPage* page) nothrow;
+__gshared c_adw_navigation_view_get_previous_pageFn c_adw_navigation_view_get_previous_page; ///
+private alias c_adw_navigation_view_get_vhomogeneousFn = extern(C) gboolean function(AdwNavigationView* self) nothrow;
+__gshared c_adw_navigation_view_get_vhomogeneousFn c_adw_navigation_view_get_vhomogeneous; ///
+private alias c_adw_navigation_view_get_visible_pageFn = extern(C) AdwNavigationPage* function(AdwNavigationView* self) nothrow;
+__gshared c_adw_navigation_view_get_visible_pageFn c_adw_navigation_view_get_visible_page; ///
+private alias c_adw_navigation_view_get_visible_page_tagFn = extern(C) const(char)* function(AdwNavigationView* self) nothrow;
+__gshared c_adw_navigation_view_get_visible_page_tagFn c_adw_navigation_view_get_visible_page_tag; ///
+private alias c_adw_navigation_view_popFn = extern(C) gboolean function(AdwNavigationView* self) nothrow;
+__gshared c_adw_navigation_view_popFn c_adw_navigation_view_pop; ///
+private alias c_adw_navigation_view_pop_to_pageFn = extern(C) gboolean function(AdwNavigationView* self, AdwNavigationPage* page) nothrow;
+__gshared c_adw_navigation_view_pop_to_pageFn c_adw_navigation_view_pop_to_page; ///
+private alias c_adw_navigation_view_pop_to_tagFn = extern(C) gboolean function(AdwNavigationView* self, const(char)* tag) nothrow;
+__gshared c_adw_navigation_view_pop_to_tagFn c_adw_navigation_view_pop_to_tag; ///
+private alias c_adw_navigation_view_pushFn = extern(C) void function(AdwNavigationView* self, AdwNavigationPage* page) nothrow;
+__gshared c_adw_navigation_view_pushFn c_adw_navigation_view_push; ///
+private alias c_adw_navigation_view_push_by_tagFn = extern(C) void function(AdwNavigationView* self, const(char)* tag) nothrow;
+__gshared c_adw_navigation_view_push_by_tagFn c_adw_navigation_view_push_by_tag; ///
+private alias c_adw_navigation_view_removeFn = extern(C) void function(AdwNavigationView* self, AdwNavigationPage* page) nothrow;
+__gshared c_adw_navigation_view_removeFn c_adw_navigation_view_remove; ///
+private alias c_adw_navigation_view_replaceFn = extern(C) void function(AdwNavigationView* self, AdwNavigationPage** pages, int nPages) nothrow;
+__gshared c_adw_navigation_view_replaceFn c_adw_navigation_view_replace; ///
+private alias c_adw_navigation_view_replace_with_tagsFn = extern(C) void function(AdwNavigationView* self, const(char*)* tags, int nTags) nothrow;
+__gshared c_adw_navigation_view_replace_with_tagsFn c_adw_navigation_view_replace_with_tags; ///
+private alias c_adw_navigation_view_set_animate_transitionsFn = extern(C) void function(AdwNavigationView* self, gboolean animateTransitions) nothrow;
+__gshared c_adw_navigation_view_set_animate_transitionsFn c_adw_navigation_view_set_animate_transitions; ///
+private alias c_adw_navigation_view_set_hhomogeneousFn = extern(C) void function(AdwNavigationView* self, gboolean hhomogeneous) nothrow;
+__gshared c_adw_navigation_view_set_hhomogeneousFn c_adw_navigation_view_set_hhomogeneous; ///
+private alias c_adw_navigation_view_set_pop_on_escapeFn = extern(C) void function(AdwNavigationView* self, gboolean popOnEscape) nothrow;
+__gshared c_adw_navigation_view_set_pop_on_escapeFn c_adw_navigation_view_set_pop_on_escape; ///
+private alias c_adw_navigation_view_set_vhomogeneousFn = extern(C) void function(AdwNavigationView* self, gboolean vhomogeneous) nothrow;
+__gshared c_adw_navigation_view_set_vhomogeneousFn c_adw_navigation_view_set_vhomogeneous; ///
+
+// NoneAnimationTarget
+private alias c_adw_none_animation_target_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_none_animation_target_get_typeFn c_adw_none_animation_target_get_type; ///
+private alias c_adw_none_animation_target_newFn = extern(C) AdwAnimationTarget* function() nothrow;
+__gshared c_adw_none_animation_target_newFn c_adw_none_animation_target_new; ///
+
+// OverlaySplitView
+private alias c_adw_overlay_split_view_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_overlay_split_view_get_typeFn c_adw_overlay_split_view_get_type; ///
+private alias c_adw_overlay_split_view_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_overlay_split_view_newFn c_adw_overlay_split_view_new; ///
+private alias c_adw_overlay_split_view_get_collapsedFn = extern(C) gboolean function(AdwOverlaySplitView* self) nothrow;
+__gshared c_adw_overlay_split_view_get_collapsedFn c_adw_overlay_split_view_get_collapsed; ///
+private alias c_adw_overlay_split_view_get_contentFn = extern(C) GtkWidget* function(AdwOverlaySplitView* self) nothrow;
+__gshared c_adw_overlay_split_view_get_contentFn c_adw_overlay_split_view_get_content; ///
+private alias c_adw_overlay_split_view_get_enable_hide_gestureFn = extern(C) gboolean function(AdwOverlaySplitView* self) nothrow;
+__gshared c_adw_overlay_split_view_get_enable_hide_gestureFn c_adw_overlay_split_view_get_enable_hide_gesture; ///
+private alias c_adw_overlay_split_view_get_enable_show_gestureFn = extern(C) gboolean function(AdwOverlaySplitView* self) nothrow;
+__gshared c_adw_overlay_split_view_get_enable_show_gestureFn c_adw_overlay_split_view_get_enable_show_gesture; ///
+private alias c_adw_overlay_split_view_get_max_sidebar_widthFn = extern(C) double function(AdwOverlaySplitView* self) nothrow;
+__gshared c_adw_overlay_split_view_get_max_sidebar_widthFn c_adw_overlay_split_view_get_max_sidebar_width; ///
+private alias c_adw_overlay_split_view_get_min_sidebar_widthFn = extern(C) double function(AdwOverlaySplitView* self) nothrow;
+__gshared c_adw_overlay_split_view_get_min_sidebar_widthFn c_adw_overlay_split_view_get_min_sidebar_width; ///
+private alias c_adw_overlay_split_view_get_pin_sidebarFn = extern(C) gboolean function(AdwOverlaySplitView* self) nothrow;
+__gshared c_adw_overlay_split_view_get_pin_sidebarFn c_adw_overlay_split_view_get_pin_sidebar; ///
+private alias c_adw_overlay_split_view_get_show_sidebarFn = extern(C) gboolean function(AdwOverlaySplitView* self) nothrow;
+__gshared c_adw_overlay_split_view_get_show_sidebarFn c_adw_overlay_split_view_get_show_sidebar; ///
+private alias c_adw_overlay_split_view_get_sidebarFn = extern(C) GtkWidget* function(AdwOverlaySplitView* self) nothrow;
+__gshared c_adw_overlay_split_view_get_sidebarFn c_adw_overlay_split_view_get_sidebar; ///
+private alias c_adw_overlay_split_view_get_sidebar_positionFn = extern(C) GtkPackType function(AdwOverlaySplitView* self) nothrow;
+__gshared c_adw_overlay_split_view_get_sidebar_positionFn c_adw_overlay_split_view_get_sidebar_position; ///
+private alias c_adw_overlay_split_view_get_sidebar_width_fractionFn = extern(C) double function(AdwOverlaySplitView* self) nothrow;
+__gshared c_adw_overlay_split_view_get_sidebar_width_fractionFn c_adw_overlay_split_view_get_sidebar_width_fraction; ///
+private alias c_adw_overlay_split_view_get_sidebar_width_unitFn = extern(C) AdwLengthUnit function(AdwOverlaySplitView* self) nothrow;
+__gshared c_adw_overlay_split_view_get_sidebar_width_unitFn c_adw_overlay_split_view_get_sidebar_width_unit; ///
+private alias c_adw_overlay_split_view_set_collapsedFn = extern(C) void function(AdwOverlaySplitView* self, gboolean collapsed) nothrow;
+__gshared c_adw_overlay_split_view_set_collapsedFn c_adw_overlay_split_view_set_collapsed; ///
+private alias c_adw_overlay_split_view_set_contentFn = extern(C) void function(AdwOverlaySplitView* self, GtkWidget* content) nothrow;
+__gshared c_adw_overlay_split_view_set_contentFn c_adw_overlay_split_view_set_content; ///
+private alias c_adw_overlay_split_view_set_enable_hide_gestureFn = extern(C) void function(AdwOverlaySplitView* self, gboolean enableHideGesture) nothrow;
+__gshared c_adw_overlay_split_view_set_enable_hide_gestureFn c_adw_overlay_split_view_set_enable_hide_gesture; ///
+private alias c_adw_overlay_split_view_set_enable_show_gestureFn = extern(C) void function(AdwOverlaySplitView* self, gboolean enableShowGesture) nothrow;
+__gshared c_adw_overlay_split_view_set_enable_show_gestureFn c_adw_overlay_split_view_set_enable_show_gesture; ///
+private alias c_adw_overlay_split_view_set_max_sidebar_widthFn = extern(C) void function(AdwOverlaySplitView* self, double width) nothrow;
+__gshared c_adw_overlay_split_view_set_max_sidebar_widthFn c_adw_overlay_split_view_set_max_sidebar_width; ///
+private alias c_adw_overlay_split_view_set_min_sidebar_widthFn = extern(C) void function(AdwOverlaySplitView* self, double width) nothrow;
+__gshared c_adw_overlay_split_view_set_min_sidebar_widthFn c_adw_overlay_split_view_set_min_sidebar_width; ///
+private alias c_adw_overlay_split_view_set_pin_sidebarFn = extern(C) void function(AdwOverlaySplitView* self, gboolean pinSidebar) nothrow;
+__gshared c_adw_overlay_split_view_set_pin_sidebarFn c_adw_overlay_split_view_set_pin_sidebar; ///
+private alias c_adw_overlay_split_view_set_show_sidebarFn = extern(C) void function(AdwOverlaySplitView* self, gboolean showSidebar) nothrow;
+__gshared c_adw_overlay_split_view_set_show_sidebarFn c_adw_overlay_split_view_set_show_sidebar; ///
+private alias c_adw_overlay_split_view_set_sidebarFn = extern(C) void function(AdwOverlaySplitView* self, GtkWidget* sidebar) nothrow;
+__gshared c_adw_overlay_split_view_set_sidebarFn c_adw_overlay_split_view_set_sidebar; ///
+private alias c_adw_overlay_split_view_set_sidebar_positionFn = extern(C) void function(AdwOverlaySplitView* self, GtkPackType position) nothrow;
+__gshared c_adw_overlay_split_view_set_sidebar_positionFn c_adw_overlay_split_view_set_sidebar_position; ///
+private alias c_adw_overlay_split_view_set_sidebar_width_fractionFn = extern(C) void function(AdwOverlaySplitView* self, double fraction) nothrow;
+__gshared c_adw_overlay_split_view_set_sidebar_width_fractionFn c_adw_overlay_split_view_set_sidebar_width_fraction; ///
+private alias c_adw_overlay_split_view_set_sidebar_width_unitFn = extern(C) void function(AdwOverlaySplitView* self, AdwLengthUnit unit) nothrow;
+__gshared c_adw_overlay_split_view_set_sidebar_width_unitFn c_adw_overlay_split_view_set_sidebar_width_unit; ///
+
+// PasswordEntryRow
+private alias c_adw_password_entry_row_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_password_entry_row_get_typeFn c_adw_password_entry_row_get_type; ///
+private alias c_adw_password_entry_row_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_password_entry_row_newFn c_adw_password_entry_row_new; ///
+
+// PreferencesDialog
+private alias c_adw_preferences_dialog_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_preferences_dialog_get_typeFn c_adw_preferences_dialog_get_type; ///
+private alias c_adw_preferences_dialog_newFn = extern(C) AdwDialog* function() nothrow;
+__gshared c_adw_preferences_dialog_newFn c_adw_preferences_dialog_new; ///
+private alias c_adw_preferences_dialog_addFn = extern(C) void function(AdwPreferencesDialog* self, AdwPreferencesPage* page) nothrow;
+__gshared c_adw_preferences_dialog_addFn c_adw_preferences_dialog_add; ///
+private alias c_adw_preferences_dialog_add_toastFn = extern(C) void function(AdwPreferencesDialog* self, AdwToast* toast) nothrow;
+__gshared c_adw_preferences_dialog_add_toastFn c_adw_preferences_dialog_add_toast; ///
+private alias c_adw_preferences_dialog_get_search_enabledFn = extern(C) gboolean function(AdwPreferencesDialog* self) nothrow;
+__gshared c_adw_preferences_dialog_get_search_enabledFn c_adw_preferences_dialog_get_search_enabled; ///
+private alias c_adw_preferences_dialog_get_visible_pageFn = extern(C) AdwPreferencesPage* function(AdwPreferencesDialog* self) nothrow;
+__gshared c_adw_preferences_dialog_get_visible_pageFn c_adw_preferences_dialog_get_visible_page; ///
+private alias c_adw_preferences_dialog_get_visible_page_nameFn = extern(C) const(char)* function(AdwPreferencesDialog* self) nothrow;
+__gshared c_adw_preferences_dialog_get_visible_page_nameFn c_adw_preferences_dialog_get_visible_page_name; ///
+private alias c_adw_preferences_dialog_pop_subpageFn = extern(C) gboolean function(AdwPreferencesDialog* self) nothrow;
+__gshared c_adw_preferences_dialog_pop_subpageFn c_adw_preferences_dialog_pop_subpage; ///
+private alias c_adw_preferences_dialog_push_subpageFn = extern(C) void function(AdwPreferencesDialog* self, AdwNavigationPage* page) nothrow;
+__gshared c_adw_preferences_dialog_push_subpageFn c_adw_preferences_dialog_push_subpage; ///
+private alias c_adw_preferences_dialog_removeFn = extern(C) void function(AdwPreferencesDialog* self, AdwPreferencesPage* page) nothrow;
+__gshared c_adw_preferences_dialog_removeFn c_adw_preferences_dialog_remove; ///
+private alias c_adw_preferences_dialog_set_search_enabledFn = extern(C) void function(AdwPreferencesDialog* self, gboolean searchEnabled) nothrow;
+__gshared c_adw_preferences_dialog_set_search_enabledFn c_adw_preferences_dialog_set_search_enabled; ///
+private alias c_adw_preferences_dialog_set_visible_pageFn = extern(C) void function(AdwPreferencesDialog* self, AdwPreferencesPage* page) nothrow;
+__gshared c_adw_preferences_dialog_set_visible_pageFn c_adw_preferences_dialog_set_visible_page; ///
+private alias c_adw_preferences_dialog_set_visible_page_nameFn = extern(C) void function(AdwPreferencesDialog* self, const(char)* name) nothrow;
+__gshared c_adw_preferences_dialog_set_visible_page_nameFn c_adw_preferences_dialog_set_visible_page_name; ///
+
+// PreferencesGroup
+private alias c_adw_preferences_group_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_preferences_group_get_typeFn c_adw_preferences_group_get_type; ///
+private alias c_adw_preferences_group_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_preferences_group_newFn c_adw_preferences_group_new; ///
+private alias c_adw_preferences_group_addFn = extern(C) void function(AdwPreferencesGroup* self, GtkWidget* child) nothrow;
+__gshared c_adw_preferences_group_addFn c_adw_preferences_group_add; ///
+private alias c_adw_preferences_group_bind_modelFn = extern(C) void function(AdwPreferencesGroup* self, GListModel* model, GtkListBoxCreateWidgetFunc createRowFunc, void* userData, GDestroyNotify userDataFreeFunc) nothrow;
+__gshared c_adw_preferences_group_bind_modelFn c_adw_preferences_group_bind_model; ///
+private alias c_adw_preferences_group_get_descriptionFn = extern(C) const(char)* function(AdwPreferencesGroup* self) nothrow;
+__gshared c_adw_preferences_group_get_descriptionFn c_adw_preferences_group_get_description; ///
+private alias c_adw_preferences_group_get_header_suffixFn = extern(C) GtkWidget* function(AdwPreferencesGroup* self) nothrow;
+__gshared c_adw_preferences_group_get_header_suffixFn c_adw_preferences_group_get_header_suffix; ///
+private alias c_adw_preferences_group_get_rowFn = extern(C) GtkWidget* function(AdwPreferencesGroup* self, uint index) nothrow;
+__gshared c_adw_preferences_group_get_rowFn c_adw_preferences_group_get_row; ///
+private alias c_adw_preferences_group_get_separate_rowsFn = extern(C) gboolean function(AdwPreferencesGroup* self) nothrow;
+__gshared c_adw_preferences_group_get_separate_rowsFn c_adw_preferences_group_get_separate_rows; ///
+private alias c_adw_preferences_group_get_titleFn = extern(C) const(char)* function(AdwPreferencesGroup* self) nothrow;
+__gshared c_adw_preferences_group_get_titleFn c_adw_preferences_group_get_title; ///
+private alias c_adw_preferences_group_removeFn = extern(C) void function(AdwPreferencesGroup* self, GtkWidget* child) nothrow;
+__gshared c_adw_preferences_group_removeFn c_adw_preferences_group_remove; ///
+private alias c_adw_preferences_group_set_descriptionFn = extern(C) void function(AdwPreferencesGroup* self, const(char)* description) nothrow;
+__gshared c_adw_preferences_group_set_descriptionFn c_adw_preferences_group_set_description; ///
+private alias c_adw_preferences_group_set_header_suffixFn = extern(C) void function(AdwPreferencesGroup* self, GtkWidget* suffix) nothrow;
+__gshared c_adw_preferences_group_set_header_suffixFn c_adw_preferences_group_set_header_suffix; ///
+private alias c_adw_preferences_group_set_separate_rowsFn = extern(C) void function(AdwPreferencesGroup* self, gboolean separateRows) nothrow;
+__gshared c_adw_preferences_group_set_separate_rowsFn c_adw_preferences_group_set_separate_rows; ///
+private alias c_adw_preferences_group_set_titleFn = extern(C) void function(AdwPreferencesGroup* self, const(char)* title) nothrow;
+__gshared c_adw_preferences_group_set_titleFn c_adw_preferences_group_set_title; ///
+
+// PreferencesPage
+private alias c_adw_preferences_page_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_preferences_page_get_typeFn c_adw_preferences_page_get_type; ///
+private alias c_adw_preferences_page_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_preferences_page_newFn c_adw_preferences_page_new; ///
+private alias c_adw_preferences_page_addFn = extern(C) void function(AdwPreferencesPage* self, AdwPreferencesGroup* group) nothrow;
+__gshared c_adw_preferences_page_addFn c_adw_preferences_page_add; ///
+private alias c_adw_preferences_page_get_bannerFn = extern(C) AdwBanner* function(AdwPreferencesPage* self) nothrow;
+__gshared c_adw_preferences_page_get_bannerFn c_adw_preferences_page_get_banner; ///
+private alias c_adw_preferences_page_get_descriptionFn = extern(C) const(char)* function(AdwPreferencesPage* self) nothrow;
+__gshared c_adw_preferences_page_get_descriptionFn c_adw_preferences_page_get_description; ///
+private alias c_adw_preferences_page_get_description_centeredFn = extern(C) gboolean function(AdwPreferencesPage* self) nothrow;
+__gshared c_adw_preferences_page_get_description_centeredFn c_adw_preferences_page_get_description_centered; ///
+private alias c_adw_preferences_page_get_groupFn = extern(C) AdwPreferencesGroup* function(AdwPreferencesPage* self, uint index) nothrow;
+__gshared c_adw_preferences_page_get_groupFn c_adw_preferences_page_get_group; ///
+private alias c_adw_preferences_page_get_icon_nameFn = extern(C) const(char)* function(AdwPreferencesPage* self) nothrow;
+__gshared c_adw_preferences_page_get_icon_nameFn c_adw_preferences_page_get_icon_name; ///
+private alias c_adw_preferences_page_get_nameFn = extern(C) const(char)* function(AdwPreferencesPage* self) nothrow;
+__gshared c_adw_preferences_page_get_nameFn c_adw_preferences_page_get_name; ///
+private alias c_adw_preferences_page_get_titleFn = extern(C) const(char)* function(AdwPreferencesPage* self) nothrow;
+__gshared c_adw_preferences_page_get_titleFn c_adw_preferences_page_get_title; ///
+private alias c_adw_preferences_page_get_use_underlineFn = extern(C) gboolean function(AdwPreferencesPage* self) nothrow;
+__gshared c_adw_preferences_page_get_use_underlineFn c_adw_preferences_page_get_use_underline; ///
+private alias c_adw_preferences_page_insertFn = extern(C) void function(AdwPreferencesPage* self, AdwPreferencesGroup* group, int index) nothrow;
+__gshared c_adw_preferences_page_insertFn c_adw_preferences_page_insert; ///
+private alias c_adw_preferences_page_removeFn = extern(C) void function(AdwPreferencesPage* self, AdwPreferencesGroup* group) nothrow;
+__gshared c_adw_preferences_page_removeFn c_adw_preferences_page_remove; ///
+private alias c_adw_preferences_page_scroll_to_topFn = extern(C) void function(AdwPreferencesPage* self) nothrow;
+__gshared c_adw_preferences_page_scroll_to_topFn c_adw_preferences_page_scroll_to_top; ///
+private alias c_adw_preferences_page_set_bannerFn = extern(C) void function(AdwPreferencesPage* self, AdwBanner* banner) nothrow;
+__gshared c_adw_preferences_page_set_bannerFn c_adw_preferences_page_set_banner; ///
+private alias c_adw_preferences_page_set_descriptionFn = extern(C) void function(AdwPreferencesPage* self, const(char)* description) nothrow;
+__gshared c_adw_preferences_page_set_descriptionFn c_adw_preferences_page_set_description; ///
+private alias c_adw_preferences_page_set_description_centeredFn = extern(C) void function(AdwPreferencesPage* self, gboolean centered) nothrow;
+__gshared c_adw_preferences_page_set_description_centeredFn c_adw_preferences_page_set_description_centered; ///
+private alias c_adw_preferences_page_set_icon_nameFn = extern(C) void function(AdwPreferencesPage* self, const(char)* iconName) nothrow;
+__gshared c_adw_preferences_page_set_icon_nameFn c_adw_preferences_page_set_icon_name; ///
+private alias c_adw_preferences_page_set_nameFn = extern(C) void function(AdwPreferencesPage* self, const(char)* name) nothrow;
+__gshared c_adw_preferences_page_set_nameFn c_adw_preferences_page_set_name; ///
+private alias c_adw_preferences_page_set_titleFn = extern(C) void function(AdwPreferencesPage* self, const(char)* title) nothrow;
+__gshared c_adw_preferences_page_set_titleFn c_adw_preferences_page_set_title; ///
+private alias c_adw_preferences_page_set_use_underlineFn = extern(C) void function(AdwPreferencesPage* self, gboolean useUnderline) nothrow;
+__gshared c_adw_preferences_page_set_use_underlineFn c_adw_preferences_page_set_use_underline; ///
+
+// PreferencesRow
+private alias c_adw_preferences_row_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_preferences_row_get_typeFn c_adw_preferences_row_get_type; ///
+private alias c_adw_preferences_row_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_preferences_row_newFn c_adw_preferences_row_new; ///
+private alias c_adw_preferences_row_get_titleFn = extern(C) const(char)* function(AdwPreferencesRow* self) nothrow;
+__gshared c_adw_preferences_row_get_titleFn c_adw_preferences_row_get_title; ///
+private alias c_adw_preferences_row_get_title_selectableFn = extern(C) gboolean function(AdwPreferencesRow* self) nothrow;
+__gshared c_adw_preferences_row_get_title_selectableFn c_adw_preferences_row_get_title_selectable; ///
+private alias c_adw_preferences_row_get_use_markupFn = extern(C) gboolean function(AdwPreferencesRow* self) nothrow;
+__gshared c_adw_preferences_row_get_use_markupFn c_adw_preferences_row_get_use_markup; ///
+private alias c_adw_preferences_row_get_use_underlineFn = extern(C) gboolean function(AdwPreferencesRow* self) nothrow;
+__gshared c_adw_preferences_row_get_use_underlineFn c_adw_preferences_row_get_use_underline; ///
+private alias c_adw_preferences_row_set_titleFn = extern(C) void function(AdwPreferencesRow* self, const(char)* title) nothrow;
+__gshared c_adw_preferences_row_set_titleFn c_adw_preferences_row_set_title; ///
+private alias c_adw_preferences_row_set_title_selectableFn = extern(C) void function(AdwPreferencesRow* self, gboolean titleSelectable) nothrow;
+__gshared c_adw_preferences_row_set_title_selectableFn c_adw_preferences_row_set_title_selectable; ///
+private alias c_adw_preferences_row_set_use_markupFn = extern(C) void function(AdwPreferencesRow* self, gboolean useMarkup) nothrow;
+__gshared c_adw_preferences_row_set_use_markupFn c_adw_preferences_row_set_use_markup; ///
+private alias c_adw_preferences_row_set_use_underlineFn = extern(C) void function(AdwPreferencesRow* self, gboolean useUnderline) nothrow;
+__gshared c_adw_preferences_row_set_use_underlineFn c_adw_preferences_row_set_use_underline; ///
+
+// PreferencesWindow
+private alias c_adw_preferences_window_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_preferences_window_get_typeFn c_adw_preferences_window_get_type; ///
+private alias c_adw_preferences_window_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_preferences_window_newFn c_adw_preferences_window_new; ///
+private alias c_adw_preferences_window_addFn = extern(C) void function(AdwPreferencesWindow* self, AdwPreferencesPage* page) nothrow;
+__gshared c_adw_preferences_window_addFn c_adw_preferences_window_add; ///
+private alias c_adw_preferences_window_add_toastFn = extern(C) void function(AdwPreferencesWindow* self, AdwToast* toast) nothrow;
+__gshared c_adw_preferences_window_add_toastFn c_adw_preferences_window_add_toast; ///
+private alias c_adw_preferences_window_close_subpageFn = extern(C) void function(AdwPreferencesWindow* self) nothrow;
+__gshared c_adw_preferences_window_close_subpageFn c_adw_preferences_window_close_subpage; ///
+private alias c_adw_preferences_window_get_can_navigate_backFn = extern(C) gboolean function(AdwPreferencesWindow* self) nothrow;
+__gshared c_adw_preferences_window_get_can_navigate_backFn c_adw_preferences_window_get_can_navigate_back; ///
+private alias c_adw_preferences_window_get_search_enabledFn = extern(C) gboolean function(AdwPreferencesWindow* self) nothrow;
+__gshared c_adw_preferences_window_get_search_enabledFn c_adw_preferences_window_get_search_enabled; ///
+private alias c_adw_preferences_window_get_visible_pageFn = extern(C) AdwPreferencesPage* function(AdwPreferencesWindow* self) nothrow;
+__gshared c_adw_preferences_window_get_visible_pageFn c_adw_preferences_window_get_visible_page; ///
+private alias c_adw_preferences_window_get_visible_page_nameFn = extern(C) const(char)* function(AdwPreferencesWindow* self) nothrow;
+__gshared c_adw_preferences_window_get_visible_page_nameFn c_adw_preferences_window_get_visible_page_name; ///
+private alias c_adw_preferences_window_pop_subpageFn = extern(C) gboolean function(AdwPreferencesWindow* self) nothrow;
+__gshared c_adw_preferences_window_pop_subpageFn c_adw_preferences_window_pop_subpage; ///
+private alias c_adw_preferences_window_present_subpageFn = extern(C) void function(AdwPreferencesWindow* self, GtkWidget* subpage) nothrow;
+__gshared c_adw_preferences_window_present_subpageFn c_adw_preferences_window_present_subpage; ///
+private alias c_adw_preferences_window_push_subpageFn = extern(C) void function(AdwPreferencesWindow* self, AdwNavigationPage* page) nothrow;
+__gshared c_adw_preferences_window_push_subpageFn c_adw_preferences_window_push_subpage; ///
+private alias c_adw_preferences_window_removeFn = extern(C) void function(AdwPreferencesWindow* self, AdwPreferencesPage* page) nothrow;
+__gshared c_adw_preferences_window_removeFn c_adw_preferences_window_remove; ///
+private alias c_adw_preferences_window_set_can_navigate_backFn = extern(C) void function(AdwPreferencesWindow* self, gboolean canNavigateBack) nothrow;
+__gshared c_adw_preferences_window_set_can_navigate_backFn c_adw_preferences_window_set_can_navigate_back; ///
+private alias c_adw_preferences_window_set_search_enabledFn = extern(C) void function(AdwPreferencesWindow* self, gboolean searchEnabled) nothrow;
+__gshared c_adw_preferences_window_set_search_enabledFn c_adw_preferences_window_set_search_enabled; ///
+private alias c_adw_preferences_window_set_visible_pageFn = extern(C) void function(AdwPreferencesWindow* self, AdwPreferencesPage* page) nothrow;
+__gshared c_adw_preferences_window_set_visible_pageFn c_adw_preferences_window_set_visible_page; ///
+private alias c_adw_preferences_window_set_visible_page_nameFn = extern(C) void function(AdwPreferencesWindow* self, const(char)* name) nothrow;
+__gshared c_adw_preferences_window_set_visible_page_nameFn c_adw_preferences_window_set_visible_page_name; ///
+
+// PropertyAnimationTarget
+private alias c_adw_property_animation_target_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_property_animation_target_get_typeFn c_adw_property_animation_target_get_type; ///
+private alias c_adw_property_animation_target_newFn = extern(C) AdwAnimationTarget* function(GObject* object, const(char)* propertyName) nothrow;
+__gshared c_adw_property_animation_target_newFn c_adw_property_animation_target_new; ///
+private alias c_adw_property_animation_target_new_for_pspecFn = extern(C) AdwAnimationTarget* function(GObject* object, GParamSpec* pspec) nothrow;
+__gshared c_adw_property_animation_target_new_for_pspecFn c_adw_property_animation_target_new_for_pspec; ///
+private alias c_adw_property_animation_target_get_objectFn = extern(C) GObject* function(AdwPropertyAnimationTarget* self) nothrow;
+__gshared c_adw_property_animation_target_get_objectFn c_adw_property_animation_target_get_object; ///
+private alias c_adw_property_animation_target_get_pspecFn = extern(C) GParamSpec* function(AdwPropertyAnimationTarget* self) nothrow;
+__gshared c_adw_property_animation_target_get_pspecFn c_adw_property_animation_target_get_pspec; ///
+
+// ShortcutLabel
+private alias c_adw_shortcut_label_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_shortcut_label_get_typeFn c_adw_shortcut_label_get_type; ///
+private alias c_adw_shortcut_label_newFn = extern(C) GtkWidget* function(const(char)* accelerator) nothrow;
+__gshared c_adw_shortcut_label_newFn c_adw_shortcut_label_new; ///
+private alias c_adw_shortcut_label_get_acceleratorFn = extern(C) const(char)* function(AdwShortcutLabel* self) nothrow;
+__gshared c_adw_shortcut_label_get_acceleratorFn c_adw_shortcut_label_get_accelerator; ///
+private alias c_adw_shortcut_label_get_disabled_textFn = extern(C) const(char)* function(AdwShortcutLabel* self) nothrow;
+__gshared c_adw_shortcut_label_get_disabled_textFn c_adw_shortcut_label_get_disabled_text; ///
+private alias c_adw_shortcut_label_set_acceleratorFn = extern(C) void function(AdwShortcutLabel* self, const(char)* accelerator) nothrow;
+__gshared c_adw_shortcut_label_set_acceleratorFn c_adw_shortcut_label_set_accelerator; ///
+private alias c_adw_shortcut_label_set_disabled_textFn = extern(C) void function(AdwShortcutLabel* self, const(char)* disabledText) nothrow;
+__gshared c_adw_shortcut_label_set_disabled_textFn c_adw_shortcut_label_set_disabled_text; ///
+
+// ShortcutsDialog
+private alias c_adw_shortcuts_dialog_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_shortcuts_dialog_get_typeFn c_adw_shortcuts_dialog_get_type; ///
+private alias c_adw_shortcuts_dialog_newFn = extern(C) AdwDialog* function() nothrow;
+__gshared c_adw_shortcuts_dialog_newFn c_adw_shortcuts_dialog_new; ///
+private alias c_adw_shortcuts_dialog_addFn = extern(C) void function(AdwShortcutsDialog* self, AdwShortcutsSection* section) nothrow;
+__gshared c_adw_shortcuts_dialog_addFn c_adw_shortcuts_dialog_add; ///
+
+// ShortcutsItem
+private alias c_adw_shortcuts_item_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_shortcuts_item_get_typeFn c_adw_shortcuts_item_get_type; ///
+private alias c_adw_shortcuts_item_newFn = extern(C) AdwShortcutsItem* function(const(char)* title, const(char)* accelerator) nothrow;
+__gshared c_adw_shortcuts_item_newFn c_adw_shortcuts_item_new; ///
+private alias c_adw_shortcuts_item_new_from_actionFn = extern(C) AdwShortcutsItem* function(const(char)* title, const(char)* actionName) nothrow;
+__gshared c_adw_shortcuts_item_new_from_actionFn c_adw_shortcuts_item_new_from_action; ///
+private alias c_adw_shortcuts_item_get_acceleratorFn = extern(C) const(char)* function(AdwShortcutsItem* self) nothrow;
+__gshared c_adw_shortcuts_item_get_acceleratorFn c_adw_shortcuts_item_get_accelerator; ///
+private alias c_adw_shortcuts_item_get_action_nameFn = extern(C) const(char)* function(AdwShortcutsItem* self) nothrow;
+__gshared c_adw_shortcuts_item_get_action_nameFn c_adw_shortcuts_item_get_action_name; ///
+private alias c_adw_shortcuts_item_get_directionFn = extern(C) GtkTextDirection function(AdwShortcutsItem* self) nothrow;
+__gshared c_adw_shortcuts_item_get_directionFn c_adw_shortcuts_item_get_direction; ///
+private alias c_adw_shortcuts_item_get_subtitleFn = extern(C) const(char)* function(AdwShortcutsItem* self) nothrow;
+__gshared c_adw_shortcuts_item_get_subtitleFn c_adw_shortcuts_item_get_subtitle; ///
+private alias c_adw_shortcuts_item_get_titleFn = extern(C) const(char)* function(AdwShortcutsItem* self) nothrow;
+__gshared c_adw_shortcuts_item_get_titleFn c_adw_shortcuts_item_get_title; ///
+private alias c_adw_shortcuts_item_set_acceleratorFn = extern(C) void function(AdwShortcutsItem* self, const(char)* accelerator) nothrow;
+__gshared c_adw_shortcuts_item_set_acceleratorFn c_adw_shortcuts_item_set_accelerator; ///
+private alias c_adw_shortcuts_item_set_action_nameFn = extern(C) void function(AdwShortcutsItem* self, const(char)* actionName) nothrow;
+__gshared c_adw_shortcuts_item_set_action_nameFn c_adw_shortcuts_item_set_action_name; ///
+private alias c_adw_shortcuts_item_set_directionFn = extern(C) void function(AdwShortcutsItem* self, GtkTextDirection direction) nothrow;
+__gshared c_adw_shortcuts_item_set_directionFn c_adw_shortcuts_item_set_direction; ///
+private alias c_adw_shortcuts_item_set_subtitleFn = extern(C) void function(AdwShortcutsItem* self, const(char)* subtitle) nothrow;
+__gshared c_adw_shortcuts_item_set_subtitleFn c_adw_shortcuts_item_set_subtitle; ///
+private alias c_adw_shortcuts_item_set_titleFn = extern(C) void function(AdwShortcutsItem* self, const(char)* title) nothrow;
+__gshared c_adw_shortcuts_item_set_titleFn c_adw_shortcuts_item_set_title; ///
+
+// ShortcutsSection
+private alias c_adw_shortcuts_section_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_shortcuts_section_get_typeFn c_adw_shortcuts_section_get_type; ///
+private alias c_adw_shortcuts_section_newFn = extern(C) AdwShortcutsSection* function(const(char)* title) nothrow;
+__gshared c_adw_shortcuts_section_newFn c_adw_shortcuts_section_new; ///
+private alias c_adw_shortcuts_section_addFn = extern(C) void function(AdwShortcutsSection* self, AdwShortcutsItem* item) nothrow;
+__gshared c_adw_shortcuts_section_addFn c_adw_shortcuts_section_add; ///
+private alias c_adw_shortcuts_section_get_titleFn = extern(C) const(char)* function(AdwShortcutsSection* self) nothrow;
+__gshared c_adw_shortcuts_section_get_titleFn c_adw_shortcuts_section_get_title; ///
+private alias c_adw_shortcuts_section_set_titleFn = extern(C) void function(AdwShortcutsSection* self, const(char)* title) nothrow;
+__gshared c_adw_shortcuts_section_set_titleFn c_adw_shortcuts_section_set_title; ///
+
+// Sidebar
+private alias c_adw_sidebar_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_sidebar_get_typeFn c_adw_sidebar_get_type; ///
+private alias c_adw_sidebar_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_sidebar_newFn c_adw_sidebar_new; ///
+private alias c_adw_sidebar_appendFn = extern(C) void function(AdwSidebar* self, AdwSidebarSection* section) nothrow;
+__gshared c_adw_sidebar_appendFn c_adw_sidebar_append; ///
+private alias c_adw_sidebar_get_drop_preloadFn = extern(C) gboolean function(AdwSidebar* self) nothrow;
+__gshared c_adw_sidebar_get_drop_preloadFn c_adw_sidebar_get_drop_preload; ///
+private alias c_adw_sidebar_get_filterFn = extern(C) GtkFilter* function(AdwSidebar* self) nothrow;
+__gshared c_adw_sidebar_get_filterFn c_adw_sidebar_get_filter; ///
+private alias c_adw_sidebar_get_itemFn = extern(C) AdwSidebarItem* function(AdwSidebar* self, uint index) nothrow;
+__gshared c_adw_sidebar_get_itemFn c_adw_sidebar_get_item; ///
+private alias c_adw_sidebar_get_itemsFn = extern(C) GtkSelectionModel* function(AdwSidebar* self) nothrow;
+__gshared c_adw_sidebar_get_itemsFn c_adw_sidebar_get_items; ///
+private alias c_adw_sidebar_get_menu_modelFn = extern(C) GMenuModel* function(AdwSidebar* self) nothrow;
+__gshared c_adw_sidebar_get_menu_modelFn c_adw_sidebar_get_menu_model; ///
+private alias c_adw_sidebar_get_modeFn = extern(C) AdwSidebarMode function(AdwSidebar* self) nothrow;
+__gshared c_adw_sidebar_get_modeFn c_adw_sidebar_get_mode; ///
+private alias c_adw_sidebar_get_placeholderFn = extern(C) GtkWidget* function(AdwSidebar* self) nothrow;
+__gshared c_adw_sidebar_get_placeholderFn c_adw_sidebar_get_placeholder; ///
+private alias c_adw_sidebar_get_sectionFn = extern(C) AdwSidebarSection* function(AdwSidebar* self, uint index) nothrow;
+__gshared c_adw_sidebar_get_sectionFn c_adw_sidebar_get_section; ///
+private alias c_adw_sidebar_get_sectionsFn = extern(C) GListModel* function(AdwSidebar* self) nothrow;
+__gshared c_adw_sidebar_get_sectionsFn c_adw_sidebar_get_sections; ///
+private alias c_adw_sidebar_get_selectedFn = extern(C) uint function(AdwSidebar* self) nothrow;
+__gshared c_adw_sidebar_get_selectedFn c_adw_sidebar_get_selected; ///
+private alias c_adw_sidebar_get_selected_itemFn = extern(C) AdwSidebarItem* function(AdwSidebar* self) nothrow;
+__gshared c_adw_sidebar_get_selected_itemFn c_adw_sidebar_get_selected_item; ///
+private alias c_adw_sidebar_insertFn = extern(C) void function(AdwSidebar* self, AdwSidebarSection* section, int position) nothrow;
+__gshared c_adw_sidebar_insertFn c_adw_sidebar_insert; ///
+private alias c_adw_sidebar_prependFn = extern(C) void function(AdwSidebar* self, AdwSidebarSection* section) nothrow;
+__gshared c_adw_sidebar_prependFn c_adw_sidebar_prepend; ///
+private alias c_adw_sidebar_removeFn = extern(C) void function(AdwSidebar* self, AdwSidebarSection* section) nothrow;
+__gshared c_adw_sidebar_removeFn c_adw_sidebar_remove; ///
+private alias c_adw_sidebar_remove_allFn = extern(C) void function(AdwSidebar* self) nothrow;
+__gshared c_adw_sidebar_remove_allFn c_adw_sidebar_remove_all; ///
+private alias c_adw_sidebar_set_drop_preloadFn = extern(C) void function(AdwSidebar* self, gboolean preload) nothrow;
+__gshared c_adw_sidebar_set_drop_preloadFn c_adw_sidebar_set_drop_preload; ///
+private alias c_adw_sidebar_set_filterFn = extern(C) void function(AdwSidebar* self, GtkFilter* filter) nothrow;
+__gshared c_adw_sidebar_set_filterFn c_adw_sidebar_set_filter; ///
+private alias c_adw_sidebar_set_menu_modelFn = extern(C) void function(AdwSidebar* self, GMenuModel* menuModel) nothrow;
+__gshared c_adw_sidebar_set_menu_modelFn c_adw_sidebar_set_menu_model; ///
+private alias c_adw_sidebar_set_modeFn = extern(C) void function(AdwSidebar* self, AdwSidebarMode mode) nothrow;
+__gshared c_adw_sidebar_set_modeFn c_adw_sidebar_set_mode; ///
+private alias c_adw_sidebar_set_placeholderFn = extern(C) void function(AdwSidebar* self, GtkWidget* placeholder) nothrow;
+__gshared c_adw_sidebar_set_placeholderFn c_adw_sidebar_set_placeholder; ///
+private alias c_adw_sidebar_set_selectedFn = extern(C) void function(AdwSidebar* self, uint selected) nothrow;
+__gshared c_adw_sidebar_set_selectedFn c_adw_sidebar_set_selected; ///
+private alias c_adw_sidebar_setup_drop_targetFn = extern(C) void function(AdwSidebar* self, GdkDragAction actions, GType* types, size_t nTypes) nothrow;
+__gshared c_adw_sidebar_setup_drop_targetFn c_adw_sidebar_setup_drop_target; ///
+
+// SidebarItem
+private alias c_adw_sidebar_item_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_sidebar_item_get_typeFn c_adw_sidebar_item_get_type; ///
+private alias c_adw_sidebar_item_newFn = extern(C) AdwSidebarItem* function(const(char)* title) nothrow;
+__gshared c_adw_sidebar_item_newFn c_adw_sidebar_item_new; ///
+private alias c_adw_sidebar_item_get_drag_motion_activateFn = extern(C) gboolean function(AdwSidebarItem* self) nothrow;
+__gshared c_adw_sidebar_item_get_drag_motion_activateFn c_adw_sidebar_item_get_drag_motion_activate; ///
+private alias c_adw_sidebar_item_get_enabledFn = extern(C) gboolean function(AdwSidebarItem* self) nothrow;
+__gshared c_adw_sidebar_item_get_enabledFn c_adw_sidebar_item_get_enabled; ///
+private alias c_adw_sidebar_item_get_icon_nameFn = extern(C) const(char)* function(AdwSidebarItem* self) nothrow;
+__gshared c_adw_sidebar_item_get_icon_nameFn c_adw_sidebar_item_get_icon_name; ///
+private alias c_adw_sidebar_item_get_icon_paintableFn = extern(C) GdkPaintable* function(AdwSidebarItem* self) nothrow;
+__gshared c_adw_sidebar_item_get_icon_paintableFn c_adw_sidebar_item_get_icon_paintable; ///
+private alias c_adw_sidebar_item_get_indexFn = extern(C) uint function(AdwSidebarItem* self) nothrow;
+__gshared c_adw_sidebar_item_get_indexFn c_adw_sidebar_item_get_index; ///
+private alias c_adw_sidebar_item_get_sectionFn = extern(C) AdwSidebarSection* function(AdwSidebarItem* self) nothrow;
+__gshared c_adw_sidebar_item_get_sectionFn c_adw_sidebar_item_get_section; ///
+private alias c_adw_sidebar_item_get_section_indexFn = extern(C) uint function(AdwSidebarItem* self) nothrow;
+__gshared c_adw_sidebar_item_get_section_indexFn c_adw_sidebar_item_get_section_index; ///
+private alias c_adw_sidebar_item_get_subtitleFn = extern(C) const(char)* function(AdwSidebarItem* self) nothrow;
+__gshared c_adw_sidebar_item_get_subtitleFn c_adw_sidebar_item_get_subtitle; ///
+private alias c_adw_sidebar_item_get_suffixFn = extern(C) GtkWidget* function(AdwSidebarItem* self) nothrow;
+__gshared c_adw_sidebar_item_get_suffixFn c_adw_sidebar_item_get_suffix; ///
+private alias c_adw_sidebar_item_get_titleFn = extern(C) const(char)* function(AdwSidebarItem* self) nothrow;
+__gshared c_adw_sidebar_item_get_titleFn c_adw_sidebar_item_get_title; ///
+private alias c_adw_sidebar_item_get_tooltipFn = extern(C) const(char)* function(AdwSidebarItem* self) nothrow;
+__gshared c_adw_sidebar_item_get_tooltipFn c_adw_sidebar_item_get_tooltip; ///
+private alias c_adw_sidebar_item_get_use_underlineFn = extern(C) gboolean function(AdwSidebarItem* self) nothrow;
+__gshared c_adw_sidebar_item_get_use_underlineFn c_adw_sidebar_item_get_use_underline; ///
+private alias c_adw_sidebar_item_get_visibleFn = extern(C) gboolean function(AdwSidebarItem* self) nothrow;
+__gshared c_adw_sidebar_item_get_visibleFn c_adw_sidebar_item_get_visible; ///
+private alias c_adw_sidebar_item_set_drag_motion_activateFn = extern(C) void function(AdwSidebarItem* self, gboolean dragMotionActivate) nothrow;
+__gshared c_adw_sidebar_item_set_drag_motion_activateFn c_adw_sidebar_item_set_drag_motion_activate; ///
+private alias c_adw_sidebar_item_set_enabledFn = extern(C) void function(AdwSidebarItem* self, gboolean enabled) nothrow;
+__gshared c_adw_sidebar_item_set_enabledFn c_adw_sidebar_item_set_enabled; ///
+private alias c_adw_sidebar_item_set_icon_nameFn = extern(C) void function(AdwSidebarItem* self, const(char)* iconName) nothrow;
+__gshared c_adw_sidebar_item_set_icon_nameFn c_adw_sidebar_item_set_icon_name; ///
+private alias c_adw_sidebar_item_set_icon_paintableFn = extern(C) void function(AdwSidebarItem* self, GdkPaintable* paintable) nothrow;
+__gshared c_adw_sidebar_item_set_icon_paintableFn c_adw_sidebar_item_set_icon_paintable; ///
+private alias c_adw_sidebar_item_set_subtitleFn = extern(C) void function(AdwSidebarItem* self, const(char)* subtitle) nothrow;
+__gshared c_adw_sidebar_item_set_subtitleFn c_adw_sidebar_item_set_subtitle; ///
+private alias c_adw_sidebar_item_set_suffixFn = extern(C) void function(AdwSidebarItem* self, GtkWidget* suffix) nothrow;
+__gshared c_adw_sidebar_item_set_suffixFn c_adw_sidebar_item_set_suffix; ///
+private alias c_adw_sidebar_item_set_titleFn = extern(C) void function(AdwSidebarItem* self, const(char)* title) nothrow;
+__gshared c_adw_sidebar_item_set_titleFn c_adw_sidebar_item_set_title; ///
+private alias c_adw_sidebar_item_set_tooltipFn = extern(C) void function(AdwSidebarItem* self, const(char)* tooltip) nothrow;
+__gshared c_adw_sidebar_item_set_tooltipFn c_adw_sidebar_item_set_tooltip; ///
+private alias c_adw_sidebar_item_set_use_underlineFn = extern(C) void function(AdwSidebarItem* self, gboolean useUnderline) nothrow;
+__gshared c_adw_sidebar_item_set_use_underlineFn c_adw_sidebar_item_set_use_underline; ///
+private alias c_adw_sidebar_item_set_visibleFn = extern(C) void function(AdwSidebarItem* self, gboolean visible) nothrow;
+__gshared c_adw_sidebar_item_set_visibleFn c_adw_sidebar_item_set_visible; ///
+
+// SidebarSection
+private alias c_adw_sidebar_section_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_sidebar_section_get_typeFn c_adw_sidebar_section_get_type; ///
+private alias c_adw_sidebar_section_newFn = extern(C) AdwSidebarSection* function() nothrow;
+__gshared c_adw_sidebar_section_newFn c_adw_sidebar_section_new; ///
+private alias c_adw_sidebar_section_appendFn = extern(C) void function(AdwSidebarSection* self, AdwSidebarItem* item) nothrow;
+__gshared c_adw_sidebar_section_appendFn c_adw_sidebar_section_append; ///
+private alias c_adw_sidebar_section_bind_modelFn = extern(C) void function(AdwSidebarSection* self, GListModel* model, AdwSidebarSectionCreateItemFunc createItemFunc, void* userData, GDestroyNotify userDataFreeFunc) nothrow;
+__gshared c_adw_sidebar_section_bind_modelFn c_adw_sidebar_section_bind_model; ///
+private alias c_adw_sidebar_section_get_itemFn = extern(C) AdwSidebarItem* function(AdwSidebarSection* self, uint index) nothrow;
+__gshared c_adw_sidebar_section_get_itemFn c_adw_sidebar_section_get_item; ///
+private alias c_adw_sidebar_section_get_itemsFn = extern(C) GListModel* function(AdwSidebarSection* self) nothrow;
+__gshared c_adw_sidebar_section_get_itemsFn c_adw_sidebar_section_get_items; ///
+private alias c_adw_sidebar_section_get_menu_modelFn = extern(C) GMenuModel* function(AdwSidebarSection* self) nothrow;
+__gshared c_adw_sidebar_section_get_menu_modelFn c_adw_sidebar_section_get_menu_model; ///
+private alias c_adw_sidebar_section_get_sidebarFn = extern(C) AdwSidebar* function(AdwSidebarSection* self) nothrow;
+__gshared c_adw_sidebar_section_get_sidebarFn c_adw_sidebar_section_get_sidebar; ///
+private alias c_adw_sidebar_section_get_titleFn = extern(C) const(char)* function(AdwSidebarSection* self) nothrow;
+__gshared c_adw_sidebar_section_get_titleFn c_adw_sidebar_section_get_title; ///
+private alias c_adw_sidebar_section_insertFn = extern(C) void function(AdwSidebarSection* self, AdwSidebarItem* item, int position) nothrow;
+__gshared c_adw_sidebar_section_insertFn c_adw_sidebar_section_insert; ///
+private alias c_adw_sidebar_section_prependFn = extern(C) void function(AdwSidebarSection* self, AdwSidebarItem* item) nothrow;
+__gshared c_adw_sidebar_section_prependFn c_adw_sidebar_section_prepend; ///
+private alias c_adw_sidebar_section_removeFn = extern(C) void function(AdwSidebarSection* self, AdwSidebarItem* item) nothrow;
+__gshared c_adw_sidebar_section_removeFn c_adw_sidebar_section_remove; ///
+private alias c_adw_sidebar_section_remove_allFn = extern(C) void function(AdwSidebarSection* self) nothrow;
+__gshared c_adw_sidebar_section_remove_allFn c_adw_sidebar_section_remove_all; ///
+private alias c_adw_sidebar_section_set_menu_modelFn = extern(C) void function(AdwSidebarSection* self, GMenuModel* menuModel) nothrow;
+__gshared c_adw_sidebar_section_set_menu_modelFn c_adw_sidebar_section_set_menu_model; ///
+private alias c_adw_sidebar_section_set_titleFn = extern(C) void function(AdwSidebarSection* self, const(char)* title) nothrow;
+__gshared c_adw_sidebar_section_set_titleFn c_adw_sidebar_section_set_title; ///
+
+// SpinRow
+private alias c_adw_spin_row_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_spin_row_get_typeFn c_adw_spin_row_get_type; ///
+private alias c_adw_spin_row_newFn = extern(C) GtkWidget* function(GtkAdjustment* adjustment, double climbRate, uint digits) nothrow;
+__gshared c_adw_spin_row_newFn c_adw_spin_row_new; ///
+private alias c_adw_spin_row_new_with_rangeFn = extern(C) GtkWidget* function(double min, double max, double step) nothrow;
+__gshared c_adw_spin_row_new_with_rangeFn c_adw_spin_row_new_with_range; ///
+private alias c_adw_spin_row_configureFn = extern(C) void function(AdwSpinRow* self, GtkAdjustment* adjustment, double climbRate, uint digits) nothrow;
+__gshared c_adw_spin_row_configureFn c_adw_spin_row_configure; ///
+private alias c_adw_spin_row_get_adjustmentFn = extern(C) GtkAdjustment* function(AdwSpinRow* self) nothrow;
+__gshared c_adw_spin_row_get_adjustmentFn c_adw_spin_row_get_adjustment; ///
+private alias c_adw_spin_row_get_climb_rateFn = extern(C) double function(AdwSpinRow* self) nothrow;
+__gshared c_adw_spin_row_get_climb_rateFn c_adw_spin_row_get_climb_rate; ///
+private alias c_adw_spin_row_get_digitsFn = extern(C) uint function(AdwSpinRow* self) nothrow;
+__gshared c_adw_spin_row_get_digitsFn c_adw_spin_row_get_digits; ///
+private alias c_adw_spin_row_get_numericFn = extern(C) gboolean function(AdwSpinRow* self) nothrow;
+__gshared c_adw_spin_row_get_numericFn c_adw_spin_row_get_numeric; ///
+private alias c_adw_spin_row_get_snap_to_ticksFn = extern(C) gboolean function(AdwSpinRow* self) nothrow;
+__gshared c_adw_spin_row_get_snap_to_ticksFn c_adw_spin_row_get_snap_to_ticks; ///
+private alias c_adw_spin_row_get_update_policyFn = extern(C) GtkSpinButtonUpdatePolicy function(AdwSpinRow* self) nothrow;
+__gshared c_adw_spin_row_get_update_policyFn c_adw_spin_row_get_update_policy; ///
+private alias c_adw_spin_row_get_valueFn = extern(C) double function(AdwSpinRow* self) nothrow;
+__gshared c_adw_spin_row_get_valueFn c_adw_spin_row_get_value; ///
+private alias c_adw_spin_row_get_wrapFn = extern(C) gboolean function(AdwSpinRow* self) nothrow;
+__gshared c_adw_spin_row_get_wrapFn c_adw_spin_row_get_wrap; ///
+private alias c_adw_spin_row_set_adjustmentFn = extern(C) void function(AdwSpinRow* self, GtkAdjustment* adjustment) nothrow;
+__gshared c_adw_spin_row_set_adjustmentFn c_adw_spin_row_set_adjustment; ///
+private alias c_adw_spin_row_set_climb_rateFn = extern(C) void function(AdwSpinRow* self, double climbRate) nothrow;
+__gshared c_adw_spin_row_set_climb_rateFn c_adw_spin_row_set_climb_rate; ///
+private alias c_adw_spin_row_set_digitsFn = extern(C) void function(AdwSpinRow* self, uint digits) nothrow;
+__gshared c_adw_spin_row_set_digitsFn c_adw_spin_row_set_digits; ///
+private alias c_adw_spin_row_set_numericFn = extern(C) void function(AdwSpinRow* self, gboolean numeric) nothrow;
+__gshared c_adw_spin_row_set_numericFn c_adw_spin_row_set_numeric; ///
+private alias c_adw_spin_row_set_rangeFn = extern(C) void function(AdwSpinRow* self, double min, double max) nothrow;
+__gshared c_adw_spin_row_set_rangeFn c_adw_spin_row_set_range; ///
+private alias c_adw_spin_row_set_snap_to_ticksFn = extern(C) void function(AdwSpinRow* self, gboolean snapToTicks) nothrow;
+__gshared c_adw_spin_row_set_snap_to_ticksFn c_adw_spin_row_set_snap_to_ticks; ///
+private alias c_adw_spin_row_set_update_policyFn = extern(C) void function(AdwSpinRow* self, GtkSpinButtonUpdatePolicy policy) nothrow;
+__gshared c_adw_spin_row_set_update_policyFn c_adw_spin_row_set_update_policy; ///
+private alias c_adw_spin_row_set_valueFn = extern(C) void function(AdwSpinRow* self, double value) nothrow;
+__gshared c_adw_spin_row_set_valueFn c_adw_spin_row_set_value; ///
+private alias c_adw_spin_row_set_wrapFn = extern(C) void function(AdwSpinRow* self, gboolean wrap) nothrow;
+__gshared c_adw_spin_row_set_wrapFn c_adw_spin_row_set_wrap; ///
+private alias c_adw_spin_row_updateFn = extern(C) void function(AdwSpinRow* self) nothrow;
+__gshared c_adw_spin_row_updateFn c_adw_spin_row_update; ///
+
+// Spinner
+private alias c_adw_spinner_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_spinner_get_typeFn c_adw_spinner_get_type; ///
+private alias c_adw_spinner_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_spinner_newFn c_adw_spinner_new; ///
+
+// SpinnerPaintable
+private alias c_adw_spinner_paintable_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_spinner_paintable_get_typeFn c_adw_spinner_paintable_get_type; ///
+private alias c_adw_spinner_paintable_newFn = extern(C) AdwSpinnerPaintable* function(GtkWidget* widget) nothrow;
+__gshared c_adw_spinner_paintable_newFn c_adw_spinner_paintable_new; ///
+private alias c_adw_spinner_paintable_get_widgetFn = extern(C) GtkWidget* function(AdwSpinnerPaintable* self) nothrow;
+__gshared c_adw_spinner_paintable_get_widgetFn c_adw_spinner_paintable_get_widget; ///
+private alias c_adw_spinner_paintable_set_widgetFn = extern(C) void function(AdwSpinnerPaintable* self, GtkWidget* widget) nothrow;
+__gshared c_adw_spinner_paintable_set_widgetFn c_adw_spinner_paintable_set_widget; ///
+
+// SplitButton
+private alias c_adw_split_button_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_split_button_get_typeFn c_adw_split_button_get_type; ///
+private alias c_adw_split_button_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_split_button_newFn c_adw_split_button_new; ///
+private alias c_adw_split_button_get_can_shrinkFn = extern(C) gboolean function(AdwSplitButton* self) nothrow;
+__gshared c_adw_split_button_get_can_shrinkFn c_adw_split_button_get_can_shrink; ///
+private alias c_adw_split_button_get_childFn = extern(C) GtkWidget* function(AdwSplitButton* self) nothrow;
+__gshared c_adw_split_button_get_childFn c_adw_split_button_get_child; ///
+private alias c_adw_split_button_get_directionFn = extern(C) GtkArrowType function(AdwSplitButton* self) nothrow;
+__gshared c_adw_split_button_get_directionFn c_adw_split_button_get_direction; ///
+private alias c_adw_split_button_get_dropdown_tooltipFn = extern(C) const(char)* function(AdwSplitButton* self) nothrow;
+__gshared c_adw_split_button_get_dropdown_tooltipFn c_adw_split_button_get_dropdown_tooltip; ///
+private alias c_adw_split_button_get_icon_nameFn = extern(C) const(char)* function(AdwSplitButton* self) nothrow;
+__gshared c_adw_split_button_get_icon_nameFn c_adw_split_button_get_icon_name; ///
+private alias c_adw_split_button_get_labelFn = extern(C) const(char)* function(AdwSplitButton* self) nothrow;
+__gshared c_adw_split_button_get_labelFn c_adw_split_button_get_label; ///
+private alias c_adw_split_button_get_menu_modelFn = extern(C) GMenuModel* function(AdwSplitButton* self) nothrow;
+__gshared c_adw_split_button_get_menu_modelFn c_adw_split_button_get_menu_model; ///
+private alias c_adw_split_button_get_popoverFn = extern(C) GtkPopover* function(AdwSplitButton* self) nothrow;
+__gshared c_adw_split_button_get_popoverFn c_adw_split_button_get_popover; ///
+private alias c_adw_split_button_get_use_underlineFn = extern(C) gboolean function(AdwSplitButton* self) nothrow;
+__gshared c_adw_split_button_get_use_underlineFn c_adw_split_button_get_use_underline; ///
+private alias c_adw_split_button_popdownFn = extern(C) void function(AdwSplitButton* self) nothrow;
+__gshared c_adw_split_button_popdownFn c_adw_split_button_popdown; ///
+private alias c_adw_split_button_popupFn = extern(C) void function(AdwSplitButton* self) nothrow;
+__gshared c_adw_split_button_popupFn c_adw_split_button_popup; ///
+private alias c_adw_split_button_set_can_shrinkFn = extern(C) void function(AdwSplitButton* self, gboolean canShrink) nothrow;
+__gshared c_adw_split_button_set_can_shrinkFn c_adw_split_button_set_can_shrink; ///
+private alias c_adw_split_button_set_childFn = extern(C) void function(AdwSplitButton* self, GtkWidget* child) nothrow;
+__gshared c_adw_split_button_set_childFn c_adw_split_button_set_child; ///
+private alias c_adw_split_button_set_directionFn = extern(C) void function(AdwSplitButton* self, GtkArrowType direction) nothrow;
+__gshared c_adw_split_button_set_directionFn c_adw_split_button_set_direction; ///
+private alias c_adw_split_button_set_dropdown_tooltipFn = extern(C) void function(AdwSplitButton* self, const(char)* tooltip) nothrow;
+__gshared c_adw_split_button_set_dropdown_tooltipFn c_adw_split_button_set_dropdown_tooltip; ///
+private alias c_adw_split_button_set_icon_nameFn = extern(C) void function(AdwSplitButton* self, const(char)* iconName) nothrow;
+__gshared c_adw_split_button_set_icon_nameFn c_adw_split_button_set_icon_name; ///
+private alias c_adw_split_button_set_labelFn = extern(C) void function(AdwSplitButton* self, const(char)* label) nothrow;
+__gshared c_adw_split_button_set_labelFn c_adw_split_button_set_label; ///
+private alias c_adw_split_button_set_menu_modelFn = extern(C) void function(AdwSplitButton* self, GMenuModel* menuModel) nothrow;
+__gshared c_adw_split_button_set_menu_modelFn c_adw_split_button_set_menu_model; ///
+private alias c_adw_split_button_set_popoverFn = extern(C) void function(AdwSplitButton* self, GtkPopover* popover) nothrow;
+__gshared c_adw_split_button_set_popoverFn c_adw_split_button_set_popover; ///
+private alias c_adw_split_button_set_use_underlineFn = extern(C) void function(AdwSplitButton* self, gboolean useUnderline) nothrow;
+__gshared c_adw_split_button_set_use_underlineFn c_adw_split_button_set_use_underline; ///
+
+// SpringAnimation
+private alias c_adw_spring_animation_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_spring_animation_get_typeFn c_adw_spring_animation_get_type; ///
+private alias c_adw_spring_animation_newFn = extern(C) AdwAnimation* function(GtkWidget* widget, double from, double to, AdwSpringParams* springParams, AdwAnimationTarget* target) nothrow;
+__gshared c_adw_spring_animation_newFn c_adw_spring_animation_new; ///
+private alias c_adw_spring_animation_calculate_valueFn = extern(C) double function(AdwSpringAnimation* self, uint time) nothrow;
+__gshared c_adw_spring_animation_calculate_valueFn c_adw_spring_animation_calculate_value; ///
+private alias c_adw_spring_animation_calculate_velocityFn = extern(C) double function(AdwSpringAnimation* self, uint time) nothrow;
+__gshared c_adw_spring_animation_calculate_velocityFn c_adw_spring_animation_calculate_velocity; ///
+private alias c_adw_spring_animation_get_clampFn = extern(C) gboolean function(AdwSpringAnimation* self) nothrow;
+__gshared c_adw_spring_animation_get_clampFn c_adw_spring_animation_get_clamp; ///
+private alias c_adw_spring_animation_get_epsilonFn = extern(C) double function(AdwSpringAnimation* self) nothrow;
+__gshared c_adw_spring_animation_get_epsilonFn c_adw_spring_animation_get_epsilon; ///
+private alias c_adw_spring_animation_get_estimated_durationFn = extern(C) uint function(AdwSpringAnimation* self) nothrow;
+__gshared c_adw_spring_animation_get_estimated_durationFn c_adw_spring_animation_get_estimated_duration; ///
+private alias c_adw_spring_animation_get_initial_velocityFn = extern(C) double function(AdwSpringAnimation* self) nothrow;
+__gshared c_adw_spring_animation_get_initial_velocityFn c_adw_spring_animation_get_initial_velocity; ///
+private alias c_adw_spring_animation_get_spring_paramsFn = extern(C) AdwSpringParams* function(AdwSpringAnimation* self) nothrow;
+__gshared c_adw_spring_animation_get_spring_paramsFn c_adw_spring_animation_get_spring_params; ///
+private alias c_adw_spring_animation_get_value_fromFn = extern(C) double function(AdwSpringAnimation* self) nothrow;
+__gshared c_adw_spring_animation_get_value_fromFn c_adw_spring_animation_get_value_from; ///
+private alias c_adw_spring_animation_get_value_toFn = extern(C) double function(AdwSpringAnimation* self) nothrow;
+__gshared c_adw_spring_animation_get_value_toFn c_adw_spring_animation_get_value_to; ///
+private alias c_adw_spring_animation_get_velocityFn = extern(C) double function(AdwSpringAnimation* self) nothrow;
+__gshared c_adw_spring_animation_get_velocityFn c_adw_spring_animation_get_velocity; ///
+private alias c_adw_spring_animation_set_clampFn = extern(C) void function(AdwSpringAnimation* self, gboolean clamp) nothrow;
+__gshared c_adw_spring_animation_set_clampFn c_adw_spring_animation_set_clamp; ///
+private alias c_adw_spring_animation_set_epsilonFn = extern(C) void function(AdwSpringAnimation* self, double epsilon) nothrow;
+__gshared c_adw_spring_animation_set_epsilonFn c_adw_spring_animation_set_epsilon; ///
+private alias c_adw_spring_animation_set_initial_velocityFn = extern(C) void function(AdwSpringAnimation* self, double velocity) nothrow;
+__gshared c_adw_spring_animation_set_initial_velocityFn c_adw_spring_animation_set_initial_velocity; ///
+private alias c_adw_spring_animation_set_spring_paramsFn = extern(C) void function(AdwSpringAnimation* self, AdwSpringParams* springParams) nothrow;
+__gshared c_adw_spring_animation_set_spring_paramsFn c_adw_spring_animation_set_spring_params; ///
+private alias c_adw_spring_animation_set_value_fromFn = extern(C) void function(AdwSpringAnimation* self, double value) nothrow;
+__gshared c_adw_spring_animation_set_value_fromFn c_adw_spring_animation_set_value_from; ///
+private alias c_adw_spring_animation_set_value_toFn = extern(C) void function(AdwSpringAnimation* self, double value) nothrow;
+__gshared c_adw_spring_animation_set_value_toFn c_adw_spring_animation_set_value_to; ///
+
+// SpringParams
+private alias c_adw_spring_params_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_spring_params_get_typeFn c_adw_spring_params_get_type; ///
+private alias c_adw_spring_params_newFn = extern(C) AdwSpringParams* function(double dampingRatio, double mass, double stiffness) nothrow;
+__gshared c_adw_spring_params_newFn c_adw_spring_params_new; ///
+private alias c_adw_spring_params_new_fullFn = extern(C) AdwSpringParams* function(double damping, double mass, double stiffness) nothrow;
+__gshared c_adw_spring_params_new_fullFn c_adw_spring_params_new_full; ///
+private alias c_adw_spring_params_get_dampingFn = extern(C) double function(AdwSpringParams* self) nothrow;
+__gshared c_adw_spring_params_get_dampingFn c_adw_spring_params_get_damping; ///
+private alias c_adw_spring_params_get_damping_ratioFn = extern(C) double function(AdwSpringParams* self) nothrow;
+__gshared c_adw_spring_params_get_damping_ratioFn c_adw_spring_params_get_damping_ratio; ///
+private alias c_adw_spring_params_get_massFn = extern(C) double function(AdwSpringParams* self) nothrow;
+__gshared c_adw_spring_params_get_massFn c_adw_spring_params_get_mass; ///
+private alias c_adw_spring_params_get_stiffnessFn = extern(C) double function(AdwSpringParams* self) nothrow;
+__gshared c_adw_spring_params_get_stiffnessFn c_adw_spring_params_get_stiffness; ///
+private alias c_adw_spring_params_refFn = extern(C) AdwSpringParams* function(AdwSpringParams* self) nothrow;
+__gshared c_adw_spring_params_refFn c_adw_spring_params_ref; ///
+private alias c_adw_spring_params_unrefFn = extern(C) void function(AdwSpringParams* self) nothrow;
+__gshared c_adw_spring_params_unrefFn c_adw_spring_params_unref; ///
+
+// Squeezer
+private alias c_adw_squeezer_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_squeezer_get_typeFn c_adw_squeezer_get_type; ///
+private alias c_adw_squeezer_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_squeezer_newFn c_adw_squeezer_new; ///
+private alias c_adw_squeezer_addFn = extern(C) AdwSqueezerPage* function(AdwSqueezer* self, GtkWidget* child) nothrow;
+__gshared c_adw_squeezer_addFn c_adw_squeezer_add; ///
+private alias c_adw_squeezer_get_allow_noneFn = extern(C) gboolean function(AdwSqueezer* self) nothrow;
+__gshared c_adw_squeezer_get_allow_noneFn c_adw_squeezer_get_allow_none; ///
+private alias c_adw_squeezer_get_homogeneousFn = extern(C) gboolean function(AdwSqueezer* self) nothrow;
+__gshared c_adw_squeezer_get_homogeneousFn c_adw_squeezer_get_homogeneous; ///
+private alias c_adw_squeezer_get_interpolate_sizeFn = extern(C) gboolean function(AdwSqueezer* self) nothrow;
+__gshared c_adw_squeezer_get_interpolate_sizeFn c_adw_squeezer_get_interpolate_size; ///
+private alias c_adw_squeezer_get_pageFn = extern(C) AdwSqueezerPage* function(AdwSqueezer* self, GtkWidget* child) nothrow;
+__gshared c_adw_squeezer_get_pageFn c_adw_squeezer_get_page; ///
+private alias c_adw_squeezer_get_pagesFn = extern(C) GtkSelectionModel* function(AdwSqueezer* self) nothrow;
+__gshared c_adw_squeezer_get_pagesFn c_adw_squeezer_get_pages; ///
+private alias c_adw_squeezer_get_switch_threshold_policyFn = extern(C) AdwFoldThresholdPolicy function(AdwSqueezer* self) nothrow;
+__gshared c_adw_squeezer_get_switch_threshold_policyFn c_adw_squeezer_get_switch_threshold_policy; ///
+private alias c_adw_squeezer_get_transition_durationFn = extern(C) uint function(AdwSqueezer* self) nothrow;
+__gshared c_adw_squeezer_get_transition_durationFn c_adw_squeezer_get_transition_duration; ///
+private alias c_adw_squeezer_get_transition_runningFn = extern(C) gboolean function(AdwSqueezer* self) nothrow;
+__gshared c_adw_squeezer_get_transition_runningFn c_adw_squeezer_get_transition_running; ///
+private alias c_adw_squeezer_get_transition_typeFn = extern(C) AdwSqueezerTransitionType function(AdwSqueezer* self) nothrow;
+__gshared c_adw_squeezer_get_transition_typeFn c_adw_squeezer_get_transition_type; ///
+private alias c_adw_squeezer_get_visible_childFn = extern(C) GtkWidget* function(AdwSqueezer* self) nothrow;
+__gshared c_adw_squeezer_get_visible_childFn c_adw_squeezer_get_visible_child; ///
+private alias c_adw_squeezer_get_xalignFn = extern(C) float function(AdwSqueezer* self) nothrow;
+__gshared c_adw_squeezer_get_xalignFn c_adw_squeezer_get_xalign; ///
+private alias c_adw_squeezer_get_yalignFn = extern(C) float function(AdwSqueezer* self) nothrow;
+__gshared c_adw_squeezer_get_yalignFn c_adw_squeezer_get_yalign; ///
+private alias c_adw_squeezer_removeFn = extern(C) void function(AdwSqueezer* self, GtkWidget* child) nothrow;
+__gshared c_adw_squeezer_removeFn c_adw_squeezer_remove; ///
+private alias c_adw_squeezer_set_allow_noneFn = extern(C) void function(AdwSqueezer* self, gboolean allowNone) nothrow;
+__gshared c_adw_squeezer_set_allow_noneFn c_adw_squeezer_set_allow_none; ///
+private alias c_adw_squeezer_set_homogeneousFn = extern(C) void function(AdwSqueezer* self, gboolean homogeneous) nothrow;
+__gshared c_adw_squeezer_set_homogeneousFn c_adw_squeezer_set_homogeneous; ///
+private alias c_adw_squeezer_set_interpolate_sizeFn = extern(C) void function(AdwSqueezer* self, gboolean interpolateSize) nothrow;
+__gshared c_adw_squeezer_set_interpolate_sizeFn c_adw_squeezer_set_interpolate_size; ///
+private alias c_adw_squeezer_set_switch_threshold_policyFn = extern(C) void function(AdwSqueezer* self, AdwFoldThresholdPolicy policy) nothrow;
+__gshared c_adw_squeezer_set_switch_threshold_policyFn c_adw_squeezer_set_switch_threshold_policy; ///
+private alias c_adw_squeezer_set_transition_durationFn = extern(C) void function(AdwSqueezer* self, uint duration) nothrow;
+__gshared c_adw_squeezer_set_transition_durationFn c_adw_squeezer_set_transition_duration; ///
+private alias c_adw_squeezer_set_transition_typeFn = extern(C) void function(AdwSqueezer* self, AdwSqueezerTransitionType transition) nothrow;
+__gshared c_adw_squeezer_set_transition_typeFn c_adw_squeezer_set_transition_type; ///
+private alias c_adw_squeezer_set_xalignFn = extern(C) void function(AdwSqueezer* self, float xalign) nothrow;
+__gshared c_adw_squeezer_set_xalignFn c_adw_squeezer_set_xalign; ///
+private alias c_adw_squeezer_set_yalignFn = extern(C) void function(AdwSqueezer* self, float yalign) nothrow;
+__gshared c_adw_squeezer_set_yalignFn c_adw_squeezer_set_yalign; ///
+
+// SqueezerPage
+private alias c_adw_squeezer_page_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_squeezer_page_get_typeFn c_adw_squeezer_page_get_type; ///
+private alias c_adw_squeezer_page_get_childFn = extern(C) GtkWidget* function(AdwSqueezerPage* self) nothrow;
+__gshared c_adw_squeezer_page_get_childFn c_adw_squeezer_page_get_child; ///
+private alias c_adw_squeezer_page_get_enabledFn = extern(C) gboolean function(AdwSqueezerPage* self) nothrow;
+__gshared c_adw_squeezer_page_get_enabledFn c_adw_squeezer_page_get_enabled; ///
+private alias c_adw_squeezer_page_set_enabledFn = extern(C) void function(AdwSqueezerPage* self, gboolean enabled) nothrow;
+__gshared c_adw_squeezer_page_set_enabledFn c_adw_squeezer_page_set_enabled; ///
+
+// StatusPage
+private alias c_adw_status_page_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_status_page_get_typeFn c_adw_status_page_get_type; ///
+private alias c_adw_status_page_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_status_page_newFn c_adw_status_page_new; ///
+private alias c_adw_status_page_get_childFn = extern(C) GtkWidget* function(AdwStatusPage* self) nothrow;
+__gshared c_adw_status_page_get_childFn c_adw_status_page_get_child; ///
+private alias c_adw_status_page_get_descriptionFn = extern(C) const(char)* function(AdwStatusPage* self) nothrow;
+__gshared c_adw_status_page_get_descriptionFn c_adw_status_page_get_description; ///
+private alias c_adw_status_page_get_icon_nameFn = extern(C) const(char)* function(AdwStatusPage* self) nothrow;
+__gshared c_adw_status_page_get_icon_nameFn c_adw_status_page_get_icon_name; ///
+private alias c_adw_status_page_get_paintableFn = extern(C) GdkPaintable* function(AdwStatusPage* self) nothrow;
+__gshared c_adw_status_page_get_paintableFn c_adw_status_page_get_paintable; ///
+private alias c_adw_status_page_get_titleFn = extern(C) const(char)* function(AdwStatusPage* self) nothrow;
+__gshared c_adw_status_page_get_titleFn c_adw_status_page_get_title; ///
+private alias c_adw_status_page_set_childFn = extern(C) void function(AdwStatusPage* self, GtkWidget* child) nothrow;
+__gshared c_adw_status_page_set_childFn c_adw_status_page_set_child; ///
+private alias c_adw_status_page_set_descriptionFn = extern(C) void function(AdwStatusPage* self, const(char)* description) nothrow;
+__gshared c_adw_status_page_set_descriptionFn c_adw_status_page_set_description; ///
+private alias c_adw_status_page_set_icon_nameFn = extern(C) void function(AdwStatusPage* self, const(char)* iconName) nothrow;
+__gshared c_adw_status_page_set_icon_nameFn c_adw_status_page_set_icon_name; ///
+private alias c_adw_status_page_set_paintableFn = extern(C) void function(AdwStatusPage* self, GdkPaintable* paintable) nothrow;
+__gshared c_adw_status_page_set_paintableFn c_adw_status_page_set_paintable; ///
+private alias c_adw_status_page_set_titleFn = extern(C) void function(AdwStatusPage* self, const(char)* title) nothrow;
+__gshared c_adw_status_page_set_titleFn c_adw_status_page_set_title; ///
+
+// StyleManager
+private alias c_adw_style_manager_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_style_manager_get_typeFn c_adw_style_manager_get_type; ///
+private alias c_adw_style_manager_get_defaultFn = extern(C) AdwStyleManager* function() nothrow;
+__gshared c_adw_style_manager_get_defaultFn c_adw_style_manager_get_default; ///
+private alias c_adw_style_manager_get_for_displayFn = extern(C) AdwStyleManager* function(GdkDisplay* display) nothrow;
+__gshared c_adw_style_manager_get_for_displayFn c_adw_style_manager_get_for_display; ///
+private alias c_adw_style_manager_get_accent_colorFn = extern(C) AdwAccentColor function(AdwStyleManager* self) nothrow;
+__gshared c_adw_style_manager_get_accent_colorFn c_adw_style_manager_get_accent_color; ///
+private alias c_adw_style_manager_get_accent_color_rgbaFn = extern(C) GdkRGBA* function(AdwStyleManager* self) nothrow;
+__gshared c_adw_style_manager_get_accent_color_rgbaFn c_adw_style_manager_get_accent_color_rgba; ///
+private alias c_adw_style_manager_get_color_schemeFn = extern(C) AdwColorScheme function(AdwStyleManager* self) nothrow;
+__gshared c_adw_style_manager_get_color_schemeFn c_adw_style_manager_get_color_scheme; ///
+private alias c_adw_style_manager_get_darkFn = extern(C) gboolean function(AdwStyleManager* self) nothrow;
+__gshared c_adw_style_manager_get_darkFn c_adw_style_manager_get_dark; ///
+private alias c_adw_style_manager_get_displayFn = extern(C) GdkDisplay* function(AdwStyleManager* self) nothrow;
+__gshared c_adw_style_manager_get_displayFn c_adw_style_manager_get_display; ///
+private alias c_adw_style_manager_get_document_font_nameFn = extern(C) const(char)* function(AdwStyleManager* self) nothrow;
+__gshared c_adw_style_manager_get_document_font_nameFn c_adw_style_manager_get_document_font_name; ///
+private alias c_adw_style_manager_get_high_contrastFn = extern(C) gboolean function(AdwStyleManager* self) nothrow;
+__gshared c_adw_style_manager_get_high_contrastFn c_adw_style_manager_get_high_contrast; ///
+private alias c_adw_style_manager_get_monospace_font_nameFn = extern(C) const(char)* function(AdwStyleManager* self) nothrow;
+__gshared c_adw_style_manager_get_monospace_font_nameFn c_adw_style_manager_get_monospace_font_name; ///
+private alias c_adw_style_manager_get_system_supports_accent_colorsFn = extern(C) gboolean function(AdwStyleManager* self) nothrow;
+__gshared c_adw_style_manager_get_system_supports_accent_colorsFn c_adw_style_manager_get_system_supports_accent_colors; ///
+private alias c_adw_style_manager_get_system_supports_color_schemesFn = extern(C) gboolean function(AdwStyleManager* self) nothrow;
+__gshared c_adw_style_manager_get_system_supports_color_schemesFn c_adw_style_manager_get_system_supports_color_schemes; ///
+private alias c_adw_style_manager_set_color_schemeFn = extern(C) void function(AdwStyleManager* self, AdwColorScheme colorScheme) nothrow;
+__gshared c_adw_style_manager_set_color_schemeFn c_adw_style_manager_set_color_scheme; ///
+
+// SwipeTracker
+private alias c_adw_swipe_tracker_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_swipe_tracker_get_typeFn c_adw_swipe_tracker_get_type; ///
+private alias c_adw_swipe_tracker_newFn = extern(C) AdwSwipeTracker* function(AdwSwipeable* swipeable) nothrow;
+__gshared c_adw_swipe_tracker_newFn c_adw_swipe_tracker_new; ///
+private alias c_adw_swipe_tracker_get_allow_long_swipesFn = extern(C) gboolean function(AdwSwipeTracker* self) nothrow;
+__gshared c_adw_swipe_tracker_get_allow_long_swipesFn c_adw_swipe_tracker_get_allow_long_swipes; ///
+private alias c_adw_swipe_tracker_get_allow_mouse_dragFn = extern(C) gboolean function(AdwSwipeTracker* self) nothrow;
+__gshared c_adw_swipe_tracker_get_allow_mouse_dragFn c_adw_swipe_tracker_get_allow_mouse_drag; ///
+private alias c_adw_swipe_tracker_get_allow_window_handleFn = extern(C) gboolean function(AdwSwipeTracker* self) nothrow;
+__gshared c_adw_swipe_tracker_get_allow_window_handleFn c_adw_swipe_tracker_get_allow_window_handle; ///
+private alias c_adw_swipe_tracker_get_enabledFn = extern(C) gboolean function(AdwSwipeTracker* self) nothrow;
+__gshared c_adw_swipe_tracker_get_enabledFn c_adw_swipe_tracker_get_enabled; ///
+private alias c_adw_swipe_tracker_get_lower_overshootFn = extern(C) gboolean function(AdwSwipeTracker* self) nothrow;
+__gshared c_adw_swipe_tracker_get_lower_overshootFn c_adw_swipe_tracker_get_lower_overshoot; ///
+private alias c_adw_swipe_tracker_get_reversedFn = extern(C) gboolean function(AdwSwipeTracker* self) nothrow;
+__gshared c_adw_swipe_tracker_get_reversedFn c_adw_swipe_tracker_get_reversed; ///
+private alias c_adw_swipe_tracker_get_swipeableFn = extern(C) AdwSwipeable* function(AdwSwipeTracker* self) nothrow;
+__gshared c_adw_swipe_tracker_get_swipeableFn c_adw_swipe_tracker_get_swipeable; ///
+private alias c_adw_swipe_tracker_get_upper_overshootFn = extern(C) gboolean function(AdwSwipeTracker* self) nothrow;
+__gshared c_adw_swipe_tracker_get_upper_overshootFn c_adw_swipe_tracker_get_upper_overshoot; ///
+private alias c_adw_swipe_tracker_set_allow_long_swipesFn = extern(C) void function(AdwSwipeTracker* self, gboolean allowLongSwipes) nothrow;
+__gshared c_adw_swipe_tracker_set_allow_long_swipesFn c_adw_swipe_tracker_set_allow_long_swipes; ///
+private alias c_adw_swipe_tracker_set_allow_mouse_dragFn = extern(C) void function(AdwSwipeTracker* self, gboolean allowMouseDrag) nothrow;
+__gshared c_adw_swipe_tracker_set_allow_mouse_dragFn c_adw_swipe_tracker_set_allow_mouse_drag; ///
+private alias c_adw_swipe_tracker_set_allow_window_handleFn = extern(C) void function(AdwSwipeTracker* self, gboolean allowWindowHandle) nothrow;
+__gshared c_adw_swipe_tracker_set_allow_window_handleFn c_adw_swipe_tracker_set_allow_window_handle; ///
+private alias c_adw_swipe_tracker_set_enabledFn = extern(C) void function(AdwSwipeTracker* self, gboolean enabled) nothrow;
+__gshared c_adw_swipe_tracker_set_enabledFn c_adw_swipe_tracker_set_enabled; ///
+private alias c_adw_swipe_tracker_set_lower_overshootFn = extern(C) void function(AdwSwipeTracker* self, gboolean overshoot) nothrow;
+__gshared c_adw_swipe_tracker_set_lower_overshootFn c_adw_swipe_tracker_set_lower_overshoot; ///
+private alias c_adw_swipe_tracker_set_reversedFn = extern(C) void function(AdwSwipeTracker* self, gboolean reversed) nothrow;
+__gshared c_adw_swipe_tracker_set_reversedFn c_adw_swipe_tracker_set_reversed; ///
+private alias c_adw_swipe_tracker_set_upper_overshootFn = extern(C) void function(AdwSwipeTracker* self, gboolean overshoot) nothrow;
+__gshared c_adw_swipe_tracker_set_upper_overshootFn c_adw_swipe_tracker_set_upper_overshoot; ///
+private alias c_adw_swipe_tracker_shift_positionFn = extern(C) void function(AdwSwipeTracker* self, double delta) nothrow;
+__gshared c_adw_swipe_tracker_shift_positionFn c_adw_swipe_tracker_shift_position; ///
+
+// Swipeable
+private alias c_adw_swipeable_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_swipeable_get_typeFn c_adw_swipeable_get_type; ///
+private alias c_adw_swipeable_get_cancel_progressFn = extern(C) double function(AdwSwipeable* self) nothrow;
+__gshared c_adw_swipeable_get_cancel_progressFn c_adw_swipeable_get_cancel_progress; ///
+private alias c_adw_swipeable_get_distanceFn = extern(C) double function(AdwSwipeable* self) nothrow;
+__gshared c_adw_swipeable_get_distanceFn c_adw_swipeable_get_distance; ///
+private alias c_adw_swipeable_get_progressFn = extern(C) double function(AdwSwipeable* self) nothrow;
+__gshared c_adw_swipeable_get_progressFn c_adw_swipeable_get_progress; ///
+private alias c_adw_swipeable_get_snap_pointsFn = extern(C) double* function(AdwSwipeable* self, int* nSnapPoints) nothrow;
+__gshared c_adw_swipeable_get_snap_pointsFn c_adw_swipeable_get_snap_points; ///
+private alias c_adw_swipeable_get_swipe_areaFn = extern(C) void function(AdwSwipeable* self, AdwNavigationDirection navigationDirection, gboolean isDrag, GdkRectangle* rect) nothrow;
+__gshared c_adw_swipeable_get_swipe_areaFn c_adw_swipeable_get_swipe_area; ///
+
+// SwitchRow
+private alias c_adw_switch_row_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_switch_row_get_typeFn c_adw_switch_row_get_type; ///
+private alias c_adw_switch_row_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_switch_row_newFn c_adw_switch_row_new; ///
+private alias c_adw_switch_row_get_activeFn = extern(C) gboolean function(AdwSwitchRow* self) nothrow;
+__gshared c_adw_switch_row_get_activeFn c_adw_switch_row_get_active; ///
+private alias c_adw_switch_row_set_activeFn = extern(C) void function(AdwSwitchRow* self, gboolean isActive) nothrow;
+__gshared c_adw_switch_row_set_activeFn c_adw_switch_row_set_active; ///
+
+// TabBar
+private alias c_adw_tab_bar_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_tab_bar_get_typeFn c_adw_tab_bar_get_type; ///
+private alias c_adw_tab_bar_newFn = extern(C) AdwTabBar* function() nothrow;
+__gshared c_adw_tab_bar_newFn c_adw_tab_bar_new; ///
+private alias c_adw_tab_bar_get_autohideFn = extern(C) gboolean function(AdwTabBar* self) nothrow;
+__gshared c_adw_tab_bar_get_autohideFn c_adw_tab_bar_get_autohide; ///
+private alias c_adw_tab_bar_get_end_action_widgetFn = extern(C) GtkWidget* function(AdwTabBar* self) nothrow;
+__gshared c_adw_tab_bar_get_end_action_widgetFn c_adw_tab_bar_get_end_action_widget; ///
+private alias c_adw_tab_bar_get_expand_tabsFn = extern(C) gboolean function(AdwTabBar* self) nothrow;
+__gshared c_adw_tab_bar_get_expand_tabsFn c_adw_tab_bar_get_expand_tabs; ///
+private alias c_adw_tab_bar_get_extra_drag_preferred_actionFn = extern(C) GdkDragAction function(AdwTabBar* self) nothrow;
+__gshared c_adw_tab_bar_get_extra_drag_preferred_actionFn c_adw_tab_bar_get_extra_drag_preferred_action; ///
+private alias c_adw_tab_bar_get_extra_drag_preloadFn = extern(C) gboolean function(AdwTabBar* self) nothrow;
+__gshared c_adw_tab_bar_get_extra_drag_preloadFn c_adw_tab_bar_get_extra_drag_preload; ///
+private alias c_adw_tab_bar_get_invertedFn = extern(C) gboolean function(AdwTabBar* self) nothrow;
+__gshared c_adw_tab_bar_get_invertedFn c_adw_tab_bar_get_inverted; ///
+private alias c_adw_tab_bar_get_is_overflowingFn = extern(C) gboolean function(AdwTabBar* self) nothrow;
+__gshared c_adw_tab_bar_get_is_overflowingFn c_adw_tab_bar_get_is_overflowing; ///
+private alias c_adw_tab_bar_get_start_action_widgetFn = extern(C) GtkWidget* function(AdwTabBar* self) nothrow;
+__gshared c_adw_tab_bar_get_start_action_widgetFn c_adw_tab_bar_get_start_action_widget; ///
+private alias c_adw_tab_bar_get_tabs_revealedFn = extern(C) gboolean function(AdwTabBar* self) nothrow;
+__gshared c_adw_tab_bar_get_tabs_revealedFn c_adw_tab_bar_get_tabs_revealed; ///
+private alias c_adw_tab_bar_get_viewFn = extern(C) AdwTabView* function(AdwTabBar* self) nothrow;
+__gshared c_adw_tab_bar_get_viewFn c_adw_tab_bar_get_view; ///
+private alias c_adw_tab_bar_set_autohideFn = extern(C) void function(AdwTabBar* self, gboolean autohide) nothrow;
+__gshared c_adw_tab_bar_set_autohideFn c_adw_tab_bar_set_autohide; ///
+private alias c_adw_tab_bar_set_end_action_widgetFn = extern(C) void function(AdwTabBar* self, GtkWidget* widget) nothrow;
+__gshared c_adw_tab_bar_set_end_action_widgetFn c_adw_tab_bar_set_end_action_widget; ///
+private alias c_adw_tab_bar_set_expand_tabsFn = extern(C) void function(AdwTabBar* self, gboolean expandTabs) nothrow;
+__gshared c_adw_tab_bar_set_expand_tabsFn c_adw_tab_bar_set_expand_tabs; ///
+private alias c_adw_tab_bar_set_extra_drag_preloadFn = extern(C) void function(AdwTabBar* self, gboolean preload) nothrow;
+__gshared c_adw_tab_bar_set_extra_drag_preloadFn c_adw_tab_bar_set_extra_drag_preload; ///
+private alias c_adw_tab_bar_set_invertedFn = extern(C) void function(AdwTabBar* self, gboolean inverted) nothrow;
+__gshared c_adw_tab_bar_set_invertedFn c_adw_tab_bar_set_inverted; ///
+private alias c_adw_tab_bar_set_start_action_widgetFn = extern(C) void function(AdwTabBar* self, GtkWidget* widget) nothrow;
+__gshared c_adw_tab_bar_set_start_action_widgetFn c_adw_tab_bar_set_start_action_widget; ///
+private alias c_adw_tab_bar_set_viewFn = extern(C) void function(AdwTabBar* self, AdwTabView* view) nothrow;
+__gshared c_adw_tab_bar_set_viewFn c_adw_tab_bar_set_view; ///
+private alias c_adw_tab_bar_setup_extra_drop_targetFn = extern(C) void function(AdwTabBar* self, GdkDragAction actions, GType* types, size_t nTypes) nothrow;
+__gshared c_adw_tab_bar_setup_extra_drop_targetFn c_adw_tab_bar_setup_extra_drop_target; ///
+
+// TabButton
+private alias c_adw_tab_button_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_tab_button_get_typeFn c_adw_tab_button_get_type; ///
+private alias c_adw_tab_button_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_tab_button_newFn c_adw_tab_button_new; ///
+private alias c_adw_tab_button_get_viewFn = extern(C) AdwTabView* function(AdwTabButton* self) nothrow;
+__gshared c_adw_tab_button_get_viewFn c_adw_tab_button_get_view; ///
+private alias c_adw_tab_button_set_viewFn = extern(C) void function(AdwTabButton* self, AdwTabView* view) nothrow;
+__gshared c_adw_tab_button_set_viewFn c_adw_tab_button_set_view; ///
+
+// TabOverview
+private alias c_adw_tab_overview_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_tab_overview_get_typeFn c_adw_tab_overview_get_type; ///
+private alias c_adw_tab_overview_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_tab_overview_newFn c_adw_tab_overview_new; ///
+private alias c_adw_tab_overview_get_childFn = extern(C) GtkWidget* function(AdwTabOverview* self) nothrow;
+__gshared c_adw_tab_overview_get_childFn c_adw_tab_overview_get_child; ///
+private alias c_adw_tab_overview_get_enable_new_tabFn = extern(C) gboolean function(AdwTabOverview* self) nothrow;
+__gshared c_adw_tab_overview_get_enable_new_tabFn c_adw_tab_overview_get_enable_new_tab; ///
+private alias c_adw_tab_overview_get_enable_searchFn = extern(C) gboolean function(AdwTabOverview* self) nothrow;
+__gshared c_adw_tab_overview_get_enable_searchFn c_adw_tab_overview_get_enable_search; ///
+private alias c_adw_tab_overview_get_extra_drag_preferred_actionFn = extern(C) GdkDragAction function(AdwTabOverview* self) nothrow;
+__gshared c_adw_tab_overview_get_extra_drag_preferred_actionFn c_adw_tab_overview_get_extra_drag_preferred_action; ///
+private alias c_adw_tab_overview_get_extra_drag_preloadFn = extern(C) gboolean function(AdwTabOverview* self) nothrow;
+__gshared c_adw_tab_overview_get_extra_drag_preloadFn c_adw_tab_overview_get_extra_drag_preload; ///
+private alias c_adw_tab_overview_get_invertedFn = extern(C) gboolean function(AdwTabOverview* self) nothrow;
+__gshared c_adw_tab_overview_get_invertedFn c_adw_tab_overview_get_inverted; ///
+private alias c_adw_tab_overview_get_openFn = extern(C) gboolean function(AdwTabOverview* self) nothrow;
+__gshared c_adw_tab_overview_get_openFn c_adw_tab_overview_get_open; ///
+private alias c_adw_tab_overview_get_search_activeFn = extern(C) gboolean function(AdwTabOverview* self) nothrow;
+__gshared c_adw_tab_overview_get_search_activeFn c_adw_tab_overview_get_search_active; ///
+private alias c_adw_tab_overview_get_secondary_menuFn = extern(C) GMenuModel* function(AdwTabOverview* self) nothrow;
+__gshared c_adw_tab_overview_get_secondary_menuFn c_adw_tab_overview_get_secondary_menu; ///
+private alias c_adw_tab_overview_get_show_end_title_buttonsFn = extern(C) gboolean function(AdwTabOverview* self) nothrow;
+__gshared c_adw_tab_overview_get_show_end_title_buttonsFn c_adw_tab_overview_get_show_end_title_buttons; ///
+private alias c_adw_tab_overview_get_show_start_title_buttonsFn = extern(C) gboolean function(AdwTabOverview* self) nothrow;
+__gshared c_adw_tab_overview_get_show_start_title_buttonsFn c_adw_tab_overview_get_show_start_title_buttons; ///
+private alias c_adw_tab_overview_get_viewFn = extern(C) AdwTabView* function(AdwTabOverview* self) nothrow;
+__gshared c_adw_tab_overview_get_viewFn c_adw_tab_overview_get_view; ///
+private alias c_adw_tab_overview_set_childFn = extern(C) void function(AdwTabOverview* self, GtkWidget* child) nothrow;
+__gshared c_adw_tab_overview_set_childFn c_adw_tab_overview_set_child; ///
+private alias c_adw_tab_overview_set_enable_new_tabFn = extern(C) void function(AdwTabOverview* self, gboolean enableNewTab) nothrow;
+__gshared c_adw_tab_overview_set_enable_new_tabFn c_adw_tab_overview_set_enable_new_tab; ///
+private alias c_adw_tab_overview_set_enable_searchFn = extern(C) void function(AdwTabOverview* self, gboolean enableSearch) nothrow;
+__gshared c_adw_tab_overview_set_enable_searchFn c_adw_tab_overview_set_enable_search; ///
+private alias c_adw_tab_overview_set_extra_drag_preloadFn = extern(C) void function(AdwTabOverview* self, gboolean preload) nothrow;
+__gshared c_adw_tab_overview_set_extra_drag_preloadFn c_adw_tab_overview_set_extra_drag_preload; ///
+private alias c_adw_tab_overview_set_invertedFn = extern(C) void function(AdwTabOverview* self, gboolean inverted) nothrow;
+__gshared c_adw_tab_overview_set_invertedFn c_adw_tab_overview_set_inverted; ///
+private alias c_adw_tab_overview_set_openFn = extern(C) void function(AdwTabOverview* self, gboolean open) nothrow;
+__gshared c_adw_tab_overview_set_openFn c_adw_tab_overview_set_open; ///
+private alias c_adw_tab_overview_set_secondary_menuFn = extern(C) void function(AdwTabOverview* self, GMenuModel* secondaryMenu) nothrow;
+__gshared c_adw_tab_overview_set_secondary_menuFn c_adw_tab_overview_set_secondary_menu; ///
+private alias c_adw_tab_overview_set_show_end_title_buttonsFn = extern(C) void function(AdwTabOverview* self, gboolean showEndTitleButtons) nothrow;
+__gshared c_adw_tab_overview_set_show_end_title_buttonsFn c_adw_tab_overview_set_show_end_title_buttons; ///
+private alias c_adw_tab_overview_set_show_start_title_buttonsFn = extern(C) void function(AdwTabOverview* self, gboolean showStartTitleButtons) nothrow;
+__gshared c_adw_tab_overview_set_show_start_title_buttonsFn c_adw_tab_overview_set_show_start_title_buttons; ///
+private alias c_adw_tab_overview_set_viewFn = extern(C) void function(AdwTabOverview* self, AdwTabView* view) nothrow;
+__gshared c_adw_tab_overview_set_viewFn c_adw_tab_overview_set_view; ///
+private alias c_adw_tab_overview_setup_extra_drop_targetFn = extern(C) void function(AdwTabOverview* self, GdkDragAction actions, GType* types, size_t nTypes) nothrow;
+__gshared c_adw_tab_overview_setup_extra_drop_targetFn c_adw_tab_overview_setup_extra_drop_target; ///
+
+// TabPage
+private alias c_adw_tab_page_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_tab_page_get_typeFn c_adw_tab_page_get_type; ///
+private alias c_adw_tab_page_get_childFn = extern(C) GtkWidget* function(AdwTabPage* self) nothrow;
+__gshared c_adw_tab_page_get_childFn c_adw_tab_page_get_child; ///
+private alias c_adw_tab_page_get_iconFn = extern(C) GIcon* function(AdwTabPage* self) nothrow;
+__gshared c_adw_tab_page_get_iconFn c_adw_tab_page_get_icon; ///
+private alias c_adw_tab_page_get_indicator_activatableFn = extern(C) gboolean function(AdwTabPage* self) nothrow;
+__gshared c_adw_tab_page_get_indicator_activatableFn c_adw_tab_page_get_indicator_activatable; ///
+private alias c_adw_tab_page_get_indicator_iconFn = extern(C) GIcon* function(AdwTabPage* self) nothrow;
+__gshared c_adw_tab_page_get_indicator_iconFn c_adw_tab_page_get_indicator_icon; ///
+private alias c_adw_tab_page_get_indicator_tooltipFn = extern(C) const(char)* function(AdwTabPage* self) nothrow;
+__gshared c_adw_tab_page_get_indicator_tooltipFn c_adw_tab_page_get_indicator_tooltip; ///
+private alias c_adw_tab_page_get_keywordFn = extern(C) const(char)* function(AdwTabPage* self) nothrow;
+__gshared c_adw_tab_page_get_keywordFn c_adw_tab_page_get_keyword; ///
+private alias c_adw_tab_page_get_live_thumbnailFn = extern(C) gboolean function(AdwTabPage* self) nothrow;
+__gshared c_adw_tab_page_get_live_thumbnailFn c_adw_tab_page_get_live_thumbnail; ///
+private alias c_adw_tab_page_get_loadingFn = extern(C) gboolean function(AdwTabPage* self) nothrow;
+__gshared c_adw_tab_page_get_loadingFn c_adw_tab_page_get_loading; ///
+private alias c_adw_tab_page_get_needs_attentionFn = extern(C) gboolean function(AdwTabPage* self) nothrow;
+__gshared c_adw_tab_page_get_needs_attentionFn c_adw_tab_page_get_needs_attention; ///
+private alias c_adw_tab_page_get_parentFn = extern(C) AdwTabPage* function(AdwTabPage* self) nothrow;
+__gshared c_adw_tab_page_get_parentFn c_adw_tab_page_get_parent; ///
+private alias c_adw_tab_page_get_pinnedFn = extern(C) gboolean function(AdwTabPage* self) nothrow;
+__gshared c_adw_tab_page_get_pinnedFn c_adw_tab_page_get_pinned; ///
+private alias c_adw_tab_page_get_selectedFn = extern(C) gboolean function(AdwTabPage* self) nothrow;
+__gshared c_adw_tab_page_get_selectedFn c_adw_tab_page_get_selected; ///
+private alias c_adw_tab_page_get_thumbnail_xalignFn = extern(C) float function(AdwTabPage* self) nothrow;
+__gshared c_adw_tab_page_get_thumbnail_xalignFn c_adw_tab_page_get_thumbnail_xalign; ///
+private alias c_adw_tab_page_get_thumbnail_yalignFn = extern(C) float function(AdwTabPage* self) nothrow;
+__gshared c_adw_tab_page_get_thumbnail_yalignFn c_adw_tab_page_get_thumbnail_yalign; ///
+private alias c_adw_tab_page_get_titleFn = extern(C) const(char)* function(AdwTabPage* self) nothrow;
+__gshared c_adw_tab_page_get_titleFn c_adw_tab_page_get_title; ///
+private alias c_adw_tab_page_get_tooltipFn = extern(C) const(char)* function(AdwTabPage* self) nothrow;
+__gshared c_adw_tab_page_get_tooltipFn c_adw_tab_page_get_tooltip; ///
+private alias c_adw_tab_page_invalidate_thumbnailFn = extern(C) void function(AdwTabPage* self) nothrow;
+__gshared c_adw_tab_page_invalidate_thumbnailFn c_adw_tab_page_invalidate_thumbnail; ///
+private alias c_adw_tab_page_set_iconFn = extern(C) void function(AdwTabPage* self, GIcon* icon) nothrow;
+__gshared c_adw_tab_page_set_iconFn c_adw_tab_page_set_icon; ///
+private alias c_adw_tab_page_set_indicator_activatableFn = extern(C) void function(AdwTabPage* self, gboolean activatable) nothrow;
+__gshared c_adw_tab_page_set_indicator_activatableFn c_adw_tab_page_set_indicator_activatable; ///
+private alias c_adw_tab_page_set_indicator_iconFn = extern(C) void function(AdwTabPage* self, GIcon* indicatorIcon) nothrow;
+__gshared c_adw_tab_page_set_indicator_iconFn c_adw_tab_page_set_indicator_icon; ///
+private alias c_adw_tab_page_set_indicator_tooltipFn = extern(C) void function(AdwTabPage* self, const(char)* tooltip) nothrow;
+__gshared c_adw_tab_page_set_indicator_tooltipFn c_adw_tab_page_set_indicator_tooltip; ///
+private alias c_adw_tab_page_set_keywordFn = extern(C) void function(AdwTabPage* self, const(char)* keyword) nothrow;
+__gshared c_adw_tab_page_set_keywordFn c_adw_tab_page_set_keyword; ///
+private alias c_adw_tab_page_set_live_thumbnailFn = extern(C) void function(AdwTabPage* self, gboolean liveThumbnail) nothrow;
+__gshared c_adw_tab_page_set_live_thumbnailFn c_adw_tab_page_set_live_thumbnail; ///
+private alias c_adw_tab_page_set_loadingFn = extern(C) void function(AdwTabPage* self, gboolean loading) nothrow;
+__gshared c_adw_tab_page_set_loadingFn c_adw_tab_page_set_loading; ///
+private alias c_adw_tab_page_set_needs_attentionFn = extern(C) void function(AdwTabPage* self, gboolean needsAttention) nothrow;
+__gshared c_adw_tab_page_set_needs_attentionFn c_adw_tab_page_set_needs_attention; ///
+private alias c_adw_tab_page_set_thumbnail_xalignFn = extern(C) void function(AdwTabPage* self, float xalign) nothrow;
+__gshared c_adw_tab_page_set_thumbnail_xalignFn c_adw_tab_page_set_thumbnail_xalign; ///
+private alias c_adw_tab_page_set_thumbnail_yalignFn = extern(C) void function(AdwTabPage* self, float yalign) nothrow;
+__gshared c_adw_tab_page_set_thumbnail_yalignFn c_adw_tab_page_set_thumbnail_yalign; ///
+private alias c_adw_tab_page_set_titleFn = extern(C) void function(AdwTabPage* self, const(char)* title) nothrow;
+__gshared c_adw_tab_page_set_titleFn c_adw_tab_page_set_title; ///
+private alias c_adw_tab_page_set_tooltipFn = extern(C) void function(AdwTabPage* self, const(char)* tooltip) nothrow;
+__gshared c_adw_tab_page_set_tooltipFn c_adw_tab_page_set_tooltip; ///
+
+// TabView
+private alias c_adw_tab_view_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_tab_view_get_typeFn c_adw_tab_view_get_type; ///
+private alias c_adw_tab_view_newFn = extern(C) AdwTabView* function() nothrow;
+__gshared c_adw_tab_view_newFn c_adw_tab_view_new; ///
+private alias c_adw_tab_view_add_pageFn = extern(C) AdwTabPage* function(AdwTabView* self, GtkWidget* child, AdwTabPage* parent) nothrow;
+__gshared c_adw_tab_view_add_pageFn c_adw_tab_view_add_page; ///
+private alias c_adw_tab_view_add_shortcutsFn = extern(C) void function(AdwTabView* self, AdwTabViewShortcuts shortcuts) nothrow;
+__gshared c_adw_tab_view_add_shortcutsFn c_adw_tab_view_add_shortcuts; ///
+private alias c_adw_tab_view_appendFn = extern(C) AdwTabPage* function(AdwTabView* self, GtkWidget* child) nothrow;
+__gshared c_adw_tab_view_appendFn c_adw_tab_view_append; ///
+private alias c_adw_tab_view_append_pinnedFn = extern(C) AdwTabPage* function(AdwTabView* self, GtkWidget* child) nothrow;
+__gshared c_adw_tab_view_append_pinnedFn c_adw_tab_view_append_pinned; ///
+private alias c_adw_tab_view_close_other_pagesFn = extern(C) void function(AdwTabView* self, AdwTabPage* page) nothrow;
+__gshared c_adw_tab_view_close_other_pagesFn c_adw_tab_view_close_other_pages; ///
+private alias c_adw_tab_view_close_pageFn = extern(C) void function(AdwTabView* self, AdwTabPage* page) nothrow;
+__gshared c_adw_tab_view_close_pageFn c_adw_tab_view_close_page; ///
+private alias c_adw_tab_view_close_page_finishFn = extern(C) void function(AdwTabView* self, AdwTabPage* page, gboolean confirm) nothrow;
+__gshared c_adw_tab_view_close_page_finishFn c_adw_tab_view_close_page_finish; ///
+private alias c_adw_tab_view_close_pages_afterFn = extern(C) void function(AdwTabView* self, AdwTabPage* page) nothrow;
+__gshared c_adw_tab_view_close_pages_afterFn c_adw_tab_view_close_pages_after; ///
+private alias c_adw_tab_view_close_pages_beforeFn = extern(C) void function(AdwTabView* self, AdwTabPage* page) nothrow;
+__gshared c_adw_tab_view_close_pages_beforeFn c_adw_tab_view_close_pages_before; ///
+private alias c_adw_tab_view_get_default_iconFn = extern(C) GIcon* function(AdwTabView* self) nothrow;
+__gshared c_adw_tab_view_get_default_iconFn c_adw_tab_view_get_default_icon; ///
+private alias c_adw_tab_view_get_is_transferring_pageFn = extern(C) gboolean function(AdwTabView* self) nothrow;
+__gshared c_adw_tab_view_get_is_transferring_pageFn c_adw_tab_view_get_is_transferring_page; ///
+private alias c_adw_tab_view_get_menu_modelFn = extern(C) GMenuModel* function(AdwTabView* self) nothrow;
+__gshared c_adw_tab_view_get_menu_modelFn c_adw_tab_view_get_menu_model; ///
+private alias c_adw_tab_view_get_n_pagesFn = extern(C) int function(AdwTabView* self) nothrow;
+__gshared c_adw_tab_view_get_n_pagesFn c_adw_tab_view_get_n_pages; ///
+private alias c_adw_tab_view_get_n_pinned_pagesFn = extern(C) int function(AdwTabView* self) nothrow;
+__gshared c_adw_tab_view_get_n_pinned_pagesFn c_adw_tab_view_get_n_pinned_pages; ///
+private alias c_adw_tab_view_get_nth_pageFn = extern(C) AdwTabPage* function(AdwTabView* self, int position) nothrow;
+__gshared c_adw_tab_view_get_nth_pageFn c_adw_tab_view_get_nth_page; ///
+private alias c_adw_tab_view_get_pageFn = extern(C) AdwTabPage* function(AdwTabView* self, GtkWidget* child) nothrow;
+__gshared c_adw_tab_view_get_pageFn c_adw_tab_view_get_page; ///
+private alias c_adw_tab_view_get_page_positionFn = extern(C) int function(AdwTabView* self, AdwTabPage* page) nothrow;
+__gshared c_adw_tab_view_get_page_positionFn c_adw_tab_view_get_page_position; ///
+private alias c_adw_tab_view_get_pagesFn = extern(C) GtkSelectionModel* function(AdwTabView* self) nothrow;
+__gshared c_adw_tab_view_get_pagesFn c_adw_tab_view_get_pages; ///
+private alias c_adw_tab_view_get_selected_pageFn = extern(C) AdwTabPage* function(AdwTabView* self) nothrow;
+__gshared c_adw_tab_view_get_selected_pageFn c_adw_tab_view_get_selected_page; ///
+private alias c_adw_tab_view_get_shortcutsFn = extern(C) AdwTabViewShortcuts function(AdwTabView* self) nothrow;
+__gshared c_adw_tab_view_get_shortcutsFn c_adw_tab_view_get_shortcuts; ///
+private alias c_adw_tab_view_insertFn = extern(C) AdwTabPage* function(AdwTabView* self, GtkWidget* child, int position) nothrow;
+__gshared c_adw_tab_view_insertFn c_adw_tab_view_insert; ///
+private alias c_adw_tab_view_insert_pinnedFn = extern(C) AdwTabPage* function(AdwTabView* self, GtkWidget* child, int position) nothrow;
+__gshared c_adw_tab_view_insert_pinnedFn c_adw_tab_view_insert_pinned; ///
+private alias c_adw_tab_view_invalidate_thumbnailsFn = extern(C) void function(AdwTabView* self) nothrow;
+__gshared c_adw_tab_view_invalidate_thumbnailsFn c_adw_tab_view_invalidate_thumbnails; ///
+private alias c_adw_tab_view_prependFn = extern(C) AdwTabPage* function(AdwTabView* self, GtkWidget* child) nothrow;
+__gshared c_adw_tab_view_prependFn c_adw_tab_view_prepend; ///
+private alias c_adw_tab_view_prepend_pinnedFn = extern(C) AdwTabPage* function(AdwTabView* self, GtkWidget* child) nothrow;
+__gshared c_adw_tab_view_prepend_pinnedFn c_adw_tab_view_prepend_pinned; ///
+private alias c_adw_tab_view_remove_shortcutsFn = extern(C) void function(AdwTabView* self, AdwTabViewShortcuts shortcuts) nothrow;
+__gshared c_adw_tab_view_remove_shortcutsFn c_adw_tab_view_remove_shortcuts; ///
+private alias c_adw_tab_view_reorder_backwardFn = extern(C) gboolean function(AdwTabView* self, AdwTabPage* page) nothrow;
+__gshared c_adw_tab_view_reorder_backwardFn c_adw_tab_view_reorder_backward; ///
+private alias c_adw_tab_view_reorder_firstFn = extern(C) gboolean function(AdwTabView* self, AdwTabPage* page) nothrow;
+__gshared c_adw_tab_view_reorder_firstFn c_adw_tab_view_reorder_first; ///
+private alias c_adw_tab_view_reorder_forwardFn = extern(C) gboolean function(AdwTabView* self, AdwTabPage* page) nothrow;
+__gshared c_adw_tab_view_reorder_forwardFn c_adw_tab_view_reorder_forward; ///
+private alias c_adw_tab_view_reorder_lastFn = extern(C) gboolean function(AdwTabView* self, AdwTabPage* page) nothrow;
+__gshared c_adw_tab_view_reorder_lastFn c_adw_tab_view_reorder_last; ///
+private alias c_adw_tab_view_reorder_pageFn = extern(C) gboolean function(AdwTabView* self, AdwTabPage* page, int position) nothrow;
+__gshared c_adw_tab_view_reorder_pageFn c_adw_tab_view_reorder_page; ///
+private alias c_adw_tab_view_select_next_pageFn = extern(C) gboolean function(AdwTabView* self) nothrow;
+__gshared c_adw_tab_view_select_next_pageFn c_adw_tab_view_select_next_page; ///
+private alias c_adw_tab_view_select_previous_pageFn = extern(C) gboolean function(AdwTabView* self) nothrow;
+__gshared c_adw_tab_view_select_previous_pageFn c_adw_tab_view_select_previous_page; ///
+private alias c_adw_tab_view_set_default_iconFn = extern(C) void function(AdwTabView* self, GIcon* defaultIcon) nothrow;
+__gshared c_adw_tab_view_set_default_iconFn c_adw_tab_view_set_default_icon; ///
+private alias c_adw_tab_view_set_menu_modelFn = extern(C) void function(AdwTabView* self, GMenuModel* menuModel) nothrow;
+__gshared c_adw_tab_view_set_menu_modelFn c_adw_tab_view_set_menu_model; ///
+private alias c_adw_tab_view_set_page_pinnedFn = extern(C) void function(AdwTabView* self, AdwTabPage* page, gboolean pinned) nothrow;
+__gshared c_adw_tab_view_set_page_pinnedFn c_adw_tab_view_set_page_pinned; ///
+private alias c_adw_tab_view_set_selected_pageFn = extern(C) void function(AdwTabView* self, AdwTabPage* selectedPage) nothrow;
+__gshared c_adw_tab_view_set_selected_pageFn c_adw_tab_view_set_selected_page; ///
+private alias c_adw_tab_view_set_shortcutsFn = extern(C) void function(AdwTabView* self, AdwTabViewShortcuts shortcuts) nothrow;
+__gshared c_adw_tab_view_set_shortcutsFn c_adw_tab_view_set_shortcuts; ///
+private alias c_adw_tab_view_transfer_pageFn = extern(C) void function(AdwTabView* self, AdwTabPage* page, AdwTabView* otherView, int position) nothrow;
+__gshared c_adw_tab_view_transfer_pageFn c_adw_tab_view_transfer_page; ///
+
+// TimedAnimation
+private alias c_adw_timed_animation_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_timed_animation_get_typeFn c_adw_timed_animation_get_type; ///
+private alias c_adw_timed_animation_newFn = extern(C) AdwAnimation* function(GtkWidget* widget, double from, double to, uint duration, AdwAnimationTarget* target) nothrow;
+__gshared c_adw_timed_animation_newFn c_adw_timed_animation_new; ///
+private alias c_adw_timed_animation_get_alternateFn = extern(C) gboolean function(AdwTimedAnimation* self) nothrow;
+__gshared c_adw_timed_animation_get_alternateFn c_adw_timed_animation_get_alternate; ///
+private alias c_adw_timed_animation_get_durationFn = extern(C) uint function(AdwTimedAnimation* self) nothrow;
+__gshared c_adw_timed_animation_get_durationFn c_adw_timed_animation_get_duration; ///
+private alias c_adw_timed_animation_get_easingFn = extern(C) AdwEasing function(AdwTimedAnimation* self) nothrow;
+__gshared c_adw_timed_animation_get_easingFn c_adw_timed_animation_get_easing; ///
+private alias c_adw_timed_animation_get_repeat_countFn = extern(C) uint function(AdwTimedAnimation* self) nothrow;
+__gshared c_adw_timed_animation_get_repeat_countFn c_adw_timed_animation_get_repeat_count; ///
+private alias c_adw_timed_animation_get_reverseFn = extern(C) gboolean function(AdwTimedAnimation* self) nothrow;
+__gshared c_adw_timed_animation_get_reverseFn c_adw_timed_animation_get_reverse; ///
+private alias c_adw_timed_animation_get_value_fromFn = extern(C) double function(AdwTimedAnimation* self) nothrow;
+__gshared c_adw_timed_animation_get_value_fromFn c_adw_timed_animation_get_value_from; ///
+private alias c_adw_timed_animation_get_value_toFn = extern(C) double function(AdwTimedAnimation* self) nothrow;
+__gshared c_adw_timed_animation_get_value_toFn c_adw_timed_animation_get_value_to; ///
+private alias c_adw_timed_animation_set_alternateFn = extern(C) void function(AdwTimedAnimation* self, gboolean alternate) nothrow;
+__gshared c_adw_timed_animation_set_alternateFn c_adw_timed_animation_set_alternate; ///
+private alias c_adw_timed_animation_set_durationFn = extern(C) void function(AdwTimedAnimation* self, uint duration) nothrow;
+__gshared c_adw_timed_animation_set_durationFn c_adw_timed_animation_set_duration; ///
+private alias c_adw_timed_animation_set_easingFn = extern(C) void function(AdwTimedAnimation* self, AdwEasing easing) nothrow;
+__gshared c_adw_timed_animation_set_easingFn c_adw_timed_animation_set_easing; ///
+private alias c_adw_timed_animation_set_repeat_countFn = extern(C) void function(AdwTimedAnimation* self, uint repeatCount) nothrow;
+__gshared c_adw_timed_animation_set_repeat_countFn c_adw_timed_animation_set_repeat_count; ///
+private alias c_adw_timed_animation_set_reverseFn = extern(C) void function(AdwTimedAnimation* self, gboolean reverse) nothrow;
+__gshared c_adw_timed_animation_set_reverseFn c_adw_timed_animation_set_reverse; ///
+private alias c_adw_timed_animation_set_value_fromFn = extern(C) void function(AdwTimedAnimation* self, double value) nothrow;
+__gshared c_adw_timed_animation_set_value_fromFn c_adw_timed_animation_set_value_from; ///
+private alias c_adw_timed_animation_set_value_toFn = extern(C) void function(AdwTimedAnimation* self, double value) nothrow;
+__gshared c_adw_timed_animation_set_value_toFn c_adw_timed_animation_set_value_to; ///
+
+// Toast
+private alias c_adw_toast_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_toast_get_typeFn c_adw_toast_get_type; ///
+private alias c_adw_toast_newFn = extern(C) AdwToast* function(const(char)* title) nothrow;
+__gshared c_adw_toast_newFn c_adw_toast_new; ///
+private alias c_adw_toast_new_formatFn = extern(C) AdwToast* function(const(char)* format,  ...) nothrow;
+__gshared c_adw_toast_new_formatFn c_adw_toast_new_format; ///
+private alias c_adw_toast_dismissFn = extern(C) void function(AdwToast* self) nothrow;
+__gshared c_adw_toast_dismissFn c_adw_toast_dismiss; ///
+private alias c_adw_toast_get_action_nameFn = extern(C) const(char)* function(AdwToast* self) nothrow;
+__gshared c_adw_toast_get_action_nameFn c_adw_toast_get_action_name; ///
+private alias c_adw_toast_get_action_target_valueFn = extern(C) GVariant* function(AdwToast* self) nothrow;
+__gshared c_adw_toast_get_action_target_valueFn c_adw_toast_get_action_target_value; ///
+private alias c_adw_toast_get_button_labelFn = extern(C) const(char)* function(AdwToast* self) nothrow;
+__gshared c_adw_toast_get_button_labelFn c_adw_toast_get_button_label; ///
+private alias c_adw_toast_get_custom_titleFn = extern(C) GtkWidget* function(AdwToast* self) nothrow;
+__gshared c_adw_toast_get_custom_titleFn c_adw_toast_get_custom_title; ///
+private alias c_adw_toast_get_priorityFn = extern(C) AdwToastPriority function(AdwToast* self) nothrow;
+__gshared c_adw_toast_get_priorityFn c_adw_toast_get_priority; ///
+private alias c_adw_toast_get_timeoutFn = extern(C) uint function(AdwToast* self) nothrow;
+__gshared c_adw_toast_get_timeoutFn c_adw_toast_get_timeout; ///
+private alias c_adw_toast_get_titleFn = extern(C) const(char)* function(AdwToast* self) nothrow;
+__gshared c_adw_toast_get_titleFn c_adw_toast_get_title; ///
+private alias c_adw_toast_get_use_markupFn = extern(C) gboolean function(AdwToast* self) nothrow;
+__gshared c_adw_toast_get_use_markupFn c_adw_toast_get_use_markup; ///
+private alias c_adw_toast_set_action_nameFn = extern(C) void function(AdwToast* self, const(char)* actionName) nothrow;
+__gshared c_adw_toast_set_action_nameFn c_adw_toast_set_action_name; ///
+private alias c_adw_toast_set_action_targetFn = extern(C) void function(AdwToast* self, const(char)* formatString,  ...) nothrow;
+__gshared c_adw_toast_set_action_targetFn c_adw_toast_set_action_target; ///
+private alias c_adw_toast_set_action_target_valueFn = extern(C) void function(AdwToast* self, GVariant* actionTarget) nothrow;
+__gshared c_adw_toast_set_action_target_valueFn c_adw_toast_set_action_target_value; ///
+private alias c_adw_toast_set_button_labelFn = extern(C) void function(AdwToast* self, const(char)* buttonLabel) nothrow;
+__gshared c_adw_toast_set_button_labelFn c_adw_toast_set_button_label; ///
+private alias c_adw_toast_set_custom_titleFn = extern(C) void function(AdwToast* self, GtkWidget* widget) nothrow;
+__gshared c_adw_toast_set_custom_titleFn c_adw_toast_set_custom_title; ///
+private alias c_adw_toast_set_detailed_action_nameFn = extern(C) void function(AdwToast* self, const(char)* detailedActionName) nothrow;
+__gshared c_adw_toast_set_detailed_action_nameFn c_adw_toast_set_detailed_action_name; ///
+private alias c_adw_toast_set_priorityFn = extern(C) void function(AdwToast* self, AdwToastPriority priority) nothrow;
+__gshared c_adw_toast_set_priorityFn c_adw_toast_set_priority; ///
+private alias c_adw_toast_set_timeoutFn = extern(C) void function(AdwToast* self, uint timeout) nothrow;
+__gshared c_adw_toast_set_timeoutFn c_adw_toast_set_timeout; ///
+private alias c_adw_toast_set_titleFn = extern(C) void function(AdwToast* self, const(char)* title) nothrow;
+__gshared c_adw_toast_set_titleFn c_adw_toast_set_title; ///
+private alias c_adw_toast_set_use_markupFn = extern(C) void function(AdwToast* self, gboolean useMarkup) nothrow;
+__gshared c_adw_toast_set_use_markupFn c_adw_toast_set_use_markup; ///
+
+// ToastOverlay
+private alias c_adw_toast_overlay_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_toast_overlay_get_typeFn c_adw_toast_overlay_get_type; ///
+private alias c_adw_toast_overlay_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_toast_overlay_newFn c_adw_toast_overlay_new; ///
+private alias c_adw_toast_overlay_add_toastFn = extern(C) void function(AdwToastOverlay* self, AdwToast* toast) nothrow;
+__gshared c_adw_toast_overlay_add_toastFn c_adw_toast_overlay_add_toast; ///
+private alias c_adw_toast_overlay_dismiss_allFn = extern(C) void function(AdwToastOverlay* self) nothrow;
+__gshared c_adw_toast_overlay_dismiss_allFn c_adw_toast_overlay_dismiss_all; ///
+private alias c_adw_toast_overlay_get_childFn = extern(C) GtkWidget* function(AdwToastOverlay* self) nothrow;
+__gshared c_adw_toast_overlay_get_childFn c_adw_toast_overlay_get_child; ///
+private alias c_adw_toast_overlay_set_childFn = extern(C) void function(AdwToastOverlay* self, GtkWidget* child) nothrow;
+__gshared c_adw_toast_overlay_set_childFn c_adw_toast_overlay_set_child; ///
+
+// Toggle
+private alias c_adw_toggle_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_toggle_get_typeFn c_adw_toggle_get_type; ///
+private alias c_adw_toggle_newFn = extern(C) AdwToggle* function() nothrow;
+__gshared c_adw_toggle_newFn c_adw_toggle_new; ///
+private alias c_adw_toggle_get_childFn = extern(C) GtkWidget* function(AdwToggle* self) nothrow;
+__gshared c_adw_toggle_get_childFn c_adw_toggle_get_child; ///
+private alias c_adw_toggle_get_descriptionFn = extern(C) const(char)* function(AdwToggle* self) nothrow;
+__gshared c_adw_toggle_get_descriptionFn c_adw_toggle_get_description; ///
+private alias c_adw_toggle_get_enabledFn = extern(C) gboolean function(AdwToggle* self) nothrow;
+__gshared c_adw_toggle_get_enabledFn c_adw_toggle_get_enabled; ///
+private alias c_adw_toggle_get_icon_nameFn = extern(C) const(char)* function(AdwToggle* self) nothrow;
+__gshared c_adw_toggle_get_icon_nameFn c_adw_toggle_get_icon_name; ///
+private alias c_adw_toggle_get_indexFn = extern(C) uint function(AdwToggle* self) nothrow;
+__gshared c_adw_toggle_get_indexFn c_adw_toggle_get_index; ///
+private alias c_adw_toggle_get_labelFn = extern(C) const(char)* function(AdwToggle* self) nothrow;
+__gshared c_adw_toggle_get_labelFn c_adw_toggle_get_label; ///
+private alias c_adw_toggle_get_nameFn = extern(C) const(char)* function(AdwToggle* self) nothrow;
+__gshared c_adw_toggle_get_nameFn c_adw_toggle_get_name; ///
+private alias c_adw_toggle_get_tooltipFn = extern(C) const(char)* function(AdwToggle* self) nothrow;
+__gshared c_adw_toggle_get_tooltipFn c_adw_toggle_get_tooltip; ///
+private alias c_adw_toggle_get_use_underlineFn = extern(C) gboolean function(AdwToggle* self) nothrow;
+__gshared c_adw_toggle_get_use_underlineFn c_adw_toggle_get_use_underline; ///
+private alias c_adw_toggle_set_childFn = extern(C) void function(AdwToggle* self, GtkWidget* child) nothrow;
+__gshared c_adw_toggle_set_childFn c_adw_toggle_set_child; ///
+private alias c_adw_toggle_set_descriptionFn = extern(C) void function(AdwToggle* self, const(char)* description) nothrow;
+__gshared c_adw_toggle_set_descriptionFn c_adw_toggle_set_description; ///
+private alias c_adw_toggle_set_enabledFn = extern(C) void function(AdwToggle* self, gboolean enabled) nothrow;
+__gshared c_adw_toggle_set_enabledFn c_adw_toggle_set_enabled; ///
+private alias c_adw_toggle_set_icon_nameFn = extern(C) void function(AdwToggle* self, const(char)* iconName) nothrow;
+__gshared c_adw_toggle_set_icon_nameFn c_adw_toggle_set_icon_name; ///
+private alias c_adw_toggle_set_labelFn = extern(C) void function(AdwToggle* self, const(char)* label) nothrow;
+__gshared c_adw_toggle_set_labelFn c_adw_toggle_set_label; ///
+private alias c_adw_toggle_set_nameFn = extern(C) void function(AdwToggle* self, const(char)* name) nothrow;
+__gshared c_adw_toggle_set_nameFn c_adw_toggle_set_name; ///
+private alias c_adw_toggle_set_tooltipFn = extern(C) void function(AdwToggle* self, const(char)* tooltip) nothrow;
+__gshared c_adw_toggle_set_tooltipFn c_adw_toggle_set_tooltip; ///
+private alias c_adw_toggle_set_use_underlineFn = extern(C) void function(AdwToggle* self, gboolean useUnderline) nothrow;
+__gshared c_adw_toggle_set_use_underlineFn c_adw_toggle_set_use_underline; ///
+
+// ToggleGroup
+private alias c_adw_toggle_group_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_toggle_group_get_typeFn c_adw_toggle_group_get_type; ///
+private alias c_adw_toggle_group_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_toggle_group_newFn c_adw_toggle_group_new; ///
+private alias c_adw_toggle_group_addFn = extern(C) void function(AdwToggleGroup* self, AdwToggle* toggle) nothrow;
+__gshared c_adw_toggle_group_addFn c_adw_toggle_group_add; ///
+private alias c_adw_toggle_group_get_activeFn = extern(C) uint function(AdwToggleGroup* self) nothrow;
+__gshared c_adw_toggle_group_get_activeFn c_adw_toggle_group_get_active; ///
+private alias c_adw_toggle_group_get_active_nameFn = extern(C) const(char)* function(AdwToggleGroup* self) nothrow;
+__gshared c_adw_toggle_group_get_active_nameFn c_adw_toggle_group_get_active_name; ///
+private alias c_adw_toggle_group_get_can_shrinkFn = extern(C) gboolean function(AdwToggleGroup* self) nothrow;
+__gshared c_adw_toggle_group_get_can_shrinkFn c_adw_toggle_group_get_can_shrink; ///
+private alias c_adw_toggle_group_get_homogeneousFn = extern(C) gboolean function(AdwToggleGroup* self) nothrow;
+__gshared c_adw_toggle_group_get_homogeneousFn c_adw_toggle_group_get_homogeneous; ///
+private alias c_adw_toggle_group_get_n_togglesFn = extern(C) uint function(AdwToggleGroup* self) nothrow;
+__gshared c_adw_toggle_group_get_n_togglesFn c_adw_toggle_group_get_n_toggles; ///
+private alias c_adw_toggle_group_get_toggleFn = extern(C) AdwToggle* function(AdwToggleGroup* self, uint index) nothrow;
+__gshared c_adw_toggle_group_get_toggleFn c_adw_toggle_group_get_toggle; ///
+private alias c_adw_toggle_group_get_toggle_by_nameFn = extern(C) AdwToggle* function(AdwToggleGroup* self, const(char)* name) nothrow;
+__gshared c_adw_toggle_group_get_toggle_by_nameFn c_adw_toggle_group_get_toggle_by_name; ///
+private alias c_adw_toggle_group_get_togglesFn = extern(C) GtkSelectionModel* function(AdwToggleGroup* self) nothrow;
+__gshared c_adw_toggle_group_get_togglesFn c_adw_toggle_group_get_toggles; ///
+private alias c_adw_toggle_group_removeFn = extern(C) void function(AdwToggleGroup* self, AdwToggle* toggle) nothrow;
+__gshared c_adw_toggle_group_removeFn c_adw_toggle_group_remove; ///
+private alias c_adw_toggle_group_remove_allFn = extern(C) void function(AdwToggleGroup* self) nothrow;
+__gshared c_adw_toggle_group_remove_allFn c_adw_toggle_group_remove_all; ///
+private alias c_adw_toggle_group_set_activeFn = extern(C) void function(AdwToggleGroup* self, uint active) nothrow;
+__gshared c_adw_toggle_group_set_activeFn c_adw_toggle_group_set_active; ///
+private alias c_adw_toggle_group_set_active_nameFn = extern(C) void function(AdwToggleGroup* self, const(char)* name) nothrow;
+__gshared c_adw_toggle_group_set_active_nameFn c_adw_toggle_group_set_active_name; ///
+private alias c_adw_toggle_group_set_can_shrinkFn = extern(C) void function(AdwToggleGroup* self, gboolean canShrink) nothrow;
+__gshared c_adw_toggle_group_set_can_shrinkFn c_adw_toggle_group_set_can_shrink; ///
+private alias c_adw_toggle_group_set_homogeneousFn = extern(C) void function(AdwToggleGroup* self, gboolean homogeneous) nothrow;
+__gshared c_adw_toggle_group_set_homogeneousFn c_adw_toggle_group_set_homogeneous; ///
+
+// ToolbarView
+private alias c_adw_toolbar_view_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_toolbar_view_get_typeFn c_adw_toolbar_view_get_type; ///
+private alias c_adw_toolbar_view_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_toolbar_view_newFn c_adw_toolbar_view_new; ///
+private alias c_adw_toolbar_view_add_bottom_barFn = extern(C) void function(AdwToolbarView* self, GtkWidget* widget) nothrow;
+__gshared c_adw_toolbar_view_add_bottom_barFn c_adw_toolbar_view_add_bottom_bar; ///
+private alias c_adw_toolbar_view_add_top_barFn = extern(C) void function(AdwToolbarView* self, GtkWidget* widget) nothrow;
+__gshared c_adw_toolbar_view_add_top_barFn c_adw_toolbar_view_add_top_bar; ///
+private alias c_adw_toolbar_view_get_bottom_bar_heightFn = extern(C) int function(AdwToolbarView* self) nothrow;
+__gshared c_adw_toolbar_view_get_bottom_bar_heightFn c_adw_toolbar_view_get_bottom_bar_height; ///
+private alias c_adw_toolbar_view_get_bottom_bar_styleFn = extern(C) AdwToolbarStyle function(AdwToolbarView* self) nothrow;
+__gshared c_adw_toolbar_view_get_bottom_bar_styleFn c_adw_toolbar_view_get_bottom_bar_style; ///
+private alias c_adw_toolbar_view_get_contentFn = extern(C) GtkWidget* function(AdwToolbarView* self) nothrow;
+__gshared c_adw_toolbar_view_get_contentFn c_adw_toolbar_view_get_content; ///
+private alias c_adw_toolbar_view_get_extend_content_to_bottom_edgeFn = extern(C) gboolean function(AdwToolbarView* self) nothrow;
+__gshared c_adw_toolbar_view_get_extend_content_to_bottom_edgeFn c_adw_toolbar_view_get_extend_content_to_bottom_edge; ///
+private alias c_adw_toolbar_view_get_extend_content_to_top_edgeFn = extern(C) gboolean function(AdwToolbarView* self) nothrow;
+__gshared c_adw_toolbar_view_get_extend_content_to_top_edgeFn c_adw_toolbar_view_get_extend_content_to_top_edge; ///
+private alias c_adw_toolbar_view_get_reveal_bottom_barsFn = extern(C) gboolean function(AdwToolbarView* self) nothrow;
+__gshared c_adw_toolbar_view_get_reveal_bottom_barsFn c_adw_toolbar_view_get_reveal_bottom_bars; ///
+private alias c_adw_toolbar_view_get_reveal_top_barsFn = extern(C) gboolean function(AdwToolbarView* self) nothrow;
+__gshared c_adw_toolbar_view_get_reveal_top_barsFn c_adw_toolbar_view_get_reveal_top_bars; ///
+private alias c_adw_toolbar_view_get_top_bar_heightFn = extern(C) int function(AdwToolbarView* self) nothrow;
+__gshared c_adw_toolbar_view_get_top_bar_heightFn c_adw_toolbar_view_get_top_bar_height; ///
+private alias c_adw_toolbar_view_get_top_bar_styleFn = extern(C) AdwToolbarStyle function(AdwToolbarView* self) nothrow;
+__gshared c_adw_toolbar_view_get_top_bar_styleFn c_adw_toolbar_view_get_top_bar_style; ///
+private alias c_adw_toolbar_view_removeFn = extern(C) void function(AdwToolbarView* self, GtkWidget* widget) nothrow;
+__gshared c_adw_toolbar_view_removeFn c_adw_toolbar_view_remove; ///
+private alias c_adw_toolbar_view_set_bottom_bar_styleFn = extern(C) void function(AdwToolbarView* self, AdwToolbarStyle style) nothrow;
+__gshared c_adw_toolbar_view_set_bottom_bar_styleFn c_adw_toolbar_view_set_bottom_bar_style; ///
+private alias c_adw_toolbar_view_set_contentFn = extern(C) void function(AdwToolbarView* self, GtkWidget* content) nothrow;
+__gshared c_adw_toolbar_view_set_contentFn c_adw_toolbar_view_set_content; ///
+private alias c_adw_toolbar_view_set_extend_content_to_bottom_edgeFn = extern(C) void function(AdwToolbarView* self, gboolean extend) nothrow;
+__gshared c_adw_toolbar_view_set_extend_content_to_bottom_edgeFn c_adw_toolbar_view_set_extend_content_to_bottom_edge; ///
+private alias c_adw_toolbar_view_set_extend_content_to_top_edgeFn = extern(C) void function(AdwToolbarView* self, gboolean extend) nothrow;
+__gshared c_adw_toolbar_view_set_extend_content_to_top_edgeFn c_adw_toolbar_view_set_extend_content_to_top_edge; ///
+private alias c_adw_toolbar_view_set_reveal_bottom_barsFn = extern(C) void function(AdwToolbarView* self, gboolean reveal) nothrow;
+__gshared c_adw_toolbar_view_set_reveal_bottom_barsFn c_adw_toolbar_view_set_reveal_bottom_bars; ///
+private alias c_adw_toolbar_view_set_reveal_top_barsFn = extern(C) void function(AdwToolbarView* self, gboolean reveal) nothrow;
+__gshared c_adw_toolbar_view_set_reveal_top_barsFn c_adw_toolbar_view_set_reveal_top_bars; ///
+private alias c_adw_toolbar_view_set_top_bar_styleFn = extern(C) void function(AdwToolbarView* self, AdwToolbarStyle style) nothrow;
+__gshared c_adw_toolbar_view_set_top_bar_styleFn c_adw_toolbar_view_set_top_bar_style; ///
+
+// ViewStack
+private alias c_adw_view_stack_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_view_stack_get_typeFn c_adw_view_stack_get_type; ///
+private alias c_adw_view_stack_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_view_stack_newFn c_adw_view_stack_new; ///
+private alias c_adw_view_stack_addFn = extern(C) AdwViewStackPage* function(AdwViewStack* self, GtkWidget* child) nothrow;
+__gshared c_adw_view_stack_addFn c_adw_view_stack_add; ///
+private alias c_adw_view_stack_add_namedFn = extern(C) AdwViewStackPage* function(AdwViewStack* self, GtkWidget* child, const(char)* name) nothrow;
+__gshared c_adw_view_stack_add_namedFn c_adw_view_stack_add_named; ///
+private alias c_adw_view_stack_add_titledFn = extern(C) AdwViewStackPage* function(AdwViewStack* self, GtkWidget* child, const(char)* name, const(char)* title) nothrow;
+__gshared c_adw_view_stack_add_titledFn c_adw_view_stack_add_titled; ///
+private alias c_adw_view_stack_add_titled_with_iconFn = extern(C) AdwViewStackPage* function(AdwViewStack* self, GtkWidget* child, const(char)* name, const(char)* title, const(char)* iconName) nothrow;
+__gshared c_adw_view_stack_add_titled_with_iconFn c_adw_view_stack_add_titled_with_icon; ///
+private alias c_adw_view_stack_get_child_by_nameFn = extern(C) GtkWidget* function(AdwViewStack* self, const(char)* name) nothrow;
+__gshared c_adw_view_stack_get_child_by_nameFn c_adw_view_stack_get_child_by_name; ///
+private alias c_adw_view_stack_get_enable_transitionsFn = extern(C) gboolean function(AdwViewStack* self) nothrow;
+__gshared c_adw_view_stack_get_enable_transitionsFn c_adw_view_stack_get_enable_transitions; ///
+private alias c_adw_view_stack_get_hhomogeneousFn = extern(C) gboolean function(AdwViewStack* self) nothrow;
+__gshared c_adw_view_stack_get_hhomogeneousFn c_adw_view_stack_get_hhomogeneous; ///
+private alias c_adw_view_stack_get_pageFn = extern(C) AdwViewStackPage* function(AdwViewStack* self, GtkWidget* child) nothrow;
+__gshared c_adw_view_stack_get_pageFn c_adw_view_stack_get_page; ///
+private alias c_adw_view_stack_get_pagesFn = extern(C) GtkSelectionModel* function(AdwViewStack* self) nothrow;
+__gshared c_adw_view_stack_get_pagesFn c_adw_view_stack_get_pages; ///
+private alias c_adw_view_stack_get_transition_durationFn = extern(C) uint function(AdwViewStack* self) nothrow;
+__gshared c_adw_view_stack_get_transition_durationFn c_adw_view_stack_get_transition_duration; ///
+private alias c_adw_view_stack_get_transition_runningFn = extern(C) gboolean function(AdwViewStack* self) nothrow;
+__gshared c_adw_view_stack_get_transition_runningFn c_adw_view_stack_get_transition_running; ///
+private alias c_adw_view_stack_get_vhomogeneousFn = extern(C) gboolean function(AdwViewStack* self) nothrow;
+__gshared c_adw_view_stack_get_vhomogeneousFn c_adw_view_stack_get_vhomogeneous; ///
+private alias c_adw_view_stack_get_visible_childFn = extern(C) GtkWidget* function(AdwViewStack* self) nothrow;
+__gshared c_adw_view_stack_get_visible_childFn c_adw_view_stack_get_visible_child; ///
+private alias c_adw_view_stack_get_visible_child_nameFn = extern(C) const(char)* function(AdwViewStack* self) nothrow;
+__gshared c_adw_view_stack_get_visible_child_nameFn c_adw_view_stack_get_visible_child_name; ///
+private alias c_adw_view_stack_removeFn = extern(C) void function(AdwViewStack* self, GtkWidget* child) nothrow;
+__gshared c_adw_view_stack_removeFn c_adw_view_stack_remove; ///
+private alias c_adw_view_stack_set_enable_transitionsFn = extern(C) void function(AdwViewStack* self, gboolean enableTransitions) nothrow;
+__gshared c_adw_view_stack_set_enable_transitionsFn c_adw_view_stack_set_enable_transitions; ///
+private alias c_adw_view_stack_set_hhomogeneousFn = extern(C) void function(AdwViewStack* self, gboolean hhomogeneous) nothrow;
+__gshared c_adw_view_stack_set_hhomogeneousFn c_adw_view_stack_set_hhomogeneous; ///
+private alias c_adw_view_stack_set_transition_durationFn = extern(C) void function(AdwViewStack* self, uint duration) nothrow;
+__gshared c_adw_view_stack_set_transition_durationFn c_adw_view_stack_set_transition_duration; ///
+private alias c_adw_view_stack_set_vhomogeneousFn = extern(C) void function(AdwViewStack* self, gboolean vhomogeneous) nothrow;
+__gshared c_adw_view_stack_set_vhomogeneousFn c_adw_view_stack_set_vhomogeneous; ///
+private alias c_adw_view_stack_set_visible_childFn = extern(C) void function(AdwViewStack* self, GtkWidget* child) nothrow;
+__gshared c_adw_view_stack_set_visible_childFn c_adw_view_stack_set_visible_child; ///
+private alias c_adw_view_stack_set_visible_child_nameFn = extern(C) void function(AdwViewStack* self, const(char)* name) nothrow;
+__gshared c_adw_view_stack_set_visible_child_nameFn c_adw_view_stack_set_visible_child_name; ///
+
+// ViewStackPage
+private alias c_adw_view_stack_page_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_view_stack_page_get_typeFn c_adw_view_stack_page_get_type; ///
+private alias c_adw_view_stack_page_get_badge_numberFn = extern(C) uint function(AdwViewStackPage* self) nothrow;
+__gshared c_adw_view_stack_page_get_badge_numberFn c_adw_view_stack_page_get_badge_number; ///
+private alias c_adw_view_stack_page_get_childFn = extern(C) GtkWidget* function(AdwViewStackPage* self) nothrow;
+__gshared c_adw_view_stack_page_get_childFn c_adw_view_stack_page_get_child; ///
+private alias c_adw_view_stack_page_get_icon_nameFn = extern(C) const(char)* function(AdwViewStackPage* self) nothrow;
+__gshared c_adw_view_stack_page_get_icon_nameFn c_adw_view_stack_page_get_icon_name; ///
+private alias c_adw_view_stack_page_get_nameFn = extern(C) const(char)* function(AdwViewStackPage* self) nothrow;
+__gshared c_adw_view_stack_page_get_nameFn c_adw_view_stack_page_get_name; ///
+private alias c_adw_view_stack_page_get_needs_attentionFn = extern(C) gboolean function(AdwViewStackPage* self) nothrow;
+__gshared c_adw_view_stack_page_get_needs_attentionFn c_adw_view_stack_page_get_needs_attention; ///
+private alias c_adw_view_stack_page_get_section_titleFn = extern(C) const(char)* function(AdwViewStackPage* self) nothrow;
+__gshared c_adw_view_stack_page_get_section_titleFn c_adw_view_stack_page_get_section_title; ///
+private alias c_adw_view_stack_page_get_starts_sectionFn = extern(C) gboolean function(AdwViewStackPage* self) nothrow;
+__gshared c_adw_view_stack_page_get_starts_sectionFn c_adw_view_stack_page_get_starts_section; ///
+private alias c_adw_view_stack_page_get_titleFn = extern(C) const(char)* function(AdwViewStackPage* self) nothrow;
+__gshared c_adw_view_stack_page_get_titleFn c_adw_view_stack_page_get_title; ///
+private alias c_adw_view_stack_page_get_use_underlineFn = extern(C) gboolean function(AdwViewStackPage* self) nothrow;
+__gshared c_adw_view_stack_page_get_use_underlineFn c_adw_view_stack_page_get_use_underline; ///
+private alias c_adw_view_stack_page_get_visibleFn = extern(C) gboolean function(AdwViewStackPage* self) nothrow;
+__gshared c_adw_view_stack_page_get_visibleFn c_adw_view_stack_page_get_visible; ///
+private alias c_adw_view_stack_page_set_badge_numberFn = extern(C) void function(AdwViewStackPage* self, uint badgeNumber) nothrow;
+__gshared c_adw_view_stack_page_set_badge_numberFn c_adw_view_stack_page_set_badge_number; ///
+private alias c_adw_view_stack_page_set_icon_nameFn = extern(C) void function(AdwViewStackPage* self, const(char)* iconName) nothrow;
+__gshared c_adw_view_stack_page_set_icon_nameFn c_adw_view_stack_page_set_icon_name; ///
+private alias c_adw_view_stack_page_set_nameFn = extern(C) void function(AdwViewStackPage* self, const(char)* name) nothrow;
+__gshared c_adw_view_stack_page_set_nameFn c_adw_view_stack_page_set_name; ///
+private alias c_adw_view_stack_page_set_needs_attentionFn = extern(C) void function(AdwViewStackPage* self, gboolean needsAttention) nothrow;
+__gshared c_adw_view_stack_page_set_needs_attentionFn c_adw_view_stack_page_set_needs_attention; ///
+private alias c_adw_view_stack_page_set_section_titleFn = extern(C) void function(AdwViewStackPage* self, const(char)* sectionTitle) nothrow;
+__gshared c_adw_view_stack_page_set_section_titleFn c_adw_view_stack_page_set_section_title; ///
+private alias c_adw_view_stack_page_set_starts_sectionFn = extern(C) void function(AdwViewStackPage* self, gboolean startsSection) nothrow;
+__gshared c_adw_view_stack_page_set_starts_sectionFn c_adw_view_stack_page_set_starts_section; ///
+private alias c_adw_view_stack_page_set_titleFn = extern(C) void function(AdwViewStackPage* self, const(char)* title) nothrow;
+__gshared c_adw_view_stack_page_set_titleFn c_adw_view_stack_page_set_title; ///
+private alias c_adw_view_stack_page_set_use_underlineFn = extern(C) void function(AdwViewStackPage* self, gboolean useUnderline) nothrow;
+__gshared c_adw_view_stack_page_set_use_underlineFn c_adw_view_stack_page_set_use_underline; ///
+private alias c_adw_view_stack_page_set_visibleFn = extern(C) void function(AdwViewStackPage* self, gboolean visible) nothrow;
+__gshared c_adw_view_stack_page_set_visibleFn c_adw_view_stack_page_set_visible; ///
+
+// ViewStackPages
+private alias c_adw_view_stack_pages_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_view_stack_pages_get_typeFn c_adw_view_stack_pages_get_type; ///
+private alias c_adw_view_stack_pages_get_selected_pageFn = extern(C) AdwViewStackPage* function(AdwViewStackPages* self) nothrow;
+__gshared c_adw_view_stack_pages_get_selected_pageFn c_adw_view_stack_pages_get_selected_page; ///
+private alias c_adw_view_stack_pages_set_selected_pageFn = extern(C) void function(AdwViewStackPages* self, AdwViewStackPage* page) nothrow;
+__gshared c_adw_view_stack_pages_set_selected_pageFn c_adw_view_stack_pages_set_selected_page; ///
+
+// ViewSwitcher
+private alias c_adw_view_switcher_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_view_switcher_get_typeFn c_adw_view_switcher_get_type; ///
+private alias c_adw_view_switcher_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_view_switcher_newFn c_adw_view_switcher_new; ///
+private alias c_adw_view_switcher_get_policyFn = extern(C) AdwViewSwitcherPolicy function(AdwViewSwitcher* self) nothrow;
+__gshared c_adw_view_switcher_get_policyFn c_adw_view_switcher_get_policy; ///
+private alias c_adw_view_switcher_get_stackFn = extern(C) AdwViewStack* function(AdwViewSwitcher* self) nothrow;
+__gshared c_adw_view_switcher_get_stackFn c_adw_view_switcher_get_stack; ///
+private alias c_adw_view_switcher_set_policyFn = extern(C) void function(AdwViewSwitcher* self, AdwViewSwitcherPolicy policy) nothrow;
+__gshared c_adw_view_switcher_set_policyFn c_adw_view_switcher_set_policy; ///
+private alias c_adw_view_switcher_set_stackFn = extern(C) void function(AdwViewSwitcher* self, AdwViewStack* stack) nothrow;
+__gshared c_adw_view_switcher_set_stackFn c_adw_view_switcher_set_stack; ///
+
+// ViewSwitcherBar
+private alias c_adw_view_switcher_bar_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_view_switcher_bar_get_typeFn c_adw_view_switcher_bar_get_type; ///
+private alias c_adw_view_switcher_bar_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_view_switcher_bar_newFn c_adw_view_switcher_bar_new; ///
+private alias c_adw_view_switcher_bar_get_revealFn = extern(C) gboolean function(AdwViewSwitcherBar* self) nothrow;
+__gshared c_adw_view_switcher_bar_get_revealFn c_adw_view_switcher_bar_get_reveal; ///
+private alias c_adw_view_switcher_bar_get_stackFn = extern(C) AdwViewStack* function(AdwViewSwitcherBar* self) nothrow;
+__gshared c_adw_view_switcher_bar_get_stackFn c_adw_view_switcher_bar_get_stack; ///
+private alias c_adw_view_switcher_bar_set_revealFn = extern(C) void function(AdwViewSwitcherBar* self, gboolean reveal) nothrow;
+__gshared c_adw_view_switcher_bar_set_revealFn c_adw_view_switcher_bar_set_reveal; ///
+private alias c_adw_view_switcher_bar_set_stackFn = extern(C) void function(AdwViewSwitcherBar* self, AdwViewStack* stack) nothrow;
+__gshared c_adw_view_switcher_bar_set_stackFn c_adw_view_switcher_bar_set_stack; ///
+
+// ViewSwitcherSidebar
+private alias c_adw_view_switcher_sidebar_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_view_switcher_sidebar_get_typeFn c_adw_view_switcher_sidebar_get_type; ///
+private alias c_adw_view_switcher_sidebar_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_view_switcher_sidebar_newFn c_adw_view_switcher_sidebar_new; ///
+private alias c_adw_view_switcher_sidebar_get_filterFn = extern(C) GtkFilter* function(AdwViewSwitcherSidebar* self) nothrow;
+__gshared c_adw_view_switcher_sidebar_get_filterFn c_adw_view_switcher_sidebar_get_filter; ///
+private alias c_adw_view_switcher_sidebar_get_modeFn = extern(C) AdwSidebarMode function(AdwViewSwitcherSidebar* self) nothrow;
+__gshared c_adw_view_switcher_sidebar_get_modeFn c_adw_view_switcher_sidebar_get_mode; ///
+private alias c_adw_view_switcher_sidebar_get_placeholderFn = extern(C) GtkWidget* function(AdwViewSwitcherSidebar* self) nothrow;
+__gshared c_adw_view_switcher_sidebar_get_placeholderFn c_adw_view_switcher_sidebar_get_placeholder; ///
+private alias c_adw_view_switcher_sidebar_get_stackFn = extern(C) AdwViewStack* function(AdwViewSwitcherSidebar* self) nothrow;
+__gshared c_adw_view_switcher_sidebar_get_stackFn c_adw_view_switcher_sidebar_get_stack; ///
+private alias c_adw_view_switcher_sidebar_set_filterFn = extern(C) void function(AdwViewSwitcherSidebar* self, GtkFilter* filter) nothrow;
+__gshared c_adw_view_switcher_sidebar_set_filterFn c_adw_view_switcher_sidebar_set_filter; ///
+private alias c_adw_view_switcher_sidebar_set_modeFn = extern(C) void function(AdwViewSwitcherSidebar* self, AdwSidebarMode mode) nothrow;
+__gshared c_adw_view_switcher_sidebar_set_modeFn c_adw_view_switcher_sidebar_set_mode; ///
+private alias c_adw_view_switcher_sidebar_set_placeholderFn = extern(C) void function(AdwViewSwitcherSidebar* self, GtkWidget* placeholder) nothrow;
+__gshared c_adw_view_switcher_sidebar_set_placeholderFn c_adw_view_switcher_sidebar_set_placeholder; ///
+private alias c_adw_view_switcher_sidebar_set_stackFn = extern(C) void function(AdwViewSwitcherSidebar* self, AdwViewStack* stack) nothrow;
+__gshared c_adw_view_switcher_sidebar_set_stackFn c_adw_view_switcher_sidebar_set_stack; ///
+
+// ViewSwitcherTitle
+private alias c_adw_view_switcher_title_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_view_switcher_title_get_typeFn c_adw_view_switcher_title_get_type; ///
+private alias c_adw_view_switcher_title_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_view_switcher_title_newFn c_adw_view_switcher_title_new; ///
+private alias c_adw_view_switcher_title_get_stackFn = extern(C) AdwViewStack* function(AdwViewSwitcherTitle* self) nothrow;
+__gshared c_adw_view_switcher_title_get_stackFn c_adw_view_switcher_title_get_stack; ///
+private alias c_adw_view_switcher_title_get_subtitleFn = extern(C) const(char)* function(AdwViewSwitcherTitle* self) nothrow;
+__gshared c_adw_view_switcher_title_get_subtitleFn c_adw_view_switcher_title_get_subtitle; ///
+private alias c_adw_view_switcher_title_get_titleFn = extern(C) const(char)* function(AdwViewSwitcherTitle* self) nothrow;
+__gshared c_adw_view_switcher_title_get_titleFn c_adw_view_switcher_title_get_title; ///
+private alias c_adw_view_switcher_title_get_title_visibleFn = extern(C) gboolean function(AdwViewSwitcherTitle* self) nothrow;
+__gshared c_adw_view_switcher_title_get_title_visibleFn c_adw_view_switcher_title_get_title_visible; ///
+private alias c_adw_view_switcher_title_get_view_switcher_enabledFn = extern(C) gboolean function(AdwViewSwitcherTitle* self) nothrow;
+__gshared c_adw_view_switcher_title_get_view_switcher_enabledFn c_adw_view_switcher_title_get_view_switcher_enabled; ///
+private alias c_adw_view_switcher_title_set_stackFn = extern(C) void function(AdwViewSwitcherTitle* self, AdwViewStack* stack) nothrow;
+__gshared c_adw_view_switcher_title_set_stackFn c_adw_view_switcher_title_set_stack; ///
+private alias c_adw_view_switcher_title_set_subtitleFn = extern(C) void function(AdwViewSwitcherTitle* self, const(char)* subtitle) nothrow;
+__gshared c_adw_view_switcher_title_set_subtitleFn c_adw_view_switcher_title_set_subtitle; ///
+private alias c_adw_view_switcher_title_set_titleFn = extern(C) void function(AdwViewSwitcherTitle* self, const(char)* title) nothrow;
+__gshared c_adw_view_switcher_title_set_titleFn c_adw_view_switcher_title_set_title; ///
+private alias c_adw_view_switcher_title_set_view_switcher_enabledFn = extern(C) void function(AdwViewSwitcherTitle* self, gboolean enabled) nothrow;
+__gshared c_adw_view_switcher_title_set_view_switcher_enabledFn c_adw_view_switcher_title_set_view_switcher_enabled; ///
+
+// Window
+private alias c_adw_window_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_window_get_typeFn c_adw_window_get_type; ///
+private alias c_adw_window_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_window_newFn c_adw_window_new; ///
+private alias c_adw_window_add_breakpointFn = extern(C) void function(AdwWindow* self, AdwBreakpoint* breakpoint) nothrow;
+__gshared c_adw_window_add_breakpointFn c_adw_window_add_breakpoint; ///
+private alias c_adw_window_get_adaptive_previewFn = extern(C) gboolean function(AdwWindow* self) nothrow;
+__gshared c_adw_window_get_adaptive_previewFn c_adw_window_get_adaptive_preview; ///
+private alias c_adw_window_get_contentFn = extern(C) GtkWidget* function(AdwWindow* self) nothrow;
+__gshared c_adw_window_get_contentFn c_adw_window_get_content; ///
+private alias c_adw_window_get_current_breakpointFn = extern(C) AdwBreakpoint* function(AdwWindow* self) nothrow;
+__gshared c_adw_window_get_current_breakpointFn c_adw_window_get_current_breakpoint; ///
+private alias c_adw_window_get_dialogsFn = extern(C) GListModel* function(AdwWindow* self) nothrow;
+__gshared c_adw_window_get_dialogsFn c_adw_window_get_dialogs; ///
+private alias c_adw_window_get_visible_dialogFn = extern(C) AdwDialog* function(AdwWindow* self) nothrow;
+__gshared c_adw_window_get_visible_dialogFn c_adw_window_get_visible_dialog; ///
+private alias c_adw_window_set_adaptive_previewFn = extern(C) void function(AdwWindow* self, gboolean adaptivePreview) nothrow;
+__gshared c_adw_window_set_adaptive_previewFn c_adw_window_set_adaptive_preview; ///
+private alias c_adw_window_set_contentFn = extern(C) void function(AdwWindow* self, GtkWidget* content) nothrow;
+__gshared c_adw_window_set_contentFn c_adw_window_set_content; ///
+
+// WindowTitle
+private alias c_adw_window_title_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_window_title_get_typeFn c_adw_window_title_get_type; ///
+private alias c_adw_window_title_newFn = extern(C) GtkWidget* function(const(char)* title, const(char)* subtitle) nothrow;
+__gshared c_adw_window_title_newFn c_adw_window_title_new; ///
+private alias c_adw_window_title_get_subtitleFn = extern(C) const(char)* function(AdwWindowTitle* self) nothrow;
+__gshared c_adw_window_title_get_subtitleFn c_adw_window_title_get_subtitle; ///
+private alias c_adw_window_title_get_titleFn = extern(C) const(char)* function(AdwWindowTitle* self) nothrow;
+__gshared c_adw_window_title_get_titleFn c_adw_window_title_get_title; ///
+private alias c_adw_window_title_set_subtitleFn = extern(C) void function(AdwWindowTitle* self, const(char)* subtitle) nothrow;
+__gshared c_adw_window_title_set_subtitleFn c_adw_window_title_set_subtitle; ///
+private alias c_adw_window_title_set_titleFn = extern(C) void function(AdwWindowTitle* self, const(char)* title) nothrow;
+__gshared c_adw_window_title_set_titleFn c_adw_window_title_set_title; ///
+
+// WrapBox
+private alias c_adw_wrap_box_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_wrap_box_get_typeFn c_adw_wrap_box_get_type; ///
+private alias c_adw_wrap_box_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_adw_wrap_box_newFn c_adw_wrap_box_new; ///
+private alias c_adw_wrap_box_appendFn = extern(C) void function(AdwWrapBox* self, GtkWidget* child) nothrow;
+__gshared c_adw_wrap_box_appendFn c_adw_wrap_box_append; ///
+private alias c_adw_wrap_box_get_alignFn = extern(C) float function(AdwWrapBox* self) nothrow;
+__gshared c_adw_wrap_box_get_alignFn c_adw_wrap_box_get_align; ///
+private alias c_adw_wrap_box_get_child_spacingFn = extern(C) int function(AdwWrapBox* self) nothrow;
+__gshared c_adw_wrap_box_get_child_spacingFn c_adw_wrap_box_get_child_spacing; ///
+private alias c_adw_wrap_box_get_child_spacing_unitFn = extern(C) AdwLengthUnit function(AdwWrapBox* self) nothrow;
+__gshared c_adw_wrap_box_get_child_spacing_unitFn c_adw_wrap_box_get_child_spacing_unit; ///
+private alias c_adw_wrap_box_get_justifyFn = extern(C) AdwJustifyMode function(AdwWrapBox* self) nothrow;
+__gshared c_adw_wrap_box_get_justifyFn c_adw_wrap_box_get_justify; ///
+private alias c_adw_wrap_box_get_justify_last_lineFn = extern(C) gboolean function(AdwWrapBox* self) nothrow;
+__gshared c_adw_wrap_box_get_justify_last_lineFn c_adw_wrap_box_get_justify_last_line; ///
+private alias c_adw_wrap_box_get_line_homogeneousFn = extern(C) gboolean function(AdwWrapBox* self) nothrow;
+__gshared c_adw_wrap_box_get_line_homogeneousFn c_adw_wrap_box_get_line_homogeneous; ///
+private alias c_adw_wrap_box_get_line_spacingFn = extern(C) int function(AdwWrapBox* self) nothrow;
+__gshared c_adw_wrap_box_get_line_spacingFn c_adw_wrap_box_get_line_spacing; ///
+private alias c_adw_wrap_box_get_line_spacing_unitFn = extern(C) AdwLengthUnit function(AdwWrapBox* self) nothrow;
+__gshared c_adw_wrap_box_get_line_spacing_unitFn c_adw_wrap_box_get_line_spacing_unit; ///
+private alias c_adw_wrap_box_get_natural_line_lengthFn = extern(C) int function(AdwWrapBox* self) nothrow;
+__gshared c_adw_wrap_box_get_natural_line_lengthFn c_adw_wrap_box_get_natural_line_length; ///
+private alias c_adw_wrap_box_get_natural_line_length_unitFn = extern(C) AdwLengthUnit function(AdwWrapBox* self) nothrow;
+__gshared c_adw_wrap_box_get_natural_line_length_unitFn c_adw_wrap_box_get_natural_line_length_unit; ///
+private alias c_adw_wrap_box_get_pack_directionFn = extern(C) AdwPackDirection function(AdwWrapBox* self) nothrow;
+__gshared c_adw_wrap_box_get_pack_directionFn c_adw_wrap_box_get_pack_direction; ///
+private alias c_adw_wrap_box_get_wrap_policyFn = extern(C) AdwWrapPolicy function(AdwWrapBox* self) nothrow;
+__gshared c_adw_wrap_box_get_wrap_policyFn c_adw_wrap_box_get_wrap_policy; ///
+private alias c_adw_wrap_box_get_wrap_reverseFn = extern(C) gboolean function(AdwWrapBox* self) nothrow;
+__gshared c_adw_wrap_box_get_wrap_reverseFn c_adw_wrap_box_get_wrap_reverse; ///
+private alias c_adw_wrap_box_insert_child_afterFn = extern(C) void function(AdwWrapBox* self, GtkWidget* child, GtkWidget* sibling) nothrow;
+__gshared c_adw_wrap_box_insert_child_afterFn c_adw_wrap_box_insert_child_after; ///
+private alias c_adw_wrap_box_prependFn = extern(C) void function(AdwWrapBox* self, GtkWidget* child) nothrow;
+__gshared c_adw_wrap_box_prependFn c_adw_wrap_box_prepend; ///
+private alias c_adw_wrap_box_removeFn = extern(C) void function(AdwWrapBox* self, GtkWidget* child) nothrow;
+__gshared c_adw_wrap_box_removeFn c_adw_wrap_box_remove; ///
+private alias c_adw_wrap_box_remove_allFn = extern(C) void function(AdwWrapBox* self) nothrow;
+__gshared c_adw_wrap_box_remove_allFn c_adw_wrap_box_remove_all; ///
+private alias c_adw_wrap_box_reorder_child_afterFn = extern(C) void function(AdwWrapBox* self, GtkWidget* child, GtkWidget* sibling) nothrow;
+__gshared c_adw_wrap_box_reorder_child_afterFn c_adw_wrap_box_reorder_child_after; ///
+private alias c_adw_wrap_box_set_alignFn = extern(C) void function(AdwWrapBox* self, float align_) nothrow;
+__gshared c_adw_wrap_box_set_alignFn c_adw_wrap_box_set_align; ///
+private alias c_adw_wrap_box_set_child_spacingFn = extern(C) void function(AdwWrapBox* self, int childSpacing) nothrow;
+__gshared c_adw_wrap_box_set_child_spacingFn c_adw_wrap_box_set_child_spacing; ///
+private alias c_adw_wrap_box_set_child_spacing_unitFn = extern(C) void function(AdwWrapBox* self, AdwLengthUnit unit) nothrow;
+__gshared c_adw_wrap_box_set_child_spacing_unitFn c_adw_wrap_box_set_child_spacing_unit; ///
+private alias c_adw_wrap_box_set_justifyFn = extern(C) void function(AdwWrapBox* self, AdwJustifyMode justify) nothrow;
+__gshared c_adw_wrap_box_set_justifyFn c_adw_wrap_box_set_justify; ///
+private alias c_adw_wrap_box_set_justify_last_lineFn = extern(C) void function(AdwWrapBox* self, gboolean justifyLastLine) nothrow;
+__gshared c_adw_wrap_box_set_justify_last_lineFn c_adw_wrap_box_set_justify_last_line; ///
+private alias c_adw_wrap_box_set_line_homogeneousFn = extern(C) void function(AdwWrapBox* self, gboolean homogeneous) nothrow;
+__gshared c_adw_wrap_box_set_line_homogeneousFn c_adw_wrap_box_set_line_homogeneous; ///
+private alias c_adw_wrap_box_set_line_spacingFn = extern(C) void function(AdwWrapBox* self, int lineSpacing) nothrow;
+__gshared c_adw_wrap_box_set_line_spacingFn c_adw_wrap_box_set_line_spacing; ///
+private alias c_adw_wrap_box_set_line_spacing_unitFn = extern(C) void function(AdwWrapBox* self, AdwLengthUnit unit) nothrow;
+__gshared c_adw_wrap_box_set_line_spacing_unitFn c_adw_wrap_box_set_line_spacing_unit; ///
+private alias c_adw_wrap_box_set_natural_line_lengthFn = extern(C) void function(AdwWrapBox* self, int naturalLineLength) nothrow;
+__gshared c_adw_wrap_box_set_natural_line_lengthFn c_adw_wrap_box_set_natural_line_length; ///
+private alias c_adw_wrap_box_set_natural_line_length_unitFn = extern(C) void function(AdwWrapBox* self, AdwLengthUnit unit) nothrow;
+__gshared c_adw_wrap_box_set_natural_line_length_unitFn c_adw_wrap_box_set_natural_line_length_unit; ///
+private alias c_adw_wrap_box_set_pack_directionFn = extern(C) void function(AdwWrapBox* self, AdwPackDirection packDirection) nothrow;
+__gshared c_adw_wrap_box_set_pack_directionFn c_adw_wrap_box_set_pack_direction; ///
+private alias c_adw_wrap_box_set_wrap_policyFn = extern(C) void function(AdwWrapBox* self, AdwWrapPolicy wrapPolicy) nothrow;
+__gshared c_adw_wrap_box_set_wrap_policyFn c_adw_wrap_box_set_wrap_policy; ///
+private alias c_adw_wrap_box_set_wrap_reverseFn = extern(C) void function(AdwWrapBox* self, gboolean wrapReverse) nothrow;
+__gshared c_adw_wrap_box_set_wrap_reverseFn c_adw_wrap_box_set_wrap_reverse; ///
+
+// WrapLayout
+private alias c_adw_wrap_layout_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_adw_wrap_layout_get_typeFn c_adw_wrap_layout_get_type; ///
+private alias c_adw_wrap_layout_newFn = extern(C) GtkLayoutManager* function() nothrow;
+__gshared c_adw_wrap_layout_newFn c_adw_wrap_layout_new; ///
+private alias c_adw_wrap_layout_get_alignFn = extern(C) float function(AdwWrapLayout* self) nothrow;
+__gshared c_adw_wrap_layout_get_alignFn c_adw_wrap_layout_get_align; ///
+private alias c_adw_wrap_layout_get_child_spacingFn = extern(C) int function(AdwWrapLayout* self) nothrow;
+__gshared c_adw_wrap_layout_get_child_spacingFn c_adw_wrap_layout_get_child_spacing; ///
+private alias c_adw_wrap_layout_get_child_spacing_unitFn = extern(C) AdwLengthUnit function(AdwWrapLayout* self) nothrow;
+__gshared c_adw_wrap_layout_get_child_spacing_unitFn c_adw_wrap_layout_get_child_spacing_unit; ///
+private alias c_adw_wrap_layout_get_justifyFn = extern(C) AdwJustifyMode function(AdwWrapLayout* self) nothrow;
+__gshared c_adw_wrap_layout_get_justifyFn c_adw_wrap_layout_get_justify; ///
+private alias c_adw_wrap_layout_get_justify_last_lineFn = extern(C) gboolean function(AdwWrapLayout* self) nothrow;
+__gshared c_adw_wrap_layout_get_justify_last_lineFn c_adw_wrap_layout_get_justify_last_line; ///
+private alias c_adw_wrap_layout_get_line_homogeneousFn = extern(C) gboolean function(AdwWrapLayout* self) nothrow;
+__gshared c_adw_wrap_layout_get_line_homogeneousFn c_adw_wrap_layout_get_line_homogeneous; ///
+private alias c_adw_wrap_layout_get_line_spacingFn = extern(C) int function(AdwWrapLayout* self) nothrow;
+__gshared c_adw_wrap_layout_get_line_spacingFn c_adw_wrap_layout_get_line_spacing; ///
+private alias c_adw_wrap_layout_get_line_spacing_unitFn = extern(C) AdwLengthUnit function(AdwWrapLayout* self) nothrow;
+__gshared c_adw_wrap_layout_get_line_spacing_unitFn c_adw_wrap_layout_get_line_spacing_unit; ///
+private alias c_adw_wrap_layout_get_natural_line_lengthFn = extern(C) int function(AdwWrapLayout* self) nothrow;
+__gshared c_adw_wrap_layout_get_natural_line_lengthFn c_adw_wrap_layout_get_natural_line_length; ///
+private alias c_adw_wrap_layout_get_natural_line_length_unitFn = extern(C) AdwLengthUnit function(AdwWrapLayout* self) nothrow;
+__gshared c_adw_wrap_layout_get_natural_line_length_unitFn c_adw_wrap_layout_get_natural_line_length_unit; ///
+private alias c_adw_wrap_layout_get_pack_directionFn = extern(C) AdwPackDirection function(AdwWrapLayout* self) nothrow;
+__gshared c_adw_wrap_layout_get_pack_directionFn c_adw_wrap_layout_get_pack_direction; ///
+private alias c_adw_wrap_layout_get_wrap_policyFn = extern(C) AdwWrapPolicy function(AdwWrapLayout* self) nothrow;
+__gshared c_adw_wrap_layout_get_wrap_policyFn c_adw_wrap_layout_get_wrap_policy; ///
+private alias c_adw_wrap_layout_get_wrap_reverseFn = extern(C) gboolean function(AdwWrapLayout* self) nothrow;
+__gshared c_adw_wrap_layout_get_wrap_reverseFn c_adw_wrap_layout_get_wrap_reverse; ///
+private alias c_adw_wrap_layout_set_alignFn = extern(C) void function(AdwWrapLayout* self, float align_) nothrow;
+__gshared c_adw_wrap_layout_set_alignFn c_adw_wrap_layout_set_align; ///
+private alias c_adw_wrap_layout_set_child_spacingFn = extern(C) void function(AdwWrapLayout* self, int childSpacing) nothrow;
+__gshared c_adw_wrap_layout_set_child_spacingFn c_adw_wrap_layout_set_child_spacing; ///
+private alias c_adw_wrap_layout_set_child_spacing_unitFn = extern(C) void function(AdwWrapLayout* self, AdwLengthUnit unit) nothrow;
+__gshared c_adw_wrap_layout_set_child_spacing_unitFn c_adw_wrap_layout_set_child_spacing_unit; ///
+private alias c_adw_wrap_layout_set_justifyFn = extern(C) void function(AdwWrapLayout* self, AdwJustifyMode justify) nothrow;
+__gshared c_adw_wrap_layout_set_justifyFn c_adw_wrap_layout_set_justify; ///
+private alias c_adw_wrap_layout_set_justify_last_lineFn = extern(C) void function(AdwWrapLayout* self, gboolean justifyLastLine) nothrow;
+__gshared c_adw_wrap_layout_set_justify_last_lineFn c_adw_wrap_layout_set_justify_last_line; ///
+private alias c_adw_wrap_layout_set_line_homogeneousFn = extern(C) void function(AdwWrapLayout* self, gboolean homogeneous) nothrow;
+__gshared c_adw_wrap_layout_set_line_homogeneousFn c_adw_wrap_layout_set_line_homogeneous; ///
+private alias c_adw_wrap_layout_set_line_spacingFn = extern(C) void function(AdwWrapLayout* self, int lineSpacing) nothrow;
+__gshared c_adw_wrap_layout_set_line_spacingFn c_adw_wrap_layout_set_line_spacing; ///
+private alias c_adw_wrap_layout_set_line_spacing_unitFn = extern(C) void function(AdwWrapLayout* self, AdwLengthUnit unit) nothrow;
+__gshared c_adw_wrap_layout_set_line_spacing_unitFn c_adw_wrap_layout_set_line_spacing_unit; ///
+private alias c_adw_wrap_layout_set_natural_line_lengthFn = extern(C) void function(AdwWrapLayout* self, int naturalLineLength) nothrow;
+__gshared c_adw_wrap_layout_set_natural_line_lengthFn c_adw_wrap_layout_set_natural_line_length; ///
+private alias c_adw_wrap_layout_set_natural_line_length_unitFn = extern(C) void function(AdwWrapLayout* self, AdwLengthUnit unit) nothrow;
+__gshared c_adw_wrap_layout_set_natural_line_length_unitFn c_adw_wrap_layout_set_natural_line_length_unit; ///
+private alias c_adw_wrap_layout_set_pack_directionFn = extern(C) void function(AdwWrapLayout* self, AdwPackDirection packDirection) nothrow;
+__gshared c_adw_wrap_layout_set_pack_directionFn c_adw_wrap_layout_set_pack_direction; ///
+private alias c_adw_wrap_layout_set_wrap_policyFn = extern(C) void function(AdwWrapLayout* self, AdwWrapPolicy wrapPolicy) nothrow;
+__gshared c_adw_wrap_layout_set_wrap_policyFn c_adw_wrap_layout_set_wrap_policy; ///
+private alias c_adw_wrap_layout_set_wrap_reverseFn = extern(C) void function(AdwWrapLayout* self, gboolean wrapReverse) nothrow;
+__gshared c_adw_wrap_layout_set_wrap_reverseFn c_adw_wrap_layout_set_wrap_reverse; ///
+
+// global
+private alias c_adw_get_enable_animationsFn = extern(C) gboolean function(GtkWidget* widget) nothrow;
+__gshared c_adw_get_enable_animationsFn c_adw_get_enable_animations; ///
+private alias c_adw_get_major_versionFn = extern(C) uint function() nothrow;
+__gshared c_adw_get_major_versionFn c_adw_get_major_version; ///
+private alias c_adw_get_micro_versionFn = extern(C) uint function() nothrow;
+__gshared c_adw_get_micro_versionFn c_adw_get_micro_version; ///
+private alias c_adw_get_minor_versionFn = extern(C) uint function() nothrow;
+__gshared c_adw_get_minor_versionFn c_adw_get_minor_version; ///
+private alias c_adw_initFn = extern(C) void function() nothrow;
+__gshared c_adw_initFn c_adw_init; ///
+private alias c_adw_is_initializedFn = extern(C) gboolean function() nothrow;
+__gshared c_adw_is_initializedFn c_adw_is_initialized; ///
+private alias c_adw_lerpFn = extern(C) double function(double a, double b, double t) nothrow;
+__gshared c_adw_lerpFn c_adw_lerp; ///
+private alias c_adw_rgba_to_standaloneFn = extern(C) void function(const(GdkRGBA)* rgba, gboolean dark, GdkRGBA* standaloneRgba) nothrow;
+__gshared c_adw_rgba_to_standaloneFn c_adw_rgba_to_standalone; ///
+private alias c_adw_show_about_dialogFn = extern(C) void function(GtkWidget* parent, const(char)* firstPropertyName,  ...) nothrow;
+__gshared c_adw_show_about_dialogFn c_adw_show_about_dialog; ///
+private alias c_adw_show_about_dialog_from_appdataFn = extern(C) void function(GtkWidget* parent, const(char)* resourcePath, const(char)* releaseNotesVersion, const(char)* firstPropertyName,  ...) nothrow;
+__gshared c_adw_show_about_dialog_from_appdataFn c_adw_show_about_dialog_from_appdata; ///
+private alias c_adw_show_about_windowFn = extern(C) void function(GtkWindow* parent, const(char)* firstPropertyName,  ...) nothrow;
+__gshared c_adw_show_about_windowFn c_adw_show_about_window; ///
+private alias c_adw_show_about_window_from_appdataFn = extern(C) void function(GtkWindow* parent, const(char)* resourcePath, const(char)* releaseNotesVersion, const(char)* firstPropertyName,  ...) nothrow;
+__gshared c_adw_show_about_window_from_appdataFn c_adw_show_about_window_from_appdata; ///
+
+// AccentColor
+private alias c_adw_accent_color_to_rgbaFn = extern(C) void function(AdwAccentColor self, GdkRGBA* rgba) nothrow;
+__gshared c_adw_accent_color_to_rgbaFn c_adw_accent_color_to_rgba; ///
+private alias c_adw_accent_color_to_standalone_rgbaFn = extern(C) void function(AdwAccentColor self, gboolean dark, GdkRGBA* rgba) nothrow;
+__gshared c_adw_accent_color_to_standalone_rgbaFn c_adw_accent_color_to_standalone_rgba; ///
+
+// Easing
+private alias c_adw_easing_easeFn = extern(C) double function(AdwEasing self, double value) nothrow;
+__gshared c_adw_easing_easeFn c_adw_easing_ease; ///
+
+// LengthUnit
+private alias c_adw_length_unit_from_pxFn = extern(C) double function(AdwLengthUnit unit, double value, GtkSettings* settings) nothrow;
+__gshared c_adw_length_unit_from_pxFn c_adw_length_unit_from_px; ///
+private alias c_adw_length_unit_to_pxFn = extern(C) double function(AdwLengthUnit unit, double value, GtkSettings* settings) nothrow;
+__gshared c_adw_length_unit_to_pxFn c_adw_length_unit_to_px; ///
 
 // AboutDialog
 

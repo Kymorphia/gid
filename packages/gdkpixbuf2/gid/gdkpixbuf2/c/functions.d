@@ -9,143 +9,257 @@ public import gid.gmodule2.c.types;
 
 private immutable LIBS = ["gdk_pixbuf-2.0_0"];
 
-__gshared extern(C) nothrow
-{
-  // Pixbuf
-  GType function() c_gdk_pixbuf_get_type; ///
-  GdkPixbuf* function(GdkColorspace colorspace, gboolean hasAlpha, int bitsPerSample, int width, int height) c_gdk_pixbuf_new; ///
-  GdkPixbuf* function(GBytes* data, GdkColorspace colorspace, gboolean hasAlpha, int bitsPerSample, int width, int height, int rowstride) c_gdk_pixbuf_new_from_bytes; ///
-  GdkPixbuf* function(const(ubyte)* data, GdkColorspace colorspace, gboolean hasAlpha, int bitsPerSample, int width, int height, int rowstride, GdkPixbufDestroyNotify destroyFn, void* destroyFnData) c_gdk_pixbuf_new_from_data; ///
-  GdkPixbuf* function(const(char)* filename, GError** _err) c_gdk_pixbuf_new_from_file; ///
-  GdkPixbuf* function(const(char)* filename, int width, int height, gboolean preserveAspectRatio, GError** _err) c_gdk_pixbuf_new_from_file_at_scale; ///
-  GdkPixbuf* function(const(char)* filename, int width, int height, GError** _err) c_gdk_pixbuf_new_from_file_at_size; ///
-  GdkPixbuf* function(int dataLength, const(ubyte)* data, gboolean copyPixels, GError** _err) c_gdk_pixbuf_new_from_inline; ///
-  GdkPixbuf* function(const(char)* resourcePath, GError** _err) c_gdk_pixbuf_new_from_resource; ///
-  GdkPixbuf* function(const(char)* resourcePath, int width, int height, gboolean preserveAspectRatio, GError** _err) c_gdk_pixbuf_new_from_resource_at_scale; ///
-  GdkPixbuf* function(GInputStream* stream, GCancellable* cancellable, GError** _err) c_gdk_pixbuf_new_from_stream; ///
-  GdkPixbuf* function(GInputStream* stream, int width, int height, gboolean preserveAspectRatio, GCancellable* cancellable, GError** _err) c_gdk_pixbuf_new_from_stream_at_scale; ///
-  GdkPixbuf* function(GAsyncResult* asyncResult, GError** _err) c_gdk_pixbuf_new_from_stream_finish; ///
-  GdkPixbuf* function(const(char*)* data) c_gdk_pixbuf_new_from_xpm_data; ///
-  int function(GdkColorspace colorspace, gboolean hasAlpha, int bitsPerSample, int width, int height) c_gdk_pixbuf_calculate_rowstride; ///
-  GdkPixbufFormat* function(const(char)* filename, int* width, int* height) c_gdk_pixbuf_get_file_info; ///
-  void function(const(char)* filename, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gdk_pixbuf_get_file_info_async; ///
-  GdkPixbufFormat* function(GAsyncResult* asyncResult, int* width, int* height, GError** _err) c_gdk_pixbuf_get_file_info_finish; ///
-  GSList* function() c_gdk_pixbuf_get_formats; ///
-  gboolean function(const(char)* path, GError** _err) c_gdk_pixbuf_init_modules; ///
-  void function(GInputStream* stream, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gdk_pixbuf_new_from_stream_async; ///
-  void function(GInputStream* stream, int width, int height, gboolean preserveAspectRatio, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gdk_pixbuf_new_from_stream_at_scale_async; ///
-  gboolean function(GAsyncResult* asyncResult, GError** _err) c_gdk_pixbuf_save_to_stream_finish; ///
-  GdkPixbuf* function(const(GdkPixbuf)* pixbuf, gboolean substituteColor, ubyte r, ubyte g, ubyte b) c_gdk_pixbuf_add_alpha; ///
-  GdkPixbuf* function(GdkPixbuf* src) c_gdk_pixbuf_apply_embedded_orientation; ///
-  void function(const(GdkPixbuf)* src, GdkPixbuf* dest, int destX, int destY, int destWidth, int destHeight, double offsetX, double offsetY, double scaleX, double scaleY, GdkInterpType interpType, int overallAlpha) c_gdk_pixbuf_composite; ///
-  void function(const(GdkPixbuf)* src, GdkPixbuf* dest, int destX, int destY, int destWidth, int destHeight, double offsetX, double offsetY, double scaleX, double scaleY, GdkInterpType interpType, int overallAlpha, int checkX, int checkY, int checkSize, uint color1, uint color2) c_gdk_pixbuf_composite_color; ///
-  GdkPixbuf* function(const(GdkPixbuf)* src, int destWidth, int destHeight, GdkInterpType interpType, int overallAlpha, int checkSize, uint color1, uint color2) c_gdk_pixbuf_composite_color_simple; ///
-  GdkPixbuf* function(const(GdkPixbuf)* pixbuf) c_gdk_pixbuf_copy; ///
-  void function(const(GdkPixbuf)* srcPixbuf, int srcX, int srcY, int width, int height, GdkPixbuf* destPixbuf, int destX, int destY) c_gdk_pixbuf_copy_area; ///
-  gboolean function(GdkPixbuf* srcPixbuf, GdkPixbuf* destPixbuf) c_gdk_pixbuf_copy_options; ///
-  void function(GdkPixbuf* pixbuf, uint pixel) c_gdk_pixbuf_fill; ///
-  GdkPixbuf* function(const(GdkPixbuf)* src, gboolean horizontal) c_gdk_pixbuf_flip; ///
-  int function(const(GdkPixbuf)* pixbuf) c_gdk_pixbuf_get_bits_per_sample; ///
-  size_t function(const(GdkPixbuf)* pixbuf) c_gdk_pixbuf_get_byte_length; ///
-  GdkColorspace function(const(GdkPixbuf)* pixbuf) c_gdk_pixbuf_get_colorspace; ///
-  gboolean function(const(GdkPixbuf)* pixbuf) c_gdk_pixbuf_get_has_alpha; ///
-  int function(const(GdkPixbuf)* pixbuf) c_gdk_pixbuf_get_height; ///
-  int function(const(GdkPixbuf)* pixbuf) c_gdk_pixbuf_get_n_channels; ///
-  const(char)* function(GdkPixbuf* pixbuf, const(char)* key) c_gdk_pixbuf_get_option; ///
-  GHashTable* function(GdkPixbuf* pixbuf) c_gdk_pixbuf_get_options; ///
-  ubyte* function(const(GdkPixbuf)* pixbuf) c_gdk_pixbuf_get_pixels; ///
-  ubyte* function(const(GdkPixbuf)* pixbuf, uint* length) c_gdk_pixbuf_get_pixels_with_length; ///
-  int function(const(GdkPixbuf)* pixbuf) c_gdk_pixbuf_get_rowstride; ///
-  int function(const(GdkPixbuf)* pixbuf) c_gdk_pixbuf_get_width; ///
-  GdkPixbuf* function(GdkPixbuf* srcPixbuf, int srcX, int srcY, int width, int height) c_gdk_pixbuf_new_subpixbuf; ///
-  GBytes* function(const(GdkPixbuf)* pixbuf) c_gdk_pixbuf_read_pixel_bytes; ///
-  const(ubyte)* function(const(GdkPixbuf)* pixbuf) c_gdk_pixbuf_read_pixels; ///
-  GdkPixbuf* function(GdkPixbuf* pixbuf) c_gdk_pixbuf_ref; ///
-  gboolean function(GdkPixbuf* pixbuf, const(char)* key) c_gdk_pixbuf_remove_option; ///
-  GdkPixbuf* function(const(GdkPixbuf)* src, GdkPixbufRotation angle) c_gdk_pixbuf_rotate_simple; ///
-  void function(const(GdkPixbuf)* src, GdkPixbuf* dest, float saturation, gboolean pixelate) c_gdk_pixbuf_saturate_and_pixelate; ///
-  gboolean function(GdkPixbuf* pixbuf, const(char)* filename, const(char)* type, GError** error,  ...) c_gdk_pixbuf_save; ///
-  gboolean function(GdkPixbuf* pixbuf, ubyte** buffer, size_t* bufferSize, const(char)* type, GError** error,  ...) c_gdk_pixbuf_save_to_buffer; ///
-  gboolean function(GdkPixbuf* pixbuf, ubyte** buffer, size_t* bufferSize, const(char)* type, char** optionKeys, char** optionValues, GError** _err) c_gdk_pixbuf_save_to_bufferv; ///
-  gboolean function(GdkPixbuf* pixbuf, GdkPixbufSaveFunc saveFunc, void* userData, const(char)* type, GError** error,  ...) c_gdk_pixbuf_save_to_callback; ///
-  gboolean function(GdkPixbuf* pixbuf, GdkPixbufSaveFunc saveFunc, void* userData, const(char)* type, char** optionKeys, char** optionValues, GError** _err) c_gdk_pixbuf_save_to_callbackv; ///
-  gboolean function(GdkPixbuf* pixbuf, GOutputStream* stream, const(char)* type, GCancellable* cancellable, GError** error,  ...) c_gdk_pixbuf_save_to_stream; ///
-  void function(GdkPixbuf* pixbuf, GOutputStream* stream, const(char)* type, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData,  ...) c_gdk_pixbuf_save_to_stream_async; ///
-  gboolean function(GdkPixbuf* pixbuf, GOutputStream* stream, const(char)* type, char** optionKeys, char** optionValues, GCancellable* cancellable, GError** _err) c_gdk_pixbuf_save_to_streamv; ///
-  void function(GdkPixbuf* pixbuf, GOutputStream* stream, const(char)* type, char** optionKeys, char** optionValues, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gdk_pixbuf_save_to_streamv_async; ///
-  gboolean function(GdkPixbuf* pixbuf, const(char)* filename, const(char)* type, char** optionKeys, char** optionValues, GError** _err) c_gdk_pixbuf_savev; ///
-  void function(const(GdkPixbuf)* src, GdkPixbuf* dest, int destX, int destY, int destWidth, int destHeight, double offsetX, double offsetY, double scaleX, double scaleY, GdkInterpType interpType) c_gdk_pixbuf_scale; ///
-  GdkPixbuf* function(const(GdkPixbuf)* src, int destWidth, int destHeight, GdkInterpType interpType) c_gdk_pixbuf_scale_simple; ///
-  gboolean function(GdkPixbuf* pixbuf, const(char)* key, const(char)* value) c_gdk_pixbuf_set_option; ///
-  void function(GdkPixbuf* pixbuf) c_gdk_pixbuf_unref; ///
+// Pixbuf
+private alias c_gdk_pixbuf_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gdk_pixbuf_get_typeFn c_gdk_pixbuf_get_type; ///
+private alias c_gdk_pixbuf_newFn = extern(C) GdkPixbuf* function(GdkColorspace colorspace, gboolean hasAlpha, int bitsPerSample, int width, int height) nothrow;
+__gshared c_gdk_pixbuf_newFn c_gdk_pixbuf_new; ///
+private alias c_gdk_pixbuf_new_from_bytesFn = extern(C) GdkPixbuf* function(GBytes* data, GdkColorspace colorspace, gboolean hasAlpha, int bitsPerSample, int width, int height, int rowstride) nothrow;
+__gshared c_gdk_pixbuf_new_from_bytesFn c_gdk_pixbuf_new_from_bytes; ///
+private alias c_gdk_pixbuf_new_from_dataFn = extern(C) GdkPixbuf* function(const(ubyte)* data, GdkColorspace colorspace, gboolean hasAlpha, int bitsPerSample, int width, int height, int rowstride, GdkPixbufDestroyNotify destroyFn, void* destroyFnData) nothrow;
+__gshared c_gdk_pixbuf_new_from_dataFn c_gdk_pixbuf_new_from_data; ///
+private alias c_gdk_pixbuf_new_from_fileFn = extern(C) GdkPixbuf* function(const(char)* filename, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_new_from_fileFn c_gdk_pixbuf_new_from_file; ///
+private alias c_gdk_pixbuf_new_from_file_at_scaleFn = extern(C) GdkPixbuf* function(const(char)* filename, int width, int height, gboolean preserveAspectRatio, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_new_from_file_at_scaleFn c_gdk_pixbuf_new_from_file_at_scale; ///
+private alias c_gdk_pixbuf_new_from_file_at_sizeFn = extern(C) GdkPixbuf* function(const(char)* filename, int width, int height, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_new_from_file_at_sizeFn c_gdk_pixbuf_new_from_file_at_size; ///
+private alias c_gdk_pixbuf_new_from_inlineFn = extern(C) GdkPixbuf* function(int dataLength, const(ubyte)* data, gboolean copyPixels, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_new_from_inlineFn c_gdk_pixbuf_new_from_inline; ///
+private alias c_gdk_pixbuf_new_from_resourceFn = extern(C) GdkPixbuf* function(const(char)* resourcePath, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_new_from_resourceFn c_gdk_pixbuf_new_from_resource; ///
+private alias c_gdk_pixbuf_new_from_resource_at_scaleFn = extern(C) GdkPixbuf* function(const(char)* resourcePath, int width, int height, gboolean preserveAspectRatio, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_new_from_resource_at_scaleFn c_gdk_pixbuf_new_from_resource_at_scale; ///
+private alias c_gdk_pixbuf_new_from_streamFn = extern(C) GdkPixbuf* function(GInputStream* stream, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_new_from_streamFn c_gdk_pixbuf_new_from_stream; ///
+private alias c_gdk_pixbuf_new_from_stream_at_scaleFn = extern(C) GdkPixbuf* function(GInputStream* stream, int width, int height, gboolean preserveAspectRatio, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_new_from_stream_at_scaleFn c_gdk_pixbuf_new_from_stream_at_scale; ///
+private alias c_gdk_pixbuf_new_from_stream_finishFn = extern(C) GdkPixbuf* function(GAsyncResult* asyncResult, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_new_from_stream_finishFn c_gdk_pixbuf_new_from_stream_finish; ///
+private alias c_gdk_pixbuf_new_from_xpm_dataFn = extern(C) GdkPixbuf* function(const(char*)* data) nothrow;
+__gshared c_gdk_pixbuf_new_from_xpm_dataFn c_gdk_pixbuf_new_from_xpm_data; ///
+private alias c_gdk_pixbuf_calculate_rowstrideFn = extern(C) int function(GdkColorspace colorspace, gboolean hasAlpha, int bitsPerSample, int width, int height) nothrow;
+__gshared c_gdk_pixbuf_calculate_rowstrideFn c_gdk_pixbuf_calculate_rowstride; ///
+private alias c_gdk_pixbuf_get_file_infoFn = extern(C) GdkPixbufFormat* function(const(char)* filename, int* width, int* height) nothrow;
+__gshared c_gdk_pixbuf_get_file_infoFn c_gdk_pixbuf_get_file_info; ///
+private alias c_gdk_pixbuf_get_file_info_asyncFn = extern(C) void function(const(char)* filename, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_gdk_pixbuf_get_file_info_asyncFn c_gdk_pixbuf_get_file_info_async; ///
+private alias c_gdk_pixbuf_get_file_info_finishFn = extern(C) GdkPixbufFormat* function(GAsyncResult* asyncResult, int* width, int* height, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_get_file_info_finishFn c_gdk_pixbuf_get_file_info_finish; ///
+private alias c_gdk_pixbuf_get_formatsFn = extern(C) GSList* function() nothrow;
+__gshared c_gdk_pixbuf_get_formatsFn c_gdk_pixbuf_get_formats; ///
+private alias c_gdk_pixbuf_init_modulesFn = extern(C) gboolean function(const(char)* path, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_init_modulesFn c_gdk_pixbuf_init_modules; ///
+private alias c_gdk_pixbuf_new_from_stream_asyncFn = extern(C) void function(GInputStream* stream, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_gdk_pixbuf_new_from_stream_asyncFn c_gdk_pixbuf_new_from_stream_async; ///
+private alias c_gdk_pixbuf_new_from_stream_at_scale_asyncFn = extern(C) void function(GInputStream* stream, int width, int height, gboolean preserveAspectRatio, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_gdk_pixbuf_new_from_stream_at_scale_asyncFn c_gdk_pixbuf_new_from_stream_at_scale_async; ///
+private alias c_gdk_pixbuf_save_to_stream_finishFn = extern(C) gboolean function(GAsyncResult* asyncResult, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_save_to_stream_finishFn c_gdk_pixbuf_save_to_stream_finish; ///
+private alias c_gdk_pixbuf_add_alphaFn = extern(C) GdkPixbuf* function(const(GdkPixbuf)* pixbuf, gboolean substituteColor, ubyte r, ubyte g, ubyte b) nothrow;
+__gshared c_gdk_pixbuf_add_alphaFn c_gdk_pixbuf_add_alpha; ///
+private alias c_gdk_pixbuf_apply_embedded_orientationFn = extern(C) GdkPixbuf* function(GdkPixbuf* src) nothrow;
+__gshared c_gdk_pixbuf_apply_embedded_orientationFn c_gdk_pixbuf_apply_embedded_orientation; ///
+private alias c_gdk_pixbuf_compositeFn = extern(C) void function(const(GdkPixbuf)* src, GdkPixbuf* dest, int destX, int destY, int destWidth, int destHeight, double offsetX, double offsetY, double scaleX, double scaleY, GdkInterpType interpType, int overallAlpha) nothrow;
+__gshared c_gdk_pixbuf_compositeFn c_gdk_pixbuf_composite; ///
+private alias c_gdk_pixbuf_composite_colorFn = extern(C) void function(const(GdkPixbuf)* src, GdkPixbuf* dest, int destX, int destY, int destWidth, int destHeight, double offsetX, double offsetY, double scaleX, double scaleY, GdkInterpType interpType, int overallAlpha, int checkX, int checkY, int checkSize, uint color1, uint color2) nothrow;
+__gshared c_gdk_pixbuf_composite_colorFn c_gdk_pixbuf_composite_color; ///
+private alias c_gdk_pixbuf_composite_color_simpleFn = extern(C) GdkPixbuf* function(const(GdkPixbuf)* src, int destWidth, int destHeight, GdkInterpType interpType, int overallAlpha, int checkSize, uint color1, uint color2) nothrow;
+__gshared c_gdk_pixbuf_composite_color_simpleFn c_gdk_pixbuf_composite_color_simple; ///
+private alias c_gdk_pixbuf_copyFn = extern(C) GdkPixbuf* function(const(GdkPixbuf)* pixbuf) nothrow;
+__gshared c_gdk_pixbuf_copyFn c_gdk_pixbuf_copy; ///
+private alias c_gdk_pixbuf_copy_areaFn = extern(C) void function(const(GdkPixbuf)* srcPixbuf, int srcX, int srcY, int width, int height, GdkPixbuf* destPixbuf, int destX, int destY) nothrow;
+__gshared c_gdk_pixbuf_copy_areaFn c_gdk_pixbuf_copy_area; ///
+private alias c_gdk_pixbuf_copy_optionsFn = extern(C) gboolean function(GdkPixbuf* srcPixbuf, GdkPixbuf* destPixbuf) nothrow;
+__gshared c_gdk_pixbuf_copy_optionsFn c_gdk_pixbuf_copy_options; ///
+private alias c_gdk_pixbuf_fillFn = extern(C) void function(GdkPixbuf* pixbuf, uint pixel) nothrow;
+__gshared c_gdk_pixbuf_fillFn c_gdk_pixbuf_fill; ///
+private alias c_gdk_pixbuf_flipFn = extern(C) GdkPixbuf* function(const(GdkPixbuf)* src, gboolean horizontal) nothrow;
+__gshared c_gdk_pixbuf_flipFn c_gdk_pixbuf_flip; ///
+private alias c_gdk_pixbuf_get_bits_per_sampleFn = extern(C) int function(const(GdkPixbuf)* pixbuf) nothrow;
+__gshared c_gdk_pixbuf_get_bits_per_sampleFn c_gdk_pixbuf_get_bits_per_sample; ///
+private alias c_gdk_pixbuf_get_byte_lengthFn = extern(C) size_t function(const(GdkPixbuf)* pixbuf) nothrow;
+__gshared c_gdk_pixbuf_get_byte_lengthFn c_gdk_pixbuf_get_byte_length; ///
+private alias c_gdk_pixbuf_get_colorspaceFn = extern(C) GdkColorspace function(const(GdkPixbuf)* pixbuf) nothrow;
+__gshared c_gdk_pixbuf_get_colorspaceFn c_gdk_pixbuf_get_colorspace; ///
+private alias c_gdk_pixbuf_get_has_alphaFn = extern(C) gboolean function(const(GdkPixbuf)* pixbuf) nothrow;
+__gshared c_gdk_pixbuf_get_has_alphaFn c_gdk_pixbuf_get_has_alpha; ///
+private alias c_gdk_pixbuf_get_heightFn = extern(C) int function(const(GdkPixbuf)* pixbuf) nothrow;
+__gshared c_gdk_pixbuf_get_heightFn c_gdk_pixbuf_get_height; ///
+private alias c_gdk_pixbuf_get_n_channelsFn = extern(C) int function(const(GdkPixbuf)* pixbuf) nothrow;
+__gshared c_gdk_pixbuf_get_n_channelsFn c_gdk_pixbuf_get_n_channels; ///
+private alias c_gdk_pixbuf_get_optionFn = extern(C) const(char)* function(GdkPixbuf* pixbuf, const(char)* key) nothrow;
+__gshared c_gdk_pixbuf_get_optionFn c_gdk_pixbuf_get_option; ///
+private alias c_gdk_pixbuf_get_optionsFn = extern(C) GHashTable* function(GdkPixbuf* pixbuf) nothrow;
+__gshared c_gdk_pixbuf_get_optionsFn c_gdk_pixbuf_get_options; ///
+private alias c_gdk_pixbuf_get_pixelsFn = extern(C) ubyte* function(const(GdkPixbuf)* pixbuf) nothrow;
+__gshared c_gdk_pixbuf_get_pixelsFn c_gdk_pixbuf_get_pixels; ///
+private alias c_gdk_pixbuf_get_pixels_with_lengthFn = extern(C) ubyte* function(const(GdkPixbuf)* pixbuf, uint* length) nothrow;
+__gshared c_gdk_pixbuf_get_pixels_with_lengthFn c_gdk_pixbuf_get_pixels_with_length; ///
+private alias c_gdk_pixbuf_get_rowstrideFn = extern(C) int function(const(GdkPixbuf)* pixbuf) nothrow;
+__gshared c_gdk_pixbuf_get_rowstrideFn c_gdk_pixbuf_get_rowstride; ///
+private alias c_gdk_pixbuf_get_widthFn = extern(C) int function(const(GdkPixbuf)* pixbuf) nothrow;
+__gshared c_gdk_pixbuf_get_widthFn c_gdk_pixbuf_get_width; ///
+private alias c_gdk_pixbuf_new_subpixbufFn = extern(C) GdkPixbuf* function(GdkPixbuf* srcPixbuf, int srcX, int srcY, int width, int height) nothrow;
+__gshared c_gdk_pixbuf_new_subpixbufFn c_gdk_pixbuf_new_subpixbuf; ///
+private alias c_gdk_pixbuf_read_pixel_bytesFn = extern(C) GBytes* function(const(GdkPixbuf)* pixbuf) nothrow;
+__gshared c_gdk_pixbuf_read_pixel_bytesFn c_gdk_pixbuf_read_pixel_bytes; ///
+private alias c_gdk_pixbuf_read_pixelsFn = extern(C) const(ubyte)* function(const(GdkPixbuf)* pixbuf) nothrow;
+__gshared c_gdk_pixbuf_read_pixelsFn c_gdk_pixbuf_read_pixels; ///
+private alias c_gdk_pixbuf_refFn = extern(C) GdkPixbuf* function(GdkPixbuf* pixbuf) nothrow;
+__gshared c_gdk_pixbuf_refFn c_gdk_pixbuf_ref; ///
+private alias c_gdk_pixbuf_remove_optionFn = extern(C) gboolean function(GdkPixbuf* pixbuf, const(char)* key) nothrow;
+__gshared c_gdk_pixbuf_remove_optionFn c_gdk_pixbuf_remove_option; ///
+private alias c_gdk_pixbuf_rotate_simpleFn = extern(C) GdkPixbuf* function(const(GdkPixbuf)* src, GdkPixbufRotation angle) nothrow;
+__gshared c_gdk_pixbuf_rotate_simpleFn c_gdk_pixbuf_rotate_simple; ///
+private alias c_gdk_pixbuf_saturate_and_pixelateFn = extern(C) void function(const(GdkPixbuf)* src, GdkPixbuf* dest, float saturation, gboolean pixelate) nothrow;
+__gshared c_gdk_pixbuf_saturate_and_pixelateFn c_gdk_pixbuf_saturate_and_pixelate; ///
+private alias c_gdk_pixbuf_saveFn = extern(C) gboolean function(GdkPixbuf* pixbuf, const(char)* filename, const(char)* type, GError** error,  ...) nothrow;
+__gshared c_gdk_pixbuf_saveFn c_gdk_pixbuf_save; ///
+private alias c_gdk_pixbuf_save_to_bufferFn = extern(C) gboolean function(GdkPixbuf* pixbuf, ubyte** buffer, size_t* bufferSize, const(char)* type, GError** error,  ...) nothrow;
+__gshared c_gdk_pixbuf_save_to_bufferFn c_gdk_pixbuf_save_to_buffer; ///
+private alias c_gdk_pixbuf_save_to_buffervFn = extern(C) gboolean function(GdkPixbuf* pixbuf, ubyte** buffer, size_t* bufferSize, const(char)* type, char** optionKeys, char** optionValues, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_save_to_buffervFn c_gdk_pixbuf_save_to_bufferv; ///
+private alias c_gdk_pixbuf_save_to_callbackFn = extern(C) gboolean function(GdkPixbuf* pixbuf, GdkPixbufSaveFunc saveFunc, void* userData, const(char)* type, GError** error,  ...) nothrow;
+__gshared c_gdk_pixbuf_save_to_callbackFn c_gdk_pixbuf_save_to_callback; ///
+private alias c_gdk_pixbuf_save_to_callbackvFn = extern(C) gboolean function(GdkPixbuf* pixbuf, GdkPixbufSaveFunc saveFunc, void* userData, const(char)* type, char** optionKeys, char** optionValues, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_save_to_callbackvFn c_gdk_pixbuf_save_to_callbackv; ///
+private alias c_gdk_pixbuf_save_to_streamFn = extern(C) gboolean function(GdkPixbuf* pixbuf, GOutputStream* stream, const(char)* type, GCancellable* cancellable, GError** error,  ...) nothrow;
+__gshared c_gdk_pixbuf_save_to_streamFn c_gdk_pixbuf_save_to_stream; ///
+private alias c_gdk_pixbuf_save_to_stream_asyncFn = extern(C) void function(GdkPixbuf* pixbuf, GOutputStream* stream, const(char)* type, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData,  ...) nothrow;
+__gshared c_gdk_pixbuf_save_to_stream_asyncFn c_gdk_pixbuf_save_to_stream_async; ///
+private alias c_gdk_pixbuf_save_to_streamvFn = extern(C) gboolean function(GdkPixbuf* pixbuf, GOutputStream* stream, const(char)* type, char** optionKeys, char** optionValues, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_save_to_streamvFn c_gdk_pixbuf_save_to_streamv; ///
+private alias c_gdk_pixbuf_save_to_streamv_asyncFn = extern(C) void function(GdkPixbuf* pixbuf, GOutputStream* stream, const(char)* type, char** optionKeys, char** optionValues, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_gdk_pixbuf_save_to_streamv_asyncFn c_gdk_pixbuf_save_to_streamv_async; ///
+private alias c_gdk_pixbuf_savevFn = extern(C) gboolean function(GdkPixbuf* pixbuf, const(char)* filename, const(char)* type, char** optionKeys, char** optionValues, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_savevFn c_gdk_pixbuf_savev; ///
+private alias c_gdk_pixbuf_scaleFn = extern(C) void function(const(GdkPixbuf)* src, GdkPixbuf* dest, int destX, int destY, int destWidth, int destHeight, double offsetX, double offsetY, double scaleX, double scaleY, GdkInterpType interpType) nothrow;
+__gshared c_gdk_pixbuf_scaleFn c_gdk_pixbuf_scale; ///
+private alias c_gdk_pixbuf_scale_simpleFn = extern(C) GdkPixbuf* function(const(GdkPixbuf)* src, int destWidth, int destHeight, GdkInterpType interpType) nothrow;
+__gshared c_gdk_pixbuf_scale_simpleFn c_gdk_pixbuf_scale_simple; ///
+private alias c_gdk_pixbuf_set_optionFn = extern(C) gboolean function(GdkPixbuf* pixbuf, const(char)* key, const(char)* value) nothrow;
+__gshared c_gdk_pixbuf_set_optionFn c_gdk_pixbuf_set_option; ///
+private alias c_gdk_pixbuf_unrefFn = extern(C) void function(GdkPixbuf* pixbuf) nothrow;
+__gshared c_gdk_pixbuf_unrefFn c_gdk_pixbuf_unref; ///
 
-  // PixbufAnimation
-  GType function() c_gdk_pixbuf_animation_get_type; ///
-  GdkPixbufAnimation* function(const(char)* filename, GError** _err) c_gdk_pixbuf_animation_new_from_file; ///
-  GdkPixbufAnimation* function(const(char)* resourcePath, GError** _err) c_gdk_pixbuf_animation_new_from_resource; ///
-  GdkPixbufAnimation* function(GInputStream* stream, GCancellable* cancellable, GError** _err) c_gdk_pixbuf_animation_new_from_stream; ///
-  GdkPixbufAnimation* function(GAsyncResult* asyncResult, GError** _err) c_gdk_pixbuf_animation_new_from_stream_finish; ///
-  void function(GInputStream* stream, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gdk_pixbuf_animation_new_from_stream_async; ///
-  int function(GdkPixbufAnimation* animation) c_gdk_pixbuf_animation_get_height; ///
-  GdkPixbufAnimationIter* function(GdkPixbufAnimation* animation, const(GTimeVal)* startTime) c_gdk_pixbuf_animation_get_iter; ///
-  GdkPixbuf* function(GdkPixbufAnimation* animation) c_gdk_pixbuf_animation_get_static_image; ///
-  int function(GdkPixbufAnimation* animation) c_gdk_pixbuf_animation_get_width; ///
-  gboolean function(GdkPixbufAnimation* animation) c_gdk_pixbuf_animation_is_static_image; ///
-  GdkPixbufAnimation* function(GdkPixbufAnimation* animation) c_gdk_pixbuf_animation_ref; ///
-  void function(GdkPixbufAnimation* animation) c_gdk_pixbuf_animation_unref; ///
+// PixbufAnimation
+private alias c_gdk_pixbuf_animation_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gdk_pixbuf_animation_get_typeFn c_gdk_pixbuf_animation_get_type; ///
+private alias c_gdk_pixbuf_animation_new_from_fileFn = extern(C) GdkPixbufAnimation* function(const(char)* filename, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_animation_new_from_fileFn c_gdk_pixbuf_animation_new_from_file; ///
+private alias c_gdk_pixbuf_animation_new_from_resourceFn = extern(C) GdkPixbufAnimation* function(const(char)* resourcePath, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_animation_new_from_resourceFn c_gdk_pixbuf_animation_new_from_resource; ///
+private alias c_gdk_pixbuf_animation_new_from_streamFn = extern(C) GdkPixbufAnimation* function(GInputStream* stream, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_animation_new_from_streamFn c_gdk_pixbuf_animation_new_from_stream; ///
+private alias c_gdk_pixbuf_animation_new_from_stream_finishFn = extern(C) GdkPixbufAnimation* function(GAsyncResult* asyncResult, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_animation_new_from_stream_finishFn c_gdk_pixbuf_animation_new_from_stream_finish; ///
+private alias c_gdk_pixbuf_animation_new_from_stream_asyncFn = extern(C) void function(GInputStream* stream, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_gdk_pixbuf_animation_new_from_stream_asyncFn c_gdk_pixbuf_animation_new_from_stream_async; ///
+private alias c_gdk_pixbuf_animation_get_heightFn = extern(C) int function(GdkPixbufAnimation* animation) nothrow;
+__gshared c_gdk_pixbuf_animation_get_heightFn c_gdk_pixbuf_animation_get_height; ///
+private alias c_gdk_pixbuf_animation_get_iterFn = extern(C) GdkPixbufAnimationIter* function(GdkPixbufAnimation* animation, const(GTimeVal)* startTime) nothrow;
+__gshared c_gdk_pixbuf_animation_get_iterFn c_gdk_pixbuf_animation_get_iter; ///
+private alias c_gdk_pixbuf_animation_get_static_imageFn = extern(C) GdkPixbuf* function(GdkPixbufAnimation* animation) nothrow;
+__gshared c_gdk_pixbuf_animation_get_static_imageFn c_gdk_pixbuf_animation_get_static_image; ///
+private alias c_gdk_pixbuf_animation_get_widthFn = extern(C) int function(GdkPixbufAnimation* animation) nothrow;
+__gshared c_gdk_pixbuf_animation_get_widthFn c_gdk_pixbuf_animation_get_width; ///
+private alias c_gdk_pixbuf_animation_is_static_imageFn = extern(C) gboolean function(GdkPixbufAnimation* animation) nothrow;
+__gshared c_gdk_pixbuf_animation_is_static_imageFn c_gdk_pixbuf_animation_is_static_image; ///
+private alias c_gdk_pixbuf_animation_refFn = extern(C) GdkPixbufAnimation* function(GdkPixbufAnimation* animation) nothrow;
+__gshared c_gdk_pixbuf_animation_refFn c_gdk_pixbuf_animation_ref; ///
+private alias c_gdk_pixbuf_animation_unrefFn = extern(C) void function(GdkPixbufAnimation* animation) nothrow;
+__gshared c_gdk_pixbuf_animation_unrefFn c_gdk_pixbuf_animation_unref; ///
 
-  // PixbufAnimationIter
-  GType function() c_gdk_pixbuf_animation_iter_get_type; ///
-  gboolean function(GdkPixbufAnimationIter* iter, const(GTimeVal)* currentTime) c_gdk_pixbuf_animation_iter_advance; ///
-  int function(GdkPixbufAnimationIter* iter) c_gdk_pixbuf_animation_iter_get_delay_time; ///
-  GdkPixbuf* function(GdkPixbufAnimationIter* iter) c_gdk_pixbuf_animation_iter_get_pixbuf; ///
-  gboolean function(GdkPixbufAnimationIter* iter) c_gdk_pixbuf_animation_iter_on_currently_loading_frame; ///
+// PixbufAnimationIter
+private alias c_gdk_pixbuf_animation_iter_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gdk_pixbuf_animation_iter_get_typeFn c_gdk_pixbuf_animation_iter_get_type; ///
+private alias c_gdk_pixbuf_animation_iter_advanceFn = extern(C) gboolean function(GdkPixbufAnimationIter* iter, const(GTimeVal)* currentTime) nothrow;
+__gshared c_gdk_pixbuf_animation_iter_advanceFn c_gdk_pixbuf_animation_iter_advance; ///
+private alias c_gdk_pixbuf_animation_iter_get_delay_timeFn = extern(C) int function(GdkPixbufAnimationIter* iter) nothrow;
+__gshared c_gdk_pixbuf_animation_iter_get_delay_timeFn c_gdk_pixbuf_animation_iter_get_delay_time; ///
+private alias c_gdk_pixbuf_animation_iter_get_pixbufFn = extern(C) GdkPixbuf* function(GdkPixbufAnimationIter* iter) nothrow;
+__gshared c_gdk_pixbuf_animation_iter_get_pixbufFn c_gdk_pixbuf_animation_iter_get_pixbuf; ///
+private alias c_gdk_pixbuf_animation_iter_on_currently_loading_frameFn = extern(C) gboolean function(GdkPixbufAnimationIter* iter) nothrow;
+__gshared c_gdk_pixbuf_animation_iter_on_currently_loading_frameFn c_gdk_pixbuf_animation_iter_on_currently_loading_frame; ///
 
-  // PixbufFormat
-  GType function() c_gdk_pixbuf_format_get_type; ///
-  GdkPixbufFormat* function(const(GdkPixbufFormat)* format) c_gdk_pixbuf_format_copy; ///
-  void function(GdkPixbufFormat* format) c_gdk_pixbuf_format_free; ///
-  char* function(GdkPixbufFormat* format) c_gdk_pixbuf_format_get_description; ///
-  char** function(GdkPixbufFormat* format) c_gdk_pixbuf_format_get_extensions; ///
-  char* function(GdkPixbufFormat* format) c_gdk_pixbuf_format_get_license; ///
-  char** function(GdkPixbufFormat* format) c_gdk_pixbuf_format_get_mime_types; ///
-  char* function(GdkPixbufFormat* format) c_gdk_pixbuf_format_get_name; ///
-  gboolean function(GdkPixbufFormat* format) c_gdk_pixbuf_format_is_disabled; ///
-  gboolean function(GdkPixbufFormat* format, const(char)* optionKey) c_gdk_pixbuf_format_is_save_option_supported; ///
-  gboolean function(GdkPixbufFormat* format) c_gdk_pixbuf_format_is_scalable; ///
-  gboolean function(GdkPixbufFormat* format) c_gdk_pixbuf_format_is_writable; ///
-  void function(GdkPixbufFormat* format, gboolean disabled) c_gdk_pixbuf_format_set_disabled; ///
+// PixbufFormat
+private alias c_gdk_pixbuf_format_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gdk_pixbuf_format_get_typeFn c_gdk_pixbuf_format_get_type; ///
+private alias c_gdk_pixbuf_format_copyFn = extern(C) GdkPixbufFormat* function(const(GdkPixbufFormat)* format) nothrow;
+__gshared c_gdk_pixbuf_format_copyFn c_gdk_pixbuf_format_copy; ///
+private alias c_gdk_pixbuf_format_freeFn = extern(C) void function(GdkPixbufFormat* format) nothrow;
+__gshared c_gdk_pixbuf_format_freeFn c_gdk_pixbuf_format_free; ///
+private alias c_gdk_pixbuf_format_get_descriptionFn = extern(C) char* function(GdkPixbufFormat* format) nothrow;
+__gshared c_gdk_pixbuf_format_get_descriptionFn c_gdk_pixbuf_format_get_description; ///
+private alias c_gdk_pixbuf_format_get_extensionsFn = extern(C) char** function(GdkPixbufFormat* format) nothrow;
+__gshared c_gdk_pixbuf_format_get_extensionsFn c_gdk_pixbuf_format_get_extensions; ///
+private alias c_gdk_pixbuf_format_get_licenseFn = extern(C) char* function(GdkPixbufFormat* format) nothrow;
+__gshared c_gdk_pixbuf_format_get_licenseFn c_gdk_pixbuf_format_get_license; ///
+private alias c_gdk_pixbuf_format_get_mime_typesFn = extern(C) char** function(GdkPixbufFormat* format) nothrow;
+__gshared c_gdk_pixbuf_format_get_mime_typesFn c_gdk_pixbuf_format_get_mime_types; ///
+private alias c_gdk_pixbuf_format_get_nameFn = extern(C) char* function(GdkPixbufFormat* format) nothrow;
+__gshared c_gdk_pixbuf_format_get_nameFn c_gdk_pixbuf_format_get_name; ///
+private alias c_gdk_pixbuf_format_is_disabledFn = extern(C) gboolean function(GdkPixbufFormat* format) nothrow;
+__gshared c_gdk_pixbuf_format_is_disabledFn c_gdk_pixbuf_format_is_disabled; ///
+private alias c_gdk_pixbuf_format_is_save_option_supportedFn = extern(C) gboolean function(GdkPixbufFormat* format, const(char)* optionKey) nothrow;
+__gshared c_gdk_pixbuf_format_is_save_option_supportedFn c_gdk_pixbuf_format_is_save_option_supported; ///
+private alias c_gdk_pixbuf_format_is_scalableFn = extern(C) gboolean function(GdkPixbufFormat* format) nothrow;
+__gshared c_gdk_pixbuf_format_is_scalableFn c_gdk_pixbuf_format_is_scalable; ///
+private alias c_gdk_pixbuf_format_is_writableFn = extern(C) gboolean function(GdkPixbufFormat* format) nothrow;
+__gshared c_gdk_pixbuf_format_is_writableFn c_gdk_pixbuf_format_is_writable; ///
+private alias c_gdk_pixbuf_format_set_disabledFn = extern(C) void function(GdkPixbufFormat* format, gboolean disabled) nothrow;
+__gshared c_gdk_pixbuf_format_set_disabledFn c_gdk_pixbuf_format_set_disabled; ///
 
-  // PixbufLoader
-  GType function() c_gdk_pixbuf_loader_get_type; ///
-  GdkPixbufLoader* function() c_gdk_pixbuf_loader_new; ///
-  GdkPixbufLoader* function(const(char)* mimeType, GError** _err) c_gdk_pixbuf_loader_new_with_mime_type; ///
-  GdkPixbufLoader* function(const(char)* imageType, GError** _err) c_gdk_pixbuf_loader_new_with_type; ///
-  gboolean function(GdkPixbufLoader* loader, GError** _err) c_gdk_pixbuf_loader_close; ///
-  GdkPixbufAnimation* function(GdkPixbufLoader* loader) c_gdk_pixbuf_loader_get_animation; ///
-  GdkPixbufFormat* function(GdkPixbufLoader* loader) c_gdk_pixbuf_loader_get_format; ///
-  GdkPixbuf* function(GdkPixbufLoader* loader) c_gdk_pixbuf_loader_get_pixbuf; ///
-  void function(GdkPixbufLoader* loader, int width, int height) c_gdk_pixbuf_loader_set_size; ///
-  gboolean function(GdkPixbufLoader* loader, const(ubyte)* buf, size_t count, GError** _err) c_gdk_pixbuf_loader_write; ///
-  gboolean function(GdkPixbufLoader* loader, GBytes* buffer, GError** _err) c_gdk_pixbuf_loader_write_bytes; ///
+// PixbufLoader
+private alias c_gdk_pixbuf_loader_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gdk_pixbuf_loader_get_typeFn c_gdk_pixbuf_loader_get_type; ///
+private alias c_gdk_pixbuf_loader_newFn = extern(C) GdkPixbufLoader* function() nothrow;
+__gshared c_gdk_pixbuf_loader_newFn c_gdk_pixbuf_loader_new; ///
+private alias c_gdk_pixbuf_loader_new_with_mime_typeFn = extern(C) GdkPixbufLoader* function(const(char)* mimeType, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_loader_new_with_mime_typeFn c_gdk_pixbuf_loader_new_with_mime_type; ///
+private alias c_gdk_pixbuf_loader_new_with_typeFn = extern(C) GdkPixbufLoader* function(const(char)* imageType, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_loader_new_with_typeFn c_gdk_pixbuf_loader_new_with_type; ///
+private alias c_gdk_pixbuf_loader_closeFn = extern(C) gboolean function(GdkPixbufLoader* loader, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_loader_closeFn c_gdk_pixbuf_loader_close; ///
+private alias c_gdk_pixbuf_loader_get_animationFn = extern(C) GdkPixbufAnimation* function(GdkPixbufLoader* loader) nothrow;
+__gshared c_gdk_pixbuf_loader_get_animationFn c_gdk_pixbuf_loader_get_animation; ///
+private alias c_gdk_pixbuf_loader_get_formatFn = extern(C) GdkPixbufFormat* function(GdkPixbufLoader* loader) nothrow;
+__gshared c_gdk_pixbuf_loader_get_formatFn c_gdk_pixbuf_loader_get_format; ///
+private alias c_gdk_pixbuf_loader_get_pixbufFn = extern(C) GdkPixbuf* function(GdkPixbufLoader* loader) nothrow;
+__gshared c_gdk_pixbuf_loader_get_pixbufFn c_gdk_pixbuf_loader_get_pixbuf; ///
+private alias c_gdk_pixbuf_loader_set_sizeFn = extern(C) void function(GdkPixbufLoader* loader, int width, int height) nothrow;
+__gshared c_gdk_pixbuf_loader_set_sizeFn c_gdk_pixbuf_loader_set_size; ///
+private alias c_gdk_pixbuf_loader_writeFn = extern(C) gboolean function(GdkPixbufLoader* loader, const(ubyte)* buf, size_t count, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_loader_writeFn c_gdk_pixbuf_loader_write; ///
+private alias c_gdk_pixbuf_loader_write_bytesFn = extern(C) gboolean function(GdkPixbufLoader* loader, GBytes* buffer, GError** _err) nothrow;
+__gshared c_gdk_pixbuf_loader_write_bytesFn c_gdk_pixbuf_loader_write_bytes; ///
 
-  // PixbufNonAnim
-  GType function() c_gdk_pixbuf_non_anim_get_type; ///
-  GdkPixbufAnimation* function(GdkPixbuf* pixbuf) c_gdk_pixbuf_non_anim_new; ///
+// PixbufNonAnim
+private alias c_gdk_pixbuf_non_anim_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gdk_pixbuf_non_anim_get_typeFn c_gdk_pixbuf_non_anim_get_type; ///
+private alias c_gdk_pixbuf_non_anim_newFn = extern(C) GdkPixbufAnimation* function(GdkPixbuf* pixbuf) nothrow;
+__gshared c_gdk_pixbuf_non_anim_newFn c_gdk_pixbuf_non_anim_new; ///
 
-  // PixbufSimpleAnim
-  GType function() c_gdk_pixbuf_simple_anim_get_type; ///
-  GdkPixbufSimpleAnim* function(int width, int height, float rate) c_gdk_pixbuf_simple_anim_new; ///
-  void function(GdkPixbufSimpleAnim* animation, GdkPixbuf* pixbuf) c_gdk_pixbuf_simple_anim_add_frame; ///
-  gboolean function(GdkPixbufSimpleAnim* animation) c_gdk_pixbuf_simple_anim_get_loop; ///
-  void function(GdkPixbufSimpleAnim* animation, gboolean loop) c_gdk_pixbuf_simple_anim_set_loop; ///
+// PixbufSimpleAnim
+private alias c_gdk_pixbuf_simple_anim_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gdk_pixbuf_simple_anim_get_typeFn c_gdk_pixbuf_simple_anim_get_type; ///
+private alias c_gdk_pixbuf_simple_anim_newFn = extern(C) GdkPixbufSimpleAnim* function(int width, int height, float rate) nothrow;
+__gshared c_gdk_pixbuf_simple_anim_newFn c_gdk_pixbuf_simple_anim_new; ///
+private alias c_gdk_pixbuf_simple_anim_add_frameFn = extern(C) void function(GdkPixbufSimpleAnim* animation, GdkPixbuf* pixbuf) nothrow;
+__gshared c_gdk_pixbuf_simple_anim_add_frameFn c_gdk_pixbuf_simple_anim_add_frame; ///
+private alias c_gdk_pixbuf_simple_anim_get_loopFn = extern(C) gboolean function(GdkPixbufSimpleAnim* animation) nothrow;
+__gshared c_gdk_pixbuf_simple_anim_get_loopFn c_gdk_pixbuf_simple_anim_get_loop; ///
+private alias c_gdk_pixbuf_simple_anim_set_loopFn = extern(C) void function(GdkPixbufSimpleAnim* animation, gboolean loop) nothrow;
+__gshared c_gdk_pixbuf_simple_anim_set_loopFn c_gdk_pixbuf_simple_anim_set_loop; ///
 
-  // PixbufSimpleAnimIter
-  GType function() c_gdk_pixbuf_simple_anim_iter_get_type; ///
+// PixbufSimpleAnimIter
+private alias c_gdk_pixbuf_simple_anim_iter_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gdk_pixbuf_simple_anim_iter_get_typeFn c_gdk_pixbuf_simple_anim_iter_get_type; ///
 
-  // PixbufError
-  GQuark function() c_gdk_pixbuf_error_quark; ///
-}
+// PixbufError
+private alias c_gdk_pixbuf_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_gdk_pixbuf_error_quarkFn c_gdk_pixbuf_error_quark; ///
 
 // Pixbuf
 

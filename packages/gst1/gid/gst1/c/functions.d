@@ -10,2127 +10,4013 @@ public import gid.gobject2.c.types;
 
 private immutable LIBS = ["gstreamer-1.0_0"];
 
-__gshared extern(C) nothrow
-{
-  // AllocationParams
-  GType function() c_gst_allocation_params_get_type; ///
-  GstAllocationParams* function() c_gst_allocation_params_new; ///
-  GstAllocationParams* function(const(GstAllocationParams)* params) c_gst_allocation_params_copy; ///
-  void function(GstAllocationParams* params) c_gst_allocation_params_free; ///
-  void function(GstAllocationParams* params) c_gst_allocation_params_init; ///
-
-  // Allocator
-  GType function() c_gst_allocator_get_type; ///
-  GstAllocator* function(const(char)* name) c_gst_allocator_find; ///
-  void function(const(char)* name, GstAllocator* allocator) c_gst_allocator_register; ///
-  GstMemory* function(GstAllocator* allocator, size_t size, GstAllocationParams* params) c_gst_allocator_alloc; ///
-  void function(GstAllocator* allocator, GstMemory* memory) c_gst_allocator_free; ///
-  void function(GstAllocator* allocator) c_gst_allocator_set_default; ///
-
-  // AtomicQueue
-  GType function() c_gst_atomic_queue_get_type; ///
-  GstAtomicQueue* function(uint initialSize) c_gst_atomic_queue_new; ///
-  uint function(GstAtomicQueue* queue) c_gst_atomic_queue_length; ///
-  void* function(GstAtomicQueue* queue) c_gst_atomic_queue_peek; ///
-  void* function(GstAtomicQueue* queue) c_gst_atomic_queue_pop; ///
-  void function(GstAtomicQueue* queue, void* data) c_gst_atomic_queue_push; ///
-  void function(GstAtomicQueue* queue) c_gst_atomic_queue_ref; ///
-  void function(GstAtomicQueue* queue) c_gst_atomic_queue_unref; ///
-
-  // Bin
-  GType function() c_gst_bin_get_type; ///
-  GstElement* function(const(char)* name) c_gst_bin_new; ///
-  gboolean function(GstBin* bin, GstElement* element) c_gst_bin_add; ///
-  void function(GstBin* bin, GstElement* element1,  ...) c_gst_bin_add_many; ///
-  GstPad* function(GstBin* bin, GstPadDirection direction) c_gst_bin_find_unlinked_pad; ///
-  GstElement* function(GstBin* bin, GType iface) c_gst_bin_get_by_interface; ///
-  GstElement* function(GstBin* bin, const(char)* name) c_gst_bin_get_by_name; ///
-  GstElement* function(GstBin* bin, const(char)* name) c_gst_bin_get_by_name_recurse_up; ///
-  GstElementFlags function(GstBin* bin) c_gst_bin_get_suppressed_flags; ///
-  GstIterator* function(GstBin* bin, const(char)* factoryName) c_gst_bin_iterate_all_by_element_factory_name; ///
-  GstIterator* function(GstBin* bin, GType iface) c_gst_bin_iterate_all_by_interface; ///
-  GstIterator* function(GstBin* bin) c_gst_bin_iterate_elements; ///
-  GstIterator* function(GstBin* bin) c_gst_bin_iterate_recurse; ///
-  GstIterator* function(GstBin* bin) c_gst_bin_iterate_sinks; ///
-  GstIterator* function(GstBin* bin) c_gst_bin_iterate_sorted; ///
-  GstIterator* function(GstBin* bin) c_gst_bin_iterate_sources; ///
-  gboolean function(GstBin* bin) c_gst_bin_recalculate_latency; ///
-  gboolean function(GstBin* bin, GstElement* element) c_gst_bin_remove; ///
-  void function(GstBin* bin, GstElement* element1,  ...) c_gst_bin_remove_many; ///
-  void function(GstBin* bin, GstElementFlags flags) c_gst_bin_set_suppressed_flags; ///
-  gboolean function(GstBin* bin) c_gst_bin_sync_children_states; ///
-
-  // Bitmask
-  GType function() c_gst_bitmask_get_type; ///
-
-  // Buffer
-  GType function() c_gst_buffer_get_type; ///
-  GstBuffer* function() c_gst_buffer_new; ///
-  GstBuffer* function(GstAllocator* allocator, size_t size, GstAllocationParams* params) c_gst_buffer_new_allocate; ///
-  GstBuffer* function(const(void)* data, size_t size) c_gst_buffer_new_memdup; ///
-  GstBuffer* function(void* data, size_t size) c_gst_buffer_new_wrapped; ///
-  GstBuffer* function(GBytes* bytes) c_gst_buffer_new_wrapped_bytes; ///
-  GstBuffer* function(GstMemoryFlags flags, void* data, size_t maxsize, size_t offset, size_t size, void* userData, GDestroyNotify notify) c_gst_buffer_new_wrapped_full; ///
-  GstCustomMeta* function(GstBuffer* buffer, const(char)* name) c_gst_buffer_add_custom_meta; ///
-  GstMeta* function(GstBuffer* buffer, const(GstMetaInfo)* info, void* params) c_gst_buffer_add_meta; ///
-  GstParentBufferMeta* function(GstBuffer* buffer, GstBuffer* ref_) c_gst_buffer_add_parent_buffer_meta; ///
-  GstProtectionMeta* function(GstBuffer* buffer, GstStructure* info) c_gst_buffer_add_protection_meta; ///
-  GstReferenceTimestampMeta* function(GstBuffer* buffer, GstCaps* reference, GstClockTime timestamp, GstClockTime duration) c_gst_buffer_add_reference_timestamp_meta; ///
-  GstBuffer* function(GstBuffer* buf1, GstBuffer* buf2) c_gst_buffer_append; ///
-  void function(GstBuffer* buffer, GstMemory* mem) c_gst_buffer_append_memory; ///
-  GstBuffer* function(GstBuffer* buf1, GstBuffer* buf2, ptrdiff_t offset, ptrdiff_t size) c_gst_buffer_append_region; ///
-  GstBuffer* function(const(GstBuffer)* buf) c_gst_buffer_copy; ///
-  GstBuffer* function(const(GstBuffer)* buf) c_gst_buffer_copy_deep; ///
-  gboolean function(GstBuffer* dest, GstBuffer* src, GstBufferCopyFlags flags, size_t offset, size_t size) c_gst_buffer_copy_into; ///
-  GstBuffer* function(GstBuffer* parent, GstBufferCopyFlags flags, size_t offset, size_t size) c_gst_buffer_copy_region; ///
-  size_t function(GstBuffer* buffer, size_t offset, void* dest, size_t size) c_gst_buffer_extract; ///
-  void function(GstBuffer* buffer, size_t offset, size_t size, void** dest, size_t* destSize) c_gst_buffer_extract_dup; ///
-  size_t function(GstBuffer* buffer, size_t offset, const(void)* src, size_t size) c_gst_buffer_fill; ///
-  gboolean function(GstBuffer* buffer, size_t offset, size_t size, uint* idx, uint* length, size_t* skip) c_gst_buffer_find_memory; ///
-  gboolean function(GstBuffer* buffer, GstBufferForeachMetaFunc func, void* userData) c_gst_buffer_foreach_meta; ///
-  GstMemory* function(GstBuffer* buffer) c_gst_buffer_get_all_memory; ///
-  GstCustomMeta* function(GstBuffer* buffer, const(char)* name) c_gst_buffer_get_custom_meta; ///
-  GstBufferFlags function(GstBuffer* buffer) c_gst_buffer_get_flags; ///
-  GstMemory* function(GstBuffer* buffer, uint idx) c_gst_buffer_get_memory; ///
-  GstMemory* function(GstBuffer* buffer, uint idx, int length) c_gst_buffer_get_memory_range; ///
-  GstMeta* function(GstBuffer* buffer, GType api) c_gst_buffer_get_meta; ///
-  uint function(GstBuffer* buffer, GType apiType) c_gst_buffer_get_n_meta; ///
-  GstReferenceTimestampMeta* function(GstBuffer* buffer, GstCaps* reference) c_gst_buffer_get_reference_timestamp_meta; ///
-  size_t function(GstBuffer* buffer) c_gst_buffer_get_size; ///
-  size_t function(GstBuffer* buffer, size_t* offset, size_t* maxsize) c_gst_buffer_get_sizes; ///
-  size_t function(GstBuffer* buffer, uint idx, int length, size_t* offset, size_t* maxsize) c_gst_buffer_get_sizes_range; ///
-  gboolean function(GstBuffer* buffer, GstBufferFlags flags) c_gst_buffer_has_flags; ///
-  void function(GstBuffer* buffer, int idx, GstMemory* mem) c_gst_buffer_insert_memory; ///
-  gboolean function(GstBuffer* buffer) c_gst_buffer_is_all_memory_writable; ///
-  gboolean function(GstBuffer* buffer, uint idx, int length) c_gst_buffer_is_memory_range_writable; ///
-  gboolean function(const(GstBuffer)* buf) c_gst_buffer_is_writable; ///
-  GstMeta* function(GstBuffer* buffer, void** state) c_gst_buffer_iterate_meta; ///
-  GstMeta* function(GstBuffer* buffer, void** state, GType metaApiType) c_gst_buffer_iterate_meta_filtered; ///
-  GstBuffer* function(GstBuffer* buf) c_gst_buffer_make_writable; ///
-  gboolean function(GstBuffer* buffer, GstMapInfo* info, GstMapFlags flags) c_gst_buffer_map; ///
-  gboolean function(GstBuffer* buffer, uint idx, int length, GstMapInfo* info, GstMapFlags flags) c_gst_buffer_map_range; ///
-  int function(GstBuffer* buffer, size_t offset, const(void)* mem, size_t size) c_gst_buffer_memcmp; ///
-  size_t function(GstBuffer* buffer, size_t offset, ubyte val, size_t size) c_gst_buffer_memset; ///
-  uint function(GstBuffer* buffer) c_gst_buffer_n_memory; ///
-  GstMemory* function(GstBuffer* buffer, uint idx) c_gst_buffer_peek_memory; ///
-  void function(GstBuffer* buffer, GstMemory* mem) c_gst_buffer_prepend_memory; ///
-  GstBuffer* function(GstBuffer* buf) c_gst_buffer_ref; ///
-  void function(GstBuffer* buffer) c_gst_buffer_remove_all_memory; ///
-  void function(GstBuffer* buffer, uint idx) c_gst_buffer_remove_memory; ///
-  void function(GstBuffer* buffer, uint idx, int length) c_gst_buffer_remove_memory_range; ///
-  gboolean function(GstBuffer* buffer, GstMeta* meta) c_gst_buffer_remove_meta; ///
-  void function(GstBuffer* buffer, GstMemory* mem) c_gst_buffer_replace_all_memory; ///
-  void function(GstBuffer* buffer, uint idx, GstMemory* mem) c_gst_buffer_replace_memory; ///
-  void function(GstBuffer* buffer, uint idx, int length, GstMemory* mem) c_gst_buffer_replace_memory_range; ///
-  void function(GstBuffer* buffer, ptrdiff_t offset, ptrdiff_t size) c_gst_buffer_resize; ///
-  gboolean function(GstBuffer* buffer, uint idx, int length, ptrdiff_t offset, ptrdiff_t size) c_gst_buffer_resize_range; ///
-  gboolean function(GstBuffer* buffer, GstBufferFlags flags) c_gst_buffer_set_flags; ///
-  void function(GstBuffer* buffer, ptrdiff_t size) c_gst_buffer_set_size; ///
-  void function(GstBuffer* buffer, GstMapInfo* info) c_gst_buffer_unmap; ///
-  void function(GstBuffer* buf) c_gst_buffer_unref; ///
-  gboolean function(GstBuffer* buffer, GstBufferFlags flags) c_gst_buffer_unset_flags; ///
-  uint function() c_gst_buffer_get_max_memory; ///
-  gboolean function(GstBuffer** obuf, GstBuffer* nbuf) c_gst_buffer_replace; ///
-  GstBuffer* function(GstBuffer** oldBuffer) c_gst_buffer_steal; ///
-  gboolean function(GstBuffer** oldBuffer, GstBuffer* newBuffer) c_gst_buffer_take; ///
-
-  // BufferList
-  GType function() c_gst_buffer_list_get_type; ///
-  GstBufferList* function() c_gst_buffer_list_new; ///
-  GstBufferList* function(uint size) c_gst_buffer_list_new_sized; ///
-  size_t function(GstBufferList* list) c_gst_buffer_list_calculate_size; ///
-  GstBufferList* function(const(GstBufferList)* list) c_gst_buffer_list_copy; ///
-  GstBufferList* function(const(GstBufferList)* list) c_gst_buffer_list_copy_deep; ///
-  gboolean function(GstBufferList* list, GstBufferListFunc func, void* userData) c_gst_buffer_list_foreach; ///
-  GstBuffer* function(GstBufferList* list, uint idx) c_gst_buffer_list_get; ///
-  GstBuffer* function(GstBufferList* list, uint idx) c_gst_buffer_list_get_writable; ///
-  void function(GstBufferList* list, int idx, GstBuffer* buffer) c_gst_buffer_list_insert; ///
-  gboolean function(const(GstBufferList)* list) c_gst_buffer_list_is_writable; ///
-  uint function(GstBufferList* list) c_gst_buffer_list_length; ///
-  GstBufferList* function(GstBufferList* list) c_gst_buffer_list_make_writable; ///
-  GstBufferList* function(GstBufferList* list) c_gst_buffer_list_ref; ///
-  void function(GstBufferList* list, uint idx, uint length) c_gst_buffer_list_remove; ///
-  void function(GstBufferList* list) c_gst_buffer_list_unref; ///
-  gboolean function(GstBufferList** oldList, GstBufferList* newList) c_gst_buffer_list_replace; ///
-  GstBufferList* function(GstBufferList** oldList) c_gst_buffer_list_steal; ///
-  gboolean function(GstBufferList** oldList, GstBufferList* newList) c_gst_buffer_list_take; ///
-
-  // BufferPool
-  GType function() c_gst_buffer_pool_get_type; ///
-  GstBufferPool* function() c_gst_buffer_pool_new; ///
-  void function(GstStructure* config, const(char)* option) c_gst_buffer_pool_config_add_option; ///
-  gboolean function(GstStructure* config, GstAllocator** allocator, GstAllocationParams* params) c_gst_buffer_pool_config_get_allocator; ///
-  const(char)* function(GstStructure* config, uint index) c_gst_buffer_pool_config_get_option; ///
-  gboolean function(GstStructure* config, GstCaps** caps, uint* size, uint* minBuffers, uint* maxBuffers) c_gst_buffer_pool_config_get_params; ///
-  gboolean function(GstStructure* config, const(char)* option) c_gst_buffer_pool_config_has_option; ///
-  uint function(GstStructure* config) c_gst_buffer_pool_config_n_options; ///
-  void function(GstStructure* config, GstAllocator* allocator, const(GstAllocationParams)* params) c_gst_buffer_pool_config_set_allocator; ///
-  void function(GstStructure* config, GstCaps* caps, uint size, uint minBuffers, uint maxBuffers) c_gst_buffer_pool_config_set_params; ///
-  gboolean function(GstStructure* config, GstCaps* caps, uint size, uint minBuffers, uint maxBuffers) c_gst_buffer_pool_config_validate_params; ///
-  GstFlowReturn function(GstBufferPool* pool, GstBuffer** buffer, GstBufferPoolAcquireParams* params) c_gst_buffer_pool_acquire_buffer; ///
-  GstStructure* function(GstBufferPool* pool) c_gst_buffer_pool_get_config; ///
-  const(char*)* function(GstBufferPool* pool) c_gst_buffer_pool_get_options; ///
-  gboolean function(GstBufferPool* pool, const(char)* option) c_gst_buffer_pool_has_option; ///
-  gboolean function(GstBufferPool* pool) c_gst_buffer_pool_is_active; ///
-  void function(GstBufferPool* pool, GstBuffer* buffer) c_gst_buffer_pool_release_buffer; ///
-  gboolean function(GstBufferPool* pool, gboolean active) c_gst_buffer_pool_set_active; ///
-  gboolean function(GstBufferPool* pool, GstStructure* config) c_gst_buffer_pool_set_config; ///
-  void function(GstBufferPool* pool, gboolean flushing) c_gst_buffer_pool_set_flushing; ///
-
-  // Bus
-  GType function() c_gst_bus_get_type; ///
-  GstBus* function() c_gst_bus_new; ///
-  void function(GstBus* bus) c_gst_bus_add_signal_watch; ///
-  void function(GstBus* bus, int priority) c_gst_bus_add_signal_watch_full; ///
-  uint function(GstBus* bus, GstBusFunc func, void* userData) c_gst_bus_add_watch; ///
-  uint function(GstBus* bus, int priority, GstBusFunc func, void* userData, GDestroyNotify notify) c_gst_bus_add_watch_full; ///
-  gboolean function(GstBus* bus, GstMessage* message, void* data) c_gst_bus_async_signal_func; ///
-  GSource* function(GstBus* bus) c_gst_bus_create_watch; ///
-  void function(GstBus* bus) c_gst_bus_disable_sync_message_emission; ///
-  void function(GstBus* bus) c_gst_bus_enable_sync_message_emission; ///
-  void function(GstBus* bus, GPollFD* fd) c_gst_bus_get_pollfd; ///
-  gboolean function(GstBus* bus) c_gst_bus_have_pending; ///
-  GstMessage* function(GstBus* bus) c_gst_bus_peek; ///
-  GstMessage* function(GstBus* bus, GstMessageType events, GstClockTime timeout) c_gst_bus_poll; ///
-  GstMessage* function(GstBus* bus) c_gst_bus_pop; ///
-  GstMessage* function(GstBus* bus, GstMessageType types) c_gst_bus_pop_filtered; ///
-  gboolean function(GstBus* bus, GstMessage* message) c_gst_bus_post; ///
-  void function(GstBus* bus) c_gst_bus_remove_signal_watch; ///
-  gboolean function(GstBus* bus) c_gst_bus_remove_watch; ///
-  void function(GstBus* bus, gboolean flushing) c_gst_bus_set_flushing; ///
-  void function(GstBus* bus, GstBusSyncHandler func, void* userData, GDestroyNotify notify) c_gst_bus_set_sync_handler; ///
-  GstBusSyncReply function(GstBus* bus, GstMessage* message, void* data) c_gst_bus_sync_signal_handler; ///
-  GstMessage* function(GstBus* bus, GstClockTime timeout) c_gst_bus_timed_pop; ///
-  GstMessage* function(GstBus* bus, GstClockTime timeout, GstMessageType types) c_gst_bus_timed_pop_filtered; ///
-
-  // Caps
-  GType function() c_gst_caps_get_type; ///
-  GstCaps* function() c_gst_caps_new_any; ///
-  GstCaps* function() c_gst_caps_new_empty; ///
-  GstCaps* function(const(char)* mediaType) c_gst_caps_new_empty_simple; ///
-  GstCaps* function(GstStructure* struct1,  ...) c_gst_caps_new_full; ///
-  GstCaps* function(GstStructure* structure, void* varArgs) c_gst_caps_new_full_valist; ///
-  GstCaps* function(const(GstIdStr)* mediaType) c_gst_caps_new_id_str_empty_simple; ///
-  GstCaps* function(const(GstIdStr)* mediaType, const(GstIdStr)* fieldname,  ...) c_gst_caps_new_id_str_simple; ///
-  GstCaps* function(const(char)* mediaType, const(char)* fieldname,  ...) c_gst_caps_new_simple; ///
-  GstCaps* function(const(char)* mediaType) c_gst_caps_new_static_str_empty_simple; ///
-  GstCaps* function(const(char)* mediaType, const(char)* fieldname,  ...) c_gst_caps_new_static_str_simple; ///
-  void function(GstCaps* caps1, GstCaps* caps2) c_gst_caps_append; ///
-  void function(GstCaps* caps, GstStructure* structure) c_gst_caps_append_structure; ///
-  void function(GstCaps* caps, GstStructure* structure, GstCapsFeatures* features) c_gst_caps_append_structure_full; ///
-  gboolean function(const(GstCaps)* caps1, const(GstCaps)* caps2) c_gst_caps_can_intersect; ///
-  GstCaps* function(const(GstCaps)* caps) c_gst_caps_copy; ///
-  GstCaps* function(const(GstCaps)* caps, uint nth) c_gst_caps_copy_nth; ///
-  void function(GstCaps* caps, GstCapsFilterMapFunc func, void* userData) c_gst_caps_filter_and_map_in_place; ///
-  GstCaps* function(GstCaps* caps) c_gst_caps_fixate; ///
-  gboolean function(const(GstCaps)* caps, GstCapsForeachFunc func, void* userData) c_gst_caps_foreach; ///
-  GstCapsFeatures* function(const(GstCaps)* caps, uint index) c_gst_caps_get_features; ///
-  uint function(const(GstCaps)* caps) c_gst_caps_get_size; ///
-  GstStructure* function(const(GstCaps)* caps, uint index) c_gst_caps_get_structure; ///
-  void function(GstCaps* caps, const(GstIdStr)* field,  ...) c_gst_caps_id_str_set_simple; ///
-  void function(GstCaps* caps, const(GstIdStr)* field, void* varargs) c_gst_caps_id_str_set_simple_valist; ///
-  void function(GstCaps* caps, const(GstIdStr)* field, const(GValue)* value) c_gst_caps_id_str_set_value; ///
-  GstCaps* function(GstCaps* caps1, GstCaps* caps2) c_gst_caps_intersect; ///
-  GstCaps* function(GstCaps* caps1, GstCaps* caps2, GstCapsIntersectMode mode) c_gst_caps_intersect_full; ///
-  gboolean function(const(GstCaps)* caps1, const(GstCaps)* caps2) c_gst_caps_is_always_compatible; ///
-  gboolean function(const(GstCaps)* caps) c_gst_caps_is_any; ///
-  gboolean function(const(GstCaps)* caps) c_gst_caps_is_empty; ///
-  gboolean function(const(GstCaps)* caps1, const(GstCaps)* caps2) c_gst_caps_is_equal; ///
-  gboolean function(const(GstCaps)* caps1, const(GstCaps)* caps2) c_gst_caps_is_equal_fixed; ///
-  gboolean function(const(GstCaps)* caps) c_gst_caps_is_fixed; ///
-  gboolean function(const(GstCaps)* caps1, const(GstCaps)* caps2) c_gst_caps_is_strictly_equal; ///
-  gboolean function(const(GstCaps)* subset, const(GstCaps)* superset) c_gst_caps_is_subset; ///
-  gboolean function(const(GstCaps)* caps, const(GstStructure)* structure) c_gst_caps_is_subset_structure; ///
-  gboolean function(const(GstCaps)* caps, const(GstStructure)* structure, const(GstCapsFeatures)* features) c_gst_caps_is_subset_structure_full; ///
-  gboolean function(const(GstCaps)* caps) c_gst_caps_is_writable; ///
-  GstCaps* function(GstCaps* caps) c_gst_caps_make_writable; ///
-  gboolean function(GstCaps* caps, GstCapsMapFunc func, void* userData) c_gst_caps_map_in_place; ///
-  GstCaps* function(GstCaps* caps1, GstCaps* caps2) c_gst_caps_merge; ///
-  GstCaps* function(GstCaps* caps, GstStructure* structure) c_gst_caps_merge_structure; ///
-  GstCaps* function(GstCaps* caps, GstStructure* structure, GstCapsFeatures* features) c_gst_caps_merge_structure_full; ///
-  GstCaps* function(GstCaps* caps) c_gst_caps_normalize; ///
-  GstCaps* function(GstCaps* caps) c_gst_caps_ref; ///
-  void function(GstCaps* caps, uint idx) c_gst_caps_remove_structure; ///
-  char* function(const(GstCaps)* caps, GstSerializeFlags flags) c_gst_caps_serialize; ///
-  void function(GstCaps* caps, uint index, GstCapsFeatures* features) c_gst_caps_set_features; ///
-  void function(GstCaps* caps, GstCapsFeatures* features) c_gst_caps_set_features_simple; ///
-  void function(GstCaps* caps, const(char)* field,  ...) c_gst_caps_set_simple; ///
-  void function(GstCaps* caps, const(char)* field,  ...) c_gst_caps_set_simple_static_str; ///
-  void function(GstCaps* caps, const(char)* field, void* varargs) c_gst_caps_set_simple_static_str_valist; ///
-  void function(GstCaps* caps, const(char)* field, void* varargs) c_gst_caps_set_simple_valist; ///
-  void function(GstCaps* caps, const(char)* field, const(GValue)* value) c_gst_caps_set_value; ///
-  void function(GstCaps* caps, const(char)* field, const(GValue)* value) c_gst_caps_set_value_static_str; ///
-  GstCaps* function(GstCaps* caps) c_gst_caps_simplify; ///
-  GstStructure* function(GstCaps* caps, uint index) c_gst_caps_steal_structure; ///
-  GstCaps* function(GstCaps* minuend, GstCaps* subtrahend) c_gst_caps_subtract; ///
-  char* function(const(GstCaps)* caps) c_gst_caps_to_string; ///
-  GstCaps* function(GstCaps* caps) c_gst_caps_truncate; ///
-  void function(GstCaps* caps) c_gst_caps_unref; ///
-  GstCaps* function(const(char)* string_) c_gst_caps_from_string; ///
-  gboolean function(GstCaps** oldCaps, GstCaps* newCaps) c_gst_caps_replace; ///
-  GstCaps* function(GstCaps** oldCaps) c_gst_caps_steal; ///
-  gboolean function(GstCaps** oldCaps, GstCaps* newCaps) c_gst_caps_take; ///
-
-  // CapsFeatures
-  GType function() c_gst_caps_features_get_type; ///
-  GstCapsFeatures* function(const(char)* feature1,  ...) c_gst_caps_features_new; ///
-  GstCapsFeatures* function() c_gst_caps_features_new_any; ///
-  GstCapsFeatures* function() c_gst_caps_features_new_empty; ///
-  GstCapsFeatures* function(GQuark feature1,  ...) c_gst_caps_features_new_id; ///
-  GstCapsFeatures* function(const(GstIdStr)* feature1,  ...) c_gst_caps_features_new_id_str; ///
-  GstCapsFeatures* function(const(GstIdStr)* feature1, void* varargs) c_gst_caps_features_new_id_str_valist; ///
-  GstCapsFeatures* function(GQuark feature1, void* varargs) c_gst_caps_features_new_id_valist; ///
-  GstCapsFeatures* function(const(char)* feature) c_gst_caps_features_new_single; ///
-  GstCapsFeatures* function(const(char)* feature) c_gst_caps_features_new_single_static_str; ///
-  GstCapsFeatures* function(const(char)* feature1,  ...) c_gst_caps_features_new_static_str; ///
-  GstCapsFeatures* function(const(char)* feature1, void* varargs) c_gst_caps_features_new_static_str_valist; ///
-  GstCapsFeatures* function(const(char)* feature1, void* varargs) c_gst_caps_features_new_valist; ///
-  void function(GstCapsFeatures* features, const(char)* feature) c_gst_caps_features_add; ///
-  void function(GstCapsFeatures* features, GQuark feature) c_gst_caps_features_add_id; ///
-  void function(GstCapsFeatures* features, const(GstIdStr)* feature) c_gst_caps_features_add_id_str; ///
-  void function(GstCapsFeatures* features, const(char)* feature) c_gst_caps_features_add_static_str; ///
-  gboolean function(const(GstCapsFeatures)* features, const(char)* feature) c_gst_caps_features_contains; ///
-  gboolean function(const(GstCapsFeatures)* features, GQuark feature) c_gst_caps_features_contains_id; ///
-  gboolean function(const(GstCapsFeatures)* features, const(GstIdStr)* feature) c_gst_caps_features_contains_id_str; ///
-  GstCapsFeatures* function(const(GstCapsFeatures)* features) c_gst_caps_features_copy; ///
-  void function(GstCapsFeatures* features) c_gst_caps_features_free; ///
-  const(char)* function(const(GstCapsFeatures)* features, uint i) c_gst_caps_features_get_nth; ///
-  GQuark function(const(GstCapsFeatures)* features, uint i) c_gst_caps_features_get_nth_id; ///
-  const(GstIdStr)* function(const(GstCapsFeatures)* features, uint i) c_gst_caps_features_get_nth_id_str; ///
-  uint function(const(GstCapsFeatures)* features) c_gst_caps_features_get_size; ///
-  gboolean function(const(GstCapsFeatures)* features) c_gst_caps_features_is_any; ///
-  gboolean function(const(GstCapsFeatures)* features1, const(GstCapsFeatures)* features2) c_gst_caps_features_is_equal; ///
-  void function(GstCapsFeatures* features, const(char)* feature) c_gst_caps_features_remove; ///
-  void function(GstCapsFeatures* features, GQuark feature) c_gst_caps_features_remove_id; ///
-  void function(GstCapsFeatures* features, const(GstIdStr)* feature) c_gst_caps_features_remove_id_str; ///
-  gboolean function(GstCapsFeatures* features, int* refcount) c_gst_caps_features_set_parent_refcount; ///
-  char* function(const(GstCapsFeatures)* features) c_gst_caps_features_to_string; ///
-  GstCapsFeatures* function(const(char)* features) c_gst_caps_features_from_string; ///
-
-  // ChildProxy
-  GType function() c_gst_child_proxy_get_type; ///
-  void function(GstChildProxy* parent, GObject* child, const(char)* name) c_gst_child_proxy_child_added; ///
-  void function(GstChildProxy* parent, GObject* child, const(char)* name) c_gst_child_proxy_child_removed; ///
-  void function(GstChildProxy* object, const(char)* firstPropertyName,  ...) c_gst_child_proxy_get; ///
-  GObject* function(GstChildProxy* parent, uint index) c_gst_child_proxy_get_child_by_index; ///
-  GObject* function(GstChildProxy* parent, const(char)* name) c_gst_child_proxy_get_child_by_name; ///
-  GObject* function(GstChildProxy* childProxy, const(char)* name) c_gst_child_proxy_get_child_by_name_recurse; ///
-  uint function(GstChildProxy* parent) c_gst_child_proxy_get_children_count; ///
-  void function(GstChildProxy* object, const(char)* name, GValue* value) c_gst_child_proxy_get_property; ///
-  void function(GstChildProxy* object, const(char)* firstPropertyName, void* varArgs) c_gst_child_proxy_get_valist; ///
-  gboolean function(GstChildProxy* object, const(char)* name, GObject** target, GParamSpec** pspec) c_gst_child_proxy_lookup; ///
-  void function(GstChildProxy* object, const(char)* firstPropertyName,  ...) c_gst_child_proxy_set; ///
-  void function(GstChildProxy* object, const(char)* name, const(GValue)* value) c_gst_child_proxy_set_property; ///
-  void function(GstChildProxy* object, const(char)* firstPropertyName, void* varArgs) c_gst_child_proxy_set_valist; ///
-
-  // Clock
-  GType function() c_gst_clock_get_type; ///
-  int function(const(void)* id1, const(void)* id2) c_gst_clock_id_compare_func; ///
-  GstClock* function(GstClockID id) c_gst_clock_id_get_clock; ///
-  GstClockTime function(GstClockID id) c_gst_clock_id_get_time; ///
-  GstClockID function(GstClockID id) c_gst_clock_id_ref; ///
-  void function(GstClockID id) c_gst_clock_id_unref; ///
-  void function(GstClockID id) c_gst_clock_id_unschedule; ///
-  gboolean function(GstClockID id, GstClock* clock) c_gst_clock_id_uses_clock; ///
-  GstClockReturn function(GstClockID id, GstClockTimeDiff* jitter) c_gst_clock_id_wait; ///
-  GstClockReturn function(GstClockID id, GstClockCallback func, void* userData, GDestroyNotify destroyData) c_gst_clock_id_wait_async; ///
-  gboolean function(GstClock* clock, GstClockTime observationInternal, GstClockTime observationExternal, double* rSquared) c_gst_clock_add_observation; ///
-  gboolean function(GstClock* clock, GstClockTime observationInternal, GstClockTime observationExternal, double* rSquared, GstClockTime* internal, GstClockTime* external, GstClockTime* rateNum, GstClockTime* rateDenom) c_gst_clock_add_observation_unapplied; ///
-  GstClockTime function(GstClock* clock, GstClockTime internal) c_gst_clock_adjust_unlocked; ///
-  GstClockTime function(GstClock* clock, GstClockTime internalTarget, GstClockTime cinternal, GstClockTime cexternal, GstClockTime cnum, GstClockTime cdenom) c_gst_clock_adjust_with_calibration; ///
-  void function(GstClock* clock, GstClockTime* internal, GstClockTime* external, GstClockTime* rateNum, GstClockTime* rateDenom) c_gst_clock_get_calibration; ///
-  GstClockTime function(GstClock* clock) c_gst_clock_get_internal_time; ///
-  GstClock* function(GstClock* clock) c_gst_clock_get_master; ///
-  GstClockTime function(GstClock* clock) c_gst_clock_get_resolution; ///
-  GstClockTime function(GstClock* clock) c_gst_clock_get_time; ///
-  GstClockTime function(GstClock* clock) c_gst_clock_get_timeout; ///
-  gboolean function(GstClock* clock) c_gst_clock_is_synced; ///
-  gboolean function(GstClock* clock) c_gst_clock_is_system_monotonic; ///
-  GstClockID function(GstClock* clock, GstClockTime startTime, GstClockTime interval) c_gst_clock_new_periodic_id; ///
-  GstClockID function(GstClock* clock, GstClockTime time) c_gst_clock_new_single_shot_id; ///
-  gboolean function(GstClock* clock, GstClockID id, GstClockTime startTime, GstClockTime interval) c_gst_clock_periodic_id_reinit; ///
-  void function(GstClock* clock, GstClockTime internal, GstClockTime external, GstClockTime rateNum, GstClockTime rateDenom) c_gst_clock_set_calibration; ///
-  gboolean function(GstClock* clock, GstClock* master) c_gst_clock_set_master; ///
-  GstClockTime function(GstClock* clock, GstClockTime resolution) c_gst_clock_set_resolution; ///
-  void function(GstClock* clock, gboolean synced) c_gst_clock_set_synced; ///
-  void function(GstClock* clock, GstClockTime timeout) c_gst_clock_set_timeout; ///
-  gboolean function(GstClock* clock, GstClockID id, GstClockTime time) c_gst_clock_single_shot_id_reinit; ///
-  GstClockTime function(GstClock* clock, GstClockTime external) c_gst_clock_unadjust_unlocked; ///
-  GstClockTime function(GstClock* clock, GstClockTime externalTarget, GstClockTime cinternal, GstClockTime cexternal, GstClockTime cnum, GstClockTime cdenom) c_gst_clock_unadjust_with_calibration; ///
-  gboolean function(GstClock* clock, GstClockTime timeout) c_gst_clock_wait_for_sync; ///
-
-  // Context
-  GType function() c_gst_context_get_type; ///
-  GstContext* function(const(char)* contextType, gboolean persistent) c_gst_context_new; ///
-  GstContext* function(const(GstContext)* context) c_gst_context_copy; ///
-  const(char)* function(const(GstContext)* context) c_gst_context_get_context_type; ///
-  const(GstStructure)* function(const(GstContext)* context) c_gst_context_get_structure; ///
-  gboolean function(GstContext* context, GstTaskPool** pool) c_gst_context_get_task_pool; ///
-  gboolean function(const(GstContext)* context, const(char)* contextType) c_gst_context_has_context_type; ///
-  gboolean function(const(GstContext)* context) c_gst_context_is_persistent; ///
-  gboolean function(const(GstContext)* context) c_gst_context_is_writable; ///
-  GstContext* function(GstContext* context) c_gst_context_make_writable; ///
-  GstContext* function(GstContext* context) c_gst_context_ref; ///
-  void function(GstContext* context, GstTaskPool* pool) c_gst_context_set_task_pool; ///
-  void function(GstContext* context) c_gst_context_unref; ///
-  GstStructure* function(GstContext* context) c_gst_context_writable_structure; ///
-  gboolean function(GstContext** oldContext, GstContext* newContext) c_gst_context_replace; ///
-
-  // ControlBinding
-  GType function() c_gst_control_binding_get_type; ///
-  gboolean function(GstControlBinding* binding, GstClockTime timestamp, GstClockTime interval, uint nValues, GValue* values) c_gst_control_binding_get_g_value_array; ///
-  GValue* function(GstControlBinding* binding, GstClockTime timestamp) c_gst_control_binding_get_value; ///
-  gboolean function(GstControlBinding* binding, GstClockTime timestamp, GstClockTime interval, uint nValues, void* values) c_gst_control_binding_get_value_array; ///
-  gboolean function(GstControlBinding* binding) c_gst_control_binding_is_disabled; ///
-  void function(GstControlBinding* binding, gboolean disabled) c_gst_control_binding_set_disabled; ///
-  gboolean function(GstControlBinding* binding, GstObject* object, GstClockTime timestamp, GstClockTime lastSync) c_gst_control_binding_sync_values; ///
-
-  // ControlSource
-  GType function() c_gst_control_source_get_type; ///
-  gboolean function(GstControlSource* self, GstClockTime timestamp, double* value) c_gst_control_source_get_value; ///
-  gboolean function(GstControlSource* self, GstClockTime timestamp, GstClockTime interval, uint nValues, double* values) c_gst_control_source_get_value_array; ///
-
-  // CustomMeta
-  GstStructure* function(GstCustomMeta* meta) c_gst_custom_meta_get_structure; ///
-  gboolean function(GstCustomMeta* meta, const(char)* name) c_gst_custom_meta_has_name; ///
-
-  // DateTime
-  GType function() c_gst_date_time_get_type; ///
-  GstDateTime* function(float tzoffset, int year, int month, int day, int hour, int minute, double seconds) c_gst_date_time_new; ///
-  GstDateTime* function(GDateTime* dt) c_gst_date_time_new_from_g_date_time; ///
-  GstDateTime* function(const(char)* string_) c_gst_date_time_new_from_iso8601_string; ///
-  GstDateTime* function(long secs) c_gst_date_time_new_from_unix_epoch_local_time; ///
-  GstDateTime* function(long usecs) c_gst_date_time_new_from_unix_epoch_local_time_usecs; ///
-  GstDateTime* function(long secs) c_gst_date_time_new_from_unix_epoch_utc; ///
-  GstDateTime* function(long usecs) c_gst_date_time_new_from_unix_epoch_utc_usecs; ///
-  GstDateTime* function(int year, int month, int day, int hour, int minute, double seconds) c_gst_date_time_new_local_time; ///
-  GstDateTime* function() c_gst_date_time_new_now_local_time; ///
-  GstDateTime* function() c_gst_date_time_new_now_utc; ///
-  GstDateTime* function(int year) c_gst_date_time_new_y; ///
-  GstDateTime* function(int year, int month) c_gst_date_time_new_ym; ///
-  GstDateTime* function(int year, int month, int day) c_gst_date_time_new_ymd; ///
-  int function(const(GstDateTime)* datetime) c_gst_date_time_get_day; ///
-  int function(const(GstDateTime)* datetime) c_gst_date_time_get_hour; ///
-  int function(const(GstDateTime)* datetime) c_gst_date_time_get_microsecond; ///
-  int function(const(GstDateTime)* datetime) c_gst_date_time_get_minute; ///
-  int function(const(GstDateTime)* datetime) c_gst_date_time_get_month; ///
-  int function(const(GstDateTime)* datetime) c_gst_date_time_get_second; ///
-  float function(const(GstDateTime)* datetime) c_gst_date_time_get_time_zone_offset; ///
-  int function(const(GstDateTime)* datetime) c_gst_date_time_get_year; ///
-  gboolean function(const(GstDateTime)* datetime) c_gst_date_time_has_day; ///
-  gboolean function(const(GstDateTime)* datetime) c_gst_date_time_has_month; ///
-  gboolean function(const(GstDateTime)* datetime) c_gst_date_time_has_second; ///
-  gboolean function(const(GstDateTime)* datetime) c_gst_date_time_has_time; ///
-  gboolean function(const(GstDateTime)* datetime) c_gst_date_time_has_year; ///
-  GstDateTime* function(GstDateTime* datetime) c_gst_date_time_ref; ///
-  GDateTime* function(GstDateTime* datetime) c_gst_date_time_to_g_date_time; ///
-  char* function(GstDateTime* datetime) c_gst_date_time_to_iso8601_string; ///
-  void function(GstDateTime* datetime) c_gst_date_time_unref; ///
-
-  // DebugCategory
-  void function(GstDebugCategory* category) c_gst_debug_category_free; ///
-  uint function(GstDebugCategory* category) c_gst_debug_category_get_color; ///
-  const(char)* function(GstDebugCategory* category) c_gst_debug_category_get_description; ///
-  const(char)* function(GstDebugCategory* category) c_gst_debug_category_get_name; ///
-  GstDebugLevel function(GstDebugCategory* category) c_gst_debug_category_get_threshold; ///
-  void function(GstDebugCategory* category) c_gst_debug_category_reset_threshold; ///
-  void function(GstDebugCategory* category, GstDebugLevel level) c_gst_debug_category_set_threshold; ///
-
-  // DebugMessage
-  const(char)* function(GstDebugMessage* message) c_gst_debug_message_get; ///
-  const(char)* function(GstDebugMessage* message) c_gst_debug_message_get_id; ///
-
-  // Device
-  GType function() c_gst_device_get_type; ///
-  GstElement* function(GstDevice* device, const(char)* name) c_gst_device_create_element; ///
-  GstCaps* function(GstDevice* device) c_gst_device_get_caps; ///
-  char* function(GstDevice* device) c_gst_device_get_device_class; ///
-  char* function(GstDevice* device) c_gst_device_get_display_name; ///
-  GstStructure* function(GstDevice* device) c_gst_device_get_properties; ///
-  gboolean function(GstDevice* device, const(char)* classes) c_gst_device_has_classes; ///
-  gboolean function(GstDevice* device, char** classes) c_gst_device_has_classesv; ///
-  gboolean function(GstDevice* device, GstElement* element) c_gst_device_reconfigure_element; ///
-
-  // DeviceMonitor
-  GType function() c_gst_device_monitor_get_type; ///
-  GstDeviceMonitor* function() c_gst_device_monitor_new; ///
-  uint function(GstDeviceMonitor* monitor, const(char)* classes, GstCaps* caps) c_gst_device_monitor_add_filter; ///
-  GstBus* function(GstDeviceMonitor* monitor) c_gst_device_monitor_get_bus; ///
-  GList* function(GstDeviceMonitor* monitor) c_gst_device_monitor_get_devices; ///
-  char** function(GstDeviceMonitor* monitor) c_gst_device_monitor_get_providers; ///
-  gboolean function(GstDeviceMonitor* monitor) c_gst_device_monitor_get_show_all_devices; ///
-  gboolean function(GstDeviceMonitor* monitor, uint filterId) c_gst_device_monitor_remove_filter; ///
-  void function(GstDeviceMonitor* monitor, gboolean showAll) c_gst_device_monitor_set_show_all_devices; ///
-  gboolean function(GstDeviceMonitor* monitor) c_gst_device_monitor_start; ///
-  void function(GstDeviceMonitor* monitor) c_gst_device_monitor_stop; ///
-
-  // DeviceProvider
-  GType function() c_gst_device_provider_get_type; ///
-  gboolean function(GstPlugin* plugin, const(char)* name, uint rank, GType type) c_gst_device_provider_register; ///
-  gboolean function(GstDeviceProvider* provider) c_gst_device_provider_can_monitor; ///
-  void function(GstDeviceProvider* provider, GstDevice* device) c_gst_device_provider_device_add; ///
-  void function(GstDeviceProvider* provider, GstDevice* device, GstDevice* changedDevice) c_gst_device_provider_device_changed; ///
-  void function(GstDeviceProvider* provider, GstDevice* device) c_gst_device_provider_device_remove; ///
-  GstBus* function(GstDeviceProvider* provider) c_gst_device_provider_get_bus; ///
-  GList* function(GstDeviceProvider* provider) c_gst_device_provider_get_devices; ///
-  GstDeviceProviderFactory* function(GstDeviceProvider* provider) c_gst_device_provider_get_factory; ///
-  char** function(GstDeviceProvider* provider) c_gst_device_provider_get_hidden_providers; ///
-  const(char)* function(GstDeviceProvider* provider, const(char)* key) c_gst_device_provider_get_metadata; ///
-  void function(GstDeviceProvider* provider, const(char)* name) c_gst_device_provider_hide_provider; ///
-  gboolean function(GstDeviceProvider* provider) c_gst_device_provider_is_started; ///
-  gboolean function(GstDeviceProvider* provider) c_gst_device_provider_start; ///
-  void function(GstDeviceProvider* provider) c_gst_device_provider_stop; ///
-  void function(GstDeviceProvider* provider, const(char)* name) c_gst_device_provider_unhide_provider; ///
-
-  // DeviceProviderClass
-  void function(GstDeviceProviderClass* klass, const(char)* key, const(char)* value) c_gst_device_provider_class_add_metadata; ///
-  void function(GstDeviceProviderClass* klass, const(char)* key, const(char)* value) c_gst_device_provider_class_add_static_metadata; ///
-  const(char)* function(GstDeviceProviderClass* klass, const(char)* key) c_gst_device_provider_class_get_metadata; ///
-  void function(GstDeviceProviderClass* klass, const(char)* longname, const(char)* classification, const(char)* description, const(char)* author) c_gst_device_provider_class_set_metadata; ///
-  void function(GstDeviceProviderClass* klass, const(char)* longname, const(char)* classification, const(char)* description, const(char)* author) c_gst_device_provider_class_set_static_metadata; ///
-
-  // DeviceProviderFactory
-  GType function() c_gst_device_provider_factory_get_type; ///
-  GstDeviceProviderFactory* function(const(char)* name) c_gst_device_provider_factory_find; ///
-  GstDeviceProvider* function(const(char)* factoryname) c_gst_device_provider_factory_get_by_name; ///
-  GList* function(GstRank minrank) c_gst_device_provider_factory_list_get_device_providers; ///
-  GstDeviceProvider* function(GstDeviceProviderFactory* factory) c_gst_device_provider_factory_get; ///
-  GType function(GstDeviceProviderFactory* factory) c_gst_device_provider_factory_get_device_provider_type; ///
-  const(char)* function(GstDeviceProviderFactory* factory, const(char)* key) c_gst_device_provider_factory_get_metadata; ///
-  char** function(GstDeviceProviderFactory* factory) c_gst_device_provider_factory_get_metadata_keys; ///
-  gboolean function(GstDeviceProviderFactory* factory, const(char)* classes) c_gst_device_provider_factory_has_classes; ///
-  gboolean function(GstDeviceProviderFactory* factory, char** classes) c_gst_device_provider_factory_has_classesv; ///
-
-  // DoubleRange
-  GType function() c_gst_double_range_get_type; ///
-
-  // DynamicTypeFactory
-  GType function() c_gst_dynamic_type_factory_get_type; ///
-  GType function(const(char)* factoryname) c_gst_dynamic_type_factory_load; ///
-
-  // Element
-  GType function() c_gst_element_get_type; ///
-  GstElement* function(GstURIType type, const(char)* uri, const(char)* elementname, GError** _err) c_gst_element_make_from_uri; ///
-  gboolean function(GstPlugin* plugin, const(char)* name, uint rank, GType type) c_gst_element_register; ///
-  const(char)* function(GstStateChangeReturn stateRet) c_gst_element_state_change_return_get_name; ///
-  const(char)* function(GstState state) c_gst_element_state_get_name; ///
-  void function(GType type) c_gst_element_type_set_skip_documentation; ///
-  void function(GstElement* element) c_gst_element_abort_state; ///
-  gboolean function(GstElement* element, GstPad* pad) c_gst_element_add_pad; ///
-  gulong function(GstElement* element, const(char)* propertyName, gboolean includeValue) c_gst_element_add_property_deep_notify_watch; ///
-  gulong function(GstElement* element, const(char)* propertyName, gboolean includeValue) c_gst_element_add_property_notify_watch; ///
-  void function(GstElement* element, GstElementCallAsyncFunc func, void* userData, GDestroyNotify destroyNotify) c_gst_element_call_async; ///
-  GstStateChangeReturn function(GstElement* element, GstStateChange transition) c_gst_element_change_state; ///
-  GstStateChangeReturn function(GstElement* element, GstStateChangeReturn ret) c_gst_element_continue_state; ///
-  void function(GstElement* element) c_gst_element_create_all_pads; ///
-  char* function(GstElement* element, const(char)* streamId) c_gst_element_decorate_stream_id; ///
-  char* function(GstElement* element, const(char)* format,  ...) c_gst_element_decorate_stream_id_printf; ///
-  char* function(GstElement* element, const(char)* format, void* varArgs) c_gst_element_decorate_stream_id_printf_valist; ///
-  gboolean function(GstElement* element, GstElementForeachPadFunc func, void* userData) c_gst_element_foreach_pad; ///
-  gboolean function(GstElement* element, GstElementForeachPadFunc func, void* userData) c_gst_element_foreach_sink_pad; ///
-  gboolean function(GstElement* element, GstElementForeachPadFunc func, void* userData) c_gst_element_foreach_src_pad; ///
-  GstClockTime function(GstElement* element) c_gst_element_get_base_time; ///
-  GstBus* function(GstElement* element) c_gst_element_get_bus; ///
-  GstClock* function(GstElement* element) c_gst_element_get_clock; ///
-  GstPad* function(GstElement* element, GstPad* pad, GstCaps* caps) c_gst_element_get_compatible_pad; ///
-  GstPadTemplate* function(GstElement* element, GstPadTemplate* compattempl) c_gst_element_get_compatible_pad_template; ///
-  GstContext* function(GstElement* element, const(char)* contextType) c_gst_element_get_context; ///
-  GstContext* function(GstElement* element, const(char)* contextType) c_gst_element_get_context_unlocked; ///
-  GList* function(GstElement* element) c_gst_element_get_contexts; ///
-  GstClockTime function(GstElement* element) c_gst_element_get_current_clock_time; ///
-  GstClockTime function(GstElement* element) c_gst_element_get_current_running_time; ///
-  GstElementFactory* function(GstElement* element) c_gst_element_get_factory; ///
-  const(char)* function(GstElement* element, const(char)* key) c_gst_element_get_metadata; ///
-  GstPadTemplate* function(GstElement* element, const(char)* name) c_gst_element_get_pad_template; ///
-  GList* function(GstElement* element) c_gst_element_get_pad_template_list; ///
-  GstPad* function(GstElement* element, const(char)* name) c_gst_element_get_request_pad; ///
-  GstClockTime function(GstElement* element) c_gst_element_get_start_time; ///
-  GstStateChangeReturn function(GstElement* element, GstState* state, GstState* pending, GstClockTime timeout) c_gst_element_get_state; ///
-  GstPad* function(GstElement* element, const(char)* name) c_gst_element_get_static_pad; ///
-  gboolean function(GstElement* element) c_gst_element_is_locked_state; ///
-  GstIterator* function(GstElement* element) c_gst_element_iterate_pads; ///
-  GstIterator* function(GstElement* element) c_gst_element_iterate_sink_pads; ///
-  GstIterator* function(GstElement* element) c_gst_element_iterate_src_pads; ///
-  gboolean function(GstElement* src, GstElement* dest) c_gst_element_link; ///
-  gboolean function(GstElement* src, GstElement* dest, GstCaps* filter) c_gst_element_link_filtered; ///
-  gboolean function(GstElement* element1, GstElement* element2,  ...) c_gst_element_link_many; ///
-  gboolean function(GstElement* src, const(char)* srcpadname, GstElement* dest, const(char)* destpadname) c_gst_element_link_pads; ///
-  gboolean function(GstElement* src, const(char)* srcpadname, GstElement* dest, const(char)* destpadname, GstCaps* filter) c_gst_element_link_pads_filtered; ///
-  gboolean function(GstElement* src, const(char)* srcpadname, GstElement* dest, const(char)* destpadname, GstPadLinkCheck flags) c_gst_element_link_pads_full; ///
-  void function(GstElement* element) c_gst_element_lost_state; ///
-  void function(GstElement* element, GstMessageType type, GQuark domain, int code, char* text, char* debug_, const(char)* file, const(char)* function_, int line) c_gst_element_message_full; ///
-  void function(GstElement* element, GstMessageType type, GQuark domain, int code, char* text, char* debug_, const(char)* file, const(char)* function_, int line, GstStructure* structure) c_gst_element_message_full_with_details; ///
-  void function(GstElement* element) c_gst_element_no_more_pads; ///
-  gboolean function(GstElement* element, GstMessage* message) c_gst_element_post_message; ///
-  GstClock* function(GstElement* element) c_gst_element_provide_clock; ///
-  gboolean function(GstElement* element, GstQuery* query) c_gst_element_query; ///
-  gboolean function(GstElement* element, GstFormat srcFormat, long srcVal, GstFormat destFormat, long* destVal) c_gst_element_query_convert; ///
-  gboolean function(GstElement* element, GstFormat format, long* duration) c_gst_element_query_duration; ///
-  gboolean function(GstElement* element, GstFormat format, long* cur) c_gst_element_query_position; ///
-  void function(GstElement* element, GstPad* pad) c_gst_element_release_request_pad; ///
-  gboolean function(GstElement* element, GstPad* pad) c_gst_element_remove_pad; ///
-  void function(GstElement* element, gulong watchId) c_gst_element_remove_property_notify_watch; ///
-  GstPad* function(GstElement* element, GstPadTemplate* templ, const(char)* name, const(GstCaps)* caps) c_gst_element_request_pad; ///
-  GstPad* function(GstElement* element, const(char)* name) c_gst_element_request_pad_simple; ///
-  gboolean function(GstElement* element, double rate, GstFormat format, GstSeekFlags flags, GstSeekType startType, long start, GstSeekType stopType, long stop) c_gst_element_seek; ///
-  gboolean function(GstElement* element, GstFormat format, GstSeekFlags seekFlags, long seekPos) c_gst_element_seek_simple; ///
-  gboolean function(GstElement* element, GstEvent* event) c_gst_element_send_event; ///
-  void function(GstElement* element, GstClockTime time) c_gst_element_set_base_time; ///
-  void function(GstElement* element, GstBus* bus) c_gst_element_set_bus; ///
-  gboolean function(GstElement* element, GstClock* clock) c_gst_element_set_clock; ///
-  void function(GstElement* element, GstContext* context) c_gst_element_set_context; ///
-  gboolean function(GstElement* element, gboolean lockedState) c_gst_element_set_locked_state; ///
-  void function(GstElement* element, GstClockTime time) c_gst_element_set_start_time; ///
-  GstStateChangeReturn function(GstElement* element, GstState state) c_gst_element_set_state; ///
-  gboolean function(GstElement* element) c_gst_element_sync_state_with_parent; ///
-  void function(GstElement* src, GstElement* dest) c_gst_element_unlink; ///
-  void function(GstElement* element1, GstElement* element2,  ...) c_gst_element_unlink_many; ///
-  void function(GstElement* src, const(char)* srcpadname, GstElement* dest, const(char)* destpadname) c_gst_element_unlink_pads; ///
-
-  // ElementClass
-  void function(GstElementClass* klass, const(char)* key, const(char)* value) c_gst_element_class_add_metadata; ///
-  void function(GstElementClass* klass, GstPadTemplate* templ) c_gst_element_class_add_pad_template; ///
-  void function(GstElementClass* klass, const(char)* key, const(char)* value) c_gst_element_class_add_static_metadata; ///
-  void function(GstElementClass* klass, GstStaticPadTemplate* staticTempl) c_gst_element_class_add_static_pad_template; ///
-  void function(GstElementClass* klass, GstStaticPadTemplate* staticTempl, GType padType) c_gst_element_class_add_static_pad_template_with_gtype; ///
-  const(char)* function(GstElementClass* klass, const(char)* key) c_gst_element_class_get_metadata; ///
-  GstPadTemplate* function(GstElementClass* elementClass, const(char)* name) c_gst_element_class_get_pad_template; ///
-  GList* function(GstElementClass* elementClass) c_gst_element_class_get_pad_template_list; ///
-  void function(GstElementClass* klass, const(char)* longname, const(char)* classification, const(char)* description, const(char)* author) c_gst_element_class_set_metadata; ///
-  void function(GstElementClass* klass, const(char)* longname, const(char)* classification, const(char)* description, const(char)* author) c_gst_element_class_set_static_metadata; ///
-
-  // ElementFactory
-  GType function() c_gst_element_factory_get_type; ///
-  GstElementFactory* function(const(char)* name) c_gst_element_factory_find; ///
-  GList* function(GList* list, const(GstCaps)* caps, GstPadDirection direction, gboolean subsetonly) c_gst_element_factory_list_filter; ///
-  GList* function(GstElementFactoryListType type, GstRank minrank) c_gst_element_factory_list_get_elements; ///
-  GstElement* function(const(char)* factoryname, const(char)* name) c_gst_element_factory_make; ///
-  GstElement* function(const(char)* factoryname, const(char)* first,  ...) c_gst_element_factory_make_full; ///
-  GstElement* function(const(char)* factoryname, const(char)* first, void* properties) c_gst_element_factory_make_valist; ///
-  GstElement* function(const(char)* factoryname, uint n, const(char*)* names, const(GValue)* values) c_gst_element_factory_make_with_properties; ///
-  gboolean function(GstElementFactory* factory, const(GstCaps)* caps) c_gst_element_factory_can_sink_all_caps; ///
-  gboolean function(GstElementFactory* factory, const(GstCaps)* caps) c_gst_element_factory_can_sink_any_caps; ///
-  gboolean function(GstElementFactory* factory, const(GstCaps)* caps) c_gst_element_factory_can_src_all_caps; ///
-  gboolean function(GstElementFactory* factory, const(GstCaps)* caps) c_gst_element_factory_can_src_any_caps; ///
-  GstElement* function(GstElementFactory* factory, const(char)* name) c_gst_element_factory_create; ///
-  GstElement* function(GstElementFactory* factory, const(char)* first,  ...) c_gst_element_factory_create_full; ///
-  GstElement* function(GstElementFactory* factory, const(char)* first, void* properties) c_gst_element_factory_create_valist; ///
-  GstElement* function(GstElementFactory* factory, uint n, const(char*)* names, const(GValue)* values) c_gst_element_factory_create_with_properties; ///
-  GType function(GstElementFactory* factory) c_gst_element_factory_get_element_type; ///
-  const(char)* function(GstElementFactory* factory, const(char)* key) c_gst_element_factory_get_metadata; ///
-  char** function(GstElementFactory* factory) c_gst_element_factory_get_metadata_keys; ///
-  uint function(GstElementFactory* factory) c_gst_element_factory_get_num_pad_templates; ///
-  gboolean function(GstElementFactory* factory) c_gst_element_factory_get_skip_documentation; ///
-  const(GList)* function(GstElementFactory* factory) c_gst_element_factory_get_static_pad_templates; ///
-  const(char*)* function(GstElementFactory* factory) c_gst_element_factory_get_uri_protocols; ///
-  GstURIType function(GstElementFactory* factory) c_gst_element_factory_get_uri_type; ///
-  gboolean function(GstElementFactory* factory, const(char)* interfacename) c_gst_element_factory_has_interface; ///
-  gboolean function(GstElementFactory* factory, GstElementFactoryListType type) c_gst_element_factory_list_is_type; ///
-
-  // Event
-  GType function() c_gst_event_get_type; ///
-  GstEvent* function(GstFormat format, long minsize, long maxsize, gboolean async) c_gst_event_new_buffer_size; ///
-  GstEvent* function(GstCaps* caps) c_gst_event_new_caps; ///
-  GstEvent* function(GstEventType type, GstStructure* structure) c_gst_event_new_custom; ///
-  GstEvent* function() c_gst_event_new_eos; ///
-  GstEvent* function() c_gst_event_new_flush_start; ///
-  GstEvent* function(gboolean resetTime) c_gst_event_new_flush_stop; ///
-  GstEvent* function(GstClockTime timestamp, GstClockTime duration) c_gst_event_new_gap; ///
-  GstEvent* function(double rateMultiplier, GstSegmentFlags newFlags) c_gst_event_new_instant_rate_change; ///
-  GstEvent* function(double rateMultiplier, GstClockTime runningTime, GstClockTime upstreamRunningTime) c_gst_event_new_instant_rate_sync_time; ///
-  GstEvent* function(GstClockTime latency) c_gst_event_new_latency; ///
-  GstEvent* function(GstStructure* structure) c_gst_event_new_navigation; ///
-  GstEvent* function(const(char)* systemId, GstBuffer* data, const(char)* origin) c_gst_event_new_protection; ///
-  GstEvent* function(GstQOSType type, double proportion, GstClockTimeDiff diff, GstClockTime timestamp) c_gst_event_new_qos; ///
-  GstEvent* function() c_gst_event_new_reconfigure; ///
-  GstEvent* function(double rate, GstFormat format, GstSeekFlags flags, GstSeekType startType, long start, GstSeekType stopType, long stop) c_gst_event_new_seek; ///
-  GstEvent* function(const(GstSegment)* segment) c_gst_event_new_segment; ///
-  GstEvent* function(GstFormat format, long position) c_gst_event_new_segment_done; ///
-  GstEvent* function(GList* streams) c_gst_event_new_select_streams; ///
-  GstEvent* function(const(char)* name, GstMessage* msg) c_gst_event_new_sink_message; ///
-  GstEvent* function(GstFormat format, ulong amount, double rate, gboolean flush, gboolean intermediate) c_gst_event_new_step; ///
-  GstEvent* function(GstStreamCollection* collection) c_gst_event_new_stream_collection; ///
-  GstEvent* function(uint groupId) c_gst_event_new_stream_group_done; ///
-  GstEvent* function(const(char)* streamId) c_gst_event_new_stream_start; ///
-  GstEvent* function(GstTagList* taglist) c_gst_event_new_tag; ///
-  GstEvent* function(GstToc* toc, gboolean updated) c_gst_event_new_toc; ///
-  GstEvent* function(const(char)* uid) c_gst_event_new_toc_select; ///
-  GstEvent* function(const(GstEvent)* event) c_gst_event_copy; ///
-  void function(GstEvent* event, GstSegment* segment) c_gst_event_copy_segment; ///
-  long function(GstEvent* event) c_gst_event_get_running_time_offset; ///
-  uint function(GstEvent* event) c_gst_event_get_seqnum; ///
-  const(GstStructure)* function(GstEvent* event) c_gst_event_get_structure; ///
-  gboolean function(GstEvent* event, const(char)* name) c_gst_event_has_name; ///
-  gboolean function(GstEvent* event, GQuark name) c_gst_event_has_name_id; ///
-  gboolean function(const(GstEvent)* event) c_gst_event_is_writable; ///
-  GstEvent* function(GstEvent* event) c_gst_event_make_writable; ///
-  void function(GstEvent* event, GstFormat* format, long* minsize, long* maxsize, gboolean* async) c_gst_event_parse_buffer_size; ///
-  void function(GstEvent* event, GstCaps** caps) c_gst_event_parse_caps; ///
-  void function(GstEvent* event, gboolean* resetTime) c_gst_event_parse_flush_stop; ///
-  void function(GstEvent* event, GstClockTime* timestamp, GstClockTime* duration) c_gst_event_parse_gap; ///
-  void function(GstEvent* event, GstGapFlags* flags) c_gst_event_parse_gap_flags; ///
-  gboolean function(GstEvent* event, uint* groupId) c_gst_event_parse_group_id; ///
-  void function(GstEvent* event, double* rateMultiplier, GstSegmentFlags* newFlags) c_gst_event_parse_instant_rate_change; ///
-  void function(GstEvent* event, double* rateMultiplier, GstClockTime* runningTime, GstClockTime* upstreamRunningTime) c_gst_event_parse_instant_rate_sync_time; ///
-  void function(GstEvent* event, GstClockTime* latency) c_gst_event_parse_latency; ///
-  void function(GstEvent* event, const(char*)* systemId, GstBuffer** data, const(char*)* origin) c_gst_event_parse_protection; ///
-  void function(GstEvent* event, GstQOSType* type, double* proportion, GstClockTimeDiff* diff, GstClockTime* timestamp) c_gst_event_parse_qos; ///
-  void function(GstEvent* event, double* rate, GstFormat* format, GstSeekFlags* flags, GstSeekType* startType, long* start, GstSeekType* stopType, long* stop) c_gst_event_parse_seek; ///
-  void function(GstEvent* event, GstClockTime* interval) c_gst_event_parse_seek_trickmode_interval; ///
-  void function(GstEvent* event, const(GstSegment*)* segment) c_gst_event_parse_segment; ///
-  void function(GstEvent* event, GstFormat* format, long* position) c_gst_event_parse_segment_done; ///
-  void function(GstEvent* event, GList** streams) c_gst_event_parse_select_streams; ///
-  void function(GstEvent* event, GstMessage** msg) c_gst_event_parse_sink_message; ///
-  void function(GstEvent* event, GstFormat* format, ulong* amount, double* rate, gboolean* flush, gboolean* intermediate) c_gst_event_parse_step; ///
-  void function(GstEvent* event, GstStream** stream) c_gst_event_parse_stream; ///
-  void function(GstEvent* event, GstStreamCollection** collection) c_gst_event_parse_stream_collection; ///
-  void function(GstEvent* event, GstStreamFlags* flags) c_gst_event_parse_stream_flags; ///
-  void function(GstEvent* event, uint* groupId) c_gst_event_parse_stream_group_done; ///
-  void function(GstEvent* event, const(char*)* streamId) c_gst_event_parse_stream_start; ///
-  void function(GstEvent* event, GstTagList** taglist) c_gst_event_parse_tag; ///
-  void function(GstEvent* event, GstToc** toc, gboolean* updated) c_gst_event_parse_toc; ///
-  void function(GstEvent* event, char** uid) c_gst_event_parse_toc_select; ///
-  GstEvent* function(GstEvent* event) c_gst_event_ref; ///
-  void function(GstEvent* event, GstGapFlags flags) c_gst_event_set_gap_flags; ///
-  void function(GstEvent* event, uint groupId) c_gst_event_set_group_id; ///
-  void function(GstEvent* event, long offset) c_gst_event_set_running_time_offset; ///
-  void function(GstEvent* event, GstClockTime interval) c_gst_event_set_seek_trickmode_interval; ///
-  void function(GstEvent* event, uint seqnum) c_gst_event_set_seqnum; ///
-  void function(GstEvent* event, GstStream* stream) c_gst_event_set_stream; ///
-  void function(GstEvent* event, GstStreamFlags flags) c_gst_event_set_stream_flags; ///
-  void function(GstEvent* event) c_gst_event_unref; ///
-  GstStructure* function(GstEvent* event) c_gst_event_writable_structure; ///
-  gboolean function(GstEvent** oldEvent, GstEvent* newEvent) c_gst_event_replace; ///
-  GstEvent* function(GstEvent** oldEvent) c_gst_event_steal; ///
-  gboolean function(GstEvent** oldEvent, GstEvent* newEvent) c_gst_event_take; ///
-
-  // FlagSet
-  GType function() c_gst_flagset_get_type; ///
-  GType function(GType flagsType) c_gst_flagset_register; ///
-
-  // Fraction
-  GType function() c_gst_fraction_get_type; ///
-
-  // FractionRange
-  GType function() c_gst_fraction_range_get_type; ///
-
-  // GhostPad
-  GType function() c_gst_ghost_pad_get_type; ///
-  GstPad* function(const(char)* name, GstPad* target) c_gst_ghost_pad_new; ///
-  GstPad* function(const(char)* name, GstPad* target, GstPadTemplate* templ) c_gst_ghost_pad_new_from_template; ///
-  GstPad* function(const(char)* name, GstPadDirection dir) c_gst_ghost_pad_new_no_target; ///
-  GstPad* function(const(char)* name, GstPadTemplate* templ) c_gst_ghost_pad_new_no_target_from_template; ///
-  gboolean function(GstPad* pad, GstObject* parent, GstPadMode mode, gboolean active) c_gst_ghost_pad_activate_mode_default; ///
-  gboolean function(GstPad* pad, GstObject* parent, GstPadMode mode, gboolean active) c_gst_ghost_pad_internal_activate_mode_default; ///
-  gboolean function(GstGhostPad* gpad) c_gst_ghost_pad_construct; ///
-  GstPad* function(GstGhostPad* gpad) c_gst_ghost_pad_get_target; ///
-  gboolean function(GstGhostPad* gpad, GstPad* newtarget) c_gst_ghost_pad_set_target; ///
-
-  // IdStr
-  GType function() c_gst_id_str_get_type; ///
-  GstIdStr* function() c_gst_id_str_new; ///
-  const(char)* function(const(GstIdStr)* s) c_gst_id_str_as_str; ///
-  void function(GstIdStr* s) c_gst_id_str_clear; ///
-  GstIdStr* function(const(GstIdStr)* s) c_gst_id_str_copy; ///
-  void function(GstIdStr* d, const(GstIdStr)* s) c_gst_id_str_copy_into; ///
-  void function(GstIdStr* s) c_gst_id_str_free; ///
-  size_t function(const(GstIdStr)* s) c_gst_id_str_get_len; ///
-  void function(GstIdStr* s) c_gst_id_str_init; ///
-  gboolean function(const(GstIdStr)* s1, const(GstIdStr)* s2) c_gst_id_str_is_equal; ///
-  gboolean function(const(GstIdStr)* s1, const(char)* s2) c_gst_id_str_is_equal_to_str; ///
-  gboolean function(const(GstIdStr)* s1, const(char)* s2, size_t len) c_gst_id_str_is_equal_to_str_with_len; ///
-  void function(GstIdStr* d, GstIdStr* s) c_gst_id_str_move; ///
-  void function(GstIdStr* s, const(char)* value) c_gst_id_str_set; ///
-  void function(GstIdStr* s, const(char)* value) c_gst_id_str_set_static_str; ///
-  void function(GstIdStr* s, const(char)* value, size_t len) c_gst_id_str_set_static_str_with_len; ///
-  void function(GstIdStr* s, const(char)* value, size_t len) c_gst_id_str_set_with_len; ///
-
-  // Int64Range
-  GType function() c_gst_int64_range_get_type; ///
-
-  // IntRange
-  GType function() c_gst_int_range_get_type; ///
-
-  // Iterator
-  GType function() c_gst_iterator_get_type; ///
-  GstIterator* function(uint size, GType type, GMutex* lock, uint* masterCookie, GstIteratorCopyFunction copy, GstIteratorNextFunction next, GstIteratorItemFunction item, GstIteratorResyncFunction resync, GstIteratorFreeFunction free) c_gst_iterator_new; ///
-  GstIterator* function(GType type, GMutex* lock, uint* masterCookie, GList** list, GObject* owner, GstIteratorItemFunction item) c_gst_iterator_new_list; ///
-  GstIterator* function(GType type, const(GValue)* object) c_gst_iterator_new_single; ///
-  GstIterator* function(const(GstIterator)* it) c_gst_iterator_copy; ///
-  GstIterator* function(GstIterator* it, GCompareFunc func, const(GValue)* userData) c_gst_iterator_filter; ///
-  gboolean function(GstIterator* it, GCompareFunc func, GValue* elem, void* userData) c_gst_iterator_find_custom; ///
-  GstIteratorResult function(GstIterator* it, GstIteratorFoldFunction func, GValue* ret, void* userData) c_gst_iterator_fold; ///
-  GstIteratorResult function(GstIterator* it, GstIteratorForeachFunction func, void* userData) c_gst_iterator_foreach; ///
-  void function(GstIterator* it) c_gst_iterator_free; ///
-  GstIteratorResult function(GstIterator* it, GValue* elem) c_gst_iterator_next; ///
-  void function(GstIterator* it, GstIterator* other) c_gst_iterator_push; ///
-  void function(GstIterator* it) c_gst_iterator_resync; ///
-
-  // LogContext
-  void function(GstLogContext* ctx) c_gst_log_context_free; ///
-  GstDebugCategory* function(GstLogContext* context) c_gst_log_context_get_category; ///
-  void function(GstLogContext* ctx) c_gst_log_context_reset; ///
-
-  // LogContextBuilder
-  GstLogContext* function(GstLogContextBuilder* builder) c_gst_log_context_builder_build; ///
-  GstLogContextBuilder* function(GstLogContextBuilder* builder, GstDebugCategory* category) c_gst_log_context_builder_set_category; ///
-  GstLogContextBuilder* function(GstLogContextBuilder* builder, GstLogContextHashFlags flags) c_gst_log_context_builder_set_hash_flags; ///
-  GstLogContextBuilder* function(GstLogContextBuilder* builder, GstClockTime interval) c_gst_log_context_builder_set_interval; ///
-  GstLogContextBuilder* function(GstDebugCategory* category, GstLogContextFlags flags) c_gst_log_context_builder_new; ///
-
-  // MapInfo
-  void function(GstMapInfo* info) c_gst_map_info_clear; ///
-  ubyte* function(GstMapInfo* info, size_t* size) c_gst_map_info_get_data; ///
-  void function(GstMapInfo* info) c_gst_map_info_init; ///
-
-  // Memory
-  GType function() c_gst_memory_get_type; ///
-  GstMemory* function(GstMemoryFlags flags, void* data, size_t maxsize, size_t offset, size_t size, void* userData, GDestroyNotify notify) c_gst_memory_new_wrapped; ///
-  GstMemory* function(GstMemory* mem, ptrdiff_t offset, ptrdiff_t size) c_gst_memory_copy; ///
-  size_t function(GstMemory* mem, size_t* offset, size_t* maxsize) c_gst_memory_get_sizes; ///
-  void function(GstMemory* mem, GstMemoryFlags flags, GstAllocator* allocator, GstMemory* parent, size_t maxsize, size_t align_, size_t offset, size_t size) c_gst_memory_init; ///
-  gboolean function(GstMemory* mem1, GstMemory* mem2, size_t* offset) c_gst_memory_is_span; ///
-  gboolean function(GstMemory* mem, const(char)* memType) c_gst_memory_is_type; ///
-  gboolean function(const(GstMemory)* memory) c_gst_memory_is_writable; ///
-  GstMemory* function(GstMemory* mem, GstMapInfo* info, GstMapFlags flags) c_gst_memory_make_mapped; ///
-  GstMemory* function(GstMemory* memory) c_gst_memory_make_writable; ///
-  gboolean function(GstMemory* mem, GstMapInfo* info, GstMapFlags flags) c_gst_memory_map; ///
-  GstMemory* function(GstMemory* memory) c_gst_memory_ref; ///
-  void function(GstMemory* mem, ptrdiff_t offset, size_t size) c_gst_memory_resize; ///
-  GstMemory* function(GstMemory* mem, ptrdiff_t offset, ptrdiff_t size) c_gst_memory_share; ///
-  void function(GstMemory* mem, GstMapInfo* info) c_gst_memory_unmap; ///
-  void function(GstMemory* memory) c_gst_memory_unref; ///
-  gboolean function(GstMemory** oldMemory, GstMemory* newMemory) c_gst_memory_replace; ///
-  GstMemory* function(GstMemory** oldMemory) c_gst_memory_steal; ///
-  gboolean function(GstMemory** oldMemory, GstMemory* newMemory) c_gst_memory_take; ///
-
-  // Message
-  GType function() c_gst_message_get_type; ///
-  GstMessage* function(GstObject* src, GstStructure* structure) c_gst_message_new_application; ///
-  GstMessage* function(GstObject* src, GstClockTime runningTime) c_gst_message_new_async_done; ///
-  GstMessage* function(GstObject* src) c_gst_message_new_async_start; ///
-  GstMessage* function(GstObject* src, int percent) c_gst_message_new_buffering; ///
-  GstMessage* function(GstObject* src, GstClock* clock) c_gst_message_new_clock_lost; ///
-  GstMessage* function(GstObject* src, GstClock* clock, gboolean ready) c_gst_message_new_clock_provide; ///
-  GstMessage* function(GstMessageType type, GstObject* src, GstStructure* structure) c_gst_message_new_custom; ///
-  GstMessage* function(GstObject* src, GstDevice* device) c_gst_message_new_device_added; ///
-  GstMessage* function(GstObject* src, GstDevice* device, GstDevice* changedDevice) c_gst_message_new_device_changed; ///
-  GstMessage* function(GstObject* src, gboolean success) c_gst_message_new_device_monitor_started; ///
-  GstMessage* function(GstObject* src, GstDevice* device) c_gst_message_new_device_removed; ///
-  GstMessage* function(GstObject* src) c_gst_message_new_duration_changed; ///
-  GstMessage* function(GstObject* src, GstStructure* structure) c_gst_message_new_element; ///
-  GstMessage* function(GstObject* src) c_gst_message_new_eos; ///
-  GstMessage* function(GstObject* src, GError* error, const(char)* debug_) c_gst_message_new_error; ///
-  GstMessage* function(GstObject* src, GError* error, const(char)* debug_, GstStructure* details) c_gst_message_new_error_with_details; ///
-  GstMessage* function(GstObject* src, GstContext* context) c_gst_message_new_have_context; ///
-  GstMessage* function(GstObject* src, GError* error, const(char)* debug_) c_gst_message_new_info; ///
-  GstMessage* function(GstObject* src, GError* error, const(char)* debug_, GstStructure* details) c_gst_message_new_info_with_details; ///
-  GstMessage* function(GstObject* src, double rateMultiplier) c_gst_message_new_instant_rate_request; ///
-  GstMessage* function(GstObject* src) c_gst_message_new_latency; ///
-  GstMessage* function(GstObject* src, const(char)* contextType) c_gst_message_new_need_context; ///
-  GstMessage* function(GstObject* src, GstClock* clock) c_gst_message_new_new_clock; ///
-  GstMessage* function(GstObject* src, GstProgressType type, const(char)* code, const(char)* text) c_gst_message_new_progress; ///
-  GstMessage* function(GstObject* src, const(char)* propertyName, GValue* val) c_gst_message_new_property_notify; ///
-  GstMessage* function(GstObject* src, gboolean live, ulong runningTime, ulong streamTime, ulong timestamp, ulong duration) c_gst_message_new_qos; ///
-  GstMessage* function(GstObject* src, const(char)* location, GstTagList* tagList, GstStructure* entryStruct) c_gst_message_new_redirect; ///
-  GstMessage* function(GstObject* src, GstState state) c_gst_message_new_request_state; ///
-  GstMessage* function(GstObject* src, GstClockTime runningTime) c_gst_message_new_reset_time; ///
-  GstMessage* function(GstObject* src, GstFormat format, long position) c_gst_message_new_segment_done; ///
-  GstMessage* function(GstObject* src, GstFormat format, long position) c_gst_message_new_segment_start; ///
-  GstMessage* function(GstObject* src, GstState oldstate, GstState newstate, GstState pending) c_gst_message_new_state_changed; ///
-  GstMessage* function(GstObject* src) c_gst_message_new_state_dirty; ///
-  GstMessage* function(GstObject* src, GstFormat format, ulong amount, double rate, gboolean flush, gboolean intermediate, ulong duration, gboolean eos) c_gst_message_new_step_done; ///
-  GstMessage* function(GstObject* src, gboolean active, GstFormat format, ulong amount, double rate, gboolean flush, gboolean intermediate) c_gst_message_new_step_start; ///
-  GstMessage* function(GstObject* src, GstStreamCollection* collection) c_gst_message_new_stream_collection; ///
-  GstMessage* function(GstObject* src) c_gst_message_new_stream_start; ///
-  GstMessage* function(GstObject* src, GstStreamStatusType type, GstElement* owner) c_gst_message_new_stream_status; ///
-  GstMessage* function(GstObject* src, GstStreamCollection* collection) c_gst_message_new_streams_selected; ///
-  GstMessage* function(GstObject* src, GstStructureChangeType type, GstElement* owner, gboolean busy) c_gst_message_new_structure_change; ///
-  GstMessage* function(GstObject* src, GstTagList* tagList) c_gst_message_new_tag; ///
-  GstMessage* function(GstObject* src, GstToc* toc, gboolean updated) c_gst_message_new_toc; ///
-  GstMessage* function(GstObject* src, GError* error, const(char)* debug_) c_gst_message_new_warning; ///
-  GstMessage* function(GstObject* src, GError* error, const(char)* debug_, GstStructure* details) c_gst_message_new_warning_with_details; ///
-  void function(GstMessage* message, const(char)* location, GstTagList* tagList, GstStructure* entryStruct) c_gst_message_add_redirect_entry; ///
-  GstMessage* function(const(GstMessage)* msg) c_gst_message_copy; ///
-  const(GstStructure)* function(GstMessage* message) c_gst_message_get_details; ///
-  size_t function(GstMessage* message) c_gst_message_get_num_redirect_entries; ///
-  uint function(GstMessage* message) c_gst_message_get_seqnum; ///
-  const(GValue)* function(GstMessage* message) c_gst_message_get_stream_status_object; ///
-  const(GstStructure)* function(GstMessage* message) c_gst_message_get_structure; ///
-  gboolean function(GstMessage* message, const(char)* name) c_gst_message_has_name; ///
-  gboolean function(const(GstMessage)* message) c_gst_message_is_writable; ///
-  GstMessage* function(GstMessage* message) c_gst_message_make_writable; ///
-  void function(GstMessage* message, GstClockTime* runningTime) c_gst_message_parse_async_done; ///
-  void function(GstMessage* message, int* percent) c_gst_message_parse_buffering; ///
-  void function(GstMessage* message, GstBufferingMode* mode, int* avgIn, int* avgOut, long* bufferingLeft) c_gst_message_parse_buffering_stats; ///
-  void function(GstMessage* message, GstClock** clock) c_gst_message_parse_clock_lost; ///
-  void function(GstMessage* message, GstClock** clock, gboolean* ready) c_gst_message_parse_clock_provide; ///
-  gboolean function(GstMessage* message, const(char*)* contextType) c_gst_message_parse_context_type; ///
-  void function(GstMessage* message, GstDevice** device) c_gst_message_parse_device_added; ///
-  void function(GstMessage* message, GstDevice** device, GstDevice** changedDevice) c_gst_message_parse_device_changed; ///
-  void function(GstMessage* message, gboolean* success) c_gst_message_parse_device_monitor_started; ///
-  void function(GstMessage* message, GstDevice** device) c_gst_message_parse_device_removed; ///
-  void function(GstMessage* message, GError** gerror, char** debug_) c_gst_message_parse_error; ///
-  void function(GstMessage* message, const(GstStructure*)* structure) c_gst_message_parse_error_details; ///
-  void function(GstMessage* message, GstStructure** structure) c_gst_message_parse_error_writable_details; ///
-  gboolean function(GstMessage* message, uint* groupId) c_gst_message_parse_group_id; ///
-  void function(GstMessage* message, GstContext** context) c_gst_message_parse_have_context; ///
-  void function(GstMessage* message, GError** gerror, char** debug_) c_gst_message_parse_info; ///
-  void function(GstMessage* message, const(GstStructure*)* structure) c_gst_message_parse_info_details; ///
-  void function(GstMessage* message, GstStructure** structure) c_gst_message_parse_info_writable_details; ///
-  void function(GstMessage* message, double* rateMultiplier) c_gst_message_parse_instant_rate_request; ///
-  void function(GstMessage* message, GstClock** clock) c_gst_message_parse_new_clock; ///
-  void function(GstMessage* message, GstProgressType* type, char** code, char** text) c_gst_message_parse_progress; ///
-  void function(GstMessage* message, GstObject** object, const(char*)* propertyName, const(GValue*)* propertyValue) c_gst_message_parse_property_notify; ///
-  void function(GstMessage* message, gboolean* live, ulong* runningTime, ulong* streamTime, ulong* timestamp, ulong* duration) c_gst_message_parse_qos; ///
-  void function(GstMessage* message, GstFormat* format, ulong* processed, ulong* dropped) c_gst_message_parse_qos_stats; ///
-  void function(GstMessage* message, long* jitter, double* proportion, int* quality) c_gst_message_parse_qos_values; ///
-  void function(GstMessage* message, size_t entryIndex, const(char*)* location, GstTagList** tagList, const(GstStructure*)* entryStruct) c_gst_message_parse_redirect_entry; ///
-  void function(GstMessage* message, GstState* state) c_gst_message_parse_request_state; ///
-  void function(GstMessage* message, GstClockTime* runningTime) c_gst_message_parse_reset_time; ///
-  void function(GstMessage* message, GstFormat* format, long* position) c_gst_message_parse_segment_done; ///
-  void function(GstMessage* message, GstFormat* format, long* position) c_gst_message_parse_segment_start; ///
-  void function(GstMessage* message, GstState* oldstate, GstState* newstate, GstState* pending) c_gst_message_parse_state_changed; ///
-  void function(GstMessage* message, GstFormat* format, ulong* amount, double* rate, gboolean* flush, gboolean* intermediate, ulong* duration, gboolean* eos) c_gst_message_parse_step_done; ///
-  void function(GstMessage* message, gboolean* active, GstFormat* format, ulong* amount, double* rate, gboolean* flush, gboolean* intermediate) c_gst_message_parse_step_start; ///
-  void function(GstMessage* message, GstStreamCollection** collection) c_gst_message_parse_stream_collection; ///
-  void function(GstMessage* message, GstStreamStatusType* type, GstElement** owner) c_gst_message_parse_stream_status; ///
-  void function(GstMessage* message, GstStreamCollection** collection) c_gst_message_parse_streams_selected; ///
-  void function(GstMessage* message, GstStructureChangeType* type, GstElement** owner, gboolean* busy) c_gst_message_parse_structure_change; ///
-  void function(GstMessage* message, GstTagList** tagList) c_gst_message_parse_tag; ///
-  void function(GstMessage* message, GstToc** toc, gboolean* updated) c_gst_message_parse_toc; ///
-  void function(GstMessage* message, GError** gerror, char** debug_) c_gst_message_parse_warning; ///
-  void function(GstMessage* message, const(GstStructure*)* structure) c_gst_message_parse_warning_details; ///
-  void function(GstMessage* message, GstStructure** structure) c_gst_message_parse_warning_writable_details; ///
-  GstMessage* function(GstMessage* msg) c_gst_message_ref; ///
-  void function(GstMessage* message, GstBufferingMode mode, int avgIn, int avgOut, long bufferingLeft) c_gst_message_set_buffering_stats; ///
-  void function(GstMessage* message, GstStructure* details) c_gst_message_set_details; ///
-  void function(GstMessage* message, uint groupId) c_gst_message_set_group_id; ///
-  void function(GstMessage* message, GstFormat format, ulong processed, ulong dropped) c_gst_message_set_qos_stats; ///
-  void function(GstMessage* message, long jitter, double proportion, int quality) c_gst_message_set_qos_values; ///
-  void function(GstMessage* message, uint seqnum) c_gst_message_set_seqnum; ///
-  void function(GstMessage* message, const(GValue)* object) c_gst_message_set_stream_status_object; ///
-  void function(GstMessage* message, GstStream* stream) c_gst_message_streams_selected_add; ///
-  uint function(GstMessage* message) c_gst_message_streams_selected_get_size; ///
-  GstStream* function(GstMessage* message, uint idx) c_gst_message_streams_selected_get_stream; ///
-  void function(GstMessage* msg) c_gst_message_unref; ///
-  GstStructure* function(GstMessage* message) c_gst_message_writable_details; ///
-  GstStructure* function(GstMessage* message) c_gst_message_writable_structure; ///
-  gboolean function(GstMessage** oldMessage, GstMessage* newMessage) c_gst_message_replace; ///
-  GstMessage* function(GstMessage** oldMessage) c_gst_message_steal; ///
-  gboolean function(GstMessage** oldMessage, GstMessage* newMessage) c_gst_message_take; ///
-
-  // Meta
-  int function(const(GstMeta)* meta1, const(GstMeta)* meta2) c_gst_meta_compare_seqnum; ///
-  ulong function(const(GstMeta)* meta) c_gst_meta_get_seqnum; ///
-  gboolean function(const(GstMeta)* meta, GstByteArrayInterface* data) c_gst_meta_serialize; ///
-  gboolean function(const(GstMeta)* meta, GByteArray* data) c_gst_meta_serialize_simple; ///
-  gboolean function(GType api, GstStructure** aggregatedParams, const(GstStructure)* params0, const(GstStructure)* params1) c_gst_meta_api_type_aggregate_params; ///
-  const(char*)* function(GType api) c_gst_meta_api_type_get_tags; ///
-  gboolean function(GType api, GQuark tag) c_gst_meta_api_type_has_tag; ///
-  GType function(const(char)* api, const(char*)* tags) c_gst_meta_api_type_register; ///
-  void function(GType api, GstAllocationMetaParamsAggregator aggregator) c_gst_meta_api_type_set_params_aggregator; ///
-  gboolean function(GType api, const(char*)* validTags) c_gst_meta_api_type_tags_contain_only; ///
-  GstMeta* function(GstBuffer* buffer, const(ubyte)* data, size_t size, uint* consumed) c_gst_meta_deserialize; ///
-  const(GstMetaInfo)* function(const(char)* impl) c_gst_meta_get_info; ///
-  const(GstMetaInfo)* function(GType api, const(char)* impl, size_t size, GstMetaInitFunction initFunc, GstMetaFreeFunction freeFunc, GstMetaTransformFunction transformFunc) c_gst_meta_register; ///
-  const(GstMetaInfo)* function(const(char)* name, const(char*)* tags, GstCustomMetaTransformFunction transformFunc, void* userData, GDestroyNotify destroyData) c_gst_meta_register_custom; ///
-  const(GstMetaInfo)* function(const(char)* name) c_gst_meta_register_custom_simple; ///
-
-  // MetaFactory
-  GType function() c_gst_meta_factory_get_type; ///
-  const(GstMetaInfo)* function(const(char)* factoryname) c_gst_meta_factory_load; ///
-  gboolean function(GstPlugin* plugin, const(GstMetaInfo)* metaInfo) c_gst_meta_factory_register; ///
-
-  // MetaInfo
-  gboolean function(const(GstMetaInfo)* info) c_gst_meta_info_is_custom; ///
-  const(GstMetaInfo)* function(GstMetaInfo* info) c_gst_meta_info_register; ///
-  GstMetaInfo* function(GType api, const(char)* impl, size_t size) c_gst_meta_info_new; ///
-
-  // MiniObject
-  GType function() c_gst_mini_object_get_type; ///
-  void function(GstMiniObject* object, GstMiniObject* parent) c_gst_mini_object_add_parent; ///
-  GstMiniObject* function(const(GstMiniObject)* miniObject) c_gst_mini_object_copy; ///
-  void* function(GstMiniObject* object, GQuark quark) c_gst_mini_object_get_qdata; ///
-  void function(GstMiniObject* miniObject, uint flags, GType type, GstMiniObjectCopyFunction copyFunc, GstMiniObjectDisposeFunction disposeFunc, GstMiniObjectFreeFunction freeFunc) c_gst_mini_object_init; ///
-  gboolean function(const(GstMiniObject)* miniObject) c_gst_mini_object_is_writable; ///
-  gboolean function(GstMiniObject* object, GstLockFlags flags) c_gst_mini_object_lock; ///
-  GstMiniObject* function(GstMiniObject* miniObject) c_gst_mini_object_make_writable; ///
-  GstMiniObject* function(GstMiniObject* miniObject) c_gst_mini_object_ref; ///
-  void function(GstMiniObject* object, GstMiniObject* parent) c_gst_mini_object_remove_parent; ///
-  void function(GstMiniObject* object, GQuark quark, void* data, GDestroyNotify destroy) c_gst_mini_object_set_qdata; ///
-  void* function(GstMiniObject* object, GQuark quark) c_gst_mini_object_steal_qdata; ///
-  void function(GstMiniObject* object, GstLockFlags flags) c_gst_mini_object_unlock; ///
-  void function(GstMiniObject* miniObject) c_gst_mini_object_unref; ///
-  void function(GstMiniObject* object, GstMiniObjectNotify notify, void* data) c_gst_mini_object_weak_ref; ///
-  void function(GstMiniObject* object, GstMiniObjectNotify notify, void* data) c_gst_mini_object_weak_unref; ///
-  gboolean function(GstMiniObject** olddata, GstMiniObject* newdata) c_gst_mini_object_replace; ///
-  GstMiniObject* function(GstMiniObject** olddata) c_gst_mini_object_steal; ///
-  gboolean function(GstMiniObject** olddata, GstMiniObject* newdata) c_gst_mini_object_take; ///
-
-  // ObjectWrap
-  GType function() c_gst_object_get_type; ///
-  gboolean function(GList* list, const(char)* name) c_gst_object_check_uniqueness; ///
-  void function(GObject* object, GstObject* orig, GParamSpec* pspec, char** excludedProps) c_gst_object_default_deep_notify; ///
-  void* function(void* object) c_gst_object_ref_sink; ///
-  gboolean function(GstObject** oldobj, GstObject* newobj) c_gst_object_replace; ///
-  gboolean function(GstObject* object, GstControlBinding* binding) c_gst_object_add_control_binding; ///
-  void function(GstObject* object, GstObjectCallAsyncFunc func, void* userData) c_gst_object_call_async; ///
-  void function(GstObject* source, const(GError)* error, const(char)* debug_) c_gst_object_default_error; ///
-  GstControlBinding* function(GstObject* object, const(char)* propertyName) c_gst_object_get_control_binding; ///
-  GstClockTime function(GstObject* object) c_gst_object_get_control_rate; ///
-  gboolean function(GstObject* object, const(char)* propertyName, GstClockTime timestamp, GstClockTime interval, uint nValues, GValue* values) c_gst_object_get_g_value_array; ///
-  char* function(GstObject* object) c_gst_object_get_name; ///
-  GstObject* function(GstObject* object) c_gst_object_get_parent; ///
-  char* function(GstObject* object) c_gst_object_get_path_string; ///
-  GstObject* function(GstObject* object) c_gst_object_get_toplevel; ///
-  GValue* function(GstObject* object, const(char)* propertyName, GstClockTime timestamp) c_gst_object_get_value; ///
-  gboolean function(GstObject* object, const(char)* propertyName, GstClockTime timestamp, GstClockTime interval, uint nValues, void* values) c_gst_object_get_value_array; ///
-  gboolean function(GstObject* object) c_gst_object_has_active_control_bindings; ///
-  gboolean function(GstObject* object, GstObject* ancestor) c_gst_object_has_ancestor; ///
-  gboolean function(GstObject* object, GstObject* ancestor) c_gst_object_has_as_ancestor; ///
-  gboolean function(GstObject* object, GstObject* parent) c_gst_object_has_as_parent; ///
-  GstObject* function(GstObject* object) c_gst_object_ref; ///
-  gboolean function(GstObject* object, GstControlBinding* binding) c_gst_object_remove_control_binding; ///
-  void function(GstObject* object, const(char)* propertyName, gboolean disabled) c_gst_object_set_control_binding_disabled; ///
-  void function(GstObject* object, gboolean disabled) c_gst_object_set_control_bindings_disabled; ///
-  void function(GstObject* object, GstClockTime controlRate) c_gst_object_set_control_rate; ///
-  gboolean function(GstObject* object, const(char)* name) c_gst_object_set_name; ///
-  gboolean function(GstObject* object, GstObject* parent) c_gst_object_set_parent; ///
-  GstClockTime function(GstObject* object) c_gst_object_suggest_next_sync; ///
-  gboolean function(GstObject* object, GstClockTime timestamp) c_gst_object_sync_values; ///
-  void function(GstObject* object) c_gst_object_unparent; ///
-  void function(GstObject* object) c_gst_object_unref; ///
-
-  // Pad
-  GType function() c_gst_pad_get_type; ///
-  GstPad* function(const(char)* name, GstPadDirection direction) c_gst_pad_new; ///
-  GstPad* function(GstStaticPadTemplate* templ, const(char)* name) c_gst_pad_new_from_static_template; ///
-  GstPad* function(GstPadTemplate* templ, const(char)* name) c_gst_pad_new_from_template; ///
-  const(char)* function(GstPadLinkReturn ret) c_gst_pad_link_get_name; ///
-  gboolean function(GstPad* pad, GstPadMode mode, gboolean active) c_gst_pad_activate_mode; ///
-  gulong function(GstPad* pad, GstPadProbeType mask, GstPadProbeCallback callback, void* userData, GDestroyNotify destroyData) c_gst_pad_add_probe; ///
-  gboolean function(GstPad* srcpad, GstPad* sinkpad) c_gst_pad_can_link; ///
-  GstFlowReturn function(GstPad* pad, GstBuffer* buffer) c_gst_pad_chain; ///
-  GstFlowReturn function(GstPad* pad, GstBufferList* list) c_gst_pad_chain_list; ///
-  gboolean function(GstPad* pad) c_gst_pad_check_reconfigure; ///
-  char* function(GstPad* pad, GstElement* parent, const(char)* streamId) c_gst_pad_create_stream_id; ///
-  char* function(GstPad* pad, GstElement* parent, const(char)* streamId,  ...) c_gst_pad_create_stream_id_printf; ///
-  char* function(GstPad* pad, GstElement* parent, const(char)* streamId, void* varArgs) c_gst_pad_create_stream_id_printf_valist; ///
-  gboolean function(GstPad* pad, GstObject* parent, GstEvent* event) c_gst_pad_event_default; ///
-  gboolean function(GstPad* pad, GstPadForwardFunction forward, void* userData) c_gst_pad_forward; ///
-  GstCaps* function(GstPad* pad) c_gst_pad_get_allowed_caps; ///
-  GstCaps* function(GstPad* pad) c_gst_pad_get_current_caps; ///
-  GstPadDirection function(GstPad* pad) c_gst_pad_get_direction; ///
-  void* function(GstPad* pad) c_gst_pad_get_element_private; ///
-  GstFlowReturn function(GstPad* pad) c_gst_pad_get_last_flow_return; ///
-  long function(GstPad* pad) c_gst_pad_get_offset; ///
-  GstPadTemplate* function(GstPad* pad) c_gst_pad_get_pad_template; ///
-  GstCaps* function(GstPad* pad) c_gst_pad_get_pad_template_caps; ///
-  GstElement* function(GstPad* pad) c_gst_pad_get_parent_element; ///
-  GstPad* function(GstPad* pad) c_gst_pad_get_peer; ///
-  GstFlowReturn function(GstPad* pad, ulong offset, uint size, GstBuffer** buffer) c_gst_pad_get_range; ///
-  GstPad* function(GstPad* pad) c_gst_pad_get_single_internal_link; ///
-  GstEvent* function(GstPad* pad, GstEventType eventType, uint idx) c_gst_pad_get_sticky_event; ///
-  GstStream* function(GstPad* pad) c_gst_pad_get_stream; ///
-  char* function(GstPad* pad) c_gst_pad_get_stream_id; ///
-  GstTaskState function(GstPad* pad) c_gst_pad_get_task_state; ///
-  gboolean function(GstPad* pad) c_gst_pad_has_current_caps; ///
-  gboolean function(GstPad* pad) c_gst_pad_is_active; ///
-  gboolean function(GstPad* pad) c_gst_pad_is_blocked; ///
-  gboolean function(GstPad* pad) c_gst_pad_is_blocking; ///
-  gboolean function(GstPad* pad) c_gst_pad_is_linked; ///
-  GstIterator* function(GstPad* pad) c_gst_pad_iterate_internal_links; ///
-  GstIterator* function(GstPad* pad, GstObject* parent) c_gst_pad_iterate_internal_links_default; ///
-  GstPadLinkReturn function(GstPad* srcpad, GstPad* sinkpad) c_gst_pad_link; ///
-  GstPadLinkReturn function(GstPad* srcpad, GstPad* sinkpad, GstPadLinkCheck flags) c_gst_pad_link_full; ///
-  gboolean function(GstPad* src, GstPad* sink) c_gst_pad_link_maybe_ghosting; ///
-  gboolean function(GstPad* src, GstPad* sink, GstPadLinkCheck flags) c_gst_pad_link_maybe_ghosting_full; ///
-  void function(GstPad* pad) c_gst_pad_mark_reconfigure; ///
-  gboolean function(GstPad* pad) c_gst_pad_needs_reconfigure; ///
-  gboolean function(GstPad* pad) c_gst_pad_pause_task; ///
-  gboolean function(GstPad* pad, GstQuery* query) c_gst_pad_peer_query; ///
-  gboolean function(GstPad* pad, GstCaps* caps) c_gst_pad_peer_query_accept_caps; ///
-  GstCaps* function(GstPad* pad, GstCaps* filter) c_gst_pad_peer_query_caps; ///
-  gboolean function(GstPad* pad, GstFormat srcFormat, long srcVal, GstFormat destFormat, long* destVal) c_gst_pad_peer_query_convert; ///
-  gboolean function(GstPad* pad, GstFormat format, long* duration) c_gst_pad_peer_query_duration; ///
-  gboolean function(GstPad* pad, GstFormat format, long* cur) c_gst_pad_peer_query_position; ///
-  gboolean function(GstPad* pad, GstQuery* query) c_gst_pad_proxy_query_accept_caps; ///
-  gboolean function(GstPad* pad, GstQuery* query) c_gst_pad_proxy_query_caps; ///
-  GstFlowReturn function(GstPad* pad, ulong offset, uint size, GstBuffer** buffer) c_gst_pad_pull_range; ///
-  GstFlowReturn function(GstPad* pad, GstBuffer* buffer) c_gst_pad_push; ///
-  gboolean function(GstPad* pad, GstEvent* event) c_gst_pad_push_event; ///
-  GstFlowReturn function(GstPad* pad, GstBufferList* list) c_gst_pad_push_list; ///
-  gboolean function(GstPad* pad, GstQuery* query) c_gst_pad_query; ///
-  gboolean function(GstPad* pad, GstCaps* caps) c_gst_pad_query_accept_caps; ///
-  GstCaps* function(GstPad* pad, GstCaps* filter) c_gst_pad_query_caps; ///
-  gboolean function(GstPad* pad, GstFormat srcFormat, long srcVal, GstFormat destFormat, long* destVal) c_gst_pad_query_convert; ///
-  gboolean function(GstPad* pad, GstObject* parent, GstQuery* query) c_gst_pad_query_default; ///
-  gboolean function(GstPad* pad, GstFormat format, long* duration) c_gst_pad_query_duration; ///
-  gboolean function(GstPad* pad, GstFormat format, long* cur) c_gst_pad_query_position; ///
-  void function(GstPad* pad, gulong id) c_gst_pad_remove_probe; ///
-  gboolean function(GstPad* pad, GstEvent* event) c_gst_pad_send_event; ///
-  void function(GstPad* pad, GstPadActivateFunction activate, void* userData, GDestroyNotify notify) c_gst_pad_set_activate_function_full; ///
-  void function(GstPad* pad, GstPadActivateModeFunction activatemode, void* userData, GDestroyNotify notify) c_gst_pad_set_activatemode_function_full; ///
-  gboolean function(GstPad* pad, gboolean active) c_gst_pad_set_active; ///
-  void function(GstPad* pad, GstPadChainFunction chain, void* userData, GDestroyNotify notify) c_gst_pad_set_chain_function_full; ///
-  void function(GstPad* pad, GstPadChainListFunction chainlist, void* userData, GDestroyNotify notify) c_gst_pad_set_chain_list_function_full; ///
-  void function(GstPad* pad, void* priv) c_gst_pad_set_element_private; ///
-  void function(GstPad* pad, GstPadEventFullFunction event, void* userData, GDestroyNotify notify) c_gst_pad_set_event_full_function_full; ///
-  void function(GstPad* pad, GstPadEventFunction event, void* userData, GDestroyNotify notify) c_gst_pad_set_event_function_full; ///
-  void function(GstPad* pad, GstPadGetRangeFunction get, void* userData, GDestroyNotify notify) c_gst_pad_set_getrange_function_full; ///
-  void function(GstPad* pad, GstPadIterIntLinkFunction iterintlink, void* userData, GDestroyNotify notify) c_gst_pad_set_iterate_internal_links_function_full; ///
-  void function(GstPad* pad, GstPadLinkFunction link, void* userData, GDestroyNotify notify) c_gst_pad_set_link_function_full; ///
-  void function(GstPad* pad, long offset) c_gst_pad_set_offset; ///
-  void function(GstPad* pad, GstPadQueryFunction query, void* userData, GDestroyNotify notify) c_gst_pad_set_query_function_full; ///
-  void function(GstPad* pad, GstPadUnlinkFunction unlink, void* userData, GDestroyNotify notify) c_gst_pad_set_unlink_function_full; ///
-  gboolean function(GstPad* pad, GstTaskFunction func, void* userData, GDestroyNotify notify) c_gst_pad_start_task; ///
-  void function(GstPad* pad, GstPadStickyEventsForeachFunction foreachFunc, void* userData) c_gst_pad_sticky_events_foreach; ///
-  gboolean function(GstPad* pad) c_gst_pad_stop_task; ///
-  GstFlowReturn function(GstPad* pad, GstEvent* event) c_gst_pad_store_sticky_event; ///
-  gboolean function(GstPad* srcpad, GstPad* sinkpad) c_gst_pad_unlink; ///
-  void function(GstPad* pad) c_gst_pad_use_fixed_caps; ///
-
-  // PadProbeInfo
-  GstBuffer* function(GstPadProbeInfo* info) c_gst_pad_probe_info_get_buffer; ///
-  GstBufferList* function(GstPadProbeInfo* info) c_gst_pad_probe_info_get_buffer_list; ///
-  GstEvent* function(GstPadProbeInfo* info) c_gst_pad_probe_info_get_event; ///
-  GstFlowReturn function(GstPadProbeInfo* info) c_gst_pad_probe_info_get_flow_return; ///
-  gulong function(GstPadProbeInfo* info) c_gst_pad_probe_info_get_id; ///
-  ulong function(GstPadProbeInfo* info) c_gst_pad_probe_info_get_offset; ///
-  GstQuery* function(GstPadProbeInfo* info) c_gst_pad_probe_info_get_query; ///
-  size_t function(GstPadProbeInfo* info) c_gst_pad_probe_info_get_size; ///
-  GstPadProbeType function(GstPadProbeInfo* info) c_gst_pad_probe_info_get_type; ///
-  void function(GstPadProbeInfo* info, GstBuffer* buffer) c_gst_pad_probe_info_set_buffer; ///
-  void function(GstPadProbeInfo* info, GstBufferList* list) c_gst_pad_probe_info_set_buffer_list; ///
-  void function(GstPadProbeInfo* info, GstEvent* event) c_gst_pad_probe_info_set_event; ///
-  void function(GstPadProbeInfo* info, GstFlowReturn flowRet) c_gst_pad_probe_info_set_flow_return; ///
-
-  // PadTemplate
-  GType function() c_gst_pad_template_get_type; ///
-  GstPadTemplate* function(const(char)* nameTemplate, GstPadDirection direction, GstPadPresence presence, GstCaps* caps) c_gst_pad_template_new; ///
-  GstPadTemplate* function(GstStaticPadTemplate* padTemplate, GType padType) c_gst_pad_template_new_from_static_pad_template_with_gtype; ///
-  GstPadTemplate* function(const(char)* nameTemplate, GstPadDirection direction, GstPadPresence presence, GstCaps* caps, GType padType) c_gst_pad_template_new_with_gtype; ///
-  GstCaps* function(GstPadTemplate* templ) c_gst_pad_template_get_caps; ///
-  GstCaps* function(GstPadTemplate* templ) c_gst_pad_template_get_documentation_caps; ///
-  void function(GstPadTemplate* templ, GstPad* pad) c_gst_pad_template_pad_created; ///
-  void function(GstPadTemplate* templ, GstCaps* caps) c_gst_pad_template_set_documentation_caps; ///
-
-  // ParamArray
-  GType function() c_gst_param_spec_array_get_type; ///
-
-  // ParamFraction
-  GType function() c_gst_param_spec_fraction_get_type; ///
-
-  // ParentBufferMeta
-  const(GstMetaInfo)* function() c_gst_parent_buffer_meta_get_info; ///
-
-  // ParseContext
-  GType function() c_gst_parse_context_get_type; ///
-  GstParseContext* function() c_gst_parse_context_new; ///
-  GstParseContext* function(const(GstParseContext)* context) c_gst_parse_context_copy; ///
-  void function(GstParseContext* context) c_gst_parse_context_free; ///
-  char** function(GstParseContext* context) c_gst_parse_context_get_missing_elements; ///
-
-  // Pipeline
-  GType function() c_gst_pipeline_get_type; ///
-  GstElement* function(const(char)* name) c_gst_pipeline_new; ///
-  void function(GstPipeline* pipeline) c_gst_pipeline_auto_clock; ///
-  gboolean function(GstPipeline* pipeline) c_gst_pipeline_get_auto_flush_bus; ///
-  GstBus* function(GstPipeline* pipeline) c_gst_pipeline_get_bus; ///
-  GstClock* function(GstPipeline* pipeline) c_gst_pipeline_get_clock; ///
-  GstClockTime function(GstPipeline* pipeline) c_gst_pipeline_get_configured_latency; ///
-  GstClockTime function(GstPipeline* pipeline) c_gst_pipeline_get_delay; ///
-  GstClockTime function(GstPipeline* pipeline) c_gst_pipeline_get_latency; ///
-  GstClock* function(GstPipeline* pipeline) c_gst_pipeline_get_pipeline_clock; ///
-  gboolean function(GstPipeline* pipeline) c_gst_pipeline_is_live; ///
-  void function(GstPipeline* pipeline, gboolean autoFlush) c_gst_pipeline_set_auto_flush_bus; ///
-  gboolean function(GstPipeline* pipeline, GstClock* clock) c_gst_pipeline_set_clock; ///
-  void function(GstPipeline* pipeline, GstClockTime delay) c_gst_pipeline_set_delay; ///
-  void function(GstPipeline* pipeline, GstClockTime latency) c_gst_pipeline_set_latency; ///
-  void function(GstPipeline* pipeline, GstClock* clock) c_gst_pipeline_use_clock; ///
-
-  // Plugin
-  GType function() c_gst_plugin_get_type; ///
-  void function(GList* list) c_gst_plugin_list_free; ///
-  GstPlugin* function(const(char)* name) c_gst_plugin_load_by_name; ///
-  GstPlugin* function(const(char)* filename, GError** _err) c_gst_plugin_load_file; ///
-  gboolean function(int majorVersion, int minorVersion, const(char)* name, const(char)* description, GstPluginInitFunc initFunc, const(char)* version_, const(char)* license, const(char)* source, const(char)* package_, const(char)* origin) c_gst_plugin_register_static; ///
-  gboolean function(int majorVersion, int minorVersion, const(char)* name, const(char)* description, GstPluginInitFullFunc initFullFunc, const(char)* version_, const(char)* license, const(char)* source, const(char)* package_, const(char)* origin, void* userData) c_gst_plugin_register_static_full; ///
-  void function(GstPlugin* plugin, const(char*)* envVars, const(char*)* paths, const(char*)* names, GstPluginDependencyFlags flags) c_gst_plugin_add_dependency; ///
-  void function(GstPlugin* plugin, const(char)* envVars, const(char)* paths, const(char)* names, GstPluginDependencyFlags flags) c_gst_plugin_add_dependency_simple; ///
-  void function(GstPlugin* plugin, const(char)* message) c_gst_plugin_add_status_error; ///
-  void function(GstPlugin* plugin, const(char)* message) c_gst_plugin_add_status_info; ///
-  void function(GstPlugin* plugin, const(char)* message) c_gst_plugin_add_status_warning; ///
-  const(GstStructure)* function(GstPlugin* plugin) c_gst_plugin_get_cache_data; ///
-  const(char)* function(GstPlugin* plugin) c_gst_plugin_get_description; ///
-  const(char)* function(GstPlugin* plugin) c_gst_plugin_get_filename; ///
-  const(char)* function(GstPlugin* plugin) c_gst_plugin_get_license; ///
-  const(char)* function(GstPlugin* plugin) c_gst_plugin_get_name; ///
-  const(char)* function(GstPlugin* plugin) c_gst_plugin_get_origin; ///
-  const(char)* function(GstPlugin* plugin) c_gst_plugin_get_package; ///
-  const(char)* function(GstPlugin* plugin) c_gst_plugin_get_release_date_string; ///
-  const(char)* function(GstPlugin* plugin) c_gst_plugin_get_source; ///
-  char** function(GstPlugin* plugin) c_gst_plugin_get_status_errors; ///
-  char** function(GstPlugin* plugin) c_gst_plugin_get_status_infos; ///
-  char** function(GstPlugin* plugin) c_gst_plugin_get_status_warnings; ///
-  const(char)* function(GstPlugin* plugin) c_gst_plugin_get_version; ///
-  gboolean function(GstPlugin* plugin) c_gst_plugin_is_loaded; ///
-  GstPlugin* function(GstPlugin* plugin) c_gst_plugin_load; ///
-  void function(GstPlugin* plugin, GstStructure* cacheData) c_gst_plugin_set_cache_data; ///
-
-  // PluginFeature
-  GType function() c_gst_plugin_feature_get_type; ///
-  GList* function(GList* list) c_gst_plugin_feature_list_copy; ///
-  void function(GList* list) c_gst_plugin_feature_list_debug; ///
-  void function(GList* list) c_gst_plugin_feature_list_free; ///
-  int function(const(void)* p1, const(void)* p2) c_gst_plugin_feature_rank_compare_func; ///
-  gboolean function(GstPluginFeature* feature, uint minMajor, uint minMinor, uint minMicro) c_gst_plugin_feature_check_version; ///
-  GstPlugin* function(GstPluginFeature* feature) c_gst_plugin_feature_get_plugin; ///
-  const(char)* function(GstPluginFeature* feature) c_gst_plugin_feature_get_plugin_name; ///
-  uint function(GstPluginFeature* feature) c_gst_plugin_feature_get_rank; ///
-  GstPluginFeature* function(GstPluginFeature* feature) c_gst_plugin_feature_load; ///
-  void function(GstPluginFeature* feature, uint rank) c_gst_plugin_feature_set_rank; ///
-
-  // Poll
-  gboolean function(GstPoll* set, GstPollFD* fd) c_gst_poll_add_fd; ///
-  gboolean function(const(GstPoll)* set, GstPollFD* fd) c_gst_poll_fd_can_read; ///
-  gboolean function(const(GstPoll)* set, GstPollFD* fd) c_gst_poll_fd_can_write; ///
-  gboolean function(GstPoll* set, GstPollFD* fd, gboolean active) c_gst_poll_fd_ctl_pri; ///
-  gboolean function(GstPoll* set, GstPollFD* fd, gboolean active) c_gst_poll_fd_ctl_read; ///
-  gboolean function(GstPoll* set, GstPollFD* fd, gboolean active) c_gst_poll_fd_ctl_write; ///
-  gboolean function(const(GstPoll)* set, GstPollFD* fd) c_gst_poll_fd_has_closed; ///
-  gboolean function(const(GstPoll)* set, GstPollFD* fd) c_gst_poll_fd_has_error; ///
-  gboolean function(const(GstPoll)* set, GstPollFD* fd) c_gst_poll_fd_has_pri; ///
-  void function(GstPoll* set, GstPollFD* fd) c_gst_poll_fd_ignored; ///
-  void function(GstPoll* set) c_gst_poll_free; ///
-  void function(GstPoll* set, GPollFD* fd) c_gst_poll_get_read_gpollfd; ///
-  gboolean function(GstPoll* set) c_gst_poll_read_control; ///
-  gboolean function(GstPoll* set, GstPollFD* fd) c_gst_poll_remove_fd; ///
-  void function(GstPoll* set) c_gst_poll_restart; ///
-  gboolean function(GstPoll* set, gboolean controllable) c_gst_poll_set_controllable; ///
-  void function(GstPoll* set, gboolean flushing) c_gst_poll_set_flushing; ///
-  int function(GstPoll* set, GstClockTime timeout) c_gst_poll_wait; ///
-  gboolean function(GstPoll* set) c_gst_poll_write_control; ///
-  GstPoll* function(gboolean controllable) c_gst_poll_new; ///
-  GstPoll* function() c_gst_poll_new_timer; ///
-
-  // PollFD
-  void function(GstPollFD* fd) c_gst_poll_fd_init; ///
-
-  // Preset
-  GType function() c_gst_preset_get_type; ///
-  const(char)* function() c_gst_preset_get_app_dir; ///
-  gboolean function(const(char)* appDir) c_gst_preset_set_app_dir; ///
-  gboolean function(GstPreset* preset, const(char)* name) c_gst_preset_delete_preset; ///
-  gboolean function(GstPreset* preset, const(char)* name, const(char)* tag, char** value) c_gst_preset_get_meta; ///
-  char** function(GstPreset* preset) c_gst_preset_get_preset_names; ///
-  char** function(GstPreset* preset) c_gst_preset_get_property_names; ///
-  gboolean function(GstPreset* preset) c_gst_preset_is_editable; ///
-  gboolean function(GstPreset* preset, const(char)* name) c_gst_preset_load_preset; ///
-  gboolean function(GstPreset* preset, const(char)* oldName, const(char)* newName) c_gst_preset_rename_preset; ///
-  gboolean function(GstPreset* preset, const(char)* name) c_gst_preset_save_preset; ///
-  gboolean function(GstPreset* preset, const(char)* name, const(char)* tag, const(char)* value) c_gst_preset_set_meta; ///
-
-  // Promise
-  GType function() c_gst_promise_get_type; ///
-  GstPromise* function() c_gst_promise_new; ///
-  GstPromise* function(GstPromiseChangeFunc func, void* userData, GDestroyNotify notify) c_gst_promise_new_with_change_func; ///
-  void function(GstPromise* promise) c_gst_promise_expire; ///
-  const(GstStructure)* function(GstPromise* promise) c_gst_promise_get_reply; ///
-  void function(GstPromise* promise) c_gst_promise_interrupt; ///
-  GstPromise* function(GstPromise* promise) c_gst_promise_ref; ///
-  void function(GstPromise* promise, GstStructure* s) c_gst_promise_reply; ///
-  void function(GstPromise* promise) c_gst_promise_unref; ///
-  GstPromiseResult function(GstPromise* promise) c_gst_promise_wait; ///
-
-  // ProtectionMeta
-  const(GstMetaInfo)* function() c_gst_protection_meta_get_info; ///
-
-  // ProxyPad
-  GType function() c_gst_proxy_pad_get_type; ///
-  GstFlowReturn function(GstPad* pad, GstObject* parent, GstBuffer* buffer) c_gst_proxy_pad_chain_default; ///
-  GstFlowReturn function(GstPad* pad, GstObject* parent, GstBufferList* list) c_gst_proxy_pad_chain_list_default; ///
-  GstFlowReturn function(GstPad* pad, GstObject* parent, ulong offset, uint size, GstBuffer** buffer) c_gst_proxy_pad_getrange_default; ///
-  GstIterator* function(GstPad* pad, GstObject* parent) c_gst_proxy_pad_iterate_internal_links_default; ///
-  GstProxyPad* function(GstProxyPad* pad) c_gst_proxy_pad_get_internal; ///
-
-  // Query
-  GType function() c_gst_query_get_type; ///
-  GstQuery* function(GstCaps* caps) c_gst_query_new_accept_caps; ///
-  GstQuery* function(GstCaps* caps, gboolean needPool) c_gst_query_new_allocation; ///
-  GstQuery* function() c_gst_query_new_bitrate; ///
-  GstQuery* function(GstFormat format) c_gst_query_new_buffering; ///
-  GstQuery* function(GstCaps* filter) c_gst_query_new_caps; ///
-  GstQuery* function(const(char)* contextType) c_gst_query_new_context; ///
-  GstQuery* function(GstFormat srcFormat, long value, GstFormat destFormat) c_gst_query_new_convert; ///
-  GstQuery* function(GstQueryType type, GstStructure* structure) c_gst_query_new_custom; ///
-  GstQuery* function() c_gst_query_new_drain; ///
-  GstQuery* function(GstFormat format) c_gst_query_new_duration; ///
-  GstQuery* function() c_gst_query_new_formats; ///
-  GstQuery* function() c_gst_query_new_latency; ///
-  GstQuery* function(GstFormat format) c_gst_query_new_position; ///
-  GstQuery* function() c_gst_query_new_scheduling; ///
-  GstQuery* function(GstFormat format) c_gst_query_new_seeking; ///
-  GstQuery* function(GstFormat format) c_gst_query_new_segment; ///
-  GstQuery* function() c_gst_query_new_selectable; ///
-  GstQuery* function() c_gst_query_new_uri; ///
-  void function(GstQuery* query, GType api, const(GstStructure)* params) c_gst_query_add_allocation_meta; ///
-  void function(GstQuery* query, GstAllocator* allocator, const(GstAllocationParams)* params) c_gst_query_add_allocation_param; ///
-  void function(GstQuery* query, GstBufferPool* pool, uint size, uint minBuffers, uint maxBuffers) c_gst_query_add_allocation_pool; ///
-  gboolean function(GstQuery* query, long start, long stop) c_gst_query_add_buffering_range; ///
-  void function(GstQuery* query, GstPadMode mode) c_gst_query_add_scheduling_mode; ///
-  GstQuery* function(const(GstQuery)* q) c_gst_query_copy; ///
-  gboolean function(GstQuery* query, GType api, uint* index) c_gst_query_find_allocation_meta; ///
-  uint function(GstQuery* query) c_gst_query_get_n_allocation_metas; ///
-  uint function(GstQuery* query) c_gst_query_get_n_allocation_params; ///
-  uint function(GstQuery* query) c_gst_query_get_n_allocation_pools; ///
-  uint function(GstQuery* query) c_gst_query_get_n_buffering_ranges; ///
-  uint function(GstQuery* query) c_gst_query_get_n_scheduling_modes; ///
-  const(GstStructure)* function(GstQuery* query) c_gst_query_get_structure; ///
-  gboolean function(GstQuery* query, GstPadMode mode) c_gst_query_has_scheduling_mode; ///
-  gboolean function(GstQuery* query, GstPadMode mode, GstSchedulingFlags flags) c_gst_query_has_scheduling_mode_with_flags; ///
-  gboolean function(const(GstQuery)* query) c_gst_query_is_writable; ///
-  GstQuery* function(GstQuery* query) c_gst_query_make_writable; ///
-  void function(GstQuery* query, GstCaps** caps) c_gst_query_parse_accept_caps; ///
-  void function(GstQuery* query, gboolean* result) c_gst_query_parse_accept_caps_result; ///
-  void function(GstQuery* query, GstCaps** caps, gboolean* needPool) c_gst_query_parse_allocation; ///
-  void function(GstQuery* query, uint* nominalBitrate) c_gst_query_parse_bitrate; ///
-  void function(GstQuery* query, gboolean* busy, int* percent) c_gst_query_parse_buffering_percent; ///
-  void function(GstQuery* query, GstFormat* format, long* start, long* stop, long* estimatedTotal) c_gst_query_parse_buffering_range; ///
-  void function(GstQuery* query, GstBufferingMode* mode, int* avgIn, int* avgOut, long* bufferingLeft) c_gst_query_parse_buffering_stats; ///
-  void function(GstQuery* query, GstCaps** filter) c_gst_query_parse_caps; ///
-  void function(GstQuery* query, GstCaps** caps) c_gst_query_parse_caps_result; ///
-  void function(GstQuery* query, GstContext** context) c_gst_query_parse_context; ///
-  gboolean function(GstQuery* query, const(char*)* contextType) c_gst_query_parse_context_type; ///
-  void function(GstQuery* query, GstFormat* srcFormat, long* srcValue, GstFormat* destFormat, long* destValue) c_gst_query_parse_convert; ///
-  void function(GstQuery* query, GstFormat* format, long* duration) c_gst_query_parse_duration; ///
-  void function(GstQuery* query, gboolean* live, GstClockTime* minLatency, GstClockTime* maxLatency) c_gst_query_parse_latency; ///
-  void function(GstQuery* query, uint* nFormats) c_gst_query_parse_n_formats; ///
-  GType function(GstQuery* query, uint index, const(GstStructure*)* params) c_gst_query_parse_nth_allocation_meta; ///
-  void function(GstQuery* query, uint index, GstAllocator** allocator, GstAllocationParams* params) c_gst_query_parse_nth_allocation_param; ///
-  void function(GstQuery* query, uint index, GstBufferPool** pool, uint* size, uint* minBuffers, uint* maxBuffers) c_gst_query_parse_nth_allocation_pool; ///
-  gboolean function(GstQuery* query, uint index, long* start, long* stop) c_gst_query_parse_nth_buffering_range; ///
-  void function(GstQuery* query, uint nth, GstFormat* format) c_gst_query_parse_nth_format; ///
-  GstPadMode function(GstQuery* query, uint index) c_gst_query_parse_nth_scheduling_mode; ///
-  void function(GstQuery* query, GstFormat* format, long* cur) c_gst_query_parse_position; ///
-  void function(GstQuery* query, GstSchedulingFlags* flags, int* minsize, int* maxsize, int* align_) c_gst_query_parse_scheduling; ///
-  void function(GstQuery* query, GstFormat* format, gboolean* seekable, long* segmentStart, long* segmentEnd) c_gst_query_parse_seeking; ///
-  void function(GstQuery* query, double* rate, GstFormat* format, long* startValue, long* stopValue) c_gst_query_parse_segment; ///
-  void function(GstQuery* query, gboolean* selectable) c_gst_query_parse_selectable; ///
-  void function(GstQuery* query, char** uri) c_gst_query_parse_uri; ///
-  void function(GstQuery* query, char** uri) c_gst_query_parse_uri_redirection; ///
-  void function(GstQuery* query, gboolean* permanent) c_gst_query_parse_uri_redirection_permanent; ///
-  GstQuery* function(GstQuery* q) c_gst_query_ref; ///
-  void function(GstQuery* query, uint index) c_gst_query_remove_nth_allocation_meta; ///
-  void function(GstQuery* query, uint index) c_gst_query_remove_nth_allocation_param; ///
-  void function(GstQuery* query, uint index) c_gst_query_remove_nth_allocation_pool; ///
-  void function(GstQuery* query, gboolean result) c_gst_query_set_accept_caps_result; ///
-  void function(GstQuery* query, uint nominalBitrate) c_gst_query_set_bitrate; ///
-  void function(GstQuery* query, gboolean busy, int percent) c_gst_query_set_buffering_percent; ///
-  void function(GstQuery* query, GstFormat format, long start, long stop, long estimatedTotal) c_gst_query_set_buffering_range; ///
-  void function(GstQuery* query, GstBufferingMode mode, int avgIn, int avgOut, long bufferingLeft) c_gst_query_set_buffering_stats; ///
-  void function(GstQuery* query, GstCaps* caps) c_gst_query_set_caps_result; ///
-  void function(GstQuery* query, GstContext* context) c_gst_query_set_context; ///
-  void function(GstQuery* query, GstFormat srcFormat, long srcValue, GstFormat destFormat, long destValue) c_gst_query_set_convert; ///
-  void function(GstQuery* query, GstFormat format, long duration) c_gst_query_set_duration; ///
-  void function(GstQuery* query, int nFormats,  ...) c_gst_query_set_formats; ///
-  void function(GstQuery* query, int nFormats, const(GstFormat)* formats) c_gst_query_set_formatsv; ///
-  void function(GstQuery* query, gboolean live, GstClockTime minLatency, GstClockTime maxLatency) c_gst_query_set_latency; ///
-  void function(GstQuery* query, uint index, GstAllocator* allocator, const(GstAllocationParams)* params) c_gst_query_set_nth_allocation_param; ///
-  void function(GstQuery* query, uint index, GstBufferPool* pool, uint size, uint minBuffers, uint maxBuffers) c_gst_query_set_nth_allocation_pool; ///
-  void function(GstQuery* query, GstFormat format, long cur) c_gst_query_set_position; ///
-  void function(GstQuery* query, GstSchedulingFlags flags, int minsize, int maxsize, int align_) c_gst_query_set_scheduling; ///
-  void function(GstQuery* query, GstFormat format, gboolean seekable, long segmentStart, long segmentEnd) c_gst_query_set_seeking; ///
-  void function(GstQuery* query, double rate, GstFormat format, long startValue, long stopValue) c_gst_query_set_segment; ///
-  void function(GstQuery* query, gboolean selectable) c_gst_query_set_selectable; ///
-  void function(GstQuery* query, const(char)* uri) c_gst_query_set_uri; ///
-  void function(GstQuery* query, const(char)* uri) c_gst_query_set_uri_redirection; ///
-  void function(GstQuery* query, gboolean permanent) c_gst_query_set_uri_redirection_permanent; ///
-  void function(GstQuery* q) c_gst_query_unref; ///
-  GstStructure* function(GstQuery* query) c_gst_query_writable_structure; ///
-  gboolean function(GstQuery** oldQuery, GstQuery* newQuery) c_gst_query_replace; ///
-  GstQuery* function(GstQuery** oldQuery) c_gst_query_steal; ///
-  gboolean function(GstQuery** oldQuery, GstQuery* newQuery) c_gst_query_take; ///
-
-  // ReferenceTimestampMeta
-  const(GstMetaInfo)* function() c_gst_reference_timestamp_meta_get_info; ///
-
-  // Registry
-  GType function() c_gst_registry_get_type; ///
-  gboolean function() c_gst_registry_fork_is_enabled; ///
-  void function(gboolean enabled) c_gst_registry_fork_set_enabled; ///
-  GstRegistry* function() c_gst_registry_get; ///
-  gboolean function(GstRegistry* registry, GstPluginFeature* feature) c_gst_registry_add_feature; ///
-  gboolean function(GstRegistry* registry, GstPlugin* plugin) c_gst_registry_add_plugin; ///
-  gboolean function(GstRegistry* registry, const(char)* featureName, uint minMajor, uint minMinor, uint minMicro) c_gst_registry_check_feature_version; ///
-  GList* function(GstRegistry* registry, GstPluginFeatureFilter filter, gboolean first, void* userData) c_gst_registry_feature_filter; ///
-  GstPluginFeature* function(GstRegistry* registry, const(char)* name, GType type) c_gst_registry_find_feature; ///
-  GstPlugin* function(GstRegistry* registry, const(char)* name) c_gst_registry_find_plugin; ///
-  GList* function(GstRegistry* registry, GType type) c_gst_registry_get_feature_list; ///
-  GList* function(GstRegistry* registry, const(char)* name) c_gst_registry_get_feature_list_by_plugin; ///
-  uint function(GstRegistry* registry) c_gst_registry_get_feature_list_cookie; ///
-  GList* function(GstRegistry* registry) c_gst_registry_get_plugin_list; ///
-  GstPlugin* function(GstRegistry* registry, const(char)* filename) c_gst_registry_lookup; ///
-  GstPluginFeature* function(GstRegistry* registry, const(char)* name) c_gst_registry_lookup_feature; ///
-  GList* function(GstRegistry* registry, GstPluginFilter filter, gboolean first, void* userData) c_gst_registry_plugin_filter; ///
-  void function(GstRegistry* registry, GstPluginFeature* feature) c_gst_registry_remove_feature; ///
-  void function(GstRegistry* registry, GstPlugin* plugin) c_gst_registry_remove_plugin; ///
-  gboolean function(GstRegistry* registry, const(char)* path) c_gst_registry_scan_path; ///
-
-  // Sample
-  GType function() c_gst_sample_get_type; ///
-  GstSample* function(GstBuffer* buffer, GstCaps* caps, const(GstSegment)* segment, GstStructure* info) c_gst_sample_new; ///
-  GstSample* function(const(GstSample)* sample) c_gst_sample_copy; ///
-  GstBuffer* function(GstSample* sample) c_gst_sample_get_buffer; ///
-  GstBufferList* function(GstSample* sample) c_gst_sample_get_buffer_list; ///
-  GstCaps* function(GstSample* sample) c_gst_sample_get_caps; ///
-  const(GstStructure)* function(GstSample* sample) c_gst_sample_get_info; ///
-  GstSegment* function(GstSample* sample) c_gst_sample_get_segment; ///
-  gboolean function(const(GstSample)* sample) c_gst_sample_is_writable; ///
-  GstSample* function(GstSample* sample) c_gst_sample_make_writable; ///
-  GstSample* function(GstSample* sample) c_gst_sample_ref; ///
-  void function(GstSample* sample, GstBuffer* buffer) c_gst_sample_set_buffer; ///
-  void function(GstSample* sample, GstBufferList* bufferList) c_gst_sample_set_buffer_list; ///
-  void function(GstSample* sample, GstCaps* caps) c_gst_sample_set_caps; ///
-  gboolean function(GstSample* sample, GstStructure* info) c_gst_sample_set_info; ///
-  void function(GstSample* sample, const(GstSegment)* segment) c_gst_sample_set_segment; ///
-  void function(GstSample* sample) c_gst_sample_unref; ///
-
-  // Segment
-  GType function() c_gst_segment_get_type; ///
-  GstSegment* function() c_gst_segment_new; ///
-  gboolean function(const(GstSegment)* segment, GstFormat format, ulong start, ulong stop, ulong* clipStart, ulong* clipStop) c_gst_segment_clip; ///
-  GstSegment* function(const(GstSegment)* segment) c_gst_segment_copy; ///
-  void function(const(GstSegment)* src, GstSegment* dest) c_gst_segment_copy_into; ///
-  gboolean function(GstSegment* segment, double rate, GstFormat format, GstSeekFlags flags, GstSeekType startType, ulong start, GstSeekType stopType, ulong stop, gboolean* update) c_gst_segment_do_seek; ///
-  void function(GstSegment* segment) c_gst_segment_free; ///
-  void function(GstSegment* segment, GstFormat format) c_gst_segment_init; ///
-  gboolean function(const(GstSegment)* s0, const(GstSegment)* s1) c_gst_segment_is_equal; ///
-  gboolean function(GstSegment* segment, GstFormat format, long offset) c_gst_segment_offset_running_time; ///
-  ulong function(const(GstSegment)* segment, GstFormat format, ulong runningTime) c_gst_segment_position_from_running_time; ///
-  int function(const(GstSegment)* segment, GstFormat format, ulong runningTime, ulong* position) c_gst_segment_position_from_running_time_full; ///
-  ulong function(const(GstSegment)* segment, GstFormat format, ulong streamTime) c_gst_segment_position_from_stream_time; ///
-  int function(const(GstSegment)* segment, GstFormat format, ulong streamTime, ulong* position) c_gst_segment_position_from_stream_time_full; ///
-  gboolean function(GstSegment* segment, GstFormat format, ulong runningTime) c_gst_segment_set_running_time; ///
-  ulong function(const(GstSegment)* segment, GstFormat format, ulong runningTime) c_gst_segment_to_position; ///
-  ulong function(const(GstSegment)* segment, GstFormat format, ulong position) c_gst_segment_to_running_time; ///
-  int function(const(GstSegment)* segment, GstFormat format, ulong position, ulong* runningTime) c_gst_segment_to_running_time_full; ///
-  ulong function(const(GstSegment)* segment, GstFormat format, ulong position) c_gst_segment_to_stream_time; ///
-  int function(const(GstSegment)* segment, GstFormat format, ulong position, ulong* streamTime) c_gst_segment_to_stream_time_full; ///
-
-  // SharedTaskPool
-  GType function() c_gst_shared_task_pool_get_type; ///
-  GstTaskPool* function() c_gst_shared_task_pool_new; ///
-  uint function(GstSharedTaskPool* pool) c_gst_shared_task_pool_get_max_threads; ///
-  void function(GstSharedTaskPool* pool, uint maxThreads) c_gst_shared_task_pool_set_max_threads; ///
-
-  // StaticCaps
-  GType function() c_gst_static_caps_get_type; ///
-  void function(GstStaticCaps* staticCaps) c_gst_static_caps_cleanup; ///
-  GstCaps* function(GstStaticCaps* staticCaps) c_gst_static_caps_get; ///
-
-  // StaticPadTemplate
-  GType function() c_gst_static_pad_template_get_type; ///
-  GstPadTemplate* function(GstStaticPadTemplate* padTemplate) c_gst_static_pad_template_get; ///
-  GstCaps* function(GstStaticPadTemplate* templ) c_gst_static_pad_template_get_caps; ///
-
-  // Stream
-  GType function() c_gst_stream_get_type; ///
-  GstStream* function(const(char)* streamId, GstCaps* caps, GstStreamType type, GstStreamFlags flags) c_gst_stream_new; ///
-  GstCaps* function(GstStream* stream) c_gst_stream_get_caps; ///
-  GstStreamFlags function(GstStream* stream) c_gst_stream_get_stream_flags; ///
-  const(char)* function(GstStream* stream) c_gst_stream_get_stream_id; ///
-  GstStreamType function(GstStream* stream) c_gst_stream_get_stream_type; ///
-  GstTagList* function(GstStream* stream) c_gst_stream_get_tags; ///
-  void function(GstStream* stream, GstCaps* caps) c_gst_stream_set_caps; ///
-  void function(GstStream* stream, GstStreamFlags flags) c_gst_stream_set_stream_flags; ///
-  void function(GstStream* stream, GstStreamType streamType) c_gst_stream_set_stream_type; ///
-  void function(GstStream* stream, GstTagList* tags) c_gst_stream_set_tags; ///
-
-  // StreamCollection
-  GType function() c_gst_stream_collection_get_type; ///
-  GstStreamCollection* function(const(char)* upstreamId) c_gst_stream_collection_new; ///
-  gboolean function(GstStreamCollection* collection, GstStream* stream) c_gst_stream_collection_add_stream; ///
-  uint function(GstStreamCollection* collection) c_gst_stream_collection_get_size; ///
-  GstStream* function(GstStreamCollection* collection, uint index) c_gst_stream_collection_get_stream; ///
-  const(char)* function(GstStreamCollection* collection) c_gst_stream_collection_get_upstream_id; ///
-
-  // Structure
-  GType function() c_gst_structure_get_type; ///
-  GstStructure* function(const(char)* string_, char** end) c_gst_structure_from_string; ///
-  GstStructure* function(const(char)* name, const(char)* firstfield,  ...) c_gst_structure_new; ///
-  GstStructure* function(const(char)* name) c_gst_structure_new_empty; ///
-  GstStructure* function(const(char)* string_) c_gst_structure_new_from_string; ///
-  GstStructure* function(GQuark nameQuark, GQuark fieldQuark,  ...) c_gst_structure_new_id; ///
-  GstStructure* function(GQuark quark) c_gst_structure_new_id_empty; ///
-  GstStructure* function(const(GstIdStr)* name, const(GstIdStr)* fieldname,  ...) c_gst_structure_new_id_str; ///
-  GstStructure* function(const(GstIdStr)* name) c_gst_structure_new_id_str_empty; ///
-  GstStructure* function(const(GstIdStr)* name, const(GstIdStr)* firstfield, void* varargs) c_gst_structure_new_id_str_valist; ///
-  GstStructure* function(const(char)* name, const(char)* firstfield,  ...) c_gst_structure_new_static_str; ///
-  GstStructure* function(const(char)* name) c_gst_structure_new_static_str_empty; ///
-  GstStructure* function(const(char)* name, const(char)* firstfield, void* varargs) c_gst_structure_new_static_str_valist; ///
-  GstStructure* function(const(char)* name, const(char)* firstfield, void* varargs) c_gst_structure_new_valist; ///
-  gboolean function(const(GstStructure)* struct1, const(GstStructure)* struct2) c_gst_structure_can_intersect; ///
-  GstStructure* function(const(GstStructure)* structure) c_gst_structure_copy; ///
-  void function(GstStructure* structure, GstStructureFilterMapFunc func, void* userData) c_gst_structure_filter_and_map_in_place; ///
-  void function(GstStructure* structure, GstStructureFilterMapIdStrFunc func, void* userData) c_gst_structure_filter_and_map_in_place_id_str; ///
-  void function(GstStructure* structure) c_gst_structure_fixate; ///
-  gboolean function(GstStructure* structure, const(char)* fieldName) c_gst_structure_fixate_field; ///
-  gboolean function(GstStructure* structure, const(char)* fieldName, gboolean target) c_gst_structure_fixate_field_boolean; ///
-  gboolean function(GstStructure* structure, const(char)* fieldName, double target) c_gst_structure_fixate_field_nearest_double; ///
-  gboolean function(GstStructure* structure, const(char)* fieldName, int targetNumerator, int targetDenominator) c_gst_structure_fixate_field_nearest_fraction; ///
-  gboolean function(GstStructure* structure, const(char)* fieldName, int target) c_gst_structure_fixate_field_nearest_int; ///
-  gboolean function(GstStructure* structure, const(char)* fieldName, const(char)* target) c_gst_structure_fixate_field_string; ///
-  gboolean function(const(GstStructure)* structure, GstStructureForeachFunc func, void* userData) c_gst_structure_foreach; ///
-  gboolean function(const(GstStructure)* structure, GstStructureForeachIdStrFunc func, void* userData) c_gst_structure_foreach_id_str; ///
-  void function(GstStructure* structure) c_gst_structure_free; ///
-  gboolean function(const(GstStructure)* structure, const(char)* firstFieldname,  ...) c_gst_structure_get; ///
-  gboolean function(GstStructure* structure, const(char)* fieldname, GValueArray** array) c_gst_structure_get_array; ///
-  gboolean function(const(GstStructure)* structure, const(char)* fieldname, gboolean* value) c_gst_structure_get_boolean; ///
-  gboolean function(const(GstStructure)* structure, const(char)* fieldname, const(GstCaps*)* caps) c_gst_structure_get_caps; ///
-  gboolean function(const(GstStructure)* structure, const(char)* fieldname, GstClockTime* value) c_gst_structure_get_clock_time; ///
-  gboolean function(const(GstStructure)* structure, const(char)* fieldname, GDate** value) c_gst_structure_get_date; ///
-  gboolean function(const(GstStructure)* structure, const(char)* fieldname, GstDateTime** value) c_gst_structure_get_date_time; ///
-  gboolean function(const(GstStructure)* structure, const(char)* fieldname, double* value) c_gst_structure_get_double; ///
-  gboolean function(const(GstStructure)* structure, const(char)* fieldname, GType enumtype, int* value) c_gst_structure_get_enum; ///
-  GType function(const(GstStructure)* structure, const(char)* fieldname) c_gst_structure_get_field_type; ///
-  gboolean function(const(GstStructure)* structure, const(char)* fieldname, GType flagsType, uint* value) c_gst_structure_get_flags; ///
-  gboolean function(const(GstStructure)* structure, const(char)* fieldname, uint* valueFlags, uint* valueMask) c_gst_structure_get_flagset; ///
-  gboolean function(const(GstStructure)* structure, const(char)* fieldname, int* valueNumerator, int* valueDenominator) c_gst_structure_get_fraction; ///
-  gboolean function(const(GstStructure)* structure, const(char)* fieldname, int* value) c_gst_structure_get_int; ///
-  gboolean function(const(GstStructure)* structure, const(char)* fieldname, long* value) c_gst_structure_get_int64; ///
-  gboolean function(GstStructure* structure, const(char)* fieldname, GValueArray** array) c_gst_structure_get_list; ///
-  const(char)* function(const(GstStructure)* structure) c_gst_structure_get_name; ///
-  GQuark function(const(GstStructure)* structure) c_gst_structure_get_name_id; ///
-  const(GstIdStr)* function(const(GstStructure)* structure) c_gst_structure_get_name_id_str; ///
-  const(char)* function(const(GstStructure)* structure, const(char)* fieldname) c_gst_structure_get_string; ///
-  gboolean function(const(GstStructure)* structure, const(char)* fieldname, uint* value) c_gst_structure_get_uint; ///
-  gboolean function(const(GstStructure)* structure, const(char)* fieldname, ulong* value) c_gst_structure_get_uint64; ///
-  gboolean function(const(GstStructure)* structure, const(char)* firstFieldname, void* args) c_gst_structure_get_valist; ///
-  const(GValue)* function(const(GstStructure)* structure, const(char)* fieldname) c_gst_structure_get_value; ///
-  gboolean function(const(GstStructure)* structure, const(char)* fieldname) c_gst_structure_has_field; ///
-  gboolean function(const(GstStructure)* structure, const(char)* fieldname, GType type) c_gst_structure_has_field_typed; ///
-  gboolean function(const(GstStructure)* structure, const(char)* name) c_gst_structure_has_name; ///
-  gboolean function(const(GstStructure)* structure, GQuark firstFieldId,  ...) c_gst_structure_id_get; ///
-  gboolean function(const(GstStructure)* structure, GQuark firstFieldId, void* args) c_gst_structure_id_get_valist; ///
-  const(GValue)* function(const(GstStructure)* structure, GQuark field) c_gst_structure_id_get_value; ///
-  gboolean function(const(GstStructure)* structure, GQuark field) c_gst_structure_id_has_field; ///
-  gboolean function(const(GstStructure)* structure, GQuark field, GType type) c_gst_structure_id_has_field_typed; ///
-  void function(GstStructure* structure, GQuark fieldname,  ...) c_gst_structure_id_set; ///
-  void function(GstStructure* structure, GQuark fieldname, void* varargs) c_gst_structure_id_set_valist; ///
-  void function(GstStructure* structure, GQuark field, const(GValue)* value) c_gst_structure_id_set_value; ///
-  gboolean function(const(GstStructure)* structure, const(GstIdStr)* firstFieldname,  ...) c_gst_structure_id_str_get; ///
-  GType function(const(GstStructure)* structure, const(GstIdStr)* fieldname) c_gst_structure_id_str_get_field_type; ///
-  gboolean function(const(GstStructure)* structure, const(GstIdStr)* firstFieldname, void* args) c_gst_structure_id_str_get_valist; ///
-  const(GValue)* function(const(GstStructure)* structure, const(GstIdStr)* fieldname) c_gst_structure_id_str_get_value; ///
-  gboolean function(const(GstStructure)* structure, const(GstIdStr)* fieldname) c_gst_structure_id_str_has_field; ///
-  gboolean function(const(GstStructure)* structure, const(GstIdStr)* fieldname, GType type) c_gst_structure_id_str_has_field_typed; ///
-  const(GstIdStr)* function(const(GstStructure)* structure, uint index) c_gst_structure_id_str_nth_field_name; ///
-  void function(GstStructure* structure, const(GstIdStr)* fieldname) c_gst_structure_id_str_remove_field; ///
-  void function(GstStructure* structure, const(GstIdStr)* fieldname,  ...) c_gst_structure_id_str_remove_fields; ///
-  void function(GstStructure* structure, const(GstIdStr)* fieldname, void* varargs) c_gst_structure_id_str_remove_fields_valist; ///
-  void function(GstStructure* structure, const(GstIdStr)* fieldname,  ...) c_gst_structure_id_str_set; ///
-  void function(GstStructure* structure, const(GstIdStr)* fieldname, void* varargs) c_gst_structure_id_str_set_valist; ///
-  void function(GstStructure* structure, const(GstIdStr)* fieldname, const(GValue)* value) c_gst_structure_id_str_set_value; ///
-  void function(GstStructure* structure, const(GstIdStr)* fieldname, GValue* value) c_gst_structure_id_str_take_value; ///
-  void function(GstStructure* structure, GQuark field, GValue* value) c_gst_structure_id_take_value; ///
-  GstStructure* function(const(GstStructure)* struct1, const(GstStructure)* struct2) c_gst_structure_intersect; ///
-  gboolean function(const(GstStructure)* structure1, const(GstStructure)* structure2) c_gst_structure_is_equal; ///
-  gboolean function(const(GstStructure)* subset, const(GstStructure)* superset) c_gst_structure_is_subset; ///
-  gboolean function(const(GstStructure)* structure) c_gst_structure_is_writable; ///
-  gboolean function(GstStructure* structure, GstStructureMapFunc func, void* userData) c_gst_structure_map_in_place; ///
-  gboolean function(GstStructure* structure, GstStructureMapIdStrFunc func, void* userData) c_gst_structure_map_in_place_id_str; ///
-  int function(const(GstStructure)* structure) c_gst_structure_n_fields; ///
-  const(char)* function(const(GstStructure)* structure, uint index) c_gst_structure_nth_field_name; ///
-  void function(GstStructure* structure) c_gst_structure_remove_all_fields; ///
-  void function(GstStructure* structure, const(char)* fieldname) c_gst_structure_remove_field; ///
-  void function(GstStructure* structure, const(char)* fieldname,  ...) c_gst_structure_remove_fields; ///
-  void function(GstStructure* structure, const(char)* fieldname, void* varargs) c_gst_structure_remove_fields_valist; ///
-  char* function(const(GstStructure)* structure, GstSerializeFlags flags) c_gst_structure_serialize; ///
-  char* function(const(GstStructure)* structure, GstSerializeFlags flags) c_gst_structure_serialize_full; ///
-  void function(GstStructure* structure, const(char)* fieldname,  ...) c_gst_structure_set; ///
-  void function(GstStructure* structure, const(char)* fieldname, const(GValueArray)* array) c_gst_structure_set_array; ///
-  void function(GstStructure* structure, const(char)* fieldname, const(GValueArray)* array) c_gst_structure_set_list; ///
-  void function(GstStructure* structure, const(char)* name) c_gst_structure_set_name; ///
-  void function(GstStructure* structure, const(GstIdStr)* name) c_gst_structure_set_name_id_str; ///
-  void function(GstStructure* structure, const(char)* name) c_gst_structure_set_name_static_str; ///
-  gboolean function(GstStructure* structure, int* refcount) c_gst_structure_set_parent_refcount; ///
-  void function(GstStructure* structure, const(char)* fieldname,  ...) c_gst_structure_set_static_str; ///
-  void function(GstStructure* structure, const(char)* fieldname, void* varargs) c_gst_structure_set_static_str_valist; ///
-  void function(GstStructure* structure, const(char)* fieldname, void* varargs) c_gst_structure_set_valist; ///
-  void function(GstStructure* structure, const(char)* fieldname, const(GValue)* value) c_gst_structure_set_value; ///
-  void function(GstStructure* structure, const(char)* fieldname, const(GValue)* value) c_gst_structure_set_value_static_str; ///
-  void function(GstStructure* structure, const(char)* fieldname, GValue* value) c_gst_structure_take_value; ///
-  void function(GstStructure* structure, const(char)* fieldname, GValue* value) c_gst_structure_take_value_static_str; ///
-  char* function(const(GstStructure)* structure) c_gst_structure_to_string; ///
-  gboolean function(GstStructure** oldstrPtr, GstStructure* newstr) c_gst_structure_take; ///
-
-  // SystemClock
-  GType function() c_gst_system_clock_get_type; ///
-  GstClock* function() c_gst_system_clock_obtain; ///
-  void function(GstClock* newClock) c_gst_system_clock_set_default; ///
-
-  // TagList
-  GType function() c_gst_tag_list_get_type; ///
-  GstTagList* function(const(char)* tag,  ...) c_gst_tag_list_new; ///
-  GstTagList* function() c_gst_tag_list_new_empty; ///
-  GstTagList* function(const(char)* str) c_gst_tag_list_new_from_string; ///
-  GstTagList* function(void* varArgs) c_gst_tag_list_new_valist; ///
-  void function(GstTagList* list, GstTagMergeMode mode, const(char)* tag,  ...) c_gst_tag_list_add; ///
-  void function(GstTagList* list, GstTagMergeMode mode, const(char)* tag, void* varArgs) c_gst_tag_list_add_valist; ///
-  void function(GstTagList* list, GstTagMergeMode mode, const(char)* tag, void* varArgs) c_gst_tag_list_add_valist_values; ///
-  void function(GstTagList* list, GstTagMergeMode mode, const(char)* tag, const(GValue)* value) c_gst_tag_list_add_value; ///
-  void function(GstTagList* list, GstTagMergeMode mode, const(char)* tag,  ...) c_gst_tag_list_add_values; ///
-  GstTagList* function(const(GstTagList)* taglist) c_gst_tag_list_copy; ///
-  void function(const(GstTagList)* list, GstTagForeachFunc func, void* userData) c_gst_tag_list_foreach; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, gboolean* value) c_gst_tag_list_get_boolean; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, gboolean* value) c_gst_tag_list_get_boolean_index; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, GDate** value) c_gst_tag_list_get_date; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, GDate** value) c_gst_tag_list_get_date_index; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, GstDateTime** value) c_gst_tag_list_get_date_time; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, GstDateTime** value) c_gst_tag_list_get_date_time_index; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, double* value) c_gst_tag_list_get_double; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, double* value) c_gst_tag_list_get_double_index; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, float* value) c_gst_tag_list_get_float; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, float* value) c_gst_tag_list_get_float_index; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, int* value) c_gst_tag_list_get_int; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, long* value) c_gst_tag_list_get_int64; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, long* value) c_gst_tag_list_get_int64_index; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, int* value) c_gst_tag_list_get_int_index; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, void** value) c_gst_tag_list_get_pointer; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, void** value) c_gst_tag_list_get_pointer_index; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, GstSample** sample) c_gst_tag_list_get_sample; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, GstSample** sample) c_gst_tag_list_get_sample_index; ///
-  GstTagScope function(const(GstTagList)* list) c_gst_tag_list_get_scope; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, char** value) c_gst_tag_list_get_string; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, char** value) c_gst_tag_list_get_string_index; ///
-  uint function(const(GstTagList)* list, const(char)* tag) c_gst_tag_list_get_tag_size; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, uint* value) c_gst_tag_list_get_uint; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, ulong* value) c_gst_tag_list_get_uint64; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, ulong* value) c_gst_tag_list_get_uint64_index; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, uint* value) c_gst_tag_list_get_uint_index; ///
-  const(GValue)* function(const(GstTagList)* list, const(char)* tag, uint index) c_gst_tag_list_get_value_index; ///
-  void function(GstTagList* into, const(GstTagList)* from, GstTagMergeMode mode) c_gst_tag_list_insert; ///
-  gboolean function(const(GstTagList)* list) c_gst_tag_list_is_empty; ///
-  gboolean function(const(GstTagList)* list1, const(GstTagList)* list2) c_gst_tag_list_is_equal; ///
-  gboolean function(const(GstTagList)* taglist) c_gst_tag_list_is_writable; ///
-  GstTagList* function(GstTagList* taglist) c_gst_tag_list_make_writable; ///
-  GstTagList* function(const(GstTagList)* list1, const(GstTagList)* list2, GstTagMergeMode mode) c_gst_tag_list_merge; ///
-  int function(const(GstTagList)* list) c_gst_tag_list_n_tags; ///
-  const(char)* function(const(GstTagList)* list, uint index) c_gst_tag_list_nth_tag_name; ///
-  gboolean function(const(GstTagList)* list, const(char)* tag, uint index, const(char*)* value) c_gst_tag_list_peek_string_index; ///
-  GstTagList* function(GstTagList* taglist) c_gst_tag_list_ref; ///
-  void function(GstTagList* list, const(char)* tag) c_gst_tag_list_remove_tag; ///
-  void function(GstTagList* list, GstTagScope scope_) c_gst_tag_list_set_scope; ///
-  char* function(const(GstTagList)* list) c_gst_tag_list_to_string; ///
-  void function(GstTagList* taglist) c_gst_tag_list_unref; ///
-  gboolean function(GValue* dest, const(GstTagList)* list, const(char)* tag) c_gst_tag_list_copy_value; ///
-  gboolean function(GstTagList** oldTaglist, GstTagList* newTaglist) c_gst_tag_list_replace; ///
-  gboolean function(GstTagList** oldTaglist, GstTagList* newTaglist) c_gst_tag_list_take; ///
-
-  // TagSetter
-  GType function() c_gst_tag_setter_get_type; ///
-  void function(GstTagSetter* setter, GstTagMergeMode mode, const(char)* tag, void* varArgs) c_gst_tag_setter_add_tag_valist; ///
-  void function(GstTagSetter* setter, GstTagMergeMode mode, const(char)* tag, void* varArgs) c_gst_tag_setter_add_tag_valist_values; ///
-  void function(GstTagSetter* setter, GstTagMergeMode mode, const(char)* tag, const(GValue)* value) c_gst_tag_setter_add_tag_value; ///
-  void function(GstTagSetter* setter, GstTagMergeMode mode, const(char)* tag,  ...) c_gst_tag_setter_add_tag_values; ///
-  void function(GstTagSetter* setter, GstTagMergeMode mode, const(char)* tag,  ...) c_gst_tag_setter_add_tags; ///
-  const(GstTagList)* function(GstTagSetter* setter) c_gst_tag_setter_get_tag_list; ///
-  GstTagMergeMode function(GstTagSetter* setter) c_gst_tag_setter_get_tag_merge_mode; ///
-  void function(GstTagSetter* setter, const(GstTagList)* list, GstTagMergeMode mode) c_gst_tag_setter_merge_tags; ///
-  void function(GstTagSetter* setter) c_gst_tag_setter_reset_tags; ///
-  void function(GstTagSetter* setter, GstTagMergeMode mode) c_gst_tag_setter_set_tag_merge_mode; ///
-
-  // Task
-  GType function() c_gst_task_get_type; ///
-  GstTask* function(GstTaskFunction func, void* userData, GDestroyNotify notify) c_gst_task_new; ///
-  void function() c_gst_task_cleanup_all; ///
-  GstTaskPool* function(GstTask* task) c_gst_task_get_pool; ///
-  GstTaskState function(GstTask* task) c_gst_task_get_state; ///
-  gboolean function(GstTask* task) c_gst_task_join; ///
-  gboolean function(GstTask* task) c_gst_task_pause; ///
-  gboolean function(GstTask* task) c_gst_task_resume; ///
-  void function(GstTask* task, GstTaskThreadFunc enterFunc, void* userData, GDestroyNotify notify) c_gst_task_set_enter_callback; ///
-  void function(GstTask* task, GstTaskThreadFunc leaveFunc, void* userData, GDestroyNotify notify) c_gst_task_set_leave_callback; ///
-  void function(GstTask* task, GRecMutex* mutex) c_gst_task_set_lock; ///
-  void function(GstTask* task, GstTaskPool* pool) c_gst_task_set_pool; ///
-  gboolean function(GstTask* task, GstTaskState state) c_gst_task_set_state; ///
-  gboolean function(GstTask* task) c_gst_task_start; ///
-  gboolean function(GstTask* task) c_gst_task_stop; ///
-
-  // TaskPool
-  GType function() c_gst_task_pool_get_type; ///
-  GstTaskPool* function() c_gst_task_pool_new; ///
-  void function(GstTaskPool* pool) c_gst_task_pool_cleanup; ///
-  void function(GstTaskPool* pool, void* id) c_gst_task_pool_dispose_handle; ///
-  void function(GstTaskPool* pool, void* id) c_gst_task_pool_join; ///
-  void function(GstTaskPool* pool, GError** _err) c_gst_task_pool_prepare; ///
-  void* function(GstTaskPool* pool, GstTaskPoolFunction func, void* userData, GError** _err) c_gst_task_pool_push; ///
-
-  // Toc
-  GType function() c_gst_toc_get_type; ///
-  GstToc* function(GstTocScope scope_) c_gst_toc_new; ///
-  void function(GstToc* toc, GstTocEntry* entry) c_gst_toc_append_entry; ///
-  void function(GstToc* toc) c_gst_toc_dump; ///
-  GstTocEntry* function(const(GstToc)* toc, const(char)* uid) c_gst_toc_find_entry; ///
-  GList* function(const(GstToc)* toc) c_gst_toc_get_entries; ///
-  GstTocScope function(const(GstToc)* toc) c_gst_toc_get_scope; ///
-  GstTagList* function(const(GstToc)* toc) c_gst_toc_get_tags; ///
-  void function(GstToc* toc, GstTagList* tags, GstTagMergeMode mode) c_gst_toc_merge_tags; ///
-  void function(GstToc* toc, GstTagList* tags) c_gst_toc_set_tags; ///
-
-  // TocEntry
-  GType function() c_gst_toc_entry_get_type; ///
-  GstTocEntry* function(GstTocEntryType type, const(char)* uid) c_gst_toc_entry_new; ///
-  void function(GstTocEntry* entry, GstTocEntry* subentry) c_gst_toc_entry_append_sub_entry; ///
-  GstTocEntryType function(const(GstTocEntry)* entry) c_gst_toc_entry_get_entry_type; ///
-  gboolean function(const(GstTocEntry)* entry, GstTocLoopType* loopType, int* repeatCount) c_gst_toc_entry_get_loop; ///
-  GstTocEntry* function(GstTocEntry* entry) c_gst_toc_entry_get_parent; ///
-  gboolean function(const(GstTocEntry)* entry, long* start, long* stop) c_gst_toc_entry_get_start_stop_times; ///
-  GList* function(const(GstTocEntry)* entry) c_gst_toc_entry_get_sub_entries; ///
-  GstTagList* function(const(GstTocEntry)* entry) c_gst_toc_entry_get_tags; ///
-  GstToc* function(GstTocEntry* entry) c_gst_toc_entry_get_toc; ///
-  const(char)* function(const(GstTocEntry)* entry) c_gst_toc_entry_get_uid; ///
-  gboolean function(const(GstTocEntry)* entry) c_gst_toc_entry_is_alternative; ///
-  gboolean function(const(GstTocEntry)* entry) c_gst_toc_entry_is_sequence; ///
-  void function(GstTocEntry* entry, GstTagList* tags, GstTagMergeMode mode) c_gst_toc_entry_merge_tags; ///
-  void function(GstTocEntry* entry, GstTocLoopType loopType, int repeatCount) c_gst_toc_entry_set_loop; ///
-  void function(GstTocEntry* entry, long start, long stop) c_gst_toc_entry_set_start_stop_times; ///
-  void function(GstTocEntry* entry, GstTagList* tags) c_gst_toc_entry_set_tags; ///
-
-  // TocSetter
-  GType function() c_gst_toc_setter_get_type; ///
-  GstToc* function(GstTocSetter* setter) c_gst_toc_setter_get_toc; ///
-  void function(GstTocSetter* setter) c_gst_toc_setter_reset; ///
-  void function(GstTocSetter* setter, GstToc* toc) c_gst_toc_setter_set_toc; ///
-
-  // Tracer
-  GType function() c_gst_tracer_get_type; ///
-  gboolean function(GstPlugin* plugin, const(char)* name, GType type) c_gst_tracer_register; ///
-
-  // TracerClass
-  void function(GstTracerClass* tracerClass, gboolean useStructureParams) c_gst_tracer_class_set_use_structure_params; ///
-  gboolean function(GstTracerClass* tracerClass) c_gst_tracer_class_uses_structure_params; ///
-
-  // TracerFactory
-  GType function() c_gst_tracer_factory_get_type; ///
-  GList* function() c_gst_tracer_factory_get_list; ///
-  GType function(GstTracerFactory* factory) c_gst_tracer_factory_get_tracer_type; ///
-
-  // TracerRecord
-  GType function() c_gst_tracer_record_get_type; ///
-  GstTracerRecord* function(const(char)* name, const(char)* firstfield,  ...) c_gst_tracer_record_new; ///
-  void function(GstTracerRecord* self,  ...) c_gst_tracer_record_log; ///
-
-  // TypeFind
-  GType function() c_gst_type_find_get_type; ///
-  ulong function(GstTypeFind* find) c_gst_type_find_get_length; ///
-  const(ubyte)* function(GstTypeFind* find, long offset, uint size) c_gst_type_find_peek; ///
-  void function(GstTypeFind* find, uint probability, GstCaps* caps) c_gst_type_find_suggest; ///
-  void function(GstTypeFind* find, uint probability, const(char)* mediaType) c_gst_type_find_suggest_empty_simple; ///
-  void function(GstTypeFind* find, uint probability, const(char)* mediaType, const(char)* fieldname,  ...) c_gst_type_find_suggest_simple; ///
-  gboolean function(GstPlugin* plugin, const(char)* name, uint rank, GstTypeFindFunction func, const(char)* extensions, GstCaps* possibleCaps, void* data, GDestroyNotify dataNotify) c_gst_type_find_register; ///
-
-  // TypeFindFactory
-  GType function() c_gst_type_find_factory_get_type; ///
-  GList* function() c_gst_type_find_factory_get_list; ///
-  void function(GstTypeFindFactory* factory, GstTypeFind* find) c_gst_type_find_factory_call_function; ///
-  GstCaps* function(GstTypeFindFactory* factory) c_gst_type_find_factory_get_caps; ///
-  const(char*)* function(GstTypeFindFactory* factory) c_gst_type_find_factory_get_extensions; ///
-  gboolean function(GstTypeFindFactory* factory) c_gst_type_find_factory_has_function; ///
-
-  // URIHandler
-  GType function() c_gst_uri_handler_get_type; ///
-  const(char*)* function(GstURIHandler* handler) c_gst_uri_handler_get_protocols; ///
-  char* function(GstURIHandler* handler) c_gst_uri_handler_get_uri; ///
-  GstURIType function(GstURIHandler* handler) c_gst_uri_handler_get_uri_type; ///
-  gboolean function(GstURIHandler* handler, const(char)* uri, GError** _err) c_gst_uri_handler_set_uri; ///
-
-  // Uri
-  GType function() c_gst_uri_get_type; ///
-  GstUri* function(const(char)* scheme, const(char)* userinfo, const(char)* host, uint port, const(char)* path, const(char)* query, const(char)* fragment) c_gst_uri_new; ///
-  gboolean function(GstUri* uri, const(char)* relativePath) c_gst_uri_append_path; ///
-  gboolean function(GstUri* uri, const(char)* pathSegment) c_gst_uri_append_path_segment; ///
-  GstUri* function(const(GstUri)* uri) c_gst_uri_copy; ///
-  gboolean function(const(GstUri)* first, const(GstUri)* second) c_gst_uri_equal; ///
-  GstUri* function(GstUri* base, const(char)* uri) c_gst_uri_from_string_with_base; ///
-  const(char)* function(const(GstUri)* uri) c_gst_uri_get_fragment; ///
-  const(char)* function(const(GstUri)* uri) c_gst_uri_get_host; ///
-  GHashTable* function(const(GstUri)* uri) c_gst_uri_get_media_fragment_table; ///
-  char* function(const(GstUri)* uri) c_gst_uri_get_path; ///
-  GList* function(const(GstUri)* uri) c_gst_uri_get_path_segments; ///
-  char* function(const(GstUri)* uri) c_gst_uri_get_path_string; ///
-  uint function(const(GstUri)* uri) c_gst_uri_get_port; ///
-  GList* function(const(GstUri)* uri) c_gst_uri_get_query_keys; ///
-  char* function(const(GstUri)* uri) c_gst_uri_get_query_string; ///
-  char* function(const(GstUri)* uri, const(GList)* keys) c_gst_uri_get_query_string_ordered; ///
-  GHashTable* function(const(GstUri)* uri) c_gst_uri_get_query_table; ///
-  const(char)* function(const(GstUri)* uri, const(char)* queryKey) c_gst_uri_get_query_value; ///
-  const(char)* function(const(GstUri)* uri) c_gst_uri_get_scheme; ///
-  const(char)* function(const(GstUri)* uri) c_gst_uri_get_userinfo; ///
-  gboolean function(const(GstUri)* uri) c_gst_uri_is_normalized; ///
-  gboolean function(const(GstUri)* uri) c_gst_uri_is_writable; ///
-  GstUri* function(GstUri* baseUri, GstUri* refUri) c_gst_uri_join; ///
-  GstUri* function(GstUri* uri) c_gst_uri_make_writable; ///
-  GstUri* function(GstUri* base, const(char)* scheme, const(char)* userinfo, const(char)* host, uint port, const(char)* path, const(char)* query, const(char)* fragment) c_gst_uri_new_with_base; ///
-  gboolean function(GstUri* uri) c_gst_uri_normalize; ///
-  gboolean function(const(GstUri)* uri, const(char)* queryKey) c_gst_uri_query_has_key; ///
-  GstUri* function(GstUri* uri) c_gst_uri_ref; ///
-  gboolean function(GstUri* uri, const(char)* queryKey) c_gst_uri_remove_query_key; ///
-  gboolean function(GstUri* uri, const(char)* fragment) c_gst_uri_set_fragment; ///
-  gboolean function(GstUri* uri, const(char)* host) c_gst_uri_set_host; ///
-  gboolean function(GstUri* uri, const(char)* path) c_gst_uri_set_path; ///
-  gboolean function(GstUri* uri, GList* pathSegments) c_gst_uri_set_path_segments; ///
-  gboolean function(GstUri* uri, const(char)* path) c_gst_uri_set_path_string; ///
-  gboolean function(GstUri* uri, uint port) c_gst_uri_set_port; ///
-  gboolean function(GstUri* uri, const(char)* query) c_gst_uri_set_query_string; ///
-  gboolean function(GstUri* uri, GHashTable* queryTable) c_gst_uri_set_query_table; ///
-  gboolean function(GstUri* uri, const(char)* queryKey, const(char)* queryValue) c_gst_uri_set_query_value; ///
-  gboolean function(GstUri* uri, const(char)* scheme) c_gst_uri_set_scheme; ///
-  gboolean function(GstUri* uri, const(char)* userinfo) c_gst_uri_set_userinfo; ///
-  char* function(const(GstUri)* uri) c_gst_uri_to_string; ///
-  char* function(const(GstUri)* uri, const(GList)* keys) c_gst_uri_to_string_with_keys; ///
-  void function(GstUri* uri) c_gst_uri_unref; ///
-  char* function(const(char)* protocol, const(char)* location) c_gst_uri_construct; ///
-  GstUri* function(const(char)* uri) c_gst_uri_from_string; ///
-  GstUri* function(const(char)* uri) c_gst_uri_from_string_escaped; ///
-  char* function(const(char)* uri) c_gst_uri_get_location; ///
-  char* function(const(char)* uri) c_gst_uri_get_protocol; ///
-  gboolean function(const(char)* uri, const(char)* protocol) c_gst_uri_has_protocol; ///
-  gboolean function(const(char)* uri) c_gst_uri_is_valid; ///
-  char* function(const(char)* baseUri, const(char)* refUri) c_gst_uri_join_strings; ///
-  gboolean function(GstURIType type, const(char)* protocol) c_gst_uri_protocol_is_supported; ///
-  gboolean function(const(char)* protocol) c_gst_uri_protocol_is_valid; ///
-
-  // ValueArray
-  GType function() c_gst_value_array_get_type; ///
-  void function(GValue* value, GValue* appendValue) c_gst_value_array_append_and_take_value; ///
-  void function(GValue* value, const(GValue)* appendValue) c_gst_value_array_append_value; ///
-  uint function(const(GValue)* value) c_gst_value_array_get_size; ///
-  const(GValue)* function(const(GValue)* value, uint index) c_gst_value_array_get_value; ///
-  GValue* function(GValue* value, uint prealloc) c_gst_value_array_init; ///
-  void function(GValue* value, const(GValue)* prependValue) c_gst_value_array_prepend_value; ///
-
-  // ValueList
-  GType function() c_gst_value_list_get_type; ///
-  void function(GValue* value, GValue* appendValue) c_gst_value_list_append_and_take_value; ///
-  void function(GValue* value, const(GValue)* appendValue) c_gst_value_list_append_value; ///
-  void function(GValue* dest, const(GValue)* value1, const(GValue)* value2) c_gst_value_list_concat; ///
-  uint function(const(GValue)* value) c_gst_value_list_get_size; ///
-  const(GValue)* function(const(GValue)* value, uint index) c_gst_value_list_get_value; ///
-  GValue* function(GValue* value, uint prealloc) c_gst_value_list_init; ///
-  void function(GValue* dest, const(GValue)* value1, const(GValue)* value2) c_gst_value_list_merge; ///
-  void function(GValue* value, const(GValue)* prependValue) c_gst_value_list_prepend_value; ///
-
-  // ValueUniqueList
-  GType function() c_gst_value_unique_list_get_type; ///
-  void function(GValue* value, GValue* appendValue) c_gst_value_unique_list_append_and_take_value; ///
-  void function(GValue* value, const(GValue)* appendValue) c_gst_value_unique_list_append_value; ///
-  void function(GValue* dest, const(GValue)* value1, const(GValue)* value2) c_gst_value_unique_list_concat; ///
-  uint function(const(GValue)* value) c_gst_value_unique_list_get_size; ///
-  const(GValue)* function(const(GValue)* value, uint index) c_gst_value_unique_list_get_value; ///
-  void function(GValue* value, const(GValue)* prependValue) c_gst_value_unique_list_prepend_value; ///
-
-  // VecDeque
-  void function(GstVecDeque* array) c_gst_vec_deque_clear; ///
-  void* function(GstVecDeque* array, size_t idx) c_gst_vec_deque_drop_element; ///
-  gboolean function(GstVecDeque* array, size_t idx, void* pStruct) c_gst_vec_deque_drop_struct; ///
-  size_t function(GstVecDeque* array, GCompareFunc func, void* data) c_gst_vec_deque_find; ///
-  void function(GstVecDeque* array) c_gst_vec_deque_free; ///
-  size_t function(GstVecDeque* array) c_gst_vec_deque_get_length; ///
-  gboolean function(GstVecDeque* array) c_gst_vec_deque_is_empty; ///
-  void* function(GstVecDeque* array) c_gst_vec_deque_peek_head; ///
-  void* function(GstVecDeque* array) c_gst_vec_deque_peek_head_struct; ///
-  void* function(GstVecDeque* array, size_t idx) c_gst_vec_deque_peek_nth; ///
-  void* function(GstVecDeque* array, size_t idx) c_gst_vec_deque_peek_nth_struct; ///
-  void* function(GstVecDeque* array) c_gst_vec_deque_peek_tail; ///
-  void* function(GstVecDeque* array) c_gst_vec_deque_peek_tail_struct; ///
-  void* function(GstVecDeque* array) c_gst_vec_deque_pop_head; ///
-  void* function(GstVecDeque* array) c_gst_vec_deque_pop_head_struct; ///
-  void* function(GstVecDeque* array) c_gst_vec_deque_pop_tail; ///
-  void* function(GstVecDeque* array) c_gst_vec_deque_pop_tail_struct; ///
-  void function(GstVecDeque* array, void* data, GCompareDataFunc func, void* userData) c_gst_vec_deque_push_sorted; ///
-  void function(GstVecDeque* array, void* pStruct, GCompareDataFunc func, void* userData) c_gst_vec_deque_push_sorted_struct; ///
-  void function(GstVecDeque* array, void* data) c_gst_vec_deque_push_tail; ///
-  void function(GstVecDeque* array, void* pStruct) c_gst_vec_deque_push_tail_struct; ///
-  void function(GstVecDeque* array, GDestroyNotify clearFunc) c_gst_vec_deque_set_clear_func; ///
-  void function(GstVecDeque* array, GCompareDataFunc compareFunc, void* userData) c_gst_vec_deque_sort; ///
-  GstVecDeque* function(size_t initialSize) c_gst_vec_deque_new; ///
-  GstVecDeque* function(size_t structSize, size_t initialSize) c_gst_vec_deque_new_for_struct; ///
-
-  // global
-  gboolean function(const(GstClockTime)* xy, GstClockTime* temp, uint n, GstClockTime* mNum, GstClockTime* mDenom, GstClockTime* b, GstClockTime* xbase, double* rSquared) c_gst_calculate_linear_regression; ///
-  void function(GstCallAsyncFunc func, void* userData) c_gst_call_async; ///
-  gboolean function(uint major, uint minor, uint micro) c_gst_check_version; ///
-  void function(GstBuffer** bufPtr) c_gst_clear_buffer; ///
-  void function(GstBufferList** listPtr) c_gst_clear_buffer_list; ///
-  void function(GstCaps** capsPtr) c_gst_clear_caps; ///
-  void function(GstContext** contextPtr) c_gst_clear_context; ///
-  void function(GstEvent** eventPtr) c_gst_clear_event; ///
-  void function(GstMessage** msgPtr) c_gst_clear_message; ///
-  void function(GstMiniObject** objectPtr) c_gst_clear_mini_object; ///
-  void function(GstObject** objectPtr) c_gst_clear_object; ///
-  void function(GstPromise** promisePtr) c_gst_clear_promise; ///
-  void function(GstQuery** queryPtr) c_gst_clear_query; ///
-  void function(GstSample** samplePtr) c_gst_clear_sample; ///
-  void function(GstStructure** structurePtr) c_gst_clear_structure; ///
-  void function(GstTagList** taglistPtr) c_gst_clear_tag_list; ///
-  void function(GstUri** uriPtr) c_gst_clear_uri; ///
-  gboolean function() c_gst_cpuid_supports_arm_neon; ///
-  gboolean function() c_gst_cpuid_supports_arm_neon64; ///
-  gboolean function() c_gst_cpuid_supports_x86_3dnow; ///
-  gboolean function() c_gst_cpuid_supports_x86_avx; ///
-  gboolean function() c_gst_cpuid_supports_x86_avx2; ///
-  gboolean function() c_gst_cpuid_supports_x86_mmx; ///
-  gboolean function() c_gst_cpuid_supports_x86_mmxext; ///
-  gboolean function() c_gst_cpuid_supports_x86_sse2; ///
-  gboolean function() c_gst_cpuid_supports_x86_sse3; ///
-  gboolean function() c_gst_cpuid_supports_x86_sse4_1; ///
-  gboolean function() c_gst_cpuid_supports_x86_sse4_2; ///
-  gboolean function() c_gst_cpuid_supports_x86_ssse3; ///
-  void function(GstLogFunction func, void* userData, GDestroyNotify notify) c_gst_debug_add_log_function; ///
-  void function(uint maxSizePerThread, uint threadTimeout) c_gst_debug_add_ring_buffer_logger; ///
-  char* function(GstBin* bin, GstDebugGraphDetails details) c_gst_debug_bin_to_dot_data; ///
-  void function(GstBin* bin, GstDebugGraphDetails details, const(char)* fileName) c_gst_debug_bin_to_dot_file; ///
-  void function(GstBin* bin, GstDebugGraphDetails details, const(char)* fileName) c_gst_debug_bin_to_dot_file_with_ts; ///
-  char* function(uint colorinfo) c_gst_debug_construct_term_color; ///
-  int function(uint colorinfo) c_gst_debug_construct_win_color; ///
-  GSList* function() c_gst_debug_get_all_categories; ///
-  GstDebugColorMode function() c_gst_debug_get_color_mode; ///
-  GstDebugLevel function() c_gst_debug_get_default_threshold; ///
-  char* function(GstStackTraceFlags flags) c_gst_debug_get_stack_trace; ///
-  gboolean function() c_gst_debug_is_active; ///
-  gboolean function() c_gst_debug_is_colored; ///
-  void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, const(char)* format,  ...) c_gst_debug_log; ///
-  void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, GstDebugMessage* message, void* userData) c_gst_debug_log_default; ///
-  char* function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, GstDebugMessage* message) c_gst_debug_log_get_line; ///
-  void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, const(char)* id, const(char)* format,  ...) c_gst_debug_log_id; ///
-  void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, const(char)* id, const(char)* messageString) c_gst_debug_log_id_literal; ///
-  void function(GstLogContext* ctx, GstDebugLevel level, const(char)* file, const(char)* function_, int line, const(char)* id, const(char)* message) c_gst_debug_log_id_literal_with_context; ///
-  void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, const(char)* id, const(char)* format, void* args) c_gst_debug_log_id_valist; ///
-  void function(GstLogContext* ctx, GstDebugLevel level, const(char)* file, const(char)* function_, int line, const(char)* id, const(char)* format,  ...) c_gst_debug_log_id_with_context; ///
-  void function(GstLogContext* ctx, GstDebugLevel level, const(char)* file, const(char)* function_, int line, const(char)* id, const(char)* format, void* args) c_gst_debug_log_id_with_context_valist; ///
-  void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, const(char)* messageString) c_gst_debug_log_literal; ///
-  void function(GstLogContext* ctx, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, const(char)* message) c_gst_debug_log_literal_with_context; ///
-  void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, const(char)* format, void* args) c_gst_debug_log_valist; ///
-  void function(GstLogContext* ctx, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, const(char)* format,  ...) c_gst_debug_log_with_context; ///
-  void function(GstLogContext* ctx, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, const(char)* format, void* args) c_gst_debug_log_with_context_valist; ///
-  char* function(const(void)* ptr) c_gst_debug_print_object; ///
-  char* function(const(GstSegment)* segment) c_gst_debug_print_segment; ///
-  void function() c_gst_debug_print_stack_trace; ///
-  uint function(GstLogFunction func) c_gst_debug_remove_log_function; ///
-  uint function(void* data) c_gst_debug_remove_log_function_by_data; ///
-  void function() c_gst_debug_remove_ring_buffer_logger; ///
-  char** function() c_gst_debug_ring_buffer_logger_get_logs; ///
-  void function(gboolean active) c_gst_debug_set_active; ///
-  void function(GstDebugColorMode mode) c_gst_debug_set_color_mode; ///
-  void function(const(char)* mode) c_gst_debug_set_color_mode_from_string; ///
-  void function(gboolean colored) c_gst_debug_set_colored; ///
-  void function(GstDebugLevel level) c_gst_debug_set_default_threshold; ///
-  void function(const(char)* name, GstDebugLevel level) c_gst_debug_set_threshold_for_name; ///
-  void function(const(char)* list, gboolean reset) c_gst_debug_set_threshold_from_string; ///
-  void function(const(char)* name) c_gst_debug_unset_threshold_for_name; ///
-  void function() c_gst_deinit; ///
-  gboolean function(GstPlugin* plugin, GType type) c_gst_dynamic_type_register; ///
-  char* function(GQuark domain, int code) c_gst_error_get_message; ///
-  char* function(const(char)* filename, GError** _err) c_gst_filename_to_uri; ///
-  const(char)* function(GstFlowReturn ret) c_gst_flow_get_name; ///
-  GQuark function(GstFlowReturn ret) c_gst_flow_to_quark; ///
-  gboolean function(const(GstFormat)* formats, GstFormat format) c_gst_formats_contains; ///
-  const(char)* function() c_gst_get_main_executable_path; ///
-  char* function(const(char)* format,  ...) c_gst_info_strdup_printf; ///
-  char* function(const(char)* format, void* args) c_gst_info_strdup_vprintf; ///
-  int function(char** result, const(char)* format, void* args) c_gst_info_vasprintf; ///
-  void function(int* argc, char*** argv) c_gst_init; ///
-  gboolean function(int* argc, char*** argv, GError** _err) c_gst_init_check; ///
-  GOptionGroup* function() c_gst_init_get_option_group; ///
-  gboolean function(const(void)* obj) c_gst_is_caps_features; ///
-  gboolean function() c_gst_is_initialized; ///
-  GstStructure* function(const(char)* name,  ...) c_gst_make_element_message_details; ///
-  GParamSpec* function(const(char)* name, const(char)* nick, const(char)* blurb, GParamSpec* elementSpec, GParamFlags flags) c_gst_param_spec_array; ///
-  GParamSpec* function(const(char)* name, const(char)* nick, const(char)* blurb, int minNum, int minDenom, int maxNum, int maxDenom, int defaultNum, int defaultDenom, GParamFlags flags) c_gst_param_spec_fraction; ///
-  GType function() c_gst_parent_buffer_meta_api_get_type; ///
-  GstElement* function(const(char)* binDescription, gboolean ghostUnlinkedPads, GError** _err) c_gst_parse_bin_from_description; ///
-  GstElement* function(const(char)* binDescription, gboolean ghostUnlinkedPads, GstParseContext* context, GstParseFlags flags, GError** _err) c_gst_parse_bin_from_description_full; ///
-  GstElement* function(const(char)* pipelineDescription, GError** _err) c_gst_parse_launch; ///
-  GstElement* function(const(char)* pipelineDescription, GstParseContext* context, GstParseFlags flags, GError** _err) c_gst_parse_launch_full; ///
-  GstElement* function(const(char*)* argv, GError** _err) c_gst_parse_launchv; ///
-  GstElement* function(const(char*)* argv, GstParseContext* context, GstParseFlags flags, GError** _err) c_gst_parse_launchv_full; ///
-  void function(const(char)* format,  ...) c_gst_print; ///
-  void function(const(char)* format,  ...) c_gst_printerr; ///
-  void function(const(char)* format,  ...) c_gst_printerrln; ///
-  void function(const(char)* format,  ...) c_gst_println; ///
-  char** function(const(char*)* systemIdentifiers) c_gst_protection_filter_systems_by_available_decryptors; ///
-  GType function() c_gst_protection_meta_api_get_type; ///
-  const(char)* function(const(char*)* systemIdentifiers) c_gst_protection_select_system; ///
-  GType function() c_gst_reference_timestamp_meta_api_get_type; ///
-  gboolean function() c_gst_segtrap_is_enabled; ///
-  void function(gboolean enabled) c_gst_segtrap_set_enabled; ///
-  gboolean function(const(char)* tag) c_gst_tag_exists; ///
-  const(char)* function(const(char)* tag) c_gst_tag_get_description; ///
-  GstTagFlag function(const(char)* tag) c_gst_tag_get_flag; ///
-  const(char)* function(const(char)* tag) c_gst_tag_get_nick; ///
-  GType function(const(char)* tag) c_gst_tag_get_type; ///
-  gboolean function(const(char)* tag) c_gst_tag_is_fixed; ///
-  void function(GValue* dest, const(GValue)* src) c_gst_tag_merge_strings_with_comma; ///
-  void function(GValue* dest, const(GValue)* src) c_gst_tag_merge_use_first; ///
-  void function(const(char)* name, GstTagFlag flag, GType type, const(char)* nick, const(char)* blurb, GstTagMergeFunc func) c_gst_tag_register; ///
-  void function(const(char)* name, GstTagFlag flag, GType type, const(char)* nick, const(char)* blurb, GstTagMergeFunc func) c_gst_tag_register_static; ///
-  GList* function() c_gst_tracing_get_active_tracers; ///
-  void function(GstTracer* tracer, const(char)* detail, GCallback func) c_gst_tracing_register_hook; ///
-  gboolean function(GType type, GstPluginAPIFlags* flags) c_gst_type_is_plugin_api; ///
-  void function(GType type, GstPluginAPIFlags flags) c_gst_type_mark_as_plugin_api; ///
-  gboolean function() c_gst_update_registry; ///
-  void* function(void* array, uint numElements, size_t elementSize, GCompareDataFunc searchFunc, GstSearchMode mode, const(void)* searchData, void* userData) c_gst_util_array_binary_search; ///
-  uint function(uint v) c_gst_util_ceil_log2; ///
-  void function(double src, int* destN, int* destD) c_gst_util_double_to_fraction; ///
-  void function(GstBuffer* buf) c_gst_util_dump_buffer; ///
-  void function(const(ubyte)* mem, uint size) c_gst_util_dump_mem; ///
-  int function(const(char)* a, const(char)* b) c_gst_util_filename_compare; ///
-  uint function(uint v) c_gst_util_floor_log2; ///
-  gboolean function(int aN, int aD, int bN, int bD, int* resN, int* resD) c_gst_util_fraction_add; ///
-  int function(int aN, int aD, int bN, int bD) c_gst_util_fraction_compare; ///
-  gboolean function(int aN, int aD, int bN, int bD, int* resN, int* resD) c_gst_util_fraction_multiply; ///
-  gboolean function(long aN, long aD, long bN, long bD, long* resN, long* resD) c_gst_util_fraction_multiply_int64; ///
-  void function(int srcN, int srcD, double* dest) c_gst_util_fraction_to_double; ///
-  ulong function(double value) c_gst_util_gdouble_to_guint64; ///
-  gboolean function(GObject* object, const(char)* name, GValueArray** array) c_gst_util_get_object_array; ///
-  GstClockTime function() c_gst_util_get_timestamp; ///
-  int function(int a, int b) c_gst_util_greatest_common_divisor; ///
-  long function(long a, long b) c_gst_util_greatest_common_divisor_int64; ///
-  uint function() c_gst_util_group_id_next; ///
-  double function(ulong value) c_gst_util_guint64_to_gdouble; ///
-  int function(uint s1, uint s2) c_gst_util_seqnum_compare; ///
-  uint function() c_gst_util_seqnum_next; ///
-  void function(GObject* object, const(char)* name, const(char)* value) c_gst_util_set_object_arg; ///
-  gboolean function(GObject* object, const(char)* name, const(GValueArray)* array) c_gst_util_set_object_array; ///
-  void function(GValue* value, const(char)* valueStr) c_gst_util_set_value_from_string; ///
-  void function(int* numerator, int* denominator, uint nTerms, uint threshold) c_gst_util_simplify_fraction; ///
-  ulong function(ulong val, ulong num, ulong denom) c_gst_util_uint64_scale; ///
-  ulong function(ulong val, ulong num, ulong denom) c_gst_util_uint64_scale_ceil; ///
-  ulong function(ulong val, int num, int denom) c_gst_util_uint64_scale_int; ///
-  ulong function(ulong val, int num, int denom) c_gst_util_uint64_scale_int_ceil; ///
-  ulong function(ulong val, int num, int denom) c_gst_util_uint64_scale_int_round; ///
-  ulong function(ulong val, ulong num, ulong denom) c_gst_util_uint64_scale_round; ///
-  gboolean function(const(GValue)* value1, const(GValue)* value2) c_gst_value_can_compare; ///
-  gboolean function(const(GValue)* value1, const(GValue)* value2) c_gst_value_can_intersect; ///
-  gboolean function(const(GValue)* minuend, const(GValue)* subtrahend) c_gst_value_can_subtract; ///
-  gboolean function(const(GValue)* value1, const(GValue)* value2) c_gst_value_can_union; ///
-  int function(const(GValue)* value1, const(GValue)* value2) c_gst_value_compare; ///
-  gboolean function(GValue* dest, const(char)* src) c_gst_value_deserialize; ///
-  gboolean function(GValue* dest, const(char)* src, GParamSpec* pspec) c_gst_value_deserialize_with_pspec; ///
-  gboolean function(GValue* dest, const(GValue)* src) c_gst_value_fixate; ///
-  gboolean function(GValue* product, const(GValue)* factor1, const(GValue)* factor2) c_gst_value_fraction_multiply; ///
-  gboolean function(GValue* dest, const(GValue)* minuend, const(GValue)* subtrahend) c_gst_value_fraction_subtract; ///
-  ulong function(const(GValue)* value) c_gst_value_get_bitmask; ///
-  const(GstCaps)* function(const(GValue)* value) c_gst_value_get_caps; ///
-  const(GstCapsFeatures)* function(const(GValue)* value) c_gst_value_get_caps_features; ///
-  double function(const(GValue)* value) c_gst_value_get_double_range_max; ///
-  double function(const(GValue)* value) c_gst_value_get_double_range_min; ///
-  uint function(const(GValue)* value) c_gst_value_get_flagset_flags; ///
-  uint function(const(GValue)* value) c_gst_value_get_flagset_mask; ///
-  int function(const(GValue)* value) c_gst_value_get_fraction_denominator; ///
-  int function(const(GValue)* value) c_gst_value_get_fraction_numerator; ///
-  const(GValue)* function(const(GValue)* value) c_gst_value_get_fraction_range_max; ///
-  const(GValue)* function(const(GValue)* value) c_gst_value_get_fraction_range_min; ///
-  long function(const(GValue)* value) c_gst_value_get_int64_range_max; ///
-  long function(const(GValue)* value) c_gst_value_get_int64_range_min; ///
-  long function(const(GValue)* value) c_gst_value_get_int64_range_step; ///
-  int function(const(GValue)* value) c_gst_value_get_int_range_max; ///
-  int function(const(GValue)* value) c_gst_value_get_int_range_min; ///
-  int function(const(GValue)* value) c_gst_value_get_int_range_step; ///
-  const(GstStructure)* function(const(GValue)* value) c_gst_value_get_structure; ///
-  gboolean function(const(GValue)* value, uint* res) c_gst_value_hash; ///
-  void function(GValue* dest, const(GValue)* src) c_gst_value_init_and_copy; ///
-  gboolean function(GValue* dest, const(GValue)* value1, const(GValue)* value2) c_gst_value_intersect; ///
-  gboolean function(const(GValue)* value) c_gst_value_is_fixed; ///
-  gboolean function(const(GValue)* value1, const(GValue)* value2) c_gst_value_is_subset; ///
-  void function(const(GstValueTable)* table) c_gst_value_register; ///
-  char* function(const(GValue)* value) c_gst_value_serialize; ///
-  void function(GValue* value, ulong bitmask) c_gst_value_set_bitmask; ///
-  void function(GValue* value, const(GstCaps)* caps) c_gst_value_set_caps; ///
-  void function(GValue* value, const(GstCapsFeatures)* features) c_gst_value_set_caps_features; ///
-  void function(GValue* value, double start, double end) c_gst_value_set_double_range; ///
-  void function(GValue* value, uint flags, uint mask) c_gst_value_set_flagset; ///
-  void function(GValue* value, int numerator, int denominator) c_gst_value_set_fraction; ///
-  void function(GValue* value, const(GValue)* start, const(GValue)* end) c_gst_value_set_fraction_range; ///
-  void function(GValue* value, int numeratorStart, int denominatorStart, int numeratorEnd, int denominatorEnd) c_gst_value_set_fraction_range_full; ///
-  void function(GValue* value, long start, long end) c_gst_value_set_int64_range; ///
-  void function(GValue* value, long start, long end, long step) c_gst_value_set_int64_range_step; ///
-  void function(GValue* value, int start, int end) c_gst_value_set_int_range; ///
-  void function(GValue* value, int start, int end, int step) c_gst_value_set_int_range_step; ///
-  void function(GValue* value, const(GstStructure)* structure) c_gst_value_set_structure; ///
-  gboolean function(GValue* dest, const(GValue)* minuend, const(GValue)* subtrahend) c_gst_value_subtract; ///
-  gboolean function(GValue* dest, const(GValue)* value1, const(GValue)* value2) c_gst_value_union; ///
-  void function(uint* major, uint* minor, uint* micro, uint* nano) c_gst_version; ///
-  char* function() c_gst_version_string; ///
-
-  // CoreError
-  GQuark function() c_gst_core_error_quark; ///
-
-  // DebugLevel
-  const(char)* function(GstDebugLevel level) c_gst_debug_level_get_name; ///
-
-  // EventType
-  GstEventTypeFlags function(GstEventType type) c_gst_event_type_get_flags; ///
-  const(char)* function(GstEventType type) c_gst_event_type_get_name; ///
-  GQuark function(GstEventType type) c_gst_event_type_to_quark; ///
-  uint function(GstEventType type) c_gst_event_type_to_sticky_ordering; ///
-
-  // Format
-  GstFormat function(const(char)* nick) c_gst_format_get_by_nick; ///
-  const(GstFormatDefinition)* function(GstFormat format) c_gst_format_get_details; ///
-  const(char)* function(GstFormat format) c_gst_format_get_name; ///
-  GstIterator* function() c_gst_format_iterate_definitions; ///
-  GstFormat function(const(char)* nick, const(char)* description) c_gst_format_register; ///
-  GQuark function(GstFormat format) c_gst_format_to_quark; ///
-
-  // LibraryError
-  GQuark function() c_gst_library_error_quark; ///
-
-  // MessageType
-  const(char)* function(GstMessageType type) c_gst_message_type_get_name; ///
-  GQuark function(GstMessageType type) c_gst_message_type_to_quark; ///
-
-  // PadMode
-  const(char)* function(GstPadMode mode) c_gst_pad_mode_get_name; ///
-
-  // ParseError
-  GQuark function() c_gst_parse_error_quark; ///
-
-  // PluginError
-  GQuark function() c_gst_plugin_error_quark; ///
-
-  // QueryType
-  GstQueryTypeFlags function(GstQueryType type) c_gst_query_type_get_flags; ///
-  const(char)* function(GstQueryType type) c_gst_query_type_get_name; ///
-  GQuark function(GstQueryType type) c_gst_query_type_to_quark; ///
-
-  // ResourceError
-  GQuark function() c_gst_resource_error_quark; ///
-
-  // State
-  const(char)* function(GstState state) c_gst_state_get_name; ///
-
-  // StateChange
-  const(char)* function(GstStateChange transition) c_gst_state_change_get_name; ///
-
-  // StateChangeReturn
-  const(char)* function(GstStateChangeReturn stateRet) c_gst_state_change_return_get_name; ///
-
-  // StreamError
-  GQuark function() c_gst_stream_error_quark; ///
-
-  // StreamType
-  const(char)* function(GstStreamType stype) c_gst_stream_type_get_name; ///
-
-  // TocEntryType
-  const(char)* function(GstTocEntryType type) c_gst_toc_entry_type_get_nick; ///
-
-  // URIError
-  GQuark function() c_gst_uri_error_quark; ///
-}
+// AllocationParams
+private alias c_gst_allocation_params_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_allocation_params_get_typeFn c_gst_allocation_params_get_type; ///
+private alias c_gst_allocation_params_newFn = extern(C) GstAllocationParams* function() nothrow;
+__gshared c_gst_allocation_params_newFn c_gst_allocation_params_new; ///
+private alias c_gst_allocation_params_copyFn = extern(C) GstAllocationParams* function(const(GstAllocationParams)* params) nothrow;
+__gshared c_gst_allocation_params_copyFn c_gst_allocation_params_copy; ///
+private alias c_gst_allocation_params_freeFn = extern(C) void function(GstAllocationParams* params) nothrow;
+__gshared c_gst_allocation_params_freeFn c_gst_allocation_params_free; ///
+private alias c_gst_allocation_params_initFn = extern(C) void function(GstAllocationParams* params) nothrow;
+__gshared c_gst_allocation_params_initFn c_gst_allocation_params_init; ///
+
+// Allocator
+private alias c_gst_allocator_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_allocator_get_typeFn c_gst_allocator_get_type; ///
+private alias c_gst_allocator_findFn = extern(C) GstAllocator* function(const(char)* name) nothrow;
+__gshared c_gst_allocator_findFn c_gst_allocator_find; ///
+private alias c_gst_allocator_registerFn = extern(C) void function(const(char)* name, GstAllocator* allocator) nothrow;
+__gshared c_gst_allocator_registerFn c_gst_allocator_register; ///
+private alias c_gst_allocator_allocFn = extern(C) GstMemory* function(GstAllocator* allocator, size_t size, GstAllocationParams* params) nothrow;
+__gshared c_gst_allocator_allocFn c_gst_allocator_alloc; ///
+private alias c_gst_allocator_freeFn = extern(C) void function(GstAllocator* allocator, GstMemory* memory) nothrow;
+__gshared c_gst_allocator_freeFn c_gst_allocator_free; ///
+private alias c_gst_allocator_set_defaultFn = extern(C) void function(GstAllocator* allocator) nothrow;
+__gshared c_gst_allocator_set_defaultFn c_gst_allocator_set_default; ///
+
+// AtomicQueue
+private alias c_gst_atomic_queue_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_atomic_queue_get_typeFn c_gst_atomic_queue_get_type; ///
+private alias c_gst_atomic_queue_newFn = extern(C) GstAtomicQueue* function(uint initialSize) nothrow;
+__gshared c_gst_atomic_queue_newFn c_gst_atomic_queue_new; ///
+private alias c_gst_atomic_queue_lengthFn = extern(C) uint function(GstAtomicQueue* queue) nothrow;
+__gshared c_gst_atomic_queue_lengthFn c_gst_atomic_queue_length; ///
+private alias c_gst_atomic_queue_peekFn = extern(C) void* function(GstAtomicQueue* queue) nothrow;
+__gshared c_gst_atomic_queue_peekFn c_gst_atomic_queue_peek; ///
+private alias c_gst_atomic_queue_popFn = extern(C) void* function(GstAtomicQueue* queue) nothrow;
+__gshared c_gst_atomic_queue_popFn c_gst_atomic_queue_pop; ///
+private alias c_gst_atomic_queue_pushFn = extern(C) void function(GstAtomicQueue* queue, void* data) nothrow;
+__gshared c_gst_atomic_queue_pushFn c_gst_atomic_queue_push; ///
+private alias c_gst_atomic_queue_refFn = extern(C) void function(GstAtomicQueue* queue) nothrow;
+__gshared c_gst_atomic_queue_refFn c_gst_atomic_queue_ref; ///
+private alias c_gst_atomic_queue_unrefFn = extern(C) void function(GstAtomicQueue* queue) nothrow;
+__gshared c_gst_atomic_queue_unrefFn c_gst_atomic_queue_unref; ///
+
+// Bin
+private alias c_gst_bin_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_bin_get_typeFn c_gst_bin_get_type; ///
+private alias c_gst_bin_newFn = extern(C) GstElement* function(const(char)* name) nothrow;
+__gshared c_gst_bin_newFn c_gst_bin_new; ///
+private alias c_gst_bin_addFn = extern(C) gboolean function(GstBin* bin, GstElement* element) nothrow;
+__gshared c_gst_bin_addFn c_gst_bin_add; ///
+private alias c_gst_bin_add_manyFn = extern(C) void function(GstBin* bin, GstElement* element1,  ...) nothrow;
+__gshared c_gst_bin_add_manyFn c_gst_bin_add_many; ///
+private alias c_gst_bin_find_unlinked_padFn = extern(C) GstPad* function(GstBin* bin, GstPadDirection direction) nothrow;
+__gshared c_gst_bin_find_unlinked_padFn c_gst_bin_find_unlinked_pad; ///
+private alias c_gst_bin_get_by_interfaceFn = extern(C) GstElement* function(GstBin* bin, GType iface) nothrow;
+__gshared c_gst_bin_get_by_interfaceFn c_gst_bin_get_by_interface; ///
+private alias c_gst_bin_get_by_nameFn = extern(C) GstElement* function(GstBin* bin, const(char)* name) nothrow;
+__gshared c_gst_bin_get_by_nameFn c_gst_bin_get_by_name; ///
+private alias c_gst_bin_get_by_name_recurse_upFn = extern(C) GstElement* function(GstBin* bin, const(char)* name) nothrow;
+__gshared c_gst_bin_get_by_name_recurse_upFn c_gst_bin_get_by_name_recurse_up; ///
+private alias c_gst_bin_get_suppressed_flagsFn = extern(C) GstElementFlags function(GstBin* bin) nothrow;
+__gshared c_gst_bin_get_suppressed_flagsFn c_gst_bin_get_suppressed_flags; ///
+private alias c_gst_bin_iterate_all_by_element_factory_nameFn = extern(C) GstIterator* function(GstBin* bin, const(char)* factoryName) nothrow;
+__gshared c_gst_bin_iterate_all_by_element_factory_nameFn c_gst_bin_iterate_all_by_element_factory_name; ///
+private alias c_gst_bin_iterate_all_by_interfaceFn = extern(C) GstIterator* function(GstBin* bin, GType iface) nothrow;
+__gshared c_gst_bin_iterate_all_by_interfaceFn c_gst_bin_iterate_all_by_interface; ///
+private alias c_gst_bin_iterate_elementsFn = extern(C) GstIterator* function(GstBin* bin) nothrow;
+__gshared c_gst_bin_iterate_elementsFn c_gst_bin_iterate_elements; ///
+private alias c_gst_bin_iterate_recurseFn = extern(C) GstIterator* function(GstBin* bin) nothrow;
+__gshared c_gst_bin_iterate_recurseFn c_gst_bin_iterate_recurse; ///
+private alias c_gst_bin_iterate_sinksFn = extern(C) GstIterator* function(GstBin* bin) nothrow;
+__gshared c_gst_bin_iterate_sinksFn c_gst_bin_iterate_sinks; ///
+private alias c_gst_bin_iterate_sortedFn = extern(C) GstIterator* function(GstBin* bin) nothrow;
+__gshared c_gst_bin_iterate_sortedFn c_gst_bin_iterate_sorted; ///
+private alias c_gst_bin_iterate_sourcesFn = extern(C) GstIterator* function(GstBin* bin) nothrow;
+__gshared c_gst_bin_iterate_sourcesFn c_gst_bin_iterate_sources; ///
+private alias c_gst_bin_recalculate_latencyFn = extern(C) gboolean function(GstBin* bin) nothrow;
+__gshared c_gst_bin_recalculate_latencyFn c_gst_bin_recalculate_latency; ///
+private alias c_gst_bin_removeFn = extern(C) gboolean function(GstBin* bin, GstElement* element) nothrow;
+__gshared c_gst_bin_removeFn c_gst_bin_remove; ///
+private alias c_gst_bin_remove_manyFn = extern(C) void function(GstBin* bin, GstElement* element1,  ...) nothrow;
+__gshared c_gst_bin_remove_manyFn c_gst_bin_remove_many; ///
+private alias c_gst_bin_set_suppressed_flagsFn = extern(C) void function(GstBin* bin, GstElementFlags flags) nothrow;
+__gshared c_gst_bin_set_suppressed_flagsFn c_gst_bin_set_suppressed_flags; ///
+private alias c_gst_bin_sync_children_statesFn = extern(C) gboolean function(GstBin* bin) nothrow;
+__gshared c_gst_bin_sync_children_statesFn c_gst_bin_sync_children_states; ///
+
+// Bitmask
+private alias c_gst_bitmask_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_bitmask_get_typeFn c_gst_bitmask_get_type; ///
+
+// Buffer
+private alias c_gst_buffer_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_buffer_get_typeFn c_gst_buffer_get_type; ///
+private alias c_gst_buffer_newFn = extern(C) GstBuffer* function() nothrow;
+__gshared c_gst_buffer_newFn c_gst_buffer_new; ///
+private alias c_gst_buffer_new_allocateFn = extern(C) GstBuffer* function(GstAllocator* allocator, size_t size, GstAllocationParams* params) nothrow;
+__gshared c_gst_buffer_new_allocateFn c_gst_buffer_new_allocate; ///
+private alias c_gst_buffer_new_memdupFn = extern(C) GstBuffer* function(const(void)* data, size_t size) nothrow;
+__gshared c_gst_buffer_new_memdupFn c_gst_buffer_new_memdup; ///
+private alias c_gst_buffer_new_wrappedFn = extern(C) GstBuffer* function(void* data, size_t size) nothrow;
+__gshared c_gst_buffer_new_wrappedFn c_gst_buffer_new_wrapped; ///
+private alias c_gst_buffer_new_wrapped_bytesFn = extern(C) GstBuffer* function(GBytes* bytes) nothrow;
+__gshared c_gst_buffer_new_wrapped_bytesFn c_gst_buffer_new_wrapped_bytes; ///
+private alias c_gst_buffer_new_wrapped_fullFn = extern(C) GstBuffer* function(GstMemoryFlags flags, void* data, size_t maxsize, size_t offset, size_t size, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_buffer_new_wrapped_fullFn c_gst_buffer_new_wrapped_full; ///
+private alias c_gst_buffer_add_custom_metaFn = extern(C) GstCustomMeta* function(GstBuffer* buffer, const(char)* name) nothrow;
+__gshared c_gst_buffer_add_custom_metaFn c_gst_buffer_add_custom_meta; ///
+private alias c_gst_buffer_add_metaFn = extern(C) GstMeta* function(GstBuffer* buffer, const(GstMetaInfo)* info, void* params) nothrow;
+__gshared c_gst_buffer_add_metaFn c_gst_buffer_add_meta; ///
+private alias c_gst_buffer_add_parent_buffer_metaFn = extern(C) GstParentBufferMeta* function(GstBuffer* buffer, GstBuffer* ref_) nothrow;
+__gshared c_gst_buffer_add_parent_buffer_metaFn c_gst_buffer_add_parent_buffer_meta; ///
+private alias c_gst_buffer_add_protection_metaFn = extern(C) GstProtectionMeta* function(GstBuffer* buffer, GstStructure* info) nothrow;
+__gshared c_gst_buffer_add_protection_metaFn c_gst_buffer_add_protection_meta; ///
+private alias c_gst_buffer_add_reference_timestamp_metaFn = extern(C) GstReferenceTimestampMeta* function(GstBuffer* buffer, GstCaps* reference, GstClockTime timestamp, GstClockTime duration) nothrow;
+__gshared c_gst_buffer_add_reference_timestamp_metaFn c_gst_buffer_add_reference_timestamp_meta; ///
+private alias c_gst_buffer_appendFn = extern(C) GstBuffer* function(GstBuffer* buf1, GstBuffer* buf2) nothrow;
+__gshared c_gst_buffer_appendFn c_gst_buffer_append; ///
+private alias c_gst_buffer_append_memoryFn = extern(C) void function(GstBuffer* buffer, GstMemory* mem) nothrow;
+__gshared c_gst_buffer_append_memoryFn c_gst_buffer_append_memory; ///
+private alias c_gst_buffer_append_regionFn = extern(C) GstBuffer* function(GstBuffer* buf1, GstBuffer* buf2, ptrdiff_t offset, ptrdiff_t size) nothrow;
+__gshared c_gst_buffer_append_regionFn c_gst_buffer_append_region; ///
+private alias c_gst_buffer_copyFn = extern(C) GstBuffer* function(const(GstBuffer)* buf) nothrow;
+__gshared c_gst_buffer_copyFn c_gst_buffer_copy; ///
+private alias c_gst_buffer_copy_deepFn = extern(C) GstBuffer* function(const(GstBuffer)* buf) nothrow;
+__gshared c_gst_buffer_copy_deepFn c_gst_buffer_copy_deep; ///
+private alias c_gst_buffer_copy_intoFn = extern(C) gboolean function(GstBuffer* dest, GstBuffer* src, GstBufferCopyFlags flags, size_t offset, size_t size) nothrow;
+__gshared c_gst_buffer_copy_intoFn c_gst_buffer_copy_into; ///
+private alias c_gst_buffer_copy_regionFn = extern(C) GstBuffer* function(GstBuffer* parent, GstBufferCopyFlags flags, size_t offset, size_t size) nothrow;
+__gshared c_gst_buffer_copy_regionFn c_gst_buffer_copy_region; ///
+private alias c_gst_buffer_extractFn = extern(C) size_t function(GstBuffer* buffer, size_t offset, void* dest, size_t size) nothrow;
+__gshared c_gst_buffer_extractFn c_gst_buffer_extract; ///
+private alias c_gst_buffer_extract_dupFn = extern(C) void function(GstBuffer* buffer, size_t offset, size_t size, void** dest, size_t* destSize) nothrow;
+__gshared c_gst_buffer_extract_dupFn c_gst_buffer_extract_dup; ///
+private alias c_gst_buffer_fillFn = extern(C) size_t function(GstBuffer* buffer, size_t offset, const(void)* src, size_t size) nothrow;
+__gshared c_gst_buffer_fillFn c_gst_buffer_fill; ///
+private alias c_gst_buffer_find_memoryFn = extern(C) gboolean function(GstBuffer* buffer, size_t offset, size_t size, uint* idx, uint* length, size_t* skip) nothrow;
+__gshared c_gst_buffer_find_memoryFn c_gst_buffer_find_memory; ///
+private alias c_gst_buffer_foreach_metaFn = extern(C) gboolean function(GstBuffer* buffer, GstBufferForeachMetaFunc func, void* userData) nothrow;
+__gshared c_gst_buffer_foreach_metaFn c_gst_buffer_foreach_meta; ///
+private alias c_gst_buffer_get_all_memoryFn = extern(C) GstMemory* function(GstBuffer* buffer) nothrow;
+__gshared c_gst_buffer_get_all_memoryFn c_gst_buffer_get_all_memory; ///
+private alias c_gst_buffer_get_custom_metaFn = extern(C) GstCustomMeta* function(GstBuffer* buffer, const(char)* name) nothrow;
+__gshared c_gst_buffer_get_custom_metaFn c_gst_buffer_get_custom_meta; ///
+private alias c_gst_buffer_get_flagsFn = extern(C) GstBufferFlags function(GstBuffer* buffer) nothrow;
+__gshared c_gst_buffer_get_flagsFn c_gst_buffer_get_flags; ///
+private alias c_gst_buffer_get_memoryFn = extern(C) GstMemory* function(GstBuffer* buffer, uint idx) nothrow;
+__gshared c_gst_buffer_get_memoryFn c_gst_buffer_get_memory; ///
+private alias c_gst_buffer_get_memory_rangeFn = extern(C) GstMemory* function(GstBuffer* buffer, uint idx, int length) nothrow;
+__gshared c_gst_buffer_get_memory_rangeFn c_gst_buffer_get_memory_range; ///
+private alias c_gst_buffer_get_metaFn = extern(C) GstMeta* function(GstBuffer* buffer, GType api) nothrow;
+__gshared c_gst_buffer_get_metaFn c_gst_buffer_get_meta; ///
+private alias c_gst_buffer_get_n_metaFn = extern(C) uint function(GstBuffer* buffer, GType apiType) nothrow;
+__gshared c_gst_buffer_get_n_metaFn c_gst_buffer_get_n_meta; ///
+private alias c_gst_buffer_get_reference_timestamp_metaFn = extern(C) GstReferenceTimestampMeta* function(GstBuffer* buffer, GstCaps* reference) nothrow;
+__gshared c_gst_buffer_get_reference_timestamp_metaFn c_gst_buffer_get_reference_timestamp_meta; ///
+private alias c_gst_buffer_get_sizeFn = extern(C) size_t function(GstBuffer* buffer) nothrow;
+__gshared c_gst_buffer_get_sizeFn c_gst_buffer_get_size; ///
+private alias c_gst_buffer_get_sizesFn = extern(C) size_t function(GstBuffer* buffer, size_t* offset, size_t* maxsize) nothrow;
+__gshared c_gst_buffer_get_sizesFn c_gst_buffer_get_sizes; ///
+private alias c_gst_buffer_get_sizes_rangeFn = extern(C) size_t function(GstBuffer* buffer, uint idx, int length, size_t* offset, size_t* maxsize) nothrow;
+__gshared c_gst_buffer_get_sizes_rangeFn c_gst_buffer_get_sizes_range; ///
+private alias c_gst_buffer_has_flagsFn = extern(C) gboolean function(GstBuffer* buffer, GstBufferFlags flags) nothrow;
+__gshared c_gst_buffer_has_flagsFn c_gst_buffer_has_flags; ///
+private alias c_gst_buffer_insert_memoryFn = extern(C) void function(GstBuffer* buffer, int idx, GstMemory* mem) nothrow;
+__gshared c_gst_buffer_insert_memoryFn c_gst_buffer_insert_memory; ///
+private alias c_gst_buffer_is_all_memory_writableFn = extern(C) gboolean function(GstBuffer* buffer) nothrow;
+__gshared c_gst_buffer_is_all_memory_writableFn c_gst_buffer_is_all_memory_writable; ///
+private alias c_gst_buffer_is_memory_range_writableFn = extern(C) gboolean function(GstBuffer* buffer, uint idx, int length) nothrow;
+__gshared c_gst_buffer_is_memory_range_writableFn c_gst_buffer_is_memory_range_writable; ///
+private alias c_gst_buffer_is_writableFn = extern(C) gboolean function(const(GstBuffer)* buf) nothrow;
+__gshared c_gst_buffer_is_writableFn c_gst_buffer_is_writable; ///
+private alias c_gst_buffer_iterate_metaFn = extern(C) GstMeta* function(GstBuffer* buffer, void** state) nothrow;
+__gshared c_gst_buffer_iterate_metaFn c_gst_buffer_iterate_meta; ///
+private alias c_gst_buffer_iterate_meta_filteredFn = extern(C) GstMeta* function(GstBuffer* buffer, void** state, GType metaApiType) nothrow;
+__gshared c_gst_buffer_iterate_meta_filteredFn c_gst_buffer_iterate_meta_filtered; ///
+private alias c_gst_buffer_make_writableFn = extern(C) GstBuffer* function(GstBuffer* buf) nothrow;
+__gshared c_gst_buffer_make_writableFn c_gst_buffer_make_writable; ///
+private alias c_gst_buffer_mapFn = extern(C) gboolean function(GstBuffer* buffer, GstMapInfo* info, GstMapFlags flags) nothrow;
+__gshared c_gst_buffer_mapFn c_gst_buffer_map; ///
+private alias c_gst_buffer_map_rangeFn = extern(C) gboolean function(GstBuffer* buffer, uint idx, int length, GstMapInfo* info, GstMapFlags flags) nothrow;
+__gshared c_gst_buffer_map_rangeFn c_gst_buffer_map_range; ///
+private alias c_gst_buffer_memcmpFn = extern(C) int function(GstBuffer* buffer, size_t offset, const(void)* mem, size_t size) nothrow;
+__gshared c_gst_buffer_memcmpFn c_gst_buffer_memcmp; ///
+private alias c_gst_buffer_memsetFn = extern(C) size_t function(GstBuffer* buffer, size_t offset, ubyte val, size_t size) nothrow;
+__gshared c_gst_buffer_memsetFn c_gst_buffer_memset; ///
+private alias c_gst_buffer_n_memoryFn = extern(C) uint function(GstBuffer* buffer) nothrow;
+__gshared c_gst_buffer_n_memoryFn c_gst_buffer_n_memory; ///
+private alias c_gst_buffer_peek_memoryFn = extern(C) GstMemory* function(GstBuffer* buffer, uint idx) nothrow;
+__gshared c_gst_buffer_peek_memoryFn c_gst_buffer_peek_memory; ///
+private alias c_gst_buffer_prepend_memoryFn = extern(C) void function(GstBuffer* buffer, GstMemory* mem) nothrow;
+__gshared c_gst_buffer_prepend_memoryFn c_gst_buffer_prepend_memory; ///
+private alias c_gst_buffer_refFn = extern(C) GstBuffer* function(GstBuffer* buf) nothrow;
+__gshared c_gst_buffer_refFn c_gst_buffer_ref; ///
+private alias c_gst_buffer_remove_all_memoryFn = extern(C) void function(GstBuffer* buffer) nothrow;
+__gshared c_gst_buffer_remove_all_memoryFn c_gst_buffer_remove_all_memory; ///
+private alias c_gst_buffer_remove_memoryFn = extern(C) void function(GstBuffer* buffer, uint idx) nothrow;
+__gshared c_gst_buffer_remove_memoryFn c_gst_buffer_remove_memory; ///
+private alias c_gst_buffer_remove_memory_rangeFn = extern(C) void function(GstBuffer* buffer, uint idx, int length) nothrow;
+__gshared c_gst_buffer_remove_memory_rangeFn c_gst_buffer_remove_memory_range; ///
+private alias c_gst_buffer_remove_metaFn = extern(C) gboolean function(GstBuffer* buffer, GstMeta* meta) nothrow;
+__gshared c_gst_buffer_remove_metaFn c_gst_buffer_remove_meta; ///
+private alias c_gst_buffer_replace_all_memoryFn = extern(C) void function(GstBuffer* buffer, GstMemory* mem) nothrow;
+__gshared c_gst_buffer_replace_all_memoryFn c_gst_buffer_replace_all_memory; ///
+private alias c_gst_buffer_replace_memoryFn = extern(C) void function(GstBuffer* buffer, uint idx, GstMemory* mem) nothrow;
+__gshared c_gst_buffer_replace_memoryFn c_gst_buffer_replace_memory; ///
+private alias c_gst_buffer_replace_memory_rangeFn = extern(C) void function(GstBuffer* buffer, uint idx, int length, GstMemory* mem) nothrow;
+__gshared c_gst_buffer_replace_memory_rangeFn c_gst_buffer_replace_memory_range; ///
+private alias c_gst_buffer_resizeFn = extern(C) void function(GstBuffer* buffer, ptrdiff_t offset, ptrdiff_t size) nothrow;
+__gshared c_gst_buffer_resizeFn c_gst_buffer_resize; ///
+private alias c_gst_buffer_resize_rangeFn = extern(C) gboolean function(GstBuffer* buffer, uint idx, int length, ptrdiff_t offset, ptrdiff_t size) nothrow;
+__gshared c_gst_buffer_resize_rangeFn c_gst_buffer_resize_range; ///
+private alias c_gst_buffer_set_flagsFn = extern(C) gboolean function(GstBuffer* buffer, GstBufferFlags flags) nothrow;
+__gshared c_gst_buffer_set_flagsFn c_gst_buffer_set_flags; ///
+private alias c_gst_buffer_set_sizeFn = extern(C) void function(GstBuffer* buffer, ptrdiff_t size) nothrow;
+__gshared c_gst_buffer_set_sizeFn c_gst_buffer_set_size; ///
+private alias c_gst_buffer_unmapFn = extern(C) void function(GstBuffer* buffer, GstMapInfo* info) nothrow;
+__gshared c_gst_buffer_unmapFn c_gst_buffer_unmap; ///
+private alias c_gst_buffer_unrefFn = extern(C) void function(GstBuffer* buf) nothrow;
+__gshared c_gst_buffer_unrefFn c_gst_buffer_unref; ///
+private alias c_gst_buffer_unset_flagsFn = extern(C) gboolean function(GstBuffer* buffer, GstBufferFlags flags) nothrow;
+__gshared c_gst_buffer_unset_flagsFn c_gst_buffer_unset_flags; ///
+private alias c_gst_buffer_get_max_memoryFn = extern(C) uint function() nothrow;
+__gshared c_gst_buffer_get_max_memoryFn c_gst_buffer_get_max_memory; ///
+private alias c_gst_buffer_replaceFn = extern(C) gboolean function(GstBuffer** obuf, GstBuffer* nbuf) nothrow;
+__gshared c_gst_buffer_replaceFn c_gst_buffer_replace; ///
+private alias c_gst_buffer_stealFn = extern(C) GstBuffer* function(GstBuffer** oldBuffer) nothrow;
+__gshared c_gst_buffer_stealFn c_gst_buffer_steal; ///
+private alias c_gst_buffer_takeFn = extern(C) gboolean function(GstBuffer** oldBuffer, GstBuffer* newBuffer) nothrow;
+__gshared c_gst_buffer_takeFn c_gst_buffer_take; ///
+
+// BufferList
+private alias c_gst_buffer_list_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_buffer_list_get_typeFn c_gst_buffer_list_get_type; ///
+private alias c_gst_buffer_list_newFn = extern(C) GstBufferList* function() nothrow;
+__gshared c_gst_buffer_list_newFn c_gst_buffer_list_new; ///
+private alias c_gst_buffer_list_new_sizedFn = extern(C) GstBufferList* function(uint size) nothrow;
+__gshared c_gst_buffer_list_new_sizedFn c_gst_buffer_list_new_sized; ///
+private alias c_gst_buffer_list_calculate_sizeFn = extern(C) size_t function(GstBufferList* list) nothrow;
+__gshared c_gst_buffer_list_calculate_sizeFn c_gst_buffer_list_calculate_size; ///
+private alias c_gst_buffer_list_copyFn = extern(C) GstBufferList* function(const(GstBufferList)* list) nothrow;
+__gshared c_gst_buffer_list_copyFn c_gst_buffer_list_copy; ///
+private alias c_gst_buffer_list_copy_deepFn = extern(C) GstBufferList* function(const(GstBufferList)* list) nothrow;
+__gshared c_gst_buffer_list_copy_deepFn c_gst_buffer_list_copy_deep; ///
+private alias c_gst_buffer_list_foreachFn = extern(C) gboolean function(GstBufferList* list, GstBufferListFunc func, void* userData) nothrow;
+__gshared c_gst_buffer_list_foreachFn c_gst_buffer_list_foreach; ///
+private alias c_gst_buffer_list_getFn = extern(C) GstBuffer* function(GstBufferList* list, uint idx) nothrow;
+__gshared c_gst_buffer_list_getFn c_gst_buffer_list_get; ///
+private alias c_gst_buffer_list_get_writableFn = extern(C) GstBuffer* function(GstBufferList* list, uint idx) nothrow;
+__gshared c_gst_buffer_list_get_writableFn c_gst_buffer_list_get_writable; ///
+private alias c_gst_buffer_list_insertFn = extern(C) void function(GstBufferList* list, int idx, GstBuffer* buffer) nothrow;
+__gshared c_gst_buffer_list_insertFn c_gst_buffer_list_insert; ///
+private alias c_gst_buffer_list_is_writableFn = extern(C) gboolean function(const(GstBufferList)* list) nothrow;
+__gshared c_gst_buffer_list_is_writableFn c_gst_buffer_list_is_writable; ///
+private alias c_gst_buffer_list_lengthFn = extern(C) uint function(GstBufferList* list) nothrow;
+__gshared c_gst_buffer_list_lengthFn c_gst_buffer_list_length; ///
+private alias c_gst_buffer_list_make_writableFn = extern(C) GstBufferList* function(GstBufferList* list) nothrow;
+__gshared c_gst_buffer_list_make_writableFn c_gst_buffer_list_make_writable; ///
+private alias c_gst_buffer_list_refFn = extern(C) GstBufferList* function(GstBufferList* list) nothrow;
+__gshared c_gst_buffer_list_refFn c_gst_buffer_list_ref; ///
+private alias c_gst_buffer_list_removeFn = extern(C) void function(GstBufferList* list, uint idx, uint length) nothrow;
+__gshared c_gst_buffer_list_removeFn c_gst_buffer_list_remove; ///
+private alias c_gst_buffer_list_unrefFn = extern(C) void function(GstBufferList* list) nothrow;
+__gshared c_gst_buffer_list_unrefFn c_gst_buffer_list_unref; ///
+private alias c_gst_buffer_list_replaceFn = extern(C) gboolean function(GstBufferList** oldList, GstBufferList* newList) nothrow;
+__gshared c_gst_buffer_list_replaceFn c_gst_buffer_list_replace; ///
+private alias c_gst_buffer_list_stealFn = extern(C) GstBufferList* function(GstBufferList** oldList) nothrow;
+__gshared c_gst_buffer_list_stealFn c_gst_buffer_list_steal; ///
+private alias c_gst_buffer_list_takeFn = extern(C) gboolean function(GstBufferList** oldList, GstBufferList* newList) nothrow;
+__gshared c_gst_buffer_list_takeFn c_gst_buffer_list_take; ///
+
+// BufferPool
+private alias c_gst_buffer_pool_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_buffer_pool_get_typeFn c_gst_buffer_pool_get_type; ///
+private alias c_gst_buffer_pool_newFn = extern(C) GstBufferPool* function() nothrow;
+__gshared c_gst_buffer_pool_newFn c_gst_buffer_pool_new; ///
+private alias c_gst_buffer_pool_config_add_optionFn = extern(C) void function(GstStructure* config, const(char)* option) nothrow;
+__gshared c_gst_buffer_pool_config_add_optionFn c_gst_buffer_pool_config_add_option; ///
+private alias c_gst_buffer_pool_config_get_allocatorFn = extern(C) gboolean function(GstStructure* config, GstAllocator** allocator, GstAllocationParams* params) nothrow;
+__gshared c_gst_buffer_pool_config_get_allocatorFn c_gst_buffer_pool_config_get_allocator; ///
+private alias c_gst_buffer_pool_config_get_optionFn = extern(C) const(char)* function(GstStructure* config, uint index) nothrow;
+__gshared c_gst_buffer_pool_config_get_optionFn c_gst_buffer_pool_config_get_option; ///
+private alias c_gst_buffer_pool_config_get_paramsFn = extern(C) gboolean function(GstStructure* config, GstCaps** caps, uint* size, uint* minBuffers, uint* maxBuffers) nothrow;
+__gshared c_gst_buffer_pool_config_get_paramsFn c_gst_buffer_pool_config_get_params; ///
+private alias c_gst_buffer_pool_config_has_optionFn = extern(C) gboolean function(GstStructure* config, const(char)* option) nothrow;
+__gshared c_gst_buffer_pool_config_has_optionFn c_gst_buffer_pool_config_has_option; ///
+private alias c_gst_buffer_pool_config_n_optionsFn = extern(C) uint function(GstStructure* config) nothrow;
+__gshared c_gst_buffer_pool_config_n_optionsFn c_gst_buffer_pool_config_n_options; ///
+private alias c_gst_buffer_pool_config_set_allocatorFn = extern(C) void function(GstStructure* config, GstAllocator* allocator, const(GstAllocationParams)* params) nothrow;
+__gshared c_gst_buffer_pool_config_set_allocatorFn c_gst_buffer_pool_config_set_allocator; ///
+private alias c_gst_buffer_pool_config_set_paramsFn = extern(C) void function(GstStructure* config, GstCaps* caps, uint size, uint minBuffers, uint maxBuffers) nothrow;
+__gshared c_gst_buffer_pool_config_set_paramsFn c_gst_buffer_pool_config_set_params; ///
+private alias c_gst_buffer_pool_config_validate_paramsFn = extern(C) gboolean function(GstStructure* config, GstCaps* caps, uint size, uint minBuffers, uint maxBuffers) nothrow;
+__gshared c_gst_buffer_pool_config_validate_paramsFn c_gst_buffer_pool_config_validate_params; ///
+private alias c_gst_buffer_pool_acquire_bufferFn = extern(C) GstFlowReturn function(GstBufferPool* pool, GstBuffer** buffer, GstBufferPoolAcquireParams* params) nothrow;
+__gshared c_gst_buffer_pool_acquire_bufferFn c_gst_buffer_pool_acquire_buffer; ///
+private alias c_gst_buffer_pool_get_configFn = extern(C) GstStructure* function(GstBufferPool* pool) nothrow;
+__gshared c_gst_buffer_pool_get_configFn c_gst_buffer_pool_get_config; ///
+private alias c_gst_buffer_pool_get_optionsFn = extern(C) const(char*)* function(GstBufferPool* pool) nothrow;
+__gshared c_gst_buffer_pool_get_optionsFn c_gst_buffer_pool_get_options; ///
+private alias c_gst_buffer_pool_has_optionFn = extern(C) gboolean function(GstBufferPool* pool, const(char)* option) nothrow;
+__gshared c_gst_buffer_pool_has_optionFn c_gst_buffer_pool_has_option; ///
+private alias c_gst_buffer_pool_is_activeFn = extern(C) gboolean function(GstBufferPool* pool) nothrow;
+__gshared c_gst_buffer_pool_is_activeFn c_gst_buffer_pool_is_active; ///
+private alias c_gst_buffer_pool_release_bufferFn = extern(C) void function(GstBufferPool* pool, GstBuffer* buffer) nothrow;
+__gshared c_gst_buffer_pool_release_bufferFn c_gst_buffer_pool_release_buffer; ///
+private alias c_gst_buffer_pool_set_activeFn = extern(C) gboolean function(GstBufferPool* pool, gboolean active) nothrow;
+__gshared c_gst_buffer_pool_set_activeFn c_gst_buffer_pool_set_active; ///
+private alias c_gst_buffer_pool_set_configFn = extern(C) gboolean function(GstBufferPool* pool, GstStructure* config) nothrow;
+__gshared c_gst_buffer_pool_set_configFn c_gst_buffer_pool_set_config; ///
+private alias c_gst_buffer_pool_set_flushingFn = extern(C) void function(GstBufferPool* pool, gboolean flushing) nothrow;
+__gshared c_gst_buffer_pool_set_flushingFn c_gst_buffer_pool_set_flushing; ///
+
+// Bus
+private alias c_gst_bus_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_bus_get_typeFn c_gst_bus_get_type; ///
+private alias c_gst_bus_newFn = extern(C) GstBus* function() nothrow;
+__gshared c_gst_bus_newFn c_gst_bus_new; ///
+private alias c_gst_bus_add_signal_watchFn = extern(C) void function(GstBus* bus) nothrow;
+__gshared c_gst_bus_add_signal_watchFn c_gst_bus_add_signal_watch; ///
+private alias c_gst_bus_add_signal_watch_fullFn = extern(C) void function(GstBus* bus, int priority) nothrow;
+__gshared c_gst_bus_add_signal_watch_fullFn c_gst_bus_add_signal_watch_full; ///
+private alias c_gst_bus_add_watchFn = extern(C) uint function(GstBus* bus, GstBusFunc func, void* userData) nothrow;
+__gshared c_gst_bus_add_watchFn c_gst_bus_add_watch; ///
+private alias c_gst_bus_add_watch_fullFn = extern(C) uint function(GstBus* bus, int priority, GstBusFunc func, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_bus_add_watch_fullFn c_gst_bus_add_watch_full; ///
+private alias c_gst_bus_async_signal_funcFn = extern(C) gboolean function(GstBus* bus, GstMessage* message, void* data) nothrow;
+__gshared c_gst_bus_async_signal_funcFn c_gst_bus_async_signal_func; ///
+private alias c_gst_bus_create_watchFn = extern(C) GSource* function(GstBus* bus) nothrow;
+__gshared c_gst_bus_create_watchFn c_gst_bus_create_watch; ///
+private alias c_gst_bus_disable_sync_message_emissionFn = extern(C) void function(GstBus* bus) nothrow;
+__gshared c_gst_bus_disable_sync_message_emissionFn c_gst_bus_disable_sync_message_emission; ///
+private alias c_gst_bus_enable_sync_message_emissionFn = extern(C) void function(GstBus* bus) nothrow;
+__gshared c_gst_bus_enable_sync_message_emissionFn c_gst_bus_enable_sync_message_emission; ///
+private alias c_gst_bus_get_pollfdFn = extern(C) void function(GstBus* bus, GPollFD* fd) nothrow;
+__gshared c_gst_bus_get_pollfdFn c_gst_bus_get_pollfd; ///
+private alias c_gst_bus_have_pendingFn = extern(C) gboolean function(GstBus* bus) nothrow;
+__gshared c_gst_bus_have_pendingFn c_gst_bus_have_pending; ///
+private alias c_gst_bus_peekFn = extern(C) GstMessage* function(GstBus* bus) nothrow;
+__gshared c_gst_bus_peekFn c_gst_bus_peek; ///
+private alias c_gst_bus_pollFn = extern(C) GstMessage* function(GstBus* bus, GstMessageType events, GstClockTime timeout) nothrow;
+__gshared c_gst_bus_pollFn c_gst_bus_poll; ///
+private alias c_gst_bus_popFn = extern(C) GstMessage* function(GstBus* bus) nothrow;
+__gshared c_gst_bus_popFn c_gst_bus_pop; ///
+private alias c_gst_bus_pop_filteredFn = extern(C) GstMessage* function(GstBus* bus, GstMessageType types) nothrow;
+__gshared c_gst_bus_pop_filteredFn c_gst_bus_pop_filtered; ///
+private alias c_gst_bus_postFn = extern(C) gboolean function(GstBus* bus, GstMessage* message) nothrow;
+__gshared c_gst_bus_postFn c_gst_bus_post; ///
+private alias c_gst_bus_remove_signal_watchFn = extern(C) void function(GstBus* bus) nothrow;
+__gshared c_gst_bus_remove_signal_watchFn c_gst_bus_remove_signal_watch; ///
+private alias c_gst_bus_remove_watchFn = extern(C) gboolean function(GstBus* bus) nothrow;
+__gshared c_gst_bus_remove_watchFn c_gst_bus_remove_watch; ///
+private alias c_gst_bus_set_flushingFn = extern(C) void function(GstBus* bus, gboolean flushing) nothrow;
+__gshared c_gst_bus_set_flushingFn c_gst_bus_set_flushing; ///
+private alias c_gst_bus_set_sync_handlerFn = extern(C) void function(GstBus* bus, GstBusSyncHandler func, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_bus_set_sync_handlerFn c_gst_bus_set_sync_handler; ///
+private alias c_gst_bus_sync_signal_handlerFn = extern(C) GstBusSyncReply function(GstBus* bus, GstMessage* message, void* data) nothrow;
+__gshared c_gst_bus_sync_signal_handlerFn c_gst_bus_sync_signal_handler; ///
+private alias c_gst_bus_timed_popFn = extern(C) GstMessage* function(GstBus* bus, GstClockTime timeout) nothrow;
+__gshared c_gst_bus_timed_popFn c_gst_bus_timed_pop; ///
+private alias c_gst_bus_timed_pop_filteredFn = extern(C) GstMessage* function(GstBus* bus, GstClockTime timeout, GstMessageType types) nothrow;
+__gshared c_gst_bus_timed_pop_filteredFn c_gst_bus_timed_pop_filtered; ///
+
+// Caps
+private alias c_gst_caps_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_caps_get_typeFn c_gst_caps_get_type; ///
+private alias c_gst_caps_new_anyFn = extern(C) GstCaps* function() nothrow;
+__gshared c_gst_caps_new_anyFn c_gst_caps_new_any; ///
+private alias c_gst_caps_new_emptyFn = extern(C) GstCaps* function() nothrow;
+__gshared c_gst_caps_new_emptyFn c_gst_caps_new_empty; ///
+private alias c_gst_caps_new_empty_simpleFn = extern(C) GstCaps* function(const(char)* mediaType) nothrow;
+__gshared c_gst_caps_new_empty_simpleFn c_gst_caps_new_empty_simple; ///
+private alias c_gst_caps_new_fullFn = extern(C) GstCaps* function(GstStructure* struct1,  ...) nothrow;
+__gshared c_gst_caps_new_fullFn c_gst_caps_new_full; ///
+private alias c_gst_caps_new_full_valistFn = extern(C) GstCaps* function(GstStructure* structure, void* varArgs) nothrow;
+__gshared c_gst_caps_new_full_valistFn c_gst_caps_new_full_valist; ///
+private alias c_gst_caps_new_id_str_empty_simpleFn = extern(C) GstCaps* function(const(GstIdStr)* mediaType) nothrow;
+__gshared c_gst_caps_new_id_str_empty_simpleFn c_gst_caps_new_id_str_empty_simple; ///
+private alias c_gst_caps_new_id_str_simpleFn = extern(C) GstCaps* function(const(GstIdStr)* mediaType, const(GstIdStr)* fieldname,  ...) nothrow;
+__gshared c_gst_caps_new_id_str_simpleFn c_gst_caps_new_id_str_simple; ///
+private alias c_gst_caps_new_simpleFn = extern(C) GstCaps* function(const(char)* mediaType, const(char)* fieldname,  ...) nothrow;
+__gshared c_gst_caps_new_simpleFn c_gst_caps_new_simple; ///
+private alias c_gst_caps_new_static_str_empty_simpleFn = extern(C) GstCaps* function(const(char)* mediaType) nothrow;
+__gshared c_gst_caps_new_static_str_empty_simpleFn c_gst_caps_new_static_str_empty_simple; ///
+private alias c_gst_caps_new_static_str_simpleFn = extern(C) GstCaps* function(const(char)* mediaType, const(char)* fieldname,  ...) nothrow;
+__gshared c_gst_caps_new_static_str_simpleFn c_gst_caps_new_static_str_simple; ///
+private alias c_gst_caps_appendFn = extern(C) void function(GstCaps* caps1, GstCaps* caps2) nothrow;
+__gshared c_gst_caps_appendFn c_gst_caps_append; ///
+private alias c_gst_caps_append_structureFn = extern(C) void function(GstCaps* caps, GstStructure* structure) nothrow;
+__gshared c_gst_caps_append_structureFn c_gst_caps_append_structure; ///
+private alias c_gst_caps_append_structure_fullFn = extern(C) void function(GstCaps* caps, GstStructure* structure, GstCapsFeatures* features) nothrow;
+__gshared c_gst_caps_append_structure_fullFn c_gst_caps_append_structure_full; ///
+private alias c_gst_caps_can_intersectFn = extern(C) gboolean function(const(GstCaps)* caps1, const(GstCaps)* caps2) nothrow;
+__gshared c_gst_caps_can_intersectFn c_gst_caps_can_intersect; ///
+private alias c_gst_caps_copyFn = extern(C) GstCaps* function(const(GstCaps)* caps) nothrow;
+__gshared c_gst_caps_copyFn c_gst_caps_copy; ///
+private alias c_gst_caps_copy_nthFn = extern(C) GstCaps* function(const(GstCaps)* caps, uint nth) nothrow;
+__gshared c_gst_caps_copy_nthFn c_gst_caps_copy_nth; ///
+private alias c_gst_caps_filter_and_map_in_placeFn = extern(C) void function(GstCaps* caps, GstCapsFilterMapFunc func, void* userData) nothrow;
+__gshared c_gst_caps_filter_and_map_in_placeFn c_gst_caps_filter_and_map_in_place; ///
+private alias c_gst_caps_fixateFn = extern(C) GstCaps* function(GstCaps* caps) nothrow;
+__gshared c_gst_caps_fixateFn c_gst_caps_fixate; ///
+private alias c_gst_caps_foreachFn = extern(C) gboolean function(const(GstCaps)* caps, GstCapsForeachFunc func, void* userData) nothrow;
+__gshared c_gst_caps_foreachFn c_gst_caps_foreach; ///
+private alias c_gst_caps_get_featuresFn = extern(C) GstCapsFeatures* function(const(GstCaps)* caps, uint index) nothrow;
+__gshared c_gst_caps_get_featuresFn c_gst_caps_get_features; ///
+private alias c_gst_caps_get_sizeFn = extern(C) uint function(const(GstCaps)* caps) nothrow;
+__gshared c_gst_caps_get_sizeFn c_gst_caps_get_size; ///
+private alias c_gst_caps_get_structureFn = extern(C) GstStructure* function(const(GstCaps)* caps, uint index) nothrow;
+__gshared c_gst_caps_get_structureFn c_gst_caps_get_structure; ///
+private alias c_gst_caps_id_str_set_simpleFn = extern(C) void function(GstCaps* caps, const(GstIdStr)* field,  ...) nothrow;
+__gshared c_gst_caps_id_str_set_simpleFn c_gst_caps_id_str_set_simple; ///
+private alias c_gst_caps_id_str_set_simple_valistFn = extern(C) void function(GstCaps* caps, const(GstIdStr)* field, void* varargs) nothrow;
+__gshared c_gst_caps_id_str_set_simple_valistFn c_gst_caps_id_str_set_simple_valist; ///
+private alias c_gst_caps_id_str_set_valueFn = extern(C) void function(GstCaps* caps, const(GstIdStr)* field, const(GValue)* value) nothrow;
+__gshared c_gst_caps_id_str_set_valueFn c_gst_caps_id_str_set_value; ///
+private alias c_gst_caps_intersectFn = extern(C) GstCaps* function(GstCaps* caps1, GstCaps* caps2) nothrow;
+__gshared c_gst_caps_intersectFn c_gst_caps_intersect; ///
+private alias c_gst_caps_intersect_fullFn = extern(C) GstCaps* function(GstCaps* caps1, GstCaps* caps2, GstCapsIntersectMode mode) nothrow;
+__gshared c_gst_caps_intersect_fullFn c_gst_caps_intersect_full; ///
+private alias c_gst_caps_is_always_compatibleFn = extern(C) gboolean function(const(GstCaps)* caps1, const(GstCaps)* caps2) nothrow;
+__gshared c_gst_caps_is_always_compatibleFn c_gst_caps_is_always_compatible; ///
+private alias c_gst_caps_is_anyFn = extern(C) gboolean function(const(GstCaps)* caps) nothrow;
+__gshared c_gst_caps_is_anyFn c_gst_caps_is_any; ///
+private alias c_gst_caps_is_emptyFn = extern(C) gboolean function(const(GstCaps)* caps) nothrow;
+__gshared c_gst_caps_is_emptyFn c_gst_caps_is_empty; ///
+private alias c_gst_caps_is_equalFn = extern(C) gboolean function(const(GstCaps)* caps1, const(GstCaps)* caps2) nothrow;
+__gshared c_gst_caps_is_equalFn c_gst_caps_is_equal; ///
+private alias c_gst_caps_is_equal_fixedFn = extern(C) gboolean function(const(GstCaps)* caps1, const(GstCaps)* caps2) nothrow;
+__gshared c_gst_caps_is_equal_fixedFn c_gst_caps_is_equal_fixed; ///
+private alias c_gst_caps_is_fixedFn = extern(C) gboolean function(const(GstCaps)* caps) nothrow;
+__gshared c_gst_caps_is_fixedFn c_gst_caps_is_fixed; ///
+private alias c_gst_caps_is_strictly_equalFn = extern(C) gboolean function(const(GstCaps)* caps1, const(GstCaps)* caps2) nothrow;
+__gshared c_gst_caps_is_strictly_equalFn c_gst_caps_is_strictly_equal; ///
+private alias c_gst_caps_is_subsetFn = extern(C) gboolean function(const(GstCaps)* subset, const(GstCaps)* superset) nothrow;
+__gshared c_gst_caps_is_subsetFn c_gst_caps_is_subset; ///
+private alias c_gst_caps_is_subset_structureFn = extern(C) gboolean function(const(GstCaps)* caps, const(GstStructure)* structure) nothrow;
+__gshared c_gst_caps_is_subset_structureFn c_gst_caps_is_subset_structure; ///
+private alias c_gst_caps_is_subset_structure_fullFn = extern(C) gboolean function(const(GstCaps)* caps, const(GstStructure)* structure, const(GstCapsFeatures)* features) nothrow;
+__gshared c_gst_caps_is_subset_structure_fullFn c_gst_caps_is_subset_structure_full; ///
+private alias c_gst_caps_is_writableFn = extern(C) gboolean function(const(GstCaps)* caps) nothrow;
+__gshared c_gst_caps_is_writableFn c_gst_caps_is_writable; ///
+private alias c_gst_caps_make_writableFn = extern(C) GstCaps* function(GstCaps* caps) nothrow;
+__gshared c_gst_caps_make_writableFn c_gst_caps_make_writable; ///
+private alias c_gst_caps_map_in_placeFn = extern(C) gboolean function(GstCaps* caps, GstCapsMapFunc func, void* userData) nothrow;
+__gshared c_gst_caps_map_in_placeFn c_gst_caps_map_in_place; ///
+private alias c_gst_caps_mergeFn = extern(C) GstCaps* function(GstCaps* caps1, GstCaps* caps2) nothrow;
+__gshared c_gst_caps_mergeFn c_gst_caps_merge; ///
+private alias c_gst_caps_merge_structureFn = extern(C) GstCaps* function(GstCaps* caps, GstStructure* structure) nothrow;
+__gshared c_gst_caps_merge_structureFn c_gst_caps_merge_structure; ///
+private alias c_gst_caps_merge_structure_fullFn = extern(C) GstCaps* function(GstCaps* caps, GstStructure* structure, GstCapsFeatures* features) nothrow;
+__gshared c_gst_caps_merge_structure_fullFn c_gst_caps_merge_structure_full; ///
+private alias c_gst_caps_normalizeFn = extern(C) GstCaps* function(GstCaps* caps) nothrow;
+__gshared c_gst_caps_normalizeFn c_gst_caps_normalize; ///
+private alias c_gst_caps_refFn = extern(C) GstCaps* function(GstCaps* caps) nothrow;
+__gshared c_gst_caps_refFn c_gst_caps_ref; ///
+private alias c_gst_caps_remove_structureFn = extern(C) void function(GstCaps* caps, uint idx) nothrow;
+__gshared c_gst_caps_remove_structureFn c_gst_caps_remove_structure; ///
+private alias c_gst_caps_serializeFn = extern(C) char* function(const(GstCaps)* caps, GstSerializeFlags flags) nothrow;
+__gshared c_gst_caps_serializeFn c_gst_caps_serialize; ///
+private alias c_gst_caps_set_featuresFn = extern(C) void function(GstCaps* caps, uint index, GstCapsFeatures* features) nothrow;
+__gshared c_gst_caps_set_featuresFn c_gst_caps_set_features; ///
+private alias c_gst_caps_set_features_simpleFn = extern(C) void function(GstCaps* caps, GstCapsFeatures* features) nothrow;
+__gshared c_gst_caps_set_features_simpleFn c_gst_caps_set_features_simple; ///
+private alias c_gst_caps_set_simpleFn = extern(C) void function(GstCaps* caps, const(char)* field,  ...) nothrow;
+__gshared c_gst_caps_set_simpleFn c_gst_caps_set_simple; ///
+private alias c_gst_caps_set_simple_static_strFn = extern(C) void function(GstCaps* caps, const(char)* field,  ...) nothrow;
+__gshared c_gst_caps_set_simple_static_strFn c_gst_caps_set_simple_static_str; ///
+private alias c_gst_caps_set_simple_static_str_valistFn = extern(C) void function(GstCaps* caps, const(char)* field, void* varargs) nothrow;
+__gshared c_gst_caps_set_simple_static_str_valistFn c_gst_caps_set_simple_static_str_valist; ///
+private alias c_gst_caps_set_simple_valistFn = extern(C) void function(GstCaps* caps, const(char)* field, void* varargs) nothrow;
+__gshared c_gst_caps_set_simple_valistFn c_gst_caps_set_simple_valist; ///
+private alias c_gst_caps_set_valueFn = extern(C) void function(GstCaps* caps, const(char)* field, const(GValue)* value) nothrow;
+__gshared c_gst_caps_set_valueFn c_gst_caps_set_value; ///
+private alias c_gst_caps_set_value_static_strFn = extern(C) void function(GstCaps* caps, const(char)* field, const(GValue)* value) nothrow;
+__gshared c_gst_caps_set_value_static_strFn c_gst_caps_set_value_static_str; ///
+private alias c_gst_caps_simplifyFn = extern(C) GstCaps* function(GstCaps* caps) nothrow;
+__gshared c_gst_caps_simplifyFn c_gst_caps_simplify; ///
+private alias c_gst_caps_steal_structureFn = extern(C) GstStructure* function(GstCaps* caps, uint index) nothrow;
+__gshared c_gst_caps_steal_structureFn c_gst_caps_steal_structure; ///
+private alias c_gst_caps_subtractFn = extern(C) GstCaps* function(GstCaps* minuend, GstCaps* subtrahend) nothrow;
+__gshared c_gst_caps_subtractFn c_gst_caps_subtract; ///
+private alias c_gst_caps_to_stringFn = extern(C) char* function(const(GstCaps)* caps) nothrow;
+__gshared c_gst_caps_to_stringFn c_gst_caps_to_string; ///
+private alias c_gst_caps_truncateFn = extern(C) GstCaps* function(GstCaps* caps) nothrow;
+__gshared c_gst_caps_truncateFn c_gst_caps_truncate; ///
+private alias c_gst_caps_unrefFn = extern(C) void function(GstCaps* caps) nothrow;
+__gshared c_gst_caps_unrefFn c_gst_caps_unref; ///
+private alias c_gst_caps_from_stringFn = extern(C) GstCaps* function(const(char)* string_) nothrow;
+__gshared c_gst_caps_from_stringFn c_gst_caps_from_string; ///
+private alias c_gst_caps_replaceFn = extern(C) gboolean function(GstCaps** oldCaps, GstCaps* newCaps) nothrow;
+__gshared c_gst_caps_replaceFn c_gst_caps_replace; ///
+private alias c_gst_caps_stealFn = extern(C) GstCaps* function(GstCaps** oldCaps) nothrow;
+__gshared c_gst_caps_stealFn c_gst_caps_steal; ///
+private alias c_gst_caps_takeFn = extern(C) gboolean function(GstCaps** oldCaps, GstCaps* newCaps) nothrow;
+__gshared c_gst_caps_takeFn c_gst_caps_take; ///
+
+// CapsFeatures
+private alias c_gst_caps_features_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_caps_features_get_typeFn c_gst_caps_features_get_type; ///
+private alias c_gst_caps_features_newFn = extern(C) GstCapsFeatures* function(const(char)* feature1,  ...) nothrow;
+__gshared c_gst_caps_features_newFn c_gst_caps_features_new; ///
+private alias c_gst_caps_features_new_anyFn = extern(C) GstCapsFeatures* function() nothrow;
+__gshared c_gst_caps_features_new_anyFn c_gst_caps_features_new_any; ///
+private alias c_gst_caps_features_new_emptyFn = extern(C) GstCapsFeatures* function() nothrow;
+__gshared c_gst_caps_features_new_emptyFn c_gst_caps_features_new_empty; ///
+private alias c_gst_caps_features_new_idFn = extern(C) GstCapsFeatures* function(GQuark feature1,  ...) nothrow;
+__gshared c_gst_caps_features_new_idFn c_gst_caps_features_new_id; ///
+private alias c_gst_caps_features_new_id_strFn = extern(C) GstCapsFeatures* function(const(GstIdStr)* feature1,  ...) nothrow;
+__gshared c_gst_caps_features_new_id_strFn c_gst_caps_features_new_id_str; ///
+private alias c_gst_caps_features_new_id_str_valistFn = extern(C) GstCapsFeatures* function(const(GstIdStr)* feature1, void* varargs) nothrow;
+__gshared c_gst_caps_features_new_id_str_valistFn c_gst_caps_features_new_id_str_valist; ///
+private alias c_gst_caps_features_new_id_valistFn = extern(C) GstCapsFeatures* function(GQuark feature1, void* varargs) nothrow;
+__gshared c_gst_caps_features_new_id_valistFn c_gst_caps_features_new_id_valist; ///
+private alias c_gst_caps_features_new_singleFn = extern(C) GstCapsFeatures* function(const(char)* feature) nothrow;
+__gshared c_gst_caps_features_new_singleFn c_gst_caps_features_new_single; ///
+private alias c_gst_caps_features_new_single_static_strFn = extern(C) GstCapsFeatures* function(const(char)* feature) nothrow;
+__gshared c_gst_caps_features_new_single_static_strFn c_gst_caps_features_new_single_static_str; ///
+private alias c_gst_caps_features_new_static_strFn = extern(C) GstCapsFeatures* function(const(char)* feature1,  ...) nothrow;
+__gshared c_gst_caps_features_new_static_strFn c_gst_caps_features_new_static_str; ///
+private alias c_gst_caps_features_new_static_str_valistFn = extern(C) GstCapsFeatures* function(const(char)* feature1, void* varargs) nothrow;
+__gshared c_gst_caps_features_new_static_str_valistFn c_gst_caps_features_new_static_str_valist; ///
+private alias c_gst_caps_features_new_valistFn = extern(C) GstCapsFeatures* function(const(char)* feature1, void* varargs) nothrow;
+__gshared c_gst_caps_features_new_valistFn c_gst_caps_features_new_valist; ///
+private alias c_gst_caps_features_addFn = extern(C) void function(GstCapsFeatures* features, const(char)* feature) nothrow;
+__gshared c_gst_caps_features_addFn c_gst_caps_features_add; ///
+private alias c_gst_caps_features_add_idFn = extern(C) void function(GstCapsFeatures* features, GQuark feature) nothrow;
+__gshared c_gst_caps_features_add_idFn c_gst_caps_features_add_id; ///
+private alias c_gst_caps_features_add_id_strFn = extern(C) void function(GstCapsFeatures* features, const(GstIdStr)* feature) nothrow;
+__gshared c_gst_caps_features_add_id_strFn c_gst_caps_features_add_id_str; ///
+private alias c_gst_caps_features_add_static_strFn = extern(C) void function(GstCapsFeatures* features, const(char)* feature) nothrow;
+__gshared c_gst_caps_features_add_static_strFn c_gst_caps_features_add_static_str; ///
+private alias c_gst_caps_features_containsFn = extern(C) gboolean function(const(GstCapsFeatures)* features, const(char)* feature) nothrow;
+__gshared c_gst_caps_features_containsFn c_gst_caps_features_contains; ///
+private alias c_gst_caps_features_contains_idFn = extern(C) gboolean function(const(GstCapsFeatures)* features, GQuark feature) nothrow;
+__gshared c_gst_caps_features_contains_idFn c_gst_caps_features_contains_id; ///
+private alias c_gst_caps_features_contains_id_strFn = extern(C) gboolean function(const(GstCapsFeatures)* features, const(GstIdStr)* feature) nothrow;
+__gshared c_gst_caps_features_contains_id_strFn c_gst_caps_features_contains_id_str; ///
+private alias c_gst_caps_features_copyFn = extern(C) GstCapsFeatures* function(const(GstCapsFeatures)* features) nothrow;
+__gshared c_gst_caps_features_copyFn c_gst_caps_features_copy; ///
+private alias c_gst_caps_features_freeFn = extern(C) void function(GstCapsFeatures* features) nothrow;
+__gshared c_gst_caps_features_freeFn c_gst_caps_features_free; ///
+private alias c_gst_caps_features_get_nthFn = extern(C) const(char)* function(const(GstCapsFeatures)* features, uint i) nothrow;
+__gshared c_gst_caps_features_get_nthFn c_gst_caps_features_get_nth; ///
+private alias c_gst_caps_features_get_nth_idFn = extern(C) GQuark function(const(GstCapsFeatures)* features, uint i) nothrow;
+__gshared c_gst_caps_features_get_nth_idFn c_gst_caps_features_get_nth_id; ///
+private alias c_gst_caps_features_get_nth_id_strFn = extern(C) const(GstIdStr)* function(const(GstCapsFeatures)* features, uint i) nothrow;
+__gshared c_gst_caps_features_get_nth_id_strFn c_gst_caps_features_get_nth_id_str; ///
+private alias c_gst_caps_features_get_sizeFn = extern(C) uint function(const(GstCapsFeatures)* features) nothrow;
+__gshared c_gst_caps_features_get_sizeFn c_gst_caps_features_get_size; ///
+private alias c_gst_caps_features_is_anyFn = extern(C) gboolean function(const(GstCapsFeatures)* features) nothrow;
+__gshared c_gst_caps_features_is_anyFn c_gst_caps_features_is_any; ///
+private alias c_gst_caps_features_is_equalFn = extern(C) gboolean function(const(GstCapsFeatures)* features1, const(GstCapsFeatures)* features2) nothrow;
+__gshared c_gst_caps_features_is_equalFn c_gst_caps_features_is_equal; ///
+private alias c_gst_caps_features_removeFn = extern(C) void function(GstCapsFeatures* features, const(char)* feature) nothrow;
+__gshared c_gst_caps_features_removeFn c_gst_caps_features_remove; ///
+private alias c_gst_caps_features_remove_idFn = extern(C) void function(GstCapsFeatures* features, GQuark feature) nothrow;
+__gshared c_gst_caps_features_remove_idFn c_gst_caps_features_remove_id; ///
+private alias c_gst_caps_features_remove_id_strFn = extern(C) void function(GstCapsFeatures* features, const(GstIdStr)* feature) nothrow;
+__gshared c_gst_caps_features_remove_id_strFn c_gst_caps_features_remove_id_str; ///
+private alias c_gst_caps_features_set_parent_refcountFn = extern(C) gboolean function(GstCapsFeatures* features, int* refcount) nothrow;
+__gshared c_gst_caps_features_set_parent_refcountFn c_gst_caps_features_set_parent_refcount; ///
+private alias c_gst_caps_features_to_stringFn = extern(C) char* function(const(GstCapsFeatures)* features) nothrow;
+__gshared c_gst_caps_features_to_stringFn c_gst_caps_features_to_string; ///
+private alias c_gst_caps_features_from_stringFn = extern(C) GstCapsFeatures* function(const(char)* features) nothrow;
+__gshared c_gst_caps_features_from_stringFn c_gst_caps_features_from_string; ///
+
+// ChildProxy
+private alias c_gst_child_proxy_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_child_proxy_get_typeFn c_gst_child_proxy_get_type; ///
+private alias c_gst_child_proxy_child_addedFn = extern(C) void function(GstChildProxy* parent, GObject* child, const(char)* name) nothrow;
+__gshared c_gst_child_proxy_child_addedFn c_gst_child_proxy_child_added; ///
+private alias c_gst_child_proxy_child_removedFn = extern(C) void function(GstChildProxy* parent, GObject* child, const(char)* name) nothrow;
+__gshared c_gst_child_proxy_child_removedFn c_gst_child_proxy_child_removed; ///
+private alias c_gst_child_proxy_getFn = extern(C) void function(GstChildProxy* object, const(char)* firstPropertyName,  ...) nothrow;
+__gshared c_gst_child_proxy_getFn c_gst_child_proxy_get; ///
+private alias c_gst_child_proxy_get_child_by_indexFn = extern(C) GObject* function(GstChildProxy* parent, uint index) nothrow;
+__gshared c_gst_child_proxy_get_child_by_indexFn c_gst_child_proxy_get_child_by_index; ///
+private alias c_gst_child_proxy_get_child_by_nameFn = extern(C) GObject* function(GstChildProxy* parent, const(char)* name) nothrow;
+__gshared c_gst_child_proxy_get_child_by_nameFn c_gst_child_proxy_get_child_by_name; ///
+private alias c_gst_child_proxy_get_child_by_name_recurseFn = extern(C) GObject* function(GstChildProxy* childProxy, const(char)* name) nothrow;
+__gshared c_gst_child_proxy_get_child_by_name_recurseFn c_gst_child_proxy_get_child_by_name_recurse; ///
+private alias c_gst_child_proxy_get_children_countFn = extern(C) uint function(GstChildProxy* parent) nothrow;
+__gshared c_gst_child_proxy_get_children_countFn c_gst_child_proxy_get_children_count; ///
+private alias c_gst_child_proxy_get_propertyFn = extern(C) void function(GstChildProxy* object, const(char)* name, GValue* value) nothrow;
+__gshared c_gst_child_proxy_get_propertyFn c_gst_child_proxy_get_property; ///
+private alias c_gst_child_proxy_get_valistFn = extern(C) void function(GstChildProxy* object, const(char)* firstPropertyName, void* varArgs) nothrow;
+__gshared c_gst_child_proxy_get_valistFn c_gst_child_proxy_get_valist; ///
+private alias c_gst_child_proxy_lookupFn = extern(C) gboolean function(GstChildProxy* object, const(char)* name, GObject** target, GParamSpec** pspec) nothrow;
+__gshared c_gst_child_proxy_lookupFn c_gst_child_proxy_lookup; ///
+private alias c_gst_child_proxy_setFn = extern(C) void function(GstChildProxy* object, const(char)* firstPropertyName,  ...) nothrow;
+__gshared c_gst_child_proxy_setFn c_gst_child_proxy_set; ///
+private alias c_gst_child_proxy_set_propertyFn = extern(C) void function(GstChildProxy* object, const(char)* name, const(GValue)* value) nothrow;
+__gshared c_gst_child_proxy_set_propertyFn c_gst_child_proxy_set_property; ///
+private alias c_gst_child_proxy_set_valistFn = extern(C) void function(GstChildProxy* object, const(char)* firstPropertyName, void* varArgs) nothrow;
+__gshared c_gst_child_proxy_set_valistFn c_gst_child_proxy_set_valist; ///
+
+// Clock
+private alias c_gst_clock_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_clock_get_typeFn c_gst_clock_get_type; ///
+private alias c_gst_clock_id_compare_funcFn = extern(C) int function(const(void)* id1, const(void)* id2) nothrow;
+__gshared c_gst_clock_id_compare_funcFn c_gst_clock_id_compare_func; ///
+private alias c_gst_clock_id_get_clockFn = extern(C) GstClock* function(GstClockID id) nothrow;
+__gshared c_gst_clock_id_get_clockFn c_gst_clock_id_get_clock; ///
+private alias c_gst_clock_id_get_timeFn = extern(C) GstClockTime function(GstClockID id) nothrow;
+__gshared c_gst_clock_id_get_timeFn c_gst_clock_id_get_time; ///
+private alias c_gst_clock_id_refFn = extern(C) GstClockID function(GstClockID id) nothrow;
+__gshared c_gst_clock_id_refFn c_gst_clock_id_ref; ///
+private alias c_gst_clock_id_unrefFn = extern(C) void function(GstClockID id) nothrow;
+__gshared c_gst_clock_id_unrefFn c_gst_clock_id_unref; ///
+private alias c_gst_clock_id_unscheduleFn = extern(C) void function(GstClockID id) nothrow;
+__gshared c_gst_clock_id_unscheduleFn c_gst_clock_id_unschedule; ///
+private alias c_gst_clock_id_uses_clockFn = extern(C) gboolean function(GstClockID id, GstClock* clock) nothrow;
+__gshared c_gst_clock_id_uses_clockFn c_gst_clock_id_uses_clock; ///
+private alias c_gst_clock_id_waitFn = extern(C) GstClockReturn function(GstClockID id, GstClockTimeDiff* jitter) nothrow;
+__gshared c_gst_clock_id_waitFn c_gst_clock_id_wait; ///
+private alias c_gst_clock_id_wait_asyncFn = extern(C) GstClockReturn function(GstClockID id, GstClockCallback func, void* userData, GDestroyNotify destroyData) nothrow;
+__gshared c_gst_clock_id_wait_asyncFn c_gst_clock_id_wait_async; ///
+private alias c_gst_clock_add_observationFn = extern(C) gboolean function(GstClock* clock, GstClockTime observationInternal, GstClockTime observationExternal, double* rSquared) nothrow;
+__gshared c_gst_clock_add_observationFn c_gst_clock_add_observation; ///
+private alias c_gst_clock_add_observation_unappliedFn = extern(C) gboolean function(GstClock* clock, GstClockTime observationInternal, GstClockTime observationExternal, double* rSquared, GstClockTime* internal, GstClockTime* external, GstClockTime* rateNum, GstClockTime* rateDenom) nothrow;
+__gshared c_gst_clock_add_observation_unappliedFn c_gst_clock_add_observation_unapplied; ///
+private alias c_gst_clock_adjust_unlockedFn = extern(C) GstClockTime function(GstClock* clock, GstClockTime internal) nothrow;
+__gshared c_gst_clock_adjust_unlockedFn c_gst_clock_adjust_unlocked; ///
+private alias c_gst_clock_adjust_with_calibrationFn = extern(C) GstClockTime function(GstClock* clock, GstClockTime internalTarget, GstClockTime cinternal, GstClockTime cexternal, GstClockTime cnum, GstClockTime cdenom) nothrow;
+__gshared c_gst_clock_adjust_with_calibrationFn c_gst_clock_adjust_with_calibration; ///
+private alias c_gst_clock_get_calibrationFn = extern(C) void function(GstClock* clock, GstClockTime* internal, GstClockTime* external, GstClockTime* rateNum, GstClockTime* rateDenom) nothrow;
+__gshared c_gst_clock_get_calibrationFn c_gst_clock_get_calibration; ///
+private alias c_gst_clock_get_internal_timeFn = extern(C) GstClockTime function(GstClock* clock) nothrow;
+__gshared c_gst_clock_get_internal_timeFn c_gst_clock_get_internal_time; ///
+private alias c_gst_clock_get_masterFn = extern(C) GstClock* function(GstClock* clock) nothrow;
+__gshared c_gst_clock_get_masterFn c_gst_clock_get_master; ///
+private alias c_gst_clock_get_resolutionFn = extern(C) GstClockTime function(GstClock* clock) nothrow;
+__gshared c_gst_clock_get_resolutionFn c_gst_clock_get_resolution; ///
+private alias c_gst_clock_get_timeFn = extern(C) GstClockTime function(GstClock* clock) nothrow;
+__gshared c_gst_clock_get_timeFn c_gst_clock_get_time; ///
+private alias c_gst_clock_get_timeoutFn = extern(C) GstClockTime function(GstClock* clock) nothrow;
+__gshared c_gst_clock_get_timeoutFn c_gst_clock_get_timeout; ///
+private alias c_gst_clock_is_syncedFn = extern(C) gboolean function(GstClock* clock) nothrow;
+__gshared c_gst_clock_is_syncedFn c_gst_clock_is_synced; ///
+private alias c_gst_clock_is_system_monotonicFn = extern(C) gboolean function(GstClock* clock) nothrow;
+__gshared c_gst_clock_is_system_monotonicFn c_gst_clock_is_system_monotonic; ///
+private alias c_gst_clock_new_periodic_idFn = extern(C) GstClockID function(GstClock* clock, GstClockTime startTime, GstClockTime interval) nothrow;
+__gshared c_gst_clock_new_periodic_idFn c_gst_clock_new_periodic_id; ///
+private alias c_gst_clock_new_single_shot_idFn = extern(C) GstClockID function(GstClock* clock, GstClockTime time) nothrow;
+__gshared c_gst_clock_new_single_shot_idFn c_gst_clock_new_single_shot_id; ///
+private alias c_gst_clock_periodic_id_reinitFn = extern(C) gboolean function(GstClock* clock, GstClockID id, GstClockTime startTime, GstClockTime interval) nothrow;
+__gshared c_gst_clock_periodic_id_reinitFn c_gst_clock_periodic_id_reinit; ///
+private alias c_gst_clock_set_calibrationFn = extern(C) void function(GstClock* clock, GstClockTime internal, GstClockTime external, GstClockTime rateNum, GstClockTime rateDenom) nothrow;
+__gshared c_gst_clock_set_calibrationFn c_gst_clock_set_calibration; ///
+private alias c_gst_clock_set_masterFn = extern(C) gboolean function(GstClock* clock, GstClock* master) nothrow;
+__gshared c_gst_clock_set_masterFn c_gst_clock_set_master; ///
+private alias c_gst_clock_set_resolutionFn = extern(C) GstClockTime function(GstClock* clock, GstClockTime resolution) nothrow;
+__gshared c_gst_clock_set_resolutionFn c_gst_clock_set_resolution; ///
+private alias c_gst_clock_set_syncedFn = extern(C) void function(GstClock* clock, gboolean synced) nothrow;
+__gshared c_gst_clock_set_syncedFn c_gst_clock_set_synced; ///
+private alias c_gst_clock_set_timeoutFn = extern(C) void function(GstClock* clock, GstClockTime timeout) nothrow;
+__gshared c_gst_clock_set_timeoutFn c_gst_clock_set_timeout; ///
+private alias c_gst_clock_single_shot_id_reinitFn = extern(C) gboolean function(GstClock* clock, GstClockID id, GstClockTime time) nothrow;
+__gshared c_gst_clock_single_shot_id_reinitFn c_gst_clock_single_shot_id_reinit; ///
+private alias c_gst_clock_unadjust_unlockedFn = extern(C) GstClockTime function(GstClock* clock, GstClockTime external) nothrow;
+__gshared c_gst_clock_unadjust_unlockedFn c_gst_clock_unadjust_unlocked; ///
+private alias c_gst_clock_unadjust_with_calibrationFn = extern(C) GstClockTime function(GstClock* clock, GstClockTime externalTarget, GstClockTime cinternal, GstClockTime cexternal, GstClockTime cnum, GstClockTime cdenom) nothrow;
+__gshared c_gst_clock_unadjust_with_calibrationFn c_gst_clock_unadjust_with_calibration; ///
+private alias c_gst_clock_wait_for_syncFn = extern(C) gboolean function(GstClock* clock, GstClockTime timeout) nothrow;
+__gshared c_gst_clock_wait_for_syncFn c_gst_clock_wait_for_sync; ///
+
+// Context
+private alias c_gst_context_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_context_get_typeFn c_gst_context_get_type; ///
+private alias c_gst_context_newFn = extern(C) GstContext* function(const(char)* contextType, gboolean persistent) nothrow;
+__gshared c_gst_context_newFn c_gst_context_new; ///
+private alias c_gst_context_copyFn = extern(C) GstContext* function(const(GstContext)* context) nothrow;
+__gshared c_gst_context_copyFn c_gst_context_copy; ///
+private alias c_gst_context_get_context_typeFn = extern(C) const(char)* function(const(GstContext)* context) nothrow;
+__gshared c_gst_context_get_context_typeFn c_gst_context_get_context_type; ///
+private alias c_gst_context_get_structureFn = extern(C) const(GstStructure)* function(const(GstContext)* context) nothrow;
+__gshared c_gst_context_get_structureFn c_gst_context_get_structure; ///
+private alias c_gst_context_get_task_poolFn = extern(C) gboolean function(GstContext* context, GstTaskPool** pool) nothrow;
+__gshared c_gst_context_get_task_poolFn c_gst_context_get_task_pool; ///
+private alias c_gst_context_has_context_typeFn = extern(C) gboolean function(const(GstContext)* context, const(char)* contextType) nothrow;
+__gshared c_gst_context_has_context_typeFn c_gst_context_has_context_type; ///
+private alias c_gst_context_is_persistentFn = extern(C) gboolean function(const(GstContext)* context) nothrow;
+__gshared c_gst_context_is_persistentFn c_gst_context_is_persistent; ///
+private alias c_gst_context_is_writableFn = extern(C) gboolean function(const(GstContext)* context) nothrow;
+__gshared c_gst_context_is_writableFn c_gst_context_is_writable; ///
+private alias c_gst_context_make_writableFn = extern(C) GstContext* function(GstContext* context) nothrow;
+__gshared c_gst_context_make_writableFn c_gst_context_make_writable; ///
+private alias c_gst_context_refFn = extern(C) GstContext* function(GstContext* context) nothrow;
+__gshared c_gst_context_refFn c_gst_context_ref; ///
+private alias c_gst_context_set_task_poolFn = extern(C) void function(GstContext* context, GstTaskPool* pool) nothrow;
+__gshared c_gst_context_set_task_poolFn c_gst_context_set_task_pool; ///
+private alias c_gst_context_unrefFn = extern(C) void function(GstContext* context) nothrow;
+__gshared c_gst_context_unrefFn c_gst_context_unref; ///
+private alias c_gst_context_writable_structureFn = extern(C) GstStructure* function(GstContext* context) nothrow;
+__gshared c_gst_context_writable_structureFn c_gst_context_writable_structure; ///
+private alias c_gst_context_replaceFn = extern(C) gboolean function(GstContext** oldContext, GstContext* newContext) nothrow;
+__gshared c_gst_context_replaceFn c_gst_context_replace; ///
+
+// ControlBinding
+private alias c_gst_control_binding_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_control_binding_get_typeFn c_gst_control_binding_get_type; ///
+private alias c_gst_control_binding_get_g_value_arrayFn = extern(C) gboolean function(GstControlBinding* binding, GstClockTime timestamp, GstClockTime interval, uint nValues, GValue* values) nothrow;
+__gshared c_gst_control_binding_get_g_value_arrayFn c_gst_control_binding_get_g_value_array; ///
+private alias c_gst_control_binding_get_valueFn = extern(C) GValue* function(GstControlBinding* binding, GstClockTime timestamp) nothrow;
+__gshared c_gst_control_binding_get_valueFn c_gst_control_binding_get_value; ///
+private alias c_gst_control_binding_get_value_arrayFn = extern(C) gboolean function(GstControlBinding* binding, GstClockTime timestamp, GstClockTime interval, uint nValues, void* values) nothrow;
+__gshared c_gst_control_binding_get_value_arrayFn c_gst_control_binding_get_value_array; ///
+private alias c_gst_control_binding_is_disabledFn = extern(C) gboolean function(GstControlBinding* binding) nothrow;
+__gshared c_gst_control_binding_is_disabledFn c_gst_control_binding_is_disabled; ///
+private alias c_gst_control_binding_set_disabledFn = extern(C) void function(GstControlBinding* binding, gboolean disabled) nothrow;
+__gshared c_gst_control_binding_set_disabledFn c_gst_control_binding_set_disabled; ///
+private alias c_gst_control_binding_sync_valuesFn = extern(C) gboolean function(GstControlBinding* binding, GstObject* object, GstClockTime timestamp, GstClockTime lastSync) nothrow;
+__gshared c_gst_control_binding_sync_valuesFn c_gst_control_binding_sync_values; ///
+
+// ControlSource
+private alias c_gst_control_source_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_control_source_get_typeFn c_gst_control_source_get_type; ///
+private alias c_gst_control_source_get_valueFn = extern(C) gboolean function(GstControlSource* self, GstClockTime timestamp, double* value) nothrow;
+__gshared c_gst_control_source_get_valueFn c_gst_control_source_get_value; ///
+private alias c_gst_control_source_get_value_arrayFn = extern(C) gboolean function(GstControlSource* self, GstClockTime timestamp, GstClockTime interval, uint nValues, double* values) nothrow;
+__gshared c_gst_control_source_get_value_arrayFn c_gst_control_source_get_value_array; ///
+
+// CustomMeta
+private alias c_gst_custom_meta_get_structureFn = extern(C) GstStructure* function(GstCustomMeta* meta) nothrow;
+__gshared c_gst_custom_meta_get_structureFn c_gst_custom_meta_get_structure; ///
+private alias c_gst_custom_meta_has_nameFn = extern(C) gboolean function(GstCustomMeta* meta, const(char)* name) nothrow;
+__gshared c_gst_custom_meta_has_nameFn c_gst_custom_meta_has_name; ///
+
+// DateTime
+private alias c_gst_date_time_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_date_time_get_typeFn c_gst_date_time_get_type; ///
+private alias c_gst_date_time_newFn = extern(C) GstDateTime* function(float tzoffset, int year, int month, int day, int hour, int minute, double seconds) nothrow;
+__gshared c_gst_date_time_newFn c_gst_date_time_new; ///
+private alias c_gst_date_time_new_from_g_date_timeFn = extern(C) GstDateTime* function(GDateTime* dt) nothrow;
+__gshared c_gst_date_time_new_from_g_date_timeFn c_gst_date_time_new_from_g_date_time; ///
+private alias c_gst_date_time_new_from_iso8601_stringFn = extern(C) GstDateTime* function(const(char)* string_) nothrow;
+__gshared c_gst_date_time_new_from_iso8601_stringFn c_gst_date_time_new_from_iso8601_string; ///
+private alias c_gst_date_time_new_from_unix_epoch_local_timeFn = extern(C) GstDateTime* function(long secs) nothrow;
+__gshared c_gst_date_time_new_from_unix_epoch_local_timeFn c_gst_date_time_new_from_unix_epoch_local_time; ///
+private alias c_gst_date_time_new_from_unix_epoch_local_time_usecsFn = extern(C) GstDateTime* function(long usecs) nothrow;
+__gshared c_gst_date_time_new_from_unix_epoch_local_time_usecsFn c_gst_date_time_new_from_unix_epoch_local_time_usecs; ///
+private alias c_gst_date_time_new_from_unix_epoch_utcFn = extern(C) GstDateTime* function(long secs) nothrow;
+__gshared c_gst_date_time_new_from_unix_epoch_utcFn c_gst_date_time_new_from_unix_epoch_utc; ///
+private alias c_gst_date_time_new_from_unix_epoch_utc_usecsFn = extern(C) GstDateTime* function(long usecs) nothrow;
+__gshared c_gst_date_time_new_from_unix_epoch_utc_usecsFn c_gst_date_time_new_from_unix_epoch_utc_usecs; ///
+private alias c_gst_date_time_new_local_timeFn = extern(C) GstDateTime* function(int year, int month, int day, int hour, int minute, double seconds) nothrow;
+__gshared c_gst_date_time_new_local_timeFn c_gst_date_time_new_local_time; ///
+private alias c_gst_date_time_new_now_local_timeFn = extern(C) GstDateTime* function() nothrow;
+__gshared c_gst_date_time_new_now_local_timeFn c_gst_date_time_new_now_local_time; ///
+private alias c_gst_date_time_new_now_utcFn = extern(C) GstDateTime* function() nothrow;
+__gshared c_gst_date_time_new_now_utcFn c_gst_date_time_new_now_utc; ///
+private alias c_gst_date_time_new_yFn = extern(C) GstDateTime* function(int year) nothrow;
+__gshared c_gst_date_time_new_yFn c_gst_date_time_new_y; ///
+private alias c_gst_date_time_new_ymFn = extern(C) GstDateTime* function(int year, int month) nothrow;
+__gshared c_gst_date_time_new_ymFn c_gst_date_time_new_ym; ///
+private alias c_gst_date_time_new_ymdFn = extern(C) GstDateTime* function(int year, int month, int day) nothrow;
+__gshared c_gst_date_time_new_ymdFn c_gst_date_time_new_ymd; ///
+private alias c_gst_date_time_get_dayFn = extern(C) int function(const(GstDateTime)* datetime) nothrow;
+__gshared c_gst_date_time_get_dayFn c_gst_date_time_get_day; ///
+private alias c_gst_date_time_get_hourFn = extern(C) int function(const(GstDateTime)* datetime) nothrow;
+__gshared c_gst_date_time_get_hourFn c_gst_date_time_get_hour; ///
+private alias c_gst_date_time_get_microsecondFn = extern(C) int function(const(GstDateTime)* datetime) nothrow;
+__gshared c_gst_date_time_get_microsecondFn c_gst_date_time_get_microsecond; ///
+private alias c_gst_date_time_get_minuteFn = extern(C) int function(const(GstDateTime)* datetime) nothrow;
+__gshared c_gst_date_time_get_minuteFn c_gst_date_time_get_minute; ///
+private alias c_gst_date_time_get_monthFn = extern(C) int function(const(GstDateTime)* datetime) nothrow;
+__gshared c_gst_date_time_get_monthFn c_gst_date_time_get_month; ///
+private alias c_gst_date_time_get_secondFn = extern(C) int function(const(GstDateTime)* datetime) nothrow;
+__gshared c_gst_date_time_get_secondFn c_gst_date_time_get_second; ///
+private alias c_gst_date_time_get_time_zone_offsetFn = extern(C) float function(const(GstDateTime)* datetime) nothrow;
+__gshared c_gst_date_time_get_time_zone_offsetFn c_gst_date_time_get_time_zone_offset; ///
+private alias c_gst_date_time_get_yearFn = extern(C) int function(const(GstDateTime)* datetime) nothrow;
+__gshared c_gst_date_time_get_yearFn c_gst_date_time_get_year; ///
+private alias c_gst_date_time_has_dayFn = extern(C) gboolean function(const(GstDateTime)* datetime) nothrow;
+__gshared c_gst_date_time_has_dayFn c_gst_date_time_has_day; ///
+private alias c_gst_date_time_has_monthFn = extern(C) gboolean function(const(GstDateTime)* datetime) nothrow;
+__gshared c_gst_date_time_has_monthFn c_gst_date_time_has_month; ///
+private alias c_gst_date_time_has_secondFn = extern(C) gboolean function(const(GstDateTime)* datetime) nothrow;
+__gshared c_gst_date_time_has_secondFn c_gst_date_time_has_second; ///
+private alias c_gst_date_time_has_timeFn = extern(C) gboolean function(const(GstDateTime)* datetime) nothrow;
+__gshared c_gst_date_time_has_timeFn c_gst_date_time_has_time; ///
+private alias c_gst_date_time_has_yearFn = extern(C) gboolean function(const(GstDateTime)* datetime) nothrow;
+__gshared c_gst_date_time_has_yearFn c_gst_date_time_has_year; ///
+private alias c_gst_date_time_refFn = extern(C) GstDateTime* function(GstDateTime* datetime) nothrow;
+__gshared c_gst_date_time_refFn c_gst_date_time_ref; ///
+private alias c_gst_date_time_to_g_date_timeFn = extern(C) GDateTime* function(GstDateTime* datetime) nothrow;
+__gshared c_gst_date_time_to_g_date_timeFn c_gst_date_time_to_g_date_time; ///
+private alias c_gst_date_time_to_iso8601_stringFn = extern(C) char* function(GstDateTime* datetime) nothrow;
+__gshared c_gst_date_time_to_iso8601_stringFn c_gst_date_time_to_iso8601_string; ///
+private alias c_gst_date_time_unrefFn = extern(C) void function(GstDateTime* datetime) nothrow;
+__gshared c_gst_date_time_unrefFn c_gst_date_time_unref; ///
+
+// DebugCategory
+private alias c_gst_debug_category_freeFn = extern(C) void function(GstDebugCategory* category) nothrow;
+__gshared c_gst_debug_category_freeFn c_gst_debug_category_free; ///
+private alias c_gst_debug_category_get_colorFn = extern(C) uint function(GstDebugCategory* category) nothrow;
+__gshared c_gst_debug_category_get_colorFn c_gst_debug_category_get_color; ///
+private alias c_gst_debug_category_get_descriptionFn = extern(C) const(char)* function(GstDebugCategory* category) nothrow;
+__gshared c_gst_debug_category_get_descriptionFn c_gst_debug_category_get_description; ///
+private alias c_gst_debug_category_get_nameFn = extern(C) const(char)* function(GstDebugCategory* category) nothrow;
+__gshared c_gst_debug_category_get_nameFn c_gst_debug_category_get_name; ///
+private alias c_gst_debug_category_get_thresholdFn = extern(C) GstDebugLevel function(GstDebugCategory* category) nothrow;
+__gshared c_gst_debug_category_get_thresholdFn c_gst_debug_category_get_threshold; ///
+private alias c_gst_debug_category_reset_thresholdFn = extern(C) void function(GstDebugCategory* category) nothrow;
+__gshared c_gst_debug_category_reset_thresholdFn c_gst_debug_category_reset_threshold; ///
+private alias c_gst_debug_category_set_thresholdFn = extern(C) void function(GstDebugCategory* category, GstDebugLevel level) nothrow;
+__gshared c_gst_debug_category_set_thresholdFn c_gst_debug_category_set_threshold; ///
+
+// DebugMessage
+private alias c_gst_debug_message_getFn = extern(C) const(char)* function(GstDebugMessage* message) nothrow;
+__gshared c_gst_debug_message_getFn c_gst_debug_message_get; ///
+private alias c_gst_debug_message_get_idFn = extern(C) const(char)* function(GstDebugMessage* message) nothrow;
+__gshared c_gst_debug_message_get_idFn c_gst_debug_message_get_id; ///
+
+// Device
+private alias c_gst_device_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_device_get_typeFn c_gst_device_get_type; ///
+private alias c_gst_device_create_elementFn = extern(C) GstElement* function(GstDevice* device, const(char)* name) nothrow;
+__gshared c_gst_device_create_elementFn c_gst_device_create_element; ///
+private alias c_gst_device_get_capsFn = extern(C) GstCaps* function(GstDevice* device) nothrow;
+__gshared c_gst_device_get_capsFn c_gst_device_get_caps; ///
+private alias c_gst_device_get_device_classFn = extern(C) char* function(GstDevice* device) nothrow;
+__gshared c_gst_device_get_device_classFn c_gst_device_get_device_class; ///
+private alias c_gst_device_get_display_nameFn = extern(C) char* function(GstDevice* device) nothrow;
+__gshared c_gst_device_get_display_nameFn c_gst_device_get_display_name; ///
+private alias c_gst_device_get_propertiesFn = extern(C) GstStructure* function(GstDevice* device) nothrow;
+__gshared c_gst_device_get_propertiesFn c_gst_device_get_properties; ///
+private alias c_gst_device_has_classesFn = extern(C) gboolean function(GstDevice* device, const(char)* classes) nothrow;
+__gshared c_gst_device_has_classesFn c_gst_device_has_classes; ///
+private alias c_gst_device_has_classesvFn = extern(C) gboolean function(GstDevice* device, char** classes) nothrow;
+__gshared c_gst_device_has_classesvFn c_gst_device_has_classesv; ///
+private alias c_gst_device_reconfigure_elementFn = extern(C) gboolean function(GstDevice* device, GstElement* element) nothrow;
+__gshared c_gst_device_reconfigure_elementFn c_gst_device_reconfigure_element; ///
+
+// DeviceMonitor
+private alias c_gst_device_monitor_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_device_monitor_get_typeFn c_gst_device_monitor_get_type; ///
+private alias c_gst_device_monitor_newFn = extern(C) GstDeviceMonitor* function() nothrow;
+__gshared c_gst_device_monitor_newFn c_gst_device_monitor_new; ///
+private alias c_gst_device_monitor_add_filterFn = extern(C) uint function(GstDeviceMonitor* monitor, const(char)* classes, GstCaps* caps) nothrow;
+__gshared c_gst_device_monitor_add_filterFn c_gst_device_monitor_add_filter; ///
+private alias c_gst_device_monitor_get_busFn = extern(C) GstBus* function(GstDeviceMonitor* monitor) nothrow;
+__gshared c_gst_device_monitor_get_busFn c_gst_device_monitor_get_bus; ///
+private alias c_gst_device_monitor_get_devicesFn = extern(C) GList* function(GstDeviceMonitor* monitor) nothrow;
+__gshared c_gst_device_monitor_get_devicesFn c_gst_device_monitor_get_devices; ///
+private alias c_gst_device_monitor_get_providersFn = extern(C) char** function(GstDeviceMonitor* monitor) nothrow;
+__gshared c_gst_device_monitor_get_providersFn c_gst_device_monitor_get_providers; ///
+private alias c_gst_device_monitor_get_show_all_devicesFn = extern(C) gboolean function(GstDeviceMonitor* monitor) nothrow;
+__gshared c_gst_device_monitor_get_show_all_devicesFn c_gst_device_monitor_get_show_all_devices; ///
+private alias c_gst_device_monitor_remove_filterFn = extern(C) gboolean function(GstDeviceMonitor* monitor, uint filterId) nothrow;
+__gshared c_gst_device_monitor_remove_filterFn c_gst_device_monitor_remove_filter; ///
+private alias c_gst_device_monitor_set_show_all_devicesFn = extern(C) void function(GstDeviceMonitor* monitor, gboolean showAll) nothrow;
+__gshared c_gst_device_monitor_set_show_all_devicesFn c_gst_device_monitor_set_show_all_devices; ///
+private alias c_gst_device_monitor_startFn = extern(C) gboolean function(GstDeviceMonitor* monitor) nothrow;
+__gshared c_gst_device_monitor_startFn c_gst_device_monitor_start; ///
+private alias c_gst_device_monitor_stopFn = extern(C) void function(GstDeviceMonitor* monitor) nothrow;
+__gshared c_gst_device_monitor_stopFn c_gst_device_monitor_stop; ///
+
+// DeviceProvider
+private alias c_gst_device_provider_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_device_provider_get_typeFn c_gst_device_provider_get_type; ///
+private alias c_gst_device_provider_registerFn = extern(C) gboolean function(GstPlugin* plugin, const(char)* name, uint rank, GType type) nothrow;
+__gshared c_gst_device_provider_registerFn c_gst_device_provider_register; ///
+private alias c_gst_device_provider_can_monitorFn = extern(C) gboolean function(GstDeviceProvider* provider) nothrow;
+__gshared c_gst_device_provider_can_monitorFn c_gst_device_provider_can_monitor; ///
+private alias c_gst_device_provider_device_addFn = extern(C) void function(GstDeviceProvider* provider, GstDevice* device) nothrow;
+__gshared c_gst_device_provider_device_addFn c_gst_device_provider_device_add; ///
+private alias c_gst_device_provider_device_changedFn = extern(C) void function(GstDeviceProvider* provider, GstDevice* device, GstDevice* changedDevice) nothrow;
+__gshared c_gst_device_provider_device_changedFn c_gst_device_provider_device_changed; ///
+private alias c_gst_device_provider_device_removeFn = extern(C) void function(GstDeviceProvider* provider, GstDevice* device) nothrow;
+__gshared c_gst_device_provider_device_removeFn c_gst_device_provider_device_remove; ///
+private alias c_gst_device_provider_get_busFn = extern(C) GstBus* function(GstDeviceProvider* provider) nothrow;
+__gshared c_gst_device_provider_get_busFn c_gst_device_provider_get_bus; ///
+private alias c_gst_device_provider_get_devicesFn = extern(C) GList* function(GstDeviceProvider* provider) nothrow;
+__gshared c_gst_device_provider_get_devicesFn c_gst_device_provider_get_devices; ///
+private alias c_gst_device_provider_get_factoryFn = extern(C) GstDeviceProviderFactory* function(GstDeviceProvider* provider) nothrow;
+__gshared c_gst_device_provider_get_factoryFn c_gst_device_provider_get_factory; ///
+private alias c_gst_device_provider_get_hidden_providersFn = extern(C) char** function(GstDeviceProvider* provider) nothrow;
+__gshared c_gst_device_provider_get_hidden_providersFn c_gst_device_provider_get_hidden_providers; ///
+private alias c_gst_device_provider_get_metadataFn = extern(C) const(char)* function(GstDeviceProvider* provider, const(char)* key) nothrow;
+__gshared c_gst_device_provider_get_metadataFn c_gst_device_provider_get_metadata; ///
+private alias c_gst_device_provider_hide_providerFn = extern(C) void function(GstDeviceProvider* provider, const(char)* name) nothrow;
+__gshared c_gst_device_provider_hide_providerFn c_gst_device_provider_hide_provider; ///
+private alias c_gst_device_provider_is_startedFn = extern(C) gboolean function(GstDeviceProvider* provider) nothrow;
+__gshared c_gst_device_provider_is_startedFn c_gst_device_provider_is_started; ///
+private alias c_gst_device_provider_startFn = extern(C) gboolean function(GstDeviceProvider* provider) nothrow;
+__gshared c_gst_device_provider_startFn c_gst_device_provider_start; ///
+private alias c_gst_device_provider_stopFn = extern(C) void function(GstDeviceProvider* provider) nothrow;
+__gshared c_gst_device_provider_stopFn c_gst_device_provider_stop; ///
+private alias c_gst_device_provider_unhide_providerFn = extern(C) void function(GstDeviceProvider* provider, const(char)* name) nothrow;
+__gshared c_gst_device_provider_unhide_providerFn c_gst_device_provider_unhide_provider; ///
+
+// DeviceProviderClass
+private alias c_gst_device_provider_class_add_metadataFn = extern(C) void function(GstDeviceProviderClass* klass, const(char)* key, const(char)* value) nothrow;
+__gshared c_gst_device_provider_class_add_metadataFn c_gst_device_provider_class_add_metadata; ///
+private alias c_gst_device_provider_class_add_static_metadataFn = extern(C) void function(GstDeviceProviderClass* klass, const(char)* key, const(char)* value) nothrow;
+__gshared c_gst_device_provider_class_add_static_metadataFn c_gst_device_provider_class_add_static_metadata; ///
+private alias c_gst_device_provider_class_get_metadataFn = extern(C) const(char)* function(GstDeviceProviderClass* klass, const(char)* key) nothrow;
+__gshared c_gst_device_provider_class_get_metadataFn c_gst_device_provider_class_get_metadata; ///
+private alias c_gst_device_provider_class_set_metadataFn = extern(C) void function(GstDeviceProviderClass* klass, const(char)* longname, const(char)* classification, const(char)* description, const(char)* author) nothrow;
+__gshared c_gst_device_provider_class_set_metadataFn c_gst_device_provider_class_set_metadata; ///
+private alias c_gst_device_provider_class_set_static_metadataFn = extern(C) void function(GstDeviceProviderClass* klass, const(char)* longname, const(char)* classification, const(char)* description, const(char)* author) nothrow;
+__gshared c_gst_device_provider_class_set_static_metadataFn c_gst_device_provider_class_set_static_metadata; ///
+
+// DeviceProviderFactory
+private alias c_gst_device_provider_factory_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_device_provider_factory_get_typeFn c_gst_device_provider_factory_get_type; ///
+private alias c_gst_device_provider_factory_findFn = extern(C) GstDeviceProviderFactory* function(const(char)* name) nothrow;
+__gshared c_gst_device_provider_factory_findFn c_gst_device_provider_factory_find; ///
+private alias c_gst_device_provider_factory_get_by_nameFn = extern(C) GstDeviceProvider* function(const(char)* factoryname) nothrow;
+__gshared c_gst_device_provider_factory_get_by_nameFn c_gst_device_provider_factory_get_by_name; ///
+private alias c_gst_device_provider_factory_list_get_device_providersFn = extern(C) GList* function(GstRank minrank) nothrow;
+__gshared c_gst_device_provider_factory_list_get_device_providersFn c_gst_device_provider_factory_list_get_device_providers; ///
+private alias c_gst_device_provider_factory_getFn = extern(C) GstDeviceProvider* function(GstDeviceProviderFactory* factory) nothrow;
+__gshared c_gst_device_provider_factory_getFn c_gst_device_provider_factory_get; ///
+private alias c_gst_device_provider_factory_get_device_provider_typeFn = extern(C) GType function(GstDeviceProviderFactory* factory) nothrow;
+__gshared c_gst_device_provider_factory_get_device_provider_typeFn c_gst_device_provider_factory_get_device_provider_type; ///
+private alias c_gst_device_provider_factory_get_metadataFn = extern(C) const(char)* function(GstDeviceProviderFactory* factory, const(char)* key) nothrow;
+__gshared c_gst_device_provider_factory_get_metadataFn c_gst_device_provider_factory_get_metadata; ///
+private alias c_gst_device_provider_factory_get_metadata_keysFn = extern(C) char** function(GstDeviceProviderFactory* factory) nothrow;
+__gshared c_gst_device_provider_factory_get_metadata_keysFn c_gst_device_provider_factory_get_metadata_keys; ///
+private alias c_gst_device_provider_factory_has_classesFn = extern(C) gboolean function(GstDeviceProviderFactory* factory, const(char)* classes) nothrow;
+__gshared c_gst_device_provider_factory_has_classesFn c_gst_device_provider_factory_has_classes; ///
+private alias c_gst_device_provider_factory_has_classesvFn = extern(C) gboolean function(GstDeviceProviderFactory* factory, char** classes) nothrow;
+__gshared c_gst_device_provider_factory_has_classesvFn c_gst_device_provider_factory_has_classesv; ///
+
+// DoubleRange
+private alias c_gst_double_range_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_double_range_get_typeFn c_gst_double_range_get_type; ///
+
+// DynamicTypeFactory
+private alias c_gst_dynamic_type_factory_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_dynamic_type_factory_get_typeFn c_gst_dynamic_type_factory_get_type; ///
+private alias c_gst_dynamic_type_factory_loadFn = extern(C) GType function(const(char)* factoryname) nothrow;
+__gshared c_gst_dynamic_type_factory_loadFn c_gst_dynamic_type_factory_load; ///
+
+// Element
+private alias c_gst_element_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_element_get_typeFn c_gst_element_get_type; ///
+private alias c_gst_element_make_from_uriFn = extern(C) GstElement* function(GstURIType type, const(char)* uri, const(char)* elementname, GError** _err) nothrow;
+__gshared c_gst_element_make_from_uriFn c_gst_element_make_from_uri; ///
+private alias c_gst_element_registerFn = extern(C) gboolean function(GstPlugin* plugin, const(char)* name, uint rank, GType type) nothrow;
+__gshared c_gst_element_registerFn c_gst_element_register; ///
+private alias c_gst_element_state_change_return_get_nameFn = extern(C) const(char)* function(GstStateChangeReturn stateRet) nothrow;
+__gshared c_gst_element_state_change_return_get_nameFn c_gst_element_state_change_return_get_name; ///
+private alias c_gst_element_state_get_nameFn = extern(C) const(char)* function(GstState state) nothrow;
+__gshared c_gst_element_state_get_nameFn c_gst_element_state_get_name; ///
+private alias c_gst_element_type_set_skip_documentationFn = extern(C) void function(GType type) nothrow;
+__gshared c_gst_element_type_set_skip_documentationFn c_gst_element_type_set_skip_documentation; ///
+private alias c_gst_element_abort_stateFn = extern(C) void function(GstElement* element) nothrow;
+__gshared c_gst_element_abort_stateFn c_gst_element_abort_state; ///
+private alias c_gst_element_add_padFn = extern(C) gboolean function(GstElement* element, GstPad* pad) nothrow;
+__gshared c_gst_element_add_padFn c_gst_element_add_pad; ///
+private alias c_gst_element_add_property_deep_notify_watchFn = extern(C) gulong function(GstElement* element, const(char)* propertyName, gboolean includeValue) nothrow;
+__gshared c_gst_element_add_property_deep_notify_watchFn c_gst_element_add_property_deep_notify_watch; ///
+private alias c_gst_element_add_property_notify_watchFn = extern(C) gulong function(GstElement* element, const(char)* propertyName, gboolean includeValue) nothrow;
+__gshared c_gst_element_add_property_notify_watchFn c_gst_element_add_property_notify_watch; ///
+private alias c_gst_element_call_asyncFn = extern(C) void function(GstElement* element, GstElementCallAsyncFunc func, void* userData, GDestroyNotify destroyNotify) nothrow;
+__gshared c_gst_element_call_asyncFn c_gst_element_call_async; ///
+private alias c_gst_element_change_stateFn = extern(C) GstStateChangeReturn function(GstElement* element, GstStateChange transition) nothrow;
+__gshared c_gst_element_change_stateFn c_gst_element_change_state; ///
+private alias c_gst_element_continue_stateFn = extern(C) GstStateChangeReturn function(GstElement* element, GstStateChangeReturn ret) nothrow;
+__gshared c_gst_element_continue_stateFn c_gst_element_continue_state; ///
+private alias c_gst_element_create_all_padsFn = extern(C) void function(GstElement* element) nothrow;
+__gshared c_gst_element_create_all_padsFn c_gst_element_create_all_pads; ///
+private alias c_gst_element_decorate_stream_idFn = extern(C) char* function(GstElement* element, const(char)* streamId) nothrow;
+__gshared c_gst_element_decorate_stream_idFn c_gst_element_decorate_stream_id; ///
+private alias c_gst_element_decorate_stream_id_printfFn = extern(C) char* function(GstElement* element, const(char)* format,  ...) nothrow;
+__gshared c_gst_element_decorate_stream_id_printfFn c_gst_element_decorate_stream_id_printf; ///
+private alias c_gst_element_decorate_stream_id_printf_valistFn = extern(C) char* function(GstElement* element, const(char)* format, void* varArgs) nothrow;
+__gshared c_gst_element_decorate_stream_id_printf_valistFn c_gst_element_decorate_stream_id_printf_valist; ///
+private alias c_gst_element_foreach_padFn = extern(C) gboolean function(GstElement* element, GstElementForeachPadFunc func, void* userData) nothrow;
+__gshared c_gst_element_foreach_padFn c_gst_element_foreach_pad; ///
+private alias c_gst_element_foreach_sink_padFn = extern(C) gboolean function(GstElement* element, GstElementForeachPadFunc func, void* userData) nothrow;
+__gshared c_gst_element_foreach_sink_padFn c_gst_element_foreach_sink_pad; ///
+private alias c_gst_element_foreach_src_padFn = extern(C) gboolean function(GstElement* element, GstElementForeachPadFunc func, void* userData) nothrow;
+__gshared c_gst_element_foreach_src_padFn c_gst_element_foreach_src_pad; ///
+private alias c_gst_element_get_base_timeFn = extern(C) GstClockTime function(GstElement* element) nothrow;
+__gshared c_gst_element_get_base_timeFn c_gst_element_get_base_time; ///
+private alias c_gst_element_get_busFn = extern(C) GstBus* function(GstElement* element) nothrow;
+__gshared c_gst_element_get_busFn c_gst_element_get_bus; ///
+private alias c_gst_element_get_clockFn = extern(C) GstClock* function(GstElement* element) nothrow;
+__gshared c_gst_element_get_clockFn c_gst_element_get_clock; ///
+private alias c_gst_element_get_compatible_padFn = extern(C) GstPad* function(GstElement* element, GstPad* pad, GstCaps* caps) nothrow;
+__gshared c_gst_element_get_compatible_padFn c_gst_element_get_compatible_pad; ///
+private alias c_gst_element_get_compatible_pad_templateFn = extern(C) GstPadTemplate* function(GstElement* element, GstPadTemplate* compattempl) nothrow;
+__gshared c_gst_element_get_compatible_pad_templateFn c_gst_element_get_compatible_pad_template; ///
+private alias c_gst_element_get_contextFn = extern(C) GstContext* function(GstElement* element, const(char)* contextType) nothrow;
+__gshared c_gst_element_get_contextFn c_gst_element_get_context; ///
+private alias c_gst_element_get_context_unlockedFn = extern(C) GstContext* function(GstElement* element, const(char)* contextType) nothrow;
+__gshared c_gst_element_get_context_unlockedFn c_gst_element_get_context_unlocked; ///
+private alias c_gst_element_get_contextsFn = extern(C) GList* function(GstElement* element) nothrow;
+__gshared c_gst_element_get_contextsFn c_gst_element_get_contexts; ///
+private alias c_gst_element_get_current_clock_timeFn = extern(C) GstClockTime function(GstElement* element) nothrow;
+__gshared c_gst_element_get_current_clock_timeFn c_gst_element_get_current_clock_time; ///
+private alias c_gst_element_get_current_running_timeFn = extern(C) GstClockTime function(GstElement* element) nothrow;
+__gshared c_gst_element_get_current_running_timeFn c_gst_element_get_current_running_time; ///
+private alias c_gst_element_get_factoryFn = extern(C) GstElementFactory* function(GstElement* element) nothrow;
+__gshared c_gst_element_get_factoryFn c_gst_element_get_factory; ///
+private alias c_gst_element_get_metadataFn = extern(C) const(char)* function(GstElement* element, const(char)* key) nothrow;
+__gshared c_gst_element_get_metadataFn c_gst_element_get_metadata; ///
+private alias c_gst_element_get_pad_templateFn = extern(C) GstPadTemplate* function(GstElement* element, const(char)* name) nothrow;
+__gshared c_gst_element_get_pad_templateFn c_gst_element_get_pad_template; ///
+private alias c_gst_element_get_pad_template_listFn = extern(C) GList* function(GstElement* element) nothrow;
+__gshared c_gst_element_get_pad_template_listFn c_gst_element_get_pad_template_list; ///
+private alias c_gst_element_get_request_padFn = extern(C) GstPad* function(GstElement* element, const(char)* name) nothrow;
+__gshared c_gst_element_get_request_padFn c_gst_element_get_request_pad; ///
+private alias c_gst_element_get_start_timeFn = extern(C) GstClockTime function(GstElement* element) nothrow;
+__gshared c_gst_element_get_start_timeFn c_gst_element_get_start_time; ///
+private alias c_gst_element_get_stateFn = extern(C) GstStateChangeReturn function(GstElement* element, GstState* state, GstState* pending, GstClockTime timeout) nothrow;
+__gshared c_gst_element_get_stateFn c_gst_element_get_state; ///
+private alias c_gst_element_get_static_padFn = extern(C) GstPad* function(GstElement* element, const(char)* name) nothrow;
+__gshared c_gst_element_get_static_padFn c_gst_element_get_static_pad; ///
+private alias c_gst_element_is_locked_stateFn = extern(C) gboolean function(GstElement* element) nothrow;
+__gshared c_gst_element_is_locked_stateFn c_gst_element_is_locked_state; ///
+private alias c_gst_element_iterate_padsFn = extern(C) GstIterator* function(GstElement* element) nothrow;
+__gshared c_gst_element_iterate_padsFn c_gst_element_iterate_pads; ///
+private alias c_gst_element_iterate_sink_padsFn = extern(C) GstIterator* function(GstElement* element) nothrow;
+__gshared c_gst_element_iterate_sink_padsFn c_gst_element_iterate_sink_pads; ///
+private alias c_gst_element_iterate_src_padsFn = extern(C) GstIterator* function(GstElement* element) nothrow;
+__gshared c_gst_element_iterate_src_padsFn c_gst_element_iterate_src_pads; ///
+private alias c_gst_element_linkFn = extern(C) gboolean function(GstElement* src, GstElement* dest) nothrow;
+__gshared c_gst_element_linkFn c_gst_element_link; ///
+private alias c_gst_element_link_filteredFn = extern(C) gboolean function(GstElement* src, GstElement* dest, GstCaps* filter) nothrow;
+__gshared c_gst_element_link_filteredFn c_gst_element_link_filtered; ///
+private alias c_gst_element_link_manyFn = extern(C) gboolean function(GstElement* element1, GstElement* element2,  ...) nothrow;
+__gshared c_gst_element_link_manyFn c_gst_element_link_many; ///
+private alias c_gst_element_link_padsFn = extern(C) gboolean function(GstElement* src, const(char)* srcpadname, GstElement* dest, const(char)* destpadname) nothrow;
+__gshared c_gst_element_link_padsFn c_gst_element_link_pads; ///
+private alias c_gst_element_link_pads_filteredFn = extern(C) gboolean function(GstElement* src, const(char)* srcpadname, GstElement* dest, const(char)* destpadname, GstCaps* filter) nothrow;
+__gshared c_gst_element_link_pads_filteredFn c_gst_element_link_pads_filtered; ///
+private alias c_gst_element_link_pads_fullFn = extern(C) gboolean function(GstElement* src, const(char)* srcpadname, GstElement* dest, const(char)* destpadname, GstPadLinkCheck flags) nothrow;
+__gshared c_gst_element_link_pads_fullFn c_gst_element_link_pads_full; ///
+private alias c_gst_element_lost_stateFn = extern(C) void function(GstElement* element) nothrow;
+__gshared c_gst_element_lost_stateFn c_gst_element_lost_state; ///
+private alias c_gst_element_message_fullFn = extern(C) void function(GstElement* element, GstMessageType type, GQuark domain, int code, char* text, char* debug_, const(char)* file, const(char)* function_, int line) nothrow;
+__gshared c_gst_element_message_fullFn c_gst_element_message_full; ///
+private alias c_gst_element_message_full_with_detailsFn = extern(C) void function(GstElement* element, GstMessageType type, GQuark domain, int code, char* text, char* debug_, const(char)* file, const(char)* function_, int line, GstStructure* structure) nothrow;
+__gshared c_gst_element_message_full_with_detailsFn c_gst_element_message_full_with_details; ///
+private alias c_gst_element_no_more_padsFn = extern(C) void function(GstElement* element) nothrow;
+__gshared c_gst_element_no_more_padsFn c_gst_element_no_more_pads; ///
+private alias c_gst_element_post_messageFn = extern(C) gboolean function(GstElement* element, GstMessage* message) nothrow;
+__gshared c_gst_element_post_messageFn c_gst_element_post_message; ///
+private alias c_gst_element_provide_clockFn = extern(C) GstClock* function(GstElement* element) nothrow;
+__gshared c_gst_element_provide_clockFn c_gst_element_provide_clock; ///
+private alias c_gst_element_queryFn = extern(C) gboolean function(GstElement* element, GstQuery* query) nothrow;
+__gshared c_gst_element_queryFn c_gst_element_query; ///
+private alias c_gst_element_query_convertFn = extern(C) gboolean function(GstElement* element, GstFormat srcFormat, long srcVal, GstFormat destFormat, long* destVal) nothrow;
+__gshared c_gst_element_query_convertFn c_gst_element_query_convert; ///
+private alias c_gst_element_query_durationFn = extern(C) gboolean function(GstElement* element, GstFormat format, long* duration) nothrow;
+__gshared c_gst_element_query_durationFn c_gst_element_query_duration; ///
+private alias c_gst_element_query_positionFn = extern(C) gboolean function(GstElement* element, GstFormat format, long* cur) nothrow;
+__gshared c_gst_element_query_positionFn c_gst_element_query_position; ///
+private alias c_gst_element_release_request_padFn = extern(C) void function(GstElement* element, GstPad* pad) nothrow;
+__gshared c_gst_element_release_request_padFn c_gst_element_release_request_pad; ///
+private alias c_gst_element_remove_padFn = extern(C) gboolean function(GstElement* element, GstPad* pad) nothrow;
+__gshared c_gst_element_remove_padFn c_gst_element_remove_pad; ///
+private alias c_gst_element_remove_property_notify_watchFn = extern(C) void function(GstElement* element, gulong watchId) nothrow;
+__gshared c_gst_element_remove_property_notify_watchFn c_gst_element_remove_property_notify_watch; ///
+private alias c_gst_element_request_padFn = extern(C) GstPad* function(GstElement* element, GstPadTemplate* templ, const(char)* name, const(GstCaps)* caps) nothrow;
+__gshared c_gst_element_request_padFn c_gst_element_request_pad; ///
+private alias c_gst_element_request_pad_simpleFn = extern(C) GstPad* function(GstElement* element, const(char)* name) nothrow;
+__gshared c_gst_element_request_pad_simpleFn c_gst_element_request_pad_simple; ///
+private alias c_gst_element_seekFn = extern(C) gboolean function(GstElement* element, double rate, GstFormat format, GstSeekFlags flags, GstSeekType startType, long start, GstSeekType stopType, long stop) nothrow;
+__gshared c_gst_element_seekFn c_gst_element_seek; ///
+private alias c_gst_element_seek_simpleFn = extern(C) gboolean function(GstElement* element, GstFormat format, GstSeekFlags seekFlags, long seekPos) nothrow;
+__gshared c_gst_element_seek_simpleFn c_gst_element_seek_simple; ///
+private alias c_gst_element_send_eventFn = extern(C) gboolean function(GstElement* element, GstEvent* event) nothrow;
+__gshared c_gst_element_send_eventFn c_gst_element_send_event; ///
+private alias c_gst_element_set_base_timeFn = extern(C) void function(GstElement* element, GstClockTime time) nothrow;
+__gshared c_gst_element_set_base_timeFn c_gst_element_set_base_time; ///
+private alias c_gst_element_set_busFn = extern(C) void function(GstElement* element, GstBus* bus) nothrow;
+__gshared c_gst_element_set_busFn c_gst_element_set_bus; ///
+private alias c_gst_element_set_clockFn = extern(C) gboolean function(GstElement* element, GstClock* clock) nothrow;
+__gshared c_gst_element_set_clockFn c_gst_element_set_clock; ///
+private alias c_gst_element_set_contextFn = extern(C) void function(GstElement* element, GstContext* context) nothrow;
+__gshared c_gst_element_set_contextFn c_gst_element_set_context; ///
+private alias c_gst_element_set_locked_stateFn = extern(C) gboolean function(GstElement* element, gboolean lockedState) nothrow;
+__gshared c_gst_element_set_locked_stateFn c_gst_element_set_locked_state; ///
+private alias c_gst_element_set_start_timeFn = extern(C) void function(GstElement* element, GstClockTime time) nothrow;
+__gshared c_gst_element_set_start_timeFn c_gst_element_set_start_time; ///
+private alias c_gst_element_set_stateFn = extern(C) GstStateChangeReturn function(GstElement* element, GstState state) nothrow;
+__gshared c_gst_element_set_stateFn c_gst_element_set_state; ///
+private alias c_gst_element_sync_state_with_parentFn = extern(C) gboolean function(GstElement* element) nothrow;
+__gshared c_gst_element_sync_state_with_parentFn c_gst_element_sync_state_with_parent; ///
+private alias c_gst_element_unlinkFn = extern(C) void function(GstElement* src, GstElement* dest) nothrow;
+__gshared c_gst_element_unlinkFn c_gst_element_unlink; ///
+private alias c_gst_element_unlink_manyFn = extern(C) void function(GstElement* element1, GstElement* element2,  ...) nothrow;
+__gshared c_gst_element_unlink_manyFn c_gst_element_unlink_many; ///
+private alias c_gst_element_unlink_padsFn = extern(C) void function(GstElement* src, const(char)* srcpadname, GstElement* dest, const(char)* destpadname) nothrow;
+__gshared c_gst_element_unlink_padsFn c_gst_element_unlink_pads; ///
+
+// ElementClass
+private alias c_gst_element_class_add_metadataFn = extern(C) void function(GstElementClass* klass, const(char)* key, const(char)* value) nothrow;
+__gshared c_gst_element_class_add_metadataFn c_gst_element_class_add_metadata; ///
+private alias c_gst_element_class_add_pad_templateFn = extern(C) void function(GstElementClass* klass, GstPadTemplate* templ) nothrow;
+__gshared c_gst_element_class_add_pad_templateFn c_gst_element_class_add_pad_template; ///
+private alias c_gst_element_class_add_static_metadataFn = extern(C) void function(GstElementClass* klass, const(char)* key, const(char)* value) nothrow;
+__gshared c_gst_element_class_add_static_metadataFn c_gst_element_class_add_static_metadata; ///
+private alias c_gst_element_class_add_static_pad_templateFn = extern(C) void function(GstElementClass* klass, GstStaticPadTemplate* staticTempl) nothrow;
+__gshared c_gst_element_class_add_static_pad_templateFn c_gst_element_class_add_static_pad_template; ///
+private alias c_gst_element_class_add_static_pad_template_with_gtypeFn = extern(C) void function(GstElementClass* klass, GstStaticPadTemplate* staticTempl, GType padType) nothrow;
+__gshared c_gst_element_class_add_static_pad_template_with_gtypeFn c_gst_element_class_add_static_pad_template_with_gtype; ///
+private alias c_gst_element_class_get_metadataFn = extern(C) const(char)* function(GstElementClass* klass, const(char)* key) nothrow;
+__gshared c_gst_element_class_get_metadataFn c_gst_element_class_get_metadata; ///
+private alias c_gst_element_class_get_pad_templateFn = extern(C) GstPadTemplate* function(GstElementClass* elementClass, const(char)* name) nothrow;
+__gshared c_gst_element_class_get_pad_templateFn c_gst_element_class_get_pad_template; ///
+private alias c_gst_element_class_get_pad_template_listFn = extern(C) GList* function(GstElementClass* elementClass) nothrow;
+__gshared c_gst_element_class_get_pad_template_listFn c_gst_element_class_get_pad_template_list; ///
+private alias c_gst_element_class_set_metadataFn = extern(C) void function(GstElementClass* klass, const(char)* longname, const(char)* classification, const(char)* description, const(char)* author) nothrow;
+__gshared c_gst_element_class_set_metadataFn c_gst_element_class_set_metadata; ///
+private alias c_gst_element_class_set_static_metadataFn = extern(C) void function(GstElementClass* klass, const(char)* longname, const(char)* classification, const(char)* description, const(char)* author) nothrow;
+__gshared c_gst_element_class_set_static_metadataFn c_gst_element_class_set_static_metadata; ///
+
+// ElementFactory
+private alias c_gst_element_factory_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_element_factory_get_typeFn c_gst_element_factory_get_type; ///
+private alias c_gst_element_factory_findFn = extern(C) GstElementFactory* function(const(char)* name) nothrow;
+__gshared c_gst_element_factory_findFn c_gst_element_factory_find; ///
+private alias c_gst_element_factory_list_filterFn = extern(C) GList* function(GList* list, const(GstCaps)* caps, GstPadDirection direction, gboolean subsetonly) nothrow;
+__gshared c_gst_element_factory_list_filterFn c_gst_element_factory_list_filter; ///
+private alias c_gst_element_factory_list_get_elementsFn = extern(C) GList* function(GstElementFactoryListType type, GstRank minrank) nothrow;
+__gshared c_gst_element_factory_list_get_elementsFn c_gst_element_factory_list_get_elements; ///
+private alias c_gst_element_factory_makeFn = extern(C) GstElement* function(const(char)* factoryname, const(char)* name) nothrow;
+__gshared c_gst_element_factory_makeFn c_gst_element_factory_make; ///
+private alias c_gst_element_factory_make_fullFn = extern(C) GstElement* function(const(char)* factoryname, const(char)* first,  ...) nothrow;
+__gshared c_gst_element_factory_make_fullFn c_gst_element_factory_make_full; ///
+private alias c_gst_element_factory_make_valistFn = extern(C) GstElement* function(const(char)* factoryname, const(char)* first, void* properties) nothrow;
+__gshared c_gst_element_factory_make_valistFn c_gst_element_factory_make_valist; ///
+private alias c_gst_element_factory_make_with_propertiesFn = extern(C) GstElement* function(const(char)* factoryname, uint n, const(char*)* names, const(GValue)* values) nothrow;
+__gshared c_gst_element_factory_make_with_propertiesFn c_gst_element_factory_make_with_properties; ///
+private alias c_gst_element_factory_can_sink_all_capsFn = extern(C) gboolean function(GstElementFactory* factory, const(GstCaps)* caps) nothrow;
+__gshared c_gst_element_factory_can_sink_all_capsFn c_gst_element_factory_can_sink_all_caps; ///
+private alias c_gst_element_factory_can_sink_any_capsFn = extern(C) gboolean function(GstElementFactory* factory, const(GstCaps)* caps) nothrow;
+__gshared c_gst_element_factory_can_sink_any_capsFn c_gst_element_factory_can_sink_any_caps; ///
+private alias c_gst_element_factory_can_src_all_capsFn = extern(C) gboolean function(GstElementFactory* factory, const(GstCaps)* caps) nothrow;
+__gshared c_gst_element_factory_can_src_all_capsFn c_gst_element_factory_can_src_all_caps; ///
+private alias c_gst_element_factory_can_src_any_capsFn = extern(C) gboolean function(GstElementFactory* factory, const(GstCaps)* caps) nothrow;
+__gshared c_gst_element_factory_can_src_any_capsFn c_gst_element_factory_can_src_any_caps; ///
+private alias c_gst_element_factory_createFn = extern(C) GstElement* function(GstElementFactory* factory, const(char)* name) nothrow;
+__gshared c_gst_element_factory_createFn c_gst_element_factory_create; ///
+private alias c_gst_element_factory_create_fullFn = extern(C) GstElement* function(GstElementFactory* factory, const(char)* first,  ...) nothrow;
+__gshared c_gst_element_factory_create_fullFn c_gst_element_factory_create_full; ///
+private alias c_gst_element_factory_create_valistFn = extern(C) GstElement* function(GstElementFactory* factory, const(char)* first, void* properties) nothrow;
+__gshared c_gst_element_factory_create_valistFn c_gst_element_factory_create_valist; ///
+private alias c_gst_element_factory_create_with_propertiesFn = extern(C) GstElement* function(GstElementFactory* factory, uint n, const(char*)* names, const(GValue)* values) nothrow;
+__gshared c_gst_element_factory_create_with_propertiesFn c_gst_element_factory_create_with_properties; ///
+private alias c_gst_element_factory_get_element_typeFn = extern(C) GType function(GstElementFactory* factory) nothrow;
+__gshared c_gst_element_factory_get_element_typeFn c_gst_element_factory_get_element_type; ///
+private alias c_gst_element_factory_get_metadataFn = extern(C) const(char)* function(GstElementFactory* factory, const(char)* key) nothrow;
+__gshared c_gst_element_factory_get_metadataFn c_gst_element_factory_get_metadata; ///
+private alias c_gst_element_factory_get_metadata_keysFn = extern(C) char** function(GstElementFactory* factory) nothrow;
+__gshared c_gst_element_factory_get_metadata_keysFn c_gst_element_factory_get_metadata_keys; ///
+private alias c_gst_element_factory_get_num_pad_templatesFn = extern(C) uint function(GstElementFactory* factory) nothrow;
+__gshared c_gst_element_factory_get_num_pad_templatesFn c_gst_element_factory_get_num_pad_templates; ///
+private alias c_gst_element_factory_get_skip_documentationFn = extern(C) gboolean function(GstElementFactory* factory) nothrow;
+__gshared c_gst_element_factory_get_skip_documentationFn c_gst_element_factory_get_skip_documentation; ///
+private alias c_gst_element_factory_get_static_pad_templatesFn = extern(C) const(GList)* function(GstElementFactory* factory) nothrow;
+__gshared c_gst_element_factory_get_static_pad_templatesFn c_gst_element_factory_get_static_pad_templates; ///
+private alias c_gst_element_factory_get_uri_protocolsFn = extern(C) const(char*)* function(GstElementFactory* factory) nothrow;
+__gshared c_gst_element_factory_get_uri_protocolsFn c_gst_element_factory_get_uri_protocols; ///
+private alias c_gst_element_factory_get_uri_typeFn = extern(C) GstURIType function(GstElementFactory* factory) nothrow;
+__gshared c_gst_element_factory_get_uri_typeFn c_gst_element_factory_get_uri_type; ///
+private alias c_gst_element_factory_has_interfaceFn = extern(C) gboolean function(GstElementFactory* factory, const(char)* interfacename) nothrow;
+__gshared c_gst_element_factory_has_interfaceFn c_gst_element_factory_has_interface; ///
+private alias c_gst_element_factory_list_is_typeFn = extern(C) gboolean function(GstElementFactory* factory, GstElementFactoryListType type) nothrow;
+__gshared c_gst_element_factory_list_is_typeFn c_gst_element_factory_list_is_type; ///
+
+// Event
+private alias c_gst_event_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_event_get_typeFn c_gst_event_get_type; ///
+private alias c_gst_event_new_buffer_sizeFn = extern(C) GstEvent* function(GstFormat format, long minsize, long maxsize, gboolean async) nothrow;
+__gshared c_gst_event_new_buffer_sizeFn c_gst_event_new_buffer_size; ///
+private alias c_gst_event_new_capsFn = extern(C) GstEvent* function(GstCaps* caps) nothrow;
+__gshared c_gst_event_new_capsFn c_gst_event_new_caps; ///
+private alias c_gst_event_new_customFn = extern(C) GstEvent* function(GstEventType type, GstStructure* structure) nothrow;
+__gshared c_gst_event_new_customFn c_gst_event_new_custom; ///
+private alias c_gst_event_new_eosFn = extern(C) GstEvent* function() nothrow;
+__gshared c_gst_event_new_eosFn c_gst_event_new_eos; ///
+private alias c_gst_event_new_flush_startFn = extern(C) GstEvent* function() nothrow;
+__gshared c_gst_event_new_flush_startFn c_gst_event_new_flush_start; ///
+private alias c_gst_event_new_flush_stopFn = extern(C) GstEvent* function(gboolean resetTime) nothrow;
+__gshared c_gst_event_new_flush_stopFn c_gst_event_new_flush_stop; ///
+private alias c_gst_event_new_gapFn = extern(C) GstEvent* function(GstClockTime timestamp, GstClockTime duration) nothrow;
+__gshared c_gst_event_new_gapFn c_gst_event_new_gap; ///
+private alias c_gst_event_new_instant_rate_changeFn = extern(C) GstEvent* function(double rateMultiplier, GstSegmentFlags newFlags) nothrow;
+__gshared c_gst_event_new_instant_rate_changeFn c_gst_event_new_instant_rate_change; ///
+private alias c_gst_event_new_instant_rate_sync_timeFn = extern(C) GstEvent* function(double rateMultiplier, GstClockTime runningTime, GstClockTime upstreamRunningTime) nothrow;
+__gshared c_gst_event_new_instant_rate_sync_timeFn c_gst_event_new_instant_rate_sync_time; ///
+private alias c_gst_event_new_latencyFn = extern(C) GstEvent* function(GstClockTime latency) nothrow;
+__gshared c_gst_event_new_latencyFn c_gst_event_new_latency; ///
+private alias c_gst_event_new_navigationFn = extern(C) GstEvent* function(GstStructure* structure) nothrow;
+__gshared c_gst_event_new_navigationFn c_gst_event_new_navigation; ///
+private alias c_gst_event_new_protectionFn = extern(C) GstEvent* function(const(char)* systemId, GstBuffer* data, const(char)* origin) nothrow;
+__gshared c_gst_event_new_protectionFn c_gst_event_new_protection; ///
+private alias c_gst_event_new_qosFn = extern(C) GstEvent* function(GstQOSType type, double proportion, GstClockTimeDiff diff, GstClockTime timestamp) nothrow;
+__gshared c_gst_event_new_qosFn c_gst_event_new_qos; ///
+private alias c_gst_event_new_reconfigureFn = extern(C) GstEvent* function() nothrow;
+__gshared c_gst_event_new_reconfigureFn c_gst_event_new_reconfigure; ///
+private alias c_gst_event_new_seekFn = extern(C) GstEvent* function(double rate, GstFormat format, GstSeekFlags flags, GstSeekType startType, long start, GstSeekType stopType, long stop) nothrow;
+__gshared c_gst_event_new_seekFn c_gst_event_new_seek; ///
+private alias c_gst_event_new_segmentFn = extern(C) GstEvent* function(const(GstSegment)* segment) nothrow;
+__gshared c_gst_event_new_segmentFn c_gst_event_new_segment; ///
+private alias c_gst_event_new_segment_doneFn = extern(C) GstEvent* function(GstFormat format, long position) nothrow;
+__gshared c_gst_event_new_segment_doneFn c_gst_event_new_segment_done; ///
+private alias c_gst_event_new_select_streamsFn = extern(C) GstEvent* function(GList* streams) nothrow;
+__gshared c_gst_event_new_select_streamsFn c_gst_event_new_select_streams; ///
+private alias c_gst_event_new_sink_messageFn = extern(C) GstEvent* function(const(char)* name, GstMessage* msg) nothrow;
+__gshared c_gst_event_new_sink_messageFn c_gst_event_new_sink_message; ///
+private alias c_gst_event_new_stepFn = extern(C) GstEvent* function(GstFormat format, ulong amount, double rate, gboolean flush, gboolean intermediate) nothrow;
+__gshared c_gst_event_new_stepFn c_gst_event_new_step; ///
+private alias c_gst_event_new_stream_collectionFn = extern(C) GstEvent* function(GstStreamCollection* collection) nothrow;
+__gshared c_gst_event_new_stream_collectionFn c_gst_event_new_stream_collection; ///
+private alias c_gst_event_new_stream_group_doneFn = extern(C) GstEvent* function(uint groupId) nothrow;
+__gshared c_gst_event_new_stream_group_doneFn c_gst_event_new_stream_group_done; ///
+private alias c_gst_event_new_stream_startFn = extern(C) GstEvent* function(const(char)* streamId) nothrow;
+__gshared c_gst_event_new_stream_startFn c_gst_event_new_stream_start; ///
+private alias c_gst_event_new_tagFn = extern(C) GstEvent* function(GstTagList* taglist) nothrow;
+__gshared c_gst_event_new_tagFn c_gst_event_new_tag; ///
+private alias c_gst_event_new_tocFn = extern(C) GstEvent* function(GstToc* toc, gboolean updated) nothrow;
+__gshared c_gst_event_new_tocFn c_gst_event_new_toc; ///
+private alias c_gst_event_new_toc_selectFn = extern(C) GstEvent* function(const(char)* uid) nothrow;
+__gshared c_gst_event_new_toc_selectFn c_gst_event_new_toc_select; ///
+private alias c_gst_event_copyFn = extern(C) GstEvent* function(const(GstEvent)* event) nothrow;
+__gshared c_gst_event_copyFn c_gst_event_copy; ///
+private alias c_gst_event_copy_segmentFn = extern(C) void function(GstEvent* event, GstSegment* segment) nothrow;
+__gshared c_gst_event_copy_segmentFn c_gst_event_copy_segment; ///
+private alias c_gst_event_get_running_time_offsetFn = extern(C) long function(GstEvent* event) nothrow;
+__gshared c_gst_event_get_running_time_offsetFn c_gst_event_get_running_time_offset; ///
+private alias c_gst_event_get_seqnumFn = extern(C) uint function(GstEvent* event) nothrow;
+__gshared c_gst_event_get_seqnumFn c_gst_event_get_seqnum; ///
+private alias c_gst_event_get_structureFn = extern(C) const(GstStructure)* function(GstEvent* event) nothrow;
+__gshared c_gst_event_get_structureFn c_gst_event_get_structure; ///
+private alias c_gst_event_has_nameFn = extern(C) gboolean function(GstEvent* event, const(char)* name) nothrow;
+__gshared c_gst_event_has_nameFn c_gst_event_has_name; ///
+private alias c_gst_event_has_name_idFn = extern(C) gboolean function(GstEvent* event, GQuark name) nothrow;
+__gshared c_gst_event_has_name_idFn c_gst_event_has_name_id; ///
+private alias c_gst_event_is_writableFn = extern(C) gboolean function(const(GstEvent)* event) nothrow;
+__gshared c_gst_event_is_writableFn c_gst_event_is_writable; ///
+private alias c_gst_event_make_writableFn = extern(C) GstEvent* function(GstEvent* event) nothrow;
+__gshared c_gst_event_make_writableFn c_gst_event_make_writable; ///
+private alias c_gst_event_parse_buffer_sizeFn = extern(C) void function(GstEvent* event, GstFormat* format, long* minsize, long* maxsize, gboolean* async) nothrow;
+__gshared c_gst_event_parse_buffer_sizeFn c_gst_event_parse_buffer_size; ///
+private alias c_gst_event_parse_capsFn = extern(C) void function(GstEvent* event, GstCaps** caps) nothrow;
+__gshared c_gst_event_parse_capsFn c_gst_event_parse_caps; ///
+private alias c_gst_event_parse_flush_stopFn = extern(C) void function(GstEvent* event, gboolean* resetTime) nothrow;
+__gshared c_gst_event_parse_flush_stopFn c_gst_event_parse_flush_stop; ///
+private alias c_gst_event_parse_gapFn = extern(C) void function(GstEvent* event, GstClockTime* timestamp, GstClockTime* duration) nothrow;
+__gshared c_gst_event_parse_gapFn c_gst_event_parse_gap; ///
+private alias c_gst_event_parse_gap_flagsFn = extern(C) void function(GstEvent* event, GstGapFlags* flags) nothrow;
+__gshared c_gst_event_parse_gap_flagsFn c_gst_event_parse_gap_flags; ///
+private alias c_gst_event_parse_group_idFn = extern(C) gboolean function(GstEvent* event, uint* groupId) nothrow;
+__gshared c_gst_event_parse_group_idFn c_gst_event_parse_group_id; ///
+private alias c_gst_event_parse_instant_rate_changeFn = extern(C) void function(GstEvent* event, double* rateMultiplier, GstSegmentFlags* newFlags) nothrow;
+__gshared c_gst_event_parse_instant_rate_changeFn c_gst_event_parse_instant_rate_change; ///
+private alias c_gst_event_parse_instant_rate_sync_timeFn = extern(C) void function(GstEvent* event, double* rateMultiplier, GstClockTime* runningTime, GstClockTime* upstreamRunningTime) nothrow;
+__gshared c_gst_event_parse_instant_rate_sync_timeFn c_gst_event_parse_instant_rate_sync_time; ///
+private alias c_gst_event_parse_latencyFn = extern(C) void function(GstEvent* event, GstClockTime* latency) nothrow;
+__gshared c_gst_event_parse_latencyFn c_gst_event_parse_latency; ///
+private alias c_gst_event_parse_protectionFn = extern(C) void function(GstEvent* event, const(char*)* systemId, GstBuffer** data, const(char*)* origin) nothrow;
+__gshared c_gst_event_parse_protectionFn c_gst_event_parse_protection; ///
+private alias c_gst_event_parse_qosFn = extern(C) void function(GstEvent* event, GstQOSType* type, double* proportion, GstClockTimeDiff* diff, GstClockTime* timestamp) nothrow;
+__gshared c_gst_event_parse_qosFn c_gst_event_parse_qos; ///
+private alias c_gst_event_parse_seekFn = extern(C) void function(GstEvent* event, double* rate, GstFormat* format, GstSeekFlags* flags, GstSeekType* startType, long* start, GstSeekType* stopType, long* stop) nothrow;
+__gshared c_gst_event_parse_seekFn c_gst_event_parse_seek; ///
+private alias c_gst_event_parse_seek_trickmode_intervalFn = extern(C) void function(GstEvent* event, GstClockTime* interval) nothrow;
+__gshared c_gst_event_parse_seek_trickmode_intervalFn c_gst_event_parse_seek_trickmode_interval; ///
+private alias c_gst_event_parse_segmentFn = extern(C) void function(GstEvent* event, const(GstSegment*)* segment) nothrow;
+__gshared c_gst_event_parse_segmentFn c_gst_event_parse_segment; ///
+private alias c_gst_event_parse_segment_doneFn = extern(C) void function(GstEvent* event, GstFormat* format, long* position) nothrow;
+__gshared c_gst_event_parse_segment_doneFn c_gst_event_parse_segment_done; ///
+private alias c_gst_event_parse_select_streamsFn = extern(C) void function(GstEvent* event, GList** streams) nothrow;
+__gshared c_gst_event_parse_select_streamsFn c_gst_event_parse_select_streams; ///
+private alias c_gst_event_parse_sink_messageFn = extern(C) void function(GstEvent* event, GstMessage** msg) nothrow;
+__gshared c_gst_event_parse_sink_messageFn c_gst_event_parse_sink_message; ///
+private alias c_gst_event_parse_stepFn = extern(C) void function(GstEvent* event, GstFormat* format, ulong* amount, double* rate, gboolean* flush, gboolean* intermediate) nothrow;
+__gshared c_gst_event_parse_stepFn c_gst_event_parse_step; ///
+private alias c_gst_event_parse_streamFn = extern(C) void function(GstEvent* event, GstStream** stream) nothrow;
+__gshared c_gst_event_parse_streamFn c_gst_event_parse_stream; ///
+private alias c_gst_event_parse_stream_collectionFn = extern(C) void function(GstEvent* event, GstStreamCollection** collection) nothrow;
+__gshared c_gst_event_parse_stream_collectionFn c_gst_event_parse_stream_collection; ///
+private alias c_gst_event_parse_stream_flagsFn = extern(C) void function(GstEvent* event, GstStreamFlags* flags) nothrow;
+__gshared c_gst_event_parse_stream_flagsFn c_gst_event_parse_stream_flags; ///
+private alias c_gst_event_parse_stream_group_doneFn = extern(C) void function(GstEvent* event, uint* groupId) nothrow;
+__gshared c_gst_event_parse_stream_group_doneFn c_gst_event_parse_stream_group_done; ///
+private alias c_gst_event_parse_stream_startFn = extern(C) void function(GstEvent* event, const(char*)* streamId) nothrow;
+__gshared c_gst_event_parse_stream_startFn c_gst_event_parse_stream_start; ///
+private alias c_gst_event_parse_tagFn = extern(C) void function(GstEvent* event, GstTagList** taglist) nothrow;
+__gshared c_gst_event_parse_tagFn c_gst_event_parse_tag; ///
+private alias c_gst_event_parse_tocFn = extern(C) void function(GstEvent* event, GstToc** toc, gboolean* updated) nothrow;
+__gshared c_gst_event_parse_tocFn c_gst_event_parse_toc; ///
+private alias c_gst_event_parse_toc_selectFn = extern(C) void function(GstEvent* event, char** uid) nothrow;
+__gshared c_gst_event_parse_toc_selectFn c_gst_event_parse_toc_select; ///
+private alias c_gst_event_refFn = extern(C) GstEvent* function(GstEvent* event) nothrow;
+__gshared c_gst_event_refFn c_gst_event_ref; ///
+private alias c_gst_event_set_gap_flagsFn = extern(C) void function(GstEvent* event, GstGapFlags flags) nothrow;
+__gshared c_gst_event_set_gap_flagsFn c_gst_event_set_gap_flags; ///
+private alias c_gst_event_set_group_idFn = extern(C) void function(GstEvent* event, uint groupId) nothrow;
+__gshared c_gst_event_set_group_idFn c_gst_event_set_group_id; ///
+private alias c_gst_event_set_running_time_offsetFn = extern(C) void function(GstEvent* event, long offset) nothrow;
+__gshared c_gst_event_set_running_time_offsetFn c_gst_event_set_running_time_offset; ///
+private alias c_gst_event_set_seek_trickmode_intervalFn = extern(C) void function(GstEvent* event, GstClockTime interval) nothrow;
+__gshared c_gst_event_set_seek_trickmode_intervalFn c_gst_event_set_seek_trickmode_interval; ///
+private alias c_gst_event_set_seqnumFn = extern(C) void function(GstEvent* event, uint seqnum) nothrow;
+__gshared c_gst_event_set_seqnumFn c_gst_event_set_seqnum; ///
+private alias c_gst_event_set_streamFn = extern(C) void function(GstEvent* event, GstStream* stream) nothrow;
+__gshared c_gst_event_set_streamFn c_gst_event_set_stream; ///
+private alias c_gst_event_set_stream_flagsFn = extern(C) void function(GstEvent* event, GstStreamFlags flags) nothrow;
+__gshared c_gst_event_set_stream_flagsFn c_gst_event_set_stream_flags; ///
+private alias c_gst_event_unrefFn = extern(C) void function(GstEvent* event) nothrow;
+__gshared c_gst_event_unrefFn c_gst_event_unref; ///
+private alias c_gst_event_writable_structureFn = extern(C) GstStructure* function(GstEvent* event) nothrow;
+__gshared c_gst_event_writable_structureFn c_gst_event_writable_structure; ///
+private alias c_gst_event_replaceFn = extern(C) gboolean function(GstEvent** oldEvent, GstEvent* newEvent) nothrow;
+__gshared c_gst_event_replaceFn c_gst_event_replace; ///
+private alias c_gst_event_stealFn = extern(C) GstEvent* function(GstEvent** oldEvent) nothrow;
+__gshared c_gst_event_stealFn c_gst_event_steal; ///
+private alias c_gst_event_takeFn = extern(C) gboolean function(GstEvent** oldEvent, GstEvent* newEvent) nothrow;
+__gshared c_gst_event_takeFn c_gst_event_take; ///
+
+// FlagSet
+private alias c_gst_flagset_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_flagset_get_typeFn c_gst_flagset_get_type; ///
+private alias c_gst_flagset_registerFn = extern(C) GType function(GType flagsType) nothrow;
+__gshared c_gst_flagset_registerFn c_gst_flagset_register; ///
+
+// Fraction
+private alias c_gst_fraction_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_fraction_get_typeFn c_gst_fraction_get_type; ///
+
+// FractionRange
+private alias c_gst_fraction_range_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_fraction_range_get_typeFn c_gst_fraction_range_get_type; ///
+
+// GhostPad
+private alias c_gst_ghost_pad_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_ghost_pad_get_typeFn c_gst_ghost_pad_get_type; ///
+private alias c_gst_ghost_pad_newFn = extern(C) GstPad* function(const(char)* name, GstPad* target) nothrow;
+__gshared c_gst_ghost_pad_newFn c_gst_ghost_pad_new; ///
+private alias c_gst_ghost_pad_new_from_templateFn = extern(C) GstPad* function(const(char)* name, GstPad* target, GstPadTemplate* templ) nothrow;
+__gshared c_gst_ghost_pad_new_from_templateFn c_gst_ghost_pad_new_from_template; ///
+private alias c_gst_ghost_pad_new_no_targetFn = extern(C) GstPad* function(const(char)* name, GstPadDirection dir) nothrow;
+__gshared c_gst_ghost_pad_new_no_targetFn c_gst_ghost_pad_new_no_target; ///
+private alias c_gst_ghost_pad_new_no_target_from_templateFn = extern(C) GstPad* function(const(char)* name, GstPadTemplate* templ) nothrow;
+__gshared c_gst_ghost_pad_new_no_target_from_templateFn c_gst_ghost_pad_new_no_target_from_template; ///
+private alias c_gst_ghost_pad_activate_mode_defaultFn = extern(C) gboolean function(GstPad* pad, GstObject* parent, GstPadMode mode, gboolean active) nothrow;
+__gshared c_gst_ghost_pad_activate_mode_defaultFn c_gst_ghost_pad_activate_mode_default; ///
+private alias c_gst_ghost_pad_internal_activate_mode_defaultFn = extern(C) gboolean function(GstPad* pad, GstObject* parent, GstPadMode mode, gboolean active) nothrow;
+__gshared c_gst_ghost_pad_internal_activate_mode_defaultFn c_gst_ghost_pad_internal_activate_mode_default; ///
+private alias c_gst_ghost_pad_constructFn = extern(C) gboolean function(GstGhostPad* gpad) nothrow;
+__gshared c_gst_ghost_pad_constructFn c_gst_ghost_pad_construct; ///
+private alias c_gst_ghost_pad_get_targetFn = extern(C) GstPad* function(GstGhostPad* gpad) nothrow;
+__gshared c_gst_ghost_pad_get_targetFn c_gst_ghost_pad_get_target; ///
+private alias c_gst_ghost_pad_set_targetFn = extern(C) gboolean function(GstGhostPad* gpad, GstPad* newtarget) nothrow;
+__gshared c_gst_ghost_pad_set_targetFn c_gst_ghost_pad_set_target; ///
+
+// IdStr
+private alias c_gst_id_str_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_id_str_get_typeFn c_gst_id_str_get_type; ///
+private alias c_gst_id_str_newFn = extern(C) GstIdStr* function() nothrow;
+__gshared c_gst_id_str_newFn c_gst_id_str_new; ///
+private alias c_gst_id_str_as_strFn = extern(C) const(char)* function(const(GstIdStr)* s) nothrow;
+__gshared c_gst_id_str_as_strFn c_gst_id_str_as_str; ///
+private alias c_gst_id_str_clearFn = extern(C) void function(GstIdStr* s) nothrow;
+__gshared c_gst_id_str_clearFn c_gst_id_str_clear; ///
+private alias c_gst_id_str_copyFn = extern(C) GstIdStr* function(const(GstIdStr)* s) nothrow;
+__gshared c_gst_id_str_copyFn c_gst_id_str_copy; ///
+private alias c_gst_id_str_copy_intoFn = extern(C) void function(GstIdStr* d, const(GstIdStr)* s) nothrow;
+__gshared c_gst_id_str_copy_intoFn c_gst_id_str_copy_into; ///
+private alias c_gst_id_str_freeFn = extern(C) void function(GstIdStr* s) nothrow;
+__gshared c_gst_id_str_freeFn c_gst_id_str_free; ///
+private alias c_gst_id_str_get_lenFn = extern(C) size_t function(const(GstIdStr)* s) nothrow;
+__gshared c_gst_id_str_get_lenFn c_gst_id_str_get_len; ///
+private alias c_gst_id_str_initFn = extern(C) void function(GstIdStr* s) nothrow;
+__gshared c_gst_id_str_initFn c_gst_id_str_init; ///
+private alias c_gst_id_str_is_equalFn = extern(C) gboolean function(const(GstIdStr)* s1, const(GstIdStr)* s2) nothrow;
+__gshared c_gst_id_str_is_equalFn c_gst_id_str_is_equal; ///
+private alias c_gst_id_str_is_equal_to_strFn = extern(C) gboolean function(const(GstIdStr)* s1, const(char)* s2) nothrow;
+__gshared c_gst_id_str_is_equal_to_strFn c_gst_id_str_is_equal_to_str; ///
+private alias c_gst_id_str_is_equal_to_str_with_lenFn = extern(C) gboolean function(const(GstIdStr)* s1, const(char)* s2, size_t len) nothrow;
+__gshared c_gst_id_str_is_equal_to_str_with_lenFn c_gst_id_str_is_equal_to_str_with_len; ///
+private alias c_gst_id_str_moveFn = extern(C) void function(GstIdStr* d, GstIdStr* s) nothrow;
+__gshared c_gst_id_str_moveFn c_gst_id_str_move; ///
+private alias c_gst_id_str_setFn = extern(C) void function(GstIdStr* s, const(char)* value) nothrow;
+__gshared c_gst_id_str_setFn c_gst_id_str_set; ///
+private alias c_gst_id_str_set_static_strFn = extern(C) void function(GstIdStr* s, const(char)* value) nothrow;
+__gshared c_gst_id_str_set_static_strFn c_gst_id_str_set_static_str; ///
+private alias c_gst_id_str_set_static_str_with_lenFn = extern(C) void function(GstIdStr* s, const(char)* value, size_t len) nothrow;
+__gshared c_gst_id_str_set_static_str_with_lenFn c_gst_id_str_set_static_str_with_len; ///
+private alias c_gst_id_str_set_with_lenFn = extern(C) void function(GstIdStr* s, const(char)* value, size_t len) nothrow;
+__gshared c_gst_id_str_set_with_lenFn c_gst_id_str_set_with_len; ///
+
+// Int64Range
+private alias c_gst_int64_range_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_int64_range_get_typeFn c_gst_int64_range_get_type; ///
+
+// IntRange
+private alias c_gst_int_range_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_int_range_get_typeFn c_gst_int_range_get_type; ///
+
+// Iterator
+private alias c_gst_iterator_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_iterator_get_typeFn c_gst_iterator_get_type; ///
+private alias c_gst_iterator_newFn = extern(C) GstIterator* function(uint size, GType type, GMutex* lock, uint* masterCookie, GstIteratorCopyFunction copy, GstIteratorNextFunction next, GstIteratorItemFunction item, GstIteratorResyncFunction resync, GstIteratorFreeFunction free) nothrow;
+__gshared c_gst_iterator_newFn c_gst_iterator_new; ///
+private alias c_gst_iterator_new_listFn = extern(C) GstIterator* function(GType type, GMutex* lock, uint* masterCookie, GList** list, GObject* owner, GstIteratorItemFunction item) nothrow;
+__gshared c_gst_iterator_new_listFn c_gst_iterator_new_list; ///
+private alias c_gst_iterator_new_singleFn = extern(C) GstIterator* function(GType type, const(GValue)* object) nothrow;
+__gshared c_gst_iterator_new_singleFn c_gst_iterator_new_single; ///
+private alias c_gst_iterator_copyFn = extern(C) GstIterator* function(const(GstIterator)* it) nothrow;
+__gshared c_gst_iterator_copyFn c_gst_iterator_copy; ///
+private alias c_gst_iterator_filterFn = extern(C) GstIterator* function(GstIterator* it, GCompareFunc func, const(GValue)* userData) nothrow;
+__gshared c_gst_iterator_filterFn c_gst_iterator_filter; ///
+private alias c_gst_iterator_find_customFn = extern(C) gboolean function(GstIterator* it, GCompareFunc func, GValue* elem, void* userData) nothrow;
+__gshared c_gst_iterator_find_customFn c_gst_iterator_find_custom; ///
+private alias c_gst_iterator_foldFn = extern(C) GstIteratorResult function(GstIterator* it, GstIteratorFoldFunction func, GValue* ret, void* userData) nothrow;
+__gshared c_gst_iterator_foldFn c_gst_iterator_fold; ///
+private alias c_gst_iterator_foreachFn = extern(C) GstIteratorResult function(GstIterator* it, GstIteratorForeachFunction func, void* userData) nothrow;
+__gshared c_gst_iterator_foreachFn c_gst_iterator_foreach; ///
+private alias c_gst_iterator_freeFn = extern(C) void function(GstIterator* it) nothrow;
+__gshared c_gst_iterator_freeFn c_gst_iterator_free; ///
+private alias c_gst_iterator_nextFn = extern(C) GstIteratorResult function(GstIterator* it, GValue* elem) nothrow;
+__gshared c_gst_iterator_nextFn c_gst_iterator_next; ///
+private alias c_gst_iterator_pushFn = extern(C) void function(GstIterator* it, GstIterator* other) nothrow;
+__gshared c_gst_iterator_pushFn c_gst_iterator_push; ///
+private alias c_gst_iterator_resyncFn = extern(C) void function(GstIterator* it) nothrow;
+__gshared c_gst_iterator_resyncFn c_gst_iterator_resync; ///
+
+// LogContext
+private alias c_gst_log_context_freeFn = extern(C) void function(GstLogContext* ctx) nothrow;
+__gshared c_gst_log_context_freeFn c_gst_log_context_free; ///
+private alias c_gst_log_context_get_categoryFn = extern(C) GstDebugCategory* function(GstLogContext* context) nothrow;
+__gshared c_gst_log_context_get_categoryFn c_gst_log_context_get_category; ///
+private alias c_gst_log_context_resetFn = extern(C) void function(GstLogContext* ctx) nothrow;
+__gshared c_gst_log_context_resetFn c_gst_log_context_reset; ///
+
+// LogContextBuilder
+private alias c_gst_log_context_builder_buildFn = extern(C) GstLogContext* function(GstLogContextBuilder* builder) nothrow;
+__gshared c_gst_log_context_builder_buildFn c_gst_log_context_builder_build; ///
+private alias c_gst_log_context_builder_set_categoryFn = extern(C) GstLogContextBuilder* function(GstLogContextBuilder* builder, GstDebugCategory* category) nothrow;
+__gshared c_gst_log_context_builder_set_categoryFn c_gst_log_context_builder_set_category; ///
+private alias c_gst_log_context_builder_set_hash_flagsFn = extern(C) GstLogContextBuilder* function(GstLogContextBuilder* builder, GstLogContextHashFlags flags) nothrow;
+__gshared c_gst_log_context_builder_set_hash_flagsFn c_gst_log_context_builder_set_hash_flags; ///
+private alias c_gst_log_context_builder_set_intervalFn = extern(C) GstLogContextBuilder* function(GstLogContextBuilder* builder, GstClockTime interval) nothrow;
+__gshared c_gst_log_context_builder_set_intervalFn c_gst_log_context_builder_set_interval; ///
+private alias c_gst_log_context_builder_newFn = extern(C) GstLogContextBuilder* function(GstDebugCategory* category, GstLogContextFlags flags) nothrow;
+__gshared c_gst_log_context_builder_newFn c_gst_log_context_builder_new; ///
+
+// MapInfo
+private alias c_gst_map_info_clearFn = extern(C) void function(GstMapInfo* info) nothrow;
+__gshared c_gst_map_info_clearFn c_gst_map_info_clear; ///
+private alias c_gst_map_info_get_dataFn = extern(C) ubyte* function(GstMapInfo* info, size_t* size) nothrow;
+__gshared c_gst_map_info_get_dataFn c_gst_map_info_get_data; ///
+private alias c_gst_map_info_initFn = extern(C) void function(GstMapInfo* info) nothrow;
+__gshared c_gst_map_info_initFn c_gst_map_info_init; ///
+
+// Memory
+private alias c_gst_memory_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_memory_get_typeFn c_gst_memory_get_type; ///
+private alias c_gst_memory_new_wrappedFn = extern(C) GstMemory* function(GstMemoryFlags flags, void* data, size_t maxsize, size_t offset, size_t size, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_memory_new_wrappedFn c_gst_memory_new_wrapped; ///
+private alias c_gst_memory_copyFn = extern(C) GstMemory* function(GstMemory* mem, ptrdiff_t offset, ptrdiff_t size) nothrow;
+__gshared c_gst_memory_copyFn c_gst_memory_copy; ///
+private alias c_gst_memory_get_sizesFn = extern(C) size_t function(GstMemory* mem, size_t* offset, size_t* maxsize) nothrow;
+__gshared c_gst_memory_get_sizesFn c_gst_memory_get_sizes; ///
+private alias c_gst_memory_initFn = extern(C) void function(GstMemory* mem, GstMemoryFlags flags, GstAllocator* allocator, GstMemory* parent, size_t maxsize, size_t align_, size_t offset, size_t size) nothrow;
+__gshared c_gst_memory_initFn c_gst_memory_init; ///
+private alias c_gst_memory_is_spanFn = extern(C) gboolean function(GstMemory* mem1, GstMemory* mem2, size_t* offset) nothrow;
+__gshared c_gst_memory_is_spanFn c_gst_memory_is_span; ///
+private alias c_gst_memory_is_typeFn = extern(C) gboolean function(GstMemory* mem, const(char)* memType) nothrow;
+__gshared c_gst_memory_is_typeFn c_gst_memory_is_type; ///
+private alias c_gst_memory_is_writableFn = extern(C) gboolean function(const(GstMemory)* memory) nothrow;
+__gshared c_gst_memory_is_writableFn c_gst_memory_is_writable; ///
+private alias c_gst_memory_make_mappedFn = extern(C) GstMemory* function(GstMemory* mem, GstMapInfo* info, GstMapFlags flags) nothrow;
+__gshared c_gst_memory_make_mappedFn c_gst_memory_make_mapped; ///
+private alias c_gst_memory_make_writableFn = extern(C) GstMemory* function(GstMemory* memory) nothrow;
+__gshared c_gst_memory_make_writableFn c_gst_memory_make_writable; ///
+private alias c_gst_memory_mapFn = extern(C) gboolean function(GstMemory* mem, GstMapInfo* info, GstMapFlags flags) nothrow;
+__gshared c_gst_memory_mapFn c_gst_memory_map; ///
+private alias c_gst_memory_refFn = extern(C) GstMemory* function(GstMemory* memory) nothrow;
+__gshared c_gst_memory_refFn c_gst_memory_ref; ///
+private alias c_gst_memory_resizeFn = extern(C) void function(GstMemory* mem, ptrdiff_t offset, size_t size) nothrow;
+__gshared c_gst_memory_resizeFn c_gst_memory_resize; ///
+private alias c_gst_memory_shareFn = extern(C) GstMemory* function(GstMemory* mem, ptrdiff_t offset, ptrdiff_t size) nothrow;
+__gshared c_gst_memory_shareFn c_gst_memory_share; ///
+private alias c_gst_memory_unmapFn = extern(C) void function(GstMemory* mem, GstMapInfo* info) nothrow;
+__gshared c_gst_memory_unmapFn c_gst_memory_unmap; ///
+private alias c_gst_memory_unrefFn = extern(C) void function(GstMemory* memory) nothrow;
+__gshared c_gst_memory_unrefFn c_gst_memory_unref; ///
+private alias c_gst_memory_replaceFn = extern(C) gboolean function(GstMemory** oldMemory, GstMemory* newMemory) nothrow;
+__gshared c_gst_memory_replaceFn c_gst_memory_replace; ///
+private alias c_gst_memory_stealFn = extern(C) GstMemory* function(GstMemory** oldMemory) nothrow;
+__gshared c_gst_memory_stealFn c_gst_memory_steal; ///
+private alias c_gst_memory_takeFn = extern(C) gboolean function(GstMemory** oldMemory, GstMemory* newMemory) nothrow;
+__gshared c_gst_memory_takeFn c_gst_memory_take; ///
+
+// Message
+private alias c_gst_message_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_message_get_typeFn c_gst_message_get_type; ///
+private alias c_gst_message_new_applicationFn = extern(C) GstMessage* function(GstObject* src, GstStructure* structure) nothrow;
+__gshared c_gst_message_new_applicationFn c_gst_message_new_application; ///
+private alias c_gst_message_new_async_doneFn = extern(C) GstMessage* function(GstObject* src, GstClockTime runningTime) nothrow;
+__gshared c_gst_message_new_async_doneFn c_gst_message_new_async_done; ///
+private alias c_gst_message_new_async_startFn = extern(C) GstMessage* function(GstObject* src) nothrow;
+__gshared c_gst_message_new_async_startFn c_gst_message_new_async_start; ///
+private alias c_gst_message_new_bufferingFn = extern(C) GstMessage* function(GstObject* src, int percent) nothrow;
+__gshared c_gst_message_new_bufferingFn c_gst_message_new_buffering; ///
+private alias c_gst_message_new_clock_lostFn = extern(C) GstMessage* function(GstObject* src, GstClock* clock) nothrow;
+__gshared c_gst_message_new_clock_lostFn c_gst_message_new_clock_lost; ///
+private alias c_gst_message_new_clock_provideFn = extern(C) GstMessage* function(GstObject* src, GstClock* clock, gboolean ready) nothrow;
+__gshared c_gst_message_new_clock_provideFn c_gst_message_new_clock_provide; ///
+private alias c_gst_message_new_customFn = extern(C) GstMessage* function(GstMessageType type, GstObject* src, GstStructure* structure) nothrow;
+__gshared c_gst_message_new_customFn c_gst_message_new_custom; ///
+private alias c_gst_message_new_device_addedFn = extern(C) GstMessage* function(GstObject* src, GstDevice* device) nothrow;
+__gshared c_gst_message_new_device_addedFn c_gst_message_new_device_added; ///
+private alias c_gst_message_new_device_changedFn = extern(C) GstMessage* function(GstObject* src, GstDevice* device, GstDevice* changedDevice) nothrow;
+__gshared c_gst_message_new_device_changedFn c_gst_message_new_device_changed; ///
+private alias c_gst_message_new_device_monitor_startedFn = extern(C) GstMessage* function(GstObject* src, gboolean success) nothrow;
+__gshared c_gst_message_new_device_monitor_startedFn c_gst_message_new_device_monitor_started; ///
+private alias c_gst_message_new_device_removedFn = extern(C) GstMessage* function(GstObject* src, GstDevice* device) nothrow;
+__gshared c_gst_message_new_device_removedFn c_gst_message_new_device_removed; ///
+private alias c_gst_message_new_duration_changedFn = extern(C) GstMessage* function(GstObject* src) nothrow;
+__gshared c_gst_message_new_duration_changedFn c_gst_message_new_duration_changed; ///
+private alias c_gst_message_new_elementFn = extern(C) GstMessage* function(GstObject* src, GstStructure* structure) nothrow;
+__gshared c_gst_message_new_elementFn c_gst_message_new_element; ///
+private alias c_gst_message_new_eosFn = extern(C) GstMessage* function(GstObject* src) nothrow;
+__gshared c_gst_message_new_eosFn c_gst_message_new_eos; ///
+private alias c_gst_message_new_errorFn = extern(C) GstMessage* function(GstObject* src, GError* error, const(char)* debug_) nothrow;
+__gshared c_gst_message_new_errorFn c_gst_message_new_error; ///
+private alias c_gst_message_new_error_with_detailsFn = extern(C) GstMessage* function(GstObject* src, GError* error, const(char)* debug_, GstStructure* details) nothrow;
+__gshared c_gst_message_new_error_with_detailsFn c_gst_message_new_error_with_details; ///
+private alias c_gst_message_new_have_contextFn = extern(C) GstMessage* function(GstObject* src, GstContext* context) nothrow;
+__gshared c_gst_message_new_have_contextFn c_gst_message_new_have_context; ///
+private alias c_gst_message_new_infoFn = extern(C) GstMessage* function(GstObject* src, GError* error, const(char)* debug_) nothrow;
+__gshared c_gst_message_new_infoFn c_gst_message_new_info; ///
+private alias c_gst_message_new_info_with_detailsFn = extern(C) GstMessage* function(GstObject* src, GError* error, const(char)* debug_, GstStructure* details) nothrow;
+__gshared c_gst_message_new_info_with_detailsFn c_gst_message_new_info_with_details; ///
+private alias c_gst_message_new_instant_rate_requestFn = extern(C) GstMessage* function(GstObject* src, double rateMultiplier) nothrow;
+__gshared c_gst_message_new_instant_rate_requestFn c_gst_message_new_instant_rate_request; ///
+private alias c_gst_message_new_latencyFn = extern(C) GstMessage* function(GstObject* src) nothrow;
+__gshared c_gst_message_new_latencyFn c_gst_message_new_latency; ///
+private alias c_gst_message_new_need_contextFn = extern(C) GstMessage* function(GstObject* src, const(char)* contextType) nothrow;
+__gshared c_gst_message_new_need_contextFn c_gst_message_new_need_context; ///
+private alias c_gst_message_new_new_clockFn = extern(C) GstMessage* function(GstObject* src, GstClock* clock) nothrow;
+__gshared c_gst_message_new_new_clockFn c_gst_message_new_new_clock; ///
+private alias c_gst_message_new_progressFn = extern(C) GstMessage* function(GstObject* src, GstProgressType type, const(char)* code, const(char)* text) nothrow;
+__gshared c_gst_message_new_progressFn c_gst_message_new_progress; ///
+private alias c_gst_message_new_property_notifyFn = extern(C) GstMessage* function(GstObject* src, const(char)* propertyName, GValue* val) nothrow;
+__gshared c_gst_message_new_property_notifyFn c_gst_message_new_property_notify; ///
+private alias c_gst_message_new_qosFn = extern(C) GstMessage* function(GstObject* src, gboolean live, ulong runningTime, ulong streamTime, ulong timestamp, ulong duration) nothrow;
+__gshared c_gst_message_new_qosFn c_gst_message_new_qos; ///
+private alias c_gst_message_new_redirectFn = extern(C) GstMessage* function(GstObject* src, const(char)* location, GstTagList* tagList, GstStructure* entryStruct) nothrow;
+__gshared c_gst_message_new_redirectFn c_gst_message_new_redirect; ///
+private alias c_gst_message_new_request_stateFn = extern(C) GstMessage* function(GstObject* src, GstState state) nothrow;
+__gshared c_gst_message_new_request_stateFn c_gst_message_new_request_state; ///
+private alias c_gst_message_new_reset_timeFn = extern(C) GstMessage* function(GstObject* src, GstClockTime runningTime) nothrow;
+__gshared c_gst_message_new_reset_timeFn c_gst_message_new_reset_time; ///
+private alias c_gst_message_new_segment_doneFn = extern(C) GstMessage* function(GstObject* src, GstFormat format, long position) nothrow;
+__gshared c_gst_message_new_segment_doneFn c_gst_message_new_segment_done; ///
+private alias c_gst_message_new_segment_startFn = extern(C) GstMessage* function(GstObject* src, GstFormat format, long position) nothrow;
+__gshared c_gst_message_new_segment_startFn c_gst_message_new_segment_start; ///
+private alias c_gst_message_new_state_changedFn = extern(C) GstMessage* function(GstObject* src, GstState oldstate, GstState newstate, GstState pending) nothrow;
+__gshared c_gst_message_new_state_changedFn c_gst_message_new_state_changed; ///
+private alias c_gst_message_new_state_dirtyFn = extern(C) GstMessage* function(GstObject* src) nothrow;
+__gshared c_gst_message_new_state_dirtyFn c_gst_message_new_state_dirty; ///
+private alias c_gst_message_new_step_doneFn = extern(C) GstMessage* function(GstObject* src, GstFormat format, ulong amount, double rate, gboolean flush, gboolean intermediate, ulong duration, gboolean eos) nothrow;
+__gshared c_gst_message_new_step_doneFn c_gst_message_new_step_done; ///
+private alias c_gst_message_new_step_startFn = extern(C) GstMessage* function(GstObject* src, gboolean active, GstFormat format, ulong amount, double rate, gboolean flush, gboolean intermediate) nothrow;
+__gshared c_gst_message_new_step_startFn c_gst_message_new_step_start; ///
+private alias c_gst_message_new_stream_collectionFn = extern(C) GstMessage* function(GstObject* src, GstStreamCollection* collection) nothrow;
+__gshared c_gst_message_new_stream_collectionFn c_gst_message_new_stream_collection; ///
+private alias c_gst_message_new_stream_startFn = extern(C) GstMessage* function(GstObject* src) nothrow;
+__gshared c_gst_message_new_stream_startFn c_gst_message_new_stream_start; ///
+private alias c_gst_message_new_stream_statusFn = extern(C) GstMessage* function(GstObject* src, GstStreamStatusType type, GstElement* owner) nothrow;
+__gshared c_gst_message_new_stream_statusFn c_gst_message_new_stream_status; ///
+private alias c_gst_message_new_streams_selectedFn = extern(C) GstMessage* function(GstObject* src, GstStreamCollection* collection) nothrow;
+__gshared c_gst_message_new_streams_selectedFn c_gst_message_new_streams_selected; ///
+private alias c_gst_message_new_structure_changeFn = extern(C) GstMessage* function(GstObject* src, GstStructureChangeType type, GstElement* owner, gboolean busy) nothrow;
+__gshared c_gst_message_new_structure_changeFn c_gst_message_new_structure_change; ///
+private alias c_gst_message_new_tagFn = extern(C) GstMessage* function(GstObject* src, GstTagList* tagList) nothrow;
+__gshared c_gst_message_new_tagFn c_gst_message_new_tag; ///
+private alias c_gst_message_new_tocFn = extern(C) GstMessage* function(GstObject* src, GstToc* toc, gboolean updated) nothrow;
+__gshared c_gst_message_new_tocFn c_gst_message_new_toc; ///
+private alias c_gst_message_new_warningFn = extern(C) GstMessage* function(GstObject* src, GError* error, const(char)* debug_) nothrow;
+__gshared c_gst_message_new_warningFn c_gst_message_new_warning; ///
+private alias c_gst_message_new_warning_with_detailsFn = extern(C) GstMessage* function(GstObject* src, GError* error, const(char)* debug_, GstStructure* details) nothrow;
+__gshared c_gst_message_new_warning_with_detailsFn c_gst_message_new_warning_with_details; ///
+private alias c_gst_message_add_redirect_entryFn = extern(C) void function(GstMessage* message, const(char)* location, GstTagList* tagList, GstStructure* entryStruct) nothrow;
+__gshared c_gst_message_add_redirect_entryFn c_gst_message_add_redirect_entry; ///
+private alias c_gst_message_copyFn = extern(C) GstMessage* function(const(GstMessage)* msg) nothrow;
+__gshared c_gst_message_copyFn c_gst_message_copy; ///
+private alias c_gst_message_get_detailsFn = extern(C) const(GstStructure)* function(GstMessage* message) nothrow;
+__gshared c_gst_message_get_detailsFn c_gst_message_get_details; ///
+private alias c_gst_message_get_num_redirect_entriesFn = extern(C) size_t function(GstMessage* message) nothrow;
+__gshared c_gst_message_get_num_redirect_entriesFn c_gst_message_get_num_redirect_entries; ///
+private alias c_gst_message_get_seqnumFn = extern(C) uint function(GstMessage* message) nothrow;
+__gshared c_gst_message_get_seqnumFn c_gst_message_get_seqnum; ///
+private alias c_gst_message_get_stream_status_objectFn = extern(C) const(GValue)* function(GstMessage* message) nothrow;
+__gshared c_gst_message_get_stream_status_objectFn c_gst_message_get_stream_status_object; ///
+private alias c_gst_message_get_structureFn = extern(C) const(GstStructure)* function(GstMessage* message) nothrow;
+__gshared c_gst_message_get_structureFn c_gst_message_get_structure; ///
+private alias c_gst_message_has_nameFn = extern(C) gboolean function(GstMessage* message, const(char)* name) nothrow;
+__gshared c_gst_message_has_nameFn c_gst_message_has_name; ///
+private alias c_gst_message_is_writableFn = extern(C) gboolean function(const(GstMessage)* message) nothrow;
+__gshared c_gst_message_is_writableFn c_gst_message_is_writable; ///
+private alias c_gst_message_make_writableFn = extern(C) GstMessage* function(GstMessage* message) nothrow;
+__gshared c_gst_message_make_writableFn c_gst_message_make_writable; ///
+private alias c_gst_message_parse_async_doneFn = extern(C) void function(GstMessage* message, GstClockTime* runningTime) nothrow;
+__gshared c_gst_message_parse_async_doneFn c_gst_message_parse_async_done; ///
+private alias c_gst_message_parse_bufferingFn = extern(C) void function(GstMessage* message, int* percent) nothrow;
+__gshared c_gst_message_parse_bufferingFn c_gst_message_parse_buffering; ///
+private alias c_gst_message_parse_buffering_statsFn = extern(C) void function(GstMessage* message, GstBufferingMode* mode, int* avgIn, int* avgOut, long* bufferingLeft) nothrow;
+__gshared c_gst_message_parse_buffering_statsFn c_gst_message_parse_buffering_stats; ///
+private alias c_gst_message_parse_clock_lostFn = extern(C) void function(GstMessage* message, GstClock** clock) nothrow;
+__gshared c_gst_message_parse_clock_lostFn c_gst_message_parse_clock_lost; ///
+private alias c_gst_message_parse_clock_provideFn = extern(C) void function(GstMessage* message, GstClock** clock, gboolean* ready) nothrow;
+__gshared c_gst_message_parse_clock_provideFn c_gst_message_parse_clock_provide; ///
+private alias c_gst_message_parse_context_typeFn = extern(C) gboolean function(GstMessage* message, const(char*)* contextType) nothrow;
+__gshared c_gst_message_parse_context_typeFn c_gst_message_parse_context_type; ///
+private alias c_gst_message_parse_device_addedFn = extern(C) void function(GstMessage* message, GstDevice** device) nothrow;
+__gshared c_gst_message_parse_device_addedFn c_gst_message_parse_device_added; ///
+private alias c_gst_message_parse_device_changedFn = extern(C) void function(GstMessage* message, GstDevice** device, GstDevice** changedDevice) nothrow;
+__gshared c_gst_message_parse_device_changedFn c_gst_message_parse_device_changed; ///
+private alias c_gst_message_parse_device_monitor_startedFn = extern(C) void function(GstMessage* message, gboolean* success) nothrow;
+__gshared c_gst_message_parse_device_monitor_startedFn c_gst_message_parse_device_monitor_started; ///
+private alias c_gst_message_parse_device_removedFn = extern(C) void function(GstMessage* message, GstDevice** device) nothrow;
+__gshared c_gst_message_parse_device_removedFn c_gst_message_parse_device_removed; ///
+private alias c_gst_message_parse_errorFn = extern(C) void function(GstMessage* message, GError** gerror, char** debug_) nothrow;
+__gshared c_gst_message_parse_errorFn c_gst_message_parse_error; ///
+private alias c_gst_message_parse_error_detailsFn = extern(C) void function(GstMessage* message, const(GstStructure*)* structure) nothrow;
+__gshared c_gst_message_parse_error_detailsFn c_gst_message_parse_error_details; ///
+private alias c_gst_message_parse_error_writable_detailsFn = extern(C) void function(GstMessage* message, GstStructure** structure) nothrow;
+__gshared c_gst_message_parse_error_writable_detailsFn c_gst_message_parse_error_writable_details; ///
+private alias c_gst_message_parse_group_idFn = extern(C) gboolean function(GstMessage* message, uint* groupId) nothrow;
+__gshared c_gst_message_parse_group_idFn c_gst_message_parse_group_id; ///
+private alias c_gst_message_parse_have_contextFn = extern(C) void function(GstMessage* message, GstContext** context) nothrow;
+__gshared c_gst_message_parse_have_contextFn c_gst_message_parse_have_context; ///
+private alias c_gst_message_parse_infoFn = extern(C) void function(GstMessage* message, GError** gerror, char** debug_) nothrow;
+__gshared c_gst_message_parse_infoFn c_gst_message_parse_info; ///
+private alias c_gst_message_parse_info_detailsFn = extern(C) void function(GstMessage* message, const(GstStructure*)* structure) nothrow;
+__gshared c_gst_message_parse_info_detailsFn c_gst_message_parse_info_details; ///
+private alias c_gst_message_parse_info_writable_detailsFn = extern(C) void function(GstMessage* message, GstStructure** structure) nothrow;
+__gshared c_gst_message_parse_info_writable_detailsFn c_gst_message_parse_info_writable_details; ///
+private alias c_gst_message_parse_instant_rate_requestFn = extern(C) void function(GstMessage* message, double* rateMultiplier) nothrow;
+__gshared c_gst_message_parse_instant_rate_requestFn c_gst_message_parse_instant_rate_request; ///
+private alias c_gst_message_parse_new_clockFn = extern(C) void function(GstMessage* message, GstClock** clock) nothrow;
+__gshared c_gst_message_parse_new_clockFn c_gst_message_parse_new_clock; ///
+private alias c_gst_message_parse_progressFn = extern(C) void function(GstMessage* message, GstProgressType* type, char** code, char** text) nothrow;
+__gshared c_gst_message_parse_progressFn c_gst_message_parse_progress; ///
+private alias c_gst_message_parse_property_notifyFn = extern(C) void function(GstMessage* message, GstObject** object, const(char*)* propertyName, const(GValue*)* propertyValue) nothrow;
+__gshared c_gst_message_parse_property_notifyFn c_gst_message_parse_property_notify; ///
+private alias c_gst_message_parse_qosFn = extern(C) void function(GstMessage* message, gboolean* live, ulong* runningTime, ulong* streamTime, ulong* timestamp, ulong* duration) nothrow;
+__gshared c_gst_message_parse_qosFn c_gst_message_parse_qos; ///
+private alias c_gst_message_parse_qos_statsFn = extern(C) void function(GstMessage* message, GstFormat* format, ulong* processed, ulong* dropped) nothrow;
+__gshared c_gst_message_parse_qos_statsFn c_gst_message_parse_qos_stats; ///
+private alias c_gst_message_parse_qos_valuesFn = extern(C) void function(GstMessage* message, long* jitter, double* proportion, int* quality) nothrow;
+__gshared c_gst_message_parse_qos_valuesFn c_gst_message_parse_qos_values; ///
+private alias c_gst_message_parse_redirect_entryFn = extern(C) void function(GstMessage* message, size_t entryIndex, const(char*)* location, GstTagList** tagList, const(GstStructure*)* entryStruct) nothrow;
+__gshared c_gst_message_parse_redirect_entryFn c_gst_message_parse_redirect_entry; ///
+private alias c_gst_message_parse_request_stateFn = extern(C) void function(GstMessage* message, GstState* state) nothrow;
+__gshared c_gst_message_parse_request_stateFn c_gst_message_parse_request_state; ///
+private alias c_gst_message_parse_reset_timeFn = extern(C) void function(GstMessage* message, GstClockTime* runningTime) nothrow;
+__gshared c_gst_message_parse_reset_timeFn c_gst_message_parse_reset_time; ///
+private alias c_gst_message_parse_segment_doneFn = extern(C) void function(GstMessage* message, GstFormat* format, long* position) nothrow;
+__gshared c_gst_message_parse_segment_doneFn c_gst_message_parse_segment_done; ///
+private alias c_gst_message_parse_segment_startFn = extern(C) void function(GstMessage* message, GstFormat* format, long* position) nothrow;
+__gshared c_gst_message_parse_segment_startFn c_gst_message_parse_segment_start; ///
+private alias c_gst_message_parse_state_changedFn = extern(C) void function(GstMessage* message, GstState* oldstate, GstState* newstate, GstState* pending) nothrow;
+__gshared c_gst_message_parse_state_changedFn c_gst_message_parse_state_changed; ///
+private alias c_gst_message_parse_step_doneFn = extern(C) void function(GstMessage* message, GstFormat* format, ulong* amount, double* rate, gboolean* flush, gboolean* intermediate, ulong* duration, gboolean* eos) nothrow;
+__gshared c_gst_message_parse_step_doneFn c_gst_message_parse_step_done; ///
+private alias c_gst_message_parse_step_startFn = extern(C) void function(GstMessage* message, gboolean* active, GstFormat* format, ulong* amount, double* rate, gboolean* flush, gboolean* intermediate) nothrow;
+__gshared c_gst_message_parse_step_startFn c_gst_message_parse_step_start; ///
+private alias c_gst_message_parse_stream_collectionFn = extern(C) void function(GstMessage* message, GstStreamCollection** collection) nothrow;
+__gshared c_gst_message_parse_stream_collectionFn c_gst_message_parse_stream_collection; ///
+private alias c_gst_message_parse_stream_statusFn = extern(C) void function(GstMessage* message, GstStreamStatusType* type, GstElement** owner) nothrow;
+__gshared c_gst_message_parse_stream_statusFn c_gst_message_parse_stream_status; ///
+private alias c_gst_message_parse_streams_selectedFn = extern(C) void function(GstMessage* message, GstStreamCollection** collection) nothrow;
+__gshared c_gst_message_parse_streams_selectedFn c_gst_message_parse_streams_selected; ///
+private alias c_gst_message_parse_structure_changeFn = extern(C) void function(GstMessage* message, GstStructureChangeType* type, GstElement** owner, gboolean* busy) nothrow;
+__gshared c_gst_message_parse_structure_changeFn c_gst_message_parse_structure_change; ///
+private alias c_gst_message_parse_tagFn = extern(C) void function(GstMessage* message, GstTagList** tagList) nothrow;
+__gshared c_gst_message_parse_tagFn c_gst_message_parse_tag; ///
+private alias c_gst_message_parse_tocFn = extern(C) void function(GstMessage* message, GstToc** toc, gboolean* updated) nothrow;
+__gshared c_gst_message_parse_tocFn c_gst_message_parse_toc; ///
+private alias c_gst_message_parse_warningFn = extern(C) void function(GstMessage* message, GError** gerror, char** debug_) nothrow;
+__gshared c_gst_message_parse_warningFn c_gst_message_parse_warning; ///
+private alias c_gst_message_parse_warning_detailsFn = extern(C) void function(GstMessage* message, const(GstStructure*)* structure) nothrow;
+__gshared c_gst_message_parse_warning_detailsFn c_gst_message_parse_warning_details; ///
+private alias c_gst_message_parse_warning_writable_detailsFn = extern(C) void function(GstMessage* message, GstStructure** structure) nothrow;
+__gshared c_gst_message_parse_warning_writable_detailsFn c_gst_message_parse_warning_writable_details; ///
+private alias c_gst_message_refFn = extern(C) GstMessage* function(GstMessage* msg) nothrow;
+__gshared c_gst_message_refFn c_gst_message_ref; ///
+private alias c_gst_message_set_buffering_statsFn = extern(C) void function(GstMessage* message, GstBufferingMode mode, int avgIn, int avgOut, long bufferingLeft) nothrow;
+__gshared c_gst_message_set_buffering_statsFn c_gst_message_set_buffering_stats; ///
+private alias c_gst_message_set_detailsFn = extern(C) void function(GstMessage* message, GstStructure* details) nothrow;
+__gshared c_gst_message_set_detailsFn c_gst_message_set_details; ///
+private alias c_gst_message_set_group_idFn = extern(C) void function(GstMessage* message, uint groupId) nothrow;
+__gshared c_gst_message_set_group_idFn c_gst_message_set_group_id; ///
+private alias c_gst_message_set_qos_statsFn = extern(C) void function(GstMessage* message, GstFormat format, ulong processed, ulong dropped) nothrow;
+__gshared c_gst_message_set_qos_statsFn c_gst_message_set_qos_stats; ///
+private alias c_gst_message_set_qos_valuesFn = extern(C) void function(GstMessage* message, long jitter, double proportion, int quality) nothrow;
+__gshared c_gst_message_set_qos_valuesFn c_gst_message_set_qos_values; ///
+private alias c_gst_message_set_seqnumFn = extern(C) void function(GstMessage* message, uint seqnum) nothrow;
+__gshared c_gst_message_set_seqnumFn c_gst_message_set_seqnum; ///
+private alias c_gst_message_set_stream_status_objectFn = extern(C) void function(GstMessage* message, const(GValue)* object) nothrow;
+__gshared c_gst_message_set_stream_status_objectFn c_gst_message_set_stream_status_object; ///
+private alias c_gst_message_streams_selected_addFn = extern(C) void function(GstMessage* message, GstStream* stream) nothrow;
+__gshared c_gst_message_streams_selected_addFn c_gst_message_streams_selected_add; ///
+private alias c_gst_message_streams_selected_get_sizeFn = extern(C) uint function(GstMessage* message) nothrow;
+__gshared c_gst_message_streams_selected_get_sizeFn c_gst_message_streams_selected_get_size; ///
+private alias c_gst_message_streams_selected_get_streamFn = extern(C) GstStream* function(GstMessage* message, uint idx) nothrow;
+__gshared c_gst_message_streams_selected_get_streamFn c_gst_message_streams_selected_get_stream; ///
+private alias c_gst_message_unrefFn = extern(C) void function(GstMessage* msg) nothrow;
+__gshared c_gst_message_unrefFn c_gst_message_unref; ///
+private alias c_gst_message_writable_detailsFn = extern(C) GstStructure* function(GstMessage* message) nothrow;
+__gshared c_gst_message_writable_detailsFn c_gst_message_writable_details; ///
+private alias c_gst_message_writable_structureFn = extern(C) GstStructure* function(GstMessage* message) nothrow;
+__gshared c_gst_message_writable_structureFn c_gst_message_writable_structure; ///
+private alias c_gst_message_replaceFn = extern(C) gboolean function(GstMessage** oldMessage, GstMessage* newMessage) nothrow;
+__gshared c_gst_message_replaceFn c_gst_message_replace; ///
+private alias c_gst_message_stealFn = extern(C) GstMessage* function(GstMessage** oldMessage) nothrow;
+__gshared c_gst_message_stealFn c_gst_message_steal; ///
+private alias c_gst_message_takeFn = extern(C) gboolean function(GstMessage** oldMessage, GstMessage* newMessage) nothrow;
+__gshared c_gst_message_takeFn c_gst_message_take; ///
+
+// Meta
+private alias c_gst_meta_compare_seqnumFn = extern(C) int function(const(GstMeta)* meta1, const(GstMeta)* meta2) nothrow;
+__gshared c_gst_meta_compare_seqnumFn c_gst_meta_compare_seqnum; ///
+private alias c_gst_meta_get_seqnumFn = extern(C) ulong function(const(GstMeta)* meta) nothrow;
+__gshared c_gst_meta_get_seqnumFn c_gst_meta_get_seqnum; ///
+private alias c_gst_meta_serializeFn = extern(C) gboolean function(const(GstMeta)* meta, GstByteArrayInterface* data) nothrow;
+__gshared c_gst_meta_serializeFn c_gst_meta_serialize; ///
+private alias c_gst_meta_serialize_simpleFn = extern(C) gboolean function(const(GstMeta)* meta, GByteArray* data) nothrow;
+__gshared c_gst_meta_serialize_simpleFn c_gst_meta_serialize_simple; ///
+private alias c_gst_meta_api_type_aggregate_paramsFn = extern(C) gboolean function(GType api, GstStructure** aggregatedParams, const(GstStructure)* params0, const(GstStructure)* params1) nothrow;
+__gshared c_gst_meta_api_type_aggregate_paramsFn c_gst_meta_api_type_aggregate_params; ///
+private alias c_gst_meta_api_type_get_tagsFn = extern(C) const(char*)* function(GType api) nothrow;
+__gshared c_gst_meta_api_type_get_tagsFn c_gst_meta_api_type_get_tags; ///
+private alias c_gst_meta_api_type_has_tagFn = extern(C) gboolean function(GType api, GQuark tag) nothrow;
+__gshared c_gst_meta_api_type_has_tagFn c_gst_meta_api_type_has_tag; ///
+private alias c_gst_meta_api_type_registerFn = extern(C) GType function(const(char)* api, const(char*)* tags) nothrow;
+__gshared c_gst_meta_api_type_registerFn c_gst_meta_api_type_register; ///
+private alias c_gst_meta_api_type_set_params_aggregatorFn = extern(C) void function(GType api, GstAllocationMetaParamsAggregator aggregator) nothrow;
+__gshared c_gst_meta_api_type_set_params_aggregatorFn c_gst_meta_api_type_set_params_aggregator; ///
+private alias c_gst_meta_api_type_tags_contain_onlyFn = extern(C) gboolean function(GType api, const(char*)* validTags) nothrow;
+__gshared c_gst_meta_api_type_tags_contain_onlyFn c_gst_meta_api_type_tags_contain_only; ///
+private alias c_gst_meta_deserializeFn = extern(C) GstMeta* function(GstBuffer* buffer, const(ubyte)* data, size_t size, uint* consumed) nothrow;
+__gshared c_gst_meta_deserializeFn c_gst_meta_deserialize; ///
+private alias c_gst_meta_get_infoFn = extern(C) const(GstMetaInfo)* function(const(char)* impl) nothrow;
+__gshared c_gst_meta_get_infoFn c_gst_meta_get_info; ///
+private alias c_gst_meta_registerFn = extern(C) const(GstMetaInfo)* function(GType api, const(char)* impl, size_t size, GstMetaInitFunction initFunc, GstMetaFreeFunction freeFunc, GstMetaTransformFunction transformFunc) nothrow;
+__gshared c_gst_meta_registerFn c_gst_meta_register; ///
+private alias c_gst_meta_register_customFn = extern(C) const(GstMetaInfo)* function(const(char)* name, const(char*)* tags, GstCustomMetaTransformFunction transformFunc, void* userData, GDestroyNotify destroyData) nothrow;
+__gshared c_gst_meta_register_customFn c_gst_meta_register_custom; ///
+private alias c_gst_meta_register_custom_simpleFn = extern(C) const(GstMetaInfo)* function(const(char)* name) nothrow;
+__gshared c_gst_meta_register_custom_simpleFn c_gst_meta_register_custom_simple; ///
+
+// MetaFactory
+private alias c_gst_meta_factory_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_meta_factory_get_typeFn c_gst_meta_factory_get_type; ///
+private alias c_gst_meta_factory_loadFn = extern(C) const(GstMetaInfo)* function(const(char)* factoryname) nothrow;
+__gshared c_gst_meta_factory_loadFn c_gst_meta_factory_load; ///
+private alias c_gst_meta_factory_registerFn = extern(C) gboolean function(GstPlugin* plugin, const(GstMetaInfo)* metaInfo) nothrow;
+__gshared c_gst_meta_factory_registerFn c_gst_meta_factory_register; ///
+
+// MetaInfo
+private alias c_gst_meta_info_is_customFn = extern(C) gboolean function(const(GstMetaInfo)* info) nothrow;
+__gshared c_gst_meta_info_is_customFn c_gst_meta_info_is_custom; ///
+private alias c_gst_meta_info_registerFn = extern(C) const(GstMetaInfo)* function(GstMetaInfo* info) nothrow;
+__gshared c_gst_meta_info_registerFn c_gst_meta_info_register; ///
+private alias c_gst_meta_info_newFn = extern(C) GstMetaInfo* function(GType api, const(char)* impl, size_t size) nothrow;
+__gshared c_gst_meta_info_newFn c_gst_meta_info_new; ///
+
+// MiniObject
+private alias c_gst_mini_object_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_mini_object_get_typeFn c_gst_mini_object_get_type; ///
+private alias c_gst_mini_object_add_parentFn = extern(C) void function(GstMiniObject* object, GstMiniObject* parent) nothrow;
+__gshared c_gst_mini_object_add_parentFn c_gst_mini_object_add_parent; ///
+private alias c_gst_mini_object_copyFn = extern(C) GstMiniObject* function(const(GstMiniObject)* miniObject) nothrow;
+__gshared c_gst_mini_object_copyFn c_gst_mini_object_copy; ///
+private alias c_gst_mini_object_get_qdataFn = extern(C) void* function(GstMiniObject* object, GQuark quark) nothrow;
+__gshared c_gst_mini_object_get_qdataFn c_gst_mini_object_get_qdata; ///
+private alias c_gst_mini_object_initFn = extern(C) void function(GstMiniObject* miniObject, uint flags, GType type, GstMiniObjectCopyFunction copyFunc, GstMiniObjectDisposeFunction disposeFunc, GstMiniObjectFreeFunction freeFunc) nothrow;
+__gshared c_gst_mini_object_initFn c_gst_mini_object_init; ///
+private alias c_gst_mini_object_is_writableFn = extern(C) gboolean function(const(GstMiniObject)* miniObject) nothrow;
+__gshared c_gst_mini_object_is_writableFn c_gst_mini_object_is_writable; ///
+private alias c_gst_mini_object_lockFn = extern(C) gboolean function(GstMiniObject* object, GstLockFlags flags) nothrow;
+__gshared c_gst_mini_object_lockFn c_gst_mini_object_lock; ///
+private alias c_gst_mini_object_make_writableFn = extern(C) GstMiniObject* function(GstMiniObject* miniObject) nothrow;
+__gshared c_gst_mini_object_make_writableFn c_gst_mini_object_make_writable; ///
+private alias c_gst_mini_object_refFn = extern(C) GstMiniObject* function(GstMiniObject* miniObject) nothrow;
+__gshared c_gst_mini_object_refFn c_gst_mini_object_ref; ///
+private alias c_gst_mini_object_remove_parentFn = extern(C) void function(GstMiniObject* object, GstMiniObject* parent) nothrow;
+__gshared c_gst_mini_object_remove_parentFn c_gst_mini_object_remove_parent; ///
+private alias c_gst_mini_object_set_qdataFn = extern(C) void function(GstMiniObject* object, GQuark quark, void* data, GDestroyNotify destroy) nothrow;
+__gshared c_gst_mini_object_set_qdataFn c_gst_mini_object_set_qdata; ///
+private alias c_gst_mini_object_steal_qdataFn = extern(C) void* function(GstMiniObject* object, GQuark quark) nothrow;
+__gshared c_gst_mini_object_steal_qdataFn c_gst_mini_object_steal_qdata; ///
+private alias c_gst_mini_object_unlockFn = extern(C) void function(GstMiniObject* object, GstLockFlags flags) nothrow;
+__gshared c_gst_mini_object_unlockFn c_gst_mini_object_unlock; ///
+private alias c_gst_mini_object_unrefFn = extern(C) void function(GstMiniObject* miniObject) nothrow;
+__gshared c_gst_mini_object_unrefFn c_gst_mini_object_unref; ///
+private alias c_gst_mini_object_weak_refFn = extern(C) void function(GstMiniObject* object, GstMiniObjectNotify notify, void* data) nothrow;
+__gshared c_gst_mini_object_weak_refFn c_gst_mini_object_weak_ref; ///
+private alias c_gst_mini_object_weak_unrefFn = extern(C) void function(GstMiniObject* object, GstMiniObjectNotify notify, void* data) nothrow;
+__gshared c_gst_mini_object_weak_unrefFn c_gst_mini_object_weak_unref; ///
+private alias c_gst_mini_object_replaceFn = extern(C) gboolean function(GstMiniObject** olddata, GstMiniObject* newdata) nothrow;
+__gshared c_gst_mini_object_replaceFn c_gst_mini_object_replace; ///
+private alias c_gst_mini_object_stealFn = extern(C) GstMiniObject* function(GstMiniObject** olddata) nothrow;
+__gshared c_gst_mini_object_stealFn c_gst_mini_object_steal; ///
+private alias c_gst_mini_object_takeFn = extern(C) gboolean function(GstMiniObject** olddata, GstMiniObject* newdata) nothrow;
+__gshared c_gst_mini_object_takeFn c_gst_mini_object_take; ///
+
+// ObjectWrap
+private alias c_gst_object_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_object_get_typeFn c_gst_object_get_type; ///
+private alias c_gst_object_check_uniquenessFn = extern(C) gboolean function(GList* list, const(char)* name) nothrow;
+__gshared c_gst_object_check_uniquenessFn c_gst_object_check_uniqueness; ///
+private alias c_gst_object_default_deep_notifyFn = extern(C) void function(GObject* object, GstObject* orig, GParamSpec* pspec, char** excludedProps) nothrow;
+__gshared c_gst_object_default_deep_notifyFn c_gst_object_default_deep_notify; ///
+private alias c_gst_object_ref_sinkFn = extern(C) void* function(void* object) nothrow;
+__gshared c_gst_object_ref_sinkFn c_gst_object_ref_sink; ///
+private alias c_gst_object_replaceFn = extern(C) gboolean function(GstObject** oldobj, GstObject* newobj) nothrow;
+__gshared c_gst_object_replaceFn c_gst_object_replace; ///
+private alias c_gst_object_add_control_bindingFn = extern(C) gboolean function(GstObject* object, GstControlBinding* binding) nothrow;
+__gshared c_gst_object_add_control_bindingFn c_gst_object_add_control_binding; ///
+private alias c_gst_object_call_asyncFn = extern(C) void function(GstObject* object, GstObjectCallAsyncFunc func, void* userData) nothrow;
+__gshared c_gst_object_call_asyncFn c_gst_object_call_async; ///
+private alias c_gst_object_default_errorFn = extern(C) void function(GstObject* source, const(GError)* error, const(char)* debug_) nothrow;
+__gshared c_gst_object_default_errorFn c_gst_object_default_error; ///
+private alias c_gst_object_get_control_bindingFn = extern(C) GstControlBinding* function(GstObject* object, const(char)* propertyName) nothrow;
+__gshared c_gst_object_get_control_bindingFn c_gst_object_get_control_binding; ///
+private alias c_gst_object_get_control_rateFn = extern(C) GstClockTime function(GstObject* object) nothrow;
+__gshared c_gst_object_get_control_rateFn c_gst_object_get_control_rate; ///
+private alias c_gst_object_get_g_value_arrayFn = extern(C) gboolean function(GstObject* object, const(char)* propertyName, GstClockTime timestamp, GstClockTime interval, uint nValues, GValue* values) nothrow;
+__gshared c_gst_object_get_g_value_arrayFn c_gst_object_get_g_value_array; ///
+private alias c_gst_object_get_nameFn = extern(C) char* function(GstObject* object) nothrow;
+__gshared c_gst_object_get_nameFn c_gst_object_get_name; ///
+private alias c_gst_object_get_parentFn = extern(C) GstObject* function(GstObject* object) nothrow;
+__gshared c_gst_object_get_parentFn c_gst_object_get_parent; ///
+private alias c_gst_object_get_path_stringFn = extern(C) char* function(GstObject* object) nothrow;
+__gshared c_gst_object_get_path_stringFn c_gst_object_get_path_string; ///
+private alias c_gst_object_get_toplevelFn = extern(C) GstObject* function(GstObject* object) nothrow;
+__gshared c_gst_object_get_toplevelFn c_gst_object_get_toplevel; ///
+private alias c_gst_object_get_valueFn = extern(C) GValue* function(GstObject* object, const(char)* propertyName, GstClockTime timestamp) nothrow;
+__gshared c_gst_object_get_valueFn c_gst_object_get_value; ///
+private alias c_gst_object_get_value_arrayFn = extern(C) gboolean function(GstObject* object, const(char)* propertyName, GstClockTime timestamp, GstClockTime interval, uint nValues, void* values) nothrow;
+__gshared c_gst_object_get_value_arrayFn c_gst_object_get_value_array; ///
+private alias c_gst_object_has_active_control_bindingsFn = extern(C) gboolean function(GstObject* object) nothrow;
+__gshared c_gst_object_has_active_control_bindingsFn c_gst_object_has_active_control_bindings; ///
+private alias c_gst_object_has_ancestorFn = extern(C) gboolean function(GstObject* object, GstObject* ancestor) nothrow;
+__gshared c_gst_object_has_ancestorFn c_gst_object_has_ancestor; ///
+private alias c_gst_object_has_as_ancestorFn = extern(C) gboolean function(GstObject* object, GstObject* ancestor) nothrow;
+__gshared c_gst_object_has_as_ancestorFn c_gst_object_has_as_ancestor; ///
+private alias c_gst_object_has_as_parentFn = extern(C) gboolean function(GstObject* object, GstObject* parent) nothrow;
+__gshared c_gst_object_has_as_parentFn c_gst_object_has_as_parent; ///
+private alias c_gst_object_refFn = extern(C) GstObject* function(GstObject* object) nothrow;
+__gshared c_gst_object_refFn c_gst_object_ref; ///
+private alias c_gst_object_remove_control_bindingFn = extern(C) gboolean function(GstObject* object, GstControlBinding* binding) nothrow;
+__gshared c_gst_object_remove_control_bindingFn c_gst_object_remove_control_binding; ///
+private alias c_gst_object_set_control_binding_disabledFn = extern(C) void function(GstObject* object, const(char)* propertyName, gboolean disabled) nothrow;
+__gshared c_gst_object_set_control_binding_disabledFn c_gst_object_set_control_binding_disabled; ///
+private alias c_gst_object_set_control_bindings_disabledFn = extern(C) void function(GstObject* object, gboolean disabled) nothrow;
+__gshared c_gst_object_set_control_bindings_disabledFn c_gst_object_set_control_bindings_disabled; ///
+private alias c_gst_object_set_control_rateFn = extern(C) void function(GstObject* object, GstClockTime controlRate) nothrow;
+__gshared c_gst_object_set_control_rateFn c_gst_object_set_control_rate; ///
+private alias c_gst_object_set_nameFn = extern(C) gboolean function(GstObject* object, const(char)* name) nothrow;
+__gshared c_gst_object_set_nameFn c_gst_object_set_name; ///
+private alias c_gst_object_set_parentFn = extern(C) gboolean function(GstObject* object, GstObject* parent) nothrow;
+__gshared c_gst_object_set_parentFn c_gst_object_set_parent; ///
+private alias c_gst_object_suggest_next_syncFn = extern(C) GstClockTime function(GstObject* object) nothrow;
+__gshared c_gst_object_suggest_next_syncFn c_gst_object_suggest_next_sync; ///
+private alias c_gst_object_sync_valuesFn = extern(C) gboolean function(GstObject* object, GstClockTime timestamp) nothrow;
+__gshared c_gst_object_sync_valuesFn c_gst_object_sync_values; ///
+private alias c_gst_object_unparentFn = extern(C) void function(GstObject* object) nothrow;
+__gshared c_gst_object_unparentFn c_gst_object_unparent; ///
+private alias c_gst_object_unrefFn = extern(C) void function(GstObject* object) nothrow;
+__gshared c_gst_object_unrefFn c_gst_object_unref; ///
+
+// Pad
+private alias c_gst_pad_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_pad_get_typeFn c_gst_pad_get_type; ///
+private alias c_gst_pad_newFn = extern(C) GstPad* function(const(char)* name, GstPadDirection direction) nothrow;
+__gshared c_gst_pad_newFn c_gst_pad_new; ///
+private alias c_gst_pad_new_from_static_templateFn = extern(C) GstPad* function(GstStaticPadTemplate* templ, const(char)* name) nothrow;
+__gshared c_gst_pad_new_from_static_templateFn c_gst_pad_new_from_static_template; ///
+private alias c_gst_pad_new_from_templateFn = extern(C) GstPad* function(GstPadTemplate* templ, const(char)* name) nothrow;
+__gshared c_gst_pad_new_from_templateFn c_gst_pad_new_from_template; ///
+private alias c_gst_pad_link_get_nameFn = extern(C) const(char)* function(GstPadLinkReturn ret) nothrow;
+__gshared c_gst_pad_link_get_nameFn c_gst_pad_link_get_name; ///
+private alias c_gst_pad_activate_modeFn = extern(C) gboolean function(GstPad* pad, GstPadMode mode, gboolean active) nothrow;
+__gshared c_gst_pad_activate_modeFn c_gst_pad_activate_mode; ///
+private alias c_gst_pad_add_probeFn = extern(C) gulong function(GstPad* pad, GstPadProbeType mask, GstPadProbeCallback callback, void* userData, GDestroyNotify destroyData) nothrow;
+__gshared c_gst_pad_add_probeFn c_gst_pad_add_probe; ///
+private alias c_gst_pad_can_linkFn = extern(C) gboolean function(GstPad* srcpad, GstPad* sinkpad) nothrow;
+__gshared c_gst_pad_can_linkFn c_gst_pad_can_link; ///
+private alias c_gst_pad_chainFn = extern(C) GstFlowReturn function(GstPad* pad, GstBuffer* buffer) nothrow;
+__gshared c_gst_pad_chainFn c_gst_pad_chain; ///
+private alias c_gst_pad_chain_listFn = extern(C) GstFlowReturn function(GstPad* pad, GstBufferList* list) nothrow;
+__gshared c_gst_pad_chain_listFn c_gst_pad_chain_list; ///
+private alias c_gst_pad_check_reconfigureFn = extern(C) gboolean function(GstPad* pad) nothrow;
+__gshared c_gst_pad_check_reconfigureFn c_gst_pad_check_reconfigure; ///
+private alias c_gst_pad_create_stream_idFn = extern(C) char* function(GstPad* pad, GstElement* parent, const(char)* streamId) nothrow;
+__gshared c_gst_pad_create_stream_idFn c_gst_pad_create_stream_id; ///
+private alias c_gst_pad_create_stream_id_printfFn = extern(C) char* function(GstPad* pad, GstElement* parent, const(char)* streamId,  ...) nothrow;
+__gshared c_gst_pad_create_stream_id_printfFn c_gst_pad_create_stream_id_printf; ///
+private alias c_gst_pad_create_stream_id_printf_valistFn = extern(C) char* function(GstPad* pad, GstElement* parent, const(char)* streamId, void* varArgs) nothrow;
+__gshared c_gst_pad_create_stream_id_printf_valistFn c_gst_pad_create_stream_id_printf_valist; ///
+private alias c_gst_pad_event_defaultFn = extern(C) gboolean function(GstPad* pad, GstObject* parent, GstEvent* event) nothrow;
+__gshared c_gst_pad_event_defaultFn c_gst_pad_event_default; ///
+private alias c_gst_pad_forwardFn = extern(C) gboolean function(GstPad* pad, GstPadForwardFunction forward, void* userData) nothrow;
+__gshared c_gst_pad_forwardFn c_gst_pad_forward; ///
+private alias c_gst_pad_get_allowed_capsFn = extern(C) GstCaps* function(GstPad* pad) nothrow;
+__gshared c_gst_pad_get_allowed_capsFn c_gst_pad_get_allowed_caps; ///
+private alias c_gst_pad_get_current_capsFn = extern(C) GstCaps* function(GstPad* pad) nothrow;
+__gshared c_gst_pad_get_current_capsFn c_gst_pad_get_current_caps; ///
+private alias c_gst_pad_get_directionFn = extern(C) GstPadDirection function(GstPad* pad) nothrow;
+__gshared c_gst_pad_get_directionFn c_gst_pad_get_direction; ///
+private alias c_gst_pad_get_element_privateFn = extern(C) void* function(GstPad* pad) nothrow;
+__gshared c_gst_pad_get_element_privateFn c_gst_pad_get_element_private; ///
+private alias c_gst_pad_get_last_flow_returnFn = extern(C) GstFlowReturn function(GstPad* pad) nothrow;
+__gshared c_gst_pad_get_last_flow_returnFn c_gst_pad_get_last_flow_return; ///
+private alias c_gst_pad_get_offsetFn = extern(C) long function(GstPad* pad) nothrow;
+__gshared c_gst_pad_get_offsetFn c_gst_pad_get_offset; ///
+private alias c_gst_pad_get_pad_templateFn = extern(C) GstPadTemplate* function(GstPad* pad) nothrow;
+__gshared c_gst_pad_get_pad_templateFn c_gst_pad_get_pad_template; ///
+private alias c_gst_pad_get_pad_template_capsFn = extern(C) GstCaps* function(GstPad* pad) nothrow;
+__gshared c_gst_pad_get_pad_template_capsFn c_gst_pad_get_pad_template_caps; ///
+private alias c_gst_pad_get_parent_elementFn = extern(C) GstElement* function(GstPad* pad) nothrow;
+__gshared c_gst_pad_get_parent_elementFn c_gst_pad_get_parent_element; ///
+private alias c_gst_pad_get_peerFn = extern(C) GstPad* function(GstPad* pad) nothrow;
+__gshared c_gst_pad_get_peerFn c_gst_pad_get_peer; ///
+private alias c_gst_pad_get_rangeFn = extern(C) GstFlowReturn function(GstPad* pad, ulong offset, uint size, GstBuffer** buffer) nothrow;
+__gshared c_gst_pad_get_rangeFn c_gst_pad_get_range; ///
+private alias c_gst_pad_get_single_internal_linkFn = extern(C) GstPad* function(GstPad* pad) nothrow;
+__gshared c_gst_pad_get_single_internal_linkFn c_gst_pad_get_single_internal_link; ///
+private alias c_gst_pad_get_sticky_eventFn = extern(C) GstEvent* function(GstPad* pad, GstEventType eventType, uint idx) nothrow;
+__gshared c_gst_pad_get_sticky_eventFn c_gst_pad_get_sticky_event; ///
+private alias c_gst_pad_get_streamFn = extern(C) GstStream* function(GstPad* pad) nothrow;
+__gshared c_gst_pad_get_streamFn c_gst_pad_get_stream; ///
+private alias c_gst_pad_get_stream_idFn = extern(C) char* function(GstPad* pad) nothrow;
+__gshared c_gst_pad_get_stream_idFn c_gst_pad_get_stream_id; ///
+private alias c_gst_pad_get_task_stateFn = extern(C) GstTaskState function(GstPad* pad) nothrow;
+__gshared c_gst_pad_get_task_stateFn c_gst_pad_get_task_state; ///
+private alias c_gst_pad_has_current_capsFn = extern(C) gboolean function(GstPad* pad) nothrow;
+__gshared c_gst_pad_has_current_capsFn c_gst_pad_has_current_caps; ///
+private alias c_gst_pad_is_activeFn = extern(C) gboolean function(GstPad* pad) nothrow;
+__gshared c_gst_pad_is_activeFn c_gst_pad_is_active; ///
+private alias c_gst_pad_is_blockedFn = extern(C) gboolean function(GstPad* pad) nothrow;
+__gshared c_gst_pad_is_blockedFn c_gst_pad_is_blocked; ///
+private alias c_gst_pad_is_blockingFn = extern(C) gboolean function(GstPad* pad) nothrow;
+__gshared c_gst_pad_is_blockingFn c_gst_pad_is_blocking; ///
+private alias c_gst_pad_is_linkedFn = extern(C) gboolean function(GstPad* pad) nothrow;
+__gshared c_gst_pad_is_linkedFn c_gst_pad_is_linked; ///
+private alias c_gst_pad_iterate_internal_linksFn = extern(C) GstIterator* function(GstPad* pad) nothrow;
+__gshared c_gst_pad_iterate_internal_linksFn c_gst_pad_iterate_internal_links; ///
+private alias c_gst_pad_iterate_internal_links_defaultFn = extern(C) GstIterator* function(GstPad* pad, GstObject* parent) nothrow;
+__gshared c_gst_pad_iterate_internal_links_defaultFn c_gst_pad_iterate_internal_links_default; ///
+private alias c_gst_pad_linkFn = extern(C) GstPadLinkReturn function(GstPad* srcpad, GstPad* sinkpad) nothrow;
+__gshared c_gst_pad_linkFn c_gst_pad_link; ///
+private alias c_gst_pad_link_fullFn = extern(C) GstPadLinkReturn function(GstPad* srcpad, GstPad* sinkpad, GstPadLinkCheck flags) nothrow;
+__gshared c_gst_pad_link_fullFn c_gst_pad_link_full; ///
+private alias c_gst_pad_link_maybe_ghostingFn = extern(C) gboolean function(GstPad* src, GstPad* sink) nothrow;
+__gshared c_gst_pad_link_maybe_ghostingFn c_gst_pad_link_maybe_ghosting; ///
+private alias c_gst_pad_link_maybe_ghosting_fullFn = extern(C) gboolean function(GstPad* src, GstPad* sink, GstPadLinkCheck flags) nothrow;
+__gshared c_gst_pad_link_maybe_ghosting_fullFn c_gst_pad_link_maybe_ghosting_full; ///
+private alias c_gst_pad_mark_reconfigureFn = extern(C) void function(GstPad* pad) nothrow;
+__gshared c_gst_pad_mark_reconfigureFn c_gst_pad_mark_reconfigure; ///
+private alias c_gst_pad_needs_reconfigureFn = extern(C) gboolean function(GstPad* pad) nothrow;
+__gshared c_gst_pad_needs_reconfigureFn c_gst_pad_needs_reconfigure; ///
+private alias c_gst_pad_pause_taskFn = extern(C) gboolean function(GstPad* pad) nothrow;
+__gshared c_gst_pad_pause_taskFn c_gst_pad_pause_task; ///
+private alias c_gst_pad_peer_queryFn = extern(C) gboolean function(GstPad* pad, GstQuery* query) nothrow;
+__gshared c_gst_pad_peer_queryFn c_gst_pad_peer_query; ///
+private alias c_gst_pad_peer_query_accept_capsFn = extern(C) gboolean function(GstPad* pad, GstCaps* caps) nothrow;
+__gshared c_gst_pad_peer_query_accept_capsFn c_gst_pad_peer_query_accept_caps; ///
+private alias c_gst_pad_peer_query_capsFn = extern(C) GstCaps* function(GstPad* pad, GstCaps* filter) nothrow;
+__gshared c_gst_pad_peer_query_capsFn c_gst_pad_peer_query_caps; ///
+private alias c_gst_pad_peer_query_convertFn = extern(C) gboolean function(GstPad* pad, GstFormat srcFormat, long srcVal, GstFormat destFormat, long* destVal) nothrow;
+__gshared c_gst_pad_peer_query_convertFn c_gst_pad_peer_query_convert; ///
+private alias c_gst_pad_peer_query_durationFn = extern(C) gboolean function(GstPad* pad, GstFormat format, long* duration) nothrow;
+__gshared c_gst_pad_peer_query_durationFn c_gst_pad_peer_query_duration; ///
+private alias c_gst_pad_peer_query_positionFn = extern(C) gboolean function(GstPad* pad, GstFormat format, long* cur) nothrow;
+__gshared c_gst_pad_peer_query_positionFn c_gst_pad_peer_query_position; ///
+private alias c_gst_pad_proxy_query_accept_capsFn = extern(C) gboolean function(GstPad* pad, GstQuery* query) nothrow;
+__gshared c_gst_pad_proxy_query_accept_capsFn c_gst_pad_proxy_query_accept_caps; ///
+private alias c_gst_pad_proxy_query_capsFn = extern(C) gboolean function(GstPad* pad, GstQuery* query) nothrow;
+__gshared c_gst_pad_proxy_query_capsFn c_gst_pad_proxy_query_caps; ///
+private alias c_gst_pad_pull_rangeFn = extern(C) GstFlowReturn function(GstPad* pad, ulong offset, uint size, GstBuffer** buffer) nothrow;
+__gshared c_gst_pad_pull_rangeFn c_gst_pad_pull_range; ///
+private alias c_gst_pad_pushFn = extern(C) GstFlowReturn function(GstPad* pad, GstBuffer* buffer) nothrow;
+__gshared c_gst_pad_pushFn c_gst_pad_push; ///
+private alias c_gst_pad_push_eventFn = extern(C) gboolean function(GstPad* pad, GstEvent* event) nothrow;
+__gshared c_gst_pad_push_eventFn c_gst_pad_push_event; ///
+private alias c_gst_pad_push_listFn = extern(C) GstFlowReturn function(GstPad* pad, GstBufferList* list) nothrow;
+__gshared c_gst_pad_push_listFn c_gst_pad_push_list; ///
+private alias c_gst_pad_queryFn = extern(C) gboolean function(GstPad* pad, GstQuery* query) nothrow;
+__gshared c_gst_pad_queryFn c_gst_pad_query; ///
+private alias c_gst_pad_query_accept_capsFn = extern(C) gboolean function(GstPad* pad, GstCaps* caps) nothrow;
+__gshared c_gst_pad_query_accept_capsFn c_gst_pad_query_accept_caps; ///
+private alias c_gst_pad_query_capsFn = extern(C) GstCaps* function(GstPad* pad, GstCaps* filter) nothrow;
+__gshared c_gst_pad_query_capsFn c_gst_pad_query_caps; ///
+private alias c_gst_pad_query_convertFn = extern(C) gboolean function(GstPad* pad, GstFormat srcFormat, long srcVal, GstFormat destFormat, long* destVal) nothrow;
+__gshared c_gst_pad_query_convertFn c_gst_pad_query_convert; ///
+private alias c_gst_pad_query_defaultFn = extern(C) gboolean function(GstPad* pad, GstObject* parent, GstQuery* query) nothrow;
+__gshared c_gst_pad_query_defaultFn c_gst_pad_query_default; ///
+private alias c_gst_pad_query_durationFn = extern(C) gboolean function(GstPad* pad, GstFormat format, long* duration) nothrow;
+__gshared c_gst_pad_query_durationFn c_gst_pad_query_duration; ///
+private alias c_gst_pad_query_positionFn = extern(C) gboolean function(GstPad* pad, GstFormat format, long* cur) nothrow;
+__gshared c_gst_pad_query_positionFn c_gst_pad_query_position; ///
+private alias c_gst_pad_remove_probeFn = extern(C) void function(GstPad* pad, gulong id) nothrow;
+__gshared c_gst_pad_remove_probeFn c_gst_pad_remove_probe; ///
+private alias c_gst_pad_send_eventFn = extern(C) gboolean function(GstPad* pad, GstEvent* event) nothrow;
+__gshared c_gst_pad_send_eventFn c_gst_pad_send_event; ///
+private alias c_gst_pad_set_activate_function_fullFn = extern(C) void function(GstPad* pad, GstPadActivateFunction activate, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_pad_set_activate_function_fullFn c_gst_pad_set_activate_function_full; ///
+private alias c_gst_pad_set_activatemode_function_fullFn = extern(C) void function(GstPad* pad, GstPadActivateModeFunction activatemode, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_pad_set_activatemode_function_fullFn c_gst_pad_set_activatemode_function_full; ///
+private alias c_gst_pad_set_activeFn = extern(C) gboolean function(GstPad* pad, gboolean active) nothrow;
+__gshared c_gst_pad_set_activeFn c_gst_pad_set_active; ///
+private alias c_gst_pad_set_chain_function_fullFn = extern(C) void function(GstPad* pad, GstPadChainFunction chain, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_pad_set_chain_function_fullFn c_gst_pad_set_chain_function_full; ///
+private alias c_gst_pad_set_chain_list_function_fullFn = extern(C) void function(GstPad* pad, GstPadChainListFunction chainlist, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_pad_set_chain_list_function_fullFn c_gst_pad_set_chain_list_function_full; ///
+private alias c_gst_pad_set_element_privateFn = extern(C) void function(GstPad* pad, void* priv) nothrow;
+__gshared c_gst_pad_set_element_privateFn c_gst_pad_set_element_private; ///
+private alias c_gst_pad_set_event_full_function_fullFn = extern(C) void function(GstPad* pad, GstPadEventFullFunction event, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_pad_set_event_full_function_fullFn c_gst_pad_set_event_full_function_full; ///
+private alias c_gst_pad_set_event_function_fullFn = extern(C) void function(GstPad* pad, GstPadEventFunction event, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_pad_set_event_function_fullFn c_gst_pad_set_event_function_full; ///
+private alias c_gst_pad_set_getrange_function_fullFn = extern(C) void function(GstPad* pad, GstPadGetRangeFunction get, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_pad_set_getrange_function_fullFn c_gst_pad_set_getrange_function_full; ///
+private alias c_gst_pad_set_iterate_internal_links_function_fullFn = extern(C) void function(GstPad* pad, GstPadIterIntLinkFunction iterintlink, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_pad_set_iterate_internal_links_function_fullFn c_gst_pad_set_iterate_internal_links_function_full; ///
+private alias c_gst_pad_set_link_function_fullFn = extern(C) void function(GstPad* pad, GstPadLinkFunction link, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_pad_set_link_function_fullFn c_gst_pad_set_link_function_full; ///
+private alias c_gst_pad_set_offsetFn = extern(C) void function(GstPad* pad, long offset) nothrow;
+__gshared c_gst_pad_set_offsetFn c_gst_pad_set_offset; ///
+private alias c_gst_pad_set_query_function_fullFn = extern(C) void function(GstPad* pad, GstPadQueryFunction query, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_pad_set_query_function_fullFn c_gst_pad_set_query_function_full; ///
+private alias c_gst_pad_set_unlink_function_fullFn = extern(C) void function(GstPad* pad, GstPadUnlinkFunction unlink, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_pad_set_unlink_function_fullFn c_gst_pad_set_unlink_function_full; ///
+private alias c_gst_pad_start_taskFn = extern(C) gboolean function(GstPad* pad, GstTaskFunction func, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_pad_start_taskFn c_gst_pad_start_task; ///
+private alias c_gst_pad_sticky_events_foreachFn = extern(C) void function(GstPad* pad, GstPadStickyEventsForeachFunction foreachFunc, void* userData) nothrow;
+__gshared c_gst_pad_sticky_events_foreachFn c_gst_pad_sticky_events_foreach; ///
+private alias c_gst_pad_stop_taskFn = extern(C) gboolean function(GstPad* pad) nothrow;
+__gshared c_gst_pad_stop_taskFn c_gst_pad_stop_task; ///
+private alias c_gst_pad_store_sticky_eventFn = extern(C) GstFlowReturn function(GstPad* pad, GstEvent* event) nothrow;
+__gshared c_gst_pad_store_sticky_eventFn c_gst_pad_store_sticky_event; ///
+private alias c_gst_pad_unlinkFn = extern(C) gboolean function(GstPad* srcpad, GstPad* sinkpad) nothrow;
+__gshared c_gst_pad_unlinkFn c_gst_pad_unlink; ///
+private alias c_gst_pad_use_fixed_capsFn = extern(C) void function(GstPad* pad) nothrow;
+__gshared c_gst_pad_use_fixed_capsFn c_gst_pad_use_fixed_caps; ///
+
+// PadProbeInfo
+private alias c_gst_pad_probe_info_get_bufferFn = extern(C) GstBuffer* function(GstPadProbeInfo* info) nothrow;
+__gshared c_gst_pad_probe_info_get_bufferFn c_gst_pad_probe_info_get_buffer; ///
+private alias c_gst_pad_probe_info_get_buffer_listFn = extern(C) GstBufferList* function(GstPadProbeInfo* info) nothrow;
+__gshared c_gst_pad_probe_info_get_buffer_listFn c_gst_pad_probe_info_get_buffer_list; ///
+private alias c_gst_pad_probe_info_get_eventFn = extern(C) GstEvent* function(GstPadProbeInfo* info) nothrow;
+__gshared c_gst_pad_probe_info_get_eventFn c_gst_pad_probe_info_get_event; ///
+private alias c_gst_pad_probe_info_get_flow_returnFn = extern(C) GstFlowReturn function(GstPadProbeInfo* info) nothrow;
+__gshared c_gst_pad_probe_info_get_flow_returnFn c_gst_pad_probe_info_get_flow_return; ///
+private alias c_gst_pad_probe_info_get_idFn = extern(C) gulong function(GstPadProbeInfo* info) nothrow;
+__gshared c_gst_pad_probe_info_get_idFn c_gst_pad_probe_info_get_id; ///
+private alias c_gst_pad_probe_info_get_offsetFn = extern(C) ulong function(GstPadProbeInfo* info) nothrow;
+__gshared c_gst_pad_probe_info_get_offsetFn c_gst_pad_probe_info_get_offset; ///
+private alias c_gst_pad_probe_info_get_queryFn = extern(C) GstQuery* function(GstPadProbeInfo* info) nothrow;
+__gshared c_gst_pad_probe_info_get_queryFn c_gst_pad_probe_info_get_query; ///
+private alias c_gst_pad_probe_info_get_sizeFn = extern(C) size_t function(GstPadProbeInfo* info) nothrow;
+__gshared c_gst_pad_probe_info_get_sizeFn c_gst_pad_probe_info_get_size; ///
+private alias c_gst_pad_probe_info_get_typeFn = extern(C) GstPadProbeType function(GstPadProbeInfo* info) nothrow;
+__gshared c_gst_pad_probe_info_get_typeFn c_gst_pad_probe_info_get_type; ///
+private alias c_gst_pad_probe_info_set_bufferFn = extern(C) void function(GstPadProbeInfo* info, GstBuffer* buffer) nothrow;
+__gshared c_gst_pad_probe_info_set_bufferFn c_gst_pad_probe_info_set_buffer; ///
+private alias c_gst_pad_probe_info_set_buffer_listFn = extern(C) void function(GstPadProbeInfo* info, GstBufferList* list) nothrow;
+__gshared c_gst_pad_probe_info_set_buffer_listFn c_gst_pad_probe_info_set_buffer_list; ///
+private alias c_gst_pad_probe_info_set_eventFn = extern(C) void function(GstPadProbeInfo* info, GstEvent* event) nothrow;
+__gshared c_gst_pad_probe_info_set_eventFn c_gst_pad_probe_info_set_event; ///
+private alias c_gst_pad_probe_info_set_flow_returnFn = extern(C) void function(GstPadProbeInfo* info, GstFlowReturn flowRet) nothrow;
+__gshared c_gst_pad_probe_info_set_flow_returnFn c_gst_pad_probe_info_set_flow_return; ///
+
+// PadTemplate
+private alias c_gst_pad_template_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_pad_template_get_typeFn c_gst_pad_template_get_type; ///
+private alias c_gst_pad_template_newFn = extern(C) GstPadTemplate* function(const(char)* nameTemplate, GstPadDirection direction, GstPadPresence presence, GstCaps* caps) nothrow;
+__gshared c_gst_pad_template_newFn c_gst_pad_template_new; ///
+private alias c_gst_pad_template_new_from_static_pad_template_with_gtypeFn = extern(C) GstPadTemplate* function(GstStaticPadTemplate* padTemplate, GType padType) nothrow;
+__gshared c_gst_pad_template_new_from_static_pad_template_with_gtypeFn c_gst_pad_template_new_from_static_pad_template_with_gtype; ///
+private alias c_gst_pad_template_new_with_gtypeFn = extern(C) GstPadTemplate* function(const(char)* nameTemplate, GstPadDirection direction, GstPadPresence presence, GstCaps* caps, GType padType) nothrow;
+__gshared c_gst_pad_template_new_with_gtypeFn c_gst_pad_template_new_with_gtype; ///
+private alias c_gst_pad_template_get_capsFn = extern(C) GstCaps* function(GstPadTemplate* templ) nothrow;
+__gshared c_gst_pad_template_get_capsFn c_gst_pad_template_get_caps; ///
+private alias c_gst_pad_template_get_documentation_capsFn = extern(C) GstCaps* function(GstPadTemplate* templ) nothrow;
+__gshared c_gst_pad_template_get_documentation_capsFn c_gst_pad_template_get_documentation_caps; ///
+private alias c_gst_pad_template_pad_createdFn = extern(C) void function(GstPadTemplate* templ, GstPad* pad) nothrow;
+__gshared c_gst_pad_template_pad_createdFn c_gst_pad_template_pad_created; ///
+private alias c_gst_pad_template_set_documentation_capsFn = extern(C) void function(GstPadTemplate* templ, GstCaps* caps) nothrow;
+__gshared c_gst_pad_template_set_documentation_capsFn c_gst_pad_template_set_documentation_caps; ///
+
+// ParamArray
+private alias c_gst_param_spec_array_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_param_spec_array_get_typeFn c_gst_param_spec_array_get_type; ///
+
+// ParamFraction
+private alias c_gst_param_spec_fraction_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_param_spec_fraction_get_typeFn c_gst_param_spec_fraction_get_type; ///
+
+// ParentBufferMeta
+private alias c_gst_parent_buffer_meta_get_infoFn = extern(C) const(GstMetaInfo)* function() nothrow;
+__gshared c_gst_parent_buffer_meta_get_infoFn c_gst_parent_buffer_meta_get_info; ///
+
+// ParseContext
+private alias c_gst_parse_context_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_parse_context_get_typeFn c_gst_parse_context_get_type; ///
+private alias c_gst_parse_context_newFn = extern(C) GstParseContext* function() nothrow;
+__gshared c_gst_parse_context_newFn c_gst_parse_context_new; ///
+private alias c_gst_parse_context_copyFn = extern(C) GstParseContext* function(const(GstParseContext)* context) nothrow;
+__gshared c_gst_parse_context_copyFn c_gst_parse_context_copy; ///
+private alias c_gst_parse_context_freeFn = extern(C) void function(GstParseContext* context) nothrow;
+__gshared c_gst_parse_context_freeFn c_gst_parse_context_free; ///
+private alias c_gst_parse_context_get_missing_elementsFn = extern(C) char** function(GstParseContext* context) nothrow;
+__gshared c_gst_parse_context_get_missing_elementsFn c_gst_parse_context_get_missing_elements; ///
+
+// Pipeline
+private alias c_gst_pipeline_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_pipeline_get_typeFn c_gst_pipeline_get_type; ///
+private alias c_gst_pipeline_newFn = extern(C) GstElement* function(const(char)* name) nothrow;
+__gshared c_gst_pipeline_newFn c_gst_pipeline_new; ///
+private alias c_gst_pipeline_auto_clockFn = extern(C) void function(GstPipeline* pipeline) nothrow;
+__gshared c_gst_pipeline_auto_clockFn c_gst_pipeline_auto_clock; ///
+private alias c_gst_pipeline_get_auto_flush_busFn = extern(C) gboolean function(GstPipeline* pipeline) nothrow;
+__gshared c_gst_pipeline_get_auto_flush_busFn c_gst_pipeline_get_auto_flush_bus; ///
+private alias c_gst_pipeline_get_busFn = extern(C) GstBus* function(GstPipeline* pipeline) nothrow;
+__gshared c_gst_pipeline_get_busFn c_gst_pipeline_get_bus; ///
+private alias c_gst_pipeline_get_clockFn = extern(C) GstClock* function(GstPipeline* pipeline) nothrow;
+__gshared c_gst_pipeline_get_clockFn c_gst_pipeline_get_clock; ///
+private alias c_gst_pipeline_get_configured_latencyFn = extern(C) GstClockTime function(GstPipeline* pipeline) nothrow;
+__gshared c_gst_pipeline_get_configured_latencyFn c_gst_pipeline_get_configured_latency; ///
+private alias c_gst_pipeline_get_delayFn = extern(C) GstClockTime function(GstPipeline* pipeline) nothrow;
+__gshared c_gst_pipeline_get_delayFn c_gst_pipeline_get_delay; ///
+private alias c_gst_pipeline_get_latencyFn = extern(C) GstClockTime function(GstPipeline* pipeline) nothrow;
+__gshared c_gst_pipeline_get_latencyFn c_gst_pipeline_get_latency; ///
+private alias c_gst_pipeline_get_pipeline_clockFn = extern(C) GstClock* function(GstPipeline* pipeline) nothrow;
+__gshared c_gst_pipeline_get_pipeline_clockFn c_gst_pipeline_get_pipeline_clock; ///
+private alias c_gst_pipeline_is_liveFn = extern(C) gboolean function(GstPipeline* pipeline) nothrow;
+__gshared c_gst_pipeline_is_liveFn c_gst_pipeline_is_live; ///
+private alias c_gst_pipeline_set_auto_flush_busFn = extern(C) void function(GstPipeline* pipeline, gboolean autoFlush) nothrow;
+__gshared c_gst_pipeline_set_auto_flush_busFn c_gst_pipeline_set_auto_flush_bus; ///
+private alias c_gst_pipeline_set_clockFn = extern(C) gboolean function(GstPipeline* pipeline, GstClock* clock) nothrow;
+__gshared c_gst_pipeline_set_clockFn c_gst_pipeline_set_clock; ///
+private alias c_gst_pipeline_set_delayFn = extern(C) void function(GstPipeline* pipeline, GstClockTime delay) nothrow;
+__gshared c_gst_pipeline_set_delayFn c_gst_pipeline_set_delay; ///
+private alias c_gst_pipeline_set_latencyFn = extern(C) void function(GstPipeline* pipeline, GstClockTime latency) nothrow;
+__gshared c_gst_pipeline_set_latencyFn c_gst_pipeline_set_latency; ///
+private alias c_gst_pipeline_use_clockFn = extern(C) void function(GstPipeline* pipeline, GstClock* clock) nothrow;
+__gshared c_gst_pipeline_use_clockFn c_gst_pipeline_use_clock; ///
+
+// Plugin
+private alias c_gst_plugin_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_plugin_get_typeFn c_gst_plugin_get_type; ///
+private alias c_gst_plugin_list_freeFn = extern(C) void function(GList* list) nothrow;
+__gshared c_gst_plugin_list_freeFn c_gst_plugin_list_free; ///
+private alias c_gst_plugin_load_by_nameFn = extern(C) GstPlugin* function(const(char)* name) nothrow;
+__gshared c_gst_plugin_load_by_nameFn c_gst_plugin_load_by_name; ///
+private alias c_gst_plugin_load_fileFn = extern(C) GstPlugin* function(const(char)* filename, GError** _err) nothrow;
+__gshared c_gst_plugin_load_fileFn c_gst_plugin_load_file; ///
+private alias c_gst_plugin_register_staticFn = extern(C) gboolean function(int majorVersion, int minorVersion, const(char)* name, const(char)* description, GstPluginInitFunc initFunc, const(char)* version_, const(char)* license, const(char)* source, const(char)* package_, const(char)* origin) nothrow;
+__gshared c_gst_plugin_register_staticFn c_gst_plugin_register_static; ///
+private alias c_gst_plugin_register_static_fullFn = extern(C) gboolean function(int majorVersion, int minorVersion, const(char)* name, const(char)* description, GstPluginInitFullFunc initFullFunc, const(char)* version_, const(char)* license, const(char)* source, const(char)* package_, const(char)* origin, void* userData) nothrow;
+__gshared c_gst_plugin_register_static_fullFn c_gst_plugin_register_static_full; ///
+private alias c_gst_plugin_add_dependencyFn = extern(C) void function(GstPlugin* plugin, const(char*)* envVars, const(char*)* paths, const(char*)* names, GstPluginDependencyFlags flags) nothrow;
+__gshared c_gst_plugin_add_dependencyFn c_gst_plugin_add_dependency; ///
+private alias c_gst_plugin_add_dependency_simpleFn = extern(C) void function(GstPlugin* plugin, const(char)* envVars, const(char)* paths, const(char)* names, GstPluginDependencyFlags flags) nothrow;
+__gshared c_gst_plugin_add_dependency_simpleFn c_gst_plugin_add_dependency_simple; ///
+private alias c_gst_plugin_add_status_errorFn = extern(C) void function(GstPlugin* plugin, const(char)* message) nothrow;
+__gshared c_gst_plugin_add_status_errorFn c_gst_plugin_add_status_error; ///
+private alias c_gst_plugin_add_status_infoFn = extern(C) void function(GstPlugin* plugin, const(char)* message) nothrow;
+__gshared c_gst_plugin_add_status_infoFn c_gst_plugin_add_status_info; ///
+private alias c_gst_plugin_add_status_warningFn = extern(C) void function(GstPlugin* plugin, const(char)* message) nothrow;
+__gshared c_gst_plugin_add_status_warningFn c_gst_plugin_add_status_warning; ///
+private alias c_gst_plugin_get_cache_dataFn = extern(C) const(GstStructure)* function(GstPlugin* plugin) nothrow;
+__gshared c_gst_plugin_get_cache_dataFn c_gst_plugin_get_cache_data; ///
+private alias c_gst_plugin_get_descriptionFn = extern(C) const(char)* function(GstPlugin* plugin) nothrow;
+__gshared c_gst_plugin_get_descriptionFn c_gst_plugin_get_description; ///
+private alias c_gst_plugin_get_filenameFn = extern(C) const(char)* function(GstPlugin* plugin) nothrow;
+__gshared c_gst_plugin_get_filenameFn c_gst_plugin_get_filename; ///
+private alias c_gst_plugin_get_licenseFn = extern(C) const(char)* function(GstPlugin* plugin) nothrow;
+__gshared c_gst_plugin_get_licenseFn c_gst_plugin_get_license; ///
+private alias c_gst_plugin_get_nameFn = extern(C) const(char)* function(GstPlugin* plugin) nothrow;
+__gshared c_gst_plugin_get_nameFn c_gst_plugin_get_name; ///
+private alias c_gst_plugin_get_originFn = extern(C) const(char)* function(GstPlugin* plugin) nothrow;
+__gshared c_gst_plugin_get_originFn c_gst_plugin_get_origin; ///
+private alias c_gst_plugin_get_packageFn = extern(C) const(char)* function(GstPlugin* plugin) nothrow;
+__gshared c_gst_plugin_get_packageFn c_gst_plugin_get_package; ///
+private alias c_gst_plugin_get_release_date_stringFn = extern(C) const(char)* function(GstPlugin* plugin) nothrow;
+__gshared c_gst_plugin_get_release_date_stringFn c_gst_plugin_get_release_date_string; ///
+private alias c_gst_plugin_get_sourceFn = extern(C) const(char)* function(GstPlugin* plugin) nothrow;
+__gshared c_gst_plugin_get_sourceFn c_gst_plugin_get_source; ///
+private alias c_gst_plugin_get_status_errorsFn = extern(C) char** function(GstPlugin* plugin) nothrow;
+__gshared c_gst_plugin_get_status_errorsFn c_gst_plugin_get_status_errors; ///
+private alias c_gst_plugin_get_status_infosFn = extern(C) char** function(GstPlugin* plugin) nothrow;
+__gshared c_gst_plugin_get_status_infosFn c_gst_plugin_get_status_infos; ///
+private alias c_gst_plugin_get_status_warningsFn = extern(C) char** function(GstPlugin* plugin) nothrow;
+__gshared c_gst_plugin_get_status_warningsFn c_gst_plugin_get_status_warnings; ///
+private alias c_gst_plugin_get_versionFn = extern(C) const(char)* function(GstPlugin* plugin) nothrow;
+__gshared c_gst_plugin_get_versionFn c_gst_plugin_get_version; ///
+private alias c_gst_plugin_is_loadedFn = extern(C) gboolean function(GstPlugin* plugin) nothrow;
+__gshared c_gst_plugin_is_loadedFn c_gst_plugin_is_loaded; ///
+private alias c_gst_plugin_loadFn = extern(C) GstPlugin* function(GstPlugin* plugin) nothrow;
+__gshared c_gst_plugin_loadFn c_gst_plugin_load; ///
+private alias c_gst_plugin_set_cache_dataFn = extern(C) void function(GstPlugin* plugin, GstStructure* cacheData) nothrow;
+__gshared c_gst_plugin_set_cache_dataFn c_gst_plugin_set_cache_data; ///
+
+// PluginFeature
+private alias c_gst_plugin_feature_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_plugin_feature_get_typeFn c_gst_plugin_feature_get_type; ///
+private alias c_gst_plugin_feature_list_copyFn = extern(C) GList* function(GList* list) nothrow;
+__gshared c_gst_plugin_feature_list_copyFn c_gst_plugin_feature_list_copy; ///
+private alias c_gst_plugin_feature_list_debugFn = extern(C) void function(GList* list) nothrow;
+__gshared c_gst_plugin_feature_list_debugFn c_gst_plugin_feature_list_debug; ///
+private alias c_gst_plugin_feature_list_freeFn = extern(C) void function(GList* list) nothrow;
+__gshared c_gst_plugin_feature_list_freeFn c_gst_plugin_feature_list_free; ///
+private alias c_gst_plugin_feature_rank_compare_funcFn = extern(C) int function(const(void)* p1, const(void)* p2) nothrow;
+__gshared c_gst_plugin_feature_rank_compare_funcFn c_gst_plugin_feature_rank_compare_func; ///
+private alias c_gst_plugin_feature_check_versionFn = extern(C) gboolean function(GstPluginFeature* feature, uint minMajor, uint minMinor, uint minMicro) nothrow;
+__gshared c_gst_plugin_feature_check_versionFn c_gst_plugin_feature_check_version; ///
+private alias c_gst_plugin_feature_get_pluginFn = extern(C) GstPlugin* function(GstPluginFeature* feature) nothrow;
+__gshared c_gst_plugin_feature_get_pluginFn c_gst_plugin_feature_get_plugin; ///
+private alias c_gst_plugin_feature_get_plugin_nameFn = extern(C) const(char)* function(GstPluginFeature* feature) nothrow;
+__gshared c_gst_plugin_feature_get_plugin_nameFn c_gst_plugin_feature_get_plugin_name; ///
+private alias c_gst_plugin_feature_get_rankFn = extern(C) uint function(GstPluginFeature* feature) nothrow;
+__gshared c_gst_plugin_feature_get_rankFn c_gst_plugin_feature_get_rank; ///
+private alias c_gst_plugin_feature_loadFn = extern(C) GstPluginFeature* function(GstPluginFeature* feature) nothrow;
+__gshared c_gst_plugin_feature_loadFn c_gst_plugin_feature_load; ///
+private alias c_gst_plugin_feature_set_rankFn = extern(C) void function(GstPluginFeature* feature, uint rank) nothrow;
+__gshared c_gst_plugin_feature_set_rankFn c_gst_plugin_feature_set_rank; ///
+
+// Poll
+private alias c_gst_poll_add_fdFn = extern(C) gboolean function(GstPoll* set, GstPollFD* fd) nothrow;
+__gshared c_gst_poll_add_fdFn c_gst_poll_add_fd; ///
+private alias c_gst_poll_fd_can_readFn = extern(C) gboolean function(const(GstPoll)* set, GstPollFD* fd) nothrow;
+__gshared c_gst_poll_fd_can_readFn c_gst_poll_fd_can_read; ///
+private alias c_gst_poll_fd_can_writeFn = extern(C) gboolean function(const(GstPoll)* set, GstPollFD* fd) nothrow;
+__gshared c_gst_poll_fd_can_writeFn c_gst_poll_fd_can_write; ///
+private alias c_gst_poll_fd_ctl_priFn = extern(C) gboolean function(GstPoll* set, GstPollFD* fd, gboolean active) nothrow;
+__gshared c_gst_poll_fd_ctl_priFn c_gst_poll_fd_ctl_pri; ///
+private alias c_gst_poll_fd_ctl_readFn = extern(C) gboolean function(GstPoll* set, GstPollFD* fd, gboolean active) nothrow;
+__gshared c_gst_poll_fd_ctl_readFn c_gst_poll_fd_ctl_read; ///
+private alias c_gst_poll_fd_ctl_writeFn = extern(C) gboolean function(GstPoll* set, GstPollFD* fd, gboolean active) nothrow;
+__gshared c_gst_poll_fd_ctl_writeFn c_gst_poll_fd_ctl_write; ///
+private alias c_gst_poll_fd_has_closedFn = extern(C) gboolean function(const(GstPoll)* set, GstPollFD* fd) nothrow;
+__gshared c_gst_poll_fd_has_closedFn c_gst_poll_fd_has_closed; ///
+private alias c_gst_poll_fd_has_errorFn = extern(C) gboolean function(const(GstPoll)* set, GstPollFD* fd) nothrow;
+__gshared c_gst_poll_fd_has_errorFn c_gst_poll_fd_has_error; ///
+private alias c_gst_poll_fd_has_priFn = extern(C) gboolean function(const(GstPoll)* set, GstPollFD* fd) nothrow;
+__gshared c_gst_poll_fd_has_priFn c_gst_poll_fd_has_pri; ///
+private alias c_gst_poll_fd_ignoredFn = extern(C) void function(GstPoll* set, GstPollFD* fd) nothrow;
+__gshared c_gst_poll_fd_ignoredFn c_gst_poll_fd_ignored; ///
+private alias c_gst_poll_freeFn = extern(C) void function(GstPoll* set) nothrow;
+__gshared c_gst_poll_freeFn c_gst_poll_free; ///
+private alias c_gst_poll_get_read_gpollfdFn = extern(C) void function(GstPoll* set, GPollFD* fd) nothrow;
+__gshared c_gst_poll_get_read_gpollfdFn c_gst_poll_get_read_gpollfd; ///
+private alias c_gst_poll_read_controlFn = extern(C) gboolean function(GstPoll* set) nothrow;
+__gshared c_gst_poll_read_controlFn c_gst_poll_read_control; ///
+private alias c_gst_poll_remove_fdFn = extern(C) gboolean function(GstPoll* set, GstPollFD* fd) nothrow;
+__gshared c_gst_poll_remove_fdFn c_gst_poll_remove_fd; ///
+private alias c_gst_poll_restartFn = extern(C) void function(GstPoll* set) nothrow;
+__gshared c_gst_poll_restartFn c_gst_poll_restart; ///
+private alias c_gst_poll_set_controllableFn = extern(C) gboolean function(GstPoll* set, gboolean controllable) nothrow;
+__gshared c_gst_poll_set_controllableFn c_gst_poll_set_controllable; ///
+private alias c_gst_poll_set_flushingFn = extern(C) void function(GstPoll* set, gboolean flushing) nothrow;
+__gshared c_gst_poll_set_flushingFn c_gst_poll_set_flushing; ///
+private alias c_gst_poll_waitFn = extern(C) int function(GstPoll* set, GstClockTime timeout) nothrow;
+__gshared c_gst_poll_waitFn c_gst_poll_wait; ///
+private alias c_gst_poll_write_controlFn = extern(C) gboolean function(GstPoll* set) nothrow;
+__gshared c_gst_poll_write_controlFn c_gst_poll_write_control; ///
+private alias c_gst_poll_newFn = extern(C) GstPoll* function(gboolean controllable) nothrow;
+__gshared c_gst_poll_newFn c_gst_poll_new; ///
+private alias c_gst_poll_new_timerFn = extern(C) GstPoll* function() nothrow;
+__gshared c_gst_poll_new_timerFn c_gst_poll_new_timer; ///
+
+// PollFD
+private alias c_gst_poll_fd_initFn = extern(C) void function(GstPollFD* fd) nothrow;
+__gshared c_gst_poll_fd_initFn c_gst_poll_fd_init; ///
+
+// Preset
+private alias c_gst_preset_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_preset_get_typeFn c_gst_preset_get_type; ///
+private alias c_gst_preset_get_app_dirFn = extern(C) const(char)* function() nothrow;
+__gshared c_gst_preset_get_app_dirFn c_gst_preset_get_app_dir; ///
+private alias c_gst_preset_set_app_dirFn = extern(C) gboolean function(const(char)* appDir) nothrow;
+__gshared c_gst_preset_set_app_dirFn c_gst_preset_set_app_dir; ///
+private alias c_gst_preset_delete_presetFn = extern(C) gboolean function(GstPreset* preset, const(char)* name) nothrow;
+__gshared c_gst_preset_delete_presetFn c_gst_preset_delete_preset; ///
+private alias c_gst_preset_get_metaFn = extern(C) gboolean function(GstPreset* preset, const(char)* name, const(char)* tag, char** value) nothrow;
+__gshared c_gst_preset_get_metaFn c_gst_preset_get_meta; ///
+private alias c_gst_preset_get_preset_namesFn = extern(C) char** function(GstPreset* preset) nothrow;
+__gshared c_gst_preset_get_preset_namesFn c_gst_preset_get_preset_names; ///
+private alias c_gst_preset_get_property_namesFn = extern(C) char** function(GstPreset* preset) nothrow;
+__gshared c_gst_preset_get_property_namesFn c_gst_preset_get_property_names; ///
+private alias c_gst_preset_is_editableFn = extern(C) gboolean function(GstPreset* preset) nothrow;
+__gshared c_gst_preset_is_editableFn c_gst_preset_is_editable; ///
+private alias c_gst_preset_load_presetFn = extern(C) gboolean function(GstPreset* preset, const(char)* name) nothrow;
+__gshared c_gst_preset_load_presetFn c_gst_preset_load_preset; ///
+private alias c_gst_preset_rename_presetFn = extern(C) gboolean function(GstPreset* preset, const(char)* oldName, const(char)* newName) nothrow;
+__gshared c_gst_preset_rename_presetFn c_gst_preset_rename_preset; ///
+private alias c_gst_preset_save_presetFn = extern(C) gboolean function(GstPreset* preset, const(char)* name) nothrow;
+__gshared c_gst_preset_save_presetFn c_gst_preset_save_preset; ///
+private alias c_gst_preset_set_metaFn = extern(C) gboolean function(GstPreset* preset, const(char)* name, const(char)* tag, const(char)* value) nothrow;
+__gshared c_gst_preset_set_metaFn c_gst_preset_set_meta; ///
+
+// Promise
+private alias c_gst_promise_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_promise_get_typeFn c_gst_promise_get_type; ///
+private alias c_gst_promise_newFn = extern(C) GstPromise* function() nothrow;
+__gshared c_gst_promise_newFn c_gst_promise_new; ///
+private alias c_gst_promise_new_with_change_funcFn = extern(C) GstPromise* function(GstPromiseChangeFunc func, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_promise_new_with_change_funcFn c_gst_promise_new_with_change_func; ///
+private alias c_gst_promise_expireFn = extern(C) void function(GstPromise* promise) nothrow;
+__gshared c_gst_promise_expireFn c_gst_promise_expire; ///
+private alias c_gst_promise_get_replyFn = extern(C) const(GstStructure)* function(GstPromise* promise) nothrow;
+__gshared c_gst_promise_get_replyFn c_gst_promise_get_reply; ///
+private alias c_gst_promise_interruptFn = extern(C) void function(GstPromise* promise) nothrow;
+__gshared c_gst_promise_interruptFn c_gst_promise_interrupt; ///
+private alias c_gst_promise_refFn = extern(C) GstPromise* function(GstPromise* promise) nothrow;
+__gshared c_gst_promise_refFn c_gst_promise_ref; ///
+private alias c_gst_promise_replyFn = extern(C) void function(GstPromise* promise, GstStructure* s) nothrow;
+__gshared c_gst_promise_replyFn c_gst_promise_reply; ///
+private alias c_gst_promise_unrefFn = extern(C) void function(GstPromise* promise) nothrow;
+__gshared c_gst_promise_unrefFn c_gst_promise_unref; ///
+private alias c_gst_promise_waitFn = extern(C) GstPromiseResult function(GstPromise* promise) nothrow;
+__gshared c_gst_promise_waitFn c_gst_promise_wait; ///
+
+// ProtectionMeta
+private alias c_gst_protection_meta_get_infoFn = extern(C) const(GstMetaInfo)* function() nothrow;
+__gshared c_gst_protection_meta_get_infoFn c_gst_protection_meta_get_info; ///
+
+// ProxyPad
+private alias c_gst_proxy_pad_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_proxy_pad_get_typeFn c_gst_proxy_pad_get_type; ///
+private alias c_gst_proxy_pad_chain_defaultFn = extern(C) GstFlowReturn function(GstPad* pad, GstObject* parent, GstBuffer* buffer) nothrow;
+__gshared c_gst_proxy_pad_chain_defaultFn c_gst_proxy_pad_chain_default; ///
+private alias c_gst_proxy_pad_chain_list_defaultFn = extern(C) GstFlowReturn function(GstPad* pad, GstObject* parent, GstBufferList* list) nothrow;
+__gshared c_gst_proxy_pad_chain_list_defaultFn c_gst_proxy_pad_chain_list_default; ///
+private alias c_gst_proxy_pad_getrange_defaultFn = extern(C) GstFlowReturn function(GstPad* pad, GstObject* parent, ulong offset, uint size, GstBuffer** buffer) nothrow;
+__gshared c_gst_proxy_pad_getrange_defaultFn c_gst_proxy_pad_getrange_default; ///
+private alias c_gst_proxy_pad_iterate_internal_links_defaultFn = extern(C) GstIterator* function(GstPad* pad, GstObject* parent) nothrow;
+__gshared c_gst_proxy_pad_iterate_internal_links_defaultFn c_gst_proxy_pad_iterate_internal_links_default; ///
+private alias c_gst_proxy_pad_get_internalFn = extern(C) GstProxyPad* function(GstProxyPad* pad) nothrow;
+__gshared c_gst_proxy_pad_get_internalFn c_gst_proxy_pad_get_internal; ///
+
+// Query
+private alias c_gst_query_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_query_get_typeFn c_gst_query_get_type; ///
+private alias c_gst_query_new_accept_capsFn = extern(C) GstQuery* function(GstCaps* caps) nothrow;
+__gshared c_gst_query_new_accept_capsFn c_gst_query_new_accept_caps; ///
+private alias c_gst_query_new_allocationFn = extern(C) GstQuery* function(GstCaps* caps, gboolean needPool) nothrow;
+__gshared c_gst_query_new_allocationFn c_gst_query_new_allocation; ///
+private alias c_gst_query_new_bitrateFn = extern(C) GstQuery* function() nothrow;
+__gshared c_gst_query_new_bitrateFn c_gst_query_new_bitrate; ///
+private alias c_gst_query_new_bufferingFn = extern(C) GstQuery* function(GstFormat format) nothrow;
+__gshared c_gst_query_new_bufferingFn c_gst_query_new_buffering; ///
+private alias c_gst_query_new_capsFn = extern(C) GstQuery* function(GstCaps* filter) nothrow;
+__gshared c_gst_query_new_capsFn c_gst_query_new_caps; ///
+private alias c_gst_query_new_contextFn = extern(C) GstQuery* function(const(char)* contextType) nothrow;
+__gshared c_gst_query_new_contextFn c_gst_query_new_context; ///
+private alias c_gst_query_new_convertFn = extern(C) GstQuery* function(GstFormat srcFormat, long value, GstFormat destFormat) nothrow;
+__gshared c_gst_query_new_convertFn c_gst_query_new_convert; ///
+private alias c_gst_query_new_customFn = extern(C) GstQuery* function(GstQueryType type, GstStructure* structure) nothrow;
+__gshared c_gst_query_new_customFn c_gst_query_new_custom; ///
+private alias c_gst_query_new_drainFn = extern(C) GstQuery* function() nothrow;
+__gshared c_gst_query_new_drainFn c_gst_query_new_drain; ///
+private alias c_gst_query_new_durationFn = extern(C) GstQuery* function(GstFormat format) nothrow;
+__gshared c_gst_query_new_durationFn c_gst_query_new_duration; ///
+private alias c_gst_query_new_formatsFn = extern(C) GstQuery* function() nothrow;
+__gshared c_gst_query_new_formatsFn c_gst_query_new_formats; ///
+private alias c_gst_query_new_latencyFn = extern(C) GstQuery* function() nothrow;
+__gshared c_gst_query_new_latencyFn c_gst_query_new_latency; ///
+private alias c_gst_query_new_positionFn = extern(C) GstQuery* function(GstFormat format) nothrow;
+__gshared c_gst_query_new_positionFn c_gst_query_new_position; ///
+private alias c_gst_query_new_schedulingFn = extern(C) GstQuery* function() nothrow;
+__gshared c_gst_query_new_schedulingFn c_gst_query_new_scheduling; ///
+private alias c_gst_query_new_seekingFn = extern(C) GstQuery* function(GstFormat format) nothrow;
+__gshared c_gst_query_new_seekingFn c_gst_query_new_seeking; ///
+private alias c_gst_query_new_segmentFn = extern(C) GstQuery* function(GstFormat format) nothrow;
+__gshared c_gst_query_new_segmentFn c_gst_query_new_segment; ///
+private alias c_gst_query_new_selectableFn = extern(C) GstQuery* function() nothrow;
+__gshared c_gst_query_new_selectableFn c_gst_query_new_selectable; ///
+private alias c_gst_query_new_uriFn = extern(C) GstQuery* function() nothrow;
+__gshared c_gst_query_new_uriFn c_gst_query_new_uri; ///
+private alias c_gst_query_add_allocation_metaFn = extern(C) void function(GstQuery* query, GType api, const(GstStructure)* params) nothrow;
+__gshared c_gst_query_add_allocation_metaFn c_gst_query_add_allocation_meta; ///
+private alias c_gst_query_add_allocation_paramFn = extern(C) void function(GstQuery* query, GstAllocator* allocator, const(GstAllocationParams)* params) nothrow;
+__gshared c_gst_query_add_allocation_paramFn c_gst_query_add_allocation_param; ///
+private alias c_gst_query_add_allocation_poolFn = extern(C) void function(GstQuery* query, GstBufferPool* pool, uint size, uint minBuffers, uint maxBuffers) nothrow;
+__gshared c_gst_query_add_allocation_poolFn c_gst_query_add_allocation_pool; ///
+private alias c_gst_query_add_buffering_rangeFn = extern(C) gboolean function(GstQuery* query, long start, long stop) nothrow;
+__gshared c_gst_query_add_buffering_rangeFn c_gst_query_add_buffering_range; ///
+private alias c_gst_query_add_scheduling_modeFn = extern(C) void function(GstQuery* query, GstPadMode mode) nothrow;
+__gshared c_gst_query_add_scheduling_modeFn c_gst_query_add_scheduling_mode; ///
+private alias c_gst_query_copyFn = extern(C) GstQuery* function(const(GstQuery)* q) nothrow;
+__gshared c_gst_query_copyFn c_gst_query_copy; ///
+private alias c_gst_query_find_allocation_metaFn = extern(C) gboolean function(GstQuery* query, GType api, uint* index) nothrow;
+__gshared c_gst_query_find_allocation_metaFn c_gst_query_find_allocation_meta; ///
+private alias c_gst_query_get_n_allocation_metasFn = extern(C) uint function(GstQuery* query) nothrow;
+__gshared c_gst_query_get_n_allocation_metasFn c_gst_query_get_n_allocation_metas; ///
+private alias c_gst_query_get_n_allocation_paramsFn = extern(C) uint function(GstQuery* query) nothrow;
+__gshared c_gst_query_get_n_allocation_paramsFn c_gst_query_get_n_allocation_params; ///
+private alias c_gst_query_get_n_allocation_poolsFn = extern(C) uint function(GstQuery* query) nothrow;
+__gshared c_gst_query_get_n_allocation_poolsFn c_gst_query_get_n_allocation_pools; ///
+private alias c_gst_query_get_n_buffering_rangesFn = extern(C) uint function(GstQuery* query) nothrow;
+__gshared c_gst_query_get_n_buffering_rangesFn c_gst_query_get_n_buffering_ranges; ///
+private alias c_gst_query_get_n_scheduling_modesFn = extern(C) uint function(GstQuery* query) nothrow;
+__gshared c_gst_query_get_n_scheduling_modesFn c_gst_query_get_n_scheduling_modes; ///
+private alias c_gst_query_get_structureFn = extern(C) const(GstStructure)* function(GstQuery* query) nothrow;
+__gshared c_gst_query_get_structureFn c_gst_query_get_structure; ///
+private alias c_gst_query_has_scheduling_modeFn = extern(C) gboolean function(GstQuery* query, GstPadMode mode) nothrow;
+__gshared c_gst_query_has_scheduling_modeFn c_gst_query_has_scheduling_mode; ///
+private alias c_gst_query_has_scheduling_mode_with_flagsFn = extern(C) gboolean function(GstQuery* query, GstPadMode mode, GstSchedulingFlags flags) nothrow;
+__gshared c_gst_query_has_scheduling_mode_with_flagsFn c_gst_query_has_scheduling_mode_with_flags; ///
+private alias c_gst_query_is_writableFn = extern(C) gboolean function(const(GstQuery)* query) nothrow;
+__gshared c_gst_query_is_writableFn c_gst_query_is_writable; ///
+private alias c_gst_query_make_writableFn = extern(C) GstQuery* function(GstQuery* query) nothrow;
+__gshared c_gst_query_make_writableFn c_gst_query_make_writable; ///
+private alias c_gst_query_parse_accept_capsFn = extern(C) void function(GstQuery* query, GstCaps** caps) nothrow;
+__gshared c_gst_query_parse_accept_capsFn c_gst_query_parse_accept_caps; ///
+private alias c_gst_query_parse_accept_caps_resultFn = extern(C) void function(GstQuery* query, gboolean* result) nothrow;
+__gshared c_gst_query_parse_accept_caps_resultFn c_gst_query_parse_accept_caps_result; ///
+private alias c_gst_query_parse_allocationFn = extern(C) void function(GstQuery* query, GstCaps** caps, gboolean* needPool) nothrow;
+__gshared c_gst_query_parse_allocationFn c_gst_query_parse_allocation; ///
+private alias c_gst_query_parse_bitrateFn = extern(C) void function(GstQuery* query, uint* nominalBitrate) nothrow;
+__gshared c_gst_query_parse_bitrateFn c_gst_query_parse_bitrate; ///
+private alias c_gst_query_parse_buffering_percentFn = extern(C) void function(GstQuery* query, gboolean* busy, int* percent) nothrow;
+__gshared c_gst_query_parse_buffering_percentFn c_gst_query_parse_buffering_percent; ///
+private alias c_gst_query_parse_buffering_rangeFn = extern(C) void function(GstQuery* query, GstFormat* format, long* start, long* stop, long* estimatedTotal) nothrow;
+__gshared c_gst_query_parse_buffering_rangeFn c_gst_query_parse_buffering_range; ///
+private alias c_gst_query_parse_buffering_statsFn = extern(C) void function(GstQuery* query, GstBufferingMode* mode, int* avgIn, int* avgOut, long* bufferingLeft) nothrow;
+__gshared c_gst_query_parse_buffering_statsFn c_gst_query_parse_buffering_stats; ///
+private alias c_gst_query_parse_capsFn = extern(C) void function(GstQuery* query, GstCaps** filter) nothrow;
+__gshared c_gst_query_parse_capsFn c_gst_query_parse_caps; ///
+private alias c_gst_query_parse_caps_resultFn = extern(C) void function(GstQuery* query, GstCaps** caps) nothrow;
+__gshared c_gst_query_parse_caps_resultFn c_gst_query_parse_caps_result; ///
+private alias c_gst_query_parse_contextFn = extern(C) void function(GstQuery* query, GstContext** context) nothrow;
+__gshared c_gst_query_parse_contextFn c_gst_query_parse_context; ///
+private alias c_gst_query_parse_context_typeFn = extern(C) gboolean function(GstQuery* query, const(char*)* contextType) nothrow;
+__gshared c_gst_query_parse_context_typeFn c_gst_query_parse_context_type; ///
+private alias c_gst_query_parse_convertFn = extern(C) void function(GstQuery* query, GstFormat* srcFormat, long* srcValue, GstFormat* destFormat, long* destValue) nothrow;
+__gshared c_gst_query_parse_convertFn c_gst_query_parse_convert; ///
+private alias c_gst_query_parse_durationFn = extern(C) void function(GstQuery* query, GstFormat* format, long* duration) nothrow;
+__gshared c_gst_query_parse_durationFn c_gst_query_parse_duration; ///
+private alias c_gst_query_parse_latencyFn = extern(C) void function(GstQuery* query, gboolean* live, GstClockTime* minLatency, GstClockTime* maxLatency) nothrow;
+__gshared c_gst_query_parse_latencyFn c_gst_query_parse_latency; ///
+private alias c_gst_query_parse_n_formatsFn = extern(C) void function(GstQuery* query, uint* nFormats) nothrow;
+__gshared c_gst_query_parse_n_formatsFn c_gst_query_parse_n_formats; ///
+private alias c_gst_query_parse_nth_allocation_metaFn = extern(C) GType function(GstQuery* query, uint index, const(GstStructure*)* params) nothrow;
+__gshared c_gst_query_parse_nth_allocation_metaFn c_gst_query_parse_nth_allocation_meta; ///
+private alias c_gst_query_parse_nth_allocation_paramFn = extern(C) void function(GstQuery* query, uint index, GstAllocator** allocator, GstAllocationParams* params) nothrow;
+__gshared c_gst_query_parse_nth_allocation_paramFn c_gst_query_parse_nth_allocation_param; ///
+private alias c_gst_query_parse_nth_allocation_poolFn = extern(C) void function(GstQuery* query, uint index, GstBufferPool** pool, uint* size, uint* minBuffers, uint* maxBuffers) nothrow;
+__gshared c_gst_query_parse_nth_allocation_poolFn c_gst_query_parse_nth_allocation_pool; ///
+private alias c_gst_query_parse_nth_buffering_rangeFn = extern(C) gboolean function(GstQuery* query, uint index, long* start, long* stop) nothrow;
+__gshared c_gst_query_parse_nth_buffering_rangeFn c_gst_query_parse_nth_buffering_range; ///
+private alias c_gst_query_parse_nth_formatFn = extern(C) void function(GstQuery* query, uint nth, GstFormat* format) nothrow;
+__gshared c_gst_query_parse_nth_formatFn c_gst_query_parse_nth_format; ///
+private alias c_gst_query_parse_nth_scheduling_modeFn = extern(C) GstPadMode function(GstQuery* query, uint index) nothrow;
+__gshared c_gst_query_parse_nth_scheduling_modeFn c_gst_query_parse_nth_scheduling_mode; ///
+private alias c_gst_query_parse_positionFn = extern(C) void function(GstQuery* query, GstFormat* format, long* cur) nothrow;
+__gshared c_gst_query_parse_positionFn c_gst_query_parse_position; ///
+private alias c_gst_query_parse_schedulingFn = extern(C) void function(GstQuery* query, GstSchedulingFlags* flags, int* minsize, int* maxsize, int* align_) nothrow;
+__gshared c_gst_query_parse_schedulingFn c_gst_query_parse_scheduling; ///
+private alias c_gst_query_parse_seekingFn = extern(C) void function(GstQuery* query, GstFormat* format, gboolean* seekable, long* segmentStart, long* segmentEnd) nothrow;
+__gshared c_gst_query_parse_seekingFn c_gst_query_parse_seeking; ///
+private alias c_gst_query_parse_segmentFn = extern(C) void function(GstQuery* query, double* rate, GstFormat* format, long* startValue, long* stopValue) nothrow;
+__gshared c_gst_query_parse_segmentFn c_gst_query_parse_segment; ///
+private alias c_gst_query_parse_selectableFn = extern(C) void function(GstQuery* query, gboolean* selectable) nothrow;
+__gshared c_gst_query_parse_selectableFn c_gst_query_parse_selectable; ///
+private alias c_gst_query_parse_uriFn = extern(C) void function(GstQuery* query, char** uri) nothrow;
+__gshared c_gst_query_parse_uriFn c_gst_query_parse_uri; ///
+private alias c_gst_query_parse_uri_redirectionFn = extern(C) void function(GstQuery* query, char** uri) nothrow;
+__gshared c_gst_query_parse_uri_redirectionFn c_gst_query_parse_uri_redirection; ///
+private alias c_gst_query_parse_uri_redirection_permanentFn = extern(C) void function(GstQuery* query, gboolean* permanent) nothrow;
+__gshared c_gst_query_parse_uri_redirection_permanentFn c_gst_query_parse_uri_redirection_permanent; ///
+private alias c_gst_query_refFn = extern(C) GstQuery* function(GstQuery* q) nothrow;
+__gshared c_gst_query_refFn c_gst_query_ref; ///
+private alias c_gst_query_remove_nth_allocation_metaFn = extern(C) void function(GstQuery* query, uint index) nothrow;
+__gshared c_gst_query_remove_nth_allocation_metaFn c_gst_query_remove_nth_allocation_meta; ///
+private alias c_gst_query_remove_nth_allocation_paramFn = extern(C) void function(GstQuery* query, uint index) nothrow;
+__gshared c_gst_query_remove_nth_allocation_paramFn c_gst_query_remove_nth_allocation_param; ///
+private alias c_gst_query_remove_nth_allocation_poolFn = extern(C) void function(GstQuery* query, uint index) nothrow;
+__gshared c_gst_query_remove_nth_allocation_poolFn c_gst_query_remove_nth_allocation_pool; ///
+private alias c_gst_query_set_accept_caps_resultFn = extern(C) void function(GstQuery* query, gboolean result) nothrow;
+__gshared c_gst_query_set_accept_caps_resultFn c_gst_query_set_accept_caps_result; ///
+private alias c_gst_query_set_bitrateFn = extern(C) void function(GstQuery* query, uint nominalBitrate) nothrow;
+__gshared c_gst_query_set_bitrateFn c_gst_query_set_bitrate; ///
+private alias c_gst_query_set_buffering_percentFn = extern(C) void function(GstQuery* query, gboolean busy, int percent) nothrow;
+__gshared c_gst_query_set_buffering_percentFn c_gst_query_set_buffering_percent; ///
+private alias c_gst_query_set_buffering_rangeFn = extern(C) void function(GstQuery* query, GstFormat format, long start, long stop, long estimatedTotal) nothrow;
+__gshared c_gst_query_set_buffering_rangeFn c_gst_query_set_buffering_range; ///
+private alias c_gst_query_set_buffering_statsFn = extern(C) void function(GstQuery* query, GstBufferingMode mode, int avgIn, int avgOut, long bufferingLeft) nothrow;
+__gshared c_gst_query_set_buffering_statsFn c_gst_query_set_buffering_stats; ///
+private alias c_gst_query_set_caps_resultFn = extern(C) void function(GstQuery* query, GstCaps* caps) nothrow;
+__gshared c_gst_query_set_caps_resultFn c_gst_query_set_caps_result; ///
+private alias c_gst_query_set_contextFn = extern(C) void function(GstQuery* query, GstContext* context) nothrow;
+__gshared c_gst_query_set_contextFn c_gst_query_set_context; ///
+private alias c_gst_query_set_convertFn = extern(C) void function(GstQuery* query, GstFormat srcFormat, long srcValue, GstFormat destFormat, long destValue) nothrow;
+__gshared c_gst_query_set_convertFn c_gst_query_set_convert; ///
+private alias c_gst_query_set_durationFn = extern(C) void function(GstQuery* query, GstFormat format, long duration) nothrow;
+__gshared c_gst_query_set_durationFn c_gst_query_set_duration; ///
+private alias c_gst_query_set_formatsFn = extern(C) void function(GstQuery* query, int nFormats,  ...) nothrow;
+__gshared c_gst_query_set_formatsFn c_gst_query_set_formats; ///
+private alias c_gst_query_set_formatsvFn = extern(C) void function(GstQuery* query, int nFormats, const(GstFormat)* formats) nothrow;
+__gshared c_gst_query_set_formatsvFn c_gst_query_set_formatsv; ///
+private alias c_gst_query_set_latencyFn = extern(C) void function(GstQuery* query, gboolean live, GstClockTime minLatency, GstClockTime maxLatency) nothrow;
+__gshared c_gst_query_set_latencyFn c_gst_query_set_latency; ///
+private alias c_gst_query_set_nth_allocation_paramFn = extern(C) void function(GstQuery* query, uint index, GstAllocator* allocator, const(GstAllocationParams)* params) nothrow;
+__gshared c_gst_query_set_nth_allocation_paramFn c_gst_query_set_nth_allocation_param; ///
+private alias c_gst_query_set_nth_allocation_poolFn = extern(C) void function(GstQuery* query, uint index, GstBufferPool* pool, uint size, uint minBuffers, uint maxBuffers) nothrow;
+__gshared c_gst_query_set_nth_allocation_poolFn c_gst_query_set_nth_allocation_pool; ///
+private alias c_gst_query_set_positionFn = extern(C) void function(GstQuery* query, GstFormat format, long cur) nothrow;
+__gshared c_gst_query_set_positionFn c_gst_query_set_position; ///
+private alias c_gst_query_set_schedulingFn = extern(C) void function(GstQuery* query, GstSchedulingFlags flags, int minsize, int maxsize, int align_) nothrow;
+__gshared c_gst_query_set_schedulingFn c_gst_query_set_scheduling; ///
+private alias c_gst_query_set_seekingFn = extern(C) void function(GstQuery* query, GstFormat format, gboolean seekable, long segmentStart, long segmentEnd) nothrow;
+__gshared c_gst_query_set_seekingFn c_gst_query_set_seeking; ///
+private alias c_gst_query_set_segmentFn = extern(C) void function(GstQuery* query, double rate, GstFormat format, long startValue, long stopValue) nothrow;
+__gshared c_gst_query_set_segmentFn c_gst_query_set_segment; ///
+private alias c_gst_query_set_selectableFn = extern(C) void function(GstQuery* query, gboolean selectable) nothrow;
+__gshared c_gst_query_set_selectableFn c_gst_query_set_selectable; ///
+private alias c_gst_query_set_uriFn = extern(C) void function(GstQuery* query, const(char)* uri) nothrow;
+__gshared c_gst_query_set_uriFn c_gst_query_set_uri; ///
+private alias c_gst_query_set_uri_redirectionFn = extern(C) void function(GstQuery* query, const(char)* uri) nothrow;
+__gshared c_gst_query_set_uri_redirectionFn c_gst_query_set_uri_redirection; ///
+private alias c_gst_query_set_uri_redirection_permanentFn = extern(C) void function(GstQuery* query, gboolean permanent) nothrow;
+__gshared c_gst_query_set_uri_redirection_permanentFn c_gst_query_set_uri_redirection_permanent; ///
+private alias c_gst_query_unrefFn = extern(C) void function(GstQuery* q) nothrow;
+__gshared c_gst_query_unrefFn c_gst_query_unref; ///
+private alias c_gst_query_writable_structureFn = extern(C) GstStructure* function(GstQuery* query) nothrow;
+__gshared c_gst_query_writable_structureFn c_gst_query_writable_structure; ///
+private alias c_gst_query_replaceFn = extern(C) gboolean function(GstQuery** oldQuery, GstQuery* newQuery) nothrow;
+__gshared c_gst_query_replaceFn c_gst_query_replace; ///
+private alias c_gst_query_stealFn = extern(C) GstQuery* function(GstQuery** oldQuery) nothrow;
+__gshared c_gst_query_stealFn c_gst_query_steal; ///
+private alias c_gst_query_takeFn = extern(C) gboolean function(GstQuery** oldQuery, GstQuery* newQuery) nothrow;
+__gshared c_gst_query_takeFn c_gst_query_take; ///
+
+// ReferenceTimestampMeta
+private alias c_gst_reference_timestamp_meta_get_infoFn = extern(C) const(GstMetaInfo)* function() nothrow;
+__gshared c_gst_reference_timestamp_meta_get_infoFn c_gst_reference_timestamp_meta_get_info; ///
+
+// Registry
+private alias c_gst_registry_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_registry_get_typeFn c_gst_registry_get_type; ///
+private alias c_gst_registry_fork_is_enabledFn = extern(C) gboolean function() nothrow;
+__gshared c_gst_registry_fork_is_enabledFn c_gst_registry_fork_is_enabled; ///
+private alias c_gst_registry_fork_set_enabledFn = extern(C) void function(gboolean enabled) nothrow;
+__gshared c_gst_registry_fork_set_enabledFn c_gst_registry_fork_set_enabled; ///
+private alias c_gst_registry_getFn = extern(C) GstRegistry* function() nothrow;
+__gshared c_gst_registry_getFn c_gst_registry_get; ///
+private alias c_gst_registry_add_featureFn = extern(C) gboolean function(GstRegistry* registry, GstPluginFeature* feature) nothrow;
+__gshared c_gst_registry_add_featureFn c_gst_registry_add_feature; ///
+private alias c_gst_registry_add_pluginFn = extern(C) gboolean function(GstRegistry* registry, GstPlugin* plugin) nothrow;
+__gshared c_gst_registry_add_pluginFn c_gst_registry_add_plugin; ///
+private alias c_gst_registry_check_feature_versionFn = extern(C) gboolean function(GstRegistry* registry, const(char)* featureName, uint minMajor, uint minMinor, uint minMicro) nothrow;
+__gshared c_gst_registry_check_feature_versionFn c_gst_registry_check_feature_version; ///
+private alias c_gst_registry_feature_filterFn = extern(C) GList* function(GstRegistry* registry, GstPluginFeatureFilter filter, gboolean first, void* userData) nothrow;
+__gshared c_gst_registry_feature_filterFn c_gst_registry_feature_filter; ///
+private alias c_gst_registry_find_featureFn = extern(C) GstPluginFeature* function(GstRegistry* registry, const(char)* name, GType type) nothrow;
+__gshared c_gst_registry_find_featureFn c_gst_registry_find_feature; ///
+private alias c_gst_registry_find_pluginFn = extern(C) GstPlugin* function(GstRegistry* registry, const(char)* name) nothrow;
+__gshared c_gst_registry_find_pluginFn c_gst_registry_find_plugin; ///
+private alias c_gst_registry_get_feature_listFn = extern(C) GList* function(GstRegistry* registry, GType type) nothrow;
+__gshared c_gst_registry_get_feature_listFn c_gst_registry_get_feature_list; ///
+private alias c_gst_registry_get_feature_list_by_pluginFn = extern(C) GList* function(GstRegistry* registry, const(char)* name) nothrow;
+__gshared c_gst_registry_get_feature_list_by_pluginFn c_gst_registry_get_feature_list_by_plugin; ///
+private alias c_gst_registry_get_feature_list_cookieFn = extern(C) uint function(GstRegistry* registry) nothrow;
+__gshared c_gst_registry_get_feature_list_cookieFn c_gst_registry_get_feature_list_cookie; ///
+private alias c_gst_registry_get_plugin_listFn = extern(C) GList* function(GstRegistry* registry) nothrow;
+__gshared c_gst_registry_get_plugin_listFn c_gst_registry_get_plugin_list; ///
+private alias c_gst_registry_lookupFn = extern(C) GstPlugin* function(GstRegistry* registry, const(char)* filename) nothrow;
+__gshared c_gst_registry_lookupFn c_gst_registry_lookup; ///
+private alias c_gst_registry_lookup_featureFn = extern(C) GstPluginFeature* function(GstRegistry* registry, const(char)* name) nothrow;
+__gshared c_gst_registry_lookup_featureFn c_gst_registry_lookup_feature; ///
+private alias c_gst_registry_plugin_filterFn = extern(C) GList* function(GstRegistry* registry, GstPluginFilter filter, gboolean first, void* userData) nothrow;
+__gshared c_gst_registry_plugin_filterFn c_gst_registry_plugin_filter; ///
+private alias c_gst_registry_remove_featureFn = extern(C) void function(GstRegistry* registry, GstPluginFeature* feature) nothrow;
+__gshared c_gst_registry_remove_featureFn c_gst_registry_remove_feature; ///
+private alias c_gst_registry_remove_pluginFn = extern(C) void function(GstRegistry* registry, GstPlugin* plugin) nothrow;
+__gshared c_gst_registry_remove_pluginFn c_gst_registry_remove_plugin; ///
+private alias c_gst_registry_scan_pathFn = extern(C) gboolean function(GstRegistry* registry, const(char)* path) nothrow;
+__gshared c_gst_registry_scan_pathFn c_gst_registry_scan_path; ///
+
+// Sample
+private alias c_gst_sample_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_sample_get_typeFn c_gst_sample_get_type; ///
+private alias c_gst_sample_newFn = extern(C) GstSample* function(GstBuffer* buffer, GstCaps* caps, const(GstSegment)* segment, GstStructure* info) nothrow;
+__gshared c_gst_sample_newFn c_gst_sample_new; ///
+private alias c_gst_sample_copyFn = extern(C) GstSample* function(const(GstSample)* sample) nothrow;
+__gshared c_gst_sample_copyFn c_gst_sample_copy; ///
+private alias c_gst_sample_get_bufferFn = extern(C) GstBuffer* function(GstSample* sample) nothrow;
+__gshared c_gst_sample_get_bufferFn c_gst_sample_get_buffer; ///
+private alias c_gst_sample_get_buffer_listFn = extern(C) GstBufferList* function(GstSample* sample) nothrow;
+__gshared c_gst_sample_get_buffer_listFn c_gst_sample_get_buffer_list; ///
+private alias c_gst_sample_get_capsFn = extern(C) GstCaps* function(GstSample* sample) nothrow;
+__gshared c_gst_sample_get_capsFn c_gst_sample_get_caps; ///
+private alias c_gst_sample_get_infoFn = extern(C) const(GstStructure)* function(GstSample* sample) nothrow;
+__gshared c_gst_sample_get_infoFn c_gst_sample_get_info; ///
+private alias c_gst_sample_get_segmentFn = extern(C) GstSegment* function(GstSample* sample) nothrow;
+__gshared c_gst_sample_get_segmentFn c_gst_sample_get_segment; ///
+private alias c_gst_sample_is_writableFn = extern(C) gboolean function(const(GstSample)* sample) nothrow;
+__gshared c_gst_sample_is_writableFn c_gst_sample_is_writable; ///
+private alias c_gst_sample_make_writableFn = extern(C) GstSample* function(GstSample* sample) nothrow;
+__gshared c_gst_sample_make_writableFn c_gst_sample_make_writable; ///
+private alias c_gst_sample_refFn = extern(C) GstSample* function(GstSample* sample) nothrow;
+__gshared c_gst_sample_refFn c_gst_sample_ref; ///
+private alias c_gst_sample_set_bufferFn = extern(C) void function(GstSample* sample, GstBuffer* buffer) nothrow;
+__gshared c_gst_sample_set_bufferFn c_gst_sample_set_buffer; ///
+private alias c_gst_sample_set_buffer_listFn = extern(C) void function(GstSample* sample, GstBufferList* bufferList) nothrow;
+__gshared c_gst_sample_set_buffer_listFn c_gst_sample_set_buffer_list; ///
+private alias c_gst_sample_set_capsFn = extern(C) void function(GstSample* sample, GstCaps* caps) nothrow;
+__gshared c_gst_sample_set_capsFn c_gst_sample_set_caps; ///
+private alias c_gst_sample_set_infoFn = extern(C) gboolean function(GstSample* sample, GstStructure* info) nothrow;
+__gshared c_gst_sample_set_infoFn c_gst_sample_set_info; ///
+private alias c_gst_sample_set_segmentFn = extern(C) void function(GstSample* sample, const(GstSegment)* segment) nothrow;
+__gshared c_gst_sample_set_segmentFn c_gst_sample_set_segment; ///
+private alias c_gst_sample_unrefFn = extern(C) void function(GstSample* sample) nothrow;
+__gshared c_gst_sample_unrefFn c_gst_sample_unref; ///
+
+// Segment
+private alias c_gst_segment_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_segment_get_typeFn c_gst_segment_get_type; ///
+private alias c_gst_segment_newFn = extern(C) GstSegment* function() nothrow;
+__gshared c_gst_segment_newFn c_gst_segment_new; ///
+private alias c_gst_segment_clipFn = extern(C) gboolean function(const(GstSegment)* segment, GstFormat format, ulong start, ulong stop, ulong* clipStart, ulong* clipStop) nothrow;
+__gshared c_gst_segment_clipFn c_gst_segment_clip; ///
+private alias c_gst_segment_copyFn = extern(C) GstSegment* function(const(GstSegment)* segment) nothrow;
+__gshared c_gst_segment_copyFn c_gst_segment_copy; ///
+private alias c_gst_segment_copy_intoFn = extern(C) void function(const(GstSegment)* src, GstSegment* dest) nothrow;
+__gshared c_gst_segment_copy_intoFn c_gst_segment_copy_into; ///
+private alias c_gst_segment_do_seekFn = extern(C) gboolean function(GstSegment* segment, double rate, GstFormat format, GstSeekFlags flags, GstSeekType startType, ulong start, GstSeekType stopType, ulong stop, gboolean* update) nothrow;
+__gshared c_gst_segment_do_seekFn c_gst_segment_do_seek; ///
+private alias c_gst_segment_freeFn = extern(C) void function(GstSegment* segment) nothrow;
+__gshared c_gst_segment_freeFn c_gst_segment_free; ///
+private alias c_gst_segment_initFn = extern(C) void function(GstSegment* segment, GstFormat format) nothrow;
+__gshared c_gst_segment_initFn c_gst_segment_init; ///
+private alias c_gst_segment_is_equalFn = extern(C) gboolean function(const(GstSegment)* s0, const(GstSegment)* s1) nothrow;
+__gshared c_gst_segment_is_equalFn c_gst_segment_is_equal; ///
+private alias c_gst_segment_offset_running_timeFn = extern(C) gboolean function(GstSegment* segment, GstFormat format, long offset) nothrow;
+__gshared c_gst_segment_offset_running_timeFn c_gst_segment_offset_running_time; ///
+private alias c_gst_segment_position_from_running_timeFn = extern(C) ulong function(const(GstSegment)* segment, GstFormat format, ulong runningTime) nothrow;
+__gshared c_gst_segment_position_from_running_timeFn c_gst_segment_position_from_running_time; ///
+private alias c_gst_segment_position_from_running_time_fullFn = extern(C) int function(const(GstSegment)* segment, GstFormat format, ulong runningTime, ulong* position) nothrow;
+__gshared c_gst_segment_position_from_running_time_fullFn c_gst_segment_position_from_running_time_full; ///
+private alias c_gst_segment_position_from_stream_timeFn = extern(C) ulong function(const(GstSegment)* segment, GstFormat format, ulong streamTime) nothrow;
+__gshared c_gst_segment_position_from_stream_timeFn c_gst_segment_position_from_stream_time; ///
+private alias c_gst_segment_position_from_stream_time_fullFn = extern(C) int function(const(GstSegment)* segment, GstFormat format, ulong streamTime, ulong* position) nothrow;
+__gshared c_gst_segment_position_from_stream_time_fullFn c_gst_segment_position_from_stream_time_full; ///
+private alias c_gst_segment_set_running_timeFn = extern(C) gboolean function(GstSegment* segment, GstFormat format, ulong runningTime) nothrow;
+__gshared c_gst_segment_set_running_timeFn c_gst_segment_set_running_time; ///
+private alias c_gst_segment_to_positionFn = extern(C) ulong function(const(GstSegment)* segment, GstFormat format, ulong runningTime) nothrow;
+__gshared c_gst_segment_to_positionFn c_gst_segment_to_position; ///
+private alias c_gst_segment_to_running_timeFn = extern(C) ulong function(const(GstSegment)* segment, GstFormat format, ulong position) nothrow;
+__gshared c_gst_segment_to_running_timeFn c_gst_segment_to_running_time; ///
+private alias c_gst_segment_to_running_time_fullFn = extern(C) int function(const(GstSegment)* segment, GstFormat format, ulong position, ulong* runningTime) nothrow;
+__gshared c_gst_segment_to_running_time_fullFn c_gst_segment_to_running_time_full; ///
+private alias c_gst_segment_to_stream_timeFn = extern(C) ulong function(const(GstSegment)* segment, GstFormat format, ulong position) nothrow;
+__gshared c_gst_segment_to_stream_timeFn c_gst_segment_to_stream_time; ///
+private alias c_gst_segment_to_stream_time_fullFn = extern(C) int function(const(GstSegment)* segment, GstFormat format, ulong position, ulong* streamTime) nothrow;
+__gshared c_gst_segment_to_stream_time_fullFn c_gst_segment_to_stream_time_full; ///
+
+// SharedTaskPool
+private alias c_gst_shared_task_pool_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_shared_task_pool_get_typeFn c_gst_shared_task_pool_get_type; ///
+private alias c_gst_shared_task_pool_newFn = extern(C) GstTaskPool* function() nothrow;
+__gshared c_gst_shared_task_pool_newFn c_gst_shared_task_pool_new; ///
+private alias c_gst_shared_task_pool_get_max_threadsFn = extern(C) uint function(GstSharedTaskPool* pool) nothrow;
+__gshared c_gst_shared_task_pool_get_max_threadsFn c_gst_shared_task_pool_get_max_threads; ///
+private alias c_gst_shared_task_pool_set_max_threadsFn = extern(C) void function(GstSharedTaskPool* pool, uint maxThreads) nothrow;
+__gshared c_gst_shared_task_pool_set_max_threadsFn c_gst_shared_task_pool_set_max_threads; ///
+
+// StaticCaps
+private alias c_gst_static_caps_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_static_caps_get_typeFn c_gst_static_caps_get_type; ///
+private alias c_gst_static_caps_cleanupFn = extern(C) void function(GstStaticCaps* staticCaps) nothrow;
+__gshared c_gst_static_caps_cleanupFn c_gst_static_caps_cleanup; ///
+private alias c_gst_static_caps_getFn = extern(C) GstCaps* function(GstStaticCaps* staticCaps) nothrow;
+__gshared c_gst_static_caps_getFn c_gst_static_caps_get; ///
+
+// StaticPadTemplate
+private alias c_gst_static_pad_template_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_static_pad_template_get_typeFn c_gst_static_pad_template_get_type; ///
+private alias c_gst_static_pad_template_getFn = extern(C) GstPadTemplate* function(GstStaticPadTemplate* padTemplate) nothrow;
+__gshared c_gst_static_pad_template_getFn c_gst_static_pad_template_get; ///
+private alias c_gst_static_pad_template_get_capsFn = extern(C) GstCaps* function(GstStaticPadTemplate* templ) nothrow;
+__gshared c_gst_static_pad_template_get_capsFn c_gst_static_pad_template_get_caps; ///
+
+// Stream
+private alias c_gst_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_stream_get_typeFn c_gst_stream_get_type; ///
+private alias c_gst_stream_newFn = extern(C) GstStream* function(const(char)* streamId, GstCaps* caps, GstStreamType type, GstStreamFlags flags) nothrow;
+__gshared c_gst_stream_newFn c_gst_stream_new; ///
+private alias c_gst_stream_get_capsFn = extern(C) GstCaps* function(GstStream* stream) nothrow;
+__gshared c_gst_stream_get_capsFn c_gst_stream_get_caps; ///
+private alias c_gst_stream_get_stream_flagsFn = extern(C) GstStreamFlags function(GstStream* stream) nothrow;
+__gshared c_gst_stream_get_stream_flagsFn c_gst_stream_get_stream_flags; ///
+private alias c_gst_stream_get_stream_idFn = extern(C) const(char)* function(GstStream* stream) nothrow;
+__gshared c_gst_stream_get_stream_idFn c_gst_stream_get_stream_id; ///
+private alias c_gst_stream_get_stream_typeFn = extern(C) GstStreamType function(GstStream* stream) nothrow;
+__gshared c_gst_stream_get_stream_typeFn c_gst_stream_get_stream_type; ///
+private alias c_gst_stream_get_tagsFn = extern(C) GstTagList* function(GstStream* stream) nothrow;
+__gshared c_gst_stream_get_tagsFn c_gst_stream_get_tags; ///
+private alias c_gst_stream_set_capsFn = extern(C) void function(GstStream* stream, GstCaps* caps) nothrow;
+__gshared c_gst_stream_set_capsFn c_gst_stream_set_caps; ///
+private alias c_gst_stream_set_stream_flagsFn = extern(C) void function(GstStream* stream, GstStreamFlags flags) nothrow;
+__gshared c_gst_stream_set_stream_flagsFn c_gst_stream_set_stream_flags; ///
+private alias c_gst_stream_set_stream_typeFn = extern(C) void function(GstStream* stream, GstStreamType streamType) nothrow;
+__gshared c_gst_stream_set_stream_typeFn c_gst_stream_set_stream_type; ///
+private alias c_gst_stream_set_tagsFn = extern(C) void function(GstStream* stream, GstTagList* tags) nothrow;
+__gshared c_gst_stream_set_tagsFn c_gst_stream_set_tags; ///
+
+// StreamCollection
+private alias c_gst_stream_collection_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_stream_collection_get_typeFn c_gst_stream_collection_get_type; ///
+private alias c_gst_stream_collection_newFn = extern(C) GstStreamCollection* function(const(char)* upstreamId) nothrow;
+__gshared c_gst_stream_collection_newFn c_gst_stream_collection_new; ///
+private alias c_gst_stream_collection_add_streamFn = extern(C) gboolean function(GstStreamCollection* collection, GstStream* stream) nothrow;
+__gshared c_gst_stream_collection_add_streamFn c_gst_stream_collection_add_stream; ///
+private alias c_gst_stream_collection_get_sizeFn = extern(C) uint function(GstStreamCollection* collection) nothrow;
+__gshared c_gst_stream_collection_get_sizeFn c_gst_stream_collection_get_size; ///
+private alias c_gst_stream_collection_get_streamFn = extern(C) GstStream* function(GstStreamCollection* collection, uint index) nothrow;
+__gshared c_gst_stream_collection_get_streamFn c_gst_stream_collection_get_stream; ///
+private alias c_gst_stream_collection_get_upstream_idFn = extern(C) const(char)* function(GstStreamCollection* collection) nothrow;
+__gshared c_gst_stream_collection_get_upstream_idFn c_gst_stream_collection_get_upstream_id; ///
+
+// Structure
+private alias c_gst_structure_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_structure_get_typeFn c_gst_structure_get_type; ///
+private alias c_gst_structure_from_stringFn = extern(C) GstStructure* function(const(char)* string_, char** end) nothrow;
+__gshared c_gst_structure_from_stringFn c_gst_structure_from_string; ///
+private alias c_gst_structure_newFn = extern(C) GstStructure* function(const(char)* name, const(char)* firstfield,  ...) nothrow;
+__gshared c_gst_structure_newFn c_gst_structure_new; ///
+private alias c_gst_structure_new_emptyFn = extern(C) GstStructure* function(const(char)* name) nothrow;
+__gshared c_gst_structure_new_emptyFn c_gst_structure_new_empty; ///
+private alias c_gst_structure_new_from_stringFn = extern(C) GstStructure* function(const(char)* string_) nothrow;
+__gshared c_gst_structure_new_from_stringFn c_gst_structure_new_from_string; ///
+private alias c_gst_structure_new_idFn = extern(C) GstStructure* function(GQuark nameQuark, GQuark fieldQuark,  ...) nothrow;
+__gshared c_gst_structure_new_idFn c_gst_structure_new_id; ///
+private alias c_gst_structure_new_id_emptyFn = extern(C) GstStructure* function(GQuark quark) nothrow;
+__gshared c_gst_structure_new_id_emptyFn c_gst_structure_new_id_empty; ///
+private alias c_gst_structure_new_id_strFn = extern(C) GstStructure* function(const(GstIdStr)* name, const(GstIdStr)* fieldname,  ...) nothrow;
+__gshared c_gst_structure_new_id_strFn c_gst_structure_new_id_str; ///
+private alias c_gst_structure_new_id_str_emptyFn = extern(C) GstStructure* function(const(GstIdStr)* name) nothrow;
+__gshared c_gst_structure_new_id_str_emptyFn c_gst_structure_new_id_str_empty; ///
+private alias c_gst_structure_new_id_str_valistFn = extern(C) GstStructure* function(const(GstIdStr)* name, const(GstIdStr)* firstfield, void* varargs) nothrow;
+__gshared c_gst_structure_new_id_str_valistFn c_gst_structure_new_id_str_valist; ///
+private alias c_gst_structure_new_static_strFn = extern(C) GstStructure* function(const(char)* name, const(char)* firstfield,  ...) nothrow;
+__gshared c_gst_structure_new_static_strFn c_gst_structure_new_static_str; ///
+private alias c_gst_structure_new_static_str_emptyFn = extern(C) GstStructure* function(const(char)* name) nothrow;
+__gshared c_gst_structure_new_static_str_emptyFn c_gst_structure_new_static_str_empty; ///
+private alias c_gst_structure_new_static_str_valistFn = extern(C) GstStructure* function(const(char)* name, const(char)* firstfield, void* varargs) nothrow;
+__gshared c_gst_structure_new_static_str_valistFn c_gst_structure_new_static_str_valist; ///
+private alias c_gst_structure_new_valistFn = extern(C) GstStructure* function(const(char)* name, const(char)* firstfield, void* varargs) nothrow;
+__gshared c_gst_structure_new_valistFn c_gst_structure_new_valist; ///
+private alias c_gst_structure_can_intersectFn = extern(C) gboolean function(const(GstStructure)* struct1, const(GstStructure)* struct2) nothrow;
+__gshared c_gst_structure_can_intersectFn c_gst_structure_can_intersect; ///
+private alias c_gst_structure_copyFn = extern(C) GstStructure* function(const(GstStructure)* structure) nothrow;
+__gshared c_gst_structure_copyFn c_gst_structure_copy; ///
+private alias c_gst_structure_filter_and_map_in_placeFn = extern(C) void function(GstStructure* structure, GstStructureFilterMapFunc func, void* userData) nothrow;
+__gshared c_gst_structure_filter_and_map_in_placeFn c_gst_structure_filter_and_map_in_place; ///
+private alias c_gst_structure_filter_and_map_in_place_id_strFn = extern(C) void function(GstStructure* structure, GstStructureFilterMapIdStrFunc func, void* userData) nothrow;
+__gshared c_gst_structure_filter_and_map_in_place_id_strFn c_gst_structure_filter_and_map_in_place_id_str; ///
+private alias c_gst_structure_fixateFn = extern(C) void function(GstStructure* structure) nothrow;
+__gshared c_gst_structure_fixateFn c_gst_structure_fixate; ///
+private alias c_gst_structure_fixate_fieldFn = extern(C) gboolean function(GstStructure* structure, const(char)* fieldName) nothrow;
+__gshared c_gst_structure_fixate_fieldFn c_gst_structure_fixate_field; ///
+private alias c_gst_structure_fixate_field_booleanFn = extern(C) gboolean function(GstStructure* structure, const(char)* fieldName, gboolean target) nothrow;
+__gshared c_gst_structure_fixate_field_booleanFn c_gst_structure_fixate_field_boolean; ///
+private alias c_gst_structure_fixate_field_nearest_doubleFn = extern(C) gboolean function(GstStructure* structure, const(char)* fieldName, double target) nothrow;
+__gshared c_gst_structure_fixate_field_nearest_doubleFn c_gst_structure_fixate_field_nearest_double; ///
+private alias c_gst_structure_fixate_field_nearest_fractionFn = extern(C) gboolean function(GstStructure* structure, const(char)* fieldName, int targetNumerator, int targetDenominator) nothrow;
+__gshared c_gst_structure_fixate_field_nearest_fractionFn c_gst_structure_fixate_field_nearest_fraction; ///
+private alias c_gst_structure_fixate_field_nearest_intFn = extern(C) gboolean function(GstStructure* structure, const(char)* fieldName, int target) nothrow;
+__gshared c_gst_structure_fixate_field_nearest_intFn c_gst_structure_fixate_field_nearest_int; ///
+private alias c_gst_structure_fixate_field_stringFn = extern(C) gboolean function(GstStructure* structure, const(char)* fieldName, const(char)* target) nothrow;
+__gshared c_gst_structure_fixate_field_stringFn c_gst_structure_fixate_field_string; ///
+private alias c_gst_structure_foreachFn = extern(C) gboolean function(const(GstStructure)* structure, GstStructureForeachFunc func, void* userData) nothrow;
+__gshared c_gst_structure_foreachFn c_gst_structure_foreach; ///
+private alias c_gst_structure_foreach_id_strFn = extern(C) gboolean function(const(GstStructure)* structure, GstStructureForeachIdStrFunc func, void* userData) nothrow;
+__gshared c_gst_structure_foreach_id_strFn c_gst_structure_foreach_id_str; ///
+private alias c_gst_structure_freeFn = extern(C) void function(GstStructure* structure) nothrow;
+__gshared c_gst_structure_freeFn c_gst_structure_free; ///
+private alias c_gst_structure_getFn = extern(C) gboolean function(const(GstStructure)* structure, const(char)* firstFieldname,  ...) nothrow;
+__gshared c_gst_structure_getFn c_gst_structure_get; ///
+private alias c_gst_structure_get_arrayFn = extern(C) gboolean function(GstStructure* structure, const(char)* fieldname, GValueArray** array) nothrow;
+__gshared c_gst_structure_get_arrayFn c_gst_structure_get_array; ///
+private alias c_gst_structure_get_booleanFn = extern(C) gboolean function(const(GstStructure)* structure, const(char)* fieldname, gboolean* value) nothrow;
+__gshared c_gst_structure_get_booleanFn c_gst_structure_get_boolean; ///
+private alias c_gst_structure_get_capsFn = extern(C) gboolean function(const(GstStructure)* structure, const(char)* fieldname, const(GstCaps*)* caps) nothrow;
+__gshared c_gst_structure_get_capsFn c_gst_structure_get_caps; ///
+private alias c_gst_structure_get_clock_timeFn = extern(C) gboolean function(const(GstStructure)* structure, const(char)* fieldname, GstClockTime* value) nothrow;
+__gshared c_gst_structure_get_clock_timeFn c_gst_structure_get_clock_time; ///
+private alias c_gst_structure_get_dateFn = extern(C) gboolean function(const(GstStructure)* structure, const(char)* fieldname, GDate** value) nothrow;
+__gshared c_gst_structure_get_dateFn c_gst_structure_get_date; ///
+private alias c_gst_structure_get_date_timeFn = extern(C) gboolean function(const(GstStructure)* structure, const(char)* fieldname, GstDateTime** value) nothrow;
+__gshared c_gst_structure_get_date_timeFn c_gst_structure_get_date_time; ///
+private alias c_gst_structure_get_doubleFn = extern(C) gboolean function(const(GstStructure)* structure, const(char)* fieldname, double* value) nothrow;
+__gshared c_gst_structure_get_doubleFn c_gst_structure_get_double; ///
+private alias c_gst_structure_get_enumFn = extern(C) gboolean function(const(GstStructure)* structure, const(char)* fieldname, GType enumtype, int* value) nothrow;
+__gshared c_gst_structure_get_enumFn c_gst_structure_get_enum; ///
+private alias c_gst_structure_get_field_typeFn = extern(C) GType function(const(GstStructure)* structure, const(char)* fieldname) nothrow;
+__gshared c_gst_structure_get_field_typeFn c_gst_structure_get_field_type; ///
+private alias c_gst_structure_get_flagsFn = extern(C) gboolean function(const(GstStructure)* structure, const(char)* fieldname, GType flagsType, uint* value) nothrow;
+__gshared c_gst_structure_get_flagsFn c_gst_structure_get_flags; ///
+private alias c_gst_structure_get_flagsetFn = extern(C) gboolean function(const(GstStructure)* structure, const(char)* fieldname, uint* valueFlags, uint* valueMask) nothrow;
+__gshared c_gst_structure_get_flagsetFn c_gst_structure_get_flagset; ///
+private alias c_gst_structure_get_fractionFn = extern(C) gboolean function(const(GstStructure)* structure, const(char)* fieldname, int* valueNumerator, int* valueDenominator) nothrow;
+__gshared c_gst_structure_get_fractionFn c_gst_structure_get_fraction; ///
+private alias c_gst_structure_get_intFn = extern(C) gboolean function(const(GstStructure)* structure, const(char)* fieldname, int* value) nothrow;
+__gshared c_gst_structure_get_intFn c_gst_structure_get_int; ///
+private alias c_gst_structure_get_int64Fn = extern(C) gboolean function(const(GstStructure)* structure, const(char)* fieldname, long* value) nothrow;
+__gshared c_gst_structure_get_int64Fn c_gst_structure_get_int64; ///
+private alias c_gst_structure_get_listFn = extern(C) gboolean function(GstStructure* structure, const(char)* fieldname, GValueArray** array) nothrow;
+__gshared c_gst_structure_get_listFn c_gst_structure_get_list; ///
+private alias c_gst_structure_get_nameFn = extern(C) const(char)* function(const(GstStructure)* structure) nothrow;
+__gshared c_gst_structure_get_nameFn c_gst_structure_get_name; ///
+private alias c_gst_structure_get_name_idFn = extern(C) GQuark function(const(GstStructure)* structure) nothrow;
+__gshared c_gst_structure_get_name_idFn c_gst_structure_get_name_id; ///
+private alias c_gst_structure_get_name_id_strFn = extern(C) const(GstIdStr)* function(const(GstStructure)* structure) nothrow;
+__gshared c_gst_structure_get_name_id_strFn c_gst_structure_get_name_id_str; ///
+private alias c_gst_structure_get_stringFn = extern(C) const(char)* function(const(GstStructure)* structure, const(char)* fieldname) nothrow;
+__gshared c_gst_structure_get_stringFn c_gst_structure_get_string; ///
+private alias c_gst_structure_get_uintFn = extern(C) gboolean function(const(GstStructure)* structure, const(char)* fieldname, uint* value) nothrow;
+__gshared c_gst_structure_get_uintFn c_gst_structure_get_uint; ///
+private alias c_gst_structure_get_uint64Fn = extern(C) gboolean function(const(GstStructure)* structure, const(char)* fieldname, ulong* value) nothrow;
+__gshared c_gst_structure_get_uint64Fn c_gst_structure_get_uint64; ///
+private alias c_gst_structure_get_valistFn = extern(C) gboolean function(const(GstStructure)* structure, const(char)* firstFieldname, void* args) nothrow;
+__gshared c_gst_structure_get_valistFn c_gst_structure_get_valist; ///
+private alias c_gst_structure_get_valueFn = extern(C) const(GValue)* function(const(GstStructure)* structure, const(char)* fieldname) nothrow;
+__gshared c_gst_structure_get_valueFn c_gst_structure_get_value; ///
+private alias c_gst_structure_has_fieldFn = extern(C) gboolean function(const(GstStructure)* structure, const(char)* fieldname) nothrow;
+__gshared c_gst_structure_has_fieldFn c_gst_structure_has_field; ///
+private alias c_gst_structure_has_field_typedFn = extern(C) gboolean function(const(GstStructure)* structure, const(char)* fieldname, GType type) nothrow;
+__gshared c_gst_structure_has_field_typedFn c_gst_structure_has_field_typed; ///
+private alias c_gst_structure_has_nameFn = extern(C) gboolean function(const(GstStructure)* structure, const(char)* name) nothrow;
+__gshared c_gst_structure_has_nameFn c_gst_structure_has_name; ///
+private alias c_gst_structure_id_getFn = extern(C) gboolean function(const(GstStructure)* structure, GQuark firstFieldId,  ...) nothrow;
+__gshared c_gst_structure_id_getFn c_gst_structure_id_get; ///
+private alias c_gst_structure_id_get_valistFn = extern(C) gboolean function(const(GstStructure)* structure, GQuark firstFieldId, void* args) nothrow;
+__gshared c_gst_structure_id_get_valistFn c_gst_structure_id_get_valist; ///
+private alias c_gst_structure_id_get_valueFn = extern(C) const(GValue)* function(const(GstStructure)* structure, GQuark field) nothrow;
+__gshared c_gst_structure_id_get_valueFn c_gst_structure_id_get_value; ///
+private alias c_gst_structure_id_has_fieldFn = extern(C) gboolean function(const(GstStructure)* structure, GQuark field) nothrow;
+__gshared c_gst_structure_id_has_fieldFn c_gst_structure_id_has_field; ///
+private alias c_gst_structure_id_has_field_typedFn = extern(C) gboolean function(const(GstStructure)* structure, GQuark field, GType type) nothrow;
+__gshared c_gst_structure_id_has_field_typedFn c_gst_structure_id_has_field_typed; ///
+private alias c_gst_structure_id_setFn = extern(C) void function(GstStructure* structure, GQuark fieldname,  ...) nothrow;
+__gshared c_gst_structure_id_setFn c_gst_structure_id_set; ///
+private alias c_gst_structure_id_set_valistFn = extern(C) void function(GstStructure* structure, GQuark fieldname, void* varargs) nothrow;
+__gshared c_gst_structure_id_set_valistFn c_gst_structure_id_set_valist; ///
+private alias c_gst_structure_id_set_valueFn = extern(C) void function(GstStructure* structure, GQuark field, const(GValue)* value) nothrow;
+__gshared c_gst_structure_id_set_valueFn c_gst_structure_id_set_value; ///
+private alias c_gst_structure_id_str_getFn = extern(C) gboolean function(const(GstStructure)* structure, const(GstIdStr)* firstFieldname,  ...) nothrow;
+__gshared c_gst_structure_id_str_getFn c_gst_structure_id_str_get; ///
+private alias c_gst_structure_id_str_get_field_typeFn = extern(C) GType function(const(GstStructure)* structure, const(GstIdStr)* fieldname) nothrow;
+__gshared c_gst_structure_id_str_get_field_typeFn c_gst_structure_id_str_get_field_type; ///
+private alias c_gst_structure_id_str_get_valistFn = extern(C) gboolean function(const(GstStructure)* structure, const(GstIdStr)* firstFieldname, void* args) nothrow;
+__gshared c_gst_structure_id_str_get_valistFn c_gst_structure_id_str_get_valist; ///
+private alias c_gst_structure_id_str_get_valueFn = extern(C) const(GValue)* function(const(GstStructure)* structure, const(GstIdStr)* fieldname) nothrow;
+__gshared c_gst_structure_id_str_get_valueFn c_gst_structure_id_str_get_value; ///
+private alias c_gst_structure_id_str_has_fieldFn = extern(C) gboolean function(const(GstStructure)* structure, const(GstIdStr)* fieldname) nothrow;
+__gshared c_gst_structure_id_str_has_fieldFn c_gst_structure_id_str_has_field; ///
+private alias c_gst_structure_id_str_has_field_typedFn = extern(C) gboolean function(const(GstStructure)* structure, const(GstIdStr)* fieldname, GType type) nothrow;
+__gshared c_gst_structure_id_str_has_field_typedFn c_gst_structure_id_str_has_field_typed; ///
+private alias c_gst_structure_id_str_nth_field_nameFn = extern(C) const(GstIdStr)* function(const(GstStructure)* structure, uint index) nothrow;
+__gshared c_gst_structure_id_str_nth_field_nameFn c_gst_structure_id_str_nth_field_name; ///
+private alias c_gst_structure_id_str_remove_fieldFn = extern(C) void function(GstStructure* structure, const(GstIdStr)* fieldname) nothrow;
+__gshared c_gst_structure_id_str_remove_fieldFn c_gst_structure_id_str_remove_field; ///
+private alias c_gst_structure_id_str_remove_fieldsFn = extern(C) void function(GstStructure* structure, const(GstIdStr)* fieldname,  ...) nothrow;
+__gshared c_gst_structure_id_str_remove_fieldsFn c_gst_structure_id_str_remove_fields; ///
+private alias c_gst_structure_id_str_remove_fields_valistFn = extern(C) void function(GstStructure* structure, const(GstIdStr)* fieldname, void* varargs) nothrow;
+__gshared c_gst_structure_id_str_remove_fields_valistFn c_gst_structure_id_str_remove_fields_valist; ///
+private alias c_gst_structure_id_str_setFn = extern(C) void function(GstStructure* structure, const(GstIdStr)* fieldname,  ...) nothrow;
+__gshared c_gst_structure_id_str_setFn c_gst_structure_id_str_set; ///
+private alias c_gst_structure_id_str_set_valistFn = extern(C) void function(GstStructure* structure, const(GstIdStr)* fieldname, void* varargs) nothrow;
+__gshared c_gst_structure_id_str_set_valistFn c_gst_structure_id_str_set_valist; ///
+private alias c_gst_structure_id_str_set_valueFn = extern(C) void function(GstStructure* structure, const(GstIdStr)* fieldname, const(GValue)* value) nothrow;
+__gshared c_gst_structure_id_str_set_valueFn c_gst_structure_id_str_set_value; ///
+private alias c_gst_structure_id_str_take_valueFn = extern(C) void function(GstStructure* structure, const(GstIdStr)* fieldname, GValue* value) nothrow;
+__gshared c_gst_structure_id_str_take_valueFn c_gst_structure_id_str_take_value; ///
+private alias c_gst_structure_id_take_valueFn = extern(C) void function(GstStructure* structure, GQuark field, GValue* value) nothrow;
+__gshared c_gst_structure_id_take_valueFn c_gst_structure_id_take_value; ///
+private alias c_gst_structure_intersectFn = extern(C) GstStructure* function(const(GstStructure)* struct1, const(GstStructure)* struct2) nothrow;
+__gshared c_gst_structure_intersectFn c_gst_structure_intersect; ///
+private alias c_gst_structure_is_equalFn = extern(C) gboolean function(const(GstStructure)* structure1, const(GstStructure)* structure2) nothrow;
+__gshared c_gst_structure_is_equalFn c_gst_structure_is_equal; ///
+private alias c_gst_structure_is_subsetFn = extern(C) gboolean function(const(GstStructure)* subset, const(GstStructure)* superset) nothrow;
+__gshared c_gst_structure_is_subsetFn c_gst_structure_is_subset; ///
+private alias c_gst_structure_is_writableFn = extern(C) gboolean function(const(GstStructure)* structure) nothrow;
+__gshared c_gst_structure_is_writableFn c_gst_structure_is_writable; ///
+private alias c_gst_structure_map_in_placeFn = extern(C) gboolean function(GstStructure* structure, GstStructureMapFunc func, void* userData) nothrow;
+__gshared c_gst_structure_map_in_placeFn c_gst_structure_map_in_place; ///
+private alias c_gst_structure_map_in_place_id_strFn = extern(C) gboolean function(GstStructure* structure, GstStructureMapIdStrFunc func, void* userData) nothrow;
+__gshared c_gst_structure_map_in_place_id_strFn c_gst_structure_map_in_place_id_str; ///
+private alias c_gst_structure_n_fieldsFn = extern(C) int function(const(GstStructure)* structure) nothrow;
+__gshared c_gst_structure_n_fieldsFn c_gst_structure_n_fields; ///
+private alias c_gst_structure_nth_field_nameFn = extern(C) const(char)* function(const(GstStructure)* structure, uint index) nothrow;
+__gshared c_gst_structure_nth_field_nameFn c_gst_structure_nth_field_name; ///
+private alias c_gst_structure_remove_all_fieldsFn = extern(C) void function(GstStructure* structure) nothrow;
+__gshared c_gst_structure_remove_all_fieldsFn c_gst_structure_remove_all_fields; ///
+private alias c_gst_structure_remove_fieldFn = extern(C) void function(GstStructure* structure, const(char)* fieldname) nothrow;
+__gshared c_gst_structure_remove_fieldFn c_gst_structure_remove_field; ///
+private alias c_gst_structure_remove_fieldsFn = extern(C) void function(GstStructure* structure, const(char)* fieldname,  ...) nothrow;
+__gshared c_gst_structure_remove_fieldsFn c_gst_structure_remove_fields; ///
+private alias c_gst_structure_remove_fields_valistFn = extern(C) void function(GstStructure* structure, const(char)* fieldname, void* varargs) nothrow;
+__gshared c_gst_structure_remove_fields_valistFn c_gst_structure_remove_fields_valist; ///
+private alias c_gst_structure_serializeFn = extern(C) char* function(const(GstStructure)* structure, GstSerializeFlags flags) nothrow;
+__gshared c_gst_structure_serializeFn c_gst_structure_serialize; ///
+private alias c_gst_structure_serialize_fullFn = extern(C) char* function(const(GstStructure)* structure, GstSerializeFlags flags) nothrow;
+__gshared c_gst_structure_serialize_fullFn c_gst_structure_serialize_full; ///
+private alias c_gst_structure_setFn = extern(C) void function(GstStructure* structure, const(char)* fieldname,  ...) nothrow;
+__gshared c_gst_structure_setFn c_gst_structure_set; ///
+private alias c_gst_structure_set_arrayFn = extern(C) void function(GstStructure* structure, const(char)* fieldname, const(GValueArray)* array) nothrow;
+__gshared c_gst_structure_set_arrayFn c_gst_structure_set_array; ///
+private alias c_gst_structure_set_listFn = extern(C) void function(GstStructure* structure, const(char)* fieldname, const(GValueArray)* array) nothrow;
+__gshared c_gst_structure_set_listFn c_gst_structure_set_list; ///
+private alias c_gst_structure_set_nameFn = extern(C) void function(GstStructure* structure, const(char)* name) nothrow;
+__gshared c_gst_structure_set_nameFn c_gst_structure_set_name; ///
+private alias c_gst_structure_set_name_id_strFn = extern(C) void function(GstStructure* structure, const(GstIdStr)* name) nothrow;
+__gshared c_gst_structure_set_name_id_strFn c_gst_structure_set_name_id_str; ///
+private alias c_gst_structure_set_name_static_strFn = extern(C) void function(GstStructure* structure, const(char)* name) nothrow;
+__gshared c_gst_structure_set_name_static_strFn c_gst_structure_set_name_static_str; ///
+private alias c_gst_structure_set_parent_refcountFn = extern(C) gboolean function(GstStructure* structure, int* refcount) nothrow;
+__gshared c_gst_structure_set_parent_refcountFn c_gst_structure_set_parent_refcount; ///
+private alias c_gst_structure_set_static_strFn = extern(C) void function(GstStructure* structure, const(char)* fieldname,  ...) nothrow;
+__gshared c_gst_structure_set_static_strFn c_gst_structure_set_static_str; ///
+private alias c_gst_structure_set_static_str_valistFn = extern(C) void function(GstStructure* structure, const(char)* fieldname, void* varargs) nothrow;
+__gshared c_gst_structure_set_static_str_valistFn c_gst_structure_set_static_str_valist; ///
+private alias c_gst_structure_set_valistFn = extern(C) void function(GstStructure* structure, const(char)* fieldname, void* varargs) nothrow;
+__gshared c_gst_structure_set_valistFn c_gst_structure_set_valist; ///
+private alias c_gst_structure_set_valueFn = extern(C) void function(GstStructure* structure, const(char)* fieldname, const(GValue)* value) nothrow;
+__gshared c_gst_structure_set_valueFn c_gst_structure_set_value; ///
+private alias c_gst_structure_set_value_static_strFn = extern(C) void function(GstStructure* structure, const(char)* fieldname, const(GValue)* value) nothrow;
+__gshared c_gst_structure_set_value_static_strFn c_gst_structure_set_value_static_str; ///
+private alias c_gst_structure_take_valueFn = extern(C) void function(GstStructure* structure, const(char)* fieldname, GValue* value) nothrow;
+__gshared c_gst_structure_take_valueFn c_gst_structure_take_value; ///
+private alias c_gst_structure_take_value_static_strFn = extern(C) void function(GstStructure* structure, const(char)* fieldname, GValue* value) nothrow;
+__gshared c_gst_structure_take_value_static_strFn c_gst_structure_take_value_static_str; ///
+private alias c_gst_structure_to_stringFn = extern(C) char* function(const(GstStructure)* structure) nothrow;
+__gshared c_gst_structure_to_stringFn c_gst_structure_to_string; ///
+private alias c_gst_structure_takeFn = extern(C) gboolean function(GstStructure** oldstrPtr, GstStructure* newstr) nothrow;
+__gshared c_gst_structure_takeFn c_gst_structure_take; ///
+
+// SystemClock
+private alias c_gst_system_clock_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_system_clock_get_typeFn c_gst_system_clock_get_type; ///
+private alias c_gst_system_clock_obtainFn = extern(C) GstClock* function() nothrow;
+__gshared c_gst_system_clock_obtainFn c_gst_system_clock_obtain; ///
+private alias c_gst_system_clock_set_defaultFn = extern(C) void function(GstClock* newClock) nothrow;
+__gshared c_gst_system_clock_set_defaultFn c_gst_system_clock_set_default; ///
+
+// TagList
+private alias c_gst_tag_list_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_tag_list_get_typeFn c_gst_tag_list_get_type; ///
+private alias c_gst_tag_list_newFn = extern(C) GstTagList* function(const(char)* tag,  ...) nothrow;
+__gshared c_gst_tag_list_newFn c_gst_tag_list_new; ///
+private alias c_gst_tag_list_new_emptyFn = extern(C) GstTagList* function() nothrow;
+__gshared c_gst_tag_list_new_emptyFn c_gst_tag_list_new_empty; ///
+private alias c_gst_tag_list_new_from_stringFn = extern(C) GstTagList* function(const(char)* str) nothrow;
+__gshared c_gst_tag_list_new_from_stringFn c_gst_tag_list_new_from_string; ///
+private alias c_gst_tag_list_new_valistFn = extern(C) GstTagList* function(void* varArgs) nothrow;
+__gshared c_gst_tag_list_new_valistFn c_gst_tag_list_new_valist; ///
+private alias c_gst_tag_list_addFn = extern(C) void function(GstTagList* list, GstTagMergeMode mode, const(char)* tag,  ...) nothrow;
+__gshared c_gst_tag_list_addFn c_gst_tag_list_add; ///
+private alias c_gst_tag_list_add_valistFn = extern(C) void function(GstTagList* list, GstTagMergeMode mode, const(char)* tag, void* varArgs) nothrow;
+__gshared c_gst_tag_list_add_valistFn c_gst_tag_list_add_valist; ///
+private alias c_gst_tag_list_add_valist_valuesFn = extern(C) void function(GstTagList* list, GstTagMergeMode mode, const(char)* tag, void* varArgs) nothrow;
+__gshared c_gst_tag_list_add_valist_valuesFn c_gst_tag_list_add_valist_values; ///
+private alias c_gst_tag_list_add_valueFn = extern(C) void function(GstTagList* list, GstTagMergeMode mode, const(char)* tag, const(GValue)* value) nothrow;
+__gshared c_gst_tag_list_add_valueFn c_gst_tag_list_add_value; ///
+private alias c_gst_tag_list_add_valuesFn = extern(C) void function(GstTagList* list, GstTagMergeMode mode, const(char)* tag,  ...) nothrow;
+__gshared c_gst_tag_list_add_valuesFn c_gst_tag_list_add_values; ///
+private alias c_gst_tag_list_copyFn = extern(C) GstTagList* function(const(GstTagList)* taglist) nothrow;
+__gshared c_gst_tag_list_copyFn c_gst_tag_list_copy; ///
+private alias c_gst_tag_list_foreachFn = extern(C) void function(const(GstTagList)* list, GstTagForeachFunc func, void* userData) nothrow;
+__gshared c_gst_tag_list_foreachFn c_gst_tag_list_foreach; ///
+private alias c_gst_tag_list_get_booleanFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, gboolean* value) nothrow;
+__gshared c_gst_tag_list_get_booleanFn c_gst_tag_list_get_boolean; ///
+private alias c_gst_tag_list_get_boolean_indexFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, uint index, gboolean* value) nothrow;
+__gshared c_gst_tag_list_get_boolean_indexFn c_gst_tag_list_get_boolean_index; ///
+private alias c_gst_tag_list_get_dateFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, GDate** value) nothrow;
+__gshared c_gst_tag_list_get_dateFn c_gst_tag_list_get_date; ///
+private alias c_gst_tag_list_get_date_indexFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, uint index, GDate** value) nothrow;
+__gshared c_gst_tag_list_get_date_indexFn c_gst_tag_list_get_date_index; ///
+private alias c_gst_tag_list_get_date_timeFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, GstDateTime** value) nothrow;
+__gshared c_gst_tag_list_get_date_timeFn c_gst_tag_list_get_date_time; ///
+private alias c_gst_tag_list_get_date_time_indexFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, uint index, GstDateTime** value) nothrow;
+__gshared c_gst_tag_list_get_date_time_indexFn c_gst_tag_list_get_date_time_index; ///
+private alias c_gst_tag_list_get_doubleFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, double* value) nothrow;
+__gshared c_gst_tag_list_get_doubleFn c_gst_tag_list_get_double; ///
+private alias c_gst_tag_list_get_double_indexFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, uint index, double* value) nothrow;
+__gshared c_gst_tag_list_get_double_indexFn c_gst_tag_list_get_double_index; ///
+private alias c_gst_tag_list_get_floatFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, float* value) nothrow;
+__gshared c_gst_tag_list_get_floatFn c_gst_tag_list_get_float; ///
+private alias c_gst_tag_list_get_float_indexFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, uint index, float* value) nothrow;
+__gshared c_gst_tag_list_get_float_indexFn c_gst_tag_list_get_float_index; ///
+private alias c_gst_tag_list_get_intFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, int* value) nothrow;
+__gshared c_gst_tag_list_get_intFn c_gst_tag_list_get_int; ///
+private alias c_gst_tag_list_get_int64Fn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, long* value) nothrow;
+__gshared c_gst_tag_list_get_int64Fn c_gst_tag_list_get_int64; ///
+private alias c_gst_tag_list_get_int64_indexFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, uint index, long* value) nothrow;
+__gshared c_gst_tag_list_get_int64_indexFn c_gst_tag_list_get_int64_index; ///
+private alias c_gst_tag_list_get_int_indexFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, uint index, int* value) nothrow;
+__gshared c_gst_tag_list_get_int_indexFn c_gst_tag_list_get_int_index; ///
+private alias c_gst_tag_list_get_pointerFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, void** value) nothrow;
+__gshared c_gst_tag_list_get_pointerFn c_gst_tag_list_get_pointer; ///
+private alias c_gst_tag_list_get_pointer_indexFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, uint index, void** value) nothrow;
+__gshared c_gst_tag_list_get_pointer_indexFn c_gst_tag_list_get_pointer_index; ///
+private alias c_gst_tag_list_get_sampleFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, GstSample** sample) nothrow;
+__gshared c_gst_tag_list_get_sampleFn c_gst_tag_list_get_sample; ///
+private alias c_gst_tag_list_get_sample_indexFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, uint index, GstSample** sample) nothrow;
+__gshared c_gst_tag_list_get_sample_indexFn c_gst_tag_list_get_sample_index; ///
+private alias c_gst_tag_list_get_scopeFn = extern(C) GstTagScope function(const(GstTagList)* list) nothrow;
+__gshared c_gst_tag_list_get_scopeFn c_gst_tag_list_get_scope; ///
+private alias c_gst_tag_list_get_stringFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, char** value) nothrow;
+__gshared c_gst_tag_list_get_stringFn c_gst_tag_list_get_string; ///
+private alias c_gst_tag_list_get_string_indexFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, uint index, char** value) nothrow;
+__gshared c_gst_tag_list_get_string_indexFn c_gst_tag_list_get_string_index; ///
+private alias c_gst_tag_list_get_tag_sizeFn = extern(C) uint function(const(GstTagList)* list, const(char)* tag) nothrow;
+__gshared c_gst_tag_list_get_tag_sizeFn c_gst_tag_list_get_tag_size; ///
+private alias c_gst_tag_list_get_uintFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, uint* value) nothrow;
+__gshared c_gst_tag_list_get_uintFn c_gst_tag_list_get_uint; ///
+private alias c_gst_tag_list_get_uint64Fn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, ulong* value) nothrow;
+__gshared c_gst_tag_list_get_uint64Fn c_gst_tag_list_get_uint64; ///
+private alias c_gst_tag_list_get_uint64_indexFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, uint index, ulong* value) nothrow;
+__gshared c_gst_tag_list_get_uint64_indexFn c_gst_tag_list_get_uint64_index; ///
+private alias c_gst_tag_list_get_uint_indexFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, uint index, uint* value) nothrow;
+__gshared c_gst_tag_list_get_uint_indexFn c_gst_tag_list_get_uint_index; ///
+private alias c_gst_tag_list_get_value_indexFn = extern(C) const(GValue)* function(const(GstTagList)* list, const(char)* tag, uint index) nothrow;
+__gshared c_gst_tag_list_get_value_indexFn c_gst_tag_list_get_value_index; ///
+private alias c_gst_tag_list_insertFn = extern(C) void function(GstTagList* into, const(GstTagList)* from, GstTagMergeMode mode) nothrow;
+__gshared c_gst_tag_list_insertFn c_gst_tag_list_insert; ///
+private alias c_gst_tag_list_is_emptyFn = extern(C) gboolean function(const(GstTagList)* list) nothrow;
+__gshared c_gst_tag_list_is_emptyFn c_gst_tag_list_is_empty; ///
+private alias c_gst_tag_list_is_equalFn = extern(C) gboolean function(const(GstTagList)* list1, const(GstTagList)* list2) nothrow;
+__gshared c_gst_tag_list_is_equalFn c_gst_tag_list_is_equal; ///
+private alias c_gst_tag_list_is_writableFn = extern(C) gboolean function(const(GstTagList)* taglist) nothrow;
+__gshared c_gst_tag_list_is_writableFn c_gst_tag_list_is_writable; ///
+private alias c_gst_tag_list_make_writableFn = extern(C) GstTagList* function(GstTagList* taglist) nothrow;
+__gshared c_gst_tag_list_make_writableFn c_gst_tag_list_make_writable; ///
+private alias c_gst_tag_list_mergeFn = extern(C) GstTagList* function(const(GstTagList)* list1, const(GstTagList)* list2, GstTagMergeMode mode) nothrow;
+__gshared c_gst_tag_list_mergeFn c_gst_tag_list_merge; ///
+private alias c_gst_tag_list_n_tagsFn = extern(C) int function(const(GstTagList)* list) nothrow;
+__gshared c_gst_tag_list_n_tagsFn c_gst_tag_list_n_tags; ///
+private alias c_gst_tag_list_nth_tag_nameFn = extern(C) const(char)* function(const(GstTagList)* list, uint index) nothrow;
+__gshared c_gst_tag_list_nth_tag_nameFn c_gst_tag_list_nth_tag_name; ///
+private alias c_gst_tag_list_peek_string_indexFn = extern(C) gboolean function(const(GstTagList)* list, const(char)* tag, uint index, const(char*)* value) nothrow;
+__gshared c_gst_tag_list_peek_string_indexFn c_gst_tag_list_peek_string_index; ///
+private alias c_gst_tag_list_refFn = extern(C) GstTagList* function(GstTagList* taglist) nothrow;
+__gshared c_gst_tag_list_refFn c_gst_tag_list_ref; ///
+private alias c_gst_tag_list_remove_tagFn = extern(C) void function(GstTagList* list, const(char)* tag) nothrow;
+__gshared c_gst_tag_list_remove_tagFn c_gst_tag_list_remove_tag; ///
+private alias c_gst_tag_list_set_scopeFn = extern(C) void function(GstTagList* list, GstTagScope scope_) nothrow;
+__gshared c_gst_tag_list_set_scopeFn c_gst_tag_list_set_scope; ///
+private alias c_gst_tag_list_to_stringFn = extern(C) char* function(const(GstTagList)* list) nothrow;
+__gshared c_gst_tag_list_to_stringFn c_gst_tag_list_to_string; ///
+private alias c_gst_tag_list_unrefFn = extern(C) void function(GstTagList* taglist) nothrow;
+__gshared c_gst_tag_list_unrefFn c_gst_tag_list_unref; ///
+private alias c_gst_tag_list_copy_valueFn = extern(C) gboolean function(GValue* dest, const(GstTagList)* list, const(char)* tag) nothrow;
+__gshared c_gst_tag_list_copy_valueFn c_gst_tag_list_copy_value; ///
+private alias c_gst_tag_list_replaceFn = extern(C) gboolean function(GstTagList** oldTaglist, GstTagList* newTaglist) nothrow;
+__gshared c_gst_tag_list_replaceFn c_gst_tag_list_replace; ///
+private alias c_gst_tag_list_takeFn = extern(C) gboolean function(GstTagList** oldTaglist, GstTagList* newTaglist) nothrow;
+__gshared c_gst_tag_list_takeFn c_gst_tag_list_take; ///
+
+// TagSetter
+private alias c_gst_tag_setter_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_tag_setter_get_typeFn c_gst_tag_setter_get_type; ///
+private alias c_gst_tag_setter_add_tag_valistFn = extern(C) void function(GstTagSetter* setter, GstTagMergeMode mode, const(char)* tag, void* varArgs) nothrow;
+__gshared c_gst_tag_setter_add_tag_valistFn c_gst_tag_setter_add_tag_valist; ///
+private alias c_gst_tag_setter_add_tag_valist_valuesFn = extern(C) void function(GstTagSetter* setter, GstTagMergeMode mode, const(char)* tag, void* varArgs) nothrow;
+__gshared c_gst_tag_setter_add_tag_valist_valuesFn c_gst_tag_setter_add_tag_valist_values; ///
+private alias c_gst_tag_setter_add_tag_valueFn = extern(C) void function(GstTagSetter* setter, GstTagMergeMode mode, const(char)* tag, const(GValue)* value) nothrow;
+__gshared c_gst_tag_setter_add_tag_valueFn c_gst_tag_setter_add_tag_value; ///
+private alias c_gst_tag_setter_add_tag_valuesFn = extern(C) void function(GstTagSetter* setter, GstTagMergeMode mode, const(char)* tag,  ...) nothrow;
+__gshared c_gst_tag_setter_add_tag_valuesFn c_gst_tag_setter_add_tag_values; ///
+private alias c_gst_tag_setter_add_tagsFn = extern(C) void function(GstTagSetter* setter, GstTagMergeMode mode, const(char)* tag,  ...) nothrow;
+__gshared c_gst_tag_setter_add_tagsFn c_gst_tag_setter_add_tags; ///
+private alias c_gst_tag_setter_get_tag_listFn = extern(C) const(GstTagList)* function(GstTagSetter* setter) nothrow;
+__gshared c_gst_tag_setter_get_tag_listFn c_gst_tag_setter_get_tag_list; ///
+private alias c_gst_tag_setter_get_tag_merge_modeFn = extern(C) GstTagMergeMode function(GstTagSetter* setter) nothrow;
+__gshared c_gst_tag_setter_get_tag_merge_modeFn c_gst_tag_setter_get_tag_merge_mode; ///
+private alias c_gst_tag_setter_merge_tagsFn = extern(C) void function(GstTagSetter* setter, const(GstTagList)* list, GstTagMergeMode mode) nothrow;
+__gshared c_gst_tag_setter_merge_tagsFn c_gst_tag_setter_merge_tags; ///
+private alias c_gst_tag_setter_reset_tagsFn = extern(C) void function(GstTagSetter* setter) nothrow;
+__gshared c_gst_tag_setter_reset_tagsFn c_gst_tag_setter_reset_tags; ///
+private alias c_gst_tag_setter_set_tag_merge_modeFn = extern(C) void function(GstTagSetter* setter, GstTagMergeMode mode) nothrow;
+__gshared c_gst_tag_setter_set_tag_merge_modeFn c_gst_tag_setter_set_tag_merge_mode; ///
+
+// Task
+private alias c_gst_task_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_task_get_typeFn c_gst_task_get_type; ///
+private alias c_gst_task_newFn = extern(C) GstTask* function(GstTaskFunction func, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_task_newFn c_gst_task_new; ///
+private alias c_gst_task_cleanup_allFn = extern(C) void function() nothrow;
+__gshared c_gst_task_cleanup_allFn c_gst_task_cleanup_all; ///
+private alias c_gst_task_get_poolFn = extern(C) GstTaskPool* function(GstTask* task) nothrow;
+__gshared c_gst_task_get_poolFn c_gst_task_get_pool; ///
+private alias c_gst_task_get_stateFn = extern(C) GstTaskState function(GstTask* task) nothrow;
+__gshared c_gst_task_get_stateFn c_gst_task_get_state; ///
+private alias c_gst_task_joinFn = extern(C) gboolean function(GstTask* task) nothrow;
+__gshared c_gst_task_joinFn c_gst_task_join; ///
+private alias c_gst_task_pauseFn = extern(C) gboolean function(GstTask* task) nothrow;
+__gshared c_gst_task_pauseFn c_gst_task_pause; ///
+private alias c_gst_task_resumeFn = extern(C) gboolean function(GstTask* task) nothrow;
+__gshared c_gst_task_resumeFn c_gst_task_resume; ///
+private alias c_gst_task_set_enter_callbackFn = extern(C) void function(GstTask* task, GstTaskThreadFunc enterFunc, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_task_set_enter_callbackFn c_gst_task_set_enter_callback; ///
+private alias c_gst_task_set_leave_callbackFn = extern(C) void function(GstTask* task, GstTaskThreadFunc leaveFunc, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_task_set_leave_callbackFn c_gst_task_set_leave_callback; ///
+private alias c_gst_task_set_lockFn = extern(C) void function(GstTask* task, GRecMutex* mutex) nothrow;
+__gshared c_gst_task_set_lockFn c_gst_task_set_lock; ///
+private alias c_gst_task_set_poolFn = extern(C) void function(GstTask* task, GstTaskPool* pool) nothrow;
+__gshared c_gst_task_set_poolFn c_gst_task_set_pool; ///
+private alias c_gst_task_set_stateFn = extern(C) gboolean function(GstTask* task, GstTaskState state) nothrow;
+__gshared c_gst_task_set_stateFn c_gst_task_set_state; ///
+private alias c_gst_task_startFn = extern(C) gboolean function(GstTask* task) nothrow;
+__gshared c_gst_task_startFn c_gst_task_start; ///
+private alias c_gst_task_stopFn = extern(C) gboolean function(GstTask* task) nothrow;
+__gshared c_gst_task_stopFn c_gst_task_stop; ///
+
+// TaskPool
+private alias c_gst_task_pool_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_task_pool_get_typeFn c_gst_task_pool_get_type; ///
+private alias c_gst_task_pool_newFn = extern(C) GstTaskPool* function() nothrow;
+__gshared c_gst_task_pool_newFn c_gst_task_pool_new; ///
+private alias c_gst_task_pool_cleanupFn = extern(C) void function(GstTaskPool* pool) nothrow;
+__gshared c_gst_task_pool_cleanupFn c_gst_task_pool_cleanup; ///
+private alias c_gst_task_pool_dispose_handleFn = extern(C) void function(GstTaskPool* pool, void* id) nothrow;
+__gshared c_gst_task_pool_dispose_handleFn c_gst_task_pool_dispose_handle; ///
+private alias c_gst_task_pool_joinFn = extern(C) void function(GstTaskPool* pool, void* id) nothrow;
+__gshared c_gst_task_pool_joinFn c_gst_task_pool_join; ///
+private alias c_gst_task_pool_prepareFn = extern(C) void function(GstTaskPool* pool, GError** _err) nothrow;
+__gshared c_gst_task_pool_prepareFn c_gst_task_pool_prepare; ///
+private alias c_gst_task_pool_pushFn = extern(C) void* function(GstTaskPool* pool, GstTaskPoolFunction func, void* userData, GError** _err) nothrow;
+__gshared c_gst_task_pool_pushFn c_gst_task_pool_push; ///
+
+// Toc
+private alias c_gst_toc_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_toc_get_typeFn c_gst_toc_get_type; ///
+private alias c_gst_toc_newFn = extern(C) GstToc* function(GstTocScope scope_) nothrow;
+__gshared c_gst_toc_newFn c_gst_toc_new; ///
+private alias c_gst_toc_append_entryFn = extern(C) void function(GstToc* toc, GstTocEntry* entry) nothrow;
+__gshared c_gst_toc_append_entryFn c_gst_toc_append_entry; ///
+private alias c_gst_toc_dumpFn = extern(C) void function(GstToc* toc) nothrow;
+__gshared c_gst_toc_dumpFn c_gst_toc_dump; ///
+private alias c_gst_toc_find_entryFn = extern(C) GstTocEntry* function(const(GstToc)* toc, const(char)* uid) nothrow;
+__gshared c_gst_toc_find_entryFn c_gst_toc_find_entry; ///
+private alias c_gst_toc_get_entriesFn = extern(C) GList* function(const(GstToc)* toc) nothrow;
+__gshared c_gst_toc_get_entriesFn c_gst_toc_get_entries; ///
+private alias c_gst_toc_get_scopeFn = extern(C) GstTocScope function(const(GstToc)* toc) nothrow;
+__gshared c_gst_toc_get_scopeFn c_gst_toc_get_scope; ///
+private alias c_gst_toc_get_tagsFn = extern(C) GstTagList* function(const(GstToc)* toc) nothrow;
+__gshared c_gst_toc_get_tagsFn c_gst_toc_get_tags; ///
+private alias c_gst_toc_merge_tagsFn = extern(C) void function(GstToc* toc, GstTagList* tags, GstTagMergeMode mode) nothrow;
+__gshared c_gst_toc_merge_tagsFn c_gst_toc_merge_tags; ///
+private alias c_gst_toc_set_tagsFn = extern(C) void function(GstToc* toc, GstTagList* tags) nothrow;
+__gshared c_gst_toc_set_tagsFn c_gst_toc_set_tags; ///
+
+// TocEntry
+private alias c_gst_toc_entry_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_toc_entry_get_typeFn c_gst_toc_entry_get_type; ///
+private alias c_gst_toc_entry_newFn = extern(C) GstTocEntry* function(GstTocEntryType type, const(char)* uid) nothrow;
+__gshared c_gst_toc_entry_newFn c_gst_toc_entry_new; ///
+private alias c_gst_toc_entry_append_sub_entryFn = extern(C) void function(GstTocEntry* entry, GstTocEntry* subentry) nothrow;
+__gshared c_gst_toc_entry_append_sub_entryFn c_gst_toc_entry_append_sub_entry; ///
+private alias c_gst_toc_entry_get_entry_typeFn = extern(C) GstTocEntryType function(const(GstTocEntry)* entry) nothrow;
+__gshared c_gst_toc_entry_get_entry_typeFn c_gst_toc_entry_get_entry_type; ///
+private alias c_gst_toc_entry_get_loopFn = extern(C) gboolean function(const(GstTocEntry)* entry, GstTocLoopType* loopType, int* repeatCount) nothrow;
+__gshared c_gst_toc_entry_get_loopFn c_gst_toc_entry_get_loop; ///
+private alias c_gst_toc_entry_get_parentFn = extern(C) GstTocEntry* function(GstTocEntry* entry) nothrow;
+__gshared c_gst_toc_entry_get_parentFn c_gst_toc_entry_get_parent; ///
+private alias c_gst_toc_entry_get_start_stop_timesFn = extern(C) gboolean function(const(GstTocEntry)* entry, long* start, long* stop) nothrow;
+__gshared c_gst_toc_entry_get_start_stop_timesFn c_gst_toc_entry_get_start_stop_times; ///
+private alias c_gst_toc_entry_get_sub_entriesFn = extern(C) GList* function(const(GstTocEntry)* entry) nothrow;
+__gshared c_gst_toc_entry_get_sub_entriesFn c_gst_toc_entry_get_sub_entries; ///
+private alias c_gst_toc_entry_get_tagsFn = extern(C) GstTagList* function(const(GstTocEntry)* entry) nothrow;
+__gshared c_gst_toc_entry_get_tagsFn c_gst_toc_entry_get_tags; ///
+private alias c_gst_toc_entry_get_tocFn = extern(C) GstToc* function(GstTocEntry* entry) nothrow;
+__gshared c_gst_toc_entry_get_tocFn c_gst_toc_entry_get_toc; ///
+private alias c_gst_toc_entry_get_uidFn = extern(C) const(char)* function(const(GstTocEntry)* entry) nothrow;
+__gshared c_gst_toc_entry_get_uidFn c_gst_toc_entry_get_uid; ///
+private alias c_gst_toc_entry_is_alternativeFn = extern(C) gboolean function(const(GstTocEntry)* entry) nothrow;
+__gshared c_gst_toc_entry_is_alternativeFn c_gst_toc_entry_is_alternative; ///
+private alias c_gst_toc_entry_is_sequenceFn = extern(C) gboolean function(const(GstTocEntry)* entry) nothrow;
+__gshared c_gst_toc_entry_is_sequenceFn c_gst_toc_entry_is_sequence; ///
+private alias c_gst_toc_entry_merge_tagsFn = extern(C) void function(GstTocEntry* entry, GstTagList* tags, GstTagMergeMode mode) nothrow;
+__gshared c_gst_toc_entry_merge_tagsFn c_gst_toc_entry_merge_tags; ///
+private alias c_gst_toc_entry_set_loopFn = extern(C) void function(GstTocEntry* entry, GstTocLoopType loopType, int repeatCount) nothrow;
+__gshared c_gst_toc_entry_set_loopFn c_gst_toc_entry_set_loop; ///
+private alias c_gst_toc_entry_set_start_stop_timesFn = extern(C) void function(GstTocEntry* entry, long start, long stop) nothrow;
+__gshared c_gst_toc_entry_set_start_stop_timesFn c_gst_toc_entry_set_start_stop_times; ///
+private alias c_gst_toc_entry_set_tagsFn = extern(C) void function(GstTocEntry* entry, GstTagList* tags) nothrow;
+__gshared c_gst_toc_entry_set_tagsFn c_gst_toc_entry_set_tags; ///
+
+// TocSetter
+private alias c_gst_toc_setter_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_toc_setter_get_typeFn c_gst_toc_setter_get_type; ///
+private alias c_gst_toc_setter_get_tocFn = extern(C) GstToc* function(GstTocSetter* setter) nothrow;
+__gshared c_gst_toc_setter_get_tocFn c_gst_toc_setter_get_toc; ///
+private alias c_gst_toc_setter_resetFn = extern(C) void function(GstTocSetter* setter) nothrow;
+__gshared c_gst_toc_setter_resetFn c_gst_toc_setter_reset; ///
+private alias c_gst_toc_setter_set_tocFn = extern(C) void function(GstTocSetter* setter, GstToc* toc) nothrow;
+__gshared c_gst_toc_setter_set_tocFn c_gst_toc_setter_set_toc; ///
+
+// Tracer
+private alias c_gst_tracer_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_tracer_get_typeFn c_gst_tracer_get_type; ///
+private alias c_gst_tracer_registerFn = extern(C) gboolean function(GstPlugin* plugin, const(char)* name, GType type) nothrow;
+__gshared c_gst_tracer_registerFn c_gst_tracer_register; ///
+
+// TracerClass
+private alias c_gst_tracer_class_set_use_structure_paramsFn = extern(C) void function(GstTracerClass* tracerClass, gboolean useStructureParams) nothrow;
+__gshared c_gst_tracer_class_set_use_structure_paramsFn c_gst_tracer_class_set_use_structure_params; ///
+private alias c_gst_tracer_class_uses_structure_paramsFn = extern(C) gboolean function(GstTracerClass* tracerClass) nothrow;
+__gshared c_gst_tracer_class_uses_structure_paramsFn c_gst_tracer_class_uses_structure_params; ///
+
+// TracerFactory
+private alias c_gst_tracer_factory_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_tracer_factory_get_typeFn c_gst_tracer_factory_get_type; ///
+private alias c_gst_tracer_factory_get_listFn = extern(C) GList* function() nothrow;
+__gshared c_gst_tracer_factory_get_listFn c_gst_tracer_factory_get_list; ///
+private alias c_gst_tracer_factory_get_tracer_typeFn = extern(C) GType function(GstTracerFactory* factory) nothrow;
+__gshared c_gst_tracer_factory_get_tracer_typeFn c_gst_tracer_factory_get_tracer_type; ///
+
+// TracerRecord
+private alias c_gst_tracer_record_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_tracer_record_get_typeFn c_gst_tracer_record_get_type; ///
+private alias c_gst_tracer_record_newFn = extern(C) GstTracerRecord* function(const(char)* name, const(char)* firstfield,  ...) nothrow;
+__gshared c_gst_tracer_record_newFn c_gst_tracer_record_new; ///
+private alias c_gst_tracer_record_logFn = extern(C) void function(GstTracerRecord* self,  ...) nothrow;
+__gshared c_gst_tracer_record_logFn c_gst_tracer_record_log; ///
+
+// TypeFind
+private alias c_gst_type_find_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_type_find_get_typeFn c_gst_type_find_get_type; ///
+private alias c_gst_type_find_get_lengthFn = extern(C) ulong function(GstTypeFind* find) nothrow;
+__gshared c_gst_type_find_get_lengthFn c_gst_type_find_get_length; ///
+private alias c_gst_type_find_peekFn = extern(C) const(ubyte)* function(GstTypeFind* find, long offset, uint size) nothrow;
+__gshared c_gst_type_find_peekFn c_gst_type_find_peek; ///
+private alias c_gst_type_find_suggestFn = extern(C) void function(GstTypeFind* find, uint probability, GstCaps* caps) nothrow;
+__gshared c_gst_type_find_suggestFn c_gst_type_find_suggest; ///
+private alias c_gst_type_find_suggest_empty_simpleFn = extern(C) void function(GstTypeFind* find, uint probability, const(char)* mediaType) nothrow;
+__gshared c_gst_type_find_suggest_empty_simpleFn c_gst_type_find_suggest_empty_simple; ///
+private alias c_gst_type_find_suggest_simpleFn = extern(C) void function(GstTypeFind* find, uint probability, const(char)* mediaType, const(char)* fieldname,  ...) nothrow;
+__gshared c_gst_type_find_suggest_simpleFn c_gst_type_find_suggest_simple; ///
+private alias c_gst_type_find_registerFn = extern(C) gboolean function(GstPlugin* plugin, const(char)* name, uint rank, GstTypeFindFunction func, const(char)* extensions, GstCaps* possibleCaps, void* data, GDestroyNotify dataNotify) nothrow;
+__gshared c_gst_type_find_registerFn c_gst_type_find_register; ///
+
+// TypeFindFactory
+private alias c_gst_type_find_factory_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_type_find_factory_get_typeFn c_gst_type_find_factory_get_type; ///
+private alias c_gst_type_find_factory_get_listFn = extern(C) GList* function() nothrow;
+__gshared c_gst_type_find_factory_get_listFn c_gst_type_find_factory_get_list; ///
+private alias c_gst_type_find_factory_call_functionFn = extern(C) void function(GstTypeFindFactory* factory, GstTypeFind* find) nothrow;
+__gshared c_gst_type_find_factory_call_functionFn c_gst_type_find_factory_call_function; ///
+private alias c_gst_type_find_factory_get_capsFn = extern(C) GstCaps* function(GstTypeFindFactory* factory) nothrow;
+__gshared c_gst_type_find_factory_get_capsFn c_gst_type_find_factory_get_caps; ///
+private alias c_gst_type_find_factory_get_extensionsFn = extern(C) const(char*)* function(GstTypeFindFactory* factory) nothrow;
+__gshared c_gst_type_find_factory_get_extensionsFn c_gst_type_find_factory_get_extensions; ///
+private alias c_gst_type_find_factory_has_functionFn = extern(C) gboolean function(GstTypeFindFactory* factory) nothrow;
+__gshared c_gst_type_find_factory_has_functionFn c_gst_type_find_factory_has_function; ///
+
+// URIHandler
+private alias c_gst_uri_handler_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_uri_handler_get_typeFn c_gst_uri_handler_get_type; ///
+private alias c_gst_uri_handler_get_protocolsFn = extern(C) const(char*)* function(GstURIHandler* handler) nothrow;
+__gshared c_gst_uri_handler_get_protocolsFn c_gst_uri_handler_get_protocols; ///
+private alias c_gst_uri_handler_get_uriFn = extern(C) char* function(GstURIHandler* handler) nothrow;
+__gshared c_gst_uri_handler_get_uriFn c_gst_uri_handler_get_uri; ///
+private alias c_gst_uri_handler_get_uri_typeFn = extern(C) GstURIType function(GstURIHandler* handler) nothrow;
+__gshared c_gst_uri_handler_get_uri_typeFn c_gst_uri_handler_get_uri_type; ///
+private alias c_gst_uri_handler_set_uriFn = extern(C) gboolean function(GstURIHandler* handler, const(char)* uri, GError** _err) nothrow;
+__gshared c_gst_uri_handler_set_uriFn c_gst_uri_handler_set_uri; ///
+
+// Uri
+private alias c_gst_uri_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_uri_get_typeFn c_gst_uri_get_type; ///
+private alias c_gst_uri_newFn = extern(C) GstUri* function(const(char)* scheme, const(char)* userinfo, const(char)* host, uint port, const(char)* path, const(char)* query, const(char)* fragment) nothrow;
+__gshared c_gst_uri_newFn c_gst_uri_new; ///
+private alias c_gst_uri_append_pathFn = extern(C) gboolean function(GstUri* uri, const(char)* relativePath) nothrow;
+__gshared c_gst_uri_append_pathFn c_gst_uri_append_path; ///
+private alias c_gst_uri_append_path_segmentFn = extern(C) gboolean function(GstUri* uri, const(char)* pathSegment) nothrow;
+__gshared c_gst_uri_append_path_segmentFn c_gst_uri_append_path_segment; ///
+private alias c_gst_uri_copyFn = extern(C) GstUri* function(const(GstUri)* uri) nothrow;
+__gshared c_gst_uri_copyFn c_gst_uri_copy; ///
+private alias c_gst_uri_equalFn = extern(C) gboolean function(const(GstUri)* first, const(GstUri)* second) nothrow;
+__gshared c_gst_uri_equalFn c_gst_uri_equal; ///
+private alias c_gst_uri_from_string_with_baseFn = extern(C) GstUri* function(GstUri* base, const(char)* uri) nothrow;
+__gshared c_gst_uri_from_string_with_baseFn c_gst_uri_from_string_with_base; ///
+private alias c_gst_uri_get_fragmentFn = extern(C) const(char)* function(const(GstUri)* uri) nothrow;
+__gshared c_gst_uri_get_fragmentFn c_gst_uri_get_fragment; ///
+private alias c_gst_uri_get_hostFn = extern(C) const(char)* function(const(GstUri)* uri) nothrow;
+__gshared c_gst_uri_get_hostFn c_gst_uri_get_host; ///
+private alias c_gst_uri_get_media_fragment_tableFn = extern(C) GHashTable* function(const(GstUri)* uri) nothrow;
+__gshared c_gst_uri_get_media_fragment_tableFn c_gst_uri_get_media_fragment_table; ///
+private alias c_gst_uri_get_pathFn = extern(C) char* function(const(GstUri)* uri) nothrow;
+__gshared c_gst_uri_get_pathFn c_gst_uri_get_path; ///
+private alias c_gst_uri_get_path_segmentsFn = extern(C) GList* function(const(GstUri)* uri) nothrow;
+__gshared c_gst_uri_get_path_segmentsFn c_gst_uri_get_path_segments; ///
+private alias c_gst_uri_get_path_stringFn = extern(C) char* function(const(GstUri)* uri) nothrow;
+__gshared c_gst_uri_get_path_stringFn c_gst_uri_get_path_string; ///
+private alias c_gst_uri_get_portFn = extern(C) uint function(const(GstUri)* uri) nothrow;
+__gshared c_gst_uri_get_portFn c_gst_uri_get_port; ///
+private alias c_gst_uri_get_query_keysFn = extern(C) GList* function(const(GstUri)* uri) nothrow;
+__gshared c_gst_uri_get_query_keysFn c_gst_uri_get_query_keys; ///
+private alias c_gst_uri_get_query_stringFn = extern(C) char* function(const(GstUri)* uri) nothrow;
+__gshared c_gst_uri_get_query_stringFn c_gst_uri_get_query_string; ///
+private alias c_gst_uri_get_query_string_orderedFn = extern(C) char* function(const(GstUri)* uri, const(GList)* keys) nothrow;
+__gshared c_gst_uri_get_query_string_orderedFn c_gst_uri_get_query_string_ordered; ///
+private alias c_gst_uri_get_query_tableFn = extern(C) GHashTable* function(const(GstUri)* uri) nothrow;
+__gshared c_gst_uri_get_query_tableFn c_gst_uri_get_query_table; ///
+private alias c_gst_uri_get_query_valueFn = extern(C) const(char)* function(const(GstUri)* uri, const(char)* queryKey) nothrow;
+__gshared c_gst_uri_get_query_valueFn c_gst_uri_get_query_value; ///
+private alias c_gst_uri_get_schemeFn = extern(C) const(char)* function(const(GstUri)* uri) nothrow;
+__gshared c_gst_uri_get_schemeFn c_gst_uri_get_scheme; ///
+private alias c_gst_uri_get_userinfoFn = extern(C) const(char)* function(const(GstUri)* uri) nothrow;
+__gshared c_gst_uri_get_userinfoFn c_gst_uri_get_userinfo; ///
+private alias c_gst_uri_is_normalizedFn = extern(C) gboolean function(const(GstUri)* uri) nothrow;
+__gshared c_gst_uri_is_normalizedFn c_gst_uri_is_normalized; ///
+private alias c_gst_uri_is_writableFn = extern(C) gboolean function(const(GstUri)* uri) nothrow;
+__gshared c_gst_uri_is_writableFn c_gst_uri_is_writable; ///
+private alias c_gst_uri_joinFn = extern(C) GstUri* function(GstUri* baseUri, GstUri* refUri) nothrow;
+__gshared c_gst_uri_joinFn c_gst_uri_join; ///
+private alias c_gst_uri_make_writableFn = extern(C) GstUri* function(GstUri* uri) nothrow;
+__gshared c_gst_uri_make_writableFn c_gst_uri_make_writable; ///
+private alias c_gst_uri_new_with_baseFn = extern(C) GstUri* function(GstUri* base, const(char)* scheme, const(char)* userinfo, const(char)* host, uint port, const(char)* path, const(char)* query, const(char)* fragment) nothrow;
+__gshared c_gst_uri_new_with_baseFn c_gst_uri_new_with_base; ///
+private alias c_gst_uri_normalizeFn = extern(C) gboolean function(GstUri* uri) nothrow;
+__gshared c_gst_uri_normalizeFn c_gst_uri_normalize; ///
+private alias c_gst_uri_query_has_keyFn = extern(C) gboolean function(const(GstUri)* uri, const(char)* queryKey) nothrow;
+__gshared c_gst_uri_query_has_keyFn c_gst_uri_query_has_key; ///
+private alias c_gst_uri_refFn = extern(C) GstUri* function(GstUri* uri) nothrow;
+__gshared c_gst_uri_refFn c_gst_uri_ref; ///
+private alias c_gst_uri_remove_query_keyFn = extern(C) gboolean function(GstUri* uri, const(char)* queryKey) nothrow;
+__gshared c_gst_uri_remove_query_keyFn c_gst_uri_remove_query_key; ///
+private alias c_gst_uri_set_fragmentFn = extern(C) gboolean function(GstUri* uri, const(char)* fragment) nothrow;
+__gshared c_gst_uri_set_fragmentFn c_gst_uri_set_fragment; ///
+private alias c_gst_uri_set_hostFn = extern(C) gboolean function(GstUri* uri, const(char)* host) nothrow;
+__gshared c_gst_uri_set_hostFn c_gst_uri_set_host; ///
+private alias c_gst_uri_set_pathFn = extern(C) gboolean function(GstUri* uri, const(char)* path) nothrow;
+__gshared c_gst_uri_set_pathFn c_gst_uri_set_path; ///
+private alias c_gst_uri_set_path_segmentsFn = extern(C) gboolean function(GstUri* uri, GList* pathSegments) nothrow;
+__gshared c_gst_uri_set_path_segmentsFn c_gst_uri_set_path_segments; ///
+private alias c_gst_uri_set_path_stringFn = extern(C) gboolean function(GstUri* uri, const(char)* path) nothrow;
+__gshared c_gst_uri_set_path_stringFn c_gst_uri_set_path_string; ///
+private alias c_gst_uri_set_portFn = extern(C) gboolean function(GstUri* uri, uint port) nothrow;
+__gshared c_gst_uri_set_portFn c_gst_uri_set_port; ///
+private alias c_gst_uri_set_query_stringFn = extern(C) gboolean function(GstUri* uri, const(char)* query) nothrow;
+__gshared c_gst_uri_set_query_stringFn c_gst_uri_set_query_string; ///
+private alias c_gst_uri_set_query_tableFn = extern(C) gboolean function(GstUri* uri, GHashTable* queryTable) nothrow;
+__gshared c_gst_uri_set_query_tableFn c_gst_uri_set_query_table; ///
+private alias c_gst_uri_set_query_valueFn = extern(C) gboolean function(GstUri* uri, const(char)* queryKey, const(char)* queryValue) nothrow;
+__gshared c_gst_uri_set_query_valueFn c_gst_uri_set_query_value; ///
+private alias c_gst_uri_set_schemeFn = extern(C) gboolean function(GstUri* uri, const(char)* scheme) nothrow;
+__gshared c_gst_uri_set_schemeFn c_gst_uri_set_scheme; ///
+private alias c_gst_uri_set_userinfoFn = extern(C) gboolean function(GstUri* uri, const(char)* userinfo) nothrow;
+__gshared c_gst_uri_set_userinfoFn c_gst_uri_set_userinfo; ///
+private alias c_gst_uri_to_stringFn = extern(C) char* function(const(GstUri)* uri) nothrow;
+__gshared c_gst_uri_to_stringFn c_gst_uri_to_string; ///
+private alias c_gst_uri_to_string_with_keysFn = extern(C) char* function(const(GstUri)* uri, const(GList)* keys) nothrow;
+__gshared c_gst_uri_to_string_with_keysFn c_gst_uri_to_string_with_keys; ///
+private alias c_gst_uri_unrefFn = extern(C) void function(GstUri* uri) nothrow;
+__gshared c_gst_uri_unrefFn c_gst_uri_unref; ///
+private alias c_gst_uri_constructFn = extern(C) char* function(const(char)* protocol, const(char)* location) nothrow;
+__gshared c_gst_uri_constructFn c_gst_uri_construct; ///
+private alias c_gst_uri_from_stringFn = extern(C) GstUri* function(const(char)* uri) nothrow;
+__gshared c_gst_uri_from_stringFn c_gst_uri_from_string; ///
+private alias c_gst_uri_from_string_escapedFn = extern(C) GstUri* function(const(char)* uri) nothrow;
+__gshared c_gst_uri_from_string_escapedFn c_gst_uri_from_string_escaped; ///
+private alias c_gst_uri_get_locationFn = extern(C) char* function(const(char)* uri) nothrow;
+__gshared c_gst_uri_get_locationFn c_gst_uri_get_location; ///
+private alias c_gst_uri_get_protocolFn = extern(C) char* function(const(char)* uri) nothrow;
+__gshared c_gst_uri_get_protocolFn c_gst_uri_get_protocol; ///
+private alias c_gst_uri_has_protocolFn = extern(C) gboolean function(const(char)* uri, const(char)* protocol) nothrow;
+__gshared c_gst_uri_has_protocolFn c_gst_uri_has_protocol; ///
+private alias c_gst_uri_is_validFn = extern(C) gboolean function(const(char)* uri) nothrow;
+__gshared c_gst_uri_is_validFn c_gst_uri_is_valid; ///
+private alias c_gst_uri_join_stringsFn = extern(C) char* function(const(char)* baseUri, const(char)* refUri) nothrow;
+__gshared c_gst_uri_join_stringsFn c_gst_uri_join_strings; ///
+private alias c_gst_uri_protocol_is_supportedFn = extern(C) gboolean function(GstURIType type, const(char)* protocol) nothrow;
+__gshared c_gst_uri_protocol_is_supportedFn c_gst_uri_protocol_is_supported; ///
+private alias c_gst_uri_protocol_is_validFn = extern(C) gboolean function(const(char)* protocol) nothrow;
+__gshared c_gst_uri_protocol_is_validFn c_gst_uri_protocol_is_valid; ///
+
+// ValueArray
+private alias c_gst_value_array_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_value_array_get_typeFn c_gst_value_array_get_type; ///
+private alias c_gst_value_array_append_and_take_valueFn = extern(C) void function(GValue* value, GValue* appendValue) nothrow;
+__gshared c_gst_value_array_append_and_take_valueFn c_gst_value_array_append_and_take_value; ///
+private alias c_gst_value_array_append_valueFn = extern(C) void function(GValue* value, const(GValue)* appendValue) nothrow;
+__gshared c_gst_value_array_append_valueFn c_gst_value_array_append_value; ///
+private alias c_gst_value_array_get_sizeFn = extern(C) uint function(const(GValue)* value) nothrow;
+__gshared c_gst_value_array_get_sizeFn c_gst_value_array_get_size; ///
+private alias c_gst_value_array_get_valueFn = extern(C) const(GValue)* function(const(GValue)* value, uint index) nothrow;
+__gshared c_gst_value_array_get_valueFn c_gst_value_array_get_value; ///
+private alias c_gst_value_array_initFn = extern(C) GValue* function(GValue* value, uint prealloc) nothrow;
+__gshared c_gst_value_array_initFn c_gst_value_array_init; ///
+private alias c_gst_value_array_prepend_valueFn = extern(C) void function(GValue* value, const(GValue)* prependValue) nothrow;
+__gshared c_gst_value_array_prepend_valueFn c_gst_value_array_prepend_value; ///
+
+// ValueList
+private alias c_gst_value_list_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_value_list_get_typeFn c_gst_value_list_get_type; ///
+private alias c_gst_value_list_append_and_take_valueFn = extern(C) void function(GValue* value, GValue* appendValue) nothrow;
+__gshared c_gst_value_list_append_and_take_valueFn c_gst_value_list_append_and_take_value; ///
+private alias c_gst_value_list_append_valueFn = extern(C) void function(GValue* value, const(GValue)* appendValue) nothrow;
+__gshared c_gst_value_list_append_valueFn c_gst_value_list_append_value; ///
+private alias c_gst_value_list_concatFn = extern(C) void function(GValue* dest, const(GValue)* value1, const(GValue)* value2) nothrow;
+__gshared c_gst_value_list_concatFn c_gst_value_list_concat; ///
+private alias c_gst_value_list_get_sizeFn = extern(C) uint function(const(GValue)* value) nothrow;
+__gshared c_gst_value_list_get_sizeFn c_gst_value_list_get_size; ///
+private alias c_gst_value_list_get_valueFn = extern(C) const(GValue)* function(const(GValue)* value, uint index) nothrow;
+__gshared c_gst_value_list_get_valueFn c_gst_value_list_get_value; ///
+private alias c_gst_value_list_initFn = extern(C) GValue* function(GValue* value, uint prealloc) nothrow;
+__gshared c_gst_value_list_initFn c_gst_value_list_init; ///
+private alias c_gst_value_list_mergeFn = extern(C) void function(GValue* dest, const(GValue)* value1, const(GValue)* value2) nothrow;
+__gshared c_gst_value_list_mergeFn c_gst_value_list_merge; ///
+private alias c_gst_value_list_prepend_valueFn = extern(C) void function(GValue* value, const(GValue)* prependValue) nothrow;
+__gshared c_gst_value_list_prepend_valueFn c_gst_value_list_prepend_value; ///
+
+// ValueUniqueList
+private alias c_gst_value_unique_list_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_value_unique_list_get_typeFn c_gst_value_unique_list_get_type; ///
+private alias c_gst_value_unique_list_append_and_take_valueFn = extern(C) void function(GValue* value, GValue* appendValue) nothrow;
+__gshared c_gst_value_unique_list_append_and_take_valueFn c_gst_value_unique_list_append_and_take_value; ///
+private alias c_gst_value_unique_list_append_valueFn = extern(C) void function(GValue* value, const(GValue)* appendValue) nothrow;
+__gshared c_gst_value_unique_list_append_valueFn c_gst_value_unique_list_append_value; ///
+private alias c_gst_value_unique_list_concatFn = extern(C) void function(GValue* dest, const(GValue)* value1, const(GValue)* value2) nothrow;
+__gshared c_gst_value_unique_list_concatFn c_gst_value_unique_list_concat; ///
+private alias c_gst_value_unique_list_get_sizeFn = extern(C) uint function(const(GValue)* value) nothrow;
+__gshared c_gst_value_unique_list_get_sizeFn c_gst_value_unique_list_get_size; ///
+private alias c_gst_value_unique_list_get_valueFn = extern(C) const(GValue)* function(const(GValue)* value, uint index) nothrow;
+__gshared c_gst_value_unique_list_get_valueFn c_gst_value_unique_list_get_value; ///
+private alias c_gst_value_unique_list_prepend_valueFn = extern(C) void function(GValue* value, const(GValue)* prependValue) nothrow;
+__gshared c_gst_value_unique_list_prepend_valueFn c_gst_value_unique_list_prepend_value; ///
+
+// VecDeque
+private alias c_gst_vec_deque_clearFn = extern(C) void function(GstVecDeque* array) nothrow;
+__gshared c_gst_vec_deque_clearFn c_gst_vec_deque_clear; ///
+private alias c_gst_vec_deque_drop_elementFn = extern(C) void* function(GstVecDeque* array, size_t idx) nothrow;
+__gshared c_gst_vec_deque_drop_elementFn c_gst_vec_deque_drop_element; ///
+private alias c_gst_vec_deque_drop_structFn = extern(C) gboolean function(GstVecDeque* array, size_t idx, void* pStruct) nothrow;
+__gshared c_gst_vec_deque_drop_structFn c_gst_vec_deque_drop_struct; ///
+private alias c_gst_vec_deque_findFn = extern(C) size_t function(GstVecDeque* array, GCompareFunc func, void* data) nothrow;
+__gshared c_gst_vec_deque_findFn c_gst_vec_deque_find; ///
+private alias c_gst_vec_deque_freeFn = extern(C) void function(GstVecDeque* array) nothrow;
+__gshared c_gst_vec_deque_freeFn c_gst_vec_deque_free; ///
+private alias c_gst_vec_deque_get_lengthFn = extern(C) size_t function(GstVecDeque* array) nothrow;
+__gshared c_gst_vec_deque_get_lengthFn c_gst_vec_deque_get_length; ///
+private alias c_gst_vec_deque_is_emptyFn = extern(C) gboolean function(GstVecDeque* array) nothrow;
+__gshared c_gst_vec_deque_is_emptyFn c_gst_vec_deque_is_empty; ///
+private alias c_gst_vec_deque_peek_headFn = extern(C) void* function(GstVecDeque* array) nothrow;
+__gshared c_gst_vec_deque_peek_headFn c_gst_vec_deque_peek_head; ///
+private alias c_gst_vec_deque_peek_head_structFn = extern(C) void* function(GstVecDeque* array) nothrow;
+__gshared c_gst_vec_deque_peek_head_structFn c_gst_vec_deque_peek_head_struct; ///
+private alias c_gst_vec_deque_peek_nthFn = extern(C) void* function(GstVecDeque* array, size_t idx) nothrow;
+__gshared c_gst_vec_deque_peek_nthFn c_gst_vec_deque_peek_nth; ///
+private alias c_gst_vec_deque_peek_nth_structFn = extern(C) void* function(GstVecDeque* array, size_t idx) nothrow;
+__gshared c_gst_vec_deque_peek_nth_structFn c_gst_vec_deque_peek_nth_struct; ///
+private alias c_gst_vec_deque_peek_tailFn = extern(C) void* function(GstVecDeque* array) nothrow;
+__gshared c_gst_vec_deque_peek_tailFn c_gst_vec_deque_peek_tail; ///
+private alias c_gst_vec_deque_peek_tail_structFn = extern(C) void* function(GstVecDeque* array) nothrow;
+__gshared c_gst_vec_deque_peek_tail_structFn c_gst_vec_deque_peek_tail_struct; ///
+private alias c_gst_vec_deque_pop_headFn = extern(C) void* function(GstVecDeque* array) nothrow;
+__gshared c_gst_vec_deque_pop_headFn c_gst_vec_deque_pop_head; ///
+private alias c_gst_vec_deque_pop_head_structFn = extern(C) void* function(GstVecDeque* array) nothrow;
+__gshared c_gst_vec_deque_pop_head_structFn c_gst_vec_deque_pop_head_struct; ///
+private alias c_gst_vec_deque_pop_tailFn = extern(C) void* function(GstVecDeque* array) nothrow;
+__gshared c_gst_vec_deque_pop_tailFn c_gst_vec_deque_pop_tail; ///
+private alias c_gst_vec_deque_pop_tail_structFn = extern(C) void* function(GstVecDeque* array) nothrow;
+__gshared c_gst_vec_deque_pop_tail_structFn c_gst_vec_deque_pop_tail_struct; ///
+private alias c_gst_vec_deque_push_sortedFn = extern(C) void function(GstVecDeque* array, void* data, GCompareDataFunc func, void* userData) nothrow;
+__gshared c_gst_vec_deque_push_sortedFn c_gst_vec_deque_push_sorted; ///
+private alias c_gst_vec_deque_push_sorted_structFn = extern(C) void function(GstVecDeque* array, void* pStruct, GCompareDataFunc func, void* userData) nothrow;
+__gshared c_gst_vec_deque_push_sorted_structFn c_gst_vec_deque_push_sorted_struct; ///
+private alias c_gst_vec_deque_push_tailFn = extern(C) void function(GstVecDeque* array, void* data) nothrow;
+__gshared c_gst_vec_deque_push_tailFn c_gst_vec_deque_push_tail; ///
+private alias c_gst_vec_deque_push_tail_structFn = extern(C) void function(GstVecDeque* array, void* pStruct) nothrow;
+__gshared c_gst_vec_deque_push_tail_structFn c_gst_vec_deque_push_tail_struct; ///
+private alias c_gst_vec_deque_set_clear_funcFn = extern(C) void function(GstVecDeque* array, GDestroyNotify clearFunc) nothrow;
+__gshared c_gst_vec_deque_set_clear_funcFn c_gst_vec_deque_set_clear_func; ///
+private alias c_gst_vec_deque_sortFn = extern(C) void function(GstVecDeque* array, GCompareDataFunc compareFunc, void* userData) nothrow;
+__gshared c_gst_vec_deque_sortFn c_gst_vec_deque_sort; ///
+private alias c_gst_vec_deque_newFn = extern(C) GstVecDeque* function(size_t initialSize) nothrow;
+__gshared c_gst_vec_deque_newFn c_gst_vec_deque_new; ///
+private alias c_gst_vec_deque_new_for_structFn = extern(C) GstVecDeque* function(size_t structSize, size_t initialSize) nothrow;
+__gshared c_gst_vec_deque_new_for_structFn c_gst_vec_deque_new_for_struct; ///
+
+// global
+private alias c_gst_calculate_linear_regressionFn = extern(C) gboolean function(const(GstClockTime)* xy, GstClockTime* temp, uint n, GstClockTime* mNum, GstClockTime* mDenom, GstClockTime* b, GstClockTime* xbase, double* rSquared) nothrow;
+__gshared c_gst_calculate_linear_regressionFn c_gst_calculate_linear_regression; ///
+private alias c_gst_call_asyncFn = extern(C) void function(GstCallAsyncFunc func, void* userData) nothrow;
+__gshared c_gst_call_asyncFn c_gst_call_async; ///
+private alias c_gst_check_versionFn = extern(C) gboolean function(uint major, uint minor, uint micro) nothrow;
+__gshared c_gst_check_versionFn c_gst_check_version; ///
+private alias c_gst_clear_bufferFn = extern(C) void function(GstBuffer** bufPtr) nothrow;
+__gshared c_gst_clear_bufferFn c_gst_clear_buffer; ///
+private alias c_gst_clear_buffer_listFn = extern(C) void function(GstBufferList** listPtr) nothrow;
+__gshared c_gst_clear_buffer_listFn c_gst_clear_buffer_list; ///
+private alias c_gst_clear_capsFn = extern(C) void function(GstCaps** capsPtr) nothrow;
+__gshared c_gst_clear_capsFn c_gst_clear_caps; ///
+private alias c_gst_clear_contextFn = extern(C) void function(GstContext** contextPtr) nothrow;
+__gshared c_gst_clear_contextFn c_gst_clear_context; ///
+private alias c_gst_clear_eventFn = extern(C) void function(GstEvent** eventPtr) nothrow;
+__gshared c_gst_clear_eventFn c_gst_clear_event; ///
+private alias c_gst_clear_messageFn = extern(C) void function(GstMessage** msgPtr) nothrow;
+__gshared c_gst_clear_messageFn c_gst_clear_message; ///
+private alias c_gst_clear_mini_objectFn = extern(C) void function(GstMiniObject** objectPtr) nothrow;
+__gshared c_gst_clear_mini_objectFn c_gst_clear_mini_object; ///
+private alias c_gst_clear_objectFn = extern(C) void function(GstObject** objectPtr) nothrow;
+__gshared c_gst_clear_objectFn c_gst_clear_object; ///
+private alias c_gst_clear_promiseFn = extern(C) void function(GstPromise** promisePtr) nothrow;
+__gshared c_gst_clear_promiseFn c_gst_clear_promise; ///
+private alias c_gst_clear_queryFn = extern(C) void function(GstQuery** queryPtr) nothrow;
+__gshared c_gst_clear_queryFn c_gst_clear_query; ///
+private alias c_gst_clear_sampleFn = extern(C) void function(GstSample** samplePtr) nothrow;
+__gshared c_gst_clear_sampleFn c_gst_clear_sample; ///
+private alias c_gst_clear_structureFn = extern(C) void function(GstStructure** structurePtr) nothrow;
+__gshared c_gst_clear_structureFn c_gst_clear_structure; ///
+private alias c_gst_clear_tag_listFn = extern(C) void function(GstTagList** taglistPtr) nothrow;
+__gshared c_gst_clear_tag_listFn c_gst_clear_tag_list; ///
+private alias c_gst_clear_uriFn = extern(C) void function(GstUri** uriPtr) nothrow;
+__gshared c_gst_clear_uriFn c_gst_clear_uri; ///
+private alias c_gst_cpuid_supports_arm_neonFn = extern(C) gboolean function() nothrow;
+__gshared c_gst_cpuid_supports_arm_neonFn c_gst_cpuid_supports_arm_neon; ///
+private alias c_gst_cpuid_supports_arm_neon64Fn = extern(C) gboolean function() nothrow;
+__gshared c_gst_cpuid_supports_arm_neon64Fn c_gst_cpuid_supports_arm_neon64; ///
+private alias c_gst_cpuid_supports_x86_3dnowFn = extern(C) gboolean function() nothrow;
+__gshared c_gst_cpuid_supports_x86_3dnowFn c_gst_cpuid_supports_x86_3dnow; ///
+private alias c_gst_cpuid_supports_x86_avxFn = extern(C) gboolean function() nothrow;
+__gshared c_gst_cpuid_supports_x86_avxFn c_gst_cpuid_supports_x86_avx; ///
+private alias c_gst_cpuid_supports_x86_avx2Fn = extern(C) gboolean function() nothrow;
+__gshared c_gst_cpuid_supports_x86_avx2Fn c_gst_cpuid_supports_x86_avx2; ///
+private alias c_gst_cpuid_supports_x86_mmxFn = extern(C) gboolean function() nothrow;
+__gshared c_gst_cpuid_supports_x86_mmxFn c_gst_cpuid_supports_x86_mmx; ///
+private alias c_gst_cpuid_supports_x86_mmxextFn = extern(C) gboolean function() nothrow;
+__gshared c_gst_cpuid_supports_x86_mmxextFn c_gst_cpuid_supports_x86_mmxext; ///
+private alias c_gst_cpuid_supports_x86_sse2Fn = extern(C) gboolean function() nothrow;
+__gshared c_gst_cpuid_supports_x86_sse2Fn c_gst_cpuid_supports_x86_sse2; ///
+private alias c_gst_cpuid_supports_x86_sse3Fn = extern(C) gboolean function() nothrow;
+__gshared c_gst_cpuid_supports_x86_sse3Fn c_gst_cpuid_supports_x86_sse3; ///
+private alias c_gst_cpuid_supports_x86_sse4_1Fn = extern(C) gboolean function() nothrow;
+__gshared c_gst_cpuid_supports_x86_sse4_1Fn c_gst_cpuid_supports_x86_sse4_1; ///
+private alias c_gst_cpuid_supports_x86_sse4_2Fn = extern(C) gboolean function() nothrow;
+__gshared c_gst_cpuid_supports_x86_sse4_2Fn c_gst_cpuid_supports_x86_sse4_2; ///
+private alias c_gst_cpuid_supports_x86_ssse3Fn = extern(C) gboolean function() nothrow;
+__gshared c_gst_cpuid_supports_x86_ssse3Fn c_gst_cpuid_supports_x86_ssse3; ///
+private alias c_gst_debug_add_log_functionFn = extern(C) void function(GstLogFunction func, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_debug_add_log_functionFn c_gst_debug_add_log_function; ///
+private alias c_gst_debug_add_ring_buffer_loggerFn = extern(C) void function(uint maxSizePerThread, uint threadTimeout) nothrow;
+__gshared c_gst_debug_add_ring_buffer_loggerFn c_gst_debug_add_ring_buffer_logger; ///
+private alias c_gst_debug_bin_to_dot_dataFn = extern(C) char* function(GstBin* bin, GstDebugGraphDetails details) nothrow;
+__gshared c_gst_debug_bin_to_dot_dataFn c_gst_debug_bin_to_dot_data; ///
+private alias c_gst_debug_bin_to_dot_fileFn = extern(C) void function(GstBin* bin, GstDebugGraphDetails details, const(char)* fileName) nothrow;
+__gshared c_gst_debug_bin_to_dot_fileFn c_gst_debug_bin_to_dot_file; ///
+private alias c_gst_debug_bin_to_dot_file_with_tsFn = extern(C) void function(GstBin* bin, GstDebugGraphDetails details, const(char)* fileName) nothrow;
+__gshared c_gst_debug_bin_to_dot_file_with_tsFn c_gst_debug_bin_to_dot_file_with_ts; ///
+private alias c_gst_debug_construct_term_colorFn = extern(C) char* function(uint colorinfo) nothrow;
+__gshared c_gst_debug_construct_term_colorFn c_gst_debug_construct_term_color; ///
+private alias c_gst_debug_construct_win_colorFn = extern(C) int function(uint colorinfo) nothrow;
+__gshared c_gst_debug_construct_win_colorFn c_gst_debug_construct_win_color; ///
+private alias c_gst_debug_get_all_categoriesFn = extern(C) GSList* function() nothrow;
+__gshared c_gst_debug_get_all_categoriesFn c_gst_debug_get_all_categories; ///
+private alias c_gst_debug_get_color_modeFn = extern(C) GstDebugColorMode function() nothrow;
+__gshared c_gst_debug_get_color_modeFn c_gst_debug_get_color_mode; ///
+private alias c_gst_debug_get_default_thresholdFn = extern(C) GstDebugLevel function() nothrow;
+__gshared c_gst_debug_get_default_thresholdFn c_gst_debug_get_default_threshold; ///
+private alias c_gst_debug_get_stack_traceFn = extern(C) char* function(GstStackTraceFlags flags) nothrow;
+__gshared c_gst_debug_get_stack_traceFn c_gst_debug_get_stack_trace; ///
+private alias c_gst_debug_is_activeFn = extern(C) gboolean function() nothrow;
+__gshared c_gst_debug_is_activeFn c_gst_debug_is_active; ///
+private alias c_gst_debug_is_coloredFn = extern(C) gboolean function() nothrow;
+__gshared c_gst_debug_is_coloredFn c_gst_debug_is_colored; ///
+private alias c_gst_debug_logFn = extern(C) void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, const(char)* format,  ...) nothrow;
+__gshared c_gst_debug_logFn c_gst_debug_log; ///
+private alias c_gst_debug_log_defaultFn = extern(C) void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, GstDebugMessage* message, void* userData) nothrow;
+__gshared c_gst_debug_log_defaultFn c_gst_debug_log_default; ///
+private alias c_gst_debug_log_get_lineFn = extern(C) char* function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, GstDebugMessage* message) nothrow;
+__gshared c_gst_debug_log_get_lineFn c_gst_debug_log_get_line; ///
+private alias c_gst_debug_log_idFn = extern(C) void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, const(char)* id, const(char)* format,  ...) nothrow;
+__gshared c_gst_debug_log_idFn c_gst_debug_log_id; ///
+private alias c_gst_debug_log_id_literalFn = extern(C) void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, const(char)* id, const(char)* messageString) nothrow;
+__gshared c_gst_debug_log_id_literalFn c_gst_debug_log_id_literal; ///
+private alias c_gst_debug_log_id_literal_with_contextFn = extern(C) void function(GstLogContext* ctx, GstDebugLevel level, const(char)* file, const(char)* function_, int line, const(char)* id, const(char)* message) nothrow;
+__gshared c_gst_debug_log_id_literal_with_contextFn c_gst_debug_log_id_literal_with_context; ///
+private alias c_gst_debug_log_id_valistFn = extern(C) void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, const(char)* id, const(char)* format, void* args) nothrow;
+__gshared c_gst_debug_log_id_valistFn c_gst_debug_log_id_valist; ///
+private alias c_gst_debug_log_id_with_contextFn = extern(C) void function(GstLogContext* ctx, GstDebugLevel level, const(char)* file, const(char)* function_, int line, const(char)* id, const(char)* format,  ...) nothrow;
+__gshared c_gst_debug_log_id_with_contextFn c_gst_debug_log_id_with_context; ///
+private alias c_gst_debug_log_id_with_context_valistFn = extern(C) void function(GstLogContext* ctx, GstDebugLevel level, const(char)* file, const(char)* function_, int line, const(char)* id, const(char)* format, void* args) nothrow;
+__gshared c_gst_debug_log_id_with_context_valistFn c_gst_debug_log_id_with_context_valist; ///
+private alias c_gst_debug_log_literalFn = extern(C) void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, const(char)* messageString) nothrow;
+__gshared c_gst_debug_log_literalFn c_gst_debug_log_literal; ///
+private alias c_gst_debug_log_literal_with_contextFn = extern(C) void function(GstLogContext* ctx, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, const(char)* message) nothrow;
+__gshared c_gst_debug_log_literal_with_contextFn c_gst_debug_log_literal_with_context; ///
+private alias c_gst_debug_log_valistFn = extern(C) void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, const(char)* format, void* args) nothrow;
+__gshared c_gst_debug_log_valistFn c_gst_debug_log_valist; ///
+private alias c_gst_debug_log_with_contextFn = extern(C) void function(GstLogContext* ctx, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, const(char)* format,  ...) nothrow;
+__gshared c_gst_debug_log_with_contextFn c_gst_debug_log_with_context; ///
+private alias c_gst_debug_log_with_context_valistFn = extern(C) void function(GstLogContext* ctx, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, const(char)* format, void* args) nothrow;
+__gshared c_gst_debug_log_with_context_valistFn c_gst_debug_log_with_context_valist; ///
+private alias c_gst_debug_print_objectFn = extern(C) char* function(const(void)* ptr) nothrow;
+__gshared c_gst_debug_print_objectFn c_gst_debug_print_object; ///
+private alias c_gst_debug_print_segmentFn = extern(C) char* function(const(GstSegment)* segment) nothrow;
+__gshared c_gst_debug_print_segmentFn c_gst_debug_print_segment; ///
+private alias c_gst_debug_print_stack_traceFn = extern(C) void function() nothrow;
+__gshared c_gst_debug_print_stack_traceFn c_gst_debug_print_stack_trace; ///
+private alias c_gst_debug_remove_log_functionFn = extern(C) uint function(GstLogFunction func) nothrow;
+__gshared c_gst_debug_remove_log_functionFn c_gst_debug_remove_log_function; ///
+private alias c_gst_debug_remove_log_function_by_dataFn = extern(C) uint function(void* data) nothrow;
+__gshared c_gst_debug_remove_log_function_by_dataFn c_gst_debug_remove_log_function_by_data; ///
+private alias c_gst_debug_remove_ring_buffer_loggerFn = extern(C) void function() nothrow;
+__gshared c_gst_debug_remove_ring_buffer_loggerFn c_gst_debug_remove_ring_buffer_logger; ///
+private alias c_gst_debug_ring_buffer_logger_get_logsFn = extern(C) char** function() nothrow;
+__gshared c_gst_debug_ring_buffer_logger_get_logsFn c_gst_debug_ring_buffer_logger_get_logs; ///
+private alias c_gst_debug_set_activeFn = extern(C) void function(gboolean active) nothrow;
+__gshared c_gst_debug_set_activeFn c_gst_debug_set_active; ///
+private alias c_gst_debug_set_color_modeFn = extern(C) void function(GstDebugColorMode mode) nothrow;
+__gshared c_gst_debug_set_color_modeFn c_gst_debug_set_color_mode; ///
+private alias c_gst_debug_set_color_mode_from_stringFn = extern(C) void function(const(char)* mode) nothrow;
+__gshared c_gst_debug_set_color_mode_from_stringFn c_gst_debug_set_color_mode_from_string; ///
+private alias c_gst_debug_set_coloredFn = extern(C) void function(gboolean colored) nothrow;
+__gshared c_gst_debug_set_coloredFn c_gst_debug_set_colored; ///
+private alias c_gst_debug_set_default_thresholdFn = extern(C) void function(GstDebugLevel level) nothrow;
+__gshared c_gst_debug_set_default_thresholdFn c_gst_debug_set_default_threshold; ///
+private alias c_gst_debug_set_threshold_for_nameFn = extern(C) void function(const(char)* name, GstDebugLevel level) nothrow;
+__gshared c_gst_debug_set_threshold_for_nameFn c_gst_debug_set_threshold_for_name; ///
+private alias c_gst_debug_set_threshold_from_stringFn = extern(C) void function(const(char)* list, gboolean reset) nothrow;
+__gshared c_gst_debug_set_threshold_from_stringFn c_gst_debug_set_threshold_from_string; ///
+private alias c_gst_debug_unset_threshold_for_nameFn = extern(C) void function(const(char)* name) nothrow;
+__gshared c_gst_debug_unset_threshold_for_nameFn c_gst_debug_unset_threshold_for_name; ///
+private alias c_gst_deinitFn = extern(C) void function() nothrow;
+__gshared c_gst_deinitFn c_gst_deinit; ///
+private alias c_gst_dynamic_type_registerFn = extern(C) gboolean function(GstPlugin* plugin, GType type) nothrow;
+__gshared c_gst_dynamic_type_registerFn c_gst_dynamic_type_register; ///
+private alias c_gst_error_get_messageFn = extern(C) char* function(GQuark domain, int code) nothrow;
+__gshared c_gst_error_get_messageFn c_gst_error_get_message; ///
+private alias c_gst_filename_to_uriFn = extern(C) char* function(const(char)* filename, GError** _err) nothrow;
+__gshared c_gst_filename_to_uriFn c_gst_filename_to_uri; ///
+private alias c_gst_flow_get_nameFn = extern(C) const(char)* function(GstFlowReturn ret) nothrow;
+__gshared c_gst_flow_get_nameFn c_gst_flow_get_name; ///
+private alias c_gst_flow_to_quarkFn = extern(C) GQuark function(GstFlowReturn ret) nothrow;
+__gshared c_gst_flow_to_quarkFn c_gst_flow_to_quark; ///
+private alias c_gst_formats_containsFn = extern(C) gboolean function(const(GstFormat)* formats, GstFormat format) nothrow;
+__gshared c_gst_formats_containsFn c_gst_formats_contains; ///
+private alias c_gst_get_main_executable_pathFn = extern(C) const(char)* function() nothrow;
+__gshared c_gst_get_main_executable_pathFn c_gst_get_main_executable_path; ///
+private alias c_gst_info_strdup_printfFn = extern(C) char* function(const(char)* format,  ...) nothrow;
+__gshared c_gst_info_strdup_printfFn c_gst_info_strdup_printf; ///
+private alias c_gst_info_strdup_vprintfFn = extern(C) char* function(const(char)* format, void* args) nothrow;
+__gshared c_gst_info_strdup_vprintfFn c_gst_info_strdup_vprintf; ///
+private alias c_gst_info_vasprintfFn = extern(C) int function(char** result, const(char)* format, void* args) nothrow;
+__gshared c_gst_info_vasprintfFn c_gst_info_vasprintf; ///
+private alias c_gst_initFn = extern(C) void function(int* argc, char*** argv) nothrow;
+__gshared c_gst_initFn c_gst_init; ///
+private alias c_gst_init_checkFn = extern(C) gboolean function(int* argc, char*** argv, GError** _err) nothrow;
+__gshared c_gst_init_checkFn c_gst_init_check; ///
+private alias c_gst_init_get_option_groupFn = extern(C) GOptionGroup* function() nothrow;
+__gshared c_gst_init_get_option_groupFn c_gst_init_get_option_group; ///
+private alias c_gst_is_caps_featuresFn = extern(C) gboolean function(const(void)* obj) nothrow;
+__gshared c_gst_is_caps_featuresFn c_gst_is_caps_features; ///
+private alias c_gst_is_initializedFn = extern(C) gboolean function() nothrow;
+__gshared c_gst_is_initializedFn c_gst_is_initialized; ///
+private alias c_gst_make_element_message_detailsFn = extern(C) GstStructure* function(const(char)* name,  ...) nothrow;
+__gshared c_gst_make_element_message_detailsFn c_gst_make_element_message_details; ///
+private alias c_gst_param_spec_arrayFn = extern(C) GParamSpec* function(const(char)* name, const(char)* nick, const(char)* blurb, GParamSpec* elementSpec, GParamFlags flags) nothrow;
+__gshared c_gst_param_spec_arrayFn c_gst_param_spec_array; ///
+private alias c_gst_param_spec_fractionFn = extern(C) GParamSpec* function(const(char)* name, const(char)* nick, const(char)* blurb, int minNum, int minDenom, int maxNum, int maxDenom, int defaultNum, int defaultDenom, GParamFlags flags) nothrow;
+__gshared c_gst_param_spec_fractionFn c_gst_param_spec_fraction; ///
+private alias c_gst_parent_buffer_meta_api_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_parent_buffer_meta_api_get_typeFn c_gst_parent_buffer_meta_api_get_type; ///
+private alias c_gst_parse_bin_from_descriptionFn = extern(C) GstElement* function(const(char)* binDescription, gboolean ghostUnlinkedPads, GError** _err) nothrow;
+__gshared c_gst_parse_bin_from_descriptionFn c_gst_parse_bin_from_description; ///
+private alias c_gst_parse_bin_from_description_fullFn = extern(C) GstElement* function(const(char)* binDescription, gboolean ghostUnlinkedPads, GstParseContext* context, GstParseFlags flags, GError** _err) nothrow;
+__gshared c_gst_parse_bin_from_description_fullFn c_gst_parse_bin_from_description_full; ///
+private alias c_gst_parse_launchFn = extern(C) GstElement* function(const(char)* pipelineDescription, GError** _err) nothrow;
+__gshared c_gst_parse_launchFn c_gst_parse_launch; ///
+private alias c_gst_parse_launch_fullFn = extern(C) GstElement* function(const(char)* pipelineDescription, GstParseContext* context, GstParseFlags flags, GError** _err) nothrow;
+__gshared c_gst_parse_launch_fullFn c_gst_parse_launch_full; ///
+private alias c_gst_parse_launchvFn = extern(C) GstElement* function(const(char*)* argv, GError** _err) nothrow;
+__gshared c_gst_parse_launchvFn c_gst_parse_launchv; ///
+private alias c_gst_parse_launchv_fullFn = extern(C) GstElement* function(const(char*)* argv, GstParseContext* context, GstParseFlags flags, GError** _err) nothrow;
+__gshared c_gst_parse_launchv_fullFn c_gst_parse_launchv_full; ///
+private alias c_gst_printFn = extern(C) void function(const(char)* format,  ...) nothrow;
+__gshared c_gst_printFn c_gst_print; ///
+private alias c_gst_printerrFn = extern(C) void function(const(char)* format,  ...) nothrow;
+__gshared c_gst_printerrFn c_gst_printerr; ///
+private alias c_gst_printerrlnFn = extern(C) void function(const(char)* format,  ...) nothrow;
+__gshared c_gst_printerrlnFn c_gst_printerrln; ///
+private alias c_gst_printlnFn = extern(C) void function(const(char)* format,  ...) nothrow;
+__gshared c_gst_printlnFn c_gst_println; ///
+private alias c_gst_protection_filter_systems_by_available_decryptorsFn = extern(C) char** function(const(char*)* systemIdentifiers) nothrow;
+__gshared c_gst_protection_filter_systems_by_available_decryptorsFn c_gst_protection_filter_systems_by_available_decryptors; ///
+private alias c_gst_protection_meta_api_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_protection_meta_api_get_typeFn c_gst_protection_meta_api_get_type; ///
+private alias c_gst_protection_select_systemFn = extern(C) const(char)* function(const(char*)* systemIdentifiers) nothrow;
+__gshared c_gst_protection_select_systemFn c_gst_protection_select_system; ///
+private alias c_gst_reference_timestamp_meta_api_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_reference_timestamp_meta_api_get_typeFn c_gst_reference_timestamp_meta_api_get_type; ///
+private alias c_gst_segtrap_is_enabledFn = extern(C) gboolean function() nothrow;
+__gshared c_gst_segtrap_is_enabledFn c_gst_segtrap_is_enabled; ///
+private alias c_gst_segtrap_set_enabledFn = extern(C) void function(gboolean enabled) nothrow;
+__gshared c_gst_segtrap_set_enabledFn c_gst_segtrap_set_enabled; ///
+private alias c_gst_tag_existsFn = extern(C) gboolean function(const(char)* tag) nothrow;
+__gshared c_gst_tag_existsFn c_gst_tag_exists; ///
+private alias c_gst_tag_get_descriptionFn = extern(C) const(char)* function(const(char)* tag) nothrow;
+__gshared c_gst_tag_get_descriptionFn c_gst_tag_get_description; ///
+private alias c_gst_tag_get_flagFn = extern(C) GstTagFlag function(const(char)* tag) nothrow;
+__gshared c_gst_tag_get_flagFn c_gst_tag_get_flag; ///
+private alias c_gst_tag_get_nickFn = extern(C) const(char)* function(const(char)* tag) nothrow;
+__gshared c_gst_tag_get_nickFn c_gst_tag_get_nick; ///
+private alias c_gst_tag_get_typeFn = extern(C) GType function(const(char)* tag) nothrow;
+__gshared c_gst_tag_get_typeFn c_gst_tag_get_type; ///
+private alias c_gst_tag_is_fixedFn = extern(C) gboolean function(const(char)* tag) nothrow;
+__gshared c_gst_tag_is_fixedFn c_gst_tag_is_fixed; ///
+private alias c_gst_tag_merge_strings_with_commaFn = extern(C) void function(GValue* dest, const(GValue)* src) nothrow;
+__gshared c_gst_tag_merge_strings_with_commaFn c_gst_tag_merge_strings_with_comma; ///
+private alias c_gst_tag_merge_use_firstFn = extern(C) void function(GValue* dest, const(GValue)* src) nothrow;
+__gshared c_gst_tag_merge_use_firstFn c_gst_tag_merge_use_first; ///
+private alias c_gst_tag_registerFn = extern(C) void function(const(char)* name, GstTagFlag flag, GType type, const(char)* nick, const(char)* blurb, GstTagMergeFunc func) nothrow;
+__gshared c_gst_tag_registerFn c_gst_tag_register; ///
+private alias c_gst_tag_register_staticFn = extern(C) void function(const(char)* name, GstTagFlag flag, GType type, const(char)* nick, const(char)* blurb, GstTagMergeFunc func) nothrow;
+__gshared c_gst_tag_register_staticFn c_gst_tag_register_static; ///
+private alias c_gst_tracing_get_active_tracersFn = extern(C) GList* function() nothrow;
+__gshared c_gst_tracing_get_active_tracersFn c_gst_tracing_get_active_tracers; ///
+private alias c_gst_tracing_register_hookFn = extern(C) void function(GstTracer* tracer, const(char)* detail, GCallback func) nothrow;
+__gshared c_gst_tracing_register_hookFn c_gst_tracing_register_hook; ///
+private alias c_gst_type_is_plugin_apiFn = extern(C) gboolean function(GType type, GstPluginAPIFlags* flags) nothrow;
+__gshared c_gst_type_is_plugin_apiFn c_gst_type_is_plugin_api; ///
+private alias c_gst_type_mark_as_plugin_apiFn = extern(C) void function(GType type, GstPluginAPIFlags flags) nothrow;
+__gshared c_gst_type_mark_as_plugin_apiFn c_gst_type_mark_as_plugin_api; ///
+private alias c_gst_update_registryFn = extern(C) gboolean function() nothrow;
+__gshared c_gst_update_registryFn c_gst_update_registry; ///
+private alias c_gst_util_array_binary_searchFn = extern(C) void* function(void* array, uint numElements, size_t elementSize, GCompareDataFunc searchFunc, GstSearchMode mode, const(void)* searchData, void* userData) nothrow;
+__gshared c_gst_util_array_binary_searchFn c_gst_util_array_binary_search; ///
+private alias c_gst_util_ceil_log2Fn = extern(C) uint function(uint v) nothrow;
+__gshared c_gst_util_ceil_log2Fn c_gst_util_ceil_log2; ///
+private alias c_gst_util_double_to_fractionFn = extern(C) void function(double src, int* destN, int* destD) nothrow;
+__gshared c_gst_util_double_to_fractionFn c_gst_util_double_to_fraction; ///
+private alias c_gst_util_dump_bufferFn = extern(C) void function(GstBuffer* buf) nothrow;
+__gshared c_gst_util_dump_bufferFn c_gst_util_dump_buffer; ///
+private alias c_gst_util_dump_memFn = extern(C) void function(const(ubyte)* mem, uint size) nothrow;
+__gshared c_gst_util_dump_memFn c_gst_util_dump_mem; ///
+private alias c_gst_util_filename_compareFn = extern(C) int function(const(char)* a, const(char)* b) nothrow;
+__gshared c_gst_util_filename_compareFn c_gst_util_filename_compare; ///
+private alias c_gst_util_floor_log2Fn = extern(C) uint function(uint v) nothrow;
+__gshared c_gst_util_floor_log2Fn c_gst_util_floor_log2; ///
+private alias c_gst_util_fraction_addFn = extern(C) gboolean function(int aN, int aD, int bN, int bD, int* resN, int* resD) nothrow;
+__gshared c_gst_util_fraction_addFn c_gst_util_fraction_add; ///
+private alias c_gst_util_fraction_compareFn = extern(C) int function(int aN, int aD, int bN, int bD) nothrow;
+__gshared c_gst_util_fraction_compareFn c_gst_util_fraction_compare; ///
+private alias c_gst_util_fraction_multiplyFn = extern(C) gboolean function(int aN, int aD, int bN, int bD, int* resN, int* resD) nothrow;
+__gshared c_gst_util_fraction_multiplyFn c_gst_util_fraction_multiply; ///
+private alias c_gst_util_fraction_multiply_int64Fn = extern(C) gboolean function(long aN, long aD, long bN, long bD, long* resN, long* resD) nothrow;
+__gshared c_gst_util_fraction_multiply_int64Fn c_gst_util_fraction_multiply_int64; ///
+private alias c_gst_util_fraction_to_doubleFn = extern(C) void function(int srcN, int srcD, double* dest) nothrow;
+__gshared c_gst_util_fraction_to_doubleFn c_gst_util_fraction_to_double; ///
+private alias c_gst_util_gdouble_to_guint64Fn = extern(C) ulong function(double value) nothrow;
+__gshared c_gst_util_gdouble_to_guint64Fn c_gst_util_gdouble_to_guint64; ///
+private alias c_gst_util_get_object_arrayFn = extern(C) gboolean function(GObject* object, const(char)* name, GValueArray** array) nothrow;
+__gshared c_gst_util_get_object_arrayFn c_gst_util_get_object_array; ///
+private alias c_gst_util_get_timestampFn = extern(C) GstClockTime function() nothrow;
+__gshared c_gst_util_get_timestampFn c_gst_util_get_timestamp; ///
+private alias c_gst_util_greatest_common_divisorFn = extern(C) int function(int a, int b) nothrow;
+__gshared c_gst_util_greatest_common_divisorFn c_gst_util_greatest_common_divisor; ///
+private alias c_gst_util_greatest_common_divisor_int64Fn = extern(C) long function(long a, long b) nothrow;
+__gshared c_gst_util_greatest_common_divisor_int64Fn c_gst_util_greatest_common_divisor_int64; ///
+private alias c_gst_util_group_id_nextFn = extern(C) uint function() nothrow;
+__gshared c_gst_util_group_id_nextFn c_gst_util_group_id_next; ///
+private alias c_gst_util_guint64_to_gdoubleFn = extern(C) double function(ulong value) nothrow;
+__gshared c_gst_util_guint64_to_gdoubleFn c_gst_util_guint64_to_gdouble; ///
+private alias c_gst_util_seqnum_compareFn = extern(C) int function(uint s1, uint s2) nothrow;
+__gshared c_gst_util_seqnum_compareFn c_gst_util_seqnum_compare; ///
+private alias c_gst_util_seqnum_nextFn = extern(C) uint function() nothrow;
+__gshared c_gst_util_seqnum_nextFn c_gst_util_seqnum_next; ///
+private alias c_gst_util_set_object_argFn = extern(C) void function(GObject* object, const(char)* name, const(char)* value) nothrow;
+__gshared c_gst_util_set_object_argFn c_gst_util_set_object_arg; ///
+private alias c_gst_util_set_object_arrayFn = extern(C) gboolean function(GObject* object, const(char)* name, const(GValueArray)* array) nothrow;
+__gshared c_gst_util_set_object_arrayFn c_gst_util_set_object_array; ///
+private alias c_gst_util_set_value_from_stringFn = extern(C) void function(GValue* value, const(char)* valueStr) nothrow;
+__gshared c_gst_util_set_value_from_stringFn c_gst_util_set_value_from_string; ///
+private alias c_gst_util_simplify_fractionFn = extern(C) void function(int* numerator, int* denominator, uint nTerms, uint threshold) nothrow;
+__gshared c_gst_util_simplify_fractionFn c_gst_util_simplify_fraction; ///
+private alias c_gst_util_uint64_scaleFn = extern(C) ulong function(ulong val, ulong num, ulong denom) nothrow;
+__gshared c_gst_util_uint64_scaleFn c_gst_util_uint64_scale; ///
+private alias c_gst_util_uint64_scale_ceilFn = extern(C) ulong function(ulong val, ulong num, ulong denom) nothrow;
+__gshared c_gst_util_uint64_scale_ceilFn c_gst_util_uint64_scale_ceil; ///
+private alias c_gst_util_uint64_scale_intFn = extern(C) ulong function(ulong val, int num, int denom) nothrow;
+__gshared c_gst_util_uint64_scale_intFn c_gst_util_uint64_scale_int; ///
+private alias c_gst_util_uint64_scale_int_ceilFn = extern(C) ulong function(ulong val, int num, int denom) nothrow;
+__gshared c_gst_util_uint64_scale_int_ceilFn c_gst_util_uint64_scale_int_ceil; ///
+private alias c_gst_util_uint64_scale_int_roundFn = extern(C) ulong function(ulong val, int num, int denom) nothrow;
+__gshared c_gst_util_uint64_scale_int_roundFn c_gst_util_uint64_scale_int_round; ///
+private alias c_gst_util_uint64_scale_roundFn = extern(C) ulong function(ulong val, ulong num, ulong denom) nothrow;
+__gshared c_gst_util_uint64_scale_roundFn c_gst_util_uint64_scale_round; ///
+private alias c_gst_value_can_compareFn = extern(C) gboolean function(const(GValue)* value1, const(GValue)* value2) nothrow;
+__gshared c_gst_value_can_compareFn c_gst_value_can_compare; ///
+private alias c_gst_value_can_intersectFn = extern(C) gboolean function(const(GValue)* value1, const(GValue)* value2) nothrow;
+__gshared c_gst_value_can_intersectFn c_gst_value_can_intersect; ///
+private alias c_gst_value_can_subtractFn = extern(C) gboolean function(const(GValue)* minuend, const(GValue)* subtrahend) nothrow;
+__gshared c_gst_value_can_subtractFn c_gst_value_can_subtract; ///
+private alias c_gst_value_can_unionFn = extern(C) gboolean function(const(GValue)* value1, const(GValue)* value2) nothrow;
+__gshared c_gst_value_can_unionFn c_gst_value_can_union; ///
+private alias c_gst_value_compareFn = extern(C) int function(const(GValue)* value1, const(GValue)* value2) nothrow;
+__gshared c_gst_value_compareFn c_gst_value_compare; ///
+private alias c_gst_value_deserializeFn = extern(C) gboolean function(GValue* dest, const(char)* src) nothrow;
+__gshared c_gst_value_deserializeFn c_gst_value_deserialize; ///
+private alias c_gst_value_deserialize_with_pspecFn = extern(C) gboolean function(GValue* dest, const(char)* src, GParamSpec* pspec) nothrow;
+__gshared c_gst_value_deserialize_with_pspecFn c_gst_value_deserialize_with_pspec; ///
+private alias c_gst_value_fixateFn = extern(C) gboolean function(GValue* dest, const(GValue)* src) nothrow;
+__gshared c_gst_value_fixateFn c_gst_value_fixate; ///
+private alias c_gst_value_fraction_multiplyFn = extern(C) gboolean function(GValue* product, const(GValue)* factor1, const(GValue)* factor2) nothrow;
+__gshared c_gst_value_fraction_multiplyFn c_gst_value_fraction_multiply; ///
+private alias c_gst_value_fraction_subtractFn = extern(C) gboolean function(GValue* dest, const(GValue)* minuend, const(GValue)* subtrahend) nothrow;
+__gshared c_gst_value_fraction_subtractFn c_gst_value_fraction_subtract; ///
+private alias c_gst_value_get_bitmaskFn = extern(C) ulong function(const(GValue)* value) nothrow;
+__gshared c_gst_value_get_bitmaskFn c_gst_value_get_bitmask; ///
+private alias c_gst_value_get_capsFn = extern(C) const(GstCaps)* function(const(GValue)* value) nothrow;
+__gshared c_gst_value_get_capsFn c_gst_value_get_caps; ///
+private alias c_gst_value_get_caps_featuresFn = extern(C) const(GstCapsFeatures)* function(const(GValue)* value) nothrow;
+__gshared c_gst_value_get_caps_featuresFn c_gst_value_get_caps_features; ///
+private alias c_gst_value_get_double_range_maxFn = extern(C) double function(const(GValue)* value) nothrow;
+__gshared c_gst_value_get_double_range_maxFn c_gst_value_get_double_range_max; ///
+private alias c_gst_value_get_double_range_minFn = extern(C) double function(const(GValue)* value) nothrow;
+__gshared c_gst_value_get_double_range_minFn c_gst_value_get_double_range_min; ///
+private alias c_gst_value_get_flagset_flagsFn = extern(C) uint function(const(GValue)* value) nothrow;
+__gshared c_gst_value_get_flagset_flagsFn c_gst_value_get_flagset_flags; ///
+private alias c_gst_value_get_flagset_maskFn = extern(C) uint function(const(GValue)* value) nothrow;
+__gshared c_gst_value_get_flagset_maskFn c_gst_value_get_flagset_mask; ///
+private alias c_gst_value_get_fraction_denominatorFn = extern(C) int function(const(GValue)* value) nothrow;
+__gshared c_gst_value_get_fraction_denominatorFn c_gst_value_get_fraction_denominator; ///
+private alias c_gst_value_get_fraction_numeratorFn = extern(C) int function(const(GValue)* value) nothrow;
+__gshared c_gst_value_get_fraction_numeratorFn c_gst_value_get_fraction_numerator; ///
+private alias c_gst_value_get_fraction_range_maxFn = extern(C) const(GValue)* function(const(GValue)* value) nothrow;
+__gshared c_gst_value_get_fraction_range_maxFn c_gst_value_get_fraction_range_max; ///
+private alias c_gst_value_get_fraction_range_minFn = extern(C) const(GValue)* function(const(GValue)* value) nothrow;
+__gshared c_gst_value_get_fraction_range_minFn c_gst_value_get_fraction_range_min; ///
+private alias c_gst_value_get_int64_range_maxFn = extern(C) long function(const(GValue)* value) nothrow;
+__gshared c_gst_value_get_int64_range_maxFn c_gst_value_get_int64_range_max; ///
+private alias c_gst_value_get_int64_range_minFn = extern(C) long function(const(GValue)* value) nothrow;
+__gshared c_gst_value_get_int64_range_minFn c_gst_value_get_int64_range_min; ///
+private alias c_gst_value_get_int64_range_stepFn = extern(C) long function(const(GValue)* value) nothrow;
+__gshared c_gst_value_get_int64_range_stepFn c_gst_value_get_int64_range_step; ///
+private alias c_gst_value_get_int_range_maxFn = extern(C) int function(const(GValue)* value) nothrow;
+__gshared c_gst_value_get_int_range_maxFn c_gst_value_get_int_range_max; ///
+private alias c_gst_value_get_int_range_minFn = extern(C) int function(const(GValue)* value) nothrow;
+__gshared c_gst_value_get_int_range_minFn c_gst_value_get_int_range_min; ///
+private alias c_gst_value_get_int_range_stepFn = extern(C) int function(const(GValue)* value) nothrow;
+__gshared c_gst_value_get_int_range_stepFn c_gst_value_get_int_range_step; ///
+private alias c_gst_value_get_structureFn = extern(C) const(GstStructure)* function(const(GValue)* value) nothrow;
+__gshared c_gst_value_get_structureFn c_gst_value_get_structure; ///
+private alias c_gst_value_hashFn = extern(C) gboolean function(const(GValue)* value, uint* res) nothrow;
+__gshared c_gst_value_hashFn c_gst_value_hash; ///
+private alias c_gst_value_init_and_copyFn = extern(C) void function(GValue* dest, const(GValue)* src) nothrow;
+__gshared c_gst_value_init_and_copyFn c_gst_value_init_and_copy; ///
+private alias c_gst_value_intersectFn = extern(C) gboolean function(GValue* dest, const(GValue)* value1, const(GValue)* value2) nothrow;
+__gshared c_gst_value_intersectFn c_gst_value_intersect; ///
+private alias c_gst_value_is_fixedFn = extern(C) gboolean function(const(GValue)* value) nothrow;
+__gshared c_gst_value_is_fixedFn c_gst_value_is_fixed; ///
+private alias c_gst_value_is_subsetFn = extern(C) gboolean function(const(GValue)* value1, const(GValue)* value2) nothrow;
+__gshared c_gst_value_is_subsetFn c_gst_value_is_subset; ///
+private alias c_gst_value_registerFn = extern(C) void function(const(GstValueTable)* table) nothrow;
+__gshared c_gst_value_registerFn c_gst_value_register; ///
+private alias c_gst_value_serializeFn = extern(C) char* function(const(GValue)* value) nothrow;
+__gshared c_gst_value_serializeFn c_gst_value_serialize; ///
+private alias c_gst_value_set_bitmaskFn = extern(C) void function(GValue* value, ulong bitmask) nothrow;
+__gshared c_gst_value_set_bitmaskFn c_gst_value_set_bitmask; ///
+private alias c_gst_value_set_capsFn = extern(C) void function(GValue* value, const(GstCaps)* caps) nothrow;
+__gshared c_gst_value_set_capsFn c_gst_value_set_caps; ///
+private alias c_gst_value_set_caps_featuresFn = extern(C) void function(GValue* value, const(GstCapsFeatures)* features) nothrow;
+__gshared c_gst_value_set_caps_featuresFn c_gst_value_set_caps_features; ///
+private alias c_gst_value_set_double_rangeFn = extern(C) void function(GValue* value, double start, double end) nothrow;
+__gshared c_gst_value_set_double_rangeFn c_gst_value_set_double_range; ///
+private alias c_gst_value_set_flagsetFn = extern(C) void function(GValue* value, uint flags, uint mask) nothrow;
+__gshared c_gst_value_set_flagsetFn c_gst_value_set_flagset; ///
+private alias c_gst_value_set_fractionFn = extern(C) void function(GValue* value, int numerator, int denominator) nothrow;
+__gshared c_gst_value_set_fractionFn c_gst_value_set_fraction; ///
+private alias c_gst_value_set_fraction_rangeFn = extern(C) void function(GValue* value, const(GValue)* start, const(GValue)* end) nothrow;
+__gshared c_gst_value_set_fraction_rangeFn c_gst_value_set_fraction_range; ///
+private alias c_gst_value_set_fraction_range_fullFn = extern(C) void function(GValue* value, int numeratorStart, int denominatorStart, int numeratorEnd, int denominatorEnd) nothrow;
+__gshared c_gst_value_set_fraction_range_fullFn c_gst_value_set_fraction_range_full; ///
+private alias c_gst_value_set_int64_rangeFn = extern(C) void function(GValue* value, long start, long end) nothrow;
+__gshared c_gst_value_set_int64_rangeFn c_gst_value_set_int64_range; ///
+private alias c_gst_value_set_int64_range_stepFn = extern(C) void function(GValue* value, long start, long end, long step) nothrow;
+__gshared c_gst_value_set_int64_range_stepFn c_gst_value_set_int64_range_step; ///
+private alias c_gst_value_set_int_rangeFn = extern(C) void function(GValue* value, int start, int end) nothrow;
+__gshared c_gst_value_set_int_rangeFn c_gst_value_set_int_range; ///
+private alias c_gst_value_set_int_range_stepFn = extern(C) void function(GValue* value, int start, int end, int step) nothrow;
+__gshared c_gst_value_set_int_range_stepFn c_gst_value_set_int_range_step; ///
+private alias c_gst_value_set_structureFn = extern(C) void function(GValue* value, const(GstStructure)* structure) nothrow;
+__gshared c_gst_value_set_structureFn c_gst_value_set_structure; ///
+private alias c_gst_value_subtractFn = extern(C) gboolean function(GValue* dest, const(GValue)* minuend, const(GValue)* subtrahend) nothrow;
+__gshared c_gst_value_subtractFn c_gst_value_subtract; ///
+private alias c_gst_value_unionFn = extern(C) gboolean function(GValue* dest, const(GValue)* value1, const(GValue)* value2) nothrow;
+__gshared c_gst_value_unionFn c_gst_value_union; ///
+private alias c_gst_versionFn = extern(C) void function(uint* major, uint* minor, uint* micro, uint* nano) nothrow;
+__gshared c_gst_versionFn c_gst_version; ///
+private alias c_gst_version_stringFn = extern(C) char* function() nothrow;
+__gshared c_gst_version_stringFn c_gst_version_string; ///
+
+// CoreError
+private alias c_gst_core_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_gst_core_error_quarkFn c_gst_core_error_quark; ///
+
+// DebugLevel
+private alias c_gst_debug_level_get_nameFn = extern(C) const(char)* function(GstDebugLevel level) nothrow;
+__gshared c_gst_debug_level_get_nameFn c_gst_debug_level_get_name; ///
+
+// EventType
+private alias c_gst_event_type_get_flagsFn = extern(C) GstEventTypeFlags function(GstEventType type) nothrow;
+__gshared c_gst_event_type_get_flagsFn c_gst_event_type_get_flags; ///
+private alias c_gst_event_type_get_nameFn = extern(C) const(char)* function(GstEventType type) nothrow;
+__gshared c_gst_event_type_get_nameFn c_gst_event_type_get_name; ///
+private alias c_gst_event_type_to_quarkFn = extern(C) GQuark function(GstEventType type) nothrow;
+__gshared c_gst_event_type_to_quarkFn c_gst_event_type_to_quark; ///
+private alias c_gst_event_type_to_sticky_orderingFn = extern(C) uint function(GstEventType type) nothrow;
+__gshared c_gst_event_type_to_sticky_orderingFn c_gst_event_type_to_sticky_ordering; ///
+
+// Format
+private alias c_gst_format_get_by_nickFn = extern(C) GstFormat function(const(char)* nick) nothrow;
+__gshared c_gst_format_get_by_nickFn c_gst_format_get_by_nick; ///
+private alias c_gst_format_get_detailsFn = extern(C) const(GstFormatDefinition)* function(GstFormat format) nothrow;
+__gshared c_gst_format_get_detailsFn c_gst_format_get_details; ///
+private alias c_gst_format_get_nameFn = extern(C) const(char)* function(GstFormat format) nothrow;
+__gshared c_gst_format_get_nameFn c_gst_format_get_name; ///
+private alias c_gst_format_iterate_definitionsFn = extern(C) GstIterator* function() nothrow;
+__gshared c_gst_format_iterate_definitionsFn c_gst_format_iterate_definitions; ///
+private alias c_gst_format_registerFn = extern(C) GstFormat function(const(char)* nick, const(char)* description) nothrow;
+__gshared c_gst_format_registerFn c_gst_format_register; ///
+private alias c_gst_format_to_quarkFn = extern(C) GQuark function(GstFormat format) nothrow;
+__gshared c_gst_format_to_quarkFn c_gst_format_to_quark; ///
+
+// LibraryError
+private alias c_gst_library_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_gst_library_error_quarkFn c_gst_library_error_quark; ///
+
+// MessageType
+private alias c_gst_message_type_get_nameFn = extern(C) const(char)* function(GstMessageType type) nothrow;
+__gshared c_gst_message_type_get_nameFn c_gst_message_type_get_name; ///
+private alias c_gst_message_type_to_quarkFn = extern(C) GQuark function(GstMessageType type) nothrow;
+__gshared c_gst_message_type_to_quarkFn c_gst_message_type_to_quark; ///
+
+// PadMode
+private alias c_gst_pad_mode_get_nameFn = extern(C) const(char)* function(GstPadMode mode) nothrow;
+__gshared c_gst_pad_mode_get_nameFn c_gst_pad_mode_get_name; ///
+
+// ParseError
+private alias c_gst_parse_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_gst_parse_error_quarkFn c_gst_parse_error_quark; ///
+
+// PluginError
+private alias c_gst_plugin_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_gst_plugin_error_quarkFn c_gst_plugin_error_quark; ///
+
+// QueryType
+private alias c_gst_query_type_get_flagsFn = extern(C) GstQueryTypeFlags function(GstQueryType type) nothrow;
+__gshared c_gst_query_type_get_flagsFn c_gst_query_type_get_flags; ///
+private alias c_gst_query_type_get_nameFn = extern(C) const(char)* function(GstQueryType type) nothrow;
+__gshared c_gst_query_type_get_nameFn c_gst_query_type_get_name; ///
+private alias c_gst_query_type_to_quarkFn = extern(C) GQuark function(GstQueryType type) nothrow;
+__gshared c_gst_query_type_to_quarkFn c_gst_query_type_to_quark; ///
+
+// ResourceError
+private alias c_gst_resource_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_gst_resource_error_quarkFn c_gst_resource_error_quark; ///
+
+// State
+private alias c_gst_state_get_nameFn = extern(C) const(char)* function(GstState state) nothrow;
+__gshared c_gst_state_get_nameFn c_gst_state_get_name; ///
+
+// StateChange
+private alias c_gst_state_change_get_nameFn = extern(C) const(char)* function(GstStateChange transition) nothrow;
+__gshared c_gst_state_change_get_nameFn c_gst_state_change_get_name; ///
+
+// StateChangeReturn
+private alias c_gst_state_change_return_get_nameFn = extern(C) const(char)* function(GstStateChangeReturn stateRet) nothrow;
+__gshared c_gst_state_change_return_get_nameFn c_gst_state_change_return_get_name; ///
+
+// StreamError
+private alias c_gst_stream_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_gst_stream_error_quarkFn c_gst_stream_error_quark; ///
+
+// StreamType
+private alias c_gst_stream_type_get_nameFn = extern(C) const(char)* function(GstStreamType stype) nothrow;
+__gshared c_gst_stream_type_get_nameFn c_gst_stream_type_get_name; ///
+
+// TocEntryType
+private alias c_gst_toc_entry_type_get_nickFn = extern(C) const(char)* function(GstTocEntryType type) nothrow;
+__gshared c_gst_toc_entry_type_get_nickFn c_gst_toc_entry_type_get_nick; ///
+
+// URIError
+private alias c_gst_uri_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_gst_uri_error_quarkFn c_gst_uri_error_quark; ///
 
 // AllocationParams
 

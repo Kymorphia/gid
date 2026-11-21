@@ -10,986 +10,1787 @@ public import gid.soup3.c.types;
 
 private immutable LIBS = ["webkitgtk-6.0_4", "javascriptcoregtk-6.0_1"];
 
-__gshared extern(C) nothrow
-{
-  // ApplicationInfo
-  GType function() c_webkit_application_info_get_type; ///
-  WebKitApplicationInfo* function() c_webkit_application_info_new; ///
-  const(char)* function(WebKitApplicationInfo* info) c_webkit_application_info_get_name; ///
-  void function(WebKitApplicationInfo* info, ulong* major, ulong* minor, ulong* micro) c_webkit_application_info_get_version; ///
-  WebKitApplicationInfo* function(WebKitApplicationInfo* info) c_webkit_application_info_ref; ///
-  void function(WebKitApplicationInfo* info, const(char)* name) c_webkit_application_info_set_name; ///
-  void function(WebKitApplicationInfo* info, ulong major, ulong minor, ulong micro) c_webkit_application_info_set_version; ///
-  void function(WebKitApplicationInfo* info) c_webkit_application_info_unref; ///
-
-  // AuthenticationRequest
-  GType function() c_webkit_authentication_request_get_type; ///
-  void function(WebKitAuthenticationRequest* request, WebKitCredential* credential) c_webkit_authentication_request_authenticate; ///
-  gboolean function(WebKitAuthenticationRequest* request) c_webkit_authentication_request_can_save_credentials; ///
-  void function(WebKitAuthenticationRequest* request) c_webkit_authentication_request_cancel; ///
-  GTlsPasswordFlags function(WebKitAuthenticationRequest* request) c_webkit_authentication_request_get_certificate_pin_flags; ///
-  const(char)* function(WebKitAuthenticationRequest* request) c_webkit_authentication_request_get_host; ///
-  uint function(WebKitAuthenticationRequest* request) c_webkit_authentication_request_get_port; ///
-  WebKitCredential* function(WebKitAuthenticationRequest* request) c_webkit_authentication_request_get_proposed_credential; ///
-  const(char)* function(WebKitAuthenticationRequest* request) c_webkit_authentication_request_get_realm; ///
-  WebKitAuthenticationScheme function(WebKitAuthenticationRequest* request) c_webkit_authentication_request_get_scheme; ///
-  WebKitSecurityOrigin* function(WebKitAuthenticationRequest* request) c_webkit_authentication_request_get_security_origin; ///
-  gboolean function(WebKitAuthenticationRequest* request) c_webkit_authentication_request_is_for_proxy; ///
-  gboolean function(WebKitAuthenticationRequest* request) c_webkit_authentication_request_is_retry; ///
-  void function(WebKitAuthenticationRequest* request, gboolean enabled) c_webkit_authentication_request_set_can_save_credentials; ///
-  void function(WebKitAuthenticationRequest* request, WebKitCredential* credential) c_webkit_authentication_request_set_proposed_credential; ///
-
-  // AutomationSession
-  GType function() c_webkit_automation_session_get_type; ///
-  WebKitApplicationInfo* function(WebKitAutomationSession* session) c_webkit_automation_session_get_application_info; ///
-  const(char)* function(WebKitAutomationSession* session) c_webkit_automation_session_get_id; ///
-  void function(WebKitAutomationSession* session, WebKitApplicationInfo* info) c_webkit_automation_session_set_application_info; ///
-
-  // BackForwardList
-  GType function() c_webkit_back_forward_list_get_type; ///
-  WebKitBackForwardListItem* function(WebKitBackForwardList* backForwardList) c_webkit_back_forward_list_get_back_item; ///
-  GList* function(WebKitBackForwardList* backForwardList) c_webkit_back_forward_list_get_back_list; ///
-  GList* function(WebKitBackForwardList* backForwardList, uint limit) c_webkit_back_forward_list_get_back_list_with_limit; ///
-  WebKitBackForwardListItem* function(WebKitBackForwardList* backForwardList) c_webkit_back_forward_list_get_current_item; ///
-  WebKitBackForwardListItem* function(WebKitBackForwardList* backForwardList) c_webkit_back_forward_list_get_forward_item; ///
-  GList* function(WebKitBackForwardList* backForwardList) c_webkit_back_forward_list_get_forward_list; ///
-  GList* function(WebKitBackForwardList* backForwardList, uint limit) c_webkit_back_forward_list_get_forward_list_with_limit; ///
-  uint function(WebKitBackForwardList* backForwardList) c_webkit_back_forward_list_get_length; ///
-  WebKitBackForwardListItem* function(WebKitBackForwardList* backForwardList, int index) c_webkit_back_forward_list_get_nth_item; ///
-
-  // BackForwardListItem
-  GType function() c_webkit_back_forward_list_item_get_type; ///
-  const(char)* function(WebKitBackForwardListItem* listItem) c_webkit_back_forward_list_item_get_original_uri; ///
-  const(char)* function(WebKitBackForwardListItem* listItem) c_webkit_back_forward_list_item_get_title; ///
-  const(char)* function(WebKitBackForwardListItem* listItem) c_webkit_back_forward_list_item_get_uri; ///
-
-  // ClipboardPermissionRequest
-  GType function() c_webkit_clipboard_permission_request_get_type; ///
-
-  // ColorChooserRequest
-  GType function() c_webkit_color_chooser_request_get_type; ///
-  void function(WebKitColorChooserRequest* request) c_webkit_color_chooser_request_cancel; ///
-  void function(WebKitColorChooserRequest* request) c_webkit_color_chooser_request_finish; ///
-  void function(WebKitColorChooserRequest* request, GdkRectangle* rect) c_webkit_color_chooser_request_get_element_rectangle; ///
-  void function(WebKitColorChooserRequest* request, GdkRGBA* rgba) c_webkit_color_chooser_request_get_rgba; ///
-  void function(WebKitColorChooserRequest* request, const(GdkRGBA)* rgba) c_webkit_color_chooser_request_set_rgba; ///
-
-  // ContextMenu
-  GType function() c_webkit_context_menu_get_type; ///
-  WebKitContextMenu* function() c_webkit_context_menu_new; ///
-  WebKitContextMenu* function(GList* items) c_webkit_context_menu_new_with_items; ///
-  void function(WebKitContextMenu* menu, WebKitContextMenuItem* item) c_webkit_context_menu_append; ///
-  WebKitContextMenuItem* function(WebKitContextMenu* menu) c_webkit_context_menu_first; ///
-  GdkEvent* function(WebKitContextMenu* menu) c_webkit_context_menu_get_event; ///
-  WebKitContextMenuItem* function(WebKitContextMenu* menu, uint position) c_webkit_context_menu_get_item_at_position; ///
-  GList* function(WebKitContextMenu* menu) c_webkit_context_menu_get_items; ///
-  uint function(WebKitContextMenu* menu) c_webkit_context_menu_get_n_items; ///
-  gboolean function(WebKitContextMenu* menu, int* x, int* y) c_webkit_context_menu_get_position; ///
-  GVariant* function(WebKitContextMenu* menu) c_webkit_context_menu_get_user_data; ///
-  void function(WebKitContextMenu* menu, WebKitContextMenuItem* item, int position) c_webkit_context_menu_insert; ///
-  WebKitContextMenuItem* function(WebKitContextMenu* menu) c_webkit_context_menu_last; ///
-  void function(WebKitContextMenu* menu, WebKitContextMenuItem* item, int position) c_webkit_context_menu_move_item; ///
-  void function(WebKitContextMenu* menu, WebKitContextMenuItem* item) c_webkit_context_menu_prepend; ///
-  void function(WebKitContextMenu* menu, WebKitContextMenuItem* item) c_webkit_context_menu_remove; ///
-  void function(WebKitContextMenu* menu) c_webkit_context_menu_remove_all; ///
-  void function(WebKitContextMenu* menu, GVariant* userData) c_webkit_context_menu_set_user_data; ///
-
-  // ContextMenuItem
-  GType function() c_webkit_context_menu_item_get_type; ///
-  WebKitContextMenuItem* function(GAction* action, const(char)* label, GVariant* target) c_webkit_context_menu_item_new_from_gaction; ///
-  WebKitContextMenuItem* function(WebKitContextMenuAction action) c_webkit_context_menu_item_new_from_stock_action; ///
-  WebKitContextMenuItem* function(WebKitContextMenuAction action, const(char)* label) c_webkit_context_menu_item_new_from_stock_action_with_label; ///
-  WebKitContextMenuItem* function() c_webkit_context_menu_item_new_separator; ///
-  WebKitContextMenuItem* function(const(char)* label, WebKitContextMenu* submenu) c_webkit_context_menu_item_new_with_submenu; ///
-  GAction* function(WebKitContextMenuItem* item) c_webkit_context_menu_item_get_gaction; ///
-  GVariant* function(WebKitContextMenuItem* item) c_webkit_context_menu_item_get_gaction_target; ///
-  WebKitContextMenuAction function(WebKitContextMenuItem* item) c_webkit_context_menu_item_get_stock_action; ///
-  WebKitContextMenu* function(WebKitContextMenuItem* item) c_webkit_context_menu_item_get_submenu; ///
-  const(char)* function(WebKitContextMenuItem* item) c_webkit_context_menu_item_get_title; ///
-  gboolean function(WebKitContextMenuItem* item) c_webkit_context_menu_item_is_separator; ///
-  void function(WebKitContextMenuItem* item, WebKitContextMenu* submenu) c_webkit_context_menu_item_set_submenu; ///
-
-  // CookieManager
-  GType function() c_webkit_cookie_manager_get_type; ///
-  void function(WebKitCookieManager* cookieManager, SoupCookie* cookie, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_cookie_manager_add_cookie; ///
-  gboolean function(WebKitCookieManager* cookieManager, GAsyncResult* result, GError** _err) c_webkit_cookie_manager_add_cookie_finish; ///
-  void function(WebKitCookieManager* cookieManager, SoupCookie* cookie, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_cookie_manager_delete_cookie; ///
-  gboolean function(WebKitCookieManager* cookieManager, GAsyncResult* result, GError** _err) c_webkit_cookie_manager_delete_cookie_finish; ///
-  void function(WebKitCookieManager* cookieManager, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_cookie_manager_get_accept_policy; ///
-  WebKitCookieAcceptPolicy function(WebKitCookieManager* cookieManager, GAsyncResult* result, GError** _err) c_webkit_cookie_manager_get_accept_policy_finish; ///
-  void function(WebKitCookieManager* cookieManager, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_cookie_manager_get_all_cookies; ///
-  GList* function(WebKitCookieManager* cookieManager, GAsyncResult* result, GError** _err) c_webkit_cookie_manager_get_all_cookies_finish; ///
-  void function(WebKitCookieManager* cookieManager, const(char)* uri, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_cookie_manager_get_cookies; ///
-  GList* function(WebKitCookieManager* cookieManager, GAsyncResult* result, GError** _err) c_webkit_cookie_manager_get_cookies_finish; ///
-  void function(WebKitCookieManager* cookieManager, GList* cookies, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_cookie_manager_replace_cookies; ///
-  gboolean function(WebKitCookieManager* cookieManager, GAsyncResult* result, GError** _err) c_webkit_cookie_manager_replace_cookies_finish; ///
-  void function(WebKitCookieManager* cookieManager, WebKitCookieAcceptPolicy policy) c_webkit_cookie_manager_set_accept_policy; ///
-  void function(WebKitCookieManager* cookieManager, const(char)* filename, WebKitCookiePersistentStorage storage) c_webkit_cookie_manager_set_persistent_storage; ///
-
-  // Credential
-  GType function() c_webkit_credential_get_type; ///
-  WebKitCredential* function(const(char)* username, const(char)* password, WebKitCredentialPersistence persistence) c_webkit_credential_new; ///
-  WebKitCredential* function(GTlsCertificate* certificate, WebKitCredentialPersistence persistence) c_webkit_credential_new_for_certificate; ///
-  WebKitCredential* function(const(char)* pin, WebKitCredentialPersistence persistence) c_webkit_credential_new_for_certificate_pin; ///
-  WebKitCredential* function(WebKitCredential* credential) c_webkit_credential_copy; ///
-  void function(WebKitCredential* credential) c_webkit_credential_free; ///
-  GTlsCertificate* function(WebKitCredential* credential) c_webkit_credential_get_certificate; ///
-  const(char)* function(WebKitCredential* credential) c_webkit_credential_get_password; ///
-  WebKitCredentialPersistence function(WebKitCredential* credential) c_webkit_credential_get_persistence; ///
-  const(char)* function(WebKitCredential* credential) c_webkit_credential_get_username; ///
-  gboolean function(WebKitCredential* credential) c_webkit_credential_has_password; ///
-
-  // DeviceInfoPermissionRequest
-  GType function() c_webkit_device_info_permission_request_get_type; ///
-
-  // Download
-  GType function() c_webkit_download_get_type; ///
-  void function(WebKitDownload* download) c_webkit_download_cancel; ///
-  gboolean function(WebKitDownload* download) c_webkit_download_get_allow_overwrite; ///
-  const(char)* function(WebKitDownload* download) c_webkit_download_get_destination; ///
-  double function(WebKitDownload* download) c_webkit_download_get_elapsed_time; ///
-  double function(WebKitDownload* download) c_webkit_download_get_estimated_progress; ///
-  ulong function(WebKitDownload* download) c_webkit_download_get_received_data_length; ///
-  WebKitURIRequest* function(WebKitDownload* download) c_webkit_download_get_request; ///
-  WebKitURIResponse* function(WebKitDownload* download) c_webkit_download_get_response; ///
-  WebKitWebView* function(WebKitDownload* download) c_webkit_download_get_web_view; ///
-  void function(WebKitDownload* download, gboolean allowed) c_webkit_download_set_allow_overwrite; ///
-  void function(WebKitDownload* download, const(char)* destination) c_webkit_download_set_destination; ///
-
-  // EditorState
-  GType function() c_webkit_editor_state_get_type; ///
-  uint function(WebKitEditorState* editorState) c_webkit_editor_state_get_typing_attributes; ///
-  gboolean function(WebKitEditorState* editorState) c_webkit_editor_state_is_copy_available; ///
-  gboolean function(WebKitEditorState* editorState) c_webkit_editor_state_is_cut_available; ///
-  gboolean function(WebKitEditorState* editorState) c_webkit_editor_state_is_paste_available; ///
-  gboolean function(WebKitEditorState* editorState) c_webkit_editor_state_is_redo_available; ///
-  gboolean function(WebKitEditorState* editorState) c_webkit_editor_state_is_undo_available; ///
-
-  // FaviconDatabase
-  GType function() c_webkit_favicon_database_get_type; ///
-  void function(WebKitFaviconDatabase* database) c_webkit_favicon_database_clear; ///
-  void function(WebKitFaviconDatabase* database, const(char)* pageUri, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_favicon_database_get_favicon; ///
-  GdkTexture* function(WebKitFaviconDatabase* database, GAsyncResult* result, GError** _err) c_webkit_favicon_database_get_favicon_finish; ///
-  char* function(WebKitFaviconDatabase* database, const(char)* pageUri) c_webkit_favicon_database_get_favicon_uri; ///
-
-  // Feature
-  GType function() c_webkit_feature_get_type; ///
-  const(char)* function(WebKitFeature* feature) c_webkit_feature_get_category; ///
-  gboolean function(WebKitFeature* feature) c_webkit_feature_get_default_value; ///
-  const(char)* function(WebKitFeature* feature) c_webkit_feature_get_details; ///
-  const(char)* function(WebKitFeature* feature) c_webkit_feature_get_identifier; ///
-  const(char)* function(WebKitFeature* feature) c_webkit_feature_get_name; ///
-  WebKitFeatureStatus function(WebKitFeature* feature) c_webkit_feature_get_status; ///
-  WebKitFeature* function(WebKitFeature* feature) c_webkit_feature_ref; ///
-  void function(WebKitFeature* feature) c_webkit_feature_unref; ///
-
-  // FeatureList
-  GType function() c_webkit_feature_list_get_type; ///
-  WebKitFeature* function(WebKitFeatureList* featureList, size_t index) c_webkit_feature_list_get; ///
-  size_t function(WebKitFeatureList* featureList) c_webkit_feature_list_get_length; ///
-  WebKitFeatureList* function(WebKitFeatureList* featureList) c_webkit_feature_list_ref; ///
-  void function(WebKitFeatureList* featureList) c_webkit_feature_list_unref; ///
-
-  // FileChooserRequest
-  GType function() c_webkit_file_chooser_request_get_type; ///
-  void function(WebKitFileChooserRequest* request) c_webkit_file_chooser_request_cancel; ///
-  const(char*)* function(WebKitFileChooserRequest* request) c_webkit_file_chooser_request_get_mime_types; ///
-  GtkFileFilter* function(WebKitFileChooserRequest* request) c_webkit_file_chooser_request_get_mime_types_filter; ///
-  gboolean function(WebKitFileChooserRequest* request) c_webkit_file_chooser_request_get_select_multiple; ///
-  const(char*)* function(WebKitFileChooserRequest* request) c_webkit_file_chooser_request_get_selected_files; ///
-  void function(WebKitFileChooserRequest* request, const(char*)* files) c_webkit_file_chooser_request_select_files; ///
-
-  // FindController
-  GType function() c_webkit_find_controller_get_type; ///
-  void function(WebKitFindController* findController, const(char)* searchText, uint findOptions, uint maxMatchCount) c_webkit_find_controller_count_matches; ///
-  uint function(WebKitFindController* findController) c_webkit_find_controller_get_max_match_count; ///
-  uint function(WebKitFindController* findController) c_webkit_find_controller_get_options; ///
-  const(char)* function(WebKitFindController* findController) c_webkit_find_controller_get_search_text; ///
-  WebKitWebView* function(WebKitFindController* findController) c_webkit_find_controller_get_web_view; ///
-  void function(WebKitFindController* findController, const(char)* searchText, uint findOptions, uint maxMatchCount) c_webkit_find_controller_search; ///
-  void function(WebKitFindController* findController) c_webkit_find_controller_search_finish; ///
-  void function(WebKitFindController* findController) c_webkit_find_controller_search_next; ///
-  void function(WebKitFindController* findController) c_webkit_find_controller_search_previous; ///
-
-  // FormSubmissionRequest
-  GType function() c_webkit_form_submission_request_get_type; ///
-  gboolean function(WebKitFormSubmissionRequest* request, GPtrArray** fieldNames, GPtrArray** fieldValues) c_webkit_form_submission_request_list_text_fields; ///
-  void function(WebKitFormSubmissionRequest* request) c_webkit_form_submission_request_submit; ///
-
-  // GeolocationManager
-  GType function() c_webkit_geolocation_manager_get_type; ///
-  void function(WebKitGeolocationManager* manager, const(char)* errorMessage) c_webkit_geolocation_manager_failed; ///
-  gboolean function(WebKitGeolocationManager* manager) c_webkit_geolocation_manager_get_enable_high_accuracy; ///
-  void function(WebKitGeolocationManager* manager, WebKitGeolocationPosition* position) c_webkit_geolocation_manager_update_position; ///
-
-  // GeolocationPermissionRequest
-  GType function() c_webkit_geolocation_permission_request_get_type; ///
-
-  // GeolocationPosition
-  GType function() c_webkit_geolocation_position_get_type; ///
-  WebKitGeolocationPosition* function(double latitude, double longitude, double accuracy) c_webkit_geolocation_position_new; ///
-  WebKitGeolocationPosition* function(WebKitGeolocationPosition* position) c_webkit_geolocation_position_copy; ///
-  void function(WebKitGeolocationPosition* position) c_webkit_geolocation_position_free; ///
-  void function(WebKitGeolocationPosition* position, double altitude) c_webkit_geolocation_position_set_altitude; ///
-  void function(WebKitGeolocationPosition* position, double altitudeAccuracy) c_webkit_geolocation_position_set_altitude_accuracy; ///
-  void function(WebKitGeolocationPosition* position, double heading) c_webkit_geolocation_position_set_heading; ///
-  void function(WebKitGeolocationPosition* position, double speed) c_webkit_geolocation_position_set_speed; ///
-  void function(WebKitGeolocationPosition* position, ulong timestamp) c_webkit_geolocation_position_set_timestamp; ///
-
-  // HitTestResult
-  GType function() c_webkit_hit_test_result_get_type; ///
-  gboolean function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_context_is_editable; ///
-  gboolean function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_context_is_image; ///
-  gboolean function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_context_is_link; ///
-  gboolean function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_context_is_media; ///
-  gboolean function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_context_is_scrollbar; ///
-  gboolean function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_context_is_selection; ///
-  uint function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_get_context; ///
-  const(char)* function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_get_image_uri; ///
-  const(char)* function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_get_link_label; ///
-  const(char)* function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_get_link_title; ///
-  const(char)* function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_get_link_uri; ///
-  const(char)* function(WebKitHitTestResult* hitTestResult) c_webkit_hit_test_result_get_media_uri; ///
-
-  // ITPFirstParty
-  GType function() c_webkit_itp_first_party_get_type; ///
-  const(char)* function(WebKitITPFirstParty* itpFirstParty) c_webkit_itp_first_party_get_domain; ///
-  GDateTime* function(WebKitITPFirstParty* itpFirstParty) c_webkit_itp_first_party_get_last_update_time; ///
-  gboolean function(WebKitITPFirstParty* itpFirstParty) c_webkit_itp_first_party_get_website_data_access_allowed; ///
-  WebKitITPFirstParty* function(WebKitITPFirstParty* itpFirstParty) c_webkit_itp_first_party_ref; ///
-  void function(WebKitITPFirstParty* itpFirstParty) c_webkit_itp_first_party_unref; ///
-
-  // ITPThirdParty
-  GType function() c_webkit_itp_third_party_get_type; ///
-  const(char)* function(WebKitITPThirdParty* itpThirdParty) c_webkit_itp_third_party_get_domain; ///
-  GList* function(WebKitITPThirdParty* itpThirdParty) c_webkit_itp_third_party_get_first_parties; ///
-  WebKitITPThirdParty* function(WebKitITPThirdParty* itpThirdParty) c_webkit_itp_third_party_ref; ///
-  void function(WebKitITPThirdParty* itpThirdParty) c_webkit_itp_third_party_unref; ///
-
-  // InputMethodContext
-  GType function() c_webkit_input_method_context_get_type; ///
-  gboolean function(WebKitInputMethodContext* context, GdkEvent* keyEvent) c_webkit_input_method_context_filter_key_event; ///
-  WebKitInputHints function(WebKitInputMethodContext* context) c_webkit_input_method_context_get_input_hints; ///
-  WebKitInputPurpose function(WebKitInputMethodContext* context) c_webkit_input_method_context_get_input_purpose; ///
-  void function(WebKitInputMethodContext* context, char** text, GList** underlines, uint* cursorOffset) c_webkit_input_method_context_get_preedit; ///
-  void function(WebKitInputMethodContext* context, int x, int y, int width, int height) c_webkit_input_method_context_notify_cursor_area; ///
-  void function(WebKitInputMethodContext* context) c_webkit_input_method_context_notify_focus_in; ///
-  void function(WebKitInputMethodContext* context) c_webkit_input_method_context_notify_focus_out; ///
-  void function(WebKitInputMethodContext* context, const(char)* text, int length, uint cursorIndex, uint selectionIndex) c_webkit_input_method_context_notify_surrounding; ///
-  void function(WebKitInputMethodContext* context) c_webkit_input_method_context_reset; ///
-  void function(WebKitInputMethodContext* context, gboolean enabled) c_webkit_input_method_context_set_enable_preedit; ///
-  void function(WebKitInputMethodContext* context, WebKitInputHints hints) c_webkit_input_method_context_set_input_hints; ///
-  void function(WebKitInputMethodContext* context, WebKitInputPurpose purpose) c_webkit_input_method_context_set_input_purpose; ///
-
-  // InputMethodUnderline
-  GType function() c_webkit_input_method_underline_get_type; ///
-  WebKitInputMethodUnderline* function(uint startOffset, uint endOffset) c_webkit_input_method_underline_new; ///
-  WebKitInputMethodUnderline* function(WebKitInputMethodUnderline* underline) c_webkit_input_method_underline_copy; ///
-  void function(WebKitInputMethodUnderline* underline) c_webkit_input_method_underline_free; ///
-  void function(WebKitInputMethodUnderline* underline, const(GdkRGBA)* rgba) c_webkit_input_method_underline_set_color; ///
-
-  // MediaKeySystemPermissionRequest
-  GType function() c_webkit_media_key_system_permission_request_get_type; ///
-
-  // MemoryPressureSettings
-  GType function() c_webkit_memory_pressure_settings_get_type; ///
-  WebKitMemoryPressureSettings* function() c_webkit_memory_pressure_settings_new; ///
-  WebKitMemoryPressureSettings* function(WebKitMemoryPressureSettings* settings) c_webkit_memory_pressure_settings_copy; ///
-  void function(WebKitMemoryPressureSettings* settings) c_webkit_memory_pressure_settings_free; ///
-  double function(WebKitMemoryPressureSettings* settings) c_webkit_memory_pressure_settings_get_conservative_threshold; ///
-  double function(WebKitMemoryPressureSettings* settings) c_webkit_memory_pressure_settings_get_kill_threshold; ///
-  uint function(WebKitMemoryPressureSettings* settings) c_webkit_memory_pressure_settings_get_memory_limit; ///
-  double function(WebKitMemoryPressureSettings* settings) c_webkit_memory_pressure_settings_get_poll_interval; ///
-  double function(WebKitMemoryPressureSettings* settings) c_webkit_memory_pressure_settings_get_strict_threshold; ///
-  void function(WebKitMemoryPressureSettings* settings, double value) c_webkit_memory_pressure_settings_set_conservative_threshold; ///
-  void function(WebKitMemoryPressureSettings* settings, double value) c_webkit_memory_pressure_settings_set_kill_threshold; ///
-  void function(WebKitMemoryPressureSettings* settings, uint memoryLimit) c_webkit_memory_pressure_settings_set_memory_limit; ///
-  void function(WebKitMemoryPressureSettings* settings, double value) c_webkit_memory_pressure_settings_set_poll_interval; ///
-  void function(WebKitMemoryPressureSettings* settings, double value) c_webkit_memory_pressure_settings_set_strict_threshold; ///
-
-  // NavigationAction
-  GType function() c_webkit_navigation_action_get_type; ///
-  WebKitNavigationAction* function(WebKitNavigationAction* navigation) c_webkit_navigation_action_copy; ///
-  void function(WebKitNavigationAction* navigation) c_webkit_navigation_action_free; ///
-  const(char)* function(WebKitNavigationAction* navigation) c_webkit_navigation_action_get_frame_name; ///
-  uint function(WebKitNavigationAction* navigation) c_webkit_navigation_action_get_modifiers; ///
-  uint function(WebKitNavigationAction* navigation) c_webkit_navigation_action_get_mouse_button; ///
-  WebKitNavigationType function(WebKitNavigationAction* navigation) c_webkit_navigation_action_get_navigation_type; ///
-  WebKitURIRequest* function(WebKitNavigationAction* navigation) c_webkit_navigation_action_get_request; ///
-  gboolean function(WebKitNavigationAction* navigation) c_webkit_navigation_action_is_redirect; ///
-  gboolean function(WebKitNavigationAction* navigation) c_webkit_navigation_action_is_user_gesture; ///
-
-  // NavigationPolicyDecision
-  GType function() c_webkit_navigation_policy_decision_get_type; ///
-  WebKitNavigationAction* function(WebKitNavigationPolicyDecision* decision) c_webkit_navigation_policy_decision_get_navigation_action; ///
-
-  // NetworkProxySettings
-  GType function() c_webkit_network_proxy_settings_get_type; ///
-  WebKitNetworkProxySettings* function(const(char)* defaultProxyUri, const(char*)* ignoreHosts) c_webkit_network_proxy_settings_new; ///
-  void function(WebKitNetworkProxySettings* proxySettings, const(char)* scheme, const(char)* proxyUri) c_webkit_network_proxy_settings_add_proxy_for_scheme; ///
-  WebKitNetworkProxySettings* function(WebKitNetworkProxySettings* proxySettings) c_webkit_network_proxy_settings_copy; ///
-  void function(WebKitNetworkProxySettings* proxySettings) c_webkit_network_proxy_settings_free; ///
-
-  // NetworkSession
-  GType function() c_webkit_network_session_get_type; ///
-  WebKitNetworkSession* function(const(char)* dataDirectory, const(char)* cacheDirectory) c_webkit_network_session_new; ///
-  WebKitNetworkSession* function() c_webkit_network_session_new_ephemeral; ///
-  WebKitNetworkSession* function() c_webkit_network_session_get_default; ///
-  void function(WebKitMemoryPressureSettings* settings) c_webkit_network_session_set_memory_pressure_settings; ///
-  void function(WebKitNetworkSession* session, GTlsCertificate* certificate, const(char)* host) c_webkit_network_session_allow_tls_certificate_for_host; ///
-  WebKitDownload* function(WebKitNetworkSession* session, const(char)* uri) c_webkit_network_session_download_uri; ///
-  WebKitCookieManager* function(WebKitNetworkSession* session) c_webkit_network_session_get_cookie_manager; ///
-  gboolean function(WebKitNetworkSession* session) c_webkit_network_session_get_itp_enabled; ///
-  void function(WebKitNetworkSession* session, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_network_session_get_itp_summary; ///
-  GList* function(WebKitNetworkSession* session, GAsyncResult* result, GError** _err) c_webkit_network_session_get_itp_summary_finish; ///
-  gboolean function(WebKitNetworkSession* session) c_webkit_network_session_get_persistent_credential_storage_enabled; ///
-  WebKitTLSErrorsPolicy function(WebKitNetworkSession* session) c_webkit_network_session_get_tls_errors_policy; ///
-  WebKitWebsiteDataManager* function(WebKitNetworkSession* session) c_webkit_network_session_get_website_data_manager; ///
-  gboolean function(WebKitNetworkSession* session) c_webkit_network_session_is_ephemeral; ///
-  void function(WebKitNetworkSession* session, const(char)* hostname) c_webkit_network_session_prefetch_dns; ///
-  void function(WebKitNetworkSession* session, gboolean enabled) c_webkit_network_session_set_itp_enabled; ///
-  void function(WebKitNetworkSession* session, gboolean enabled) c_webkit_network_session_set_persistent_credential_storage_enabled; ///
-  void function(WebKitNetworkSession* session, WebKitNetworkProxyMode proxyMode, WebKitNetworkProxySettings* proxySettings) c_webkit_network_session_set_proxy_settings; ///
-  void function(WebKitNetworkSession* session, WebKitTLSErrorsPolicy policy) c_webkit_network_session_set_tls_errors_policy; ///
-
-  // Notification
-  GType function() c_webkit_notification_get_type; ///
-  void function(WebKitNotification* notification) c_webkit_notification_clicked; ///
-  void function(WebKitNotification* notification) c_webkit_notification_close; ///
-  const(char)* function(WebKitNotification* notification) c_webkit_notification_get_body; ///
-  ulong function(WebKitNotification* notification) c_webkit_notification_get_id; ///
-  const(char)* function(WebKitNotification* notification) c_webkit_notification_get_tag; ///
-  const(char)* function(WebKitNotification* notification) c_webkit_notification_get_title; ///
-
-  // NotificationPermissionRequest
-  GType function() c_webkit_notification_permission_request_get_type; ///
-
-  // OptionMenu
-  GType function() c_webkit_option_menu_get_type; ///
-  void function(WebKitOptionMenu* menu, uint index) c_webkit_option_menu_activate_item; ///
-  void function(WebKitOptionMenu* menu) c_webkit_option_menu_close; ///
-  GdkEvent* function(WebKitOptionMenu* menu) c_webkit_option_menu_get_event; ///
-  WebKitOptionMenuItem* function(WebKitOptionMenu* menu, uint index) c_webkit_option_menu_get_item; ///
-  uint function(WebKitOptionMenu* menu) c_webkit_option_menu_get_n_items; ///
-  void function(WebKitOptionMenu* menu, uint index) c_webkit_option_menu_select_item; ///
-
-  // OptionMenuItem
-  GType function() c_webkit_option_menu_item_get_type; ///
-  WebKitOptionMenuItem* function(WebKitOptionMenuItem* item) c_webkit_option_menu_item_copy; ///
-  void function(WebKitOptionMenuItem* item) c_webkit_option_menu_item_free; ///
-  const(char)* function(WebKitOptionMenuItem* item) c_webkit_option_menu_item_get_label; ///
-  const(char)* function(WebKitOptionMenuItem* item) c_webkit_option_menu_item_get_tooltip; ///
-  gboolean function(WebKitOptionMenuItem* item) c_webkit_option_menu_item_is_enabled; ///
-  gboolean function(WebKitOptionMenuItem* item) c_webkit_option_menu_item_is_group_child; ///
-  gboolean function(WebKitOptionMenuItem* item) c_webkit_option_menu_item_is_group_label; ///
-  gboolean function(WebKitOptionMenuItem* item) c_webkit_option_menu_item_is_selected; ///
-
-  // PermissionRequest
-  GType function() c_webkit_permission_request_get_type; ///
-  void function(WebKitPermissionRequest* request) c_webkit_permission_request_allow; ///
-  void function(WebKitPermissionRequest* request) c_webkit_permission_request_deny; ///
-
-  // PermissionStateQuery
-  GType function() c_webkit_permission_state_query_get_type; ///
-  void function(WebKitPermissionStateQuery* query, WebKitPermissionState state) c_webkit_permission_state_query_finish; ///
-  const(char)* function(WebKitPermissionStateQuery* query) c_webkit_permission_state_query_get_name; ///
-  WebKitSecurityOrigin* function(WebKitPermissionStateQuery* query) c_webkit_permission_state_query_get_security_origin; ///
-  WebKitPermissionStateQuery* function(WebKitPermissionStateQuery* query) c_webkit_permission_state_query_ref; ///
-  void function(WebKitPermissionStateQuery* query) c_webkit_permission_state_query_unref; ///
-
-  // PointerLockPermissionRequest
-  GType function() c_webkit_pointer_lock_permission_request_get_type; ///
-
-  // PolicyDecision
-  GType function() c_webkit_policy_decision_get_type; ///
-  void function(WebKitPolicyDecision* decision) c_webkit_policy_decision_download; ///
-  void function(WebKitPolicyDecision* decision) c_webkit_policy_decision_ignore; ///
-  void function(WebKitPolicyDecision* decision) c_webkit_policy_decision_use; ///
-  void function(WebKitPolicyDecision* decision, WebKitWebsitePolicies* policies) c_webkit_policy_decision_use_with_policies; ///
-
-  // PrintOperation
-  GType function() c_webkit_print_operation_get_type; ///
-  WebKitPrintOperation* function(WebKitWebView* webView) c_webkit_print_operation_new; ///
-  GtkPageSetup* function(WebKitPrintOperation* printOperation) c_webkit_print_operation_get_page_setup; ///
-  GtkPrintSettings* function(WebKitPrintOperation* printOperation) c_webkit_print_operation_get_print_settings; ///
-  void function(WebKitPrintOperation* printOperation) c_webkit_print_operation_print; ///
-  WebKitPrintOperationResponse function(WebKitPrintOperation* printOperation, GtkWindow* parent) c_webkit_print_operation_run_dialog; ///
-  void function(WebKitPrintOperation* printOperation, GtkPageSetup* pageSetup) c_webkit_print_operation_set_page_setup; ///
-  void function(WebKitPrintOperation* printOperation, GtkPrintSettings* printSettings) c_webkit_print_operation_set_print_settings; ///
-
-  // ResponsePolicyDecision
-  GType function() c_webkit_response_policy_decision_get_type; ///
-  WebKitURIRequest* function(WebKitResponsePolicyDecision* decision) c_webkit_response_policy_decision_get_request; ///
-  WebKitURIResponse* function(WebKitResponsePolicyDecision* decision) c_webkit_response_policy_decision_get_response; ///
-  gboolean function(WebKitResponsePolicyDecision* decision) c_webkit_response_policy_decision_is_main_frame_main_resource; ///
-  gboolean function(WebKitResponsePolicyDecision* decision) c_webkit_response_policy_decision_is_mime_type_supported; ///
-
-  // ScriptDialog
-  GType function() c_webkit_script_dialog_get_type; ///
-  void function(WebKitScriptDialog* dialog) c_webkit_script_dialog_close; ///
-  void function(WebKitScriptDialog* dialog, gboolean confirmed) c_webkit_script_dialog_confirm_set_confirmed; ///
-  WebKitScriptDialogType function(WebKitScriptDialog* dialog) c_webkit_script_dialog_get_dialog_type; ///
-  const(char)* function(WebKitScriptDialog* dialog) c_webkit_script_dialog_get_message; ///
-  const(char)* function(WebKitScriptDialog* dialog) c_webkit_script_dialog_prompt_get_default_text; ///
-  void function(WebKitScriptDialog* dialog, const(char)* text) c_webkit_script_dialog_prompt_set_text; ///
-  WebKitScriptDialog* function(WebKitScriptDialog* dialog) c_webkit_script_dialog_ref; ///
-  void function(WebKitScriptDialog* dialog) c_webkit_script_dialog_unref; ///
-
-  // ScriptMessageReply
-  GType function() c_webkit_script_message_reply_get_type; ///
-  WebKitScriptMessageReply* function(WebKitScriptMessageReply* scriptMessageReply) c_webkit_script_message_reply_ref; ///
-  void function(WebKitScriptMessageReply* scriptMessageReply, const(char)* errorMessage) c_webkit_script_message_reply_return_error_message; ///
-  void function(WebKitScriptMessageReply* scriptMessageReply, JSCValue* replyValue) c_webkit_script_message_reply_return_value; ///
-  void function(WebKitScriptMessageReply* scriptMessageReply) c_webkit_script_message_reply_unref; ///
-
-  // SecurityManager
-  GType function() c_webkit_security_manager_get_type; ///
-  void function(WebKitSecurityManager* securityManager, const(char)* scheme) c_webkit_security_manager_register_uri_scheme_as_cors_enabled; ///
-  void function(WebKitSecurityManager* securityManager, const(char)* scheme) c_webkit_security_manager_register_uri_scheme_as_display_isolated; ///
-  void function(WebKitSecurityManager* securityManager, const(char)* scheme) c_webkit_security_manager_register_uri_scheme_as_empty_document; ///
-  void function(WebKitSecurityManager* securityManager, const(char)* scheme) c_webkit_security_manager_register_uri_scheme_as_local; ///
-  void function(WebKitSecurityManager* securityManager, const(char)* scheme) c_webkit_security_manager_register_uri_scheme_as_no_access; ///
-  void function(WebKitSecurityManager* securityManager, const(char)* scheme) c_webkit_security_manager_register_uri_scheme_as_secure; ///
-  gboolean function(WebKitSecurityManager* securityManager, const(char)* scheme) c_webkit_security_manager_uri_scheme_is_cors_enabled; ///
-  gboolean function(WebKitSecurityManager* securityManager, const(char)* scheme) c_webkit_security_manager_uri_scheme_is_display_isolated; ///
-  gboolean function(WebKitSecurityManager* securityManager, const(char)* scheme) c_webkit_security_manager_uri_scheme_is_empty_document; ///
-  gboolean function(WebKitSecurityManager* securityManager, const(char)* scheme) c_webkit_security_manager_uri_scheme_is_local; ///
-  gboolean function(WebKitSecurityManager* securityManager, const(char)* scheme) c_webkit_security_manager_uri_scheme_is_no_access; ///
-  gboolean function(WebKitSecurityManager* securityManager, const(char)* scheme) c_webkit_security_manager_uri_scheme_is_secure; ///
-
-  // SecurityOrigin
-  GType function() c_webkit_security_origin_get_type; ///
-  WebKitSecurityOrigin* function(const(char)* protocol, const(char)* host, ushort port) c_webkit_security_origin_new; ///
-  WebKitSecurityOrigin* function(const(char)* uri) c_webkit_security_origin_new_for_uri; ///
-  const(char)* function(WebKitSecurityOrigin* origin) c_webkit_security_origin_get_host; ///
-  ushort function(WebKitSecurityOrigin* origin) c_webkit_security_origin_get_port; ///
-  const(char)* function(WebKitSecurityOrigin* origin) c_webkit_security_origin_get_protocol; ///
-  WebKitSecurityOrigin* function(WebKitSecurityOrigin* origin) c_webkit_security_origin_ref; ///
-  char* function(WebKitSecurityOrigin* origin) c_webkit_security_origin_to_string; ///
-  void function(WebKitSecurityOrigin* origin) c_webkit_security_origin_unref; ///
-
-  // Settings
-  GType function() c_webkit_settings_get_type; ///
-  WebKitSettings* function() c_webkit_settings_new; ///
-  WebKitSettings* function(const(char)* firstSettingName,  ...) c_webkit_settings_new_with_settings; ///
-  uint function(uint points) c_webkit_settings_font_size_to_pixels; ///
-  uint function(uint pixels) c_webkit_settings_font_size_to_points; ///
-  WebKitFeatureList* function() c_webkit_settings_get_all_features; ///
-  WebKitFeatureList* function() c_webkit_settings_get_development_features; ///
-  WebKitFeatureList* function() c_webkit_settings_get_experimental_features; ///
-  gboolean function(WebKitSettings* settings, GKeyFile* keyFile, const(char)* groupName, GError** _err) c_webkit_settings_apply_from_key_file; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_allow_file_access_from_file_urls; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_allow_modal_dialogs; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_allow_top_navigation_to_data_urls; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_allow_universal_access_from_file_urls; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_auto_load_images; ///
-  const(char)* function(WebKitSettings* settings) c_webkit_settings_get_cursive_font_family; ///
-  const(char)* function(WebKitSettings* settings) c_webkit_settings_get_default_charset; ///
-  const(char)* function(WebKitSettings* settings) c_webkit_settings_get_default_font_family; ///
-  uint function(WebKitSettings* settings) c_webkit_settings_get_default_font_size; ///
-  uint function(WebKitSettings* settings) c_webkit_settings_get_default_monospace_font_size; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_disable_web_security; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_draw_compositing_indicators; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_2d_canvas_acceleration; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_back_forward_navigation_gestures; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_caret_browsing; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_developer_extras; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_dns_prefetching; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_encrypted_media; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_fullscreen; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_html5_database; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_html5_local_storage; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_hyperlink_auditing; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_javascript; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_javascript_markup; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_media; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_media_capabilities; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_media_stream; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_mediasource; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_mock_capture_devices; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_offline_web_application_cache; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_page_cache; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_resizable_text_areas; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_site_specific_quirks; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_smooth_scrolling; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_spatial_navigation; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_tabs_to_links; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_webaudio; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_webgl; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_webrtc; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_enable_write_console_messages_to_stdout; ///
-  const(char)* function(WebKitSettings* settings) c_webkit_settings_get_fantasy_font_family; ///
-  gboolean function(WebKitSettings* settings, WebKitFeature* feature) c_webkit_settings_get_feature_enabled; ///
-  WebKitHardwareAccelerationPolicy function(WebKitSettings* settings) c_webkit_settings_get_hardware_acceleration_policy; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_javascript_can_access_clipboard; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_javascript_can_open_windows_automatically; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_load_icons_ignoring_image_load_setting; ///
-  const(char)* function(WebKitSettings* settings) c_webkit_settings_get_math_font_family; ///
-  const(char)* function(WebKitSettings* settings) c_webkit_settings_get_media_content_types_requiring_hardware_support; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_media_playback_allows_inline; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_media_playback_requires_user_gesture; ///
-  uint function(WebKitSettings* settings) c_webkit_settings_get_minimum_font_size; ///
-  const(char)* function(WebKitSettings* settings) c_webkit_settings_get_monospace_font_family; ///
-  const(char)* function(WebKitSettings* settings) c_webkit_settings_get_pictograph_font_family; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_print_backgrounds; ///
-  const(char)* function(WebKitSettings* settings) c_webkit_settings_get_sans_serif_font_family; ///
-  const(char)* function(WebKitSettings* settings) c_webkit_settings_get_serif_font_family; ///
-  const(char)* function(WebKitSettings* settings) c_webkit_settings_get_user_agent; ///
-  const(char)* function(WebKitSettings* settings) c_webkit_settings_get_webrtc_udp_ports_range; ///
-  gboolean function(WebKitSettings* settings) c_webkit_settings_get_zoom_text_only; ///
-  void function(WebKitSettings* settings, gboolean allowed) c_webkit_settings_set_allow_file_access_from_file_urls; ///
-  void function(WebKitSettings* settings, gboolean allowed) c_webkit_settings_set_allow_modal_dialogs; ///
-  void function(WebKitSettings* settings, gboolean allowed) c_webkit_settings_set_allow_top_navigation_to_data_urls; ///
-  void function(WebKitSettings* settings, gboolean allowed) c_webkit_settings_set_allow_universal_access_from_file_urls; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_auto_load_images; ///
-  void function(WebKitSettings* settings, const(char)* cursiveFontFamily) c_webkit_settings_set_cursive_font_family; ///
-  void function(WebKitSettings* settings, const(char)* defaultCharset) c_webkit_settings_set_default_charset; ///
-  void function(WebKitSettings* settings, const(char)* defaultFontFamily) c_webkit_settings_set_default_font_family; ///
-  void function(WebKitSettings* settings, uint fontSize) c_webkit_settings_set_default_font_size; ///
-  void function(WebKitSettings* settings, uint fontSize) c_webkit_settings_set_default_monospace_font_size; ///
-  void function(WebKitSettings* settings, gboolean disabled) c_webkit_settings_set_disable_web_security; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_draw_compositing_indicators; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_2d_canvas_acceleration; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_back_forward_navigation_gestures; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_caret_browsing; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_developer_extras; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_dns_prefetching; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_encrypted_media; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_fullscreen; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_html5_database; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_html5_local_storage; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_hyperlink_auditing; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_javascript; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_javascript_markup; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_media; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_media_capabilities; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_media_stream; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_mediasource; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_mock_capture_devices; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_offline_web_application_cache; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_page_cache; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_resizable_text_areas; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_site_specific_quirks; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_smooth_scrolling; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_spatial_navigation; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_tabs_to_links; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_webaudio; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_webgl; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_webrtc; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_enable_write_console_messages_to_stdout; ///
-  void function(WebKitSettings* settings, const(char)* fantasyFontFamily) c_webkit_settings_set_fantasy_font_family; ///
-  void function(WebKitSettings* settings, WebKitFeature* feature, gboolean enabled) c_webkit_settings_set_feature_enabled; ///
-  void function(WebKitSettings* settings, WebKitHardwareAccelerationPolicy policy) c_webkit_settings_set_hardware_acceleration_policy; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_javascript_can_access_clipboard; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_javascript_can_open_windows_automatically; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_load_icons_ignoring_image_load_setting; ///
-  void function(WebKitSettings* settings, const(char)* mathFontFamily) c_webkit_settings_set_math_font_family; ///
-  void function(WebKitSettings* settings, const(char)* contentTypes) c_webkit_settings_set_media_content_types_requiring_hardware_support; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_media_playback_allows_inline; ///
-  void function(WebKitSettings* settings, gboolean enabled) c_webkit_settings_set_media_playback_requires_user_gesture; ///
-  void function(WebKitSettings* settings, uint fontSize) c_webkit_settings_set_minimum_font_size; ///
-  void function(WebKitSettings* settings, const(char)* monospaceFontFamily) c_webkit_settings_set_monospace_font_family; ///
-  void function(WebKitSettings* settings, const(char)* pictographFontFamily) c_webkit_settings_set_pictograph_font_family; ///
-  void function(WebKitSettings* settings, gboolean printBackgrounds) c_webkit_settings_set_print_backgrounds; ///
-  void function(WebKitSettings* settings, const(char)* sansSerifFontFamily) c_webkit_settings_set_sans_serif_font_family; ///
-  void function(WebKitSettings* settings, const(char)* serifFontFamily) c_webkit_settings_set_serif_font_family; ///
-  void function(WebKitSettings* settings, const(char)* userAgent) c_webkit_settings_set_user_agent; ///
-  void function(WebKitSettings* settings, const(char)* applicationName, const(char)* applicationVersion) c_webkit_settings_set_user_agent_with_application_details; ///
-  void function(WebKitSettings* settings, const(char)* udpPortRange) c_webkit_settings_set_webrtc_udp_ports_range; ///
-  void function(WebKitSettings* settings, gboolean zoomTextOnly) c_webkit_settings_set_zoom_text_only; ///
-
-  // URIRequest
-  GType function() c_webkit_uri_request_get_type; ///
-  WebKitURIRequest* function(const(char)* uri) c_webkit_uri_request_new; ///
-  SoupMessageHeaders* function(WebKitURIRequest* request) c_webkit_uri_request_get_http_headers; ///
-  const(char)* function(WebKitURIRequest* request) c_webkit_uri_request_get_http_method; ///
-  const(char)* function(WebKitURIRequest* request) c_webkit_uri_request_get_uri; ///
-  void function(WebKitURIRequest* request, const(char)* uri) c_webkit_uri_request_set_uri; ///
-
-  // URIResponse
-  GType function() c_webkit_uri_response_get_type; ///
-  ulong function(WebKitURIResponse* response) c_webkit_uri_response_get_content_length; ///
-  SoupMessageHeaders* function(WebKitURIResponse* response) c_webkit_uri_response_get_http_headers; ///
-  const(char)* function(WebKitURIResponse* response) c_webkit_uri_response_get_mime_type; ///
-  uint function(WebKitURIResponse* response) c_webkit_uri_response_get_status_code; ///
-  const(char)* function(WebKitURIResponse* response) c_webkit_uri_response_get_suggested_filename; ///
-  const(char)* function(WebKitURIResponse* response) c_webkit_uri_response_get_uri; ///
-
-  // URISchemeRequest
-  GType function() c_webkit_uri_scheme_request_get_type; ///
-  void function(WebKitURISchemeRequest* request, GInputStream* stream, long streamLength, const(char)* contentType) c_webkit_uri_scheme_request_finish; ///
-  void function(WebKitURISchemeRequest* request, GError* error) c_webkit_uri_scheme_request_finish_error; ///
-  void function(WebKitURISchemeRequest* request, WebKitURISchemeResponse* response) c_webkit_uri_scheme_request_finish_with_response; ///
-  GInputStream* function(WebKitURISchemeRequest* request) c_webkit_uri_scheme_request_get_http_body; ///
-  SoupMessageHeaders* function(WebKitURISchemeRequest* request) c_webkit_uri_scheme_request_get_http_headers; ///
-  const(char)* function(WebKitURISchemeRequest* request) c_webkit_uri_scheme_request_get_http_method; ///
-  const(char)* function(WebKitURISchemeRequest* request) c_webkit_uri_scheme_request_get_path; ///
-  const(char)* function(WebKitURISchemeRequest* request) c_webkit_uri_scheme_request_get_scheme; ///
-  const(char)* function(WebKitURISchemeRequest* request) c_webkit_uri_scheme_request_get_uri; ///
-  WebKitWebView* function(WebKitURISchemeRequest* request) c_webkit_uri_scheme_request_get_web_view; ///
-
-  // URISchemeResponse
-  GType function() c_webkit_uri_scheme_response_get_type; ///
-  WebKitURISchemeResponse* function(GInputStream* inputStream, long streamLength) c_webkit_uri_scheme_response_new; ///
-  void function(WebKitURISchemeResponse* response, const(char)* contentType) c_webkit_uri_scheme_response_set_content_type; ///
-  void function(WebKitURISchemeResponse* response, SoupMessageHeaders* headers) c_webkit_uri_scheme_response_set_http_headers; ///
-  void function(WebKitURISchemeResponse* response, uint statusCode, const(char)* reasonPhrase) c_webkit_uri_scheme_response_set_status; ///
-
-  // UserContentFilter
-  GType function() c_webkit_user_content_filter_get_type; ///
-  const(char)* function(WebKitUserContentFilter* userContentFilter) c_webkit_user_content_filter_get_identifier; ///
-  WebKitUserContentFilter* function(WebKitUserContentFilter* userContentFilter) c_webkit_user_content_filter_ref; ///
-  void function(WebKitUserContentFilter* userContentFilter) c_webkit_user_content_filter_unref; ///
-
-  // UserContentFilterStore
-  GType function() c_webkit_user_content_filter_store_get_type; ///
-  WebKitUserContentFilterStore* function(const(char)* storagePath) c_webkit_user_content_filter_store_new; ///
-  void function(WebKitUserContentFilterStore* store, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_user_content_filter_store_fetch_identifiers; ///
-  char** function(WebKitUserContentFilterStore* store, GAsyncResult* result) c_webkit_user_content_filter_store_fetch_identifiers_finish; ///
-  const(char)* function(WebKitUserContentFilterStore* store) c_webkit_user_content_filter_store_get_path; ///
-  void function(WebKitUserContentFilterStore* store, const(char)* identifier, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_user_content_filter_store_load; ///
-  WebKitUserContentFilter* function(WebKitUserContentFilterStore* store, GAsyncResult* result, GError** _err) c_webkit_user_content_filter_store_load_finish; ///
-  void function(WebKitUserContentFilterStore* store, const(char)* identifier, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_user_content_filter_store_remove; ///
-  gboolean function(WebKitUserContentFilterStore* store, GAsyncResult* result, GError** _err) c_webkit_user_content_filter_store_remove_finish; ///
-  void function(WebKitUserContentFilterStore* store, const(char)* identifier, GBytes* source, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_user_content_filter_store_save; ///
-  WebKitUserContentFilter* function(WebKitUserContentFilterStore* store, GAsyncResult* result, GError** _err) c_webkit_user_content_filter_store_save_finish; ///
-  void function(WebKitUserContentFilterStore* store, const(char)* identifier, GFile* file, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_user_content_filter_store_save_from_file; ///
-  WebKitUserContentFilter* function(WebKitUserContentFilterStore* store, GAsyncResult* result, GError** _err) c_webkit_user_content_filter_store_save_from_file_finish; ///
-
-  // UserContentManager
-  GType function() c_webkit_user_content_manager_get_type; ///
-  WebKitUserContentManager* function() c_webkit_user_content_manager_new; ///
-  void function(WebKitUserContentManager* manager, WebKitUserContentFilter* filter) c_webkit_user_content_manager_add_filter; ///
-  void function(WebKitUserContentManager* manager, WebKitUserScript* script) c_webkit_user_content_manager_add_script; ///
-  void function(WebKitUserContentManager* manager, WebKitUserStyleSheet* stylesheet) c_webkit_user_content_manager_add_style_sheet; ///
-  gboolean function(WebKitUserContentManager* manager, const(char)* name, const(char)* worldName) c_webkit_user_content_manager_register_script_message_handler; ///
-  gboolean function(WebKitUserContentManager* manager, const(char)* name, const(char)* worldName) c_webkit_user_content_manager_register_script_message_handler_with_reply; ///
-  void function(WebKitUserContentManager* manager) c_webkit_user_content_manager_remove_all_filters; ///
-  void function(WebKitUserContentManager* manager) c_webkit_user_content_manager_remove_all_scripts; ///
-  void function(WebKitUserContentManager* manager) c_webkit_user_content_manager_remove_all_style_sheets; ///
-  void function(WebKitUserContentManager* manager, WebKitUserContentFilter* filter) c_webkit_user_content_manager_remove_filter; ///
-  void function(WebKitUserContentManager* manager, const(char)* filterId) c_webkit_user_content_manager_remove_filter_by_id; ///
-  void function(WebKitUserContentManager* manager, WebKitUserScript* script) c_webkit_user_content_manager_remove_script; ///
-  void function(WebKitUserContentManager* manager, WebKitUserStyleSheet* stylesheet) c_webkit_user_content_manager_remove_style_sheet; ///
-  void function(WebKitUserContentManager* manager, const(char)* name, const(char)* worldName) c_webkit_user_content_manager_unregister_script_message_handler; ///
-
-  // UserMediaPermissionRequest
-  GType function() c_webkit_user_media_permission_request_get_type; ///
-
-  // UserMessage
-  GType function() c_webkit_user_message_get_type; ///
-  WebKitUserMessage* function(const(char)* name, GVariant* parameters) c_webkit_user_message_new; ///
-  WebKitUserMessage* function(const(char)* name, GVariant* parameters, GUnixFDList* fdList) c_webkit_user_message_new_with_fd_list; ///
-  GUnixFDList* function(WebKitUserMessage* message) c_webkit_user_message_get_fd_list; ///
-  const(char)* function(WebKitUserMessage* message) c_webkit_user_message_get_name; ///
-  GVariant* function(WebKitUserMessage* message) c_webkit_user_message_get_parameters; ///
-  void function(WebKitUserMessage* message, WebKitUserMessage* reply) c_webkit_user_message_send_reply; ///
-
-  // UserScript
-  GType function() c_webkit_user_script_get_type; ///
-  WebKitUserScript* function(const(char)* source, WebKitUserContentInjectedFrames injectedFrames, WebKitUserScriptInjectionTime injectionTime, const(char*)* allowList, const(char*)* blockList) c_webkit_user_script_new; ///
-  WebKitUserScript* function(const(char)* source, WebKitUserContentInjectedFrames injectedFrames, WebKitUserScriptInjectionTime injectionTime, const(char)* worldName, const(char*)* allowList, const(char*)* blockList) c_webkit_user_script_new_for_world; ///
-  WebKitUserScript* function(WebKitUserScript* userScript) c_webkit_user_script_ref; ///
-  void function(WebKitUserScript* userScript) c_webkit_user_script_unref; ///
-
-  // UserStyleSheet
-  GType function() c_webkit_user_style_sheet_get_type; ///
-  WebKitUserStyleSheet* function(const(char)* source, WebKitUserContentInjectedFrames injectedFrames, WebKitUserStyleLevel level, const(char*)* allowList, const(char*)* blockList) c_webkit_user_style_sheet_new; ///
-  WebKitUserStyleSheet* function(const(char)* source, WebKitUserContentInjectedFrames injectedFrames, WebKitUserStyleLevel level, const(char)* worldName, const(char*)* allowList, const(char*)* blockList) c_webkit_user_style_sheet_new_for_world; ///
-  WebKitUserStyleSheet* function(WebKitUserStyleSheet* userStyleSheet) c_webkit_user_style_sheet_ref; ///
-  void function(WebKitUserStyleSheet* userStyleSheet) c_webkit_user_style_sheet_unref; ///
-
-  // WebContext
-  GType function() c_webkit_web_context_get_type; ///
-  WebKitWebContext* function() c_webkit_web_context_new; ///
-  WebKitWebContext* function() c_webkit_web_context_get_default; ///
-  void function(WebKitWebContext* context, const(char)* path, gboolean readOnly) c_webkit_web_context_add_path_to_sandbox; ///
-  WebKitCacheModel function(WebKitWebContext* context) c_webkit_web_context_get_cache_model; ///
-  WebKitGeolocationManager* function(WebKitWebContext* context) c_webkit_web_context_get_geolocation_manager; ///
-  WebKitNetworkSession* function(WebKitWebContext* context) c_webkit_web_context_get_network_session_for_automation; ///
-  WebKitSecurityManager* function(WebKitWebContext* context) c_webkit_web_context_get_security_manager; ///
-  gboolean function(WebKitWebContext* context) c_webkit_web_context_get_spell_checking_enabled; ///
-  const(char*)* function(WebKitWebContext* context) c_webkit_web_context_get_spell_checking_languages; ///
-  const(char)* function(WebKitWebContext* context) c_webkit_web_context_get_time_zone_override; ///
-  void function(WebKitWebContext* context, GList* allowedOrigins, GList* disallowedOrigins) c_webkit_web_context_initialize_notification_permissions; ///
-  gboolean function(WebKitWebContext* context) c_webkit_web_context_is_automation_allowed; ///
-  void function(WebKitWebContext* context, const(char)* scheme, WebKitURISchemeRequestCallback callback, void* userData, GDestroyNotify userDataDestroyFunc) c_webkit_web_context_register_uri_scheme; ///
-  void function(WebKitWebContext* context, WebKitUserMessage* message) c_webkit_web_context_send_message_to_all_extensions; ///
-  void function(WebKitWebContext* context, gboolean allowed) c_webkit_web_context_set_automation_allowed; ///
-  void function(WebKitWebContext* context, WebKitCacheModel cacheModel) c_webkit_web_context_set_cache_model; ///
-  void function(WebKitWebContext* context, const(char*)* languages) c_webkit_web_context_set_preferred_languages; ///
-  void function(WebKitWebContext* context, gboolean enabled) c_webkit_web_context_set_spell_checking_enabled; ///
-  void function(WebKitWebContext* context, const(char*)* languages) c_webkit_web_context_set_spell_checking_languages; ///
-  void function(WebKitWebContext* context, const(char)* directory) c_webkit_web_context_set_web_process_extensions_directory; ///
-  void function(WebKitWebContext* context, GVariant* userData) c_webkit_web_context_set_web_process_extensions_initialization_user_data; ///
-
-  // WebExtension
-  GType function() c_webkit_web_extension_get_type; ///
-  WebKitWebExtension* function(const(char)* extensionPath, GError** _err) c_webkit_web_extension_new; ///
-  GIcon* function(WebKitWebExtension* extension, double width, double height) c_webkit_web_extension_get_action_icon; ///
-  WebKitWebExtensionMatchPattern** function(WebKitWebExtension* extension) c_webkit_web_extension_get_all_requested_match_patterns; ///
-  const(char)* function(WebKitWebExtension* extension) c_webkit_web_extension_get_default_locale; ///
-  const(char)* function(WebKitWebExtension* extension) c_webkit_web_extension_get_display_action_label; ///
-  const(char)* function(WebKitWebExtension* extension) c_webkit_web_extension_get_display_description; ///
-  const(char)* function(WebKitWebExtension* extension) c_webkit_web_extension_get_display_name; ///
-  const(char)* function(WebKitWebExtension* extension) c_webkit_web_extension_get_display_short_name; ///
-  const(char)* function(WebKitWebExtension* extension) c_webkit_web_extension_get_display_version; ///
-  gboolean function(WebKitWebExtension* extension) c_webkit_web_extension_get_has_background_content; ///
-  gboolean function(WebKitWebExtension* extension) c_webkit_web_extension_get_has_commands; ///
-  gboolean function(WebKitWebExtension* extension) c_webkit_web_extension_get_has_content_modification_rules; ///
-  gboolean function(WebKitWebExtension* extension) c_webkit_web_extension_get_has_injected_content; ///
-  gboolean function(WebKitWebExtension* extension) c_webkit_web_extension_get_has_options_page; ///
-  gboolean function(WebKitWebExtension* extension) c_webkit_web_extension_get_has_override_new_tab_page; ///
-  gboolean function(WebKitWebExtension* extension) c_webkit_web_extension_get_has_persistent_background_content; ///
-  GIcon* function(WebKitWebExtension* extension, double width, double height) c_webkit_web_extension_get_icon; ///
-  double function(WebKitWebExtension* extension) c_webkit_web_extension_get_manifest_version; ///
-  WebKitWebExtensionMatchPattern** function(WebKitWebExtension* extension) c_webkit_web_extension_get_optional_permission_match_patterns; ///
-  const(char*)* function(WebKitWebExtension* extension) c_webkit_web_extension_get_optional_permissions; ///
-  const(char)* function(WebKitWebExtension* extension) c_webkit_web_extension_get_path; ///
-  WebKitWebExtensionMatchPattern** function(WebKitWebExtension* extension) c_webkit_web_extension_get_requested_permission_match_patterns; ///
-  const(char*)* function(WebKitWebExtension* extension) c_webkit_web_extension_get_requested_permissions; ///
-  const(char)* function(WebKitWebExtension* extension) c_webkit_web_extension_get_version; ///
-  gboolean function(WebKitWebExtension* extension, double manifestVersion) c_webkit_web_extension_supports_manifest_version; ///
-
-  // WebExtensionMatchPattern
-  GType function() c_webkit_web_extension_match_pattern_get_type; ///
-  WebKitWebExtensionMatchPattern* function() c_webkit_web_extension_match_pattern_new_all_hosts_and_schemes; ///
-  WebKitWebExtensionMatchPattern* function() c_webkit_web_extension_match_pattern_new_all_urls; ///
-  WebKitWebExtensionMatchPattern* function(const(char)* scheme, const(char)* host, const(char)* path, GError** _err) c_webkit_web_extension_match_pattern_new_with_scheme; ///
-  WebKitWebExtensionMatchPattern* function(const(char)* string_, GError** _err) c_webkit_web_extension_match_pattern_new_with_string; ///
-  const(char)* function(WebKitWebExtensionMatchPattern* matchPattern) c_webkit_web_extension_match_pattern_get_host; ///
-  gboolean function(WebKitWebExtensionMatchPattern* matchPattern) c_webkit_web_extension_match_pattern_get_matches_all_hosts; ///
-  gboolean function(WebKitWebExtensionMatchPattern* matchPattern) c_webkit_web_extension_match_pattern_get_matches_all_urls; ///
-  const(char)* function(WebKitWebExtensionMatchPattern* matchPattern) c_webkit_web_extension_match_pattern_get_path; ///
-  const(char)* function(WebKitWebExtensionMatchPattern* matchPattern) c_webkit_web_extension_match_pattern_get_scheme; ///
-  const(char)* function(WebKitWebExtensionMatchPattern* matchPattern) c_webkit_web_extension_match_pattern_get_string; ///
-  gboolean function(WebKitWebExtensionMatchPattern* matchPattern, WebKitWebExtensionMatchPattern* pattern, WebKitWebExtensionMatchPatternOptions options) c_webkit_web_extension_match_pattern_matches_pattern; ///
-  gboolean function(WebKitWebExtensionMatchPattern* matchPattern, const(char)* url, WebKitWebExtensionMatchPatternOptions options) c_webkit_web_extension_match_pattern_matches_url; ///
-  WebKitWebExtensionMatchPattern* function(WebKitWebExtensionMatchPattern* matchPattern) c_webkit_web_extension_match_pattern_ref; ///
-  void function(WebKitWebExtensionMatchPattern* matchPattern) c_webkit_web_extension_match_pattern_unref; ///
-  void function(const(char)* urlScheme) c_webkit_web_extension_match_pattern_register_custom_URL_scheme; ///
-  void function(const(char)* urlScheme) c_webkit_web_extension_match_pattern_register_custom_url_scheme; ///
-
-  // WebInspector
-  GType function() c_webkit_web_inspector_get_type; ///
-  void function(WebKitWebInspector* inspector) c_webkit_web_inspector_attach; ///
-  void function(WebKitWebInspector* inspector) c_webkit_web_inspector_close; ///
-  void function(WebKitWebInspector* inspector) c_webkit_web_inspector_detach; ///
-  uint function(WebKitWebInspector* inspector) c_webkit_web_inspector_get_attached_height; ///
-  gboolean function(WebKitWebInspector* inspector) c_webkit_web_inspector_get_can_attach; ///
-  const(char)* function(WebKitWebInspector* inspector) c_webkit_web_inspector_get_inspected_uri; ///
-  WebKitWebViewBase* function(WebKitWebInspector* inspector) c_webkit_web_inspector_get_web_view; ///
-  gboolean function(WebKitWebInspector* inspector) c_webkit_web_inspector_is_attached; ///
-  void function(WebKitWebInspector* inspector) c_webkit_web_inspector_show; ///
-
-  // WebResource
-  GType function() c_webkit_web_resource_get_type; ///
-  void function(WebKitWebResource* resource, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_web_resource_get_data; ///
-  ubyte* function(WebKitWebResource* resource, GAsyncResult* result, size_t* length, GError** _err) c_webkit_web_resource_get_data_finish; ///
-  WebKitURIResponse* function(WebKitWebResource* resource) c_webkit_web_resource_get_response; ///
-  const(char)* function(WebKitWebResource* resource) c_webkit_web_resource_get_uri; ///
-
-  // WebView
-  GType function() c_webkit_web_view_get_type; ///
-  GtkWidget* function() c_webkit_web_view_new; ///
-  void function(WebKitWebView* webView, const(char)* body_, ptrdiff_t length, GVariant* arguments, const(char)* worldName, const(char)* sourceUri, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_web_view_call_async_javascript_function; ///
-  JSCValue* function(WebKitWebView* webView, GAsyncResult* result, GError** _err) c_webkit_web_view_call_async_javascript_function_finish; ///
-  void function(WebKitWebView* webView, const(char)* command, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_web_view_can_execute_editing_command; ///
-  gboolean function(WebKitWebView* webView, GAsyncResult* result, GError** _err) c_webkit_web_view_can_execute_editing_command_finish; ///
-  gboolean function(WebKitWebView* webView) c_webkit_web_view_can_go_back; ///
-  gboolean function(WebKitWebView* webView) c_webkit_web_view_can_go_forward; ///
-  gboolean function(WebKitWebView* webView, const(char)* mimeType) c_webkit_web_view_can_show_mime_type; ///
-  WebKitDownload* function(WebKitWebView* webView, const(char)* uri) c_webkit_web_view_download_uri; ///
-  void function(WebKitWebView* webView, const(char)* script, ptrdiff_t length, const(char)* worldName, const(char)* sourceUri, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_web_view_evaluate_javascript; ///
-  JSCValue* function(WebKitWebView* webView, GAsyncResult* result, GError** _err) c_webkit_web_view_evaluate_javascript_finish; ///
-  void function(WebKitWebView* webView, const(char)* command) c_webkit_web_view_execute_editing_command; ///
-  void function(WebKitWebView* webView, const(char)* command, const(char)* argument) c_webkit_web_view_execute_editing_command_with_argument; ///
-  WebKitAutomationBrowsingContextPresentation function(WebKitWebView* webView) c_webkit_web_view_get_automation_presentation_type; ///
-  WebKitBackForwardList* function(WebKitWebView* webView) c_webkit_web_view_get_back_forward_list; ///
-  void function(WebKitWebView* webView, GdkRGBA* rgba) c_webkit_web_view_get_background_color; ///
-  WebKitMediaCaptureState function(WebKitWebView* webView) c_webkit_web_view_get_camera_capture_state; ///
-  WebKitWebContext* function(WebKitWebView* webView) c_webkit_web_view_get_context; ///
-  const(char)* function(WebKitWebView* webView) c_webkit_web_view_get_custom_charset; ///
-  const(char)* function(WebKitWebView* webView) c_webkit_web_view_get_default_content_security_policy; ///
-  WebKitMediaCaptureState function(WebKitWebView* webView) c_webkit_web_view_get_display_capture_state; ///
-  WebKitEditorState* function(WebKitWebView* webView) c_webkit_web_view_get_editor_state; ///
-  double function(WebKitWebView* webView) c_webkit_web_view_get_estimated_load_progress; ///
-  GdkTexture* function(WebKitWebView* webView) c_webkit_web_view_get_favicon; ///
-  WebKitFindController* function(WebKitWebView* webView) c_webkit_web_view_get_find_controller; ///
-  WebKitInputMethodContext* function(WebKitWebView* webView) c_webkit_web_view_get_input_method_context; ///
-  WebKitWebInspector* function(WebKitWebView* webView) c_webkit_web_view_get_inspector; ///
-  gboolean function(WebKitWebView* webView) c_webkit_web_view_get_is_muted; ///
-  gboolean function(WebKitWebView* webView) c_webkit_web_view_get_is_web_process_responsive; ///
-  WebKitWebResource* function(WebKitWebView* webView) c_webkit_web_view_get_main_resource; ///
-  WebKitMediaCaptureState function(WebKitWebView* webView) c_webkit_web_view_get_microphone_capture_state; ///
-  WebKitNetworkSession* function(WebKitWebView* webView) c_webkit_web_view_get_network_session; ///
-  ulong function(WebKitWebView* webView) c_webkit_web_view_get_page_id; ///
-  WebKitWebViewSessionState* function(WebKitWebView* webView) c_webkit_web_view_get_session_state; ///
-  WebKitSettings* function(WebKitWebView* webView) c_webkit_web_view_get_settings; ///
-  void function(WebKitWebView* webView, WebKitSnapshotRegion region, WebKitSnapshotOptions options, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_web_view_get_snapshot; ///
-  GdkTexture* function(WebKitWebView* webView, GAsyncResult* result, GError** _err) c_webkit_web_view_get_snapshot_finish; ///
-  gboolean function(WebKitWebView* webView, GdkRGBA* rgba) c_webkit_web_view_get_theme_color; ///
-  const(char)* function(WebKitWebView* webView) c_webkit_web_view_get_title; ///
-  gboolean function(WebKitWebView* webView, GTlsCertificate** certificate, GTlsCertificateFlags* errors) c_webkit_web_view_get_tls_info; ///
-  const(char)* function(WebKitWebView* webView) c_webkit_web_view_get_uri; ///
-  WebKitUserContentManager* function(WebKitWebView* webView) c_webkit_web_view_get_user_content_manager; ///
-  WebKitWebExtensionMode function(WebKitWebView* webView) c_webkit_web_view_get_web_extension_mode; ///
-  WebKitWebsitePolicies* function(WebKitWebView* webView) c_webkit_web_view_get_website_policies; ///
-  WebKitWindowProperties* function(WebKitWebView* webView) c_webkit_web_view_get_window_properties; ///
-  double function(WebKitWebView* webView) c_webkit_web_view_get_zoom_level; ///
-  void function(WebKitWebView* webView) c_webkit_web_view_go_back; ///
-  void function(WebKitWebView* webView) c_webkit_web_view_go_forward; ///
-  void function(WebKitWebView* webView, WebKitBackForwardListItem* listItem) c_webkit_web_view_go_to_back_forward_list_item; ///
-  gboolean function(WebKitWebView* webView) c_webkit_web_view_is_controlled_by_automation; ///
-  gboolean function(WebKitWebView* webView) c_webkit_web_view_is_editable; ///
-  gboolean function(WebKitWebView* webView) c_webkit_web_view_is_immersive_mode_enabled; ///
-  gboolean function(WebKitWebView* webView) c_webkit_web_view_is_loading; ///
-  gboolean function(WebKitWebView* webView) c_webkit_web_view_is_playing_audio; ///
-  void function(WebKitWebView* webView) c_webkit_web_view_leave_immersive_mode; ///
-  void function(WebKitWebView* webView, const(char)* content, const(char)* contentUri, const(char)* baseUri) c_webkit_web_view_load_alternate_html; ///
-  void function(WebKitWebView* webView, GBytes* bytes, const(char)* mimeType, const(char)* encoding, const(char)* baseUri) c_webkit_web_view_load_bytes; ///
-  void function(WebKitWebView* webView, const(char)* content, const(char)* baseUri) c_webkit_web_view_load_html; ///
-  void function(WebKitWebView* webView, const(char)* plainText) c_webkit_web_view_load_plain_text; ///
-  void function(WebKitWebView* webView, WebKitURIRequest* request) c_webkit_web_view_load_request; ///
-  void function(WebKitWebView* webView, const(char)* uri) c_webkit_web_view_load_uri; ///
-  void function(WebKitWebView* webView) c_webkit_web_view_reload; ///
-  void function(WebKitWebView* webView) c_webkit_web_view_reload_bypass_cache; ///
-  void function(WebKitWebView* webView, WebKitWebViewSessionState* state) c_webkit_web_view_restore_session_state; ///
-  void function(WebKitWebView* webView, WebKitSaveMode saveMode, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_web_view_save; ///
-  GInputStream* function(WebKitWebView* webView, GAsyncResult* result, GError** _err) c_webkit_web_view_save_finish; ///
-  void function(WebKitWebView* webView, GFile* file, WebKitSaveMode saveMode, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_web_view_save_to_file; ///
-  gboolean function(WebKitWebView* webView, GAsyncResult* result, GError** _err) c_webkit_web_view_save_to_file_finish; ///
-  void function(WebKitWebView* webView, WebKitUserMessage* message, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_web_view_send_message_to_page; ///
-  WebKitUserMessage* function(WebKitWebView* webView, GAsyncResult* result, GError** _err) c_webkit_web_view_send_message_to_page_finish; ///
-  void function(WebKitWebView* webView, const(GdkRGBA)* rgba) c_webkit_web_view_set_background_color; ///
-  void function(WebKitWebView* webView, WebKitMediaCaptureState state) c_webkit_web_view_set_camera_capture_state; ///
-  void function(WebKitWebView* webView, const(char*)* allowlist) c_webkit_web_view_set_cors_allowlist; ///
-  void function(WebKitWebView* webView, const(char)* charset) c_webkit_web_view_set_custom_charset; ///
-  void function(WebKitWebView* webView, WebKitMediaCaptureState state) c_webkit_web_view_set_display_capture_state; ///
-  void function(WebKitWebView* webView, gboolean editable) c_webkit_web_view_set_editable; ///
-  void function(WebKitWebView* webView, WebKitInputMethodContext* context) c_webkit_web_view_set_input_method_context; ///
-  void function(WebKitWebView* webView, gboolean muted) c_webkit_web_view_set_is_muted; ///
-  void function(WebKitWebView* webView, WebKitMediaCaptureState state) c_webkit_web_view_set_microphone_capture_state; ///
-  void function(WebKitWebView* webView, WebKitSettings* settings) c_webkit_web_view_set_settings; ///
-  void function(WebKitWebView* webView, double zoomLevel) c_webkit_web_view_set_zoom_level; ///
-  void function(WebKitWebView* webView) c_webkit_web_view_stop_loading; ///
-  void function(WebKitWebView* webView) c_webkit_web_view_terminate_web_process; ///
-  void function(WebKitWebView* webView) c_webkit_web_view_try_close; ///
-
-  // WebViewBase
-  GType function() c_webkit_web_view_base_get_type; ///
-
-  // WebViewSessionState
-  GType function() c_webkit_web_view_session_state_get_type; ///
-  WebKitWebViewSessionState* function(GBytes* data) c_webkit_web_view_session_state_new; ///
-  WebKitWebViewSessionState* function(WebKitWebViewSessionState* state) c_webkit_web_view_session_state_ref; ///
-  GBytes* function(WebKitWebViewSessionState* state) c_webkit_web_view_session_state_serialize; ///
-  void function(WebKitWebViewSessionState* state) c_webkit_web_view_session_state_unref; ///
-
-  // WebsiteData
-  GType function() c_webkit_website_data_get_type; ///
-  const(char)* function(WebKitWebsiteData* websiteData) c_webkit_website_data_get_name; ///
-  ulong function(WebKitWebsiteData* websiteData, WebKitWebsiteDataTypes types) c_webkit_website_data_get_size; ///
-  WebKitWebsiteDataTypes function(WebKitWebsiteData* websiteData) c_webkit_website_data_get_types; ///
-  WebKitWebsiteData* function(WebKitWebsiteData* websiteData) c_webkit_website_data_ref; ///
-  void function(WebKitWebsiteData* websiteData) c_webkit_website_data_unref; ///
-
-  // WebsiteDataAccessPermissionRequest
-  GType function() c_webkit_website_data_access_permission_request_get_type; ///
-  const(char)* function(WebKitWebsiteDataAccessPermissionRequest* request) c_webkit_website_data_access_permission_request_get_current_domain; ///
-  const(char)* function(WebKitWebsiteDataAccessPermissionRequest* request) c_webkit_website_data_access_permission_request_get_requesting_domain; ///
-
-  // WebsiteDataManager
-  GType function() c_webkit_website_data_manager_get_type; ///
-  void function(WebKitWebsiteDataManager* manager, WebKitWebsiteDataTypes types, GTimeSpan timespan, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_website_data_manager_clear; ///
-  gboolean function(WebKitWebsiteDataManager* manager, GAsyncResult* result, GError** _err) c_webkit_website_data_manager_clear_finish; ///
-  void function(WebKitWebsiteDataManager* manager, WebKitWebsiteDataTypes types, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_website_data_manager_fetch; ///
-  GList* function(WebKitWebsiteDataManager* manager, GAsyncResult* result, GError** _err) c_webkit_website_data_manager_fetch_finish; ///
-  const(char)* function(WebKitWebsiteDataManager* manager) c_webkit_website_data_manager_get_base_cache_directory; ///
-  const(char)* function(WebKitWebsiteDataManager* manager) c_webkit_website_data_manager_get_base_data_directory; ///
-  WebKitFaviconDatabase* function(WebKitWebsiteDataManager* manager) c_webkit_website_data_manager_get_favicon_database; ///
-  gboolean function(WebKitWebsiteDataManager* manager) c_webkit_website_data_manager_get_favicons_enabled; ///
-  void function(WebKitWebsiteDataManager* manager, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_website_data_manager_get_itp_summary; ///
-  GList* function(WebKitWebsiteDataManager* manager, GAsyncResult* result, GError** _err) c_webkit_website_data_manager_get_itp_summary_finish; ///
-  gboolean function(WebKitWebsiteDataManager* manager) c_webkit_website_data_manager_is_ephemeral; ///
-  void function(WebKitWebsiteDataManager* manager, WebKitWebsiteDataTypes types, GList* websiteData, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_webkit_website_data_manager_remove; ///
-  gboolean function(WebKitWebsiteDataManager* manager, GAsyncResult* result, GError** _err) c_webkit_website_data_manager_remove_finish; ///
-  void function(WebKitWebsiteDataManager* manager, gboolean enabled) c_webkit_website_data_manager_set_favicons_enabled; ///
-
-  // WebsitePolicies
-  GType function() c_webkit_website_policies_get_type; ///
-  WebKitWebsitePolicies* function() c_webkit_website_policies_new; ///
-  WebKitWebsitePolicies* function(const(char)* firstPolicyName,  ...) c_webkit_website_policies_new_with_policies; ///
-  WebKitAutoplayPolicy function(WebKitWebsitePolicies* policies) c_webkit_website_policies_get_autoplay_policy; ///
-
-  // WindowProperties
-  GType function() c_webkit_window_properties_get_type; ///
-  gboolean function(WebKitWindowProperties* windowProperties) c_webkit_window_properties_get_fullscreen; ///
-  void function(WebKitWindowProperties* windowProperties, GdkRectangle* geometry) c_webkit_window_properties_get_geometry; ///
-  gboolean function(WebKitWindowProperties* windowProperties) c_webkit_window_properties_get_locationbar_visible; ///
-  gboolean function(WebKitWindowProperties* windowProperties) c_webkit_window_properties_get_menubar_visible; ///
-  gboolean function(WebKitWindowProperties* windowProperties) c_webkit_window_properties_get_resizable; ///
-  gboolean function(WebKitWindowProperties* windowProperties) c_webkit_window_properties_get_scrollbars_visible; ///
-  gboolean function(WebKitWindowProperties* windowProperties) c_webkit_window_properties_get_statusbar_visible; ///
-  gboolean function(WebKitWindowProperties* windowProperties) c_webkit_window_properties_get_toolbar_visible; ///
-
-  // XRPermissionRequest
-  GType function() c_webkit_xr_permission_request_get_type; ///
-  WebKitXRSessionFeatures function(WebKitXRPermissionRequest* request) c_webkit_xr_permission_request_get_consent_optional_features; ///
-  WebKitXRSessionFeatures function(WebKitXRPermissionRequest* request) c_webkit_xr_permission_request_get_consent_required_features; ///
-  WebKitXRSessionFeatures function(WebKitXRPermissionRequest* request) c_webkit_xr_permission_request_get_granted_features; ///
-  WebKitXRSessionFeatures function(WebKitXRPermissionRequest* request) c_webkit_xr_permission_request_get_optional_features_requested; ///
-  WebKitXRSessionFeatures function(WebKitXRPermissionRequest* request) c_webkit_xr_permission_request_get_required_features_requested; ///
-  WebKitSecurityOrigin* function(WebKitXRPermissionRequest* request) c_webkit_xr_permission_request_get_security_origin; ///
-  WebKitXRSessionMode function(WebKitXRPermissionRequest* request) c_webkit_xr_permission_request_get_session_mode; ///
-  void function(WebKitXRPermissionRequest* request, WebKitXRSessionFeatures granted) c_webkit_xr_permission_request_set_granted_optional_features; ///
-
-  // global
-  uint function() c_webkit_get_major_version; ///
-  uint function() c_webkit_get_micro_version; ///
-  uint function() c_webkit_get_minor_version; ///
-  const(char)* function(WebKitMediaKeySystemPermissionRequest* request) c_webkit_media_key_system_permission_get_name; ///
-  char* function(const(char)* uri) c_webkit_uri_for_display; ///
-  gboolean function(WebKitUserMediaPermissionRequest* request) c_webkit_user_media_permission_is_for_audio_device; ///
-  gboolean function(WebKitUserMediaPermissionRequest* request) c_webkit_user_media_permission_is_for_display_device; ///
-  gboolean function(WebKitUserMediaPermissionRequest* request) c_webkit_user_media_permission_is_for_video_device; ///
-
-  // DownloadError
-  GQuark function() c_webkit_download_error_quark; ///
-
-  // FaviconDatabaseError
-  GQuark function() c_webkit_favicon_database_error_quark; ///
-
-  // JavascriptError
-  GQuark function() c_webkit_javascript_error_quark; ///
-
-  // MediaError
-  GQuark function() c_webkit_media_error_quark; ///
-
-  // NetworkError
-  GQuark function() c_webkit_network_error_quark; ///
-
-  // PolicyError
-  GQuark function() c_webkit_policy_error_quark; ///
-
-  // PrintError
-  GQuark function() c_webkit_print_error_quark; ///
-
-  // SnapshotError
-  GQuark function() c_webkit_snapshot_error_quark; ///
-
-  // UserContentFilterError
-  GQuark function() c_webkit_user_content_filter_error_quark; ///
-
-  // UserMessageError
-  GQuark function() c_webkit_user_message_error_quark; ///
-
-  // WebExtensionError
-  GQuark function() c_webkit_web_extension_error_quark; ///
-
-  // WebExtensionMatchPatternError
-  GQuark function() c_webkit_web_extension_match_pattern_error_quark; ///
-}
+// ApplicationInfo
+private alias c_webkit_application_info_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_application_info_get_typeFn c_webkit_application_info_get_type; ///
+private alias c_webkit_application_info_newFn = extern(C) WebKitApplicationInfo* function() nothrow;
+__gshared c_webkit_application_info_newFn c_webkit_application_info_new; ///
+private alias c_webkit_application_info_get_nameFn = extern(C) const(char)* function(WebKitApplicationInfo* info) nothrow;
+__gshared c_webkit_application_info_get_nameFn c_webkit_application_info_get_name; ///
+private alias c_webkit_application_info_get_versionFn = extern(C) void function(WebKitApplicationInfo* info, ulong* major, ulong* minor, ulong* micro) nothrow;
+__gshared c_webkit_application_info_get_versionFn c_webkit_application_info_get_version; ///
+private alias c_webkit_application_info_refFn = extern(C) WebKitApplicationInfo* function(WebKitApplicationInfo* info) nothrow;
+__gshared c_webkit_application_info_refFn c_webkit_application_info_ref; ///
+private alias c_webkit_application_info_set_nameFn = extern(C) void function(WebKitApplicationInfo* info, const(char)* name) nothrow;
+__gshared c_webkit_application_info_set_nameFn c_webkit_application_info_set_name; ///
+private alias c_webkit_application_info_set_versionFn = extern(C) void function(WebKitApplicationInfo* info, ulong major, ulong minor, ulong micro) nothrow;
+__gshared c_webkit_application_info_set_versionFn c_webkit_application_info_set_version; ///
+private alias c_webkit_application_info_unrefFn = extern(C) void function(WebKitApplicationInfo* info) nothrow;
+__gshared c_webkit_application_info_unrefFn c_webkit_application_info_unref; ///
+
+// AuthenticationRequest
+private alias c_webkit_authentication_request_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_authentication_request_get_typeFn c_webkit_authentication_request_get_type; ///
+private alias c_webkit_authentication_request_authenticateFn = extern(C) void function(WebKitAuthenticationRequest* request, WebKitCredential* credential) nothrow;
+__gshared c_webkit_authentication_request_authenticateFn c_webkit_authentication_request_authenticate; ///
+private alias c_webkit_authentication_request_can_save_credentialsFn = extern(C) gboolean function(WebKitAuthenticationRequest* request) nothrow;
+__gshared c_webkit_authentication_request_can_save_credentialsFn c_webkit_authentication_request_can_save_credentials; ///
+private alias c_webkit_authentication_request_cancelFn = extern(C) void function(WebKitAuthenticationRequest* request) nothrow;
+__gshared c_webkit_authentication_request_cancelFn c_webkit_authentication_request_cancel; ///
+private alias c_webkit_authentication_request_get_certificate_pin_flagsFn = extern(C) GTlsPasswordFlags function(WebKitAuthenticationRequest* request) nothrow;
+__gshared c_webkit_authentication_request_get_certificate_pin_flagsFn c_webkit_authentication_request_get_certificate_pin_flags; ///
+private alias c_webkit_authentication_request_get_hostFn = extern(C) const(char)* function(WebKitAuthenticationRequest* request) nothrow;
+__gshared c_webkit_authentication_request_get_hostFn c_webkit_authentication_request_get_host; ///
+private alias c_webkit_authentication_request_get_portFn = extern(C) uint function(WebKitAuthenticationRequest* request) nothrow;
+__gshared c_webkit_authentication_request_get_portFn c_webkit_authentication_request_get_port; ///
+private alias c_webkit_authentication_request_get_proposed_credentialFn = extern(C) WebKitCredential* function(WebKitAuthenticationRequest* request) nothrow;
+__gshared c_webkit_authentication_request_get_proposed_credentialFn c_webkit_authentication_request_get_proposed_credential; ///
+private alias c_webkit_authentication_request_get_realmFn = extern(C) const(char)* function(WebKitAuthenticationRequest* request) nothrow;
+__gshared c_webkit_authentication_request_get_realmFn c_webkit_authentication_request_get_realm; ///
+private alias c_webkit_authentication_request_get_schemeFn = extern(C) WebKitAuthenticationScheme function(WebKitAuthenticationRequest* request) nothrow;
+__gshared c_webkit_authentication_request_get_schemeFn c_webkit_authentication_request_get_scheme; ///
+private alias c_webkit_authentication_request_get_security_originFn = extern(C) WebKitSecurityOrigin* function(WebKitAuthenticationRequest* request) nothrow;
+__gshared c_webkit_authentication_request_get_security_originFn c_webkit_authentication_request_get_security_origin; ///
+private alias c_webkit_authentication_request_is_for_proxyFn = extern(C) gboolean function(WebKitAuthenticationRequest* request) nothrow;
+__gshared c_webkit_authentication_request_is_for_proxyFn c_webkit_authentication_request_is_for_proxy; ///
+private alias c_webkit_authentication_request_is_retryFn = extern(C) gboolean function(WebKitAuthenticationRequest* request) nothrow;
+__gshared c_webkit_authentication_request_is_retryFn c_webkit_authentication_request_is_retry; ///
+private alias c_webkit_authentication_request_set_can_save_credentialsFn = extern(C) void function(WebKitAuthenticationRequest* request, gboolean enabled) nothrow;
+__gshared c_webkit_authentication_request_set_can_save_credentialsFn c_webkit_authentication_request_set_can_save_credentials; ///
+private alias c_webkit_authentication_request_set_proposed_credentialFn = extern(C) void function(WebKitAuthenticationRequest* request, WebKitCredential* credential) nothrow;
+__gshared c_webkit_authentication_request_set_proposed_credentialFn c_webkit_authentication_request_set_proposed_credential; ///
+
+// AutomationSession
+private alias c_webkit_automation_session_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_automation_session_get_typeFn c_webkit_automation_session_get_type; ///
+private alias c_webkit_automation_session_get_application_infoFn = extern(C) WebKitApplicationInfo* function(WebKitAutomationSession* session) nothrow;
+__gshared c_webkit_automation_session_get_application_infoFn c_webkit_automation_session_get_application_info; ///
+private alias c_webkit_automation_session_get_idFn = extern(C) const(char)* function(WebKitAutomationSession* session) nothrow;
+__gshared c_webkit_automation_session_get_idFn c_webkit_automation_session_get_id; ///
+private alias c_webkit_automation_session_set_application_infoFn = extern(C) void function(WebKitAutomationSession* session, WebKitApplicationInfo* info) nothrow;
+__gshared c_webkit_automation_session_set_application_infoFn c_webkit_automation_session_set_application_info; ///
+
+// BackForwardList
+private alias c_webkit_back_forward_list_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_back_forward_list_get_typeFn c_webkit_back_forward_list_get_type; ///
+private alias c_webkit_back_forward_list_get_back_itemFn = extern(C) WebKitBackForwardListItem* function(WebKitBackForwardList* backForwardList) nothrow;
+__gshared c_webkit_back_forward_list_get_back_itemFn c_webkit_back_forward_list_get_back_item; ///
+private alias c_webkit_back_forward_list_get_back_listFn = extern(C) GList* function(WebKitBackForwardList* backForwardList) nothrow;
+__gshared c_webkit_back_forward_list_get_back_listFn c_webkit_back_forward_list_get_back_list; ///
+private alias c_webkit_back_forward_list_get_back_list_with_limitFn = extern(C) GList* function(WebKitBackForwardList* backForwardList, uint limit) nothrow;
+__gshared c_webkit_back_forward_list_get_back_list_with_limitFn c_webkit_back_forward_list_get_back_list_with_limit; ///
+private alias c_webkit_back_forward_list_get_current_itemFn = extern(C) WebKitBackForwardListItem* function(WebKitBackForwardList* backForwardList) nothrow;
+__gshared c_webkit_back_forward_list_get_current_itemFn c_webkit_back_forward_list_get_current_item; ///
+private alias c_webkit_back_forward_list_get_forward_itemFn = extern(C) WebKitBackForwardListItem* function(WebKitBackForwardList* backForwardList) nothrow;
+__gshared c_webkit_back_forward_list_get_forward_itemFn c_webkit_back_forward_list_get_forward_item; ///
+private alias c_webkit_back_forward_list_get_forward_listFn = extern(C) GList* function(WebKitBackForwardList* backForwardList) nothrow;
+__gshared c_webkit_back_forward_list_get_forward_listFn c_webkit_back_forward_list_get_forward_list; ///
+private alias c_webkit_back_forward_list_get_forward_list_with_limitFn = extern(C) GList* function(WebKitBackForwardList* backForwardList, uint limit) nothrow;
+__gshared c_webkit_back_forward_list_get_forward_list_with_limitFn c_webkit_back_forward_list_get_forward_list_with_limit; ///
+private alias c_webkit_back_forward_list_get_lengthFn = extern(C) uint function(WebKitBackForwardList* backForwardList) nothrow;
+__gshared c_webkit_back_forward_list_get_lengthFn c_webkit_back_forward_list_get_length; ///
+private alias c_webkit_back_forward_list_get_nth_itemFn = extern(C) WebKitBackForwardListItem* function(WebKitBackForwardList* backForwardList, int index) nothrow;
+__gshared c_webkit_back_forward_list_get_nth_itemFn c_webkit_back_forward_list_get_nth_item; ///
+
+// BackForwardListItem
+private alias c_webkit_back_forward_list_item_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_back_forward_list_item_get_typeFn c_webkit_back_forward_list_item_get_type; ///
+private alias c_webkit_back_forward_list_item_get_original_uriFn = extern(C) const(char)* function(WebKitBackForwardListItem* listItem) nothrow;
+__gshared c_webkit_back_forward_list_item_get_original_uriFn c_webkit_back_forward_list_item_get_original_uri; ///
+private alias c_webkit_back_forward_list_item_get_titleFn = extern(C) const(char)* function(WebKitBackForwardListItem* listItem) nothrow;
+__gshared c_webkit_back_forward_list_item_get_titleFn c_webkit_back_forward_list_item_get_title; ///
+private alias c_webkit_back_forward_list_item_get_uriFn = extern(C) const(char)* function(WebKitBackForwardListItem* listItem) nothrow;
+__gshared c_webkit_back_forward_list_item_get_uriFn c_webkit_back_forward_list_item_get_uri; ///
+
+// ClipboardPermissionRequest
+private alias c_webkit_clipboard_permission_request_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_clipboard_permission_request_get_typeFn c_webkit_clipboard_permission_request_get_type; ///
+
+// ColorChooserRequest
+private alias c_webkit_color_chooser_request_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_color_chooser_request_get_typeFn c_webkit_color_chooser_request_get_type; ///
+private alias c_webkit_color_chooser_request_cancelFn = extern(C) void function(WebKitColorChooserRequest* request) nothrow;
+__gshared c_webkit_color_chooser_request_cancelFn c_webkit_color_chooser_request_cancel; ///
+private alias c_webkit_color_chooser_request_finishFn = extern(C) void function(WebKitColorChooserRequest* request) nothrow;
+__gshared c_webkit_color_chooser_request_finishFn c_webkit_color_chooser_request_finish; ///
+private alias c_webkit_color_chooser_request_get_element_rectangleFn = extern(C) void function(WebKitColorChooserRequest* request, GdkRectangle* rect) nothrow;
+__gshared c_webkit_color_chooser_request_get_element_rectangleFn c_webkit_color_chooser_request_get_element_rectangle; ///
+private alias c_webkit_color_chooser_request_get_rgbaFn = extern(C) void function(WebKitColorChooserRequest* request, GdkRGBA* rgba) nothrow;
+__gshared c_webkit_color_chooser_request_get_rgbaFn c_webkit_color_chooser_request_get_rgba; ///
+private alias c_webkit_color_chooser_request_set_rgbaFn = extern(C) void function(WebKitColorChooserRequest* request, const(GdkRGBA)* rgba) nothrow;
+__gshared c_webkit_color_chooser_request_set_rgbaFn c_webkit_color_chooser_request_set_rgba; ///
+
+// ContextMenu
+private alias c_webkit_context_menu_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_context_menu_get_typeFn c_webkit_context_menu_get_type; ///
+private alias c_webkit_context_menu_newFn = extern(C) WebKitContextMenu* function() nothrow;
+__gshared c_webkit_context_menu_newFn c_webkit_context_menu_new; ///
+private alias c_webkit_context_menu_new_with_itemsFn = extern(C) WebKitContextMenu* function(GList* items) nothrow;
+__gshared c_webkit_context_menu_new_with_itemsFn c_webkit_context_menu_new_with_items; ///
+private alias c_webkit_context_menu_appendFn = extern(C) void function(WebKitContextMenu* menu, WebKitContextMenuItem* item) nothrow;
+__gshared c_webkit_context_menu_appendFn c_webkit_context_menu_append; ///
+private alias c_webkit_context_menu_firstFn = extern(C) WebKitContextMenuItem* function(WebKitContextMenu* menu) nothrow;
+__gshared c_webkit_context_menu_firstFn c_webkit_context_menu_first; ///
+private alias c_webkit_context_menu_get_eventFn = extern(C) GdkEvent* function(WebKitContextMenu* menu) nothrow;
+__gshared c_webkit_context_menu_get_eventFn c_webkit_context_menu_get_event; ///
+private alias c_webkit_context_menu_get_item_at_positionFn = extern(C) WebKitContextMenuItem* function(WebKitContextMenu* menu, uint position) nothrow;
+__gshared c_webkit_context_menu_get_item_at_positionFn c_webkit_context_menu_get_item_at_position; ///
+private alias c_webkit_context_menu_get_itemsFn = extern(C) GList* function(WebKitContextMenu* menu) nothrow;
+__gshared c_webkit_context_menu_get_itemsFn c_webkit_context_menu_get_items; ///
+private alias c_webkit_context_menu_get_n_itemsFn = extern(C) uint function(WebKitContextMenu* menu) nothrow;
+__gshared c_webkit_context_menu_get_n_itemsFn c_webkit_context_menu_get_n_items; ///
+private alias c_webkit_context_menu_get_positionFn = extern(C) gboolean function(WebKitContextMenu* menu, int* x, int* y) nothrow;
+__gshared c_webkit_context_menu_get_positionFn c_webkit_context_menu_get_position; ///
+private alias c_webkit_context_menu_get_user_dataFn = extern(C) GVariant* function(WebKitContextMenu* menu) nothrow;
+__gshared c_webkit_context_menu_get_user_dataFn c_webkit_context_menu_get_user_data; ///
+private alias c_webkit_context_menu_insertFn = extern(C) void function(WebKitContextMenu* menu, WebKitContextMenuItem* item, int position) nothrow;
+__gshared c_webkit_context_menu_insertFn c_webkit_context_menu_insert; ///
+private alias c_webkit_context_menu_lastFn = extern(C) WebKitContextMenuItem* function(WebKitContextMenu* menu) nothrow;
+__gshared c_webkit_context_menu_lastFn c_webkit_context_menu_last; ///
+private alias c_webkit_context_menu_move_itemFn = extern(C) void function(WebKitContextMenu* menu, WebKitContextMenuItem* item, int position) nothrow;
+__gshared c_webkit_context_menu_move_itemFn c_webkit_context_menu_move_item; ///
+private alias c_webkit_context_menu_prependFn = extern(C) void function(WebKitContextMenu* menu, WebKitContextMenuItem* item) nothrow;
+__gshared c_webkit_context_menu_prependFn c_webkit_context_menu_prepend; ///
+private alias c_webkit_context_menu_removeFn = extern(C) void function(WebKitContextMenu* menu, WebKitContextMenuItem* item) nothrow;
+__gshared c_webkit_context_menu_removeFn c_webkit_context_menu_remove; ///
+private alias c_webkit_context_menu_remove_allFn = extern(C) void function(WebKitContextMenu* menu) nothrow;
+__gshared c_webkit_context_menu_remove_allFn c_webkit_context_menu_remove_all; ///
+private alias c_webkit_context_menu_set_user_dataFn = extern(C) void function(WebKitContextMenu* menu, GVariant* userData) nothrow;
+__gshared c_webkit_context_menu_set_user_dataFn c_webkit_context_menu_set_user_data; ///
+
+// ContextMenuItem
+private alias c_webkit_context_menu_item_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_context_menu_item_get_typeFn c_webkit_context_menu_item_get_type; ///
+private alias c_webkit_context_menu_item_new_from_gactionFn = extern(C) WebKitContextMenuItem* function(GAction* action, const(char)* label, GVariant* target) nothrow;
+__gshared c_webkit_context_menu_item_new_from_gactionFn c_webkit_context_menu_item_new_from_gaction; ///
+private alias c_webkit_context_menu_item_new_from_stock_actionFn = extern(C) WebKitContextMenuItem* function(WebKitContextMenuAction action) nothrow;
+__gshared c_webkit_context_menu_item_new_from_stock_actionFn c_webkit_context_menu_item_new_from_stock_action; ///
+private alias c_webkit_context_menu_item_new_from_stock_action_with_labelFn = extern(C) WebKitContextMenuItem* function(WebKitContextMenuAction action, const(char)* label) nothrow;
+__gshared c_webkit_context_menu_item_new_from_stock_action_with_labelFn c_webkit_context_menu_item_new_from_stock_action_with_label; ///
+private alias c_webkit_context_menu_item_new_separatorFn = extern(C) WebKitContextMenuItem* function() nothrow;
+__gshared c_webkit_context_menu_item_new_separatorFn c_webkit_context_menu_item_new_separator; ///
+private alias c_webkit_context_menu_item_new_with_submenuFn = extern(C) WebKitContextMenuItem* function(const(char)* label, WebKitContextMenu* submenu) nothrow;
+__gshared c_webkit_context_menu_item_new_with_submenuFn c_webkit_context_menu_item_new_with_submenu; ///
+private alias c_webkit_context_menu_item_get_gactionFn = extern(C) GAction* function(WebKitContextMenuItem* item) nothrow;
+__gshared c_webkit_context_menu_item_get_gactionFn c_webkit_context_menu_item_get_gaction; ///
+private alias c_webkit_context_menu_item_get_gaction_targetFn = extern(C) GVariant* function(WebKitContextMenuItem* item) nothrow;
+__gshared c_webkit_context_menu_item_get_gaction_targetFn c_webkit_context_menu_item_get_gaction_target; ///
+private alias c_webkit_context_menu_item_get_stock_actionFn = extern(C) WebKitContextMenuAction function(WebKitContextMenuItem* item) nothrow;
+__gshared c_webkit_context_menu_item_get_stock_actionFn c_webkit_context_menu_item_get_stock_action; ///
+private alias c_webkit_context_menu_item_get_submenuFn = extern(C) WebKitContextMenu* function(WebKitContextMenuItem* item) nothrow;
+__gshared c_webkit_context_menu_item_get_submenuFn c_webkit_context_menu_item_get_submenu; ///
+private alias c_webkit_context_menu_item_get_titleFn = extern(C) const(char)* function(WebKitContextMenuItem* item) nothrow;
+__gshared c_webkit_context_menu_item_get_titleFn c_webkit_context_menu_item_get_title; ///
+private alias c_webkit_context_menu_item_is_separatorFn = extern(C) gboolean function(WebKitContextMenuItem* item) nothrow;
+__gshared c_webkit_context_menu_item_is_separatorFn c_webkit_context_menu_item_is_separator; ///
+private alias c_webkit_context_menu_item_set_submenuFn = extern(C) void function(WebKitContextMenuItem* item, WebKitContextMenu* submenu) nothrow;
+__gshared c_webkit_context_menu_item_set_submenuFn c_webkit_context_menu_item_set_submenu; ///
+
+// CookieManager
+private alias c_webkit_cookie_manager_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_cookie_manager_get_typeFn c_webkit_cookie_manager_get_type; ///
+private alias c_webkit_cookie_manager_add_cookieFn = extern(C) void function(WebKitCookieManager* cookieManager, SoupCookie* cookie, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_cookie_manager_add_cookieFn c_webkit_cookie_manager_add_cookie; ///
+private alias c_webkit_cookie_manager_add_cookie_finishFn = extern(C) gboolean function(WebKitCookieManager* cookieManager, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_cookie_manager_add_cookie_finishFn c_webkit_cookie_manager_add_cookie_finish; ///
+private alias c_webkit_cookie_manager_delete_cookieFn = extern(C) void function(WebKitCookieManager* cookieManager, SoupCookie* cookie, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_cookie_manager_delete_cookieFn c_webkit_cookie_manager_delete_cookie; ///
+private alias c_webkit_cookie_manager_delete_cookie_finishFn = extern(C) gboolean function(WebKitCookieManager* cookieManager, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_cookie_manager_delete_cookie_finishFn c_webkit_cookie_manager_delete_cookie_finish; ///
+private alias c_webkit_cookie_manager_get_accept_policyFn = extern(C) void function(WebKitCookieManager* cookieManager, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_cookie_manager_get_accept_policyFn c_webkit_cookie_manager_get_accept_policy; ///
+private alias c_webkit_cookie_manager_get_accept_policy_finishFn = extern(C) WebKitCookieAcceptPolicy function(WebKitCookieManager* cookieManager, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_cookie_manager_get_accept_policy_finishFn c_webkit_cookie_manager_get_accept_policy_finish; ///
+private alias c_webkit_cookie_manager_get_all_cookiesFn = extern(C) void function(WebKitCookieManager* cookieManager, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_cookie_manager_get_all_cookiesFn c_webkit_cookie_manager_get_all_cookies; ///
+private alias c_webkit_cookie_manager_get_all_cookies_finishFn = extern(C) GList* function(WebKitCookieManager* cookieManager, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_cookie_manager_get_all_cookies_finishFn c_webkit_cookie_manager_get_all_cookies_finish; ///
+private alias c_webkit_cookie_manager_get_cookiesFn = extern(C) void function(WebKitCookieManager* cookieManager, const(char)* uri, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_cookie_manager_get_cookiesFn c_webkit_cookie_manager_get_cookies; ///
+private alias c_webkit_cookie_manager_get_cookies_finishFn = extern(C) GList* function(WebKitCookieManager* cookieManager, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_cookie_manager_get_cookies_finishFn c_webkit_cookie_manager_get_cookies_finish; ///
+private alias c_webkit_cookie_manager_replace_cookiesFn = extern(C) void function(WebKitCookieManager* cookieManager, GList* cookies, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_cookie_manager_replace_cookiesFn c_webkit_cookie_manager_replace_cookies; ///
+private alias c_webkit_cookie_manager_replace_cookies_finishFn = extern(C) gboolean function(WebKitCookieManager* cookieManager, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_cookie_manager_replace_cookies_finishFn c_webkit_cookie_manager_replace_cookies_finish; ///
+private alias c_webkit_cookie_manager_set_accept_policyFn = extern(C) void function(WebKitCookieManager* cookieManager, WebKitCookieAcceptPolicy policy) nothrow;
+__gshared c_webkit_cookie_manager_set_accept_policyFn c_webkit_cookie_manager_set_accept_policy; ///
+private alias c_webkit_cookie_manager_set_persistent_storageFn = extern(C) void function(WebKitCookieManager* cookieManager, const(char)* filename, WebKitCookiePersistentStorage storage) nothrow;
+__gshared c_webkit_cookie_manager_set_persistent_storageFn c_webkit_cookie_manager_set_persistent_storage; ///
+
+// Credential
+private alias c_webkit_credential_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_credential_get_typeFn c_webkit_credential_get_type; ///
+private alias c_webkit_credential_newFn = extern(C) WebKitCredential* function(const(char)* username, const(char)* password, WebKitCredentialPersistence persistence) nothrow;
+__gshared c_webkit_credential_newFn c_webkit_credential_new; ///
+private alias c_webkit_credential_new_for_certificateFn = extern(C) WebKitCredential* function(GTlsCertificate* certificate, WebKitCredentialPersistence persistence) nothrow;
+__gshared c_webkit_credential_new_for_certificateFn c_webkit_credential_new_for_certificate; ///
+private alias c_webkit_credential_new_for_certificate_pinFn = extern(C) WebKitCredential* function(const(char)* pin, WebKitCredentialPersistence persistence) nothrow;
+__gshared c_webkit_credential_new_for_certificate_pinFn c_webkit_credential_new_for_certificate_pin; ///
+private alias c_webkit_credential_copyFn = extern(C) WebKitCredential* function(WebKitCredential* credential) nothrow;
+__gshared c_webkit_credential_copyFn c_webkit_credential_copy; ///
+private alias c_webkit_credential_freeFn = extern(C) void function(WebKitCredential* credential) nothrow;
+__gshared c_webkit_credential_freeFn c_webkit_credential_free; ///
+private alias c_webkit_credential_get_certificateFn = extern(C) GTlsCertificate* function(WebKitCredential* credential) nothrow;
+__gshared c_webkit_credential_get_certificateFn c_webkit_credential_get_certificate; ///
+private alias c_webkit_credential_get_passwordFn = extern(C) const(char)* function(WebKitCredential* credential) nothrow;
+__gshared c_webkit_credential_get_passwordFn c_webkit_credential_get_password; ///
+private alias c_webkit_credential_get_persistenceFn = extern(C) WebKitCredentialPersistence function(WebKitCredential* credential) nothrow;
+__gshared c_webkit_credential_get_persistenceFn c_webkit_credential_get_persistence; ///
+private alias c_webkit_credential_get_usernameFn = extern(C) const(char)* function(WebKitCredential* credential) nothrow;
+__gshared c_webkit_credential_get_usernameFn c_webkit_credential_get_username; ///
+private alias c_webkit_credential_has_passwordFn = extern(C) gboolean function(WebKitCredential* credential) nothrow;
+__gshared c_webkit_credential_has_passwordFn c_webkit_credential_has_password; ///
+
+// DeviceInfoPermissionRequest
+private alias c_webkit_device_info_permission_request_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_device_info_permission_request_get_typeFn c_webkit_device_info_permission_request_get_type; ///
+
+// Download
+private alias c_webkit_download_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_download_get_typeFn c_webkit_download_get_type; ///
+private alias c_webkit_download_cancelFn = extern(C) void function(WebKitDownload* download) nothrow;
+__gshared c_webkit_download_cancelFn c_webkit_download_cancel; ///
+private alias c_webkit_download_get_allow_overwriteFn = extern(C) gboolean function(WebKitDownload* download) nothrow;
+__gshared c_webkit_download_get_allow_overwriteFn c_webkit_download_get_allow_overwrite; ///
+private alias c_webkit_download_get_destinationFn = extern(C) const(char)* function(WebKitDownload* download) nothrow;
+__gshared c_webkit_download_get_destinationFn c_webkit_download_get_destination; ///
+private alias c_webkit_download_get_elapsed_timeFn = extern(C) double function(WebKitDownload* download) nothrow;
+__gshared c_webkit_download_get_elapsed_timeFn c_webkit_download_get_elapsed_time; ///
+private alias c_webkit_download_get_estimated_progressFn = extern(C) double function(WebKitDownload* download) nothrow;
+__gshared c_webkit_download_get_estimated_progressFn c_webkit_download_get_estimated_progress; ///
+private alias c_webkit_download_get_received_data_lengthFn = extern(C) ulong function(WebKitDownload* download) nothrow;
+__gshared c_webkit_download_get_received_data_lengthFn c_webkit_download_get_received_data_length; ///
+private alias c_webkit_download_get_requestFn = extern(C) WebKitURIRequest* function(WebKitDownload* download) nothrow;
+__gshared c_webkit_download_get_requestFn c_webkit_download_get_request; ///
+private alias c_webkit_download_get_responseFn = extern(C) WebKitURIResponse* function(WebKitDownload* download) nothrow;
+__gshared c_webkit_download_get_responseFn c_webkit_download_get_response; ///
+private alias c_webkit_download_get_web_viewFn = extern(C) WebKitWebView* function(WebKitDownload* download) nothrow;
+__gshared c_webkit_download_get_web_viewFn c_webkit_download_get_web_view; ///
+private alias c_webkit_download_set_allow_overwriteFn = extern(C) void function(WebKitDownload* download, gboolean allowed) nothrow;
+__gshared c_webkit_download_set_allow_overwriteFn c_webkit_download_set_allow_overwrite; ///
+private alias c_webkit_download_set_destinationFn = extern(C) void function(WebKitDownload* download, const(char)* destination) nothrow;
+__gshared c_webkit_download_set_destinationFn c_webkit_download_set_destination; ///
+
+// EditorState
+private alias c_webkit_editor_state_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_editor_state_get_typeFn c_webkit_editor_state_get_type; ///
+private alias c_webkit_editor_state_get_typing_attributesFn = extern(C) uint function(WebKitEditorState* editorState) nothrow;
+__gshared c_webkit_editor_state_get_typing_attributesFn c_webkit_editor_state_get_typing_attributes; ///
+private alias c_webkit_editor_state_is_copy_availableFn = extern(C) gboolean function(WebKitEditorState* editorState) nothrow;
+__gshared c_webkit_editor_state_is_copy_availableFn c_webkit_editor_state_is_copy_available; ///
+private alias c_webkit_editor_state_is_cut_availableFn = extern(C) gboolean function(WebKitEditorState* editorState) nothrow;
+__gshared c_webkit_editor_state_is_cut_availableFn c_webkit_editor_state_is_cut_available; ///
+private alias c_webkit_editor_state_is_paste_availableFn = extern(C) gboolean function(WebKitEditorState* editorState) nothrow;
+__gshared c_webkit_editor_state_is_paste_availableFn c_webkit_editor_state_is_paste_available; ///
+private alias c_webkit_editor_state_is_redo_availableFn = extern(C) gboolean function(WebKitEditorState* editorState) nothrow;
+__gshared c_webkit_editor_state_is_redo_availableFn c_webkit_editor_state_is_redo_available; ///
+private alias c_webkit_editor_state_is_undo_availableFn = extern(C) gboolean function(WebKitEditorState* editorState) nothrow;
+__gshared c_webkit_editor_state_is_undo_availableFn c_webkit_editor_state_is_undo_available; ///
+
+// FaviconDatabase
+private alias c_webkit_favicon_database_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_favicon_database_get_typeFn c_webkit_favicon_database_get_type; ///
+private alias c_webkit_favicon_database_clearFn = extern(C) void function(WebKitFaviconDatabase* database) nothrow;
+__gshared c_webkit_favicon_database_clearFn c_webkit_favicon_database_clear; ///
+private alias c_webkit_favicon_database_get_faviconFn = extern(C) void function(WebKitFaviconDatabase* database, const(char)* pageUri, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_favicon_database_get_faviconFn c_webkit_favicon_database_get_favicon; ///
+private alias c_webkit_favicon_database_get_favicon_finishFn = extern(C) GdkTexture* function(WebKitFaviconDatabase* database, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_favicon_database_get_favicon_finishFn c_webkit_favicon_database_get_favicon_finish; ///
+private alias c_webkit_favicon_database_get_favicon_uriFn = extern(C) char* function(WebKitFaviconDatabase* database, const(char)* pageUri) nothrow;
+__gshared c_webkit_favicon_database_get_favicon_uriFn c_webkit_favicon_database_get_favicon_uri; ///
+
+// Feature
+private alias c_webkit_feature_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_feature_get_typeFn c_webkit_feature_get_type; ///
+private alias c_webkit_feature_get_categoryFn = extern(C) const(char)* function(WebKitFeature* feature) nothrow;
+__gshared c_webkit_feature_get_categoryFn c_webkit_feature_get_category; ///
+private alias c_webkit_feature_get_default_valueFn = extern(C) gboolean function(WebKitFeature* feature) nothrow;
+__gshared c_webkit_feature_get_default_valueFn c_webkit_feature_get_default_value; ///
+private alias c_webkit_feature_get_detailsFn = extern(C) const(char)* function(WebKitFeature* feature) nothrow;
+__gshared c_webkit_feature_get_detailsFn c_webkit_feature_get_details; ///
+private alias c_webkit_feature_get_identifierFn = extern(C) const(char)* function(WebKitFeature* feature) nothrow;
+__gshared c_webkit_feature_get_identifierFn c_webkit_feature_get_identifier; ///
+private alias c_webkit_feature_get_nameFn = extern(C) const(char)* function(WebKitFeature* feature) nothrow;
+__gshared c_webkit_feature_get_nameFn c_webkit_feature_get_name; ///
+private alias c_webkit_feature_get_statusFn = extern(C) WebKitFeatureStatus function(WebKitFeature* feature) nothrow;
+__gshared c_webkit_feature_get_statusFn c_webkit_feature_get_status; ///
+private alias c_webkit_feature_refFn = extern(C) WebKitFeature* function(WebKitFeature* feature) nothrow;
+__gshared c_webkit_feature_refFn c_webkit_feature_ref; ///
+private alias c_webkit_feature_unrefFn = extern(C) void function(WebKitFeature* feature) nothrow;
+__gshared c_webkit_feature_unrefFn c_webkit_feature_unref; ///
+
+// FeatureList
+private alias c_webkit_feature_list_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_feature_list_get_typeFn c_webkit_feature_list_get_type; ///
+private alias c_webkit_feature_list_getFn = extern(C) WebKitFeature* function(WebKitFeatureList* featureList, size_t index) nothrow;
+__gshared c_webkit_feature_list_getFn c_webkit_feature_list_get; ///
+private alias c_webkit_feature_list_get_lengthFn = extern(C) size_t function(WebKitFeatureList* featureList) nothrow;
+__gshared c_webkit_feature_list_get_lengthFn c_webkit_feature_list_get_length; ///
+private alias c_webkit_feature_list_refFn = extern(C) WebKitFeatureList* function(WebKitFeatureList* featureList) nothrow;
+__gshared c_webkit_feature_list_refFn c_webkit_feature_list_ref; ///
+private alias c_webkit_feature_list_unrefFn = extern(C) void function(WebKitFeatureList* featureList) nothrow;
+__gshared c_webkit_feature_list_unrefFn c_webkit_feature_list_unref; ///
+
+// FileChooserRequest
+private alias c_webkit_file_chooser_request_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_file_chooser_request_get_typeFn c_webkit_file_chooser_request_get_type; ///
+private alias c_webkit_file_chooser_request_cancelFn = extern(C) void function(WebKitFileChooserRequest* request) nothrow;
+__gshared c_webkit_file_chooser_request_cancelFn c_webkit_file_chooser_request_cancel; ///
+private alias c_webkit_file_chooser_request_get_mime_typesFn = extern(C) const(char*)* function(WebKitFileChooserRequest* request) nothrow;
+__gshared c_webkit_file_chooser_request_get_mime_typesFn c_webkit_file_chooser_request_get_mime_types; ///
+private alias c_webkit_file_chooser_request_get_mime_types_filterFn = extern(C) GtkFileFilter* function(WebKitFileChooserRequest* request) nothrow;
+__gshared c_webkit_file_chooser_request_get_mime_types_filterFn c_webkit_file_chooser_request_get_mime_types_filter; ///
+private alias c_webkit_file_chooser_request_get_select_multipleFn = extern(C) gboolean function(WebKitFileChooserRequest* request) nothrow;
+__gshared c_webkit_file_chooser_request_get_select_multipleFn c_webkit_file_chooser_request_get_select_multiple; ///
+private alias c_webkit_file_chooser_request_get_selected_filesFn = extern(C) const(char*)* function(WebKitFileChooserRequest* request) nothrow;
+__gshared c_webkit_file_chooser_request_get_selected_filesFn c_webkit_file_chooser_request_get_selected_files; ///
+private alias c_webkit_file_chooser_request_select_filesFn = extern(C) void function(WebKitFileChooserRequest* request, const(char*)* files) nothrow;
+__gshared c_webkit_file_chooser_request_select_filesFn c_webkit_file_chooser_request_select_files; ///
+
+// FindController
+private alias c_webkit_find_controller_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_find_controller_get_typeFn c_webkit_find_controller_get_type; ///
+private alias c_webkit_find_controller_count_matchesFn = extern(C) void function(WebKitFindController* findController, const(char)* searchText, uint findOptions, uint maxMatchCount) nothrow;
+__gshared c_webkit_find_controller_count_matchesFn c_webkit_find_controller_count_matches; ///
+private alias c_webkit_find_controller_get_max_match_countFn = extern(C) uint function(WebKitFindController* findController) nothrow;
+__gshared c_webkit_find_controller_get_max_match_countFn c_webkit_find_controller_get_max_match_count; ///
+private alias c_webkit_find_controller_get_optionsFn = extern(C) uint function(WebKitFindController* findController) nothrow;
+__gshared c_webkit_find_controller_get_optionsFn c_webkit_find_controller_get_options; ///
+private alias c_webkit_find_controller_get_search_textFn = extern(C) const(char)* function(WebKitFindController* findController) nothrow;
+__gshared c_webkit_find_controller_get_search_textFn c_webkit_find_controller_get_search_text; ///
+private alias c_webkit_find_controller_get_web_viewFn = extern(C) WebKitWebView* function(WebKitFindController* findController) nothrow;
+__gshared c_webkit_find_controller_get_web_viewFn c_webkit_find_controller_get_web_view; ///
+private alias c_webkit_find_controller_searchFn = extern(C) void function(WebKitFindController* findController, const(char)* searchText, uint findOptions, uint maxMatchCount) nothrow;
+__gshared c_webkit_find_controller_searchFn c_webkit_find_controller_search; ///
+private alias c_webkit_find_controller_search_finishFn = extern(C) void function(WebKitFindController* findController) nothrow;
+__gshared c_webkit_find_controller_search_finishFn c_webkit_find_controller_search_finish; ///
+private alias c_webkit_find_controller_search_nextFn = extern(C) void function(WebKitFindController* findController) nothrow;
+__gshared c_webkit_find_controller_search_nextFn c_webkit_find_controller_search_next; ///
+private alias c_webkit_find_controller_search_previousFn = extern(C) void function(WebKitFindController* findController) nothrow;
+__gshared c_webkit_find_controller_search_previousFn c_webkit_find_controller_search_previous; ///
+
+// FormSubmissionRequest
+private alias c_webkit_form_submission_request_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_form_submission_request_get_typeFn c_webkit_form_submission_request_get_type; ///
+private alias c_webkit_form_submission_request_list_text_fieldsFn = extern(C) gboolean function(WebKitFormSubmissionRequest* request, GPtrArray** fieldNames, GPtrArray** fieldValues) nothrow;
+__gshared c_webkit_form_submission_request_list_text_fieldsFn c_webkit_form_submission_request_list_text_fields; ///
+private alias c_webkit_form_submission_request_submitFn = extern(C) void function(WebKitFormSubmissionRequest* request) nothrow;
+__gshared c_webkit_form_submission_request_submitFn c_webkit_form_submission_request_submit; ///
+
+// GeolocationManager
+private alias c_webkit_geolocation_manager_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_geolocation_manager_get_typeFn c_webkit_geolocation_manager_get_type; ///
+private alias c_webkit_geolocation_manager_failedFn = extern(C) void function(WebKitGeolocationManager* manager, const(char)* errorMessage) nothrow;
+__gshared c_webkit_geolocation_manager_failedFn c_webkit_geolocation_manager_failed; ///
+private alias c_webkit_geolocation_manager_get_enable_high_accuracyFn = extern(C) gboolean function(WebKitGeolocationManager* manager) nothrow;
+__gshared c_webkit_geolocation_manager_get_enable_high_accuracyFn c_webkit_geolocation_manager_get_enable_high_accuracy; ///
+private alias c_webkit_geolocation_manager_update_positionFn = extern(C) void function(WebKitGeolocationManager* manager, WebKitGeolocationPosition* position) nothrow;
+__gshared c_webkit_geolocation_manager_update_positionFn c_webkit_geolocation_manager_update_position; ///
+
+// GeolocationPermissionRequest
+private alias c_webkit_geolocation_permission_request_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_geolocation_permission_request_get_typeFn c_webkit_geolocation_permission_request_get_type; ///
+
+// GeolocationPosition
+private alias c_webkit_geolocation_position_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_geolocation_position_get_typeFn c_webkit_geolocation_position_get_type; ///
+private alias c_webkit_geolocation_position_newFn = extern(C) WebKitGeolocationPosition* function(double latitude, double longitude, double accuracy) nothrow;
+__gshared c_webkit_geolocation_position_newFn c_webkit_geolocation_position_new; ///
+private alias c_webkit_geolocation_position_copyFn = extern(C) WebKitGeolocationPosition* function(WebKitGeolocationPosition* position) nothrow;
+__gshared c_webkit_geolocation_position_copyFn c_webkit_geolocation_position_copy; ///
+private alias c_webkit_geolocation_position_freeFn = extern(C) void function(WebKitGeolocationPosition* position) nothrow;
+__gshared c_webkit_geolocation_position_freeFn c_webkit_geolocation_position_free; ///
+private alias c_webkit_geolocation_position_set_altitudeFn = extern(C) void function(WebKitGeolocationPosition* position, double altitude) nothrow;
+__gshared c_webkit_geolocation_position_set_altitudeFn c_webkit_geolocation_position_set_altitude; ///
+private alias c_webkit_geolocation_position_set_altitude_accuracyFn = extern(C) void function(WebKitGeolocationPosition* position, double altitudeAccuracy) nothrow;
+__gshared c_webkit_geolocation_position_set_altitude_accuracyFn c_webkit_geolocation_position_set_altitude_accuracy; ///
+private alias c_webkit_geolocation_position_set_headingFn = extern(C) void function(WebKitGeolocationPosition* position, double heading) nothrow;
+__gshared c_webkit_geolocation_position_set_headingFn c_webkit_geolocation_position_set_heading; ///
+private alias c_webkit_geolocation_position_set_speedFn = extern(C) void function(WebKitGeolocationPosition* position, double speed) nothrow;
+__gshared c_webkit_geolocation_position_set_speedFn c_webkit_geolocation_position_set_speed; ///
+private alias c_webkit_geolocation_position_set_timestampFn = extern(C) void function(WebKitGeolocationPosition* position, ulong timestamp) nothrow;
+__gshared c_webkit_geolocation_position_set_timestampFn c_webkit_geolocation_position_set_timestamp; ///
+
+// HitTestResult
+private alias c_webkit_hit_test_result_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_hit_test_result_get_typeFn c_webkit_hit_test_result_get_type; ///
+private alias c_webkit_hit_test_result_context_is_editableFn = extern(C) gboolean function(WebKitHitTestResult* hitTestResult) nothrow;
+__gshared c_webkit_hit_test_result_context_is_editableFn c_webkit_hit_test_result_context_is_editable; ///
+private alias c_webkit_hit_test_result_context_is_imageFn = extern(C) gboolean function(WebKitHitTestResult* hitTestResult) nothrow;
+__gshared c_webkit_hit_test_result_context_is_imageFn c_webkit_hit_test_result_context_is_image; ///
+private alias c_webkit_hit_test_result_context_is_linkFn = extern(C) gboolean function(WebKitHitTestResult* hitTestResult) nothrow;
+__gshared c_webkit_hit_test_result_context_is_linkFn c_webkit_hit_test_result_context_is_link; ///
+private alias c_webkit_hit_test_result_context_is_mediaFn = extern(C) gboolean function(WebKitHitTestResult* hitTestResult) nothrow;
+__gshared c_webkit_hit_test_result_context_is_mediaFn c_webkit_hit_test_result_context_is_media; ///
+private alias c_webkit_hit_test_result_context_is_scrollbarFn = extern(C) gboolean function(WebKitHitTestResult* hitTestResult) nothrow;
+__gshared c_webkit_hit_test_result_context_is_scrollbarFn c_webkit_hit_test_result_context_is_scrollbar; ///
+private alias c_webkit_hit_test_result_context_is_selectionFn = extern(C) gboolean function(WebKitHitTestResult* hitTestResult) nothrow;
+__gshared c_webkit_hit_test_result_context_is_selectionFn c_webkit_hit_test_result_context_is_selection; ///
+private alias c_webkit_hit_test_result_get_contextFn = extern(C) uint function(WebKitHitTestResult* hitTestResult) nothrow;
+__gshared c_webkit_hit_test_result_get_contextFn c_webkit_hit_test_result_get_context; ///
+private alias c_webkit_hit_test_result_get_image_uriFn = extern(C) const(char)* function(WebKitHitTestResult* hitTestResult) nothrow;
+__gshared c_webkit_hit_test_result_get_image_uriFn c_webkit_hit_test_result_get_image_uri; ///
+private alias c_webkit_hit_test_result_get_link_labelFn = extern(C) const(char)* function(WebKitHitTestResult* hitTestResult) nothrow;
+__gshared c_webkit_hit_test_result_get_link_labelFn c_webkit_hit_test_result_get_link_label; ///
+private alias c_webkit_hit_test_result_get_link_titleFn = extern(C) const(char)* function(WebKitHitTestResult* hitTestResult) nothrow;
+__gshared c_webkit_hit_test_result_get_link_titleFn c_webkit_hit_test_result_get_link_title; ///
+private alias c_webkit_hit_test_result_get_link_uriFn = extern(C) const(char)* function(WebKitHitTestResult* hitTestResult) nothrow;
+__gshared c_webkit_hit_test_result_get_link_uriFn c_webkit_hit_test_result_get_link_uri; ///
+private alias c_webkit_hit_test_result_get_media_uriFn = extern(C) const(char)* function(WebKitHitTestResult* hitTestResult) nothrow;
+__gshared c_webkit_hit_test_result_get_media_uriFn c_webkit_hit_test_result_get_media_uri; ///
+
+// ITPFirstParty
+private alias c_webkit_itp_first_party_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_itp_first_party_get_typeFn c_webkit_itp_first_party_get_type; ///
+private alias c_webkit_itp_first_party_get_domainFn = extern(C) const(char)* function(WebKitITPFirstParty* itpFirstParty) nothrow;
+__gshared c_webkit_itp_first_party_get_domainFn c_webkit_itp_first_party_get_domain; ///
+private alias c_webkit_itp_first_party_get_last_update_timeFn = extern(C) GDateTime* function(WebKitITPFirstParty* itpFirstParty) nothrow;
+__gshared c_webkit_itp_first_party_get_last_update_timeFn c_webkit_itp_first_party_get_last_update_time; ///
+private alias c_webkit_itp_first_party_get_website_data_access_allowedFn = extern(C) gboolean function(WebKitITPFirstParty* itpFirstParty) nothrow;
+__gshared c_webkit_itp_first_party_get_website_data_access_allowedFn c_webkit_itp_first_party_get_website_data_access_allowed; ///
+private alias c_webkit_itp_first_party_refFn = extern(C) WebKitITPFirstParty* function(WebKitITPFirstParty* itpFirstParty) nothrow;
+__gshared c_webkit_itp_first_party_refFn c_webkit_itp_first_party_ref; ///
+private alias c_webkit_itp_first_party_unrefFn = extern(C) void function(WebKitITPFirstParty* itpFirstParty) nothrow;
+__gshared c_webkit_itp_first_party_unrefFn c_webkit_itp_first_party_unref; ///
+
+// ITPThirdParty
+private alias c_webkit_itp_third_party_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_itp_third_party_get_typeFn c_webkit_itp_third_party_get_type; ///
+private alias c_webkit_itp_third_party_get_domainFn = extern(C) const(char)* function(WebKitITPThirdParty* itpThirdParty) nothrow;
+__gshared c_webkit_itp_third_party_get_domainFn c_webkit_itp_third_party_get_domain; ///
+private alias c_webkit_itp_third_party_get_first_partiesFn = extern(C) GList* function(WebKitITPThirdParty* itpThirdParty) nothrow;
+__gshared c_webkit_itp_third_party_get_first_partiesFn c_webkit_itp_third_party_get_first_parties; ///
+private alias c_webkit_itp_third_party_refFn = extern(C) WebKitITPThirdParty* function(WebKitITPThirdParty* itpThirdParty) nothrow;
+__gshared c_webkit_itp_third_party_refFn c_webkit_itp_third_party_ref; ///
+private alias c_webkit_itp_third_party_unrefFn = extern(C) void function(WebKitITPThirdParty* itpThirdParty) nothrow;
+__gshared c_webkit_itp_third_party_unrefFn c_webkit_itp_third_party_unref; ///
+
+// InputMethodContext
+private alias c_webkit_input_method_context_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_input_method_context_get_typeFn c_webkit_input_method_context_get_type; ///
+private alias c_webkit_input_method_context_filter_key_eventFn = extern(C) gboolean function(WebKitInputMethodContext* context, GdkEvent* keyEvent) nothrow;
+__gshared c_webkit_input_method_context_filter_key_eventFn c_webkit_input_method_context_filter_key_event; ///
+private alias c_webkit_input_method_context_get_input_hintsFn = extern(C) WebKitInputHints function(WebKitInputMethodContext* context) nothrow;
+__gshared c_webkit_input_method_context_get_input_hintsFn c_webkit_input_method_context_get_input_hints; ///
+private alias c_webkit_input_method_context_get_input_purposeFn = extern(C) WebKitInputPurpose function(WebKitInputMethodContext* context) nothrow;
+__gshared c_webkit_input_method_context_get_input_purposeFn c_webkit_input_method_context_get_input_purpose; ///
+private alias c_webkit_input_method_context_get_preeditFn = extern(C) void function(WebKitInputMethodContext* context, char** text, GList** underlines, uint* cursorOffset) nothrow;
+__gshared c_webkit_input_method_context_get_preeditFn c_webkit_input_method_context_get_preedit; ///
+private alias c_webkit_input_method_context_notify_cursor_areaFn = extern(C) void function(WebKitInputMethodContext* context, int x, int y, int width, int height) nothrow;
+__gshared c_webkit_input_method_context_notify_cursor_areaFn c_webkit_input_method_context_notify_cursor_area; ///
+private alias c_webkit_input_method_context_notify_focus_inFn = extern(C) void function(WebKitInputMethodContext* context) nothrow;
+__gshared c_webkit_input_method_context_notify_focus_inFn c_webkit_input_method_context_notify_focus_in; ///
+private alias c_webkit_input_method_context_notify_focus_outFn = extern(C) void function(WebKitInputMethodContext* context) nothrow;
+__gshared c_webkit_input_method_context_notify_focus_outFn c_webkit_input_method_context_notify_focus_out; ///
+private alias c_webkit_input_method_context_notify_surroundingFn = extern(C) void function(WebKitInputMethodContext* context, const(char)* text, int length, uint cursorIndex, uint selectionIndex) nothrow;
+__gshared c_webkit_input_method_context_notify_surroundingFn c_webkit_input_method_context_notify_surrounding; ///
+private alias c_webkit_input_method_context_resetFn = extern(C) void function(WebKitInputMethodContext* context) nothrow;
+__gshared c_webkit_input_method_context_resetFn c_webkit_input_method_context_reset; ///
+private alias c_webkit_input_method_context_set_enable_preeditFn = extern(C) void function(WebKitInputMethodContext* context, gboolean enabled) nothrow;
+__gshared c_webkit_input_method_context_set_enable_preeditFn c_webkit_input_method_context_set_enable_preedit; ///
+private alias c_webkit_input_method_context_set_input_hintsFn = extern(C) void function(WebKitInputMethodContext* context, WebKitInputHints hints) nothrow;
+__gshared c_webkit_input_method_context_set_input_hintsFn c_webkit_input_method_context_set_input_hints; ///
+private alias c_webkit_input_method_context_set_input_purposeFn = extern(C) void function(WebKitInputMethodContext* context, WebKitInputPurpose purpose) nothrow;
+__gshared c_webkit_input_method_context_set_input_purposeFn c_webkit_input_method_context_set_input_purpose; ///
+
+// InputMethodUnderline
+private alias c_webkit_input_method_underline_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_input_method_underline_get_typeFn c_webkit_input_method_underline_get_type; ///
+private alias c_webkit_input_method_underline_newFn = extern(C) WebKitInputMethodUnderline* function(uint startOffset, uint endOffset) nothrow;
+__gshared c_webkit_input_method_underline_newFn c_webkit_input_method_underline_new; ///
+private alias c_webkit_input_method_underline_copyFn = extern(C) WebKitInputMethodUnderline* function(WebKitInputMethodUnderline* underline) nothrow;
+__gshared c_webkit_input_method_underline_copyFn c_webkit_input_method_underline_copy; ///
+private alias c_webkit_input_method_underline_freeFn = extern(C) void function(WebKitInputMethodUnderline* underline) nothrow;
+__gshared c_webkit_input_method_underline_freeFn c_webkit_input_method_underline_free; ///
+private alias c_webkit_input_method_underline_set_colorFn = extern(C) void function(WebKitInputMethodUnderline* underline, const(GdkRGBA)* rgba) nothrow;
+__gshared c_webkit_input_method_underline_set_colorFn c_webkit_input_method_underline_set_color; ///
+
+// MediaKeySystemPermissionRequest
+private alias c_webkit_media_key_system_permission_request_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_media_key_system_permission_request_get_typeFn c_webkit_media_key_system_permission_request_get_type; ///
+
+// MemoryPressureSettings
+private alias c_webkit_memory_pressure_settings_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_memory_pressure_settings_get_typeFn c_webkit_memory_pressure_settings_get_type; ///
+private alias c_webkit_memory_pressure_settings_newFn = extern(C) WebKitMemoryPressureSettings* function() nothrow;
+__gshared c_webkit_memory_pressure_settings_newFn c_webkit_memory_pressure_settings_new; ///
+private alias c_webkit_memory_pressure_settings_copyFn = extern(C) WebKitMemoryPressureSettings* function(WebKitMemoryPressureSettings* settings) nothrow;
+__gshared c_webkit_memory_pressure_settings_copyFn c_webkit_memory_pressure_settings_copy; ///
+private alias c_webkit_memory_pressure_settings_freeFn = extern(C) void function(WebKitMemoryPressureSettings* settings) nothrow;
+__gshared c_webkit_memory_pressure_settings_freeFn c_webkit_memory_pressure_settings_free; ///
+private alias c_webkit_memory_pressure_settings_get_conservative_thresholdFn = extern(C) double function(WebKitMemoryPressureSettings* settings) nothrow;
+__gshared c_webkit_memory_pressure_settings_get_conservative_thresholdFn c_webkit_memory_pressure_settings_get_conservative_threshold; ///
+private alias c_webkit_memory_pressure_settings_get_kill_thresholdFn = extern(C) double function(WebKitMemoryPressureSettings* settings) nothrow;
+__gshared c_webkit_memory_pressure_settings_get_kill_thresholdFn c_webkit_memory_pressure_settings_get_kill_threshold; ///
+private alias c_webkit_memory_pressure_settings_get_memory_limitFn = extern(C) uint function(WebKitMemoryPressureSettings* settings) nothrow;
+__gshared c_webkit_memory_pressure_settings_get_memory_limitFn c_webkit_memory_pressure_settings_get_memory_limit; ///
+private alias c_webkit_memory_pressure_settings_get_poll_intervalFn = extern(C) double function(WebKitMemoryPressureSettings* settings) nothrow;
+__gshared c_webkit_memory_pressure_settings_get_poll_intervalFn c_webkit_memory_pressure_settings_get_poll_interval; ///
+private alias c_webkit_memory_pressure_settings_get_strict_thresholdFn = extern(C) double function(WebKitMemoryPressureSettings* settings) nothrow;
+__gshared c_webkit_memory_pressure_settings_get_strict_thresholdFn c_webkit_memory_pressure_settings_get_strict_threshold; ///
+private alias c_webkit_memory_pressure_settings_set_conservative_thresholdFn = extern(C) void function(WebKitMemoryPressureSettings* settings, double value) nothrow;
+__gshared c_webkit_memory_pressure_settings_set_conservative_thresholdFn c_webkit_memory_pressure_settings_set_conservative_threshold; ///
+private alias c_webkit_memory_pressure_settings_set_kill_thresholdFn = extern(C) void function(WebKitMemoryPressureSettings* settings, double value) nothrow;
+__gshared c_webkit_memory_pressure_settings_set_kill_thresholdFn c_webkit_memory_pressure_settings_set_kill_threshold; ///
+private alias c_webkit_memory_pressure_settings_set_memory_limitFn = extern(C) void function(WebKitMemoryPressureSettings* settings, uint memoryLimit) nothrow;
+__gshared c_webkit_memory_pressure_settings_set_memory_limitFn c_webkit_memory_pressure_settings_set_memory_limit; ///
+private alias c_webkit_memory_pressure_settings_set_poll_intervalFn = extern(C) void function(WebKitMemoryPressureSettings* settings, double value) nothrow;
+__gshared c_webkit_memory_pressure_settings_set_poll_intervalFn c_webkit_memory_pressure_settings_set_poll_interval; ///
+private alias c_webkit_memory_pressure_settings_set_strict_thresholdFn = extern(C) void function(WebKitMemoryPressureSettings* settings, double value) nothrow;
+__gshared c_webkit_memory_pressure_settings_set_strict_thresholdFn c_webkit_memory_pressure_settings_set_strict_threshold; ///
+
+// NavigationAction
+private alias c_webkit_navigation_action_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_navigation_action_get_typeFn c_webkit_navigation_action_get_type; ///
+private alias c_webkit_navigation_action_copyFn = extern(C) WebKitNavigationAction* function(WebKitNavigationAction* navigation) nothrow;
+__gshared c_webkit_navigation_action_copyFn c_webkit_navigation_action_copy; ///
+private alias c_webkit_navigation_action_freeFn = extern(C) void function(WebKitNavigationAction* navigation) nothrow;
+__gshared c_webkit_navigation_action_freeFn c_webkit_navigation_action_free; ///
+private alias c_webkit_navigation_action_get_frame_nameFn = extern(C) const(char)* function(WebKitNavigationAction* navigation) nothrow;
+__gshared c_webkit_navigation_action_get_frame_nameFn c_webkit_navigation_action_get_frame_name; ///
+private alias c_webkit_navigation_action_get_modifiersFn = extern(C) uint function(WebKitNavigationAction* navigation) nothrow;
+__gshared c_webkit_navigation_action_get_modifiersFn c_webkit_navigation_action_get_modifiers; ///
+private alias c_webkit_navigation_action_get_mouse_buttonFn = extern(C) uint function(WebKitNavigationAction* navigation) nothrow;
+__gshared c_webkit_navigation_action_get_mouse_buttonFn c_webkit_navigation_action_get_mouse_button; ///
+private alias c_webkit_navigation_action_get_navigation_typeFn = extern(C) WebKitNavigationType function(WebKitNavigationAction* navigation) nothrow;
+__gshared c_webkit_navigation_action_get_navigation_typeFn c_webkit_navigation_action_get_navigation_type; ///
+private alias c_webkit_navigation_action_get_requestFn = extern(C) WebKitURIRequest* function(WebKitNavigationAction* navigation) nothrow;
+__gshared c_webkit_navigation_action_get_requestFn c_webkit_navigation_action_get_request; ///
+private alias c_webkit_navigation_action_is_redirectFn = extern(C) gboolean function(WebKitNavigationAction* navigation) nothrow;
+__gshared c_webkit_navigation_action_is_redirectFn c_webkit_navigation_action_is_redirect; ///
+private alias c_webkit_navigation_action_is_user_gestureFn = extern(C) gboolean function(WebKitNavigationAction* navigation) nothrow;
+__gshared c_webkit_navigation_action_is_user_gestureFn c_webkit_navigation_action_is_user_gesture; ///
+
+// NavigationPolicyDecision
+private alias c_webkit_navigation_policy_decision_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_navigation_policy_decision_get_typeFn c_webkit_navigation_policy_decision_get_type; ///
+private alias c_webkit_navigation_policy_decision_get_navigation_actionFn = extern(C) WebKitNavigationAction* function(WebKitNavigationPolicyDecision* decision) nothrow;
+__gshared c_webkit_navigation_policy_decision_get_navigation_actionFn c_webkit_navigation_policy_decision_get_navigation_action; ///
+
+// NetworkProxySettings
+private alias c_webkit_network_proxy_settings_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_network_proxy_settings_get_typeFn c_webkit_network_proxy_settings_get_type; ///
+private alias c_webkit_network_proxy_settings_newFn = extern(C) WebKitNetworkProxySettings* function(const(char)* defaultProxyUri, const(char*)* ignoreHosts) nothrow;
+__gshared c_webkit_network_proxy_settings_newFn c_webkit_network_proxy_settings_new; ///
+private alias c_webkit_network_proxy_settings_add_proxy_for_schemeFn = extern(C) void function(WebKitNetworkProxySettings* proxySettings, const(char)* scheme, const(char)* proxyUri) nothrow;
+__gshared c_webkit_network_proxy_settings_add_proxy_for_schemeFn c_webkit_network_proxy_settings_add_proxy_for_scheme; ///
+private alias c_webkit_network_proxy_settings_copyFn = extern(C) WebKitNetworkProxySettings* function(WebKitNetworkProxySettings* proxySettings) nothrow;
+__gshared c_webkit_network_proxy_settings_copyFn c_webkit_network_proxy_settings_copy; ///
+private alias c_webkit_network_proxy_settings_freeFn = extern(C) void function(WebKitNetworkProxySettings* proxySettings) nothrow;
+__gshared c_webkit_network_proxy_settings_freeFn c_webkit_network_proxy_settings_free; ///
+
+// NetworkSession
+private alias c_webkit_network_session_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_network_session_get_typeFn c_webkit_network_session_get_type; ///
+private alias c_webkit_network_session_newFn = extern(C) WebKitNetworkSession* function(const(char)* dataDirectory, const(char)* cacheDirectory) nothrow;
+__gshared c_webkit_network_session_newFn c_webkit_network_session_new; ///
+private alias c_webkit_network_session_new_ephemeralFn = extern(C) WebKitNetworkSession* function() nothrow;
+__gshared c_webkit_network_session_new_ephemeralFn c_webkit_network_session_new_ephemeral; ///
+private alias c_webkit_network_session_get_defaultFn = extern(C) WebKitNetworkSession* function() nothrow;
+__gshared c_webkit_network_session_get_defaultFn c_webkit_network_session_get_default; ///
+private alias c_webkit_network_session_set_memory_pressure_settingsFn = extern(C) void function(WebKitMemoryPressureSettings* settings) nothrow;
+__gshared c_webkit_network_session_set_memory_pressure_settingsFn c_webkit_network_session_set_memory_pressure_settings; ///
+private alias c_webkit_network_session_allow_tls_certificate_for_hostFn = extern(C) void function(WebKitNetworkSession* session, GTlsCertificate* certificate, const(char)* host) nothrow;
+__gshared c_webkit_network_session_allow_tls_certificate_for_hostFn c_webkit_network_session_allow_tls_certificate_for_host; ///
+private alias c_webkit_network_session_download_uriFn = extern(C) WebKitDownload* function(WebKitNetworkSession* session, const(char)* uri) nothrow;
+__gshared c_webkit_network_session_download_uriFn c_webkit_network_session_download_uri; ///
+private alias c_webkit_network_session_get_cookie_managerFn = extern(C) WebKitCookieManager* function(WebKitNetworkSession* session) nothrow;
+__gshared c_webkit_network_session_get_cookie_managerFn c_webkit_network_session_get_cookie_manager; ///
+private alias c_webkit_network_session_get_itp_enabledFn = extern(C) gboolean function(WebKitNetworkSession* session) nothrow;
+__gshared c_webkit_network_session_get_itp_enabledFn c_webkit_network_session_get_itp_enabled; ///
+private alias c_webkit_network_session_get_itp_summaryFn = extern(C) void function(WebKitNetworkSession* session, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_network_session_get_itp_summaryFn c_webkit_network_session_get_itp_summary; ///
+private alias c_webkit_network_session_get_itp_summary_finishFn = extern(C) GList* function(WebKitNetworkSession* session, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_network_session_get_itp_summary_finishFn c_webkit_network_session_get_itp_summary_finish; ///
+private alias c_webkit_network_session_get_persistent_credential_storage_enabledFn = extern(C) gboolean function(WebKitNetworkSession* session) nothrow;
+__gshared c_webkit_network_session_get_persistent_credential_storage_enabledFn c_webkit_network_session_get_persistent_credential_storage_enabled; ///
+private alias c_webkit_network_session_get_tls_errors_policyFn = extern(C) WebKitTLSErrorsPolicy function(WebKitNetworkSession* session) nothrow;
+__gshared c_webkit_network_session_get_tls_errors_policyFn c_webkit_network_session_get_tls_errors_policy; ///
+private alias c_webkit_network_session_get_website_data_managerFn = extern(C) WebKitWebsiteDataManager* function(WebKitNetworkSession* session) nothrow;
+__gshared c_webkit_network_session_get_website_data_managerFn c_webkit_network_session_get_website_data_manager; ///
+private alias c_webkit_network_session_is_ephemeralFn = extern(C) gboolean function(WebKitNetworkSession* session) nothrow;
+__gshared c_webkit_network_session_is_ephemeralFn c_webkit_network_session_is_ephemeral; ///
+private alias c_webkit_network_session_prefetch_dnsFn = extern(C) void function(WebKitNetworkSession* session, const(char)* hostname) nothrow;
+__gshared c_webkit_network_session_prefetch_dnsFn c_webkit_network_session_prefetch_dns; ///
+private alias c_webkit_network_session_set_itp_enabledFn = extern(C) void function(WebKitNetworkSession* session, gboolean enabled) nothrow;
+__gshared c_webkit_network_session_set_itp_enabledFn c_webkit_network_session_set_itp_enabled; ///
+private alias c_webkit_network_session_set_persistent_credential_storage_enabledFn = extern(C) void function(WebKitNetworkSession* session, gboolean enabled) nothrow;
+__gshared c_webkit_network_session_set_persistent_credential_storage_enabledFn c_webkit_network_session_set_persistent_credential_storage_enabled; ///
+private alias c_webkit_network_session_set_proxy_settingsFn = extern(C) void function(WebKitNetworkSession* session, WebKitNetworkProxyMode proxyMode, WebKitNetworkProxySettings* proxySettings) nothrow;
+__gshared c_webkit_network_session_set_proxy_settingsFn c_webkit_network_session_set_proxy_settings; ///
+private alias c_webkit_network_session_set_tls_errors_policyFn = extern(C) void function(WebKitNetworkSession* session, WebKitTLSErrorsPolicy policy) nothrow;
+__gshared c_webkit_network_session_set_tls_errors_policyFn c_webkit_network_session_set_tls_errors_policy; ///
+
+// Notification
+private alias c_webkit_notification_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_notification_get_typeFn c_webkit_notification_get_type; ///
+private alias c_webkit_notification_clickedFn = extern(C) void function(WebKitNotification* notification) nothrow;
+__gshared c_webkit_notification_clickedFn c_webkit_notification_clicked; ///
+private alias c_webkit_notification_closeFn = extern(C) void function(WebKitNotification* notification) nothrow;
+__gshared c_webkit_notification_closeFn c_webkit_notification_close; ///
+private alias c_webkit_notification_get_bodyFn = extern(C) const(char)* function(WebKitNotification* notification) nothrow;
+__gshared c_webkit_notification_get_bodyFn c_webkit_notification_get_body; ///
+private alias c_webkit_notification_get_idFn = extern(C) ulong function(WebKitNotification* notification) nothrow;
+__gshared c_webkit_notification_get_idFn c_webkit_notification_get_id; ///
+private alias c_webkit_notification_get_tagFn = extern(C) const(char)* function(WebKitNotification* notification) nothrow;
+__gshared c_webkit_notification_get_tagFn c_webkit_notification_get_tag; ///
+private alias c_webkit_notification_get_titleFn = extern(C) const(char)* function(WebKitNotification* notification) nothrow;
+__gshared c_webkit_notification_get_titleFn c_webkit_notification_get_title; ///
+
+// NotificationPermissionRequest
+private alias c_webkit_notification_permission_request_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_notification_permission_request_get_typeFn c_webkit_notification_permission_request_get_type; ///
+
+// OptionMenu
+private alias c_webkit_option_menu_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_option_menu_get_typeFn c_webkit_option_menu_get_type; ///
+private alias c_webkit_option_menu_activate_itemFn = extern(C) void function(WebKitOptionMenu* menu, uint index) nothrow;
+__gshared c_webkit_option_menu_activate_itemFn c_webkit_option_menu_activate_item; ///
+private alias c_webkit_option_menu_closeFn = extern(C) void function(WebKitOptionMenu* menu) nothrow;
+__gshared c_webkit_option_menu_closeFn c_webkit_option_menu_close; ///
+private alias c_webkit_option_menu_get_eventFn = extern(C) GdkEvent* function(WebKitOptionMenu* menu) nothrow;
+__gshared c_webkit_option_menu_get_eventFn c_webkit_option_menu_get_event; ///
+private alias c_webkit_option_menu_get_itemFn = extern(C) WebKitOptionMenuItem* function(WebKitOptionMenu* menu, uint index) nothrow;
+__gshared c_webkit_option_menu_get_itemFn c_webkit_option_menu_get_item; ///
+private alias c_webkit_option_menu_get_n_itemsFn = extern(C) uint function(WebKitOptionMenu* menu) nothrow;
+__gshared c_webkit_option_menu_get_n_itemsFn c_webkit_option_menu_get_n_items; ///
+private alias c_webkit_option_menu_select_itemFn = extern(C) void function(WebKitOptionMenu* menu, uint index) nothrow;
+__gshared c_webkit_option_menu_select_itemFn c_webkit_option_menu_select_item; ///
+
+// OptionMenuItem
+private alias c_webkit_option_menu_item_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_option_menu_item_get_typeFn c_webkit_option_menu_item_get_type; ///
+private alias c_webkit_option_menu_item_copyFn = extern(C) WebKitOptionMenuItem* function(WebKitOptionMenuItem* item) nothrow;
+__gshared c_webkit_option_menu_item_copyFn c_webkit_option_menu_item_copy; ///
+private alias c_webkit_option_menu_item_freeFn = extern(C) void function(WebKitOptionMenuItem* item) nothrow;
+__gshared c_webkit_option_menu_item_freeFn c_webkit_option_menu_item_free; ///
+private alias c_webkit_option_menu_item_get_labelFn = extern(C) const(char)* function(WebKitOptionMenuItem* item) nothrow;
+__gshared c_webkit_option_menu_item_get_labelFn c_webkit_option_menu_item_get_label; ///
+private alias c_webkit_option_menu_item_get_tooltipFn = extern(C) const(char)* function(WebKitOptionMenuItem* item) nothrow;
+__gshared c_webkit_option_menu_item_get_tooltipFn c_webkit_option_menu_item_get_tooltip; ///
+private alias c_webkit_option_menu_item_is_enabledFn = extern(C) gboolean function(WebKitOptionMenuItem* item) nothrow;
+__gshared c_webkit_option_menu_item_is_enabledFn c_webkit_option_menu_item_is_enabled; ///
+private alias c_webkit_option_menu_item_is_group_childFn = extern(C) gboolean function(WebKitOptionMenuItem* item) nothrow;
+__gshared c_webkit_option_menu_item_is_group_childFn c_webkit_option_menu_item_is_group_child; ///
+private alias c_webkit_option_menu_item_is_group_labelFn = extern(C) gboolean function(WebKitOptionMenuItem* item) nothrow;
+__gshared c_webkit_option_menu_item_is_group_labelFn c_webkit_option_menu_item_is_group_label; ///
+private alias c_webkit_option_menu_item_is_selectedFn = extern(C) gboolean function(WebKitOptionMenuItem* item) nothrow;
+__gshared c_webkit_option_menu_item_is_selectedFn c_webkit_option_menu_item_is_selected; ///
+
+// PermissionRequest
+private alias c_webkit_permission_request_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_permission_request_get_typeFn c_webkit_permission_request_get_type; ///
+private alias c_webkit_permission_request_allowFn = extern(C) void function(WebKitPermissionRequest* request) nothrow;
+__gshared c_webkit_permission_request_allowFn c_webkit_permission_request_allow; ///
+private alias c_webkit_permission_request_denyFn = extern(C) void function(WebKitPermissionRequest* request) nothrow;
+__gshared c_webkit_permission_request_denyFn c_webkit_permission_request_deny; ///
+
+// PermissionStateQuery
+private alias c_webkit_permission_state_query_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_permission_state_query_get_typeFn c_webkit_permission_state_query_get_type; ///
+private alias c_webkit_permission_state_query_finishFn = extern(C) void function(WebKitPermissionStateQuery* query, WebKitPermissionState state) nothrow;
+__gshared c_webkit_permission_state_query_finishFn c_webkit_permission_state_query_finish; ///
+private alias c_webkit_permission_state_query_get_nameFn = extern(C) const(char)* function(WebKitPermissionStateQuery* query) nothrow;
+__gshared c_webkit_permission_state_query_get_nameFn c_webkit_permission_state_query_get_name; ///
+private alias c_webkit_permission_state_query_get_security_originFn = extern(C) WebKitSecurityOrigin* function(WebKitPermissionStateQuery* query) nothrow;
+__gshared c_webkit_permission_state_query_get_security_originFn c_webkit_permission_state_query_get_security_origin; ///
+private alias c_webkit_permission_state_query_refFn = extern(C) WebKitPermissionStateQuery* function(WebKitPermissionStateQuery* query) nothrow;
+__gshared c_webkit_permission_state_query_refFn c_webkit_permission_state_query_ref; ///
+private alias c_webkit_permission_state_query_unrefFn = extern(C) void function(WebKitPermissionStateQuery* query) nothrow;
+__gshared c_webkit_permission_state_query_unrefFn c_webkit_permission_state_query_unref; ///
+
+// PointerLockPermissionRequest
+private alias c_webkit_pointer_lock_permission_request_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_pointer_lock_permission_request_get_typeFn c_webkit_pointer_lock_permission_request_get_type; ///
+
+// PolicyDecision
+private alias c_webkit_policy_decision_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_policy_decision_get_typeFn c_webkit_policy_decision_get_type; ///
+private alias c_webkit_policy_decision_downloadFn = extern(C) void function(WebKitPolicyDecision* decision) nothrow;
+__gshared c_webkit_policy_decision_downloadFn c_webkit_policy_decision_download; ///
+private alias c_webkit_policy_decision_ignoreFn = extern(C) void function(WebKitPolicyDecision* decision) nothrow;
+__gshared c_webkit_policy_decision_ignoreFn c_webkit_policy_decision_ignore; ///
+private alias c_webkit_policy_decision_useFn = extern(C) void function(WebKitPolicyDecision* decision) nothrow;
+__gshared c_webkit_policy_decision_useFn c_webkit_policy_decision_use; ///
+private alias c_webkit_policy_decision_use_with_policiesFn = extern(C) void function(WebKitPolicyDecision* decision, WebKitWebsitePolicies* policies) nothrow;
+__gshared c_webkit_policy_decision_use_with_policiesFn c_webkit_policy_decision_use_with_policies; ///
+
+// PrintOperation
+private alias c_webkit_print_operation_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_print_operation_get_typeFn c_webkit_print_operation_get_type; ///
+private alias c_webkit_print_operation_newFn = extern(C) WebKitPrintOperation* function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_print_operation_newFn c_webkit_print_operation_new; ///
+private alias c_webkit_print_operation_get_page_setupFn = extern(C) GtkPageSetup* function(WebKitPrintOperation* printOperation) nothrow;
+__gshared c_webkit_print_operation_get_page_setupFn c_webkit_print_operation_get_page_setup; ///
+private alias c_webkit_print_operation_get_print_settingsFn = extern(C) GtkPrintSettings* function(WebKitPrintOperation* printOperation) nothrow;
+__gshared c_webkit_print_operation_get_print_settingsFn c_webkit_print_operation_get_print_settings; ///
+private alias c_webkit_print_operation_printFn = extern(C) void function(WebKitPrintOperation* printOperation) nothrow;
+__gshared c_webkit_print_operation_printFn c_webkit_print_operation_print; ///
+private alias c_webkit_print_operation_run_dialogFn = extern(C) WebKitPrintOperationResponse function(WebKitPrintOperation* printOperation, GtkWindow* parent) nothrow;
+__gshared c_webkit_print_operation_run_dialogFn c_webkit_print_operation_run_dialog; ///
+private alias c_webkit_print_operation_set_page_setupFn = extern(C) void function(WebKitPrintOperation* printOperation, GtkPageSetup* pageSetup) nothrow;
+__gshared c_webkit_print_operation_set_page_setupFn c_webkit_print_operation_set_page_setup; ///
+private alias c_webkit_print_operation_set_print_settingsFn = extern(C) void function(WebKitPrintOperation* printOperation, GtkPrintSettings* printSettings) nothrow;
+__gshared c_webkit_print_operation_set_print_settingsFn c_webkit_print_operation_set_print_settings; ///
+
+// ResponsePolicyDecision
+private alias c_webkit_response_policy_decision_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_response_policy_decision_get_typeFn c_webkit_response_policy_decision_get_type; ///
+private alias c_webkit_response_policy_decision_get_requestFn = extern(C) WebKitURIRequest* function(WebKitResponsePolicyDecision* decision) nothrow;
+__gshared c_webkit_response_policy_decision_get_requestFn c_webkit_response_policy_decision_get_request; ///
+private alias c_webkit_response_policy_decision_get_responseFn = extern(C) WebKitURIResponse* function(WebKitResponsePolicyDecision* decision) nothrow;
+__gshared c_webkit_response_policy_decision_get_responseFn c_webkit_response_policy_decision_get_response; ///
+private alias c_webkit_response_policy_decision_is_main_frame_main_resourceFn = extern(C) gboolean function(WebKitResponsePolicyDecision* decision) nothrow;
+__gshared c_webkit_response_policy_decision_is_main_frame_main_resourceFn c_webkit_response_policy_decision_is_main_frame_main_resource; ///
+private alias c_webkit_response_policy_decision_is_mime_type_supportedFn = extern(C) gboolean function(WebKitResponsePolicyDecision* decision) nothrow;
+__gshared c_webkit_response_policy_decision_is_mime_type_supportedFn c_webkit_response_policy_decision_is_mime_type_supported; ///
+
+// ScriptDialog
+private alias c_webkit_script_dialog_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_script_dialog_get_typeFn c_webkit_script_dialog_get_type; ///
+private alias c_webkit_script_dialog_closeFn = extern(C) void function(WebKitScriptDialog* dialog) nothrow;
+__gshared c_webkit_script_dialog_closeFn c_webkit_script_dialog_close; ///
+private alias c_webkit_script_dialog_confirm_set_confirmedFn = extern(C) void function(WebKitScriptDialog* dialog, gboolean confirmed) nothrow;
+__gshared c_webkit_script_dialog_confirm_set_confirmedFn c_webkit_script_dialog_confirm_set_confirmed; ///
+private alias c_webkit_script_dialog_get_dialog_typeFn = extern(C) WebKitScriptDialogType function(WebKitScriptDialog* dialog) nothrow;
+__gshared c_webkit_script_dialog_get_dialog_typeFn c_webkit_script_dialog_get_dialog_type; ///
+private alias c_webkit_script_dialog_get_messageFn = extern(C) const(char)* function(WebKitScriptDialog* dialog) nothrow;
+__gshared c_webkit_script_dialog_get_messageFn c_webkit_script_dialog_get_message; ///
+private alias c_webkit_script_dialog_prompt_get_default_textFn = extern(C) const(char)* function(WebKitScriptDialog* dialog) nothrow;
+__gshared c_webkit_script_dialog_prompt_get_default_textFn c_webkit_script_dialog_prompt_get_default_text; ///
+private alias c_webkit_script_dialog_prompt_set_textFn = extern(C) void function(WebKitScriptDialog* dialog, const(char)* text) nothrow;
+__gshared c_webkit_script_dialog_prompt_set_textFn c_webkit_script_dialog_prompt_set_text; ///
+private alias c_webkit_script_dialog_refFn = extern(C) WebKitScriptDialog* function(WebKitScriptDialog* dialog) nothrow;
+__gshared c_webkit_script_dialog_refFn c_webkit_script_dialog_ref; ///
+private alias c_webkit_script_dialog_unrefFn = extern(C) void function(WebKitScriptDialog* dialog) nothrow;
+__gshared c_webkit_script_dialog_unrefFn c_webkit_script_dialog_unref; ///
+
+// ScriptMessageReply
+private alias c_webkit_script_message_reply_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_script_message_reply_get_typeFn c_webkit_script_message_reply_get_type; ///
+private alias c_webkit_script_message_reply_refFn = extern(C) WebKitScriptMessageReply* function(WebKitScriptMessageReply* scriptMessageReply) nothrow;
+__gshared c_webkit_script_message_reply_refFn c_webkit_script_message_reply_ref; ///
+private alias c_webkit_script_message_reply_return_error_messageFn = extern(C) void function(WebKitScriptMessageReply* scriptMessageReply, const(char)* errorMessage) nothrow;
+__gshared c_webkit_script_message_reply_return_error_messageFn c_webkit_script_message_reply_return_error_message; ///
+private alias c_webkit_script_message_reply_return_valueFn = extern(C) void function(WebKitScriptMessageReply* scriptMessageReply, JSCValue* replyValue) nothrow;
+__gshared c_webkit_script_message_reply_return_valueFn c_webkit_script_message_reply_return_value; ///
+private alias c_webkit_script_message_reply_unrefFn = extern(C) void function(WebKitScriptMessageReply* scriptMessageReply) nothrow;
+__gshared c_webkit_script_message_reply_unrefFn c_webkit_script_message_reply_unref; ///
+
+// SecurityManager
+private alias c_webkit_security_manager_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_security_manager_get_typeFn c_webkit_security_manager_get_type; ///
+private alias c_webkit_security_manager_register_uri_scheme_as_cors_enabledFn = extern(C) void function(WebKitSecurityManager* securityManager, const(char)* scheme) nothrow;
+__gshared c_webkit_security_manager_register_uri_scheme_as_cors_enabledFn c_webkit_security_manager_register_uri_scheme_as_cors_enabled; ///
+private alias c_webkit_security_manager_register_uri_scheme_as_display_isolatedFn = extern(C) void function(WebKitSecurityManager* securityManager, const(char)* scheme) nothrow;
+__gshared c_webkit_security_manager_register_uri_scheme_as_display_isolatedFn c_webkit_security_manager_register_uri_scheme_as_display_isolated; ///
+private alias c_webkit_security_manager_register_uri_scheme_as_empty_documentFn = extern(C) void function(WebKitSecurityManager* securityManager, const(char)* scheme) nothrow;
+__gshared c_webkit_security_manager_register_uri_scheme_as_empty_documentFn c_webkit_security_manager_register_uri_scheme_as_empty_document; ///
+private alias c_webkit_security_manager_register_uri_scheme_as_localFn = extern(C) void function(WebKitSecurityManager* securityManager, const(char)* scheme) nothrow;
+__gshared c_webkit_security_manager_register_uri_scheme_as_localFn c_webkit_security_manager_register_uri_scheme_as_local; ///
+private alias c_webkit_security_manager_register_uri_scheme_as_no_accessFn = extern(C) void function(WebKitSecurityManager* securityManager, const(char)* scheme) nothrow;
+__gshared c_webkit_security_manager_register_uri_scheme_as_no_accessFn c_webkit_security_manager_register_uri_scheme_as_no_access; ///
+private alias c_webkit_security_manager_register_uri_scheme_as_secureFn = extern(C) void function(WebKitSecurityManager* securityManager, const(char)* scheme) nothrow;
+__gshared c_webkit_security_manager_register_uri_scheme_as_secureFn c_webkit_security_manager_register_uri_scheme_as_secure; ///
+private alias c_webkit_security_manager_uri_scheme_is_cors_enabledFn = extern(C) gboolean function(WebKitSecurityManager* securityManager, const(char)* scheme) nothrow;
+__gshared c_webkit_security_manager_uri_scheme_is_cors_enabledFn c_webkit_security_manager_uri_scheme_is_cors_enabled; ///
+private alias c_webkit_security_manager_uri_scheme_is_display_isolatedFn = extern(C) gboolean function(WebKitSecurityManager* securityManager, const(char)* scheme) nothrow;
+__gshared c_webkit_security_manager_uri_scheme_is_display_isolatedFn c_webkit_security_manager_uri_scheme_is_display_isolated; ///
+private alias c_webkit_security_manager_uri_scheme_is_empty_documentFn = extern(C) gboolean function(WebKitSecurityManager* securityManager, const(char)* scheme) nothrow;
+__gshared c_webkit_security_manager_uri_scheme_is_empty_documentFn c_webkit_security_manager_uri_scheme_is_empty_document; ///
+private alias c_webkit_security_manager_uri_scheme_is_localFn = extern(C) gboolean function(WebKitSecurityManager* securityManager, const(char)* scheme) nothrow;
+__gshared c_webkit_security_manager_uri_scheme_is_localFn c_webkit_security_manager_uri_scheme_is_local; ///
+private alias c_webkit_security_manager_uri_scheme_is_no_accessFn = extern(C) gboolean function(WebKitSecurityManager* securityManager, const(char)* scheme) nothrow;
+__gshared c_webkit_security_manager_uri_scheme_is_no_accessFn c_webkit_security_manager_uri_scheme_is_no_access; ///
+private alias c_webkit_security_manager_uri_scheme_is_secureFn = extern(C) gboolean function(WebKitSecurityManager* securityManager, const(char)* scheme) nothrow;
+__gshared c_webkit_security_manager_uri_scheme_is_secureFn c_webkit_security_manager_uri_scheme_is_secure; ///
+
+// SecurityOrigin
+private alias c_webkit_security_origin_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_security_origin_get_typeFn c_webkit_security_origin_get_type; ///
+private alias c_webkit_security_origin_newFn = extern(C) WebKitSecurityOrigin* function(const(char)* protocol, const(char)* host, ushort port) nothrow;
+__gshared c_webkit_security_origin_newFn c_webkit_security_origin_new; ///
+private alias c_webkit_security_origin_new_for_uriFn = extern(C) WebKitSecurityOrigin* function(const(char)* uri) nothrow;
+__gshared c_webkit_security_origin_new_for_uriFn c_webkit_security_origin_new_for_uri; ///
+private alias c_webkit_security_origin_get_hostFn = extern(C) const(char)* function(WebKitSecurityOrigin* origin) nothrow;
+__gshared c_webkit_security_origin_get_hostFn c_webkit_security_origin_get_host; ///
+private alias c_webkit_security_origin_get_portFn = extern(C) ushort function(WebKitSecurityOrigin* origin) nothrow;
+__gshared c_webkit_security_origin_get_portFn c_webkit_security_origin_get_port; ///
+private alias c_webkit_security_origin_get_protocolFn = extern(C) const(char)* function(WebKitSecurityOrigin* origin) nothrow;
+__gshared c_webkit_security_origin_get_protocolFn c_webkit_security_origin_get_protocol; ///
+private alias c_webkit_security_origin_refFn = extern(C) WebKitSecurityOrigin* function(WebKitSecurityOrigin* origin) nothrow;
+__gshared c_webkit_security_origin_refFn c_webkit_security_origin_ref; ///
+private alias c_webkit_security_origin_to_stringFn = extern(C) char* function(WebKitSecurityOrigin* origin) nothrow;
+__gshared c_webkit_security_origin_to_stringFn c_webkit_security_origin_to_string; ///
+private alias c_webkit_security_origin_unrefFn = extern(C) void function(WebKitSecurityOrigin* origin) nothrow;
+__gshared c_webkit_security_origin_unrefFn c_webkit_security_origin_unref; ///
+
+// Settings
+private alias c_webkit_settings_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_settings_get_typeFn c_webkit_settings_get_type; ///
+private alias c_webkit_settings_newFn = extern(C) WebKitSettings* function() nothrow;
+__gshared c_webkit_settings_newFn c_webkit_settings_new; ///
+private alias c_webkit_settings_new_with_settingsFn = extern(C) WebKitSettings* function(const(char)* firstSettingName,  ...) nothrow;
+__gshared c_webkit_settings_new_with_settingsFn c_webkit_settings_new_with_settings; ///
+private alias c_webkit_settings_font_size_to_pixelsFn = extern(C) uint function(uint points) nothrow;
+__gshared c_webkit_settings_font_size_to_pixelsFn c_webkit_settings_font_size_to_pixels; ///
+private alias c_webkit_settings_font_size_to_pointsFn = extern(C) uint function(uint pixels) nothrow;
+__gshared c_webkit_settings_font_size_to_pointsFn c_webkit_settings_font_size_to_points; ///
+private alias c_webkit_settings_get_all_featuresFn = extern(C) WebKitFeatureList* function() nothrow;
+__gshared c_webkit_settings_get_all_featuresFn c_webkit_settings_get_all_features; ///
+private alias c_webkit_settings_get_development_featuresFn = extern(C) WebKitFeatureList* function() nothrow;
+__gshared c_webkit_settings_get_development_featuresFn c_webkit_settings_get_development_features; ///
+private alias c_webkit_settings_get_experimental_featuresFn = extern(C) WebKitFeatureList* function() nothrow;
+__gshared c_webkit_settings_get_experimental_featuresFn c_webkit_settings_get_experimental_features; ///
+private alias c_webkit_settings_apply_from_key_fileFn = extern(C) gboolean function(WebKitSettings* settings, GKeyFile* keyFile, const(char)* groupName, GError** _err) nothrow;
+__gshared c_webkit_settings_apply_from_key_fileFn c_webkit_settings_apply_from_key_file; ///
+private alias c_webkit_settings_get_allow_file_access_from_file_urlsFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_allow_file_access_from_file_urlsFn c_webkit_settings_get_allow_file_access_from_file_urls; ///
+private alias c_webkit_settings_get_allow_modal_dialogsFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_allow_modal_dialogsFn c_webkit_settings_get_allow_modal_dialogs; ///
+private alias c_webkit_settings_get_allow_top_navigation_to_data_urlsFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_allow_top_navigation_to_data_urlsFn c_webkit_settings_get_allow_top_navigation_to_data_urls; ///
+private alias c_webkit_settings_get_allow_universal_access_from_file_urlsFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_allow_universal_access_from_file_urlsFn c_webkit_settings_get_allow_universal_access_from_file_urls; ///
+private alias c_webkit_settings_get_auto_load_imagesFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_auto_load_imagesFn c_webkit_settings_get_auto_load_images; ///
+private alias c_webkit_settings_get_cursive_font_familyFn = extern(C) const(char)* function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_cursive_font_familyFn c_webkit_settings_get_cursive_font_family; ///
+private alias c_webkit_settings_get_default_charsetFn = extern(C) const(char)* function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_default_charsetFn c_webkit_settings_get_default_charset; ///
+private alias c_webkit_settings_get_default_font_familyFn = extern(C) const(char)* function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_default_font_familyFn c_webkit_settings_get_default_font_family; ///
+private alias c_webkit_settings_get_default_font_sizeFn = extern(C) uint function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_default_font_sizeFn c_webkit_settings_get_default_font_size; ///
+private alias c_webkit_settings_get_default_monospace_font_sizeFn = extern(C) uint function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_default_monospace_font_sizeFn c_webkit_settings_get_default_monospace_font_size; ///
+private alias c_webkit_settings_get_disable_web_securityFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_disable_web_securityFn c_webkit_settings_get_disable_web_security; ///
+private alias c_webkit_settings_get_draw_compositing_indicatorsFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_draw_compositing_indicatorsFn c_webkit_settings_get_draw_compositing_indicators; ///
+private alias c_webkit_settings_get_enable_2d_canvas_accelerationFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_2d_canvas_accelerationFn c_webkit_settings_get_enable_2d_canvas_acceleration; ///
+private alias c_webkit_settings_get_enable_back_forward_navigation_gesturesFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_back_forward_navigation_gesturesFn c_webkit_settings_get_enable_back_forward_navigation_gestures; ///
+private alias c_webkit_settings_get_enable_caret_browsingFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_caret_browsingFn c_webkit_settings_get_enable_caret_browsing; ///
+private alias c_webkit_settings_get_enable_developer_extrasFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_developer_extrasFn c_webkit_settings_get_enable_developer_extras; ///
+private alias c_webkit_settings_get_enable_dns_prefetchingFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_dns_prefetchingFn c_webkit_settings_get_enable_dns_prefetching; ///
+private alias c_webkit_settings_get_enable_encrypted_mediaFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_encrypted_mediaFn c_webkit_settings_get_enable_encrypted_media; ///
+private alias c_webkit_settings_get_enable_fullscreenFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_fullscreenFn c_webkit_settings_get_enable_fullscreen; ///
+private alias c_webkit_settings_get_enable_html5_databaseFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_html5_databaseFn c_webkit_settings_get_enable_html5_database; ///
+private alias c_webkit_settings_get_enable_html5_local_storageFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_html5_local_storageFn c_webkit_settings_get_enable_html5_local_storage; ///
+private alias c_webkit_settings_get_enable_hyperlink_auditingFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_hyperlink_auditingFn c_webkit_settings_get_enable_hyperlink_auditing; ///
+private alias c_webkit_settings_get_enable_javascriptFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_javascriptFn c_webkit_settings_get_enable_javascript; ///
+private alias c_webkit_settings_get_enable_javascript_markupFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_javascript_markupFn c_webkit_settings_get_enable_javascript_markup; ///
+private alias c_webkit_settings_get_enable_mediaFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_mediaFn c_webkit_settings_get_enable_media; ///
+private alias c_webkit_settings_get_enable_media_capabilitiesFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_media_capabilitiesFn c_webkit_settings_get_enable_media_capabilities; ///
+private alias c_webkit_settings_get_enable_media_streamFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_media_streamFn c_webkit_settings_get_enable_media_stream; ///
+private alias c_webkit_settings_get_enable_mediasourceFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_mediasourceFn c_webkit_settings_get_enable_mediasource; ///
+private alias c_webkit_settings_get_enable_mock_capture_devicesFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_mock_capture_devicesFn c_webkit_settings_get_enable_mock_capture_devices; ///
+private alias c_webkit_settings_get_enable_offline_web_application_cacheFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_offline_web_application_cacheFn c_webkit_settings_get_enable_offline_web_application_cache; ///
+private alias c_webkit_settings_get_enable_page_cacheFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_page_cacheFn c_webkit_settings_get_enable_page_cache; ///
+private alias c_webkit_settings_get_enable_resizable_text_areasFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_resizable_text_areasFn c_webkit_settings_get_enable_resizable_text_areas; ///
+private alias c_webkit_settings_get_enable_site_specific_quirksFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_site_specific_quirksFn c_webkit_settings_get_enable_site_specific_quirks; ///
+private alias c_webkit_settings_get_enable_smooth_scrollingFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_smooth_scrollingFn c_webkit_settings_get_enable_smooth_scrolling; ///
+private alias c_webkit_settings_get_enable_spatial_navigationFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_spatial_navigationFn c_webkit_settings_get_enable_spatial_navigation; ///
+private alias c_webkit_settings_get_enable_tabs_to_linksFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_tabs_to_linksFn c_webkit_settings_get_enable_tabs_to_links; ///
+private alias c_webkit_settings_get_enable_webaudioFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_webaudioFn c_webkit_settings_get_enable_webaudio; ///
+private alias c_webkit_settings_get_enable_webglFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_webglFn c_webkit_settings_get_enable_webgl; ///
+private alias c_webkit_settings_get_enable_webrtcFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_webrtcFn c_webkit_settings_get_enable_webrtc; ///
+private alias c_webkit_settings_get_enable_write_console_messages_to_stdoutFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_enable_write_console_messages_to_stdoutFn c_webkit_settings_get_enable_write_console_messages_to_stdout; ///
+private alias c_webkit_settings_get_fantasy_font_familyFn = extern(C) const(char)* function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_fantasy_font_familyFn c_webkit_settings_get_fantasy_font_family; ///
+private alias c_webkit_settings_get_feature_enabledFn = extern(C) gboolean function(WebKitSettings* settings, WebKitFeature* feature) nothrow;
+__gshared c_webkit_settings_get_feature_enabledFn c_webkit_settings_get_feature_enabled; ///
+private alias c_webkit_settings_get_hardware_acceleration_policyFn = extern(C) WebKitHardwareAccelerationPolicy function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_hardware_acceleration_policyFn c_webkit_settings_get_hardware_acceleration_policy; ///
+private alias c_webkit_settings_get_javascript_can_access_clipboardFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_javascript_can_access_clipboardFn c_webkit_settings_get_javascript_can_access_clipboard; ///
+private alias c_webkit_settings_get_javascript_can_open_windows_automaticallyFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_javascript_can_open_windows_automaticallyFn c_webkit_settings_get_javascript_can_open_windows_automatically; ///
+private alias c_webkit_settings_get_load_icons_ignoring_image_load_settingFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_load_icons_ignoring_image_load_settingFn c_webkit_settings_get_load_icons_ignoring_image_load_setting; ///
+private alias c_webkit_settings_get_math_font_familyFn = extern(C) const(char)* function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_math_font_familyFn c_webkit_settings_get_math_font_family; ///
+private alias c_webkit_settings_get_media_content_types_requiring_hardware_supportFn = extern(C) const(char)* function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_media_content_types_requiring_hardware_supportFn c_webkit_settings_get_media_content_types_requiring_hardware_support; ///
+private alias c_webkit_settings_get_media_playback_allows_inlineFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_media_playback_allows_inlineFn c_webkit_settings_get_media_playback_allows_inline; ///
+private alias c_webkit_settings_get_media_playback_requires_user_gestureFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_media_playback_requires_user_gestureFn c_webkit_settings_get_media_playback_requires_user_gesture; ///
+private alias c_webkit_settings_get_minimum_font_sizeFn = extern(C) uint function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_minimum_font_sizeFn c_webkit_settings_get_minimum_font_size; ///
+private alias c_webkit_settings_get_monospace_font_familyFn = extern(C) const(char)* function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_monospace_font_familyFn c_webkit_settings_get_monospace_font_family; ///
+private alias c_webkit_settings_get_pictograph_font_familyFn = extern(C) const(char)* function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_pictograph_font_familyFn c_webkit_settings_get_pictograph_font_family; ///
+private alias c_webkit_settings_get_print_backgroundsFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_print_backgroundsFn c_webkit_settings_get_print_backgrounds; ///
+private alias c_webkit_settings_get_sans_serif_font_familyFn = extern(C) const(char)* function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_sans_serif_font_familyFn c_webkit_settings_get_sans_serif_font_family; ///
+private alias c_webkit_settings_get_serif_font_familyFn = extern(C) const(char)* function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_serif_font_familyFn c_webkit_settings_get_serif_font_family; ///
+private alias c_webkit_settings_get_user_agentFn = extern(C) const(char)* function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_user_agentFn c_webkit_settings_get_user_agent; ///
+private alias c_webkit_settings_get_webrtc_udp_ports_rangeFn = extern(C) const(char)* function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_webrtc_udp_ports_rangeFn c_webkit_settings_get_webrtc_udp_ports_range; ///
+private alias c_webkit_settings_get_zoom_text_onlyFn = extern(C) gboolean function(WebKitSettings* settings) nothrow;
+__gshared c_webkit_settings_get_zoom_text_onlyFn c_webkit_settings_get_zoom_text_only; ///
+private alias c_webkit_settings_set_allow_file_access_from_file_urlsFn = extern(C) void function(WebKitSettings* settings, gboolean allowed) nothrow;
+__gshared c_webkit_settings_set_allow_file_access_from_file_urlsFn c_webkit_settings_set_allow_file_access_from_file_urls; ///
+private alias c_webkit_settings_set_allow_modal_dialogsFn = extern(C) void function(WebKitSettings* settings, gboolean allowed) nothrow;
+__gshared c_webkit_settings_set_allow_modal_dialogsFn c_webkit_settings_set_allow_modal_dialogs; ///
+private alias c_webkit_settings_set_allow_top_navigation_to_data_urlsFn = extern(C) void function(WebKitSettings* settings, gboolean allowed) nothrow;
+__gshared c_webkit_settings_set_allow_top_navigation_to_data_urlsFn c_webkit_settings_set_allow_top_navigation_to_data_urls; ///
+private alias c_webkit_settings_set_allow_universal_access_from_file_urlsFn = extern(C) void function(WebKitSettings* settings, gboolean allowed) nothrow;
+__gshared c_webkit_settings_set_allow_universal_access_from_file_urlsFn c_webkit_settings_set_allow_universal_access_from_file_urls; ///
+private alias c_webkit_settings_set_auto_load_imagesFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_auto_load_imagesFn c_webkit_settings_set_auto_load_images; ///
+private alias c_webkit_settings_set_cursive_font_familyFn = extern(C) void function(WebKitSettings* settings, const(char)* cursiveFontFamily) nothrow;
+__gshared c_webkit_settings_set_cursive_font_familyFn c_webkit_settings_set_cursive_font_family; ///
+private alias c_webkit_settings_set_default_charsetFn = extern(C) void function(WebKitSettings* settings, const(char)* defaultCharset) nothrow;
+__gshared c_webkit_settings_set_default_charsetFn c_webkit_settings_set_default_charset; ///
+private alias c_webkit_settings_set_default_font_familyFn = extern(C) void function(WebKitSettings* settings, const(char)* defaultFontFamily) nothrow;
+__gshared c_webkit_settings_set_default_font_familyFn c_webkit_settings_set_default_font_family; ///
+private alias c_webkit_settings_set_default_font_sizeFn = extern(C) void function(WebKitSettings* settings, uint fontSize) nothrow;
+__gshared c_webkit_settings_set_default_font_sizeFn c_webkit_settings_set_default_font_size; ///
+private alias c_webkit_settings_set_default_monospace_font_sizeFn = extern(C) void function(WebKitSettings* settings, uint fontSize) nothrow;
+__gshared c_webkit_settings_set_default_monospace_font_sizeFn c_webkit_settings_set_default_monospace_font_size; ///
+private alias c_webkit_settings_set_disable_web_securityFn = extern(C) void function(WebKitSettings* settings, gboolean disabled) nothrow;
+__gshared c_webkit_settings_set_disable_web_securityFn c_webkit_settings_set_disable_web_security; ///
+private alias c_webkit_settings_set_draw_compositing_indicatorsFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_draw_compositing_indicatorsFn c_webkit_settings_set_draw_compositing_indicators; ///
+private alias c_webkit_settings_set_enable_2d_canvas_accelerationFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_2d_canvas_accelerationFn c_webkit_settings_set_enable_2d_canvas_acceleration; ///
+private alias c_webkit_settings_set_enable_back_forward_navigation_gesturesFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_back_forward_navigation_gesturesFn c_webkit_settings_set_enable_back_forward_navigation_gestures; ///
+private alias c_webkit_settings_set_enable_caret_browsingFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_caret_browsingFn c_webkit_settings_set_enable_caret_browsing; ///
+private alias c_webkit_settings_set_enable_developer_extrasFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_developer_extrasFn c_webkit_settings_set_enable_developer_extras; ///
+private alias c_webkit_settings_set_enable_dns_prefetchingFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_dns_prefetchingFn c_webkit_settings_set_enable_dns_prefetching; ///
+private alias c_webkit_settings_set_enable_encrypted_mediaFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_encrypted_mediaFn c_webkit_settings_set_enable_encrypted_media; ///
+private alias c_webkit_settings_set_enable_fullscreenFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_fullscreenFn c_webkit_settings_set_enable_fullscreen; ///
+private alias c_webkit_settings_set_enable_html5_databaseFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_html5_databaseFn c_webkit_settings_set_enable_html5_database; ///
+private alias c_webkit_settings_set_enable_html5_local_storageFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_html5_local_storageFn c_webkit_settings_set_enable_html5_local_storage; ///
+private alias c_webkit_settings_set_enable_hyperlink_auditingFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_hyperlink_auditingFn c_webkit_settings_set_enable_hyperlink_auditing; ///
+private alias c_webkit_settings_set_enable_javascriptFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_javascriptFn c_webkit_settings_set_enable_javascript; ///
+private alias c_webkit_settings_set_enable_javascript_markupFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_javascript_markupFn c_webkit_settings_set_enable_javascript_markup; ///
+private alias c_webkit_settings_set_enable_mediaFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_mediaFn c_webkit_settings_set_enable_media; ///
+private alias c_webkit_settings_set_enable_media_capabilitiesFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_media_capabilitiesFn c_webkit_settings_set_enable_media_capabilities; ///
+private alias c_webkit_settings_set_enable_media_streamFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_media_streamFn c_webkit_settings_set_enable_media_stream; ///
+private alias c_webkit_settings_set_enable_mediasourceFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_mediasourceFn c_webkit_settings_set_enable_mediasource; ///
+private alias c_webkit_settings_set_enable_mock_capture_devicesFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_mock_capture_devicesFn c_webkit_settings_set_enable_mock_capture_devices; ///
+private alias c_webkit_settings_set_enable_offline_web_application_cacheFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_offline_web_application_cacheFn c_webkit_settings_set_enable_offline_web_application_cache; ///
+private alias c_webkit_settings_set_enable_page_cacheFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_page_cacheFn c_webkit_settings_set_enable_page_cache; ///
+private alias c_webkit_settings_set_enable_resizable_text_areasFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_resizable_text_areasFn c_webkit_settings_set_enable_resizable_text_areas; ///
+private alias c_webkit_settings_set_enable_site_specific_quirksFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_site_specific_quirksFn c_webkit_settings_set_enable_site_specific_quirks; ///
+private alias c_webkit_settings_set_enable_smooth_scrollingFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_smooth_scrollingFn c_webkit_settings_set_enable_smooth_scrolling; ///
+private alias c_webkit_settings_set_enable_spatial_navigationFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_spatial_navigationFn c_webkit_settings_set_enable_spatial_navigation; ///
+private alias c_webkit_settings_set_enable_tabs_to_linksFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_tabs_to_linksFn c_webkit_settings_set_enable_tabs_to_links; ///
+private alias c_webkit_settings_set_enable_webaudioFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_webaudioFn c_webkit_settings_set_enable_webaudio; ///
+private alias c_webkit_settings_set_enable_webglFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_webglFn c_webkit_settings_set_enable_webgl; ///
+private alias c_webkit_settings_set_enable_webrtcFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_webrtcFn c_webkit_settings_set_enable_webrtc; ///
+private alias c_webkit_settings_set_enable_write_console_messages_to_stdoutFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_enable_write_console_messages_to_stdoutFn c_webkit_settings_set_enable_write_console_messages_to_stdout; ///
+private alias c_webkit_settings_set_fantasy_font_familyFn = extern(C) void function(WebKitSettings* settings, const(char)* fantasyFontFamily) nothrow;
+__gshared c_webkit_settings_set_fantasy_font_familyFn c_webkit_settings_set_fantasy_font_family; ///
+private alias c_webkit_settings_set_feature_enabledFn = extern(C) void function(WebKitSettings* settings, WebKitFeature* feature, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_feature_enabledFn c_webkit_settings_set_feature_enabled; ///
+private alias c_webkit_settings_set_hardware_acceleration_policyFn = extern(C) void function(WebKitSettings* settings, WebKitHardwareAccelerationPolicy policy) nothrow;
+__gshared c_webkit_settings_set_hardware_acceleration_policyFn c_webkit_settings_set_hardware_acceleration_policy; ///
+private alias c_webkit_settings_set_javascript_can_access_clipboardFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_javascript_can_access_clipboardFn c_webkit_settings_set_javascript_can_access_clipboard; ///
+private alias c_webkit_settings_set_javascript_can_open_windows_automaticallyFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_javascript_can_open_windows_automaticallyFn c_webkit_settings_set_javascript_can_open_windows_automatically; ///
+private alias c_webkit_settings_set_load_icons_ignoring_image_load_settingFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_load_icons_ignoring_image_load_settingFn c_webkit_settings_set_load_icons_ignoring_image_load_setting; ///
+private alias c_webkit_settings_set_math_font_familyFn = extern(C) void function(WebKitSettings* settings, const(char)* mathFontFamily) nothrow;
+__gshared c_webkit_settings_set_math_font_familyFn c_webkit_settings_set_math_font_family; ///
+private alias c_webkit_settings_set_media_content_types_requiring_hardware_supportFn = extern(C) void function(WebKitSettings* settings, const(char)* contentTypes) nothrow;
+__gshared c_webkit_settings_set_media_content_types_requiring_hardware_supportFn c_webkit_settings_set_media_content_types_requiring_hardware_support; ///
+private alias c_webkit_settings_set_media_playback_allows_inlineFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_media_playback_allows_inlineFn c_webkit_settings_set_media_playback_allows_inline; ///
+private alias c_webkit_settings_set_media_playback_requires_user_gestureFn = extern(C) void function(WebKitSettings* settings, gboolean enabled) nothrow;
+__gshared c_webkit_settings_set_media_playback_requires_user_gestureFn c_webkit_settings_set_media_playback_requires_user_gesture; ///
+private alias c_webkit_settings_set_minimum_font_sizeFn = extern(C) void function(WebKitSettings* settings, uint fontSize) nothrow;
+__gshared c_webkit_settings_set_minimum_font_sizeFn c_webkit_settings_set_minimum_font_size; ///
+private alias c_webkit_settings_set_monospace_font_familyFn = extern(C) void function(WebKitSettings* settings, const(char)* monospaceFontFamily) nothrow;
+__gshared c_webkit_settings_set_monospace_font_familyFn c_webkit_settings_set_monospace_font_family; ///
+private alias c_webkit_settings_set_pictograph_font_familyFn = extern(C) void function(WebKitSettings* settings, const(char)* pictographFontFamily) nothrow;
+__gshared c_webkit_settings_set_pictograph_font_familyFn c_webkit_settings_set_pictograph_font_family; ///
+private alias c_webkit_settings_set_print_backgroundsFn = extern(C) void function(WebKitSettings* settings, gboolean printBackgrounds) nothrow;
+__gshared c_webkit_settings_set_print_backgroundsFn c_webkit_settings_set_print_backgrounds; ///
+private alias c_webkit_settings_set_sans_serif_font_familyFn = extern(C) void function(WebKitSettings* settings, const(char)* sansSerifFontFamily) nothrow;
+__gshared c_webkit_settings_set_sans_serif_font_familyFn c_webkit_settings_set_sans_serif_font_family; ///
+private alias c_webkit_settings_set_serif_font_familyFn = extern(C) void function(WebKitSettings* settings, const(char)* serifFontFamily) nothrow;
+__gshared c_webkit_settings_set_serif_font_familyFn c_webkit_settings_set_serif_font_family; ///
+private alias c_webkit_settings_set_user_agentFn = extern(C) void function(WebKitSettings* settings, const(char)* userAgent) nothrow;
+__gshared c_webkit_settings_set_user_agentFn c_webkit_settings_set_user_agent; ///
+private alias c_webkit_settings_set_user_agent_with_application_detailsFn = extern(C) void function(WebKitSettings* settings, const(char)* applicationName, const(char)* applicationVersion) nothrow;
+__gshared c_webkit_settings_set_user_agent_with_application_detailsFn c_webkit_settings_set_user_agent_with_application_details; ///
+private alias c_webkit_settings_set_webrtc_udp_ports_rangeFn = extern(C) void function(WebKitSettings* settings, const(char)* udpPortRange) nothrow;
+__gshared c_webkit_settings_set_webrtc_udp_ports_rangeFn c_webkit_settings_set_webrtc_udp_ports_range; ///
+private alias c_webkit_settings_set_zoom_text_onlyFn = extern(C) void function(WebKitSettings* settings, gboolean zoomTextOnly) nothrow;
+__gshared c_webkit_settings_set_zoom_text_onlyFn c_webkit_settings_set_zoom_text_only; ///
+
+// URIRequest
+private alias c_webkit_uri_request_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_uri_request_get_typeFn c_webkit_uri_request_get_type; ///
+private alias c_webkit_uri_request_newFn = extern(C) WebKitURIRequest* function(const(char)* uri) nothrow;
+__gshared c_webkit_uri_request_newFn c_webkit_uri_request_new; ///
+private alias c_webkit_uri_request_get_http_headersFn = extern(C) SoupMessageHeaders* function(WebKitURIRequest* request) nothrow;
+__gshared c_webkit_uri_request_get_http_headersFn c_webkit_uri_request_get_http_headers; ///
+private alias c_webkit_uri_request_get_http_methodFn = extern(C) const(char)* function(WebKitURIRequest* request) nothrow;
+__gshared c_webkit_uri_request_get_http_methodFn c_webkit_uri_request_get_http_method; ///
+private alias c_webkit_uri_request_get_uriFn = extern(C) const(char)* function(WebKitURIRequest* request) nothrow;
+__gshared c_webkit_uri_request_get_uriFn c_webkit_uri_request_get_uri; ///
+private alias c_webkit_uri_request_set_uriFn = extern(C) void function(WebKitURIRequest* request, const(char)* uri) nothrow;
+__gshared c_webkit_uri_request_set_uriFn c_webkit_uri_request_set_uri; ///
+
+// URIResponse
+private alias c_webkit_uri_response_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_uri_response_get_typeFn c_webkit_uri_response_get_type; ///
+private alias c_webkit_uri_response_get_content_lengthFn = extern(C) ulong function(WebKitURIResponse* response) nothrow;
+__gshared c_webkit_uri_response_get_content_lengthFn c_webkit_uri_response_get_content_length; ///
+private alias c_webkit_uri_response_get_http_headersFn = extern(C) SoupMessageHeaders* function(WebKitURIResponse* response) nothrow;
+__gshared c_webkit_uri_response_get_http_headersFn c_webkit_uri_response_get_http_headers; ///
+private alias c_webkit_uri_response_get_mime_typeFn = extern(C) const(char)* function(WebKitURIResponse* response) nothrow;
+__gshared c_webkit_uri_response_get_mime_typeFn c_webkit_uri_response_get_mime_type; ///
+private alias c_webkit_uri_response_get_status_codeFn = extern(C) uint function(WebKitURIResponse* response) nothrow;
+__gshared c_webkit_uri_response_get_status_codeFn c_webkit_uri_response_get_status_code; ///
+private alias c_webkit_uri_response_get_suggested_filenameFn = extern(C) const(char)* function(WebKitURIResponse* response) nothrow;
+__gshared c_webkit_uri_response_get_suggested_filenameFn c_webkit_uri_response_get_suggested_filename; ///
+private alias c_webkit_uri_response_get_uriFn = extern(C) const(char)* function(WebKitURIResponse* response) nothrow;
+__gshared c_webkit_uri_response_get_uriFn c_webkit_uri_response_get_uri; ///
+
+// URISchemeRequest
+private alias c_webkit_uri_scheme_request_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_uri_scheme_request_get_typeFn c_webkit_uri_scheme_request_get_type; ///
+private alias c_webkit_uri_scheme_request_finishFn = extern(C) void function(WebKitURISchemeRequest* request, GInputStream* stream, long streamLength, const(char)* contentType) nothrow;
+__gshared c_webkit_uri_scheme_request_finishFn c_webkit_uri_scheme_request_finish; ///
+private alias c_webkit_uri_scheme_request_finish_errorFn = extern(C) void function(WebKitURISchemeRequest* request, GError* error) nothrow;
+__gshared c_webkit_uri_scheme_request_finish_errorFn c_webkit_uri_scheme_request_finish_error; ///
+private alias c_webkit_uri_scheme_request_finish_with_responseFn = extern(C) void function(WebKitURISchemeRequest* request, WebKitURISchemeResponse* response) nothrow;
+__gshared c_webkit_uri_scheme_request_finish_with_responseFn c_webkit_uri_scheme_request_finish_with_response; ///
+private alias c_webkit_uri_scheme_request_get_http_bodyFn = extern(C) GInputStream* function(WebKitURISchemeRequest* request) nothrow;
+__gshared c_webkit_uri_scheme_request_get_http_bodyFn c_webkit_uri_scheme_request_get_http_body; ///
+private alias c_webkit_uri_scheme_request_get_http_headersFn = extern(C) SoupMessageHeaders* function(WebKitURISchemeRequest* request) nothrow;
+__gshared c_webkit_uri_scheme_request_get_http_headersFn c_webkit_uri_scheme_request_get_http_headers; ///
+private alias c_webkit_uri_scheme_request_get_http_methodFn = extern(C) const(char)* function(WebKitURISchemeRequest* request) nothrow;
+__gshared c_webkit_uri_scheme_request_get_http_methodFn c_webkit_uri_scheme_request_get_http_method; ///
+private alias c_webkit_uri_scheme_request_get_pathFn = extern(C) const(char)* function(WebKitURISchemeRequest* request) nothrow;
+__gshared c_webkit_uri_scheme_request_get_pathFn c_webkit_uri_scheme_request_get_path; ///
+private alias c_webkit_uri_scheme_request_get_schemeFn = extern(C) const(char)* function(WebKitURISchemeRequest* request) nothrow;
+__gshared c_webkit_uri_scheme_request_get_schemeFn c_webkit_uri_scheme_request_get_scheme; ///
+private alias c_webkit_uri_scheme_request_get_uriFn = extern(C) const(char)* function(WebKitURISchemeRequest* request) nothrow;
+__gshared c_webkit_uri_scheme_request_get_uriFn c_webkit_uri_scheme_request_get_uri; ///
+private alias c_webkit_uri_scheme_request_get_web_viewFn = extern(C) WebKitWebView* function(WebKitURISchemeRequest* request) nothrow;
+__gshared c_webkit_uri_scheme_request_get_web_viewFn c_webkit_uri_scheme_request_get_web_view; ///
+
+// URISchemeResponse
+private alias c_webkit_uri_scheme_response_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_uri_scheme_response_get_typeFn c_webkit_uri_scheme_response_get_type; ///
+private alias c_webkit_uri_scheme_response_newFn = extern(C) WebKitURISchemeResponse* function(GInputStream* inputStream, long streamLength) nothrow;
+__gshared c_webkit_uri_scheme_response_newFn c_webkit_uri_scheme_response_new; ///
+private alias c_webkit_uri_scheme_response_set_content_typeFn = extern(C) void function(WebKitURISchemeResponse* response, const(char)* contentType) nothrow;
+__gshared c_webkit_uri_scheme_response_set_content_typeFn c_webkit_uri_scheme_response_set_content_type; ///
+private alias c_webkit_uri_scheme_response_set_http_headersFn = extern(C) void function(WebKitURISchemeResponse* response, SoupMessageHeaders* headers) nothrow;
+__gshared c_webkit_uri_scheme_response_set_http_headersFn c_webkit_uri_scheme_response_set_http_headers; ///
+private alias c_webkit_uri_scheme_response_set_statusFn = extern(C) void function(WebKitURISchemeResponse* response, uint statusCode, const(char)* reasonPhrase) nothrow;
+__gshared c_webkit_uri_scheme_response_set_statusFn c_webkit_uri_scheme_response_set_status; ///
+
+// UserContentFilter
+private alias c_webkit_user_content_filter_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_user_content_filter_get_typeFn c_webkit_user_content_filter_get_type; ///
+private alias c_webkit_user_content_filter_get_identifierFn = extern(C) const(char)* function(WebKitUserContentFilter* userContentFilter) nothrow;
+__gshared c_webkit_user_content_filter_get_identifierFn c_webkit_user_content_filter_get_identifier; ///
+private alias c_webkit_user_content_filter_refFn = extern(C) WebKitUserContentFilter* function(WebKitUserContentFilter* userContentFilter) nothrow;
+__gshared c_webkit_user_content_filter_refFn c_webkit_user_content_filter_ref; ///
+private alias c_webkit_user_content_filter_unrefFn = extern(C) void function(WebKitUserContentFilter* userContentFilter) nothrow;
+__gshared c_webkit_user_content_filter_unrefFn c_webkit_user_content_filter_unref; ///
+
+// UserContentFilterStore
+private alias c_webkit_user_content_filter_store_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_user_content_filter_store_get_typeFn c_webkit_user_content_filter_store_get_type; ///
+private alias c_webkit_user_content_filter_store_newFn = extern(C) WebKitUserContentFilterStore* function(const(char)* storagePath) nothrow;
+__gshared c_webkit_user_content_filter_store_newFn c_webkit_user_content_filter_store_new; ///
+private alias c_webkit_user_content_filter_store_fetch_identifiersFn = extern(C) void function(WebKitUserContentFilterStore* store, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_user_content_filter_store_fetch_identifiersFn c_webkit_user_content_filter_store_fetch_identifiers; ///
+private alias c_webkit_user_content_filter_store_fetch_identifiers_finishFn = extern(C) char** function(WebKitUserContentFilterStore* store, GAsyncResult* result) nothrow;
+__gshared c_webkit_user_content_filter_store_fetch_identifiers_finishFn c_webkit_user_content_filter_store_fetch_identifiers_finish; ///
+private alias c_webkit_user_content_filter_store_get_pathFn = extern(C) const(char)* function(WebKitUserContentFilterStore* store) nothrow;
+__gshared c_webkit_user_content_filter_store_get_pathFn c_webkit_user_content_filter_store_get_path; ///
+private alias c_webkit_user_content_filter_store_loadFn = extern(C) void function(WebKitUserContentFilterStore* store, const(char)* identifier, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_user_content_filter_store_loadFn c_webkit_user_content_filter_store_load; ///
+private alias c_webkit_user_content_filter_store_load_finishFn = extern(C) WebKitUserContentFilter* function(WebKitUserContentFilterStore* store, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_user_content_filter_store_load_finishFn c_webkit_user_content_filter_store_load_finish; ///
+private alias c_webkit_user_content_filter_store_removeFn = extern(C) void function(WebKitUserContentFilterStore* store, const(char)* identifier, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_user_content_filter_store_removeFn c_webkit_user_content_filter_store_remove; ///
+private alias c_webkit_user_content_filter_store_remove_finishFn = extern(C) gboolean function(WebKitUserContentFilterStore* store, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_user_content_filter_store_remove_finishFn c_webkit_user_content_filter_store_remove_finish; ///
+private alias c_webkit_user_content_filter_store_saveFn = extern(C) void function(WebKitUserContentFilterStore* store, const(char)* identifier, GBytes* source, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_user_content_filter_store_saveFn c_webkit_user_content_filter_store_save; ///
+private alias c_webkit_user_content_filter_store_save_finishFn = extern(C) WebKitUserContentFilter* function(WebKitUserContentFilterStore* store, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_user_content_filter_store_save_finishFn c_webkit_user_content_filter_store_save_finish; ///
+private alias c_webkit_user_content_filter_store_save_from_fileFn = extern(C) void function(WebKitUserContentFilterStore* store, const(char)* identifier, GFile* file, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_user_content_filter_store_save_from_fileFn c_webkit_user_content_filter_store_save_from_file; ///
+private alias c_webkit_user_content_filter_store_save_from_file_finishFn = extern(C) WebKitUserContentFilter* function(WebKitUserContentFilterStore* store, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_user_content_filter_store_save_from_file_finishFn c_webkit_user_content_filter_store_save_from_file_finish; ///
+
+// UserContentManager
+private alias c_webkit_user_content_manager_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_user_content_manager_get_typeFn c_webkit_user_content_manager_get_type; ///
+private alias c_webkit_user_content_manager_newFn = extern(C) WebKitUserContentManager* function() nothrow;
+__gshared c_webkit_user_content_manager_newFn c_webkit_user_content_manager_new; ///
+private alias c_webkit_user_content_manager_add_filterFn = extern(C) void function(WebKitUserContentManager* manager, WebKitUserContentFilter* filter) nothrow;
+__gshared c_webkit_user_content_manager_add_filterFn c_webkit_user_content_manager_add_filter; ///
+private alias c_webkit_user_content_manager_add_scriptFn = extern(C) void function(WebKitUserContentManager* manager, WebKitUserScript* script) nothrow;
+__gshared c_webkit_user_content_manager_add_scriptFn c_webkit_user_content_manager_add_script; ///
+private alias c_webkit_user_content_manager_add_style_sheetFn = extern(C) void function(WebKitUserContentManager* manager, WebKitUserStyleSheet* stylesheet) nothrow;
+__gshared c_webkit_user_content_manager_add_style_sheetFn c_webkit_user_content_manager_add_style_sheet; ///
+private alias c_webkit_user_content_manager_register_script_message_handlerFn = extern(C) gboolean function(WebKitUserContentManager* manager, const(char)* name, const(char)* worldName) nothrow;
+__gshared c_webkit_user_content_manager_register_script_message_handlerFn c_webkit_user_content_manager_register_script_message_handler; ///
+private alias c_webkit_user_content_manager_register_script_message_handler_with_replyFn = extern(C) gboolean function(WebKitUserContentManager* manager, const(char)* name, const(char)* worldName) nothrow;
+__gshared c_webkit_user_content_manager_register_script_message_handler_with_replyFn c_webkit_user_content_manager_register_script_message_handler_with_reply; ///
+private alias c_webkit_user_content_manager_remove_all_filtersFn = extern(C) void function(WebKitUserContentManager* manager) nothrow;
+__gshared c_webkit_user_content_manager_remove_all_filtersFn c_webkit_user_content_manager_remove_all_filters; ///
+private alias c_webkit_user_content_manager_remove_all_scriptsFn = extern(C) void function(WebKitUserContentManager* manager) nothrow;
+__gshared c_webkit_user_content_manager_remove_all_scriptsFn c_webkit_user_content_manager_remove_all_scripts; ///
+private alias c_webkit_user_content_manager_remove_all_style_sheetsFn = extern(C) void function(WebKitUserContentManager* manager) nothrow;
+__gshared c_webkit_user_content_manager_remove_all_style_sheetsFn c_webkit_user_content_manager_remove_all_style_sheets; ///
+private alias c_webkit_user_content_manager_remove_filterFn = extern(C) void function(WebKitUserContentManager* manager, WebKitUserContentFilter* filter) nothrow;
+__gshared c_webkit_user_content_manager_remove_filterFn c_webkit_user_content_manager_remove_filter; ///
+private alias c_webkit_user_content_manager_remove_filter_by_idFn = extern(C) void function(WebKitUserContentManager* manager, const(char)* filterId) nothrow;
+__gshared c_webkit_user_content_manager_remove_filter_by_idFn c_webkit_user_content_manager_remove_filter_by_id; ///
+private alias c_webkit_user_content_manager_remove_scriptFn = extern(C) void function(WebKitUserContentManager* manager, WebKitUserScript* script) nothrow;
+__gshared c_webkit_user_content_manager_remove_scriptFn c_webkit_user_content_manager_remove_script; ///
+private alias c_webkit_user_content_manager_remove_style_sheetFn = extern(C) void function(WebKitUserContentManager* manager, WebKitUserStyleSheet* stylesheet) nothrow;
+__gshared c_webkit_user_content_manager_remove_style_sheetFn c_webkit_user_content_manager_remove_style_sheet; ///
+private alias c_webkit_user_content_manager_unregister_script_message_handlerFn = extern(C) void function(WebKitUserContentManager* manager, const(char)* name, const(char)* worldName) nothrow;
+__gshared c_webkit_user_content_manager_unregister_script_message_handlerFn c_webkit_user_content_manager_unregister_script_message_handler; ///
+
+// UserMediaPermissionRequest
+private alias c_webkit_user_media_permission_request_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_user_media_permission_request_get_typeFn c_webkit_user_media_permission_request_get_type; ///
+
+// UserMessage
+private alias c_webkit_user_message_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_user_message_get_typeFn c_webkit_user_message_get_type; ///
+private alias c_webkit_user_message_newFn = extern(C) WebKitUserMessage* function(const(char)* name, GVariant* parameters) nothrow;
+__gshared c_webkit_user_message_newFn c_webkit_user_message_new; ///
+private alias c_webkit_user_message_new_with_fd_listFn = extern(C) WebKitUserMessage* function(const(char)* name, GVariant* parameters, GUnixFDList* fdList) nothrow;
+__gshared c_webkit_user_message_new_with_fd_listFn c_webkit_user_message_new_with_fd_list; ///
+private alias c_webkit_user_message_get_fd_listFn = extern(C) GUnixFDList* function(WebKitUserMessage* message) nothrow;
+__gshared c_webkit_user_message_get_fd_listFn c_webkit_user_message_get_fd_list; ///
+private alias c_webkit_user_message_get_nameFn = extern(C) const(char)* function(WebKitUserMessage* message) nothrow;
+__gshared c_webkit_user_message_get_nameFn c_webkit_user_message_get_name; ///
+private alias c_webkit_user_message_get_parametersFn = extern(C) GVariant* function(WebKitUserMessage* message) nothrow;
+__gshared c_webkit_user_message_get_parametersFn c_webkit_user_message_get_parameters; ///
+private alias c_webkit_user_message_send_replyFn = extern(C) void function(WebKitUserMessage* message, WebKitUserMessage* reply) nothrow;
+__gshared c_webkit_user_message_send_replyFn c_webkit_user_message_send_reply; ///
+
+// UserScript
+private alias c_webkit_user_script_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_user_script_get_typeFn c_webkit_user_script_get_type; ///
+private alias c_webkit_user_script_newFn = extern(C) WebKitUserScript* function(const(char)* source, WebKitUserContentInjectedFrames injectedFrames, WebKitUserScriptInjectionTime injectionTime, const(char*)* allowList, const(char*)* blockList) nothrow;
+__gshared c_webkit_user_script_newFn c_webkit_user_script_new; ///
+private alias c_webkit_user_script_new_for_worldFn = extern(C) WebKitUserScript* function(const(char)* source, WebKitUserContentInjectedFrames injectedFrames, WebKitUserScriptInjectionTime injectionTime, const(char)* worldName, const(char*)* allowList, const(char*)* blockList) nothrow;
+__gshared c_webkit_user_script_new_for_worldFn c_webkit_user_script_new_for_world; ///
+private alias c_webkit_user_script_refFn = extern(C) WebKitUserScript* function(WebKitUserScript* userScript) nothrow;
+__gshared c_webkit_user_script_refFn c_webkit_user_script_ref; ///
+private alias c_webkit_user_script_unrefFn = extern(C) void function(WebKitUserScript* userScript) nothrow;
+__gshared c_webkit_user_script_unrefFn c_webkit_user_script_unref; ///
+
+// UserStyleSheet
+private alias c_webkit_user_style_sheet_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_user_style_sheet_get_typeFn c_webkit_user_style_sheet_get_type; ///
+private alias c_webkit_user_style_sheet_newFn = extern(C) WebKitUserStyleSheet* function(const(char)* source, WebKitUserContentInjectedFrames injectedFrames, WebKitUserStyleLevel level, const(char*)* allowList, const(char*)* blockList) nothrow;
+__gshared c_webkit_user_style_sheet_newFn c_webkit_user_style_sheet_new; ///
+private alias c_webkit_user_style_sheet_new_for_worldFn = extern(C) WebKitUserStyleSheet* function(const(char)* source, WebKitUserContentInjectedFrames injectedFrames, WebKitUserStyleLevel level, const(char)* worldName, const(char*)* allowList, const(char*)* blockList) nothrow;
+__gshared c_webkit_user_style_sheet_new_for_worldFn c_webkit_user_style_sheet_new_for_world; ///
+private alias c_webkit_user_style_sheet_refFn = extern(C) WebKitUserStyleSheet* function(WebKitUserStyleSheet* userStyleSheet) nothrow;
+__gshared c_webkit_user_style_sheet_refFn c_webkit_user_style_sheet_ref; ///
+private alias c_webkit_user_style_sheet_unrefFn = extern(C) void function(WebKitUserStyleSheet* userStyleSheet) nothrow;
+__gshared c_webkit_user_style_sheet_unrefFn c_webkit_user_style_sheet_unref; ///
+
+// WebContext
+private alias c_webkit_web_context_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_web_context_get_typeFn c_webkit_web_context_get_type; ///
+private alias c_webkit_web_context_newFn = extern(C) WebKitWebContext* function() nothrow;
+__gshared c_webkit_web_context_newFn c_webkit_web_context_new; ///
+private alias c_webkit_web_context_get_defaultFn = extern(C) WebKitWebContext* function() nothrow;
+__gshared c_webkit_web_context_get_defaultFn c_webkit_web_context_get_default; ///
+private alias c_webkit_web_context_add_path_to_sandboxFn = extern(C) void function(WebKitWebContext* context, const(char)* path, gboolean readOnly) nothrow;
+__gshared c_webkit_web_context_add_path_to_sandboxFn c_webkit_web_context_add_path_to_sandbox; ///
+private alias c_webkit_web_context_get_cache_modelFn = extern(C) WebKitCacheModel function(WebKitWebContext* context) nothrow;
+__gshared c_webkit_web_context_get_cache_modelFn c_webkit_web_context_get_cache_model; ///
+private alias c_webkit_web_context_get_geolocation_managerFn = extern(C) WebKitGeolocationManager* function(WebKitWebContext* context) nothrow;
+__gshared c_webkit_web_context_get_geolocation_managerFn c_webkit_web_context_get_geolocation_manager; ///
+private alias c_webkit_web_context_get_network_session_for_automationFn = extern(C) WebKitNetworkSession* function(WebKitWebContext* context) nothrow;
+__gshared c_webkit_web_context_get_network_session_for_automationFn c_webkit_web_context_get_network_session_for_automation; ///
+private alias c_webkit_web_context_get_security_managerFn = extern(C) WebKitSecurityManager* function(WebKitWebContext* context) nothrow;
+__gshared c_webkit_web_context_get_security_managerFn c_webkit_web_context_get_security_manager; ///
+private alias c_webkit_web_context_get_spell_checking_enabledFn = extern(C) gboolean function(WebKitWebContext* context) nothrow;
+__gshared c_webkit_web_context_get_spell_checking_enabledFn c_webkit_web_context_get_spell_checking_enabled; ///
+private alias c_webkit_web_context_get_spell_checking_languagesFn = extern(C) const(char*)* function(WebKitWebContext* context) nothrow;
+__gshared c_webkit_web_context_get_spell_checking_languagesFn c_webkit_web_context_get_spell_checking_languages; ///
+private alias c_webkit_web_context_get_time_zone_overrideFn = extern(C) const(char)* function(WebKitWebContext* context) nothrow;
+__gshared c_webkit_web_context_get_time_zone_overrideFn c_webkit_web_context_get_time_zone_override; ///
+private alias c_webkit_web_context_initialize_notification_permissionsFn = extern(C) void function(WebKitWebContext* context, GList* allowedOrigins, GList* disallowedOrigins) nothrow;
+__gshared c_webkit_web_context_initialize_notification_permissionsFn c_webkit_web_context_initialize_notification_permissions; ///
+private alias c_webkit_web_context_is_automation_allowedFn = extern(C) gboolean function(WebKitWebContext* context) nothrow;
+__gshared c_webkit_web_context_is_automation_allowedFn c_webkit_web_context_is_automation_allowed; ///
+private alias c_webkit_web_context_register_uri_schemeFn = extern(C) void function(WebKitWebContext* context, const(char)* scheme, WebKitURISchemeRequestCallback callback, void* userData, GDestroyNotify userDataDestroyFunc) nothrow;
+__gshared c_webkit_web_context_register_uri_schemeFn c_webkit_web_context_register_uri_scheme; ///
+private alias c_webkit_web_context_send_message_to_all_extensionsFn = extern(C) void function(WebKitWebContext* context, WebKitUserMessage* message) nothrow;
+__gshared c_webkit_web_context_send_message_to_all_extensionsFn c_webkit_web_context_send_message_to_all_extensions; ///
+private alias c_webkit_web_context_set_automation_allowedFn = extern(C) void function(WebKitWebContext* context, gboolean allowed) nothrow;
+__gshared c_webkit_web_context_set_automation_allowedFn c_webkit_web_context_set_automation_allowed; ///
+private alias c_webkit_web_context_set_cache_modelFn = extern(C) void function(WebKitWebContext* context, WebKitCacheModel cacheModel) nothrow;
+__gshared c_webkit_web_context_set_cache_modelFn c_webkit_web_context_set_cache_model; ///
+private alias c_webkit_web_context_set_preferred_languagesFn = extern(C) void function(WebKitWebContext* context, const(char*)* languages) nothrow;
+__gshared c_webkit_web_context_set_preferred_languagesFn c_webkit_web_context_set_preferred_languages; ///
+private alias c_webkit_web_context_set_spell_checking_enabledFn = extern(C) void function(WebKitWebContext* context, gboolean enabled) nothrow;
+__gshared c_webkit_web_context_set_spell_checking_enabledFn c_webkit_web_context_set_spell_checking_enabled; ///
+private alias c_webkit_web_context_set_spell_checking_languagesFn = extern(C) void function(WebKitWebContext* context, const(char*)* languages) nothrow;
+__gshared c_webkit_web_context_set_spell_checking_languagesFn c_webkit_web_context_set_spell_checking_languages; ///
+private alias c_webkit_web_context_set_web_process_extensions_directoryFn = extern(C) void function(WebKitWebContext* context, const(char)* directory) nothrow;
+__gshared c_webkit_web_context_set_web_process_extensions_directoryFn c_webkit_web_context_set_web_process_extensions_directory; ///
+private alias c_webkit_web_context_set_web_process_extensions_initialization_user_dataFn = extern(C) void function(WebKitWebContext* context, GVariant* userData) nothrow;
+__gshared c_webkit_web_context_set_web_process_extensions_initialization_user_dataFn c_webkit_web_context_set_web_process_extensions_initialization_user_data; ///
+
+// WebExtension
+private alias c_webkit_web_extension_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_web_extension_get_typeFn c_webkit_web_extension_get_type; ///
+private alias c_webkit_web_extension_newFn = extern(C) WebKitWebExtension* function(const(char)* extensionPath, GError** _err) nothrow;
+__gshared c_webkit_web_extension_newFn c_webkit_web_extension_new; ///
+private alias c_webkit_web_extension_get_action_iconFn = extern(C) GIcon* function(WebKitWebExtension* extension, double width, double height) nothrow;
+__gshared c_webkit_web_extension_get_action_iconFn c_webkit_web_extension_get_action_icon; ///
+private alias c_webkit_web_extension_get_all_requested_match_patternsFn = extern(C) WebKitWebExtensionMatchPattern** function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_all_requested_match_patternsFn c_webkit_web_extension_get_all_requested_match_patterns; ///
+private alias c_webkit_web_extension_get_default_localeFn = extern(C) const(char)* function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_default_localeFn c_webkit_web_extension_get_default_locale; ///
+private alias c_webkit_web_extension_get_display_action_labelFn = extern(C) const(char)* function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_display_action_labelFn c_webkit_web_extension_get_display_action_label; ///
+private alias c_webkit_web_extension_get_display_descriptionFn = extern(C) const(char)* function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_display_descriptionFn c_webkit_web_extension_get_display_description; ///
+private alias c_webkit_web_extension_get_display_nameFn = extern(C) const(char)* function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_display_nameFn c_webkit_web_extension_get_display_name; ///
+private alias c_webkit_web_extension_get_display_short_nameFn = extern(C) const(char)* function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_display_short_nameFn c_webkit_web_extension_get_display_short_name; ///
+private alias c_webkit_web_extension_get_display_versionFn = extern(C) const(char)* function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_display_versionFn c_webkit_web_extension_get_display_version; ///
+private alias c_webkit_web_extension_get_has_background_contentFn = extern(C) gboolean function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_has_background_contentFn c_webkit_web_extension_get_has_background_content; ///
+private alias c_webkit_web_extension_get_has_commandsFn = extern(C) gboolean function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_has_commandsFn c_webkit_web_extension_get_has_commands; ///
+private alias c_webkit_web_extension_get_has_content_modification_rulesFn = extern(C) gboolean function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_has_content_modification_rulesFn c_webkit_web_extension_get_has_content_modification_rules; ///
+private alias c_webkit_web_extension_get_has_injected_contentFn = extern(C) gboolean function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_has_injected_contentFn c_webkit_web_extension_get_has_injected_content; ///
+private alias c_webkit_web_extension_get_has_options_pageFn = extern(C) gboolean function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_has_options_pageFn c_webkit_web_extension_get_has_options_page; ///
+private alias c_webkit_web_extension_get_has_override_new_tab_pageFn = extern(C) gboolean function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_has_override_new_tab_pageFn c_webkit_web_extension_get_has_override_new_tab_page; ///
+private alias c_webkit_web_extension_get_has_persistent_background_contentFn = extern(C) gboolean function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_has_persistent_background_contentFn c_webkit_web_extension_get_has_persistent_background_content; ///
+private alias c_webkit_web_extension_get_iconFn = extern(C) GIcon* function(WebKitWebExtension* extension, double width, double height) nothrow;
+__gshared c_webkit_web_extension_get_iconFn c_webkit_web_extension_get_icon; ///
+private alias c_webkit_web_extension_get_manifest_versionFn = extern(C) double function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_manifest_versionFn c_webkit_web_extension_get_manifest_version; ///
+private alias c_webkit_web_extension_get_optional_permission_match_patternsFn = extern(C) WebKitWebExtensionMatchPattern** function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_optional_permission_match_patternsFn c_webkit_web_extension_get_optional_permission_match_patterns; ///
+private alias c_webkit_web_extension_get_optional_permissionsFn = extern(C) const(char*)* function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_optional_permissionsFn c_webkit_web_extension_get_optional_permissions; ///
+private alias c_webkit_web_extension_get_pathFn = extern(C) const(char)* function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_pathFn c_webkit_web_extension_get_path; ///
+private alias c_webkit_web_extension_get_requested_permission_match_patternsFn = extern(C) WebKitWebExtensionMatchPattern** function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_requested_permission_match_patternsFn c_webkit_web_extension_get_requested_permission_match_patterns; ///
+private alias c_webkit_web_extension_get_requested_permissionsFn = extern(C) const(char*)* function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_requested_permissionsFn c_webkit_web_extension_get_requested_permissions; ///
+private alias c_webkit_web_extension_get_versionFn = extern(C) const(char)* function(WebKitWebExtension* extension) nothrow;
+__gshared c_webkit_web_extension_get_versionFn c_webkit_web_extension_get_version; ///
+private alias c_webkit_web_extension_supports_manifest_versionFn = extern(C) gboolean function(WebKitWebExtension* extension, double manifestVersion) nothrow;
+__gshared c_webkit_web_extension_supports_manifest_versionFn c_webkit_web_extension_supports_manifest_version; ///
+
+// WebExtensionMatchPattern
+private alias c_webkit_web_extension_match_pattern_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_web_extension_match_pattern_get_typeFn c_webkit_web_extension_match_pattern_get_type; ///
+private alias c_webkit_web_extension_match_pattern_new_all_hosts_and_schemesFn = extern(C) WebKitWebExtensionMatchPattern* function() nothrow;
+__gshared c_webkit_web_extension_match_pattern_new_all_hosts_and_schemesFn c_webkit_web_extension_match_pattern_new_all_hosts_and_schemes; ///
+private alias c_webkit_web_extension_match_pattern_new_all_urlsFn = extern(C) WebKitWebExtensionMatchPattern* function() nothrow;
+__gshared c_webkit_web_extension_match_pattern_new_all_urlsFn c_webkit_web_extension_match_pattern_new_all_urls; ///
+private alias c_webkit_web_extension_match_pattern_new_with_schemeFn = extern(C) WebKitWebExtensionMatchPattern* function(const(char)* scheme, const(char)* host, const(char)* path, GError** _err) nothrow;
+__gshared c_webkit_web_extension_match_pattern_new_with_schemeFn c_webkit_web_extension_match_pattern_new_with_scheme; ///
+private alias c_webkit_web_extension_match_pattern_new_with_stringFn = extern(C) WebKitWebExtensionMatchPattern* function(const(char)* string_, GError** _err) nothrow;
+__gshared c_webkit_web_extension_match_pattern_new_with_stringFn c_webkit_web_extension_match_pattern_new_with_string; ///
+private alias c_webkit_web_extension_match_pattern_get_hostFn = extern(C) const(char)* function(WebKitWebExtensionMatchPattern* matchPattern) nothrow;
+__gshared c_webkit_web_extension_match_pattern_get_hostFn c_webkit_web_extension_match_pattern_get_host; ///
+private alias c_webkit_web_extension_match_pattern_get_matches_all_hostsFn = extern(C) gboolean function(WebKitWebExtensionMatchPattern* matchPattern) nothrow;
+__gshared c_webkit_web_extension_match_pattern_get_matches_all_hostsFn c_webkit_web_extension_match_pattern_get_matches_all_hosts; ///
+private alias c_webkit_web_extension_match_pattern_get_matches_all_urlsFn = extern(C) gboolean function(WebKitWebExtensionMatchPattern* matchPattern) nothrow;
+__gshared c_webkit_web_extension_match_pattern_get_matches_all_urlsFn c_webkit_web_extension_match_pattern_get_matches_all_urls; ///
+private alias c_webkit_web_extension_match_pattern_get_pathFn = extern(C) const(char)* function(WebKitWebExtensionMatchPattern* matchPattern) nothrow;
+__gshared c_webkit_web_extension_match_pattern_get_pathFn c_webkit_web_extension_match_pattern_get_path; ///
+private alias c_webkit_web_extension_match_pattern_get_schemeFn = extern(C) const(char)* function(WebKitWebExtensionMatchPattern* matchPattern) nothrow;
+__gshared c_webkit_web_extension_match_pattern_get_schemeFn c_webkit_web_extension_match_pattern_get_scheme; ///
+private alias c_webkit_web_extension_match_pattern_get_stringFn = extern(C) const(char)* function(WebKitWebExtensionMatchPattern* matchPattern) nothrow;
+__gshared c_webkit_web_extension_match_pattern_get_stringFn c_webkit_web_extension_match_pattern_get_string; ///
+private alias c_webkit_web_extension_match_pattern_matches_patternFn = extern(C) gboolean function(WebKitWebExtensionMatchPattern* matchPattern, WebKitWebExtensionMatchPattern* pattern, WebKitWebExtensionMatchPatternOptions options) nothrow;
+__gshared c_webkit_web_extension_match_pattern_matches_patternFn c_webkit_web_extension_match_pattern_matches_pattern; ///
+private alias c_webkit_web_extension_match_pattern_matches_urlFn = extern(C) gboolean function(WebKitWebExtensionMatchPattern* matchPattern, const(char)* url, WebKitWebExtensionMatchPatternOptions options) nothrow;
+__gshared c_webkit_web_extension_match_pattern_matches_urlFn c_webkit_web_extension_match_pattern_matches_url; ///
+private alias c_webkit_web_extension_match_pattern_refFn = extern(C) WebKitWebExtensionMatchPattern* function(WebKitWebExtensionMatchPattern* matchPattern) nothrow;
+__gshared c_webkit_web_extension_match_pattern_refFn c_webkit_web_extension_match_pattern_ref; ///
+private alias c_webkit_web_extension_match_pattern_unrefFn = extern(C) void function(WebKitWebExtensionMatchPattern* matchPattern) nothrow;
+__gshared c_webkit_web_extension_match_pattern_unrefFn c_webkit_web_extension_match_pattern_unref; ///
+private alias c_webkit_web_extension_match_pattern_register_custom_URL_schemeFn = extern(C) void function(const(char)* urlScheme) nothrow;
+__gshared c_webkit_web_extension_match_pattern_register_custom_URL_schemeFn c_webkit_web_extension_match_pattern_register_custom_URL_scheme; ///
+private alias c_webkit_web_extension_match_pattern_register_custom_url_schemeFn = extern(C) void function(const(char)* urlScheme) nothrow;
+__gshared c_webkit_web_extension_match_pattern_register_custom_url_schemeFn c_webkit_web_extension_match_pattern_register_custom_url_scheme; ///
+
+// WebInspector
+private alias c_webkit_web_inspector_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_web_inspector_get_typeFn c_webkit_web_inspector_get_type; ///
+private alias c_webkit_web_inspector_attachFn = extern(C) void function(WebKitWebInspector* inspector) nothrow;
+__gshared c_webkit_web_inspector_attachFn c_webkit_web_inspector_attach; ///
+private alias c_webkit_web_inspector_closeFn = extern(C) void function(WebKitWebInspector* inspector) nothrow;
+__gshared c_webkit_web_inspector_closeFn c_webkit_web_inspector_close; ///
+private alias c_webkit_web_inspector_detachFn = extern(C) void function(WebKitWebInspector* inspector) nothrow;
+__gshared c_webkit_web_inspector_detachFn c_webkit_web_inspector_detach; ///
+private alias c_webkit_web_inspector_get_attached_heightFn = extern(C) uint function(WebKitWebInspector* inspector) nothrow;
+__gshared c_webkit_web_inspector_get_attached_heightFn c_webkit_web_inspector_get_attached_height; ///
+private alias c_webkit_web_inspector_get_can_attachFn = extern(C) gboolean function(WebKitWebInspector* inspector) nothrow;
+__gshared c_webkit_web_inspector_get_can_attachFn c_webkit_web_inspector_get_can_attach; ///
+private alias c_webkit_web_inspector_get_inspected_uriFn = extern(C) const(char)* function(WebKitWebInspector* inspector) nothrow;
+__gshared c_webkit_web_inspector_get_inspected_uriFn c_webkit_web_inspector_get_inspected_uri; ///
+private alias c_webkit_web_inspector_get_web_viewFn = extern(C) WebKitWebViewBase* function(WebKitWebInspector* inspector) nothrow;
+__gshared c_webkit_web_inspector_get_web_viewFn c_webkit_web_inspector_get_web_view; ///
+private alias c_webkit_web_inspector_is_attachedFn = extern(C) gboolean function(WebKitWebInspector* inspector) nothrow;
+__gshared c_webkit_web_inspector_is_attachedFn c_webkit_web_inspector_is_attached; ///
+private alias c_webkit_web_inspector_showFn = extern(C) void function(WebKitWebInspector* inspector) nothrow;
+__gshared c_webkit_web_inspector_showFn c_webkit_web_inspector_show; ///
+
+// WebResource
+private alias c_webkit_web_resource_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_web_resource_get_typeFn c_webkit_web_resource_get_type; ///
+private alias c_webkit_web_resource_get_dataFn = extern(C) void function(WebKitWebResource* resource, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_web_resource_get_dataFn c_webkit_web_resource_get_data; ///
+private alias c_webkit_web_resource_get_data_finishFn = extern(C) ubyte* function(WebKitWebResource* resource, GAsyncResult* result, size_t* length, GError** _err) nothrow;
+__gshared c_webkit_web_resource_get_data_finishFn c_webkit_web_resource_get_data_finish; ///
+private alias c_webkit_web_resource_get_responseFn = extern(C) WebKitURIResponse* function(WebKitWebResource* resource) nothrow;
+__gshared c_webkit_web_resource_get_responseFn c_webkit_web_resource_get_response; ///
+private alias c_webkit_web_resource_get_uriFn = extern(C) const(char)* function(WebKitWebResource* resource) nothrow;
+__gshared c_webkit_web_resource_get_uriFn c_webkit_web_resource_get_uri; ///
+
+// WebView
+private alias c_webkit_web_view_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_web_view_get_typeFn c_webkit_web_view_get_type; ///
+private alias c_webkit_web_view_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_webkit_web_view_newFn c_webkit_web_view_new; ///
+private alias c_webkit_web_view_call_async_javascript_functionFn = extern(C) void function(WebKitWebView* webView, const(char)* body_, ptrdiff_t length, GVariant* arguments, const(char)* worldName, const(char)* sourceUri, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_web_view_call_async_javascript_functionFn c_webkit_web_view_call_async_javascript_function; ///
+private alias c_webkit_web_view_call_async_javascript_function_finishFn = extern(C) JSCValue* function(WebKitWebView* webView, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_web_view_call_async_javascript_function_finishFn c_webkit_web_view_call_async_javascript_function_finish; ///
+private alias c_webkit_web_view_can_execute_editing_commandFn = extern(C) void function(WebKitWebView* webView, const(char)* command, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_web_view_can_execute_editing_commandFn c_webkit_web_view_can_execute_editing_command; ///
+private alias c_webkit_web_view_can_execute_editing_command_finishFn = extern(C) gboolean function(WebKitWebView* webView, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_web_view_can_execute_editing_command_finishFn c_webkit_web_view_can_execute_editing_command_finish; ///
+private alias c_webkit_web_view_can_go_backFn = extern(C) gboolean function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_can_go_backFn c_webkit_web_view_can_go_back; ///
+private alias c_webkit_web_view_can_go_forwardFn = extern(C) gboolean function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_can_go_forwardFn c_webkit_web_view_can_go_forward; ///
+private alias c_webkit_web_view_can_show_mime_typeFn = extern(C) gboolean function(WebKitWebView* webView, const(char)* mimeType) nothrow;
+__gshared c_webkit_web_view_can_show_mime_typeFn c_webkit_web_view_can_show_mime_type; ///
+private alias c_webkit_web_view_download_uriFn = extern(C) WebKitDownload* function(WebKitWebView* webView, const(char)* uri) nothrow;
+__gshared c_webkit_web_view_download_uriFn c_webkit_web_view_download_uri; ///
+private alias c_webkit_web_view_evaluate_javascriptFn = extern(C) void function(WebKitWebView* webView, const(char)* script, ptrdiff_t length, const(char)* worldName, const(char)* sourceUri, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_web_view_evaluate_javascriptFn c_webkit_web_view_evaluate_javascript; ///
+private alias c_webkit_web_view_evaluate_javascript_finishFn = extern(C) JSCValue* function(WebKitWebView* webView, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_web_view_evaluate_javascript_finishFn c_webkit_web_view_evaluate_javascript_finish; ///
+private alias c_webkit_web_view_execute_editing_commandFn = extern(C) void function(WebKitWebView* webView, const(char)* command) nothrow;
+__gshared c_webkit_web_view_execute_editing_commandFn c_webkit_web_view_execute_editing_command; ///
+private alias c_webkit_web_view_execute_editing_command_with_argumentFn = extern(C) void function(WebKitWebView* webView, const(char)* command, const(char)* argument) nothrow;
+__gshared c_webkit_web_view_execute_editing_command_with_argumentFn c_webkit_web_view_execute_editing_command_with_argument; ///
+private alias c_webkit_web_view_get_automation_presentation_typeFn = extern(C) WebKitAutomationBrowsingContextPresentation function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_automation_presentation_typeFn c_webkit_web_view_get_automation_presentation_type; ///
+private alias c_webkit_web_view_get_back_forward_listFn = extern(C) WebKitBackForwardList* function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_back_forward_listFn c_webkit_web_view_get_back_forward_list; ///
+private alias c_webkit_web_view_get_background_colorFn = extern(C) void function(WebKitWebView* webView, GdkRGBA* rgba) nothrow;
+__gshared c_webkit_web_view_get_background_colorFn c_webkit_web_view_get_background_color; ///
+private alias c_webkit_web_view_get_camera_capture_stateFn = extern(C) WebKitMediaCaptureState function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_camera_capture_stateFn c_webkit_web_view_get_camera_capture_state; ///
+private alias c_webkit_web_view_get_contextFn = extern(C) WebKitWebContext* function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_contextFn c_webkit_web_view_get_context; ///
+private alias c_webkit_web_view_get_custom_charsetFn = extern(C) const(char)* function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_custom_charsetFn c_webkit_web_view_get_custom_charset; ///
+private alias c_webkit_web_view_get_default_content_security_policyFn = extern(C) const(char)* function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_default_content_security_policyFn c_webkit_web_view_get_default_content_security_policy; ///
+private alias c_webkit_web_view_get_display_capture_stateFn = extern(C) WebKitMediaCaptureState function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_display_capture_stateFn c_webkit_web_view_get_display_capture_state; ///
+private alias c_webkit_web_view_get_editor_stateFn = extern(C) WebKitEditorState* function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_editor_stateFn c_webkit_web_view_get_editor_state; ///
+private alias c_webkit_web_view_get_estimated_load_progressFn = extern(C) double function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_estimated_load_progressFn c_webkit_web_view_get_estimated_load_progress; ///
+private alias c_webkit_web_view_get_faviconFn = extern(C) GdkTexture* function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_faviconFn c_webkit_web_view_get_favicon; ///
+private alias c_webkit_web_view_get_find_controllerFn = extern(C) WebKitFindController* function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_find_controllerFn c_webkit_web_view_get_find_controller; ///
+private alias c_webkit_web_view_get_input_method_contextFn = extern(C) WebKitInputMethodContext* function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_input_method_contextFn c_webkit_web_view_get_input_method_context; ///
+private alias c_webkit_web_view_get_inspectorFn = extern(C) WebKitWebInspector* function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_inspectorFn c_webkit_web_view_get_inspector; ///
+private alias c_webkit_web_view_get_is_mutedFn = extern(C) gboolean function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_is_mutedFn c_webkit_web_view_get_is_muted; ///
+private alias c_webkit_web_view_get_is_web_process_responsiveFn = extern(C) gboolean function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_is_web_process_responsiveFn c_webkit_web_view_get_is_web_process_responsive; ///
+private alias c_webkit_web_view_get_main_resourceFn = extern(C) WebKitWebResource* function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_main_resourceFn c_webkit_web_view_get_main_resource; ///
+private alias c_webkit_web_view_get_microphone_capture_stateFn = extern(C) WebKitMediaCaptureState function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_microphone_capture_stateFn c_webkit_web_view_get_microphone_capture_state; ///
+private alias c_webkit_web_view_get_network_sessionFn = extern(C) WebKitNetworkSession* function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_network_sessionFn c_webkit_web_view_get_network_session; ///
+private alias c_webkit_web_view_get_page_idFn = extern(C) ulong function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_page_idFn c_webkit_web_view_get_page_id; ///
+private alias c_webkit_web_view_get_session_stateFn = extern(C) WebKitWebViewSessionState* function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_session_stateFn c_webkit_web_view_get_session_state; ///
+private alias c_webkit_web_view_get_settingsFn = extern(C) WebKitSettings* function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_settingsFn c_webkit_web_view_get_settings; ///
+private alias c_webkit_web_view_get_snapshotFn = extern(C) void function(WebKitWebView* webView, WebKitSnapshotRegion region, WebKitSnapshotOptions options, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_web_view_get_snapshotFn c_webkit_web_view_get_snapshot; ///
+private alias c_webkit_web_view_get_snapshot_finishFn = extern(C) GdkTexture* function(WebKitWebView* webView, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_web_view_get_snapshot_finishFn c_webkit_web_view_get_snapshot_finish; ///
+private alias c_webkit_web_view_get_theme_colorFn = extern(C) gboolean function(WebKitWebView* webView, GdkRGBA* rgba) nothrow;
+__gshared c_webkit_web_view_get_theme_colorFn c_webkit_web_view_get_theme_color; ///
+private alias c_webkit_web_view_get_titleFn = extern(C) const(char)* function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_titleFn c_webkit_web_view_get_title; ///
+private alias c_webkit_web_view_get_tls_infoFn = extern(C) gboolean function(WebKitWebView* webView, GTlsCertificate** certificate, GTlsCertificateFlags* errors) nothrow;
+__gshared c_webkit_web_view_get_tls_infoFn c_webkit_web_view_get_tls_info; ///
+private alias c_webkit_web_view_get_uriFn = extern(C) const(char)* function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_uriFn c_webkit_web_view_get_uri; ///
+private alias c_webkit_web_view_get_user_content_managerFn = extern(C) WebKitUserContentManager* function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_user_content_managerFn c_webkit_web_view_get_user_content_manager; ///
+private alias c_webkit_web_view_get_web_extension_modeFn = extern(C) WebKitWebExtensionMode function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_web_extension_modeFn c_webkit_web_view_get_web_extension_mode; ///
+private alias c_webkit_web_view_get_website_policiesFn = extern(C) WebKitWebsitePolicies* function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_website_policiesFn c_webkit_web_view_get_website_policies; ///
+private alias c_webkit_web_view_get_window_propertiesFn = extern(C) WebKitWindowProperties* function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_window_propertiesFn c_webkit_web_view_get_window_properties; ///
+private alias c_webkit_web_view_get_zoom_levelFn = extern(C) double function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_get_zoom_levelFn c_webkit_web_view_get_zoom_level; ///
+private alias c_webkit_web_view_go_backFn = extern(C) void function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_go_backFn c_webkit_web_view_go_back; ///
+private alias c_webkit_web_view_go_forwardFn = extern(C) void function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_go_forwardFn c_webkit_web_view_go_forward; ///
+private alias c_webkit_web_view_go_to_back_forward_list_itemFn = extern(C) void function(WebKitWebView* webView, WebKitBackForwardListItem* listItem) nothrow;
+__gshared c_webkit_web_view_go_to_back_forward_list_itemFn c_webkit_web_view_go_to_back_forward_list_item; ///
+private alias c_webkit_web_view_is_controlled_by_automationFn = extern(C) gboolean function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_is_controlled_by_automationFn c_webkit_web_view_is_controlled_by_automation; ///
+private alias c_webkit_web_view_is_editableFn = extern(C) gboolean function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_is_editableFn c_webkit_web_view_is_editable; ///
+private alias c_webkit_web_view_is_immersive_mode_enabledFn = extern(C) gboolean function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_is_immersive_mode_enabledFn c_webkit_web_view_is_immersive_mode_enabled; ///
+private alias c_webkit_web_view_is_loadingFn = extern(C) gboolean function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_is_loadingFn c_webkit_web_view_is_loading; ///
+private alias c_webkit_web_view_is_playing_audioFn = extern(C) gboolean function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_is_playing_audioFn c_webkit_web_view_is_playing_audio; ///
+private alias c_webkit_web_view_leave_immersive_modeFn = extern(C) void function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_leave_immersive_modeFn c_webkit_web_view_leave_immersive_mode; ///
+private alias c_webkit_web_view_load_alternate_htmlFn = extern(C) void function(WebKitWebView* webView, const(char)* content, const(char)* contentUri, const(char)* baseUri) nothrow;
+__gshared c_webkit_web_view_load_alternate_htmlFn c_webkit_web_view_load_alternate_html; ///
+private alias c_webkit_web_view_load_bytesFn = extern(C) void function(WebKitWebView* webView, GBytes* bytes, const(char)* mimeType, const(char)* encoding, const(char)* baseUri) nothrow;
+__gshared c_webkit_web_view_load_bytesFn c_webkit_web_view_load_bytes; ///
+private alias c_webkit_web_view_load_htmlFn = extern(C) void function(WebKitWebView* webView, const(char)* content, const(char)* baseUri) nothrow;
+__gshared c_webkit_web_view_load_htmlFn c_webkit_web_view_load_html; ///
+private alias c_webkit_web_view_load_plain_textFn = extern(C) void function(WebKitWebView* webView, const(char)* plainText) nothrow;
+__gshared c_webkit_web_view_load_plain_textFn c_webkit_web_view_load_plain_text; ///
+private alias c_webkit_web_view_load_requestFn = extern(C) void function(WebKitWebView* webView, WebKitURIRequest* request) nothrow;
+__gshared c_webkit_web_view_load_requestFn c_webkit_web_view_load_request; ///
+private alias c_webkit_web_view_load_uriFn = extern(C) void function(WebKitWebView* webView, const(char)* uri) nothrow;
+__gshared c_webkit_web_view_load_uriFn c_webkit_web_view_load_uri; ///
+private alias c_webkit_web_view_reloadFn = extern(C) void function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_reloadFn c_webkit_web_view_reload; ///
+private alias c_webkit_web_view_reload_bypass_cacheFn = extern(C) void function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_reload_bypass_cacheFn c_webkit_web_view_reload_bypass_cache; ///
+private alias c_webkit_web_view_restore_session_stateFn = extern(C) void function(WebKitWebView* webView, WebKitWebViewSessionState* state) nothrow;
+__gshared c_webkit_web_view_restore_session_stateFn c_webkit_web_view_restore_session_state; ///
+private alias c_webkit_web_view_saveFn = extern(C) void function(WebKitWebView* webView, WebKitSaveMode saveMode, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_web_view_saveFn c_webkit_web_view_save; ///
+private alias c_webkit_web_view_save_finishFn = extern(C) GInputStream* function(WebKitWebView* webView, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_web_view_save_finishFn c_webkit_web_view_save_finish; ///
+private alias c_webkit_web_view_save_to_fileFn = extern(C) void function(WebKitWebView* webView, GFile* file, WebKitSaveMode saveMode, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_web_view_save_to_fileFn c_webkit_web_view_save_to_file; ///
+private alias c_webkit_web_view_save_to_file_finishFn = extern(C) gboolean function(WebKitWebView* webView, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_web_view_save_to_file_finishFn c_webkit_web_view_save_to_file_finish; ///
+private alias c_webkit_web_view_send_message_to_pageFn = extern(C) void function(WebKitWebView* webView, WebKitUserMessage* message, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_web_view_send_message_to_pageFn c_webkit_web_view_send_message_to_page; ///
+private alias c_webkit_web_view_send_message_to_page_finishFn = extern(C) WebKitUserMessage* function(WebKitWebView* webView, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_web_view_send_message_to_page_finishFn c_webkit_web_view_send_message_to_page_finish; ///
+private alias c_webkit_web_view_set_background_colorFn = extern(C) void function(WebKitWebView* webView, const(GdkRGBA)* rgba) nothrow;
+__gshared c_webkit_web_view_set_background_colorFn c_webkit_web_view_set_background_color; ///
+private alias c_webkit_web_view_set_camera_capture_stateFn = extern(C) void function(WebKitWebView* webView, WebKitMediaCaptureState state) nothrow;
+__gshared c_webkit_web_view_set_camera_capture_stateFn c_webkit_web_view_set_camera_capture_state; ///
+private alias c_webkit_web_view_set_cors_allowlistFn = extern(C) void function(WebKitWebView* webView, const(char*)* allowlist) nothrow;
+__gshared c_webkit_web_view_set_cors_allowlistFn c_webkit_web_view_set_cors_allowlist; ///
+private alias c_webkit_web_view_set_custom_charsetFn = extern(C) void function(WebKitWebView* webView, const(char)* charset) nothrow;
+__gshared c_webkit_web_view_set_custom_charsetFn c_webkit_web_view_set_custom_charset; ///
+private alias c_webkit_web_view_set_display_capture_stateFn = extern(C) void function(WebKitWebView* webView, WebKitMediaCaptureState state) nothrow;
+__gshared c_webkit_web_view_set_display_capture_stateFn c_webkit_web_view_set_display_capture_state; ///
+private alias c_webkit_web_view_set_editableFn = extern(C) void function(WebKitWebView* webView, gboolean editable) nothrow;
+__gshared c_webkit_web_view_set_editableFn c_webkit_web_view_set_editable; ///
+private alias c_webkit_web_view_set_input_method_contextFn = extern(C) void function(WebKitWebView* webView, WebKitInputMethodContext* context) nothrow;
+__gshared c_webkit_web_view_set_input_method_contextFn c_webkit_web_view_set_input_method_context; ///
+private alias c_webkit_web_view_set_is_mutedFn = extern(C) void function(WebKitWebView* webView, gboolean muted) nothrow;
+__gshared c_webkit_web_view_set_is_mutedFn c_webkit_web_view_set_is_muted; ///
+private alias c_webkit_web_view_set_microphone_capture_stateFn = extern(C) void function(WebKitWebView* webView, WebKitMediaCaptureState state) nothrow;
+__gshared c_webkit_web_view_set_microphone_capture_stateFn c_webkit_web_view_set_microphone_capture_state; ///
+private alias c_webkit_web_view_set_settingsFn = extern(C) void function(WebKitWebView* webView, WebKitSettings* settings) nothrow;
+__gshared c_webkit_web_view_set_settingsFn c_webkit_web_view_set_settings; ///
+private alias c_webkit_web_view_set_zoom_levelFn = extern(C) void function(WebKitWebView* webView, double zoomLevel) nothrow;
+__gshared c_webkit_web_view_set_zoom_levelFn c_webkit_web_view_set_zoom_level; ///
+private alias c_webkit_web_view_stop_loadingFn = extern(C) void function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_stop_loadingFn c_webkit_web_view_stop_loading; ///
+private alias c_webkit_web_view_terminate_web_processFn = extern(C) void function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_terminate_web_processFn c_webkit_web_view_terminate_web_process; ///
+private alias c_webkit_web_view_try_closeFn = extern(C) void function(WebKitWebView* webView) nothrow;
+__gshared c_webkit_web_view_try_closeFn c_webkit_web_view_try_close; ///
+
+// WebViewBase
+private alias c_webkit_web_view_base_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_web_view_base_get_typeFn c_webkit_web_view_base_get_type; ///
+
+// WebViewSessionState
+private alias c_webkit_web_view_session_state_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_web_view_session_state_get_typeFn c_webkit_web_view_session_state_get_type; ///
+private alias c_webkit_web_view_session_state_newFn = extern(C) WebKitWebViewSessionState* function(GBytes* data) nothrow;
+__gshared c_webkit_web_view_session_state_newFn c_webkit_web_view_session_state_new; ///
+private alias c_webkit_web_view_session_state_refFn = extern(C) WebKitWebViewSessionState* function(WebKitWebViewSessionState* state) nothrow;
+__gshared c_webkit_web_view_session_state_refFn c_webkit_web_view_session_state_ref; ///
+private alias c_webkit_web_view_session_state_serializeFn = extern(C) GBytes* function(WebKitWebViewSessionState* state) nothrow;
+__gshared c_webkit_web_view_session_state_serializeFn c_webkit_web_view_session_state_serialize; ///
+private alias c_webkit_web_view_session_state_unrefFn = extern(C) void function(WebKitWebViewSessionState* state) nothrow;
+__gshared c_webkit_web_view_session_state_unrefFn c_webkit_web_view_session_state_unref; ///
+
+// WebsiteData
+private alias c_webkit_website_data_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_website_data_get_typeFn c_webkit_website_data_get_type; ///
+private alias c_webkit_website_data_get_nameFn = extern(C) const(char)* function(WebKitWebsiteData* websiteData) nothrow;
+__gshared c_webkit_website_data_get_nameFn c_webkit_website_data_get_name; ///
+private alias c_webkit_website_data_get_sizeFn = extern(C) ulong function(WebKitWebsiteData* websiteData, WebKitWebsiteDataTypes types) nothrow;
+__gshared c_webkit_website_data_get_sizeFn c_webkit_website_data_get_size; ///
+private alias c_webkit_website_data_get_typesFn = extern(C) WebKitWebsiteDataTypes function(WebKitWebsiteData* websiteData) nothrow;
+__gshared c_webkit_website_data_get_typesFn c_webkit_website_data_get_types; ///
+private alias c_webkit_website_data_refFn = extern(C) WebKitWebsiteData* function(WebKitWebsiteData* websiteData) nothrow;
+__gshared c_webkit_website_data_refFn c_webkit_website_data_ref; ///
+private alias c_webkit_website_data_unrefFn = extern(C) void function(WebKitWebsiteData* websiteData) nothrow;
+__gshared c_webkit_website_data_unrefFn c_webkit_website_data_unref; ///
+
+// WebsiteDataAccessPermissionRequest
+private alias c_webkit_website_data_access_permission_request_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_website_data_access_permission_request_get_typeFn c_webkit_website_data_access_permission_request_get_type; ///
+private alias c_webkit_website_data_access_permission_request_get_current_domainFn = extern(C) const(char)* function(WebKitWebsiteDataAccessPermissionRequest* request) nothrow;
+__gshared c_webkit_website_data_access_permission_request_get_current_domainFn c_webkit_website_data_access_permission_request_get_current_domain; ///
+private alias c_webkit_website_data_access_permission_request_get_requesting_domainFn = extern(C) const(char)* function(WebKitWebsiteDataAccessPermissionRequest* request) nothrow;
+__gshared c_webkit_website_data_access_permission_request_get_requesting_domainFn c_webkit_website_data_access_permission_request_get_requesting_domain; ///
+
+// WebsiteDataManager
+private alias c_webkit_website_data_manager_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_website_data_manager_get_typeFn c_webkit_website_data_manager_get_type; ///
+private alias c_webkit_website_data_manager_clearFn = extern(C) void function(WebKitWebsiteDataManager* manager, WebKitWebsiteDataTypes types, GTimeSpan timespan, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_website_data_manager_clearFn c_webkit_website_data_manager_clear; ///
+private alias c_webkit_website_data_manager_clear_finishFn = extern(C) gboolean function(WebKitWebsiteDataManager* manager, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_website_data_manager_clear_finishFn c_webkit_website_data_manager_clear_finish; ///
+private alias c_webkit_website_data_manager_fetchFn = extern(C) void function(WebKitWebsiteDataManager* manager, WebKitWebsiteDataTypes types, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_website_data_manager_fetchFn c_webkit_website_data_manager_fetch; ///
+private alias c_webkit_website_data_manager_fetch_finishFn = extern(C) GList* function(WebKitWebsiteDataManager* manager, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_website_data_manager_fetch_finishFn c_webkit_website_data_manager_fetch_finish; ///
+private alias c_webkit_website_data_manager_get_base_cache_directoryFn = extern(C) const(char)* function(WebKitWebsiteDataManager* manager) nothrow;
+__gshared c_webkit_website_data_manager_get_base_cache_directoryFn c_webkit_website_data_manager_get_base_cache_directory; ///
+private alias c_webkit_website_data_manager_get_base_data_directoryFn = extern(C) const(char)* function(WebKitWebsiteDataManager* manager) nothrow;
+__gshared c_webkit_website_data_manager_get_base_data_directoryFn c_webkit_website_data_manager_get_base_data_directory; ///
+private alias c_webkit_website_data_manager_get_favicon_databaseFn = extern(C) WebKitFaviconDatabase* function(WebKitWebsiteDataManager* manager) nothrow;
+__gshared c_webkit_website_data_manager_get_favicon_databaseFn c_webkit_website_data_manager_get_favicon_database; ///
+private alias c_webkit_website_data_manager_get_favicons_enabledFn = extern(C) gboolean function(WebKitWebsiteDataManager* manager) nothrow;
+__gshared c_webkit_website_data_manager_get_favicons_enabledFn c_webkit_website_data_manager_get_favicons_enabled; ///
+private alias c_webkit_website_data_manager_get_itp_summaryFn = extern(C) void function(WebKitWebsiteDataManager* manager, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_website_data_manager_get_itp_summaryFn c_webkit_website_data_manager_get_itp_summary; ///
+private alias c_webkit_website_data_manager_get_itp_summary_finishFn = extern(C) GList* function(WebKitWebsiteDataManager* manager, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_website_data_manager_get_itp_summary_finishFn c_webkit_website_data_manager_get_itp_summary_finish; ///
+private alias c_webkit_website_data_manager_is_ephemeralFn = extern(C) gboolean function(WebKitWebsiteDataManager* manager) nothrow;
+__gshared c_webkit_website_data_manager_is_ephemeralFn c_webkit_website_data_manager_is_ephemeral; ///
+private alias c_webkit_website_data_manager_removeFn = extern(C) void function(WebKitWebsiteDataManager* manager, WebKitWebsiteDataTypes types, GList* websiteData, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_webkit_website_data_manager_removeFn c_webkit_website_data_manager_remove; ///
+private alias c_webkit_website_data_manager_remove_finishFn = extern(C) gboolean function(WebKitWebsiteDataManager* manager, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_webkit_website_data_manager_remove_finishFn c_webkit_website_data_manager_remove_finish; ///
+private alias c_webkit_website_data_manager_set_favicons_enabledFn = extern(C) void function(WebKitWebsiteDataManager* manager, gboolean enabled) nothrow;
+__gshared c_webkit_website_data_manager_set_favicons_enabledFn c_webkit_website_data_manager_set_favicons_enabled; ///
+
+// WebsitePolicies
+private alias c_webkit_website_policies_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_website_policies_get_typeFn c_webkit_website_policies_get_type; ///
+private alias c_webkit_website_policies_newFn = extern(C) WebKitWebsitePolicies* function() nothrow;
+__gshared c_webkit_website_policies_newFn c_webkit_website_policies_new; ///
+private alias c_webkit_website_policies_new_with_policiesFn = extern(C) WebKitWebsitePolicies* function(const(char)* firstPolicyName,  ...) nothrow;
+__gshared c_webkit_website_policies_new_with_policiesFn c_webkit_website_policies_new_with_policies; ///
+private alias c_webkit_website_policies_get_autoplay_policyFn = extern(C) WebKitAutoplayPolicy function(WebKitWebsitePolicies* policies) nothrow;
+__gshared c_webkit_website_policies_get_autoplay_policyFn c_webkit_website_policies_get_autoplay_policy; ///
+
+// WindowProperties
+private alias c_webkit_window_properties_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_window_properties_get_typeFn c_webkit_window_properties_get_type; ///
+private alias c_webkit_window_properties_get_fullscreenFn = extern(C) gboolean function(WebKitWindowProperties* windowProperties) nothrow;
+__gshared c_webkit_window_properties_get_fullscreenFn c_webkit_window_properties_get_fullscreen; ///
+private alias c_webkit_window_properties_get_geometryFn = extern(C) void function(WebKitWindowProperties* windowProperties, GdkRectangle* geometry) nothrow;
+__gshared c_webkit_window_properties_get_geometryFn c_webkit_window_properties_get_geometry; ///
+private alias c_webkit_window_properties_get_locationbar_visibleFn = extern(C) gboolean function(WebKitWindowProperties* windowProperties) nothrow;
+__gshared c_webkit_window_properties_get_locationbar_visibleFn c_webkit_window_properties_get_locationbar_visible; ///
+private alias c_webkit_window_properties_get_menubar_visibleFn = extern(C) gboolean function(WebKitWindowProperties* windowProperties) nothrow;
+__gshared c_webkit_window_properties_get_menubar_visibleFn c_webkit_window_properties_get_menubar_visible; ///
+private alias c_webkit_window_properties_get_resizableFn = extern(C) gboolean function(WebKitWindowProperties* windowProperties) nothrow;
+__gshared c_webkit_window_properties_get_resizableFn c_webkit_window_properties_get_resizable; ///
+private alias c_webkit_window_properties_get_scrollbars_visibleFn = extern(C) gboolean function(WebKitWindowProperties* windowProperties) nothrow;
+__gshared c_webkit_window_properties_get_scrollbars_visibleFn c_webkit_window_properties_get_scrollbars_visible; ///
+private alias c_webkit_window_properties_get_statusbar_visibleFn = extern(C) gboolean function(WebKitWindowProperties* windowProperties) nothrow;
+__gshared c_webkit_window_properties_get_statusbar_visibleFn c_webkit_window_properties_get_statusbar_visible; ///
+private alias c_webkit_window_properties_get_toolbar_visibleFn = extern(C) gboolean function(WebKitWindowProperties* windowProperties) nothrow;
+__gshared c_webkit_window_properties_get_toolbar_visibleFn c_webkit_window_properties_get_toolbar_visible; ///
+
+// XRPermissionRequest
+private alias c_webkit_xr_permission_request_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_webkit_xr_permission_request_get_typeFn c_webkit_xr_permission_request_get_type; ///
+private alias c_webkit_xr_permission_request_get_consent_optional_featuresFn = extern(C) WebKitXRSessionFeatures function(WebKitXRPermissionRequest* request) nothrow;
+__gshared c_webkit_xr_permission_request_get_consent_optional_featuresFn c_webkit_xr_permission_request_get_consent_optional_features; ///
+private alias c_webkit_xr_permission_request_get_consent_required_featuresFn = extern(C) WebKitXRSessionFeatures function(WebKitXRPermissionRequest* request) nothrow;
+__gshared c_webkit_xr_permission_request_get_consent_required_featuresFn c_webkit_xr_permission_request_get_consent_required_features; ///
+private alias c_webkit_xr_permission_request_get_granted_featuresFn = extern(C) WebKitXRSessionFeatures function(WebKitXRPermissionRequest* request) nothrow;
+__gshared c_webkit_xr_permission_request_get_granted_featuresFn c_webkit_xr_permission_request_get_granted_features; ///
+private alias c_webkit_xr_permission_request_get_optional_features_requestedFn = extern(C) WebKitXRSessionFeatures function(WebKitXRPermissionRequest* request) nothrow;
+__gshared c_webkit_xr_permission_request_get_optional_features_requestedFn c_webkit_xr_permission_request_get_optional_features_requested; ///
+private alias c_webkit_xr_permission_request_get_required_features_requestedFn = extern(C) WebKitXRSessionFeatures function(WebKitXRPermissionRequest* request) nothrow;
+__gshared c_webkit_xr_permission_request_get_required_features_requestedFn c_webkit_xr_permission_request_get_required_features_requested; ///
+private alias c_webkit_xr_permission_request_get_security_originFn = extern(C) WebKitSecurityOrigin* function(WebKitXRPermissionRequest* request) nothrow;
+__gshared c_webkit_xr_permission_request_get_security_originFn c_webkit_xr_permission_request_get_security_origin; ///
+private alias c_webkit_xr_permission_request_get_session_modeFn = extern(C) WebKitXRSessionMode function(WebKitXRPermissionRequest* request) nothrow;
+__gshared c_webkit_xr_permission_request_get_session_modeFn c_webkit_xr_permission_request_get_session_mode; ///
+private alias c_webkit_xr_permission_request_set_granted_optional_featuresFn = extern(C) void function(WebKitXRPermissionRequest* request, WebKitXRSessionFeatures granted) nothrow;
+__gshared c_webkit_xr_permission_request_set_granted_optional_featuresFn c_webkit_xr_permission_request_set_granted_optional_features; ///
+
+// global
+private alias c_webkit_get_major_versionFn = extern(C) uint function() nothrow;
+__gshared c_webkit_get_major_versionFn c_webkit_get_major_version; ///
+private alias c_webkit_get_micro_versionFn = extern(C) uint function() nothrow;
+__gshared c_webkit_get_micro_versionFn c_webkit_get_micro_version; ///
+private alias c_webkit_get_minor_versionFn = extern(C) uint function() nothrow;
+__gshared c_webkit_get_minor_versionFn c_webkit_get_minor_version; ///
+private alias c_webkit_media_key_system_permission_get_nameFn = extern(C) const(char)* function(WebKitMediaKeySystemPermissionRequest* request) nothrow;
+__gshared c_webkit_media_key_system_permission_get_nameFn c_webkit_media_key_system_permission_get_name; ///
+private alias c_webkit_uri_for_displayFn = extern(C) char* function(const(char)* uri) nothrow;
+__gshared c_webkit_uri_for_displayFn c_webkit_uri_for_display; ///
+private alias c_webkit_user_media_permission_is_for_audio_deviceFn = extern(C) gboolean function(WebKitUserMediaPermissionRequest* request) nothrow;
+__gshared c_webkit_user_media_permission_is_for_audio_deviceFn c_webkit_user_media_permission_is_for_audio_device; ///
+private alias c_webkit_user_media_permission_is_for_display_deviceFn = extern(C) gboolean function(WebKitUserMediaPermissionRequest* request) nothrow;
+__gshared c_webkit_user_media_permission_is_for_display_deviceFn c_webkit_user_media_permission_is_for_display_device; ///
+private alias c_webkit_user_media_permission_is_for_video_deviceFn = extern(C) gboolean function(WebKitUserMediaPermissionRequest* request) nothrow;
+__gshared c_webkit_user_media_permission_is_for_video_deviceFn c_webkit_user_media_permission_is_for_video_device; ///
+
+// DownloadError
+private alias c_webkit_download_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_webkit_download_error_quarkFn c_webkit_download_error_quark; ///
+
+// FaviconDatabaseError
+private alias c_webkit_favicon_database_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_webkit_favicon_database_error_quarkFn c_webkit_favicon_database_error_quark; ///
+
+// JavascriptError
+private alias c_webkit_javascript_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_webkit_javascript_error_quarkFn c_webkit_javascript_error_quark; ///
+
+// MediaError
+private alias c_webkit_media_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_webkit_media_error_quarkFn c_webkit_media_error_quark; ///
+
+// NetworkError
+private alias c_webkit_network_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_webkit_network_error_quarkFn c_webkit_network_error_quark; ///
+
+// PolicyError
+private alias c_webkit_policy_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_webkit_policy_error_quarkFn c_webkit_policy_error_quark; ///
+
+// PrintError
+private alias c_webkit_print_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_webkit_print_error_quarkFn c_webkit_print_error_quark; ///
+
+// SnapshotError
+private alias c_webkit_snapshot_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_webkit_snapshot_error_quarkFn c_webkit_snapshot_error_quark; ///
+
+// UserContentFilterError
+private alias c_webkit_user_content_filter_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_webkit_user_content_filter_error_quarkFn c_webkit_user_content_filter_error_quark; ///
+
+// UserMessageError
+private alias c_webkit_user_message_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_webkit_user_message_error_quarkFn c_webkit_user_message_error_quark; ///
+
+// WebExtensionError
+private alias c_webkit_web_extension_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_webkit_web_extension_error_quarkFn c_webkit_web_extension_error_quark; ///
+
+// WebExtensionMatchPatternError
+private alias c_webkit_web_extension_match_pattern_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_webkit_web_extension_match_pattern_error_quarkFn c_webkit_web_extension_match_pattern_error_quark; ///
 
 // ApplicationInfo
 

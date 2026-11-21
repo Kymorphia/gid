@@ -10,2294 +10,4241 @@ public import gid.gobject2.c.types;
 
 private immutable LIBS = ["gio-2.0_0"];
 
-__gshared extern(C) nothrow
-{
-  // Action
-  GType function() c_g_action_get_type; ///
-  gboolean function(const(char)* actionName) c_g_action_name_is_valid; ///
-  gboolean function(const(char)* detailedName, char** actionName, GVariant** targetValue, GError** _err) c_g_action_parse_detailed_name; ///
-  char* function(const(char)* actionName, GVariant* targetValue) c_g_action_print_detailed_name; ///
-  void function(GAction* action, GVariant* parameter) c_g_action_activate; ///
-  void function(GAction* action, GVariant* value) c_g_action_change_state; ///
-  gboolean function(GAction* action) c_g_action_get_enabled; ///
-  const(char)* function(GAction* action) c_g_action_get_name; ///
-  const(GVariantType)* function(GAction* action) c_g_action_get_parameter_type; ///
-  GVariant* function(GAction* action) c_g_action_get_state; ///
-  GVariant* function(GAction* action) c_g_action_get_state_hint; ///
-  const(GVariantType)* function(GAction* action) c_g_action_get_state_type; ///
-
-  // ActionGroup
-  GType function() c_g_action_group_get_type; ///
-  void function(GActionGroup* actionGroup, const(char)* actionName) c_g_action_group_action_added; ///
-  void function(GActionGroup* actionGroup, const(char)* actionName, gboolean enabled) c_g_action_group_action_enabled_changed; ///
-  void function(GActionGroup* actionGroup, const(char)* actionName) c_g_action_group_action_removed; ///
-  void function(GActionGroup* actionGroup, const(char)* actionName, GVariant* state) c_g_action_group_action_state_changed; ///
-  void function(GActionGroup* actionGroup, const(char)* actionName, GVariant* parameter) c_g_action_group_activate_action; ///
-  void function(GActionGroup* actionGroup, const(char)* actionName, GVariant* value) c_g_action_group_change_action_state; ///
-  gboolean function(GActionGroup* actionGroup, const(char)* actionName) c_g_action_group_get_action_enabled; ///
-  const(GVariantType)* function(GActionGroup* actionGroup, const(char)* actionName) c_g_action_group_get_action_parameter_type; ///
-  GVariant* function(GActionGroup* actionGroup, const(char)* actionName) c_g_action_group_get_action_state; ///
-  GVariant* function(GActionGroup* actionGroup, const(char)* actionName) c_g_action_group_get_action_state_hint; ///
-  const(GVariantType)* function(GActionGroup* actionGroup, const(char)* actionName) c_g_action_group_get_action_state_type; ///
-  gboolean function(GActionGroup* actionGroup, const(char)* actionName) c_g_action_group_has_action; ///
-  char** function(GActionGroup* actionGroup) c_g_action_group_list_actions; ///
-  gboolean function(GActionGroup* actionGroup, const(char)* actionName, gboolean* enabled, const(GVariantType*)* parameterType, const(GVariantType*)* stateType, GVariant** stateHint, GVariant** state) c_g_action_group_query_action; ///
-
-  // ActionMap
-  GType function() c_g_action_map_get_type; ///
-  void function(GActionMap* actionMap, GAction* action) c_g_action_map_add_action; ///
-  void function(GActionMap* actionMap, const(GActionEntry)* entries, int nEntries, void* userData) c_g_action_map_add_action_entries; ///
-  GAction* function(GActionMap* actionMap, const(char)* actionName) c_g_action_map_lookup_action; ///
-  void function(GActionMap* actionMap, const(char)* actionName) c_g_action_map_remove_action; ///
-  void function(GActionMap* actionMap, const(GActionEntry)* entries, int nEntries) c_g_action_map_remove_action_entries; ///
-
-  // AppInfo
-  GType function() c_g_app_info_get_type; ///
-  GAppInfo* function(const(char)* commandline, const(char)* applicationName, GAppInfoCreateFlags flags, GError** _err) c_g_app_info_create_from_commandline; ///
-  GList* function() c_g_app_info_get_all; ///
-  GList* function(const(char)* contentType) c_g_app_info_get_all_for_type; ///
-  GAppInfo* function(const(char)* contentType, gboolean mustSupportUris) c_g_app_info_get_default_for_type; ///
-  void function(const(char)* contentType, gboolean mustSupportUris, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_app_info_get_default_for_type_async; ///
-  GAppInfo* function(GAsyncResult* result, GError** _err) c_g_app_info_get_default_for_type_finish; ///
-  GAppInfo* function(const(char)* uriScheme) c_g_app_info_get_default_for_uri_scheme; ///
-  void function(const(char)* uriScheme, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_app_info_get_default_for_uri_scheme_async; ///
-  GAppInfo* function(GAsyncResult* result, GError** _err) c_g_app_info_get_default_for_uri_scheme_finish; ///
-  GList* function(const(char)* contentType) c_g_app_info_get_fallback_for_type; ///
-  GList* function(const(char)* contentType) c_g_app_info_get_recommended_for_type; ///
-  gboolean function(const(char)* uri, GAppLaunchContext* context, GError** _err) c_g_app_info_launch_default_for_uri; ///
-  void function(const(char)* uri, GAppLaunchContext* context, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_app_info_launch_default_for_uri_async; ///
-  gboolean function(GAsyncResult* result, GError** _err) c_g_app_info_launch_default_for_uri_finish; ///
-  void function(const(char)* contentType) c_g_app_info_reset_type_associations; ///
-  gboolean function(GAppInfo* appinfo, const(char)* contentType, GError** _err) c_g_app_info_add_supports_type; ///
-  gboolean function(GAppInfo* appinfo) c_g_app_info_can_delete; ///
-  gboolean function(GAppInfo* appinfo) c_g_app_info_can_remove_supports_type; ///
-  gboolean function(GAppInfo* appinfo) c_g_app_info_delete; ///
-  GAppInfo* function(GAppInfo* appinfo) c_g_app_info_dup; ///
-  gboolean function(GAppInfo* appinfo1, GAppInfo* appinfo2) c_g_app_info_equal; ///
-  const(char)* function(GAppInfo* appinfo) c_g_app_info_get_commandline; ///
-  const(char)* function(GAppInfo* appinfo) c_g_app_info_get_description; ///
-  const(char)* function(GAppInfo* appinfo) c_g_app_info_get_display_name; ///
-  const(char)* function(GAppInfo* appinfo) c_g_app_info_get_executable; ///
-  GIcon* function(GAppInfo* appinfo) c_g_app_info_get_icon; ///
-  const(char)* function(GAppInfo* appinfo) c_g_app_info_get_id; ///
-  const(char)* function(GAppInfo* appinfo) c_g_app_info_get_name; ///
-  const(char*)* function(GAppInfo* appinfo) c_g_app_info_get_supported_types; ///
-  gboolean function(GAppInfo* appinfo, GList* files, GAppLaunchContext* context, GError** _err) c_g_app_info_launch; ///
-  gboolean function(GAppInfo* appinfo, GList* uris, GAppLaunchContext* context, GError** _err) c_g_app_info_launch_uris; ///
-  void function(GAppInfo* appinfo, GList* uris, GAppLaunchContext* context, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_app_info_launch_uris_async; ///
-  gboolean function(GAppInfo* appinfo, GAsyncResult* result, GError** _err) c_g_app_info_launch_uris_finish; ///
-  gboolean function(GAppInfo* appinfo, const(char)* contentType, GError** _err) c_g_app_info_remove_supports_type; ///
-  gboolean function(GAppInfo* appinfo, const(char)* extension, GError** _err) c_g_app_info_set_as_default_for_extension; ///
-  gboolean function(GAppInfo* appinfo, const(char)* contentType, GError** _err) c_g_app_info_set_as_default_for_type; ///
-  gboolean function(GAppInfo* appinfo, const(char)* contentType, GError** _err) c_g_app_info_set_as_last_used_for_type; ///
-  gboolean function(GAppInfo* appinfo) c_g_app_info_should_show; ///
-  gboolean function(GAppInfo* appinfo) c_g_app_info_supports_files; ///
-  gboolean function(GAppInfo* appinfo) c_g_app_info_supports_uris; ///
-
-  // AppInfoMonitor
-  GType function() c_g_app_info_monitor_get_type; ///
-  GAppInfoMonitor* function() c_g_app_info_monitor_get; ///
-
-  // AppLaunchContext
-  GType function() c_g_app_launch_context_get_type; ///
-  GAppLaunchContext* function() c_g_app_launch_context_new; ///
-  char* function(GAppLaunchContext* context, GAppInfo* info, GList* files) c_g_app_launch_context_get_display; ///
-  char** function(GAppLaunchContext* context) c_g_app_launch_context_get_environment; ///
-  char* function(GAppLaunchContext* context, GAppInfo* info, GList* files) c_g_app_launch_context_get_startup_notify_id; ///
-  void function(GAppLaunchContext* context, const(char)* startupNotifyId) c_g_app_launch_context_launch_failed; ///
-  void function(GAppLaunchContext* context, const(char)* variable, const(char)* value) c_g_app_launch_context_setenv; ///
-  void function(GAppLaunchContext* context, const(char)* variable) c_g_app_launch_context_unsetenv; ///
-
-  // Application
-  GType function() c_g_application_get_type; ///
-  GApplication* function(const(char)* applicationId, GApplicationFlags flags) c_g_application_new; ///
-  GApplication* function() c_g_application_get_default; ///
-  gboolean function(const(char)* applicationId) c_g_application_id_is_valid; ///
-  void function(GApplication* application) c_g_application_activate; ///
-  void function(GApplication* application, const(char)* longName, char shortName, GOptionFlags flags, GOptionArg arg, const(char)* description, const(char)* argDescription) c_g_application_add_main_option; ///
-  void function(GApplication* application, const(GOptionEntry)* entries) c_g_application_add_main_option_entries; ///
-  void function(GApplication* application, GOptionGroup* group) c_g_application_add_option_group; ///
-  void function(GApplication* application, GObject* object, const(char)* property) c_g_application_bind_busy_property; ///
-  const(char)* function(GApplication* application) c_g_application_get_application_id; ///
-  GDBusConnection* function(GApplication* application) c_g_application_get_dbus_connection; ///
-  const(char)* function(GApplication* application) c_g_application_get_dbus_object_path; ///
-  GApplicationFlags function(GApplication* application) c_g_application_get_flags; ///
-  uint function(GApplication* application) c_g_application_get_inactivity_timeout; ///
-  gboolean function(GApplication* application) c_g_application_get_is_busy; ///
-  gboolean function(GApplication* application) c_g_application_get_is_registered; ///
-  gboolean function(GApplication* application) c_g_application_get_is_remote; ///
-  const(char)* function(GApplication* application) c_g_application_get_resource_base_path; ///
-  const(char)* function(GApplication* application) c_g_application_get_version; ///
-  void function(GApplication* application) c_g_application_hold; ///
-  void function(GApplication* application) c_g_application_mark_busy; ///
-  void function(GApplication* application, GFile** files, int nFiles, const(char)* hint) c_g_application_open; ///
-  void function(GApplication* application) c_g_application_quit; ///
-  gboolean function(GApplication* application, GCancellable* cancellable, GError** _err) c_g_application_register; ///
-  void function(GApplication* application) c_g_application_release; ///
-  int function(GApplication* application, int argc, char** argv) c_g_application_run; ///
-  void function(GApplication* application, const(char)* id, GNotification* notification) c_g_application_send_notification; ///
-  void function(GApplication* application, GActionGroup* actionGroup) c_g_application_set_action_group; ///
-  void function(GApplication* application, const(char)* applicationId) c_g_application_set_application_id; ///
-  void function(GApplication* application) c_g_application_set_default; ///
-  void function(GApplication* application, GApplicationFlags flags) c_g_application_set_flags; ///
-  void function(GApplication* application, uint inactivityTimeout) c_g_application_set_inactivity_timeout; ///
-  void function(GApplication* application, const(char)* description) c_g_application_set_option_context_description; ///
-  void function(GApplication* application, const(char)* parameterString) c_g_application_set_option_context_parameter_string; ///
-  void function(GApplication* application, const(char)* summary) c_g_application_set_option_context_summary; ///
-  void function(GApplication* application, const(char)* resourcePath) c_g_application_set_resource_base_path; ///
-  void function(GApplication* application, const(char)* version_) c_g_application_set_version; ///
-  void function(GApplication* application, GObject* object, const(char)* property) c_g_application_unbind_busy_property; ///
-  void function(GApplication* application) c_g_application_unmark_busy; ///
-  void function(GApplication* application, const(char)* id) c_g_application_withdraw_notification; ///
-
-  // ApplicationCommandLine
-  GType function() c_g_application_command_line_get_type; ///
-  GFile* function(GApplicationCommandLine* cmdline, const(char)* arg) c_g_application_command_line_create_file_for_arg; ///
-  void function(GApplicationCommandLine* cmdline) c_g_application_command_line_done; ///
-  char** function(GApplicationCommandLine* cmdline, int* argc) c_g_application_command_line_get_arguments; ///
-  const(char)* function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_cwd; ///
-  const(char*)* function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_environ; ///
-  int function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_exit_status; ///
-  gboolean function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_is_remote; ///
-  GVariantDict* function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_options_dict; ///
-  GVariant* function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_platform_data; ///
-  GInputStream* function(GApplicationCommandLine* cmdline) c_g_application_command_line_get_stdin; ///
-  const(char)* function(GApplicationCommandLine* cmdline, const(char)* name) c_g_application_command_line_getenv; ///
-  void function(GApplicationCommandLine* cmdline, const(char)* format,  ...) c_g_application_command_line_print; ///
-  void function(GApplicationCommandLine* cmdline, const(char)* message) c_g_application_command_line_print_literal; ///
-  void function(GApplicationCommandLine* cmdline, const(char)* format,  ...) c_g_application_command_line_printerr; ///
-  void function(GApplicationCommandLine* cmdline, const(char)* message) c_g_application_command_line_printerr_literal; ///
-  void function(GApplicationCommandLine* cmdline, int exitStatus) c_g_application_command_line_set_exit_status; ///
-
-  // AsyncInitable
-  GType function() c_g_async_initable_get_type; ///
-  void function(GType objectType, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData, const(char)* firstPropertyName,  ...) c_g_async_initable_new_async; ///
-  void function(GType objectType, const(char)* firstPropertyName, void* varArgs, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_async_initable_new_valist_async; ///
-  void function(GType objectType, uint nParameters, GParameter* parameters, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_async_initable_newv_async; ///
-  void function(GAsyncInitable* initable, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_async_initable_init_async; ///
-  gboolean function(GAsyncInitable* initable, GAsyncResult* res, GError** _err) c_g_async_initable_init_finish; ///
-  GObject* function(GAsyncInitable* initable, GAsyncResult* res, GError** _err) c_g_async_initable_new_finish; ///
-
-  // AsyncResult
-  GType function() c_g_async_result_get_type; ///
-  GObject* function(GAsyncResult* res) c_g_async_result_get_source_object; ///
-  void* function(GAsyncResult* res) c_g_async_result_get_user_data; ///
-  gboolean function(GAsyncResult* res, void* sourceTag) c_g_async_result_is_tagged; ///
-  gboolean function(GAsyncResult* res, GError** _err) c_g_async_result_legacy_propagate_error; ///
-
-  // BufferedInputStream
-  GType function() c_g_buffered_input_stream_get_type; ///
-  GInputStream* function(GInputStream* baseStream) c_g_buffered_input_stream_new; ///
-  GInputStream* function(GInputStream* baseStream, size_t size) c_g_buffered_input_stream_new_sized; ///
-  ptrdiff_t function(GBufferedInputStream* stream, ptrdiff_t count, GCancellable* cancellable, GError** _err) c_g_buffered_input_stream_fill; ///
-  void function(GBufferedInputStream* stream, ptrdiff_t count, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_buffered_input_stream_fill_async; ///
-  ptrdiff_t function(GBufferedInputStream* stream, GAsyncResult* result, GError** _err) c_g_buffered_input_stream_fill_finish; ///
-  size_t function(GBufferedInputStream* stream) c_g_buffered_input_stream_get_available; ///
-  size_t function(GBufferedInputStream* stream) c_g_buffered_input_stream_get_buffer_size; ///
-  size_t function(GBufferedInputStream* stream, void* buffer, size_t offset, size_t count) c_g_buffered_input_stream_peek; ///
-  void* function(GBufferedInputStream* stream, size_t* count) c_g_buffered_input_stream_peek_buffer; ///
-  int function(GBufferedInputStream* stream, GCancellable* cancellable, GError** _err) c_g_buffered_input_stream_read_byte; ///
-  void function(GBufferedInputStream* stream, size_t size) c_g_buffered_input_stream_set_buffer_size; ///
-
-  // BufferedOutputStream
-  GType function() c_g_buffered_output_stream_get_type; ///
-  GOutputStream* function(GOutputStream* baseStream) c_g_buffered_output_stream_new; ///
-  GOutputStream* function(GOutputStream* baseStream, size_t size) c_g_buffered_output_stream_new_sized; ///
-  gboolean function(GBufferedOutputStream* stream) c_g_buffered_output_stream_get_auto_grow; ///
-  size_t function(GBufferedOutputStream* stream) c_g_buffered_output_stream_get_buffer_size; ///
-  void function(GBufferedOutputStream* stream, gboolean autoGrow) c_g_buffered_output_stream_set_auto_grow; ///
-  void function(GBufferedOutputStream* stream, size_t size) c_g_buffered_output_stream_set_buffer_size; ///
-
-  // BytesIcon
-  GType function() c_g_bytes_icon_get_type; ///
-  GIcon* function(GBytes* bytes) c_g_bytes_icon_new; ///
-  GBytes* function(GBytesIcon* icon) c_g_bytes_icon_get_bytes; ///
-
-  // Cancellable
-  GType function() c_g_cancellable_get_type; ///
-  GCancellable* function() c_g_cancellable_new; ///
-  GCancellable* function() c_g_cancellable_get_current; ///
-  void function(GCancellable* cancellable) c_g_cancellable_cancel; ///
-  gulong function(GCancellable* cancellable, GCancellableConnectFunc callback, void* data, GDestroyNotify dataDestroyFunc) c_g_cancellable_connect; ///
-  void function(GCancellable* cancellable, gulong handlerId) c_g_cancellable_disconnect; ///
-  int function(GCancellable* cancellable) c_g_cancellable_get_fd; ///
-  gboolean function(GCancellable* cancellable) c_g_cancellable_is_cancelled; ///
-  gboolean function(GCancellable* cancellable, GPollFD* pollfd) c_g_cancellable_make_pollfd; ///
-  void function(GCancellable* cancellable) c_g_cancellable_pop_current; ///
-  void function(GCancellable* cancellable) c_g_cancellable_push_current; ///
-  void function(GCancellable* cancellable) c_g_cancellable_release_fd; ///
-  void function(GCancellable* cancellable) c_g_cancellable_reset; ///
-  gboolean function(GCancellable* cancellable, GError** _err) c_g_cancellable_set_error_if_cancelled; ///
-  GSource* function(GCancellable* cancellable) c_g_cancellable_source_new; ///
-
-  // CharsetConverter
-  GType function() c_g_charset_converter_get_type; ///
-  GCharsetConverter* function(const(char)* toCharset, const(char)* fromCharset, GError** _err) c_g_charset_converter_new; ///
-  uint function(GCharsetConverter* converter) c_g_charset_converter_get_num_fallbacks; ///
-  gboolean function(GCharsetConverter* converter) c_g_charset_converter_get_use_fallback; ///
-  void function(GCharsetConverter* converter, gboolean useFallback) c_g_charset_converter_set_use_fallback; ///
-
-  // Converter
-  GType function() c_g_converter_get_type; ///
-  GConverterResult function(GConverter* converter, void* inbuf, size_t inbufSize, void* outbuf, size_t outbufSize, GConverterFlags flags, size_t* bytesRead, size_t* bytesWritten, GError** _err) c_g_converter_convert; ///
-  GBytes* function(GConverter* converter, GBytes* bytes, GError** _err) c_g_converter_convert_bytes; ///
-  void function(GConverter* converter) c_g_converter_reset; ///
-
-  // ConverterInputStream
-  GType function() c_g_converter_input_stream_get_type; ///
-  GInputStream* function(GInputStream* baseStream, GConverter* converter) c_g_converter_input_stream_new; ///
-  GConverter* function(GConverterInputStream* converterStream) c_g_converter_input_stream_get_converter; ///
-
-  // ConverterOutputStream
-  GType function() c_g_converter_output_stream_get_type; ///
-  GOutputStream* function(GOutputStream* baseStream, GConverter* converter) c_g_converter_output_stream_new; ///
-  GConverter* function(GConverterOutputStream* converterStream) c_g_converter_output_stream_get_converter; ///
-
-  // Credentials
-  GType function() c_g_credentials_get_type; ///
-  GCredentials* function() c_g_credentials_new; ///
-  void* function(GCredentials* credentials, GCredentialsType nativeType) c_g_credentials_get_native; ///
-  int function(GCredentials* credentials, GError** _err) c_g_credentials_get_unix_pid; ///
-  uint function(GCredentials* credentials, GError** _err) c_g_credentials_get_unix_user; ///
-  gboolean function(GCredentials* credentials, GCredentials* otherCredentials, GError** _err) c_g_credentials_is_same_user; ///
-  void function(GCredentials* credentials, GCredentialsType nativeType, void* native) c_g_credentials_set_native; ///
-  gboolean function(GCredentials* credentials, uint uid, GError** _err) c_g_credentials_set_unix_user; ///
-  char* function(GCredentials* credentials) c_g_credentials_to_string; ///
-
-  // DBusActionGroup
-  GType function() c_g_dbus_action_group_get_type; ///
-  GDBusActionGroup* function(GDBusConnection* connection, const(char)* busName, const(char)* objectPath) c_g_dbus_action_group_get; ///
-
-  // DBusAnnotationInfo
-  GType function() c_g_dbus_annotation_info_get_type; ///
-  GDBusAnnotationInfo* function(GDBusAnnotationInfo* info) c_g_dbus_annotation_info_ref; ///
-  void function(GDBusAnnotationInfo* info) c_g_dbus_annotation_info_unref; ///
-  const(char)* function(GDBusAnnotationInfo** annotations, const(char)* name) c_g_dbus_annotation_info_lookup; ///
-
-  // DBusArgInfo
-  GType function() c_g_dbus_arg_info_get_type; ///
-  GDBusArgInfo* function(GDBusArgInfo* info) c_g_dbus_arg_info_ref; ///
-  void function(GDBusArgInfo* info) c_g_dbus_arg_info_unref; ///
-
-  // DBusAuthObserver
-  GType function() c_g_dbus_auth_observer_get_type; ///
-  GDBusAuthObserver* function() c_g_dbus_auth_observer_new; ///
-  gboolean function(GDBusAuthObserver* observer, const(char)* mechanism) c_g_dbus_auth_observer_allow_mechanism; ///
-  gboolean function(GDBusAuthObserver* observer, GIOStream* stream, GCredentials* credentials) c_g_dbus_auth_observer_authorize_authenticated_peer; ///
-
-  // DBusConnection
-  GType function() c_g_dbus_connection_get_type; ///
-  GDBusConnection* function(GAsyncResult* res, GError** _err) c_g_dbus_connection_new_finish; ///
-  GDBusConnection* function(GAsyncResult* res, GError** _err) c_g_dbus_connection_new_for_address_finish; ///
-  GDBusConnection* function(const(char)* address, GDBusConnectionFlags flags, GDBusAuthObserver* observer, GCancellable* cancellable, GError** _err) c_g_dbus_connection_new_for_address_sync; ///
-  GDBusConnection* function(GIOStream* stream, const(char)* guid, GDBusConnectionFlags flags, GDBusAuthObserver* observer, GCancellable* cancellable, GError** _err) c_g_dbus_connection_new_sync; ///
-  void function(GIOStream* stream, const(char)* guid, GDBusConnectionFlags flags, GDBusAuthObserver* observer, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_dbus_connection_new; ///
-  void function(const(char)* address, GDBusConnectionFlags flags, GDBusAuthObserver* observer, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_dbus_connection_new_for_address; ///
-  uint function(GDBusConnection* connection, GDBusMessageFilterFunction filterFunction, void* userData, GDestroyNotify userDataFreeFunc) c_g_dbus_connection_add_filter; ///
-  void function(GDBusConnection* connection, const(char)* busName, const(char)* objectPath, const(char)* interfaceName, const(char)* methodName, GVariant* parameters, const(GVariantType)* replyType, GDBusCallFlags flags, int timeoutMsec, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_dbus_connection_call; ///
-  GVariant* function(GDBusConnection* connection, GAsyncResult* res, GError** _err) c_g_dbus_connection_call_finish; ///
-  GVariant* function(GDBusConnection* connection, const(char)* busName, const(char)* objectPath, const(char)* interfaceName, const(char)* methodName, GVariant* parameters, const(GVariantType)* replyType, GDBusCallFlags flags, int timeoutMsec, GCancellable* cancellable, GError** _err) c_g_dbus_connection_call_sync; ///
-  void function(GDBusConnection* connection, const(char)* busName, const(char)* objectPath, const(char)* interfaceName, const(char)* methodName, GVariant* parameters, const(GVariantType)* replyType, GDBusCallFlags flags, int timeoutMsec, GUnixFDList* fdList, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_dbus_connection_call_with_unix_fd_list; ///
-  GVariant* function(GDBusConnection* connection, GUnixFDList** outFdList, GAsyncResult* res, GError** _err) c_g_dbus_connection_call_with_unix_fd_list_finish; ///
-  GVariant* function(GDBusConnection* connection, const(char)* busName, const(char)* objectPath, const(char)* interfaceName, const(char)* methodName, GVariant* parameters, const(GVariantType)* replyType, GDBusCallFlags flags, int timeoutMsec, GUnixFDList* fdList, GUnixFDList** outFdList, GCancellable* cancellable, GError** _err) c_g_dbus_connection_call_with_unix_fd_list_sync; ///
-  void function(GDBusConnection* connection, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_dbus_connection_close; ///
-  gboolean function(GDBusConnection* connection, GAsyncResult* res, GError** _err) c_g_dbus_connection_close_finish; ///
-  gboolean function(GDBusConnection* connection, GCancellable* cancellable, GError** _err) c_g_dbus_connection_close_sync; ///
-  gboolean function(GDBusConnection* connection, const(char)* destinationBusName, const(char)* objectPath, const(char)* interfaceName, const(char)* signalName, GVariant* parameters, GError** _err) c_g_dbus_connection_emit_signal; ///
-  uint function(GDBusConnection* connection, const(char)* objectPath, GActionGroup* actionGroup, GError** _err) c_g_dbus_connection_export_action_group; ///
-  uint function(GDBusConnection* connection, const(char)* objectPath, GMenuModel* menu, GError** _err) c_g_dbus_connection_export_menu_model; ///
-  void function(GDBusConnection* connection, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_dbus_connection_flush; ///
-  gboolean function(GDBusConnection* connection, GAsyncResult* res, GError** _err) c_g_dbus_connection_flush_finish; ///
-  gboolean function(GDBusConnection* connection, GCancellable* cancellable, GError** _err) c_g_dbus_connection_flush_sync; ///
-  GDBusCapabilityFlags function(GDBusConnection* connection) c_g_dbus_connection_get_capabilities; ///
-  gboolean function(GDBusConnection* connection) c_g_dbus_connection_get_exit_on_close; ///
-  GDBusConnectionFlags function(GDBusConnection* connection) c_g_dbus_connection_get_flags; ///
-  const(char)* function(GDBusConnection* connection) c_g_dbus_connection_get_guid; ///
-  uint function(GDBusConnection* connection) c_g_dbus_connection_get_last_serial; ///
-  GCredentials* function(GDBusConnection* connection) c_g_dbus_connection_get_peer_credentials; ///
-  GIOStream* function(GDBusConnection* connection) c_g_dbus_connection_get_stream; ///
-  const(char)* function(GDBusConnection* connection) c_g_dbus_connection_get_unique_name; ///
-  gboolean function(GDBusConnection* connection) c_g_dbus_connection_is_closed; ///
-  uint function(GDBusConnection* connection, const(char)* objectPath, GDBusInterfaceInfo* interfaceInfo, const(GDBusInterfaceVTable)* vtable, void* userData, GDestroyNotify userDataFreeFunc, GError** _err) c_g_dbus_connection_register_object; ///
-  uint function(GDBusConnection* connection, const(char)* objectPath, GDBusInterfaceInfo* interfaceInfo, GClosure* methodCallClosure, GClosure* getPropertyClosure, GClosure* setPropertyClosure, GError** _err) c_g_dbus_connection_register_object_with_closures; ///
-  uint function(GDBusConnection* connection, const(char)* objectPath, GDBusInterfaceInfo* interfaceInfo, GClosure* methodCallClosure, GClosure* getPropertyClosure, GClosure* setPropertyClosure, GError** _err) c_g_dbus_connection_register_object_with_closures2; ///
-  uint function(GDBusConnection* connection, const(char)* objectPath, const(GDBusSubtreeVTable)* vtable, GDBusSubtreeFlags flags, void* userData, GDestroyNotify userDataFreeFunc, GError** _err) c_g_dbus_connection_register_subtree; ///
-  void function(GDBusConnection* connection, uint filterId) c_g_dbus_connection_remove_filter; ///
-  gboolean function(GDBusConnection* connection, GDBusMessage* message, GDBusSendMessageFlags flags, uint* outSerial, GError** _err) c_g_dbus_connection_send_message; ///
-  void function(GDBusConnection* connection, GDBusMessage* message, GDBusSendMessageFlags flags, int timeoutMsec, uint* outSerial, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_dbus_connection_send_message_with_reply; ///
-  GDBusMessage* function(GDBusConnection* connection, GAsyncResult* res, GError** _err) c_g_dbus_connection_send_message_with_reply_finish; ///
-  GDBusMessage* function(GDBusConnection* connection, GDBusMessage* message, GDBusSendMessageFlags flags, int timeoutMsec, uint* outSerial, GCancellable* cancellable, GError** _err) c_g_dbus_connection_send_message_with_reply_sync; ///
-  void function(GDBusConnection* connection, gboolean exitOnClose) c_g_dbus_connection_set_exit_on_close; ///
-  uint function(GDBusConnection* connection, const(char)* sender, const(char)* interfaceName, const(char)* member, const(char)* objectPath, const(char)* arg0, GDBusSignalFlags flags, GDBusSignalCallback callback, void* userData, GDestroyNotify userDataFreeFunc) c_g_dbus_connection_signal_subscribe; ///
-  void function(GDBusConnection* connection, uint subscriptionId) c_g_dbus_connection_signal_unsubscribe; ///
-  void function(GDBusConnection* connection) c_g_dbus_connection_start_message_processing; ///
-  void function(GDBusConnection* connection, uint exportId) c_g_dbus_connection_unexport_action_group; ///
-  void function(GDBusConnection* connection, uint exportId) c_g_dbus_connection_unexport_menu_model; ///
-  gboolean function(GDBusConnection* connection, uint registrationId) c_g_dbus_connection_unregister_object; ///
-  gboolean function(GDBusConnection* connection, uint registrationId) c_g_dbus_connection_unregister_subtree; ///
-
-  // DBusInterface
-  GType function() c_g_dbus_interface_get_type; ///
-  GDBusObject* function(GDBusInterface* interface_) c_g_dbus_interface_dup_object; ///
-  GDBusInterfaceInfo* function(GDBusInterface* interface_) c_g_dbus_interface_get_info; ///
-  GDBusObject* function(GDBusInterface* interface_) c_g_dbus_interface_get_object; ///
-  void function(GDBusInterface* interface_, GDBusObject* object) c_g_dbus_interface_set_object; ///
-
-  // DBusInterfaceInfo
-  GType function() c_g_dbus_interface_info_get_type; ///
-  void function(GDBusInterfaceInfo* info) c_g_dbus_interface_info_cache_build; ///
-  void function(GDBusInterfaceInfo* info) c_g_dbus_interface_info_cache_release; ///
-  void function(GDBusInterfaceInfo* info, uint indent, GString* stringBuilder) c_g_dbus_interface_info_generate_xml; ///
-  GDBusMethodInfo* function(GDBusInterfaceInfo* info, const(char)* name) c_g_dbus_interface_info_lookup_method; ///
-  GDBusPropertyInfo* function(GDBusInterfaceInfo* info, const(char)* name) c_g_dbus_interface_info_lookup_property; ///
-  GDBusSignalInfo* function(GDBusInterfaceInfo* info, const(char)* name) c_g_dbus_interface_info_lookup_signal; ///
-  GDBusInterfaceInfo* function(GDBusInterfaceInfo* info) c_g_dbus_interface_info_ref; ///
-  void function(GDBusInterfaceInfo* info) c_g_dbus_interface_info_unref; ///
-
-  // DBusInterfaceSkeleton
-  GType function() c_g_dbus_interface_skeleton_get_type; ///
-  gboolean function(GDBusInterfaceSkeleton* interface_, GDBusConnection* connection, const(char)* objectPath, GError** _err) c_g_dbus_interface_skeleton_export; ///
-  void function(GDBusInterfaceSkeleton* interface_) c_g_dbus_interface_skeleton_flush; ///
-  GDBusConnection* function(GDBusInterfaceSkeleton* interface_) c_g_dbus_interface_skeleton_get_connection; ///
-  GList* function(GDBusInterfaceSkeleton* interface_) c_g_dbus_interface_skeleton_get_connections; ///
-  GDBusInterfaceSkeletonFlags function(GDBusInterfaceSkeleton* interface_) c_g_dbus_interface_skeleton_get_flags; ///
-  GDBusInterfaceInfo* function(GDBusInterfaceSkeleton* interface_) c_g_dbus_interface_skeleton_get_info; ///
-  const(char)* function(GDBusInterfaceSkeleton* interface_) c_g_dbus_interface_skeleton_get_object_path; ///
-  GVariant* function(GDBusInterfaceSkeleton* interface_) c_g_dbus_interface_skeleton_get_properties; ///
-  GDBusInterfaceVTable* function(GDBusInterfaceSkeleton* interface_) c_g_dbus_interface_skeleton_get_vtable; ///
-  gboolean function(GDBusInterfaceSkeleton* interface_, GDBusConnection* connection) c_g_dbus_interface_skeleton_has_connection; ///
-  void function(GDBusInterfaceSkeleton* interface_, GDBusInterfaceSkeletonFlags flags) c_g_dbus_interface_skeleton_set_flags; ///
-  void function(GDBusInterfaceSkeleton* interface_) c_g_dbus_interface_skeleton_unexport; ///
-  void function(GDBusInterfaceSkeleton* interface_, GDBusConnection* connection) c_g_dbus_interface_skeleton_unexport_from_connection; ///
-
-  // DBusMenuModel
-  GType function() c_g_dbus_menu_model_get_type; ///
-  GDBusMenuModel* function(GDBusConnection* connection, const(char)* busName, const(char)* objectPath) c_g_dbus_menu_model_get; ///
-
-  // DBusMessage
-  GType function() c_g_dbus_message_get_type; ///
-  GDBusMessage* function() c_g_dbus_message_new; ///
-  GDBusMessage* function(ubyte* blob, size_t blobLen, GDBusCapabilityFlags capabilities, GError** _err) c_g_dbus_message_new_from_blob; ///
-  GDBusMessage* function(const(char)* name, const(char)* path, const(char)* interface_, const(char)* method) c_g_dbus_message_new_method_call; ///
-  GDBusMessage* function(const(char)* path, const(char)* interface_, const(char)* signal) c_g_dbus_message_new_signal; ///
-  ptrdiff_t function(ubyte* blob, size_t blobLen, GError** _err) c_g_dbus_message_bytes_needed; ///
-  GDBusMessage* function(GDBusMessage* message, GError** _err) c_g_dbus_message_copy; ///
-  const(char)* function(GDBusMessage* message) c_g_dbus_message_get_arg0; ///
-  const(char)* function(GDBusMessage* message) c_g_dbus_message_get_arg0_path; ///
-  GVariant* function(GDBusMessage* message) c_g_dbus_message_get_body; ///
-  GDBusMessageByteOrder function(GDBusMessage* message) c_g_dbus_message_get_byte_order; ///
-  const(char)* function(GDBusMessage* message) c_g_dbus_message_get_destination; ///
-  const(char)* function(GDBusMessage* message) c_g_dbus_message_get_error_name; ///
-  GDBusMessageFlags function(GDBusMessage* message) c_g_dbus_message_get_flags; ///
-  GVariant* function(GDBusMessage* message, GDBusMessageHeaderField headerField) c_g_dbus_message_get_header; ///
-  ubyte* function(GDBusMessage* message) c_g_dbus_message_get_header_fields; ///
-  const(char)* function(GDBusMessage* message) c_g_dbus_message_get_interface; ///
-  gboolean function(GDBusMessage* message) c_g_dbus_message_get_locked; ///
-  const(char)* function(GDBusMessage* message) c_g_dbus_message_get_member; ///
-  GDBusMessageType function(GDBusMessage* message) c_g_dbus_message_get_message_type; ///
-  uint function(GDBusMessage* message) c_g_dbus_message_get_num_unix_fds; ///
-  const(char)* function(GDBusMessage* message) c_g_dbus_message_get_path; ///
-  uint function(GDBusMessage* message) c_g_dbus_message_get_reply_serial; ///
-  const(char)* function(GDBusMessage* message) c_g_dbus_message_get_sender; ///
-  uint function(GDBusMessage* message) c_g_dbus_message_get_serial; ///
-  const(char)* function(GDBusMessage* message) c_g_dbus_message_get_signature; ///
-  GUnixFDList* function(GDBusMessage* message) c_g_dbus_message_get_unix_fd_list; ///
-  void function(GDBusMessage* message) c_g_dbus_message_lock; ///
-  GDBusMessage* function(GDBusMessage* methodCallMessage, const(char)* errorName, const(char)* errorMessageFormat,  ...) c_g_dbus_message_new_method_error; ///
-  GDBusMessage* function(GDBusMessage* methodCallMessage, const(char)* errorName, const(char)* errorMessage) c_g_dbus_message_new_method_error_literal; ///
-  GDBusMessage* function(GDBusMessage* methodCallMessage, const(char)* errorName, const(char)* errorMessageFormat, void* varArgs) c_g_dbus_message_new_method_error_valist; ///
-  GDBusMessage* function(GDBusMessage* methodCallMessage) c_g_dbus_message_new_method_reply; ///
-  char* function(GDBusMessage* message, uint indent) c_g_dbus_message_print; ///
-  void function(GDBusMessage* message, GVariant* body_) c_g_dbus_message_set_body; ///
-  void function(GDBusMessage* message, GDBusMessageByteOrder byteOrder) c_g_dbus_message_set_byte_order; ///
-  void function(GDBusMessage* message, const(char)* value) c_g_dbus_message_set_destination; ///
-  void function(GDBusMessage* message, const(char)* value) c_g_dbus_message_set_error_name; ///
-  void function(GDBusMessage* message, GDBusMessageFlags flags) c_g_dbus_message_set_flags; ///
-  void function(GDBusMessage* message, GDBusMessageHeaderField headerField, GVariant* value) c_g_dbus_message_set_header; ///
-  void function(GDBusMessage* message, const(char)* value) c_g_dbus_message_set_interface; ///
-  void function(GDBusMessage* message, const(char)* value) c_g_dbus_message_set_member; ///
-  void function(GDBusMessage* message, GDBusMessageType type) c_g_dbus_message_set_message_type; ///
-  void function(GDBusMessage* message, uint value) c_g_dbus_message_set_num_unix_fds; ///
-  void function(GDBusMessage* message, const(char)* value) c_g_dbus_message_set_path; ///
-  void function(GDBusMessage* message, uint value) c_g_dbus_message_set_reply_serial; ///
-  void function(GDBusMessage* message, const(char)* value) c_g_dbus_message_set_sender; ///
-  void function(GDBusMessage* message, uint serial) c_g_dbus_message_set_serial; ///
-  void function(GDBusMessage* message, const(char)* value) c_g_dbus_message_set_signature; ///
-  void function(GDBusMessage* message, GUnixFDList* fdList) c_g_dbus_message_set_unix_fd_list; ///
-  ubyte* function(GDBusMessage* message, size_t* outSize, GDBusCapabilityFlags capabilities, GError** _err) c_g_dbus_message_to_blob; ///
-  gboolean function(GDBusMessage* message, GError** _err) c_g_dbus_message_to_gerror; ///
-
-  // DBusMethodInfo
-  GType function() c_g_dbus_method_info_get_type; ///
-  GDBusMethodInfo* function(GDBusMethodInfo* info) c_g_dbus_method_info_ref; ///
-  void function(GDBusMethodInfo* info) c_g_dbus_method_info_unref; ///
-
-  // DBusMethodInvocation
-  GType function() c_g_dbus_method_invocation_get_type; ///
-  GDBusConnection* function(GDBusMethodInvocation* invocation) c_g_dbus_method_invocation_get_connection; ///
-  const(char)* function(GDBusMethodInvocation* invocation) c_g_dbus_method_invocation_get_interface_name; ///
-  GDBusMessage* function(GDBusMethodInvocation* invocation) c_g_dbus_method_invocation_get_message; ///
-  const(GDBusMethodInfo)* function(GDBusMethodInvocation* invocation) c_g_dbus_method_invocation_get_method_info; ///
-  const(char)* function(GDBusMethodInvocation* invocation) c_g_dbus_method_invocation_get_method_name; ///
-  const(char)* function(GDBusMethodInvocation* invocation) c_g_dbus_method_invocation_get_object_path; ///
-  GVariant* function(GDBusMethodInvocation* invocation) c_g_dbus_method_invocation_get_parameters; ///
-  const(GDBusPropertyInfo)* function(GDBusMethodInvocation* invocation) c_g_dbus_method_invocation_get_property_info; ///
-  const(char)* function(GDBusMethodInvocation* invocation) c_g_dbus_method_invocation_get_sender; ///
-  void* function(GDBusMethodInvocation* invocation) c_g_dbus_method_invocation_get_user_data; ///
-  void function(GDBusMethodInvocation* invocation, const(char)* errorName, const(char)* errorMessage) c_g_dbus_method_invocation_return_dbus_error; ///
-  void function(GDBusMethodInvocation* invocation, GQuark domain, int code, const(char)* format,  ...) c_g_dbus_method_invocation_return_error; ///
-  void function(GDBusMethodInvocation* invocation, GQuark domain, int code, const(char)* message) c_g_dbus_method_invocation_return_error_literal; ///
-  void function(GDBusMethodInvocation* invocation, GQuark domain, int code, const(char)* format, void* varArgs) c_g_dbus_method_invocation_return_error_valist; ///
-  void function(GDBusMethodInvocation* invocation, const(GError)* error) c_g_dbus_method_invocation_return_gerror; ///
-  void function(GDBusMethodInvocation* invocation, GVariant* parameters) c_g_dbus_method_invocation_return_value; ///
-  void function(GDBusMethodInvocation* invocation, GVariant* parameters, GUnixFDList* fdList) c_g_dbus_method_invocation_return_value_with_unix_fd_list; ///
-  void function(GDBusMethodInvocation* invocation, GError* error) c_g_dbus_method_invocation_take_error; ///
-
-  // DBusNodeInfo
-  GType function() c_g_dbus_node_info_get_type; ///
-  GDBusNodeInfo* function(const(char)* xmlData, GError** _err) c_g_dbus_node_info_new_for_xml; ///
-  void function(GDBusNodeInfo* info, uint indent, GString* stringBuilder) c_g_dbus_node_info_generate_xml; ///
-  GDBusInterfaceInfo* function(GDBusNodeInfo* info, const(char)* name) c_g_dbus_node_info_lookup_interface; ///
-  GDBusNodeInfo* function(GDBusNodeInfo* info) c_g_dbus_node_info_ref; ///
-  void function(GDBusNodeInfo* info) c_g_dbus_node_info_unref; ///
-
-  // DBusObject
-  GType function() c_g_dbus_object_get_type; ///
-  GDBusInterface* function(GDBusObject* object, const(char)* interfaceName) c_g_dbus_object_get_interface; ///
-  GList* function(GDBusObject* object) c_g_dbus_object_get_interfaces; ///
-  const(char)* function(GDBusObject* object) c_g_dbus_object_get_object_path; ///
-
-  // DBusObjectManager
-  GType function() c_g_dbus_object_manager_get_type; ///
-  GDBusInterface* function(GDBusObjectManager* manager, const(char)* objectPath, const(char)* interfaceName) c_g_dbus_object_manager_get_interface; ///
-  GDBusObject* function(GDBusObjectManager* manager, const(char)* objectPath) c_g_dbus_object_manager_get_object; ///
-  const(char)* function(GDBusObjectManager* manager) c_g_dbus_object_manager_get_object_path; ///
-  GList* function(GDBusObjectManager* manager) c_g_dbus_object_manager_get_objects; ///
-
-  // DBusObjectManagerClient
-  GType function() c_g_dbus_object_manager_client_get_type; ///
-  GDBusObjectManager* function(GAsyncResult* res, GError** _err) c_g_dbus_object_manager_client_new_finish; ///
-  GDBusObjectManager* function(GAsyncResult* res, GError** _err) c_g_dbus_object_manager_client_new_for_bus_finish; ///
-  GDBusObjectManager* function(GBusType busType, GDBusObjectManagerClientFlags flags, const(char)* name, const(char)* objectPath, GDBusProxyTypeFunc getProxyTypeFunc, void* getProxyTypeUserData, GDestroyNotify getProxyTypeDestroyNotify, GCancellable* cancellable, GError** _err) c_g_dbus_object_manager_client_new_for_bus_sync; ///
-  GDBusObjectManager* function(GDBusConnection* connection, GDBusObjectManagerClientFlags flags, const(char)* name, const(char)* objectPath, GDBusProxyTypeFunc getProxyTypeFunc, void* getProxyTypeUserData, GDestroyNotify getProxyTypeDestroyNotify, GCancellable* cancellable, GError** _err) c_g_dbus_object_manager_client_new_sync; ///
-  void function(GDBusConnection* connection, GDBusObjectManagerClientFlags flags, const(char)* name, const(char)* objectPath, GDBusProxyTypeFunc getProxyTypeFunc, void* getProxyTypeUserData, GDestroyNotify getProxyTypeDestroyNotify, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_dbus_object_manager_client_new; ///
-  void function(GBusType busType, GDBusObjectManagerClientFlags flags, const(char)* name, const(char)* objectPath, GDBusProxyTypeFunc getProxyTypeFunc, void* getProxyTypeUserData, GDestroyNotify getProxyTypeDestroyNotify, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_dbus_object_manager_client_new_for_bus; ///
-  GDBusConnection* function(GDBusObjectManagerClient* manager) c_g_dbus_object_manager_client_get_connection; ///
-  GDBusObjectManagerClientFlags function(GDBusObjectManagerClient* manager) c_g_dbus_object_manager_client_get_flags; ///
-  const(char)* function(GDBusObjectManagerClient* manager) c_g_dbus_object_manager_client_get_name; ///
-  char* function(GDBusObjectManagerClient* manager) c_g_dbus_object_manager_client_get_name_owner; ///
-
-  // DBusObjectManagerServer
-  GType function() c_g_dbus_object_manager_server_get_type; ///
-  GDBusObjectManagerServer* function(const(char)* objectPath) c_g_dbus_object_manager_server_new; ///
-  void function(GDBusObjectManagerServer* manager, GDBusObjectSkeleton* object) c_g_dbus_object_manager_server_export; ///
-  void function(GDBusObjectManagerServer* manager, GDBusObjectSkeleton* object) c_g_dbus_object_manager_server_export_uniquely; ///
-  GDBusConnection* function(GDBusObjectManagerServer* manager) c_g_dbus_object_manager_server_get_connection; ///
-  gboolean function(GDBusObjectManagerServer* manager, GDBusObjectSkeleton* object) c_g_dbus_object_manager_server_is_exported; ///
-  void function(GDBusObjectManagerServer* manager, GDBusConnection* connection) c_g_dbus_object_manager_server_set_connection; ///
-  gboolean function(GDBusObjectManagerServer* manager, const(char)* objectPath) c_g_dbus_object_manager_server_unexport; ///
-
-  // DBusObjectProxy
-  GType function() c_g_dbus_object_proxy_get_type; ///
-  GDBusObjectProxy* function(GDBusConnection* connection, const(char)* objectPath) c_g_dbus_object_proxy_new; ///
-  GDBusConnection* function(GDBusObjectProxy* proxy) c_g_dbus_object_proxy_get_connection; ///
-
-  // DBusObjectSkeleton
-  GType function() c_g_dbus_object_skeleton_get_type; ///
-  GDBusObjectSkeleton* function(const(char)* objectPath) c_g_dbus_object_skeleton_new; ///
-  void function(GDBusObjectSkeleton* object, GDBusInterfaceSkeleton* interface_) c_g_dbus_object_skeleton_add_interface; ///
-  void function(GDBusObjectSkeleton* object) c_g_dbus_object_skeleton_flush; ///
-  void function(GDBusObjectSkeleton* object, GDBusInterfaceSkeleton* interface_) c_g_dbus_object_skeleton_remove_interface; ///
-  void function(GDBusObjectSkeleton* object, const(char)* interfaceName) c_g_dbus_object_skeleton_remove_interface_by_name; ///
-  void function(GDBusObjectSkeleton* object, const(char)* objectPath) c_g_dbus_object_skeleton_set_object_path; ///
-
-  // DBusPropertyInfo
-  GType function() c_g_dbus_property_info_get_type; ///
-  GDBusPropertyInfo* function(GDBusPropertyInfo* info) c_g_dbus_property_info_ref; ///
-  void function(GDBusPropertyInfo* info) c_g_dbus_property_info_unref; ///
-
-  // DBusProxy
-  GType function() c_g_dbus_proxy_get_type; ///
-  GDBusProxy* function(GAsyncResult* res, GError** _err) c_g_dbus_proxy_new_finish; ///
-  GDBusProxy* function(GAsyncResult* res, GError** _err) c_g_dbus_proxy_new_for_bus_finish; ///
-  GDBusProxy* function(GBusType busType, GDBusProxyFlags flags, GDBusInterfaceInfo* info, const(char)* name, const(char)* objectPath, const(char)* interfaceName, GCancellable* cancellable, GError** _err) c_g_dbus_proxy_new_for_bus_sync; ///
-  GDBusProxy* function(GDBusConnection* connection, GDBusProxyFlags flags, GDBusInterfaceInfo* info, const(char)* name, const(char)* objectPath, const(char)* interfaceName, GCancellable* cancellable, GError** _err) c_g_dbus_proxy_new_sync; ///
-  void function(GDBusConnection* connection, GDBusProxyFlags flags, GDBusInterfaceInfo* info, const(char)* name, const(char)* objectPath, const(char)* interfaceName, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_dbus_proxy_new; ///
-  void function(GBusType busType, GDBusProxyFlags flags, GDBusInterfaceInfo* info, const(char)* name, const(char)* objectPath, const(char)* interfaceName, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_dbus_proxy_new_for_bus; ///
-  void function(GDBusProxy* proxy, const(char)* methodName, GVariant* parameters, GDBusCallFlags flags, int timeoutMsec, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_dbus_proxy_call; ///
-  GVariant* function(GDBusProxy* proxy, GAsyncResult* res, GError** _err) c_g_dbus_proxy_call_finish; ///
-  GVariant* function(GDBusProxy* proxy, const(char)* methodName, GVariant* parameters, GDBusCallFlags flags, int timeoutMsec, GCancellable* cancellable, GError** _err) c_g_dbus_proxy_call_sync; ///
-  void function(GDBusProxy* proxy, const(char)* methodName, GVariant* parameters, GDBusCallFlags flags, int timeoutMsec, GUnixFDList* fdList, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_dbus_proxy_call_with_unix_fd_list; ///
-  GVariant* function(GDBusProxy* proxy, GUnixFDList** outFdList, GAsyncResult* res, GError** _err) c_g_dbus_proxy_call_with_unix_fd_list_finish; ///
-  GVariant* function(GDBusProxy* proxy, const(char)* methodName, GVariant* parameters, GDBusCallFlags flags, int timeoutMsec, GUnixFDList* fdList, GUnixFDList** outFdList, GCancellable* cancellable, GError** _err) c_g_dbus_proxy_call_with_unix_fd_list_sync; ///
-  GVariant* function(GDBusProxy* proxy, const(char)* propertyName) c_g_dbus_proxy_get_cached_property; ///
-  char** function(GDBusProxy* proxy) c_g_dbus_proxy_get_cached_property_names; ///
-  GDBusConnection* function(GDBusProxy* proxy) c_g_dbus_proxy_get_connection; ///
-  int function(GDBusProxy* proxy) c_g_dbus_proxy_get_default_timeout; ///
-  GDBusProxyFlags function(GDBusProxy* proxy) c_g_dbus_proxy_get_flags; ///
-  GDBusInterfaceInfo* function(GDBusProxy* proxy) c_g_dbus_proxy_get_interface_info; ///
-  const(char)* function(GDBusProxy* proxy) c_g_dbus_proxy_get_interface_name; ///
-  const(char)* function(GDBusProxy* proxy) c_g_dbus_proxy_get_name; ///
-  char* function(GDBusProxy* proxy) c_g_dbus_proxy_get_name_owner; ///
-  const(char)* function(GDBusProxy* proxy) c_g_dbus_proxy_get_object_path; ///
-  void function(GDBusProxy* proxy, const(char)* propertyName, GVariant* value) c_g_dbus_proxy_set_cached_property; ///
-  void function(GDBusProxy* proxy, int timeoutMsec) c_g_dbus_proxy_set_default_timeout; ///
-  void function(GDBusProxy* proxy, GDBusInterfaceInfo* info) c_g_dbus_proxy_set_interface_info; ///
-
-  // DBusServer
-  GType function() c_g_dbus_server_get_type; ///
-  GDBusServer* function(const(char)* address, GDBusServerFlags flags, const(char)* guid, GDBusAuthObserver* observer, GCancellable* cancellable, GError** _err) c_g_dbus_server_new_sync; ///
-  const(char)* function(GDBusServer* server) c_g_dbus_server_get_client_address; ///
-  GDBusServerFlags function(GDBusServer* server) c_g_dbus_server_get_flags; ///
-  const(char)* function(GDBusServer* server) c_g_dbus_server_get_guid; ///
-  gboolean function(GDBusServer* server) c_g_dbus_server_is_active; ///
-  void function(GDBusServer* server) c_g_dbus_server_start; ///
-  void function(GDBusServer* server) c_g_dbus_server_stop; ///
-
-  // DBusSignalInfo
-  GType function() c_g_dbus_signal_info_get_type; ///
-  GDBusSignalInfo* function(GDBusSignalInfo* info) c_g_dbus_signal_info_ref; ///
-  void function(GDBusSignalInfo* info) c_g_dbus_signal_info_unref; ///
-
-  // DataInputStream
-  GType function() c_g_data_input_stream_get_type; ///
-  GDataInputStream* function(GInputStream* baseStream) c_g_data_input_stream_new; ///
-  GDataStreamByteOrder function(GDataInputStream* stream) c_g_data_input_stream_get_byte_order; ///
-  GDataStreamNewlineType function(GDataInputStream* stream) c_g_data_input_stream_get_newline_type; ///
-  ubyte function(GDataInputStream* stream, GCancellable* cancellable, GError** _err) c_g_data_input_stream_read_byte; ///
-  short function(GDataInputStream* stream, GCancellable* cancellable, GError** _err) c_g_data_input_stream_read_int16; ///
-  int function(GDataInputStream* stream, GCancellable* cancellable, GError** _err) c_g_data_input_stream_read_int32; ///
-  long function(GDataInputStream* stream, GCancellable* cancellable, GError** _err) c_g_data_input_stream_read_int64; ///
-  char* function(GDataInputStream* stream, size_t* length, GCancellable* cancellable, GError** _err) c_g_data_input_stream_read_line; ///
-  void function(GDataInputStream* stream, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_data_input_stream_read_line_async; ///
-  char* function(GDataInputStream* stream, GAsyncResult* result, size_t* length, GError** _err) c_g_data_input_stream_read_line_finish; ///
-  char* function(GDataInputStream* stream, GAsyncResult* result, size_t* length, GError** _err) c_g_data_input_stream_read_line_finish_utf8; ///
-  char* function(GDataInputStream* stream, size_t* length, GCancellable* cancellable, GError** _err) c_g_data_input_stream_read_line_utf8; ///
-  ushort function(GDataInputStream* stream, GCancellable* cancellable, GError** _err) c_g_data_input_stream_read_uint16; ///
-  uint function(GDataInputStream* stream, GCancellable* cancellable, GError** _err) c_g_data_input_stream_read_uint32; ///
-  ulong function(GDataInputStream* stream, GCancellable* cancellable, GError** _err) c_g_data_input_stream_read_uint64; ///
-  char* function(GDataInputStream* stream, const(char)* stopChars, size_t* length, GCancellable* cancellable, GError** _err) c_g_data_input_stream_read_until; ///
-  void function(GDataInputStream* stream, const(char)* stopChars, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_data_input_stream_read_until_async; ///
-  char* function(GDataInputStream* stream, GAsyncResult* result, size_t* length, GError** _err) c_g_data_input_stream_read_until_finish; ///
-  char* function(GDataInputStream* stream, const(char)* stopChars, ptrdiff_t stopCharsLen, size_t* length, GCancellable* cancellable, GError** _err) c_g_data_input_stream_read_upto; ///
-  void function(GDataInputStream* stream, const(char)* stopChars, ptrdiff_t stopCharsLen, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_data_input_stream_read_upto_async; ///
-  char* function(GDataInputStream* stream, GAsyncResult* result, size_t* length, GError** _err) c_g_data_input_stream_read_upto_finish; ///
-  void function(GDataInputStream* stream, GDataStreamByteOrder order) c_g_data_input_stream_set_byte_order; ///
-  void function(GDataInputStream* stream, GDataStreamNewlineType type) c_g_data_input_stream_set_newline_type; ///
-
-  // DataOutputStream
-  GType function() c_g_data_output_stream_get_type; ///
-  GDataOutputStream* function(GOutputStream* baseStream) c_g_data_output_stream_new; ///
-  GDataStreamByteOrder function(GDataOutputStream* stream) c_g_data_output_stream_get_byte_order; ///
-  gboolean function(GDataOutputStream* stream, ubyte data, GCancellable* cancellable, GError** _err) c_g_data_output_stream_put_byte; ///
-  gboolean function(GDataOutputStream* stream, short data, GCancellable* cancellable, GError** _err) c_g_data_output_stream_put_int16; ///
-  gboolean function(GDataOutputStream* stream, int data, GCancellable* cancellable, GError** _err) c_g_data_output_stream_put_int32; ///
-  gboolean function(GDataOutputStream* stream, long data, GCancellable* cancellable, GError** _err) c_g_data_output_stream_put_int64; ///
-  gboolean function(GDataOutputStream* stream, const(char)* str, GCancellable* cancellable, GError** _err) c_g_data_output_stream_put_string; ///
-  gboolean function(GDataOutputStream* stream, ushort data, GCancellable* cancellable, GError** _err) c_g_data_output_stream_put_uint16; ///
-  gboolean function(GDataOutputStream* stream, uint data, GCancellable* cancellable, GError** _err) c_g_data_output_stream_put_uint32; ///
-  gboolean function(GDataOutputStream* stream, ulong data, GCancellable* cancellable, GError** _err) c_g_data_output_stream_put_uint64; ///
-  void function(GDataOutputStream* stream, GDataStreamByteOrder order) c_g_data_output_stream_set_byte_order; ///
-
-  // DatagramBased
-  GType function() c_g_datagram_based_get_type; ///
-  GIOCondition function(GDatagramBased* datagramBased, GIOCondition condition) c_g_datagram_based_condition_check; ///
-  gboolean function(GDatagramBased* datagramBased, GIOCondition condition, long timeout, GCancellable* cancellable, GError** _err) c_g_datagram_based_condition_wait; ///
-  GSource* function(GDatagramBased* datagramBased, GIOCondition condition, GCancellable* cancellable) c_g_datagram_based_create_source; ///
-  int function(GDatagramBased* datagramBased, GInputMessage* messages, uint numMessages, int flags, long timeout, GCancellable* cancellable, GError** _err) c_g_datagram_based_receive_messages; ///
-  int function(GDatagramBased* datagramBased, GOutputMessage* messages, uint numMessages, int flags, long timeout, GCancellable* cancellable, GError** _err) c_g_datagram_based_send_messages; ///
-
-  // DebugController
-  GType function() c_g_debug_controller_get_type; ///
-  gboolean function(GDebugController* self) c_g_debug_controller_get_debug_enabled; ///
-  void function(GDebugController* self, gboolean debugEnabled) c_g_debug_controller_set_debug_enabled; ///
-
-  // DebugControllerDBus
-  GType function() c_g_debug_controller_dbus_get_type; ///
-  GDebugControllerDBus* function(GDBusConnection* connection, GCancellable* cancellable, GError** _err) c_g_debug_controller_dbus_new; ///
-  void function(GDebugControllerDBus* self) c_g_debug_controller_dbus_stop; ///
-
-  // Drive
-  GType function() c_g_drive_get_type; ///
-  gboolean function(GDrive* drive) c_g_drive_can_eject; ///
-  gboolean function(GDrive* drive) c_g_drive_can_poll_for_media; ///
-  gboolean function(GDrive* drive) c_g_drive_can_start; ///
-  gboolean function(GDrive* drive) c_g_drive_can_start_degraded; ///
-  gboolean function(GDrive* drive) c_g_drive_can_stop; ///
-  void function(GDrive* drive, GMountUnmountFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_drive_eject; ///
-  gboolean function(GDrive* drive, GAsyncResult* result, GError** _err) c_g_drive_eject_finish; ///
-  void function(GDrive* drive, GMountUnmountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_drive_eject_with_operation; ///
-  gboolean function(GDrive* drive, GAsyncResult* result, GError** _err) c_g_drive_eject_with_operation_finish; ///
-  char** function(GDrive* drive) c_g_drive_enumerate_identifiers; ///
-  GIcon* function(GDrive* drive) c_g_drive_get_icon; ///
-  char* function(GDrive* drive, const(char)* kind) c_g_drive_get_identifier; ///
-  char* function(GDrive* drive) c_g_drive_get_name; ///
-  const(char)* function(GDrive* drive) c_g_drive_get_sort_key; ///
-  GDriveStartStopType function(GDrive* drive) c_g_drive_get_start_stop_type; ///
-  GIcon* function(GDrive* drive) c_g_drive_get_symbolic_icon; ///
-  GList* function(GDrive* drive) c_g_drive_get_volumes; ///
-  gboolean function(GDrive* drive) c_g_drive_has_media; ///
-  gboolean function(GDrive* drive) c_g_drive_has_volumes; ///
-  gboolean function(GDrive* drive) c_g_drive_is_media_check_automatic; ///
-  gboolean function(GDrive* drive) c_g_drive_is_media_removable; ///
-  gboolean function(GDrive* drive) c_g_drive_is_removable; ///
-  void function(GDrive* drive, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_drive_poll_for_media; ///
-  gboolean function(GDrive* drive, GAsyncResult* result, GError** _err) c_g_drive_poll_for_media_finish; ///
-  void function(GDrive* drive, GDriveStartFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_drive_start; ///
-  gboolean function(GDrive* drive, GAsyncResult* result, GError** _err) c_g_drive_start_finish; ///
-  void function(GDrive* drive, GMountUnmountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_drive_stop; ///
-  gboolean function(GDrive* drive, GAsyncResult* result, GError** _err) c_g_drive_stop_finish; ///
-
-  // DtlsClientConnection
-  GType function() c_g_dtls_client_connection_get_type; ///
-  GDatagramBased* function(GDatagramBased* baseSocket, GSocketConnectable* serverIdentity, GError** _err) c_g_dtls_client_connection_new; ///
-  GList* function(GDtlsClientConnection* conn) c_g_dtls_client_connection_get_accepted_cas; ///
-  GSocketConnectable* function(GDtlsClientConnection* conn) c_g_dtls_client_connection_get_server_identity; ///
-  GTlsCertificateFlags function(GDtlsClientConnection* conn) c_g_dtls_client_connection_get_validation_flags; ///
-  void function(GDtlsClientConnection* conn, GSocketConnectable* identity) c_g_dtls_client_connection_set_server_identity; ///
-  void function(GDtlsClientConnection* conn, GTlsCertificateFlags flags) c_g_dtls_client_connection_set_validation_flags; ///
-
-  // DtlsConnection
-  GType function() c_g_dtls_connection_get_type; ///
-  gboolean function(GDtlsConnection* conn, GCancellable* cancellable, GError** _err) c_g_dtls_connection_close; ///
-  void function(GDtlsConnection* conn, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_dtls_connection_close_async; ///
-  gboolean function(GDtlsConnection* conn, GAsyncResult* result, GError** _err) c_g_dtls_connection_close_finish; ///
-  gboolean function(GDtlsConnection* conn, GTlsCertificate* peerCert, GTlsCertificateFlags errors) c_g_dtls_connection_emit_accept_certificate; ///
-  GTlsCertificate* function(GDtlsConnection* conn) c_g_dtls_connection_get_certificate; ///
-  gboolean function(GDtlsConnection* conn, GTlsChannelBindingType type, GByteArray* data, GError** _err) c_g_dtls_connection_get_channel_binding_data; ///
-  char* function(GDtlsConnection* conn) c_g_dtls_connection_get_ciphersuite_name; ///
-  GTlsDatabase* function(GDtlsConnection* conn) c_g_dtls_connection_get_database; ///
-  GTlsInteraction* function(GDtlsConnection* conn) c_g_dtls_connection_get_interaction; ///
-  const(char)* function(GDtlsConnection* conn) c_g_dtls_connection_get_negotiated_protocol; ///
-  GTlsCertificate* function(GDtlsConnection* conn) c_g_dtls_connection_get_peer_certificate; ///
-  GTlsCertificateFlags function(GDtlsConnection* conn) c_g_dtls_connection_get_peer_certificate_errors; ///
-  GTlsProtocolVersion function(GDtlsConnection* conn) c_g_dtls_connection_get_protocol_version; ///
-  GTlsRehandshakeMode function(GDtlsConnection* conn) c_g_dtls_connection_get_rehandshake_mode; ///
-  gboolean function(GDtlsConnection* conn) c_g_dtls_connection_get_require_close_notify; ///
-  gboolean function(GDtlsConnection* conn, GCancellable* cancellable, GError** _err) c_g_dtls_connection_handshake; ///
-  void function(GDtlsConnection* conn, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_dtls_connection_handshake_async; ///
-  gboolean function(GDtlsConnection* conn, GAsyncResult* result, GError** _err) c_g_dtls_connection_handshake_finish; ///
-  void function(GDtlsConnection* conn, const(char*)* protocols) c_g_dtls_connection_set_advertised_protocols; ///
-  void function(GDtlsConnection* conn, GTlsCertificate* certificate) c_g_dtls_connection_set_certificate; ///
-  void function(GDtlsConnection* conn, GTlsDatabase* database) c_g_dtls_connection_set_database; ///
-  void function(GDtlsConnection* conn, GTlsInteraction* interaction) c_g_dtls_connection_set_interaction; ///
-  void function(GDtlsConnection* conn, GTlsRehandshakeMode mode) c_g_dtls_connection_set_rehandshake_mode; ///
-  void function(GDtlsConnection* conn, gboolean requireCloseNotify) c_g_dtls_connection_set_require_close_notify; ///
-  gboolean function(GDtlsConnection* conn, gboolean shutdownRead, gboolean shutdownWrite, GCancellable* cancellable, GError** _err) c_g_dtls_connection_shutdown; ///
-  void function(GDtlsConnection* conn, gboolean shutdownRead, gboolean shutdownWrite, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_dtls_connection_shutdown_async; ///
-  gboolean function(GDtlsConnection* conn, GAsyncResult* result, GError** _err) c_g_dtls_connection_shutdown_finish; ///
-
-  // DtlsServerConnection
-  GType function() c_g_dtls_server_connection_get_type; ///
-  GDatagramBased* function(GDatagramBased* baseSocket, GTlsCertificate* certificate, GError** _err) c_g_dtls_server_connection_new; ///
-
-  // Emblem
-  GType function() c_g_emblem_get_type; ///
-  GEmblem* function(GIcon* icon) c_g_emblem_new; ///
-  GEmblem* function(GIcon* icon, GEmblemOrigin origin) c_g_emblem_new_with_origin; ///
-  GIcon* function(GEmblem* emblem) c_g_emblem_get_icon; ///
-  GEmblemOrigin function(GEmblem* emblem) c_g_emblem_get_origin; ///
-
-  // EmblemedIcon
-  GType function() c_g_emblemed_icon_get_type; ///
-  GIcon* function(GIcon* icon, GEmblem* emblem) c_g_emblemed_icon_new; ///
-  void function(GEmblemedIcon* emblemed, GEmblem* emblem) c_g_emblemed_icon_add_emblem; ///
-  void function(GEmblemedIcon* emblemed) c_g_emblemed_icon_clear_emblems; ///
-  GList* function(GEmblemedIcon* emblemed) c_g_emblemed_icon_get_emblems; ///
-  GIcon* function(GEmblemedIcon* emblemed) c_g_emblemed_icon_get_icon; ///
-
-  // File
-  GType function() c_g_file_get_type; ///
-  GFile* function(const(char)* firstElement,  ...) c_g_file_new_build_filename; ///
-  GFile* function(const(char*)* args) c_g_file_new_build_filenamev; ///
-  GFile* function(const(char)* arg) c_g_file_new_for_commandline_arg; ///
-  GFile* function(const(char)* arg, const(char)* cwd) c_g_file_new_for_commandline_arg_and_cwd; ///
-  GFile* function(const(char)* path) c_g_file_new_for_path; ///
-  GFile* function(const(char)* uri) c_g_file_new_for_uri; ///
-  GFile* function(const(char)* tmpl, GFileIOStream** iostream, GError** _err) c_g_file_new_tmp; ///
-  void function(const(char)* tmpl, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_new_tmp_async; ///
-  void function(const(char)* tmpl, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_new_tmp_dir_async; ///
-  GFile* function(GAsyncResult* result, GError** _err) c_g_file_new_tmp_dir_finish; ///
-  GFile* function(GAsyncResult* result, GFileIOStream** iostream, GError** _err) c_g_file_new_tmp_finish; ///
-  GFile* function(const(char)* parseName) c_g_file_parse_name; ///
-  GFileOutputStream* function(GFile* file, GFileCreateFlags flags, GCancellable* cancellable, GError** _err) c_g_file_append_to; ///
-  void function(GFile* file, GFileCreateFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_append_to_async; ///
-  GFileOutputStream* function(GFile* file, GAsyncResult* res, GError** _err) c_g_file_append_to_finish; ///
-  char* function(GFile* file, GFileCopyFlags flags, GCancellable* cancellable, GError** _err) c_g_file_build_attribute_list_for_copy; ///
-  gboolean function(GFile* source, GFile* destination, GFileCopyFlags flags, GCancellable* cancellable, GFileProgressCallback progressCallback, void* progressCallbackData, GError** _err) c_g_file_copy; ///
-  void function(GFile* source, GFile* destination, GFileCopyFlags flags, int ioPriority, GCancellable* cancellable, GFileProgressCallback progressCallback, void* progressCallbackData, GAsyncReadyCallback callback, void* userData) c_g_file_copy_async; ///
-  void function(GFile* source, GFile* destination, GFileCopyFlags flags, int ioPriority, GCancellable* cancellable, GClosure* progressCallbackClosure, GClosure* readyCallbackClosure) c_g_file_copy_async_with_closures; ///
-  gboolean function(GFile* source, GFile* destination, GFileCopyFlags flags, GCancellable* cancellable, GError** _err) c_g_file_copy_attributes; ///
-  gboolean function(GFile* file, GAsyncResult* res, GError** _err) c_g_file_copy_finish; ///
-  GFileOutputStream* function(GFile* file, GFileCreateFlags flags, GCancellable* cancellable, GError** _err) c_g_file_create; ///
-  void function(GFile* file, GFileCreateFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_create_async; ///
-  GFileOutputStream* function(GFile* file, GAsyncResult* res, GError** _err) c_g_file_create_finish; ///
-  GFileIOStream* function(GFile* file, GFileCreateFlags flags, GCancellable* cancellable, GError** _err) c_g_file_create_readwrite; ///
-  void function(GFile* file, GFileCreateFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_create_readwrite_async; ///
-  GFileIOStream* function(GFile* file, GAsyncResult* res, GError** _err) c_g_file_create_readwrite_finish; ///
-  gboolean function(GFile* file, GCancellable* cancellable, GError** _err) c_g_file_delete; ///
-  void function(GFile* file, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_delete_async; ///
-  gboolean function(GFile* file, GAsyncResult* result, GError** _err) c_g_file_delete_finish; ///
-  GFile* function(GFile* file) c_g_file_dup; ///
-  void function(GFile* file, GMountUnmountFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_eject_mountable; ///
-  gboolean function(GFile* file, GAsyncResult* result, GError** _err) c_g_file_eject_mountable_finish; ///
-  void function(GFile* file, GMountUnmountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_eject_mountable_with_operation; ///
-  gboolean function(GFile* file, GAsyncResult* result, GError** _err) c_g_file_eject_mountable_with_operation_finish; ///
-  GFileEnumerator* function(GFile* file, const(char)* attributes, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) c_g_file_enumerate_children; ///
-  void function(GFile* file, const(char)* attributes, GFileQueryInfoFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_enumerate_children_async; ///
-  GFileEnumerator* function(GFile* file, GAsyncResult* res, GError** _err) c_g_file_enumerate_children_finish; ///
-  gboolean function(GFile* file1, GFile* file2) c_g_file_equal; ///
-  GMount* function(GFile* file, GCancellable* cancellable, GError** _err) c_g_file_find_enclosing_mount; ///
-  void function(GFile* file, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_find_enclosing_mount_async; ///
-  GMount* function(GFile* file, GAsyncResult* res, GError** _err) c_g_file_find_enclosing_mount_finish; ///
-  char* function(GFile* file) c_g_file_get_basename; ///
-  GFile* function(GFile* file, const(char)* name) c_g_file_get_child; ///
-  GFile* function(GFile* file, const(char)* displayName, GError** _err) c_g_file_get_child_for_display_name; ///
-  GFile* function(GFile* file) c_g_file_get_parent; ///
-  char* function(GFile* file) c_g_file_get_parse_name; ///
-  char* function(GFile* file) c_g_file_get_path; ///
-  char* function(GFile* parent, GFile* descendant) c_g_file_get_relative_path; ///
-  char* function(GFile* file) c_g_file_get_uri; ///
-  char* function(GFile* file) c_g_file_get_uri_scheme; ///
-  gboolean function(GFile* file, GFile* parent) c_g_file_has_parent; ///
-  gboolean function(GFile* file, GFile* prefix) c_g_file_has_prefix; ///
-  gboolean function(GFile* file, const(char)* uriScheme) c_g_file_has_uri_scheme; ///
-  uint function(GFile* file) c_g_file_hash; ///
-  gboolean function(GFile* file) c_g_file_is_native; ///
-  GBytes* function(GFile* file, GCancellable* cancellable, char** etagOut, GError** _err) c_g_file_load_bytes; ///
-  void function(GFile* file, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_load_bytes_async; ///
-  GBytes* function(GFile* file, GAsyncResult* result, char** etagOut, GError** _err) c_g_file_load_bytes_finish; ///
-  gboolean function(GFile* file, GCancellable* cancellable, ubyte** contents, size_t* length, char** etagOut, GError** _err) c_g_file_load_contents; ///
-  void function(GFile* file, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_load_contents_async; ///
-  gboolean function(GFile* file, GAsyncResult* res, ubyte** contents, size_t* length, char** etagOut, GError** _err) c_g_file_load_contents_finish; ///
-  void function(GFile* file, GCancellable* cancellable, GFileReadMoreCallback readMoreCallback, GAsyncReadyCallback callback, void* userData) c_g_file_load_partial_contents_async; ///
-  gboolean function(GFile* file, GAsyncResult* res, ubyte** contents, size_t* length, char** etagOut, GError** _err) c_g_file_load_partial_contents_finish; ///
-  gboolean function(GFile* file, GCancellable* cancellable, GError** _err) c_g_file_make_directory; ///
-  void function(GFile* file, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_make_directory_async; ///
-  gboolean function(GFile* file, GAsyncResult* result, GError** _err) c_g_file_make_directory_finish; ///
-  gboolean function(GFile* file, GCancellable* cancellable, GError** _err) c_g_file_make_directory_with_parents; ///
-  gboolean function(GFile* file, const(char)* symlinkValue, GCancellable* cancellable, GError** _err) c_g_file_make_symbolic_link; ///
-  void function(GFile* file, const(char)* symlinkValue, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_make_symbolic_link_async; ///
-  gboolean function(GFile* file, GAsyncResult* result, GError** _err) c_g_file_make_symbolic_link_finish; ///
-  gboolean function(GFile* file, GFileMeasureFlags flags, GCancellable* cancellable, GFileMeasureProgressCallback progressCallback, void* progressData, ulong* diskUsage, ulong* numDirs, ulong* numFiles, GError** _err) c_g_file_measure_disk_usage; ///
-  void function(GFile* file, GFileMeasureFlags flags, int ioPriority, GCancellable* cancellable, GFileMeasureProgressCallback progressCallback, void* progressData, GAsyncReadyCallback callback, void* userData) c_g_file_measure_disk_usage_async; ///
-  gboolean function(GFile* file, GAsyncResult* result, ulong* diskUsage, ulong* numDirs, ulong* numFiles, GError** _err) c_g_file_measure_disk_usage_finish; ///
-  GFileMonitor* function(GFile* file, GFileMonitorFlags flags, GCancellable* cancellable, GError** _err) c_g_file_monitor; ///
-  GFileMonitor* function(GFile* file, GFileMonitorFlags flags, GCancellable* cancellable, GError** _err) c_g_file_monitor_directory; ///
-  GFileMonitor* function(GFile* file, GFileMonitorFlags flags, GCancellable* cancellable, GError** _err) c_g_file_monitor_file; ///
-  void function(GFile* location, GMountMountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_mount_enclosing_volume; ///
-  gboolean function(GFile* location, GAsyncResult* result, GError** _err) c_g_file_mount_enclosing_volume_finish; ///
-  void function(GFile* file, GMountMountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_mount_mountable; ///
-  GFile* function(GFile* file, GAsyncResult* result, GError** _err) c_g_file_mount_mountable_finish; ///
-  gboolean function(GFile* source, GFile* destination, GFileCopyFlags flags, GCancellable* cancellable, GFileProgressCallback progressCallback, void* progressCallbackData, GError** _err) c_g_file_move; ///
-  void function(GFile* source, GFile* destination, GFileCopyFlags flags, int ioPriority, GCancellable* cancellable, GFileProgressCallback progressCallback, void* progressCallbackData, GAsyncReadyCallback callback, void* userData) c_g_file_move_async; ///
-  void function(GFile* source, GFile* destination, GFileCopyFlags flags, int ioPriority, GCancellable* cancellable, GClosure* progressCallbackClosure, GClosure* readyCallbackClosure) c_g_file_move_async_with_closures; ///
-  gboolean function(GFile* file, GAsyncResult* result, GError** _err) c_g_file_move_finish; ///
-  GFileIOStream* function(GFile* file, GCancellable* cancellable, GError** _err) c_g_file_open_readwrite; ///
-  void function(GFile* file, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_open_readwrite_async; ///
-  GFileIOStream* function(GFile* file, GAsyncResult* res, GError** _err) c_g_file_open_readwrite_finish; ///
-  const(char)* function(GFile* file) c_g_file_peek_path; ///
-  void function(GFile* file, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_poll_mountable; ///
-  gboolean function(GFile* file, GAsyncResult* result, GError** _err) c_g_file_poll_mountable_finish; ///
-  GAppInfo* function(GFile* file, GCancellable* cancellable, GError** _err) c_g_file_query_default_handler; ///
-  void function(GFile* file, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_query_default_handler_async; ///
-  GAppInfo* function(GFile* file, GAsyncResult* result, GError** _err) c_g_file_query_default_handler_finish; ///
-  gboolean function(GFile* file, GCancellable* cancellable) c_g_file_query_exists; ///
-  GFileType function(GFile* file, GFileQueryInfoFlags flags, GCancellable* cancellable) c_g_file_query_file_type; ///
-  GFileInfo* function(GFile* file, const(char)* attributes, GCancellable* cancellable, GError** _err) c_g_file_query_filesystem_info; ///
-  void function(GFile* file, const(char)* attributes, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_query_filesystem_info_async; ///
-  GFileInfo* function(GFile* file, GAsyncResult* res, GError** _err) c_g_file_query_filesystem_info_finish; ///
-  GFileInfo* function(GFile* file, const(char)* attributes, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) c_g_file_query_info; ///
-  void function(GFile* file, const(char)* attributes, GFileQueryInfoFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_query_info_async; ///
-  GFileInfo* function(GFile* file, GAsyncResult* res, GError** _err) c_g_file_query_info_finish; ///
-  GFileAttributeInfoList* function(GFile* file, GCancellable* cancellable, GError** _err) c_g_file_query_settable_attributes; ///
-  GFileAttributeInfoList* function(GFile* file, GCancellable* cancellable, GError** _err) c_g_file_query_writable_namespaces; ///
-  GFileInputStream* function(GFile* file, GCancellable* cancellable, GError** _err) c_g_file_read; ///
-  void function(GFile* file, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_read_async; ///
-  GFileInputStream* function(GFile* file, GAsyncResult* res, GError** _err) c_g_file_read_finish; ///
-  GFileOutputStream* function(GFile* file, const(char)* etag, gboolean makeBackup, GFileCreateFlags flags, GCancellable* cancellable, GError** _err) c_g_file_replace; ///
-  void function(GFile* file, const(char)* etag, gboolean makeBackup, GFileCreateFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_replace_async; ///
-  gboolean function(GFile* file, const(ubyte)* contents, size_t length, const(char)* etag, gboolean makeBackup, GFileCreateFlags flags, char** newEtag, GCancellable* cancellable, GError** _err) c_g_file_replace_contents; ///
-  void function(GFile* file, const(ubyte)* contents, size_t length, const(char)* etag, gboolean makeBackup, GFileCreateFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_replace_contents_async; ///
-  void function(GFile* file, GBytes* contents, const(char)* etag, gboolean makeBackup, GFileCreateFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_replace_contents_bytes_async; ///
-  gboolean function(GFile* file, GAsyncResult* res, char** newEtag, GError** _err) c_g_file_replace_contents_finish; ///
-  GFileOutputStream* function(GFile* file, GAsyncResult* res, GError** _err) c_g_file_replace_finish; ///
-  GFileIOStream* function(GFile* file, const(char)* etag, gboolean makeBackup, GFileCreateFlags flags, GCancellable* cancellable, GError** _err) c_g_file_replace_readwrite; ///
-  void function(GFile* file, const(char)* etag, gboolean makeBackup, GFileCreateFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_replace_readwrite_async; ///
-  GFileIOStream* function(GFile* file, GAsyncResult* res, GError** _err) c_g_file_replace_readwrite_finish; ///
-  GFile* function(GFile* file, const(char)* relativePath) c_g_file_resolve_relative_path; ///
-  gboolean function(GFile* file, const(char)* attribute, GFileAttributeType type, void* valueP, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) c_g_file_set_attribute; ///
-  gboolean function(GFile* file, const(char)* attribute, const(char)* value, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) c_g_file_set_attribute_byte_string; ///
-  gboolean function(GFile* file, const(char)* attribute, int value, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) c_g_file_set_attribute_int32; ///
-  gboolean function(GFile* file, const(char)* attribute, long value, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) c_g_file_set_attribute_int64; ///
-  gboolean function(GFile* file, const(char)* attribute, const(char)* value, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) c_g_file_set_attribute_string; ///
-  gboolean function(GFile* file, const(char)* attribute, uint value, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) c_g_file_set_attribute_uint32; ///
-  gboolean function(GFile* file, const(char)* attribute, ulong value, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) c_g_file_set_attribute_uint64; ///
-  void function(GFile* file, GFileInfo* info, GFileQueryInfoFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_set_attributes_async; ///
-  gboolean function(GFile* file, GAsyncResult* result, GFileInfo** info, GError** _err) c_g_file_set_attributes_finish; ///
-  gboolean function(GFile* file, GFileInfo* info, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) c_g_file_set_attributes_from_info; ///
-  GFile* function(GFile* file, const(char)* displayName, GCancellable* cancellable, GError** _err) c_g_file_set_display_name; ///
-  void function(GFile* file, const(char)* displayName, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_set_display_name_async; ///
-  GFile* function(GFile* file, GAsyncResult* res, GError** _err) c_g_file_set_display_name_finish; ///
-  void function(GFile* file, GDriveStartFlags flags, GMountOperation* startOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_start_mountable; ///
-  gboolean function(GFile* file, GAsyncResult* result, GError** _err) c_g_file_start_mountable_finish; ///
-  void function(GFile* file, GMountUnmountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_stop_mountable; ///
-  gboolean function(GFile* file, GAsyncResult* result, GError** _err) c_g_file_stop_mountable_finish; ///
-  gboolean function(GFile* file) c_g_file_supports_thread_contexts; ///
-  gboolean function(GFile* file, GCancellable* cancellable, GError** _err) c_g_file_trash; ///
-  void function(GFile* file, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_trash_async; ///
-  gboolean function(GFile* file, GAsyncResult* result, GError** _err) c_g_file_trash_finish; ///
-  void function(GFile* file, GMountUnmountFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_unmount_mountable; ///
-  gboolean function(GFile* file, GAsyncResult* result, GError** _err) c_g_file_unmount_mountable_finish; ///
-  void function(GFile* file, GMountUnmountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_unmount_mountable_with_operation; ///
-  gboolean function(GFile* file, GAsyncResult* result, GError** _err) c_g_file_unmount_mountable_with_operation_finish; ///
-
-  // FileAttributeInfoList
-  GType function() c_g_file_attribute_info_list_get_type; ///
-  GFileAttributeInfoList* function() c_g_file_attribute_info_list_new; ///
-  void function(GFileAttributeInfoList* list, const(char)* name, GFileAttributeType type, GFileAttributeInfoFlags flags) c_g_file_attribute_info_list_add; ///
-  GFileAttributeInfoList* function(GFileAttributeInfoList* list) c_g_file_attribute_info_list_dup; ///
-  const(GFileAttributeInfo)* function(GFileAttributeInfoList* list, const(char)* name) c_g_file_attribute_info_list_lookup; ///
-  GFileAttributeInfoList* function(GFileAttributeInfoList* list) c_g_file_attribute_info_list_ref; ///
-  void function(GFileAttributeInfoList* list) c_g_file_attribute_info_list_unref; ///
-
-  // FileAttributeMatcher
-  GType function() c_g_file_attribute_matcher_get_type; ///
-  GFileAttributeMatcher* function(const(char)* attributes) c_g_file_attribute_matcher_new; ///
-  gboolean function(GFileAttributeMatcher* matcher, const(char)* ns) c_g_file_attribute_matcher_enumerate_namespace; ///
-  const(char)* function(GFileAttributeMatcher* matcher) c_g_file_attribute_matcher_enumerate_next; ///
-  gboolean function(GFileAttributeMatcher* matcher, const(char)* attribute) c_g_file_attribute_matcher_matches; ///
-  gboolean function(GFileAttributeMatcher* matcher, const(char)* attribute) c_g_file_attribute_matcher_matches_only; ///
-  GFileAttributeMatcher* function(GFileAttributeMatcher* matcher) c_g_file_attribute_matcher_ref; ///
-  GFileAttributeMatcher* function(GFileAttributeMatcher* matcher, GFileAttributeMatcher* subtract) c_g_file_attribute_matcher_subtract; ///
-  char* function(GFileAttributeMatcher* matcher) c_g_file_attribute_matcher_to_string; ///
-  void function(GFileAttributeMatcher* matcher) c_g_file_attribute_matcher_unref; ///
-
-  // FileEnumerator
-  GType function() c_g_file_enumerator_get_type; ///
-  gboolean function(GFileEnumerator* enumerator, GCancellable* cancellable, GError** _err) c_g_file_enumerator_close; ///
-  void function(GFileEnumerator* enumerator, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_enumerator_close_async; ///
-  gboolean function(GFileEnumerator* enumerator, GAsyncResult* result, GError** _err) c_g_file_enumerator_close_finish; ///
-  GFile* function(GFileEnumerator* enumerator, GFileInfo* info) c_g_file_enumerator_get_child; ///
-  GFile* function(GFileEnumerator* enumerator) c_g_file_enumerator_get_container; ///
-  gboolean function(GFileEnumerator* enumerator) c_g_file_enumerator_has_pending; ///
-  gboolean function(GFileEnumerator* enumerator) c_g_file_enumerator_is_closed; ///
-  gboolean function(GFileEnumerator* direnum, GFileInfo** outInfo, GFile** outChild, GCancellable* cancellable, GError** _err) c_g_file_enumerator_iterate; ///
-  GFileInfo* function(GFileEnumerator* enumerator, GCancellable* cancellable, GError** _err) c_g_file_enumerator_next_file; ///
-  void function(GFileEnumerator* enumerator, int numFiles, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_enumerator_next_files_async; ///
-  GList* function(GFileEnumerator* enumerator, GAsyncResult* result, GError** _err) c_g_file_enumerator_next_files_finish; ///
-  void function(GFileEnumerator* enumerator, gboolean pending) c_g_file_enumerator_set_pending; ///
-
-  // FileIOStream
-  GType function() c_g_file_io_stream_get_type; ///
-  char* function(GFileIOStream* stream) c_g_file_io_stream_get_etag; ///
-  GFileInfo* function(GFileIOStream* stream, const(char)* attributes, GCancellable* cancellable, GError** _err) c_g_file_io_stream_query_info; ///
-  void function(GFileIOStream* stream, const(char)* attributes, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_io_stream_query_info_async; ///
-  GFileInfo* function(GFileIOStream* stream, GAsyncResult* result, GError** _err) c_g_file_io_stream_query_info_finish; ///
-
-  // FileIcon
-  GType function() c_g_file_icon_get_type; ///
-  GIcon* function(GFile* file) c_g_file_icon_new; ///
-  GFile* function(GFileIcon* icon) c_g_file_icon_get_file; ///
-
-  // FileInfo
-  GType function() c_g_file_info_get_type; ///
-  GFileInfo* function() c_g_file_info_new; ///
-  void function(GFileInfo* info) c_g_file_info_clear_status; ///
-  void function(GFileInfo* srcInfo, GFileInfo* destInfo) c_g_file_info_copy_into; ///
-  GFileInfo* function(GFileInfo* other) c_g_file_info_dup; ///
-  GDateTime* function(GFileInfo* info) c_g_file_info_get_access_date_time; ///
-  char* function(GFileInfo* info, const(char)* attribute) c_g_file_info_get_attribute_as_string; ///
-  gboolean function(GFileInfo* info, const(char)* attribute) c_g_file_info_get_attribute_boolean; ///
-  const(char)* function(GFileInfo* info, const(char)* attribute) c_g_file_info_get_attribute_byte_string; ///
-  gboolean function(GFileInfo* info, const(char)* attribute, GFileAttributeType* type, void** valuePp, GFileAttributeStatus* status) c_g_file_info_get_attribute_data; ///
-  const(char)* function(GFileInfo* info, const(char)* attribute) c_g_file_info_get_attribute_file_path; ///
-  int function(GFileInfo* info, const(char)* attribute) c_g_file_info_get_attribute_int32; ///
-  long function(GFileInfo* info, const(char)* attribute) c_g_file_info_get_attribute_int64; ///
-  GObject* function(GFileInfo* info, const(char)* attribute) c_g_file_info_get_attribute_object; ///
-  GFileAttributeStatus function(GFileInfo* info, const(char)* attribute) c_g_file_info_get_attribute_status; ///
-  const(char)* function(GFileInfo* info, const(char)* attribute) c_g_file_info_get_attribute_string; ///
-  char** function(GFileInfo* info, const(char)* attribute) c_g_file_info_get_attribute_stringv; ///
-  GFileAttributeType function(GFileInfo* info, const(char)* attribute) c_g_file_info_get_attribute_type; ///
-  uint function(GFileInfo* info, const(char)* attribute) c_g_file_info_get_attribute_uint32; ///
-  ulong function(GFileInfo* info, const(char)* attribute) c_g_file_info_get_attribute_uint64; ///
-  const(char)* function(GFileInfo* info) c_g_file_info_get_content_type; ///
-  GDateTime* function(GFileInfo* info) c_g_file_info_get_creation_date_time; ///
-  GDateTime* function(GFileInfo* info) c_g_file_info_get_deletion_date; ///
-  const(char)* function(GFileInfo* info) c_g_file_info_get_display_name; ///
-  const(char)* function(GFileInfo* info) c_g_file_info_get_edit_name; ///
-  const(char)* function(GFileInfo* info) c_g_file_info_get_etag; ///
-  GFileType function(GFileInfo* info) c_g_file_info_get_file_type; ///
-  GIcon* function(GFileInfo* info) c_g_file_info_get_icon; ///
-  gboolean function(GFileInfo* info) c_g_file_info_get_is_backup; ///
-  gboolean function(GFileInfo* info) c_g_file_info_get_is_hidden; ///
-  gboolean function(GFileInfo* info) c_g_file_info_get_is_symlink; ///
-  GDateTime* function(GFileInfo* info) c_g_file_info_get_modification_date_time; ///
-  void function(GFileInfo* info, GTimeVal* result) c_g_file_info_get_modification_time; ///
-  const(char)* function(GFileInfo* info) c_g_file_info_get_name; ///
-  long function(GFileInfo* info) c_g_file_info_get_size; ///
-  int function(GFileInfo* info) c_g_file_info_get_sort_order; ///
-  GIcon* function(GFileInfo* info) c_g_file_info_get_symbolic_icon; ///
-  const(char)* function(GFileInfo* info) c_g_file_info_get_symlink_target; ///
-  gboolean function(GFileInfo* info, const(char)* attribute) c_g_file_info_has_attribute; ///
-  gboolean function(GFileInfo* info, const(char)* nameSpace) c_g_file_info_has_namespace; ///
-  char** function(GFileInfo* info, const(char)* nameSpace) c_g_file_info_list_attributes; ///
-  void function(GFileInfo* info, const(char)* attribute) c_g_file_info_remove_attribute; ///
-  void function(GFileInfo* info, GDateTime* atime) c_g_file_info_set_access_date_time; ///
-  void function(GFileInfo* info, const(char)* attribute, GFileAttributeType type, void* valueP) c_g_file_info_set_attribute; ///
-  void function(GFileInfo* info, const(char)* attribute, gboolean attrValue) c_g_file_info_set_attribute_boolean; ///
-  void function(GFileInfo* info, const(char)* attribute, const(char)* attrValue) c_g_file_info_set_attribute_byte_string; ///
-  void function(GFileInfo* info, const(char)* attribute, const(char)* attrValue) c_g_file_info_set_attribute_file_path; ///
-  void function(GFileInfo* info, const(char)* attribute, int attrValue) c_g_file_info_set_attribute_int32; ///
-  void function(GFileInfo* info, const(char)* attribute, long attrValue) c_g_file_info_set_attribute_int64; ///
-  void function(GFileInfo* info, GFileAttributeMatcher* mask) c_g_file_info_set_attribute_mask; ///
-  void function(GFileInfo* info, const(char)* attribute, GObject* attrValue) c_g_file_info_set_attribute_object; ///
-  gboolean function(GFileInfo* info, const(char)* attribute, GFileAttributeStatus status) c_g_file_info_set_attribute_status; ///
-  void function(GFileInfo* info, const(char)* attribute, const(char)* attrValue) c_g_file_info_set_attribute_string; ///
-  void function(GFileInfo* info, const(char)* attribute, char** attrValue) c_g_file_info_set_attribute_stringv; ///
-  void function(GFileInfo* info, const(char)* attribute, uint attrValue) c_g_file_info_set_attribute_uint32; ///
-  void function(GFileInfo* info, const(char)* attribute, ulong attrValue) c_g_file_info_set_attribute_uint64; ///
-  void function(GFileInfo* info, const(char)* contentType) c_g_file_info_set_content_type; ///
-  void function(GFileInfo* info, GDateTime* creationTime) c_g_file_info_set_creation_date_time; ///
-  void function(GFileInfo* info, const(char)* displayName) c_g_file_info_set_display_name; ///
-  void function(GFileInfo* info, const(char)* editName) c_g_file_info_set_edit_name; ///
-  void function(GFileInfo* info, GFileType type) c_g_file_info_set_file_type; ///
-  void function(GFileInfo* info, GIcon* icon) c_g_file_info_set_icon; ///
-  void function(GFileInfo* info, gboolean isHidden) c_g_file_info_set_is_hidden; ///
-  void function(GFileInfo* info, gboolean isSymlink) c_g_file_info_set_is_symlink; ///
-  void function(GFileInfo* info, GDateTime* mtime) c_g_file_info_set_modification_date_time; ///
-  void function(GFileInfo* info, GTimeVal* mtime) c_g_file_info_set_modification_time; ///
-  void function(GFileInfo* info, const(char)* name) c_g_file_info_set_name; ///
-  void function(GFileInfo* info, long size) c_g_file_info_set_size; ///
-  void function(GFileInfo* info, int sortOrder) c_g_file_info_set_sort_order; ///
-  void function(GFileInfo* info, GIcon* icon) c_g_file_info_set_symbolic_icon; ///
-  void function(GFileInfo* info, const(char)* symlinkTarget) c_g_file_info_set_symlink_target; ///
-  void function(GFileInfo* info) c_g_file_info_unset_attribute_mask; ///
-
-  // FileInputStream
-  GType function() c_g_file_input_stream_get_type; ///
-  GFileInfo* function(GFileInputStream* stream, const(char)* attributes, GCancellable* cancellable, GError** _err) c_g_file_input_stream_query_info; ///
-  void function(GFileInputStream* stream, const(char)* attributes, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_input_stream_query_info_async; ///
-  GFileInfo* function(GFileInputStream* stream, GAsyncResult* result, GError** _err) c_g_file_input_stream_query_info_finish; ///
-
-  // FileMonitor
-  GType function() c_g_file_monitor_get_type; ///
-  gboolean function(GFileMonitor* monitor) c_g_file_monitor_cancel; ///
-  void function(GFileMonitor* monitor, GFile* child, GFile* otherFile, GFileMonitorEvent eventType) c_g_file_monitor_emit_event; ///
-  gboolean function(GFileMonitor* monitor) c_g_file_monitor_is_cancelled; ///
-  void function(GFileMonitor* monitor, int limitMsecs) c_g_file_monitor_set_rate_limit; ///
-
-  // FileOutputStream
-  GType function() c_g_file_output_stream_get_type; ///
-  char* function(GFileOutputStream* stream) c_g_file_output_stream_get_etag; ///
-  GFileInfo* function(GFileOutputStream* stream, const(char)* attributes, GCancellable* cancellable, GError** _err) c_g_file_output_stream_query_info; ///
-  void function(GFileOutputStream* stream, const(char)* attributes, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_file_output_stream_query_info_async; ///
-  GFileInfo* function(GFileOutputStream* stream, GAsyncResult* result, GError** _err) c_g_file_output_stream_query_info_finish; ///
-
-  // FilenameCompleter
-  GType function() c_g_filename_completer_get_type; ///
-  GFilenameCompleter* function() c_g_filename_completer_new; ///
-  char* function(GFilenameCompleter* completer, const(char)* initialText) c_g_filename_completer_get_completion_suffix; ///
-  char** function(GFilenameCompleter* completer, const(char)* initialText) c_g_filename_completer_get_completions; ///
-  void function(GFilenameCompleter* completer, gboolean dirsOnly) c_g_filename_completer_set_dirs_only; ///
-
-  // FilterInputStream
-  GType function() c_g_filter_input_stream_get_type; ///
-  GInputStream* function(GFilterInputStream* stream) c_g_filter_input_stream_get_base_stream; ///
-  gboolean function(GFilterInputStream* stream) c_g_filter_input_stream_get_close_base_stream; ///
-  void function(GFilterInputStream* stream, gboolean closeBase) c_g_filter_input_stream_set_close_base_stream; ///
-
-  // FilterOutputStream
-  GType function() c_g_filter_output_stream_get_type; ///
-  GOutputStream* function(GFilterOutputStream* stream) c_g_filter_output_stream_get_base_stream; ///
-  gboolean function(GFilterOutputStream* stream) c_g_filter_output_stream_get_close_base_stream; ///
-  void function(GFilterOutputStream* stream, gboolean closeBase) c_g_filter_output_stream_set_close_base_stream; ///
-
-  // IOExtension
-  const(char)* function(GIOExtension* extension) c_g_io_extension_get_name; ///
-  int function(GIOExtension* extension) c_g_io_extension_get_priority; ///
-  GType function(GIOExtension* extension) c_g_io_extension_get_type; ///
-  GTypeClass* function(GIOExtension* extension) c_g_io_extension_ref_class; ///
-
-  // IOExtensionPoint
-  GIOExtension* function(GIOExtensionPoint* extensionPoint, const(char)* name) c_g_io_extension_point_get_extension_by_name; ///
-  GList* function(GIOExtensionPoint* extensionPoint) c_g_io_extension_point_get_extensions; ///
-  GType function(GIOExtensionPoint* extensionPoint) c_g_io_extension_point_get_required_type; ///
-  void function(GIOExtensionPoint* extensionPoint, GType type) c_g_io_extension_point_set_required_type; ///
-  GIOExtension* function(const(char)* extensionPointName, GType type, const(char)* extensionName, int priority) c_g_io_extension_point_implement; ///
-  GIOExtensionPoint* function(const(char)* name) c_g_io_extension_point_lookup; ///
-  GIOExtensionPoint* function(const(char)* name) c_g_io_extension_point_register; ///
-
-  // IOModule
-  GType function() c_g_io_module_get_type; ///
-  GIOModule* function(const(char)* filename) c_g_io_module_new; ///
-  char** function() c_g_io_module_query; ///
-  void function(GIOModule* module_) c_g_io_module_load; ///
-  void function(GIOModule* module_) c_g_io_module_unload; ///
-
-  // IOModuleScope
-  void function(GIOModuleScope* scope_, const(char)* basename) c_g_io_module_scope_block; ///
-  void function(GIOModuleScope* scope_) c_g_io_module_scope_free; ///
-  GIOModuleScope* function(GIOModuleScopeFlags flags) c_g_io_module_scope_new; ///
-
-  // IOSchedulerJob
-  gboolean function(GIOSchedulerJob* job, GSourceFunc func, void* userData, GDestroyNotify notify) c_g_io_scheduler_job_send_to_mainloop; ///
-  void function(GIOSchedulerJob* job, GSourceFunc func, void* userData, GDestroyNotify notify) c_g_io_scheduler_job_send_to_mainloop_async; ///
-
-  // IOStream
-  GType function() c_g_io_stream_get_type; ///
-  gboolean function(GAsyncResult* result, GError** _err) c_g_io_stream_splice_finish; ///
-  void function(GIOStream* stream) c_g_io_stream_clear_pending; ///
-  gboolean function(GIOStream* stream, GCancellable* cancellable, GError** _err) c_g_io_stream_close; ///
-  void function(GIOStream* stream, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_io_stream_close_async; ///
-  gboolean function(GIOStream* stream, GAsyncResult* result, GError** _err) c_g_io_stream_close_finish; ///
-  GInputStream* function(GIOStream* stream) c_g_io_stream_get_input_stream; ///
-  GOutputStream* function(GIOStream* stream) c_g_io_stream_get_output_stream; ///
-  gboolean function(GIOStream* stream) c_g_io_stream_has_pending; ///
-  gboolean function(GIOStream* stream) c_g_io_stream_is_closed; ///
-  gboolean function(GIOStream* stream, GError** _err) c_g_io_stream_set_pending; ///
-  void function(GIOStream* stream1, GIOStream* stream2, GIOStreamSpliceFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_io_stream_splice_async; ///
-
-  // IPTosMessage
-  GType function() c_g_ip_tos_message_get_type; ///
-  GSocketControlMessage* function(ubyte dscp, GEcnCodePoint ecn) c_g_ip_tos_message_new; ///
-  ubyte function(GIPTosMessage* message) c_g_ip_tos_message_get_dscp; ///
-  GEcnCodePoint function(GIPTosMessage* message) c_g_ip_tos_message_get_ecn; ///
-
-  // IPv6TclassMessage
-  GType function() c_g_ipv6_tclass_message_get_type; ///
-  GSocketControlMessage* function(ubyte dscp, GEcnCodePoint ecn) c_g_ipv6_tclass_message_new; ///
-  ubyte function(GIPv6TclassMessage* message) c_g_ipv6_tclass_message_get_dscp; ///
-  GEcnCodePoint function(GIPv6TclassMessage* message) c_g_ipv6_tclass_message_get_ecn; ///
-
-  // Icon
-  GType function() c_g_icon_get_type; ///
-  GIcon* function(GVariant* value) c_g_icon_deserialize; ///
-  GIcon* function(const(char)* str, GError** _err) c_g_icon_new_for_string; ///
-  gboolean function(GIcon* icon1, GIcon* icon2) c_g_icon_equal; ///
-  uint function(GIcon* icon) c_g_icon_hash; ///
-  GVariant* function(GIcon* icon) c_g_icon_serialize; ///
-  char* function(GIcon* icon) c_g_icon_to_string; ///
-
-  // InetAddress
-  GType function() c_g_inet_address_get_type; ///
-  GInetAddress* function(GSocketFamily family) c_g_inet_address_new_any; ///
-  GInetAddress* function(const(ubyte)* bytes, GSocketFamily family) c_g_inet_address_new_from_bytes; ///
-  GInetAddress* function(const(ubyte)* bytes, GSocketFamily family, uint flowinfo, uint scopeId) c_g_inet_address_new_from_bytes_with_ipv6_info; ///
-  GInetAddress* function(const(char)* string_) c_g_inet_address_new_from_string; ///
-  GInetAddress* function(GSocketFamily family) c_g_inet_address_new_loopback; ///
-  gboolean function(GInetAddress* address, GInetAddress* otherAddress) c_g_inet_address_equal; ///
-  GSocketFamily function(GInetAddress* address) c_g_inet_address_get_family; ///
-  uint function(GInetAddress* address) c_g_inet_address_get_flowinfo; ///
-  gboolean function(GInetAddress* address) c_g_inet_address_get_is_any; ///
-  gboolean function(GInetAddress* address) c_g_inet_address_get_is_link_local; ///
-  gboolean function(GInetAddress* address) c_g_inet_address_get_is_loopback; ///
-  gboolean function(GInetAddress* address) c_g_inet_address_get_is_mc_global; ///
-  gboolean function(GInetAddress* address) c_g_inet_address_get_is_mc_link_local; ///
-  gboolean function(GInetAddress* address) c_g_inet_address_get_is_mc_node_local; ///
-  gboolean function(GInetAddress* address) c_g_inet_address_get_is_mc_org_local; ///
-  gboolean function(GInetAddress* address) c_g_inet_address_get_is_mc_site_local; ///
-  gboolean function(GInetAddress* address) c_g_inet_address_get_is_multicast; ///
-  gboolean function(GInetAddress* address) c_g_inet_address_get_is_site_local; ///
-  size_t function(GInetAddress* address) c_g_inet_address_get_native_size; ///
-  uint function(GInetAddress* address) c_g_inet_address_get_scope_id; ///
-  const(ubyte)* function(GInetAddress* address) c_g_inet_address_to_bytes; ///
-  char* function(GInetAddress* address) c_g_inet_address_to_string; ///
-
-  // InetAddressMask
-  GType function() c_g_inet_address_mask_get_type; ///
-  GInetAddressMask* function(GInetAddress* addr, uint length, GError** _err) c_g_inet_address_mask_new; ///
-  GInetAddressMask* function(const(char)* maskString, GError** _err) c_g_inet_address_mask_new_from_string; ///
-  gboolean function(GInetAddressMask* mask, GInetAddressMask* mask2) c_g_inet_address_mask_equal; ///
-  GInetAddress* function(GInetAddressMask* mask) c_g_inet_address_mask_get_address; ///
-  GSocketFamily function(GInetAddressMask* mask) c_g_inet_address_mask_get_family; ///
-  uint function(GInetAddressMask* mask) c_g_inet_address_mask_get_length; ///
-  gboolean function(GInetAddressMask* mask, GInetAddress* address) c_g_inet_address_mask_matches; ///
-  char* function(GInetAddressMask* mask) c_g_inet_address_mask_to_string; ///
-
-  // InetSocketAddress
-  GType function() c_g_inet_socket_address_get_type; ///
-  GSocketAddress* function(GInetAddress* address, ushort port) c_g_inet_socket_address_new; ///
-  GSocketAddress* function(const(char)* address, uint port) c_g_inet_socket_address_new_from_string; ///
-  GInetAddress* function(GInetSocketAddress* address) c_g_inet_socket_address_get_address; ///
-  uint function(GInetSocketAddress* address) c_g_inet_socket_address_get_flowinfo; ///
-  ushort function(GInetSocketAddress* address) c_g_inet_socket_address_get_port; ///
-  uint function(GInetSocketAddress* address) c_g_inet_socket_address_get_scope_id; ///
-
-  // Initable
-  GType function() c_g_initable_get_type; ///
-  GObject* function(GType objectType, GCancellable* cancellable, GError** error, const(char)* firstPropertyName,  ...) c_g_initable_new; ///
-  GObject* function(GType objectType, const(char)* firstPropertyName, void* varArgs, GCancellable* cancellable, GError** _err) c_g_initable_new_valist; ///
-  GObject* function(GType objectType, uint nParameters, GParameter* parameters, GCancellable* cancellable, GError** _err) c_g_initable_newv; ///
-  gboolean function(GInitable* initable, GCancellable* cancellable, GError** _err) c_g_initable_init; ///
-
-  // InputStream
-  GType function() c_g_input_stream_get_type; ///
-  void function(GInputStream* stream) c_g_input_stream_clear_pending; ///
-  gboolean function(GInputStream* stream, GCancellable* cancellable, GError** _err) c_g_input_stream_close; ///
-  void function(GInputStream* stream, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_input_stream_close_async; ///
-  gboolean function(GInputStream* stream, GAsyncResult* result, GError** _err) c_g_input_stream_close_finish; ///
-  gboolean function(GInputStream* stream) c_g_input_stream_has_pending; ///
-  gboolean function(GInputStream* stream) c_g_input_stream_is_closed; ///
-  ptrdiff_t function(GInputStream* stream, void* buffer, size_t count, GCancellable* cancellable, GError** _err) c_g_input_stream_read; ///
-  gboolean function(GInputStream* stream, void* buffer, size_t count, size_t* bytesRead, GCancellable* cancellable, GError** _err) c_g_input_stream_read_all; ///
-  void function(GInputStream* stream, void* buffer, size_t count, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_input_stream_read_all_async; ///
-  gboolean function(GInputStream* stream, GAsyncResult* result, size_t* bytesRead, GError** _err) c_g_input_stream_read_all_finish; ///
-  void function(GInputStream* stream, void* buffer, size_t count, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_input_stream_read_async; ///
-  GBytes* function(GInputStream* stream, size_t count, GCancellable* cancellable, GError** _err) c_g_input_stream_read_bytes; ///
-  void function(GInputStream* stream, size_t count, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_input_stream_read_bytes_async; ///
-  GBytes* function(GInputStream* stream, GAsyncResult* result, GError** _err) c_g_input_stream_read_bytes_finish; ///
-  ptrdiff_t function(GInputStream* stream, GAsyncResult* result, GError** _err) c_g_input_stream_read_finish; ///
-  gboolean function(GInputStream* stream, GError** _err) c_g_input_stream_set_pending; ///
-  ptrdiff_t function(GInputStream* stream, size_t count, GCancellable* cancellable, GError** _err) c_g_input_stream_skip; ///
-  void function(GInputStream* stream, size_t count, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_input_stream_skip_async; ///
-  ptrdiff_t function(GInputStream* stream, GAsyncResult* result, GError** _err) c_g_input_stream_skip_finish; ///
-
-  // ListModel
-  GType function() c_g_list_model_get_type; ///
-  void* function(GListModel* list, uint position) c_g_list_model_get_item; ///
-  GType function(GListModel* list) c_g_list_model_get_item_type; ///
-  uint function(GListModel* list) c_g_list_model_get_n_items; ///
-  GObject* function(GListModel* list, uint position) c_g_list_model_get_object; ///
-  void function(GListModel* list, uint position, uint removed, uint added) c_g_list_model_items_changed; ///
-
-  // ListStore
-  GType function() c_g_list_store_get_type; ///
-  GListStore* function(GType itemType) c_g_list_store_new; ///
-  void function(GListStore* store, GObject* item) c_g_list_store_append; ///
-  gboolean function(GListStore* store, GObject* item, uint* position) c_g_list_store_find; ///
-  gboolean function(GListStore* store, GObject* item, GEqualFunc equalFunc, uint* position) c_g_list_store_find_with_equal_func; ///
-  gboolean function(GListStore* store, GObject* item, GEqualFuncFull equalFunc, void* userData, uint* position) c_g_list_store_find_with_equal_func_full; ///
-  void function(GListStore* store, uint position, GObject* item) c_g_list_store_insert; ///
-  uint function(GListStore* store, GObject* item, GCompareDataFunc compareFunc, void* userData) c_g_list_store_insert_sorted; ///
-  void function(GListStore* store, uint position) c_g_list_store_remove; ///
-  void function(GListStore* store) c_g_list_store_remove_all; ///
-  void function(GListStore* store, GCompareDataFunc compareFunc, void* userData) c_g_list_store_sort; ///
-  void function(GListStore* store, uint position, uint nRemovals, void** additions, uint nAdditions) c_g_list_store_splice; ///
-
-  // LoadableIcon
-  GType function() c_g_loadable_icon_get_type; ///
-  GInputStream* function(GLoadableIcon* icon, int size, char** type, GCancellable* cancellable, GError** _err) c_g_loadable_icon_load; ///
-  void function(GLoadableIcon* icon, int size, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_loadable_icon_load_async; ///
-  GInputStream* function(GLoadableIcon* icon, GAsyncResult* res, char** type, GError** _err) c_g_loadable_icon_load_finish; ///
-
-  // MemoryInputStream
-  GType function() c_g_memory_input_stream_get_type; ///
-  GInputStream* function() c_g_memory_input_stream_new; ///
-  GInputStream* function(GBytes* bytes) c_g_memory_input_stream_new_from_bytes; ///
-  GInputStream* function(void* data, ptrdiff_t len, GDestroyNotify destroy) c_g_memory_input_stream_new_from_data; ///
-  void function(GMemoryInputStream* stream, GBytes* bytes) c_g_memory_input_stream_add_bytes; ///
-  void function(GMemoryInputStream* stream, void* data, ptrdiff_t len, GDestroyNotify destroy) c_g_memory_input_stream_add_data; ///
-
-  // MemoryMonitor
-  GType function() c_g_memory_monitor_get_type; ///
-  GMemoryMonitor* function() c_g_memory_monitor_dup_default; ///
-
-  // MemoryOutputStream
-  GType function() c_g_memory_output_stream_get_type; ///
-  GOutputStream* function(void* data, size_t size, GReallocFunc reallocFunction, GDestroyNotify destroyFunction) c_g_memory_output_stream_new; ///
-  GOutputStream* function() c_g_memory_output_stream_new_resizable; ///
-  void* function(GMemoryOutputStream* ostream) c_g_memory_output_stream_get_data; ///
-  size_t function(GMemoryOutputStream* ostream) c_g_memory_output_stream_get_data_size; ///
-  size_t function(GMemoryOutputStream* ostream) c_g_memory_output_stream_get_size; ///
-  GBytes* function(GMemoryOutputStream* ostream) c_g_memory_output_stream_steal_as_bytes; ///
-  void* function(GMemoryOutputStream* ostream) c_g_memory_output_stream_steal_data; ///
-
-  // Menu
-  GType function() c_g_menu_get_type; ///
-  GMenu* function() c_g_menu_new; ///
-  void function(GMenu* menu, const(char)* label, const(char)* detailedAction) c_g_menu_append; ///
-  void function(GMenu* menu, GMenuItem* item) c_g_menu_append_item; ///
-  void function(GMenu* menu, const(char)* label, GMenuModel* section) c_g_menu_append_section; ///
-  void function(GMenu* menu, const(char)* label, GMenuModel* submenu) c_g_menu_append_submenu; ///
-  void function(GMenu* menu) c_g_menu_freeze; ///
-  void function(GMenu* menu, int position, const(char)* label, const(char)* detailedAction) c_g_menu_insert; ///
-  void function(GMenu* menu, int position, GMenuItem* item) c_g_menu_insert_item; ///
-  void function(GMenu* menu, int position, const(char)* label, GMenuModel* section) c_g_menu_insert_section; ///
-  void function(GMenu* menu, int position, const(char)* label, GMenuModel* submenu) c_g_menu_insert_submenu; ///
-  void function(GMenu* menu, const(char)* label, const(char)* detailedAction) c_g_menu_prepend; ///
-  void function(GMenu* menu, GMenuItem* item) c_g_menu_prepend_item; ///
-  void function(GMenu* menu, const(char)* label, GMenuModel* section) c_g_menu_prepend_section; ///
-  void function(GMenu* menu, const(char)* label, GMenuModel* submenu) c_g_menu_prepend_submenu; ///
-  void function(GMenu* menu, int position) c_g_menu_remove; ///
-  void function(GMenu* menu) c_g_menu_remove_all; ///
-
-  // MenuAttributeIter
-  GType function() c_g_menu_attribute_iter_get_type; ///
-  const(char)* function(GMenuAttributeIter* iter) c_g_menu_attribute_iter_get_name; ///
-  gboolean function(GMenuAttributeIter* iter, const(char*)* outName, GVariant** value) c_g_menu_attribute_iter_get_next; ///
-  GVariant* function(GMenuAttributeIter* iter) c_g_menu_attribute_iter_get_value; ///
-  gboolean function(GMenuAttributeIter* iter) c_g_menu_attribute_iter_next; ///
-
-  // MenuItem
-  GType function() c_g_menu_item_get_type; ///
-  GMenuItem* function(const(char)* label, const(char)* detailedAction) c_g_menu_item_new; ///
-  GMenuItem* function(GMenuModel* model, int itemIndex) c_g_menu_item_new_from_model; ///
-  GMenuItem* function(const(char)* label, GMenuModel* section) c_g_menu_item_new_section; ///
-  GMenuItem* function(const(char)* label, GMenuModel* submenu) c_g_menu_item_new_submenu; ///
-  gboolean function(GMenuItem* menuItem, const(char)* attribute, const(char)* formatString,  ...) c_g_menu_item_get_attribute; ///
-  GVariant* function(GMenuItem* menuItem, const(char)* attribute, const(GVariantType)* expectedType) c_g_menu_item_get_attribute_value; ///
-  GMenuModel* function(GMenuItem* menuItem, const(char)* link) c_g_menu_item_get_link; ///
-  void function(GMenuItem* menuItem, const(char)* action, const(char)* formatString,  ...) c_g_menu_item_set_action_and_target; ///
-  void function(GMenuItem* menuItem, const(char)* action, GVariant* targetValue) c_g_menu_item_set_action_and_target_value; ///
-  void function(GMenuItem* menuItem, const(char)* attribute, const(char)* formatString,  ...) c_g_menu_item_set_attribute; ///
-  void function(GMenuItem* menuItem, const(char)* attribute, GVariant* value) c_g_menu_item_set_attribute_value; ///
-  void function(GMenuItem* menuItem, const(char)* detailedAction) c_g_menu_item_set_detailed_action; ///
-  void function(GMenuItem* menuItem, GIcon* icon) c_g_menu_item_set_icon; ///
-  void function(GMenuItem* menuItem, const(char)* label) c_g_menu_item_set_label; ///
-  void function(GMenuItem* menuItem, const(char)* link, GMenuModel* model) c_g_menu_item_set_link; ///
-  void function(GMenuItem* menuItem, GMenuModel* section) c_g_menu_item_set_section; ///
-  void function(GMenuItem* menuItem, GMenuModel* submenu) c_g_menu_item_set_submenu; ///
-
-  // MenuLinkIter
-  GType function() c_g_menu_link_iter_get_type; ///
-  const(char)* function(GMenuLinkIter* iter) c_g_menu_link_iter_get_name; ///
-  gboolean function(GMenuLinkIter* iter, const(char*)* outLink, GMenuModel** value) c_g_menu_link_iter_get_next; ///
-  GMenuModel* function(GMenuLinkIter* iter) c_g_menu_link_iter_get_value; ///
-  gboolean function(GMenuLinkIter* iter) c_g_menu_link_iter_next; ///
-
-  // MenuModel
-  GType function() c_g_menu_model_get_type; ///
-  gboolean function(GMenuModel* model, int itemIndex, const(char)* attribute, const(char)* formatString,  ...) c_g_menu_model_get_item_attribute; ///
-  GVariant* function(GMenuModel* model, int itemIndex, const(char)* attribute, const(GVariantType)* expectedType) c_g_menu_model_get_item_attribute_value; ///
-  GMenuModel* function(GMenuModel* model, int itemIndex, const(char)* link) c_g_menu_model_get_item_link; ///
-  int function(GMenuModel* model) c_g_menu_model_get_n_items; ///
-  gboolean function(GMenuModel* model) c_g_menu_model_is_mutable; ///
-  void function(GMenuModel* model, int position, int removed, int added) c_g_menu_model_items_changed; ///
-  GMenuAttributeIter* function(GMenuModel* model, int itemIndex) c_g_menu_model_iterate_item_attributes; ///
-  GMenuLinkIter* function(GMenuModel* model, int itemIndex) c_g_menu_model_iterate_item_links; ///
-
-  // Mount
-  GType function() c_g_mount_get_type; ///
-  gboolean function(GMount* mount) c_g_mount_can_eject; ///
-  gboolean function(GMount* mount) c_g_mount_can_unmount; ///
-  void function(GMount* mount, GMountUnmountFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_mount_eject; ///
-  gboolean function(GMount* mount, GAsyncResult* result, GError** _err) c_g_mount_eject_finish; ///
-  void function(GMount* mount, GMountUnmountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_mount_eject_with_operation; ///
-  gboolean function(GMount* mount, GAsyncResult* result, GError** _err) c_g_mount_eject_with_operation_finish; ///
-  GFile* function(GMount* mount) c_g_mount_get_default_location; ///
-  GDrive* function(GMount* mount) c_g_mount_get_drive; ///
-  GIcon* function(GMount* mount) c_g_mount_get_icon; ///
-  char* function(GMount* mount) c_g_mount_get_name; ///
-  GFile* function(GMount* mount) c_g_mount_get_root; ///
-  const(char)* function(GMount* mount) c_g_mount_get_sort_key; ///
-  GIcon* function(GMount* mount) c_g_mount_get_symbolic_icon; ///
-  char* function(GMount* mount) c_g_mount_get_uuid; ///
-  GVolume* function(GMount* mount) c_g_mount_get_volume; ///
-  void function(GMount* mount, gboolean forceRescan, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_mount_guess_content_type; ///
-  char** function(GMount* mount, GAsyncResult* result, GError** _err) c_g_mount_guess_content_type_finish; ///
-  char** function(GMount* mount, gboolean forceRescan, GCancellable* cancellable, GError** _err) c_g_mount_guess_content_type_sync; ///
-  gboolean function(GMount* mount) c_g_mount_is_shadowed; ///
-  void function(GMount* mount, GMountMountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_mount_remount; ///
-  gboolean function(GMount* mount, GAsyncResult* result, GError** _err) c_g_mount_remount_finish; ///
-  void function(GMount* mount) c_g_mount_shadow; ///
-  void function(GMount* mount, GMountUnmountFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_mount_unmount; ///
-  gboolean function(GMount* mount, GAsyncResult* result, GError** _err) c_g_mount_unmount_finish; ///
-  void function(GMount* mount, GMountUnmountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_mount_unmount_with_operation; ///
-  gboolean function(GMount* mount, GAsyncResult* result, GError** _err) c_g_mount_unmount_with_operation_finish; ///
-  void function(GMount* mount) c_g_mount_unshadow; ///
-
-  // MountOperation
-  GType function() c_g_mount_operation_get_type; ///
-  GMountOperation* function() c_g_mount_operation_new; ///
-  gboolean function(GMountOperation* op) c_g_mount_operation_get_anonymous; ///
-  int function(GMountOperation* op) c_g_mount_operation_get_choice; ///
-  const(char)* function(GMountOperation* op) c_g_mount_operation_get_domain; ///
-  gboolean function(GMountOperation* op) c_g_mount_operation_get_is_tcrypt_hidden_volume; ///
-  gboolean function(GMountOperation* op) c_g_mount_operation_get_is_tcrypt_system_volume; ///
-  const(char)* function(GMountOperation* op) c_g_mount_operation_get_password; ///
-  GPasswordSave function(GMountOperation* op) c_g_mount_operation_get_password_save; ///
-  uint function(GMountOperation* op) c_g_mount_operation_get_pim; ///
-  const(char)* function(GMountOperation* op) c_g_mount_operation_get_username; ///
-  void function(GMountOperation* op, GMountOperationResult result) c_g_mount_operation_reply; ///
-  void function(GMountOperation* op, gboolean anonymous) c_g_mount_operation_set_anonymous; ///
-  void function(GMountOperation* op, int choice) c_g_mount_operation_set_choice; ///
-  void function(GMountOperation* op, const(char)* domain) c_g_mount_operation_set_domain; ///
-  void function(GMountOperation* op, gboolean hiddenVolume) c_g_mount_operation_set_is_tcrypt_hidden_volume; ///
-  void function(GMountOperation* op, gboolean systemVolume) c_g_mount_operation_set_is_tcrypt_system_volume; ///
-  void function(GMountOperation* op, const(char)* password) c_g_mount_operation_set_password; ///
-  void function(GMountOperation* op, GPasswordSave save) c_g_mount_operation_set_password_save; ///
-  void function(GMountOperation* op, uint pim) c_g_mount_operation_set_pim; ///
-  void function(GMountOperation* op, const(char)* username) c_g_mount_operation_set_username; ///
-
-  // NativeSocketAddress
-  GType function() c_g_native_socket_address_get_type; ///
-  GSocketAddress* function(void* native, size_t len) c_g_native_socket_address_new; ///
-
-  // NativeVolumeMonitor
-  GType function() c_g_native_volume_monitor_get_type; ///
-
-  // NetworkAddress
-  GType function() c_g_network_address_get_type; ///
-  GSocketConnectable* function(const(char)* hostname, ushort port) c_g_network_address_new; ///
-  GSocketConnectable* function(ushort port) c_g_network_address_new_loopback; ///
-  GSocketConnectable* function(const(char)* hostAndPort, ushort defaultPort, GError** _err) c_g_network_address_parse; ///
-  GSocketConnectable* function(const(char)* uri, ushort defaultPort, GError** _err) c_g_network_address_parse_uri; ///
-  const(char)* function(GNetworkAddress* addr) c_g_network_address_get_hostname; ///
-  ushort function(GNetworkAddress* addr) c_g_network_address_get_port; ///
-  const(char)* function(GNetworkAddress* addr) c_g_network_address_get_scheme; ///
-
-  // NetworkMonitor
-  GType function() c_g_network_monitor_get_type; ///
-  GNetworkMonitor* function() c_g_network_monitor_get_default; ///
-  gboolean function(GNetworkMonitor* monitor, GSocketConnectable* connectable, GCancellable* cancellable, GError** _err) c_g_network_monitor_can_reach; ///
-  void function(GNetworkMonitor* monitor, GSocketConnectable* connectable, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_network_monitor_can_reach_async; ///
-  gboolean function(GNetworkMonitor* monitor, GAsyncResult* result, GError** _err) c_g_network_monitor_can_reach_finish; ///
-  GNetworkConnectivity function(GNetworkMonitor* monitor) c_g_network_monitor_get_connectivity; ///
-  gboolean function(GNetworkMonitor* monitor) c_g_network_monitor_get_network_available; ///
-  gboolean function(GNetworkMonitor* monitor) c_g_network_monitor_get_network_metered; ///
-
-  // NetworkService
-  GType function() c_g_network_service_get_type; ///
-  GSocketConnectable* function(const(char)* service, const(char)* protocol, const(char)* domain) c_g_network_service_new; ///
-  const(char)* function(GNetworkService* srv) c_g_network_service_get_domain; ///
-  const(char)* function(GNetworkService* srv) c_g_network_service_get_protocol; ///
-  const(char)* function(GNetworkService* srv) c_g_network_service_get_scheme; ///
-  const(char)* function(GNetworkService* srv) c_g_network_service_get_service; ///
-  void function(GNetworkService* srv, const(char)* scheme) c_g_network_service_set_scheme; ///
-
-  // Notification
-  GType function() c_g_notification_get_type; ///
-  GNotification* function(const(char)* title) c_g_notification_new; ///
-  void function(GNotification* notification, const(char)* label, const(char)* detailedAction) c_g_notification_add_button; ///
-  void function(GNotification* notification, const(char)* label, const(char)* action, const(char)* targetFormat,  ...) c_g_notification_add_button_with_target; ///
-  void function(GNotification* notification, const(char)* label, const(char)* action, GVariant* target) c_g_notification_add_button_with_target_value; ///
-  void function(GNotification* notification, const(char)* body_) c_g_notification_set_body; ///
-  void function(GNotification* notification, const(char)* category) c_g_notification_set_category; ///
-  void function(GNotification* notification, const(char)* detailedAction) c_g_notification_set_default_action; ///
-  void function(GNotification* notification, const(char)* action, const(char)* targetFormat,  ...) c_g_notification_set_default_action_and_target; ///
-  void function(GNotification* notification, const(char)* action, GVariant* target) c_g_notification_set_default_action_and_target_value; ///
-  void function(GNotification* notification, GIcon* icon) c_g_notification_set_icon; ///
-  void function(GNotification* notification, GNotificationPriority priority) c_g_notification_set_priority; ///
-  void function(GNotification* notification, const(char)* title) c_g_notification_set_title; ///
-  void function(GNotification* notification, gboolean urgent) c_g_notification_set_urgent; ///
-
-  // OutputStream
-  GType function() c_g_output_stream_get_type; ///
-  void function(GOutputStream* stream) c_g_output_stream_clear_pending; ///
-  gboolean function(GOutputStream* stream, GCancellable* cancellable, GError** _err) c_g_output_stream_close; ///
-  void function(GOutputStream* stream, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_output_stream_close_async; ///
-  gboolean function(GOutputStream* stream, GAsyncResult* result, GError** _err) c_g_output_stream_close_finish; ///
-  gboolean function(GOutputStream* stream, GCancellable* cancellable, GError** _err) c_g_output_stream_flush; ///
-  void function(GOutputStream* stream, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_output_stream_flush_async; ///
-  gboolean function(GOutputStream* stream, GAsyncResult* result, GError** _err) c_g_output_stream_flush_finish; ///
-  gboolean function(GOutputStream* stream) c_g_output_stream_has_pending; ///
-  gboolean function(GOutputStream* stream) c_g_output_stream_is_closed; ///
-  gboolean function(GOutputStream* stream) c_g_output_stream_is_closing; ///
-  gboolean function(GOutputStream* stream, size_t* bytesWritten, GCancellable* cancellable, GError** error, const(char)* format,  ...) c_g_output_stream_printf; ///
-  gboolean function(GOutputStream* stream, GError** _err) c_g_output_stream_set_pending; ///
-  ptrdiff_t function(GOutputStream* stream, GInputStream* source, GOutputStreamSpliceFlags flags, GCancellable* cancellable, GError** _err) c_g_output_stream_splice; ///
-  void function(GOutputStream* stream, GInputStream* source, GOutputStreamSpliceFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_output_stream_splice_async; ///
-  ptrdiff_t function(GOutputStream* stream, GAsyncResult* result, GError** _err) c_g_output_stream_splice_finish; ///
-  gboolean function(GOutputStream* stream, size_t* bytesWritten, GCancellable* cancellable, GError** error, const(char)* format, void* args) c_g_output_stream_vprintf; ///
-  ptrdiff_t function(GOutputStream* stream, void* buffer, size_t count, GCancellable* cancellable, GError** _err) c_g_output_stream_write; ///
-  gboolean function(GOutputStream* stream, void* buffer, size_t count, size_t* bytesWritten, GCancellable* cancellable, GError** _err) c_g_output_stream_write_all; ///
-  void function(GOutputStream* stream, void* buffer, size_t count, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_output_stream_write_all_async; ///
-  gboolean function(GOutputStream* stream, GAsyncResult* result, size_t* bytesWritten, GError** _err) c_g_output_stream_write_all_finish; ///
-  void function(GOutputStream* stream, void* buffer, size_t count, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_output_stream_write_async; ///
-  ptrdiff_t function(GOutputStream* stream, GBytes* bytes, GCancellable* cancellable, GError** _err) c_g_output_stream_write_bytes; ///
-  void function(GOutputStream* stream, GBytes* bytes, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_output_stream_write_bytes_async; ///
-  ptrdiff_t function(GOutputStream* stream, GAsyncResult* result, GError** _err) c_g_output_stream_write_bytes_finish; ///
-  ptrdiff_t function(GOutputStream* stream, GAsyncResult* result, GError** _err) c_g_output_stream_write_finish; ///
-  gboolean function(GOutputStream* stream, const(GOutputVector)* vectors, size_t nVectors, size_t* bytesWritten, GCancellable* cancellable, GError** _err) c_g_output_stream_writev; ///
-  gboolean function(GOutputStream* stream, GOutputVector* vectors, size_t nVectors, size_t* bytesWritten, GCancellable* cancellable, GError** _err) c_g_output_stream_writev_all; ///
-  void function(GOutputStream* stream, GOutputVector* vectors, size_t nVectors, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_output_stream_writev_all_async; ///
-  gboolean function(GOutputStream* stream, GAsyncResult* result, size_t* bytesWritten, GError** _err) c_g_output_stream_writev_all_finish; ///
-  void function(GOutputStream* stream, const(GOutputVector)* vectors, size_t nVectors, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_output_stream_writev_async; ///
-  gboolean function(GOutputStream* stream, GAsyncResult* result, size_t* bytesWritten, GError** _err) c_g_output_stream_writev_finish; ///
-
-  // Permission
-  GType function() c_g_permission_get_type; ///
-  gboolean function(GPermission* permission, GCancellable* cancellable, GError** _err) c_g_permission_acquire; ///
-  void function(GPermission* permission, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_permission_acquire_async; ///
-  gboolean function(GPermission* permission, GAsyncResult* result, GError** _err) c_g_permission_acquire_finish; ///
-  gboolean function(GPermission* permission) c_g_permission_get_allowed; ///
-  gboolean function(GPermission* permission) c_g_permission_get_can_acquire; ///
-  gboolean function(GPermission* permission) c_g_permission_get_can_release; ///
-  void function(GPermission* permission, gboolean allowed, gboolean canAcquire, gboolean canRelease) c_g_permission_impl_update; ///
-  gboolean function(GPermission* permission, GCancellable* cancellable, GError** _err) c_g_permission_release; ///
-  void function(GPermission* permission, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_permission_release_async; ///
-  gboolean function(GPermission* permission, GAsyncResult* result, GError** _err) c_g_permission_release_finish; ///
-
-  // PollableInputStream
-  GType function() c_g_pollable_input_stream_get_type; ///
-  gboolean function(GPollableInputStream* stream) c_g_pollable_input_stream_can_poll; ///
-  GSource* function(GPollableInputStream* stream, GCancellable* cancellable) c_g_pollable_input_stream_create_source; ///
-  gboolean function(GPollableInputStream* stream) c_g_pollable_input_stream_is_readable; ///
-  ptrdiff_t function(GPollableInputStream* stream, void* buffer, size_t count, GCancellable* cancellable, GError** _err) c_g_pollable_input_stream_read_nonblocking; ///
-
-  // PollableOutputStream
-  GType function() c_g_pollable_output_stream_get_type; ///
-  gboolean function(GPollableOutputStream* stream) c_g_pollable_output_stream_can_poll; ///
-  GSource* function(GPollableOutputStream* stream, GCancellable* cancellable) c_g_pollable_output_stream_create_source; ///
-  gboolean function(GPollableOutputStream* stream) c_g_pollable_output_stream_is_writable; ///
-  ptrdiff_t function(GPollableOutputStream* stream, void* buffer, size_t count, GCancellable* cancellable, GError** _err) c_g_pollable_output_stream_write_nonblocking; ///
-  GPollableReturn function(GPollableOutputStream* stream, const(GOutputVector)* vectors, size_t nVectors, size_t* bytesWritten, GCancellable* cancellable, GError** _err) c_g_pollable_output_stream_writev_nonblocking; ///
-
-  // PowerProfileMonitor
-  GType function() c_g_power_profile_monitor_get_type; ///
-  GPowerProfileMonitor* function() c_g_power_profile_monitor_dup_default; ///
-  gboolean function(GPowerProfileMonitor* monitor) c_g_power_profile_monitor_get_power_saver_enabled; ///
-
-  // PropertyAction
-  GType function() c_g_property_action_get_type; ///
-  GPropertyAction* function(const(char)* name, GObject* object, const(char)* propertyName) c_g_property_action_new; ///
-
-  // Proxy
-  GType function() c_g_proxy_get_type; ///
-  GProxy* function(const(char)* protocol) c_g_proxy_get_default_for_protocol; ///
-  GIOStream* function(GProxy* proxy, GIOStream* connection, GProxyAddress* proxyAddress, GCancellable* cancellable, GError** _err) c_g_proxy_connect; ///
-  void function(GProxy* proxy, GIOStream* connection, GProxyAddress* proxyAddress, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_proxy_connect_async; ///
-  GIOStream* function(GProxy* proxy, GAsyncResult* result, GError** _err) c_g_proxy_connect_finish; ///
-  gboolean function(GProxy* proxy) c_g_proxy_supports_hostname; ///
-
-  // ProxyAddress
-  GType function() c_g_proxy_address_get_type; ///
-  GSocketAddress* function(GInetAddress* inetaddr, ushort port, const(char)* protocol, const(char)* destHostname, ushort destPort, const(char)* username, const(char)* password) c_g_proxy_address_new; ///
-  const(char)* function(GProxyAddress* proxy) c_g_proxy_address_get_destination_hostname; ///
-  ushort function(GProxyAddress* proxy) c_g_proxy_address_get_destination_port; ///
-  const(char)* function(GProxyAddress* proxy) c_g_proxy_address_get_destination_protocol; ///
-  const(char)* function(GProxyAddress* proxy) c_g_proxy_address_get_password; ///
-  const(char)* function(GProxyAddress* proxy) c_g_proxy_address_get_protocol; ///
-  const(char)* function(GProxyAddress* proxy) c_g_proxy_address_get_uri; ///
-  const(char)* function(GProxyAddress* proxy) c_g_proxy_address_get_username; ///
-
-  // ProxyAddressEnumerator
-  GType function() c_g_proxy_address_enumerator_get_type; ///
-
-  // ProxyResolver
-  GType function() c_g_proxy_resolver_get_type; ///
-  GProxyResolver* function() c_g_proxy_resolver_get_default; ///
-  gboolean function(GProxyResolver* resolver) c_g_proxy_resolver_is_supported; ///
-  char** function(GProxyResolver* resolver, const(char)* uri, GCancellable* cancellable, GError** _err) c_g_proxy_resolver_lookup; ///
-  void function(GProxyResolver* resolver, const(char)* uri, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_proxy_resolver_lookup_async; ///
-  char** function(GProxyResolver* resolver, GAsyncResult* result, GError** _err) c_g_proxy_resolver_lookup_finish; ///
-
-  // RemoteActionGroup
-  GType function() c_g_remote_action_group_get_type; ///
-  void function(GRemoteActionGroup* remote, const(char)* actionName, GVariant* parameter, GVariant* platformData) c_g_remote_action_group_activate_action_full; ///
-  void function(GRemoteActionGroup* remote, const(char)* actionName, GVariant* value, GVariant* platformData) c_g_remote_action_group_change_action_state_full; ///
-
-  // Resolver
-  GType function() c_g_resolver_get_type; ///
-  void function(GList* addresses) c_g_resolver_free_addresses; ///
-  void function(GList* targets) c_g_resolver_free_targets; ///
-  GResolver* function() c_g_resolver_get_default; ///
-  uint function(GResolver* resolver) c_g_resolver_get_timeout; ///
-  char* function(GResolver* resolver, GInetAddress* address, GCancellable* cancellable, GError** _err) c_g_resolver_lookup_by_address; ///
-  void function(GResolver* resolver, GInetAddress* address, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_resolver_lookup_by_address_async; ///
-  char* function(GResolver* resolver, GAsyncResult* result, GError** _err) c_g_resolver_lookup_by_address_finish; ///
-  GList* function(GResolver* resolver, const(char)* hostname, GCancellable* cancellable, GError** _err) c_g_resolver_lookup_by_name; ///
-  void function(GResolver* resolver, const(char)* hostname, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_resolver_lookup_by_name_async; ///
-  GList* function(GResolver* resolver, GAsyncResult* result, GError** _err) c_g_resolver_lookup_by_name_finish; ///
-  GList* function(GResolver* resolver, const(char)* hostname, GResolverNameLookupFlags flags, GCancellable* cancellable, GError** _err) c_g_resolver_lookup_by_name_with_flags; ///
-  void function(GResolver* resolver, const(char)* hostname, GResolverNameLookupFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_resolver_lookup_by_name_with_flags_async; ///
-  GList* function(GResolver* resolver, GAsyncResult* result, GError** _err) c_g_resolver_lookup_by_name_with_flags_finish; ///
-  GList* function(GResolver* resolver, const(char)* rrname, GResolverRecordType recordType, GCancellable* cancellable, GError** _err) c_g_resolver_lookup_records; ///
-  void function(GResolver* resolver, const(char)* rrname, GResolverRecordType recordType, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_resolver_lookup_records_async; ///
-  GList* function(GResolver* resolver, GAsyncResult* result, GError** _err) c_g_resolver_lookup_records_finish; ///
-  GList* function(GResolver* resolver, const(char)* service, const(char)* protocol, const(char)* domain, GCancellable* cancellable, GError** _err) c_g_resolver_lookup_service; ///
-  void function(GResolver* resolver, const(char)* service, const(char)* protocol, const(char)* domain, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_resolver_lookup_service_async; ///
-  GList* function(GResolver* resolver, GAsyncResult* result, GError** _err) c_g_resolver_lookup_service_finish; ///
-  void function(GResolver* resolver) c_g_resolver_set_default; ///
-  void function(GResolver* resolver, uint timeoutMs) c_g_resolver_set_timeout; ///
-
-  // Resource
-  GType function() c_g_resource_get_type; ///
-  GResource* function(GBytes* data, GError** _err) c_g_resource_new_from_data; ///
-  char** function(GResource* resource, const(char)* path, GResourceLookupFlags lookupFlags, GError** _err) c_g_resource_enumerate_children; ///
-  gboolean function(GResource* resource, const(char)* path, GResourceLookupFlags lookupFlags, size_t* size, uint* flags, GError** _err) c_g_resource_get_info; ///
-  gboolean function(GResource* resource, const(char)* path) c_g_resource_has_children; ///
-  GBytes* function(GResource* resource, const(char)* path, GResourceLookupFlags lookupFlags, GError** _err) c_g_resource_lookup_data; ///
-  GInputStream* function(GResource* resource, const(char)* path, GResourceLookupFlags lookupFlags, GError** _err) c_g_resource_open_stream; ///
-  GResource* function(GResource* resource) c_g_resource_ref; ///
-  void function(GResource* resource) c_g_resource_unref; ///
-  GResource* function(const(char)* filename, GError** _err) c_g_resource_load; ///
-
-  // Seekable
-  GType function() c_g_seekable_get_type; ///
-  gboolean function(GSeekable* seekable) c_g_seekable_can_seek; ///
-  gboolean function(GSeekable* seekable) c_g_seekable_can_truncate; ///
-  gboolean function(GSeekable* seekable, long offset, GSeekType type, GCancellable* cancellable, GError** _err) c_g_seekable_seek; ///
-  long function(GSeekable* seekable) c_g_seekable_tell; ///
-  gboolean function(GSeekable* seekable, long offset, GCancellable* cancellable, GError** _err) c_g_seekable_truncate; ///
-
-  // Settings
-  GType function() c_g_settings_get_type; ///
-  GSettings* function(const(char)* schemaId) c_g_settings_new; ///
-  GSettings* function(GSettingsSchema* schema, GSettingsBackend* backend, const(char)* path) c_g_settings_new_full; ///
-  GSettings* function(const(char)* schemaId, GSettingsBackend* backend) c_g_settings_new_with_backend; ///
-  GSettings* function(const(char)* schemaId, GSettingsBackend* backend, const(char)* path) c_g_settings_new_with_backend_and_path; ///
-  GSettings* function(const(char)* schemaId, const(char)* path) c_g_settings_new_with_path; ///
-  const(char*)* function() c_g_settings_list_relocatable_schemas; ///
-  const(char*)* function() c_g_settings_list_schemas; ///
-  void function() c_g_settings_sync; ///
-  void function(GObject* object, const(char)* property) c_g_settings_unbind; ///
-  void function(GSettings* settings) c_g_settings_apply; ///
-  void function(GSettings* settings, const(char)* key, GObject* object, const(char)* property, GSettingsBindFlags flags) c_g_settings_bind; ///
-  void function(GSettings* settings, const(char)* key, GObject* object, const(char)* property, GSettingsBindFlags flags, GSettingsBindGetMapping getMapping, GSettingsBindSetMapping setMapping, void* userData, GDestroyNotify destroy) c_g_settings_bind_with_mapping; ///
-  void function(GSettings* settings, const(char)* key, GObject* object, const(char)* property, GSettingsBindFlags flags, GClosure* getMapping, GClosure* setMapping) c_g_settings_bind_with_mapping_closures; ///
-  void function(GSettings* settings, const(char)* key, GObject* object, const(char)* property, gboolean inverted) c_g_settings_bind_writable; ///
-  GAction* function(GSettings* settings, const(char)* key) c_g_settings_create_action; ///
-  void function(GSettings* settings) c_g_settings_delay; ///
-  void function(GSettings* settings, const(char)* key, const(char)* format,  ...) c_g_settings_get; ///
-  gboolean function(GSettings* settings, const(char)* key) c_g_settings_get_boolean; ///
-  GSettings* function(GSettings* settings, const(char)* name) c_g_settings_get_child; ///
-  GVariant* function(GSettings* settings, const(char)* key) c_g_settings_get_default_value; ///
-  double function(GSettings* settings, const(char)* key) c_g_settings_get_double; ///
-  int function(GSettings* settings, const(char)* key) c_g_settings_get_enum; ///
-  uint function(GSettings* settings, const(char)* key) c_g_settings_get_flags; ///
-  gboolean function(GSettings* settings) c_g_settings_get_has_unapplied; ///
-  int function(GSettings* settings, const(char)* key) c_g_settings_get_int; ///
-  long function(GSettings* settings, const(char)* key) c_g_settings_get_int64; ///
-  void* function(GSettings* settings, const(char)* key, GSettingsGetMapping mapping, void* userData) c_g_settings_get_mapped; ///
-  GVariant* function(GSettings* settings, const(char)* key) c_g_settings_get_range; ///
-  char* function(GSettings* settings, const(char)* key) c_g_settings_get_string; ///
-  char** function(GSettings* settings, const(char)* key) c_g_settings_get_strv; ///
-  uint function(GSettings* settings, const(char)* key) c_g_settings_get_uint; ///
-  ulong function(GSettings* settings, const(char)* key) c_g_settings_get_uint64; ///
-  GVariant* function(GSettings* settings, const(char)* key) c_g_settings_get_user_value; ///
-  GVariant* function(GSettings* settings, const(char)* key) c_g_settings_get_value; ///
-  gboolean function(GSettings* settings, const(char)* name) c_g_settings_is_writable; ///
-  char** function(GSettings* settings) c_g_settings_list_children; ///
-  char** function(GSettings* settings) c_g_settings_list_keys; ///
-  gboolean function(GSettings* settings, const(char)* key, GVariant* value) c_g_settings_range_check; ///
-  void function(GSettings* settings, const(char)* key) c_g_settings_reset; ///
-  void function(GSettings* settings) c_g_settings_revert; ///
-  gboolean function(GSettings* settings, const(char)* key, const(char)* format,  ...) c_g_settings_set; ///
-  gboolean function(GSettings* settings, const(char)* key, gboolean value) c_g_settings_set_boolean; ///
-  gboolean function(GSettings* settings, const(char)* key, double value) c_g_settings_set_double; ///
-  gboolean function(GSettings* settings, const(char)* key, int value) c_g_settings_set_enum; ///
-  gboolean function(GSettings* settings, const(char)* key, uint value) c_g_settings_set_flags; ///
-  gboolean function(GSettings* settings, const(char)* key, int value) c_g_settings_set_int; ///
-  gboolean function(GSettings* settings, const(char)* key, long value) c_g_settings_set_int64; ///
-  gboolean function(GSettings* settings, const(char)* key, const(char)* value) c_g_settings_set_string; ///
-  gboolean function(GSettings* settings, const(char)* key, const(char*)* value) c_g_settings_set_strv; ///
-  gboolean function(GSettings* settings, const(char)* key, uint value) c_g_settings_set_uint; ///
-  gboolean function(GSettings* settings, const(char)* key, ulong value) c_g_settings_set_uint64; ///
-  gboolean function(GSettings* settings, const(char)* key, GVariant* value) c_g_settings_set_value; ///
-
-  // SettingsBackend
-  GType function() c_g_settings_backend_get_type; ///
-  void function(GTree* tree, char** path, const(char**)* keys, GVariant*** values) c_g_settings_backend_flatten_tree; ///
-  GSettingsBackend* function() c_g_settings_backend_get_default; ///
-  void function(GSettingsBackend* backend, const(char)* key, void* originTag) c_g_settings_backend_changed; ///
-  void function(GSettingsBackend* backend, GTree* tree, void* originTag) c_g_settings_backend_changed_tree; ///
-  void function(GSettingsBackend* backend, const(char)* path, const(char*)* items, void* originTag) c_g_settings_backend_keys_changed; ///
-  void function(GSettingsBackend* backend, const(char)* path, void* originTag) c_g_settings_backend_path_changed; ///
-  void function(GSettingsBackend* backend, const(char)* path) c_g_settings_backend_path_writable_changed; ///
-  void function(GSettingsBackend* backend, const(char)* key) c_g_settings_backend_writable_changed; ///
-
-  // SettingsSchema
-  GType function() c_g_settings_schema_get_type; ///
-  const(char)* function(GSettingsSchema* schema) c_g_settings_schema_get_id; ///
-  GSettingsSchemaKey* function(GSettingsSchema* schema, const(char)* name) c_g_settings_schema_get_key; ///
-  const(char)* function(GSettingsSchema* schema) c_g_settings_schema_get_path; ///
-  gboolean function(GSettingsSchema* schema, const(char)* name) c_g_settings_schema_has_key; ///
-  char** function(GSettingsSchema* schema) c_g_settings_schema_list_children; ///
-  char** function(GSettingsSchema* schema) c_g_settings_schema_list_keys; ///
-  GSettingsSchema* function(GSettingsSchema* schema) c_g_settings_schema_ref; ///
-  void function(GSettingsSchema* schema) c_g_settings_schema_unref; ///
-
-  // SettingsSchemaKey
-  GType function() c_g_settings_schema_key_get_type; ///
-  GVariant* function(GSettingsSchemaKey* key) c_g_settings_schema_key_get_default_value; ///
-  const(char)* function(GSettingsSchemaKey* key) c_g_settings_schema_key_get_description; ///
-  const(char)* function(GSettingsSchemaKey* key) c_g_settings_schema_key_get_name; ///
-  GVariant* function(GSettingsSchemaKey* key) c_g_settings_schema_key_get_range; ///
-  const(char)* function(GSettingsSchemaKey* key) c_g_settings_schema_key_get_summary; ///
-  const(GVariantType)* function(GSettingsSchemaKey* key) c_g_settings_schema_key_get_value_type; ///
-  gboolean function(GSettingsSchemaKey* key, GVariant* value) c_g_settings_schema_key_range_check; ///
-  GSettingsSchemaKey* function(GSettingsSchemaKey* key) c_g_settings_schema_key_ref; ///
-  void function(GSettingsSchemaKey* key) c_g_settings_schema_key_unref; ///
-
-  // SettingsSchemaSource
-  GType function() c_g_settings_schema_source_get_type; ///
-  GSettingsSchemaSource* function(const(char)* directory, GSettingsSchemaSource* parent, gboolean trusted, GError** _err) c_g_settings_schema_source_new_from_directory; ///
-  void function(GSettingsSchemaSource* source, gboolean recursive, char*** nonRelocatable, char*** relocatable) c_g_settings_schema_source_list_schemas; ///
-  GSettingsSchema* function(GSettingsSchemaSource* source, const(char)* schemaId, gboolean recursive) c_g_settings_schema_source_lookup; ///
-  GSettingsSchemaSource* function(GSettingsSchemaSource* source) c_g_settings_schema_source_ref; ///
-  void function(GSettingsSchemaSource* source) c_g_settings_schema_source_unref; ///
-  GSettingsSchemaSource* function() c_g_settings_schema_source_get_default; ///
-
-  // SimpleAction
-  GType function() c_g_simple_action_get_type; ///
-  GSimpleAction* function(const(char)* name, const(GVariantType)* parameterType) c_g_simple_action_new; ///
-  GSimpleAction* function(const(char)* name, const(GVariantType)* parameterType, GVariant* state) c_g_simple_action_new_stateful; ///
-  void function(GSimpleAction* simple, gboolean enabled) c_g_simple_action_set_enabled; ///
-  void function(GSimpleAction* simple, GVariant* value) c_g_simple_action_set_state; ///
-  void function(GSimpleAction* simple, GVariant* stateHint) c_g_simple_action_set_state_hint; ///
-
-  // SimpleActionGroup
-  GType function() c_g_simple_action_group_get_type; ///
-  GSimpleActionGroup* function() c_g_simple_action_group_new; ///
-  void function(GSimpleActionGroup* simple, const(GActionEntry)* entries, int nEntries, void* userData) c_g_simple_action_group_add_entries; ///
-  void function(GSimpleActionGroup* simple, GAction* action) c_g_simple_action_group_insert; ///
-  GAction* function(GSimpleActionGroup* simple, const(char)* actionName) c_g_simple_action_group_lookup; ///
-  void function(GSimpleActionGroup* simple, const(char)* actionName) c_g_simple_action_group_remove; ///
-
-  // SimpleAsyncResult
-  GType function() c_g_simple_async_result_get_type; ///
-  GSimpleAsyncResult* function(GObject* sourceObject, GAsyncReadyCallback callback, void* userData, void* sourceTag) c_g_simple_async_result_new; ///
-  GSimpleAsyncResult* function(GObject* sourceObject, GAsyncReadyCallback callback, void* userData, GQuark domain, int code, const(char)* format,  ...) c_g_simple_async_result_new_error; ///
-  GSimpleAsyncResult* function(GObject* sourceObject, GAsyncReadyCallback callback, void* userData, const(GError)* error) c_g_simple_async_result_new_from_error; ///
-  GSimpleAsyncResult* function(GObject* sourceObject, GAsyncReadyCallback callback, void* userData, GError* error) c_g_simple_async_result_new_take_error; ///
-  gboolean function(GAsyncResult* result, GObject* source, void* sourceTag) c_g_simple_async_result_is_valid; ///
-  void function(GSimpleAsyncResult* simple) c_g_simple_async_result_complete; ///
-  void function(GSimpleAsyncResult* simple) c_g_simple_async_result_complete_in_idle; ///
-  gboolean function(GSimpleAsyncResult* simple) c_g_simple_async_result_get_op_res_gboolean; ///
-  void* function(GSimpleAsyncResult* simple) c_g_simple_async_result_get_op_res_gpointer; ///
-  ptrdiff_t function(GSimpleAsyncResult* simple) c_g_simple_async_result_get_op_res_gssize; ///
-  void* function(GSimpleAsyncResult* simple) c_g_simple_async_result_get_source_tag; ///
-  gboolean function(GSimpleAsyncResult* simple, GError** _err) c_g_simple_async_result_propagate_error; ///
-  void function(GSimpleAsyncResult* simple, GSimpleAsyncThreadFunc func, int ioPriority, GCancellable* cancellable) c_g_simple_async_result_run_in_thread; ///
-  void function(GSimpleAsyncResult* simple, GCancellable* checkCancellable) c_g_simple_async_result_set_check_cancellable; ///
-  void function(GSimpleAsyncResult* simple, GQuark domain, int code, const(char)* format,  ...) c_g_simple_async_result_set_error; ///
-  void function(GSimpleAsyncResult* simple, GQuark domain, int code, const(char)* format, void* args) c_g_simple_async_result_set_error_va; ///
-  void function(GSimpleAsyncResult* simple, const(GError)* error) c_g_simple_async_result_set_from_error; ///
-  void function(GSimpleAsyncResult* simple, gboolean handleCancellation) c_g_simple_async_result_set_handle_cancellation; ///
-  void function(GSimpleAsyncResult* simple, gboolean opRes) c_g_simple_async_result_set_op_res_gboolean; ///
-  void function(GSimpleAsyncResult* simple, void* opRes, GDestroyNotify destroyOpRes) c_g_simple_async_result_set_op_res_gpointer; ///
-  void function(GSimpleAsyncResult* simple, ptrdiff_t opRes) c_g_simple_async_result_set_op_res_gssize; ///
-  void function(GSimpleAsyncResult* simple, GError* error) c_g_simple_async_result_take_error; ///
-
-  // SimpleIOStream
-  GType function() c_g_simple_io_stream_get_type; ///
-  GIOStream* function(GInputStream* inputStream, GOutputStream* outputStream) c_g_simple_io_stream_new; ///
-
-  // SimplePermission
-  GType function() c_g_simple_permission_get_type; ///
-  GPermission* function(gboolean allowed) c_g_simple_permission_new; ///
-
-  // SimpleProxyResolver
-  GType function() c_g_simple_proxy_resolver_get_type; ///
-  GProxyResolver* function(const(char)* defaultProxy, char** ignoreHosts) c_g_simple_proxy_resolver_new; ///
-  void function(GSimpleProxyResolver* resolver, const(char)* defaultProxy) c_g_simple_proxy_resolver_set_default_proxy; ///
-  void function(GSimpleProxyResolver* resolver, char** ignoreHosts) c_g_simple_proxy_resolver_set_ignore_hosts; ///
-  void function(GSimpleProxyResolver* resolver, const(char)* uriScheme, const(char)* proxy) c_g_simple_proxy_resolver_set_uri_proxy; ///
-
-  // Socket
-  GType function() c_g_socket_get_type; ///
-  GSocket* function(GSocketFamily family, GSocketType type, GSocketProtocol protocol, GError** _err) c_g_socket_new; ///
-  GSocket* function(int fd, GError** _err) c_g_socket_new_from_fd; ///
-  GSocket* function(GSocket* socket, GCancellable* cancellable, GError** _err) c_g_socket_accept; ///
-  gboolean function(GSocket* socket, GSocketAddress* address, gboolean allowReuse, GError** _err) c_g_socket_bind; ///
-  gboolean function(GSocket* socket, GError** _err) c_g_socket_check_connect_result; ///
-  gboolean function(GSocket* socket, GError** _err) c_g_socket_close; ///
-  GIOCondition function(GSocket* socket, GIOCondition condition) c_g_socket_condition_check; ///
-  gboolean function(GSocket* socket, GIOCondition condition, long timeoutUs, GCancellable* cancellable, GError** _err) c_g_socket_condition_timed_wait; ///
-  gboolean function(GSocket* socket, GIOCondition condition, GCancellable* cancellable, GError** _err) c_g_socket_condition_wait; ///
-  gboolean function(GSocket* socket, GSocketAddress* address, GCancellable* cancellable, GError** _err) c_g_socket_connect; ///
-  GSocketConnection* function(GSocket* socket) c_g_socket_connection_factory_create_connection; ///
-  GSource* function(GSocket* socket, GIOCondition condition, GCancellable* cancellable) c_g_socket_create_source; ///
-  ptrdiff_t function(GSocket* socket) c_g_socket_get_available_bytes; ///
-  gboolean function(GSocket* socket) c_g_socket_get_blocking; ///
-  gboolean function(GSocket* socket) c_g_socket_get_broadcast; ///
-  GCredentials* function(GSocket* socket, GError** _err) c_g_socket_get_credentials; ///
-  GSocketFamily function(GSocket* socket) c_g_socket_get_family; ///
-  int function(GSocket* socket) c_g_socket_get_fd; ///
-  gboolean function(GSocket* socket) c_g_socket_get_keepalive; ///
-  int function(GSocket* socket) c_g_socket_get_listen_backlog; ///
-  GSocketAddress* function(GSocket* socket, GError** _err) c_g_socket_get_local_address; ///
-  gboolean function(GSocket* socket) c_g_socket_get_multicast_loopback; ///
-  uint function(GSocket* socket) c_g_socket_get_multicast_ttl; ///
-  gboolean function(GSocket* socket, int level, int optname, int* value, GError** _err) c_g_socket_get_option; ///
-  GSocketProtocol function(GSocket* socket) c_g_socket_get_protocol; ///
-  GSocketAddress* function(GSocket* socket, GError** _err) c_g_socket_get_remote_address; ///
-  GSocketType function(GSocket* socket) c_g_socket_get_socket_type; ///
-  uint function(GSocket* socket) c_g_socket_get_timeout; ///
-  uint function(GSocket* socket) c_g_socket_get_ttl; ///
-  gboolean function(GSocket* socket) c_g_socket_is_closed; ///
-  gboolean function(GSocket* socket) c_g_socket_is_connected; ///
-  gboolean function(GSocket* socket, GInetAddress* group, gboolean sourceSpecific, const(char)* iface, GError** _err) c_g_socket_join_multicast_group; ///
-  gboolean function(GSocket* socket, GInetAddress* group, GInetAddress* sourceSpecific, const(char)* iface, GError** _err) c_g_socket_join_multicast_group_ssm; ///
-  gboolean function(GSocket* socket, GInetAddress* group, gboolean sourceSpecific, const(char)* iface, GError** _err) c_g_socket_leave_multicast_group; ///
-  gboolean function(GSocket* socket, GInetAddress* group, GInetAddress* sourceSpecific, const(char)* iface, GError** _err) c_g_socket_leave_multicast_group_ssm; ///
-  gboolean function(GSocket* socket, GError** _err) c_g_socket_listen; ///
-  ptrdiff_t function(GSocket* socket, ubyte* buffer, size_t size, GCancellable* cancellable, GError** _err) c_g_socket_receive; ///
-  GBytes* function(GSocket* socket, size_t size, long timeoutUs, GCancellable* cancellable, GError** _err) c_g_socket_receive_bytes; ///
-  GBytes* function(GSocket* socket, GSocketAddress** address, size_t size, long timeoutUs, GCancellable* cancellable, GError** _err) c_g_socket_receive_bytes_from; ///
-  ptrdiff_t function(GSocket* socket, GSocketAddress** address, ubyte* buffer, size_t size, GCancellable* cancellable, GError** _err) c_g_socket_receive_from; ///
-  ptrdiff_t function(GSocket* socket, GSocketAddress** address, GInputVector* vectors, int numVectors, GSocketControlMessage*** messages, int* numMessages, int* flags, GCancellable* cancellable, GError** _err) c_g_socket_receive_message; ///
-  int function(GSocket* socket, GInputMessage* messages, uint numMessages, int flags, GCancellable* cancellable, GError** _err) c_g_socket_receive_messages; ///
-  ptrdiff_t function(GSocket* socket, ubyte* buffer, size_t size, gboolean blocking, GCancellable* cancellable, GError** _err) c_g_socket_receive_with_blocking; ///
-  ptrdiff_t function(GSocket* socket, const(ubyte)* buffer, size_t size, GCancellable* cancellable, GError** _err) c_g_socket_send; ///
-  ptrdiff_t function(GSocket* socket, GSocketAddress* address, GOutputVector* vectors, int numVectors, GSocketControlMessage** messages, int numMessages, int flags, GCancellable* cancellable, GError** _err) c_g_socket_send_message; ///
-  GPollableReturn function(GSocket* socket, GSocketAddress* address, const(GOutputVector)* vectors, int numVectors, GSocketControlMessage** messages, int numMessages, int flags, long timeoutUs, size_t* bytesWritten, GCancellable* cancellable, GError** _err) c_g_socket_send_message_with_timeout; ///
-  int function(GSocket* socket, GOutputMessage* messages, uint numMessages, int flags, GCancellable* cancellable, GError** _err) c_g_socket_send_messages; ///
-  ptrdiff_t function(GSocket* socket, GSocketAddress* address, const(ubyte)* buffer, size_t size, GCancellable* cancellable, GError** _err) c_g_socket_send_to; ///
-  ptrdiff_t function(GSocket* socket, const(ubyte)* buffer, size_t size, gboolean blocking, GCancellable* cancellable, GError** _err) c_g_socket_send_with_blocking; ///
-  void function(GSocket* socket, gboolean blocking) c_g_socket_set_blocking; ///
-  void function(GSocket* socket, gboolean broadcast) c_g_socket_set_broadcast; ///
-  void function(GSocket* socket, gboolean keepalive) c_g_socket_set_keepalive; ///
-  void function(GSocket* socket, int backlog) c_g_socket_set_listen_backlog; ///
-  void function(GSocket* socket, gboolean loopback) c_g_socket_set_multicast_loopback; ///
-  void function(GSocket* socket, uint ttl) c_g_socket_set_multicast_ttl; ///
-  gboolean function(GSocket* socket, int level, int optname, int value, GError** _err) c_g_socket_set_option; ///
-  void function(GSocket* socket, uint timeout) c_g_socket_set_timeout; ///
-  void function(GSocket* socket, uint ttl) c_g_socket_set_ttl; ///
-  gboolean function(GSocket* socket, gboolean shutdownRead, gboolean shutdownWrite, GError** _err) c_g_socket_shutdown; ///
-  gboolean function(GSocket* socket) c_g_socket_speaks_ipv4; ///
-
-  // SocketAddress
-  GType function() c_g_socket_address_get_type; ///
-  GSocketAddress* function(void* native, size_t len) c_g_socket_address_new_from_native; ///
-  GSocketFamily function(GSocketAddress* address) c_g_socket_address_get_family; ///
-  ptrdiff_t function(GSocketAddress* address) c_g_socket_address_get_native_size; ///
-  gboolean function(GSocketAddress* address, void* dest, size_t destlen, GError** _err) c_g_socket_address_to_native; ///
-
-  // SocketAddressEnumerator
-  GType function() c_g_socket_address_enumerator_get_type; ///
-  GSocketAddress* function(GSocketAddressEnumerator* enumerator, GCancellable* cancellable, GError** _err) c_g_socket_address_enumerator_next; ///
-  void function(GSocketAddressEnumerator* enumerator, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_socket_address_enumerator_next_async; ///
-  GSocketAddress* function(GSocketAddressEnumerator* enumerator, GAsyncResult* result, GError** _err) c_g_socket_address_enumerator_next_finish; ///
-
-  // SocketClient
-  GType function() c_g_socket_client_get_type; ///
-  GSocketClient* function() c_g_socket_client_new; ///
-  void function(GSocketClient* client, const(char)* protocol) c_g_socket_client_add_application_proxy; ///
-  GSocketConnection* function(GSocketClient* client, GSocketConnectable* connectable, GCancellable* cancellable, GError** _err) c_g_socket_client_connect; ///
-  void function(GSocketClient* client, GSocketConnectable* connectable, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_socket_client_connect_async; ///
-  GSocketConnection* function(GSocketClient* client, GAsyncResult* result, GError** _err) c_g_socket_client_connect_finish; ///
-  GSocketConnection* function(GSocketClient* client, const(char)* hostAndPort, ushort defaultPort, GCancellable* cancellable, GError** _err) c_g_socket_client_connect_to_host; ///
-  void function(GSocketClient* client, const(char)* hostAndPort, ushort defaultPort, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_socket_client_connect_to_host_async; ///
-  GSocketConnection* function(GSocketClient* client, GAsyncResult* result, GError** _err) c_g_socket_client_connect_to_host_finish; ///
-  GSocketConnection* function(GSocketClient* client, const(char)* domain, const(char)* service, GCancellable* cancellable, GError** _err) c_g_socket_client_connect_to_service; ///
-  void function(GSocketClient* client, const(char)* domain, const(char)* service, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_socket_client_connect_to_service_async; ///
-  GSocketConnection* function(GSocketClient* client, GAsyncResult* result, GError** _err) c_g_socket_client_connect_to_service_finish; ///
-  GSocketConnection* function(GSocketClient* client, const(char)* uri, ushort defaultPort, GCancellable* cancellable, GError** _err) c_g_socket_client_connect_to_uri; ///
-  void function(GSocketClient* client, const(char)* uri, ushort defaultPort, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_socket_client_connect_to_uri_async; ///
-  GSocketConnection* function(GSocketClient* client, GAsyncResult* result, GError** _err) c_g_socket_client_connect_to_uri_finish; ///
-  gboolean function(GSocketClient* client) c_g_socket_client_get_enable_proxy; ///
-  GSocketFamily function(GSocketClient* client) c_g_socket_client_get_family; ///
-  GSocketAddress* function(GSocketClient* client) c_g_socket_client_get_local_address; ///
-  GSocketProtocol function(GSocketClient* client) c_g_socket_client_get_protocol; ///
-  GProxyResolver* function(GSocketClient* client) c_g_socket_client_get_proxy_resolver; ///
-  GSocketType function(GSocketClient* client) c_g_socket_client_get_socket_type; ///
-  uint function(GSocketClient* client) c_g_socket_client_get_timeout; ///
-  gboolean function(GSocketClient* client) c_g_socket_client_get_tls; ///
-  GTlsCertificateFlags function(GSocketClient* client) c_g_socket_client_get_tls_validation_flags; ///
-  void function(GSocketClient* client, gboolean enable) c_g_socket_client_set_enable_proxy; ///
-  void function(GSocketClient* client, GSocketFamily family) c_g_socket_client_set_family; ///
-  void function(GSocketClient* client, GSocketAddress* address) c_g_socket_client_set_local_address; ///
-  void function(GSocketClient* client, GSocketProtocol protocol) c_g_socket_client_set_protocol; ///
-  void function(GSocketClient* client, GProxyResolver* proxyResolver) c_g_socket_client_set_proxy_resolver; ///
-  void function(GSocketClient* client, GSocketType type) c_g_socket_client_set_socket_type; ///
-  void function(GSocketClient* client, uint timeout) c_g_socket_client_set_timeout; ///
-  void function(GSocketClient* client, gboolean tls) c_g_socket_client_set_tls; ///
-  void function(GSocketClient* client, GTlsCertificateFlags flags) c_g_socket_client_set_tls_validation_flags; ///
-
-  // SocketConnectable
-  GType function() c_g_socket_connectable_get_type; ///
-  GSocketAddressEnumerator* function(GSocketConnectable* connectable) c_g_socket_connectable_enumerate; ///
-  GSocketAddressEnumerator* function(GSocketConnectable* connectable) c_g_socket_connectable_proxy_enumerate; ///
-  char* function(GSocketConnectable* connectable) c_g_socket_connectable_to_string; ///
-
-  // SocketConnection
-  GType function() c_g_socket_connection_get_type; ///
-  GType function(GSocketFamily family, GSocketType type, int protocolId) c_g_socket_connection_factory_lookup_type; ///
-  void function(GType gType, GSocketFamily family, GSocketType type, int protocol) c_g_socket_connection_factory_register_type; ///
-  gboolean function(GSocketConnection* connection, GSocketAddress* address, GCancellable* cancellable, GError** _err) c_g_socket_connection_connect; ///
-  void function(GSocketConnection* connection, GSocketAddress* address, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_socket_connection_connect_async; ///
-  gboolean function(GSocketConnection* connection, GAsyncResult* result, GError** _err) c_g_socket_connection_connect_finish; ///
-  GSocketAddress* function(GSocketConnection* connection, GError** _err) c_g_socket_connection_get_local_address; ///
-  GSocketAddress* function(GSocketConnection* connection, GError** _err) c_g_socket_connection_get_remote_address; ///
-  GSocket* function(GSocketConnection* connection) c_g_socket_connection_get_socket; ///
-  gboolean function(GSocketConnection* connection) c_g_socket_connection_is_connected; ///
-
-  // SocketControlMessage
-  GType function() c_g_socket_control_message_get_type; ///
-  GSocketControlMessage* function(int level, int type, size_t size, void* data) c_g_socket_control_message_deserialize; ///
-  int function(GSocketControlMessage* message) c_g_socket_control_message_get_level; ///
-  int function(GSocketControlMessage* message) c_g_socket_control_message_get_msg_type; ///
-  size_t function(GSocketControlMessage* message) c_g_socket_control_message_get_size; ///
-  void function(GSocketControlMessage* message, void* data) c_g_socket_control_message_serialize; ///
-
-  // SocketListener
-  GType function() c_g_socket_listener_get_type; ///
-  GSocketListener* function() c_g_socket_listener_new; ///
-  GSocketConnection* function(GSocketListener* listener, GObject** sourceObject, GCancellable* cancellable, GError** _err) c_g_socket_listener_accept; ///
-  void function(GSocketListener* listener, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_socket_listener_accept_async; ///
-  GSocketConnection* function(GSocketListener* listener, GAsyncResult* result, GObject** sourceObject, GError** _err) c_g_socket_listener_accept_finish; ///
-  GSocket* function(GSocketListener* listener, GObject** sourceObject, GCancellable* cancellable, GError** _err) c_g_socket_listener_accept_socket; ///
-  void function(GSocketListener* listener, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_socket_listener_accept_socket_async; ///
-  GSocket* function(GSocketListener* listener, GAsyncResult* result, GObject** sourceObject, GError** _err) c_g_socket_listener_accept_socket_finish; ///
-  gboolean function(GSocketListener* listener, GSocketAddress* address, GSocketType type, GSocketProtocol protocol, GObject* sourceObject, GSocketAddress** effectiveAddress, GError** _err) c_g_socket_listener_add_address; ///
-  ushort function(GSocketListener* listener, GObject* sourceObject, GError** _err) c_g_socket_listener_add_any_inet_port; ///
-  gboolean function(GSocketListener* listener, ushort port, GObject* sourceObject, GError** _err) c_g_socket_listener_add_inet_port; ///
-  gboolean function(GSocketListener* listener, GSocket* socket, GObject* sourceObject, GError** _err) c_g_socket_listener_add_socket; ///
-  void function(GSocketListener* listener) c_g_socket_listener_close; ///
-  void function(GSocketListener* listener, int listenBacklog) c_g_socket_listener_set_backlog; ///
-
-  // SocketService
-  GType function() c_g_socket_service_get_type; ///
-  GSocketService* function() c_g_socket_service_new; ///
-  gboolean function(GSocketService* service) c_g_socket_service_is_active; ///
-  void function(GSocketService* service) c_g_socket_service_start; ///
-  void function(GSocketService* service) c_g_socket_service_stop; ///
-
-  // SrvTarget
-  GType function() c_g_srv_target_get_type; ///
-  GSrvTarget* function(const(char)* hostname, ushort port, ushort priority, ushort weight) c_g_srv_target_new; ///
-  GSrvTarget* function(GSrvTarget* target) c_g_srv_target_copy; ///
-  void function(GSrvTarget* target) c_g_srv_target_free; ///
-  const(char)* function(GSrvTarget* target) c_g_srv_target_get_hostname; ///
-  ushort function(GSrvTarget* target) c_g_srv_target_get_port; ///
-  ushort function(GSrvTarget* target) c_g_srv_target_get_priority; ///
-  ushort function(GSrvTarget* target) c_g_srv_target_get_weight; ///
-  GList* function(GList* targets) c_g_srv_target_list_sort; ///
-
-  // StaticResource
-  void function(GStaticResource* staticResource) c_g_static_resource_fini; ///
-  GResource* function(GStaticResource* staticResource) c_g_static_resource_get_resource; ///
-  void function(GStaticResource* staticResource) c_g_static_resource_init; ///
-
-  // Subprocess
-  GType function() c_g_subprocess_get_type; ///
-  GSubprocess* function(GSubprocessFlags flags, GError** error, const(char)* argv0,  ...) c_g_subprocess_new; ///
-  GSubprocess* function(const(char*)* argv, GSubprocessFlags flags, GError** _err) c_g_subprocess_newv; ///
-  gboolean function(GSubprocess* subprocess, GBytes* stdinBuf, GCancellable* cancellable, GBytes** stdoutBuf, GBytes** stderrBuf, GError** _err) c_g_subprocess_communicate; ///
-  void function(GSubprocess* subprocess, GBytes* stdinBuf, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_subprocess_communicate_async; ///
-  gboolean function(GSubprocess* subprocess, GAsyncResult* result, GBytes** stdoutBuf, GBytes** stderrBuf, GError** _err) c_g_subprocess_communicate_finish; ///
-  gboolean function(GSubprocess* subprocess, const(char)* stdinBuf, GCancellable* cancellable, char** stdoutBuf, char** stderrBuf, GError** _err) c_g_subprocess_communicate_utf8; ///
-  void function(GSubprocess* subprocess, const(char)* stdinBuf, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_subprocess_communicate_utf8_async; ///
-  gboolean function(GSubprocess* subprocess, GAsyncResult* result, char** stdoutBuf, char** stderrBuf, GError** _err) c_g_subprocess_communicate_utf8_finish; ///
-  void function(GSubprocess* subprocess) c_g_subprocess_force_exit; ///
-  int function(GSubprocess* subprocess) c_g_subprocess_get_exit_status; ///
-  const(char)* function(GSubprocess* subprocess) c_g_subprocess_get_identifier; ///
-  gboolean function(GSubprocess* subprocess) c_g_subprocess_get_if_exited; ///
-  gboolean function(GSubprocess* subprocess) c_g_subprocess_get_if_signaled; ///
-  int function(GSubprocess* subprocess) c_g_subprocess_get_status; ///
-  GInputStream* function(GSubprocess* subprocess) c_g_subprocess_get_stderr_pipe; ///
-  GOutputStream* function(GSubprocess* subprocess) c_g_subprocess_get_stdin_pipe; ///
-  GInputStream* function(GSubprocess* subprocess) c_g_subprocess_get_stdout_pipe; ///
-  gboolean function(GSubprocess* subprocess) c_g_subprocess_get_successful; ///
-  int function(GSubprocess* subprocess) c_g_subprocess_get_term_sig; ///
-  void function(GSubprocess* subprocess, int signalNum) c_g_subprocess_send_signal; ///
-  gboolean function(GSubprocess* subprocess, GCancellable* cancellable, GError** _err) c_g_subprocess_wait; ///
-  void function(GSubprocess* subprocess, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_subprocess_wait_async; ///
-  gboolean function(GSubprocess* subprocess, GCancellable* cancellable, GError** _err) c_g_subprocess_wait_check; ///
-  void function(GSubprocess* subprocess, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_subprocess_wait_check_async; ///
-  gboolean function(GSubprocess* subprocess, GAsyncResult* result, GError** _err) c_g_subprocess_wait_check_finish; ///
-  gboolean function(GSubprocess* subprocess, GAsyncResult* result, GError** _err) c_g_subprocess_wait_finish; ///
-
-  // SubprocessLauncher
-  GType function() c_g_subprocess_launcher_get_type; ///
-  GSubprocessLauncher* function(GSubprocessFlags flags) c_g_subprocess_launcher_new; ///
-  void function(GSubprocessLauncher* self) c_g_subprocess_launcher_close; ///
-  const(char)* function(GSubprocessLauncher* self, const(char)* variable) c_g_subprocess_launcher_getenv; ///
-  void function(GSubprocessLauncher* self, GSpawnChildSetupFunc childSetup, void* userData, GDestroyNotify destroyNotify) c_g_subprocess_launcher_set_child_setup; ///
-  void function(GSubprocessLauncher* self, const(char)* cwd) c_g_subprocess_launcher_set_cwd; ///
-  void function(GSubprocessLauncher* self, char** env) c_g_subprocess_launcher_set_environ; ///
-  void function(GSubprocessLauncher* self, GSubprocessFlags flags) c_g_subprocess_launcher_set_flags; ///
-  void function(GSubprocessLauncher* self, const(char)* path) c_g_subprocess_launcher_set_stderr_file_path; ///
-  void function(GSubprocessLauncher* self, const(char)* path) c_g_subprocess_launcher_set_stdin_file_path; ///
-  void function(GSubprocessLauncher* self, const(char)* path) c_g_subprocess_launcher_set_stdout_file_path; ///
-  void function(GSubprocessLauncher* self, const(char)* variable, const(char)* value, gboolean overwrite) c_g_subprocess_launcher_setenv; ///
-  GSubprocess* function(GSubprocessLauncher* self, GError** error, const(char)* argv0,  ...) c_g_subprocess_launcher_spawn; ///
-  GSubprocess* function(GSubprocessLauncher* self, const(char*)* argv, GError** _err) c_g_subprocess_launcher_spawnv; ///
-  void function(GSubprocessLauncher* self, int sourceFd, int targetFd) c_g_subprocess_launcher_take_fd; ///
-  void function(GSubprocessLauncher* self, int fd) c_g_subprocess_launcher_take_stderr_fd; ///
-  void function(GSubprocessLauncher* self, int fd) c_g_subprocess_launcher_take_stdin_fd; ///
-  void function(GSubprocessLauncher* self, int fd) c_g_subprocess_launcher_take_stdout_fd; ///
-  void function(GSubprocessLauncher* self, const(char)* variable) c_g_subprocess_launcher_unsetenv; ///
-
-  // Task
-  GType function() c_g_task_get_type; ///
-  GTask* function(GObject* sourceObject, GCancellable* cancellable, GAsyncReadyCallback callback, void* callbackData) c_g_task_new; ///
-  gboolean function(GAsyncResult* result, GObject* sourceObject) c_g_task_is_valid; ///
-  void function(GObject* sourceObject, GAsyncReadyCallback callback, void* callbackData, void* sourceTag, GError* error) c_g_task_report_error; ///
-  void function(GObject* sourceObject, GAsyncReadyCallback callback, void* callbackData, void* sourceTag, GQuark domain, int code, const(char)* format,  ...) c_g_task_report_new_error; ///
-  void function(GTask* task, GSource* source, GSourceFunc callback) c_g_task_attach_source; ///
-  GCancellable* function(GTask* task) c_g_task_get_cancellable; ///
-  gboolean function(GTask* task) c_g_task_get_check_cancellable; ///
-  gboolean function(GTask* task) c_g_task_get_completed; ///
-  GMainContext* function(GTask* task) c_g_task_get_context; ///
-  const(char)* function(GTask* task) c_g_task_get_name; ///
-  int function(GTask* task) c_g_task_get_priority; ///
-  gboolean function(GTask* task) c_g_task_get_return_on_cancel; ///
-  GObject* function(GTask* task) c_g_task_get_source_object; ///
-  void* function(GTask* task) c_g_task_get_source_tag; ///
-  void* function(GTask* task) c_g_task_get_task_data; ///
-  gboolean function(GTask* task) c_g_task_had_error; ///
-  gboolean function(GTask* task, GError** _err) c_g_task_propagate_boolean; ///
-  ptrdiff_t function(GTask* task, GError** _err) c_g_task_propagate_int; ///
-  void* function(GTask* task, GError** _err) c_g_task_propagate_pointer; ///
-  gboolean function(GTask* task, GValue* value, GError** _err) c_g_task_propagate_value; ///
-  void function(GTask* task, gboolean result) c_g_task_return_boolean; ///
-  void function(GTask* task, GError* error) c_g_task_return_error; ///
-  gboolean function(GTask* task) c_g_task_return_error_if_cancelled; ///
-  void function(GTask* task, ptrdiff_t result) c_g_task_return_int; ///
-  void function(GTask* task, GQuark domain, int code, const(char)* format,  ...) c_g_task_return_new_error; ///
-  void function(GTask* task, GQuark domain, int code, const(char)* message) c_g_task_return_new_error_literal; ///
-  void function(GTask* task, void* result, GDestroyNotify resultDestroy) c_g_task_return_pointer; ///
-  void function(GTask* task, GError* error, const(char)* format,  ...) c_g_task_return_prefixed_error; ///
-  void function(GTask* task, GValue* result) c_g_task_return_value; ///
-  void function(GTask* task, GTaskThreadFunc taskFunc) c_g_task_run_in_thread; ///
-  void function(GTask* task, GTaskThreadFunc taskFunc) c_g_task_run_in_thread_sync; ///
-  void function(GTask* task, gboolean checkCancellable) c_g_task_set_check_cancellable; ///
-  void function(GTask* task, const(char)* name) c_g_task_set_name; ///
-  void function(GTask* task, int priority) c_g_task_set_priority; ///
-  gboolean function(GTask* task, gboolean returnOnCancel) c_g_task_set_return_on_cancel; ///
-  void function(GTask* task, void* sourceTag) c_g_task_set_source_tag; ///
-  void function(GTask* task, const(char)* name) c_g_task_set_static_name; ///
-  void function(GTask* task, void* taskData, GDestroyNotify taskDataDestroy) c_g_task_set_task_data; ///
-
-  // TcpConnection
-  GType function() c_g_tcp_connection_get_type; ///
-  gboolean function(GTcpConnection* connection) c_g_tcp_connection_get_graceful_disconnect; ///
-  void function(GTcpConnection* connection, gboolean gracefulDisconnect) c_g_tcp_connection_set_graceful_disconnect; ///
-
-  // TcpWrapperConnection
-  GType function() c_g_tcp_wrapper_connection_get_type; ///
-  GSocketConnection* function(GIOStream* baseIoStream, GSocket* socket) c_g_tcp_wrapper_connection_new; ///
-  GIOStream* function(GTcpWrapperConnection* conn) c_g_tcp_wrapper_connection_get_base_io_stream; ///
-
-  // TestDBus
-  GType function() c_g_test_dbus_get_type; ///
-  GTestDBus* function(GTestDBusFlags flags) c_g_test_dbus_new; ///
-  void function() c_g_test_dbus_unset; ///
-  void function(GTestDBus* self, const(char)* path) c_g_test_dbus_add_service_dir; ///
-  void function(GTestDBus* self) c_g_test_dbus_down; ///
-  const(char)* function(GTestDBus* self) c_g_test_dbus_get_bus_address; ///
-  GTestDBusFlags function(GTestDBus* self) c_g_test_dbus_get_flags; ///
-  void function(GTestDBus* self) c_g_test_dbus_stop; ///
-  void function(GTestDBus* self) c_g_test_dbus_up; ///
-
-  // ThemedIcon
-  GType function() c_g_themed_icon_get_type; ///
-  GIcon* function(const(char)* iconname) c_g_themed_icon_new; ///
-  GIcon* function(char** iconnames, int len) c_g_themed_icon_new_from_names; ///
-  GIcon* function(const(char)* iconname) c_g_themed_icon_new_with_default_fallbacks; ///
-  void function(GThemedIcon* icon, const(char)* iconname) c_g_themed_icon_append_name; ///
-  const(char*)* function(GThemedIcon* icon) c_g_themed_icon_get_names; ///
-  void function(GThemedIcon* icon, const(char)* iconname) c_g_themed_icon_prepend_name; ///
-
-  // ThreadedResolver
-  GType function() c_g_threaded_resolver_get_type; ///
-
-  // ThreadedSocketService
-  GType function() c_g_threaded_socket_service_get_type; ///
-  GSocketService* function(int maxThreads) c_g_threaded_socket_service_new; ///
-
-  // TlsBackend
-  GType function() c_g_tls_backend_get_type; ///
-  GTlsBackend* function() c_g_tls_backend_get_default; ///
-  GType function(GTlsBackend* backend) c_g_tls_backend_get_certificate_type; ///
-  GType function(GTlsBackend* backend) c_g_tls_backend_get_client_connection_type; ///
-  GTlsDatabase* function(GTlsBackend* backend) c_g_tls_backend_get_default_database; ///
-  GType function(GTlsBackend* backend) c_g_tls_backend_get_dtls_client_connection_type; ///
-  GType function(GTlsBackend* backend) c_g_tls_backend_get_dtls_server_connection_type; ///
-  GType function(GTlsBackend* backend) c_g_tls_backend_get_file_database_type; ///
-  GType function(GTlsBackend* backend) c_g_tls_backend_get_server_connection_type; ///
-  void function(GTlsBackend* backend, GTlsDatabase* database) c_g_tls_backend_set_default_database; ///
-  gboolean function(GTlsBackend* backend) c_g_tls_backend_supports_dtls; ///
-  gboolean function(GTlsBackend* backend) c_g_tls_backend_supports_tls; ///
-
-  // TlsCertificate
-  GType function() c_g_tls_certificate_get_type; ///
-  GTlsCertificate* function(const(char)* file, GError** _err) c_g_tls_certificate_new_from_file; ///
-  GTlsCertificate* function(const(char)* file, const(char)* password, GError** _err) c_g_tls_certificate_new_from_file_with_password; ///
-  GTlsCertificate* function(const(char)* certFile, const(char)* keyFile, GError** _err) c_g_tls_certificate_new_from_files; ///
-  GTlsCertificate* function(const(char)* data, ptrdiff_t length, GError** _err) c_g_tls_certificate_new_from_pem; ///
-  GTlsCertificate* function(const(char)* pkcs11Uri, const(char)* privateKeyPkcs11Uri, GError** _err) c_g_tls_certificate_new_from_pkcs11_uris; ///
-  GTlsCertificate* function(const(ubyte)* data, size_t length, const(char)* password, GError** _err) c_g_tls_certificate_new_from_pkcs12; ///
-  GList* function(const(char)* file, GError** _err) c_g_tls_certificate_list_new_from_file; ///
-  GPtrArray* function(GTlsCertificate* cert) c_g_tls_certificate_get_dns_names; ///
-  GPtrArray* function(GTlsCertificate* cert) c_g_tls_certificate_get_ip_addresses; ///
-  GTlsCertificate* function(GTlsCertificate* cert) c_g_tls_certificate_get_issuer; ///
-  char* function(GTlsCertificate* cert) c_g_tls_certificate_get_issuer_name; ///
-  GDateTime* function(GTlsCertificate* cert) c_g_tls_certificate_get_not_valid_after; ///
-  GDateTime* function(GTlsCertificate* cert) c_g_tls_certificate_get_not_valid_before; ///
-  char* function(GTlsCertificate* cert) c_g_tls_certificate_get_subject_name; ///
-  gboolean function(GTlsCertificate* certOne, GTlsCertificate* certTwo) c_g_tls_certificate_is_same; ///
-  GTlsCertificateFlags function(GTlsCertificate* cert, GSocketConnectable* identity, GTlsCertificate* trustedCa) c_g_tls_certificate_verify; ///
-
-  // TlsClientConnection
-  GType function() c_g_tls_client_connection_get_type; ///
-  GIOStream* function(GIOStream* baseIoStream, GSocketConnectable* serverIdentity, GError** _err) c_g_tls_client_connection_new; ///
-  void function(GTlsClientConnection* conn, GTlsClientConnection* source) c_g_tls_client_connection_copy_session_state; ///
-  GList* function(GTlsClientConnection* conn) c_g_tls_client_connection_get_accepted_cas; ///
-  GSocketConnectable* function(GTlsClientConnection* conn) c_g_tls_client_connection_get_server_identity; ///
-  gboolean function(GTlsClientConnection* conn) c_g_tls_client_connection_get_use_ssl3; ///
-  GTlsCertificateFlags function(GTlsClientConnection* conn) c_g_tls_client_connection_get_validation_flags; ///
-  void function(GTlsClientConnection* conn, GSocketConnectable* identity) c_g_tls_client_connection_set_server_identity; ///
-  void function(GTlsClientConnection* conn, gboolean useSsl3) c_g_tls_client_connection_set_use_ssl3; ///
-  void function(GTlsClientConnection* conn, GTlsCertificateFlags flags) c_g_tls_client_connection_set_validation_flags; ///
-
-  // TlsConnection
-  GType function() c_g_tls_connection_get_type; ///
-  gboolean function(GTlsConnection* conn, GTlsCertificate* peerCert, GTlsCertificateFlags errors) c_g_tls_connection_emit_accept_certificate; ///
-  GTlsCertificate* function(GTlsConnection* conn) c_g_tls_connection_get_certificate; ///
-  gboolean function(GTlsConnection* conn, GTlsChannelBindingType type, GByteArray* data, GError** _err) c_g_tls_connection_get_channel_binding_data; ///
-  char* function(GTlsConnection* conn) c_g_tls_connection_get_ciphersuite_name; ///
-  GTlsDatabase* function(GTlsConnection* conn) c_g_tls_connection_get_database; ///
-  GTlsInteraction* function(GTlsConnection* conn) c_g_tls_connection_get_interaction; ///
-  const(char)* function(GTlsConnection* conn) c_g_tls_connection_get_negotiated_protocol; ///
-  GTlsCertificate* function(GTlsConnection* conn) c_g_tls_connection_get_peer_certificate; ///
-  GTlsCertificateFlags function(GTlsConnection* conn) c_g_tls_connection_get_peer_certificate_errors; ///
-  GTlsProtocolVersion function(GTlsConnection* conn) c_g_tls_connection_get_protocol_version; ///
-  GTlsRehandshakeMode function(GTlsConnection* conn) c_g_tls_connection_get_rehandshake_mode; ///
-  gboolean function(GTlsConnection* conn) c_g_tls_connection_get_require_close_notify; ///
-  gboolean function(GTlsConnection* conn) c_g_tls_connection_get_use_system_certdb; ///
-  gboolean function(GTlsConnection* conn, GCancellable* cancellable, GError** _err) c_g_tls_connection_handshake; ///
-  void function(GTlsConnection* conn, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_tls_connection_handshake_async; ///
-  gboolean function(GTlsConnection* conn, GAsyncResult* result, GError** _err) c_g_tls_connection_handshake_finish; ///
-  void function(GTlsConnection* conn, const(char*)* protocols) c_g_tls_connection_set_advertised_protocols; ///
-  void function(GTlsConnection* conn, GTlsCertificate* certificate) c_g_tls_connection_set_certificate; ///
-  void function(GTlsConnection* conn, GTlsDatabase* database) c_g_tls_connection_set_database; ///
-  void function(GTlsConnection* conn, GTlsInteraction* interaction) c_g_tls_connection_set_interaction; ///
-  void function(GTlsConnection* conn, GTlsRehandshakeMode mode) c_g_tls_connection_set_rehandshake_mode; ///
-  void function(GTlsConnection* conn, gboolean requireCloseNotify) c_g_tls_connection_set_require_close_notify; ///
-  void function(GTlsConnection* conn, gboolean useSystemCertdb) c_g_tls_connection_set_use_system_certdb; ///
-
-  // TlsDatabase
-  GType function() c_g_tls_database_get_type; ///
-  char* function(GTlsDatabase* self, GTlsCertificate* certificate) c_g_tls_database_create_certificate_handle; ///
-  GTlsCertificate* function(GTlsDatabase* self, const(char)* handle, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GError** _err) c_g_tls_database_lookup_certificate_for_handle; ///
-  void function(GTlsDatabase* self, const(char)* handle, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_tls_database_lookup_certificate_for_handle_async; ///
-  GTlsCertificate* function(GTlsDatabase* self, GAsyncResult* result, GError** _err) c_g_tls_database_lookup_certificate_for_handle_finish; ///
-  GTlsCertificate* function(GTlsDatabase* self, GTlsCertificate* certificate, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GError** _err) c_g_tls_database_lookup_certificate_issuer; ///
-  void function(GTlsDatabase* self, GTlsCertificate* certificate, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_tls_database_lookup_certificate_issuer_async; ///
-  GTlsCertificate* function(GTlsDatabase* self, GAsyncResult* result, GError** _err) c_g_tls_database_lookup_certificate_issuer_finish; ///
-  GList* function(GTlsDatabase* self, GByteArray* issuerRawDn, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GError** _err) c_g_tls_database_lookup_certificates_issued_by; ///
-  void function(GTlsDatabase* self, GByteArray* issuerRawDn, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_tls_database_lookup_certificates_issued_by_async; ///
-  GList* function(GTlsDatabase* self, GAsyncResult* result, GError** _err) c_g_tls_database_lookup_certificates_issued_by_finish; ///
-  GTlsCertificateFlags function(GTlsDatabase* self, GTlsCertificate* chain, const(char)* purpose, GSocketConnectable* identity, GTlsInteraction* interaction, GTlsDatabaseVerifyFlags flags, GCancellable* cancellable, GError** _err) c_g_tls_database_verify_chain; ///
-  void function(GTlsDatabase* self, GTlsCertificate* chain, const(char)* purpose, GSocketConnectable* identity, GTlsInteraction* interaction, GTlsDatabaseVerifyFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_tls_database_verify_chain_async; ///
-  GTlsCertificateFlags function(GTlsDatabase* self, GAsyncResult* result, GError** _err) c_g_tls_database_verify_chain_finish; ///
-
-  // TlsFileDatabase
-  GType function() c_g_tls_file_database_get_type; ///
-  GTlsDatabase* function(const(char)* anchors, GError** _err) c_g_tls_file_database_new; ///
-
-  // TlsInteraction
-  GType function() c_g_tls_interaction_get_type; ///
-  GTlsInteractionResult function(GTlsInteraction* interaction, GTlsPassword* password, GCancellable* cancellable, GError** _err) c_g_tls_interaction_ask_password; ///
-  void function(GTlsInteraction* interaction, GTlsPassword* password, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_tls_interaction_ask_password_async; ///
-  GTlsInteractionResult function(GTlsInteraction* interaction, GAsyncResult* result, GError** _err) c_g_tls_interaction_ask_password_finish; ///
-  GTlsInteractionResult function(GTlsInteraction* interaction, GTlsPassword* password, GCancellable* cancellable, GError** _err) c_g_tls_interaction_invoke_ask_password; ///
-  GTlsInteractionResult function(GTlsInteraction* interaction, GTlsConnection* connection, GTlsCertificateRequestFlags flags, GCancellable* cancellable, GError** _err) c_g_tls_interaction_invoke_request_certificate; ///
-  GTlsInteractionResult function(GTlsInteraction* interaction, GTlsConnection* connection, GTlsCertificateRequestFlags flags, GCancellable* cancellable, GError** _err) c_g_tls_interaction_request_certificate; ///
-  void function(GTlsInteraction* interaction, GTlsConnection* connection, GTlsCertificateRequestFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_tls_interaction_request_certificate_async; ///
-  GTlsInteractionResult function(GTlsInteraction* interaction, GAsyncResult* result, GError** _err) c_g_tls_interaction_request_certificate_finish; ///
-
-  // TlsPassword
-  GType function() c_g_tls_password_get_type; ///
-  GTlsPassword* function(GTlsPasswordFlags flags, const(char)* description) c_g_tls_password_new; ///
-  const(char)* function(GTlsPassword* password) c_g_tls_password_get_description; ///
-  GTlsPasswordFlags function(GTlsPassword* password) c_g_tls_password_get_flags; ///
-  const(ubyte)* function(GTlsPassword* password, size_t* length) c_g_tls_password_get_value; ///
-  const(char)* function(GTlsPassword* password) c_g_tls_password_get_warning; ///
-  void function(GTlsPassword* password, const(char)* description) c_g_tls_password_set_description; ///
-  void function(GTlsPassword* password, GTlsPasswordFlags flags) c_g_tls_password_set_flags; ///
-  void function(GTlsPassword* password, const(ubyte)* value, ptrdiff_t length) c_g_tls_password_set_value; ///
-  void function(GTlsPassword* password, ubyte* value, ptrdiff_t length, GDestroyNotify destroy) c_g_tls_password_set_value_full; ///
-  void function(GTlsPassword* password, const(char)* warning) c_g_tls_password_set_warning; ///
-
-  // TlsServerConnection
-  GType function() c_g_tls_server_connection_get_type; ///
-  GIOStream* function(GIOStream* baseIoStream, GTlsCertificate* certificate, GError** _err) c_g_tls_server_connection_new; ///
-
-  // UnixConnection
-  GType function() c_g_unix_connection_get_type; ///
-  GCredentials* function(GUnixConnection* connection, GCancellable* cancellable, GError** _err) c_g_unix_connection_receive_credentials; ///
-  void function(GUnixConnection* connection, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_unix_connection_receive_credentials_async; ///
-  GCredentials* function(GUnixConnection* connection, GAsyncResult* result, GError** _err) c_g_unix_connection_receive_credentials_finish; ///
-  int function(GUnixConnection* connection, GCancellable* cancellable, GError** _err) c_g_unix_connection_receive_fd; ///
-  gboolean function(GUnixConnection* connection, GCancellable* cancellable, GError** _err) c_g_unix_connection_send_credentials; ///
-  void function(GUnixConnection* connection, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_unix_connection_send_credentials_async; ///
-  gboolean function(GUnixConnection* connection, GAsyncResult* result, GError** _err) c_g_unix_connection_send_credentials_finish; ///
-  gboolean function(GUnixConnection* connection, int fd, GCancellable* cancellable, GError** _err) c_g_unix_connection_send_fd; ///
-
-  // UnixCredentialsMessage
-  GType function() c_g_unix_credentials_message_get_type; ///
-  GSocketControlMessage* function() c_g_unix_credentials_message_new; ///
-  GSocketControlMessage* function(GCredentials* credentials) c_g_unix_credentials_message_new_with_credentials; ///
-  gboolean function() c_g_unix_credentials_message_is_supported; ///
-  GCredentials* function(GUnixCredentialsMessage* message) c_g_unix_credentials_message_get_credentials; ///
-
-  // UnixFDList
-  GType function() c_g_unix_fd_list_get_type; ///
-  GUnixFDList* function() c_g_unix_fd_list_new; ///
-  GUnixFDList* function(const(int)* fds, int nFds) c_g_unix_fd_list_new_from_array; ///
-  int function(GUnixFDList* list, int fd, GError** _err) c_g_unix_fd_list_append; ///
-  int function(GUnixFDList* list, int index, GError** _err) c_g_unix_fd_list_get; ///
-  int function(GUnixFDList* list) c_g_unix_fd_list_get_length; ///
-  const(int)* function(GUnixFDList* list, int* length) c_g_unix_fd_list_peek_fds; ///
-  int* function(GUnixFDList* list, int* length) c_g_unix_fd_list_steal_fds; ///
-
-  // UnixSocketAddress
-  GType function() c_g_unix_socket_address_get_type; ///
-  GSocketAddress* function(const(char)* path) c_g_unix_socket_address_new; ///
-  GSocketAddress* function(const(char)* path, int pathLen) c_g_unix_socket_address_new_abstract; ///
-  GSocketAddress* function(const(char)* path, int pathLen, GUnixSocketAddressType type) c_g_unix_socket_address_new_with_type; ///
-  gboolean function() c_g_unix_socket_address_abstract_names_supported; ///
-  GUnixSocketAddressType function(GUnixSocketAddress* address) c_g_unix_socket_address_get_address_type; ///
-  gboolean function(GUnixSocketAddress* address) c_g_unix_socket_address_get_is_abstract; ///
-  const(char)* function(GUnixSocketAddress* address) c_g_unix_socket_address_get_path; ///
-  size_t function(GUnixSocketAddress* address) c_g_unix_socket_address_get_path_len; ///
-
-  // Vfs
-  GType function() c_g_vfs_get_type; ///
-  GVfs* function() c_g_vfs_get_default; ///
-  GVfs* function() c_g_vfs_get_local; ///
-  GFile* function(GVfs* vfs, const(char)* path) c_g_vfs_get_file_for_path; ///
-  GFile* function(GVfs* vfs, const(char)* uri) c_g_vfs_get_file_for_uri; ///
-  const(char*)* function(GVfs* vfs) c_g_vfs_get_supported_uri_schemes; ///
-  gboolean function(GVfs* vfs) c_g_vfs_is_active; ///
-  GFile* function(GVfs* vfs, const(char)* parseName) c_g_vfs_parse_name; ///
-  gboolean function(GVfs* vfs, const(char)* scheme, GVfsFileLookupFunc uriFunc, void* uriData, GDestroyNotify uriDestroy, GVfsFileLookupFunc parseNameFunc, void* parseNameData, GDestroyNotify parseNameDestroy) c_g_vfs_register_uri_scheme; ///
-  gboolean function(GVfs* vfs, const(char)* scheme) c_g_vfs_unregister_uri_scheme; ///
-
-  // Volume
-  GType function() c_g_volume_get_type; ///
-  gboolean function(GVolume* volume) c_g_volume_can_eject; ///
-  gboolean function(GVolume* volume) c_g_volume_can_mount; ///
-  void function(GVolume* volume, GMountUnmountFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_volume_eject; ///
-  gboolean function(GVolume* volume, GAsyncResult* result, GError** _err) c_g_volume_eject_finish; ///
-  void function(GVolume* volume, GMountUnmountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_volume_eject_with_operation; ///
-  gboolean function(GVolume* volume, GAsyncResult* result, GError** _err) c_g_volume_eject_with_operation_finish; ///
-  char** function(GVolume* volume) c_g_volume_enumerate_identifiers; ///
-  GFile* function(GVolume* volume) c_g_volume_get_activation_root; ///
-  GDrive* function(GVolume* volume) c_g_volume_get_drive; ///
-  GIcon* function(GVolume* volume) c_g_volume_get_icon; ///
-  char* function(GVolume* volume, const(char)* kind) c_g_volume_get_identifier; ///
-  GMount* function(GVolume* volume) c_g_volume_get_mount; ///
-  char* function(GVolume* volume) c_g_volume_get_name; ///
-  const(char)* function(GVolume* volume) c_g_volume_get_sort_key; ///
-  GIcon* function(GVolume* volume) c_g_volume_get_symbolic_icon; ///
-  char* function(GVolume* volume) c_g_volume_get_uuid; ///
-  void function(GVolume* volume, GMountMountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_volume_mount; ///
-  gboolean function(GVolume* volume, GAsyncResult* result, GError** _err) c_g_volume_mount_finish; ///
-  gboolean function(GVolume* volume) c_g_volume_should_automount; ///
-
-  // VolumeMonitor
-  GType function() c_g_volume_monitor_get_type; ///
-  GVolume* function(GMount* mount) c_g_volume_monitor_adopt_orphan_mount; ///
-  GVolumeMonitor* function() c_g_volume_monitor_get; ///
-  GList* function(GVolumeMonitor* volumeMonitor) c_g_volume_monitor_get_connected_drives; ///
-  GMount* function(GVolumeMonitor* volumeMonitor, const(char)* uuid) c_g_volume_monitor_get_mount_for_uuid; ///
-  GList* function(GVolumeMonitor* volumeMonitor) c_g_volume_monitor_get_mounts; ///
-  GVolume* function(GVolumeMonitor* volumeMonitor, const(char)* uuid) c_g_volume_monitor_get_volume_for_uuid; ///
-  GList* function(GVolumeMonitor* volumeMonitor) c_g_volume_monitor_get_volumes; ///
-
-  // ZlibCompressor
-  GType function() c_g_zlib_compressor_get_type; ///
-  GZlibCompressor* function(GZlibCompressorFormat format, int level) c_g_zlib_compressor_new; ///
-  GFileInfo* function(GZlibCompressor* compressor) c_g_zlib_compressor_get_file_info; ///
-  int function(GZlibCompressor* compressor) c_g_zlib_compressor_get_os; ///
-  void function(GZlibCompressor* compressor, GFileInfo* fileInfo) c_g_zlib_compressor_set_file_info; ///
-  void function(GZlibCompressor* compressor, int os) c_g_zlib_compressor_set_os; ///
-
-  // ZlibDecompressor
-  GType function() c_g_zlib_decompressor_get_type; ///
-  GZlibDecompressor* function(GZlibCompressorFormat format) c_g_zlib_decompressor_new; ///
-  GFileInfo* function(GZlibDecompressor* decompressor) c_g_zlib_decompressor_get_file_info; ///
-
-  // global
-  void function(GBusType busType, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_bus_get; ///
-  GDBusConnection* function(GAsyncResult* res, GError** _err) c_g_bus_get_finish; ///
-  GDBusConnection* function(GBusType busType, GCancellable* cancellable, GError** _err) c_g_bus_get_sync; ///
-  uint function(GBusType busType, const(char)* name, GBusNameOwnerFlags flags, GBusAcquiredCallback busAcquiredHandler, GBusNameAcquiredCallback nameAcquiredHandler, GBusNameLostCallback nameLostHandler, void* userData, GDestroyNotify userDataFreeFunc) c_g_bus_own_name; ///
-  uint function(GDBusConnection* connection, const(char)* name, GBusNameOwnerFlags flags, GBusNameAcquiredCallback nameAcquiredHandler, GBusNameLostCallback nameLostHandler, void* userData, GDestroyNotify userDataFreeFunc) c_g_bus_own_name_on_connection; ///
-  uint function(GDBusConnection* connection, const(char)* name, GBusNameOwnerFlags flags, GClosure* nameAcquiredClosure, GClosure* nameLostClosure) c_g_bus_own_name_on_connection_with_closures; ///
-  uint function(GBusType busType, const(char)* name, GBusNameOwnerFlags flags, GClosure* busAcquiredClosure, GClosure* nameAcquiredClosure, GClosure* nameLostClosure) c_g_bus_own_name_with_closures; ///
-  void function(uint ownerId) c_g_bus_unown_name; ///
-  void function(uint watcherId) c_g_bus_unwatch_name; ///
-  uint function(GBusType busType, const(char)* name, GBusNameWatcherFlags flags, GBusNameAppearedCallback nameAppearedHandler, GBusNameVanishedCallback nameVanishedHandler, void* userData, GDestroyNotify userDataFreeFunc) c_g_bus_watch_name; ///
-  uint function(GDBusConnection* connection, const(char)* name, GBusNameWatcherFlags flags, GBusNameAppearedCallback nameAppearedHandler, GBusNameVanishedCallback nameVanishedHandler, void* userData, GDestroyNotify userDataFreeFunc) c_g_bus_watch_name_on_connection; ///
-  uint function(GDBusConnection* connection, const(char)* name, GBusNameWatcherFlags flags, GClosure* nameAppearedClosure, GClosure* nameVanishedClosure) c_g_bus_watch_name_on_connection_with_closures; ///
-  uint function(GBusType busType, const(char)* name, GBusNameWatcherFlags flags, GClosure* nameAppearedClosure, GClosure* nameVanishedClosure) c_g_bus_watch_name_with_closures; ///
-  gboolean function(const(char)* type) c_g_content_type_can_be_executable; ///
-  gboolean function(const(char)* type1, const(char)* type2) c_g_content_type_equals; ///
-  char* function(const(char)* mimeType) c_g_content_type_from_mime_type; ///
-  char* function(const(char)* type) c_g_content_type_get_description; ///
-  char* function(const(char)* type) c_g_content_type_get_generic_icon_name; ///
-  GIcon* function(const(char)* type) c_g_content_type_get_icon; ///
-  const(char*)* function() c_g_content_type_get_mime_dirs; ///
-  char* function(const(char)* type) c_g_content_type_get_mime_type; ///
-  GIcon* function(const(char)* type) c_g_content_type_get_symbolic_icon; ///
-  char* function(const(char)* filename, const(ubyte)* data, size_t dataSize, gboolean* resultUncertain) c_g_content_type_guess; ///
-  char** function(GFile* root) c_g_content_type_guess_for_tree; ///
-  gboolean function(const(char)* type, const(char)* supertype) c_g_content_type_is_a; ///
-  gboolean function(const(char)* type, const(char)* mimeType) c_g_content_type_is_mime_type; ///
-  gboolean function(const(char)* type) c_g_content_type_is_unknown; ///
-  void function(const(char*)* dirs) c_g_content_type_set_mime_dirs; ///
-  GList* function() c_g_content_types_get_registered; ///
-  char* function(const(char)* string_) c_g_dbus_address_escape_value; ///
-  char* function(GBusType busType, GCancellable* cancellable, GError** _err) c_g_dbus_address_get_for_bus_sync; ///
-  void function(const(char)* address, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_g_dbus_address_get_stream; ///
-  GIOStream* function(GAsyncResult* res, char** outGuid, GError** _err) c_g_dbus_address_get_stream_finish; ///
-  GIOStream* function(const(char)* address, char** outGuid, GCancellable* cancellable, GError** _err) c_g_dbus_address_get_stream_sync; ///
-  char* function(const(char)* s) c_g_dbus_escape_object_path; ///
-  char* function(const(ubyte)* bytes) c_g_dbus_escape_object_path_bytestring; ///
-  char* function() c_g_dbus_generate_guid; ///
-  GVariant* function(const(GValue)* gvalue, const(GVariantType)* type) c_g_dbus_gvalue_to_gvariant; ///
-  void function(GVariant* value, GValue* outGvalue) c_g_dbus_gvariant_to_gvalue; ///
-  gboolean function(const(char)* string_) c_g_dbus_is_address; ///
-  gboolean function(const(char)* string_) c_g_dbus_is_error_name; ///
-  gboolean function(const(char)* string_) c_g_dbus_is_guid; ///
-  gboolean function(const(char)* string_) c_g_dbus_is_interface_name; ///
-  gboolean function(const(char)* string_) c_g_dbus_is_member_name; ///
-  gboolean function(const(char)* string_) c_g_dbus_is_name; ///
-  gboolean function(const(char)* string_, GError** _err) c_g_dbus_is_supported_address; ///
-  gboolean function(const(char)* string_) c_g_dbus_is_unique_name; ///
-  ubyte* function(const(char)* s) c_g_dbus_unescape_object_path; ///
-  GIOErrorEnum function(int errNo) c_g_io_error_from_errno; ///
-  GIOErrorEnum function(GFileError fileError) c_g_io_error_from_file_error; ///
-  GQuark function() c_g_io_error_quark; ///
-  GList* function(const(char)* dirname) c_g_io_modules_load_all_in_directory; ///
-  GList* function(const(char)* dirname, GIOModuleScope* scope_) c_g_io_modules_load_all_in_directory_with_scope; ///
-  void function(const(char)* dirname) c_g_io_modules_scan_all_in_directory; ///
-  void function(const(char)* dirname, GIOModuleScope* scope_) c_g_io_modules_scan_all_in_directory_with_scope; ///
-  void function() c_g_io_scheduler_cancel_all_jobs; ///
-  void function(GIOSchedulerJobFunc jobFunc, void* userData, GDestroyNotify notify, int ioPriority, GCancellable* cancellable) c_g_io_scheduler_push_job; ///
-  GSettingsBackend* function(const(char)* filename, const(char)* rootPath, const(char)* rootGroup) c_g_keyfile_settings_backend_new; ///
-  GSettingsBackend* function() c_g_memory_settings_backend_new; ///
-  void function() c_g_networking_init; ///
-  GSettingsBackend* function() c_g_null_settings_backend_new; ///
-  GSource* function(GObject* pollableStream) c_g_pollable_source_new; ///
-  GSource* function(GObject* pollableStream, GSource* childSource, GCancellable* cancellable) c_g_pollable_source_new_full; ///
-  ptrdiff_t function(GInputStream* stream, void* buffer, size_t count, gboolean blocking, GCancellable* cancellable, GError** _err) c_g_pollable_stream_read; ///
-  ptrdiff_t function(GOutputStream* stream, void* buffer, size_t count, gboolean blocking, GCancellable* cancellable, GError** _err) c_g_pollable_stream_write; ///
-  gboolean function(GOutputStream* stream, void* buffer, size_t count, gboolean blocking, size_t* bytesWritten, GCancellable* cancellable, GError** _err) c_g_pollable_stream_write_all; ///
-  char** function(const(char)* path, GResourceLookupFlags lookupFlags, GError** _err) c_g_resources_enumerate_children; ///
-  gboolean function(const(char)* path, GResourceLookupFlags lookupFlags, size_t* size, uint* flags, GError** _err) c_g_resources_get_info; ///
-  gboolean function(const(char)* path) c_g_resources_has_children; ///
-  GBytes* function(const(char)* path, GResourceLookupFlags lookupFlags, GError** _err) c_g_resources_lookup_data; ///
-  GInputStream* function(const(char)* path, GResourceLookupFlags lookupFlags, GError** _err) c_g_resources_open_stream; ///
-  void function(GResource* resource) c_g_resources_register; ///
-  void function(GResource* resource) c_g_resources_unregister; ///
-  void function(GObject* object, GAsyncReadyCallback callback, void* userData, GQuark domain, int code, const(char)* format,  ...) c_g_simple_async_report_error_in_idle; ///
-  void function(GObject* object, GAsyncReadyCallback callback, void* userData, const(GError)* error) c_g_simple_async_report_gerror_in_idle; ///
-  void function(GObject* object, GAsyncReadyCallback callback, void* userData, GError* error) c_g_simple_async_report_take_gerror_in_idle; ///
-
-  // DBusError
-  char* function(const(GError)* error) c_g_dbus_error_encode_gerror; ///
-  char* function(const(GError)* error) c_g_dbus_error_get_remote_error; ///
-  gboolean function(const(GError)* error) c_g_dbus_error_is_remote_error; ///
-  GError* function(const(char)* dbusErrorName, const(char)* dbusErrorMessage) c_g_dbus_error_new_for_dbus_error; ///
-  GQuark function() c_g_dbus_error_quark; ///
-  gboolean function(GQuark errorDomain, int errorCode, const(char)* dbusErrorName) c_g_dbus_error_register_error; ///
-  void function(const(char)* errorDomainQuarkName, size_t* quarkVolatile, const(GDBusErrorEntry)* entries, uint numEntries) c_g_dbus_error_register_error_domain; ///
-  void function(GError** error, const(char)* dbusErrorName, const(char)* dbusErrorMessage, const(char)* format,  ...) c_g_dbus_error_set_dbus_error; ///
-  void function(GError** error, const(char)* dbusErrorName, const(char)* dbusErrorMessage, const(char)* format, void* varArgs) c_g_dbus_error_set_dbus_error_valist; ///
-  gboolean function(GError* error) c_g_dbus_error_strip_remote_error; ///
-  gboolean function(GQuark errorDomain, int errorCode, const(char)* dbusErrorName) c_g_dbus_error_unregister_error; ///
-
-  // ResolverError
-  GQuark function() c_g_resolver_error_quark; ///
-
-  // ResourceError
-  GQuark function() c_g_resource_error_quark; ///
-
-  // TlsChannelBindingError
-  GQuark function() c_g_tls_channel_binding_error_quark; ///
-
-  // TlsError
-  GQuark function() c_g_tls_error_quark; ///
-}
+// Action
+private alias c_g_action_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_action_get_typeFn c_g_action_get_type; ///
+private alias c_g_action_name_is_validFn = extern(C) gboolean function(const(char)* actionName) nothrow;
+__gshared c_g_action_name_is_validFn c_g_action_name_is_valid; ///
+private alias c_g_action_parse_detailed_nameFn = extern(C) gboolean function(const(char)* detailedName, char** actionName, GVariant** targetValue, GError** _err) nothrow;
+__gshared c_g_action_parse_detailed_nameFn c_g_action_parse_detailed_name; ///
+private alias c_g_action_print_detailed_nameFn = extern(C) char* function(const(char)* actionName, GVariant* targetValue) nothrow;
+__gshared c_g_action_print_detailed_nameFn c_g_action_print_detailed_name; ///
+private alias c_g_action_activateFn = extern(C) void function(GAction* action, GVariant* parameter) nothrow;
+__gshared c_g_action_activateFn c_g_action_activate; ///
+private alias c_g_action_change_stateFn = extern(C) void function(GAction* action, GVariant* value) nothrow;
+__gshared c_g_action_change_stateFn c_g_action_change_state; ///
+private alias c_g_action_get_enabledFn = extern(C) gboolean function(GAction* action) nothrow;
+__gshared c_g_action_get_enabledFn c_g_action_get_enabled; ///
+private alias c_g_action_get_nameFn = extern(C) const(char)* function(GAction* action) nothrow;
+__gshared c_g_action_get_nameFn c_g_action_get_name; ///
+private alias c_g_action_get_parameter_typeFn = extern(C) const(GVariantType)* function(GAction* action) nothrow;
+__gshared c_g_action_get_parameter_typeFn c_g_action_get_parameter_type; ///
+private alias c_g_action_get_stateFn = extern(C) GVariant* function(GAction* action) nothrow;
+__gshared c_g_action_get_stateFn c_g_action_get_state; ///
+private alias c_g_action_get_state_hintFn = extern(C) GVariant* function(GAction* action) nothrow;
+__gshared c_g_action_get_state_hintFn c_g_action_get_state_hint; ///
+private alias c_g_action_get_state_typeFn = extern(C) const(GVariantType)* function(GAction* action) nothrow;
+__gshared c_g_action_get_state_typeFn c_g_action_get_state_type; ///
+
+// ActionGroup
+private alias c_g_action_group_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_action_group_get_typeFn c_g_action_group_get_type; ///
+private alias c_g_action_group_action_addedFn = extern(C) void function(GActionGroup* actionGroup, const(char)* actionName) nothrow;
+__gshared c_g_action_group_action_addedFn c_g_action_group_action_added; ///
+private alias c_g_action_group_action_enabled_changedFn = extern(C) void function(GActionGroup* actionGroup, const(char)* actionName, gboolean enabled) nothrow;
+__gshared c_g_action_group_action_enabled_changedFn c_g_action_group_action_enabled_changed; ///
+private alias c_g_action_group_action_removedFn = extern(C) void function(GActionGroup* actionGroup, const(char)* actionName) nothrow;
+__gshared c_g_action_group_action_removedFn c_g_action_group_action_removed; ///
+private alias c_g_action_group_action_state_changedFn = extern(C) void function(GActionGroup* actionGroup, const(char)* actionName, GVariant* state) nothrow;
+__gshared c_g_action_group_action_state_changedFn c_g_action_group_action_state_changed; ///
+private alias c_g_action_group_activate_actionFn = extern(C) void function(GActionGroup* actionGroup, const(char)* actionName, GVariant* parameter) nothrow;
+__gshared c_g_action_group_activate_actionFn c_g_action_group_activate_action; ///
+private alias c_g_action_group_change_action_stateFn = extern(C) void function(GActionGroup* actionGroup, const(char)* actionName, GVariant* value) nothrow;
+__gshared c_g_action_group_change_action_stateFn c_g_action_group_change_action_state; ///
+private alias c_g_action_group_get_action_enabledFn = extern(C) gboolean function(GActionGroup* actionGroup, const(char)* actionName) nothrow;
+__gshared c_g_action_group_get_action_enabledFn c_g_action_group_get_action_enabled; ///
+private alias c_g_action_group_get_action_parameter_typeFn = extern(C) const(GVariantType)* function(GActionGroup* actionGroup, const(char)* actionName) nothrow;
+__gshared c_g_action_group_get_action_parameter_typeFn c_g_action_group_get_action_parameter_type; ///
+private alias c_g_action_group_get_action_stateFn = extern(C) GVariant* function(GActionGroup* actionGroup, const(char)* actionName) nothrow;
+__gshared c_g_action_group_get_action_stateFn c_g_action_group_get_action_state; ///
+private alias c_g_action_group_get_action_state_hintFn = extern(C) GVariant* function(GActionGroup* actionGroup, const(char)* actionName) nothrow;
+__gshared c_g_action_group_get_action_state_hintFn c_g_action_group_get_action_state_hint; ///
+private alias c_g_action_group_get_action_state_typeFn = extern(C) const(GVariantType)* function(GActionGroup* actionGroup, const(char)* actionName) nothrow;
+__gshared c_g_action_group_get_action_state_typeFn c_g_action_group_get_action_state_type; ///
+private alias c_g_action_group_has_actionFn = extern(C) gboolean function(GActionGroup* actionGroup, const(char)* actionName) nothrow;
+__gshared c_g_action_group_has_actionFn c_g_action_group_has_action; ///
+private alias c_g_action_group_list_actionsFn = extern(C) char** function(GActionGroup* actionGroup) nothrow;
+__gshared c_g_action_group_list_actionsFn c_g_action_group_list_actions; ///
+private alias c_g_action_group_query_actionFn = extern(C) gboolean function(GActionGroup* actionGroup, const(char)* actionName, gboolean* enabled, const(GVariantType*)* parameterType, const(GVariantType*)* stateType, GVariant** stateHint, GVariant** state) nothrow;
+__gshared c_g_action_group_query_actionFn c_g_action_group_query_action; ///
+
+// ActionMap
+private alias c_g_action_map_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_action_map_get_typeFn c_g_action_map_get_type; ///
+private alias c_g_action_map_add_actionFn = extern(C) void function(GActionMap* actionMap, GAction* action) nothrow;
+__gshared c_g_action_map_add_actionFn c_g_action_map_add_action; ///
+private alias c_g_action_map_add_action_entriesFn = extern(C) void function(GActionMap* actionMap, const(GActionEntry)* entries, int nEntries, void* userData) nothrow;
+__gshared c_g_action_map_add_action_entriesFn c_g_action_map_add_action_entries; ///
+private alias c_g_action_map_lookup_actionFn = extern(C) GAction* function(GActionMap* actionMap, const(char)* actionName) nothrow;
+__gshared c_g_action_map_lookup_actionFn c_g_action_map_lookup_action; ///
+private alias c_g_action_map_remove_actionFn = extern(C) void function(GActionMap* actionMap, const(char)* actionName) nothrow;
+__gshared c_g_action_map_remove_actionFn c_g_action_map_remove_action; ///
+private alias c_g_action_map_remove_action_entriesFn = extern(C) void function(GActionMap* actionMap, const(GActionEntry)* entries, int nEntries) nothrow;
+__gshared c_g_action_map_remove_action_entriesFn c_g_action_map_remove_action_entries; ///
+
+// AppInfo
+private alias c_g_app_info_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_app_info_get_typeFn c_g_app_info_get_type; ///
+private alias c_g_app_info_create_from_commandlineFn = extern(C) GAppInfo* function(const(char)* commandline, const(char)* applicationName, GAppInfoCreateFlags flags, GError** _err) nothrow;
+__gshared c_g_app_info_create_from_commandlineFn c_g_app_info_create_from_commandline; ///
+private alias c_g_app_info_get_allFn = extern(C) GList* function() nothrow;
+__gshared c_g_app_info_get_allFn c_g_app_info_get_all; ///
+private alias c_g_app_info_get_all_for_typeFn = extern(C) GList* function(const(char)* contentType) nothrow;
+__gshared c_g_app_info_get_all_for_typeFn c_g_app_info_get_all_for_type; ///
+private alias c_g_app_info_get_default_for_typeFn = extern(C) GAppInfo* function(const(char)* contentType, gboolean mustSupportUris) nothrow;
+__gshared c_g_app_info_get_default_for_typeFn c_g_app_info_get_default_for_type; ///
+private alias c_g_app_info_get_default_for_type_asyncFn = extern(C) void function(const(char)* contentType, gboolean mustSupportUris, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_app_info_get_default_for_type_asyncFn c_g_app_info_get_default_for_type_async; ///
+private alias c_g_app_info_get_default_for_type_finishFn = extern(C) GAppInfo* function(GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_app_info_get_default_for_type_finishFn c_g_app_info_get_default_for_type_finish; ///
+private alias c_g_app_info_get_default_for_uri_schemeFn = extern(C) GAppInfo* function(const(char)* uriScheme) nothrow;
+__gshared c_g_app_info_get_default_for_uri_schemeFn c_g_app_info_get_default_for_uri_scheme; ///
+private alias c_g_app_info_get_default_for_uri_scheme_asyncFn = extern(C) void function(const(char)* uriScheme, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_app_info_get_default_for_uri_scheme_asyncFn c_g_app_info_get_default_for_uri_scheme_async; ///
+private alias c_g_app_info_get_default_for_uri_scheme_finishFn = extern(C) GAppInfo* function(GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_app_info_get_default_for_uri_scheme_finishFn c_g_app_info_get_default_for_uri_scheme_finish; ///
+private alias c_g_app_info_get_fallback_for_typeFn = extern(C) GList* function(const(char)* contentType) nothrow;
+__gshared c_g_app_info_get_fallback_for_typeFn c_g_app_info_get_fallback_for_type; ///
+private alias c_g_app_info_get_recommended_for_typeFn = extern(C) GList* function(const(char)* contentType) nothrow;
+__gshared c_g_app_info_get_recommended_for_typeFn c_g_app_info_get_recommended_for_type; ///
+private alias c_g_app_info_launch_default_for_uriFn = extern(C) gboolean function(const(char)* uri, GAppLaunchContext* context, GError** _err) nothrow;
+__gshared c_g_app_info_launch_default_for_uriFn c_g_app_info_launch_default_for_uri; ///
+private alias c_g_app_info_launch_default_for_uri_asyncFn = extern(C) void function(const(char)* uri, GAppLaunchContext* context, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_app_info_launch_default_for_uri_asyncFn c_g_app_info_launch_default_for_uri_async; ///
+private alias c_g_app_info_launch_default_for_uri_finishFn = extern(C) gboolean function(GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_app_info_launch_default_for_uri_finishFn c_g_app_info_launch_default_for_uri_finish; ///
+private alias c_g_app_info_reset_type_associationsFn = extern(C) void function(const(char)* contentType) nothrow;
+__gshared c_g_app_info_reset_type_associationsFn c_g_app_info_reset_type_associations; ///
+private alias c_g_app_info_add_supports_typeFn = extern(C) gboolean function(GAppInfo* appinfo, const(char)* contentType, GError** _err) nothrow;
+__gshared c_g_app_info_add_supports_typeFn c_g_app_info_add_supports_type; ///
+private alias c_g_app_info_can_deleteFn = extern(C) gboolean function(GAppInfo* appinfo) nothrow;
+__gshared c_g_app_info_can_deleteFn c_g_app_info_can_delete; ///
+private alias c_g_app_info_can_remove_supports_typeFn = extern(C) gboolean function(GAppInfo* appinfo) nothrow;
+__gshared c_g_app_info_can_remove_supports_typeFn c_g_app_info_can_remove_supports_type; ///
+private alias c_g_app_info_deleteFn = extern(C) gboolean function(GAppInfo* appinfo) nothrow;
+__gshared c_g_app_info_deleteFn c_g_app_info_delete; ///
+private alias c_g_app_info_dupFn = extern(C) GAppInfo* function(GAppInfo* appinfo) nothrow;
+__gshared c_g_app_info_dupFn c_g_app_info_dup; ///
+private alias c_g_app_info_equalFn = extern(C) gboolean function(GAppInfo* appinfo1, GAppInfo* appinfo2) nothrow;
+__gshared c_g_app_info_equalFn c_g_app_info_equal; ///
+private alias c_g_app_info_get_commandlineFn = extern(C) const(char)* function(GAppInfo* appinfo) nothrow;
+__gshared c_g_app_info_get_commandlineFn c_g_app_info_get_commandline; ///
+private alias c_g_app_info_get_descriptionFn = extern(C) const(char)* function(GAppInfo* appinfo) nothrow;
+__gshared c_g_app_info_get_descriptionFn c_g_app_info_get_description; ///
+private alias c_g_app_info_get_display_nameFn = extern(C) const(char)* function(GAppInfo* appinfo) nothrow;
+__gshared c_g_app_info_get_display_nameFn c_g_app_info_get_display_name; ///
+private alias c_g_app_info_get_executableFn = extern(C) const(char)* function(GAppInfo* appinfo) nothrow;
+__gshared c_g_app_info_get_executableFn c_g_app_info_get_executable; ///
+private alias c_g_app_info_get_iconFn = extern(C) GIcon* function(GAppInfo* appinfo) nothrow;
+__gshared c_g_app_info_get_iconFn c_g_app_info_get_icon; ///
+private alias c_g_app_info_get_idFn = extern(C) const(char)* function(GAppInfo* appinfo) nothrow;
+__gshared c_g_app_info_get_idFn c_g_app_info_get_id; ///
+private alias c_g_app_info_get_nameFn = extern(C) const(char)* function(GAppInfo* appinfo) nothrow;
+__gshared c_g_app_info_get_nameFn c_g_app_info_get_name; ///
+private alias c_g_app_info_get_supported_typesFn = extern(C) const(char*)* function(GAppInfo* appinfo) nothrow;
+__gshared c_g_app_info_get_supported_typesFn c_g_app_info_get_supported_types; ///
+private alias c_g_app_info_launchFn = extern(C) gboolean function(GAppInfo* appinfo, GList* files, GAppLaunchContext* context, GError** _err) nothrow;
+__gshared c_g_app_info_launchFn c_g_app_info_launch; ///
+private alias c_g_app_info_launch_urisFn = extern(C) gboolean function(GAppInfo* appinfo, GList* uris, GAppLaunchContext* context, GError** _err) nothrow;
+__gshared c_g_app_info_launch_urisFn c_g_app_info_launch_uris; ///
+private alias c_g_app_info_launch_uris_asyncFn = extern(C) void function(GAppInfo* appinfo, GList* uris, GAppLaunchContext* context, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_app_info_launch_uris_asyncFn c_g_app_info_launch_uris_async; ///
+private alias c_g_app_info_launch_uris_finishFn = extern(C) gboolean function(GAppInfo* appinfo, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_app_info_launch_uris_finishFn c_g_app_info_launch_uris_finish; ///
+private alias c_g_app_info_remove_supports_typeFn = extern(C) gboolean function(GAppInfo* appinfo, const(char)* contentType, GError** _err) nothrow;
+__gshared c_g_app_info_remove_supports_typeFn c_g_app_info_remove_supports_type; ///
+private alias c_g_app_info_set_as_default_for_extensionFn = extern(C) gboolean function(GAppInfo* appinfo, const(char)* extension, GError** _err) nothrow;
+__gshared c_g_app_info_set_as_default_for_extensionFn c_g_app_info_set_as_default_for_extension; ///
+private alias c_g_app_info_set_as_default_for_typeFn = extern(C) gboolean function(GAppInfo* appinfo, const(char)* contentType, GError** _err) nothrow;
+__gshared c_g_app_info_set_as_default_for_typeFn c_g_app_info_set_as_default_for_type; ///
+private alias c_g_app_info_set_as_last_used_for_typeFn = extern(C) gboolean function(GAppInfo* appinfo, const(char)* contentType, GError** _err) nothrow;
+__gshared c_g_app_info_set_as_last_used_for_typeFn c_g_app_info_set_as_last_used_for_type; ///
+private alias c_g_app_info_should_showFn = extern(C) gboolean function(GAppInfo* appinfo) nothrow;
+__gshared c_g_app_info_should_showFn c_g_app_info_should_show; ///
+private alias c_g_app_info_supports_filesFn = extern(C) gboolean function(GAppInfo* appinfo) nothrow;
+__gshared c_g_app_info_supports_filesFn c_g_app_info_supports_files; ///
+private alias c_g_app_info_supports_urisFn = extern(C) gboolean function(GAppInfo* appinfo) nothrow;
+__gshared c_g_app_info_supports_urisFn c_g_app_info_supports_uris; ///
+
+// AppInfoMonitor
+private alias c_g_app_info_monitor_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_app_info_monitor_get_typeFn c_g_app_info_monitor_get_type; ///
+private alias c_g_app_info_monitor_getFn = extern(C) GAppInfoMonitor* function() nothrow;
+__gshared c_g_app_info_monitor_getFn c_g_app_info_monitor_get; ///
+
+// AppLaunchContext
+private alias c_g_app_launch_context_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_app_launch_context_get_typeFn c_g_app_launch_context_get_type; ///
+private alias c_g_app_launch_context_newFn = extern(C) GAppLaunchContext* function() nothrow;
+__gshared c_g_app_launch_context_newFn c_g_app_launch_context_new; ///
+private alias c_g_app_launch_context_get_displayFn = extern(C) char* function(GAppLaunchContext* context, GAppInfo* info, GList* files) nothrow;
+__gshared c_g_app_launch_context_get_displayFn c_g_app_launch_context_get_display; ///
+private alias c_g_app_launch_context_get_environmentFn = extern(C) char** function(GAppLaunchContext* context) nothrow;
+__gshared c_g_app_launch_context_get_environmentFn c_g_app_launch_context_get_environment; ///
+private alias c_g_app_launch_context_get_startup_notify_idFn = extern(C) char* function(GAppLaunchContext* context, GAppInfo* info, GList* files) nothrow;
+__gshared c_g_app_launch_context_get_startup_notify_idFn c_g_app_launch_context_get_startup_notify_id; ///
+private alias c_g_app_launch_context_launch_failedFn = extern(C) void function(GAppLaunchContext* context, const(char)* startupNotifyId) nothrow;
+__gshared c_g_app_launch_context_launch_failedFn c_g_app_launch_context_launch_failed; ///
+private alias c_g_app_launch_context_setenvFn = extern(C) void function(GAppLaunchContext* context, const(char)* variable, const(char)* value) nothrow;
+__gshared c_g_app_launch_context_setenvFn c_g_app_launch_context_setenv; ///
+private alias c_g_app_launch_context_unsetenvFn = extern(C) void function(GAppLaunchContext* context, const(char)* variable) nothrow;
+__gshared c_g_app_launch_context_unsetenvFn c_g_app_launch_context_unsetenv; ///
+
+// Application
+private alias c_g_application_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_application_get_typeFn c_g_application_get_type; ///
+private alias c_g_application_newFn = extern(C) GApplication* function(const(char)* applicationId, GApplicationFlags flags) nothrow;
+__gshared c_g_application_newFn c_g_application_new; ///
+private alias c_g_application_get_defaultFn = extern(C) GApplication* function() nothrow;
+__gshared c_g_application_get_defaultFn c_g_application_get_default; ///
+private alias c_g_application_id_is_validFn = extern(C) gboolean function(const(char)* applicationId) nothrow;
+__gshared c_g_application_id_is_validFn c_g_application_id_is_valid; ///
+private alias c_g_application_activateFn = extern(C) void function(GApplication* application) nothrow;
+__gshared c_g_application_activateFn c_g_application_activate; ///
+private alias c_g_application_add_main_optionFn = extern(C) void function(GApplication* application, const(char)* longName, char shortName, GOptionFlags flags, GOptionArg arg, const(char)* description, const(char)* argDescription) nothrow;
+__gshared c_g_application_add_main_optionFn c_g_application_add_main_option; ///
+private alias c_g_application_add_main_option_entriesFn = extern(C) void function(GApplication* application, const(GOptionEntry)* entries) nothrow;
+__gshared c_g_application_add_main_option_entriesFn c_g_application_add_main_option_entries; ///
+private alias c_g_application_add_option_groupFn = extern(C) void function(GApplication* application, GOptionGroup* group) nothrow;
+__gshared c_g_application_add_option_groupFn c_g_application_add_option_group; ///
+private alias c_g_application_bind_busy_propertyFn = extern(C) void function(GApplication* application, GObject* object, const(char)* property) nothrow;
+__gshared c_g_application_bind_busy_propertyFn c_g_application_bind_busy_property; ///
+private alias c_g_application_get_application_idFn = extern(C) const(char)* function(GApplication* application) nothrow;
+__gshared c_g_application_get_application_idFn c_g_application_get_application_id; ///
+private alias c_g_application_get_dbus_connectionFn = extern(C) GDBusConnection* function(GApplication* application) nothrow;
+__gshared c_g_application_get_dbus_connectionFn c_g_application_get_dbus_connection; ///
+private alias c_g_application_get_dbus_object_pathFn = extern(C) const(char)* function(GApplication* application) nothrow;
+__gshared c_g_application_get_dbus_object_pathFn c_g_application_get_dbus_object_path; ///
+private alias c_g_application_get_flagsFn = extern(C) GApplicationFlags function(GApplication* application) nothrow;
+__gshared c_g_application_get_flagsFn c_g_application_get_flags; ///
+private alias c_g_application_get_inactivity_timeoutFn = extern(C) uint function(GApplication* application) nothrow;
+__gshared c_g_application_get_inactivity_timeoutFn c_g_application_get_inactivity_timeout; ///
+private alias c_g_application_get_is_busyFn = extern(C) gboolean function(GApplication* application) nothrow;
+__gshared c_g_application_get_is_busyFn c_g_application_get_is_busy; ///
+private alias c_g_application_get_is_registeredFn = extern(C) gboolean function(GApplication* application) nothrow;
+__gshared c_g_application_get_is_registeredFn c_g_application_get_is_registered; ///
+private alias c_g_application_get_is_remoteFn = extern(C) gboolean function(GApplication* application) nothrow;
+__gshared c_g_application_get_is_remoteFn c_g_application_get_is_remote; ///
+private alias c_g_application_get_resource_base_pathFn = extern(C) const(char)* function(GApplication* application) nothrow;
+__gshared c_g_application_get_resource_base_pathFn c_g_application_get_resource_base_path; ///
+private alias c_g_application_get_versionFn = extern(C) const(char)* function(GApplication* application) nothrow;
+__gshared c_g_application_get_versionFn c_g_application_get_version; ///
+private alias c_g_application_holdFn = extern(C) void function(GApplication* application) nothrow;
+__gshared c_g_application_holdFn c_g_application_hold; ///
+private alias c_g_application_mark_busyFn = extern(C) void function(GApplication* application) nothrow;
+__gshared c_g_application_mark_busyFn c_g_application_mark_busy; ///
+private alias c_g_application_openFn = extern(C) void function(GApplication* application, GFile** files, int nFiles, const(char)* hint) nothrow;
+__gshared c_g_application_openFn c_g_application_open; ///
+private alias c_g_application_quitFn = extern(C) void function(GApplication* application) nothrow;
+__gshared c_g_application_quitFn c_g_application_quit; ///
+private alias c_g_application_registerFn = extern(C) gboolean function(GApplication* application, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_application_registerFn c_g_application_register; ///
+private alias c_g_application_releaseFn = extern(C) void function(GApplication* application) nothrow;
+__gshared c_g_application_releaseFn c_g_application_release; ///
+private alias c_g_application_runFn = extern(C) int function(GApplication* application, int argc, char** argv) nothrow;
+__gshared c_g_application_runFn c_g_application_run; ///
+private alias c_g_application_send_notificationFn = extern(C) void function(GApplication* application, const(char)* id, GNotification* notification) nothrow;
+__gshared c_g_application_send_notificationFn c_g_application_send_notification; ///
+private alias c_g_application_set_action_groupFn = extern(C) void function(GApplication* application, GActionGroup* actionGroup) nothrow;
+__gshared c_g_application_set_action_groupFn c_g_application_set_action_group; ///
+private alias c_g_application_set_application_idFn = extern(C) void function(GApplication* application, const(char)* applicationId) nothrow;
+__gshared c_g_application_set_application_idFn c_g_application_set_application_id; ///
+private alias c_g_application_set_defaultFn = extern(C) void function(GApplication* application) nothrow;
+__gshared c_g_application_set_defaultFn c_g_application_set_default; ///
+private alias c_g_application_set_flagsFn = extern(C) void function(GApplication* application, GApplicationFlags flags) nothrow;
+__gshared c_g_application_set_flagsFn c_g_application_set_flags; ///
+private alias c_g_application_set_inactivity_timeoutFn = extern(C) void function(GApplication* application, uint inactivityTimeout) nothrow;
+__gshared c_g_application_set_inactivity_timeoutFn c_g_application_set_inactivity_timeout; ///
+private alias c_g_application_set_option_context_descriptionFn = extern(C) void function(GApplication* application, const(char)* description) nothrow;
+__gshared c_g_application_set_option_context_descriptionFn c_g_application_set_option_context_description; ///
+private alias c_g_application_set_option_context_parameter_stringFn = extern(C) void function(GApplication* application, const(char)* parameterString) nothrow;
+__gshared c_g_application_set_option_context_parameter_stringFn c_g_application_set_option_context_parameter_string; ///
+private alias c_g_application_set_option_context_summaryFn = extern(C) void function(GApplication* application, const(char)* summary) nothrow;
+__gshared c_g_application_set_option_context_summaryFn c_g_application_set_option_context_summary; ///
+private alias c_g_application_set_resource_base_pathFn = extern(C) void function(GApplication* application, const(char)* resourcePath) nothrow;
+__gshared c_g_application_set_resource_base_pathFn c_g_application_set_resource_base_path; ///
+private alias c_g_application_set_versionFn = extern(C) void function(GApplication* application, const(char)* version_) nothrow;
+__gshared c_g_application_set_versionFn c_g_application_set_version; ///
+private alias c_g_application_unbind_busy_propertyFn = extern(C) void function(GApplication* application, GObject* object, const(char)* property) nothrow;
+__gshared c_g_application_unbind_busy_propertyFn c_g_application_unbind_busy_property; ///
+private alias c_g_application_unmark_busyFn = extern(C) void function(GApplication* application) nothrow;
+__gshared c_g_application_unmark_busyFn c_g_application_unmark_busy; ///
+private alias c_g_application_withdraw_notificationFn = extern(C) void function(GApplication* application, const(char)* id) nothrow;
+__gshared c_g_application_withdraw_notificationFn c_g_application_withdraw_notification; ///
+
+// ApplicationCommandLine
+private alias c_g_application_command_line_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_application_command_line_get_typeFn c_g_application_command_line_get_type; ///
+private alias c_g_application_command_line_create_file_for_argFn = extern(C) GFile* function(GApplicationCommandLine* cmdline, const(char)* arg) nothrow;
+__gshared c_g_application_command_line_create_file_for_argFn c_g_application_command_line_create_file_for_arg; ///
+private alias c_g_application_command_line_doneFn = extern(C) void function(GApplicationCommandLine* cmdline) nothrow;
+__gshared c_g_application_command_line_doneFn c_g_application_command_line_done; ///
+private alias c_g_application_command_line_get_argumentsFn = extern(C) char** function(GApplicationCommandLine* cmdline, int* argc) nothrow;
+__gshared c_g_application_command_line_get_argumentsFn c_g_application_command_line_get_arguments; ///
+private alias c_g_application_command_line_get_cwdFn = extern(C) const(char)* function(GApplicationCommandLine* cmdline) nothrow;
+__gshared c_g_application_command_line_get_cwdFn c_g_application_command_line_get_cwd; ///
+private alias c_g_application_command_line_get_environFn = extern(C) const(char*)* function(GApplicationCommandLine* cmdline) nothrow;
+__gshared c_g_application_command_line_get_environFn c_g_application_command_line_get_environ; ///
+private alias c_g_application_command_line_get_exit_statusFn = extern(C) int function(GApplicationCommandLine* cmdline) nothrow;
+__gshared c_g_application_command_line_get_exit_statusFn c_g_application_command_line_get_exit_status; ///
+private alias c_g_application_command_line_get_is_remoteFn = extern(C) gboolean function(GApplicationCommandLine* cmdline) nothrow;
+__gshared c_g_application_command_line_get_is_remoteFn c_g_application_command_line_get_is_remote; ///
+private alias c_g_application_command_line_get_options_dictFn = extern(C) GVariantDict* function(GApplicationCommandLine* cmdline) nothrow;
+__gshared c_g_application_command_line_get_options_dictFn c_g_application_command_line_get_options_dict; ///
+private alias c_g_application_command_line_get_platform_dataFn = extern(C) GVariant* function(GApplicationCommandLine* cmdline) nothrow;
+__gshared c_g_application_command_line_get_platform_dataFn c_g_application_command_line_get_platform_data; ///
+private alias c_g_application_command_line_get_stdinFn = extern(C) GInputStream* function(GApplicationCommandLine* cmdline) nothrow;
+__gshared c_g_application_command_line_get_stdinFn c_g_application_command_line_get_stdin; ///
+private alias c_g_application_command_line_getenvFn = extern(C) const(char)* function(GApplicationCommandLine* cmdline, const(char)* name) nothrow;
+__gshared c_g_application_command_line_getenvFn c_g_application_command_line_getenv; ///
+private alias c_g_application_command_line_printFn = extern(C) void function(GApplicationCommandLine* cmdline, const(char)* format,  ...) nothrow;
+__gshared c_g_application_command_line_printFn c_g_application_command_line_print; ///
+private alias c_g_application_command_line_print_literalFn = extern(C) void function(GApplicationCommandLine* cmdline, const(char)* message) nothrow;
+__gshared c_g_application_command_line_print_literalFn c_g_application_command_line_print_literal; ///
+private alias c_g_application_command_line_printerrFn = extern(C) void function(GApplicationCommandLine* cmdline, const(char)* format,  ...) nothrow;
+__gshared c_g_application_command_line_printerrFn c_g_application_command_line_printerr; ///
+private alias c_g_application_command_line_printerr_literalFn = extern(C) void function(GApplicationCommandLine* cmdline, const(char)* message) nothrow;
+__gshared c_g_application_command_line_printerr_literalFn c_g_application_command_line_printerr_literal; ///
+private alias c_g_application_command_line_set_exit_statusFn = extern(C) void function(GApplicationCommandLine* cmdline, int exitStatus) nothrow;
+__gshared c_g_application_command_line_set_exit_statusFn c_g_application_command_line_set_exit_status; ///
+
+// AsyncInitable
+private alias c_g_async_initable_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_async_initable_get_typeFn c_g_async_initable_get_type; ///
+private alias c_g_async_initable_new_asyncFn = extern(C) void function(GType objectType, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData, const(char)* firstPropertyName,  ...) nothrow;
+__gshared c_g_async_initable_new_asyncFn c_g_async_initable_new_async; ///
+private alias c_g_async_initable_new_valist_asyncFn = extern(C) void function(GType objectType, const(char)* firstPropertyName, void* varArgs, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_async_initable_new_valist_asyncFn c_g_async_initable_new_valist_async; ///
+private alias c_g_async_initable_newv_asyncFn = extern(C) void function(GType objectType, uint nParameters, GParameter* parameters, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_async_initable_newv_asyncFn c_g_async_initable_newv_async; ///
+private alias c_g_async_initable_init_asyncFn = extern(C) void function(GAsyncInitable* initable, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_async_initable_init_asyncFn c_g_async_initable_init_async; ///
+private alias c_g_async_initable_init_finishFn = extern(C) gboolean function(GAsyncInitable* initable, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_async_initable_init_finishFn c_g_async_initable_init_finish; ///
+private alias c_g_async_initable_new_finishFn = extern(C) GObject* function(GAsyncInitable* initable, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_async_initable_new_finishFn c_g_async_initable_new_finish; ///
+
+// AsyncResult
+private alias c_g_async_result_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_async_result_get_typeFn c_g_async_result_get_type; ///
+private alias c_g_async_result_get_source_objectFn = extern(C) GObject* function(GAsyncResult* res) nothrow;
+__gshared c_g_async_result_get_source_objectFn c_g_async_result_get_source_object; ///
+private alias c_g_async_result_get_user_dataFn = extern(C) void* function(GAsyncResult* res) nothrow;
+__gshared c_g_async_result_get_user_dataFn c_g_async_result_get_user_data; ///
+private alias c_g_async_result_is_taggedFn = extern(C) gboolean function(GAsyncResult* res, void* sourceTag) nothrow;
+__gshared c_g_async_result_is_taggedFn c_g_async_result_is_tagged; ///
+private alias c_g_async_result_legacy_propagate_errorFn = extern(C) gboolean function(GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_async_result_legacy_propagate_errorFn c_g_async_result_legacy_propagate_error; ///
+
+// BufferedInputStream
+private alias c_g_buffered_input_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_buffered_input_stream_get_typeFn c_g_buffered_input_stream_get_type; ///
+private alias c_g_buffered_input_stream_newFn = extern(C) GInputStream* function(GInputStream* baseStream) nothrow;
+__gshared c_g_buffered_input_stream_newFn c_g_buffered_input_stream_new; ///
+private alias c_g_buffered_input_stream_new_sizedFn = extern(C) GInputStream* function(GInputStream* baseStream, size_t size) nothrow;
+__gshared c_g_buffered_input_stream_new_sizedFn c_g_buffered_input_stream_new_sized; ///
+private alias c_g_buffered_input_stream_fillFn = extern(C) ptrdiff_t function(GBufferedInputStream* stream, ptrdiff_t count, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_buffered_input_stream_fillFn c_g_buffered_input_stream_fill; ///
+private alias c_g_buffered_input_stream_fill_asyncFn = extern(C) void function(GBufferedInputStream* stream, ptrdiff_t count, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_buffered_input_stream_fill_asyncFn c_g_buffered_input_stream_fill_async; ///
+private alias c_g_buffered_input_stream_fill_finishFn = extern(C) ptrdiff_t function(GBufferedInputStream* stream, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_buffered_input_stream_fill_finishFn c_g_buffered_input_stream_fill_finish; ///
+private alias c_g_buffered_input_stream_get_availableFn = extern(C) size_t function(GBufferedInputStream* stream) nothrow;
+__gshared c_g_buffered_input_stream_get_availableFn c_g_buffered_input_stream_get_available; ///
+private alias c_g_buffered_input_stream_get_buffer_sizeFn = extern(C) size_t function(GBufferedInputStream* stream) nothrow;
+__gshared c_g_buffered_input_stream_get_buffer_sizeFn c_g_buffered_input_stream_get_buffer_size; ///
+private alias c_g_buffered_input_stream_peekFn = extern(C) size_t function(GBufferedInputStream* stream, void* buffer, size_t offset, size_t count) nothrow;
+__gshared c_g_buffered_input_stream_peekFn c_g_buffered_input_stream_peek; ///
+private alias c_g_buffered_input_stream_peek_bufferFn = extern(C) void* function(GBufferedInputStream* stream, size_t* count) nothrow;
+__gshared c_g_buffered_input_stream_peek_bufferFn c_g_buffered_input_stream_peek_buffer; ///
+private alias c_g_buffered_input_stream_read_byteFn = extern(C) int function(GBufferedInputStream* stream, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_buffered_input_stream_read_byteFn c_g_buffered_input_stream_read_byte; ///
+private alias c_g_buffered_input_stream_set_buffer_sizeFn = extern(C) void function(GBufferedInputStream* stream, size_t size) nothrow;
+__gshared c_g_buffered_input_stream_set_buffer_sizeFn c_g_buffered_input_stream_set_buffer_size; ///
+
+// BufferedOutputStream
+private alias c_g_buffered_output_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_buffered_output_stream_get_typeFn c_g_buffered_output_stream_get_type; ///
+private alias c_g_buffered_output_stream_newFn = extern(C) GOutputStream* function(GOutputStream* baseStream) nothrow;
+__gshared c_g_buffered_output_stream_newFn c_g_buffered_output_stream_new; ///
+private alias c_g_buffered_output_stream_new_sizedFn = extern(C) GOutputStream* function(GOutputStream* baseStream, size_t size) nothrow;
+__gshared c_g_buffered_output_stream_new_sizedFn c_g_buffered_output_stream_new_sized; ///
+private alias c_g_buffered_output_stream_get_auto_growFn = extern(C) gboolean function(GBufferedOutputStream* stream) nothrow;
+__gshared c_g_buffered_output_stream_get_auto_growFn c_g_buffered_output_stream_get_auto_grow; ///
+private alias c_g_buffered_output_stream_get_buffer_sizeFn = extern(C) size_t function(GBufferedOutputStream* stream) nothrow;
+__gshared c_g_buffered_output_stream_get_buffer_sizeFn c_g_buffered_output_stream_get_buffer_size; ///
+private alias c_g_buffered_output_stream_set_auto_growFn = extern(C) void function(GBufferedOutputStream* stream, gboolean autoGrow) nothrow;
+__gshared c_g_buffered_output_stream_set_auto_growFn c_g_buffered_output_stream_set_auto_grow; ///
+private alias c_g_buffered_output_stream_set_buffer_sizeFn = extern(C) void function(GBufferedOutputStream* stream, size_t size) nothrow;
+__gshared c_g_buffered_output_stream_set_buffer_sizeFn c_g_buffered_output_stream_set_buffer_size; ///
+
+// BytesIcon
+private alias c_g_bytes_icon_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_bytes_icon_get_typeFn c_g_bytes_icon_get_type; ///
+private alias c_g_bytes_icon_newFn = extern(C) GIcon* function(GBytes* bytes) nothrow;
+__gshared c_g_bytes_icon_newFn c_g_bytes_icon_new; ///
+private alias c_g_bytes_icon_get_bytesFn = extern(C) GBytes* function(GBytesIcon* icon) nothrow;
+__gshared c_g_bytes_icon_get_bytesFn c_g_bytes_icon_get_bytes; ///
+
+// Cancellable
+private alias c_g_cancellable_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_cancellable_get_typeFn c_g_cancellable_get_type; ///
+private alias c_g_cancellable_newFn = extern(C) GCancellable* function() nothrow;
+__gshared c_g_cancellable_newFn c_g_cancellable_new; ///
+private alias c_g_cancellable_get_currentFn = extern(C) GCancellable* function() nothrow;
+__gshared c_g_cancellable_get_currentFn c_g_cancellable_get_current; ///
+private alias c_g_cancellable_cancelFn = extern(C) void function(GCancellable* cancellable) nothrow;
+__gshared c_g_cancellable_cancelFn c_g_cancellable_cancel; ///
+private alias c_g_cancellable_connectFn = extern(C) gulong function(GCancellable* cancellable, GCancellableConnectFunc callback, void* data, GDestroyNotify dataDestroyFunc) nothrow;
+__gshared c_g_cancellable_connectFn c_g_cancellable_connect; ///
+private alias c_g_cancellable_disconnectFn = extern(C) void function(GCancellable* cancellable, gulong handlerId) nothrow;
+__gshared c_g_cancellable_disconnectFn c_g_cancellable_disconnect; ///
+private alias c_g_cancellable_get_fdFn = extern(C) int function(GCancellable* cancellable) nothrow;
+__gshared c_g_cancellable_get_fdFn c_g_cancellable_get_fd; ///
+private alias c_g_cancellable_is_cancelledFn = extern(C) gboolean function(GCancellable* cancellable) nothrow;
+__gshared c_g_cancellable_is_cancelledFn c_g_cancellable_is_cancelled; ///
+private alias c_g_cancellable_make_pollfdFn = extern(C) gboolean function(GCancellable* cancellable, GPollFD* pollfd) nothrow;
+__gshared c_g_cancellable_make_pollfdFn c_g_cancellable_make_pollfd; ///
+private alias c_g_cancellable_pop_currentFn = extern(C) void function(GCancellable* cancellable) nothrow;
+__gshared c_g_cancellable_pop_currentFn c_g_cancellable_pop_current; ///
+private alias c_g_cancellable_push_currentFn = extern(C) void function(GCancellable* cancellable) nothrow;
+__gshared c_g_cancellable_push_currentFn c_g_cancellable_push_current; ///
+private alias c_g_cancellable_release_fdFn = extern(C) void function(GCancellable* cancellable) nothrow;
+__gshared c_g_cancellable_release_fdFn c_g_cancellable_release_fd; ///
+private alias c_g_cancellable_resetFn = extern(C) void function(GCancellable* cancellable) nothrow;
+__gshared c_g_cancellable_resetFn c_g_cancellable_reset; ///
+private alias c_g_cancellable_set_error_if_cancelledFn = extern(C) gboolean function(GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_cancellable_set_error_if_cancelledFn c_g_cancellable_set_error_if_cancelled; ///
+private alias c_g_cancellable_source_newFn = extern(C) GSource* function(GCancellable* cancellable) nothrow;
+__gshared c_g_cancellable_source_newFn c_g_cancellable_source_new; ///
+
+// CharsetConverter
+private alias c_g_charset_converter_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_charset_converter_get_typeFn c_g_charset_converter_get_type; ///
+private alias c_g_charset_converter_newFn = extern(C) GCharsetConverter* function(const(char)* toCharset, const(char)* fromCharset, GError** _err) nothrow;
+__gshared c_g_charset_converter_newFn c_g_charset_converter_new; ///
+private alias c_g_charset_converter_get_num_fallbacksFn = extern(C) uint function(GCharsetConverter* converter) nothrow;
+__gshared c_g_charset_converter_get_num_fallbacksFn c_g_charset_converter_get_num_fallbacks; ///
+private alias c_g_charset_converter_get_use_fallbackFn = extern(C) gboolean function(GCharsetConverter* converter) nothrow;
+__gshared c_g_charset_converter_get_use_fallbackFn c_g_charset_converter_get_use_fallback; ///
+private alias c_g_charset_converter_set_use_fallbackFn = extern(C) void function(GCharsetConverter* converter, gboolean useFallback) nothrow;
+__gshared c_g_charset_converter_set_use_fallbackFn c_g_charset_converter_set_use_fallback; ///
+
+// Converter
+private alias c_g_converter_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_converter_get_typeFn c_g_converter_get_type; ///
+private alias c_g_converter_convertFn = extern(C) GConverterResult function(GConverter* converter, void* inbuf, size_t inbufSize, void* outbuf, size_t outbufSize, GConverterFlags flags, size_t* bytesRead, size_t* bytesWritten, GError** _err) nothrow;
+__gshared c_g_converter_convertFn c_g_converter_convert; ///
+private alias c_g_converter_convert_bytesFn = extern(C) GBytes* function(GConverter* converter, GBytes* bytes, GError** _err) nothrow;
+__gshared c_g_converter_convert_bytesFn c_g_converter_convert_bytes; ///
+private alias c_g_converter_resetFn = extern(C) void function(GConverter* converter) nothrow;
+__gshared c_g_converter_resetFn c_g_converter_reset; ///
+
+// ConverterInputStream
+private alias c_g_converter_input_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_converter_input_stream_get_typeFn c_g_converter_input_stream_get_type; ///
+private alias c_g_converter_input_stream_newFn = extern(C) GInputStream* function(GInputStream* baseStream, GConverter* converter) nothrow;
+__gshared c_g_converter_input_stream_newFn c_g_converter_input_stream_new; ///
+private alias c_g_converter_input_stream_get_converterFn = extern(C) GConverter* function(GConverterInputStream* converterStream) nothrow;
+__gshared c_g_converter_input_stream_get_converterFn c_g_converter_input_stream_get_converter; ///
+
+// ConverterOutputStream
+private alias c_g_converter_output_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_converter_output_stream_get_typeFn c_g_converter_output_stream_get_type; ///
+private alias c_g_converter_output_stream_newFn = extern(C) GOutputStream* function(GOutputStream* baseStream, GConverter* converter) nothrow;
+__gshared c_g_converter_output_stream_newFn c_g_converter_output_stream_new; ///
+private alias c_g_converter_output_stream_get_converterFn = extern(C) GConverter* function(GConverterOutputStream* converterStream) nothrow;
+__gshared c_g_converter_output_stream_get_converterFn c_g_converter_output_stream_get_converter; ///
+
+// Credentials
+private alias c_g_credentials_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_credentials_get_typeFn c_g_credentials_get_type; ///
+private alias c_g_credentials_newFn = extern(C) GCredentials* function() nothrow;
+__gshared c_g_credentials_newFn c_g_credentials_new; ///
+private alias c_g_credentials_get_nativeFn = extern(C) void* function(GCredentials* credentials, GCredentialsType nativeType) nothrow;
+__gshared c_g_credentials_get_nativeFn c_g_credentials_get_native; ///
+private alias c_g_credentials_get_unix_pidFn = extern(C) int function(GCredentials* credentials, GError** _err) nothrow;
+__gshared c_g_credentials_get_unix_pidFn c_g_credentials_get_unix_pid; ///
+private alias c_g_credentials_get_unix_userFn = extern(C) uint function(GCredentials* credentials, GError** _err) nothrow;
+__gshared c_g_credentials_get_unix_userFn c_g_credentials_get_unix_user; ///
+private alias c_g_credentials_is_same_userFn = extern(C) gboolean function(GCredentials* credentials, GCredentials* otherCredentials, GError** _err) nothrow;
+__gshared c_g_credentials_is_same_userFn c_g_credentials_is_same_user; ///
+private alias c_g_credentials_set_nativeFn = extern(C) void function(GCredentials* credentials, GCredentialsType nativeType, void* native) nothrow;
+__gshared c_g_credentials_set_nativeFn c_g_credentials_set_native; ///
+private alias c_g_credentials_set_unix_userFn = extern(C) gboolean function(GCredentials* credentials, uint uid, GError** _err) nothrow;
+__gshared c_g_credentials_set_unix_userFn c_g_credentials_set_unix_user; ///
+private alias c_g_credentials_to_stringFn = extern(C) char* function(GCredentials* credentials) nothrow;
+__gshared c_g_credentials_to_stringFn c_g_credentials_to_string; ///
+
+// DBusActionGroup
+private alias c_g_dbus_action_group_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_action_group_get_typeFn c_g_dbus_action_group_get_type; ///
+private alias c_g_dbus_action_group_getFn = extern(C) GDBusActionGroup* function(GDBusConnection* connection, const(char)* busName, const(char)* objectPath) nothrow;
+__gshared c_g_dbus_action_group_getFn c_g_dbus_action_group_get; ///
+
+// DBusAnnotationInfo
+private alias c_g_dbus_annotation_info_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_annotation_info_get_typeFn c_g_dbus_annotation_info_get_type; ///
+private alias c_g_dbus_annotation_info_refFn = extern(C) GDBusAnnotationInfo* function(GDBusAnnotationInfo* info) nothrow;
+__gshared c_g_dbus_annotation_info_refFn c_g_dbus_annotation_info_ref; ///
+private alias c_g_dbus_annotation_info_unrefFn = extern(C) void function(GDBusAnnotationInfo* info) nothrow;
+__gshared c_g_dbus_annotation_info_unrefFn c_g_dbus_annotation_info_unref; ///
+private alias c_g_dbus_annotation_info_lookupFn = extern(C) const(char)* function(GDBusAnnotationInfo** annotations, const(char)* name) nothrow;
+__gshared c_g_dbus_annotation_info_lookupFn c_g_dbus_annotation_info_lookup; ///
+
+// DBusArgInfo
+private alias c_g_dbus_arg_info_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_arg_info_get_typeFn c_g_dbus_arg_info_get_type; ///
+private alias c_g_dbus_arg_info_refFn = extern(C) GDBusArgInfo* function(GDBusArgInfo* info) nothrow;
+__gshared c_g_dbus_arg_info_refFn c_g_dbus_arg_info_ref; ///
+private alias c_g_dbus_arg_info_unrefFn = extern(C) void function(GDBusArgInfo* info) nothrow;
+__gshared c_g_dbus_arg_info_unrefFn c_g_dbus_arg_info_unref; ///
+
+// DBusAuthObserver
+private alias c_g_dbus_auth_observer_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_auth_observer_get_typeFn c_g_dbus_auth_observer_get_type; ///
+private alias c_g_dbus_auth_observer_newFn = extern(C) GDBusAuthObserver* function() nothrow;
+__gshared c_g_dbus_auth_observer_newFn c_g_dbus_auth_observer_new; ///
+private alias c_g_dbus_auth_observer_allow_mechanismFn = extern(C) gboolean function(GDBusAuthObserver* observer, const(char)* mechanism) nothrow;
+__gshared c_g_dbus_auth_observer_allow_mechanismFn c_g_dbus_auth_observer_allow_mechanism; ///
+private alias c_g_dbus_auth_observer_authorize_authenticated_peerFn = extern(C) gboolean function(GDBusAuthObserver* observer, GIOStream* stream, GCredentials* credentials) nothrow;
+__gshared c_g_dbus_auth_observer_authorize_authenticated_peerFn c_g_dbus_auth_observer_authorize_authenticated_peer; ///
+
+// DBusConnection
+private alias c_g_dbus_connection_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_connection_get_typeFn c_g_dbus_connection_get_type; ///
+private alias c_g_dbus_connection_new_finishFn = extern(C) GDBusConnection* function(GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_dbus_connection_new_finishFn c_g_dbus_connection_new_finish; ///
+private alias c_g_dbus_connection_new_for_address_finishFn = extern(C) GDBusConnection* function(GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_dbus_connection_new_for_address_finishFn c_g_dbus_connection_new_for_address_finish; ///
+private alias c_g_dbus_connection_new_for_address_syncFn = extern(C) GDBusConnection* function(const(char)* address, GDBusConnectionFlags flags, GDBusAuthObserver* observer, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_dbus_connection_new_for_address_syncFn c_g_dbus_connection_new_for_address_sync; ///
+private alias c_g_dbus_connection_new_syncFn = extern(C) GDBusConnection* function(GIOStream* stream, const(char)* guid, GDBusConnectionFlags flags, GDBusAuthObserver* observer, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_dbus_connection_new_syncFn c_g_dbus_connection_new_sync; ///
+private alias c_g_dbus_connection_newFn = extern(C) void function(GIOStream* stream, const(char)* guid, GDBusConnectionFlags flags, GDBusAuthObserver* observer, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_dbus_connection_newFn c_g_dbus_connection_new; ///
+private alias c_g_dbus_connection_new_for_addressFn = extern(C) void function(const(char)* address, GDBusConnectionFlags flags, GDBusAuthObserver* observer, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_dbus_connection_new_for_addressFn c_g_dbus_connection_new_for_address; ///
+private alias c_g_dbus_connection_add_filterFn = extern(C) uint function(GDBusConnection* connection, GDBusMessageFilterFunction filterFunction, void* userData, GDestroyNotify userDataFreeFunc) nothrow;
+__gshared c_g_dbus_connection_add_filterFn c_g_dbus_connection_add_filter; ///
+private alias c_g_dbus_connection_callFn = extern(C) void function(GDBusConnection* connection, const(char)* busName, const(char)* objectPath, const(char)* interfaceName, const(char)* methodName, GVariant* parameters, const(GVariantType)* replyType, GDBusCallFlags flags, int timeoutMsec, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_dbus_connection_callFn c_g_dbus_connection_call; ///
+private alias c_g_dbus_connection_call_finishFn = extern(C) GVariant* function(GDBusConnection* connection, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_dbus_connection_call_finishFn c_g_dbus_connection_call_finish; ///
+private alias c_g_dbus_connection_call_syncFn = extern(C) GVariant* function(GDBusConnection* connection, const(char)* busName, const(char)* objectPath, const(char)* interfaceName, const(char)* methodName, GVariant* parameters, const(GVariantType)* replyType, GDBusCallFlags flags, int timeoutMsec, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_dbus_connection_call_syncFn c_g_dbus_connection_call_sync; ///
+private alias c_g_dbus_connection_call_with_unix_fd_listFn = extern(C) void function(GDBusConnection* connection, const(char)* busName, const(char)* objectPath, const(char)* interfaceName, const(char)* methodName, GVariant* parameters, const(GVariantType)* replyType, GDBusCallFlags flags, int timeoutMsec, GUnixFDList* fdList, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_dbus_connection_call_with_unix_fd_listFn c_g_dbus_connection_call_with_unix_fd_list; ///
+private alias c_g_dbus_connection_call_with_unix_fd_list_finishFn = extern(C) GVariant* function(GDBusConnection* connection, GUnixFDList** outFdList, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_dbus_connection_call_with_unix_fd_list_finishFn c_g_dbus_connection_call_with_unix_fd_list_finish; ///
+private alias c_g_dbus_connection_call_with_unix_fd_list_syncFn = extern(C) GVariant* function(GDBusConnection* connection, const(char)* busName, const(char)* objectPath, const(char)* interfaceName, const(char)* methodName, GVariant* parameters, const(GVariantType)* replyType, GDBusCallFlags flags, int timeoutMsec, GUnixFDList* fdList, GUnixFDList** outFdList, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_dbus_connection_call_with_unix_fd_list_syncFn c_g_dbus_connection_call_with_unix_fd_list_sync; ///
+private alias c_g_dbus_connection_closeFn = extern(C) void function(GDBusConnection* connection, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_dbus_connection_closeFn c_g_dbus_connection_close; ///
+private alias c_g_dbus_connection_close_finishFn = extern(C) gboolean function(GDBusConnection* connection, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_dbus_connection_close_finishFn c_g_dbus_connection_close_finish; ///
+private alias c_g_dbus_connection_close_syncFn = extern(C) gboolean function(GDBusConnection* connection, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_dbus_connection_close_syncFn c_g_dbus_connection_close_sync; ///
+private alias c_g_dbus_connection_emit_signalFn = extern(C) gboolean function(GDBusConnection* connection, const(char)* destinationBusName, const(char)* objectPath, const(char)* interfaceName, const(char)* signalName, GVariant* parameters, GError** _err) nothrow;
+__gshared c_g_dbus_connection_emit_signalFn c_g_dbus_connection_emit_signal; ///
+private alias c_g_dbus_connection_export_action_groupFn = extern(C) uint function(GDBusConnection* connection, const(char)* objectPath, GActionGroup* actionGroup, GError** _err) nothrow;
+__gshared c_g_dbus_connection_export_action_groupFn c_g_dbus_connection_export_action_group; ///
+private alias c_g_dbus_connection_export_menu_modelFn = extern(C) uint function(GDBusConnection* connection, const(char)* objectPath, GMenuModel* menu, GError** _err) nothrow;
+__gshared c_g_dbus_connection_export_menu_modelFn c_g_dbus_connection_export_menu_model; ///
+private alias c_g_dbus_connection_flushFn = extern(C) void function(GDBusConnection* connection, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_dbus_connection_flushFn c_g_dbus_connection_flush; ///
+private alias c_g_dbus_connection_flush_finishFn = extern(C) gboolean function(GDBusConnection* connection, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_dbus_connection_flush_finishFn c_g_dbus_connection_flush_finish; ///
+private alias c_g_dbus_connection_flush_syncFn = extern(C) gboolean function(GDBusConnection* connection, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_dbus_connection_flush_syncFn c_g_dbus_connection_flush_sync; ///
+private alias c_g_dbus_connection_get_capabilitiesFn = extern(C) GDBusCapabilityFlags function(GDBusConnection* connection) nothrow;
+__gshared c_g_dbus_connection_get_capabilitiesFn c_g_dbus_connection_get_capabilities; ///
+private alias c_g_dbus_connection_get_exit_on_closeFn = extern(C) gboolean function(GDBusConnection* connection) nothrow;
+__gshared c_g_dbus_connection_get_exit_on_closeFn c_g_dbus_connection_get_exit_on_close; ///
+private alias c_g_dbus_connection_get_flagsFn = extern(C) GDBusConnectionFlags function(GDBusConnection* connection) nothrow;
+__gshared c_g_dbus_connection_get_flagsFn c_g_dbus_connection_get_flags; ///
+private alias c_g_dbus_connection_get_guidFn = extern(C) const(char)* function(GDBusConnection* connection) nothrow;
+__gshared c_g_dbus_connection_get_guidFn c_g_dbus_connection_get_guid; ///
+private alias c_g_dbus_connection_get_last_serialFn = extern(C) uint function(GDBusConnection* connection) nothrow;
+__gshared c_g_dbus_connection_get_last_serialFn c_g_dbus_connection_get_last_serial; ///
+private alias c_g_dbus_connection_get_peer_credentialsFn = extern(C) GCredentials* function(GDBusConnection* connection) nothrow;
+__gshared c_g_dbus_connection_get_peer_credentialsFn c_g_dbus_connection_get_peer_credentials; ///
+private alias c_g_dbus_connection_get_streamFn = extern(C) GIOStream* function(GDBusConnection* connection) nothrow;
+__gshared c_g_dbus_connection_get_streamFn c_g_dbus_connection_get_stream; ///
+private alias c_g_dbus_connection_get_unique_nameFn = extern(C) const(char)* function(GDBusConnection* connection) nothrow;
+__gshared c_g_dbus_connection_get_unique_nameFn c_g_dbus_connection_get_unique_name; ///
+private alias c_g_dbus_connection_is_closedFn = extern(C) gboolean function(GDBusConnection* connection) nothrow;
+__gshared c_g_dbus_connection_is_closedFn c_g_dbus_connection_is_closed; ///
+private alias c_g_dbus_connection_register_objectFn = extern(C) uint function(GDBusConnection* connection, const(char)* objectPath, GDBusInterfaceInfo* interfaceInfo, const(GDBusInterfaceVTable)* vtable, void* userData, GDestroyNotify userDataFreeFunc, GError** _err) nothrow;
+__gshared c_g_dbus_connection_register_objectFn c_g_dbus_connection_register_object; ///
+private alias c_g_dbus_connection_register_object_with_closuresFn = extern(C) uint function(GDBusConnection* connection, const(char)* objectPath, GDBusInterfaceInfo* interfaceInfo, GClosure* methodCallClosure, GClosure* getPropertyClosure, GClosure* setPropertyClosure, GError** _err) nothrow;
+__gshared c_g_dbus_connection_register_object_with_closuresFn c_g_dbus_connection_register_object_with_closures; ///
+private alias c_g_dbus_connection_register_object_with_closures2Fn = extern(C) uint function(GDBusConnection* connection, const(char)* objectPath, GDBusInterfaceInfo* interfaceInfo, GClosure* methodCallClosure, GClosure* getPropertyClosure, GClosure* setPropertyClosure, GError** _err) nothrow;
+__gshared c_g_dbus_connection_register_object_with_closures2Fn c_g_dbus_connection_register_object_with_closures2; ///
+private alias c_g_dbus_connection_register_subtreeFn = extern(C) uint function(GDBusConnection* connection, const(char)* objectPath, const(GDBusSubtreeVTable)* vtable, GDBusSubtreeFlags flags, void* userData, GDestroyNotify userDataFreeFunc, GError** _err) nothrow;
+__gshared c_g_dbus_connection_register_subtreeFn c_g_dbus_connection_register_subtree; ///
+private alias c_g_dbus_connection_remove_filterFn = extern(C) void function(GDBusConnection* connection, uint filterId) nothrow;
+__gshared c_g_dbus_connection_remove_filterFn c_g_dbus_connection_remove_filter; ///
+private alias c_g_dbus_connection_send_messageFn = extern(C) gboolean function(GDBusConnection* connection, GDBusMessage* message, GDBusSendMessageFlags flags, uint* outSerial, GError** _err) nothrow;
+__gshared c_g_dbus_connection_send_messageFn c_g_dbus_connection_send_message; ///
+private alias c_g_dbus_connection_send_message_with_replyFn = extern(C) void function(GDBusConnection* connection, GDBusMessage* message, GDBusSendMessageFlags flags, int timeoutMsec, uint* outSerial, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_dbus_connection_send_message_with_replyFn c_g_dbus_connection_send_message_with_reply; ///
+private alias c_g_dbus_connection_send_message_with_reply_finishFn = extern(C) GDBusMessage* function(GDBusConnection* connection, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_dbus_connection_send_message_with_reply_finishFn c_g_dbus_connection_send_message_with_reply_finish; ///
+private alias c_g_dbus_connection_send_message_with_reply_syncFn = extern(C) GDBusMessage* function(GDBusConnection* connection, GDBusMessage* message, GDBusSendMessageFlags flags, int timeoutMsec, uint* outSerial, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_dbus_connection_send_message_with_reply_syncFn c_g_dbus_connection_send_message_with_reply_sync; ///
+private alias c_g_dbus_connection_set_exit_on_closeFn = extern(C) void function(GDBusConnection* connection, gboolean exitOnClose) nothrow;
+__gshared c_g_dbus_connection_set_exit_on_closeFn c_g_dbus_connection_set_exit_on_close; ///
+private alias c_g_dbus_connection_signal_subscribeFn = extern(C) uint function(GDBusConnection* connection, const(char)* sender, const(char)* interfaceName, const(char)* member, const(char)* objectPath, const(char)* arg0, GDBusSignalFlags flags, GDBusSignalCallback callback, void* userData, GDestroyNotify userDataFreeFunc) nothrow;
+__gshared c_g_dbus_connection_signal_subscribeFn c_g_dbus_connection_signal_subscribe; ///
+private alias c_g_dbus_connection_signal_unsubscribeFn = extern(C) void function(GDBusConnection* connection, uint subscriptionId) nothrow;
+__gshared c_g_dbus_connection_signal_unsubscribeFn c_g_dbus_connection_signal_unsubscribe; ///
+private alias c_g_dbus_connection_start_message_processingFn = extern(C) void function(GDBusConnection* connection) nothrow;
+__gshared c_g_dbus_connection_start_message_processingFn c_g_dbus_connection_start_message_processing; ///
+private alias c_g_dbus_connection_unexport_action_groupFn = extern(C) void function(GDBusConnection* connection, uint exportId) nothrow;
+__gshared c_g_dbus_connection_unexport_action_groupFn c_g_dbus_connection_unexport_action_group; ///
+private alias c_g_dbus_connection_unexport_menu_modelFn = extern(C) void function(GDBusConnection* connection, uint exportId) nothrow;
+__gshared c_g_dbus_connection_unexport_menu_modelFn c_g_dbus_connection_unexport_menu_model; ///
+private alias c_g_dbus_connection_unregister_objectFn = extern(C) gboolean function(GDBusConnection* connection, uint registrationId) nothrow;
+__gshared c_g_dbus_connection_unregister_objectFn c_g_dbus_connection_unregister_object; ///
+private alias c_g_dbus_connection_unregister_subtreeFn = extern(C) gboolean function(GDBusConnection* connection, uint registrationId) nothrow;
+__gshared c_g_dbus_connection_unregister_subtreeFn c_g_dbus_connection_unregister_subtree; ///
+
+// DBusInterface
+private alias c_g_dbus_interface_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_interface_get_typeFn c_g_dbus_interface_get_type; ///
+private alias c_g_dbus_interface_dup_objectFn = extern(C) GDBusObject* function(GDBusInterface* interface_) nothrow;
+__gshared c_g_dbus_interface_dup_objectFn c_g_dbus_interface_dup_object; ///
+private alias c_g_dbus_interface_get_infoFn = extern(C) GDBusInterfaceInfo* function(GDBusInterface* interface_) nothrow;
+__gshared c_g_dbus_interface_get_infoFn c_g_dbus_interface_get_info; ///
+private alias c_g_dbus_interface_get_objectFn = extern(C) GDBusObject* function(GDBusInterface* interface_) nothrow;
+__gshared c_g_dbus_interface_get_objectFn c_g_dbus_interface_get_object; ///
+private alias c_g_dbus_interface_set_objectFn = extern(C) void function(GDBusInterface* interface_, GDBusObject* object) nothrow;
+__gshared c_g_dbus_interface_set_objectFn c_g_dbus_interface_set_object; ///
+
+// DBusInterfaceInfo
+private alias c_g_dbus_interface_info_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_interface_info_get_typeFn c_g_dbus_interface_info_get_type; ///
+private alias c_g_dbus_interface_info_cache_buildFn = extern(C) void function(GDBusInterfaceInfo* info) nothrow;
+__gshared c_g_dbus_interface_info_cache_buildFn c_g_dbus_interface_info_cache_build; ///
+private alias c_g_dbus_interface_info_cache_releaseFn = extern(C) void function(GDBusInterfaceInfo* info) nothrow;
+__gshared c_g_dbus_interface_info_cache_releaseFn c_g_dbus_interface_info_cache_release; ///
+private alias c_g_dbus_interface_info_generate_xmlFn = extern(C) void function(GDBusInterfaceInfo* info, uint indent, GString* stringBuilder) nothrow;
+__gshared c_g_dbus_interface_info_generate_xmlFn c_g_dbus_interface_info_generate_xml; ///
+private alias c_g_dbus_interface_info_lookup_methodFn = extern(C) GDBusMethodInfo* function(GDBusInterfaceInfo* info, const(char)* name) nothrow;
+__gshared c_g_dbus_interface_info_lookup_methodFn c_g_dbus_interface_info_lookup_method; ///
+private alias c_g_dbus_interface_info_lookup_propertyFn = extern(C) GDBusPropertyInfo* function(GDBusInterfaceInfo* info, const(char)* name) nothrow;
+__gshared c_g_dbus_interface_info_lookup_propertyFn c_g_dbus_interface_info_lookup_property; ///
+private alias c_g_dbus_interface_info_lookup_signalFn = extern(C) GDBusSignalInfo* function(GDBusInterfaceInfo* info, const(char)* name) nothrow;
+__gshared c_g_dbus_interface_info_lookup_signalFn c_g_dbus_interface_info_lookup_signal; ///
+private alias c_g_dbus_interface_info_refFn = extern(C) GDBusInterfaceInfo* function(GDBusInterfaceInfo* info) nothrow;
+__gshared c_g_dbus_interface_info_refFn c_g_dbus_interface_info_ref; ///
+private alias c_g_dbus_interface_info_unrefFn = extern(C) void function(GDBusInterfaceInfo* info) nothrow;
+__gshared c_g_dbus_interface_info_unrefFn c_g_dbus_interface_info_unref; ///
+
+// DBusInterfaceSkeleton
+private alias c_g_dbus_interface_skeleton_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_interface_skeleton_get_typeFn c_g_dbus_interface_skeleton_get_type; ///
+private alias c_g_dbus_interface_skeleton_exportFn = extern(C) gboolean function(GDBusInterfaceSkeleton* interface_, GDBusConnection* connection, const(char)* objectPath, GError** _err) nothrow;
+__gshared c_g_dbus_interface_skeleton_exportFn c_g_dbus_interface_skeleton_export; ///
+private alias c_g_dbus_interface_skeleton_flushFn = extern(C) void function(GDBusInterfaceSkeleton* interface_) nothrow;
+__gshared c_g_dbus_interface_skeleton_flushFn c_g_dbus_interface_skeleton_flush; ///
+private alias c_g_dbus_interface_skeleton_get_connectionFn = extern(C) GDBusConnection* function(GDBusInterfaceSkeleton* interface_) nothrow;
+__gshared c_g_dbus_interface_skeleton_get_connectionFn c_g_dbus_interface_skeleton_get_connection; ///
+private alias c_g_dbus_interface_skeleton_get_connectionsFn = extern(C) GList* function(GDBusInterfaceSkeleton* interface_) nothrow;
+__gshared c_g_dbus_interface_skeleton_get_connectionsFn c_g_dbus_interface_skeleton_get_connections; ///
+private alias c_g_dbus_interface_skeleton_get_flagsFn = extern(C) GDBusInterfaceSkeletonFlags function(GDBusInterfaceSkeleton* interface_) nothrow;
+__gshared c_g_dbus_interface_skeleton_get_flagsFn c_g_dbus_interface_skeleton_get_flags; ///
+private alias c_g_dbus_interface_skeleton_get_infoFn = extern(C) GDBusInterfaceInfo* function(GDBusInterfaceSkeleton* interface_) nothrow;
+__gshared c_g_dbus_interface_skeleton_get_infoFn c_g_dbus_interface_skeleton_get_info; ///
+private alias c_g_dbus_interface_skeleton_get_object_pathFn = extern(C) const(char)* function(GDBusInterfaceSkeleton* interface_) nothrow;
+__gshared c_g_dbus_interface_skeleton_get_object_pathFn c_g_dbus_interface_skeleton_get_object_path; ///
+private alias c_g_dbus_interface_skeleton_get_propertiesFn = extern(C) GVariant* function(GDBusInterfaceSkeleton* interface_) nothrow;
+__gshared c_g_dbus_interface_skeleton_get_propertiesFn c_g_dbus_interface_skeleton_get_properties; ///
+private alias c_g_dbus_interface_skeleton_get_vtableFn = extern(C) GDBusInterfaceVTable* function(GDBusInterfaceSkeleton* interface_) nothrow;
+__gshared c_g_dbus_interface_skeleton_get_vtableFn c_g_dbus_interface_skeleton_get_vtable; ///
+private alias c_g_dbus_interface_skeleton_has_connectionFn = extern(C) gboolean function(GDBusInterfaceSkeleton* interface_, GDBusConnection* connection) nothrow;
+__gshared c_g_dbus_interface_skeleton_has_connectionFn c_g_dbus_interface_skeleton_has_connection; ///
+private alias c_g_dbus_interface_skeleton_set_flagsFn = extern(C) void function(GDBusInterfaceSkeleton* interface_, GDBusInterfaceSkeletonFlags flags) nothrow;
+__gshared c_g_dbus_interface_skeleton_set_flagsFn c_g_dbus_interface_skeleton_set_flags; ///
+private alias c_g_dbus_interface_skeleton_unexportFn = extern(C) void function(GDBusInterfaceSkeleton* interface_) nothrow;
+__gshared c_g_dbus_interface_skeleton_unexportFn c_g_dbus_interface_skeleton_unexport; ///
+private alias c_g_dbus_interface_skeleton_unexport_from_connectionFn = extern(C) void function(GDBusInterfaceSkeleton* interface_, GDBusConnection* connection) nothrow;
+__gshared c_g_dbus_interface_skeleton_unexport_from_connectionFn c_g_dbus_interface_skeleton_unexport_from_connection; ///
+
+// DBusMenuModel
+private alias c_g_dbus_menu_model_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_menu_model_get_typeFn c_g_dbus_menu_model_get_type; ///
+private alias c_g_dbus_menu_model_getFn = extern(C) GDBusMenuModel* function(GDBusConnection* connection, const(char)* busName, const(char)* objectPath) nothrow;
+__gshared c_g_dbus_menu_model_getFn c_g_dbus_menu_model_get; ///
+
+// DBusMessage
+private alias c_g_dbus_message_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_message_get_typeFn c_g_dbus_message_get_type; ///
+private alias c_g_dbus_message_newFn = extern(C) GDBusMessage* function() nothrow;
+__gshared c_g_dbus_message_newFn c_g_dbus_message_new; ///
+private alias c_g_dbus_message_new_from_blobFn = extern(C) GDBusMessage* function(ubyte* blob, size_t blobLen, GDBusCapabilityFlags capabilities, GError** _err) nothrow;
+__gshared c_g_dbus_message_new_from_blobFn c_g_dbus_message_new_from_blob; ///
+private alias c_g_dbus_message_new_method_callFn = extern(C) GDBusMessage* function(const(char)* name, const(char)* path, const(char)* interface_, const(char)* method) nothrow;
+__gshared c_g_dbus_message_new_method_callFn c_g_dbus_message_new_method_call; ///
+private alias c_g_dbus_message_new_signalFn = extern(C) GDBusMessage* function(const(char)* path, const(char)* interface_, const(char)* signal) nothrow;
+__gshared c_g_dbus_message_new_signalFn c_g_dbus_message_new_signal; ///
+private alias c_g_dbus_message_bytes_neededFn = extern(C) ptrdiff_t function(ubyte* blob, size_t blobLen, GError** _err) nothrow;
+__gshared c_g_dbus_message_bytes_neededFn c_g_dbus_message_bytes_needed; ///
+private alias c_g_dbus_message_copyFn = extern(C) GDBusMessage* function(GDBusMessage* message, GError** _err) nothrow;
+__gshared c_g_dbus_message_copyFn c_g_dbus_message_copy; ///
+private alias c_g_dbus_message_get_arg0Fn = extern(C) const(char)* function(GDBusMessage* message) nothrow;
+__gshared c_g_dbus_message_get_arg0Fn c_g_dbus_message_get_arg0; ///
+private alias c_g_dbus_message_get_arg0_pathFn = extern(C) const(char)* function(GDBusMessage* message) nothrow;
+__gshared c_g_dbus_message_get_arg0_pathFn c_g_dbus_message_get_arg0_path; ///
+private alias c_g_dbus_message_get_bodyFn = extern(C) GVariant* function(GDBusMessage* message) nothrow;
+__gshared c_g_dbus_message_get_bodyFn c_g_dbus_message_get_body; ///
+private alias c_g_dbus_message_get_byte_orderFn = extern(C) GDBusMessageByteOrder function(GDBusMessage* message) nothrow;
+__gshared c_g_dbus_message_get_byte_orderFn c_g_dbus_message_get_byte_order; ///
+private alias c_g_dbus_message_get_destinationFn = extern(C) const(char)* function(GDBusMessage* message) nothrow;
+__gshared c_g_dbus_message_get_destinationFn c_g_dbus_message_get_destination; ///
+private alias c_g_dbus_message_get_error_nameFn = extern(C) const(char)* function(GDBusMessage* message) nothrow;
+__gshared c_g_dbus_message_get_error_nameFn c_g_dbus_message_get_error_name; ///
+private alias c_g_dbus_message_get_flagsFn = extern(C) GDBusMessageFlags function(GDBusMessage* message) nothrow;
+__gshared c_g_dbus_message_get_flagsFn c_g_dbus_message_get_flags; ///
+private alias c_g_dbus_message_get_headerFn = extern(C) GVariant* function(GDBusMessage* message, GDBusMessageHeaderField headerField) nothrow;
+__gshared c_g_dbus_message_get_headerFn c_g_dbus_message_get_header; ///
+private alias c_g_dbus_message_get_header_fieldsFn = extern(C) ubyte* function(GDBusMessage* message) nothrow;
+__gshared c_g_dbus_message_get_header_fieldsFn c_g_dbus_message_get_header_fields; ///
+private alias c_g_dbus_message_get_interfaceFn = extern(C) const(char)* function(GDBusMessage* message) nothrow;
+__gshared c_g_dbus_message_get_interfaceFn c_g_dbus_message_get_interface; ///
+private alias c_g_dbus_message_get_lockedFn = extern(C) gboolean function(GDBusMessage* message) nothrow;
+__gshared c_g_dbus_message_get_lockedFn c_g_dbus_message_get_locked; ///
+private alias c_g_dbus_message_get_memberFn = extern(C) const(char)* function(GDBusMessage* message) nothrow;
+__gshared c_g_dbus_message_get_memberFn c_g_dbus_message_get_member; ///
+private alias c_g_dbus_message_get_message_typeFn = extern(C) GDBusMessageType function(GDBusMessage* message) nothrow;
+__gshared c_g_dbus_message_get_message_typeFn c_g_dbus_message_get_message_type; ///
+private alias c_g_dbus_message_get_num_unix_fdsFn = extern(C) uint function(GDBusMessage* message) nothrow;
+__gshared c_g_dbus_message_get_num_unix_fdsFn c_g_dbus_message_get_num_unix_fds; ///
+private alias c_g_dbus_message_get_pathFn = extern(C) const(char)* function(GDBusMessage* message) nothrow;
+__gshared c_g_dbus_message_get_pathFn c_g_dbus_message_get_path; ///
+private alias c_g_dbus_message_get_reply_serialFn = extern(C) uint function(GDBusMessage* message) nothrow;
+__gshared c_g_dbus_message_get_reply_serialFn c_g_dbus_message_get_reply_serial; ///
+private alias c_g_dbus_message_get_senderFn = extern(C) const(char)* function(GDBusMessage* message) nothrow;
+__gshared c_g_dbus_message_get_senderFn c_g_dbus_message_get_sender; ///
+private alias c_g_dbus_message_get_serialFn = extern(C) uint function(GDBusMessage* message) nothrow;
+__gshared c_g_dbus_message_get_serialFn c_g_dbus_message_get_serial; ///
+private alias c_g_dbus_message_get_signatureFn = extern(C) const(char)* function(GDBusMessage* message) nothrow;
+__gshared c_g_dbus_message_get_signatureFn c_g_dbus_message_get_signature; ///
+private alias c_g_dbus_message_get_unix_fd_listFn = extern(C) GUnixFDList* function(GDBusMessage* message) nothrow;
+__gshared c_g_dbus_message_get_unix_fd_listFn c_g_dbus_message_get_unix_fd_list; ///
+private alias c_g_dbus_message_lockFn = extern(C) void function(GDBusMessage* message) nothrow;
+__gshared c_g_dbus_message_lockFn c_g_dbus_message_lock; ///
+private alias c_g_dbus_message_new_method_errorFn = extern(C) GDBusMessage* function(GDBusMessage* methodCallMessage, const(char)* errorName, const(char)* errorMessageFormat,  ...) nothrow;
+__gshared c_g_dbus_message_new_method_errorFn c_g_dbus_message_new_method_error; ///
+private alias c_g_dbus_message_new_method_error_literalFn = extern(C) GDBusMessage* function(GDBusMessage* methodCallMessage, const(char)* errorName, const(char)* errorMessage) nothrow;
+__gshared c_g_dbus_message_new_method_error_literalFn c_g_dbus_message_new_method_error_literal; ///
+private alias c_g_dbus_message_new_method_error_valistFn = extern(C) GDBusMessage* function(GDBusMessage* methodCallMessage, const(char)* errorName, const(char)* errorMessageFormat, void* varArgs) nothrow;
+__gshared c_g_dbus_message_new_method_error_valistFn c_g_dbus_message_new_method_error_valist; ///
+private alias c_g_dbus_message_new_method_replyFn = extern(C) GDBusMessage* function(GDBusMessage* methodCallMessage) nothrow;
+__gshared c_g_dbus_message_new_method_replyFn c_g_dbus_message_new_method_reply; ///
+private alias c_g_dbus_message_printFn = extern(C) char* function(GDBusMessage* message, uint indent) nothrow;
+__gshared c_g_dbus_message_printFn c_g_dbus_message_print; ///
+private alias c_g_dbus_message_set_bodyFn = extern(C) void function(GDBusMessage* message, GVariant* body_) nothrow;
+__gshared c_g_dbus_message_set_bodyFn c_g_dbus_message_set_body; ///
+private alias c_g_dbus_message_set_byte_orderFn = extern(C) void function(GDBusMessage* message, GDBusMessageByteOrder byteOrder) nothrow;
+__gshared c_g_dbus_message_set_byte_orderFn c_g_dbus_message_set_byte_order; ///
+private alias c_g_dbus_message_set_destinationFn = extern(C) void function(GDBusMessage* message, const(char)* value) nothrow;
+__gshared c_g_dbus_message_set_destinationFn c_g_dbus_message_set_destination; ///
+private alias c_g_dbus_message_set_error_nameFn = extern(C) void function(GDBusMessage* message, const(char)* value) nothrow;
+__gshared c_g_dbus_message_set_error_nameFn c_g_dbus_message_set_error_name; ///
+private alias c_g_dbus_message_set_flagsFn = extern(C) void function(GDBusMessage* message, GDBusMessageFlags flags) nothrow;
+__gshared c_g_dbus_message_set_flagsFn c_g_dbus_message_set_flags; ///
+private alias c_g_dbus_message_set_headerFn = extern(C) void function(GDBusMessage* message, GDBusMessageHeaderField headerField, GVariant* value) nothrow;
+__gshared c_g_dbus_message_set_headerFn c_g_dbus_message_set_header; ///
+private alias c_g_dbus_message_set_interfaceFn = extern(C) void function(GDBusMessage* message, const(char)* value) nothrow;
+__gshared c_g_dbus_message_set_interfaceFn c_g_dbus_message_set_interface; ///
+private alias c_g_dbus_message_set_memberFn = extern(C) void function(GDBusMessage* message, const(char)* value) nothrow;
+__gshared c_g_dbus_message_set_memberFn c_g_dbus_message_set_member; ///
+private alias c_g_dbus_message_set_message_typeFn = extern(C) void function(GDBusMessage* message, GDBusMessageType type) nothrow;
+__gshared c_g_dbus_message_set_message_typeFn c_g_dbus_message_set_message_type; ///
+private alias c_g_dbus_message_set_num_unix_fdsFn = extern(C) void function(GDBusMessage* message, uint value) nothrow;
+__gshared c_g_dbus_message_set_num_unix_fdsFn c_g_dbus_message_set_num_unix_fds; ///
+private alias c_g_dbus_message_set_pathFn = extern(C) void function(GDBusMessage* message, const(char)* value) nothrow;
+__gshared c_g_dbus_message_set_pathFn c_g_dbus_message_set_path; ///
+private alias c_g_dbus_message_set_reply_serialFn = extern(C) void function(GDBusMessage* message, uint value) nothrow;
+__gshared c_g_dbus_message_set_reply_serialFn c_g_dbus_message_set_reply_serial; ///
+private alias c_g_dbus_message_set_senderFn = extern(C) void function(GDBusMessage* message, const(char)* value) nothrow;
+__gshared c_g_dbus_message_set_senderFn c_g_dbus_message_set_sender; ///
+private alias c_g_dbus_message_set_serialFn = extern(C) void function(GDBusMessage* message, uint serial) nothrow;
+__gshared c_g_dbus_message_set_serialFn c_g_dbus_message_set_serial; ///
+private alias c_g_dbus_message_set_signatureFn = extern(C) void function(GDBusMessage* message, const(char)* value) nothrow;
+__gshared c_g_dbus_message_set_signatureFn c_g_dbus_message_set_signature; ///
+private alias c_g_dbus_message_set_unix_fd_listFn = extern(C) void function(GDBusMessage* message, GUnixFDList* fdList) nothrow;
+__gshared c_g_dbus_message_set_unix_fd_listFn c_g_dbus_message_set_unix_fd_list; ///
+private alias c_g_dbus_message_to_blobFn = extern(C) ubyte* function(GDBusMessage* message, size_t* outSize, GDBusCapabilityFlags capabilities, GError** _err) nothrow;
+__gshared c_g_dbus_message_to_blobFn c_g_dbus_message_to_blob; ///
+private alias c_g_dbus_message_to_gerrorFn = extern(C) gboolean function(GDBusMessage* message, GError** _err) nothrow;
+__gshared c_g_dbus_message_to_gerrorFn c_g_dbus_message_to_gerror; ///
+
+// DBusMethodInfo
+private alias c_g_dbus_method_info_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_method_info_get_typeFn c_g_dbus_method_info_get_type; ///
+private alias c_g_dbus_method_info_refFn = extern(C) GDBusMethodInfo* function(GDBusMethodInfo* info) nothrow;
+__gshared c_g_dbus_method_info_refFn c_g_dbus_method_info_ref; ///
+private alias c_g_dbus_method_info_unrefFn = extern(C) void function(GDBusMethodInfo* info) nothrow;
+__gshared c_g_dbus_method_info_unrefFn c_g_dbus_method_info_unref; ///
+
+// DBusMethodInvocation
+private alias c_g_dbus_method_invocation_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_method_invocation_get_typeFn c_g_dbus_method_invocation_get_type; ///
+private alias c_g_dbus_method_invocation_get_connectionFn = extern(C) GDBusConnection* function(GDBusMethodInvocation* invocation) nothrow;
+__gshared c_g_dbus_method_invocation_get_connectionFn c_g_dbus_method_invocation_get_connection; ///
+private alias c_g_dbus_method_invocation_get_interface_nameFn = extern(C) const(char)* function(GDBusMethodInvocation* invocation) nothrow;
+__gshared c_g_dbus_method_invocation_get_interface_nameFn c_g_dbus_method_invocation_get_interface_name; ///
+private alias c_g_dbus_method_invocation_get_messageFn = extern(C) GDBusMessage* function(GDBusMethodInvocation* invocation) nothrow;
+__gshared c_g_dbus_method_invocation_get_messageFn c_g_dbus_method_invocation_get_message; ///
+private alias c_g_dbus_method_invocation_get_method_infoFn = extern(C) const(GDBusMethodInfo)* function(GDBusMethodInvocation* invocation) nothrow;
+__gshared c_g_dbus_method_invocation_get_method_infoFn c_g_dbus_method_invocation_get_method_info; ///
+private alias c_g_dbus_method_invocation_get_method_nameFn = extern(C) const(char)* function(GDBusMethodInvocation* invocation) nothrow;
+__gshared c_g_dbus_method_invocation_get_method_nameFn c_g_dbus_method_invocation_get_method_name; ///
+private alias c_g_dbus_method_invocation_get_object_pathFn = extern(C) const(char)* function(GDBusMethodInvocation* invocation) nothrow;
+__gshared c_g_dbus_method_invocation_get_object_pathFn c_g_dbus_method_invocation_get_object_path; ///
+private alias c_g_dbus_method_invocation_get_parametersFn = extern(C) GVariant* function(GDBusMethodInvocation* invocation) nothrow;
+__gshared c_g_dbus_method_invocation_get_parametersFn c_g_dbus_method_invocation_get_parameters; ///
+private alias c_g_dbus_method_invocation_get_property_infoFn = extern(C) const(GDBusPropertyInfo)* function(GDBusMethodInvocation* invocation) nothrow;
+__gshared c_g_dbus_method_invocation_get_property_infoFn c_g_dbus_method_invocation_get_property_info; ///
+private alias c_g_dbus_method_invocation_get_senderFn = extern(C) const(char)* function(GDBusMethodInvocation* invocation) nothrow;
+__gshared c_g_dbus_method_invocation_get_senderFn c_g_dbus_method_invocation_get_sender; ///
+private alias c_g_dbus_method_invocation_get_user_dataFn = extern(C) void* function(GDBusMethodInvocation* invocation) nothrow;
+__gshared c_g_dbus_method_invocation_get_user_dataFn c_g_dbus_method_invocation_get_user_data; ///
+private alias c_g_dbus_method_invocation_return_dbus_errorFn = extern(C) void function(GDBusMethodInvocation* invocation, const(char)* errorName, const(char)* errorMessage) nothrow;
+__gshared c_g_dbus_method_invocation_return_dbus_errorFn c_g_dbus_method_invocation_return_dbus_error; ///
+private alias c_g_dbus_method_invocation_return_errorFn = extern(C) void function(GDBusMethodInvocation* invocation, GQuark domain, int code, const(char)* format,  ...) nothrow;
+__gshared c_g_dbus_method_invocation_return_errorFn c_g_dbus_method_invocation_return_error; ///
+private alias c_g_dbus_method_invocation_return_error_literalFn = extern(C) void function(GDBusMethodInvocation* invocation, GQuark domain, int code, const(char)* message) nothrow;
+__gshared c_g_dbus_method_invocation_return_error_literalFn c_g_dbus_method_invocation_return_error_literal; ///
+private alias c_g_dbus_method_invocation_return_error_valistFn = extern(C) void function(GDBusMethodInvocation* invocation, GQuark domain, int code, const(char)* format, void* varArgs) nothrow;
+__gshared c_g_dbus_method_invocation_return_error_valistFn c_g_dbus_method_invocation_return_error_valist; ///
+private alias c_g_dbus_method_invocation_return_gerrorFn = extern(C) void function(GDBusMethodInvocation* invocation, const(GError)* error) nothrow;
+__gshared c_g_dbus_method_invocation_return_gerrorFn c_g_dbus_method_invocation_return_gerror; ///
+private alias c_g_dbus_method_invocation_return_valueFn = extern(C) void function(GDBusMethodInvocation* invocation, GVariant* parameters) nothrow;
+__gshared c_g_dbus_method_invocation_return_valueFn c_g_dbus_method_invocation_return_value; ///
+private alias c_g_dbus_method_invocation_return_value_with_unix_fd_listFn = extern(C) void function(GDBusMethodInvocation* invocation, GVariant* parameters, GUnixFDList* fdList) nothrow;
+__gshared c_g_dbus_method_invocation_return_value_with_unix_fd_listFn c_g_dbus_method_invocation_return_value_with_unix_fd_list; ///
+private alias c_g_dbus_method_invocation_take_errorFn = extern(C) void function(GDBusMethodInvocation* invocation, GError* error) nothrow;
+__gshared c_g_dbus_method_invocation_take_errorFn c_g_dbus_method_invocation_take_error; ///
+
+// DBusNodeInfo
+private alias c_g_dbus_node_info_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_node_info_get_typeFn c_g_dbus_node_info_get_type; ///
+private alias c_g_dbus_node_info_new_for_xmlFn = extern(C) GDBusNodeInfo* function(const(char)* xmlData, GError** _err) nothrow;
+__gshared c_g_dbus_node_info_new_for_xmlFn c_g_dbus_node_info_new_for_xml; ///
+private alias c_g_dbus_node_info_generate_xmlFn = extern(C) void function(GDBusNodeInfo* info, uint indent, GString* stringBuilder) nothrow;
+__gshared c_g_dbus_node_info_generate_xmlFn c_g_dbus_node_info_generate_xml; ///
+private alias c_g_dbus_node_info_lookup_interfaceFn = extern(C) GDBusInterfaceInfo* function(GDBusNodeInfo* info, const(char)* name) nothrow;
+__gshared c_g_dbus_node_info_lookup_interfaceFn c_g_dbus_node_info_lookup_interface; ///
+private alias c_g_dbus_node_info_refFn = extern(C) GDBusNodeInfo* function(GDBusNodeInfo* info) nothrow;
+__gshared c_g_dbus_node_info_refFn c_g_dbus_node_info_ref; ///
+private alias c_g_dbus_node_info_unrefFn = extern(C) void function(GDBusNodeInfo* info) nothrow;
+__gshared c_g_dbus_node_info_unrefFn c_g_dbus_node_info_unref; ///
+
+// DBusObject
+private alias c_g_dbus_object_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_object_get_typeFn c_g_dbus_object_get_type; ///
+private alias c_g_dbus_object_get_interfaceFn = extern(C) GDBusInterface* function(GDBusObject* object, const(char)* interfaceName) nothrow;
+__gshared c_g_dbus_object_get_interfaceFn c_g_dbus_object_get_interface; ///
+private alias c_g_dbus_object_get_interfacesFn = extern(C) GList* function(GDBusObject* object) nothrow;
+__gshared c_g_dbus_object_get_interfacesFn c_g_dbus_object_get_interfaces; ///
+private alias c_g_dbus_object_get_object_pathFn = extern(C) const(char)* function(GDBusObject* object) nothrow;
+__gshared c_g_dbus_object_get_object_pathFn c_g_dbus_object_get_object_path; ///
+
+// DBusObjectManager
+private alias c_g_dbus_object_manager_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_object_manager_get_typeFn c_g_dbus_object_manager_get_type; ///
+private alias c_g_dbus_object_manager_get_interfaceFn = extern(C) GDBusInterface* function(GDBusObjectManager* manager, const(char)* objectPath, const(char)* interfaceName) nothrow;
+__gshared c_g_dbus_object_manager_get_interfaceFn c_g_dbus_object_manager_get_interface; ///
+private alias c_g_dbus_object_manager_get_objectFn = extern(C) GDBusObject* function(GDBusObjectManager* manager, const(char)* objectPath) nothrow;
+__gshared c_g_dbus_object_manager_get_objectFn c_g_dbus_object_manager_get_object; ///
+private alias c_g_dbus_object_manager_get_object_pathFn = extern(C) const(char)* function(GDBusObjectManager* manager) nothrow;
+__gshared c_g_dbus_object_manager_get_object_pathFn c_g_dbus_object_manager_get_object_path; ///
+private alias c_g_dbus_object_manager_get_objectsFn = extern(C) GList* function(GDBusObjectManager* manager) nothrow;
+__gshared c_g_dbus_object_manager_get_objectsFn c_g_dbus_object_manager_get_objects; ///
+
+// DBusObjectManagerClient
+private alias c_g_dbus_object_manager_client_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_object_manager_client_get_typeFn c_g_dbus_object_manager_client_get_type; ///
+private alias c_g_dbus_object_manager_client_new_finishFn = extern(C) GDBusObjectManager* function(GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_dbus_object_manager_client_new_finishFn c_g_dbus_object_manager_client_new_finish; ///
+private alias c_g_dbus_object_manager_client_new_for_bus_finishFn = extern(C) GDBusObjectManager* function(GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_dbus_object_manager_client_new_for_bus_finishFn c_g_dbus_object_manager_client_new_for_bus_finish; ///
+private alias c_g_dbus_object_manager_client_new_for_bus_syncFn = extern(C) GDBusObjectManager* function(GBusType busType, GDBusObjectManagerClientFlags flags, const(char)* name, const(char)* objectPath, GDBusProxyTypeFunc getProxyTypeFunc, void* getProxyTypeUserData, GDestroyNotify getProxyTypeDestroyNotify, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_dbus_object_manager_client_new_for_bus_syncFn c_g_dbus_object_manager_client_new_for_bus_sync; ///
+private alias c_g_dbus_object_manager_client_new_syncFn = extern(C) GDBusObjectManager* function(GDBusConnection* connection, GDBusObjectManagerClientFlags flags, const(char)* name, const(char)* objectPath, GDBusProxyTypeFunc getProxyTypeFunc, void* getProxyTypeUserData, GDestroyNotify getProxyTypeDestroyNotify, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_dbus_object_manager_client_new_syncFn c_g_dbus_object_manager_client_new_sync; ///
+private alias c_g_dbus_object_manager_client_newFn = extern(C) void function(GDBusConnection* connection, GDBusObjectManagerClientFlags flags, const(char)* name, const(char)* objectPath, GDBusProxyTypeFunc getProxyTypeFunc, void* getProxyTypeUserData, GDestroyNotify getProxyTypeDestroyNotify, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_dbus_object_manager_client_newFn c_g_dbus_object_manager_client_new; ///
+private alias c_g_dbus_object_manager_client_new_for_busFn = extern(C) void function(GBusType busType, GDBusObjectManagerClientFlags flags, const(char)* name, const(char)* objectPath, GDBusProxyTypeFunc getProxyTypeFunc, void* getProxyTypeUserData, GDestroyNotify getProxyTypeDestroyNotify, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_dbus_object_manager_client_new_for_busFn c_g_dbus_object_manager_client_new_for_bus; ///
+private alias c_g_dbus_object_manager_client_get_connectionFn = extern(C) GDBusConnection* function(GDBusObjectManagerClient* manager) nothrow;
+__gshared c_g_dbus_object_manager_client_get_connectionFn c_g_dbus_object_manager_client_get_connection; ///
+private alias c_g_dbus_object_manager_client_get_flagsFn = extern(C) GDBusObjectManagerClientFlags function(GDBusObjectManagerClient* manager) nothrow;
+__gshared c_g_dbus_object_manager_client_get_flagsFn c_g_dbus_object_manager_client_get_flags; ///
+private alias c_g_dbus_object_manager_client_get_nameFn = extern(C) const(char)* function(GDBusObjectManagerClient* manager) nothrow;
+__gshared c_g_dbus_object_manager_client_get_nameFn c_g_dbus_object_manager_client_get_name; ///
+private alias c_g_dbus_object_manager_client_get_name_ownerFn = extern(C) char* function(GDBusObjectManagerClient* manager) nothrow;
+__gshared c_g_dbus_object_manager_client_get_name_ownerFn c_g_dbus_object_manager_client_get_name_owner; ///
+
+// DBusObjectManagerServer
+private alias c_g_dbus_object_manager_server_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_object_manager_server_get_typeFn c_g_dbus_object_manager_server_get_type; ///
+private alias c_g_dbus_object_manager_server_newFn = extern(C) GDBusObjectManagerServer* function(const(char)* objectPath) nothrow;
+__gshared c_g_dbus_object_manager_server_newFn c_g_dbus_object_manager_server_new; ///
+private alias c_g_dbus_object_manager_server_exportFn = extern(C) void function(GDBusObjectManagerServer* manager, GDBusObjectSkeleton* object) nothrow;
+__gshared c_g_dbus_object_manager_server_exportFn c_g_dbus_object_manager_server_export; ///
+private alias c_g_dbus_object_manager_server_export_uniquelyFn = extern(C) void function(GDBusObjectManagerServer* manager, GDBusObjectSkeleton* object) nothrow;
+__gshared c_g_dbus_object_manager_server_export_uniquelyFn c_g_dbus_object_manager_server_export_uniquely; ///
+private alias c_g_dbus_object_manager_server_get_connectionFn = extern(C) GDBusConnection* function(GDBusObjectManagerServer* manager) nothrow;
+__gshared c_g_dbus_object_manager_server_get_connectionFn c_g_dbus_object_manager_server_get_connection; ///
+private alias c_g_dbus_object_manager_server_is_exportedFn = extern(C) gboolean function(GDBusObjectManagerServer* manager, GDBusObjectSkeleton* object) nothrow;
+__gshared c_g_dbus_object_manager_server_is_exportedFn c_g_dbus_object_manager_server_is_exported; ///
+private alias c_g_dbus_object_manager_server_set_connectionFn = extern(C) void function(GDBusObjectManagerServer* manager, GDBusConnection* connection) nothrow;
+__gshared c_g_dbus_object_manager_server_set_connectionFn c_g_dbus_object_manager_server_set_connection; ///
+private alias c_g_dbus_object_manager_server_unexportFn = extern(C) gboolean function(GDBusObjectManagerServer* manager, const(char)* objectPath) nothrow;
+__gshared c_g_dbus_object_manager_server_unexportFn c_g_dbus_object_manager_server_unexport; ///
+
+// DBusObjectProxy
+private alias c_g_dbus_object_proxy_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_object_proxy_get_typeFn c_g_dbus_object_proxy_get_type; ///
+private alias c_g_dbus_object_proxy_newFn = extern(C) GDBusObjectProxy* function(GDBusConnection* connection, const(char)* objectPath) nothrow;
+__gshared c_g_dbus_object_proxy_newFn c_g_dbus_object_proxy_new; ///
+private alias c_g_dbus_object_proxy_get_connectionFn = extern(C) GDBusConnection* function(GDBusObjectProxy* proxy) nothrow;
+__gshared c_g_dbus_object_proxy_get_connectionFn c_g_dbus_object_proxy_get_connection; ///
+
+// DBusObjectSkeleton
+private alias c_g_dbus_object_skeleton_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_object_skeleton_get_typeFn c_g_dbus_object_skeleton_get_type; ///
+private alias c_g_dbus_object_skeleton_newFn = extern(C) GDBusObjectSkeleton* function(const(char)* objectPath) nothrow;
+__gshared c_g_dbus_object_skeleton_newFn c_g_dbus_object_skeleton_new; ///
+private alias c_g_dbus_object_skeleton_add_interfaceFn = extern(C) void function(GDBusObjectSkeleton* object, GDBusInterfaceSkeleton* interface_) nothrow;
+__gshared c_g_dbus_object_skeleton_add_interfaceFn c_g_dbus_object_skeleton_add_interface; ///
+private alias c_g_dbus_object_skeleton_flushFn = extern(C) void function(GDBusObjectSkeleton* object) nothrow;
+__gshared c_g_dbus_object_skeleton_flushFn c_g_dbus_object_skeleton_flush; ///
+private alias c_g_dbus_object_skeleton_remove_interfaceFn = extern(C) void function(GDBusObjectSkeleton* object, GDBusInterfaceSkeleton* interface_) nothrow;
+__gshared c_g_dbus_object_skeleton_remove_interfaceFn c_g_dbus_object_skeleton_remove_interface; ///
+private alias c_g_dbus_object_skeleton_remove_interface_by_nameFn = extern(C) void function(GDBusObjectSkeleton* object, const(char)* interfaceName) nothrow;
+__gshared c_g_dbus_object_skeleton_remove_interface_by_nameFn c_g_dbus_object_skeleton_remove_interface_by_name; ///
+private alias c_g_dbus_object_skeleton_set_object_pathFn = extern(C) void function(GDBusObjectSkeleton* object, const(char)* objectPath) nothrow;
+__gshared c_g_dbus_object_skeleton_set_object_pathFn c_g_dbus_object_skeleton_set_object_path; ///
+
+// DBusPropertyInfo
+private alias c_g_dbus_property_info_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_property_info_get_typeFn c_g_dbus_property_info_get_type; ///
+private alias c_g_dbus_property_info_refFn = extern(C) GDBusPropertyInfo* function(GDBusPropertyInfo* info) nothrow;
+__gshared c_g_dbus_property_info_refFn c_g_dbus_property_info_ref; ///
+private alias c_g_dbus_property_info_unrefFn = extern(C) void function(GDBusPropertyInfo* info) nothrow;
+__gshared c_g_dbus_property_info_unrefFn c_g_dbus_property_info_unref; ///
+
+// DBusProxy
+private alias c_g_dbus_proxy_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_proxy_get_typeFn c_g_dbus_proxy_get_type; ///
+private alias c_g_dbus_proxy_new_finishFn = extern(C) GDBusProxy* function(GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_dbus_proxy_new_finishFn c_g_dbus_proxy_new_finish; ///
+private alias c_g_dbus_proxy_new_for_bus_finishFn = extern(C) GDBusProxy* function(GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_dbus_proxy_new_for_bus_finishFn c_g_dbus_proxy_new_for_bus_finish; ///
+private alias c_g_dbus_proxy_new_for_bus_syncFn = extern(C) GDBusProxy* function(GBusType busType, GDBusProxyFlags flags, GDBusInterfaceInfo* info, const(char)* name, const(char)* objectPath, const(char)* interfaceName, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_dbus_proxy_new_for_bus_syncFn c_g_dbus_proxy_new_for_bus_sync; ///
+private alias c_g_dbus_proxy_new_syncFn = extern(C) GDBusProxy* function(GDBusConnection* connection, GDBusProxyFlags flags, GDBusInterfaceInfo* info, const(char)* name, const(char)* objectPath, const(char)* interfaceName, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_dbus_proxy_new_syncFn c_g_dbus_proxy_new_sync; ///
+private alias c_g_dbus_proxy_newFn = extern(C) void function(GDBusConnection* connection, GDBusProxyFlags flags, GDBusInterfaceInfo* info, const(char)* name, const(char)* objectPath, const(char)* interfaceName, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_dbus_proxy_newFn c_g_dbus_proxy_new; ///
+private alias c_g_dbus_proxy_new_for_busFn = extern(C) void function(GBusType busType, GDBusProxyFlags flags, GDBusInterfaceInfo* info, const(char)* name, const(char)* objectPath, const(char)* interfaceName, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_dbus_proxy_new_for_busFn c_g_dbus_proxy_new_for_bus; ///
+private alias c_g_dbus_proxy_callFn = extern(C) void function(GDBusProxy* proxy, const(char)* methodName, GVariant* parameters, GDBusCallFlags flags, int timeoutMsec, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_dbus_proxy_callFn c_g_dbus_proxy_call; ///
+private alias c_g_dbus_proxy_call_finishFn = extern(C) GVariant* function(GDBusProxy* proxy, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_dbus_proxy_call_finishFn c_g_dbus_proxy_call_finish; ///
+private alias c_g_dbus_proxy_call_syncFn = extern(C) GVariant* function(GDBusProxy* proxy, const(char)* methodName, GVariant* parameters, GDBusCallFlags flags, int timeoutMsec, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_dbus_proxy_call_syncFn c_g_dbus_proxy_call_sync; ///
+private alias c_g_dbus_proxy_call_with_unix_fd_listFn = extern(C) void function(GDBusProxy* proxy, const(char)* methodName, GVariant* parameters, GDBusCallFlags flags, int timeoutMsec, GUnixFDList* fdList, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_dbus_proxy_call_with_unix_fd_listFn c_g_dbus_proxy_call_with_unix_fd_list; ///
+private alias c_g_dbus_proxy_call_with_unix_fd_list_finishFn = extern(C) GVariant* function(GDBusProxy* proxy, GUnixFDList** outFdList, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_dbus_proxy_call_with_unix_fd_list_finishFn c_g_dbus_proxy_call_with_unix_fd_list_finish; ///
+private alias c_g_dbus_proxy_call_with_unix_fd_list_syncFn = extern(C) GVariant* function(GDBusProxy* proxy, const(char)* methodName, GVariant* parameters, GDBusCallFlags flags, int timeoutMsec, GUnixFDList* fdList, GUnixFDList** outFdList, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_dbus_proxy_call_with_unix_fd_list_syncFn c_g_dbus_proxy_call_with_unix_fd_list_sync; ///
+private alias c_g_dbus_proxy_get_cached_propertyFn = extern(C) GVariant* function(GDBusProxy* proxy, const(char)* propertyName) nothrow;
+__gshared c_g_dbus_proxy_get_cached_propertyFn c_g_dbus_proxy_get_cached_property; ///
+private alias c_g_dbus_proxy_get_cached_property_namesFn = extern(C) char** function(GDBusProxy* proxy) nothrow;
+__gshared c_g_dbus_proxy_get_cached_property_namesFn c_g_dbus_proxy_get_cached_property_names; ///
+private alias c_g_dbus_proxy_get_connectionFn = extern(C) GDBusConnection* function(GDBusProxy* proxy) nothrow;
+__gshared c_g_dbus_proxy_get_connectionFn c_g_dbus_proxy_get_connection; ///
+private alias c_g_dbus_proxy_get_default_timeoutFn = extern(C) int function(GDBusProxy* proxy) nothrow;
+__gshared c_g_dbus_proxy_get_default_timeoutFn c_g_dbus_proxy_get_default_timeout; ///
+private alias c_g_dbus_proxy_get_flagsFn = extern(C) GDBusProxyFlags function(GDBusProxy* proxy) nothrow;
+__gshared c_g_dbus_proxy_get_flagsFn c_g_dbus_proxy_get_flags; ///
+private alias c_g_dbus_proxy_get_interface_infoFn = extern(C) GDBusInterfaceInfo* function(GDBusProxy* proxy) nothrow;
+__gshared c_g_dbus_proxy_get_interface_infoFn c_g_dbus_proxy_get_interface_info; ///
+private alias c_g_dbus_proxy_get_interface_nameFn = extern(C) const(char)* function(GDBusProxy* proxy) nothrow;
+__gshared c_g_dbus_proxy_get_interface_nameFn c_g_dbus_proxy_get_interface_name; ///
+private alias c_g_dbus_proxy_get_nameFn = extern(C) const(char)* function(GDBusProxy* proxy) nothrow;
+__gshared c_g_dbus_proxy_get_nameFn c_g_dbus_proxy_get_name; ///
+private alias c_g_dbus_proxy_get_name_ownerFn = extern(C) char* function(GDBusProxy* proxy) nothrow;
+__gshared c_g_dbus_proxy_get_name_ownerFn c_g_dbus_proxy_get_name_owner; ///
+private alias c_g_dbus_proxy_get_object_pathFn = extern(C) const(char)* function(GDBusProxy* proxy) nothrow;
+__gshared c_g_dbus_proxy_get_object_pathFn c_g_dbus_proxy_get_object_path; ///
+private alias c_g_dbus_proxy_set_cached_propertyFn = extern(C) void function(GDBusProxy* proxy, const(char)* propertyName, GVariant* value) nothrow;
+__gshared c_g_dbus_proxy_set_cached_propertyFn c_g_dbus_proxy_set_cached_property; ///
+private alias c_g_dbus_proxy_set_default_timeoutFn = extern(C) void function(GDBusProxy* proxy, int timeoutMsec) nothrow;
+__gshared c_g_dbus_proxy_set_default_timeoutFn c_g_dbus_proxy_set_default_timeout; ///
+private alias c_g_dbus_proxy_set_interface_infoFn = extern(C) void function(GDBusProxy* proxy, GDBusInterfaceInfo* info) nothrow;
+__gshared c_g_dbus_proxy_set_interface_infoFn c_g_dbus_proxy_set_interface_info; ///
+
+// DBusServer
+private alias c_g_dbus_server_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_server_get_typeFn c_g_dbus_server_get_type; ///
+private alias c_g_dbus_server_new_syncFn = extern(C) GDBusServer* function(const(char)* address, GDBusServerFlags flags, const(char)* guid, GDBusAuthObserver* observer, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_dbus_server_new_syncFn c_g_dbus_server_new_sync; ///
+private alias c_g_dbus_server_get_client_addressFn = extern(C) const(char)* function(GDBusServer* server) nothrow;
+__gshared c_g_dbus_server_get_client_addressFn c_g_dbus_server_get_client_address; ///
+private alias c_g_dbus_server_get_flagsFn = extern(C) GDBusServerFlags function(GDBusServer* server) nothrow;
+__gshared c_g_dbus_server_get_flagsFn c_g_dbus_server_get_flags; ///
+private alias c_g_dbus_server_get_guidFn = extern(C) const(char)* function(GDBusServer* server) nothrow;
+__gshared c_g_dbus_server_get_guidFn c_g_dbus_server_get_guid; ///
+private alias c_g_dbus_server_is_activeFn = extern(C) gboolean function(GDBusServer* server) nothrow;
+__gshared c_g_dbus_server_is_activeFn c_g_dbus_server_is_active; ///
+private alias c_g_dbus_server_startFn = extern(C) void function(GDBusServer* server) nothrow;
+__gshared c_g_dbus_server_startFn c_g_dbus_server_start; ///
+private alias c_g_dbus_server_stopFn = extern(C) void function(GDBusServer* server) nothrow;
+__gshared c_g_dbus_server_stopFn c_g_dbus_server_stop; ///
+
+// DBusSignalInfo
+private alias c_g_dbus_signal_info_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dbus_signal_info_get_typeFn c_g_dbus_signal_info_get_type; ///
+private alias c_g_dbus_signal_info_refFn = extern(C) GDBusSignalInfo* function(GDBusSignalInfo* info) nothrow;
+__gshared c_g_dbus_signal_info_refFn c_g_dbus_signal_info_ref; ///
+private alias c_g_dbus_signal_info_unrefFn = extern(C) void function(GDBusSignalInfo* info) nothrow;
+__gshared c_g_dbus_signal_info_unrefFn c_g_dbus_signal_info_unref; ///
+
+// DataInputStream
+private alias c_g_data_input_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_data_input_stream_get_typeFn c_g_data_input_stream_get_type; ///
+private alias c_g_data_input_stream_newFn = extern(C) GDataInputStream* function(GInputStream* baseStream) nothrow;
+__gshared c_g_data_input_stream_newFn c_g_data_input_stream_new; ///
+private alias c_g_data_input_stream_get_byte_orderFn = extern(C) GDataStreamByteOrder function(GDataInputStream* stream) nothrow;
+__gshared c_g_data_input_stream_get_byte_orderFn c_g_data_input_stream_get_byte_order; ///
+private alias c_g_data_input_stream_get_newline_typeFn = extern(C) GDataStreamNewlineType function(GDataInputStream* stream) nothrow;
+__gshared c_g_data_input_stream_get_newline_typeFn c_g_data_input_stream_get_newline_type; ///
+private alias c_g_data_input_stream_read_byteFn = extern(C) ubyte function(GDataInputStream* stream, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_data_input_stream_read_byteFn c_g_data_input_stream_read_byte; ///
+private alias c_g_data_input_stream_read_int16Fn = extern(C) short function(GDataInputStream* stream, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_data_input_stream_read_int16Fn c_g_data_input_stream_read_int16; ///
+private alias c_g_data_input_stream_read_int32Fn = extern(C) int function(GDataInputStream* stream, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_data_input_stream_read_int32Fn c_g_data_input_stream_read_int32; ///
+private alias c_g_data_input_stream_read_int64Fn = extern(C) long function(GDataInputStream* stream, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_data_input_stream_read_int64Fn c_g_data_input_stream_read_int64; ///
+private alias c_g_data_input_stream_read_lineFn = extern(C) char* function(GDataInputStream* stream, size_t* length, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_data_input_stream_read_lineFn c_g_data_input_stream_read_line; ///
+private alias c_g_data_input_stream_read_line_asyncFn = extern(C) void function(GDataInputStream* stream, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_data_input_stream_read_line_asyncFn c_g_data_input_stream_read_line_async; ///
+private alias c_g_data_input_stream_read_line_finishFn = extern(C) char* function(GDataInputStream* stream, GAsyncResult* result, size_t* length, GError** _err) nothrow;
+__gshared c_g_data_input_stream_read_line_finishFn c_g_data_input_stream_read_line_finish; ///
+private alias c_g_data_input_stream_read_line_finish_utf8Fn = extern(C) char* function(GDataInputStream* stream, GAsyncResult* result, size_t* length, GError** _err) nothrow;
+__gshared c_g_data_input_stream_read_line_finish_utf8Fn c_g_data_input_stream_read_line_finish_utf8; ///
+private alias c_g_data_input_stream_read_line_utf8Fn = extern(C) char* function(GDataInputStream* stream, size_t* length, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_data_input_stream_read_line_utf8Fn c_g_data_input_stream_read_line_utf8; ///
+private alias c_g_data_input_stream_read_uint16Fn = extern(C) ushort function(GDataInputStream* stream, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_data_input_stream_read_uint16Fn c_g_data_input_stream_read_uint16; ///
+private alias c_g_data_input_stream_read_uint32Fn = extern(C) uint function(GDataInputStream* stream, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_data_input_stream_read_uint32Fn c_g_data_input_stream_read_uint32; ///
+private alias c_g_data_input_stream_read_uint64Fn = extern(C) ulong function(GDataInputStream* stream, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_data_input_stream_read_uint64Fn c_g_data_input_stream_read_uint64; ///
+private alias c_g_data_input_stream_read_untilFn = extern(C) char* function(GDataInputStream* stream, const(char)* stopChars, size_t* length, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_data_input_stream_read_untilFn c_g_data_input_stream_read_until; ///
+private alias c_g_data_input_stream_read_until_asyncFn = extern(C) void function(GDataInputStream* stream, const(char)* stopChars, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_data_input_stream_read_until_asyncFn c_g_data_input_stream_read_until_async; ///
+private alias c_g_data_input_stream_read_until_finishFn = extern(C) char* function(GDataInputStream* stream, GAsyncResult* result, size_t* length, GError** _err) nothrow;
+__gshared c_g_data_input_stream_read_until_finishFn c_g_data_input_stream_read_until_finish; ///
+private alias c_g_data_input_stream_read_uptoFn = extern(C) char* function(GDataInputStream* stream, const(char)* stopChars, ptrdiff_t stopCharsLen, size_t* length, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_data_input_stream_read_uptoFn c_g_data_input_stream_read_upto; ///
+private alias c_g_data_input_stream_read_upto_asyncFn = extern(C) void function(GDataInputStream* stream, const(char)* stopChars, ptrdiff_t stopCharsLen, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_data_input_stream_read_upto_asyncFn c_g_data_input_stream_read_upto_async; ///
+private alias c_g_data_input_stream_read_upto_finishFn = extern(C) char* function(GDataInputStream* stream, GAsyncResult* result, size_t* length, GError** _err) nothrow;
+__gshared c_g_data_input_stream_read_upto_finishFn c_g_data_input_stream_read_upto_finish; ///
+private alias c_g_data_input_stream_set_byte_orderFn = extern(C) void function(GDataInputStream* stream, GDataStreamByteOrder order) nothrow;
+__gshared c_g_data_input_stream_set_byte_orderFn c_g_data_input_stream_set_byte_order; ///
+private alias c_g_data_input_stream_set_newline_typeFn = extern(C) void function(GDataInputStream* stream, GDataStreamNewlineType type) nothrow;
+__gshared c_g_data_input_stream_set_newline_typeFn c_g_data_input_stream_set_newline_type; ///
+
+// DataOutputStream
+private alias c_g_data_output_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_data_output_stream_get_typeFn c_g_data_output_stream_get_type; ///
+private alias c_g_data_output_stream_newFn = extern(C) GDataOutputStream* function(GOutputStream* baseStream) nothrow;
+__gshared c_g_data_output_stream_newFn c_g_data_output_stream_new; ///
+private alias c_g_data_output_stream_get_byte_orderFn = extern(C) GDataStreamByteOrder function(GDataOutputStream* stream) nothrow;
+__gshared c_g_data_output_stream_get_byte_orderFn c_g_data_output_stream_get_byte_order; ///
+private alias c_g_data_output_stream_put_byteFn = extern(C) gboolean function(GDataOutputStream* stream, ubyte data, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_data_output_stream_put_byteFn c_g_data_output_stream_put_byte; ///
+private alias c_g_data_output_stream_put_int16Fn = extern(C) gboolean function(GDataOutputStream* stream, short data, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_data_output_stream_put_int16Fn c_g_data_output_stream_put_int16; ///
+private alias c_g_data_output_stream_put_int32Fn = extern(C) gboolean function(GDataOutputStream* stream, int data, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_data_output_stream_put_int32Fn c_g_data_output_stream_put_int32; ///
+private alias c_g_data_output_stream_put_int64Fn = extern(C) gboolean function(GDataOutputStream* stream, long data, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_data_output_stream_put_int64Fn c_g_data_output_stream_put_int64; ///
+private alias c_g_data_output_stream_put_stringFn = extern(C) gboolean function(GDataOutputStream* stream, const(char)* str, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_data_output_stream_put_stringFn c_g_data_output_stream_put_string; ///
+private alias c_g_data_output_stream_put_uint16Fn = extern(C) gboolean function(GDataOutputStream* stream, ushort data, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_data_output_stream_put_uint16Fn c_g_data_output_stream_put_uint16; ///
+private alias c_g_data_output_stream_put_uint32Fn = extern(C) gboolean function(GDataOutputStream* stream, uint data, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_data_output_stream_put_uint32Fn c_g_data_output_stream_put_uint32; ///
+private alias c_g_data_output_stream_put_uint64Fn = extern(C) gboolean function(GDataOutputStream* stream, ulong data, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_data_output_stream_put_uint64Fn c_g_data_output_stream_put_uint64; ///
+private alias c_g_data_output_stream_set_byte_orderFn = extern(C) void function(GDataOutputStream* stream, GDataStreamByteOrder order) nothrow;
+__gshared c_g_data_output_stream_set_byte_orderFn c_g_data_output_stream_set_byte_order; ///
+
+// DatagramBased
+private alias c_g_datagram_based_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_datagram_based_get_typeFn c_g_datagram_based_get_type; ///
+private alias c_g_datagram_based_condition_checkFn = extern(C) GIOCondition function(GDatagramBased* datagramBased, GIOCondition condition) nothrow;
+__gshared c_g_datagram_based_condition_checkFn c_g_datagram_based_condition_check; ///
+private alias c_g_datagram_based_condition_waitFn = extern(C) gboolean function(GDatagramBased* datagramBased, GIOCondition condition, long timeout, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_datagram_based_condition_waitFn c_g_datagram_based_condition_wait; ///
+private alias c_g_datagram_based_create_sourceFn = extern(C) GSource* function(GDatagramBased* datagramBased, GIOCondition condition, GCancellable* cancellable) nothrow;
+__gshared c_g_datagram_based_create_sourceFn c_g_datagram_based_create_source; ///
+private alias c_g_datagram_based_receive_messagesFn = extern(C) int function(GDatagramBased* datagramBased, GInputMessage* messages, uint numMessages, int flags, long timeout, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_datagram_based_receive_messagesFn c_g_datagram_based_receive_messages; ///
+private alias c_g_datagram_based_send_messagesFn = extern(C) int function(GDatagramBased* datagramBased, GOutputMessage* messages, uint numMessages, int flags, long timeout, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_datagram_based_send_messagesFn c_g_datagram_based_send_messages; ///
+
+// DebugController
+private alias c_g_debug_controller_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_debug_controller_get_typeFn c_g_debug_controller_get_type; ///
+private alias c_g_debug_controller_get_debug_enabledFn = extern(C) gboolean function(GDebugController* self) nothrow;
+__gshared c_g_debug_controller_get_debug_enabledFn c_g_debug_controller_get_debug_enabled; ///
+private alias c_g_debug_controller_set_debug_enabledFn = extern(C) void function(GDebugController* self, gboolean debugEnabled) nothrow;
+__gshared c_g_debug_controller_set_debug_enabledFn c_g_debug_controller_set_debug_enabled; ///
+
+// DebugControllerDBus
+private alias c_g_debug_controller_dbus_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_debug_controller_dbus_get_typeFn c_g_debug_controller_dbus_get_type; ///
+private alias c_g_debug_controller_dbus_newFn = extern(C) GDebugControllerDBus* function(GDBusConnection* connection, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_debug_controller_dbus_newFn c_g_debug_controller_dbus_new; ///
+private alias c_g_debug_controller_dbus_stopFn = extern(C) void function(GDebugControllerDBus* self) nothrow;
+__gshared c_g_debug_controller_dbus_stopFn c_g_debug_controller_dbus_stop; ///
+
+// Drive
+private alias c_g_drive_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_drive_get_typeFn c_g_drive_get_type; ///
+private alias c_g_drive_can_ejectFn = extern(C) gboolean function(GDrive* drive) nothrow;
+__gshared c_g_drive_can_ejectFn c_g_drive_can_eject; ///
+private alias c_g_drive_can_poll_for_mediaFn = extern(C) gboolean function(GDrive* drive) nothrow;
+__gshared c_g_drive_can_poll_for_mediaFn c_g_drive_can_poll_for_media; ///
+private alias c_g_drive_can_startFn = extern(C) gboolean function(GDrive* drive) nothrow;
+__gshared c_g_drive_can_startFn c_g_drive_can_start; ///
+private alias c_g_drive_can_start_degradedFn = extern(C) gboolean function(GDrive* drive) nothrow;
+__gshared c_g_drive_can_start_degradedFn c_g_drive_can_start_degraded; ///
+private alias c_g_drive_can_stopFn = extern(C) gboolean function(GDrive* drive) nothrow;
+__gshared c_g_drive_can_stopFn c_g_drive_can_stop; ///
+private alias c_g_drive_ejectFn = extern(C) void function(GDrive* drive, GMountUnmountFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_drive_ejectFn c_g_drive_eject; ///
+private alias c_g_drive_eject_finishFn = extern(C) gboolean function(GDrive* drive, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_drive_eject_finishFn c_g_drive_eject_finish; ///
+private alias c_g_drive_eject_with_operationFn = extern(C) void function(GDrive* drive, GMountUnmountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_drive_eject_with_operationFn c_g_drive_eject_with_operation; ///
+private alias c_g_drive_eject_with_operation_finishFn = extern(C) gboolean function(GDrive* drive, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_drive_eject_with_operation_finishFn c_g_drive_eject_with_operation_finish; ///
+private alias c_g_drive_enumerate_identifiersFn = extern(C) char** function(GDrive* drive) nothrow;
+__gshared c_g_drive_enumerate_identifiersFn c_g_drive_enumerate_identifiers; ///
+private alias c_g_drive_get_iconFn = extern(C) GIcon* function(GDrive* drive) nothrow;
+__gshared c_g_drive_get_iconFn c_g_drive_get_icon; ///
+private alias c_g_drive_get_identifierFn = extern(C) char* function(GDrive* drive, const(char)* kind) nothrow;
+__gshared c_g_drive_get_identifierFn c_g_drive_get_identifier; ///
+private alias c_g_drive_get_nameFn = extern(C) char* function(GDrive* drive) nothrow;
+__gshared c_g_drive_get_nameFn c_g_drive_get_name; ///
+private alias c_g_drive_get_sort_keyFn = extern(C) const(char)* function(GDrive* drive) nothrow;
+__gshared c_g_drive_get_sort_keyFn c_g_drive_get_sort_key; ///
+private alias c_g_drive_get_start_stop_typeFn = extern(C) GDriveStartStopType function(GDrive* drive) nothrow;
+__gshared c_g_drive_get_start_stop_typeFn c_g_drive_get_start_stop_type; ///
+private alias c_g_drive_get_symbolic_iconFn = extern(C) GIcon* function(GDrive* drive) nothrow;
+__gshared c_g_drive_get_symbolic_iconFn c_g_drive_get_symbolic_icon; ///
+private alias c_g_drive_get_volumesFn = extern(C) GList* function(GDrive* drive) nothrow;
+__gshared c_g_drive_get_volumesFn c_g_drive_get_volumes; ///
+private alias c_g_drive_has_mediaFn = extern(C) gboolean function(GDrive* drive) nothrow;
+__gshared c_g_drive_has_mediaFn c_g_drive_has_media; ///
+private alias c_g_drive_has_volumesFn = extern(C) gboolean function(GDrive* drive) nothrow;
+__gshared c_g_drive_has_volumesFn c_g_drive_has_volumes; ///
+private alias c_g_drive_is_media_check_automaticFn = extern(C) gboolean function(GDrive* drive) nothrow;
+__gshared c_g_drive_is_media_check_automaticFn c_g_drive_is_media_check_automatic; ///
+private alias c_g_drive_is_media_removableFn = extern(C) gboolean function(GDrive* drive) nothrow;
+__gshared c_g_drive_is_media_removableFn c_g_drive_is_media_removable; ///
+private alias c_g_drive_is_removableFn = extern(C) gboolean function(GDrive* drive) nothrow;
+__gshared c_g_drive_is_removableFn c_g_drive_is_removable; ///
+private alias c_g_drive_poll_for_mediaFn = extern(C) void function(GDrive* drive, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_drive_poll_for_mediaFn c_g_drive_poll_for_media; ///
+private alias c_g_drive_poll_for_media_finishFn = extern(C) gboolean function(GDrive* drive, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_drive_poll_for_media_finishFn c_g_drive_poll_for_media_finish; ///
+private alias c_g_drive_startFn = extern(C) void function(GDrive* drive, GDriveStartFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_drive_startFn c_g_drive_start; ///
+private alias c_g_drive_start_finishFn = extern(C) gboolean function(GDrive* drive, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_drive_start_finishFn c_g_drive_start_finish; ///
+private alias c_g_drive_stopFn = extern(C) void function(GDrive* drive, GMountUnmountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_drive_stopFn c_g_drive_stop; ///
+private alias c_g_drive_stop_finishFn = extern(C) gboolean function(GDrive* drive, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_drive_stop_finishFn c_g_drive_stop_finish; ///
+
+// DtlsClientConnection
+private alias c_g_dtls_client_connection_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dtls_client_connection_get_typeFn c_g_dtls_client_connection_get_type; ///
+private alias c_g_dtls_client_connection_newFn = extern(C) GDatagramBased* function(GDatagramBased* baseSocket, GSocketConnectable* serverIdentity, GError** _err) nothrow;
+__gshared c_g_dtls_client_connection_newFn c_g_dtls_client_connection_new; ///
+private alias c_g_dtls_client_connection_get_accepted_casFn = extern(C) GList* function(GDtlsClientConnection* conn) nothrow;
+__gshared c_g_dtls_client_connection_get_accepted_casFn c_g_dtls_client_connection_get_accepted_cas; ///
+private alias c_g_dtls_client_connection_get_server_identityFn = extern(C) GSocketConnectable* function(GDtlsClientConnection* conn) nothrow;
+__gshared c_g_dtls_client_connection_get_server_identityFn c_g_dtls_client_connection_get_server_identity; ///
+private alias c_g_dtls_client_connection_get_validation_flagsFn = extern(C) GTlsCertificateFlags function(GDtlsClientConnection* conn) nothrow;
+__gshared c_g_dtls_client_connection_get_validation_flagsFn c_g_dtls_client_connection_get_validation_flags; ///
+private alias c_g_dtls_client_connection_set_server_identityFn = extern(C) void function(GDtlsClientConnection* conn, GSocketConnectable* identity) nothrow;
+__gshared c_g_dtls_client_connection_set_server_identityFn c_g_dtls_client_connection_set_server_identity; ///
+private alias c_g_dtls_client_connection_set_validation_flagsFn = extern(C) void function(GDtlsClientConnection* conn, GTlsCertificateFlags flags) nothrow;
+__gshared c_g_dtls_client_connection_set_validation_flagsFn c_g_dtls_client_connection_set_validation_flags; ///
+
+// DtlsConnection
+private alias c_g_dtls_connection_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dtls_connection_get_typeFn c_g_dtls_connection_get_type; ///
+private alias c_g_dtls_connection_closeFn = extern(C) gboolean function(GDtlsConnection* conn, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_dtls_connection_closeFn c_g_dtls_connection_close; ///
+private alias c_g_dtls_connection_close_asyncFn = extern(C) void function(GDtlsConnection* conn, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_dtls_connection_close_asyncFn c_g_dtls_connection_close_async; ///
+private alias c_g_dtls_connection_close_finishFn = extern(C) gboolean function(GDtlsConnection* conn, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_dtls_connection_close_finishFn c_g_dtls_connection_close_finish; ///
+private alias c_g_dtls_connection_emit_accept_certificateFn = extern(C) gboolean function(GDtlsConnection* conn, GTlsCertificate* peerCert, GTlsCertificateFlags errors) nothrow;
+__gshared c_g_dtls_connection_emit_accept_certificateFn c_g_dtls_connection_emit_accept_certificate; ///
+private alias c_g_dtls_connection_get_certificateFn = extern(C) GTlsCertificate* function(GDtlsConnection* conn) nothrow;
+__gshared c_g_dtls_connection_get_certificateFn c_g_dtls_connection_get_certificate; ///
+private alias c_g_dtls_connection_get_channel_binding_dataFn = extern(C) gboolean function(GDtlsConnection* conn, GTlsChannelBindingType type, GByteArray* data, GError** _err) nothrow;
+__gshared c_g_dtls_connection_get_channel_binding_dataFn c_g_dtls_connection_get_channel_binding_data; ///
+private alias c_g_dtls_connection_get_ciphersuite_nameFn = extern(C) char* function(GDtlsConnection* conn) nothrow;
+__gshared c_g_dtls_connection_get_ciphersuite_nameFn c_g_dtls_connection_get_ciphersuite_name; ///
+private alias c_g_dtls_connection_get_databaseFn = extern(C) GTlsDatabase* function(GDtlsConnection* conn) nothrow;
+__gshared c_g_dtls_connection_get_databaseFn c_g_dtls_connection_get_database; ///
+private alias c_g_dtls_connection_get_interactionFn = extern(C) GTlsInteraction* function(GDtlsConnection* conn) nothrow;
+__gshared c_g_dtls_connection_get_interactionFn c_g_dtls_connection_get_interaction; ///
+private alias c_g_dtls_connection_get_negotiated_protocolFn = extern(C) const(char)* function(GDtlsConnection* conn) nothrow;
+__gshared c_g_dtls_connection_get_negotiated_protocolFn c_g_dtls_connection_get_negotiated_protocol; ///
+private alias c_g_dtls_connection_get_peer_certificateFn = extern(C) GTlsCertificate* function(GDtlsConnection* conn) nothrow;
+__gshared c_g_dtls_connection_get_peer_certificateFn c_g_dtls_connection_get_peer_certificate; ///
+private alias c_g_dtls_connection_get_peer_certificate_errorsFn = extern(C) GTlsCertificateFlags function(GDtlsConnection* conn) nothrow;
+__gshared c_g_dtls_connection_get_peer_certificate_errorsFn c_g_dtls_connection_get_peer_certificate_errors; ///
+private alias c_g_dtls_connection_get_protocol_versionFn = extern(C) GTlsProtocolVersion function(GDtlsConnection* conn) nothrow;
+__gshared c_g_dtls_connection_get_protocol_versionFn c_g_dtls_connection_get_protocol_version; ///
+private alias c_g_dtls_connection_get_rehandshake_modeFn = extern(C) GTlsRehandshakeMode function(GDtlsConnection* conn) nothrow;
+__gshared c_g_dtls_connection_get_rehandshake_modeFn c_g_dtls_connection_get_rehandshake_mode; ///
+private alias c_g_dtls_connection_get_require_close_notifyFn = extern(C) gboolean function(GDtlsConnection* conn) nothrow;
+__gshared c_g_dtls_connection_get_require_close_notifyFn c_g_dtls_connection_get_require_close_notify; ///
+private alias c_g_dtls_connection_handshakeFn = extern(C) gboolean function(GDtlsConnection* conn, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_dtls_connection_handshakeFn c_g_dtls_connection_handshake; ///
+private alias c_g_dtls_connection_handshake_asyncFn = extern(C) void function(GDtlsConnection* conn, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_dtls_connection_handshake_asyncFn c_g_dtls_connection_handshake_async; ///
+private alias c_g_dtls_connection_handshake_finishFn = extern(C) gboolean function(GDtlsConnection* conn, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_dtls_connection_handshake_finishFn c_g_dtls_connection_handshake_finish; ///
+private alias c_g_dtls_connection_set_advertised_protocolsFn = extern(C) void function(GDtlsConnection* conn, const(char*)* protocols) nothrow;
+__gshared c_g_dtls_connection_set_advertised_protocolsFn c_g_dtls_connection_set_advertised_protocols; ///
+private alias c_g_dtls_connection_set_certificateFn = extern(C) void function(GDtlsConnection* conn, GTlsCertificate* certificate) nothrow;
+__gshared c_g_dtls_connection_set_certificateFn c_g_dtls_connection_set_certificate; ///
+private alias c_g_dtls_connection_set_databaseFn = extern(C) void function(GDtlsConnection* conn, GTlsDatabase* database) nothrow;
+__gshared c_g_dtls_connection_set_databaseFn c_g_dtls_connection_set_database; ///
+private alias c_g_dtls_connection_set_interactionFn = extern(C) void function(GDtlsConnection* conn, GTlsInteraction* interaction) nothrow;
+__gshared c_g_dtls_connection_set_interactionFn c_g_dtls_connection_set_interaction; ///
+private alias c_g_dtls_connection_set_rehandshake_modeFn = extern(C) void function(GDtlsConnection* conn, GTlsRehandshakeMode mode) nothrow;
+__gshared c_g_dtls_connection_set_rehandshake_modeFn c_g_dtls_connection_set_rehandshake_mode; ///
+private alias c_g_dtls_connection_set_require_close_notifyFn = extern(C) void function(GDtlsConnection* conn, gboolean requireCloseNotify) nothrow;
+__gshared c_g_dtls_connection_set_require_close_notifyFn c_g_dtls_connection_set_require_close_notify; ///
+private alias c_g_dtls_connection_shutdownFn = extern(C) gboolean function(GDtlsConnection* conn, gboolean shutdownRead, gboolean shutdownWrite, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_dtls_connection_shutdownFn c_g_dtls_connection_shutdown; ///
+private alias c_g_dtls_connection_shutdown_asyncFn = extern(C) void function(GDtlsConnection* conn, gboolean shutdownRead, gboolean shutdownWrite, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_dtls_connection_shutdown_asyncFn c_g_dtls_connection_shutdown_async; ///
+private alias c_g_dtls_connection_shutdown_finishFn = extern(C) gboolean function(GDtlsConnection* conn, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_dtls_connection_shutdown_finishFn c_g_dtls_connection_shutdown_finish; ///
+
+// DtlsServerConnection
+private alias c_g_dtls_server_connection_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dtls_server_connection_get_typeFn c_g_dtls_server_connection_get_type; ///
+private alias c_g_dtls_server_connection_newFn = extern(C) GDatagramBased* function(GDatagramBased* baseSocket, GTlsCertificate* certificate, GError** _err) nothrow;
+__gshared c_g_dtls_server_connection_newFn c_g_dtls_server_connection_new; ///
+
+// Emblem
+private alias c_g_emblem_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_emblem_get_typeFn c_g_emblem_get_type; ///
+private alias c_g_emblem_newFn = extern(C) GEmblem* function(GIcon* icon) nothrow;
+__gshared c_g_emblem_newFn c_g_emblem_new; ///
+private alias c_g_emblem_new_with_originFn = extern(C) GEmblem* function(GIcon* icon, GEmblemOrigin origin) nothrow;
+__gshared c_g_emblem_new_with_originFn c_g_emblem_new_with_origin; ///
+private alias c_g_emblem_get_iconFn = extern(C) GIcon* function(GEmblem* emblem) nothrow;
+__gshared c_g_emblem_get_iconFn c_g_emblem_get_icon; ///
+private alias c_g_emblem_get_originFn = extern(C) GEmblemOrigin function(GEmblem* emblem) nothrow;
+__gshared c_g_emblem_get_originFn c_g_emblem_get_origin; ///
+
+// EmblemedIcon
+private alias c_g_emblemed_icon_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_emblemed_icon_get_typeFn c_g_emblemed_icon_get_type; ///
+private alias c_g_emblemed_icon_newFn = extern(C) GIcon* function(GIcon* icon, GEmblem* emblem) nothrow;
+__gshared c_g_emblemed_icon_newFn c_g_emblemed_icon_new; ///
+private alias c_g_emblemed_icon_add_emblemFn = extern(C) void function(GEmblemedIcon* emblemed, GEmblem* emblem) nothrow;
+__gshared c_g_emblemed_icon_add_emblemFn c_g_emblemed_icon_add_emblem; ///
+private alias c_g_emblemed_icon_clear_emblemsFn = extern(C) void function(GEmblemedIcon* emblemed) nothrow;
+__gshared c_g_emblemed_icon_clear_emblemsFn c_g_emblemed_icon_clear_emblems; ///
+private alias c_g_emblemed_icon_get_emblemsFn = extern(C) GList* function(GEmblemedIcon* emblemed) nothrow;
+__gshared c_g_emblemed_icon_get_emblemsFn c_g_emblemed_icon_get_emblems; ///
+private alias c_g_emblemed_icon_get_iconFn = extern(C) GIcon* function(GEmblemedIcon* emblemed) nothrow;
+__gshared c_g_emblemed_icon_get_iconFn c_g_emblemed_icon_get_icon; ///
+
+// File
+private alias c_g_file_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_file_get_typeFn c_g_file_get_type; ///
+private alias c_g_file_new_build_filenameFn = extern(C) GFile* function(const(char)* firstElement,  ...) nothrow;
+__gshared c_g_file_new_build_filenameFn c_g_file_new_build_filename; ///
+private alias c_g_file_new_build_filenamevFn = extern(C) GFile* function(const(char*)* args) nothrow;
+__gshared c_g_file_new_build_filenamevFn c_g_file_new_build_filenamev; ///
+private alias c_g_file_new_for_commandline_argFn = extern(C) GFile* function(const(char)* arg) nothrow;
+__gshared c_g_file_new_for_commandline_argFn c_g_file_new_for_commandline_arg; ///
+private alias c_g_file_new_for_commandline_arg_and_cwdFn = extern(C) GFile* function(const(char)* arg, const(char)* cwd) nothrow;
+__gshared c_g_file_new_for_commandline_arg_and_cwdFn c_g_file_new_for_commandline_arg_and_cwd; ///
+private alias c_g_file_new_for_pathFn = extern(C) GFile* function(const(char)* path) nothrow;
+__gshared c_g_file_new_for_pathFn c_g_file_new_for_path; ///
+private alias c_g_file_new_for_uriFn = extern(C) GFile* function(const(char)* uri) nothrow;
+__gshared c_g_file_new_for_uriFn c_g_file_new_for_uri; ///
+private alias c_g_file_new_tmpFn = extern(C) GFile* function(const(char)* tmpl, GFileIOStream** iostream, GError** _err) nothrow;
+__gshared c_g_file_new_tmpFn c_g_file_new_tmp; ///
+private alias c_g_file_new_tmp_asyncFn = extern(C) void function(const(char)* tmpl, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_new_tmp_asyncFn c_g_file_new_tmp_async; ///
+private alias c_g_file_new_tmp_dir_asyncFn = extern(C) void function(const(char)* tmpl, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_new_tmp_dir_asyncFn c_g_file_new_tmp_dir_async; ///
+private alias c_g_file_new_tmp_dir_finishFn = extern(C) GFile* function(GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_new_tmp_dir_finishFn c_g_file_new_tmp_dir_finish; ///
+private alias c_g_file_new_tmp_finishFn = extern(C) GFile* function(GAsyncResult* result, GFileIOStream** iostream, GError** _err) nothrow;
+__gshared c_g_file_new_tmp_finishFn c_g_file_new_tmp_finish; ///
+private alias c_g_file_parse_nameFn = extern(C) GFile* function(const(char)* parseName) nothrow;
+__gshared c_g_file_parse_nameFn c_g_file_parse_name; ///
+private alias c_g_file_append_toFn = extern(C) GFileOutputStream* function(GFile* file, GFileCreateFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_append_toFn c_g_file_append_to; ///
+private alias c_g_file_append_to_asyncFn = extern(C) void function(GFile* file, GFileCreateFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_append_to_asyncFn c_g_file_append_to_async; ///
+private alias c_g_file_append_to_finishFn = extern(C) GFileOutputStream* function(GFile* file, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_file_append_to_finishFn c_g_file_append_to_finish; ///
+private alias c_g_file_build_attribute_list_for_copyFn = extern(C) char* function(GFile* file, GFileCopyFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_build_attribute_list_for_copyFn c_g_file_build_attribute_list_for_copy; ///
+private alias c_g_file_copyFn = extern(C) gboolean function(GFile* source, GFile* destination, GFileCopyFlags flags, GCancellable* cancellable, GFileProgressCallback progressCallback, void* progressCallbackData, GError** _err) nothrow;
+__gshared c_g_file_copyFn c_g_file_copy; ///
+private alias c_g_file_copy_asyncFn = extern(C) void function(GFile* source, GFile* destination, GFileCopyFlags flags, int ioPriority, GCancellable* cancellable, GFileProgressCallback progressCallback, void* progressCallbackData, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_copy_asyncFn c_g_file_copy_async; ///
+private alias c_g_file_copy_async_with_closuresFn = extern(C) void function(GFile* source, GFile* destination, GFileCopyFlags flags, int ioPriority, GCancellable* cancellable, GClosure* progressCallbackClosure, GClosure* readyCallbackClosure) nothrow;
+__gshared c_g_file_copy_async_with_closuresFn c_g_file_copy_async_with_closures; ///
+private alias c_g_file_copy_attributesFn = extern(C) gboolean function(GFile* source, GFile* destination, GFileCopyFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_copy_attributesFn c_g_file_copy_attributes; ///
+private alias c_g_file_copy_finishFn = extern(C) gboolean function(GFile* file, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_file_copy_finishFn c_g_file_copy_finish; ///
+private alias c_g_file_createFn = extern(C) GFileOutputStream* function(GFile* file, GFileCreateFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_createFn c_g_file_create; ///
+private alias c_g_file_create_asyncFn = extern(C) void function(GFile* file, GFileCreateFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_create_asyncFn c_g_file_create_async; ///
+private alias c_g_file_create_finishFn = extern(C) GFileOutputStream* function(GFile* file, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_file_create_finishFn c_g_file_create_finish; ///
+private alias c_g_file_create_readwriteFn = extern(C) GFileIOStream* function(GFile* file, GFileCreateFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_create_readwriteFn c_g_file_create_readwrite; ///
+private alias c_g_file_create_readwrite_asyncFn = extern(C) void function(GFile* file, GFileCreateFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_create_readwrite_asyncFn c_g_file_create_readwrite_async; ///
+private alias c_g_file_create_readwrite_finishFn = extern(C) GFileIOStream* function(GFile* file, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_file_create_readwrite_finishFn c_g_file_create_readwrite_finish; ///
+private alias c_g_file_deleteFn = extern(C) gboolean function(GFile* file, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_deleteFn c_g_file_delete; ///
+private alias c_g_file_delete_asyncFn = extern(C) void function(GFile* file, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_delete_asyncFn c_g_file_delete_async; ///
+private alias c_g_file_delete_finishFn = extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_delete_finishFn c_g_file_delete_finish; ///
+private alias c_g_file_dupFn = extern(C) GFile* function(GFile* file) nothrow;
+__gshared c_g_file_dupFn c_g_file_dup; ///
+private alias c_g_file_eject_mountableFn = extern(C) void function(GFile* file, GMountUnmountFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_eject_mountableFn c_g_file_eject_mountable; ///
+private alias c_g_file_eject_mountable_finishFn = extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_eject_mountable_finishFn c_g_file_eject_mountable_finish; ///
+private alias c_g_file_eject_mountable_with_operationFn = extern(C) void function(GFile* file, GMountUnmountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_eject_mountable_with_operationFn c_g_file_eject_mountable_with_operation; ///
+private alias c_g_file_eject_mountable_with_operation_finishFn = extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_eject_mountable_with_operation_finishFn c_g_file_eject_mountable_with_operation_finish; ///
+private alias c_g_file_enumerate_childrenFn = extern(C) GFileEnumerator* function(GFile* file, const(char)* attributes, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_enumerate_childrenFn c_g_file_enumerate_children; ///
+private alias c_g_file_enumerate_children_asyncFn = extern(C) void function(GFile* file, const(char)* attributes, GFileQueryInfoFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_enumerate_children_asyncFn c_g_file_enumerate_children_async; ///
+private alias c_g_file_enumerate_children_finishFn = extern(C) GFileEnumerator* function(GFile* file, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_file_enumerate_children_finishFn c_g_file_enumerate_children_finish; ///
+private alias c_g_file_equalFn = extern(C) gboolean function(GFile* file1, GFile* file2) nothrow;
+__gshared c_g_file_equalFn c_g_file_equal; ///
+private alias c_g_file_find_enclosing_mountFn = extern(C) GMount* function(GFile* file, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_find_enclosing_mountFn c_g_file_find_enclosing_mount; ///
+private alias c_g_file_find_enclosing_mount_asyncFn = extern(C) void function(GFile* file, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_find_enclosing_mount_asyncFn c_g_file_find_enclosing_mount_async; ///
+private alias c_g_file_find_enclosing_mount_finishFn = extern(C) GMount* function(GFile* file, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_file_find_enclosing_mount_finishFn c_g_file_find_enclosing_mount_finish; ///
+private alias c_g_file_get_basenameFn = extern(C) char* function(GFile* file) nothrow;
+__gshared c_g_file_get_basenameFn c_g_file_get_basename; ///
+private alias c_g_file_get_childFn = extern(C) GFile* function(GFile* file, const(char)* name) nothrow;
+__gshared c_g_file_get_childFn c_g_file_get_child; ///
+private alias c_g_file_get_child_for_display_nameFn = extern(C) GFile* function(GFile* file, const(char)* displayName, GError** _err) nothrow;
+__gshared c_g_file_get_child_for_display_nameFn c_g_file_get_child_for_display_name; ///
+private alias c_g_file_get_parentFn = extern(C) GFile* function(GFile* file) nothrow;
+__gshared c_g_file_get_parentFn c_g_file_get_parent; ///
+private alias c_g_file_get_parse_nameFn = extern(C) char* function(GFile* file) nothrow;
+__gshared c_g_file_get_parse_nameFn c_g_file_get_parse_name; ///
+private alias c_g_file_get_pathFn = extern(C) char* function(GFile* file) nothrow;
+__gshared c_g_file_get_pathFn c_g_file_get_path; ///
+private alias c_g_file_get_relative_pathFn = extern(C) char* function(GFile* parent, GFile* descendant) nothrow;
+__gshared c_g_file_get_relative_pathFn c_g_file_get_relative_path; ///
+private alias c_g_file_get_uriFn = extern(C) char* function(GFile* file) nothrow;
+__gshared c_g_file_get_uriFn c_g_file_get_uri; ///
+private alias c_g_file_get_uri_schemeFn = extern(C) char* function(GFile* file) nothrow;
+__gshared c_g_file_get_uri_schemeFn c_g_file_get_uri_scheme; ///
+private alias c_g_file_has_parentFn = extern(C) gboolean function(GFile* file, GFile* parent) nothrow;
+__gshared c_g_file_has_parentFn c_g_file_has_parent; ///
+private alias c_g_file_has_prefixFn = extern(C) gboolean function(GFile* file, GFile* prefix) nothrow;
+__gshared c_g_file_has_prefixFn c_g_file_has_prefix; ///
+private alias c_g_file_has_uri_schemeFn = extern(C) gboolean function(GFile* file, const(char)* uriScheme) nothrow;
+__gshared c_g_file_has_uri_schemeFn c_g_file_has_uri_scheme; ///
+private alias c_g_file_hashFn = extern(C) uint function(GFile* file) nothrow;
+__gshared c_g_file_hashFn c_g_file_hash; ///
+private alias c_g_file_is_nativeFn = extern(C) gboolean function(GFile* file) nothrow;
+__gshared c_g_file_is_nativeFn c_g_file_is_native; ///
+private alias c_g_file_load_bytesFn = extern(C) GBytes* function(GFile* file, GCancellable* cancellable, char** etagOut, GError** _err) nothrow;
+__gshared c_g_file_load_bytesFn c_g_file_load_bytes; ///
+private alias c_g_file_load_bytes_asyncFn = extern(C) void function(GFile* file, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_load_bytes_asyncFn c_g_file_load_bytes_async; ///
+private alias c_g_file_load_bytes_finishFn = extern(C) GBytes* function(GFile* file, GAsyncResult* result, char** etagOut, GError** _err) nothrow;
+__gshared c_g_file_load_bytes_finishFn c_g_file_load_bytes_finish; ///
+private alias c_g_file_load_contentsFn = extern(C) gboolean function(GFile* file, GCancellable* cancellable, ubyte** contents, size_t* length, char** etagOut, GError** _err) nothrow;
+__gshared c_g_file_load_contentsFn c_g_file_load_contents; ///
+private alias c_g_file_load_contents_asyncFn = extern(C) void function(GFile* file, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_load_contents_asyncFn c_g_file_load_contents_async; ///
+private alias c_g_file_load_contents_finishFn = extern(C) gboolean function(GFile* file, GAsyncResult* res, ubyte** contents, size_t* length, char** etagOut, GError** _err) nothrow;
+__gshared c_g_file_load_contents_finishFn c_g_file_load_contents_finish; ///
+private alias c_g_file_load_partial_contents_asyncFn = extern(C) void function(GFile* file, GCancellable* cancellable, GFileReadMoreCallback readMoreCallback, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_load_partial_contents_asyncFn c_g_file_load_partial_contents_async; ///
+private alias c_g_file_load_partial_contents_finishFn = extern(C) gboolean function(GFile* file, GAsyncResult* res, ubyte** contents, size_t* length, char** etagOut, GError** _err) nothrow;
+__gshared c_g_file_load_partial_contents_finishFn c_g_file_load_partial_contents_finish; ///
+private alias c_g_file_make_directoryFn = extern(C) gboolean function(GFile* file, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_make_directoryFn c_g_file_make_directory; ///
+private alias c_g_file_make_directory_asyncFn = extern(C) void function(GFile* file, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_make_directory_asyncFn c_g_file_make_directory_async; ///
+private alias c_g_file_make_directory_finishFn = extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_make_directory_finishFn c_g_file_make_directory_finish; ///
+private alias c_g_file_make_directory_with_parentsFn = extern(C) gboolean function(GFile* file, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_make_directory_with_parentsFn c_g_file_make_directory_with_parents; ///
+private alias c_g_file_make_symbolic_linkFn = extern(C) gboolean function(GFile* file, const(char)* symlinkValue, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_make_symbolic_linkFn c_g_file_make_symbolic_link; ///
+private alias c_g_file_make_symbolic_link_asyncFn = extern(C) void function(GFile* file, const(char)* symlinkValue, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_make_symbolic_link_asyncFn c_g_file_make_symbolic_link_async; ///
+private alias c_g_file_make_symbolic_link_finishFn = extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_make_symbolic_link_finishFn c_g_file_make_symbolic_link_finish; ///
+private alias c_g_file_measure_disk_usageFn = extern(C) gboolean function(GFile* file, GFileMeasureFlags flags, GCancellable* cancellable, GFileMeasureProgressCallback progressCallback, void* progressData, ulong* diskUsage, ulong* numDirs, ulong* numFiles, GError** _err) nothrow;
+__gshared c_g_file_measure_disk_usageFn c_g_file_measure_disk_usage; ///
+private alias c_g_file_measure_disk_usage_asyncFn = extern(C) void function(GFile* file, GFileMeasureFlags flags, int ioPriority, GCancellable* cancellable, GFileMeasureProgressCallback progressCallback, void* progressData, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_measure_disk_usage_asyncFn c_g_file_measure_disk_usage_async; ///
+private alias c_g_file_measure_disk_usage_finishFn = extern(C) gboolean function(GFile* file, GAsyncResult* result, ulong* diskUsage, ulong* numDirs, ulong* numFiles, GError** _err) nothrow;
+__gshared c_g_file_measure_disk_usage_finishFn c_g_file_measure_disk_usage_finish; ///
+private alias c_g_file_monitorFn = extern(C) GFileMonitor* function(GFile* file, GFileMonitorFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_monitorFn c_g_file_monitor; ///
+private alias c_g_file_monitor_directoryFn = extern(C) GFileMonitor* function(GFile* file, GFileMonitorFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_monitor_directoryFn c_g_file_monitor_directory; ///
+private alias c_g_file_monitor_fileFn = extern(C) GFileMonitor* function(GFile* file, GFileMonitorFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_monitor_fileFn c_g_file_monitor_file; ///
+private alias c_g_file_mount_enclosing_volumeFn = extern(C) void function(GFile* location, GMountMountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_mount_enclosing_volumeFn c_g_file_mount_enclosing_volume; ///
+private alias c_g_file_mount_enclosing_volume_finishFn = extern(C) gboolean function(GFile* location, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_mount_enclosing_volume_finishFn c_g_file_mount_enclosing_volume_finish; ///
+private alias c_g_file_mount_mountableFn = extern(C) void function(GFile* file, GMountMountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_mount_mountableFn c_g_file_mount_mountable; ///
+private alias c_g_file_mount_mountable_finishFn = extern(C) GFile* function(GFile* file, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_mount_mountable_finishFn c_g_file_mount_mountable_finish; ///
+private alias c_g_file_moveFn = extern(C) gboolean function(GFile* source, GFile* destination, GFileCopyFlags flags, GCancellable* cancellable, GFileProgressCallback progressCallback, void* progressCallbackData, GError** _err) nothrow;
+__gshared c_g_file_moveFn c_g_file_move; ///
+private alias c_g_file_move_asyncFn = extern(C) void function(GFile* source, GFile* destination, GFileCopyFlags flags, int ioPriority, GCancellable* cancellable, GFileProgressCallback progressCallback, void* progressCallbackData, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_move_asyncFn c_g_file_move_async; ///
+private alias c_g_file_move_async_with_closuresFn = extern(C) void function(GFile* source, GFile* destination, GFileCopyFlags flags, int ioPriority, GCancellable* cancellable, GClosure* progressCallbackClosure, GClosure* readyCallbackClosure) nothrow;
+__gshared c_g_file_move_async_with_closuresFn c_g_file_move_async_with_closures; ///
+private alias c_g_file_move_finishFn = extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_move_finishFn c_g_file_move_finish; ///
+private alias c_g_file_open_readwriteFn = extern(C) GFileIOStream* function(GFile* file, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_open_readwriteFn c_g_file_open_readwrite; ///
+private alias c_g_file_open_readwrite_asyncFn = extern(C) void function(GFile* file, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_open_readwrite_asyncFn c_g_file_open_readwrite_async; ///
+private alias c_g_file_open_readwrite_finishFn = extern(C) GFileIOStream* function(GFile* file, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_file_open_readwrite_finishFn c_g_file_open_readwrite_finish; ///
+private alias c_g_file_peek_pathFn = extern(C) const(char)* function(GFile* file) nothrow;
+__gshared c_g_file_peek_pathFn c_g_file_peek_path; ///
+private alias c_g_file_poll_mountableFn = extern(C) void function(GFile* file, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_poll_mountableFn c_g_file_poll_mountable; ///
+private alias c_g_file_poll_mountable_finishFn = extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_poll_mountable_finishFn c_g_file_poll_mountable_finish; ///
+private alias c_g_file_query_default_handlerFn = extern(C) GAppInfo* function(GFile* file, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_query_default_handlerFn c_g_file_query_default_handler; ///
+private alias c_g_file_query_default_handler_asyncFn = extern(C) void function(GFile* file, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_query_default_handler_asyncFn c_g_file_query_default_handler_async; ///
+private alias c_g_file_query_default_handler_finishFn = extern(C) GAppInfo* function(GFile* file, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_query_default_handler_finishFn c_g_file_query_default_handler_finish; ///
+private alias c_g_file_query_existsFn = extern(C) gboolean function(GFile* file, GCancellable* cancellable) nothrow;
+__gshared c_g_file_query_existsFn c_g_file_query_exists; ///
+private alias c_g_file_query_file_typeFn = extern(C) GFileType function(GFile* file, GFileQueryInfoFlags flags, GCancellable* cancellable) nothrow;
+__gshared c_g_file_query_file_typeFn c_g_file_query_file_type; ///
+private alias c_g_file_query_filesystem_infoFn = extern(C) GFileInfo* function(GFile* file, const(char)* attributes, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_query_filesystem_infoFn c_g_file_query_filesystem_info; ///
+private alias c_g_file_query_filesystem_info_asyncFn = extern(C) void function(GFile* file, const(char)* attributes, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_query_filesystem_info_asyncFn c_g_file_query_filesystem_info_async; ///
+private alias c_g_file_query_filesystem_info_finishFn = extern(C) GFileInfo* function(GFile* file, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_file_query_filesystem_info_finishFn c_g_file_query_filesystem_info_finish; ///
+private alias c_g_file_query_infoFn = extern(C) GFileInfo* function(GFile* file, const(char)* attributes, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_query_infoFn c_g_file_query_info; ///
+private alias c_g_file_query_info_asyncFn = extern(C) void function(GFile* file, const(char)* attributes, GFileQueryInfoFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_query_info_asyncFn c_g_file_query_info_async; ///
+private alias c_g_file_query_info_finishFn = extern(C) GFileInfo* function(GFile* file, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_file_query_info_finishFn c_g_file_query_info_finish; ///
+private alias c_g_file_query_settable_attributesFn = extern(C) GFileAttributeInfoList* function(GFile* file, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_query_settable_attributesFn c_g_file_query_settable_attributes; ///
+private alias c_g_file_query_writable_namespacesFn = extern(C) GFileAttributeInfoList* function(GFile* file, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_query_writable_namespacesFn c_g_file_query_writable_namespaces; ///
+private alias c_g_file_readFn = extern(C) GFileInputStream* function(GFile* file, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_readFn c_g_file_read; ///
+private alias c_g_file_read_asyncFn = extern(C) void function(GFile* file, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_read_asyncFn c_g_file_read_async; ///
+private alias c_g_file_read_finishFn = extern(C) GFileInputStream* function(GFile* file, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_file_read_finishFn c_g_file_read_finish; ///
+private alias c_g_file_replaceFn = extern(C) GFileOutputStream* function(GFile* file, const(char)* etag, gboolean makeBackup, GFileCreateFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_replaceFn c_g_file_replace; ///
+private alias c_g_file_replace_asyncFn = extern(C) void function(GFile* file, const(char)* etag, gboolean makeBackup, GFileCreateFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_replace_asyncFn c_g_file_replace_async; ///
+private alias c_g_file_replace_contentsFn = extern(C) gboolean function(GFile* file, const(ubyte)* contents, size_t length, const(char)* etag, gboolean makeBackup, GFileCreateFlags flags, char** newEtag, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_replace_contentsFn c_g_file_replace_contents; ///
+private alias c_g_file_replace_contents_asyncFn = extern(C) void function(GFile* file, const(ubyte)* contents, size_t length, const(char)* etag, gboolean makeBackup, GFileCreateFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_replace_contents_asyncFn c_g_file_replace_contents_async; ///
+private alias c_g_file_replace_contents_bytes_asyncFn = extern(C) void function(GFile* file, GBytes* contents, const(char)* etag, gboolean makeBackup, GFileCreateFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_replace_contents_bytes_asyncFn c_g_file_replace_contents_bytes_async; ///
+private alias c_g_file_replace_contents_finishFn = extern(C) gboolean function(GFile* file, GAsyncResult* res, char** newEtag, GError** _err) nothrow;
+__gshared c_g_file_replace_contents_finishFn c_g_file_replace_contents_finish; ///
+private alias c_g_file_replace_finishFn = extern(C) GFileOutputStream* function(GFile* file, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_file_replace_finishFn c_g_file_replace_finish; ///
+private alias c_g_file_replace_readwriteFn = extern(C) GFileIOStream* function(GFile* file, const(char)* etag, gboolean makeBackup, GFileCreateFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_replace_readwriteFn c_g_file_replace_readwrite; ///
+private alias c_g_file_replace_readwrite_asyncFn = extern(C) void function(GFile* file, const(char)* etag, gboolean makeBackup, GFileCreateFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_replace_readwrite_asyncFn c_g_file_replace_readwrite_async; ///
+private alias c_g_file_replace_readwrite_finishFn = extern(C) GFileIOStream* function(GFile* file, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_file_replace_readwrite_finishFn c_g_file_replace_readwrite_finish; ///
+private alias c_g_file_resolve_relative_pathFn = extern(C) GFile* function(GFile* file, const(char)* relativePath) nothrow;
+__gshared c_g_file_resolve_relative_pathFn c_g_file_resolve_relative_path; ///
+private alias c_g_file_set_attributeFn = extern(C) gboolean function(GFile* file, const(char)* attribute, GFileAttributeType type, void* valueP, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_set_attributeFn c_g_file_set_attribute; ///
+private alias c_g_file_set_attribute_byte_stringFn = extern(C) gboolean function(GFile* file, const(char)* attribute, const(char)* value, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_set_attribute_byte_stringFn c_g_file_set_attribute_byte_string; ///
+private alias c_g_file_set_attribute_int32Fn = extern(C) gboolean function(GFile* file, const(char)* attribute, int value, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_set_attribute_int32Fn c_g_file_set_attribute_int32; ///
+private alias c_g_file_set_attribute_int64Fn = extern(C) gboolean function(GFile* file, const(char)* attribute, long value, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_set_attribute_int64Fn c_g_file_set_attribute_int64; ///
+private alias c_g_file_set_attribute_stringFn = extern(C) gboolean function(GFile* file, const(char)* attribute, const(char)* value, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_set_attribute_stringFn c_g_file_set_attribute_string; ///
+private alias c_g_file_set_attribute_uint32Fn = extern(C) gboolean function(GFile* file, const(char)* attribute, uint value, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_set_attribute_uint32Fn c_g_file_set_attribute_uint32; ///
+private alias c_g_file_set_attribute_uint64Fn = extern(C) gboolean function(GFile* file, const(char)* attribute, ulong value, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_set_attribute_uint64Fn c_g_file_set_attribute_uint64; ///
+private alias c_g_file_set_attributes_asyncFn = extern(C) void function(GFile* file, GFileInfo* info, GFileQueryInfoFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_set_attributes_asyncFn c_g_file_set_attributes_async; ///
+private alias c_g_file_set_attributes_finishFn = extern(C) gboolean function(GFile* file, GAsyncResult* result, GFileInfo** info, GError** _err) nothrow;
+__gshared c_g_file_set_attributes_finishFn c_g_file_set_attributes_finish; ///
+private alias c_g_file_set_attributes_from_infoFn = extern(C) gboolean function(GFile* file, GFileInfo* info, GFileQueryInfoFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_set_attributes_from_infoFn c_g_file_set_attributes_from_info; ///
+private alias c_g_file_set_display_nameFn = extern(C) GFile* function(GFile* file, const(char)* displayName, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_set_display_nameFn c_g_file_set_display_name; ///
+private alias c_g_file_set_display_name_asyncFn = extern(C) void function(GFile* file, const(char)* displayName, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_set_display_name_asyncFn c_g_file_set_display_name_async; ///
+private alias c_g_file_set_display_name_finishFn = extern(C) GFile* function(GFile* file, GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_file_set_display_name_finishFn c_g_file_set_display_name_finish; ///
+private alias c_g_file_start_mountableFn = extern(C) void function(GFile* file, GDriveStartFlags flags, GMountOperation* startOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_start_mountableFn c_g_file_start_mountable; ///
+private alias c_g_file_start_mountable_finishFn = extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_start_mountable_finishFn c_g_file_start_mountable_finish; ///
+private alias c_g_file_stop_mountableFn = extern(C) void function(GFile* file, GMountUnmountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_stop_mountableFn c_g_file_stop_mountable; ///
+private alias c_g_file_stop_mountable_finishFn = extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_stop_mountable_finishFn c_g_file_stop_mountable_finish; ///
+private alias c_g_file_supports_thread_contextsFn = extern(C) gboolean function(GFile* file) nothrow;
+__gshared c_g_file_supports_thread_contextsFn c_g_file_supports_thread_contexts; ///
+private alias c_g_file_trashFn = extern(C) gboolean function(GFile* file, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_trashFn c_g_file_trash; ///
+private alias c_g_file_trash_asyncFn = extern(C) void function(GFile* file, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_trash_asyncFn c_g_file_trash_async; ///
+private alias c_g_file_trash_finishFn = extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_trash_finishFn c_g_file_trash_finish; ///
+private alias c_g_file_unmount_mountableFn = extern(C) void function(GFile* file, GMountUnmountFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_unmount_mountableFn c_g_file_unmount_mountable; ///
+private alias c_g_file_unmount_mountable_finishFn = extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_unmount_mountable_finishFn c_g_file_unmount_mountable_finish; ///
+private alias c_g_file_unmount_mountable_with_operationFn = extern(C) void function(GFile* file, GMountUnmountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_unmount_mountable_with_operationFn c_g_file_unmount_mountable_with_operation; ///
+private alias c_g_file_unmount_mountable_with_operation_finishFn = extern(C) gboolean function(GFile* file, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_unmount_mountable_with_operation_finishFn c_g_file_unmount_mountable_with_operation_finish; ///
+
+// FileAttributeInfoList
+private alias c_g_file_attribute_info_list_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_file_attribute_info_list_get_typeFn c_g_file_attribute_info_list_get_type; ///
+private alias c_g_file_attribute_info_list_newFn = extern(C) GFileAttributeInfoList* function() nothrow;
+__gshared c_g_file_attribute_info_list_newFn c_g_file_attribute_info_list_new; ///
+private alias c_g_file_attribute_info_list_addFn = extern(C) void function(GFileAttributeInfoList* list, const(char)* name, GFileAttributeType type, GFileAttributeInfoFlags flags) nothrow;
+__gshared c_g_file_attribute_info_list_addFn c_g_file_attribute_info_list_add; ///
+private alias c_g_file_attribute_info_list_dupFn = extern(C) GFileAttributeInfoList* function(GFileAttributeInfoList* list) nothrow;
+__gshared c_g_file_attribute_info_list_dupFn c_g_file_attribute_info_list_dup; ///
+private alias c_g_file_attribute_info_list_lookupFn = extern(C) const(GFileAttributeInfo)* function(GFileAttributeInfoList* list, const(char)* name) nothrow;
+__gshared c_g_file_attribute_info_list_lookupFn c_g_file_attribute_info_list_lookup; ///
+private alias c_g_file_attribute_info_list_refFn = extern(C) GFileAttributeInfoList* function(GFileAttributeInfoList* list) nothrow;
+__gshared c_g_file_attribute_info_list_refFn c_g_file_attribute_info_list_ref; ///
+private alias c_g_file_attribute_info_list_unrefFn = extern(C) void function(GFileAttributeInfoList* list) nothrow;
+__gshared c_g_file_attribute_info_list_unrefFn c_g_file_attribute_info_list_unref; ///
+
+// FileAttributeMatcher
+private alias c_g_file_attribute_matcher_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_file_attribute_matcher_get_typeFn c_g_file_attribute_matcher_get_type; ///
+private alias c_g_file_attribute_matcher_newFn = extern(C) GFileAttributeMatcher* function(const(char)* attributes) nothrow;
+__gshared c_g_file_attribute_matcher_newFn c_g_file_attribute_matcher_new; ///
+private alias c_g_file_attribute_matcher_enumerate_namespaceFn = extern(C) gboolean function(GFileAttributeMatcher* matcher, const(char)* ns) nothrow;
+__gshared c_g_file_attribute_matcher_enumerate_namespaceFn c_g_file_attribute_matcher_enumerate_namespace; ///
+private alias c_g_file_attribute_matcher_enumerate_nextFn = extern(C) const(char)* function(GFileAttributeMatcher* matcher) nothrow;
+__gshared c_g_file_attribute_matcher_enumerate_nextFn c_g_file_attribute_matcher_enumerate_next; ///
+private alias c_g_file_attribute_matcher_matchesFn = extern(C) gboolean function(GFileAttributeMatcher* matcher, const(char)* attribute) nothrow;
+__gshared c_g_file_attribute_matcher_matchesFn c_g_file_attribute_matcher_matches; ///
+private alias c_g_file_attribute_matcher_matches_onlyFn = extern(C) gboolean function(GFileAttributeMatcher* matcher, const(char)* attribute) nothrow;
+__gshared c_g_file_attribute_matcher_matches_onlyFn c_g_file_attribute_matcher_matches_only; ///
+private alias c_g_file_attribute_matcher_refFn = extern(C) GFileAttributeMatcher* function(GFileAttributeMatcher* matcher) nothrow;
+__gshared c_g_file_attribute_matcher_refFn c_g_file_attribute_matcher_ref; ///
+private alias c_g_file_attribute_matcher_subtractFn = extern(C) GFileAttributeMatcher* function(GFileAttributeMatcher* matcher, GFileAttributeMatcher* subtract) nothrow;
+__gshared c_g_file_attribute_matcher_subtractFn c_g_file_attribute_matcher_subtract; ///
+private alias c_g_file_attribute_matcher_to_stringFn = extern(C) char* function(GFileAttributeMatcher* matcher) nothrow;
+__gshared c_g_file_attribute_matcher_to_stringFn c_g_file_attribute_matcher_to_string; ///
+private alias c_g_file_attribute_matcher_unrefFn = extern(C) void function(GFileAttributeMatcher* matcher) nothrow;
+__gshared c_g_file_attribute_matcher_unrefFn c_g_file_attribute_matcher_unref; ///
+
+// FileEnumerator
+private alias c_g_file_enumerator_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_file_enumerator_get_typeFn c_g_file_enumerator_get_type; ///
+private alias c_g_file_enumerator_closeFn = extern(C) gboolean function(GFileEnumerator* enumerator, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_enumerator_closeFn c_g_file_enumerator_close; ///
+private alias c_g_file_enumerator_close_asyncFn = extern(C) void function(GFileEnumerator* enumerator, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_enumerator_close_asyncFn c_g_file_enumerator_close_async; ///
+private alias c_g_file_enumerator_close_finishFn = extern(C) gboolean function(GFileEnumerator* enumerator, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_enumerator_close_finishFn c_g_file_enumerator_close_finish; ///
+private alias c_g_file_enumerator_get_childFn = extern(C) GFile* function(GFileEnumerator* enumerator, GFileInfo* info) nothrow;
+__gshared c_g_file_enumerator_get_childFn c_g_file_enumerator_get_child; ///
+private alias c_g_file_enumerator_get_containerFn = extern(C) GFile* function(GFileEnumerator* enumerator) nothrow;
+__gshared c_g_file_enumerator_get_containerFn c_g_file_enumerator_get_container; ///
+private alias c_g_file_enumerator_has_pendingFn = extern(C) gboolean function(GFileEnumerator* enumerator) nothrow;
+__gshared c_g_file_enumerator_has_pendingFn c_g_file_enumerator_has_pending; ///
+private alias c_g_file_enumerator_is_closedFn = extern(C) gboolean function(GFileEnumerator* enumerator) nothrow;
+__gshared c_g_file_enumerator_is_closedFn c_g_file_enumerator_is_closed; ///
+private alias c_g_file_enumerator_iterateFn = extern(C) gboolean function(GFileEnumerator* direnum, GFileInfo** outInfo, GFile** outChild, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_enumerator_iterateFn c_g_file_enumerator_iterate; ///
+private alias c_g_file_enumerator_next_fileFn = extern(C) GFileInfo* function(GFileEnumerator* enumerator, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_enumerator_next_fileFn c_g_file_enumerator_next_file; ///
+private alias c_g_file_enumerator_next_files_asyncFn = extern(C) void function(GFileEnumerator* enumerator, int numFiles, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_enumerator_next_files_asyncFn c_g_file_enumerator_next_files_async; ///
+private alias c_g_file_enumerator_next_files_finishFn = extern(C) GList* function(GFileEnumerator* enumerator, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_enumerator_next_files_finishFn c_g_file_enumerator_next_files_finish; ///
+private alias c_g_file_enumerator_set_pendingFn = extern(C) void function(GFileEnumerator* enumerator, gboolean pending) nothrow;
+__gshared c_g_file_enumerator_set_pendingFn c_g_file_enumerator_set_pending; ///
+
+// FileIOStream
+private alias c_g_file_io_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_file_io_stream_get_typeFn c_g_file_io_stream_get_type; ///
+private alias c_g_file_io_stream_get_etagFn = extern(C) char* function(GFileIOStream* stream) nothrow;
+__gshared c_g_file_io_stream_get_etagFn c_g_file_io_stream_get_etag; ///
+private alias c_g_file_io_stream_query_infoFn = extern(C) GFileInfo* function(GFileIOStream* stream, const(char)* attributes, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_io_stream_query_infoFn c_g_file_io_stream_query_info; ///
+private alias c_g_file_io_stream_query_info_asyncFn = extern(C) void function(GFileIOStream* stream, const(char)* attributes, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_io_stream_query_info_asyncFn c_g_file_io_stream_query_info_async; ///
+private alias c_g_file_io_stream_query_info_finishFn = extern(C) GFileInfo* function(GFileIOStream* stream, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_io_stream_query_info_finishFn c_g_file_io_stream_query_info_finish; ///
+
+// FileIcon
+private alias c_g_file_icon_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_file_icon_get_typeFn c_g_file_icon_get_type; ///
+private alias c_g_file_icon_newFn = extern(C) GIcon* function(GFile* file) nothrow;
+__gshared c_g_file_icon_newFn c_g_file_icon_new; ///
+private alias c_g_file_icon_get_fileFn = extern(C) GFile* function(GFileIcon* icon) nothrow;
+__gshared c_g_file_icon_get_fileFn c_g_file_icon_get_file; ///
+
+// FileInfo
+private alias c_g_file_info_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_file_info_get_typeFn c_g_file_info_get_type; ///
+private alias c_g_file_info_newFn = extern(C) GFileInfo* function() nothrow;
+__gshared c_g_file_info_newFn c_g_file_info_new; ///
+private alias c_g_file_info_clear_statusFn = extern(C) void function(GFileInfo* info) nothrow;
+__gshared c_g_file_info_clear_statusFn c_g_file_info_clear_status; ///
+private alias c_g_file_info_copy_intoFn = extern(C) void function(GFileInfo* srcInfo, GFileInfo* destInfo) nothrow;
+__gshared c_g_file_info_copy_intoFn c_g_file_info_copy_into; ///
+private alias c_g_file_info_dupFn = extern(C) GFileInfo* function(GFileInfo* other) nothrow;
+__gshared c_g_file_info_dupFn c_g_file_info_dup; ///
+private alias c_g_file_info_get_access_date_timeFn = extern(C) GDateTime* function(GFileInfo* info) nothrow;
+__gshared c_g_file_info_get_access_date_timeFn c_g_file_info_get_access_date_time; ///
+private alias c_g_file_info_get_attribute_as_stringFn = extern(C) char* function(GFileInfo* info, const(char)* attribute) nothrow;
+__gshared c_g_file_info_get_attribute_as_stringFn c_g_file_info_get_attribute_as_string; ///
+private alias c_g_file_info_get_attribute_booleanFn = extern(C) gboolean function(GFileInfo* info, const(char)* attribute) nothrow;
+__gshared c_g_file_info_get_attribute_booleanFn c_g_file_info_get_attribute_boolean; ///
+private alias c_g_file_info_get_attribute_byte_stringFn = extern(C) const(char)* function(GFileInfo* info, const(char)* attribute) nothrow;
+__gshared c_g_file_info_get_attribute_byte_stringFn c_g_file_info_get_attribute_byte_string; ///
+private alias c_g_file_info_get_attribute_dataFn = extern(C) gboolean function(GFileInfo* info, const(char)* attribute, GFileAttributeType* type, void** valuePp, GFileAttributeStatus* status) nothrow;
+__gshared c_g_file_info_get_attribute_dataFn c_g_file_info_get_attribute_data; ///
+private alias c_g_file_info_get_attribute_file_pathFn = extern(C) const(char)* function(GFileInfo* info, const(char)* attribute) nothrow;
+__gshared c_g_file_info_get_attribute_file_pathFn c_g_file_info_get_attribute_file_path; ///
+private alias c_g_file_info_get_attribute_int32Fn = extern(C) int function(GFileInfo* info, const(char)* attribute) nothrow;
+__gshared c_g_file_info_get_attribute_int32Fn c_g_file_info_get_attribute_int32; ///
+private alias c_g_file_info_get_attribute_int64Fn = extern(C) long function(GFileInfo* info, const(char)* attribute) nothrow;
+__gshared c_g_file_info_get_attribute_int64Fn c_g_file_info_get_attribute_int64; ///
+private alias c_g_file_info_get_attribute_objectFn = extern(C) GObject* function(GFileInfo* info, const(char)* attribute) nothrow;
+__gshared c_g_file_info_get_attribute_objectFn c_g_file_info_get_attribute_object; ///
+private alias c_g_file_info_get_attribute_statusFn = extern(C) GFileAttributeStatus function(GFileInfo* info, const(char)* attribute) nothrow;
+__gshared c_g_file_info_get_attribute_statusFn c_g_file_info_get_attribute_status; ///
+private alias c_g_file_info_get_attribute_stringFn = extern(C) const(char)* function(GFileInfo* info, const(char)* attribute) nothrow;
+__gshared c_g_file_info_get_attribute_stringFn c_g_file_info_get_attribute_string; ///
+private alias c_g_file_info_get_attribute_stringvFn = extern(C) char** function(GFileInfo* info, const(char)* attribute) nothrow;
+__gshared c_g_file_info_get_attribute_stringvFn c_g_file_info_get_attribute_stringv; ///
+private alias c_g_file_info_get_attribute_typeFn = extern(C) GFileAttributeType function(GFileInfo* info, const(char)* attribute) nothrow;
+__gshared c_g_file_info_get_attribute_typeFn c_g_file_info_get_attribute_type; ///
+private alias c_g_file_info_get_attribute_uint32Fn = extern(C) uint function(GFileInfo* info, const(char)* attribute) nothrow;
+__gshared c_g_file_info_get_attribute_uint32Fn c_g_file_info_get_attribute_uint32; ///
+private alias c_g_file_info_get_attribute_uint64Fn = extern(C) ulong function(GFileInfo* info, const(char)* attribute) nothrow;
+__gshared c_g_file_info_get_attribute_uint64Fn c_g_file_info_get_attribute_uint64; ///
+private alias c_g_file_info_get_content_typeFn = extern(C) const(char)* function(GFileInfo* info) nothrow;
+__gshared c_g_file_info_get_content_typeFn c_g_file_info_get_content_type; ///
+private alias c_g_file_info_get_creation_date_timeFn = extern(C) GDateTime* function(GFileInfo* info) nothrow;
+__gshared c_g_file_info_get_creation_date_timeFn c_g_file_info_get_creation_date_time; ///
+private alias c_g_file_info_get_deletion_dateFn = extern(C) GDateTime* function(GFileInfo* info) nothrow;
+__gshared c_g_file_info_get_deletion_dateFn c_g_file_info_get_deletion_date; ///
+private alias c_g_file_info_get_display_nameFn = extern(C) const(char)* function(GFileInfo* info) nothrow;
+__gshared c_g_file_info_get_display_nameFn c_g_file_info_get_display_name; ///
+private alias c_g_file_info_get_edit_nameFn = extern(C) const(char)* function(GFileInfo* info) nothrow;
+__gshared c_g_file_info_get_edit_nameFn c_g_file_info_get_edit_name; ///
+private alias c_g_file_info_get_etagFn = extern(C) const(char)* function(GFileInfo* info) nothrow;
+__gshared c_g_file_info_get_etagFn c_g_file_info_get_etag; ///
+private alias c_g_file_info_get_file_typeFn = extern(C) GFileType function(GFileInfo* info) nothrow;
+__gshared c_g_file_info_get_file_typeFn c_g_file_info_get_file_type; ///
+private alias c_g_file_info_get_iconFn = extern(C) GIcon* function(GFileInfo* info) nothrow;
+__gshared c_g_file_info_get_iconFn c_g_file_info_get_icon; ///
+private alias c_g_file_info_get_is_backupFn = extern(C) gboolean function(GFileInfo* info) nothrow;
+__gshared c_g_file_info_get_is_backupFn c_g_file_info_get_is_backup; ///
+private alias c_g_file_info_get_is_hiddenFn = extern(C) gboolean function(GFileInfo* info) nothrow;
+__gshared c_g_file_info_get_is_hiddenFn c_g_file_info_get_is_hidden; ///
+private alias c_g_file_info_get_is_symlinkFn = extern(C) gboolean function(GFileInfo* info) nothrow;
+__gshared c_g_file_info_get_is_symlinkFn c_g_file_info_get_is_symlink; ///
+private alias c_g_file_info_get_modification_date_timeFn = extern(C) GDateTime* function(GFileInfo* info) nothrow;
+__gshared c_g_file_info_get_modification_date_timeFn c_g_file_info_get_modification_date_time; ///
+private alias c_g_file_info_get_modification_timeFn = extern(C) void function(GFileInfo* info, GTimeVal* result) nothrow;
+__gshared c_g_file_info_get_modification_timeFn c_g_file_info_get_modification_time; ///
+private alias c_g_file_info_get_nameFn = extern(C) const(char)* function(GFileInfo* info) nothrow;
+__gshared c_g_file_info_get_nameFn c_g_file_info_get_name; ///
+private alias c_g_file_info_get_sizeFn = extern(C) long function(GFileInfo* info) nothrow;
+__gshared c_g_file_info_get_sizeFn c_g_file_info_get_size; ///
+private alias c_g_file_info_get_sort_orderFn = extern(C) int function(GFileInfo* info) nothrow;
+__gshared c_g_file_info_get_sort_orderFn c_g_file_info_get_sort_order; ///
+private alias c_g_file_info_get_symbolic_iconFn = extern(C) GIcon* function(GFileInfo* info) nothrow;
+__gshared c_g_file_info_get_symbolic_iconFn c_g_file_info_get_symbolic_icon; ///
+private alias c_g_file_info_get_symlink_targetFn = extern(C) const(char)* function(GFileInfo* info) nothrow;
+__gshared c_g_file_info_get_symlink_targetFn c_g_file_info_get_symlink_target; ///
+private alias c_g_file_info_has_attributeFn = extern(C) gboolean function(GFileInfo* info, const(char)* attribute) nothrow;
+__gshared c_g_file_info_has_attributeFn c_g_file_info_has_attribute; ///
+private alias c_g_file_info_has_namespaceFn = extern(C) gboolean function(GFileInfo* info, const(char)* nameSpace) nothrow;
+__gshared c_g_file_info_has_namespaceFn c_g_file_info_has_namespace; ///
+private alias c_g_file_info_list_attributesFn = extern(C) char** function(GFileInfo* info, const(char)* nameSpace) nothrow;
+__gshared c_g_file_info_list_attributesFn c_g_file_info_list_attributes; ///
+private alias c_g_file_info_remove_attributeFn = extern(C) void function(GFileInfo* info, const(char)* attribute) nothrow;
+__gshared c_g_file_info_remove_attributeFn c_g_file_info_remove_attribute; ///
+private alias c_g_file_info_set_access_date_timeFn = extern(C) void function(GFileInfo* info, GDateTime* atime) nothrow;
+__gshared c_g_file_info_set_access_date_timeFn c_g_file_info_set_access_date_time; ///
+private alias c_g_file_info_set_attributeFn = extern(C) void function(GFileInfo* info, const(char)* attribute, GFileAttributeType type, void* valueP) nothrow;
+__gshared c_g_file_info_set_attributeFn c_g_file_info_set_attribute; ///
+private alias c_g_file_info_set_attribute_booleanFn = extern(C) void function(GFileInfo* info, const(char)* attribute, gboolean attrValue) nothrow;
+__gshared c_g_file_info_set_attribute_booleanFn c_g_file_info_set_attribute_boolean; ///
+private alias c_g_file_info_set_attribute_byte_stringFn = extern(C) void function(GFileInfo* info, const(char)* attribute, const(char)* attrValue) nothrow;
+__gshared c_g_file_info_set_attribute_byte_stringFn c_g_file_info_set_attribute_byte_string; ///
+private alias c_g_file_info_set_attribute_file_pathFn = extern(C) void function(GFileInfo* info, const(char)* attribute, const(char)* attrValue) nothrow;
+__gshared c_g_file_info_set_attribute_file_pathFn c_g_file_info_set_attribute_file_path; ///
+private alias c_g_file_info_set_attribute_int32Fn = extern(C) void function(GFileInfo* info, const(char)* attribute, int attrValue) nothrow;
+__gshared c_g_file_info_set_attribute_int32Fn c_g_file_info_set_attribute_int32; ///
+private alias c_g_file_info_set_attribute_int64Fn = extern(C) void function(GFileInfo* info, const(char)* attribute, long attrValue) nothrow;
+__gshared c_g_file_info_set_attribute_int64Fn c_g_file_info_set_attribute_int64; ///
+private alias c_g_file_info_set_attribute_maskFn = extern(C) void function(GFileInfo* info, GFileAttributeMatcher* mask) nothrow;
+__gshared c_g_file_info_set_attribute_maskFn c_g_file_info_set_attribute_mask; ///
+private alias c_g_file_info_set_attribute_objectFn = extern(C) void function(GFileInfo* info, const(char)* attribute, GObject* attrValue) nothrow;
+__gshared c_g_file_info_set_attribute_objectFn c_g_file_info_set_attribute_object; ///
+private alias c_g_file_info_set_attribute_statusFn = extern(C) gboolean function(GFileInfo* info, const(char)* attribute, GFileAttributeStatus status) nothrow;
+__gshared c_g_file_info_set_attribute_statusFn c_g_file_info_set_attribute_status; ///
+private alias c_g_file_info_set_attribute_stringFn = extern(C) void function(GFileInfo* info, const(char)* attribute, const(char)* attrValue) nothrow;
+__gshared c_g_file_info_set_attribute_stringFn c_g_file_info_set_attribute_string; ///
+private alias c_g_file_info_set_attribute_stringvFn = extern(C) void function(GFileInfo* info, const(char)* attribute, char** attrValue) nothrow;
+__gshared c_g_file_info_set_attribute_stringvFn c_g_file_info_set_attribute_stringv; ///
+private alias c_g_file_info_set_attribute_uint32Fn = extern(C) void function(GFileInfo* info, const(char)* attribute, uint attrValue) nothrow;
+__gshared c_g_file_info_set_attribute_uint32Fn c_g_file_info_set_attribute_uint32; ///
+private alias c_g_file_info_set_attribute_uint64Fn = extern(C) void function(GFileInfo* info, const(char)* attribute, ulong attrValue) nothrow;
+__gshared c_g_file_info_set_attribute_uint64Fn c_g_file_info_set_attribute_uint64; ///
+private alias c_g_file_info_set_content_typeFn = extern(C) void function(GFileInfo* info, const(char)* contentType) nothrow;
+__gshared c_g_file_info_set_content_typeFn c_g_file_info_set_content_type; ///
+private alias c_g_file_info_set_creation_date_timeFn = extern(C) void function(GFileInfo* info, GDateTime* creationTime) nothrow;
+__gshared c_g_file_info_set_creation_date_timeFn c_g_file_info_set_creation_date_time; ///
+private alias c_g_file_info_set_display_nameFn = extern(C) void function(GFileInfo* info, const(char)* displayName) nothrow;
+__gshared c_g_file_info_set_display_nameFn c_g_file_info_set_display_name; ///
+private alias c_g_file_info_set_edit_nameFn = extern(C) void function(GFileInfo* info, const(char)* editName) nothrow;
+__gshared c_g_file_info_set_edit_nameFn c_g_file_info_set_edit_name; ///
+private alias c_g_file_info_set_file_typeFn = extern(C) void function(GFileInfo* info, GFileType type) nothrow;
+__gshared c_g_file_info_set_file_typeFn c_g_file_info_set_file_type; ///
+private alias c_g_file_info_set_iconFn = extern(C) void function(GFileInfo* info, GIcon* icon) nothrow;
+__gshared c_g_file_info_set_iconFn c_g_file_info_set_icon; ///
+private alias c_g_file_info_set_is_hiddenFn = extern(C) void function(GFileInfo* info, gboolean isHidden) nothrow;
+__gshared c_g_file_info_set_is_hiddenFn c_g_file_info_set_is_hidden; ///
+private alias c_g_file_info_set_is_symlinkFn = extern(C) void function(GFileInfo* info, gboolean isSymlink) nothrow;
+__gshared c_g_file_info_set_is_symlinkFn c_g_file_info_set_is_symlink; ///
+private alias c_g_file_info_set_modification_date_timeFn = extern(C) void function(GFileInfo* info, GDateTime* mtime) nothrow;
+__gshared c_g_file_info_set_modification_date_timeFn c_g_file_info_set_modification_date_time; ///
+private alias c_g_file_info_set_modification_timeFn = extern(C) void function(GFileInfo* info, GTimeVal* mtime) nothrow;
+__gshared c_g_file_info_set_modification_timeFn c_g_file_info_set_modification_time; ///
+private alias c_g_file_info_set_nameFn = extern(C) void function(GFileInfo* info, const(char)* name) nothrow;
+__gshared c_g_file_info_set_nameFn c_g_file_info_set_name; ///
+private alias c_g_file_info_set_sizeFn = extern(C) void function(GFileInfo* info, long size) nothrow;
+__gshared c_g_file_info_set_sizeFn c_g_file_info_set_size; ///
+private alias c_g_file_info_set_sort_orderFn = extern(C) void function(GFileInfo* info, int sortOrder) nothrow;
+__gshared c_g_file_info_set_sort_orderFn c_g_file_info_set_sort_order; ///
+private alias c_g_file_info_set_symbolic_iconFn = extern(C) void function(GFileInfo* info, GIcon* icon) nothrow;
+__gshared c_g_file_info_set_symbolic_iconFn c_g_file_info_set_symbolic_icon; ///
+private alias c_g_file_info_set_symlink_targetFn = extern(C) void function(GFileInfo* info, const(char)* symlinkTarget) nothrow;
+__gshared c_g_file_info_set_symlink_targetFn c_g_file_info_set_symlink_target; ///
+private alias c_g_file_info_unset_attribute_maskFn = extern(C) void function(GFileInfo* info) nothrow;
+__gshared c_g_file_info_unset_attribute_maskFn c_g_file_info_unset_attribute_mask; ///
+
+// FileInputStream
+private alias c_g_file_input_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_file_input_stream_get_typeFn c_g_file_input_stream_get_type; ///
+private alias c_g_file_input_stream_query_infoFn = extern(C) GFileInfo* function(GFileInputStream* stream, const(char)* attributes, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_input_stream_query_infoFn c_g_file_input_stream_query_info; ///
+private alias c_g_file_input_stream_query_info_asyncFn = extern(C) void function(GFileInputStream* stream, const(char)* attributes, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_input_stream_query_info_asyncFn c_g_file_input_stream_query_info_async; ///
+private alias c_g_file_input_stream_query_info_finishFn = extern(C) GFileInfo* function(GFileInputStream* stream, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_input_stream_query_info_finishFn c_g_file_input_stream_query_info_finish; ///
+
+// FileMonitor
+private alias c_g_file_monitor_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_file_monitor_get_typeFn c_g_file_monitor_get_type; ///
+private alias c_g_file_monitor_cancelFn = extern(C) gboolean function(GFileMonitor* monitor) nothrow;
+__gshared c_g_file_monitor_cancelFn c_g_file_monitor_cancel; ///
+private alias c_g_file_monitor_emit_eventFn = extern(C) void function(GFileMonitor* monitor, GFile* child, GFile* otherFile, GFileMonitorEvent eventType) nothrow;
+__gshared c_g_file_monitor_emit_eventFn c_g_file_monitor_emit_event; ///
+private alias c_g_file_monitor_is_cancelledFn = extern(C) gboolean function(GFileMonitor* monitor) nothrow;
+__gshared c_g_file_monitor_is_cancelledFn c_g_file_monitor_is_cancelled; ///
+private alias c_g_file_monitor_set_rate_limitFn = extern(C) void function(GFileMonitor* monitor, int limitMsecs) nothrow;
+__gshared c_g_file_monitor_set_rate_limitFn c_g_file_monitor_set_rate_limit; ///
+
+// FileOutputStream
+private alias c_g_file_output_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_file_output_stream_get_typeFn c_g_file_output_stream_get_type; ///
+private alias c_g_file_output_stream_get_etagFn = extern(C) char* function(GFileOutputStream* stream) nothrow;
+__gshared c_g_file_output_stream_get_etagFn c_g_file_output_stream_get_etag; ///
+private alias c_g_file_output_stream_query_infoFn = extern(C) GFileInfo* function(GFileOutputStream* stream, const(char)* attributes, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_file_output_stream_query_infoFn c_g_file_output_stream_query_info; ///
+private alias c_g_file_output_stream_query_info_asyncFn = extern(C) void function(GFileOutputStream* stream, const(char)* attributes, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_file_output_stream_query_info_asyncFn c_g_file_output_stream_query_info_async; ///
+private alias c_g_file_output_stream_query_info_finishFn = extern(C) GFileInfo* function(GFileOutputStream* stream, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_file_output_stream_query_info_finishFn c_g_file_output_stream_query_info_finish; ///
+
+// FilenameCompleter
+private alias c_g_filename_completer_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_filename_completer_get_typeFn c_g_filename_completer_get_type; ///
+private alias c_g_filename_completer_newFn = extern(C) GFilenameCompleter* function() nothrow;
+__gshared c_g_filename_completer_newFn c_g_filename_completer_new; ///
+private alias c_g_filename_completer_get_completion_suffixFn = extern(C) char* function(GFilenameCompleter* completer, const(char)* initialText) nothrow;
+__gshared c_g_filename_completer_get_completion_suffixFn c_g_filename_completer_get_completion_suffix; ///
+private alias c_g_filename_completer_get_completionsFn = extern(C) char** function(GFilenameCompleter* completer, const(char)* initialText) nothrow;
+__gshared c_g_filename_completer_get_completionsFn c_g_filename_completer_get_completions; ///
+private alias c_g_filename_completer_set_dirs_onlyFn = extern(C) void function(GFilenameCompleter* completer, gboolean dirsOnly) nothrow;
+__gshared c_g_filename_completer_set_dirs_onlyFn c_g_filename_completer_set_dirs_only; ///
+
+// FilterInputStream
+private alias c_g_filter_input_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_filter_input_stream_get_typeFn c_g_filter_input_stream_get_type; ///
+private alias c_g_filter_input_stream_get_base_streamFn = extern(C) GInputStream* function(GFilterInputStream* stream) nothrow;
+__gshared c_g_filter_input_stream_get_base_streamFn c_g_filter_input_stream_get_base_stream; ///
+private alias c_g_filter_input_stream_get_close_base_streamFn = extern(C) gboolean function(GFilterInputStream* stream) nothrow;
+__gshared c_g_filter_input_stream_get_close_base_streamFn c_g_filter_input_stream_get_close_base_stream; ///
+private alias c_g_filter_input_stream_set_close_base_streamFn = extern(C) void function(GFilterInputStream* stream, gboolean closeBase) nothrow;
+__gshared c_g_filter_input_stream_set_close_base_streamFn c_g_filter_input_stream_set_close_base_stream; ///
+
+// FilterOutputStream
+private alias c_g_filter_output_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_filter_output_stream_get_typeFn c_g_filter_output_stream_get_type; ///
+private alias c_g_filter_output_stream_get_base_streamFn = extern(C) GOutputStream* function(GFilterOutputStream* stream) nothrow;
+__gshared c_g_filter_output_stream_get_base_streamFn c_g_filter_output_stream_get_base_stream; ///
+private alias c_g_filter_output_stream_get_close_base_streamFn = extern(C) gboolean function(GFilterOutputStream* stream) nothrow;
+__gshared c_g_filter_output_stream_get_close_base_streamFn c_g_filter_output_stream_get_close_base_stream; ///
+private alias c_g_filter_output_stream_set_close_base_streamFn = extern(C) void function(GFilterOutputStream* stream, gboolean closeBase) nothrow;
+__gshared c_g_filter_output_stream_set_close_base_streamFn c_g_filter_output_stream_set_close_base_stream; ///
+
+// IOExtension
+private alias c_g_io_extension_get_nameFn = extern(C) const(char)* function(GIOExtension* extension) nothrow;
+__gshared c_g_io_extension_get_nameFn c_g_io_extension_get_name; ///
+private alias c_g_io_extension_get_priorityFn = extern(C) int function(GIOExtension* extension) nothrow;
+__gshared c_g_io_extension_get_priorityFn c_g_io_extension_get_priority; ///
+private alias c_g_io_extension_get_typeFn = extern(C) GType function(GIOExtension* extension) nothrow;
+__gshared c_g_io_extension_get_typeFn c_g_io_extension_get_type; ///
+private alias c_g_io_extension_ref_classFn = extern(C) GTypeClass* function(GIOExtension* extension) nothrow;
+__gshared c_g_io_extension_ref_classFn c_g_io_extension_ref_class; ///
+
+// IOExtensionPoint
+private alias c_g_io_extension_point_get_extension_by_nameFn = extern(C) GIOExtension* function(GIOExtensionPoint* extensionPoint, const(char)* name) nothrow;
+__gshared c_g_io_extension_point_get_extension_by_nameFn c_g_io_extension_point_get_extension_by_name; ///
+private alias c_g_io_extension_point_get_extensionsFn = extern(C) GList* function(GIOExtensionPoint* extensionPoint) nothrow;
+__gshared c_g_io_extension_point_get_extensionsFn c_g_io_extension_point_get_extensions; ///
+private alias c_g_io_extension_point_get_required_typeFn = extern(C) GType function(GIOExtensionPoint* extensionPoint) nothrow;
+__gshared c_g_io_extension_point_get_required_typeFn c_g_io_extension_point_get_required_type; ///
+private alias c_g_io_extension_point_set_required_typeFn = extern(C) void function(GIOExtensionPoint* extensionPoint, GType type) nothrow;
+__gshared c_g_io_extension_point_set_required_typeFn c_g_io_extension_point_set_required_type; ///
+private alias c_g_io_extension_point_implementFn = extern(C) GIOExtension* function(const(char)* extensionPointName, GType type, const(char)* extensionName, int priority) nothrow;
+__gshared c_g_io_extension_point_implementFn c_g_io_extension_point_implement; ///
+private alias c_g_io_extension_point_lookupFn = extern(C) GIOExtensionPoint* function(const(char)* name) nothrow;
+__gshared c_g_io_extension_point_lookupFn c_g_io_extension_point_lookup; ///
+private alias c_g_io_extension_point_registerFn = extern(C) GIOExtensionPoint* function(const(char)* name) nothrow;
+__gshared c_g_io_extension_point_registerFn c_g_io_extension_point_register; ///
+
+// IOModule
+private alias c_g_io_module_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_io_module_get_typeFn c_g_io_module_get_type; ///
+private alias c_g_io_module_newFn = extern(C) GIOModule* function(const(char)* filename) nothrow;
+__gshared c_g_io_module_newFn c_g_io_module_new; ///
+private alias c_g_io_module_queryFn = extern(C) char** function() nothrow;
+__gshared c_g_io_module_queryFn c_g_io_module_query; ///
+private alias c_g_io_module_loadFn = extern(C) void function(GIOModule* module_) nothrow;
+__gshared c_g_io_module_loadFn c_g_io_module_load; ///
+private alias c_g_io_module_unloadFn = extern(C) void function(GIOModule* module_) nothrow;
+__gshared c_g_io_module_unloadFn c_g_io_module_unload; ///
+
+// IOModuleScope
+private alias c_g_io_module_scope_blockFn = extern(C) void function(GIOModuleScope* scope_, const(char)* basename) nothrow;
+__gshared c_g_io_module_scope_blockFn c_g_io_module_scope_block; ///
+private alias c_g_io_module_scope_freeFn = extern(C) void function(GIOModuleScope* scope_) nothrow;
+__gshared c_g_io_module_scope_freeFn c_g_io_module_scope_free; ///
+private alias c_g_io_module_scope_newFn = extern(C) GIOModuleScope* function(GIOModuleScopeFlags flags) nothrow;
+__gshared c_g_io_module_scope_newFn c_g_io_module_scope_new; ///
+
+// IOSchedulerJob
+private alias c_g_io_scheduler_job_send_to_mainloopFn = extern(C) gboolean function(GIOSchedulerJob* job, GSourceFunc func, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_g_io_scheduler_job_send_to_mainloopFn c_g_io_scheduler_job_send_to_mainloop; ///
+private alias c_g_io_scheduler_job_send_to_mainloop_asyncFn = extern(C) void function(GIOSchedulerJob* job, GSourceFunc func, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_g_io_scheduler_job_send_to_mainloop_asyncFn c_g_io_scheduler_job_send_to_mainloop_async; ///
+
+// IOStream
+private alias c_g_io_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_io_stream_get_typeFn c_g_io_stream_get_type; ///
+private alias c_g_io_stream_splice_finishFn = extern(C) gboolean function(GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_io_stream_splice_finishFn c_g_io_stream_splice_finish; ///
+private alias c_g_io_stream_clear_pendingFn = extern(C) void function(GIOStream* stream) nothrow;
+__gshared c_g_io_stream_clear_pendingFn c_g_io_stream_clear_pending; ///
+private alias c_g_io_stream_closeFn = extern(C) gboolean function(GIOStream* stream, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_io_stream_closeFn c_g_io_stream_close; ///
+private alias c_g_io_stream_close_asyncFn = extern(C) void function(GIOStream* stream, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_io_stream_close_asyncFn c_g_io_stream_close_async; ///
+private alias c_g_io_stream_close_finishFn = extern(C) gboolean function(GIOStream* stream, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_io_stream_close_finishFn c_g_io_stream_close_finish; ///
+private alias c_g_io_stream_get_input_streamFn = extern(C) GInputStream* function(GIOStream* stream) nothrow;
+__gshared c_g_io_stream_get_input_streamFn c_g_io_stream_get_input_stream; ///
+private alias c_g_io_stream_get_output_streamFn = extern(C) GOutputStream* function(GIOStream* stream) nothrow;
+__gshared c_g_io_stream_get_output_streamFn c_g_io_stream_get_output_stream; ///
+private alias c_g_io_stream_has_pendingFn = extern(C) gboolean function(GIOStream* stream) nothrow;
+__gshared c_g_io_stream_has_pendingFn c_g_io_stream_has_pending; ///
+private alias c_g_io_stream_is_closedFn = extern(C) gboolean function(GIOStream* stream) nothrow;
+__gshared c_g_io_stream_is_closedFn c_g_io_stream_is_closed; ///
+private alias c_g_io_stream_set_pendingFn = extern(C) gboolean function(GIOStream* stream, GError** _err) nothrow;
+__gshared c_g_io_stream_set_pendingFn c_g_io_stream_set_pending; ///
+private alias c_g_io_stream_splice_asyncFn = extern(C) void function(GIOStream* stream1, GIOStream* stream2, GIOStreamSpliceFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_io_stream_splice_asyncFn c_g_io_stream_splice_async; ///
+
+// IPTosMessage
+private alias c_g_ip_tos_message_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_ip_tos_message_get_typeFn c_g_ip_tos_message_get_type; ///
+private alias c_g_ip_tos_message_newFn = extern(C) GSocketControlMessage* function(ubyte dscp, GEcnCodePoint ecn) nothrow;
+__gshared c_g_ip_tos_message_newFn c_g_ip_tos_message_new; ///
+private alias c_g_ip_tos_message_get_dscpFn = extern(C) ubyte function(GIPTosMessage* message) nothrow;
+__gshared c_g_ip_tos_message_get_dscpFn c_g_ip_tos_message_get_dscp; ///
+private alias c_g_ip_tos_message_get_ecnFn = extern(C) GEcnCodePoint function(GIPTosMessage* message) nothrow;
+__gshared c_g_ip_tos_message_get_ecnFn c_g_ip_tos_message_get_ecn; ///
+
+// IPv6TclassMessage
+private alias c_g_ipv6_tclass_message_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_ipv6_tclass_message_get_typeFn c_g_ipv6_tclass_message_get_type; ///
+private alias c_g_ipv6_tclass_message_newFn = extern(C) GSocketControlMessage* function(ubyte dscp, GEcnCodePoint ecn) nothrow;
+__gshared c_g_ipv6_tclass_message_newFn c_g_ipv6_tclass_message_new; ///
+private alias c_g_ipv6_tclass_message_get_dscpFn = extern(C) ubyte function(GIPv6TclassMessage* message) nothrow;
+__gshared c_g_ipv6_tclass_message_get_dscpFn c_g_ipv6_tclass_message_get_dscp; ///
+private alias c_g_ipv6_tclass_message_get_ecnFn = extern(C) GEcnCodePoint function(GIPv6TclassMessage* message) nothrow;
+__gshared c_g_ipv6_tclass_message_get_ecnFn c_g_ipv6_tclass_message_get_ecn; ///
+
+// Icon
+private alias c_g_icon_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_icon_get_typeFn c_g_icon_get_type; ///
+private alias c_g_icon_deserializeFn = extern(C) GIcon* function(GVariant* value) nothrow;
+__gshared c_g_icon_deserializeFn c_g_icon_deserialize; ///
+private alias c_g_icon_new_for_stringFn = extern(C) GIcon* function(const(char)* str, GError** _err) nothrow;
+__gshared c_g_icon_new_for_stringFn c_g_icon_new_for_string; ///
+private alias c_g_icon_equalFn = extern(C) gboolean function(GIcon* icon1, GIcon* icon2) nothrow;
+__gshared c_g_icon_equalFn c_g_icon_equal; ///
+private alias c_g_icon_hashFn = extern(C) uint function(GIcon* icon) nothrow;
+__gshared c_g_icon_hashFn c_g_icon_hash; ///
+private alias c_g_icon_serializeFn = extern(C) GVariant* function(GIcon* icon) nothrow;
+__gshared c_g_icon_serializeFn c_g_icon_serialize; ///
+private alias c_g_icon_to_stringFn = extern(C) char* function(GIcon* icon) nothrow;
+__gshared c_g_icon_to_stringFn c_g_icon_to_string; ///
+
+// InetAddress
+private alias c_g_inet_address_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_inet_address_get_typeFn c_g_inet_address_get_type; ///
+private alias c_g_inet_address_new_anyFn = extern(C) GInetAddress* function(GSocketFamily family) nothrow;
+__gshared c_g_inet_address_new_anyFn c_g_inet_address_new_any; ///
+private alias c_g_inet_address_new_from_bytesFn = extern(C) GInetAddress* function(const(ubyte)* bytes, GSocketFamily family) nothrow;
+__gshared c_g_inet_address_new_from_bytesFn c_g_inet_address_new_from_bytes; ///
+private alias c_g_inet_address_new_from_bytes_with_ipv6_infoFn = extern(C) GInetAddress* function(const(ubyte)* bytes, GSocketFamily family, uint flowinfo, uint scopeId) nothrow;
+__gshared c_g_inet_address_new_from_bytes_with_ipv6_infoFn c_g_inet_address_new_from_bytes_with_ipv6_info; ///
+private alias c_g_inet_address_new_from_stringFn = extern(C) GInetAddress* function(const(char)* string_) nothrow;
+__gshared c_g_inet_address_new_from_stringFn c_g_inet_address_new_from_string; ///
+private alias c_g_inet_address_new_loopbackFn = extern(C) GInetAddress* function(GSocketFamily family) nothrow;
+__gshared c_g_inet_address_new_loopbackFn c_g_inet_address_new_loopback; ///
+private alias c_g_inet_address_equalFn = extern(C) gboolean function(GInetAddress* address, GInetAddress* otherAddress) nothrow;
+__gshared c_g_inet_address_equalFn c_g_inet_address_equal; ///
+private alias c_g_inet_address_get_familyFn = extern(C) GSocketFamily function(GInetAddress* address) nothrow;
+__gshared c_g_inet_address_get_familyFn c_g_inet_address_get_family; ///
+private alias c_g_inet_address_get_flowinfoFn = extern(C) uint function(GInetAddress* address) nothrow;
+__gshared c_g_inet_address_get_flowinfoFn c_g_inet_address_get_flowinfo; ///
+private alias c_g_inet_address_get_is_anyFn = extern(C) gboolean function(GInetAddress* address) nothrow;
+__gshared c_g_inet_address_get_is_anyFn c_g_inet_address_get_is_any; ///
+private alias c_g_inet_address_get_is_link_localFn = extern(C) gboolean function(GInetAddress* address) nothrow;
+__gshared c_g_inet_address_get_is_link_localFn c_g_inet_address_get_is_link_local; ///
+private alias c_g_inet_address_get_is_loopbackFn = extern(C) gboolean function(GInetAddress* address) nothrow;
+__gshared c_g_inet_address_get_is_loopbackFn c_g_inet_address_get_is_loopback; ///
+private alias c_g_inet_address_get_is_mc_globalFn = extern(C) gboolean function(GInetAddress* address) nothrow;
+__gshared c_g_inet_address_get_is_mc_globalFn c_g_inet_address_get_is_mc_global; ///
+private alias c_g_inet_address_get_is_mc_link_localFn = extern(C) gboolean function(GInetAddress* address) nothrow;
+__gshared c_g_inet_address_get_is_mc_link_localFn c_g_inet_address_get_is_mc_link_local; ///
+private alias c_g_inet_address_get_is_mc_node_localFn = extern(C) gboolean function(GInetAddress* address) nothrow;
+__gshared c_g_inet_address_get_is_mc_node_localFn c_g_inet_address_get_is_mc_node_local; ///
+private alias c_g_inet_address_get_is_mc_org_localFn = extern(C) gboolean function(GInetAddress* address) nothrow;
+__gshared c_g_inet_address_get_is_mc_org_localFn c_g_inet_address_get_is_mc_org_local; ///
+private alias c_g_inet_address_get_is_mc_site_localFn = extern(C) gboolean function(GInetAddress* address) nothrow;
+__gshared c_g_inet_address_get_is_mc_site_localFn c_g_inet_address_get_is_mc_site_local; ///
+private alias c_g_inet_address_get_is_multicastFn = extern(C) gboolean function(GInetAddress* address) nothrow;
+__gshared c_g_inet_address_get_is_multicastFn c_g_inet_address_get_is_multicast; ///
+private alias c_g_inet_address_get_is_site_localFn = extern(C) gboolean function(GInetAddress* address) nothrow;
+__gshared c_g_inet_address_get_is_site_localFn c_g_inet_address_get_is_site_local; ///
+private alias c_g_inet_address_get_native_sizeFn = extern(C) size_t function(GInetAddress* address) nothrow;
+__gshared c_g_inet_address_get_native_sizeFn c_g_inet_address_get_native_size; ///
+private alias c_g_inet_address_get_scope_idFn = extern(C) uint function(GInetAddress* address) nothrow;
+__gshared c_g_inet_address_get_scope_idFn c_g_inet_address_get_scope_id; ///
+private alias c_g_inet_address_to_bytesFn = extern(C) const(ubyte)* function(GInetAddress* address) nothrow;
+__gshared c_g_inet_address_to_bytesFn c_g_inet_address_to_bytes; ///
+private alias c_g_inet_address_to_stringFn = extern(C) char* function(GInetAddress* address) nothrow;
+__gshared c_g_inet_address_to_stringFn c_g_inet_address_to_string; ///
+
+// InetAddressMask
+private alias c_g_inet_address_mask_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_inet_address_mask_get_typeFn c_g_inet_address_mask_get_type; ///
+private alias c_g_inet_address_mask_newFn = extern(C) GInetAddressMask* function(GInetAddress* addr, uint length, GError** _err) nothrow;
+__gshared c_g_inet_address_mask_newFn c_g_inet_address_mask_new; ///
+private alias c_g_inet_address_mask_new_from_stringFn = extern(C) GInetAddressMask* function(const(char)* maskString, GError** _err) nothrow;
+__gshared c_g_inet_address_mask_new_from_stringFn c_g_inet_address_mask_new_from_string; ///
+private alias c_g_inet_address_mask_equalFn = extern(C) gboolean function(GInetAddressMask* mask, GInetAddressMask* mask2) nothrow;
+__gshared c_g_inet_address_mask_equalFn c_g_inet_address_mask_equal; ///
+private alias c_g_inet_address_mask_get_addressFn = extern(C) GInetAddress* function(GInetAddressMask* mask) nothrow;
+__gshared c_g_inet_address_mask_get_addressFn c_g_inet_address_mask_get_address; ///
+private alias c_g_inet_address_mask_get_familyFn = extern(C) GSocketFamily function(GInetAddressMask* mask) nothrow;
+__gshared c_g_inet_address_mask_get_familyFn c_g_inet_address_mask_get_family; ///
+private alias c_g_inet_address_mask_get_lengthFn = extern(C) uint function(GInetAddressMask* mask) nothrow;
+__gshared c_g_inet_address_mask_get_lengthFn c_g_inet_address_mask_get_length; ///
+private alias c_g_inet_address_mask_matchesFn = extern(C) gboolean function(GInetAddressMask* mask, GInetAddress* address) nothrow;
+__gshared c_g_inet_address_mask_matchesFn c_g_inet_address_mask_matches; ///
+private alias c_g_inet_address_mask_to_stringFn = extern(C) char* function(GInetAddressMask* mask) nothrow;
+__gshared c_g_inet_address_mask_to_stringFn c_g_inet_address_mask_to_string; ///
+
+// InetSocketAddress
+private alias c_g_inet_socket_address_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_inet_socket_address_get_typeFn c_g_inet_socket_address_get_type; ///
+private alias c_g_inet_socket_address_newFn = extern(C) GSocketAddress* function(GInetAddress* address, ushort port) nothrow;
+__gshared c_g_inet_socket_address_newFn c_g_inet_socket_address_new; ///
+private alias c_g_inet_socket_address_new_from_stringFn = extern(C) GSocketAddress* function(const(char)* address, uint port) nothrow;
+__gshared c_g_inet_socket_address_new_from_stringFn c_g_inet_socket_address_new_from_string; ///
+private alias c_g_inet_socket_address_get_addressFn = extern(C) GInetAddress* function(GInetSocketAddress* address) nothrow;
+__gshared c_g_inet_socket_address_get_addressFn c_g_inet_socket_address_get_address; ///
+private alias c_g_inet_socket_address_get_flowinfoFn = extern(C) uint function(GInetSocketAddress* address) nothrow;
+__gshared c_g_inet_socket_address_get_flowinfoFn c_g_inet_socket_address_get_flowinfo; ///
+private alias c_g_inet_socket_address_get_portFn = extern(C) ushort function(GInetSocketAddress* address) nothrow;
+__gshared c_g_inet_socket_address_get_portFn c_g_inet_socket_address_get_port; ///
+private alias c_g_inet_socket_address_get_scope_idFn = extern(C) uint function(GInetSocketAddress* address) nothrow;
+__gshared c_g_inet_socket_address_get_scope_idFn c_g_inet_socket_address_get_scope_id; ///
+
+// Initable
+private alias c_g_initable_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_initable_get_typeFn c_g_initable_get_type; ///
+private alias c_g_initable_newFn = extern(C) GObject* function(GType objectType, GCancellable* cancellable, GError** error, const(char)* firstPropertyName,  ...) nothrow;
+__gshared c_g_initable_newFn c_g_initable_new; ///
+private alias c_g_initable_new_valistFn = extern(C) GObject* function(GType objectType, const(char)* firstPropertyName, void* varArgs, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_initable_new_valistFn c_g_initable_new_valist; ///
+private alias c_g_initable_newvFn = extern(C) GObject* function(GType objectType, uint nParameters, GParameter* parameters, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_initable_newvFn c_g_initable_newv; ///
+private alias c_g_initable_initFn = extern(C) gboolean function(GInitable* initable, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_initable_initFn c_g_initable_init; ///
+
+// InputStream
+private alias c_g_input_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_input_stream_get_typeFn c_g_input_stream_get_type; ///
+private alias c_g_input_stream_clear_pendingFn = extern(C) void function(GInputStream* stream) nothrow;
+__gshared c_g_input_stream_clear_pendingFn c_g_input_stream_clear_pending; ///
+private alias c_g_input_stream_closeFn = extern(C) gboolean function(GInputStream* stream, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_input_stream_closeFn c_g_input_stream_close; ///
+private alias c_g_input_stream_close_asyncFn = extern(C) void function(GInputStream* stream, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_input_stream_close_asyncFn c_g_input_stream_close_async; ///
+private alias c_g_input_stream_close_finishFn = extern(C) gboolean function(GInputStream* stream, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_input_stream_close_finishFn c_g_input_stream_close_finish; ///
+private alias c_g_input_stream_has_pendingFn = extern(C) gboolean function(GInputStream* stream) nothrow;
+__gshared c_g_input_stream_has_pendingFn c_g_input_stream_has_pending; ///
+private alias c_g_input_stream_is_closedFn = extern(C) gboolean function(GInputStream* stream) nothrow;
+__gshared c_g_input_stream_is_closedFn c_g_input_stream_is_closed; ///
+private alias c_g_input_stream_readFn = extern(C) ptrdiff_t function(GInputStream* stream, void* buffer, size_t count, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_input_stream_readFn c_g_input_stream_read; ///
+private alias c_g_input_stream_read_allFn = extern(C) gboolean function(GInputStream* stream, void* buffer, size_t count, size_t* bytesRead, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_input_stream_read_allFn c_g_input_stream_read_all; ///
+private alias c_g_input_stream_read_all_asyncFn = extern(C) void function(GInputStream* stream, void* buffer, size_t count, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_input_stream_read_all_asyncFn c_g_input_stream_read_all_async; ///
+private alias c_g_input_stream_read_all_finishFn = extern(C) gboolean function(GInputStream* stream, GAsyncResult* result, size_t* bytesRead, GError** _err) nothrow;
+__gshared c_g_input_stream_read_all_finishFn c_g_input_stream_read_all_finish; ///
+private alias c_g_input_stream_read_asyncFn = extern(C) void function(GInputStream* stream, void* buffer, size_t count, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_input_stream_read_asyncFn c_g_input_stream_read_async; ///
+private alias c_g_input_stream_read_bytesFn = extern(C) GBytes* function(GInputStream* stream, size_t count, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_input_stream_read_bytesFn c_g_input_stream_read_bytes; ///
+private alias c_g_input_stream_read_bytes_asyncFn = extern(C) void function(GInputStream* stream, size_t count, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_input_stream_read_bytes_asyncFn c_g_input_stream_read_bytes_async; ///
+private alias c_g_input_stream_read_bytes_finishFn = extern(C) GBytes* function(GInputStream* stream, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_input_stream_read_bytes_finishFn c_g_input_stream_read_bytes_finish; ///
+private alias c_g_input_stream_read_finishFn = extern(C) ptrdiff_t function(GInputStream* stream, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_input_stream_read_finishFn c_g_input_stream_read_finish; ///
+private alias c_g_input_stream_set_pendingFn = extern(C) gboolean function(GInputStream* stream, GError** _err) nothrow;
+__gshared c_g_input_stream_set_pendingFn c_g_input_stream_set_pending; ///
+private alias c_g_input_stream_skipFn = extern(C) ptrdiff_t function(GInputStream* stream, size_t count, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_input_stream_skipFn c_g_input_stream_skip; ///
+private alias c_g_input_stream_skip_asyncFn = extern(C) void function(GInputStream* stream, size_t count, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_input_stream_skip_asyncFn c_g_input_stream_skip_async; ///
+private alias c_g_input_stream_skip_finishFn = extern(C) ptrdiff_t function(GInputStream* stream, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_input_stream_skip_finishFn c_g_input_stream_skip_finish; ///
+
+// ListModel
+private alias c_g_list_model_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_list_model_get_typeFn c_g_list_model_get_type; ///
+private alias c_g_list_model_get_itemFn = extern(C) void* function(GListModel* list, uint position) nothrow;
+__gshared c_g_list_model_get_itemFn c_g_list_model_get_item; ///
+private alias c_g_list_model_get_item_typeFn = extern(C) GType function(GListModel* list) nothrow;
+__gshared c_g_list_model_get_item_typeFn c_g_list_model_get_item_type; ///
+private alias c_g_list_model_get_n_itemsFn = extern(C) uint function(GListModel* list) nothrow;
+__gshared c_g_list_model_get_n_itemsFn c_g_list_model_get_n_items; ///
+private alias c_g_list_model_get_objectFn = extern(C) GObject* function(GListModel* list, uint position) nothrow;
+__gshared c_g_list_model_get_objectFn c_g_list_model_get_object; ///
+private alias c_g_list_model_items_changedFn = extern(C) void function(GListModel* list, uint position, uint removed, uint added) nothrow;
+__gshared c_g_list_model_items_changedFn c_g_list_model_items_changed; ///
+
+// ListStore
+private alias c_g_list_store_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_list_store_get_typeFn c_g_list_store_get_type; ///
+private alias c_g_list_store_newFn = extern(C) GListStore* function(GType itemType) nothrow;
+__gshared c_g_list_store_newFn c_g_list_store_new; ///
+private alias c_g_list_store_appendFn = extern(C) void function(GListStore* store, GObject* item) nothrow;
+__gshared c_g_list_store_appendFn c_g_list_store_append; ///
+private alias c_g_list_store_findFn = extern(C) gboolean function(GListStore* store, GObject* item, uint* position) nothrow;
+__gshared c_g_list_store_findFn c_g_list_store_find; ///
+private alias c_g_list_store_find_with_equal_funcFn = extern(C) gboolean function(GListStore* store, GObject* item, GEqualFunc equalFunc, uint* position) nothrow;
+__gshared c_g_list_store_find_with_equal_funcFn c_g_list_store_find_with_equal_func; ///
+private alias c_g_list_store_find_with_equal_func_fullFn = extern(C) gboolean function(GListStore* store, GObject* item, GEqualFuncFull equalFunc, void* userData, uint* position) nothrow;
+__gshared c_g_list_store_find_with_equal_func_fullFn c_g_list_store_find_with_equal_func_full; ///
+private alias c_g_list_store_insertFn = extern(C) void function(GListStore* store, uint position, GObject* item) nothrow;
+__gshared c_g_list_store_insertFn c_g_list_store_insert; ///
+private alias c_g_list_store_insert_sortedFn = extern(C) uint function(GListStore* store, GObject* item, GCompareDataFunc compareFunc, void* userData) nothrow;
+__gshared c_g_list_store_insert_sortedFn c_g_list_store_insert_sorted; ///
+private alias c_g_list_store_removeFn = extern(C) void function(GListStore* store, uint position) nothrow;
+__gshared c_g_list_store_removeFn c_g_list_store_remove; ///
+private alias c_g_list_store_remove_allFn = extern(C) void function(GListStore* store) nothrow;
+__gshared c_g_list_store_remove_allFn c_g_list_store_remove_all; ///
+private alias c_g_list_store_sortFn = extern(C) void function(GListStore* store, GCompareDataFunc compareFunc, void* userData) nothrow;
+__gshared c_g_list_store_sortFn c_g_list_store_sort; ///
+private alias c_g_list_store_spliceFn = extern(C) void function(GListStore* store, uint position, uint nRemovals, void** additions, uint nAdditions) nothrow;
+__gshared c_g_list_store_spliceFn c_g_list_store_splice; ///
+
+// LoadableIcon
+private alias c_g_loadable_icon_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_loadable_icon_get_typeFn c_g_loadable_icon_get_type; ///
+private alias c_g_loadable_icon_loadFn = extern(C) GInputStream* function(GLoadableIcon* icon, int size, char** type, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_loadable_icon_loadFn c_g_loadable_icon_load; ///
+private alias c_g_loadable_icon_load_asyncFn = extern(C) void function(GLoadableIcon* icon, int size, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_loadable_icon_load_asyncFn c_g_loadable_icon_load_async; ///
+private alias c_g_loadable_icon_load_finishFn = extern(C) GInputStream* function(GLoadableIcon* icon, GAsyncResult* res, char** type, GError** _err) nothrow;
+__gshared c_g_loadable_icon_load_finishFn c_g_loadable_icon_load_finish; ///
+
+// MemoryInputStream
+private alias c_g_memory_input_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_memory_input_stream_get_typeFn c_g_memory_input_stream_get_type; ///
+private alias c_g_memory_input_stream_newFn = extern(C) GInputStream* function() nothrow;
+__gshared c_g_memory_input_stream_newFn c_g_memory_input_stream_new; ///
+private alias c_g_memory_input_stream_new_from_bytesFn = extern(C) GInputStream* function(GBytes* bytes) nothrow;
+__gshared c_g_memory_input_stream_new_from_bytesFn c_g_memory_input_stream_new_from_bytes; ///
+private alias c_g_memory_input_stream_new_from_dataFn = extern(C) GInputStream* function(void* data, ptrdiff_t len, GDestroyNotify destroy) nothrow;
+__gshared c_g_memory_input_stream_new_from_dataFn c_g_memory_input_stream_new_from_data; ///
+private alias c_g_memory_input_stream_add_bytesFn = extern(C) void function(GMemoryInputStream* stream, GBytes* bytes) nothrow;
+__gshared c_g_memory_input_stream_add_bytesFn c_g_memory_input_stream_add_bytes; ///
+private alias c_g_memory_input_stream_add_dataFn = extern(C) void function(GMemoryInputStream* stream, void* data, ptrdiff_t len, GDestroyNotify destroy) nothrow;
+__gshared c_g_memory_input_stream_add_dataFn c_g_memory_input_stream_add_data; ///
+
+// MemoryMonitor
+private alias c_g_memory_monitor_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_memory_monitor_get_typeFn c_g_memory_monitor_get_type; ///
+private alias c_g_memory_monitor_dup_defaultFn = extern(C) GMemoryMonitor* function() nothrow;
+__gshared c_g_memory_monitor_dup_defaultFn c_g_memory_monitor_dup_default; ///
+
+// MemoryOutputStream
+private alias c_g_memory_output_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_memory_output_stream_get_typeFn c_g_memory_output_stream_get_type; ///
+private alias c_g_memory_output_stream_newFn = extern(C) GOutputStream* function(void* data, size_t size, GReallocFunc reallocFunction, GDestroyNotify destroyFunction) nothrow;
+__gshared c_g_memory_output_stream_newFn c_g_memory_output_stream_new; ///
+private alias c_g_memory_output_stream_new_resizableFn = extern(C) GOutputStream* function() nothrow;
+__gshared c_g_memory_output_stream_new_resizableFn c_g_memory_output_stream_new_resizable; ///
+private alias c_g_memory_output_stream_get_dataFn = extern(C) void* function(GMemoryOutputStream* ostream) nothrow;
+__gshared c_g_memory_output_stream_get_dataFn c_g_memory_output_stream_get_data; ///
+private alias c_g_memory_output_stream_get_data_sizeFn = extern(C) size_t function(GMemoryOutputStream* ostream) nothrow;
+__gshared c_g_memory_output_stream_get_data_sizeFn c_g_memory_output_stream_get_data_size; ///
+private alias c_g_memory_output_stream_get_sizeFn = extern(C) size_t function(GMemoryOutputStream* ostream) nothrow;
+__gshared c_g_memory_output_stream_get_sizeFn c_g_memory_output_stream_get_size; ///
+private alias c_g_memory_output_stream_steal_as_bytesFn = extern(C) GBytes* function(GMemoryOutputStream* ostream) nothrow;
+__gshared c_g_memory_output_stream_steal_as_bytesFn c_g_memory_output_stream_steal_as_bytes; ///
+private alias c_g_memory_output_stream_steal_dataFn = extern(C) void* function(GMemoryOutputStream* ostream) nothrow;
+__gshared c_g_memory_output_stream_steal_dataFn c_g_memory_output_stream_steal_data; ///
+
+// Menu
+private alias c_g_menu_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_menu_get_typeFn c_g_menu_get_type; ///
+private alias c_g_menu_newFn = extern(C) GMenu* function() nothrow;
+__gshared c_g_menu_newFn c_g_menu_new; ///
+private alias c_g_menu_appendFn = extern(C) void function(GMenu* menu, const(char)* label, const(char)* detailedAction) nothrow;
+__gshared c_g_menu_appendFn c_g_menu_append; ///
+private alias c_g_menu_append_itemFn = extern(C) void function(GMenu* menu, GMenuItem* item) nothrow;
+__gshared c_g_menu_append_itemFn c_g_menu_append_item; ///
+private alias c_g_menu_append_sectionFn = extern(C) void function(GMenu* menu, const(char)* label, GMenuModel* section) nothrow;
+__gshared c_g_menu_append_sectionFn c_g_menu_append_section; ///
+private alias c_g_menu_append_submenuFn = extern(C) void function(GMenu* menu, const(char)* label, GMenuModel* submenu) nothrow;
+__gshared c_g_menu_append_submenuFn c_g_menu_append_submenu; ///
+private alias c_g_menu_freezeFn = extern(C) void function(GMenu* menu) nothrow;
+__gshared c_g_menu_freezeFn c_g_menu_freeze; ///
+private alias c_g_menu_insertFn = extern(C) void function(GMenu* menu, int position, const(char)* label, const(char)* detailedAction) nothrow;
+__gshared c_g_menu_insertFn c_g_menu_insert; ///
+private alias c_g_menu_insert_itemFn = extern(C) void function(GMenu* menu, int position, GMenuItem* item) nothrow;
+__gshared c_g_menu_insert_itemFn c_g_menu_insert_item; ///
+private alias c_g_menu_insert_sectionFn = extern(C) void function(GMenu* menu, int position, const(char)* label, GMenuModel* section) nothrow;
+__gshared c_g_menu_insert_sectionFn c_g_menu_insert_section; ///
+private alias c_g_menu_insert_submenuFn = extern(C) void function(GMenu* menu, int position, const(char)* label, GMenuModel* submenu) nothrow;
+__gshared c_g_menu_insert_submenuFn c_g_menu_insert_submenu; ///
+private alias c_g_menu_prependFn = extern(C) void function(GMenu* menu, const(char)* label, const(char)* detailedAction) nothrow;
+__gshared c_g_menu_prependFn c_g_menu_prepend; ///
+private alias c_g_menu_prepend_itemFn = extern(C) void function(GMenu* menu, GMenuItem* item) nothrow;
+__gshared c_g_menu_prepend_itemFn c_g_menu_prepend_item; ///
+private alias c_g_menu_prepend_sectionFn = extern(C) void function(GMenu* menu, const(char)* label, GMenuModel* section) nothrow;
+__gshared c_g_menu_prepend_sectionFn c_g_menu_prepend_section; ///
+private alias c_g_menu_prepend_submenuFn = extern(C) void function(GMenu* menu, const(char)* label, GMenuModel* submenu) nothrow;
+__gshared c_g_menu_prepend_submenuFn c_g_menu_prepend_submenu; ///
+private alias c_g_menu_removeFn = extern(C) void function(GMenu* menu, int position) nothrow;
+__gshared c_g_menu_removeFn c_g_menu_remove; ///
+private alias c_g_menu_remove_allFn = extern(C) void function(GMenu* menu) nothrow;
+__gshared c_g_menu_remove_allFn c_g_menu_remove_all; ///
+
+// MenuAttributeIter
+private alias c_g_menu_attribute_iter_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_menu_attribute_iter_get_typeFn c_g_menu_attribute_iter_get_type; ///
+private alias c_g_menu_attribute_iter_get_nameFn = extern(C) const(char)* function(GMenuAttributeIter* iter) nothrow;
+__gshared c_g_menu_attribute_iter_get_nameFn c_g_menu_attribute_iter_get_name; ///
+private alias c_g_menu_attribute_iter_get_nextFn = extern(C) gboolean function(GMenuAttributeIter* iter, const(char*)* outName, GVariant** value) nothrow;
+__gshared c_g_menu_attribute_iter_get_nextFn c_g_menu_attribute_iter_get_next; ///
+private alias c_g_menu_attribute_iter_get_valueFn = extern(C) GVariant* function(GMenuAttributeIter* iter) nothrow;
+__gshared c_g_menu_attribute_iter_get_valueFn c_g_menu_attribute_iter_get_value; ///
+private alias c_g_menu_attribute_iter_nextFn = extern(C) gboolean function(GMenuAttributeIter* iter) nothrow;
+__gshared c_g_menu_attribute_iter_nextFn c_g_menu_attribute_iter_next; ///
+
+// MenuItem
+private alias c_g_menu_item_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_menu_item_get_typeFn c_g_menu_item_get_type; ///
+private alias c_g_menu_item_newFn = extern(C) GMenuItem* function(const(char)* label, const(char)* detailedAction) nothrow;
+__gshared c_g_menu_item_newFn c_g_menu_item_new; ///
+private alias c_g_menu_item_new_from_modelFn = extern(C) GMenuItem* function(GMenuModel* model, int itemIndex) nothrow;
+__gshared c_g_menu_item_new_from_modelFn c_g_menu_item_new_from_model; ///
+private alias c_g_menu_item_new_sectionFn = extern(C) GMenuItem* function(const(char)* label, GMenuModel* section) nothrow;
+__gshared c_g_menu_item_new_sectionFn c_g_menu_item_new_section; ///
+private alias c_g_menu_item_new_submenuFn = extern(C) GMenuItem* function(const(char)* label, GMenuModel* submenu) nothrow;
+__gshared c_g_menu_item_new_submenuFn c_g_menu_item_new_submenu; ///
+private alias c_g_menu_item_get_attributeFn = extern(C) gboolean function(GMenuItem* menuItem, const(char)* attribute, const(char)* formatString,  ...) nothrow;
+__gshared c_g_menu_item_get_attributeFn c_g_menu_item_get_attribute; ///
+private alias c_g_menu_item_get_attribute_valueFn = extern(C) GVariant* function(GMenuItem* menuItem, const(char)* attribute, const(GVariantType)* expectedType) nothrow;
+__gshared c_g_menu_item_get_attribute_valueFn c_g_menu_item_get_attribute_value; ///
+private alias c_g_menu_item_get_linkFn = extern(C) GMenuModel* function(GMenuItem* menuItem, const(char)* link) nothrow;
+__gshared c_g_menu_item_get_linkFn c_g_menu_item_get_link; ///
+private alias c_g_menu_item_set_action_and_targetFn = extern(C) void function(GMenuItem* menuItem, const(char)* action, const(char)* formatString,  ...) nothrow;
+__gshared c_g_menu_item_set_action_and_targetFn c_g_menu_item_set_action_and_target; ///
+private alias c_g_menu_item_set_action_and_target_valueFn = extern(C) void function(GMenuItem* menuItem, const(char)* action, GVariant* targetValue) nothrow;
+__gshared c_g_menu_item_set_action_and_target_valueFn c_g_menu_item_set_action_and_target_value; ///
+private alias c_g_menu_item_set_attributeFn = extern(C) void function(GMenuItem* menuItem, const(char)* attribute, const(char)* formatString,  ...) nothrow;
+__gshared c_g_menu_item_set_attributeFn c_g_menu_item_set_attribute; ///
+private alias c_g_menu_item_set_attribute_valueFn = extern(C) void function(GMenuItem* menuItem, const(char)* attribute, GVariant* value) nothrow;
+__gshared c_g_menu_item_set_attribute_valueFn c_g_menu_item_set_attribute_value; ///
+private alias c_g_menu_item_set_detailed_actionFn = extern(C) void function(GMenuItem* menuItem, const(char)* detailedAction) nothrow;
+__gshared c_g_menu_item_set_detailed_actionFn c_g_menu_item_set_detailed_action; ///
+private alias c_g_menu_item_set_iconFn = extern(C) void function(GMenuItem* menuItem, GIcon* icon) nothrow;
+__gshared c_g_menu_item_set_iconFn c_g_menu_item_set_icon; ///
+private alias c_g_menu_item_set_labelFn = extern(C) void function(GMenuItem* menuItem, const(char)* label) nothrow;
+__gshared c_g_menu_item_set_labelFn c_g_menu_item_set_label; ///
+private alias c_g_menu_item_set_linkFn = extern(C) void function(GMenuItem* menuItem, const(char)* link, GMenuModel* model) nothrow;
+__gshared c_g_menu_item_set_linkFn c_g_menu_item_set_link; ///
+private alias c_g_menu_item_set_sectionFn = extern(C) void function(GMenuItem* menuItem, GMenuModel* section) nothrow;
+__gshared c_g_menu_item_set_sectionFn c_g_menu_item_set_section; ///
+private alias c_g_menu_item_set_submenuFn = extern(C) void function(GMenuItem* menuItem, GMenuModel* submenu) nothrow;
+__gshared c_g_menu_item_set_submenuFn c_g_menu_item_set_submenu; ///
+
+// MenuLinkIter
+private alias c_g_menu_link_iter_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_menu_link_iter_get_typeFn c_g_menu_link_iter_get_type; ///
+private alias c_g_menu_link_iter_get_nameFn = extern(C) const(char)* function(GMenuLinkIter* iter) nothrow;
+__gshared c_g_menu_link_iter_get_nameFn c_g_menu_link_iter_get_name; ///
+private alias c_g_menu_link_iter_get_nextFn = extern(C) gboolean function(GMenuLinkIter* iter, const(char*)* outLink, GMenuModel** value) nothrow;
+__gshared c_g_menu_link_iter_get_nextFn c_g_menu_link_iter_get_next; ///
+private alias c_g_menu_link_iter_get_valueFn = extern(C) GMenuModel* function(GMenuLinkIter* iter) nothrow;
+__gshared c_g_menu_link_iter_get_valueFn c_g_menu_link_iter_get_value; ///
+private alias c_g_menu_link_iter_nextFn = extern(C) gboolean function(GMenuLinkIter* iter) nothrow;
+__gshared c_g_menu_link_iter_nextFn c_g_menu_link_iter_next; ///
+
+// MenuModel
+private alias c_g_menu_model_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_menu_model_get_typeFn c_g_menu_model_get_type; ///
+private alias c_g_menu_model_get_item_attributeFn = extern(C) gboolean function(GMenuModel* model, int itemIndex, const(char)* attribute, const(char)* formatString,  ...) nothrow;
+__gshared c_g_menu_model_get_item_attributeFn c_g_menu_model_get_item_attribute; ///
+private alias c_g_menu_model_get_item_attribute_valueFn = extern(C) GVariant* function(GMenuModel* model, int itemIndex, const(char)* attribute, const(GVariantType)* expectedType) nothrow;
+__gshared c_g_menu_model_get_item_attribute_valueFn c_g_menu_model_get_item_attribute_value; ///
+private alias c_g_menu_model_get_item_linkFn = extern(C) GMenuModel* function(GMenuModel* model, int itemIndex, const(char)* link) nothrow;
+__gshared c_g_menu_model_get_item_linkFn c_g_menu_model_get_item_link; ///
+private alias c_g_menu_model_get_n_itemsFn = extern(C) int function(GMenuModel* model) nothrow;
+__gshared c_g_menu_model_get_n_itemsFn c_g_menu_model_get_n_items; ///
+private alias c_g_menu_model_is_mutableFn = extern(C) gboolean function(GMenuModel* model) nothrow;
+__gshared c_g_menu_model_is_mutableFn c_g_menu_model_is_mutable; ///
+private alias c_g_menu_model_items_changedFn = extern(C) void function(GMenuModel* model, int position, int removed, int added) nothrow;
+__gshared c_g_menu_model_items_changedFn c_g_menu_model_items_changed; ///
+private alias c_g_menu_model_iterate_item_attributesFn = extern(C) GMenuAttributeIter* function(GMenuModel* model, int itemIndex) nothrow;
+__gshared c_g_menu_model_iterate_item_attributesFn c_g_menu_model_iterate_item_attributes; ///
+private alias c_g_menu_model_iterate_item_linksFn = extern(C) GMenuLinkIter* function(GMenuModel* model, int itemIndex) nothrow;
+__gshared c_g_menu_model_iterate_item_linksFn c_g_menu_model_iterate_item_links; ///
+
+// Mount
+private alias c_g_mount_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_mount_get_typeFn c_g_mount_get_type; ///
+private alias c_g_mount_can_ejectFn = extern(C) gboolean function(GMount* mount) nothrow;
+__gshared c_g_mount_can_ejectFn c_g_mount_can_eject; ///
+private alias c_g_mount_can_unmountFn = extern(C) gboolean function(GMount* mount) nothrow;
+__gshared c_g_mount_can_unmountFn c_g_mount_can_unmount; ///
+private alias c_g_mount_ejectFn = extern(C) void function(GMount* mount, GMountUnmountFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_mount_ejectFn c_g_mount_eject; ///
+private alias c_g_mount_eject_finishFn = extern(C) gboolean function(GMount* mount, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_mount_eject_finishFn c_g_mount_eject_finish; ///
+private alias c_g_mount_eject_with_operationFn = extern(C) void function(GMount* mount, GMountUnmountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_mount_eject_with_operationFn c_g_mount_eject_with_operation; ///
+private alias c_g_mount_eject_with_operation_finishFn = extern(C) gboolean function(GMount* mount, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_mount_eject_with_operation_finishFn c_g_mount_eject_with_operation_finish; ///
+private alias c_g_mount_get_default_locationFn = extern(C) GFile* function(GMount* mount) nothrow;
+__gshared c_g_mount_get_default_locationFn c_g_mount_get_default_location; ///
+private alias c_g_mount_get_driveFn = extern(C) GDrive* function(GMount* mount) nothrow;
+__gshared c_g_mount_get_driveFn c_g_mount_get_drive; ///
+private alias c_g_mount_get_iconFn = extern(C) GIcon* function(GMount* mount) nothrow;
+__gshared c_g_mount_get_iconFn c_g_mount_get_icon; ///
+private alias c_g_mount_get_nameFn = extern(C) char* function(GMount* mount) nothrow;
+__gshared c_g_mount_get_nameFn c_g_mount_get_name; ///
+private alias c_g_mount_get_rootFn = extern(C) GFile* function(GMount* mount) nothrow;
+__gshared c_g_mount_get_rootFn c_g_mount_get_root; ///
+private alias c_g_mount_get_sort_keyFn = extern(C) const(char)* function(GMount* mount) nothrow;
+__gshared c_g_mount_get_sort_keyFn c_g_mount_get_sort_key; ///
+private alias c_g_mount_get_symbolic_iconFn = extern(C) GIcon* function(GMount* mount) nothrow;
+__gshared c_g_mount_get_symbolic_iconFn c_g_mount_get_symbolic_icon; ///
+private alias c_g_mount_get_uuidFn = extern(C) char* function(GMount* mount) nothrow;
+__gshared c_g_mount_get_uuidFn c_g_mount_get_uuid; ///
+private alias c_g_mount_get_volumeFn = extern(C) GVolume* function(GMount* mount) nothrow;
+__gshared c_g_mount_get_volumeFn c_g_mount_get_volume; ///
+private alias c_g_mount_guess_content_typeFn = extern(C) void function(GMount* mount, gboolean forceRescan, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_mount_guess_content_typeFn c_g_mount_guess_content_type; ///
+private alias c_g_mount_guess_content_type_finishFn = extern(C) char** function(GMount* mount, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_mount_guess_content_type_finishFn c_g_mount_guess_content_type_finish; ///
+private alias c_g_mount_guess_content_type_syncFn = extern(C) char** function(GMount* mount, gboolean forceRescan, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_mount_guess_content_type_syncFn c_g_mount_guess_content_type_sync; ///
+private alias c_g_mount_is_shadowedFn = extern(C) gboolean function(GMount* mount) nothrow;
+__gshared c_g_mount_is_shadowedFn c_g_mount_is_shadowed; ///
+private alias c_g_mount_remountFn = extern(C) void function(GMount* mount, GMountMountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_mount_remountFn c_g_mount_remount; ///
+private alias c_g_mount_remount_finishFn = extern(C) gboolean function(GMount* mount, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_mount_remount_finishFn c_g_mount_remount_finish; ///
+private alias c_g_mount_shadowFn = extern(C) void function(GMount* mount) nothrow;
+__gshared c_g_mount_shadowFn c_g_mount_shadow; ///
+private alias c_g_mount_unmountFn = extern(C) void function(GMount* mount, GMountUnmountFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_mount_unmountFn c_g_mount_unmount; ///
+private alias c_g_mount_unmount_finishFn = extern(C) gboolean function(GMount* mount, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_mount_unmount_finishFn c_g_mount_unmount_finish; ///
+private alias c_g_mount_unmount_with_operationFn = extern(C) void function(GMount* mount, GMountUnmountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_mount_unmount_with_operationFn c_g_mount_unmount_with_operation; ///
+private alias c_g_mount_unmount_with_operation_finishFn = extern(C) gboolean function(GMount* mount, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_mount_unmount_with_operation_finishFn c_g_mount_unmount_with_operation_finish; ///
+private alias c_g_mount_unshadowFn = extern(C) void function(GMount* mount) nothrow;
+__gshared c_g_mount_unshadowFn c_g_mount_unshadow; ///
+
+// MountOperation
+private alias c_g_mount_operation_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_mount_operation_get_typeFn c_g_mount_operation_get_type; ///
+private alias c_g_mount_operation_newFn = extern(C) GMountOperation* function() nothrow;
+__gshared c_g_mount_operation_newFn c_g_mount_operation_new; ///
+private alias c_g_mount_operation_get_anonymousFn = extern(C) gboolean function(GMountOperation* op) nothrow;
+__gshared c_g_mount_operation_get_anonymousFn c_g_mount_operation_get_anonymous; ///
+private alias c_g_mount_operation_get_choiceFn = extern(C) int function(GMountOperation* op) nothrow;
+__gshared c_g_mount_operation_get_choiceFn c_g_mount_operation_get_choice; ///
+private alias c_g_mount_operation_get_domainFn = extern(C) const(char)* function(GMountOperation* op) nothrow;
+__gshared c_g_mount_operation_get_domainFn c_g_mount_operation_get_domain; ///
+private alias c_g_mount_operation_get_is_tcrypt_hidden_volumeFn = extern(C) gboolean function(GMountOperation* op) nothrow;
+__gshared c_g_mount_operation_get_is_tcrypt_hidden_volumeFn c_g_mount_operation_get_is_tcrypt_hidden_volume; ///
+private alias c_g_mount_operation_get_is_tcrypt_system_volumeFn = extern(C) gboolean function(GMountOperation* op) nothrow;
+__gshared c_g_mount_operation_get_is_tcrypt_system_volumeFn c_g_mount_operation_get_is_tcrypt_system_volume; ///
+private alias c_g_mount_operation_get_passwordFn = extern(C) const(char)* function(GMountOperation* op) nothrow;
+__gshared c_g_mount_operation_get_passwordFn c_g_mount_operation_get_password; ///
+private alias c_g_mount_operation_get_password_saveFn = extern(C) GPasswordSave function(GMountOperation* op) nothrow;
+__gshared c_g_mount_operation_get_password_saveFn c_g_mount_operation_get_password_save; ///
+private alias c_g_mount_operation_get_pimFn = extern(C) uint function(GMountOperation* op) nothrow;
+__gshared c_g_mount_operation_get_pimFn c_g_mount_operation_get_pim; ///
+private alias c_g_mount_operation_get_usernameFn = extern(C) const(char)* function(GMountOperation* op) nothrow;
+__gshared c_g_mount_operation_get_usernameFn c_g_mount_operation_get_username; ///
+private alias c_g_mount_operation_replyFn = extern(C) void function(GMountOperation* op, GMountOperationResult result) nothrow;
+__gshared c_g_mount_operation_replyFn c_g_mount_operation_reply; ///
+private alias c_g_mount_operation_set_anonymousFn = extern(C) void function(GMountOperation* op, gboolean anonymous) nothrow;
+__gshared c_g_mount_operation_set_anonymousFn c_g_mount_operation_set_anonymous; ///
+private alias c_g_mount_operation_set_choiceFn = extern(C) void function(GMountOperation* op, int choice) nothrow;
+__gshared c_g_mount_operation_set_choiceFn c_g_mount_operation_set_choice; ///
+private alias c_g_mount_operation_set_domainFn = extern(C) void function(GMountOperation* op, const(char)* domain) nothrow;
+__gshared c_g_mount_operation_set_domainFn c_g_mount_operation_set_domain; ///
+private alias c_g_mount_operation_set_is_tcrypt_hidden_volumeFn = extern(C) void function(GMountOperation* op, gboolean hiddenVolume) nothrow;
+__gshared c_g_mount_operation_set_is_tcrypt_hidden_volumeFn c_g_mount_operation_set_is_tcrypt_hidden_volume; ///
+private alias c_g_mount_operation_set_is_tcrypt_system_volumeFn = extern(C) void function(GMountOperation* op, gboolean systemVolume) nothrow;
+__gshared c_g_mount_operation_set_is_tcrypt_system_volumeFn c_g_mount_operation_set_is_tcrypt_system_volume; ///
+private alias c_g_mount_operation_set_passwordFn = extern(C) void function(GMountOperation* op, const(char)* password) nothrow;
+__gshared c_g_mount_operation_set_passwordFn c_g_mount_operation_set_password; ///
+private alias c_g_mount_operation_set_password_saveFn = extern(C) void function(GMountOperation* op, GPasswordSave save) nothrow;
+__gshared c_g_mount_operation_set_password_saveFn c_g_mount_operation_set_password_save; ///
+private alias c_g_mount_operation_set_pimFn = extern(C) void function(GMountOperation* op, uint pim) nothrow;
+__gshared c_g_mount_operation_set_pimFn c_g_mount_operation_set_pim; ///
+private alias c_g_mount_operation_set_usernameFn = extern(C) void function(GMountOperation* op, const(char)* username) nothrow;
+__gshared c_g_mount_operation_set_usernameFn c_g_mount_operation_set_username; ///
+
+// NativeSocketAddress
+private alias c_g_native_socket_address_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_native_socket_address_get_typeFn c_g_native_socket_address_get_type; ///
+private alias c_g_native_socket_address_newFn = extern(C) GSocketAddress* function(void* native, size_t len) nothrow;
+__gshared c_g_native_socket_address_newFn c_g_native_socket_address_new; ///
+
+// NativeVolumeMonitor
+private alias c_g_native_volume_monitor_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_native_volume_monitor_get_typeFn c_g_native_volume_monitor_get_type; ///
+
+// NetworkAddress
+private alias c_g_network_address_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_network_address_get_typeFn c_g_network_address_get_type; ///
+private alias c_g_network_address_newFn = extern(C) GSocketConnectable* function(const(char)* hostname, ushort port) nothrow;
+__gshared c_g_network_address_newFn c_g_network_address_new; ///
+private alias c_g_network_address_new_loopbackFn = extern(C) GSocketConnectable* function(ushort port) nothrow;
+__gshared c_g_network_address_new_loopbackFn c_g_network_address_new_loopback; ///
+private alias c_g_network_address_parseFn = extern(C) GSocketConnectable* function(const(char)* hostAndPort, ushort defaultPort, GError** _err) nothrow;
+__gshared c_g_network_address_parseFn c_g_network_address_parse; ///
+private alias c_g_network_address_parse_uriFn = extern(C) GSocketConnectable* function(const(char)* uri, ushort defaultPort, GError** _err) nothrow;
+__gshared c_g_network_address_parse_uriFn c_g_network_address_parse_uri; ///
+private alias c_g_network_address_get_hostnameFn = extern(C) const(char)* function(GNetworkAddress* addr) nothrow;
+__gshared c_g_network_address_get_hostnameFn c_g_network_address_get_hostname; ///
+private alias c_g_network_address_get_portFn = extern(C) ushort function(GNetworkAddress* addr) nothrow;
+__gshared c_g_network_address_get_portFn c_g_network_address_get_port; ///
+private alias c_g_network_address_get_schemeFn = extern(C) const(char)* function(GNetworkAddress* addr) nothrow;
+__gshared c_g_network_address_get_schemeFn c_g_network_address_get_scheme; ///
+
+// NetworkMonitor
+private alias c_g_network_monitor_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_network_monitor_get_typeFn c_g_network_monitor_get_type; ///
+private alias c_g_network_monitor_get_defaultFn = extern(C) GNetworkMonitor* function() nothrow;
+__gshared c_g_network_monitor_get_defaultFn c_g_network_monitor_get_default; ///
+private alias c_g_network_monitor_can_reachFn = extern(C) gboolean function(GNetworkMonitor* monitor, GSocketConnectable* connectable, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_network_monitor_can_reachFn c_g_network_monitor_can_reach; ///
+private alias c_g_network_monitor_can_reach_asyncFn = extern(C) void function(GNetworkMonitor* monitor, GSocketConnectable* connectable, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_network_monitor_can_reach_asyncFn c_g_network_monitor_can_reach_async; ///
+private alias c_g_network_monitor_can_reach_finishFn = extern(C) gboolean function(GNetworkMonitor* monitor, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_network_monitor_can_reach_finishFn c_g_network_monitor_can_reach_finish; ///
+private alias c_g_network_monitor_get_connectivityFn = extern(C) GNetworkConnectivity function(GNetworkMonitor* monitor) nothrow;
+__gshared c_g_network_monitor_get_connectivityFn c_g_network_monitor_get_connectivity; ///
+private alias c_g_network_monitor_get_network_availableFn = extern(C) gboolean function(GNetworkMonitor* monitor) nothrow;
+__gshared c_g_network_monitor_get_network_availableFn c_g_network_monitor_get_network_available; ///
+private alias c_g_network_monitor_get_network_meteredFn = extern(C) gboolean function(GNetworkMonitor* monitor) nothrow;
+__gshared c_g_network_monitor_get_network_meteredFn c_g_network_monitor_get_network_metered; ///
+
+// NetworkService
+private alias c_g_network_service_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_network_service_get_typeFn c_g_network_service_get_type; ///
+private alias c_g_network_service_newFn = extern(C) GSocketConnectable* function(const(char)* service, const(char)* protocol, const(char)* domain) nothrow;
+__gshared c_g_network_service_newFn c_g_network_service_new; ///
+private alias c_g_network_service_get_domainFn = extern(C) const(char)* function(GNetworkService* srv) nothrow;
+__gshared c_g_network_service_get_domainFn c_g_network_service_get_domain; ///
+private alias c_g_network_service_get_protocolFn = extern(C) const(char)* function(GNetworkService* srv) nothrow;
+__gshared c_g_network_service_get_protocolFn c_g_network_service_get_protocol; ///
+private alias c_g_network_service_get_schemeFn = extern(C) const(char)* function(GNetworkService* srv) nothrow;
+__gshared c_g_network_service_get_schemeFn c_g_network_service_get_scheme; ///
+private alias c_g_network_service_get_serviceFn = extern(C) const(char)* function(GNetworkService* srv) nothrow;
+__gshared c_g_network_service_get_serviceFn c_g_network_service_get_service; ///
+private alias c_g_network_service_set_schemeFn = extern(C) void function(GNetworkService* srv, const(char)* scheme) nothrow;
+__gshared c_g_network_service_set_schemeFn c_g_network_service_set_scheme; ///
+
+// Notification
+private alias c_g_notification_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_notification_get_typeFn c_g_notification_get_type; ///
+private alias c_g_notification_newFn = extern(C) GNotification* function(const(char)* title) nothrow;
+__gshared c_g_notification_newFn c_g_notification_new; ///
+private alias c_g_notification_add_buttonFn = extern(C) void function(GNotification* notification, const(char)* label, const(char)* detailedAction) nothrow;
+__gshared c_g_notification_add_buttonFn c_g_notification_add_button; ///
+private alias c_g_notification_add_button_with_targetFn = extern(C) void function(GNotification* notification, const(char)* label, const(char)* action, const(char)* targetFormat,  ...) nothrow;
+__gshared c_g_notification_add_button_with_targetFn c_g_notification_add_button_with_target; ///
+private alias c_g_notification_add_button_with_target_valueFn = extern(C) void function(GNotification* notification, const(char)* label, const(char)* action, GVariant* target) nothrow;
+__gshared c_g_notification_add_button_with_target_valueFn c_g_notification_add_button_with_target_value; ///
+private alias c_g_notification_set_bodyFn = extern(C) void function(GNotification* notification, const(char)* body_) nothrow;
+__gshared c_g_notification_set_bodyFn c_g_notification_set_body; ///
+private alias c_g_notification_set_categoryFn = extern(C) void function(GNotification* notification, const(char)* category) nothrow;
+__gshared c_g_notification_set_categoryFn c_g_notification_set_category; ///
+private alias c_g_notification_set_default_actionFn = extern(C) void function(GNotification* notification, const(char)* detailedAction) nothrow;
+__gshared c_g_notification_set_default_actionFn c_g_notification_set_default_action; ///
+private alias c_g_notification_set_default_action_and_targetFn = extern(C) void function(GNotification* notification, const(char)* action, const(char)* targetFormat,  ...) nothrow;
+__gshared c_g_notification_set_default_action_and_targetFn c_g_notification_set_default_action_and_target; ///
+private alias c_g_notification_set_default_action_and_target_valueFn = extern(C) void function(GNotification* notification, const(char)* action, GVariant* target) nothrow;
+__gshared c_g_notification_set_default_action_and_target_valueFn c_g_notification_set_default_action_and_target_value; ///
+private alias c_g_notification_set_iconFn = extern(C) void function(GNotification* notification, GIcon* icon) nothrow;
+__gshared c_g_notification_set_iconFn c_g_notification_set_icon; ///
+private alias c_g_notification_set_priorityFn = extern(C) void function(GNotification* notification, GNotificationPriority priority) nothrow;
+__gshared c_g_notification_set_priorityFn c_g_notification_set_priority; ///
+private alias c_g_notification_set_titleFn = extern(C) void function(GNotification* notification, const(char)* title) nothrow;
+__gshared c_g_notification_set_titleFn c_g_notification_set_title; ///
+private alias c_g_notification_set_urgentFn = extern(C) void function(GNotification* notification, gboolean urgent) nothrow;
+__gshared c_g_notification_set_urgentFn c_g_notification_set_urgent; ///
+
+// OutputStream
+private alias c_g_output_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_output_stream_get_typeFn c_g_output_stream_get_type; ///
+private alias c_g_output_stream_clear_pendingFn = extern(C) void function(GOutputStream* stream) nothrow;
+__gshared c_g_output_stream_clear_pendingFn c_g_output_stream_clear_pending; ///
+private alias c_g_output_stream_closeFn = extern(C) gboolean function(GOutputStream* stream, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_output_stream_closeFn c_g_output_stream_close; ///
+private alias c_g_output_stream_close_asyncFn = extern(C) void function(GOutputStream* stream, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_output_stream_close_asyncFn c_g_output_stream_close_async; ///
+private alias c_g_output_stream_close_finishFn = extern(C) gboolean function(GOutputStream* stream, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_output_stream_close_finishFn c_g_output_stream_close_finish; ///
+private alias c_g_output_stream_flushFn = extern(C) gboolean function(GOutputStream* stream, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_output_stream_flushFn c_g_output_stream_flush; ///
+private alias c_g_output_stream_flush_asyncFn = extern(C) void function(GOutputStream* stream, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_output_stream_flush_asyncFn c_g_output_stream_flush_async; ///
+private alias c_g_output_stream_flush_finishFn = extern(C) gboolean function(GOutputStream* stream, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_output_stream_flush_finishFn c_g_output_stream_flush_finish; ///
+private alias c_g_output_stream_has_pendingFn = extern(C) gboolean function(GOutputStream* stream) nothrow;
+__gshared c_g_output_stream_has_pendingFn c_g_output_stream_has_pending; ///
+private alias c_g_output_stream_is_closedFn = extern(C) gboolean function(GOutputStream* stream) nothrow;
+__gshared c_g_output_stream_is_closedFn c_g_output_stream_is_closed; ///
+private alias c_g_output_stream_is_closingFn = extern(C) gboolean function(GOutputStream* stream) nothrow;
+__gshared c_g_output_stream_is_closingFn c_g_output_stream_is_closing; ///
+private alias c_g_output_stream_printfFn = extern(C) gboolean function(GOutputStream* stream, size_t* bytesWritten, GCancellable* cancellable, GError** error, const(char)* format,  ...) nothrow;
+__gshared c_g_output_stream_printfFn c_g_output_stream_printf; ///
+private alias c_g_output_stream_set_pendingFn = extern(C) gboolean function(GOutputStream* stream, GError** _err) nothrow;
+__gshared c_g_output_stream_set_pendingFn c_g_output_stream_set_pending; ///
+private alias c_g_output_stream_spliceFn = extern(C) ptrdiff_t function(GOutputStream* stream, GInputStream* source, GOutputStreamSpliceFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_output_stream_spliceFn c_g_output_stream_splice; ///
+private alias c_g_output_stream_splice_asyncFn = extern(C) void function(GOutputStream* stream, GInputStream* source, GOutputStreamSpliceFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_output_stream_splice_asyncFn c_g_output_stream_splice_async; ///
+private alias c_g_output_stream_splice_finishFn = extern(C) ptrdiff_t function(GOutputStream* stream, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_output_stream_splice_finishFn c_g_output_stream_splice_finish; ///
+private alias c_g_output_stream_vprintfFn = extern(C) gboolean function(GOutputStream* stream, size_t* bytesWritten, GCancellable* cancellable, GError** error, const(char)* format, void* args) nothrow;
+__gshared c_g_output_stream_vprintfFn c_g_output_stream_vprintf; ///
+private alias c_g_output_stream_writeFn = extern(C) ptrdiff_t function(GOutputStream* stream, void* buffer, size_t count, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_output_stream_writeFn c_g_output_stream_write; ///
+private alias c_g_output_stream_write_allFn = extern(C) gboolean function(GOutputStream* stream, void* buffer, size_t count, size_t* bytesWritten, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_output_stream_write_allFn c_g_output_stream_write_all; ///
+private alias c_g_output_stream_write_all_asyncFn = extern(C) void function(GOutputStream* stream, void* buffer, size_t count, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_output_stream_write_all_asyncFn c_g_output_stream_write_all_async; ///
+private alias c_g_output_stream_write_all_finishFn = extern(C) gboolean function(GOutputStream* stream, GAsyncResult* result, size_t* bytesWritten, GError** _err) nothrow;
+__gshared c_g_output_stream_write_all_finishFn c_g_output_stream_write_all_finish; ///
+private alias c_g_output_stream_write_asyncFn = extern(C) void function(GOutputStream* stream, void* buffer, size_t count, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_output_stream_write_asyncFn c_g_output_stream_write_async; ///
+private alias c_g_output_stream_write_bytesFn = extern(C) ptrdiff_t function(GOutputStream* stream, GBytes* bytes, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_output_stream_write_bytesFn c_g_output_stream_write_bytes; ///
+private alias c_g_output_stream_write_bytes_asyncFn = extern(C) void function(GOutputStream* stream, GBytes* bytes, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_output_stream_write_bytes_asyncFn c_g_output_stream_write_bytes_async; ///
+private alias c_g_output_stream_write_bytes_finishFn = extern(C) ptrdiff_t function(GOutputStream* stream, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_output_stream_write_bytes_finishFn c_g_output_stream_write_bytes_finish; ///
+private alias c_g_output_stream_write_finishFn = extern(C) ptrdiff_t function(GOutputStream* stream, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_output_stream_write_finishFn c_g_output_stream_write_finish; ///
+private alias c_g_output_stream_writevFn = extern(C) gboolean function(GOutputStream* stream, const(GOutputVector)* vectors, size_t nVectors, size_t* bytesWritten, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_output_stream_writevFn c_g_output_stream_writev; ///
+private alias c_g_output_stream_writev_allFn = extern(C) gboolean function(GOutputStream* stream, GOutputVector* vectors, size_t nVectors, size_t* bytesWritten, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_output_stream_writev_allFn c_g_output_stream_writev_all; ///
+private alias c_g_output_stream_writev_all_asyncFn = extern(C) void function(GOutputStream* stream, GOutputVector* vectors, size_t nVectors, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_output_stream_writev_all_asyncFn c_g_output_stream_writev_all_async; ///
+private alias c_g_output_stream_writev_all_finishFn = extern(C) gboolean function(GOutputStream* stream, GAsyncResult* result, size_t* bytesWritten, GError** _err) nothrow;
+__gshared c_g_output_stream_writev_all_finishFn c_g_output_stream_writev_all_finish; ///
+private alias c_g_output_stream_writev_asyncFn = extern(C) void function(GOutputStream* stream, const(GOutputVector)* vectors, size_t nVectors, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_output_stream_writev_asyncFn c_g_output_stream_writev_async; ///
+private alias c_g_output_stream_writev_finishFn = extern(C) gboolean function(GOutputStream* stream, GAsyncResult* result, size_t* bytesWritten, GError** _err) nothrow;
+__gshared c_g_output_stream_writev_finishFn c_g_output_stream_writev_finish; ///
+
+// Permission
+private alias c_g_permission_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_permission_get_typeFn c_g_permission_get_type; ///
+private alias c_g_permission_acquireFn = extern(C) gboolean function(GPermission* permission, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_permission_acquireFn c_g_permission_acquire; ///
+private alias c_g_permission_acquire_asyncFn = extern(C) void function(GPermission* permission, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_permission_acquire_asyncFn c_g_permission_acquire_async; ///
+private alias c_g_permission_acquire_finishFn = extern(C) gboolean function(GPermission* permission, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_permission_acquire_finishFn c_g_permission_acquire_finish; ///
+private alias c_g_permission_get_allowedFn = extern(C) gboolean function(GPermission* permission) nothrow;
+__gshared c_g_permission_get_allowedFn c_g_permission_get_allowed; ///
+private alias c_g_permission_get_can_acquireFn = extern(C) gboolean function(GPermission* permission) nothrow;
+__gshared c_g_permission_get_can_acquireFn c_g_permission_get_can_acquire; ///
+private alias c_g_permission_get_can_releaseFn = extern(C) gboolean function(GPermission* permission) nothrow;
+__gshared c_g_permission_get_can_releaseFn c_g_permission_get_can_release; ///
+private alias c_g_permission_impl_updateFn = extern(C) void function(GPermission* permission, gboolean allowed, gboolean canAcquire, gboolean canRelease) nothrow;
+__gshared c_g_permission_impl_updateFn c_g_permission_impl_update; ///
+private alias c_g_permission_releaseFn = extern(C) gboolean function(GPermission* permission, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_permission_releaseFn c_g_permission_release; ///
+private alias c_g_permission_release_asyncFn = extern(C) void function(GPermission* permission, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_permission_release_asyncFn c_g_permission_release_async; ///
+private alias c_g_permission_release_finishFn = extern(C) gboolean function(GPermission* permission, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_permission_release_finishFn c_g_permission_release_finish; ///
+
+// PollableInputStream
+private alias c_g_pollable_input_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_pollable_input_stream_get_typeFn c_g_pollable_input_stream_get_type; ///
+private alias c_g_pollable_input_stream_can_pollFn = extern(C) gboolean function(GPollableInputStream* stream) nothrow;
+__gshared c_g_pollable_input_stream_can_pollFn c_g_pollable_input_stream_can_poll; ///
+private alias c_g_pollable_input_stream_create_sourceFn = extern(C) GSource* function(GPollableInputStream* stream, GCancellable* cancellable) nothrow;
+__gshared c_g_pollable_input_stream_create_sourceFn c_g_pollable_input_stream_create_source; ///
+private alias c_g_pollable_input_stream_is_readableFn = extern(C) gboolean function(GPollableInputStream* stream) nothrow;
+__gshared c_g_pollable_input_stream_is_readableFn c_g_pollable_input_stream_is_readable; ///
+private alias c_g_pollable_input_stream_read_nonblockingFn = extern(C) ptrdiff_t function(GPollableInputStream* stream, void* buffer, size_t count, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_pollable_input_stream_read_nonblockingFn c_g_pollable_input_stream_read_nonblocking; ///
+
+// PollableOutputStream
+private alias c_g_pollable_output_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_pollable_output_stream_get_typeFn c_g_pollable_output_stream_get_type; ///
+private alias c_g_pollable_output_stream_can_pollFn = extern(C) gboolean function(GPollableOutputStream* stream) nothrow;
+__gshared c_g_pollable_output_stream_can_pollFn c_g_pollable_output_stream_can_poll; ///
+private alias c_g_pollable_output_stream_create_sourceFn = extern(C) GSource* function(GPollableOutputStream* stream, GCancellable* cancellable) nothrow;
+__gshared c_g_pollable_output_stream_create_sourceFn c_g_pollable_output_stream_create_source; ///
+private alias c_g_pollable_output_stream_is_writableFn = extern(C) gboolean function(GPollableOutputStream* stream) nothrow;
+__gshared c_g_pollable_output_stream_is_writableFn c_g_pollable_output_stream_is_writable; ///
+private alias c_g_pollable_output_stream_write_nonblockingFn = extern(C) ptrdiff_t function(GPollableOutputStream* stream, void* buffer, size_t count, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_pollable_output_stream_write_nonblockingFn c_g_pollable_output_stream_write_nonblocking; ///
+private alias c_g_pollable_output_stream_writev_nonblockingFn = extern(C) GPollableReturn function(GPollableOutputStream* stream, const(GOutputVector)* vectors, size_t nVectors, size_t* bytesWritten, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_pollable_output_stream_writev_nonblockingFn c_g_pollable_output_stream_writev_nonblocking; ///
+
+// PowerProfileMonitor
+private alias c_g_power_profile_monitor_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_power_profile_monitor_get_typeFn c_g_power_profile_monitor_get_type; ///
+private alias c_g_power_profile_monitor_dup_defaultFn = extern(C) GPowerProfileMonitor* function() nothrow;
+__gshared c_g_power_profile_monitor_dup_defaultFn c_g_power_profile_monitor_dup_default; ///
+private alias c_g_power_profile_monitor_get_power_saver_enabledFn = extern(C) gboolean function(GPowerProfileMonitor* monitor) nothrow;
+__gshared c_g_power_profile_monitor_get_power_saver_enabledFn c_g_power_profile_monitor_get_power_saver_enabled; ///
+
+// PropertyAction
+private alias c_g_property_action_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_property_action_get_typeFn c_g_property_action_get_type; ///
+private alias c_g_property_action_newFn = extern(C) GPropertyAction* function(const(char)* name, GObject* object, const(char)* propertyName) nothrow;
+__gshared c_g_property_action_newFn c_g_property_action_new; ///
+
+// Proxy
+private alias c_g_proxy_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_proxy_get_typeFn c_g_proxy_get_type; ///
+private alias c_g_proxy_get_default_for_protocolFn = extern(C) GProxy* function(const(char)* protocol) nothrow;
+__gshared c_g_proxy_get_default_for_protocolFn c_g_proxy_get_default_for_protocol; ///
+private alias c_g_proxy_connectFn = extern(C) GIOStream* function(GProxy* proxy, GIOStream* connection, GProxyAddress* proxyAddress, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_proxy_connectFn c_g_proxy_connect; ///
+private alias c_g_proxy_connect_asyncFn = extern(C) void function(GProxy* proxy, GIOStream* connection, GProxyAddress* proxyAddress, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_proxy_connect_asyncFn c_g_proxy_connect_async; ///
+private alias c_g_proxy_connect_finishFn = extern(C) GIOStream* function(GProxy* proxy, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_proxy_connect_finishFn c_g_proxy_connect_finish; ///
+private alias c_g_proxy_supports_hostnameFn = extern(C) gboolean function(GProxy* proxy) nothrow;
+__gshared c_g_proxy_supports_hostnameFn c_g_proxy_supports_hostname; ///
+
+// ProxyAddress
+private alias c_g_proxy_address_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_proxy_address_get_typeFn c_g_proxy_address_get_type; ///
+private alias c_g_proxy_address_newFn = extern(C) GSocketAddress* function(GInetAddress* inetaddr, ushort port, const(char)* protocol, const(char)* destHostname, ushort destPort, const(char)* username, const(char)* password) nothrow;
+__gshared c_g_proxy_address_newFn c_g_proxy_address_new; ///
+private alias c_g_proxy_address_get_destination_hostnameFn = extern(C) const(char)* function(GProxyAddress* proxy) nothrow;
+__gshared c_g_proxy_address_get_destination_hostnameFn c_g_proxy_address_get_destination_hostname; ///
+private alias c_g_proxy_address_get_destination_portFn = extern(C) ushort function(GProxyAddress* proxy) nothrow;
+__gshared c_g_proxy_address_get_destination_portFn c_g_proxy_address_get_destination_port; ///
+private alias c_g_proxy_address_get_destination_protocolFn = extern(C) const(char)* function(GProxyAddress* proxy) nothrow;
+__gshared c_g_proxy_address_get_destination_protocolFn c_g_proxy_address_get_destination_protocol; ///
+private alias c_g_proxy_address_get_passwordFn = extern(C) const(char)* function(GProxyAddress* proxy) nothrow;
+__gshared c_g_proxy_address_get_passwordFn c_g_proxy_address_get_password; ///
+private alias c_g_proxy_address_get_protocolFn = extern(C) const(char)* function(GProxyAddress* proxy) nothrow;
+__gshared c_g_proxy_address_get_protocolFn c_g_proxy_address_get_protocol; ///
+private alias c_g_proxy_address_get_uriFn = extern(C) const(char)* function(GProxyAddress* proxy) nothrow;
+__gshared c_g_proxy_address_get_uriFn c_g_proxy_address_get_uri; ///
+private alias c_g_proxy_address_get_usernameFn = extern(C) const(char)* function(GProxyAddress* proxy) nothrow;
+__gshared c_g_proxy_address_get_usernameFn c_g_proxy_address_get_username; ///
+
+// ProxyAddressEnumerator
+private alias c_g_proxy_address_enumerator_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_proxy_address_enumerator_get_typeFn c_g_proxy_address_enumerator_get_type; ///
+
+// ProxyResolver
+private alias c_g_proxy_resolver_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_proxy_resolver_get_typeFn c_g_proxy_resolver_get_type; ///
+private alias c_g_proxy_resolver_get_defaultFn = extern(C) GProxyResolver* function() nothrow;
+__gshared c_g_proxy_resolver_get_defaultFn c_g_proxy_resolver_get_default; ///
+private alias c_g_proxy_resolver_is_supportedFn = extern(C) gboolean function(GProxyResolver* resolver) nothrow;
+__gshared c_g_proxy_resolver_is_supportedFn c_g_proxy_resolver_is_supported; ///
+private alias c_g_proxy_resolver_lookupFn = extern(C) char** function(GProxyResolver* resolver, const(char)* uri, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_proxy_resolver_lookupFn c_g_proxy_resolver_lookup; ///
+private alias c_g_proxy_resolver_lookup_asyncFn = extern(C) void function(GProxyResolver* resolver, const(char)* uri, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_proxy_resolver_lookup_asyncFn c_g_proxy_resolver_lookup_async; ///
+private alias c_g_proxy_resolver_lookup_finishFn = extern(C) char** function(GProxyResolver* resolver, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_proxy_resolver_lookup_finishFn c_g_proxy_resolver_lookup_finish; ///
+
+// RemoteActionGroup
+private alias c_g_remote_action_group_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_remote_action_group_get_typeFn c_g_remote_action_group_get_type; ///
+private alias c_g_remote_action_group_activate_action_fullFn = extern(C) void function(GRemoteActionGroup* remote, const(char)* actionName, GVariant* parameter, GVariant* platformData) nothrow;
+__gshared c_g_remote_action_group_activate_action_fullFn c_g_remote_action_group_activate_action_full; ///
+private alias c_g_remote_action_group_change_action_state_fullFn = extern(C) void function(GRemoteActionGroup* remote, const(char)* actionName, GVariant* value, GVariant* platformData) nothrow;
+__gshared c_g_remote_action_group_change_action_state_fullFn c_g_remote_action_group_change_action_state_full; ///
+
+// Resolver
+private alias c_g_resolver_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_resolver_get_typeFn c_g_resolver_get_type; ///
+private alias c_g_resolver_free_addressesFn = extern(C) void function(GList* addresses) nothrow;
+__gshared c_g_resolver_free_addressesFn c_g_resolver_free_addresses; ///
+private alias c_g_resolver_free_targetsFn = extern(C) void function(GList* targets) nothrow;
+__gshared c_g_resolver_free_targetsFn c_g_resolver_free_targets; ///
+private alias c_g_resolver_get_defaultFn = extern(C) GResolver* function() nothrow;
+__gshared c_g_resolver_get_defaultFn c_g_resolver_get_default; ///
+private alias c_g_resolver_get_timeoutFn = extern(C) uint function(GResolver* resolver) nothrow;
+__gshared c_g_resolver_get_timeoutFn c_g_resolver_get_timeout; ///
+private alias c_g_resolver_lookup_by_addressFn = extern(C) char* function(GResolver* resolver, GInetAddress* address, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_resolver_lookup_by_addressFn c_g_resolver_lookup_by_address; ///
+private alias c_g_resolver_lookup_by_address_asyncFn = extern(C) void function(GResolver* resolver, GInetAddress* address, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_resolver_lookup_by_address_asyncFn c_g_resolver_lookup_by_address_async; ///
+private alias c_g_resolver_lookup_by_address_finishFn = extern(C) char* function(GResolver* resolver, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_resolver_lookup_by_address_finishFn c_g_resolver_lookup_by_address_finish; ///
+private alias c_g_resolver_lookup_by_nameFn = extern(C) GList* function(GResolver* resolver, const(char)* hostname, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_resolver_lookup_by_nameFn c_g_resolver_lookup_by_name; ///
+private alias c_g_resolver_lookup_by_name_asyncFn = extern(C) void function(GResolver* resolver, const(char)* hostname, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_resolver_lookup_by_name_asyncFn c_g_resolver_lookup_by_name_async; ///
+private alias c_g_resolver_lookup_by_name_finishFn = extern(C) GList* function(GResolver* resolver, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_resolver_lookup_by_name_finishFn c_g_resolver_lookup_by_name_finish; ///
+private alias c_g_resolver_lookup_by_name_with_flagsFn = extern(C) GList* function(GResolver* resolver, const(char)* hostname, GResolverNameLookupFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_resolver_lookup_by_name_with_flagsFn c_g_resolver_lookup_by_name_with_flags; ///
+private alias c_g_resolver_lookup_by_name_with_flags_asyncFn = extern(C) void function(GResolver* resolver, const(char)* hostname, GResolverNameLookupFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_resolver_lookup_by_name_with_flags_asyncFn c_g_resolver_lookup_by_name_with_flags_async; ///
+private alias c_g_resolver_lookup_by_name_with_flags_finishFn = extern(C) GList* function(GResolver* resolver, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_resolver_lookup_by_name_with_flags_finishFn c_g_resolver_lookup_by_name_with_flags_finish; ///
+private alias c_g_resolver_lookup_recordsFn = extern(C) GList* function(GResolver* resolver, const(char)* rrname, GResolverRecordType recordType, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_resolver_lookup_recordsFn c_g_resolver_lookup_records; ///
+private alias c_g_resolver_lookup_records_asyncFn = extern(C) void function(GResolver* resolver, const(char)* rrname, GResolverRecordType recordType, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_resolver_lookup_records_asyncFn c_g_resolver_lookup_records_async; ///
+private alias c_g_resolver_lookup_records_finishFn = extern(C) GList* function(GResolver* resolver, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_resolver_lookup_records_finishFn c_g_resolver_lookup_records_finish; ///
+private alias c_g_resolver_lookup_serviceFn = extern(C) GList* function(GResolver* resolver, const(char)* service, const(char)* protocol, const(char)* domain, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_resolver_lookup_serviceFn c_g_resolver_lookup_service; ///
+private alias c_g_resolver_lookup_service_asyncFn = extern(C) void function(GResolver* resolver, const(char)* service, const(char)* protocol, const(char)* domain, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_resolver_lookup_service_asyncFn c_g_resolver_lookup_service_async; ///
+private alias c_g_resolver_lookup_service_finishFn = extern(C) GList* function(GResolver* resolver, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_resolver_lookup_service_finishFn c_g_resolver_lookup_service_finish; ///
+private alias c_g_resolver_set_defaultFn = extern(C) void function(GResolver* resolver) nothrow;
+__gshared c_g_resolver_set_defaultFn c_g_resolver_set_default; ///
+private alias c_g_resolver_set_timeoutFn = extern(C) void function(GResolver* resolver, uint timeoutMs) nothrow;
+__gshared c_g_resolver_set_timeoutFn c_g_resolver_set_timeout; ///
+
+// Resource
+private alias c_g_resource_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_resource_get_typeFn c_g_resource_get_type; ///
+private alias c_g_resource_new_from_dataFn = extern(C) GResource* function(GBytes* data, GError** _err) nothrow;
+__gshared c_g_resource_new_from_dataFn c_g_resource_new_from_data; ///
+private alias c_g_resource_enumerate_childrenFn = extern(C) char** function(GResource* resource, const(char)* path, GResourceLookupFlags lookupFlags, GError** _err) nothrow;
+__gshared c_g_resource_enumerate_childrenFn c_g_resource_enumerate_children; ///
+private alias c_g_resource_get_infoFn = extern(C) gboolean function(GResource* resource, const(char)* path, GResourceLookupFlags lookupFlags, size_t* size, uint* flags, GError** _err) nothrow;
+__gshared c_g_resource_get_infoFn c_g_resource_get_info; ///
+private alias c_g_resource_has_childrenFn = extern(C) gboolean function(GResource* resource, const(char)* path) nothrow;
+__gshared c_g_resource_has_childrenFn c_g_resource_has_children; ///
+private alias c_g_resource_lookup_dataFn = extern(C) GBytes* function(GResource* resource, const(char)* path, GResourceLookupFlags lookupFlags, GError** _err) nothrow;
+__gshared c_g_resource_lookup_dataFn c_g_resource_lookup_data; ///
+private alias c_g_resource_open_streamFn = extern(C) GInputStream* function(GResource* resource, const(char)* path, GResourceLookupFlags lookupFlags, GError** _err) nothrow;
+__gshared c_g_resource_open_streamFn c_g_resource_open_stream; ///
+private alias c_g_resource_refFn = extern(C) GResource* function(GResource* resource) nothrow;
+__gshared c_g_resource_refFn c_g_resource_ref; ///
+private alias c_g_resource_unrefFn = extern(C) void function(GResource* resource) nothrow;
+__gshared c_g_resource_unrefFn c_g_resource_unref; ///
+private alias c_g_resource_loadFn = extern(C) GResource* function(const(char)* filename, GError** _err) nothrow;
+__gshared c_g_resource_loadFn c_g_resource_load; ///
+
+// Seekable
+private alias c_g_seekable_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_seekable_get_typeFn c_g_seekable_get_type; ///
+private alias c_g_seekable_can_seekFn = extern(C) gboolean function(GSeekable* seekable) nothrow;
+__gshared c_g_seekable_can_seekFn c_g_seekable_can_seek; ///
+private alias c_g_seekable_can_truncateFn = extern(C) gboolean function(GSeekable* seekable) nothrow;
+__gshared c_g_seekable_can_truncateFn c_g_seekable_can_truncate; ///
+private alias c_g_seekable_seekFn = extern(C) gboolean function(GSeekable* seekable, long offset, GSeekType type, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_seekable_seekFn c_g_seekable_seek; ///
+private alias c_g_seekable_tellFn = extern(C) long function(GSeekable* seekable) nothrow;
+__gshared c_g_seekable_tellFn c_g_seekable_tell; ///
+private alias c_g_seekable_truncateFn = extern(C) gboolean function(GSeekable* seekable, long offset, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_seekable_truncateFn c_g_seekable_truncate; ///
+
+// Settings
+private alias c_g_settings_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_settings_get_typeFn c_g_settings_get_type; ///
+private alias c_g_settings_newFn = extern(C) GSettings* function(const(char)* schemaId) nothrow;
+__gshared c_g_settings_newFn c_g_settings_new; ///
+private alias c_g_settings_new_fullFn = extern(C) GSettings* function(GSettingsSchema* schema, GSettingsBackend* backend, const(char)* path) nothrow;
+__gshared c_g_settings_new_fullFn c_g_settings_new_full; ///
+private alias c_g_settings_new_with_backendFn = extern(C) GSettings* function(const(char)* schemaId, GSettingsBackend* backend) nothrow;
+__gshared c_g_settings_new_with_backendFn c_g_settings_new_with_backend; ///
+private alias c_g_settings_new_with_backend_and_pathFn = extern(C) GSettings* function(const(char)* schemaId, GSettingsBackend* backend, const(char)* path) nothrow;
+__gshared c_g_settings_new_with_backend_and_pathFn c_g_settings_new_with_backend_and_path; ///
+private alias c_g_settings_new_with_pathFn = extern(C) GSettings* function(const(char)* schemaId, const(char)* path) nothrow;
+__gshared c_g_settings_new_with_pathFn c_g_settings_new_with_path; ///
+private alias c_g_settings_list_relocatable_schemasFn = extern(C) const(char*)* function() nothrow;
+__gshared c_g_settings_list_relocatable_schemasFn c_g_settings_list_relocatable_schemas; ///
+private alias c_g_settings_list_schemasFn = extern(C) const(char*)* function() nothrow;
+__gshared c_g_settings_list_schemasFn c_g_settings_list_schemas; ///
+private alias c_g_settings_syncFn = extern(C) void function() nothrow;
+__gshared c_g_settings_syncFn c_g_settings_sync; ///
+private alias c_g_settings_unbindFn = extern(C) void function(GObject* object, const(char)* property) nothrow;
+__gshared c_g_settings_unbindFn c_g_settings_unbind; ///
+private alias c_g_settings_applyFn = extern(C) void function(GSettings* settings) nothrow;
+__gshared c_g_settings_applyFn c_g_settings_apply; ///
+private alias c_g_settings_bindFn = extern(C) void function(GSettings* settings, const(char)* key, GObject* object, const(char)* property, GSettingsBindFlags flags) nothrow;
+__gshared c_g_settings_bindFn c_g_settings_bind; ///
+private alias c_g_settings_bind_with_mappingFn = extern(C) void function(GSettings* settings, const(char)* key, GObject* object, const(char)* property, GSettingsBindFlags flags, GSettingsBindGetMapping getMapping, GSettingsBindSetMapping setMapping, void* userData, GDestroyNotify destroy) nothrow;
+__gshared c_g_settings_bind_with_mappingFn c_g_settings_bind_with_mapping; ///
+private alias c_g_settings_bind_with_mapping_closuresFn = extern(C) void function(GSettings* settings, const(char)* key, GObject* object, const(char)* property, GSettingsBindFlags flags, GClosure* getMapping, GClosure* setMapping) nothrow;
+__gshared c_g_settings_bind_with_mapping_closuresFn c_g_settings_bind_with_mapping_closures; ///
+private alias c_g_settings_bind_writableFn = extern(C) void function(GSettings* settings, const(char)* key, GObject* object, const(char)* property, gboolean inverted) nothrow;
+__gshared c_g_settings_bind_writableFn c_g_settings_bind_writable; ///
+private alias c_g_settings_create_actionFn = extern(C) GAction* function(GSettings* settings, const(char)* key) nothrow;
+__gshared c_g_settings_create_actionFn c_g_settings_create_action; ///
+private alias c_g_settings_delayFn = extern(C) void function(GSettings* settings) nothrow;
+__gshared c_g_settings_delayFn c_g_settings_delay; ///
+private alias c_g_settings_getFn = extern(C) void function(GSettings* settings, const(char)* key, const(char)* format,  ...) nothrow;
+__gshared c_g_settings_getFn c_g_settings_get; ///
+private alias c_g_settings_get_booleanFn = extern(C) gboolean function(GSettings* settings, const(char)* key) nothrow;
+__gshared c_g_settings_get_booleanFn c_g_settings_get_boolean; ///
+private alias c_g_settings_get_childFn = extern(C) GSettings* function(GSettings* settings, const(char)* name) nothrow;
+__gshared c_g_settings_get_childFn c_g_settings_get_child; ///
+private alias c_g_settings_get_default_valueFn = extern(C) GVariant* function(GSettings* settings, const(char)* key) nothrow;
+__gshared c_g_settings_get_default_valueFn c_g_settings_get_default_value; ///
+private alias c_g_settings_get_doubleFn = extern(C) double function(GSettings* settings, const(char)* key) nothrow;
+__gshared c_g_settings_get_doubleFn c_g_settings_get_double; ///
+private alias c_g_settings_get_enumFn = extern(C) int function(GSettings* settings, const(char)* key) nothrow;
+__gshared c_g_settings_get_enumFn c_g_settings_get_enum; ///
+private alias c_g_settings_get_flagsFn = extern(C) uint function(GSettings* settings, const(char)* key) nothrow;
+__gshared c_g_settings_get_flagsFn c_g_settings_get_flags; ///
+private alias c_g_settings_get_has_unappliedFn = extern(C) gboolean function(GSettings* settings) nothrow;
+__gshared c_g_settings_get_has_unappliedFn c_g_settings_get_has_unapplied; ///
+private alias c_g_settings_get_intFn = extern(C) int function(GSettings* settings, const(char)* key) nothrow;
+__gshared c_g_settings_get_intFn c_g_settings_get_int; ///
+private alias c_g_settings_get_int64Fn = extern(C) long function(GSettings* settings, const(char)* key) nothrow;
+__gshared c_g_settings_get_int64Fn c_g_settings_get_int64; ///
+private alias c_g_settings_get_mappedFn = extern(C) void* function(GSettings* settings, const(char)* key, GSettingsGetMapping mapping, void* userData) nothrow;
+__gshared c_g_settings_get_mappedFn c_g_settings_get_mapped; ///
+private alias c_g_settings_get_rangeFn = extern(C) GVariant* function(GSettings* settings, const(char)* key) nothrow;
+__gshared c_g_settings_get_rangeFn c_g_settings_get_range; ///
+private alias c_g_settings_get_stringFn = extern(C) char* function(GSettings* settings, const(char)* key) nothrow;
+__gshared c_g_settings_get_stringFn c_g_settings_get_string; ///
+private alias c_g_settings_get_strvFn = extern(C) char** function(GSettings* settings, const(char)* key) nothrow;
+__gshared c_g_settings_get_strvFn c_g_settings_get_strv; ///
+private alias c_g_settings_get_uintFn = extern(C) uint function(GSettings* settings, const(char)* key) nothrow;
+__gshared c_g_settings_get_uintFn c_g_settings_get_uint; ///
+private alias c_g_settings_get_uint64Fn = extern(C) ulong function(GSettings* settings, const(char)* key) nothrow;
+__gshared c_g_settings_get_uint64Fn c_g_settings_get_uint64; ///
+private alias c_g_settings_get_user_valueFn = extern(C) GVariant* function(GSettings* settings, const(char)* key) nothrow;
+__gshared c_g_settings_get_user_valueFn c_g_settings_get_user_value; ///
+private alias c_g_settings_get_valueFn = extern(C) GVariant* function(GSettings* settings, const(char)* key) nothrow;
+__gshared c_g_settings_get_valueFn c_g_settings_get_value; ///
+private alias c_g_settings_is_writableFn = extern(C) gboolean function(GSettings* settings, const(char)* name) nothrow;
+__gshared c_g_settings_is_writableFn c_g_settings_is_writable; ///
+private alias c_g_settings_list_childrenFn = extern(C) char** function(GSettings* settings) nothrow;
+__gshared c_g_settings_list_childrenFn c_g_settings_list_children; ///
+private alias c_g_settings_list_keysFn = extern(C) char** function(GSettings* settings) nothrow;
+__gshared c_g_settings_list_keysFn c_g_settings_list_keys; ///
+private alias c_g_settings_range_checkFn = extern(C) gboolean function(GSettings* settings, const(char)* key, GVariant* value) nothrow;
+__gshared c_g_settings_range_checkFn c_g_settings_range_check; ///
+private alias c_g_settings_resetFn = extern(C) void function(GSettings* settings, const(char)* key) nothrow;
+__gshared c_g_settings_resetFn c_g_settings_reset; ///
+private alias c_g_settings_revertFn = extern(C) void function(GSettings* settings) nothrow;
+__gshared c_g_settings_revertFn c_g_settings_revert; ///
+private alias c_g_settings_setFn = extern(C) gboolean function(GSettings* settings, const(char)* key, const(char)* format,  ...) nothrow;
+__gshared c_g_settings_setFn c_g_settings_set; ///
+private alias c_g_settings_set_booleanFn = extern(C) gboolean function(GSettings* settings, const(char)* key, gboolean value) nothrow;
+__gshared c_g_settings_set_booleanFn c_g_settings_set_boolean; ///
+private alias c_g_settings_set_doubleFn = extern(C) gboolean function(GSettings* settings, const(char)* key, double value) nothrow;
+__gshared c_g_settings_set_doubleFn c_g_settings_set_double; ///
+private alias c_g_settings_set_enumFn = extern(C) gboolean function(GSettings* settings, const(char)* key, int value) nothrow;
+__gshared c_g_settings_set_enumFn c_g_settings_set_enum; ///
+private alias c_g_settings_set_flagsFn = extern(C) gboolean function(GSettings* settings, const(char)* key, uint value) nothrow;
+__gshared c_g_settings_set_flagsFn c_g_settings_set_flags; ///
+private alias c_g_settings_set_intFn = extern(C) gboolean function(GSettings* settings, const(char)* key, int value) nothrow;
+__gshared c_g_settings_set_intFn c_g_settings_set_int; ///
+private alias c_g_settings_set_int64Fn = extern(C) gboolean function(GSettings* settings, const(char)* key, long value) nothrow;
+__gshared c_g_settings_set_int64Fn c_g_settings_set_int64; ///
+private alias c_g_settings_set_stringFn = extern(C) gboolean function(GSettings* settings, const(char)* key, const(char)* value) nothrow;
+__gshared c_g_settings_set_stringFn c_g_settings_set_string; ///
+private alias c_g_settings_set_strvFn = extern(C) gboolean function(GSettings* settings, const(char)* key, const(char*)* value) nothrow;
+__gshared c_g_settings_set_strvFn c_g_settings_set_strv; ///
+private alias c_g_settings_set_uintFn = extern(C) gboolean function(GSettings* settings, const(char)* key, uint value) nothrow;
+__gshared c_g_settings_set_uintFn c_g_settings_set_uint; ///
+private alias c_g_settings_set_uint64Fn = extern(C) gboolean function(GSettings* settings, const(char)* key, ulong value) nothrow;
+__gshared c_g_settings_set_uint64Fn c_g_settings_set_uint64; ///
+private alias c_g_settings_set_valueFn = extern(C) gboolean function(GSettings* settings, const(char)* key, GVariant* value) nothrow;
+__gshared c_g_settings_set_valueFn c_g_settings_set_value; ///
+
+// SettingsBackend
+private alias c_g_settings_backend_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_settings_backend_get_typeFn c_g_settings_backend_get_type; ///
+private alias c_g_settings_backend_flatten_treeFn = extern(C) void function(GTree* tree, char** path, const(char**)* keys, GVariant*** values) nothrow;
+__gshared c_g_settings_backend_flatten_treeFn c_g_settings_backend_flatten_tree; ///
+private alias c_g_settings_backend_get_defaultFn = extern(C) GSettingsBackend* function() nothrow;
+__gshared c_g_settings_backend_get_defaultFn c_g_settings_backend_get_default; ///
+private alias c_g_settings_backend_changedFn = extern(C) void function(GSettingsBackend* backend, const(char)* key, void* originTag) nothrow;
+__gshared c_g_settings_backend_changedFn c_g_settings_backend_changed; ///
+private alias c_g_settings_backend_changed_treeFn = extern(C) void function(GSettingsBackend* backend, GTree* tree, void* originTag) nothrow;
+__gshared c_g_settings_backend_changed_treeFn c_g_settings_backend_changed_tree; ///
+private alias c_g_settings_backend_keys_changedFn = extern(C) void function(GSettingsBackend* backend, const(char)* path, const(char*)* items, void* originTag) nothrow;
+__gshared c_g_settings_backend_keys_changedFn c_g_settings_backend_keys_changed; ///
+private alias c_g_settings_backend_path_changedFn = extern(C) void function(GSettingsBackend* backend, const(char)* path, void* originTag) nothrow;
+__gshared c_g_settings_backend_path_changedFn c_g_settings_backend_path_changed; ///
+private alias c_g_settings_backend_path_writable_changedFn = extern(C) void function(GSettingsBackend* backend, const(char)* path) nothrow;
+__gshared c_g_settings_backend_path_writable_changedFn c_g_settings_backend_path_writable_changed; ///
+private alias c_g_settings_backend_writable_changedFn = extern(C) void function(GSettingsBackend* backend, const(char)* key) nothrow;
+__gshared c_g_settings_backend_writable_changedFn c_g_settings_backend_writable_changed; ///
+
+// SettingsSchema
+private alias c_g_settings_schema_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_settings_schema_get_typeFn c_g_settings_schema_get_type; ///
+private alias c_g_settings_schema_get_idFn = extern(C) const(char)* function(GSettingsSchema* schema) nothrow;
+__gshared c_g_settings_schema_get_idFn c_g_settings_schema_get_id; ///
+private alias c_g_settings_schema_get_keyFn = extern(C) GSettingsSchemaKey* function(GSettingsSchema* schema, const(char)* name) nothrow;
+__gshared c_g_settings_schema_get_keyFn c_g_settings_schema_get_key; ///
+private alias c_g_settings_schema_get_pathFn = extern(C) const(char)* function(GSettingsSchema* schema) nothrow;
+__gshared c_g_settings_schema_get_pathFn c_g_settings_schema_get_path; ///
+private alias c_g_settings_schema_has_keyFn = extern(C) gboolean function(GSettingsSchema* schema, const(char)* name) nothrow;
+__gshared c_g_settings_schema_has_keyFn c_g_settings_schema_has_key; ///
+private alias c_g_settings_schema_list_childrenFn = extern(C) char** function(GSettingsSchema* schema) nothrow;
+__gshared c_g_settings_schema_list_childrenFn c_g_settings_schema_list_children; ///
+private alias c_g_settings_schema_list_keysFn = extern(C) char** function(GSettingsSchema* schema) nothrow;
+__gshared c_g_settings_schema_list_keysFn c_g_settings_schema_list_keys; ///
+private alias c_g_settings_schema_refFn = extern(C) GSettingsSchema* function(GSettingsSchema* schema) nothrow;
+__gshared c_g_settings_schema_refFn c_g_settings_schema_ref; ///
+private alias c_g_settings_schema_unrefFn = extern(C) void function(GSettingsSchema* schema) nothrow;
+__gshared c_g_settings_schema_unrefFn c_g_settings_schema_unref; ///
+
+// SettingsSchemaKey
+private alias c_g_settings_schema_key_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_settings_schema_key_get_typeFn c_g_settings_schema_key_get_type; ///
+private alias c_g_settings_schema_key_get_default_valueFn = extern(C) GVariant* function(GSettingsSchemaKey* key) nothrow;
+__gshared c_g_settings_schema_key_get_default_valueFn c_g_settings_schema_key_get_default_value; ///
+private alias c_g_settings_schema_key_get_descriptionFn = extern(C) const(char)* function(GSettingsSchemaKey* key) nothrow;
+__gshared c_g_settings_schema_key_get_descriptionFn c_g_settings_schema_key_get_description; ///
+private alias c_g_settings_schema_key_get_nameFn = extern(C) const(char)* function(GSettingsSchemaKey* key) nothrow;
+__gshared c_g_settings_schema_key_get_nameFn c_g_settings_schema_key_get_name; ///
+private alias c_g_settings_schema_key_get_rangeFn = extern(C) GVariant* function(GSettingsSchemaKey* key) nothrow;
+__gshared c_g_settings_schema_key_get_rangeFn c_g_settings_schema_key_get_range; ///
+private alias c_g_settings_schema_key_get_summaryFn = extern(C) const(char)* function(GSettingsSchemaKey* key) nothrow;
+__gshared c_g_settings_schema_key_get_summaryFn c_g_settings_schema_key_get_summary; ///
+private alias c_g_settings_schema_key_get_value_typeFn = extern(C) const(GVariantType)* function(GSettingsSchemaKey* key) nothrow;
+__gshared c_g_settings_schema_key_get_value_typeFn c_g_settings_schema_key_get_value_type; ///
+private alias c_g_settings_schema_key_range_checkFn = extern(C) gboolean function(GSettingsSchemaKey* key, GVariant* value) nothrow;
+__gshared c_g_settings_schema_key_range_checkFn c_g_settings_schema_key_range_check; ///
+private alias c_g_settings_schema_key_refFn = extern(C) GSettingsSchemaKey* function(GSettingsSchemaKey* key) nothrow;
+__gshared c_g_settings_schema_key_refFn c_g_settings_schema_key_ref; ///
+private alias c_g_settings_schema_key_unrefFn = extern(C) void function(GSettingsSchemaKey* key) nothrow;
+__gshared c_g_settings_schema_key_unrefFn c_g_settings_schema_key_unref; ///
+
+// SettingsSchemaSource
+private alias c_g_settings_schema_source_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_settings_schema_source_get_typeFn c_g_settings_schema_source_get_type; ///
+private alias c_g_settings_schema_source_new_from_directoryFn = extern(C) GSettingsSchemaSource* function(const(char)* directory, GSettingsSchemaSource* parent, gboolean trusted, GError** _err) nothrow;
+__gshared c_g_settings_schema_source_new_from_directoryFn c_g_settings_schema_source_new_from_directory; ///
+private alias c_g_settings_schema_source_list_schemasFn = extern(C) void function(GSettingsSchemaSource* source, gboolean recursive, char*** nonRelocatable, char*** relocatable) nothrow;
+__gshared c_g_settings_schema_source_list_schemasFn c_g_settings_schema_source_list_schemas; ///
+private alias c_g_settings_schema_source_lookupFn = extern(C) GSettingsSchema* function(GSettingsSchemaSource* source, const(char)* schemaId, gboolean recursive) nothrow;
+__gshared c_g_settings_schema_source_lookupFn c_g_settings_schema_source_lookup; ///
+private alias c_g_settings_schema_source_refFn = extern(C) GSettingsSchemaSource* function(GSettingsSchemaSource* source) nothrow;
+__gshared c_g_settings_schema_source_refFn c_g_settings_schema_source_ref; ///
+private alias c_g_settings_schema_source_unrefFn = extern(C) void function(GSettingsSchemaSource* source) nothrow;
+__gshared c_g_settings_schema_source_unrefFn c_g_settings_schema_source_unref; ///
+private alias c_g_settings_schema_source_get_defaultFn = extern(C) GSettingsSchemaSource* function() nothrow;
+__gshared c_g_settings_schema_source_get_defaultFn c_g_settings_schema_source_get_default; ///
+
+// SimpleAction
+private alias c_g_simple_action_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_simple_action_get_typeFn c_g_simple_action_get_type; ///
+private alias c_g_simple_action_newFn = extern(C) GSimpleAction* function(const(char)* name, const(GVariantType)* parameterType) nothrow;
+__gshared c_g_simple_action_newFn c_g_simple_action_new; ///
+private alias c_g_simple_action_new_statefulFn = extern(C) GSimpleAction* function(const(char)* name, const(GVariantType)* parameterType, GVariant* state) nothrow;
+__gshared c_g_simple_action_new_statefulFn c_g_simple_action_new_stateful; ///
+private alias c_g_simple_action_set_enabledFn = extern(C) void function(GSimpleAction* simple, gboolean enabled) nothrow;
+__gshared c_g_simple_action_set_enabledFn c_g_simple_action_set_enabled; ///
+private alias c_g_simple_action_set_stateFn = extern(C) void function(GSimpleAction* simple, GVariant* value) nothrow;
+__gshared c_g_simple_action_set_stateFn c_g_simple_action_set_state; ///
+private alias c_g_simple_action_set_state_hintFn = extern(C) void function(GSimpleAction* simple, GVariant* stateHint) nothrow;
+__gshared c_g_simple_action_set_state_hintFn c_g_simple_action_set_state_hint; ///
+
+// SimpleActionGroup
+private alias c_g_simple_action_group_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_simple_action_group_get_typeFn c_g_simple_action_group_get_type; ///
+private alias c_g_simple_action_group_newFn = extern(C) GSimpleActionGroup* function() nothrow;
+__gshared c_g_simple_action_group_newFn c_g_simple_action_group_new; ///
+private alias c_g_simple_action_group_add_entriesFn = extern(C) void function(GSimpleActionGroup* simple, const(GActionEntry)* entries, int nEntries, void* userData) nothrow;
+__gshared c_g_simple_action_group_add_entriesFn c_g_simple_action_group_add_entries; ///
+private alias c_g_simple_action_group_insertFn = extern(C) void function(GSimpleActionGroup* simple, GAction* action) nothrow;
+__gshared c_g_simple_action_group_insertFn c_g_simple_action_group_insert; ///
+private alias c_g_simple_action_group_lookupFn = extern(C) GAction* function(GSimpleActionGroup* simple, const(char)* actionName) nothrow;
+__gshared c_g_simple_action_group_lookupFn c_g_simple_action_group_lookup; ///
+private alias c_g_simple_action_group_removeFn = extern(C) void function(GSimpleActionGroup* simple, const(char)* actionName) nothrow;
+__gshared c_g_simple_action_group_removeFn c_g_simple_action_group_remove; ///
+
+// SimpleAsyncResult
+private alias c_g_simple_async_result_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_simple_async_result_get_typeFn c_g_simple_async_result_get_type; ///
+private alias c_g_simple_async_result_newFn = extern(C) GSimpleAsyncResult* function(GObject* sourceObject, GAsyncReadyCallback callback, void* userData, void* sourceTag) nothrow;
+__gshared c_g_simple_async_result_newFn c_g_simple_async_result_new; ///
+private alias c_g_simple_async_result_new_errorFn = extern(C) GSimpleAsyncResult* function(GObject* sourceObject, GAsyncReadyCallback callback, void* userData, GQuark domain, int code, const(char)* format,  ...) nothrow;
+__gshared c_g_simple_async_result_new_errorFn c_g_simple_async_result_new_error; ///
+private alias c_g_simple_async_result_new_from_errorFn = extern(C) GSimpleAsyncResult* function(GObject* sourceObject, GAsyncReadyCallback callback, void* userData, const(GError)* error) nothrow;
+__gshared c_g_simple_async_result_new_from_errorFn c_g_simple_async_result_new_from_error; ///
+private alias c_g_simple_async_result_new_take_errorFn = extern(C) GSimpleAsyncResult* function(GObject* sourceObject, GAsyncReadyCallback callback, void* userData, GError* error) nothrow;
+__gshared c_g_simple_async_result_new_take_errorFn c_g_simple_async_result_new_take_error; ///
+private alias c_g_simple_async_result_is_validFn = extern(C) gboolean function(GAsyncResult* result, GObject* source, void* sourceTag) nothrow;
+__gshared c_g_simple_async_result_is_validFn c_g_simple_async_result_is_valid; ///
+private alias c_g_simple_async_result_completeFn = extern(C) void function(GSimpleAsyncResult* simple) nothrow;
+__gshared c_g_simple_async_result_completeFn c_g_simple_async_result_complete; ///
+private alias c_g_simple_async_result_complete_in_idleFn = extern(C) void function(GSimpleAsyncResult* simple) nothrow;
+__gshared c_g_simple_async_result_complete_in_idleFn c_g_simple_async_result_complete_in_idle; ///
+private alias c_g_simple_async_result_get_op_res_gbooleanFn = extern(C) gboolean function(GSimpleAsyncResult* simple) nothrow;
+__gshared c_g_simple_async_result_get_op_res_gbooleanFn c_g_simple_async_result_get_op_res_gboolean; ///
+private alias c_g_simple_async_result_get_op_res_gpointerFn = extern(C) void* function(GSimpleAsyncResult* simple) nothrow;
+__gshared c_g_simple_async_result_get_op_res_gpointerFn c_g_simple_async_result_get_op_res_gpointer; ///
+private alias c_g_simple_async_result_get_op_res_gssizeFn = extern(C) ptrdiff_t function(GSimpleAsyncResult* simple) nothrow;
+__gshared c_g_simple_async_result_get_op_res_gssizeFn c_g_simple_async_result_get_op_res_gssize; ///
+private alias c_g_simple_async_result_get_source_tagFn = extern(C) void* function(GSimpleAsyncResult* simple) nothrow;
+__gshared c_g_simple_async_result_get_source_tagFn c_g_simple_async_result_get_source_tag; ///
+private alias c_g_simple_async_result_propagate_errorFn = extern(C) gboolean function(GSimpleAsyncResult* simple, GError** _err) nothrow;
+__gshared c_g_simple_async_result_propagate_errorFn c_g_simple_async_result_propagate_error; ///
+private alias c_g_simple_async_result_run_in_threadFn = extern(C) void function(GSimpleAsyncResult* simple, GSimpleAsyncThreadFunc func, int ioPriority, GCancellable* cancellable) nothrow;
+__gshared c_g_simple_async_result_run_in_threadFn c_g_simple_async_result_run_in_thread; ///
+private alias c_g_simple_async_result_set_check_cancellableFn = extern(C) void function(GSimpleAsyncResult* simple, GCancellable* checkCancellable) nothrow;
+__gshared c_g_simple_async_result_set_check_cancellableFn c_g_simple_async_result_set_check_cancellable; ///
+private alias c_g_simple_async_result_set_errorFn = extern(C) void function(GSimpleAsyncResult* simple, GQuark domain, int code, const(char)* format,  ...) nothrow;
+__gshared c_g_simple_async_result_set_errorFn c_g_simple_async_result_set_error; ///
+private alias c_g_simple_async_result_set_error_vaFn = extern(C) void function(GSimpleAsyncResult* simple, GQuark domain, int code, const(char)* format, void* args) nothrow;
+__gshared c_g_simple_async_result_set_error_vaFn c_g_simple_async_result_set_error_va; ///
+private alias c_g_simple_async_result_set_from_errorFn = extern(C) void function(GSimpleAsyncResult* simple, const(GError)* error) nothrow;
+__gshared c_g_simple_async_result_set_from_errorFn c_g_simple_async_result_set_from_error; ///
+private alias c_g_simple_async_result_set_handle_cancellationFn = extern(C) void function(GSimpleAsyncResult* simple, gboolean handleCancellation) nothrow;
+__gshared c_g_simple_async_result_set_handle_cancellationFn c_g_simple_async_result_set_handle_cancellation; ///
+private alias c_g_simple_async_result_set_op_res_gbooleanFn = extern(C) void function(GSimpleAsyncResult* simple, gboolean opRes) nothrow;
+__gshared c_g_simple_async_result_set_op_res_gbooleanFn c_g_simple_async_result_set_op_res_gboolean; ///
+private alias c_g_simple_async_result_set_op_res_gpointerFn = extern(C) void function(GSimpleAsyncResult* simple, void* opRes, GDestroyNotify destroyOpRes) nothrow;
+__gshared c_g_simple_async_result_set_op_res_gpointerFn c_g_simple_async_result_set_op_res_gpointer; ///
+private alias c_g_simple_async_result_set_op_res_gssizeFn = extern(C) void function(GSimpleAsyncResult* simple, ptrdiff_t opRes) nothrow;
+__gshared c_g_simple_async_result_set_op_res_gssizeFn c_g_simple_async_result_set_op_res_gssize; ///
+private alias c_g_simple_async_result_take_errorFn = extern(C) void function(GSimpleAsyncResult* simple, GError* error) nothrow;
+__gshared c_g_simple_async_result_take_errorFn c_g_simple_async_result_take_error; ///
+
+// SimpleIOStream
+private alias c_g_simple_io_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_simple_io_stream_get_typeFn c_g_simple_io_stream_get_type; ///
+private alias c_g_simple_io_stream_newFn = extern(C) GIOStream* function(GInputStream* inputStream, GOutputStream* outputStream) nothrow;
+__gshared c_g_simple_io_stream_newFn c_g_simple_io_stream_new; ///
+
+// SimplePermission
+private alias c_g_simple_permission_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_simple_permission_get_typeFn c_g_simple_permission_get_type; ///
+private alias c_g_simple_permission_newFn = extern(C) GPermission* function(gboolean allowed) nothrow;
+__gshared c_g_simple_permission_newFn c_g_simple_permission_new; ///
+
+// SimpleProxyResolver
+private alias c_g_simple_proxy_resolver_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_simple_proxy_resolver_get_typeFn c_g_simple_proxy_resolver_get_type; ///
+private alias c_g_simple_proxy_resolver_newFn = extern(C) GProxyResolver* function(const(char)* defaultProxy, char** ignoreHosts) nothrow;
+__gshared c_g_simple_proxy_resolver_newFn c_g_simple_proxy_resolver_new; ///
+private alias c_g_simple_proxy_resolver_set_default_proxyFn = extern(C) void function(GSimpleProxyResolver* resolver, const(char)* defaultProxy) nothrow;
+__gshared c_g_simple_proxy_resolver_set_default_proxyFn c_g_simple_proxy_resolver_set_default_proxy; ///
+private alias c_g_simple_proxy_resolver_set_ignore_hostsFn = extern(C) void function(GSimpleProxyResolver* resolver, char** ignoreHosts) nothrow;
+__gshared c_g_simple_proxy_resolver_set_ignore_hostsFn c_g_simple_proxy_resolver_set_ignore_hosts; ///
+private alias c_g_simple_proxy_resolver_set_uri_proxyFn = extern(C) void function(GSimpleProxyResolver* resolver, const(char)* uriScheme, const(char)* proxy) nothrow;
+__gshared c_g_simple_proxy_resolver_set_uri_proxyFn c_g_simple_proxy_resolver_set_uri_proxy; ///
+
+// Socket
+private alias c_g_socket_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_socket_get_typeFn c_g_socket_get_type; ///
+private alias c_g_socket_newFn = extern(C) GSocket* function(GSocketFamily family, GSocketType type, GSocketProtocol protocol, GError** _err) nothrow;
+__gshared c_g_socket_newFn c_g_socket_new; ///
+private alias c_g_socket_new_from_fdFn = extern(C) GSocket* function(int fd, GError** _err) nothrow;
+__gshared c_g_socket_new_from_fdFn c_g_socket_new_from_fd; ///
+private alias c_g_socket_acceptFn = extern(C) GSocket* function(GSocket* socket, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_acceptFn c_g_socket_accept; ///
+private alias c_g_socket_bindFn = extern(C) gboolean function(GSocket* socket, GSocketAddress* address, gboolean allowReuse, GError** _err) nothrow;
+__gshared c_g_socket_bindFn c_g_socket_bind; ///
+private alias c_g_socket_check_connect_resultFn = extern(C) gboolean function(GSocket* socket, GError** _err) nothrow;
+__gshared c_g_socket_check_connect_resultFn c_g_socket_check_connect_result; ///
+private alias c_g_socket_closeFn = extern(C) gboolean function(GSocket* socket, GError** _err) nothrow;
+__gshared c_g_socket_closeFn c_g_socket_close; ///
+private alias c_g_socket_condition_checkFn = extern(C) GIOCondition function(GSocket* socket, GIOCondition condition) nothrow;
+__gshared c_g_socket_condition_checkFn c_g_socket_condition_check; ///
+private alias c_g_socket_condition_timed_waitFn = extern(C) gboolean function(GSocket* socket, GIOCondition condition, long timeoutUs, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_condition_timed_waitFn c_g_socket_condition_timed_wait; ///
+private alias c_g_socket_condition_waitFn = extern(C) gboolean function(GSocket* socket, GIOCondition condition, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_condition_waitFn c_g_socket_condition_wait; ///
+private alias c_g_socket_connectFn = extern(C) gboolean function(GSocket* socket, GSocketAddress* address, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_connectFn c_g_socket_connect; ///
+private alias c_g_socket_connection_factory_create_connectionFn = extern(C) GSocketConnection* function(GSocket* socket) nothrow;
+__gshared c_g_socket_connection_factory_create_connectionFn c_g_socket_connection_factory_create_connection; ///
+private alias c_g_socket_create_sourceFn = extern(C) GSource* function(GSocket* socket, GIOCondition condition, GCancellable* cancellable) nothrow;
+__gshared c_g_socket_create_sourceFn c_g_socket_create_source; ///
+private alias c_g_socket_get_available_bytesFn = extern(C) ptrdiff_t function(GSocket* socket) nothrow;
+__gshared c_g_socket_get_available_bytesFn c_g_socket_get_available_bytes; ///
+private alias c_g_socket_get_blockingFn = extern(C) gboolean function(GSocket* socket) nothrow;
+__gshared c_g_socket_get_blockingFn c_g_socket_get_blocking; ///
+private alias c_g_socket_get_broadcastFn = extern(C) gboolean function(GSocket* socket) nothrow;
+__gshared c_g_socket_get_broadcastFn c_g_socket_get_broadcast; ///
+private alias c_g_socket_get_credentialsFn = extern(C) GCredentials* function(GSocket* socket, GError** _err) nothrow;
+__gshared c_g_socket_get_credentialsFn c_g_socket_get_credentials; ///
+private alias c_g_socket_get_familyFn = extern(C) GSocketFamily function(GSocket* socket) nothrow;
+__gshared c_g_socket_get_familyFn c_g_socket_get_family; ///
+private alias c_g_socket_get_fdFn = extern(C) int function(GSocket* socket) nothrow;
+__gshared c_g_socket_get_fdFn c_g_socket_get_fd; ///
+private alias c_g_socket_get_keepaliveFn = extern(C) gboolean function(GSocket* socket) nothrow;
+__gshared c_g_socket_get_keepaliveFn c_g_socket_get_keepalive; ///
+private alias c_g_socket_get_listen_backlogFn = extern(C) int function(GSocket* socket) nothrow;
+__gshared c_g_socket_get_listen_backlogFn c_g_socket_get_listen_backlog; ///
+private alias c_g_socket_get_local_addressFn = extern(C) GSocketAddress* function(GSocket* socket, GError** _err) nothrow;
+__gshared c_g_socket_get_local_addressFn c_g_socket_get_local_address; ///
+private alias c_g_socket_get_multicast_loopbackFn = extern(C) gboolean function(GSocket* socket) nothrow;
+__gshared c_g_socket_get_multicast_loopbackFn c_g_socket_get_multicast_loopback; ///
+private alias c_g_socket_get_multicast_ttlFn = extern(C) uint function(GSocket* socket) nothrow;
+__gshared c_g_socket_get_multicast_ttlFn c_g_socket_get_multicast_ttl; ///
+private alias c_g_socket_get_optionFn = extern(C) gboolean function(GSocket* socket, int level, int optname, int* value, GError** _err) nothrow;
+__gshared c_g_socket_get_optionFn c_g_socket_get_option; ///
+private alias c_g_socket_get_protocolFn = extern(C) GSocketProtocol function(GSocket* socket) nothrow;
+__gshared c_g_socket_get_protocolFn c_g_socket_get_protocol; ///
+private alias c_g_socket_get_remote_addressFn = extern(C) GSocketAddress* function(GSocket* socket, GError** _err) nothrow;
+__gshared c_g_socket_get_remote_addressFn c_g_socket_get_remote_address; ///
+private alias c_g_socket_get_socket_typeFn = extern(C) GSocketType function(GSocket* socket) nothrow;
+__gshared c_g_socket_get_socket_typeFn c_g_socket_get_socket_type; ///
+private alias c_g_socket_get_timeoutFn = extern(C) uint function(GSocket* socket) nothrow;
+__gshared c_g_socket_get_timeoutFn c_g_socket_get_timeout; ///
+private alias c_g_socket_get_ttlFn = extern(C) uint function(GSocket* socket) nothrow;
+__gshared c_g_socket_get_ttlFn c_g_socket_get_ttl; ///
+private alias c_g_socket_is_closedFn = extern(C) gboolean function(GSocket* socket) nothrow;
+__gshared c_g_socket_is_closedFn c_g_socket_is_closed; ///
+private alias c_g_socket_is_connectedFn = extern(C) gboolean function(GSocket* socket) nothrow;
+__gshared c_g_socket_is_connectedFn c_g_socket_is_connected; ///
+private alias c_g_socket_join_multicast_groupFn = extern(C) gboolean function(GSocket* socket, GInetAddress* group, gboolean sourceSpecific, const(char)* iface, GError** _err) nothrow;
+__gshared c_g_socket_join_multicast_groupFn c_g_socket_join_multicast_group; ///
+private alias c_g_socket_join_multicast_group_ssmFn = extern(C) gboolean function(GSocket* socket, GInetAddress* group, GInetAddress* sourceSpecific, const(char)* iface, GError** _err) nothrow;
+__gshared c_g_socket_join_multicast_group_ssmFn c_g_socket_join_multicast_group_ssm; ///
+private alias c_g_socket_leave_multicast_groupFn = extern(C) gboolean function(GSocket* socket, GInetAddress* group, gboolean sourceSpecific, const(char)* iface, GError** _err) nothrow;
+__gshared c_g_socket_leave_multicast_groupFn c_g_socket_leave_multicast_group; ///
+private alias c_g_socket_leave_multicast_group_ssmFn = extern(C) gboolean function(GSocket* socket, GInetAddress* group, GInetAddress* sourceSpecific, const(char)* iface, GError** _err) nothrow;
+__gshared c_g_socket_leave_multicast_group_ssmFn c_g_socket_leave_multicast_group_ssm; ///
+private alias c_g_socket_listenFn = extern(C) gboolean function(GSocket* socket, GError** _err) nothrow;
+__gshared c_g_socket_listenFn c_g_socket_listen; ///
+private alias c_g_socket_receiveFn = extern(C) ptrdiff_t function(GSocket* socket, ubyte* buffer, size_t size, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_receiveFn c_g_socket_receive; ///
+private alias c_g_socket_receive_bytesFn = extern(C) GBytes* function(GSocket* socket, size_t size, long timeoutUs, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_receive_bytesFn c_g_socket_receive_bytes; ///
+private alias c_g_socket_receive_bytes_fromFn = extern(C) GBytes* function(GSocket* socket, GSocketAddress** address, size_t size, long timeoutUs, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_receive_bytes_fromFn c_g_socket_receive_bytes_from; ///
+private alias c_g_socket_receive_fromFn = extern(C) ptrdiff_t function(GSocket* socket, GSocketAddress** address, ubyte* buffer, size_t size, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_receive_fromFn c_g_socket_receive_from; ///
+private alias c_g_socket_receive_messageFn = extern(C) ptrdiff_t function(GSocket* socket, GSocketAddress** address, GInputVector* vectors, int numVectors, GSocketControlMessage*** messages, int* numMessages, int* flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_receive_messageFn c_g_socket_receive_message; ///
+private alias c_g_socket_receive_messagesFn = extern(C) int function(GSocket* socket, GInputMessage* messages, uint numMessages, int flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_receive_messagesFn c_g_socket_receive_messages; ///
+private alias c_g_socket_receive_with_blockingFn = extern(C) ptrdiff_t function(GSocket* socket, ubyte* buffer, size_t size, gboolean blocking, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_receive_with_blockingFn c_g_socket_receive_with_blocking; ///
+private alias c_g_socket_sendFn = extern(C) ptrdiff_t function(GSocket* socket, const(ubyte)* buffer, size_t size, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_sendFn c_g_socket_send; ///
+private alias c_g_socket_send_messageFn = extern(C) ptrdiff_t function(GSocket* socket, GSocketAddress* address, GOutputVector* vectors, int numVectors, GSocketControlMessage** messages, int numMessages, int flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_send_messageFn c_g_socket_send_message; ///
+private alias c_g_socket_send_message_with_timeoutFn = extern(C) GPollableReturn function(GSocket* socket, GSocketAddress* address, const(GOutputVector)* vectors, int numVectors, GSocketControlMessage** messages, int numMessages, int flags, long timeoutUs, size_t* bytesWritten, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_send_message_with_timeoutFn c_g_socket_send_message_with_timeout; ///
+private alias c_g_socket_send_messagesFn = extern(C) int function(GSocket* socket, GOutputMessage* messages, uint numMessages, int flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_send_messagesFn c_g_socket_send_messages; ///
+private alias c_g_socket_send_toFn = extern(C) ptrdiff_t function(GSocket* socket, GSocketAddress* address, const(ubyte)* buffer, size_t size, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_send_toFn c_g_socket_send_to; ///
+private alias c_g_socket_send_with_blockingFn = extern(C) ptrdiff_t function(GSocket* socket, const(ubyte)* buffer, size_t size, gboolean blocking, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_send_with_blockingFn c_g_socket_send_with_blocking; ///
+private alias c_g_socket_set_blockingFn = extern(C) void function(GSocket* socket, gboolean blocking) nothrow;
+__gshared c_g_socket_set_blockingFn c_g_socket_set_blocking; ///
+private alias c_g_socket_set_broadcastFn = extern(C) void function(GSocket* socket, gboolean broadcast) nothrow;
+__gshared c_g_socket_set_broadcastFn c_g_socket_set_broadcast; ///
+private alias c_g_socket_set_keepaliveFn = extern(C) void function(GSocket* socket, gboolean keepalive) nothrow;
+__gshared c_g_socket_set_keepaliveFn c_g_socket_set_keepalive; ///
+private alias c_g_socket_set_listen_backlogFn = extern(C) void function(GSocket* socket, int backlog) nothrow;
+__gshared c_g_socket_set_listen_backlogFn c_g_socket_set_listen_backlog; ///
+private alias c_g_socket_set_multicast_loopbackFn = extern(C) void function(GSocket* socket, gboolean loopback) nothrow;
+__gshared c_g_socket_set_multicast_loopbackFn c_g_socket_set_multicast_loopback; ///
+private alias c_g_socket_set_multicast_ttlFn = extern(C) void function(GSocket* socket, uint ttl) nothrow;
+__gshared c_g_socket_set_multicast_ttlFn c_g_socket_set_multicast_ttl; ///
+private alias c_g_socket_set_optionFn = extern(C) gboolean function(GSocket* socket, int level, int optname, int value, GError** _err) nothrow;
+__gshared c_g_socket_set_optionFn c_g_socket_set_option; ///
+private alias c_g_socket_set_timeoutFn = extern(C) void function(GSocket* socket, uint timeout) nothrow;
+__gshared c_g_socket_set_timeoutFn c_g_socket_set_timeout; ///
+private alias c_g_socket_set_ttlFn = extern(C) void function(GSocket* socket, uint ttl) nothrow;
+__gshared c_g_socket_set_ttlFn c_g_socket_set_ttl; ///
+private alias c_g_socket_shutdownFn = extern(C) gboolean function(GSocket* socket, gboolean shutdownRead, gboolean shutdownWrite, GError** _err) nothrow;
+__gshared c_g_socket_shutdownFn c_g_socket_shutdown; ///
+private alias c_g_socket_speaks_ipv4Fn = extern(C) gboolean function(GSocket* socket) nothrow;
+__gshared c_g_socket_speaks_ipv4Fn c_g_socket_speaks_ipv4; ///
+
+// SocketAddress
+private alias c_g_socket_address_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_socket_address_get_typeFn c_g_socket_address_get_type; ///
+private alias c_g_socket_address_new_from_nativeFn = extern(C) GSocketAddress* function(void* native, size_t len) nothrow;
+__gshared c_g_socket_address_new_from_nativeFn c_g_socket_address_new_from_native; ///
+private alias c_g_socket_address_get_familyFn = extern(C) GSocketFamily function(GSocketAddress* address) nothrow;
+__gshared c_g_socket_address_get_familyFn c_g_socket_address_get_family; ///
+private alias c_g_socket_address_get_native_sizeFn = extern(C) ptrdiff_t function(GSocketAddress* address) nothrow;
+__gshared c_g_socket_address_get_native_sizeFn c_g_socket_address_get_native_size; ///
+private alias c_g_socket_address_to_nativeFn = extern(C) gboolean function(GSocketAddress* address, void* dest, size_t destlen, GError** _err) nothrow;
+__gshared c_g_socket_address_to_nativeFn c_g_socket_address_to_native; ///
+
+// SocketAddressEnumerator
+private alias c_g_socket_address_enumerator_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_socket_address_enumerator_get_typeFn c_g_socket_address_enumerator_get_type; ///
+private alias c_g_socket_address_enumerator_nextFn = extern(C) GSocketAddress* function(GSocketAddressEnumerator* enumerator, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_address_enumerator_nextFn c_g_socket_address_enumerator_next; ///
+private alias c_g_socket_address_enumerator_next_asyncFn = extern(C) void function(GSocketAddressEnumerator* enumerator, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_socket_address_enumerator_next_asyncFn c_g_socket_address_enumerator_next_async; ///
+private alias c_g_socket_address_enumerator_next_finishFn = extern(C) GSocketAddress* function(GSocketAddressEnumerator* enumerator, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_socket_address_enumerator_next_finishFn c_g_socket_address_enumerator_next_finish; ///
+
+// SocketClient
+private alias c_g_socket_client_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_socket_client_get_typeFn c_g_socket_client_get_type; ///
+private alias c_g_socket_client_newFn = extern(C) GSocketClient* function() nothrow;
+__gshared c_g_socket_client_newFn c_g_socket_client_new; ///
+private alias c_g_socket_client_add_application_proxyFn = extern(C) void function(GSocketClient* client, const(char)* protocol) nothrow;
+__gshared c_g_socket_client_add_application_proxyFn c_g_socket_client_add_application_proxy; ///
+private alias c_g_socket_client_connectFn = extern(C) GSocketConnection* function(GSocketClient* client, GSocketConnectable* connectable, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_client_connectFn c_g_socket_client_connect; ///
+private alias c_g_socket_client_connect_asyncFn = extern(C) void function(GSocketClient* client, GSocketConnectable* connectable, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_socket_client_connect_asyncFn c_g_socket_client_connect_async; ///
+private alias c_g_socket_client_connect_finishFn = extern(C) GSocketConnection* function(GSocketClient* client, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_socket_client_connect_finishFn c_g_socket_client_connect_finish; ///
+private alias c_g_socket_client_connect_to_hostFn = extern(C) GSocketConnection* function(GSocketClient* client, const(char)* hostAndPort, ushort defaultPort, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_client_connect_to_hostFn c_g_socket_client_connect_to_host; ///
+private alias c_g_socket_client_connect_to_host_asyncFn = extern(C) void function(GSocketClient* client, const(char)* hostAndPort, ushort defaultPort, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_socket_client_connect_to_host_asyncFn c_g_socket_client_connect_to_host_async; ///
+private alias c_g_socket_client_connect_to_host_finishFn = extern(C) GSocketConnection* function(GSocketClient* client, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_socket_client_connect_to_host_finishFn c_g_socket_client_connect_to_host_finish; ///
+private alias c_g_socket_client_connect_to_serviceFn = extern(C) GSocketConnection* function(GSocketClient* client, const(char)* domain, const(char)* service, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_client_connect_to_serviceFn c_g_socket_client_connect_to_service; ///
+private alias c_g_socket_client_connect_to_service_asyncFn = extern(C) void function(GSocketClient* client, const(char)* domain, const(char)* service, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_socket_client_connect_to_service_asyncFn c_g_socket_client_connect_to_service_async; ///
+private alias c_g_socket_client_connect_to_service_finishFn = extern(C) GSocketConnection* function(GSocketClient* client, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_socket_client_connect_to_service_finishFn c_g_socket_client_connect_to_service_finish; ///
+private alias c_g_socket_client_connect_to_uriFn = extern(C) GSocketConnection* function(GSocketClient* client, const(char)* uri, ushort defaultPort, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_client_connect_to_uriFn c_g_socket_client_connect_to_uri; ///
+private alias c_g_socket_client_connect_to_uri_asyncFn = extern(C) void function(GSocketClient* client, const(char)* uri, ushort defaultPort, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_socket_client_connect_to_uri_asyncFn c_g_socket_client_connect_to_uri_async; ///
+private alias c_g_socket_client_connect_to_uri_finishFn = extern(C) GSocketConnection* function(GSocketClient* client, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_socket_client_connect_to_uri_finishFn c_g_socket_client_connect_to_uri_finish; ///
+private alias c_g_socket_client_get_enable_proxyFn = extern(C) gboolean function(GSocketClient* client) nothrow;
+__gshared c_g_socket_client_get_enable_proxyFn c_g_socket_client_get_enable_proxy; ///
+private alias c_g_socket_client_get_familyFn = extern(C) GSocketFamily function(GSocketClient* client) nothrow;
+__gshared c_g_socket_client_get_familyFn c_g_socket_client_get_family; ///
+private alias c_g_socket_client_get_local_addressFn = extern(C) GSocketAddress* function(GSocketClient* client) nothrow;
+__gshared c_g_socket_client_get_local_addressFn c_g_socket_client_get_local_address; ///
+private alias c_g_socket_client_get_protocolFn = extern(C) GSocketProtocol function(GSocketClient* client) nothrow;
+__gshared c_g_socket_client_get_protocolFn c_g_socket_client_get_protocol; ///
+private alias c_g_socket_client_get_proxy_resolverFn = extern(C) GProxyResolver* function(GSocketClient* client) nothrow;
+__gshared c_g_socket_client_get_proxy_resolverFn c_g_socket_client_get_proxy_resolver; ///
+private alias c_g_socket_client_get_socket_typeFn = extern(C) GSocketType function(GSocketClient* client) nothrow;
+__gshared c_g_socket_client_get_socket_typeFn c_g_socket_client_get_socket_type; ///
+private alias c_g_socket_client_get_timeoutFn = extern(C) uint function(GSocketClient* client) nothrow;
+__gshared c_g_socket_client_get_timeoutFn c_g_socket_client_get_timeout; ///
+private alias c_g_socket_client_get_tlsFn = extern(C) gboolean function(GSocketClient* client) nothrow;
+__gshared c_g_socket_client_get_tlsFn c_g_socket_client_get_tls; ///
+private alias c_g_socket_client_get_tls_validation_flagsFn = extern(C) GTlsCertificateFlags function(GSocketClient* client) nothrow;
+__gshared c_g_socket_client_get_tls_validation_flagsFn c_g_socket_client_get_tls_validation_flags; ///
+private alias c_g_socket_client_set_enable_proxyFn = extern(C) void function(GSocketClient* client, gboolean enable) nothrow;
+__gshared c_g_socket_client_set_enable_proxyFn c_g_socket_client_set_enable_proxy; ///
+private alias c_g_socket_client_set_familyFn = extern(C) void function(GSocketClient* client, GSocketFamily family) nothrow;
+__gshared c_g_socket_client_set_familyFn c_g_socket_client_set_family; ///
+private alias c_g_socket_client_set_local_addressFn = extern(C) void function(GSocketClient* client, GSocketAddress* address) nothrow;
+__gshared c_g_socket_client_set_local_addressFn c_g_socket_client_set_local_address; ///
+private alias c_g_socket_client_set_protocolFn = extern(C) void function(GSocketClient* client, GSocketProtocol protocol) nothrow;
+__gshared c_g_socket_client_set_protocolFn c_g_socket_client_set_protocol; ///
+private alias c_g_socket_client_set_proxy_resolverFn = extern(C) void function(GSocketClient* client, GProxyResolver* proxyResolver) nothrow;
+__gshared c_g_socket_client_set_proxy_resolverFn c_g_socket_client_set_proxy_resolver; ///
+private alias c_g_socket_client_set_socket_typeFn = extern(C) void function(GSocketClient* client, GSocketType type) nothrow;
+__gshared c_g_socket_client_set_socket_typeFn c_g_socket_client_set_socket_type; ///
+private alias c_g_socket_client_set_timeoutFn = extern(C) void function(GSocketClient* client, uint timeout) nothrow;
+__gshared c_g_socket_client_set_timeoutFn c_g_socket_client_set_timeout; ///
+private alias c_g_socket_client_set_tlsFn = extern(C) void function(GSocketClient* client, gboolean tls) nothrow;
+__gshared c_g_socket_client_set_tlsFn c_g_socket_client_set_tls; ///
+private alias c_g_socket_client_set_tls_validation_flagsFn = extern(C) void function(GSocketClient* client, GTlsCertificateFlags flags) nothrow;
+__gshared c_g_socket_client_set_tls_validation_flagsFn c_g_socket_client_set_tls_validation_flags; ///
+
+// SocketConnectable
+private alias c_g_socket_connectable_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_socket_connectable_get_typeFn c_g_socket_connectable_get_type; ///
+private alias c_g_socket_connectable_enumerateFn = extern(C) GSocketAddressEnumerator* function(GSocketConnectable* connectable) nothrow;
+__gshared c_g_socket_connectable_enumerateFn c_g_socket_connectable_enumerate; ///
+private alias c_g_socket_connectable_proxy_enumerateFn = extern(C) GSocketAddressEnumerator* function(GSocketConnectable* connectable) nothrow;
+__gshared c_g_socket_connectable_proxy_enumerateFn c_g_socket_connectable_proxy_enumerate; ///
+private alias c_g_socket_connectable_to_stringFn = extern(C) char* function(GSocketConnectable* connectable) nothrow;
+__gshared c_g_socket_connectable_to_stringFn c_g_socket_connectable_to_string; ///
+
+// SocketConnection
+private alias c_g_socket_connection_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_socket_connection_get_typeFn c_g_socket_connection_get_type; ///
+private alias c_g_socket_connection_factory_lookup_typeFn = extern(C) GType function(GSocketFamily family, GSocketType type, int protocolId) nothrow;
+__gshared c_g_socket_connection_factory_lookup_typeFn c_g_socket_connection_factory_lookup_type; ///
+private alias c_g_socket_connection_factory_register_typeFn = extern(C) void function(GType gType, GSocketFamily family, GSocketType type, int protocol) nothrow;
+__gshared c_g_socket_connection_factory_register_typeFn c_g_socket_connection_factory_register_type; ///
+private alias c_g_socket_connection_connectFn = extern(C) gboolean function(GSocketConnection* connection, GSocketAddress* address, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_connection_connectFn c_g_socket_connection_connect; ///
+private alias c_g_socket_connection_connect_asyncFn = extern(C) void function(GSocketConnection* connection, GSocketAddress* address, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_socket_connection_connect_asyncFn c_g_socket_connection_connect_async; ///
+private alias c_g_socket_connection_connect_finishFn = extern(C) gboolean function(GSocketConnection* connection, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_socket_connection_connect_finishFn c_g_socket_connection_connect_finish; ///
+private alias c_g_socket_connection_get_local_addressFn = extern(C) GSocketAddress* function(GSocketConnection* connection, GError** _err) nothrow;
+__gshared c_g_socket_connection_get_local_addressFn c_g_socket_connection_get_local_address; ///
+private alias c_g_socket_connection_get_remote_addressFn = extern(C) GSocketAddress* function(GSocketConnection* connection, GError** _err) nothrow;
+__gshared c_g_socket_connection_get_remote_addressFn c_g_socket_connection_get_remote_address; ///
+private alias c_g_socket_connection_get_socketFn = extern(C) GSocket* function(GSocketConnection* connection) nothrow;
+__gshared c_g_socket_connection_get_socketFn c_g_socket_connection_get_socket; ///
+private alias c_g_socket_connection_is_connectedFn = extern(C) gboolean function(GSocketConnection* connection) nothrow;
+__gshared c_g_socket_connection_is_connectedFn c_g_socket_connection_is_connected; ///
+
+// SocketControlMessage
+private alias c_g_socket_control_message_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_socket_control_message_get_typeFn c_g_socket_control_message_get_type; ///
+private alias c_g_socket_control_message_deserializeFn = extern(C) GSocketControlMessage* function(int level, int type, size_t size, void* data) nothrow;
+__gshared c_g_socket_control_message_deserializeFn c_g_socket_control_message_deserialize; ///
+private alias c_g_socket_control_message_get_levelFn = extern(C) int function(GSocketControlMessage* message) nothrow;
+__gshared c_g_socket_control_message_get_levelFn c_g_socket_control_message_get_level; ///
+private alias c_g_socket_control_message_get_msg_typeFn = extern(C) int function(GSocketControlMessage* message) nothrow;
+__gshared c_g_socket_control_message_get_msg_typeFn c_g_socket_control_message_get_msg_type; ///
+private alias c_g_socket_control_message_get_sizeFn = extern(C) size_t function(GSocketControlMessage* message) nothrow;
+__gshared c_g_socket_control_message_get_sizeFn c_g_socket_control_message_get_size; ///
+private alias c_g_socket_control_message_serializeFn = extern(C) void function(GSocketControlMessage* message, void* data) nothrow;
+__gshared c_g_socket_control_message_serializeFn c_g_socket_control_message_serialize; ///
+
+// SocketListener
+private alias c_g_socket_listener_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_socket_listener_get_typeFn c_g_socket_listener_get_type; ///
+private alias c_g_socket_listener_newFn = extern(C) GSocketListener* function() nothrow;
+__gshared c_g_socket_listener_newFn c_g_socket_listener_new; ///
+private alias c_g_socket_listener_acceptFn = extern(C) GSocketConnection* function(GSocketListener* listener, GObject** sourceObject, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_listener_acceptFn c_g_socket_listener_accept; ///
+private alias c_g_socket_listener_accept_asyncFn = extern(C) void function(GSocketListener* listener, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_socket_listener_accept_asyncFn c_g_socket_listener_accept_async; ///
+private alias c_g_socket_listener_accept_finishFn = extern(C) GSocketConnection* function(GSocketListener* listener, GAsyncResult* result, GObject** sourceObject, GError** _err) nothrow;
+__gshared c_g_socket_listener_accept_finishFn c_g_socket_listener_accept_finish; ///
+private alias c_g_socket_listener_accept_socketFn = extern(C) GSocket* function(GSocketListener* listener, GObject** sourceObject, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_socket_listener_accept_socketFn c_g_socket_listener_accept_socket; ///
+private alias c_g_socket_listener_accept_socket_asyncFn = extern(C) void function(GSocketListener* listener, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_socket_listener_accept_socket_asyncFn c_g_socket_listener_accept_socket_async; ///
+private alias c_g_socket_listener_accept_socket_finishFn = extern(C) GSocket* function(GSocketListener* listener, GAsyncResult* result, GObject** sourceObject, GError** _err) nothrow;
+__gshared c_g_socket_listener_accept_socket_finishFn c_g_socket_listener_accept_socket_finish; ///
+private alias c_g_socket_listener_add_addressFn = extern(C) gboolean function(GSocketListener* listener, GSocketAddress* address, GSocketType type, GSocketProtocol protocol, GObject* sourceObject, GSocketAddress** effectiveAddress, GError** _err) nothrow;
+__gshared c_g_socket_listener_add_addressFn c_g_socket_listener_add_address; ///
+private alias c_g_socket_listener_add_any_inet_portFn = extern(C) ushort function(GSocketListener* listener, GObject* sourceObject, GError** _err) nothrow;
+__gshared c_g_socket_listener_add_any_inet_portFn c_g_socket_listener_add_any_inet_port; ///
+private alias c_g_socket_listener_add_inet_portFn = extern(C) gboolean function(GSocketListener* listener, ushort port, GObject* sourceObject, GError** _err) nothrow;
+__gshared c_g_socket_listener_add_inet_portFn c_g_socket_listener_add_inet_port; ///
+private alias c_g_socket_listener_add_socketFn = extern(C) gboolean function(GSocketListener* listener, GSocket* socket, GObject* sourceObject, GError** _err) nothrow;
+__gshared c_g_socket_listener_add_socketFn c_g_socket_listener_add_socket; ///
+private alias c_g_socket_listener_closeFn = extern(C) void function(GSocketListener* listener) nothrow;
+__gshared c_g_socket_listener_closeFn c_g_socket_listener_close; ///
+private alias c_g_socket_listener_set_backlogFn = extern(C) void function(GSocketListener* listener, int listenBacklog) nothrow;
+__gshared c_g_socket_listener_set_backlogFn c_g_socket_listener_set_backlog; ///
+
+// SocketService
+private alias c_g_socket_service_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_socket_service_get_typeFn c_g_socket_service_get_type; ///
+private alias c_g_socket_service_newFn = extern(C) GSocketService* function() nothrow;
+__gshared c_g_socket_service_newFn c_g_socket_service_new; ///
+private alias c_g_socket_service_is_activeFn = extern(C) gboolean function(GSocketService* service) nothrow;
+__gshared c_g_socket_service_is_activeFn c_g_socket_service_is_active; ///
+private alias c_g_socket_service_startFn = extern(C) void function(GSocketService* service) nothrow;
+__gshared c_g_socket_service_startFn c_g_socket_service_start; ///
+private alias c_g_socket_service_stopFn = extern(C) void function(GSocketService* service) nothrow;
+__gshared c_g_socket_service_stopFn c_g_socket_service_stop; ///
+
+// SrvTarget
+private alias c_g_srv_target_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_srv_target_get_typeFn c_g_srv_target_get_type; ///
+private alias c_g_srv_target_newFn = extern(C) GSrvTarget* function(const(char)* hostname, ushort port, ushort priority, ushort weight) nothrow;
+__gshared c_g_srv_target_newFn c_g_srv_target_new; ///
+private alias c_g_srv_target_copyFn = extern(C) GSrvTarget* function(GSrvTarget* target) nothrow;
+__gshared c_g_srv_target_copyFn c_g_srv_target_copy; ///
+private alias c_g_srv_target_freeFn = extern(C) void function(GSrvTarget* target) nothrow;
+__gshared c_g_srv_target_freeFn c_g_srv_target_free; ///
+private alias c_g_srv_target_get_hostnameFn = extern(C) const(char)* function(GSrvTarget* target) nothrow;
+__gshared c_g_srv_target_get_hostnameFn c_g_srv_target_get_hostname; ///
+private alias c_g_srv_target_get_portFn = extern(C) ushort function(GSrvTarget* target) nothrow;
+__gshared c_g_srv_target_get_portFn c_g_srv_target_get_port; ///
+private alias c_g_srv_target_get_priorityFn = extern(C) ushort function(GSrvTarget* target) nothrow;
+__gshared c_g_srv_target_get_priorityFn c_g_srv_target_get_priority; ///
+private alias c_g_srv_target_get_weightFn = extern(C) ushort function(GSrvTarget* target) nothrow;
+__gshared c_g_srv_target_get_weightFn c_g_srv_target_get_weight; ///
+private alias c_g_srv_target_list_sortFn = extern(C) GList* function(GList* targets) nothrow;
+__gshared c_g_srv_target_list_sortFn c_g_srv_target_list_sort; ///
+
+// StaticResource
+private alias c_g_static_resource_finiFn = extern(C) void function(GStaticResource* staticResource) nothrow;
+__gshared c_g_static_resource_finiFn c_g_static_resource_fini; ///
+private alias c_g_static_resource_get_resourceFn = extern(C) GResource* function(GStaticResource* staticResource) nothrow;
+__gshared c_g_static_resource_get_resourceFn c_g_static_resource_get_resource; ///
+private alias c_g_static_resource_initFn = extern(C) void function(GStaticResource* staticResource) nothrow;
+__gshared c_g_static_resource_initFn c_g_static_resource_init; ///
+
+// Subprocess
+private alias c_g_subprocess_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_subprocess_get_typeFn c_g_subprocess_get_type; ///
+private alias c_g_subprocess_newFn = extern(C) GSubprocess* function(GSubprocessFlags flags, GError** error, const(char)* argv0,  ...) nothrow;
+__gshared c_g_subprocess_newFn c_g_subprocess_new; ///
+private alias c_g_subprocess_newvFn = extern(C) GSubprocess* function(const(char*)* argv, GSubprocessFlags flags, GError** _err) nothrow;
+__gshared c_g_subprocess_newvFn c_g_subprocess_newv; ///
+private alias c_g_subprocess_communicateFn = extern(C) gboolean function(GSubprocess* subprocess, GBytes* stdinBuf, GCancellable* cancellable, GBytes** stdoutBuf, GBytes** stderrBuf, GError** _err) nothrow;
+__gshared c_g_subprocess_communicateFn c_g_subprocess_communicate; ///
+private alias c_g_subprocess_communicate_asyncFn = extern(C) void function(GSubprocess* subprocess, GBytes* stdinBuf, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_subprocess_communicate_asyncFn c_g_subprocess_communicate_async; ///
+private alias c_g_subprocess_communicate_finishFn = extern(C) gboolean function(GSubprocess* subprocess, GAsyncResult* result, GBytes** stdoutBuf, GBytes** stderrBuf, GError** _err) nothrow;
+__gshared c_g_subprocess_communicate_finishFn c_g_subprocess_communicate_finish; ///
+private alias c_g_subprocess_communicate_utf8Fn = extern(C) gboolean function(GSubprocess* subprocess, const(char)* stdinBuf, GCancellable* cancellable, char** stdoutBuf, char** stderrBuf, GError** _err) nothrow;
+__gshared c_g_subprocess_communicate_utf8Fn c_g_subprocess_communicate_utf8; ///
+private alias c_g_subprocess_communicate_utf8_asyncFn = extern(C) void function(GSubprocess* subprocess, const(char)* stdinBuf, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_subprocess_communicate_utf8_asyncFn c_g_subprocess_communicate_utf8_async; ///
+private alias c_g_subprocess_communicate_utf8_finishFn = extern(C) gboolean function(GSubprocess* subprocess, GAsyncResult* result, char** stdoutBuf, char** stderrBuf, GError** _err) nothrow;
+__gshared c_g_subprocess_communicate_utf8_finishFn c_g_subprocess_communicate_utf8_finish; ///
+private alias c_g_subprocess_force_exitFn = extern(C) void function(GSubprocess* subprocess) nothrow;
+__gshared c_g_subprocess_force_exitFn c_g_subprocess_force_exit; ///
+private alias c_g_subprocess_get_exit_statusFn = extern(C) int function(GSubprocess* subprocess) nothrow;
+__gshared c_g_subprocess_get_exit_statusFn c_g_subprocess_get_exit_status; ///
+private alias c_g_subprocess_get_identifierFn = extern(C) const(char)* function(GSubprocess* subprocess) nothrow;
+__gshared c_g_subprocess_get_identifierFn c_g_subprocess_get_identifier; ///
+private alias c_g_subprocess_get_if_exitedFn = extern(C) gboolean function(GSubprocess* subprocess) nothrow;
+__gshared c_g_subprocess_get_if_exitedFn c_g_subprocess_get_if_exited; ///
+private alias c_g_subprocess_get_if_signaledFn = extern(C) gboolean function(GSubprocess* subprocess) nothrow;
+__gshared c_g_subprocess_get_if_signaledFn c_g_subprocess_get_if_signaled; ///
+private alias c_g_subprocess_get_statusFn = extern(C) int function(GSubprocess* subprocess) nothrow;
+__gshared c_g_subprocess_get_statusFn c_g_subprocess_get_status; ///
+private alias c_g_subprocess_get_stderr_pipeFn = extern(C) GInputStream* function(GSubprocess* subprocess) nothrow;
+__gshared c_g_subprocess_get_stderr_pipeFn c_g_subprocess_get_stderr_pipe; ///
+private alias c_g_subprocess_get_stdin_pipeFn = extern(C) GOutputStream* function(GSubprocess* subprocess) nothrow;
+__gshared c_g_subprocess_get_stdin_pipeFn c_g_subprocess_get_stdin_pipe; ///
+private alias c_g_subprocess_get_stdout_pipeFn = extern(C) GInputStream* function(GSubprocess* subprocess) nothrow;
+__gshared c_g_subprocess_get_stdout_pipeFn c_g_subprocess_get_stdout_pipe; ///
+private alias c_g_subprocess_get_successfulFn = extern(C) gboolean function(GSubprocess* subprocess) nothrow;
+__gshared c_g_subprocess_get_successfulFn c_g_subprocess_get_successful; ///
+private alias c_g_subprocess_get_term_sigFn = extern(C) int function(GSubprocess* subprocess) nothrow;
+__gshared c_g_subprocess_get_term_sigFn c_g_subprocess_get_term_sig; ///
+private alias c_g_subprocess_send_signalFn = extern(C) void function(GSubprocess* subprocess, int signalNum) nothrow;
+__gshared c_g_subprocess_send_signalFn c_g_subprocess_send_signal; ///
+private alias c_g_subprocess_waitFn = extern(C) gboolean function(GSubprocess* subprocess, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_subprocess_waitFn c_g_subprocess_wait; ///
+private alias c_g_subprocess_wait_asyncFn = extern(C) void function(GSubprocess* subprocess, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_subprocess_wait_asyncFn c_g_subprocess_wait_async; ///
+private alias c_g_subprocess_wait_checkFn = extern(C) gboolean function(GSubprocess* subprocess, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_subprocess_wait_checkFn c_g_subprocess_wait_check; ///
+private alias c_g_subprocess_wait_check_asyncFn = extern(C) void function(GSubprocess* subprocess, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_subprocess_wait_check_asyncFn c_g_subprocess_wait_check_async; ///
+private alias c_g_subprocess_wait_check_finishFn = extern(C) gboolean function(GSubprocess* subprocess, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_subprocess_wait_check_finishFn c_g_subprocess_wait_check_finish; ///
+private alias c_g_subprocess_wait_finishFn = extern(C) gboolean function(GSubprocess* subprocess, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_subprocess_wait_finishFn c_g_subprocess_wait_finish; ///
+
+// SubprocessLauncher
+private alias c_g_subprocess_launcher_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_subprocess_launcher_get_typeFn c_g_subprocess_launcher_get_type; ///
+private alias c_g_subprocess_launcher_newFn = extern(C) GSubprocessLauncher* function(GSubprocessFlags flags) nothrow;
+__gshared c_g_subprocess_launcher_newFn c_g_subprocess_launcher_new; ///
+private alias c_g_subprocess_launcher_closeFn = extern(C) void function(GSubprocessLauncher* self) nothrow;
+__gshared c_g_subprocess_launcher_closeFn c_g_subprocess_launcher_close; ///
+private alias c_g_subprocess_launcher_getenvFn = extern(C) const(char)* function(GSubprocessLauncher* self, const(char)* variable) nothrow;
+__gshared c_g_subprocess_launcher_getenvFn c_g_subprocess_launcher_getenv; ///
+private alias c_g_subprocess_launcher_set_child_setupFn = extern(C) void function(GSubprocessLauncher* self, GSpawnChildSetupFunc childSetup, void* userData, GDestroyNotify destroyNotify) nothrow;
+__gshared c_g_subprocess_launcher_set_child_setupFn c_g_subprocess_launcher_set_child_setup; ///
+private alias c_g_subprocess_launcher_set_cwdFn = extern(C) void function(GSubprocessLauncher* self, const(char)* cwd) nothrow;
+__gshared c_g_subprocess_launcher_set_cwdFn c_g_subprocess_launcher_set_cwd; ///
+private alias c_g_subprocess_launcher_set_environFn = extern(C) void function(GSubprocessLauncher* self, char** env) nothrow;
+__gshared c_g_subprocess_launcher_set_environFn c_g_subprocess_launcher_set_environ; ///
+private alias c_g_subprocess_launcher_set_flagsFn = extern(C) void function(GSubprocessLauncher* self, GSubprocessFlags flags) nothrow;
+__gshared c_g_subprocess_launcher_set_flagsFn c_g_subprocess_launcher_set_flags; ///
+private alias c_g_subprocess_launcher_set_stderr_file_pathFn = extern(C) void function(GSubprocessLauncher* self, const(char)* path) nothrow;
+__gshared c_g_subprocess_launcher_set_stderr_file_pathFn c_g_subprocess_launcher_set_stderr_file_path; ///
+private alias c_g_subprocess_launcher_set_stdin_file_pathFn = extern(C) void function(GSubprocessLauncher* self, const(char)* path) nothrow;
+__gshared c_g_subprocess_launcher_set_stdin_file_pathFn c_g_subprocess_launcher_set_stdin_file_path; ///
+private alias c_g_subprocess_launcher_set_stdout_file_pathFn = extern(C) void function(GSubprocessLauncher* self, const(char)* path) nothrow;
+__gshared c_g_subprocess_launcher_set_stdout_file_pathFn c_g_subprocess_launcher_set_stdout_file_path; ///
+private alias c_g_subprocess_launcher_setenvFn = extern(C) void function(GSubprocessLauncher* self, const(char)* variable, const(char)* value, gboolean overwrite) nothrow;
+__gshared c_g_subprocess_launcher_setenvFn c_g_subprocess_launcher_setenv; ///
+private alias c_g_subprocess_launcher_spawnFn = extern(C) GSubprocess* function(GSubprocessLauncher* self, GError** error, const(char)* argv0,  ...) nothrow;
+__gshared c_g_subprocess_launcher_spawnFn c_g_subprocess_launcher_spawn; ///
+private alias c_g_subprocess_launcher_spawnvFn = extern(C) GSubprocess* function(GSubprocessLauncher* self, const(char*)* argv, GError** _err) nothrow;
+__gshared c_g_subprocess_launcher_spawnvFn c_g_subprocess_launcher_spawnv; ///
+private alias c_g_subprocess_launcher_take_fdFn = extern(C) void function(GSubprocessLauncher* self, int sourceFd, int targetFd) nothrow;
+__gshared c_g_subprocess_launcher_take_fdFn c_g_subprocess_launcher_take_fd; ///
+private alias c_g_subprocess_launcher_take_stderr_fdFn = extern(C) void function(GSubprocessLauncher* self, int fd) nothrow;
+__gshared c_g_subprocess_launcher_take_stderr_fdFn c_g_subprocess_launcher_take_stderr_fd; ///
+private alias c_g_subprocess_launcher_take_stdin_fdFn = extern(C) void function(GSubprocessLauncher* self, int fd) nothrow;
+__gshared c_g_subprocess_launcher_take_stdin_fdFn c_g_subprocess_launcher_take_stdin_fd; ///
+private alias c_g_subprocess_launcher_take_stdout_fdFn = extern(C) void function(GSubprocessLauncher* self, int fd) nothrow;
+__gshared c_g_subprocess_launcher_take_stdout_fdFn c_g_subprocess_launcher_take_stdout_fd; ///
+private alias c_g_subprocess_launcher_unsetenvFn = extern(C) void function(GSubprocessLauncher* self, const(char)* variable) nothrow;
+__gshared c_g_subprocess_launcher_unsetenvFn c_g_subprocess_launcher_unsetenv; ///
+
+// Task
+private alias c_g_task_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_task_get_typeFn c_g_task_get_type; ///
+private alias c_g_task_newFn = extern(C) GTask* function(GObject* sourceObject, GCancellable* cancellable, GAsyncReadyCallback callback, void* callbackData) nothrow;
+__gshared c_g_task_newFn c_g_task_new; ///
+private alias c_g_task_is_validFn = extern(C) gboolean function(GAsyncResult* result, GObject* sourceObject) nothrow;
+__gshared c_g_task_is_validFn c_g_task_is_valid; ///
+private alias c_g_task_report_errorFn = extern(C) void function(GObject* sourceObject, GAsyncReadyCallback callback, void* callbackData, void* sourceTag, GError* error) nothrow;
+__gshared c_g_task_report_errorFn c_g_task_report_error; ///
+private alias c_g_task_report_new_errorFn = extern(C) void function(GObject* sourceObject, GAsyncReadyCallback callback, void* callbackData, void* sourceTag, GQuark domain, int code, const(char)* format,  ...) nothrow;
+__gshared c_g_task_report_new_errorFn c_g_task_report_new_error; ///
+private alias c_g_task_attach_sourceFn = extern(C) void function(GTask* task, GSource* source, GSourceFunc callback) nothrow;
+__gshared c_g_task_attach_sourceFn c_g_task_attach_source; ///
+private alias c_g_task_get_cancellableFn = extern(C) GCancellable* function(GTask* task) nothrow;
+__gshared c_g_task_get_cancellableFn c_g_task_get_cancellable; ///
+private alias c_g_task_get_check_cancellableFn = extern(C) gboolean function(GTask* task) nothrow;
+__gshared c_g_task_get_check_cancellableFn c_g_task_get_check_cancellable; ///
+private alias c_g_task_get_completedFn = extern(C) gboolean function(GTask* task) nothrow;
+__gshared c_g_task_get_completedFn c_g_task_get_completed; ///
+private alias c_g_task_get_contextFn = extern(C) GMainContext* function(GTask* task) nothrow;
+__gshared c_g_task_get_contextFn c_g_task_get_context; ///
+private alias c_g_task_get_nameFn = extern(C) const(char)* function(GTask* task) nothrow;
+__gshared c_g_task_get_nameFn c_g_task_get_name; ///
+private alias c_g_task_get_priorityFn = extern(C) int function(GTask* task) nothrow;
+__gshared c_g_task_get_priorityFn c_g_task_get_priority; ///
+private alias c_g_task_get_return_on_cancelFn = extern(C) gboolean function(GTask* task) nothrow;
+__gshared c_g_task_get_return_on_cancelFn c_g_task_get_return_on_cancel; ///
+private alias c_g_task_get_source_objectFn = extern(C) GObject* function(GTask* task) nothrow;
+__gshared c_g_task_get_source_objectFn c_g_task_get_source_object; ///
+private alias c_g_task_get_source_tagFn = extern(C) void* function(GTask* task) nothrow;
+__gshared c_g_task_get_source_tagFn c_g_task_get_source_tag; ///
+private alias c_g_task_get_task_dataFn = extern(C) void* function(GTask* task) nothrow;
+__gshared c_g_task_get_task_dataFn c_g_task_get_task_data; ///
+private alias c_g_task_had_errorFn = extern(C) gboolean function(GTask* task) nothrow;
+__gshared c_g_task_had_errorFn c_g_task_had_error; ///
+private alias c_g_task_propagate_booleanFn = extern(C) gboolean function(GTask* task, GError** _err) nothrow;
+__gshared c_g_task_propagate_booleanFn c_g_task_propagate_boolean; ///
+private alias c_g_task_propagate_intFn = extern(C) ptrdiff_t function(GTask* task, GError** _err) nothrow;
+__gshared c_g_task_propagate_intFn c_g_task_propagate_int; ///
+private alias c_g_task_propagate_pointerFn = extern(C) void* function(GTask* task, GError** _err) nothrow;
+__gshared c_g_task_propagate_pointerFn c_g_task_propagate_pointer; ///
+private alias c_g_task_propagate_valueFn = extern(C) gboolean function(GTask* task, GValue* value, GError** _err) nothrow;
+__gshared c_g_task_propagate_valueFn c_g_task_propagate_value; ///
+private alias c_g_task_return_booleanFn = extern(C) void function(GTask* task, gboolean result) nothrow;
+__gshared c_g_task_return_booleanFn c_g_task_return_boolean; ///
+private alias c_g_task_return_errorFn = extern(C) void function(GTask* task, GError* error) nothrow;
+__gshared c_g_task_return_errorFn c_g_task_return_error; ///
+private alias c_g_task_return_error_if_cancelledFn = extern(C) gboolean function(GTask* task) nothrow;
+__gshared c_g_task_return_error_if_cancelledFn c_g_task_return_error_if_cancelled; ///
+private alias c_g_task_return_intFn = extern(C) void function(GTask* task, ptrdiff_t result) nothrow;
+__gshared c_g_task_return_intFn c_g_task_return_int; ///
+private alias c_g_task_return_new_errorFn = extern(C) void function(GTask* task, GQuark domain, int code, const(char)* format,  ...) nothrow;
+__gshared c_g_task_return_new_errorFn c_g_task_return_new_error; ///
+private alias c_g_task_return_new_error_literalFn = extern(C) void function(GTask* task, GQuark domain, int code, const(char)* message) nothrow;
+__gshared c_g_task_return_new_error_literalFn c_g_task_return_new_error_literal; ///
+private alias c_g_task_return_pointerFn = extern(C) void function(GTask* task, void* result, GDestroyNotify resultDestroy) nothrow;
+__gshared c_g_task_return_pointerFn c_g_task_return_pointer; ///
+private alias c_g_task_return_prefixed_errorFn = extern(C) void function(GTask* task, GError* error, const(char)* format,  ...) nothrow;
+__gshared c_g_task_return_prefixed_errorFn c_g_task_return_prefixed_error; ///
+private alias c_g_task_return_valueFn = extern(C) void function(GTask* task, GValue* result) nothrow;
+__gshared c_g_task_return_valueFn c_g_task_return_value; ///
+private alias c_g_task_run_in_threadFn = extern(C) void function(GTask* task, GTaskThreadFunc taskFunc) nothrow;
+__gshared c_g_task_run_in_threadFn c_g_task_run_in_thread; ///
+private alias c_g_task_run_in_thread_syncFn = extern(C) void function(GTask* task, GTaskThreadFunc taskFunc) nothrow;
+__gshared c_g_task_run_in_thread_syncFn c_g_task_run_in_thread_sync; ///
+private alias c_g_task_set_check_cancellableFn = extern(C) void function(GTask* task, gboolean checkCancellable) nothrow;
+__gshared c_g_task_set_check_cancellableFn c_g_task_set_check_cancellable; ///
+private alias c_g_task_set_nameFn = extern(C) void function(GTask* task, const(char)* name) nothrow;
+__gshared c_g_task_set_nameFn c_g_task_set_name; ///
+private alias c_g_task_set_priorityFn = extern(C) void function(GTask* task, int priority) nothrow;
+__gshared c_g_task_set_priorityFn c_g_task_set_priority; ///
+private alias c_g_task_set_return_on_cancelFn = extern(C) gboolean function(GTask* task, gboolean returnOnCancel) nothrow;
+__gshared c_g_task_set_return_on_cancelFn c_g_task_set_return_on_cancel; ///
+private alias c_g_task_set_source_tagFn = extern(C) void function(GTask* task, void* sourceTag) nothrow;
+__gshared c_g_task_set_source_tagFn c_g_task_set_source_tag; ///
+private alias c_g_task_set_static_nameFn = extern(C) void function(GTask* task, const(char)* name) nothrow;
+__gshared c_g_task_set_static_nameFn c_g_task_set_static_name; ///
+private alias c_g_task_set_task_dataFn = extern(C) void function(GTask* task, void* taskData, GDestroyNotify taskDataDestroy) nothrow;
+__gshared c_g_task_set_task_dataFn c_g_task_set_task_data; ///
+
+// TcpConnection
+private alias c_g_tcp_connection_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_tcp_connection_get_typeFn c_g_tcp_connection_get_type; ///
+private alias c_g_tcp_connection_get_graceful_disconnectFn = extern(C) gboolean function(GTcpConnection* connection) nothrow;
+__gshared c_g_tcp_connection_get_graceful_disconnectFn c_g_tcp_connection_get_graceful_disconnect; ///
+private alias c_g_tcp_connection_set_graceful_disconnectFn = extern(C) void function(GTcpConnection* connection, gboolean gracefulDisconnect) nothrow;
+__gshared c_g_tcp_connection_set_graceful_disconnectFn c_g_tcp_connection_set_graceful_disconnect; ///
+
+// TcpWrapperConnection
+private alias c_g_tcp_wrapper_connection_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_tcp_wrapper_connection_get_typeFn c_g_tcp_wrapper_connection_get_type; ///
+private alias c_g_tcp_wrapper_connection_newFn = extern(C) GSocketConnection* function(GIOStream* baseIoStream, GSocket* socket) nothrow;
+__gshared c_g_tcp_wrapper_connection_newFn c_g_tcp_wrapper_connection_new; ///
+private alias c_g_tcp_wrapper_connection_get_base_io_streamFn = extern(C) GIOStream* function(GTcpWrapperConnection* conn) nothrow;
+__gshared c_g_tcp_wrapper_connection_get_base_io_streamFn c_g_tcp_wrapper_connection_get_base_io_stream; ///
+
+// TestDBus
+private alias c_g_test_dbus_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_test_dbus_get_typeFn c_g_test_dbus_get_type; ///
+private alias c_g_test_dbus_newFn = extern(C) GTestDBus* function(GTestDBusFlags flags) nothrow;
+__gshared c_g_test_dbus_newFn c_g_test_dbus_new; ///
+private alias c_g_test_dbus_unsetFn = extern(C) void function() nothrow;
+__gshared c_g_test_dbus_unsetFn c_g_test_dbus_unset; ///
+private alias c_g_test_dbus_add_service_dirFn = extern(C) void function(GTestDBus* self, const(char)* path) nothrow;
+__gshared c_g_test_dbus_add_service_dirFn c_g_test_dbus_add_service_dir; ///
+private alias c_g_test_dbus_downFn = extern(C) void function(GTestDBus* self) nothrow;
+__gshared c_g_test_dbus_downFn c_g_test_dbus_down; ///
+private alias c_g_test_dbus_get_bus_addressFn = extern(C) const(char)* function(GTestDBus* self) nothrow;
+__gshared c_g_test_dbus_get_bus_addressFn c_g_test_dbus_get_bus_address; ///
+private alias c_g_test_dbus_get_flagsFn = extern(C) GTestDBusFlags function(GTestDBus* self) nothrow;
+__gshared c_g_test_dbus_get_flagsFn c_g_test_dbus_get_flags; ///
+private alias c_g_test_dbus_stopFn = extern(C) void function(GTestDBus* self) nothrow;
+__gshared c_g_test_dbus_stopFn c_g_test_dbus_stop; ///
+private alias c_g_test_dbus_upFn = extern(C) void function(GTestDBus* self) nothrow;
+__gshared c_g_test_dbus_upFn c_g_test_dbus_up; ///
+
+// ThemedIcon
+private alias c_g_themed_icon_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_themed_icon_get_typeFn c_g_themed_icon_get_type; ///
+private alias c_g_themed_icon_newFn = extern(C) GIcon* function(const(char)* iconname) nothrow;
+__gshared c_g_themed_icon_newFn c_g_themed_icon_new; ///
+private alias c_g_themed_icon_new_from_namesFn = extern(C) GIcon* function(char** iconnames, int len) nothrow;
+__gshared c_g_themed_icon_new_from_namesFn c_g_themed_icon_new_from_names; ///
+private alias c_g_themed_icon_new_with_default_fallbacksFn = extern(C) GIcon* function(const(char)* iconname) nothrow;
+__gshared c_g_themed_icon_new_with_default_fallbacksFn c_g_themed_icon_new_with_default_fallbacks; ///
+private alias c_g_themed_icon_append_nameFn = extern(C) void function(GThemedIcon* icon, const(char)* iconname) nothrow;
+__gshared c_g_themed_icon_append_nameFn c_g_themed_icon_append_name; ///
+private alias c_g_themed_icon_get_namesFn = extern(C) const(char*)* function(GThemedIcon* icon) nothrow;
+__gshared c_g_themed_icon_get_namesFn c_g_themed_icon_get_names; ///
+private alias c_g_themed_icon_prepend_nameFn = extern(C) void function(GThemedIcon* icon, const(char)* iconname) nothrow;
+__gshared c_g_themed_icon_prepend_nameFn c_g_themed_icon_prepend_name; ///
+
+// ThreadedResolver
+private alias c_g_threaded_resolver_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_threaded_resolver_get_typeFn c_g_threaded_resolver_get_type; ///
+
+// ThreadedSocketService
+private alias c_g_threaded_socket_service_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_threaded_socket_service_get_typeFn c_g_threaded_socket_service_get_type; ///
+private alias c_g_threaded_socket_service_newFn = extern(C) GSocketService* function(int maxThreads) nothrow;
+__gshared c_g_threaded_socket_service_newFn c_g_threaded_socket_service_new; ///
+
+// TlsBackend
+private alias c_g_tls_backend_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_tls_backend_get_typeFn c_g_tls_backend_get_type; ///
+private alias c_g_tls_backend_get_defaultFn = extern(C) GTlsBackend* function() nothrow;
+__gshared c_g_tls_backend_get_defaultFn c_g_tls_backend_get_default; ///
+private alias c_g_tls_backend_get_certificate_typeFn = extern(C) GType function(GTlsBackend* backend) nothrow;
+__gshared c_g_tls_backend_get_certificate_typeFn c_g_tls_backend_get_certificate_type; ///
+private alias c_g_tls_backend_get_client_connection_typeFn = extern(C) GType function(GTlsBackend* backend) nothrow;
+__gshared c_g_tls_backend_get_client_connection_typeFn c_g_tls_backend_get_client_connection_type; ///
+private alias c_g_tls_backend_get_default_databaseFn = extern(C) GTlsDatabase* function(GTlsBackend* backend) nothrow;
+__gshared c_g_tls_backend_get_default_databaseFn c_g_tls_backend_get_default_database; ///
+private alias c_g_tls_backend_get_dtls_client_connection_typeFn = extern(C) GType function(GTlsBackend* backend) nothrow;
+__gshared c_g_tls_backend_get_dtls_client_connection_typeFn c_g_tls_backend_get_dtls_client_connection_type; ///
+private alias c_g_tls_backend_get_dtls_server_connection_typeFn = extern(C) GType function(GTlsBackend* backend) nothrow;
+__gshared c_g_tls_backend_get_dtls_server_connection_typeFn c_g_tls_backend_get_dtls_server_connection_type; ///
+private alias c_g_tls_backend_get_file_database_typeFn = extern(C) GType function(GTlsBackend* backend) nothrow;
+__gshared c_g_tls_backend_get_file_database_typeFn c_g_tls_backend_get_file_database_type; ///
+private alias c_g_tls_backend_get_server_connection_typeFn = extern(C) GType function(GTlsBackend* backend) nothrow;
+__gshared c_g_tls_backend_get_server_connection_typeFn c_g_tls_backend_get_server_connection_type; ///
+private alias c_g_tls_backend_set_default_databaseFn = extern(C) void function(GTlsBackend* backend, GTlsDatabase* database) nothrow;
+__gshared c_g_tls_backend_set_default_databaseFn c_g_tls_backend_set_default_database; ///
+private alias c_g_tls_backend_supports_dtlsFn = extern(C) gboolean function(GTlsBackend* backend) nothrow;
+__gshared c_g_tls_backend_supports_dtlsFn c_g_tls_backend_supports_dtls; ///
+private alias c_g_tls_backend_supports_tlsFn = extern(C) gboolean function(GTlsBackend* backend) nothrow;
+__gshared c_g_tls_backend_supports_tlsFn c_g_tls_backend_supports_tls; ///
+
+// TlsCertificate
+private alias c_g_tls_certificate_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_tls_certificate_get_typeFn c_g_tls_certificate_get_type; ///
+private alias c_g_tls_certificate_new_from_fileFn = extern(C) GTlsCertificate* function(const(char)* file, GError** _err) nothrow;
+__gshared c_g_tls_certificate_new_from_fileFn c_g_tls_certificate_new_from_file; ///
+private alias c_g_tls_certificate_new_from_file_with_passwordFn = extern(C) GTlsCertificate* function(const(char)* file, const(char)* password, GError** _err) nothrow;
+__gshared c_g_tls_certificate_new_from_file_with_passwordFn c_g_tls_certificate_new_from_file_with_password; ///
+private alias c_g_tls_certificate_new_from_filesFn = extern(C) GTlsCertificate* function(const(char)* certFile, const(char)* keyFile, GError** _err) nothrow;
+__gshared c_g_tls_certificate_new_from_filesFn c_g_tls_certificate_new_from_files; ///
+private alias c_g_tls_certificate_new_from_pemFn = extern(C) GTlsCertificate* function(const(char)* data, ptrdiff_t length, GError** _err) nothrow;
+__gshared c_g_tls_certificate_new_from_pemFn c_g_tls_certificate_new_from_pem; ///
+private alias c_g_tls_certificate_new_from_pkcs11_urisFn = extern(C) GTlsCertificate* function(const(char)* pkcs11Uri, const(char)* privateKeyPkcs11Uri, GError** _err) nothrow;
+__gshared c_g_tls_certificate_new_from_pkcs11_urisFn c_g_tls_certificate_new_from_pkcs11_uris; ///
+private alias c_g_tls_certificate_new_from_pkcs12Fn = extern(C) GTlsCertificate* function(const(ubyte)* data, size_t length, const(char)* password, GError** _err) nothrow;
+__gshared c_g_tls_certificate_new_from_pkcs12Fn c_g_tls_certificate_new_from_pkcs12; ///
+private alias c_g_tls_certificate_list_new_from_fileFn = extern(C) GList* function(const(char)* file, GError** _err) nothrow;
+__gshared c_g_tls_certificate_list_new_from_fileFn c_g_tls_certificate_list_new_from_file; ///
+private alias c_g_tls_certificate_get_dns_namesFn = extern(C) GPtrArray* function(GTlsCertificate* cert) nothrow;
+__gshared c_g_tls_certificate_get_dns_namesFn c_g_tls_certificate_get_dns_names; ///
+private alias c_g_tls_certificate_get_ip_addressesFn = extern(C) GPtrArray* function(GTlsCertificate* cert) nothrow;
+__gshared c_g_tls_certificate_get_ip_addressesFn c_g_tls_certificate_get_ip_addresses; ///
+private alias c_g_tls_certificate_get_issuerFn = extern(C) GTlsCertificate* function(GTlsCertificate* cert) nothrow;
+__gshared c_g_tls_certificate_get_issuerFn c_g_tls_certificate_get_issuer; ///
+private alias c_g_tls_certificate_get_issuer_nameFn = extern(C) char* function(GTlsCertificate* cert) nothrow;
+__gshared c_g_tls_certificate_get_issuer_nameFn c_g_tls_certificate_get_issuer_name; ///
+private alias c_g_tls_certificate_get_not_valid_afterFn = extern(C) GDateTime* function(GTlsCertificate* cert) nothrow;
+__gshared c_g_tls_certificate_get_not_valid_afterFn c_g_tls_certificate_get_not_valid_after; ///
+private alias c_g_tls_certificate_get_not_valid_beforeFn = extern(C) GDateTime* function(GTlsCertificate* cert) nothrow;
+__gshared c_g_tls_certificate_get_not_valid_beforeFn c_g_tls_certificate_get_not_valid_before; ///
+private alias c_g_tls_certificate_get_subject_nameFn = extern(C) char* function(GTlsCertificate* cert) nothrow;
+__gshared c_g_tls_certificate_get_subject_nameFn c_g_tls_certificate_get_subject_name; ///
+private alias c_g_tls_certificate_is_sameFn = extern(C) gboolean function(GTlsCertificate* certOne, GTlsCertificate* certTwo) nothrow;
+__gshared c_g_tls_certificate_is_sameFn c_g_tls_certificate_is_same; ///
+private alias c_g_tls_certificate_verifyFn = extern(C) GTlsCertificateFlags function(GTlsCertificate* cert, GSocketConnectable* identity, GTlsCertificate* trustedCa) nothrow;
+__gshared c_g_tls_certificate_verifyFn c_g_tls_certificate_verify; ///
+
+// TlsClientConnection
+private alias c_g_tls_client_connection_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_tls_client_connection_get_typeFn c_g_tls_client_connection_get_type; ///
+private alias c_g_tls_client_connection_newFn = extern(C) GIOStream* function(GIOStream* baseIoStream, GSocketConnectable* serverIdentity, GError** _err) nothrow;
+__gshared c_g_tls_client_connection_newFn c_g_tls_client_connection_new; ///
+private alias c_g_tls_client_connection_copy_session_stateFn = extern(C) void function(GTlsClientConnection* conn, GTlsClientConnection* source) nothrow;
+__gshared c_g_tls_client_connection_copy_session_stateFn c_g_tls_client_connection_copy_session_state; ///
+private alias c_g_tls_client_connection_get_accepted_casFn = extern(C) GList* function(GTlsClientConnection* conn) nothrow;
+__gshared c_g_tls_client_connection_get_accepted_casFn c_g_tls_client_connection_get_accepted_cas; ///
+private alias c_g_tls_client_connection_get_server_identityFn = extern(C) GSocketConnectable* function(GTlsClientConnection* conn) nothrow;
+__gshared c_g_tls_client_connection_get_server_identityFn c_g_tls_client_connection_get_server_identity; ///
+private alias c_g_tls_client_connection_get_use_ssl3Fn = extern(C) gboolean function(GTlsClientConnection* conn) nothrow;
+__gshared c_g_tls_client_connection_get_use_ssl3Fn c_g_tls_client_connection_get_use_ssl3; ///
+private alias c_g_tls_client_connection_get_validation_flagsFn = extern(C) GTlsCertificateFlags function(GTlsClientConnection* conn) nothrow;
+__gshared c_g_tls_client_connection_get_validation_flagsFn c_g_tls_client_connection_get_validation_flags; ///
+private alias c_g_tls_client_connection_set_server_identityFn = extern(C) void function(GTlsClientConnection* conn, GSocketConnectable* identity) nothrow;
+__gshared c_g_tls_client_connection_set_server_identityFn c_g_tls_client_connection_set_server_identity; ///
+private alias c_g_tls_client_connection_set_use_ssl3Fn = extern(C) void function(GTlsClientConnection* conn, gboolean useSsl3) nothrow;
+__gshared c_g_tls_client_connection_set_use_ssl3Fn c_g_tls_client_connection_set_use_ssl3; ///
+private alias c_g_tls_client_connection_set_validation_flagsFn = extern(C) void function(GTlsClientConnection* conn, GTlsCertificateFlags flags) nothrow;
+__gshared c_g_tls_client_connection_set_validation_flagsFn c_g_tls_client_connection_set_validation_flags; ///
+
+// TlsConnection
+private alias c_g_tls_connection_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_tls_connection_get_typeFn c_g_tls_connection_get_type; ///
+private alias c_g_tls_connection_emit_accept_certificateFn = extern(C) gboolean function(GTlsConnection* conn, GTlsCertificate* peerCert, GTlsCertificateFlags errors) nothrow;
+__gshared c_g_tls_connection_emit_accept_certificateFn c_g_tls_connection_emit_accept_certificate; ///
+private alias c_g_tls_connection_get_certificateFn = extern(C) GTlsCertificate* function(GTlsConnection* conn) nothrow;
+__gshared c_g_tls_connection_get_certificateFn c_g_tls_connection_get_certificate; ///
+private alias c_g_tls_connection_get_channel_binding_dataFn = extern(C) gboolean function(GTlsConnection* conn, GTlsChannelBindingType type, GByteArray* data, GError** _err) nothrow;
+__gshared c_g_tls_connection_get_channel_binding_dataFn c_g_tls_connection_get_channel_binding_data; ///
+private alias c_g_tls_connection_get_ciphersuite_nameFn = extern(C) char* function(GTlsConnection* conn) nothrow;
+__gshared c_g_tls_connection_get_ciphersuite_nameFn c_g_tls_connection_get_ciphersuite_name; ///
+private alias c_g_tls_connection_get_databaseFn = extern(C) GTlsDatabase* function(GTlsConnection* conn) nothrow;
+__gshared c_g_tls_connection_get_databaseFn c_g_tls_connection_get_database; ///
+private alias c_g_tls_connection_get_interactionFn = extern(C) GTlsInteraction* function(GTlsConnection* conn) nothrow;
+__gshared c_g_tls_connection_get_interactionFn c_g_tls_connection_get_interaction; ///
+private alias c_g_tls_connection_get_negotiated_protocolFn = extern(C) const(char)* function(GTlsConnection* conn) nothrow;
+__gshared c_g_tls_connection_get_negotiated_protocolFn c_g_tls_connection_get_negotiated_protocol; ///
+private alias c_g_tls_connection_get_peer_certificateFn = extern(C) GTlsCertificate* function(GTlsConnection* conn) nothrow;
+__gshared c_g_tls_connection_get_peer_certificateFn c_g_tls_connection_get_peer_certificate; ///
+private alias c_g_tls_connection_get_peer_certificate_errorsFn = extern(C) GTlsCertificateFlags function(GTlsConnection* conn) nothrow;
+__gshared c_g_tls_connection_get_peer_certificate_errorsFn c_g_tls_connection_get_peer_certificate_errors; ///
+private alias c_g_tls_connection_get_protocol_versionFn = extern(C) GTlsProtocolVersion function(GTlsConnection* conn) nothrow;
+__gshared c_g_tls_connection_get_protocol_versionFn c_g_tls_connection_get_protocol_version; ///
+private alias c_g_tls_connection_get_rehandshake_modeFn = extern(C) GTlsRehandshakeMode function(GTlsConnection* conn) nothrow;
+__gshared c_g_tls_connection_get_rehandshake_modeFn c_g_tls_connection_get_rehandshake_mode; ///
+private alias c_g_tls_connection_get_require_close_notifyFn = extern(C) gboolean function(GTlsConnection* conn) nothrow;
+__gshared c_g_tls_connection_get_require_close_notifyFn c_g_tls_connection_get_require_close_notify; ///
+private alias c_g_tls_connection_get_use_system_certdbFn = extern(C) gboolean function(GTlsConnection* conn) nothrow;
+__gshared c_g_tls_connection_get_use_system_certdbFn c_g_tls_connection_get_use_system_certdb; ///
+private alias c_g_tls_connection_handshakeFn = extern(C) gboolean function(GTlsConnection* conn, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_tls_connection_handshakeFn c_g_tls_connection_handshake; ///
+private alias c_g_tls_connection_handshake_asyncFn = extern(C) void function(GTlsConnection* conn, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_tls_connection_handshake_asyncFn c_g_tls_connection_handshake_async; ///
+private alias c_g_tls_connection_handshake_finishFn = extern(C) gboolean function(GTlsConnection* conn, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_tls_connection_handshake_finishFn c_g_tls_connection_handshake_finish; ///
+private alias c_g_tls_connection_set_advertised_protocolsFn = extern(C) void function(GTlsConnection* conn, const(char*)* protocols) nothrow;
+__gshared c_g_tls_connection_set_advertised_protocolsFn c_g_tls_connection_set_advertised_protocols; ///
+private alias c_g_tls_connection_set_certificateFn = extern(C) void function(GTlsConnection* conn, GTlsCertificate* certificate) nothrow;
+__gshared c_g_tls_connection_set_certificateFn c_g_tls_connection_set_certificate; ///
+private alias c_g_tls_connection_set_databaseFn = extern(C) void function(GTlsConnection* conn, GTlsDatabase* database) nothrow;
+__gshared c_g_tls_connection_set_databaseFn c_g_tls_connection_set_database; ///
+private alias c_g_tls_connection_set_interactionFn = extern(C) void function(GTlsConnection* conn, GTlsInteraction* interaction) nothrow;
+__gshared c_g_tls_connection_set_interactionFn c_g_tls_connection_set_interaction; ///
+private alias c_g_tls_connection_set_rehandshake_modeFn = extern(C) void function(GTlsConnection* conn, GTlsRehandshakeMode mode) nothrow;
+__gshared c_g_tls_connection_set_rehandshake_modeFn c_g_tls_connection_set_rehandshake_mode; ///
+private alias c_g_tls_connection_set_require_close_notifyFn = extern(C) void function(GTlsConnection* conn, gboolean requireCloseNotify) nothrow;
+__gshared c_g_tls_connection_set_require_close_notifyFn c_g_tls_connection_set_require_close_notify; ///
+private alias c_g_tls_connection_set_use_system_certdbFn = extern(C) void function(GTlsConnection* conn, gboolean useSystemCertdb) nothrow;
+__gshared c_g_tls_connection_set_use_system_certdbFn c_g_tls_connection_set_use_system_certdb; ///
+
+// TlsDatabase
+private alias c_g_tls_database_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_tls_database_get_typeFn c_g_tls_database_get_type; ///
+private alias c_g_tls_database_create_certificate_handleFn = extern(C) char* function(GTlsDatabase* self, GTlsCertificate* certificate) nothrow;
+__gshared c_g_tls_database_create_certificate_handleFn c_g_tls_database_create_certificate_handle; ///
+private alias c_g_tls_database_lookup_certificate_for_handleFn = extern(C) GTlsCertificate* function(GTlsDatabase* self, const(char)* handle, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_tls_database_lookup_certificate_for_handleFn c_g_tls_database_lookup_certificate_for_handle; ///
+private alias c_g_tls_database_lookup_certificate_for_handle_asyncFn = extern(C) void function(GTlsDatabase* self, const(char)* handle, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_tls_database_lookup_certificate_for_handle_asyncFn c_g_tls_database_lookup_certificate_for_handle_async; ///
+private alias c_g_tls_database_lookup_certificate_for_handle_finishFn = extern(C) GTlsCertificate* function(GTlsDatabase* self, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_tls_database_lookup_certificate_for_handle_finishFn c_g_tls_database_lookup_certificate_for_handle_finish; ///
+private alias c_g_tls_database_lookup_certificate_issuerFn = extern(C) GTlsCertificate* function(GTlsDatabase* self, GTlsCertificate* certificate, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_tls_database_lookup_certificate_issuerFn c_g_tls_database_lookup_certificate_issuer; ///
+private alias c_g_tls_database_lookup_certificate_issuer_asyncFn = extern(C) void function(GTlsDatabase* self, GTlsCertificate* certificate, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_tls_database_lookup_certificate_issuer_asyncFn c_g_tls_database_lookup_certificate_issuer_async; ///
+private alias c_g_tls_database_lookup_certificate_issuer_finishFn = extern(C) GTlsCertificate* function(GTlsDatabase* self, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_tls_database_lookup_certificate_issuer_finishFn c_g_tls_database_lookup_certificate_issuer_finish; ///
+private alias c_g_tls_database_lookup_certificates_issued_byFn = extern(C) GList* function(GTlsDatabase* self, GByteArray* issuerRawDn, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_tls_database_lookup_certificates_issued_byFn c_g_tls_database_lookup_certificates_issued_by; ///
+private alias c_g_tls_database_lookup_certificates_issued_by_asyncFn = extern(C) void function(GTlsDatabase* self, GByteArray* issuerRawDn, GTlsInteraction* interaction, GTlsDatabaseLookupFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_tls_database_lookup_certificates_issued_by_asyncFn c_g_tls_database_lookup_certificates_issued_by_async; ///
+private alias c_g_tls_database_lookup_certificates_issued_by_finishFn = extern(C) GList* function(GTlsDatabase* self, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_tls_database_lookup_certificates_issued_by_finishFn c_g_tls_database_lookup_certificates_issued_by_finish; ///
+private alias c_g_tls_database_verify_chainFn = extern(C) GTlsCertificateFlags function(GTlsDatabase* self, GTlsCertificate* chain, const(char)* purpose, GSocketConnectable* identity, GTlsInteraction* interaction, GTlsDatabaseVerifyFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_tls_database_verify_chainFn c_g_tls_database_verify_chain; ///
+private alias c_g_tls_database_verify_chain_asyncFn = extern(C) void function(GTlsDatabase* self, GTlsCertificate* chain, const(char)* purpose, GSocketConnectable* identity, GTlsInteraction* interaction, GTlsDatabaseVerifyFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_tls_database_verify_chain_asyncFn c_g_tls_database_verify_chain_async; ///
+private alias c_g_tls_database_verify_chain_finishFn = extern(C) GTlsCertificateFlags function(GTlsDatabase* self, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_tls_database_verify_chain_finishFn c_g_tls_database_verify_chain_finish; ///
+
+// TlsFileDatabase
+private alias c_g_tls_file_database_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_tls_file_database_get_typeFn c_g_tls_file_database_get_type; ///
+private alias c_g_tls_file_database_newFn = extern(C) GTlsDatabase* function(const(char)* anchors, GError** _err) nothrow;
+__gshared c_g_tls_file_database_newFn c_g_tls_file_database_new; ///
+
+// TlsInteraction
+private alias c_g_tls_interaction_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_tls_interaction_get_typeFn c_g_tls_interaction_get_type; ///
+private alias c_g_tls_interaction_ask_passwordFn = extern(C) GTlsInteractionResult function(GTlsInteraction* interaction, GTlsPassword* password, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_tls_interaction_ask_passwordFn c_g_tls_interaction_ask_password; ///
+private alias c_g_tls_interaction_ask_password_asyncFn = extern(C) void function(GTlsInteraction* interaction, GTlsPassword* password, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_tls_interaction_ask_password_asyncFn c_g_tls_interaction_ask_password_async; ///
+private alias c_g_tls_interaction_ask_password_finishFn = extern(C) GTlsInteractionResult function(GTlsInteraction* interaction, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_tls_interaction_ask_password_finishFn c_g_tls_interaction_ask_password_finish; ///
+private alias c_g_tls_interaction_invoke_ask_passwordFn = extern(C) GTlsInteractionResult function(GTlsInteraction* interaction, GTlsPassword* password, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_tls_interaction_invoke_ask_passwordFn c_g_tls_interaction_invoke_ask_password; ///
+private alias c_g_tls_interaction_invoke_request_certificateFn = extern(C) GTlsInteractionResult function(GTlsInteraction* interaction, GTlsConnection* connection, GTlsCertificateRequestFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_tls_interaction_invoke_request_certificateFn c_g_tls_interaction_invoke_request_certificate; ///
+private alias c_g_tls_interaction_request_certificateFn = extern(C) GTlsInteractionResult function(GTlsInteraction* interaction, GTlsConnection* connection, GTlsCertificateRequestFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_tls_interaction_request_certificateFn c_g_tls_interaction_request_certificate; ///
+private alias c_g_tls_interaction_request_certificate_asyncFn = extern(C) void function(GTlsInteraction* interaction, GTlsConnection* connection, GTlsCertificateRequestFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_tls_interaction_request_certificate_asyncFn c_g_tls_interaction_request_certificate_async; ///
+private alias c_g_tls_interaction_request_certificate_finishFn = extern(C) GTlsInteractionResult function(GTlsInteraction* interaction, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_tls_interaction_request_certificate_finishFn c_g_tls_interaction_request_certificate_finish; ///
+
+// TlsPassword
+private alias c_g_tls_password_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_tls_password_get_typeFn c_g_tls_password_get_type; ///
+private alias c_g_tls_password_newFn = extern(C) GTlsPassword* function(GTlsPasswordFlags flags, const(char)* description) nothrow;
+__gshared c_g_tls_password_newFn c_g_tls_password_new; ///
+private alias c_g_tls_password_get_descriptionFn = extern(C) const(char)* function(GTlsPassword* password) nothrow;
+__gshared c_g_tls_password_get_descriptionFn c_g_tls_password_get_description; ///
+private alias c_g_tls_password_get_flagsFn = extern(C) GTlsPasswordFlags function(GTlsPassword* password) nothrow;
+__gshared c_g_tls_password_get_flagsFn c_g_tls_password_get_flags; ///
+private alias c_g_tls_password_get_valueFn = extern(C) const(ubyte)* function(GTlsPassword* password, size_t* length) nothrow;
+__gshared c_g_tls_password_get_valueFn c_g_tls_password_get_value; ///
+private alias c_g_tls_password_get_warningFn = extern(C) const(char)* function(GTlsPassword* password) nothrow;
+__gshared c_g_tls_password_get_warningFn c_g_tls_password_get_warning; ///
+private alias c_g_tls_password_set_descriptionFn = extern(C) void function(GTlsPassword* password, const(char)* description) nothrow;
+__gshared c_g_tls_password_set_descriptionFn c_g_tls_password_set_description; ///
+private alias c_g_tls_password_set_flagsFn = extern(C) void function(GTlsPassword* password, GTlsPasswordFlags flags) nothrow;
+__gshared c_g_tls_password_set_flagsFn c_g_tls_password_set_flags; ///
+private alias c_g_tls_password_set_valueFn = extern(C) void function(GTlsPassword* password, const(ubyte)* value, ptrdiff_t length) nothrow;
+__gshared c_g_tls_password_set_valueFn c_g_tls_password_set_value; ///
+private alias c_g_tls_password_set_value_fullFn = extern(C) void function(GTlsPassword* password, ubyte* value, ptrdiff_t length, GDestroyNotify destroy) nothrow;
+__gshared c_g_tls_password_set_value_fullFn c_g_tls_password_set_value_full; ///
+private alias c_g_tls_password_set_warningFn = extern(C) void function(GTlsPassword* password, const(char)* warning) nothrow;
+__gshared c_g_tls_password_set_warningFn c_g_tls_password_set_warning; ///
+
+// TlsServerConnection
+private alias c_g_tls_server_connection_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_tls_server_connection_get_typeFn c_g_tls_server_connection_get_type; ///
+private alias c_g_tls_server_connection_newFn = extern(C) GIOStream* function(GIOStream* baseIoStream, GTlsCertificate* certificate, GError** _err) nothrow;
+__gshared c_g_tls_server_connection_newFn c_g_tls_server_connection_new; ///
+
+// UnixConnection
+private alias c_g_unix_connection_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_unix_connection_get_typeFn c_g_unix_connection_get_type; ///
+private alias c_g_unix_connection_receive_credentialsFn = extern(C) GCredentials* function(GUnixConnection* connection, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_unix_connection_receive_credentialsFn c_g_unix_connection_receive_credentials; ///
+private alias c_g_unix_connection_receive_credentials_asyncFn = extern(C) void function(GUnixConnection* connection, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_unix_connection_receive_credentials_asyncFn c_g_unix_connection_receive_credentials_async; ///
+private alias c_g_unix_connection_receive_credentials_finishFn = extern(C) GCredentials* function(GUnixConnection* connection, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_unix_connection_receive_credentials_finishFn c_g_unix_connection_receive_credentials_finish; ///
+private alias c_g_unix_connection_receive_fdFn = extern(C) int function(GUnixConnection* connection, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_unix_connection_receive_fdFn c_g_unix_connection_receive_fd; ///
+private alias c_g_unix_connection_send_credentialsFn = extern(C) gboolean function(GUnixConnection* connection, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_unix_connection_send_credentialsFn c_g_unix_connection_send_credentials; ///
+private alias c_g_unix_connection_send_credentials_asyncFn = extern(C) void function(GUnixConnection* connection, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_unix_connection_send_credentials_asyncFn c_g_unix_connection_send_credentials_async; ///
+private alias c_g_unix_connection_send_credentials_finishFn = extern(C) gboolean function(GUnixConnection* connection, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_unix_connection_send_credentials_finishFn c_g_unix_connection_send_credentials_finish; ///
+private alias c_g_unix_connection_send_fdFn = extern(C) gboolean function(GUnixConnection* connection, int fd, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_unix_connection_send_fdFn c_g_unix_connection_send_fd; ///
+
+// UnixCredentialsMessage
+private alias c_g_unix_credentials_message_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_unix_credentials_message_get_typeFn c_g_unix_credentials_message_get_type; ///
+private alias c_g_unix_credentials_message_newFn = extern(C) GSocketControlMessage* function() nothrow;
+__gshared c_g_unix_credentials_message_newFn c_g_unix_credentials_message_new; ///
+private alias c_g_unix_credentials_message_new_with_credentialsFn = extern(C) GSocketControlMessage* function(GCredentials* credentials) nothrow;
+__gshared c_g_unix_credentials_message_new_with_credentialsFn c_g_unix_credentials_message_new_with_credentials; ///
+private alias c_g_unix_credentials_message_is_supportedFn = extern(C) gboolean function() nothrow;
+__gshared c_g_unix_credentials_message_is_supportedFn c_g_unix_credentials_message_is_supported; ///
+private alias c_g_unix_credentials_message_get_credentialsFn = extern(C) GCredentials* function(GUnixCredentialsMessage* message) nothrow;
+__gshared c_g_unix_credentials_message_get_credentialsFn c_g_unix_credentials_message_get_credentials; ///
+
+// UnixFDList
+private alias c_g_unix_fd_list_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_unix_fd_list_get_typeFn c_g_unix_fd_list_get_type; ///
+private alias c_g_unix_fd_list_newFn = extern(C) GUnixFDList* function() nothrow;
+__gshared c_g_unix_fd_list_newFn c_g_unix_fd_list_new; ///
+private alias c_g_unix_fd_list_new_from_arrayFn = extern(C) GUnixFDList* function(const(int)* fds, int nFds) nothrow;
+__gshared c_g_unix_fd_list_new_from_arrayFn c_g_unix_fd_list_new_from_array; ///
+private alias c_g_unix_fd_list_appendFn = extern(C) int function(GUnixFDList* list, int fd, GError** _err) nothrow;
+__gshared c_g_unix_fd_list_appendFn c_g_unix_fd_list_append; ///
+private alias c_g_unix_fd_list_getFn = extern(C) int function(GUnixFDList* list, int index, GError** _err) nothrow;
+__gshared c_g_unix_fd_list_getFn c_g_unix_fd_list_get; ///
+private alias c_g_unix_fd_list_get_lengthFn = extern(C) int function(GUnixFDList* list) nothrow;
+__gshared c_g_unix_fd_list_get_lengthFn c_g_unix_fd_list_get_length; ///
+private alias c_g_unix_fd_list_peek_fdsFn = extern(C) const(int)* function(GUnixFDList* list, int* length) nothrow;
+__gshared c_g_unix_fd_list_peek_fdsFn c_g_unix_fd_list_peek_fds; ///
+private alias c_g_unix_fd_list_steal_fdsFn = extern(C) int* function(GUnixFDList* list, int* length) nothrow;
+__gshared c_g_unix_fd_list_steal_fdsFn c_g_unix_fd_list_steal_fds; ///
+
+// UnixSocketAddress
+private alias c_g_unix_socket_address_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_unix_socket_address_get_typeFn c_g_unix_socket_address_get_type; ///
+private alias c_g_unix_socket_address_newFn = extern(C) GSocketAddress* function(const(char)* path) nothrow;
+__gshared c_g_unix_socket_address_newFn c_g_unix_socket_address_new; ///
+private alias c_g_unix_socket_address_new_abstractFn = extern(C) GSocketAddress* function(const(char)* path, int pathLen) nothrow;
+__gshared c_g_unix_socket_address_new_abstractFn c_g_unix_socket_address_new_abstract; ///
+private alias c_g_unix_socket_address_new_with_typeFn = extern(C) GSocketAddress* function(const(char)* path, int pathLen, GUnixSocketAddressType type) nothrow;
+__gshared c_g_unix_socket_address_new_with_typeFn c_g_unix_socket_address_new_with_type; ///
+private alias c_g_unix_socket_address_abstract_names_supportedFn = extern(C) gboolean function() nothrow;
+__gshared c_g_unix_socket_address_abstract_names_supportedFn c_g_unix_socket_address_abstract_names_supported; ///
+private alias c_g_unix_socket_address_get_address_typeFn = extern(C) GUnixSocketAddressType function(GUnixSocketAddress* address) nothrow;
+__gshared c_g_unix_socket_address_get_address_typeFn c_g_unix_socket_address_get_address_type; ///
+private alias c_g_unix_socket_address_get_is_abstractFn = extern(C) gboolean function(GUnixSocketAddress* address) nothrow;
+__gshared c_g_unix_socket_address_get_is_abstractFn c_g_unix_socket_address_get_is_abstract; ///
+private alias c_g_unix_socket_address_get_pathFn = extern(C) const(char)* function(GUnixSocketAddress* address) nothrow;
+__gshared c_g_unix_socket_address_get_pathFn c_g_unix_socket_address_get_path; ///
+private alias c_g_unix_socket_address_get_path_lenFn = extern(C) size_t function(GUnixSocketAddress* address) nothrow;
+__gshared c_g_unix_socket_address_get_path_lenFn c_g_unix_socket_address_get_path_len; ///
+
+// Vfs
+private alias c_g_vfs_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_vfs_get_typeFn c_g_vfs_get_type; ///
+private alias c_g_vfs_get_defaultFn = extern(C) GVfs* function() nothrow;
+__gshared c_g_vfs_get_defaultFn c_g_vfs_get_default; ///
+private alias c_g_vfs_get_localFn = extern(C) GVfs* function() nothrow;
+__gshared c_g_vfs_get_localFn c_g_vfs_get_local; ///
+private alias c_g_vfs_get_file_for_pathFn = extern(C) GFile* function(GVfs* vfs, const(char)* path) nothrow;
+__gshared c_g_vfs_get_file_for_pathFn c_g_vfs_get_file_for_path; ///
+private alias c_g_vfs_get_file_for_uriFn = extern(C) GFile* function(GVfs* vfs, const(char)* uri) nothrow;
+__gshared c_g_vfs_get_file_for_uriFn c_g_vfs_get_file_for_uri; ///
+private alias c_g_vfs_get_supported_uri_schemesFn = extern(C) const(char*)* function(GVfs* vfs) nothrow;
+__gshared c_g_vfs_get_supported_uri_schemesFn c_g_vfs_get_supported_uri_schemes; ///
+private alias c_g_vfs_is_activeFn = extern(C) gboolean function(GVfs* vfs) nothrow;
+__gshared c_g_vfs_is_activeFn c_g_vfs_is_active; ///
+private alias c_g_vfs_parse_nameFn = extern(C) GFile* function(GVfs* vfs, const(char)* parseName) nothrow;
+__gshared c_g_vfs_parse_nameFn c_g_vfs_parse_name; ///
+private alias c_g_vfs_register_uri_schemeFn = extern(C) gboolean function(GVfs* vfs, const(char)* scheme, GVfsFileLookupFunc uriFunc, void* uriData, GDestroyNotify uriDestroy, GVfsFileLookupFunc parseNameFunc, void* parseNameData, GDestroyNotify parseNameDestroy) nothrow;
+__gshared c_g_vfs_register_uri_schemeFn c_g_vfs_register_uri_scheme; ///
+private alias c_g_vfs_unregister_uri_schemeFn = extern(C) gboolean function(GVfs* vfs, const(char)* scheme) nothrow;
+__gshared c_g_vfs_unregister_uri_schemeFn c_g_vfs_unregister_uri_scheme; ///
+
+// Volume
+private alias c_g_volume_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_volume_get_typeFn c_g_volume_get_type; ///
+private alias c_g_volume_can_ejectFn = extern(C) gboolean function(GVolume* volume) nothrow;
+__gshared c_g_volume_can_ejectFn c_g_volume_can_eject; ///
+private alias c_g_volume_can_mountFn = extern(C) gboolean function(GVolume* volume) nothrow;
+__gshared c_g_volume_can_mountFn c_g_volume_can_mount; ///
+private alias c_g_volume_ejectFn = extern(C) void function(GVolume* volume, GMountUnmountFlags flags, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_volume_ejectFn c_g_volume_eject; ///
+private alias c_g_volume_eject_finishFn = extern(C) gboolean function(GVolume* volume, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_volume_eject_finishFn c_g_volume_eject_finish; ///
+private alias c_g_volume_eject_with_operationFn = extern(C) void function(GVolume* volume, GMountUnmountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_volume_eject_with_operationFn c_g_volume_eject_with_operation; ///
+private alias c_g_volume_eject_with_operation_finishFn = extern(C) gboolean function(GVolume* volume, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_volume_eject_with_operation_finishFn c_g_volume_eject_with_operation_finish; ///
+private alias c_g_volume_enumerate_identifiersFn = extern(C) char** function(GVolume* volume) nothrow;
+__gshared c_g_volume_enumerate_identifiersFn c_g_volume_enumerate_identifiers; ///
+private alias c_g_volume_get_activation_rootFn = extern(C) GFile* function(GVolume* volume) nothrow;
+__gshared c_g_volume_get_activation_rootFn c_g_volume_get_activation_root; ///
+private alias c_g_volume_get_driveFn = extern(C) GDrive* function(GVolume* volume) nothrow;
+__gshared c_g_volume_get_driveFn c_g_volume_get_drive; ///
+private alias c_g_volume_get_iconFn = extern(C) GIcon* function(GVolume* volume) nothrow;
+__gshared c_g_volume_get_iconFn c_g_volume_get_icon; ///
+private alias c_g_volume_get_identifierFn = extern(C) char* function(GVolume* volume, const(char)* kind) nothrow;
+__gshared c_g_volume_get_identifierFn c_g_volume_get_identifier; ///
+private alias c_g_volume_get_mountFn = extern(C) GMount* function(GVolume* volume) nothrow;
+__gshared c_g_volume_get_mountFn c_g_volume_get_mount; ///
+private alias c_g_volume_get_nameFn = extern(C) char* function(GVolume* volume) nothrow;
+__gshared c_g_volume_get_nameFn c_g_volume_get_name; ///
+private alias c_g_volume_get_sort_keyFn = extern(C) const(char)* function(GVolume* volume) nothrow;
+__gshared c_g_volume_get_sort_keyFn c_g_volume_get_sort_key; ///
+private alias c_g_volume_get_symbolic_iconFn = extern(C) GIcon* function(GVolume* volume) nothrow;
+__gshared c_g_volume_get_symbolic_iconFn c_g_volume_get_symbolic_icon; ///
+private alias c_g_volume_get_uuidFn = extern(C) char* function(GVolume* volume) nothrow;
+__gshared c_g_volume_get_uuidFn c_g_volume_get_uuid; ///
+private alias c_g_volume_mountFn = extern(C) void function(GVolume* volume, GMountMountFlags flags, GMountOperation* mountOperation, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_volume_mountFn c_g_volume_mount; ///
+private alias c_g_volume_mount_finishFn = extern(C) gboolean function(GVolume* volume, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_g_volume_mount_finishFn c_g_volume_mount_finish; ///
+private alias c_g_volume_should_automountFn = extern(C) gboolean function(GVolume* volume) nothrow;
+__gshared c_g_volume_should_automountFn c_g_volume_should_automount; ///
+
+// VolumeMonitor
+private alias c_g_volume_monitor_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_volume_monitor_get_typeFn c_g_volume_monitor_get_type; ///
+private alias c_g_volume_monitor_adopt_orphan_mountFn = extern(C) GVolume* function(GMount* mount) nothrow;
+__gshared c_g_volume_monitor_adopt_orphan_mountFn c_g_volume_monitor_adopt_orphan_mount; ///
+private alias c_g_volume_monitor_getFn = extern(C) GVolumeMonitor* function() nothrow;
+__gshared c_g_volume_monitor_getFn c_g_volume_monitor_get; ///
+private alias c_g_volume_monitor_get_connected_drivesFn = extern(C) GList* function(GVolumeMonitor* volumeMonitor) nothrow;
+__gshared c_g_volume_monitor_get_connected_drivesFn c_g_volume_monitor_get_connected_drives; ///
+private alias c_g_volume_monitor_get_mount_for_uuidFn = extern(C) GMount* function(GVolumeMonitor* volumeMonitor, const(char)* uuid) nothrow;
+__gshared c_g_volume_monitor_get_mount_for_uuidFn c_g_volume_monitor_get_mount_for_uuid; ///
+private alias c_g_volume_monitor_get_mountsFn = extern(C) GList* function(GVolumeMonitor* volumeMonitor) nothrow;
+__gshared c_g_volume_monitor_get_mountsFn c_g_volume_monitor_get_mounts; ///
+private alias c_g_volume_monitor_get_volume_for_uuidFn = extern(C) GVolume* function(GVolumeMonitor* volumeMonitor, const(char)* uuid) nothrow;
+__gshared c_g_volume_monitor_get_volume_for_uuidFn c_g_volume_monitor_get_volume_for_uuid; ///
+private alias c_g_volume_monitor_get_volumesFn = extern(C) GList* function(GVolumeMonitor* volumeMonitor) nothrow;
+__gshared c_g_volume_monitor_get_volumesFn c_g_volume_monitor_get_volumes; ///
+
+// ZlibCompressor
+private alias c_g_zlib_compressor_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_zlib_compressor_get_typeFn c_g_zlib_compressor_get_type; ///
+private alias c_g_zlib_compressor_newFn = extern(C) GZlibCompressor* function(GZlibCompressorFormat format, int level) nothrow;
+__gshared c_g_zlib_compressor_newFn c_g_zlib_compressor_new; ///
+private alias c_g_zlib_compressor_get_file_infoFn = extern(C) GFileInfo* function(GZlibCompressor* compressor) nothrow;
+__gshared c_g_zlib_compressor_get_file_infoFn c_g_zlib_compressor_get_file_info; ///
+private alias c_g_zlib_compressor_get_osFn = extern(C) int function(GZlibCompressor* compressor) nothrow;
+__gshared c_g_zlib_compressor_get_osFn c_g_zlib_compressor_get_os; ///
+private alias c_g_zlib_compressor_set_file_infoFn = extern(C) void function(GZlibCompressor* compressor, GFileInfo* fileInfo) nothrow;
+__gshared c_g_zlib_compressor_set_file_infoFn c_g_zlib_compressor_set_file_info; ///
+private alias c_g_zlib_compressor_set_osFn = extern(C) void function(GZlibCompressor* compressor, int os) nothrow;
+__gshared c_g_zlib_compressor_set_osFn c_g_zlib_compressor_set_os; ///
+
+// ZlibDecompressor
+private alias c_g_zlib_decompressor_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_zlib_decompressor_get_typeFn c_g_zlib_decompressor_get_type; ///
+private alias c_g_zlib_decompressor_newFn = extern(C) GZlibDecompressor* function(GZlibCompressorFormat format) nothrow;
+__gshared c_g_zlib_decompressor_newFn c_g_zlib_decompressor_new; ///
+private alias c_g_zlib_decompressor_get_file_infoFn = extern(C) GFileInfo* function(GZlibDecompressor* decompressor) nothrow;
+__gshared c_g_zlib_decompressor_get_file_infoFn c_g_zlib_decompressor_get_file_info; ///
+
+// global
+private alias c_g_bus_getFn = extern(C) void function(GBusType busType, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_bus_getFn c_g_bus_get; ///
+private alias c_g_bus_get_finishFn = extern(C) GDBusConnection* function(GAsyncResult* res, GError** _err) nothrow;
+__gshared c_g_bus_get_finishFn c_g_bus_get_finish; ///
+private alias c_g_bus_get_syncFn = extern(C) GDBusConnection* function(GBusType busType, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_bus_get_syncFn c_g_bus_get_sync; ///
+private alias c_g_bus_own_nameFn = extern(C) uint function(GBusType busType, const(char)* name, GBusNameOwnerFlags flags, GBusAcquiredCallback busAcquiredHandler, GBusNameAcquiredCallback nameAcquiredHandler, GBusNameLostCallback nameLostHandler, void* userData, GDestroyNotify userDataFreeFunc) nothrow;
+__gshared c_g_bus_own_nameFn c_g_bus_own_name; ///
+private alias c_g_bus_own_name_on_connectionFn = extern(C) uint function(GDBusConnection* connection, const(char)* name, GBusNameOwnerFlags flags, GBusNameAcquiredCallback nameAcquiredHandler, GBusNameLostCallback nameLostHandler, void* userData, GDestroyNotify userDataFreeFunc) nothrow;
+__gshared c_g_bus_own_name_on_connectionFn c_g_bus_own_name_on_connection; ///
+private alias c_g_bus_own_name_on_connection_with_closuresFn = extern(C) uint function(GDBusConnection* connection, const(char)* name, GBusNameOwnerFlags flags, GClosure* nameAcquiredClosure, GClosure* nameLostClosure) nothrow;
+__gshared c_g_bus_own_name_on_connection_with_closuresFn c_g_bus_own_name_on_connection_with_closures; ///
+private alias c_g_bus_own_name_with_closuresFn = extern(C) uint function(GBusType busType, const(char)* name, GBusNameOwnerFlags flags, GClosure* busAcquiredClosure, GClosure* nameAcquiredClosure, GClosure* nameLostClosure) nothrow;
+__gshared c_g_bus_own_name_with_closuresFn c_g_bus_own_name_with_closures; ///
+private alias c_g_bus_unown_nameFn = extern(C) void function(uint ownerId) nothrow;
+__gshared c_g_bus_unown_nameFn c_g_bus_unown_name; ///
+private alias c_g_bus_unwatch_nameFn = extern(C) void function(uint watcherId) nothrow;
+__gshared c_g_bus_unwatch_nameFn c_g_bus_unwatch_name; ///
+private alias c_g_bus_watch_nameFn = extern(C) uint function(GBusType busType, const(char)* name, GBusNameWatcherFlags flags, GBusNameAppearedCallback nameAppearedHandler, GBusNameVanishedCallback nameVanishedHandler, void* userData, GDestroyNotify userDataFreeFunc) nothrow;
+__gshared c_g_bus_watch_nameFn c_g_bus_watch_name; ///
+private alias c_g_bus_watch_name_on_connectionFn = extern(C) uint function(GDBusConnection* connection, const(char)* name, GBusNameWatcherFlags flags, GBusNameAppearedCallback nameAppearedHandler, GBusNameVanishedCallback nameVanishedHandler, void* userData, GDestroyNotify userDataFreeFunc) nothrow;
+__gshared c_g_bus_watch_name_on_connectionFn c_g_bus_watch_name_on_connection; ///
+private alias c_g_bus_watch_name_on_connection_with_closuresFn = extern(C) uint function(GDBusConnection* connection, const(char)* name, GBusNameWatcherFlags flags, GClosure* nameAppearedClosure, GClosure* nameVanishedClosure) nothrow;
+__gshared c_g_bus_watch_name_on_connection_with_closuresFn c_g_bus_watch_name_on_connection_with_closures; ///
+private alias c_g_bus_watch_name_with_closuresFn = extern(C) uint function(GBusType busType, const(char)* name, GBusNameWatcherFlags flags, GClosure* nameAppearedClosure, GClosure* nameVanishedClosure) nothrow;
+__gshared c_g_bus_watch_name_with_closuresFn c_g_bus_watch_name_with_closures; ///
+private alias c_g_content_type_can_be_executableFn = extern(C) gboolean function(const(char)* type) nothrow;
+__gshared c_g_content_type_can_be_executableFn c_g_content_type_can_be_executable; ///
+private alias c_g_content_type_equalsFn = extern(C) gboolean function(const(char)* type1, const(char)* type2) nothrow;
+__gshared c_g_content_type_equalsFn c_g_content_type_equals; ///
+private alias c_g_content_type_from_mime_typeFn = extern(C) char* function(const(char)* mimeType) nothrow;
+__gshared c_g_content_type_from_mime_typeFn c_g_content_type_from_mime_type; ///
+private alias c_g_content_type_get_descriptionFn = extern(C) char* function(const(char)* type) nothrow;
+__gshared c_g_content_type_get_descriptionFn c_g_content_type_get_description; ///
+private alias c_g_content_type_get_generic_icon_nameFn = extern(C) char* function(const(char)* type) nothrow;
+__gshared c_g_content_type_get_generic_icon_nameFn c_g_content_type_get_generic_icon_name; ///
+private alias c_g_content_type_get_iconFn = extern(C) GIcon* function(const(char)* type) nothrow;
+__gshared c_g_content_type_get_iconFn c_g_content_type_get_icon; ///
+private alias c_g_content_type_get_mime_dirsFn = extern(C) const(char*)* function() nothrow;
+__gshared c_g_content_type_get_mime_dirsFn c_g_content_type_get_mime_dirs; ///
+private alias c_g_content_type_get_mime_typeFn = extern(C) char* function(const(char)* type) nothrow;
+__gshared c_g_content_type_get_mime_typeFn c_g_content_type_get_mime_type; ///
+private alias c_g_content_type_get_symbolic_iconFn = extern(C) GIcon* function(const(char)* type) nothrow;
+__gshared c_g_content_type_get_symbolic_iconFn c_g_content_type_get_symbolic_icon; ///
+private alias c_g_content_type_guessFn = extern(C) char* function(const(char)* filename, const(ubyte)* data, size_t dataSize, gboolean* resultUncertain) nothrow;
+__gshared c_g_content_type_guessFn c_g_content_type_guess; ///
+private alias c_g_content_type_guess_for_treeFn = extern(C) char** function(GFile* root) nothrow;
+__gshared c_g_content_type_guess_for_treeFn c_g_content_type_guess_for_tree; ///
+private alias c_g_content_type_is_aFn = extern(C) gboolean function(const(char)* type, const(char)* supertype) nothrow;
+__gshared c_g_content_type_is_aFn c_g_content_type_is_a; ///
+private alias c_g_content_type_is_mime_typeFn = extern(C) gboolean function(const(char)* type, const(char)* mimeType) nothrow;
+__gshared c_g_content_type_is_mime_typeFn c_g_content_type_is_mime_type; ///
+private alias c_g_content_type_is_unknownFn = extern(C) gboolean function(const(char)* type) nothrow;
+__gshared c_g_content_type_is_unknownFn c_g_content_type_is_unknown; ///
+private alias c_g_content_type_set_mime_dirsFn = extern(C) void function(const(char*)* dirs) nothrow;
+__gshared c_g_content_type_set_mime_dirsFn c_g_content_type_set_mime_dirs; ///
+private alias c_g_content_types_get_registeredFn = extern(C) GList* function() nothrow;
+__gshared c_g_content_types_get_registeredFn c_g_content_types_get_registered; ///
+private alias c_g_dbus_address_escape_valueFn = extern(C) char* function(const(char)* string_) nothrow;
+__gshared c_g_dbus_address_escape_valueFn c_g_dbus_address_escape_value; ///
+private alias c_g_dbus_address_get_for_bus_syncFn = extern(C) char* function(GBusType busType, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_dbus_address_get_for_bus_syncFn c_g_dbus_address_get_for_bus_sync; ///
+private alias c_g_dbus_address_get_streamFn = extern(C) void function(const(char)* address, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_g_dbus_address_get_streamFn c_g_dbus_address_get_stream; ///
+private alias c_g_dbus_address_get_stream_finishFn = extern(C) GIOStream* function(GAsyncResult* res, char** outGuid, GError** _err) nothrow;
+__gshared c_g_dbus_address_get_stream_finishFn c_g_dbus_address_get_stream_finish; ///
+private alias c_g_dbus_address_get_stream_syncFn = extern(C) GIOStream* function(const(char)* address, char** outGuid, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_dbus_address_get_stream_syncFn c_g_dbus_address_get_stream_sync; ///
+private alias c_g_dbus_escape_object_pathFn = extern(C) char* function(const(char)* s) nothrow;
+__gshared c_g_dbus_escape_object_pathFn c_g_dbus_escape_object_path; ///
+private alias c_g_dbus_escape_object_path_bytestringFn = extern(C) char* function(const(ubyte)* bytes) nothrow;
+__gshared c_g_dbus_escape_object_path_bytestringFn c_g_dbus_escape_object_path_bytestring; ///
+private alias c_g_dbus_generate_guidFn = extern(C) char* function() nothrow;
+__gshared c_g_dbus_generate_guidFn c_g_dbus_generate_guid; ///
+private alias c_g_dbus_gvalue_to_gvariantFn = extern(C) GVariant* function(const(GValue)* gvalue, const(GVariantType)* type) nothrow;
+__gshared c_g_dbus_gvalue_to_gvariantFn c_g_dbus_gvalue_to_gvariant; ///
+private alias c_g_dbus_gvariant_to_gvalueFn = extern(C) void function(GVariant* value, GValue* outGvalue) nothrow;
+__gshared c_g_dbus_gvariant_to_gvalueFn c_g_dbus_gvariant_to_gvalue; ///
+private alias c_g_dbus_is_addressFn = extern(C) gboolean function(const(char)* string_) nothrow;
+__gshared c_g_dbus_is_addressFn c_g_dbus_is_address; ///
+private alias c_g_dbus_is_error_nameFn = extern(C) gboolean function(const(char)* string_) nothrow;
+__gshared c_g_dbus_is_error_nameFn c_g_dbus_is_error_name; ///
+private alias c_g_dbus_is_guidFn = extern(C) gboolean function(const(char)* string_) nothrow;
+__gshared c_g_dbus_is_guidFn c_g_dbus_is_guid; ///
+private alias c_g_dbus_is_interface_nameFn = extern(C) gboolean function(const(char)* string_) nothrow;
+__gshared c_g_dbus_is_interface_nameFn c_g_dbus_is_interface_name; ///
+private alias c_g_dbus_is_member_nameFn = extern(C) gboolean function(const(char)* string_) nothrow;
+__gshared c_g_dbus_is_member_nameFn c_g_dbus_is_member_name; ///
+private alias c_g_dbus_is_nameFn = extern(C) gboolean function(const(char)* string_) nothrow;
+__gshared c_g_dbus_is_nameFn c_g_dbus_is_name; ///
+private alias c_g_dbus_is_supported_addressFn = extern(C) gboolean function(const(char)* string_, GError** _err) nothrow;
+__gshared c_g_dbus_is_supported_addressFn c_g_dbus_is_supported_address; ///
+private alias c_g_dbus_is_unique_nameFn = extern(C) gboolean function(const(char)* string_) nothrow;
+__gshared c_g_dbus_is_unique_nameFn c_g_dbus_is_unique_name; ///
+private alias c_g_dbus_unescape_object_pathFn = extern(C) ubyte* function(const(char)* s) nothrow;
+__gshared c_g_dbus_unescape_object_pathFn c_g_dbus_unescape_object_path; ///
+private alias c_g_io_error_from_errnoFn = extern(C) GIOErrorEnum function(int errNo) nothrow;
+__gshared c_g_io_error_from_errnoFn c_g_io_error_from_errno; ///
+private alias c_g_io_error_from_file_errorFn = extern(C) GIOErrorEnum function(GFileError fileError) nothrow;
+__gshared c_g_io_error_from_file_errorFn c_g_io_error_from_file_error; ///
+private alias c_g_io_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_io_error_quarkFn c_g_io_error_quark; ///
+private alias c_g_io_modules_load_all_in_directoryFn = extern(C) GList* function(const(char)* dirname) nothrow;
+__gshared c_g_io_modules_load_all_in_directoryFn c_g_io_modules_load_all_in_directory; ///
+private alias c_g_io_modules_load_all_in_directory_with_scopeFn = extern(C) GList* function(const(char)* dirname, GIOModuleScope* scope_) nothrow;
+__gshared c_g_io_modules_load_all_in_directory_with_scopeFn c_g_io_modules_load_all_in_directory_with_scope; ///
+private alias c_g_io_modules_scan_all_in_directoryFn = extern(C) void function(const(char)* dirname) nothrow;
+__gshared c_g_io_modules_scan_all_in_directoryFn c_g_io_modules_scan_all_in_directory; ///
+private alias c_g_io_modules_scan_all_in_directory_with_scopeFn = extern(C) void function(const(char)* dirname, GIOModuleScope* scope_) nothrow;
+__gshared c_g_io_modules_scan_all_in_directory_with_scopeFn c_g_io_modules_scan_all_in_directory_with_scope; ///
+private alias c_g_io_scheduler_cancel_all_jobsFn = extern(C) void function() nothrow;
+__gshared c_g_io_scheduler_cancel_all_jobsFn c_g_io_scheduler_cancel_all_jobs; ///
+private alias c_g_io_scheduler_push_jobFn = extern(C) void function(GIOSchedulerJobFunc jobFunc, void* userData, GDestroyNotify notify, int ioPriority, GCancellable* cancellable) nothrow;
+__gshared c_g_io_scheduler_push_jobFn c_g_io_scheduler_push_job; ///
+private alias c_g_keyfile_settings_backend_newFn = extern(C) GSettingsBackend* function(const(char)* filename, const(char)* rootPath, const(char)* rootGroup) nothrow;
+__gshared c_g_keyfile_settings_backend_newFn c_g_keyfile_settings_backend_new; ///
+private alias c_g_memory_settings_backend_newFn = extern(C) GSettingsBackend* function() nothrow;
+__gshared c_g_memory_settings_backend_newFn c_g_memory_settings_backend_new; ///
+private alias c_g_networking_initFn = extern(C) void function() nothrow;
+__gshared c_g_networking_initFn c_g_networking_init; ///
+private alias c_g_null_settings_backend_newFn = extern(C) GSettingsBackend* function() nothrow;
+__gshared c_g_null_settings_backend_newFn c_g_null_settings_backend_new; ///
+private alias c_g_pollable_source_newFn = extern(C) GSource* function(GObject* pollableStream) nothrow;
+__gshared c_g_pollable_source_newFn c_g_pollable_source_new; ///
+private alias c_g_pollable_source_new_fullFn = extern(C) GSource* function(GObject* pollableStream, GSource* childSource, GCancellable* cancellable) nothrow;
+__gshared c_g_pollable_source_new_fullFn c_g_pollable_source_new_full; ///
+private alias c_g_pollable_stream_readFn = extern(C) ptrdiff_t function(GInputStream* stream, void* buffer, size_t count, gboolean blocking, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_pollable_stream_readFn c_g_pollable_stream_read; ///
+private alias c_g_pollable_stream_writeFn = extern(C) ptrdiff_t function(GOutputStream* stream, void* buffer, size_t count, gboolean blocking, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_pollable_stream_writeFn c_g_pollable_stream_write; ///
+private alias c_g_pollable_stream_write_allFn = extern(C) gboolean function(GOutputStream* stream, void* buffer, size_t count, gboolean blocking, size_t* bytesWritten, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_g_pollable_stream_write_allFn c_g_pollable_stream_write_all; ///
+private alias c_g_resources_enumerate_childrenFn = extern(C) char** function(const(char)* path, GResourceLookupFlags lookupFlags, GError** _err) nothrow;
+__gshared c_g_resources_enumerate_childrenFn c_g_resources_enumerate_children; ///
+private alias c_g_resources_get_infoFn = extern(C) gboolean function(const(char)* path, GResourceLookupFlags lookupFlags, size_t* size, uint* flags, GError** _err) nothrow;
+__gshared c_g_resources_get_infoFn c_g_resources_get_info; ///
+private alias c_g_resources_has_childrenFn = extern(C) gboolean function(const(char)* path) nothrow;
+__gshared c_g_resources_has_childrenFn c_g_resources_has_children; ///
+private alias c_g_resources_lookup_dataFn = extern(C) GBytes* function(const(char)* path, GResourceLookupFlags lookupFlags, GError** _err) nothrow;
+__gshared c_g_resources_lookup_dataFn c_g_resources_lookup_data; ///
+private alias c_g_resources_open_streamFn = extern(C) GInputStream* function(const(char)* path, GResourceLookupFlags lookupFlags, GError** _err) nothrow;
+__gshared c_g_resources_open_streamFn c_g_resources_open_stream; ///
+private alias c_g_resources_registerFn = extern(C) void function(GResource* resource) nothrow;
+__gshared c_g_resources_registerFn c_g_resources_register; ///
+private alias c_g_resources_unregisterFn = extern(C) void function(GResource* resource) nothrow;
+__gshared c_g_resources_unregisterFn c_g_resources_unregister; ///
+private alias c_g_simple_async_report_error_in_idleFn = extern(C) void function(GObject* object, GAsyncReadyCallback callback, void* userData, GQuark domain, int code, const(char)* format,  ...) nothrow;
+__gshared c_g_simple_async_report_error_in_idleFn c_g_simple_async_report_error_in_idle; ///
+private alias c_g_simple_async_report_gerror_in_idleFn = extern(C) void function(GObject* object, GAsyncReadyCallback callback, void* userData, const(GError)* error) nothrow;
+__gshared c_g_simple_async_report_gerror_in_idleFn c_g_simple_async_report_gerror_in_idle; ///
+private alias c_g_simple_async_report_take_gerror_in_idleFn = extern(C) void function(GObject* object, GAsyncReadyCallback callback, void* userData, GError* error) nothrow;
+__gshared c_g_simple_async_report_take_gerror_in_idleFn c_g_simple_async_report_take_gerror_in_idle; ///
+
+// DBusError
+private alias c_g_dbus_error_encode_gerrorFn = extern(C) char* function(const(GError)* error) nothrow;
+__gshared c_g_dbus_error_encode_gerrorFn c_g_dbus_error_encode_gerror; ///
+private alias c_g_dbus_error_get_remote_errorFn = extern(C) char* function(const(GError)* error) nothrow;
+__gshared c_g_dbus_error_get_remote_errorFn c_g_dbus_error_get_remote_error; ///
+private alias c_g_dbus_error_is_remote_errorFn = extern(C) gboolean function(const(GError)* error) nothrow;
+__gshared c_g_dbus_error_is_remote_errorFn c_g_dbus_error_is_remote_error; ///
+private alias c_g_dbus_error_new_for_dbus_errorFn = extern(C) GError* function(const(char)* dbusErrorName, const(char)* dbusErrorMessage) nothrow;
+__gshared c_g_dbus_error_new_for_dbus_errorFn c_g_dbus_error_new_for_dbus_error; ///
+private alias c_g_dbus_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_dbus_error_quarkFn c_g_dbus_error_quark; ///
+private alias c_g_dbus_error_register_errorFn = extern(C) gboolean function(GQuark errorDomain, int errorCode, const(char)* dbusErrorName) nothrow;
+__gshared c_g_dbus_error_register_errorFn c_g_dbus_error_register_error; ///
+private alias c_g_dbus_error_register_error_domainFn = extern(C) void function(const(char)* errorDomainQuarkName, size_t* quarkVolatile, const(GDBusErrorEntry)* entries, uint numEntries) nothrow;
+__gshared c_g_dbus_error_register_error_domainFn c_g_dbus_error_register_error_domain; ///
+private alias c_g_dbus_error_set_dbus_errorFn = extern(C) void function(GError** error, const(char)* dbusErrorName, const(char)* dbusErrorMessage, const(char)* format,  ...) nothrow;
+__gshared c_g_dbus_error_set_dbus_errorFn c_g_dbus_error_set_dbus_error; ///
+private alias c_g_dbus_error_set_dbus_error_valistFn = extern(C) void function(GError** error, const(char)* dbusErrorName, const(char)* dbusErrorMessage, const(char)* format, void* varArgs) nothrow;
+__gshared c_g_dbus_error_set_dbus_error_valistFn c_g_dbus_error_set_dbus_error_valist; ///
+private alias c_g_dbus_error_strip_remote_errorFn = extern(C) gboolean function(GError* error) nothrow;
+__gshared c_g_dbus_error_strip_remote_errorFn c_g_dbus_error_strip_remote_error; ///
+private alias c_g_dbus_error_unregister_errorFn = extern(C) gboolean function(GQuark errorDomain, int errorCode, const(char)* dbusErrorName) nothrow;
+__gshared c_g_dbus_error_unregister_errorFn c_g_dbus_error_unregister_error; ///
+
+// ResolverError
+private alias c_g_resolver_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_resolver_error_quarkFn c_g_resolver_error_quark; ///
+
+// ResourceError
+private alias c_g_resource_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_resource_error_quarkFn c_g_resource_error_quark; ///
+
+// TlsChannelBindingError
+private alias c_g_tls_channel_binding_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_tls_channel_binding_error_quarkFn c_g_tls_channel_binding_error_quark; ///
+
+// TlsError
+private alias c_g_tls_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_tls_error_quarkFn c_g_tls_error_quark; ///
 
 // Action
 

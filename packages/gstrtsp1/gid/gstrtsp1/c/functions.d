@@ -11,184 +11,333 @@ public import gid.gstsdp1.c.types;
 
 private immutable LIBS = ["gstrtsp-1.0_0"];
 
-__gshared extern(C) nothrow
-{
-  // RTSPAuthCredential
-  GType function() c_gst_rtsp_auth_credential_get_type; ///
+// RTSPAuthCredential
+private alias c_gst_rtsp_auth_credential_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_rtsp_auth_credential_get_typeFn c_gst_rtsp_auth_credential_get_type; ///
 
-  // RTSPAuthParam
-  GType function() c_gst_rtsp_auth_param_get_type; ///
-  GstRTSPAuthParam* function(GstRTSPAuthParam* param) c_gst_rtsp_auth_param_copy; ///
-  void function(GstRTSPAuthParam* param) c_gst_rtsp_auth_param_free; ///
+// RTSPAuthParam
+private alias c_gst_rtsp_auth_param_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_rtsp_auth_param_get_typeFn c_gst_rtsp_auth_param_get_type; ///
+private alias c_gst_rtsp_auth_param_copyFn = extern(C) GstRTSPAuthParam* function(GstRTSPAuthParam* param) nothrow;
+__gshared c_gst_rtsp_auth_param_copyFn c_gst_rtsp_auth_param_copy; ///
+private alias c_gst_rtsp_auth_param_freeFn = extern(C) void function(GstRTSPAuthParam* param) nothrow;
+__gshared c_gst_rtsp_auth_param_freeFn c_gst_rtsp_auth_param_free; ///
 
-  // RTSPConnection
-  void function(GstRTSPConnection* conn, const(char)* key, const(char)* value) c_gst_rtsp_connection_add_extra_http_request_header; ///
-  void function(GstRTSPConnection* conn) c_gst_rtsp_connection_clear_auth_params; ///
-  GstRTSPResult function(GstRTSPConnection* conn) c_gst_rtsp_connection_close; ///
-  GstRTSPResult function(GstRTSPConnection* conn, GTimeVal* timeout) c_gst_rtsp_connection_connect; ///
-  GstRTSPResult function(GstRTSPConnection* conn, long timeout) c_gst_rtsp_connection_connect_usec; ///
-  GstRTSPResult function(GstRTSPConnection* conn, GTimeVal* timeout, GstRTSPMessage* response) c_gst_rtsp_connection_connect_with_response; ///
-  GstRTSPResult function(GstRTSPConnection* conn, long timeout, GstRTSPMessage* response) c_gst_rtsp_connection_connect_with_response_usec; ///
-  GstRTSPResult function(GstRTSPConnection* conn, GstRTSPConnection* conn2) c_gst_rtsp_connection_do_tunnel; ///
-  GstRTSPResult function(GstRTSPConnection* conn, gboolean flush) c_gst_rtsp_connection_flush; ///
-  GstRTSPResult function(GstRTSPConnection* conn) c_gst_rtsp_connection_free; ///
-  gboolean function(const(GstRTSPConnection)* conn) c_gst_rtsp_connection_get_ignore_x_server_reply; ///
-  const(char)* function(const(GstRTSPConnection)* conn) c_gst_rtsp_connection_get_ip; ///
-  GSocket* function(const(GstRTSPConnection)* conn) c_gst_rtsp_connection_get_read_socket; ///
-  gboolean function(GstRTSPConnection* conn) c_gst_rtsp_connection_get_remember_session_id; ///
-  GTlsConnection* function(GstRTSPConnection* conn, GError** _err) c_gst_rtsp_connection_get_tls; ///
-  GTlsDatabase* function(GstRTSPConnection* conn) c_gst_rtsp_connection_get_tls_database; ///
-  GTlsInteraction* function(GstRTSPConnection* conn) c_gst_rtsp_connection_get_tls_interaction; ///
-  GTlsCertificateFlags function(GstRTSPConnection* conn) c_gst_rtsp_connection_get_tls_validation_flags; ///
-  const(char)* function(const(GstRTSPConnection)* conn) c_gst_rtsp_connection_get_tunnelid; ///
-  GstRTSPUrl* function(const(GstRTSPConnection)* conn) c_gst_rtsp_connection_get_url; ///
-  GSocket* function(const(GstRTSPConnection)* conn) c_gst_rtsp_connection_get_write_socket; ///
-  gboolean function(const(GstRTSPConnection)* conn) c_gst_rtsp_connection_is_tunneled; ///
-  GstRTSPResult function(GstRTSPConnection* conn, GTimeVal* timeout) c_gst_rtsp_connection_next_timeout; ///
-  long function(GstRTSPConnection* conn) c_gst_rtsp_connection_next_timeout_usec; ///
-  GstRTSPResult function(GstRTSPConnection* conn, GstRTSPEvent events, GstRTSPEvent* revents, GTimeVal* timeout) c_gst_rtsp_connection_poll; ///
-  GstRTSPResult function(GstRTSPConnection* conn, GstRTSPEvent events, GstRTSPEvent* revents, long timeout) c_gst_rtsp_connection_poll_usec; ///
-  GstRTSPResult function(GstRTSPConnection* conn, ubyte* data, uint size, GTimeVal* timeout) c_gst_rtsp_connection_read; ///
-  GstRTSPResult function(GstRTSPConnection* conn, ubyte* data, uint size, long timeout) c_gst_rtsp_connection_read_usec; ///
-  GstRTSPResult function(GstRTSPConnection* conn, GstRTSPMessage* message, GTimeVal* timeout) c_gst_rtsp_connection_receive; ///
-  GstRTSPResult function(GstRTSPConnection* conn, GstRTSPMessage* message, long timeout) c_gst_rtsp_connection_receive_usec; ///
-  GstRTSPResult function(GstRTSPConnection* conn) c_gst_rtsp_connection_reset_timeout; ///
-  GstRTSPResult function(GstRTSPConnection* conn, GstRTSPMessage* message, GTimeVal* timeout) c_gst_rtsp_connection_send; ///
-  GstRTSPResult function(GstRTSPConnection* conn, GstRTSPMessage* messages, uint nMessages, GTimeVal* timeout) c_gst_rtsp_connection_send_messages; ///
-  GstRTSPResult function(GstRTSPConnection* conn, GstRTSPMessage* messages, uint nMessages, long timeout) c_gst_rtsp_connection_send_messages_usec; ///
-  GstRTSPResult function(GstRTSPConnection* conn, GstRTSPMessage* message, long timeout) c_gst_rtsp_connection_send_usec; ///
-  void function(GstRTSPConnection* conn, GstRTSPConnectionAcceptCertificateFunc func, void* userData, GDestroyNotify destroyNotify) c_gst_rtsp_connection_set_accept_certificate_func; ///
-  GstRTSPResult function(GstRTSPConnection* conn, GstRTSPAuthMethod method, const(char)* user, const(char)* pass) c_gst_rtsp_connection_set_auth; ///
-  void function(GstRTSPConnection* conn, const(char)* param, const(char)* value) c_gst_rtsp_connection_set_auth_param; ///
-  void function(GstRTSPConnection* conn, uint limit) c_gst_rtsp_connection_set_content_length_limit; ///
-  void function(GstRTSPConnection* conn, gboolean enable) c_gst_rtsp_connection_set_http_mode; ///
-  void function(GstRTSPConnection* conn, gboolean ignore) c_gst_rtsp_connection_set_ignore_x_server_reply; ///
-  void function(GstRTSPConnection* conn, const(char)* ip) c_gst_rtsp_connection_set_ip; ///
-  GstRTSPResult function(GstRTSPConnection* conn, const(char)* host, uint port) c_gst_rtsp_connection_set_proxy; ///
-  GstRTSPResult function(GstRTSPConnection* conn, uint qosDscp) c_gst_rtsp_connection_set_qos_dscp; ///
-  void function(GstRTSPConnection* conn, gboolean remember) c_gst_rtsp_connection_set_remember_session_id; ///
-  void function(GstRTSPConnection* conn, GTlsDatabase* database) c_gst_rtsp_connection_set_tls_database; ///
-  void function(GstRTSPConnection* conn, GTlsInteraction* interaction) c_gst_rtsp_connection_set_tls_interaction; ///
-  gboolean function(GstRTSPConnection* conn, GTlsCertificateFlags flags) c_gst_rtsp_connection_set_tls_validation_flags; ///
-  void function(GstRTSPConnection* conn, gboolean tunneled) c_gst_rtsp_connection_set_tunneled; ///
-  GstRTSPResult function(GstRTSPConnection* conn, const(ubyte)* data, uint size, GTimeVal* timeout) c_gst_rtsp_connection_write; ///
-  GstRTSPResult function(GstRTSPConnection* conn, const(ubyte)* data, uint size, long timeout) c_gst_rtsp_connection_write_usec; ///
-  GstRTSPResult function(GSocket* socket, GstRTSPConnection** conn, GCancellable* cancellable) c_gst_rtsp_connection_accept; ///
-  GstRTSPResult function(const(GstRTSPUrl)* url, GstRTSPConnection** conn) c_gst_rtsp_connection_create; ///
-  GstRTSPResult function(GSocket* socket, const(char)* ip, ushort port, const(char)* initialBuffer, GstRTSPConnection** conn) c_gst_rtsp_connection_create_from_socket; ///
+// RTSPConnection
+private alias c_gst_rtsp_connection_add_extra_http_request_headerFn = extern(C) void function(GstRTSPConnection* conn, const(char)* key, const(char)* value) nothrow;
+__gshared c_gst_rtsp_connection_add_extra_http_request_headerFn c_gst_rtsp_connection_add_extra_http_request_header; ///
+private alias c_gst_rtsp_connection_clear_auth_paramsFn = extern(C) void function(GstRTSPConnection* conn) nothrow;
+__gshared c_gst_rtsp_connection_clear_auth_paramsFn c_gst_rtsp_connection_clear_auth_params; ///
+private alias c_gst_rtsp_connection_closeFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn) nothrow;
+__gshared c_gst_rtsp_connection_closeFn c_gst_rtsp_connection_close; ///
+private alias c_gst_rtsp_connection_connectFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, GTimeVal* timeout) nothrow;
+__gshared c_gst_rtsp_connection_connectFn c_gst_rtsp_connection_connect; ///
+private alias c_gst_rtsp_connection_connect_usecFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, long timeout) nothrow;
+__gshared c_gst_rtsp_connection_connect_usecFn c_gst_rtsp_connection_connect_usec; ///
+private alias c_gst_rtsp_connection_connect_with_responseFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, GTimeVal* timeout, GstRTSPMessage* response) nothrow;
+__gshared c_gst_rtsp_connection_connect_with_responseFn c_gst_rtsp_connection_connect_with_response; ///
+private alias c_gst_rtsp_connection_connect_with_response_usecFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, long timeout, GstRTSPMessage* response) nothrow;
+__gshared c_gst_rtsp_connection_connect_with_response_usecFn c_gst_rtsp_connection_connect_with_response_usec; ///
+private alias c_gst_rtsp_connection_do_tunnelFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, GstRTSPConnection* conn2) nothrow;
+__gshared c_gst_rtsp_connection_do_tunnelFn c_gst_rtsp_connection_do_tunnel; ///
+private alias c_gst_rtsp_connection_flushFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, gboolean flush) nothrow;
+__gshared c_gst_rtsp_connection_flushFn c_gst_rtsp_connection_flush; ///
+private alias c_gst_rtsp_connection_freeFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn) nothrow;
+__gshared c_gst_rtsp_connection_freeFn c_gst_rtsp_connection_free; ///
+private alias c_gst_rtsp_connection_get_ignore_x_server_replyFn = extern(C) gboolean function(const(GstRTSPConnection)* conn) nothrow;
+__gshared c_gst_rtsp_connection_get_ignore_x_server_replyFn c_gst_rtsp_connection_get_ignore_x_server_reply; ///
+private alias c_gst_rtsp_connection_get_ipFn = extern(C) const(char)* function(const(GstRTSPConnection)* conn) nothrow;
+__gshared c_gst_rtsp_connection_get_ipFn c_gst_rtsp_connection_get_ip; ///
+private alias c_gst_rtsp_connection_get_read_socketFn = extern(C) GSocket* function(const(GstRTSPConnection)* conn) nothrow;
+__gshared c_gst_rtsp_connection_get_read_socketFn c_gst_rtsp_connection_get_read_socket; ///
+private alias c_gst_rtsp_connection_get_remember_session_idFn = extern(C) gboolean function(GstRTSPConnection* conn) nothrow;
+__gshared c_gst_rtsp_connection_get_remember_session_idFn c_gst_rtsp_connection_get_remember_session_id; ///
+private alias c_gst_rtsp_connection_get_tlsFn = extern(C) GTlsConnection* function(GstRTSPConnection* conn, GError** _err) nothrow;
+__gshared c_gst_rtsp_connection_get_tlsFn c_gst_rtsp_connection_get_tls; ///
+private alias c_gst_rtsp_connection_get_tls_databaseFn = extern(C) GTlsDatabase* function(GstRTSPConnection* conn) nothrow;
+__gshared c_gst_rtsp_connection_get_tls_databaseFn c_gst_rtsp_connection_get_tls_database; ///
+private alias c_gst_rtsp_connection_get_tls_interactionFn = extern(C) GTlsInteraction* function(GstRTSPConnection* conn) nothrow;
+__gshared c_gst_rtsp_connection_get_tls_interactionFn c_gst_rtsp_connection_get_tls_interaction; ///
+private alias c_gst_rtsp_connection_get_tls_validation_flagsFn = extern(C) GTlsCertificateFlags function(GstRTSPConnection* conn) nothrow;
+__gshared c_gst_rtsp_connection_get_tls_validation_flagsFn c_gst_rtsp_connection_get_tls_validation_flags; ///
+private alias c_gst_rtsp_connection_get_tunnelidFn = extern(C) const(char)* function(const(GstRTSPConnection)* conn) nothrow;
+__gshared c_gst_rtsp_connection_get_tunnelidFn c_gst_rtsp_connection_get_tunnelid; ///
+private alias c_gst_rtsp_connection_get_urlFn = extern(C) GstRTSPUrl* function(const(GstRTSPConnection)* conn) nothrow;
+__gshared c_gst_rtsp_connection_get_urlFn c_gst_rtsp_connection_get_url; ///
+private alias c_gst_rtsp_connection_get_write_socketFn = extern(C) GSocket* function(const(GstRTSPConnection)* conn) nothrow;
+__gshared c_gst_rtsp_connection_get_write_socketFn c_gst_rtsp_connection_get_write_socket; ///
+private alias c_gst_rtsp_connection_is_tunneledFn = extern(C) gboolean function(const(GstRTSPConnection)* conn) nothrow;
+__gshared c_gst_rtsp_connection_is_tunneledFn c_gst_rtsp_connection_is_tunneled; ///
+private alias c_gst_rtsp_connection_next_timeoutFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, GTimeVal* timeout) nothrow;
+__gshared c_gst_rtsp_connection_next_timeoutFn c_gst_rtsp_connection_next_timeout; ///
+private alias c_gst_rtsp_connection_next_timeout_usecFn = extern(C) long function(GstRTSPConnection* conn) nothrow;
+__gshared c_gst_rtsp_connection_next_timeout_usecFn c_gst_rtsp_connection_next_timeout_usec; ///
+private alias c_gst_rtsp_connection_pollFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, GstRTSPEvent events, GstRTSPEvent* revents, GTimeVal* timeout) nothrow;
+__gshared c_gst_rtsp_connection_pollFn c_gst_rtsp_connection_poll; ///
+private alias c_gst_rtsp_connection_poll_usecFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, GstRTSPEvent events, GstRTSPEvent* revents, long timeout) nothrow;
+__gshared c_gst_rtsp_connection_poll_usecFn c_gst_rtsp_connection_poll_usec; ///
+private alias c_gst_rtsp_connection_readFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, ubyte* data, uint size, GTimeVal* timeout) nothrow;
+__gshared c_gst_rtsp_connection_readFn c_gst_rtsp_connection_read; ///
+private alias c_gst_rtsp_connection_read_usecFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, ubyte* data, uint size, long timeout) nothrow;
+__gshared c_gst_rtsp_connection_read_usecFn c_gst_rtsp_connection_read_usec; ///
+private alias c_gst_rtsp_connection_receiveFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, GstRTSPMessage* message, GTimeVal* timeout) nothrow;
+__gshared c_gst_rtsp_connection_receiveFn c_gst_rtsp_connection_receive; ///
+private alias c_gst_rtsp_connection_receive_usecFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, GstRTSPMessage* message, long timeout) nothrow;
+__gshared c_gst_rtsp_connection_receive_usecFn c_gst_rtsp_connection_receive_usec; ///
+private alias c_gst_rtsp_connection_reset_timeoutFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn) nothrow;
+__gshared c_gst_rtsp_connection_reset_timeoutFn c_gst_rtsp_connection_reset_timeout; ///
+private alias c_gst_rtsp_connection_sendFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, GstRTSPMessage* message, GTimeVal* timeout) nothrow;
+__gshared c_gst_rtsp_connection_sendFn c_gst_rtsp_connection_send; ///
+private alias c_gst_rtsp_connection_send_messagesFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, GstRTSPMessage* messages, uint nMessages, GTimeVal* timeout) nothrow;
+__gshared c_gst_rtsp_connection_send_messagesFn c_gst_rtsp_connection_send_messages; ///
+private alias c_gst_rtsp_connection_send_messages_usecFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, GstRTSPMessage* messages, uint nMessages, long timeout) nothrow;
+__gshared c_gst_rtsp_connection_send_messages_usecFn c_gst_rtsp_connection_send_messages_usec; ///
+private alias c_gst_rtsp_connection_send_usecFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, GstRTSPMessage* message, long timeout) nothrow;
+__gshared c_gst_rtsp_connection_send_usecFn c_gst_rtsp_connection_send_usec; ///
+private alias c_gst_rtsp_connection_set_accept_certificate_funcFn = extern(C) void function(GstRTSPConnection* conn, GstRTSPConnectionAcceptCertificateFunc func, void* userData, GDestroyNotify destroyNotify) nothrow;
+__gshared c_gst_rtsp_connection_set_accept_certificate_funcFn c_gst_rtsp_connection_set_accept_certificate_func; ///
+private alias c_gst_rtsp_connection_set_authFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, GstRTSPAuthMethod method, const(char)* user, const(char)* pass) nothrow;
+__gshared c_gst_rtsp_connection_set_authFn c_gst_rtsp_connection_set_auth; ///
+private alias c_gst_rtsp_connection_set_auth_paramFn = extern(C) void function(GstRTSPConnection* conn, const(char)* param, const(char)* value) nothrow;
+__gshared c_gst_rtsp_connection_set_auth_paramFn c_gst_rtsp_connection_set_auth_param; ///
+private alias c_gst_rtsp_connection_set_content_length_limitFn = extern(C) void function(GstRTSPConnection* conn, uint limit) nothrow;
+__gshared c_gst_rtsp_connection_set_content_length_limitFn c_gst_rtsp_connection_set_content_length_limit; ///
+private alias c_gst_rtsp_connection_set_http_modeFn = extern(C) void function(GstRTSPConnection* conn, gboolean enable) nothrow;
+__gshared c_gst_rtsp_connection_set_http_modeFn c_gst_rtsp_connection_set_http_mode; ///
+private alias c_gst_rtsp_connection_set_ignore_x_server_replyFn = extern(C) void function(GstRTSPConnection* conn, gboolean ignore) nothrow;
+__gshared c_gst_rtsp_connection_set_ignore_x_server_replyFn c_gst_rtsp_connection_set_ignore_x_server_reply; ///
+private alias c_gst_rtsp_connection_set_ipFn = extern(C) void function(GstRTSPConnection* conn, const(char)* ip) nothrow;
+__gshared c_gst_rtsp_connection_set_ipFn c_gst_rtsp_connection_set_ip; ///
+private alias c_gst_rtsp_connection_set_proxyFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, const(char)* host, uint port) nothrow;
+__gshared c_gst_rtsp_connection_set_proxyFn c_gst_rtsp_connection_set_proxy; ///
+private alias c_gst_rtsp_connection_set_qos_dscpFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, uint qosDscp) nothrow;
+__gshared c_gst_rtsp_connection_set_qos_dscpFn c_gst_rtsp_connection_set_qos_dscp; ///
+private alias c_gst_rtsp_connection_set_remember_session_idFn = extern(C) void function(GstRTSPConnection* conn, gboolean remember) nothrow;
+__gshared c_gst_rtsp_connection_set_remember_session_idFn c_gst_rtsp_connection_set_remember_session_id; ///
+private alias c_gst_rtsp_connection_set_tls_databaseFn = extern(C) void function(GstRTSPConnection* conn, GTlsDatabase* database) nothrow;
+__gshared c_gst_rtsp_connection_set_tls_databaseFn c_gst_rtsp_connection_set_tls_database; ///
+private alias c_gst_rtsp_connection_set_tls_interactionFn = extern(C) void function(GstRTSPConnection* conn, GTlsInteraction* interaction) nothrow;
+__gshared c_gst_rtsp_connection_set_tls_interactionFn c_gst_rtsp_connection_set_tls_interaction; ///
+private alias c_gst_rtsp_connection_set_tls_validation_flagsFn = extern(C) gboolean function(GstRTSPConnection* conn, GTlsCertificateFlags flags) nothrow;
+__gshared c_gst_rtsp_connection_set_tls_validation_flagsFn c_gst_rtsp_connection_set_tls_validation_flags; ///
+private alias c_gst_rtsp_connection_set_tunneledFn = extern(C) void function(GstRTSPConnection* conn, gboolean tunneled) nothrow;
+__gshared c_gst_rtsp_connection_set_tunneledFn c_gst_rtsp_connection_set_tunneled; ///
+private alias c_gst_rtsp_connection_writeFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, const(ubyte)* data, uint size, GTimeVal* timeout) nothrow;
+__gshared c_gst_rtsp_connection_writeFn c_gst_rtsp_connection_write; ///
+private alias c_gst_rtsp_connection_write_usecFn = extern(C) GstRTSPResult function(GstRTSPConnection* conn, const(ubyte)* data, uint size, long timeout) nothrow;
+__gshared c_gst_rtsp_connection_write_usecFn c_gst_rtsp_connection_write_usec; ///
+private alias c_gst_rtsp_connection_acceptFn = extern(C) GstRTSPResult function(GSocket* socket, GstRTSPConnection** conn, GCancellable* cancellable) nothrow;
+__gshared c_gst_rtsp_connection_acceptFn c_gst_rtsp_connection_accept; ///
+private alias c_gst_rtsp_connection_createFn = extern(C) GstRTSPResult function(const(GstRTSPUrl)* url, GstRTSPConnection** conn) nothrow;
+__gshared c_gst_rtsp_connection_createFn c_gst_rtsp_connection_create; ///
+private alias c_gst_rtsp_connection_create_from_socketFn = extern(C) GstRTSPResult function(GSocket* socket, const(char)* ip, ushort port, const(char)* initialBuffer, GstRTSPConnection** conn) nothrow;
+__gshared c_gst_rtsp_connection_create_from_socketFn c_gst_rtsp_connection_create_from_socket; ///
 
-  // RTSPExtension
-  GType function() c_gst_rtsp_extension_get_type; ///
-  GstRTSPResult function(GstRTSPExtension* ext, GstRTSPMessage* req, GstRTSPMessage* resp) c_gst_rtsp_extension_after_send; ///
-  GstRTSPResult function(GstRTSPExtension* ext, GstRTSPMessage* req) c_gst_rtsp_extension_before_send; ///
-  gboolean function(GstRTSPExtension* ext, GstCaps* caps) c_gst_rtsp_extension_configure_stream; ///
-  gboolean function(GstRTSPExtension* ext, GstRTSPMessage* resp) c_gst_rtsp_extension_detect_server; ///
-  GstRTSPResult function(GstRTSPExtension* ext, GstRTSPLowerTrans protocols, char* transport) c_gst_rtsp_extension_get_transports; ///
-  GstRTSPResult function(GstRTSPExtension* ext, GstSDPMessage* sdp, GstStructure* s) c_gst_rtsp_extension_parse_sdp; ///
-  GstRTSPResult function(GstRTSPExtension* ext, GstRTSPMessage* req) c_gst_rtsp_extension_receive_request; ///
-  GstRTSPResult function(GstRTSPExtension* ext, GstRTSPMessage* req, GstRTSPMessage* resp) c_gst_rtsp_extension_send; ///
-  GstRTSPResult function(GstRTSPExtension* ext, GstSDPMedia* media) c_gst_rtsp_extension_setup_media; ///
-  GstRTSPResult function(GstRTSPExtension* ext, GstRTSPUrl* url) c_gst_rtsp_extension_stream_select; ///
+// RTSPExtension
+private alias c_gst_rtsp_extension_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_rtsp_extension_get_typeFn c_gst_rtsp_extension_get_type; ///
+private alias c_gst_rtsp_extension_after_sendFn = extern(C) GstRTSPResult function(GstRTSPExtension* ext, GstRTSPMessage* req, GstRTSPMessage* resp) nothrow;
+__gshared c_gst_rtsp_extension_after_sendFn c_gst_rtsp_extension_after_send; ///
+private alias c_gst_rtsp_extension_before_sendFn = extern(C) GstRTSPResult function(GstRTSPExtension* ext, GstRTSPMessage* req) nothrow;
+__gshared c_gst_rtsp_extension_before_sendFn c_gst_rtsp_extension_before_send; ///
+private alias c_gst_rtsp_extension_configure_streamFn = extern(C) gboolean function(GstRTSPExtension* ext, GstCaps* caps) nothrow;
+__gshared c_gst_rtsp_extension_configure_streamFn c_gst_rtsp_extension_configure_stream; ///
+private alias c_gst_rtsp_extension_detect_serverFn = extern(C) gboolean function(GstRTSPExtension* ext, GstRTSPMessage* resp) nothrow;
+__gshared c_gst_rtsp_extension_detect_serverFn c_gst_rtsp_extension_detect_server; ///
+private alias c_gst_rtsp_extension_get_transportsFn = extern(C) GstRTSPResult function(GstRTSPExtension* ext, GstRTSPLowerTrans protocols, char* transport) nothrow;
+__gshared c_gst_rtsp_extension_get_transportsFn c_gst_rtsp_extension_get_transports; ///
+private alias c_gst_rtsp_extension_parse_sdpFn = extern(C) GstRTSPResult function(GstRTSPExtension* ext, GstSDPMessage* sdp, GstStructure* s) nothrow;
+__gshared c_gst_rtsp_extension_parse_sdpFn c_gst_rtsp_extension_parse_sdp; ///
+private alias c_gst_rtsp_extension_receive_requestFn = extern(C) GstRTSPResult function(GstRTSPExtension* ext, GstRTSPMessage* req) nothrow;
+__gshared c_gst_rtsp_extension_receive_requestFn c_gst_rtsp_extension_receive_request; ///
+private alias c_gst_rtsp_extension_sendFn = extern(C) GstRTSPResult function(GstRTSPExtension* ext, GstRTSPMessage* req, GstRTSPMessage* resp) nothrow;
+__gshared c_gst_rtsp_extension_sendFn c_gst_rtsp_extension_send; ///
+private alias c_gst_rtsp_extension_setup_mediaFn = extern(C) GstRTSPResult function(GstRTSPExtension* ext, GstSDPMedia* media) nothrow;
+__gshared c_gst_rtsp_extension_setup_mediaFn c_gst_rtsp_extension_setup_media; ///
+private alias c_gst_rtsp_extension_stream_selectFn = extern(C) GstRTSPResult function(GstRTSPExtension* ext, GstRTSPUrl* url) nothrow;
+__gshared c_gst_rtsp_extension_stream_selectFn c_gst_rtsp_extension_stream_select; ///
 
-  // RTSPMessage
-  GType function() c_gst_rtsp_msg_get_type; ///
-  GstRTSPResult function(GstRTSPMessage* msg, GstRTSPHeaderField field, const(char)* value) c_gst_rtsp_message_add_header; ///
-  GstRTSPResult function(GstRTSPMessage* msg, const(char)* header, const(char)* value) c_gst_rtsp_message_add_header_by_name; ///
-  GstRTSPResult function(const(GstRTSPMessage)* msg, GString* str) c_gst_rtsp_message_append_headers; ///
-  GstRTSPResult function(const(GstRTSPMessage)* msg, GstRTSPMessage** copy) c_gst_rtsp_message_copy; ///
-  GstRTSPResult function(GstRTSPMessage* msg) c_gst_rtsp_message_dump; ///
-  GstRTSPResult function(GstRTSPMessage* msg) c_gst_rtsp_message_free; ///
-  GstRTSPResult function(const(GstRTSPMessage)* msg, ubyte** data, uint* size) c_gst_rtsp_message_get_body; ///
-  GstRTSPResult function(const(GstRTSPMessage)* msg, GstBuffer** buffer) c_gst_rtsp_message_get_body_buffer; ///
-  GstRTSPResult function(const(GstRTSPMessage)* msg, GstRTSPHeaderField field, char** value, int indx) c_gst_rtsp_message_get_header; ///
-  GstRTSPResult function(GstRTSPMessage* msg, const(char)* header, char** value, int index) c_gst_rtsp_message_get_header_by_name; ///
-  GstRTSPMsgType function(GstRTSPMessage* msg) c_gst_rtsp_message_get_type; ///
-  gboolean function(const(GstRTSPMessage)* msg) c_gst_rtsp_message_has_body_buffer; ///
-  GstRTSPResult function(GstRTSPMessage* msg) c_gst_rtsp_message_init; ///
-  GstRTSPResult function(GstRTSPMessage* msg, ubyte channel) c_gst_rtsp_message_init_data; ///
-  GstRTSPResult function(GstRTSPMessage* msg, GstRTSPMethod method, const(char)* uri) c_gst_rtsp_message_init_request; ///
-  GstRTSPResult function(GstRTSPMessage* msg, GstRTSPStatusCode code, const(char)* reason, const(GstRTSPMessage)* request) c_gst_rtsp_message_init_response; ///
-  GstRTSPAuthCredential** function(GstRTSPMessage* msg, GstRTSPHeaderField field) c_gst_rtsp_message_parse_auth_credentials; ///
-  GstRTSPResult function(GstRTSPMessage* msg, ubyte* channel) c_gst_rtsp_message_parse_data; ///
-  GstRTSPResult function(GstRTSPMessage* msg, GstRTSPMethod* method, const(char*)* uri, GstRTSPVersion* version_) c_gst_rtsp_message_parse_request; ///
-  GstRTSPResult function(GstRTSPMessage* msg, GstRTSPStatusCode* code, const(char*)* reason, GstRTSPVersion* version_) c_gst_rtsp_message_parse_response; ///
-  GstRTSPResult function(GstRTSPMessage* msg, GstRTSPHeaderField field, int indx) c_gst_rtsp_message_remove_header; ///
-  GstRTSPResult function(GstRTSPMessage* msg, const(char)* header, int index) c_gst_rtsp_message_remove_header_by_name; ///
-  GstRTSPResult function(GstRTSPMessage* msg, const(ubyte)* data, uint size) c_gst_rtsp_message_set_body; ///
-  GstRTSPResult function(GstRTSPMessage* msg, GstBuffer* buffer) c_gst_rtsp_message_set_body_buffer; ///
-  GstRTSPResult function(GstRTSPMessage* msg, ubyte** data, uint* size) c_gst_rtsp_message_steal_body; ///
-  GstRTSPResult function(GstRTSPMessage* msg, GstBuffer** buffer) c_gst_rtsp_message_steal_body_buffer; ///
-  GstRTSPResult function(GstRTSPMessage* msg, ubyte* data, uint size) c_gst_rtsp_message_take_body; ///
-  GstRTSPResult function(GstRTSPMessage* msg, GstBuffer* buffer) c_gst_rtsp_message_take_body_buffer; ///
-  GstRTSPResult function(GstRTSPMessage* msg, GstRTSPHeaderField field, char* value) c_gst_rtsp_message_take_header; ///
-  GstRTSPResult function(GstRTSPMessage* msg, const(char)* header, char* value) c_gst_rtsp_message_take_header_by_name; ///
-  GstRTSPResult function(GstRTSPMessage* msg) c_gst_rtsp_message_unset; ///
+// RTSPMessage
+private alias c_gst_rtsp_msg_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_rtsp_msg_get_typeFn c_gst_rtsp_msg_get_type; ///
+private alias c_gst_rtsp_message_add_headerFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg, GstRTSPHeaderField field, const(char)* value) nothrow;
+__gshared c_gst_rtsp_message_add_headerFn c_gst_rtsp_message_add_header; ///
+private alias c_gst_rtsp_message_add_header_by_nameFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg, const(char)* header, const(char)* value) nothrow;
+__gshared c_gst_rtsp_message_add_header_by_nameFn c_gst_rtsp_message_add_header_by_name; ///
+private alias c_gst_rtsp_message_append_headersFn = extern(C) GstRTSPResult function(const(GstRTSPMessage)* msg, GString* str) nothrow;
+__gshared c_gst_rtsp_message_append_headersFn c_gst_rtsp_message_append_headers; ///
+private alias c_gst_rtsp_message_copyFn = extern(C) GstRTSPResult function(const(GstRTSPMessage)* msg, GstRTSPMessage** copy) nothrow;
+__gshared c_gst_rtsp_message_copyFn c_gst_rtsp_message_copy; ///
+private alias c_gst_rtsp_message_dumpFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg) nothrow;
+__gshared c_gst_rtsp_message_dumpFn c_gst_rtsp_message_dump; ///
+private alias c_gst_rtsp_message_freeFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg) nothrow;
+__gshared c_gst_rtsp_message_freeFn c_gst_rtsp_message_free; ///
+private alias c_gst_rtsp_message_get_bodyFn = extern(C) GstRTSPResult function(const(GstRTSPMessage)* msg, ubyte** data, uint* size) nothrow;
+__gshared c_gst_rtsp_message_get_bodyFn c_gst_rtsp_message_get_body; ///
+private alias c_gst_rtsp_message_get_body_bufferFn = extern(C) GstRTSPResult function(const(GstRTSPMessage)* msg, GstBuffer** buffer) nothrow;
+__gshared c_gst_rtsp_message_get_body_bufferFn c_gst_rtsp_message_get_body_buffer; ///
+private alias c_gst_rtsp_message_get_headerFn = extern(C) GstRTSPResult function(const(GstRTSPMessage)* msg, GstRTSPHeaderField field, char** value, int indx) nothrow;
+__gshared c_gst_rtsp_message_get_headerFn c_gst_rtsp_message_get_header; ///
+private alias c_gst_rtsp_message_get_header_by_nameFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg, const(char)* header, char** value, int index) nothrow;
+__gshared c_gst_rtsp_message_get_header_by_nameFn c_gst_rtsp_message_get_header_by_name; ///
+private alias c_gst_rtsp_message_get_typeFn = extern(C) GstRTSPMsgType function(GstRTSPMessage* msg) nothrow;
+__gshared c_gst_rtsp_message_get_typeFn c_gst_rtsp_message_get_type; ///
+private alias c_gst_rtsp_message_has_body_bufferFn = extern(C) gboolean function(const(GstRTSPMessage)* msg) nothrow;
+__gshared c_gst_rtsp_message_has_body_bufferFn c_gst_rtsp_message_has_body_buffer; ///
+private alias c_gst_rtsp_message_initFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg) nothrow;
+__gshared c_gst_rtsp_message_initFn c_gst_rtsp_message_init; ///
+private alias c_gst_rtsp_message_init_dataFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg, ubyte channel) nothrow;
+__gshared c_gst_rtsp_message_init_dataFn c_gst_rtsp_message_init_data; ///
+private alias c_gst_rtsp_message_init_requestFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg, GstRTSPMethod method, const(char)* uri) nothrow;
+__gshared c_gst_rtsp_message_init_requestFn c_gst_rtsp_message_init_request; ///
+private alias c_gst_rtsp_message_init_responseFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg, GstRTSPStatusCode code, const(char)* reason, const(GstRTSPMessage)* request) nothrow;
+__gshared c_gst_rtsp_message_init_responseFn c_gst_rtsp_message_init_response; ///
+private alias c_gst_rtsp_message_parse_auth_credentialsFn = extern(C) GstRTSPAuthCredential** function(GstRTSPMessage* msg, GstRTSPHeaderField field) nothrow;
+__gshared c_gst_rtsp_message_parse_auth_credentialsFn c_gst_rtsp_message_parse_auth_credentials; ///
+private alias c_gst_rtsp_message_parse_dataFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg, ubyte* channel) nothrow;
+__gshared c_gst_rtsp_message_parse_dataFn c_gst_rtsp_message_parse_data; ///
+private alias c_gst_rtsp_message_parse_requestFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg, GstRTSPMethod* method, const(char*)* uri, GstRTSPVersion* version_) nothrow;
+__gshared c_gst_rtsp_message_parse_requestFn c_gst_rtsp_message_parse_request; ///
+private alias c_gst_rtsp_message_parse_responseFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg, GstRTSPStatusCode* code, const(char*)* reason, GstRTSPVersion* version_) nothrow;
+__gshared c_gst_rtsp_message_parse_responseFn c_gst_rtsp_message_parse_response; ///
+private alias c_gst_rtsp_message_remove_headerFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg, GstRTSPHeaderField field, int indx) nothrow;
+__gshared c_gst_rtsp_message_remove_headerFn c_gst_rtsp_message_remove_header; ///
+private alias c_gst_rtsp_message_remove_header_by_nameFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg, const(char)* header, int index) nothrow;
+__gshared c_gst_rtsp_message_remove_header_by_nameFn c_gst_rtsp_message_remove_header_by_name; ///
+private alias c_gst_rtsp_message_set_bodyFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg, const(ubyte)* data, uint size) nothrow;
+__gshared c_gst_rtsp_message_set_bodyFn c_gst_rtsp_message_set_body; ///
+private alias c_gst_rtsp_message_set_body_bufferFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg, GstBuffer* buffer) nothrow;
+__gshared c_gst_rtsp_message_set_body_bufferFn c_gst_rtsp_message_set_body_buffer; ///
+private alias c_gst_rtsp_message_steal_bodyFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg, ubyte** data, uint* size) nothrow;
+__gshared c_gst_rtsp_message_steal_bodyFn c_gst_rtsp_message_steal_body; ///
+private alias c_gst_rtsp_message_steal_body_bufferFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg, GstBuffer** buffer) nothrow;
+__gshared c_gst_rtsp_message_steal_body_bufferFn c_gst_rtsp_message_steal_body_buffer; ///
+private alias c_gst_rtsp_message_take_bodyFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg, ubyte* data, uint size) nothrow;
+__gshared c_gst_rtsp_message_take_bodyFn c_gst_rtsp_message_take_body; ///
+private alias c_gst_rtsp_message_take_body_bufferFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg, GstBuffer* buffer) nothrow;
+__gshared c_gst_rtsp_message_take_body_bufferFn c_gst_rtsp_message_take_body_buffer; ///
+private alias c_gst_rtsp_message_take_headerFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg, GstRTSPHeaderField field, char* value) nothrow;
+__gshared c_gst_rtsp_message_take_headerFn c_gst_rtsp_message_take_header; ///
+private alias c_gst_rtsp_message_take_header_by_nameFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg, const(char)* header, char* value) nothrow;
+__gshared c_gst_rtsp_message_take_header_by_nameFn c_gst_rtsp_message_take_header_by_name; ///
+private alias c_gst_rtsp_message_unsetFn = extern(C) GstRTSPResult function(GstRTSPMessage* msg) nothrow;
+__gshared c_gst_rtsp_message_unsetFn c_gst_rtsp_message_unset; ///
 
-  // RTSPRange
-  gboolean function(GstRTSPTimeRange* range, GstRTSPRangeUnit unit) c_gst_rtsp_range_convert_units; ///
-  void function(GstRTSPTimeRange* range) c_gst_rtsp_range_free; ///
-  gboolean function(const(GstRTSPTimeRange)* range, GstClockTime* min, GstClockTime* max) c_gst_rtsp_range_get_times; ///
-  GstRTSPResult function(const(char)* rangestr, GstRTSPTimeRange** range) c_gst_rtsp_range_parse; ///
-  char* function(const(GstRTSPTimeRange)* range) c_gst_rtsp_range_to_string; ///
+// RTSPRange
+private alias c_gst_rtsp_range_convert_unitsFn = extern(C) gboolean function(GstRTSPTimeRange* range, GstRTSPRangeUnit unit) nothrow;
+__gshared c_gst_rtsp_range_convert_unitsFn c_gst_rtsp_range_convert_units; ///
+private alias c_gst_rtsp_range_freeFn = extern(C) void function(GstRTSPTimeRange* range) nothrow;
+__gshared c_gst_rtsp_range_freeFn c_gst_rtsp_range_free; ///
+private alias c_gst_rtsp_range_get_timesFn = extern(C) gboolean function(const(GstRTSPTimeRange)* range, GstClockTime* min, GstClockTime* max) nothrow;
+__gshared c_gst_rtsp_range_get_timesFn c_gst_rtsp_range_get_times; ///
+private alias c_gst_rtsp_range_parseFn = extern(C) GstRTSPResult function(const(char)* rangestr, GstRTSPTimeRange** range) nothrow;
+__gshared c_gst_rtsp_range_parseFn c_gst_rtsp_range_parse; ///
+private alias c_gst_rtsp_range_to_stringFn = extern(C) char* function(const(GstRTSPTimeRange)* range) nothrow;
+__gshared c_gst_rtsp_range_to_stringFn c_gst_rtsp_range_to_string; ///
 
-  // RTSPTransport
-  char* function(GstRTSPTransport* transport) c_gst_rtsp_transport_as_text; ///
-  GstRTSPResult function(GstRTSPTransport* transport) c_gst_rtsp_transport_free; ///
-  GstRTSPResult function(GstRTSPTransport* transport, const(char*)* mediaType) c_gst_rtsp_transport_get_media_type; ///
-  GstRTSPResult function(GstRTSPTransMode trans, const(char*)* manager, uint option) c_gst_rtsp_transport_get_manager; ///
-  GstRTSPResult function(GstRTSPTransMode trans, const(char*)* mime) c_gst_rtsp_transport_get_mime; ///
-  GstRTSPResult function(GstRTSPTransport* transport) c_gst_rtsp_transport_init; ///
-  GstRTSPResult function(GstRTSPTransport** transport) c_gst_rtsp_transport_new; ///
-  GstRTSPResult function(const(char)* str, GstRTSPTransport* transport) c_gst_rtsp_transport_parse; ///
+// RTSPTransport
+private alias c_gst_rtsp_transport_as_textFn = extern(C) char* function(GstRTSPTransport* transport) nothrow;
+__gshared c_gst_rtsp_transport_as_textFn c_gst_rtsp_transport_as_text; ///
+private alias c_gst_rtsp_transport_freeFn = extern(C) GstRTSPResult function(GstRTSPTransport* transport) nothrow;
+__gshared c_gst_rtsp_transport_freeFn c_gst_rtsp_transport_free; ///
+private alias c_gst_rtsp_transport_get_media_typeFn = extern(C) GstRTSPResult function(GstRTSPTransport* transport, const(char*)* mediaType) nothrow;
+__gshared c_gst_rtsp_transport_get_media_typeFn c_gst_rtsp_transport_get_media_type; ///
+private alias c_gst_rtsp_transport_get_managerFn = extern(C) GstRTSPResult function(GstRTSPTransMode trans, const(char*)* manager, uint option) nothrow;
+__gshared c_gst_rtsp_transport_get_managerFn c_gst_rtsp_transport_get_manager; ///
+private alias c_gst_rtsp_transport_get_mimeFn = extern(C) GstRTSPResult function(GstRTSPTransMode trans, const(char*)* mime) nothrow;
+__gshared c_gst_rtsp_transport_get_mimeFn c_gst_rtsp_transport_get_mime; ///
+private alias c_gst_rtsp_transport_initFn = extern(C) GstRTSPResult function(GstRTSPTransport* transport) nothrow;
+__gshared c_gst_rtsp_transport_initFn c_gst_rtsp_transport_init; ///
+private alias c_gst_rtsp_transport_newFn = extern(C) GstRTSPResult function(GstRTSPTransport** transport) nothrow;
+__gshared c_gst_rtsp_transport_newFn c_gst_rtsp_transport_new; ///
+private alias c_gst_rtsp_transport_parseFn = extern(C) GstRTSPResult function(const(char)* str, GstRTSPTransport* transport) nothrow;
+__gshared c_gst_rtsp_transport_parseFn c_gst_rtsp_transport_parse; ///
 
-  // RTSPUrl
-  GType function() c_gst_rtsp_url_get_type; ///
-  GstRTSPUrl* function(const(GstRTSPUrl)* url) c_gst_rtsp_url_copy; ///
-  char** function(const(GstRTSPUrl)* url) c_gst_rtsp_url_decode_path_components; ///
-  void function(GstRTSPUrl* url) c_gst_rtsp_url_free; ///
-  GstRTSPResult function(const(GstRTSPUrl)* url, ushort* port) c_gst_rtsp_url_get_port; ///
-  char* function(const(GstRTSPUrl)* url) c_gst_rtsp_url_get_request_uri; ///
-  char* function(const(GstRTSPUrl)* url, const(char)* controlPath) c_gst_rtsp_url_get_request_uri_with_control; ///
-  GstRTSPResult function(GstRTSPUrl* url, ushort port) c_gst_rtsp_url_set_port; ///
-  GstRTSPResult function(const(char)* urlstr, GstRTSPUrl** url) c_gst_rtsp_url_parse; ///
+// RTSPUrl
+private alias c_gst_rtsp_url_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_rtsp_url_get_typeFn c_gst_rtsp_url_get_type; ///
+private alias c_gst_rtsp_url_copyFn = extern(C) GstRTSPUrl* function(const(GstRTSPUrl)* url) nothrow;
+__gshared c_gst_rtsp_url_copyFn c_gst_rtsp_url_copy; ///
+private alias c_gst_rtsp_url_decode_path_componentsFn = extern(C) char** function(const(GstRTSPUrl)* url) nothrow;
+__gshared c_gst_rtsp_url_decode_path_componentsFn c_gst_rtsp_url_decode_path_components; ///
+private alias c_gst_rtsp_url_freeFn = extern(C) void function(GstRTSPUrl* url) nothrow;
+__gshared c_gst_rtsp_url_freeFn c_gst_rtsp_url_free; ///
+private alias c_gst_rtsp_url_get_portFn = extern(C) GstRTSPResult function(const(GstRTSPUrl)* url, ushort* port) nothrow;
+__gshared c_gst_rtsp_url_get_portFn c_gst_rtsp_url_get_port; ///
+private alias c_gst_rtsp_url_get_request_uriFn = extern(C) char* function(const(GstRTSPUrl)* url) nothrow;
+__gshared c_gst_rtsp_url_get_request_uriFn c_gst_rtsp_url_get_request_uri; ///
+private alias c_gst_rtsp_url_get_request_uri_with_controlFn = extern(C) char* function(const(GstRTSPUrl)* url, const(char)* controlPath) nothrow;
+__gshared c_gst_rtsp_url_get_request_uri_with_controlFn c_gst_rtsp_url_get_request_uri_with_control; ///
+private alias c_gst_rtsp_url_set_portFn = extern(C) GstRTSPResult function(GstRTSPUrl* url, ushort port) nothrow;
+__gshared c_gst_rtsp_url_set_portFn c_gst_rtsp_url_set_port; ///
+private alias c_gst_rtsp_url_parseFn = extern(C) GstRTSPResult function(const(char)* urlstr, GstRTSPUrl** url) nothrow;
+__gshared c_gst_rtsp_url_parseFn c_gst_rtsp_url_parse; ///
 
-  // RTSPWatch
-  uint function(GstRTSPWatch* watch, GMainContext* context) c_gst_rtsp_watch_attach; ///
-  void function(GstRTSPWatch* watch, size_t* bytes, uint* messages) c_gst_rtsp_watch_get_send_backlog; ///
-  void function(GstRTSPWatch* watch) c_gst_rtsp_watch_reset; ///
-  GstRTSPResult function(GstRTSPWatch* watch, GstRTSPMessage* message, uint* id) c_gst_rtsp_watch_send_message; ///
-  GstRTSPResult function(GstRTSPWatch* watch, GstRTSPMessage* messages, uint nMessages, uint* id) c_gst_rtsp_watch_send_messages; ///
-  void function(GstRTSPWatch* watch, gboolean flushing) c_gst_rtsp_watch_set_flushing; ///
-  void function(GstRTSPWatch* watch, size_t bytes, uint messages) c_gst_rtsp_watch_set_send_backlog; ///
-  void function(GstRTSPWatch* watch) c_gst_rtsp_watch_unref; ///
-  GstRTSPResult function(GstRTSPWatch* watch, GTimeVal* timeout) c_gst_rtsp_watch_wait_backlog; ///
-  GstRTSPResult function(GstRTSPWatch* watch, long timeout) c_gst_rtsp_watch_wait_backlog_usec; ///
-  GstRTSPResult function(GstRTSPWatch* watch, const(ubyte)* data, uint size, uint* id) c_gst_rtsp_watch_write_data; ///
-  GstRTSPWatch* function(GstRTSPConnection* conn, GstRTSPWatchFuncs* funcs, void* userData, GDestroyNotify notify) c_gst_rtsp_watch_new; ///
+// RTSPWatch
+private alias c_gst_rtsp_watch_attachFn = extern(C) uint function(GstRTSPWatch* watch, GMainContext* context) nothrow;
+__gshared c_gst_rtsp_watch_attachFn c_gst_rtsp_watch_attach; ///
+private alias c_gst_rtsp_watch_get_send_backlogFn = extern(C) void function(GstRTSPWatch* watch, size_t* bytes, uint* messages) nothrow;
+__gshared c_gst_rtsp_watch_get_send_backlogFn c_gst_rtsp_watch_get_send_backlog; ///
+private alias c_gst_rtsp_watch_resetFn = extern(C) void function(GstRTSPWatch* watch) nothrow;
+__gshared c_gst_rtsp_watch_resetFn c_gst_rtsp_watch_reset; ///
+private alias c_gst_rtsp_watch_send_messageFn = extern(C) GstRTSPResult function(GstRTSPWatch* watch, GstRTSPMessage* message, uint* id) nothrow;
+__gshared c_gst_rtsp_watch_send_messageFn c_gst_rtsp_watch_send_message; ///
+private alias c_gst_rtsp_watch_send_messagesFn = extern(C) GstRTSPResult function(GstRTSPWatch* watch, GstRTSPMessage* messages, uint nMessages, uint* id) nothrow;
+__gshared c_gst_rtsp_watch_send_messagesFn c_gst_rtsp_watch_send_messages; ///
+private alias c_gst_rtsp_watch_set_flushingFn = extern(C) void function(GstRTSPWatch* watch, gboolean flushing) nothrow;
+__gshared c_gst_rtsp_watch_set_flushingFn c_gst_rtsp_watch_set_flushing; ///
+private alias c_gst_rtsp_watch_set_send_backlogFn = extern(C) void function(GstRTSPWatch* watch, size_t bytes, uint messages) nothrow;
+__gshared c_gst_rtsp_watch_set_send_backlogFn c_gst_rtsp_watch_set_send_backlog; ///
+private alias c_gst_rtsp_watch_unrefFn = extern(C) void function(GstRTSPWatch* watch) nothrow;
+__gshared c_gst_rtsp_watch_unrefFn c_gst_rtsp_watch_unref; ///
+private alias c_gst_rtsp_watch_wait_backlogFn = extern(C) GstRTSPResult function(GstRTSPWatch* watch, GTimeVal* timeout) nothrow;
+__gshared c_gst_rtsp_watch_wait_backlogFn c_gst_rtsp_watch_wait_backlog; ///
+private alias c_gst_rtsp_watch_wait_backlog_usecFn = extern(C) GstRTSPResult function(GstRTSPWatch* watch, long timeout) nothrow;
+__gshared c_gst_rtsp_watch_wait_backlog_usecFn c_gst_rtsp_watch_wait_backlog_usec; ///
+private alias c_gst_rtsp_watch_write_dataFn = extern(C) GstRTSPResult function(GstRTSPWatch* watch, const(ubyte)* data, uint size, uint* id) nothrow;
+__gshared c_gst_rtsp_watch_write_dataFn c_gst_rtsp_watch_write_data; ///
+private alias c_gst_rtsp_watch_newFn = extern(C) GstRTSPWatch* function(GstRTSPConnection* conn, GstRTSPWatchFuncs* funcs, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_gst_rtsp_watch_newFn c_gst_rtsp_watch_new; ///
 
-  // global
-  void function(GstRTSPAuthCredential** credentials) c_gst_rtsp_auth_credentials_free; ///
-  GstRTSPHeaderField function(const(char)* header) c_gst_rtsp_find_header_field; ///
-  GstRTSPMethod function(const(char)* method) c_gst_rtsp_find_method; ///
-  char* function(const(char)* algorithm, const(char)* method, const(char)* realm, const(char)* username, const(char)* password, const(char)* uri, const(char)* nonce) c_gst_rtsp_generate_digest_auth_response; ///
-  char* function(const(char)* algorithm, const(char)* method, const(char)* md5, const(char)* uri, const(char)* nonce) c_gst_rtsp_generate_digest_auth_response_from_md5; ///
-  gboolean function(GstRTSPHeaderField field) c_gst_rtsp_header_allow_multiple; ///
-  const(char)* function(GstRTSPHeaderField field) c_gst_rtsp_header_as_text; ///
-  GstRTSPResult function(GstRTSPMessage** msg) c_gst_rtsp_message_new; ///
-  GstRTSPResult function(GstRTSPMessage** msg, ubyte channel) c_gst_rtsp_message_new_data; ///
-  GstRTSPResult function(GstRTSPMessage** msg, GstRTSPMethod method, const(char)* uri) c_gst_rtsp_message_new_request; ///
-  GstRTSPResult function(GstRTSPMessage** msg, GstRTSPStatusCode code, const(char)* reason, const(GstRTSPMessage)* request) c_gst_rtsp_message_new_response; ///
-  char* function(GstRTSPMethod options) c_gst_rtsp_options_as_text; ///
-  GstRTSPMethod function(const(char)* options) c_gst_rtsp_options_from_text; ///
-  const(char)* function(GstRTSPStatusCode code) c_gst_rtsp_status_as_text; ///
-  char* function(GstRTSPResult result) c_gst_rtsp_strresult; ///
+// global
+private alias c_gst_rtsp_auth_credentials_freeFn = extern(C) void function(GstRTSPAuthCredential** credentials) nothrow;
+__gshared c_gst_rtsp_auth_credentials_freeFn c_gst_rtsp_auth_credentials_free; ///
+private alias c_gst_rtsp_find_header_fieldFn = extern(C) GstRTSPHeaderField function(const(char)* header) nothrow;
+__gshared c_gst_rtsp_find_header_fieldFn c_gst_rtsp_find_header_field; ///
+private alias c_gst_rtsp_find_methodFn = extern(C) GstRTSPMethod function(const(char)* method) nothrow;
+__gshared c_gst_rtsp_find_methodFn c_gst_rtsp_find_method; ///
+private alias c_gst_rtsp_generate_digest_auth_responseFn = extern(C) char* function(const(char)* algorithm, const(char)* method, const(char)* realm, const(char)* username, const(char)* password, const(char)* uri, const(char)* nonce) nothrow;
+__gshared c_gst_rtsp_generate_digest_auth_responseFn c_gst_rtsp_generate_digest_auth_response; ///
+private alias c_gst_rtsp_generate_digest_auth_response_from_md5Fn = extern(C) char* function(const(char)* algorithm, const(char)* method, const(char)* md5, const(char)* uri, const(char)* nonce) nothrow;
+__gshared c_gst_rtsp_generate_digest_auth_response_from_md5Fn c_gst_rtsp_generate_digest_auth_response_from_md5; ///
+private alias c_gst_rtsp_header_allow_multipleFn = extern(C) gboolean function(GstRTSPHeaderField field) nothrow;
+__gshared c_gst_rtsp_header_allow_multipleFn c_gst_rtsp_header_allow_multiple; ///
+private alias c_gst_rtsp_header_as_textFn = extern(C) const(char)* function(GstRTSPHeaderField field) nothrow;
+__gshared c_gst_rtsp_header_as_textFn c_gst_rtsp_header_as_text; ///
+private alias c_gst_rtsp_message_newFn = extern(C) GstRTSPResult function(GstRTSPMessage** msg) nothrow;
+__gshared c_gst_rtsp_message_newFn c_gst_rtsp_message_new; ///
+private alias c_gst_rtsp_message_new_dataFn = extern(C) GstRTSPResult function(GstRTSPMessage** msg, ubyte channel) nothrow;
+__gshared c_gst_rtsp_message_new_dataFn c_gst_rtsp_message_new_data; ///
+private alias c_gst_rtsp_message_new_requestFn = extern(C) GstRTSPResult function(GstRTSPMessage** msg, GstRTSPMethod method, const(char)* uri) nothrow;
+__gshared c_gst_rtsp_message_new_requestFn c_gst_rtsp_message_new_request; ///
+private alias c_gst_rtsp_message_new_responseFn = extern(C) GstRTSPResult function(GstRTSPMessage** msg, GstRTSPStatusCode code, const(char)* reason, const(GstRTSPMessage)* request) nothrow;
+__gshared c_gst_rtsp_message_new_responseFn c_gst_rtsp_message_new_response; ///
+private alias c_gst_rtsp_options_as_textFn = extern(C) char* function(GstRTSPMethod options) nothrow;
+__gshared c_gst_rtsp_options_as_textFn c_gst_rtsp_options_as_text; ///
+private alias c_gst_rtsp_options_from_textFn = extern(C) GstRTSPMethod function(const(char)* options) nothrow;
+__gshared c_gst_rtsp_options_from_textFn c_gst_rtsp_options_from_text; ///
+private alias c_gst_rtsp_status_as_textFn = extern(C) const(char)* function(GstRTSPStatusCode code) nothrow;
+__gshared c_gst_rtsp_status_as_textFn c_gst_rtsp_status_as_text; ///
+private alias c_gst_rtsp_strresultFn = extern(C) char* function(GstRTSPResult result) nothrow;
+__gshared c_gst_rtsp_strresultFn c_gst_rtsp_strresult; ///
 
-  // RTSPMethod
-  const(char)* function(GstRTSPMethod method) c_gst_rtsp_method_as_text; ///
+// RTSPMethod
+private alias c_gst_rtsp_method_as_textFn = extern(C) const(char)* function(GstRTSPMethod method) nothrow;
+__gshared c_gst_rtsp_method_as_textFn c_gst_rtsp_method_as_text; ///
 
-  // RTSPVersion
-  const(char)* function(GstRTSPVersion version_) c_gst_rtsp_version_as_text; ///
-}
+// RTSPVersion
+private alias c_gst_rtsp_version_as_textFn = extern(C) const(char)* function(GstRTSPVersion version_) nothrow;
+__gshared c_gst_rtsp_version_as_textFn c_gst_rtsp_version_as_text; ///
 
 // RTSPAuthCredential
 

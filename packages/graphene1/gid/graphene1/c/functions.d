@@ -8,443 +8,841 @@ public import gid.gobject2.c.types;
 
 private immutable LIBS = ["graphene-1.0_0"];
 
-__gshared extern(C) nothrow
-{
-  // Box
-  GType function() c_graphene_box_get_type; ///
-  graphene_box_t* function() c_graphene_box_alloc; ///
-  bool function(const(graphene_box_t)* a, const(graphene_box_t)* b) c_graphene_box_contains_box; ///
-  bool function(const(graphene_box_t)* box, const(graphene_point3d_t)* point) c_graphene_box_contains_point; ///
-  bool function(const(graphene_box_t)* a, const(graphene_box_t)* b) c_graphene_box_equal; ///
-  void function(const(graphene_box_t)* box, const(graphene_point3d_t)* point, graphene_box_t* res) c_graphene_box_expand; ///
-  void function(const(graphene_box_t)* box, float scalar, graphene_box_t* res) c_graphene_box_expand_scalar; ///
-  void function(const(graphene_box_t)* box, const(graphene_vec3_t)* vec, graphene_box_t* res) c_graphene_box_expand_vec3; ///
-  void function(graphene_box_t* box) c_graphene_box_free; ///
-  void function(const(graphene_box_t)* box, graphene_sphere_t* sphere) c_graphene_box_get_bounding_sphere; ///
-  void function(const(graphene_box_t)* box, graphene_point3d_t* center) c_graphene_box_get_center; ///
-  float function(const(graphene_box_t)* box) c_graphene_box_get_depth; ///
-  float function(const(graphene_box_t)* box) c_graphene_box_get_height; ///
-  void function(const(graphene_box_t)* box, graphene_point3d_t* max) c_graphene_box_get_max; ///
-  void function(const(graphene_box_t)* box, graphene_point3d_t* min) c_graphene_box_get_min; ///
-  void function(const(graphene_box_t)* box, graphene_vec3_t* size) c_graphene_box_get_size; ///
-  void function(const(graphene_box_t)* box, graphene_vec3_t* vertices) c_graphene_box_get_vertices; ///
-  float function(const(graphene_box_t)* box) c_graphene_box_get_width; ///
-  graphene_box_t* function(graphene_box_t* box, const(graphene_point3d_t)* min, const(graphene_point3d_t)* max) c_graphene_box_init; ///
-  graphene_box_t* function(graphene_box_t* box, const(graphene_box_t)* src) c_graphene_box_init_from_box; ///
-  graphene_box_t* function(graphene_box_t* box, uint nPoints, const(graphene_point3d_t)* points) c_graphene_box_init_from_points; ///
-  graphene_box_t* function(graphene_box_t* box, const(graphene_vec3_t)* min, const(graphene_vec3_t)* max) c_graphene_box_init_from_vec3; ///
-  graphene_box_t* function(graphene_box_t* box, uint nVectors, const(graphene_vec3_t)* vectors) c_graphene_box_init_from_vectors; ///
-  bool function(const(graphene_box_t)* a, const(graphene_box_t)* b, graphene_box_t* res) c_graphene_box_intersection; ///
-  void function(const(graphene_box_t)* a, const(graphene_box_t)* b, graphene_box_t* res) c_graphene_box_union; ///
-  const(graphene_box_t)* function() c_graphene_box_empty; ///
-  const(graphene_box_t)* function() c_graphene_box_infinite; ///
-  const(graphene_box_t)* function() c_graphene_box_minus_one; ///
-  const(graphene_box_t)* function() c_graphene_box_one; ///
-  const(graphene_box_t)* function() c_graphene_box_one_minus_one; ///
-  const(graphene_box_t)* function() c_graphene_box_zero; ///
+// Box
+private alias c_graphene_box_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_graphene_box_get_typeFn c_graphene_box_get_type; ///
+private alias c_graphene_box_allocFn = extern(C) graphene_box_t* function() nothrow;
+__gshared c_graphene_box_allocFn c_graphene_box_alloc; ///
+private alias c_graphene_box_contains_boxFn = extern(C) bool function(const(graphene_box_t)* a, const(graphene_box_t)* b) nothrow;
+__gshared c_graphene_box_contains_boxFn c_graphene_box_contains_box; ///
+private alias c_graphene_box_contains_pointFn = extern(C) bool function(const(graphene_box_t)* box, const(graphene_point3d_t)* point) nothrow;
+__gshared c_graphene_box_contains_pointFn c_graphene_box_contains_point; ///
+private alias c_graphene_box_equalFn = extern(C) bool function(const(graphene_box_t)* a, const(graphene_box_t)* b) nothrow;
+__gshared c_graphene_box_equalFn c_graphene_box_equal; ///
+private alias c_graphene_box_expandFn = extern(C) void function(const(graphene_box_t)* box, const(graphene_point3d_t)* point, graphene_box_t* res) nothrow;
+__gshared c_graphene_box_expandFn c_graphene_box_expand; ///
+private alias c_graphene_box_expand_scalarFn = extern(C) void function(const(graphene_box_t)* box, float scalar, graphene_box_t* res) nothrow;
+__gshared c_graphene_box_expand_scalarFn c_graphene_box_expand_scalar; ///
+private alias c_graphene_box_expand_vec3Fn = extern(C) void function(const(graphene_box_t)* box, const(graphene_vec3_t)* vec, graphene_box_t* res) nothrow;
+__gshared c_graphene_box_expand_vec3Fn c_graphene_box_expand_vec3; ///
+private alias c_graphene_box_freeFn = extern(C) void function(graphene_box_t* box) nothrow;
+__gshared c_graphene_box_freeFn c_graphene_box_free; ///
+private alias c_graphene_box_get_bounding_sphereFn = extern(C) void function(const(graphene_box_t)* box, graphene_sphere_t* sphere) nothrow;
+__gshared c_graphene_box_get_bounding_sphereFn c_graphene_box_get_bounding_sphere; ///
+private alias c_graphene_box_get_centerFn = extern(C) void function(const(graphene_box_t)* box, graphene_point3d_t* center) nothrow;
+__gshared c_graphene_box_get_centerFn c_graphene_box_get_center; ///
+private alias c_graphene_box_get_depthFn = extern(C) float function(const(graphene_box_t)* box) nothrow;
+__gshared c_graphene_box_get_depthFn c_graphene_box_get_depth; ///
+private alias c_graphene_box_get_heightFn = extern(C) float function(const(graphene_box_t)* box) nothrow;
+__gshared c_graphene_box_get_heightFn c_graphene_box_get_height; ///
+private alias c_graphene_box_get_maxFn = extern(C) void function(const(graphene_box_t)* box, graphene_point3d_t* max) nothrow;
+__gshared c_graphene_box_get_maxFn c_graphene_box_get_max; ///
+private alias c_graphene_box_get_minFn = extern(C) void function(const(graphene_box_t)* box, graphene_point3d_t* min) nothrow;
+__gshared c_graphene_box_get_minFn c_graphene_box_get_min; ///
+private alias c_graphene_box_get_sizeFn = extern(C) void function(const(graphene_box_t)* box, graphene_vec3_t* size) nothrow;
+__gshared c_graphene_box_get_sizeFn c_graphene_box_get_size; ///
+private alias c_graphene_box_get_verticesFn = extern(C) void function(const(graphene_box_t)* box, graphene_vec3_t* vertices) nothrow;
+__gshared c_graphene_box_get_verticesFn c_graphene_box_get_vertices; ///
+private alias c_graphene_box_get_widthFn = extern(C) float function(const(graphene_box_t)* box) nothrow;
+__gshared c_graphene_box_get_widthFn c_graphene_box_get_width; ///
+private alias c_graphene_box_initFn = extern(C) graphene_box_t* function(graphene_box_t* box, const(graphene_point3d_t)* min, const(graphene_point3d_t)* max) nothrow;
+__gshared c_graphene_box_initFn c_graphene_box_init; ///
+private alias c_graphene_box_init_from_boxFn = extern(C) graphene_box_t* function(graphene_box_t* box, const(graphene_box_t)* src) nothrow;
+__gshared c_graphene_box_init_from_boxFn c_graphene_box_init_from_box; ///
+private alias c_graphene_box_init_from_pointsFn = extern(C) graphene_box_t* function(graphene_box_t* box, uint nPoints, const(graphene_point3d_t)* points) nothrow;
+__gshared c_graphene_box_init_from_pointsFn c_graphene_box_init_from_points; ///
+private alias c_graphene_box_init_from_vec3Fn = extern(C) graphene_box_t* function(graphene_box_t* box, const(graphene_vec3_t)* min, const(graphene_vec3_t)* max) nothrow;
+__gshared c_graphene_box_init_from_vec3Fn c_graphene_box_init_from_vec3; ///
+private alias c_graphene_box_init_from_vectorsFn = extern(C) graphene_box_t* function(graphene_box_t* box, uint nVectors, const(graphene_vec3_t)* vectors) nothrow;
+__gshared c_graphene_box_init_from_vectorsFn c_graphene_box_init_from_vectors; ///
+private alias c_graphene_box_intersectionFn = extern(C) bool function(const(graphene_box_t)* a, const(graphene_box_t)* b, graphene_box_t* res) nothrow;
+__gshared c_graphene_box_intersectionFn c_graphene_box_intersection; ///
+private alias c_graphene_box_unionFn = extern(C) void function(const(graphene_box_t)* a, const(graphene_box_t)* b, graphene_box_t* res) nothrow;
+__gshared c_graphene_box_unionFn c_graphene_box_union; ///
+private alias c_graphene_box_emptyFn = extern(C) const(graphene_box_t)* function() nothrow;
+__gshared c_graphene_box_emptyFn c_graphene_box_empty; ///
+private alias c_graphene_box_infiniteFn = extern(C) const(graphene_box_t)* function() nothrow;
+__gshared c_graphene_box_infiniteFn c_graphene_box_infinite; ///
+private alias c_graphene_box_minus_oneFn = extern(C) const(graphene_box_t)* function() nothrow;
+__gshared c_graphene_box_minus_oneFn c_graphene_box_minus_one; ///
+private alias c_graphene_box_oneFn = extern(C) const(graphene_box_t)* function() nothrow;
+__gshared c_graphene_box_oneFn c_graphene_box_one; ///
+private alias c_graphene_box_one_minus_oneFn = extern(C) const(graphene_box_t)* function() nothrow;
+__gshared c_graphene_box_one_minus_oneFn c_graphene_box_one_minus_one; ///
+private alias c_graphene_box_zeroFn = extern(C) const(graphene_box_t)* function() nothrow;
+__gshared c_graphene_box_zeroFn c_graphene_box_zero; ///
 
-  // Euler
-  GType function() c_graphene_euler_get_type; ///
-  graphene_euler_t* function() c_graphene_euler_alloc; ///
-  bool function(const(graphene_euler_t)* a, const(graphene_euler_t)* b) c_graphene_euler_equal; ///
-  void function(graphene_euler_t* e) c_graphene_euler_free; ///
-  float function(const(graphene_euler_t)* e) c_graphene_euler_get_alpha; ///
-  float function(const(graphene_euler_t)* e) c_graphene_euler_get_beta; ///
-  float function(const(graphene_euler_t)* e) c_graphene_euler_get_gamma; ///
-  graphene_euler_order_t function(const(graphene_euler_t)* e) c_graphene_euler_get_order; ///
-  float function(const(graphene_euler_t)* e) c_graphene_euler_get_x; ///
-  float function(const(graphene_euler_t)* e) c_graphene_euler_get_y; ///
-  float function(const(graphene_euler_t)* e) c_graphene_euler_get_z; ///
-  graphene_euler_t* function(graphene_euler_t* e, float x, float y, float z) c_graphene_euler_init; ///
-  graphene_euler_t* function(graphene_euler_t* e, const(graphene_euler_t)* src) c_graphene_euler_init_from_euler; ///
-  graphene_euler_t* function(graphene_euler_t* e, const(graphene_matrix_t)* m, graphene_euler_order_t order) c_graphene_euler_init_from_matrix; ///
-  graphene_euler_t* function(graphene_euler_t* e, const(graphene_quaternion_t)* q, graphene_euler_order_t order) c_graphene_euler_init_from_quaternion; ///
-  graphene_euler_t* function(graphene_euler_t* e, float x, float y, float z, graphene_euler_order_t order) c_graphene_euler_init_from_radians; ///
-  graphene_euler_t* function(graphene_euler_t* e, const(graphene_vec3_t)* v, graphene_euler_order_t order) c_graphene_euler_init_from_vec3; ///
-  graphene_euler_t* function(graphene_euler_t* e, float x, float y, float z, graphene_euler_order_t order) c_graphene_euler_init_with_order; ///
-  void function(const(graphene_euler_t)* e, graphene_euler_order_t order, graphene_euler_t* res) c_graphene_euler_reorder; ///
-  void function(const(graphene_euler_t)* e, graphene_matrix_t* res) c_graphene_euler_to_matrix; ///
-  void function(const(graphene_euler_t)* e, graphene_quaternion_t* res) c_graphene_euler_to_quaternion; ///
-  void function(const(graphene_euler_t)* e, graphene_vec3_t* res) c_graphene_euler_to_vec3; ///
+// Euler
+private alias c_graphene_euler_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_graphene_euler_get_typeFn c_graphene_euler_get_type; ///
+private alias c_graphene_euler_allocFn = extern(C) graphene_euler_t* function() nothrow;
+__gshared c_graphene_euler_allocFn c_graphene_euler_alloc; ///
+private alias c_graphene_euler_equalFn = extern(C) bool function(const(graphene_euler_t)* a, const(graphene_euler_t)* b) nothrow;
+__gshared c_graphene_euler_equalFn c_graphene_euler_equal; ///
+private alias c_graphene_euler_freeFn = extern(C) void function(graphene_euler_t* e) nothrow;
+__gshared c_graphene_euler_freeFn c_graphene_euler_free; ///
+private alias c_graphene_euler_get_alphaFn = extern(C) float function(const(graphene_euler_t)* e) nothrow;
+__gshared c_graphene_euler_get_alphaFn c_graphene_euler_get_alpha; ///
+private alias c_graphene_euler_get_betaFn = extern(C) float function(const(graphene_euler_t)* e) nothrow;
+__gshared c_graphene_euler_get_betaFn c_graphene_euler_get_beta; ///
+private alias c_graphene_euler_get_gammaFn = extern(C) float function(const(graphene_euler_t)* e) nothrow;
+__gshared c_graphene_euler_get_gammaFn c_graphene_euler_get_gamma; ///
+private alias c_graphene_euler_get_orderFn = extern(C) graphene_euler_order_t function(const(graphene_euler_t)* e) nothrow;
+__gshared c_graphene_euler_get_orderFn c_graphene_euler_get_order; ///
+private alias c_graphene_euler_get_xFn = extern(C) float function(const(graphene_euler_t)* e) nothrow;
+__gshared c_graphene_euler_get_xFn c_graphene_euler_get_x; ///
+private alias c_graphene_euler_get_yFn = extern(C) float function(const(graphene_euler_t)* e) nothrow;
+__gshared c_graphene_euler_get_yFn c_graphene_euler_get_y; ///
+private alias c_graphene_euler_get_zFn = extern(C) float function(const(graphene_euler_t)* e) nothrow;
+__gshared c_graphene_euler_get_zFn c_graphene_euler_get_z; ///
+private alias c_graphene_euler_initFn = extern(C) graphene_euler_t* function(graphene_euler_t* e, float x, float y, float z) nothrow;
+__gshared c_graphene_euler_initFn c_graphene_euler_init; ///
+private alias c_graphene_euler_init_from_eulerFn = extern(C) graphene_euler_t* function(graphene_euler_t* e, const(graphene_euler_t)* src) nothrow;
+__gshared c_graphene_euler_init_from_eulerFn c_graphene_euler_init_from_euler; ///
+private alias c_graphene_euler_init_from_matrixFn = extern(C) graphene_euler_t* function(graphene_euler_t* e, const(graphene_matrix_t)* m, graphene_euler_order_t order) nothrow;
+__gshared c_graphene_euler_init_from_matrixFn c_graphene_euler_init_from_matrix; ///
+private alias c_graphene_euler_init_from_quaternionFn = extern(C) graphene_euler_t* function(graphene_euler_t* e, const(graphene_quaternion_t)* q, graphene_euler_order_t order) nothrow;
+__gshared c_graphene_euler_init_from_quaternionFn c_graphene_euler_init_from_quaternion; ///
+private alias c_graphene_euler_init_from_radiansFn = extern(C) graphene_euler_t* function(graphene_euler_t* e, float x, float y, float z, graphene_euler_order_t order) nothrow;
+__gshared c_graphene_euler_init_from_radiansFn c_graphene_euler_init_from_radians; ///
+private alias c_graphene_euler_init_from_vec3Fn = extern(C) graphene_euler_t* function(graphene_euler_t* e, const(graphene_vec3_t)* v, graphene_euler_order_t order) nothrow;
+__gshared c_graphene_euler_init_from_vec3Fn c_graphene_euler_init_from_vec3; ///
+private alias c_graphene_euler_init_with_orderFn = extern(C) graphene_euler_t* function(graphene_euler_t* e, float x, float y, float z, graphene_euler_order_t order) nothrow;
+__gshared c_graphene_euler_init_with_orderFn c_graphene_euler_init_with_order; ///
+private alias c_graphene_euler_reorderFn = extern(C) void function(const(graphene_euler_t)* e, graphene_euler_order_t order, graphene_euler_t* res) nothrow;
+__gshared c_graphene_euler_reorderFn c_graphene_euler_reorder; ///
+private alias c_graphene_euler_to_matrixFn = extern(C) void function(const(graphene_euler_t)* e, graphene_matrix_t* res) nothrow;
+__gshared c_graphene_euler_to_matrixFn c_graphene_euler_to_matrix; ///
+private alias c_graphene_euler_to_quaternionFn = extern(C) void function(const(graphene_euler_t)* e, graphene_quaternion_t* res) nothrow;
+__gshared c_graphene_euler_to_quaternionFn c_graphene_euler_to_quaternion; ///
+private alias c_graphene_euler_to_vec3Fn = extern(C) void function(const(graphene_euler_t)* e, graphene_vec3_t* res) nothrow;
+__gshared c_graphene_euler_to_vec3Fn c_graphene_euler_to_vec3; ///
 
-  // Frustum
-  GType function() c_graphene_frustum_get_type; ///
-  graphene_frustum_t* function() c_graphene_frustum_alloc; ///
-  bool function(const(graphene_frustum_t)* f, const(graphene_point3d_t)* point) c_graphene_frustum_contains_point; ///
-  bool function(const(graphene_frustum_t)* a, const(graphene_frustum_t)* b) c_graphene_frustum_equal; ///
-  void function(graphene_frustum_t* f) c_graphene_frustum_free; ///
-  void function(const(graphene_frustum_t)* f, graphene_plane_t* planes) c_graphene_frustum_get_planes; ///
-  graphene_frustum_t* function(graphene_frustum_t* f, const(graphene_plane_t)* p0, const(graphene_plane_t)* p1, const(graphene_plane_t)* p2, const(graphene_plane_t)* p3, const(graphene_plane_t)* p4, const(graphene_plane_t)* p5) c_graphene_frustum_init; ///
-  graphene_frustum_t* function(graphene_frustum_t* f, const(graphene_frustum_t)* src) c_graphene_frustum_init_from_frustum; ///
-  graphene_frustum_t* function(graphene_frustum_t* f, const(graphene_matrix_t)* matrix) c_graphene_frustum_init_from_matrix; ///
-  bool function(const(graphene_frustum_t)* f, const(graphene_box_t)* box) c_graphene_frustum_intersects_box; ///
-  bool function(const(graphene_frustum_t)* f, const(graphene_sphere_t)* sphere) c_graphene_frustum_intersects_sphere; ///
+// Frustum
+private alias c_graphene_frustum_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_graphene_frustum_get_typeFn c_graphene_frustum_get_type; ///
+private alias c_graphene_frustum_allocFn = extern(C) graphene_frustum_t* function() nothrow;
+__gshared c_graphene_frustum_allocFn c_graphene_frustum_alloc; ///
+private alias c_graphene_frustum_contains_pointFn = extern(C) bool function(const(graphene_frustum_t)* f, const(graphene_point3d_t)* point) nothrow;
+__gshared c_graphene_frustum_contains_pointFn c_graphene_frustum_contains_point; ///
+private alias c_graphene_frustum_equalFn = extern(C) bool function(const(graphene_frustum_t)* a, const(graphene_frustum_t)* b) nothrow;
+__gshared c_graphene_frustum_equalFn c_graphene_frustum_equal; ///
+private alias c_graphene_frustum_freeFn = extern(C) void function(graphene_frustum_t* f) nothrow;
+__gshared c_graphene_frustum_freeFn c_graphene_frustum_free; ///
+private alias c_graphene_frustum_get_planesFn = extern(C) void function(const(graphene_frustum_t)* f, graphene_plane_t* planes) nothrow;
+__gshared c_graphene_frustum_get_planesFn c_graphene_frustum_get_planes; ///
+private alias c_graphene_frustum_initFn = extern(C) graphene_frustum_t* function(graphene_frustum_t* f, const(graphene_plane_t)* p0, const(graphene_plane_t)* p1, const(graphene_plane_t)* p2, const(graphene_plane_t)* p3, const(graphene_plane_t)* p4, const(graphene_plane_t)* p5) nothrow;
+__gshared c_graphene_frustum_initFn c_graphene_frustum_init; ///
+private alias c_graphene_frustum_init_from_frustumFn = extern(C) graphene_frustum_t* function(graphene_frustum_t* f, const(graphene_frustum_t)* src) nothrow;
+__gshared c_graphene_frustum_init_from_frustumFn c_graphene_frustum_init_from_frustum; ///
+private alias c_graphene_frustum_init_from_matrixFn = extern(C) graphene_frustum_t* function(graphene_frustum_t* f, const(graphene_matrix_t)* matrix) nothrow;
+__gshared c_graphene_frustum_init_from_matrixFn c_graphene_frustum_init_from_matrix; ///
+private alias c_graphene_frustum_intersects_boxFn = extern(C) bool function(const(graphene_frustum_t)* f, const(graphene_box_t)* box) nothrow;
+__gshared c_graphene_frustum_intersects_boxFn c_graphene_frustum_intersects_box; ///
+private alias c_graphene_frustum_intersects_sphereFn = extern(C) bool function(const(graphene_frustum_t)* f, const(graphene_sphere_t)* sphere) nothrow;
+__gshared c_graphene_frustum_intersects_sphereFn c_graphene_frustum_intersects_sphere; ///
 
-  // Matrix
-  GType function() c_graphene_matrix_get_type; ///
-  graphene_matrix_t* function() c_graphene_matrix_alloc; ///
-  bool function(const(graphene_matrix_t)* m, graphene_vec3_t* translate, graphene_vec3_t* scale, graphene_quaternion_t* rotate, graphene_vec3_t* shear, graphene_vec4_t* perspective) c_graphene_matrix_decompose; ///
-  float function(const(graphene_matrix_t)* m) c_graphene_matrix_determinant; ///
-  bool function(const(graphene_matrix_t)* a, const(graphene_matrix_t)* b) c_graphene_matrix_equal; ///
-  bool function(const(graphene_matrix_t)* a, const(graphene_matrix_t)* b) c_graphene_matrix_equal_fast; ///
-  void function(graphene_matrix_t* m) c_graphene_matrix_free; ///
-  void function(const(graphene_matrix_t)* m, uint index, graphene_vec4_t* res) c_graphene_matrix_get_row; ///
-  float function(const(graphene_matrix_t)* m, uint row, uint col) c_graphene_matrix_get_value; ///
-  float function(const(graphene_matrix_t)* m) c_graphene_matrix_get_x_scale; ///
-  float function(const(graphene_matrix_t)* m) c_graphene_matrix_get_x_translation; ///
-  float function(const(graphene_matrix_t)* m) c_graphene_matrix_get_y_scale; ///
-  float function(const(graphene_matrix_t)* m) c_graphene_matrix_get_y_translation; ///
-  float function(const(graphene_matrix_t)* m) c_graphene_matrix_get_z_scale; ///
-  float function(const(graphene_matrix_t)* m) c_graphene_matrix_get_z_translation; ///
-  graphene_matrix_t* function(graphene_matrix_t* m, double xx, double yx, double xy, double yy, double x0, double y0) c_graphene_matrix_init_from_2d; ///
-  graphene_matrix_t* function(graphene_matrix_t* m, const(float)* v) c_graphene_matrix_init_from_float; ///
-  graphene_matrix_t* function(graphene_matrix_t* m, const(graphene_matrix_t)* src) c_graphene_matrix_init_from_matrix; ///
-  graphene_matrix_t* function(graphene_matrix_t* m, const(graphene_vec4_t)* v0, const(graphene_vec4_t)* v1, const(graphene_vec4_t)* v2, const(graphene_vec4_t)* v3) c_graphene_matrix_init_from_vec4; ///
-  graphene_matrix_t* function(graphene_matrix_t* m, float left, float right, float bottom, float top, float zNear, float zFar) c_graphene_matrix_init_frustum; ///
-  graphene_matrix_t* function(graphene_matrix_t* m) c_graphene_matrix_init_identity; ///
-  graphene_matrix_t* function(graphene_matrix_t* m, const(graphene_vec3_t)* eye, const(graphene_vec3_t)* center, const(graphene_vec3_t)* up) c_graphene_matrix_init_look_at; ///
-  graphene_matrix_t* function(graphene_matrix_t* m, float left, float right, float top, float bottom, float zNear, float zFar) c_graphene_matrix_init_ortho; ///
-  graphene_matrix_t* function(graphene_matrix_t* m, float fovy, float aspect, float zNear, float zFar) c_graphene_matrix_init_perspective; ///
-  graphene_matrix_t* function(graphene_matrix_t* m, float angle, const(graphene_vec3_t)* axis) c_graphene_matrix_init_rotate; ///
-  graphene_matrix_t* function(graphene_matrix_t* m, float x, float y, float z) c_graphene_matrix_init_scale; ///
-  graphene_matrix_t* function(graphene_matrix_t* m, float xSkew, float ySkew) c_graphene_matrix_init_skew; ///
-  graphene_matrix_t* function(graphene_matrix_t* m, const(graphene_point3d_t)* p) c_graphene_matrix_init_translate; ///
-  void function(const(graphene_matrix_t)* a, const(graphene_matrix_t)* b, double factor, graphene_matrix_t* res) c_graphene_matrix_interpolate; ///
-  bool function(const(graphene_matrix_t)* m, graphene_matrix_t* res) c_graphene_matrix_inverse; ///
-  bool function(const(graphene_matrix_t)* m) c_graphene_matrix_is_2d; ///
-  bool function(const(graphene_matrix_t)* m) c_graphene_matrix_is_backface_visible; ///
-  bool function(const(graphene_matrix_t)* m) c_graphene_matrix_is_identity; ///
-  bool function(const(graphene_matrix_t)* m) c_graphene_matrix_is_singular; ///
-  void function(const(graphene_matrix_t)* a, const(graphene_matrix_t)* b, graphene_matrix_t* res) c_graphene_matrix_multiply; ///
-  bool function(const(graphene_matrix_t)* a, const(graphene_matrix_t)* b, float epsilon) c_graphene_matrix_near; ///
-  void function(const(graphene_matrix_t)* m, graphene_matrix_t* res) c_graphene_matrix_normalize; ///
-  void function(const(graphene_matrix_t)* m, float depth, graphene_matrix_t* res) c_graphene_matrix_perspective; ///
-  void function(const(graphene_matrix_t)* m) c_graphene_matrix_print; ///
-  void function(const(graphene_matrix_t)* m, const(graphene_point_t)* p, graphene_point_t* res) c_graphene_matrix_project_point; ///
-  void function(const(graphene_matrix_t)* m, const(graphene_rect_t)* r, graphene_quad_t* res) c_graphene_matrix_project_rect; ///
-  void function(const(graphene_matrix_t)* m, const(graphene_rect_t)* r, graphene_rect_t* res) c_graphene_matrix_project_rect_bounds; ///
-  void function(graphene_matrix_t* m, float angle, const(graphene_vec3_t)* axis) c_graphene_matrix_rotate; ///
-  void function(graphene_matrix_t* m, const(graphene_euler_t)* e) c_graphene_matrix_rotate_euler; ///
-  void function(graphene_matrix_t* m, const(graphene_quaternion_t)* q) c_graphene_matrix_rotate_quaternion; ///
-  void function(graphene_matrix_t* m, float angle) c_graphene_matrix_rotate_x; ///
-  void function(graphene_matrix_t* m, float angle) c_graphene_matrix_rotate_y; ///
-  void function(graphene_matrix_t* m, float angle) c_graphene_matrix_rotate_z; ///
-  void function(graphene_matrix_t* m, float factorX, float factorY, float factorZ) c_graphene_matrix_scale; ///
-  void function(graphene_matrix_t* m, float factor) c_graphene_matrix_skew_xy; ///
-  void function(graphene_matrix_t* m, float factor) c_graphene_matrix_skew_xz; ///
-  void function(graphene_matrix_t* m, float factor) c_graphene_matrix_skew_yz; ///
-  bool function(const(graphene_matrix_t)* m, double* xx, double* yx, double* xy, double* yy, double* x0, double* y0) c_graphene_matrix_to_2d; ///
-  void function(const(graphene_matrix_t)* m, float* v) c_graphene_matrix_to_float; ///
-  void function(const(graphene_matrix_t)* m, const(graphene_rect_t)* r, graphene_rect_t* res) c_graphene_matrix_transform_bounds; ///
-  void function(const(graphene_matrix_t)* m, const(graphene_box_t)* b, graphene_box_t* res) c_graphene_matrix_transform_box; ///
-  void function(const(graphene_matrix_t)* m, const(graphene_point_t)* p, graphene_point_t* res) c_graphene_matrix_transform_point; ///
-  void function(const(graphene_matrix_t)* m, const(graphene_point3d_t)* p, graphene_point3d_t* res) c_graphene_matrix_transform_point3d; ///
-  void function(const(graphene_matrix_t)* m, const(graphene_ray_t)* r, graphene_ray_t* res) c_graphene_matrix_transform_ray; ///
-  void function(const(graphene_matrix_t)* m, const(graphene_rect_t)* r, graphene_quad_t* res) c_graphene_matrix_transform_rect; ///
-  void function(const(graphene_matrix_t)* m, const(graphene_sphere_t)* s, graphene_sphere_t* res) c_graphene_matrix_transform_sphere; ///
-  void function(const(graphene_matrix_t)* m, const(graphene_vec3_t)* v, graphene_vec3_t* res) c_graphene_matrix_transform_vec3; ///
-  void function(const(graphene_matrix_t)* m, const(graphene_vec4_t)* v, graphene_vec4_t* res) c_graphene_matrix_transform_vec4; ///
-  void function(graphene_matrix_t* m, const(graphene_point3d_t)* pos) c_graphene_matrix_translate; ///
-  void function(const(graphene_matrix_t)* m, graphene_matrix_t* res) c_graphene_matrix_transpose; ///
-  void function(const(graphene_matrix_t)* projection, const(graphene_matrix_t)* modelview, const(graphene_point3d_t)* point, graphene_point3d_t* res) c_graphene_matrix_unproject_point3d; ///
-  void function(const(graphene_matrix_t)* m, const(graphene_rect_t)* r, const(graphene_rect_t)* bounds, graphene_rect_t* res) c_graphene_matrix_untransform_bounds; ///
-  bool function(const(graphene_matrix_t)* m, const(graphene_point_t)* p, const(graphene_rect_t)* bounds, graphene_point_t* res) c_graphene_matrix_untransform_point; ///
+// Matrix
+private alias c_graphene_matrix_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_graphene_matrix_get_typeFn c_graphene_matrix_get_type; ///
+private alias c_graphene_matrix_allocFn = extern(C) graphene_matrix_t* function() nothrow;
+__gshared c_graphene_matrix_allocFn c_graphene_matrix_alloc; ///
+private alias c_graphene_matrix_decomposeFn = extern(C) bool function(const(graphene_matrix_t)* m, graphene_vec3_t* translate, graphene_vec3_t* scale, graphene_quaternion_t* rotate, graphene_vec3_t* shear, graphene_vec4_t* perspective) nothrow;
+__gshared c_graphene_matrix_decomposeFn c_graphene_matrix_decompose; ///
+private alias c_graphene_matrix_determinantFn = extern(C) float function(const(graphene_matrix_t)* m) nothrow;
+__gshared c_graphene_matrix_determinantFn c_graphene_matrix_determinant; ///
+private alias c_graphene_matrix_equalFn = extern(C) bool function(const(graphene_matrix_t)* a, const(graphene_matrix_t)* b) nothrow;
+__gshared c_graphene_matrix_equalFn c_graphene_matrix_equal; ///
+private alias c_graphene_matrix_equal_fastFn = extern(C) bool function(const(graphene_matrix_t)* a, const(graphene_matrix_t)* b) nothrow;
+__gshared c_graphene_matrix_equal_fastFn c_graphene_matrix_equal_fast; ///
+private alias c_graphene_matrix_freeFn = extern(C) void function(graphene_matrix_t* m) nothrow;
+__gshared c_graphene_matrix_freeFn c_graphene_matrix_free; ///
+private alias c_graphene_matrix_get_rowFn = extern(C) void function(const(graphene_matrix_t)* m, uint index, graphene_vec4_t* res) nothrow;
+__gshared c_graphene_matrix_get_rowFn c_graphene_matrix_get_row; ///
+private alias c_graphene_matrix_get_valueFn = extern(C) float function(const(graphene_matrix_t)* m, uint row, uint col) nothrow;
+__gshared c_graphene_matrix_get_valueFn c_graphene_matrix_get_value; ///
+private alias c_graphene_matrix_get_x_scaleFn = extern(C) float function(const(graphene_matrix_t)* m) nothrow;
+__gshared c_graphene_matrix_get_x_scaleFn c_graphene_matrix_get_x_scale; ///
+private alias c_graphene_matrix_get_x_translationFn = extern(C) float function(const(graphene_matrix_t)* m) nothrow;
+__gshared c_graphene_matrix_get_x_translationFn c_graphene_matrix_get_x_translation; ///
+private alias c_graphene_matrix_get_y_scaleFn = extern(C) float function(const(graphene_matrix_t)* m) nothrow;
+__gshared c_graphene_matrix_get_y_scaleFn c_graphene_matrix_get_y_scale; ///
+private alias c_graphene_matrix_get_y_translationFn = extern(C) float function(const(graphene_matrix_t)* m) nothrow;
+__gshared c_graphene_matrix_get_y_translationFn c_graphene_matrix_get_y_translation; ///
+private alias c_graphene_matrix_get_z_scaleFn = extern(C) float function(const(graphene_matrix_t)* m) nothrow;
+__gshared c_graphene_matrix_get_z_scaleFn c_graphene_matrix_get_z_scale; ///
+private alias c_graphene_matrix_get_z_translationFn = extern(C) float function(const(graphene_matrix_t)* m) nothrow;
+__gshared c_graphene_matrix_get_z_translationFn c_graphene_matrix_get_z_translation; ///
+private alias c_graphene_matrix_init_from_2dFn = extern(C) graphene_matrix_t* function(graphene_matrix_t* m, double xx, double yx, double xy, double yy, double x0, double y0) nothrow;
+__gshared c_graphene_matrix_init_from_2dFn c_graphene_matrix_init_from_2d; ///
+private alias c_graphene_matrix_init_from_floatFn = extern(C) graphene_matrix_t* function(graphene_matrix_t* m, const(float)* v) nothrow;
+__gshared c_graphene_matrix_init_from_floatFn c_graphene_matrix_init_from_float; ///
+private alias c_graphene_matrix_init_from_matrixFn = extern(C) graphene_matrix_t* function(graphene_matrix_t* m, const(graphene_matrix_t)* src) nothrow;
+__gshared c_graphene_matrix_init_from_matrixFn c_graphene_matrix_init_from_matrix; ///
+private alias c_graphene_matrix_init_from_vec4Fn = extern(C) graphene_matrix_t* function(graphene_matrix_t* m, const(graphene_vec4_t)* v0, const(graphene_vec4_t)* v1, const(graphene_vec4_t)* v2, const(graphene_vec4_t)* v3) nothrow;
+__gshared c_graphene_matrix_init_from_vec4Fn c_graphene_matrix_init_from_vec4; ///
+private alias c_graphene_matrix_init_frustumFn = extern(C) graphene_matrix_t* function(graphene_matrix_t* m, float left, float right, float bottom, float top, float zNear, float zFar) nothrow;
+__gshared c_graphene_matrix_init_frustumFn c_graphene_matrix_init_frustum; ///
+private alias c_graphene_matrix_init_identityFn = extern(C) graphene_matrix_t* function(graphene_matrix_t* m) nothrow;
+__gshared c_graphene_matrix_init_identityFn c_graphene_matrix_init_identity; ///
+private alias c_graphene_matrix_init_look_atFn = extern(C) graphene_matrix_t* function(graphene_matrix_t* m, const(graphene_vec3_t)* eye, const(graphene_vec3_t)* center, const(graphene_vec3_t)* up) nothrow;
+__gshared c_graphene_matrix_init_look_atFn c_graphene_matrix_init_look_at; ///
+private alias c_graphene_matrix_init_orthoFn = extern(C) graphene_matrix_t* function(graphene_matrix_t* m, float left, float right, float top, float bottom, float zNear, float zFar) nothrow;
+__gshared c_graphene_matrix_init_orthoFn c_graphene_matrix_init_ortho; ///
+private alias c_graphene_matrix_init_perspectiveFn = extern(C) graphene_matrix_t* function(graphene_matrix_t* m, float fovy, float aspect, float zNear, float zFar) nothrow;
+__gshared c_graphene_matrix_init_perspectiveFn c_graphene_matrix_init_perspective; ///
+private alias c_graphene_matrix_init_rotateFn = extern(C) graphene_matrix_t* function(graphene_matrix_t* m, float angle, const(graphene_vec3_t)* axis) nothrow;
+__gshared c_graphene_matrix_init_rotateFn c_graphene_matrix_init_rotate; ///
+private alias c_graphene_matrix_init_scaleFn = extern(C) graphene_matrix_t* function(graphene_matrix_t* m, float x, float y, float z) nothrow;
+__gshared c_graphene_matrix_init_scaleFn c_graphene_matrix_init_scale; ///
+private alias c_graphene_matrix_init_skewFn = extern(C) graphene_matrix_t* function(graphene_matrix_t* m, float xSkew, float ySkew) nothrow;
+__gshared c_graphene_matrix_init_skewFn c_graphene_matrix_init_skew; ///
+private alias c_graphene_matrix_init_translateFn = extern(C) graphene_matrix_t* function(graphene_matrix_t* m, const(graphene_point3d_t)* p) nothrow;
+__gshared c_graphene_matrix_init_translateFn c_graphene_matrix_init_translate; ///
+private alias c_graphene_matrix_interpolateFn = extern(C) void function(const(graphene_matrix_t)* a, const(graphene_matrix_t)* b, double factor, graphene_matrix_t* res) nothrow;
+__gshared c_graphene_matrix_interpolateFn c_graphene_matrix_interpolate; ///
+private alias c_graphene_matrix_inverseFn = extern(C) bool function(const(graphene_matrix_t)* m, graphene_matrix_t* res) nothrow;
+__gshared c_graphene_matrix_inverseFn c_graphene_matrix_inverse; ///
+private alias c_graphene_matrix_is_2dFn = extern(C) bool function(const(graphene_matrix_t)* m) nothrow;
+__gshared c_graphene_matrix_is_2dFn c_graphene_matrix_is_2d; ///
+private alias c_graphene_matrix_is_backface_visibleFn = extern(C) bool function(const(graphene_matrix_t)* m) nothrow;
+__gshared c_graphene_matrix_is_backface_visibleFn c_graphene_matrix_is_backface_visible; ///
+private alias c_graphene_matrix_is_identityFn = extern(C) bool function(const(graphene_matrix_t)* m) nothrow;
+__gshared c_graphene_matrix_is_identityFn c_graphene_matrix_is_identity; ///
+private alias c_graphene_matrix_is_singularFn = extern(C) bool function(const(graphene_matrix_t)* m) nothrow;
+__gshared c_graphene_matrix_is_singularFn c_graphene_matrix_is_singular; ///
+private alias c_graphene_matrix_multiplyFn = extern(C) void function(const(graphene_matrix_t)* a, const(graphene_matrix_t)* b, graphene_matrix_t* res) nothrow;
+__gshared c_graphene_matrix_multiplyFn c_graphene_matrix_multiply; ///
+private alias c_graphene_matrix_nearFn = extern(C) bool function(const(graphene_matrix_t)* a, const(graphene_matrix_t)* b, float epsilon) nothrow;
+__gshared c_graphene_matrix_nearFn c_graphene_matrix_near; ///
+private alias c_graphene_matrix_normalizeFn = extern(C) void function(const(graphene_matrix_t)* m, graphene_matrix_t* res) nothrow;
+__gshared c_graphene_matrix_normalizeFn c_graphene_matrix_normalize; ///
+private alias c_graphene_matrix_perspectiveFn = extern(C) void function(const(graphene_matrix_t)* m, float depth, graphene_matrix_t* res) nothrow;
+__gshared c_graphene_matrix_perspectiveFn c_graphene_matrix_perspective; ///
+private alias c_graphene_matrix_printFn = extern(C) void function(const(graphene_matrix_t)* m) nothrow;
+__gshared c_graphene_matrix_printFn c_graphene_matrix_print; ///
+private alias c_graphene_matrix_project_pointFn = extern(C) void function(const(graphene_matrix_t)* m, const(graphene_point_t)* p, graphene_point_t* res) nothrow;
+__gshared c_graphene_matrix_project_pointFn c_graphene_matrix_project_point; ///
+private alias c_graphene_matrix_project_rectFn = extern(C) void function(const(graphene_matrix_t)* m, const(graphene_rect_t)* r, graphene_quad_t* res) nothrow;
+__gshared c_graphene_matrix_project_rectFn c_graphene_matrix_project_rect; ///
+private alias c_graphene_matrix_project_rect_boundsFn = extern(C) void function(const(graphene_matrix_t)* m, const(graphene_rect_t)* r, graphene_rect_t* res) nothrow;
+__gshared c_graphene_matrix_project_rect_boundsFn c_graphene_matrix_project_rect_bounds; ///
+private alias c_graphene_matrix_rotateFn = extern(C) void function(graphene_matrix_t* m, float angle, const(graphene_vec3_t)* axis) nothrow;
+__gshared c_graphene_matrix_rotateFn c_graphene_matrix_rotate; ///
+private alias c_graphene_matrix_rotate_eulerFn = extern(C) void function(graphene_matrix_t* m, const(graphene_euler_t)* e) nothrow;
+__gshared c_graphene_matrix_rotate_eulerFn c_graphene_matrix_rotate_euler; ///
+private alias c_graphene_matrix_rotate_quaternionFn = extern(C) void function(graphene_matrix_t* m, const(graphene_quaternion_t)* q) nothrow;
+__gshared c_graphene_matrix_rotate_quaternionFn c_graphene_matrix_rotate_quaternion; ///
+private alias c_graphene_matrix_rotate_xFn = extern(C) void function(graphene_matrix_t* m, float angle) nothrow;
+__gshared c_graphene_matrix_rotate_xFn c_graphene_matrix_rotate_x; ///
+private alias c_graphene_matrix_rotate_yFn = extern(C) void function(graphene_matrix_t* m, float angle) nothrow;
+__gshared c_graphene_matrix_rotate_yFn c_graphene_matrix_rotate_y; ///
+private alias c_graphene_matrix_rotate_zFn = extern(C) void function(graphene_matrix_t* m, float angle) nothrow;
+__gshared c_graphene_matrix_rotate_zFn c_graphene_matrix_rotate_z; ///
+private alias c_graphene_matrix_scaleFn = extern(C) void function(graphene_matrix_t* m, float factorX, float factorY, float factorZ) nothrow;
+__gshared c_graphene_matrix_scaleFn c_graphene_matrix_scale; ///
+private alias c_graphene_matrix_skew_xyFn = extern(C) void function(graphene_matrix_t* m, float factor) nothrow;
+__gshared c_graphene_matrix_skew_xyFn c_graphene_matrix_skew_xy; ///
+private alias c_graphene_matrix_skew_xzFn = extern(C) void function(graphene_matrix_t* m, float factor) nothrow;
+__gshared c_graphene_matrix_skew_xzFn c_graphene_matrix_skew_xz; ///
+private alias c_graphene_matrix_skew_yzFn = extern(C) void function(graphene_matrix_t* m, float factor) nothrow;
+__gshared c_graphene_matrix_skew_yzFn c_graphene_matrix_skew_yz; ///
+private alias c_graphene_matrix_to_2dFn = extern(C) bool function(const(graphene_matrix_t)* m, double* xx, double* yx, double* xy, double* yy, double* x0, double* y0) nothrow;
+__gshared c_graphene_matrix_to_2dFn c_graphene_matrix_to_2d; ///
+private alias c_graphene_matrix_to_floatFn = extern(C) void function(const(graphene_matrix_t)* m, float* v) nothrow;
+__gshared c_graphene_matrix_to_floatFn c_graphene_matrix_to_float; ///
+private alias c_graphene_matrix_transform_boundsFn = extern(C) void function(const(graphene_matrix_t)* m, const(graphene_rect_t)* r, graphene_rect_t* res) nothrow;
+__gshared c_graphene_matrix_transform_boundsFn c_graphene_matrix_transform_bounds; ///
+private alias c_graphene_matrix_transform_boxFn = extern(C) void function(const(graphene_matrix_t)* m, const(graphene_box_t)* b, graphene_box_t* res) nothrow;
+__gshared c_graphene_matrix_transform_boxFn c_graphene_matrix_transform_box; ///
+private alias c_graphene_matrix_transform_pointFn = extern(C) void function(const(graphene_matrix_t)* m, const(graphene_point_t)* p, graphene_point_t* res) nothrow;
+__gshared c_graphene_matrix_transform_pointFn c_graphene_matrix_transform_point; ///
+private alias c_graphene_matrix_transform_point3dFn = extern(C) void function(const(graphene_matrix_t)* m, const(graphene_point3d_t)* p, graphene_point3d_t* res) nothrow;
+__gshared c_graphene_matrix_transform_point3dFn c_graphene_matrix_transform_point3d; ///
+private alias c_graphene_matrix_transform_rayFn = extern(C) void function(const(graphene_matrix_t)* m, const(graphene_ray_t)* r, graphene_ray_t* res) nothrow;
+__gshared c_graphene_matrix_transform_rayFn c_graphene_matrix_transform_ray; ///
+private alias c_graphene_matrix_transform_rectFn = extern(C) void function(const(graphene_matrix_t)* m, const(graphene_rect_t)* r, graphene_quad_t* res) nothrow;
+__gshared c_graphene_matrix_transform_rectFn c_graphene_matrix_transform_rect; ///
+private alias c_graphene_matrix_transform_sphereFn = extern(C) void function(const(graphene_matrix_t)* m, const(graphene_sphere_t)* s, graphene_sphere_t* res) nothrow;
+__gshared c_graphene_matrix_transform_sphereFn c_graphene_matrix_transform_sphere; ///
+private alias c_graphene_matrix_transform_vec3Fn = extern(C) void function(const(graphene_matrix_t)* m, const(graphene_vec3_t)* v, graphene_vec3_t* res) nothrow;
+__gshared c_graphene_matrix_transform_vec3Fn c_graphene_matrix_transform_vec3; ///
+private alias c_graphene_matrix_transform_vec4Fn = extern(C) void function(const(graphene_matrix_t)* m, const(graphene_vec4_t)* v, graphene_vec4_t* res) nothrow;
+__gshared c_graphene_matrix_transform_vec4Fn c_graphene_matrix_transform_vec4; ///
+private alias c_graphene_matrix_translateFn = extern(C) void function(graphene_matrix_t* m, const(graphene_point3d_t)* pos) nothrow;
+__gshared c_graphene_matrix_translateFn c_graphene_matrix_translate; ///
+private alias c_graphene_matrix_transposeFn = extern(C) void function(const(graphene_matrix_t)* m, graphene_matrix_t* res) nothrow;
+__gshared c_graphene_matrix_transposeFn c_graphene_matrix_transpose; ///
+private alias c_graphene_matrix_unproject_point3dFn = extern(C) void function(const(graphene_matrix_t)* projection, const(graphene_matrix_t)* modelview, const(graphene_point3d_t)* point, graphene_point3d_t* res) nothrow;
+__gshared c_graphene_matrix_unproject_point3dFn c_graphene_matrix_unproject_point3d; ///
+private alias c_graphene_matrix_untransform_boundsFn = extern(C) void function(const(graphene_matrix_t)* m, const(graphene_rect_t)* r, const(graphene_rect_t)* bounds, graphene_rect_t* res) nothrow;
+__gshared c_graphene_matrix_untransform_boundsFn c_graphene_matrix_untransform_bounds; ///
+private alias c_graphene_matrix_untransform_pointFn = extern(C) bool function(const(graphene_matrix_t)* m, const(graphene_point_t)* p, const(graphene_rect_t)* bounds, graphene_point_t* res) nothrow;
+__gshared c_graphene_matrix_untransform_pointFn c_graphene_matrix_untransform_point; ///
 
-  // Plane
-  GType function() c_graphene_plane_get_type; ///
-  graphene_plane_t* function() c_graphene_plane_alloc; ///
-  float function(const(graphene_plane_t)* p, const(graphene_point3d_t)* point) c_graphene_plane_distance; ///
-  bool function(const(graphene_plane_t)* a, const(graphene_plane_t)* b) c_graphene_plane_equal; ///
-  void function(graphene_plane_t* p) c_graphene_plane_free; ///
-  float function(const(graphene_plane_t)* p) c_graphene_plane_get_constant; ///
-  void function(const(graphene_plane_t)* p, graphene_vec3_t* normal) c_graphene_plane_get_normal; ///
-  graphene_plane_t* function(graphene_plane_t* p, const(graphene_vec3_t)* normal, float constant) c_graphene_plane_init; ///
-  graphene_plane_t* function(graphene_plane_t* p, const(graphene_plane_t)* src) c_graphene_plane_init_from_plane; ///
-  graphene_plane_t* function(graphene_plane_t* p, const(graphene_vec3_t)* normal, const(graphene_point3d_t)* point) c_graphene_plane_init_from_point; ///
-  graphene_plane_t* function(graphene_plane_t* p, const(graphene_point3d_t)* a, const(graphene_point3d_t)* b, const(graphene_point3d_t)* c) c_graphene_plane_init_from_points; ///
-  graphene_plane_t* function(graphene_plane_t* p, const(graphene_vec4_t)* src) c_graphene_plane_init_from_vec4; ///
-  void function(const(graphene_plane_t)* p, graphene_plane_t* res) c_graphene_plane_negate; ///
-  void function(const(graphene_plane_t)* p, graphene_plane_t* res) c_graphene_plane_normalize; ///
-  void function(const(graphene_plane_t)* p, const(graphene_matrix_t)* matrix, const(graphene_matrix_t)* normalMatrix, graphene_plane_t* res) c_graphene_plane_transform; ///
+// Plane
+private alias c_graphene_plane_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_graphene_plane_get_typeFn c_graphene_plane_get_type; ///
+private alias c_graphene_plane_allocFn = extern(C) graphene_plane_t* function() nothrow;
+__gshared c_graphene_plane_allocFn c_graphene_plane_alloc; ///
+private alias c_graphene_plane_distanceFn = extern(C) float function(const(graphene_plane_t)* p, const(graphene_point3d_t)* point) nothrow;
+__gshared c_graphene_plane_distanceFn c_graphene_plane_distance; ///
+private alias c_graphene_plane_equalFn = extern(C) bool function(const(graphene_plane_t)* a, const(graphene_plane_t)* b) nothrow;
+__gshared c_graphene_plane_equalFn c_graphene_plane_equal; ///
+private alias c_graphene_plane_freeFn = extern(C) void function(graphene_plane_t* p) nothrow;
+__gshared c_graphene_plane_freeFn c_graphene_plane_free; ///
+private alias c_graphene_plane_get_constantFn = extern(C) float function(const(graphene_plane_t)* p) nothrow;
+__gshared c_graphene_plane_get_constantFn c_graphene_plane_get_constant; ///
+private alias c_graphene_plane_get_normalFn = extern(C) void function(const(graphene_plane_t)* p, graphene_vec3_t* normal) nothrow;
+__gshared c_graphene_plane_get_normalFn c_graphene_plane_get_normal; ///
+private alias c_graphene_plane_initFn = extern(C) graphene_plane_t* function(graphene_plane_t* p, const(graphene_vec3_t)* normal, float constant) nothrow;
+__gshared c_graphene_plane_initFn c_graphene_plane_init; ///
+private alias c_graphene_plane_init_from_planeFn = extern(C) graphene_plane_t* function(graphene_plane_t* p, const(graphene_plane_t)* src) nothrow;
+__gshared c_graphene_plane_init_from_planeFn c_graphene_plane_init_from_plane; ///
+private alias c_graphene_plane_init_from_pointFn = extern(C) graphene_plane_t* function(graphene_plane_t* p, const(graphene_vec3_t)* normal, const(graphene_point3d_t)* point) nothrow;
+__gshared c_graphene_plane_init_from_pointFn c_graphene_plane_init_from_point; ///
+private alias c_graphene_plane_init_from_pointsFn = extern(C) graphene_plane_t* function(graphene_plane_t* p, const(graphene_point3d_t)* a, const(graphene_point3d_t)* b, const(graphene_point3d_t)* c) nothrow;
+__gshared c_graphene_plane_init_from_pointsFn c_graphene_plane_init_from_points; ///
+private alias c_graphene_plane_init_from_vec4Fn = extern(C) graphene_plane_t* function(graphene_plane_t* p, const(graphene_vec4_t)* src) nothrow;
+__gshared c_graphene_plane_init_from_vec4Fn c_graphene_plane_init_from_vec4; ///
+private alias c_graphene_plane_negateFn = extern(C) void function(const(graphene_plane_t)* p, graphene_plane_t* res) nothrow;
+__gshared c_graphene_plane_negateFn c_graphene_plane_negate; ///
+private alias c_graphene_plane_normalizeFn = extern(C) void function(const(graphene_plane_t)* p, graphene_plane_t* res) nothrow;
+__gshared c_graphene_plane_normalizeFn c_graphene_plane_normalize; ///
+private alias c_graphene_plane_transformFn = extern(C) void function(const(graphene_plane_t)* p, const(graphene_matrix_t)* matrix, const(graphene_matrix_t)* normalMatrix, graphene_plane_t* res) nothrow;
+__gshared c_graphene_plane_transformFn c_graphene_plane_transform; ///
 
-  // Point
-  GType function() c_graphene_point_get_type; ///
-  graphene_point_t* function() c_graphene_point_alloc; ///
-  float function(const(graphene_point_t)* a, const(graphene_point_t)* b, float* dX, float* dY) c_graphene_point_distance; ///
-  bool function(const(graphene_point_t)* a, const(graphene_point_t)* b) c_graphene_point_equal; ///
-  void function(graphene_point_t* p) c_graphene_point_free; ///
-  graphene_point_t* function(graphene_point_t* p, float x, float y) c_graphene_point_init; ///
-  graphene_point_t* function(graphene_point_t* p, const(graphene_point_t)* src) c_graphene_point_init_from_point; ///
-  graphene_point_t* function(graphene_point_t* p, const(graphene_vec2_t)* src) c_graphene_point_init_from_vec2; ///
-  void function(const(graphene_point_t)* a, const(graphene_point_t)* b, double factor, graphene_point_t* res) c_graphene_point_interpolate; ///
-  bool function(const(graphene_point_t)* a, const(graphene_point_t)* b, float epsilon) c_graphene_point_near; ///
-  void function(const(graphene_point_t)* p, graphene_vec2_t* v) c_graphene_point_to_vec2; ///
-  const(graphene_point_t)* function() c_graphene_point_zero; ///
+// Point
+private alias c_graphene_point_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_graphene_point_get_typeFn c_graphene_point_get_type; ///
+private alias c_graphene_point_allocFn = extern(C) graphene_point_t* function() nothrow;
+__gshared c_graphene_point_allocFn c_graphene_point_alloc; ///
+private alias c_graphene_point_distanceFn = extern(C) float function(const(graphene_point_t)* a, const(graphene_point_t)* b, float* dX, float* dY) nothrow;
+__gshared c_graphene_point_distanceFn c_graphene_point_distance; ///
+private alias c_graphene_point_equalFn = extern(C) bool function(const(graphene_point_t)* a, const(graphene_point_t)* b) nothrow;
+__gshared c_graphene_point_equalFn c_graphene_point_equal; ///
+private alias c_graphene_point_freeFn = extern(C) void function(graphene_point_t* p) nothrow;
+__gshared c_graphene_point_freeFn c_graphene_point_free; ///
+private alias c_graphene_point_initFn = extern(C) graphene_point_t* function(graphene_point_t* p, float x, float y) nothrow;
+__gshared c_graphene_point_initFn c_graphene_point_init; ///
+private alias c_graphene_point_init_from_pointFn = extern(C) graphene_point_t* function(graphene_point_t* p, const(graphene_point_t)* src) nothrow;
+__gshared c_graphene_point_init_from_pointFn c_graphene_point_init_from_point; ///
+private alias c_graphene_point_init_from_vec2Fn = extern(C) graphene_point_t* function(graphene_point_t* p, const(graphene_vec2_t)* src) nothrow;
+__gshared c_graphene_point_init_from_vec2Fn c_graphene_point_init_from_vec2; ///
+private alias c_graphene_point_interpolateFn = extern(C) void function(const(graphene_point_t)* a, const(graphene_point_t)* b, double factor, graphene_point_t* res) nothrow;
+__gshared c_graphene_point_interpolateFn c_graphene_point_interpolate; ///
+private alias c_graphene_point_nearFn = extern(C) bool function(const(graphene_point_t)* a, const(graphene_point_t)* b, float epsilon) nothrow;
+__gshared c_graphene_point_nearFn c_graphene_point_near; ///
+private alias c_graphene_point_to_vec2Fn = extern(C) void function(const(graphene_point_t)* p, graphene_vec2_t* v) nothrow;
+__gshared c_graphene_point_to_vec2Fn c_graphene_point_to_vec2; ///
+private alias c_graphene_point_zeroFn = extern(C) const(graphene_point_t)* function() nothrow;
+__gshared c_graphene_point_zeroFn c_graphene_point_zero; ///
 
-  // Point3D
-  GType function() c_graphene_point3d_get_type; ///
-  graphene_point3d_t* function() c_graphene_point3d_alloc; ///
-  void function(const(graphene_point3d_t)* a, const(graphene_point3d_t)* b, graphene_point3d_t* res) c_graphene_point3d_cross; ///
-  float function(const(graphene_point3d_t)* a, const(graphene_point3d_t)* b, graphene_vec3_t* delta) c_graphene_point3d_distance; ///
-  float function(const(graphene_point3d_t)* a, const(graphene_point3d_t)* b) c_graphene_point3d_dot; ///
-  bool function(const(graphene_point3d_t)* a, const(graphene_point3d_t)* b) c_graphene_point3d_equal; ///
-  void function(graphene_point3d_t* p) c_graphene_point3d_free; ///
-  graphene_point3d_t* function(graphene_point3d_t* p, float x, float y, float z) c_graphene_point3d_init; ///
-  graphene_point3d_t* function(graphene_point3d_t* p, const(graphene_point3d_t)* src) c_graphene_point3d_init_from_point; ///
-  graphene_point3d_t* function(graphene_point3d_t* p, const(graphene_vec3_t)* v) c_graphene_point3d_init_from_vec3; ///
-  void function(const(graphene_point3d_t)* a, const(graphene_point3d_t)* b, double factor, graphene_point3d_t* res) c_graphene_point3d_interpolate; ///
-  float function(const(graphene_point3d_t)* p) c_graphene_point3d_length; ///
-  bool function(const(graphene_point3d_t)* a, const(graphene_point3d_t)* b, float epsilon) c_graphene_point3d_near; ///
-  void function(const(graphene_point3d_t)* p, graphene_point3d_t* res) c_graphene_point3d_normalize; ///
-  void function(const(graphene_point3d_t)* p, const(graphene_rect_t)* viewport, float zNear, float zFar, graphene_point3d_t* res) c_graphene_point3d_normalize_viewport; ///
-  void function(const(graphene_point3d_t)* p, float factor, graphene_point3d_t* res) c_graphene_point3d_scale; ///
-  void function(const(graphene_point3d_t)* p, graphene_vec3_t* v) c_graphene_point3d_to_vec3; ///
-  const(graphene_point3d_t)* function() c_graphene_point3d_zero; ///
+// Point3D
+private alias c_graphene_point3d_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_graphene_point3d_get_typeFn c_graphene_point3d_get_type; ///
+private alias c_graphene_point3d_allocFn = extern(C) graphene_point3d_t* function() nothrow;
+__gshared c_graphene_point3d_allocFn c_graphene_point3d_alloc; ///
+private alias c_graphene_point3d_crossFn = extern(C) void function(const(graphene_point3d_t)* a, const(graphene_point3d_t)* b, graphene_point3d_t* res) nothrow;
+__gshared c_graphene_point3d_crossFn c_graphene_point3d_cross; ///
+private alias c_graphene_point3d_distanceFn = extern(C) float function(const(graphene_point3d_t)* a, const(graphene_point3d_t)* b, graphene_vec3_t* delta) nothrow;
+__gshared c_graphene_point3d_distanceFn c_graphene_point3d_distance; ///
+private alias c_graphene_point3d_dotFn = extern(C) float function(const(graphene_point3d_t)* a, const(graphene_point3d_t)* b) nothrow;
+__gshared c_graphene_point3d_dotFn c_graphene_point3d_dot; ///
+private alias c_graphene_point3d_equalFn = extern(C) bool function(const(graphene_point3d_t)* a, const(graphene_point3d_t)* b) nothrow;
+__gshared c_graphene_point3d_equalFn c_graphene_point3d_equal; ///
+private alias c_graphene_point3d_freeFn = extern(C) void function(graphene_point3d_t* p) nothrow;
+__gshared c_graphene_point3d_freeFn c_graphene_point3d_free; ///
+private alias c_graphene_point3d_initFn = extern(C) graphene_point3d_t* function(graphene_point3d_t* p, float x, float y, float z) nothrow;
+__gshared c_graphene_point3d_initFn c_graphene_point3d_init; ///
+private alias c_graphene_point3d_init_from_pointFn = extern(C) graphene_point3d_t* function(graphene_point3d_t* p, const(graphene_point3d_t)* src) nothrow;
+__gshared c_graphene_point3d_init_from_pointFn c_graphene_point3d_init_from_point; ///
+private alias c_graphene_point3d_init_from_vec3Fn = extern(C) graphene_point3d_t* function(graphene_point3d_t* p, const(graphene_vec3_t)* v) nothrow;
+__gshared c_graphene_point3d_init_from_vec3Fn c_graphene_point3d_init_from_vec3; ///
+private alias c_graphene_point3d_interpolateFn = extern(C) void function(const(graphene_point3d_t)* a, const(graphene_point3d_t)* b, double factor, graphene_point3d_t* res) nothrow;
+__gshared c_graphene_point3d_interpolateFn c_graphene_point3d_interpolate; ///
+private alias c_graphene_point3d_lengthFn = extern(C) float function(const(graphene_point3d_t)* p) nothrow;
+__gshared c_graphene_point3d_lengthFn c_graphene_point3d_length; ///
+private alias c_graphene_point3d_nearFn = extern(C) bool function(const(graphene_point3d_t)* a, const(graphene_point3d_t)* b, float epsilon) nothrow;
+__gshared c_graphene_point3d_nearFn c_graphene_point3d_near; ///
+private alias c_graphene_point3d_normalizeFn = extern(C) void function(const(graphene_point3d_t)* p, graphene_point3d_t* res) nothrow;
+__gshared c_graphene_point3d_normalizeFn c_graphene_point3d_normalize; ///
+private alias c_graphene_point3d_normalize_viewportFn = extern(C) void function(const(graphene_point3d_t)* p, const(graphene_rect_t)* viewport, float zNear, float zFar, graphene_point3d_t* res) nothrow;
+__gshared c_graphene_point3d_normalize_viewportFn c_graphene_point3d_normalize_viewport; ///
+private alias c_graphene_point3d_scaleFn = extern(C) void function(const(graphene_point3d_t)* p, float factor, graphene_point3d_t* res) nothrow;
+__gshared c_graphene_point3d_scaleFn c_graphene_point3d_scale; ///
+private alias c_graphene_point3d_to_vec3Fn = extern(C) void function(const(graphene_point3d_t)* p, graphene_vec3_t* v) nothrow;
+__gshared c_graphene_point3d_to_vec3Fn c_graphene_point3d_to_vec3; ///
+private alias c_graphene_point3d_zeroFn = extern(C) const(graphene_point3d_t)* function() nothrow;
+__gshared c_graphene_point3d_zeroFn c_graphene_point3d_zero; ///
 
-  // Quad
-  GType function() c_graphene_quad_get_type; ///
-  graphene_quad_t* function() c_graphene_quad_alloc; ///
-  void function(const(graphene_quad_t)* q, graphene_rect_t* r) c_graphene_quad_bounds; ///
-  bool function(const(graphene_quad_t)* q, const(graphene_point_t)* p) c_graphene_quad_contains; ///
-  void function(graphene_quad_t* q) c_graphene_quad_free; ///
-  const(graphene_point_t)* function(const(graphene_quad_t)* q, uint index) c_graphene_quad_get_point; ///
-  graphene_quad_t* function(graphene_quad_t* q, const(graphene_point_t)* p1, const(graphene_point_t)* p2, const(graphene_point_t)* p3, const(graphene_point_t)* p4) c_graphene_quad_init; ///
-  graphene_quad_t* function(graphene_quad_t* q, const(graphene_point_t)* points) c_graphene_quad_init_from_points; ///
-  graphene_quad_t* function(graphene_quad_t* q, const(graphene_rect_t)* r) c_graphene_quad_init_from_rect; ///
+// Quad
+private alias c_graphene_quad_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_graphene_quad_get_typeFn c_graphene_quad_get_type; ///
+private alias c_graphene_quad_allocFn = extern(C) graphene_quad_t* function() nothrow;
+__gshared c_graphene_quad_allocFn c_graphene_quad_alloc; ///
+private alias c_graphene_quad_boundsFn = extern(C) void function(const(graphene_quad_t)* q, graphene_rect_t* r) nothrow;
+__gshared c_graphene_quad_boundsFn c_graphene_quad_bounds; ///
+private alias c_graphene_quad_containsFn = extern(C) bool function(const(graphene_quad_t)* q, const(graphene_point_t)* p) nothrow;
+__gshared c_graphene_quad_containsFn c_graphene_quad_contains; ///
+private alias c_graphene_quad_freeFn = extern(C) void function(graphene_quad_t* q) nothrow;
+__gshared c_graphene_quad_freeFn c_graphene_quad_free; ///
+private alias c_graphene_quad_get_pointFn = extern(C) const(graphene_point_t)* function(const(graphene_quad_t)* q, uint index) nothrow;
+__gshared c_graphene_quad_get_pointFn c_graphene_quad_get_point; ///
+private alias c_graphene_quad_initFn = extern(C) graphene_quad_t* function(graphene_quad_t* q, const(graphene_point_t)* p1, const(graphene_point_t)* p2, const(graphene_point_t)* p3, const(graphene_point_t)* p4) nothrow;
+__gshared c_graphene_quad_initFn c_graphene_quad_init; ///
+private alias c_graphene_quad_init_from_pointsFn = extern(C) graphene_quad_t* function(graphene_quad_t* q, const(graphene_point_t)* points) nothrow;
+__gshared c_graphene_quad_init_from_pointsFn c_graphene_quad_init_from_points; ///
+private alias c_graphene_quad_init_from_rectFn = extern(C) graphene_quad_t* function(graphene_quad_t* q, const(graphene_rect_t)* r) nothrow;
+__gshared c_graphene_quad_init_from_rectFn c_graphene_quad_init_from_rect; ///
 
-  // Quaternion
-  GType function() c_graphene_quaternion_get_type; ///
-  graphene_quaternion_t* function() c_graphene_quaternion_alloc; ///
-  void function(const(graphene_quaternion_t)* a, const(graphene_quaternion_t)* b, graphene_quaternion_t* res) c_graphene_quaternion_add; ///
-  float function(const(graphene_quaternion_t)* a, const(graphene_quaternion_t)* b) c_graphene_quaternion_dot; ///
-  bool function(const(graphene_quaternion_t)* a, const(graphene_quaternion_t)* b) c_graphene_quaternion_equal; ///
-  void function(graphene_quaternion_t* q) c_graphene_quaternion_free; ///
-  graphene_quaternion_t* function(graphene_quaternion_t* q, float x, float y, float z, float w) c_graphene_quaternion_init; ///
-  graphene_quaternion_t* function(graphene_quaternion_t* q, float angle, const(graphene_vec3_t)* axis) c_graphene_quaternion_init_from_angle_vec3; ///
-  graphene_quaternion_t* function(graphene_quaternion_t* q, float degX, float degY, float degZ) c_graphene_quaternion_init_from_angles; ///
-  graphene_quaternion_t* function(graphene_quaternion_t* q, const(graphene_euler_t)* e) c_graphene_quaternion_init_from_euler; ///
-  graphene_quaternion_t* function(graphene_quaternion_t* q, const(graphene_matrix_t)* m) c_graphene_quaternion_init_from_matrix; ///
-  graphene_quaternion_t* function(graphene_quaternion_t* q, const(graphene_quaternion_t)* src) c_graphene_quaternion_init_from_quaternion; ///
-  graphene_quaternion_t* function(graphene_quaternion_t* q, float radX, float radY, float radZ) c_graphene_quaternion_init_from_radians; ///
-  graphene_quaternion_t* function(graphene_quaternion_t* q, const(graphene_vec4_t)* src) c_graphene_quaternion_init_from_vec4; ///
-  graphene_quaternion_t* function(graphene_quaternion_t* q) c_graphene_quaternion_init_identity; ///
-  void function(const(graphene_quaternion_t)* q, graphene_quaternion_t* res) c_graphene_quaternion_invert; ///
-  void function(const(graphene_quaternion_t)* a, const(graphene_quaternion_t)* b, graphene_quaternion_t* res) c_graphene_quaternion_multiply; ///
-  void function(const(graphene_quaternion_t)* q, graphene_quaternion_t* res) c_graphene_quaternion_normalize; ///
-  void function(const(graphene_quaternion_t)* q, float factor, graphene_quaternion_t* res) c_graphene_quaternion_scale; ///
-  void function(const(graphene_quaternion_t)* a, const(graphene_quaternion_t)* b, float factor, graphene_quaternion_t* res) c_graphene_quaternion_slerp; ///
-  void function(const(graphene_quaternion_t)* q, float* angle, graphene_vec3_t* axis) c_graphene_quaternion_to_angle_vec3; ///
-  void function(const(graphene_quaternion_t)* q, float* degX, float* degY, float* degZ) c_graphene_quaternion_to_angles; ///
-  void function(const(graphene_quaternion_t)* q, graphene_matrix_t* m) c_graphene_quaternion_to_matrix; ///
-  void function(const(graphene_quaternion_t)* q, float* radX, float* radY, float* radZ) c_graphene_quaternion_to_radians; ///
-  void function(const(graphene_quaternion_t)* q, graphene_vec4_t* res) c_graphene_quaternion_to_vec4; ///
+// Quaternion
+private alias c_graphene_quaternion_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_graphene_quaternion_get_typeFn c_graphene_quaternion_get_type; ///
+private alias c_graphene_quaternion_allocFn = extern(C) graphene_quaternion_t* function() nothrow;
+__gshared c_graphene_quaternion_allocFn c_graphene_quaternion_alloc; ///
+private alias c_graphene_quaternion_addFn = extern(C) void function(const(graphene_quaternion_t)* a, const(graphene_quaternion_t)* b, graphene_quaternion_t* res) nothrow;
+__gshared c_graphene_quaternion_addFn c_graphene_quaternion_add; ///
+private alias c_graphene_quaternion_dotFn = extern(C) float function(const(graphene_quaternion_t)* a, const(graphene_quaternion_t)* b) nothrow;
+__gshared c_graphene_quaternion_dotFn c_graphene_quaternion_dot; ///
+private alias c_graphene_quaternion_equalFn = extern(C) bool function(const(graphene_quaternion_t)* a, const(graphene_quaternion_t)* b) nothrow;
+__gshared c_graphene_quaternion_equalFn c_graphene_quaternion_equal; ///
+private alias c_graphene_quaternion_freeFn = extern(C) void function(graphene_quaternion_t* q) nothrow;
+__gshared c_graphene_quaternion_freeFn c_graphene_quaternion_free; ///
+private alias c_graphene_quaternion_initFn = extern(C) graphene_quaternion_t* function(graphene_quaternion_t* q, float x, float y, float z, float w) nothrow;
+__gshared c_graphene_quaternion_initFn c_graphene_quaternion_init; ///
+private alias c_graphene_quaternion_init_from_angle_vec3Fn = extern(C) graphene_quaternion_t* function(graphene_quaternion_t* q, float angle, const(graphene_vec3_t)* axis) nothrow;
+__gshared c_graphene_quaternion_init_from_angle_vec3Fn c_graphene_quaternion_init_from_angle_vec3; ///
+private alias c_graphene_quaternion_init_from_anglesFn = extern(C) graphene_quaternion_t* function(graphene_quaternion_t* q, float degX, float degY, float degZ) nothrow;
+__gshared c_graphene_quaternion_init_from_anglesFn c_graphene_quaternion_init_from_angles; ///
+private alias c_graphene_quaternion_init_from_eulerFn = extern(C) graphene_quaternion_t* function(graphene_quaternion_t* q, const(graphene_euler_t)* e) nothrow;
+__gshared c_graphene_quaternion_init_from_eulerFn c_graphene_quaternion_init_from_euler; ///
+private alias c_graphene_quaternion_init_from_matrixFn = extern(C) graphene_quaternion_t* function(graphene_quaternion_t* q, const(graphene_matrix_t)* m) nothrow;
+__gshared c_graphene_quaternion_init_from_matrixFn c_graphene_quaternion_init_from_matrix; ///
+private alias c_graphene_quaternion_init_from_quaternionFn = extern(C) graphene_quaternion_t* function(graphene_quaternion_t* q, const(graphene_quaternion_t)* src) nothrow;
+__gshared c_graphene_quaternion_init_from_quaternionFn c_graphene_quaternion_init_from_quaternion; ///
+private alias c_graphene_quaternion_init_from_radiansFn = extern(C) graphene_quaternion_t* function(graphene_quaternion_t* q, float radX, float radY, float radZ) nothrow;
+__gshared c_graphene_quaternion_init_from_radiansFn c_graphene_quaternion_init_from_radians; ///
+private alias c_graphene_quaternion_init_from_vec4Fn = extern(C) graphene_quaternion_t* function(graphene_quaternion_t* q, const(graphene_vec4_t)* src) nothrow;
+__gshared c_graphene_quaternion_init_from_vec4Fn c_graphene_quaternion_init_from_vec4; ///
+private alias c_graphene_quaternion_init_identityFn = extern(C) graphene_quaternion_t* function(graphene_quaternion_t* q) nothrow;
+__gshared c_graphene_quaternion_init_identityFn c_graphene_quaternion_init_identity; ///
+private alias c_graphene_quaternion_invertFn = extern(C) void function(const(graphene_quaternion_t)* q, graphene_quaternion_t* res) nothrow;
+__gshared c_graphene_quaternion_invertFn c_graphene_quaternion_invert; ///
+private alias c_graphene_quaternion_multiplyFn = extern(C) void function(const(graphene_quaternion_t)* a, const(graphene_quaternion_t)* b, graphene_quaternion_t* res) nothrow;
+__gshared c_graphene_quaternion_multiplyFn c_graphene_quaternion_multiply; ///
+private alias c_graphene_quaternion_normalizeFn = extern(C) void function(const(graphene_quaternion_t)* q, graphene_quaternion_t* res) nothrow;
+__gshared c_graphene_quaternion_normalizeFn c_graphene_quaternion_normalize; ///
+private alias c_graphene_quaternion_scaleFn = extern(C) void function(const(graphene_quaternion_t)* q, float factor, graphene_quaternion_t* res) nothrow;
+__gshared c_graphene_quaternion_scaleFn c_graphene_quaternion_scale; ///
+private alias c_graphene_quaternion_slerpFn = extern(C) void function(const(graphene_quaternion_t)* a, const(graphene_quaternion_t)* b, float factor, graphene_quaternion_t* res) nothrow;
+__gshared c_graphene_quaternion_slerpFn c_graphene_quaternion_slerp; ///
+private alias c_graphene_quaternion_to_angle_vec3Fn = extern(C) void function(const(graphene_quaternion_t)* q, float* angle, graphene_vec3_t* axis) nothrow;
+__gshared c_graphene_quaternion_to_angle_vec3Fn c_graphene_quaternion_to_angle_vec3; ///
+private alias c_graphene_quaternion_to_anglesFn = extern(C) void function(const(graphene_quaternion_t)* q, float* degX, float* degY, float* degZ) nothrow;
+__gshared c_graphene_quaternion_to_anglesFn c_graphene_quaternion_to_angles; ///
+private alias c_graphene_quaternion_to_matrixFn = extern(C) void function(const(graphene_quaternion_t)* q, graphene_matrix_t* m) nothrow;
+__gshared c_graphene_quaternion_to_matrixFn c_graphene_quaternion_to_matrix; ///
+private alias c_graphene_quaternion_to_radiansFn = extern(C) void function(const(graphene_quaternion_t)* q, float* radX, float* radY, float* radZ) nothrow;
+__gshared c_graphene_quaternion_to_radiansFn c_graphene_quaternion_to_radians; ///
+private alias c_graphene_quaternion_to_vec4Fn = extern(C) void function(const(graphene_quaternion_t)* q, graphene_vec4_t* res) nothrow;
+__gshared c_graphene_quaternion_to_vec4Fn c_graphene_quaternion_to_vec4; ///
 
-  // Ray
-  GType function() c_graphene_ray_get_type; ///
-  graphene_ray_t* function() c_graphene_ray_alloc; ///
-  bool function(const(graphene_ray_t)* a, const(graphene_ray_t)* b) c_graphene_ray_equal; ///
-  void function(graphene_ray_t* r) c_graphene_ray_free; ///
-  void function(const(graphene_ray_t)* r, const(graphene_point3d_t)* p, graphene_point3d_t* res) c_graphene_ray_get_closest_point_to_point; ///
-  void function(const(graphene_ray_t)* r, graphene_vec3_t* direction) c_graphene_ray_get_direction; ///
-  float function(const(graphene_ray_t)* r, const(graphene_plane_t)* p) c_graphene_ray_get_distance_to_plane; ///
-  float function(const(graphene_ray_t)* r, const(graphene_point3d_t)* p) c_graphene_ray_get_distance_to_point; ///
-  void function(const(graphene_ray_t)* r, graphene_point3d_t* origin) c_graphene_ray_get_origin; ///
-  void function(const(graphene_ray_t)* r, float t, graphene_point3d_t* position) c_graphene_ray_get_position_at; ///
-  graphene_ray_t* function(graphene_ray_t* r, const(graphene_point3d_t)* origin, const(graphene_vec3_t)* direction) c_graphene_ray_init; ///
-  graphene_ray_t* function(graphene_ray_t* r, const(graphene_ray_t)* src) c_graphene_ray_init_from_ray; ///
-  graphene_ray_t* function(graphene_ray_t* r, const(graphene_vec3_t)* origin, const(graphene_vec3_t)* direction) c_graphene_ray_init_from_vec3; ///
-  graphene_ray_intersection_kind_t function(const(graphene_ray_t)* r, const(graphene_box_t)* b, float* tOut) c_graphene_ray_intersect_box; ///
-  graphene_ray_intersection_kind_t function(const(graphene_ray_t)* r, const(graphene_sphere_t)* s, float* tOut) c_graphene_ray_intersect_sphere; ///
-  graphene_ray_intersection_kind_t function(const(graphene_ray_t)* r, const(graphene_triangle_t)* t, float* tOut) c_graphene_ray_intersect_triangle; ///
-  bool function(const(graphene_ray_t)* r, const(graphene_box_t)* b) c_graphene_ray_intersects_box; ///
-  bool function(const(graphene_ray_t)* r, const(graphene_sphere_t)* s) c_graphene_ray_intersects_sphere; ///
-  bool function(const(graphene_ray_t)* r, const(graphene_triangle_t)* t) c_graphene_ray_intersects_triangle; ///
+// Ray
+private alias c_graphene_ray_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_graphene_ray_get_typeFn c_graphene_ray_get_type; ///
+private alias c_graphene_ray_allocFn = extern(C) graphene_ray_t* function() nothrow;
+__gshared c_graphene_ray_allocFn c_graphene_ray_alloc; ///
+private alias c_graphene_ray_equalFn = extern(C) bool function(const(graphene_ray_t)* a, const(graphene_ray_t)* b) nothrow;
+__gshared c_graphene_ray_equalFn c_graphene_ray_equal; ///
+private alias c_graphene_ray_freeFn = extern(C) void function(graphene_ray_t* r) nothrow;
+__gshared c_graphene_ray_freeFn c_graphene_ray_free; ///
+private alias c_graphene_ray_get_closest_point_to_pointFn = extern(C) void function(const(graphene_ray_t)* r, const(graphene_point3d_t)* p, graphene_point3d_t* res) nothrow;
+__gshared c_graphene_ray_get_closest_point_to_pointFn c_graphene_ray_get_closest_point_to_point; ///
+private alias c_graphene_ray_get_directionFn = extern(C) void function(const(graphene_ray_t)* r, graphene_vec3_t* direction) nothrow;
+__gshared c_graphene_ray_get_directionFn c_graphene_ray_get_direction; ///
+private alias c_graphene_ray_get_distance_to_planeFn = extern(C) float function(const(graphene_ray_t)* r, const(graphene_plane_t)* p) nothrow;
+__gshared c_graphene_ray_get_distance_to_planeFn c_graphene_ray_get_distance_to_plane; ///
+private alias c_graphene_ray_get_distance_to_pointFn = extern(C) float function(const(graphene_ray_t)* r, const(graphene_point3d_t)* p) nothrow;
+__gshared c_graphene_ray_get_distance_to_pointFn c_graphene_ray_get_distance_to_point; ///
+private alias c_graphene_ray_get_originFn = extern(C) void function(const(graphene_ray_t)* r, graphene_point3d_t* origin) nothrow;
+__gshared c_graphene_ray_get_originFn c_graphene_ray_get_origin; ///
+private alias c_graphene_ray_get_position_atFn = extern(C) void function(const(graphene_ray_t)* r, float t, graphene_point3d_t* position) nothrow;
+__gshared c_graphene_ray_get_position_atFn c_graphene_ray_get_position_at; ///
+private alias c_graphene_ray_initFn = extern(C) graphene_ray_t* function(graphene_ray_t* r, const(graphene_point3d_t)* origin, const(graphene_vec3_t)* direction) nothrow;
+__gshared c_graphene_ray_initFn c_graphene_ray_init; ///
+private alias c_graphene_ray_init_from_rayFn = extern(C) graphene_ray_t* function(graphene_ray_t* r, const(graphene_ray_t)* src) nothrow;
+__gshared c_graphene_ray_init_from_rayFn c_graphene_ray_init_from_ray; ///
+private alias c_graphene_ray_init_from_vec3Fn = extern(C) graphene_ray_t* function(graphene_ray_t* r, const(graphene_vec3_t)* origin, const(graphene_vec3_t)* direction) nothrow;
+__gshared c_graphene_ray_init_from_vec3Fn c_graphene_ray_init_from_vec3; ///
+private alias c_graphene_ray_intersect_boxFn = extern(C) graphene_ray_intersection_kind_t function(const(graphene_ray_t)* r, const(graphene_box_t)* b, float* tOut) nothrow;
+__gshared c_graphene_ray_intersect_boxFn c_graphene_ray_intersect_box; ///
+private alias c_graphene_ray_intersect_sphereFn = extern(C) graphene_ray_intersection_kind_t function(const(graphene_ray_t)* r, const(graphene_sphere_t)* s, float* tOut) nothrow;
+__gshared c_graphene_ray_intersect_sphereFn c_graphene_ray_intersect_sphere; ///
+private alias c_graphene_ray_intersect_triangleFn = extern(C) graphene_ray_intersection_kind_t function(const(graphene_ray_t)* r, const(graphene_triangle_t)* t, float* tOut) nothrow;
+__gshared c_graphene_ray_intersect_triangleFn c_graphene_ray_intersect_triangle; ///
+private alias c_graphene_ray_intersects_boxFn = extern(C) bool function(const(graphene_ray_t)* r, const(graphene_box_t)* b) nothrow;
+__gshared c_graphene_ray_intersects_boxFn c_graphene_ray_intersects_box; ///
+private alias c_graphene_ray_intersects_sphereFn = extern(C) bool function(const(graphene_ray_t)* r, const(graphene_sphere_t)* s) nothrow;
+__gshared c_graphene_ray_intersects_sphereFn c_graphene_ray_intersects_sphere; ///
+private alias c_graphene_ray_intersects_triangleFn = extern(C) bool function(const(graphene_ray_t)* r, const(graphene_triangle_t)* t) nothrow;
+__gshared c_graphene_ray_intersects_triangleFn c_graphene_ray_intersects_triangle; ///
 
-  // Rect
-  GType function() c_graphene_rect_get_type; ///
-  bool function(const(graphene_rect_t)* r, const(graphene_point_t)* p) c_graphene_rect_contains_point; ///
-  bool function(const(graphene_rect_t)* a, const(graphene_rect_t)* b) c_graphene_rect_contains_rect; ///
-  bool function(const(graphene_rect_t)* a, const(graphene_rect_t)* b) c_graphene_rect_equal; ///
-  void function(const(graphene_rect_t)* r, const(graphene_point_t)* p, graphene_rect_t* res) c_graphene_rect_expand; ///
-  void function(graphene_rect_t* r) c_graphene_rect_free; ///
-  float function(const(graphene_rect_t)* r) c_graphene_rect_get_area; ///
-  void function(const(graphene_rect_t)* r, graphene_point_t* p) c_graphene_rect_get_bottom_left; ///
-  void function(const(graphene_rect_t)* r, graphene_point_t* p) c_graphene_rect_get_bottom_right; ///
-  void function(const(graphene_rect_t)* r, graphene_point_t* p) c_graphene_rect_get_center; ///
-  float function(const(graphene_rect_t)* r) c_graphene_rect_get_height; ///
-  void function(const(graphene_rect_t)* r, graphene_point_t* p) c_graphene_rect_get_top_left; ///
-  void function(const(graphene_rect_t)* r, graphene_point_t* p) c_graphene_rect_get_top_right; ///
-  void function(const(graphene_rect_t)* r, graphene_vec2_t* vertices) c_graphene_rect_get_vertices; ///
-  float function(const(graphene_rect_t)* r) c_graphene_rect_get_width; ///
-  float function(const(graphene_rect_t)* r) c_graphene_rect_get_x; ///
-  float function(const(graphene_rect_t)* r) c_graphene_rect_get_y; ///
-  graphene_rect_t* function(graphene_rect_t* r, float x, float y, float width, float height) c_graphene_rect_init; ///
-  graphene_rect_t* function(graphene_rect_t* r, const(graphene_rect_t)* src) c_graphene_rect_init_from_rect; ///
-  graphene_rect_t* function(graphene_rect_t* r, float dX, float dY) c_graphene_rect_inset; ///
-  void function(const(graphene_rect_t)* r, float dX, float dY, graphene_rect_t* res) c_graphene_rect_inset_r; ///
-  void function(const(graphene_rect_t)* a, const(graphene_rect_t)* b, double factor, graphene_rect_t* res) c_graphene_rect_interpolate; ///
-  bool function(const(graphene_rect_t)* a, const(graphene_rect_t)* b, graphene_rect_t* res) c_graphene_rect_intersection; ///
-  graphene_rect_t* function(graphene_rect_t* r) c_graphene_rect_normalize; ///
-  void function(const(graphene_rect_t)* r, graphene_rect_t* res) c_graphene_rect_normalize_r; ///
-  graphene_rect_t* function(graphene_rect_t* r, float dX, float dY) c_graphene_rect_offset; ///
-  void function(const(graphene_rect_t)* r, float dX, float dY, graphene_rect_t* res) c_graphene_rect_offset_r; ///
-  void function(const(graphene_rect_t)* r, graphene_rect_t* res) c_graphene_rect_round; ///
-  void function(const(graphene_rect_t)* r, graphene_rect_t* res) c_graphene_rect_round_extents; ///
-  graphene_rect_t* function(graphene_rect_t* r) c_graphene_rect_round_to_pixel; ///
-  void function(const(graphene_rect_t)* r, float sH, float sV, graphene_rect_t* res) c_graphene_rect_scale; ///
-  void function(const(graphene_rect_t)* a, const(graphene_rect_t)* b, graphene_rect_t* res) c_graphene_rect_union; ///
-  graphene_rect_t* function() c_graphene_rect_alloc; ///
-  const(graphene_rect_t)* function() c_graphene_rect_zero; ///
+// Rect
+private alias c_graphene_rect_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_graphene_rect_get_typeFn c_graphene_rect_get_type; ///
+private alias c_graphene_rect_contains_pointFn = extern(C) bool function(const(graphene_rect_t)* r, const(graphene_point_t)* p) nothrow;
+__gshared c_graphene_rect_contains_pointFn c_graphene_rect_contains_point; ///
+private alias c_graphene_rect_contains_rectFn = extern(C) bool function(const(graphene_rect_t)* a, const(graphene_rect_t)* b) nothrow;
+__gshared c_graphene_rect_contains_rectFn c_graphene_rect_contains_rect; ///
+private alias c_graphene_rect_equalFn = extern(C) bool function(const(graphene_rect_t)* a, const(graphene_rect_t)* b) nothrow;
+__gshared c_graphene_rect_equalFn c_graphene_rect_equal; ///
+private alias c_graphene_rect_expandFn = extern(C) void function(const(graphene_rect_t)* r, const(graphene_point_t)* p, graphene_rect_t* res) nothrow;
+__gshared c_graphene_rect_expandFn c_graphene_rect_expand; ///
+private alias c_graphene_rect_freeFn = extern(C) void function(graphene_rect_t* r) nothrow;
+__gshared c_graphene_rect_freeFn c_graphene_rect_free; ///
+private alias c_graphene_rect_get_areaFn = extern(C) float function(const(graphene_rect_t)* r) nothrow;
+__gshared c_graphene_rect_get_areaFn c_graphene_rect_get_area; ///
+private alias c_graphene_rect_get_bottom_leftFn = extern(C) void function(const(graphene_rect_t)* r, graphene_point_t* p) nothrow;
+__gshared c_graphene_rect_get_bottom_leftFn c_graphene_rect_get_bottom_left; ///
+private alias c_graphene_rect_get_bottom_rightFn = extern(C) void function(const(graphene_rect_t)* r, graphene_point_t* p) nothrow;
+__gshared c_graphene_rect_get_bottom_rightFn c_graphene_rect_get_bottom_right; ///
+private alias c_graphene_rect_get_centerFn = extern(C) void function(const(graphene_rect_t)* r, graphene_point_t* p) nothrow;
+__gshared c_graphene_rect_get_centerFn c_graphene_rect_get_center; ///
+private alias c_graphene_rect_get_heightFn = extern(C) float function(const(graphene_rect_t)* r) nothrow;
+__gshared c_graphene_rect_get_heightFn c_graphene_rect_get_height; ///
+private alias c_graphene_rect_get_top_leftFn = extern(C) void function(const(graphene_rect_t)* r, graphene_point_t* p) nothrow;
+__gshared c_graphene_rect_get_top_leftFn c_graphene_rect_get_top_left; ///
+private alias c_graphene_rect_get_top_rightFn = extern(C) void function(const(graphene_rect_t)* r, graphene_point_t* p) nothrow;
+__gshared c_graphene_rect_get_top_rightFn c_graphene_rect_get_top_right; ///
+private alias c_graphene_rect_get_verticesFn = extern(C) void function(const(graphene_rect_t)* r, graphene_vec2_t* vertices) nothrow;
+__gshared c_graphene_rect_get_verticesFn c_graphene_rect_get_vertices; ///
+private alias c_graphene_rect_get_widthFn = extern(C) float function(const(graphene_rect_t)* r) nothrow;
+__gshared c_graphene_rect_get_widthFn c_graphene_rect_get_width; ///
+private alias c_graphene_rect_get_xFn = extern(C) float function(const(graphene_rect_t)* r) nothrow;
+__gshared c_graphene_rect_get_xFn c_graphene_rect_get_x; ///
+private alias c_graphene_rect_get_yFn = extern(C) float function(const(graphene_rect_t)* r) nothrow;
+__gshared c_graphene_rect_get_yFn c_graphene_rect_get_y; ///
+private alias c_graphene_rect_initFn = extern(C) graphene_rect_t* function(graphene_rect_t* r, float x, float y, float width, float height) nothrow;
+__gshared c_graphene_rect_initFn c_graphene_rect_init; ///
+private alias c_graphene_rect_init_from_rectFn = extern(C) graphene_rect_t* function(graphene_rect_t* r, const(graphene_rect_t)* src) nothrow;
+__gshared c_graphene_rect_init_from_rectFn c_graphene_rect_init_from_rect; ///
+private alias c_graphene_rect_insetFn = extern(C) graphene_rect_t* function(graphene_rect_t* r, float dX, float dY) nothrow;
+__gshared c_graphene_rect_insetFn c_graphene_rect_inset; ///
+private alias c_graphene_rect_inset_rFn = extern(C) void function(const(graphene_rect_t)* r, float dX, float dY, graphene_rect_t* res) nothrow;
+__gshared c_graphene_rect_inset_rFn c_graphene_rect_inset_r; ///
+private alias c_graphene_rect_interpolateFn = extern(C) void function(const(graphene_rect_t)* a, const(graphene_rect_t)* b, double factor, graphene_rect_t* res) nothrow;
+__gshared c_graphene_rect_interpolateFn c_graphene_rect_interpolate; ///
+private alias c_graphene_rect_intersectionFn = extern(C) bool function(const(graphene_rect_t)* a, const(graphene_rect_t)* b, graphene_rect_t* res) nothrow;
+__gshared c_graphene_rect_intersectionFn c_graphene_rect_intersection; ///
+private alias c_graphene_rect_normalizeFn = extern(C) graphene_rect_t* function(graphene_rect_t* r) nothrow;
+__gshared c_graphene_rect_normalizeFn c_graphene_rect_normalize; ///
+private alias c_graphene_rect_normalize_rFn = extern(C) void function(const(graphene_rect_t)* r, graphene_rect_t* res) nothrow;
+__gshared c_graphene_rect_normalize_rFn c_graphene_rect_normalize_r; ///
+private alias c_graphene_rect_offsetFn = extern(C) graphene_rect_t* function(graphene_rect_t* r, float dX, float dY) nothrow;
+__gshared c_graphene_rect_offsetFn c_graphene_rect_offset; ///
+private alias c_graphene_rect_offset_rFn = extern(C) void function(const(graphene_rect_t)* r, float dX, float dY, graphene_rect_t* res) nothrow;
+__gshared c_graphene_rect_offset_rFn c_graphene_rect_offset_r; ///
+private alias c_graphene_rect_roundFn = extern(C) void function(const(graphene_rect_t)* r, graphene_rect_t* res) nothrow;
+__gshared c_graphene_rect_roundFn c_graphene_rect_round; ///
+private alias c_graphene_rect_round_extentsFn = extern(C) void function(const(graphene_rect_t)* r, graphene_rect_t* res) nothrow;
+__gshared c_graphene_rect_round_extentsFn c_graphene_rect_round_extents; ///
+private alias c_graphene_rect_round_to_pixelFn = extern(C) graphene_rect_t* function(graphene_rect_t* r) nothrow;
+__gshared c_graphene_rect_round_to_pixelFn c_graphene_rect_round_to_pixel; ///
+private alias c_graphene_rect_scaleFn = extern(C) void function(const(graphene_rect_t)* r, float sH, float sV, graphene_rect_t* res) nothrow;
+__gshared c_graphene_rect_scaleFn c_graphene_rect_scale; ///
+private alias c_graphene_rect_unionFn = extern(C) void function(const(graphene_rect_t)* a, const(graphene_rect_t)* b, graphene_rect_t* res) nothrow;
+__gshared c_graphene_rect_unionFn c_graphene_rect_union; ///
+private alias c_graphene_rect_allocFn = extern(C) graphene_rect_t* function() nothrow;
+__gshared c_graphene_rect_allocFn c_graphene_rect_alloc; ///
+private alias c_graphene_rect_zeroFn = extern(C) const(graphene_rect_t)* function() nothrow;
+__gshared c_graphene_rect_zeroFn c_graphene_rect_zero; ///
 
-  // Size
-  GType function() c_graphene_size_get_type; ///
-  graphene_size_t* function() c_graphene_size_alloc; ///
-  bool function(const(graphene_size_t)* a, const(graphene_size_t)* b) c_graphene_size_equal; ///
-  void function(graphene_size_t* s) c_graphene_size_free; ///
-  graphene_size_t* function(graphene_size_t* s, float width, float height) c_graphene_size_init; ///
-  graphene_size_t* function(graphene_size_t* s, const(graphene_size_t)* src) c_graphene_size_init_from_size; ///
-  void function(const(graphene_size_t)* a, const(graphene_size_t)* b, double factor, graphene_size_t* res) c_graphene_size_interpolate; ///
-  void function(const(graphene_size_t)* s, float factor, graphene_size_t* res) c_graphene_size_scale; ///
-  const(graphene_size_t)* function() c_graphene_size_zero; ///
+// Size
+private alias c_graphene_size_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_graphene_size_get_typeFn c_graphene_size_get_type; ///
+private alias c_graphene_size_allocFn = extern(C) graphene_size_t* function() nothrow;
+__gshared c_graphene_size_allocFn c_graphene_size_alloc; ///
+private alias c_graphene_size_equalFn = extern(C) bool function(const(graphene_size_t)* a, const(graphene_size_t)* b) nothrow;
+__gshared c_graphene_size_equalFn c_graphene_size_equal; ///
+private alias c_graphene_size_freeFn = extern(C) void function(graphene_size_t* s) nothrow;
+__gshared c_graphene_size_freeFn c_graphene_size_free; ///
+private alias c_graphene_size_initFn = extern(C) graphene_size_t* function(graphene_size_t* s, float width, float height) nothrow;
+__gshared c_graphene_size_initFn c_graphene_size_init; ///
+private alias c_graphene_size_init_from_sizeFn = extern(C) graphene_size_t* function(graphene_size_t* s, const(graphene_size_t)* src) nothrow;
+__gshared c_graphene_size_init_from_sizeFn c_graphene_size_init_from_size; ///
+private alias c_graphene_size_interpolateFn = extern(C) void function(const(graphene_size_t)* a, const(graphene_size_t)* b, double factor, graphene_size_t* res) nothrow;
+__gshared c_graphene_size_interpolateFn c_graphene_size_interpolate; ///
+private alias c_graphene_size_scaleFn = extern(C) void function(const(graphene_size_t)* s, float factor, graphene_size_t* res) nothrow;
+__gshared c_graphene_size_scaleFn c_graphene_size_scale; ///
+private alias c_graphene_size_zeroFn = extern(C) const(graphene_size_t)* function() nothrow;
+__gshared c_graphene_size_zeroFn c_graphene_size_zero; ///
 
-  // Sphere
-  GType function() c_graphene_sphere_get_type; ///
-  graphene_sphere_t* function() c_graphene_sphere_alloc; ///
-  bool function(const(graphene_sphere_t)* s, const(graphene_point3d_t)* point) c_graphene_sphere_contains_point; ///
-  float function(const(graphene_sphere_t)* s, const(graphene_point3d_t)* point) c_graphene_sphere_distance; ///
-  bool function(const(graphene_sphere_t)* a, const(graphene_sphere_t)* b) c_graphene_sphere_equal; ///
-  void function(graphene_sphere_t* s) c_graphene_sphere_free; ///
-  void function(const(graphene_sphere_t)* s, graphene_box_t* box) c_graphene_sphere_get_bounding_box; ///
-  void function(const(graphene_sphere_t)* s, graphene_point3d_t* center) c_graphene_sphere_get_center; ///
-  float function(const(graphene_sphere_t)* s) c_graphene_sphere_get_radius; ///
-  graphene_sphere_t* function(graphene_sphere_t* s, const(graphene_point3d_t)* center, float radius) c_graphene_sphere_init; ///
-  graphene_sphere_t* function(graphene_sphere_t* s, uint nPoints, const(graphene_point3d_t)* points, const(graphene_point3d_t)* center) c_graphene_sphere_init_from_points; ///
-  graphene_sphere_t* function(graphene_sphere_t* s, uint nVectors, const(graphene_vec3_t)* vectors, const(graphene_point3d_t)* center) c_graphene_sphere_init_from_vectors; ///
-  bool function(const(graphene_sphere_t)* s) c_graphene_sphere_is_empty; ///
-  void function(const(graphene_sphere_t)* s, const(graphene_point3d_t)* point, graphene_sphere_t* res) c_graphene_sphere_translate; ///
+// Sphere
+private alias c_graphene_sphere_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_graphene_sphere_get_typeFn c_graphene_sphere_get_type; ///
+private alias c_graphene_sphere_allocFn = extern(C) graphene_sphere_t* function() nothrow;
+__gshared c_graphene_sphere_allocFn c_graphene_sphere_alloc; ///
+private alias c_graphene_sphere_contains_pointFn = extern(C) bool function(const(graphene_sphere_t)* s, const(graphene_point3d_t)* point) nothrow;
+__gshared c_graphene_sphere_contains_pointFn c_graphene_sphere_contains_point; ///
+private alias c_graphene_sphere_distanceFn = extern(C) float function(const(graphene_sphere_t)* s, const(graphene_point3d_t)* point) nothrow;
+__gshared c_graphene_sphere_distanceFn c_graphene_sphere_distance; ///
+private alias c_graphene_sphere_equalFn = extern(C) bool function(const(graphene_sphere_t)* a, const(graphene_sphere_t)* b) nothrow;
+__gshared c_graphene_sphere_equalFn c_graphene_sphere_equal; ///
+private alias c_graphene_sphere_freeFn = extern(C) void function(graphene_sphere_t* s) nothrow;
+__gshared c_graphene_sphere_freeFn c_graphene_sphere_free; ///
+private alias c_graphene_sphere_get_bounding_boxFn = extern(C) void function(const(graphene_sphere_t)* s, graphene_box_t* box) nothrow;
+__gshared c_graphene_sphere_get_bounding_boxFn c_graphene_sphere_get_bounding_box; ///
+private alias c_graphene_sphere_get_centerFn = extern(C) void function(const(graphene_sphere_t)* s, graphene_point3d_t* center) nothrow;
+__gshared c_graphene_sphere_get_centerFn c_graphene_sphere_get_center; ///
+private alias c_graphene_sphere_get_radiusFn = extern(C) float function(const(graphene_sphere_t)* s) nothrow;
+__gshared c_graphene_sphere_get_radiusFn c_graphene_sphere_get_radius; ///
+private alias c_graphene_sphere_initFn = extern(C) graphene_sphere_t* function(graphene_sphere_t* s, const(graphene_point3d_t)* center, float radius) nothrow;
+__gshared c_graphene_sphere_initFn c_graphene_sphere_init; ///
+private alias c_graphene_sphere_init_from_pointsFn = extern(C) graphene_sphere_t* function(graphene_sphere_t* s, uint nPoints, const(graphene_point3d_t)* points, const(graphene_point3d_t)* center) nothrow;
+__gshared c_graphene_sphere_init_from_pointsFn c_graphene_sphere_init_from_points; ///
+private alias c_graphene_sphere_init_from_vectorsFn = extern(C) graphene_sphere_t* function(graphene_sphere_t* s, uint nVectors, const(graphene_vec3_t)* vectors, const(graphene_point3d_t)* center) nothrow;
+__gshared c_graphene_sphere_init_from_vectorsFn c_graphene_sphere_init_from_vectors; ///
+private alias c_graphene_sphere_is_emptyFn = extern(C) bool function(const(graphene_sphere_t)* s) nothrow;
+__gshared c_graphene_sphere_is_emptyFn c_graphene_sphere_is_empty; ///
+private alias c_graphene_sphere_translateFn = extern(C) void function(const(graphene_sphere_t)* s, const(graphene_point3d_t)* point, graphene_sphere_t* res) nothrow;
+__gshared c_graphene_sphere_translateFn c_graphene_sphere_translate; ///
 
-  // Triangle
-  GType function() c_graphene_triangle_get_type; ///
-  graphene_triangle_t* function() c_graphene_triangle_alloc; ///
-  bool function(const(graphene_triangle_t)* t, const(graphene_point3d_t)* p) c_graphene_triangle_contains_point; ///
-  bool function(const(graphene_triangle_t)* a, const(graphene_triangle_t)* b) c_graphene_triangle_equal; ///
-  void function(graphene_triangle_t* t) c_graphene_triangle_free; ///
-  float function(const(graphene_triangle_t)* t) c_graphene_triangle_get_area; ///
-  bool function(const(graphene_triangle_t)* t, const(graphene_point3d_t)* p, graphene_vec2_t* res) c_graphene_triangle_get_barycoords; ///
-  void function(const(graphene_triangle_t)* t, graphene_box_t* res) c_graphene_triangle_get_bounding_box; ///
-  void function(const(graphene_triangle_t)* t, graphene_point3d_t* res) c_graphene_triangle_get_midpoint; ///
-  void function(const(graphene_triangle_t)* t, graphene_vec3_t* res) c_graphene_triangle_get_normal; ///
-  void function(const(graphene_triangle_t)* t, graphene_plane_t* res) c_graphene_triangle_get_plane; ///
-  void function(const(graphene_triangle_t)* t, graphene_point3d_t* a, graphene_point3d_t* b, graphene_point3d_t* c) c_graphene_triangle_get_points; ///
-  bool function(const(graphene_triangle_t)* t, const(graphene_point3d_t)* p, const(graphene_vec2_t)* uvA, const(graphene_vec2_t)* uvB, const(graphene_vec2_t)* uvC, graphene_vec2_t* res) c_graphene_triangle_get_uv; ///
-  void function(const(graphene_triangle_t)* t, graphene_vec3_t* a, graphene_vec3_t* b, graphene_vec3_t* c) c_graphene_triangle_get_vertices; ///
-  graphene_triangle_t* function(graphene_triangle_t* t, const(float)* a, const(float)* b, const(float)* c) c_graphene_triangle_init_from_float; ///
-  graphene_triangle_t* function(graphene_triangle_t* t, const(graphene_point3d_t)* a, const(graphene_point3d_t)* b, const(graphene_point3d_t)* c) c_graphene_triangle_init_from_point3d; ///
-  graphene_triangle_t* function(graphene_triangle_t* t, const(graphene_vec3_t)* a, const(graphene_vec3_t)* b, const(graphene_vec3_t)* c) c_graphene_triangle_init_from_vec3; ///
+// Triangle
+private alias c_graphene_triangle_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_graphene_triangle_get_typeFn c_graphene_triangle_get_type; ///
+private alias c_graphene_triangle_allocFn = extern(C) graphene_triangle_t* function() nothrow;
+__gshared c_graphene_triangle_allocFn c_graphene_triangle_alloc; ///
+private alias c_graphene_triangle_contains_pointFn = extern(C) bool function(const(graphene_triangle_t)* t, const(graphene_point3d_t)* p) nothrow;
+__gshared c_graphene_triangle_contains_pointFn c_graphene_triangle_contains_point; ///
+private alias c_graphene_triangle_equalFn = extern(C) bool function(const(graphene_triangle_t)* a, const(graphene_triangle_t)* b) nothrow;
+__gshared c_graphene_triangle_equalFn c_graphene_triangle_equal; ///
+private alias c_graphene_triangle_freeFn = extern(C) void function(graphene_triangle_t* t) nothrow;
+__gshared c_graphene_triangle_freeFn c_graphene_triangle_free; ///
+private alias c_graphene_triangle_get_areaFn = extern(C) float function(const(graphene_triangle_t)* t) nothrow;
+__gshared c_graphene_triangle_get_areaFn c_graphene_triangle_get_area; ///
+private alias c_graphene_triangle_get_barycoordsFn = extern(C) bool function(const(graphene_triangle_t)* t, const(graphene_point3d_t)* p, graphene_vec2_t* res) nothrow;
+__gshared c_graphene_triangle_get_barycoordsFn c_graphene_triangle_get_barycoords; ///
+private alias c_graphene_triangle_get_bounding_boxFn = extern(C) void function(const(graphene_triangle_t)* t, graphene_box_t* res) nothrow;
+__gshared c_graphene_triangle_get_bounding_boxFn c_graphene_triangle_get_bounding_box; ///
+private alias c_graphene_triangle_get_midpointFn = extern(C) void function(const(graphene_triangle_t)* t, graphene_point3d_t* res) nothrow;
+__gshared c_graphene_triangle_get_midpointFn c_graphene_triangle_get_midpoint; ///
+private alias c_graphene_triangle_get_normalFn = extern(C) void function(const(graphene_triangle_t)* t, graphene_vec3_t* res) nothrow;
+__gshared c_graphene_triangle_get_normalFn c_graphene_triangle_get_normal; ///
+private alias c_graphene_triangle_get_planeFn = extern(C) void function(const(graphene_triangle_t)* t, graphene_plane_t* res) nothrow;
+__gshared c_graphene_triangle_get_planeFn c_graphene_triangle_get_plane; ///
+private alias c_graphene_triangle_get_pointsFn = extern(C) void function(const(graphene_triangle_t)* t, graphene_point3d_t* a, graphene_point3d_t* b, graphene_point3d_t* c) nothrow;
+__gshared c_graphene_triangle_get_pointsFn c_graphene_triangle_get_points; ///
+private alias c_graphene_triangle_get_uvFn = extern(C) bool function(const(graphene_triangle_t)* t, const(graphene_point3d_t)* p, const(graphene_vec2_t)* uvA, const(graphene_vec2_t)* uvB, const(graphene_vec2_t)* uvC, graphene_vec2_t* res) nothrow;
+__gshared c_graphene_triangle_get_uvFn c_graphene_triangle_get_uv; ///
+private alias c_graphene_triangle_get_verticesFn = extern(C) void function(const(graphene_triangle_t)* t, graphene_vec3_t* a, graphene_vec3_t* b, graphene_vec3_t* c) nothrow;
+__gshared c_graphene_triangle_get_verticesFn c_graphene_triangle_get_vertices; ///
+private alias c_graphene_triangle_init_from_floatFn = extern(C) graphene_triangle_t* function(graphene_triangle_t* t, const(float)* a, const(float)* b, const(float)* c) nothrow;
+__gshared c_graphene_triangle_init_from_floatFn c_graphene_triangle_init_from_float; ///
+private alias c_graphene_triangle_init_from_point3dFn = extern(C) graphene_triangle_t* function(graphene_triangle_t* t, const(graphene_point3d_t)* a, const(graphene_point3d_t)* b, const(graphene_point3d_t)* c) nothrow;
+__gshared c_graphene_triangle_init_from_point3dFn c_graphene_triangle_init_from_point3d; ///
+private alias c_graphene_triangle_init_from_vec3Fn = extern(C) graphene_triangle_t* function(graphene_triangle_t* t, const(graphene_vec3_t)* a, const(graphene_vec3_t)* b, const(graphene_vec3_t)* c) nothrow;
+__gshared c_graphene_triangle_init_from_vec3Fn c_graphene_triangle_init_from_vec3; ///
 
-  // Vec2
-  GType function() c_graphene_vec2_get_type; ///
-  graphene_vec2_t* function() c_graphene_vec2_alloc; ///
-  void function(const(graphene_vec2_t)* a, const(graphene_vec2_t)* b, graphene_vec2_t* res) c_graphene_vec2_add; ///
-  void function(const(graphene_vec2_t)* a, const(graphene_vec2_t)* b, graphene_vec2_t* res) c_graphene_vec2_divide; ///
-  float function(const(graphene_vec2_t)* a, const(graphene_vec2_t)* b) c_graphene_vec2_dot; ///
-  bool function(const(graphene_vec2_t)* v1, const(graphene_vec2_t)* v2) c_graphene_vec2_equal; ///
-  void function(graphene_vec2_t* v) c_graphene_vec2_free; ///
-  float function(const(graphene_vec2_t)* v) c_graphene_vec2_get_x; ///
-  float function(const(graphene_vec2_t)* v) c_graphene_vec2_get_y; ///
-  graphene_vec2_t* function(graphene_vec2_t* v, float x, float y) c_graphene_vec2_init; ///
-  graphene_vec2_t* function(graphene_vec2_t* v, const(float)* src) c_graphene_vec2_init_from_float; ///
-  graphene_vec2_t* function(graphene_vec2_t* v, const(graphene_vec2_t)* src) c_graphene_vec2_init_from_vec2; ///
-  void function(const(graphene_vec2_t)* v1, const(graphene_vec2_t)* v2, double factor, graphene_vec2_t* res) c_graphene_vec2_interpolate; ///
-  float function(const(graphene_vec2_t)* v) c_graphene_vec2_length; ///
-  void function(const(graphene_vec2_t)* a, const(graphene_vec2_t)* b, graphene_vec2_t* res) c_graphene_vec2_max; ///
-  void function(const(graphene_vec2_t)* a, const(graphene_vec2_t)* b, graphene_vec2_t* res) c_graphene_vec2_min; ///
-  void function(const(graphene_vec2_t)* a, const(graphene_vec2_t)* b, graphene_vec2_t* res) c_graphene_vec2_multiply; ///
-  bool function(const(graphene_vec2_t)* v1, const(graphene_vec2_t)* v2, float epsilon) c_graphene_vec2_near; ///
-  void function(const(graphene_vec2_t)* v, graphene_vec2_t* res) c_graphene_vec2_negate; ///
-  void function(const(graphene_vec2_t)* v, graphene_vec2_t* res) c_graphene_vec2_normalize; ///
-  void function(const(graphene_vec2_t)* v, float factor, graphene_vec2_t* res) c_graphene_vec2_scale; ///
-  void function(const(graphene_vec2_t)* a, const(graphene_vec2_t)* b, graphene_vec2_t* res) c_graphene_vec2_subtract; ///
-  void function(const(graphene_vec2_t)* v, float* dest) c_graphene_vec2_to_float; ///
-  const(graphene_vec2_t)* function() c_graphene_vec2_one; ///
-  const(graphene_vec2_t)* function() c_graphene_vec2_x_axis; ///
-  const(graphene_vec2_t)* function() c_graphene_vec2_y_axis; ///
-  const(graphene_vec2_t)* function() c_graphene_vec2_zero; ///
+// Vec2
+private alias c_graphene_vec2_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_graphene_vec2_get_typeFn c_graphene_vec2_get_type; ///
+private alias c_graphene_vec2_allocFn = extern(C) graphene_vec2_t* function() nothrow;
+__gshared c_graphene_vec2_allocFn c_graphene_vec2_alloc; ///
+private alias c_graphene_vec2_addFn = extern(C) void function(const(graphene_vec2_t)* a, const(graphene_vec2_t)* b, graphene_vec2_t* res) nothrow;
+__gshared c_graphene_vec2_addFn c_graphene_vec2_add; ///
+private alias c_graphene_vec2_divideFn = extern(C) void function(const(graphene_vec2_t)* a, const(graphene_vec2_t)* b, graphene_vec2_t* res) nothrow;
+__gshared c_graphene_vec2_divideFn c_graphene_vec2_divide; ///
+private alias c_graphene_vec2_dotFn = extern(C) float function(const(graphene_vec2_t)* a, const(graphene_vec2_t)* b) nothrow;
+__gshared c_graphene_vec2_dotFn c_graphene_vec2_dot; ///
+private alias c_graphene_vec2_equalFn = extern(C) bool function(const(graphene_vec2_t)* v1, const(graphene_vec2_t)* v2) nothrow;
+__gshared c_graphene_vec2_equalFn c_graphene_vec2_equal; ///
+private alias c_graphene_vec2_freeFn = extern(C) void function(graphene_vec2_t* v) nothrow;
+__gshared c_graphene_vec2_freeFn c_graphene_vec2_free; ///
+private alias c_graphene_vec2_get_xFn = extern(C) float function(const(graphene_vec2_t)* v) nothrow;
+__gshared c_graphene_vec2_get_xFn c_graphene_vec2_get_x; ///
+private alias c_graphene_vec2_get_yFn = extern(C) float function(const(graphene_vec2_t)* v) nothrow;
+__gshared c_graphene_vec2_get_yFn c_graphene_vec2_get_y; ///
+private alias c_graphene_vec2_initFn = extern(C) graphene_vec2_t* function(graphene_vec2_t* v, float x, float y) nothrow;
+__gshared c_graphene_vec2_initFn c_graphene_vec2_init; ///
+private alias c_graphene_vec2_init_from_floatFn = extern(C) graphene_vec2_t* function(graphene_vec2_t* v, const(float)* src) nothrow;
+__gshared c_graphene_vec2_init_from_floatFn c_graphene_vec2_init_from_float; ///
+private alias c_graphene_vec2_init_from_vec2Fn = extern(C) graphene_vec2_t* function(graphene_vec2_t* v, const(graphene_vec2_t)* src) nothrow;
+__gshared c_graphene_vec2_init_from_vec2Fn c_graphene_vec2_init_from_vec2; ///
+private alias c_graphene_vec2_interpolateFn = extern(C) void function(const(graphene_vec2_t)* v1, const(graphene_vec2_t)* v2, double factor, graphene_vec2_t* res) nothrow;
+__gshared c_graphene_vec2_interpolateFn c_graphene_vec2_interpolate; ///
+private alias c_graphene_vec2_lengthFn = extern(C) float function(const(graphene_vec2_t)* v) nothrow;
+__gshared c_graphene_vec2_lengthFn c_graphene_vec2_length; ///
+private alias c_graphene_vec2_maxFn = extern(C) void function(const(graphene_vec2_t)* a, const(graphene_vec2_t)* b, graphene_vec2_t* res) nothrow;
+__gshared c_graphene_vec2_maxFn c_graphene_vec2_max; ///
+private alias c_graphene_vec2_minFn = extern(C) void function(const(graphene_vec2_t)* a, const(graphene_vec2_t)* b, graphene_vec2_t* res) nothrow;
+__gshared c_graphene_vec2_minFn c_graphene_vec2_min; ///
+private alias c_graphene_vec2_multiplyFn = extern(C) void function(const(graphene_vec2_t)* a, const(graphene_vec2_t)* b, graphene_vec2_t* res) nothrow;
+__gshared c_graphene_vec2_multiplyFn c_graphene_vec2_multiply; ///
+private alias c_graphene_vec2_nearFn = extern(C) bool function(const(graphene_vec2_t)* v1, const(graphene_vec2_t)* v2, float epsilon) nothrow;
+__gshared c_graphene_vec2_nearFn c_graphene_vec2_near; ///
+private alias c_graphene_vec2_negateFn = extern(C) void function(const(graphene_vec2_t)* v, graphene_vec2_t* res) nothrow;
+__gshared c_graphene_vec2_negateFn c_graphene_vec2_negate; ///
+private alias c_graphene_vec2_normalizeFn = extern(C) void function(const(graphene_vec2_t)* v, graphene_vec2_t* res) nothrow;
+__gshared c_graphene_vec2_normalizeFn c_graphene_vec2_normalize; ///
+private alias c_graphene_vec2_scaleFn = extern(C) void function(const(graphene_vec2_t)* v, float factor, graphene_vec2_t* res) nothrow;
+__gshared c_graphene_vec2_scaleFn c_graphene_vec2_scale; ///
+private alias c_graphene_vec2_subtractFn = extern(C) void function(const(graphene_vec2_t)* a, const(graphene_vec2_t)* b, graphene_vec2_t* res) nothrow;
+__gshared c_graphene_vec2_subtractFn c_graphene_vec2_subtract; ///
+private alias c_graphene_vec2_to_floatFn = extern(C) void function(const(graphene_vec2_t)* v, float* dest) nothrow;
+__gshared c_graphene_vec2_to_floatFn c_graphene_vec2_to_float; ///
+private alias c_graphene_vec2_oneFn = extern(C) const(graphene_vec2_t)* function() nothrow;
+__gshared c_graphene_vec2_oneFn c_graphene_vec2_one; ///
+private alias c_graphene_vec2_x_axisFn = extern(C) const(graphene_vec2_t)* function() nothrow;
+__gshared c_graphene_vec2_x_axisFn c_graphene_vec2_x_axis; ///
+private alias c_graphene_vec2_y_axisFn = extern(C) const(graphene_vec2_t)* function() nothrow;
+__gshared c_graphene_vec2_y_axisFn c_graphene_vec2_y_axis; ///
+private alias c_graphene_vec2_zeroFn = extern(C) const(graphene_vec2_t)* function() nothrow;
+__gshared c_graphene_vec2_zeroFn c_graphene_vec2_zero; ///
 
-  // Vec3
-  GType function() c_graphene_vec3_get_type; ///
-  graphene_vec3_t* function() c_graphene_vec3_alloc; ///
-  void function(const(graphene_vec3_t)* a, const(graphene_vec3_t)* b, graphene_vec3_t* res) c_graphene_vec3_add; ///
-  void function(const(graphene_vec3_t)* a, const(graphene_vec3_t)* b, graphene_vec3_t* res) c_graphene_vec3_cross; ///
-  void function(const(graphene_vec3_t)* a, const(graphene_vec3_t)* b, graphene_vec3_t* res) c_graphene_vec3_divide; ///
-  float function(const(graphene_vec3_t)* a, const(graphene_vec3_t)* b) c_graphene_vec3_dot; ///
-  bool function(const(graphene_vec3_t)* v1, const(graphene_vec3_t)* v2) c_graphene_vec3_equal; ///
-  void function(graphene_vec3_t* v) c_graphene_vec3_free; ///
-  float function(const(graphene_vec3_t)* v) c_graphene_vec3_get_x; ///
-  void function(const(graphene_vec3_t)* v, graphene_vec2_t* res) c_graphene_vec3_get_xy; ///
-  void function(const(graphene_vec3_t)* v, graphene_vec3_t* res) c_graphene_vec3_get_xy0; ///
-  void function(const(graphene_vec3_t)* v, graphene_vec4_t* res) c_graphene_vec3_get_xyz0; ///
-  void function(const(graphene_vec3_t)* v, graphene_vec4_t* res) c_graphene_vec3_get_xyz1; ///
-  void function(const(graphene_vec3_t)* v, float w, graphene_vec4_t* res) c_graphene_vec3_get_xyzw; ///
-  float function(const(graphene_vec3_t)* v) c_graphene_vec3_get_y; ///
-  float function(const(graphene_vec3_t)* v) c_graphene_vec3_get_z; ///
-  graphene_vec3_t* function(graphene_vec3_t* v, float x, float y, float z) c_graphene_vec3_init; ///
-  graphene_vec3_t* function(graphene_vec3_t* v, const(float)* src) c_graphene_vec3_init_from_float; ///
-  graphene_vec3_t* function(graphene_vec3_t* v, const(graphene_vec3_t)* src) c_graphene_vec3_init_from_vec3; ///
-  void function(const(graphene_vec3_t)* v1, const(graphene_vec3_t)* v2, double factor, graphene_vec3_t* res) c_graphene_vec3_interpolate; ///
-  float function(const(graphene_vec3_t)* v) c_graphene_vec3_length; ///
-  void function(const(graphene_vec3_t)* a, const(graphene_vec3_t)* b, graphene_vec3_t* res) c_graphene_vec3_max; ///
-  void function(const(graphene_vec3_t)* a, const(graphene_vec3_t)* b, graphene_vec3_t* res) c_graphene_vec3_min; ///
-  void function(const(graphene_vec3_t)* a, const(graphene_vec3_t)* b, graphene_vec3_t* res) c_graphene_vec3_multiply; ///
-  bool function(const(graphene_vec3_t)* v1, const(graphene_vec3_t)* v2, float epsilon) c_graphene_vec3_near; ///
-  void function(const(graphene_vec3_t)* v, graphene_vec3_t* res) c_graphene_vec3_negate; ///
-  void function(const(graphene_vec3_t)* v, graphene_vec3_t* res) c_graphene_vec3_normalize; ///
-  void function(const(graphene_vec3_t)* v, float factor, graphene_vec3_t* res) c_graphene_vec3_scale; ///
-  void function(const(graphene_vec3_t)* a, const(graphene_vec3_t)* b, graphene_vec3_t* res) c_graphene_vec3_subtract; ///
-  void function(const(graphene_vec3_t)* v, float* dest) c_graphene_vec3_to_float; ///
-  const(graphene_vec3_t)* function() c_graphene_vec3_one; ///
-  const(graphene_vec3_t)* function() c_graphene_vec3_x_axis; ///
-  const(graphene_vec3_t)* function() c_graphene_vec3_y_axis; ///
-  const(graphene_vec3_t)* function() c_graphene_vec3_z_axis; ///
-  const(graphene_vec3_t)* function() c_graphene_vec3_zero; ///
+// Vec3
+private alias c_graphene_vec3_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_graphene_vec3_get_typeFn c_graphene_vec3_get_type; ///
+private alias c_graphene_vec3_allocFn = extern(C) graphene_vec3_t* function() nothrow;
+__gshared c_graphene_vec3_allocFn c_graphene_vec3_alloc; ///
+private alias c_graphene_vec3_addFn = extern(C) void function(const(graphene_vec3_t)* a, const(graphene_vec3_t)* b, graphene_vec3_t* res) nothrow;
+__gshared c_graphene_vec3_addFn c_graphene_vec3_add; ///
+private alias c_graphene_vec3_crossFn = extern(C) void function(const(graphene_vec3_t)* a, const(graphene_vec3_t)* b, graphene_vec3_t* res) nothrow;
+__gshared c_graphene_vec3_crossFn c_graphene_vec3_cross; ///
+private alias c_graphene_vec3_divideFn = extern(C) void function(const(graphene_vec3_t)* a, const(graphene_vec3_t)* b, graphene_vec3_t* res) nothrow;
+__gshared c_graphene_vec3_divideFn c_graphene_vec3_divide; ///
+private alias c_graphene_vec3_dotFn = extern(C) float function(const(graphene_vec3_t)* a, const(graphene_vec3_t)* b) nothrow;
+__gshared c_graphene_vec3_dotFn c_graphene_vec3_dot; ///
+private alias c_graphene_vec3_equalFn = extern(C) bool function(const(graphene_vec3_t)* v1, const(graphene_vec3_t)* v2) nothrow;
+__gshared c_graphene_vec3_equalFn c_graphene_vec3_equal; ///
+private alias c_graphene_vec3_freeFn = extern(C) void function(graphene_vec3_t* v) nothrow;
+__gshared c_graphene_vec3_freeFn c_graphene_vec3_free; ///
+private alias c_graphene_vec3_get_xFn = extern(C) float function(const(graphene_vec3_t)* v) nothrow;
+__gshared c_graphene_vec3_get_xFn c_graphene_vec3_get_x; ///
+private alias c_graphene_vec3_get_xyFn = extern(C) void function(const(graphene_vec3_t)* v, graphene_vec2_t* res) nothrow;
+__gshared c_graphene_vec3_get_xyFn c_graphene_vec3_get_xy; ///
+private alias c_graphene_vec3_get_xy0Fn = extern(C) void function(const(graphene_vec3_t)* v, graphene_vec3_t* res) nothrow;
+__gshared c_graphene_vec3_get_xy0Fn c_graphene_vec3_get_xy0; ///
+private alias c_graphene_vec3_get_xyz0Fn = extern(C) void function(const(graphene_vec3_t)* v, graphene_vec4_t* res) nothrow;
+__gshared c_graphene_vec3_get_xyz0Fn c_graphene_vec3_get_xyz0; ///
+private alias c_graphene_vec3_get_xyz1Fn = extern(C) void function(const(graphene_vec3_t)* v, graphene_vec4_t* res) nothrow;
+__gshared c_graphene_vec3_get_xyz1Fn c_graphene_vec3_get_xyz1; ///
+private alias c_graphene_vec3_get_xyzwFn = extern(C) void function(const(graphene_vec3_t)* v, float w, graphene_vec4_t* res) nothrow;
+__gshared c_graphene_vec3_get_xyzwFn c_graphene_vec3_get_xyzw; ///
+private alias c_graphene_vec3_get_yFn = extern(C) float function(const(graphene_vec3_t)* v) nothrow;
+__gshared c_graphene_vec3_get_yFn c_graphene_vec3_get_y; ///
+private alias c_graphene_vec3_get_zFn = extern(C) float function(const(graphene_vec3_t)* v) nothrow;
+__gshared c_graphene_vec3_get_zFn c_graphene_vec3_get_z; ///
+private alias c_graphene_vec3_initFn = extern(C) graphene_vec3_t* function(graphene_vec3_t* v, float x, float y, float z) nothrow;
+__gshared c_graphene_vec3_initFn c_graphene_vec3_init; ///
+private alias c_graphene_vec3_init_from_floatFn = extern(C) graphene_vec3_t* function(graphene_vec3_t* v, const(float)* src) nothrow;
+__gshared c_graphene_vec3_init_from_floatFn c_graphene_vec3_init_from_float; ///
+private alias c_graphene_vec3_init_from_vec3Fn = extern(C) graphene_vec3_t* function(graphene_vec3_t* v, const(graphene_vec3_t)* src) nothrow;
+__gshared c_graphene_vec3_init_from_vec3Fn c_graphene_vec3_init_from_vec3; ///
+private alias c_graphene_vec3_interpolateFn = extern(C) void function(const(graphene_vec3_t)* v1, const(graphene_vec3_t)* v2, double factor, graphene_vec3_t* res) nothrow;
+__gshared c_graphene_vec3_interpolateFn c_graphene_vec3_interpolate; ///
+private alias c_graphene_vec3_lengthFn = extern(C) float function(const(graphene_vec3_t)* v) nothrow;
+__gshared c_graphene_vec3_lengthFn c_graphene_vec3_length; ///
+private alias c_graphene_vec3_maxFn = extern(C) void function(const(graphene_vec3_t)* a, const(graphene_vec3_t)* b, graphene_vec3_t* res) nothrow;
+__gshared c_graphene_vec3_maxFn c_graphene_vec3_max; ///
+private alias c_graphene_vec3_minFn = extern(C) void function(const(graphene_vec3_t)* a, const(graphene_vec3_t)* b, graphene_vec3_t* res) nothrow;
+__gshared c_graphene_vec3_minFn c_graphene_vec3_min; ///
+private alias c_graphene_vec3_multiplyFn = extern(C) void function(const(graphene_vec3_t)* a, const(graphene_vec3_t)* b, graphene_vec3_t* res) nothrow;
+__gshared c_graphene_vec3_multiplyFn c_graphene_vec3_multiply; ///
+private alias c_graphene_vec3_nearFn = extern(C) bool function(const(graphene_vec3_t)* v1, const(graphene_vec3_t)* v2, float epsilon) nothrow;
+__gshared c_graphene_vec3_nearFn c_graphene_vec3_near; ///
+private alias c_graphene_vec3_negateFn = extern(C) void function(const(graphene_vec3_t)* v, graphene_vec3_t* res) nothrow;
+__gshared c_graphene_vec3_negateFn c_graphene_vec3_negate; ///
+private alias c_graphene_vec3_normalizeFn = extern(C) void function(const(graphene_vec3_t)* v, graphene_vec3_t* res) nothrow;
+__gshared c_graphene_vec3_normalizeFn c_graphene_vec3_normalize; ///
+private alias c_graphene_vec3_scaleFn = extern(C) void function(const(graphene_vec3_t)* v, float factor, graphene_vec3_t* res) nothrow;
+__gshared c_graphene_vec3_scaleFn c_graphene_vec3_scale; ///
+private alias c_graphene_vec3_subtractFn = extern(C) void function(const(graphene_vec3_t)* a, const(graphene_vec3_t)* b, graphene_vec3_t* res) nothrow;
+__gshared c_graphene_vec3_subtractFn c_graphene_vec3_subtract; ///
+private alias c_graphene_vec3_to_floatFn = extern(C) void function(const(graphene_vec3_t)* v, float* dest) nothrow;
+__gshared c_graphene_vec3_to_floatFn c_graphene_vec3_to_float; ///
+private alias c_graphene_vec3_oneFn = extern(C) const(graphene_vec3_t)* function() nothrow;
+__gshared c_graphene_vec3_oneFn c_graphene_vec3_one; ///
+private alias c_graphene_vec3_x_axisFn = extern(C) const(graphene_vec3_t)* function() nothrow;
+__gshared c_graphene_vec3_x_axisFn c_graphene_vec3_x_axis; ///
+private alias c_graphene_vec3_y_axisFn = extern(C) const(graphene_vec3_t)* function() nothrow;
+__gshared c_graphene_vec3_y_axisFn c_graphene_vec3_y_axis; ///
+private alias c_graphene_vec3_z_axisFn = extern(C) const(graphene_vec3_t)* function() nothrow;
+__gshared c_graphene_vec3_z_axisFn c_graphene_vec3_z_axis; ///
+private alias c_graphene_vec3_zeroFn = extern(C) const(graphene_vec3_t)* function() nothrow;
+__gshared c_graphene_vec3_zeroFn c_graphene_vec3_zero; ///
 
-  // Vec4
-  GType function() c_graphene_vec4_get_type; ///
-  graphene_vec4_t* function() c_graphene_vec4_alloc; ///
-  void function(const(graphene_vec4_t)* a, const(graphene_vec4_t)* b, graphene_vec4_t* res) c_graphene_vec4_add; ///
-  void function(const(graphene_vec4_t)* a, const(graphene_vec4_t)* b, graphene_vec4_t* res) c_graphene_vec4_divide; ///
-  float function(const(graphene_vec4_t)* a, const(graphene_vec4_t)* b) c_graphene_vec4_dot; ///
-  bool function(const(graphene_vec4_t)* v1, const(graphene_vec4_t)* v2) c_graphene_vec4_equal; ///
-  void function(graphene_vec4_t* v) c_graphene_vec4_free; ///
-  float function(const(graphene_vec4_t)* v) c_graphene_vec4_get_w; ///
-  float function(const(graphene_vec4_t)* v) c_graphene_vec4_get_x; ///
-  void function(const(graphene_vec4_t)* v, graphene_vec2_t* res) c_graphene_vec4_get_xy; ///
-  void function(const(graphene_vec4_t)* v, graphene_vec3_t* res) c_graphene_vec4_get_xyz; ///
-  float function(const(graphene_vec4_t)* v) c_graphene_vec4_get_y; ///
-  float function(const(graphene_vec4_t)* v) c_graphene_vec4_get_z; ///
-  graphene_vec4_t* function(graphene_vec4_t* v, float x, float y, float z, float w) c_graphene_vec4_init; ///
-  graphene_vec4_t* function(graphene_vec4_t* v, const(float)* src) c_graphene_vec4_init_from_float; ///
-  graphene_vec4_t* function(graphene_vec4_t* v, const(graphene_vec2_t)* src, float z, float w) c_graphene_vec4_init_from_vec2; ///
-  graphene_vec4_t* function(graphene_vec4_t* v, const(graphene_vec3_t)* src, float w) c_graphene_vec4_init_from_vec3; ///
-  graphene_vec4_t* function(graphene_vec4_t* v, const(graphene_vec4_t)* src) c_graphene_vec4_init_from_vec4; ///
-  void function(const(graphene_vec4_t)* v1, const(graphene_vec4_t)* v2, double factor, graphene_vec4_t* res) c_graphene_vec4_interpolate; ///
-  float function(const(graphene_vec4_t)* v) c_graphene_vec4_length; ///
-  void function(const(graphene_vec4_t)* a, const(graphene_vec4_t)* b, graphene_vec4_t* res) c_graphene_vec4_max; ///
-  void function(const(graphene_vec4_t)* a, const(graphene_vec4_t)* b, graphene_vec4_t* res) c_graphene_vec4_min; ///
-  void function(const(graphene_vec4_t)* a, const(graphene_vec4_t)* b, graphene_vec4_t* res) c_graphene_vec4_multiply; ///
-  bool function(const(graphene_vec4_t)* v1, const(graphene_vec4_t)* v2, float epsilon) c_graphene_vec4_near; ///
-  void function(const(graphene_vec4_t)* v, graphene_vec4_t* res) c_graphene_vec4_negate; ///
-  void function(const(graphene_vec4_t)* v, graphene_vec4_t* res) c_graphene_vec4_normalize; ///
-  void function(const(graphene_vec4_t)* v, float factor, graphene_vec4_t* res) c_graphene_vec4_scale; ///
-  void function(const(graphene_vec4_t)* a, const(graphene_vec4_t)* b, graphene_vec4_t* res) c_graphene_vec4_subtract; ///
-  void function(const(graphene_vec4_t)* v, float* dest) c_graphene_vec4_to_float; ///
-  const(graphene_vec4_t)* function() c_graphene_vec4_one; ///
-  const(graphene_vec4_t)* function() c_graphene_vec4_w_axis; ///
-  const(graphene_vec4_t)* function() c_graphene_vec4_x_axis; ///
-  const(graphene_vec4_t)* function() c_graphene_vec4_y_axis; ///
-  const(graphene_vec4_t)* function() c_graphene_vec4_z_axis; ///
-  const(graphene_vec4_t)* function() c_graphene_vec4_zero; ///
-}
+// Vec4
+private alias c_graphene_vec4_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_graphene_vec4_get_typeFn c_graphene_vec4_get_type; ///
+private alias c_graphene_vec4_allocFn = extern(C) graphene_vec4_t* function() nothrow;
+__gshared c_graphene_vec4_allocFn c_graphene_vec4_alloc; ///
+private alias c_graphene_vec4_addFn = extern(C) void function(const(graphene_vec4_t)* a, const(graphene_vec4_t)* b, graphene_vec4_t* res) nothrow;
+__gshared c_graphene_vec4_addFn c_graphene_vec4_add; ///
+private alias c_graphene_vec4_divideFn = extern(C) void function(const(graphene_vec4_t)* a, const(graphene_vec4_t)* b, graphene_vec4_t* res) nothrow;
+__gshared c_graphene_vec4_divideFn c_graphene_vec4_divide; ///
+private alias c_graphene_vec4_dotFn = extern(C) float function(const(graphene_vec4_t)* a, const(graphene_vec4_t)* b) nothrow;
+__gshared c_graphene_vec4_dotFn c_graphene_vec4_dot; ///
+private alias c_graphene_vec4_equalFn = extern(C) bool function(const(graphene_vec4_t)* v1, const(graphene_vec4_t)* v2) nothrow;
+__gshared c_graphene_vec4_equalFn c_graphene_vec4_equal; ///
+private alias c_graphene_vec4_freeFn = extern(C) void function(graphene_vec4_t* v) nothrow;
+__gshared c_graphene_vec4_freeFn c_graphene_vec4_free; ///
+private alias c_graphene_vec4_get_wFn = extern(C) float function(const(graphene_vec4_t)* v) nothrow;
+__gshared c_graphene_vec4_get_wFn c_graphene_vec4_get_w; ///
+private alias c_graphene_vec4_get_xFn = extern(C) float function(const(graphene_vec4_t)* v) nothrow;
+__gshared c_graphene_vec4_get_xFn c_graphene_vec4_get_x; ///
+private alias c_graphene_vec4_get_xyFn = extern(C) void function(const(graphene_vec4_t)* v, graphene_vec2_t* res) nothrow;
+__gshared c_graphene_vec4_get_xyFn c_graphene_vec4_get_xy; ///
+private alias c_graphene_vec4_get_xyzFn = extern(C) void function(const(graphene_vec4_t)* v, graphene_vec3_t* res) nothrow;
+__gshared c_graphene_vec4_get_xyzFn c_graphene_vec4_get_xyz; ///
+private alias c_graphene_vec4_get_yFn = extern(C) float function(const(graphene_vec4_t)* v) nothrow;
+__gshared c_graphene_vec4_get_yFn c_graphene_vec4_get_y; ///
+private alias c_graphene_vec4_get_zFn = extern(C) float function(const(graphene_vec4_t)* v) nothrow;
+__gshared c_graphene_vec4_get_zFn c_graphene_vec4_get_z; ///
+private alias c_graphene_vec4_initFn = extern(C) graphene_vec4_t* function(graphene_vec4_t* v, float x, float y, float z, float w) nothrow;
+__gshared c_graphene_vec4_initFn c_graphene_vec4_init; ///
+private alias c_graphene_vec4_init_from_floatFn = extern(C) graphene_vec4_t* function(graphene_vec4_t* v, const(float)* src) nothrow;
+__gshared c_graphene_vec4_init_from_floatFn c_graphene_vec4_init_from_float; ///
+private alias c_graphene_vec4_init_from_vec2Fn = extern(C) graphene_vec4_t* function(graphene_vec4_t* v, const(graphene_vec2_t)* src, float z, float w) nothrow;
+__gshared c_graphene_vec4_init_from_vec2Fn c_graphene_vec4_init_from_vec2; ///
+private alias c_graphene_vec4_init_from_vec3Fn = extern(C) graphene_vec4_t* function(graphene_vec4_t* v, const(graphene_vec3_t)* src, float w) nothrow;
+__gshared c_graphene_vec4_init_from_vec3Fn c_graphene_vec4_init_from_vec3; ///
+private alias c_graphene_vec4_init_from_vec4Fn = extern(C) graphene_vec4_t* function(graphene_vec4_t* v, const(graphene_vec4_t)* src) nothrow;
+__gshared c_graphene_vec4_init_from_vec4Fn c_graphene_vec4_init_from_vec4; ///
+private alias c_graphene_vec4_interpolateFn = extern(C) void function(const(graphene_vec4_t)* v1, const(graphene_vec4_t)* v2, double factor, graphene_vec4_t* res) nothrow;
+__gshared c_graphene_vec4_interpolateFn c_graphene_vec4_interpolate; ///
+private alias c_graphene_vec4_lengthFn = extern(C) float function(const(graphene_vec4_t)* v) nothrow;
+__gshared c_graphene_vec4_lengthFn c_graphene_vec4_length; ///
+private alias c_graphene_vec4_maxFn = extern(C) void function(const(graphene_vec4_t)* a, const(graphene_vec4_t)* b, graphene_vec4_t* res) nothrow;
+__gshared c_graphene_vec4_maxFn c_graphene_vec4_max; ///
+private alias c_graphene_vec4_minFn = extern(C) void function(const(graphene_vec4_t)* a, const(graphene_vec4_t)* b, graphene_vec4_t* res) nothrow;
+__gshared c_graphene_vec4_minFn c_graphene_vec4_min; ///
+private alias c_graphene_vec4_multiplyFn = extern(C) void function(const(graphene_vec4_t)* a, const(graphene_vec4_t)* b, graphene_vec4_t* res) nothrow;
+__gshared c_graphene_vec4_multiplyFn c_graphene_vec4_multiply; ///
+private alias c_graphene_vec4_nearFn = extern(C) bool function(const(graphene_vec4_t)* v1, const(graphene_vec4_t)* v2, float epsilon) nothrow;
+__gshared c_graphene_vec4_nearFn c_graphene_vec4_near; ///
+private alias c_graphene_vec4_negateFn = extern(C) void function(const(graphene_vec4_t)* v, graphene_vec4_t* res) nothrow;
+__gshared c_graphene_vec4_negateFn c_graphene_vec4_negate; ///
+private alias c_graphene_vec4_normalizeFn = extern(C) void function(const(graphene_vec4_t)* v, graphene_vec4_t* res) nothrow;
+__gshared c_graphene_vec4_normalizeFn c_graphene_vec4_normalize; ///
+private alias c_graphene_vec4_scaleFn = extern(C) void function(const(graphene_vec4_t)* v, float factor, graphene_vec4_t* res) nothrow;
+__gshared c_graphene_vec4_scaleFn c_graphene_vec4_scale; ///
+private alias c_graphene_vec4_subtractFn = extern(C) void function(const(graphene_vec4_t)* a, const(graphene_vec4_t)* b, graphene_vec4_t* res) nothrow;
+__gshared c_graphene_vec4_subtractFn c_graphene_vec4_subtract; ///
+private alias c_graphene_vec4_to_floatFn = extern(C) void function(const(graphene_vec4_t)* v, float* dest) nothrow;
+__gshared c_graphene_vec4_to_floatFn c_graphene_vec4_to_float; ///
+private alias c_graphene_vec4_oneFn = extern(C) const(graphene_vec4_t)* function() nothrow;
+__gshared c_graphene_vec4_oneFn c_graphene_vec4_one; ///
+private alias c_graphene_vec4_w_axisFn = extern(C) const(graphene_vec4_t)* function() nothrow;
+__gshared c_graphene_vec4_w_axisFn c_graphene_vec4_w_axis; ///
+private alias c_graphene_vec4_x_axisFn = extern(C) const(graphene_vec4_t)* function() nothrow;
+__gshared c_graphene_vec4_x_axisFn c_graphene_vec4_x_axis; ///
+private alias c_graphene_vec4_y_axisFn = extern(C) const(graphene_vec4_t)* function() nothrow;
+__gshared c_graphene_vec4_y_axisFn c_graphene_vec4_y_axis; ///
+private alias c_graphene_vec4_z_axisFn = extern(C) const(graphene_vec4_t)* function() nothrow;
+__gshared c_graphene_vec4_z_axisFn c_graphene_vec4_z_axis; ///
+private alias c_graphene_vec4_zeroFn = extern(C) const(graphene_vec4_t)* function() nothrow;
+__gshared c_graphene_vec4_zeroFn c_graphene_vec4_zero; ///
 
 // Box
 

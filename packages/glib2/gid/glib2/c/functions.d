@@ -8,2029 +8,3891 @@ public import gid.gobject2.c.types;
 
 private immutable LIBS = ["gobject-2.0_0", "glib-2.0_0"];
 
-__gshared extern(C) nothrow
-{
-  // Allocator
-  void function(GAllocator* allocator) c_g_allocator_free; ///
-  GAllocator* function(const(char)* name, uint nPreallocs) c_g_allocator_new; ///
-
-  // Array
-  GType function() c_g_array_get_type; ///
-  GArray* function(GArray* array, const(void)* data, uint len) c_g_array_append_vals; ///
-  gboolean function(GArray* array, const(void)* target, GCompareFunc compareFunc, uint* outMatchIndex) c_g_array_binary_search; ///
-  GArray* function(GArray* array) c_g_array_copy; ///
-  char* function(GArray* array, gboolean freeSegment) c_g_array_free; ///
-  uint function(GArray* array) c_g_array_get_element_size; ///
-  GArray* function(GArray* array, uint index, const(void)* data, uint len) c_g_array_insert_vals; ///
-  GArray* function(gboolean zeroTerminated, gboolean clear, uint elementSize) c_g_array_new; ///
-  GArray* function(void* data, size_t len, gboolean clear, size_t elementSize) c_g_array_new_take; ///
-  GArray* function(void* data, gboolean clear, size_t elementSize) c_g_array_new_take_zero_terminated; ///
-  GArray* function(GArray* array, const(void)* data, uint len) c_g_array_prepend_vals; ///
-  GArray* function(GArray* array) c_g_array_ref; ///
-  GArray* function(GArray* array, uint index) c_g_array_remove_index; ///
-  GArray* function(GArray* array, uint index) c_g_array_remove_index_fast; ///
-  GArray* function(GArray* array, uint index, uint length) c_g_array_remove_range; ///
-  void function(GArray* array, GDestroyNotify clearFunc) c_g_array_set_clear_func; ///
-  GArray* function(GArray* array, uint length) c_g_array_set_size; ///
-  GArray* function(gboolean zeroTerminated, gboolean clear, uint elementSize, uint reservedSize) c_g_array_sized_new; ///
-  void function(GArray* array, GCompareFunc compareFunc) c_g_array_sort; ///
-  void function(GArray* array, GCompareDataFunc compareFunc, void* userData) c_g_array_sort_with_data; ///
-  void* function(GArray* array, size_t* len) c_g_array_steal; ///
-  void function(GArray* array) c_g_array_unref; ///
-
-  // AsyncQueue
-  int function(GAsyncQueue* queue) c_g_async_queue_length; ///
-  int function(GAsyncQueue* queue) c_g_async_queue_length_unlocked; ///
-  void function(GAsyncQueue* queue) c_g_async_queue_lock; ///
-  void* function(GAsyncQueue* queue) c_g_async_queue_pop; ///
-  void* function(GAsyncQueue* queue) c_g_async_queue_pop_unlocked; ///
-  void function(GAsyncQueue* queue, void* data) c_g_async_queue_push; ///
-  void function(GAsyncQueue* queue, void* item) c_g_async_queue_push_front; ///
-  void function(GAsyncQueue* queue, void* item) c_g_async_queue_push_front_unlocked; ///
-  void function(GAsyncQueue* queue, void* data, GCompareDataFunc func, void* userData) c_g_async_queue_push_sorted; ///
-  void function(GAsyncQueue* queue, void* data, GCompareDataFunc func, void* userData) c_g_async_queue_push_sorted_unlocked; ///
-  void function(GAsyncQueue* queue, void* data) c_g_async_queue_push_unlocked; ///
-  GAsyncQueue* function(GAsyncQueue* queue) c_g_async_queue_ref; ///
-  void function(GAsyncQueue* queue) c_g_async_queue_ref_unlocked; ///
-  gboolean function(GAsyncQueue* queue, void* item) c_g_async_queue_remove; ///
-  gboolean function(GAsyncQueue* queue, void* item) c_g_async_queue_remove_unlocked; ///
-  void function(GAsyncQueue* queue, GCompareDataFunc func, void* userData) c_g_async_queue_sort; ///
-  void function(GAsyncQueue* queue, GCompareDataFunc func, void* userData) c_g_async_queue_sort_unlocked; ///
-  void* function(GAsyncQueue* queue, GTimeVal* endTime) c_g_async_queue_timed_pop; ///
-  void* function(GAsyncQueue* queue, GTimeVal* endTime) c_g_async_queue_timed_pop_unlocked; ///
-  void* function(GAsyncQueue* queue, ulong timeout) c_g_async_queue_timeout_pop; ///
-  void* function(GAsyncQueue* queue, ulong timeout) c_g_async_queue_timeout_pop_unlocked; ///
-  void* function(GAsyncQueue* queue) c_g_async_queue_try_pop; ///
-  void* function(GAsyncQueue* queue) c_g_async_queue_try_pop_unlocked; ///
-  void function(GAsyncQueue* queue) c_g_async_queue_unlock; ///
-  void function(GAsyncQueue* queue) c_g_async_queue_unref; ///
-  void function(GAsyncQueue* queue) c_g_async_queue_unref_and_unlock; ///
-  GAsyncQueue* function() c_g_async_queue_new; ///
-  GAsyncQueue* function(GDestroyNotify itemFreeFunc) c_g_async_queue_new_full; ///
-
-  // BookmarkFile
-  GType function() c_g_bookmark_file_get_type; ///
-  GBookmarkFile* function() c_g_bookmark_file_new; ///
-  void function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, const(char)* exec) c_g_bookmark_file_add_application; ///
-  void function(GBookmarkFile* bookmark, const(char)* uri, const(char)* group) c_g_bookmark_file_add_group; ///
-  GBookmarkFile* function(GBookmarkFile* bookmark) c_g_bookmark_file_copy; ///
-  void function(GBookmarkFile* bookmark) c_g_bookmark_file_free; ///
-  long function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_get_added; ///
-  GDateTime* function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_get_added_date_time; ///
-  gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, char** exec, uint* count, long* stamp, GError** _err) c_g_bookmark_file_get_app_info; ///
-  gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, char** exec, uint* count, GDateTime** stamp, GError** _err) c_g_bookmark_file_get_application_info; ///
-  char** function(GBookmarkFile* bookmark, const(char)* uri, size_t* length, GError** _err) c_g_bookmark_file_get_applications; ///
-  char* function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_get_description; ///
-  char** function(GBookmarkFile* bookmark, const(char)* uri, size_t* length, GError** _err) c_g_bookmark_file_get_groups; ///
-  gboolean function(GBookmarkFile* bookmark, const(char)* uri, char** href, char** mimeType, GError** _err) c_g_bookmark_file_get_icon; ///
-  gboolean function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_get_is_private; ///
-  char* function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_get_mime_type; ///
-  long function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_get_modified; ///
-  GDateTime* function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_get_modified_date_time; ///
-  int function(GBookmarkFile* bookmark) c_g_bookmark_file_get_size; ///
-  char* function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_get_title; ///
-  char** function(GBookmarkFile* bookmark, size_t* length) c_g_bookmark_file_get_uris; ///
-  long function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_get_visited; ///
-  GDateTime* function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_get_visited_date_time; ///
-  gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, GError** _err) c_g_bookmark_file_has_application; ///
-  gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* group, GError** _err) c_g_bookmark_file_has_group; ///
-  gboolean function(GBookmarkFile* bookmark, const(char)* uri) c_g_bookmark_file_has_item; ///
-  gboolean function(GBookmarkFile* bookmark, const(ubyte)* data, size_t length, GError** _err) c_g_bookmark_file_load_from_data; ///
-  gboolean function(GBookmarkFile* bookmark, const(char)* file, char** fullPath, GError** _err) c_g_bookmark_file_load_from_data_dirs; ///
-  gboolean function(GBookmarkFile* bookmark, const(char)* filename, GError** _err) c_g_bookmark_file_load_from_file; ///
-  gboolean function(GBookmarkFile* bookmark, const(char)* oldUri, const(char)* newUri, GError** _err) c_g_bookmark_file_move_item; ///
-  gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, GError** _err) c_g_bookmark_file_remove_application; ///
-  gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* group, GError** _err) c_g_bookmark_file_remove_group; ///
-  gboolean function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) c_g_bookmark_file_remove_item; ///
-  void function(GBookmarkFile* bookmark, const(char)* uri, long added) c_g_bookmark_file_set_added; ///
-  void function(GBookmarkFile* bookmark, const(char)* uri, GDateTime* added) c_g_bookmark_file_set_added_date_time; ///
-  gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, const(char)* exec, int count, long stamp, GError** _err) c_g_bookmark_file_set_app_info; ///
-  gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, const(char)* exec, int count, GDateTime* stamp, GError** _err) c_g_bookmark_file_set_application_info; ///
-  void function(GBookmarkFile* bookmark, const(char)* uri, const(char)* description) c_g_bookmark_file_set_description; ///
-  void function(GBookmarkFile* bookmark, const(char)* uri, const(char*)* groups, size_t length) c_g_bookmark_file_set_groups; ///
-  void function(GBookmarkFile* bookmark, const(char)* uri, const(char)* href, const(char)* mimeType) c_g_bookmark_file_set_icon; ///
-  void function(GBookmarkFile* bookmark, const(char)* uri, gboolean isPrivate) c_g_bookmark_file_set_is_private; ///
-  void function(GBookmarkFile* bookmark, const(char)* uri, const(char)* mimeType) c_g_bookmark_file_set_mime_type; ///
-  void function(GBookmarkFile* bookmark, const(char)* uri, long modified) c_g_bookmark_file_set_modified; ///
-  void function(GBookmarkFile* bookmark, const(char)* uri, GDateTime* modified) c_g_bookmark_file_set_modified_date_time; ///
-  void function(GBookmarkFile* bookmark, const(char)* uri, const(char)* title) c_g_bookmark_file_set_title; ///
-  void function(GBookmarkFile* bookmark, const(char)* uri, long visited) c_g_bookmark_file_set_visited; ///
-  void function(GBookmarkFile* bookmark, const(char)* uri, GDateTime* visited) c_g_bookmark_file_set_visited_date_time; ///
-  ubyte* function(GBookmarkFile* bookmark, size_t* length, GError** _err) c_g_bookmark_file_to_data; ///
-  gboolean function(GBookmarkFile* bookmark, const(char)* filename, GError** _err) c_g_bookmark_file_to_file; ///
-  GQuark function() c_g_bookmark_file_error_quark; ///
-
-  // ByteArray
-  GType function() c_g_byte_array_get_type; ///
-  GByteArray* function(GByteArray* array, const(ubyte)* data, uint len) c_g_byte_array_append; ///
-  ubyte* function(GByteArray* array, gboolean freeSegment) c_g_byte_array_free; ///
-  GBytes* function(GByteArray* array) c_g_byte_array_free_to_bytes; ///
-  GByteArray* function() c_g_byte_array_new; ///
-  GByteArray* function(ubyte* data, size_t len) c_g_byte_array_new_take; ///
-  GByteArray* function(GByteArray* array, const(ubyte)* data, uint len) c_g_byte_array_prepend; ///
-  GByteArray* function(GByteArray* array) c_g_byte_array_ref; ///
-  GByteArray* function(GByteArray* array, uint index) c_g_byte_array_remove_index; ///
-  GByteArray* function(GByteArray* array, uint index) c_g_byte_array_remove_index_fast; ///
-  GByteArray* function(GByteArray* array, uint index, uint length) c_g_byte_array_remove_range; ///
-  GByteArray* function(GByteArray* array, uint length) c_g_byte_array_set_size; ///
-  GByteArray* function(uint reservedSize) c_g_byte_array_sized_new; ///
-  void function(GByteArray* array, GCompareFunc compareFunc) c_g_byte_array_sort; ///
-  void function(GByteArray* array, GCompareDataFunc compareFunc, void* userData) c_g_byte_array_sort_with_data; ///
-  ubyte* function(GByteArray* array, size_t* len) c_g_byte_array_steal; ///
-  void function(GByteArray* array) c_g_byte_array_unref; ///
-
-  // Bytes
-  GType function() c_g_bytes_get_type; ///
-  GBytes* function(const(void)* data, size_t size) c_g_bytes_new; ///
-  GBytes* function(GBytes* bytes, size_t offset, size_t length) c_g_bytes_new_from_bytes; ///
-  GBytes* function(const(void)* data, size_t size) c_g_bytes_new_static; ///
-  GBytes* function(void* data, size_t size) c_g_bytes_new_take; ///
-  GBytes* function(const(void)* data, size_t size, GDestroyNotify freeFunc, void* userData) c_g_bytes_new_with_free_func; ///
-  int function(GBytes* bytes1, GBytes* bytes2) c_g_bytes_compare; ///
-  gboolean function(GBytes* bytes1, GBytes* bytes2) c_g_bytes_equal; ///
-  const(void)* function(GBytes* bytes, size_t* size) c_g_bytes_get_data; ///
-  const(void)* function(GBytes* bytes, size_t elementSize, size_t offset, size_t nElements) c_g_bytes_get_region; ///
-  size_t function(GBytes* bytes) c_g_bytes_get_size; ///
-  uint function(GBytes* bytes) c_g_bytes_hash; ///
-  GBytes* function(GBytes* bytes) c_g_bytes_ref; ///
-  void function(GBytes* bytes) c_g_bytes_unref; ///
-  GByteArray* function(GBytes* bytes) c_g_bytes_unref_to_array; ///
-  void* function(GBytes* bytes, size_t* size) c_g_bytes_unref_to_data; ///
-
-  // Cache
-  void function(GCache* cache) c_g_cache_destroy; ///
-  void* function(GCache* cache, void* key) c_g_cache_insert; ///
-  void function(GCache* cache, GHFunc func, void* userData) c_g_cache_key_foreach; ///
-  void function(GCache* cache, const(void)* value) c_g_cache_remove; ///
-  void function(GCache* cache, GHFunc func, void* userData) c_g_cache_value_foreach; ///
-  GCache* function(GCacheNewFunc valueNewFunc, GCacheDestroyFunc valueDestroyFunc, GCacheDupFunc keyDupFunc, GCacheDestroyFunc keyDestroyFunc, GHashFunc hashKeyFunc, GHashFunc hashValueFunc, GEqualFunc keyEqualFunc) c_g_cache_new; ///
-
-  // Checksum
-  GType function() c_g_checksum_get_type; ///
-  GChecksum* function(GChecksumType checksumType) c_g_checksum_new; ///
-  GChecksum* function(const(GChecksum)* checksum) c_g_checksum_copy; ///
-  void function(GChecksum* checksum) c_g_checksum_free; ///
-  void function(GChecksum* checksum, ubyte* buffer, size_t* digestLen) c_g_checksum_get_digest; ///
-  const(char)* function(GChecksum* checksum) c_g_checksum_get_string; ///
-  void function(GChecksum* checksum) c_g_checksum_reset; ///
-  void function(GChecksum* checksum, const(ubyte)* data, ptrdiff_t length) c_g_checksum_update; ///
-  ptrdiff_t function(GChecksumType checksumType) c_g_checksum_type_get_length; ///
-
-  // Completion
-  void function(GCompletion* cmp, GList* items) c_g_completion_add_items; ///
-  void function(GCompletion* cmp) c_g_completion_clear_items; ///
-  GList* function(GCompletion* cmp, const(char)* prefix, char** newPrefix) c_g_completion_complete; ///
-  GList* function(GCompletion* cmp, const(char)* prefix, char** newPrefix) c_g_completion_complete_utf8; ///
-  void function(GCompletion* cmp) c_g_completion_free; ///
-  void function(GCompletion* cmp, GList* items) c_g_completion_remove_items; ///
-  void function(GCompletion* cmp, GCompletionStrncmpFunc strncmpFunc) c_g_completion_set_compare; ///
-  GCompletion* function(GCompletionFunc func) c_g_completion_new; ///
-
-  // Cond
-  void function(GCond* cond) c_g_cond_broadcast; ///
-  void function(GCond* cond) c_g_cond_clear; ///
-  void function(GCond* cond) c_g_cond_free; ///
-  void function(GCond* cond) c_g_cond_init; ///
-  void function(GCond* cond) c_g_cond_signal; ///
-  gboolean function(GCond* cond, GMutex* mutex, GTimeVal* absTime) c_g_cond_timed_wait; ///
-  void function(GCond* cond, GMutex* mutex) c_g_cond_wait; ///
-  gboolean function(GCond* cond, GMutex* mutex, long endTime) c_g_cond_wait_until; ///
-  GCond* function() c_g_cond_new; ///
-
-  // Date
-  GType function() c_g_date_get_type; ///
-  GDate* function() c_g_date_new; ///
-  GDate* function(GDateDay day, GDateMonth month, GDateYear year) c_g_date_new_dmy; ///
-  GDate* function(uint julianDay) c_g_date_new_julian; ///
-  void function(GDate* date, uint nDays) c_g_date_add_days; ///
-  void function(GDate* date, uint nMonths) c_g_date_add_months; ///
-  void function(GDate* date, uint nYears) c_g_date_add_years; ///
-  void function(GDate* date, const(GDate)* minDate, const(GDate)* maxDate) c_g_date_clamp; ///
-  void function(GDate* date, uint nDates) c_g_date_clear; ///
-  int function(const(GDate)* lhs, const(GDate)* rhs) c_g_date_compare; ///
-  GDate* function(const(GDate)* date) c_g_date_copy; ///
-  int function(const(GDate)* date1, const(GDate)* date2) c_g_date_days_between; ///
-  void function(GDate* date) c_g_date_free; ///
-  GDateDay function(const(GDate)* date) c_g_date_get_day; ///
-  uint function(const(GDate)* date) c_g_date_get_day_of_year; ///
-  uint function(const(GDate)* date) c_g_date_get_iso8601_week_of_year; ///
-  uint function(const(GDate)* date) c_g_date_get_julian; ///
-  uint function(const(GDate)* date) c_g_date_get_monday_week_of_year; ///
-  GDateMonth function(const(GDate)* date) c_g_date_get_month; ///
-  uint function(const(GDate)* date) c_g_date_get_sunday_week_of_year; ///
-  uint function(const(GDate)* date, GDateWeekday firstDayOfWeek) c_g_date_get_week_of_year; ///
-  GDateWeekday function(const(GDate)* date) c_g_date_get_weekday; ///
-  GDateYear function(const(GDate)* date) c_g_date_get_year; ///
-  gboolean function(const(GDate)* date) c_g_date_is_first_of_month; ///
-  gboolean function(const(GDate)* date) c_g_date_is_last_of_month; ///
-  void function(GDate* date1, GDate* date2) c_g_date_order; ///
-  void function(GDate* date, GDateDay day) c_g_date_set_day; ///
-  void function(GDate* date, GDateDay day, GDateMonth month, GDateYear y) c_g_date_set_dmy; ///
-  void function(GDate* date, uint julianDate) c_g_date_set_julian; ///
-  void function(GDate* date, GDateMonth month) c_g_date_set_month; ///
-  void function(GDate* date, const(char)* str) c_g_date_set_parse; ///
-  void function(GDate* date, GTime time) c_g_date_set_time; ///
-  void function(GDate* date, long timet) c_g_date_set_time_t; ///
-  void function(GDate* date, GTimeVal* timeval) c_g_date_set_time_val; ///
-  void function(GDate* date, GDateYear year) c_g_date_set_year; ///
-  void function(GDate* date, uint nDays) c_g_date_subtract_days; ///
-  void function(GDate* date, uint nMonths) c_g_date_subtract_months; ///
-  void function(GDate* date, uint nYears) c_g_date_subtract_years; ///
-  void function(const(GDate)* date, void* tm) c_g_date_to_struct_tm; ///
-  gboolean function(const(GDate)* date) c_g_date_valid; ///
-  ubyte function(GDateMonth month, GDateYear year) c_g_date_get_days_in_month; ///
-  ubyte function(GDateYear year) c_g_date_get_monday_weeks_in_year; ///
-  ubyte function(GDateYear year) c_g_date_get_sunday_weeks_in_year; ///
-  ubyte function(GDateYear year, GDateWeekday firstDayOfWeek) c_g_date_get_weeks_in_year; ///
-  gboolean function(GDateYear year) c_g_date_is_leap_year; ///
-  size_t function(char* s, size_t slen, const(char)* format, const(GDate)* date) c_g_date_strftime; ///
-  gboolean function(GDateDay day) c_g_date_valid_day; ///
-  gboolean function(GDateDay day, GDateMonth month, GDateYear year) c_g_date_valid_dmy; ///
-  gboolean function(uint julianDate) c_g_date_valid_julian; ///
-  gboolean function(GDateMonth month) c_g_date_valid_month; ///
-  gboolean function(GDateWeekday weekday) c_g_date_valid_weekday; ///
-  gboolean function(GDateYear year) c_g_date_valid_year; ///
-
-  // DateTime
-  GType function() c_g_date_time_get_type; ///
-  GDateTime* function(GTimeZone* tz, int year, int month, int day, int hour, int minute, double seconds) c_g_date_time_new; ///
-  GDateTime* function(const(char)* text, GTimeZone* defaultTz) c_g_date_time_new_from_iso8601; ///
-  GDateTime* function(const(GTimeVal)* tv) c_g_date_time_new_from_timeval_local; ///
-  GDateTime* function(const(GTimeVal)* tv) c_g_date_time_new_from_timeval_utc; ///
-  GDateTime* function(long t) c_g_date_time_new_from_unix_local; ///
-  GDateTime* function(long usecs) c_g_date_time_new_from_unix_local_usec; ///
-  GDateTime* function(long t) c_g_date_time_new_from_unix_utc; ///
-  GDateTime* function(long usecs) c_g_date_time_new_from_unix_utc_usec; ///
-  GDateTime* function(int year, int month, int day, int hour, int minute, double seconds) c_g_date_time_new_local; ///
-  GDateTime* function(GTimeZone* tz) c_g_date_time_new_now; ///
-  GDateTime* function() c_g_date_time_new_now_local; ///
-  GDateTime* function() c_g_date_time_new_now_utc; ///
-  GDateTime* function(int year, int month, int day, int hour, int minute, double seconds) c_g_date_time_new_utc; ///
-  GDateTime* function(GDateTime* datetime, GTimeSpan timespan) c_g_date_time_add; ///
-  GDateTime* function(GDateTime* datetime, int days) c_g_date_time_add_days; ///
-  GDateTime* function(GDateTime* datetime, int years, int months, int days, int hours, int minutes, double seconds) c_g_date_time_add_full; ///
-  GDateTime* function(GDateTime* datetime, int hours) c_g_date_time_add_hours; ///
-  GDateTime* function(GDateTime* datetime, int minutes) c_g_date_time_add_minutes; ///
-  GDateTime* function(GDateTime* datetime, int months) c_g_date_time_add_months; ///
-  GDateTime* function(GDateTime* datetime, double seconds) c_g_date_time_add_seconds; ///
-  GDateTime* function(GDateTime* datetime, int weeks) c_g_date_time_add_weeks; ///
-  GDateTime* function(GDateTime* datetime, int years) c_g_date_time_add_years; ///
-  int function(GDateTime* dt1, GDateTime* dt2) c_g_date_time_compare; ///
-  GTimeSpan function(GDateTime* end, GDateTime* begin) c_g_date_time_difference; ///
-  gboolean function(GDateTime* dt1, GDateTime* dt2) c_g_date_time_equal; ///
-  char* function(GDateTime* datetime, const(char)* format) c_g_date_time_format; ///
-  char* function(GDateTime* datetime) c_g_date_time_format_iso8601; ///
-  int function(GDateTime* datetime) c_g_date_time_get_day_of_month; ///
-  int function(GDateTime* datetime) c_g_date_time_get_day_of_week; ///
-  int function(GDateTime* datetime) c_g_date_time_get_day_of_year; ///
-  int function(GDateTime* datetime) c_g_date_time_get_hour; ///
-  int function(GDateTime* datetime) c_g_date_time_get_microsecond; ///
-  int function(GDateTime* datetime) c_g_date_time_get_minute; ///
-  int function(GDateTime* datetime) c_g_date_time_get_month; ///
-  int function(GDateTime* datetime) c_g_date_time_get_second; ///
-  double function(GDateTime* datetime) c_g_date_time_get_seconds; ///
-  GTimeZone* function(GDateTime* datetime) c_g_date_time_get_timezone; ///
-  const(char)* function(GDateTime* datetime) c_g_date_time_get_timezone_abbreviation; ///
-  GTimeSpan function(GDateTime* datetime) c_g_date_time_get_utc_offset; ///
-  int function(GDateTime* datetime) c_g_date_time_get_week_numbering_year; ///
-  int function(GDateTime* datetime) c_g_date_time_get_week_of_year; ///
-  int function(GDateTime* datetime) c_g_date_time_get_year; ///
-  void function(GDateTime* datetime, int* year, int* month, int* day) c_g_date_time_get_ymd; ///
-  uint function(GDateTime* datetime) c_g_date_time_hash; ///
-  gboolean function(GDateTime* datetime) c_g_date_time_is_daylight_savings; ///
-  GDateTime* function(GDateTime* datetime) c_g_date_time_ref; ///
-  GDateTime* function(GDateTime* datetime) c_g_date_time_to_local; ///
-  gboolean function(GDateTime* datetime, GTimeVal* tv) c_g_date_time_to_timeval; ///
-  GDateTime* function(GDateTime* datetime, GTimeZone* tz) c_g_date_time_to_timezone; ///
-  long function(GDateTime* datetime) c_g_date_time_to_unix; ///
-  long function(GDateTime* datetime) c_g_date_time_to_unix_usec; ///
-  GDateTime* function(GDateTime* datetime) c_g_date_time_to_utc; ///
-  void function(GDateTime* datetime) c_g_date_time_unref; ///
-
-  // Dir
-  GType function() c_g_dir_get_type; ///
-  GDir* function(const(char)* path, uint flags, GError** _err) c_g_dir_open; ///
-  void function(GDir* dir) c_g_dir_close; ///
-  const(char)* function(GDir* dir) c_g_dir_read_name; ///
-  GDir* function(GDir* dir) c_g_dir_ref; ///
-  void function(GDir* dir) c_g_dir_rewind; ///
-  void function(GDir* dir) c_g_dir_unref; ///
-  char* function(const(char)* tmpl, GError** _err) c_g_dir_make_tmp; ///
-
-  // ErrorWrap
-  GType function() c_g_error_get_type; ///
-  GError* function(GQuark domain, int code, const(char)* format,  ...) c_g_error_new; ///
-  GError* function(GQuark domain, int code, const(char)* message) c_g_error_new_literal; ///
-  GError* function(GQuark domain, int code, const(char)* format, void* args) c_g_error_new_valist; ///
-  GError* function(const(GError)* error) c_g_error_copy; ///
-  void function(GError* error) c_g_error_free; ///
-  gboolean function(const(GError)* error, GQuark domain, int code) c_g_error_matches; ///
-  GQuark function(const(char)* errorTypeName, size_t errorTypePrivateSize, GErrorInitFunc errorTypeInit, GErrorCopyFunc errorTypeCopy, GErrorClearFunc errorTypeClear) c_g_error_domain_register; ///
-  GQuark function(const(char)* errorTypeName, size_t errorTypePrivateSize, GErrorInitFunc errorTypeInit, GErrorCopyFunc errorTypeCopy, GErrorClearFunc errorTypeClear) c_g_error_domain_register_static; ///
-
-  // HashTable
-  GType function() c_g_hash_table_get_type; ///
-  gboolean function(GHashTable* hashTable, void* key) c_g_hash_table_add; ///
-  gboolean function(GHashTable* hashTable, const(void)* key) c_g_hash_table_contains; ///
-  void function(GHashTable* hashTable) c_g_hash_table_destroy; ///
-  void* function(GHashTable* hashTable, GHRFunc predicate, void* userData) c_g_hash_table_find; ///
-  void function(GHashTable* hashTable, GHFunc func, void* userData) c_g_hash_table_foreach; ///
-  uint function(GHashTable* hashTable, GHRFunc func, void* userData) c_g_hash_table_foreach_remove; ///
-  uint function(GHashTable* hashTable, GHRFunc func, void* userData) c_g_hash_table_foreach_steal; ///
-  GList* function(GHashTable* hashTable) c_g_hash_table_get_keys; ///
-  void** function(GHashTable* hashTable, uint* length) c_g_hash_table_get_keys_as_array; ///
-  GPtrArray* function(GHashTable* hashTable) c_g_hash_table_get_keys_as_ptr_array; ///
-  GList* function(GHashTable* hashTable) c_g_hash_table_get_values; ///
-  GPtrArray* function(GHashTable* hashTable) c_g_hash_table_get_values_as_ptr_array; ///
-  gboolean function(GHashTable* hashTable, void* key, void* value) c_g_hash_table_insert; ///
-  void* function(GHashTable* hashTable, const(void)* key) c_g_hash_table_lookup; ///
-  gboolean function(GHashTable* hashTable, const(void)* lookupKey, void** origKey, void** value) c_g_hash_table_lookup_extended; ///
-  GHashTable* function(GHashFunc hashFunc, GEqualFunc keyEqualFunc) c_g_hash_table_new; ///
-  GHashTable* function(GHashFunc hashFunc, GEqualFunc keyEqualFunc, GDestroyNotify keyDestroyFunc, GDestroyNotify valueDestroyFunc) c_g_hash_table_new_full; ///
-  GHashTable* function(GHashTable* otherHashTable) c_g_hash_table_new_similar; ///
-  GHashTable* function(GHashTable* hashTable) c_g_hash_table_ref; ///
-  gboolean function(GHashTable* hashTable, const(void)* key) c_g_hash_table_remove; ///
-  void function(GHashTable* hashTable) c_g_hash_table_remove_all; ///
-  gboolean function(GHashTable* hashTable, void* key, void* value) c_g_hash_table_replace; ///
-  uint function(GHashTable* hashTable) c_g_hash_table_size; ///
-  gboolean function(GHashTable* hashTable, const(void)* key) c_g_hash_table_steal; ///
-  void function(GHashTable* hashTable) c_g_hash_table_steal_all; ///
-  GPtrArray* function(GHashTable* hashTable) c_g_hash_table_steal_all_keys; ///
-  GPtrArray* function(GHashTable* hashTable) c_g_hash_table_steal_all_values; ///
-  gboolean function(GHashTable* hashTable, const(void)* lookupKey, void** stolenKey, void** stolenValue) c_g_hash_table_steal_extended; ///
-  void function(GHashTable* hashTable) c_g_hash_table_unref; ///
-
-  // HashTableIter
-  GHashTable* function(GHashTableIter* iter) c_g_hash_table_iter_get_hash_table; ///
-  void function(GHashTableIter* iter, GHashTable* hashTable) c_g_hash_table_iter_init; ///
-  gboolean function(GHashTableIter* iter, void** key, void** value) c_g_hash_table_iter_next; ///
-  void function(GHashTableIter* iter) c_g_hash_table_iter_remove; ///
-  void function(GHashTableIter* iter, void* value) c_g_hash_table_iter_replace; ///
-  void function(GHashTableIter* iter) c_g_hash_table_iter_steal; ///
-
-  // Hmac
-  GType function() c_g_hmac_get_type; ///
-  GHmac* function(GChecksumType digestType, const(ubyte)* key, size_t keyLen) c_g_hmac_new; ///
-  GHmac* function(const(GHmac)* hmac) c_g_hmac_copy; ///
-  void function(GHmac* hmac, ubyte* buffer, size_t* digestLen) c_g_hmac_get_digest; ///
-  const(char)* function(GHmac* hmac) c_g_hmac_get_string; ///
-  GHmac* function(GHmac* hmac) c_g_hmac_ref; ///
-  void function(GHmac* hmac) c_g_hmac_unref; ///
-  void function(GHmac* hmac, const(ubyte)* data, ptrdiff_t length) c_g_hmac_update; ///
-
-  // Hook
-  int function(GHook* newHook, GHook* sibling) c_g_hook_compare_ids; ///
-  GHook* function(GHookList* hookList) c_g_hook_alloc; ///
-  gboolean function(GHookList* hookList, gulong hookId) c_g_hook_destroy; ///
-  void function(GHookList* hookList, GHook* hook) c_g_hook_destroy_link; ///
-  GHook* function(GHookList* hookList, gboolean needValids, GHookFindFunc func, void* data) c_g_hook_find; ///
-  GHook* function(GHookList* hookList, gboolean needValids, void* data) c_g_hook_find_data; ///
-  GHook* function(GHookList* hookList, gboolean needValids, void* func) c_g_hook_find_func; ///
-  GHook* function(GHookList* hookList, gboolean needValids, void* func, void* data) c_g_hook_find_func_data; ///
-  GHook* function(GHookList* hookList, gboolean mayBeInCall) c_g_hook_first_valid; ///
-  void function(GHookList* hookList, GHook* hook) c_g_hook_free; ///
-  GHook* function(GHookList* hookList, gulong hookId) c_g_hook_get; ///
-  void function(GHookList* hookList, GHook* sibling, GHook* hook) c_g_hook_insert_before; ///
-  void function(GHookList* hookList, GHook* hook, GHookCompareFunc func) c_g_hook_insert_sorted; ///
-  GHook* function(GHookList* hookList, GHook* hook, gboolean mayBeInCall) c_g_hook_next_valid; ///
-  void function(GHookList* hookList, GHook* hook) c_g_hook_prepend; ///
-  GHook* function(GHookList* hookList, GHook* hook) c_g_hook_ref; ///
-  void function(GHookList* hookList, GHook* hook) c_g_hook_unref; ///
-
-  // HookList
-  void function(GHookList* hookList) c_g_hook_list_clear; ///
-  void function(GHookList* hookList, uint hookSize) c_g_hook_list_init; ///
-  void function(GHookList* hookList, gboolean mayRecurse) c_g_hook_list_invoke; ///
-  void function(GHookList* hookList, gboolean mayRecurse) c_g_hook_list_invoke_check; ///
-  void function(GHookList* hookList, gboolean mayRecurse, GHookMarshaller marshaller, void* marshalData) c_g_hook_list_marshal; ///
-  void function(GHookList* hookList, gboolean mayRecurse, GHookCheckMarshaller marshaller, void* marshalData) c_g_hook_list_marshal_check; ///
-
-  // IOChannel
-  GType function() c_g_io_channel_get_type; ///
-  GIOChannel* function(const(char)* filename, const(char)* mode, GError** _err) c_g_io_channel_new_file; ///
-  GIOChannel* function(int fd) c_g_io_channel_unix_new; ///
-  void function(GIOChannel* channel) c_g_io_channel_close; ///
-  GIOStatus function(GIOChannel* channel, GError** _err) c_g_io_channel_flush; ///
-  GIOCondition function(GIOChannel* channel) c_g_io_channel_get_buffer_condition; ///
-  size_t function(GIOChannel* channel) c_g_io_channel_get_buffer_size; ///
-  gboolean function(GIOChannel* channel) c_g_io_channel_get_buffered; ///
-  gboolean function(GIOChannel* channel) c_g_io_channel_get_close_on_unref; ///
-  const(char)* function(GIOChannel* channel) c_g_io_channel_get_encoding; ///
-  GIOFlags function(GIOChannel* channel) c_g_io_channel_get_flags; ///
-  const(char)* function(GIOChannel* channel, int* length) c_g_io_channel_get_line_term; ///
-  void function(GIOChannel* channel) c_g_io_channel_init; ///
-  GIOError function(GIOChannel* channel, ubyte* buf, size_t count, size_t* bytesRead) c_g_io_channel_read; ///
-  GIOStatus function(GIOChannel* channel, ubyte* buf, size_t count, size_t* bytesRead, GError** _err) c_g_io_channel_read_chars; ///
-  GIOStatus function(GIOChannel* channel, char** strReturn, size_t* length, size_t* terminatorPos, GError** _err) c_g_io_channel_read_line; ///
-  GIOStatus function(GIOChannel* channel, GString* buffer, size_t* terminatorPos, GError** _err) c_g_io_channel_read_line_string; ///
-  GIOStatus function(GIOChannel* channel, ubyte** strReturn, size_t* length, GError** _err) c_g_io_channel_read_to_end; ///
-  GIOStatus function(GIOChannel* channel, dchar* thechar, GError** _err) c_g_io_channel_read_unichar; ///
-  GIOChannel* function(GIOChannel* channel) c_g_io_channel_ref; ///
-  GIOError function(GIOChannel* channel, long offset, GSeekType type) c_g_io_channel_seek; ///
-  GIOStatus function(GIOChannel* channel, long offset, GSeekType type, GError** _err) c_g_io_channel_seek_position; ///
-  void function(GIOChannel* channel, size_t size) c_g_io_channel_set_buffer_size; ///
-  void function(GIOChannel* channel, gboolean buffered) c_g_io_channel_set_buffered; ///
-  void function(GIOChannel* channel, gboolean doClose) c_g_io_channel_set_close_on_unref; ///
-  GIOStatus function(GIOChannel* channel, const(char)* encoding, GError** _err) c_g_io_channel_set_encoding; ///
-  GIOStatus function(GIOChannel* channel, GIOFlags flags, GError** _err) c_g_io_channel_set_flags; ///
-  void function(GIOChannel* channel, const(char)* lineTerm, int length) c_g_io_channel_set_line_term; ///
-  GIOStatus function(GIOChannel* channel, gboolean flush, GError** _err) c_g_io_channel_shutdown; ///
-  int function(GIOChannel* channel) c_g_io_channel_unix_get_fd; ///
-  void function(GIOChannel* channel) c_g_io_channel_unref; ///
-  GIOError function(GIOChannel* channel, const(char)* buf, size_t count, size_t* bytesWritten) c_g_io_channel_write; ///
-  GIOStatus function(GIOChannel* channel, const(ubyte)* buf, ptrdiff_t count, size_t* bytesWritten, GError** _err) c_g_io_channel_write_chars; ///
-  GIOStatus function(GIOChannel* channel, dchar thechar, GError** _err) c_g_io_channel_write_unichar; ///
-  GIOChannelError function(int en) c_g_io_channel_error_from_errno; ///
-  GQuark function() c_g_io_channel_error_quark; ///
-
-  // KeyFile
-  GType function() c_g_key_file_get_type; ///
-  GKeyFile* function() c_g_key_file_new; ///
-  void function(GKeyFile* keyFile) c_g_key_file_free; ///
-  gboolean function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_get_boolean; ///
-  gboolean* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, size_t* length, GError** _err) c_g_key_file_get_boolean_list; ///
-  char* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_get_comment; ///
-  double function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_get_double; ///
-  double* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, size_t* length, GError** _err) c_g_key_file_get_double_list; ///
-  char** function(GKeyFile* keyFile, size_t* length) c_g_key_file_get_groups; ///
-  long function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_get_int64; ///
-  int function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_get_integer; ///
-  int* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, size_t* length, GError** _err) c_g_key_file_get_integer_list; ///
-  char** function(GKeyFile* keyFile, const(char)* groupName, size_t* length, GError** _err) c_g_key_file_get_keys; ///
-  char* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, const(char)* locale) c_g_key_file_get_locale_for_key; ///
-  char* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, const(char)* locale, GError** _err) c_g_key_file_get_locale_string; ///
-  char** function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, const(char)* locale, size_t* length, GError** _err) c_g_key_file_get_locale_string_list; ///
-  char* function(GKeyFile* keyFile) c_g_key_file_get_start_group; ///
-  char* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_get_string; ///
-  char** function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, size_t* length, GError** _err) c_g_key_file_get_string_list; ///
-  ulong function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_get_uint64; ///
-  char* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_get_value; ///
-  gboolean function(GKeyFile* keyFile, const(char)* groupName) c_g_key_file_has_group; ///
-  gboolean function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_has_key; ///
-  gboolean function(GKeyFile* keyFile, GBytes* bytes, GKeyFileFlags flags, GError** _err) c_g_key_file_load_from_bytes; ///
-  gboolean function(GKeyFile* keyFile, const(char)* data, size_t length, GKeyFileFlags flags, GError** _err) c_g_key_file_load_from_data; ///
-  gboolean function(GKeyFile* keyFile, const(char)* file, char** fullPath, GKeyFileFlags flags, GError** _err) c_g_key_file_load_from_data_dirs; ///
-  gboolean function(GKeyFile* keyFile, const(char)* file, const(char*)* searchDirs, char** fullPath, GKeyFileFlags flags, GError** _err) c_g_key_file_load_from_dirs; ///
-  gboolean function(GKeyFile* keyFile, const(char)* file, GKeyFileFlags flags, GError** _err) c_g_key_file_load_from_file; ///
-  GKeyFile* function(GKeyFile* keyFile) c_g_key_file_ref; ///
-  gboolean function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_remove_comment; ///
-  gboolean function(GKeyFile* keyFile, const(char)* groupName, GError** _err) c_g_key_file_remove_group; ///
-  gboolean function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) c_g_key_file_remove_key; ///
-  gboolean function(GKeyFile* keyFile, const(char)* filename, GError** _err) c_g_key_file_save_to_file; ///
-  void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, gboolean value) c_g_key_file_set_boolean; ///
-  void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, gboolean* list, size_t length) c_g_key_file_set_boolean_list; ///
-  gboolean function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, const(char)* comment, GError** _err) c_g_key_file_set_comment; ///
-  void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, double value) c_g_key_file_set_double; ///
-  void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, double* list, size_t length) c_g_key_file_set_double_list; ///
-  void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, long value) c_g_key_file_set_int64; ///
-  void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, int value) c_g_key_file_set_integer; ///
-  void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, int* list, size_t length) c_g_key_file_set_integer_list; ///
-  void function(GKeyFile* keyFile, char separator) c_g_key_file_set_list_separator; ///
-  void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, const(char)* locale, const(char)* string_) c_g_key_file_set_locale_string; ///
-  void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, const(char)* locale, const(char*)* list, size_t length) c_g_key_file_set_locale_string_list; ///
-  void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, const(char)* string_) c_g_key_file_set_string; ///
-  void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, const(char*)* list, size_t length) c_g_key_file_set_string_list; ///
-  void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, ulong value) c_g_key_file_set_uint64; ///
-  void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, const(char)* value) c_g_key_file_set_value; ///
-  char* function(GKeyFile* keyFile, size_t* length, GError** _err) c_g_key_file_to_data; ///
-  void function(GKeyFile* keyFile) c_g_key_file_unref; ///
-  GQuark function() c_g_key_file_error_quark; ///
-
-  // List
-  GList* function() c_g_list_alloc; ///
-  GList* function(GList* list, void* data) c_g_list_append; ///
-  GList* function(GList* list1, GList* list2) c_g_list_concat; ///
-  GList* function(GList* list) c_g_list_copy; ///
-  GList* function(GList* list, GCopyFunc func, void* userData) c_g_list_copy_deep; ///
-  GList* function(GList* list, GList* link) c_g_list_delete_link; ///
-  GList* function(GList* list, const(void)* data) c_g_list_find; ///
-  GList* function(GList* list, const(void)* data, GCompareFunc func) c_g_list_find_custom; ///
-  GList* function(GList* list) c_g_list_first; ///
-  void function(GList* list, GFunc func, void* userData) c_g_list_foreach; ///
-  void function(GList* list) c_g_list_free; ///
-  void function(GList* list) c_g_list_free_1; ///
-  void function(GList* list, GDestroyNotify freeFunc) c_g_list_free_full; ///
-  int function(GList* list, const(void)* data) c_g_list_index; ///
-  GList* function(GList* list, void* data, int position) c_g_list_insert; ///
-  GList* function(GList* list, GList* sibling, void* data) c_g_list_insert_before; ///
-  GList* function(GList* list, GList* sibling, GList* link) c_g_list_insert_before_link; ///
-  GList* function(GList* list, void* data, GCompareFunc func) c_g_list_insert_sorted; ///
-  GList* function(GList* list, void* data, GCompareDataFunc func, void* userData) c_g_list_insert_sorted_with_data; ///
-  GList* function(GList* list) c_g_list_last; ///
-  uint function(GList* list) c_g_list_length; ///
-  GList* function(GList* list, uint n) c_g_list_nth; ///
-  void* function(GList* list, uint n) c_g_list_nth_data; ///
-  GList* function(GList* list, uint n) c_g_list_nth_prev; ///
-  void function() c_g_list_pop_allocator; ///
-  int function(GList* list, GList* llink) c_g_list_position; ///
-  GList* function(GList* list, void* data) c_g_list_prepend; ///
-  void function(GAllocator* allocator) c_g_list_push_allocator; ///
-  GList* function(GList* list, const(void)* data) c_g_list_remove; ///
-  GList* function(GList* list, const(void)* data) c_g_list_remove_all; ///
-  GList* function(GList* list, GList* llink) c_g_list_remove_link; ///
-  GList* function(GList* list) c_g_list_reverse; ///
-  GList* function(GList* list, GCompareFunc compareFunc) c_g_list_sort; ///
-  GList* function(GList* list, GCompareDataFunc compareFunc, void* userData) c_g_list_sort_with_data; ///
-
-  // MainContext
-  GType function() c_g_main_context_get_type; ///
-  GMainContext* function() c_g_main_context_new; ///
-  GMainContext* function(GMainContextFlags flags) c_g_main_context_new_with_flags; ///
-  gboolean function(GMainContext* context) c_g_main_context_acquire; ///
-  void function(GMainContext* context, GPollFD* fd, int priority) c_g_main_context_add_poll; ///
-  gboolean function(GMainContext* context, int maxPriority, GPollFD* fds, int nFds) c_g_main_context_check; ///
-  void function(GMainContext* context) c_g_main_context_dispatch; ///
-  GSource* function(GMainContext* context, GSourceFuncs* funcs, void* userData) c_g_main_context_find_source_by_funcs_user_data; ///
-  GSource* function(GMainContext* context, uint sourceId) c_g_main_context_find_source_by_id; ///
-  GSource* function(GMainContext* context, void* userData) c_g_main_context_find_source_by_user_data; ///
-  GPollFunc function(GMainContext* context) c_g_main_context_get_poll_func; ///
-  void function(GMainContext* context, GSourceFunc function_, void* data) c_g_main_context_invoke; ///
-  void function(GMainContext* context, int priority, GSourceFunc function_, void* data, GDestroyNotify notify) c_g_main_context_invoke_full; ///
-  gboolean function(GMainContext* context) c_g_main_context_is_owner; ///
-  gboolean function(GMainContext* context, gboolean mayBlock) c_g_main_context_iteration; ///
-  gboolean function(GMainContext* context) c_g_main_context_pending; ///
-  void function(GMainContext* context) c_g_main_context_pop_thread_default; ///
-  gboolean function(GMainContext* context, int* priority) c_g_main_context_prepare; ///
-  void function(GMainContext* context) c_g_main_context_push_thread_default; ///
-  GMainContextPusher* function(GMainContext* mainContext) c_g_main_context_pusher_new; ///
-  int function(GMainContext* context, int maxPriority, int* timeout, GPollFD* fds, int nFds) c_g_main_context_query; ///
-  GMainContext* function(GMainContext* context) c_g_main_context_ref; ///
-  void function(GMainContext* context) c_g_main_context_release; ///
-  void function(GMainContext* context, GPollFD* fd) c_g_main_context_remove_poll; ///
-  void function(GMainContext* context, GPollFunc func) c_g_main_context_set_poll_func; ///
-  void function(GMainContext* context) c_g_main_context_unref; ///
-  gboolean function(GMainContext* context, GCond* cond, GMutex* mutex) c_g_main_context_wait; ///
-  void function(GMainContext* context) c_g_main_context_wakeup; ///
-  GMainContext* function() c_g_main_context_default; ///
-  GMainContext* function() c_g_main_context_get_thread_default; ///
-  void function(GMainContextPusher* pusher) c_g_main_context_pusher_free; ///
-  GMainContext* function() c_g_main_context_ref_thread_default; ///
-
-  // MainLoop
-  GType function() c_g_main_loop_get_type; ///
-  GMainLoop* function(GMainContext* context, gboolean isRunning) c_g_main_loop_new; ///
-  GMainContext* function(GMainLoop* loop) c_g_main_loop_get_context; ///
-  gboolean function(GMainLoop* loop) c_g_main_loop_is_running; ///
-  void function(GMainLoop* loop) c_g_main_loop_quit; ///
-  GMainLoop* function(GMainLoop* loop) c_g_main_loop_ref; ///
-  void function(GMainLoop* loop) c_g_main_loop_run; ///
-  void function(GMainLoop* loop) c_g_main_loop_unref; ///
-
-  // MappedFile
-  GType function() c_g_mapped_file_get_type; ///
-  GMappedFile* function(const(char)* filename, gboolean writable, GError** _err) c_g_mapped_file_new; ///
-  GMappedFile* function(int fd, gboolean writable, GError** _err) c_g_mapped_file_new_from_fd; ///
-  void function(GMappedFile* file) c_g_mapped_file_free; ///
-  GBytes* function(GMappedFile* file) c_g_mapped_file_get_bytes; ///
-  char* function(GMappedFile* file) c_g_mapped_file_get_contents; ///
-  size_t function(GMappedFile* file) c_g_mapped_file_get_length; ///
-  GMappedFile* function(GMappedFile* file) c_g_mapped_file_ref; ///
-  void function(GMappedFile* file) c_g_mapped_file_unref; ///
-
-  // MarkupParseContext
-  GType function() c_g_markup_parse_context_get_type; ///
-  GMarkupParseContext* function(const(GMarkupParser)* parser, GMarkupParseFlags flags, void* userData, GDestroyNotify userDataDnotify) c_g_markup_parse_context_new; ///
-  gboolean function(GMarkupParseContext* context, GError** _err) c_g_markup_parse_context_end_parse; ///
-  void function(GMarkupParseContext* context) c_g_markup_parse_context_free; ///
-  const(char)* function(GMarkupParseContext* context) c_g_markup_parse_context_get_element; ///
-  const(GSList)* function(GMarkupParseContext* context) c_g_markup_parse_context_get_element_stack; ///
-  size_t function(GMarkupParseContext* context) c_g_markup_parse_context_get_offset; ///
-  void function(GMarkupParseContext* context, int* lineNumber, int* charNumber) c_g_markup_parse_context_get_position; ///
-  void function(GMarkupParseContext* context, size_t* lineNumber, size_t* charNumber, size_t* offset) c_g_markup_parse_context_get_tag_start; ///
-  void* function(GMarkupParseContext* context) c_g_markup_parse_context_get_user_data; ///
-  gboolean function(GMarkupParseContext* context, const(char)* text, ptrdiff_t textLen, GError** _err) c_g_markup_parse_context_parse; ///
-  void* function(GMarkupParseContext* context) c_g_markup_parse_context_pop; ///
-  void function(GMarkupParseContext* context, const(GMarkupParser)* parser, void* userData) c_g_markup_parse_context_push; ///
-  GMarkupParseContext* function(GMarkupParseContext* context) c_g_markup_parse_context_ref; ///
-  void function(GMarkupParseContext* context) c_g_markup_parse_context_unref; ///
-
-  // MatchInfo
-  GType function() c_g_match_info_get_type; ///
-  char* function(const(GMatchInfo)* matchInfo, const(char)* stringToExpand, GError** _err) c_g_match_info_expand_references; ///
-  char* function(const(GMatchInfo)* matchInfo, int matchNum) c_g_match_info_fetch; ///
-  char** function(const(GMatchInfo)* matchInfo) c_g_match_info_fetch_all; ///
-  char* function(const(GMatchInfo)* matchInfo, const(char)* name) c_g_match_info_fetch_named; ///
-  gboolean function(const(GMatchInfo)* matchInfo, const(char)* name, int* startPos, int* endPos) c_g_match_info_fetch_named_pos; ///
-  gboolean function(const(GMatchInfo)* matchInfo, int matchNum, int* startPos, int* endPos) c_g_match_info_fetch_pos; ///
-  void function(GMatchInfo* matchInfo) c_g_match_info_free; ///
-  int function(const(GMatchInfo)* matchInfo) c_g_match_info_get_match_count; ///
-  GRegex* function(const(GMatchInfo)* matchInfo) c_g_match_info_get_regex; ///
-  const(char)* function(const(GMatchInfo)* matchInfo) c_g_match_info_get_string; ///
-  gboolean function(const(GMatchInfo)* matchInfo) c_g_match_info_is_partial_match; ///
-  gboolean function(const(GMatchInfo)* matchInfo) c_g_match_info_matches; ///
-  gboolean function(GMatchInfo* matchInfo, GError** _err) c_g_match_info_next; ///
-  GMatchInfo* function(GMatchInfo* matchInfo) c_g_match_info_ref; ///
-  void function(GMatchInfo* matchInfo) c_g_match_info_unref; ///
-
-  // MemChunk
-  void* function(GMemChunk* memChunk) c_g_mem_chunk_alloc; ///
-  void* function(GMemChunk* memChunk) c_g_mem_chunk_alloc0; ///
-  void function(GMemChunk* memChunk) c_g_mem_chunk_clean; ///
-  void function(GMemChunk* memChunk) c_g_mem_chunk_destroy; ///
-  void function(GMemChunk* memChunk, void* mem) c_g_mem_chunk_free; ///
-  void function(GMemChunk* memChunk) c_g_mem_chunk_print; ///
-  void function(GMemChunk* memChunk) c_g_mem_chunk_reset; ///
-  void function() c_g_mem_chunk_info; ///
-  GMemChunk* function(const(char)* name, int atomSize, size_t areaSize, int type) c_g_mem_chunk_new; ///
-
-  // Mutex
-  void function(GMutex* mutex) c_g_mutex_clear; ///
-  void function(GMutex* mutex) c_g_mutex_free; ///
-  void function(GMutex* mutex) c_g_mutex_init; ///
-  void function(GMutex* mutex) c_g_mutex_lock; ///
-  gboolean function(GMutex* mutex) c_g_mutex_trylock; ///
-  void function(GMutex* mutex) c_g_mutex_unlock; ///
-  GMutex* function() c_g_mutex_new; ///
-
-  // Node
-  int function(GNode* node, void* data) c_g_node_child_index; ///
-  int function(GNode* node, GNode* child) c_g_node_child_position; ///
-  void function(GNode* node, GTraverseFlags flags, GNodeForeachFunc func, void* data) c_g_node_children_foreach; ///
-  GNode* function(GNode* node) c_g_node_copy; ///
-  GNode* function(GNode* node, GCopyFunc copyFunc, void* data) c_g_node_copy_deep; ///
-  uint function(GNode* node) c_g_node_depth; ///
-  void function(GNode* root) c_g_node_destroy; ///
-  GNode* function(GNode* root, GTraverseType order, GTraverseFlags flags, void* data) c_g_node_find; ///
-  GNode* function(GNode* node, GTraverseFlags flags, void* data) c_g_node_find_child; ///
-  GNode* function(GNode* node) c_g_node_first_sibling; ///
-  GNode* function(GNode* node) c_g_node_get_root; ///
-  GNode* function(GNode* parent, int position, GNode* node) c_g_node_insert; ///
-  GNode* function(GNode* parent, GNode* sibling, GNode* node) c_g_node_insert_after; ///
-  GNode* function(GNode* parent, GNode* sibling, GNode* node) c_g_node_insert_before; ///
-  gboolean function(GNode* node, GNode* descendant) c_g_node_is_ancestor; ///
-  GNode* function(GNode* node) c_g_node_last_child; ///
-  GNode* function(GNode* node) c_g_node_last_sibling; ///
-  uint function(GNode* root) c_g_node_max_height; ///
-  uint function(GNode* node) c_g_node_n_children; ///
-  uint function(GNode* root, GTraverseFlags flags) c_g_node_n_nodes; ///
-  GNode* function(GNode* node, uint n) c_g_node_nth_child; ///
-  GNode* function(GNode* parent, GNode* node) c_g_node_prepend; ///
-  void function(GNode* node) c_g_node_reverse_children; ///
-  void function(GNode* root, GTraverseType order, GTraverseFlags flags, int maxDepth, GNodeTraverseFunc func, void* data) c_g_node_traverse; ///
-  void function(GNode* node) c_g_node_unlink; ///
-  GNode* function(void* data) c_g_node_new; ///
-  void function() c_g_node_pop_allocator; ///
-  void function(GAllocator* allocator) c_g_node_push_allocator; ///
-
-  // Once
-  void* function(GOnce* once, GThreadFunc func, void* arg) c_g_once_impl; ///
-  gboolean function(void* location) c_g_once_init_enter; ///
-  gboolean function(size_t* location) c_g_once_init_enter_impl; ///
-  gboolean function(void* location) c_g_once_init_enter_pointer; ///
-  void function(void* location, size_t result) c_g_once_init_leave; ///
-  void function(void* location, void* result) c_g_once_init_leave_pointer; ///
-
-  // OptionContext
-  void function(GOptionContext* context, GOptionGroup* group) c_g_option_context_add_group; ///
-  void function(GOptionContext* context, const(GOptionEntry)* entries, const(char)* translationDomain) c_g_option_context_add_main_entries; ///
-  void function(GOptionContext* context) c_g_option_context_free; ///
-  const(char)* function(GOptionContext* context) c_g_option_context_get_description; ///
-  char* function(GOptionContext* context, gboolean mainHelp, GOptionGroup* group) c_g_option_context_get_help; ///
-  gboolean function(GOptionContext* context) c_g_option_context_get_help_enabled; ///
-  gboolean function(GOptionContext* context) c_g_option_context_get_ignore_unknown_options; ///
-  GOptionGroup* function(GOptionContext* context) c_g_option_context_get_main_group; ///
-  gboolean function(GOptionContext* context) c_g_option_context_get_strict_posix; ///
-  const(char)* function(GOptionContext* context) c_g_option_context_get_summary; ///
-  gboolean function(GOptionContext* context, int* argc, char*** argv, GError** _err) c_g_option_context_parse; ///
-  gboolean function(GOptionContext* context, char*** arguments, GError** _err) c_g_option_context_parse_strv; ///
-  void function(GOptionContext* context, const(char)* description) c_g_option_context_set_description; ///
-  void function(GOptionContext* context, gboolean helpEnabled) c_g_option_context_set_help_enabled; ///
-  void function(GOptionContext* context, gboolean ignoreUnknown) c_g_option_context_set_ignore_unknown_options; ///
-  void function(GOptionContext* context, GOptionGroup* group) c_g_option_context_set_main_group; ///
-  void function(GOptionContext* context, gboolean strictPosix) c_g_option_context_set_strict_posix; ///
-  void function(GOptionContext* context, const(char)* summary) c_g_option_context_set_summary; ///
-  void function(GOptionContext* context, GTranslateFunc func, void* data, GDestroyNotify destroyNotify) c_g_option_context_set_translate_func; ///
-  void function(GOptionContext* context, const(char)* domain) c_g_option_context_set_translation_domain; ///
-  GOptionContext* function(const(char)* parameterString) c_g_option_context_new; ///
-
-  // OptionGroup
-  GType function() c_g_option_group_get_type; ///
-  GOptionGroup* function(const(char)* name, const(char)* description, const(char)* helpDescription, void* userData, GDestroyNotify destroy) c_g_option_group_new; ///
-  void function(GOptionGroup* group, const(GOptionEntry)* entries) c_g_option_group_add_entries; ///
-  void function(GOptionGroup* group) c_g_option_group_free; ///
-  GOptionGroup* function(GOptionGroup* group) c_g_option_group_ref; ///
-  void function(GOptionGroup* group, GOptionErrorFunc errorFunc) c_g_option_group_set_error_hook; ///
-  void function(GOptionGroup* group, GOptionParseFunc preParseFunc, GOptionParseFunc postParseFunc) c_g_option_group_set_parse_hooks; ///
-  void function(GOptionGroup* group, GTranslateFunc func, void* data, GDestroyNotify destroyNotify) c_g_option_group_set_translate_func; ///
-  void function(GOptionGroup* group, const(char)* domain) c_g_option_group_set_translation_domain; ///
-  void function(GOptionGroup* group) c_g_option_group_unref; ///
-
-  // PathBuf
-  void function(GPathBuf* buf) c_g_path_buf_clear; ///
-  char* function(GPathBuf* buf) c_g_path_buf_clear_to_path; ///
-  GPathBuf* function(GPathBuf* buf) c_g_path_buf_copy; ///
-  void function(GPathBuf* buf) c_g_path_buf_free; ///
-  char* function(GPathBuf* buf) c_g_path_buf_free_to_path; ///
-  GPathBuf* function(GPathBuf* buf) c_g_path_buf_init; ///
-  GPathBuf* function(GPathBuf* buf, const(char)* path) c_g_path_buf_init_from_path; ///
-  gboolean function(GPathBuf* buf) c_g_path_buf_pop; ///
-  GPathBuf* function(GPathBuf* buf, const(char)* path) c_g_path_buf_push; ///
-  gboolean function(GPathBuf* buf, const(char)* extension) c_g_path_buf_set_extension; ///
-  gboolean function(GPathBuf* buf, const(char)* fileName) c_g_path_buf_set_filename; ///
-  char* function(GPathBuf* buf) c_g_path_buf_to_path; ///
-  gboolean function(const(void)* v1, const(void)* v2) c_g_path_buf_equal; ///
-  GPathBuf* function() c_g_path_buf_new; ///
-  GPathBuf* function(const(char)* path) c_g_path_buf_new_from_path; ///
-
-  // PatternSpec
-  GType function() c_g_pattern_spec_get_type; ///
-  GPatternSpec* function(const(char)* pattern) c_g_pattern_spec_new; ///
-  GPatternSpec* function(GPatternSpec* pspec) c_g_pattern_spec_copy; ///
-  gboolean function(GPatternSpec* pspec1, GPatternSpec* pspec2) c_g_pattern_spec_equal; ///
-  void function(GPatternSpec* pspec) c_g_pattern_spec_free; ///
-  gboolean function(GPatternSpec* pspec, size_t stringLength, const(char)* string_, const(char)* stringReversed) c_g_pattern_spec_match; ///
-  gboolean function(GPatternSpec* pspec, const(char)* string_) c_g_pattern_spec_match_string; ///
-
-  // PollFD
-  GType function() c_g_pollfd_get_type; ///
-
-  // Private
-  void* function(GPrivate* key) c_g_private_get; ///
-  void function(GPrivate* key, void* value) c_g_private_replace; ///
-  void function(GPrivate* key, void* value) c_g_private_set; ///
-  GPrivate* function(GDestroyNotify notify) c_g_private_new; ///
-
-  // PtrArray
-  GType function() c_g_ptr_array_get_type; ///
-  void function(GPtrArray* array, void* data) c_g_ptr_array_add; ///
-  GPtrArray* function(GPtrArray* array, GCopyFunc func, void* userData) c_g_ptr_array_copy; ///
-  void function(GPtrArray* arrayToExtend, GPtrArray* array, GCopyFunc func, void* userData) c_g_ptr_array_extend; ///
-  void function(GPtrArray* arrayToExtend, GPtrArray* array) c_g_ptr_array_extend_and_steal; ///
-  gboolean function(GPtrArray* haystack, const(void)* needle, uint* index) c_g_ptr_array_find; ///
-  gboolean function(GPtrArray* haystack, const(void)* needle, GEqualFunc equalFunc, uint* index) c_g_ptr_array_find_with_equal_func; ///
-  void function(GPtrArray* array, GFunc func, void* userData) c_g_ptr_array_foreach; ///
-  void** function(GPtrArray* array, gboolean freeSegment) c_g_ptr_array_free; ///
-  void function(GPtrArray* array, int index, void* data) c_g_ptr_array_insert; ///
-  gboolean function(GPtrArray* array) c_g_ptr_array_is_null_terminated; ///
-  GPtrArray* function() c_g_ptr_array_new; ///
-  GPtrArray* function(void** data, size_t len, GCopyFunc copyFunc, void* copyFuncUserData, GDestroyNotify elementFreeFunc) c_g_ptr_array_new_from_array; ///
-  GPtrArray* function(void** data, GCopyFunc copyFunc, void* copyFuncUserData, GDestroyNotify elementFreeFunc) c_g_ptr_array_new_from_null_terminated_array; ///
-  GPtrArray* function(uint reservedSize, GDestroyNotify elementFreeFunc) c_g_ptr_array_new_full; ///
-  GPtrArray* function(uint reservedSize, GDestroyNotify elementFreeFunc, gboolean nullTerminated) c_g_ptr_array_new_null_terminated; ///
-  GPtrArray* function(void** data, size_t len, GDestroyNotify elementFreeFunc) c_g_ptr_array_new_take; ///
-  GPtrArray* function(void** data, GDestroyNotify elementFreeFunc) c_g_ptr_array_new_take_null_terminated; ///
-  GPtrArray* function(GDestroyNotify elementFreeFunc) c_g_ptr_array_new_with_free_func; ///
-  GPtrArray* function(GPtrArray* array) c_g_ptr_array_ref; ///
-  gboolean function(GPtrArray* array, void* data) c_g_ptr_array_remove; ///
-  gboolean function(GPtrArray* array, void* data) c_g_ptr_array_remove_fast; ///
-  void* function(GPtrArray* array, uint index) c_g_ptr_array_remove_index; ///
-  void* function(GPtrArray* array, uint index) c_g_ptr_array_remove_index_fast; ///
-  GPtrArray* function(GPtrArray* array, uint index, uint length) c_g_ptr_array_remove_range; ///
-  void function(GPtrArray* array, GDestroyNotify elementFreeFunc) c_g_ptr_array_set_free_func; ///
-  void function(GPtrArray* array, int length) c_g_ptr_array_set_size; ///
-  GPtrArray* function(uint reservedSize) c_g_ptr_array_sized_new; ///
-  void function(GPtrArray* array, GCompareFunc compareFunc) c_g_ptr_array_sort; ///
-  void function(GPtrArray* array, GCompareFunc compareFunc) c_g_ptr_array_sort_values; ///
-  void function(GPtrArray* array, GCompareDataFunc compareFunc, void* userData) c_g_ptr_array_sort_values_with_data; ///
-  void function(GPtrArray* array, GCompareDataFunc compareFunc, void* userData) c_g_ptr_array_sort_with_data; ///
-  void** function(GPtrArray* array, size_t* len) c_g_ptr_array_steal; ///
-  void* function(GPtrArray* array, uint index) c_g_ptr_array_steal_index; ///
-  void* function(GPtrArray* array, uint index) c_g_ptr_array_steal_index_fast; ///
-  void function(GPtrArray* array) c_g_ptr_array_unref; ///
-
-  // Queue
-  void function(GQueue* queue) c_g_queue_clear; ///
-  void function(GQueue* queue, GDestroyNotify freeFunc) c_g_queue_clear_full; ///
-  GQueue* function(GQueue* queue) c_g_queue_copy; ///
-  void function(GQueue* queue, GList* link) c_g_queue_delete_link; ///
-  GList* function(GQueue* queue, const(void)* data) c_g_queue_find; ///
-  GList* function(GQueue* queue, const(void)* data, GCompareFunc func) c_g_queue_find_custom; ///
-  void function(GQueue* queue, GFunc func, void* userData) c_g_queue_foreach; ///
-  void function(GQueue* queue) c_g_queue_free; ///
-  void function(GQueue* queue, GDestroyNotify freeFunc) c_g_queue_free_full; ///
-  uint function(GQueue* queue) c_g_queue_get_length; ///
-  int function(GQueue* queue, const(void)* data) c_g_queue_index; ///
-  void function(GQueue* queue) c_g_queue_init; ///
-  void function(GQueue* queue, GList* sibling, void* data) c_g_queue_insert_after; ///
-  void function(GQueue* queue, GList* sibling, GList* link) c_g_queue_insert_after_link; ///
-  void function(GQueue* queue, GList* sibling, void* data) c_g_queue_insert_before; ///
-  void function(GQueue* queue, GList* sibling, GList* link) c_g_queue_insert_before_link; ///
-  void function(GQueue* queue, void* data, GCompareDataFunc func, void* userData) c_g_queue_insert_sorted; ///
-  gboolean function(GQueue* queue) c_g_queue_is_empty; ///
-  int function(GQueue* queue, GList* link) c_g_queue_link_index; ///
-  void* function(GQueue* queue) c_g_queue_peek_head; ///
-  GList* function(GQueue* queue) c_g_queue_peek_head_link; ///
-  void* function(GQueue* queue, uint n) c_g_queue_peek_nth; ///
-  GList* function(GQueue* queue, uint n) c_g_queue_peek_nth_link; ///
-  void* function(GQueue* queue) c_g_queue_peek_tail; ///
-  GList* function(GQueue* queue) c_g_queue_peek_tail_link; ///
-  void* function(GQueue* queue) c_g_queue_pop_head; ///
-  GList* function(GQueue* queue) c_g_queue_pop_head_link; ///
-  void* function(GQueue* queue, uint n) c_g_queue_pop_nth; ///
-  GList* function(GQueue* queue, uint n) c_g_queue_pop_nth_link; ///
-  void* function(GQueue* queue) c_g_queue_pop_tail; ///
-  GList* function(GQueue* queue) c_g_queue_pop_tail_link; ///
-  void function(GQueue* queue, void* data) c_g_queue_push_head; ///
-  void function(GQueue* queue, GList* link) c_g_queue_push_head_link; ///
-  void function(GQueue* queue, void* data, int n) c_g_queue_push_nth; ///
-  void function(GQueue* queue, int n, GList* link) c_g_queue_push_nth_link; ///
-  void function(GQueue* queue, void* data) c_g_queue_push_tail; ///
-  void function(GQueue* queue, GList* link) c_g_queue_push_tail_link; ///
-  gboolean function(GQueue* queue, const(void)* data) c_g_queue_remove; ///
-  uint function(GQueue* queue, const(void)* data) c_g_queue_remove_all; ///
-  void function(GQueue* queue) c_g_queue_reverse; ///
-  void function(GQueue* queue, GCompareDataFunc compareFunc, void* userData) c_g_queue_sort; ///
-  void function(GQueue* queue, GList* link) c_g_queue_unlink; ///
-  GQueue* function() c_g_queue_new; ///
-
-  // RWLock
-  void function(GRWLock* rwLock) c_g_rw_lock_clear; ///
-  void function(GRWLock* rwLock) c_g_rw_lock_init; ///
-  void function(GRWLock* rwLock) c_g_rw_lock_reader_lock; ///
-  gboolean function(GRWLock* rwLock) c_g_rw_lock_reader_trylock; ///
-  void function(GRWLock* rwLock) c_g_rw_lock_reader_unlock; ///
-  void function(GRWLock* rwLock) c_g_rw_lock_writer_lock; ///
-  gboolean function(GRWLock* rwLock) c_g_rw_lock_writer_trylock; ///
-  void function(GRWLock* rwLock) c_g_rw_lock_writer_unlock; ///
-
-  // Rand
-  GType function() c_g_rand_get_type; ///
-  GRand* function() c_g_rand_new; ///
-  GRand* function(uint seed) c_g_rand_new_with_seed; ///
-  GRand* function(const(uint)* seed, uint seedLength) c_g_rand_new_with_seed_array; ///
-  GRand* function(GRand* rand) c_g_rand_copy; ///
-  double function(GRand* rand) c_g_rand_double; ///
-  double function(GRand* rand, double begin, double end) c_g_rand_double_range; ///
-  void function(GRand* rand) c_g_rand_free; ///
-  uint function(GRand* rand) c_g_rand_int; ///
-  int function(GRand* rand, int begin, int end) c_g_rand_int_range; ///
-  void function(GRand* rand, uint seed) c_g_rand_set_seed; ///
-  void function(GRand* rand, const(uint)* seed, uint seedLength) c_g_rand_set_seed_array; ///
-
-  // RecMutex
-  void function(GRecMutex* recMutex) c_g_rec_mutex_clear; ///
-  void function(GRecMutex* recMutex) c_g_rec_mutex_init; ///
-  void function(GRecMutex* recMutex) c_g_rec_mutex_lock; ///
-  gboolean function(GRecMutex* recMutex) c_g_rec_mutex_trylock; ///
-  void function(GRecMutex* recMutex) c_g_rec_mutex_unlock; ///
-
-  // Regex
-  GType function() c_g_regex_get_type; ///
-  GRegex* function(const(char)* pattern, GRegexCompileFlags compileOptions, GRegexMatchFlags matchOptions, GError** _err) c_g_regex_new; ///
-  int function(const(GRegex)* regex) c_g_regex_get_capture_count; ///
-  GRegexCompileFlags function(const(GRegex)* regex) c_g_regex_get_compile_flags; ///
-  gboolean function(const(GRegex)* regex) c_g_regex_get_has_cr_or_lf; ///
-  GRegexMatchFlags function(const(GRegex)* regex) c_g_regex_get_match_flags; ///
-  int function(const(GRegex)* regex) c_g_regex_get_max_backref; ///
-  int function(const(GRegex)* regex) c_g_regex_get_max_lookbehind; ///
-  const(char)* function(const(GRegex)* regex) c_g_regex_get_pattern; ///
-  int function(const(GRegex)* regex, const(char)* name) c_g_regex_get_string_number; ///
-  gboolean function(const(GRegex)* regex, const(char)* string_, GRegexMatchFlags matchOptions, GMatchInfo** matchInfo) c_g_regex_match; ///
-  gboolean function(const(GRegex)* regex, const(char)* string_, GRegexMatchFlags matchOptions, GMatchInfo** matchInfo) c_g_regex_match_all; ///
-  gboolean function(const(GRegex)* regex, const(char)* string_, ptrdiff_t stringLen, int startPosition, GRegexMatchFlags matchOptions, GMatchInfo** matchInfo, GError** _err) c_g_regex_match_all_full; ///
-  gboolean function(const(GRegex)* regex, const(char)* string_, ptrdiff_t stringLen, int startPosition, GRegexMatchFlags matchOptions, GMatchInfo** matchInfo, GError** _err) c_g_regex_match_full; ///
-  GRegex* function(GRegex* regex) c_g_regex_ref; ///
-  char* function(const(GRegex)* regex, const(char)* string_, ptrdiff_t stringLen, int startPosition, const(char)* replacement, GRegexMatchFlags matchOptions, GError** _err) c_g_regex_replace; ///
-  char* function(const(GRegex)* regex, const(char)* string_, ptrdiff_t stringLen, int startPosition, GRegexMatchFlags matchOptions, GRegexEvalCallback eval, void* userData, GError** _err) c_g_regex_replace_eval; ///
-  char* function(const(GRegex)* regex, const(char)* string_, ptrdiff_t stringLen, int startPosition, const(char)* replacement, GRegexMatchFlags matchOptions, GError** _err) c_g_regex_replace_literal; ///
-  char** function(const(GRegex)* regex, const(char)* string_, GRegexMatchFlags matchOptions) c_g_regex_split; ///
-  char** function(const(GRegex)* regex, const(char)* string_, ptrdiff_t stringLen, int startPosition, GRegexMatchFlags matchOptions, int maxTokens, GError** _err) c_g_regex_split_full; ///
-  void function(GRegex* regex) c_g_regex_unref; ///
-  gboolean function(const(char)* replacement, gboolean* hasReferences, GError** _err) c_g_regex_check_replacement; ///
-  GQuark function() c_g_regex_error_quark; ///
-  char* function(const(char)* string_, int length) c_g_regex_escape_nul; ///
-  char* function(const(char)* string_, int length) c_g_regex_escape_string; ///
-  gboolean function(const(char)* pattern, const(char)* string_, GRegexCompileFlags compileOptions, GRegexMatchFlags matchOptions) c_g_regex_match_simple; ///
-  char** function(const(char)* pattern, const(char)* string_, GRegexCompileFlags compileOptions, GRegexMatchFlags matchOptions) c_g_regex_split_simple; ///
-
-  // Relation
-  int function(GRelation* relation, const(void)* key, int field) c_g_relation_count; ///
-  int function(GRelation* relation, const(void)* key, int field) c_g_relation_delete; ///
-  void function(GRelation* relation) c_g_relation_destroy; ///
-  gboolean function(GRelation* relation,  ...) c_g_relation_exists; ///
-  void function(GRelation* relation, int field, GHashFunc hashFunc, GEqualFunc keyEqualFunc) c_g_relation_index; ///
-  void function(GRelation* relation,  ...) c_g_relation_insert; ///
-  void function(GRelation* relation) c_g_relation_print; ///
-  GTuples* function(GRelation* relation, const(void)* key, int field) c_g_relation_select; ///
-  GRelation* function(int fields) c_g_relation_new; ///
-
-  // SList
-  GSList* function() c_g_slist_alloc; ///
-  GSList* function(GSList* list, void* data) c_g_slist_append; ///
-  GSList* function(GSList* list1, GSList* list2) c_g_slist_concat; ///
-  GSList* function(GSList* list) c_g_slist_copy; ///
-  GSList* function(GSList* list, GCopyFunc func, void* userData) c_g_slist_copy_deep; ///
-  GSList* function(GSList* list, GSList* link) c_g_slist_delete_link; ///
-  GSList* function(GSList* list, const(void)* data) c_g_slist_find; ///
-  GSList* function(GSList* list, const(void)* data, GCompareFunc func) c_g_slist_find_custom; ///
-  void function(GSList* list, GFunc func, void* userData) c_g_slist_foreach; ///
-  void function(GSList* list) c_g_slist_free; ///
-  void function(GSList* list) c_g_slist_free_1; ///
-  void function(GSList* list, GDestroyNotify freeFunc) c_g_slist_free_full; ///
-  int function(GSList* list, const(void)* data) c_g_slist_index; ///
-  GSList* function(GSList* list, void* data, int position) c_g_slist_insert; ///
-  GSList* function(GSList* slist, GSList* sibling, void* data) c_g_slist_insert_before; ///
-  GSList* function(GSList* list, void* data, GCompareFunc func) c_g_slist_insert_sorted; ///
-  GSList* function(GSList* list, void* data, GCompareDataFunc func, void* userData) c_g_slist_insert_sorted_with_data; ///
-  GSList* function(GSList* list) c_g_slist_last; ///
-  uint function(GSList* list) c_g_slist_length; ///
-  GSList* function(GSList* list, uint n) c_g_slist_nth; ///
-  void* function(GSList* list, uint n) c_g_slist_nth_data; ///
-  void function() c_g_slist_pop_allocator; ///
-  int function(GSList* list, GSList* llink) c_g_slist_position; ///
-  GSList* function(GSList* list, void* data) c_g_slist_prepend; ///
-  void function(GAllocator* allocator) c_g_slist_push_allocator; ///
-  GSList* function(GSList* list, const(void)* data) c_g_slist_remove; ///
-  GSList* function(GSList* list, const(void)* data) c_g_slist_remove_all; ///
-  GSList* function(GSList* list, GSList* link) c_g_slist_remove_link; ///
-  GSList* function(GSList* list) c_g_slist_reverse; ///
-  GSList* function(GSList* list, GCompareFunc compareFunc) c_g_slist_sort; ///
-  GSList* function(GSList* list, GCompareDataFunc compareFunc, void* userData) c_g_slist_sort_with_data; ///
-
-  // Scanner
-  uint function(GScanner* scanner) c_g_scanner_cur_line; ///
-  uint function(GScanner* scanner) c_g_scanner_cur_position; ///
-  GTokenType function(GScanner* scanner) c_g_scanner_cur_token; ///
-  GTokenValue function(GScanner* scanner) c_g_scanner_cur_value; ///
-  void function(GScanner* scanner) c_g_scanner_destroy; ///
-  gboolean function(GScanner* scanner) c_g_scanner_eof; ///
-  void function(GScanner* scanner, const(char)* format,  ...) c_g_scanner_error; ///
-  GTokenType function(GScanner* scanner) c_g_scanner_get_next_token; ///
-  void function(GScanner* scanner, int inputFd) c_g_scanner_input_file; ///
-  void function(GScanner* scanner, const(char)* text, uint textLen) c_g_scanner_input_text; ///
-  void* function(GScanner* scanner, const(char)* symbol) c_g_scanner_lookup_symbol; ///
-  GTokenType function(GScanner* scanner) c_g_scanner_peek_next_token; ///
-  void function(GScanner* scanner, uint scopeId, const(char)* symbol, void* value) c_g_scanner_scope_add_symbol; ///
-  void function(GScanner* scanner, uint scopeId, GHFunc func, void* userData) c_g_scanner_scope_foreach_symbol; ///
-  void* function(GScanner* scanner, uint scopeId, const(char)* symbol) c_g_scanner_scope_lookup_symbol; ///
-  void function(GScanner* scanner, uint scopeId, const(char)* symbol) c_g_scanner_scope_remove_symbol; ///
-  uint function(GScanner* scanner, uint scopeId) c_g_scanner_set_scope; ///
-  void function(GScanner* scanner) c_g_scanner_sync_file_offset; ///
-  void function(GScanner* scanner, GTokenType expectedToken, const(char)* identifierSpec, const(char)* symbolSpec, const(char)* symbolName, const(char)* message, int isError) c_g_scanner_unexp_token; ///
-  void function(GScanner* scanner, const(char)* format,  ...) c_g_scanner_warn; ///
-  GScanner* function(const(GScannerConfig)* configTempl) c_g_scanner_new; ///
-
-  // Sequence
-  GSequenceIter* function(GSequence* seq, void* data) c_g_sequence_append; ///
-  void function(GSequence* seq, GFunc func, void* userData) c_g_sequence_foreach; ///
-  void function(GSequence* seq) c_g_sequence_free; ///
-  GSequenceIter* function(GSequence* seq) c_g_sequence_get_begin_iter; ///
-  GSequenceIter* function(GSequence* seq) c_g_sequence_get_end_iter; ///
-  GSequenceIter* function(GSequence* seq, int pos) c_g_sequence_get_iter_at_pos; ///
-  int function(GSequence* seq) c_g_sequence_get_length; ///
-  GSequenceIter* function(GSequence* seq, void* data, GCompareDataFunc cmpFunc, void* cmpData) c_g_sequence_insert_sorted; ///
-  GSequenceIter* function(GSequence* seq, void* data, GSequenceIterCompareFunc iterCmp, void* cmpData) c_g_sequence_insert_sorted_iter; ///
-  gboolean function(GSequence* seq) c_g_sequence_is_empty; ///
-  GSequenceIter* function(GSequence* seq, void* data, GCompareDataFunc cmpFunc, void* cmpData) c_g_sequence_lookup; ///
-  GSequenceIter* function(GSequence* seq, void* data, GSequenceIterCompareFunc iterCmp, void* cmpData) c_g_sequence_lookup_iter; ///
-  GSequenceIter* function(GSequence* seq, void* data) c_g_sequence_prepend; ///
-  GSequenceIter* function(GSequence* seq, void* data, GCompareDataFunc cmpFunc, void* cmpData) c_g_sequence_search; ///
-  GSequenceIter* function(GSequence* seq, void* data, GSequenceIterCompareFunc iterCmp, void* cmpData) c_g_sequence_search_iter; ///
-  void function(GSequence* seq, GCompareDataFunc cmpFunc, void* cmpData) c_g_sequence_sort; ///
-  void function(GSequence* seq, GSequenceIterCompareFunc cmpFunc, void* cmpData) c_g_sequence_sort_iter; ///
-  void function(GSequenceIter* begin, GSequenceIter* end, GFunc func, void* userData) c_g_sequence_foreach_range; ///
-  void* function(GSequenceIter* iter) c_g_sequence_get; ///
-  GSequenceIter* function(GSequenceIter* iter, void* data) c_g_sequence_insert_before; ///
-  void function(GSequenceIter* src, GSequenceIter* dest) c_g_sequence_move; ///
-  void function(GSequenceIter* dest, GSequenceIter* begin, GSequenceIter* end) c_g_sequence_move_range; ///
-  GSequence* function(GDestroyNotify dataDestroy) c_g_sequence_new; ///
-  GSequenceIter* function(GSequenceIter* begin, GSequenceIter* end) c_g_sequence_range_get_midpoint; ///
-  void function(GSequenceIter* iter) c_g_sequence_remove; ///
-  void function(GSequenceIter* begin, GSequenceIter* end) c_g_sequence_remove_range; ///
-  void function(GSequenceIter* iter, void* data) c_g_sequence_set; ///
-  void function(GSequenceIter* iter, GCompareDataFunc cmpFunc, void* cmpData) c_g_sequence_sort_changed; ///
-  void function(GSequenceIter* iter, GSequenceIterCompareFunc iterCmp, void* cmpData) c_g_sequence_sort_changed_iter; ///
-  void function(GSequenceIter* a, GSequenceIter* b) c_g_sequence_swap; ///
-
-  // SequenceIter
-  int function(GSequenceIter* a, GSequenceIter* b) c_g_sequence_iter_compare; ///
-  int function(GSequenceIter* iter) c_g_sequence_iter_get_position; ///
-  GSequence* function(GSequenceIter* iter) c_g_sequence_iter_get_sequence; ///
-  gboolean function(GSequenceIter* iter) c_g_sequence_iter_is_begin; ///
-  gboolean function(GSequenceIter* iter) c_g_sequence_iter_is_end; ///
-  GSequenceIter* function(GSequenceIter* iter, int delta) c_g_sequence_iter_move; ///
-  GSequenceIter* function(GSequenceIter* iter) c_g_sequence_iter_next; ///
-  GSequenceIter* function(GSequenceIter* iter) c_g_sequence_iter_prev; ///
-
-  // Source
-  GType function() c_g_source_get_type; ///
-  GSource* function(GSourceFuncs* sourceFuncs, uint structSize) c_g_source_new; ///
-  void function(GSource* source, GSource* childSource) c_g_source_add_child_source; ///
-  void function(GSource* source, GPollFD* fd) c_g_source_add_poll; ///
-  void* function(GSource* source, int fd, GIOCondition events) c_g_source_add_unix_fd; ///
-  uint function(GSource* source, GMainContext* context) c_g_source_attach; ///
-  void function(GSource* source) c_g_source_destroy; ///
-  GMainContext* function(GSource* source) c_g_source_dup_context; ///
-  gboolean function(GSource* source) c_g_source_get_can_recurse; ///
-  GMainContext* function(GSource* source) c_g_source_get_context; ///
-  void function(GSource* source, GTimeVal* timeval) c_g_source_get_current_time; ///
-  uint function(GSource* source) c_g_source_get_id; ///
-  const(char)* function(GSource* source) c_g_source_get_name; ///
-  int function(GSource* source) c_g_source_get_priority; ///
-  long function(GSource* source) c_g_source_get_ready_time; ///
-  long function(GSource* source) c_g_source_get_time; ///
-  gboolean function(GSource* source) c_g_source_is_destroyed; ///
-  void function(GSource* source, void* tag, GIOCondition newEvents) c_g_source_modify_unix_fd; ///
-  GIOCondition function(GSource* source, void* tag) c_g_source_query_unix_fd; ///
-  GSource* function(GSource* source) c_g_source_ref; ///
-  void function(GSource* source, GSource* childSource) c_g_source_remove_child_source; ///
-  void function(GSource* source, GPollFD* fd) c_g_source_remove_poll; ///
-  void function(GSource* source, void* tag) c_g_source_remove_unix_fd; ///
-  void function(GSource* source, GSourceFunc func, void* data, GDestroyNotify notify) c_g_source_set_callback; ///
-  void function(GSource* source, void* callbackData, GSourceCallbackFuncs* callbackFuncs) c_g_source_set_callback_indirect; ///
-  void function(GSource* source, gboolean canRecurse) c_g_source_set_can_recurse; ///
-  void function(GSource* source, GSourceDisposeFunc dispose) c_g_source_set_dispose_function; ///
-  void function(GSource* source, GSourceFuncs* funcs) c_g_source_set_funcs; ///
-  void function(GSource* source, const(char)* name) c_g_source_set_name; ///
-  void function(GSource* source, int priority) c_g_source_set_priority; ///
-  void function(GSource* source, long readyTime) c_g_source_set_ready_time; ///
-  void function(GSource* source, const(char)* name) c_g_source_set_static_name; ///
-  void function(GSource* source) c_g_source_unref; ///
-  gboolean function(uint tag) c_g_source_remove; ///
-  gboolean function(GSourceFuncs* funcs, void* userData) c_g_source_remove_by_funcs_user_data; ///
-  gboolean function(void* userData) c_g_source_remove_by_user_data; ///
-  void function(uint tag, const(char)* name) c_g_source_set_name_by_id; ///
-
-  // StaticMutex
-  void function(GStaticMutex* mutex) c_g_static_mutex_free; ///
-  GMutex* function(GStaticMutex* mutex) c_g_static_mutex_get_mutex_impl; ///
-  void function(GStaticMutex* mutex) c_g_static_mutex_init; ///
-
-  // StaticPrivate
-  void function(GStaticPrivate* privateKey) c_g_static_private_free; ///
-  void* function(GStaticPrivate* privateKey) c_g_static_private_get; ///
-  void function(GStaticPrivate* privateKey) c_g_static_private_init; ///
-  void function(GStaticPrivate* privateKey, void* data, GDestroyNotify notify) c_g_static_private_set; ///
-
-  // StaticRWLock
-  void function(GStaticRWLock* lock) c_g_static_rw_lock_free; ///
-  void function(GStaticRWLock* lock) c_g_static_rw_lock_init; ///
-  void function(GStaticRWLock* lock) c_g_static_rw_lock_reader_lock; ///
-  gboolean function(GStaticRWLock* lock) c_g_static_rw_lock_reader_trylock; ///
-  void function(GStaticRWLock* lock) c_g_static_rw_lock_reader_unlock; ///
-  void function(GStaticRWLock* lock) c_g_static_rw_lock_writer_lock; ///
-  gboolean function(GStaticRWLock* lock) c_g_static_rw_lock_writer_trylock; ///
-  void function(GStaticRWLock* lock) c_g_static_rw_lock_writer_unlock; ///
-
-  // StaticRecMutex
-  void function(GStaticRecMutex* mutex) c_g_static_rec_mutex_free; ///
-  void function(GStaticRecMutex* mutex) c_g_static_rec_mutex_init; ///
-  void function(GStaticRecMutex* mutex) c_g_static_rec_mutex_lock; ///
-  void function(GStaticRecMutex* mutex, uint depth) c_g_static_rec_mutex_lock_full; ///
-  gboolean function(GStaticRecMutex* mutex) c_g_static_rec_mutex_trylock; ///
-  void function(GStaticRecMutex* mutex) c_g_static_rec_mutex_unlock; ///
-  uint function(GStaticRecMutex* mutex) c_g_static_rec_mutex_unlock_full; ///
-
-  // String
-  GType function() c_g_gstring_get_type; ///
-  GString* function(const(char)* init_) c_g_string_new; ///
-  GString* function(const(char)* init_, ptrdiff_t len) c_g_string_new_len; ///
-  GString* function(char* init_) c_g_string_new_take; ///
-  GString* function(size_t dflSize) c_g_string_sized_new; ///
-  GString* function(GString* string_, const(char)* val) c_g_string_append; ///
-  GString* function(GString* string_, char c) c_g_string_append_c; ///
-  GString* function(GString* string_, const(char)* val, ptrdiff_t len) c_g_string_append_len; ///
-  void function(GString* string_, const(char)* format,  ...) c_g_string_append_printf; ///
-  GString* function(GString* string_, dchar wc) c_g_string_append_unichar; ///
-  GString* function(GString* string_, const(char)* unescaped, const(char)* reservedCharsAllowed, gboolean allowUtf8) c_g_string_append_uri_escaped; ///
-  void function(GString* string_, const(char)* format, void* args) c_g_string_append_vprintf; ///
-  GString* function(GString* string_) c_g_string_ascii_down; ///
-  GString* function(GString* string_) c_g_string_ascii_up; ///
-  GString* function(GString* string_, const(char)* rval) c_g_string_assign; ///
-  GString* function(GString* string_) c_g_string_copy; ///
-  GString* function(GString* string_) c_g_string_down; ///
-  gboolean function(const(GString)* v, const(GString)* v2) c_g_string_equal; ///
-  GString* function(GString* string_, ptrdiff_t pos, ptrdiff_t len) c_g_string_erase; ///
-  char* function(GString* string_, gboolean freeSegment) c_g_string_free; ///
-  char* function(GString* string_) c_g_string_free_and_steal; ///
-  GBytes* function(GString* string_) c_g_string_free_to_bytes; ///
-  uint function(const(GString)* str) c_g_string_hash; ///
-  GString* function(GString* string_, ptrdiff_t pos, const(char)* val) c_g_string_insert; ///
-  GString* function(GString* string_, ptrdiff_t pos, char c) c_g_string_insert_c; ///
-  GString* function(GString* string_, ptrdiff_t pos, const(char)* val, ptrdiff_t len) c_g_string_insert_len; ///
-  GString* function(GString* string_, ptrdiff_t pos, dchar wc) c_g_string_insert_unichar; ///
-  GString* function(GString* string_, size_t pos, const(char)* val) c_g_string_overwrite; ///
-  GString* function(GString* string_, size_t pos, const(char)* val, ptrdiff_t len) c_g_string_overwrite_len; ///
-  GString* function(GString* string_, const(char)* val) c_g_string_prepend; ///
-  GString* function(GString* string_, char c) c_g_string_prepend_c; ///
-  GString* function(GString* string_, const(char)* val, ptrdiff_t len) c_g_string_prepend_len; ///
-  GString* function(GString* string_, dchar wc) c_g_string_prepend_unichar; ///
-  void function(GString* string_, const(char)* format,  ...) c_g_string_printf; ///
-  uint function(GString* string_, const(char)* find, const(char)* replace, uint limit) c_g_string_replace; ///
-  GString* function(GString* string_, size_t len) c_g_string_set_size; ///
-  GString* function(GString* string_, size_t len) c_g_string_truncate; ///
-  GString* function(GString* string_) c_g_string_up; ///
-  void function(GString* string_, const(char)* format, void* args) c_g_string_vprintf; ///
-
-  // StringChunk
-  void function(GStringChunk* chunk) c_g_string_chunk_clear; ///
-  void function(GStringChunk* chunk) c_g_string_chunk_free; ///
-  char* function(GStringChunk* chunk, const(char)* string_) c_g_string_chunk_insert; ///
-  char* function(GStringChunk* chunk, const(char)* string_) c_g_string_chunk_insert_const; ///
-  char* function(GStringChunk* chunk, const(char)* string_, ptrdiff_t len) c_g_string_chunk_insert_len; ///
-  GStringChunk* function(size_t size) c_g_string_chunk_new; ///
-
-  // StrvBuilder
-  GType function() c_g_strv_builder_get_type; ///
-  GStrvBuilder* function() c_g_strv_builder_new; ///
-  void function(GStrvBuilder* builder, const(char)* value) c_g_strv_builder_add; ///
-  void function(GStrvBuilder* builder,  ...) c_g_strv_builder_add_many; ///
-  void function(GStrvBuilder* builder, const(char*)* value) c_g_strv_builder_addv; ///
-  char** function(GStrvBuilder* builder) c_g_strv_builder_end; ///
-  GStrvBuilder* function(GStrvBuilder* builder) c_g_strv_builder_ref; ///
-  void function(GStrvBuilder* builder, char* value) c_g_strv_builder_take; ///
-  void function(GStrvBuilder* builder) c_g_strv_builder_unref; ///
-  GStrv function(GStrvBuilder* builder) c_g_strv_builder_unref_to_strv; ///
-
-  // TestCase
-  void function(GTestCase* testCase) c_g_test_case_free; ///
-
-  // TestLogBuffer
-  void function(GTestLogBuffer* tbuffer) c_g_test_log_buffer_free; ///
-  GTestLogMsg* function(GTestLogBuffer* tbuffer) c_g_test_log_buffer_pop; ///
-  void function(GTestLogBuffer* tbuffer, uint nBytes, const(ubyte)* bytes) c_g_test_log_buffer_push; ///
-  GTestLogBuffer* function() c_g_test_log_buffer_new; ///
-
-  // TestLogMsg
-  void function(GTestLogMsg* tmsg) c_g_test_log_msg_free; ///
-
-  // TestSuite
-  void function(GTestSuite* suite, GTestCase* testCase) c_g_test_suite_add; ///
-  void function(GTestSuite* suite, GTestSuite* nestedsuite) c_g_test_suite_add_suite; ///
-  void function(GTestSuite* suite) c_g_test_suite_free; ///
-
-  // Thread
-  GType function() c_g_thread_get_type; ///
-  GThread* function(const(char)* name, GThreadFunc func, void* data) c_g_thread_new; ///
-  GThread* function(const(char)* name, GThreadFunc func, void* data, GError** _err) c_g_thread_try_new; ///
-  const(char)* function(GThread* thread) c_g_thread_get_name; ///
-  void* function(GThread* thread) c_g_thread_join; ///
-  GThread* function(GThread* thread) c_g_thread_ref; ///
-  void function(GThread* thread, GThreadPriority priority) c_g_thread_set_priority; ///
-  void function(GThread* thread) c_g_thread_unref; ///
-  GThread* function(GThreadFunc func, void* data, gboolean joinable, GError** _err) c_g_thread_create; ///
-  GThread* function(GThreadFunc func, void* data, gulong stackSize, gboolean joinable, gboolean bound, GThreadPriority priority, GError** _err) c_g_thread_create_full; ///
-  GQuark function() c_g_thread_error_quark; ///
-  void function(void* retval) c_g_thread_exit; ///
-  void function(GFunc threadFunc, void* userData) c_g_thread_foreach; ///
-  gboolean function() c_g_thread_get_initialized; ///
-  void function(void* vtable) c_g_thread_init; ///
-  void function(void* vtable) c_g_thread_init_with_errorcheck_mutexes; ///
-  GThread* function() c_g_thread_self; ///
-  void function() c_g_thread_yield; ///
-
-  // ThreadPool
-  void function(GThreadPool* pool, gboolean immediate, gboolean wait) c_g_thread_pool_free; ///
-  int function(GThreadPool* pool) c_g_thread_pool_get_max_threads; ///
-  uint function(GThreadPool* pool) c_g_thread_pool_get_num_threads; ///
-  gboolean function(GThreadPool* pool, void* data) c_g_thread_pool_move_to_front; ///
-  gboolean function(GThreadPool* pool, void* data, GError** _err) c_g_thread_pool_push; ///
-  gboolean function(GThreadPool* pool, int maxThreads, GError** _err) c_g_thread_pool_set_max_threads; ///
-  void function(GThreadPool* pool, GCompareDataFunc func, void* userData) c_g_thread_pool_set_sort_function; ///
-  uint function(GThreadPool* pool) c_g_thread_pool_unprocessed; ///
-  uint function() c_g_thread_pool_get_max_idle_time; ///
-  int function() c_g_thread_pool_get_max_unused_threads; ///
-  uint function() c_g_thread_pool_get_num_unused_threads; ///
-  GThreadPool* function(GFunc func, void* userData, int maxThreads, gboolean exclusive, GError** _err) c_g_thread_pool_new; ///
-  GThreadPool* function(GFunc func, void* userData, GDestroyNotify itemFreeFunc, int maxThreads, gboolean exclusive, GError** _err) c_g_thread_pool_new_full; ///
-  void function(uint interval) c_g_thread_pool_set_max_idle_time; ///
-  void function(int maxThreads) c_g_thread_pool_set_max_unused_threads; ///
-  void function() c_g_thread_pool_stop_unused_threads; ///
-
-  // TimeVal
-  void function(GTimeVal* time, glong microseconds) c_g_time_val_add; ///
-  char* function(GTimeVal* time) c_g_time_val_to_iso8601; ///
-  gboolean function(const(char)* isoDate, GTimeVal* time) c_g_time_val_from_iso8601; ///
-
-  // TimeZone
-  GType function() c_g_time_zone_get_type; ///
-  GTimeZone* function(const(char)* identifier) c_g_time_zone_new; ///
-  GTimeZone* function(const(char)* identifier) c_g_time_zone_new_identifier; ///
-  GTimeZone* function() c_g_time_zone_new_local; ///
-  GTimeZone* function(int seconds) c_g_time_zone_new_offset; ///
-  GTimeZone* function() c_g_time_zone_new_utc; ///
-  int function(GTimeZone* tz, GTimeType type, long* time) c_g_time_zone_adjust_time; ///
-  int function(GTimeZone* tz, GTimeType type, long time) c_g_time_zone_find_interval; ///
-  const(char)* function(GTimeZone* tz, int interval) c_g_time_zone_get_abbreviation; ///
-  const(char)* function(GTimeZone* tz) c_g_time_zone_get_identifier; ///
-  int function(GTimeZone* tz, int interval) c_g_time_zone_get_offset; ///
-  gboolean function(GTimeZone* tz, int interval) c_g_time_zone_is_dst; ///
-  GTimeZone* function(GTimeZone* tz) c_g_time_zone_ref; ///
-  void function(GTimeZone* tz) c_g_time_zone_unref; ///
-
-  // Timer
-  void function(GTimer* timer) c_g_timer_continue; ///
-  void function(GTimer* timer) c_g_timer_destroy; ///
-  double function(GTimer* timer, gulong* microseconds) c_g_timer_elapsed; ///
-  gboolean function(GTimer* timer) c_g_timer_is_active; ///
-  void function(GTimer* timer) c_g_timer_reset; ///
-  void function(GTimer* timer) c_g_timer_start; ///
-  void function(GTimer* timer) c_g_timer_stop; ///
-  GTimer* function() c_g_timer_new; ///
-
-  // TrashStack
-  uint function(GTrashStack** stackP) c_g_trash_stack_height; ///
-  void* function(GTrashStack** stackP) c_g_trash_stack_peek; ///
-  void* function(GTrashStack** stackP) c_g_trash_stack_pop; ///
-  void function(GTrashStack** stackP, void* dataP) c_g_trash_stack_push; ///
-
-  // Tree
-  GType function() c_g_tree_get_type; ///
-  GTree* function(GCompareFunc keyCompareFunc) c_g_tree_new; ///
-  GTree* function(GCompareDataFunc keyCompareFunc, void* keyCompareData, GDestroyNotify keyDestroyFunc, GDestroyNotify valueDestroyFunc) c_g_tree_new_full; ///
-  GTree* function(GCompareDataFunc keyCompareFunc, void* keyCompareData) c_g_tree_new_with_data; ///
-  void function(GTree* tree) c_g_tree_destroy; ///
-  void function(GTree* tree, GTraverseFunc func, void* userData) c_g_tree_foreach; ///
-  void function(GTree* tree, GTraverseNodeFunc func, void* userData) c_g_tree_foreach_node; ///
-  int function(GTree* tree) c_g_tree_height; ///
-  void function(GTree* tree, void* key, void* value) c_g_tree_insert; ///
-  GTreeNode* function(GTree* tree, void* key, void* value) c_g_tree_insert_node; ///
-  void* function(GTree* tree, const(void)* key) c_g_tree_lookup; ///
-  gboolean function(GTree* tree, const(void)* lookupKey, void** origKey, void** value) c_g_tree_lookup_extended; ///
-  GTreeNode* function(GTree* tree, const(void)* key) c_g_tree_lookup_node; ///
-  GTreeNode* function(GTree* tree, const(void)* key) c_g_tree_lower_bound; ///
-  int function(GTree* tree) c_g_tree_nnodes; ///
-  GTreeNode* function(GTree* tree) c_g_tree_node_first; ///
-  GTreeNode* function(GTree* tree) c_g_tree_node_last; ///
-  GTree* function(GTree* tree) c_g_tree_ref; ///
-  gboolean function(GTree* tree, const(void)* key) c_g_tree_remove; ///
-  void function(GTree* tree) c_g_tree_remove_all; ///
-  void function(GTree* tree, void* key, void* value) c_g_tree_replace; ///
-  GTreeNode* function(GTree* tree, void* key, void* value) c_g_tree_replace_node; ///
-  void* function(GTree* tree, GCompareFunc searchFunc, const(void)* userData) c_g_tree_search; ///
-  GTreeNode* function(GTree* tree, GCompareFunc searchFunc, const(void)* userData) c_g_tree_search_node; ///
-  gboolean function(GTree* tree, const(void)* key) c_g_tree_steal; ///
-  void function(GTree* tree, GTraverseFunc traverseFunc, GTraverseType traverseType, void* userData) c_g_tree_traverse; ///
-  void function(GTree* tree) c_g_tree_unref; ///
-  GTreeNode* function(GTree* tree, const(void)* key) c_g_tree_upper_bound; ///
-
-  // TreeNode
-  void* function(GTreeNode* node) c_g_tree_node_key; ///
-  GTreeNode* function(GTreeNode* node) c_g_tree_node_next; ///
-  GTreeNode* function(GTreeNode* node) c_g_tree_node_previous; ///
-  void* function(GTreeNode* node) c_g_tree_node_value; ///
-
-  // Tuples
-  void function(GTuples* tuples) c_g_tuples_destroy; ///
-  void* function(GTuples* tuples, int index, int field) c_g_tuples_index; ///
-
-  // Uri
-  GType function() c_g_uri_get_type; ///
-  const(char)* function(GUri* uri) c_g_uri_get_auth_params; ///
-  GUriFlags function(GUri* uri) c_g_uri_get_flags; ///
-  const(char)* function(GUri* uri) c_g_uri_get_fragment; ///
-  const(char)* function(GUri* uri) c_g_uri_get_host; ///
-  const(char)* function(GUri* uri) c_g_uri_get_password; ///
-  const(char)* function(GUri* uri) c_g_uri_get_path; ///
-  int function(GUri* uri) c_g_uri_get_port; ///
-  const(char)* function(GUri* uri) c_g_uri_get_query; ///
-  const(char)* function(GUri* uri) c_g_uri_get_scheme; ///
-  const(char)* function(GUri* uri) c_g_uri_get_user; ///
-  const(char)* function(GUri* uri) c_g_uri_get_userinfo; ///
-  GUri* function(GUri* baseUri, const(char)* uriRef, GUriFlags flags, GError** _err) c_g_uri_parse_relative; ///
-  GUri* function(GUri* uri) c_g_uri_ref; ///
-  char* function(GUri* uri) c_g_uri_to_string; ///
-  char* function(GUri* uri, GUriHideFlags flags) c_g_uri_to_string_partial; ///
-  void function(GUri* uri) c_g_uri_unref; ///
-  GUri* function(GUriFlags flags, const(char)* scheme, const(char)* userinfo, const(char)* host, int port, const(char)* path, const(char)* query, const(char)* fragment) c_g_uri_build; ///
-  GUri* function(GUriFlags flags, const(char)* scheme, const(char)* user, const(char)* password, const(char)* authParams, const(char)* host, int port, const(char)* path, const(char)* query, const(char)* fragment) c_g_uri_build_with_user; ///
-  GQuark function() c_g_uri_error_quark; ///
-  char* function(const(ubyte)* unescaped, size_t length, const(char)* reservedCharsAllowed) c_g_uri_escape_bytes; ///
-  char* function(const(char)* unescaped, const(char)* reservedCharsAllowed, gboolean allowUtf8) c_g_uri_escape_string; ///
-  gboolean function(const(char)* uriString, GUriFlags flags, GError** _err) c_g_uri_is_valid; ///
-  char* function(GUriFlags flags, const(char)* scheme, const(char)* userinfo, const(char)* host, int port, const(char)* path, const(char)* query, const(char)* fragment) c_g_uri_join; ///
-  char* function(GUriFlags flags, const(char)* scheme, const(char)* user, const(char)* password, const(char)* authParams, const(char)* host, int port, const(char)* path, const(char)* query, const(char)* fragment) c_g_uri_join_with_user; ///
-  char** function(const(char)* uriList) c_g_uri_list_extract_uris; ///
-  GUri* function(const(char)* uriString, GUriFlags flags, GError** _err) c_g_uri_parse; ///
-  GHashTable* function(const(char)* params, ptrdiff_t length, const(char)* separators, GUriParamsFlags flags, GError** _err) c_g_uri_parse_params; ///
-  char* function(const(char)* uri) c_g_uri_parse_scheme; ///
-  const(char)* function(const(char)* uri) c_g_uri_peek_scheme; ///
-  char* function(const(char)* baseUriString, const(char)* uriRef, GUriFlags flags, GError** _err) c_g_uri_resolve_relative; ///
-  gboolean function(const(char)* uriRef, GUriFlags flags, char** scheme, char** userinfo, char** host, int* port, char** path, char** query, char** fragment, GError** _err) c_g_uri_split; ///
-  gboolean function(const(char)* uriString, GUriFlags flags, char** scheme, char** host, int* port, GError** _err) c_g_uri_split_network; ///
-  gboolean function(const(char)* uriRef, GUriFlags flags, char** scheme, char** user, char** password, char** authParams, char** host, int* port, char** path, char** query, char** fragment, GError** _err) c_g_uri_split_with_user; ///
-  GBytes* function(const(char)* escapedString, ptrdiff_t length, const(char)* illegalCharacters, GError** _err) c_g_uri_unescape_bytes; ///
-  char* function(const(char)* escapedString, const(char)* escapedStringEnd, const(char)* illegalCharacters) c_g_uri_unescape_segment; ///
-  char* function(const(char)* escapedString, const(char)* illegalCharacters) c_g_uri_unescape_string; ///
-
-  // UriParamsIter
-  void function(GUriParamsIter* iter, const(char)* params, ptrdiff_t length, const(char)* separators, GUriParamsFlags flags) c_g_uri_params_iter_init; ///
-  gboolean function(GUriParamsIter* iter, char** attribute, char** value, GError** _err) c_g_uri_params_iter_next; ///
-
-  // Variant
-  GType function() c_intern; ///
-  GVariant* function(const(char)* formatString,  ...) c_g_variant_new; ///
-  GVariant* function(const(GVariantType)* childType, const(GVariant*)* children, size_t nChildren) c_g_variant_new_array; ///
-  GVariant* function(gboolean value) c_g_variant_new_boolean; ///
-  GVariant* function(ubyte value) c_g_variant_new_byte; ///
-  GVariant* function(const(char)* string_) c_g_variant_new_bytestring; ///
-  GVariant* function(const(char*)* strv, ptrdiff_t length) c_g_variant_new_bytestring_array; ///
-  GVariant* function(GVariant* key, GVariant* value) c_g_variant_new_dict_entry; ///
-  GVariant* function(double value) c_g_variant_new_double; ///
-  GVariant* function(const(GVariantType)* elementType, const(void)* elements, size_t nElements, size_t elementSize) c_g_variant_new_fixed_array; ///
-  GVariant* function(const(GVariantType)* type, GBytes* bytes, gboolean trusted) c_g_variant_new_from_bytes; ///
-  GVariant* function(const(GVariantType)* type, const(void)* data, size_t size, gboolean trusted, GDestroyNotify notify, void* userData) c_g_variant_new_from_data; ///
-  GVariant* function(int value) c_g_variant_new_handle; ///
-  GVariant* function(short value) c_g_variant_new_int16; ///
-  GVariant* function(int value) c_g_variant_new_int32; ///
-  GVariant* function(long value) c_g_variant_new_int64; ///
-  GVariant* function(const(GVariantType)* childType, GVariant* child) c_g_variant_new_maybe; ///
-  GVariant* function(const(char)* objectPath) c_g_variant_new_object_path; ///
-  GVariant* function(const(char*)* strv, ptrdiff_t length) c_g_variant_new_objv; ///
-  GVariant* function(const(char)* format,  ...) c_g_variant_new_parsed; ///
-  GVariant* function(const(char)* format, void** app) c_g_variant_new_parsed_va; ///
-  GVariant* function(const(char)* formatString,  ...) c_g_variant_new_printf; ///
-  GVariant* function(const(char)* signature) c_g_variant_new_signature; ///
-  GVariant* function(const(char)* string_) c_g_variant_new_string; ///
-  GVariant* function(const(char*)* strv, ptrdiff_t length) c_g_variant_new_strv; ///
-  GVariant* function(char* string_) c_g_variant_new_take_string; ///
-  GVariant* function(const(GVariant*)* children, size_t nChildren) c_g_variant_new_tuple; ///
-  GVariant* function(ushort value) c_g_variant_new_uint16; ///
-  GVariant* function(uint value) c_g_variant_new_uint32; ///
-  GVariant* function(ulong value) c_g_variant_new_uint64; ///
-  GVariant* function(const(char)* formatString, const(char*)* endptr, void** app) c_g_variant_new_va; ///
-  GVariant* function(GVariant* value) c_g_variant_new_variant; ///
-  GVariant* function(GVariant* value) c_g_variant_byteswap; ///
-  gboolean function(GVariant* value, const(char)* formatString, gboolean copyOnly) c_g_variant_check_format_string; ///
-  GVariantClass function(GVariant* value) c_g_variant_classify; ///
-  int function(GVariant* one, GVariant* two) c_g_variant_compare; ///
-  ubyte* function(GVariant* value, size_t* length) c_g_variant_dup_bytestring; ///
-  char** function(GVariant* value, size_t* length) c_g_variant_dup_bytestring_array; ///
-  char** function(GVariant* value, size_t* length) c_g_variant_dup_objv; ///
-  char* function(GVariant* value, size_t* length) c_g_variant_dup_string; ///
-  char** function(GVariant* value, size_t* length) c_g_variant_dup_strv; ///
-  gboolean function(GVariant* one, GVariant* two) c_g_variant_equal; ///
-  void function(GVariant* value, const(char)* formatString,  ...) c_g_variant_get; ///
-  gboolean function(GVariant* value) c_g_variant_get_boolean; ///
-  ubyte function(GVariant* value) c_g_variant_get_byte; ///
-  const(char)* function(GVariant* value) c_g_variant_get_bytestring; ///
-  const(char*)* function(GVariant* value, size_t* length) c_g_variant_get_bytestring_array; ///
-  void function(GVariant* value, size_t index, const(char)* formatString,  ...) c_g_variant_get_child; ///
-  GVariant* function(GVariant* value, size_t index) c_g_variant_get_child_value; ///
-  const(void)* function(GVariant* value) c_g_variant_get_data; ///
-  GBytes* function(GVariant* value) c_g_variant_get_data_as_bytes; ///
-  double function(GVariant* value) c_g_variant_get_double; ///
-  const(void)* function(GVariant* value, size_t* nElements, size_t elementSize) c_g_variant_get_fixed_array; ///
-  int function(GVariant* value) c_g_variant_get_handle; ///
-  short function(GVariant* value) c_g_variant_get_int16; ///
-  int function(GVariant* value) c_g_variant_get_int32; ///
-  long function(GVariant* value) c_g_variant_get_int64; ///
-  GVariant* function(GVariant* value) c_g_variant_get_maybe; ///
-  GVariant* function(GVariant* value) c_g_variant_get_normal_form; ///
-  const(char*)* function(GVariant* value, size_t* length) c_g_variant_get_objv; ///
-  size_t function(GVariant* value) c_g_variant_get_size; ///
-  char* function(GVariant* value, size_t* length) c_g_variant_get_string; ///
-  const(char*)* function(GVariant* value, size_t* length) c_g_variant_get_strv; ///
-  const(GVariantType)* function(GVariant* value) c_g_variant_get_type; ///
-  const(char)* function(GVariant* value) c_g_variant_get_type_string; ///
-  ushort function(GVariant* value) c_g_variant_get_uint16; ///
-  uint function(GVariant* value) c_g_variant_get_uint32; ///
-  ulong function(GVariant* value) c_g_variant_get_uint64; ///
-  void function(GVariant* value, const(char)* formatString, const(char*)* endptr, void** app) c_g_variant_get_va; ///
-  GVariant* function(GVariant* value) c_g_variant_get_variant; ///
-  uint function(GVariant* value) c_g_variant_hash; ///
-  gboolean function(GVariant* value) c_g_variant_is_container; ///
-  gboolean function(GVariant* value) c_g_variant_is_floating; ///
-  gboolean function(GVariant* value) c_g_variant_is_normal_form; ///
-  gboolean function(GVariant* value, const(GVariantType)* type) c_g_variant_is_of_type; ///
-  GVariantIter* function(GVariant* value) c_g_variant_iter_new; ///
-  gboolean function(GVariant* dictionary, const(char)* key, const(char)* formatString,  ...) c_g_variant_lookup; ///
-  GVariant* function(GVariant* dictionary, const(char)* key, const(GVariantType)* expectedType) c_g_variant_lookup_value; ///
-  size_t function(GVariant* value) c_g_variant_n_children; ///
-  char* function(GVariant* value, gboolean typeAnnotate) c_g_variant_print; ///
-  GString* function(GVariant* value, GString* string_, gboolean typeAnnotate) c_g_variant_print_string; ///
-  GVariant* function(GVariant* value) c_g_variant_ref; ///
-  GVariant* function(GVariant* value) c_g_variant_ref_sink; ///
-  void function(GVariant* value, void* data) c_g_variant_store; ///
-  GVariant* function(GVariant* value) c_g_variant_take_ref; ///
-  void function(GVariant* value) c_g_variant_unref; ///
-  gboolean function(const(char)* string_) c_g_variant_is_object_path; ///
-  gboolean function(const(char)* string_) c_g_variant_is_signature; ///
-  GVariant* function(const(GVariantType)* type, const(char)* text, const(char)* limit, const(char*)* endptr, GError** _err) c_g_variant_parse; ///
-  char* function(GError* error, const(char)* sourceStr) c_g_variant_parse_error_print_context; ///
-  GQuark function() c_g_variant_parse_error_quark; ///
-  GQuark function() c_g_variant_parser_get_error_quark; ///
-
-  // VariantBuilder
-  GType function() c_g_variant_builder_get_type; ///
-  GVariantBuilder* function(const(GVariantType)* type) c_g_variant_builder_new; ///
-  void function(GVariantBuilder* builder, const(char)* formatString,  ...) c_g_variant_builder_add; ///
-  void function(GVariantBuilder* builder, const(char)* format,  ...) c_g_variant_builder_add_parsed; ///
-  void function(GVariantBuilder* builder, GVariant* value) c_g_variant_builder_add_value; ///
-  void function(GVariantBuilder* builder) c_g_variant_builder_clear; ///
-  void function(GVariantBuilder* builder) c_g_variant_builder_close; ///
-  GVariant* function(GVariantBuilder* builder) c_g_variant_builder_end; ///
-  void function(GVariantBuilder* builder, const(GVariantType)* type) c_g_variant_builder_init; ///
-  void function(GVariantBuilder* builder, const(GVariantType)* type) c_g_variant_builder_init_static; ///
-  void function(GVariantBuilder* builder, const(GVariantType)* type) c_g_variant_builder_open; ///
-  GVariantBuilder* function(GVariantBuilder* builder) c_g_variant_builder_ref; ///
-  void function(GVariantBuilder* builder) c_g_variant_builder_unref; ///
-
-  // VariantDict
-  GType function() c_g_variant_dict_get_type; ///
-  GVariantDict* function(GVariant* fromAsv) c_g_variant_dict_new; ///
-  void function(GVariantDict* dict) c_g_variant_dict_clear; ///
-  gboolean function(GVariantDict* dict, const(char)* key) c_g_variant_dict_contains; ///
-  GVariant* function(GVariantDict* dict) c_g_variant_dict_end; ///
-  void function(GVariantDict* dict, GVariant* fromAsv) c_g_variant_dict_init; ///
-  void function(GVariantDict* dict, const(char)* key, const(char)* formatString,  ...) c_g_variant_dict_insert; ///
-  void function(GVariantDict* dict, const(char)* key, GVariant* value) c_g_variant_dict_insert_value; ///
-  gboolean function(GVariantDict* dict, const(char)* key, const(char)* formatString,  ...) c_g_variant_dict_lookup; ///
-  GVariant* function(GVariantDict* dict, const(char)* key, const(GVariantType)* expectedType) c_g_variant_dict_lookup_value; ///
-  GVariantDict* function(GVariantDict* dict) c_g_variant_dict_ref; ///
-  gboolean function(GVariantDict* dict, const(char)* key) c_g_variant_dict_remove; ///
-  void function(GVariantDict* dict) c_g_variant_dict_unref; ///
-
-  // VariantIter
-  GVariantIter* function(GVariantIter* iter) c_g_variant_iter_copy; ///
-  void function(GVariantIter* iter) c_g_variant_iter_free; ///
-  size_t function(GVariantIter* iter, GVariant* value) c_g_variant_iter_init; ///
-  gboolean function(GVariantIter* iter, const(char)* formatString,  ...) c_g_variant_iter_loop; ///
-  size_t function(GVariantIter* iter) c_g_variant_iter_n_children; ///
-  gboolean function(GVariantIter* iter, const(char)* formatString,  ...) c_g_variant_iter_next; ///
-  GVariant* function(GVariantIter* iter) c_g_variant_iter_next_value; ///
-
-  // VariantType
-  GType function() c_g_variant_type_get_gtype; ///
-  GVariantType* function(const(char)* typeString) c_g_variant_type_new; ///
-  GVariantType* function(const(GVariantType)* element) c_g_variant_type_new_array; ///
-  GVariantType* function(const(GVariantType)* key, const(GVariantType)* value) c_g_variant_type_new_dict_entry; ///
-  GVariantType* function(const(GVariantType)* element) c_g_variant_type_new_maybe; ///
-  GVariantType* function(const(GVariantType*)* items, int length) c_g_variant_type_new_tuple; ///
-  GVariantType* function(const(GVariantType)* type) c_g_variant_type_copy; ///
-  char* function(const(GVariantType)* type) c_g_variant_type_dup_string; ///
-  const(GVariantType)* function(const(GVariantType)* type) c_g_variant_type_element; ///
-  gboolean function(GVariantType* type1, GVariantType* type2) c_g_variant_type_equal; ///
-  const(GVariantType)* function(const(GVariantType)* type) c_g_variant_type_first; ///
-  void function(GVariantType* type) c_g_variant_type_free; ///
-  size_t function(const(GVariantType)* type) c_g_variant_type_get_string_length; ///
-  uint function(GVariantType* type) c_g_variant_type_hash; ///
-  gboolean function(const(GVariantType)* type) c_g_variant_type_is_array; ///
-  gboolean function(const(GVariantType)* type) c_g_variant_type_is_basic; ///
-  gboolean function(const(GVariantType)* type) c_g_variant_type_is_container; ///
-  gboolean function(const(GVariantType)* type) c_g_variant_type_is_definite; ///
-  gboolean function(const(GVariantType)* type) c_g_variant_type_is_dict_entry; ///
-  gboolean function(const(GVariantType)* type) c_g_variant_type_is_maybe; ///
-  gboolean function(const(GVariantType)* type, const(GVariantType)* supertype) c_g_variant_type_is_subtype_of; ///
-  gboolean function(const(GVariantType)* type) c_g_variant_type_is_tuple; ///
-  gboolean function(const(GVariantType)* type) c_g_variant_type_is_variant; ///
-  const(GVariantType)* function(const(GVariantType)* type) c_g_variant_type_key; ///
-  size_t function(const(GVariantType)* type) c_g_variant_type_n_items; ///
-  const(GVariantType)* function(const(GVariantType)* type) c_g_variant_type_next; ///
-  const(char)* function(const(GVariantType)* type) c_g_variant_type_peek_string; ///
-  const(GVariantType)* function(const(GVariantType)* type) c_g_variant_type_value; ///
-  const(GVariantType)* function(const(char)* typeString) c_g_variant_type_checked_; ///
-  size_t function(const(char)* typeString) c_g_variant_type_string_get_depth_; ///
-  gboolean function(const(char)* typeString) c_g_variant_type_string_is_valid; ///
-  gboolean function(const(char)* string_, const(char)* limit, const(char*)* endptr) c_g_variant_type_string_scan; ///
-
-  // global
-  int function(const(char)* filename, int mode) c_g_access; ///
-  void* function(size_t nBlocks, size_t nBlockBytes, size_t alignment) c_g_aligned_alloc; ///
-  void* function(size_t nBlocks, size_t nBlockBytes, size_t alignment) c_g_aligned_alloc0; ///
-  void function(void* mem) c_g_aligned_free; ///
-  void function(void* mem, size_t alignment, size_t size) c_g_aligned_free_sized; ///
-  int function(char c) c_g_ascii_digit_value; ///
-  char* function(char* buffer, int bufLen, double d) c_g_ascii_dtostr; ///
-  char* function(char* buffer, int bufLen, const(char)* format, double d) c_g_ascii_formatd; ///
-  int function(const(char)* s1, const(char)* s2) c_g_ascii_strcasecmp; ///
-  char* function(const(char)* str, ptrdiff_t len) c_g_ascii_strdown; ///
-  gboolean function(const(char)* str, uint base, long min, long max, long* outNum, GError** _err) c_g_ascii_string_to_signed; ///
-  gboolean function(const(char)* str, uint base, ulong min, ulong max, ulong* outNum, GError** _err) c_g_ascii_string_to_unsigned; ///
-  int function(const(char)* s1, const(char)* s2, size_t n) c_g_ascii_strncasecmp; ///
-  double function(const(char)* nptr, char** endptr) c_g_ascii_strtod; ///
-  long function(const(char)* nptr, char** endptr, uint base) c_g_ascii_strtoll; ///
-  ulong function(const(char)* nptr, char** endptr, uint base) c_g_ascii_strtoull; ///
-  char* function(const(char)* str, ptrdiff_t len) c_g_ascii_strup; ///
-  char function(char c) c_g_ascii_tolower; ///
-  char function(char c) c_g_ascii_toupper; ///
-  int function(char c) c_g_ascii_xdigit_value; ///
-  void function(const(char)* logDomain, const(char)* file, int line, const(char)* prettyFunction, const(char)* expression) c_g_assert_warning; ///
-  void function(const(char)* domain, const(char)* file, int line, const(char)* func, const(char)* message) c_g_assertion_message; ///
-  void function(const(char)* domain, const(char)* file, int line, const(char)* func, const(char)* expr, ulong arg1, const(char)* cmp, ulong arg2, char numtype) c_g_assertion_message_cmpint; ///
-  void function(const(char)* domain, const(char)* file, int line, const(char)* func, const(char)* expr, real arg1, const(char)* cmp, real arg2, char numtype) c_g_assertion_message_cmpnum; ///
-  void function(const(char)* domain, const(char)* file, int line, const(char)* func, const(char)* expr, const(char)* arg1, const(char)* cmp, const(char)* arg2) c_g_assertion_message_cmpstr; ///
-  void function(const(char)* domain, const(char)* file, int line, const(char)* func, const(char)* expr, const(char*)* arg1, const(char*)* arg2, size_t firstWrongIdx) c_g_assertion_message_cmpstrv; ///
-  void function(const(char)* domain, const(char)* file, int line, const(char)* func, const(char)* expr, const(GError)* error, GQuark errorDomain, int errorCode) c_g_assertion_message_error; ///
-  void function(const(char)* domain, const(char)* file, int line, const(char)* func, const(char)* expr) c_g_assertion_message_expr; ///
-  void function(GVoidFunc func) c_g_atexit; ///
-  int function(int* atomic, int val) c_g_atomic_int_add; ///
-  uint function(uint* atomic, uint val) c_g_atomic_int_and; ///
-  gboolean function(int* atomic, int oldval, int newval) c_g_atomic_int_compare_and_exchange; ///
-  gboolean function(int* atomic, int oldval, int newval, int* preval) c_g_atomic_int_compare_and_exchange_full; ///
-  gboolean function(int* atomic) c_g_atomic_int_dec_and_test; ///
-  int function(int* atomic, int newval) c_g_atomic_int_exchange; ///
-  int function(int* atomic, int val) c_g_atomic_int_exchange_and_add; ///
-  int function(const(int)* atomic) c_g_atomic_int_get; ///
-  void function(int* atomic) c_g_atomic_int_inc; ///
-  uint function(uint* atomic, uint val) c_g_atomic_int_or; ///
-  void function(int* atomic, int newval) c_g_atomic_int_set; ///
-  uint function(uint* atomic, uint val) c_g_atomic_int_xor; ///
-  ptrdiff_t function(void* atomic, ptrdiff_t val) c_g_atomic_pointer_add; ///
-  size_t function(void* atomic, size_t val) c_g_atomic_pointer_and; ///
-  gboolean function(void* atomic, void* oldval, void* newval) c_g_atomic_pointer_compare_and_exchange; ///
-  gboolean function(void* atomic, void* oldval, void* newval, void* preval) c_g_atomic_pointer_compare_and_exchange_full; ///
-  void* function(void* atomic, void* newval) c_g_atomic_pointer_exchange; ///
-  void* function(void* atomic) c_g_atomic_pointer_get; ///
-  size_t function(void* atomic, size_t val) c_g_atomic_pointer_or; ///
-  void function(void* atomic, void* newval) c_g_atomic_pointer_set; ///
-  size_t function(void* atomic, size_t val) c_g_atomic_pointer_xor; ///
-  void* function(void* memBlock) c_g_atomic_rc_box_acquire; ///
-  void* function(size_t blockSize) c_g_atomic_rc_box_alloc; ///
-  void* function(size_t blockSize) c_g_atomic_rc_box_alloc0; ///
-  void* function(size_t blockSize, const(void)* memBlock) c_g_atomic_rc_box_dup; ///
-  size_t function(void* memBlock) c_g_atomic_rc_box_get_size; ///
-  void function(void* memBlock) c_g_atomic_rc_box_release; ///
-  void function(void* memBlock, GDestroyNotify clearFunc) c_g_atomic_rc_box_release_full; ///
-  gboolean function(int* arc, int val) c_g_atomic_ref_count_compare; ///
-  gboolean function(int* arc) c_g_atomic_ref_count_dec; ///
-  void function(int* arc) c_g_atomic_ref_count_inc; ///
-  void function(int* arc) c_g_atomic_ref_count_init; ///
-  ubyte* function(const(char)* text, size_t* outLen) c_g_base64_decode; ///
-  ubyte* function(ubyte* text, size_t* outLen) c_g_base64_decode_inplace; ///
-  size_t function(const(ubyte)* in_, size_t len, ubyte* out_, int* state, uint* save) c_g_base64_decode_step; ///
-  char* function(const(ubyte)* data, size_t len) c_g_base64_encode; ///
-  size_t function(gboolean breakLines, char* out_, int* state, int* save) c_g_base64_encode_close; ///
-  size_t function(const(ubyte)* in_, size_t len, gboolean breakLines, char* out_, int* state, int* save) c_g_base64_encode_step; ///
-  const(char)* function(const(char)* fileName) c_g_basename; ///
-  void function(int* address, int lockBit) c_g_bit_lock; ///
-  void function(int* address, uint lockBit, int* outVal) c_g_bit_lock_and_get; ///
-  int function(gulong mask, int nthBit) c_g_bit_nth_lsf; ///
-  int function(gulong mask, int nthBit) c_g_bit_nth_msf; ///
-  uint function(gulong number) c_g_bit_storage; ///
-  gboolean function(int* address, int lockBit) c_g_bit_trylock; ///
-  void function(int* address, int lockBit) c_g_bit_unlock; ///
-  void function(int* address, uint lockBit, int newVal, int preserveMask) c_g_bit_unlock_and_set; ///
-  void function() c_g_blow_chunks; ///
-  char* function(const(char)* firstElement,  ...) c_g_build_filename; ///
-  char* function(const(char)* firstElement, void** args) c_g_build_filename_valist; ///
-  char* function(char** args) c_g_build_filenamev; ///
-  char* function(const(char)* separator, const(char)* firstElement,  ...) c_g_build_path; ///
-  char* function(const(char)* separator, char** args) c_g_build_pathv; ///
-  char* function(const(char)* filename, const(char)* relativeTo) c_g_canonicalize_filename; ///
-  int function(const(char)* path) c_g_chdir; ///
-  const(char)* function(uint requiredMajor, uint requiredMinor, uint requiredMicro) c_glib_check_version; ///
-  uint function(GPid pid, GChildWatchFunc function_, void* data) c_g_child_watch_add; ///
-  uint function(int priority, GPid pid, GChildWatchFunc function_, void* data, GDestroyNotify notify) c_g_child_watch_add_full; ///
-  GSource* function(GPid pid) c_g_child_watch_source_new; ///
-  int function(const(char)* filename, int mode) c_g_chmod; ///
-  void function(GError** _err) c_g_clear_error; ///
-  void function(uint* tagPtr, GClearHandleFunc clearFunc) c_g_clear_handle_id; ///
-  void function(GList** listPtr, GDestroyNotify destroy) c_g_clear_list; ///
-  void function(void** pp, GDestroyNotify destroy) c_g_clear_pointer; ///
-  void function(GSList** slistPtr, GDestroyNotify destroy) c_g_clear_slist; ///
-  gboolean function(int fd, GError** _err) c_g_close; ///
-  char* function(GChecksumType checksumType, GBytes* data) c_g_compute_checksum_for_bytes; ///
-  char* function(GChecksumType checksumType, const(ubyte)* data, size_t length) c_g_compute_checksum_for_data; ///
-  char* function(GChecksumType checksumType, const(char)* str, ptrdiff_t length) c_g_compute_checksum_for_string; ///
-  char* function(GChecksumType digestType, GBytes* key, GBytes* data) c_g_compute_hmac_for_bytes; ///
-  char* function(GChecksumType digestType, const(ubyte)* key, size_t keyLen, const(ubyte)* data, size_t length) c_g_compute_hmac_for_data; ///
-  char* function(GChecksumType digestType, const(ubyte)* key, size_t keyLen, const(char)* str, ptrdiff_t length) c_g_compute_hmac_for_string; ///
-  ubyte* function(const(ubyte)* str, ptrdiff_t len, const(char)* toCodeset, const(char)* fromCodeset, size_t* bytesRead, size_t* bytesWritten, GError** _err) c_g_convert; ///
-  GQuark function() c_g_convert_error_quark; ///
-  ubyte* function(const(ubyte)* str, ptrdiff_t len, const(char)* toCodeset, const(char)* fromCodeset, const(char)* fallback, size_t* bytesRead, size_t* bytesWritten, GError** _err) c_g_convert_with_fallback; ///
-  ubyte* function(const(ubyte)* str, ptrdiff_t len, GIConv converter, size_t* bytesRead, size_t* bytesWritten, GError** _err) c_g_convert_with_iconv; ///
-  int function(const(char)* filename, int mode) c_g_creat; ///
-  void function(GData** datalist) c_g_datalist_clear; ///
-  void function(GData** datalist, GDataForeachFunc func, void* userData) c_g_datalist_foreach; ///
-  void* function(GData** datalist, const(char)* key) c_g_datalist_get_data; ///
-  uint function(GData** datalist) c_g_datalist_get_flags; ///
-  void* function(GData** datalist, GQuark keyId, GDuplicateFunc dupFunc, void* userData) c_g_datalist_id_dup_data; ///
-  void* function(GData** datalist, GQuark keyId) c_g_datalist_id_get_data; ///
-  void function(GData** datalist, GQuark* keys, size_t nKeys) c_g_datalist_id_remove_multiple; ///
-  void* function(GData** datalist, GQuark keyId) c_g_datalist_id_remove_no_notify; ///
-  gboolean function(GData** datalist, GQuark keyId, void* oldval, void* newval, GDestroyNotify destroy, GDestroyNotify* oldDestroy) c_g_datalist_id_replace_data; ///
-  void function(GData** datalist, GQuark keyId, void* data, GDestroyNotify destroyFunc) c_g_datalist_id_set_data_full; ///
-  void function(GData** datalist) c_g_datalist_init; ///
-  void function(GData** datalist, uint flags) c_g_datalist_set_flags; ///
-  void function(GData** datalist, uint flags) c_g_datalist_unset_flags; ///
-  void function(const(void)* datasetLocation) c_g_dataset_destroy; ///
-  void function(const(void)* datasetLocation, GDataForeachFunc func, void* userData) c_g_dataset_foreach; ///
-  void* function(const(void)* datasetLocation, GQuark keyId) c_g_dataset_id_get_data; ///
-  void* function(const(void)* datasetLocation, GQuark keyId) c_g_dataset_id_remove_no_notify; ///
-  void function(const(void)* datasetLocation, GQuark keyId, void* data, GDestroyNotify destroyFunc) c_g_dataset_id_set_data_full; ///
-  const(char)* function(const(char)* domain, const(char)* msgid, int category) c_g_dcgettext; ///
-  const(char)* function(const(char)* domain, const(char)* msgid) c_g_dgettext; ///
-  gboolean function(const(void)* v1, const(void)* v2) c_g_direct_equal; ///
-  uint function(const(void)* v) c_g_direct_hash; ///
-  const(char)* function(const(char)* domain, const(char)* msgid, const(char)* msgidPlural, gulong n) c_g_dngettext; ///
-  gboolean function(const(void)* v1, const(void)* v2) c_g_double_equal; ///
-  uint function(const(void)* v) c_g_double_hash; ///
-  const(char)* function(const(char)* domain, const(char)* msgctxtid, size_t msgidoffset) c_g_dpgettext; ///
-  const(char)* function(const(char)* domain, const(char)* context, const(char)* msgid) c_g_dpgettext2; ///
-  const(char)* function(char** envp, const(char)* variable) c_g_environ_getenv; ///
-  char** function(char** envp, const(char)* variable, const(char)* value, gboolean overwrite) c_g_environ_setenv; ///
-  char** function(char** envp, const(char)* variable) c_g_environ_unsetenv; ///
-  GFileError function(int errNo) c_g_file_error_from_errno; ///
-  GQuark function() c_g_file_error_quark; ///
-  gboolean function(const(char)* filename, ubyte** contents, size_t* length, GError** _err) c_g_file_get_contents; ///
-  int function(const(char)* tmpl, char** nameUsed, GError** _err) c_g_file_open_tmp; ///
-  char* function(const(char)* filename, GError** _err) c_g_file_read_link; ///
-  gboolean function(const(char)* filename, const(ubyte)* contents, ptrdiff_t length, GError** _err) c_g_file_set_contents; ///
-  gboolean function(const(char)* filename, const(ubyte)* contents, ptrdiff_t length, GFileSetContentsFlags flags, int mode, GError** _err) c_g_file_set_contents_full; ///
-  gboolean function(const(char)* filename, GFileTest test) c_g_file_test; ///
-  char* function(const(char)* filename) c_g_filename_display_basename; ///
-  char* function(const(char)* filename) c_g_filename_display_name; ///
-  char* function(const(char)* uri, char** hostname, GError** _err) c_g_filename_from_uri; ///
-  ubyte* function(const(ubyte)* utf8string, ptrdiff_t len, size_t* bytesRead, size_t* bytesWritten, GError** _err) c_g_filename_from_utf8; ///
-  char* function(const(char)* filename, const(char)* hostname, GError** _err) c_g_filename_to_uri; ///
-  char* function(const(ubyte)* opsysstring, ptrdiff_t len, size_t* bytesRead, size_t* bytesWritten, GError** _err) c_g_filename_to_utf8; ///
-  char* function(const(char)* program) c_g_find_program_in_path; ///
-  void* function(const(char)* filename, const(char)* mode) c_g_fopen; ///
-  char* function(ulong size) c_g_format_size; ///
-  char* function(long size) c_g_format_size_for_display; ///
-  char* function(ulong size, GFormatSizeFlags flags) c_g_format_size_full; ///
-  int function(void* file, const(char)* format,  ...) c_g_fprintf; ///
-  void function(void* mem) c_g_free; ///
-  void function(void* mem, size_t size) c_g_free_sized; ///
-  void* function(const(char)* filename, const(char)* mode, void* stream) c_g_freopen; ///
-  int function(int fd) c_g_fsync; ///
-  const(char)* function() c_g_get_application_name; ///
-  gboolean function(const(char*)* charset) c_g_get_charset; ///
-  char* function() c_g_get_codeset; ///
-  gboolean function(const(char*)* charset) c_g_get_console_charset; ///
-  char* function() c_g_get_current_dir; ///
-  void function(GTimeVal* result) c_g_get_current_time; ///
-  char** function() c_g_get_environ; ///
-  gboolean function(const(char**)* filenameCharsets) c_g_get_filename_charsets; ///
-  const(char)* function() c_g_get_home_dir; ///
-  const(char)* function() c_g_get_host_name; ///
-  const(char*)* function() c_g_get_language_names; ///
-  const(char*)* function(const(char)* categoryName) c_g_get_language_names_with_category; ///
-  char** function(const(char)* locale) c_g_get_locale_variants; ///
-  long function() c_g_get_monotonic_time; ///
-  ulong function() c_g_get_monotonic_time_ns; ///
-  uint function() c_g_get_num_processors; ///
-  char* function(const(char)* keyName) c_g_get_os_info; ///
-  const(char)* function() c_g_get_prgname; ///
-  const(char)* function() c_g_get_real_name; ///
-  long function() c_g_get_real_time; ///
-  const(char*)* function() c_g_get_system_config_dirs; ///
-  const(char*)* function() c_g_get_system_data_dirs; ///
-  const(char)* function() c_g_get_tmp_dir; ///
-  const(char)* function() c_g_get_user_cache_dir; ///
-  const(char)* function() c_g_get_user_config_dir; ///
-  const(char)* function() c_g_get_user_data_dir; ///
-  const(char)* function() c_g_get_user_name; ///
-  const(char)* function() c_g_get_user_runtime_dir; ///
-  const(char)* function(GUserDirectory directory) c_g_get_user_special_dir; ///
-  const(char)* function() c_g_get_user_state_dir; ///
-  const(char)* function(const(char)* variable) c_g_getenv; ///
-  gboolean function(const(char)* hostname) c_g_hostname_is_ascii_encoded; ///
-  gboolean function(const(char)* hostname) c_g_hostname_is_ip_address; ///
-  gboolean function(const(char)* hostname) c_g_hostname_is_non_ascii; ///
-  char* function(const(char)* hostname) c_g_hostname_to_ascii; ///
-  char* function(const(char)* hostname) c_g_hostname_to_unicode; ///
-  size_t function(GIConv converter, char** inbuf, size_t* inbytesLeft, char** outbuf, size_t* outbytesLeft) c_g_iconv; ///
-  uint function(GSourceFunc function_, void* data) c_g_idle_add; ///
-  uint function(int priority, GSourceFunc function_, void* data, GDestroyNotify notify) c_g_idle_add_full; ///
-  uint function(GSourceOnceFunc function_, void* data) c_g_idle_add_once; ///
-  gboolean function(void* data) c_g_idle_remove_by_data; ///
-  GSource* function() c_g_idle_source_new; ///
-  gboolean function(const(void)* v1, const(void)* v2) c_g_int64_equal; ///
-  uint function(const(void)* v) c_g_int64_hash; ///
-  gboolean function(const(void)* v1, const(void)* v2) c_g_int_equal; ///
-  uint function(const(void)* v) c_g_int_hash; ///
-  const(char)* function(const(char)* string_) c_g_intern_static_string; ///
-  const(char)* function(const(char)* string_) c_g_intern_string; ///
-  uint function(GIOChannel* channel, GIOCondition condition, GIOFunc func, void* userData) c_g_io_add_watch; ///
-  uint function(GIOChannel* channel, int priority, GIOCondition condition, GIOFunc func, void* userData, GDestroyNotify notify) c_g_io_add_watch_full; ///
-  GSource* function(GIOChannel* channel, GIOCondition condition) c_g_io_create_watch; ///
-  char** function() c_g_listenv; ///
-  ubyte* function(const(ubyte)* utf8string, ptrdiff_t len, size_t* bytesRead, size_t* bytesWritten, GError** _err) c_g_locale_from_utf8; ///
-  char* function(const(ubyte)* opsysstring, ptrdiff_t len, size_t* bytesRead, size_t* bytesWritten, GError** _err) c_g_locale_to_utf8; ///
-  void function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* format,  ...) c_g_log; ///
-  void function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* message, void* unusedData) c_g_log_default_handler; ///
-  GLogLevelFlags function() c_g_log_get_always_fatal; ///
-  gboolean function() c_g_log_get_debug_enabled; ///
-  void function(const(char)* logDomain, uint handlerId) c_g_log_remove_handler; ///
-  GLogLevelFlags function(GLogLevelFlags fatalMask) c_g_log_set_always_fatal; ///
-  void function(gboolean enabled) c_g_log_set_debug_enabled; ///
-  GLogFunc function(GLogFunc logFunc, void* userData) c_g_log_set_default_handler; ///
-  GLogLevelFlags function(const(char)* logDomain, GLogLevelFlags fatalMask) c_g_log_set_fatal_mask; ///
-  uint function(const(char)* logDomain, GLogLevelFlags logLevels, GLogFunc logFunc, void* userData) c_g_log_set_handler; ///
-  uint function(const(char)* logDomain, GLogLevelFlags logLevels, GLogFunc logFunc, void* userData, GDestroyNotify destroy) c_g_log_set_handler_full; ///
-  void function(GLogWriterFunc func, void* userData, GDestroyNotify userDataFree) c_g_log_set_writer_func; ///
-  void function(const(char)* logDomain, GLogLevelFlags logLevel,  ...) c_g_log_structured; ///
-  void function(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields) c_g_log_structured_array; ///
-  void function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* file, const(char)* line, const(char)* func, const(char)* messageFormat,  ...) c_g_log_structured_standard; ///
-  void function(const(char)* logDomain, GLogLevelFlags logLevel, GVariant* fields) c_g_log_variant; ///
-  GLogWriterOutput function(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields, void* userData) c_g_log_writer_default; ///
-  void function(const(char*)* domains) c_g_log_writer_default_set_debug_domains; ///
-  void function(gboolean useStderr) c_g_log_writer_default_set_use_stderr; ///
-  gboolean function(GLogLevelFlags logLevel, const(char)* logDomain) c_g_log_writer_default_would_drop; ///
-  char* function(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields, gboolean useColor) c_g_log_writer_format_fields; ///
-  gboolean function(int outputFd) c_g_log_writer_is_journald; ///
-  GLogWriterOutput function(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields, void* userData) c_g_log_writer_journald; ///
-  GLogWriterOutput function(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields, void* userData) c_g_log_writer_standard_streams; ///
-  gboolean function(int outputFd) c_g_log_writer_supports_color; ///
-  GLogWriterOutput function(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields, void* userData) c_g_log_writer_syslog; ///
-  void function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* format, void* args) c_g_logv; ///
-  int function(const(char)* filename, GStatBuf* buf) c_g_lstat; ///
-  GSource* function() c_g_main_current_source; ///
-  int function() c_g_main_depth; ///
-  void* function(size_t nBytes) c_g_malloc; ///
-  void* function(size_t nBytes) c_g_malloc0; ///
-  void* function(size_t nBlocks, size_t nBlockBytes) c_g_malloc0_n; ///
-  void* function(size_t nBlocks, size_t nBlockBytes) c_g_malloc_n; ///
-  gboolean function(const(char)* elementName, const(char*)* attributeNames, const(char*)* attributeValues, GError** error, GMarkupCollectType firstType, const(char)* firstAttr,  ...) c_g_markup_collect_attributes; ///
-  GQuark function() c_g_markup_error_quark; ///
-  char* function(const(char)* text, ptrdiff_t length) c_g_markup_escape_text; ///
-  char* function(const(char)* format,  ...) c_g_markup_printf_escaped; ///
-  char* function(const(char)* format, void* args) c_g_markup_vprintf_escaped; ///
-  gboolean function() c_g_mem_is_system_malloc; ///
-  void function() c_g_mem_profile; ///
-  void function(GMemVTable* vtable) c_g_mem_set_vtable; ///
-  void* function(const(void)* mem, uint byteSize) c_g_memdup; ///
-  void* function(const(void)* mem, size_t byteSize) c_g_memdup2; ///
-  int function(const(char)* filename, int mode) c_g_mkdir; ///
-  int function(const(char)* pathname, int mode) c_g_mkdir_with_parents; ///
-  char* function(char* tmpl) c_g_mkdtemp; ///
-  char* function(char* tmpl, int mode) c_g_mkdtemp_full; ///
-  int function(char* tmpl) c_g_mkstemp; ///
-  int function(char* tmpl, int flags, int mode) c_g_mkstemp_full; ///
-  void function(void** nullifyLocation) c_g_nullify_pointer; ///
-  GQuark function() c_g_number_parser_error_quark; ///
-  void function(const(char)* prgName) c_g_on_error_query; ///
-  void function(const(char)* prgName) c_g_on_error_stack_trace; ///
-  int function(const(char)* filename, int flags, int mode) c_g_open; ///
-  GQuark function() c_g_option_error_quark; ///
-  uint function(const(char)* string_, const(GDebugKey)* keys, uint nkeys) c_g_parse_debug_string; ///
-  char* function(const(char)* fileName) c_g_path_get_basename; ///
-  char* function(const(char)* fileName) c_g_path_get_dirname; ///
-  gboolean function(const(char)* fileName) c_g_path_is_absolute; ///
-  const(char)* function(const(char)* fileName) c_g_path_skip_root; ///
-  gboolean function(GPatternSpec* pspec, uint stringLength, const(char)* string_, const(char)* stringReversed) c_g_pattern_match; ///
-  gboolean function(const(char)* pattern, const(char)* string_) c_g_pattern_match_simple; ///
-  gboolean function(GPatternSpec* pspec, const(char)* string_) c_g_pattern_match_string; ///
-  void function(void* address, int lockBit) c_g_pointer_bit_lock; ///
-  void function(void* address, uint lockBit, size_t* outPtr) c_g_pointer_bit_lock_and_get; ///
-  void* function(void* ptr, uint lockBit, gboolean set, size_t preserveMask, void* preservePtr) c_g_pointer_bit_lock_mask_ptr; ///
-  gboolean function(void* address, int lockBit) c_g_pointer_bit_trylock; ///
-  void function(void* address, int lockBit) c_g_pointer_bit_unlock; ///
-  void function(void* address, uint lockBit, void* ptr, size_t preserveMask) c_g_pointer_bit_unlock_and_set; ///
-  int function(GPollFD* fds, uint nfds, int timeout) c_g_poll; ///
-  void function(GError** err, const(char)* format,  ...) c_g_prefix_error; ///
-  void function(GError** err, const(char)* prefix) c_g_prefix_error_literal; ///
-  void function(const(char)* format,  ...) c_g_print; ///
-  void function(const(char)* format,  ...) c_g_printerr; ///
-  int function(const(char)* format,  ...) c_g_printf; ///
-  size_t function(const(char)* format, void* args) c_g_printf_string_upper_bound; ///
-  void function(GError** dest, GError* src) c_g_propagate_error; ///
-  void function(GError** dest, GError* src, const(char)* format,  ...) c_g_propagate_prefixed_error; ///
-  void function(const(void)* pbase, int totalElems, size_t size, GCompareDataFunc compareFunc, void* userData) c_g_qsort_with_data; ///
-  GQuark function(const(char)* string_) c_g_quark_from_static_string; ///
-  GQuark function(const(char)* string_) c_g_quark_from_string; ///
-  const(char)* function(GQuark quark) c_g_quark_to_string; ///
-  GQuark function(const(char)* string_) c_g_quark_try_string; ///
-  double function() c_g_random_double; ///
-  double function(double begin, double end) c_g_random_double_range; ///
-  uint function() c_g_random_int; ///
-  int function(int begin, int end) c_g_random_int_range; ///
-  void function(uint seed) c_g_random_set_seed; ///
-  void* function(void* memBlock) c_g_rc_box_acquire; ///
-  void* function(size_t blockSize) c_g_rc_box_alloc; ///
-  void* function(size_t blockSize) c_g_rc_box_alloc0; ///
-  void* function(size_t blockSize, const(void)* memBlock) c_g_rc_box_dup; ///
-  size_t function(void* memBlock) c_g_rc_box_get_size; ///
-  void function(void* memBlock) c_g_rc_box_release; ///
-  void function(void* memBlock, GDestroyNotify clearFunc) c_g_rc_box_release_full; ///
-  void* function(void* mem, size_t nBytes) c_g_realloc; ///
-  void* function(void* mem, size_t nBlocks, size_t nBlockBytes) c_g_realloc_n; ///
-  gboolean function(int* rc, int val) c_g_ref_count_compare; ///
-  gboolean function(int* rc) c_g_ref_count_dec; ///
-  void function(int* rc) c_g_ref_count_inc; ///
-  void function(int* rc) c_g_ref_count_init; ///
-  char* function(char* str) c_g_ref_string_acquire; ///
-  gboolean function(const(char)* str1, const(char)* str2) c_g_ref_string_equal; ///
-  size_t function(char* str) c_g_ref_string_length; ///
-  char* function(const(char)* str) c_g_ref_string_new; ///
-  char* function(const(char)* str) c_g_ref_string_new_intern; ///
-  char* function(const(char)* str, ptrdiff_t len) c_g_ref_string_new_len; ///
-  void function(char* str) c_g_ref_string_release; ///
-  void function() c_g_reload_user_special_dirs_cache; ///
-  int function(const(char)* filename) c_g_remove; ///
-  int function(const(char)* oldfilename, const(char)* newfilename) c_g_rename; ///
-  void function(const(char)* logDomain, const(char)* prettyFunction, const(char)* expression) c_g_return_if_fail_warning; ///
-  int function(const(char)* filename) c_g_rmdir; ///
-  void function(const(char)* applicationName) c_g_set_application_name; ///
-  void function(GError** err, GQuark domain, int code, const(char)* format,  ...) c_g_set_error; ///
-  void function(GError** err, GQuark domain, int code, const(char)* message) c_g_set_error_literal; ///
-  void function(const(char)* prgname) c_g_set_prgname; ///
-  GPrintFunc function(GPrintFunc func) c_g_set_print_handler; ///
-  GPrintFunc function(GPrintFunc func) c_g_set_printerr_handler; ///
-  gboolean function(const(char)* variable, const(char)* value, gboolean overwrite) c_g_setenv; ///
-  GQuark function() c_g_shell_error_quark; ///
-  gboolean function(const(char)* commandLine, int* argcp, char*** argvp, GError** _err) c_g_shell_parse_argv; ///
-  char* function(const(char)* unquotedString) c_g_shell_quote; ///
-  char* function(const(char)* quotedString, GError** _err) c_g_shell_unquote; ///
-  void* function(size_t blockSize) c_g_slice_alloc; ///
-  void* function(size_t blockSize) c_g_slice_alloc0; ///
-  void* function(size_t blockSize, const(void)* memBlock) c_g_slice_copy; ///
-  void function(size_t blockSize, void* memBlock) c_g_slice_free1; ///
-  void function(size_t blockSize, void* memChain, size_t nextOffset) c_g_slice_free_chain_with_offset; ///
-  long function(GSliceConfig ckey) c_g_slice_get_config; ///
-  const(long)* function(GSliceConfig ckey, long address, uint* nValues) c_g_slice_get_config_state; ///
-  void function(GSliceConfig ckey, long value) c_g_slice_set_config; ///
-  int function(char* string_, gulong n, const(char)* format,  ...) c_g_snprintf; ///
-  void function(void* array, size_t nElements, size_t elementSize, GCompareDataFunc compareFunc, void* userData) c_g_sort_array; ///
-  uint function(uint num) c_g_spaced_primes_closest; ///
-  gboolean function(const(char)* workingDirectory, char** argv, char** envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, GPid* childPid, GError** _err) c_g_spawn_async; ///
-  gboolean function(const(char)* workingDirectory, char** argv, char** envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, GPid* childPid, int stdinFd, int stdoutFd, int stderrFd, GError** _err) c_g_spawn_async_with_fds; ///
-  gboolean function(const(char)* workingDirectory, char** argv, char** envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, GPid* childPid, int* standardInput, int* standardOutput, int* standardError, GError** _err) c_g_spawn_async_with_pipes; ///
-  gboolean function(const(char)* workingDirectory, const(char*)* argv, const(char*)* envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, int stdinFd, int stdoutFd, int stderrFd, const(int)* sourceFds, const(int)* targetFds, size_t nFds, GPid* childPidOut, int* stdinPipeOut, int* stdoutPipeOut, int* stderrPipeOut, GError** _err) c_g_spawn_async_with_pipes_and_fds; ///
-  gboolean function(int waitStatus, GError** _err) c_g_spawn_check_exit_status; ///
-  gboolean function(int waitStatus, GError** _err) c_g_spawn_check_wait_status; ///
-  void function(GPid pid) c_g_spawn_close_pid; ///
-  gboolean function(const(char)* commandLine, GError** _err) c_g_spawn_command_line_async; ///
-  gboolean function(const(char)* commandLine, char** standardOutput, char** standardError, int* waitStatus, GError** _err) c_g_spawn_command_line_sync; ///
-  GQuark function() c_g_spawn_error_quark; ///
-  GQuark function() c_g_spawn_exit_error_quark; ///
-  gboolean function(const(char)* workingDirectory, char** argv, char** envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, char** standardOutput, char** standardError, int* waitStatus, GError** _err) c_g_spawn_sync; ///
-  int function(char* string_, const(char)* format,  ...) c_g_sprintf; ///
-  int function(const(char)* filename, GStatBuf* buf) c_g_stat; ///
-  char* function(char* dest, const(char)* src) c_g_stpcpy; ///
-  gboolean function(const(void)* v1, const(void)* v2) c_g_str_equal; ///
-  gboolean function(const(char)* str, const(char)* prefix) c_g_str_has_prefix; ///
-  gboolean function(const(char)* str, const(char)* suffix) c_g_str_has_suffix; ///
-  uint function(const(void)* v) c_g_str_hash; ///
-  gboolean function(const(char)* str) c_g_str_is_ascii; ///
-  gboolean function(const(char)* searchTerm, const(char)* potentialHit, gboolean acceptAlternates) c_g_str_match_string; ///
-  char* function(const(char)* str, const(char)* fromLocale) c_g_str_to_ascii; ///
-  char** function(const(char)* string_, const(char)* translitLocale, char*** asciiAlternates) c_g_str_tokenize_and_fold; ///
-  char* function(char* string_, const(char)* validChars, char substitutor) c_g_strcanon; ///
-  int function(const(char)* s1, const(char)* s2) c_g_strcasecmp; ///
-  char* function(char* string_) c_g_strchomp; ///
-  char* function(char* string_) c_g_strchug; ///
-  int function(const(char)* str1, const(char)* str2) c_g_strcmp0; ///
-  char* function(const(char)* source) c_g_strcompress; ///
-  char* function(const(char)* string1,  ...) c_g_strconcat; ///
-  char* function(char* string_, const(char)* delimiters, char newDelimiter) c_g_strdelimit; ///
-  char* function(char* string_) c_g_strdown; ///
-  char* function(const(char)* str) c_g_strdup; ///
-  char* function(const(char)* format,  ...) c_g_strdup_printf; ///
-  char* function(const(char)* format, void* args) c_g_strdup_vprintf; ///
-  char** function(char** strArray) c_g_strdupv; ///
-  const(char)* function(int errnum) c_g_strerror; ///
-  char* function(const(char)* source, const(char)* exceptions) c_g_strescape; ///
-  void function(char** strArray) c_g_strfreev; ///
-  const(char)* function(const(char)* msgid, const(char)* msgval) c_g_strip_context; ///
-  char* function(const(char)* separator,  ...) c_g_strjoin; ///
-  char* function(const(char)* separator, char** strArray) c_g_strjoinv; ///
-  size_t function(char* dest, const(char)* src, size_t destSize) c_g_strlcat; ///
-  size_t function(char* dest, const(char)* src, size_t destSize) c_g_strlcpy; ///
-  int function(const(char)* s1, const(char)* s2, uint n) c_g_strncasecmp; ///
-  char* function(const(char)* str, size_t n) c_g_strndup; ///
-  char* function(size_t length, char fillChar) c_g_strnfill; ///
-  char* function(char* string_) c_g_strreverse; ///
-  char* function(const(char)* haystack, const(char)* needle) c_g_strrstr; ///
-  char* function(const(char)* haystack, ptrdiff_t haystackLen, const(char)* needle) c_g_strrstr_len; ///
-  const(char)* function(int signum) c_g_strsignal; ///
-  char** function(const(char)* string_, const(char)* delimiter, int maxTokens) c_g_strsplit; ///
-  char** function(const(char)* string_, const(char)* delimiters, int maxTokens) c_g_strsplit_set; ///
-  char* function(const(char)* haystack, ptrdiff_t haystackLen, const(char)* needle) c_g_strstr_len; ///
-  double function(const(char)* nptr, char** endptr) c_g_strtod; ///
-  char* function(char* string_) c_g_strup; ///
-  gboolean function(const(char*)* strv, const(char)* str) c_g_strv_contains; ///
-  gboolean function(const(char*)* strv1, const(char*)* strv2) c_g_strv_equal; ///
-  GType function() c_g_strv_get_type; ///
-  uint function(char** strArray) c_g_strv_length; ///
-  void function(const(char)* testpath, const(void)* testData, GTestDataFunc testFunc) c_g_test_add_data_func; ///
-  void function(const(char)* testpath, void* testData, GTestDataFunc testFunc, GDestroyNotify dataFreeFunc) c_g_test_add_data_func_full; ///
-  void function(const(char)* testpath, GTestFunc testFunc) c_g_test_add_func; ///
-  void function(const(char)* testpath, size_t dataSize, const(void)* testData, GTestFixtureFunc dataSetup, GTestFixtureFunc dataTest, GTestFixtureFunc dataTeardown) c_g_test_add_vtable; ///
-  void function(const(char)* domain, const(char)* file, int line, const(char)* func) c_g_test_assert_expected_messages_internal; ///
-  void function(const(char)* bugUriSnippet) c_g_test_bug; ///
-  void function(const(char)* uriPattern) c_g_test_bug_base; ///
-  char* function(GTestFileType fileType, const(char)* firstPath,  ...) c_g_test_build_filename; ///
-  GTestCase* function(const(char)* testName, size_t dataSize, const(void)* testData, GTestFixtureFunc dataSetup, GTestFixtureFunc dataTest, GTestFixtureFunc dataTeardown) c_g_test_create_case; ///
-  GTestSuite* function(const(char)* suiteName) c_g_test_create_suite; ///
-  void function() c_g_test_disable_crash_reporting; ///
-  void function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* pattern) c_g_test_expect_message; ///
-  void function() c_g_test_fail; ///
-  void function(const(char)* format,  ...) c_g_test_fail_printf; ///
-  gboolean function() c_g_test_failed; ///
-  const(char)* function(GTestFileType fileType) c_g_test_get_dir; ///
-  const(char)* function(GTestFileType fileType, const(char)* firstPath,  ...) c_g_test_get_filename; ///
-  const(char)* function() c_g_test_get_path; ///
-  GTestSuite* function() c_g_test_get_root; ///
-  void function(const(char)* msg) c_g_test_incomplete; ///
-  void function(const(char)* format,  ...) c_g_test_incomplete_printf; ///
-  void function(int* argc, char*** argv,  ...) c_g_test_init; ///
-  void function(GTestLogFatalFunc logFunc, void* userData) c_g_test_log_set_fatal_handler; ///
-  const(char)* function(GTestLogType logType) c_g_test_log_type_name; ///
-  void function(double maximizedQuantity, const(char)* format,  ...) c_g_test_maximized_result; ///
-  void function(const(char)* format,  ...) c_g_test_message; ///
-  void function(double minimizedQuantity, const(char)* format,  ...) c_g_test_minimized_result; ///
-  void function(GDestroyNotify destroyFunc, void* destroyData) c_g_test_queue_destroy; ///
-  void function(void* gfreePointer) c_g_test_queue_free; ///
-  double function() c_g_test_rand_double; ///
-  double function(double rangeStart, double rangeEnd) c_g_test_rand_double_range; ///
-  int function() c_g_test_rand_int; ///
-  int function(int begin, int end) c_g_test_rand_int_range; ///
-  int function() c_g_test_run; ///
-  int function(GTestSuite* suite) c_g_test_run_suite; ///
-  void function() c_g_test_set_nonfatal_assertions; ///
-  void function(const(char)* msg) c_g_test_skip; ///
-  void function(const(char)* format,  ...) c_g_test_skip_printf; ///
-  gboolean function() c_g_test_subprocess; ///
-  void function(const(char)* summary) c_g_test_summary; ///
-  double function() c_g_test_timer_elapsed; ///
-  double function() c_g_test_timer_last; ///
-  void function() c_g_test_timer_start; ///
-  void function(const(char)* domain, const(char)* file, int line, const(char)* func, ulong assertionFlags, const(char)* pattern) c_g_test_trap_assertions; ///
-  gboolean function(ulong usecTimeout, GTestTrapFlags testTrapFlags) c_g_test_trap_fork; ///
-  gboolean function() c_g_test_trap_has_passed; ///
-  gboolean function() c_g_test_trap_has_skipped; ///
-  gboolean function() c_g_test_trap_reached_timeout; ///
-  void function(const(char)* testPath, ulong usecTimeout, GTestSubprocessFlags testFlags) c_g_test_trap_subprocess; ///
-  void function(const(char)* testPath, const(char*)* envp, ulong usecTimeout, GTestSubprocessFlags testFlags) c_g_test_trap_subprocess_with_envp; ///
-  uint function(uint interval, GSourceFunc function_, void* data) c_g_timeout_add; ///
-  uint function(int priority, uint interval, GSourceFunc function_, void* data, GDestroyNotify notify) c_g_timeout_add_full; ///
-  uint function(uint interval, GSourceOnceFunc function_, void* data) c_g_timeout_add_once; ///
-  uint function(uint interval, GSourceFunc function_, void* data) c_g_timeout_add_seconds; ///
-  uint function(int priority, uint interval, GSourceFunc function_, void* data, GDestroyNotify notify) c_g_timeout_add_seconds_full; ///
-  uint function(uint interval, GSourceOnceFunc function_, void* data) c_g_timeout_add_seconds_once; ///
-  GSource* function(uint interval) c_g_timeout_source_new; ///
-  GSource* function(uint interval) c_g_timeout_source_new_seconds; ///
-  void* function(size_t nBytes) c_g_try_malloc; ///
-  void* function(size_t nBytes) c_g_try_malloc0; ///
-  void* function(size_t nBlocks, size_t nBlockBytes) c_g_try_malloc0_n; ///
-  void* function(size_t nBlocks, size_t nBlockBytes) c_g_try_malloc_n; ///
-  void* function(void* mem, size_t nBytes) c_g_try_realloc; ///
-  void* function(void* mem, size_t nBlocks, size_t nBlockBytes) c_g_try_realloc_n; ///
-  ushort* function(const(dchar)* str, glong len, glong* itemsRead, glong* itemsWritten, GError** _err) c_g_ucs4_to_utf16; ///
-  char* function(const(dchar)* str, glong len, glong* itemsRead, glong* itemsWritten, GError** _err) c_g_ucs4_to_utf8; ///
-  GUnicodeBreakType function(dchar c) c_g_unichar_break_type; ///
-  int function(dchar uc) c_g_unichar_combining_class; ///
-  gboolean function(dchar a, dchar b, dchar* ch) c_g_unichar_compose; ///
-  gboolean function(dchar ch, dchar* a, dchar* b) c_g_unichar_decompose; ///
-  int function(dchar c) c_g_unichar_digit_value; ///
-  size_t function(dchar ch, gboolean compat, dchar* result, size_t resultLen) c_g_unichar_fully_decompose; ///
-  gboolean function(dchar ch, dchar* mirroredCh) c_g_unichar_get_mirror_char; ///
-  GUnicodeScript function(dchar ch) c_g_unichar_get_script; ///
-  gboolean function(dchar c) c_g_unichar_isalnum; ///
-  gboolean function(dchar c) c_g_unichar_isalpha; ///
-  gboolean function(dchar c) c_g_unichar_iscntrl; ///
-  gboolean function(dchar c) c_g_unichar_isdefined; ///
-  gboolean function(dchar c) c_g_unichar_isdigit; ///
-  gboolean function(dchar c) c_g_unichar_isgraph; ///
-  gboolean function(dchar c) c_g_unichar_islower; ///
-  gboolean function(dchar c) c_g_unichar_ismark; ///
-  gboolean function(dchar c) c_g_unichar_isprint; ///
-  gboolean function(dchar c) c_g_unichar_ispunct; ///
-  gboolean function(dchar c) c_g_unichar_isspace; ///
-  gboolean function(dchar c) c_g_unichar_istitle; ///
-  gboolean function(dchar c) c_g_unichar_isupper; ///
-  gboolean function(dchar c) c_g_unichar_iswide; ///
-  gboolean function(dchar c) c_g_unichar_iswide_cjk; ///
-  gboolean function(dchar c) c_g_unichar_isxdigit; ///
-  gboolean function(dchar c) c_g_unichar_iszerowidth; ///
-  int function(dchar c, char* outbuf) c_g_unichar_to_utf8; ///
-  dchar function(dchar c) c_g_unichar_tolower; ///
-  dchar function(dchar c) c_g_unichar_totitle; ///
-  dchar function(dchar c) c_g_unichar_toupper; ///
-  GUnicodeType function(dchar c) c_g_unichar_type; ///
-  gboolean function(dchar ch) c_g_unichar_validate; ///
-  int function(dchar c) c_g_unichar_xdigit_value; ///
-  dchar* function(dchar ch, size_t* resultLen) c_g_unicode_canonical_decomposition; ///
-  void function(dchar* string_, size_t len) c_g_unicode_canonical_ordering; ///
-  int function(const(char)* filename) c_g_unlink; ///
-  void function(const(char)* variable) c_g_unsetenv; ///
-  void function(gulong microseconds) c_g_usleep; ///
-  dchar* function(const(ushort)* str, glong len, glong* itemsRead, glong* itemsWritten, GError** _err) c_g_utf16_to_ucs4; ///
-  char* function(const(ushort)* str, glong len, glong* itemsRead, glong* itemsWritten, GError** _err) c_g_utf16_to_utf8; ///
-  char* function(const(char)* str, ptrdiff_t len) c_g_utf8_casefold; ///
-  int function(const(char)* str1, const(char)* str2) c_g_utf8_collate; ///
-  char* function(const(char)* str, ptrdiff_t len) c_g_utf8_collate_key; ///
-  char* function(const(char)* str, ptrdiff_t len) c_g_utf8_collate_key_for_filename; ///
-  char* function(const(char)* p, const(char)* end) c_g_utf8_find_next_char; ///
-  char* function(const(char)* str, const(char)* p) c_g_utf8_find_prev_char; ///
-  dchar function(const(char)* p) c_g_utf8_get_char; ///
-  dchar function(const(char)* p, ptrdiff_t maxLen) c_g_utf8_get_char_validated; ///
-  char* function(const(char)* str, ptrdiff_t len) c_g_utf8_make_valid; ///
-  char* function(const(char)* str, ptrdiff_t len, GNormalizeMode mode) c_g_utf8_normalize; ///
-  char* function(const(char)* str, glong offset) c_g_utf8_offset_to_pointer; ///
-  glong function(const(char)* str, const(char)* pos) c_g_utf8_pointer_to_offset; ///
-  char* function(const(char)* p) c_g_utf8_prev_char; ///
-  char* function(const(char)* p, ptrdiff_t len, dchar c) c_g_utf8_strchr; ///
-  char* function(const(char)* str, ptrdiff_t len) c_g_utf8_strdown; ///
-  glong function(const(char)* p, ptrdiff_t max) c_g_utf8_strlen; ///
-  char* function(char* dest, const(char)* src, size_t n) c_g_utf8_strncpy; ///
-  char* function(const(char)* p, ptrdiff_t len, dchar c) c_g_utf8_strrchr; ///
-  char* function(const(char)* str, ptrdiff_t len) c_g_utf8_strreverse; ///
-  char* function(const(char)* str, ptrdiff_t len) c_g_utf8_strup; ///
-  char* function(const(char)* str, glong startPos, glong endPos) c_g_utf8_substring; ///
-  dchar* function(const(char)* str, glong len, glong* itemsRead, glong* itemsWritten, GError** _err) c_g_utf8_to_ucs4; ///
-  dchar* function(const(char)* str, glong len, glong* itemsWritten) c_g_utf8_to_ucs4_fast; ///
-  ushort* function(const(char)* str, glong len, glong* itemsRead, glong* itemsWritten, GError** _err) c_g_utf8_to_utf16; ///
-  char* function(const(char)* string_, size_t truncateLength) c_g_utf8_truncate_middle; ///
-  gboolean function(const(ubyte)* str, ptrdiff_t maxLen, const(char*)* end) c_g_utf8_validate; ///
-  gboolean function(const(ubyte)* str, size_t maxLen, const(char*)* end) c_g_utf8_validate_len; ///
-  gboolean function(const(char)* str) c_g_uuid_string_is_valid; ///
-  char* function() c_g_uuid_string_random; ///
-  GType function() c_g_variant_get_gtype; ///
-  int function(char** string_, const(char)* format, void* args) c_g_vasprintf; ///
-  int function(void* file, const(char)* format, void* args) c_g_vfprintf; ///
-  int function(const(char)* format, void* args) c_g_vprintf; ///
-  int function(char* string_, gulong n, const(char)* format, void* args) c_g_vsnprintf; ///
-  int function(char* string_, const(char)* format, void* args) c_g_vsprintf; ///
-  void function(const(char)* domain, const(char)* file, int line, const(char)* func, const(char)* warnexpr) c_g_warn_message; ///
-
-  // UnicodeScript
-  GUnicodeScript function(uint iso15924) c_g_unicode_script_from_iso15924; ///
-  uint function(GUnicodeScript script) c_g_unicode_script_to_iso15924; ///
-}
+// Allocator
+private alias c_g_allocator_freeFn = extern(C) void function(GAllocator* allocator) nothrow;
+__gshared c_g_allocator_freeFn c_g_allocator_free; ///
+private alias c_g_allocator_newFn = extern(C) GAllocator* function(const(char)* name, uint nPreallocs) nothrow;
+__gshared c_g_allocator_newFn c_g_allocator_new; ///
+
+// Array
+private alias c_g_array_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_array_get_typeFn c_g_array_get_type; ///
+private alias c_g_array_append_valsFn = extern(C) GArray* function(GArray* array, const(void)* data, uint len) nothrow;
+__gshared c_g_array_append_valsFn c_g_array_append_vals; ///
+private alias c_g_array_binary_searchFn = extern(C) gboolean function(GArray* array, const(void)* target, GCompareFunc compareFunc, uint* outMatchIndex) nothrow;
+__gshared c_g_array_binary_searchFn c_g_array_binary_search; ///
+private alias c_g_array_copyFn = extern(C) GArray* function(GArray* array) nothrow;
+__gshared c_g_array_copyFn c_g_array_copy; ///
+private alias c_g_array_freeFn = extern(C) char* function(GArray* array, gboolean freeSegment) nothrow;
+__gshared c_g_array_freeFn c_g_array_free; ///
+private alias c_g_array_get_element_sizeFn = extern(C) uint function(GArray* array) nothrow;
+__gshared c_g_array_get_element_sizeFn c_g_array_get_element_size; ///
+private alias c_g_array_insert_valsFn = extern(C) GArray* function(GArray* array, uint index, const(void)* data, uint len) nothrow;
+__gshared c_g_array_insert_valsFn c_g_array_insert_vals; ///
+private alias c_g_array_newFn = extern(C) GArray* function(gboolean zeroTerminated, gboolean clear, uint elementSize) nothrow;
+__gshared c_g_array_newFn c_g_array_new; ///
+private alias c_g_array_new_takeFn = extern(C) GArray* function(void* data, size_t len, gboolean clear, size_t elementSize) nothrow;
+__gshared c_g_array_new_takeFn c_g_array_new_take; ///
+private alias c_g_array_new_take_zero_terminatedFn = extern(C) GArray* function(void* data, gboolean clear, size_t elementSize) nothrow;
+__gshared c_g_array_new_take_zero_terminatedFn c_g_array_new_take_zero_terminated; ///
+private alias c_g_array_prepend_valsFn = extern(C) GArray* function(GArray* array, const(void)* data, uint len) nothrow;
+__gshared c_g_array_prepend_valsFn c_g_array_prepend_vals; ///
+private alias c_g_array_refFn = extern(C) GArray* function(GArray* array) nothrow;
+__gshared c_g_array_refFn c_g_array_ref; ///
+private alias c_g_array_remove_indexFn = extern(C) GArray* function(GArray* array, uint index) nothrow;
+__gshared c_g_array_remove_indexFn c_g_array_remove_index; ///
+private alias c_g_array_remove_index_fastFn = extern(C) GArray* function(GArray* array, uint index) nothrow;
+__gshared c_g_array_remove_index_fastFn c_g_array_remove_index_fast; ///
+private alias c_g_array_remove_rangeFn = extern(C) GArray* function(GArray* array, uint index, uint length) nothrow;
+__gshared c_g_array_remove_rangeFn c_g_array_remove_range; ///
+private alias c_g_array_set_clear_funcFn = extern(C) void function(GArray* array, GDestroyNotify clearFunc) nothrow;
+__gshared c_g_array_set_clear_funcFn c_g_array_set_clear_func; ///
+private alias c_g_array_set_sizeFn = extern(C) GArray* function(GArray* array, uint length) nothrow;
+__gshared c_g_array_set_sizeFn c_g_array_set_size; ///
+private alias c_g_array_sized_newFn = extern(C) GArray* function(gboolean zeroTerminated, gboolean clear, uint elementSize, uint reservedSize) nothrow;
+__gshared c_g_array_sized_newFn c_g_array_sized_new; ///
+private alias c_g_array_sortFn = extern(C) void function(GArray* array, GCompareFunc compareFunc) nothrow;
+__gshared c_g_array_sortFn c_g_array_sort; ///
+private alias c_g_array_sort_with_dataFn = extern(C) void function(GArray* array, GCompareDataFunc compareFunc, void* userData) nothrow;
+__gshared c_g_array_sort_with_dataFn c_g_array_sort_with_data; ///
+private alias c_g_array_stealFn = extern(C) void* function(GArray* array, size_t* len) nothrow;
+__gshared c_g_array_stealFn c_g_array_steal; ///
+private alias c_g_array_unrefFn = extern(C) void function(GArray* array) nothrow;
+__gshared c_g_array_unrefFn c_g_array_unref; ///
+
+// AsyncQueue
+private alias c_g_async_queue_lengthFn = extern(C) int function(GAsyncQueue* queue) nothrow;
+__gshared c_g_async_queue_lengthFn c_g_async_queue_length; ///
+private alias c_g_async_queue_length_unlockedFn = extern(C) int function(GAsyncQueue* queue) nothrow;
+__gshared c_g_async_queue_length_unlockedFn c_g_async_queue_length_unlocked; ///
+private alias c_g_async_queue_lockFn = extern(C) void function(GAsyncQueue* queue) nothrow;
+__gshared c_g_async_queue_lockFn c_g_async_queue_lock; ///
+private alias c_g_async_queue_popFn = extern(C) void* function(GAsyncQueue* queue) nothrow;
+__gshared c_g_async_queue_popFn c_g_async_queue_pop; ///
+private alias c_g_async_queue_pop_unlockedFn = extern(C) void* function(GAsyncQueue* queue) nothrow;
+__gshared c_g_async_queue_pop_unlockedFn c_g_async_queue_pop_unlocked; ///
+private alias c_g_async_queue_pushFn = extern(C) void function(GAsyncQueue* queue, void* data) nothrow;
+__gshared c_g_async_queue_pushFn c_g_async_queue_push; ///
+private alias c_g_async_queue_push_frontFn = extern(C) void function(GAsyncQueue* queue, void* item) nothrow;
+__gshared c_g_async_queue_push_frontFn c_g_async_queue_push_front; ///
+private alias c_g_async_queue_push_front_unlockedFn = extern(C) void function(GAsyncQueue* queue, void* item) nothrow;
+__gshared c_g_async_queue_push_front_unlockedFn c_g_async_queue_push_front_unlocked; ///
+private alias c_g_async_queue_push_sortedFn = extern(C) void function(GAsyncQueue* queue, void* data, GCompareDataFunc func, void* userData) nothrow;
+__gshared c_g_async_queue_push_sortedFn c_g_async_queue_push_sorted; ///
+private alias c_g_async_queue_push_sorted_unlockedFn = extern(C) void function(GAsyncQueue* queue, void* data, GCompareDataFunc func, void* userData) nothrow;
+__gshared c_g_async_queue_push_sorted_unlockedFn c_g_async_queue_push_sorted_unlocked; ///
+private alias c_g_async_queue_push_unlockedFn = extern(C) void function(GAsyncQueue* queue, void* data) nothrow;
+__gshared c_g_async_queue_push_unlockedFn c_g_async_queue_push_unlocked; ///
+private alias c_g_async_queue_refFn = extern(C) GAsyncQueue* function(GAsyncQueue* queue) nothrow;
+__gshared c_g_async_queue_refFn c_g_async_queue_ref; ///
+private alias c_g_async_queue_ref_unlockedFn = extern(C) void function(GAsyncQueue* queue) nothrow;
+__gshared c_g_async_queue_ref_unlockedFn c_g_async_queue_ref_unlocked; ///
+private alias c_g_async_queue_removeFn = extern(C) gboolean function(GAsyncQueue* queue, void* item) nothrow;
+__gshared c_g_async_queue_removeFn c_g_async_queue_remove; ///
+private alias c_g_async_queue_remove_unlockedFn = extern(C) gboolean function(GAsyncQueue* queue, void* item) nothrow;
+__gshared c_g_async_queue_remove_unlockedFn c_g_async_queue_remove_unlocked; ///
+private alias c_g_async_queue_sortFn = extern(C) void function(GAsyncQueue* queue, GCompareDataFunc func, void* userData) nothrow;
+__gshared c_g_async_queue_sortFn c_g_async_queue_sort; ///
+private alias c_g_async_queue_sort_unlockedFn = extern(C) void function(GAsyncQueue* queue, GCompareDataFunc func, void* userData) nothrow;
+__gshared c_g_async_queue_sort_unlockedFn c_g_async_queue_sort_unlocked; ///
+private alias c_g_async_queue_timed_popFn = extern(C) void* function(GAsyncQueue* queue, GTimeVal* endTime) nothrow;
+__gshared c_g_async_queue_timed_popFn c_g_async_queue_timed_pop; ///
+private alias c_g_async_queue_timed_pop_unlockedFn = extern(C) void* function(GAsyncQueue* queue, GTimeVal* endTime) nothrow;
+__gshared c_g_async_queue_timed_pop_unlockedFn c_g_async_queue_timed_pop_unlocked; ///
+private alias c_g_async_queue_timeout_popFn = extern(C) void* function(GAsyncQueue* queue, ulong timeout) nothrow;
+__gshared c_g_async_queue_timeout_popFn c_g_async_queue_timeout_pop; ///
+private alias c_g_async_queue_timeout_pop_unlockedFn = extern(C) void* function(GAsyncQueue* queue, ulong timeout) nothrow;
+__gshared c_g_async_queue_timeout_pop_unlockedFn c_g_async_queue_timeout_pop_unlocked; ///
+private alias c_g_async_queue_try_popFn = extern(C) void* function(GAsyncQueue* queue) nothrow;
+__gshared c_g_async_queue_try_popFn c_g_async_queue_try_pop; ///
+private alias c_g_async_queue_try_pop_unlockedFn = extern(C) void* function(GAsyncQueue* queue) nothrow;
+__gshared c_g_async_queue_try_pop_unlockedFn c_g_async_queue_try_pop_unlocked; ///
+private alias c_g_async_queue_unlockFn = extern(C) void function(GAsyncQueue* queue) nothrow;
+__gshared c_g_async_queue_unlockFn c_g_async_queue_unlock; ///
+private alias c_g_async_queue_unrefFn = extern(C) void function(GAsyncQueue* queue) nothrow;
+__gshared c_g_async_queue_unrefFn c_g_async_queue_unref; ///
+private alias c_g_async_queue_unref_and_unlockFn = extern(C) void function(GAsyncQueue* queue) nothrow;
+__gshared c_g_async_queue_unref_and_unlockFn c_g_async_queue_unref_and_unlock; ///
+private alias c_g_async_queue_newFn = extern(C) GAsyncQueue* function() nothrow;
+__gshared c_g_async_queue_newFn c_g_async_queue_new; ///
+private alias c_g_async_queue_new_fullFn = extern(C) GAsyncQueue* function(GDestroyNotify itemFreeFunc) nothrow;
+__gshared c_g_async_queue_new_fullFn c_g_async_queue_new_full; ///
+
+// BookmarkFile
+private alias c_g_bookmark_file_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_bookmark_file_get_typeFn c_g_bookmark_file_get_type; ///
+private alias c_g_bookmark_file_newFn = extern(C) GBookmarkFile* function() nothrow;
+__gshared c_g_bookmark_file_newFn c_g_bookmark_file_new; ///
+private alias c_g_bookmark_file_add_applicationFn = extern(C) void function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, const(char)* exec) nothrow;
+__gshared c_g_bookmark_file_add_applicationFn c_g_bookmark_file_add_application; ///
+private alias c_g_bookmark_file_add_groupFn = extern(C) void function(GBookmarkFile* bookmark, const(char)* uri, const(char)* group) nothrow;
+__gshared c_g_bookmark_file_add_groupFn c_g_bookmark_file_add_group; ///
+private alias c_g_bookmark_file_copyFn = extern(C) GBookmarkFile* function(GBookmarkFile* bookmark) nothrow;
+__gshared c_g_bookmark_file_copyFn c_g_bookmark_file_copy; ///
+private alias c_g_bookmark_file_freeFn = extern(C) void function(GBookmarkFile* bookmark) nothrow;
+__gshared c_g_bookmark_file_freeFn c_g_bookmark_file_free; ///
+private alias c_g_bookmark_file_get_addedFn = extern(C) long function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) nothrow;
+__gshared c_g_bookmark_file_get_addedFn c_g_bookmark_file_get_added; ///
+private alias c_g_bookmark_file_get_added_date_timeFn = extern(C) GDateTime* function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) nothrow;
+__gshared c_g_bookmark_file_get_added_date_timeFn c_g_bookmark_file_get_added_date_time; ///
+private alias c_g_bookmark_file_get_app_infoFn = extern(C) gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, char** exec, uint* count, long* stamp, GError** _err) nothrow;
+__gshared c_g_bookmark_file_get_app_infoFn c_g_bookmark_file_get_app_info; ///
+private alias c_g_bookmark_file_get_application_infoFn = extern(C) gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, char** exec, uint* count, GDateTime** stamp, GError** _err) nothrow;
+__gshared c_g_bookmark_file_get_application_infoFn c_g_bookmark_file_get_application_info; ///
+private alias c_g_bookmark_file_get_applicationsFn = extern(C) char** function(GBookmarkFile* bookmark, const(char)* uri, size_t* length, GError** _err) nothrow;
+__gshared c_g_bookmark_file_get_applicationsFn c_g_bookmark_file_get_applications; ///
+private alias c_g_bookmark_file_get_descriptionFn = extern(C) char* function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) nothrow;
+__gshared c_g_bookmark_file_get_descriptionFn c_g_bookmark_file_get_description; ///
+private alias c_g_bookmark_file_get_groupsFn = extern(C) char** function(GBookmarkFile* bookmark, const(char)* uri, size_t* length, GError** _err) nothrow;
+__gshared c_g_bookmark_file_get_groupsFn c_g_bookmark_file_get_groups; ///
+private alias c_g_bookmark_file_get_iconFn = extern(C) gboolean function(GBookmarkFile* bookmark, const(char)* uri, char** href, char** mimeType, GError** _err) nothrow;
+__gshared c_g_bookmark_file_get_iconFn c_g_bookmark_file_get_icon; ///
+private alias c_g_bookmark_file_get_is_privateFn = extern(C) gboolean function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) nothrow;
+__gshared c_g_bookmark_file_get_is_privateFn c_g_bookmark_file_get_is_private; ///
+private alias c_g_bookmark_file_get_mime_typeFn = extern(C) char* function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) nothrow;
+__gshared c_g_bookmark_file_get_mime_typeFn c_g_bookmark_file_get_mime_type; ///
+private alias c_g_bookmark_file_get_modifiedFn = extern(C) long function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) nothrow;
+__gshared c_g_bookmark_file_get_modifiedFn c_g_bookmark_file_get_modified; ///
+private alias c_g_bookmark_file_get_modified_date_timeFn = extern(C) GDateTime* function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) nothrow;
+__gshared c_g_bookmark_file_get_modified_date_timeFn c_g_bookmark_file_get_modified_date_time; ///
+private alias c_g_bookmark_file_get_sizeFn = extern(C) int function(GBookmarkFile* bookmark) nothrow;
+__gshared c_g_bookmark_file_get_sizeFn c_g_bookmark_file_get_size; ///
+private alias c_g_bookmark_file_get_titleFn = extern(C) char* function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) nothrow;
+__gshared c_g_bookmark_file_get_titleFn c_g_bookmark_file_get_title; ///
+private alias c_g_bookmark_file_get_urisFn = extern(C) char** function(GBookmarkFile* bookmark, size_t* length) nothrow;
+__gshared c_g_bookmark_file_get_urisFn c_g_bookmark_file_get_uris; ///
+private alias c_g_bookmark_file_get_visitedFn = extern(C) long function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) nothrow;
+__gshared c_g_bookmark_file_get_visitedFn c_g_bookmark_file_get_visited; ///
+private alias c_g_bookmark_file_get_visited_date_timeFn = extern(C) GDateTime* function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) nothrow;
+__gshared c_g_bookmark_file_get_visited_date_timeFn c_g_bookmark_file_get_visited_date_time; ///
+private alias c_g_bookmark_file_has_applicationFn = extern(C) gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, GError** _err) nothrow;
+__gshared c_g_bookmark_file_has_applicationFn c_g_bookmark_file_has_application; ///
+private alias c_g_bookmark_file_has_groupFn = extern(C) gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* group, GError** _err) nothrow;
+__gshared c_g_bookmark_file_has_groupFn c_g_bookmark_file_has_group; ///
+private alias c_g_bookmark_file_has_itemFn = extern(C) gboolean function(GBookmarkFile* bookmark, const(char)* uri) nothrow;
+__gshared c_g_bookmark_file_has_itemFn c_g_bookmark_file_has_item; ///
+private alias c_g_bookmark_file_load_from_dataFn = extern(C) gboolean function(GBookmarkFile* bookmark, const(ubyte)* data, size_t length, GError** _err) nothrow;
+__gshared c_g_bookmark_file_load_from_dataFn c_g_bookmark_file_load_from_data; ///
+private alias c_g_bookmark_file_load_from_data_dirsFn = extern(C) gboolean function(GBookmarkFile* bookmark, const(char)* file, char** fullPath, GError** _err) nothrow;
+__gshared c_g_bookmark_file_load_from_data_dirsFn c_g_bookmark_file_load_from_data_dirs; ///
+private alias c_g_bookmark_file_load_from_fileFn = extern(C) gboolean function(GBookmarkFile* bookmark, const(char)* filename, GError** _err) nothrow;
+__gshared c_g_bookmark_file_load_from_fileFn c_g_bookmark_file_load_from_file; ///
+private alias c_g_bookmark_file_move_itemFn = extern(C) gboolean function(GBookmarkFile* bookmark, const(char)* oldUri, const(char)* newUri, GError** _err) nothrow;
+__gshared c_g_bookmark_file_move_itemFn c_g_bookmark_file_move_item; ///
+private alias c_g_bookmark_file_remove_applicationFn = extern(C) gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, GError** _err) nothrow;
+__gshared c_g_bookmark_file_remove_applicationFn c_g_bookmark_file_remove_application; ///
+private alias c_g_bookmark_file_remove_groupFn = extern(C) gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* group, GError** _err) nothrow;
+__gshared c_g_bookmark_file_remove_groupFn c_g_bookmark_file_remove_group; ///
+private alias c_g_bookmark_file_remove_itemFn = extern(C) gboolean function(GBookmarkFile* bookmark, const(char)* uri, GError** _err) nothrow;
+__gshared c_g_bookmark_file_remove_itemFn c_g_bookmark_file_remove_item; ///
+private alias c_g_bookmark_file_set_addedFn = extern(C) void function(GBookmarkFile* bookmark, const(char)* uri, long added) nothrow;
+__gshared c_g_bookmark_file_set_addedFn c_g_bookmark_file_set_added; ///
+private alias c_g_bookmark_file_set_added_date_timeFn = extern(C) void function(GBookmarkFile* bookmark, const(char)* uri, GDateTime* added) nothrow;
+__gshared c_g_bookmark_file_set_added_date_timeFn c_g_bookmark_file_set_added_date_time; ///
+private alias c_g_bookmark_file_set_app_infoFn = extern(C) gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, const(char)* exec, int count, long stamp, GError** _err) nothrow;
+__gshared c_g_bookmark_file_set_app_infoFn c_g_bookmark_file_set_app_info; ///
+private alias c_g_bookmark_file_set_application_infoFn = extern(C) gboolean function(GBookmarkFile* bookmark, const(char)* uri, const(char)* name, const(char)* exec, int count, GDateTime* stamp, GError** _err) nothrow;
+__gshared c_g_bookmark_file_set_application_infoFn c_g_bookmark_file_set_application_info; ///
+private alias c_g_bookmark_file_set_descriptionFn = extern(C) void function(GBookmarkFile* bookmark, const(char)* uri, const(char)* description) nothrow;
+__gshared c_g_bookmark_file_set_descriptionFn c_g_bookmark_file_set_description; ///
+private alias c_g_bookmark_file_set_groupsFn = extern(C) void function(GBookmarkFile* bookmark, const(char)* uri, const(char*)* groups, size_t length) nothrow;
+__gshared c_g_bookmark_file_set_groupsFn c_g_bookmark_file_set_groups; ///
+private alias c_g_bookmark_file_set_iconFn = extern(C) void function(GBookmarkFile* bookmark, const(char)* uri, const(char)* href, const(char)* mimeType) nothrow;
+__gshared c_g_bookmark_file_set_iconFn c_g_bookmark_file_set_icon; ///
+private alias c_g_bookmark_file_set_is_privateFn = extern(C) void function(GBookmarkFile* bookmark, const(char)* uri, gboolean isPrivate) nothrow;
+__gshared c_g_bookmark_file_set_is_privateFn c_g_bookmark_file_set_is_private; ///
+private alias c_g_bookmark_file_set_mime_typeFn = extern(C) void function(GBookmarkFile* bookmark, const(char)* uri, const(char)* mimeType) nothrow;
+__gshared c_g_bookmark_file_set_mime_typeFn c_g_bookmark_file_set_mime_type; ///
+private alias c_g_bookmark_file_set_modifiedFn = extern(C) void function(GBookmarkFile* bookmark, const(char)* uri, long modified) nothrow;
+__gshared c_g_bookmark_file_set_modifiedFn c_g_bookmark_file_set_modified; ///
+private alias c_g_bookmark_file_set_modified_date_timeFn = extern(C) void function(GBookmarkFile* bookmark, const(char)* uri, GDateTime* modified) nothrow;
+__gshared c_g_bookmark_file_set_modified_date_timeFn c_g_bookmark_file_set_modified_date_time; ///
+private alias c_g_bookmark_file_set_titleFn = extern(C) void function(GBookmarkFile* bookmark, const(char)* uri, const(char)* title) nothrow;
+__gshared c_g_bookmark_file_set_titleFn c_g_bookmark_file_set_title; ///
+private alias c_g_bookmark_file_set_visitedFn = extern(C) void function(GBookmarkFile* bookmark, const(char)* uri, long visited) nothrow;
+__gshared c_g_bookmark_file_set_visitedFn c_g_bookmark_file_set_visited; ///
+private alias c_g_bookmark_file_set_visited_date_timeFn = extern(C) void function(GBookmarkFile* bookmark, const(char)* uri, GDateTime* visited) nothrow;
+__gshared c_g_bookmark_file_set_visited_date_timeFn c_g_bookmark_file_set_visited_date_time; ///
+private alias c_g_bookmark_file_to_dataFn = extern(C) ubyte* function(GBookmarkFile* bookmark, size_t* length, GError** _err) nothrow;
+__gshared c_g_bookmark_file_to_dataFn c_g_bookmark_file_to_data; ///
+private alias c_g_bookmark_file_to_fileFn = extern(C) gboolean function(GBookmarkFile* bookmark, const(char)* filename, GError** _err) nothrow;
+__gshared c_g_bookmark_file_to_fileFn c_g_bookmark_file_to_file; ///
+private alias c_g_bookmark_file_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_bookmark_file_error_quarkFn c_g_bookmark_file_error_quark; ///
+
+// ByteArray
+private alias c_g_byte_array_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_byte_array_get_typeFn c_g_byte_array_get_type; ///
+private alias c_g_byte_array_appendFn = extern(C) GByteArray* function(GByteArray* array, const(ubyte)* data, uint len) nothrow;
+__gshared c_g_byte_array_appendFn c_g_byte_array_append; ///
+private alias c_g_byte_array_freeFn = extern(C) ubyte* function(GByteArray* array, gboolean freeSegment) nothrow;
+__gshared c_g_byte_array_freeFn c_g_byte_array_free; ///
+private alias c_g_byte_array_free_to_bytesFn = extern(C) GBytes* function(GByteArray* array) nothrow;
+__gshared c_g_byte_array_free_to_bytesFn c_g_byte_array_free_to_bytes; ///
+private alias c_g_byte_array_newFn = extern(C) GByteArray* function() nothrow;
+__gshared c_g_byte_array_newFn c_g_byte_array_new; ///
+private alias c_g_byte_array_new_takeFn = extern(C) GByteArray* function(ubyte* data, size_t len) nothrow;
+__gshared c_g_byte_array_new_takeFn c_g_byte_array_new_take; ///
+private alias c_g_byte_array_prependFn = extern(C) GByteArray* function(GByteArray* array, const(ubyte)* data, uint len) nothrow;
+__gshared c_g_byte_array_prependFn c_g_byte_array_prepend; ///
+private alias c_g_byte_array_refFn = extern(C) GByteArray* function(GByteArray* array) nothrow;
+__gshared c_g_byte_array_refFn c_g_byte_array_ref; ///
+private alias c_g_byte_array_remove_indexFn = extern(C) GByteArray* function(GByteArray* array, uint index) nothrow;
+__gshared c_g_byte_array_remove_indexFn c_g_byte_array_remove_index; ///
+private alias c_g_byte_array_remove_index_fastFn = extern(C) GByteArray* function(GByteArray* array, uint index) nothrow;
+__gshared c_g_byte_array_remove_index_fastFn c_g_byte_array_remove_index_fast; ///
+private alias c_g_byte_array_remove_rangeFn = extern(C) GByteArray* function(GByteArray* array, uint index, uint length) nothrow;
+__gshared c_g_byte_array_remove_rangeFn c_g_byte_array_remove_range; ///
+private alias c_g_byte_array_set_sizeFn = extern(C) GByteArray* function(GByteArray* array, uint length) nothrow;
+__gshared c_g_byte_array_set_sizeFn c_g_byte_array_set_size; ///
+private alias c_g_byte_array_sized_newFn = extern(C) GByteArray* function(uint reservedSize) nothrow;
+__gshared c_g_byte_array_sized_newFn c_g_byte_array_sized_new; ///
+private alias c_g_byte_array_sortFn = extern(C) void function(GByteArray* array, GCompareFunc compareFunc) nothrow;
+__gshared c_g_byte_array_sortFn c_g_byte_array_sort; ///
+private alias c_g_byte_array_sort_with_dataFn = extern(C) void function(GByteArray* array, GCompareDataFunc compareFunc, void* userData) nothrow;
+__gshared c_g_byte_array_sort_with_dataFn c_g_byte_array_sort_with_data; ///
+private alias c_g_byte_array_stealFn = extern(C) ubyte* function(GByteArray* array, size_t* len) nothrow;
+__gshared c_g_byte_array_stealFn c_g_byte_array_steal; ///
+private alias c_g_byte_array_unrefFn = extern(C) void function(GByteArray* array) nothrow;
+__gshared c_g_byte_array_unrefFn c_g_byte_array_unref; ///
+
+// Bytes
+private alias c_g_bytes_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_bytes_get_typeFn c_g_bytes_get_type; ///
+private alias c_g_bytes_newFn = extern(C) GBytes* function(const(void)* data, size_t size) nothrow;
+__gshared c_g_bytes_newFn c_g_bytes_new; ///
+private alias c_g_bytes_new_from_bytesFn = extern(C) GBytes* function(GBytes* bytes, size_t offset, size_t length) nothrow;
+__gshared c_g_bytes_new_from_bytesFn c_g_bytes_new_from_bytes; ///
+private alias c_g_bytes_new_staticFn = extern(C) GBytes* function(const(void)* data, size_t size) nothrow;
+__gshared c_g_bytes_new_staticFn c_g_bytes_new_static; ///
+private alias c_g_bytes_new_takeFn = extern(C) GBytes* function(void* data, size_t size) nothrow;
+__gshared c_g_bytes_new_takeFn c_g_bytes_new_take; ///
+private alias c_g_bytes_new_with_free_funcFn = extern(C) GBytes* function(const(void)* data, size_t size, GDestroyNotify freeFunc, void* userData) nothrow;
+__gshared c_g_bytes_new_with_free_funcFn c_g_bytes_new_with_free_func; ///
+private alias c_g_bytes_compareFn = extern(C) int function(GBytes* bytes1, GBytes* bytes2) nothrow;
+__gshared c_g_bytes_compareFn c_g_bytes_compare; ///
+private alias c_g_bytes_equalFn = extern(C) gboolean function(GBytes* bytes1, GBytes* bytes2) nothrow;
+__gshared c_g_bytes_equalFn c_g_bytes_equal; ///
+private alias c_g_bytes_get_dataFn = extern(C) const(void)* function(GBytes* bytes, size_t* size) nothrow;
+__gshared c_g_bytes_get_dataFn c_g_bytes_get_data; ///
+private alias c_g_bytes_get_regionFn = extern(C) const(void)* function(GBytes* bytes, size_t elementSize, size_t offset, size_t nElements) nothrow;
+__gshared c_g_bytes_get_regionFn c_g_bytes_get_region; ///
+private alias c_g_bytes_get_sizeFn = extern(C) size_t function(GBytes* bytes) nothrow;
+__gshared c_g_bytes_get_sizeFn c_g_bytes_get_size; ///
+private alias c_g_bytes_hashFn = extern(C) uint function(GBytes* bytes) nothrow;
+__gshared c_g_bytes_hashFn c_g_bytes_hash; ///
+private alias c_g_bytes_refFn = extern(C) GBytes* function(GBytes* bytes) nothrow;
+__gshared c_g_bytes_refFn c_g_bytes_ref; ///
+private alias c_g_bytes_unrefFn = extern(C) void function(GBytes* bytes) nothrow;
+__gshared c_g_bytes_unrefFn c_g_bytes_unref; ///
+private alias c_g_bytes_unref_to_arrayFn = extern(C) GByteArray* function(GBytes* bytes) nothrow;
+__gshared c_g_bytes_unref_to_arrayFn c_g_bytes_unref_to_array; ///
+private alias c_g_bytes_unref_to_dataFn = extern(C) void* function(GBytes* bytes, size_t* size) nothrow;
+__gshared c_g_bytes_unref_to_dataFn c_g_bytes_unref_to_data; ///
+
+// Cache
+private alias c_g_cache_destroyFn = extern(C) void function(GCache* cache) nothrow;
+__gshared c_g_cache_destroyFn c_g_cache_destroy; ///
+private alias c_g_cache_insertFn = extern(C) void* function(GCache* cache, void* key) nothrow;
+__gshared c_g_cache_insertFn c_g_cache_insert; ///
+private alias c_g_cache_key_foreachFn = extern(C) void function(GCache* cache, GHFunc func, void* userData) nothrow;
+__gshared c_g_cache_key_foreachFn c_g_cache_key_foreach; ///
+private alias c_g_cache_removeFn = extern(C) void function(GCache* cache, const(void)* value) nothrow;
+__gshared c_g_cache_removeFn c_g_cache_remove; ///
+private alias c_g_cache_value_foreachFn = extern(C) void function(GCache* cache, GHFunc func, void* userData) nothrow;
+__gshared c_g_cache_value_foreachFn c_g_cache_value_foreach; ///
+private alias c_g_cache_newFn = extern(C) GCache* function(GCacheNewFunc valueNewFunc, GCacheDestroyFunc valueDestroyFunc, GCacheDupFunc keyDupFunc, GCacheDestroyFunc keyDestroyFunc, GHashFunc hashKeyFunc, GHashFunc hashValueFunc, GEqualFunc keyEqualFunc) nothrow;
+__gshared c_g_cache_newFn c_g_cache_new; ///
+
+// Checksum
+private alias c_g_checksum_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_checksum_get_typeFn c_g_checksum_get_type; ///
+private alias c_g_checksum_newFn = extern(C) GChecksum* function(GChecksumType checksumType) nothrow;
+__gshared c_g_checksum_newFn c_g_checksum_new; ///
+private alias c_g_checksum_copyFn = extern(C) GChecksum* function(const(GChecksum)* checksum) nothrow;
+__gshared c_g_checksum_copyFn c_g_checksum_copy; ///
+private alias c_g_checksum_freeFn = extern(C) void function(GChecksum* checksum) nothrow;
+__gshared c_g_checksum_freeFn c_g_checksum_free; ///
+private alias c_g_checksum_get_digestFn = extern(C) void function(GChecksum* checksum, ubyte* buffer, size_t* digestLen) nothrow;
+__gshared c_g_checksum_get_digestFn c_g_checksum_get_digest; ///
+private alias c_g_checksum_get_stringFn = extern(C) const(char)* function(GChecksum* checksum) nothrow;
+__gshared c_g_checksum_get_stringFn c_g_checksum_get_string; ///
+private alias c_g_checksum_resetFn = extern(C) void function(GChecksum* checksum) nothrow;
+__gshared c_g_checksum_resetFn c_g_checksum_reset; ///
+private alias c_g_checksum_updateFn = extern(C) void function(GChecksum* checksum, const(ubyte)* data, ptrdiff_t length) nothrow;
+__gshared c_g_checksum_updateFn c_g_checksum_update; ///
+private alias c_g_checksum_type_get_lengthFn = extern(C) ptrdiff_t function(GChecksumType checksumType) nothrow;
+__gshared c_g_checksum_type_get_lengthFn c_g_checksum_type_get_length; ///
+
+// Completion
+private alias c_g_completion_add_itemsFn = extern(C) void function(GCompletion* cmp, GList* items) nothrow;
+__gshared c_g_completion_add_itemsFn c_g_completion_add_items; ///
+private alias c_g_completion_clear_itemsFn = extern(C) void function(GCompletion* cmp) nothrow;
+__gshared c_g_completion_clear_itemsFn c_g_completion_clear_items; ///
+private alias c_g_completion_completeFn = extern(C) GList* function(GCompletion* cmp, const(char)* prefix, char** newPrefix) nothrow;
+__gshared c_g_completion_completeFn c_g_completion_complete; ///
+private alias c_g_completion_complete_utf8Fn = extern(C) GList* function(GCompletion* cmp, const(char)* prefix, char** newPrefix) nothrow;
+__gshared c_g_completion_complete_utf8Fn c_g_completion_complete_utf8; ///
+private alias c_g_completion_freeFn = extern(C) void function(GCompletion* cmp) nothrow;
+__gshared c_g_completion_freeFn c_g_completion_free; ///
+private alias c_g_completion_remove_itemsFn = extern(C) void function(GCompletion* cmp, GList* items) nothrow;
+__gshared c_g_completion_remove_itemsFn c_g_completion_remove_items; ///
+private alias c_g_completion_set_compareFn = extern(C) void function(GCompletion* cmp, GCompletionStrncmpFunc strncmpFunc) nothrow;
+__gshared c_g_completion_set_compareFn c_g_completion_set_compare; ///
+private alias c_g_completion_newFn = extern(C) GCompletion* function(GCompletionFunc func) nothrow;
+__gshared c_g_completion_newFn c_g_completion_new; ///
+
+// Cond
+private alias c_g_cond_broadcastFn = extern(C) void function(GCond* cond) nothrow;
+__gshared c_g_cond_broadcastFn c_g_cond_broadcast; ///
+private alias c_g_cond_clearFn = extern(C) void function(GCond* cond) nothrow;
+__gshared c_g_cond_clearFn c_g_cond_clear; ///
+private alias c_g_cond_freeFn = extern(C) void function(GCond* cond) nothrow;
+__gshared c_g_cond_freeFn c_g_cond_free; ///
+private alias c_g_cond_initFn = extern(C) void function(GCond* cond) nothrow;
+__gshared c_g_cond_initFn c_g_cond_init; ///
+private alias c_g_cond_signalFn = extern(C) void function(GCond* cond) nothrow;
+__gshared c_g_cond_signalFn c_g_cond_signal; ///
+private alias c_g_cond_timed_waitFn = extern(C) gboolean function(GCond* cond, GMutex* mutex, GTimeVal* absTime) nothrow;
+__gshared c_g_cond_timed_waitFn c_g_cond_timed_wait; ///
+private alias c_g_cond_waitFn = extern(C) void function(GCond* cond, GMutex* mutex) nothrow;
+__gshared c_g_cond_waitFn c_g_cond_wait; ///
+private alias c_g_cond_wait_untilFn = extern(C) gboolean function(GCond* cond, GMutex* mutex, long endTime) nothrow;
+__gshared c_g_cond_wait_untilFn c_g_cond_wait_until; ///
+private alias c_g_cond_newFn = extern(C) GCond* function() nothrow;
+__gshared c_g_cond_newFn c_g_cond_new; ///
+
+// Date
+private alias c_g_date_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_date_get_typeFn c_g_date_get_type; ///
+private alias c_g_date_newFn = extern(C) GDate* function() nothrow;
+__gshared c_g_date_newFn c_g_date_new; ///
+private alias c_g_date_new_dmyFn = extern(C) GDate* function(GDateDay day, GDateMonth month, GDateYear year) nothrow;
+__gshared c_g_date_new_dmyFn c_g_date_new_dmy; ///
+private alias c_g_date_new_julianFn = extern(C) GDate* function(uint julianDay) nothrow;
+__gshared c_g_date_new_julianFn c_g_date_new_julian; ///
+private alias c_g_date_add_daysFn = extern(C) void function(GDate* date, uint nDays) nothrow;
+__gshared c_g_date_add_daysFn c_g_date_add_days; ///
+private alias c_g_date_add_monthsFn = extern(C) void function(GDate* date, uint nMonths) nothrow;
+__gshared c_g_date_add_monthsFn c_g_date_add_months; ///
+private alias c_g_date_add_yearsFn = extern(C) void function(GDate* date, uint nYears) nothrow;
+__gshared c_g_date_add_yearsFn c_g_date_add_years; ///
+private alias c_g_date_clampFn = extern(C) void function(GDate* date, const(GDate)* minDate, const(GDate)* maxDate) nothrow;
+__gshared c_g_date_clampFn c_g_date_clamp; ///
+private alias c_g_date_clearFn = extern(C) void function(GDate* date, uint nDates) nothrow;
+__gshared c_g_date_clearFn c_g_date_clear; ///
+private alias c_g_date_compareFn = extern(C) int function(const(GDate)* lhs, const(GDate)* rhs) nothrow;
+__gshared c_g_date_compareFn c_g_date_compare; ///
+private alias c_g_date_copyFn = extern(C) GDate* function(const(GDate)* date) nothrow;
+__gshared c_g_date_copyFn c_g_date_copy; ///
+private alias c_g_date_days_betweenFn = extern(C) int function(const(GDate)* date1, const(GDate)* date2) nothrow;
+__gshared c_g_date_days_betweenFn c_g_date_days_between; ///
+private alias c_g_date_freeFn = extern(C) void function(GDate* date) nothrow;
+__gshared c_g_date_freeFn c_g_date_free; ///
+private alias c_g_date_get_dayFn = extern(C) GDateDay function(const(GDate)* date) nothrow;
+__gshared c_g_date_get_dayFn c_g_date_get_day; ///
+private alias c_g_date_get_day_of_yearFn = extern(C) uint function(const(GDate)* date) nothrow;
+__gshared c_g_date_get_day_of_yearFn c_g_date_get_day_of_year; ///
+private alias c_g_date_get_iso8601_week_of_yearFn = extern(C) uint function(const(GDate)* date) nothrow;
+__gshared c_g_date_get_iso8601_week_of_yearFn c_g_date_get_iso8601_week_of_year; ///
+private alias c_g_date_get_julianFn = extern(C) uint function(const(GDate)* date) nothrow;
+__gshared c_g_date_get_julianFn c_g_date_get_julian; ///
+private alias c_g_date_get_monday_week_of_yearFn = extern(C) uint function(const(GDate)* date) nothrow;
+__gshared c_g_date_get_monday_week_of_yearFn c_g_date_get_monday_week_of_year; ///
+private alias c_g_date_get_monthFn = extern(C) GDateMonth function(const(GDate)* date) nothrow;
+__gshared c_g_date_get_monthFn c_g_date_get_month; ///
+private alias c_g_date_get_sunday_week_of_yearFn = extern(C) uint function(const(GDate)* date) nothrow;
+__gshared c_g_date_get_sunday_week_of_yearFn c_g_date_get_sunday_week_of_year; ///
+private alias c_g_date_get_week_of_yearFn = extern(C) uint function(const(GDate)* date, GDateWeekday firstDayOfWeek) nothrow;
+__gshared c_g_date_get_week_of_yearFn c_g_date_get_week_of_year; ///
+private alias c_g_date_get_weekdayFn = extern(C) GDateWeekday function(const(GDate)* date) nothrow;
+__gshared c_g_date_get_weekdayFn c_g_date_get_weekday; ///
+private alias c_g_date_get_yearFn = extern(C) GDateYear function(const(GDate)* date) nothrow;
+__gshared c_g_date_get_yearFn c_g_date_get_year; ///
+private alias c_g_date_is_first_of_monthFn = extern(C) gboolean function(const(GDate)* date) nothrow;
+__gshared c_g_date_is_first_of_monthFn c_g_date_is_first_of_month; ///
+private alias c_g_date_is_last_of_monthFn = extern(C) gboolean function(const(GDate)* date) nothrow;
+__gshared c_g_date_is_last_of_monthFn c_g_date_is_last_of_month; ///
+private alias c_g_date_orderFn = extern(C) void function(GDate* date1, GDate* date2) nothrow;
+__gshared c_g_date_orderFn c_g_date_order; ///
+private alias c_g_date_set_dayFn = extern(C) void function(GDate* date, GDateDay day) nothrow;
+__gshared c_g_date_set_dayFn c_g_date_set_day; ///
+private alias c_g_date_set_dmyFn = extern(C) void function(GDate* date, GDateDay day, GDateMonth month, GDateYear y) nothrow;
+__gshared c_g_date_set_dmyFn c_g_date_set_dmy; ///
+private alias c_g_date_set_julianFn = extern(C) void function(GDate* date, uint julianDate) nothrow;
+__gshared c_g_date_set_julianFn c_g_date_set_julian; ///
+private alias c_g_date_set_monthFn = extern(C) void function(GDate* date, GDateMonth month) nothrow;
+__gshared c_g_date_set_monthFn c_g_date_set_month; ///
+private alias c_g_date_set_parseFn = extern(C) void function(GDate* date, const(char)* str) nothrow;
+__gshared c_g_date_set_parseFn c_g_date_set_parse; ///
+private alias c_g_date_set_timeFn = extern(C) void function(GDate* date, GTime time) nothrow;
+__gshared c_g_date_set_timeFn c_g_date_set_time; ///
+private alias c_g_date_set_time_tFn = extern(C) void function(GDate* date, long timet) nothrow;
+__gshared c_g_date_set_time_tFn c_g_date_set_time_t; ///
+private alias c_g_date_set_time_valFn = extern(C) void function(GDate* date, GTimeVal* timeval) nothrow;
+__gshared c_g_date_set_time_valFn c_g_date_set_time_val; ///
+private alias c_g_date_set_yearFn = extern(C) void function(GDate* date, GDateYear year) nothrow;
+__gshared c_g_date_set_yearFn c_g_date_set_year; ///
+private alias c_g_date_subtract_daysFn = extern(C) void function(GDate* date, uint nDays) nothrow;
+__gshared c_g_date_subtract_daysFn c_g_date_subtract_days; ///
+private alias c_g_date_subtract_monthsFn = extern(C) void function(GDate* date, uint nMonths) nothrow;
+__gshared c_g_date_subtract_monthsFn c_g_date_subtract_months; ///
+private alias c_g_date_subtract_yearsFn = extern(C) void function(GDate* date, uint nYears) nothrow;
+__gshared c_g_date_subtract_yearsFn c_g_date_subtract_years; ///
+private alias c_g_date_to_struct_tmFn = extern(C) void function(const(GDate)* date, void* tm) nothrow;
+__gshared c_g_date_to_struct_tmFn c_g_date_to_struct_tm; ///
+private alias c_g_date_validFn = extern(C) gboolean function(const(GDate)* date) nothrow;
+__gshared c_g_date_validFn c_g_date_valid; ///
+private alias c_g_date_get_days_in_monthFn = extern(C) ubyte function(GDateMonth month, GDateYear year) nothrow;
+__gshared c_g_date_get_days_in_monthFn c_g_date_get_days_in_month; ///
+private alias c_g_date_get_monday_weeks_in_yearFn = extern(C) ubyte function(GDateYear year) nothrow;
+__gshared c_g_date_get_monday_weeks_in_yearFn c_g_date_get_monday_weeks_in_year; ///
+private alias c_g_date_get_sunday_weeks_in_yearFn = extern(C) ubyte function(GDateYear year) nothrow;
+__gshared c_g_date_get_sunday_weeks_in_yearFn c_g_date_get_sunday_weeks_in_year; ///
+private alias c_g_date_get_weeks_in_yearFn = extern(C) ubyte function(GDateYear year, GDateWeekday firstDayOfWeek) nothrow;
+__gshared c_g_date_get_weeks_in_yearFn c_g_date_get_weeks_in_year; ///
+private alias c_g_date_is_leap_yearFn = extern(C) gboolean function(GDateYear year) nothrow;
+__gshared c_g_date_is_leap_yearFn c_g_date_is_leap_year; ///
+private alias c_g_date_strftimeFn = extern(C) size_t function(char* s, size_t slen, const(char)* format, const(GDate)* date) nothrow;
+__gshared c_g_date_strftimeFn c_g_date_strftime; ///
+private alias c_g_date_valid_dayFn = extern(C) gboolean function(GDateDay day) nothrow;
+__gshared c_g_date_valid_dayFn c_g_date_valid_day; ///
+private alias c_g_date_valid_dmyFn = extern(C) gboolean function(GDateDay day, GDateMonth month, GDateYear year) nothrow;
+__gshared c_g_date_valid_dmyFn c_g_date_valid_dmy; ///
+private alias c_g_date_valid_julianFn = extern(C) gboolean function(uint julianDate) nothrow;
+__gshared c_g_date_valid_julianFn c_g_date_valid_julian; ///
+private alias c_g_date_valid_monthFn = extern(C) gboolean function(GDateMonth month) nothrow;
+__gshared c_g_date_valid_monthFn c_g_date_valid_month; ///
+private alias c_g_date_valid_weekdayFn = extern(C) gboolean function(GDateWeekday weekday) nothrow;
+__gshared c_g_date_valid_weekdayFn c_g_date_valid_weekday; ///
+private alias c_g_date_valid_yearFn = extern(C) gboolean function(GDateYear year) nothrow;
+__gshared c_g_date_valid_yearFn c_g_date_valid_year; ///
+
+// DateTime
+private alias c_g_date_time_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_date_time_get_typeFn c_g_date_time_get_type; ///
+private alias c_g_date_time_newFn = extern(C) GDateTime* function(GTimeZone* tz, int year, int month, int day, int hour, int minute, double seconds) nothrow;
+__gshared c_g_date_time_newFn c_g_date_time_new; ///
+private alias c_g_date_time_new_from_iso8601Fn = extern(C) GDateTime* function(const(char)* text, GTimeZone* defaultTz) nothrow;
+__gshared c_g_date_time_new_from_iso8601Fn c_g_date_time_new_from_iso8601; ///
+private alias c_g_date_time_new_from_timeval_localFn = extern(C) GDateTime* function(const(GTimeVal)* tv) nothrow;
+__gshared c_g_date_time_new_from_timeval_localFn c_g_date_time_new_from_timeval_local; ///
+private alias c_g_date_time_new_from_timeval_utcFn = extern(C) GDateTime* function(const(GTimeVal)* tv) nothrow;
+__gshared c_g_date_time_new_from_timeval_utcFn c_g_date_time_new_from_timeval_utc; ///
+private alias c_g_date_time_new_from_unix_localFn = extern(C) GDateTime* function(long t) nothrow;
+__gshared c_g_date_time_new_from_unix_localFn c_g_date_time_new_from_unix_local; ///
+private alias c_g_date_time_new_from_unix_local_usecFn = extern(C) GDateTime* function(long usecs) nothrow;
+__gshared c_g_date_time_new_from_unix_local_usecFn c_g_date_time_new_from_unix_local_usec; ///
+private alias c_g_date_time_new_from_unix_utcFn = extern(C) GDateTime* function(long t) nothrow;
+__gshared c_g_date_time_new_from_unix_utcFn c_g_date_time_new_from_unix_utc; ///
+private alias c_g_date_time_new_from_unix_utc_usecFn = extern(C) GDateTime* function(long usecs) nothrow;
+__gshared c_g_date_time_new_from_unix_utc_usecFn c_g_date_time_new_from_unix_utc_usec; ///
+private alias c_g_date_time_new_localFn = extern(C) GDateTime* function(int year, int month, int day, int hour, int minute, double seconds) nothrow;
+__gshared c_g_date_time_new_localFn c_g_date_time_new_local; ///
+private alias c_g_date_time_new_nowFn = extern(C) GDateTime* function(GTimeZone* tz) nothrow;
+__gshared c_g_date_time_new_nowFn c_g_date_time_new_now; ///
+private alias c_g_date_time_new_now_localFn = extern(C) GDateTime* function() nothrow;
+__gshared c_g_date_time_new_now_localFn c_g_date_time_new_now_local; ///
+private alias c_g_date_time_new_now_utcFn = extern(C) GDateTime* function() nothrow;
+__gshared c_g_date_time_new_now_utcFn c_g_date_time_new_now_utc; ///
+private alias c_g_date_time_new_utcFn = extern(C) GDateTime* function(int year, int month, int day, int hour, int minute, double seconds) nothrow;
+__gshared c_g_date_time_new_utcFn c_g_date_time_new_utc; ///
+private alias c_g_date_time_addFn = extern(C) GDateTime* function(GDateTime* datetime, GTimeSpan timespan) nothrow;
+__gshared c_g_date_time_addFn c_g_date_time_add; ///
+private alias c_g_date_time_add_daysFn = extern(C) GDateTime* function(GDateTime* datetime, int days) nothrow;
+__gshared c_g_date_time_add_daysFn c_g_date_time_add_days; ///
+private alias c_g_date_time_add_fullFn = extern(C) GDateTime* function(GDateTime* datetime, int years, int months, int days, int hours, int minutes, double seconds) nothrow;
+__gshared c_g_date_time_add_fullFn c_g_date_time_add_full; ///
+private alias c_g_date_time_add_hoursFn = extern(C) GDateTime* function(GDateTime* datetime, int hours) nothrow;
+__gshared c_g_date_time_add_hoursFn c_g_date_time_add_hours; ///
+private alias c_g_date_time_add_minutesFn = extern(C) GDateTime* function(GDateTime* datetime, int minutes) nothrow;
+__gshared c_g_date_time_add_minutesFn c_g_date_time_add_minutes; ///
+private alias c_g_date_time_add_monthsFn = extern(C) GDateTime* function(GDateTime* datetime, int months) nothrow;
+__gshared c_g_date_time_add_monthsFn c_g_date_time_add_months; ///
+private alias c_g_date_time_add_secondsFn = extern(C) GDateTime* function(GDateTime* datetime, double seconds) nothrow;
+__gshared c_g_date_time_add_secondsFn c_g_date_time_add_seconds; ///
+private alias c_g_date_time_add_weeksFn = extern(C) GDateTime* function(GDateTime* datetime, int weeks) nothrow;
+__gshared c_g_date_time_add_weeksFn c_g_date_time_add_weeks; ///
+private alias c_g_date_time_add_yearsFn = extern(C) GDateTime* function(GDateTime* datetime, int years) nothrow;
+__gshared c_g_date_time_add_yearsFn c_g_date_time_add_years; ///
+private alias c_g_date_time_compareFn = extern(C) int function(GDateTime* dt1, GDateTime* dt2) nothrow;
+__gshared c_g_date_time_compareFn c_g_date_time_compare; ///
+private alias c_g_date_time_differenceFn = extern(C) GTimeSpan function(GDateTime* end, GDateTime* begin) nothrow;
+__gshared c_g_date_time_differenceFn c_g_date_time_difference; ///
+private alias c_g_date_time_equalFn = extern(C) gboolean function(GDateTime* dt1, GDateTime* dt2) nothrow;
+__gshared c_g_date_time_equalFn c_g_date_time_equal; ///
+private alias c_g_date_time_formatFn = extern(C) char* function(GDateTime* datetime, const(char)* format) nothrow;
+__gshared c_g_date_time_formatFn c_g_date_time_format; ///
+private alias c_g_date_time_format_iso8601Fn = extern(C) char* function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_format_iso8601Fn c_g_date_time_format_iso8601; ///
+private alias c_g_date_time_get_day_of_monthFn = extern(C) int function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_get_day_of_monthFn c_g_date_time_get_day_of_month; ///
+private alias c_g_date_time_get_day_of_weekFn = extern(C) int function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_get_day_of_weekFn c_g_date_time_get_day_of_week; ///
+private alias c_g_date_time_get_day_of_yearFn = extern(C) int function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_get_day_of_yearFn c_g_date_time_get_day_of_year; ///
+private alias c_g_date_time_get_hourFn = extern(C) int function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_get_hourFn c_g_date_time_get_hour; ///
+private alias c_g_date_time_get_microsecondFn = extern(C) int function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_get_microsecondFn c_g_date_time_get_microsecond; ///
+private alias c_g_date_time_get_minuteFn = extern(C) int function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_get_minuteFn c_g_date_time_get_minute; ///
+private alias c_g_date_time_get_monthFn = extern(C) int function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_get_monthFn c_g_date_time_get_month; ///
+private alias c_g_date_time_get_secondFn = extern(C) int function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_get_secondFn c_g_date_time_get_second; ///
+private alias c_g_date_time_get_secondsFn = extern(C) double function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_get_secondsFn c_g_date_time_get_seconds; ///
+private alias c_g_date_time_get_timezoneFn = extern(C) GTimeZone* function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_get_timezoneFn c_g_date_time_get_timezone; ///
+private alias c_g_date_time_get_timezone_abbreviationFn = extern(C) const(char)* function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_get_timezone_abbreviationFn c_g_date_time_get_timezone_abbreviation; ///
+private alias c_g_date_time_get_utc_offsetFn = extern(C) GTimeSpan function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_get_utc_offsetFn c_g_date_time_get_utc_offset; ///
+private alias c_g_date_time_get_week_numbering_yearFn = extern(C) int function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_get_week_numbering_yearFn c_g_date_time_get_week_numbering_year; ///
+private alias c_g_date_time_get_week_of_yearFn = extern(C) int function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_get_week_of_yearFn c_g_date_time_get_week_of_year; ///
+private alias c_g_date_time_get_yearFn = extern(C) int function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_get_yearFn c_g_date_time_get_year; ///
+private alias c_g_date_time_get_ymdFn = extern(C) void function(GDateTime* datetime, int* year, int* month, int* day) nothrow;
+__gshared c_g_date_time_get_ymdFn c_g_date_time_get_ymd; ///
+private alias c_g_date_time_hashFn = extern(C) uint function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_hashFn c_g_date_time_hash; ///
+private alias c_g_date_time_is_daylight_savingsFn = extern(C) gboolean function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_is_daylight_savingsFn c_g_date_time_is_daylight_savings; ///
+private alias c_g_date_time_refFn = extern(C) GDateTime* function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_refFn c_g_date_time_ref; ///
+private alias c_g_date_time_to_localFn = extern(C) GDateTime* function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_to_localFn c_g_date_time_to_local; ///
+private alias c_g_date_time_to_timevalFn = extern(C) gboolean function(GDateTime* datetime, GTimeVal* tv) nothrow;
+__gshared c_g_date_time_to_timevalFn c_g_date_time_to_timeval; ///
+private alias c_g_date_time_to_timezoneFn = extern(C) GDateTime* function(GDateTime* datetime, GTimeZone* tz) nothrow;
+__gshared c_g_date_time_to_timezoneFn c_g_date_time_to_timezone; ///
+private alias c_g_date_time_to_unixFn = extern(C) long function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_to_unixFn c_g_date_time_to_unix; ///
+private alias c_g_date_time_to_unix_usecFn = extern(C) long function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_to_unix_usecFn c_g_date_time_to_unix_usec; ///
+private alias c_g_date_time_to_utcFn = extern(C) GDateTime* function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_to_utcFn c_g_date_time_to_utc; ///
+private alias c_g_date_time_unrefFn = extern(C) void function(GDateTime* datetime) nothrow;
+__gshared c_g_date_time_unrefFn c_g_date_time_unref; ///
+
+// Dir
+private alias c_g_dir_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_dir_get_typeFn c_g_dir_get_type; ///
+private alias c_g_dir_openFn = extern(C) GDir* function(const(char)* path, uint flags, GError** _err) nothrow;
+__gshared c_g_dir_openFn c_g_dir_open; ///
+private alias c_g_dir_closeFn = extern(C) void function(GDir* dir) nothrow;
+__gshared c_g_dir_closeFn c_g_dir_close; ///
+private alias c_g_dir_read_nameFn = extern(C) const(char)* function(GDir* dir) nothrow;
+__gshared c_g_dir_read_nameFn c_g_dir_read_name; ///
+private alias c_g_dir_refFn = extern(C) GDir* function(GDir* dir) nothrow;
+__gshared c_g_dir_refFn c_g_dir_ref; ///
+private alias c_g_dir_rewindFn = extern(C) void function(GDir* dir) nothrow;
+__gshared c_g_dir_rewindFn c_g_dir_rewind; ///
+private alias c_g_dir_unrefFn = extern(C) void function(GDir* dir) nothrow;
+__gshared c_g_dir_unrefFn c_g_dir_unref; ///
+private alias c_g_dir_make_tmpFn = extern(C) char* function(const(char)* tmpl, GError** _err) nothrow;
+__gshared c_g_dir_make_tmpFn c_g_dir_make_tmp; ///
+
+// ErrorWrap
+private alias c_g_error_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_error_get_typeFn c_g_error_get_type; ///
+private alias c_g_error_newFn = extern(C) GError* function(GQuark domain, int code, const(char)* format,  ...) nothrow;
+__gshared c_g_error_newFn c_g_error_new; ///
+private alias c_g_error_new_literalFn = extern(C) GError* function(GQuark domain, int code, const(char)* message) nothrow;
+__gshared c_g_error_new_literalFn c_g_error_new_literal; ///
+private alias c_g_error_new_valistFn = extern(C) GError* function(GQuark domain, int code, const(char)* format, void* args) nothrow;
+__gshared c_g_error_new_valistFn c_g_error_new_valist; ///
+private alias c_g_error_copyFn = extern(C) GError* function(const(GError)* error) nothrow;
+__gshared c_g_error_copyFn c_g_error_copy; ///
+private alias c_g_error_freeFn = extern(C) void function(GError* error) nothrow;
+__gshared c_g_error_freeFn c_g_error_free; ///
+private alias c_g_error_matchesFn = extern(C) gboolean function(const(GError)* error, GQuark domain, int code) nothrow;
+__gshared c_g_error_matchesFn c_g_error_matches; ///
+private alias c_g_error_domain_registerFn = extern(C) GQuark function(const(char)* errorTypeName, size_t errorTypePrivateSize, GErrorInitFunc errorTypeInit, GErrorCopyFunc errorTypeCopy, GErrorClearFunc errorTypeClear) nothrow;
+__gshared c_g_error_domain_registerFn c_g_error_domain_register; ///
+private alias c_g_error_domain_register_staticFn = extern(C) GQuark function(const(char)* errorTypeName, size_t errorTypePrivateSize, GErrorInitFunc errorTypeInit, GErrorCopyFunc errorTypeCopy, GErrorClearFunc errorTypeClear) nothrow;
+__gshared c_g_error_domain_register_staticFn c_g_error_domain_register_static; ///
+
+// HashTable
+private alias c_g_hash_table_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_hash_table_get_typeFn c_g_hash_table_get_type; ///
+private alias c_g_hash_table_addFn = extern(C) gboolean function(GHashTable* hashTable, void* key) nothrow;
+__gshared c_g_hash_table_addFn c_g_hash_table_add; ///
+private alias c_g_hash_table_containsFn = extern(C) gboolean function(GHashTable* hashTable, const(void)* key) nothrow;
+__gshared c_g_hash_table_containsFn c_g_hash_table_contains; ///
+private alias c_g_hash_table_destroyFn = extern(C) void function(GHashTable* hashTable) nothrow;
+__gshared c_g_hash_table_destroyFn c_g_hash_table_destroy; ///
+private alias c_g_hash_table_findFn = extern(C) void* function(GHashTable* hashTable, GHRFunc predicate, void* userData) nothrow;
+__gshared c_g_hash_table_findFn c_g_hash_table_find; ///
+private alias c_g_hash_table_foreachFn = extern(C) void function(GHashTable* hashTable, GHFunc func, void* userData) nothrow;
+__gshared c_g_hash_table_foreachFn c_g_hash_table_foreach; ///
+private alias c_g_hash_table_foreach_removeFn = extern(C) uint function(GHashTable* hashTable, GHRFunc func, void* userData) nothrow;
+__gshared c_g_hash_table_foreach_removeFn c_g_hash_table_foreach_remove; ///
+private alias c_g_hash_table_foreach_stealFn = extern(C) uint function(GHashTable* hashTable, GHRFunc func, void* userData) nothrow;
+__gshared c_g_hash_table_foreach_stealFn c_g_hash_table_foreach_steal; ///
+private alias c_g_hash_table_get_keysFn = extern(C) GList* function(GHashTable* hashTable) nothrow;
+__gshared c_g_hash_table_get_keysFn c_g_hash_table_get_keys; ///
+private alias c_g_hash_table_get_keys_as_arrayFn = extern(C) void** function(GHashTable* hashTable, uint* length) nothrow;
+__gshared c_g_hash_table_get_keys_as_arrayFn c_g_hash_table_get_keys_as_array; ///
+private alias c_g_hash_table_get_keys_as_ptr_arrayFn = extern(C) GPtrArray* function(GHashTable* hashTable) nothrow;
+__gshared c_g_hash_table_get_keys_as_ptr_arrayFn c_g_hash_table_get_keys_as_ptr_array; ///
+private alias c_g_hash_table_get_valuesFn = extern(C) GList* function(GHashTable* hashTable) nothrow;
+__gshared c_g_hash_table_get_valuesFn c_g_hash_table_get_values; ///
+private alias c_g_hash_table_get_values_as_ptr_arrayFn = extern(C) GPtrArray* function(GHashTable* hashTable) nothrow;
+__gshared c_g_hash_table_get_values_as_ptr_arrayFn c_g_hash_table_get_values_as_ptr_array; ///
+private alias c_g_hash_table_insertFn = extern(C) gboolean function(GHashTable* hashTable, void* key, void* value) nothrow;
+__gshared c_g_hash_table_insertFn c_g_hash_table_insert; ///
+private alias c_g_hash_table_lookupFn = extern(C) void* function(GHashTable* hashTable, const(void)* key) nothrow;
+__gshared c_g_hash_table_lookupFn c_g_hash_table_lookup; ///
+private alias c_g_hash_table_lookup_extendedFn = extern(C) gboolean function(GHashTable* hashTable, const(void)* lookupKey, void** origKey, void** value) nothrow;
+__gshared c_g_hash_table_lookup_extendedFn c_g_hash_table_lookup_extended; ///
+private alias c_g_hash_table_newFn = extern(C) GHashTable* function(GHashFunc hashFunc, GEqualFunc keyEqualFunc) nothrow;
+__gshared c_g_hash_table_newFn c_g_hash_table_new; ///
+private alias c_g_hash_table_new_fullFn = extern(C) GHashTable* function(GHashFunc hashFunc, GEqualFunc keyEqualFunc, GDestroyNotify keyDestroyFunc, GDestroyNotify valueDestroyFunc) nothrow;
+__gshared c_g_hash_table_new_fullFn c_g_hash_table_new_full; ///
+private alias c_g_hash_table_new_similarFn = extern(C) GHashTable* function(GHashTable* otherHashTable) nothrow;
+__gshared c_g_hash_table_new_similarFn c_g_hash_table_new_similar; ///
+private alias c_g_hash_table_refFn = extern(C) GHashTable* function(GHashTable* hashTable) nothrow;
+__gshared c_g_hash_table_refFn c_g_hash_table_ref; ///
+private alias c_g_hash_table_removeFn = extern(C) gboolean function(GHashTable* hashTable, const(void)* key) nothrow;
+__gshared c_g_hash_table_removeFn c_g_hash_table_remove; ///
+private alias c_g_hash_table_remove_allFn = extern(C) void function(GHashTable* hashTable) nothrow;
+__gshared c_g_hash_table_remove_allFn c_g_hash_table_remove_all; ///
+private alias c_g_hash_table_replaceFn = extern(C) gboolean function(GHashTable* hashTable, void* key, void* value) nothrow;
+__gshared c_g_hash_table_replaceFn c_g_hash_table_replace; ///
+private alias c_g_hash_table_sizeFn = extern(C) uint function(GHashTable* hashTable) nothrow;
+__gshared c_g_hash_table_sizeFn c_g_hash_table_size; ///
+private alias c_g_hash_table_stealFn = extern(C) gboolean function(GHashTable* hashTable, const(void)* key) nothrow;
+__gshared c_g_hash_table_stealFn c_g_hash_table_steal; ///
+private alias c_g_hash_table_steal_allFn = extern(C) void function(GHashTable* hashTable) nothrow;
+__gshared c_g_hash_table_steal_allFn c_g_hash_table_steal_all; ///
+private alias c_g_hash_table_steal_all_keysFn = extern(C) GPtrArray* function(GHashTable* hashTable) nothrow;
+__gshared c_g_hash_table_steal_all_keysFn c_g_hash_table_steal_all_keys; ///
+private alias c_g_hash_table_steal_all_valuesFn = extern(C) GPtrArray* function(GHashTable* hashTable) nothrow;
+__gshared c_g_hash_table_steal_all_valuesFn c_g_hash_table_steal_all_values; ///
+private alias c_g_hash_table_steal_extendedFn = extern(C) gboolean function(GHashTable* hashTable, const(void)* lookupKey, void** stolenKey, void** stolenValue) nothrow;
+__gshared c_g_hash_table_steal_extendedFn c_g_hash_table_steal_extended; ///
+private alias c_g_hash_table_unrefFn = extern(C) void function(GHashTable* hashTable) nothrow;
+__gshared c_g_hash_table_unrefFn c_g_hash_table_unref; ///
+
+// HashTableIter
+private alias c_g_hash_table_iter_get_hash_tableFn = extern(C) GHashTable* function(GHashTableIter* iter) nothrow;
+__gshared c_g_hash_table_iter_get_hash_tableFn c_g_hash_table_iter_get_hash_table; ///
+private alias c_g_hash_table_iter_initFn = extern(C) void function(GHashTableIter* iter, GHashTable* hashTable) nothrow;
+__gshared c_g_hash_table_iter_initFn c_g_hash_table_iter_init; ///
+private alias c_g_hash_table_iter_nextFn = extern(C) gboolean function(GHashTableIter* iter, void** key, void** value) nothrow;
+__gshared c_g_hash_table_iter_nextFn c_g_hash_table_iter_next; ///
+private alias c_g_hash_table_iter_removeFn = extern(C) void function(GHashTableIter* iter) nothrow;
+__gshared c_g_hash_table_iter_removeFn c_g_hash_table_iter_remove; ///
+private alias c_g_hash_table_iter_replaceFn = extern(C) void function(GHashTableIter* iter, void* value) nothrow;
+__gshared c_g_hash_table_iter_replaceFn c_g_hash_table_iter_replace; ///
+private alias c_g_hash_table_iter_stealFn = extern(C) void function(GHashTableIter* iter) nothrow;
+__gshared c_g_hash_table_iter_stealFn c_g_hash_table_iter_steal; ///
+
+// Hmac
+private alias c_g_hmac_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_hmac_get_typeFn c_g_hmac_get_type; ///
+private alias c_g_hmac_newFn = extern(C) GHmac* function(GChecksumType digestType, const(ubyte)* key, size_t keyLen) nothrow;
+__gshared c_g_hmac_newFn c_g_hmac_new; ///
+private alias c_g_hmac_copyFn = extern(C) GHmac* function(const(GHmac)* hmac) nothrow;
+__gshared c_g_hmac_copyFn c_g_hmac_copy; ///
+private alias c_g_hmac_get_digestFn = extern(C) void function(GHmac* hmac, ubyte* buffer, size_t* digestLen) nothrow;
+__gshared c_g_hmac_get_digestFn c_g_hmac_get_digest; ///
+private alias c_g_hmac_get_stringFn = extern(C) const(char)* function(GHmac* hmac) nothrow;
+__gshared c_g_hmac_get_stringFn c_g_hmac_get_string; ///
+private alias c_g_hmac_refFn = extern(C) GHmac* function(GHmac* hmac) nothrow;
+__gshared c_g_hmac_refFn c_g_hmac_ref; ///
+private alias c_g_hmac_unrefFn = extern(C) void function(GHmac* hmac) nothrow;
+__gshared c_g_hmac_unrefFn c_g_hmac_unref; ///
+private alias c_g_hmac_updateFn = extern(C) void function(GHmac* hmac, const(ubyte)* data, ptrdiff_t length) nothrow;
+__gshared c_g_hmac_updateFn c_g_hmac_update; ///
+
+// Hook
+private alias c_g_hook_compare_idsFn = extern(C) int function(GHook* newHook, GHook* sibling) nothrow;
+__gshared c_g_hook_compare_idsFn c_g_hook_compare_ids; ///
+private alias c_g_hook_allocFn = extern(C) GHook* function(GHookList* hookList) nothrow;
+__gshared c_g_hook_allocFn c_g_hook_alloc; ///
+private alias c_g_hook_destroyFn = extern(C) gboolean function(GHookList* hookList, gulong hookId) nothrow;
+__gshared c_g_hook_destroyFn c_g_hook_destroy; ///
+private alias c_g_hook_destroy_linkFn = extern(C) void function(GHookList* hookList, GHook* hook) nothrow;
+__gshared c_g_hook_destroy_linkFn c_g_hook_destroy_link; ///
+private alias c_g_hook_findFn = extern(C) GHook* function(GHookList* hookList, gboolean needValids, GHookFindFunc func, void* data) nothrow;
+__gshared c_g_hook_findFn c_g_hook_find; ///
+private alias c_g_hook_find_dataFn = extern(C) GHook* function(GHookList* hookList, gboolean needValids, void* data) nothrow;
+__gshared c_g_hook_find_dataFn c_g_hook_find_data; ///
+private alias c_g_hook_find_funcFn = extern(C) GHook* function(GHookList* hookList, gboolean needValids, void* func) nothrow;
+__gshared c_g_hook_find_funcFn c_g_hook_find_func; ///
+private alias c_g_hook_find_func_dataFn = extern(C) GHook* function(GHookList* hookList, gboolean needValids, void* func, void* data) nothrow;
+__gshared c_g_hook_find_func_dataFn c_g_hook_find_func_data; ///
+private alias c_g_hook_first_validFn = extern(C) GHook* function(GHookList* hookList, gboolean mayBeInCall) nothrow;
+__gshared c_g_hook_first_validFn c_g_hook_first_valid; ///
+private alias c_g_hook_freeFn = extern(C) void function(GHookList* hookList, GHook* hook) nothrow;
+__gshared c_g_hook_freeFn c_g_hook_free; ///
+private alias c_g_hook_getFn = extern(C) GHook* function(GHookList* hookList, gulong hookId) nothrow;
+__gshared c_g_hook_getFn c_g_hook_get; ///
+private alias c_g_hook_insert_beforeFn = extern(C) void function(GHookList* hookList, GHook* sibling, GHook* hook) nothrow;
+__gshared c_g_hook_insert_beforeFn c_g_hook_insert_before; ///
+private alias c_g_hook_insert_sortedFn = extern(C) void function(GHookList* hookList, GHook* hook, GHookCompareFunc func) nothrow;
+__gshared c_g_hook_insert_sortedFn c_g_hook_insert_sorted; ///
+private alias c_g_hook_next_validFn = extern(C) GHook* function(GHookList* hookList, GHook* hook, gboolean mayBeInCall) nothrow;
+__gshared c_g_hook_next_validFn c_g_hook_next_valid; ///
+private alias c_g_hook_prependFn = extern(C) void function(GHookList* hookList, GHook* hook) nothrow;
+__gshared c_g_hook_prependFn c_g_hook_prepend; ///
+private alias c_g_hook_refFn = extern(C) GHook* function(GHookList* hookList, GHook* hook) nothrow;
+__gshared c_g_hook_refFn c_g_hook_ref; ///
+private alias c_g_hook_unrefFn = extern(C) void function(GHookList* hookList, GHook* hook) nothrow;
+__gshared c_g_hook_unrefFn c_g_hook_unref; ///
+
+// HookList
+private alias c_g_hook_list_clearFn = extern(C) void function(GHookList* hookList) nothrow;
+__gshared c_g_hook_list_clearFn c_g_hook_list_clear; ///
+private alias c_g_hook_list_initFn = extern(C) void function(GHookList* hookList, uint hookSize) nothrow;
+__gshared c_g_hook_list_initFn c_g_hook_list_init; ///
+private alias c_g_hook_list_invokeFn = extern(C) void function(GHookList* hookList, gboolean mayRecurse) nothrow;
+__gshared c_g_hook_list_invokeFn c_g_hook_list_invoke; ///
+private alias c_g_hook_list_invoke_checkFn = extern(C) void function(GHookList* hookList, gboolean mayRecurse) nothrow;
+__gshared c_g_hook_list_invoke_checkFn c_g_hook_list_invoke_check; ///
+private alias c_g_hook_list_marshalFn = extern(C) void function(GHookList* hookList, gboolean mayRecurse, GHookMarshaller marshaller, void* marshalData) nothrow;
+__gshared c_g_hook_list_marshalFn c_g_hook_list_marshal; ///
+private alias c_g_hook_list_marshal_checkFn = extern(C) void function(GHookList* hookList, gboolean mayRecurse, GHookCheckMarshaller marshaller, void* marshalData) nothrow;
+__gshared c_g_hook_list_marshal_checkFn c_g_hook_list_marshal_check; ///
+
+// IOChannel
+private alias c_g_io_channel_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_io_channel_get_typeFn c_g_io_channel_get_type; ///
+private alias c_g_io_channel_new_fileFn = extern(C) GIOChannel* function(const(char)* filename, const(char)* mode, GError** _err) nothrow;
+__gshared c_g_io_channel_new_fileFn c_g_io_channel_new_file; ///
+private alias c_g_io_channel_unix_newFn = extern(C) GIOChannel* function(int fd) nothrow;
+__gshared c_g_io_channel_unix_newFn c_g_io_channel_unix_new; ///
+private alias c_g_io_channel_closeFn = extern(C) void function(GIOChannel* channel) nothrow;
+__gshared c_g_io_channel_closeFn c_g_io_channel_close; ///
+private alias c_g_io_channel_flushFn = extern(C) GIOStatus function(GIOChannel* channel, GError** _err) nothrow;
+__gshared c_g_io_channel_flushFn c_g_io_channel_flush; ///
+private alias c_g_io_channel_get_buffer_conditionFn = extern(C) GIOCondition function(GIOChannel* channel) nothrow;
+__gshared c_g_io_channel_get_buffer_conditionFn c_g_io_channel_get_buffer_condition; ///
+private alias c_g_io_channel_get_buffer_sizeFn = extern(C) size_t function(GIOChannel* channel) nothrow;
+__gshared c_g_io_channel_get_buffer_sizeFn c_g_io_channel_get_buffer_size; ///
+private alias c_g_io_channel_get_bufferedFn = extern(C) gboolean function(GIOChannel* channel) nothrow;
+__gshared c_g_io_channel_get_bufferedFn c_g_io_channel_get_buffered; ///
+private alias c_g_io_channel_get_close_on_unrefFn = extern(C) gboolean function(GIOChannel* channel) nothrow;
+__gshared c_g_io_channel_get_close_on_unrefFn c_g_io_channel_get_close_on_unref; ///
+private alias c_g_io_channel_get_encodingFn = extern(C) const(char)* function(GIOChannel* channel) nothrow;
+__gshared c_g_io_channel_get_encodingFn c_g_io_channel_get_encoding; ///
+private alias c_g_io_channel_get_flagsFn = extern(C) GIOFlags function(GIOChannel* channel) nothrow;
+__gshared c_g_io_channel_get_flagsFn c_g_io_channel_get_flags; ///
+private alias c_g_io_channel_get_line_termFn = extern(C) const(char)* function(GIOChannel* channel, int* length) nothrow;
+__gshared c_g_io_channel_get_line_termFn c_g_io_channel_get_line_term; ///
+private alias c_g_io_channel_initFn = extern(C) void function(GIOChannel* channel) nothrow;
+__gshared c_g_io_channel_initFn c_g_io_channel_init; ///
+private alias c_g_io_channel_readFn = extern(C) GIOError function(GIOChannel* channel, ubyte* buf, size_t count, size_t* bytesRead) nothrow;
+__gshared c_g_io_channel_readFn c_g_io_channel_read; ///
+private alias c_g_io_channel_read_charsFn = extern(C) GIOStatus function(GIOChannel* channel, ubyte* buf, size_t count, size_t* bytesRead, GError** _err) nothrow;
+__gshared c_g_io_channel_read_charsFn c_g_io_channel_read_chars; ///
+private alias c_g_io_channel_read_lineFn = extern(C) GIOStatus function(GIOChannel* channel, char** strReturn, size_t* length, size_t* terminatorPos, GError** _err) nothrow;
+__gshared c_g_io_channel_read_lineFn c_g_io_channel_read_line; ///
+private alias c_g_io_channel_read_line_stringFn = extern(C) GIOStatus function(GIOChannel* channel, GString* buffer, size_t* terminatorPos, GError** _err) nothrow;
+__gshared c_g_io_channel_read_line_stringFn c_g_io_channel_read_line_string; ///
+private alias c_g_io_channel_read_to_endFn = extern(C) GIOStatus function(GIOChannel* channel, ubyte** strReturn, size_t* length, GError** _err) nothrow;
+__gshared c_g_io_channel_read_to_endFn c_g_io_channel_read_to_end; ///
+private alias c_g_io_channel_read_unicharFn = extern(C) GIOStatus function(GIOChannel* channel, dchar* thechar, GError** _err) nothrow;
+__gshared c_g_io_channel_read_unicharFn c_g_io_channel_read_unichar; ///
+private alias c_g_io_channel_refFn = extern(C) GIOChannel* function(GIOChannel* channel) nothrow;
+__gshared c_g_io_channel_refFn c_g_io_channel_ref; ///
+private alias c_g_io_channel_seekFn = extern(C) GIOError function(GIOChannel* channel, long offset, GSeekType type) nothrow;
+__gshared c_g_io_channel_seekFn c_g_io_channel_seek; ///
+private alias c_g_io_channel_seek_positionFn = extern(C) GIOStatus function(GIOChannel* channel, long offset, GSeekType type, GError** _err) nothrow;
+__gshared c_g_io_channel_seek_positionFn c_g_io_channel_seek_position; ///
+private alias c_g_io_channel_set_buffer_sizeFn = extern(C) void function(GIOChannel* channel, size_t size) nothrow;
+__gshared c_g_io_channel_set_buffer_sizeFn c_g_io_channel_set_buffer_size; ///
+private alias c_g_io_channel_set_bufferedFn = extern(C) void function(GIOChannel* channel, gboolean buffered) nothrow;
+__gshared c_g_io_channel_set_bufferedFn c_g_io_channel_set_buffered; ///
+private alias c_g_io_channel_set_close_on_unrefFn = extern(C) void function(GIOChannel* channel, gboolean doClose) nothrow;
+__gshared c_g_io_channel_set_close_on_unrefFn c_g_io_channel_set_close_on_unref; ///
+private alias c_g_io_channel_set_encodingFn = extern(C) GIOStatus function(GIOChannel* channel, const(char)* encoding, GError** _err) nothrow;
+__gshared c_g_io_channel_set_encodingFn c_g_io_channel_set_encoding; ///
+private alias c_g_io_channel_set_flagsFn = extern(C) GIOStatus function(GIOChannel* channel, GIOFlags flags, GError** _err) nothrow;
+__gshared c_g_io_channel_set_flagsFn c_g_io_channel_set_flags; ///
+private alias c_g_io_channel_set_line_termFn = extern(C) void function(GIOChannel* channel, const(char)* lineTerm, int length) nothrow;
+__gshared c_g_io_channel_set_line_termFn c_g_io_channel_set_line_term; ///
+private alias c_g_io_channel_shutdownFn = extern(C) GIOStatus function(GIOChannel* channel, gboolean flush, GError** _err) nothrow;
+__gshared c_g_io_channel_shutdownFn c_g_io_channel_shutdown; ///
+private alias c_g_io_channel_unix_get_fdFn = extern(C) int function(GIOChannel* channel) nothrow;
+__gshared c_g_io_channel_unix_get_fdFn c_g_io_channel_unix_get_fd; ///
+private alias c_g_io_channel_unrefFn = extern(C) void function(GIOChannel* channel) nothrow;
+__gshared c_g_io_channel_unrefFn c_g_io_channel_unref; ///
+private alias c_g_io_channel_writeFn = extern(C) GIOError function(GIOChannel* channel, const(char)* buf, size_t count, size_t* bytesWritten) nothrow;
+__gshared c_g_io_channel_writeFn c_g_io_channel_write; ///
+private alias c_g_io_channel_write_charsFn = extern(C) GIOStatus function(GIOChannel* channel, const(ubyte)* buf, ptrdiff_t count, size_t* bytesWritten, GError** _err) nothrow;
+__gshared c_g_io_channel_write_charsFn c_g_io_channel_write_chars; ///
+private alias c_g_io_channel_write_unicharFn = extern(C) GIOStatus function(GIOChannel* channel, dchar thechar, GError** _err) nothrow;
+__gshared c_g_io_channel_write_unicharFn c_g_io_channel_write_unichar; ///
+private alias c_g_io_channel_error_from_errnoFn = extern(C) GIOChannelError function(int en) nothrow;
+__gshared c_g_io_channel_error_from_errnoFn c_g_io_channel_error_from_errno; ///
+private alias c_g_io_channel_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_io_channel_error_quarkFn c_g_io_channel_error_quark; ///
+
+// KeyFile
+private alias c_g_key_file_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_key_file_get_typeFn c_g_key_file_get_type; ///
+private alias c_g_key_file_newFn = extern(C) GKeyFile* function() nothrow;
+__gshared c_g_key_file_newFn c_g_key_file_new; ///
+private alias c_g_key_file_freeFn = extern(C) void function(GKeyFile* keyFile) nothrow;
+__gshared c_g_key_file_freeFn c_g_key_file_free; ///
+private alias c_g_key_file_get_booleanFn = extern(C) gboolean function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) nothrow;
+__gshared c_g_key_file_get_booleanFn c_g_key_file_get_boolean; ///
+private alias c_g_key_file_get_boolean_listFn = extern(C) gboolean* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, size_t* length, GError** _err) nothrow;
+__gshared c_g_key_file_get_boolean_listFn c_g_key_file_get_boolean_list; ///
+private alias c_g_key_file_get_commentFn = extern(C) char* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) nothrow;
+__gshared c_g_key_file_get_commentFn c_g_key_file_get_comment; ///
+private alias c_g_key_file_get_doubleFn = extern(C) double function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) nothrow;
+__gshared c_g_key_file_get_doubleFn c_g_key_file_get_double; ///
+private alias c_g_key_file_get_double_listFn = extern(C) double* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, size_t* length, GError** _err) nothrow;
+__gshared c_g_key_file_get_double_listFn c_g_key_file_get_double_list; ///
+private alias c_g_key_file_get_groupsFn = extern(C) char** function(GKeyFile* keyFile, size_t* length) nothrow;
+__gshared c_g_key_file_get_groupsFn c_g_key_file_get_groups; ///
+private alias c_g_key_file_get_int64Fn = extern(C) long function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) nothrow;
+__gshared c_g_key_file_get_int64Fn c_g_key_file_get_int64; ///
+private alias c_g_key_file_get_integerFn = extern(C) int function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) nothrow;
+__gshared c_g_key_file_get_integerFn c_g_key_file_get_integer; ///
+private alias c_g_key_file_get_integer_listFn = extern(C) int* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, size_t* length, GError** _err) nothrow;
+__gshared c_g_key_file_get_integer_listFn c_g_key_file_get_integer_list; ///
+private alias c_g_key_file_get_keysFn = extern(C) char** function(GKeyFile* keyFile, const(char)* groupName, size_t* length, GError** _err) nothrow;
+__gshared c_g_key_file_get_keysFn c_g_key_file_get_keys; ///
+private alias c_g_key_file_get_locale_for_keyFn = extern(C) char* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, const(char)* locale) nothrow;
+__gshared c_g_key_file_get_locale_for_keyFn c_g_key_file_get_locale_for_key; ///
+private alias c_g_key_file_get_locale_stringFn = extern(C) char* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, const(char)* locale, GError** _err) nothrow;
+__gshared c_g_key_file_get_locale_stringFn c_g_key_file_get_locale_string; ///
+private alias c_g_key_file_get_locale_string_listFn = extern(C) char** function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, const(char)* locale, size_t* length, GError** _err) nothrow;
+__gshared c_g_key_file_get_locale_string_listFn c_g_key_file_get_locale_string_list; ///
+private alias c_g_key_file_get_start_groupFn = extern(C) char* function(GKeyFile* keyFile) nothrow;
+__gshared c_g_key_file_get_start_groupFn c_g_key_file_get_start_group; ///
+private alias c_g_key_file_get_stringFn = extern(C) char* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) nothrow;
+__gshared c_g_key_file_get_stringFn c_g_key_file_get_string; ///
+private alias c_g_key_file_get_string_listFn = extern(C) char** function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, size_t* length, GError** _err) nothrow;
+__gshared c_g_key_file_get_string_listFn c_g_key_file_get_string_list; ///
+private alias c_g_key_file_get_uint64Fn = extern(C) ulong function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) nothrow;
+__gshared c_g_key_file_get_uint64Fn c_g_key_file_get_uint64; ///
+private alias c_g_key_file_get_valueFn = extern(C) char* function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) nothrow;
+__gshared c_g_key_file_get_valueFn c_g_key_file_get_value; ///
+private alias c_g_key_file_has_groupFn = extern(C) gboolean function(GKeyFile* keyFile, const(char)* groupName) nothrow;
+__gshared c_g_key_file_has_groupFn c_g_key_file_has_group; ///
+private alias c_g_key_file_has_keyFn = extern(C) gboolean function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) nothrow;
+__gshared c_g_key_file_has_keyFn c_g_key_file_has_key; ///
+private alias c_g_key_file_load_from_bytesFn = extern(C) gboolean function(GKeyFile* keyFile, GBytes* bytes, GKeyFileFlags flags, GError** _err) nothrow;
+__gshared c_g_key_file_load_from_bytesFn c_g_key_file_load_from_bytes; ///
+private alias c_g_key_file_load_from_dataFn = extern(C) gboolean function(GKeyFile* keyFile, const(char)* data, size_t length, GKeyFileFlags flags, GError** _err) nothrow;
+__gshared c_g_key_file_load_from_dataFn c_g_key_file_load_from_data; ///
+private alias c_g_key_file_load_from_data_dirsFn = extern(C) gboolean function(GKeyFile* keyFile, const(char)* file, char** fullPath, GKeyFileFlags flags, GError** _err) nothrow;
+__gshared c_g_key_file_load_from_data_dirsFn c_g_key_file_load_from_data_dirs; ///
+private alias c_g_key_file_load_from_dirsFn = extern(C) gboolean function(GKeyFile* keyFile, const(char)* file, const(char*)* searchDirs, char** fullPath, GKeyFileFlags flags, GError** _err) nothrow;
+__gshared c_g_key_file_load_from_dirsFn c_g_key_file_load_from_dirs; ///
+private alias c_g_key_file_load_from_fileFn = extern(C) gboolean function(GKeyFile* keyFile, const(char)* file, GKeyFileFlags flags, GError** _err) nothrow;
+__gshared c_g_key_file_load_from_fileFn c_g_key_file_load_from_file; ///
+private alias c_g_key_file_refFn = extern(C) GKeyFile* function(GKeyFile* keyFile) nothrow;
+__gshared c_g_key_file_refFn c_g_key_file_ref; ///
+private alias c_g_key_file_remove_commentFn = extern(C) gboolean function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) nothrow;
+__gshared c_g_key_file_remove_commentFn c_g_key_file_remove_comment; ///
+private alias c_g_key_file_remove_groupFn = extern(C) gboolean function(GKeyFile* keyFile, const(char)* groupName, GError** _err) nothrow;
+__gshared c_g_key_file_remove_groupFn c_g_key_file_remove_group; ///
+private alias c_g_key_file_remove_keyFn = extern(C) gboolean function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, GError** _err) nothrow;
+__gshared c_g_key_file_remove_keyFn c_g_key_file_remove_key; ///
+private alias c_g_key_file_save_to_fileFn = extern(C) gboolean function(GKeyFile* keyFile, const(char)* filename, GError** _err) nothrow;
+__gshared c_g_key_file_save_to_fileFn c_g_key_file_save_to_file; ///
+private alias c_g_key_file_set_booleanFn = extern(C) void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, gboolean value) nothrow;
+__gshared c_g_key_file_set_booleanFn c_g_key_file_set_boolean; ///
+private alias c_g_key_file_set_boolean_listFn = extern(C) void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, gboolean* list, size_t length) nothrow;
+__gshared c_g_key_file_set_boolean_listFn c_g_key_file_set_boolean_list; ///
+private alias c_g_key_file_set_commentFn = extern(C) gboolean function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, const(char)* comment, GError** _err) nothrow;
+__gshared c_g_key_file_set_commentFn c_g_key_file_set_comment; ///
+private alias c_g_key_file_set_doubleFn = extern(C) void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, double value) nothrow;
+__gshared c_g_key_file_set_doubleFn c_g_key_file_set_double; ///
+private alias c_g_key_file_set_double_listFn = extern(C) void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, double* list, size_t length) nothrow;
+__gshared c_g_key_file_set_double_listFn c_g_key_file_set_double_list; ///
+private alias c_g_key_file_set_int64Fn = extern(C) void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, long value) nothrow;
+__gshared c_g_key_file_set_int64Fn c_g_key_file_set_int64; ///
+private alias c_g_key_file_set_integerFn = extern(C) void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, int value) nothrow;
+__gshared c_g_key_file_set_integerFn c_g_key_file_set_integer; ///
+private alias c_g_key_file_set_integer_listFn = extern(C) void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, int* list, size_t length) nothrow;
+__gshared c_g_key_file_set_integer_listFn c_g_key_file_set_integer_list; ///
+private alias c_g_key_file_set_list_separatorFn = extern(C) void function(GKeyFile* keyFile, char separator) nothrow;
+__gshared c_g_key_file_set_list_separatorFn c_g_key_file_set_list_separator; ///
+private alias c_g_key_file_set_locale_stringFn = extern(C) void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, const(char)* locale, const(char)* string_) nothrow;
+__gshared c_g_key_file_set_locale_stringFn c_g_key_file_set_locale_string; ///
+private alias c_g_key_file_set_locale_string_listFn = extern(C) void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, const(char)* locale, const(char*)* list, size_t length) nothrow;
+__gshared c_g_key_file_set_locale_string_listFn c_g_key_file_set_locale_string_list; ///
+private alias c_g_key_file_set_stringFn = extern(C) void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, const(char)* string_) nothrow;
+__gshared c_g_key_file_set_stringFn c_g_key_file_set_string; ///
+private alias c_g_key_file_set_string_listFn = extern(C) void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, const(char*)* list, size_t length) nothrow;
+__gshared c_g_key_file_set_string_listFn c_g_key_file_set_string_list; ///
+private alias c_g_key_file_set_uint64Fn = extern(C) void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, ulong value) nothrow;
+__gshared c_g_key_file_set_uint64Fn c_g_key_file_set_uint64; ///
+private alias c_g_key_file_set_valueFn = extern(C) void function(GKeyFile* keyFile, const(char)* groupName, const(char)* key, const(char)* value) nothrow;
+__gshared c_g_key_file_set_valueFn c_g_key_file_set_value; ///
+private alias c_g_key_file_to_dataFn = extern(C) char* function(GKeyFile* keyFile, size_t* length, GError** _err) nothrow;
+__gshared c_g_key_file_to_dataFn c_g_key_file_to_data; ///
+private alias c_g_key_file_unrefFn = extern(C) void function(GKeyFile* keyFile) nothrow;
+__gshared c_g_key_file_unrefFn c_g_key_file_unref; ///
+private alias c_g_key_file_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_key_file_error_quarkFn c_g_key_file_error_quark; ///
+
+// List
+private alias c_g_list_allocFn = extern(C) GList* function() nothrow;
+__gshared c_g_list_allocFn c_g_list_alloc; ///
+private alias c_g_list_appendFn = extern(C) GList* function(GList* list, void* data) nothrow;
+__gshared c_g_list_appendFn c_g_list_append; ///
+private alias c_g_list_concatFn = extern(C) GList* function(GList* list1, GList* list2) nothrow;
+__gshared c_g_list_concatFn c_g_list_concat; ///
+private alias c_g_list_copyFn = extern(C) GList* function(GList* list) nothrow;
+__gshared c_g_list_copyFn c_g_list_copy; ///
+private alias c_g_list_copy_deepFn = extern(C) GList* function(GList* list, GCopyFunc func, void* userData) nothrow;
+__gshared c_g_list_copy_deepFn c_g_list_copy_deep; ///
+private alias c_g_list_delete_linkFn = extern(C) GList* function(GList* list, GList* link) nothrow;
+__gshared c_g_list_delete_linkFn c_g_list_delete_link; ///
+private alias c_g_list_findFn = extern(C) GList* function(GList* list, const(void)* data) nothrow;
+__gshared c_g_list_findFn c_g_list_find; ///
+private alias c_g_list_find_customFn = extern(C) GList* function(GList* list, const(void)* data, GCompareFunc func) nothrow;
+__gshared c_g_list_find_customFn c_g_list_find_custom; ///
+private alias c_g_list_firstFn = extern(C) GList* function(GList* list) nothrow;
+__gshared c_g_list_firstFn c_g_list_first; ///
+private alias c_g_list_foreachFn = extern(C) void function(GList* list, GFunc func, void* userData) nothrow;
+__gshared c_g_list_foreachFn c_g_list_foreach; ///
+private alias c_g_list_freeFn = extern(C) void function(GList* list) nothrow;
+__gshared c_g_list_freeFn c_g_list_free; ///
+private alias c_g_list_free_1Fn = extern(C) void function(GList* list) nothrow;
+__gshared c_g_list_free_1Fn c_g_list_free_1; ///
+private alias c_g_list_free_fullFn = extern(C) void function(GList* list, GDestroyNotify freeFunc) nothrow;
+__gshared c_g_list_free_fullFn c_g_list_free_full; ///
+private alias c_g_list_indexFn = extern(C) int function(GList* list, const(void)* data) nothrow;
+__gshared c_g_list_indexFn c_g_list_index; ///
+private alias c_g_list_insertFn = extern(C) GList* function(GList* list, void* data, int position) nothrow;
+__gshared c_g_list_insertFn c_g_list_insert; ///
+private alias c_g_list_insert_beforeFn = extern(C) GList* function(GList* list, GList* sibling, void* data) nothrow;
+__gshared c_g_list_insert_beforeFn c_g_list_insert_before; ///
+private alias c_g_list_insert_before_linkFn = extern(C) GList* function(GList* list, GList* sibling, GList* link) nothrow;
+__gshared c_g_list_insert_before_linkFn c_g_list_insert_before_link; ///
+private alias c_g_list_insert_sortedFn = extern(C) GList* function(GList* list, void* data, GCompareFunc func) nothrow;
+__gshared c_g_list_insert_sortedFn c_g_list_insert_sorted; ///
+private alias c_g_list_insert_sorted_with_dataFn = extern(C) GList* function(GList* list, void* data, GCompareDataFunc func, void* userData) nothrow;
+__gshared c_g_list_insert_sorted_with_dataFn c_g_list_insert_sorted_with_data; ///
+private alias c_g_list_lastFn = extern(C) GList* function(GList* list) nothrow;
+__gshared c_g_list_lastFn c_g_list_last; ///
+private alias c_g_list_lengthFn = extern(C) uint function(GList* list) nothrow;
+__gshared c_g_list_lengthFn c_g_list_length; ///
+private alias c_g_list_nthFn = extern(C) GList* function(GList* list, uint n) nothrow;
+__gshared c_g_list_nthFn c_g_list_nth; ///
+private alias c_g_list_nth_dataFn = extern(C) void* function(GList* list, uint n) nothrow;
+__gshared c_g_list_nth_dataFn c_g_list_nth_data; ///
+private alias c_g_list_nth_prevFn = extern(C) GList* function(GList* list, uint n) nothrow;
+__gshared c_g_list_nth_prevFn c_g_list_nth_prev; ///
+private alias c_g_list_pop_allocatorFn = extern(C) void function() nothrow;
+__gshared c_g_list_pop_allocatorFn c_g_list_pop_allocator; ///
+private alias c_g_list_positionFn = extern(C) int function(GList* list, GList* llink) nothrow;
+__gshared c_g_list_positionFn c_g_list_position; ///
+private alias c_g_list_prependFn = extern(C) GList* function(GList* list, void* data) nothrow;
+__gshared c_g_list_prependFn c_g_list_prepend; ///
+private alias c_g_list_push_allocatorFn = extern(C) void function(GAllocator* allocator) nothrow;
+__gshared c_g_list_push_allocatorFn c_g_list_push_allocator; ///
+private alias c_g_list_removeFn = extern(C) GList* function(GList* list, const(void)* data) nothrow;
+__gshared c_g_list_removeFn c_g_list_remove; ///
+private alias c_g_list_remove_allFn = extern(C) GList* function(GList* list, const(void)* data) nothrow;
+__gshared c_g_list_remove_allFn c_g_list_remove_all; ///
+private alias c_g_list_remove_linkFn = extern(C) GList* function(GList* list, GList* llink) nothrow;
+__gshared c_g_list_remove_linkFn c_g_list_remove_link; ///
+private alias c_g_list_reverseFn = extern(C) GList* function(GList* list) nothrow;
+__gshared c_g_list_reverseFn c_g_list_reverse; ///
+private alias c_g_list_sortFn = extern(C) GList* function(GList* list, GCompareFunc compareFunc) nothrow;
+__gshared c_g_list_sortFn c_g_list_sort; ///
+private alias c_g_list_sort_with_dataFn = extern(C) GList* function(GList* list, GCompareDataFunc compareFunc, void* userData) nothrow;
+__gshared c_g_list_sort_with_dataFn c_g_list_sort_with_data; ///
+
+// MainContext
+private alias c_g_main_context_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_main_context_get_typeFn c_g_main_context_get_type; ///
+private alias c_g_main_context_newFn = extern(C) GMainContext* function() nothrow;
+__gshared c_g_main_context_newFn c_g_main_context_new; ///
+private alias c_g_main_context_new_with_flagsFn = extern(C) GMainContext* function(GMainContextFlags flags) nothrow;
+__gshared c_g_main_context_new_with_flagsFn c_g_main_context_new_with_flags; ///
+private alias c_g_main_context_acquireFn = extern(C) gboolean function(GMainContext* context) nothrow;
+__gshared c_g_main_context_acquireFn c_g_main_context_acquire; ///
+private alias c_g_main_context_add_pollFn = extern(C) void function(GMainContext* context, GPollFD* fd, int priority) nothrow;
+__gshared c_g_main_context_add_pollFn c_g_main_context_add_poll; ///
+private alias c_g_main_context_checkFn = extern(C) gboolean function(GMainContext* context, int maxPriority, GPollFD* fds, int nFds) nothrow;
+__gshared c_g_main_context_checkFn c_g_main_context_check; ///
+private alias c_g_main_context_dispatchFn = extern(C) void function(GMainContext* context) nothrow;
+__gshared c_g_main_context_dispatchFn c_g_main_context_dispatch; ///
+private alias c_g_main_context_find_source_by_funcs_user_dataFn = extern(C) GSource* function(GMainContext* context, GSourceFuncs* funcs, void* userData) nothrow;
+__gshared c_g_main_context_find_source_by_funcs_user_dataFn c_g_main_context_find_source_by_funcs_user_data; ///
+private alias c_g_main_context_find_source_by_idFn = extern(C) GSource* function(GMainContext* context, uint sourceId) nothrow;
+__gshared c_g_main_context_find_source_by_idFn c_g_main_context_find_source_by_id; ///
+private alias c_g_main_context_find_source_by_user_dataFn = extern(C) GSource* function(GMainContext* context, void* userData) nothrow;
+__gshared c_g_main_context_find_source_by_user_dataFn c_g_main_context_find_source_by_user_data; ///
+private alias c_g_main_context_get_poll_funcFn = extern(C) GPollFunc function(GMainContext* context) nothrow;
+__gshared c_g_main_context_get_poll_funcFn c_g_main_context_get_poll_func; ///
+private alias c_g_main_context_invokeFn = extern(C) void function(GMainContext* context, GSourceFunc function_, void* data) nothrow;
+__gshared c_g_main_context_invokeFn c_g_main_context_invoke; ///
+private alias c_g_main_context_invoke_fullFn = extern(C) void function(GMainContext* context, int priority, GSourceFunc function_, void* data, GDestroyNotify notify) nothrow;
+__gshared c_g_main_context_invoke_fullFn c_g_main_context_invoke_full; ///
+private alias c_g_main_context_is_ownerFn = extern(C) gboolean function(GMainContext* context) nothrow;
+__gshared c_g_main_context_is_ownerFn c_g_main_context_is_owner; ///
+private alias c_g_main_context_iterationFn = extern(C) gboolean function(GMainContext* context, gboolean mayBlock) nothrow;
+__gshared c_g_main_context_iterationFn c_g_main_context_iteration; ///
+private alias c_g_main_context_pendingFn = extern(C) gboolean function(GMainContext* context) nothrow;
+__gshared c_g_main_context_pendingFn c_g_main_context_pending; ///
+private alias c_g_main_context_pop_thread_defaultFn = extern(C) void function(GMainContext* context) nothrow;
+__gshared c_g_main_context_pop_thread_defaultFn c_g_main_context_pop_thread_default; ///
+private alias c_g_main_context_prepareFn = extern(C) gboolean function(GMainContext* context, int* priority) nothrow;
+__gshared c_g_main_context_prepareFn c_g_main_context_prepare; ///
+private alias c_g_main_context_push_thread_defaultFn = extern(C) void function(GMainContext* context) nothrow;
+__gshared c_g_main_context_push_thread_defaultFn c_g_main_context_push_thread_default; ///
+private alias c_g_main_context_pusher_newFn = extern(C) GMainContextPusher* function(GMainContext* mainContext) nothrow;
+__gshared c_g_main_context_pusher_newFn c_g_main_context_pusher_new; ///
+private alias c_g_main_context_queryFn = extern(C) int function(GMainContext* context, int maxPriority, int* timeout, GPollFD* fds, int nFds) nothrow;
+__gshared c_g_main_context_queryFn c_g_main_context_query; ///
+private alias c_g_main_context_refFn = extern(C) GMainContext* function(GMainContext* context) nothrow;
+__gshared c_g_main_context_refFn c_g_main_context_ref; ///
+private alias c_g_main_context_releaseFn = extern(C) void function(GMainContext* context) nothrow;
+__gshared c_g_main_context_releaseFn c_g_main_context_release; ///
+private alias c_g_main_context_remove_pollFn = extern(C) void function(GMainContext* context, GPollFD* fd) nothrow;
+__gshared c_g_main_context_remove_pollFn c_g_main_context_remove_poll; ///
+private alias c_g_main_context_set_poll_funcFn = extern(C) void function(GMainContext* context, GPollFunc func) nothrow;
+__gshared c_g_main_context_set_poll_funcFn c_g_main_context_set_poll_func; ///
+private alias c_g_main_context_unrefFn = extern(C) void function(GMainContext* context) nothrow;
+__gshared c_g_main_context_unrefFn c_g_main_context_unref; ///
+private alias c_g_main_context_waitFn = extern(C) gboolean function(GMainContext* context, GCond* cond, GMutex* mutex) nothrow;
+__gshared c_g_main_context_waitFn c_g_main_context_wait; ///
+private alias c_g_main_context_wakeupFn = extern(C) void function(GMainContext* context) nothrow;
+__gshared c_g_main_context_wakeupFn c_g_main_context_wakeup; ///
+private alias c_g_main_context_defaultFn = extern(C) GMainContext* function() nothrow;
+__gshared c_g_main_context_defaultFn c_g_main_context_default; ///
+private alias c_g_main_context_get_thread_defaultFn = extern(C) GMainContext* function() nothrow;
+__gshared c_g_main_context_get_thread_defaultFn c_g_main_context_get_thread_default; ///
+private alias c_g_main_context_pusher_freeFn = extern(C) void function(GMainContextPusher* pusher) nothrow;
+__gshared c_g_main_context_pusher_freeFn c_g_main_context_pusher_free; ///
+private alias c_g_main_context_ref_thread_defaultFn = extern(C) GMainContext* function() nothrow;
+__gshared c_g_main_context_ref_thread_defaultFn c_g_main_context_ref_thread_default; ///
+
+// MainLoop
+private alias c_g_main_loop_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_main_loop_get_typeFn c_g_main_loop_get_type; ///
+private alias c_g_main_loop_newFn = extern(C) GMainLoop* function(GMainContext* context, gboolean isRunning) nothrow;
+__gshared c_g_main_loop_newFn c_g_main_loop_new; ///
+private alias c_g_main_loop_get_contextFn = extern(C) GMainContext* function(GMainLoop* loop) nothrow;
+__gshared c_g_main_loop_get_contextFn c_g_main_loop_get_context; ///
+private alias c_g_main_loop_is_runningFn = extern(C) gboolean function(GMainLoop* loop) nothrow;
+__gshared c_g_main_loop_is_runningFn c_g_main_loop_is_running; ///
+private alias c_g_main_loop_quitFn = extern(C) void function(GMainLoop* loop) nothrow;
+__gshared c_g_main_loop_quitFn c_g_main_loop_quit; ///
+private alias c_g_main_loop_refFn = extern(C) GMainLoop* function(GMainLoop* loop) nothrow;
+__gshared c_g_main_loop_refFn c_g_main_loop_ref; ///
+private alias c_g_main_loop_runFn = extern(C) void function(GMainLoop* loop) nothrow;
+__gshared c_g_main_loop_runFn c_g_main_loop_run; ///
+private alias c_g_main_loop_unrefFn = extern(C) void function(GMainLoop* loop) nothrow;
+__gshared c_g_main_loop_unrefFn c_g_main_loop_unref; ///
+
+// MappedFile
+private alias c_g_mapped_file_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_mapped_file_get_typeFn c_g_mapped_file_get_type; ///
+private alias c_g_mapped_file_newFn = extern(C) GMappedFile* function(const(char)* filename, gboolean writable, GError** _err) nothrow;
+__gshared c_g_mapped_file_newFn c_g_mapped_file_new; ///
+private alias c_g_mapped_file_new_from_fdFn = extern(C) GMappedFile* function(int fd, gboolean writable, GError** _err) nothrow;
+__gshared c_g_mapped_file_new_from_fdFn c_g_mapped_file_new_from_fd; ///
+private alias c_g_mapped_file_freeFn = extern(C) void function(GMappedFile* file) nothrow;
+__gshared c_g_mapped_file_freeFn c_g_mapped_file_free; ///
+private alias c_g_mapped_file_get_bytesFn = extern(C) GBytes* function(GMappedFile* file) nothrow;
+__gshared c_g_mapped_file_get_bytesFn c_g_mapped_file_get_bytes; ///
+private alias c_g_mapped_file_get_contentsFn = extern(C) char* function(GMappedFile* file) nothrow;
+__gshared c_g_mapped_file_get_contentsFn c_g_mapped_file_get_contents; ///
+private alias c_g_mapped_file_get_lengthFn = extern(C) size_t function(GMappedFile* file) nothrow;
+__gshared c_g_mapped_file_get_lengthFn c_g_mapped_file_get_length; ///
+private alias c_g_mapped_file_refFn = extern(C) GMappedFile* function(GMappedFile* file) nothrow;
+__gshared c_g_mapped_file_refFn c_g_mapped_file_ref; ///
+private alias c_g_mapped_file_unrefFn = extern(C) void function(GMappedFile* file) nothrow;
+__gshared c_g_mapped_file_unrefFn c_g_mapped_file_unref; ///
+
+// MarkupParseContext
+private alias c_g_markup_parse_context_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_markup_parse_context_get_typeFn c_g_markup_parse_context_get_type; ///
+private alias c_g_markup_parse_context_newFn = extern(C) GMarkupParseContext* function(const(GMarkupParser)* parser, GMarkupParseFlags flags, void* userData, GDestroyNotify userDataDnotify) nothrow;
+__gshared c_g_markup_parse_context_newFn c_g_markup_parse_context_new; ///
+private alias c_g_markup_parse_context_end_parseFn = extern(C) gboolean function(GMarkupParseContext* context, GError** _err) nothrow;
+__gshared c_g_markup_parse_context_end_parseFn c_g_markup_parse_context_end_parse; ///
+private alias c_g_markup_parse_context_freeFn = extern(C) void function(GMarkupParseContext* context) nothrow;
+__gshared c_g_markup_parse_context_freeFn c_g_markup_parse_context_free; ///
+private alias c_g_markup_parse_context_get_elementFn = extern(C) const(char)* function(GMarkupParseContext* context) nothrow;
+__gshared c_g_markup_parse_context_get_elementFn c_g_markup_parse_context_get_element; ///
+private alias c_g_markup_parse_context_get_element_stackFn = extern(C) const(GSList)* function(GMarkupParseContext* context) nothrow;
+__gshared c_g_markup_parse_context_get_element_stackFn c_g_markup_parse_context_get_element_stack; ///
+private alias c_g_markup_parse_context_get_offsetFn = extern(C) size_t function(GMarkupParseContext* context) nothrow;
+__gshared c_g_markup_parse_context_get_offsetFn c_g_markup_parse_context_get_offset; ///
+private alias c_g_markup_parse_context_get_positionFn = extern(C) void function(GMarkupParseContext* context, int* lineNumber, int* charNumber) nothrow;
+__gshared c_g_markup_parse_context_get_positionFn c_g_markup_parse_context_get_position; ///
+private alias c_g_markup_parse_context_get_tag_startFn = extern(C) void function(GMarkupParseContext* context, size_t* lineNumber, size_t* charNumber, size_t* offset) nothrow;
+__gshared c_g_markup_parse_context_get_tag_startFn c_g_markup_parse_context_get_tag_start; ///
+private alias c_g_markup_parse_context_get_user_dataFn = extern(C) void* function(GMarkupParseContext* context) nothrow;
+__gshared c_g_markup_parse_context_get_user_dataFn c_g_markup_parse_context_get_user_data; ///
+private alias c_g_markup_parse_context_parseFn = extern(C) gboolean function(GMarkupParseContext* context, const(char)* text, ptrdiff_t textLen, GError** _err) nothrow;
+__gshared c_g_markup_parse_context_parseFn c_g_markup_parse_context_parse; ///
+private alias c_g_markup_parse_context_popFn = extern(C) void* function(GMarkupParseContext* context) nothrow;
+__gshared c_g_markup_parse_context_popFn c_g_markup_parse_context_pop; ///
+private alias c_g_markup_parse_context_pushFn = extern(C) void function(GMarkupParseContext* context, const(GMarkupParser)* parser, void* userData) nothrow;
+__gshared c_g_markup_parse_context_pushFn c_g_markup_parse_context_push; ///
+private alias c_g_markup_parse_context_refFn = extern(C) GMarkupParseContext* function(GMarkupParseContext* context) nothrow;
+__gshared c_g_markup_parse_context_refFn c_g_markup_parse_context_ref; ///
+private alias c_g_markup_parse_context_unrefFn = extern(C) void function(GMarkupParseContext* context) nothrow;
+__gshared c_g_markup_parse_context_unrefFn c_g_markup_parse_context_unref; ///
+
+// MatchInfo
+private alias c_g_match_info_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_match_info_get_typeFn c_g_match_info_get_type; ///
+private alias c_g_match_info_expand_referencesFn = extern(C) char* function(const(GMatchInfo)* matchInfo, const(char)* stringToExpand, GError** _err) nothrow;
+__gshared c_g_match_info_expand_referencesFn c_g_match_info_expand_references; ///
+private alias c_g_match_info_fetchFn = extern(C) char* function(const(GMatchInfo)* matchInfo, int matchNum) nothrow;
+__gshared c_g_match_info_fetchFn c_g_match_info_fetch; ///
+private alias c_g_match_info_fetch_allFn = extern(C) char** function(const(GMatchInfo)* matchInfo) nothrow;
+__gshared c_g_match_info_fetch_allFn c_g_match_info_fetch_all; ///
+private alias c_g_match_info_fetch_namedFn = extern(C) char* function(const(GMatchInfo)* matchInfo, const(char)* name) nothrow;
+__gshared c_g_match_info_fetch_namedFn c_g_match_info_fetch_named; ///
+private alias c_g_match_info_fetch_named_posFn = extern(C) gboolean function(const(GMatchInfo)* matchInfo, const(char)* name, int* startPos, int* endPos) nothrow;
+__gshared c_g_match_info_fetch_named_posFn c_g_match_info_fetch_named_pos; ///
+private alias c_g_match_info_fetch_posFn = extern(C) gboolean function(const(GMatchInfo)* matchInfo, int matchNum, int* startPos, int* endPos) nothrow;
+__gshared c_g_match_info_fetch_posFn c_g_match_info_fetch_pos; ///
+private alias c_g_match_info_freeFn = extern(C) void function(GMatchInfo* matchInfo) nothrow;
+__gshared c_g_match_info_freeFn c_g_match_info_free; ///
+private alias c_g_match_info_get_match_countFn = extern(C) int function(const(GMatchInfo)* matchInfo) nothrow;
+__gshared c_g_match_info_get_match_countFn c_g_match_info_get_match_count; ///
+private alias c_g_match_info_get_regexFn = extern(C) GRegex* function(const(GMatchInfo)* matchInfo) nothrow;
+__gshared c_g_match_info_get_regexFn c_g_match_info_get_regex; ///
+private alias c_g_match_info_get_stringFn = extern(C) const(char)* function(const(GMatchInfo)* matchInfo) nothrow;
+__gshared c_g_match_info_get_stringFn c_g_match_info_get_string; ///
+private alias c_g_match_info_is_partial_matchFn = extern(C) gboolean function(const(GMatchInfo)* matchInfo) nothrow;
+__gshared c_g_match_info_is_partial_matchFn c_g_match_info_is_partial_match; ///
+private alias c_g_match_info_matchesFn = extern(C) gboolean function(const(GMatchInfo)* matchInfo) nothrow;
+__gshared c_g_match_info_matchesFn c_g_match_info_matches; ///
+private alias c_g_match_info_nextFn = extern(C) gboolean function(GMatchInfo* matchInfo, GError** _err) nothrow;
+__gshared c_g_match_info_nextFn c_g_match_info_next; ///
+private alias c_g_match_info_refFn = extern(C) GMatchInfo* function(GMatchInfo* matchInfo) nothrow;
+__gshared c_g_match_info_refFn c_g_match_info_ref; ///
+private alias c_g_match_info_unrefFn = extern(C) void function(GMatchInfo* matchInfo) nothrow;
+__gshared c_g_match_info_unrefFn c_g_match_info_unref; ///
+
+// MemChunk
+private alias c_g_mem_chunk_allocFn = extern(C) void* function(GMemChunk* memChunk) nothrow;
+__gshared c_g_mem_chunk_allocFn c_g_mem_chunk_alloc; ///
+private alias c_g_mem_chunk_alloc0Fn = extern(C) void* function(GMemChunk* memChunk) nothrow;
+__gshared c_g_mem_chunk_alloc0Fn c_g_mem_chunk_alloc0; ///
+private alias c_g_mem_chunk_cleanFn = extern(C) void function(GMemChunk* memChunk) nothrow;
+__gshared c_g_mem_chunk_cleanFn c_g_mem_chunk_clean; ///
+private alias c_g_mem_chunk_destroyFn = extern(C) void function(GMemChunk* memChunk) nothrow;
+__gshared c_g_mem_chunk_destroyFn c_g_mem_chunk_destroy; ///
+private alias c_g_mem_chunk_freeFn = extern(C) void function(GMemChunk* memChunk, void* mem) nothrow;
+__gshared c_g_mem_chunk_freeFn c_g_mem_chunk_free; ///
+private alias c_g_mem_chunk_printFn = extern(C) void function(GMemChunk* memChunk) nothrow;
+__gshared c_g_mem_chunk_printFn c_g_mem_chunk_print; ///
+private alias c_g_mem_chunk_resetFn = extern(C) void function(GMemChunk* memChunk) nothrow;
+__gshared c_g_mem_chunk_resetFn c_g_mem_chunk_reset; ///
+private alias c_g_mem_chunk_infoFn = extern(C) void function() nothrow;
+__gshared c_g_mem_chunk_infoFn c_g_mem_chunk_info; ///
+private alias c_g_mem_chunk_newFn = extern(C) GMemChunk* function(const(char)* name, int atomSize, size_t areaSize, int type) nothrow;
+__gshared c_g_mem_chunk_newFn c_g_mem_chunk_new; ///
+
+// Mutex
+private alias c_g_mutex_clearFn = extern(C) void function(GMutex* mutex) nothrow;
+__gshared c_g_mutex_clearFn c_g_mutex_clear; ///
+private alias c_g_mutex_freeFn = extern(C) void function(GMutex* mutex) nothrow;
+__gshared c_g_mutex_freeFn c_g_mutex_free; ///
+private alias c_g_mutex_initFn = extern(C) void function(GMutex* mutex) nothrow;
+__gshared c_g_mutex_initFn c_g_mutex_init; ///
+private alias c_g_mutex_lockFn = extern(C) void function(GMutex* mutex) nothrow;
+__gshared c_g_mutex_lockFn c_g_mutex_lock; ///
+private alias c_g_mutex_trylockFn = extern(C) gboolean function(GMutex* mutex) nothrow;
+__gshared c_g_mutex_trylockFn c_g_mutex_trylock; ///
+private alias c_g_mutex_unlockFn = extern(C) void function(GMutex* mutex) nothrow;
+__gshared c_g_mutex_unlockFn c_g_mutex_unlock; ///
+private alias c_g_mutex_newFn = extern(C) GMutex* function() nothrow;
+__gshared c_g_mutex_newFn c_g_mutex_new; ///
+
+// Node
+private alias c_g_node_child_indexFn = extern(C) int function(GNode* node, void* data) nothrow;
+__gshared c_g_node_child_indexFn c_g_node_child_index; ///
+private alias c_g_node_child_positionFn = extern(C) int function(GNode* node, GNode* child) nothrow;
+__gshared c_g_node_child_positionFn c_g_node_child_position; ///
+private alias c_g_node_children_foreachFn = extern(C) void function(GNode* node, GTraverseFlags flags, GNodeForeachFunc func, void* data) nothrow;
+__gshared c_g_node_children_foreachFn c_g_node_children_foreach; ///
+private alias c_g_node_copyFn = extern(C) GNode* function(GNode* node) nothrow;
+__gshared c_g_node_copyFn c_g_node_copy; ///
+private alias c_g_node_copy_deepFn = extern(C) GNode* function(GNode* node, GCopyFunc copyFunc, void* data) nothrow;
+__gshared c_g_node_copy_deepFn c_g_node_copy_deep; ///
+private alias c_g_node_depthFn = extern(C) uint function(GNode* node) nothrow;
+__gshared c_g_node_depthFn c_g_node_depth; ///
+private alias c_g_node_destroyFn = extern(C) void function(GNode* root) nothrow;
+__gshared c_g_node_destroyFn c_g_node_destroy; ///
+private alias c_g_node_findFn = extern(C) GNode* function(GNode* root, GTraverseType order, GTraverseFlags flags, void* data) nothrow;
+__gshared c_g_node_findFn c_g_node_find; ///
+private alias c_g_node_find_childFn = extern(C) GNode* function(GNode* node, GTraverseFlags flags, void* data) nothrow;
+__gshared c_g_node_find_childFn c_g_node_find_child; ///
+private alias c_g_node_first_siblingFn = extern(C) GNode* function(GNode* node) nothrow;
+__gshared c_g_node_first_siblingFn c_g_node_first_sibling; ///
+private alias c_g_node_get_rootFn = extern(C) GNode* function(GNode* node) nothrow;
+__gshared c_g_node_get_rootFn c_g_node_get_root; ///
+private alias c_g_node_insertFn = extern(C) GNode* function(GNode* parent, int position, GNode* node) nothrow;
+__gshared c_g_node_insertFn c_g_node_insert; ///
+private alias c_g_node_insert_afterFn = extern(C) GNode* function(GNode* parent, GNode* sibling, GNode* node) nothrow;
+__gshared c_g_node_insert_afterFn c_g_node_insert_after; ///
+private alias c_g_node_insert_beforeFn = extern(C) GNode* function(GNode* parent, GNode* sibling, GNode* node) nothrow;
+__gshared c_g_node_insert_beforeFn c_g_node_insert_before; ///
+private alias c_g_node_is_ancestorFn = extern(C) gboolean function(GNode* node, GNode* descendant) nothrow;
+__gshared c_g_node_is_ancestorFn c_g_node_is_ancestor; ///
+private alias c_g_node_last_childFn = extern(C) GNode* function(GNode* node) nothrow;
+__gshared c_g_node_last_childFn c_g_node_last_child; ///
+private alias c_g_node_last_siblingFn = extern(C) GNode* function(GNode* node) nothrow;
+__gshared c_g_node_last_siblingFn c_g_node_last_sibling; ///
+private alias c_g_node_max_heightFn = extern(C) uint function(GNode* root) nothrow;
+__gshared c_g_node_max_heightFn c_g_node_max_height; ///
+private alias c_g_node_n_childrenFn = extern(C) uint function(GNode* node) nothrow;
+__gshared c_g_node_n_childrenFn c_g_node_n_children; ///
+private alias c_g_node_n_nodesFn = extern(C) uint function(GNode* root, GTraverseFlags flags) nothrow;
+__gshared c_g_node_n_nodesFn c_g_node_n_nodes; ///
+private alias c_g_node_nth_childFn = extern(C) GNode* function(GNode* node, uint n) nothrow;
+__gshared c_g_node_nth_childFn c_g_node_nth_child; ///
+private alias c_g_node_prependFn = extern(C) GNode* function(GNode* parent, GNode* node) nothrow;
+__gshared c_g_node_prependFn c_g_node_prepend; ///
+private alias c_g_node_reverse_childrenFn = extern(C) void function(GNode* node) nothrow;
+__gshared c_g_node_reverse_childrenFn c_g_node_reverse_children; ///
+private alias c_g_node_traverseFn = extern(C) void function(GNode* root, GTraverseType order, GTraverseFlags flags, int maxDepth, GNodeTraverseFunc func, void* data) nothrow;
+__gshared c_g_node_traverseFn c_g_node_traverse; ///
+private alias c_g_node_unlinkFn = extern(C) void function(GNode* node) nothrow;
+__gshared c_g_node_unlinkFn c_g_node_unlink; ///
+private alias c_g_node_newFn = extern(C) GNode* function(void* data) nothrow;
+__gshared c_g_node_newFn c_g_node_new; ///
+private alias c_g_node_pop_allocatorFn = extern(C) void function() nothrow;
+__gshared c_g_node_pop_allocatorFn c_g_node_pop_allocator; ///
+private alias c_g_node_push_allocatorFn = extern(C) void function(GAllocator* allocator) nothrow;
+__gshared c_g_node_push_allocatorFn c_g_node_push_allocator; ///
+
+// Once
+private alias c_g_once_implFn = extern(C) void* function(GOnce* once, GThreadFunc func, void* arg) nothrow;
+__gshared c_g_once_implFn c_g_once_impl; ///
+private alias c_g_once_init_enterFn = extern(C) gboolean function(void* location) nothrow;
+__gshared c_g_once_init_enterFn c_g_once_init_enter; ///
+private alias c_g_once_init_enter_implFn = extern(C) gboolean function(size_t* location) nothrow;
+__gshared c_g_once_init_enter_implFn c_g_once_init_enter_impl; ///
+private alias c_g_once_init_enter_pointerFn = extern(C) gboolean function(void* location) nothrow;
+__gshared c_g_once_init_enter_pointerFn c_g_once_init_enter_pointer; ///
+private alias c_g_once_init_leaveFn = extern(C) void function(void* location, size_t result) nothrow;
+__gshared c_g_once_init_leaveFn c_g_once_init_leave; ///
+private alias c_g_once_init_leave_pointerFn = extern(C) void function(void* location, void* result) nothrow;
+__gshared c_g_once_init_leave_pointerFn c_g_once_init_leave_pointer; ///
+
+// OptionContext
+private alias c_g_option_context_add_groupFn = extern(C) void function(GOptionContext* context, GOptionGroup* group) nothrow;
+__gshared c_g_option_context_add_groupFn c_g_option_context_add_group; ///
+private alias c_g_option_context_add_main_entriesFn = extern(C) void function(GOptionContext* context, const(GOptionEntry)* entries, const(char)* translationDomain) nothrow;
+__gshared c_g_option_context_add_main_entriesFn c_g_option_context_add_main_entries; ///
+private alias c_g_option_context_freeFn = extern(C) void function(GOptionContext* context) nothrow;
+__gshared c_g_option_context_freeFn c_g_option_context_free; ///
+private alias c_g_option_context_get_descriptionFn = extern(C) const(char)* function(GOptionContext* context) nothrow;
+__gshared c_g_option_context_get_descriptionFn c_g_option_context_get_description; ///
+private alias c_g_option_context_get_helpFn = extern(C) char* function(GOptionContext* context, gboolean mainHelp, GOptionGroup* group) nothrow;
+__gshared c_g_option_context_get_helpFn c_g_option_context_get_help; ///
+private alias c_g_option_context_get_help_enabledFn = extern(C) gboolean function(GOptionContext* context) nothrow;
+__gshared c_g_option_context_get_help_enabledFn c_g_option_context_get_help_enabled; ///
+private alias c_g_option_context_get_ignore_unknown_optionsFn = extern(C) gboolean function(GOptionContext* context) nothrow;
+__gshared c_g_option_context_get_ignore_unknown_optionsFn c_g_option_context_get_ignore_unknown_options; ///
+private alias c_g_option_context_get_main_groupFn = extern(C) GOptionGroup* function(GOptionContext* context) nothrow;
+__gshared c_g_option_context_get_main_groupFn c_g_option_context_get_main_group; ///
+private alias c_g_option_context_get_strict_posixFn = extern(C) gboolean function(GOptionContext* context) nothrow;
+__gshared c_g_option_context_get_strict_posixFn c_g_option_context_get_strict_posix; ///
+private alias c_g_option_context_get_summaryFn = extern(C) const(char)* function(GOptionContext* context) nothrow;
+__gshared c_g_option_context_get_summaryFn c_g_option_context_get_summary; ///
+private alias c_g_option_context_parseFn = extern(C) gboolean function(GOptionContext* context, int* argc, char*** argv, GError** _err) nothrow;
+__gshared c_g_option_context_parseFn c_g_option_context_parse; ///
+private alias c_g_option_context_parse_strvFn = extern(C) gboolean function(GOptionContext* context, char*** arguments, GError** _err) nothrow;
+__gshared c_g_option_context_parse_strvFn c_g_option_context_parse_strv; ///
+private alias c_g_option_context_set_descriptionFn = extern(C) void function(GOptionContext* context, const(char)* description) nothrow;
+__gshared c_g_option_context_set_descriptionFn c_g_option_context_set_description; ///
+private alias c_g_option_context_set_help_enabledFn = extern(C) void function(GOptionContext* context, gboolean helpEnabled) nothrow;
+__gshared c_g_option_context_set_help_enabledFn c_g_option_context_set_help_enabled; ///
+private alias c_g_option_context_set_ignore_unknown_optionsFn = extern(C) void function(GOptionContext* context, gboolean ignoreUnknown) nothrow;
+__gshared c_g_option_context_set_ignore_unknown_optionsFn c_g_option_context_set_ignore_unknown_options; ///
+private alias c_g_option_context_set_main_groupFn = extern(C) void function(GOptionContext* context, GOptionGroup* group) nothrow;
+__gshared c_g_option_context_set_main_groupFn c_g_option_context_set_main_group; ///
+private alias c_g_option_context_set_strict_posixFn = extern(C) void function(GOptionContext* context, gboolean strictPosix) nothrow;
+__gshared c_g_option_context_set_strict_posixFn c_g_option_context_set_strict_posix; ///
+private alias c_g_option_context_set_summaryFn = extern(C) void function(GOptionContext* context, const(char)* summary) nothrow;
+__gshared c_g_option_context_set_summaryFn c_g_option_context_set_summary; ///
+private alias c_g_option_context_set_translate_funcFn = extern(C) void function(GOptionContext* context, GTranslateFunc func, void* data, GDestroyNotify destroyNotify) nothrow;
+__gshared c_g_option_context_set_translate_funcFn c_g_option_context_set_translate_func; ///
+private alias c_g_option_context_set_translation_domainFn = extern(C) void function(GOptionContext* context, const(char)* domain) nothrow;
+__gshared c_g_option_context_set_translation_domainFn c_g_option_context_set_translation_domain; ///
+private alias c_g_option_context_newFn = extern(C) GOptionContext* function(const(char)* parameterString) nothrow;
+__gshared c_g_option_context_newFn c_g_option_context_new; ///
+
+// OptionGroup
+private alias c_g_option_group_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_option_group_get_typeFn c_g_option_group_get_type; ///
+private alias c_g_option_group_newFn = extern(C) GOptionGroup* function(const(char)* name, const(char)* description, const(char)* helpDescription, void* userData, GDestroyNotify destroy) nothrow;
+__gshared c_g_option_group_newFn c_g_option_group_new; ///
+private alias c_g_option_group_add_entriesFn = extern(C) void function(GOptionGroup* group, const(GOptionEntry)* entries) nothrow;
+__gshared c_g_option_group_add_entriesFn c_g_option_group_add_entries; ///
+private alias c_g_option_group_freeFn = extern(C) void function(GOptionGroup* group) nothrow;
+__gshared c_g_option_group_freeFn c_g_option_group_free; ///
+private alias c_g_option_group_refFn = extern(C) GOptionGroup* function(GOptionGroup* group) nothrow;
+__gshared c_g_option_group_refFn c_g_option_group_ref; ///
+private alias c_g_option_group_set_error_hookFn = extern(C) void function(GOptionGroup* group, GOptionErrorFunc errorFunc) nothrow;
+__gshared c_g_option_group_set_error_hookFn c_g_option_group_set_error_hook; ///
+private alias c_g_option_group_set_parse_hooksFn = extern(C) void function(GOptionGroup* group, GOptionParseFunc preParseFunc, GOptionParseFunc postParseFunc) nothrow;
+__gshared c_g_option_group_set_parse_hooksFn c_g_option_group_set_parse_hooks; ///
+private alias c_g_option_group_set_translate_funcFn = extern(C) void function(GOptionGroup* group, GTranslateFunc func, void* data, GDestroyNotify destroyNotify) nothrow;
+__gshared c_g_option_group_set_translate_funcFn c_g_option_group_set_translate_func; ///
+private alias c_g_option_group_set_translation_domainFn = extern(C) void function(GOptionGroup* group, const(char)* domain) nothrow;
+__gshared c_g_option_group_set_translation_domainFn c_g_option_group_set_translation_domain; ///
+private alias c_g_option_group_unrefFn = extern(C) void function(GOptionGroup* group) nothrow;
+__gshared c_g_option_group_unrefFn c_g_option_group_unref; ///
+
+// PathBuf
+private alias c_g_path_buf_clearFn = extern(C) void function(GPathBuf* buf) nothrow;
+__gshared c_g_path_buf_clearFn c_g_path_buf_clear; ///
+private alias c_g_path_buf_clear_to_pathFn = extern(C) char* function(GPathBuf* buf) nothrow;
+__gshared c_g_path_buf_clear_to_pathFn c_g_path_buf_clear_to_path; ///
+private alias c_g_path_buf_copyFn = extern(C) GPathBuf* function(GPathBuf* buf) nothrow;
+__gshared c_g_path_buf_copyFn c_g_path_buf_copy; ///
+private alias c_g_path_buf_freeFn = extern(C) void function(GPathBuf* buf) nothrow;
+__gshared c_g_path_buf_freeFn c_g_path_buf_free; ///
+private alias c_g_path_buf_free_to_pathFn = extern(C) char* function(GPathBuf* buf) nothrow;
+__gshared c_g_path_buf_free_to_pathFn c_g_path_buf_free_to_path; ///
+private alias c_g_path_buf_initFn = extern(C) GPathBuf* function(GPathBuf* buf) nothrow;
+__gshared c_g_path_buf_initFn c_g_path_buf_init; ///
+private alias c_g_path_buf_init_from_pathFn = extern(C) GPathBuf* function(GPathBuf* buf, const(char)* path) nothrow;
+__gshared c_g_path_buf_init_from_pathFn c_g_path_buf_init_from_path; ///
+private alias c_g_path_buf_popFn = extern(C) gboolean function(GPathBuf* buf) nothrow;
+__gshared c_g_path_buf_popFn c_g_path_buf_pop; ///
+private alias c_g_path_buf_pushFn = extern(C) GPathBuf* function(GPathBuf* buf, const(char)* path) nothrow;
+__gshared c_g_path_buf_pushFn c_g_path_buf_push; ///
+private alias c_g_path_buf_set_extensionFn = extern(C) gboolean function(GPathBuf* buf, const(char)* extension) nothrow;
+__gshared c_g_path_buf_set_extensionFn c_g_path_buf_set_extension; ///
+private alias c_g_path_buf_set_filenameFn = extern(C) gboolean function(GPathBuf* buf, const(char)* fileName) nothrow;
+__gshared c_g_path_buf_set_filenameFn c_g_path_buf_set_filename; ///
+private alias c_g_path_buf_to_pathFn = extern(C) char* function(GPathBuf* buf) nothrow;
+__gshared c_g_path_buf_to_pathFn c_g_path_buf_to_path; ///
+private alias c_g_path_buf_equalFn = extern(C) gboolean function(const(void)* v1, const(void)* v2) nothrow;
+__gshared c_g_path_buf_equalFn c_g_path_buf_equal; ///
+private alias c_g_path_buf_newFn = extern(C) GPathBuf* function() nothrow;
+__gshared c_g_path_buf_newFn c_g_path_buf_new; ///
+private alias c_g_path_buf_new_from_pathFn = extern(C) GPathBuf* function(const(char)* path) nothrow;
+__gshared c_g_path_buf_new_from_pathFn c_g_path_buf_new_from_path; ///
+
+// PatternSpec
+private alias c_g_pattern_spec_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_pattern_spec_get_typeFn c_g_pattern_spec_get_type; ///
+private alias c_g_pattern_spec_newFn = extern(C) GPatternSpec* function(const(char)* pattern) nothrow;
+__gshared c_g_pattern_spec_newFn c_g_pattern_spec_new; ///
+private alias c_g_pattern_spec_copyFn = extern(C) GPatternSpec* function(GPatternSpec* pspec) nothrow;
+__gshared c_g_pattern_spec_copyFn c_g_pattern_spec_copy; ///
+private alias c_g_pattern_spec_equalFn = extern(C) gboolean function(GPatternSpec* pspec1, GPatternSpec* pspec2) nothrow;
+__gshared c_g_pattern_spec_equalFn c_g_pattern_spec_equal; ///
+private alias c_g_pattern_spec_freeFn = extern(C) void function(GPatternSpec* pspec) nothrow;
+__gshared c_g_pattern_spec_freeFn c_g_pattern_spec_free; ///
+private alias c_g_pattern_spec_matchFn = extern(C) gboolean function(GPatternSpec* pspec, size_t stringLength, const(char)* string_, const(char)* stringReversed) nothrow;
+__gshared c_g_pattern_spec_matchFn c_g_pattern_spec_match; ///
+private alias c_g_pattern_spec_match_stringFn = extern(C) gboolean function(GPatternSpec* pspec, const(char)* string_) nothrow;
+__gshared c_g_pattern_spec_match_stringFn c_g_pattern_spec_match_string; ///
+
+// PollFD
+private alias c_g_pollfd_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_pollfd_get_typeFn c_g_pollfd_get_type; ///
+
+// Private
+private alias c_g_private_getFn = extern(C) void* function(GPrivate* key) nothrow;
+__gshared c_g_private_getFn c_g_private_get; ///
+private alias c_g_private_replaceFn = extern(C) void function(GPrivate* key, void* value) nothrow;
+__gshared c_g_private_replaceFn c_g_private_replace; ///
+private alias c_g_private_setFn = extern(C) void function(GPrivate* key, void* value) nothrow;
+__gshared c_g_private_setFn c_g_private_set; ///
+private alias c_g_private_newFn = extern(C) GPrivate* function(GDestroyNotify notify) nothrow;
+__gshared c_g_private_newFn c_g_private_new; ///
+
+// PtrArray
+private alias c_g_ptr_array_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_ptr_array_get_typeFn c_g_ptr_array_get_type; ///
+private alias c_g_ptr_array_addFn = extern(C) void function(GPtrArray* array, void* data) nothrow;
+__gshared c_g_ptr_array_addFn c_g_ptr_array_add; ///
+private alias c_g_ptr_array_copyFn = extern(C) GPtrArray* function(GPtrArray* array, GCopyFunc func, void* userData) nothrow;
+__gshared c_g_ptr_array_copyFn c_g_ptr_array_copy; ///
+private alias c_g_ptr_array_extendFn = extern(C) void function(GPtrArray* arrayToExtend, GPtrArray* array, GCopyFunc func, void* userData) nothrow;
+__gshared c_g_ptr_array_extendFn c_g_ptr_array_extend; ///
+private alias c_g_ptr_array_extend_and_stealFn = extern(C) void function(GPtrArray* arrayToExtend, GPtrArray* array) nothrow;
+__gshared c_g_ptr_array_extend_and_stealFn c_g_ptr_array_extend_and_steal; ///
+private alias c_g_ptr_array_findFn = extern(C) gboolean function(GPtrArray* haystack, const(void)* needle, uint* index) nothrow;
+__gshared c_g_ptr_array_findFn c_g_ptr_array_find; ///
+private alias c_g_ptr_array_find_with_equal_funcFn = extern(C) gboolean function(GPtrArray* haystack, const(void)* needle, GEqualFunc equalFunc, uint* index) nothrow;
+__gshared c_g_ptr_array_find_with_equal_funcFn c_g_ptr_array_find_with_equal_func; ///
+private alias c_g_ptr_array_foreachFn = extern(C) void function(GPtrArray* array, GFunc func, void* userData) nothrow;
+__gshared c_g_ptr_array_foreachFn c_g_ptr_array_foreach; ///
+private alias c_g_ptr_array_freeFn = extern(C) void** function(GPtrArray* array, gboolean freeSegment) nothrow;
+__gshared c_g_ptr_array_freeFn c_g_ptr_array_free; ///
+private alias c_g_ptr_array_insertFn = extern(C) void function(GPtrArray* array, int index, void* data) nothrow;
+__gshared c_g_ptr_array_insertFn c_g_ptr_array_insert; ///
+private alias c_g_ptr_array_is_null_terminatedFn = extern(C) gboolean function(GPtrArray* array) nothrow;
+__gshared c_g_ptr_array_is_null_terminatedFn c_g_ptr_array_is_null_terminated; ///
+private alias c_g_ptr_array_newFn = extern(C) GPtrArray* function() nothrow;
+__gshared c_g_ptr_array_newFn c_g_ptr_array_new; ///
+private alias c_g_ptr_array_new_from_arrayFn = extern(C) GPtrArray* function(void** data, size_t len, GCopyFunc copyFunc, void* copyFuncUserData, GDestroyNotify elementFreeFunc) nothrow;
+__gshared c_g_ptr_array_new_from_arrayFn c_g_ptr_array_new_from_array; ///
+private alias c_g_ptr_array_new_from_null_terminated_arrayFn = extern(C) GPtrArray* function(void** data, GCopyFunc copyFunc, void* copyFuncUserData, GDestroyNotify elementFreeFunc) nothrow;
+__gshared c_g_ptr_array_new_from_null_terminated_arrayFn c_g_ptr_array_new_from_null_terminated_array; ///
+private alias c_g_ptr_array_new_fullFn = extern(C) GPtrArray* function(uint reservedSize, GDestroyNotify elementFreeFunc) nothrow;
+__gshared c_g_ptr_array_new_fullFn c_g_ptr_array_new_full; ///
+private alias c_g_ptr_array_new_null_terminatedFn = extern(C) GPtrArray* function(uint reservedSize, GDestroyNotify elementFreeFunc, gboolean nullTerminated) nothrow;
+__gshared c_g_ptr_array_new_null_terminatedFn c_g_ptr_array_new_null_terminated; ///
+private alias c_g_ptr_array_new_takeFn = extern(C) GPtrArray* function(void** data, size_t len, GDestroyNotify elementFreeFunc) nothrow;
+__gshared c_g_ptr_array_new_takeFn c_g_ptr_array_new_take; ///
+private alias c_g_ptr_array_new_take_null_terminatedFn = extern(C) GPtrArray* function(void** data, GDestroyNotify elementFreeFunc) nothrow;
+__gshared c_g_ptr_array_new_take_null_terminatedFn c_g_ptr_array_new_take_null_terminated; ///
+private alias c_g_ptr_array_new_with_free_funcFn = extern(C) GPtrArray* function(GDestroyNotify elementFreeFunc) nothrow;
+__gshared c_g_ptr_array_new_with_free_funcFn c_g_ptr_array_new_with_free_func; ///
+private alias c_g_ptr_array_refFn = extern(C) GPtrArray* function(GPtrArray* array) nothrow;
+__gshared c_g_ptr_array_refFn c_g_ptr_array_ref; ///
+private alias c_g_ptr_array_removeFn = extern(C) gboolean function(GPtrArray* array, void* data) nothrow;
+__gshared c_g_ptr_array_removeFn c_g_ptr_array_remove; ///
+private alias c_g_ptr_array_remove_fastFn = extern(C) gboolean function(GPtrArray* array, void* data) nothrow;
+__gshared c_g_ptr_array_remove_fastFn c_g_ptr_array_remove_fast; ///
+private alias c_g_ptr_array_remove_indexFn = extern(C) void* function(GPtrArray* array, uint index) nothrow;
+__gshared c_g_ptr_array_remove_indexFn c_g_ptr_array_remove_index; ///
+private alias c_g_ptr_array_remove_index_fastFn = extern(C) void* function(GPtrArray* array, uint index) nothrow;
+__gshared c_g_ptr_array_remove_index_fastFn c_g_ptr_array_remove_index_fast; ///
+private alias c_g_ptr_array_remove_rangeFn = extern(C) GPtrArray* function(GPtrArray* array, uint index, uint length) nothrow;
+__gshared c_g_ptr_array_remove_rangeFn c_g_ptr_array_remove_range; ///
+private alias c_g_ptr_array_set_free_funcFn = extern(C) void function(GPtrArray* array, GDestroyNotify elementFreeFunc) nothrow;
+__gshared c_g_ptr_array_set_free_funcFn c_g_ptr_array_set_free_func; ///
+private alias c_g_ptr_array_set_sizeFn = extern(C) void function(GPtrArray* array, int length) nothrow;
+__gshared c_g_ptr_array_set_sizeFn c_g_ptr_array_set_size; ///
+private alias c_g_ptr_array_sized_newFn = extern(C) GPtrArray* function(uint reservedSize) nothrow;
+__gshared c_g_ptr_array_sized_newFn c_g_ptr_array_sized_new; ///
+private alias c_g_ptr_array_sortFn = extern(C) void function(GPtrArray* array, GCompareFunc compareFunc) nothrow;
+__gshared c_g_ptr_array_sortFn c_g_ptr_array_sort; ///
+private alias c_g_ptr_array_sort_valuesFn = extern(C) void function(GPtrArray* array, GCompareFunc compareFunc) nothrow;
+__gshared c_g_ptr_array_sort_valuesFn c_g_ptr_array_sort_values; ///
+private alias c_g_ptr_array_sort_values_with_dataFn = extern(C) void function(GPtrArray* array, GCompareDataFunc compareFunc, void* userData) nothrow;
+__gshared c_g_ptr_array_sort_values_with_dataFn c_g_ptr_array_sort_values_with_data; ///
+private alias c_g_ptr_array_sort_with_dataFn = extern(C) void function(GPtrArray* array, GCompareDataFunc compareFunc, void* userData) nothrow;
+__gshared c_g_ptr_array_sort_with_dataFn c_g_ptr_array_sort_with_data; ///
+private alias c_g_ptr_array_stealFn = extern(C) void** function(GPtrArray* array, size_t* len) nothrow;
+__gshared c_g_ptr_array_stealFn c_g_ptr_array_steal; ///
+private alias c_g_ptr_array_steal_indexFn = extern(C) void* function(GPtrArray* array, uint index) nothrow;
+__gshared c_g_ptr_array_steal_indexFn c_g_ptr_array_steal_index; ///
+private alias c_g_ptr_array_steal_index_fastFn = extern(C) void* function(GPtrArray* array, uint index) nothrow;
+__gshared c_g_ptr_array_steal_index_fastFn c_g_ptr_array_steal_index_fast; ///
+private alias c_g_ptr_array_unrefFn = extern(C) void function(GPtrArray* array) nothrow;
+__gshared c_g_ptr_array_unrefFn c_g_ptr_array_unref; ///
+
+// Queue
+private alias c_g_queue_clearFn = extern(C) void function(GQueue* queue) nothrow;
+__gshared c_g_queue_clearFn c_g_queue_clear; ///
+private alias c_g_queue_clear_fullFn = extern(C) void function(GQueue* queue, GDestroyNotify freeFunc) nothrow;
+__gshared c_g_queue_clear_fullFn c_g_queue_clear_full; ///
+private alias c_g_queue_copyFn = extern(C) GQueue* function(GQueue* queue) nothrow;
+__gshared c_g_queue_copyFn c_g_queue_copy; ///
+private alias c_g_queue_delete_linkFn = extern(C) void function(GQueue* queue, GList* link) nothrow;
+__gshared c_g_queue_delete_linkFn c_g_queue_delete_link; ///
+private alias c_g_queue_findFn = extern(C) GList* function(GQueue* queue, const(void)* data) nothrow;
+__gshared c_g_queue_findFn c_g_queue_find; ///
+private alias c_g_queue_find_customFn = extern(C) GList* function(GQueue* queue, const(void)* data, GCompareFunc func) nothrow;
+__gshared c_g_queue_find_customFn c_g_queue_find_custom; ///
+private alias c_g_queue_foreachFn = extern(C) void function(GQueue* queue, GFunc func, void* userData) nothrow;
+__gshared c_g_queue_foreachFn c_g_queue_foreach; ///
+private alias c_g_queue_freeFn = extern(C) void function(GQueue* queue) nothrow;
+__gshared c_g_queue_freeFn c_g_queue_free; ///
+private alias c_g_queue_free_fullFn = extern(C) void function(GQueue* queue, GDestroyNotify freeFunc) nothrow;
+__gshared c_g_queue_free_fullFn c_g_queue_free_full; ///
+private alias c_g_queue_get_lengthFn = extern(C) uint function(GQueue* queue) nothrow;
+__gshared c_g_queue_get_lengthFn c_g_queue_get_length; ///
+private alias c_g_queue_indexFn = extern(C) int function(GQueue* queue, const(void)* data) nothrow;
+__gshared c_g_queue_indexFn c_g_queue_index; ///
+private alias c_g_queue_initFn = extern(C) void function(GQueue* queue) nothrow;
+__gshared c_g_queue_initFn c_g_queue_init; ///
+private alias c_g_queue_insert_afterFn = extern(C) void function(GQueue* queue, GList* sibling, void* data) nothrow;
+__gshared c_g_queue_insert_afterFn c_g_queue_insert_after; ///
+private alias c_g_queue_insert_after_linkFn = extern(C) void function(GQueue* queue, GList* sibling, GList* link) nothrow;
+__gshared c_g_queue_insert_after_linkFn c_g_queue_insert_after_link; ///
+private alias c_g_queue_insert_beforeFn = extern(C) void function(GQueue* queue, GList* sibling, void* data) nothrow;
+__gshared c_g_queue_insert_beforeFn c_g_queue_insert_before; ///
+private alias c_g_queue_insert_before_linkFn = extern(C) void function(GQueue* queue, GList* sibling, GList* link) nothrow;
+__gshared c_g_queue_insert_before_linkFn c_g_queue_insert_before_link; ///
+private alias c_g_queue_insert_sortedFn = extern(C) void function(GQueue* queue, void* data, GCompareDataFunc func, void* userData) nothrow;
+__gshared c_g_queue_insert_sortedFn c_g_queue_insert_sorted; ///
+private alias c_g_queue_is_emptyFn = extern(C) gboolean function(GQueue* queue) nothrow;
+__gshared c_g_queue_is_emptyFn c_g_queue_is_empty; ///
+private alias c_g_queue_link_indexFn = extern(C) int function(GQueue* queue, GList* link) nothrow;
+__gshared c_g_queue_link_indexFn c_g_queue_link_index; ///
+private alias c_g_queue_peek_headFn = extern(C) void* function(GQueue* queue) nothrow;
+__gshared c_g_queue_peek_headFn c_g_queue_peek_head; ///
+private alias c_g_queue_peek_head_linkFn = extern(C) GList* function(GQueue* queue) nothrow;
+__gshared c_g_queue_peek_head_linkFn c_g_queue_peek_head_link; ///
+private alias c_g_queue_peek_nthFn = extern(C) void* function(GQueue* queue, uint n) nothrow;
+__gshared c_g_queue_peek_nthFn c_g_queue_peek_nth; ///
+private alias c_g_queue_peek_nth_linkFn = extern(C) GList* function(GQueue* queue, uint n) nothrow;
+__gshared c_g_queue_peek_nth_linkFn c_g_queue_peek_nth_link; ///
+private alias c_g_queue_peek_tailFn = extern(C) void* function(GQueue* queue) nothrow;
+__gshared c_g_queue_peek_tailFn c_g_queue_peek_tail; ///
+private alias c_g_queue_peek_tail_linkFn = extern(C) GList* function(GQueue* queue) nothrow;
+__gshared c_g_queue_peek_tail_linkFn c_g_queue_peek_tail_link; ///
+private alias c_g_queue_pop_headFn = extern(C) void* function(GQueue* queue) nothrow;
+__gshared c_g_queue_pop_headFn c_g_queue_pop_head; ///
+private alias c_g_queue_pop_head_linkFn = extern(C) GList* function(GQueue* queue) nothrow;
+__gshared c_g_queue_pop_head_linkFn c_g_queue_pop_head_link; ///
+private alias c_g_queue_pop_nthFn = extern(C) void* function(GQueue* queue, uint n) nothrow;
+__gshared c_g_queue_pop_nthFn c_g_queue_pop_nth; ///
+private alias c_g_queue_pop_nth_linkFn = extern(C) GList* function(GQueue* queue, uint n) nothrow;
+__gshared c_g_queue_pop_nth_linkFn c_g_queue_pop_nth_link; ///
+private alias c_g_queue_pop_tailFn = extern(C) void* function(GQueue* queue) nothrow;
+__gshared c_g_queue_pop_tailFn c_g_queue_pop_tail; ///
+private alias c_g_queue_pop_tail_linkFn = extern(C) GList* function(GQueue* queue) nothrow;
+__gshared c_g_queue_pop_tail_linkFn c_g_queue_pop_tail_link; ///
+private alias c_g_queue_push_headFn = extern(C) void function(GQueue* queue, void* data) nothrow;
+__gshared c_g_queue_push_headFn c_g_queue_push_head; ///
+private alias c_g_queue_push_head_linkFn = extern(C) void function(GQueue* queue, GList* link) nothrow;
+__gshared c_g_queue_push_head_linkFn c_g_queue_push_head_link; ///
+private alias c_g_queue_push_nthFn = extern(C) void function(GQueue* queue, void* data, int n) nothrow;
+__gshared c_g_queue_push_nthFn c_g_queue_push_nth; ///
+private alias c_g_queue_push_nth_linkFn = extern(C) void function(GQueue* queue, int n, GList* link) nothrow;
+__gshared c_g_queue_push_nth_linkFn c_g_queue_push_nth_link; ///
+private alias c_g_queue_push_tailFn = extern(C) void function(GQueue* queue, void* data) nothrow;
+__gshared c_g_queue_push_tailFn c_g_queue_push_tail; ///
+private alias c_g_queue_push_tail_linkFn = extern(C) void function(GQueue* queue, GList* link) nothrow;
+__gshared c_g_queue_push_tail_linkFn c_g_queue_push_tail_link; ///
+private alias c_g_queue_removeFn = extern(C) gboolean function(GQueue* queue, const(void)* data) nothrow;
+__gshared c_g_queue_removeFn c_g_queue_remove; ///
+private alias c_g_queue_remove_allFn = extern(C) uint function(GQueue* queue, const(void)* data) nothrow;
+__gshared c_g_queue_remove_allFn c_g_queue_remove_all; ///
+private alias c_g_queue_reverseFn = extern(C) void function(GQueue* queue) nothrow;
+__gshared c_g_queue_reverseFn c_g_queue_reverse; ///
+private alias c_g_queue_sortFn = extern(C) void function(GQueue* queue, GCompareDataFunc compareFunc, void* userData) nothrow;
+__gshared c_g_queue_sortFn c_g_queue_sort; ///
+private alias c_g_queue_unlinkFn = extern(C) void function(GQueue* queue, GList* link) nothrow;
+__gshared c_g_queue_unlinkFn c_g_queue_unlink; ///
+private alias c_g_queue_newFn = extern(C) GQueue* function() nothrow;
+__gshared c_g_queue_newFn c_g_queue_new; ///
+
+// RWLock
+private alias c_g_rw_lock_clearFn = extern(C) void function(GRWLock* rwLock) nothrow;
+__gshared c_g_rw_lock_clearFn c_g_rw_lock_clear; ///
+private alias c_g_rw_lock_initFn = extern(C) void function(GRWLock* rwLock) nothrow;
+__gshared c_g_rw_lock_initFn c_g_rw_lock_init; ///
+private alias c_g_rw_lock_reader_lockFn = extern(C) void function(GRWLock* rwLock) nothrow;
+__gshared c_g_rw_lock_reader_lockFn c_g_rw_lock_reader_lock; ///
+private alias c_g_rw_lock_reader_trylockFn = extern(C) gboolean function(GRWLock* rwLock) nothrow;
+__gshared c_g_rw_lock_reader_trylockFn c_g_rw_lock_reader_trylock; ///
+private alias c_g_rw_lock_reader_unlockFn = extern(C) void function(GRWLock* rwLock) nothrow;
+__gshared c_g_rw_lock_reader_unlockFn c_g_rw_lock_reader_unlock; ///
+private alias c_g_rw_lock_writer_lockFn = extern(C) void function(GRWLock* rwLock) nothrow;
+__gshared c_g_rw_lock_writer_lockFn c_g_rw_lock_writer_lock; ///
+private alias c_g_rw_lock_writer_trylockFn = extern(C) gboolean function(GRWLock* rwLock) nothrow;
+__gshared c_g_rw_lock_writer_trylockFn c_g_rw_lock_writer_trylock; ///
+private alias c_g_rw_lock_writer_unlockFn = extern(C) void function(GRWLock* rwLock) nothrow;
+__gshared c_g_rw_lock_writer_unlockFn c_g_rw_lock_writer_unlock; ///
+
+// Rand
+private alias c_g_rand_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_rand_get_typeFn c_g_rand_get_type; ///
+private alias c_g_rand_newFn = extern(C) GRand* function() nothrow;
+__gshared c_g_rand_newFn c_g_rand_new; ///
+private alias c_g_rand_new_with_seedFn = extern(C) GRand* function(uint seed) nothrow;
+__gshared c_g_rand_new_with_seedFn c_g_rand_new_with_seed; ///
+private alias c_g_rand_new_with_seed_arrayFn = extern(C) GRand* function(const(uint)* seed, uint seedLength) nothrow;
+__gshared c_g_rand_new_with_seed_arrayFn c_g_rand_new_with_seed_array; ///
+private alias c_g_rand_copyFn = extern(C) GRand* function(GRand* rand) nothrow;
+__gshared c_g_rand_copyFn c_g_rand_copy; ///
+private alias c_g_rand_doubleFn = extern(C) double function(GRand* rand) nothrow;
+__gshared c_g_rand_doubleFn c_g_rand_double; ///
+private alias c_g_rand_double_rangeFn = extern(C) double function(GRand* rand, double begin, double end) nothrow;
+__gshared c_g_rand_double_rangeFn c_g_rand_double_range; ///
+private alias c_g_rand_freeFn = extern(C) void function(GRand* rand) nothrow;
+__gshared c_g_rand_freeFn c_g_rand_free; ///
+private alias c_g_rand_intFn = extern(C) uint function(GRand* rand) nothrow;
+__gshared c_g_rand_intFn c_g_rand_int; ///
+private alias c_g_rand_int_rangeFn = extern(C) int function(GRand* rand, int begin, int end) nothrow;
+__gshared c_g_rand_int_rangeFn c_g_rand_int_range; ///
+private alias c_g_rand_set_seedFn = extern(C) void function(GRand* rand, uint seed) nothrow;
+__gshared c_g_rand_set_seedFn c_g_rand_set_seed; ///
+private alias c_g_rand_set_seed_arrayFn = extern(C) void function(GRand* rand, const(uint)* seed, uint seedLength) nothrow;
+__gshared c_g_rand_set_seed_arrayFn c_g_rand_set_seed_array; ///
+
+// RecMutex
+private alias c_g_rec_mutex_clearFn = extern(C) void function(GRecMutex* recMutex) nothrow;
+__gshared c_g_rec_mutex_clearFn c_g_rec_mutex_clear; ///
+private alias c_g_rec_mutex_initFn = extern(C) void function(GRecMutex* recMutex) nothrow;
+__gshared c_g_rec_mutex_initFn c_g_rec_mutex_init; ///
+private alias c_g_rec_mutex_lockFn = extern(C) void function(GRecMutex* recMutex) nothrow;
+__gshared c_g_rec_mutex_lockFn c_g_rec_mutex_lock; ///
+private alias c_g_rec_mutex_trylockFn = extern(C) gboolean function(GRecMutex* recMutex) nothrow;
+__gshared c_g_rec_mutex_trylockFn c_g_rec_mutex_trylock; ///
+private alias c_g_rec_mutex_unlockFn = extern(C) void function(GRecMutex* recMutex) nothrow;
+__gshared c_g_rec_mutex_unlockFn c_g_rec_mutex_unlock; ///
+
+// Regex
+private alias c_g_regex_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_regex_get_typeFn c_g_regex_get_type; ///
+private alias c_g_regex_newFn = extern(C) GRegex* function(const(char)* pattern, GRegexCompileFlags compileOptions, GRegexMatchFlags matchOptions, GError** _err) nothrow;
+__gshared c_g_regex_newFn c_g_regex_new; ///
+private alias c_g_regex_get_capture_countFn = extern(C) int function(const(GRegex)* regex) nothrow;
+__gshared c_g_regex_get_capture_countFn c_g_regex_get_capture_count; ///
+private alias c_g_regex_get_compile_flagsFn = extern(C) GRegexCompileFlags function(const(GRegex)* regex) nothrow;
+__gshared c_g_regex_get_compile_flagsFn c_g_regex_get_compile_flags; ///
+private alias c_g_regex_get_has_cr_or_lfFn = extern(C) gboolean function(const(GRegex)* regex) nothrow;
+__gshared c_g_regex_get_has_cr_or_lfFn c_g_regex_get_has_cr_or_lf; ///
+private alias c_g_regex_get_match_flagsFn = extern(C) GRegexMatchFlags function(const(GRegex)* regex) nothrow;
+__gshared c_g_regex_get_match_flagsFn c_g_regex_get_match_flags; ///
+private alias c_g_regex_get_max_backrefFn = extern(C) int function(const(GRegex)* regex) nothrow;
+__gshared c_g_regex_get_max_backrefFn c_g_regex_get_max_backref; ///
+private alias c_g_regex_get_max_lookbehindFn = extern(C) int function(const(GRegex)* regex) nothrow;
+__gshared c_g_regex_get_max_lookbehindFn c_g_regex_get_max_lookbehind; ///
+private alias c_g_regex_get_patternFn = extern(C) const(char)* function(const(GRegex)* regex) nothrow;
+__gshared c_g_regex_get_patternFn c_g_regex_get_pattern; ///
+private alias c_g_regex_get_string_numberFn = extern(C) int function(const(GRegex)* regex, const(char)* name) nothrow;
+__gshared c_g_regex_get_string_numberFn c_g_regex_get_string_number; ///
+private alias c_g_regex_matchFn = extern(C) gboolean function(const(GRegex)* regex, const(char)* string_, GRegexMatchFlags matchOptions, GMatchInfo** matchInfo) nothrow;
+__gshared c_g_regex_matchFn c_g_regex_match; ///
+private alias c_g_regex_match_allFn = extern(C) gboolean function(const(GRegex)* regex, const(char)* string_, GRegexMatchFlags matchOptions, GMatchInfo** matchInfo) nothrow;
+__gshared c_g_regex_match_allFn c_g_regex_match_all; ///
+private alias c_g_regex_match_all_fullFn = extern(C) gboolean function(const(GRegex)* regex, const(char)* string_, ptrdiff_t stringLen, int startPosition, GRegexMatchFlags matchOptions, GMatchInfo** matchInfo, GError** _err) nothrow;
+__gshared c_g_regex_match_all_fullFn c_g_regex_match_all_full; ///
+private alias c_g_regex_match_fullFn = extern(C) gboolean function(const(GRegex)* regex, const(char)* string_, ptrdiff_t stringLen, int startPosition, GRegexMatchFlags matchOptions, GMatchInfo** matchInfo, GError** _err) nothrow;
+__gshared c_g_regex_match_fullFn c_g_regex_match_full; ///
+private alias c_g_regex_refFn = extern(C) GRegex* function(GRegex* regex) nothrow;
+__gshared c_g_regex_refFn c_g_regex_ref; ///
+private alias c_g_regex_replaceFn = extern(C) char* function(const(GRegex)* regex, const(char)* string_, ptrdiff_t stringLen, int startPosition, const(char)* replacement, GRegexMatchFlags matchOptions, GError** _err) nothrow;
+__gshared c_g_regex_replaceFn c_g_regex_replace; ///
+private alias c_g_regex_replace_evalFn = extern(C) char* function(const(GRegex)* regex, const(char)* string_, ptrdiff_t stringLen, int startPosition, GRegexMatchFlags matchOptions, GRegexEvalCallback eval, void* userData, GError** _err) nothrow;
+__gshared c_g_regex_replace_evalFn c_g_regex_replace_eval; ///
+private alias c_g_regex_replace_literalFn = extern(C) char* function(const(GRegex)* regex, const(char)* string_, ptrdiff_t stringLen, int startPosition, const(char)* replacement, GRegexMatchFlags matchOptions, GError** _err) nothrow;
+__gshared c_g_regex_replace_literalFn c_g_regex_replace_literal; ///
+private alias c_g_regex_splitFn = extern(C) char** function(const(GRegex)* regex, const(char)* string_, GRegexMatchFlags matchOptions) nothrow;
+__gshared c_g_regex_splitFn c_g_regex_split; ///
+private alias c_g_regex_split_fullFn = extern(C) char** function(const(GRegex)* regex, const(char)* string_, ptrdiff_t stringLen, int startPosition, GRegexMatchFlags matchOptions, int maxTokens, GError** _err) nothrow;
+__gshared c_g_regex_split_fullFn c_g_regex_split_full; ///
+private alias c_g_regex_unrefFn = extern(C) void function(GRegex* regex) nothrow;
+__gshared c_g_regex_unrefFn c_g_regex_unref; ///
+private alias c_g_regex_check_replacementFn = extern(C) gboolean function(const(char)* replacement, gboolean* hasReferences, GError** _err) nothrow;
+__gshared c_g_regex_check_replacementFn c_g_regex_check_replacement; ///
+private alias c_g_regex_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_regex_error_quarkFn c_g_regex_error_quark; ///
+private alias c_g_regex_escape_nulFn = extern(C) char* function(const(char)* string_, int length) nothrow;
+__gshared c_g_regex_escape_nulFn c_g_regex_escape_nul; ///
+private alias c_g_regex_escape_stringFn = extern(C) char* function(const(char)* string_, int length) nothrow;
+__gshared c_g_regex_escape_stringFn c_g_regex_escape_string; ///
+private alias c_g_regex_match_simpleFn = extern(C) gboolean function(const(char)* pattern, const(char)* string_, GRegexCompileFlags compileOptions, GRegexMatchFlags matchOptions) nothrow;
+__gshared c_g_regex_match_simpleFn c_g_regex_match_simple; ///
+private alias c_g_regex_split_simpleFn = extern(C) char** function(const(char)* pattern, const(char)* string_, GRegexCompileFlags compileOptions, GRegexMatchFlags matchOptions) nothrow;
+__gshared c_g_regex_split_simpleFn c_g_regex_split_simple; ///
+
+// Relation
+private alias c_g_relation_countFn = extern(C) int function(GRelation* relation, const(void)* key, int field) nothrow;
+__gshared c_g_relation_countFn c_g_relation_count; ///
+private alias c_g_relation_deleteFn = extern(C) int function(GRelation* relation, const(void)* key, int field) nothrow;
+__gshared c_g_relation_deleteFn c_g_relation_delete; ///
+private alias c_g_relation_destroyFn = extern(C) void function(GRelation* relation) nothrow;
+__gshared c_g_relation_destroyFn c_g_relation_destroy; ///
+private alias c_g_relation_existsFn = extern(C) gboolean function(GRelation* relation,  ...) nothrow;
+__gshared c_g_relation_existsFn c_g_relation_exists; ///
+private alias c_g_relation_indexFn = extern(C) void function(GRelation* relation, int field, GHashFunc hashFunc, GEqualFunc keyEqualFunc) nothrow;
+__gshared c_g_relation_indexFn c_g_relation_index; ///
+private alias c_g_relation_insertFn = extern(C) void function(GRelation* relation,  ...) nothrow;
+__gshared c_g_relation_insertFn c_g_relation_insert; ///
+private alias c_g_relation_printFn = extern(C) void function(GRelation* relation) nothrow;
+__gshared c_g_relation_printFn c_g_relation_print; ///
+private alias c_g_relation_selectFn = extern(C) GTuples* function(GRelation* relation, const(void)* key, int field) nothrow;
+__gshared c_g_relation_selectFn c_g_relation_select; ///
+private alias c_g_relation_newFn = extern(C) GRelation* function(int fields) nothrow;
+__gshared c_g_relation_newFn c_g_relation_new; ///
+
+// SList
+private alias c_g_slist_allocFn = extern(C) GSList* function() nothrow;
+__gshared c_g_slist_allocFn c_g_slist_alloc; ///
+private alias c_g_slist_appendFn = extern(C) GSList* function(GSList* list, void* data) nothrow;
+__gshared c_g_slist_appendFn c_g_slist_append; ///
+private alias c_g_slist_concatFn = extern(C) GSList* function(GSList* list1, GSList* list2) nothrow;
+__gshared c_g_slist_concatFn c_g_slist_concat; ///
+private alias c_g_slist_copyFn = extern(C) GSList* function(GSList* list) nothrow;
+__gshared c_g_slist_copyFn c_g_slist_copy; ///
+private alias c_g_slist_copy_deepFn = extern(C) GSList* function(GSList* list, GCopyFunc func, void* userData) nothrow;
+__gshared c_g_slist_copy_deepFn c_g_slist_copy_deep; ///
+private alias c_g_slist_delete_linkFn = extern(C) GSList* function(GSList* list, GSList* link) nothrow;
+__gshared c_g_slist_delete_linkFn c_g_slist_delete_link; ///
+private alias c_g_slist_findFn = extern(C) GSList* function(GSList* list, const(void)* data) nothrow;
+__gshared c_g_slist_findFn c_g_slist_find; ///
+private alias c_g_slist_find_customFn = extern(C) GSList* function(GSList* list, const(void)* data, GCompareFunc func) nothrow;
+__gshared c_g_slist_find_customFn c_g_slist_find_custom; ///
+private alias c_g_slist_foreachFn = extern(C) void function(GSList* list, GFunc func, void* userData) nothrow;
+__gshared c_g_slist_foreachFn c_g_slist_foreach; ///
+private alias c_g_slist_freeFn = extern(C) void function(GSList* list) nothrow;
+__gshared c_g_slist_freeFn c_g_slist_free; ///
+private alias c_g_slist_free_1Fn = extern(C) void function(GSList* list) nothrow;
+__gshared c_g_slist_free_1Fn c_g_slist_free_1; ///
+private alias c_g_slist_free_fullFn = extern(C) void function(GSList* list, GDestroyNotify freeFunc) nothrow;
+__gshared c_g_slist_free_fullFn c_g_slist_free_full; ///
+private alias c_g_slist_indexFn = extern(C) int function(GSList* list, const(void)* data) nothrow;
+__gshared c_g_slist_indexFn c_g_slist_index; ///
+private alias c_g_slist_insertFn = extern(C) GSList* function(GSList* list, void* data, int position) nothrow;
+__gshared c_g_slist_insertFn c_g_slist_insert; ///
+private alias c_g_slist_insert_beforeFn = extern(C) GSList* function(GSList* slist, GSList* sibling, void* data) nothrow;
+__gshared c_g_slist_insert_beforeFn c_g_slist_insert_before; ///
+private alias c_g_slist_insert_sortedFn = extern(C) GSList* function(GSList* list, void* data, GCompareFunc func) nothrow;
+__gshared c_g_slist_insert_sortedFn c_g_slist_insert_sorted; ///
+private alias c_g_slist_insert_sorted_with_dataFn = extern(C) GSList* function(GSList* list, void* data, GCompareDataFunc func, void* userData) nothrow;
+__gshared c_g_slist_insert_sorted_with_dataFn c_g_slist_insert_sorted_with_data; ///
+private alias c_g_slist_lastFn = extern(C) GSList* function(GSList* list) nothrow;
+__gshared c_g_slist_lastFn c_g_slist_last; ///
+private alias c_g_slist_lengthFn = extern(C) uint function(GSList* list) nothrow;
+__gshared c_g_slist_lengthFn c_g_slist_length; ///
+private alias c_g_slist_nthFn = extern(C) GSList* function(GSList* list, uint n) nothrow;
+__gshared c_g_slist_nthFn c_g_slist_nth; ///
+private alias c_g_slist_nth_dataFn = extern(C) void* function(GSList* list, uint n) nothrow;
+__gshared c_g_slist_nth_dataFn c_g_slist_nth_data; ///
+private alias c_g_slist_pop_allocatorFn = extern(C) void function() nothrow;
+__gshared c_g_slist_pop_allocatorFn c_g_slist_pop_allocator; ///
+private alias c_g_slist_positionFn = extern(C) int function(GSList* list, GSList* llink) nothrow;
+__gshared c_g_slist_positionFn c_g_slist_position; ///
+private alias c_g_slist_prependFn = extern(C) GSList* function(GSList* list, void* data) nothrow;
+__gshared c_g_slist_prependFn c_g_slist_prepend; ///
+private alias c_g_slist_push_allocatorFn = extern(C) void function(GAllocator* allocator) nothrow;
+__gshared c_g_slist_push_allocatorFn c_g_slist_push_allocator; ///
+private alias c_g_slist_removeFn = extern(C) GSList* function(GSList* list, const(void)* data) nothrow;
+__gshared c_g_slist_removeFn c_g_slist_remove; ///
+private alias c_g_slist_remove_allFn = extern(C) GSList* function(GSList* list, const(void)* data) nothrow;
+__gshared c_g_slist_remove_allFn c_g_slist_remove_all; ///
+private alias c_g_slist_remove_linkFn = extern(C) GSList* function(GSList* list, GSList* link) nothrow;
+__gshared c_g_slist_remove_linkFn c_g_slist_remove_link; ///
+private alias c_g_slist_reverseFn = extern(C) GSList* function(GSList* list) nothrow;
+__gshared c_g_slist_reverseFn c_g_slist_reverse; ///
+private alias c_g_slist_sortFn = extern(C) GSList* function(GSList* list, GCompareFunc compareFunc) nothrow;
+__gshared c_g_slist_sortFn c_g_slist_sort; ///
+private alias c_g_slist_sort_with_dataFn = extern(C) GSList* function(GSList* list, GCompareDataFunc compareFunc, void* userData) nothrow;
+__gshared c_g_slist_sort_with_dataFn c_g_slist_sort_with_data; ///
+
+// Scanner
+private alias c_g_scanner_cur_lineFn = extern(C) uint function(GScanner* scanner) nothrow;
+__gshared c_g_scanner_cur_lineFn c_g_scanner_cur_line; ///
+private alias c_g_scanner_cur_positionFn = extern(C) uint function(GScanner* scanner) nothrow;
+__gshared c_g_scanner_cur_positionFn c_g_scanner_cur_position; ///
+private alias c_g_scanner_cur_tokenFn = extern(C) GTokenType function(GScanner* scanner) nothrow;
+__gshared c_g_scanner_cur_tokenFn c_g_scanner_cur_token; ///
+private alias c_g_scanner_cur_valueFn = extern(C) GTokenValue function(GScanner* scanner) nothrow;
+__gshared c_g_scanner_cur_valueFn c_g_scanner_cur_value; ///
+private alias c_g_scanner_destroyFn = extern(C) void function(GScanner* scanner) nothrow;
+__gshared c_g_scanner_destroyFn c_g_scanner_destroy; ///
+private alias c_g_scanner_eofFn = extern(C) gboolean function(GScanner* scanner) nothrow;
+__gshared c_g_scanner_eofFn c_g_scanner_eof; ///
+private alias c_g_scanner_errorFn = extern(C) void function(GScanner* scanner, const(char)* format,  ...) nothrow;
+__gshared c_g_scanner_errorFn c_g_scanner_error; ///
+private alias c_g_scanner_get_next_tokenFn = extern(C) GTokenType function(GScanner* scanner) nothrow;
+__gshared c_g_scanner_get_next_tokenFn c_g_scanner_get_next_token; ///
+private alias c_g_scanner_input_fileFn = extern(C) void function(GScanner* scanner, int inputFd) nothrow;
+__gshared c_g_scanner_input_fileFn c_g_scanner_input_file; ///
+private alias c_g_scanner_input_textFn = extern(C) void function(GScanner* scanner, const(char)* text, uint textLen) nothrow;
+__gshared c_g_scanner_input_textFn c_g_scanner_input_text; ///
+private alias c_g_scanner_lookup_symbolFn = extern(C) void* function(GScanner* scanner, const(char)* symbol) nothrow;
+__gshared c_g_scanner_lookup_symbolFn c_g_scanner_lookup_symbol; ///
+private alias c_g_scanner_peek_next_tokenFn = extern(C) GTokenType function(GScanner* scanner) nothrow;
+__gshared c_g_scanner_peek_next_tokenFn c_g_scanner_peek_next_token; ///
+private alias c_g_scanner_scope_add_symbolFn = extern(C) void function(GScanner* scanner, uint scopeId, const(char)* symbol, void* value) nothrow;
+__gshared c_g_scanner_scope_add_symbolFn c_g_scanner_scope_add_symbol; ///
+private alias c_g_scanner_scope_foreach_symbolFn = extern(C) void function(GScanner* scanner, uint scopeId, GHFunc func, void* userData) nothrow;
+__gshared c_g_scanner_scope_foreach_symbolFn c_g_scanner_scope_foreach_symbol; ///
+private alias c_g_scanner_scope_lookup_symbolFn = extern(C) void* function(GScanner* scanner, uint scopeId, const(char)* symbol) nothrow;
+__gshared c_g_scanner_scope_lookup_symbolFn c_g_scanner_scope_lookup_symbol; ///
+private alias c_g_scanner_scope_remove_symbolFn = extern(C) void function(GScanner* scanner, uint scopeId, const(char)* symbol) nothrow;
+__gshared c_g_scanner_scope_remove_symbolFn c_g_scanner_scope_remove_symbol; ///
+private alias c_g_scanner_set_scopeFn = extern(C) uint function(GScanner* scanner, uint scopeId) nothrow;
+__gshared c_g_scanner_set_scopeFn c_g_scanner_set_scope; ///
+private alias c_g_scanner_sync_file_offsetFn = extern(C) void function(GScanner* scanner) nothrow;
+__gshared c_g_scanner_sync_file_offsetFn c_g_scanner_sync_file_offset; ///
+private alias c_g_scanner_unexp_tokenFn = extern(C) void function(GScanner* scanner, GTokenType expectedToken, const(char)* identifierSpec, const(char)* symbolSpec, const(char)* symbolName, const(char)* message, int isError) nothrow;
+__gshared c_g_scanner_unexp_tokenFn c_g_scanner_unexp_token; ///
+private alias c_g_scanner_warnFn = extern(C) void function(GScanner* scanner, const(char)* format,  ...) nothrow;
+__gshared c_g_scanner_warnFn c_g_scanner_warn; ///
+private alias c_g_scanner_newFn = extern(C) GScanner* function(const(GScannerConfig)* configTempl) nothrow;
+__gshared c_g_scanner_newFn c_g_scanner_new; ///
+
+// Sequence
+private alias c_g_sequence_appendFn = extern(C) GSequenceIter* function(GSequence* seq, void* data) nothrow;
+__gshared c_g_sequence_appendFn c_g_sequence_append; ///
+private alias c_g_sequence_foreachFn = extern(C) void function(GSequence* seq, GFunc func, void* userData) nothrow;
+__gshared c_g_sequence_foreachFn c_g_sequence_foreach; ///
+private alias c_g_sequence_freeFn = extern(C) void function(GSequence* seq) nothrow;
+__gshared c_g_sequence_freeFn c_g_sequence_free; ///
+private alias c_g_sequence_get_begin_iterFn = extern(C) GSequenceIter* function(GSequence* seq) nothrow;
+__gshared c_g_sequence_get_begin_iterFn c_g_sequence_get_begin_iter; ///
+private alias c_g_sequence_get_end_iterFn = extern(C) GSequenceIter* function(GSequence* seq) nothrow;
+__gshared c_g_sequence_get_end_iterFn c_g_sequence_get_end_iter; ///
+private alias c_g_sequence_get_iter_at_posFn = extern(C) GSequenceIter* function(GSequence* seq, int pos) nothrow;
+__gshared c_g_sequence_get_iter_at_posFn c_g_sequence_get_iter_at_pos; ///
+private alias c_g_sequence_get_lengthFn = extern(C) int function(GSequence* seq) nothrow;
+__gshared c_g_sequence_get_lengthFn c_g_sequence_get_length; ///
+private alias c_g_sequence_insert_sortedFn = extern(C) GSequenceIter* function(GSequence* seq, void* data, GCompareDataFunc cmpFunc, void* cmpData) nothrow;
+__gshared c_g_sequence_insert_sortedFn c_g_sequence_insert_sorted; ///
+private alias c_g_sequence_insert_sorted_iterFn = extern(C) GSequenceIter* function(GSequence* seq, void* data, GSequenceIterCompareFunc iterCmp, void* cmpData) nothrow;
+__gshared c_g_sequence_insert_sorted_iterFn c_g_sequence_insert_sorted_iter; ///
+private alias c_g_sequence_is_emptyFn = extern(C) gboolean function(GSequence* seq) nothrow;
+__gshared c_g_sequence_is_emptyFn c_g_sequence_is_empty; ///
+private alias c_g_sequence_lookupFn = extern(C) GSequenceIter* function(GSequence* seq, void* data, GCompareDataFunc cmpFunc, void* cmpData) nothrow;
+__gshared c_g_sequence_lookupFn c_g_sequence_lookup; ///
+private alias c_g_sequence_lookup_iterFn = extern(C) GSequenceIter* function(GSequence* seq, void* data, GSequenceIterCompareFunc iterCmp, void* cmpData) nothrow;
+__gshared c_g_sequence_lookup_iterFn c_g_sequence_lookup_iter; ///
+private alias c_g_sequence_prependFn = extern(C) GSequenceIter* function(GSequence* seq, void* data) nothrow;
+__gshared c_g_sequence_prependFn c_g_sequence_prepend; ///
+private alias c_g_sequence_searchFn = extern(C) GSequenceIter* function(GSequence* seq, void* data, GCompareDataFunc cmpFunc, void* cmpData) nothrow;
+__gshared c_g_sequence_searchFn c_g_sequence_search; ///
+private alias c_g_sequence_search_iterFn = extern(C) GSequenceIter* function(GSequence* seq, void* data, GSequenceIterCompareFunc iterCmp, void* cmpData) nothrow;
+__gshared c_g_sequence_search_iterFn c_g_sequence_search_iter; ///
+private alias c_g_sequence_sortFn = extern(C) void function(GSequence* seq, GCompareDataFunc cmpFunc, void* cmpData) nothrow;
+__gshared c_g_sequence_sortFn c_g_sequence_sort; ///
+private alias c_g_sequence_sort_iterFn = extern(C) void function(GSequence* seq, GSequenceIterCompareFunc cmpFunc, void* cmpData) nothrow;
+__gshared c_g_sequence_sort_iterFn c_g_sequence_sort_iter; ///
+private alias c_g_sequence_foreach_rangeFn = extern(C) void function(GSequenceIter* begin, GSequenceIter* end, GFunc func, void* userData) nothrow;
+__gshared c_g_sequence_foreach_rangeFn c_g_sequence_foreach_range; ///
+private alias c_g_sequence_getFn = extern(C) void* function(GSequenceIter* iter) nothrow;
+__gshared c_g_sequence_getFn c_g_sequence_get; ///
+private alias c_g_sequence_insert_beforeFn = extern(C) GSequenceIter* function(GSequenceIter* iter, void* data) nothrow;
+__gshared c_g_sequence_insert_beforeFn c_g_sequence_insert_before; ///
+private alias c_g_sequence_moveFn = extern(C) void function(GSequenceIter* src, GSequenceIter* dest) nothrow;
+__gshared c_g_sequence_moveFn c_g_sequence_move; ///
+private alias c_g_sequence_move_rangeFn = extern(C) void function(GSequenceIter* dest, GSequenceIter* begin, GSequenceIter* end) nothrow;
+__gshared c_g_sequence_move_rangeFn c_g_sequence_move_range; ///
+private alias c_g_sequence_newFn = extern(C) GSequence* function(GDestroyNotify dataDestroy) nothrow;
+__gshared c_g_sequence_newFn c_g_sequence_new; ///
+private alias c_g_sequence_range_get_midpointFn = extern(C) GSequenceIter* function(GSequenceIter* begin, GSequenceIter* end) nothrow;
+__gshared c_g_sequence_range_get_midpointFn c_g_sequence_range_get_midpoint; ///
+private alias c_g_sequence_removeFn = extern(C) void function(GSequenceIter* iter) nothrow;
+__gshared c_g_sequence_removeFn c_g_sequence_remove; ///
+private alias c_g_sequence_remove_rangeFn = extern(C) void function(GSequenceIter* begin, GSequenceIter* end) nothrow;
+__gshared c_g_sequence_remove_rangeFn c_g_sequence_remove_range; ///
+private alias c_g_sequence_setFn = extern(C) void function(GSequenceIter* iter, void* data) nothrow;
+__gshared c_g_sequence_setFn c_g_sequence_set; ///
+private alias c_g_sequence_sort_changedFn = extern(C) void function(GSequenceIter* iter, GCompareDataFunc cmpFunc, void* cmpData) nothrow;
+__gshared c_g_sequence_sort_changedFn c_g_sequence_sort_changed; ///
+private alias c_g_sequence_sort_changed_iterFn = extern(C) void function(GSequenceIter* iter, GSequenceIterCompareFunc iterCmp, void* cmpData) nothrow;
+__gshared c_g_sequence_sort_changed_iterFn c_g_sequence_sort_changed_iter; ///
+private alias c_g_sequence_swapFn = extern(C) void function(GSequenceIter* a, GSequenceIter* b) nothrow;
+__gshared c_g_sequence_swapFn c_g_sequence_swap; ///
+
+// SequenceIter
+private alias c_g_sequence_iter_compareFn = extern(C) int function(GSequenceIter* a, GSequenceIter* b) nothrow;
+__gshared c_g_sequence_iter_compareFn c_g_sequence_iter_compare; ///
+private alias c_g_sequence_iter_get_positionFn = extern(C) int function(GSequenceIter* iter) nothrow;
+__gshared c_g_sequence_iter_get_positionFn c_g_sequence_iter_get_position; ///
+private alias c_g_sequence_iter_get_sequenceFn = extern(C) GSequence* function(GSequenceIter* iter) nothrow;
+__gshared c_g_sequence_iter_get_sequenceFn c_g_sequence_iter_get_sequence; ///
+private alias c_g_sequence_iter_is_beginFn = extern(C) gboolean function(GSequenceIter* iter) nothrow;
+__gshared c_g_sequence_iter_is_beginFn c_g_sequence_iter_is_begin; ///
+private alias c_g_sequence_iter_is_endFn = extern(C) gboolean function(GSequenceIter* iter) nothrow;
+__gshared c_g_sequence_iter_is_endFn c_g_sequence_iter_is_end; ///
+private alias c_g_sequence_iter_moveFn = extern(C) GSequenceIter* function(GSequenceIter* iter, int delta) nothrow;
+__gshared c_g_sequence_iter_moveFn c_g_sequence_iter_move; ///
+private alias c_g_sequence_iter_nextFn = extern(C) GSequenceIter* function(GSequenceIter* iter) nothrow;
+__gshared c_g_sequence_iter_nextFn c_g_sequence_iter_next; ///
+private alias c_g_sequence_iter_prevFn = extern(C) GSequenceIter* function(GSequenceIter* iter) nothrow;
+__gshared c_g_sequence_iter_prevFn c_g_sequence_iter_prev; ///
+
+// Source
+private alias c_g_source_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_source_get_typeFn c_g_source_get_type; ///
+private alias c_g_source_newFn = extern(C) GSource* function(GSourceFuncs* sourceFuncs, uint structSize) nothrow;
+__gshared c_g_source_newFn c_g_source_new; ///
+private alias c_g_source_add_child_sourceFn = extern(C) void function(GSource* source, GSource* childSource) nothrow;
+__gshared c_g_source_add_child_sourceFn c_g_source_add_child_source; ///
+private alias c_g_source_add_pollFn = extern(C) void function(GSource* source, GPollFD* fd) nothrow;
+__gshared c_g_source_add_pollFn c_g_source_add_poll; ///
+private alias c_g_source_add_unix_fdFn = extern(C) void* function(GSource* source, int fd, GIOCondition events) nothrow;
+__gshared c_g_source_add_unix_fdFn c_g_source_add_unix_fd; ///
+private alias c_g_source_attachFn = extern(C) uint function(GSource* source, GMainContext* context) nothrow;
+__gshared c_g_source_attachFn c_g_source_attach; ///
+private alias c_g_source_destroyFn = extern(C) void function(GSource* source) nothrow;
+__gshared c_g_source_destroyFn c_g_source_destroy; ///
+private alias c_g_source_dup_contextFn = extern(C) GMainContext* function(GSource* source) nothrow;
+__gshared c_g_source_dup_contextFn c_g_source_dup_context; ///
+private alias c_g_source_get_can_recurseFn = extern(C) gboolean function(GSource* source) nothrow;
+__gshared c_g_source_get_can_recurseFn c_g_source_get_can_recurse; ///
+private alias c_g_source_get_contextFn = extern(C) GMainContext* function(GSource* source) nothrow;
+__gshared c_g_source_get_contextFn c_g_source_get_context; ///
+private alias c_g_source_get_current_timeFn = extern(C) void function(GSource* source, GTimeVal* timeval) nothrow;
+__gshared c_g_source_get_current_timeFn c_g_source_get_current_time; ///
+private alias c_g_source_get_idFn = extern(C) uint function(GSource* source) nothrow;
+__gshared c_g_source_get_idFn c_g_source_get_id; ///
+private alias c_g_source_get_nameFn = extern(C) const(char)* function(GSource* source) nothrow;
+__gshared c_g_source_get_nameFn c_g_source_get_name; ///
+private alias c_g_source_get_priorityFn = extern(C) int function(GSource* source) nothrow;
+__gshared c_g_source_get_priorityFn c_g_source_get_priority; ///
+private alias c_g_source_get_ready_timeFn = extern(C) long function(GSource* source) nothrow;
+__gshared c_g_source_get_ready_timeFn c_g_source_get_ready_time; ///
+private alias c_g_source_get_timeFn = extern(C) long function(GSource* source) nothrow;
+__gshared c_g_source_get_timeFn c_g_source_get_time; ///
+private alias c_g_source_is_destroyedFn = extern(C) gboolean function(GSource* source) nothrow;
+__gshared c_g_source_is_destroyedFn c_g_source_is_destroyed; ///
+private alias c_g_source_modify_unix_fdFn = extern(C) void function(GSource* source, void* tag, GIOCondition newEvents) nothrow;
+__gshared c_g_source_modify_unix_fdFn c_g_source_modify_unix_fd; ///
+private alias c_g_source_query_unix_fdFn = extern(C) GIOCondition function(GSource* source, void* tag) nothrow;
+__gshared c_g_source_query_unix_fdFn c_g_source_query_unix_fd; ///
+private alias c_g_source_refFn = extern(C) GSource* function(GSource* source) nothrow;
+__gshared c_g_source_refFn c_g_source_ref; ///
+private alias c_g_source_remove_child_sourceFn = extern(C) void function(GSource* source, GSource* childSource) nothrow;
+__gshared c_g_source_remove_child_sourceFn c_g_source_remove_child_source; ///
+private alias c_g_source_remove_pollFn = extern(C) void function(GSource* source, GPollFD* fd) nothrow;
+__gshared c_g_source_remove_pollFn c_g_source_remove_poll; ///
+private alias c_g_source_remove_unix_fdFn = extern(C) void function(GSource* source, void* tag) nothrow;
+__gshared c_g_source_remove_unix_fdFn c_g_source_remove_unix_fd; ///
+private alias c_g_source_set_callbackFn = extern(C) void function(GSource* source, GSourceFunc func, void* data, GDestroyNotify notify) nothrow;
+__gshared c_g_source_set_callbackFn c_g_source_set_callback; ///
+private alias c_g_source_set_callback_indirectFn = extern(C) void function(GSource* source, void* callbackData, GSourceCallbackFuncs* callbackFuncs) nothrow;
+__gshared c_g_source_set_callback_indirectFn c_g_source_set_callback_indirect; ///
+private alias c_g_source_set_can_recurseFn = extern(C) void function(GSource* source, gboolean canRecurse) nothrow;
+__gshared c_g_source_set_can_recurseFn c_g_source_set_can_recurse; ///
+private alias c_g_source_set_dispose_functionFn = extern(C) void function(GSource* source, GSourceDisposeFunc dispose) nothrow;
+__gshared c_g_source_set_dispose_functionFn c_g_source_set_dispose_function; ///
+private alias c_g_source_set_funcsFn = extern(C) void function(GSource* source, GSourceFuncs* funcs) nothrow;
+__gshared c_g_source_set_funcsFn c_g_source_set_funcs; ///
+private alias c_g_source_set_nameFn = extern(C) void function(GSource* source, const(char)* name) nothrow;
+__gshared c_g_source_set_nameFn c_g_source_set_name; ///
+private alias c_g_source_set_priorityFn = extern(C) void function(GSource* source, int priority) nothrow;
+__gshared c_g_source_set_priorityFn c_g_source_set_priority; ///
+private alias c_g_source_set_ready_timeFn = extern(C) void function(GSource* source, long readyTime) nothrow;
+__gshared c_g_source_set_ready_timeFn c_g_source_set_ready_time; ///
+private alias c_g_source_set_static_nameFn = extern(C) void function(GSource* source, const(char)* name) nothrow;
+__gshared c_g_source_set_static_nameFn c_g_source_set_static_name; ///
+private alias c_g_source_unrefFn = extern(C) void function(GSource* source) nothrow;
+__gshared c_g_source_unrefFn c_g_source_unref; ///
+private alias c_g_source_removeFn = extern(C) gboolean function(uint tag) nothrow;
+__gshared c_g_source_removeFn c_g_source_remove; ///
+private alias c_g_source_remove_by_funcs_user_dataFn = extern(C) gboolean function(GSourceFuncs* funcs, void* userData) nothrow;
+__gshared c_g_source_remove_by_funcs_user_dataFn c_g_source_remove_by_funcs_user_data; ///
+private alias c_g_source_remove_by_user_dataFn = extern(C) gboolean function(void* userData) nothrow;
+__gshared c_g_source_remove_by_user_dataFn c_g_source_remove_by_user_data; ///
+private alias c_g_source_set_name_by_idFn = extern(C) void function(uint tag, const(char)* name) nothrow;
+__gshared c_g_source_set_name_by_idFn c_g_source_set_name_by_id; ///
+
+// StaticMutex
+private alias c_g_static_mutex_freeFn = extern(C) void function(GStaticMutex* mutex) nothrow;
+__gshared c_g_static_mutex_freeFn c_g_static_mutex_free; ///
+private alias c_g_static_mutex_get_mutex_implFn = extern(C) GMutex* function(GStaticMutex* mutex) nothrow;
+__gshared c_g_static_mutex_get_mutex_implFn c_g_static_mutex_get_mutex_impl; ///
+private alias c_g_static_mutex_initFn = extern(C) void function(GStaticMutex* mutex) nothrow;
+__gshared c_g_static_mutex_initFn c_g_static_mutex_init; ///
+
+// StaticPrivate
+private alias c_g_static_private_freeFn = extern(C) void function(GStaticPrivate* privateKey) nothrow;
+__gshared c_g_static_private_freeFn c_g_static_private_free; ///
+private alias c_g_static_private_getFn = extern(C) void* function(GStaticPrivate* privateKey) nothrow;
+__gshared c_g_static_private_getFn c_g_static_private_get; ///
+private alias c_g_static_private_initFn = extern(C) void function(GStaticPrivate* privateKey) nothrow;
+__gshared c_g_static_private_initFn c_g_static_private_init; ///
+private alias c_g_static_private_setFn = extern(C) void function(GStaticPrivate* privateKey, void* data, GDestroyNotify notify) nothrow;
+__gshared c_g_static_private_setFn c_g_static_private_set; ///
+
+// StaticRWLock
+private alias c_g_static_rw_lock_freeFn = extern(C) void function(GStaticRWLock* lock) nothrow;
+__gshared c_g_static_rw_lock_freeFn c_g_static_rw_lock_free; ///
+private alias c_g_static_rw_lock_initFn = extern(C) void function(GStaticRWLock* lock) nothrow;
+__gshared c_g_static_rw_lock_initFn c_g_static_rw_lock_init; ///
+private alias c_g_static_rw_lock_reader_lockFn = extern(C) void function(GStaticRWLock* lock) nothrow;
+__gshared c_g_static_rw_lock_reader_lockFn c_g_static_rw_lock_reader_lock; ///
+private alias c_g_static_rw_lock_reader_trylockFn = extern(C) gboolean function(GStaticRWLock* lock) nothrow;
+__gshared c_g_static_rw_lock_reader_trylockFn c_g_static_rw_lock_reader_trylock; ///
+private alias c_g_static_rw_lock_reader_unlockFn = extern(C) void function(GStaticRWLock* lock) nothrow;
+__gshared c_g_static_rw_lock_reader_unlockFn c_g_static_rw_lock_reader_unlock; ///
+private alias c_g_static_rw_lock_writer_lockFn = extern(C) void function(GStaticRWLock* lock) nothrow;
+__gshared c_g_static_rw_lock_writer_lockFn c_g_static_rw_lock_writer_lock; ///
+private alias c_g_static_rw_lock_writer_trylockFn = extern(C) gboolean function(GStaticRWLock* lock) nothrow;
+__gshared c_g_static_rw_lock_writer_trylockFn c_g_static_rw_lock_writer_trylock; ///
+private alias c_g_static_rw_lock_writer_unlockFn = extern(C) void function(GStaticRWLock* lock) nothrow;
+__gshared c_g_static_rw_lock_writer_unlockFn c_g_static_rw_lock_writer_unlock; ///
+
+// StaticRecMutex
+private alias c_g_static_rec_mutex_freeFn = extern(C) void function(GStaticRecMutex* mutex) nothrow;
+__gshared c_g_static_rec_mutex_freeFn c_g_static_rec_mutex_free; ///
+private alias c_g_static_rec_mutex_initFn = extern(C) void function(GStaticRecMutex* mutex) nothrow;
+__gshared c_g_static_rec_mutex_initFn c_g_static_rec_mutex_init; ///
+private alias c_g_static_rec_mutex_lockFn = extern(C) void function(GStaticRecMutex* mutex) nothrow;
+__gshared c_g_static_rec_mutex_lockFn c_g_static_rec_mutex_lock; ///
+private alias c_g_static_rec_mutex_lock_fullFn = extern(C) void function(GStaticRecMutex* mutex, uint depth) nothrow;
+__gshared c_g_static_rec_mutex_lock_fullFn c_g_static_rec_mutex_lock_full; ///
+private alias c_g_static_rec_mutex_trylockFn = extern(C) gboolean function(GStaticRecMutex* mutex) nothrow;
+__gshared c_g_static_rec_mutex_trylockFn c_g_static_rec_mutex_trylock; ///
+private alias c_g_static_rec_mutex_unlockFn = extern(C) void function(GStaticRecMutex* mutex) nothrow;
+__gshared c_g_static_rec_mutex_unlockFn c_g_static_rec_mutex_unlock; ///
+private alias c_g_static_rec_mutex_unlock_fullFn = extern(C) uint function(GStaticRecMutex* mutex) nothrow;
+__gshared c_g_static_rec_mutex_unlock_fullFn c_g_static_rec_mutex_unlock_full; ///
+
+// String
+private alias c_g_gstring_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_gstring_get_typeFn c_g_gstring_get_type; ///
+private alias c_g_string_newFn = extern(C) GString* function(const(char)* init_) nothrow;
+__gshared c_g_string_newFn c_g_string_new; ///
+private alias c_g_string_new_lenFn = extern(C) GString* function(const(char)* init_, ptrdiff_t len) nothrow;
+__gshared c_g_string_new_lenFn c_g_string_new_len; ///
+private alias c_g_string_new_takeFn = extern(C) GString* function(char* init_) nothrow;
+__gshared c_g_string_new_takeFn c_g_string_new_take; ///
+private alias c_g_string_sized_newFn = extern(C) GString* function(size_t dflSize) nothrow;
+__gshared c_g_string_sized_newFn c_g_string_sized_new; ///
+private alias c_g_string_appendFn = extern(C) GString* function(GString* string_, const(char)* val) nothrow;
+__gshared c_g_string_appendFn c_g_string_append; ///
+private alias c_g_string_append_cFn = extern(C) GString* function(GString* string_, char c) nothrow;
+__gshared c_g_string_append_cFn c_g_string_append_c; ///
+private alias c_g_string_append_lenFn = extern(C) GString* function(GString* string_, const(char)* val, ptrdiff_t len) nothrow;
+__gshared c_g_string_append_lenFn c_g_string_append_len; ///
+private alias c_g_string_append_printfFn = extern(C) void function(GString* string_, const(char)* format,  ...) nothrow;
+__gshared c_g_string_append_printfFn c_g_string_append_printf; ///
+private alias c_g_string_append_unicharFn = extern(C) GString* function(GString* string_, dchar wc) nothrow;
+__gshared c_g_string_append_unicharFn c_g_string_append_unichar; ///
+private alias c_g_string_append_uri_escapedFn = extern(C) GString* function(GString* string_, const(char)* unescaped, const(char)* reservedCharsAllowed, gboolean allowUtf8) nothrow;
+__gshared c_g_string_append_uri_escapedFn c_g_string_append_uri_escaped; ///
+private alias c_g_string_append_vprintfFn = extern(C) void function(GString* string_, const(char)* format, void* args) nothrow;
+__gshared c_g_string_append_vprintfFn c_g_string_append_vprintf; ///
+private alias c_g_string_ascii_downFn = extern(C) GString* function(GString* string_) nothrow;
+__gshared c_g_string_ascii_downFn c_g_string_ascii_down; ///
+private alias c_g_string_ascii_upFn = extern(C) GString* function(GString* string_) nothrow;
+__gshared c_g_string_ascii_upFn c_g_string_ascii_up; ///
+private alias c_g_string_assignFn = extern(C) GString* function(GString* string_, const(char)* rval) nothrow;
+__gshared c_g_string_assignFn c_g_string_assign; ///
+private alias c_g_string_copyFn = extern(C) GString* function(GString* string_) nothrow;
+__gshared c_g_string_copyFn c_g_string_copy; ///
+private alias c_g_string_downFn = extern(C) GString* function(GString* string_) nothrow;
+__gshared c_g_string_downFn c_g_string_down; ///
+private alias c_g_string_equalFn = extern(C) gboolean function(const(GString)* v, const(GString)* v2) nothrow;
+__gshared c_g_string_equalFn c_g_string_equal; ///
+private alias c_g_string_eraseFn = extern(C) GString* function(GString* string_, ptrdiff_t pos, ptrdiff_t len) nothrow;
+__gshared c_g_string_eraseFn c_g_string_erase; ///
+private alias c_g_string_freeFn = extern(C) char* function(GString* string_, gboolean freeSegment) nothrow;
+__gshared c_g_string_freeFn c_g_string_free; ///
+private alias c_g_string_free_and_stealFn = extern(C) char* function(GString* string_) nothrow;
+__gshared c_g_string_free_and_stealFn c_g_string_free_and_steal; ///
+private alias c_g_string_free_to_bytesFn = extern(C) GBytes* function(GString* string_) nothrow;
+__gshared c_g_string_free_to_bytesFn c_g_string_free_to_bytes; ///
+private alias c_g_string_hashFn = extern(C) uint function(const(GString)* str) nothrow;
+__gshared c_g_string_hashFn c_g_string_hash; ///
+private alias c_g_string_insertFn = extern(C) GString* function(GString* string_, ptrdiff_t pos, const(char)* val) nothrow;
+__gshared c_g_string_insertFn c_g_string_insert; ///
+private alias c_g_string_insert_cFn = extern(C) GString* function(GString* string_, ptrdiff_t pos, char c) nothrow;
+__gshared c_g_string_insert_cFn c_g_string_insert_c; ///
+private alias c_g_string_insert_lenFn = extern(C) GString* function(GString* string_, ptrdiff_t pos, const(char)* val, ptrdiff_t len) nothrow;
+__gshared c_g_string_insert_lenFn c_g_string_insert_len; ///
+private alias c_g_string_insert_unicharFn = extern(C) GString* function(GString* string_, ptrdiff_t pos, dchar wc) nothrow;
+__gshared c_g_string_insert_unicharFn c_g_string_insert_unichar; ///
+private alias c_g_string_overwriteFn = extern(C) GString* function(GString* string_, size_t pos, const(char)* val) nothrow;
+__gshared c_g_string_overwriteFn c_g_string_overwrite; ///
+private alias c_g_string_overwrite_lenFn = extern(C) GString* function(GString* string_, size_t pos, const(char)* val, ptrdiff_t len) nothrow;
+__gshared c_g_string_overwrite_lenFn c_g_string_overwrite_len; ///
+private alias c_g_string_prependFn = extern(C) GString* function(GString* string_, const(char)* val) nothrow;
+__gshared c_g_string_prependFn c_g_string_prepend; ///
+private alias c_g_string_prepend_cFn = extern(C) GString* function(GString* string_, char c) nothrow;
+__gshared c_g_string_prepend_cFn c_g_string_prepend_c; ///
+private alias c_g_string_prepend_lenFn = extern(C) GString* function(GString* string_, const(char)* val, ptrdiff_t len) nothrow;
+__gshared c_g_string_prepend_lenFn c_g_string_prepend_len; ///
+private alias c_g_string_prepend_unicharFn = extern(C) GString* function(GString* string_, dchar wc) nothrow;
+__gshared c_g_string_prepend_unicharFn c_g_string_prepend_unichar; ///
+private alias c_g_string_printfFn = extern(C) void function(GString* string_, const(char)* format,  ...) nothrow;
+__gshared c_g_string_printfFn c_g_string_printf; ///
+private alias c_g_string_replaceFn = extern(C) uint function(GString* string_, const(char)* find, const(char)* replace, uint limit) nothrow;
+__gshared c_g_string_replaceFn c_g_string_replace; ///
+private alias c_g_string_set_sizeFn = extern(C) GString* function(GString* string_, size_t len) nothrow;
+__gshared c_g_string_set_sizeFn c_g_string_set_size; ///
+private alias c_g_string_truncateFn = extern(C) GString* function(GString* string_, size_t len) nothrow;
+__gshared c_g_string_truncateFn c_g_string_truncate; ///
+private alias c_g_string_upFn = extern(C) GString* function(GString* string_) nothrow;
+__gshared c_g_string_upFn c_g_string_up; ///
+private alias c_g_string_vprintfFn = extern(C) void function(GString* string_, const(char)* format, void* args) nothrow;
+__gshared c_g_string_vprintfFn c_g_string_vprintf; ///
+
+// StringChunk
+private alias c_g_string_chunk_clearFn = extern(C) void function(GStringChunk* chunk) nothrow;
+__gshared c_g_string_chunk_clearFn c_g_string_chunk_clear; ///
+private alias c_g_string_chunk_freeFn = extern(C) void function(GStringChunk* chunk) nothrow;
+__gshared c_g_string_chunk_freeFn c_g_string_chunk_free; ///
+private alias c_g_string_chunk_insertFn = extern(C) char* function(GStringChunk* chunk, const(char)* string_) nothrow;
+__gshared c_g_string_chunk_insertFn c_g_string_chunk_insert; ///
+private alias c_g_string_chunk_insert_constFn = extern(C) char* function(GStringChunk* chunk, const(char)* string_) nothrow;
+__gshared c_g_string_chunk_insert_constFn c_g_string_chunk_insert_const; ///
+private alias c_g_string_chunk_insert_lenFn = extern(C) char* function(GStringChunk* chunk, const(char)* string_, ptrdiff_t len) nothrow;
+__gshared c_g_string_chunk_insert_lenFn c_g_string_chunk_insert_len; ///
+private alias c_g_string_chunk_newFn = extern(C) GStringChunk* function(size_t size) nothrow;
+__gshared c_g_string_chunk_newFn c_g_string_chunk_new; ///
+
+// StrvBuilder
+private alias c_g_strv_builder_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_strv_builder_get_typeFn c_g_strv_builder_get_type; ///
+private alias c_g_strv_builder_newFn = extern(C) GStrvBuilder* function() nothrow;
+__gshared c_g_strv_builder_newFn c_g_strv_builder_new; ///
+private alias c_g_strv_builder_addFn = extern(C) void function(GStrvBuilder* builder, const(char)* value) nothrow;
+__gshared c_g_strv_builder_addFn c_g_strv_builder_add; ///
+private alias c_g_strv_builder_add_manyFn = extern(C) void function(GStrvBuilder* builder,  ...) nothrow;
+__gshared c_g_strv_builder_add_manyFn c_g_strv_builder_add_many; ///
+private alias c_g_strv_builder_addvFn = extern(C) void function(GStrvBuilder* builder, const(char*)* value) nothrow;
+__gshared c_g_strv_builder_addvFn c_g_strv_builder_addv; ///
+private alias c_g_strv_builder_endFn = extern(C) char** function(GStrvBuilder* builder) nothrow;
+__gshared c_g_strv_builder_endFn c_g_strv_builder_end; ///
+private alias c_g_strv_builder_refFn = extern(C) GStrvBuilder* function(GStrvBuilder* builder) nothrow;
+__gshared c_g_strv_builder_refFn c_g_strv_builder_ref; ///
+private alias c_g_strv_builder_takeFn = extern(C) void function(GStrvBuilder* builder, char* value) nothrow;
+__gshared c_g_strv_builder_takeFn c_g_strv_builder_take; ///
+private alias c_g_strv_builder_unrefFn = extern(C) void function(GStrvBuilder* builder) nothrow;
+__gshared c_g_strv_builder_unrefFn c_g_strv_builder_unref; ///
+private alias c_g_strv_builder_unref_to_strvFn = extern(C) GStrv function(GStrvBuilder* builder) nothrow;
+__gshared c_g_strv_builder_unref_to_strvFn c_g_strv_builder_unref_to_strv; ///
+
+// TestCase
+private alias c_g_test_case_freeFn = extern(C) void function(GTestCase* testCase) nothrow;
+__gshared c_g_test_case_freeFn c_g_test_case_free; ///
+
+// TestLogBuffer
+private alias c_g_test_log_buffer_freeFn = extern(C) void function(GTestLogBuffer* tbuffer) nothrow;
+__gshared c_g_test_log_buffer_freeFn c_g_test_log_buffer_free; ///
+private alias c_g_test_log_buffer_popFn = extern(C) GTestLogMsg* function(GTestLogBuffer* tbuffer) nothrow;
+__gshared c_g_test_log_buffer_popFn c_g_test_log_buffer_pop; ///
+private alias c_g_test_log_buffer_pushFn = extern(C) void function(GTestLogBuffer* tbuffer, uint nBytes, const(ubyte)* bytes) nothrow;
+__gshared c_g_test_log_buffer_pushFn c_g_test_log_buffer_push; ///
+private alias c_g_test_log_buffer_newFn = extern(C) GTestLogBuffer* function() nothrow;
+__gshared c_g_test_log_buffer_newFn c_g_test_log_buffer_new; ///
+
+// TestLogMsg
+private alias c_g_test_log_msg_freeFn = extern(C) void function(GTestLogMsg* tmsg) nothrow;
+__gshared c_g_test_log_msg_freeFn c_g_test_log_msg_free; ///
+
+// TestSuite
+private alias c_g_test_suite_addFn = extern(C) void function(GTestSuite* suite, GTestCase* testCase) nothrow;
+__gshared c_g_test_suite_addFn c_g_test_suite_add; ///
+private alias c_g_test_suite_add_suiteFn = extern(C) void function(GTestSuite* suite, GTestSuite* nestedsuite) nothrow;
+__gshared c_g_test_suite_add_suiteFn c_g_test_suite_add_suite; ///
+private alias c_g_test_suite_freeFn = extern(C) void function(GTestSuite* suite) nothrow;
+__gshared c_g_test_suite_freeFn c_g_test_suite_free; ///
+
+// Thread
+private alias c_g_thread_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_thread_get_typeFn c_g_thread_get_type; ///
+private alias c_g_thread_newFn = extern(C) GThread* function(const(char)* name, GThreadFunc func, void* data) nothrow;
+__gshared c_g_thread_newFn c_g_thread_new; ///
+private alias c_g_thread_try_newFn = extern(C) GThread* function(const(char)* name, GThreadFunc func, void* data, GError** _err) nothrow;
+__gshared c_g_thread_try_newFn c_g_thread_try_new; ///
+private alias c_g_thread_get_nameFn = extern(C) const(char)* function(GThread* thread) nothrow;
+__gshared c_g_thread_get_nameFn c_g_thread_get_name; ///
+private alias c_g_thread_joinFn = extern(C) void* function(GThread* thread) nothrow;
+__gshared c_g_thread_joinFn c_g_thread_join; ///
+private alias c_g_thread_refFn = extern(C) GThread* function(GThread* thread) nothrow;
+__gshared c_g_thread_refFn c_g_thread_ref; ///
+private alias c_g_thread_set_priorityFn = extern(C) void function(GThread* thread, GThreadPriority priority) nothrow;
+__gshared c_g_thread_set_priorityFn c_g_thread_set_priority; ///
+private alias c_g_thread_unrefFn = extern(C) void function(GThread* thread) nothrow;
+__gshared c_g_thread_unrefFn c_g_thread_unref; ///
+private alias c_g_thread_createFn = extern(C) GThread* function(GThreadFunc func, void* data, gboolean joinable, GError** _err) nothrow;
+__gshared c_g_thread_createFn c_g_thread_create; ///
+private alias c_g_thread_create_fullFn = extern(C) GThread* function(GThreadFunc func, void* data, gulong stackSize, gboolean joinable, gboolean bound, GThreadPriority priority, GError** _err) nothrow;
+__gshared c_g_thread_create_fullFn c_g_thread_create_full; ///
+private alias c_g_thread_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_thread_error_quarkFn c_g_thread_error_quark; ///
+private alias c_g_thread_exitFn = extern(C) void function(void* retval) nothrow;
+__gshared c_g_thread_exitFn c_g_thread_exit; ///
+private alias c_g_thread_foreachFn = extern(C) void function(GFunc threadFunc, void* userData) nothrow;
+__gshared c_g_thread_foreachFn c_g_thread_foreach; ///
+private alias c_g_thread_get_initializedFn = extern(C) gboolean function() nothrow;
+__gshared c_g_thread_get_initializedFn c_g_thread_get_initialized; ///
+private alias c_g_thread_initFn = extern(C) void function(void* vtable) nothrow;
+__gshared c_g_thread_initFn c_g_thread_init; ///
+private alias c_g_thread_init_with_errorcheck_mutexesFn = extern(C) void function(void* vtable) nothrow;
+__gshared c_g_thread_init_with_errorcheck_mutexesFn c_g_thread_init_with_errorcheck_mutexes; ///
+private alias c_g_thread_selfFn = extern(C) GThread* function() nothrow;
+__gshared c_g_thread_selfFn c_g_thread_self; ///
+private alias c_g_thread_yieldFn = extern(C) void function() nothrow;
+__gshared c_g_thread_yieldFn c_g_thread_yield; ///
+
+// ThreadPool
+private alias c_g_thread_pool_freeFn = extern(C) void function(GThreadPool* pool, gboolean immediate, gboolean wait) nothrow;
+__gshared c_g_thread_pool_freeFn c_g_thread_pool_free; ///
+private alias c_g_thread_pool_get_max_threadsFn = extern(C) int function(GThreadPool* pool) nothrow;
+__gshared c_g_thread_pool_get_max_threadsFn c_g_thread_pool_get_max_threads; ///
+private alias c_g_thread_pool_get_num_threadsFn = extern(C) uint function(GThreadPool* pool) nothrow;
+__gshared c_g_thread_pool_get_num_threadsFn c_g_thread_pool_get_num_threads; ///
+private alias c_g_thread_pool_move_to_frontFn = extern(C) gboolean function(GThreadPool* pool, void* data) nothrow;
+__gshared c_g_thread_pool_move_to_frontFn c_g_thread_pool_move_to_front; ///
+private alias c_g_thread_pool_pushFn = extern(C) gboolean function(GThreadPool* pool, void* data, GError** _err) nothrow;
+__gshared c_g_thread_pool_pushFn c_g_thread_pool_push; ///
+private alias c_g_thread_pool_set_max_threadsFn = extern(C) gboolean function(GThreadPool* pool, int maxThreads, GError** _err) nothrow;
+__gshared c_g_thread_pool_set_max_threadsFn c_g_thread_pool_set_max_threads; ///
+private alias c_g_thread_pool_set_sort_functionFn = extern(C) void function(GThreadPool* pool, GCompareDataFunc func, void* userData) nothrow;
+__gshared c_g_thread_pool_set_sort_functionFn c_g_thread_pool_set_sort_function; ///
+private alias c_g_thread_pool_unprocessedFn = extern(C) uint function(GThreadPool* pool) nothrow;
+__gshared c_g_thread_pool_unprocessedFn c_g_thread_pool_unprocessed; ///
+private alias c_g_thread_pool_get_max_idle_timeFn = extern(C) uint function() nothrow;
+__gshared c_g_thread_pool_get_max_idle_timeFn c_g_thread_pool_get_max_idle_time; ///
+private alias c_g_thread_pool_get_max_unused_threadsFn = extern(C) int function() nothrow;
+__gshared c_g_thread_pool_get_max_unused_threadsFn c_g_thread_pool_get_max_unused_threads; ///
+private alias c_g_thread_pool_get_num_unused_threadsFn = extern(C) uint function() nothrow;
+__gshared c_g_thread_pool_get_num_unused_threadsFn c_g_thread_pool_get_num_unused_threads; ///
+private alias c_g_thread_pool_newFn = extern(C) GThreadPool* function(GFunc func, void* userData, int maxThreads, gboolean exclusive, GError** _err) nothrow;
+__gshared c_g_thread_pool_newFn c_g_thread_pool_new; ///
+private alias c_g_thread_pool_new_fullFn = extern(C) GThreadPool* function(GFunc func, void* userData, GDestroyNotify itemFreeFunc, int maxThreads, gboolean exclusive, GError** _err) nothrow;
+__gshared c_g_thread_pool_new_fullFn c_g_thread_pool_new_full; ///
+private alias c_g_thread_pool_set_max_idle_timeFn = extern(C) void function(uint interval) nothrow;
+__gshared c_g_thread_pool_set_max_idle_timeFn c_g_thread_pool_set_max_idle_time; ///
+private alias c_g_thread_pool_set_max_unused_threadsFn = extern(C) void function(int maxThreads) nothrow;
+__gshared c_g_thread_pool_set_max_unused_threadsFn c_g_thread_pool_set_max_unused_threads; ///
+private alias c_g_thread_pool_stop_unused_threadsFn = extern(C) void function() nothrow;
+__gshared c_g_thread_pool_stop_unused_threadsFn c_g_thread_pool_stop_unused_threads; ///
+
+// TimeVal
+private alias c_g_time_val_addFn = extern(C) void function(GTimeVal* time, glong microseconds) nothrow;
+__gshared c_g_time_val_addFn c_g_time_val_add; ///
+private alias c_g_time_val_to_iso8601Fn = extern(C) char* function(GTimeVal* time) nothrow;
+__gshared c_g_time_val_to_iso8601Fn c_g_time_val_to_iso8601; ///
+private alias c_g_time_val_from_iso8601Fn = extern(C) gboolean function(const(char)* isoDate, GTimeVal* time) nothrow;
+__gshared c_g_time_val_from_iso8601Fn c_g_time_val_from_iso8601; ///
+
+// TimeZone
+private alias c_g_time_zone_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_time_zone_get_typeFn c_g_time_zone_get_type; ///
+private alias c_g_time_zone_newFn = extern(C) GTimeZone* function(const(char)* identifier) nothrow;
+__gshared c_g_time_zone_newFn c_g_time_zone_new; ///
+private alias c_g_time_zone_new_identifierFn = extern(C) GTimeZone* function(const(char)* identifier) nothrow;
+__gshared c_g_time_zone_new_identifierFn c_g_time_zone_new_identifier; ///
+private alias c_g_time_zone_new_localFn = extern(C) GTimeZone* function() nothrow;
+__gshared c_g_time_zone_new_localFn c_g_time_zone_new_local; ///
+private alias c_g_time_zone_new_offsetFn = extern(C) GTimeZone* function(int seconds) nothrow;
+__gshared c_g_time_zone_new_offsetFn c_g_time_zone_new_offset; ///
+private alias c_g_time_zone_new_utcFn = extern(C) GTimeZone* function() nothrow;
+__gshared c_g_time_zone_new_utcFn c_g_time_zone_new_utc; ///
+private alias c_g_time_zone_adjust_timeFn = extern(C) int function(GTimeZone* tz, GTimeType type, long* time) nothrow;
+__gshared c_g_time_zone_adjust_timeFn c_g_time_zone_adjust_time; ///
+private alias c_g_time_zone_find_intervalFn = extern(C) int function(GTimeZone* tz, GTimeType type, long time) nothrow;
+__gshared c_g_time_zone_find_intervalFn c_g_time_zone_find_interval; ///
+private alias c_g_time_zone_get_abbreviationFn = extern(C) const(char)* function(GTimeZone* tz, int interval) nothrow;
+__gshared c_g_time_zone_get_abbreviationFn c_g_time_zone_get_abbreviation; ///
+private alias c_g_time_zone_get_identifierFn = extern(C) const(char)* function(GTimeZone* tz) nothrow;
+__gshared c_g_time_zone_get_identifierFn c_g_time_zone_get_identifier; ///
+private alias c_g_time_zone_get_offsetFn = extern(C) int function(GTimeZone* tz, int interval) nothrow;
+__gshared c_g_time_zone_get_offsetFn c_g_time_zone_get_offset; ///
+private alias c_g_time_zone_is_dstFn = extern(C) gboolean function(GTimeZone* tz, int interval) nothrow;
+__gshared c_g_time_zone_is_dstFn c_g_time_zone_is_dst; ///
+private alias c_g_time_zone_refFn = extern(C) GTimeZone* function(GTimeZone* tz) nothrow;
+__gshared c_g_time_zone_refFn c_g_time_zone_ref; ///
+private alias c_g_time_zone_unrefFn = extern(C) void function(GTimeZone* tz) nothrow;
+__gshared c_g_time_zone_unrefFn c_g_time_zone_unref; ///
+
+// Timer
+private alias c_g_timer_continueFn = extern(C) void function(GTimer* timer) nothrow;
+__gshared c_g_timer_continueFn c_g_timer_continue; ///
+private alias c_g_timer_destroyFn = extern(C) void function(GTimer* timer) nothrow;
+__gshared c_g_timer_destroyFn c_g_timer_destroy; ///
+private alias c_g_timer_elapsedFn = extern(C) double function(GTimer* timer, gulong* microseconds) nothrow;
+__gshared c_g_timer_elapsedFn c_g_timer_elapsed; ///
+private alias c_g_timer_is_activeFn = extern(C) gboolean function(GTimer* timer) nothrow;
+__gshared c_g_timer_is_activeFn c_g_timer_is_active; ///
+private alias c_g_timer_resetFn = extern(C) void function(GTimer* timer) nothrow;
+__gshared c_g_timer_resetFn c_g_timer_reset; ///
+private alias c_g_timer_startFn = extern(C) void function(GTimer* timer) nothrow;
+__gshared c_g_timer_startFn c_g_timer_start; ///
+private alias c_g_timer_stopFn = extern(C) void function(GTimer* timer) nothrow;
+__gshared c_g_timer_stopFn c_g_timer_stop; ///
+private alias c_g_timer_newFn = extern(C) GTimer* function() nothrow;
+__gshared c_g_timer_newFn c_g_timer_new; ///
+
+// TrashStack
+private alias c_g_trash_stack_heightFn = extern(C) uint function(GTrashStack** stackP) nothrow;
+__gshared c_g_trash_stack_heightFn c_g_trash_stack_height; ///
+private alias c_g_trash_stack_peekFn = extern(C) void* function(GTrashStack** stackP) nothrow;
+__gshared c_g_trash_stack_peekFn c_g_trash_stack_peek; ///
+private alias c_g_trash_stack_popFn = extern(C) void* function(GTrashStack** stackP) nothrow;
+__gshared c_g_trash_stack_popFn c_g_trash_stack_pop; ///
+private alias c_g_trash_stack_pushFn = extern(C) void function(GTrashStack** stackP, void* dataP) nothrow;
+__gshared c_g_trash_stack_pushFn c_g_trash_stack_push; ///
+
+// Tree
+private alias c_g_tree_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_tree_get_typeFn c_g_tree_get_type; ///
+private alias c_g_tree_newFn = extern(C) GTree* function(GCompareFunc keyCompareFunc) nothrow;
+__gshared c_g_tree_newFn c_g_tree_new; ///
+private alias c_g_tree_new_fullFn = extern(C) GTree* function(GCompareDataFunc keyCompareFunc, void* keyCompareData, GDestroyNotify keyDestroyFunc, GDestroyNotify valueDestroyFunc) nothrow;
+__gshared c_g_tree_new_fullFn c_g_tree_new_full; ///
+private alias c_g_tree_new_with_dataFn = extern(C) GTree* function(GCompareDataFunc keyCompareFunc, void* keyCompareData) nothrow;
+__gshared c_g_tree_new_with_dataFn c_g_tree_new_with_data; ///
+private alias c_g_tree_destroyFn = extern(C) void function(GTree* tree) nothrow;
+__gshared c_g_tree_destroyFn c_g_tree_destroy; ///
+private alias c_g_tree_foreachFn = extern(C) void function(GTree* tree, GTraverseFunc func, void* userData) nothrow;
+__gshared c_g_tree_foreachFn c_g_tree_foreach; ///
+private alias c_g_tree_foreach_nodeFn = extern(C) void function(GTree* tree, GTraverseNodeFunc func, void* userData) nothrow;
+__gshared c_g_tree_foreach_nodeFn c_g_tree_foreach_node; ///
+private alias c_g_tree_heightFn = extern(C) int function(GTree* tree) nothrow;
+__gshared c_g_tree_heightFn c_g_tree_height; ///
+private alias c_g_tree_insertFn = extern(C) void function(GTree* tree, void* key, void* value) nothrow;
+__gshared c_g_tree_insertFn c_g_tree_insert; ///
+private alias c_g_tree_insert_nodeFn = extern(C) GTreeNode* function(GTree* tree, void* key, void* value) nothrow;
+__gshared c_g_tree_insert_nodeFn c_g_tree_insert_node; ///
+private alias c_g_tree_lookupFn = extern(C) void* function(GTree* tree, const(void)* key) nothrow;
+__gshared c_g_tree_lookupFn c_g_tree_lookup; ///
+private alias c_g_tree_lookup_extendedFn = extern(C) gboolean function(GTree* tree, const(void)* lookupKey, void** origKey, void** value) nothrow;
+__gshared c_g_tree_lookup_extendedFn c_g_tree_lookup_extended; ///
+private alias c_g_tree_lookup_nodeFn = extern(C) GTreeNode* function(GTree* tree, const(void)* key) nothrow;
+__gshared c_g_tree_lookup_nodeFn c_g_tree_lookup_node; ///
+private alias c_g_tree_lower_boundFn = extern(C) GTreeNode* function(GTree* tree, const(void)* key) nothrow;
+__gshared c_g_tree_lower_boundFn c_g_tree_lower_bound; ///
+private alias c_g_tree_nnodesFn = extern(C) int function(GTree* tree) nothrow;
+__gshared c_g_tree_nnodesFn c_g_tree_nnodes; ///
+private alias c_g_tree_node_firstFn = extern(C) GTreeNode* function(GTree* tree) nothrow;
+__gshared c_g_tree_node_firstFn c_g_tree_node_first; ///
+private alias c_g_tree_node_lastFn = extern(C) GTreeNode* function(GTree* tree) nothrow;
+__gshared c_g_tree_node_lastFn c_g_tree_node_last; ///
+private alias c_g_tree_refFn = extern(C) GTree* function(GTree* tree) nothrow;
+__gshared c_g_tree_refFn c_g_tree_ref; ///
+private alias c_g_tree_removeFn = extern(C) gboolean function(GTree* tree, const(void)* key) nothrow;
+__gshared c_g_tree_removeFn c_g_tree_remove; ///
+private alias c_g_tree_remove_allFn = extern(C) void function(GTree* tree) nothrow;
+__gshared c_g_tree_remove_allFn c_g_tree_remove_all; ///
+private alias c_g_tree_replaceFn = extern(C) void function(GTree* tree, void* key, void* value) nothrow;
+__gshared c_g_tree_replaceFn c_g_tree_replace; ///
+private alias c_g_tree_replace_nodeFn = extern(C) GTreeNode* function(GTree* tree, void* key, void* value) nothrow;
+__gshared c_g_tree_replace_nodeFn c_g_tree_replace_node; ///
+private alias c_g_tree_searchFn = extern(C) void* function(GTree* tree, GCompareFunc searchFunc, const(void)* userData) nothrow;
+__gshared c_g_tree_searchFn c_g_tree_search; ///
+private alias c_g_tree_search_nodeFn = extern(C) GTreeNode* function(GTree* tree, GCompareFunc searchFunc, const(void)* userData) nothrow;
+__gshared c_g_tree_search_nodeFn c_g_tree_search_node; ///
+private alias c_g_tree_stealFn = extern(C) gboolean function(GTree* tree, const(void)* key) nothrow;
+__gshared c_g_tree_stealFn c_g_tree_steal; ///
+private alias c_g_tree_traverseFn = extern(C) void function(GTree* tree, GTraverseFunc traverseFunc, GTraverseType traverseType, void* userData) nothrow;
+__gshared c_g_tree_traverseFn c_g_tree_traverse; ///
+private alias c_g_tree_unrefFn = extern(C) void function(GTree* tree) nothrow;
+__gshared c_g_tree_unrefFn c_g_tree_unref; ///
+private alias c_g_tree_upper_boundFn = extern(C) GTreeNode* function(GTree* tree, const(void)* key) nothrow;
+__gshared c_g_tree_upper_boundFn c_g_tree_upper_bound; ///
+
+// TreeNode
+private alias c_g_tree_node_keyFn = extern(C) void* function(GTreeNode* node) nothrow;
+__gshared c_g_tree_node_keyFn c_g_tree_node_key; ///
+private alias c_g_tree_node_nextFn = extern(C) GTreeNode* function(GTreeNode* node) nothrow;
+__gshared c_g_tree_node_nextFn c_g_tree_node_next; ///
+private alias c_g_tree_node_previousFn = extern(C) GTreeNode* function(GTreeNode* node) nothrow;
+__gshared c_g_tree_node_previousFn c_g_tree_node_previous; ///
+private alias c_g_tree_node_valueFn = extern(C) void* function(GTreeNode* node) nothrow;
+__gshared c_g_tree_node_valueFn c_g_tree_node_value; ///
+
+// Tuples
+private alias c_g_tuples_destroyFn = extern(C) void function(GTuples* tuples) nothrow;
+__gshared c_g_tuples_destroyFn c_g_tuples_destroy; ///
+private alias c_g_tuples_indexFn = extern(C) void* function(GTuples* tuples, int index, int field) nothrow;
+__gshared c_g_tuples_indexFn c_g_tuples_index; ///
+
+// Uri
+private alias c_g_uri_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_uri_get_typeFn c_g_uri_get_type; ///
+private alias c_g_uri_get_auth_paramsFn = extern(C) const(char)* function(GUri* uri) nothrow;
+__gshared c_g_uri_get_auth_paramsFn c_g_uri_get_auth_params; ///
+private alias c_g_uri_get_flagsFn = extern(C) GUriFlags function(GUri* uri) nothrow;
+__gshared c_g_uri_get_flagsFn c_g_uri_get_flags; ///
+private alias c_g_uri_get_fragmentFn = extern(C) const(char)* function(GUri* uri) nothrow;
+__gshared c_g_uri_get_fragmentFn c_g_uri_get_fragment; ///
+private alias c_g_uri_get_hostFn = extern(C) const(char)* function(GUri* uri) nothrow;
+__gshared c_g_uri_get_hostFn c_g_uri_get_host; ///
+private alias c_g_uri_get_passwordFn = extern(C) const(char)* function(GUri* uri) nothrow;
+__gshared c_g_uri_get_passwordFn c_g_uri_get_password; ///
+private alias c_g_uri_get_pathFn = extern(C) const(char)* function(GUri* uri) nothrow;
+__gshared c_g_uri_get_pathFn c_g_uri_get_path; ///
+private alias c_g_uri_get_portFn = extern(C) int function(GUri* uri) nothrow;
+__gshared c_g_uri_get_portFn c_g_uri_get_port; ///
+private alias c_g_uri_get_queryFn = extern(C) const(char)* function(GUri* uri) nothrow;
+__gshared c_g_uri_get_queryFn c_g_uri_get_query; ///
+private alias c_g_uri_get_schemeFn = extern(C) const(char)* function(GUri* uri) nothrow;
+__gshared c_g_uri_get_schemeFn c_g_uri_get_scheme; ///
+private alias c_g_uri_get_userFn = extern(C) const(char)* function(GUri* uri) nothrow;
+__gshared c_g_uri_get_userFn c_g_uri_get_user; ///
+private alias c_g_uri_get_userinfoFn = extern(C) const(char)* function(GUri* uri) nothrow;
+__gshared c_g_uri_get_userinfoFn c_g_uri_get_userinfo; ///
+private alias c_g_uri_parse_relativeFn = extern(C) GUri* function(GUri* baseUri, const(char)* uriRef, GUriFlags flags, GError** _err) nothrow;
+__gshared c_g_uri_parse_relativeFn c_g_uri_parse_relative; ///
+private alias c_g_uri_refFn = extern(C) GUri* function(GUri* uri) nothrow;
+__gshared c_g_uri_refFn c_g_uri_ref; ///
+private alias c_g_uri_to_stringFn = extern(C) char* function(GUri* uri) nothrow;
+__gshared c_g_uri_to_stringFn c_g_uri_to_string; ///
+private alias c_g_uri_to_string_partialFn = extern(C) char* function(GUri* uri, GUriHideFlags flags) nothrow;
+__gshared c_g_uri_to_string_partialFn c_g_uri_to_string_partial; ///
+private alias c_g_uri_unrefFn = extern(C) void function(GUri* uri) nothrow;
+__gshared c_g_uri_unrefFn c_g_uri_unref; ///
+private alias c_g_uri_buildFn = extern(C) GUri* function(GUriFlags flags, const(char)* scheme, const(char)* userinfo, const(char)* host, int port, const(char)* path, const(char)* query, const(char)* fragment) nothrow;
+__gshared c_g_uri_buildFn c_g_uri_build; ///
+private alias c_g_uri_build_with_userFn = extern(C) GUri* function(GUriFlags flags, const(char)* scheme, const(char)* user, const(char)* password, const(char)* authParams, const(char)* host, int port, const(char)* path, const(char)* query, const(char)* fragment) nothrow;
+__gshared c_g_uri_build_with_userFn c_g_uri_build_with_user; ///
+private alias c_g_uri_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_uri_error_quarkFn c_g_uri_error_quark; ///
+private alias c_g_uri_escape_bytesFn = extern(C) char* function(const(ubyte)* unescaped, size_t length, const(char)* reservedCharsAllowed) nothrow;
+__gshared c_g_uri_escape_bytesFn c_g_uri_escape_bytes; ///
+private alias c_g_uri_escape_stringFn = extern(C) char* function(const(char)* unescaped, const(char)* reservedCharsAllowed, gboolean allowUtf8) nothrow;
+__gshared c_g_uri_escape_stringFn c_g_uri_escape_string; ///
+private alias c_g_uri_is_validFn = extern(C) gboolean function(const(char)* uriString, GUriFlags flags, GError** _err) nothrow;
+__gshared c_g_uri_is_validFn c_g_uri_is_valid; ///
+private alias c_g_uri_joinFn = extern(C) char* function(GUriFlags flags, const(char)* scheme, const(char)* userinfo, const(char)* host, int port, const(char)* path, const(char)* query, const(char)* fragment) nothrow;
+__gshared c_g_uri_joinFn c_g_uri_join; ///
+private alias c_g_uri_join_with_userFn = extern(C) char* function(GUriFlags flags, const(char)* scheme, const(char)* user, const(char)* password, const(char)* authParams, const(char)* host, int port, const(char)* path, const(char)* query, const(char)* fragment) nothrow;
+__gshared c_g_uri_join_with_userFn c_g_uri_join_with_user; ///
+private alias c_g_uri_list_extract_urisFn = extern(C) char** function(const(char)* uriList) nothrow;
+__gshared c_g_uri_list_extract_urisFn c_g_uri_list_extract_uris; ///
+private alias c_g_uri_parseFn = extern(C) GUri* function(const(char)* uriString, GUriFlags flags, GError** _err) nothrow;
+__gshared c_g_uri_parseFn c_g_uri_parse; ///
+private alias c_g_uri_parse_paramsFn = extern(C) GHashTable* function(const(char)* params, ptrdiff_t length, const(char)* separators, GUriParamsFlags flags, GError** _err) nothrow;
+__gshared c_g_uri_parse_paramsFn c_g_uri_parse_params; ///
+private alias c_g_uri_parse_schemeFn = extern(C) char* function(const(char)* uri) nothrow;
+__gshared c_g_uri_parse_schemeFn c_g_uri_parse_scheme; ///
+private alias c_g_uri_peek_schemeFn = extern(C) const(char)* function(const(char)* uri) nothrow;
+__gshared c_g_uri_peek_schemeFn c_g_uri_peek_scheme; ///
+private alias c_g_uri_resolve_relativeFn = extern(C) char* function(const(char)* baseUriString, const(char)* uriRef, GUriFlags flags, GError** _err) nothrow;
+__gshared c_g_uri_resolve_relativeFn c_g_uri_resolve_relative; ///
+private alias c_g_uri_splitFn = extern(C) gboolean function(const(char)* uriRef, GUriFlags flags, char** scheme, char** userinfo, char** host, int* port, char** path, char** query, char** fragment, GError** _err) nothrow;
+__gshared c_g_uri_splitFn c_g_uri_split; ///
+private alias c_g_uri_split_networkFn = extern(C) gboolean function(const(char)* uriString, GUriFlags flags, char** scheme, char** host, int* port, GError** _err) nothrow;
+__gshared c_g_uri_split_networkFn c_g_uri_split_network; ///
+private alias c_g_uri_split_with_userFn = extern(C) gboolean function(const(char)* uriRef, GUriFlags flags, char** scheme, char** user, char** password, char** authParams, char** host, int* port, char** path, char** query, char** fragment, GError** _err) nothrow;
+__gshared c_g_uri_split_with_userFn c_g_uri_split_with_user; ///
+private alias c_g_uri_unescape_bytesFn = extern(C) GBytes* function(const(char)* escapedString, ptrdiff_t length, const(char)* illegalCharacters, GError** _err) nothrow;
+__gshared c_g_uri_unescape_bytesFn c_g_uri_unescape_bytes; ///
+private alias c_g_uri_unescape_segmentFn = extern(C) char* function(const(char)* escapedString, const(char)* escapedStringEnd, const(char)* illegalCharacters) nothrow;
+__gshared c_g_uri_unescape_segmentFn c_g_uri_unescape_segment; ///
+private alias c_g_uri_unescape_stringFn = extern(C) char* function(const(char)* escapedString, const(char)* illegalCharacters) nothrow;
+__gshared c_g_uri_unescape_stringFn c_g_uri_unescape_string; ///
+
+// UriParamsIter
+private alias c_g_uri_params_iter_initFn = extern(C) void function(GUriParamsIter* iter, const(char)* params, ptrdiff_t length, const(char)* separators, GUriParamsFlags flags) nothrow;
+__gshared c_g_uri_params_iter_initFn c_g_uri_params_iter_init; ///
+private alias c_g_uri_params_iter_nextFn = extern(C) gboolean function(GUriParamsIter* iter, char** attribute, char** value, GError** _err) nothrow;
+__gshared c_g_uri_params_iter_nextFn c_g_uri_params_iter_next; ///
+
+// Variant
+private alias c_internFn = extern(C) GType function() nothrow;
+__gshared c_internFn c_intern; ///
+private alias c_g_variant_newFn = extern(C) GVariant* function(const(char)* formatString,  ...) nothrow;
+__gshared c_g_variant_newFn c_g_variant_new; ///
+private alias c_g_variant_new_arrayFn = extern(C) GVariant* function(const(GVariantType)* childType, const(GVariant*)* children, size_t nChildren) nothrow;
+__gshared c_g_variant_new_arrayFn c_g_variant_new_array; ///
+private alias c_g_variant_new_booleanFn = extern(C) GVariant* function(gboolean value) nothrow;
+__gshared c_g_variant_new_booleanFn c_g_variant_new_boolean; ///
+private alias c_g_variant_new_byteFn = extern(C) GVariant* function(ubyte value) nothrow;
+__gshared c_g_variant_new_byteFn c_g_variant_new_byte; ///
+private alias c_g_variant_new_bytestringFn = extern(C) GVariant* function(const(char)* string_) nothrow;
+__gshared c_g_variant_new_bytestringFn c_g_variant_new_bytestring; ///
+private alias c_g_variant_new_bytestring_arrayFn = extern(C) GVariant* function(const(char*)* strv, ptrdiff_t length) nothrow;
+__gshared c_g_variant_new_bytestring_arrayFn c_g_variant_new_bytestring_array; ///
+private alias c_g_variant_new_dict_entryFn = extern(C) GVariant* function(GVariant* key, GVariant* value) nothrow;
+__gshared c_g_variant_new_dict_entryFn c_g_variant_new_dict_entry; ///
+private alias c_g_variant_new_doubleFn = extern(C) GVariant* function(double value) nothrow;
+__gshared c_g_variant_new_doubleFn c_g_variant_new_double; ///
+private alias c_g_variant_new_fixed_arrayFn = extern(C) GVariant* function(const(GVariantType)* elementType, const(void)* elements, size_t nElements, size_t elementSize) nothrow;
+__gshared c_g_variant_new_fixed_arrayFn c_g_variant_new_fixed_array; ///
+private alias c_g_variant_new_from_bytesFn = extern(C) GVariant* function(const(GVariantType)* type, GBytes* bytes, gboolean trusted) nothrow;
+__gshared c_g_variant_new_from_bytesFn c_g_variant_new_from_bytes; ///
+private alias c_g_variant_new_from_dataFn = extern(C) GVariant* function(const(GVariantType)* type, const(void)* data, size_t size, gboolean trusted, GDestroyNotify notify, void* userData) nothrow;
+__gshared c_g_variant_new_from_dataFn c_g_variant_new_from_data; ///
+private alias c_g_variant_new_handleFn = extern(C) GVariant* function(int value) nothrow;
+__gshared c_g_variant_new_handleFn c_g_variant_new_handle; ///
+private alias c_g_variant_new_int16Fn = extern(C) GVariant* function(short value) nothrow;
+__gshared c_g_variant_new_int16Fn c_g_variant_new_int16; ///
+private alias c_g_variant_new_int32Fn = extern(C) GVariant* function(int value) nothrow;
+__gshared c_g_variant_new_int32Fn c_g_variant_new_int32; ///
+private alias c_g_variant_new_int64Fn = extern(C) GVariant* function(long value) nothrow;
+__gshared c_g_variant_new_int64Fn c_g_variant_new_int64; ///
+private alias c_g_variant_new_maybeFn = extern(C) GVariant* function(const(GVariantType)* childType, GVariant* child) nothrow;
+__gshared c_g_variant_new_maybeFn c_g_variant_new_maybe; ///
+private alias c_g_variant_new_object_pathFn = extern(C) GVariant* function(const(char)* objectPath) nothrow;
+__gshared c_g_variant_new_object_pathFn c_g_variant_new_object_path; ///
+private alias c_g_variant_new_objvFn = extern(C) GVariant* function(const(char*)* strv, ptrdiff_t length) nothrow;
+__gshared c_g_variant_new_objvFn c_g_variant_new_objv; ///
+private alias c_g_variant_new_parsedFn = extern(C) GVariant* function(const(char)* format,  ...) nothrow;
+__gshared c_g_variant_new_parsedFn c_g_variant_new_parsed; ///
+private alias c_g_variant_new_parsed_vaFn = extern(C) GVariant* function(const(char)* format, void** app) nothrow;
+__gshared c_g_variant_new_parsed_vaFn c_g_variant_new_parsed_va; ///
+private alias c_g_variant_new_printfFn = extern(C) GVariant* function(const(char)* formatString,  ...) nothrow;
+__gshared c_g_variant_new_printfFn c_g_variant_new_printf; ///
+private alias c_g_variant_new_signatureFn = extern(C) GVariant* function(const(char)* signature) nothrow;
+__gshared c_g_variant_new_signatureFn c_g_variant_new_signature; ///
+private alias c_g_variant_new_stringFn = extern(C) GVariant* function(const(char)* string_) nothrow;
+__gshared c_g_variant_new_stringFn c_g_variant_new_string; ///
+private alias c_g_variant_new_strvFn = extern(C) GVariant* function(const(char*)* strv, ptrdiff_t length) nothrow;
+__gshared c_g_variant_new_strvFn c_g_variant_new_strv; ///
+private alias c_g_variant_new_take_stringFn = extern(C) GVariant* function(char* string_) nothrow;
+__gshared c_g_variant_new_take_stringFn c_g_variant_new_take_string; ///
+private alias c_g_variant_new_tupleFn = extern(C) GVariant* function(const(GVariant*)* children, size_t nChildren) nothrow;
+__gshared c_g_variant_new_tupleFn c_g_variant_new_tuple; ///
+private alias c_g_variant_new_uint16Fn = extern(C) GVariant* function(ushort value) nothrow;
+__gshared c_g_variant_new_uint16Fn c_g_variant_new_uint16; ///
+private alias c_g_variant_new_uint32Fn = extern(C) GVariant* function(uint value) nothrow;
+__gshared c_g_variant_new_uint32Fn c_g_variant_new_uint32; ///
+private alias c_g_variant_new_uint64Fn = extern(C) GVariant* function(ulong value) nothrow;
+__gshared c_g_variant_new_uint64Fn c_g_variant_new_uint64; ///
+private alias c_g_variant_new_vaFn = extern(C) GVariant* function(const(char)* formatString, const(char*)* endptr, void** app) nothrow;
+__gshared c_g_variant_new_vaFn c_g_variant_new_va; ///
+private alias c_g_variant_new_variantFn = extern(C) GVariant* function(GVariant* value) nothrow;
+__gshared c_g_variant_new_variantFn c_g_variant_new_variant; ///
+private alias c_g_variant_byteswapFn = extern(C) GVariant* function(GVariant* value) nothrow;
+__gshared c_g_variant_byteswapFn c_g_variant_byteswap; ///
+private alias c_g_variant_check_format_stringFn = extern(C) gboolean function(GVariant* value, const(char)* formatString, gboolean copyOnly) nothrow;
+__gshared c_g_variant_check_format_stringFn c_g_variant_check_format_string; ///
+private alias c_g_variant_classifyFn = extern(C) GVariantClass function(GVariant* value) nothrow;
+__gshared c_g_variant_classifyFn c_g_variant_classify; ///
+private alias c_g_variant_compareFn = extern(C) int function(GVariant* one, GVariant* two) nothrow;
+__gshared c_g_variant_compareFn c_g_variant_compare; ///
+private alias c_g_variant_dup_bytestringFn = extern(C) ubyte* function(GVariant* value, size_t* length) nothrow;
+__gshared c_g_variant_dup_bytestringFn c_g_variant_dup_bytestring; ///
+private alias c_g_variant_dup_bytestring_arrayFn = extern(C) char** function(GVariant* value, size_t* length) nothrow;
+__gshared c_g_variant_dup_bytestring_arrayFn c_g_variant_dup_bytestring_array; ///
+private alias c_g_variant_dup_objvFn = extern(C) char** function(GVariant* value, size_t* length) nothrow;
+__gshared c_g_variant_dup_objvFn c_g_variant_dup_objv; ///
+private alias c_g_variant_dup_stringFn = extern(C) char* function(GVariant* value, size_t* length) nothrow;
+__gshared c_g_variant_dup_stringFn c_g_variant_dup_string; ///
+private alias c_g_variant_dup_strvFn = extern(C) char** function(GVariant* value, size_t* length) nothrow;
+__gshared c_g_variant_dup_strvFn c_g_variant_dup_strv; ///
+private alias c_g_variant_equalFn = extern(C) gboolean function(GVariant* one, GVariant* two) nothrow;
+__gshared c_g_variant_equalFn c_g_variant_equal; ///
+private alias c_g_variant_getFn = extern(C) void function(GVariant* value, const(char)* formatString,  ...) nothrow;
+__gshared c_g_variant_getFn c_g_variant_get; ///
+private alias c_g_variant_get_booleanFn = extern(C) gboolean function(GVariant* value) nothrow;
+__gshared c_g_variant_get_booleanFn c_g_variant_get_boolean; ///
+private alias c_g_variant_get_byteFn = extern(C) ubyte function(GVariant* value) nothrow;
+__gshared c_g_variant_get_byteFn c_g_variant_get_byte; ///
+private alias c_g_variant_get_bytestringFn = extern(C) const(char)* function(GVariant* value) nothrow;
+__gshared c_g_variant_get_bytestringFn c_g_variant_get_bytestring; ///
+private alias c_g_variant_get_bytestring_arrayFn = extern(C) const(char*)* function(GVariant* value, size_t* length) nothrow;
+__gshared c_g_variant_get_bytestring_arrayFn c_g_variant_get_bytestring_array; ///
+private alias c_g_variant_get_childFn = extern(C) void function(GVariant* value, size_t index, const(char)* formatString,  ...) nothrow;
+__gshared c_g_variant_get_childFn c_g_variant_get_child; ///
+private alias c_g_variant_get_child_valueFn = extern(C) GVariant* function(GVariant* value, size_t index) nothrow;
+__gshared c_g_variant_get_child_valueFn c_g_variant_get_child_value; ///
+private alias c_g_variant_get_dataFn = extern(C) const(void)* function(GVariant* value) nothrow;
+__gshared c_g_variant_get_dataFn c_g_variant_get_data; ///
+private alias c_g_variant_get_data_as_bytesFn = extern(C) GBytes* function(GVariant* value) nothrow;
+__gshared c_g_variant_get_data_as_bytesFn c_g_variant_get_data_as_bytes; ///
+private alias c_g_variant_get_doubleFn = extern(C) double function(GVariant* value) nothrow;
+__gshared c_g_variant_get_doubleFn c_g_variant_get_double; ///
+private alias c_g_variant_get_fixed_arrayFn = extern(C) const(void)* function(GVariant* value, size_t* nElements, size_t elementSize) nothrow;
+__gshared c_g_variant_get_fixed_arrayFn c_g_variant_get_fixed_array; ///
+private alias c_g_variant_get_handleFn = extern(C) int function(GVariant* value) nothrow;
+__gshared c_g_variant_get_handleFn c_g_variant_get_handle; ///
+private alias c_g_variant_get_int16Fn = extern(C) short function(GVariant* value) nothrow;
+__gshared c_g_variant_get_int16Fn c_g_variant_get_int16; ///
+private alias c_g_variant_get_int32Fn = extern(C) int function(GVariant* value) nothrow;
+__gshared c_g_variant_get_int32Fn c_g_variant_get_int32; ///
+private alias c_g_variant_get_int64Fn = extern(C) long function(GVariant* value) nothrow;
+__gshared c_g_variant_get_int64Fn c_g_variant_get_int64; ///
+private alias c_g_variant_get_maybeFn = extern(C) GVariant* function(GVariant* value) nothrow;
+__gshared c_g_variant_get_maybeFn c_g_variant_get_maybe; ///
+private alias c_g_variant_get_normal_formFn = extern(C) GVariant* function(GVariant* value) nothrow;
+__gshared c_g_variant_get_normal_formFn c_g_variant_get_normal_form; ///
+private alias c_g_variant_get_objvFn = extern(C) const(char*)* function(GVariant* value, size_t* length) nothrow;
+__gshared c_g_variant_get_objvFn c_g_variant_get_objv; ///
+private alias c_g_variant_get_sizeFn = extern(C) size_t function(GVariant* value) nothrow;
+__gshared c_g_variant_get_sizeFn c_g_variant_get_size; ///
+private alias c_g_variant_get_stringFn = extern(C) char* function(GVariant* value, size_t* length) nothrow;
+__gshared c_g_variant_get_stringFn c_g_variant_get_string; ///
+private alias c_g_variant_get_strvFn = extern(C) const(char*)* function(GVariant* value, size_t* length) nothrow;
+__gshared c_g_variant_get_strvFn c_g_variant_get_strv; ///
+private alias c_g_variant_get_typeFn = extern(C) const(GVariantType)* function(GVariant* value) nothrow;
+__gshared c_g_variant_get_typeFn c_g_variant_get_type; ///
+private alias c_g_variant_get_type_stringFn = extern(C) const(char)* function(GVariant* value) nothrow;
+__gshared c_g_variant_get_type_stringFn c_g_variant_get_type_string; ///
+private alias c_g_variant_get_uint16Fn = extern(C) ushort function(GVariant* value) nothrow;
+__gshared c_g_variant_get_uint16Fn c_g_variant_get_uint16; ///
+private alias c_g_variant_get_uint32Fn = extern(C) uint function(GVariant* value) nothrow;
+__gshared c_g_variant_get_uint32Fn c_g_variant_get_uint32; ///
+private alias c_g_variant_get_uint64Fn = extern(C) ulong function(GVariant* value) nothrow;
+__gshared c_g_variant_get_uint64Fn c_g_variant_get_uint64; ///
+private alias c_g_variant_get_vaFn = extern(C) void function(GVariant* value, const(char)* formatString, const(char*)* endptr, void** app) nothrow;
+__gshared c_g_variant_get_vaFn c_g_variant_get_va; ///
+private alias c_g_variant_get_variantFn = extern(C) GVariant* function(GVariant* value) nothrow;
+__gshared c_g_variant_get_variantFn c_g_variant_get_variant; ///
+private alias c_g_variant_hashFn = extern(C) uint function(GVariant* value) nothrow;
+__gshared c_g_variant_hashFn c_g_variant_hash; ///
+private alias c_g_variant_is_containerFn = extern(C) gboolean function(GVariant* value) nothrow;
+__gshared c_g_variant_is_containerFn c_g_variant_is_container; ///
+private alias c_g_variant_is_floatingFn = extern(C) gboolean function(GVariant* value) nothrow;
+__gshared c_g_variant_is_floatingFn c_g_variant_is_floating; ///
+private alias c_g_variant_is_normal_formFn = extern(C) gboolean function(GVariant* value) nothrow;
+__gshared c_g_variant_is_normal_formFn c_g_variant_is_normal_form; ///
+private alias c_g_variant_is_of_typeFn = extern(C) gboolean function(GVariant* value, const(GVariantType)* type) nothrow;
+__gshared c_g_variant_is_of_typeFn c_g_variant_is_of_type; ///
+private alias c_g_variant_iter_newFn = extern(C) GVariantIter* function(GVariant* value) nothrow;
+__gshared c_g_variant_iter_newFn c_g_variant_iter_new; ///
+private alias c_g_variant_lookupFn = extern(C) gboolean function(GVariant* dictionary, const(char)* key, const(char)* formatString,  ...) nothrow;
+__gshared c_g_variant_lookupFn c_g_variant_lookup; ///
+private alias c_g_variant_lookup_valueFn = extern(C) GVariant* function(GVariant* dictionary, const(char)* key, const(GVariantType)* expectedType) nothrow;
+__gshared c_g_variant_lookup_valueFn c_g_variant_lookup_value; ///
+private alias c_g_variant_n_childrenFn = extern(C) size_t function(GVariant* value) nothrow;
+__gshared c_g_variant_n_childrenFn c_g_variant_n_children; ///
+private alias c_g_variant_printFn = extern(C) char* function(GVariant* value, gboolean typeAnnotate) nothrow;
+__gshared c_g_variant_printFn c_g_variant_print; ///
+private alias c_g_variant_print_stringFn = extern(C) GString* function(GVariant* value, GString* string_, gboolean typeAnnotate) nothrow;
+__gshared c_g_variant_print_stringFn c_g_variant_print_string; ///
+private alias c_g_variant_refFn = extern(C) GVariant* function(GVariant* value) nothrow;
+__gshared c_g_variant_refFn c_g_variant_ref; ///
+private alias c_g_variant_ref_sinkFn = extern(C) GVariant* function(GVariant* value) nothrow;
+__gshared c_g_variant_ref_sinkFn c_g_variant_ref_sink; ///
+private alias c_g_variant_storeFn = extern(C) void function(GVariant* value, void* data) nothrow;
+__gshared c_g_variant_storeFn c_g_variant_store; ///
+private alias c_g_variant_take_refFn = extern(C) GVariant* function(GVariant* value) nothrow;
+__gshared c_g_variant_take_refFn c_g_variant_take_ref; ///
+private alias c_g_variant_unrefFn = extern(C) void function(GVariant* value) nothrow;
+__gshared c_g_variant_unrefFn c_g_variant_unref; ///
+private alias c_g_variant_is_object_pathFn = extern(C) gboolean function(const(char)* string_) nothrow;
+__gshared c_g_variant_is_object_pathFn c_g_variant_is_object_path; ///
+private alias c_g_variant_is_signatureFn = extern(C) gboolean function(const(char)* string_) nothrow;
+__gshared c_g_variant_is_signatureFn c_g_variant_is_signature; ///
+private alias c_g_variant_parseFn = extern(C) GVariant* function(const(GVariantType)* type, const(char)* text, const(char)* limit, const(char*)* endptr, GError** _err) nothrow;
+__gshared c_g_variant_parseFn c_g_variant_parse; ///
+private alias c_g_variant_parse_error_print_contextFn = extern(C) char* function(GError* error, const(char)* sourceStr) nothrow;
+__gshared c_g_variant_parse_error_print_contextFn c_g_variant_parse_error_print_context; ///
+private alias c_g_variant_parse_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_variant_parse_error_quarkFn c_g_variant_parse_error_quark; ///
+private alias c_g_variant_parser_get_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_variant_parser_get_error_quarkFn c_g_variant_parser_get_error_quark; ///
+
+// VariantBuilder
+private alias c_g_variant_builder_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_variant_builder_get_typeFn c_g_variant_builder_get_type; ///
+private alias c_g_variant_builder_newFn = extern(C) GVariantBuilder* function(const(GVariantType)* type) nothrow;
+__gshared c_g_variant_builder_newFn c_g_variant_builder_new; ///
+private alias c_g_variant_builder_addFn = extern(C) void function(GVariantBuilder* builder, const(char)* formatString,  ...) nothrow;
+__gshared c_g_variant_builder_addFn c_g_variant_builder_add; ///
+private alias c_g_variant_builder_add_parsedFn = extern(C) void function(GVariantBuilder* builder, const(char)* format,  ...) nothrow;
+__gshared c_g_variant_builder_add_parsedFn c_g_variant_builder_add_parsed; ///
+private alias c_g_variant_builder_add_valueFn = extern(C) void function(GVariantBuilder* builder, GVariant* value) nothrow;
+__gshared c_g_variant_builder_add_valueFn c_g_variant_builder_add_value; ///
+private alias c_g_variant_builder_clearFn = extern(C) void function(GVariantBuilder* builder) nothrow;
+__gshared c_g_variant_builder_clearFn c_g_variant_builder_clear; ///
+private alias c_g_variant_builder_closeFn = extern(C) void function(GVariantBuilder* builder) nothrow;
+__gshared c_g_variant_builder_closeFn c_g_variant_builder_close; ///
+private alias c_g_variant_builder_endFn = extern(C) GVariant* function(GVariantBuilder* builder) nothrow;
+__gshared c_g_variant_builder_endFn c_g_variant_builder_end; ///
+private alias c_g_variant_builder_initFn = extern(C) void function(GVariantBuilder* builder, const(GVariantType)* type) nothrow;
+__gshared c_g_variant_builder_initFn c_g_variant_builder_init; ///
+private alias c_g_variant_builder_init_staticFn = extern(C) void function(GVariantBuilder* builder, const(GVariantType)* type) nothrow;
+__gshared c_g_variant_builder_init_staticFn c_g_variant_builder_init_static; ///
+private alias c_g_variant_builder_openFn = extern(C) void function(GVariantBuilder* builder, const(GVariantType)* type) nothrow;
+__gshared c_g_variant_builder_openFn c_g_variant_builder_open; ///
+private alias c_g_variant_builder_refFn = extern(C) GVariantBuilder* function(GVariantBuilder* builder) nothrow;
+__gshared c_g_variant_builder_refFn c_g_variant_builder_ref; ///
+private alias c_g_variant_builder_unrefFn = extern(C) void function(GVariantBuilder* builder) nothrow;
+__gshared c_g_variant_builder_unrefFn c_g_variant_builder_unref; ///
+
+// VariantDict
+private alias c_g_variant_dict_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_variant_dict_get_typeFn c_g_variant_dict_get_type; ///
+private alias c_g_variant_dict_newFn = extern(C) GVariantDict* function(GVariant* fromAsv) nothrow;
+__gshared c_g_variant_dict_newFn c_g_variant_dict_new; ///
+private alias c_g_variant_dict_clearFn = extern(C) void function(GVariantDict* dict) nothrow;
+__gshared c_g_variant_dict_clearFn c_g_variant_dict_clear; ///
+private alias c_g_variant_dict_containsFn = extern(C) gboolean function(GVariantDict* dict, const(char)* key) nothrow;
+__gshared c_g_variant_dict_containsFn c_g_variant_dict_contains; ///
+private alias c_g_variant_dict_endFn = extern(C) GVariant* function(GVariantDict* dict) nothrow;
+__gshared c_g_variant_dict_endFn c_g_variant_dict_end; ///
+private alias c_g_variant_dict_initFn = extern(C) void function(GVariantDict* dict, GVariant* fromAsv) nothrow;
+__gshared c_g_variant_dict_initFn c_g_variant_dict_init; ///
+private alias c_g_variant_dict_insertFn = extern(C) void function(GVariantDict* dict, const(char)* key, const(char)* formatString,  ...) nothrow;
+__gshared c_g_variant_dict_insertFn c_g_variant_dict_insert; ///
+private alias c_g_variant_dict_insert_valueFn = extern(C) void function(GVariantDict* dict, const(char)* key, GVariant* value) nothrow;
+__gshared c_g_variant_dict_insert_valueFn c_g_variant_dict_insert_value; ///
+private alias c_g_variant_dict_lookupFn = extern(C) gboolean function(GVariantDict* dict, const(char)* key, const(char)* formatString,  ...) nothrow;
+__gshared c_g_variant_dict_lookupFn c_g_variant_dict_lookup; ///
+private alias c_g_variant_dict_lookup_valueFn = extern(C) GVariant* function(GVariantDict* dict, const(char)* key, const(GVariantType)* expectedType) nothrow;
+__gshared c_g_variant_dict_lookup_valueFn c_g_variant_dict_lookup_value; ///
+private alias c_g_variant_dict_refFn = extern(C) GVariantDict* function(GVariantDict* dict) nothrow;
+__gshared c_g_variant_dict_refFn c_g_variant_dict_ref; ///
+private alias c_g_variant_dict_removeFn = extern(C) gboolean function(GVariantDict* dict, const(char)* key) nothrow;
+__gshared c_g_variant_dict_removeFn c_g_variant_dict_remove; ///
+private alias c_g_variant_dict_unrefFn = extern(C) void function(GVariantDict* dict) nothrow;
+__gshared c_g_variant_dict_unrefFn c_g_variant_dict_unref; ///
+
+// VariantIter
+private alias c_g_variant_iter_copyFn = extern(C) GVariantIter* function(GVariantIter* iter) nothrow;
+__gshared c_g_variant_iter_copyFn c_g_variant_iter_copy; ///
+private alias c_g_variant_iter_freeFn = extern(C) void function(GVariantIter* iter) nothrow;
+__gshared c_g_variant_iter_freeFn c_g_variant_iter_free; ///
+private alias c_g_variant_iter_initFn = extern(C) size_t function(GVariantIter* iter, GVariant* value) nothrow;
+__gshared c_g_variant_iter_initFn c_g_variant_iter_init; ///
+private alias c_g_variant_iter_loopFn = extern(C) gboolean function(GVariantIter* iter, const(char)* formatString,  ...) nothrow;
+__gshared c_g_variant_iter_loopFn c_g_variant_iter_loop; ///
+private alias c_g_variant_iter_n_childrenFn = extern(C) size_t function(GVariantIter* iter) nothrow;
+__gshared c_g_variant_iter_n_childrenFn c_g_variant_iter_n_children; ///
+private alias c_g_variant_iter_nextFn = extern(C) gboolean function(GVariantIter* iter, const(char)* formatString,  ...) nothrow;
+__gshared c_g_variant_iter_nextFn c_g_variant_iter_next; ///
+private alias c_g_variant_iter_next_valueFn = extern(C) GVariant* function(GVariantIter* iter) nothrow;
+__gshared c_g_variant_iter_next_valueFn c_g_variant_iter_next_value; ///
+
+// VariantType
+private alias c_g_variant_type_get_gtypeFn = extern(C) GType function() nothrow;
+__gshared c_g_variant_type_get_gtypeFn c_g_variant_type_get_gtype; ///
+private alias c_g_variant_type_newFn = extern(C) GVariantType* function(const(char)* typeString) nothrow;
+__gshared c_g_variant_type_newFn c_g_variant_type_new; ///
+private alias c_g_variant_type_new_arrayFn = extern(C) GVariantType* function(const(GVariantType)* element) nothrow;
+__gshared c_g_variant_type_new_arrayFn c_g_variant_type_new_array; ///
+private alias c_g_variant_type_new_dict_entryFn = extern(C) GVariantType* function(const(GVariantType)* key, const(GVariantType)* value) nothrow;
+__gshared c_g_variant_type_new_dict_entryFn c_g_variant_type_new_dict_entry; ///
+private alias c_g_variant_type_new_maybeFn = extern(C) GVariantType* function(const(GVariantType)* element) nothrow;
+__gshared c_g_variant_type_new_maybeFn c_g_variant_type_new_maybe; ///
+private alias c_g_variant_type_new_tupleFn = extern(C) GVariantType* function(const(GVariantType*)* items, int length) nothrow;
+__gshared c_g_variant_type_new_tupleFn c_g_variant_type_new_tuple; ///
+private alias c_g_variant_type_copyFn = extern(C) GVariantType* function(const(GVariantType)* type) nothrow;
+__gshared c_g_variant_type_copyFn c_g_variant_type_copy; ///
+private alias c_g_variant_type_dup_stringFn = extern(C) char* function(const(GVariantType)* type) nothrow;
+__gshared c_g_variant_type_dup_stringFn c_g_variant_type_dup_string; ///
+private alias c_g_variant_type_elementFn = extern(C) const(GVariantType)* function(const(GVariantType)* type) nothrow;
+__gshared c_g_variant_type_elementFn c_g_variant_type_element; ///
+private alias c_g_variant_type_equalFn = extern(C) gboolean function(GVariantType* type1, GVariantType* type2) nothrow;
+__gshared c_g_variant_type_equalFn c_g_variant_type_equal; ///
+private alias c_g_variant_type_firstFn = extern(C) const(GVariantType)* function(const(GVariantType)* type) nothrow;
+__gshared c_g_variant_type_firstFn c_g_variant_type_first; ///
+private alias c_g_variant_type_freeFn = extern(C) void function(GVariantType* type) nothrow;
+__gshared c_g_variant_type_freeFn c_g_variant_type_free; ///
+private alias c_g_variant_type_get_string_lengthFn = extern(C) size_t function(const(GVariantType)* type) nothrow;
+__gshared c_g_variant_type_get_string_lengthFn c_g_variant_type_get_string_length; ///
+private alias c_g_variant_type_hashFn = extern(C) uint function(GVariantType* type) nothrow;
+__gshared c_g_variant_type_hashFn c_g_variant_type_hash; ///
+private alias c_g_variant_type_is_arrayFn = extern(C) gboolean function(const(GVariantType)* type) nothrow;
+__gshared c_g_variant_type_is_arrayFn c_g_variant_type_is_array; ///
+private alias c_g_variant_type_is_basicFn = extern(C) gboolean function(const(GVariantType)* type) nothrow;
+__gshared c_g_variant_type_is_basicFn c_g_variant_type_is_basic; ///
+private alias c_g_variant_type_is_containerFn = extern(C) gboolean function(const(GVariantType)* type) nothrow;
+__gshared c_g_variant_type_is_containerFn c_g_variant_type_is_container; ///
+private alias c_g_variant_type_is_definiteFn = extern(C) gboolean function(const(GVariantType)* type) nothrow;
+__gshared c_g_variant_type_is_definiteFn c_g_variant_type_is_definite; ///
+private alias c_g_variant_type_is_dict_entryFn = extern(C) gboolean function(const(GVariantType)* type) nothrow;
+__gshared c_g_variant_type_is_dict_entryFn c_g_variant_type_is_dict_entry; ///
+private alias c_g_variant_type_is_maybeFn = extern(C) gboolean function(const(GVariantType)* type) nothrow;
+__gshared c_g_variant_type_is_maybeFn c_g_variant_type_is_maybe; ///
+private alias c_g_variant_type_is_subtype_ofFn = extern(C) gboolean function(const(GVariantType)* type, const(GVariantType)* supertype) nothrow;
+__gshared c_g_variant_type_is_subtype_ofFn c_g_variant_type_is_subtype_of; ///
+private alias c_g_variant_type_is_tupleFn = extern(C) gboolean function(const(GVariantType)* type) nothrow;
+__gshared c_g_variant_type_is_tupleFn c_g_variant_type_is_tuple; ///
+private alias c_g_variant_type_is_variantFn = extern(C) gboolean function(const(GVariantType)* type) nothrow;
+__gshared c_g_variant_type_is_variantFn c_g_variant_type_is_variant; ///
+private alias c_g_variant_type_keyFn = extern(C) const(GVariantType)* function(const(GVariantType)* type) nothrow;
+__gshared c_g_variant_type_keyFn c_g_variant_type_key; ///
+private alias c_g_variant_type_n_itemsFn = extern(C) size_t function(const(GVariantType)* type) nothrow;
+__gshared c_g_variant_type_n_itemsFn c_g_variant_type_n_items; ///
+private alias c_g_variant_type_nextFn = extern(C) const(GVariantType)* function(const(GVariantType)* type) nothrow;
+__gshared c_g_variant_type_nextFn c_g_variant_type_next; ///
+private alias c_g_variant_type_peek_stringFn = extern(C) const(char)* function(const(GVariantType)* type) nothrow;
+__gshared c_g_variant_type_peek_stringFn c_g_variant_type_peek_string; ///
+private alias c_g_variant_type_valueFn = extern(C) const(GVariantType)* function(const(GVariantType)* type) nothrow;
+__gshared c_g_variant_type_valueFn c_g_variant_type_value; ///
+private alias c_g_variant_type_checked_Fn = extern(C) const(GVariantType)* function(const(char)* typeString) nothrow;
+__gshared c_g_variant_type_checked_Fn c_g_variant_type_checked_; ///
+private alias c_g_variant_type_string_get_depth_Fn = extern(C) size_t function(const(char)* typeString) nothrow;
+__gshared c_g_variant_type_string_get_depth_Fn c_g_variant_type_string_get_depth_; ///
+private alias c_g_variant_type_string_is_validFn = extern(C) gboolean function(const(char)* typeString) nothrow;
+__gshared c_g_variant_type_string_is_validFn c_g_variant_type_string_is_valid; ///
+private alias c_g_variant_type_string_scanFn = extern(C) gboolean function(const(char)* string_, const(char)* limit, const(char*)* endptr) nothrow;
+__gshared c_g_variant_type_string_scanFn c_g_variant_type_string_scan; ///
+
+// global
+private alias c_g_accessFn = extern(C) int function(const(char)* filename, int mode) nothrow;
+__gshared c_g_accessFn c_g_access; ///
+private alias c_g_aligned_allocFn = extern(C) void* function(size_t nBlocks, size_t nBlockBytes, size_t alignment) nothrow;
+__gshared c_g_aligned_allocFn c_g_aligned_alloc; ///
+private alias c_g_aligned_alloc0Fn = extern(C) void* function(size_t nBlocks, size_t nBlockBytes, size_t alignment) nothrow;
+__gshared c_g_aligned_alloc0Fn c_g_aligned_alloc0; ///
+private alias c_g_aligned_freeFn = extern(C) void function(void* mem) nothrow;
+__gshared c_g_aligned_freeFn c_g_aligned_free; ///
+private alias c_g_aligned_free_sizedFn = extern(C) void function(void* mem, size_t alignment, size_t size) nothrow;
+__gshared c_g_aligned_free_sizedFn c_g_aligned_free_sized; ///
+private alias c_g_ascii_digit_valueFn = extern(C) int function(char c) nothrow;
+__gshared c_g_ascii_digit_valueFn c_g_ascii_digit_value; ///
+private alias c_g_ascii_dtostrFn = extern(C) char* function(char* buffer, int bufLen, double d) nothrow;
+__gshared c_g_ascii_dtostrFn c_g_ascii_dtostr; ///
+private alias c_g_ascii_formatdFn = extern(C) char* function(char* buffer, int bufLen, const(char)* format, double d) nothrow;
+__gshared c_g_ascii_formatdFn c_g_ascii_formatd; ///
+private alias c_g_ascii_strcasecmpFn = extern(C) int function(const(char)* s1, const(char)* s2) nothrow;
+__gshared c_g_ascii_strcasecmpFn c_g_ascii_strcasecmp; ///
+private alias c_g_ascii_strdownFn = extern(C) char* function(const(char)* str, ptrdiff_t len) nothrow;
+__gshared c_g_ascii_strdownFn c_g_ascii_strdown; ///
+private alias c_g_ascii_string_to_signedFn = extern(C) gboolean function(const(char)* str, uint base, long min, long max, long* outNum, GError** _err) nothrow;
+__gshared c_g_ascii_string_to_signedFn c_g_ascii_string_to_signed; ///
+private alias c_g_ascii_string_to_unsignedFn = extern(C) gboolean function(const(char)* str, uint base, ulong min, ulong max, ulong* outNum, GError** _err) nothrow;
+__gshared c_g_ascii_string_to_unsignedFn c_g_ascii_string_to_unsigned; ///
+private alias c_g_ascii_strncasecmpFn = extern(C) int function(const(char)* s1, const(char)* s2, size_t n) nothrow;
+__gshared c_g_ascii_strncasecmpFn c_g_ascii_strncasecmp; ///
+private alias c_g_ascii_strtodFn = extern(C) double function(const(char)* nptr, char** endptr) nothrow;
+__gshared c_g_ascii_strtodFn c_g_ascii_strtod; ///
+private alias c_g_ascii_strtollFn = extern(C) long function(const(char)* nptr, char** endptr, uint base) nothrow;
+__gshared c_g_ascii_strtollFn c_g_ascii_strtoll; ///
+private alias c_g_ascii_strtoullFn = extern(C) ulong function(const(char)* nptr, char** endptr, uint base) nothrow;
+__gshared c_g_ascii_strtoullFn c_g_ascii_strtoull; ///
+private alias c_g_ascii_strupFn = extern(C) char* function(const(char)* str, ptrdiff_t len) nothrow;
+__gshared c_g_ascii_strupFn c_g_ascii_strup; ///
+private alias c_g_ascii_tolowerFn = extern(C) char function(char c) nothrow;
+__gshared c_g_ascii_tolowerFn c_g_ascii_tolower; ///
+private alias c_g_ascii_toupperFn = extern(C) char function(char c) nothrow;
+__gshared c_g_ascii_toupperFn c_g_ascii_toupper; ///
+private alias c_g_ascii_xdigit_valueFn = extern(C) int function(char c) nothrow;
+__gshared c_g_ascii_xdigit_valueFn c_g_ascii_xdigit_value; ///
+private alias c_g_assert_warningFn = extern(C) void function(const(char)* logDomain, const(char)* file, int line, const(char)* prettyFunction, const(char)* expression) nothrow;
+__gshared c_g_assert_warningFn c_g_assert_warning; ///
+private alias c_g_assertion_messageFn = extern(C) void function(const(char)* domain, const(char)* file, int line, const(char)* func, const(char)* message) nothrow;
+__gshared c_g_assertion_messageFn c_g_assertion_message; ///
+private alias c_g_assertion_message_cmpintFn = extern(C) void function(const(char)* domain, const(char)* file, int line, const(char)* func, const(char)* expr, ulong arg1, const(char)* cmp, ulong arg2, char numtype) nothrow;
+__gshared c_g_assertion_message_cmpintFn c_g_assertion_message_cmpint; ///
+private alias c_g_assertion_message_cmpnumFn = extern(C) void function(const(char)* domain, const(char)* file, int line, const(char)* func, const(char)* expr, real arg1, const(char)* cmp, real arg2, char numtype) nothrow;
+__gshared c_g_assertion_message_cmpnumFn c_g_assertion_message_cmpnum; ///
+private alias c_g_assertion_message_cmpstrFn = extern(C) void function(const(char)* domain, const(char)* file, int line, const(char)* func, const(char)* expr, const(char)* arg1, const(char)* cmp, const(char)* arg2) nothrow;
+__gshared c_g_assertion_message_cmpstrFn c_g_assertion_message_cmpstr; ///
+private alias c_g_assertion_message_cmpstrvFn = extern(C) void function(const(char)* domain, const(char)* file, int line, const(char)* func, const(char)* expr, const(char*)* arg1, const(char*)* arg2, size_t firstWrongIdx) nothrow;
+__gshared c_g_assertion_message_cmpstrvFn c_g_assertion_message_cmpstrv; ///
+private alias c_g_assertion_message_errorFn = extern(C) void function(const(char)* domain, const(char)* file, int line, const(char)* func, const(char)* expr, const(GError)* error, GQuark errorDomain, int errorCode) nothrow;
+__gshared c_g_assertion_message_errorFn c_g_assertion_message_error; ///
+private alias c_g_assertion_message_exprFn = extern(C) void function(const(char)* domain, const(char)* file, int line, const(char)* func, const(char)* expr) nothrow;
+__gshared c_g_assertion_message_exprFn c_g_assertion_message_expr; ///
+private alias c_g_atexitFn = extern(C) void function(GVoidFunc func) nothrow;
+__gshared c_g_atexitFn c_g_atexit; ///
+private alias c_g_atomic_int_addFn = extern(C) int function(int* atomic, int val) nothrow;
+__gshared c_g_atomic_int_addFn c_g_atomic_int_add; ///
+private alias c_g_atomic_int_andFn = extern(C) uint function(uint* atomic, uint val) nothrow;
+__gshared c_g_atomic_int_andFn c_g_atomic_int_and; ///
+private alias c_g_atomic_int_compare_and_exchangeFn = extern(C) gboolean function(int* atomic, int oldval, int newval) nothrow;
+__gshared c_g_atomic_int_compare_and_exchangeFn c_g_atomic_int_compare_and_exchange; ///
+private alias c_g_atomic_int_compare_and_exchange_fullFn = extern(C) gboolean function(int* atomic, int oldval, int newval, int* preval) nothrow;
+__gshared c_g_atomic_int_compare_and_exchange_fullFn c_g_atomic_int_compare_and_exchange_full; ///
+private alias c_g_atomic_int_dec_and_testFn = extern(C) gboolean function(int* atomic) nothrow;
+__gshared c_g_atomic_int_dec_and_testFn c_g_atomic_int_dec_and_test; ///
+private alias c_g_atomic_int_exchangeFn = extern(C) int function(int* atomic, int newval) nothrow;
+__gshared c_g_atomic_int_exchangeFn c_g_atomic_int_exchange; ///
+private alias c_g_atomic_int_exchange_and_addFn = extern(C) int function(int* atomic, int val) nothrow;
+__gshared c_g_atomic_int_exchange_and_addFn c_g_atomic_int_exchange_and_add; ///
+private alias c_g_atomic_int_getFn = extern(C) int function(const(int)* atomic) nothrow;
+__gshared c_g_atomic_int_getFn c_g_atomic_int_get; ///
+private alias c_g_atomic_int_incFn = extern(C) void function(int* atomic) nothrow;
+__gshared c_g_atomic_int_incFn c_g_atomic_int_inc; ///
+private alias c_g_atomic_int_orFn = extern(C) uint function(uint* atomic, uint val) nothrow;
+__gshared c_g_atomic_int_orFn c_g_atomic_int_or; ///
+private alias c_g_atomic_int_setFn = extern(C) void function(int* atomic, int newval) nothrow;
+__gshared c_g_atomic_int_setFn c_g_atomic_int_set; ///
+private alias c_g_atomic_int_xorFn = extern(C) uint function(uint* atomic, uint val) nothrow;
+__gshared c_g_atomic_int_xorFn c_g_atomic_int_xor; ///
+private alias c_g_atomic_pointer_addFn = extern(C) ptrdiff_t function(void* atomic, ptrdiff_t val) nothrow;
+__gshared c_g_atomic_pointer_addFn c_g_atomic_pointer_add; ///
+private alias c_g_atomic_pointer_andFn = extern(C) size_t function(void* atomic, size_t val) nothrow;
+__gshared c_g_atomic_pointer_andFn c_g_atomic_pointer_and; ///
+private alias c_g_atomic_pointer_compare_and_exchangeFn = extern(C) gboolean function(void* atomic, void* oldval, void* newval) nothrow;
+__gshared c_g_atomic_pointer_compare_and_exchangeFn c_g_atomic_pointer_compare_and_exchange; ///
+private alias c_g_atomic_pointer_compare_and_exchange_fullFn = extern(C) gboolean function(void* atomic, void* oldval, void* newval, void* preval) nothrow;
+__gshared c_g_atomic_pointer_compare_and_exchange_fullFn c_g_atomic_pointer_compare_and_exchange_full; ///
+private alias c_g_atomic_pointer_exchangeFn = extern(C) void* function(void* atomic, void* newval) nothrow;
+__gshared c_g_atomic_pointer_exchangeFn c_g_atomic_pointer_exchange; ///
+private alias c_g_atomic_pointer_getFn = extern(C) void* function(void* atomic) nothrow;
+__gshared c_g_atomic_pointer_getFn c_g_atomic_pointer_get; ///
+private alias c_g_atomic_pointer_orFn = extern(C) size_t function(void* atomic, size_t val) nothrow;
+__gshared c_g_atomic_pointer_orFn c_g_atomic_pointer_or; ///
+private alias c_g_atomic_pointer_setFn = extern(C) void function(void* atomic, void* newval) nothrow;
+__gshared c_g_atomic_pointer_setFn c_g_atomic_pointer_set; ///
+private alias c_g_atomic_pointer_xorFn = extern(C) size_t function(void* atomic, size_t val) nothrow;
+__gshared c_g_atomic_pointer_xorFn c_g_atomic_pointer_xor; ///
+private alias c_g_atomic_rc_box_acquireFn = extern(C) void* function(void* memBlock) nothrow;
+__gshared c_g_atomic_rc_box_acquireFn c_g_atomic_rc_box_acquire; ///
+private alias c_g_atomic_rc_box_allocFn = extern(C) void* function(size_t blockSize) nothrow;
+__gshared c_g_atomic_rc_box_allocFn c_g_atomic_rc_box_alloc; ///
+private alias c_g_atomic_rc_box_alloc0Fn = extern(C) void* function(size_t blockSize) nothrow;
+__gshared c_g_atomic_rc_box_alloc0Fn c_g_atomic_rc_box_alloc0; ///
+private alias c_g_atomic_rc_box_dupFn = extern(C) void* function(size_t blockSize, const(void)* memBlock) nothrow;
+__gshared c_g_atomic_rc_box_dupFn c_g_atomic_rc_box_dup; ///
+private alias c_g_atomic_rc_box_get_sizeFn = extern(C) size_t function(void* memBlock) nothrow;
+__gshared c_g_atomic_rc_box_get_sizeFn c_g_atomic_rc_box_get_size; ///
+private alias c_g_atomic_rc_box_releaseFn = extern(C) void function(void* memBlock) nothrow;
+__gshared c_g_atomic_rc_box_releaseFn c_g_atomic_rc_box_release; ///
+private alias c_g_atomic_rc_box_release_fullFn = extern(C) void function(void* memBlock, GDestroyNotify clearFunc) nothrow;
+__gshared c_g_atomic_rc_box_release_fullFn c_g_atomic_rc_box_release_full; ///
+private alias c_g_atomic_ref_count_compareFn = extern(C) gboolean function(int* arc, int val) nothrow;
+__gshared c_g_atomic_ref_count_compareFn c_g_atomic_ref_count_compare; ///
+private alias c_g_atomic_ref_count_decFn = extern(C) gboolean function(int* arc) nothrow;
+__gshared c_g_atomic_ref_count_decFn c_g_atomic_ref_count_dec; ///
+private alias c_g_atomic_ref_count_incFn = extern(C) void function(int* arc) nothrow;
+__gshared c_g_atomic_ref_count_incFn c_g_atomic_ref_count_inc; ///
+private alias c_g_atomic_ref_count_initFn = extern(C) void function(int* arc) nothrow;
+__gshared c_g_atomic_ref_count_initFn c_g_atomic_ref_count_init; ///
+private alias c_g_base64_decodeFn = extern(C) ubyte* function(const(char)* text, size_t* outLen) nothrow;
+__gshared c_g_base64_decodeFn c_g_base64_decode; ///
+private alias c_g_base64_decode_inplaceFn = extern(C) ubyte* function(ubyte* text, size_t* outLen) nothrow;
+__gshared c_g_base64_decode_inplaceFn c_g_base64_decode_inplace; ///
+private alias c_g_base64_decode_stepFn = extern(C) size_t function(const(ubyte)* in_, size_t len, ubyte* out_, int* state, uint* save) nothrow;
+__gshared c_g_base64_decode_stepFn c_g_base64_decode_step; ///
+private alias c_g_base64_encodeFn = extern(C) char* function(const(ubyte)* data, size_t len) nothrow;
+__gshared c_g_base64_encodeFn c_g_base64_encode; ///
+private alias c_g_base64_encode_closeFn = extern(C) size_t function(gboolean breakLines, char* out_, int* state, int* save) nothrow;
+__gshared c_g_base64_encode_closeFn c_g_base64_encode_close; ///
+private alias c_g_base64_encode_stepFn = extern(C) size_t function(const(ubyte)* in_, size_t len, gboolean breakLines, char* out_, int* state, int* save) nothrow;
+__gshared c_g_base64_encode_stepFn c_g_base64_encode_step; ///
+private alias c_g_basenameFn = extern(C) const(char)* function(const(char)* fileName) nothrow;
+__gshared c_g_basenameFn c_g_basename; ///
+private alias c_g_bit_lockFn = extern(C) void function(int* address, int lockBit) nothrow;
+__gshared c_g_bit_lockFn c_g_bit_lock; ///
+private alias c_g_bit_lock_and_getFn = extern(C) void function(int* address, uint lockBit, int* outVal) nothrow;
+__gshared c_g_bit_lock_and_getFn c_g_bit_lock_and_get; ///
+private alias c_g_bit_nth_lsfFn = extern(C) int function(gulong mask, int nthBit) nothrow;
+__gshared c_g_bit_nth_lsfFn c_g_bit_nth_lsf; ///
+private alias c_g_bit_nth_msfFn = extern(C) int function(gulong mask, int nthBit) nothrow;
+__gshared c_g_bit_nth_msfFn c_g_bit_nth_msf; ///
+private alias c_g_bit_storageFn = extern(C) uint function(gulong number) nothrow;
+__gshared c_g_bit_storageFn c_g_bit_storage; ///
+private alias c_g_bit_trylockFn = extern(C) gboolean function(int* address, int lockBit) nothrow;
+__gshared c_g_bit_trylockFn c_g_bit_trylock; ///
+private alias c_g_bit_unlockFn = extern(C) void function(int* address, int lockBit) nothrow;
+__gshared c_g_bit_unlockFn c_g_bit_unlock; ///
+private alias c_g_bit_unlock_and_setFn = extern(C) void function(int* address, uint lockBit, int newVal, int preserveMask) nothrow;
+__gshared c_g_bit_unlock_and_setFn c_g_bit_unlock_and_set; ///
+private alias c_g_blow_chunksFn = extern(C) void function() nothrow;
+__gshared c_g_blow_chunksFn c_g_blow_chunks; ///
+private alias c_g_build_filenameFn = extern(C) char* function(const(char)* firstElement,  ...) nothrow;
+__gshared c_g_build_filenameFn c_g_build_filename; ///
+private alias c_g_build_filename_valistFn = extern(C) char* function(const(char)* firstElement, void** args) nothrow;
+__gshared c_g_build_filename_valistFn c_g_build_filename_valist; ///
+private alias c_g_build_filenamevFn = extern(C) char* function(char** args) nothrow;
+__gshared c_g_build_filenamevFn c_g_build_filenamev; ///
+private alias c_g_build_pathFn = extern(C) char* function(const(char)* separator, const(char)* firstElement,  ...) nothrow;
+__gshared c_g_build_pathFn c_g_build_path; ///
+private alias c_g_build_pathvFn = extern(C) char* function(const(char)* separator, char** args) nothrow;
+__gshared c_g_build_pathvFn c_g_build_pathv; ///
+private alias c_g_canonicalize_filenameFn = extern(C) char* function(const(char)* filename, const(char)* relativeTo) nothrow;
+__gshared c_g_canonicalize_filenameFn c_g_canonicalize_filename; ///
+private alias c_g_chdirFn = extern(C) int function(const(char)* path) nothrow;
+__gshared c_g_chdirFn c_g_chdir; ///
+private alias c_glib_check_versionFn = extern(C) const(char)* function(uint requiredMajor, uint requiredMinor, uint requiredMicro) nothrow;
+__gshared c_glib_check_versionFn c_glib_check_version; ///
+private alias c_g_child_watch_addFn = extern(C) uint function(GPid pid, GChildWatchFunc function_, void* data) nothrow;
+__gshared c_g_child_watch_addFn c_g_child_watch_add; ///
+private alias c_g_child_watch_add_fullFn = extern(C) uint function(int priority, GPid pid, GChildWatchFunc function_, void* data, GDestroyNotify notify) nothrow;
+__gshared c_g_child_watch_add_fullFn c_g_child_watch_add_full; ///
+private alias c_g_child_watch_source_newFn = extern(C) GSource* function(GPid pid) nothrow;
+__gshared c_g_child_watch_source_newFn c_g_child_watch_source_new; ///
+private alias c_g_chmodFn = extern(C) int function(const(char)* filename, int mode) nothrow;
+__gshared c_g_chmodFn c_g_chmod; ///
+private alias c_g_clear_errorFn = extern(C) void function(GError** _err) nothrow;
+__gshared c_g_clear_errorFn c_g_clear_error; ///
+private alias c_g_clear_handle_idFn = extern(C) void function(uint* tagPtr, GClearHandleFunc clearFunc) nothrow;
+__gshared c_g_clear_handle_idFn c_g_clear_handle_id; ///
+private alias c_g_clear_listFn = extern(C) void function(GList** listPtr, GDestroyNotify destroy) nothrow;
+__gshared c_g_clear_listFn c_g_clear_list; ///
+private alias c_g_clear_pointerFn = extern(C) void function(void** pp, GDestroyNotify destroy) nothrow;
+__gshared c_g_clear_pointerFn c_g_clear_pointer; ///
+private alias c_g_clear_slistFn = extern(C) void function(GSList** slistPtr, GDestroyNotify destroy) nothrow;
+__gshared c_g_clear_slistFn c_g_clear_slist; ///
+private alias c_g_closeFn = extern(C) gboolean function(int fd, GError** _err) nothrow;
+__gshared c_g_closeFn c_g_close; ///
+private alias c_g_compute_checksum_for_bytesFn = extern(C) char* function(GChecksumType checksumType, GBytes* data) nothrow;
+__gshared c_g_compute_checksum_for_bytesFn c_g_compute_checksum_for_bytes; ///
+private alias c_g_compute_checksum_for_dataFn = extern(C) char* function(GChecksumType checksumType, const(ubyte)* data, size_t length) nothrow;
+__gshared c_g_compute_checksum_for_dataFn c_g_compute_checksum_for_data; ///
+private alias c_g_compute_checksum_for_stringFn = extern(C) char* function(GChecksumType checksumType, const(char)* str, ptrdiff_t length) nothrow;
+__gshared c_g_compute_checksum_for_stringFn c_g_compute_checksum_for_string; ///
+private alias c_g_compute_hmac_for_bytesFn = extern(C) char* function(GChecksumType digestType, GBytes* key, GBytes* data) nothrow;
+__gshared c_g_compute_hmac_for_bytesFn c_g_compute_hmac_for_bytes; ///
+private alias c_g_compute_hmac_for_dataFn = extern(C) char* function(GChecksumType digestType, const(ubyte)* key, size_t keyLen, const(ubyte)* data, size_t length) nothrow;
+__gshared c_g_compute_hmac_for_dataFn c_g_compute_hmac_for_data; ///
+private alias c_g_compute_hmac_for_stringFn = extern(C) char* function(GChecksumType digestType, const(ubyte)* key, size_t keyLen, const(char)* str, ptrdiff_t length) nothrow;
+__gshared c_g_compute_hmac_for_stringFn c_g_compute_hmac_for_string; ///
+private alias c_g_convertFn = extern(C) ubyte* function(const(ubyte)* str, ptrdiff_t len, const(char)* toCodeset, const(char)* fromCodeset, size_t* bytesRead, size_t* bytesWritten, GError** _err) nothrow;
+__gshared c_g_convertFn c_g_convert; ///
+private alias c_g_convert_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_convert_error_quarkFn c_g_convert_error_quark; ///
+private alias c_g_convert_with_fallbackFn = extern(C) ubyte* function(const(ubyte)* str, ptrdiff_t len, const(char)* toCodeset, const(char)* fromCodeset, const(char)* fallback, size_t* bytesRead, size_t* bytesWritten, GError** _err) nothrow;
+__gshared c_g_convert_with_fallbackFn c_g_convert_with_fallback; ///
+private alias c_g_convert_with_iconvFn = extern(C) ubyte* function(const(ubyte)* str, ptrdiff_t len, GIConv converter, size_t* bytesRead, size_t* bytesWritten, GError** _err) nothrow;
+__gshared c_g_convert_with_iconvFn c_g_convert_with_iconv; ///
+private alias c_g_creatFn = extern(C) int function(const(char)* filename, int mode) nothrow;
+__gshared c_g_creatFn c_g_creat; ///
+private alias c_g_datalist_clearFn = extern(C) void function(GData** datalist) nothrow;
+__gshared c_g_datalist_clearFn c_g_datalist_clear; ///
+private alias c_g_datalist_foreachFn = extern(C) void function(GData** datalist, GDataForeachFunc func, void* userData) nothrow;
+__gshared c_g_datalist_foreachFn c_g_datalist_foreach; ///
+private alias c_g_datalist_get_dataFn = extern(C) void* function(GData** datalist, const(char)* key) nothrow;
+__gshared c_g_datalist_get_dataFn c_g_datalist_get_data; ///
+private alias c_g_datalist_get_flagsFn = extern(C) uint function(GData** datalist) nothrow;
+__gshared c_g_datalist_get_flagsFn c_g_datalist_get_flags; ///
+private alias c_g_datalist_id_dup_dataFn = extern(C) void* function(GData** datalist, GQuark keyId, GDuplicateFunc dupFunc, void* userData) nothrow;
+__gshared c_g_datalist_id_dup_dataFn c_g_datalist_id_dup_data; ///
+private alias c_g_datalist_id_get_dataFn = extern(C) void* function(GData** datalist, GQuark keyId) nothrow;
+__gshared c_g_datalist_id_get_dataFn c_g_datalist_id_get_data; ///
+private alias c_g_datalist_id_remove_multipleFn = extern(C) void function(GData** datalist, GQuark* keys, size_t nKeys) nothrow;
+__gshared c_g_datalist_id_remove_multipleFn c_g_datalist_id_remove_multiple; ///
+private alias c_g_datalist_id_remove_no_notifyFn = extern(C) void* function(GData** datalist, GQuark keyId) nothrow;
+__gshared c_g_datalist_id_remove_no_notifyFn c_g_datalist_id_remove_no_notify; ///
+private alias c_g_datalist_id_replace_dataFn = extern(C) gboolean function(GData** datalist, GQuark keyId, void* oldval, void* newval, GDestroyNotify destroy, GDestroyNotify* oldDestroy) nothrow;
+__gshared c_g_datalist_id_replace_dataFn c_g_datalist_id_replace_data; ///
+private alias c_g_datalist_id_set_data_fullFn = extern(C) void function(GData** datalist, GQuark keyId, void* data, GDestroyNotify destroyFunc) nothrow;
+__gshared c_g_datalist_id_set_data_fullFn c_g_datalist_id_set_data_full; ///
+private alias c_g_datalist_initFn = extern(C) void function(GData** datalist) nothrow;
+__gshared c_g_datalist_initFn c_g_datalist_init; ///
+private alias c_g_datalist_set_flagsFn = extern(C) void function(GData** datalist, uint flags) nothrow;
+__gshared c_g_datalist_set_flagsFn c_g_datalist_set_flags; ///
+private alias c_g_datalist_unset_flagsFn = extern(C) void function(GData** datalist, uint flags) nothrow;
+__gshared c_g_datalist_unset_flagsFn c_g_datalist_unset_flags; ///
+private alias c_g_dataset_destroyFn = extern(C) void function(const(void)* datasetLocation) nothrow;
+__gshared c_g_dataset_destroyFn c_g_dataset_destroy; ///
+private alias c_g_dataset_foreachFn = extern(C) void function(const(void)* datasetLocation, GDataForeachFunc func, void* userData) nothrow;
+__gshared c_g_dataset_foreachFn c_g_dataset_foreach; ///
+private alias c_g_dataset_id_get_dataFn = extern(C) void* function(const(void)* datasetLocation, GQuark keyId) nothrow;
+__gshared c_g_dataset_id_get_dataFn c_g_dataset_id_get_data; ///
+private alias c_g_dataset_id_remove_no_notifyFn = extern(C) void* function(const(void)* datasetLocation, GQuark keyId) nothrow;
+__gshared c_g_dataset_id_remove_no_notifyFn c_g_dataset_id_remove_no_notify; ///
+private alias c_g_dataset_id_set_data_fullFn = extern(C) void function(const(void)* datasetLocation, GQuark keyId, void* data, GDestroyNotify destroyFunc) nothrow;
+__gshared c_g_dataset_id_set_data_fullFn c_g_dataset_id_set_data_full; ///
+private alias c_g_dcgettextFn = extern(C) const(char)* function(const(char)* domain, const(char)* msgid, int category) nothrow;
+__gshared c_g_dcgettextFn c_g_dcgettext; ///
+private alias c_g_dgettextFn = extern(C) const(char)* function(const(char)* domain, const(char)* msgid) nothrow;
+__gshared c_g_dgettextFn c_g_dgettext; ///
+private alias c_g_direct_equalFn = extern(C) gboolean function(const(void)* v1, const(void)* v2) nothrow;
+__gshared c_g_direct_equalFn c_g_direct_equal; ///
+private alias c_g_direct_hashFn = extern(C) uint function(const(void)* v) nothrow;
+__gshared c_g_direct_hashFn c_g_direct_hash; ///
+private alias c_g_dngettextFn = extern(C) const(char)* function(const(char)* domain, const(char)* msgid, const(char)* msgidPlural, gulong n) nothrow;
+__gshared c_g_dngettextFn c_g_dngettext; ///
+private alias c_g_double_equalFn = extern(C) gboolean function(const(void)* v1, const(void)* v2) nothrow;
+__gshared c_g_double_equalFn c_g_double_equal; ///
+private alias c_g_double_hashFn = extern(C) uint function(const(void)* v) nothrow;
+__gshared c_g_double_hashFn c_g_double_hash; ///
+private alias c_g_dpgettextFn = extern(C) const(char)* function(const(char)* domain, const(char)* msgctxtid, size_t msgidoffset) nothrow;
+__gshared c_g_dpgettextFn c_g_dpgettext; ///
+private alias c_g_dpgettext2Fn = extern(C) const(char)* function(const(char)* domain, const(char)* context, const(char)* msgid) nothrow;
+__gshared c_g_dpgettext2Fn c_g_dpgettext2; ///
+private alias c_g_environ_getenvFn = extern(C) const(char)* function(char** envp, const(char)* variable) nothrow;
+__gshared c_g_environ_getenvFn c_g_environ_getenv; ///
+private alias c_g_environ_setenvFn = extern(C) char** function(char** envp, const(char)* variable, const(char)* value, gboolean overwrite) nothrow;
+__gshared c_g_environ_setenvFn c_g_environ_setenv; ///
+private alias c_g_environ_unsetenvFn = extern(C) char** function(char** envp, const(char)* variable) nothrow;
+__gshared c_g_environ_unsetenvFn c_g_environ_unsetenv; ///
+private alias c_g_file_error_from_errnoFn = extern(C) GFileError function(int errNo) nothrow;
+__gshared c_g_file_error_from_errnoFn c_g_file_error_from_errno; ///
+private alias c_g_file_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_file_error_quarkFn c_g_file_error_quark; ///
+private alias c_g_file_get_contentsFn = extern(C) gboolean function(const(char)* filename, ubyte** contents, size_t* length, GError** _err) nothrow;
+__gshared c_g_file_get_contentsFn c_g_file_get_contents; ///
+private alias c_g_file_open_tmpFn = extern(C) int function(const(char)* tmpl, char** nameUsed, GError** _err) nothrow;
+__gshared c_g_file_open_tmpFn c_g_file_open_tmp; ///
+private alias c_g_file_read_linkFn = extern(C) char* function(const(char)* filename, GError** _err) nothrow;
+__gshared c_g_file_read_linkFn c_g_file_read_link; ///
+private alias c_g_file_set_contentsFn = extern(C) gboolean function(const(char)* filename, const(ubyte)* contents, ptrdiff_t length, GError** _err) nothrow;
+__gshared c_g_file_set_contentsFn c_g_file_set_contents; ///
+private alias c_g_file_set_contents_fullFn = extern(C) gboolean function(const(char)* filename, const(ubyte)* contents, ptrdiff_t length, GFileSetContentsFlags flags, int mode, GError** _err) nothrow;
+__gshared c_g_file_set_contents_fullFn c_g_file_set_contents_full; ///
+private alias c_g_file_testFn = extern(C) gboolean function(const(char)* filename, GFileTest test) nothrow;
+__gshared c_g_file_testFn c_g_file_test; ///
+private alias c_g_filename_display_basenameFn = extern(C) char* function(const(char)* filename) nothrow;
+__gshared c_g_filename_display_basenameFn c_g_filename_display_basename; ///
+private alias c_g_filename_display_nameFn = extern(C) char* function(const(char)* filename) nothrow;
+__gshared c_g_filename_display_nameFn c_g_filename_display_name; ///
+private alias c_g_filename_from_uriFn = extern(C) char* function(const(char)* uri, char** hostname, GError** _err) nothrow;
+__gshared c_g_filename_from_uriFn c_g_filename_from_uri; ///
+private alias c_g_filename_from_utf8Fn = extern(C) ubyte* function(const(ubyte)* utf8string, ptrdiff_t len, size_t* bytesRead, size_t* bytesWritten, GError** _err) nothrow;
+__gshared c_g_filename_from_utf8Fn c_g_filename_from_utf8; ///
+private alias c_g_filename_to_uriFn = extern(C) char* function(const(char)* filename, const(char)* hostname, GError** _err) nothrow;
+__gshared c_g_filename_to_uriFn c_g_filename_to_uri; ///
+private alias c_g_filename_to_utf8Fn = extern(C) char* function(const(ubyte)* opsysstring, ptrdiff_t len, size_t* bytesRead, size_t* bytesWritten, GError** _err) nothrow;
+__gshared c_g_filename_to_utf8Fn c_g_filename_to_utf8; ///
+private alias c_g_find_program_in_pathFn = extern(C) char* function(const(char)* program) nothrow;
+__gshared c_g_find_program_in_pathFn c_g_find_program_in_path; ///
+private alias c_g_fopenFn = extern(C) void* function(const(char)* filename, const(char)* mode) nothrow;
+__gshared c_g_fopenFn c_g_fopen; ///
+private alias c_g_format_sizeFn = extern(C) char* function(ulong size) nothrow;
+__gshared c_g_format_sizeFn c_g_format_size; ///
+private alias c_g_format_size_for_displayFn = extern(C) char* function(long size) nothrow;
+__gshared c_g_format_size_for_displayFn c_g_format_size_for_display; ///
+private alias c_g_format_size_fullFn = extern(C) char* function(ulong size, GFormatSizeFlags flags) nothrow;
+__gshared c_g_format_size_fullFn c_g_format_size_full; ///
+private alias c_g_fprintfFn = extern(C) int function(void* file, const(char)* format,  ...) nothrow;
+__gshared c_g_fprintfFn c_g_fprintf; ///
+private alias c_g_freeFn = extern(C) void function(void* mem) nothrow;
+__gshared c_g_freeFn c_g_free; ///
+private alias c_g_free_sizedFn = extern(C) void function(void* mem, size_t size) nothrow;
+__gshared c_g_free_sizedFn c_g_free_sized; ///
+private alias c_g_freopenFn = extern(C) void* function(const(char)* filename, const(char)* mode, void* stream) nothrow;
+__gshared c_g_freopenFn c_g_freopen; ///
+private alias c_g_fsyncFn = extern(C) int function(int fd) nothrow;
+__gshared c_g_fsyncFn c_g_fsync; ///
+private alias c_g_get_application_nameFn = extern(C) const(char)* function() nothrow;
+__gshared c_g_get_application_nameFn c_g_get_application_name; ///
+private alias c_g_get_charsetFn = extern(C) gboolean function(const(char*)* charset) nothrow;
+__gshared c_g_get_charsetFn c_g_get_charset; ///
+private alias c_g_get_codesetFn = extern(C) char* function() nothrow;
+__gshared c_g_get_codesetFn c_g_get_codeset; ///
+private alias c_g_get_console_charsetFn = extern(C) gboolean function(const(char*)* charset) nothrow;
+__gshared c_g_get_console_charsetFn c_g_get_console_charset; ///
+private alias c_g_get_current_dirFn = extern(C) char* function() nothrow;
+__gshared c_g_get_current_dirFn c_g_get_current_dir; ///
+private alias c_g_get_current_timeFn = extern(C) void function(GTimeVal* result) nothrow;
+__gshared c_g_get_current_timeFn c_g_get_current_time; ///
+private alias c_g_get_environFn = extern(C) char** function() nothrow;
+__gshared c_g_get_environFn c_g_get_environ; ///
+private alias c_g_get_filename_charsetsFn = extern(C) gboolean function(const(char**)* filenameCharsets) nothrow;
+__gshared c_g_get_filename_charsetsFn c_g_get_filename_charsets; ///
+private alias c_g_get_home_dirFn = extern(C) const(char)* function() nothrow;
+__gshared c_g_get_home_dirFn c_g_get_home_dir; ///
+private alias c_g_get_host_nameFn = extern(C) const(char)* function() nothrow;
+__gshared c_g_get_host_nameFn c_g_get_host_name; ///
+private alias c_g_get_language_namesFn = extern(C) const(char*)* function() nothrow;
+__gshared c_g_get_language_namesFn c_g_get_language_names; ///
+private alias c_g_get_language_names_with_categoryFn = extern(C) const(char*)* function(const(char)* categoryName) nothrow;
+__gshared c_g_get_language_names_with_categoryFn c_g_get_language_names_with_category; ///
+private alias c_g_get_locale_variantsFn = extern(C) char** function(const(char)* locale) nothrow;
+__gshared c_g_get_locale_variantsFn c_g_get_locale_variants; ///
+private alias c_g_get_monotonic_timeFn = extern(C) long function() nothrow;
+__gshared c_g_get_monotonic_timeFn c_g_get_monotonic_time; ///
+private alias c_g_get_monotonic_time_nsFn = extern(C) ulong function() nothrow;
+__gshared c_g_get_monotonic_time_nsFn c_g_get_monotonic_time_ns; ///
+private alias c_g_get_num_processorsFn = extern(C) uint function() nothrow;
+__gshared c_g_get_num_processorsFn c_g_get_num_processors; ///
+private alias c_g_get_os_infoFn = extern(C) char* function(const(char)* keyName) nothrow;
+__gshared c_g_get_os_infoFn c_g_get_os_info; ///
+private alias c_g_get_prgnameFn = extern(C) const(char)* function() nothrow;
+__gshared c_g_get_prgnameFn c_g_get_prgname; ///
+private alias c_g_get_real_nameFn = extern(C) const(char)* function() nothrow;
+__gshared c_g_get_real_nameFn c_g_get_real_name; ///
+private alias c_g_get_real_timeFn = extern(C) long function() nothrow;
+__gshared c_g_get_real_timeFn c_g_get_real_time; ///
+private alias c_g_get_system_config_dirsFn = extern(C) const(char*)* function() nothrow;
+__gshared c_g_get_system_config_dirsFn c_g_get_system_config_dirs; ///
+private alias c_g_get_system_data_dirsFn = extern(C) const(char*)* function() nothrow;
+__gshared c_g_get_system_data_dirsFn c_g_get_system_data_dirs; ///
+private alias c_g_get_tmp_dirFn = extern(C) const(char)* function() nothrow;
+__gshared c_g_get_tmp_dirFn c_g_get_tmp_dir; ///
+private alias c_g_get_user_cache_dirFn = extern(C) const(char)* function() nothrow;
+__gshared c_g_get_user_cache_dirFn c_g_get_user_cache_dir; ///
+private alias c_g_get_user_config_dirFn = extern(C) const(char)* function() nothrow;
+__gshared c_g_get_user_config_dirFn c_g_get_user_config_dir; ///
+private alias c_g_get_user_data_dirFn = extern(C) const(char)* function() nothrow;
+__gshared c_g_get_user_data_dirFn c_g_get_user_data_dir; ///
+private alias c_g_get_user_nameFn = extern(C) const(char)* function() nothrow;
+__gshared c_g_get_user_nameFn c_g_get_user_name; ///
+private alias c_g_get_user_runtime_dirFn = extern(C) const(char)* function() nothrow;
+__gshared c_g_get_user_runtime_dirFn c_g_get_user_runtime_dir; ///
+private alias c_g_get_user_special_dirFn = extern(C) const(char)* function(GUserDirectory directory) nothrow;
+__gshared c_g_get_user_special_dirFn c_g_get_user_special_dir; ///
+private alias c_g_get_user_state_dirFn = extern(C) const(char)* function() nothrow;
+__gshared c_g_get_user_state_dirFn c_g_get_user_state_dir; ///
+private alias c_g_getenvFn = extern(C) const(char)* function(const(char)* variable) nothrow;
+__gshared c_g_getenvFn c_g_getenv; ///
+private alias c_g_hostname_is_ascii_encodedFn = extern(C) gboolean function(const(char)* hostname) nothrow;
+__gshared c_g_hostname_is_ascii_encodedFn c_g_hostname_is_ascii_encoded; ///
+private alias c_g_hostname_is_ip_addressFn = extern(C) gboolean function(const(char)* hostname) nothrow;
+__gshared c_g_hostname_is_ip_addressFn c_g_hostname_is_ip_address; ///
+private alias c_g_hostname_is_non_asciiFn = extern(C) gboolean function(const(char)* hostname) nothrow;
+__gshared c_g_hostname_is_non_asciiFn c_g_hostname_is_non_ascii; ///
+private alias c_g_hostname_to_asciiFn = extern(C) char* function(const(char)* hostname) nothrow;
+__gshared c_g_hostname_to_asciiFn c_g_hostname_to_ascii; ///
+private alias c_g_hostname_to_unicodeFn = extern(C) char* function(const(char)* hostname) nothrow;
+__gshared c_g_hostname_to_unicodeFn c_g_hostname_to_unicode; ///
+private alias c_g_iconvFn = extern(C) size_t function(GIConv converter, char** inbuf, size_t* inbytesLeft, char** outbuf, size_t* outbytesLeft) nothrow;
+__gshared c_g_iconvFn c_g_iconv; ///
+private alias c_g_idle_addFn = extern(C) uint function(GSourceFunc function_, void* data) nothrow;
+__gshared c_g_idle_addFn c_g_idle_add; ///
+private alias c_g_idle_add_fullFn = extern(C) uint function(int priority, GSourceFunc function_, void* data, GDestroyNotify notify) nothrow;
+__gshared c_g_idle_add_fullFn c_g_idle_add_full; ///
+private alias c_g_idle_add_onceFn = extern(C) uint function(GSourceOnceFunc function_, void* data) nothrow;
+__gshared c_g_idle_add_onceFn c_g_idle_add_once; ///
+private alias c_g_idle_remove_by_dataFn = extern(C) gboolean function(void* data) nothrow;
+__gshared c_g_idle_remove_by_dataFn c_g_idle_remove_by_data; ///
+private alias c_g_idle_source_newFn = extern(C) GSource* function() nothrow;
+__gshared c_g_idle_source_newFn c_g_idle_source_new; ///
+private alias c_g_int64_equalFn = extern(C) gboolean function(const(void)* v1, const(void)* v2) nothrow;
+__gshared c_g_int64_equalFn c_g_int64_equal; ///
+private alias c_g_int64_hashFn = extern(C) uint function(const(void)* v) nothrow;
+__gshared c_g_int64_hashFn c_g_int64_hash; ///
+private alias c_g_int_equalFn = extern(C) gboolean function(const(void)* v1, const(void)* v2) nothrow;
+__gshared c_g_int_equalFn c_g_int_equal; ///
+private alias c_g_int_hashFn = extern(C) uint function(const(void)* v) nothrow;
+__gshared c_g_int_hashFn c_g_int_hash; ///
+private alias c_g_intern_static_stringFn = extern(C) const(char)* function(const(char)* string_) nothrow;
+__gshared c_g_intern_static_stringFn c_g_intern_static_string; ///
+private alias c_g_intern_stringFn = extern(C) const(char)* function(const(char)* string_) nothrow;
+__gshared c_g_intern_stringFn c_g_intern_string; ///
+private alias c_g_io_add_watchFn = extern(C) uint function(GIOChannel* channel, GIOCondition condition, GIOFunc func, void* userData) nothrow;
+__gshared c_g_io_add_watchFn c_g_io_add_watch; ///
+private alias c_g_io_add_watch_fullFn = extern(C) uint function(GIOChannel* channel, int priority, GIOCondition condition, GIOFunc func, void* userData, GDestroyNotify notify) nothrow;
+__gshared c_g_io_add_watch_fullFn c_g_io_add_watch_full; ///
+private alias c_g_io_create_watchFn = extern(C) GSource* function(GIOChannel* channel, GIOCondition condition) nothrow;
+__gshared c_g_io_create_watchFn c_g_io_create_watch; ///
+private alias c_g_listenvFn = extern(C) char** function() nothrow;
+__gshared c_g_listenvFn c_g_listenv; ///
+private alias c_g_locale_from_utf8Fn = extern(C) ubyte* function(const(ubyte)* utf8string, ptrdiff_t len, size_t* bytesRead, size_t* bytesWritten, GError** _err) nothrow;
+__gshared c_g_locale_from_utf8Fn c_g_locale_from_utf8; ///
+private alias c_g_locale_to_utf8Fn = extern(C) char* function(const(ubyte)* opsysstring, ptrdiff_t len, size_t* bytesRead, size_t* bytesWritten, GError** _err) nothrow;
+__gshared c_g_locale_to_utf8Fn c_g_locale_to_utf8; ///
+private alias c_g_logFn = extern(C) void function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* format,  ...) nothrow;
+__gshared c_g_logFn c_g_log; ///
+private alias c_g_log_default_handlerFn = extern(C) void function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* message, void* unusedData) nothrow;
+__gshared c_g_log_default_handlerFn c_g_log_default_handler; ///
+private alias c_g_log_get_always_fatalFn = extern(C) GLogLevelFlags function() nothrow;
+__gshared c_g_log_get_always_fatalFn c_g_log_get_always_fatal; ///
+private alias c_g_log_get_debug_enabledFn = extern(C) gboolean function() nothrow;
+__gshared c_g_log_get_debug_enabledFn c_g_log_get_debug_enabled; ///
+private alias c_g_log_remove_handlerFn = extern(C) void function(const(char)* logDomain, uint handlerId) nothrow;
+__gshared c_g_log_remove_handlerFn c_g_log_remove_handler; ///
+private alias c_g_log_set_always_fatalFn = extern(C) GLogLevelFlags function(GLogLevelFlags fatalMask) nothrow;
+__gshared c_g_log_set_always_fatalFn c_g_log_set_always_fatal; ///
+private alias c_g_log_set_debug_enabledFn = extern(C) void function(gboolean enabled) nothrow;
+__gshared c_g_log_set_debug_enabledFn c_g_log_set_debug_enabled; ///
+private alias c_g_log_set_default_handlerFn = extern(C) GLogFunc function(GLogFunc logFunc, void* userData) nothrow;
+__gshared c_g_log_set_default_handlerFn c_g_log_set_default_handler; ///
+private alias c_g_log_set_fatal_maskFn = extern(C) GLogLevelFlags function(const(char)* logDomain, GLogLevelFlags fatalMask) nothrow;
+__gshared c_g_log_set_fatal_maskFn c_g_log_set_fatal_mask; ///
+private alias c_g_log_set_handlerFn = extern(C) uint function(const(char)* logDomain, GLogLevelFlags logLevels, GLogFunc logFunc, void* userData) nothrow;
+__gshared c_g_log_set_handlerFn c_g_log_set_handler; ///
+private alias c_g_log_set_handler_fullFn = extern(C) uint function(const(char)* logDomain, GLogLevelFlags logLevels, GLogFunc logFunc, void* userData, GDestroyNotify destroy) nothrow;
+__gshared c_g_log_set_handler_fullFn c_g_log_set_handler_full; ///
+private alias c_g_log_set_writer_funcFn = extern(C) void function(GLogWriterFunc func, void* userData, GDestroyNotify userDataFree) nothrow;
+__gshared c_g_log_set_writer_funcFn c_g_log_set_writer_func; ///
+private alias c_g_log_structuredFn = extern(C) void function(const(char)* logDomain, GLogLevelFlags logLevel,  ...) nothrow;
+__gshared c_g_log_structuredFn c_g_log_structured; ///
+private alias c_g_log_structured_arrayFn = extern(C) void function(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields) nothrow;
+__gshared c_g_log_structured_arrayFn c_g_log_structured_array; ///
+private alias c_g_log_structured_standardFn = extern(C) void function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* file, const(char)* line, const(char)* func, const(char)* messageFormat,  ...) nothrow;
+__gshared c_g_log_structured_standardFn c_g_log_structured_standard; ///
+private alias c_g_log_variantFn = extern(C) void function(const(char)* logDomain, GLogLevelFlags logLevel, GVariant* fields) nothrow;
+__gshared c_g_log_variantFn c_g_log_variant; ///
+private alias c_g_log_writer_defaultFn = extern(C) GLogWriterOutput function(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields, void* userData) nothrow;
+__gshared c_g_log_writer_defaultFn c_g_log_writer_default; ///
+private alias c_g_log_writer_default_set_debug_domainsFn = extern(C) void function(const(char*)* domains) nothrow;
+__gshared c_g_log_writer_default_set_debug_domainsFn c_g_log_writer_default_set_debug_domains; ///
+private alias c_g_log_writer_default_set_use_stderrFn = extern(C) void function(gboolean useStderr) nothrow;
+__gshared c_g_log_writer_default_set_use_stderrFn c_g_log_writer_default_set_use_stderr; ///
+private alias c_g_log_writer_default_would_dropFn = extern(C) gboolean function(GLogLevelFlags logLevel, const(char)* logDomain) nothrow;
+__gshared c_g_log_writer_default_would_dropFn c_g_log_writer_default_would_drop; ///
+private alias c_g_log_writer_format_fieldsFn = extern(C) char* function(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields, gboolean useColor) nothrow;
+__gshared c_g_log_writer_format_fieldsFn c_g_log_writer_format_fields; ///
+private alias c_g_log_writer_is_journaldFn = extern(C) gboolean function(int outputFd) nothrow;
+__gshared c_g_log_writer_is_journaldFn c_g_log_writer_is_journald; ///
+private alias c_g_log_writer_journaldFn = extern(C) GLogWriterOutput function(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields, void* userData) nothrow;
+__gshared c_g_log_writer_journaldFn c_g_log_writer_journald; ///
+private alias c_g_log_writer_standard_streamsFn = extern(C) GLogWriterOutput function(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields, void* userData) nothrow;
+__gshared c_g_log_writer_standard_streamsFn c_g_log_writer_standard_streams; ///
+private alias c_g_log_writer_supports_colorFn = extern(C) gboolean function(int outputFd) nothrow;
+__gshared c_g_log_writer_supports_colorFn c_g_log_writer_supports_color; ///
+private alias c_g_log_writer_syslogFn = extern(C) GLogWriterOutput function(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields, void* userData) nothrow;
+__gshared c_g_log_writer_syslogFn c_g_log_writer_syslog; ///
+private alias c_g_logvFn = extern(C) void function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* format, void* args) nothrow;
+__gshared c_g_logvFn c_g_logv; ///
+private alias c_g_lstatFn = extern(C) int function(const(char)* filename, GStatBuf* buf) nothrow;
+__gshared c_g_lstatFn c_g_lstat; ///
+private alias c_g_main_current_sourceFn = extern(C) GSource* function() nothrow;
+__gshared c_g_main_current_sourceFn c_g_main_current_source; ///
+private alias c_g_main_depthFn = extern(C) int function() nothrow;
+__gshared c_g_main_depthFn c_g_main_depth; ///
+private alias c_g_mallocFn = extern(C) void* function(size_t nBytes) nothrow;
+__gshared c_g_mallocFn c_g_malloc; ///
+private alias c_g_malloc0Fn = extern(C) void* function(size_t nBytes) nothrow;
+__gshared c_g_malloc0Fn c_g_malloc0; ///
+private alias c_g_malloc0_nFn = extern(C) void* function(size_t nBlocks, size_t nBlockBytes) nothrow;
+__gshared c_g_malloc0_nFn c_g_malloc0_n; ///
+private alias c_g_malloc_nFn = extern(C) void* function(size_t nBlocks, size_t nBlockBytes) nothrow;
+__gshared c_g_malloc_nFn c_g_malloc_n; ///
+private alias c_g_markup_collect_attributesFn = extern(C) gboolean function(const(char)* elementName, const(char*)* attributeNames, const(char*)* attributeValues, GError** error, GMarkupCollectType firstType, const(char)* firstAttr,  ...) nothrow;
+__gshared c_g_markup_collect_attributesFn c_g_markup_collect_attributes; ///
+private alias c_g_markup_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_markup_error_quarkFn c_g_markup_error_quark; ///
+private alias c_g_markup_escape_textFn = extern(C) char* function(const(char)* text, ptrdiff_t length) nothrow;
+__gshared c_g_markup_escape_textFn c_g_markup_escape_text; ///
+private alias c_g_markup_printf_escapedFn = extern(C) char* function(const(char)* format,  ...) nothrow;
+__gshared c_g_markup_printf_escapedFn c_g_markup_printf_escaped; ///
+private alias c_g_markup_vprintf_escapedFn = extern(C) char* function(const(char)* format, void* args) nothrow;
+__gshared c_g_markup_vprintf_escapedFn c_g_markup_vprintf_escaped; ///
+private alias c_g_mem_is_system_mallocFn = extern(C) gboolean function() nothrow;
+__gshared c_g_mem_is_system_mallocFn c_g_mem_is_system_malloc; ///
+private alias c_g_mem_profileFn = extern(C) void function() nothrow;
+__gshared c_g_mem_profileFn c_g_mem_profile; ///
+private alias c_g_mem_set_vtableFn = extern(C) void function(GMemVTable* vtable) nothrow;
+__gshared c_g_mem_set_vtableFn c_g_mem_set_vtable; ///
+private alias c_g_memdupFn = extern(C) void* function(const(void)* mem, uint byteSize) nothrow;
+__gshared c_g_memdupFn c_g_memdup; ///
+private alias c_g_memdup2Fn = extern(C) void* function(const(void)* mem, size_t byteSize) nothrow;
+__gshared c_g_memdup2Fn c_g_memdup2; ///
+private alias c_g_mkdirFn = extern(C) int function(const(char)* filename, int mode) nothrow;
+__gshared c_g_mkdirFn c_g_mkdir; ///
+private alias c_g_mkdir_with_parentsFn = extern(C) int function(const(char)* pathname, int mode) nothrow;
+__gshared c_g_mkdir_with_parentsFn c_g_mkdir_with_parents; ///
+private alias c_g_mkdtempFn = extern(C) char* function(char* tmpl) nothrow;
+__gshared c_g_mkdtempFn c_g_mkdtemp; ///
+private alias c_g_mkdtemp_fullFn = extern(C) char* function(char* tmpl, int mode) nothrow;
+__gshared c_g_mkdtemp_fullFn c_g_mkdtemp_full; ///
+private alias c_g_mkstempFn = extern(C) int function(char* tmpl) nothrow;
+__gshared c_g_mkstempFn c_g_mkstemp; ///
+private alias c_g_mkstemp_fullFn = extern(C) int function(char* tmpl, int flags, int mode) nothrow;
+__gshared c_g_mkstemp_fullFn c_g_mkstemp_full; ///
+private alias c_g_nullify_pointerFn = extern(C) void function(void** nullifyLocation) nothrow;
+__gshared c_g_nullify_pointerFn c_g_nullify_pointer; ///
+private alias c_g_number_parser_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_number_parser_error_quarkFn c_g_number_parser_error_quark; ///
+private alias c_g_on_error_queryFn = extern(C) void function(const(char)* prgName) nothrow;
+__gshared c_g_on_error_queryFn c_g_on_error_query; ///
+private alias c_g_on_error_stack_traceFn = extern(C) void function(const(char)* prgName) nothrow;
+__gshared c_g_on_error_stack_traceFn c_g_on_error_stack_trace; ///
+private alias c_g_openFn = extern(C) int function(const(char)* filename, int flags, int mode) nothrow;
+__gshared c_g_openFn c_g_open; ///
+private alias c_g_option_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_option_error_quarkFn c_g_option_error_quark; ///
+private alias c_g_parse_debug_stringFn = extern(C) uint function(const(char)* string_, const(GDebugKey)* keys, uint nkeys) nothrow;
+__gshared c_g_parse_debug_stringFn c_g_parse_debug_string; ///
+private alias c_g_path_get_basenameFn = extern(C) char* function(const(char)* fileName) nothrow;
+__gshared c_g_path_get_basenameFn c_g_path_get_basename; ///
+private alias c_g_path_get_dirnameFn = extern(C) char* function(const(char)* fileName) nothrow;
+__gshared c_g_path_get_dirnameFn c_g_path_get_dirname; ///
+private alias c_g_path_is_absoluteFn = extern(C) gboolean function(const(char)* fileName) nothrow;
+__gshared c_g_path_is_absoluteFn c_g_path_is_absolute; ///
+private alias c_g_path_skip_rootFn = extern(C) const(char)* function(const(char)* fileName) nothrow;
+__gshared c_g_path_skip_rootFn c_g_path_skip_root; ///
+private alias c_g_pattern_matchFn = extern(C) gboolean function(GPatternSpec* pspec, uint stringLength, const(char)* string_, const(char)* stringReversed) nothrow;
+__gshared c_g_pattern_matchFn c_g_pattern_match; ///
+private alias c_g_pattern_match_simpleFn = extern(C) gboolean function(const(char)* pattern, const(char)* string_) nothrow;
+__gshared c_g_pattern_match_simpleFn c_g_pattern_match_simple; ///
+private alias c_g_pattern_match_stringFn = extern(C) gboolean function(GPatternSpec* pspec, const(char)* string_) nothrow;
+__gshared c_g_pattern_match_stringFn c_g_pattern_match_string; ///
+private alias c_g_pointer_bit_lockFn = extern(C) void function(void* address, int lockBit) nothrow;
+__gshared c_g_pointer_bit_lockFn c_g_pointer_bit_lock; ///
+private alias c_g_pointer_bit_lock_and_getFn = extern(C) void function(void* address, uint lockBit, size_t* outPtr) nothrow;
+__gshared c_g_pointer_bit_lock_and_getFn c_g_pointer_bit_lock_and_get; ///
+private alias c_g_pointer_bit_lock_mask_ptrFn = extern(C) void* function(void* ptr, uint lockBit, gboolean set, size_t preserveMask, void* preservePtr) nothrow;
+__gshared c_g_pointer_bit_lock_mask_ptrFn c_g_pointer_bit_lock_mask_ptr; ///
+private alias c_g_pointer_bit_trylockFn = extern(C) gboolean function(void* address, int lockBit) nothrow;
+__gshared c_g_pointer_bit_trylockFn c_g_pointer_bit_trylock; ///
+private alias c_g_pointer_bit_unlockFn = extern(C) void function(void* address, int lockBit) nothrow;
+__gshared c_g_pointer_bit_unlockFn c_g_pointer_bit_unlock; ///
+private alias c_g_pointer_bit_unlock_and_setFn = extern(C) void function(void* address, uint lockBit, void* ptr, size_t preserveMask) nothrow;
+__gshared c_g_pointer_bit_unlock_and_setFn c_g_pointer_bit_unlock_and_set; ///
+private alias c_g_pollFn = extern(C) int function(GPollFD* fds, uint nfds, int timeout) nothrow;
+__gshared c_g_pollFn c_g_poll; ///
+private alias c_g_prefix_errorFn = extern(C) void function(GError** err, const(char)* format,  ...) nothrow;
+__gshared c_g_prefix_errorFn c_g_prefix_error; ///
+private alias c_g_prefix_error_literalFn = extern(C) void function(GError** err, const(char)* prefix) nothrow;
+__gshared c_g_prefix_error_literalFn c_g_prefix_error_literal; ///
+private alias c_g_printFn = extern(C) void function(const(char)* format,  ...) nothrow;
+__gshared c_g_printFn c_g_print; ///
+private alias c_g_printerrFn = extern(C) void function(const(char)* format,  ...) nothrow;
+__gshared c_g_printerrFn c_g_printerr; ///
+private alias c_g_printfFn = extern(C) int function(const(char)* format,  ...) nothrow;
+__gshared c_g_printfFn c_g_printf; ///
+private alias c_g_printf_string_upper_boundFn = extern(C) size_t function(const(char)* format, void* args) nothrow;
+__gshared c_g_printf_string_upper_boundFn c_g_printf_string_upper_bound; ///
+private alias c_g_propagate_errorFn = extern(C) void function(GError** dest, GError* src) nothrow;
+__gshared c_g_propagate_errorFn c_g_propagate_error; ///
+private alias c_g_propagate_prefixed_errorFn = extern(C) void function(GError** dest, GError* src, const(char)* format,  ...) nothrow;
+__gshared c_g_propagate_prefixed_errorFn c_g_propagate_prefixed_error; ///
+private alias c_g_qsort_with_dataFn = extern(C) void function(const(void)* pbase, int totalElems, size_t size, GCompareDataFunc compareFunc, void* userData) nothrow;
+__gshared c_g_qsort_with_dataFn c_g_qsort_with_data; ///
+private alias c_g_quark_from_static_stringFn = extern(C) GQuark function(const(char)* string_) nothrow;
+__gshared c_g_quark_from_static_stringFn c_g_quark_from_static_string; ///
+private alias c_g_quark_from_stringFn = extern(C) GQuark function(const(char)* string_) nothrow;
+__gshared c_g_quark_from_stringFn c_g_quark_from_string; ///
+private alias c_g_quark_to_stringFn = extern(C) const(char)* function(GQuark quark) nothrow;
+__gshared c_g_quark_to_stringFn c_g_quark_to_string; ///
+private alias c_g_quark_try_stringFn = extern(C) GQuark function(const(char)* string_) nothrow;
+__gshared c_g_quark_try_stringFn c_g_quark_try_string; ///
+private alias c_g_random_doubleFn = extern(C) double function() nothrow;
+__gshared c_g_random_doubleFn c_g_random_double; ///
+private alias c_g_random_double_rangeFn = extern(C) double function(double begin, double end) nothrow;
+__gshared c_g_random_double_rangeFn c_g_random_double_range; ///
+private alias c_g_random_intFn = extern(C) uint function() nothrow;
+__gshared c_g_random_intFn c_g_random_int; ///
+private alias c_g_random_int_rangeFn = extern(C) int function(int begin, int end) nothrow;
+__gshared c_g_random_int_rangeFn c_g_random_int_range; ///
+private alias c_g_random_set_seedFn = extern(C) void function(uint seed) nothrow;
+__gshared c_g_random_set_seedFn c_g_random_set_seed; ///
+private alias c_g_rc_box_acquireFn = extern(C) void* function(void* memBlock) nothrow;
+__gshared c_g_rc_box_acquireFn c_g_rc_box_acquire; ///
+private alias c_g_rc_box_allocFn = extern(C) void* function(size_t blockSize) nothrow;
+__gshared c_g_rc_box_allocFn c_g_rc_box_alloc; ///
+private alias c_g_rc_box_alloc0Fn = extern(C) void* function(size_t blockSize) nothrow;
+__gshared c_g_rc_box_alloc0Fn c_g_rc_box_alloc0; ///
+private alias c_g_rc_box_dupFn = extern(C) void* function(size_t blockSize, const(void)* memBlock) nothrow;
+__gshared c_g_rc_box_dupFn c_g_rc_box_dup; ///
+private alias c_g_rc_box_get_sizeFn = extern(C) size_t function(void* memBlock) nothrow;
+__gshared c_g_rc_box_get_sizeFn c_g_rc_box_get_size; ///
+private alias c_g_rc_box_releaseFn = extern(C) void function(void* memBlock) nothrow;
+__gshared c_g_rc_box_releaseFn c_g_rc_box_release; ///
+private alias c_g_rc_box_release_fullFn = extern(C) void function(void* memBlock, GDestroyNotify clearFunc) nothrow;
+__gshared c_g_rc_box_release_fullFn c_g_rc_box_release_full; ///
+private alias c_g_reallocFn = extern(C) void* function(void* mem, size_t nBytes) nothrow;
+__gshared c_g_reallocFn c_g_realloc; ///
+private alias c_g_realloc_nFn = extern(C) void* function(void* mem, size_t nBlocks, size_t nBlockBytes) nothrow;
+__gshared c_g_realloc_nFn c_g_realloc_n; ///
+private alias c_g_ref_count_compareFn = extern(C) gboolean function(int* rc, int val) nothrow;
+__gshared c_g_ref_count_compareFn c_g_ref_count_compare; ///
+private alias c_g_ref_count_decFn = extern(C) gboolean function(int* rc) nothrow;
+__gshared c_g_ref_count_decFn c_g_ref_count_dec; ///
+private alias c_g_ref_count_incFn = extern(C) void function(int* rc) nothrow;
+__gshared c_g_ref_count_incFn c_g_ref_count_inc; ///
+private alias c_g_ref_count_initFn = extern(C) void function(int* rc) nothrow;
+__gshared c_g_ref_count_initFn c_g_ref_count_init; ///
+private alias c_g_ref_string_acquireFn = extern(C) char* function(char* str) nothrow;
+__gshared c_g_ref_string_acquireFn c_g_ref_string_acquire; ///
+private alias c_g_ref_string_equalFn = extern(C) gboolean function(const(char)* str1, const(char)* str2) nothrow;
+__gshared c_g_ref_string_equalFn c_g_ref_string_equal; ///
+private alias c_g_ref_string_lengthFn = extern(C) size_t function(char* str) nothrow;
+__gshared c_g_ref_string_lengthFn c_g_ref_string_length; ///
+private alias c_g_ref_string_newFn = extern(C) char* function(const(char)* str) nothrow;
+__gshared c_g_ref_string_newFn c_g_ref_string_new; ///
+private alias c_g_ref_string_new_internFn = extern(C) char* function(const(char)* str) nothrow;
+__gshared c_g_ref_string_new_internFn c_g_ref_string_new_intern; ///
+private alias c_g_ref_string_new_lenFn = extern(C) char* function(const(char)* str, ptrdiff_t len) nothrow;
+__gshared c_g_ref_string_new_lenFn c_g_ref_string_new_len; ///
+private alias c_g_ref_string_releaseFn = extern(C) void function(char* str) nothrow;
+__gshared c_g_ref_string_releaseFn c_g_ref_string_release; ///
+private alias c_g_reload_user_special_dirs_cacheFn = extern(C) void function() nothrow;
+__gshared c_g_reload_user_special_dirs_cacheFn c_g_reload_user_special_dirs_cache; ///
+private alias c_g_removeFn = extern(C) int function(const(char)* filename) nothrow;
+__gshared c_g_removeFn c_g_remove; ///
+private alias c_g_renameFn = extern(C) int function(const(char)* oldfilename, const(char)* newfilename) nothrow;
+__gshared c_g_renameFn c_g_rename; ///
+private alias c_g_return_if_fail_warningFn = extern(C) void function(const(char)* logDomain, const(char)* prettyFunction, const(char)* expression) nothrow;
+__gshared c_g_return_if_fail_warningFn c_g_return_if_fail_warning; ///
+private alias c_g_rmdirFn = extern(C) int function(const(char)* filename) nothrow;
+__gshared c_g_rmdirFn c_g_rmdir; ///
+private alias c_g_set_application_nameFn = extern(C) void function(const(char)* applicationName) nothrow;
+__gshared c_g_set_application_nameFn c_g_set_application_name; ///
+private alias c_g_set_errorFn = extern(C) void function(GError** err, GQuark domain, int code, const(char)* format,  ...) nothrow;
+__gshared c_g_set_errorFn c_g_set_error; ///
+private alias c_g_set_error_literalFn = extern(C) void function(GError** err, GQuark domain, int code, const(char)* message) nothrow;
+__gshared c_g_set_error_literalFn c_g_set_error_literal; ///
+private alias c_g_set_prgnameFn = extern(C) void function(const(char)* prgname) nothrow;
+__gshared c_g_set_prgnameFn c_g_set_prgname; ///
+private alias c_g_set_print_handlerFn = extern(C) GPrintFunc function(GPrintFunc func) nothrow;
+__gshared c_g_set_print_handlerFn c_g_set_print_handler; ///
+private alias c_g_set_printerr_handlerFn = extern(C) GPrintFunc function(GPrintFunc func) nothrow;
+__gshared c_g_set_printerr_handlerFn c_g_set_printerr_handler; ///
+private alias c_g_setenvFn = extern(C) gboolean function(const(char)* variable, const(char)* value, gboolean overwrite) nothrow;
+__gshared c_g_setenvFn c_g_setenv; ///
+private alias c_g_shell_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_shell_error_quarkFn c_g_shell_error_quark; ///
+private alias c_g_shell_parse_argvFn = extern(C) gboolean function(const(char)* commandLine, int* argcp, char*** argvp, GError** _err) nothrow;
+__gshared c_g_shell_parse_argvFn c_g_shell_parse_argv; ///
+private alias c_g_shell_quoteFn = extern(C) char* function(const(char)* unquotedString) nothrow;
+__gshared c_g_shell_quoteFn c_g_shell_quote; ///
+private alias c_g_shell_unquoteFn = extern(C) char* function(const(char)* quotedString, GError** _err) nothrow;
+__gshared c_g_shell_unquoteFn c_g_shell_unquote; ///
+private alias c_g_slice_allocFn = extern(C) void* function(size_t blockSize) nothrow;
+__gshared c_g_slice_allocFn c_g_slice_alloc; ///
+private alias c_g_slice_alloc0Fn = extern(C) void* function(size_t blockSize) nothrow;
+__gshared c_g_slice_alloc0Fn c_g_slice_alloc0; ///
+private alias c_g_slice_copyFn = extern(C) void* function(size_t blockSize, const(void)* memBlock) nothrow;
+__gshared c_g_slice_copyFn c_g_slice_copy; ///
+private alias c_g_slice_free1Fn = extern(C) void function(size_t blockSize, void* memBlock) nothrow;
+__gshared c_g_slice_free1Fn c_g_slice_free1; ///
+private alias c_g_slice_free_chain_with_offsetFn = extern(C) void function(size_t blockSize, void* memChain, size_t nextOffset) nothrow;
+__gshared c_g_slice_free_chain_with_offsetFn c_g_slice_free_chain_with_offset; ///
+private alias c_g_slice_get_configFn = extern(C) long function(GSliceConfig ckey) nothrow;
+__gshared c_g_slice_get_configFn c_g_slice_get_config; ///
+private alias c_g_slice_get_config_stateFn = extern(C) const(long)* function(GSliceConfig ckey, long address, uint* nValues) nothrow;
+__gshared c_g_slice_get_config_stateFn c_g_slice_get_config_state; ///
+private alias c_g_slice_set_configFn = extern(C) void function(GSliceConfig ckey, long value) nothrow;
+__gshared c_g_slice_set_configFn c_g_slice_set_config; ///
+private alias c_g_snprintfFn = extern(C) int function(char* string_, gulong n, const(char)* format,  ...) nothrow;
+__gshared c_g_snprintfFn c_g_snprintf; ///
+private alias c_g_sort_arrayFn = extern(C) void function(void* array, size_t nElements, size_t elementSize, GCompareDataFunc compareFunc, void* userData) nothrow;
+__gshared c_g_sort_arrayFn c_g_sort_array; ///
+private alias c_g_spaced_primes_closestFn = extern(C) uint function(uint num) nothrow;
+__gshared c_g_spaced_primes_closestFn c_g_spaced_primes_closest; ///
+private alias c_g_spawn_asyncFn = extern(C) gboolean function(const(char)* workingDirectory, char** argv, char** envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, GPid* childPid, GError** _err) nothrow;
+__gshared c_g_spawn_asyncFn c_g_spawn_async; ///
+private alias c_g_spawn_async_with_fdsFn = extern(C) gboolean function(const(char)* workingDirectory, char** argv, char** envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, GPid* childPid, int stdinFd, int stdoutFd, int stderrFd, GError** _err) nothrow;
+__gshared c_g_spawn_async_with_fdsFn c_g_spawn_async_with_fds; ///
+private alias c_g_spawn_async_with_pipesFn = extern(C) gboolean function(const(char)* workingDirectory, char** argv, char** envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, GPid* childPid, int* standardInput, int* standardOutput, int* standardError, GError** _err) nothrow;
+__gshared c_g_spawn_async_with_pipesFn c_g_spawn_async_with_pipes; ///
+private alias c_g_spawn_async_with_pipes_and_fdsFn = extern(C) gboolean function(const(char)* workingDirectory, const(char*)* argv, const(char*)* envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, int stdinFd, int stdoutFd, int stderrFd, const(int)* sourceFds, const(int)* targetFds, size_t nFds, GPid* childPidOut, int* stdinPipeOut, int* stdoutPipeOut, int* stderrPipeOut, GError** _err) nothrow;
+__gshared c_g_spawn_async_with_pipes_and_fdsFn c_g_spawn_async_with_pipes_and_fds; ///
+private alias c_g_spawn_check_exit_statusFn = extern(C) gboolean function(int waitStatus, GError** _err) nothrow;
+__gshared c_g_spawn_check_exit_statusFn c_g_spawn_check_exit_status; ///
+private alias c_g_spawn_check_wait_statusFn = extern(C) gboolean function(int waitStatus, GError** _err) nothrow;
+__gshared c_g_spawn_check_wait_statusFn c_g_spawn_check_wait_status; ///
+private alias c_g_spawn_close_pidFn = extern(C) void function(GPid pid) nothrow;
+__gshared c_g_spawn_close_pidFn c_g_spawn_close_pid; ///
+private alias c_g_spawn_command_line_asyncFn = extern(C) gboolean function(const(char)* commandLine, GError** _err) nothrow;
+__gshared c_g_spawn_command_line_asyncFn c_g_spawn_command_line_async; ///
+private alias c_g_spawn_command_line_syncFn = extern(C) gboolean function(const(char)* commandLine, char** standardOutput, char** standardError, int* waitStatus, GError** _err) nothrow;
+__gshared c_g_spawn_command_line_syncFn c_g_spawn_command_line_sync; ///
+private alias c_g_spawn_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_spawn_error_quarkFn c_g_spawn_error_quark; ///
+private alias c_g_spawn_exit_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_spawn_exit_error_quarkFn c_g_spawn_exit_error_quark; ///
+private alias c_g_spawn_syncFn = extern(C) gboolean function(const(char)* workingDirectory, char** argv, char** envp, GSpawnFlags flags, GSpawnChildSetupFunc childSetup, void* userData, char** standardOutput, char** standardError, int* waitStatus, GError** _err) nothrow;
+__gshared c_g_spawn_syncFn c_g_spawn_sync; ///
+private alias c_g_sprintfFn = extern(C) int function(char* string_, const(char)* format,  ...) nothrow;
+__gshared c_g_sprintfFn c_g_sprintf; ///
+private alias c_g_statFn = extern(C) int function(const(char)* filename, GStatBuf* buf) nothrow;
+__gshared c_g_statFn c_g_stat; ///
+private alias c_g_stpcpyFn = extern(C) char* function(char* dest, const(char)* src) nothrow;
+__gshared c_g_stpcpyFn c_g_stpcpy; ///
+private alias c_g_str_equalFn = extern(C) gboolean function(const(void)* v1, const(void)* v2) nothrow;
+__gshared c_g_str_equalFn c_g_str_equal; ///
+private alias c_g_str_has_prefixFn = extern(C) gboolean function(const(char)* str, const(char)* prefix) nothrow;
+__gshared c_g_str_has_prefixFn c_g_str_has_prefix; ///
+private alias c_g_str_has_suffixFn = extern(C) gboolean function(const(char)* str, const(char)* suffix) nothrow;
+__gshared c_g_str_has_suffixFn c_g_str_has_suffix; ///
+private alias c_g_str_hashFn = extern(C) uint function(const(void)* v) nothrow;
+__gshared c_g_str_hashFn c_g_str_hash; ///
+private alias c_g_str_is_asciiFn = extern(C) gboolean function(const(char)* str) nothrow;
+__gshared c_g_str_is_asciiFn c_g_str_is_ascii; ///
+private alias c_g_str_match_stringFn = extern(C) gboolean function(const(char)* searchTerm, const(char)* potentialHit, gboolean acceptAlternates) nothrow;
+__gshared c_g_str_match_stringFn c_g_str_match_string; ///
+private alias c_g_str_to_asciiFn = extern(C) char* function(const(char)* str, const(char)* fromLocale) nothrow;
+__gshared c_g_str_to_asciiFn c_g_str_to_ascii; ///
+private alias c_g_str_tokenize_and_foldFn = extern(C) char** function(const(char)* string_, const(char)* translitLocale, char*** asciiAlternates) nothrow;
+__gshared c_g_str_tokenize_and_foldFn c_g_str_tokenize_and_fold; ///
+private alias c_g_strcanonFn = extern(C) char* function(char* string_, const(char)* validChars, char substitutor) nothrow;
+__gshared c_g_strcanonFn c_g_strcanon; ///
+private alias c_g_strcasecmpFn = extern(C) int function(const(char)* s1, const(char)* s2) nothrow;
+__gshared c_g_strcasecmpFn c_g_strcasecmp; ///
+private alias c_g_strchompFn = extern(C) char* function(char* string_) nothrow;
+__gshared c_g_strchompFn c_g_strchomp; ///
+private alias c_g_strchugFn = extern(C) char* function(char* string_) nothrow;
+__gshared c_g_strchugFn c_g_strchug; ///
+private alias c_g_strcmp0Fn = extern(C) int function(const(char)* str1, const(char)* str2) nothrow;
+__gshared c_g_strcmp0Fn c_g_strcmp0; ///
+private alias c_g_strcompressFn = extern(C) char* function(const(char)* source) nothrow;
+__gshared c_g_strcompressFn c_g_strcompress; ///
+private alias c_g_strconcatFn = extern(C) char* function(const(char)* string1,  ...) nothrow;
+__gshared c_g_strconcatFn c_g_strconcat; ///
+private alias c_g_strdelimitFn = extern(C) char* function(char* string_, const(char)* delimiters, char newDelimiter) nothrow;
+__gshared c_g_strdelimitFn c_g_strdelimit; ///
+private alias c_g_strdownFn = extern(C) char* function(char* string_) nothrow;
+__gshared c_g_strdownFn c_g_strdown; ///
+private alias c_g_strdupFn = extern(C) char* function(const(char)* str) nothrow;
+__gshared c_g_strdupFn c_g_strdup; ///
+private alias c_g_strdup_printfFn = extern(C) char* function(const(char)* format,  ...) nothrow;
+__gshared c_g_strdup_printfFn c_g_strdup_printf; ///
+private alias c_g_strdup_vprintfFn = extern(C) char* function(const(char)* format, void* args) nothrow;
+__gshared c_g_strdup_vprintfFn c_g_strdup_vprintf; ///
+private alias c_g_strdupvFn = extern(C) char** function(char** strArray) nothrow;
+__gshared c_g_strdupvFn c_g_strdupv; ///
+private alias c_g_strerrorFn = extern(C) const(char)* function(int errnum) nothrow;
+__gshared c_g_strerrorFn c_g_strerror; ///
+private alias c_g_strescapeFn = extern(C) char* function(const(char)* source, const(char)* exceptions) nothrow;
+__gshared c_g_strescapeFn c_g_strescape; ///
+private alias c_g_strfreevFn = extern(C) void function(char** strArray) nothrow;
+__gshared c_g_strfreevFn c_g_strfreev; ///
+private alias c_g_strip_contextFn = extern(C) const(char)* function(const(char)* msgid, const(char)* msgval) nothrow;
+__gshared c_g_strip_contextFn c_g_strip_context; ///
+private alias c_g_strjoinFn = extern(C) char* function(const(char)* separator,  ...) nothrow;
+__gshared c_g_strjoinFn c_g_strjoin; ///
+private alias c_g_strjoinvFn = extern(C) char* function(const(char)* separator, char** strArray) nothrow;
+__gshared c_g_strjoinvFn c_g_strjoinv; ///
+private alias c_g_strlcatFn = extern(C) size_t function(char* dest, const(char)* src, size_t destSize) nothrow;
+__gshared c_g_strlcatFn c_g_strlcat; ///
+private alias c_g_strlcpyFn = extern(C) size_t function(char* dest, const(char)* src, size_t destSize) nothrow;
+__gshared c_g_strlcpyFn c_g_strlcpy; ///
+private alias c_g_strncasecmpFn = extern(C) int function(const(char)* s1, const(char)* s2, uint n) nothrow;
+__gshared c_g_strncasecmpFn c_g_strncasecmp; ///
+private alias c_g_strndupFn = extern(C) char* function(const(char)* str, size_t n) nothrow;
+__gshared c_g_strndupFn c_g_strndup; ///
+private alias c_g_strnfillFn = extern(C) char* function(size_t length, char fillChar) nothrow;
+__gshared c_g_strnfillFn c_g_strnfill; ///
+private alias c_g_strreverseFn = extern(C) char* function(char* string_) nothrow;
+__gshared c_g_strreverseFn c_g_strreverse; ///
+private alias c_g_strrstrFn = extern(C) char* function(const(char)* haystack, const(char)* needle) nothrow;
+__gshared c_g_strrstrFn c_g_strrstr; ///
+private alias c_g_strrstr_lenFn = extern(C) char* function(const(char)* haystack, ptrdiff_t haystackLen, const(char)* needle) nothrow;
+__gshared c_g_strrstr_lenFn c_g_strrstr_len; ///
+private alias c_g_strsignalFn = extern(C) const(char)* function(int signum) nothrow;
+__gshared c_g_strsignalFn c_g_strsignal; ///
+private alias c_g_strsplitFn = extern(C) char** function(const(char)* string_, const(char)* delimiter, int maxTokens) nothrow;
+__gshared c_g_strsplitFn c_g_strsplit; ///
+private alias c_g_strsplit_setFn = extern(C) char** function(const(char)* string_, const(char)* delimiters, int maxTokens) nothrow;
+__gshared c_g_strsplit_setFn c_g_strsplit_set; ///
+private alias c_g_strstr_lenFn = extern(C) char* function(const(char)* haystack, ptrdiff_t haystackLen, const(char)* needle) nothrow;
+__gshared c_g_strstr_lenFn c_g_strstr_len; ///
+private alias c_g_strtodFn = extern(C) double function(const(char)* nptr, char** endptr) nothrow;
+__gshared c_g_strtodFn c_g_strtod; ///
+private alias c_g_strupFn = extern(C) char* function(char* string_) nothrow;
+__gshared c_g_strupFn c_g_strup; ///
+private alias c_g_strv_containsFn = extern(C) gboolean function(const(char*)* strv, const(char)* str) nothrow;
+__gshared c_g_strv_containsFn c_g_strv_contains; ///
+private alias c_g_strv_equalFn = extern(C) gboolean function(const(char*)* strv1, const(char*)* strv2) nothrow;
+__gshared c_g_strv_equalFn c_g_strv_equal; ///
+private alias c_g_strv_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_strv_get_typeFn c_g_strv_get_type; ///
+private alias c_g_strv_lengthFn = extern(C) uint function(char** strArray) nothrow;
+__gshared c_g_strv_lengthFn c_g_strv_length; ///
+private alias c_g_test_add_data_funcFn = extern(C) void function(const(char)* testpath, const(void)* testData, GTestDataFunc testFunc) nothrow;
+__gshared c_g_test_add_data_funcFn c_g_test_add_data_func; ///
+private alias c_g_test_add_data_func_fullFn = extern(C) void function(const(char)* testpath, void* testData, GTestDataFunc testFunc, GDestroyNotify dataFreeFunc) nothrow;
+__gshared c_g_test_add_data_func_fullFn c_g_test_add_data_func_full; ///
+private alias c_g_test_add_funcFn = extern(C) void function(const(char)* testpath, GTestFunc testFunc) nothrow;
+__gshared c_g_test_add_funcFn c_g_test_add_func; ///
+private alias c_g_test_add_vtableFn = extern(C) void function(const(char)* testpath, size_t dataSize, const(void)* testData, GTestFixtureFunc dataSetup, GTestFixtureFunc dataTest, GTestFixtureFunc dataTeardown) nothrow;
+__gshared c_g_test_add_vtableFn c_g_test_add_vtable; ///
+private alias c_g_test_assert_expected_messages_internalFn = extern(C) void function(const(char)* domain, const(char)* file, int line, const(char)* func) nothrow;
+__gshared c_g_test_assert_expected_messages_internalFn c_g_test_assert_expected_messages_internal; ///
+private alias c_g_test_bugFn = extern(C) void function(const(char)* bugUriSnippet) nothrow;
+__gshared c_g_test_bugFn c_g_test_bug; ///
+private alias c_g_test_bug_baseFn = extern(C) void function(const(char)* uriPattern) nothrow;
+__gshared c_g_test_bug_baseFn c_g_test_bug_base; ///
+private alias c_g_test_build_filenameFn = extern(C) char* function(GTestFileType fileType, const(char)* firstPath,  ...) nothrow;
+__gshared c_g_test_build_filenameFn c_g_test_build_filename; ///
+private alias c_g_test_create_caseFn = extern(C) GTestCase* function(const(char)* testName, size_t dataSize, const(void)* testData, GTestFixtureFunc dataSetup, GTestFixtureFunc dataTest, GTestFixtureFunc dataTeardown) nothrow;
+__gshared c_g_test_create_caseFn c_g_test_create_case; ///
+private alias c_g_test_create_suiteFn = extern(C) GTestSuite* function(const(char)* suiteName) nothrow;
+__gshared c_g_test_create_suiteFn c_g_test_create_suite; ///
+private alias c_g_test_disable_crash_reportingFn = extern(C) void function() nothrow;
+__gshared c_g_test_disable_crash_reportingFn c_g_test_disable_crash_reporting; ///
+private alias c_g_test_expect_messageFn = extern(C) void function(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* pattern) nothrow;
+__gshared c_g_test_expect_messageFn c_g_test_expect_message; ///
+private alias c_g_test_failFn = extern(C) void function() nothrow;
+__gshared c_g_test_failFn c_g_test_fail; ///
+private alias c_g_test_fail_printfFn = extern(C) void function(const(char)* format,  ...) nothrow;
+__gshared c_g_test_fail_printfFn c_g_test_fail_printf; ///
+private alias c_g_test_failedFn = extern(C) gboolean function() nothrow;
+__gshared c_g_test_failedFn c_g_test_failed; ///
+private alias c_g_test_get_dirFn = extern(C) const(char)* function(GTestFileType fileType) nothrow;
+__gshared c_g_test_get_dirFn c_g_test_get_dir; ///
+private alias c_g_test_get_filenameFn = extern(C) const(char)* function(GTestFileType fileType, const(char)* firstPath,  ...) nothrow;
+__gshared c_g_test_get_filenameFn c_g_test_get_filename; ///
+private alias c_g_test_get_pathFn = extern(C) const(char)* function() nothrow;
+__gshared c_g_test_get_pathFn c_g_test_get_path; ///
+private alias c_g_test_get_rootFn = extern(C) GTestSuite* function() nothrow;
+__gshared c_g_test_get_rootFn c_g_test_get_root; ///
+private alias c_g_test_incompleteFn = extern(C) void function(const(char)* msg) nothrow;
+__gshared c_g_test_incompleteFn c_g_test_incomplete; ///
+private alias c_g_test_incomplete_printfFn = extern(C) void function(const(char)* format,  ...) nothrow;
+__gshared c_g_test_incomplete_printfFn c_g_test_incomplete_printf; ///
+private alias c_g_test_initFn = extern(C) void function(int* argc, char*** argv,  ...) nothrow;
+__gshared c_g_test_initFn c_g_test_init; ///
+private alias c_g_test_log_set_fatal_handlerFn = extern(C) void function(GTestLogFatalFunc logFunc, void* userData) nothrow;
+__gshared c_g_test_log_set_fatal_handlerFn c_g_test_log_set_fatal_handler; ///
+private alias c_g_test_log_type_nameFn = extern(C) const(char)* function(GTestLogType logType) nothrow;
+__gshared c_g_test_log_type_nameFn c_g_test_log_type_name; ///
+private alias c_g_test_maximized_resultFn = extern(C) void function(double maximizedQuantity, const(char)* format,  ...) nothrow;
+__gshared c_g_test_maximized_resultFn c_g_test_maximized_result; ///
+private alias c_g_test_messageFn = extern(C) void function(const(char)* format,  ...) nothrow;
+__gshared c_g_test_messageFn c_g_test_message; ///
+private alias c_g_test_minimized_resultFn = extern(C) void function(double minimizedQuantity, const(char)* format,  ...) nothrow;
+__gshared c_g_test_minimized_resultFn c_g_test_minimized_result; ///
+private alias c_g_test_queue_destroyFn = extern(C) void function(GDestroyNotify destroyFunc, void* destroyData) nothrow;
+__gshared c_g_test_queue_destroyFn c_g_test_queue_destroy; ///
+private alias c_g_test_queue_freeFn = extern(C) void function(void* gfreePointer) nothrow;
+__gshared c_g_test_queue_freeFn c_g_test_queue_free; ///
+private alias c_g_test_rand_doubleFn = extern(C) double function() nothrow;
+__gshared c_g_test_rand_doubleFn c_g_test_rand_double; ///
+private alias c_g_test_rand_double_rangeFn = extern(C) double function(double rangeStart, double rangeEnd) nothrow;
+__gshared c_g_test_rand_double_rangeFn c_g_test_rand_double_range; ///
+private alias c_g_test_rand_intFn = extern(C) int function() nothrow;
+__gshared c_g_test_rand_intFn c_g_test_rand_int; ///
+private alias c_g_test_rand_int_rangeFn = extern(C) int function(int begin, int end) nothrow;
+__gshared c_g_test_rand_int_rangeFn c_g_test_rand_int_range; ///
+private alias c_g_test_runFn = extern(C) int function() nothrow;
+__gshared c_g_test_runFn c_g_test_run; ///
+private alias c_g_test_run_suiteFn = extern(C) int function(GTestSuite* suite) nothrow;
+__gshared c_g_test_run_suiteFn c_g_test_run_suite; ///
+private alias c_g_test_set_nonfatal_assertionsFn = extern(C) void function() nothrow;
+__gshared c_g_test_set_nonfatal_assertionsFn c_g_test_set_nonfatal_assertions; ///
+private alias c_g_test_skipFn = extern(C) void function(const(char)* msg) nothrow;
+__gshared c_g_test_skipFn c_g_test_skip; ///
+private alias c_g_test_skip_printfFn = extern(C) void function(const(char)* format,  ...) nothrow;
+__gshared c_g_test_skip_printfFn c_g_test_skip_printf; ///
+private alias c_g_test_subprocessFn = extern(C) gboolean function() nothrow;
+__gshared c_g_test_subprocessFn c_g_test_subprocess; ///
+private alias c_g_test_summaryFn = extern(C) void function(const(char)* summary) nothrow;
+__gshared c_g_test_summaryFn c_g_test_summary; ///
+private alias c_g_test_timer_elapsedFn = extern(C) double function() nothrow;
+__gshared c_g_test_timer_elapsedFn c_g_test_timer_elapsed; ///
+private alias c_g_test_timer_lastFn = extern(C) double function() nothrow;
+__gshared c_g_test_timer_lastFn c_g_test_timer_last; ///
+private alias c_g_test_timer_startFn = extern(C) void function() nothrow;
+__gshared c_g_test_timer_startFn c_g_test_timer_start; ///
+private alias c_g_test_trap_assertionsFn = extern(C) void function(const(char)* domain, const(char)* file, int line, const(char)* func, ulong assertionFlags, const(char)* pattern) nothrow;
+__gshared c_g_test_trap_assertionsFn c_g_test_trap_assertions; ///
+private alias c_g_test_trap_forkFn = extern(C) gboolean function(ulong usecTimeout, GTestTrapFlags testTrapFlags) nothrow;
+__gshared c_g_test_trap_forkFn c_g_test_trap_fork; ///
+private alias c_g_test_trap_has_passedFn = extern(C) gboolean function() nothrow;
+__gshared c_g_test_trap_has_passedFn c_g_test_trap_has_passed; ///
+private alias c_g_test_trap_has_skippedFn = extern(C) gboolean function() nothrow;
+__gshared c_g_test_trap_has_skippedFn c_g_test_trap_has_skipped; ///
+private alias c_g_test_trap_reached_timeoutFn = extern(C) gboolean function() nothrow;
+__gshared c_g_test_trap_reached_timeoutFn c_g_test_trap_reached_timeout; ///
+private alias c_g_test_trap_subprocessFn = extern(C) void function(const(char)* testPath, ulong usecTimeout, GTestSubprocessFlags testFlags) nothrow;
+__gshared c_g_test_trap_subprocessFn c_g_test_trap_subprocess; ///
+private alias c_g_test_trap_subprocess_with_envpFn = extern(C) void function(const(char)* testPath, const(char*)* envp, ulong usecTimeout, GTestSubprocessFlags testFlags) nothrow;
+__gshared c_g_test_trap_subprocess_with_envpFn c_g_test_trap_subprocess_with_envp; ///
+private alias c_g_timeout_addFn = extern(C) uint function(uint interval, GSourceFunc function_, void* data) nothrow;
+__gshared c_g_timeout_addFn c_g_timeout_add; ///
+private alias c_g_timeout_add_fullFn = extern(C) uint function(int priority, uint interval, GSourceFunc function_, void* data, GDestroyNotify notify) nothrow;
+__gshared c_g_timeout_add_fullFn c_g_timeout_add_full; ///
+private alias c_g_timeout_add_onceFn = extern(C) uint function(uint interval, GSourceOnceFunc function_, void* data) nothrow;
+__gshared c_g_timeout_add_onceFn c_g_timeout_add_once; ///
+private alias c_g_timeout_add_secondsFn = extern(C) uint function(uint interval, GSourceFunc function_, void* data) nothrow;
+__gshared c_g_timeout_add_secondsFn c_g_timeout_add_seconds; ///
+private alias c_g_timeout_add_seconds_fullFn = extern(C) uint function(int priority, uint interval, GSourceFunc function_, void* data, GDestroyNotify notify) nothrow;
+__gshared c_g_timeout_add_seconds_fullFn c_g_timeout_add_seconds_full; ///
+private alias c_g_timeout_add_seconds_onceFn = extern(C) uint function(uint interval, GSourceOnceFunc function_, void* data) nothrow;
+__gshared c_g_timeout_add_seconds_onceFn c_g_timeout_add_seconds_once; ///
+private alias c_g_timeout_source_newFn = extern(C) GSource* function(uint interval) nothrow;
+__gshared c_g_timeout_source_newFn c_g_timeout_source_new; ///
+private alias c_g_timeout_source_new_secondsFn = extern(C) GSource* function(uint interval) nothrow;
+__gshared c_g_timeout_source_new_secondsFn c_g_timeout_source_new_seconds; ///
+private alias c_g_try_mallocFn = extern(C) void* function(size_t nBytes) nothrow;
+__gshared c_g_try_mallocFn c_g_try_malloc; ///
+private alias c_g_try_malloc0Fn = extern(C) void* function(size_t nBytes) nothrow;
+__gshared c_g_try_malloc0Fn c_g_try_malloc0; ///
+private alias c_g_try_malloc0_nFn = extern(C) void* function(size_t nBlocks, size_t nBlockBytes) nothrow;
+__gshared c_g_try_malloc0_nFn c_g_try_malloc0_n; ///
+private alias c_g_try_malloc_nFn = extern(C) void* function(size_t nBlocks, size_t nBlockBytes) nothrow;
+__gshared c_g_try_malloc_nFn c_g_try_malloc_n; ///
+private alias c_g_try_reallocFn = extern(C) void* function(void* mem, size_t nBytes) nothrow;
+__gshared c_g_try_reallocFn c_g_try_realloc; ///
+private alias c_g_try_realloc_nFn = extern(C) void* function(void* mem, size_t nBlocks, size_t nBlockBytes) nothrow;
+__gshared c_g_try_realloc_nFn c_g_try_realloc_n; ///
+private alias c_g_ucs4_to_utf16Fn = extern(C) ushort* function(const(dchar)* str, glong len, glong* itemsRead, glong* itemsWritten, GError** _err) nothrow;
+__gshared c_g_ucs4_to_utf16Fn c_g_ucs4_to_utf16; ///
+private alias c_g_ucs4_to_utf8Fn = extern(C) char* function(const(dchar)* str, glong len, glong* itemsRead, glong* itemsWritten, GError** _err) nothrow;
+__gshared c_g_ucs4_to_utf8Fn c_g_ucs4_to_utf8; ///
+private alias c_g_unichar_break_typeFn = extern(C) GUnicodeBreakType function(dchar c) nothrow;
+__gshared c_g_unichar_break_typeFn c_g_unichar_break_type; ///
+private alias c_g_unichar_combining_classFn = extern(C) int function(dchar uc) nothrow;
+__gshared c_g_unichar_combining_classFn c_g_unichar_combining_class; ///
+private alias c_g_unichar_composeFn = extern(C) gboolean function(dchar a, dchar b, dchar* ch) nothrow;
+__gshared c_g_unichar_composeFn c_g_unichar_compose; ///
+private alias c_g_unichar_decomposeFn = extern(C) gboolean function(dchar ch, dchar* a, dchar* b) nothrow;
+__gshared c_g_unichar_decomposeFn c_g_unichar_decompose; ///
+private alias c_g_unichar_digit_valueFn = extern(C) int function(dchar c) nothrow;
+__gshared c_g_unichar_digit_valueFn c_g_unichar_digit_value; ///
+private alias c_g_unichar_fully_decomposeFn = extern(C) size_t function(dchar ch, gboolean compat, dchar* result, size_t resultLen) nothrow;
+__gshared c_g_unichar_fully_decomposeFn c_g_unichar_fully_decompose; ///
+private alias c_g_unichar_get_mirror_charFn = extern(C) gboolean function(dchar ch, dchar* mirroredCh) nothrow;
+__gshared c_g_unichar_get_mirror_charFn c_g_unichar_get_mirror_char; ///
+private alias c_g_unichar_get_scriptFn = extern(C) GUnicodeScript function(dchar ch) nothrow;
+__gshared c_g_unichar_get_scriptFn c_g_unichar_get_script; ///
+private alias c_g_unichar_isalnumFn = extern(C) gboolean function(dchar c) nothrow;
+__gshared c_g_unichar_isalnumFn c_g_unichar_isalnum; ///
+private alias c_g_unichar_isalphaFn = extern(C) gboolean function(dchar c) nothrow;
+__gshared c_g_unichar_isalphaFn c_g_unichar_isalpha; ///
+private alias c_g_unichar_iscntrlFn = extern(C) gboolean function(dchar c) nothrow;
+__gshared c_g_unichar_iscntrlFn c_g_unichar_iscntrl; ///
+private alias c_g_unichar_isdefinedFn = extern(C) gboolean function(dchar c) nothrow;
+__gshared c_g_unichar_isdefinedFn c_g_unichar_isdefined; ///
+private alias c_g_unichar_isdigitFn = extern(C) gboolean function(dchar c) nothrow;
+__gshared c_g_unichar_isdigitFn c_g_unichar_isdigit; ///
+private alias c_g_unichar_isgraphFn = extern(C) gboolean function(dchar c) nothrow;
+__gshared c_g_unichar_isgraphFn c_g_unichar_isgraph; ///
+private alias c_g_unichar_islowerFn = extern(C) gboolean function(dchar c) nothrow;
+__gshared c_g_unichar_islowerFn c_g_unichar_islower; ///
+private alias c_g_unichar_ismarkFn = extern(C) gboolean function(dchar c) nothrow;
+__gshared c_g_unichar_ismarkFn c_g_unichar_ismark; ///
+private alias c_g_unichar_isprintFn = extern(C) gboolean function(dchar c) nothrow;
+__gshared c_g_unichar_isprintFn c_g_unichar_isprint; ///
+private alias c_g_unichar_ispunctFn = extern(C) gboolean function(dchar c) nothrow;
+__gshared c_g_unichar_ispunctFn c_g_unichar_ispunct; ///
+private alias c_g_unichar_isspaceFn = extern(C) gboolean function(dchar c) nothrow;
+__gshared c_g_unichar_isspaceFn c_g_unichar_isspace; ///
+private alias c_g_unichar_istitleFn = extern(C) gboolean function(dchar c) nothrow;
+__gshared c_g_unichar_istitleFn c_g_unichar_istitle; ///
+private alias c_g_unichar_isupperFn = extern(C) gboolean function(dchar c) nothrow;
+__gshared c_g_unichar_isupperFn c_g_unichar_isupper; ///
+private alias c_g_unichar_iswideFn = extern(C) gboolean function(dchar c) nothrow;
+__gshared c_g_unichar_iswideFn c_g_unichar_iswide; ///
+private alias c_g_unichar_iswide_cjkFn = extern(C) gboolean function(dchar c) nothrow;
+__gshared c_g_unichar_iswide_cjkFn c_g_unichar_iswide_cjk; ///
+private alias c_g_unichar_isxdigitFn = extern(C) gboolean function(dchar c) nothrow;
+__gshared c_g_unichar_isxdigitFn c_g_unichar_isxdigit; ///
+private alias c_g_unichar_iszerowidthFn = extern(C) gboolean function(dchar c) nothrow;
+__gshared c_g_unichar_iszerowidthFn c_g_unichar_iszerowidth; ///
+private alias c_g_unichar_to_utf8Fn = extern(C) int function(dchar c, char* outbuf) nothrow;
+__gshared c_g_unichar_to_utf8Fn c_g_unichar_to_utf8; ///
+private alias c_g_unichar_tolowerFn = extern(C) dchar function(dchar c) nothrow;
+__gshared c_g_unichar_tolowerFn c_g_unichar_tolower; ///
+private alias c_g_unichar_totitleFn = extern(C) dchar function(dchar c) nothrow;
+__gshared c_g_unichar_totitleFn c_g_unichar_totitle; ///
+private alias c_g_unichar_toupperFn = extern(C) dchar function(dchar c) nothrow;
+__gshared c_g_unichar_toupperFn c_g_unichar_toupper; ///
+private alias c_g_unichar_typeFn = extern(C) GUnicodeType function(dchar c) nothrow;
+__gshared c_g_unichar_typeFn c_g_unichar_type; ///
+private alias c_g_unichar_validateFn = extern(C) gboolean function(dchar ch) nothrow;
+__gshared c_g_unichar_validateFn c_g_unichar_validate; ///
+private alias c_g_unichar_xdigit_valueFn = extern(C) int function(dchar c) nothrow;
+__gshared c_g_unichar_xdigit_valueFn c_g_unichar_xdigit_value; ///
+private alias c_g_unicode_canonical_decompositionFn = extern(C) dchar* function(dchar ch, size_t* resultLen) nothrow;
+__gshared c_g_unicode_canonical_decompositionFn c_g_unicode_canonical_decomposition; ///
+private alias c_g_unicode_canonical_orderingFn = extern(C) void function(dchar* string_, size_t len) nothrow;
+__gshared c_g_unicode_canonical_orderingFn c_g_unicode_canonical_ordering; ///
+private alias c_g_unlinkFn = extern(C) int function(const(char)* filename) nothrow;
+__gshared c_g_unlinkFn c_g_unlink; ///
+private alias c_g_unsetenvFn = extern(C) void function(const(char)* variable) nothrow;
+__gshared c_g_unsetenvFn c_g_unsetenv; ///
+private alias c_g_usleepFn = extern(C) void function(gulong microseconds) nothrow;
+__gshared c_g_usleepFn c_g_usleep; ///
+private alias c_g_utf16_to_ucs4Fn = extern(C) dchar* function(const(ushort)* str, glong len, glong* itemsRead, glong* itemsWritten, GError** _err) nothrow;
+__gshared c_g_utf16_to_ucs4Fn c_g_utf16_to_ucs4; ///
+private alias c_g_utf16_to_utf8Fn = extern(C) char* function(const(ushort)* str, glong len, glong* itemsRead, glong* itemsWritten, GError** _err) nothrow;
+__gshared c_g_utf16_to_utf8Fn c_g_utf16_to_utf8; ///
+private alias c_g_utf8_casefoldFn = extern(C) char* function(const(char)* str, ptrdiff_t len) nothrow;
+__gshared c_g_utf8_casefoldFn c_g_utf8_casefold; ///
+private alias c_g_utf8_collateFn = extern(C) int function(const(char)* str1, const(char)* str2) nothrow;
+__gshared c_g_utf8_collateFn c_g_utf8_collate; ///
+private alias c_g_utf8_collate_keyFn = extern(C) char* function(const(char)* str, ptrdiff_t len) nothrow;
+__gshared c_g_utf8_collate_keyFn c_g_utf8_collate_key; ///
+private alias c_g_utf8_collate_key_for_filenameFn = extern(C) char* function(const(char)* str, ptrdiff_t len) nothrow;
+__gshared c_g_utf8_collate_key_for_filenameFn c_g_utf8_collate_key_for_filename; ///
+private alias c_g_utf8_find_next_charFn = extern(C) char* function(const(char)* p, const(char)* end) nothrow;
+__gshared c_g_utf8_find_next_charFn c_g_utf8_find_next_char; ///
+private alias c_g_utf8_find_prev_charFn = extern(C) char* function(const(char)* str, const(char)* p) nothrow;
+__gshared c_g_utf8_find_prev_charFn c_g_utf8_find_prev_char; ///
+private alias c_g_utf8_get_charFn = extern(C) dchar function(const(char)* p) nothrow;
+__gshared c_g_utf8_get_charFn c_g_utf8_get_char; ///
+private alias c_g_utf8_get_char_validatedFn = extern(C) dchar function(const(char)* p, ptrdiff_t maxLen) nothrow;
+__gshared c_g_utf8_get_char_validatedFn c_g_utf8_get_char_validated; ///
+private alias c_g_utf8_make_validFn = extern(C) char* function(const(char)* str, ptrdiff_t len) nothrow;
+__gshared c_g_utf8_make_validFn c_g_utf8_make_valid; ///
+private alias c_g_utf8_normalizeFn = extern(C) char* function(const(char)* str, ptrdiff_t len, GNormalizeMode mode) nothrow;
+__gshared c_g_utf8_normalizeFn c_g_utf8_normalize; ///
+private alias c_g_utf8_offset_to_pointerFn = extern(C) char* function(const(char)* str, glong offset) nothrow;
+__gshared c_g_utf8_offset_to_pointerFn c_g_utf8_offset_to_pointer; ///
+private alias c_g_utf8_pointer_to_offsetFn = extern(C) glong function(const(char)* str, const(char)* pos) nothrow;
+__gshared c_g_utf8_pointer_to_offsetFn c_g_utf8_pointer_to_offset; ///
+private alias c_g_utf8_prev_charFn = extern(C) char* function(const(char)* p) nothrow;
+__gshared c_g_utf8_prev_charFn c_g_utf8_prev_char; ///
+private alias c_g_utf8_strchrFn = extern(C) char* function(const(char)* p, ptrdiff_t len, dchar c) nothrow;
+__gshared c_g_utf8_strchrFn c_g_utf8_strchr; ///
+private alias c_g_utf8_strdownFn = extern(C) char* function(const(char)* str, ptrdiff_t len) nothrow;
+__gshared c_g_utf8_strdownFn c_g_utf8_strdown; ///
+private alias c_g_utf8_strlenFn = extern(C) glong function(const(char)* p, ptrdiff_t max) nothrow;
+__gshared c_g_utf8_strlenFn c_g_utf8_strlen; ///
+private alias c_g_utf8_strncpyFn = extern(C) char* function(char* dest, const(char)* src, size_t n) nothrow;
+__gshared c_g_utf8_strncpyFn c_g_utf8_strncpy; ///
+private alias c_g_utf8_strrchrFn = extern(C) char* function(const(char)* p, ptrdiff_t len, dchar c) nothrow;
+__gshared c_g_utf8_strrchrFn c_g_utf8_strrchr; ///
+private alias c_g_utf8_strreverseFn = extern(C) char* function(const(char)* str, ptrdiff_t len) nothrow;
+__gshared c_g_utf8_strreverseFn c_g_utf8_strreverse; ///
+private alias c_g_utf8_strupFn = extern(C) char* function(const(char)* str, ptrdiff_t len) nothrow;
+__gshared c_g_utf8_strupFn c_g_utf8_strup; ///
+private alias c_g_utf8_substringFn = extern(C) char* function(const(char)* str, glong startPos, glong endPos) nothrow;
+__gshared c_g_utf8_substringFn c_g_utf8_substring; ///
+private alias c_g_utf8_to_ucs4Fn = extern(C) dchar* function(const(char)* str, glong len, glong* itemsRead, glong* itemsWritten, GError** _err) nothrow;
+__gshared c_g_utf8_to_ucs4Fn c_g_utf8_to_ucs4; ///
+private alias c_g_utf8_to_ucs4_fastFn = extern(C) dchar* function(const(char)* str, glong len, glong* itemsWritten) nothrow;
+__gshared c_g_utf8_to_ucs4_fastFn c_g_utf8_to_ucs4_fast; ///
+private alias c_g_utf8_to_utf16Fn = extern(C) ushort* function(const(char)* str, glong len, glong* itemsRead, glong* itemsWritten, GError** _err) nothrow;
+__gshared c_g_utf8_to_utf16Fn c_g_utf8_to_utf16; ///
+private alias c_g_utf8_truncate_middleFn = extern(C) char* function(const(char)* string_, size_t truncateLength) nothrow;
+__gshared c_g_utf8_truncate_middleFn c_g_utf8_truncate_middle; ///
+private alias c_g_utf8_validateFn = extern(C) gboolean function(const(ubyte)* str, ptrdiff_t maxLen, const(char*)* end) nothrow;
+__gshared c_g_utf8_validateFn c_g_utf8_validate; ///
+private alias c_g_utf8_validate_lenFn = extern(C) gboolean function(const(ubyte)* str, size_t maxLen, const(char*)* end) nothrow;
+__gshared c_g_utf8_validate_lenFn c_g_utf8_validate_len; ///
+private alias c_g_uuid_string_is_validFn = extern(C) gboolean function(const(char)* str) nothrow;
+__gshared c_g_uuid_string_is_validFn c_g_uuid_string_is_valid; ///
+private alias c_g_uuid_string_randomFn = extern(C) char* function() nothrow;
+__gshared c_g_uuid_string_randomFn c_g_uuid_string_random; ///
+private alias c_g_variant_get_gtypeFn = extern(C) GType function() nothrow;
+__gshared c_g_variant_get_gtypeFn c_g_variant_get_gtype; ///
+private alias c_g_vasprintfFn = extern(C) int function(char** string_, const(char)* format, void* args) nothrow;
+__gshared c_g_vasprintfFn c_g_vasprintf; ///
+private alias c_g_vfprintfFn = extern(C) int function(void* file, const(char)* format, void* args) nothrow;
+__gshared c_g_vfprintfFn c_g_vfprintf; ///
+private alias c_g_vprintfFn = extern(C) int function(const(char)* format, void* args) nothrow;
+__gshared c_g_vprintfFn c_g_vprintf; ///
+private alias c_g_vsnprintfFn = extern(C) int function(char* string_, gulong n, const(char)* format, void* args) nothrow;
+__gshared c_g_vsnprintfFn c_g_vsnprintf; ///
+private alias c_g_vsprintfFn = extern(C) int function(char* string_, const(char)* format, void* args) nothrow;
+__gshared c_g_vsprintfFn c_g_vsprintf; ///
+private alias c_g_warn_messageFn = extern(C) void function(const(char)* domain, const(char)* file, int line, const(char)* func, const(char)* warnexpr) nothrow;
+__gshared c_g_warn_messageFn c_g_warn_message; ///
+
+// UnicodeScript
+private alias c_g_unicode_script_from_iso15924Fn = extern(C) GUnicodeScript function(uint iso15924) nothrow;
+__gshared c_g_unicode_script_from_iso15924Fn c_g_unicode_script_from_iso15924; ///
+private alias c_g_unicode_script_to_iso15924Fn = extern(C) uint function(GUnicodeScript script) nothrow;
+__gshared c_g_unicode_script_to_iso15924Fn c_g_unicode_script_to_iso15924; ///
 
 // Allocator
 

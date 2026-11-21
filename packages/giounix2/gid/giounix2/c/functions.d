@@ -11,140 +11,249 @@ public import gid.gobject2.c.types;
 
 private immutable LIBS = ["gio-2.0_0"];
 
-__gshared extern(C) nothrow
-{
-  // DesktopAppInfo
-  GType function() c_g_desktop_app_info_get_type; ///
-  GDesktopAppInfo* function(const(char)* desktopId) c_g_desktop_app_info_new; ///
-  GDesktopAppInfo* function(const(char)* filename) c_g_desktop_app_info_new_from_filename; ///
-  GDesktopAppInfo* function(GKeyFile* keyFile) c_g_desktop_app_info_new_from_keyfile; ///
-  GList* function(const(char)* interface_) c_g_desktop_app_info_get_implementations; ///
-  char*** function(const(char)* searchString) c_g_desktop_app_info_search; ///
-  void function(const(char)* desktopEnv) c_g_desktop_app_info_set_desktop_env; ///
-  char* function(GDesktopAppInfo* info, const(char)* actionName) c_g_desktop_app_info_get_action_name; ///
-  gboolean function(GDesktopAppInfo* info, const(char)* key) c_g_desktop_app_info_get_boolean; ///
-  const(char)* function(GDesktopAppInfo* info) c_g_desktop_app_info_get_categories; ///
-  const(char)* function(GDesktopAppInfo* info) c_g_desktop_app_info_get_filename; ///
-  const(char)* function(GDesktopAppInfo* info) c_g_desktop_app_info_get_generic_name; ///
-  gboolean function(GDesktopAppInfo* info) c_g_desktop_app_info_get_is_hidden; ///
-  const(char*)* function(GDesktopAppInfo* info) c_g_desktop_app_info_get_keywords; ///
-  char* function(GDesktopAppInfo* info, const(char)* key) c_g_desktop_app_info_get_locale_string; ///
-  gboolean function(GDesktopAppInfo* info) c_g_desktop_app_info_get_nodisplay; ///
-  gboolean function(GDesktopAppInfo* info, const(char)* desktopEnv) c_g_desktop_app_info_get_show_in; ///
-  const(char)* function(GDesktopAppInfo* info) c_g_desktop_app_info_get_startup_wm_class; ///
-  char* function(GDesktopAppInfo* info, const(char)* key) c_g_desktop_app_info_get_string; ///
-  char** function(GDesktopAppInfo* info, const(char)* key, size_t* length) c_g_desktop_app_info_get_string_list; ///
-  gboolean function(GDesktopAppInfo* info, const(char)* key) c_g_desktop_app_info_has_key; ///
-  void function(GDesktopAppInfo* info, const(char)* actionName, GAppLaunchContext* launchContext) c_g_desktop_app_info_launch_action; ///
-  gboolean function(GDesktopAppInfo* appinfo, GList* uris, GAppLaunchContext* launchContext, GSpawnFlags spawnFlags, GSpawnChildSetupFunc userSetup, void* userSetupData, GDesktopAppLaunchCallback pidCallback, void* pidCallbackData, GError** _err) c_g_desktop_app_info_launch_uris_as_manager; ///
-  gboolean function(GDesktopAppInfo* appinfo, GList* uris, GAppLaunchContext* launchContext, GSpawnFlags spawnFlags, GSpawnChildSetupFunc userSetup, void* userSetupData, GDesktopAppLaunchCallback pidCallback, void* pidCallbackData, int stdinFd, int stdoutFd, int stderrFd, GError** _err) c_g_desktop_app_info_launch_uris_as_manager_with_fds; ///
-  const(char*)* function(GDesktopAppInfo* info) c_g_desktop_app_info_list_actions; ///
+// DesktopAppInfo
+private alias c_g_desktop_app_info_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_desktop_app_info_get_typeFn c_g_desktop_app_info_get_type; ///
+private alias c_g_desktop_app_info_newFn = extern(C) GDesktopAppInfo* function(const(char)* desktopId) nothrow;
+__gshared c_g_desktop_app_info_newFn c_g_desktop_app_info_new; ///
+private alias c_g_desktop_app_info_new_from_filenameFn = extern(C) GDesktopAppInfo* function(const(char)* filename) nothrow;
+__gshared c_g_desktop_app_info_new_from_filenameFn c_g_desktop_app_info_new_from_filename; ///
+private alias c_g_desktop_app_info_new_from_keyfileFn = extern(C) GDesktopAppInfo* function(GKeyFile* keyFile) nothrow;
+__gshared c_g_desktop_app_info_new_from_keyfileFn c_g_desktop_app_info_new_from_keyfile; ///
+private alias c_g_desktop_app_info_get_implementationsFn = extern(C) GList* function(const(char)* interface_) nothrow;
+__gshared c_g_desktop_app_info_get_implementationsFn c_g_desktop_app_info_get_implementations; ///
+private alias c_g_desktop_app_info_searchFn = extern(C) char*** function(const(char)* searchString) nothrow;
+__gshared c_g_desktop_app_info_searchFn c_g_desktop_app_info_search; ///
+private alias c_g_desktop_app_info_set_desktop_envFn = extern(C) void function(const(char)* desktopEnv) nothrow;
+__gshared c_g_desktop_app_info_set_desktop_envFn c_g_desktop_app_info_set_desktop_env; ///
+private alias c_g_desktop_app_info_get_action_nameFn = extern(C) char* function(GDesktopAppInfo* info, const(char)* actionName) nothrow;
+__gshared c_g_desktop_app_info_get_action_nameFn c_g_desktop_app_info_get_action_name; ///
+private alias c_g_desktop_app_info_get_booleanFn = extern(C) gboolean function(GDesktopAppInfo* info, const(char)* key) nothrow;
+__gshared c_g_desktop_app_info_get_booleanFn c_g_desktop_app_info_get_boolean; ///
+private alias c_g_desktop_app_info_get_categoriesFn = extern(C) const(char)* function(GDesktopAppInfo* info) nothrow;
+__gshared c_g_desktop_app_info_get_categoriesFn c_g_desktop_app_info_get_categories; ///
+private alias c_g_desktop_app_info_get_filenameFn = extern(C) const(char)* function(GDesktopAppInfo* info) nothrow;
+__gshared c_g_desktop_app_info_get_filenameFn c_g_desktop_app_info_get_filename; ///
+private alias c_g_desktop_app_info_get_generic_nameFn = extern(C) const(char)* function(GDesktopAppInfo* info) nothrow;
+__gshared c_g_desktop_app_info_get_generic_nameFn c_g_desktop_app_info_get_generic_name; ///
+private alias c_g_desktop_app_info_get_is_hiddenFn = extern(C) gboolean function(GDesktopAppInfo* info) nothrow;
+__gshared c_g_desktop_app_info_get_is_hiddenFn c_g_desktop_app_info_get_is_hidden; ///
+private alias c_g_desktop_app_info_get_keywordsFn = extern(C) const(char*)* function(GDesktopAppInfo* info) nothrow;
+__gshared c_g_desktop_app_info_get_keywordsFn c_g_desktop_app_info_get_keywords; ///
+private alias c_g_desktop_app_info_get_locale_stringFn = extern(C) char* function(GDesktopAppInfo* info, const(char)* key) nothrow;
+__gshared c_g_desktop_app_info_get_locale_stringFn c_g_desktop_app_info_get_locale_string; ///
+private alias c_g_desktop_app_info_get_nodisplayFn = extern(C) gboolean function(GDesktopAppInfo* info) nothrow;
+__gshared c_g_desktop_app_info_get_nodisplayFn c_g_desktop_app_info_get_nodisplay; ///
+private alias c_g_desktop_app_info_get_show_inFn = extern(C) gboolean function(GDesktopAppInfo* info, const(char)* desktopEnv) nothrow;
+__gshared c_g_desktop_app_info_get_show_inFn c_g_desktop_app_info_get_show_in; ///
+private alias c_g_desktop_app_info_get_startup_wm_classFn = extern(C) const(char)* function(GDesktopAppInfo* info) nothrow;
+__gshared c_g_desktop_app_info_get_startup_wm_classFn c_g_desktop_app_info_get_startup_wm_class; ///
+private alias c_g_desktop_app_info_get_stringFn = extern(C) char* function(GDesktopAppInfo* info, const(char)* key) nothrow;
+__gshared c_g_desktop_app_info_get_stringFn c_g_desktop_app_info_get_string; ///
+private alias c_g_desktop_app_info_get_string_listFn = extern(C) char** function(GDesktopAppInfo* info, const(char)* key, size_t* length) nothrow;
+__gshared c_g_desktop_app_info_get_string_listFn c_g_desktop_app_info_get_string_list; ///
+private alias c_g_desktop_app_info_has_keyFn = extern(C) gboolean function(GDesktopAppInfo* info, const(char)* key) nothrow;
+__gshared c_g_desktop_app_info_has_keyFn c_g_desktop_app_info_has_key; ///
+private alias c_g_desktop_app_info_launch_actionFn = extern(C) void function(GDesktopAppInfo* info, const(char)* actionName, GAppLaunchContext* launchContext) nothrow;
+__gshared c_g_desktop_app_info_launch_actionFn c_g_desktop_app_info_launch_action; ///
+private alias c_g_desktop_app_info_launch_uris_as_managerFn = extern(C) gboolean function(GDesktopAppInfo* appinfo, GList* uris, GAppLaunchContext* launchContext, GSpawnFlags spawnFlags, GSpawnChildSetupFunc userSetup, void* userSetupData, GDesktopAppLaunchCallback pidCallback, void* pidCallbackData, GError** _err) nothrow;
+__gshared c_g_desktop_app_info_launch_uris_as_managerFn c_g_desktop_app_info_launch_uris_as_manager; ///
+private alias c_g_desktop_app_info_launch_uris_as_manager_with_fdsFn = extern(C) gboolean function(GDesktopAppInfo* appinfo, GList* uris, GAppLaunchContext* launchContext, GSpawnFlags spawnFlags, GSpawnChildSetupFunc userSetup, void* userSetupData, GDesktopAppLaunchCallback pidCallback, void* pidCallbackData, int stdinFd, int stdoutFd, int stderrFd, GError** _err) nothrow;
+__gshared c_g_desktop_app_info_launch_uris_as_manager_with_fdsFn c_g_desktop_app_info_launch_uris_as_manager_with_fds; ///
+private alias c_g_desktop_app_info_list_actionsFn = extern(C) const(char*)* function(GDesktopAppInfo* info) nothrow;
+__gshared c_g_desktop_app_info_list_actionsFn c_g_desktop_app_info_list_actions; ///
 
-  // DesktopAppInfoLookup
-  GType function() c_g_desktop_app_info_lookup_get_type; ///
-  GAppInfo* function(GDesktopAppInfoLookup* lookup, const(char)* uriScheme) c_g_desktop_app_info_lookup_get_default_for_uri_scheme; ///
+// DesktopAppInfoLookup
+private alias c_g_desktop_app_info_lookup_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_desktop_app_info_lookup_get_typeFn c_g_desktop_app_info_lookup_get_type; ///
+private alias c_g_desktop_app_info_lookup_get_default_for_uri_schemeFn = extern(C) GAppInfo* function(GDesktopAppInfoLookup* lookup, const(char)* uriScheme) nothrow;
+__gshared c_g_desktop_app_info_lookup_get_default_for_uri_schemeFn c_g_desktop_app_info_lookup_get_default_for_uri_scheme; ///
 
-  // FDMessage
-  GType function() c_g_unix_fd_message_get_type; ///
-  GSocketControlMessage* function() c_g_unix_fd_message_new; ///
-  GSocketControlMessage* function(GUnixFDList* fdList) c_g_unix_fd_message_new_with_fd_list; ///
-  gboolean function(GUnixFDMessage* message, int fd, GError** _err) c_g_unix_fd_message_append_fd; ///
-  GUnixFDList* function(GUnixFDMessage* message) c_g_unix_fd_message_get_fd_list; ///
-  int* function(GUnixFDMessage* message, int* length) c_g_unix_fd_message_steal_fds; ///
+// FDMessage
+private alias c_g_unix_fd_message_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_unix_fd_message_get_typeFn c_g_unix_fd_message_get_type; ///
+private alias c_g_unix_fd_message_newFn = extern(C) GSocketControlMessage* function() nothrow;
+__gshared c_g_unix_fd_message_newFn c_g_unix_fd_message_new; ///
+private alias c_g_unix_fd_message_new_with_fd_listFn = extern(C) GSocketControlMessage* function(GUnixFDList* fdList) nothrow;
+__gshared c_g_unix_fd_message_new_with_fd_listFn c_g_unix_fd_message_new_with_fd_list; ///
+private alias c_g_unix_fd_message_append_fdFn = extern(C) gboolean function(GUnixFDMessage* message, int fd, GError** _err) nothrow;
+__gshared c_g_unix_fd_message_append_fdFn c_g_unix_fd_message_append_fd; ///
+private alias c_g_unix_fd_message_get_fd_listFn = extern(C) GUnixFDList* function(GUnixFDMessage* message) nothrow;
+__gshared c_g_unix_fd_message_get_fd_listFn c_g_unix_fd_message_get_fd_list; ///
+private alias c_g_unix_fd_message_steal_fdsFn = extern(C) int* function(GUnixFDMessage* message, int* length) nothrow;
+__gshared c_g_unix_fd_message_steal_fdsFn c_g_unix_fd_message_steal_fds; ///
 
-  // FileDescriptorBased
-  GType function() c_g_file_descriptor_based_get_type; ///
-  int function(GFileDescriptorBased* fdBased) c_g_file_descriptor_based_get_fd; ///
+// FileDescriptorBased
+private alias c_g_file_descriptor_based_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_file_descriptor_based_get_typeFn c_g_file_descriptor_based_get_type; ///
+private alias c_g_file_descriptor_based_get_fdFn = extern(C) int function(GFileDescriptorBased* fdBased) nothrow;
+__gshared c_g_file_descriptor_based_get_fdFn c_g_file_descriptor_based_get_fd; ///
 
-  // InputStream
-  GType function() c_g_unix_input_stream_get_type; ///
-  GInputStream* function(int fd, gboolean closeFd) c_g_unix_input_stream_new; ///
-  gboolean function(GUnixInputStream* stream) c_g_unix_input_stream_get_close_fd; ///
-  int function(GUnixInputStream* stream) c_g_unix_input_stream_get_fd; ///
-  void function(GUnixInputStream* stream, gboolean closeFd) c_g_unix_input_stream_set_close_fd; ///
+// InputStream
+private alias c_g_unix_input_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_unix_input_stream_get_typeFn c_g_unix_input_stream_get_type; ///
+private alias c_g_unix_input_stream_newFn = extern(C) GInputStream* function(int fd, gboolean closeFd) nothrow;
+__gshared c_g_unix_input_stream_newFn c_g_unix_input_stream_new; ///
+private alias c_g_unix_input_stream_get_close_fdFn = extern(C) gboolean function(GUnixInputStream* stream) nothrow;
+__gshared c_g_unix_input_stream_get_close_fdFn c_g_unix_input_stream_get_close_fd; ///
+private alias c_g_unix_input_stream_get_fdFn = extern(C) int function(GUnixInputStream* stream) nothrow;
+__gshared c_g_unix_input_stream_get_fdFn c_g_unix_input_stream_get_fd; ///
+private alias c_g_unix_input_stream_set_close_fdFn = extern(C) void function(GUnixInputStream* stream, gboolean closeFd) nothrow;
+__gshared c_g_unix_input_stream_set_close_fdFn c_g_unix_input_stream_set_close_fd; ///
 
-  // MountEntry
-  GType function() c_g_unix_mount_entry_get_type; ///
-  int function(GUnixMountEntry* mount1, GUnixMountEntry* mount2) c_g_unix_mount_entry_compare; ///
-  GUnixMountEntry* function(GUnixMountEntry* mountEntry) c_g_unix_mount_entry_copy; ///
-  void function(GUnixMountEntry* mountEntry) c_g_unix_mount_entry_free; ///
-  const(char)* function(GUnixMountEntry* mountEntry) c_g_unix_mount_entry_get_device_path; ///
-  const(char)* function(GUnixMountEntry* mountEntry) c_g_unix_mount_entry_get_fs_type; ///
-  const(char)* function(GUnixMountEntry* mountEntry) c_g_unix_mount_entry_get_mount_path; ///
-  const(char)* function(GUnixMountEntry* mountEntry) c_g_unix_mount_entry_get_options; ///
-  const(char)* function(GUnixMountEntry* mountEntry) c_g_unix_mount_entry_get_root_path; ///
-  gboolean function(GUnixMountEntry* mountEntry) c_g_unix_mount_entry_guess_can_eject; ///
-  GIcon* function(GUnixMountEntry* mountEntry) c_g_unix_mount_entry_guess_icon; ///
-  char* function(GUnixMountEntry* mountEntry) c_g_unix_mount_entry_guess_name; ///
-  gboolean function(GUnixMountEntry* mountEntry) c_g_unix_mount_entry_guess_should_display; ///
-  GIcon* function(GUnixMountEntry* mountEntry) c_g_unix_mount_entry_guess_symbolic_icon; ///
-  gboolean function(GUnixMountEntry* mountEntry) c_g_unix_mount_entry_is_readonly; ///
-  gboolean function(GUnixMountEntry* mountEntry) c_g_unix_mount_entry_is_system_internal; ///
-  GUnixMountEntry* function(const(char)* mountPath, ulong* timeRead) c_g_unix_mount_entry_at; ///
-  GUnixMountEntry* function(const(char)* filePath, ulong* timeRead) c_g_unix_mount_entry_for; ///
+// MountEntry
+private alias c_g_unix_mount_entry_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_unix_mount_entry_get_typeFn c_g_unix_mount_entry_get_type; ///
+private alias c_g_unix_mount_entry_compareFn = extern(C) int function(GUnixMountEntry* mount1, GUnixMountEntry* mount2) nothrow;
+__gshared c_g_unix_mount_entry_compareFn c_g_unix_mount_entry_compare; ///
+private alias c_g_unix_mount_entry_copyFn = extern(C) GUnixMountEntry* function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_entry_copyFn c_g_unix_mount_entry_copy; ///
+private alias c_g_unix_mount_entry_freeFn = extern(C) void function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_entry_freeFn c_g_unix_mount_entry_free; ///
+private alias c_g_unix_mount_entry_get_device_pathFn = extern(C) const(char)* function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_entry_get_device_pathFn c_g_unix_mount_entry_get_device_path; ///
+private alias c_g_unix_mount_entry_get_fs_typeFn = extern(C) const(char)* function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_entry_get_fs_typeFn c_g_unix_mount_entry_get_fs_type; ///
+private alias c_g_unix_mount_entry_get_mount_pathFn = extern(C) const(char)* function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_entry_get_mount_pathFn c_g_unix_mount_entry_get_mount_path; ///
+private alias c_g_unix_mount_entry_get_optionsFn = extern(C) const(char)* function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_entry_get_optionsFn c_g_unix_mount_entry_get_options; ///
+private alias c_g_unix_mount_entry_get_root_pathFn = extern(C) const(char)* function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_entry_get_root_pathFn c_g_unix_mount_entry_get_root_path; ///
+private alias c_g_unix_mount_entry_guess_can_ejectFn = extern(C) gboolean function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_entry_guess_can_ejectFn c_g_unix_mount_entry_guess_can_eject; ///
+private alias c_g_unix_mount_entry_guess_iconFn = extern(C) GIcon* function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_entry_guess_iconFn c_g_unix_mount_entry_guess_icon; ///
+private alias c_g_unix_mount_entry_guess_nameFn = extern(C) char* function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_entry_guess_nameFn c_g_unix_mount_entry_guess_name; ///
+private alias c_g_unix_mount_entry_guess_should_displayFn = extern(C) gboolean function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_entry_guess_should_displayFn c_g_unix_mount_entry_guess_should_display; ///
+private alias c_g_unix_mount_entry_guess_symbolic_iconFn = extern(C) GIcon* function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_entry_guess_symbolic_iconFn c_g_unix_mount_entry_guess_symbolic_icon; ///
+private alias c_g_unix_mount_entry_is_readonlyFn = extern(C) gboolean function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_entry_is_readonlyFn c_g_unix_mount_entry_is_readonly; ///
+private alias c_g_unix_mount_entry_is_system_internalFn = extern(C) gboolean function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_entry_is_system_internalFn c_g_unix_mount_entry_is_system_internal; ///
+private alias c_g_unix_mount_entry_atFn = extern(C) GUnixMountEntry* function(const(char)* mountPath, ulong* timeRead) nothrow;
+__gshared c_g_unix_mount_entry_atFn c_g_unix_mount_entry_at; ///
+private alias c_g_unix_mount_entry_forFn = extern(C) GUnixMountEntry* function(const(char)* filePath, ulong* timeRead) nothrow;
+__gshared c_g_unix_mount_entry_forFn c_g_unix_mount_entry_for; ///
 
-  // MountMonitor
-  GType function() c_g_unix_mount_monitor_get_type; ///
-  GUnixMountMonitor* function() c_g_unix_mount_monitor_new; ///
-  GUnixMountMonitor* function() c_g_unix_mount_monitor_get; ///
-  void function(GUnixMountMonitor* mountMonitor, int limitMsec) c_g_unix_mount_monitor_set_rate_limit; ///
+// MountMonitor
+private alias c_g_unix_mount_monitor_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_unix_mount_monitor_get_typeFn c_g_unix_mount_monitor_get_type; ///
+private alias c_g_unix_mount_monitor_newFn = extern(C) GUnixMountMonitor* function() nothrow;
+__gshared c_g_unix_mount_monitor_newFn c_g_unix_mount_monitor_new; ///
+private alias c_g_unix_mount_monitor_getFn = extern(C) GUnixMountMonitor* function() nothrow;
+__gshared c_g_unix_mount_monitor_getFn c_g_unix_mount_monitor_get; ///
+private alias c_g_unix_mount_monitor_set_rate_limitFn = extern(C) void function(GUnixMountMonitor* mountMonitor, int limitMsec) nothrow;
+__gshared c_g_unix_mount_monitor_set_rate_limitFn c_g_unix_mount_monitor_set_rate_limit; ///
 
-  // MountPoint
-  GType function() c_g_unix_mount_point_get_type; ///
-  int function(GUnixMountPoint* mount1, GUnixMountPoint* mount2) c_g_unix_mount_point_compare; ///
-  GUnixMountPoint* function(GUnixMountPoint* mountPoint) c_g_unix_mount_point_copy; ///
-  void function(GUnixMountPoint* mountPoint) c_g_unix_mount_point_free; ///
-  const(char)* function(GUnixMountPoint* mountPoint) c_g_unix_mount_point_get_device_path; ///
-  const(char)* function(GUnixMountPoint* mountPoint) c_g_unix_mount_point_get_fs_type; ///
-  const(char)* function(GUnixMountPoint* mountPoint) c_g_unix_mount_point_get_mount_path; ///
-  const(char)* function(GUnixMountPoint* mountPoint) c_g_unix_mount_point_get_options; ///
-  gboolean function(GUnixMountPoint* mountPoint) c_g_unix_mount_point_guess_can_eject; ///
-  GIcon* function(GUnixMountPoint* mountPoint) c_g_unix_mount_point_guess_icon; ///
-  char* function(GUnixMountPoint* mountPoint) c_g_unix_mount_point_guess_name; ///
-  GIcon* function(GUnixMountPoint* mountPoint) c_g_unix_mount_point_guess_symbolic_icon; ///
-  gboolean function(GUnixMountPoint* mountPoint) c_g_unix_mount_point_is_loopback; ///
-  gboolean function(GUnixMountPoint* mountPoint) c_g_unix_mount_point_is_readonly; ///
-  gboolean function(GUnixMountPoint* mountPoint) c_g_unix_mount_point_is_user_mountable; ///
-  GUnixMountPoint* function(const(char)* mountPath, ulong* timeRead) c_g_unix_mount_point_at; ///
+// MountPoint
+private alias c_g_unix_mount_point_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_unix_mount_point_get_typeFn c_g_unix_mount_point_get_type; ///
+private alias c_g_unix_mount_point_compareFn = extern(C) int function(GUnixMountPoint* mount1, GUnixMountPoint* mount2) nothrow;
+__gshared c_g_unix_mount_point_compareFn c_g_unix_mount_point_compare; ///
+private alias c_g_unix_mount_point_copyFn = extern(C) GUnixMountPoint* function(GUnixMountPoint* mountPoint) nothrow;
+__gshared c_g_unix_mount_point_copyFn c_g_unix_mount_point_copy; ///
+private alias c_g_unix_mount_point_freeFn = extern(C) void function(GUnixMountPoint* mountPoint) nothrow;
+__gshared c_g_unix_mount_point_freeFn c_g_unix_mount_point_free; ///
+private alias c_g_unix_mount_point_get_device_pathFn = extern(C) const(char)* function(GUnixMountPoint* mountPoint) nothrow;
+__gshared c_g_unix_mount_point_get_device_pathFn c_g_unix_mount_point_get_device_path; ///
+private alias c_g_unix_mount_point_get_fs_typeFn = extern(C) const(char)* function(GUnixMountPoint* mountPoint) nothrow;
+__gshared c_g_unix_mount_point_get_fs_typeFn c_g_unix_mount_point_get_fs_type; ///
+private alias c_g_unix_mount_point_get_mount_pathFn = extern(C) const(char)* function(GUnixMountPoint* mountPoint) nothrow;
+__gshared c_g_unix_mount_point_get_mount_pathFn c_g_unix_mount_point_get_mount_path; ///
+private alias c_g_unix_mount_point_get_optionsFn = extern(C) const(char)* function(GUnixMountPoint* mountPoint) nothrow;
+__gshared c_g_unix_mount_point_get_optionsFn c_g_unix_mount_point_get_options; ///
+private alias c_g_unix_mount_point_guess_can_ejectFn = extern(C) gboolean function(GUnixMountPoint* mountPoint) nothrow;
+__gshared c_g_unix_mount_point_guess_can_ejectFn c_g_unix_mount_point_guess_can_eject; ///
+private alias c_g_unix_mount_point_guess_iconFn = extern(C) GIcon* function(GUnixMountPoint* mountPoint) nothrow;
+__gshared c_g_unix_mount_point_guess_iconFn c_g_unix_mount_point_guess_icon; ///
+private alias c_g_unix_mount_point_guess_nameFn = extern(C) char* function(GUnixMountPoint* mountPoint) nothrow;
+__gshared c_g_unix_mount_point_guess_nameFn c_g_unix_mount_point_guess_name; ///
+private alias c_g_unix_mount_point_guess_symbolic_iconFn = extern(C) GIcon* function(GUnixMountPoint* mountPoint) nothrow;
+__gshared c_g_unix_mount_point_guess_symbolic_iconFn c_g_unix_mount_point_guess_symbolic_icon; ///
+private alias c_g_unix_mount_point_is_loopbackFn = extern(C) gboolean function(GUnixMountPoint* mountPoint) nothrow;
+__gshared c_g_unix_mount_point_is_loopbackFn c_g_unix_mount_point_is_loopback; ///
+private alias c_g_unix_mount_point_is_readonlyFn = extern(C) gboolean function(GUnixMountPoint* mountPoint) nothrow;
+__gshared c_g_unix_mount_point_is_readonlyFn c_g_unix_mount_point_is_readonly; ///
+private alias c_g_unix_mount_point_is_user_mountableFn = extern(C) gboolean function(GUnixMountPoint* mountPoint) nothrow;
+__gshared c_g_unix_mount_point_is_user_mountableFn c_g_unix_mount_point_is_user_mountable; ///
+private alias c_g_unix_mount_point_atFn = extern(C) GUnixMountPoint* function(const(char)* mountPath, ulong* timeRead) nothrow;
+__gshared c_g_unix_mount_point_atFn c_g_unix_mount_point_at; ///
 
-  // OutputStream
-  GType function() c_g_unix_output_stream_get_type; ///
-  GOutputStream* function(int fd, gboolean closeFd) c_g_unix_output_stream_new; ///
-  gboolean function(GUnixOutputStream* stream) c_g_unix_output_stream_get_close_fd; ///
-  int function(GUnixOutputStream* stream) c_g_unix_output_stream_get_fd; ///
-  void function(GUnixOutputStream* stream, gboolean closeFd) c_g_unix_output_stream_set_close_fd; ///
+// OutputStream
+private alias c_g_unix_output_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_g_unix_output_stream_get_typeFn c_g_unix_output_stream_get_type; ///
+private alias c_g_unix_output_stream_newFn = extern(C) GOutputStream* function(int fd, gboolean closeFd) nothrow;
+__gshared c_g_unix_output_stream_newFn c_g_unix_output_stream_new; ///
+private alias c_g_unix_output_stream_get_close_fdFn = extern(C) gboolean function(GUnixOutputStream* stream) nothrow;
+__gshared c_g_unix_output_stream_get_close_fdFn c_g_unix_output_stream_get_close_fd; ///
+private alias c_g_unix_output_stream_get_fdFn = extern(C) int function(GUnixOutputStream* stream) nothrow;
+__gshared c_g_unix_output_stream_get_fdFn c_g_unix_output_stream_get_fd; ///
+private alias c_g_unix_output_stream_set_close_fdFn = extern(C) void function(GUnixOutputStream* stream, gboolean closeFd) nothrow;
+__gshared c_g_unix_output_stream_set_close_fdFn c_g_unix_output_stream_set_close_fd; ///
 
-  // global
-  gboolean function(const(char)* mountPath) c_g_unix_is_mount_path_system_internal; ///
-  gboolean function(const(char)* devicePath) c_g_unix_is_system_device_path; ///
-  gboolean function(const(char)* fsType) c_g_unix_is_system_fs_type; ///
-  GUnixMountEntry* function(const(char)* mountPath, ulong* timeRead) c_g_unix_mount_at; ///
-  int function(GUnixMountEntry* mount1, GUnixMountEntry* mount2) c_g_unix_mount_compare; ///
-  GUnixMountEntry* function(GUnixMountEntry* mountEntry) c_g_unix_mount_copy; ///
-  gboolean function(ulong time) c_g_unix_mount_entries_changed_since; ///
-  GList* function(ulong* timeRead) c_g_unix_mount_entries_get; ///
-  GUnixMountEntry** function(const(char)* tablePath, ulong* timeReadOut, size_t* nEntriesOut) c_g_unix_mount_entries_get_from_file; ///
-  GUnixMountEntry* function(const(char)* filePath, ulong* timeRead) c_g_unix_mount_for; ///
-  void function(GUnixMountEntry* mountEntry) c_g_unix_mount_free; ///
-  const(char)* function(GUnixMountEntry* mountEntry) c_g_unix_mount_get_device_path; ///
-  const(char)* function(GUnixMountEntry* mountEntry) c_g_unix_mount_get_fs_type; ///
-  const(char)* function(GUnixMountEntry* mountEntry) c_g_unix_mount_get_mount_path; ///
-  const(char)* function(GUnixMountEntry* mountEntry) c_g_unix_mount_get_options; ///
-  const(char)* function(GUnixMountEntry* mountEntry) c_g_unix_mount_get_root_path; ///
-  gboolean function(GUnixMountEntry* mountEntry) c_g_unix_mount_guess_can_eject; ///
-  GIcon* function(GUnixMountEntry* mountEntry) c_g_unix_mount_guess_icon; ///
-  char* function(GUnixMountEntry* mountEntry) c_g_unix_mount_guess_name; ///
-  gboolean function(GUnixMountEntry* mountEntry) c_g_unix_mount_guess_should_display; ///
-  GIcon* function(GUnixMountEntry* mountEntry) c_g_unix_mount_guess_symbolic_icon; ///
-  gboolean function(GUnixMountEntry* mountEntry) c_g_unix_mount_is_readonly; ///
-  gboolean function(GUnixMountEntry* mountEntry) c_g_unix_mount_is_system_internal; ///
-  gboolean function(ulong time) c_g_unix_mount_points_changed_since; ///
-  GList* function(ulong* timeRead) c_g_unix_mount_points_get; ///
-  GUnixMountPoint** function(const(char)* tablePath, ulong* timeReadOut, size_t* nPointsOut) c_g_unix_mount_points_get_from_file; ///
-  gboolean function(ulong time) c_g_unix_mounts_changed_since; ///
-  GList* function(ulong* timeRead) c_g_unix_mounts_get; ///
-  GUnixMountEntry** function(const(char)* tablePath, ulong* timeReadOut, size_t* nEntriesOut) c_g_unix_mounts_get_from_file; ///
-}
+// global
+private alias c_g_unix_is_mount_path_system_internalFn = extern(C) gboolean function(const(char)* mountPath) nothrow;
+__gshared c_g_unix_is_mount_path_system_internalFn c_g_unix_is_mount_path_system_internal; ///
+private alias c_g_unix_is_system_device_pathFn = extern(C) gboolean function(const(char)* devicePath) nothrow;
+__gshared c_g_unix_is_system_device_pathFn c_g_unix_is_system_device_path; ///
+private alias c_g_unix_is_system_fs_typeFn = extern(C) gboolean function(const(char)* fsType) nothrow;
+__gshared c_g_unix_is_system_fs_typeFn c_g_unix_is_system_fs_type; ///
+private alias c_g_unix_mount_atFn = extern(C) GUnixMountEntry* function(const(char)* mountPath, ulong* timeRead) nothrow;
+__gshared c_g_unix_mount_atFn c_g_unix_mount_at; ///
+private alias c_g_unix_mount_compareFn = extern(C) int function(GUnixMountEntry* mount1, GUnixMountEntry* mount2) nothrow;
+__gshared c_g_unix_mount_compareFn c_g_unix_mount_compare; ///
+private alias c_g_unix_mount_copyFn = extern(C) GUnixMountEntry* function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_copyFn c_g_unix_mount_copy; ///
+private alias c_g_unix_mount_entries_changed_sinceFn = extern(C) gboolean function(ulong time) nothrow;
+__gshared c_g_unix_mount_entries_changed_sinceFn c_g_unix_mount_entries_changed_since; ///
+private alias c_g_unix_mount_entries_getFn = extern(C) GList* function(ulong* timeRead) nothrow;
+__gshared c_g_unix_mount_entries_getFn c_g_unix_mount_entries_get; ///
+private alias c_g_unix_mount_entries_get_from_fileFn = extern(C) GUnixMountEntry** function(const(char)* tablePath, ulong* timeReadOut, size_t* nEntriesOut) nothrow;
+__gshared c_g_unix_mount_entries_get_from_fileFn c_g_unix_mount_entries_get_from_file; ///
+private alias c_g_unix_mount_forFn = extern(C) GUnixMountEntry* function(const(char)* filePath, ulong* timeRead) nothrow;
+__gshared c_g_unix_mount_forFn c_g_unix_mount_for; ///
+private alias c_g_unix_mount_freeFn = extern(C) void function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_freeFn c_g_unix_mount_free; ///
+private alias c_g_unix_mount_get_device_pathFn = extern(C) const(char)* function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_get_device_pathFn c_g_unix_mount_get_device_path; ///
+private alias c_g_unix_mount_get_fs_typeFn = extern(C) const(char)* function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_get_fs_typeFn c_g_unix_mount_get_fs_type; ///
+private alias c_g_unix_mount_get_mount_pathFn = extern(C) const(char)* function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_get_mount_pathFn c_g_unix_mount_get_mount_path; ///
+private alias c_g_unix_mount_get_optionsFn = extern(C) const(char)* function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_get_optionsFn c_g_unix_mount_get_options; ///
+private alias c_g_unix_mount_get_root_pathFn = extern(C) const(char)* function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_get_root_pathFn c_g_unix_mount_get_root_path; ///
+private alias c_g_unix_mount_guess_can_ejectFn = extern(C) gboolean function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_guess_can_ejectFn c_g_unix_mount_guess_can_eject; ///
+private alias c_g_unix_mount_guess_iconFn = extern(C) GIcon* function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_guess_iconFn c_g_unix_mount_guess_icon; ///
+private alias c_g_unix_mount_guess_nameFn = extern(C) char* function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_guess_nameFn c_g_unix_mount_guess_name; ///
+private alias c_g_unix_mount_guess_should_displayFn = extern(C) gboolean function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_guess_should_displayFn c_g_unix_mount_guess_should_display; ///
+private alias c_g_unix_mount_guess_symbolic_iconFn = extern(C) GIcon* function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_guess_symbolic_iconFn c_g_unix_mount_guess_symbolic_icon; ///
+private alias c_g_unix_mount_is_readonlyFn = extern(C) gboolean function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_is_readonlyFn c_g_unix_mount_is_readonly; ///
+private alias c_g_unix_mount_is_system_internalFn = extern(C) gboolean function(GUnixMountEntry* mountEntry) nothrow;
+__gshared c_g_unix_mount_is_system_internalFn c_g_unix_mount_is_system_internal; ///
+private alias c_g_unix_mount_points_changed_sinceFn = extern(C) gboolean function(ulong time) nothrow;
+__gshared c_g_unix_mount_points_changed_sinceFn c_g_unix_mount_points_changed_since; ///
+private alias c_g_unix_mount_points_getFn = extern(C) GList* function(ulong* timeRead) nothrow;
+__gshared c_g_unix_mount_points_getFn c_g_unix_mount_points_get; ///
+private alias c_g_unix_mount_points_get_from_fileFn = extern(C) GUnixMountPoint** function(const(char)* tablePath, ulong* timeReadOut, size_t* nPointsOut) nothrow;
+__gshared c_g_unix_mount_points_get_from_fileFn c_g_unix_mount_points_get_from_file; ///
+private alias c_g_unix_mounts_changed_sinceFn = extern(C) gboolean function(ulong time) nothrow;
+__gshared c_g_unix_mounts_changed_sinceFn c_g_unix_mounts_changed_since; ///
+private alias c_g_unix_mounts_getFn = extern(C) GList* function(ulong* timeRead) nothrow;
+__gshared c_g_unix_mounts_getFn c_g_unix_mounts_get; ///
+private alias c_g_unix_mounts_get_from_fileFn = extern(C) GUnixMountEntry** function(const(char)* tablePath, ulong* timeReadOut, size_t* nEntriesOut) nothrow;
+__gshared c_g_unix_mounts_get_from_fileFn c_g_unix_mounts_get_from_file; ///
 
 // DesktopAppInfo
 

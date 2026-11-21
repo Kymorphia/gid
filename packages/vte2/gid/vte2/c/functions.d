@@ -11,257 +11,487 @@ public import gid.pango1.c.types;
 
 private immutable LIBS = ["vte-2.91_0"];
 
-__gshared extern(C) nothrow
-{
-  // EventContext
-  GType function() c_vte_event_context_get_type; ///
-  GdkEvent* function(const(VteEventContext)* context) c_vte_event_context_get_event; ///
+// EventContext
+private alias c_vte_event_context_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_vte_event_context_get_typeFn c_vte_event_context_get_type; ///
+private alias c_vte_event_context_get_eventFn = extern(C) GdkEvent* function(const(VteEventContext)* context) nothrow;
+__gshared c_vte_event_context_get_eventFn c_vte_event_context_get_event; ///
 
-  // Pty
-  GType function() c_vte_pty_get_type; ///
-  VtePty* function(int fd, GCancellable* cancellable, GError** _err) c_vte_pty_new_foreign_sync; ///
-  VtePty* function(VtePtyFlags flags, GCancellable* cancellable, GError** _err) c_vte_pty_new_sync; ///
-  void function(VtePty* pty) c_vte_pty_child_setup; ///
-  void function(VtePty* pty) c_vte_pty_close; ///
-  int function(VtePty* pty) c_vte_pty_get_fd; ///
-  gboolean function(VtePty* pty, int* rows, int* columns, GError** _err) c_vte_pty_get_size; ///
-  gboolean function(VtePty* pty, int rows, int columns, GError** _err) c_vte_pty_set_size; ///
-  gboolean function(VtePty* pty, gboolean utf8, GError** _err) c_vte_pty_set_utf8; ///
-  void function(VtePty* pty, const(char)* workingDirectory, char** argv, char** envv, GSpawnFlags spawnFlags, GSpawnChildSetupFunc childSetup, void* childSetupData, GDestroyNotify childSetupDataDestroy, int timeout, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_vte_pty_spawn_async; ///
-  gboolean function(VtePty* pty, GAsyncResult* result, GPid* childPid, GError** _err) c_vte_pty_spawn_finish; ///
-  void function(VtePty* pty, const(char)* workingDirectory, const(char*)* argv, const(char*)* envv, const(int)* fds, int nFds, const(int)* mapFds, int nMapFds, GSpawnFlags spawnFlags, GSpawnChildSetupFunc childSetup, void* childSetupData, GDestroyNotify childSetupDataDestroy, int timeout, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_vte_pty_spawn_with_fds_async; ///
+// Pty
+private alias c_vte_pty_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_vte_pty_get_typeFn c_vte_pty_get_type; ///
+private alias c_vte_pty_new_foreign_syncFn = extern(C) VtePty* function(int fd, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_vte_pty_new_foreign_syncFn c_vte_pty_new_foreign_sync; ///
+private alias c_vte_pty_new_syncFn = extern(C) VtePty* function(VtePtyFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_vte_pty_new_syncFn c_vte_pty_new_sync; ///
+private alias c_vte_pty_child_setupFn = extern(C) void function(VtePty* pty) nothrow;
+__gshared c_vte_pty_child_setupFn c_vte_pty_child_setup; ///
+private alias c_vte_pty_closeFn = extern(C) void function(VtePty* pty) nothrow;
+__gshared c_vte_pty_closeFn c_vte_pty_close; ///
+private alias c_vte_pty_get_fdFn = extern(C) int function(VtePty* pty) nothrow;
+__gshared c_vte_pty_get_fdFn c_vte_pty_get_fd; ///
+private alias c_vte_pty_get_sizeFn = extern(C) gboolean function(VtePty* pty, int* rows, int* columns, GError** _err) nothrow;
+__gshared c_vte_pty_get_sizeFn c_vte_pty_get_size; ///
+private alias c_vte_pty_set_sizeFn = extern(C) gboolean function(VtePty* pty, int rows, int columns, GError** _err) nothrow;
+__gshared c_vte_pty_set_sizeFn c_vte_pty_set_size; ///
+private alias c_vte_pty_set_utf8Fn = extern(C) gboolean function(VtePty* pty, gboolean utf8, GError** _err) nothrow;
+__gshared c_vte_pty_set_utf8Fn c_vte_pty_set_utf8; ///
+private alias c_vte_pty_spawn_asyncFn = extern(C) void function(VtePty* pty, const(char)* workingDirectory, char** argv, char** envv, GSpawnFlags spawnFlags, GSpawnChildSetupFunc childSetup, void* childSetupData, GDestroyNotify childSetupDataDestroy, int timeout, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_vte_pty_spawn_asyncFn c_vte_pty_spawn_async; ///
+private alias c_vte_pty_spawn_finishFn = extern(C) gboolean function(VtePty* pty, GAsyncResult* result, GPid* childPid, GError** _err) nothrow;
+__gshared c_vte_pty_spawn_finishFn c_vte_pty_spawn_finish; ///
+private alias c_vte_pty_spawn_with_fds_asyncFn = extern(C) void function(VtePty* pty, const(char)* workingDirectory, const(char*)* argv, const(char*)* envv, const(int)* fds, int nFds, const(int)* mapFds, int nMapFds, GSpawnFlags spawnFlags, GSpawnChildSetupFunc childSetup, void* childSetupData, GDestroyNotify childSetupDataDestroy, int timeout, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_vte_pty_spawn_with_fds_asyncFn c_vte_pty_spawn_with_fds_async; ///
 
-  // Regex
-  GType function() c_vte_regex_get_type; ///
-  VteRegex* function(const(char)* pattern, ptrdiff_t patternLength, uint flags, GError** _err) c_vte_regex_new_for_match; ///
-  VteRegex* function(const(char)* pattern, ptrdiff_t patternLength, uint flags, uint extraFlags, size_t* errorOffset, GError** _err) c_vte_regex_new_for_match_full; ///
-  VteRegex* function(const(char)* pattern, ptrdiff_t patternLength, uint flags, GError** _err) c_vte_regex_new_for_search; ///
-  VteRegex* function(const(char)* pattern, ptrdiff_t patternLength, uint flags, uint extraFlags, size_t* errorOffset, GError** _err) c_vte_regex_new_for_search_full; ///
-  gboolean function(VteRegex* regex, uint flags, GError** _err) c_vte_regex_jit; ///
-  VteRegex* function(VteRegex* regex) c_vte_regex_ref; ///
-  char* function(VteRegex* regex, const(char)* subject, const(char)* replacement, uint flags, GError** _err) c_vte_regex_substitute; ///
-  VteRegex* function(VteRegex* regex) c_vte_regex_unref; ///
+// Regex
+private alias c_vte_regex_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_vte_regex_get_typeFn c_vte_regex_get_type; ///
+private alias c_vte_regex_new_for_matchFn = extern(C) VteRegex* function(const(char)* pattern, ptrdiff_t patternLength, uint flags, GError** _err) nothrow;
+__gshared c_vte_regex_new_for_matchFn c_vte_regex_new_for_match; ///
+private alias c_vte_regex_new_for_match_fullFn = extern(C) VteRegex* function(const(char)* pattern, ptrdiff_t patternLength, uint flags, uint extraFlags, size_t* errorOffset, GError** _err) nothrow;
+__gshared c_vte_regex_new_for_match_fullFn c_vte_regex_new_for_match_full; ///
+private alias c_vte_regex_new_for_searchFn = extern(C) VteRegex* function(const(char)* pattern, ptrdiff_t patternLength, uint flags, GError** _err) nothrow;
+__gshared c_vte_regex_new_for_searchFn c_vte_regex_new_for_search; ///
+private alias c_vte_regex_new_for_search_fullFn = extern(C) VteRegex* function(const(char)* pattern, ptrdiff_t patternLength, uint flags, uint extraFlags, size_t* errorOffset, GError** _err) nothrow;
+__gshared c_vte_regex_new_for_search_fullFn c_vte_regex_new_for_search_full; ///
+private alias c_vte_regex_jitFn = extern(C) gboolean function(VteRegex* regex, uint flags, GError** _err) nothrow;
+__gshared c_vte_regex_jitFn c_vte_regex_jit; ///
+private alias c_vte_regex_refFn = extern(C) VteRegex* function(VteRegex* regex) nothrow;
+__gshared c_vte_regex_refFn c_vte_regex_ref; ///
+private alias c_vte_regex_substituteFn = extern(C) char* function(VteRegex* regex, const(char)* subject, const(char)* replacement, uint flags, GError** _err) nothrow;
+__gshared c_vte_regex_substituteFn c_vte_regex_substitute; ///
+private alias c_vte_regex_unrefFn = extern(C) VteRegex* function(VteRegex* regex) nothrow;
+__gshared c_vte_regex_unrefFn c_vte_regex_unref; ///
 
-  // Terminal
-  GType function() c_vte_terminal_get_type; ///
-  GtkWidget* function() c_vte_terminal_new; ///
-  void function(VteTerminal* terminal) c_vte_terminal_copy_clipboard; ///
-  void function(VteTerminal* terminal, VteFormat format) c_vte_terminal_copy_clipboard_format; ///
-  void function(VteTerminal* terminal) c_vte_terminal_copy_primary; ///
-  char* function(VteTerminal* terminal, const(char)* prop, size_t* size) c_vte_terminal_dup_termprop_string; ///
-  char* function(VteTerminal* terminal, int prop, size_t* size) c_vte_terminal_dup_termprop_string_by_id; ///
-  VteUuid* function(VteTerminal* terminal, const(char)* prop) c_vte_terminal_dup_termprop_uuid; ///
-  VteUuid* function(VteTerminal* terminal, int prop) c_vte_terminal_dup_termprop_uuid_by_id; ///
-  gboolean function(VteTerminal* terminal, GdkEvent* event, GRegex** regexes, size_t nRegexes, GRegexMatchFlags matchFlags, char** matches) c_vte_terminal_event_check_gregex_simple; ///
-  char** function(VteTerminal* terminal, GdkEvent* event, VteRegex** regexes, size_t nRegexes, uint matchFlags, size_t* nMatches) c_vte_terminal_event_check_regex_array; ///
-  gboolean function(VteTerminal* terminal, GdkEvent* event, VteRegex** regexes, size_t nRegexes, uint matchFlags, char** matches) c_vte_terminal_event_check_regex_simple; ///
-  void function(VteTerminal* terminal, const(ubyte)* data, ptrdiff_t length) c_vte_terminal_feed; ///
-  void function(VteTerminal* terminal, const(ubyte)* text, ptrdiff_t length) c_vte_terminal_feed_child; ///
-  void function(VteTerminal* terminal, const(ubyte)* data, size_t length) c_vte_terminal_feed_child_binary; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_get_allow_bold; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_get_allow_hyperlink; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_get_audible_bell; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_get_bold_is_bright; ///
-  double function(VteTerminal* terminal) c_vte_terminal_get_cell_height_scale; ///
-  double function(VteTerminal* terminal) c_vte_terminal_get_cell_width_scale; ///
-  glong function(VteTerminal* terminal) c_vte_terminal_get_char_height; ///
-  glong function(VteTerminal* terminal) c_vte_terminal_get_char_width; ///
-  int function(VteTerminal* terminal) c_vte_terminal_get_cjk_ambiguous_width; ///
-  void function(VteTerminal* terminal, GdkRGBA* color) c_vte_terminal_get_color_background_for_draw; ///
-  glong function(VteTerminal* terminal) c_vte_terminal_get_column_count; ///
-  GtkWidget* function(VteTerminal* terminal) c_vte_terminal_get_context_menu; ///
-  GMenuModel* function(VteTerminal* terminal) c_vte_terminal_get_context_menu_model; ///
-  const(char)* function(VteTerminal* terminal) c_vte_terminal_get_current_directory_uri; ///
-  const(char)* function(VteTerminal* terminal) c_vte_terminal_get_current_file_uri; ///
-  VteCursorBlinkMode function(VteTerminal* terminal) c_vte_terminal_get_cursor_blink_mode; ///
-  void function(VteTerminal* terminal, glong* column, glong* row) c_vte_terminal_get_cursor_position; ///
-  VteCursorShape function(VteTerminal* terminal) c_vte_terminal_get_cursor_shape; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_get_enable_a11y; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_get_enable_bidi; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_get_enable_fallback_scrolling; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_get_enable_legacy_osc777; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_get_enable_shaping; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_get_enable_sixel; ///
-  const(char)* function(VteTerminal* terminal) c_vte_terminal_get_encoding; ///
-  const(PangoFontDescription)* function(VteTerminal* terminal) c_vte_terminal_get_font; ///
-  const(cairo_font_options_t)* function(VteTerminal* terminal) c_vte_terminal_get_font_options; ///
-  double function(VteTerminal* terminal) c_vte_terminal_get_font_scale; ///
-  void function(VteTerminal* terminal, GdkGeometry* hints, int minRows, int minColumns) c_vte_terminal_get_geometry_hints; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_get_has_selection; ///
-  const(char)* function(VteTerminal* terminal) c_vte_terminal_get_icon_title; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_get_input_enabled; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_get_mouse_autohide; ///
-  VtePty* function(VteTerminal* terminal) c_vte_terminal_get_pty; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_get_rewrap_on_resize; ///
-  glong function(VteTerminal* terminal) c_vte_terminal_get_row_count; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_get_scroll_on_insert; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_get_scroll_on_keystroke; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_get_scroll_on_output; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_get_scroll_unit_is_pixels; ///
-  glong function(VteTerminal* terminal) c_vte_terminal_get_scrollback_lines; ///
-  gboolean function(VteTerminal* terminal, const(char)* prop, gboolean* valuep) c_vte_terminal_get_termprop_bool; ///
-  gboolean function(VteTerminal* terminal, int prop, gboolean* valuep) c_vte_terminal_get_termprop_bool_by_id; ///
-  const(ubyte)* function(VteTerminal* terminal, const(char)* prop, size_t* size) c_vte_terminal_get_termprop_data; ///
-  const(ubyte)* function(VteTerminal* terminal, int prop, size_t* size) c_vte_terminal_get_termprop_data_by_id; ///
-  gboolean function(VteTerminal* terminal, const(char)* prop, double* valuep) c_vte_terminal_get_termprop_double; ///
-  gboolean function(VteTerminal* terminal, int prop, double* valuep) c_vte_terminal_get_termprop_double_by_id; ///
-  gboolean function(VteTerminal* terminal, const(char)* prop, GType gtype, long* valuep) c_vte_terminal_get_termprop_enum; ///
-  gboolean function(VteTerminal* terminal, int prop, GType gtype, long* valuep) c_vte_terminal_get_termprop_enum_by_id; ///
-  gboolean function(VteTerminal* terminal, const(char)* prop, GType gtype, gboolean ignoreUnknownFlags, ulong* valuep) c_vte_terminal_get_termprop_flags; ///
-  gboolean function(VteTerminal* terminal, int prop, GType gtype, gboolean ignoreUnknownFlags, ulong* valuep) c_vte_terminal_get_termprop_flags_by_id; ///
-  gboolean function(VteTerminal* terminal, const(char)* prop, long* valuep) c_vte_terminal_get_termprop_int; ///
-  gboolean function(VteTerminal* terminal, int prop, long* valuep) c_vte_terminal_get_termprop_int_by_id; ///
-  gboolean function(VteTerminal* terminal, const(char)* prop, GdkRGBA* color) c_vte_terminal_get_termprop_rgba; ///
-  gboolean function(VteTerminal* terminal, int prop, GdkRGBA* color) c_vte_terminal_get_termprop_rgba_by_id; ///
-  const(char)* function(VteTerminal* terminal, const(char)* prop, size_t* size) c_vte_terminal_get_termprop_string; ///
-  const(char)* function(VteTerminal* terminal, int prop, size_t* size) c_vte_terminal_get_termprop_string_by_id; ///
-  gboolean function(VteTerminal* terminal, const(char)* prop, ulong* valuep) c_vte_terminal_get_termprop_uint; ///
-  gboolean function(VteTerminal* terminal, int prop, ulong* valuep) c_vte_terminal_get_termprop_uint_by_id; ///
-  gboolean function(VteTerminal* terminal, const(char)* prop, GValue* gvalue) c_vte_terminal_get_termprop_value; ///
-  gboolean function(VteTerminal* terminal, int prop, GValue* gvalue) c_vte_terminal_get_termprop_value_by_id; ///
-  char* function(VteTerminal* terminal, VteSelectionFunc isSelected, void* userData, GArray* attributes) c_vte_terminal_get_text; ///
-  VteTextBlinkMode function(VteTerminal* terminal) c_vte_terminal_get_text_blink_mode; ///
-  char* function(VteTerminal* terminal, VteFormat format) c_vte_terminal_get_text_format; ///
-  char* function(VteTerminal* terminal, VteSelectionFunc isSelected, void* userData, GArray* attributes) c_vte_terminal_get_text_include_trailing_spaces; ///
-  char* function(VteTerminal* terminal, glong startRow, glong startCol, glong endRow, glong endCol, VteSelectionFunc isSelected, void* userData, GArray* attributes) c_vte_terminal_get_text_range; ///
-  char* function(VteTerminal* terminal, VteFormat format, long startRow, long startCol, long endRow, long endCol, size_t* length) c_vte_terminal_get_text_range_format; ///
-  char* function(VteTerminal* terminal, VteFormat format) c_vte_terminal_get_text_selected; ///
-  char* function(VteTerminal* terminal, VteFormat format, size_t* length) c_vte_terminal_get_text_selected_full; ///
-  const(char)* function(VteTerminal* terminal) c_vte_terminal_get_window_title; ///
-  const(char)* function(VteTerminal* terminal) c_vte_terminal_get_word_char_exceptions; ///
-  VteAlign function(VteTerminal* terminal) c_vte_terminal_get_xalign; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_get_xfill; ///
-  VteAlign function(VteTerminal* terminal) c_vte_terminal_get_yalign; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_get_yfill; ///
-  char* function(VteTerminal* terminal, GdkEvent* event) c_vte_terminal_hyperlink_check_event; ///
-  int function(VteTerminal* terminal, GRegex* gregex, GRegexMatchFlags gflags) c_vte_terminal_match_add_gregex; ///
-  int function(VteTerminal* terminal, VteRegex* regex, uint flags) c_vte_terminal_match_add_regex; ///
-  char* function(VteTerminal* terminal, glong column, glong row, int* tag) c_vte_terminal_match_check; ///
-  char* function(VteTerminal* terminal, GdkEvent* event, int* tag) c_vte_terminal_match_check_event; ///
-  void function(VteTerminal* terminal, int tag) c_vte_terminal_match_remove; ///
-  void function(VteTerminal* terminal) c_vte_terminal_match_remove_all; ///
-  void function(VteTerminal* terminal, int tag, GdkCursor* cursor) c_vte_terminal_match_set_cursor; ///
-  void function(VteTerminal* terminal, int tag, const(char)* cursorName) c_vte_terminal_match_set_cursor_name; ///
-  void function(VteTerminal* terminal, int tag, GdkCursorType cursorType) c_vte_terminal_match_set_cursor_type; ///
-  void function(VteTerminal* terminal) c_vte_terminal_paste_clipboard; ///
-  void function(VteTerminal* terminal) c_vte_terminal_paste_primary; ///
-  void function(VteTerminal* terminal, const(char)* text) c_vte_terminal_paste_text; ///
-  VtePty* function(VteTerminal* terminal, VtePtyFlags flags, GCancellable* cancellable, GError** _err) c_vte_terminal_pty_new_sync; ///
-  GBytes* function(VteTerminal* terminal, const(char)* prop) c_vte_terminal_ref_termprop_data_bytes; ///
-  GBytes* function(VteTerminal* terminal, int prop) c_vte_terminal_ref_termprop_data_bytes_by_id; ///
-  GdkPixbuf* function(VteTerminal* terminal, const(char)* prop) c_vte_terminal_ref_termprop_image_pixbuf; ///
-  GdkPixbuf* function(VteTerminal* terminal, int prop) c_vte_terminal_ref_termprop_image_pixbuf_by_id; ///
-  cairo_surface_t* function(VteTerminal* terminal, const(char)* prop) c_vte_terminal_ref_termprop_image_surface; ///
-  cairo_surface_t* function(VteTerminal* terminal, int prop) c_vte_terminal_ref_termprop_image_surface_by_id; ///
-  GUri* function(VteTerminal* terminal, const(char)* prop) c_vte_terminal_ref_termprop_uri; ///
-  GUri* function(VteTerminal* terminal, int prop) c_vte_terminal_ref_termprop_uri_by_id; ///
-  GVariant* function(VteTerminal* terminal, const(char)* prop) c_vte_terminal_ref_termprop_variant; ///
-  GVariant* function(VteTerminal* terminal, int prop) c_vte_terminal_ref_termprop_variant_by_id; ///
-  void function(VteTerminal* terminal, gboolean clearTabstops, gboolean clearHistory) c_vte_terminal_reset; ///
-  void function(VteTerminal* terminal, const(char)* prop) c_vte_terminal_reset_termprop; ///
-  void function(VteTerminal* terminal, int prop) c_vte_terminal_reset_termprop_by_id; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_search_find_next; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_search_find_previous; ///
-  GRegex* function(VteTerminal* terminal) c_vte_terminal_search_get_gregex; ///
-  VteRegex* function(VteTerminal* terminal) c_vte_terminal_search_get_regex; ///
-  gboolean function(VteTerminal* terminal) c_vte_terminal_search_get_wrap_around; ///
-  void function(VteTerminal* terminal, GRegex* gregex, GRegexMatchFlags gflags) c_vte_terminal_search_set_gregex; ///
-  void function(VteTerminal* terminal, VteRegex* regex, uint flags) c_vte_terminal_search_set_regex; ///
-  void function(VteTerminal* terminal, gboolean wrapAround) c_vte_terminal_search_set_wrap_around; ///
-  void function(VteTerminal* terminal) c_vte_terminal_select_all; ///
-  void function(VteTerminal* terminal, gboolean allowBold) c_vte_terminal_set_allow_bold; ///
-  void function(VteTerminal* terminal, gboolean allowHyperlink) c_vte_terminal_set_allow_hyperlink; ///
-  void function(VteTerminal* terminal, gboolean isAudible) c_vte_terminal_set_audible_bell; ///
-  void function(VteTerminal* terminal, VteEraseBinding binding) c_vte_terminal_set_backspace_binding; ///
-  void function(VteTerminal* terminal, gboolean boldIsBright) c_vte_terminal_set_bold_is_bright; ///
-  void function(VteTerminal* terminal, double scale) c_vte_terminal_set_cell_height_scale; ///
-  void function(VteTerminal* terminal, double scale) c_vte_terminal_set_cell_width_scale; ///
-  void function(VteTerminal* terminal, int width) c_vte_terminal_set_cjk_ambiguous_width; ///
-  void function(VteTerminal* terminal, gboolean setting) c_vte_terminal_set_clear_background; ///
-  void function(VteTerminal* terminal, const(GdkRGBA)* background) c_vte_terminal_set_color_background; ///
-  void function(VteTerminal* terminal, const(GdkRGBA)* bold) c_vte_terminal_set_color_bold; ///
-  void function(VteTerminal* terminal, const(GdkRGBA)* cursorBackground) c_vte_terminal_set_color_cursor; ///
-  void function(VteTerminal* terminal, const(GdkRGBA)* cursorForeground) c_vte_terminal_set_color_cursor_foreground; ///
-  void function(VteTerminal* terminal, const(GdkRGBA)* foreground) c_vte_terminal_set_color_foreground; ///
-  void function(VteTerminal* terminal, const(GdkRGBA)* highlightBackground) c_vte_terminal_set_color_highlight; ///
-  void function(VteTerminal* terminal, const(GdkRGBA)* highlightForeground) c_vte_terminal_set_color_highlight_foreground; ///
-  void function(VteTerminal* terminal, const(GdkRGBA)* foreground, const(GdkRGBA)* background, const(GdkRGBA)* palette, size_t paletteSize) c_vte_terminal_set_colors; ///
-  void function(VteTerminal* terminal, GtkWidget* menu) c_vte_terminal_set_context_menu; ///
-  void function(VteTerminal* terminal, GMenuModel* model) c_vte_terminal_set_context_menu_model; ///
-  void function(VteTerminal* terminal, VteCursorBlinkMode mode) c_vte_terminal_set_cursor_blink_mode; ///
-  void function(VteTerminal* terminal, VteCursorShape shape) c_vte_terminal_set_cursor_shape; ///
-  void function(VteTerminal* terminal) c_vte_terminal_set_default_colors; ///
-  void function(VteTerminal* terminal, VteEraseBinding binding) c_vte_terminal_set_delete_binding; ///
-  void function(VteTerminal* terminal, gboolean enableA11y) c_vte_terminal_set_enable_a11y; ///
-  void function(VteTerminal* terminal, gboolean enableBidi) c_vte_terminal_set_enable_bidi; ///
-  void function(VteTerminal* terminal, gboolean enable) c_vte_terminal_set_enable_fallback_scrolling; ///
-  void function(VteTerminal* terminal, gboolean enable) c_vte_terminal_set_enable_legacy_osc777; ///
-  void function(VteTerminal* terminal, gboolean enableShaping) c_vte_terminal_set_enable_shaping; ///
-  void function(VteTerminal* terminal, gboolean enabled) c_vte_terminal_set_enable_sixel; ///
-  gboolean function(VteTerminal* terminal, const(char)* codeset, GError** _err) c_vte_terminal_set_encoding; ///
-  void function(VteTerminal* terminal, const(PangoFontDescription)* fontDesc) c_vte_terminal_set_font; ///
-  void function(VteTerminal* terminal, const(cairo_font_options_t)* fontOptions) c_vte_terminal_set_font_options; ///
-  void function(VteTerminal* terminal, double scale) c_vte_terminal_set_font_scale; ///
-  void function(VteTerminal* terminal, GtkWindow* window) c_vte_terminal_set_geometry_hints_for_window; ///
-  void function(VteTerminal* terminal, gboolean enabled) c_vte_terminal_set_input_enabled; ///
-  void function(VteTerminal* terminal, gboolean setting) c_vte_terminal_set_mouse_autohide; ///
-  void function(VteTerminal* terminal, VtePty* pty) c_vte_terminal_set_pty; ///
-  void function(VteTerminal* terminal, gboolean rewrap) c_vte_terminal_set_rewrap_on_resize; ///
-  void function(VteTerminal* terminal, gboolean scroll) c_vte_terminal_set_scroll_on_insert; ///
-  void function(VteTerminal* terminal, gboolean scroll) c_vte_terminal_set_scroll_on_keystroke; ///
-  void function(VteTerminal* terminal, gboolean scroll) c_vte_terminal_set_scroll_on_output; ///
-  void function(VteTerminal* terminal, gboolean enable) c_vte_terminal_set_scroll_unit_is_pixels; ///
-  void function(VteTerminal* terminal, glong lines) c_vte_terminal_set_scrollback_lines; ///
-  void function(VteTerminal* terminal, glong columns, glong rows) c_vte_terminal_set_size; ///
-  void function(VteTerminal* terminal) c_vte_terminal_set_suppress_legacy_signals; ///
-  void function(VteTerminal* terminal, VteTextBlinkMode textBlinkMode) c_vte_terminal_set_text_blink_mode; ///
-  void function(VteTerminal* terminal, const(char)* exceptions) c_vte_terminal_set_word_char_exceptions; ///
-  void function(VteTerminal* terminal, VteAlign align_) c_vte_terminal_set_xalign; ///
-  void function(VteTerminal* terminal, gboolean fill) c_vte_terminal_set_xfill; ///
-  void function(VteTerminal* terminal, VteAlign align_) c_vte_terminal_set_yalign; ///
-  void function(VteTerminal* terminal, gboolean fill) c_vte_terminal_set_yfill; ///
-  void function(VteTerminal* terminal, VtePtyFlags ptyFlags, const(char)* workingDirectory, char** argv, char** envv, GSpawnFlags spawnFlags, GSpawnChildSetupFunc childSetup, void* childSetupData, GDestroyNotify childSetupDataDestroy, int timeout, GCancellable* cancellable, VteTerminalSpawnAsyncCallback callback, void* userData) c_vte_terminal_spawn_async; ///
-  gboolean function(VteTerminal* terminal, VtePtyFlags ptyFlags, const(char)* workingDirectory, char** argv, char** envv, GSpawnFlags spawnFlags, GSpawnChildSetupFunc childSetup, void* childSetupData, GPid* childPid, GCancellable* cancellable, GError** _err) c_vte_terminal_spawn_sync; ///
-  void function(VteTerminal* terminal, VtePtyFlags ptyFlags, const(char)* workingDirectory, const(char*)* argv, const(char*)* envv, const(int)* fds, int nFds, const(int)* mapFds, int nMapFds, GSpawnFlags spawnFlags, GSpawnChildSetupFunc childSetup, void* childSetupData, GDestroyNotify childSetupDataDestroy, int timeout, GCancellable* cancellable, VteTerminalSpawnAsyncCallback callback, void* userData) c_vte_terminal_spawn_with_fds_async; ///
-  void function(VteTerminal* terminal) c_vte_terminal_unselect_all; ///
-  void function(VteTerminal* terminal, GPid childPid) c_vte_terminal_watch_child; ///
-  gboolean function(VteTerminal* terminal, GOutputStream* stream, VteWriteFlags flags, GCancellable* cancellable, GError** _err) c_vte_terminal_write_contents_sync; ///
+// Terminal
+private alias c_vte_terminal_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_vte_terminal_get_typeFn c_vte_terminal_get_type; ///
+private alias c_vte_terminal_newFn = extern(C) GtkWidget* function() nothrow;
+__gshared c_vte_terminal_newFn c_vte_terminal_new; ///
+private alias c_vte_terminal_copy_clipboardFn = extern(C) void function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_copy_clipboardFn c_vte_terminal_copy_clipboard; ///
+private alias c_vte_terminal_copy_clipboard_formatFn = extern(C) void function(VteTerminal* terminal, VteFormat format) nothrow;
+__gshared c_vte_terminal_copy_clipboard_formatFn c_vte_terminal_copy_clipboard_format; ///
+private alias c_vte_terminal_copy_primaryFn = extern(C) void function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_copy_primaryFn c_vte_terminal_copy_primary; ///
+private alias c_vte_terminal_dup_termprop_stringFn = extern(C) char* function(VteTerminal* terminal, const(char)* prop, size_t* size) nothrow;
+__gshared c_vte_terminal_dup_termprop_stringFn c_vte_terminal_dup_termprop_string; ///
+private alias c_vte_terminal_dup_termprop_string_by_idFn = extern(C) char* function(VteTerminal* terminal, int prop, size_t* size) nothrow;
+__gshared c_vte_terminal_dup_termprop_string_by_idFn c_vte_terminal_dup_termprop_string_by_id; ///
+private alias c_vte_terminal_dup_termprop_uuidFn = extern(C) VteUuid* function(VteTerminal* terminal, const(char)* prop) nothrow;
+__gshared c_vte_terminal_dup_termprop_uuidFn c_vte_terminal_dup_termprop_uuid; ///
+private alias c_vte_terminal_dup_termprop_uuid_by_idFn = extern(C) VteUuid* function(VteTerminal* terminal, int prop) nothrow;
+__gshared c_vte_terminal_dup_termprop_uuid_by_idFn c_vte_terminal_dup_termprop_uuid_by_id; ///
+private alias c_vte_terminal_event_check_gregex_simpleFn = extern(C) gboolean function(VteTerminal* terminal, GdkEvent* event, GRegex** regexes, size_t nRegexes, GRegexMatchFlags matchFlags, char** matches) nothrow;
+__gshared c_vte_terminal_event_check_gregex_simpleFn c_vte_terminal_event_check_gregex_simple; ///
+private alias c_vte_terminal_event_check_regex_arrayFn = extern(C) char** function(VteTerminal* terminal, GdkEvent* event, VteRegex** regexes, size_t nRegexes, uint matchFlags, size_t* nMatches) nothrow;
+__gshared c_vte_terminal_event_check_regex_arrayFn c_vte_terminal_event_check_regex_array; ///
+private alias c_vte_terminal_event_check_regex_simpleFn = extern(C) gboolean function(VteTerminal* terminal, GdkEvent* event, VteRegex** regexes, size_t nRegexes, uint matchFlags, char** matches) nothrow;
+__gshared c_vte_terminal_event_check_regex_simpleFn c_vte_terminal_event_check_regex_simple; ///
+private alias c_vte_terminal_feedFn = extern(C) void function(VteTerminal* terminal, const(ubyte)* data, ptrdiff_t length) nothrow;
+__gshared c_vte_terminal_feedFn c_vte_terminal_feed; ///
+private alias c_vte_terminal_feed_childFn = extern(C) void function(VteTerminal* terminal, const(ubyte)* text, ptrdiff_t length) nothrow;
+__gshared c_vte_terminal_feed_childFn c_vte_terminal_feed_child; ///
+private alias c_vte_terminal_feed_child_binaryFn = extern(C) void function(VteTerminal* terminal, const(ubyte)* data, size_t length) nothrow;
+__gshared c_vte_terminal_feed_child_binaryFn c_vte_terminal_feed_child_binary; ///
+private alias c_vte_terminal_get_allow_boldFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_allow_boldFn c_vte_terminal_get_allow_bold; ///
+private alias c_vte_terminal_get_allow_hyperlinkFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_allow_hyperlinkFn c_vte_terminal_get_allow_hyperlink; ///
+private alias c_vte_terminal_get_audible_bellFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_audible_bellFn c_vte_terminal_get_audible_bell; ///
+private alias c_vte_terminal_get_bold_is_brightFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_bold_is_brightFn c_vte_terminal_get_bold_is_bright; ///
+private alias c_vte_terminal_get_cell_height_scaleFn = extern(C) double function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_cell_height_scaleFn c_vte_terminal_get_cell_height_scale; ///
+private alias c_vte_terminal_get_cell_width_scaleFn = extern(C) double function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_cell_width_scaleFn c_vte_terminal_get_cell_width_scale; ///
+private alias c_vte_terminal_get_char_heightFn = extern(C) glong function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_char_heightFn c_vte_terminal_get_char_height; ///
+private alias c_vte_terminal_get_char_widthFn = extern(C) glong function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_char_widthFn c_vte_terminal_get_char_width; ///
+private alias c_vte_terminal_get_cjk_ambiguous_widthFn = extern(C) int function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_cjk_ambiguous_widthFn c_vte_terminal_get_cjk_ambiguous_width; ///
+private alias c_vte_terminal_get_color_background_for_drawFn = extern(C) void function(VteTerminal* terminal, GdkRGBA* color) nothrow;
+__gshared c_vte_terminal_get_color_background_for_drawFn c_vte_terminal_get_color_background_for_draw; ///
+private alias c_vte_terminal_get_column_countFn = extern(C) glong function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_column_countFn c_vte_terminal_get_column_count; ///
+private alias c_vte_terminal_get_context_menuFn = extern(C) GtkWidget* function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_context_menuFn c_vte_terminal_get_context_menu; ///
+private alias c_vte_terminal_get_context_menu_modelFn = extern(C) GMenuModel* function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_context_menu_modelFn c_vte_terminal_get_context_menu_model; ///
+private alias c_vte_terminal_get_current_directory_uriFn = extern(C) const(char)* function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_current_directory_uriFn c_vte_terminal_get_current_directory_uri; ///
+private alias c_vte_terminal_get_current_file_uriFn = extern(C) const(char)* function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_current_file_uriFn c_vte_terminal_get_current_file_uri; ///
+private alias c_vte_terminal_get_cursor_blink_modeFn = extern(C) VteCursorBlinkMode function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_cursor_blink_modeFn c_vte_terminal_get_cursor_blink_mode; ///
+private alias c_vte_terminal_get_cursor_positionFn = extern(C) void function(VteTerminal* terminal, glong* column, glong* row) nothrow;
+__gshared c_vte_terminal_get_cursor_positionFn c_vte_terminal_get_cursor_position; ///
+private alias c_vte_terminal_get_cursor_shapeFn = extern(C) VteCursorShape function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_cursor_shapeFn c_vte_terminal_get_cursor_shape; ///
+private alias c_vte_terminal_get_enable_a11yFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_enable_a11yFn c_vte_terminal_get_enable_a11y; ///
+private alias c_vte_terminal_get_enable_bidiFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_enable_bidiFn c_vte_terminal_get_enable_bidi; ///
+private alias c_vte_terminal_get_enable_fallback_scrollingFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_enable_fallback_scrollingFn c_vte_terminal_get_enable_fallback_scrolling; ///
+private alias c_vte_terminal_get_enable_legacy_osc777Fn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_enable_legacy_osc777Fn c_vte_terminal_get_enable_legacy_osc777; ///
+private alias c_vte_terminal_get_enable_shapingFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_enable_shapingFn c_vte_terminal_get_enable_shaping; ///
+private alias c_vte_terminal_get_enable_sixelFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_enable_sixelFn c_vte_terminal_get_enable_sixel; ///
+private alias c_vte_terminal_get_encodingFn = extern(C) const(char)* function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_encodingFn c_vte_terminal_get_encoding; ///
+private alias c_vte_terminal_get_fontFn = extern(C) const(PangoFontDescription)* function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_fontFn c_vte_terminal_get_font; ///
+private alias c_vte_terminal_get_font_optionsFn = extern(C) const(cairo_font_options_t)* function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_font_optionsFn c_vte_terminal_get_font_options; ///
+private alias c_vte_terminal_get_font_scaleFn = extern(C) double function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_font_scaleFn c_vte_terminal_get_font_scale; ///
+private alias c_vte_terminal_get_geometry_hintsFn = extern(C) void function(VteTerminal* terminal, GdkGeometry* hints, int minRows, int minColumns) nothrow;
+__gshared c_vte_terminal_get_geometry_hintsFn c_vte_terminal_get_geometry_hints; ///
+private alias c_vte_terminal_get_has_selectionFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_has_selectionFn c_vte_terminal_get_has_selection; ///
+private alias c_vte_terminal_get_icon_titleFn = extern(C) const(char)* function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_icon_titleFn c_vte_terminal_get_icon_title; ///
+private alias c_vte_terminal_get_input_enabledFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_input_enabledFn c_vte_terminal_get_input_enabled; ///
+private alias c_vte_terminal_get_mouse_autohideFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_mouse_autohideFn c_vte_terminal_get_mouse_autohide; ///
+private alias c_vte_terminal_get_ptyFn = extern(C) VtePty* function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_ptyFn c_vte_terminal_get_pty; ///
+private alias c_vte_terminal_get_rewrap_on_resizeFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_rewrap_on_resizeFn c_vte_terminal_get_rewrap_on_resize; ///
+private alias c_vte_terminal_get_row_countFn = extern(C) glong function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_row_countFn c_vte_terminal_get_row_count; ///
+private alias c_vte_terminal_get_scroll_on_insertFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_scroll_on_insertFn c_vte_terminal_get_scroll_on_insert; ///
+private alias c_vte_terminal_get_scroll_on_keystrokeFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_scroll_on_keystrokeFn c_vte_terminal_get_scroll_on_keystroke; ///
+private alias c_vte_terminal_get_scroll_on_outputFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_scroll_on_outputFn c_vte_terminal_get_scroll_on_output; ///
+private alias c_vte_terminal_get_scroll_unit_is_pixelsFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_scroll_unit_is_pixelsFn c_vte_terminal_get_scroll_unit_is_pixels; ///
+private alias c_vte_terminal_get_scrollback_linesFn = extern(C) glong function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_scrollback_linesFn c_vte_terminal_get_scrollback_lines; ///
+private alias c_vte_terminal_get_termprop_boolFn = extern(C) gboolean function(VteTerminal* terminal, const(char)* prop, gboolean* valuep) nothrow;
+__gshared c_vte_terminal_get_termprop_boolFn c_vte_terminal_get_termprop_bool; ///
+private alias c_vte_terminal_get_termprop_bool_by_idFn = extern(C) gboolean function(VteTerminal* terminal, int prop, gboolean* valuep) nothrow;
+__gshared c_vte_terminal_get_termprop_bool_by_idFn c_vte_terminal_get_termprop_bool_by_id; ///
+private alias c_vte_terminal_get_termprop_dataFn = extern(C) const(ubyte)* function(VteTerminal* terminal, const(char)* prop, size_t* size) nothrow;
+__gshared c_vte_terminal_get_termprop_dataFn c_vte_terminal_get_termprop_data; ///
+private alias c_vte_terminal_get_termprop_data_by_idFn = extern(C) const(ubyte)* function(VteTerminal* terminal, int prop, size_t* size) nothrow;
+__gshared c_vte_terminal_get_termprop_data_by_idFn c_vte_terminal_get_termprop_data_by_id; ///
+private alias c_vte_terminal_get_termprop_doubleFn = extern(C) gboolean function(VteTerminal* terminal, const(char)* prop, double* valuep) nothrow;
+__gshared c_vte_terminal_get_termprop_doubleFn c_vte_terminal_get_termprop_double; ///
+private alias c_vte_terminal_get_termprop_double_by_idFn = extern(C) gboolean function(VteTerminal* terminal, int prop, double* valuep) nothrow;
+__gshared c_vte_terminal_get_termprop_double_by_idFn c_vte_terminal_get_termprop_double_by_id; ///
+private alias c_vte_terminal_get_termprop_enumFn = extern(C) gboolean function(VteTerminal* terminal, const(char)* prop, GType gtype, long* valuep) nothrow;
+__gshared c_vte_terminal_get_termprop_enumFn c_vte_terminal_get_termprop_enum; ///
+private alias c_vte_terminal_get_termprop_enum_by_idFn = extern(C) gboolean function(VteTerminal* terminal, int prop, GType gtype, long* valuep) nothrow;
+__gshared c_vte_terminal_get_termprop_enum_by_idFn c_vte_terminal_get_termprop_enum_by_id; ///
+private alias c_vte_terminal_get_termprop_flagsFn = extern(C) gboolean function(VteTerminal* terminal, const(char)* prop, GType gtype, gboolean ignoreUnknownFlags, ulong* valuep) nothrow;
+__gshared c_vte_terminal_get_termprop_flagsFn c_vte_terminal_get_termprop_flags; ///
+private alias c_vte_terminal_get_termprop_flags_by_idFn = extern(C) gboolean function(VteTerminal* terminal, int prop, GType gtype, gboolean ignoreUnknownFlags, ulong* valuep) nothrow;
+__gshared c_vte_terminal_get_termprop_flags_by_idFn c_vte_terminal_get_termprop_flags_by_id; ///
+private alias c_vte_terminal_get_termprop_intFn = extern(C) gboolean function(VteTerminal* terminal, const(char)* prop, long* valuep) nothrow;
+__gshared c_vte_terminal_get_termprop_intFn c_vte_terminal_get_termprop_int; ///
+private alias c_vte_terminal_get_termprop_int_by_idFn = extern(C) gboolean function(VteTerminal* terminal, int prop, long* valuep) nothrow;
+__gshared c_vte_terminal_get_termprop_int_by_idFn c_vte_terminal_get_termprop_int_by_id; ///
+private alias c_vte_terminal_get_termprop_rgbaFn = extern(C) gboolean function(VteTerminal* terminal, const(char)* prop, GdkRGBA* color) nothrow;
+__gshared c_vte_terminal_get_termprop_rgbaFn c_vte_terminal_get_termprop_rgba; ///
+private alias c_vte_terminal_get_termprop_rgba_by_idFn = extern(C) gboolean function(VteTerminal* terminal, int prop, GdkRGBA* color) nothrow;
+__gshared c_vte_terminal_get_termprop_rgba_by_idFn c_vte_terminal_get_termprop_rgba_by_id; ///
+private alias c_vte_terminal_get_termprop_stringFn = extern(C) const(char)* function(VteTerminal* terminal, const(char)* prop, size_t* size) nothrow;
+__gshared c_vte_terminal_get_termprop_stringFn c_vte_terminal_get_termprop_string; ///
+private alias c_vte_terminal_get_termprop_string_by_idFn = extern(C) const(char)* function(VteTerminal* terminal, int prop, size_t* size) nothrow;
+__gshared c_vte_terminal_get_termprop_string_by_idFn c_vte_terminal_get_termprop_string_by_id; ///
+private alias c_vte_terminal_get_termprop_uintFn = extern(C) gboolean function(VteTerminal* terminal, const(char)* prop, ulong* valuep) nothrow;
+__gshared c_vte_terminal_get_termprop_uintFn c_vte_terminal_get_termprop_uint; ///
+private alias c_vte_terminal_get_termprop_uint_by_idFn = extern(C) gboolean function(VteTerminal* terminal, int prop, ulong* valuep) nothrow;
+__gshared c_vte_terminal_get_termprop_uint_by_idFn c_vte_terminal_get_termprop_uint_by_id; ///
+private alias c_vte_terminal_get_termprop_valueFn = extern(C) gboolean function(VteTerminal* terminal, const(char)* prop, GValue* gvalue) nothrow;
+__gshared c_vte_terminal_get_termprop_valueFn c_vte_terminal_get_termprop_value; ///
+private alias c_vte_terminal_get_termprop_value_by_idFn = extern(C) gboolean function(VteTerminal* terminal, int prop, GValue* gvalue) nothrow;
+__gshared c_vte_terminal_get_termprop_value_by_idFn c_vte_terminal_get_termprop_value_by_id; ///
+private alias c_vte_terminal_get_textFn = extern(C) char* function(VteTerminal* terminal, VteSelectionFunc isSelected, void* userData, GArray* attributes) nothrow;
+__gshared c_vte_terminal_get_textFn c_vte_terminal_get_text; ///
+private alias c_vte_terminal_get_text_blink_modeFn = extern(C) VteTextBlinkMode function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_text_blink_modeFn c_vte_terminal_get_text_blink_mode; ///
+private alias c_vte_terminal_get_text_formatFn = extern(C) char* function(VteTerminal* terminal, VteFormat format) nothrow;
+__gshared c_vte_terminal_get_text_formatFn c_vte_terminal_get_text_format; ///
+private alias c_vte_terminal_get_text_include_trailing_spacesFn = extern(C) char* function(VteTerminal* terminal, VteSelectionFunc isSelected, void* userData, GArray* attributes) nothrow;
+__gshared c_vte_terminal_get_text_include_trailing_spacesFn c_vte_terminal_get_text_include_trailing_spaces; ///
+private alias c_vte_terminal_get_text_rangeFn = extern(C) char* function(VteTerminal* terminal, glong startRow, glong startCol, glong endRow, glong endCol, VteSelectionFunc isSelected, void* userData, GArray* attributes) nothrow;
+__gshared c_vte_terminal_get_text_rangeFn c_vte_terminal_get_text_range; ///
+private alias c_vte_terminal_get_text_range_formatFn = extern(C) char* function(VteTerminal* terminal, VteFormat format, long startRow, long startCol, long endRow, long endCol, size_t* length) nothrow;
+__gshared c_vte_terminal_get_text_range_formatFn c_vte_terminal_get_text_range_format; ///
+private alias c_vte_terminal_get_text_selectedFn = extern(C) char* function(VteTerminal* terminal, VteFormat format) nothrow;
+__gshared c_vte_terminal_get_text_selectedFn c_vte_terminal_get_text_selected; ///
+private alias c_vte_terminal_get_text_selected_fullFn = extern(C) char* function(VteTerminal* terminal, VteFormat format, size_t* length) nothrow;
+__gshared c_vte_terminal_get_text_selected_fullFn c_vte_terminal_get_text_selected_full; ///
+private alias c_vte_terminal_get_window_titleFn = extern(C) const(char)* function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_window_titleFn c_vte_terminal_get_window_title; ///
+private alias c_vte_terminal_get_word_char_exceptionsFn = extern(C) const(char)* function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_word_char_exceptionsFn c_vte_terminal_get_word_char_exceptions; ///
+private alias c_vte_terminal_get_xalignFn = extern(C) VteAlign function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_xalignFn c_vte_terminal_get_xalign; ///
+private alias c_vte_terminal_get_xfillFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_xfillFn c_vte_terminal_get_xfill; ///
+private alias c_vte_terminal_get_yalignFn = extern(C) VteAlign function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_yalignFn c_vte_terminal_get_yalign; ///
+private alias c_vte_terminal_get_yfillFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_get_yfillFn c_vte_terminal_get_yfill; ///
+private alias c_vte_terminal_hyperlink_check_eventFn = extern(C) char* function(VteTerminal* terminal, GdkEvent* event) nothrow;
+__gshared c_vte_terminal_hyperlink_check_eventFn c_vte_terminal_hyperlink_check_event; ///
+private alias c_vte_terminal_match_add_gregexFn = extern(C) int function(VteTerminal* terminal, GRegex* gregex, GRegexMatchFlags gflags) nothrow;
+__gshared c_vte_terminal_match_add_gregexFn c_vte_terminal_match_add_gregex; ///
+private alias c_vte_terminal_match_add_regexFn = extern(C) int function(VteTerminal* terminal, VteRegex* regex, uint flags) nothrow;
+__gshared c_vte_terminal_match_add_regexFn c_vte_terminal_match_add_regex; ///
+private alias c_vte_terminal_match_checkFn = extern(C) char* function(VteTerminal* terminal, glong column, glong row, int* tag) nothrow;
+__gshared c_vte_terminal_match_checkFn c_vte_terminal_match_check; ///
+private alias c_vte_terminal_match_check_eventFn = extern(C) char* function(VteTerminal* terminal, GdkEvent* event, int* tag) nothrow;
+__gshared c_vte_terminal_match_check_eventFn c_vte_terminal_match_check_event; ///
+private alias c_vte_terminal_match_removeFn = extern(C) void function(VteTerminal* terminal, int tag) nothrow;
+__gshared c_vte_terminal_match_removeFn c_vte_terminal_match_remove; ///
+private alias c_vte_terminal_match_remove_allFn = extern(C) void function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_match_remove_allFn c_vte_terminal_match_remove_all; ///
+private alias c_vte_terminal_match_set_cursorFn = extern(C) void function(VteTerminal* terminal, int tag, GdkCursor* cursor) nothrow;
+__gshared c_vte_terminal_match_set_cursorFn c_vte_terminal_match_set_cursor; ///
+private alias c_vte_terminal_match_set_cursor_nameFn = extern(C) void function(VteTerminal* terminal, int tag, const(char)* cursorName) nothrow;
+__gshared c_vte_terminal_match_set_cursor_nameFn c_vte_terminal_match_set_cursor_name; ///
+private alias c_vte_terminal_match_set_cursor_typeFn = extern(C) void function(VteTerminal* terminal, int tag, GdkCursorType cursorType) nothrow;
+__gshared c_vte_terminal_match_set_cursor_typeFn c_vte_terminal_match_set_cursor_type; ///
+private alias c_vte_terminal_paste_clipboardFn = extern(C) void function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_paste_clipboardFn c_vte_terminal_paste_clipboard; ///
+private alias c_vte_terminal_paste_primaryFn = extern(C) void function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_paste_primaryFn c_vte_terminal_paste_primary; ///
+private alias c_vte_terminal_paste_textFn = extern(C) void function(VteTerminal* terminal, const(char)* text) nothrow;
+__gshared c_vte_terminal_paste_textFn c_vte_terminal_paste_text; ///
+private alias c_vte_terminal_pty_new_syncFn = extern(C) VtePty* function(VteTerminal* terminal, VtePtyFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_vte_terminal_pty_new_syncFn c_vte_terminal_pty_new_sync; ///
+private alias c_vte_terminal_ref_termprop_data_bytesFn = extern(C) GBytes* function(VteTerminal* terminal, const(char)* prop) nothrow;
+__gshared c_vte_terminal_ref_termprop_data_bytesFn c_vte_terminal_ref_termprop_data_bytes; ///
+private alias c_vte_terminal_ref_termprop_data_bytes_by_idFn = extern(C) GBytes* function(VteTerminal* terminal, int prop) nothrow;
+__gshared c_vte_terminal_ref_termprop_data_bytes_by_idFn c_vte_terminal_ref_termprop_data_bytes_by_id; ///
+private alias c_vte_terminal_ref_termprop_image_pixbufFn = extern(C) GdkPixbuf* function(VteTerminal* terminal, const(char)* prop) nothrow;
+__gshared c_vte_terminal_ref_termprop_image_pixbufFn c_vte_terminal_ref_termprop_image_pixbuf; ///
+private alias c_vte_terminal_ref_termprop_image_pixbuf_by_idFn = extern(C) GdkPixbuf* function(VteTerminal* terminal, int prop) nothrow;
+__gshared c_vte_terminal_ref_termprop_image_pixbuf_by_idFn c_vte_terminal_ref_termprop_image_pixbuf_by_id; ///
+private alias c_vte_terminal_ref_termprop_image_surfaceFn = extern(C) cairo_surface_t* function(VteTerminal* terminal, const(char)* prop) nothrow;
+__gshared c_vte_terminal_ref_termprop_image_surfaceFn c_vte_terminal_ref_termprop_image_surface; ///
+private alias c_vte_terminal_ref_termprop_image_surface_by_idFn = extern(C) cairo_surface_t* function(VteTerminal* terminal, int prop) nothrow;
+__gshared c_vte_terminal_ref_termprop_image_surface_by_idFn c_vte_terminal_ref_termprop_image_surface_by_id; ///
+private alias c_vte_terminal_ref_termprop_uriFn = extern(C) GUri* function(VteTerminal* terminal, const(char)* prop) nothrow;
+__gshared c_vte_terminal_ref_termprop_uriFn c_vte_terminal_ref_termprop_uri; ///
+private alias c_vte_terminal_ref_termprop_uri_by_idFn = extern(C) GUri* function(VteTerminal* terminal, int prop) nothrow;
+__gshared c_vte_terminal_ref_termprop_uri_by_idFn c_vte_terminal_ref_termprop_uri_by_id; ///
+private alias c_vte_terminal_ref_termprop_variantFn = extern(C) GVariant* function(VteTerminal* terminal, const(char)* prop) nothrow;
+__gshared c_vte_terminal_ref_termprop_variantFn c_vte_terminal_ref_termprop_variant; ///
+private alias c_vte_terminal_ref_termprop_variant_by_idFn = extern(C) GVariant* function(VteTerminal* terminal, int prop) nothrow;
+__gshared c_vte_terminal_ref_termprop_variant_by_idFn c_vte_terminal_ref_termprop_variant_by_id; ///
+private alias c_vte_terminal_resetFn = extern(C) void function(VteTerminal* terminal, gboolean clearTabstops, gboolean clearHistory) nothrow;
+__gshared c_vte_terminal_resetFn c_vte_terminal_reset; ///
+private alias c_vte_terminal_reset_termpropFn = extern(C) void function(VteTerminal* terminal, const(char)* prop) nothrow;
+__gshared c_vte_terminal_reset_termpropFn c_vte_terminal_reset_termprop; ///
+private alias c_vte_terminal_reset_termprop_by_idFn = extern(C) void function(VteTerminal* terminal, int prop) nothrow;
+__gshared c_vte_terminal_reset_termprop_by_idFn c_vte_terminal_reset_termprop_by_id; ///
+private alias c_vte_terminal_search_find_nextFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_search_find_nextFn c_vte_terminal_search_find_next; ///
+private alias c_vte_terminal_search_find_previousFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_search_find_previousFn c_vte_terminal_search_find_previous; ///
+private alias c_vte_terminal_search_get_gregexFn = extern(C) GRegex* function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_search_get_gregexFn c_vte_terminal_search_get_gregex; ///
+private alias c_vte_terminal_search_get_regexFn = extern(C) VteRegex* function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_search_get_regexFn c_vte_terminal_search_get_regex; ///
+private alias c_vte_terminal_search_get_wrap_aroundFn = extern(C) gboolean function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_search_get_wrap_aroundFn c_vte_terminal_search_get_wrap_around; ///
+private alias c_vte_terminal_search_set_gregexFn = extern(C) void function(VteTerminal* terminal, GRegex* gregex, GRegexMatchFlags gflags) nothrow;
+__gshared c_vte_terminal_search_set_gregexFn c_vte_terminal_search_set_gregex; ///
+private alias c_vte_terminal_search_set_regexFn = extern(C) void function(VteTerminal* terminal, VteRegex* regex, uint flags) nothrow;
+__gshared c_vte_terminal_search_set_regexFn c_vte_terminal_search_set_regex; ///
+private alias c_vte_terminal_search_set_wrap_aroundFn = extern(C) void function(VteTerminal* terminal, gboolean wrapAround) nothrow;
+__gshared c_vte_terminal_search_set_wrap_aroundFn c_vte_terminal_search_set_wrap_around; ///
+private alias c_vte_terminal_select_allFn = extern(C) void function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_select_allFn c_vte_terminal_select_all; ///
+private alias c_vte_terminal_set_allow_boldFn = extern(C) void function(VteTerminal* terminal, gboolean allowBold) nothrow;
+__gshared c_vte_terminal_set_allow_boldFn c_vte_terminal_set_allow_bold; ///
+private alias c_vte_terminal_set_allow_hyperlinkFn = extern(C) void function(VteTerminal* terminal, gboolean allowHyperlink) nothrow;
+__gshared c_vte_terminal_set_allow_hyperlinkFn c_vte_terminal_set_allow_hyperlink; ///
+private alias c_vte_terminal_set_audible_bellFn = extern(C) void function(VteTerminal* terminal, gboolean isAudible) nothrow;
+__gshared c_vte_terminal_set_audible_bellFn c_vte_terminal_set_audible_bell; ///
+private alias c_vte_terminal_set_backspace_bindingFn = extern(C) void function(VteTerminal* terminal, VteEraseBinding binding) nothrow;
+__gshared c_vte_terminal_set_backspace_bindingFn c_vte_terminal_set_backspace_binding; ///
+private alias c_vte_terminal_set_bold_is_brightFn = extern(C) void function(VteTerminal* terminal, gboolean boldIsBright) nothrow;
+__gshared c_vte_terminal_set_bold_is_brightFn c_vte_terminal_set_bold_is_bright; ///
+private alias c_vte_terminal_set_cell_height_scaleFn = extern(C) void function(VteTerminal* terminal, double scale) nothrow;
+__gshared c_vte_terminal_set_cell_height_scaleFn c_vte_terminal_set_cell_height_scale; ///
+private alias c_vte_terminal_set_cell_width_scaleFn = extern(C) void function(VteTerminal* terminal, double scale) nothrow;
+__gshared c_vte_terminal_set_cell_width_scaleFn c_vte_terminal_set_cell_width_scale; ///
+private alias c_vte_terminal_set_cjk_ambiguous_widthFn = extern(C) void function(VteTerminal* terminal, int width) nothrow;
+__gshared c_vte_terminal_set_cjk_ambiguous_widthFn c_vte_terminal_set_cjk_ambiguous_width; ///
+private alias c_vte_terminal_set_clear_backgroundFn = extern(C) void function(VteTerminal* terminal, gboolean setting) nothrow;
+__gshared c_vte_terminal_set_clear_backgroundFn c_vte_terminal_set_clear_background; ///
+private alias c_vte_terminal_set_color_backgroundFn = extern(C) void function(VteTerminal* terminal, const(GdkRGBA)* background) nothrow;
+__gshared c_vte_terminal_set_color_backgroundFn c_vte_terminal_set_color_background; ///
+private alias c_vte_terminal_set_color_boldFn = extern(C) void function(VteTerminal* terminal, const(GdkRGBA)* bold) nothrow;
+__gshared c_vte_terminal_set_color_boldFn c_vte_terminal_set_color_bold; ///
+private alias c_vte_terminal_set_color_cursorFn = extern(C) void function(VteTerminal* terminal, const(GdkRGBA)* cursorBackground) nothrow;
+__gshared c_vte_terminal_set_color_cursorFn c_vte_terminal_set_color_cursor; ///
+private alias c_vte_terminal_set_color_cursor_foregroundFn = extern(C) void function(VteTerminal* terminal, const(GdkRGBA)* cursorForeground) nothrow;
+__gshared c_vte_terminal_set_color_cursor_foregroundFn c_vte_terminal_set_color_cursor_foreground; ///
+private alias c_vte_terminal_set_color_foregroundFn = extern(C) void function(VteTerminal* terminal, const(GdkRGBA)* foreground) nothrow;
+__gshared c_vte_terminal_set_color_foregroundFn c_vte_terminal_set_color_foreground; ///
+private alias c_vte_terminal_set_color_highlightFn = extern(C) void function(VteTerminal* terminal, const(GdkRGBA)* highlightBackground) nothrow;
+__gshared c_vte_terminal_set_color_highlightFn c_vte_terminal_set_color_highlight; ///
+private alias c_vte_terminal_set_color_highlight_foregroundFn = extern(C) void function(VteTerminal* terminal, const(GdkRGBA)* highlightForeground) nothrow;
+__gshared c_vte_terminal_set_color_highlight_foregroundFn c_vte_terminal_set_color_highlight_foreground; ///
+private alias c_vte_terminal_set_colorsFn = extern(C) void function(VteTerminal* terminal, const(GdkRGBA)* foreground, const(GdkRGBA)* background, const(GdkRGBA)* palette, size_t paletteSize) nothrow;
+__gshared c_vte_terminal_set_colorsFn c_vte_terminal_set_colors; ///
+private alias c_vte_terminal_set_context_menuFn = extern(C) void function(VteTerminal* terminal, GtkWidget* menu) nothrow;
+__gshared c_vte_terminal_set_context_menuFn c_vte_terminal_set_context_menu; ///
+private alias c_vte_terminal_set_context_menu_modelFn = extern(C) void function(VteTerminal* terminal, GMenuModel* model) nothrow;
+__gshared c_vte_terminal_set_context_menu_modelFn c_vte_terminal_set_context_menu_model; ///
+private alias c_vte_terminal_set_cursor_blink_modeFn = extern(C) void function(VteTerminal* terminal, VteCursorBlinkMode mode) nothrow;
+__gshared c_vte_terminal_set_cursor_blink_modeFn c_vte_terminal_set_cursor_blink_mode; ///
+private alias c_vte_terminal_set_cursor_shapeFn = extern(C) void function(VteTerminal* terminal, VteCursorShape shape) nothrow;
+__gshared c_vte_terminal_set_cursor_shapeFn c_vte_terminal_set_cursor_shape; ///
+private alias c_vte_terminal_set_default_colorsFn = extern(C) void function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_set_default_colorsFn c_vte_terminal_set_default_colors; ///
+private alias c_vte_terminal_set_delete_bindingFn = extern(C) void function(VteTerminal* terminal, VteEraseBinding binding) nothrow;
+__gshared c_vte_terminal_set_delete_bindingFn c_vte_terminal_set_delete_binding; ///
+private alias c_vte_terminal_set_enable_a11yFn = extern(C) void function(VteTerminal* terminal, gboolean enableA11y) nothrow;
+__gshared c_vte_terminal_set_enable_a11yFn c_vte_terminal_set_enable_a11y; ///
+private alias c_vte_terminal_set_enable_bidiFn = extern(C) void function(VteTerminal* terminal, gboolean enableBidi) nothrow;
+__gshared c_vte_terminal_set_enable_bidiFn c_vte_terminal_set_enable_bidi; ///
+private alias c_vte_terminal_set_enable_fallback_scrollingFn = extern(C) void function(VteTerminal* terminal, gboolean enable) nothrow;
+__gshared c_vte_terminal_set_enable_fallback_scrollingFn c_vte_terminal_set_enable_fallback_scrolling; ///
+private alias c_vte_terminal_set_enable_legacy_osc777Fn = extern(C) void function(VteTerminal* terminal, gboolean enable) nothrow;
+__gshared c_vte_terminal_set_enable_legacy_osc777Fn c_vte_terminal_set_enable_legacy_osc777; ///
+private alias c_vte_terminal_set_enable_shapingFn = extern(C) void function(VteTerminal* terminal, gboolean enableShaping) nothrow;
+__gshared c_vte_terminal_set_enable_shapingFn c_vte_terminal_set_enable_shaping; ///
+private alias c_vte_terminal_set_enable_sixelFn = extern(C) void function(VteTerminal* terminal, gboolean enabled) nothrow;
+__gshared c_vte_terminal_set_enable_sixelFn c_vte_terminal_set_enable_sixel; ///
+private alias c_vte_terminal_set_encodingFn = extern(C) gboolean function(VteTerminal* terminal, const(char)* codeset, GError** _err) nothrow;
+__gshared c_vte_terminal_set_encodingFn c_vte_terminal_set_encoding; ///
+private alias c_vte_terminal_set_fontFn = extern(C) void function(VteTerminal* terminal, const(PangoFontDescription)* fontDesc) nothrow;
+__gshared c_vte_terminal_set_fontFn c_vte_terminal_set_font; ///
+private alias c_vte_terminal_set_font_optionsFn = extern(C) void function(VteTerminal* terminal, const(cairo_font_options_t)* fontOptions) nothrow;
+__gshared c_vte_terminal_set_font_optionsFn c_vte_terminal_set_font_options; ///
+private alias c_vte_terminal_set_font_scaleFn = extern(C) void function(VteTerminal* terminal, double scale) nothrow;
+__gshared c_vte_terminal_set_font_scaleFn c_vte_terminal_set_font_scale; ///
+private alias c_vte_terminal_set_geometry_hints_for_windowFn = extern(C) void function(VteTerminal* terminal, GtkWindow* window) nothrow;
+__gshared c_vte_terminal_set_geometry_hints_for_windowFn c_vte_terminal_set_geometry_hints_for_window; ///
+private alias c_vte_terminal_set_input_enabledFn = extern(C) void function(VteTerminal* terminal, gboolean enabled) nothrow;
+__gshared c_vte_terminal_set_input_enabledFn c_vte_terminal_set_input_enabled; ///
+private alias c_vte_terminal_set_mouse_autohideFn = extern(C) void function(VteTerminal* terminal, gboolean setting) nothrow;
+__gshared c_vte_terminal_set_mouse_autohideFn c_vte_terminal_set_mouse_autohide; ///
+private alias c_vte_terminal_set_ptyFn = extern(C) void function(VteTerminal* terminal, VtePty* pty) nothrow;
+__gshared c_vte_terminal_set_ptyFn c_vte_terminal_set_pty; ///
+private alias c_vte_terminal_set_rewrap_on_resizeFn = extern(C) void function(VteTerminal* terminal, gboolean rewrap) nothrow;
+__gshared c_vte_terminal_set_rewrap_on_resizeFn c_vte_terminal_set_rewrap_on_resize; ///
+private alias c_vte_terminal_set_scroll_on_insertFn = extern(C) void function(VteTerminal* terminal, gboolean scroll) nothrow;
+__gshared c_vte_terminal_set_scroll_on_insertFn c_vte_terminal_set_scroll_on_insert; ///
+private alias c_vte_terminal_set_scroll_on_keystrokeFn = extern(C) void function(VteTerminal* terminal, gboolean scroll) nothrow;
+__gshared c_vte_terminal_set_scroll_on_keystrokeFn c_vte_terminal_set_scroll_on_keystroke; ///
+private alias c_vte_terminal_set_scroll_on_outputFn = extern(C) void function(VteTerminal* terminal, gboolean scroll) nothrow;
+__gshared c_vte_terminal_set_scroll_on_outputFn c_vte_terminal_set_scroll_on_output; ///
+private alias c_vte_terminal_set_scroll_unit_is_pixelsFn = extern(C) void function(VteTerminal* terminal, gboolean enable) nothrow;
+__gshared c_vte_terminal_set_scroll_unit_is_pixelsFn c_vte_terminal_set_scroll_unit_is_pixels; ///
+private alias c_vte_terminal_set_scrollback_linesFn = extern(C) void function(VteTerminal* terminal, glong lines) nothrow;
+__gshared c_vte_terminal_set_scrollback_linesFn c_vte_terminal_set_scrollback_lines; ///
+private alias c_vte_terminal_set_sizeFn = extern(C) void function(VteTerminal* terminal, glong columns, glong rows) nothrow;
+__gshared c_vte_terminal_set_sizeFn c_vte_terminal_set_size; ///
+private alias c_vte_terminal_set_suppress_legacy_signalsFn = extern(C) void function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_set_suppress_legacy_signalsFn c_vte_terminal_set_suppress_legacy_signals; ///
+private alias c_vte_terminal_set_text_blink_modeFn = extern(C) void function(VteTerminal* terminal, VteTextBlinkMode textBlinkMode) nothrow;
+__gshared c_vte_terminal_set_text_blink_modeFn c_vte_terminal_set_text_blink_mode; ///
+private alias c_vte_terminal_set_word_char_exceptionsFn = extern(C) void function(VteTerminal* terminal, const(char)* exceptions) nothrow;
+__gshared c_vte_terminal_set_word_char_exceptionsFn c_vte_terminal_set_word_char_exceptions; ///
+private alias c_vte_terminal_set_xalignFn = extern(C) void function(VteTerminal* terminal, VteAlign align_) nothrow;
+__gshared c_vte_terminal_set_xalignFn c_vte_terminal_set_xalign; ///
+private alias c_vte_terminal_set_xfillFn = extern(C) void function(VteTerminal* terminal, gboolean fill) nothrow;
+__gshared c_vte_terminal_set_xfillFn c_vte_terminal_set_xfill; ///
+private alias c_vte_terminal_set_yalignFn = extern(C) void function(VteTerminal* terminal, VteAlign align_) nothrow;
+__gshared c_vte_terminal_set_yalignFn c_vte_terminal_set_yalign; ///
+private alias c_vte_terminal_set_yfillFn = extern(C) void function(VteTerminal* terminal, gboolean fill) nothrow;
+__gshared c_vte_terminal_set_yfillFn c_vte_terminal_set_yfill; ///
+private alias c_vte_terminal_spawn_asyncFn = extern(C) void function(VteTerminal* terminal, VtePtyFlags ptyFlags, const(char)* workingDirectory, char** argv, char** envv, GSpawnFlags spawnFlags, GSpawnChildSetupFunc childSetup, void* childSetupData, GDestroyNotify childSetupDataDestroy, int timeout, GCancellable* cancellable, VteTerminalSpawnAsyncCallback callback, void* userData) nothrow;
+__gshared c_vte_terminal_spawn_asyncFn c_vte_terminal_spawn_async; ///
+private alias c_vte_terminal_spawn_syncFn = extern(C) gboolean function(VteTerminal* terminal, VtePtyFlags ptyFlags, const(char)* workingDirectory, char** argv, char** envv, GSpawnFlags spawnFlags, GSpawnChildSetupFunc childSetup, void* childSetupData, GPid* childPid, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_vte_terminal_spawn_syncFn c_vte_terminal_spawn_sync; ///
+private alias c_vte_terminal_spawn_with_fds_asyncFn = extern(C) void function(VteTerminal* terminal, VtePtyFlags ptyFlags, const(char)* workingDirectory, const(char*)* argv, const(char*)* envv, const(int)* fds, int nFds, const(int)* mapFds, int nMapFds, GSpawnFlags spawnFlags, GSpawnChildSetupFunc childSetup, void* childSetupData, GDestroyNotify childSetupDataDestroy, int timeout, GCancellable* cancellable, VteTerminalSpawnAsyncCallback callback, void* userData) nothrow;
+__gshared c_vte_terminal_spawn_with_fds_asyncFn c_vte_terminal_spawn_with_fds_async; ///
+private alias c_vte_terminal_unselect_allFn = extern(C) void function(VteTerminal* terminal) nothrow;
+__gshared c_vte_terminal_unselect_allFn c_vte_terminal_unselect_all; ///
+private alias c_vte_terminal_watch_childFn = extern(C) void function(VteTerminal* terminal, GPid childPid) nothrow;
+__gshared c_vte_terminal_watch_childFn c_vte_terminal_watch_child; ///
+private alias c_vte_terminal_write_contents_syncFn = extern(C) gboolean function(VteTerminal* terminal, GOutputStream* stream, VteWriteFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_vte_terminal_write_contents_syncFn c_vte_terminal_write_contents_sync; ///
 
-  // Uuid
-  GType function() c_vte_uuid_get_type; ///
-  VteUuid* function(const(char)* str, ptrdiff_t len, VteUuidFormat fmt) c_vte_uuid_new_from_string; ///
-  VteUuid* function() c_vte_uuid_new_v4; ///
-  VteUuid* function(const(VteUuid)* uuid) c_vte_uuid_dup; ///
-  gboolean function(const(VteUuid)* uuid, const(VteUuid)* other) c_vte_uuid_equal; ///
-  void function(VteUuid* uuid) c_vte_uuid_free; ///
-  char* function(VteUuid* uuid, VteUuidFormat fmt, size_t* len) c_vte_uuid_free_to_string; ///
-  VteUuid* function(const(VteUuid)* ns, const(char)* data, ptrdiff_t len) c_vte_uuid_new_v5; ///
-  char* function(const(VteUuid)* uuid, VteUuidFormat fmt, size_t* len) c_vte_uuid_to_string; ///
-  gboolean function(const(char)* str, ptrdiff_t len, VteUuidFormat fmt) c_vte_uuid_validate_string; ///
+// Uuid
+private alias c_vte_uuid_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_vte_uuid_get_typeFn c_vte_uuid_get_type; ///
+private alias c_vte_uuid_new_from_stringFn = extern(C) VteUuid* function(const(char)* str, ptrdiff_t len, VteUuidFormat fmt) nothrow;
+__gshared c_vte_uuid_new_from_stringFn c_vte_uuid_new_from_string; ///
+private alias c_vte_uuid_new_v4Fn = extern(C) VteUuid* function() nothrow;
+__gshared c_vte_uuid_new_v4Fn c_vte_uuid_new_v4; ///
+private alias c_vte_uuid_dupFn = extern(C) VteUuid* function(const(VteUuid)* uuid) nothrow;
+__gshared c_vte_uuid_dupFn c_vte_uuid_dup; ///
+private alias c_vte_uuid_equalFn = extern(C) gboolean function(const(VteUuid)* uuid, const(VteUuid)* other) nothrow;
+__gshared c_vte_uuid_equalFn c_vte_uuid_equal; ///
+private alias c_vte_uuid_freeFn = extern(C) void function(VteUuid* uuid) nothrow;
+__gshared c_vte_uuid_freeFn c_vte_uuid_free; ///
+private alias c_vte_uuid_free_to_stringFn = extern(C) char* function(VteUuid* uuid, VteUuidFormat fmt, size_t* len) nothrow;
+__gshared c_vte_uuid_free_to_stringFn c_vte_uuid_free_to_string; ///
+private alias c_vte_uuid_new_v5Fn = extern(C) VteUuid* function(const(VteUuid)* ns, const(char)* data, ptrdiff_t len) nothrow;
+__gshared c_vte_uuid_new_v5Fn c_vte_uuid_new_v5; ///
+private alias c_vte_uuid_to_stringFn = extern(C) char* function(const(VteUuid)* uuid, VteUuidFormat fmt, size_t* len) nothrow;
+__gshared c_vte_uuid_to_stringFn c_vte_uuid_to_string; ///
+private alias c_vte_uuid_validate_stringFn = extern(C) gboolean function(const(char)* str, ptrdiff_t len, VteUuidFormat fmt) nothrow;
+__gshared c_vte_uuid_validate_stringFn c_vte_uuid_validate_string; ///
 
-  // global
-  gboolean function(const(char)* encoding) c_vte_get_encoding_supported; ///
-  char** function(gboolean includeAliases) c_vte_get_encodings; ///
-  VteFeatureFlags function() c_vte_get_feature_flags; ///
-  const(char)* function() c_vte_get_features; ///
-  uint function() c_vte_get_major_version; ///
-  uint function() c_vte_get_micro_version; ///
-  uint function() c_vte_get_minor_version; ///
-  const(char*)* function(size_t* length) c_vte_get_termprops; ///
-  ulong function() c_vte_get_test_flags; ///
-  char* function() c_vte_get_user_shell; ///
-  int function(const(char)* name, VtePropertyType type, VtePropertyFlags flags) c_vte_install_termprop; ///
-  int function(const(char)* name, const(char)* targetName) c_vte_install_termprop_alias; ///
-  gboolean function(const(char)* name, const(char*)* resolvedName, int* prop, VtePropertyType* type, VtePropertyFlags* flags) c_vte_query_termprop; ///
-  gboolean function(int prop, const(char*)* name, VtePropertyType* type, VtePropertyFlags* flags) c_vte_query_termprop_by_id; ///
-  void function(ulong flags) c_vte_set_test_flags; ///
+// global
+private alias c_vte_get_encoding_supportedFn = extern(C) gboolean function(const(char)* encoding) nothrow;
+__gshared c_vte_get_encoding_supportedFn c_vte_get_encoding_supported; ///
+private alias c_vte_get_encodingsFn = extern(C) char** function(gboolean includeAliases) nothrow;
+__gshared c_vte_get_encodingsFn c_vte_get_encodings; ///
+private alias c_vte_get_feature_flagsFn = extern(C) VteFeatureFlags function() nothrow;
+__gshared c_vte_get_feature_flagsFn c_vte_get_feature_flags; ///
+private alias c_vte_get_featuresFn = extern(C) const(char)* function() nothrow;
+__gshared c_vte_get_featuresFn c_vte_get_features; ///
+private alias c_vte_get_major_versionFn = extern(C) uint function() nothrow;
+__gshared c_vte_get_major_versionFn c_vte_get_major_version; ///
+private alias c_vte_get_micro_versionFn = extern(C) uint function() nothrow;
+__gshared c_vte_get_micro_versionFn c_vte_get_micro_version; ///
+private alias c_vte_get_minor_versionFn = extern(C) uint function() nothrow;
+__gshared c_vte_get_minor_versionFn c_vte_get_minor_version; ///
+private alias c_vte_get_termpropsFn = extern(C) const(char*)* function(size_t* length) nothrow;
+__gshared c_vte_get_termpropsFn c_vte_get_termprops; ///
+private alias c_vte_get_test_flagsFn = extern(C) ulong function() nothrow;
+__gshared c_vte_get_test_flagsFn c_vte_get_test_flags; ///
+private alias c_vte_get_user_shellFn = extern(C) char* function() nothrow;
+__gshared c_vte_get_user_shellFn c_vte_get_user_shell; ///
+private alias c_vte_install_termpropFn = extern(C) int function(const(char)* name, VtePropertyType type, VtePropertyFlags flags) nothrow;
+__gshared c_vte_install_termpropFn c_vte_install_termprop; ///
+private alias c_vte_install_termprop_aliasFn = extern(C) int function(const(char)* name, const(char)* targetName) nothrow;
+__gshared c_vte_install_termprop_aliasFn c_vte_install_termprop_alias; ///
+private alias c_vte_query_termpropFn = extern(C) gboolean function(const(char)* name, const(char*)* resolvedName, int* prop, VtePropertyType* type, VtePropertyFlags* flags) nothrow;
+__gshared c_vte_query_termpropFn c_vte_query_termprop; ///
+private alias c_vte_query_termprop_by_idFn = extern(C) gboolean function(int prop, const(char*)* name, VtePropertyType* type, VtePropertyFlags* flags) nothrow;
+__gshared c_vte_query_termprop_by_idFn c_vte_query_termprop_by_id; ///
+private alias c_vte_set_test_flagsFn = extern(C) void function(ulong flags) nothrow;
+__gshared c_vte_set_test_flagsFn c_vte_set_test_flags; ///
 
-  // PtyError
-  GQuark function() c_vte_pty_error_quark; ///
+// PtyError
+private alias c_vte_pty_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_vte_pty_error_quarkFn c_vte_pty_error_quark; ///
 
-  // RegexError
-  GQuark function() c_vte_regex_error_quark; ///
-}
+// RegexError
+private alias c_vte_regex_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_vte_regex_error_quarkFn c_vte_regex_error_quark; ///
 
 // EventContext
 

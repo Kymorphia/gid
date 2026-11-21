@@ -8,154 +8,283 @@ public import gid.gobject2.c.types;
 
 private immutable LIBS = ["javascriptcoregtk-6.0_1"];
 
-__gshared extern(C) nothrow
-{
-  // Class
-  GType function() c_jsc_class_get_type; ///
-  JSCValue* function(JSCClass* jscClass, const(char)* name, GCallback callback, void* userData, GDestroyNotify destroyNotify, GType returnType, uint nParams,  ...) c_jsc_class_add_constructor; ///
-  JSCValue* function(JSCClass* jscClass, const(char)* name, GCallback callback, void* userData, GDestroyNotify destroyNotify, GType returnType) c_jsc_class_add_constructor_variadic; ///
-  JSCValue* function(JSCClass* jscClass, const(char)* name, GCallback callback, void* userData, GDestroyNotify destroyNotify, GType returnType, uint nParameters, GType* parameterTypes) c_jsc_class_add_constructorv; ///
-  void function(JSCClass* jscClass, const(char)* name, GCallback callback, void* userData, GDestroyNotify destroyNotify, GType returnType, uint nParams,  ...) c_jsc_class_add_method; ///
-  void function(JSCClass* jscClass, const(char)* name, GCallback callback, void* userData, GDestroyNotify destroyNotify, GType returnType) c_jsc_class_add_method_variadic; ///
-  void function(JSCClass* jscClass, const(char)* name, GCallback callback, void* userData, GDestroyNotify destroyNotify, GType returnType, uint nParameters, GType* parameterTypes) c_jsc_class_add_methodv; ///
-  void function(JSCClass* jscClass, const(char)* name, GType propertyType, GCallback getter, GCallback setter, void* userData, GDestroyNotify destroyNotify) c_jsc_class_add_property; ///
-  const(char)* function(JSCClass* jscClass) c_jsc_class_get_name; ///
-  JSCClass* function(JSCClass* jscClass) c_jsc_class_get_parent; ///
+// Class
+private alias c_jsc_class_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_jsc_class_get_typeFn c_jsc_class_get_type; ///
+private alias c_jsc_class_add_constructorFn = extern(C) JSCValue* function(JSCClass* jscClass, const(char)* name, GCallback callback, void* userData, GDestroyNotify destroyNotify, GType returnType, uint nParams,  ...) nothrow;
+__gshared c_jsc_class_add_constructorFn c_jsc_class_add_constructor; ///
+private alias c_jsc_class_add_constructor_variadicFn = extern(C) JSCValue* function(JSCClass* jscClass, const(char)* name, GCallback callback, void* userData, GDestroyNotify destroyNotify, GType returnType) nothrow;
+__gshared c_jsc_class_add_constructor_variadicFn c_jsc_class_add_constructor_variadic; ///
+private alias c_jsc_class_add_constructorvFn = extern(C) JSCValue* function(JSCClass* jscClass, const(char)* name, GCallback callback, void* userData, GDestroyNotify destroyNotify, GType returnType, uint nParameters, GType* parameterTypes) nothrow;
+__gshared c_jsc_class_add_constructorvFn c_jsc_class_add_constructorv; ///
+private alias c_jsc_class_add_methodFn = extern(C) void function(JSCClass* jscClass, const(char)* name, GCallback callback, void* userData, GDestroyNotify destroyNotify, GType returnType, uint nParams,  ...) nothrow;
+__gshared c_jsc_class_add_methodFn c_jsc_class_add_method; ///
+private alias c_jsc_class_add_method_variadicFn = extern(C) void function(JSCClass* jscClass, const(char)* name, GCallback callback, void* userData, GDestroyNotify destroyNotify, GType returnType) nothrow;
+__gshared c_jsc_class_add_method_variadicFn c_jsc_class_add_method_variadic; ///
+private alias c_jsc_class_add_methodvFn = extern(C) void function(JSCClass* jscClass, const(char)* name, GCallback callback, void* userData, GDestroyNotify destroyNotify, GType returnType, uint nParameters, GType* parameterTypes) nothrow;
+__gshared c_jsc_class_add_methodvFn c_jsc_class_add_methodv; ///
+private alias c_jsc_class_add_propertyFn = extern(C) void function(JSCClass* jscClass, const(char)* name, GType propertyType, GCallback getter, GCallback setter, void* userData, GDestroyNotify destroyNotify) nothrow;
+__gshared c_jsc_class_add_propertyFn c_jsc_class_add_property; ///
+private alias c_jsc_class_get_nameFn = extern(C) const(char)* function(JSCClass* jscClass) nothrow;
+__gshared c_jsc_class_get_nameFn c_jsc_class_get_name; ///
+private alias c_jsc_class_get_parentFn = extern(C) JSCClass* function(JSCClass* jscClass) nothrow;
+__gshared c_jsc_class_get_parentFn c_jsc_class_get_parent; ///
 
-  // Context
-  GType function() c_jsc_context_get_type; ///
-  JSCContext* function() c_jsc_context_new; ///
-  JSCContext* function(JSCVirtualMachine* vm) c_jsc_context_new_with_virtual_machine; ///
-  JSCContext* function() c_jsc_context_get_current; ///
-  JSCCheckSyntaxResult function(JSCContext* context, const(char)* code, ptrdiff_t length, JSCCheckSyntaxMode mode, const(char)* uri, uint lineNumber, JSCException** exception) c_jsc_context_check_syntax; ///
-  void function(JSCContext* context) c_jsc_context_clear_exception; ///
-  JSCValue* function(JSCContext* context, const(char)* code, ptrdiff_t length) c_jsc_context_evaluate; ///
-  JSCValue* function(JSCContext* context, const(char)* code, ptrdiff_t length, void* objectInstance, JSCClass* objectClass, const(char)* uri, uint lineNumber, JSCValue** object) c_jsc_context_evaluate_in_object; ///
-  JSCValue* function(JSCContext* context, const(char)* code, ptrdiff_t length, const(char)* uri, uint lineNumber) c_jsc_context_evaluate_with_source_uri; ///
-  JSCException* function(JSCContext* context) c_jsc_context_get_exception; ///
-  JSCValue* function(JSCContext* context) c_jsc_context_get_global_object; ///
-  JSCValue* function(JSCContext* context, const(char)* name) c_jsc_context_get_value; ///
-  JSCVirtualMachine* function(JSCContext* context) c_jsc_context_get_virtual_machine; ///
-  void function(JSCContext* context) c_jsc_context_pop_exception_handler; ///
-  void function(JSCContext* context, JSCExceptionHandler handler, void* userData, GDestroyNotify destroyNotify) c_jsc_context_push_exception_handler; ///
-  JSCClass* function(JSCContext* context, const(char)* name, JSCClass* parentClass, JSCClassVTable* vtable, GDestroyNotify destroyNotify) c_jsc_context_register_class; ///
-  void function(JSCContext* context, const(char)* name, JSCValue* value) c_jsc_context_set_value; ///
-  void function(JSCContext* context, const(char)* errorMessage) c_jsc_context_throw; ///
-  void function(JSCContext* context, JSCException* exception) c_jsc_context_throw_exception; ///
-  void function(JSCContext* context, const(char)* format,  ...) c_jsc_context_throw_printf; ///
-  void function(JSCContext* context, const(char)* errorName, const(char)* errorMessage) c_jsc_context_throw_with_name; ///
-  void function(JSCContext* context, const(char)* errorName, const(char)* format,  ...) c_jsc_context_throw_with_name_printf; ///
+// Context
+private alias c_jsc_context_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_jsc_context_get_typeFn c_jsc_context_get_type; ///
+private alias c_jsc_context_newFn = extern(C) JSCContext* function() nothrow;
+__gshared c_jsc_context_newFn c_jsc_context_new; ///
+private alias c_jsc_context_new_with_virtual_machineFn = extern(C) JSCContext* function(JSCVirtualMachine* vm) nothrow;
+__gshared c_jsc_context_new_with_virtual_machineFn c_jsc_context_new_with_virtual_machine; ///
+private alias c_jsc_context_get_currentFn = extern(C) JSCContext* function() nothrow;
+__gshared c_jsc_context_get_currentFn c_jsc_context_get_current; ///
+private alias c_jsc_context_check_syntaxFn = extern(C) JSCCheckSyntaxResult function(JSCContext* context, const(char)* code, ptrdiff_t length, JSCCheckSyntaxMode mode, const(char)* uri, uint lineNumber, JSCException** exception) nothrow;
+__gshared c_jsc_context_check_syntaxFn c_jsc_context_check_syntax; ///
+private alias c_jsc_context_clear_exceptionFn = extern(C) void function(JSCContext* context) nothrow;
+__gshared c_jsc_context_clear_exceptionFn c_jsc_context_clear_exception; ///
+private alias c_jsc_context_evaluateFn = extern(C) JSCValue* function(JSCContext* context, const(char)* code, ptrdiff_t length) nothrow;
+__gshared c_jsc_context_evaluateFn c_jsc_context_evaluate; ///
+private alias c_jsc_context_evaluate_in_objectFn = extern(C) JSCValue* function(JSCContext* context, const(char)* code, ptrdiff_t length, void* objectInstance, JSCClass* objectClass, const(char)* uri, uint lineNumber, JSCValue** object) nothrow;
+__gshared c_jsc_context_evaluate_in_objectFn c_jsc_context_evaluate_in_object; ///
+private alias c_jsc_context_evaluate_with_source_uriFn = extern(C) JSCValue* function(JSCContext* context, const(char)* code, ptrdiff_t length, const(char)* uri, uint lineNumber) nothrow;
+__gshared c_jsc_context_evaluate_with_source_uriFn c_jsc_context_evaluate_with_source_uri; ///
+private alias c_jsc_context_get_exceptionFn = extern(C) JSCException* function(JSCContext* context) nothrow;
+__gshared c_jsc_context_get_exceptionFn c_jsc_context_get_exception; ///
+private alias c_jsc_context_get_global_objectFn = extern(C) JSCValue* function(JSCContext* context) nothrow;
+__gshared c_jsc_context_get_global_objectFn c_jsc_context_get_global_object; ///
+private alias c_jsc_context_get_valueFn = extern(C) JSCValue* function(JSCContext* context, const(char)* name) nothrow;
+__gshared c_jsc_context_get_valueFn c_jsc_context_get_value; ///
+private alias c_jsc_context_get_virtual_machineFn = extern(C) JSCVirtualMachine* function(JSCContext* context) nothrow;
+__gshared c_jsc_context_get_virtual_machineFn c_jsc_context_get_virtual_machine; ///
+private alias c_jsc_context_pop_exception_handlerFn = extern(C) void function(JSCContext* context) nothrow;
+__gshared c_jsc_context_pop_exception_handlerFn c_jsc_context_pop_exception_handler; ///
+private alias c_jsc_context_push_exception_handlerFn = extern(C) void function(JSCContext* context, JSCExceptionHandler handler, void* userData, GDestroyNotify destroyNotify) nothrow;
+__gshared c_jsc_context_push_exception_handlerFn c_jsc_context_push_exception_handler; ///
+private alias c_jsc_context_register_classFn = extern(C) JSCClass* function(JSCContext* context, const(char)* name, JSCClass* parentClass, JSCClassVTable* vtable, GDestroyNotify destroyNotify) nothrow;
+__gshared c_jsc_context_register_classFn c_jsc_context_register_class; ///
+private alias c_jsc_context_set_valueFn = extern(C) void function(JSCContext* context, const(char)* name, JSCValue* value) nothrow;
+__gshared c_jsc_context_set_valueFn c_jsc_context_set_value; ///
+private alias c_jsc_context_throwFn = extern(C) void function(JSCContext* context, const(char)* errorMessage) nothrow;
+__gshared c_jsc_context_throwFn c_jsc_context_throw; ///
+private alias c_jsc_context_throw_exceptionFn = extern(C) void function(JSCContext* context, JSCException* exception) nothrow;
+__gshared c_jsc_context_throw_exceptionFn c_jsc_context_throw_exception; ///
+private alias c_jsc_context_throw_printfFn = extern(C) void function(JSCContext* context, const(char)* format,  ...) nothrow;
+__gshared c_jsc_context_throw_printfFn c_jsc_context_throw_printf; ///
+private alias c_jsc_context_throw_with_nameFn = extern(C) void function(JSCContext* context, const(char)* errorName, const(char)* errorMessage) nothrow;
+__gshared c_jsc_context_throw_with_nameFn c_jsc_context_throw_with_name; ///
+private alias c_jsc_context_throw_with_name_printfFn = extern(C) void function(JSCContext* context, const(char)* errorName, const(char)* format,  ...) nothrow;
+__gshared c_jsc_context_throw_with_name_printfFn c_jsc_context_throw_with_name_printf; ///
 
-  // ExceptionWrap
-  GType function() c_jsc_exception_get_type; ///
-  JSCException* function(JSCContext* context, const(char)* message) c_jsc_exception_new; ///
-  JSCException* function(JSCContext* context, const(char)* format,  ...) c_jsc_exception_new_printf; ///
-  JSCException* function(JSCContext* context, const(char)* format, void* args) c_jsc_exception_new_vprintf; ///
-  JSCException* function(JSCContext* context, const(char)* name, const(char)* message) c_jsc_exception_new_with_name; ///
-  JSCException* function(JSCContext* context, const(char)* name, const(char)* format,  ...) c_jsc_exception_new_with_name_printf; ///
-  JSCException* function(JSCContext* context, const(char)* name, const(char)* format, void* args) c_jsc_exception_new_with_name_vprintf; ///
-  const(char)* function(JSCException* exception) c_jsc_exception_get_backtrace_string; ///
-  uint function(JSCException* exception) c_jsc_exception_get_column_number; ///
-  uint function(JSCException* exception) c_jsc_exception_get_line_number; ///
-  const(char)* function(JSCException* exception) c_jsc_exception_get_message; ///
-  const(char)* function(JSCException* exception) c_jsc_exception_get_name; ///
-  const(char)* function(JSCException* exception) c_jsc_exception_get_source_uri; ///
-  char* function(JSCException* exception) c_jsc_exception_report; ///
-  char* function(JSCException* exception) c_jsc_exception_to_string; ///
+// ExceptionWrap
+private alias c_jsc_exception_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_jsc_exception_get_typeFn c_jsc_exception_get_type; ///
+private alias c_jsc_exception_newFn = extern(C) JSCException* function(JSCContext* context, const(char)* message) nothrow;
+__gshared c_jsc_exception_newFn c_jsc_exception_new; ///
+private alias c_jsc_exception_new_printfFn = extern(C) JSCException* function(JSCContext* context, const(char)* format,  ...) nothrow;
+__gshared c_jsc_exception_new_printfFn c_jsc_exception_new_printf; ///
+private alias c_jsc_exception_new_vprintfFn = extern(C) JSCException* function(JSCContext* context, const(char)* format, void* args) nothrow;
+__gshared c_jsc_exception_new_vprintfFn c_jsc_exception_new_vprintf; ///
+private alias c_jsc_exception_new_with_nameFn = extern(C) JSCException* function(JSCContext* context, const(char)* name, const(char)* message) nothrow;
+__gshared c_jsc_exception_new_with_nameFn c_jsc_exception_new_with_name; ///
+private alias c_jsc_exception_new_with_name_printfFn = extern(C) JSCException* function(JSCContext* context, const(char)* name, const(char)* format,  ...) nothrow;
+__gshared c_jsc_exception_new_with_name_printfFn c_jsc_exception_new_with_name_printf; ///
+private alias c_jsc_exception_new_with_name_vprintfFn = extern(C) JSCException* function(JSCContext* context, const(char)* name, const(char)* format, void* args) nothrow;
+__gshared c_jsc_exception_new_with_name_vprintfFn c_jsc_exception_new_with_name_vprintf; ///
+private alias c_jsc_exception_get_backtrace_stringFn = extern(C) const(char)* function(JSCException* exception) nothrow;
+__gshared c_jsc_exception_get_backtrace_stringFn c_jsc_exception_get_backtrace_string; ///
+private alias c_jsc_exception_get_column_numberFn = extern(C) uint function(JSCException* exception) nothrow;
+__gshared c_jsc_exception_get_column_numberFn c_jsc_exception_get_column_number; ///
+private alias c_jsc_exception_get_line_numberFn = extern(C) uint function(JSCException* exception) nothrow;
+__gshared c_jsc_exception_get_line_numberFn c_jsc_exception_get_line_number; ///
+private alias c_jsc_exception_get_messageFn = extern(C) const(char)* function(JSCException* exception) nothrow;
+__gshared c_jsc_exception_get_messageFn c_jsc_exception_get_message; ///
+private alias c_jsc_exception_get_nameFn = extern(C) const(char)* function(JSCException* exception) nothrow;
+__gshared c_jsc_exception_get_nameFn c_jsc_exception_get_name; ///
+private alias c_jsc_exception_get_source_uriFn = extern(C) const(char)* function(JSCException* exception) nothrow;
+__gshared c_jsc_exception_get_source_uriFn c_jsc_exception_get_source_uri; ///
+private alias c_jsc_exception_reportFn = extern(C) char* function(JSCException* exception) nothrow;
+__gshared c_jsc_exception_reportFn c_jsc_exception_report; ///
+private alias c_jsc_exception_to_stringFn = extern(C) char* function(JSCException* exception) nothrow;
+__gshared c_jsc_exception_to_stringFn c_jsc_exception_to_string; ///
 
-  // Value
-  GType function() c_jsc_value_get_type; ///
-  JSCValue* function(JSCContext* context, GType firstItemType,  ...) c_jsc_value_new_array; ///
-  JSCValue* function(JSCContext* context, void* data, size_t size, GDestroyNotify destroyNotify, void* userData) c_jsc_value_new_array_buffer; ///
-  JSCValue* function(JSCContext* context, GPtrArray* array) c_jsc_value_new_array_from_garray; ///
-  JSCValue* function(JSCContext* context, const(char*)* strv) c_jsc_value_new_array_from_strv; ///
-  JSCValue* function(JSCContext* context, gboolean value) c_jsc_value_new_boolean; ///
-  JSCValue* function(JSCContext* context, const(char)* json) c_jsc_value_new_from_json; ///
-  JSCValue* function(JSCContext* context, const(char)* name, GCallback callback, void* userData, GDestroyNotify destroyNotify, GType returnType, uint nParams,  ...) c_jsc_value_new_function; ///
-  JSCValue* function(JSCContext* context, const(char)* name, GCallback callback, void* userData, GDestroyNotify destroyNotify, GType returnType) c_jsc_value_new_function_variadic; ///
-  JSCValue* function(JSCContext* context, const(char)* name, GCallback callback, void* userData, GDestroyNotify destroyNotify, GType returnType, uint nParameters, GType* parameterTypes) c_jsc_value_new_functionv; ///
-  JSCValue* function(JSCContext* context) c_jsc_value_new_null; ///
-  JSCValue* function(JSCContext* context, double number) c_jsc_value_new_number; ///
-  JSCValue* function(JSCContext* context, void* instance, JSCClass* jscClass) c_jsc_value_new_object; ///
-  JSCValue* function(JSCContext* context, JSCExecutor executor, void* userData) c_jsc_value_new_promise; ///
-  JSCValue* function(JSCContext* context, const(char)* string_) c_jsc_value_new_string; ///
-  JSCValue* function(JSCContext* context, GBytes* bytes) c_jsc_value_new_string_from_bytes; ///
-  JSCValue* function(JSCContext* context, JSCTypedArrayType type, size_t length) c_jsc_value_new_typed_array; ///
-  JSCValue* function(JSCContext* context) c_jsc_value_new_undefined; ///
-  void* function(JSCValue* value, size_t* size) c_jsc_value_array_buffer_get_data; ///
-  size_t function(JSCValue* value) c_jsc_value_array_buffer_get_size; ///
-  JSCValue* function(JSCValue* value, GType firstParameterType,  ...) c_jsc_value_constructor_call; ///
-  JSCValue* function(JSCValue* value, uint nParameters, JSCValue** parameters) c_jsc_value_constructor_callv; ///
-  JSCValue* function(JSCValue* value, GType firstParameterType,  ...) c_jsc_value_function_call; ///
-  JSCValue* function(JSCValue* value, uint nParameters, JSCValue** parameters) c_jsc_value_function_callv; ///
-  JSCContext* function(JSCValue* value) c_jsc_value_get_context; ///
-  gboolean function(JSCValue* value) c_jsc_value_is_array; ///
-  gboolean function(JSCValue* value) c_jsc_value_is_array_buffer; ///
-  gboolean function(JSCValue* value) c_jsc_value_is_boolean; ///
-  gboolean function(JSCValue* value) c_jsc_value_is_constructor; ///
-  gboolean function(JSCValue* value) c_jsc_value_is_function; ///
-  gboolean function(JSCValue* value) c_jsc_value_is_null; ///
-  gboolean function(JSCValue* value) c_jsc_value_is_number; ///
-  gboolean function(JSCValue* value) c_jsc_value_is_object; ///
-  gboolean function(JSCValue* value) c_jsc_value_is_string; ///
-  gboolean function(JSCValue* value) c_jsc_value_is_typed_array; ///
-  gboolean function(JSCValue* value) c_jsc_value_is_undefined; ///
-  JSCValue* function(JSCValue* arrayBuffer, JSCTypedArrayType type, size_t offset, ptrdiff_t length) c_jsc_value_new_typed_array_with_buffer; ///
-  void function(JSCValue* value, const(char)* propertyName, JSCValuePropertyFlags flags, GType propertyType, GCallback getter, GCallback setter, void* userData, GDestroyNotify destroyNotify) c_jsc_value_object_define_property_accessor; ///
-  void function(JSCValue* value, const(char)* propertyName, JSCValuePropertyFlags flags, JSCValue* propertyValue) c_jsc_value_object_define_property_data; ///
-  gboolean function(JSCValue* value, const(char)* name) c_jsc_value_object_delete_property; ///
-  char** function(JSCValue* value) c_jsc_value_object_enumerate_properties; ///
-  JSCValue* function(JSCValue* value, const(char)* name) c_jsc_value_object_get_property; ///
-  JSCValue* function(JSCValue* value, uint index) c_jsc_value_object_get_property_at_index; ///
-  gboolean function(JSCValue* value, const(char)* name) c_jsc_value_object_has_property; ///
-  JSCValue* function(JSCValue* value, const(char)* name, GType firstParameterType,  ...) c_jsc_value_object_invoke_method; ///
-  JSCValue* function(JSCValue* value, const(char)* name, uint nParameters, JSCValue** parameters) c_jsc_value_object_invoke_methodv; ///
-  gboolean function(JSCValue* value, const(char)* name) c_jsc_value_object_is_instance_of; ///
-  void function(JSCValue* value, const(char)* name, JSCValue* property) c_jsc_value_object_set_property; ///
-  void function(JSCValue* value, uint index, JSCValue* property) c_jsc_value_object_set_property_at_index; ///
-  gboolean function(JSCValue* value) c_jsc_value_to_boolean; ///
-  double function(JSCValue* value) c_jsc_value_to_double; ///
-  int function(JSCValue* value) c_jsc_value_to_int32; ///
-  char* function(JSCValue* value, uint indent) c_jsc_value_to_json; ///
-  char* function(JSCValue* value) c_jsc_value_to_string; ///
-  GBytes* function(JSCValue* value) c_jsc_value_to_string_as_bytes; ///
-  JSCValue* function(JSCValue* value) c_jsc_value_typed_array_get_buffer; ///
-  void* function(JSCValue* value, size_t* length) c_jsc_value_typed_array_get_data; ///
-  size_t function(JSCValue* value) c_jsc_value_typed_array_get_length; ///
-  size_t function(JSCValue* value) c_jsc_value_typed_array_get_offset; ///
-  size_t function(JSCValue* value) c_jsc_value_typed_array_get_size; ///
-  JSCTypedArrayType function(JSCValue* value) c_jsc_value_typed_array_get_type; ///
+// Value
+private alias c_jsc_value_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_jsc_value_get_typeFn c_jsc_value_get_type; ///
+private alias c_jsc_value_new_arrayFn = extern(C) JSCValue* function(JSCContext* context, GType firstItemType,  ...) nothrow;
+__gshared c_jsc_value_new_arrayFn c_jsc_value_new_array; ///
+private alias c_jsc_value_new_array_bufferFn = extern(C) JSCValue* function(JSCContext* context, void* data, size_t size, GDestroyNotify destroyNotify, void* userData) nothrow;
+__gshared c_jsc_value_new_array_bufferFn c_jsc_value_new_array_buffer; ///
+private alias c_jsc_value_new_array_from_garrayFn = extern(C) JSCValue* function(JSCContext* context, GPtrArray* array) nothrow;
+__gshared c_jsc_value_new_array_from_garrayFn c_jsc_value_new_array_from_garray; ///
+private alias c_jsc_value_new_array_from_strvFn = extern(C) JSCValue* function(JSCContext* context, const(char*)* strv) nothrow;
+__gshared c_jsc_value_new_array_from_strvFn c_jsc_value_new_array_from_strv; ///
+private alias c_jsc_value_new_booleanFn = extern(C) JSCValue* function(JSCContext* context, gboolean value) nothrow;
+__gshared c_jsc_value_new_booleanFn c_jsc_value_new_boolean; ///
+private alias c_jsc_value_new_from_jsonFn = extern(C) JSCValue* function(JSCContext* context, const(char)* json) nothrow;
+__gshared c_jsc_value_new_from_jsonFn c_jsc_value_new_from_json; ///
+private alias c_jsc_value_new_functionFn = extern(C) JSCValue* function(JSCContext* context, const(char)* name, GCallback callback, void* userData, GDestroyNotify destroyNotify, GType returnType, uint nParams,  ...) nothrow;
+__gshared c_jsc_value_new_functionFn c_jsc_value_new_function; ///
+private alias c_jsc_value_new_function_variadicFn = extern(C) JSCValue* function(JSCContext* context, const(char)* name, GCallback callback, void* userData, GDestroyNotify destroyNotify, GType returnType) nothrow;
+__gshared c_jsc_value_new_function_variadicFn c_jsc_value_new_function_variadic; ///
+private alias c_jsc_value_new_functionvFn = extern(C) JSCValue* function(JSCContext* context, const(char)* name, GCallback callback, void* userData, GDestroyNotify destroyNotify, GType returnType, uint nParameters, GType* parameterTypes) nothrow;
+__gshared c_jsc_value_new_functionvFn c_jsc_value_new_functionv; ///
+private alias c_jsc_value_new_nullFn = extern(C) JSCValue* function(JSCContext* context) nothrow;
+__gshared c_jsc_value_new_nullFn c_jsc_value_new_null; ///
+private alias c_jsc_value_new_numberFn = extern(C) JSCValue* function(JSCContext* context, double number) nothrow;
+__gshared c_jsc_value_new_numberFn c_jsc_value_new_number; ///
+private alias c_jsc_value_new_objectFn = extern(C) JSCValue* function(JSCContext* context, void* instance, JSCClass* jscClass) nothrow;
+__gshared c_jsc_value_new_objectFn c_jsc_value_new_object; ///
+private alias c_jsc_value_new_promiseFn = extern(C) JSCValue* function(JSCContext* context, JSCExecutor executor, void* userData) nothrow;
+__gshared c_jsc_value_new_promiseFn c_jsc_value_new_promise; ///
+private alias c_jsc_value_new_stringFn = extern(C) JSCValue* function(JSCContext* context, const(char)* string_) nothrow;
+__gshared c_jsc_value_new_stringFn c_jsc_value_new_string; ///
+private alias c_jsc_value_new_string_from_bytesFn = extern(C) JSCValue* function(JSCContext* context, GBytes* bytes) nothrow;
+__gshared c_jsc_value_new_string_from_bytesFn c_jsc_value_new_string_from_bytes; ///
+private alias c_jsc_value_new_typed_arrayFn = extern(C) JSCValue* function(JSCContext* context, JSCTypedArrayType type, size_t length) nothrow;
+__gshared c_jsc_value_new_typed_arrayFn c_jsc_value_new_typed_array; ///
+private alias c_jsc_value_new_undefinedFn = extern(C) JSCValue* function(JSCContext* context) nothrow;
+__gshared c_jsc_value_new_undefinedFn c_jsc_value_new_undefined; ///
+private alias c_jsc_value_array_buffer_get_dataFn = extern(C) void* function(JSCValue* value, size_t* size) nothrow;
+__gshared c_jsc_value_array_buffer_get_dataFn c_jsc_value_array_buffer_get_data; ///
+private alias c_jsc_value_array_buffer_get_sizeFn = extern(C) size_t function(JSCValue* value) nothrow;
+__gshared c_jsc_value_array_buffer_get_sizeFn c_jsc_value_array_buffer_get_size; ///
+private alias c_jsc_value_constructor_callFn = extern(C) JSCValue* function(JSCValue* value, GType firstParameterType,  ...) nothrow;
+__gshared c_jsc_value_constructor_callFn c_jsc_value_constructor_call; ///
+private alias c_jsc_value_constructor_callvFn = extern(C) JSCValue* function(JSCValue* value, uint nParameters, JSCValue** parameters) nothrow;
+__gshared c_jsc_value_constructor_callvFn c_jsc_value_constructor_callv; ///
+private alias c_jsc_value_function_callFn = extern(C) JSCValue* function(JSCValue* value, GType firstParameterType,  ...) nothrow;
+__gshared c_jsc_value_function_callFn c_jsc_value_function_call; ///
+private alias c_jsc_value_function_callvFn = extern(C) JSCValue* function(JSCValue* value, uint nParameters, JSCValue** parameters) nothrow;
+__gshared c_jsc_value_function_callvFn c_jsc_value_function_callv; ///
+private alias c_jsc_value_get_contextFn = extern(C) JSCContext* function(JSCValue* value) nothrow;
+__gshared c_jsc_value_get_contextFn c_jsc_value_get_context; ///
+private alias c_jsc_value_is_arrayFn = extern(C) gboolean function(JSCValue* value) nothrow;
+__gshared c_jsc_value_is_arrayFn c_jsc_value_is_array; ///
+private alias c_jsc_value_is_array_bufferFn = extern(C) gboolean function(JSCValue* value) nothrow;
+__gshared c_jsc_value_is_array_bufferFn c_jsc_value_is_array_buffer; ///
+private alias c_jsc_value_is_booleanFn = extern(C) gboolean function(JSCValue* value) nothrow;
+__gshared c_jsc_value_is_booleanFn c_jsc_value_is_boolean; ///
+private alias c_jsc_value_is_constructorFn = extern(C) gboolean function(JSCValue* value) nothrow;
+__gshared c_jsc_value_is_constructorFn c_jsc_value_is_constructor; ///
+private alias c_jsc_value_is_functionFn = extern(C) gboolean function(JSCValue* value) nothrow;
+__gshared c_jsc_value_is_functionFn c_jsc_value_is_function; ///
+private alias c_jsc_value_is_nullFn = extern(C) gboolean function(JSCValue* value) nothrow;
+__gshared c_jsc_value_is_nullFn c_jsc_value_is_null; ///
+private alias c_jsc_value_is_numberFn = extern(C) gboolean function(JSCValue* value) nothrow;
+__gshared c_jsc_value_is_numberFn c_jsc_value_is_number; ///
+private alias c_jsc_value_is_objectFn = extern(C) gboolean function(JSCValue* value) nothrow;
+__gshared c_jsc_value_is_objectFn c_jsc_value_is_object; ///
+private alias c_jsc_value_is_stringFn = extern(C) gboolean function(JSCValue* value) nothrow;
+__gshared c_jsc_value_is_stringFn c_jsc_value_is_string; ///
+private alias c_jsc_value_is_typed_arrayFn = extern(C) gboolean function(JSCValue* value) nothrow;
+__gshared c_jsc_value_is_typed_arrayFn c_jsc_value_is_typed_array; ///
+private alias c_jsc_value_is_undefinedFn = extern(C) gboolean function(JSCValue* value) nothrow;
+__gshared c_jsc_value_is_undefinedFn c_jsc_value_is_undefined; ///
+private alias c_jsc_value_new_typed_array_with_bufferFn = extern(C) JSCValue* function(JSCValue* arrayBuffer, JSCTypedArrayType type, size_t offset, ptrdiff_t length) nothrow;
+__gshared c_jsc_value_new_typed_array_with_bufferFn c_jsc_value_new_typed_array_with_buffer; ///
+private alias c_jsc_value_object_define_property_accessorFn = extern(C) void function(JSCValue* value, const(char)* propertyName, JSCValuePropertyFlags flags, GType propertyType, GCallback getter, GCallback setter, void* userData, GDestroyNotify destroyNotify) nothrow;
+__gshared c_jsc_value_object_define_property_accessorFn c_jsc_value_object_define_property_accessor; ///
+private alias c_jsc_value_object_define_property_dataFn = extern(C) void function(JSCValue* value, const(char)* propertyName, JSCValuePropertyFlags flags, JSCValue* propertyValue) nothrow;
+__gshared c_jsc_value_object_define_property_dataFn c_jsc_value_object_define_property_data; ///
+private alias c_jsc_value_object_delete_propertyFn = extern(C) gboolean function(JSCValue* value, const(char)* name) nothrow;
+__gshared c_jsc_value_object_delete_propertyFn c_jsc_value_object_delete_property; ///
+private alias c_jsc_value_object_enumerate_propertiesFn = extern(C) char** function(JSCValue* value) nothrow;
+__gshared c_jsc_value_object_enumerate_propertiesFn c_jsc_value_object_enumerate_properties; ///
+private alias c_jsc_value_object_get_propertyFn = extern(C) JSCValue* function(JSCValue* value, const(char)* name) nothrow;
+__gshared c_jsc_value_object_get_propertyFn c_jsc_value_object_get_property; ///
+private alias c_jsc_value_object_get_property_at_indexFn = extern(C) JSCValue* function(JSCValue* value, uint index) nothrow;
+__gshared c_jsc_value_object_get_property_at_indexFn c_jsc_value_object_get_property_at_index; ///
+private alias c_jsc_value_object_has_propertyFn = extern(C) gboolean function(JSCValue* value, const(char)* name) nothrow;
+__gshared c_jsc_value_object_has_propertyFn c_jsc_value_object_has_property; ///
+private alias c_jsc_value_object_invoke_methodFn = extern(C) JSCValue* function(JSCValue* value, const(char)* name, GType firstParameterType,  ...) nothrow;
+__gshared c_jsc_value_object_invoke_methodFn c_jsc_value_object_invoke_method; ///
+private alias c_jsc_value_object_invoke_methodvFn = extern(C) JSCValue* function(JSCValue* value, const(char)* name, uint nParameters, JSCValue** parameters) nothrow;
+__gshared c_jsc_value_object_invoke_methodvFn c_jsc_value_object_invoke_methodv; ///
+private alias c_jsc_value_object_is_instance_ofFn = extern(C) gboolean function(JSCValue* value, const(char)* name) nothrow;
+__gshared c_jsc_value_object_is_instance_ofFn c_jsc_value_object_is_instance_of; ///
+private alias c_jsc_value_object_set_propertyFn = extern(C) void function(JSCValue* value, const(char)* name, JSCValue* property) nothrow;
+__gshared c_jsc_value_object_set_propertyFn c_jsc_value_object_set_property; ///
+private alias c_jsc_value_object_set_property_at_indexFn = extern(C) void function(JSCValue* value, uint index, JSCValue* property) nothrow;
+__gshared c_jsc_value_object_set_property_at_indexFn c_jsc_value_object_set_property_at_index; ///
+private alias c_jsc_value_to_booleanFn = extern(C) gboolean function(JSCValue* value) nothrow;
+__gshared c_jsc_value_to_booleanFn c_jsc_value_to_boolean; ///
+private alias c_jsc_value_to_doubleFn = extern(C) double function(JSCValue* value) nothrow;
+__gshared c_jsc_value_to_doubleFn c_jsc_value_to_double; ///
+private alias c_jsc_value_to_int32Fn = extern(C) int function(JSCValue* value) nothrow;
+__gshared c_jsc_value_to_int32Fn c_jsc_value_to_int32; ///
+private alias c_jsc_value_to_jsonFn = extern(C) char* function(JSCValue* value, uint indent) nothrow;
+__gshared c_jsc_value_to_jsonFn c_jsc_value_to_json; ///
+private alias c_jsc_value_to_stringFn = extern(C) char* function(JSCValue* value) nothrow;
+__gshared c_jsc_value_to_stringFn c_jsc_value_to_string; ///
+private alias c_jsc_value_to_string_as_bytesFn = extern(C) GBytes* function(JSCValue* value) nothrow;
+__gshared c_jsc_value_to_string_as_bytesFn c_jsc_value_to_string_as_bytes; ///
+private alias c_jsc_value_typed_array_get_bufferFn = extern(C) JSCValue* function(JSCValue* value) nothrow;
+__gshared c_jsc_value_typed_array_get_bufferFn c_jsc_value_typed_array_get_buffer; ///
+private alias c_jsc_value_typed_array_get_dataFn = extern(C) void* function(JSCValue* value, size_t* length) nothrow;
+__gshared c_jsc_value_typed_array_get_dataFn c_jsc_value_typed_array_get_data; ///
+private alias c_jsc_value_typed_array_get_lengthFn = extern(C) size_t function(JSCValue* value) nothrow;
+__gshared c_jsc_value_typed_array_get_lengthFn c_jsc_value_typed_array_get_length; ///
+private alias c_jsc_value_typed_array_get_offsetFn = extern(C) size_t function(JSCValue* value) nothrow;
+__gshared c_jsc_value_typed_array_get_offsetFn c_jsc_value_typed_array_get_offset; ///
+private alias c_jsc_value_typed_array_get_sizeFn = extern(C) size_t function(JSCValue* value) nothrow;
+__gshared c_jsc_value_typed_array_get_sizeFn c_jsc_value_typed_array_get_size; ///
+private alias c_jsc_value_typed_array_get_typeFn = extern(C) JSCTypedArrayType function(JSCValue* value) nothrow;
+__gshared c_jsc_value_typed_array_get_typeFn c_jsc_value_typed_array_get_type; ///
 
-  // VirtualMachine
-  GType function() c_jsc_virtual_machine_get_type; ///
-  JSCVirtualMachine* function() c_jsc_virtual_machine_new; ///
+// VirtualMachine
+private alias c_jsc_virtual_machine_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_jsc_virtual_machine_get_typeFn c_jsc_virtual_machine_get_type; ///
+private alias c_jsc_virtual_machine_newFn = extern(C) JSCVirtualMachine* function() nothrow;
+__gshared c_jsc_virtual_machine_newFn c_jsc_virtual_machine_new; ///
 
-  // WeakValue
-  GType function() c_jsc_weak_value_get_type; ///
-  JSCWeakValue* function(JSCValue* value) c_jsc_weak_value_new; ///
-  JSCValue* function(JSCWeakValue* weakValue) c_jsc_weak_value_get_value; ///
+// WeakValue
+private alias c_jsc_weak_value_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_jsc_weak_value_get_typeFn c_jsc_weak_value_get_type; ///
+private alias c_jsc_weak_value_newFn = extern(C) JSCWeakValue* function(JSCValue* value) nothrow;
+__gshared c_jsc_weak_value_newFn c_jsc_weak_value_new; ///
+private alias c_jsc_weak_value_get_valueFn = extern(C) JSCValue* function(JSCWeakValue* weakValue) nothrow;
+__gshared c_jsc_weak_value_get_valueFn c_jsc_weak_value_get_value; ///
 
-  // global
-  uint function() c_jsc_get_major_version; ///
-  uint function() c_jsc_get_micro_version; ///
-  uint function() c_jsc_get_minor_version; ///
-  void function(JSCOptionsFunc function_, void* userData) c_jsc_options_foreach; ///
-  gboolean function(const(char)* option, gboolean* value) c_jsc_options_get_boolean; ///
-  gboolean function(const(char)* option, double* value) c_jsc_options_get_double; ///
-  gboolean function(const(char)* option, int* value) c_jsc_options_get_int; ///
-  GOptionGroup* function() c_jsc_options_get_option_group; ///
-  gboolean function(const(char)* option, char** value) c_jsc_options_get_range_string; ///
-  gboolean function(const(char)* option, size_t* value) c_jsc_options_get_size; ///
-  gboolean function(const(char)* option, char** value) c_jsc_options_get_string; ///
-  gboolean function(const(char)* option, uint* value) c_jsc_options_get_uint; ///
-  gboolean function(const(char)* option, gboolean value) c_jsc_options_set_boolean; ///
-  gboolean function(const(char)* option, double value) c_jsc_options_set_double; ///
-  gboolean function(const(char)* option, int value) c_jsc_options_set_int; ///
-  gboolean function(const(char)* option, const(char)* value) c_jsc_options_set_range_string; ///
-  gboolean function(const(char)* option, size_t value) c_jsc_options_set_size; ///
-  gboolean function(const(char)* option, const(char)* value) c_jsc_options_set_string; ///
-  gboolean function(const(char)* option, uint value) c_jsc_options_set_uint; ///
-}
+// global
+private alias c_jsc_get_major_versionFn = extern(C) uint function() nothrow;
+__gshared c_jsc_get_major_versionFn c_jsc_get_major_version; ///
+private alias c_jsc_get_micro_versionFn = extern(C) uint function() nothrow;
+__gshared c_jsc_get_micro_versionFn c_jsc_get_micro_version; ///
+private alias c_jsc_get_minor_versionFn = extern(C) uint function() nothrow;
+__gshared c_jsc_get_minor_versionFn c_jsc_get_minor_version; ///
+private alias c_jsc_options_foreachFn = extern(C) void function(JSCOptionsFunc function_, void* userData) nothrow;
+__gshared c_jsc_options_foreachFn c_jsc_options_foreach; ///
+private alias c_jsc_options_get_booleanFn = extern(C) gboolean function(const(char)* option, gboolean* value) nothrow;
+__gshared c_jsc_options_get_booleanFn c_jsc_options_get_boolean; ///
+private alias c_jsc_options_get_doubleFn = extern(C) gboolean function(const(char)* option, double* value) nothrow;
+__gshared c_jsc_options_get_doubleFn c_jsc_options_get_double; ///
+private alias c_jsc_options_get_intFn = extern(C) gboolean function(const(char)* option, int* value) nothrow;
+__gshared c_jsc_options_get_intFn c_jsc_options_get_int; ///
+private alias c_jsc_options_get_option_groupFn = extern(C) GOptionGroup* function() nothrow;
+__gshared c_jsc_options_get_option_groupFn c_jsc_options_get_option_group; ///
+private alias c_jsc_options_get_range_stringFn = extern(C) gboolean function(const(char)* option, char** value) nothrow;
+__gshared c_jsc_options_get_range_stringFn c_jsc_options_get_range_string; ///
+private alias c_jsc_options_get_sizeFn = extern(C) gboolean function(const(char)* option, size_t* value) nothrow;
+__gshared c_jsc_options_get_sizeFn c_jsc_options_get_size; ///
+private alias c_jsc_options_get_stringFn = extern(C) gboolean function(const(char)* option, char** value) nothrow;
+__gshared c_jsc_options_get_stringFn c_jsc_options_get_string; ///
+private alias c_jsc_options_get_uintFn = extern(C) gboolean function(const(char)* option, uint* value) nothrow;
+__gshared c_jsc_options_get_uintFn c_jsc_options_get_uint; ///
+private alias c_jsc_options_set_booleanFn = extern(C) gboolean function(const(char)* option, gboolean value) nothrow;
+__gshared c_jsc_options_set_booleanFn c_jsc_options_set_boolean; ///
+private alias c_jsc_options_set_doubleFn = extern(C) gboolean function(const(char)* option, double value) nothrow;
+__gshared c_jsc_options_set_doubleFn c_jsc_options_set_double; ///
+private alias c_jsc_options_set_intFn = extern(C) gboolean function(const(char)* option, int value) nothrow;
+__gshared c_jsc_options_set_intFn c_jsc_options_set_int; ///
+private alias c_jsc_options_set_range_stringFn = extern(C) gboolean function(const(char)* option, const(char)* value) nothrow;
+__gshared c_jsc_options_set_range_stringFn c_jsc_options_set_range_string; ///
+private alias c_jsc_options_set_sizeFn = extern(C) gboolean function(const(char)* option, size_t value) nothrow;
+__gshared c_jsc_options_set_sizeFn c_jsc_options_set_size; ///
+private alias c_jsc_options_set_stringFn = extern(C) gboolean function(const(char)* option, const(char)* value) nothrow;
+__gshared c_jsc_options_set_stringFn c_jsc_options_set_string; ///
+private alias c_jsc_options_set_uintFn = extern(C) gboolean function(const(char)* option, uint value) nothrow;
+__gshared c_jsc_options_set_uintFn c_jsc_options_set_uint; ///
 
 // Class
 

@@ -11,152 +11,287 @@ public import gid.gst1.c.types;
 
 private immutable LIBS = ["gstcheck-1.0_0"];
 
-__gshared extern(C) nothrow
-{
-  // Harness
-  void function(GstHarness* h, GstElement* element, GstStaticPadTemplate* hsrc, const(char)* elementSinkpadName, GstStaticPadTemplate* hsink, const(char)* elementSrcpadName) c_gst_harness_add_element_full; ///
-  void function(GstHarness* h, GstPad* sinkpad) c_gst_harness_add_element_sink_pad; ///
-  void function(GstHarness* h, GstPad* srcpad) c_gst_harness_add_element_src_pad; ///
-  void function(GstHarness* h, const(char)* launchline) c_gst_harness_add_parse; ///
-  void function(GstHarness* h, const(char)* elementName, const(char)* padName, GstPadProbeType mask, GstPadProbeCallback callback, void* userData, GDestroyNotify destroyData) c_gst_harness_add_probe; ///
-  void function(GstHarness* h, GType api, const(GstStructure)* params) c_gst_harness_add_propose_allocation_meta; ///
-  void function(GstHarness* h, const(char)* sinkElementName) c_gst_harness_add_sink; ///
-  void function(GstHarness* h, GstHarness* sinkHarness) c_gst_harness_add_sink_harness; ///
-  void function(GstHarness* h, const(char)* launchline) c_gst_harness_add_sink_parse; ///
-  void function(GstHarness* h, const(char)* srcElementName, gboolean hasClockWait) c_gst_harness_add_src; ///
-  void function(GstHarness* h, GstHarness* srcHarness, gboolean hasClockWait) c_gst_harness_add_src_harness; ///
-  void function(GstHarness* h, const(char)* launchline, gboolean hasClockWait) c_gst_harness_add_src_parse; ///
-  uint function(GstHarness* h) c_gst_harness_buffers_in_queue; ///
-  uint function(GstHarness* h) c_gst_harness_buffers_received; ///
-  gboolean function(GstHarness* h, uint waits) c_gst_harness_crank_multiple_clock_waits; ///
-  gboolean function(GstHarness* h) c_gst_harness_crank_single_clock_wait; ///
-  GstBuffer* function(GstHarness* h, size_t size) c_gst_harness_create_buffer; ///
-  void function(GstHarness* h, const(char)* filename) c_gst_harness_dump_to_file; ///
-  uint function(GstHarness* h) c_gst_harness_events_in_queue; ///
-  uint function(GstHarness* h) c_gst_harness_events_received; ///
-  GstElement* function(GstHarness* h, const(char)* elementName) c_gst_harness_find_element; ///
-  void function(GstHarness* h, const(char)* elementName, const(char)* firstPropertyName,  ...) c_gst_harness_get; ///
-  void function(GstHarness* h, GstAllocator** allocator, GstAllocationParams* params) c_gst_harness_get_allocator; ///
-  GstClockTime function(GstHarness* h) c_gst_harness_get_last_pushed_timestamp; ///
-  GstTestClock* function(GstHarness* h) c_gst_harness_get_testclock; ///
-  void function(GstHarness* h) c_gst_harness_play; ///
-  GstBuffer* function(GstHarness* h) c_gst_harness_pull; ///
-  GstEvent* function(GstHarness* h) c_gst_harness_pull_event; ///
-  gboolean function(GstHarness* h, GstBuffer** buf) c_gst_harness_pull_until_eos; ///
-  GstEvent* function(GstHarness* h) c_gst_harness_pull_upstream_event; ///
-  GstFlowReturn function(GstHarness* h, GstBuffer* buffer) c_gst_harness_push; ///
-  GstBuffer* function(GstHarness* h, GstBuffer* buffer) c_gst_harness_push_and_pull; ///
-  gboolean function(GstHarness* h, GstEvent* event) c_gst_harness_push_event; ///
-  GstFlowReturn function(GstHarness* h) c_gst_harness_push_from_src; ///
-  GstFlowReturn function(GstHarness* h) c_gst_harness_push_to_sink; ///
-  gboolean function(GstHarness* h, GstEvent* event) c_gst_harness_push_upstream_event; ///
-  GstClockTime function(GstHarness* h) c_gst_harness_query_latency; ///
-  void function(GstHarness* h, const(char)* elementName, const(char)* firstPropertyName,  ...) c_gst_harness_set; ///
-  void function(GstHarness* h) c_gst_harness_set_blocking_push_mode; ///
-  void function(GstHarness* h, GstCaps* in_, GstCaps* out_) c_gst_harness_set_caps; ///
-  void function(GstHarness* h, const(char)* in_, const(char)* out_) c_gst_harness_set_caps_str; ///
-  void function(GstHarness* h, gboolean dropBuffers) c_gst_harness_set_drop_buffers; ///
-  void function(GstHarness* h, gboolean forwarding) c_gst_harness_set_forwarding; ///
-  void function(GstHarness* h, gboolean isLive) c_gst_harness_set_live; ///
-  void function(GstHarness* h, GstAllocator* allocator, const(GstAllocationParams)* params) c_gst_harness_set_propose_allocator; ///
-  void function(GstHarness* h, GstCaps* caps) c_gst_harness_set_sink_caps; ///
-  void function(GstHarness* h, const(char)* str) c_gst_harness_set_sink_caps_str; ///
-  void function(GstHarness* h, GstCaps* caps) c_gst_harness_set_src_caps; ///
-  void function(GstHarness* h, const(char)* str) c_gst_harness_set_src_caps_str; ///
-  gboolean function(GstHarness* h, GstClockTime time) c_gst_harness_set_time; ///
-  void function(GstHarness* h, GstClockTime latency) c_gst_harness_set_upstream_latency; ///
-  GstFlowReturn function(GstHarness* h, int pushes) c_gst_harness_sink_push_many; ///
-  GstFlowReturn function(GstHarness* h, int cranks, int pushes) c_gst_harness_src_crank_and_push_many; ///
-  gboolean function(GstHarness* h) c_gst_harness_src_push_event; ///
-  GstHarnessThread* function(GstHarness* h, GFunc init_, GFunc callback, void* data, gulong sleep) c_gst_harness_stress_custom_start; ///
-  GstHarnessThread* function(GstHarness* h, const(char)* name, const(GValue)* value, gulong sleep) c_gst_harness_stress_property_start_full; ///
-  GstHarnessThread* function(GstHarness* h, GstCaps* caps, const(GstSegment)* segment, GstBuffer* buf, gulong sleep) c_gst_harness_stress_push_buffer_start_full; ///
-  GstHarnessThread* function(GstHarness* h, GstCaps* caps, const(GstSegment)* segment, GstHarnessPrepareBufferFunc func, void* data, GDestroyNotify notify, gulong sleep) c_gst_harness_stress_push_buffer_with_cb_start_full; ///
-  GstHarnessThread* function(GstHarness* h, GstEvent* event, gulong sleep) c_gst_harness_stress_push_event_start_full; ///
-  GstHarnessThread* function(GstHarness* h, GstHarnessPrepareEventFunc func, void* data, GDestroyNotify notify, gulong sleep) c_gst_harness_stress_push_event_with_cb_start_full; ///
-  GstHarnessThread* function(GstHarness* h, GstEvent* event, gulong sleep) c_gst_harness_stress_push_upstream_event_start_full; ///
-  GstHarnessThread* function(GstHarness* h, GstHarnessPrepareEventFunc func, void* data, GDestroyNotify notify, gulong sleep) c_gst_harness_stress_push_upstream_event_with_cb_start_full; ///
-  GstHarnessThread* function(GstHarness* h, GstPadTemplate* templ, const(char)* name, GstCaps* caps, gboolean release, gulong sleep) c_gst_harness_stress_requestpad_start_full; ///
-  GstHarnessThread* function(GstHarness* h, gulong sleep) c_gst_harness_stress_statechange_start_full; ///
-  ubyte* function(GstHarness* h, size_t* size) c_gst_harness_take_all_data; ///
-  GstBuffer* function(GstHarness* h) c_gst_harness_take_all_data_as_buffer; ///
-  GBytes* function(GstHarness* h) c_gst_harness_take_all_data_as_bytes; ///
-  void function(GstHarness* h) c_gst_harness_teardown; ///
-  GstBuffer* function(GstHarness* h) c_gst_harness_try_pull; ///
-  GstEvent* function(GstHarness* h) c_gst_harness_try_pull_event; ///
-  GstEvent* function(GstHarness* h) c_gst_harness_try_pull_upstream_event; ///
-  uint function(GstHarness* h) c_gst_harness_upstream_events_in_queue; ///
-  uint function(GstHarness* h) c_gst_harness_upstream_events_received; ///
-  void function(GstHarness* h) c_gst_harness_use_systemclock; ///
-  void function(GstHarness* h) c_gst_harness_use_testclock; ///
-  gboolean function(GstHarness* h, uint waits, uint timeout) c_gst_harness_wait_for_clock_id_waits; ///
-  GstHarness* function(const(char)* elementName) c_gst_harness_new; ///
-  GstHarness* function() c_gst_harness_new_empty; ///
-  GstHarness* function(GstElement* element, GstStaticPadTemplate* hsrc, const(char)* elementSinkpadName, GstStaticPadTemplate* hsink, const(char)* elementSrcpadName) c_gst_harness_new_full; ///
-  GstHarness* function(const(char)* launchline) c_gst_harness_new_parse; ///
-  GstHarness* function(GstElement* element, const(char)* elementSinkpadName, const(char)* elementSrcpadName) c_gst_harness_new_with_element; ///
-  GstHarness* function(const(char)* elementName, const(char)* elementSinkpadName, const(char)* elementSrcpadName) c_gst_harness_new_with_padnames; ///
-  GstHarness* function(const(char)* elementName, GstStaticPadTemplate* hsrc, GstStaticPadTemplate* hsink) c_gst_harness_new_with_templates; ///
-  uint function(GstHarnessThread* t) c_gst_harness_stress_thread_stop; ///
+// Harness
+private alias c_gst_harness_add_element_fullFn = extern(C) void function(GstHarness* h, GstElement* element, GstStaticPadTemplate* hsrc, const(char)* elementSinkpadName, GstStaticPadTemplate* hsink, const(char)* elementSrcpadName) nothrow;
+__gshared c_gst_harness_add_element_fullFn c_gst_harness_add_element_full; ///
+private alias c_gst_harness_add_element_sink_padFn = extern(C) void function(GstHarness* h, GstPad* sinkpad) nothrow;
+__gshared c_gst_harness_add_element_sink_padFn c_gst_harness_add_element_sink_pad; ///
+private alias c_gst_harness_add_element_src_padFn = extern(C) void function(GstHarness* h, GstPad* srcpad) nothrow;
+__gshared c_gst_harness_add_element_src_padFn c_gst_harness_add_element_src_pad; ///
+private alias c_gst_harness_add_parseFn = extern(C) void function(GstHarness* h, const(char)* launchline) nothrow;
+__gshared c_gst_harness_add_parseFn c_gst_harness_add_parse; ///
+private alias c_gst_harness_add_probeFn = extern(C) void function(GstHarness* h, const(char)* elementName, const(char)* padName, GstPadProbeType mask, GstPadProbeCallback callback, void* userData, GDestroyNotify destroyData) nothrow;
+__gshared c_gst_harness_add_probeFn c_gst_harness_add_probe; ///
+private alias c_gst_harness_add_propose_allocation_metaFn = extern(C) void function(GstHarness* h, GType api, const(GstStructure)* params) nothrow;
+__gshared c_gst_harness_add_propose_allocation_metaFn c_gst_harness_add_propose_allocation_meta; ///
+private alias c_gst_harness_add_sinkFn = extern(C) void function(GstHarness* h, const(char)* sinkElementName) nothrow;
+__gshared c_gst_harness_add_sinkFn c_gst_harness_add_sink; ///
+private alias c_gst_harness_add_sink_harnessFn = extern(C) void function(GstHarness* h, GstHarness* sinkHarness) nothrow;
+__gshared c_gst_harness_add_sink_harnessFn c_gst_harness_add_sink_harness; ///
+private alias c_gst_harness_add_sink_parseFn = extern(C) void function(GstHarness* h, const(char)* launchline) nothrow;
+__gshared c_gst_harness_add_sink_parseFn c_gst_harness_add_sink_parse; ///
+private alias c_gst_harness_add_srcFn = extern(C) void function(GstHarness* h, const(char)* srcElementName, gboolean hasClockWait) nothrow;
+__gshared c_gst_harness_add_srcFn c_gst_harness_add_src; ///
+private alias c_gst_harness_add_src_harnessFn = extern(C) void function(GstHarness* h, GstHarness* srcHarness, gboolean hasClockWait) nothrow;
+__gshared c_gst_harness_add_src_harnessFn c_gst_harness_add_src_harness; ///
+private alias c_gst_harness_add_src_parseFn = extern(C) void function(GstHarness* h, const(char)* launchline, gboolean hasClockWait) nothrow;
+__gshared c_gst_harness_add_src_parseFn c_gst_harness_add_src_parse; ///
+private alias c_gst_harness_buffers_in_queueFn = extern(C) uint function(GstHarness* h) nothrow;
+__gshared c_gst_harness_buffers_in_queueFn c_gst_harness_buffers_in_queue; ///
+private alias c_gst_harness_buffers_receivedFn = extern(C) uint function(GstHarness* h) nothrow;
+__gshared c_gst_harness_buffers_receivedFn c_gst_harness_buffers_received; ///
+private alias c_gst_harness_crank_multiple_clock_waitsFn = extern(C) gboolean function(GstHarness* h, uint waits) nothrow;
+__gshared c_gst_harness_crank_multiple_clock_waitsFn c_gst_harness_crank_multiple_clock_waits; ///
+private alias c_gst_harness_crank_single_clock_waitFn = extern(C) gboolean function(GstHarness* h) nothrow;
+__gshared c_gst_harness_crank_single_clock_waitFn c_gst_harness_crank_single_clock_wait; ///
+private alias c_gst_harness_create_bufferFn = extern(C) GstBuffer* function(GstHarness* h, size_t size) nothrow;
+__gshared c_gst_harness_create_bufferFn c_gst_harness_create_buffer; ///
+private alias c_gst_harness_dump_to_fileFn = extern(C) void function(GstHarness* h, const(char)* filename) nothrow;
+__gshared c_gst_harness_dump_to_fileFn c_gst_harness_dump_to_file; ///
+private alias c_gst_harness_events_in_queueFn = extern(C) uint function(GstHarness* h) nothrow;
+__gshared c_gst_harness_events_in_queueFn c_gst_harness_events_in_queue; ///
+private alias c_gst_harness_events_receivedFn = extern(C) uint function(GstHarness* h) nothrow;
+__gshared c_gst_harness_events_receivedFn c_gst_harness_events_received; ///
+private alias c_gst_harness_find_elementFn = extern(C) GstElement* function(GstHarness* h, const(char)* elementName) nothrow;
+__gshared c_gst_harness_find_elementFn c_gst_harness_find_element; ///
+private alias c_gst_harness_getFn = extern(C) void function(GstHarness* h, const(char)* elementName, const(char)* firstPropertyName,  ...) nothrow;
+__gshared c_gst_harness_getFn c_gst_harness_get; ///
+private alias c_gst_harness_get_allocatorFn = extern(C) void function(GstHarness* h, GstAllocator** allocator, GstAllocationParams* params) nothrow;
+__gshared c_gst_harness_get_allocatorFn c_gst_harness_get_allocator; ///
+private alias c_gst_harness_get_last_pushed_timestampFn = extern(C) GstClockTime function(GstHarness* h) nothrow;
+__gshared c_gst_harness_get_last_pushed_timestampFn c_gst_harness_get_last_pushed_timestamp; ///
+private alias c_gst_harness_get_testclockFn = extern(C) GstTestClock* function(GstHarness* h) nothrow;
+__gshared c_gst_harness_get_testclockFn c_gst_harness_get_testclock; ///
+private alias c_gst_harness_playFn = extern(C) void function(GstHarness* h) nothrow;
+__gshared c_gst_harness_playFn c_gst_harness_play; ///
+private alias c_gst_harness_pullFn = extern(C) GstBuffer* function(GstHarness* h) nothrow;
+__gshared c_gst_harness_pullFn c_gst_harness_pull; ///
+private alias c_gst_harness_pull_eventFn = extern(C) GstEvent* function(GstHarness* h) nothrow;
+__gshared c_gst_harness_pull_eventFn c_gst_harness_pull_event; ///
+private alias c_gst_harness_pull_until_eosFn = extern(C) gboolean function(GstHarness* h, GstBuffer** buf) nothrow;
+__gshared c_gst_harness_pull_until_eosFn c_gst_harness_pull_until_eos; ///
+private alias c_gst_harness_pull_upstream_eventFn = extern(C) GstEvent* function(GstHarness* h) nothrow;
+__gshared c_gst_harness_pull_upstream_eventFn c_gst_harness_pull_upstream_event; ///
+private alias c_gst_harness_pushFn = extern(C) GstFlowReturn function(GstHarness* h, GstBuffer* buffer) nothrow;
+__gshared c_gst_harness_pushFn c_gst_harness_push; ///
+private alias c_gst_harness_push_and_pullFn = extern(C) GstBuffer* function(GstHarness* h, GstBuffer* buffer) nothrow;
+__gshared c_gst_harness_push_and_pullFn c_gst_harness_push_and_pull; ///
+private alias c_gst_harness_push_eventFn = extern(C) gboolean function(GstHarness* h, GstEvent* event) nothrow;
+__gshared c_gst_harness_push_eventFn c_gst_harness_push_event; ///
+private alias c_gst_harness_push_from_srcFn = extern(C) GstFlowReturn function(GstHarness* h) nothrow;
+__gshared c_gst_harness_push_from_srcFn c_gst_harness_push_from_src; ///
+private alias c_gst_harness_push_to_sinkFn = extern(C) GstFlowReturn function(GstHarness* h) nothrow;
+__gshared c_gst_harness_push_to_sinkFn c_gst_harness_push_to_sink; ///
+private alias c_gst_harness_push_upstream_eventFn = extern(C) gboolean function(GstHarness* h, GstEvent* event) nothrow;
+__gshared c_gst_harness_push_upstream_eventFn c_gst_harness_push_upstream_event; ///
+private alias c_gst_harness_query_latencyFn = extern(C) GstClockTime function(GstHarness* h) nothrow;
+__gshared c_gst_harness_query_latencyFn c_gst_harness_query_latency; ///
+private alias c_gst_harness_setFn = extern(C) void function(GstHarness* h, const(char)* elementName, const(char)* firstPropertyName,  ...) nothrow;
+__gshared c_gst_harness_setFn c_gst_harness_set; ///
+private alias c_gst_harness_set_blocking_push_modeFn = extern(C) void function(GstHarness* h) nothrow;
+__gshared c_gst_harness_set_blocking_push_modeFn c_gst_harness_set_blocking_push_mode; ///
+private alias c_gst_harness_set_capsFn = extern(C) void function(GstHarness* h, GstCaps* in_, GstCaps* out_) nothrow;
+__gshared c_gst_harness_set_capsFn c_gst_harness_set_caps; ///
+private alias c_gst_harness_set_caps_strFn = extern(C) void function(GstHarness* h, const(char)* in_, const(char)* out_) nothrow;
+__gshared c_gst_harness_set_caps_strFn c_gst_harness_set_caps_str; ///
+private alias c_gst_harness_set_drop_buffersFn = extern(C) void function(GstHarness* h, gboolean dropBuffers) nothrow;
+__gshared c_gst_harness_set_drop_buffersFn c_gst_harness_set_drop_buffers; ///
+private alias c_gst_harness_set_forwardingFn = extern(C) void function(GstHarness* h, gboolean forwarding) nothrow;
+__gshared c_gst_harness_set_forwardingFn c_gst_harness_set_forwarding; ///
+private alias c_gst_harness_set_liveFn = extern(C) void function(GstHarness* h, gboolean isLive) nothrow;
+__gshared c_gst_harness_set_liveFn c_gst_harness_set_live; ///
+private alias c_gst_harness_set_propose_allocatorFn = extern(C) void function(GstHarness* h, GstAllocator* allocator, const(GstAllocationParams)* params) nothrow;
+__gshared c_gst_harness_set_propose_allocatorFn c_gst_harness_set_propose_allocator; ///
+private alias c_gst_harness_set_sink_capsFn = extern(C) void function(GstHarness* h, GstCaps* caps) nothrow;
+__gshared c_gst_harness_set_sink_capsFn c_gst_harness_set_sink_caps; ///
+private alias c_gst_harness_set_sink_caps_strFn = extern(C) void function(GstHarness* h, const(char)* str) nothrow;
+__gshared c_gst_harness_set_sink_caps_strFn c_gst_harness_set_sink_caps_str; ///
+private alias c_gst_harness_set_src_capsFn = extern(C) void function(GstHarness* h, GstCaps* caps) nothrow;
+__gshared c_gst_harness_set_src_capsFn c_gst_harness_set_src_caps; ///
+private alias c_gst_harness_set_src_caps_strFn = extern(C) void function(GstHarness* h, const(char)* str) nothrow;
+__gshared c_gst_harness_set_src_caps_strFn c_gst_harness_set_src_caps_str; ///
+private alias c_gst_harness_set_timeFn = extern(C) gboolean function(GstHarness* h, GstClockTime time) nothrow;
+__gshared c_gst_harness_set_timeFn c_gst_harness_set_time; ///
+private alias c_gst_harness_set_upstream_latencyFn = extern(C) void function(GstHarness* h, GstClockTime latency) nothrow;
+__gshared c_gst_harness_set_upstream_latencyFn c_gst_harness_set_upstream_latency; ///
+private alias c_gst_harness_sink_push_manyFn = extern(C) GstFlowReturn function(GstHarness* h, int pushes) nothrow;
+__gshared c_gst_harness_sink_push_manyFn c_gst_harness_sink_push_many; ///
+private alias c_gst_harness_src_crank_and_push_manyFn = extern(C) GstFlowReturn function(GstHarness* h, int cranks, int pushes) nothrow;
+__gshared c_gst_harness_src_crank_and_push_manyFn c_gst_harness_src_crank_and_push_many; ///
+private alias c_gst_harness_src_push_eventFn = extern(C) gboolean function(GstHarness* h) nothrow;
+__gshared c_gst_harness_src_push_eventFn c_gst_harness_src_push_event; ///
+private alias c_gst_harness_stress_custom_startFn = extern(C) GstHarnessThread* function(GstHarness* h, GFunc init_, GFunc callback, void* data, gulong sleep) nothrow;
+__gshared c_gst_harness_stress_custom_startFn c_gst_harness_stress_custom_start; ///
+private alias c_gst_harness_stress_property_start_fullFn = extern(C) GstHarnessThread* function(GstHarness* h, const(char)* name, const(GValue)* value, gulong sleep) nothrow;
+__gshared c_gst_harness_stress_property_start_fullFn c_gst_harness_stress_property_start_full; ///
+private alias c_gst_harness_stress_push_buffer_start_fullFn = extern(C) GstHarnessThread* function(GstHarness* h, GstCaps* caps, const(GstSegment)* segment, GstBuffer* buf, gulong sleep) nothrow;
+__gshared c_gst_harness_stress_push_buffer_start_fullFn c_gst_harness_stress_push_buffer_start_full; ///
+private alias c_gst_harness_stress_push_buffer_with_cb_start_fullFn = extern(C) GstHarnessThread* function(GstHarness* h, GstCaps* caps, const(GstSegment)* segment, GstHarnessPrepareBufferFunc func, void* data, GDestroyNotify notify, gulong sleep) nothrow;
+__gshared c_gst_harness_stress_push_buffer_with_cb_start_fullFn c_gst_harness_stress_push_buffer_with_cb_start_full; ///
+private alias c_gst_harness_stress_push_event_start_fullFn = extern(C) GstHarnessThread* function(GstHarness* h, GstEvent* event, gulong sleep) nothrow;
+__gshared c_gst_harness_stress_push_event_start_fullFn c_gst_harness_stress_push_event_start_full; ///
+private alias c_gst_harness_stress_push_event_with_cb_start_fullFn = extern(C) GstHarnessThread* function(GstHarness* h, GstHarnessPrepareEventFunc func, void* data, GDestroyNotify notify, gulong sleep) nothrow;
+__gshared c_gst_harness_stress_push_event_with_cb_start_fullFn c_gst_harness_stress_push_event_with_cb_start_full; ///
+private alias c_gst_harness_stress_push_upstream_event_start_fullFn = extern(C) GstHarnessThread* function(GstHarness* h, GstEvent* event, gulong sleep) nothrow;
+__gshared c_gst_harness_stress_push_upstream_event_start_fullFn c_gst_harness_stress_push_upstream_event_start_full; ///
+private alias c_gst_harness_stress_push_upstream_event_with_cb_start_fullFn = extern(C) GstHarnessThread* function(GstHarness* h, GstHarnessPrepareEventFunc func, void* data, GDestroyNotify notify, gulong sleep) nothrow;
+__gshared c_gst_harness_stress_push_upstream_event_with_cb_start_fullFn c_gst_harness_stress_push_upstream_event_with_cb_start_full; ///
+private alias c_gst_harness_stress_requestpad_start_fullFn = extern(C) GstHarnessThread* function(GstHarness* h, GstPadTemplate* templ, const(char)* name, GstCaps* caps, gboolean release, gulong sleep) nothrow;
+__gshared c_gst_harness_stress_requestpad_start_fullFn c_gst_harness_stress_requestpad_start_full; ///
+private alias c_gst_harness_stress_statechange_start_fullFn = extern(C) GstHarnessThread* function(GstHarness* h, gulong sleep) nothrow;
+__gshared c_gst_harness_stress_statechange_start_fullFn c_gst_harness_stress_statechange_start_full; ///
+private alias c_gst_harness_take_all_dataFn = extern(C) ubyte* function(GstHarness* h, size_t* size) nothrow;
+__gshared c_gst_harness_take_all_dataFn c_gst_harness_take_all_data; ///
+private alias c_gst_harness_take_all_data_as_bufferFn = extern(C) GstBuffer* function(GstHarness* h) nothrow;
+__gshared c_gst_harness_take_all_data_as_bufferFn c_gst_harness_take_all_data_as_buffer; ///
+private alias c_gst_harness_take_all_data_as_bytesFn = extern(C) GBytes* function(GstHarness* h) nothrow;
+__gshared c_gst_harness_take_all_data_as_bytesFn c_gst_harness_take_all_data_as_bytes; ///
+private alias c_gst_harness_teardownFn = extern(C) void function(GstHarness* h) nothrow;
+__gshared c_gst_harness_teardownFn c_gst_harness_teardown; ///
+private alias c_gst_harness_try_pullFn = extern(C) GstBuffer* function(GstHarness* h) nothrow;
+__gshared c_gst_harness_try_pullFn c_gst_harness_try_pull; ///
+private alias c_gst_harness_try_pull_eventFn = extern(C) GstEvent* function(GstHarness* h) nothrow;
+__gshared c_gst_harness_try_pull_eventFn c_gst_harness_try_pull_event; ///
+private alias c_gst_harness_try_pull_upstream_eventFn = extern(C) GstEvent* function(GstHarness* h) nothrow;
+__gshared c_gst_harness_try_pull_upstream_eventFn c_gst_harness_try_pull_upstream_event; ///
+private alias c_gst_harness_upstream_events_in_queueFn = extern(C) uint function(GstHarness* h) nothrow;
+__gshared c_gst_harness_upstream_events_in_queueFn c_gst_harness_upstream_events_in_queue; ///
+private alias c_gst_harness_upstream_events_receivedFn = extern(C) uint function(GstHarness* h) nothrow;
+__gshared c_gst_harness_upstream_events_receivedFn c_gst_harness_upstream_events_received; ///
+private alias c_gst_harness_use_systemclockFn = extern(C) void function(GstHarness* h) nothrow;
+__gshared c_gst_harness_use_systemclockFn c_gst_harness_use_systemclock; ///
+private alias c_gst_harness_use_testclockFn = extern(C) void function(GstHarness* h) nothrow;
+__gshared c_gst_harness_use_testclockFn c_gst_harness_use_testclock; ///
+private alias c_gst_harness_wait_for_clock_id_waitsFn = extern(C) gboolean function(GstHarness* h, uint waits, uint timeout) nothrow;
+__gshared c_gst_harness_wait_for_clock_id_waitsFn c_gst_harness_wait_for_clock_id_waits; ///
+private alias c_gst_harness_newFn = extern(C) GstHarness* function(const(char)* elementName) nothrow;
+__gshared c_gst_harness_newFn c_gst_harness_new; ///
+private alias c_gst_harness_new_emptyFn = extern(C) GstHarness* function() nothrow;
+__gshared c_gst_harness_new_emptyFn c_gst_harness_new_empty; ///
+private alias c_gst_harness_new_fullFn = extern(C) GstHarness* function(GstElement* element, GstStaticPadTemplate* hsrc, const(char)* elementSinkpadName, GstStaticPadTemplate* hsink, const(char)* elementSrcpadName) nothrow;
+__gshared c_gst_harness_new_fullFn c_gst_harness_new_full; ///
+private alias c_gst_harness_new_parseFn = extern(C) GstHarness* function(const(char)* launchline) nothrow;
+__gshared c_gst_harness_new_parseFn c_gst_harness_new_parse; ///
+private alias c_gst_harness_new_with_elementFn = extern(C) GstHarness* function(GstElement* element, const(char)* elementSinkpadName, const(char)* elementSrcpadName) nothrow;
+__gshared c_gst_harness_new_with_elementFn c_gst_harness_new_with_element; ///
+private alias c_gst_harness_new_with_padnamesFn = extern(C) GstHarness* function(const(char)* elementName, const(char)* elementSinkpadName, const(char)* elementSrcpadName) nothrow;
+__gshared c_gst_harness_new_with_padnamesFn c_gst_harness_new_with_padnames; ///
+private alias c_gst_harness_new_with_templatesFn = extern(C) GstHarness* function(const(char)* elementName, GstStaticPadTemplate* hsrc, GstStaticPadTemplate* hsink) nothrow;
+__gshared c_gst_harness_new_with_templatesFn c_gst_harness_new_with_templates; ///
+private alias c_gst_harness_stress_thread_stopFn = extern(C) uint function(GstHarnessThread* t) nothrow;
+__gshared c_gst_harness_stress_thread_stopFn c_gst_harness_stress_thread_stop; ///
 
-  // TestClock
-  GType function() c_gst_test_clock_get_type; ///
-  GstClock* function() c_gst_test_clock_new; ///
-  GstClock* function(GstClockTime startTime) c_gst_test_clock_new_with_start_time; ///
-  GstClockTime function(const(GList)* pendingList) c_gst_test_clock_id_list_get_latest_time; ///
-  void function(GstTestClock* testClock, GstClockTimeDiff delta) c_gst_test_clock_advance_time; ///
-  gboolean function(GstTestClock* testClock) c_gst_test_clock_crank; ///
-  GstClockTime function(GstTestClock* testClock) c_gst_test_clock_get_next_entry_time; ///
-  gboolean function(GstTestClock* testClock, GstClockID id) c_gst_test_clock_has_id; ///
-  uint function(GstTestClock* testClock) c_gst_test_clock_peek_id_count; ///
-  gboolean function(GstTestClock* testClock, GstClockID* pendingId) c_gst_test_clock_peek_next_pending_id; ///
-  gboolean function(GstTestClock* testClock, GstClockID pendingId) c_gst_test_clock_process_id; ///
-  uint function(GstTestClock* testClock, const(GList)* pendingList) c_gst_test_clock_process_id_list; ///
-  GstClockID function(GstTestClock* testClock) c_gst_test_clock_process_next_clock_id; ///
-  void function(GstTestClock* testClock, GstClockTime newTime) c_gst_test_clock_set_time; ///
-  gboolean function(GstTestClock* testClock, uint count, uint timeoutMs, GList** pendingList) c_gst_test_clock_timed_wait_for_multiple_pending_ids; ///
-  void function(GstTestClock* testClock, uint count, GList** pendingList) c_gst_test_clock_wait_for_multiple_pending_ids; ///
-  void function(GstTestClock* testClock, GstClockID* pendingId) c_gst_test_clock_wait_for_next_pending_id; ///
-  void function(GstTestClock* testClock, uint count) c_gst_test_clock_wait_for_pending_id_count; ///
+// TestClock
+private alias c_gst_test_clock_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_test_clock_get_typeFn c_gst_test_clock_get_type; ///
+private alias c_gst_test_clock_newFn = extern(C) GstClock* function() nothrow;
+__gshared c_gst_test_clock_newFn c_gst_test_clock_new; ///
+private alias c_gst_test_clock_new_with_start_timeFn = extern(C) GstClock* function(GstClockTime startTime) nothrow;
+__gshared c_gst_test_clock_new_with_start_timeFn c_gst_test_clock_new_with_start_time; ///
+private alias c_gst_test_clock_id_list_get_latest_timeFn = extern(C) GstClockTime function(const(GList)* pendingList) nothrow;
+__gshared c_gst_test_clock_id_list_get_latest_timeFn c_gst_test_clock_id_list_get_latest_time; ///
+private alias c_gst_test_clock_advance_timeFn = extern(C) void function(GstTestClock* testClock, GstClockTimeDiff delta) nothrow;
+__gshared c_gst_test_clock_advance_timeFn c_gst_test_clock_advance_time; ///
+private alias c_gst_test_clock_crankFn = extern(C) gboolean function(GstTestClock* testClock) nothrow;
+__gshared c_gst_test_clock_crankFn c_gst_test_clock_crank; ///
+private alias c_gst_test_clock_get_next_entry_timeFn = extern(C) GstClockTime function(GstTestClock* testClock) nothrow;
+__gshared c_gst_test_clock_get_next_entry_timeFn c_gst_test_clock_get_next_entry_time; ///
+private alias c_gst_test_clock_has_idFn = extern(C) gboolean function(GstTestClock* testClock, GstClockID id) nothrow;
+__gshared c_gst_test_clock_has_idFn c_gst_test_clock_has_id; ///
+private alias c_gst_test_clock_peek_id_countFn = extern(C) uint function(GstTestClock* testClock) nothrow;
+__gshared c_gst_test_clock_peek_id_countFn c_gst_test_clock_peek_id_count; ///
+private alias c_gst_test_clock_peek_next_pending_idFn = extern(C) gboolean function(GstTestClock* testClock, GstClockID* pendingId) nothrow;
+__gshared c_gst_test_clock_peek_next_pending_idFn c_gst_test_clock_peek_next_pending_id; ///
+private alias c_gst_test_clock_process_idFn = extern(C) gboolean function(GstTestClock* testClock, GstClockID pendingId) nothrow;
+__gshared c_gst_test_clock_process_idFn c_gst_test_clock_process_id; ///
+private alias c_gst_test_clock_process_id_listFn = extern(C) uint function(GstTestClock* testClock, const(GList)* pendingList) nothrow;
+__gshared c_gst_test_clock_process_id_listFn c_gst_test_clock_process_id_list; ///
+private alias c_gst_test_clock_process_next_clock_idFn = extern(C) GstClockID function(GstTestClock* testClock) nothrow;
+__gshared c_gst_test_clock_process_next_clock_idFn c_gst_test_clock_process_next_clock_id; ///
+private alias c_gst_test_clock_set_timeFn = extern(C) void function(GstTestClock* testClock, GstClockTime newTime) nothrow;
+__gshared c_gst_test_clock_set_timeFn c_gst_test_clock_set_time; ///
+private alias c_gst_test_clock_timed_wait_for_multiple_pending_idsFn = extern(C) gboolean function(GstTestClock* testClock, uint count, uint timeoutMs, GList** pendingList) nothrow;
+__gshared c_gst_test_clock_timed_wait_for_multiple_pending_idsFn c_gst_test_clock_timed_wait_for_multiple_pending_ids; ///
+private alias c_gst_test_clock_wait_for_multiple_pending_idsFn = extern(C) void function(GstTestClock* testClock, uint count, GList** pendingList) nothrow;
+__gshared c_gst_test_clock_wait_for_multiple_pending_idsFn c_gst_test_clock_wait_for_multiple_pending_ids; ///
+private alias c_gst_test_clock_wait_for_next_pending_idFn = extern(C) void function(GstTestClock* testClock, GstClockID* pendingId) nothrow;
+__gshared c_gst_test_clock_wait_for_next_pending_idFn c_gst_test_clock_wait_for_next_pending_id; ///
+private alias c_gst_test_clock_wait_for_pending_id_countFn = extern(C) void function(GstTestClock* testClock, uint count) nothrow;
+__gshared c_gst_test_clock_wait_for_pending_id_countFn c_gst_test_clock_wait_for_pending_id_count; ///
 
-  // global
-  GstBuffer* function(GstElement* bin, GstPad* pad) c_gst_buffer_straw_get_buffer; ///
-  void function(GstElement* bin, GstPad* pad) c_gst_buffer_straw_start_pipeline; ///
-  void function(GstElement* bin, GstPad* pad) c_gst_buffer_straw_stop_pipeline; ///
-  void function(GstCheckABIStruct* list, gboolean haveAbiSizes) c_gst_check_abi_list; ///
-  GstCheckLogFilter* function(const(char)* logDomain, GLogLevelFlags logLevel, GRegex* regex, GstCheckLogFilterFunc func, void* userData, GDestroyNotify destroyData) c_gst_check_add_log_filter; ///
-  void function(GstBuffer* buffer, const(void)* data, size_t size) c_gst_check_buffer_data; ///
-  void function(GstCaps* caps1, GstCaps* caps2) c_gst_check_caps_equal; ///
-  GstFlowReturn function(GstPad* pad, GstObject* parent, GstBuffer* buffer) c_gst_check_chain_func; ///
-  void function() c_gst_check_clear_log_filter; ///
-  void function() c_gst_check_drop_buffers; ///
-  void function(const(char)* elementName, GstBuffer* bufferIn, GstCaps* capsIn, GstBuffer* bufferOut, GstCaps* capsOut) c_gst_check_element_push_buffer; ///
-  void function(const(char)* elementName, GList* bufferIn, GstCaps* capsIn, GList* bufferOut, GstCaps* capsOut, GstFlowReturn lastFlowReturn) c_gst_check_element_push_buffer_list; ///
-  void function(int* argc, char*** argv) c_gst_check_init; ///
-  void function(GstMessage* message, GstMessageType type, GQuark domain, int code) c_gst_check_message_error; ///
-  void function(void* objectToUnref) c_gst_check_object_destroyed_on_unref; ///
-  void function(void* objectToUnref, void* firstObject,  ...) c_gst_check_objects_destroyed_on_unref; ///
-  void function(GstCheckLogFilter* filter) c_gst_check_remove_log_filter; ///
-  GstElement* function(const(char)* factory) c_gst_check_setup_element; ///
-  void function(GstPad* srcpad, GstElement* element, GstCaps* caps, GstFormat format) c_gst_check_setup_events; ///
-  void function(GstPad* srcpad, GstElement* element, GstCaps* caps, GstFormat format, const(char)* streamId) c_gst_check_setup_events_with_stream_id; ///
-  GstPad* function(GstElement* element, GstStaticPadTemplate* tmpl) c_gst_check_setup_sink_pad; ///
-  GstPad* function(GstElement* element, GstStaticPadTemplate* tmpl, const(char)* name) c_gst_check_setup_sink_pad_by_name; ///
-  GstPad* function(GstElement* element, GstPadTemplate* tmpl, const(char)* name) c_gst_check_setup_sink_pad_by_name_from_template; ///
-  GstPad* function(GstElement* element, GstPadTemplate* tmpl) c_gst_check_setup_sink_pad_from_template; ///
-  GstPad* function(GstElement* element, GstStaticPadTemplate* tmpl) c_gst_check_setup_src_pad; ///
-  GstPad* function(GstElement* element, GstStaticPadTemplate* tmpl, const(char)* name) c_gst_check_setup_src_pad_by_name; ///
-  GstPad* function(GstElement* element, GstPadTemplate* tmpl, const(char)* name) c_gst_check_setup_src_pad_by_name_from_template; ///
-  GstPad* function(GstElement* element, GstPadTemplate* tmpl) c_gst_check_setup_src_pad_from_template; ///
-  void function(GstElement* element) c_gst_check_teardown_element; ///
-  void function(GstElement* element, const(char)* name) c_gst_check_teardown_pad_by_name; ///
-  void function(GstElement* element) c_gst_check_teardown_sink_pad; ///
-  void function(GstElement* element) c_gst_check_teardown_src_pad; ///
-  gboolean function(GstStreamConsistency* consist, GstPad* pad) c_gst_consistency_checker_add_pad; ///
-  void function(GstStreamConsistency* consist) c_gst_consistency_checker_free; ///
-  GstStreamConsistency* function(GstPad* pad) c_gst_consistency_checker_new; ///
-  void function(GstStreamConsistency* consist) c_gst_consistency_checker_reset; ///
-}
+// global
+private alias c_gst_buffer_straw_get_bufferFn = extern(C) GstBuffer* function(GstElement* bin, GstPad* pad) nothrow;
+__gshared c_gst_buffer_straw_get_bufferFn c_gst_buffer_straw_get_buffer; ///
+private alias c_gst_buffer_straw_start_pipelineFn = extern(C) void function(GstElement* bin, GstPad* pad) nothrow;
+__gshared c_gst_buffer_straw_start_pipelineFn c_gst_buffer_straw_start_pipeline; ///
+private alias c_gst_buffer_straw_stop_pipelineFn = extern(C) void function(GstElement* bin, GstPad* pad) nothrow;
+__gshared c_gst_buffer_straw_stop_pipelineFn c_gst_buffer_straw_stop_pipeline; ///
+private alias c_gst_check_abi_listFn = extern(C) void function(GstCheckABIStruct* list, gboolean haveAbiSizes) nothrow;
+__gshared c_gst_check_abi_listFn c_gst_check_abi_list; ///
+private alias c_gst_check_add_log_filterFn = extern(C) GstCheckLogFilter* function(const(char)* logDomain, GLogLevelFlags logLevel, GRegex* regex, GstCheckLogFilterFunc func, void* userData, GDestroyNotify destroyData) nothrow;
+__gshared c_gst_check_add_log_filterFn c_gst_check_add_log_filter; ///
+private alias c_gst_check_buffer_dataFn = extern(C) void function(GstBuffer* buffer, const(void)* data, size_t size) nothrow;
+__gshared c_gst_check_buffer_dataFn c_gst_check_buffer_data; ///
+private alias c_gst_check_caps_equalFn = extern(C) void function(GstCaps* caps1, GstCaps* caps2) nothrow;
+__gshared c_gst_check_caps_equalFn c_gst_check_caps_equal; ///
+private alias c_gst_check_chain_funcFn = extern(C) GstFlowReturn function(GstPad* pad, GstObject* parent, GstBuffer* buffer) nothrow;
+__gshared c_gst_check_chain_funcFn c_gst_check_chain_func; ///
+private alias c_gst_check_clear_log_filterFn = extern(C) void function() nothrow;
+__gshared c_gst_check_clear_log_filterFn c_gst_check_clear_log_filter; ///
+private alias c_gst_check_drop_buffersFn = extern(C) void function() nothrow;
+__gshared c_gst_check_drop_buffersFn c_gst_check_drop_buffers; ///
+private alias c_gst_check_element_push_bufferFn = extern(C) void function(const(char)* elementName, GstBuffer* bufferIn, GstCaps* capsIn, GstBuffer* bufferOut, GstCaps* capsOut) nothrow;
+__gshared c_gst_check_element_push_bufferFn c_gst_check_element_push_buffer; ///
+private alias c_gst_check_element_push_buffer_listFn = extern(C) void function(const(char)* elementName, GList* bufferIn, GstCaps* capsIn, GList* bufferOut, GstCaps* capsOut, GstFlowReturn lastFlowReturn) nothrow;
+__gshared c_gst_check_element_push_buffer_listFn c_gst_check_element_push_buffer_list; ///
+private alias c_gst_check_initFn = extern(C) void function(int* argc, char*** argv) nothrow;
+__gshared c_gst_check_initFn c_gst_check_init; ///
+private alias c_gst_check_message_errorFn = extern(C) void function(GstMessage* message, GstMessageType type, GQuark domain, int code) nothrow;
+__gshared c_gst_check_message_errorFn c_gst_check_message_error; ///
+private alias c_gst_check_object_destroyed_on_unrefFn = extern(C) void function(void* objectToUnref) nothrow;
+__gshared c_gst_check_object_destroyed_on_unrefFn c_gst_check_object_destroyed_on_unref; ///
+private alias c_gst_check_objects_destroyed_on_unrefFn = extern(C) void function(void* objectToUnref, void* firstObject,  ...) nothrow;
+__gshared c_gst_check_objects_destroyed_on_unrefFn c_gst_check_objects_destroyed_on_unref; ///
+private alias c_gst_check_remove_log_filterFn = extern(C) void function(GstCheckLogFilter* filter) nothrow;
+__gshared c_gst_check_remove_log_filterFn c_gst_check_remove_log_filter; ///
+private alias c_gst_check_setup_elementFn = extern(C) GstElement* function(const(char)* factory) nothrow;
+__gshared c_gst_check_setup_elementFn c_gst_check_setup_element; ///
+private alias c_gst_check_setup_eventsFn = extern(C) void function(GstPad* srcpad, GstElement* element, GstCaps* caps, GstFormat format) nothrow;
+__gshared c_gst_check_setup_eventsFn c_gst_check_setup_events; ///
+private alias c_gst_check_setup_events_with_stream_idFn = extern(C) void function(GstPad* srcpad, GstElement* element, GstCaps* caps, GstFormat format, const(char)* streamId) nothrow;
+__gshared c_gst_check_setup_events_with_stream_idFn c_gst_check_setup_events_with_stream_id; ///
+private alias c_gst_check_setup_sink_padFn = extern(C) GstPad* function(GstElement* element, GstStaticPadTemplate* tmpl) nothrow;
+__gshared c_gst_check_setup_sink_padFn c_gst_check_setup_sink_pad; ///
+private alias c_gst_check_setup_sink_pad_by_nameFn = extern(C) GstPad* function(GstElement* element, GstStaticPadTemplate* tmpl, const(char)* name) nothrow;
+__gshared c_gst_check_setup_sink_pad_by_nameFn c_gst_check_setup_sink_pad_by_name; ///
+private alias c_gst_check_setup_sink_pad_by_name_from_templateFn = extern(C) GstPad* function(GstElement* element, GstPadTemplate* tmpl, const(char)* name) nothrow;
+__gshared c_gst_check_setup_sink_pad_by_name_from_templateFn c_gst_check_setup_sink_pad_by_name_from_template; ///
+private alias c_gst_check_setup_sink_pad_from_templateFn = extern(C) GstPad* function(GstElement* element, GstPadTemplate* tmpl) nothrow;
+__gshared c_gst_check_setup_sink_pad_from_templateFn c_gst_check_setup_sink_pad_from_template; ///
+private alias c_gst_check_setup_src_padFn = extern(C) GstPad* function(GstElement* element, GstStaticPadTemplate* tmpl) nothrow;
+__gshared c_gst_check_setup_src_padFn c_gst_check_setup_src_pad; ///
+private alias c_gst_check_setup_src_pad_by_nameFn = extern(C) GstPad* function(GstElement* element, GstStaticPadTemplate* tmpl, const(char)* name) nothrow;
+__gshared c_gst_check_setup_src_pad_by_nameFn c_gst_check_setup_src_pad_by_name; ///
+private alias c_gst_check_setup_src_pad_by_name_from_templateFn = extern(C) GstPad* function(GstElement* element, GstPadTemplate* tmpl, const(char)* name) nothrow;
+__gshared c_gst_check_setup_src_pad_by_name_from_templateFn c_gst_check_setup_src_pad_by_name_from_template; ///
+private alias c_gst_check_setup_src_pad_from_templateFn = extern(C) GstPad* function(GstElement* element, GstPadTemplate* tmpl) nothrow;
+__gshared c_gst_check_setup_src_pad_from_templateFn c_gst_check_setup_src_pad_from_template; ///
+private alias c_gst_check_teardown_elementFn = extern(C) void function(GstElement* element) nothrow;
+__gshared c_gst_check_teardown_elementFn c_gst_check_teardown_element; ///
+private alias c_gst_check_teardown_pad_by_nameFn = extern(C) void function(GstElement* element, const(char)* name) nothrow;
+__gshared c_gst_check_teardown_pad_by_nameFn c_gst_check_teardown_pad_by_name; ///
+private alias c_gst_check_teardown_sink_padFn = extern(C) void function(GstElement* element) nothrow;
+__gshared c_gst_check_teardown_sink_padFn c_gst_check_teardown_sink_pad; ///
+private alias c_gst_check_teardown_src_padFn = extern(C) void function(GstElement* element) nothrow;
+__gshared c_gst_check_teardown_src_padFn c_gst_check_teardown_src_pad; ///
+private alias c_gst_consistency_checker_add_padFn = extern(C) gboolean function(GstStreamConsistency* consist, GstPad* pad) nothrow;
+__gshared c_gst_consistency_checker_add_padFn c_gst_consistency_checker_add_pad; ///
+private alias c_gst_consistency_checker_freeFn = extern(C) void function(GstStreamConsistency* consist) nothrow;
+__gshared c_gst_consistency_checker_freeFn c_gst_consistency_checker_free; ///
+private alias c_gst_consistency_checker_newFn = extern(C) GstStreamConsistency* function(GstPad* pad) nothrow;
+__gshared c_gst_consistency_checker_newFn c_gst_consistency_checker_new; ///
+private alias c_gst_consistency_checker_resetFn = extern(C) void function(GstStreamConsistency* consist) nothrow;
+__gshared c_gst_consistency_checker_resetFn c_gst_consistency_checker_reset; ///
 
 // Harness
 

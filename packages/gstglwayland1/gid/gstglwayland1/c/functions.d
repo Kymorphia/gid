@@ -11,13 +11,13 @@ public import gid.gstvideo1.c.types;
 
 private immutable LIBS = ["gstgl-1.0_0"];
 
-__gshared extern(C) nothrow
-{
-  // GLDisplayWayland
-  GType function() c_gst_gl_display_wayland_get_type; ///
-  GstGLDisplayWayland* function(const(char)* name) c_gst_gl_display_wayland_new; ///
-  GstGLDisplayWayland* function(void* display) c_gst_gl_display_wayland_new_with_display; ///
-}
+// GLDisplayWayland
+private alias c_gst_gl_display_wayland_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_gl_display_wayland_get_typeFn c_gst_gl_display_wayland_get_type; ///
+private alias c_gst_gl_display_wayland_newFn = extern(C) GstGLDisplayWayland* function(const(char)* name) nothrow;
+__gshared c_gst_gl_display_wayland_newFn c_gst_gl_display_wayland_new; ///
+private alias c_gst_gl_display_wayland_new_with_displayFn = extern(C) GstGLDisplayWayland* function(void* display) nothrow;
+__gshared c_gst_gl_display_wayland_new_with_displayFn c_gst_gl_display_wayland_new_with_display; ///
 
 // GLDisplayWayland
 

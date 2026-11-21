@@ -9,257 +9,475 @@ public import gid.gobject2.c.types;
 
 private immutable LIBS = ["json-glib-1.0_0"];
 
-__gshared extern(C) nothrow
-{
-  // Array
-  GType function() c_json_array_get_type; ///
-  JsonArray* function() c_json_array_new; ///
-  JsonArray* function(uint nElements) c_json_array_sized_new; ///
-  void function(JsonArray* array, JsonArray* value) c_json_array_add_array_element; ///
-  void function(JsonArray* array, gboolean value) c_json_array_add_boolean_element; ///
-  void function(JsonArray* array, double value) c_json_array_add_double_element; ///
-  void function(JsonArray* array, JsonNode* node) c_json_array_add_element; ///
-  void function(JsonArray* array, long value) c_json_array_add_int_element; ///
-  void function(JsonArray* array) c_json_array_add_null_element; ///
-  void function(JsonArray* array, JsonObject* value) c_json_array_add_object_element; ///
-  void function(JsonArray* array, const(char)* value) c_json_array_add_string_element; ///
-  JsonNode* function(JsonArray* array, uint index) c_json_array_dup_element; ///
-  gboolean function(JsonArray* a, JsonArray* b) c_json_array_equal; ///
-  void function(JsonArray* array, JsonArrayForeach func, void* data) c_json_array_foreach_element; ///
-  JsonArray* function(JsonArray* array, uint index) c_json_array_get_array_element; ///
-  gboolean function(JsonArray* array, uint index) c_json_array_get_boolean_element; ///
-  double function(JsonArray* array, uint index) c_json_array_get_double_element; ///
-  JsonNode* function(JsonArray* array, uint index) c_json_array_get_element; ///
-  GList* function(JsonArray* array) c_json_array_get_elements; ///
-  long function(JsonArray* array, uint index) c_json_array_get_int_element; ///
-  uint function(JsonArray* array) c_json_array_get_length; ///
-  gboolean function(JsonArray* array, uint index) c_json_array_get_null_element; ///
-  JsonObject* function(JsonArray* array, uint index) c_json_array_get_object_element; ///
-  const(char)* function(JsonArray* array, uint index) c_json_array_get_string_element; ///
-  uint function(JsonArray* key) c_json_array_hash; ///
-  gboolean function(JsonArray* array) c_json_array_is_immutable; ///
-  JsonArray* function(JsonArray* array) c_json_array_ref; ///
-  void function(JsonArray* array, uint index) c_json_array_remove_element; ///
-  void function(JsonArray* array) c_json_array_seal; ///
-  void function(JsonArray* array) c_json_array_unref; ///
+// Array
+private alias c_json_array_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_json_array_get_typeFn c_json_array_get_type; ///
+private alias c_json_array_newFn = extern(C) JsonArray* function() nothrow;
+__gshared c_json_array_newFn c_json_array_new; ///
+private alias c_json_array_sized_newFn = extern(C) JsonArray* function(uint nElements) nothrow;
+__gshared c_json_array_sized_newFn c_json_array_sized_new; ///
+private alias c_json_array_add_array_elementFn = extern(C) void function(JsonArray* array, JsonArray* value) nothrow;
+__gshared c_json_array_add_array_elementFn c_json_array_add_array_element; ///
+private alias c_json_array_add_boolean_elementFn = extern(C) void function(JsonArray* array, gboolean value) nothrow;
+__gshared c_json_array_add_boolean_elementFn c_json_array_add_boolean_element; ///
+private alias c_json_array_add_double_elementFn = extern(C) void function(JsonArray* array, double value) nothrow;
+__gshared c_json_array_add_double_elementFn c_json_array_add_double_element; ///
+private alias c_json_array_add_elementFn = extern(C) void function(JsonArray* array, JsonNode* node) nothrow;
+__gshared c_json_array_add_elementFn c_json_array_add_element; ///
+private alias c_json_array_add_int_elementFn = extern(C) void function(JsonArray* array, long value) nothrow;
+__gshared c_json_array_add_int_elementFn c_json_array_add_int_element; ///
+private alias c_json_array_add_null_elementFn = extern(C) void function(JsonArray* array) nothrow;
+__gshared c_json_array_add_null_elementFn c_json_array_add_null_element; ///
+private alias c_json_array_add_object_elementFn = extern(C) void function(JsonArray* array, JsonObject* value) nothrow;
+__gshared c_json_array_add_object_elementFn c_json_array_add_object_element; ///
+private alias c_json_array_add_string_elementFn = extern(C) void function(JsonArray* array, const(char)* value) nothrow;
+__gshared c_json_array_add_string_elementFn c_json_array_add_string_element; ///
+private alias c_json_array_dup_elementFn = extern(C) JsonNode* function(JsonArray* array, uint index) nothrow;
+__gshared c_json_array_dup_elementFn c_json_array_dup_element; ///
+private alias c_json_array_equalFn = extern(C) gboolean function(JsonArray* a, JsonArray* b) nothrow;
+__gshared c_json_array_equalFn c_json_array_equal; ///
+private alias c_json_array_foreach_elementFn = extern(C) void function(JsonArray* array, JsonArrayForeach func, void* data) nothrow;
+__gshared c_json_array_foreach_elementFn c_json_array_foreach_element; ///
+private alias c_json_array_get_array_elementFn = extern(C) JsonArray* function(JsonArray* array, uint index) nothrow;
+__gshared c_json_array_get_array_elementFn c_json_array_get_array_element; ///
+private alias c_json_array_get_boolean_elementFn = extern(C) gboolean function(JsonArray* array, uint index) nothrow;
+__gshared c_json_array_get_boolean_elementFn c_json_array_get_boolean_element; ///
+private alias c_json_array_get_double_elementFn = extern(C) double function(JsonArray* array, uint index) nothrow;
+__gshared c_json_array_get_double_elementFn c_json_array_get_double_element; ///
+private alias c_json_array_get_elementFn = extern(C) JsonNode* function(JsonArray* array, uint index) nothrow;
+__gshared c_json_array_get_elementFn c_json_array_get_element; ///
+private alias c_json_array_get_elementsFn = extern(C) GList* function(JsonArray* array) nothrow;
+__gshared c_json_array_get_elementsFn c_json_array_get_elements; ///
+private alias c_json_array_get_int_elementFn = extern(C) long function(JsonArray* array, uint index) nothrow;
+__gshared c_json_array_get_int_elementFn c_json_array_get_int_element; ///
+private alias c_json_array_get_lengthFn = extern(C) uint function(JsonArray* array) nothrow;
+__gshared c_json_array_get_lengthFn c_json_array_get_length; ///
+private alias c_json_array_get_null_elementFn = extern(C) gboolean function(JsonArray* array, uint index) nothrow;
+__gshared c_json_array_get_null_elementFn c_json_array_get_null_element; ///
+private alias c_json_array_get_object_elementFn = extern(C) JsonObject* function(JsonArray* array, uint index) nothrow;
+__gshared c_json_array_get_object_elementFn c_json_array_get_object_element; ///
+private alias c_json_array_get_string_elementFn = extern(C) const(char)* function(JsonArray* array, uint index) nothrow;
+__gshared c_json_array_get_string_elementFn c_json_array_get_string_element; ///
+private alias c_json_array_hashFn = extern(C) uint function(JsonArray* key) nothrow;
+__gshared c_json_array_hashFn c_json_array_hash; ///
+private alias c_json_array_is_immutableFn = extern(C) gboolean function(JsonArray* array) nothrow;
+__gshared c_json_array_is_immutableFn c_json_array_is_immutable; ///
+private alias c_json_array_refFn = extern(C) JsonArray* function(JsonArray* array) nothrow;
+__gshared c_json_array_refFn c_json_array_ref; ///
+private alias c_json_array_remove_elementFn = extern(C) void function(JsonArray* array, uint index) nothrow;
+__gshared c_json_array_remove_elementFn c_json_array_remove_element; ///
+private alias c_json_array_sealFn = extern(C) void function(JsonArray* array) nothrow;
+__gshared c_json_array_sealFn c_json_array_seal; ///
+private alias c_json_array_unrefFn = extern(C) void function(JsonArray* array) nothrow;
+__gshared c_json_array_unrefFn c_json_array_unref; ///
 
-  // Builder
-  GType function() c_json_builder_get_type; ///
-  JsonBuilder* function() c_json_builder_new; ///
-  JsonBuilder* function() c_json_builder_new_immutable; ///
-  JsonBuilder* function(JsonBuilder* builder, gboolean value) c_json_builder_add_boolean_value; ///
-  JsonBuilder* function(JsonBuilder* builder, double value) c_json_builder_add_double_value; ///
-  JsonBuilder* function(JsonBuilder* builder, long value) c_json_builder_add_int_value; ///
-  JsonBuilder* function(JsonBuilder* builder) c_json_builder_add_null_value; ///
-  JsonBuilder* function(JsonBuilder* builder, const(char)* value) c_json_builder_add_string_value; ///
-  JsonBuilder* function(JsonBuilder* builder, JsonNode* node) c_json_builder_add_value; ///
-  JsonBuilder* function(JsonBuilder* builder) c_json_builder_begin_array; ///
-  JsonBuilder* function(JsonBuilder* builder) c_json_builder_begin_object; ///
-  JsonBuilder* function(JsonBuilder* builder) c_json_builder_end_array; ///
-  JsonBuilder* function(JsonBuilder* builder) c_json_builder_end_object; ///
-  JsonNode* function(JsonBuilder* builder) c_json_builder_get_root; ///
-  void function(JsonBuilder* builder) c_json_builder_reset; ///
-  JsonBuilder* function(JsonBuilder* builder, const(char)* memberName) c_json_builder_set_member_name; ///
+// Builder
+private alias c_json_builder_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_json_builder_get_typeFn c_json_builder_get_type; ///
+private alias c_json_builder_newFn = extern(C) JsonBuilder* function() nothrow;
+__gshared c_json_builder_newFn c_json_builder_new; ///
+private alias c_json_builder_new_immutableFn = extern(C) JsonBuilder* function() nothrow;
+__gshared c_json_builder_new_immutableFn c_json_builder_new_immutable; ///
+private alias c_json_builder_add_boolean_valueFn = extern(C) JsonBuilder* function(JsonBuilder* builder, gboolean value) nothrow;
+__gshared c_json_builder_add_boolean_valueFn c_json_builder_add_boolean_value; ///
+private alias c_json_builder_add_double_valueFn = extern(C) JsonBuilder* function(JsonBuilder* builder, double value) nothrow;
+__gshared c_json_builder_add_double_valueFn c_json_builder_add_double_value; ///
+private alias c_json_builder_add_int_valueFn = extern(C) JsonBuilder* function(JsonBuilder* builder, long value) nothrow;
+__gshared c_json_builder_add_int_valueFn c_json_builder_add_int_value; ///
+private alias c_json_builder_add_null_valueFn = extern(C) JsonBuilder* function(JsonBuilder* builder) nothrow;
+__gshared c_json_builder_add_null_valueFn c_json_builder_add_null_value; ///
+private alias c_json_builder_add_string_valueFn = extern(C) JsonBuilder* function(JsonBuilder* builder, const(char)* value) nothrow;
+__gshared c_json_builder_add_string_valueFn c_json_builder_add_string_value; ///
+private alias c_json_builder_add_valueFn = extern(C) JsonBuilder* function(JsonBuilder* builder, JsonNode* node) nothrow;
+__gshared c_json_builder_add_valueFn c_json_builder_add_value; ///
+private alias c_json_builder_begin_arrayFn = extern(C) JsonBuilder* function(JsonBuilder* builder) nothrow;
+__gshared c_json_builder_begin_arrayFn c_json_builder_begin_array; ///
+private alias c_json_builder_begin_objectFn = extern(C) JsonBuilder* function(JsonBuilder* builder) nothrow;
+__gshared c_json_builder_begin_objectFn c_json_builder_begin_object; ///
+private alias c_json_builder_end_arrayFn = extern(C) JsonBuilder* function(JsonBuilder* builder) nothrow;
+__gshared c_json_builder_end_arrayFn c_json_builder_end_array; ///
+private alias c_json_builder_end_objectFn = extern(C) JsonBuilder* function(JsonBuilder* builder) nothrow;
+__gshared c_json_builder_end_objectFn c_json_builder_end_object; ///
+private alias c_json_builder_get_rootFn = extern(C) JsonNode* function(JsonBuilder* builder) nothrow;
+__gshared c_json_builder_get_rootFn c_json_builder_get_root; ///
+private alias c_json_builder_resetFn = extern(C) void function(JsonBuilder* builder) nothrow;
+__gshared c_json_builder_resetFn c_json_builder_reset; ///
+private alias c_json_builder_set_member_nameFn = extern(C) JsonBuilder* function(JsonBuilder* builder, const(char)* memberName) nothrow;
+__gshared c_json_builder_set_member_nameFn c_json_builder_set_member_name; ///
 
-  // Generator
-  GType function() c_json_generator_get_type; ///
-  JsonGenerator* function() c_json_generator_new; ///
-  uint function(JsonGenerator* generator) c_json_generator_get_indent; ///
-  dchar function(JsonGenerator* generator) c_json_generator_get_indent_char; ///
-  gboolean function(JsonGenerator* generator) c_json_generator_get_pretty; ///
-  JsonNode* function(JsonGenerator* generator) c_json_generator_get_root; ///
-  void function(JsonGenerator* generator, uint indentLevel) c_json_generator_set_indent; ///
-  void function(JsonGenerator* generator, dchar indentChar) c_json_generator_set_indent_char; ///
-  void function(JsonGenerator* generator, gboolean isPretty) c_json_generator_set_pretty; ///
-  void function(JsonGenerator* generator, JsonNode* node) c_json_generator_set_root; ///
-  void function(JsonGenerator* generator, JsonNode* node) c_json_generator_take_root; ///
-  char* function(JsonGenerator* generator, size_t* length) c_json_generator_to_data; ///
-  gboolean function(JsonGenerator* generator, const(char)* filename, GError** _err) c_json_generator_to_file; ///
-  GString* function(JsonGenerator* generator, GString* string_) c_json_generator_to_gstring; ///
-  gboolean function(JsonGenerator* generator, GOutputStream* stream, GCancellable* cancellable, GError** _err) c_json_generator_to_stream; ///
+// Generator
+private alias c_json_generator_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_json_generator_get_typeFn c_json_generator_get_type; ///
+private alias c_json_generator_newFn = extern(C) JsonGenerator* function() nothrow;
+__gshared c_json_generator_newFn c_json_generator_new; ///
+private alias c_json_generator_get_indentFn = extern(C) uint function(JsonGenerator* generator) nothrow;
+__gshared c_json_generator_get_indentFn c_json_generator_get_indent; ///
+private alias c_json_generator_get_indent_charFn = extern(C) dchar function(JsonGenerator* generator) nothrow;
+__gshared c_json_generator_get_indent_charFn c_json_generator_get_indent_char; ///
+private alias c_json_generator_get_prettyFn = extern(C) gboolean function(JsonGenerator* generator) nothrow;
+__gshared c_json_generator_get_prettyFn c_json_generator_get_pretty; ///
+private alias c_json_generator_get_rootFn = extern(C) JsonNode* function(JsonGenerator* generator) nothrow;
+__gshared c_json_generator_get_rootFn c_json_generator_get_root; ///
+private alias c_json_generator_set_indentFn = extern(C) void function(JsonGenerator* generator, uint indentLevel) nothrow;
+__gshared c_json_generator_set_indentFn c_json_generator_set_indent; ///
+private alias c_json_generator_set_indent_charFn = extern(C) void function(JsonGenerator* generator, dchar indentChar) nothrow;
+__gshared c_json_generator_set_indent_charFn c_json_generator_set_indent_char; ///
+private alias c_json_generator_set_prettyFn = extern(C) void function(JsonGenerator* generator, gboolean isPretty) nothrow;
+__gshared c_json_generator_set_prettyFn c_json_generator_set_pretty; ///
+private alias c_json_generator_set_rootFn = extern(C) void function(JsonGenerator* generator, JsonNode* node) nothrow;
+__gshared c_json_generator_set_rootFn c_json_generator_set_root; ///
+private alias c_json_generator_take_rootFn = extern(C) void function(JsonGenerator* generator, JsonNode* node) nothrow;
+__gshared c_json_generator_take_rootFn c_json_generator_take_root; ///
+private alias c_json_generator_to_dataFn = extern(C) char* function(JsonGenerator* generator, size_t* length) nothrow;
+__gshared c_json_generator_to_dataFn c_json_generator_to_data; ///
+private alias c_json_generator_to_fileFn = extern(C) gboolean function(JsonGenerator* generator, const(char)* filename, GError** _err) nothrow;
+__gshared c_json_generator_to_fileFn c_json_generator_to_file; ///
+private alias c_json_generator_to_gstringFn = extern(C) GString* function(JsonGenerator* generator, GString* string_) nothrow;
+__gshared c_json_generator_to_gstringFn c_json_generator_to_gstring; ///
+private alias c_json_generator_to_streamFn = extern(C) gboolean function(JsonGenerator* generator, GOutputStream* stream, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_json_generator_to_streamFn c_json_generator_to_stream; ///
 
-  // Node
-  GType function() c_json_node_get_type; ///
-  JsonNode* function() c_json_node_alloc; ///
-  JsonNode* function(JsonNodeType type) c_json_node_new; ///
-  JsonNode* function(JsonNode* node) c_json_node_copy; ///
-  JsonArray* function(JsonNode* node) c_json_node_dup_array; ///
-  JsonObject* function(JsonNode* node) c_json_node_dup_object; ///
-  char* function(JsonNode* node) c_json_node_dup_string; ///
-  gboolean function(JsonNode* a, JsonNode* b) c_json_node_equal; ///
-  void function(JsonNode* node) c_json_node_free; ///
-  JsonArray* function(JsonNode* node) c_json_node_get_array; ///
-  gboolean function(JsonNode* node) c_json_node_get_boolean; ///
-  double function(JsonNode* node) c_json_node_get_double; ///
-  long function(JsonNode* node) c_json_node_get_int; ///
-  JsonNodeType function(JsonNode* node) c_json_node_get_node_type; ///
-  JsonObject* function(JsonNode* node) c_json_node_get_object; ///
-  JsonNode* function(JsonNode* node) c_json_node_get_parent; ///
-  const(char)* function(JsonNode* node) c_json_node_get_string; ///
-  void function(JsonNode* node, GValue* value) c_json_node_get_value; ///
-  GType function(JsonNode* node) c_json_node_get_value_type; ///
-  uint function(JsonNode* key) c_json_node_hash; ///
-  JsonNode* function(JsonNode* node, JsonNodeType type) c_json_node_init; ///
-  JsonNode* function(JsonNode* node, JsonArray* array) c_json_node_init_array; ///
-  JsonNode* function(JsonNode* node, gboolean value) c_json_node_init_boolean; ///
-  JsonNode* function(JsonNode* node, double value) c_json_node_init_double; ///
-  JsonNode* function(JsonNode* node, long value) c_json_node_init_int; ///
-  JsonNode* function(JsonNode* node) c_json_node_init_null; ///
-  JsonNode* function(JsonNode* node, JsonObject* object) c_json_node_init_object; ///
-  JsonNode* function(JsonNode* node, const(char)* value) c_json_node_init_string; ///
-  gboolean function(JsonNode* node) c_json_node_is_immutable; ///
-  gboolean function(JsonNode* node) c_json_node_is_null; ///
-  JsonNode* function(JsonNode* node) c_json_node_ref; ///
-  void function(JsonNode* node) c_json_node_seal; ///
-  void function(JsonNode* node, JsonArray* array) c_json_node_set_array; ///
-  void function(JsonNode* node, gboolean value) c_json_node_set_boolean; ///
-  void function(JsonNode* node, double value) c_json_node_set_double; ///
-  void function(JsonNode* node, long value) c_json_node_set_int; ///
-  void function(JsonNode* node, JsonObject* object) c_json_node_set_object; ///
-  void function(JsonNode* node, JsonNode* parent) c_json_node_set_parent; ///
-  void function(JsonNode* node, const(char)* value) c_json_node_set_string; ///
-  void function(JsonNode* node, const(GValue)* value) c_json_node_set_value; ///
-  void function(JsonNode* node, JsonArray* array) c_json_node_take_array; ///
-  void function(JsonNode* node, JsonObject* object) c_json_node_take_object; ///
-  const(char)* function(JsonNode* node) c_json_node_type_name; ///
-  void function(JsonNode* node) c_json_node_unref; ///
+// Node
+private alias c_json_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_json_node_get_typeFn c_json_node_get_type; ///
+private alias c_json_node_allocFn = extern(C) JsonNode* function() nothrow;
+__gshared c_json_node_allocFn c_json_node_alloc; ///
+private alias c_json_node_newFn = extern(C) JsonNode* function(JsonNodeType type) nothrow;
+__gshared c_json_node_newFn c_json_node_new; ///
+private alias c_json_node_copyFn = extern(C) JsonNode* function(JsonNode* node) nothrow;
+__gshared c_json_node_copyFn c_json_node_copy; ///
+private alias c_json_node_dup_arrayFn = extern(C) JsonArray* function(JsonNode* node) nothrow;
+__gshared c_json_node_dup_arrayFn c_json_node_dup_array; ///
+private alias c_json_node_dup_objectFn = extern(C) JsonObject* function(JsonNode* node) nothrow;
+__gshared c_json_node_dup_objectFn c_json_node_dup_object; ///
+private alias c_json_node_dup_stringFn = extern(C) char* function(JsonNode* node) nothrow;
+__gshared c_json_node_dup_stringFn c_json_node_dup_string; ///
+private alias c_json_node_equalFn = extern(C) gboolean function(JsonNode* a, JsonNode* b) nothrow;
+__gshared c_json_node_equalFn c_json_node_equal; ///
+private alias c_json_node_freeFn = extern(C) void function(JsonNode* node) nothrow;
+__gshared c_json_node_freeFn c_json_node_free; ///
+private alias c_json_node_get_arrayFn = extern(C) JsonArray* function(JsonNode* node) nothrow;
+__gshared c_json_node_get_arrayFn c_json_node_get_array; ///
+private alias c_json_node_get_booleanFn = extern(C) gboolean function(JsonNode* node) nothrow;
+__gshared c_json_node_get_booleanFn c_json_node_get_boolean; ///
+private alias c_json_node_get_doubleFn = extern(C) double function(JsonNode* node) nothrow;
+__gshared c_json_node_get_doubleFn c_json_node_get_double; ///
+private alias c_json_node_get_intFn = extern(C) long function(JsonNode* node) nothrow;
+__gshared c_json_node_get_intFn c_json_node_get_int; ///
+private alias c_json_node_get_node_typeFn = extern(C) JsonNodeType function(JsonNode* node) nothrow;
+__gshared c_json_node_get_node_typeFn c_json_node_get_node_type; ///
+private alias c_json_node_get_objectFn = extern(C) JsonObject* function(JsonNode* node) nothrow;
+__gshared c_json_node_get_objectFn c_json_node_get_object; ///
+private alias c_json_node_get_parentFn = extern(C) JsonNode* function(JsonNode* node) nothrow;
+__gshared c_json_node_get_parentFn c_json_node_get_parent; ///
+private alias c_json_node_get_stringFn = extern(C) const(char)* function(JsonNode* node) nothrow;
+__gshared c_json_node_get_stringFn c_json_node_get_string; ///
+private alias c_json_node_get_valueFn = extern(C) void function(JsonNode* node, GValue* value) nothrow;
+__gshared c_json_node_get_valueFn c_json_node_get_value; ///
+private alias c_json_node_get_value_typeFn = extern(C) GType function(JsonNode* node) nothrow;
+__gshared c_json_node_get_value_typeFn c_json_node_get_value_type; ///
+private alias c_json_node_hashFn = extern(C) uint function(JsonNode* key) nothrow;
+__gshared c_json_node_hashFn c_json_node_hash; ///
+private alias c_json_node_initFn = extern(C) JsonNode* function(JsonNode* node, JsonNodeType type) nothrow;
+__gshared c_json_node_initFn c_json_node_init; ///
+private alias c_json_node_init_arrayFn = extern(C) JsonNode* function(JsonNode* node, JsonArray* array) nothrow;
+__gshared c_json_node_init_arrayFn c_json_node_init_array; ///
+private alias c_json_node_init_booleanFn = extern(C) JsonNode* function(JsonNode* node, gboolean value) nothrow;
+__gshared c_json_node_init_booleanFn c_json_node_init_boolean; ///
+private alias c_json_node_init_doubleFn = extern(C) JsonNode* function(JsonNode* node, double value) nothrow;
+__gshared c_json_node_init_doubleFn c_json_node_init_double; ///
+private alias c_json_node_init_intFn = extern(C) JsonNode* function(JsonNode* node, long value) nothrow;
+__gshared c_json_node_init_intFn c_json_node_init_int; ///
+private alias c_json_node_init_nullFn = extern(C) JsonNode* function(JsonNode* node) nothrow;
+__gshared c_json_node_init_nullFn c_json_node_init_null; ///
+private alias c_json_node_init_objectFn = extern(C) JsonNode* function(JsonNode* node, JsonObject* object) nothrow;
+__gshared c_json_node_init_objectFn c_json_node_init_object; ///
+private alias c_json_node_init_stringFn = extern(C) JsonNode* function(JsonNode* node, const(char)* value) nothrow;
+__gshared c_json_node_init_stringFn c_json_node_init_string; ///
+private alias c_json_node_is_immutableFn = extern(C) gboolean function(JsonNode* node) nothrow;
+__gshared c_json_node_is_immutableFn c_json_node_is_immutable; ///
+private alias c_json_node_is_nullFn = extern(C) gboolean function(JsonNode* node) nothrow;
+__gshared c_json_node_is_nullFn c_json_node_is_null; ///
+private alias c_json_node_refFn = extern(C) JsonNode* function(JsonNode* node) nothrow;
+__gshared c_json_node_refFn c_json_node_ref; ///
+private alias c_json_node_sealFn = extern(C) void function(JsonNode* node) nothrow;
+__gshared c_json_node_sealFn c_json_node_seal; ///
+private alias c_json_node_set_arrayFn = extern(C) void function(JsonNode* node, JsonArray* array) nothrow;
+__gshared c_json_node_set_arrayFn c_json_node_set_array; ///
+private alias c_json_node_set_booleanFn = extern(C) void function(JsonNode* node, gboolean value) nothrow;
+__gshared c_json_node_set_booleanFn c_json_node_set_boolean; ///
+private alias c_json_node_set_doubleFn = extern(C) void function(JsonNode* node, double value) nothrow;
+__gshared c_json_node_set_doubleFn c_json_node_set_double; ///
+private alias c_json_node_set_intFn = extern(C) void function(JsonNode* node, long value) nothrow;
+__gshared c_json_node_set_intFn c_json_node_set_int; ///
+private alias c_json_node_set_objectFn = extern(C) void function(JsonNode* node, JsonObject* object) nothrow;
+__gshared c_json_node_set_objectFn c_json_node_set_object; ///
+private alias c_json_node_set_parentFn = extern(C) void function(JsonNode* node, JsonNode* parent) nothrow;
+__gshared c_json_node_set_parentFn c_json_node_set_parent; ///
+private alias c_json_node_set_stringFn = extern(C) void function(JsonNode* node, const(char)* value) nothrow;
+__gshared c_json_node_set_stringFn c_json_node_set_string; ///
+private alias c_json_node_set_valueFn = extern(C) void function(JsonNode* node, const(GValue)* value) nothrow;
+__gshared c_json_node_set_valueFn c_json_node_set_value; ///
+private alias c_json_node_take_arrayFn = extern(C) void function(JsonNode* node, JsonArray* array) nothrow;
+__gshared c_json_node_take_arrayFn c_json_node_take_array; ///
+private alias c_json_node_take_objectFn = extern(C) void function(JsonNode* node, JsonObject* object) nothrow;
+__gshared c_json_node_take_objectFn c_json_node_take_object; ///
+private alias c_json_node_type_nameFn = extern(C) const(char)* function(JsonNode* node) nothrow;
+__gshared c_json_node_type_nameFn c_json_node_type_name; ///
+private alias c_json_node_unrefFn = extern(C) void function(JsonNode* node) nothrow;
+__gshared c_json_node_unrefFn c_json_node_unref; ///
 
-  // ObjectIter
-  void function(JsonObjectIter* iter, JsonObject* object) c_json_object_iter_init; ///
-  void function(JsonObjectIter* iter, JsonObject* object) c_json_object_iter_init_ordered; ///
-  gboolean function(JsonObjectIter* iter, const(char*)* memberName, JsonNode** memberNode) c_json_object_iter_next; ///
-  gboolean function(JsonObjectIter* iter, const(char*)* memberName, JsonNode** memberNode) c_json_object_iter_next_ordered; ///
+// ObjectIter
+private alias c_json_object_iter_initFn = extern(C) void function(JsonObjectIter* iter, JsonObject* object) nothrow;
+__gshared c_json_object_iter_initFn c_json_object_iter_init; ///
+private alias c_json_object_iter_init_orderedFn = extern(C) void function(JsonObjectIter* iter, JsonObject* object) nothrow;
+__gshared c_json_object_iter_init_orderedFn c_json_object_iter_init_ordered; ///
+private alias c_json_object_iter_nextFn = extern(C) gboolean function(JsonObjectIter* iter, const(char*)* memberName, JsonNode** memberNode) nothrow;
+__gshared c_json_object_iter_nextFn c_json_object_iter_next; ///
+private alias c_json_object_iter_next_orderedFn = extern(C) gboolean function(JsonObjectIter* iter, const(char*)* memberName, JsonNode** memberNode) nothrow;
+__gshared c_json_object_iter_next_orderedFn c_json_object_iter_next_ordered; ///
 
-  // ObjectWrap
-  GType function() c_json_object_get_type; ///
-  JsonObject* function() c_json_object_new; ///
-  void function(JsonObject* object, const(char)* memberName, JsonNode* node) c_json_object_add_member; ///
-  JsonNode* function(JsonObject* object, const(char)* memberName) c_json_object_dup_member; ///
-  gboolean function(JsonObject* a, JsonObject* b) c_json_object_equal; ///
-  void function(JsonObject* object, JsonObjectForeach func, void* data) c_json_object_foreach_member; ///
-  JsonArray* function(JsonObject* object, const(char)* memberName) c_json_object_get_array_member; ///
-  gboolean function(JsonObject* object, const(char)* memberName) c_json_object_get_boolean_member; ///
-  gboolean function(JsonObject* object, const(char)* memberName, gboolean defaultValue) c_json_object_get_boolean_member_with_default; ///
-  double function(JsonObject* object, const(char)* memberName) c_json_object_get_double_member; ///
-  double function(JsonObject* object, const(char)* memberName, double defaultValue) c_json_object_get_double_member_with_default; ///
-  long function(JsonObject* object, const(char)* memberName) c_json_object_get_int_member; ///
-  long function(JsonObject* object, const(char)* memberName, long defaultValue) c_json_object_get_int_member_with_default; ///
-  JsonNode* function(JsonObject* object, const(char)* memberName) c_json_object_get_member; ///
-  GList* function(JsonObject* object) c_json_object_get_members; ///
-  gboolean function(JsonObject* object, const(char)* memberName) c_json_object_get_null_member; ///
-  JsonObject* function(JsonObject* object, const(char)* memberName) c_json_object_get_object_member; ///
-  uint function(JsonObject* object) c_json_object_get_size; ///
-  const(char)* function(JsonObject* object, const(char)* memberName) c_json_object_get_string_member; ///
-  const(char)* function(JsonObject* object, const(char)* memberName, const(char)* defaultValue) c_json_object_get_string_member_with_default; ///
-  GList* function(JsonObject* object) c_json_object_get_values; ///
-  gboolean function(JsonObject* object, const(char)* memberName) c_json_object_has_member; ///
-  uint function(JsonObject* key) c_json_object_hash; ///
-  gboolean function(JsonObject* object) c_json_object_is_immutable; ///
-  JsonObject* function(JsonObject* object) c_json_object_ref; ///
-  void function(JsonObject* object, const(char)* memberName) c_json_object_remove_member; ///
-  void function(JsonObject* object) c_json_object_seal; ///
-  void function(JsonObject* object, const(char)* memberName, JsonArray* value) c_json_object_set_array_member; ///
-  void function(JsonObject* object, const(char)* memberName, gboolean value) c_json_object_set_boolean_member; ///
-  void function(JsonObject* object, const(char)* memberName, double value) c_json_object_set_double_member; ///
-  void function(JsonObject* object, const(char)* memberName, long value) c_json_object_set_int_member; ///
-  void function(JsonObject* object, const(char)* memberName, JsonNode* node) c_json_object_set_member; ///
-  void function(JsonObject* object, const(char)* memberName) c_json_object_set_null_member; ///
-  void function(JsonObject* object, const(char)* memberName, JsonObject* value) c_json_object_set_object_member; ///
-  void function(JsonObject* object, const(char)* memberName, const(char)* value) c_json_object_set_string_member; ///
-  void function(JsonObject* object) c_json_object_unref; ///
+// ObjectWrap
+private alias c_json_object_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_json_object_get_typeFn c_json_object_get_type; ///
+private alias c_json_object_newFn = extern(C) JsonObject* function() nothrow;
+__gshared c_json_object_newFn c_json_object_new; ///
+private alias c_json_object_add_memberFn = extern(C) void function(JsonObject* object, const(char)* memberName, JsonNode* node) nothrow;
+__gshared c_json_object_add_memberFn c_json_object_add_member; ///
+private alias c_json_object_dup_memberFn = extern(C) JsonNode* function(JsonObject* object, const(char)* memberName) nothrow;
+__gshared c_json_object_dup_memberFn c_json_object_dup_member; ///
+private alias c_json_object_equalFn = extern(C) gboolean function(JsonObject* a, JsonObject* b) nothrow;
+__gshared c_json_object_equalFn c_json_object_equal; ///
+private alias c_json_object_foreach_memberFn = extern(C) void function(JsonObject* object, JsonObjectForeach func, void* data) nothrow;
+__gshared c_json_object_foreach_memberFn c_json_object_foreach_member; ///
+private alias c_json_object_get_array_memberFn = extern(C) JsonArray* function(JsonObject* object, const(char)* memberName) nothrow;
+__gshared c_json_object_get_array_memberFn c_json_object_get_array_member; ///
+private alias c_json_object_get_boolean_memberFn = extern(C) gboolean function(JsonObject* object, const(char)* memberName) nothrow;
+__gshared c_json_object_get_boolean_memberFn c_json_object_get_boolean_member; ///
+private alias c_json_object_get_boolean_member_with_defaultFn = extern(C) gboolean function(JsonObject* object, const(char)* memberName, gboolean defaultValue) nothrow;
+__gshared c_json_object_get_boolean_member_with_defaultFn c_json_object_get_boolean_member_with_default; ///
+private alias c_json_object_get_double_memberFn = extern(C) double function(JsonObject* object, const(char)* memberName) nothrow;
+__gshared c_json_object_get_double_memberFn c_json_object_get_double_member; ///
+private alias c_json_object_get_double_member_with_defaultFn = extern(C) double function(JsonObject* object, const(char)* memberName, double defaultValue) nothrow;
+__gshared c_json_object_get_double_member_with_defaultFn c_json_object_get_double_member_with_default; ///
+private alias c_json_object_get_int_memberFn = extern(C) long function(JsonObject* object, const(char)* memberName) nothrow;
+__gshared c_json_object_get_int_memberFn c_json_object_get_int_member; ///
+private alias c_json_object_get_int_member_with_defaultFn = extern(C) long function(JsonObject* object, const(char)* memberName, long defaultValue) nothrow;
+__gshared c_json_object_get_int_member_with_defaultFn c_json_object_get_int_member_with_default; ///
+private alias c_json_object_get_memberFn = extern(C) JsonNode* function(JsonObject* object, const(char)* memberName) nothrow;
+__gshared c_json_object_get_memberFn c_json_object_get_member; ///
+private alias c_json_object_get_membersFn = extern(C) GList* function(JsonObject* object) nothrow;
+__gshared c_json_object_get_membersFn c_json_object_get_members; ///
+private alias c_json_object_get_null_memberFn = extern(C) gboolean function(JsonObject* object, const(char)* memberName) nothrow;
+__gshared c_json_object_get_null_memberFn c_json_object_get_null_member; ///
+private alias c_json_object_get_object_memberFn = extern(C) JsonObject* function(JsonObject* object, const(char)* memberName) nothrow;
+__gshared c_json_object_get_object_memberFn c_json_object_get_object_member; ///
+private alias c_json_object_get_sizeFn = extern(C) uint function(JsonObject* object) nothrow;
+__gshared c_json_object_get_sizeFn c_json_object_get_size; ///
+private alias c_json_object_get_string_memberFn = extern(C) const(char)* function(JsonObject* object, const(char)* memberName) nothrow;
+__gshared c_json_object_get_string_memberFn c_json_object_get_string_member; ///
+private alias c_json_object_get_string_member_with_defaultFn = extern(C) const(char)* function(JsonObject* object, const(char)* memberName, const(char)* defaultValue) nothrow;
+__gshared c_json_object_get_string_member_with_defaultFn c_json_object_get_string_member_with_default; ///
+private alias c_json_object_get_valuesFn = extern(C) GList* function(JsonObject* object) nothrow;
+__gshared c_json_object_get_valuesFn c_json_object_get_values; ///
+private alias c_json_object_has_memberFn = extern(C) gboolean function(JsonObject* object, const(char)* memberName) nothrow;
+__gshared c_json_object_has_memberFn c_json_object_has_member; ///
+private alias c_json_object_hashFn = extern(C) uint function(JsonObject* key) nothrow;
+__gshared c_json_object_hashFn c_json_object_hash; ///
+private alias c_json_object_is_immutableFn = extern(C) gboolean function(JsonObject* object) nothrow;
+__gshared c_json_object_is_immutableFn c_json_object_is_immutable; ///
+private alias c_json_object_refFn = extern(C) JsonObject* function(JsonObject* object) nothrow;
+__gshared c_json_object_refFn c_json_object_ref; ///
+private alias c_json_object_remove_memberFn = extern(C) void function(JsonObject* object, const(char)* memberName) nothrow;
+__gshared c_json_object_remove_memberFn c_json_object_remove_member; ///
+private alias c_json_object_sealFn = extern(C) void function(JsonObject* object) nothrow;
+__gshared c_json_object_sealFn c_json_object_seal; ///
+private alias c_json_object_set_array_memberFn = extern(C) void function(JsonObject* object, const(char)* memberName, JsonArray* value) nothrow;
+__gshared c_json_object_set_array_memberFn c_json_object_set_array_member; ///
+private alias c_json_object_set_boolean_memberFn = extern(C) void function(JsonObject* object, const(char)* memberName, gboolean value) nothrow;
+__gshared c_json_object_set_boolean_memberFn c_json_object_set_boolean_member; ///
+private alias c_json_object_set_double_memberFn = extern(C) void function(JsonObject* object, const(char)* memberName, double value) nothrow;
+__gshared c_json_object_set_double_memberFn c_json_object_set_double_member; ///
+private alias c_json_object_set_int_memberFn = extern(C) void function(JsonObject* object, const(char)* memberName, long value) nothrow;
+__gshared c_json_object_set_int_memberFn c_json_object_set_int_member; ///
+private alias c_json_object_set_memberFn = extern(C) void function(JsonObject* object, const(char)* memberName, JsonNode* node) nothrow;
+__gshared c_json_object_set_memberFn c_json_object_set_member; ///
+private alias c_json_object_set_null_memberFn = extern(C) void function(JsonObject* object, const(char)* memberName) nothrow;
+__gshared c_json_object_set_null_memberFn c_json_object_set_null_member; ///
+private alias c_json_object_set_object_memberFn = extern(C) void function(JsonObject* object, const(char)* memberName, JsonObject* value) nothrow;
+__gshared c_json_object_set_object_memberFn c_json_object_set_object_member; ///
+private alias c_json_object_set_string_memberFn = extern(C) void function(JsonObject* object, const(char)* memberName, const(char)* value) nothrow;
+__gshared c_json_object_set_string_memberFn c_json_object_set_string_member; ///
+private alias c_json_object_unrefFn = extern(C) void function(JsonObject* object) nothrow;
+__gshared c_json_object_unrefFn c_json_object_unref; ///
 
-  // Parser
-  GType function() c_json_parser_get_type; ///
-  JsonParser* function() c_json_parser_new; ///
-  JsonParser* function() c_json_parser_new_immutable; ///
-  uint function(JsonParser* parser) c_json_parser_get_current_line; ///
-  uint function(JsonParser* parser) c_json_parser_get_current_pos; ///
-  JsonNode* function(JsonParser* parser) c_json_parser_get_root; ///
-  gboolean function(JsonParser* parser) c_json_parser_get_strict; ///
-  gboolean function(JsonParser* parser, char** variableName) c_json_parser_has_assignment; ///
-  gboolean function(JsonParser* parser, const(char)* data, ptrdiff_t length, GError** _err) c_json_parser_load_from_data; ///
-  gboolean function(JsonParser* parser, const(char)* filename, GError** _err) c_json_parser_load_from_file; ///
-  gboolean function(JsonParser* parser, const(char)* filename, GError** _err) c_json_parser_load_from_mapped_file; ///
-  gboolean function(JsonParser* parser, GInputStream* stream, GCancellable* cancellable, GError** _err) c_json_parser_load_from_stream; ///
-  void function(JsonParser* parser, GInputStream* stream, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_json_parser_load_from_stream_async; ///
-  gboolean function(JsonParser* parser, GAsyncResult* result, GError** _err) c_json_parser_load_from_stream_finish; ///
-  void function(JsonParser* parser, gboolean strict) c_json_parser_set_strict; ///
-  JsonNode* function(JsonParser* parser) c_json_parser_steal_root; ///
+// Parser
+private alias c_json_parser_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_json_parser_get_typeFn c_json_parser_get_type; ///
+private alias c_json_parser_newFn = extern(C) JsonParser* function() nothrow;
+__gshared c_json_parser_newFn c_json_parser_new; ///
+private alias c_json_parser_new_immutableFn = extern(C) JsonParser* function() nothrow;
+__gshared c_json_parser_new_immutableFn c_json_parser_new_immutable; ///
+private alias c_json_parser_get_current_lineFn = extern(C) uint function(JsonParser* parser) nothrow;
+__gshared c_json_parser_get_current_lineFn c_json_parser_get_current_line; ///
+private alias c_json_parser_get_current_posFn = extern(C) uint function(JsonParser* parser) nothrow;
+__gshared c_json_parser_get_current_posFn c_json_parser_get_current_pos; ///
+private alias c_json_parser_get_rootFn = extern(C) JsonNode* function(JsonParser* parser) nothrow;
+__gshared c_json_parser_get_rootFn c_json_parser_get_root; ///
+private alias c_json_parser_get_strictFn = extern(C) gboolean function(JsonParser* parser) nothrow;
+__gshared c_json_parser_get_strictFn c_json_parser_get_strict; ///
+private alias c_json_parser_has_assignmentFn = extern(C) gboolean function(JsonParser* parser, char** variableName) nothrow;
+__gshared c_json_parser_has_assignmentFn c_json_parser_has_assignment; ///
+private alias c_json_parser_load_from_dataFn = extern(C) gboolean function(JsonParser* parser, const(char)* data, ptrdiff_t length, GError** _err) nothrow;
+__gshared c_json_parser_load_from_dataFn c_json_parser_load_from_data; ///
+private alias c_json_parser_load_from_fileFn = extern(C) gboolean function(JsonParser* parser, const(char)* filename, GError** _err) nothrow;
+__gshared c_json_parser_load_from_fileFn c_json_parser_load_from_file; ///
+private alias c_json_parser_load_from_mapped_fileFn = extern(C) gboolean function(JsonParser* parser, const(char)* filename, GError** _err) nothrow;
+__gshared c_json_parser_load_from_mapped_fileFn c_json_parser_load_from_mapped_file; ///
+private alias c_json_parser_load_from_streamFn = extern(C) gboolean function(JsonParser* parser, GInputStream* stream, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_json_parser_load_from_streamFn c_json_parser_load_from_stream; ///
+private alias c_json_parser_load_from_stream_asyncFn = extern(C) void function(JsonParser* parser, GInputStream* stream, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_json_parser_load_from_stream_asyncFn c_json_parser_load_from_stream_async; ///
+private alias c_json_parser_load_from_stream_finishFn = extern(C) gboolean function(JsonParser* parser, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_json_parser_load_from_stream_finishFn c_json_parser_load_from_stream_finish; ///
+private alias c_json_parser_set_strictFn = extern(C) void function(JsonParser* parser, gboolean strict) nothrow;
+__gshared c_json_parser_set_strictFn c_json_parser_set_strict; ///
+private alias c_json_parser_steal_rootFn = extern(C) JsonNode* function(JsonParser* parser) nothrow;
+__gshared c_json_parser_steal_rootFn c_json_parser_steal_root; ///
 
-  // Path
-  GType function() c_json_path_get_type; ///
-  JsonPath* function() c_json_path_new; ///
-  JsonNode* function(const(char)* expression, JsonNode* root, GError** _err) c_json_path_query; ///
-  gboolean function(JsonPath* path, const(char)* expression, GError** _err) c_json_path_compile; ///
-  JsonNode* function(JsonPath* path, JsonNode* root) c_json_path_match; ///
+// Path
+private alias c_json_path_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_json_path_get_typeFn c_json_path_get_type; ///
+private alias c_json_path_newFn = extern(C) JsonPath* function() nothrow;
+__gshared c_json_path_newFn c_json_path_new; ///
+private alias c_json_path_queryFn = extern(C) JsonNode* function(const(char)* expression, JsonNode* root, GError** _err) nothrow;
+__gshared c_json_path_queryFn c_json_path_query; ///
+private alias c_json_path_compileFn = extern(C) gboolean function(JsonPath* path, const(char)* expression, GError** _err) nothrow;
+__gshared c_json_path_compileFn c_json_path_compile; ///
+private alias c_json_path_matchFn = extern(C) JsonNode* function(JsonPath* path, JsonNode* root) nothrow;
+__gshared c_json_path_matchFn c_json_path_match; ///
 
-  // Reader
-  GType function() c_json_reader_get_type; ///
-  JsonReader* function(JsonNode* node) c_json_reader_new; ///
-  int function(JsonReader* reader) c_json_reader_count_elements; ///
-  int function(JsonReader* reader) c_json_reader_count_members; ///
-  void function(JsonReader* reader) c_json_reader_end_element; ///
-  void function(JsonReader* reader) c_json_reader_end_member; ///
-  gboolean function(JsonReader* reader) c_json_reader_get_boolean_value; ///
-  JsonNode* function(JsonReader* reader) c_json_reader_get_current_node; ///
-  double function(JsonReader* reader) c_json_reader_get_double_value; ///
-  const(GError)* function(JsonReader* reader) c_json_reader_get_error; ///
-  long function(JsonReader* reader) c_json_reader_get_int_value; ///
-  const(char)* function(JsonReader* reader) c_json_reader_get_member_name; ///
-  gboolean function(JsonReader* reader) c_json_reader_get_null_value; ///
-  const(char)* function(JsonReader* reader) c_json_reader_get_string_value; ///
-  JsonNode* function(JsonReader* reader) c_json_reader_get_value; ///
-  gboolean function(JsonReader* reader) c_json_reader_is_array; ///
-  gboolean function(JsonReader* reader) c_json_reader_is_object; ///
-  gboolean function(JsonReader* reader) c_json_reader_is_value; ///
-  char** function(JsonReader* reader) c_json_reader_list_members; ///
-  gboolean function(JsonReader* reader, uint index) c_json_reader_read_element; ///
-  gboolean function(JsonReader* reader, const(char)* memberName) c_json_reader_read_member; ///
-  void function(JsonReader* reader, JsonNode* root) c_json_reader_set_root; ///
+// Reader
+private alias c_json_reader_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_json_reader_get_typeFn c_json_reader_get_type; ///
+private alias c_json_reader_newFn = extern(C) JsonReader* function(JsonNode* node) nothrow;
+__gshared c_json_reader_newFn c_json_reader_new; ///
+private alias c_json_reader_count_elementsFn = extern(C) int function(JsonReader* reader) nothrow;
+__gshared c_json_reader_count_elementsFn c_json_reader_count_elements; ///
+private alias c_json_reader_count_membersFn = extern(C) int function(JsonReader* reader) nothrow;
+__gshared c_json_reader_count_membersFn c_json_reader_count_members; ///
+private alias c_json_reader_end_elementFn = extern(C) void function(JsonReader* reader) nothrow;
+__gshared c_json_reader_end_elementFn c_json_reader_end_element; ///
+private alias c_json_reader_end_memberFn = extern(C) void function(JsonReader* reader) nothrow;
+__gshared c_json_reader_end_memberFn c_json_reader_end_member; ///
+private alias c_json_reader_get_boolean_valueFn = extern(C) gboolean function(JsonReader* reader) nothrow;
+__gshared c_json_reader_get_boolean_valueFn c_json_reader_get_boolean_value; ///
+private alias c_json_reader_get_current_nodeFn = extern(C) JsonNode* function(JsonReader* reader) nothrow;
+__gshared c_json_reader_get_current_nodeFn c_json_reader_get_current_node; ///
+private alias c_json_reader_get_double_valueFn = extern(C) double function(JsonReader* reader) nothrow;
+__gshared c_json_reader_get_double_valueFn c_json_reader_get_double_value; ///
+private alias c_json_reader_get_errorFn = extern(C) const(GError)* function(JsonReader* reader) nothrow;
+__gshared c_json_reader_get_errorFn c_json_reader_get_error; ///
+private alias c_json_reader_get_int_valueFn = extern(C) long function(JsonReader* reader) nothrow;
+__gshared c_json_reader_get_int_valueFn c_json_reader_get_int_value; ///
+private alias c_json_reader_get_member_nameFn = extern(C) const(char)* function(JsonReader* reader) nothrow;
+__gshared c_json_reader_get_member_nameFn c_json_reader_get_member_name; ///
+private alias c_json_reader_get_null_valueFn = extern(C) gboolean function(JsonReader* reader) nothrow;
+__gshared c_json_reader_get_null_valueFn c_json_reader_get_null_value; ///
+private alias c_json_reader_get_string_valueFn = extern(C) const(char)* function(JsonReader* reader) nothrow;
+__gshared c_json_reader_get_string_valueFn c_json_reader_get_string_value; ///
+private alias c_json_reader_get_valueFn = extern(C) JsonNode* function(JsonReader* reader) nothrow;
+__gshared c_json_reader_get_valueFn c_json_reader_get_value; ///
+private alias c_json_reader_is_arrayFn = extern(C) gboolean function(JsonReader* reader) nothrow;
+__gshared c_json_reader_is_arrayFn c_json_reader_is_array; ///
+private alias c_json_reader_is_objectFn = extern(C) gboolean function(JsonReader* reader) nothrow;
+__gshared c_json_reader_is_objectFn c_json_reader_is_object; ///
+private alias c_json_reader_is_valueFn = extern(C) gboolean function(JsonReader* reader) nothrow;
+__gshared c_json_reader_is_valueFn c_json_reader_is_value; ///
+private alias c_json_reader_list_membersFn = extern(C) char** function(JsonReader* reader) nothrow;
+__gshared c_json_reader_list_membersFn c_json_reader_list_members; ///
+private alias c_json_reader_read_elementFn = extern(C) gboolean function(JsonReader* reader, uint index) nothrow;
+__gshared c_json_reader_read_elementFn c_json_reader_read_element; ///
+private alias c_json_reader_read_memberFn = extern(C) gboolean function(JsonReader* reader, const(char)* memberName) nothrow;
+__gshared c_json_reader_read_memberFn c_json_reader_read_member; ///
+private alias c_json_reader_set_rootFn = extern(C) void function(JsonReader* reader, JsonNode* root) nothrow;
+__gshared c_json_reader_set_rootFn c_json_reader_set_root; ///
 
-  // Serializable
-  GType function() c_json_serializable_get_type; ///
-  gboolean function(JsonSerializable* serializable, const(char)* propertyName, GValue* value, GParamSpec* pspec, JsonNode* propertyNode) c_json_serializable_default_deserialize_property; ///
-  JsonNode* function(JsonSerializable* serializable, const(char)* propertyName, const(GValue)* value, GParamSpec* pspec) c_json_serializable_default_serialize_property; ///
-  gboolean function(JsonSerializable* serializable, const(char)* propertyName, GValue* value, GParamSpec* pspec, JsonNode* propertyNode) c_json_serializable_deserialize_property; ///
-  GParamSpec* function(JsonSerializable* serializable, const(char)* name) c_json_serializable_find_property; ///
-  void function(JsonSerializable* serializable, GParamSpec* pspec, GValue* value) c_json_serializable_get_property; ///
-  GParamSpec** function(JsonSerializable* serializable, uint* nPspecs) c_json_serializable_list_properties; ///
-  JsonNode* function(JsonSerializable* serializable, const(char)* propertyName, const(GValue)* value, GParamSpec* pspec) c_json_serializable_serialize_property; ///
-  void function(JsonSerializable* serializable, GParamSpec* pspec, const(GValue)* value) c_json_serializable_set_property; ///
+// Serializable
+private alias c_json_serializable_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_json_serializable_get_typeFn c_json_serializable_get_type; ///
+private alias c_json_serializable_default_deserialize_propertyFn = extern(C) gboolean function(JsonSerializable* serializable, const(char)* propertyName, GValue* value, GParamSpec* pspec, JsonNode* propertyNode) nothrow;
+__gshared c_json_serializable_default_deserialize_propertyFn c_json_serializable_default_deserialize_property; ///
+private alias c_json_serializable_default_serialize_propertyFn = extern(C) JsonNode* function(JsonSerializable* serializable, const(char)* propertyName, const(GValue)* value, GParamSpec* pspec) nothrow;
+__gshared c_json_serializable_default_serialize_propertyFn c_json_serializable_default_serialize_property; ///
+private alias c_json_serializable_deserialize_propertyFn = extern(C) gboolean function(JsonSerializable* serializable, const(char)* propertyName, GValue* value, GParamSpec* pspec, JsonNode* propertyNode) nothrow;
+__gshared c_json_serializable_deserialize_propertyFn c_json_serializable_deserialize_property; ///
+private alias c_json_serializable_find_propertyFn = extern(C) GParamSpec* function(JsonSerializable* serializable, const(char)* name) nothrow;
+__gshared c_json_serializable_find_propertyFn c_json_serializable_find_property; ///
+private alias c_json_serializable_get_propertyFn = extern(C) void function(JsonSerializable* serializable, GParamSpec* pspec, GValue* value) nothrow;
+__gshared c_json_serializable_get_propertyFn c_json_serializable_get_property; ///
+private alias c_json_serializable_list_propertiesFn = extern(C) GParamSpec** function(JsonSerializable* serializable, uint* nPspecs) nothrow;
+__gshared c_json_serializable_list_propertiesFn c_json_serializable_list_properties; ///
+private alias c_json_serializable_serialize_propertyFn = extern(C) JsonNode* function(JsonSerializable* serializable, const(char)* propertyName, const(GValue)* value, GParamSpec* pspec) nothrow;
+__gshared c_json_serializable_serialize_propertyFn c_json_serializable_serialize_property; ///
+private alias c_json_serializable_set_propertyFn = extern(C) void function(JsonSerializable* serializable, GParamSpec* pspec, const(GValue)* value) nothrow;
+__gshared c_json_serializable_set_propertyFn c_json_serializable_set_property; ///
 
-  // global
-  gboolean function(GType gboxedType, JsonNodeType nodeType) c_json_boxed_can_deserialize; ///
-  gboolean function(GType gboxedType, JsonNodeType* nodeType) c_json_boxed_can_serialize; ///
-  void* function(GType gboxedType, JsonNode* node) c_json_boxed_deserialize; ///
-  void function(GType gboxedType, JsonNodeType nodeType, JsonBoxedDeserializeFunc deserializeFunc) c_json_boxed_register_deserialize_func; ///
-  void function(GType gboxedType, JsonNodeType nodeType, JsonBoxedSerializeFunc serializeFunc) c_json_boxed_register_serialize_func; ///
-  JsonNode* function(GType gboxedType, const(void)* boxed) c_json_boxed_serialize; ///
-  GObject* function(GType gtype, const(char)* data, size_t length, GError** _err) c_json_construct_gobject; ///
-  JsonNode* function(const(char)* str, GError** _err) c_json_from_string; ///
-  GObject* function(GType gtype, JsonNode* node) c_json_gobject_deserialize; ///
-  GObject* function(GType gtype, const(char)* data, ptrdiff_t length, GError** _err) c_json_gobject_from_data; ///
-  JsonNode* function(GObject* gobject) c_json_gobject_serialize; ///
-  char* function(GObject* gobject, size_t* length) c_json_gobject_to_data; ///
-  GVariant* function(JsonNode* jsonNode, const(char)* signature, GError** _err) c_json_gvariant_deserialize; ///
-  GVariant* function(const(char)* json, ptrdiff_t length, const(char)* signature, GError** _err) c_json_gvariant_deserialize_data; ///
-  JsonNode* function(GVariant* variant) c_json_gvariant_serialize; ///
-  char* function(GVariant* variant, size_t* length) c_json_gvariant_serialize_data; ///
-  char* function(GObject* gobject, size_t* length) c_json_serialize_gobject; ///
-  int function(const(void)* a, const(void)* b) c_json_string_compare; ///
-  gboolean function(const(void)* a, const(void)* b) c_json_string_equal; ///
-  uint function(const(void)* key) c_json_string_hash; ///
-  char* function(JsonNode* node, gboolean pretty) c_json_to_string; ///
+// global
+private alias c_json_boxed_can_deserializeFn = extern(C) gboolean function(GType gboxedType, JsonNodeType nodeType) nothrow;
+__gshared c_json_boxed_can_deserializeFn c_json_boxed_can_deserialize; ///
+private alias c_json_boxed_can_serializeFn = extern(C) gboolean function(GType gboxedType, JsonNodeType* nodeType) nothrow;
+__gshared c_json_boxed_can_serializeFn c_json_boxed_can_serialize; ///
+private alias c_json_boxed_deserializeFn = extern(C) void* function(GType gboxedType, JsonNode* node) nothrow;
+__gshared c_json_boxed_deserializeFn c_json_boxed_deserialize; ///
+private alias c_json_boxed_register_deserialize_funcFn = extern(C) void function(GType gboxedType, JsonNodeType nodeType, JsonBoxedDeserializeFunc deserializeFunc) nothrow;
+__gshared c_json_boxed_register_deserialize_funcFn c_json_boxed_register_deserialize_func; ///
+private alias c_json_boxed_register_serialize_funcFn = extern(C) void function(GType gboxedType, JsonNodeType nodeType, JsonBoxedSerializeFunc serializeFunc) nothrow;
+__gshared c_json_boxed_register_serialize_funcFn c_json_boxed_register_serialize_func; ///
+private alias c_json_boxed_serializeFn = extern(C) JsonNode* function(GType gboxedType, const(void)* boxed) nothrow;
+__gshared c_json_boxed_serializeFn c_json_boxed_serialize; ///
+private alias c_json_construct_gobjectFn = extern(C) GObject* function(GType gtype, const(char)* data, size_t length, GError** _err) nothrow;
+__gshared c_json_construct_gobjectFn c_json_construct_gobject; ///
+private alias c_json_from_stringFn = extern(C) JsonNode* function(const(char)* str, GError** _err) nothrow;
+__gshared c_json_from_stringFn c_json_from_string; ///
+private alias c_json_gobject_deserializeFn = extern(C) GObject* function(GType gtype, JsonNode* node) nothrow;
+__gshared c_json_gobject_deserializeFn c_json_gobject_deserialize; ///
+private alias c_json_gobject_from_dataFn = extern(C) GObject* function(GType gtype, const(char)* data, ptrdiff_t length, GError** _err) nothrow;
+__gshared c_json_gobject_from_dataFn c_json_gobject_from_data; ///
+private alias c_json_gobject_serializeFn = extern(C) JsonNode* function(GObject* gobject) nothrow;
+__gshared c_json_gobject_serializeFn c_json_gobject_serialize; ///
+private alias c_json_gobject_to_dataFn = extern(C) char* function(GObject* gobject, size_t* length) nothrow;
+__gshared c_json_gobject_to_dataFn c_json_gobject_to_data; ///
+private alias c_json_gvariant_deserializeFn = extern(C) GVariant* function(JsonNode* jsonNode, const(char)* signature, GError** _err) nothrow;
+__gshared c_json_gvariant_deserializeFn c_json_gvariant_deserialize; ///
+private alias c_json_gvariant_deserialize_dataFn = extern(C) GVariant* function(const(char)* json, ptrdiff_t length, const(char)* signature, GError** _err) nothrow;
+__gshared c_json_gvariant_deserialize_dataFn c_json_gvariant_deserialize_data; ///
+private alias c_json_gvariant_serializeFn = extern(C) JsonNode* function(GVariant* variant) nothrow;
+__gshared c_json_gvariant_serializeFn c_json_gvariant_serialize; ///
+private alias c_json_gvariant_serialize_dataFn = extern(C) char* function(GVariant* variant, size_t* length) nothrow;
+__gshared c_json_gvariant_serialize_dataFn c_json_gvariant_serialize_data; ///
+private alias c_json_serialize_gobjectFn = extern(C) char* function(GObject* gobject, size_t* length) nothrow;
+__gshared c_json_serialize_gobjectFn c_json_serialize_gobject; ///
+private alias c_json_string_compareFn = extern(C) int function(const(void)* a, const(void)* b) nothrow;
+__gshared c_json_string_compareFn c_json_string_compare; ///
+private alias c_json_string_equalFn = extern(C) gboolean function(const(void)* a, const(void)* b) nothrow;
+__gshared c_json_string_equalFn c_json_string_equal; ///
+private alias c_json_string_hashFn = extern(C) uint function(const(void)* key) nothrow;
+__gshared c_json_string_hashFn c_json_string_hash; ///
+private alias c_json_to_stringFn = extern(C) char* function(JsonNode* node, gboolean pretty) nothrow;
+__gshared c_json_to_stringFn c_json_to_string; ///
 
-  // ParserError
-  GQuark function() c_json_parser_error_quark; ///
+// ParserError
+private alias c_json_parser_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_json_parser_error_quarkFn c_json_parser_error_quark; ///
 
-  // PathError
-  GQuark function() c_json_path_error_quark; ///
+// PathError
+private alias c_json_path_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_json_path_error_quarkFn c_json_path_error_quark; ///
 
-  // ReaderError
-  GQuark function() c_json_reader_error_quark; ///
-}
+// ReaderError
+private alias c_json_reader_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_json_reader_error_quarkFn c_json_reader_error_quark; ///
 
 // Array
 

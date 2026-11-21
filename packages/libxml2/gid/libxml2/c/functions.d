@@ -8,9 +8,6 @@ public import gid.glib2.c.types;
 
 private immutable LIBS = [""];
 
-__gshared extern(C) nothrow
-{
-}
 
 shared static this()
 {

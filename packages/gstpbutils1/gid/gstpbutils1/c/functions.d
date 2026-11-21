@@ -11,239 +11,435 @@ public import gid.gstvideo1.c.types;
 
 private immutable LIBS = ["gstpbutils-1.0_0"];
 
-__gshared extern(C) nothrow
-{
-  // AudioVisualizer
-  GType function() c_gst_audio_visualizer_get_type; ///
+// AudioVisualizer
+private alias c_gst_audio_visualizer_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_audio_visualizer_get_typeFn c_gst_audio_visualizer_get_type; ///
 
-  // Discoverer
-  GType function() c_gst_discoverer_get_type; ///
-  GstDiscoverer* function(GstClockTime timeout, GError** _err) c_gst_discoverer_new; ///
-  GstDiscovererInfo* function(GstDiscoverer* discoverer, const(char)* uri, GError** _err) c_gst_discoverer_discover_uri; ///
-  gboolean function(GstDiscoverer* discoverer, const(char)* uri) c_gst_discoverer_discover_uri_async; ///
-  void function(GstDiscoverer* discoverer) c_gst_discoverer_start; ///
-  void function(GstDiscoverer* discoverer) c_gst_discoverer_stop; ///
+// Discoverer
+private alias c_gst_discoverer_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_discoverer_get_typeFn c_gst_discoverer_get_type; ///
+private alias c_gst_discoverer_newFn = extern(C) GstDiscoverer* function(GstClockTime timeout, GError** _err) nothrow;
+__gshared c_gst_discoverer_newFn c_gst_discoverer_new; ///
+private alias c_gst_discoverer_discover_uriFn = extern(C) GstDiscovererInfo* function(GstDiscoverer* discoverer, const(char)* uri, GError** _err) nothrow;
+__gshared c_gst_discoverer_discover_uriFn c_gst_discoverer_discover_uri; ///
+private alias c_gst_discoverer_discover_uri_asyncFn = extern(C) gboolean function(GstDiscoverer* discoverer, const(char)* uri) nothrow;
+__gshared c_gst_discoverer_discover_uri_asyncFn c_gst_discoverer_discover_uri_async; ///
+private alias c_gst_discoverer_startFn = extern(C) void function(GstDiscoverer* discoverer) nothrow;
+__gshared c_gst_discoverer_startFn c_gst_discoverer_start; ///
+private alias c_gst_discoverer_stopFn = extern(C) void function(GstDiscoverer* discoverer) nothrow;
+__gshared c_gst_discoverer_stopFn c_gst_discoverer_stop; ///
 
-  // DiscovererAudioInfo
-  GType function() c_gst_discoverer_audio_info_get_type; ///
-  uint function(const(GstDiscovererAudioInfo)* info) c_gst_discoverer_audio_info_get_bitrate; ///
-  ulong function(const(GstDiscovererAudioInfo)* info) c_gst_discoverer_audio_info_get_channel_mask; ///
-  uint function(const(GstDiscovererAudioInfo)* info) c_gst_discoverer_audio_info_get_channels; ///
-  uint function(const(GstDiscovererAudioInfo)* info) c_gst_discoverer_audio_info_get_depth; ///
-  const(char)* function(const(GstDiscovererAudioInfo)* info) c_gst_discoverer_audio_info_get_language; ///
-  uint function(const(GstDiscovererAudioInfo)* info) c_gst_discoverer_audio_info_get_max_bitrate; ///
-  uint function(const(GstDiscovererAudioInfo)* info) c_gst_discoverer_audio_info_get_sample_rate; ///
+// DiscovererAudioInfo
+private alias c_gst_discoverer_audio_info_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_discoverer_audio_info_get_typeFn c_gst_discoverer_audio_info_get_type; ///
+private alias c_gst_discoverer_audio_info_get_bitrateFn = extern(C) uint function(const(GstDiscovererAudioInfo)* info) nothrow;
+__gshared c_gst_discoverer_audio_info_get_bitrateFn c_gst_discoverer_audio_info_get_bitrate; ///
+private alias c_gst_discoverer_audio_info_get_channel_maskFn = extern(C) ulong function(const(GstDiscovererAudioInfo)* info) nothrow;
+__gshared c_gst_discoverer_audio_info_get_channel_maskFn c_gst_discoverer_audio_info_get_channel_mask; ///
+private alias c_gst_discoverer_audio_info_get_channelsFn = extern(C) uint function(const(GstDiscovererAudioInfo)* info) nothrow;
+__gshared c_gst_discoverer_audio_info_get_channelsFn c_gst_discoverer_audio_info_get_channels; ///
+private alias c_gst_discoverer_audio_info_get_depthFn = extern(C) uint function(const(GstDiscovererAudioInfo)* info) nothrow;
+__gshared c_gst_discoverer_audio_info_get_depthFn c_gst_discoverer_audio_info_get_depth; ///
+private alias c_gst_discoverer_audio_info_get_languageFn = extern(C) const(char)* function(const(GstDiscovererAudioInfo)* info) nothrow;
+__gshared c_gst_discoverer_audio_info_get_languageFn c_gst_discoverer_audio_info_get_language; ///
+private alias c_gst_discoverer_audio_info_get_max_bitrateFn = extern(C) uint function(const(GstDiscovererAudioInfo)* info) nothrow;
+__gshared c_gst_discoverer_audio_info_get_max_bitrateFn c_gst_discoverer_audio_info_get_max_bitrate; ///
+private alias c_gst_discoverer_audio_info_get_sample_rateFn = extern(C) uint function(const(GstDiscovererAudioInfo)* info) nothrow;
+__gshared c_gst_discoverer_audio_info_get_sample_rateFn c_gst_discoverer_audio_info_get_sample_rate; ///
 
-  // DiscovererContainerInfo
-  GType function() c_gst_discoverer_container_info_get_type; ///
-  GList* function(GstDiscovererContainerInfo* info) c_gst_discoverer_container_info_get_streams; ///
-  const(GstTagList)* function(const(GstDiscovererContainerInfo)* info) c_gst_discoverer_container_info_get_tags; ///
+// DiscovererContainerInfo
+private alias c_gst_discoverer_container_info_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_discoverer_container_info_get_typeFn c_gst_discoverer_container_info_get_type; ///
+private alias c_gst_discoverer_container_info_get_streamsFn = extern(C) GList* function(GstDiscovererContainerInfo* info) nothrow;
+__gshared c_gst_discoverer_container_info_get_streamsFn c_gst_discoverer_container_info_get_streams; ///
+private alias c_gst_discoverer_container_info_get_tagsFn = extern(C) const(GstTagList)* function(const(GstDiscovererContainerInfo)* info) nothrow;
+__gshared c_gst_discoverer_container_info_get_tagsFn c_gst_discoverer_container_info_get_tags; ///
 
-  // DiscovererInfo
-  GType function() c_gst_discoverer_info_get_type; ///
-  GstDiscovererInfo* function(GVariant* variant) c_gst_discoverer_info_from_variant; ///
-  GstDiscovererInfo* function(GstDiscovererInfo* ptr) c_gst_discoverer_info_copy; ///
-  GList* function(GstDiscovererInfo* info) c_gst_discoverer_info_get_audio_streams; ///
-  GList* function(GstDiscovererInfo* info) c_gst_discoverer_info_get_container_streams; ///
-  GstClockTime function(const(GstDiscovererInfo)* info) c_gst_discoverer_info_get_duration; ///
-  gboolean function(const(GstDiscovererInfo)* info) c_gst_discoverer_info_get_live; ///
-  const(GstStructure)* function(const(GstDiscovererInfo)* info) c_gst_discoverer_info_get_misc; ///
-  const(char*)* function(const(GstDiscovererInfo)* info) c_gst_discoverer_info_get_missing_elements_installer_details; ///
-  GstDiscovererResult function(const(GstDiscovererInfo)* info) c_gst_discoverer_info_get_result; ///
-  gboolean function(const(GstDiscovererInfo)* info) c_gst_discoverer_info_get_seekable; ///
-  GstDiscovererStreamInfo* function(GstDiscovererInfo* info) c_gst_discoverer_info_get_stream_info; ///
-  GList* function(GstDiscovererInfo* info) c_gst_discoverer_info_get_stream_list; ///
-  GList* function(GstDiscovererInfo* info, GType streamtype) c_gst_discoverer_info_get_streams; ///
-  GList* function(GstDiscovererInfo* info) c_gst_discoverer_info_get_subtitle_streams; ///
-  const(GstTagList)* function(const(GstDiscovererInfo)* info) c_gst_discoverer_info_get_tags; ///
-  const(GstToc)* function(const(GstDiscovererInfo)* info) c_gst_discoverer_info_get_toc; ///
-  const(char)* function(const(GstDiscovererInfo)* info) c_gst_discoverer_info_get_uri; ///
-  GList* function(GstDiscovererInfo* info) c_gst_discoverer_info_get_video_streams; ///
-  GVariant* function(GstDiscovererInfo* info, GstDiscovererSerializeFlags flags) c_gst_discoverer_info_to_variant; ///
+// DiscovererInfo
+private alias c_gst_discoverer_info_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_discoverer_info_get_typeFn c_gst_discoverer_info_get_type; ///
+private alias c_gst_discoverer_info_from_variantFn = extern(C) GstDiscovererInfo* function(GVariant* variant) nothrow;
+__gshared c_gst_discoverer_info_from_variantFn c_gst_discoverer_info_from_variant; ///
+private alias c_gst_discoverer_info_copyFn = extern(C) GstDiscovererInfo* function(GstDiscovererInfo* ptr) nothrow;
+__gshared c_gst_discoverer_info_copyFn c_gst_discoverer_info_copy; ///
+private alias c_gst_discoverer_info_get_audio_streamsFn = extern(C) GList* function(GstDiscovererInfo* info) nothrow;
+__gshared c_gst_discoverer_info_get_audio_streamsFn c_gst_discoverer_info_get_audio_streams; ///
+private alias c_gst_discoverer_info_get_container_streamsFn = extern(C) GList* function(GstDiscovererInfo* info) nothrow;
+__gshared c_gst_discoverer_info_get_container_streamsFn c_gst_discoverer_info_get_container_streams; ///
+private alias c_gst_discoverer_info_get_durationFn = extern(C) GstClockTime function(const(GstDiscovererInfo)* info) nothrow;
+__gshared c_gst_discoverer_info_get_durationFn c_gst_discoverer_info_get_duration; ///
+private alias c_gst_discoverer_info_get_liveFn = extern(C) gboolean function(const(GstDiscovererInfo)* info) nothrow;
+__gshared c_gst_discoverer_info_get_liveFn c_gst_discoverer_info_get_live; ///
+private alias c_gst_discoverer_info_get_miscFn = extern(C) const(GstStructure)* function(const(GstDiscovererInfo)* info) nothrow;
+__gshared c_gst_discoverer_info_get_miscFn c_gst_discoverer_info_get_misc; ///
+private alias c_gst_discoverer_info_get_missing_elements_installer_detailsFn = extern(C) const(char*)* function(const(GstDiscovererInfo)* info) nothrow;
+__gshared c_gst_discoverer_info_get_missing_elements_installer_detailsFn c_gst_discoverer_info_get_missing_elements_installer_details; ///
+private alias c_gst_discoverer_info_get_resultFn = extern(C) GstDiscovererResult function(const(GstDiscovererInfo)* info) nothrow;
+__gshared c_gst_discoverer_info_get_resultFn c_gst_discoverer_info_get_result; ///
+private alias c_gst_discoverer_info_get_seekableFn = extern(C) gboolean function(const(GstDiscovererInfo)* info) nothrow;
+__gshared c_gst_discoverer_info_get_seekableFn c_gst_discoverer_info_get_seekable; ///
+private alias c_gst_discoverer_info_get_stream_infoFn = extern(C) GstDiscovererStreamInfo* function(GstDiscovererInfo* info) nothrow;
+__gshared c_gst_discoverer_info_get_stream_infoFn c_gst_discoverer_info_get_stream_info; ///
+private alias c_gst_discoverer_info_get_stream_listFn = extern(C) GList* function(GstDiscovererInfo* info) nothrow;
+__gshared c_gst_discoverer_info_get_stream_listFn c_gst_discoverer_info_get_stream_list; ///
+private alias c_gst_discoverer_info_get_streamsFn = extern(C) GList* function(GstDiscovererInfo* info, GType streamtype) nothrow;
+__gshared c_gst_discoverer_info_get_streamsFn c_gst_discoverer_info_get_streams; ///
+private alias c_gst_discoverer_info_get_subtitle_streamsFn = extern(C) GList* function(GstDiscovererInfo* info) nothrow;
+__gshared c_gst_discoverer_info_get_subtitle_streamsFn c_gst_discoverer_info_get_subtitle_streams; ///
+private alias c_gst_discoverer_info_get_tagsFn = extern(C) const(GstTagList)* function(const(GstDiscovererInfo)* info) nothrow;
+__gshared c_gst_discoverer_info_get_tagsFn c_gst_discoverer_info_get_tags; ///
+private alias c_gst_discoverer_info_get_tocFn = extern(C) const(GstToc)* function(const(GstDiscovererInfo)* info) nothrow;
+__gshared c_gst_discoverer_info_get_tocFn c_gst_discoverer_info_get_toc; ///
+private alias c_gst_discoverer_info_get_uriFn = extern(C) const(char)* function(const(GstDiscovererInfo)* info) nothrow;
+__gshared c_gst_discoverer_info_get_uriFn c_gst_discoverer_info_get_uri; ///
+private alias c_gst_discoverer_info_get_video_streamsFn = extern(C) GList* function(GstDiscovererInfo* info) nothrow;
+__gshared c_gst_discoverer_info_get_video_streamsFn c_gst_discoverer_info_get_video_streams; ///
+private alias c_gst_discoverer_info_to_variantFn = extern(C) GVariant* function(GstDiscovererInfo* info, GstDiscovererSerializeFlags flags) nothrow;
+__gshared c_gst_discoverer_info_to_variantFn c_gst_discoverer_info_to_variant; ///
 
-  // DiscovererStreamInfo
-  GType function() c_gst_discoverer_stream_info_get_type; ///
-  void function(GList* infos) c_gst_discoverer_stream_info_list_free; ///
-  GstCaps* function(GstDiscovererStreamInfo* info) c_gst_discoverer_stream_info_get_caps; ///
-  const(GstStructure)* function(GstDiscovererStreamInfo* info) c_gst_discoverer_stream_info_get_misc; ///
-  GstDiscovererStreamInfo* function(GstDiscovererStreamInfo* info) c_gst_discoverer_stream_info_get_next; ///
-  GstDiscovererStreamInfo* function(GstDiscovererStreamInfo* info) c_gst_discoverer_stream_info_get_previous; ///
-  const(char)* function(GstDiscovererStreamInfo* info) c_gst_discoverer_stream_info_get_stream_id; ///
-  int function(GstDiscovererStreamInfo* info) c_gst_discoverer_stream_info_get_stream_number; ///
-  const(char)* function(GstDiscovererStreamInfo* info) c_gst_discoverer_stream_info_get_stream_type_nick; ///
-  const(GstTagList)* function(GstDiscovererStreamInfo* info) c_gst_discoverer_stream_info_get_tags; ///
-  const(GstToc)* function(GstDiscovererStreamInfo* info) c_gst_discoverer_stream_info_get_toc; ///
+// DiscovererStreamInfo
+private alias c_gst_discoverer_stream_info_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_discoverer_stream_info_get_typeFn c_gst_discoverer_stream_info_get_type; ///
+private alias c_gst_discoverer_stream_info_list_freeFn = extern(C) void function(GList* infos) nothrow;
+__gshared c_gst_discoverer_stream_info_list_freeFn c_gst_discoverer_stream_info_list_free; ///
+private alias c_gst_discoverer_stream_info_get_capsFn = extern(C) GstCaps* function(GstDiscovererStreamInfo* info) nothrow;
+__gshared c_gst_discoverer_stream_info_get_capsFn c_gst_discoverer_stream_info_get_caps; ///
+private alias c_gst_discoverer_stream_info_get_miscFn = extern(C) const(GstStructure)* function(GstDiscovererStreamInfo* info) nothrow;
+__gshared c_gst_discoverer_stream_info_get_miscFn c_gst_discoverer_stream_info_get_misc; ///
+private alias c_gst_discoverer_stream_info_get_nextFn = extern(C) GstDiscovererStreamInfo* function(GstDiscovererStreamInfo* info) nothrow;
+__gshared c_gst_discoverer_stream_info_get_nextFn c_gst_discoverer_stream_info_get_next; ///
+private alias c_gst_discoverer_stream_info_get_previousFn = extern(C) GstDiscovererStreamInfo* function(GstDiscovererStreamInfo* info) nothrow;
+__gshared c_gst_discoverer_stream_info_get_previousFn c_gst_discoverer_stream_info_get_previous; ///
+private alias c_gst_discoverer_stream_info_get_stream_idFn = extern(C) const(char)* function(GstDiscovererStreamInfo* info) nothrow;
+__gshared c_gst_discoverer_stream_info_get_stream_idFn c_gst_discoverer_stream_info_get_stream_id; ///
+private alias c_gst_discoverer_stream_info_get_stream_numberFn = extern(C) int function(GstDiscovererStreamInfo* info) nothrow;
+__gshared c_gst_discoverer_stream_info_get_stream_numberFn c_gst_discoverer_stream_info_get_stream_number; ///
+private alias c_gst_discoverer_stream_info_get_stream_type_nickFn = extern(C) const(char)* function(GstDiscovererStreamInfo* info) nothrow;
+__gshared c_gst_discoverer_stream_info_get_stream_type_nickFn c_gst_discoverer_stream_info_get_stream_type_nick; ///
+private alias c_gst_discoverer_stream_info_get_tagsFn = extern(C) const(GstTagList)* function(GstDiscovererStreamInfo* info) nothrow;
+__gshared c_gst_discoverer_stream_info_get_tagsFn c_gst_discoverer_stream_info_get_tags; ///
+private alias c_gst_discoverer_stream_info_get_tocFn = extern(C) const(GstToc)* function(GstDiscovererStreamInfo* info) nothrow;
+__gshared c_gst_discoverer_stream_info_get_tocFn c_gst_discoverer_stream_info_get_toc; ///
 
-  // DiscovererSubtitleInfo
-  GType function() c_gst_discoverer_subtitle_info_get_type; ///
-  const(char)* function(const(GstDiscovererSubtitleInfo)* info) c_gst_discoverer_subtitle_info_get_language; ///
+// DiscovererSubtitleInfo
+private alias c_gst_discoverer_subtitle_info_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_discoverer_subtitle_info_get_typeFn c_gst_discoverer_subtitle_info_get_type; ///
+private alias c_gst_discoverer_subtitle_info_get_languageFn = extern(C) const(char)* function(const(GstDiscovererSubtitleInfo)* info) nothrow;
+__gshared c_gst_discoverer_subtitle_info_get_languageFn c_gst_discoverer_subtitle_info_get_language; ///
 
-  // DiscovererVideoInfo
-  GType function() c_gst_discoverer_video_info_get_type; ///
-  uint function(const(GstDiscovererVideoInfo)* info) c_gst_discoverer_video_info_get_bitrate; ///
-  uint function(const(GstDiscovererVideoInfo)* info) c_gst_discoverer_video_info_get_depth; ///
-  uint function(const(GstDiscovererVideoInfo)* info) c_gst_discoverer_video_info_get_framerate_denom; ///
-  uint function(const(GstDiscovererVideoInfo)* info) c_gst_discoverer_video_info_get_framerate_num; ///
-  uint function(const(GstDiscovererVideoInfo)* info) c_gst_discoverer_video_info_get_height; ///
-  uint function(const(GstDiscovererVideoInfo)* info) c_gst_discoverer_video_info_get_max_bitrate; ///
-  uint function(const(GstDiscovererVideoInfo)* info) c_gst_discoverer_video_info_get_par_denom; ///
-  uint function(const(GstDiscovererVideoInfo)* info) c_gst_discoverer_video_info_get_par_num; ///
-  uint function(const(GstDiscovererVideoInfo)* info) c_gst_discoverer_video_info_get_width; ///
-  gboolean function(const(GstDiscovererVideoInfo)* info) c_gst_discoverer_video_info_is_image; ///
-  gboolean function(const(GstDiscovererVideoInfo)* info) c_gst_discoverer_video_info_is_interlaced; ///
+// DiscovererVideoInfo
+private alias c_gst_discoverer_video_info_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_discoverer_video_info_get_typeFn c_gst_discoverer_video_info_get_type; ///
+private alias c_gst_discoverer_video_info_get_bitrateFn = extern(C) uint function(const(GstDiscovererVideoInfo)* info) nothrow;
+__gshared c_gst_discoverer_video_info_get_bitrateFn c_gst_discoverer_video_info_get_bitrate; ///
+private alias c_gst_discoverer_video_info_get_depthFn = extern(C) uint function(const(GstDiscovererVideoInfo)* info) nothrow;
+__gshared c_gst_discoverer_video_info_get_depthFn c_gst_discoverer_video_info_get_depth; ///
+private alias c_gst_discoverer_video_info_get_framerate_denomFn = extern(C) uint function(const(GstDiscovererVideoInfo)* info) nothrow;
+__gshared c_gst_discoverer_video_info_get_framerate_denomFn c_gst_discoverer_video_info_get_framerate_denom; ///
+private alias c_gst_discoverer_video_info_get_framerate_numFn = extern(C) uint function(const(GstDiscovererVideoInfo)* info) nothrow;
+__gshared c_gst_discoverer_video_info_get_framerate_numFn c_gst_discoverer_video_info_get_framerate_num; ///
+private alias c_gst_discoverer_video_info_get_heightFn = extern(C) uint function(const(GstDiscovererVideoInfo)* info) nothrow;
+__gshared c_gst_discoverer_video_info_get_heightFn c_gst_discoverer_video_info_get_height; ///
+private alias c_gst_discoverer_video_info_get_max_bitrateFn = extern(C) uint function(const(GstDiscovererVideoInfo)* info) nothrow;
+__gshared c_gst_discoverer_video_info_get_max_bitrateFn c_gst_discoverer_video_info_get_max_bitrate; ///
+private alias c_gst_discoverer_video_info_get_par_denomFn = extern(C) uint function(const(GstDiscovererVideoInfo)* info) nothrow;
+__gshared c_gst_discoverer_video_info_get_par_denomFn c_gst_discoverer_video_info_get_par_denom; ///
+private alias c_gst_discoverer_video_info_get_par_numFn = extern(C) uint function(const(GstDiscovererVideoInfo)* info) nothrow;
+__gshared c_gst_discoverer_video_info_get_par_numFn c_gst_discoverer_video_info_get_par_num; ///
+private alias c_gst_discoverer_video_info_get_widthFn = extern(C) uint function(const(GstDiscovererVideoInfo)* info) nothrow;
+__gshared c_gst_discoverer_video_info_get_widthFn c_gst_discoverer_video_info_get_width; ///
+private alias c_gst_discoverer_video_info_is_imageFn = extern(C) gboolean function(const(GstDiscovererVideoInfo)* info) nothrow;
+__gshared c_gst_discoverer_video_info_is_imageFn c_gst_discoverer_video_info_is_image; ///
+private alias c_gst_discoverer_video_info_is_interlacedFn = extern(C) gboolean function(const(GstDiscovererVideoInfo)* info) nothrow;
+__gshared c_gst_discoverer_video_info_is_interlacedFn c_gst_discoverer_video_info_is_interlaced; ///
 
-  // EncodingAudioProfile
-  GType function() c_gst_encoding_audio_profile_get_type; ///
-  GstEncodingAudioProfile* function(GstCaps* format, const(char)* preset, GstCaps* restriction, uint presence) c_gst_encoding_audio_profile_new; ///
+// EncodingAudioProfile
+private alias c_gst_encoding_audio_profile_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_encoding_audio_profile_get_typeFn c_gst_encoding_audio_profile_get_type; ///
+private alias c_gst_encoding_audio_profile_newFn = extern(C) GstEncodingAudioProfile* function(GstCaps* format, const(char)* preset, GstCaps* restriction, uint presence) nothrow;
+__gshared c_gst_encoding_audio_profile_newFn c_gst_encoding_audio_profile_new; ///
 
-  // EncodingContainerProfile
-  GType function() c_gst_encoding_container_profile_get_type; ///
-  GstEncodingContainerProfile* function(const(char)* name, const(char)* description, GstCaps* format, const(char)* preset) c_gst_encoding_container_profile_new; ///
-  gboolean function(GstEncodingContainerProfile* container, GstEncodingProfile* profile) c_gst_encoding_container_profile_add_profile; ///
-  gboolean function(GstEncodingContainerProfile* container, GstEncodingProfile* profile) c_gst_encoding_container_profile_contains_profile; ///
-  const(GList)* function(GstEncodingContainerProfile* profile) c_gst_encoding_container_profile_get_profiles; ///
+// EncodingContainerProfile
+private alias c_gst_encoding_container_profile_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_encoding_container_profile_get_typeFn c_gst_encoding_container_profile_get_type; ///
+private alias c_gst_encoding_container_profile_newFn = extern(C) GstEncodingContainerProfile* function(const(char)* name, const(char)* description, GstCaps* format, const(char)* preset) nothrow;
+__gshared c_gst_encoding_container_profile_newFn c_gst_encoding_container_profile_new; ///
+private alias c_gst_encoding_container_profile_add_profileFn = extern(C) gboolean function(GstEncodingContainerProfile* container, GstEncodingProfile* profile) nothrow;
+__gshared c_gst_encoding_container_profile_add_profileFn c_gst_encoding_container_profile_add_profile; ///
+private alias c_gst_encoding_container_profile_contains_profileFn = extern(C) gboolean function(GstEncodingContainerProfile* container, GstEncodingProfile* profile) nothrow;
+__gshared c_gst_encoding_container_profile_contains_profileFn c_gst_encoding_container_profile_contains_profile; ///
+private alias c_gst_encoding_container_profile_get_profilesFn = extern(C) const(GList)* function(GstEncodingContainerProfile* profile) nothrow;
+__gshared c_gst_encoding_container_profile_get_profilesFn c_gst_encoding_container_profile_get_profiles; ///
 
-  // EncodingProfile
-  GType function() c_gst_encoding_profile_get_type; ///
-  GstEncodingProfile* function(const(char)* targetname, const(char)* profilename, const(char)* category) c_gst_encoding_profile_find; ///
-  GstEncodingProfile* function(GstDiscovererInfo* info) c_gst_encoding_profile_from_discoverer; ///
-  GstEncodingProfile* function(const(char)* string_) c_gst_encoding_profile_from_string; ///
-  GstEncodingProfile* function(GstEncodingProfile* self) c_gst_encoding_profile_copy; ///
-  gboolean function(GstEncodingProfile* profile) c_gst_encoding_profile_get_allow_dynamic_output; ///
-  const(char)* function(GstEncodingProfile* profile) c_gst_encoding_profile_get_description; ///
-  GstStructure* function(GstEncodingProfile* self) c_gst_encoding_profile_get_element_properties; ///
-  const(char)* function(GstEncodingProfile* profile) c_gst_encoding_profile_get_file_extension; ///
-  GstCaps* function(GstEncodingProfile* profile) c_gst_encoding_profile_get_format; ///
-  GstCaps* function(GstEncodingProfile* profile) c_gst_encoding_profile_get_input_caps; ///
-  const(char)* function(GstEncodingProfile* profile) c_gst_encoding_profile_get_name; ///
-  uint function(GstEncodingProfile* profile) c_gst_encoding_profile_get_presence; ///
-  const(char)* function(GstEncodingProfile* profile) c_gst_encoding_profile_get_preset; ///
-  const(char)* function(GstEncodingProfile* profile) c_gst_encoding_profile_get_preset_name; ///
-  GstCaps* function(GstEncodingProfile* profile) c_gst_encoding_profile_get_restriction; ///
-  gboolean function(GstEncodingProfile* profile) c_gst_encoding_profile_get_single_segment; ///
-  const(char)* function(GstEncodingProfile* profile) c_gst_encoding_profile_get_type_nick; ///
-  gboolean function(GstEncodingProfile* profile) c_gst_encoding_profile_is_enabled; ///
-  gboolean function(GstEncodingProfile* a, GstEncodingProfile* b) c_gst_encoding_profile_is_equal; ///
-  void function(GstEncodingProfile* profile, gboolean allowDynamicOutput) c_gst_encoding_profile_set_allow_dynamic_output; ///
-  void function(GstEncodingProfile* profile, const(char)* description) c_gst_encoding_profile_set_description; ///
-  void function(GstEncodingProfile* self, GstStructure* elementProperties) c_gst_encoding_profile_set_element_properties; ///
-  void function(GstEncodingProfile* profile, gboolean enabled) c_gst_encoding_profile_set_enabled; ///
-  void function(GstEncodingProfile* profile, GstCaps* format) c_gst_encoding_profile_set_format; ///
-  void function(GstEncodingProfile* profile, const(char)* name) c_gst_encoding_profile_set_name; ///
-  void function(GstEncodingProfile* profile, uint presence) c_gst_encoding_profile_set_presence; ///
-  void function(GstEncodingProfile* profile, const(char)* preset) c_gst_encoding_profile_set_preset; ///
-  void function(GstEncodingProfile* profile, const(char)* presetName) c_gst_encoding_profile_set_preset_name; ///
-  void function(GstEncodingProfile* profile, GstCaps* restriction) c_gst_encoding_profile_set_restriction; ///
-  void function(GstEncodingProfile* profile, gboolean singleSegment) c_gst_encoding_profile_set_single_segment; ///
-  char* function(GstEncodingProfile* profile) c_gst_encoding_profile_to_string; ///
+// EncodingProfile
+private alias c_gst_encoding_profile_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_encoding_profile_get_typeFn c_gst_encoding_profile_get_type; ///
+private alias c_gst_encoding_profile_findFn = extern(C) GstEncodingProfile* function(const(char)* targetname, const(char)* profilename, const(char)* category) nothrow;
+__gshared c_gst_encoding_profile_findFn c_gst_encoding_profile_find; ///
+private alias c_gst_encoding_profile_from_discovererFn = extern(C) GstEncodingProfile* function(GstDiscovererInfo* info) nothrow;
+__gshared c_gst_encoding_profile_from_discovererFn c_gst_encoding_profile_from_discoverer; ///
+private alias c_gst_encoding_profile_from_stringFn = extern(C) GstEncodingProfile* function(const(char)* string_) nothrow;
+__gshared c_gst_encoding_profile_from_stringFn c_gst_encoding_profile_from_string; ///
+private alias c_gst_encoding_profile_copyFn = extern(C) GstEncodingProfile* function(GstEncodingProfile* self) nothrow;
+__gshared c_gst_encoding_profile_copyFn c_gst_encoding_profile_copy; ///
+private alias c_gst_encoding_profile_get_allow_dynamic_outputFn = extern(C) gboolean function(GstEncodingProfile* profile) nothrow;
+__gshared c_gst_encoding_profile_get_allow_dynamic_outputFn c_gst_encoding_profile_get_allow_dynamic_output; ///
+private alias c_gst_encoding_profile_get_descriptionFn = extern(C) const(char)* function(GstEncodingProfile* profile) nothrow;
+__gshared c_gst_encoding_profile_get_descriptionFn c_gst_encoding_profile_get_description; ///
+private alias c_gst_encoding_profile_get_element_propertiesFn = extern(C) GstStructure* function(GstEncodingProfile* self) nothrow;
+__gshared c_gst_encoding_profile_get_element_propertiesFn c_gst_encoding_profile_get_element_properties; ///
+private alias c_gst_encoding_profile_get_file_extensionFn = extern(C) const(char)* function(GstEncodingProfile* profile) nothrow;
+__gshared c_gst_encoding_profile_get_file_extensionFn c_gst_encoding_profile_get_file_extension; ///
+private alias c_gst_encoding_profile_get_formatFn = extern(C) GstCaps* function(GstEncodingProfile* profile) nothrow;
+__gshared c_gst_encoding_profile_get_formatFn c_gst_encoding_profile_get_format; ///
+private alias c_gst_encoding_profile_get_input_capsFn = extern(C) GstCaps* function(GstEncodingProfile* profile) nothrow;
+__gshared c_gst_encoding_profile_get_input_capsFn c_gst_encoding_profile_get_input_caps; ///
+private alias c_gst_encoding_profile_get_nameFn = extern(C) const(char)* function(GstEncodingProfile* profile) nothrow;
+__gshared c_gst_encoding_profile_get_nameFn c_gst_encoding_profile_get_name; ///
+private alias c_gst_encoding_profile_get_presenceFn = extern(C) uint function(GstEncodingProfile* profile) nothrow;
+__gshared c_gst_encoding_profile_get_presenceFn c_gst_encoding_profile_get_presence; ///
+private alias c_gst_encoding_profile_get_presetFn = extern(C) const(char)* function(GstEncodingProfile* profile) nothrow;
+__gshared c_gst_encoding_profile_get_presetFn c_gst_encoding_profile_get_preset; ///
+private alias c_gst_encoding_profile_get_preset_nameFn = extern(C) const(char)* function(GstEncodingProfile* profile) nothrow;
+__gshared c_gst_encoding_profile_get_preset_nameFn c_gst_encoding_profile_get_preset_name; ///
+private alias c_gst_encoding_profile_get_restrictionFn = extern(C) GstCaps* function(GstEncodingProfile* profile) nothrow;
+__gshared c_gst_encoding_profile_get_restrictionFn c_gst_encoding_profile_get_restriction; ///
+private alias c_gst_encoding_profile_get_single_segmentFn = extern(C) gboolean function(GstEncodingProfile* profile) nothrow;
+__gshared c_gst_encoding_profile_get_single_segmentFn c_gst_encoding_profile_get_single_segment; ///
+private alias c_gst_encoding_profile_get_type_nickFn = extern(C) const(char)* function(GstEncodingProfile* profile) nothrow;
+__gshared c_gst_encoding_profile_get_type_nickFn c_gst_encoding_profile_get_type_nick; ///
+private alias c_gst_encoding_profile_is_enabledFn = extern(C) gboolean function(GstEncodingProfile* profile) nothrow;
+__gshared c_gst_encoding_profile_is_enabledFn c_gst_encoding_profile_is_enabled; ///
+private alias c_gst_encoding_profile_is_equalFn = extern(C) gboolean function(GstEncodingProfile* a, GstEncodingProfile* b) nothrow;
+__gshared c_gst_encoding_profile_is_equalFn c_gst_encoding_profile_is_equal; ///
+private alias c_gst_encoding_profile_set_allow_dynamic_outputFn = extern(C) void function(GstEncodingProfile* profile, gboolean allowDynamicOutput) nothrow;
+__gshared c_gst_encoding_profile_set_allow_dynamic_outputFn c_gst_encoding_profile_set_allow_dynamic_output; ///
+private alias c_gst_encoding_profile_set_descriptionFn = extern(C) void function(GstEncodingProfile* profile, const(char)* description) nothrow;
+__gshared c_gst_encoding_profile_set_descriptionFn c_gst_encoding_profile_set_description; ///
+private alias c_gst_encoding_profile_set_element_propertiesFn = extern(C) void function(GstEncodingProfile* self, GstStructure* elementProperties) nothrow;
+__gshared c_gst_encoding_profile_set_element_propertiesFn c_gst_encoding_profile_set_element_properties; ///
+private alias c_gst_encoding_profile_set_enabledFn = extern(C) void function(GstEncodingProfile* profile, gboolean enabled) nothrow;
+__gshared c_gst_encoding_profile_set_enabledFn c_gst_encoding_profile_set_enabled; ///
+private alias c_gst_encoding_profile_set_formatFn = extern(C) void function(GstEncodingProfile* profile, GstCaps* format) nothrow;
+__gshared c_gst_encoding_profile_set_formatFn c_gst_encoding_profile_set_format; ///
+private alias c_gst_encoding_profile_set_nameFn = extern(C) void function(GstEncodingProfile* profile, const(char)* name) nothrow;
+__gshared c_gst_encoding_profile_set_nameFn c_gst_encoding_profile_set_name; ///
+private alias c_gst_encoding_profile_set_presenceFn = extern(C) void function(GstEncodingProfile* profile, uint presence) nothrow;
+__gshared c_gst_encoding_profile_set_presenceFn c_gst_encoding_profile_set_presence; ///
+private alias c_gst_encoding_profile_set_presetFn = extern(C) void function(GstEncodingProfile* profile, const(char)* preset) nothrow;
+__gshared c_gst_encoding_profile_set_presetFn c_gst_encoding_profile_set_preset; ///
+private alias c_gst_encoding_profile_set_preset_nameFn = extern(C) void function(GstEncodingProfile* profile, const(char)* presetName) nothrow;
+__gshared c_gst_encoding_profile_set_preset_nameFn c_gst_encoding_profile_set_preset_name; ///
+private alias c_gst_encoding_profile_set_restrictionFn = extern(C) void function(GstEncodingProfile* profile, GstCaps* restriction) nothrow;
+__gshared c_gst_encoding_profile_set_restrictionFn c_gst_encoding_profile_set_restriction; ///
+private alias c_gst_encoding_profile_set_single_segmentFn = extern(C) void function(GstEncodingProfile* profile, gboolean singleSegment) nothrow;
+__gshared c_gst_encoding_profile_set_single_segmentFn c_gst_encoding_profile_set_single_segment; ///
+private alias c_gst_encoding_profile_to_stringFn = extern(C) char* function(GstEncodingProfile* profile) nothrow;
+__gshared c_gst_encoding_profile_to_stringFn c_gst_encoding_profile_to_string; ///
 
-  // EncodingTarget
-  GType function() c_gst_encoding_target_get_type; ///
-  GstEncodingTarget* function(const(char)* name, const(char)* category, const(char)* description, const(GList)* profiles) c_gst_encoding_target_new; ///
-  GstEncodingTarget* function(const(char)* name, const(char)* category, GError** _err) c_gst_encoding_target_load; ///
-  GstEncodingTarget* function(const(char)* filepath, GError** _err) c_gst_encoding_target_load_from_file; ///
-  gboolean function(GstEncodingTarget* target, GstEncodingProfile* profile) c_gst_encoding_target_add_profile; ///
-  const(char)* function(GstEncodingTarget* target) c_gst_encoding_target_get_category; ///
-  const(char)* function(GstEncodingTarget* target) c_gst_encoding_target_get_description; ///
-  const(char)* function(GstEncodingTarget* target) c_gst_encoding_target_get_name; ///
-  const(char)* function(GstEncodingTarget* target) c_gst_encoding_target_get_path; ///
-  GstEncodingProfile* function(GstEncodingTarget* target, const(char)* name) c_gst_encoding_target_get_profile; ///
-  const(GList)* function(GstEncodingTarget* target) c_gst_encoding_target_get_profiles; ///
-  gboolean function(GstEncodingTarget* target, GError** _err) c_gst_encoding_target_save; ///
-  gboolean function(GstEncodingTarget* target, const(char)* filepath, GError** _err) c_gst_encoding_target_save_to_file; ///
+// EncodingTarget
+private alias c_gst_encoding_target_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_encoding_target_get_typeFn c_gst_encoding_target_get_type; ///
+private alias c_gst_encoding_target_newFn = extern(C) GstEncodingTarget* function(const(char)* name, const(char)* category, const(char)* description, const(GList)* profiles) nothrow;
+__gshared c_gst_encoding_target_newFn c_gst_encoding_target_new; ///
+private alias c_gst_encoding_target_loadFn = extern(C) GstEncodingTarget* function(const(char)* name, const(char)* category, GError** _err) nothrow;
+__gshared c_gst_encoding_target_loadFn c_gst_encoding_target_load; ///
+private alias c_gst_encoding_target_load_from_fileFn = extern(C) GstEncodingTarget* function(const(char)* filepath, GError** _err) nothrow;
+__gshared c_gst_encoding_target_load_from_fileFn c_gst_encoding_target_load_from_file; ///
+private alias c_gst_encoding_target_add_profileFn = extern(C) gboolean function(GstEncodingTarget* target, GstEncodingProfile* profile) nothrow;
+__gshared c_gst_encoding_target_add_profileFn c_gst_encoding_target_add_profile; ///
+private alias c_gst_encoding_target_get_categoryFn = extern(C) const(char)* function(GstEncodingTarget* target) nothrow;
+__gshared c_gst_encoding_target_get_categoryFn c_gst_encoding_target_get_category; ///
+private alias c_gst_encoding_target_get_descriptionFn = extern(C) const(char)* function(GstEncodingTarget* target) nothrow;
+__gshared c_gst_encoding_target_get_descriptionFn c_gst_encoding_target_get_description; ///
+private alias c_gst_encoding_target_get_nameFn = extern(C) const(char)* function(GstEncodingTarget* target) nothrow;
+__gshared c_gst_encoding_target_get_nameFn c_gst_encoding_target_get_name; ///
+private alias c_gst_encoding_target_get_pathFn = extern(C) const(char)* function(GstEncodingTarget* target) nothrow;
+__gshared c_gst_encoding_target_get_pathFn c_gst_encoding_target_get_path; ///
+private alias c_gst_encoding_target_get_profileFn = extern(C) GstEncodingProfile* function(GstEncodingTarget* target, const(char)* name) nothrow;
+__gshared c_gst_encoding_target_get_profileFn c_gst_encoding_target_get_profile; ///
+private alias c_gst_encoding_target_get_profilesFn = extern(C) const(GList)* function(GstEncodingTarget* target) nothrow;
+__gshared c_gst_encoding_target_get_profilesFn c_gst_encoding_target_get_profiles; ///
+private alias c_gst_encoding_target_saveFn = extern(C) gboolean function(GstEncodingTarget* target, GError** _err) nothrow;
+__gshared c_gst_encoding_target_saveFn c_gst_encoding_target_save; ///
+private alias c_gst_encoding_target_save_to_fileFn = extern(C) gboolean function(GstEncodingTarget* target, const(char)* filepath, GError** _err) nothrow;
+__gshared c_gst_encoding_target_save_to_fileFn c_gst_encoding_target_save_to_file; ///
 
-  // EncodingVideoProfile
-  GType function() c_gst_encoding_video_profile_get_type; ///
-  GstEncodingVideoProfile* function(GstCaps* format, const(char)* preset, GstCaps* restriction, uint presence) c_gst_encoding_video_profile_new; ///
-  uint function(GstEncodingVideoProfile* prof) c_gst_encoding_video_profile_get_pass; ///
-  gboolean function(GstEncodingVideoProfile* prof) c_gst_encoding_video_profile_get_variableframerate; ///
-  void function(GstEncodingVideoProfile* prof, uint pass) c_gst_encoding_video_profile_set_pass; ///
-  void function(GstEncodingVideoProfile* prof, gboolean variableframerate) c_gst_encoding_video_profile_set_variableframerate; ///
+// EncodingVideoProfile
+private alias c_gst_encoding_video_profile_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_encoding_video_profile_get_typeFn c_gst_encoding_video_profile_get_type; ///
+private alias c_gst_encoding_video_profile_newFn = extern(C) GstEncodingVideoProfile* function(GstCaps* format, const(char)* preset, GstCaps* restriction, uint presence) nothrow;
+__gshared c_gst_encoding_video_profile_newFn c_gst_encoding_video_profile_new; ///
+private alias c_gst_encoding_video_profile_get_passFn = extern(C) uint function(GstEncodingVideoProfile* prof) nothrow;
+__gshared c_gst_encoding_video_profile_get_passFn c_gst_encoding_video_profile_get_pass; ///
+private alias c_gst_encoding_video_profile_get_variableframerateFn = extern(C) gboolean function(GstEncodingVideoProfile* prof) nothrow;
+__gshared c_gst_encoding_video_profile_get_variableframerateFn c_gst_encoding_video_profile_get_variableframerate; ///
+private alias c_gst_encoding_video_profile_set_passFn = extern(C) void function(GstEncodingVideoProfile* prof, uint pass) nothrow;
+__gshared c_gst_encoding_video_profile_set_passFn c_gst_encoding_video_profile_set_pass; ///
+private alias c_gst_encoding_video_profile_set_variableframerateFn = extern(C) void function(GstEncodingVideoProfile* prof, gboolean variableframerate) nothrow;
+__gshared c_gst_encoding_video_profile_set_variableframerateFn c_gst_encoding_video_profile_set_variableframerate; ///
 
-  // InstallPluginsContext
-  GType function() c_gst_install_plugins_context_get_type; ///
-  GstInstallPluginsContext* function() c_gst_install_plugins_context_new; ///
-  GstInstallPluginsContext* function(GstInstallPluginsContext* ctx) c_gst_install_plugins_context_copy; ///
-  void function(GstInstallPluginsContext* ctx) c_gst_install_plugins_context_free; ///
-  void function(GstInstallPluginsContext* ctx, gboolean confirmSearch) c_gst_install_plugins_context_set_confirm_search; ///
-  void function(GstInstallPluginsContext* ctx, const(char)* desktopId) c_gst_install_plugins_context_set_desktop_id; ///
-  void function(GstInstallPluginsContext* ctx, const(char)* startupId) c_gst_install_plugins_context_set_startup_notification_id; ///
-  void function(GstInstallPluginsContext* ctx, uint xid) c_gst_install_plugins_context_set_xid; ///
+// InstallPluginsContext
+private alias c_gst_install_plugins_context_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_install_plugins_context_get_typeFn c_gst_install_plugins_context_get_type; ///
+private alias c_gst_install_plugins_context_newFn = extern(C) GstInstallPluginsContext* function() nothrow;
+__gshared c_gst_install_plugins_context_newFn c_gst_install_plugins_context_new; ///
+private alias c_gst_install_plugins_context_copyFn = extern(C) GstInstallPluginsContext* function(GstInstallPluginsContext* ctx) nothrow;
+__gshared c_gst_install_plugins_context_copyFn c_gst_install_plugins_context_copy; ///
+private alias c_gst_install_plugins_context_freeFn = extern(C) void function(GstInstallPluginsContext* ctx) nothrow;
+__gshared c_gst_install_plugins_context_freeFn c_gst_install_plugins_context_free; ///
+private alias c_gst_install_plugins_context_set_confirm_searchFn = extern(C) void function(GstInstallPluginsContext* ctx, gboolean confirmSearch) nothrow;
+__gshared c_gst_install_plugins_context_set_confirm_searchFn c_gst_install_plugins_context_set_confirm_search; ///
+private alias c_gst_install_plugins_context_set_desktop_idFn = extern(C) void function(GstInstallPluginsContext* ctx, const(char)* desktopId) nothrow;
+__gshared c_gst_install_plugins_context_set_desktop_idFn c_gst_install_plugins_context_set_desktop_id; ///
+private alias c_gst_install_plugins_context_set_startup_notification_idFn = extern(C) void function(GstInstallPluginsContext* ctx, const(char)* startupId) nothrow;
+__gshared c_gst_install_plugins_context_set_startup_notification_idFn c_gst_install_plugins_context_set_startup_notification_id; ///
+private alias c_gst_install_plugins_context_set_xidFn = extern(C) void function(GstInstallPluginsContext* ctx, uint xid) nothrow;
+__gshared c_gst_install_plugins_context_set_xidFn c_gst_install_plugins_context_set_xid; ///
 
-  // global
-  gboolean function(GstCaps* caps, const(ubyte)* audioConfig, uint len) c_gst_codec_utils_aac_caps_set_level_and_profile; ///
-  uint function(const(ubyte)* audioConfig, uint len) c_gst_codec_utils_aac_get_channels; ///
-  int function(uint rate) c_gst_codec_utils_aac_get_index_from_sample_rate; ///
-  const(char)* function(const(ubyte)* audioConfig, uint len) c_gst_codec_utils_aac_get_level; ///
-  const(char)* function(const(ubyte)* audioConfig, uint len) c_gst_codec_utils_aac_get_profile; ///
-  uint function(const(ubyte)* audioConfig, uint len) c_gst_codec_utils_aac_get_sample_rate; ///
-  uint function(uint srIdx) c_gst_codec_utils_aac_get_sample_rate_from_index; ///
-  GstBuffer* function(GstCaps* caps) c_gst_codec_utils_av1_create_av1c_from_caps; ///
-  GstCaps* function(GstBuffer* av1c) c_gst_codec_utils_av1_create_caps_from_av1c; ///
-  const(char)* function(ubyte seqLevelIdx) c_gst_codec_utils_av1_get_level; ///
-  ubyte function(const(char)* level) c_gst_codec_utils_av1_get_seq_level_idx; ///
-  GstCaps* function(const(char)* codecsField) c_gst_codec_utils_caps_from_mime_codec; ///
-  char* function(GstCaps* caps) c_gst_codec_utils_caps_get_mime_codec; ///
-  gboolean function(GstCaps* caps, const(ubyte)* sps, uint len) c_gst_codec_utils_h264_caps_set_level_and_profile; ///
-  const(char)* function(const(ubyte)* sps, uint len) c_gst_codec_utils_h264_get_level; ///
-  ubyte function(const(char)* level) c_gst_codec_utils_h264_get_level_idc; ///
-  const(char)* function(const(ubyte)* sps, uint len) c_gst_codec_utils_h264_get_profile; ///
-  gboolean function(const(ubyte)* codecData, uint len, ubyte* profile, ubyte* flags, ubyte* level) c_gst_codec_utils_h264_get_profile_flags_level; ///
-  gboolean function(GstCaps* caps, const(ubyte)* profileTierLevel, uint len) c_gst_codec_utils_h265_caps_set_level_tier_and_profile; ///
-  const(char)* function(const(ubyte)* profileTierLevel, uint len) c_gst_codec_utils_h265_get_level; ///
-  ubyte function(const(char)* level) c_gst_codec_utils_h265_get_level_idc; ///
-  const(char)* function(const(ubyte)* profileTierLevel, uint len) c_gst_codec_utils_h265_get_profile; ///
-  const(char)* function(const(ubyte)* profileTierLevel, uint len) c_gst_codec_utils_h265_get_tier; ///
-  gboolean function(GstCaps* caps, const(ubyte)* decoderConfiguration, uint len) c_gst_codec_utils_h266_caps_set_level_tier_and_profile; ///
-  const(char)* function(const(ubyte)* ptlRecord, uint len) c_gst_codec_utils_h266_get_level; ///
-  ubyte function(const(char)* level) c_gst_codec_utils_h266_get_level_idc; ///
-  const(char)* function(const(ubyte)* ptlRecord, uint len) c_gst_codec_utils_h266_get_profile; ///
-  const(char)* function(const(ubyte)* ptlRecord, uint len) c_gst_codec_utils_h266_get_tier; ///
-  gboolean function(GstCaps* caps, const(ubyte)* visObjSeq, uint len) c_gst_codec_utils_mpeg4video_caps_set_level_and_profile; ///
-  const(char)* function(const(ubyte)* visObjSeq, uint len) c_gst_codec_utils_mpeg4video_get_level; ///
-  const(char)* function(const(ubyte)* visObjSeq, uint len) c_gst_codec_utils_mpeg4video_get_profile; ///
-  GstCaps* function(uint rate, ubyte channels, ubyte channelMappingFamily, ubyte streamCount, ubyte coupledCount, const(ubyte)* channelMapping) c_gst_codec_utils_opus_create_caps; ///
-  GstCaps* function(GstBuffer* header, GstBuffer* comments) c_gst_codec_utils_opus_create_caps_from_header; ///
-  GstBuffer* function(uint rate, ubyte channels, ubyte channelMappingFamily, ubyte streamCount, ubyte coupledCount, const(ubyte)* channelMapping, ushort preSkip, short outputGain) c_gst_codec_utils_opus_create_header; ///
-  gboolean function(GstCaps* caps, uint* rate, ubyte* channels, ubyte* channelMappingFamily, ubyte* streamCount, ubyte* coupledCount, ubyte* channelMapping) c_gst_codec_utils_opus_parse_caps; ///
-  gboolean function(GstBuffer* header, uint* rate, ubyte* channels, ubyte* channelMappingFamily, ubyte* streamCount, ubyte* coupledCount, ubyte* channelMapping, ushort* preSkip, short* outputGain) c_gst_codec_utils_opus_parse_header; ///
-  GList* function(const(char)* categoryname) c_gst_encoding_list_all_targets; ///
-  GList* function() c_gst_encoding_list_available_categories; ///
-  GstInstallPluginsReturn function(const(char*)* details, GstInstallPluginsContext* ctx, GstInstallPluginsResultFunc func, void* userData) c_gst_install_plugins_async; ///
-  gboolean function() c_gst_install_plugins_installation_in_progress; ///
-  gboolean function() c_gst_install_plugins_supported; ///
-  GstInstallPluginsReturn function(const(char*)* details, GstInstallPluginsContext* ctx) c_gst_install_plugins_sync; ///
-  gboolean function(GstMessage* msg) c_gst_is_missing_plugin_message; ///
-  char* function(const(GstCaps)* decodeCaps) c_gst_missing_decoder_installer_detail_new; ///
-  GstMessage* function(GstElement* element, const(GstCaps)* decodeCaps) c_gst_missing_decoder_message_new; ///
-  char* function(const(char)* factoryName) c_gst_missing_element_installer_detail_new; ///
-  GstMessage* function(GstElement* element, const(char)* factoryName) c_gst_missing_element_message_new; ///
-  char* function(const(GstCaps)* encodeCaps) c_gst_missing_encoder_installer_detail_new; ///
-  GstMessage* function(GstElement* element, const(GstCaps)* encodeCaps) c_gst_missing_encoder_message_new; ///
-  char* function(GstMessage* msg) c_gst_missing_plugin_message_get_description; ///
-  char* function(GstMessage* msg) c_gst_missing_plugin_message_get_installer_detail; ///
-  const(char)* function(GstMessage* msg) c_gst_missing_plugin_message_get_stream_id; ///
-  void function(GstMessage* msg, const(char)* streamId) c_gst_missing_plugin_message_set_stream_id; ///
-  char* function(const(char)* protocol) c_gst_missing_uri_sink_installer_detail_new; ///
-  GstMessage* function(GstElement* element, const(char)* protocol) c_gst_missing_uri_sink_message_new; ///
-  char* function(const(char)* protocol) c_gst_missing_uri_source_installer_detail_new; ///
-  GstMessage* function(GstElement* element, const(char)* protocol) c_gst_missing_uri_source_message_new; ///
-  gboolean function(GstTagList* taglist, const(char)* codecTag, const(GstCaps)* caps) c_gst_pb_utils_add_codec_description_to_tag_list; ///
-  GstPbUtilsCapsDescriptionFlags function(const(GstCaps)* caps) c_gst_pb_utils_get_caps_description_flags; ///
-  char* function(const(GstCaps)* caps) c_gst_pb_utils_get_codec_description; ///
-  char* function(const(GstCaps)* caps) c_gst_pb_utils_get_decoder_description; ///
-  char* function(const(char)* factoryName) c_gst_pb_utils_get_element_description; ///
-  char* function(const(GstCaps)* caps) c_gst_pb_utils_get_encoder_description; ///
-  char* function(const(GstCaps)* caps) c_gst_pb_utils_get_file_extension_from_caps; ///
-  char* function(const(char)* protocol) c_gst_pb_utils_get_sink_description; ///
-  char* function(const(char)* protocol) c_gst_pb_utils_get_source_description; ///
-  void function() c_gst_pb_utils_init; ///
-  void function(uint* major, uint* minor, uint* micro, uint* nano) c_gst_plugins_base_version; ///
-  char* function() c_gst_plugins_base_version_string; ///
+// global
+private alias c_gst_codec_utils_aac_caps_set_level_and_profileFn = extern(C) gboolean function(GstCaps* caps, const(ubyte)* audioConfig, uint len) nothrow;
+__gshared c_gst_codec_utils_aac_caps_set_level_and_profileFn c_gst_codec_utils_aac_caps_set_level_and_profile; ///
+private alias c_gst_codec_utils_aac_get_channelsFn = extern(C) uint function(const(ubyte)* audioConfig, uint len) nothrow;
+__gshared c_gst_codec_utils_aac_get_channelsFn c_gst_codec_utils_aac_get_channels; ///
+private alias c_gst_codec_utils_aac_get_index_from_sample_rateFn = extern(C) int function(uint rate) nothrow;
+__gshared c_gst_codec_utils_aac_get_index_from_sample_rateFn c_gst_codec_utils_aac_get_index_from_sample_rate; ///
+private alias c_gst_codec_utils_aac_get_levelFn = extern(C) const(char)* function(const(ubyte)* audioConfig, uint len) nothrow;
+__gshared c_gst_codec_utils_aac_get_levelFn c_gst_codec_utils_aac_get_level; ///
+private alias c_gst_codec_utils_aac_get_profileFn = extern(C) const(char)* function(const(ubyte)* audioConfig, uint len) nothrow;
+__gshared c_gst_codec_utils_aac_get_profileFn c_gst_codec_utils_aac_get_profile; ///
+private alias c_gst_codec_utils_aac_get_sample_rateFn = extern(C) uint function(const(ubyte)* audioConfig, uint len) nothrow;
+__gshared c_gst_codec_utils_aac_get_sample_rateFn c_gst_codec_utils_aac_get_sample_rate; ///
+private alias c_gst_codec_utils_aac_get_sample_rate_from_indexFn = extern(C) uint function(uint srIdx) nothrow;
+__gshared c_gst_codec_utils_aac_get_sample_rate_from_indexFn c_gst_codec_utils_aac_get_sample_rate_from_index; ///
+private alias c_gst_codec_utils_av1_create_av1c_from_capsFn = extern(C) GstBuffer* function(GstCaps* caps) nothrow;
+__gshared c_gst_codec_utils_av1_create_av1c_from_capsFn c_gst_codec_utils_av1_create_av1c_from_caps; ///
+private alias c_gst_codec_utils_av1_create_caps_from_av1cFn = extern(C) GstCaps* function(GstBuffer* av1c) nothrow;
+__gshared c_gst_codec_utils_av1_create_caps_from_av1cFn c_gst_codec_utils_av1_create_caps_from_av1c; ///
+private alias c_gst_codec_utils_av1_get_levelFn = extern(C) const(char)* function(ubyte seqLevelIdx) nothrow;
+__gshared c_gst_codec_utils_av1_get_levelFn c_gst_codec_utils_av1_get_level; ///
+private alias c_gst_codec_utils_av1_get_seq_level_idxFn = extern(C) ubyte function(const(char)* level) nothrow;
+__gshared c_gst_codec_utils_av1_get_seq_level_idxFn c_gst_codec_utils_av1_get_seq_level_idx; ///
+private alias c_gst_codec_utils_caps_from_mime_codecFn = extern(C) GstCaps* function(const(char)* codecsField) nothrow;
+__gshared c_gst_codec_utils_caps_from_mime_codecFn c_gst_codec_utils_caps_from_mime_codec; ///
+private alias c_gst_codec_utils_caps_get_mime_codecFn = extern(C) char* function(GstCaps* caps) nothrow;
+__gshared c_gst_codec_utils_caps_get_mime_codecFn c_gst_codec_utils_caps_get_mime_codec; ///
+private alias c_gst_codec_utils_h264_caps_set_level_and_profileFn = extern(C) gboolean function(GstCaps* caps, const(ubyte)* sps, uint len) nothrow;
+__gshared c_gst_codec_utils_h264_caps_set_level_and_profileFn c_gst_codec_utils_h264_caps_set_level_and_profile; ///
+private alias c_gst_codec_utils_h264_get_levelFn = extern(C) const(char)* function(const(ubyte)* sps, uint len) nothrow;
+__gshared c_gst_codec_utils_h264_get_levelFn c_gst_codec_utils_h264_get_level; ///
+private alias c_gst_codec_utils_h264_get_level_idcFn = extern(C) ubyte function(const(char)* level) nothrow;
+__gshared c_gst_codec_utils_h264_get_level_idcFn c_gst_codec_utils_h264_get_level_idc; ///
+private alias c_gst_codec_utils_h264_get_profileFn = extern(C) const(char)* function(const(ubyte)* sps, uint len) nothrow;
+__gshared c_gst_codec_utils_h264_get_profileFn c_gst_codec_utils_h264_get_profile; ///
+private alias c_gst_codec_utils_h264_get_profile_flags_levelFn = extern(C) gboolean function(const(ubyte)* codecData, uint len, ubyte* profile, ubyte* flags, ubyte* level) nothrow;
+__gshared c_gst_codec_utils_h264_get_profile_flags_levelFn c_gst_codec_utils_h264_get_profile_flags_level; ///
+private alias c_gst_codec_utils_h265_caps_set_level_tier_and_profileFn = extern(C) gboolean function(GstCaps* caps, const(ubyte)* profileTierLevel, uint len) nothrow;
+__gshared c_gst_codec_utils_h265_caps_set_level_tier_and_profileFn c_gst_codec_utils_h265_caps_set_level_tier_and_profile; ///
+private alias c_gst_codec_utils_h265_get_levelFn = extern(C) const(char)* function(const(ubyte)* profileTierLevel, uint len) nothrow;
+__gshared c_gst_codec_utils_h265_get_levelFn c_gst_codec_utils_h265_get_level; ///
+private alias c_gst_codec_utils_h265_get_level_idcFn = extern(C) ubyte function(const(char)* level) nothrow;
+__gshared c_gst_codec_utils_h265_get_level_idcFn c_gst_codec_utils_h265_get_level_idc; ///
+private alias c_gst_codec_utils_h265_get_profileFn = extern(C) const(char)* function(const(ubyte)* profileTierLevel, uint len) nothrow;
+__gshared c_gst_codec_utils_h265_get_profileFn c_gst_codec_utils_h265_get_profile; ///
+private alias c_gst_codec_utils_h265_get_tierFn = extern(C) const(char)* function(const(ubyte)* profileTierLevel, uint len) nothrow;
+__gshared c_gst_codec_utils_h265_get_tierFn c_gst_codec_utils_h265_get_tier; ///
+private alias c_gst_codec_utils_h266_caps_set_level_tier_and_profileFn = extern(C) gboolean function(GstCaps* caps, const(ubyte)* decoderConfiguration, uint len) nothrow;
+__gshared c_gst_codec_utils_h266_caps_set_level_tier_and_profileFn c_gst_codec_utils_h266_caps_set_level_tier_and_profile; ///
+private alias c_gst_codec_utils_h266_get_levelFn = extern(C) const(char)* function(const(ubyte)* ptlRecord, uint len) nothrow;
+__gshared c_gst_codec_utils_h266_get_levelFn c_gst_codec_utils_h266_get_level; ///
+private alias c_gst_codec_utils_h266_get_level_idcFn = extern(C) ubyte function(const(char)* level) nothrow;
+__gshared c_gst_codec_utils_h266_get_level_idcFn c_gst_codec_utils_h266_get_level_idc; ///
+private alias c_gst_codec_utils_h266_get_profileFn = extern(C) const(char)* function(const(ubyte)* ptlRecord, uint len) nothrow;
+__gshared c_gst_codec_utils_h266_get_profileFn c_gst_codec_utils_h266_get_profile; ///
+private alias c_gst_codec_utils_h266_get_tierFn = extern(C) const(char)* function(const(ubyte)* ptlRecord, uint len) nothrow;
+__gshared c_gst_codec_utils_h266_get_tierFn c_gst_codec_utils_h266_get_tier; ///
+private alias c_gst_codec_utils_mpeg4video_caps_set_level_and_profileFn = extern(C) gboolean function(GstCaps* caps, const(ubyte)* visObjSeq, uint len) nothrow;
+__gshared c_gst_codec_utils_mpeg4video_caps_set_level_and_profileFn c_gst_codec_utils_mpeg4video_caps_set_level_and_profile; ///
+private alias c_gst_codec_utils_mpeg4video_get_levelFn = extern(C) const(char)* function(const(ubyte)* visObjSeq, uint len) nothrow;
+__gshared c_gst_codec_utils_mpeg4video_get_levelFn c_gst_codec_utils_mpeg4video_get_level; ///
+private alias c_gst_codec_utils_mpeg4video_get_profileFn = extern(C) const(char)* function(const(ubyte)* visObjSeq, uint len) nothrow;
+__gshared c_gst_codec_utils_mpeg4video_get_profileFn c_gst_codec_utils_mpeg4video_get_profile; ///
+private alias c_gst_codec_utils_opus_create_capsFn = extern(C) GstCaps* function(uint rate, ubyte channels, ubyte channelMappingFamily, ubyte streamCount, ubyte coupledCount, const(ubyte)* channelMapping) nothrow;
+__gshared c_gst_codec_utils_opus_create_capsFn c_gst_codec_utils_opus_create_caps; ///
+private alias c_gst_codec_utils_opus_create_caps_from_headerFn = extern(C) GstCaps* function(GstBuffer* header, GstBuffer* comments) nothrow;
+__gshared c_gst_codec_utils_opus_create_caps_from_headerFn c_gst_codec_utils_opus_create_caps_from_header; ///
+private alias c_gst_codec_utils_opus_create_headerFn = extern(C) GstBuffer* function(uint rate, ubyte channels, ubyte channelMappingFamily, ubyte streamCount, ubyte coupledCount, const(ubyte)* channelMapping, ushort preSkip, short outputGain) nothrow;
+__gshared c_gst_codec_utils_opus_create_headerFn c_gst_codec_utils_opus_create_header; ///
+private alias c_gst_codec_utils_opus_parse_capsFn = extern(C) gboolean function(GstCaps* caps, uint* rate, ubyte* channels, ubyte* channelMappingFamily, ubyte* streamCount, ubyte* coupledCount, ubyte* channelMapping) nothrow;
+__gshared c_gst_codec_utils_opus_parse_capsFn c_gst_codec_utils_opus_parse_caps; ///
+private alias c_gst_codec_utils_opus_parse_headerFn = extern(C) gboolean function(GstBuffer* header, uint* rate, ubyte* channels, ubyte* channelMappingFamily, ubyte* streamCount, ubyte* coupledCount, ubyte* channelMapping, ushort* preSkip, short* outputGain) nothrow;
+__gshared c_gst_codec_utils_opus_parse_headerFn c_gst_codec_utils_opus_parse_header; ///
+private alias c_gst_encoding_list_all_targetsFn = extern(C) GList* function(const(char)* categoryname) nothrow;
+__gshared c_gst_encoding_list_all_targetsFn c_gst_encoding_list_all_targets; ///
+private alias c_gst_encoding_list_available_categoriesFn = extern(C) GList* function() nothrow;
+__gshared c_gst_encoding_list_available_categoriesFn c_gst_encoding_list_available_categories; ///
+private alias c_gst_install_plugins_asyncFn = extern(C) GstInstallPluginsReturn function(const(char*)* details, GstInstallPluginsContext* ctx, GstInstallPluginsResultFunc func, void* userData) nothrow;
+__gshared c_gst_install_plugins_asyncFn c_gst_install_plugins_async; ///
+private alias c_gst_install_plugins_installation_in_progressFn = extern(C) gboolean function() nothrow;
+__gshared c_gst_install_plugins_installation_in_progressFn c_gst_install_plugins_installation_in_progress; ///
+private alias c_gst_install_plugins_supportedFn = extern(C) gboolean function() nothrow;
+__gshared c_gst_install_plugins_supportedFn c_gst_install_plugins_supported; ///
+private alias c_gst_install_plugins_syncFn = extern(C) GstInstallPluginsReturn function(const(char*)* details, GstInstallPluginsContext* ctx) nothrow;
+__gshared c_gst_install_plugins_syncFn c_gst_install_plugins_sync; ///
+private alias c_gst_is_missing_plugin_messageFn = extern(C) gboolean function(GstMessage* msg) nothrow;
+__gshared c_gst_is_missing_plugin_messageFn c_gst_is_missing_plugin_message; ///
+private alias c_gst_missing_decoder_installer_detail_newFn = extern(C) char* function(const(GstCaps)* decodeCaps) nothrow;
+__gshared c_gst_missing_decoder_installer_detail_newFn c_gst_missing_decoder_installer_detail_new; ///
+private alias c_gst_missing_decoder_message_newFn = extern(C) GstMessage* function(GstElement* element, const(GstCaps)* decodeCaps) nothrow;
+__gshared c_gst_missing_decoder_message_newFn c_gst_missing_decoder_message_new; ///
+private alias c_gst_missing_element_installer_detail_newFn = extern(C) char* function(const(char)* factoryName) nothrow;
+__gshared c_gst_missing_element_installer_detail_newFn c_gst_missing_element_installer_detail_new; ///
+private alias c_gst_missing_element_message_newFn = extern(C) GstMessage* function(GstElement* element, const(char)* factoryName) nothrow;
+__gshared c_gst_missing_element_message_newFn c_gst_missing_element_message_new; ///
+private alias c_gst_missing_encoder_installer_detail_newFn = extern(C) char* function(const(GstCaps)* encodeCaps) nothrow;
+__gshared c_gst_missing_encoder_installer_detail_newFn c_gst_missing_encoder_installer_detail_new; ///
+private alias c_gst_missing_encoder_message_newFn = extern(C) GstMessage* function(GstElement* element, const(GstCaps)* encodeCaps) nothrow;
+__gshared c_gst_missing_encoder_message_newFn c_gst_missing_encoder_message_new; ///
+private alias c_gst_missing_plugin_message_get_descriptionFn = extern(C) char* function(GstMessage* msg) nothrow;
+__gshared c_gst_missing_plugin_message_get_descriptionFn c_gst_missing_plugin_message_get_description; ///
+private alias c_gst_missing_plugin_message_get_installer_detailFn = extern(C) char* function(GstMessage* msg) nothrow;
+__gshared c_gst_missing_plugin_message_get_installer_detailFn c_gst_missing_plugin_message_get_installer_detail; ///
+private alias c_gst_missing_plugin_message_get_stream_idFn = extern(C) const(char)* function(GstMessage* msg) nothrow;
+__gshared c_gst_missing_plugin_message_get_stream_idFn c_gst_missing_plugin_message_get_stream_id; ///
+private alias c_gst_missing_plugin_message_set_stream_idFn = extern(C) void function(GstMessage* msg, const(char)* streamId) nothrow;
+__gshared c_gst_missing_plugin_message_set_stream_idFn c_gst_missing_plugin_message_set_stream_id; ///
+private alias c_gst_missing_uri_sink_installer_detail_newFn = extern(C) char* function(const(char)* protocol) nothrow;
+__gshared c_gst_missing_uri_sink_installer_detail_newFn c_gst_missing_uri_sink_installer_detail_new; ///
+private alias c_gst_missing_uri_sink_message_newFn = extern(C) GstMessage* function(GstElement* element, const(char)* protocol) nothrow;
+__gshared c_gst_missing_uri_sink_message_newFn c_gst_missing_uri_sink_message_new; ///
+private alias c_gst_missing_uri_source_installer_detail_newFn = extern(C) char* function(const(char)* protocol) nothrow;
+__gshared c_gst_missing_uri_source_installer_detail_newFn c_gst_missing_uri_source_installer_detail_new; ///
+private alias c_gst_missing_uri_source_message_newFn = extern(C) GstMessage* function(GstElement* element, const(char)* protocol) nothrow;
+__gshared c_gst_missing_uri_source_message_newFn c_gst_missing_uri_source_message_new; ///
+private alias c_gst_pb_utils_add_codec_description_to_tag_listFn = extern(C) gboolean function(GstTagList* taglist, const(char)* codecTag, const(GstCaps)* caps) nothrow;
+__gshared c_gst_pb_utils_add_codec_description_to_tag_listFn c_gst_pb_utils_add_codec_description_to_tag_list; ///
+private alias c_gst_pb_utils_get_caps_description_flagsFn = extern(C) GstPbUtilsCapsDescriptionFlags function(const(GstCaps)* caps) nothrow;
+__gshared c_gst_pb_utils_get_caps_description_flagsFn c_gst_pb_utils_get_caps_description_flags; ///
+private alias c_gst_pb_utils_get_codec_descriptionFn = extern(C) char* function(const(GstCaps)* caps) nothrow;
+__gshared c_gst_pb_utils_get_codec_descriptionFn c_gst_pb_utils_get_codec_description; ///
+private alias c_gst_pb_utils_get_decoder_descriptionFn = extern(C) char* function(const(GstCaps)* caps) nothrow;
+__gshared c_gst_pb_utils_get_decoder_descriptionFn c_gst_pb_utils_get_decoder_description; ///
+private alias c_gst_pb_utils_get_element_descriptionFn = extern(C) char* function(const(char)* factoryName) nothrow;
+__gshared c_gst_pb_utils_get_element_descriptionFn c_gst_pb_utils_get_element_description; ///
+private alias c_gst_pb_utils_get_encoder_descriptionFn = extern(C) char* function(const(GstCaps)* caps) nothrow;
+__gshared c_gst_pb_utils_get_encoder_descriptionFn c_gst_pb_utils_get_encoder_description; ///
+private alias c_gst_pb_utils_get_file_extension_from_capsFn = extern(C) char* function(const(GstCaps)* caps) nothrow;
+__gshared c_gst_pb_utils_get_file_extension_from_capsFn c_gst_pb_utils_get_file_extension_from_caps; ///
+private alias c_gst_pb_utils_get_sink_descriptionFn = extern(C) char* function(const(char)* protocol) nothrow;
+__gshared c_gst_pb_utils_get_sink_descriptionFn c_gst_pb_utils_get_sink_description; ///
+private alias c_gst_pb_utils_get_source_descriptionFn = extern(C) char* function(const(char)* protocol) nothrow;
+__gshared c_gst_pb_utils_get_source_descriptionFn c_gst_pb_utils_get_source_description; ///
+private alias c_gst_pb_utils_initFn = extern(C) void function() nothrow;
+__gshared c_gst_pb_utils_initFn c_gst_pb_utils_init; ///
+private alias c_gst_plugins_base_versionFn = extern(C) void function(uint* major, uint* minor, uint* micro, uint* nano) nothrow;
+__gshared c_gst_plugins_base_versionFn c_gst_plugins_base_version; ///
+private alias c_gst_plugins_base_version_stringFn = extern(C) char* function() nothrow;
+__gshared c_gst_plugins_base_version_stringFn c_gst_plugins_base_version_string; ///
 
-  // InstallPluginsReturn
-  const(char)* function(GstInstallPluginsReturn ret) c_gst_install_plugins_return_get_name; ///
-}
+// InstallPluginsReturn
+private alias c_gst_install_plugins_return_get_nameFn = extern(C) const(char)* function(GstInstallPluginsReturn ret) nothrow;
+__gshared c_gst_install_plugins_return_get_nameFn c_gst_install_plugins_return_get_name; ///
 
 // AudioVisualizer
 

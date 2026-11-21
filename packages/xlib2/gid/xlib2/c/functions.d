@@ -8,11 +8,9 @@ public import gid.glib2.c.types;
 
 private immutable LIBS = ["X11_6"];
 
-__gshared extern(C) nothrow
-{
-  // global
-  void function() c_XOpenDisplay; ///
-}
+// global
+private alias c_XOpenDisplayFn = extern(C) void function() nothrow;
+__gshared c_XOpenDisplayFn c_XOpenDisplay; ///
 
 // global
 

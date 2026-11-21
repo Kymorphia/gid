@@ -8,521 +8,951 @@ public import gid.gio2.c.types;
 
 private immutable LIBS = ["soup-3.0_0"];
 
-__gshared extern(C) nothrow
-{
-  // Auth
-  GType function() c_soup_auth_get_type; ///
-  SoupAuth* function(GType type, SoupMessage* msg, const(char)* authHeader) c_soup_auth_new; ///
-  void function(SoupAuth* auth, const(char)* username, const(char)* password) c_soup_auth_authenticate; ///
-  gboolean function(SoupAuth* auth) c_soup_auth_can_authenticate; ///
-  void function(SoupAuth* auth) c_soup_auth_cancel; ///
-  void function(SoupAuth* auth, GSList* space) c_soup_auth_free_protection_space; ///
-  const(char)* function(SoupAuth* auth) c_soup_auth_get_authority; ///
-  char* function(SoupAuth* auth, SoupMessage* msg) c_soup_auth_get_authorization; ///
-  char* function(SoupAuth* auth) c_soup_auth_get_info; ///
-  GSList* function(SoupAuth* auth, GUri* sourceUri) c_soup_auth_get_protection_space; ///
-  const(char)* function(SoupAuth* auth) c_soup_auth_get_realm; ///
-  const(char)* function(SoupAuth* auth) c_soup_auth_get_scheme_name; ///
-  gboolean function(SoupAuth* auth) c_soup_auth_is_authenticated; ///
-  gboolean function(SoupAuth* auth) c_soup_auth_is_cancelled; ///
-  gboolean function(SoupAuth* auth) c_soup_auth_is_for_proxy; ///
-  gboolean function(SoupAuth* auth, SoupMessage* msg) c_soup_auth_is_ready; ///
-  gboolean function(SoupAuth* auth, SoupMessage* msg, const(char)* authHeader) c_soup_auth_update; ///
+// Auth
+private alias c_soup_auth_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_auth_get_typeFn c_soup_auth_get_type; ///
+private alias c_soup_auth_newFn = extern(C) SoupAuth* function(GType type, SoupMessage* msg, const(char)* authHeader) nothrow;
+__gshared c_soup_auth_newFn c_soup_auth_new; ///
+private alias c_soup_auth_authenticateFn = extern(C) void function(SoupAuth* auth, const(char)* username, const(char)* password) nothrow;
+__gshared c_soup_auth_authenticateFn c_soup_auth_authenticate; ///
+private alias c_soup_auth_can_authenticateFn = extern(C) gboolean function(SoupAuth* auth) nothrow;
+__gshared c_soup_auth_can_authenticateFn c_soup_auth_can_authenticate; ///
+private alias c_soup_auth_cancelFn = extern(C) void function(SoupAuth* auth) nothrow;
+__gshared c_soup_auth_cancelFn c_soup_auth_cancel; ///
+private alias c_soup_auth_free_protection_spaceFn = extern(C) void function(SoupAuth* auth, GSList* space) nothrow;
+__gshared c_soup_auth_free_protection_spaceFn c_soup_auth_free_protection_space; ///
+private alias c_soup_auth_get_authorityFn = extern(C) const(char)* function(SoupAuth* auth) nothrow;
+__gshared c_soup_auth_get_authorityFn c_soup_auth_get_authority; ///
+private alias c_soup_auth_get_authorizationFn = extern(C) char* function(SoupAuth* auth, SoupMessage* msg) nothrow;
+__gshared c_soup_auth_get_authorizationFn c_soup_auth_get_authorization; ///
+private alias c_soup_auth_get_infoFn = extern(C) char* function(SoupAuth* auth) nothrow;
+__gshared c_soup_auth_get_infoFn c_soup_auth_get_info; ///
+private alias c_soup_auth_get_protection_spaceFn = extern(C) GSList* function(SoupAuth* auth, GUri* sourceUri) nothrow;
+__gshared c_soup_auth_get_protection_spaceFn c_soup_auth_get_protection_space; ///
+private alias c_soup_auth_get_realmFn = extern(C) const(char)* function(SoupAuth* auth) nothrow;
+__gshared c_soup_auth_get_realmFn c_soup_auth_get_realm; ///
+private alias c_soup_auth_get_scheme_nameFn = extern(C) const(char)* function(SoupAuth* auth) nothrow;
+__gshared c_soup_auth_get_scheme_nameFn c_soup_auth_get_scheme_name; ///
+private alias c_soup_auth_is_authenticatedFn = extern(C) gboolean function(SoupAuth* auth) nothrow;
+__gshared c_soup_auth_is_authenticatedFn c_soup_auth_is_authenticated; ///
+private alias c_soup_auth_is_cancelledFn = extern(C) gboolean function(SoupAuth* auth) nothrow;
+__gshared c_soup_auth_is_cancelledFn c_soup_auth_is_cancelled; ///
+private alias c_soup_auth_is_for_proxyFn = extern(C) gboolean function(SoupAuth* auth) nothrow;
+__gshared c_soup_auth_is_for_proxyFn c_soup_auth_is_for_proxy; ///
+private alias c_soup_auth_is_readyFn = extern(C) gboolean function(SoupAuth* auth, SoupMessage* msg) nothrow;
+__gshared c_soup_auth_is_readyFn c_soup_auth_is_ready; ///
+private alias c_soup_auth_updateFn = extern(C) gboolean function(SoupAuth* auth, SoupMessage* msg, const(char)* authHeader) nothrow;
+__gshared c_soup_auth_updateFn c_soup_auth_update; ///
 
-  // AuthBasic
-  GType function() c_soup_auth_basic_get_type; ///
+// AuthBasic
+private alias c_soup_auth_basic_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_auth_basic_get_typeFn c_soup_auth_basic_get_type; ///
 
-  // AuthDigest
-  GType function() c_soup_auth_digest_get_type; ///
+// AuthDigest
+private alias c_soup_auth_digest_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_auth_digest_get_typeFn c_soup_auth_digest_get_type; ///
 
-  // AuthDomain
-  GType function() c_soup_auth_domain_get_type; ///
-  char* function(SoupAuthDomain* domain, SoupServerMessage* msg) c_soup_auth_domain_accepts; ///
-  void function(SoupAuthDomain* domain, const(char)* path) c_soup_auth_domain_add_path; ///
-  void function(SoupAuthDomain* domain, SoupServerMessage* msg) c_soup_auth_domain_challenge; ///
-  gboolean function(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, const(char)* password) c_soup_auth_domain_check_password; ///
-  gboolean function(SoupAuthDomain* domain, SoupServerMessage* msg) c_soup_auth_domain_covers; ///
-  const(char)* function(SoupAuthDomain* domain) c_soup_auth_domain_get_realm; ///
-  void function(SoupAuthDomain* domain, const(char)* path) c_soup_auth_domain_remove_path; ///
-  void function(SoupAuthDomain* domain, SoupAuthDomainFilter filter, void* filterData, GDestroyNotify dnotify) c_soup_auth_domain_set_filter; ///
-  void function(SoupAuthDomain* domain, SoupAuthDomainGenericAuthCallback authCallback, void* authData, GDestroyNotify dnotify) c_soup_auth_domain_set_generic_auth_callback; ///
+// AuthDomain
+private alias c_soup_auth_domain_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_auth_domain_get_typeFn c_soup_auth_domain_get_type; ///
+private alias c_soup_auth_domain_acceptsFn = extern(C) char* function(SoupAuthDomain* domain, SoupServerMessage* msg) nothrow;
+__gshared c_soup_auth_domain_acceptsFn c_soup_auth_domain_accepts; ///
+private alias c_soup_auth_domain_add_pathFn = extern(C) void function(SoupAuthDomain* domain, const(char)* path) nothrow;
+__gshared c_soup_auth_domain_add_pathFn c_soup_auth_domain_add_path; ///
+private alias c_soup_auth_domain_challengeFn = extern(C) void function(SoupAuthDomain* domain, SoupServerMessage* msg) nothrow;
+__gshared c_soup_auth_domain_challengeFn c_soup_auth_domain_challenge; ///
+private alias c_soup_auth_domain_check_passwordFn = extern(C) gboolean function(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, const(char)* password) nothrow;
+__gshared c_soup_auth_domain_check_passwordFn c_soup_auth_domain_check_password; ///
+private alias c_soup_auth_domain_coversFn = extern(C) gboolean function(SoupAuthDomain* domain, SoupServerMessage* msg) nothrow;
+__gshared c_soup_auth_domain_coversFn c_soup_auth_domain_covers; ///
+private alias c_soup_auth_domain_get_realmFn = extern(C) const(char)* function(SoupAuthDomain* domain) nothrow;
+__gshared c_soup_auth_domain_get_realmFn c_soup_auth_domain_get_realm; ///
+private alias c_soup_auth_domain_remove_pathFn = extern(C) void function(SoupAuthDomain* domain, const(char)* path) nothrow;
+__gshared c_soup_auth_domain_remove_pathFn c_soup_auth_domain_remove_path; ///
+private alias c_soup_auth_domain_set_filterFn = extern(C) void function(SoupAuthDomain* domain, SoupAuthDomainFilter filter, void* filterData, GDestroyNotify dnotify) nothrow;
+__gshared c_soup_auth_domain_set_filterFn c_soup_auth_domain_set_filter; ///
+private alias c_soup_auth_domain_set_generic_auth_callbackFn = extern(C) void function(SoupAuthDomain* domain, SoupAuthDomainGenericAuthCallback authCallback, void* authData, GDestroyNotify dnotify) nothrow;
+__gshared c_soup_auth_domain_set_generic_auth_callbackFn c_soup_auth_domain_set_generic_auth_callback; ///
 
-  // AuthDomainBasic
-  GType function() c_soup_auth_domain_basic_get_type; ///
-  SoupAuthDomain* function(const(char)* optname1,  ...) c_soup_auth_domain_basic_new; ///
-  void function(SoupAuthDomain* domain, SoupAuthDomainBasicAuthCallback callback, void* userData, GDestroyNotify dnotify) c_soup_auth_domain_basic_set_auth_callback; ///
+// AuthDomainBasic
+private alias c_soup_auth_domain_basic_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_auth_domain_basic_get_typeFn c_soup_auth_domain_basic_get_type; ///
+private alias c_soup_auth_domain_basic_newFn = extern(C) SoupAuthDomain* function(const(char)* optname1,  ...) nothrow;
+__gshared c_soup_auth_domain_basic_newFn c_soup_auth_domain_basic_new; ///
+private alias c_soup_auth_domain_basic_set_auth_callbackFn = extern(C) void function(SoupAuthDomain* domain, SoupAuthDomainBasicAuthCallback callback, void* userData, GDestroyNotify dnotify) nothrow;
+__gshared c_soup_auth_domain_basic_set_auth_callbackFn c_soup_auth_domain_basic_set_auth_callback; ///
 
-  // AuthDomainDigest
-  GType function() c_soup_auth_domain_digest_get_type; ///
-  SoupAuthDomain* function(const(char)* optname1,  ...) c_soup_auth_domain_digest_new; ///
-  char* function(const(char)* username, const(char)* realm, const(char)* password) c_soup_auth_domain_digest_encode_password; ///
-  void function(SoupAuthDomain* domain, SoupAuthDomainDigestAuthCallback callback, void* userData, GDestroyNotify dnotify) c_soup_auth_domain_digest_set_auth_callback; ///
+// AuthDomainDigest
+private alias c_soup_auth_domain_digest_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_auth_domain_digest_get_typeFn c_soup_auth_domain_digest_get_type; ///
+private alias c_soup_auth_domain_digest_newFn = extern(C) SoupAuthDomain* function(const(char)* optname1,  ...) nothrow;
+__gshared c_soup_auth_domain_digest_newFn c_soup_auth_domain_digest_new; ///
+private alias c_soup_auth_domain_digest_encode_passwordFn = extern(C) char* function(const(char)* username, const(char)* realm, const(char)* password) nothrow;
+__gshared c_soup_auth_domain_digest_encode_passwordFn c_soup_auth_domain_digest_encode_password; ///
+private alias c_soup_auth_domain_digest_set_auth_callbackFn = extern(C) void function(SoupAuthDomain* domain, SoupAuthDomainDigestAuthCallback callback, void* userData, GDestroyNotify dnotify) nothrow;
+__gshared c_soup_auth_domain_digest_set_auth_callbackFn c_soup_auth_domain_digest_set_auth_callback; ///
 
-  // AuthManager
-  GType function() c_soup_auth_manager_get_type; ///
-  void function(SoupAuthManager* manager) c_soup_auth_manager_clear_cached_credentials; ///
-  void function(SoupAuthManager* manager, GUri* uri, SoupAuth* auth) c_soup_auth_manager_use_auth; ///
+// AuthManager
+private alias c_soup_auth_manager_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_auth_manager_get_typeFn c_soup_auth_manager_get_type; ///
+private alias c_soup_auth_manager_clear_cached_credentialsFn = extern(C) void function(SoupAuthManager* manager) nothrow;
+__gshared c_soup_auth_manager_clear_cached_credentialsFn c_soup_auth_manager_clear_cached_credentials; ///
+private alias c_soup_auth_manager_use_authFn = extern(C) void function(SoupAuthManager* manager, GUri* uri, SoupAuth* auth) nothrow;
+__gshared c_soup_auth_manager_use_authFn c_soup_auth_manager_use_auth; ///
 
-  // AuthNTLM
-  GType function() c_soup_auth_ntlm_get_type; ///
+// AuthNTLM
+private alias c_soup_auth_ntlm_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_auth_ntlm_get_typeFn c_soup_auth_ntlm_get_type; ///
 
-  // AuthNegotiate
-  GType function() c_soup_auth_negotiate_get_type; ///
-  gboolean function() c_soup_auth_negotiate_supported; ///
+// AuthNegotiate
+private alias c_soup_auth_negotiate_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_auth_negotiate_get_typeFn c_soup_auth_negotiate_get_type; ///
+private alias c_soup_auth_negotiate_supportedFn = extern(C) gboolean function() nothrow;
+__gshared c_soup_auth_negotiate_supportedFn c_soup_auth_negotiate_supported; ///
 
-  // Cache
-  GType function() c_soup_cache_get_type; ///
-  SoupCache* function(const(char)* cacheDir, SoupCacheType cacheType) c_soup_cache_new; ///
-  void function(SoupCache* cache) c_soup_cache_clear; ///
-  void function(SoupCache* cache) c_soup_cache_dump; ///
-  void function(SoupCache* cache) c_soup_cache_flush; ///
-  uint function(SoupCache* cache) c_soup_cache_get_max_size; ///
-  void function(SoupCache* cache) c_soup_cache_load; ///
-  void function(SoupCache* cache, uint maxSize) c_soup_cache_set_max_size; ///
+// Cache
+private alias c_soup_cache_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_cache_get_typeFn c_soup_cache_get_type; ///
+private alias c_soup_cache_newFn = extern(C) SoupCache* function(const(char)* cacheDir, SoupCacheType cacheType) nothrow;
+__gshared c_soup_cache_newFn c_soup_cache_new; ///
+private alias c_soup_cache_clearFn = extern(C) void function(SoupCache* cache) nothrow;
+__gshared c_soup_cache_clearFn c_soup_cache_clear; ///
+private alias c_soup_cache_dumpFn = extern(C) void function(SoupCache* cache) nothrow;
+__gshared c_soup_cache_dumpFn c_soup_cache_dump; ///
+private alias c_soup_cache_flushFn = extern(C) void function(SoupCache* cache) nothrow;
+__gshared c_soup_cache_flushFn c_soup_cache_flush; ///
+private alias c_soup_cache_get_max_sizeFn = extern(C) uint function(SoupCache* cache) nothrow;
+__gshared c_soup_cache_get_max_sizeFn c_soup_cache_get_max_size; ///
+private alias c_soup_cache_loadFn = extern(C) void function(SoupCache* cache) nothrow;
+__gshared c_soup_cache_loadFn c_soup_cache_load; ///
+private alias c_soup_cache_set_max_sizeFn = extern(C) void function(SoupCache* cache, uint maxSize) nothrow;
+__gshared c_soup_cache_set_max_sizeFn c_soup_cache_set_max_size; ///
 
-  // ContentDecoder
-  GType function() c_soup_content_decoder_get_type; ///
+// ContentDecoder
+private alias c_soup_content_decoder_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_content_decoder_get_typeFn c_soup_content_decoder_get_type; ///
 
-  // ContentSniffer
-  GType function() c_soup_content_sniffer_get_type; ///
-  SoupContentSniffer* function() c_soup_content_sniffer_new; ///
-  char* function(SoupContentSniffer* sniffer, SoupMessage* msg, GBytes* buffer, GHashTable** params) c_soup_content_sniffer_sniff; ///
+// ContentSniffer
+private alias c_soup_content_sniffer_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_content_sniffer_get_typeFn c_soup_content_sniffer_get_type; ///
+private alias c_soup_content_sniffer_newFn = extern(C) SoupContentSniffer* function() nothrow;
+__gshared c_soup_content_sniffer_newFn c_soup_content_sniffer_new; ///
+private alias c_soup_content_sniffer_sniffFn = extern(C) char* function(SoupContentSniffer* sniffer, SoupMessage* msg, GBytes* buffer, GHashTable** params) nothrow;
+__gshared c_soup_content_sniffer_sniffFn c_soup_content_sniffer_sniff; ///
 
-  // Cookie
-  GType function() c_soup_cookie_get_type; ///
-  SoupCookie* function(const(char)* name, const(char)* value, const(char)* domain, const(char)* path, int maxAge) c_soup_cookie_new; ///
-  gboolean function(SoupCookie* cookie, GUri* uri) c_soup_cookie_applies_to_uri; ///
-  SoupCookie* function(SoupCookie* cookie) c_soup_cookie_copy; ///
-  gboolean function(SoupCookie* cookie, const(char)* host) c_soup_cookie_domain_matches; ///
-  gboolean function(SoupCookie* cookie1, SoupCookie* cookie2) c_soup_cookie_equal; ///
-  void function(SoupCookie* cookie) c_soup_cookie_free; ///
-  const(char)* function(SoupCookie* cookie) c_soup_cookie_get_domain; ///
-  GDateTime* function(SoupCookie* cookie) c_soup_cookie_get_expires; ///
-  gboolean function(SoupCookie* cookie) c_soup_cookie_get_http_only; ///
-  const(char)* function(SoupCookie* cookie) c_soup_cookie_get_name; ///
-  const(char)* function(SoupCookie* cookie) c_soup_cookie_get_path; ///
-  SoupSameSitePolicy function(SoupCookie* cookie) c_soup_cookie_get_same_site_policy; ///
-  gboolean function(SoupCookie* cookie) c_soup_cookie_get_secure; ///
-  const(char)* function(SoupCookie* cookie) c_soup_cookie_get_value; ///
-  void function(SoupCookie* cookie, const(char)* domain) c_soup_cookie_set_domain; ///
-  void function(SoupCookie* cookie, GDateTime* expires) c_soup_cookie_set_expires; ///
-  void function(SoupCookie* cookie, gboolean httpOnly) c_soup_cookie_set_http_only; ///
-  void function(SoupCookie* cookie, int maxAge) c_soup_cookie_set_max_age; ///
-  void function(SoupCookie* cookie, const(char)* name) c_soup_cookie_set_name; ///
-  void function(SoupCookie* cookie, const(char)* path) c_soup_cookie_set_path; ///
-  void function(SoupCookie* cookie, SoupSameSitePolicy policy) c_soup_cookie_set_same_site_policy; ///
-  void function(SoupCookie* cookie, gboolean secure) c_soup_cookie_set_secure; ///
-  void function(SoupCookie* cookie, const(char)* value) c_soup_cookie_set_value; ///
-  char* function(SoupCookie* cookie) c_soup_cookie_to_cookie_header; ///
-  char* function(SoupCookie* cookie) c_soup_cookie_to_set_cookie_header; ///
-  SoupCookie* function(const(char)* header, GUri* origin) c_soup_cookie_parse; ///
+// Cookie
+private alias c_soup_cookie_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_cookie_get_typeFn c_soup_cookie_get_type; ///
+private alias c_soup_cookie_newFn = extern(C) SoupCookie* function(const(char)* name, const(char)* value, const(char)* domain, const(char)* path, int maxAge) nothrow;
+__gshared c_soup_cookie_newFn c_soup_cookie_new; ///
+private alias c_soup_cookie_applies_to_uriFn = extern(C) gboolean function(SoupCookie* cookie, GUri* uri) nothrow;
+__gshared c_soup_cookie_applies_to_uriFn c_soup_cookie_applies_to_uri; ///
+private alias c_soup_cookie_copyFn = extern(C) SoupCookie* function(SoupCookie* cookie) nothrow;
+__gshared c_soup_cookie_copyFn c_soup_cookie_copy; ///
+private alias c_soup_cookie_domain_matchesFn = extern(C) gboolean function(SoupCookie* cookie, const(char)* host) nothrow;
+__gshared c_soup_cookie_domain_matchesFn c_soup_cookie_domain_matches; ///
+private alias c_soup_cookie_equalFn = extern(C) gboolean function(SoupCookie* cookie1, SoupCookie* cookie2) nothrow;
+__gshared c_soup_cookie_equalFn c_soup_cookie_equal; ///
+private alias c_soup_cookie_freeFn = extern(C) void function(SoupCookie* cookie) nothrow;
+__gshared c_soup_cookie_freeFn c_soup_cookie_free; ///
+private alias c_soup_cookie_get_domainFn = extern(C) const(char)* function(SoupCookie* cookie) nothrow;
+__gshared c_soup_cookie_get_domainFn c_soup_cookie_get_domain; ///
+private alias c_soup_cookie_get_expiresFn = extern(C) GDateTime* function(SoupCookie* cookie) nothrow;
+__gshared c_soup_cookie_get_expiresFn c_soup_cookie_get_expires; ///
+private alias c_soup_cookie_get_http_onlyFn = extern(C) gboolean function(SoupCookie* cookie) nothrow;
+__gshared c_soup_cookie_get_http_onlyFn c_soup_cookie_get_http_only; ///
+private alias c_soup_cookie_get_nameFn = extern(C) const(char)* function(SoupCookie* cookie) nothrow;
+__gshared c_soup_cookie_get_nameFn c_soup_cookie_get_name; ///
+private alias c_soup_cookie_get_pathFn = extern(C) const(char)* function(SoupCookie* cookie) nothrow;
+__gshared c_soup_cookie_get_pathFn c_soup_cookie_get_path; ///
+private alias c_soup_cookie_get_same_site_policyFn = extern(C) SoupSameSitePolicy function(SoupCookie* cookie) nothrow;
+__gshared c_soup_cookie_get_same_site_policyFn c_soup_cookie_get_same_site_policy; ///
+private alias c_soup_cookie_get_secureFn = extern(C) gboolean function(SoupCookie* cookie) nothrow;
+__gshared c_soup_cookie_get_secureFn c_soup_cookie_get_secure; ///
+private alias c_soup_cookie_get_valueFn = extern(C) const(char)* function(SoupCookie* cookie) nothrow;
+__gshared c_soup_cookie_get_valueFn c_soup_cookie_get_value; ///
+private alias c_soup_cookie_set_domainFn = extern(C) void function(SoupCookie* cookie, const(char)* domain) nothrow;
+__gshared c_soup_cookie_set_domainFn c_soup_cookie_set_domain; ///
+private alias c_soup_cookie_set_expiresFn = extern(C) void function(SoupCookie* cookie, GDateTime* expires) nothrow;
+__gshared c_soup_cookie_set_expiresFn c_soup_cookie_set_expires; ///
+private alias c_soup_cookie_set_http_onlyFn = extern(C) void function(SoupCookie* cookie, gboolean httpOnly) nothrow;
+__gshared c_soup_cookie_set_http_onlyFn c_soup_cookie_set_http_only; ///
+private alias c_soup_cookie_set_max_ageFn = extern(C) void function(SoupCookie* cookie, int maxAge) nothrow;
+__gshared c_soup_cookie_set_max_ageFn c_soup_cookie_set_max_age; ///
+private alias c_soup_cookie_set_nameFn = extern(C) void function(SoupCookie* cookie, const(char)* name) nothrow;
+__gshared c_soup_cookie_set_nameFn c_soup_cookie_set_name; ///
+private alias c_soup_cookie_set_pathFn = extern(C) void function(SoupCookie* cookie, const(char)* path) nothrow;
+__gshared c_soup_cookie_set_pathFn c_soup_cookie_set_path; ///
+private alias c_soup_cookie_set_same_site_policyFn = extern(C) void function(SoupCookie* cookie, SoupSameSitePolicy policy) nothrow;
+__gshared c_soup_cookie_set_same_site_policyFn c_soup_cookie_set_same_site_policy; ///
+private alias c_soup_cookie_set_secureFn = extern(C) void function(SoupCookie* cookie, gboolean secure) nothrow;
+__gshared c_soup_cookie_set_secureFn c_soup_cookie_set_secure; ///
+private alias c_soup_cookie_set_valueFn = extern(C) void function(SoupCookie* cookie, const(char)* value) nothrow;
+__gshared c_soup_cookie_set_valueFn c_soup_cookie_set_value; ///
+private alias c_soup_cookie_to_cookie_headerFn = extern(C) char* function(SoupCookie* cookie) nothrow;
+__gshared c_soup_cookie_to_cookie_headerFn c_soup_cookie_to_cookie_header; ///
+private alias c_soup_cookie_to_set_cookie_headerFn = extern(C) char* function(SoupCookie* cookie) nothrow;
+__gshared c_soup_cookie_to_set_cookie_headerFn c_soup_cookie_to_set_cookie_header; ///
+private alias c_soup_cookie_parseFn = extern(C) SoupCookie* function(const(char)* header, GUri* origin) nothrow;
+__gshared c_soup_cookie_parseFn c_soup_cookie_parse; ///
 
-  // CookieJar
-  GType function() c_soup_cookie_jar_get_type; ///
-  SoupCookieJar* function() c_soup_cookie_jar_new; ///
-  void function(SoupCookieJar* jar, SoupCookie* cookie) c_soup_cookie_jar_add_cookie; ///
-  void function(SoupCookieJar* jar, SoupCookie* cookie, GUri* uri, GUri* firstParty) c_soup_cookie_jar_add_cookie_full; ///
-  void function(SoupCookieJar* jar, GUri* firstParty, SoupCookie* cookie) c_soup_cookie_jar_add_cookie_with_first_party; ///
-  GSList* function(SoupCookieJar* jar) c_soup_cookie_jar_all_cookies; ///
-  void function(SoupCookieJar* jar, SoupCookie* cookie) c_soup_cookie_jar_delete_cookie; ///
-  SoupCookieJarAcceptPolicy function(SoupCookieJar* jar) c_soup_cookie_jar_get_accept_policy; ///
-  GSList* function(SoupCookieJar* jar, GUri* uri, gboolean forHttp) c_soup_cookie_jar_get_cookie_list; ///
-  GSList* function(SoupCookieJar* jar, GUri* uri, GUri* topLevel, GUri* siteForCookies, gboolean forHttp, gboolean isSafeMethod, gboolean isTopLevelNavigation) c_soup_cookie_jar_get_cookie_list_with_same_site_info; ///
-  char* function(SoupCookieJar* jar, GUri* uri, gboolean forHttp) c_soup_cookie_jar_get_cookies; ///
-  gboolean function(SoupCookieJar* jar) c_soup_cookie_jar_is_persistent; ///
-  void function(SoupCookieJar* jar, SoupCookieJarAcceptPolicy policy) c_soup_cookie_jar_set_accept_policy; ///
-  void function(SoupCookieJar* jar, GUri* uri, const(char)* cookie) c_soup_cookie_jar_set_cookie; ///
-  void function(SoupCookieJar* jar, GUri* uri, GUri* firstParty, const(char)* cookie) c_soup_cookie_jar_set_cookie_with_first_party; ///
+// CookieJar
+private alias c_soup_cookie_jar_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_cookie_jar_get_typeFn c_soup_cookie_jar_get_type; ///
+private alias c_soup_cookie_jar_newFn = extern(C) SoupCookieJar* function() nothrow;
+__gshared c_soup_cookie_jar_newFn c_soup_cookie_jar_new; ///
+private alias c_soup_cookie_jar_add_cookieFn = extern(C) void function(SoupCookieJar* jar, SoupCookie* cookie) nothrow;
+__gshared c_soup_cookie_jar_add_cookieFn c_soup_cookie_jar_add_cookie; ///
+private alias c_soup_cookie_jar_add_cookie_fullFn = extern(C) void function(SoupCookieJar* jar, SoupCookie* cookie, GUri* uri, GUri* firstParty) nothrow;
+__gshared c_soup_cookie_jar_add_cookie_fullFn c_soup_cookie_jar_add_cookie_full; ///
+private alias c_soup_cookie_jar_add_cookie_with_first_partyFn = extern(C) void function(SoupCookieJar* jar, GUri* firstParty, SoupCookie* cookie) nothrow;
+__gshared c_soup_cookie_jar_add_cookie_with_first_partyFn c_soup_cookie_jar_add_cookie_with_first_party; ///
+private alias c_soup_cookie_jar_all_cookiesFn = extern(C) GSList* function(SoupCookieJar* jar) nothrow;
+__gshared c_soup_cookie_jar_all_cookiesFn c_soup_cookie_jar_all_cookies; ///
+private alias c_soup_cookie_jar_delete_cookieFn = extern(C) void function(SoupCookieJar* jar, SoupCookie* cookie) nothrow;
+__gshared c_soup_cookie_jar_delete_cookieFn c_soup_cookie_jar_delete_cookie; ///
+private alias c_soup_cookie_jar_get_accept_policyFn = extern(C) SoupCookieJarAcceptPolicy function(SoupCookieJar* jar) nothrow;
+__gshared c_soup_cookie_jar_get_accept_policyFn c_soup_cookie_jar_get_accept_policy; ///
+private alias c_soup_cookie_jar_get_cookie_listFn = extern(C) GSList* function(SoupCookieJar* jar, GUri* uri, gboolean forHttp) nothrow;
+__gshared c_soup_cookie_jar_get_cookie_listFn c_soup_cookie_jar_get_cookie_list; ///
+private alias c_soup_cookie_jar_get_cookie_list_with_same_site_infoFn = extern(C) GSList* function(SoupCookieJar* jar, GUri* uri, GUri* topLevel, GUri* siteForCookies, gboolean forHttp, gboolean isSafeMethod, gboolean isTopLevelNavigation) nothrow;
+__gshared c_soup_cookie_jar_get_cookie_list_with_same_site_infoFn c_soup_cookie_jar_get_cookie_list_with_same_site_info; ///
+private alias c_soup_cookie_jar_get_cookiesFn = extern(C) char* function(SoupCookieJar* jar, GUri* uri, gboolean forHttp) nothrow;
+__gshared c_soup_cookie_jar_get_cookiesFn c_soup_cookie_jar_get_cookies; ///
+private alias c_soup_cookie_jar_is_persistentFn = extern(C) gboolean function(SoupCookieJar* jar) nothrow;
+__gshared c_soup_cookie_jar_is_persistentFn c_soup_cookie_jar_is_persistent; ///
+private alias c_soup_cookie_jar_set_accept_policyFn = extern(C) void function(SoupCookieJar* jar, SoupCookieJarAcceptPolicy policy) nothrow;
+__gshared c_soup_cookie_jar_set_accept_policyFn c_soup_cookie_jar_set_accept_policy; ///
+private alias c_soup_cookie_jar_set_cookieFn = extern(C) void function(SoupCookieJar* jar, GUri* uri, const(char)* cookie) nothrow;
+__gshared c_soup_cookie_jar_set_cookieFn c_soup_cookie_jar_set_cookie; ///
+private alias c_soup_cookie_jar_set_cookie_with_first_partyFn = extern(C) void function(SoupCookieJar* jar, GUri* uri, GUri* firstParty, const(char)* cookie) nothrow;
+__gshared c_soup_cookie_jar_set_cookie_with_first_partyFn c_soup_cookie_jar_set_cookie_with_first_party; ///
 
-  // CookieJarDB
-  GType function() c_soup_cookie_jar_db_get_type; ///
-  SoupCookieJar* function(const(char)* filename, gboolean readOnly) c_soup_cookie_jar_db_new; ///
+// CookieJarDB
+private alias c_soup_cookie_jar_db_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_cookie_jar_db_get_typeFn c_soup_cookie_jar_db_get_type; ///
+private alias c_soup_cookie_jar_db_newFn = extern(C) SoupCookieJar* function(const(char)* filename, gboolean readOnly) nothrow;
+__gshared c_soup_cookie_jar_db_newFn c_soup_cookie_jar_db_new; ///
 
-  // CookieJarText
-  GType function() c_soup_cookie_jar_text_get_type; ///
-  SoupCookieJar* function(const(char)* filename, gboolean readOnly) c_soup_cookie_jar_text_new; ///
+// CookieJarText
+private alias c_soup_cookie_jar_text_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_cookie_jar_text_get_typeFn c_soup_cookie_jar_text_get_type; ///
+private alias c_soup_cookie_jar_text_newFn = extern(C) SoupCookieJar* function(const(char)* filename, gboolean readOnly) nothrow;
+__gshared c_soup_cookie_jar_text_newFn c_soup_cookie_jar_text_new; ///
 
-  // HSTSEnforcer
-  GType function() c_soup_hsts_enforcer_get_type; ///
-  SoupHSTSEnforcer* function() c_soup_hsts_enforcer_new; ///
-  GList* function(SoupHSTSEnforcer* hstsEnforcer, gboolean sessionPolicies) c_soup_hsts_enforcer_get_domains; ///
-  GList* function(SoupHSTSEnforcer* hstsEnforcer, gboolean sessionPolicies) c_soup_hsts_enforcer_get_policies; ///
-  gboolean function(SoupHSTSEnforcer* hstsEnforcer, const(char)* domain) c_soup_hsts_enforcer_has_valid_policy; ///
-  gboolean function(SoupHSTSEnforcer* hstsEnforcer) c_soup_hsts_enforcer_is_persistent; ///
-  void function(SoupHSTSEnforcer* hstsEnforcer, SoupHSTSPolicy* policy) c_soup_hsts_enforcer_set_policy; ///
-  void function(SoupHSTSEnforcer* hstsEnforcer, const(char)* domain, gboolean includeSubdomains) c_soup_hsts_enforcer_set_session_policy; ///
+// HSTSEnforcer
+private alias c_soup_hsts_enforcer_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_hsts_enforcer_get_typeFn c_soup_hsts_enforcer_get_type; ///
+private alias c_soup_hsts_enforcer_newFn = extern(C) SoupHSTSEnforcer* function() nothrow;
+__gshared c_soup_hsts_enforcer_newFn c_soup_hsts_enforcer_new; ///
+private alias c_soup_hsts_enforcer_get_domainsFn = extern(C) GList* function(SoupHSTSEnforcer* hstsEnforcer, gboolean sessionPolicies) nothrow;
+__gshared c_soup_hsts_enforcer_get_domainsFn c_soup_hsts_enforcer_get_domains; ///
+private alias c_soup_hsts_enforcer_get_policiesFn = extern(C) GList* function(SoupHSTSEnforcer* hstsEnforcer, gboolean sessionPolicies) nothrow;
+__gshared c_soup_hsts_enforcer_get_policiesFn c_soup_hsts_enforcer_get_policies; ///
+private alias c_soup_hsts_enforcer_has_valid_policyFn = extern(C) gboolean function(SoupHSTSEnforcer* hstsEnforcer, const(char)* domain) nothrow;
+__gshared c_soup_hsts_enforcer_has_valid_policyFn c_soup_hsts_enforcer_has_valid_policy; ///
+private alias c_soup_hsts_enforcer_is_persistentFn = extern(C) gboolean function(SoupHSTSEnforcer* hstsEnforcer) nothrow;
+__gshared c_soup_hsts_enforcer_is_persistentFn c_soup_hsts_enforcer_is_persistent; ///
+private alias c_soup_hsts_enforcer_set_policyFn = extern(C) void function(SoupHSTSEnforcer* hstsEnforcer, SoupHSTSPolicy* policy) nothrow;
+__gshared c_soup_hsts_enforcer_set_policyFn c_soup_hsts_enforcer_set_policy; ///
+private alias c_soup_hsts_enforcer_set_session_policyFn = extern(C) void function(SoupHSTSEnforcer* hstsEnforcer, const(char)* domain, gboolean includeSubdomains) nothrow;
+__gshared c_soup_hsts_enforcer_set_session_policyFn c_soup_hsts_enforcer_set_session_policy; ///
 
-  // HSTSEnforcerDB
-  GType function() c_soup_hsts_enforcer_db_get_type; ///
-  SoupHSTSEnforcer* function(const(char)* filename) c_soup_hsts_enforcer_db_new; ///
+// HSTSEnforcerDB
+private alias c_soup_hsts_enforcer_db_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_hsts_enforcer_db_get_typeFn c_soup_hsts_enforcer_db_get_type; ///
+private alias c_soup_hsts_enforcer_db_newFn = extern(C) SoupHSTSEnforcer* function(const(char)* filename) nothrow;
+__gshared c_soup_hsts_enforcer_db_newFn c_soup_hsts_enforcer_db_new; ///
 
-  // HSTSPolicy
-  GType function() c_soup_hsts_policy_get_type; ///
-  SoupHSTSPolicy* function(const(char)* domain, gulong maxAge, gboolean includeSubdomains) c_soup_hsts_policy_new; ///
-  SoupHSTSPolicy* function(SoupMessage* msg) c_soup_hsts_policy_new_from_response; ///
-  SoupHSTSPolicy* function(const(char)* domain, gulong maxAge, GDateTime* expires, gboolean includeSubdomains) c_soup_hsts_policy_new_full; ///
-  SoupHSTSPolicy* function(const(char)* domain, gboolean includeSubdomains) c_soup_hsts_policy_new_session_policy; ///
-  SoupHSTSPolicy* function(SoupHSTSPolicy* policy) c_soup_hsts_policy_copy; ///
-  gboolean function(SoupHSTSPolicy* policy1, SoupHSTSPolicy* policy2) c_soup_hsts_policy_equal; ///
-  void function(SoupHSTSPolicy* policy) c_soup_hsts_policy_free; ///
-  const(char)* function(SoupHSTSPolicy* policy) c_soup_hsts_policy_get_domain; ///
-  GDateTime* function(SoupHSTSPolicy* policy) c_soup_hsts_policy_get_expires; ///
-  gulong function(SoupHSTSPolicy* policy) c_soup_hsts_policy_get_max_age; ///
-  gboolean function(SoupHSTSPolicy* policy) c_soup_hsts_policy_includes_subdomains; ///
-  gboolean function(SoupHSTSPolicy* policy) c_soup_hsts_policy_is_expired; ///
-  gboolean function(SoupHSTSPolicy* policy) c_soup_hsts_policy_is_session_policy; ///
+// HSTSPolicy
+private alias c_soup_hsts_policy_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_hsts_policy_get_typeFn c_soup_hsts_policy_get_type; ///
+private alias c_soup_hsts_policy_newFn = extern(C) SoupHSTSPolicy* function(const(char)* domain, gulong maxAge, gboolean includeSubdomains) nothrow;
+__gshared c_soup_hsts_policy_newFn c_soup_hsts_policy_new; ///
+private alias c_soup_hsts_policy_new_from_responseFn = extern(C) SoupHSTSPolicy* function(SoupMessage* msg) nothrow;
+__gshared c_soup_hsts_policy_new_from_responseFn c_soup_hsts_policy_new_from_response; ///
+private alias c_soup_hsts_policy_new_fullFn = extern(C) SoupHSTSPolicy* function(const(char)* domain, gulong maxAge, GDateTime* expires, gboolean includeSubdomains) nothrow;
+__gshared c_soup_hsts_policy_new_fullFn c_soup_hsts_policy_new_full; ///
+private alias c_soup_hsts_policy_new_session_policyFn = extern(C) SoupHSTSPolicy* function(const(char)* domain, gboolean includeSubdomains) nothrow;
+__gshared c_soup_hsts_policy_new_session_policyFn c_soup_hsts_policy_new_session_policy; ///
+private alias c_soup_hsts_policy_copyFn = extern(C) SoupHSTSPolicy* function(SoupHSTSPolicy* policy) nothrow;
+__gshared c_soup_hsts_policy_copyFn c_soup_hsts_policy_copy; ///
+private alias c_soup_hsts_policy_equalFn = extern(C) gboolean function(SoupHSTSPolicy* policy1, SoupHSTSPolicy* policy2) nothrow;
+__gshared c_soup_hsts_policy_equalFn c_soup_hsts_policy_equal; ///
+private alias c_soup_hsts_policy_freeFn = extern(C) void function(SoupHSTSPolicy* policy) nothrow;
+__gshared c_soup_hsts_policy_freeFn c_soup_hsts_policy_free; ///
+private alias c_soup_hsts_policy_get_domainFn = extern(C) const(char)* function(SoupHSTSPolicy* policy) nothrow;
+__gshared c_soup_hsts_policy_get_domainFn c_soup_hsts_policy_get_domain; ///
+private alias c_soup_hsts_policy_get_expiresFn = extern(C) GDateTime* function(SoupHSTSPolicy* policy) nothrow;
+__gshared c_soup_hsts_policy_get_expiresFn c_soup_hsts_policy_get_expires; ///
+private alias c_soup_hsts_policy_get_max_ageFn = extern(C) gulong function(SoupHSTSPolicy* policy) nothrow;
+__gshared c_soup_hsts_policy_get_max_ageFn c_soup_hsts_policy_get_max_age; ///
+private alias c_soup_hsts_policy_includes_subdomainsFn = extern(C) gboolean function(SoupHSTSPolicy* policy) nothrow;
+__gshared c_soup_hsts_policy_includes_subdomainsFn c_soup_hsts_policy_includes_subdomains; ///
+private alias c_soup_hsts_policy_is_expiredFn = extern(C) gboolean function(SoupHSTSPolicy* policy) nothrow;
+__gshared c_soup_hsts_policy_is_expiredFn c_soup_hsts_policy_is_expired; ///
+private alias c_soup_hsts_policy_is_session_policyFn = extern(C) gboolean function(SoupHSTSPolicy* policy) nothrow;
+__gshared c_soup_hsts_policy_is_session_policyFn c_soup_hsts_policy_is_session_policy; ///
 
-  // Logger
-  GType function() c_soup_logger_get_type; ///
-  SoupLogger* function(SoupLoggerLogLevel level) c_soup_logger_new; ///
-  int function(SoupLogger* logger) c_soup_logger_get_max_body_size; ///
-  void function(SoupLogger* logger, int maxBodySize) c_soup_logger_set_max_body_size; ///
-  void function(SoupLogger* logger, SoupLoggerPrinter printer, void* printerData, GDestroyNotify destroy) c_soup_logger_set_printer; ///
-  void function(SoupLogger* logger, SoupLoggerFilter requestFilter, void* filterData, GDestroyNotify destroy) c_soup_logger_set_request_filter; ///
-  void function(SoupLogger* logger, SoupLoggerFilter responseFilter, void* filterData, GDestroyNotify destroy) c_soup_logger_set_response_filter; ///
+// Logger
+private alias c_soup_logger_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_logger_get_typeFn c_soup_logger_get_type; ///
+private alias c_soup_logger_newFn = extern(C) SoupLogger* function(SoupLoggerLogLevel level) nothrow;
+__gshared c_soup_logger_newFn c_soup_logger_new; ///
+private alias c_soup_logger_get_max_body_sizeFn = extern(C) int function(SoupLogger* logger) nothrow;
+__gshared c_soup_logger_get_max_body_sizeFn c_soup_logger_get_max_body_size; ///
+private alias c_soup_logger_set_max_body_sizeFn = extern(C) void function(SoupLogger* logger, int maxBodySize) nothrow;
+__gshared c_soup_logger_set_max_body_sizeFn c_soup_logger_set_max_body_size; ///
+private alias c_soup_logger_set_printerFn = extern(C) void function(SoupLogger* logger, SoupLoggerPrinter printer, void* printerData, GDestroyNotify destroy) nothrow;
+__gshared c_soup_logger_set_printerFn c_soup_logger_set_printer; ///
+private alias c_soup_logger_set_request_filterFn = extern(C) void function(SoupLogger* logger, SoupLoggerFilter requestFilter, void* filterData, GDestroyNotify destroy) nothrow;
+__gshared c_soup_logger_set_request_filterFn c_soup_logger_set_request_filter; ///
+private alias c_soup_logger_set_response_filterFn = extern(C) void function(SoupLogger* logger, SoupLoggerFilter responseFilter, void* filterData, GDestroyNotify destroy) nothrow;
+__gshared c_soup_logger_set_response_filterFn c_soup_logger_set_response_filter; ///
 
-  // Message
-  GType function() c_soup_message_get_type; ///
-  SoupMessage* function(const(char)* method, const(char)* uriString) c_soup_message_new; ///
-  SoupMessage* function(const(char)* method, const(char)* uriString, char* encodedForm) c_soup_message_new_from_encoded_form; ///
-  SoupMessage* function(const(char)* uriString, SoupMultipart* multipart) c_soup_message_new_from_multipart; ///
-  SoupMessage* function(const(char)* method, GUri* uri) c_soup_message_new_from_uri; ///
-  SoupMessage* function(GUri* baseUri) c_soup_message_new_options_ping; ///
-  void function(SoupMessage* msg, SoupMessageFlags flags) c_soup_message_add_flags; ///
-  uint function(SoupMessage* msg, const(char)* signal, const(char)* header, GCallback callback, void* userData) c_soup_message_add_header_handler; ///
-  uint function(SoupMessage* msg, const(char)* signal, uint statusCode, GCallback callback, void* userData) c_soup_message_add_status_code_handler; ///
-  void function(SoupMessage* msg, GType featureType) c_soup_message_disable_feature; ///
-  ulong function(SoupMessage* msg) c_soup_message_get_connection_id; ///
-  GUri* function(SoupMessage* msg) c_soup_message_get_first_party; ///
-  SoupMessageFlags function(SoupMessage* msg) c_soup_message_get_flags; ///
-  gboolean function(SoupMessage* msg) c_soup_message_get_force_http1; ///
-  SoupHTTPVersion function(SoupMessage* msg) c_soup_message_get_http_version; ///
-  gboolean function(SoupMessage* msg) c_soup_message_get_is_options_ping; ///
-  gboolean function(SoupMessage* msg) c_soup_message_get_is_top_level_navigation; ///
-  const(char)* function(SoupMessage* msg) c_soup_message_get_method; ///
-  SoupMessageMetrics* function(SoupMessage* msg) c_soup_message_get_metrics; ///
-  SoupMessagePriority function(SoupMessage* msg) c_soup_message_get_priority; ///
-  const(char)* function(SoupMessage* msg) c_soup_message_get_reason_phrase; ///
-  GSocketAddress* function(SoupMessage* msg) c_soup_message_get_remote_address; ///
-  SoupMessageHeaders* function(SoupMessage* msg) c_soup_message_get_request_headers; ///
-  SoupMessageHeaders* function(SoupMessage* msg) c_soup_message_get_response_headers; ///
-  GUri* function(SoupMessage* msg) c_soup_message_get_site_for_cookies; ///
-  SoupStatus function(SoupMessage* msg) c_soup_message_get_status; ///
-  const(char)* function(SoupMessage* msg) c_soup_message_get_tls_ciphersuite_name; ///
-  GTlsCertificate* function(SoupMessage* msg) c_soup_message_get_tls_peer_certificate; ///
-  GTlsCertificateFlags function(SoupMessage* msg) c_soup_message_get_tls_peer_certificate_errors; ///
-  GTlsProtocolVersion function(SoupMessage* msg) c_soup_message_get_tls_protocol_version; ///
-  GUri* function(SoupMessage* msg) c_soup_message_get_uri; ///
-  gboolean function(SoupMessage* msg, GType featureType) c_soup_message_is_feature_disabled; ///
-  gboolean function(SoupMessage* msg) c_soup_message_is_keepalive; ///
-  gboolean function(SoupMessage* msg, SoupMessageFlags flags) c_soup_message_query_flags; ///
-  void function(SoupMessage* msg, SoupMessageFlags flags) c_soup_message_remove_flags; ///
-  void function(SoupMessage* msg, GUri* firstParty) c_soup_message_set_first_party; ///
-  void function(SoupMessage* msg, SoupMessageFlags flags) c_soup_message_set_flags; ///
-  void function(SoupMessage* msg, gboolean value) c_soup_message_set_force_http1; ///
-  void function(SoupMessage* msg, gboolean isOptionsPing) c_soup_message_set_is_options_ping; ///
-  void function(SoupMessage* msg, gboolean isTopLevelNavigation) c_soup_message_set_is_top_level_navigation; ///
-  void function(SoupMessage* msg, const(char)* method) c_soup_message_set_method; ///
-  void function(SoupMessage* msg, SoupMessagePriority priority) c_soup_message_set_priority; ///
-  void function(SoupMessage* msg, const(char)* contentType, GInputStream* stream, ptrdiff_t contentLength) c_soup_message_set_request_body; ///
-  void function(SoupMessage* msg, const(char)* contentType, GBytes* bytes) c_soup_message_set_request_body_from_bytes; ///
-  void function(SoupMessage* msg, GUri* siteForCookies) c_soup_message_set_site_for_cookies; ///
-  void function(SoupMessage* msg, GTlsCertificate* certificate) c_soup_message_set_tls_client_certificate; ///
-  void function(SoupMessage* msg, GUri* uri) c_soup_message_set_uri; ///
-  void function(SoupMessage* msg) c_soup_message_tls_client_certificate_password_request_complete; ///
+// Message
+private alias c_soup_message_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_message_get_typeFn c_soup_message_get_type; ///
+private alias c_soup_message_newFn = extern(C) SoupMessage* function(const(char)* method, const(char)* uriString) nothrow;
+__gshared c_soup_message_newFn c_soup_message_new; ///
+private alias c_soup_message_new_from_encoded_formFn = extern(C) SoupMessage* function(const(char)* method, const(char)* uriString, char* encodedForm) nothrow;
+__gshared c_soup_message_new_from_encoded_formFn c_soup_message_new_from_encoded_form; ///
+private alias c_soup_message_new_from_multipartFn = extern(C) SoupMessage* function(const(char)* uriString, SoupMultipart* multipart) nothrow;
+__gshared c_soup_message_new_from_multipartFn c_soup_message_new_from_multipart; ///
+private alias c_soup_message_new_from_uriFn = extern(C) SoupMessage* function(const(char)* method, GUri* uri) nothrow;
+__gshared c_soup_message_new_from_uriFn c_soup_message_new_from_uri; ///
+private alias c_soup_message_new_options_pingFn = extern(C) SoupMessage* function(GUri* baseUri) nothrow;
+__gshared c_soup_message_new_options_pingFn c_soup_message_new_options_ping; ///
+private alias c_soup_message_add_flagsFn = extern(C) void function(SoupMessage* msg, SoupMessageFlags flags) nothrow;
+__gshared c_soup_message_add_flagsFn c_soup_message_add_flags; ///
+private alias c_soup_message_add_header_handlerFn = extern(C) uint function(SoupMessage* msg, const(char)* signal, const(char)* header, GCallback callback, void* userData) nothrow;
+__gshared c_soup_message_add_header_handlerFn c_soup_message_add_header_handler; ///
+private alias c_soup_message_add_status_code_handlerFn = extern(C) uint function(SoupMessage* msg, const(char)* signal, uint statusCode, GCallback callback, void* userData) nothrow;
+__gshared c_soup_message_add_status_code_handlerFn c_soup_message_add_status_code_handler; ///
+private alias c_soup_message_disable_featureFn = extern(C) void function(SoupMessage* msg, GType featureType) nothrow;
+__gshared c_soup_message_disable_featureFn c_soup_message_disable_feature; ///
+private alias c_soup_message_get_connection_idFn = extern(C) ulong function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_connection_idFn c_soup_message_get_connection_id; ///
+private alias c_soup_message_get_first_partyFn = extern(C) GUri* function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_first_partyFn c_soup_message_get_first_party; ///
+private alias c_soup_message_get_flagsFn = extern(C) SoupMessageFlags function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_flagsFn c_soup_message_get_flags; ///
+private alias c_soup_message_get_force_http1Fn = extern(C) gboolean function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_force_http1Fn c_soup_message_get_force_http1; ///
+private alias c_soup_message_get_http_versionFn = extern(C) SoupHTTPVersion function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_http_versionFn c_soup_message_get_http_version; ///
+private alias c_soup_message_get_is_options_pingFn = extern(C) gboolean function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_is_options_pingFn c_soup_message_get_is_options_ping; ///
+private alias c_soup_message_get_is_top_level_navigationFn = extern(C) gboolean function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_is_top_level_navigationFn c_soup_message_get_is_top_level_navigation; ///
+private alias c_soup_message_get_methodFn = extern(C) const(char)* function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_methodFn c_soup_message_get_method; ///
+private alias c_soup_message_get_metricsFn = extern(C) SoupMessageMetrics* function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_metricsFn c_soup_message_get_metrics; ///
+private alias c_soup_message_get_priorityFn = extern(C) SoupMessagePriority function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_priorityFn c_soup_message_get_priority; ///
+private alias c_soup_message_get_reason_phraseFn = extern(C) const(char)* function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_reason_phraseFn c_soup_message_get_reason_phrase; ///
+private alias c_soup_message_get_remote_addressFn = extern(C) GSocketAddress* function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_remote_addressFn c_soup_message_get_remote_address; ///
+private alias c_soup_message_get_request_headersFn = extern(C) SoupMessageHeaders* function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_request_headersFn c_soup_message_get_request_headers; ///
+private alias c_soup_message_get_response_headersFn = extern(C) SoupMessageHeaders* function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_response_headersFn c_soup_message_get_response_headers; ///
+private alias c_soup_message_get_site_for_cookiesFn = extern(C) GUri* function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_site_for_cookiesFn c_soup_message_get_site_for_cookies; ///
+private alias c_soup_message_get_statusFn = extern(C) SoupStatus function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_statusFn c_soup_message_get_status; ///
+private alias c_soup_message_get_tls_ciphersuite_nameFn = extern(C) const(char)* function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_tls_ciphersuite_nameFn c_soup_message_get_tls_ciphersuite_name; ///
+private alias c_soup_message_get_tls_peer_certificateFn = extern(C) GTlsCertificate* function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_tls_peer_certificateFn c_soup_message_get_tls_peer_certificate; ///
+private alias c_soup_message_get_tls_peer_certificate_errorsFn = extern(C) GTlsCertificateFlags function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_tls_peer_certificate_errorsFn c_soup_message_get_tls_peer_certificate_errors; ///
+private alias c_soup_message_get_tls_protocol_versionFn = extern(C) GTlsProtocolVersion function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_tls_protocol_versionFn c_soup_message_get_tls_protocol_version; ///
+private alias c_soup_message_get_uriFn = extern(C) GUri* function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_get_uriFn c_soup_message_get_uri; ///
+private alias c_soup_message_is_feature_disabledFn = extern(C) gboolean function(SoupMessage* msg, GType featureType) nothrow;
+__gshared c_soup_message_is_feature_disabledFn c_soup_message_is_feature_disabled; ///
+private alias c_soup_message_is_keepaliveFn = extern(C) gboolean function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_is_keepaliveFn c_soup_message_is_keepalive; ///
+private alias c_soup_message_query_flagsFn = extern(C) gboolean function(SoupMessage* msg, SoupMessageFlags flags) nothrow;
+__gshared c_soup_message_query_flagsFn c_soup_message_query_flags; ///
+private alias c_soup_message_remove_flagsFn = extern(C) void function(SoupMessage* msg, SoupMessageFlags flags) nothrow;
+__gshared c_soup_message_remove_flagsFn c_soup_message_remove_flags; ///
+private alias c_soup_message_set_first_partyFn = extern(C) void function(SoupMessage* msg, GUri* firstParty) nothrow;
+__gshared c_soup_message_set_first_partyFn c_soup_message_set_first_party; ///
+private alias c_soup_message_set_flagsFn = extern(C) void function(SoupMessage* msg, SoupMessageFlags flags) nothrow;
+__gshared c_soup_message_set_flagsFn c_soup_message_set_flags; ///
+private alias c_soup_message_set_force_http1Fn = extern(C) void function(SoupMessage* msg, gboolean value) nothrow;
+__gshared c_soup_message_set_force_http1Fn c_soup_message_set_force_http1; ///
+private alias c_soup_message_set_is_options_pingFn = extern(C) void function(SoupMessage* msg, gboolean isOptionsPing) nothrow;
+__gshared c_soup_message_set_is_options_pingFn c_soup_message_set_is_options_ping; ///
+private alias c_soup_message_set_is_top_level_navigationFn = extern(C) void function(SoupMessage* msg, gboolean isTopLevelNavigation) nothrow;
+__gshared c_soup_message_set_is_top_level_navigationFn c_soup_message_set_is_top_level_navigation; ///
+private alias c_soup_message_set_methodFn = extern(C) void function(SoupMessage* msg, const(char)* method) nothrow;
+__gshared c_soup_message_set_methodFn c_soup_message_set_method; ///
+private alias c_soup_message_set_priorityFn = extern(C) void function(SoupMessage* msg, SoupMessagePriority priority) nothrow;
+__gshared c_soup_message_set_priorityFn c_soup_message_set_priority; ///
+private alias c_soup_message_set_request_bodyFn = extern(C) void function(SoupMessage* msg, const(char)* contentType, GInputStream* stream, ptrdiff_t contentLength) nothrow;
+__gshared c_soup_message_set_request_bodyFn c_soup_message_set_request_body; ///
+private alias c_soup_message_set_request_body_from_bytesFn = extern(C) void function(SoupMessage* msg, const(char)* contentType, GBytes* bytes) nothrow;
+__gshared c_soup_message_set_request_body_from_bytesFn c_soup_message_set_request_body_from_bytes; ///
+private alias c_soup_message_set_site_for_cookiesFn = extern(C) void function(SoupMessage* msg, GUri* siteForCookies) nothrow;
+__gshared c_soup_message_set_site_for_cookiesFn c_soup_message_set_site_for_cookies; ///
+private alias c_soup_message_set_tls_client_certificateFn = extern(C) void function(SoupMessage* msg, GTlsCertificate* certificate) nothrow;
+__gshared c_soup_message_set_tls_client_certificateFn c_soup_message_set_tls_client_certificate; ///
+private alias c_soup_message_set_uriFn = extern(C) void function(SoupMessage* msg, GUri* uri) nothrow;
+__gshared c_soup_message_set_uriFn c_soup_message_set_uri; ///
+private alias c_soup_message_tls_client_certificate_password_request_completeFn = extern(C) void function(SoupMessage* msg) nothrow;
+__gshared c_soup_message_tls_client_certificate_password_request_completeFn c_soup_message_tls_client_certificate_password_request_complete; ///
 
-  // MessageBody
-  GType function() c_soup_message_body_get_type; ///
-  SoupMessageBody* function() c_soup_message_body_new; ///
-  void function(SoupMessageBody* body_, SoupMemoryUse use, const(void)* data, size_t length) c_soup_message_body_append; ///
-  void function(SoupMessageBody* body_, GBytes* buffer) c_soup_message_body_append_bytes; ///
-  void function(SoupMessageBody* body_, ubyte* data, size_t length) c_soup_message_body_append_take; ///
-  void function(SoupMessageBody* body_) c_soup_message_body_complete; ///
-  GBytes* function(SoupMessageBody* body_) c_soup_message_body_flatten; ///
-  gboolean function(SoupMessageBody* body_) c_soup_message_body_get_accumulate; ///
-  GBytes* function(SoupMessageBody* body_, long offset) c_soup_message_body_get_chunk; ///
-  void function(SoupMessageBody* body_, GBytes* chunk) c_soup_message_body_got_chunk; ///
-  SoupMessageBody* function(SoupMessageBody* body_) c_soup_message_body_ref; ///
-  void function(SoupMessageBody* body_, gboolean accumulate) c_soup_message_body_set_accumulate; ///
-  void function(SoupMessageBody* body_) c_soup_message_body_truncate; ///
-  void function(SoupMessageBody* body_) c_soup_message_body_unref; ///
-  void function(SoupMessageBody* body_, GBytes* chunk) c_soup_message_body_wrote_chunk; ///
+// MessageBody
+private alias c_soup_message_body_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_message_body_get_typeFn c_soup_message_body_get_type; ///
+private alias c_soup_message_body_newFn = extern(C) SoupMessageBody* function() nothrow;
+__gshared c_soup_message_body_newFn c_soup_message_body_new; ///
+private alias c_soup_message_body_appendFn = extern(C) void function(SoupMessageBody* body_, SoupMemoryUse use, const(void)* data, size_t length) nothrow;
+__gshared c_soup_message_body_appendFn c_soup_message_body_append; ///
+private alias c_soup_message_body_append_bytesFn = extern(C) void function(SoupMessageBody* body_, GBytes* buffer) nothrow;
+__gshared c_soup_message_body_append_bytesFn c_soup_message_body_append_bytes; ///
+private alias c_soup_message_body_append_takeFn = extern(C) void function(SoupMessageBody* body_, ubyte* data, size_t length) nothrow;
+__gshared c_soup_message_body_append_takeFn c_soup_message_body_append_take; ///
+private alias c_soup_message_body_completeFn = extern(C) void function(SoupMessageBody* body_) nothrow;
+__gshared c_soup_message_body_completeFn c_soup_message_body_complete; ///
+private alias c_soup_message_body_flattenFn = extern(C) GBytes* function(SoupMessageBody* body_) nothrow;
+__gshared c_soup_message_body_flattenFn c_soup_message_body_flatten; ///
+private alias c_soup_message_body_get_accumulateFn = extern(C) gboolean function(SoupMessageBody* body_) nothrow;
+__gshared c_soup_message_body_get_accumulateFn c_soup_message_body_get_accumulate; ///
+private alias c_soup_message_body_get_chunkFn = extern(C) GBytes* function(SoupMessageBody* body_, long offset) nothrow;
+__gshared c_soup_message_body_get_chunkFn c_soup_message_body_get_chunk; ///
+private alias c_soup_message_body_got_chunkFn = extern(C) void function(SoupMessageBody* body_, GBytes* chunk) nothrow;
+__gshared c_soup_message_body_got_chunkFn c_soup_message_body_got_chunk; ///
+private alias c_soup_message_body_refFn = extern(C) SoupMessageBody* function(SoupMessageBody* body_) nothrow;
+__gshared c_soup_message_body_refFn c_soup_message_body_ref; ///
+private alias c_soup_message_body_set_accumulateFn = extern(C) void function(SoupMessageBody* body_, gboolean accumulate) nothrow;
+__gshared c_soup_message_body_set_accumulateFn c_soup_message_body_set_accumulate; ///
+private alias c_soup_message_body_truncateFn = extern(C) void function(SoupMessageBody* body_) nothrow;
+__gshared c_soup_message_body_truncateFn c_soup_message_body_truncate; ///
+private alias c_soup_message_body_unrefFn = extern(C) void function(SoupMessageBody* body_) nothrow;
+__gshared c_soup_message_body_unrefFn c_soup_message_body_unref; ///
+private alias c_soup_message_body_wrote_chunkFn = extern(C) void function(SoupMessageBody* body_, GBytes* chunk) nothrow;
+__gshared c_soup_message_body_wrote_chunkFn c_soup_message_body_wrote_chunk; ///
 
-  // MessageHeaders
-  GType function() c_soup_message_headers_get_type; ///
-  SoupMessageHeaders* function(SoupMessageHeadersType type) c_soup_message_headers_new; ///
-  void function(SoupMessageHeaders* hdrs, const(char)* name, const(char)* value) c_soup_message_headers_append; ///
-  void function(SoupMessageHeaders* hdrs) c_soup_message_headers_clean_connection_headers; ///
-  void function(SoupMessageHeaders* hdrs) c_soup_message_headers_clear; ///
-  void function(SoupMessageHeaders* hdrs, SoupMessageHeadersForeachFunc func, void* userData) c_soup_message_headers_foreach; ///
-  void function(SoupMessageHeaders* hdrs, SoupRange* ranges) c_soup_message_headers_free_ranges; ///
-  gboolean function(SoupMessageHeaders* hdrs, char** disposition, GHashTable** params) c_soup_message_headers_get_content_disposition; ///
-  long function(SoupMessageHeaders* hdrs) c_soup_message_headers_get_content_length; ///
-  gboolean function(SoupMessageHeaders* hdrs, long* start, long* end, long* totalLength) c_soup_message_headers_get_content_range; ///
-  const(char)* function(SoupMessageHeaders* hdrs, GHashTable** params) c_soup_message_headers_get_content_type; ///
-  SoupEncoding function(SoupMessageHeaders* hdrs) c_soup_message_headers_get_encoding; ///
-  SoupExpectation function(SoupMessageHeaders* hdrs) c_soup_message_headers_get_expectations; ///
-  SoupMessageHeadersType function(SoupMessageHeaders* hdrs) c_soup_message_headers_get_headers_type; ///
-  const(char)* function(SoupMessageHeaders* hdrs, const(char)* name) c_soup_message_headers_get_list; ///
-  const(char)* function(SoupMessageHeaders* hdrs, const(char)* name) c_soup_message_headers_get_one; ///
-  gboolean function(SoupMessageHeaders* hdrs, long totalLength, SoupRange** ranges, int* length) c_soup_message_headers_get_ranges; ///
-  gboolean function(SoupMessageHeaders* hdrs, const(char)* name, const(char)* token) c_soup_message_headers_header_contains; ///
-  gboolean function(SoupMessageHeaders* hdrs, const(char)* name, const(char)* value) c_soup_message_headers_header_equals; ///
-  SoupMessageHeaders* function(SoupMessageHeaders* hdrs) c_soup_message_headers_ref; ///
-  void function(SoupMessageHeaders* hdrs, const(char)* name) c_soup_message_headers_remove; ///
-  void function(SoupMessageHeaders* hdrs, const(char)* name, const(char)* value) c_soup_message_headers_replace; ///
-  void function(SoupMessageHeaders* hdrs, const(char)* disposition, GHashTable* params) c_soup_message_headers_set_content_disposition; ///
-  void function(SoupMessageHeaders* hdrs, long contentLength) c_soup_message_headers_set_content_length; ///
-  void function(SoupMessageHeaders* hdrs, long start, long end, long totalLength) c_soup_message_headers_set_content_range; ///
-  void function(SoupMessageHeaders* hdrs, const(char)* contentType, GHashTable* params) c_soup_message_headers_set_content_type; ///
-  void function(SoupMessageHeaders* hdrs, SoupEncoding encoding) c_soup_message_headers_set_encoding; ///
-  void function(SoupMessageHeaders* hdrs, SoupExpectation expectations) c_soup_message_headers_set_expectations; ///
-  void function(SoupMessageHeaders* hdrs, long start, long end) c_soup_message_headers_set_range; ///
-  void function(SoupMessageHeaders* hdrs, SoupRange* ranges, int length) c_soup_message_headers_set_ranges; ///
-  void function(SoupMessageHeaders* hdrs) c_soup_message_headers_unref; ///
+// MessageHeaders
+private alias c_soup_message_headers_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_message_headers_get_typeFn c_soup_message_headers_get_type; ///
+private alias c_soup_message_headers_newFn = extern(C) SoupMessageHeaders* function(SoupMessageHeadersType type) nothrow;
+__gshared c_soup_message_headers_newFn c_soup_message_headers_new; ///
+private alias c_soup_message_headers_appendFn = extern(C) void function(SoupMessageHeaders* hdrs, const(char)* name, const(char)* value) nothrow;
+__gshared c_soup_message_headers_appendFn c_soup_message_headers_append; ///
+private alias c_soup_message_headers_clean_connection_headersFn = extern(C) void function(SoupMessageHeaders* hdrs) nothrow;
+__gshared c_soup_message_headers_clean_connection_headersFn c_soup_message_headers_clean_connection_headers; ///
+private alias c_soup_message_headers_clearFn = extern(C) void function(SoupMessageHeaders* hdrs) nothrow;
+__gshared c_soup_message_headers_clearFn c_soup_message_headers_clear; ///
+private alias c_soup_message_headers_foreachFn = extern(C) void function(SoupMessageHeaders* hdrs, SoupMessageHeadersForeachFunc func, void* userData) nothrow;
+__gshared c_soup_message_headers_foreachFn c_soup_message_headers_foreach; ///
+private alias c_soup_message_headers_free_rangesFn = extern(C) void function(SoupMessageHeaders* hdrs, SoupRange* ranges) nothrow;
+__gshared c_soup_message_headers_free_rangesFn c_soup_message_headers_free_ranges; ///
+private alias c_soup_message_headers_get_content_dispositionFn = extern(C) gboolean function(SoupMessageHeaders* hdrs, char** disposition, GHashTable** params) nothrow;
+__gshared c_soup_message_headers_get_content_dispositionFn c_soup_message_headers_get_content_disposition; ///
+private alias c_soup_message_headers_get_content_lengthFn = extern(C) long function(SoupMessageHeaders* hdrs) nothrow;
+__gshared c_soup_message_headers_get_content_lengthFn c_soup_message_headers_get_content_length; ///
+private alias c_soup_message_headers_get_content_rangeFn = extern(C) gboolean function(SoupMessageHeaders* hdrs, long* start, long* end, long* totalLength) nothrow;
+__gshared c_soup_message_headers_get_content_rangeFn c_soup_message_headers_get_content_range; ///
+private alias c_soup_message_headers_get_content_typeFn = extern(C) const(char)* function(SoupMessageHeaders* hdrs, GHashTable** params) nothrow;
+__gshared c_soup_message_headers_get_content_typeFn c_soup_message_headers_get_content_type; ///
+private alias c_soup_message_headers_get_encodingFn = extern(C) SoupEncoding function(SoupMessageHeaders* hdrs) nothrow;
+__gshared c_soup_message_headers_get_encodingFn c_soup_message_headers_get_encoding; ///
+private alias c_soup_message_headers_get_expectationsFn = extern(C) SoupExpectation function(SoupMessageHeaders* hdrs) nothrow;
+__gshared c_soup_message_headers_get_expectationsFn c_soup_message_headers_get_expectations; ///
+private alias c_soup_message_headers_get_headers_typeFn = extern(C) SoupMessageHeadersType function(SoupMessageHeaders* hdrs) nothrow;
+__gshared c_soup_message_headers_get_headers_typeFn c_soup_message_headers_get_headers_type; ///
+private alias c_soup_message_headers_get_listFn = extern(C) const(char)* function(SoupMessageHeaders* hdrs, const(char)* name) nothrow;
+__gshared c_soup_message_headers_get_listFn c_soup_message_headers_get_list; ///
+private alias c_soup_message_headers_get_oneFn = extern(C) const(char)* function(SoupMessageHeaders* hdrs, const(char)* name) nothrow;
+__gshared c_soup_message_headers_get_oneFn c_soup_message_headers_get_one; ///
+private alias c_soup_message_headers_get_rangesFn = extern(C) gboolean function(SoupMessageHeaders* hdrs, long totalLength, SoupRange** ranges, int* length) nothrow;
+__gshared c_soup_message_headers_get_rangesFn c_soup_message_headers_get_ranges; ///
+private alias c_soup_message_headers_header_containsFn = extern(C) gboolean function(SoupMessageHeaders* hdrs, const(char)* name, const(char)* token) nothrow;
+__gshared c_soup_message_headers_header_containsFn c_soup_message_headers_header_contains; ///
+private alias c_soup_message_headers_header_equalsFn = extern(C) gboolean function(SoupMessageHeaders* hdrs, const(char)* name, const(char)* value) nothrow;
+__gshared c_soup_message_headers_header_equalsFn c_soup_message_headers_header_equals; ///
+private alias c_soup_message_headers_refFn = extern(C) SoupMessageHeaders* function(SoupMessageHeaders* hdrs) nothrow;
+__gshared c_soup_message_headers_refFn c_soup_message_headers_ref; ///
+private alias c_soup_message_headers_removeFn = extern(C) void function(SoupMessageHeaders* hdrs, const(char)* name) nothrow;
+__gshared c_soup_message_headers_removeFn c_soup_message_headers_remove; ///
+private alias c_soup_message_headers_replaceFn = extern(C) void function(SoupMessageHeaders* hdrs, const(char)* name, const(char)* value) nothrow;
+__gshared c_soup_message_headers_replaceFn c_soup_message_headers_replace; ///
+private alias c_soup_message_headers_set_content_dispositionFn = extern(C) void function(SoupMessageHeaders* hdrs, const(char)* disposition, GHashTable* params) nothrow;
+__gshared c_soup_message_headers_set_content_dispositionFn c_soup_message_headers_set_content_disposition; ///
+private alias c_soup_message_headers_set_content_lengthFn = extern(C) void function(SoupMessageHeaders* hdrs, long contentLength) nothrow;
+__gshared c_soup_message_headers_set_content_lengthFn c_soup_message_headers_set_content_length; ///
+private alias c_soup_message_headers_set_content_rangeFn = extern(C) void function(SoupMessageHeaders* hdrs, long start, long end, long totalLength) nothrow;
+__gshared c_soup_message_headers_set_content_rangeFn c_soup_message_headers_set_content_range; ///
+private alias c_soup_message_headers_set_content_typeFn = extern(C) void function(SoupMessageHeaders* hdrs, const(char)* contentType, GHashTable* params) nothrow;
+__gshared c_soup_message_headers_set_content_typeFn c_soup_message_headers_set_content_type; ///
+private alias c_soup_message_headers_set_encodingFn = extern(C) void function(SoupMessageHeaders* hdrs, SoupEncoding encoding) nothrow;
+__gshared c_soup_message_headers_set_encodingFn c_soup_message_headers_set_encoding; ///
+private alias c_soup_message_headers_set_expectationsFn = extern(C) void function(SoupMessageHeaders* hdrs, SoupExpectation expectations) nothrow;
+__gshared c_soup_message_headers_set_expectationsFn c_soup_message_headers_set_expectations; ///
+private alias c_soup_message_headers_set_rangeFn = extern(C) void function(SoupMessageHeaders* hdrs, long start, long end) nothrow;
+__gshared c_soup_message_headers_set_rangeFn c_soup_message_headers_set_range; ///
+private alias c_soup_message_headers_set_rangesFn = extern(C) void function(SoupMessageHeaders* hdrs, SoupRange* ranges, int length) nothrow;
+__gshared c_soup_message_headers_set_rangesFn c_soup_message_headers_set_ranges; ///
+private alias c_soup_message_headers_unrefFn = extern(C) void function(SoupMessageHeaders* hdrs) nothrow;
+__gshared c_soup_message_headers_unrefFn c_soup_message_headers_unref; ///
 
-  // MessageHeadersIter
-  void function(SoupMessageHeadersIter* iter, SoupMessageHeaders* hdrs) c_soup_message_headers_iter_init; ///
-  gboolean function(SoupMessageHeadersIter* iter, const(char*)* name, const(char*)* value) c_soup_message_headers_iter_next; ///
+// MessageHeadersIter
+private alias c_soup_message_headers_iter_initFn = extern(C) void function(SoupMessageHeadersIter* iter, SoupMessageHeaders* hdrs) nothrow;
+__gshared c_soup_message_headers_iter_initFn c_soup_message_headers_iter_init; ///
+private alias c_soup_message_headers_iter_nextFn = extern(C) gboolean function(SoupMessageHeadersIter* iter, const(char*)* name, const(char*)* value) nothrow;
+__gshared c_soup_message_headers_iter_nextFn c_soup_message_headers_iter_next; ///
 
-  // MessageMetrics
-  GType function() c_soup_message_metrics_get_type; ///
-  SoupMessageMetrics* function(SoupMessageMetrics* metrics) c_soup_message_metrics_copy; ///
-  void function(SoupMessageMetrics* metrics) c_soup_message_metrics_free; ///
-  ulong function(SoupMessageMetrics* metrics) c_soup_message_metrics_get_connect_end; ///
-  ulong function(SoupMessageMetrics* metrics) c_soup_message_metrics_get_connect_start; ///
-  ulong function(SoupMessageMetrics* metrics) c_soup_message_metrics_get_dns_end; ///
-  ulong function(SoupMessageMetrics* metrics) c_soup_message_metrics_get_dns_start; ///
-  ulong function(SoupMessageMetrics* metrics) c_soup_message_metrics_get_fetch_start; ///
-  ulong function(SoupMessageMetrics* metrics) c_soup_message_metrics_get_request_body_bytes_sent; ///
-  ulong function(SoupMessageMetrics* metrics) c_soup_message_metrics_get_request_body_size; ///
-  ulong function(SoupMessageMetrics* metrics) c_soup_message_metrics_get_request_header_bytes_sent; ///
-  ulong function(SoupMessageMetrics* metrics) c_soup_message_metrics_get_request_start; ///
-  ulong function(SoupMessageMetrics* metrics) c_soup_message_metrics_get_response_body_bytes_received; ///
-  ulong function(SoupMessageMetrics* metrics) c_soup_message_metrics_get_response_body_size; ///
-  ulong function(SoupMessageMetrics* metrics) c_soup_message_metrics_get_response_end; ///
-  ulong function(SoupMessageMetrics* metrics) c_soup_message_metrics_get_response_header_bytes_received; ///
-  ulong function(SoupMessageMetrics* metrics) c_soup_message_metrics_get_response_start; ///
-  ulong function(SoupMessageMetrics* metrics) c_soup_message_metrics_get_tls_start; ///
+// MessageMetrics
+private alias c_soup_message_metrics_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_message_metrics_get_typeFn c_soup_message_metrics_get_type; ///
+private alias c_soup_message_metrics_copyFn = extern(C) SoupMessageMetrics* function(SoupMessageMetrics* metrics) nothrow;
+__gshared c_soup_message_metrics_copyFn c_soup_message_metrics_copy; ///
+private alias c_soup_message_metrics_freeFn = extern(C) void function(SoupMessageMetrics* metrics) nothrow;
+__gshared c_soup_message_metrics_freeFn c_soup_message_metrics_free; ///
+private alias c_soup_message_metrics_get_connect_endFn = extern(C) ulong function(SoupMessageMetrics* metrics) nothrow;
+__gshared c_soup_message_metrics_get_connect_endFn c_soup_message_metrics_get_connect_end; ///
+private alias c_soup_message_metrics_get_connect_startFn = extern(C) ulong function(SoupMessageMetrics* metrics) nothrow;
+__gshared c_soup_message_metrics_get_connect_startFn c_soup_message_metrics_get_connect_start; ///
+private alias c_soup_message_metrics_get_dns_endFn = extern(C) ulong function(SoupMessageMetrics* metrics) nothrow;
+__gshared c_soup_message_metrics_get_dns_endFn c_soup_message_metrics_get_dns_end; ///
+private alias c_soup_message_metrics_get_dns_startFn = extern(C) ulong function(SoupMessageMetrics* metrics) nothrow;
+__gshared c_soup_message_metrics_get_dns_startFn c_soup_message_metrics_get_dns_start; ///
+private alias c_soup_message_metrics_get_fetch_startFn = extern(C) ulong function(SoupMessageMetrics* metrics) nothrow;
+__gshared c_soup_message_metrics_get_fetch_startFn c_soup_message_metrics_get_fetch_start; ///
+private alias c_soup_message_metrics_get_request_body_bytes_sentFn = extern(C) ulong function(SoupMessageMetrics* metrics) nothrow;
+__gshared c_soup_message_metrics_get_request_body_bytes_sentFn c_soup_message_metrics_get_request_body_bytes_sent; ///
+private alias c_soup_message_metrics_get_request_body_sizeFn = extern(C) ulong function(SoupMessageMetrics* metrics) nothrow;
+__gshared c_soup_message_metrics_get_request_body_sizeFn c_soup_message_metrics_get_request_body_size; ///
+private alias c_soup_message_metrics_get_request_header_bytes_sentFn = extern(C) ulong function(SoupMessageMetrics* metrics) nothrow;
+__gshared c_soup_message_metrics_get_request_header_bytes_sentFn c_soup_message_metrics_get_request_header_bytes_sent; ///
+private alias c_soup_message_metrics_get_request_startFn = extern(C) ulong function(SoupMessageMetrics* metrics) nothrow;
+__gshared c_soup_message_metrics_get_request_startFn c_soup_message_metrics_get_request_start; ///
+private alias c_soup_message_metrics_get_response_body_bytes_receivedFn = extern(C) ulong function(SoupMessageMetrics* metrics) nothrow;
+__gshared c_soup_message_metrics_get_response_body_bytes_receivedFn c_soup_message_metrics_get_response_body_bytes_received; ///
+private alias c_soup_message_metrics_get_response_body_sizeFn = extern(C) ulong function(SoupMessageMetrics* metrics) nothrow;
+__gshared c_soup_message_metrics_get_response_body_sizeFn c_soup_message_metrics_get_response_body_size; ///
+private alias c_soup_message_metrics_get_response_endFn = extern(C) ulong function(SoupMessageMetrics* metrics) nothrow;
+__gshared c_soup_message_metrics_get_response_endFn c_soup_message_metrics_get_response_end; ///
+private alias c_soup_message_metrics_get_response_header_bytes_receivedFn = extern(C) ulong function(SoupMessageMetrics* metrics) nothrow;
+__gshared c_soup_message_metrics_get_response_header_bytes_receivedFn c_soup_message_metrics_get_response_header_bytes_received; ///
+private alias c_soup_message_metrics_get_response_startFn = extern(C) ulong function(SoupMessageMetrics* metrics) nothrow;
+__gshared c_soup_message_metrics_get_response_startFn c_soup_message_metrics_get_response_start; ///
+private alias c_soup_message_metrics_get_tls_startFn = extern(C) ulong function(SoupMessageMetrics* metrics) nothrow;
+__gshared c_soup_message_metrics_get_tls_startFn c_soup_message_metrics_get_tls_start; ///
 
-  // Multipart
-  GType function() c_soup_multipart_get_type; ///
-  SoupMultipart* function(const(char)* mimeType) c_soup_multipart_new; ///
-  SoupMultipart* function(SoupMessageHeaders* headers, GBytes* body_) c_soup_multipart_new_from_message; ///
-  void function(SoupMultipart* multipart, const(char)* controlName, const(char)* filename, const(char)* contentType, GBytes* body_) c_soup_multipart_append_form_file; ///
-  void function(SoupMultipart* multipart, const(char)* controlName, const(char)* data) c_soup_multipart_append_form_string; ///
-  void function(SoupMultipart* multipart, SoupMessageHeaders* headers, GBytes* body_) c_soup_multipart_append_part; ///
-  void function(SoupMultipart* multipart) c_soup_multipart_free; ///
-  int function(SoupMultipart* multipart) c_soup_multipart_get_length; ///
-  gboolean function(SoupMultipart* multipart, int part, SoupMessageHeaders** headers, GBytes** body_) c_soup_multipart_get_part; ///
-  void function(SoupMultipart* multipart, SoupMessageHeaders* destHeaders, GBytes** destBody) c_soup_multipart_to_message; ///
+// Multipart
+private alias c_soup_multipart_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_multipart_get_typeFn c_soup_multipart_get_type; ///
+private alias c_soup_multipart_newFn = extern(C) SoupMultipart* function(const(char)* mimeType) nothrow;
+__gshared c_soup_multipart_newFn c_soup_multipart_new; ///
+private alias c_soup_multipart_new_from_messageFn = extern(C) SoupMultipart* function(SoupMessageHeaders* headers, GBytes* body_) nothrow;
+__gshared c_soup_multipart_new_from_messageFn c_soup_multipart_new_from_message; ///
+private alias c_soup_multipart_append_form_fileFn = extern(C) void function(SoupMultipart* multipart, const(char)* controlName, const(char)* filename, const(char)* contentType, GBytes* body_) nothrow;
+__gshared c_soup_multipart_append_form_fileFn c_soup_multipart_append_form_file; ///
+private alias c_soup_multipart_append_form_stringFn = extern(C) void function(SoupMultipart* multipart, const(char)* controlName, const(char)* data) nothrow;
+__gshared c_soup_multipart_append_form_stringFn c_soup_multipart_append_form_string; ///
+private alias c_soup_multipart_append_partFn = extern(C) void function(SoupMultipart* multipart, SoupMessageHeaders* headers, GBytes* body_) nothrow;
+__gshared c_soup_multipart_append_partFn c_soup_multipart_append_part; ///
+private alias c_soup_multipart_freeFn = extern(C) void function(SoupMultipart* multipart) nothrow;
+__gshared c_soup_multipart_freeFn c_soup_multipart_free; ///
+private alias c_soup_multipart_get_lengthFn = extern(C) int function(SoupMultipart* multipart) nothrow;
+__gshared c_soup_multipart_get_lengthFn c_soup_multipart_get_length; ///
+private alias c_soup_multipart_get_partFn = extern(C) gboolean function(SoupMultipart* multipart, int part, SoupMessageHeaders** headers, GBytes** body_) nothrow;
+__gshared c_soup_multipart_get_partFn c_soup_multipart_get_part; ///
+private alias c_soup_multipart_to_messageFn = extern(C) void function(SoupMultipart* multipart, SoupMessageHeaders* destHeaders, GBytes** destBody) nothrow;
+__gshared c_soup_multipart_to_messageFn c_soup_multipart_to_message; ///
 
-  // MultipartInputStream
-  GType function() c_soup_multipart_input_stream_get_type; ///
-  SoupMultipartInputStream* function(SoupMessage* msg, GInputStream* baseStream) c_soup_multipart_input_stream_new; ///
-  SoupMessageHeaders* function(SoupMultipartInputStream* multipart) c_soup_multipart_input_stream_get_headers; ///
-  GInputStream* function(SoupMultipartInputStream* multipart, GCancellable* cancellable, GError** _err) c_soup_multipart_input_stream_next_part; ///
-  void function(SoupMultipartInputStream* multipart, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* data) c_soup_multipart_input_stream_next_part_async; ///
-  GInputStream* function(SoupMultipartInputStream* multipart, GAsyncResult* result, GError** _err) c_soup_multipart_input_stream_next_part_finish; ///
+// MultipartInputStream
+private alias c_soup_multipart_input_stream_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_multipart_input_stream_get_typeFn c_soup_multipart_input_stream_get_type; ///
+private alias c_soup_multipart_input_stream_newFn = extern(C) SoupMultipartInputStream* function(SoupMessage* msg, GInputStream* baseStream) nothrow;
+__gshared c_soup_multipart_input_stream_newFn c_soup_multipart_input_stream_new; ///
+private alias c_soup_multipart_input_stream_get_headersFn = extern(C) SoupMessageHeaders* function(SoupMultipartInputStream* multipart) nothrow;
+__gshared c_soup_multipart_input_stream_get_headersFn c_soup_multipart_input_stream_get_headers; ///
+private alias c_soup_multipart_input_stream_next_partFn = extern(C) GInputStream* function(SoupMultipartInputStream* multipart, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_soup_multipart_input_stream_next_partFn c_soup_multipart_input_stream_next_part; ///
+private alias c_soup_multipart_input_stream_next_part_asyncFn = extern(C) void function(SoupMultipartInputStream* multipart, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* data) nothrow;
+__gshared c_soup_multipart_input_stream_next_part_asyncFn c_soup_multipart_input_stream_next_part_async; ///
+private alias c_soup_multipart_input_stream_next_part_finishFn = extern(C) GInputStream* function(SoupMultipartInputStream* multipart, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_soup_multipart_input_stream_next_part_finishFn c_soup_multipart_input_stream_next_part_finish; ///
 
-  // Server
-  GType function() c_soup_server_get_type; ///
-  SoupServer* function(const(char)* optname1,  ...) c_soup_server_new; ///
-  gboolean function(SoupServer* server, GIOStream* stream, GSocketAddress* localAddr, GSocketAddress* remoteAddr, GError** _err) c_soup_server_accept_iostream; ///
-  void function(SoupServer* server, SoupAuthDomain* authDomain) c_soup_server_add_auth_domain; ///
-  void function(SoupServer* server, const(char)* path, SoupServerCallback callback, void* userData, GDestroyNotify destroy) c_soup_server_add_early_handler; ///
-  void function(SoupServer* server, const(char)* path, SoupServerCallback callback, void* userData, GDestroyNotify destroy) c_soup_server_add_handler; ///
-  void function(SoupServer* server, GType extensionType) c_soup_server_add_websocket_extension; ///
-  void function(SoupServer* server, const(char)* path, const(char)* origin, char** protocols, SoupServerWebsocketCallback callback, void* userData, GDestroyNotify destroy) c_soup_server_add_websocket_handler; ///
-  void function(SoupServer* server) c_soup_server_disconnect; ///
-  GSList* function(SoupServer* server) c_soup_server_get_listeners; ///
-  GTlsAuthenticationMode function(SoupServer* server) c_soup_server_get_tls_auth_mode; ///
-  GTlsCertificate* function(SoupServer* server) c_soup_server_get_tls_certificate; ///
-  GTlsDatabase* function(SoupServer* server) c_soup_server_get_tls_database; ///
-  GSList* function(SoupServer* server) c_soup_server_get_uris; ///
-  gboolean function(SoupServer* server) c_soup_server_is_https; ///
-  gboolean function(SoupServer* server, GSocketAddress* address, SoupServerListenOptions options, GError** _err) c_soup_server_listen; ///
-  gboolean function(SoupServer* server, uint port, SoupServerListenOptions options, GError** _err) c_soup_server_listen_all; ///
-  gboolean function(SoupServer* server, uint port, SoupServerListenOptions options, GError** _err) c_soup_server_listen_local; ///
-  gboolean function(SoupServer* server, GSocket* socket, SoupServerListenOptions options, GError** _err) c_soup_server_listen_socket; ///
-  void function(SoupServer* server, SoupServerMessage* msg) c_soup_server_pause_message; ///
-  void function(SoupServer* server, SoupAuthDomain* authDomain) c_soup_server_remove_auth_domain; ///
-  void function(SoupServer* server, const(char)* path) c_soup_server_remove_handler; ///
-  void function(SoupServer* server, GType extensionType) c_soup_server_remove_websocket_extension; ///
-  void function(SoupServer* server, GTlsAuthenticationMode mode) c_soup_server_set_tls_auth_mode; ///
-  void function(SoupServer* server, GTlsCertificate* certificate) c_soup_server_set_tls_certificate; ///
-  void function(SoupServer* server, GTlsDatabase* tlsDatabase) c_soup_server_set_tls_database; ///
-  void function(SoupServer* server, SoupServerMessage* msg) c_soup_server_unpause_message; ///
+// Server
+private alias c_soup_server_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_server_get_typeFn c_soup_server_get_type; ///
+private alias c_soup_server_newFn = extern(C) SoupServer* function(const(char)* optname1,  ...) nothrow;
+__gshared c_soup_server_newFn c_soup_server_new; ///
+private alias c_soup_server_accept_iostreamFn = extern(C) gboolean function(SoupServer* server, GIOStream* stream, GSocketAddress* localAddr, GSocketAddress* remoteAddr, GError** _err) nothrow;
+__gshared c_soup_server_accept_iostreamFn c_soup_server_accept_iostream; ///
+private alias c_soup_server_add_auth_domainFn = extern(C) void function(SoupServer* server, SoupAuthDomain* authDomain) nothrow;
+__gshared c_soup_server_add_auth_domainFn c_soup_server_add_auth_domain; ///
+private alias c_soup_server_add_early_handlerFn = extern(C) void function(SoupServer* server, const(char)* path, SoupServerCallback callback, void* userData, GDestroyNotify destroy) nothrow;
+__gshared c_soup_server_add_early_handlerFn c_soup_server_add_early_handler; ///
+private alias c_soup_server_add_handlerFn = extern(C) void function(SoupServer* server, const(char)* path, SoupServerCallback callback, void* userData, GDestroyNotify destroy) nothrow;
+__gshared c_soup_server_add_handlerFn c_soup_server_add_handler; ///
+private alias c_soup_server_add_websocket_extensionFn = extern(C) void function(SoupServer* server, GType extensionType) nothrow;
+__gshared c_soup_server_add_websocket_extensionFn c_soup_server_add_websocket_extension; ///
+private alias c_soup_server_add_websocket_handlerFn = extern(C) void function(SoupServer* server, const(char)* path, const(char)* origin, char** protocols, SoupServerWebsocketCallback callback, void* userData, GDestroyNotify destroy) nothrow;
+__gshared c_soup_server_add_websocket_handlerFn c_soup_server_add_websocket_handler; ///
+private alias c_soup_server_disconnectFn = extern(C) void function(SoupServer* server) nothrow;
+__gshared c_soup_server_disconnectFn c_soup_server_disconnect; ///
+private alias c_soup_server_get_listenersFn = extern(C) GSList* function(SoupServer* server) nothrow;
+__gshared c_soup_server_get_listenersFn c_soup_server_get_listeners; ///
+private alias c_soup_server_get_tls_auth_modeFn = extern(C) GTlsAuthenticationMode function(SoupServer* server) nothrow;
+__gshared c_soup_server_get_tls_auth_modeFn c_soup_server_get_tls_auth_mode; ///
+private alias c_soup_server_get_tls_certificateFn = extern(C) GTlsCertificate* function(SoupServer* server) nothrow;
+__gshared c_soup_server_get_tls_certificateFn c_soup_server_get_tls_certificate; ///
+private alias c_soup_server_get_tls_databaseFn = extern(C) GTlsDatabase* function(SoupServer* server) nothrow;
+__gshared c_soup_server_get_tls_databaseFn c_soup_server_get_tls_database; ///
+private alias c_soup_server_get_urisFn = extern(C) GSList* function(SoupServer* server) nothrow;
+__gshared c_soup_server_get_urisFn c_soup_server_get_uris; ///
+private alias c_soup_server_is_httpsFn = extern(C) gboolean function(SoupServer* server) nothrow;
+__gshared c_soup_server_is_httpsFn c_soup_server_is_https; ///
+private alias c_soup_server_listenFn = extern(C) gboolean function(SoupServer* server, GSocketAddress* address, SoupServerListenOptions options, GError** _err) nothrow;
+__gshared c_soup_server_listenFn c_soup_server_listen; ///
+private alias c_soup_server_listen_allFn = extern(C) gboolean function(SoupServer* server, uint port, SoupServerListenOptions options, GError** _err) nothrow;
+__gshared c_soup_server_listen_allFn c_soup_server_listen_all; ///
+private alias c_soup_server_listen_localFn = extern(C) gboolean function(SoupServer* server, uint port, SoupServerListenOptions options, GError** _err) nothrow;
+__gshared c_soup_server_listen_localFn c_soup_server_listen_local; ///
+private alias c_soup_server_listen_socketFn = extern(C) gboolean function(SoupServer* server, GSocket* socket, SoupServerListenOptions options, GError** _err) nothrow;
+__gshared c_soup_server_listen_socketFn c_soup_server_listen_socket; ///
+private alias c_soup_server_pause_messageFn = extern(C) void function(SoupServer* server, SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_pause_messageFn c_soup_server_pause_message; ///
+private alias c_soup_server_remove_auth_domainFn = extern(C) void function(SoupServer* server, SoupAuthDomain* authDomain) nothrow;
+__gshared c_soup_server_remove_auth_domainFn c_soup_server_remove_auth_domain; ///
+private alias c_soup_server_remove_handlerFn = extern(C) void function(SoupServer* server, const(char)* path) nothrow;
+__gshared c_soup_server_remove_handlerFn c_soup_server_remove_handler; ///
+private alias c_soup_server_remove_websocket_extensionFn = extern(C) void function(SoupServer* server, GType extensionType) nothrow;
+__gshared c_soup_server_remove_websocket_extensionFn c_soup_server_remove_websocket_extension; ///
+private alias c_soup_server_set_tls_auth_modeFn = extern(C) void function(SoupServer* server, GTlsAuthenticationMode mode) nothrow;
+__gshared c_soup_server_set_tls_auth_modeFn c_soup_server_set_tls_auth_mode; ///
+private alias c_soup_server_set_tls_certificateFn = extern(C) void function(SoupServer* server, GTlsCertificate* certificate) nothrow;
+__gshared c_soup_server_set_tls_certificateFn c_soup_server_set_tls_certificate; ///
+private alias c_soup_server_set_tls_databaseFn = extern(C) void function(SoupServer* server, GTlsDatabase* tlsDatabase) nothrow;
+__gshared c_soup_server_set_tls_databaseFn c_soup_server_set_tls_database; ///
+private alias c_soup_server_unpause_messageFn = extern(C) void function(SoupServer* server, SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_unpause_messageFn c_soup_server_unpause_message; ///
 
-  // ServerMessage
-  GType function() c_soup_server_message_get_type; ///
-  SoupHTTPVersion function(SoupServerMessage* msg) c_soup_server_message_get_http_version; ///
-  GSocketAddress* function(SoupServerMessage* msg) c_soup_server_message_get_local_address; ///
-  const(char)* function(SoupServerMessage* msg) c_soup_server_message_get_method; ///
-  const(char)* function(SoupServerMessage* msg) c_soup_server_message_get_reason_phrase; ///
-  GSocketAddress* function(SoupServerMessage* msg) c_soup_server_message_get_remote_address; ///
-  const(char)* function(SoupServerMessage* msg) c_soup_server_message_get_remote_host; ///
-  SoupMessageBody* function(SoupServerMessage* msg) c_soup_server_message_get_request_body; ///
-  SoupMessageHeaders* function(SoupServerMessage* msg) c_soup_server_message_get_request_headers; ///
-  SoupMessageBody* function(SoupServerMessage* msg) c_soup_server_message_get_response_body; ///
-  SoupMessageHeaders* function(SoupServerMessage* msg) c_soup_server_message_get_response_headers; ///
-  GSocket* function(SoupServerMessage* msg) c_soup_server_message_get_socket; ///
-  uint function(SoupServerMessage* msg) c_soup_server_message_get_status; ///
-  GTlsCertificate* function(SoupServerMessage* msg) c_soup_server_message_get_tls_peer_certificate; ///
-  GTlsCertificateFlags function(SoupServerMessage* msg) c_soup_server_message_get_tls_peer_certificate_errors; ///
-  GUri* function(SoupServerMessage* msg) c_soup_server_message_get_uri; ///
-  gboolean function(SoupServerMessage* msg) c_soup_server_message_is_options_ping; ///
-  void function(SoupServerMessage* msg) c_soup_server_message_pause; ///
-  void function(SoupServerMessage* msg, SoupHTTPVersion version_) c_soup_server_message_set_http_version; ///
-  void function(SoupServerMessage* msg, uint statusCode, const(char)* redirectUri) c_soup_server_message_set_redirect; ///
-  void function(SoupServerMessage* msg, const(char)* contentType, SoupMemoryUse respUse, const(ubyte)* respBody, size_t respLength) c_soup_server_message_set_response; ///
-  void function(SoupServerMessage* msg, uint statusCode, const(char)* reasonPhrase) c_soup_server_message_set_status; ///
-  GIOStream* function(SoupServerMessage* msg) c_soup_server_message_steal_connection; ///
-  void function(SoupServerMessage* msg) c_soup_server_message_unpause; ///
+// ServerMessage
+private alias c_soup_server_message_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_server_message_get_typeFn c_soup_server_message_get_type; ///
+private alias c_soup_server_message_get_http_versionFn = extern(C) SoupHTTPVersion function(SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_message_get_http_versionFn c_soup_server_message_get_http_version; ///
+private alias c_soup_server_message_get_local_addressFn = extern(C) GSocketAddress* function(SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_message_get_local_addressFn c_soup_server_message_get_local_address; ///
+private alias c_soup_server_message_get_methodFn = extern(C) const(char)* function(SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_message_get_methodFn c_soup_server_message_get_method; ///
+private alias c_soup_server_message_get_reason_phraseFn = extern(C) const(char)* function(SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_message_get_reason_phraseFn c_soup_server_message_get_reason_phrase; ///
+private alias c_soup_server_message_get_remote_addressFn = extern(C) GSocketAddress* function(SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_message_get_remote_addressFn c_soup_server_message_get_remote_address; ///
+private alias c_soup_server_message_get_remote_hostFn = extern(C) const(char)* function(SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_message_get_remote_hostFn c_soup_server_message_get_remote_host; ///
+private alias c_soup_server_message_get_request_bodyFn = extern(C) SoupMessageBody* function(SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_message_get_request_bodyFn c_soup_server_message_get_request_body; ///
+private alias c_soup_server_message_get_request_headersFn = extern(C) SoupMessageHeaders* function(SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_message_get_request_headersFn c_soup_server_message_get_request_headers; ///
+private alias c_soup_server_message_get_response_bodyFn = extern(C) SoupMessageBody* function(SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_message_get_response_bodyFn c_soup_server_message_get_response_body; ///
+private alias c_soup_server_message_get_response_headersFn = extern(C) SoupMessageHeaders* function(SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_message_get_response_headersFn c_soup_server_message_get_response_headers; ///
+private alias c_soup_server_message_get_socketFn = extern(C) GSocket* function(SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_message_get_socketFn c_soup_server_message_get_socket; ///
+private alias c_soup_server_message_get_statusFn = extern(C) uint function(SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_message_get_statusFn c_soup_server_message_get_status; ///
+private alias c_soup_server_message_get_tls_peer_certificateFn = extern(C) GTlsCertificate* function(SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_message_get_tls_peer_certificateFn c_soup_server_message_get_tls_peer_certificate; ///
+private alias c_soup_server_message_get_tls_peer_certificate_errorsFn = extern(C) GTlsCertificateFlags function(SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_message_get_tls_peer_certificate_errorsFn c_soup_server_message_get_tls_peer_certificate_errors; ///
+private alias c_soup_server_message_get_uriFn = extern(C) GUri* function(SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_message_get_uriFn c_soup_server_message_get_uri; ///
+private alias c_soup_server_message_is_options_pingFn = extern(C) gboolean function(SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_message_is_options_pingFn c_soup_server_message_is_options_ping; ///
+private alias c_soup_server_message_pauseFn = extern(C) void function(SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_message_pauseFn c_soup_server_message_pause; ///
+private alias c_soup_server_message_set_http_versionFn = extern(C) void function(SoupServerMessage* msg, SoupHTTPVersion version_) nothrow;
+__gshared c_soup_server_message_set_http_versionFn c_soup_server_message_set_http_version; ///
+private alias c_soup_server_message_set_redirectFn = extern(C) void function(SoupServerMessage* msg, uint statusCode, const(char)* redirectUri) nothrow;
+__gshared c_soup_server_message_set_redirectFn c_soup_server_message_set_redirect; ///
+private alias c_soup_server_message_set_responseFn = extern(C) void function(SoupServerMessage* msg, const(char)* contentType, SoupMemoryUse respUse, const(ubyte)* respBody, size_t respLength) nothrow;
+__gshared c_soup_server_message_set_responseFn c_soup_server_message_set_response; ///
+private alias c_soup_server_message_set_statusFn = extern(C) void function(SoupServerMessage* msg, uint statusCode, const(char)* reasonPhrase) nothrow;
+__gshared c_soup_server_message_set_statusFn c_soup_server_message_set_status; ///
+private alias c_soup_server_message_steal_connectionFn = extern(C) GIOStream* function(SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_message_steal_connectionFn c_soup_server_message_steal_connection; ///
+private alias c_soup_server_message_unpauseFn = extern(C) void function(SoupServerMessage* msg) nothrow;
+__gshared c_soup_server_message_unpauseFn c_soup_server_message_unpause; ///
 
-  // Session
-  GType function() c_soup_session_get_type; ///
-  SoupSession* function() c_soup_session_new; ///
-  SoupSession* function(const(char)* optname1,  ...) c_soup_session_new_with_options; ///
-  void function(SoupSession* session) c_soup_session_abort; ///
-  void function(SoupSession* session, SoupSessionFeature* feature) c_soup_session_add_feature; ///
-  void function(SoupSession* session, GType featureType) c_soup_session_add_feature_by_type; ///
-  const(char)* function(SoupSession* session) c_soup_session_get_accept_language; ///
-  gboolean function(SoupSession* session) c_soup_session_get_accept_language_auto; ///
-  SoupMessage* function(SoupSession* session, GAsyncResult* result) c_soup_session_get_async_result_message; ///
-  SoupSessionFeature* function(SoupSession* session, GType featureType) c_soup_session_get_feature; ///
-  SoupSessionFeature* function(SoupSession* session, GType featureType, SoupMessage* msg) c_soup_session_get_feature_for_message; ///
-  uint function(SoupSession* session) c_soup_session_get_idle_timeout; ///
-  GInetSocketAddress* function(SoupSession* session) c_soup_session_get_local_address; ///
-  uint function(SoupSession* session) c_soup_session_get_max_conns; ///
-  uint function(SoupSession* session) c_soup_session_get_max_conns_per_host; ///
-  GProxyResolver* function(SoupSession* session) c_soup_session_get_proxy_resolver; ///
-  GSocketConnectable* function(SoupSession* session) c_soup_session_get_remote_connectable; ///
-  uint function(SoupSession* session) c_soup_session_get_timeout; ///
-  GTlsDatabase* function(SoupSession* session) c_soup_session_get_tls_database; ///
-  GTlsInteraction* function(SoupSession* session) c_soup_session_get_tls_interaction; ///
-  const(char)* function(SoupSession* session) c_soup_session_get_user_agent; ///
-  gboolean function(SoupSession* session, GType featureType) c_soup_session_has_feature; ///
-  void function(SoupSession* session, SoupMessage* msg, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_soup_session_preconnect_async; ///
-  gboolean function(SoupSession* session, GAsyncResult* result, GError** _err) c_soup_session_preconnect_finish; ///
-  void function(SoupSession* session, SoupSessionFeature* feature) c_soup_session_remove_feature; ///
-  void function(SoupSession* session, GType featureType) c_soup_session_remove_feature_by_type; ///
-  GInputStream* function(SoupSession* session, SoupMessage* msg, GCancellable* cancellable, GError** _err) c_soup_session_send; ///
-  GBytes* function(SoupSession* session, SoupMessage* msg, GCancellable* cancellable, GError** _err) c_soup_session_send_and_read; ///
-  void function(SoupSession* session, SoupMessage* msg, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_soup_session_send_and_read_async; ///
-  GBytes* function(SoupSession* session, GAsyncResult* result, GError** _err) c_soup_session_send_and_read_finish; ///
-  ptrdiff_t function(SoupSession* session, SoupMessage* msg, GOutputStream* outStream, GOutputStreamSpliceFlags flags, GCancellable* cancellable, GError** _err) c_soup_session_send_and_splice; ///
-  void function(SoupSession* session, SoupMessage* msg, GOutputStream* outStream, GOutputStreamSpliceFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_soup_session_send_and_splice_async; ///
-  ptrdiff_t function(SoupSession* session, GAsyncResult* result, GError** _err) c_soup_session_send_and_splice_finish; ///
-  void function(SoupSession* session, SoupMessage* msg, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_soup_session_send_async; ///
-  GInputStream* function(SoupSession* session, GAsyncResult* result, GError** _err) c_soup_session_send_finish; ///
-  void function(SoupSession* session, const(char)* acceptLanguage) c_soup_session_set_accept_language; ///
-  void function(SoupSession* session, gboolean acceptLanguageAuto) c_soup_session_set_accept_language_auto; ///
-  void function(SoupSession* session, uint timeout) c_soup_session_set_idle_timeout; ///
-  void function(SoupSession* session, GProxyResolver* proxyResolver) c_soup_session_set_proxy_resolver; ///
-  void function(SoupSession* session, uint timeout) c_soup_session_set_timeout; ///
-  void function(SoupSession* session, GTlsDatabase* tlsDatabase) c_soup_session_set_tls_database; ///
-  void function(SoupSession* session, GTlsInteraction* tlsInteraction) c_soup_session_set_tls_interaction; ///
-  void function(SoupSession* session, const(char)* userAgent) c_soup_session_set_user_agent; ///
-  void function(SoupSession* session, SoupMessage* msg, const(char)* origin, char** protocols, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_soup_session_websocket_connect_async; ///
-  SoupWebsocketConnection* function(SoupSession* session, GAsyncResult* result, GError** _err) c_soup_session_websocket_connect_finish; ///
+// Session
+private alias c_soup_session_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_session_get_typeFn c_soup_session_get_type; ///
+private alias c_soup_session_newFn = extern(C) SoupSession* function() nothrow;
+__gshared c_soup_session_newFn c_soup_session_new; ///
+private alias c_soup_session_new_with_optionsFn = extern(C) SoupSession* function(const(char)* optname1,  ...) nothrow;
+__gshared c_soup_session_new_with_optionsFn c_soup_session_new_with_options; ///
+private alias c_soup_session_abortFn = extern(C) void function(SoupSession* session) nothrow;
+__gshared c_soup_session_abortFn c_soup_session_abort; ///
+private alias c_soup_session_add_featureFn = extern(C) void function(SoupSession* session, SoupSessionFeature* feature) nothrow;
+__gshared c_soup_session_add_featureFn c_soup_session_add_feature; ///
+private alias c_soup_session_add_feature_by_typeFn = extern(C) void function(SoupSession* session, GType featureType) nothrow;
+__gshared c_soup_session_add_feature_by_typeFn c_soup_session_add_feature_by_type; ///
+private alias c_soup_session_get_accept_languageFn = extern(C) const(char)* function(SoupSession* session) nothrow;
+__gshared c_soup_session_get_accept_languageFn c_soup_session_get_accept_language; ///
+private alias c_soup_session_get_accept_language_autoFn = extern(C) gboolean function(SoupSession* session) nothrow;
+__gshared c_soup_session_get_accept_language_autoFn c_soup_session_get_accept_language_auto; ///
+private alias c_soup_session_get_async_result_messageFn = extern(C) SoupMessage* function(SoupSession* session, GAsyncResult* result) nothrow;
+__gshared c_soup_session_get_async_result_messageFn c_soup_session_get_async_result_message; ///
+private alias c_soup_session_get_featureFn = extern(C) SoupSessionFeature* function(SoupSession* session, GType featureType) nothrow;
+__gshared c_soup_session_get_featureFn c_soup_session_get_feature; ///
+private alias c_soup_session_get_feature_for_messageFn = extern(C) SoupSessionFeature* function(SoupSession* session, GType featureType, SoupMessage* msg) nothrow;
+__gshared c_soup_session_get_feature_for_messageFn c_soup_session_get_feature_for_message; ///
+private alias c_soup_session_get_idle_timeoutFn = extern(C) uint function(SoupSession* session) nothrow;
+__gshared c_soup_session_get_idle_timeoutFn c_soup_session_get_idle_timeout; ///
+private alias c_soup_session_get_local_addressFn = extern(C) GInetSocketAddress* function(SoupSession* session) nothrow;
+__gshared c_soup_session_get_local_addressFn c_soup_session_get_local_address; ///
+private alias c_soup_session_get_max_connsFn = extern(C) uint function(SoupSession* session) nothrow;
+__gshared c_soup_session_get_max_connsFn c_soup_session_get_max_conns; ///
+private alias c_soup_session_get_max_conns_per_hostFn = extern(C) uint function(SoupSession* session) nothrow;
+__gshared c_soup_session_get_max_conns_per_hostFn c_soup_session_get_max_conns_per_host; ///
+private alias c_soup_session_get_proxy_resolverFn = extern(C) GProxyResolver* function(SoupSession* session) nothrow;
+__gshared c_soup_session_get_proxy_resolverFn c_soup_session_get_proxy_resolver; ///
+private alias c_soup_session_get_remote_connectableFn = extern(C) GSocketConnectable* function(SoupSession* session) nothrow;
+__gshared c_soup_session_get_remote_connectableFn c_soup_session_get_remote_connectable; ///
+private alias c_soup_session_get_timeoutFn = extern(C) uint function(SoupSession* session) nothrow;
+__gshared c_soup_session_get_timeoutFn c_soup_session_get_timeout; ///
+private alias c_soup_session_get_tls_databaseFn = extern(C) GTlsDatabase* function(SoupSession* session) nothrow;
+__gshared c_soup_session_get_tls_databaseFn c_soup_session_get_tls_database; ///
+private alias c_soup_session_get_tls_interactionFn = extern(C) GTlsInteraction* function(SoupSession* session) nothrow;
+__gshared c_soup_session_get_tls_interactionFn c_soup_session_get_tls_interaction; ///
+private alias c_soup_session_get_user_agentFn = extern(C) const(char)* function(SoupSession* session) nothrow;
+__gshared c_soup_session_get_user_agentFn c_soup_session_get_user_agent; ///
+private alias c_soup_session_has_featureFn = extern(C) gboolean function(SoupSession* session, GType featureType) nothrow;
+__gshared c_soup_session_has_featureFn c_soup_session_has_feature; ///
+private alias c_soup_session_preconnect_asyncFn = extern(C) void function(SoupSession* session, SoupMessage* msg, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_soup_session_preconnect_asyncFn c_soup_session_preconnect_async; ///
+private alias c_soup_session_preconnect_finishFn = extern(C) gboolean function(SoupSession* session, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_soup_session_preconnect_finishFn c_soup_session_preconnect_finish; ///
+private alias c_soup_session_remove_featureFn = extern(C) void function(SoupSession* session, SoupSessionFeature* feature) nothrow;
+__gshared c_soup_session_remove_featureFn c_soup_session_remove_feature; ///
+private alias c_soup_session_remove_feature_by_typeFn = extern(C) void function(SoupSession* session, GType featureType) nothrow;
+__gshared c_soup_session_remove_feature_by_typeFn c_soup_session_remove_feature_by_type; ///
+private alias c_soup_session_sendFn = extern(C) GInputStream* function(SoupSession* session, SoupMessage* msg, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_soup_session_sendFn c_soup_session_send; ///
+private alias c_soup_session_send_and_readFn = extern(C) GBytes* function(SoupSession* session, SoupMessage* msg, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_soup_session_send_and_readFn c_soup_session_send_and_read; ///
+private alias c_soup_session_send_and_read_asyncFn = extern(C) void function(SoupSession* session, SoupMessage* msg, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_soup_session_send_and_read_asyncFn c_soup_session_send_and_read_async; ///
+private alias c_soup_session_send_and_read_finishFn = extern(C) GBytes* function(SoupSession* session, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_soup_session_send_and_read_finishFn c_soup_session_send_and_read_finish; ///
+private alias c_soup_session_send_and_spliceFn = extern(C) ptrdiff_t function(SoupSession* session, SoupMessage* msg, GOutputStream* outStream, GOutputStreamSpliceFlags flags, GCancellable* cancellable, GError** _err) nothrow;
+__gshared c_soup_session_send_and_spliceFn c_soup_session_send_and_splice; ///
+private alias c_soup_session_send_and_splice_asyncFn = extern(C) void function(SoupSession* session, SoupMessage* msg, GOutputStream* outStream, GOutputStreamSpliceFlags flags, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_soup_session_send_and_splice_asyncFn c_soup_session_send_and_splice_async; ///
+private alias c_soup_session_send_and_splice_finishFn = extern(C) ptrdiff_t function(SoupSession* session, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_soup_session_send_and_splice_finishFn c_soup_session_send_and_splice_finish; ///
+private alias c_soup_session_send_asyncFn = extern(C) void function(SoupSession* session, SoupMessage* msg, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_soup_session_send_asyncFn c_soup_session_send_async; ///
+private alias c_soup_session_send_finishFn = extern(C) GInputStream* function(SoupSession* session, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_soup_session_send_finishFn c_soup_session_send_finish; ///
+private alias c_soup_session_set_accept_languageFn = extern(C) void function(SoupSession* session, const(char)* acceptLanguage) nothrow;
+__gshared c_soup_session_set_accept_languageFn c_soup_session_set_accept_language; ///
+private alias c_soup_session_set_accept_language_autoFn = extern(C) void function(SoupSession* session, gboolean acceptLanguageAuto) nothrow;
+__gshared c_soup_session_set_accept_language_autoFn c_soup_session_set_accept_language_auto; ///
+private alias c_soup_session_set_idle_timeoutFn = extern(C) void function(SoupSession* session, uint timeout) nothrow;
+__gshared c_soup_session_set_idle_timeoutFn c_soup_session_set_idle_timeout; ///
+private alias c_soup_session_set_proxy_resolverFn = extern(C) void function(SoupSession* session, GProxyResolver* proxyResolver) nothrow;
+__gshared c_soup_session_set_proxy_resolverFn c_soup_session_set_proxy_resolver; ///
+private alias c_soup_session_set_timeoutFn = extern(C) void function(SoupSession* session, uint timeout) nothrow;
+__gshared c_soup_session_set_timeoutFn c_soup_session_set_timeout; ///
+private alias c_soup_session_set_tls_databaseFn = extern(C) void function(SoupSession* session, GTlsDatabase* tlsDatabase) nothrow;
+__gshared c_soup_session_set_tls_databaseFn c_soup_session_set_tls_database; ///
+private alias c_soup_session_set_tls_interactionFn = extern(C) void function(SoupSession* session, GTlsInteraction* tlsInteraction) nothrow;
+__gshared c_soup_session_set_tls_interactionFn c_soup_session_set_tls_interaction; ///
+private alias c_soup_session_set_user_agentFn = extern(C) void function(SoupSession* session, const(char)* userAgent) nothrow;
+__gshared c_soup_session_set_user_agentFn c_soup_session_set_user_agent; ///
+private alias c_soup_session_websocket_connect_asyncFn = extern(C) void function(SoupSession* session, SoupMessage* msg, const(char)* origin, char** protocols, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) nothrow;
+__gshared c_soup_session_websocket_connect_asyncFn c_soup_session_websocket_connect_async; ///
+private alias c_soup_session_websocket_connect_finishFn = extern(C) SoupWebsocketConnection* function(SoupSession* session, GAsyncResult* result, GError** _err) nothrow;
+__gshared c_soup_session_websocket_connect_finishFn c_soup_session_websocket_connect_finish; ///
 
-  // SessionFeature
-  GType function() c_soup_session_feature_get_type; ///
+// SessionFeature
+private alias c_soup_session_feature_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_session_feature_get_typeFn c_soup_session_feature_get_type; ///
 
-  // WebsocketConnection
-  GType function() c_soup_websocket_connection_get_type; ///
-  SoupWebsocketConnection* function(GIOStream* stream, GUri* uri, SoupWebsocketConnectionType type, const(char)* origin, const(char)* protocol, GList* extensions) c_soup_websocket_connection_new; ///
-  void function(SoupWebsocketConnection* self, ushort code, const(char)* data) c_soup_websocket_connection_close; ///
-  ushort function(SoupWebsocketConnection* self) c_soup_websocket_connection_get_close_code; ///
-  const(char)* function(SoupWebsocketConnection* self) c_soup_websocket_connection_get_close_data; ///
-  SoupWebsocketConnectionType function(SoupWebsocketConnection* self) c_soup_websocket_connection_get_connection_type; ///
-  GList* function(SoupWebsocketConnection* self) c_soup_websocket_connection_get_extensions; ///
-  GIOStream* function(SoupWebsocketConnection* self) c_soup_websocket_connection_get_io_stream; ///
-  uint function(SoupWebsocketConnection* self) c_soup_websocket_connection_get_keepalive_interval; ///
-  uint function(SoupWebsocketConnection* self) c_soup_websocket_connection_get_keepalive_pong_timeout; ///
-  ulong function(SoupWebsocketConnection* self) c_soup_websocket_connection_get_max_incoming_payload_size; ///
-  const(char)* function(SoupWebsocketConnection* self) c_soup_websocket_connection_get_origin; ///
-  const(char)* function(SoupWebsocketConnection* self) c_soup_websocket_connection_get_protocol; ///
-  SoupWebsocketState function(SoupWebsocketConnection* self) c_soup_websocket_connection_get_state; ///
-  GUri* function(SoupWebsocketConnection* self) c_soup_websocket_connection_get_uri; ///
-  void function(SoupWebsocketConnection* self, const(void)* data, size_t length) c_soup_websocket_connection_send_binary; ///
-  void function(SoupWebsocketConnection* self, SoupWebsocketDataType type, GBytes* message) c_soup_websocket_connection_send_message; ///
-  void function(SoupWebsocketConnection* self, const(char)* text) c_soup_websocket_connection_send_text; ///
-  void function(SoupWebsocketConnection* self, uint interval) c_soup_websocket_connection_set_keepalive_interval; ///
-  void function(SoupWebsocketConnection* self, uint pongTimeout) c_soup_websocket_connection_set_keepalive_pong_timeout; ///
-  void function(SoupWebsocketConnection* self, ulong maxIncomingPayloadSize) c_soup_websocket_connection_set_max_incoming_payload_size; ///
+// WebsocketConnection
+private alias c_soup_websocket_connection_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_websocket_connection_get_typeFn c_soup_websocket_connection_get_type; ///
+private alias c_soup_websocket_connection_newFn = extern(C) SoupWebsocketConnection* function(GIOStream* stream, GUri* uri, SoupWebsocketConnectionType type, const(char)* origin, const(char)* protocol, GList* extensions) nothrow;
+__gshared c_soup_websocket_connection_newFn c_soup_websocket_connection_new; ///
+private alias c_soup_websocket_connection_closeFn = extern(C) void function(SoupWebsocketConnection* self, ushort code, const(char)* data) nothrow;
+__gshared c_soup_websocket_connection_closeFn c_soup_websocket_connection_close; ///
+private alias c_soup_websocket_connection_get_close_codeFn = extern(C) ushort function(SoupWebsocketConnection* self) nothrow;
+__gshared c_soup_websocket_connection_get_close_codeFn c_soup_websocket_connection_get_close_code; ///
+private alias c_soup_websocket_connection_get_close_dataFn = extern(C) const(char)* function(SoupWebsocketConnection* self) nothrow;
+__gshared c_soup_websocket_connection_get_close_dataFn c_soup_websocket_connection_get_close_data; ///
+private alias c_soup_websocket_connection_get_connection_typeFn = extern(C) SoupWebsocketConnectionType function(SoupWebsocketConnection* self) nothrow;
+__gshared c_soup_websocket_connection_get_connection_typeFn c_soup_websocket_connection_get_connection_type; ///
+private alias c_soup_websocket_connection_get_extensionsFn = extern(C) GList* function(SoupWebsocketConnection* self) nothrow;
+__gshared c_soup_websocket_connection_get_extensionsFn c_soup_websocket_connection_get_extensions; ///
+private alias c_soup_websocket_connection_get_io_streamFn = extern(C) GIOStream* function(SoupWebsocketConnection* self) nothrow;
+__gshared c_soup_websocket_connection_get_io_streamFn c_soup_websocket_connection_get_io_stream; ///
+private alias c_soup_websocket_connection_get_keepalive_intervalFn = extern(C) uint function(SoupWebsocketConnection* self) nothrow;
+__gshared c_soup_websocket_connection_get_keepalive_intervalFn c_soup_websocket_connection_get_keepalive_interval; ///
+private alias c_soup_websocket_connection_get_keepalive_pong_timeoutFn = extern(C) uint function(SoupWebsocketConnection* self) nothrow;
+__gshared c_soup_websocket_connection_get_keepalive_pong_timeoutFn c_soup_websocket_connection_get_keepalive_pong_timeout; ///
+private alias c_soup_websocket_connection_get_max_incoming_payload_sizeFn = extern(C) ulong function(SoupWebsocketConnection* self) nothrow;
+__gshared c_soup_websocket_connection_get_max_incoming_payload_sizeFn c_soup_websocket_connection_get_max_incoming_payload_size; ///
+private alias c_soup_websocket_connection_get_originFn = extern(C) const(char)* function(SoupWebsocketConnection* self) nothrow;
+__gshared c_soup_websocket_connection_get_originFn c_soup_websocket_connection_get_origin; ///
+private alias c_soup_websocket_connection_get_protocolFn = extern(C) const(char)* function(SoupWebsocketConnection* self) nothrow;
+__gshared c_soup_websocket_connection_get_protocolFn c_soup_websocket_connection_get_protocol; ///
+private alias c_soup_websocket_connection_get_stateFn = extern(C) SoupWebsocketState function(SoupWebsocketConnection* self) nothrow;
+__gshared c_soup_websocket_connection_get_stateFn c_soup_websocket_connection_get_state; ///
+private alias c_soup_websocket_connection_get_uriFn = extern(C) GUri* function(SoupWebsocketConnection* self) nothrow;
+__gshared c_soup_websocket_connection_get_uriFn c_soup_websocket_connection_get_uri; ///
+private alias c_soup_websocket_connection_send_binaryFn = extern(C) void function(SoupWebsocketConnection* self, const(void)* data, size_t length) nothrow;
+__gshared c_soup_websocket_connection_send_binaryFn c_soup_websocket_connection_send_binary; ///
+private alias c_soup_websocket_connection_send_messageFn = extern(C) void function(SoupWebsocketConnection* self, SoupWebsocketDataType type, GBytes* message) nothrow;
+__gshared c_soup_websocket_connection_send_messageFn c_soup_websocket_connection_send_message; ///
+private alias c_soup_websocket_connection_send_textFn = extern(C) void function(SoupWebsocketConnection* self, const(char)* text) nothrow;
+__gshared c_soup_websocket_connection_send_textFn c_soup_websocket_connection_send_text; ///
+private alias c_soup_websocket_connection_set_keepalive_intervalFn = extern(C) void function(SoupWebsocketConnection* self, uint interval) nothrow;
+__gshared c_soup_websocket_connection_set_keepalive_intervalFn c_soup_websocket_connection_set_keepalive_interval; ///
+private alias c_soup_websocket_connection_set_keepalive_pong_timeoutFn = extern(C) void function(SoupWebsocketConnection* self, uint pongTimeout) nothrow;
+__gshared c_soup_websocket_connection_set_keepalive_pong_timeoutFn c_soup_websocket_connection_set_keepalive_pong_timeout; ///
+private alias c_soup_websocket_connection_set_max_incoming_payload_sizeFn = extern(C) void function(SoupWebsocketConnection* self, ulong maxIncomingPayloadSize) nothrow;
+__gshared c_soup_websocket_connection_set_max_incoming_payload_sizeFn c_soup_websocket_connection_set_max_incoming_payload_size; ///
 
-  // WebsocketExtension
-  GType function() c_soup_websocket_extension_get_type; ///
-  gboolean function(SoupWebsocketExtension* extension, SoupWebsocketConnectionType connectionType, GHashTable* params, GError** _err) c_soup_websocket_extension_configure; ///
-  char* function(SoupWebsocketExtension* extension) c_soup_websocket_extension_get_request_params; ///
-  char* function(SoupWebsocketExtension* extension) c_soup_websocket_extension_get_response_params; ///
-  GBytes* function(SoupWebsocketExtension* extension, ubyte* header, GBytes* payload, GError** _err) c_soup_websocket_extension_process_incoming_message; ///
-  GBytes* function(SoupWebsocketExtension* extension, ubyte* header, GBytes* payload, GError** _err) c_soup_websocket_extension_process_outgoing_message; ///
+// WebsocketExtension
+private alias c_soup_websocket_extension_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_websocket_extension_get_typeFn c_soup_websocket_extension_get_type; ///
+private alias c_soup_websocket_extension_configureFn = extern(C) gboolean function(SoupWebsocketExtension* extension, SoupWebsocketConnectionType connectionType, GHashTable* params, GError** _err) nothrow;
+__gshared c_soup_websocket_extension_configureFn c_soup_websocket_extension_configure; ///
+private alias c_soup_websocket_extension_get_request_paramsFn = extern(C) char* function(SoupWebsocketExtension* extension) nothrow;
+__gshared c_soup_websocket_extension_get_request_paramsFn c_soup_websocket_extension_get_request_params; ///
+private alias c_soup_websocket_extension_get_response_paramsFn = extern(C) char* function(SoupWebsocketExtension* extension) nothrow;
+__gshared c_soup_websocket_extension_get_response_paramsFn c_soup_websocket_extension_get_response_params; ///
+private alias c_soup_websocket_extension_process_incoming_messageFn = extern(C) GBytes* function(SoupWebsocketExtension* extension, ubyte* header, GBytes* payload, GError** _err) nothrow;
+__gshared c_soup_websocket_extension_process_incoming_messageFn c_soup_websocket_extension_process_incoming_message; ///
+private alias c_soup_websocket_extension_process_outgoing_messageFn = extern(C) GBytes* function(SoupWebsocketExtension* extension, ubyte* header, GBytes* payload, GError** _err) nothrow;
+__gshared c_soup_websocket_extension_process_outgoing_messageFn c_soup_websocket_extension_process_outgoing_message; ///
 
-  // WebsocketExtensionDeflate
-  GType function() c_soup_websocket_extension_deflate_get_type; ///
+// WebsocketExtensionDeflate
+private alias c_soup_websocket_extension_deflate_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_websocket_extension_deflate_get_typeFn c_soup_websocket_extension_deflate_get_type; ///
 
-  // WebsocketExtensionManager
-  GType function() c_soup_websocket_extension_manager_get_type; ///
+// WebsocketExtensionManager
+private alias c_soup_websocket_extension_manager_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_soup_websocket_extension_manager_get_typeFn c_soup_websocket_extension_manager_get_type; ///
 
-  // global
-  gboolean function(uint major, uint minor, uint micro) c_soup_check_version; ///
-  void function(GSList* cookies) c_soup_cookies_free; ///
-  GSList* function(SoupMessage* msg) c_soup_cookies_from_request; ///
-  GSList* function(SoupMessage* msg) c_soup_cookies_from_response; ///
-  char* function(GSList* cookies) c_soup_cookies_to_cookie_header; ///
-  void function(GSList* cookies, SoupMessage* msg) c_soup_cookies_to_request; ///
-  void function(GSList* cookies, SoupMessage* msg) c_soup_cookies_to_response; ///
-  GDateTime* function(const(char)* dateString) c_soup_date_time_new_from_http_string; ///
-  char* function(GDateTime* date, SoupDateFormat format) c_soup_date_time_to_string; ///
-  GHashTable* function(const(char)* encodedForm) c_soup_form_decode; ///
-  GHashTable* function(SoupMultipart* multipart, const(char)* fileControlName, char** filename, char** contentType, GBytes** file) c_soup_form_decode_multipart; ///
-  char* function(const(char)* firstField,  ...) c_soup_form_encode; ///
-  char* function(GData** formDataSet) c_soup_form_encode_datalist; ///
-  char* function(GHashTable* formDataSet) c_soup_form_encode_hash; ///
-  char* function(const(char)* firstField, void* args) c_soup_form_encode_valist; ///
-  uint function() c_soup_get_major_version; ///
-  uint function() c_soup_get_micro_version; ///
-  uint function() c_soup_get_minor_version; ///
-  gboolean function(const(char)* header, const(char)* token) c_soup_header_contains; ///
-  void function(GSList* list) c_soup_header_free_list; ///
-  void function(GHashTable* paramList) c_soup_header_free_param_list; ///
-  void function(GString* string_, const(char)* name, const(char)* value) c_soup_header_g_string_append_param; ///
-  void function(GString* string_, const(char)* name, const(char)* value) c_soup_header_g_string_append_param_quoted; ///
-  GSList* function(const(char)* header) c_soup_header_parse_list; ///
-  GHashTable* function(const(char)* header) c_soup_header_parse_param_list; ///
-  GHashTable* function(const(char)* header) c_soup_header_parse_param_list_strict; ///
-  GSList* function(const(char)* header, GSList** unacceptable) c_soup_header_parse_quality_list; ///
-  GHashTable* function(const(char)* header) c_soup_header_parse_semi_param_list; ///
-  GHashTable* function(const(char)* header) c_soup_header_parse_semi_param_list_strict; ///
-  gboolean function(const(char)* str, int len, SoupMessageHeaders* dest) c_soup_headers_parse; ///
-  uint function(const(char)* str, int len, SoupMessageHeaders* reqHeaders, char** reqMethod, char** reqPath, SoupHTTPVersion* ver) c_soup_headers_parse_request; ///
-  gboolean function(const(char)* str, int len, SoupMessageHeaders* headers, SoupHTTPVersion* ver, uint* statusCode, char** reasonPhrase) c_soup_headers_parse_response; ///
-  gboolean function(const(char)* statusLine, SoupHTTPVersion* ver, uint* statusCode, char** reasonPhrase) c_soup_headers_parse_status_line; ///
-  gboolean function(const(char)* domain) c_soup_tld_domain_is_public_suffix; ///
-  const(char)* function(const(char)* hostname, GError** _err) c_soup_tld_get_base_domain; ///
-  GUri* function(GUri* uri, SoupURIComponent firstComponent,  ...) c_soup_uri_copy; ///
-  GBytes* function(const(char)* uri, char** contentType) c_soup_uri_decode_data_uri; ///
-  gboolean function(GUri* uri1, GUri* uri2) c_soup_uri_equal; ///
-  void function(SoupMessage* msg, const(char)* origin, char** protocols, GPtrArray* supportedExtensions) c_soup_websocket_client_prepare_handshake; ///
-  gboolean function(SoupMessage* msg, GPtrArray* supportedExtensions, GList** acceptedExtensions, GError** _err) c_soup_websocket_client_verify_handshake; ///
-  gboolean function(SoupServerMessage* msg, const(char)* origin, char** protocols, GPtrArray* supportedExtensions, GError** _err) c_soup_websocket_server_check_handshake; ///
-  gboolean function(SoupServerMessage* msg, const(char)* expectedOrigin, char** protocols, GPtrArray* supportedExtensions, GList** acceptedExtensions) c_soup_websocket_server_process_handshake; ///
+// global
+private alias c_soup_check_versionFn = extern(C) gboolean function(uint major, uint minor, uint micro) nothrow;
+__gshared c_soup_check_versionFn c_soup_check_version; ///
+private alias c_soup_cookies_freeFn = extern(C) void function(GSList* cookies) nothrow;
+__gshared c_soup_cookies_freeFn c_soup_cookies_free; ///
+private alias c_soup_cookies_from_requestFn = extern(C) GSList* function(SoupMessage* msg) nothrow;
+__gshared c_soup_cookies_from_requestFn c_soup_cookies_from_request; ///
+private alias c_soup_cookies_from_responseFn = extern(C) GSList* function(SoupMessage* msg) nothrow;
+__gshared c_soup_cookies_from_responseFn c_soup_cookies_from_response; ///
+private alias c_soup_cookies_to_cookie_headerFn = extern(C) char* function(GSList* cookies) nothrow;
+__gshared c_soup_cookies_to_cookie_headerFn c_soup_cookies_to_cookie_header; ///
+private alias c_soup_cookies_to_requestFn = extern(C) void function(GSList* cookies, SoupMessage* msg) nothrow;
+__gshared c_soup_cookies_to_requestFn c_soup_cookies_to_request; ///
+private alias c_soup_cookies_to_responseFn = extern(C) void function(GSList* cookies, SoupMessage* msg) nothrow;
+__gshared c_soup_cookies_to_responseFn c_soup_cookies_to_response; ///
+private alias c_soup_date_time_new_from_http_stringFn = extern(C) GDateTime* function(const(char)* dateString) nothrow;
+__gshared c_soup_date_time_new_from_http_stringFn c_soup_date_time_new_from_http_string; ///
+private alias c_soup_date_time_to_stringFn = extern(C) char* function(GDateTime* date, SoupDateFormat format) nothrow;
+__gshared c_soup_date_time_to_stringFn c_soup_date_time_to_string; ///
+private alias c_soup_form_decodeFn = extern(C) GHashTable* function(const(char)* encodedForm) nothrow;
+__gshared c_soup_form_decodeFn c_soup_form_decode; ///
+private alias c_soup_form_decode_multipartFn = extern(C) GHashTable* function(SoupMultipart* multipart, const(char)* fileControlName, char** filename, char** contentType, GBytes** file) nothrow;
+__gshared c_soup_form_decode_multipartFn c_soup_form_decode_multipart; ///
+private alias c_soup_form_encodeFn = extern(C) char* function(const(char)* firstField,  ...) nothrow;
+__gshared c_soup_form_encodeFn c_soup_form_encode; ///
+private alias c_soup_form_encode_datalistFn = extern(C) char* function(GData** formDataSet) nothrow;
+__gshared c_soup_form_encode_datalistFn c_soup_form_encode_datalist; ///
+private alias c_soup_form_encode_hashFn = extern(C) char* function(GHashTable* formDataSet) nothrow;
+__gshared c_soup_form_encode_hashFn c_soup_form_encode_hash; ///
+private alias c_soup_form_encode_valistFn = extern(C) char* function(const(char)* firstField, void* args) nothrow;
+__gshared c_soup_form_encode_valistFn c_soup_form_encode_valist; ///
+private alias c_soup_get_major_versionFn = extern(C) uint function() nothrow;
+__gshared c_soup_get_major_versionFn c_soup_get_major_version; ///
+private alias c_soup_get_micro_versionFn = extern(C) uint function() nothrow;
+__gshared c_soup_get_micro_versionFn c_soup_get_micro_version; ///
+private alias c_soup_get_minor_versionFn = extern(C) uint function() nothrow;
+__gshared c_soup_get_minor_versionFn c_soup_get_minor_version; ///
+private alias c_soup_header_containsFn = extern(C) gboolean function(const(char)* header, const(char)* token) nothrow;
+__gshared c_soup_header_containsFn c_soup_header_contains; ///
+private alias c_soup_header_free_listFn = extern(C) void function(GSList* list) nothrow;
+__gshared c_soup_header_free_listFn c_soup_header_free_list; ///
+private alias c_soup_header_free_param_listFn = extern(C) void function(GHashTable* paramList) nothrow;
+__gshared c_soup_header_free_param_listFn c_soup_header_free_param_list; ///
+private alias c_soup_header_g_string_append_paramFn = extern(C) void function(GString* string_, const(char)* name, const(char)* value) nothrow;
+__gshared c_soup_header_g_string_append_paramFn c_soup_header_g_string_append_param; ///
+private alias c_soup_header_g_string_append_param_quotedFn = extern(C) void function(GString* string_, const(char)* name, const(char)* value) nothrow;
+__gshared c_soup_header_g_string_append_param_quotedFn c_soup_header_g_string_append_param_quoted; ///
+private alias c_soup_header_parse_listFn = extern(C) GSList* function(const(char)* header) nothrow;
+__gshared c_soup_header_parse_listFn c_soup_header_parse_list; ///
+private alias c_soup_header_parse_param_listFn = extern(C) GHashTable* function(const(char)* header) nothrow;
+__gshared c_soup_header_parse_param_listFn c_soup_header_parse_param_list; ///
+private alias c_soup_header_parse_param_list_strictFn = extern(C) GHashTable* function(const(char)* header) nothrow;
+__gshared c_soup_header_parse_param_list_strictFn c_soup_header_parse_param_list_strict; ///
+private alias c_soup_header_parse_quality_listFn = extern(C) GSList* function(const(char)* header, GSList** unacceptable) nothrow;
+__gshared c_soup_header_parse_quality_listFn c_soup_header_parse_quality_list; ///
+private alias c_soup_header_parse_semi_param_listFn = extern(C) GHashTable* function(const(char)* header) nothrow;
+__gshared c_soup_header_parse_semi_param_listFn c_soup_header_parse_semi_param_list; ///
+private alias c_soup_header_parse_semi_param_list_strictFn = extern(C) GHashTable* function(const(char)* header) nothrow;
+__gshared c_soup_header_parse_semi_param_list_strictFn c_soup_header_parse_semi_param_list_strict; ///
+private alias c_soup_headers_parseFn = extern(C) gboolean function(const(char)* str, int len, SoupMessageHeaders* dest) nothrow;
+__gshared c_soup_headers_parseFn c_soup_headers_parse; ///
+private alias c_soup_headers_parse_requestFn = extern(C) uint function(const(char)* str, int len, SoupMessageHeaders* reqHeaders, char** reqMethod, char** reqPath, SoupHTTPVersion* ver) nothrow;
+__gshared c_soup_headers_parse_requestFn c_soup_headers_parse_request; ///
+private alias c_soup_headers_parse_responseFn = extern(C) gboolean function(const(char)* str, int len, SoupMessageHeaders* headers, SoupHTTPVersion* ver, uint* statusCode, char** reasonPhrase) nothrow;
+__gshared c_soup_headers_parse_responseFn c_soup_headers_parse_response; ///
+private alias c_soup_headers_parse_status_lineFn = extern(C) gboolean function(const(char)* statusLine, SoupHTTPVersion* ver, uint* statusCode, char** reasonPhrase) nothrow;
+__gshared c_soup_headers_parse_status_lineFn c_soup_headers_parse_status_line; ///
+private alias c_soup_tld_domain_is_public_suffixFn = extern(C) gboolean function(const(char)* domain) nothrow;
+__gshared c_soup_tld_domain_is_public_suffixFn c_soup_tld_domain_is_public_suffix; ///
+private alias c_soup_tld_get_base_domainFn = extern(C) const(char)* function(const(char)* hostname, GError** _err) nothrow;
+__gshared c_soup_tld_get_base_domainFn c_soup_tld_get_base_domain; ///
+private alias c_soup_uri_copyFn = extern(C) GUri* function(GUri* uri, SoupURIComponent firstComponent,  ...) nothrow;
+__gshared c_soup_uri_copyFn c_soup_uri_copy; ///
+private alias c_soup_uri_decode_data_uriFn = extern(C) GBytes* function(const(char)* uri, char** contentType) nothrow;
+__gshared c_soup_uri_decode_data_uriFn c_soup_uri_decode_data_uri; ///
+private alias c_soup_uri_equalFn = extern(C) gboolean function(GUri* uri1, GUri* uri2) nothrow;
+__gshared c_soup_uri_equalFn c_soup_uri_equal; ///
+private alias c_soup_websocket_client_prepare_handshakeFn = extern(C) void function(SoupMessage* msg, const(char)* origin, char** protocols, GPtrArray* supportedExtensions) nothrow;
+__gshared c_soup_websocket_client_prepare_handshakeFn c_soup_websocket_client_prepare_handshake; ///
+private alias c_soup_websocket_client_verify_handshakeFn = extern(C) gboolean function(SoupMessage* msg, GPtrArray* supportedExtensions, GList** acceptedExtensions, GError** _err) nothrow;
+__gshared c_soup_websocket_client_verify_handshakeFn c_soup_websocket_client_verify_handshake; ///
+private alias c_soup_websocket_server_check_handshakeFn = extern(C) gboolean function(SoupServerMessage* msg, const(char)* origin, char** protocols, GPtrArray* supportedExtensions, GError** _err) nothrow;
+__gshared c_soup_websocket_server_check_handshakeFn c_soup_websocket_server_check_handshake; ///
+private alias c_soup_websocket_server_process_handshakeFn = extern(C) gboolean function(SoupServerMessage* msg, const(char)* expectedOrigin, char** protocols, GPtrArray* supportedExtensions, GList** acceptedExtensions) nothrow;
+__gshared c_soup_websocket_server_process_handshakeFn c_soup_websocket_server_process_handshake; ///
 
-  // SessionError
-  GQuark function() c_soup_session_error_quark; ///
+// SessionError
+private alias c_soup_session_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_soup_session_error_quarkFn c_soup_session_error_quark; ///
 
-  // Status
-  const(char)* function(uint statusCode) c_soup_status_get_phrase; ///
+// Status
+private alias c_soup_status_get_phraseFn = extern(C) const(char)* function(uint statusCode) nothrow;
+__gshared c_soup_status_get_phraseFn c_soup_status_get_phrase; ///
 
-  // TLDError
-  GQuark function() c_soup_tld_error_quark; ///
+// TLDError
+private alias c_soup_tld_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_soup_tld_error_quarkFn c_soup_tld_error_quark; ///
 
-  // WebsocketError
-  GQuark function() c_soup_websocket_error_quark; ///
-}
+// WebsocketError
+private alias c_soup_websocket_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_soup_websocket_error_quarkFn c_soup_websocket_error_quark; ///
 
 // Auth
 

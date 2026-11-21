@@ -8,372 +8,653 @@ public import gid.gobject2.c.types;
 
 private immutable LIBS = ["atk-1.0_0"];
 
-__gshared extern(C) nothrow
-{
-  // Action
-  GType function() c_atk_action_get_type; ///
-  gboolean function(AtkAction* action, int i) c_atk_action_do_action; ///
-  const(char)* function(AtkAction* action, int i) c_atk_action_get_description; ///
-  const(char)* function(AtkAction* action, int i) c_atk_action_get_keybinding; ///
-  const(char)* function(AtkAction* action, int i) c_atk_action_get_localized_name; ///
-  int function(AtkAction* action) c_atk_action_get_n_actions; ///
-  const(char)* function(AtkAction* action, int i) c_atk_action_get_name; ///
-  gboolean function(AtkAction* action, int i, const(char)* desc) c_atk_action_set_description; ///
+// Action
+private alias c_atk_action_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_action_get_typeFn c_atk_action_get_type; ///
+private alias c_atk_action_do_actionFn = extern(C) gboolean function(AtkAction* action, int i) nothrow;
+__gshared c_atk_action_do_actionFn c_atk_action_do_action; ///
+private alias c_atk_action_get_descriptionFn = extern(C) const(char)* function(AtkAction* action, int i) nothrow;
+__gshared c_atk_action_get_descriptionFn c_atk_action_get_description; ///
+private alias c_atk_action_get_keybindingFn = extern(C) const(char)* function(AtkAction* action, int i) nothrow;
+__gshared c_atk_action_get_keybindingFn c_atk_action_get_keybinding; ///
+private alias c_atk_action_get_localized_nameFn = extern(C) const(char)* function(AtkAction* action, int i) nothrow;
+__gshared c_atk_action_get_localized_nameFn c_atk_action_get_localized_name; ///
+private alias c_atk_action_get_n_actionsFn = extern(C) int function(AtkAction* action) nothrow;
+__gshared c_atk_action_get_n_actionsFn c_atk_action_get_n_actions; ///
+private alias c_atk_action_get_nameFn = extern(C) const(char)* function(AtkAction* action, int i) nothrow;
+__gshared c_atk_action_get_nameFn c_atk_action_get_name; ///
+private alias c_atk_action_set_descriptionFn = extern(C) gboolean function(AtkAction* action, int i, const(char)* desc) nothrow;
+__gshared c_atk_action_set_descriptionFn c_atk_action_set_description; ///
 
-  // Attribute
-  void function(AtkAttributeSet* attribSet) c_atk_attribute_set_free; ///
+// Attribute
+private alias c_atk_attribute_set_freeFn = extern(C) void function(AtkAttributeSet* attribSet) nothrow;
+__gshared c_atk_attribute_set_freeFn c_atk_attribute_set_free; ///
 
-  // Component
-  GType function() c_atk_component_get_type; ///
-  uint function(AtkComponent* component, AtkFocusHandler handler) c_atk_component_add_focus_handler; ///
-  gboolean function(AtkComponent* component, int x, int y, AtkCoordType coordType) c_atk_component_contains; ///
-  double function(AtkComponent* component) c_atk_component_get_alpha; ///
-  void function(AtkComponent* component, int* x, int* y, int* width, int* height, AtkCoordType coordType) c_atk_component_get_extents; ///
-  AtkLayer function(AtkComponent* component) c_atk_component_get_layer; ///
-  int function(AtkComponent* component) c_atk_component_get_mdi_zorder; ///
-  void function(AtkComponent* component, int* x, int* y, AtkCoordType coordType) c_atk_component_get_position; ///
-  void function(AtkComponent* component, int* width, int* height) c_atk_component_get_size; ///
-  gboolean function(AtkComponent* component) c_atk_component_grab_focus; ///
-  AtkObject* function(AtkComponent* component, int x, int y, AtkCoordType coordType) c_atk_component_ref_accessible_at_point; ///
-  void function(AtkComponent* component, uint handlerId) c_atk_component_remove_focus_handler; ///
-  gboolean function(AtkComponent* component, AtkScrollType type) c_atk_component_scroll_to; ///
-  gboolean function(AtkComponent* component, AtkCoordType coords, int x, int y) c_atk_component_scroll_to_point; ///
-  gboolean function(AtkComponent* component, int x, int y, int width, int height, AtkCoordType coordType) c_atk_component_set_extents; ///
-  gboolean function(AtkComponent* component, int x, int y, AtkCoordType coordType) c_atk_component_set_position; ///
-  gboolean function(AtkComponent* component, int width, int height) c_atk_component_set_size; ///
+// Component
+private alias c_atk_component_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_component_get_typeFn c_atk_component_get_type; ///
+private alias c_atk_component_add_focus_handlerFn = extern(C) uint function(AtkComponent* component, AtkFocusHandler handler) nothrow;
+__gshared c_atk_component_add_focus_handlerFn c_atk_component_add_focus_handler; ///
+private alias c_atk_component_containsFn = extern(C) gboolean function(AtkComponent* component, int x, int y, AtkCoordType coordType) nothrow;
+__gshared c_atk_component_containsFn c_atk_component_contains; ///
+private alias c_atk_component_get_alphaFn = extern(C) double function(AtkComponent* component) nothrow;
+__gshared c_atk_component_get_alphaFn c_atk_component_get_alpha; ///
+private alias c_atk_component_get_extentsFn = extern(C) void function(AtkComponent* component, int* x, int* y, int* width, int* height, AtkCoordType coordType) nothrow;
+__gshared c_atk_component_get_extentsFn c_atk_component_get_extents; ///
+private alias c_atk_component_get_layerFn = extern(C) AtkLayer function(AtkComponent* component) nothrow;
+__gshared c_atk_component_get_layerFn c_atk_component_get_layer; ///
+private alias c_atk_component_get_mdi_zorderFn = extern(C) int function(AtkComponent* component) nothrow;
+__gshared c_atk_component_get_mdi_zorderFn c_atk_component_get_mdi_zorder; ///
+private alias c_atk_component_get_positionFn = extern(C) void function(AtkComponent* component, int* x, int* y, AtkCoordType coordType) nothrow;
+__gshared c_atk_component_get_positionFn c_atk_component_get_position; ///
+private alias c_atk_component_get_sizeFn = extern(C) void function(AtkComponent* component, int* width, int* height) nothrow;
+__gshared c_atk_component_get_sizeFn c_atk_component_get_size; ///
+private alias c_atk_component_grab_focusFn = extern(C) gboolean function(AtkComponent* component) nothrow;
+__gshared c_atk_component_grab_focusFn c_atk_component_grab_focus; ///
+private alias c_atk_component_ref_accessible_at_pointFn = extern(C) AtkObject* function(AtkComponent* component, int x, int y, AtkCoordType coordType) nothrow;
+__gshared c_atk_component_ref_accessible_at_pointFn c_atk_component_ref_accessible_at_point; ///
+private alias c_atk_component_remove_focus_handlerFn = extern(C) void function(AtkComponent* component, uint handlerId) nothrow;
+__gshared c_atk_component_remove_focus_handlerFn c_atk_component_remove_focus_handler; ///
+private alias c_atk_component_scroll_toFn = extern(C) gboolean function(AtkComponent* component, AtkScrollType type) nothrow;
+__gshared c_atk_component_scroll_toFn c_atk_component_scroll_to; ///
+private alias c_atk_component_scroll_to_pointFn = extern(C) gboolean function(AtkComponent* component, AtkCoordType coords, int x, int y) nothrow;
+__gshared c_atk_component_scroll_to_pointFn c_atk_component_scroll_to_point; ///
+private alias c_atk_component_set_extentsFn = extern(C) gboolean function(AtkComponent* component, int x, int y, int width, int height, AtkCoordType coordType) nothrow;
+__gshared c_atk_component_set_extentsFn c_atk_component_set_extents; ///
+private alias c_atk_component_set_positionFn = extern(C) gboolean function(AtkComponent* component, int x, int y, AtkCoordType coordType) nothrow;
+__gshared c_atk_component_set_positionFn c_atk_component_set_position; ///
+private alias c_atk_component_set_sizeFn = extern(C) gboolean function(AtkComponent* component, int width, int height) nothrow;
+__gshared c_atk_component_set_sizeFn c_atk_component_set_size; ///
 
-  // Document
-  GType function() c_atk_document_get_type; ///
-  const(char)* function(AtkDocument* document, const(char)* attributeName) c_atk_document_get_attribute_value; ///
-  AtkAttributeSet* function(AtkDocument* document) c_atk_document_get_attributes; ///
-  int function(AtkDocument* document) c_atk_document_get_current_page_number; ///
-  void* function(AtkDocument* document) c_atk_document_get_document; ///
-  const(char)* function(AtkDocument* document) c_atk_document_get_document_type; ///
-  const(char)* function(AtkDocument* document) c_atk_document_get_locale; ///
-  int function(AtkDocument* document) c_atk_document_get_page_count; ///
-  GArray* function(AtkDocument* document) c_atk_document_get_text_selections; ///
-  gboolean function(AtkDocument* document, const(char)* attributeName, const(char)* attributeValue) c_atk_document_set_attribute_value; ///
-  gboolean function(AtkDocument* document, GArray* selections) c_atk_document_set_text_selections; ///
+// Document
+private alias c_atk_document_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_document_get_typeFn c_atk_document_get_type; ///
+private alias c_atk_document_get_attribute_valueFn = extern(C) const(char)* function(AtkDocument* document, const(char)* attributeName) nothrow;
+__gshared c_atk_document_get_attribute_valueFn c_atk_document_get_attribute_value; ///
+private alias c_atk_document_get_attributesFn = extern(C) AtkAttributeSet* function(AtkDocument* document) nothrow;
+__gshared c_atk_document_get_attributesFn c_atk_document_get_attributes; ///
+private alias c_atk_document_get_current_page_numberFn = extern(C) int function(AtkDocument* document) nothrow;
+__gshared c_atk_document_get_current_page_numberFn c_atk_document_get_current_page_number; ///
+private alias c_atk_document_get_documentFn = extern(C) void* function(AtkDocument* document) nothrow;
+__gshared c_atk_document_get_documentFn c_atk_document_get_document; ///
+private alias c_atk_document_get_document_typeFn = extern(C) const(char)* function(AtkDocument* document) nothrow;
+__gshared c_atk_document_get_document_typeFn c_atk_document_get_document_type; ///
+private alias c_atk_document_get_localeFn = extern(C) const(char)* function(AtkDocument* document) nothrow;
+__gshared c_atk_document_get_localeFn c_atk_document_get_locale; ///
+private alias c_atk_document_get_page_countFn = extern(C) int function(AtkDocument* document) nothrow;
+__gshared c_atk_document_get_page_countFn c_atk_document_get_page_count; ///
+private alias c_atk_document_get_text_selectionsFn = extern(C) GArray* function(AtkDocument* document) nothrow;
+__gshared c_atk_document_get_text_selectionsFn c_atk_document_get_text_selections; ///
+private alias c_atk_document_set_attribute_valueFn = extern(C) gboolean function(AtkDocument* document, const(char)* attributeName, const(char)* attributeValue) nothrow;
+__gshared c_atk_document_set_attribute_valueFn c_atk_document_set_attribute_value; ///
+private alias c_atk_document_set_text_selectionsFn = extern(C) gboolean function(AtkDocument* document, GArray* selections) nothrow;
+__gshared c_atk_document_set_text_selectionsFn c_atk_document_set_text_selections; ///
 
-  // EditableText
-  GType function() c_atk_editable_text_get_type; ///
-  void function(AtkEditableText* text, int startPos, int endPos) c_atk_editable_text_copy_text; ///
-  void function(AtkEditableText* text, int startPos, int endPos) c_atk_editable_text_cut_text; ///
-  void function(AtkEditableText* text, int startPos, int endPos) c_atk_editable_text_delete_text; ///
-  void function(AtkEditableText* text, const(char)* string_, int length, int* position) c_atk_editable_text_insert_text; ///
-  void function(AtkEditableText* text, int position) c_atk_editable_text_paste_text; ///
-  gboolean function(AtkEditableText* text, AtkAttributeSet* attribSet, int startOffset, int endOffset) c_atk_editable_text_set_run_attributes; ///
-  void function(AtkEditableText* text, const(char)* string_) c_atk_editable_text_set_text_contents; ///
+// EditableText
+private alias c_atk_editable_text_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_editable_text_get_typeFn c_atk_editable_text_get_type; ///
+private alias c_atk_editable_text_copy_textFn = extern(C) void function(AtkEditableText* text, int startPos, int endPos) nothrow;
+__gshared c_atk_editable_text_copy_textFn c_atk_editable_text_copy_text; ///
+private alias c_atk_editable_text_cut_textFn = extern(C) void function(AtkEditableText* text, int startPos, int endPos) nothrow;
+__gshared c_atk_editable_text_cut_textFn c_atk_editable_text_cut_text; ///
+private alias c_atk_editable_text_delete_textFn = extern(C) void function(AtkEditableText* text, int startPos, int endPos) nothrow;
+__gshared c_atk_editable_text_delete_textFn c_atk_editable_text_delete_text; ///
+private alias c_atk_editable_text_insert_textFn = extern(C) void function(AtkEditableText* text, const(char)* string_, int length, int* position) nothrow;
+__gshared c_atk_editable_text_insert_textFn c_atk_editable_text_insert_text; ///
+private alias c_atk_editable_text_paste_textFn = extern(C) void function(AtkEditableText* text, int position) nothrow;
+__gshared c_atk_editable_text_paste_textFn c_atk_editable_text_paste_text; ///
+private alias c_atk_editable_text_set_run_attributesFn = extern(C) gboolean function(AtkEditableText* text, AtkAttributeSet* attribSet, int startOffset, int endOffset) nothrow;
+__gshared c_atk_editable_text_set_run_attributesFn c_atk_editable_text_set_run_attributes; ///
+private alias c_atk_editable_text_set_text_contentsFn = extern(C) void function(AtkEditableText* text, const(char)* string_) nothrow;
+__gshared c_atk_editable_text_set_text_contentsFn c_atk_editable_text_set_text_contents; ///
 
-  // GObjectAccessible
-  GType function() c_atk_gobject_accessible_get_type; ///
-  AtkObject* function(GObject* obj) c_atk_gobject_accessible_for_object; ///
-  GObject* function(AtkGObjectAccessible* obj) c_atk_gobject_accessible_get_object; ///
+// GObjectAccessible
+private alias c_atk_gobject_accessible_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_gobject_accessible_get_typeFn c_atk_gobject_accessible_get_type; ///
+private alias c_atk_gobject_accessible_for_objectFn = extern(C) AtkObject* function(GObject* obj) nothrow;
+__gshared c_atk_gobject_accessible_for_objectFn c_atk_gobject_accessible_for_object; ///
+private alias c_atk_gobject_accessible_get_objectFn = extern(C) GObject* function(AtkGObjectAccessible* obj) nothrow;
+__gshared c_atk_gobject_accessible_get_objectFn c_atk_gobject_accessible_get_object; ///
 
-  // Hyperlink
-  GType function() c_atk_hyperlink_get_type; ///
-  int function(AtkHyperlink* link) c_atk_hyperlink_get_end_index; ///
-  int function(AtkHyperlink* link) c_atk_hyperlink_get_n_anchors; ///
-  AtkObject* function(AtkHyperlink* link, int i) c_atk_hyperlink_get_object; ///
-  int function(AtkHyperlink* link) c_atk_hyperlink_get_start_index; ///
-  char* function(AtkHyperlink* link, int i) c_atk_hyperlink_get_uri; ///
-  gboolean function(AtkHyperlink* link) c_atk_hyperlink_is_inline; ///
-  gboolean function(AtkHyperlink* link) c_atk_hyperlink_is_selected_link; ///
-  gboolean function(AtkHyperlink* link) c_atk_hyperlink_is_valid; ///
+// Hyperlink
+private alias c_atk_hyperlink_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_hyperlink_get_typeFn c_atk_hyperlink_get_type; ///
+private alias c_atk_hyperlink_get_end_indexFn = extern(C) int function(AtkHyperlink* link) nothrow;
+__gshared c_atk_hyperlink_get_end_indexFn c_atk_hyperlink_get_end_index; ///
+private alias c_atk_hyperlink_get_n_anchorsFn = extern(C) int function(AtkHyperlink* link) nothrow;
+__gshared c_atk_hyperlink_get_n_anchorsFn c_atk_hyperlink_get_n_anchors; ///
+private alias c_atk_hyperlink_get_objectFn = extern(C) AtkObject* function(AtkHyperlink* link, int i) nothrow;
+__gshared c_atk_hyperlink_get_objectFn c_atk_hyperlink_get_object; ///
+private alias c_atk_hyperlink_get_start_indexFn = extern(C) int function(AtkHyperlink* link) nothrow;
+__gshared c_atk_hyperlink_get_start_indexFn c_atk_hyperlink_get_start_index; ///
+private alias c_atk_hyperlink_get_uriFn = extern(C) char* function(AtkHyperlink* link, int i) nothrow;
+__gshared c_atk_hyperlink_get_uriFn c_atk_hyperlink_get_uri; ///
+private alias c_atk_hyperlink_is_inlineFn = extern(C) gboolean function(AtkHyperlink* link) nothrow;
+__gshared c_atk_hyperlink_is_inlineFn c_atk_hyperlink_is_inline; ///
+private alias c_atk_hyperlink_is_selected_linkFn = extern(C) gboolean function(AtkHyperlink* link) nothrow;
+__gshared c_atk_hyperlink_is_selected_linkFn c_atk_hyperlink_is_selected_link; ///
+private alias c_atk_hyperlink_is_validFn = extern(C) gboolean function(AtkHyperlink* link) nothrow;
+__gshared c_atk_hyperlink_is_validFn c_atk_hyperlink_is_valid; ///
 
-  // HyperlinkImpl
-  GType function() c_atk_hyperlink_impl_get_type; ///
-  AtkHyperlink* function(AtkHyperlinkImpl* impl) c_atk_hyperlink_impl_get_hyperlink; ///
+// HyperlinkImpl
+private alias c_atk_hyperlink_impl_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_hyperlink_impl_get_typeFn c_atk_hyperlink_impl_get_type; ///
+private alias c_atk_hyperlink_impl_get_hyperlinkFn = extern(C) AtkHyperlink* function(AtkHyperlinkImpl* impl) nothrow;
+__gshared c_atk_hyperlink_impl_get_hyperlinkFn c_atk_hyperlink_impl_get_hyperlink; ///
 
-  // Hypertext
-  GType function() c_atk_hypertext_get_type; ///
-  AtkHyperlink* function(AtkHypertext* hypertext, int linkIndex) c_atk_hypertext_get_link; ///
-  int function(AtkHypertext* hypertext, int charIndex) c_atk_hypertext_get_link_index; ///
-  int function(AtkHypertext* hypertext) c_atk_hypertext_get_n_links; ///
+// Hypertext
+private alias c_atk_hypertext_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_hypertext_get_typeFn c_atk_hypertext_get_type; ///
+private alias c_atk_hypertext_get_linkFn = extern(C) AtkHyperlink* function(AtkHypertext* hypertext, int linkIndex) nothrow;
+__gshared c_atk_hypertext_get_linkFn c_atk_hypertext_get_link; ///
+private alias c_atk_hypertext_get_link_indexFn = extern(C) int function(AtkHypertext* hypertext, int charIndex) nothrow;
+__gshared c_atk_hypertext_get_link_indexFn c_atk_hypertext_get_link_index; ///
+private alias c_atk_hypertext_get_n_linksFn = extern(C) int function(AtkHypertext* hypertext) nothrow;
+__gshared c_atk_hypertext_get_n_linksFn c_atk_hypertext_get_n_links; ///
 
-  // Image
-  GType function() c_atk_image_get_type; ///
-  const(char)* function(AtkImage* image) c_atk_image_get_image_description; ///
-  const(char)* function(AtkImage* image) c_atk_image_get_image_locale; ///
-  void function(AtkImage* image, int* x, int* y, AtkCoordType coordType) c_atk_image_get_image_position; ///
-  void function(AtkImage* image, int* width, int* height) c_atk_image_get_image_size; ///
-  gboolean function(AtkImage* image, const(char)* description) c_atk_image_set_image_description; ///
+// Image
+private alias c_atk_image_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_image_get_typeFn c_atk_image_get_type; ///
+private alias c_atk_image_get_image_descriptionFn = extern(C) const(char)* function(AtkImage* image) nothrow;
+__gshared c_atk_image_get_image_descriptionFn c_atk_image_get_image_description; ///
+private alias c_atk_image_get_image_localeFn = extern(C) const(char)* function(AtkImage* image) nothrow;
+__gshared c_atk_image_get_image_localeFn c_atk_image_get_image_locale; ///
+private alias c_atk_image_get_image_positionFn = extern(C) void function(AtkImage* image, int* x, int* y, AtkCoordType coordType) nothrow;
+__gshared c_atk_image_get_image_positionFn c_atk_image_get_image_position; ///
+private alias c_atk_image_get_image_sizeFn = extern(C) void function(AtkImage* image, int* width, int* height) nothrow;
+__gshared c_atk_image_get_image_sizeFn c_atk_image_get_image_size; ///
+private alias c_atk_image_set_image_descriptionFn = extern(C) gboolean function(AtkImage* image, const(char)* description) nothrow;
+__gshared c_atk_image_set_image_descriptionFn c_atk_image_set_image_description; ///
 
-  // Implementor
-  AtkObject* function(AtkImplementor* implementor) c_atk_implementor_ref_accessible; ///
+// Implementor
+private alias c_atk_implementor_ref_accessibleFn = extern(C) AtkObject* function(AtkImplementor* implementor) nothrow;
+__gshared c_atk_implementor_ref_accessibleFn c_atk_implementor_ref_accessible; ///
 
-  // ImplementorIface
-  GType function() c_atk_implementor_get_type; ///
+// ImplementorIface
+private alias c_atk_implementor_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_implementor_get_typeFn c_atk_implementor_get_type; ///
 
-  // Misc
-  GType function() c_atk_misc_get_type; ///
-  const(AtkMisc)* function() c_atk_misc_get_instance; ///
-  void function(AtkMisc* misc) c_atk_misc_threads_enter; ///
-  void function(AtkMisc* misc) c_atk_misc_threads_leave; ///
+// Misc
+private alias c_atk_misc_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_misc_get_typeFn c_atk_misc_get_type; ///
+private alias c_atk_misc_get_instanceFn = extern(C) const(AtkMisc)* function() nothrow;
+__gshared c_atk_misc_get_instanceFn c_atk_misc_get_instance; ///
+private alias c_atk_misc_threads_enterFn = extern(C) void function(AtkMisc* misc) nothrow;
+__gshared c_atk_misc_threads_enterFn c_atk_misc_threads_enter; ///
+private alias c_atk_misc_threads_leaveFn = extern(C) void function(AtkMisc* misc) nothrow;
+__gshared c_atk_misc_threads_leaveFn c_atk_misc_threads_leave; ///
 
-  // NoOpObject
-  GType function() c_atk_no_op_object_get_type; ///
-  AtkObject* function(GObject* obj) c_atk_no_op_object_new; ///
+// NoOpObject
+private alias c_atk_no_op_object_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_no_op_object_get_typeFn c_atk_no_op_object_get_type; ///
+private alias c_atk_no_op_object_newFn = extern(C) AtkObject* function(GObject* obj) nothrow;
+__gshared c_atk_no_op_object_newFn c_atk_no_op_object_new; ///
 
-  // NoOpObjectFactory
-  GType function() c_atk_no_op_object_factory_get_type; ///
-  AtkObjectFactory* function() c_atk_no_op_object_factory_new; ///
+// NoOpObjectFactory
+private alias c_atk_no_op_object_factory_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_no_op_object_factory_get_typeFn c_atk_no_op_object_factory_get_type; ///
+private alias c_atk_no_op_object_factory_newFn = extern(C) AtkObjectFactory* function() nothrow;
+__gshared c_atk_no_op_object_factory_newFn c_atk_no_op_object_factory_new; ///
 
-  // ObjectFactory
-  GType function() c_atk_object_factory_get_type; ///
-  AtkObject* function(AtkObjectFactory* factory, GObject* obj) c_atk_object_factory_create_accessible; ///
-  GType function(AtkObjectFactory* factory) c_atk_object_factory_get_accessible_type; ///
-  void function(AtkObjectFactory* factory) c_atk_object_factory_invalidate; ///
+// ObjectFactory
+private alias c_atk_object_factory_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_object_factory_get_typeFn c_atk_object_factory_get_type; ///
+private alias c_atk_object_factory_create_accessibleFn = extern(C) AtkObject* function(AtkObjectFactory* factory, GObject* obj) nothrow;
+__gshared c_atk_object_factory_create_accessibleFn c_atk_object_factory_create_accessible; ///
+private alias c_atk_object_factory_get_accessible_typeFn = extern(C) GType function(AtkObjectFactory* factory) nothrow;
+__gshared c_atk_object_factory_get_accessible_typeFn c_atk_object_factory_get_accessible_type; ///
+private alias c_atk_object_factory_invalidateFn = extern(C) void function(AtkObjectFactory* factory) nothrow;
+__gshared c_atk_object_factory_invalidateFn c_atk_object_factory_invalidate; ///
 
-  // ObjectWrap
-  GType function() c_atk_object_get_type; ///
-  gboolean function(AtkObject* object, AtkRelationType relationship, AtkObject* target) c_atk_object_add_relationship; ///
-  uint function(AtkObject* accessible, AtkPropertyChangeHandler* handler) c_atk_object_connect_property_change_handler; ///
-  const(char)* function(AtkObject* accessible) c_atk_object_get_accessible_id; ///
-  AtkAttributeSet* function(AtkObject* accessible) c_atk_object_get_attributes; ///
-  const(char)* function(AtkObject* accessible) c_atk_object_get_description; ///
-  const(char)* function(AtkObject* accessible) c_atk_object_get_help_text; ///
-  int function(AtkObject* accessible) c_atk_object_get_index_in_parent; ///
-  AtkLayer function(AtkObject* accessible) c_atk_object_get_layer; ///
-  int function(AtkObject* accessible) c_atk_object_get_mdi_zorder; ///
-  int function(AtkObject* accessible) c_atk_object_get_n_accessible_children; ///
-  const(char)* function(AtkObject* accessible) c_atk_object_get_name; ///
-  const(char)* function(AtkObject* accessible) c_atk_object_get_object_locale; ///
-  AtkObject* function(AtkObject* accessible) c_atk_object_get_parent; ///
-  AtkRole function(AtkObject* accessible) c_atk_object_get_role; ///
-  void function(AtkObject* accessible, void* data) c_atk_object_initialize; ///
-  void function(AtkObject* accessible, AtkState state, gboolean value) c_atk_object_notify_state_change; ///
-  AtkObject* function(AtkObject* accessible) c_atk_object_peek_parent; ///
-  AtkObject* function(AtkObject* accessible, int i) c_atk_object_ref_accessible_child; ///
-  AtkRelationSet* function(AtkObject* accessible) c_atk_object_ref_relation_set; ///
-  AtkStateSet* function(AtkObject* accessible) c_atk_object_ref_state_set; ///
-  void function(AtkObject* accessible, uint handlerId) c_atk_object_remove_property_change_handler; ///
-  gboolean function(AtkObject* object, AtkRelationType relationship, AtkObject* target) c_atk_object_remove_relationship; ///
-  void function(AtkObject* accessible, const(char)* id) c_atk_object_set_accessible_id; ///
-  void function(AtkObject* accessible, const(char)* description) c_atk_object_set_description; ///
-  void function(AtkObject* accessible, const(char)* helpText) c_atk_object_set_help_text; ///
-  void function(AtkObject* accessible, const(char)* name) c_atk_object_set_name; ///
-  void function(AtkObject* accessible, AtkObject* parent) c_atk_object_set_parent; ///
-  void function(AtkObject* accessible, AtkRole role) c_atk_object_set_role; ///
+// ObjectWrap
+private alias c_atk_object_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_object_get_typeFn c_atk_object_get_type; ///
+private alias c_atk_object_add_relationshipFn = extern(C) gboolean function(AtkObject* object, AtkRelationType relationship, AtkObject* target) nothrow;
+__gshared c_atk_object_add_relationshipFn c_atk_object_add_relationship; ///
+private alias c_atk_object_connect_property_change_handlerFn = extern(C) uint function(AtkObject* accessible, AtkPropertyChangeHandler* handler) nothrow;
+__gshared c_atk_object_connect_property_change_handlerFn c_atk_object_connect_property_change_handler; ///
+private alias c_atk_object_get_accessible_idFn = extern(C) const(char)* function(AtkObject* accessible) nothrow;
+__gshared c_atk_object_get_accessible_idFn c_atk_object_get_accessible_id; ///
+private alias c_atk_object_get_attributesFn = extern(C) AtkAttributeSet* function(AtkObject* accessible) nothrow;
+__gshared c_atk_object_get_attributesFn c_atk_object_get_attributes; ///
+private alias c_atk_object_get_descriptionFn = extern(C) const(char)* function(AtkObject* accessible) nothrow;
+__gshared c_atk_object_get_descriptionFn c_atk_object_get_description; ///
+private alias c_atk_object_get_help_textFn = extern(C) const(char)* function(AtkObject* accessible) nothrow;
+__gshared c_atk_object_get_help_textFn c_atk_object_get_help_text; ///
+private alias c_atk_object_get_index_in_parentFn = extern(C) int function(AtkObject* accessible) nothrow;
+__gshared c_atk_object_get_index_in_parentFn c_atk_object_get_index_in_parent; ///
+private alias c_atk_object_get_layerFn = extern(C) AtkLayer function(AtkObject* accessible) nothrow;
+__gshared c_atk_object_get_layerFn c_atk_object_get_layer; ///
+private alias c_atk_object_get_mdi_zorderFn = extern(C) int function(AtkObject* accessible) nothrow;
+__gshared c_atk_object_get_mdi_zorderFn c_atk_object_get_mdi_zorder; ///
+private alias c_atk_object_get_n_accessible_childrenFn = extern(C) int function(AtkObject* accessible) nothrow;
+__gshared c_atk_object_get_n_accessible_childrenFn c_atk_object_get_n_accessible_children; ///
+private alias c_atk_object_get_nameFn = extern(C) const(char)* function(AtkObject* accessible) nothrow;
+__gshared c_atk_object_get_nameFn c_atk_object_get_name; ///
+private alias c_atk_object_get_object_localeFn = extern(C) const(char)* function(AtkObject* accessible) nothrow;
+__gshared c_atk_object_get_object_localeFn c_atk_object_get_object_locale; ///
+private alias c_atk_object_get_parentFn = extern(C) AtkObject* function(AtkObject* accessible) nothrow;
+__gshared c_atk_object_get_parentFn c_atk_object_get_parent; ///
+private alias c_atk_object_get_roleFn = extern(C) AtkRole function(AtkObject* accessible) nothrow;
+__gshared c_atk_object_get_roleFn c_atk_object_get_role; ///
+private alias c_atk_object_initializeFn = extern(C) void function(AtkObject* accessible, void* data) nothrow;
+__gshared c_atk_object_initializeFn c_atk_object_initialize; ///
+private alias c_atk_object_notify_state_changeFn = extern(C) void function(AtkObject* accessible, AtkState state, gboolean value) nothrow;
+__gshared c_atk_object_notify_state_changeFn c_atk_object_notify_state_change; ///
+private alias c_atk_object_peek_parentFn = extern(C) AtkObject* function(AtkObject* accessible) nothrow;
+__gshared c_atk_object_peek_parentFn c_atk_object_peek_parent; ///
+private alias c_atk_object_ref_accessible_childFn = extern(C) AtkObject* function(AtkObject* accessible, int i) nothrow;
+__gshared c_atk_object_ref_accessible_childFn c_atk_object_ref_accessible_child; ///
+private alias c_atk_object_ref_relation_setFn = extern(C) AtkRelationSet* function(AtkObject* accessible) nothrow;
+__gshared c_atk_object_ref_relation_setFn c_atk_object_ref_relation_set; ///
+private alias c_atk_object_ref_state_setFn = extern(C) AtkStateSet* function(AtkObject* accessible) nothrow;
+__gshared c_atk_object_ref_state_setFn c_atk_object_ref_state_set; ///
+private alias c_atk_object_remove_property_change_handlerFn = extern(C) void function(AtkObject* accessible, uint handlerId) nothrow;
+__gshared c_atk_object_remove_property_change_handlerFn c_atk_object_remove_property_change_handler; ///
+private alias c_atk_object_remove_relationshipFn = extern(C) gboolean function(AtkObject* object, AtkRelationType relationship, AtkObject* target) nothrow;
+__gshared c_atk_object_remove_relationshipFn c_atk_object_remove_relationship; ///
+private alias c_atk_object_set_accessible_idFn = extern(C) void function(AtkObject* accessible, const(char)* id) nothrow;
+__gshared c_atk_object_set_accessible_idFn c_atk_object_set_accessible_id; ///
+private alias c_atk_object_set_descriptionFn = extern(C) void function(AtkObject* accessible, const(char)* description) nothrow;
+__gshared c_atk_object_set_descriptionFn c_atk_object_set_description; ///
+private alias c_atk_object_set_help_textFn = extern(C) void function(AtkObject* accessible, const(char)* helpText) nothrow;
+__gshared c_atk_object_set_help_textFn c_atk_object_set_help_text; ///
+private alias c_atk_object_set_nameFn = extern(C) void function(AtkObject* accessible, const(char)* name) nothrow;
+__gshared c_atk_object_set_nameFn c_atk_object_set_name; ///
+private alias c_atk_object_set_parentFn = extern(C) void function(AtkObject* accessible, AtkObject* parent) nothrow;
+__gshared c_atk_object_set_parentFn c_atk_object_set_parent; ///
+private alias c_atk_object_set_roleFn = extern(C) void function(AtkObject* accessible, AtkRole role) nothrow;
+__gshared c_atk_object_set_roleFn c_atk_object_set_role; ///
 
-  // Plug
-  GType function() c_atk_plug_get_type; ///
-  AtkObject* function() c_atk_plug_new; ///
-  char* function(AtkPlug* plug) c_atk_plug_get_id; ///
-  void function(AtkPlug* plug, AtkObject* child) c_atk_plug_set_child; ///
+// Plug
+private alias c_atk_plug_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_plug_get_typeFn c_atk_plug_get_type; ///
+private alias c_atk_plug_newFn = extern(C) AtkObject* function() nothrow;
+__gshared c_atk_plug_newFn c_atk_plug_new; ///
+private alias c_atk_plug_get_idFn = extern(C) char* function(AtkPlug* plug) nothrow;
+__gshared c_atk_plug_get_idFn c_atk_plug_get_id; ///
+private alias c_atk_plug_set_childFn = extern(C) void function(AtkPlug* plug, AtkObject* child) nothrow;
+__gshared c_atk_plug_set_childFn c_atk_plug_set_child; ///
 
-  // Range
-  GType function() c_atk_range_get_type; ///
-  AtkRange* function(double lowerLimit, double upperLimit, const(char)* description) c_atk_range_new; ///
-  AtkRange* function(AtkRange* src) c_atk_range_copy; ///
-  void function(AtkRange* range) c_atk_range_free; ///
-  const(char)* function(AtkRange* range) c_atk_range_get_description; ///
-  double function(AtkRange* range) c_atk_range_get_lower_limit; ///
-  double function(AtkRange* range) c_atk_range_get_upper_limit; ///
+// Range
+private alias c_atk_range_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_range_get_typeFn c_atk_range_get_type; ///
+private alias c_atk_range_newFn = extern(C) AtkRange* function(double lowerLimit, double upperLimit, const(char)* description) nothrow;
+__gshared c_atk_range_newFn c_atk_range_new; ///
+private alias c_atk_range_copyFn = extern(C) AtkRange* function(AtkRange* src) nothrow;
+__gshared c_atk_range_copyFn c_atk_range_copy; ///
+private alias c_atk_range_freeFn = extern(C) void function(AtkRange* range) nothrow;
+__gshared c_atk_range_freeFn c_atk_range_free; ///
+private alias c_atk_range_get_descriptionFn = extern(C) const(char)* function(AtkRange* range) nothrow;
+__gshared c_atk_range_get_descriptionFn c_atk_range_get_description; ///
+private alias c_atk_range_get_lower_limitFn = extern(C) double function(AtkRange* range) nothrow;
+__gshared c_atk_range_get_lower_limitFn c_atk_range_get_lower_limit; ///
+private alias c_atk_range_get_upper_limitFn = extern(C) double function(AtkRange* range) nothrow;
+__gshared c_atk_range_get_upper_limitFn c_atk_range_get_upper_limit; ///
 
-  // Rectangle
-  GType function() c_atk_rectangle_get_type; ///
+// Rectangle
+private alias c_atk_rectangle_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_rectangle_get_typeFn c_atk_rectangle_get_type; ///
 
-  // Registry
-  GType function() c_atk_registry_get_type; ///
-  AtkObjectFactory* function(AtkRegistry* registry, GType type) c_atk_registry_get_factory; ///
-  GType function(AtkRegistry* registry, GType type) c_atk_registry_get_factory_type; ///
-  void function(AtkRegistry* registry, GType type, GType factoryType) c_atk_registry_set_factory_type; ///
+// Registry
+private alias c_atk_registry_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_registry_get_typeFn c_atk_registry_get_type; ///
+private alias c_atk_registry_get_factoryFn = extern(C) AtkObjectFactory* function(AtkRegistry* registry, GType type) nothrow;
+__gshared c_atk_registry_get_factoryFn c_atk_registry_get_factory; ///
+private alias c_atk_registry_get_factory_typeFn = extern(C) GType function(AtkRegistry* registry, GType type) nothrow;
+__gshared c_atk_registry_get_factory_typeFn c_atk_registry_get_factory_type; ///
+private alias c_atk_registry_set_factory_typeFn = extern(C) void function(AtkRegistry* registry, GType type, GType factoryType) nothrow;
+__gshared c_atk_registry_set_factory_typeFn c_atk_registry_set_factory_type; ///
 
-  // Relation
-  GType function() c_atk_relation_get_type; ///
-  AtkRelation* function(AtkObject** targets, int nTargets, AtkRelationType relationship) c_atk_relation_new; ///
-  void function(AtkRelation* relation, AtkObject* target) c_atk_relation_add_target; ///
-  AtkRelationType function(AtkRelation* relation) c_atk_relation_get_relation_type; ///
-  GPtrArray* function(AtkRelation* relation) c_atk_relation_get_target; ///
-  gboolean function(AtkRelation* relation, AtkObject* target) c_atk_relation_remove_target; ///
+// Relation
+private alias c_atk_relation_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_relation_get_typeFn c_atk_relation_get_type; ///
+private alias c_atk_relation_newFn = extern(C) AtkRelation* function(AtkObject** targets, int nTargets, AtkRelationType relationship) nothrow;
+__gshared c_atk_relation_newFn c_atk_relation_new; ///
+private alias c_atk_relation_add_targetFn = extern(C) void function(AtkRelation* relation, AtkObject* target) nothrow;
+__gshared c_atk_relation_add_targetFn c_atk_relation_add_target; ///
+private alias c_atk_relation_get_relation_typeFn = extern(C) AtkRelationType function(AtkRelation* relation) nothrow;
+__gshared c_atk_relation_get_relation_typeFn c_atk_relation_get_relation_type; ///
+private alias c_atk_relation_get_targetFn = extern(C) GPtrArray* function(AtkRelation* relation) nothrow;
+__gshared c_atk_relation_get_targetFn c_atk_relation_get_target; ///
+private alias c_atk_relation_remove_targetFn = extern(C) gboolean function(AtkRelation* relation, AtkObject* target) nothrow;
+__gshared c_atk_relation_remove_targetFn c_atk_relation_remove_target; ///
 
-  // RelationSet
-  GType function() c_atk_relation_set_get_type; ///
-  AtkRelationSet* function() c_atk_relation_set_new; ///
-  void function(AtkRelationSet* set, AtkRelation* relation) c_atk_relation_set_add; ///
-  void function(AtkRelationSet* set, AtkRelationType relationship, AtkObject* target) c_atk_relation_set_add_relation_by_type; ///
-  gboolean function(AtkRelationSet* set, AtkRelationType relationship) c_atk_relation_set_contains; ///
-  gboolean function(AtkRelationSet* set, AtkRelationType relationship, AtkObject* target) c_atk_relation_set_contains_target; ///
-  int function(AtkRelationSet* set) c_atk_relation_set_get_n_relations; ///
-  AtkRelation* function(AtkRelationSet* set, int i) c_atk_relation_set_get_relation; ///
-  AtkRelation* function(AtkRelationSet* set, AtkRelationType relationship) c_atk_relation_set_get_relation_by_type; ///
-  void function(AtkRelationSet* set, AtkRelation* relation) c_atk_relation_set_remove; ///
+// RelationSet
+private alias c_atk_relation_set_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_relation_set_get_typeFn c_atk_relation_set_get_type; ///
+private alias c_atk_relation_set_newFn = extern(C) AtkRelationSet* function() nothrow;
+__gshared c_atk_relation_set_newFn c_atk_relation_set_new; ///
+private alias c_atk_relation_set_addFn = extern(C) void function(AtkRelationSet* set, AtkRelation* relation) nothrow;
+__gshared c_atk_relation_set_addFn c_atk_relation_set_add; ///
+private alias c_atk_relation_set_add_relation_by_typeFn = extern(C) void function(AtkRelationSet* set, AtkRelationType relationship, AtkObject* target) nothrow;
+__gshared c_atk_relation_set_add_relation_by_typeFn c_atk_relation_set_add_relation_by_type; ///
+private alias c_atk_relation_set_containsFn = extern(C) gboolean function(AtkRelationSet* set, AtkRelationType relationship) nothrow;
+__gshared c_atk_relation_set_containsFn c_atk_relation_set_contains; ///
+private alias c_atk_relation_set_contains_targetFn = extern(C) gboolean function(AtkRelationSet* set, AtkRelationType relationship, AtkObject* target) nothrow;
+__gshared c_atk_relation_set_contains_targetFn c_atk_relation_set_contains_target; ///
+private alias c_atk_relation_set_get_n_relationsFn = extern(C) int function(AtkRelationSet* set) nothrow;
+__gshared c_atk_relation_set_get_n_relationsFn c_atk_relation_set_get_n_relations; ///
+private alias c_atk_relation_set_get_relationFn = extern(C) AtkRelation* function(AtkRelationSet* set, int i) nothrow;
+__gshared c_atk_relation_set_get_relationFn c_atk_relation_set_get_relation; ///
+private alias c_atk_relation_set_get_relation_by_typeFn = extern(C) AtkRelation* function(AtkRelationSet* set, AtkRelationType relationship) nothrow;
+__gshared c_atk_relation_set_get_relation_by_typeFn c_atk_relation_set_get_relation_by_type; ///
+private alias c_atk_relation_set_removeFn = extern(C) void function(AtkRelationSet* set, AtkRelation* relation) nothrow;
+__gshared c_atk_relation_set_removeFn c_atk_relation_set_remove; ///
 
-  // Selection
-  GType function() c_atk_selection_get_type; ///
-  gboolean function(AtkSelection* selection, int i) c_atk_selection_add_selection; ///
-  gboolean function(AtkSelection* selection) c_atk_selection_clear_selection; ///
-  int function(AtkSelection* selection) c_atk_selection_get_selection_count; ///
-  gboolean function(AtkSelection* selection, int i) c_atk_selection_is_child_selected; ///
-  AtkObject* function(AtkSelection* selection, int i) c_atk_selection_ref_selection; ///
-  gboolean function(AtkSelection* selection, int i) c_atk_selection_remove_selection; ///
-  gboolean function(AtkSelection* selection) c_atk_selection_select_all_selection; ///
+// Selection
+private alias c_atk_selection_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_selection_get_typeFn c_atk_selection_get_type; ///
+private alias c_atk_selection_add_selectionFn = extern(C) gboolean function(AtkSelection* selection, int i) nothrow;
+__gshared c_atk_selection_add_selectionFn c_atk_selection_add_selection; ///
+private alias c_atk_selection_clear_selectionFn = extern(C) gboolean function(AtkSelection* selection) nothrow;
+__gshared c_atk_selection_clear_selectionFn c_atk_selection_clear_selection; ///
+private alias c_atk_selection_get_selection_countFn = extern(C) int function(AtkSelection* selection) nothrow;
+__gshared c_atk_selection_get_selection_countFn c_atk_selection_get_selection_count; ///
+private alias c_atk_selection_is_child_selectedFn = extern(C) gboolean function(AtkSelection* selection, int i) nothrow;
+__gshared c_atk_selection_is_child_selectedFn c_atk_selection_is_child_selected; ///
+private alias c_atk_selection_ref_selectionFn = extern(C) AtkObject* function(AtkSelection* selection, int i) nothrow;
+__gshared c_atk_selection_ref_selectionFn c_atk_selection_ref_selection; ///
+private alias c_atk_selection_remove_selectionFn = extern(C) gboolean function(AtkSelection* selection, int i) nothrow;
+__gshared c_atk_selection_remove_selectionFn c_atk_selection_remove_selection; ///
+private alias c_atk_selection_select_all_selectionFn = extern(C) gboolean function(AtkSelection* selection) nothrow;
+__gshared c_atk_selection_select_all_selectionFn c_atk_selection_select_all_selection; ///
 
-  // Socket
-  GType function() c_atk_socket_get_type; ///
-  AtkObject* function() c_atk_socket_new; ///
-  void function(AtkSocket* obj, const(char)* plugId) c_atk_socket_embed; ///
-  gboolean function(AtkSocket* obj) c_atk_socket_is_occupied; ///
+// Socket
+private alias c_atk_socket_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_socket_get_typeFn c_atk_socket_get_type; ///
+private alias c_atk_socket_newFn = extern(C) AtkObject* function() nothrow;
+__gshared c_atk_socket_newFn c_atk_socket_new; ///
+private alias c_atk_socket_embedFn = extern(C) void function(AtkSocket* obj, const(char)* plugId) nothrow;
+__gshared c_atk_socket_embedFn c_atk_socket_embed; ///
+private alias c_atk_socket_is_occupiedFn = extern(C) gboolean function(AtkSocket* obj) nothrow;
+__gshared c_atk_socket_is_occupiedFn c_atk_socket_is_occupied; ///
 
-  // StateSet
-  GType function() c_atk_state_set_get_type; ///
-  AtkStateSet* function() c_atk_state_set_new; ///
-  gboolean function(AtkStateSet* set, AtkStateType type) c_atk_state_set_add_state; ///
-  void function(AtkStateSet* set, AtkStateType* types, int nTypes) c_atk_state_set_add_states; ///
-  AtkStateSet* function(AtkStateSet* set, AtkStateSet* compareSet) c_atk_state_set_and_sets; ///
-  void function(AtkStateSet* set) c_atk_state_set_clear_states; ///
-  gboolean function(AtkStateSet* set, AtkStateType type) c_atk_state_set_contains_state; ///
-  gboolean function(AtkStateSet* set, AtkStateType* types, int nTypes) c_atk_state_set_contains_states; ///
-  gboolean function(AtkStateSet* set) c_atk_state_set_is_empty; ///
-  AtkStateSet* function(AtkStateSet* set, AtkStateSet* compareSet) c_atk_state_set_or_sets; ///
-  gboolean function(AtkStateSet* set, AtkStateType type) c_atk_state_set_remove_state; ///
-  AtkStateSet* function(AtkStateSet* set, AtkStateSet* compareSet) c_atk_state_set_xor_sets; ///
+// StateSet
+private alias c_atk_state_set_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_state_set_get_typeFn c_atk_state_set_get_type; ///
+private alias c_atk_state_set_newFn = extern(C) AtkStateSet* function() nothrow;
+__gshared c_atk_state_set_newFn c_atk_state_set_new; ///
+private alias c_atk_state_set_add_stateFn = extern(C) gboolean function(AtkStateSet* set, AtkStateType type) nothrow;
+__gshared c_atk_state_set_add_stateFn c_atk_state_set_add_state; ///
+private alias c_atk_state_set_add_statesFn = extern(C) void function(AtkStateSet* set, AtkStateType* types, int nTypes) nothrow;
+__gshared c_atk_state_set_add_statesFn c_atk_state_set_add_states; ///
+private alias c_atk_state_set_and_setsFn = extern(C) AtkStateSet* function(AtkStateSet* set, AtkStateSet* compareSet) nothrow;
+__gshared c_atk_state_set_and_setsFn c_atk_state_set_and_sets; ///
+private alias c_atk_state_set_clear_statesFn = extern(C) void function(AtkStateSet* set) nothrow;
+__gshared c_atk_state_set_clear_statesFn c_atk_state_set_clear_states; ///
+private alias c_atk_state_set_contains_stateFn = extern(C) gboolean function(AtkStateSet* set, AtkStateType type) nothrow;
+__gshared c_atk_state_set_contains_stateFn c_atk_state_set_contains_state; ///
+private alias c_atk_state_set_contains_statesFn = extern(C) gboolean function(AtkStateSet* set, AtkStateType* types, int nTypes) nothrow;
+__gshared c_atk_state_set_contains_statesFn c_atk_state_set_contains_states; ///
+private alias c_atk_state_set_is_emptyFn = extern(C) gboolean function(AtkStateSet* set) nothrow;
+__gshared c_atk_state_set_is_emptyFn c_atk_state_set_is_empty; ///
+private alias c_atk_state_set_or_setsFn = extern(C) AtkStateSet* function(AtkStateSet* set, AtkStateSet* compareSet) nothrow;
+__gshared c_atk_state_set_or_setsFn c_atk_state_set_or_sets; ///
+private alias c_atk_state_set_remove_stateFn = extern(C) gboolean function(AtkStateSet* set, AtkStateType type) nothrow;
+__gshared c_atk_state_set_remove_stateFn c_atk_state_set_remove_state; ///
+private alias c_atk_state_set_xor_setsFn = extern(C) AtkStateSet* function(AtkStateSet* set, AtkStateSet* compareSet) nothrow;
+__gshared c_atk_state_set_xor_setsFn c_atk_state_set_xor_sets; ///
 
-  // StreamableContent
-  GType function() c_atk_streamable_content_get_type; ///
-  const(char)* function(AtkStreamableContent* streamable, int i) c_atk_streamable_content_get_mime_type; ///
-  int function(AtkStreamableContent* streamable) c_atk_streamable_content_get_n_mime_types; ///
-  GIOChannel* function(AtkStreamableContent* streamable, const(char)* mimeType) c_atk_streamable_content_get_stream; ///
-  const(char)* function(AtkStreamableContent* streamable, const(char)* mimeType) c_atk_streamable_content_get_uri; ///
+// StreamableContent
+private alias c_atk_streamable_content_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_streamable_content_get_typeFn c_atk_streamable_content_get_type; ///
+private alias c_atk_streamable_content_get_mime_typeFn = extern(C) const(char)* function(AtkStreamableContent* streamable, int i) nothrow;
+__gshared c_atk_streamable_content_get_mime_typeFn c_atk_streamable_content_get_mime_type; ///
+private alias c_atk_streamable_content_get_n_mime_typesFn = extern(C) int function(AtkStreamableContent* streamable) nothrow;
+__gshared c_atk_streamable_content_get_n_mime_typesFn c_atk_streamable_content_get_n_mime_types; ///
+private alias c_atk_streamable_content_get_streamFn = extern(C) GIOChannel* function(AtkStreamableContent* streamable, const(char)* mimeType) nothrow;
+__gshared c_atk_streamable_content_get_streamFn c_atk_streamable_content_get_stream; ///
+private alias c_atk_streamable_content_get_uriFn = extern(C) const(char)* function(AtkStreamableContent* streamable, const(char)* mimeType) nothrow;
+__gshared c_atk_streamable_content_get_uriFn c_atk_streamable_content_get_uri; ///
 
-  // Table
-  GType function() c_atk_table_get_type; ///
-  gboolean function(AtkTable* table, int column) c_atk_table_add_column_selection; ///
-  gboolean function(AtkTable* table, int row) c_atk_table_add_row_selection; ///
-  AtkObject* function(AtkTable* table) c_atk_table_get_caption; ///
-  int function(AtkTable* table, int index) c_atk_table_get_column_at_index; ///
-  const(char)* function(AtkTable* table, int column) c_atk_table_get_column_description; ///
-  int function(AtkTable* table, int row, int column) c_atk_table_get_column_extent_at; ///
-  AtkObject* function(AtkTable* table, int column) c_atk_table_get_column_header; ///
-  int function(AtkTable* table, int row, int column) c_atk_table_get_index_at; ///
-  int function(AtkTable* table) c_atk_table_get_n_columns; ///
-  int function(AtkTable* table) c_atk_table_get_n_rows; ///
-  int function(AtkTable* table, int index) c_atk_table_get_row_at_index; ///
-  const(char)* function(AtkTable* table, int row) c_atk_table_get_row_description; ///
-  int function(AtkTable* table, int row, int column) c_atk_table_get_row_extent_at; ///
-  AtkObject* function(AtkTable* table, int row) c_atk_table_get_row_header; ///
-  int function(AtkTable* table, int** selected) c_atk_table_get_selected_columns; ///
-  int function(AtkTable* table, int** selected) c_atk_table_get_selected_rows; ///
-  AtkObject* function(AtkTable* table) c_atk_table_get_summary; ///
-  gboolean function(AtkTable* table, int column) c_atk_table_is_column_selected; ///
-  gboolean function(AtkTable* table, int row) c_atk_table_is_row_selected; ///
-  gboolean function(AtkTable* table, int row, int column) c_atk_table_is_selected; ///
-  AtkObject* function(AtkTable* table, int row, int column) c_atk_table_ref_at; ///
-  gboolean function(AtkTable* table, int column) c_atk_table_remove_column_selection; ///
-  gboolean function(AtkTable* table, int row) c_atk_table_remove_row_selection; ///
-  void function(AtkTable* table, AtkObject* caption) c_atk_table_set_caption; ///
-  void function(AtkTable* table, int column, const(char)* description) c_atk_table_set_column_description; ///
-  void function(AtkTable* table, int column, AtkObject* header) c_atk_table_set_column_header; ///
-  void function(AtkTable* table, int row, const(char)* description) c_atk_table_set_row_description; ///
-  void function(AtkTable* table, int row, AtkObject* header) c_atk_table_set_row_header; ///
-  void function(AtkTable* table, AtkObject* accessible) c_atk_table_set_summary; ///
+// Table
+private alias c_atk_table_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_table_get_typeFn c_atk_table_get_type; ///
+private alias c_atk_table_add_column_selectionFn = extern(C) gboolean function(AtkTable* table, int column) nothrow;
+__gshared c_atk_table_add_column_selectionFn c_atk_table_add_column_selection; ///
+private alias c_atk_table_add_row_selectionFn = extern(C) gboolean function(AtkTable* table, int row) nothrow;
+__gshared c_atk_table_add_row_selectionFn c_atk_table_add_row_selection; ///
+private alias c_atk_table_get_captionFn = extern(C) AtkObject* function(AtkTable* table) nothrow;
+__gshared c_atk_table_get_captionFn c_atk_table_get_caption; ///
+private alias c_atk_table_get_column_at_indexFn = extern(C) int function(AtkTable* table, int index) nothrow;
+__gshared c_atk_table_get_column_at_indexFn c_atk_table_get_column_at_index; ///
+private alias c_atk_table_get_column_descriptionFn = extern(C) const(char)* function(AtkTable* table, int column) nothrow;
+__gshared c_atk_table_get_column_descriptionFn c_atk_table_get_column_description; ///
+private alias c_atk_table_get_column_extent_atFn = extern(C) int function(AtkTable* table, int row, int column) nothrow;
+__gshared c_atk_table_get_column_extent_atFn c_atk_table_get_column_extent_at; ///
+private alias c_atk_table_get_column_headerFn = extern(C) AtkObject* function(AtkTable* table, int column) nothrow;
+__gshared c_atk_table_get_column_headerFn c_atk_table_get_column_header; ///
+private alias c_atk_table_get_index_atFn = extern(C) int function(AtkTable* table, int row, int column) nothrow;
+__gshared c_atk_table_get_index_atFn c_atk_table_get_index_at; ///
+private alias c_atk_table_get_n_columnsFn = extern(C) int function(AtkTable* table) nothrow;
+__gshared c_atk_table_get_n_columnsFn c_atk_table_get_n_columns; ///
+private alias c_atk_table_get_n_rowsFn = extern(C) int function(AtkTable* table) nothrow;
+__gshared c_atk_table_get_n_rowsFn c_atk_table_get_n_rows; ///
+private alias c_atk_table_get_row_at_indexFn = extern(C) int function(AtkTable* table, int index) nothrow;
+__gshared c_atk_table_get_row_at_indexFn c_atk_table_get_row_at_index; ///
+private alias c_atk_table_get_row_descriptionFn = extern(C) const(char)* function(AtkTable* table, int row) nothrow;
+__gshared c_atk_table_get_row_descriptionFn c_atk_table_get_row_description; ///
+private alias c_atk_table_get_row_extent_atFn = extern(C) int function(AtkTable* table, int row, int column) nothrow;
+__gshared c_atk_table_get_row_extent_atFn c_atk_table_get_row_extent_at; ///
+private alias c_atk_table_get_row_headerFn = extern(C) AtkObject* function(AtkTable* table, int row) nothrow;
+__gshared c_atk_table_get_row_headerFn c_atk_table_get_row_header; ///
+private alias c_atk_table_get_selected_columnsFn = extern(C) int function(AtkTable* table, int** selected) nothrow;
+__gshared c_atk_table_get_selected_columnsFn c_atk_table_get_selected_columns; ///
+private alias c_atk_table_get_selected_rowsFn = extern(C) int function(AtkTable* table, int** selected) nothrow;
+__gshared c_atk_table_get_selected_rowsFn c_atk_table_get_selected_rows; ///
+private alias c_atk_table_get_summaryFn = extern(C) AtkObject* function(AtkTable* table) nothrow;
+__gshared c_atk_table_get_summaryFn c_atk_table_get_summary; ///
+private alias c_atk_table_is_column_selectedFn = extern(C) gboolean function(AtkTable* table, int column) nothrow;
+__gshared c_atk_table_is_column_selectedFn c_atk_table_is_column_selected; ///
+private alias c_atk_table_is_row_selectedFn = extern(C) gboolean function(AtkTable* table, int row) nothrow;
+__gshared c_atk_table_is_row_selectedFn c_atk_table_is_row_selected; ///
+private alias c_atk_table_is_selectedFn = extern(C) gboolean function(AtkTable* table, int row, int column) nothrow;
+__gshared c_atk_table_is_selectedFn c_atk_table_is_selected; ///
+private alias c_atk_table_ref_atFn = extern(C) AtkObject* function(AtkTable* table, int row, int column) nothrow;
+__gshared c_atk_table_ref_atFn c_atk_table_ref_at; ///
+private alias c_atk_table_remove_column_selectionFn = extern(C) gboolean function(AtkTable* table, int column) nothrow;
+__gshared c_atk_table_remove_column_selectionFn c_atk_table_remove_column_selection; ///
+private alias c_atk_table_remove_row_selectionFn = extern(C) gboolean function(AtkTable* table, int row) nothrow;
+__gshared c_atk_table_remove_row_selectionFn c_atk_table_remove_row_selection; ///
+private alias c_atk_table_set_captionFn = extern(C) void function(AtkTable* table, AtkObject* caption) nothrow;
+__gshared c_atk_table_set_captionFn c_atk_table_set_caption; ///
+private alias c_atk_table_set_column_descriptionFn = extern(C) void function(AtkTable* table, int column, const(char)* description) nothrow;
+__gshared c_atk_table_set_column_descriptionFn c_atk_table_set_column_description; ///
+private alias c_atk_table_set_column_headerFn = extern(C) void function(AtkTable* table, int column, AtkObject* header) nothrow;
+__gshared c_atk_table_set_column_headerFn c_atk_table_set_column_header; ///
+private alias c_atk_table_set_row_descriptionFn = extern(C) void function(AtkTable* table, int row, const(char)* description) nothrow;
+__gshared c_atk_table_set_row_descriptionFn c_atk_table_set_row_description; ///
+private alias c_atk_table_set_row_headerFn = extern(C) void function(AtkTable* table, int row, AtkObject* header) nothrow;
+__gshared c_atk_table_set_row_headerFn c_atk_table_set_row_header; ///
+private alias c_atk_table_set_summaryFn = extern(C) void function(AtkTable* table, AtkObject* accessible) nothrow;
+__gshared c_atk_table_set_summaryFn c_atk_table_set_summary; ///
 
-  // TableCell
-  GType function() c_atk_table_cell_get_type; ///
-  GPtrArray* function(AtkTableCell* cell) c_atk_table_cell_get_column_header_cells; ///
-  int function(AtkTableCell* cell) c_atk_table_cell_get_column_span; ///
-  gboolean function(AtkTableCell* cell, int* row, int* column) c_atk_table_cell_get_position; ///
-  gboolean function(AtkTableCell* cell, int* row, int* column, int* rowSpan, int* columnSpan) c_atk_table_cell_get_row_column_span; ///
-  GPtrArray* function(AtkTableCell* cell) c_atk_table_cell_get_row_header_cells; ///
-  int function(AtkTableCell* cell) c_atk_table_cell_get_row_span; ///
-  AtkObject* function(AtkTableCell* cell) c_atk_table_cell_get_table; ///
+// TableCell
+private alias c_atk_table_cell_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_table_cell_get_typeFn c_atk_table_cell_get_type; ///
+private alias c_atk_table_cell_get_column_header_cellsFn = extern(C) GPtrArray* function(AtkTableCell* cell) nothrow;
+__gshared c_atk_table_cell_get_column_header_cellsFn c_atk_table_cell_get_column_header_cells; ///
+private alias c_atk_table_cell_get_column_spanFn = extern(C) int function(AtkTableCell* cell) nothrow;
+__gshared c_atk_table_cell_get_column_spanFn c_atk_table_cell_get_column_span; ///
+private alias c_atk_table_cell_get_positionFn = extern(C) gboolean function(AtkTableCell* cell, int* row, int* column) nothrow;
+__gshared c_atk_table_cell_get_positionFn c_atk_table_cell_get_position; ///
+private alias c_atk_table_cell_get_row_column_spanFn = extern(C) gboolean function(AtkTableCell* cell, int* row, int* column, int* rowSpan, int* columnSpan) nothrow;
+__gshared c_atk_table_cell_get_row_column_spanFn c_atk_table_cell_get_row_column_span; ///
+private alias c_atk_table_cell_get_row_header_cellsFn = extern(C) GPtrArray* function(AtkTableCell* cell) nothrow;
+__gshared c_atk_table_cell_get_row_header_cellsFn c_atk_table_cell_get_row_header_cells; ///
+private alias c_atk_table_cell_get_row_spanFn = extern(C) int function(AtkTableCell* cell) nothrow;
+__gshared c_atk_table_cell_get_row_spanFn c_atk_table_cell_get_row_span; ///
+private alias c_atk_table_cell_get_tableFn = extern(C) AtkObject* function(AtkTableCell* cell) nothrow;
+__gshared c_atk_table_cell_get_tableFn c_atk_table_cell_get_table; ///
 
-  // Text
-  GType function() c_atk_text_get_type; ///
-  void function(AtkTextRange** ranges) c_atk_text_free_ranges; ///
-  gboolean function(AtkText* text, int startOffset, int endOffset) c_atk_text_add_selection; ///
-  AtkTextRange** function(AtkText* text, AtkTextRectangle* rect, AtkCoordType coordType, AtkTextClipType xClipType, AtkTextClipType yClipType) c_atk_text_get_bounded_ranges; ///
-  int function(AtkText* text) c_atk_text_get_caret_offset; ///
-  dchar function(AtkText* text, int offset) c_atk_text_get_character_at_offset; ///
-  int function(AtkText* text) c_atk_text_get_character_count; ///
-  void function(AtkText* text, int offset, int* x, int* y, int* width, int* height, AtkCoordType coords) c_atk_text_get_character_extents; ///
-  AtkAttributeSet* function(AtkText* text) c_atk_text_get_default_attributes; ///
-  int function(AtkText* text) c_atk_text_get_n_selections; ///
-  int function(AtkText* text, int x, int y, AtkCoordType coords) c_atk_text_get_offset_at_point; ///
-  void function(AtkText* text, int startOffset, int endOffset, AtkCoordType coordType, AtkTextRectangle* rect) c_atk_text_get_range_extents; ///
-  AtkAttributeSet* function(AtkText* text, int offset, int* startOffset, int* endOffset) c_atk_text_get_run_attributes; ///
-  char* function(AtkText* text, int selectionNum, int* startOffset, int* endOffset) c_atk_text_get_selection; ///
-  char* function(AtkText* text, int offset, AtkTextGranularity granularity, int* startOffset, int* endOffset) c_atk_text_get_string_at_offset; ///
-  char* function(AtkText* text, int startOffset, int endOffset) c_atk_text_get_text; ///
-  char* function(AtkText* text, int offset, AtkTextBoundary boundaryType, int* startOffset, int* endOffset) c_atk_text_get_text_after_offset; ///
-  char* function(AtkText* text, int offset, AtkTextBoundary boundaryType, int* startOffset, int* endOffset) c_atk_text_get_text_at_offset; ///
-  char* function(AtkText* text, int offset, AtkTextBoundary boundaryType, int* startOffset, int* endOffset) c_atk_text_get_text_before_offset; ///
-  gboolean function(AtkText* text, int selectionNum) c_atk_text_remove_selection; ///
-  gboolean function(AtkText* text, int startOffset, int endOffset, AtkScrollType type) c_atk_text_scroll_substring_to; ///
-  gboolean function(AtkText* text, int startOffset, int endOffset, AtkCoordType coords, int x, int y) c_atk_text_scroll_substring_to_point; ///
-  gboolean function(AtkText* text, int offset) c_atk_text_set_caret_offset; ///
-  gboolean function(AtkText* text, int selectionNum, int startOffset, int endOffset) c_atk_text_set_selection; ///
+// Text
+private alias c_atk_text_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_text_get_typeFn c_atk_text_get_type; ///
+private alias c_atk_text_free_rangesFn = extern(C) void function(AtkTextRange** ranges) nothrow;
+__gshared c_atk_text_free_rangesFn c_atk_text_free_ranges; ///
+private alias c_atk_text_add_selectionFn = extern(C) gboolean function(AtkText* text, int startOffset, int endOffset) nothrow;
+__gshared c_atk_text_add_selectionFn c_atk_text_add_selection; ///
+private alias c_atk_text_get_bounded_rangesFn = extern(C) AtkTextRange** function(AtkText* text, AtkTextRectangle* rect, AtkCoordType coordType, AtkTextClipType xClipType, AtkTextClipType yClipType) nothrow;
+__gshared c_atk_text_get_bounded_rangesFn c_atk_text_get_bounded_ranges; ///
+private alias c_atk_text_get_caret_offsetFn = extern(C) int function(AtkText* text) nothrow;
+__gshared c_atk_text_get_caret_offsetFn c_atk_text_get_caret_offset; ///
+private alias c_atk_text_get_character_at_offsetFn = extern(C) dchar function(AtkText* text, int offset) nothrow;
+__gshared c_atk_text_get_character_at_offsetFn c_atk_text_get_character_at_offset; ///
+private alias c_atk_text_get_character_countFn = extern(C) int function(AtkText* text) nothrow;
+__gshared c_atk_text_get_character_countFn c_atk_text_get_character_count; ///
+private alias c_atk_text_get_character_extentsFn = extern(C) void function(AtkText* text, int offset, int* x, int* y, int* width, int* height, AtkCoordType coords) nothrow;
+__gshared c_atk_text_get_character_extentsFn c_atk_text_get_character_extents; ///
+private alias c_atk_text_get_default_attributesFn = extern(C) AtkAttributeSet* function(AtkText* text) nothrow;
+__gshared c_atk_text_get_default_attributesFn c_atk_text_get_default_attributes; ///
+private alias c_atk_text_get_n_selectionsFn = extern(C) int function(AtkText* text) nothrow;
+__gshared c_atk_text_get_n_selectionsFn c_atk_text_get_n_selections; ///
+private alias c_atk_text_get_offset_at_pointFn = extern(C) int function(AtkText* text, int x, int y, AtkCoordType coords) nothrow;
+__gshared c_atk_text_get_offset_at_pointFn c_atk_text_get_offset_at_point; ///
+private alias c_atk_text_get_range_extentsFn = extern(C) void function(AtkText* text, int startOffset, int endOffset, AtkCoordType coordType, AtkTextRectangle* rect) nothrow;
+__gshared c_atk_text_get_range_extentsFn c_atk_text_get_range_extents; ///
+private alias c_atk_text_get_run_attributesFn = extern(C) AtkAttributeSet* function(AtkText* text, int offset, int* startOffset, int* endOffset) nothrow;
+__gshared c_atk_text_get_run_attributesFn c_atk_text_get_run_attributes; ///
+private alias c_atk_text_get_selectionFn = extern(C) char* function(AtkText* text, int selectionNum, int* startOffset, int* endOffset) nothrow;
+__gshared c_atk_text_get_selectionFn c_atk_text_get_selection; ///
+private alias c_atk_text_get_string_at_offsetFn = extern(C) char* function(AtkText* text, int offset, AtkTextGranularity granularity, int* startOffset, int* endOffset) nothrow;
+__gshared c_atk_text_get_string_at_offsetFn c_atk_text_get_string_at_offset; ///
+private alias c_atk_text_get_textFn = extern(C) char* function(AtkText* text, int startOffset, int endOffset) nothrow;
+__gshared c_atk_text_get_textFn c_atk_text_get_text; ///
+private alias c_atk_text_get_text_after_offsetFn = extern(C) char* function(AtkText* text, int offset, AtkTextBoundary boundaryType, int* startOffset, int* endOffset) nothrow;
+__gshared c_atk_text_get_text_after_offsetFn c_atk_text_get_text_after_offset; ///
+private alias c_atk_text_get_text_at_offsetFn = extern(C) char* function(AtkText* text, int offset, AtkTextBoundary boundaryType, int* startOffset, int* endOffset) nothrow;
+__gshared c_atk_text_get_text_at_offsetFn c_atk_text_get_text_at_offset; ///
+private alias c_atk_text_get_text_before_offsetFn = extern(C) char* function(AtkText* text, int offset, AtkTextBoundary boundaryType, int* startOffset, int* endOffset) nothrow;
+__gshared c_atk_text_get_text_before_offsetFn c_atk_text_get_text_before_offset; ///
+private alias c_atk_text_remove_selectionFn = extern(C) gboolean function(AtkText* text, int selectionNum) nothrow;
+__gshared c_atk_text_remove_selectionFn c_atk_text_remove_selection; ///
+private alias c_atk_text_scroll_substring_toFn = extern(C) gboolean function(AtkText* text, int startOffset, int endOffset, AtkScrollType type) nothrow;
+__gshared c_atk_text_scroll_substring_toFn c_atk_text_scroll_substring_to; ///
+private alias c_atk_text_scroll_substring_to_pointFn = extern(C) gboolean function(AtkText* text, int startOffset, int endOffset, AtkCoordType coords, int x, int y) nothrow;
+__gshared c_atk_text_scroll_substring_to_pointFn c_atk_text_scroll_substring_to_point; ///
+private alias c_atk_text_set_caret_offsetFn = extern(C) gboolean function(AtkText* text, int offset) nothrow;
+__gshared c_atk_text_set_caret_offsetFn c_atk_text_set_caret_offset; ///
+private alias c_atk_text_set_selectionFn = extern(C) gboolean function(AtkText* text, int selectionNum, int startOffset, int endOffset) nothrow;
+__gshared c_atk_text_set_selectionFn c_atk_text_set_selection; ///
 
-  // TextRange
-  GType function() c_atk_text_range_get_type; ///
+// TextRange
+private alias c_atk_text_range_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_text_range_get_typeFn c_atk_text_range_get_type; ///
 
-  // Util
-  GType function() c_atk_util_get_type; ///
+// Util
+private alias c_atk_util_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_util_get_typeFn c_atk_util_get_type; ///
 
-  // Value
-  GType function() c_atk_value_get_type; ///
-  void function(AtkValue* obj, GValue* value) c_atk_value_get_current_value; ///
-  double function(AtkValue* obj) c_atk_value_get_increment; ///
-  void function(AtkValue* obj, GValue* value) c_atk_value_get_maximum_value; ///
-  void function(AtkValue* obj, GValue* value) c_atk_value_get_minimum_increment; ///
-  void function(AtkValue* obj, GValue* value) c_atk_value_get_minimum_value; ///
-  AtkRange* function(AtkValue* obj) c_atk_value_get_range; ///
-  GSList* function(AtkValue* obj) c_atk_value_get_sub_ranges; ///
-  void function(AtkValue* obj, double* value, char** text) c_atk_value_get_value_and_text; ///
-  gboolean function(AtkValue* obj, const(GValue)* value) c_atk_value_set_current_value; ///
-  void function(AtkValue* obj, double newValue) c_atk_value_set_value; ///
+// Value
+private alias c_atk_value_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_value_get_typeFn c_atk_value_get_type; ///
+private alias c_atk_value_get_current_valueFn = extern(C) void function(AtkValue* obj, GValue* value) nothrow;
+__gshared c_atk_value_get_current_valueFn c_atk_value_get_current_value; ///
+private alias c_atk_value_get_incrementFn = extern(C) double function(AtkValue* obj) nothrow;
+__gshared c_atk_value_get_incrementFn c_atk_value_get_increment; ///
+private alias c_atk_value_get_maximum_valueFn = extern(C) void function(AtkValue* obj, GValue* value) nothrow;
+__gshared c_atk_value_get_maximum_valueFn c_atk_value_get_maximum_value; ///
+private alias c_atk_value_get_minimum_incrementFn = extern(C) void function(AtkValue* obj, GValue* value) nothrow;
+__gshared c_atk_value_get_minimum_incrementFn c_atk_value_get_minimum_increment; ///
+private alias c_atk_value_get_minimum_valueFn = extern(C) void function(AtkValue* obj, GValue* value) nothrow;
+__gshared c_atk_value_get_minimum_valueFn c_atk_value_get_minimum_value; ///
+private alias c_atk_value_get_rangeFn = extern(C) AtkRange* function(AtkValue* obj) nothrow;
+__gshared c_atk_value_get_rangeFn c_atk_value_get_range; ///
+private alias c_atk_value_get_sub_rangesFn = extern(C) GSList* function(AtkValue* obj) nothrow;
+__gshared c_atk_value_get_sub_rangesFn c_atk_value_get_sub_ranges; ///
+private alias c_atk_value_get_value_and_textFn = extern(C) void function(AtkValue* obj, double* value, char** text) nothrow;
+__gshared c_atk_value_get_value_and_textFn c_atk_value_get_value_and_text; ///
+private alias c_atk_value_set_current_valueFn = extern(C) gboolean function(AtkValue* obj, const(GValue)* value) nothrow;
+__gshared c_atk_value_set_current_valueFn c_atk_value_set_current_value; ///
+private alias c_atk_value_set_valueFn = extern(C) void function(AtkValue* obj, double newValue) nothrow;
+__gshared c_atk_value_set_valueFn c_atk_value_set_value; ///
 
-  // Window
-  GType function() c_atk_window_get_type; ///
+// Window
+private alias c_atk_window_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_atk_window_get_typeFn c_atk_window_get_type; ///
 
-  // global
-  uint function(AtkEventListener focusTracker) c_atk_add_focus_tracker; ///
-  uint function(GSignalEmissionHook listener, const(char)* eventType) c_atk_add_global_event_listener; ///
-  uint function(AtkKeySnoopFunc listener, void* data) c_atk_add_key_event_listener; ///
-  void function(AtkEventListenerInit init_) c_atk_focus_tracker_init; ///
-  void function(AtkObject* object) c_atk_focus_tracker_notify; ///
-  uint function() c_atk_get_binary_age; ///
-  AtkRegistry* function() c_atk_get_default_registry; ///
-  AtkObject* function() c_atk_get_focus_object; ///
-  uint function() c_atk_get_interface_age; ///
-  uint function() c_atk_get_major_version; ///
-  uint function() c_atk_get_micro_version; ///
-  uint function() c_atk_get_minor_version; ///
-  AtkObject* function() c_atk_get_root; ///
-  const(char)* function() c_atk_get_toolkit_name; ///
-  const(char)* function() c_atk_get_toolkit_version; ///
-  const(char)* function() c_atk_get_version; ///
-  void function(uint trackerId) c_atk_remove_focus_tracker; ///
-  void function(uint listenerId) c_atk_remove_global_event_listener; ///
-  void function(uint listenerId) c_atk_remove_key_event_listener; ///
+// global
+private alias c_atk_add_focus_trackerFn = extern(C) uint function(AtkEventListener focusTracker) nothrow;
+__gshared c_atk_add_focus_trackerFn c_atk_add_focus_tracker; ///
+private alias c_atk_add_global_event_listenerFn = extern(C) uint function(GSignalEmissionHook listener, const(char)* eventType) nothrow;
+__gshared c_atk_add_global_event_listenerFn c_atk_add_global_event_listener; ///
+private alias c_atk_add_key_event_listenerFn = extern(C) uint function(AtkKeySnoopFunc listener, void* data) nothrow;
+__gshared c_atk_add_key_event_listenerFn c_atk_add_key_event_listener; ///
+private alias c_atk_focus_tracker_initFn = extern(C) void function(AtkEventListenerInit init_) nothrow;
+__gshared c_atk_focus_tracker_initFn c_atk_focus_tracker_init; ///
+private alias c_atk_focus_tracker_notifyFn = extern(C) void function(AtkObject* object) nothrow;
+__gshared c_atk_focus_tracker_notifyFn c_atk_focus_tracker_notify; ///
+private alias c_atk_get_binary_ageFn = extern(C) uint function() nothrow;
+__gshared c_atk_get_binary_ageFn c_atk_get_binary_age; ///
+private alias c_atk_get_default_registryFn = extern(C) AtkRegistry* function() nothrow;
+__gshared c_atk_get_default_registryFn c_atk_get_default_registry; ///
+private alias c_atk_get_focus_objectFn = extern(C) AtkObject* function() nothrow;
+__gshared c_atk_get_focus_objectFn c_atk_get_focus_object; ///
+private alias c_atk_get_interface_ageFn = extern(C) uint function() nothrow;
+__gshared c_atk_get_interface_ageFn c_atk_get_interface_age; ///
+private alias c_atk_get_major_versionFn = extern(C) uint function() nothrow;
+__gshared c_atk_get_major_versionFn c_atk_get_major_version; ///
+private alias c_atk_get_micro_versionFn = extern(C) uint function() nothrow;
+__gshared c_atk_get_micro_versionFn c_atk_get_micro_version; ///
+private alias c_atk_get_minor_versionFn = extern(C) uint function() nothrow;
+__gshared c_atk_get_minor_versionFn c_atk_get_minor_version; ///
+private alias c_atk_get_rootFn = extern(C) AtkObject* function() nothrow;
+__gshared c_atk_get_rootFn c_atk_get_root; ///
+private alias c_atk_get_toolkit_nameFn = extern(C) const(char)* function() nothrow;
+__gshared c_atk_get_toolkit_nameFn c_atk_get_toolkit_name; ///
+private alias c_atk_get_toolkit_versionFn = extern(C) const(char)* function() nothrow;
+__gshared c_atk_get_toolkit_versionFn c_atk_get_toolkit_version; ///
+private alias c_atk_get_versionFn = extern(C) const(char)* function() nothrow;
+__gshared c_atk_get_versionFn c_atk_get_version; ///
+private alias c_atk_remove_focus_trackerFn = extern(C) void function(uint trackerId) nothrow;
+__gshared c_atk_remove_focus_trackerFn c_atk_remove_focus_tracker; ///
+private alias c_atk_remove_global_event_listenerFn = extern(C) void function(uint listenerId) nothrow;
+__gshared c_atk_remove_global_event_listenerFn c_atk_remove_global_event_listener; ///
+private alias c_atk_remove_key_event_listenerFn = extern(C) void function(uint listenerId) nothrow;
+__gshared c_atk_remove_key_event_listenerFn c_atk_remove_key_event_listener; ///
 
-  // RelationType
-  AtkRelationType function(const(char)* name) c_atk_relation_type_for_name; ///
-  const(char)* function(AtkRelationType type) c_atk_relation_type_get_name; ///
-  AtkRelationType function(const(char)* name) c_atk_relation_type_register; ///
+// RelationType
+private alias c_atk_relation_type_for_nameFn = extern(C) AtkRelationType function(const(char)* name) nothrow;
+__gshared c_atk_relation_type_for_nameFn c_atk_relation_type_for_name; ///
+private alias c_atk_relation_type_get_nameFn = extern(C) const(char)* function(AtkRelationType type) nothrow;
+__gshared c_atk_relation_type_get_nameFn c_atk_relation_type_get_name; ///
+private alias c_atk_relation_type_registerFn = extern(C) AtkRelationType function(const(char)* name) nothrow;
+__gshared c_atk_relation_type_registerFn c_atk_relation_type_register; ///
 
-  // Role
-  AtkRole function(const(char)* name) c_atk_role_for_name; ///
-  const(char)* function(AtkRole role) c_atk_role_get_localized_name; ///
-  const(char)* function(AtkRole role) c_atk_role_get_name; ///
-  AtkRole function(const(char)* name) c_atk_role_register; ///
+// Role
+private alias c_atk_role_for_nameFn = extern(C) AtkRole function(const(char)* name) nothrow;
+__gshared c_atk_role_for_nameFn c_atk_role_for_name; ///
+private alias c_atk_role_get_localized_nameFn = extern(C) const(char)* function(AtkRole role) nothrow;
+__gshared c_atk_role_get_localized_nameFn c_atk_role_get_localized_name; ///
+private alias c_atk_role_get_nameFn = extern(C) const(char)* function(AtkRole role) nothrow;
+__gshared c_atk_role_get_nameFn c_atk_role_get_name; ///
+private alias c_atk_role_registerFn = extern(C) AtkRole function(const(char)* name) nothrow;
+__gshared c_atk_role_registerFn c_atk_role_register; ///
 
-  // StateType
-  AtkStateType function(const(char)* name) c_atk_state_type_for_name; ///
-  const(char)* function(AtkStateType type) c_atk_state_type_get_name; ///
-  AtkStateType function(const(char)* name) c_atk_state_type_register; ///
+// StateType
+private alias c_atk_state_type_for_nameFn = extern(C) AtkStateType function(const(char)* name) nothrow;
+__gshared c_atk_state_type_for_nameFn c_atk_state_type_for_name; ///
+private alias c_atk_state_type_get_nameFn = extern(C) const(char)* function(AtkStateType type) nothrow;
+__gshared c_atk_state_type_get_nameFn c_atk_state_type_get_name; ///
+private alias c_atk_state_type_registerFn = extern(C) AtkStateType function(const(char)* name) nothrow;
+__gshared c_atk_state_type_registerFn c_atk_state_type_register; ///
 
-  // TextAttribute
-  AtkTextAttribute function(const(char)* name) c_atk_text_attribute_for_name; ///
-  const(char)* function(AtkTextAttribute attr) c_atk_text_attribute_get_name; ///
-  const(char)* function(AtkTextAttribute attr, int index) c_atk_text_attribute_get_value; ///
-  AtkTextAttribute function(const(char)* name) c_atk_text_attribute_register; ///
+// TextAttribute
+private alias c_atk_text_attribute_for_nameFn = extern(C) AtkTextAttribute function(const(char)* name) nothrow;
+__gshared c_atk_text_attribute_for_nameFn c_atk_text_attribute_for_name; ///
+private alias c_atk_text_attribute_get_nameFn = extern(C) const(char)* function(AtkTextAttribute attr) nothrow;
+__gshared c_atk_text_attribute_get_nameFn c_atk_text_attribute_get_name; ///
+private alias c_atk_text_attribute_get_valueFn = extern(C) const(char)* function(AtkTextAttribute attr, int index) nothrow;
+__gshared c_atk_text_attribute_get_valueFn c_atk_text_attribute_get_value; ///
+private alias c_atk_text_attribute_registerFn = extern(C) AtkTextAttribute function(const(char)* name) nothrow;
+__gshared c_atk_text_attribute_registerFn c_atk_text_attribute_register; ///
 
-  // ValueType
-  const(char)* function(AtkValueType valueType) c_atk_value_type_get_localized_name; ///
-  const(char)* function(AtkValueType valueType) c_atk_value_type_get_name; ///
-}
+// ValueType
+private alias c_atk_value_type_get_localized_nameFn = extern(C) const(char)* function(AtkValueType valueType) nothrow;
+__gshared c_atk_value_type_get_localized_nameFn c_atk_value_type_get_localized_name; ///
+private alias c_atk_value_type_get_nameFn = extern(C) const(char)* function(AtkValueType valueType) nothrow;
+__gshared c_atk_value_type_get_nameFn c_atk_value_type_get_name; ///
 
 // Action
 

@@ -9,441 +9,839 @@ public import gid.gobject2.c.types;
 
 private immutable LIBS = ["cairo-gobject_2", "cairo_2"];
 
-__gshared extern(C) nothrow
-{
-  // Context
-  GType function() c_cairo_gobject_context_get_type; ///
-  void function(cairo_t* cr, const(cairo_path_t)* path) c_cairo_append_path; ///
-  void function(cairo_t* cr, double xc, double yc, double radius, double angle1, double angle2) c_cairo_arc; ///
-  void function(cairo_t* cr, double xc, double yc, double radius, double angle1, double angle2) c_cairo_arc_negative; ///
-  void function(cairo_t* cr) c_cairo_clip; ///
-  void function(cairo_t* cr, double* x1, double* y1, double* x2, double* y2) c_cairo_clip_extents; ///
-  void function(cairo_t* cr) c_cairo_clip_preserve; ///
-  void function(cairo_t* cr) c_cairo_close_path; ///
-  cairo_rectangle_list_t* function(cairo_t* cr) c_cairo_copy_clip_rectangle_list; ///
-  void function(cairo_t* cr) c_cairo_copy_page; ///
-  cairo_path_t* function(cairo_t* cr) c_cairo_copy_path; ///
-  cairo_path_t* function(cairo_t* cr) c_cairo_copy_path_flat; ///
-  void function(cairo_t* cr, double x1, double y1, double x2, double y2, double x3, double y3) c_cairo_curve_to; ///
-  void function(cairo_t* cr, double* x, double* y) c_cairo_device_to_user; ///
-  void function(cairo_t* cr, double* dx, double* dy) c_cairo_device_to_user_distance; ///
-  void function(cairo_t* cr) c_cairo_fill; ///
-  void function(cairo_t* cr, double* x1, double* y1, double* x2, double* y2) c_cairo_fill_extents; ///
-  void function(cairo_t* cr) c_cairo_fill_preserve; ///
-  void function(cairo_t* cr, cairo_font_extents_t* extents) c_cairo_font_extents; ///
-  cairo_antialias_t function(cairo_t* cr) c_cairo_get_antialias; ///
-  void function(cairo_t* cr, double* x, double* y) c_cairo_get_current_point; ///
-  void function(cairo_t* cr, double* dashes, double* offset) c_cairo_get_dash; ///
-  int function(cairo_t* cr) c_cairo_get_dash_count; ///
-  cairo_fill_rule_t function(cairo_t* cr) c_cairo_get_fill_rule; ///
-  cairo_font_face_t* function(cairo_t* cr) c_cairo_get_font_face; ///
-  void function(cairo_t* cr, cairo_matrix_t* matrix) c_cairo_get_font_matrix; ///
-  void function(cairo_t* cr, cairo_font_options_t* options) c_cairo_get_font_options; ///
-  cairo_surface_t* function(cairo_t* cr) c_cairo_get_group_target; ///
-  cairo_bool_t function(cairo_t* cr) c_cairo_get_hairline; ///
-  cairo_line_cap_t function(cairo_t* cr) c_cairo_get_line_cap; ///
-  cairo_line_join_t function(cairo_t* cr) c_cairo_get_line_join; ///
-  double function(cairo_t* cr) c_cairo_get_line_width; ///
-  void function(cairo_t* cr, cairo_matrix_t* matrix) c_cairo_get_matrix; ///
-  double function(cairo_t* cr) c_cairo_get_miter_limit; ///
-  cairo_operator_t function(cairo_t* cr) c_cairo_get_operator; ///
-  cairo_scaled_font_t* function(cairo_t* cr) c_cairo_get_scaled_font; ///
-  cairo_pattern_t* function(cairo_t* cr) c_cairo_get_source; ///
-  cairo_surface_t* function(cairo_t* cr) c_cairo_get_target; ///
-  double function(cairo_t* cr) c_cairo_get_tolerance; ///
-  void function(cairo_t* cr, const(cairo_glyph_t)* glyphs, int numGlyphs, cairo_text_extents_t* extents) c_cairo_glyph_extents; ///
-  void function(cairo_t* cr, const(cairo_glyph_t)* glyphs, int numGlyphs) c_cairo_glyph_path; ///
-  cairo_bool_t function(cairo_t* cr) c_cairo_has_current_point; ///
-  void function(cairo_t* cr) c_cairo_identity_matrix; ///
-  cairo_bool_t function(cairo_t* cr, double x, double y) c_cairo_in_clip; ///
-  cairo_bool_t function(cairo_t* cr, double x, double y) c_cairo_in_fill; ///
-  cairo_bool_t function(cairo_t* cr, double x, double y) c_cairo_in_stroke; ///
-  void function(cairo_t* cr, double x, double y) c_cairo_line_to; ///
-  void function(cairo_t* cr, cairo_pattern_t* pattern) c_cairo_mask; ///
-  void function(cairo_t* cr, cairo_surface_t* surface, double surfaceX, double surfaceY) c_cairo_mask_surface; ///
-  void function(cairo_t* cr, double x, double y) c_cairo_move_to; ///
-  void function(cairo_t* cr) c_cairo_new_path; ///
-  void function(cairo_t* cr) c_cairo_new_sub_path; ///
-  void function(cairo_t* cr) c_cairo_paint; ///
-  void function(cairo_t* cr, double alpha) c_cairo_paint_with_alpha; ///
-  void function(cairo_t* cr, double* x1, double* y1, double* x2, double* y2) c_cairo_path_extents; ///
-  cairo_pattern_t* function(cairo_t* cr) c_cairo_pop_group; ///
-  void function(cairo_t* cr) c_cairo_pop_group_to_source; ///
-  void function(cairo_t* cr) c_cairo_push_group; ///
-  void function(cairo_t* cr, cairo_content_t content) c_cairo_push_group_with_content; ///
-  void function(cairo_t* cr, double x, double y, double width, double height) c_cairo_rectangle; ///
-  void function(cairo_t* cr, double dx1, double dy1, double dx2, double dy2, double dx3, double dy3) c_cairo_rel_curve_to; ///
-  void function(cairo_t* cr, double dx, double dy) c_cairo_rel_line_to; ///
-  void function(cairo_t* cr, double dx, double dy) c_cairo_rel_move_to; ///
-  void function(cairo_t* cr) c_cairo_reset_clip; ///
-  void function(cairo_t* cr) c_cairo_restore; ///
-  void function(cairo_t* cr, double angle) c_cairo_rotate; ///
-  void function(cairo_t* cr) c_cairo_save; ///
-  void function(cairo_t* cr, double sx, double sy) c_cairo_scale; ///
-  void function(cairo_t* cr, const(char)* family, cairo_font_slant_t slant, cairo_font_weight_t weight) c_cairo_select_font_face; ///
-  void function(cairo_t* cr, cairo_antialias_t antialias) c_cairo_set_antialias; ///
-  void function(cairo_t* cr, const(double)* dashes, int numDashes, double offset) c_cairo_set_dash; ///
-  void function(cairo_t* cr, cairo_fill_rule_t fillRule) c_cairo_set_fill_rule; ///
-  void function(cairo_t* cr, cairo_font_face_t* fontFace) c_cairo_set_font_face; ///
-  void function(cairo_t* cr, const(cairo_matrix_t)* matrix) c_cairo_set_font_matrix; ///
-  void function(cairo_t* cr, const(cairo_font_options_t)* options) c_cairo_set_font_options; ///
-  void function(cairo_t* cr, double size) c_cairo_set_font_size; ///
-  void function(cairo_t* cr, cairo_bool_t setHairline) c_cairo_set_hairline; ///
-  void function(cairo_t* cr, cairo_line_cap_t lineCap) c_cairo_set_line_cap; ///
-  void function(cairo_t* cr, cairo_line_join_t lineJoin) c_cairo_set_line_join; ///
-  void function(cairo_t* cr, double width) c_cairo_set_line_width; ///
-  void function(cairo_t* cr, const(cairo_matrix_t)* matrix) c_cairo_set_matrix; ///
-  void function(cairo_t* cr, double limit) c_cairo_set_miter_limit; ///
-  void function(cairo_t* cr, cairo_operator_t op) c_cairo_set_operator; ///
-  void function(cairo_t* cr, const(cairo_scaled_font_t)* scaledFont) c_cairo_set_scaled_font; ///
-  void function(cairo_t* cr, cairo_pattern_t* source) c_cairo_set_source; ///
-  void function(cairo_t* cr, double red, double green, double blue) c_cairo_set_source_rgb; ///
-  void function(cairo_t* cr, double red, double green, double blue, double alpha) c_cairo_set_source_rgba; ///
-  void function(cairo_t* cr, cairo_surface_t* surface, double x, double y) c_cairo_set_source_surface; ///
-  void function(cairo_t* cr, double tolerance) c_cairo_set_tolerance; ///
-  void function(cairo_t* cr, const(cairo_glyph_t)* glyphs, int numGlyphs) c_cairo_show_glyphs; ///
-  void function(cairo_t* cr) c_cairo_show_page; ///
-  void function(cairo_t* cr, const(char)* utf8) c_cairo_show_text; ///
-  void function(cairo_t* cr, const(char)* utf8, int utf8Len, const(cairo_glyph_t)* glyphs, int numGlyphs, const(cairo_text_cluster_t)* clusters, int numClusters, cairo_text_cluster_flags_t clusterFlags) c_cairo_show_text_glyphs; ///
-  cairo_status_t function(cairo_t* cr) c_cairo_status; ///
-  void function(cairo_t* cr) c_cairo_stroke; ///
-  void function(cairo_t* cr, double* x1, double* y1, double* x2, double* y2) c_cairo_stroke_extents; ///
-  void function(cairo_t* cr) c_cairo_stroke_preserve; ///
-  void function(cairo_t* cr, const(char)* tagName, const(char)* attributes) c_cairo_tag_begin; ///
-  void function(cairo_t* cr, const(char)* tagName) c_cairo_tag_end; ///
-  void function(cairo_t* cr, const(char)* utf8, cairo_text_extents_t* extents) c_cairo_text_extents; ///
-  void function(cairo_t* cr, const(char)* utf8) c_cairo_text_path; ///
-  void function(cairo_t* cr, const(cairo_matrix_t)* matrix) c_cairo_transform; ///
-  void function(cairo_t* cr, double tx, double ty) c_cairo_translate; ///
-  void function(cairo_t* cr, double* x, double* y) c_cairo_user_to_device; ///
-  void function(cairo_t* cr, double* dx, double* dy) c_cairo_user_to_device_distance; ///
+// Context
+private alias c_cairo_gobject_context_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_cairo_gobject_context_get_typeFn c_cairo_gobject_context_get_type; ///
+private alias c_cairo_append_pathFn = extern(C) void function(cairo_t* cr, const(cairo_path_t)* path) nothrow;
+__gshared c_cairo_append_pathFn c_cairo_append_path; ///
+private alias c_cairo_arcFn = extern(C) void function(cairo_t* cr, double xc, double yc, double radius, double angle1, double angle2) nothrow;
+__gshared c_cairo_arcFn c_cairo_arc; ///
+private alias c_cairo_arc_negativeFn = extern(C) void function(cairo_t* cr, double xc, double yc, double radius, double angle1, double angle2) nothrow;
+__gshared c_cairo_arc_negativeFn c_cairo_arc_negative; ///
+private alias c_cairo_clipFn = extern(C) void function(cairo_t* cr) nothrow;
+__gshared c_cairo_clipFn c_cairo_clip; ///
+private alias c_cairo_clip_extentsFn = extern(C) void function(cairo_t* cr, double* x1, double* y1, double* x2, double* y2) nothrow;
+__gshared c_cairo_clip_extentsFn c_cairo_clip_extents; ///
+private alias c_cairo_clip_preserveFn = extern(C) void function(cairo_t* cr) nothrow;
+__gshared c_cairo_clip_preserveFn c_cairo_clip_preserve; ///
+private alias c_cairo_close_pathFn = extern(C) void function(cairo_t* cr) nothrow;
+__gshared c_cairo_close_pathFn c_cairo_close_path; ///
+private alias c_cairo_copy_clip_rectangle_listFn = extern(C) cairo_rectangle_list_t* function(cairo_t* cr) nothrow;
+__gshared c_cairo_copy_clip_rectangle_listFn c_cairo_copy_clip_rectangle_list; ///
+private alias c_cairo_copy_pageFn = extern(C) void function(cairo_t* cr) nothrow;
+__gshared c_cairo_copy_pageFn c_cairo_copy_page; ///
+private alias c_cairo_copy_pathFn = extern(C) cairo_path_t* function(cairo_t* cr) nothrow;
+__gshared c_cairo_copy_pathFn c_cairo_copy_path; ///
+private alias c_cairo_copy_path_flatFn = extern(C) cairo_path_t* function(cairo_t* cr) nothrow;
+__gshared c_cairo_copy_path_flatFn c_cairo_copy_path_flat; ///
+private alias c_cairo_curve_toFn = extern(C) void function(cairo_t* cr, double x1, double y1, double x2, double y2, double x3, double y3) nothrow;
+__gshared c_cairo_curve_toFn c_cairo_curve_to; ///
+private alias c_cairo_device_to_userFn = extern(C) void function(cairo_t* cr, double* x, double* y) nothrow;
+__gshared c_cairo_device_to_userFn c_cairo_device_to_user; ///
+private alias c_cairo_device_to_user_distanceFn = extern(C) void function(cairo_t* cr, double* dx, double* dy) nothrow;
+__gshared c_cairo_device_to_user_distanceFn c_cairo_device_to_user_distance; ///
+private alias c_cairo_fillFn = extern(C) void function(cairo_t* cr) nothrow;
+__gshared c_cairo_fillFn c_cairo_fill; ///
+private alias c_cairo_fill_extentsFn = extern(C) void function(cairo_t* cr, double* x1, double* y1, double* x2, double* y2) nothrow;
+__gshared c_cairo_fill_extentsFn c_cairo_fill_extents; ///
+private alias c_cairo_fill_preserveFn = extern(C) void function(cairo_t* cr) nothrow;
+__gshared c_cairo_fill_preserveFn c_cairo_fill_preserve; ///
+private alias c_cairo_font_extentsFn = extern(C) void function(cairo_t* cr, cairo_font_extents_t* extents) nothrow;
+__gshared c_cairo_font_extentsFn c_cairo_font_extents; ///
+private alias c_cairo_get_antialiasFn = extern(C) cairo_antialias_t function(cairo_t* cr) nothrow;
+__gshared c_cairo_get_antialiasFn c_cairo_get_antialias; ///
+private alias c_cairo_get_current_pointFn = extern(C) void function(cairo_t* cr, double* x, double* y) nothrow;
+__gshared c_cairo_get_current_pointFn c_cairo_get_current_point; ///
+private alias c_cairo_get_dashFn = extern(C) void function(cairo_t* cr, double* dashes, double* offset) nothrow;
+__gshared c_cairo_get_dashFn c_cairo_get_dash; ///
+private alias c_cairo_get_dash_countFn = extern(C) int function(cairo_t* cr) nothrow;
+__gshared c_cairo_get_dash_countFn c_cairo_get_dash_count; ///
+private alias c_cairo_get_fill_ruleFn = extern(C) cairo_fill_rule_t function(cairo_t* cr) nothrow;
+__gshared c_cairo_get_fill_ruleFn c_cairo_get_fill_rule; ///
+private alias c_cairo_get_font_faceFn = extern(C) cairo_font_face_t* function(cairo_t* cr) nothrow;
+__gshared c_cairo_get_font_faceFn c_cairo_get_font_face; ///
+private alias c_cairo_get_font_matrixFn = extern(C) void function(cairo_t* cr, cairo_matrix_t* matrix) nothrow;
+__gshared c_cairo_get_font_matrixFn c_cairo_get_font_matrix; ///
+private alias c_cairo_get_font_optionsFn = extern(C) void function(cairo_t* cr, cairo_font_options_t* options) nothrow;
+__gshared c_cairo_get_font_optionsFn c_cairo_get_font_options; ///
+private alias c_cairo_get_group_targetFn = extern(C) cairo_surface_t* function(cairo_t* cr) nothrow;
+__gshared c_cairo_get_group_targetFn c_cairo_get_group_target; ///
+private alias c_cairo_get_hairlineFn = extern(C) cairo_bool_t function(cairo_t* cr) nothrow;
+__gshared c_cairo_get_hairlineFn c_cairo_get_hairline; ///
+private alias c_cairo_get_line_capFn = extern(C) cairo_line_cap_t function(cairo_t* cr) nothrow;
+__gshared c_cairo_get_line_capFn c_cairo_get_line_cap; ///
+private alias c_cairo_get_line_joinFn = extern(C) cairo_line_join_t function(cairo_t* cr) nothrow;
+__gshared c_cairo_get_line_joinFn c_cairo_get_line_join; ///
+private alias c_cairo_get_line_widthFn = extern(C) double function(cairo_t* cr) nothrow;
+__gshared c_cairo_get_line_widthFn c_cairo_get_line_width; ///
+private alias c_cairo_get_matrixFn = extern(C) void function(cairo_t* cr, cairo_matrix_t* matrix) nothrow;
+__gshared c_cairo_get_matrixFn c_cairo_get_matrix; ///
+private alias c_cairo_get_miter_limitFn = extern(C) double function(cairo_t* cr) nothrow;
+__gshared c_cairo_get_miter_limitFn c_cairo_get_miter_limit; ///
+private alias c_cairo_get_operatorFn = extern(C) cairo_operator_t function(cairo_t* cr) nothrow;
+__gshared c_cairo_get_operatorFn c_cairo_get_operator; ///
+private alias c_cairo_get_scaled_fontFn = extern(C) cairo_scaled_font_t* function(cairo_t* cr) nothrow;
+__gshared c_cairo_get_scaled_fontFn c_cairo_get_scaled_font; ///
+private alias c_cairo_get_sourceFn = extern(C) cairo_pattern_t* function(cairo_t* cr) nothrow;
+__gshared c_cairo_get_sourceFn c_cairo_get_source; ///
+private alias c_cairo_get_targetFn = extern(C) cairo_surface_t* function(cairo_t* cr) nothrow;
+__gshared c_cairo_get_targetFn c_cairo_get_target; ///
+private alias c_cairo_get_toleranceFn = extern(C) double function(cairo_t* cr) nothrow;
+__gshared c_cairo_get_toleranceFn c_cairo_get_tolerance; ///
+private alias c_cairo_glyph_extentsFn = extern(C) void function(cairo_t* cr, const(cairo_glyph_t)* glyphs, int numGlyphs, cairo_text_extents_t* extents) nothrow;
+__gshared c_cairo_glyph_extentsFn c_cairo_glyph_extents; ///
+private alias c_cairo_glyph_pathFn = extern(C) void function(cairo_t* cr, const(cairo_glyph_t)* glyphs, int numGlyphs) nothrow;
+__gshared c_cairo_glyph_pathFn c_cairo_glyph_path; ///
+private alias c_cairo_has_current_pointFn = extern(C) cairo_bool_t function(cairo_t* cr) nothrow;
+__gshared c_cairo_has_current_pointFn c_cairo_has_current_point; ///
+private alias c_cairo_identity_matrixFn = extern(C) void function(cairo_t* cr) nothrow;
+__gshared c_cairo_identity_matrixFn c_cairo_identity_matrix; ///
+private alias c_cairo_in_clipFn = extern(C) cairo_bool_t function(cairo_t* cr, double x, double y) nothrow;
+__gshared c_cairo_in_clipFn c_cairo_in_clip; ///
+private alias c_cairo_in_fillFn = extern(C) cairo_bool_t function(cairo_t* cr, double x, double y) nothrow;
+__gshared c_cairo_in_fillFn c_cairo_in_fill; ///
+private alias c_cairo_in_strokeFn = extern(C) cairo_bool_t function(cairo_t* cr, double x, double y) nothrow;
+__gshared c_cairo_in_strokeFn c_cairo_in_stroke; ///
+private alias c_cairo_line_toFn = extern(C) void function(cairo_t* cr, double x, double y) nothrow;
+__gshared c_cairo_line_toFn c_cairo_line_to; ///
+private alias c_cairo_maskFn = extern(C) void function(cairo_t* cr, cairo_pattern_t* pattern) nothrow;
+__gshared c_cairo_maskFn c_cairo_mask; ///
+private alias c_cairo_mask_surfaceFn = extern(C) void function(cairo_t* cr, cairo_surface_t* surface, double surfaceX, double surfaceY) nothrow;
+__gshared c_cairo_mask_surfaceFn c_cairo_mask_surface; ///
+private alias c_cairo_move_toFn = extern(C) void function(cairo_t* cr, double x, double y) nothrow;
+__gshared c_cairo_move_toFn c_cairo_move_to; ///
+private alias c_cairo_new_pathFn = extern(C) void function(cairo_t* cr) nothrow;
+__gshared c_cairo_new_pathFn c_cairo_new_path; ///
+private alias c_cairo_new_sub_pathFn = extern(C) void function(cairo_t* cr) nothrow;
+__gshared c_cairo_new_sub_pathFn c_cairo_new_sub_path; ///
+private alias c_cairo_paintFn = extern(C) void function(cairo_t* cr) nothrow;
+__gshared c_cairo_paintFn c_cairo_paint; ///
+private alias c_cairo_paint_with_alphaFn = extern(C) void function(cairo_t* cr, double alpha) nothrow;
+__gshared c_cairo_paint_with_alphaFn c_cairo_paint_with_alpha; ///
+private alias c_cairo_path_extentsFn = extern(C) void function(cairo_t* cr, double* x1, double* y1, double* x2, double* y2) nothrow;
+__gshared c_cairo_path_extentsFn c_cairo_path_extents; ///
+private alias c_cairo_pop_groupFn = extern(C) cairo_pattern_t* function(cairo_t* cr) nothrow;
+__gshared c_cairo_pop_groupFn c_cairo_pop_group; ///
+private alias c_cairo_pop_group_to_sourceFn = extern(C) void function(cairo_t* cr) nothrow;
+__gshared c_cairo_pop_group_to_sourceFn c_cairo_pop_group_to_source; ///
+private alias c_cairo_push_groupFn = extern(C) void function(cairo_t* cr) nothrow;
+__gshared c_cairo_push_groupFn c_cairo_push_group; ///
+private alias c_cairo_push_group_with_contentFn = extern(C) void function(cairo_t* cr, cairo_content_t content) nothrow;
+__gshared c_cairo_push_group_with_contentFn c_cairo_push_group_with_content; ///
+private alias c_cairo_rectangleFn = extern(C) void function(cairo_t* cr, double x, double y, double width, double height) nothrow;
+__gshared c_cairo_rectangleFn c_cairo_rectangle; ///
+private alias c_cairo_rel_curve_toFn = extern(C) void function(cairo_t* cr, double dx1, double dy1, double dx2, double dy2, double dx3, double dy3) nothrow;
+__gshared c_cairo_rel_curve_toFn c_cairo_rel_curve_to; ///
+private alias c_cairo_rel_line_toFn = extern(C) void function(cairo_t* cr, double dx, double dy) nothrow;
+__gshared c_cairo_rel_line_toFn c_cairo_rel_line_to; ///
+private alias c_cairo_rel_move_toFn = extern(C) void function(cairo_t* cr, double dx, double dy) nothrow;
+__gshared c_cairo_rel_move_toFn c_cairo_rel_move_to; ///
+private alias c_cairo_reset_clipFn = extern(C) void function(cairo_t* cr) nothrow;
+__gshared c_cairo_reset_clipFn c_cairo_reset_clip; ///
+private alias c_cairo_restoreFn = extern(C) void function(cairo_t* cr) nothrow;
+__gshared c_cairo_restoreFn c_cairo_restore; ///
+private alias c_cairo_rotateFn = extern(C) void function(cairo_t* cr, double angle) nothrow;
+__gshared c_cairo_rotateFn c_cairo_rotate; ///
+private alias c_cairo_saveFn = extern(C) void function(cairo_t* cr) nothrow;
+__gshared c_cairo_saveFn c_cairo_save; ///
+private alias c_cairo_scaleFn = extern(C) void function(cairo_t* cr, double sx, double sy) nothrow;
+__gshared c_cairo_scaleFn c_cairo_scale; ///
+private alias c_cairo_select_font_faceFn = extern(C) void function(cairo_t* cr, const(char)* family, cairo_font_slant_t slant, cairo_font_weight_t weight) nothrow;
+__gshared c_cairo_select_font_faceFn c_cairo_select_font_face; ///
+private alias c_cairo_set_antialiasFn = extern(C) void function(cairo_t* cr, cairo_antialias_t antialias) nothrow;
+__gshared c_cairo_set_antialiasFn c_cairo_set_antialias; ///
+private alias c_cairo_set_dashFn = extern(C) void function(cairo_t* cr, const(double)* dashes, int numDashes, double offset) nothrow;
+__gshared c_cairo_set_dashFn c_cairo_set_dash; ///
+private alias c_cairo_set_fill_ruleFn = extern(C) void function(cairo_t* cr, cairo_fill_rule_t fillRule) nothrow;
+__gshared c_cairo_set_fill_ruleFn c_cairo_set_fill_rule; ///
+private alias c_cairo_set_font_faceFn = extern(C) void function(cairo_t* cr, cairo_font_face_t* fontFace) nothrow;
+__gshared c_cairo_set_font_faceFn c_cairo_set_font_face; ///
+private alias c_cairo_set_font_matrixFn = extern(C) void function(cairo_t* cr, const(cairo_matrix_t)* matrix) nothrow;
+__gshared c_cairo_set_font_matrixFn c_cairo_set_font_matrix; ///
+private alias c_cairo_set_font_optionsFn = extern(C) void function(cairo_t* cr, const(cairo_font_options_t)* options) nothrow;
+__gshared c_cairo_set_font_optionsFn c_cairo_set_font_options; ///
+private alias c_cairo_set_font_sizeFn = extern(C) void function(cairo_t* cr, double size) nothrow;
+__gshared c_cairo_set_font_sizeFn c_cairo_set_font_size; ///
+private alias c_cairo_set_hairlineFn = extern(C) void function(cairo_t* cr, cairo_bool_t setHairline) nothrow;
+__gshared c_cairo_set_hairlineFn c_cairo_set_hairline; ///
+private alias c_cairo_set_line_capFn = extern(C) void function(cairo_t* cr, cairo_line_cap_t lineCap) nothrow;
+__gshared c_cairo_set_line_capFn c_cairo_set_line_cap; ///
+private alias c_cairo_set_line_joinFn = extern(C) void function(cairo_t* cr, cairo_line_join_t lineJoin) nothrow;
+__gshared c_cairo_set_line_joinFn c_cairo_set_line_join; ///
+private alias c_cairo_set_line_widthFn = extern(C) void function(cairo_t* cr, double width) nothrow;
+__gshared c_cairo_set_line_widthFn c_cairo_set_line_width; ///
+private alias c_cairo_set_matrixFn = extern(C) void function(cairo_t* cr, const(cairo_matrix_t)* matrix) nothrow;
+__gshared c_cairo_set_matrixFn c_cairo_set_matrix; ///
+private alias c_cairo_set_miter_limitFn = extern(C) void function(cairo_t* cr, double limit) nothrow;
+__gshared c_cairo_set_miter_limitFn c_cairo_set_miter_limit; ///
+private alias c_cairo_set_operatorFn = extern(C) void function(cairo_t* cr, cairo_operator_t op) nothrow;
+__gshared c_cairo_set_operatorFn c_cairo_set_operator; ///
+private alias c_cairo_set_scaled_fontFn = extern(C) void function(cairo_t* cr, const(cairo_scaled_font_t)* scaledFont) nothrow;
+__gshared c_cairo_set_scaled_fontFn c_cairo_set_scaled_font; ///
+private alias c_cairo_set_sourceFn = extern(C) void function(cairo_t* cr, cairo_pattern_t* source) nothrow;
+__gshared c_cairo_set_sourceFn c_cairo_set_source; ///
+private alias c_cairo_set_source_rgbFn = extern(C) void function(cairo_t* cr, double red, double green, double blue) nothrow;
+__gshared c_cairo_set_source_rgbFn c_cairo_set_source_rgb; ///
+private alias c_cairo_set_source_rgbaFn = extern(C) void function(cairo_t* cr, double red, double green, double blue, double alpha) nothrow;
+__gshared c_cairo_set_source_rgbaFn c_cairo_set_source_rgba; ///
+private alias c_cairo_set_source_surfaceFn = extern(C) void function(cairo_t* cr, cairo_surface_t* surface, double x, double y) nothrow;
+__gshared c_cairo_set_source_surfaceFn c_cairo_set_source_surface; ///
+private alias c_cairo_set_toleranceFn = extern(C) void function(cairo_t* cr, double tolerance) nothrow;
+__gshared c_cairo_set_toleranceFn c_cairo_set_tolerance; ///
+private alias c_cairo_show_glyphsFn = extern(C) void function(cairo_t* cr, const(cairo_glyph_t)* glyphs, int numGlyphs) nothrow;
+__gshared c_cairo_show_glyphsFn c_cairo_show_glyphs; ///
+private alias c_cairo_show_pageFn = extern(C) void function(cairo_t* cr) nothrow;
+__gshared c_cairo_show_pageFn c_cairo_show_page; ///
+private alias c_cairo_show_textFn = extern(C) void function(cairo_t* cr, const(char)* utf8) nothrow;
+__gshared c_cairo_show_textFn c_cairo_show_text; ///
+private alias c_cairo_show_text_glyphsFn = extern(C) void function(cairo_t* cr, const(char)* utf8, int utf8Len, const(cairo_glyph_t)* glyphs, int numGlyphs, const(cairo_text_cluster_t)* clusters, int numClusters, cairo_text_cluster_flags_t clusterFlags) nothrow;
+__gshared c_cairo_show_text_glyphsFn c_cairo_show_text_glyphs; ///
+private alias c_cairo_statusFn = extern(C) cairo_status_t function(cairo_t* cr) nothrow;
+__gshared c_cairo_statusFn c_cairo_status; ///
+private alias c_cairo_strokeFn = extern(C) void function(cairo_t* cr) nothrow;
+__gshared c_cairo_strokeFn c_cairo_stroke; ///
+private alias c_cairo_stroke_extentsFn = extern(C) void function(cairo_t* cr, double* x1, double* y1, double* x2, double* y2) nothrow;
+__gshared c_cairo_stroke_extentsFn c_cairo_stroke_extents; ///
+private alias c_cairo_stroke_preserveFn = extern(C) void function(cairo_t* cr) nothrow;
+__gshared c_cairo_stroke_preserveFn c_cairo_stroke_preserve; ///
+private alias c_cairo_tag_beginFn = extern(C) void function(cairo_t* cr, const(char)* tagName, const(char)* attributes) nothrow;
+__gshared c_cairo_tag_beginFn c_cairo_tag_begin; ///
+private alias c_cairo_tag_endFn = extern(C) void function(cairo_t* cr, const(char)* tagName) nothrow;
+__gshared c_cairo_tag_endFn c_cairo_tag_end; ///
+private alias c_cairo_text_extentsFn = extern(C) void function(cairo_t* cr, const(char)* utf8, cairo_text_extents_t* extents) nothrow;
+__gshared c_cairo_text_extentsFn c_cairo_text_extents; ///
+private alias c_cairo_text_pathFn = extern(C) void function(cairo_t* cr, const(char)* utf8) nothrow;
+__gshared c_cairo_text_pathFn c_cairo_text_path; ///
+private alias c_cairo_transformFn = extern(C) void function(cairo_t* cr, const(cairo_matrix_t)* matrix) nothrow;
+__gshared c_cairo_transformFn c_cairo_transform; ///
+private alias c_cairo_translateFn = extern(C) void function(cairo_t* cr, double tx, double ty) nothrow;
+__gshared c_cairo_translateFn c_cairo_translate; ///
+private alias c_cairo_user_to_deviceFn = extern(C) void function(cairo_t* cr, double* x, double* y) nothrow;
+__gshared c_cairo_user_to_deviceFn c_cairo_user_to_device; ///
+private alias c_cairo_user_to_device_distanceFn = extern(C) void function(cairo_t* cr, double* dx, double* dy) nothrow;
+__gshared c_cairo_user_to_device_distanceFn c_cairo_user_to_device_distance; ///
 
-  // Device
-  GType function() c_cairo_gobject_device_get_type; ///
-  cairo_status_t function(cairo_device_t* device) c_cairo_device_acquire; ///
-  void function(cairo_device_t* device) c_cairo_device_destroy; ///
-  void function(cairo_device_t* device) c_cairo_device_finish; ///
-  void function(cairo_device_t* device) c_cairo_device_flush; ///
-  uint function(cairo_device_t* device) c_cairo_device_get_reference_count; ///
-  cairo_device_type_t function(cairo_device_t* device) c_cairo_device_get_type; ///
-  void* function(cairo_device_t* device, const(cairo_user_data_key_t)* key) c_cairo_device_get_user_data; ///
-  double function(cairo_device_t* abstractDevice) c_cairo_device_observer_elapsed; ///
-  double function(cairo_device_t* abstractDevice) c_cairo_device_observer_fill_elapsed; ///
-  double function(cairo_device_t* abstractDevice) c_cairo_device_observer_glyphs_elapsed; ///
-  double function(cairo_device_t* abstractDevice) c_cairo_device_observer_mask_elapsed; ///
-  double function(cairo_device_t* abstractDevice) c_cairo_device_observer_paint_elapsed; ///
-  cairo_status_t function(cairo_device_t* abstractDevice, cairo_write_func_t writeFunc, void* closure) c_cairo_device_observer_print; ///
-  double function(cairo_device_t* abstractDevice) c_cairo_device_observer_stroke_elapsed; ///
-  cairo_device_t* function(cairo_device_t* device) c_cairo_device_reference; ///
-  void function(cairo_device_t* device) c_cairo_device_release; ///
-  cairo_status_t function(cairo_device_t* device, const(cairo_user_data_key_t)* key, void* userData, cairo_destroy_func_t destroy) c_cairo_device_set_user_data; ///
-  cairo_status_t function(cairo_device_t* device) c_cairo_device_status; ///
+// Device
+private alias c_cairo_gobject_device_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_cairo_gobject_device_get_typeFn c_cairo_gobject_device_get_type; ///
+private alias c_cairo_device_acquireFn = extern(C) cairo_status_t function(cairo_device_t* device) nothrow;
+__gshared c_cairo_device_acquireFn c_cairo_device_acquire; ///
+private alias c_cairo_device_destroyFn = extern(C) void function(cairo_device_t* device) nothrow;
+__gshared c_cairo_device_destroyFn c_cairo_device_destroy; ///
+private alias c_cairo_device_finishFn = extern(C) void function(cairo_device_t* device) nothrow;
+__gshared c_cairo_device_finishFn c_cairo_device_finish; ///
+private alias c_cairo_device_flushFn = extern(C) void function(cairo_device_t* device) nothrow;
+__gshared c_cairo_device_flushFn c_cairo_device_flush; ///
+private alias c_cairo_device_get_reference_countFn = extern(C) uint function(cairo_device_t* device) nothrow;
+__gshared c_cairo_device_get_reference_countFn c_cairo_device_get_reference_count; ///
+private alias c_cairo_device_get_typeFn = extern(C) cairo_device_type_t function(cairo_device_t* device) nothrow;
+__gshared c_cairo_device_get_typeFn c_cairo_device_get_type; ///
+private alias c_cairo_device_get_user_dataFn = extern(C) void* function(cairo_device_t* device, const(cairo_user_data_key_t)* key) nothrow;
+__gshared c_cairo_device_get_user_dataFn c_cairo_device_get_user_data; ///
+private alias c_cairo_device_observer_elapsedFn = extern(C) double function(cairo_device_t* abstractDevice) nothrow;
+__gshared c_cairo_device_observer_elapsedFn c_cairo_device_observer_elapsed; ///
+private alias c_cairo_device_observer_fill_elapsedFn = extern(C) double function(cairo_device_t* abstractDevice) nothrow;
+__gshared c_cairo_device_observer_fill_elapsedFn c_cairo_device_observer_fill_elapsed; ///
+private alias c_cairo_device_observer_glyphs_elapsedFn = extern(C) double function(cairo_device_t* abstractDevice) nothrow;
+__gshared c_cairo_device_observer_glyphs_elapsedFn c_cairo_device_observer_glyphs_elapsed; ///
+private alias c_cairo_device_observer_mask_elapsedFn = extern(C) double function(cairo_device_t* abstractDevice) nothrow;
+__gshared c_cairo_device_observer_mask_elapsedFn c_cairo_device_observer_mask_elapsed; ///
+private alias c_cairo_device_observer_paint_elapsedFn = extern(C) double function(cairo_device_t* abstractDevice) nothrow;
+__gshared c_cairo_device_observer_paint_elapsedFn c_cairo_device_observer_paint_elapsed; ///
+private alias c_cairo_device_observer_printFn = extern(C) cairo_status_t function(cairo_device_t* abstractDevice, cairo_write_func_t writeFunc, void* closure) nothrow;
+__gshared c_cairo_device_observer_printFn c_cairo_device_observer_print; ///
+private alias c_cairo_device_observer_stroke_elapsedFn = extern(C) double function(cairo_device_t* abstractDevice) nothrow;
+__gshared c_cairo_device_observer_stroke_elapsedFn c_cairo_device_observer_stroke_elapsed; ///
+private alias c_cairo_device_referenceFn = extern(C) cairo_device_t* function(cairo_device_t* device) nothrow;
+__gshared c_cairo_device_referenceFn c_cairo_device_reference; ///
+private alias c_cairo_device_releaseFn = extern(C) void function(cairo_device_t* device) nothrow;
+__gshared c_cairo_device_releaseFn c_cairo_device_release; ///
+private alias c_cairo_device_set_user_dataFn = extern(C) cairo_status_t function(cairo_device_t* device, const(cairo_user_data_key_t)* key, void* userData, cairo_destroy_func_t destroy) nothrow;
+__gshared c_cairo_device_set_user_dataFn c_cairo_device_set_user_data; ///
+private alias c_cairo_device_statusFn = extern(C) cairo_status_t function(cairo_device_t* device) nothrow;
+__gshared c_cairo_device_statusFn c_cairo_device_status; ///
 
-  // FontFace
-  GType function() c_cairo_gobject_font_face_get_type; ///
-  void function(cairo_font_face_t* fontFace) c_cairo_font_face_destroy; ///
-  uint function(cairo_font_face_t* fontFace) c_cairo_font_face_get_reference_count; ///
-  cairo_font_type_t function(cairo_font_face_t* fontFace) c_cairo_font_face_get_type; ///
-  void* function(cairo_font_face_t* fontFace, const(cairo_user_data_key_t)* key) c_cairo_font_face_get_user_data; ///
-  cairo_font_face_t* function(cairo_font_face_t* fontFace) c_cairo_font_face_reference; ///
-  cairo_status_t function(cairo_font_face_t* fontFace, const(cairo_user_data_key_t)* key, void* userData, cairo_destroy_func_t destroy) c_cairo_font_face_set_user_data; ///
-  cairo_status_t function(cairo_font_face_t* fontFace) c_cairo_font_face_status; ///
+// FontFace
+private alias c_cairo_gobject_font_face_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_cairo_gobject_font_face_get_typeFn c_cairo_gobject_font_face_get_type; ///
+private alias c_cairo_font_face_destroyFn = extern(C) void function(cairo_font_face_t* fontFace) nothrow;
+__gshared c_cairo_font_face_destroyFn c_cairo_font_face_destroy; ///
+private alias c_cairo_font_face_get_reference_countFn = extern(C) uint function(cairo_font_face_t* fontFace) nothrow;
+__gshared c_cairo_font_face_get_reference_countFn c_cairo_font_face_get_reference_count; ///
+private alias c_cairo_font_face_get_typeFn = extern(C) cairo_font_type_t function(cairo_font_face_t* fontFace) nothrow;
+__gshared c_cairo_font_face_get_typeFn c_cairo_font_face_get_type; ///
+private alias c_cairo_font_face_get_user_dataFn = extern(C) void* function(cairo_font_face_t* fontFace, const(cairo_user_data_key_t)* key) nothrow;
+__gshared c_cairo_font_face_get_user_dataFn c_cairo_font_face_get_user_data; ///
+private alias c_cairo_font_face_referenceFn = extern(C) cairo_font_face_t* function(cairo_font_face_t* fontFace) nothrow;
+__gshared c_cairo_font_face_referenceFn c_cairo_font_face_reference; ///
+private alias c_cairo_font_face_set_user_dataFn = extern(C) cairo_status_t function(cairo_font_face_t* fontFace, const(cairo_user_data_key_t)* key, void* userData, cairo_destroy_func_t destroy) nothrow;
+__gshared c_cairo_font_face_set_user_dataFn c_cairo_font_face_set_user_data; ///
+private alias c_cairo_font_face_statusFn = extern(C) cairo_status_t function(cairo_font_face_t* fontFace) nothrow;
+__gshared c_cairo_font_face_statusFn c_cairo_font_face_status; ///
 
-  // FontOptions
-  GType function() c_cairo_gobject_font_options_get_type; ///
-  cairo_font_options_t* function(const(cairo_font_options_t)* original) c_cairo_font_options_copy; ///
-  void function(cairo_font_options_t* options) c_cairo_font_options_destroy; ///
-  cairo_bool_t function(const(cairo_font_options_t)* options, const(cairo_font_options_t)* other) c_cairo_font_options_equal; ///
-  cairo_antialias_t function(const(cairo_font_options_t)* options) c_cairo_font_options_get_antialias; ///
-  cairo_color_mode_t function(const(cairo_font_options_t)* options) c_cairo_font_options_get_color_mode; ///
-  uint function(const(cairo_font_options_t)* options) c_cairo_font_options_get_color_palette; ///
-  cairo_status_t function(cairo_font_options_t* options, uint index, double* red, double* green, double* blue, double* alpha) c_cairo_font_options_get_custom_palette_color; ///
-  cairo_hint_metrics_t function(const(cairo_font_options_t)* options) c_cairo_font_options_get_hint_metrics; ///
-  cairo_hint_style_t function(const(cairo_font_options_t)* options) c_cairo_font_options_get_hint_style; ///
-  cairo_subpixel_order_t function(const(cairo_font_options_t)* options) c_cairo_font_options_get_subpixel_order; ///
-  const(char)* function(cairo_font_options_t* options) c_cairo_font_options_get_variations; ///
-  gulong function(const(cairo_font_options_t)* options) c_cairo_font_options_hash; ///
-  void function(cairo_font_options_t* options, const(cairo_font_options_t)* other) c_cairo_font_options_merge; ///
-  void function(cairo_font_options_t* options, cairo_antialias_t antialias) c_cairo_font_options_set_antialias; ///
-  void function(cairo_font_options_t* options, cairo_color_mode_t colorMode) c_cairo_font_options_set_color_mode; ///
-  void function(cairo_font_options_t* options, uint paletteIndex) c_cairo_font_options_set_color_palette; ///
-  void function(cairo_font_options_t* options, uint index, double red, double green, double blue, double alpha) c_cairo_font_options_set_custom_palette_color; ///
-  void function(cairo_font_options_t* options, cairo_hint_metrics_t hintMetrics) c_cairo_font_options_set_hint_metrics; ///
-  void function(cairo_font_options_t* options, cairo_hint_style_t hintStyle) c_cairo_font_options_set_hint_style; ///
-  void function(cairo_font_options_t* options, cairo_subpixel_order_t subpixelOrder) c_cairo_font_options_set_subpixel_order; ///
-  void function(cairo_font_options_t* options, const(char)* variations) c_cairo_font_options_set_variations; ///
-  cairo_status_t function(cairo_font_options_t* options) c_cairo_font_options_status; ///
+// FontOptions
+private alias c_cairo_gobject_font_options_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_cairo_gobject_font_options_get_typeFn c_cairo_gobject_font_options_get_type; ///
+private alias c_cairo_font_options_copyFn = extern(C) cairo_font_options_t* function(const(cairo_font_options_t)* original) nothrow;
+__gshared c_cairo_font_options_copyFn c_cairo_font_options_copy; ///
+private alias c_cairo_font_options_destroyFn = extern(C) void function(cairo_font_options_t* options) nothrow;
+__gshared c_cairo_font_options_destroyFn c_cairo_font_options_destroy; ///
+private alias c_cairo_font_options_equalFn = extern(C) cairo_bool_t function(const(cairo_font_options_t)* options, const(cairo_font_options_t)* other) nothrow;
+__gshared c_cairo_font_options_equalFn c_cairo_font_options_equal; ///
+private alias c_cairo_font_options_get_antialiasFn = extern(C) cairo_antialias_t function(const(cairo_font_options_t)* options) nothrow;
+__gshared c_cairo_font_options_get_antialiasFn c_cairo_font_options_get_antialias; ///
+private alias c_cairo_font_options_get_color_modeFn = extern(C) cairo_color_mode_t function(const(cairo_font_options_t)* options) nothrow;
+__gshared c_cairo_font_options_get_color_modeFn c_cairo_font_options_get_color_mode; ///
+private alias c_cairo_font_options_get_color_paletteFn = extern(C) uint function(const(cairo_font_options_t)* options) nothrow;
+__gshared c_cairo_font_options_get_color_paletteFn c_cairo_font_options_get_color_palette; ///
+private alias c_cairo_font_options_get_custom_palette_colorFn = extern(C) cairo_status_t function(cairo_font_options_t* options, uint index, double* red, double* green, double* blue, double* alpha) nothrow;
+__gshared c_cairo_font_options_get_custom_palette_colorFn c_cairo_font_options_get_custom_palette_color; ///
+private alias c_cairo_font_options_get_hint_metricsFn = extern(C) cairo_hint_metrics_t function(const(cairo_font_options_t)* options) nothrow;
+__gshared c_cairo_font_options_get_hint_metricsFn c_cairo_font_options_get_hint_metrics; ///
+private alias c_cairo_font_options_get_hint_styleFn = extern(C) cairo_hint_style_t function(const(cairo_font_options_t)* options) nothrow;
+__gshared c_cairo_font_options_get_hint_styleFn c_cairo_font_options_get_hint_style; ///
+private alias c_cairo_font_options_get_subpixel_orderFn = extern(C) cairo_subpixel_order_t function(const(cairo_font_options_t)* options) nothrow;
+__gshared c_cairo_font_options_get_subpixel_orderFn c_cairo_font_options_get_subpixel_order; ///
+private alias c_cairo_font_options_get_variationsFn = extern(C) const(char)* function(cairo_font_options_t* options) nothrow;
+__gshared c_cairo_font_options_get_variationsFn c_cairo_font_options_get_variations; ///
+private alias c_cairo_font_options_hashFn = extern(C) gulong function(const(cairo_font_options_t)* options) nothrow;
+__gshared c_cairo_font_options_hashFn c_cairo_font_options_hash; ///
+private alias c_cairo_font_options_mergeFn = extern(C) void function(cairo_font_options_t* options, const(cairo_font_options_t)* other) nothrow;
+__gshared c_cairo_font_options_mergeFn c_cairo_font_options_merge; ///
+private alias c_cairo_font_options_set_antialiasFn = extern(C) void function(cairo_font_options_t* options, cairo_antialias_t antialias) nothrow;
+__gshared c_cairo_font_options_set_antialiasFn c_cairo_font_options_set_antialias; ///
+private alias c_cairo_font_options_set_color_modeFn = extern(C) void function(cairo_font_options_t* options, cairo_color_mode_t colorMode) nothrow;
+__gshared c_cairo_font_options_set_color_modeFn c_cairo_font_options_set_color_mode; ///
+private alias c_cairo_font_options_set_color_paletteFn = extern(C) void function(cairo_font_options_t* options, uint paletteIndex) nothrow;
+__gshared c_cairo_font_options_set_color_paletteFn c_cairo_font_options_set_color_palette; ///
+private alias c_cairo_font_options_set_custom_palette_colorFn = extern(C) void function(cairo_font_options_t* options, uint index, double red, double green, double blue, double alpha) nothrow;
+__gshared c_cairo_font_options_set_custom_palette_colorFn c_cairo_font_options_set_custom_palette_color; ///
+private alias c_cairo_font_options_set_hint_metricsFn = extern(C) void function(cairo_font_options_t* options, cairo_hint_metrics_t hintMetrics) nothrow;
+__gshared c_cairo_font_options_set_hint_metricsFn c_cairo_font_options_set_hint_metrics; ///
+private alias c_cairo_font_options_set_hint_styleFn = extern(C) void function(cairo_font_options_t* options, cairo_hint_style_t hintStyle) nothrow;
+__gshared c_cairo_font_options_set_hint_styleFn c_cairo_font_options_set_hint_style; ///
+private alias c_cairo_font_options_set_subpixel_orderFn = extern(C) void function(cairo_font_options_t* options, cairo_subpixel_order_t subpixelOrder) nothrow;
+__gshared c_cairo_font_options_set_subpixel_orderFn c_cairo_font_options_set_subpixel_order; ///
+private alias c_cairo_font_options_set_variationsFn = extern(C) void function(cairo_font_options_t* options, const(char)* variations) nothrow;
+__gshared c_cairo_font_options_set_variationsFn c_cairo_font_options_set_variations; ///
+private alias c_cairo_font_options_statusFn = extern(C) cairo_status_t function(cairo_font_options_t* options) nothrow;
+__gshared c_cairo_font_options_statusFn c_cairo_font_options_status; ///
 
-  // Glyph
-  GType function() c_cairo_gobject_glyph_get_type; ///
-  void function(cairo_glyph_t* glyphs) c_cairo_glyph_free; ///
+// Glyph
+private alias c_cairo_gobject_glyph_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_cairo_gobject_glyph_get_typeFn c_cairo_gobject_glyph_get_type; ///
+private alias c_cairo_glyph_freeFn = extern(C) void function(cairo_glyph_t* glyphs) nothrow;
+__gshared c_cairo_glyph_freeFn c_cairo_glyph_free; ///
 
-  // Matrix
-  GType function() c_cairo_gobject_matrix_get_type; ///
-  void function(cairo_matrix_t* matrix, double xx, double yx, double xy, double yy, double x0, double y0) c_cairo_matrix_init; ///
-  void function(cairo_matrix_t* matrix) c_cairo_matrix_init_identity; ///
-  void function(cairo_matrix_t* matrix, double radians) c_cairo_matrix_init_rotate; ///
-  void function(cairo_matrix_t* matrix, double sx, double sy) c_cairo_matrix_init_scale; ///
-  void function(cairo_matrix_t* matrix, double tx, double ty) c_cairo_matrix_init_translate; ///
-  cairo_status_t function(cairo_matrix_t* matrix) c_cairo_matrix_invert; ///
-  void function(cairo_matrix_t* result, const(cairo_matrix_t)* a, const(cairo_matrix_t)* b) c_cairo_matrix_multiply; ///
-  void function(cairo_matrix_t* matrix, double radians) c_cairo_matrix_rotate; ///
-  void function(cairo_matrix_t* matrix, double sx, double sy) c_cairo_matrix_scale; ///
-  void function(const(cairo_matrix_t)* matrix, double* dx, double* dy) c_cairo_matrix_transform_distance; ///
-  void function(const(cairo_matrix_t)* matrix, double* x, double* y) c_cairo_matrix_transform_point; ///
-  void function(cairo_matrix_t* matrix, double tx, double ty) c_cairo_matrix_translate; ///
+// Matrix
+private alias c_cairo_gobject_matrix_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_cairo_gobject_matrix_get_typeFn c_cairo_gobject_matrix_get_type; ///
+private alias c_cairo_matrix_initFn = extern(C) void function(cairo_matrix_t* matrix, double xx, double yx, double xy, double yy, double x0, double y0) nothrow;
+__gshared c_cairo_matrix_initFn c_cairo_matrix_init; ///
+private alias c_cairo_matrix_init_identityFn = extern(C) void function(cairo_matrix_t* matrix) nothrow;
+__gshared c_cairo_matrix_init_identityFn c_cairo_matrix_init_identity; ///
+private alias c_cairo_matrix_init_rotateFn = extern(C) void function(cairo_matrix_t* matrix, double radians) nothrow;
+__gshared c_cairo_matrix_init_rotateFn c_cairo_matrix_init_rotate; ///
+private alias c_cairo_matrix_init_scaleFn = extern(C) void function(cairo_matrix_t* matrix, double sx, double sy) nothrow;
+__gshared c_cairo_matrix_init_scaleFn c_cairo_matrix_init_scale; ///
+private alias c_cairo_matrix_init_translateFn = extern(C) void function(cairo_matrix_t* matrix, double tx, double ty) nothrow;
+__gshared c_cairo_matrix_init_translateFn c_cairo_matrix_init_translate; ///
+private alias c_cairo_matrix_invertFn = extern(C) cairo_status_t function(cairo_matrix_t* matrix) nothrow;
+__gshared c_cairo_matrix_invertFn c_cairo_matrix_invert; ///
+private alias c_cairo_matrix_multiplyFn = extern(C) void function(cairo_matrix_t* result, const(cairo_matrix_t)* a, const(cairo_matrix_t)* b) nothrow;
+__gshared c_cairo_matrix_multiplyFn c_cairo_matrix_multiply; ///
+private alias c_cairo_matrix_rotateFn = extern(C) void function(cairo_matrix_t* matrix, double radians) nothrow;
+__gshared c_cairo_matrix_rotateFn c_cairo_matrix_rotate; ///
+private alias c_cairo_matrix_scaleFn = extern(C) void function(cairo_matrix_t* matrix, double sx, double sy) nothrow;
+__gshared c_cairo_matrix_scaleFn c_cairo_matrix_scale; ///
+private alias c_cairo_matrix_transform_distanceFn = extern(C) void function(const(cairo_matrix_t)* matrix, double* dx, double* dy) nothrow;
+__gshared c_cairo_matrix_transform_distanceFn c_cairo_matrix_transform_distance; ///
+private alias c_cairo_matrix_transform_pointFn = extern(C) void function(const(cairo_matrix_t)* matrix, double* x, double* y) nothrow;
+__gshared c_cairo_matrix_transform_pointFn c_cairo_matrix_transform_point; ///
+private alias c_cairo_matrix_translateFn = extern(C) void function(cairo_matrix_t* matrix, double tx, double ty) nothrow;
+__gshared c_cairo_matrix_translateFn c_cairo_matrix_translate; ///
 
-  // Path
-  GType function() c_cairo_gobject_path_get_type; ///
-  void function(cairo_path_t* path) c_cairo_path_destroy; ///
+// Path
+private alias c_cairo_gobject_path_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_cairo_gobject_path_get_typeFn c_cairo_gobject_path_get_type; ///
+private alias c_cairo_path_destroyFn = extern(C) void function(cairo_path_t* path) nothrow;
+__gshared c_cairo_path_destroyFn c_cairo_path_destroy; ///
 
-  // Pattern
-  GType function() c_cairo_gobject_pattern_get_type; ///
-  void function(cairo_pattern_t* pattern, double offset, double red, double green, double blue) c_cairo_pattern_add_color_stop_rgb; ///
-  void function(cairo_pattern_t* pattern, double offset, double red, double green, double blue, double alpha) c_cairo_pattern_add_color_stop_rgba; ///
-  void function(cairo_pattern_t* pattern) c_cairo_pattern_destroy; ///
-  cairo_status_t function(cairo_pattern_t* pattern, int* count) c_cairo_pattern_get_color_stop_count; ///
-  cairo_status_t function(cairo_pattern_t* pattern, int index, double* offset, double* red, double* green, double* blue, double* alpha) c_cairo_pattern_get_color_stop_rgba; ///
-  cairo_dither_t function(cairo_pattern_t* pattern) c_cairo_pattern_get_dither; ///
-  cairo_extend_t function(cairo_pattern_t* pattern) c_cairo_pattern_get_extend; ///
-  cairo_filter_t function(cairo_pattern_t* pattern) c_cairo_pattern_get_filter; ///
-  cairo_status_t function(cairo_pattern_t* pattern, double* x0, double* y0, double* x1, double* y1) c_cairo_pattern_get_linear_points; ///
-  void function(cairo_pattern_t* pattern, cairo_matrix_t* matrix) c_cairo_pattern_get_matrix; ///
-  cairo_status_t function(cairo_pattern_t* pattern, double* x0, double* y0, double* r0, double* x1, double* y1, double* r1) c_cairo_pattern_get_radial_circles; ///
-  uint function(cairo_pattern_t* pattern) c_cairo_pattern_get_reference_count; ///
-  cairo_status_t function(cairo_pattern_t* pattern, double* red, double* green, double* blue, double* alpha) c_cairo_pattern_get_rgba; ///
-  cairo_status_t function(cairo_pattern_t* pattern, cairo_surface_t** surface) c_cairo_pattern_get_surface; ///
-  cairo_pattern_type_t function(cairo_pattern_t* pattern) c_cairo_pattern_get_type; ///
-  void* function(cairo_pattern_t* pattern, const(cairo_user_data_key_t)* key) c_cairo_pattern_get_user_data; ///
-  cairo_pattern_t* function(cairo_pattern_t* pattern) c_cairo_pattern_reference; ///
-  void function(cairo_pattern_t* pattern, cairo_dither_t dither) c_cairo_pattern_set_dither; ///
-  void function(cairo_pattern_t* pattern, cairo_extend_t extend) c_cairo_pattern_set_extend; ///
-  void function(cairo_pattern_t* pattern, cairo_filter_t filter) c_cairo_pattern_set_filter; ///
-  void function(cairo_pattern_t* pattern, const(cairo_matrix_t)* matrix) c_cairo_pattern_set_matrix; ///
-  cairo_status_t function(cairo_pattern_t* pattern, const(cairo_user_data_key_t)* key, void* userData, cairo_destroy_func_t destroy) c_cairo_pattern_set_user_data; ///
-  cairo_status_t function(cairo_pattern_t* pattern) c_cairo_pattern_status; ///
+// Pattern
+private alias c_cairo_gobject_pattern_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_cairo_gobject_pattern_get_typeFn c_cairo_gobject_pattern_get_type; ///
+private alias c_cairo_pattern_add_color_stop_rgbFn = extern(C) void function(cairo_pattern_t* pattern, double offset, double red, double green, double blue) nothrow;
+__gshared c_cairo_pattern_add_color_stop_rgbFn c_cairo_pattern_add_color_stop_rgb; ///
+private alias c_cairo_pattern_add_color_stop_rgbaFn = extern(C) void function(cairo_pattern_t* pattern, double offset, double red, double green, double blue, double alpha) nothrow;
+__gshared c_cairo_pattern_add_color_stop_rgbaFn c_cairo_pattern_add_color_stop_rgba; ///
+private alias c_cairo_pattern_destroyFn = extern(C) void function(cairo_pattern_t* pattern) nothrow;
+__gshared c_cairo_pattern_destroyFn c_cairo_pattern_destroy; ///
+private alias c_cairo_pattern_get_color_stop_countFn = extern(C) cairo_status_t function(cairo_pattern_t* pattern, int* count) nothrow;
+__gshared c_cairo_pattern_get_color_stop_countFn c_cairo_pattern_get_color_stop_count; ///
+private alias c_cairo_pattern_get_color_stop_rgbaFn = extern(C) cairo_status_t function(cairo_pattern_t* pattern, int index, double* offset, double* red, double* green, double* blue, double* alpha) nothrow;
+__gshared c_cairo_pattern_get_color_stop_rgbaFn c_cairo_pattern_get_color_stop_rgba; ///
+private alias c_cairo_pattern_get_ditherFn = extern(C) cairo_dither_t function(cairo_pattern_t* pattern) nothrow;
+__gshared c_cairo_pattern_get_ditherFn c_cairo_pattern_get_dither; ///
+private alias c_cairo_pattern_get_extendFn = extern(C) cairo_extend_t function(cairo_pattern_t* pattern) nothrow;
+__gshared c_cairo_pattern_get_extendFn c_cairo_pattern_get_extend; ///
+private alias c_cairo_pattern_get_filterFn = extern(C) cairo_filter_t function(cairo_pattern_t* pattern) nothrow;
+__gshared c_cairo_pattern_get_filterFn c_cairo_pattern_get_filter; ///
+private alias c_cairo_pattern_get_linear_pointsFn = extern(C) cairo_status_t function(cairo_pattern_t* pattern, double* x0, double* y0, double* x1, double* y1) nothrow;
+__gshared c_cairo_pattern_get_linear_pointsFn c_cairo_pattern_get_linear_points; ///
+private alias c_cairo_pattern_get_matrixFn = extern(C) void function(cairo_pattern_t* pattern, cairo_matrix_t* matrix) nothrow;
+__gshared c_cairo_pattern_get_matrixFn c_cairo_pattern_get_matrix; ///
+private alias c_cairo_pattern_get_radial_circlesFn = extern(C) cairo_status_t function(cairo_pattern_t* pattern, double* x0, double* y0, double* r0, double* x1, double* y1, double* r1) nothrow;
+__gshared c_cairo_pattern_get_radial_circlesFn c_cairo_pattern_get_radial_circles; ///
+private alias c_cairo_pattern_get_reference_countFn = extern(C) uint function(cairo_pattern_t* pattern) nothrow;
+__gshared c_cairo_pattern_get_reference_countFn c_cairo_pattern_get_reference_count; ///
+private alias c_cairo_pattern_get_rgbaFn = extern(C) cairo_status_t function(cairo_pattern_t* pattern, double* red, double* green, double* blue, double* alpha) nothrow;
+__gshared c_cairo_pattern_get_rgbaFn c_cairo_pattern_get_rgba; ///
+private alias c_cairo_pattern_get_surfaceFn = extern(C) cairo_status_t function(cairo_pattern_t* pattern, cairo_surface_t** surface) nothrow;
+__gshared c_cairo_pattern_get_surfaceFn c_cairo_pattern_get_surface; ///
+private alias c_cairo_pattern_get_typeFn = extern(C) cairo_pattern_type_t function(cairo_pattern_t* pattern) nothrow;
+__gshared c_cairo_pattern_get_typeFn c_cairo_pattern_get_type; ///
+private alias c_cairo_pattern_get_user_dataFn = extern(C) void* function(cairo_pattern_t* pattern, const(cairo_user_data_key_t)* key) nothrow;
+__gshared c_cairo_pattern_get_user_dataFn c_cairo_pattern_get_user_data; ///
+private alias c_cairo_pattern_referenceFn = extern(C) cairo_pattern_t* function(cairo_pattern_t* pattern) nothrow;
+__gshared c_cairo_pattern_referenceFn c_cairo_pattern_reference; ///
+private alias c_cairo_pattern_set_ditherFn = extern(C) void function(cairo_pattern_t* pattern, cairo_dither_t dither) nothrow;
+__gshared c_cairo_pattern_set_ditherFn c_cairo_pattern_set_dither; ///
+private alias c_cairo_pattern_set_extendFn = extern(C) void function(cairo_pattern_t* pattern, cairo_extend_t extend) nothrow;
+__gshared c_cairo_pattern_set_extendFn c_cairo_pattern_set_extend; ///
+private alias c_cairo_pattern_set_filterFn = extern(C) void function(cairo_pattern_t* pattern, cairo_filter_t filter) nothrow;
+__gshared c_cairo_pattern_set_filterFn c_cairo_pattern_set_filter; ///
+private alias c_cairo_pattern_set_matrixFn = extern(C) void function(cairo_pattern_t* pattern, const(cairo_matrix_t)* matrix) nothrow;
+__gshared c_cairo_pattern_set_matrixFn c_cairo_pattern_set_matrix; ///
+private alias c_cairo_pattern_set_user_dataFn = extern(C) cairo_status_t function(cairo_pattern_t* pattern, const(cairo_user_data_key_t)* key, void* userData, cairo_destroy_func_t destroy) nothrow;
+__gshared c_cairo_pattern_set_user_dataFn c_cairo_pattern_set_user_data; ///
+private alias c_cairo_pattern_statusFn = extern(C) cairo_status_t function(cairo_pattern_t* pattern) nothrow;
+__gshared c_cairo_pattern_statusFn c_cairo_pattern_status; ///
 
-  // Rectangle
-  GType function() c_cairo_gobject_rectangle_get_type; ///
+// Rectangle
+private alias c_cairo_gobject_rectangle_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_cairo_gobject_rectangle_get_typeFn c_cairo_gobject_rectangle_get_type; ///
 
-  // RectangleInt
-  GType function() c_cairo_gobject_rectangle_int_get_type; ///
+// RectangleInt
+private alias c_cairo_gobject_rectangle_int_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_cairo_gobject_rectangle_int_get_typeFn c_cairo_gobject_rectangle_int_get_type; ///
 
-  // RectangleList
-  GType function() c_cairo_gobject_rectangle_list_get_type; ///
-  void function(cairo_rectangle_list_t* rectangleList) c_cairo_rectangle_list_destroy; ///
+// RectangleList
+private alias c_cairo_gobject_rectangle_list_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_cairo_gobject_rectangle_list_get_typeFn c_cairo_gobject_rectangle_list_get_type; ///
+private alias c_cairo_rectangle_list_destroyFn = extern(C) void function(cairo_rectangle_list_t* rectangleList) nothrow;
+__gshared c_cairo_rectangle_list_destroyFn c_cairo_rectangle_list_destroy; ///
 
-  // Region
-  GType function() c_cairo_gobject_region_get_type; ///
-  cairo_bool_t function(const(cairo_region_t)* region, int x, int y) c_cairo_region_contains_point; ///
-  cairo_region_overlap_t function(const(cairo_region_t)* region, const(cairo_rectangle_int_t)* rectangle) c_cairo_region_contains_rectangle; ///
-  cairo_region_t* function(const(cairo_region_t)* original) c_cairo_region_copy; ///
-  void function(cairo_region_t* region) c_cairo_region_destroy; ///
-  cairo_bool_t function(const(cairo_region_t)* a, const(cairo_region_t)* b) c_cairo_region_equal; ///
-  void function(const(cairo_region_t)* region, cairo_rectangle_int_t* extents) c_cairo_region_get_extents; ///
-  void function(const(cairo_region_t)* region, int nth, cairo_rectangle_int_t* rectangle) c_cairo_region_get_rectangle; ///
-  cairo_status_t function(cairo_region_t* dst, const(cairo_region_t)* other) c_cairo_region_intersect; ///
-  cairo_status_t function(cairo_region_t* dst, const(cairo_rectangle_int_t)* rectangle) c_cairo_region_intersect_rectangle; ///
-  cairo_bool_t function(const(cairo_region_t)* region) c_cairo_region_is_empty; ///
-  int function(const(cairo_region_t)* region) c_cairo_region_num_rectangles; ///
-  cairo_region_t* function(cairo_region_t* region) c_cairo_region_reference; ///
-  cairo_status_t function(const(cairo_region_t)* region) c_cairo_region_status; ///
-  cairo_status_t function(cairo_region_t* dst, const(cairo_region_t)* other) c_cairo_region_subtract; ///
-  cairo_status_t function(cairo_region_t* dst, const(cairo_rectangle_int_t)* rectangle) c_cairo_region_subtract_rectangle; ///
-  void function(cairo_region_t* region, int dx, int dy) c_cairo_region_translate; ///
-  cairo_status_t function(cairo_region_t* dst, const(cairo_region_t)* other) c_cairo_region_union; ///
-  cairo_status_t function(cairo_region_t* dst, const(cairo_rectangle_int_t)* rectangle) c_cairo_region_union_rectangle; ///
-  cairo_status_t function(cairo_region_t* dst, const(cairo_region_t)* other) c_cairo_region_xor; ///
-  cairo_status_t function(cairo_region_t* dst, const(cairo_rectangle_int_t)* rectangle) c_cairo_region_xor_rectangle; ///
+// Region
+private alias c_cairo_gobject_region_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_cairo_gobject_region_get_typeFn c_cairo_gobject_region_get_type; ///
+private alias c_cairo_region_contains_pointFn = extern(C) cairo_bool_t function(const(cairo_region_t)* region, int x, int y) nothrow;
+__gshared c_cairo_region_contains_pointFn c_cairo_region_contains_point; ///
+private alias c_cairo_region_contains_rectangleFn = extern(C) cairo_region_overlap_t function(const(cairo_region_t)* region, const(cairo_rectangle_int_t)* rectangle) nothrow;
+__gshared c_cairo_region_contains_rectangleFn c_cairo_region_contains_rectangle; ///
+private alias c_cairo_region_copyFn = extern(C) cairo_region_t* function(const(cairo_region_t)* original) nothrow;
+__gshared c_cairo_region_copyFn c_cairo_region_copy; ///
+private alias c_cairo_region_destroyFn = extern(C) void function(cairo_region_t* region) nothrow;
+__gshared c_cairo_region_destroyFn c_cairo_region_destroy; ///
+private alias c_cairo_region_equalFn = extern(C) cairo_bool_t function(const(cairo_region_t)* a, const(cairo_region_t)* b) nothrow;
+__gshared c_cairo_region_equalFn c_cairo_region_equal; ///
+private alias c_cairo_region_get_extentsFn = extern(C) void function(const(cairo_region_t)* region, cairo_rectangle_int_t* extents) nothrow;
+__gshared c_cairo_region_get_extentsFn c_cairo_region_get_extents; ///
+private alias c_cairo_region_get_rectangleFn = extern(C) void function(const(cairo_region_t)* region, int nth, cairo_rectangle_int_t* rectangle) nothrow;
+__gshared c_cairo_region_get_rectangleFn c_cairo_region_get_rectangle; ///
+private alias c_cairo_region_intersectFn = extern(C) cairo_status_t function(cairo_region_t* dst, const(cairo_region_t)* other) nothrow;
+__gshared c_cairo_region_intersectFn c_cairo_region_intersect; ///
+private alias c_cairo_region_intersect_rectangleFn = extern(C) cairo_status_t function(cairo_region_t* dst, const(cairo_rectangle_int_t)* rectangle) nothrow;
+__gshared c_cairo_region_intersect_rectangleFn c_cairo_region_intersect_rectangle; ///
+private alias c_cairo_region_is_emptyFn = extern(C) cairo_bool_t function(const(cairo_region_t)* region) nothrow;
+__gshared c_cairo_region_is_emptyFn c_cairo_region_is_empty; ///
+private alias c_cairo_region_num_rectanglesFn = extern(C) int function(const(cairo_region_t)* region) nothrow;
+__gshared c_cairo_region_num_rectanglesFn c_cairo_region_num_rectangles; ///
+private alias c_cairo_region_referenceFn = extern(C) cairo_region_t* function(cairo_region_t* region) nothrow;
+__gshared c_cairo_region_referenceFn c_cairo_region_reference; ///
+private alias c_cairo_region_statusFn = extern(C) cairo_status_t function(const(cairo_region_t)* region) nothrow;
+__gshared c_cairo_region_statusFn c_cairo_region_status; ///
+private alias c_cairo_region_subtractFn = extern(C) cairo_status_t function(cairo_region_t* dst, const(cairo_region_t)* other) nothrow;
+__gshared c_cairo_region_subtractFn c_cairo_region_subtract; ///
+private alias c_cairo_region_subtract_rectangleFn = extern(C) cairo_status_t function(cairo_region_t* dst, const(cairo_rectangle_int_t)* rectangle) nothrow;
+__gshared c_cairo_region_subtract_rectangleFn c_cairo_region_subtract_rectangle; ///
+private alias c_cairo_region_translateFn = extern(C) void function(cairo_region_t* region, int dx, int dy) nothrow;
+__gshared c_cairo_region_translateFn c_cairo_region_translate; ///
+private alias c_cairo_region_unionFn = extern(C) cairo_status_t function(cairo_region_t* dst, const(cairo_region_t)* other) nothrow;
+__gshared c_cairo_region_unionFn c_cairo_region_union; ///
+private alias c_cairo_region_union_rectangleFn = extern(C) cairo_status_t function(cairo_region_t* dst, const(cairo_rectangle_int_t)* rectangle) nothrow;
+__gshared c_cairo_region_union_rectangleFn c_cairo_region_union_rectangle; ///
+private alias c_cairo_region_xorFn = extern(C) cairo_status_t function(cairo_region_t* dst, const(cairo_region_t)* other) nothrow;
+__gshared c_cairo_region_xorFn c_cairo_region_xor; ///
+private alias c_cairo_region_xor_rectangleFn = extern(C) cairo_status_t function(cairo_region_t* dst, const(cairo_rectangle_int_t)* rectangle) nothrow;
+__gshared c_cairo_region_xor_rectangleFn c_cairo_region_xor_rectangle; ///
 
-  // ScaledFont
-  GType function() c_cairo_gobject_scaled_font_get_type; ///
-  void function(cairo_scaled_font_t* scaledFont) c_cairo_scaled_font_destroy; ///
-  void function(cairo_scaled_font_t* scaledFont, cairo_font_extents_t* extents) c_cairo_scaled_font_extents; ///
-  void function(cairo_scaled_font_t* scaledFont, cairo_matrix_t* ctm) c_cairo_scaled_font_get_ctm; ///
-  cairo_font_face_t* function(cairo_scaled_font_t* scaledFont) c_cairo_scaled_font_get_font_face; ///
-  void function(cairo_scaled_font_t* scaledFont, cairo_matrix_t* fontMatrix) c_cairo_scaled_font_get_font_matrix; ///
-  void function(cairo_scaled_font_t* scaledFont, cairo_font_options_t* options) c_cairo_scaled_font_get_font_options; ///
-  uint function(cairo_scaled_font_t* scaledFont) c_cairo_scaled_font_get_reference_count; ///
-  void function(cairo_scaled_font_t* scaledFont, cairo_matrix_t* scaleMatrix) c_cairo_scaled_font_get_scale_matrix; ///
-  cairo_font_type_t function(cairo_scaled_font_t* scaledFont) c_cairo_scaled_font_get_type; ///
-  void* function(cairo_scaled_font_t* scaledFont, const(cairo_user_data_key_t)* key) c_cairo_scaled_font_get_user_data; ///
-  void function(cairo_scaled_font_t* scaledFont, const(cairo_glyph_t)* glyphs, int numGlyphs, cairo_text_extents_t* extents) c_cairo_scaled_font_glyph_extents; ///
-  cairo_scaled_font_t* function(cairo_scaled_font_t* scaledFont) c_cairo_scaled_font_reference; ///
-  cairo_status_t function(cairo_scaled_font_t* scaledFont, const(cairo_user_data_key_t)* key, void* userData, cairo_destroy_func_t destroy) c_cairo_scaled_font_set_user_data; ///
-  cairo_status_t function(cairo_scaled_font_t* scaledFont) c_cairo_scaled_font_status; ///
-  void function(cairo_scaled_font_t* scaledFont, const(char)* utf8, cairo_text_extents_t* extents) c_cairo_scaled_font_text_extents; ///
-  cairo_status_t function(cairo_scaled_font_t* scaledFont, double x, double y, const(char)* utf8, int utf8Len, cairo_glyph_t** glyphs, int* numGlyphs, cairo_text_cluster_t** clusters, int* numClusters, cairo_text_cluster_flags_t* clusterFlags) c_cairo_scaled_font_text_to_glyphs; ///
+// ScaledFont
+private alias c_cairo_gobject_scaled_font_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_cairo_gobject_scaled_font_get_typeFn c_cairo_gobject_scaled_font_get_type; ///
+private alias c_cairo_scaled_font_destroyFn = extern(C) void function(cairo_scaled_font_t* scaledFont) nothrow;
+__gshared c_cairo_scaled_font_destroyFn c_cairo_scaled_font_destroy; ///
+private alias c_cairo_scaled_font_extentsFn = extern(C) void function(cairo_scaled_font_t* scaledFont, cairo_font_extents_t* extents) nothrow;
+__gshared c_cairo_scaled_font_extentsFn c_cairo_scaled_font_extents; ///
+private alias c_cairo_scaled_font_get_ctmFn = extern(C) void function(cairo_scaled_font_t* scaledFont, cairo_matrix_t* ctm) nothrow;
+__gshared c_cairo_scaled_font_get_ctmFn c_cairo_scaled_font_get_ctm; ///
+private alias c_cairo_scaled_font_get_font_faceFn = extern(C) cairo_font_face_t* function(cairo_scaled_font_t* scaledFont) nothrow;
+__gshared c_cairo_scaled_font_get_font_faceFn c_cairo_scaled_font_get_font_face; ///
+private alias c_cairo_scaled_font_get_font_matrixFn = extern(C) void function(cairo_scaled_font_t* scaledFont, cairo_matrix_t* fontMatrix) nothrow;
+__gshared c_cairo_scaled_font_get_font_matrixFn c_cairo_scaled_font_get_font_matrix; ///
+private alias c_cairo_scaled_font_get_font_optionsFn = extern(C) void function(cairo_scaled_font_t* scaledFont, cairo_font_options_t* options) nothrow;
+__gshared c_cairo_scaled_font_get_font_optionsFn c_cairo_scaled_font_get_font_options; ///
+private alias c_cairo_scaled_font_get_reference_countFn = extern(C) uint function(cairo_scaled_font_t* scaledFont) nothrow;
+__gshared c_cairo_scaled_font_get_reference_countFn c_cairo_scaled_font_get_reference_count; ///
+private alias c_cairo_scaled_font_get_scale_matrixFn = extern(C) void function(cairo_scaled_font_t* scaledFont, cairo_matrix_t* scaleMatrix) nothrow;
+__gshared c_cairo_scaled_font_get_scale_matrixFn c_cairo_scaled_font_get_scale_matrix; ///
+private alias c_cairo_scaled_font_get_typeFn = extern(C) cairo_font_type_t function(cairo_scaled_font_t* scaledFont) nothrow;
+__gshared c_cairo_scaled_font_get_typeFn c_cairo_scaled_font_get_type; ///
+private alias c_cairo_scaled_font_get_user_dataFn = extern(C) void* function(cairo_scaled_font_t* scaledFont, const(cairo_user_data_key_t)* key) nothrow;
+__gshared c_cairo_scaled_font_get_user_dataFn c_cairo_scaled_font_get_user_data; ///
+private alias c_cairo_scaled_font_glyph_extentsFn = extern(C) void function(cairo_scaled_font_t* scaledFont, const(cairo_glyph_t)* glyphs, int numGlyphs, cairo_text_extents_t* extents) nothrow;
+__gshared c_cairo_scaled_font_glyph_extentsFn c_cairo_scaled_font_glyph_extents; ///
+private alias c_cairo_scaled_font_referenceFn = extern(C) cairo_scaled_font_t* function(cairo_scaled_font_t* scaledFont) nothrow;
+__gshared c_cairo_scaled_font_referenceFn c_cairo_scaled_font_reference; ///
+private alias c_cairo_scaled_font_set_user_dataFn = extern(C) cairo_status_t function(cairo_scaled_font_t* scaledFont, const(cairo_user_data_key_t)* key, void* userData, cairo_destroy_func_t destroy) nothrow;
+__gshared c_cairo_scaled_font_set_user_dataFn c_cairo_scaled_font_set_user_data; ///
+private alias c_cairo_scaled_font_statusFn = extern(C) cairo_status_t function(cairo_scaled_font_t* scaledFont) nothrow;
+__gshared c_cairo_scaled_font_statusFn c_cairo_scaled_font_status; ///
+private alias c_cairo_scaled_font_text_extentsFn = extern(C) void function(cairo_scaled_font_t* scaledFont, const(char)* utf8, cairo_text_extents_t* extents) nothrow;
+__gshared c_cairo_scaled_font_text_extentsFn c_cairo_scaled_font_text_extents; ///
+private alias c_cairo_scaled_font_text_to_glyphsFn = extern(C) cairo_status_t function(cairo_scaled_font_t* scaledFont, double x, double y, const(char)* utf8, int utf8Len, cairo_glyph_t** glyphs, int* numGlyphs, cairo_text_cluster_t** clusters, int* numClusters, cairo_text_cluster_flags_t* clusterFlags) nothrow;
+__gshared c_cairo_scaled_font_text_to_glyphsFn c_cairo_scaled_font_text_to_glyphs; ///
 
-  // Surface
-  GType function() c_cairo_gobject_surface_get_type; ///
-  void function(cairo_surface_t* surface) c_cairo_surface_copy_page; ///
-  cairo_surface_t* function(cairo_surface_t* target, double x, double y, double width, double height) c_cairo_surface_create_for_rectangle; ///
-  cairo_surface_t* function(cairo_surface_t* target, cairo_surface_observer_mode_t mode) c_cairo_surface_create_observer; ///
-  cairo_surface_t* function(cairo_surface_t* other, cairo_content_t content, int width, int height) c_cairo_surface_create_similar; ///
-  cairo_surface_t* function(cairo_surface_t* other, cairo_format_t format, int width, int height) c_cairo_surface_create_similar_image; ///
-  void function(cairo_surface_t* surface) c_cairo_surface_destroy; ///
-  void function(cairo_surface_t* surface) c_cairo_surface_finish; ///
-  void function(cairo_surface_t* surface) c_cairo_surface_flush; ///
-  cairo_content_t function(cairo_surface_t* surface) c_cairo_surface_get_content; ///
-  cairo_device_t* function(cairo_surface_t* surface) c_cairo_surface_get_device; ///
-  void function(cairo_surface_t* surface, double* xOffset, double* yOffset) c_cairo_surface_get_device_offset; ///
-  void function(cairo_surface_t* surface, double* xScale, double* yScale) c_cairo_surface_get_device_scale; ///
-  void function(cairo_surface_t* surface, double* xPixelsPerInch, double* yPixelsPerInch) c_cairo_surface_get_fallback_resolution; ///
-  void function(cairo_surface_t* surface, cairo_font_options_t* options) c_cairo_surface_get_font_options; ///
-  void function(cairo_surface_t* surface, const(char)* mimeType, const(ubyte*)* data, gulong* length) c_cairo_surface_get_mime_data; ///
-  uint function(cairo_surface_t* surface) c_cairo_surface_get_reference_count; ///
-  cairo_surface_type_t function(cairo_surface_t* surface) c_cairo_surface_get_type; ///
-  void* function(cairo_surface_t* surface, const(cairo_user_data_key_t)* key) c_cairo_surface_get_user_data; ///
-  cairo_bool_t function(cairo_surface_t* surface) c_cairo_surface_has_show_text_glyphs; ///
-  cairo_surface_t* function(cairo_surface_t* surface, const(cairo_rectangle_int_t)* extents) c_cairo_surface_map_to_image; ///
-  void function(cairo_surface_t* surface) c_cairo_surface_mark_dirty; ///
-  void function(cairo_surface_t* surface, int x, int y, int width, int height) c_cairo_surface_mark_dirty_rectangle; ///
-  cairo_status_t function(cairo_surface_t* abstractSurface, cairo_surface_observer_callback_t func, void* data) c_cairo_surface_observer_add_fill_callback; ///
-  cairo_status_t function(cairo_surface_t* abstractSurface, cairo_surface_observer_callback_t func, void* data) c_cairo_surface_observer_add_finish_callback; ///
-  cairo_status_t function(cairo_surface_t* abstractSurface, cairo_surface_observer_callback_t func, void* data) c_cairo_surface_observer_add_flush_callback; ///
-  cairo_status_t function(cairo_surface_t* abstractSurface, cairo_surface_observer_callback_t func, void* data) c_cairo_surface_observer_add_glyphs_callback; ///
-  cairo_status_t function(cairo_surface_t* abstractSurface, cairo_surface_observer_callback_t func, void* data) c_cairo_surface_observer_add_mask_callback; ///
-  cairo_status_t function(cairo_surface_t* abstractSurface, cairo_surface_observer_callback_t func, void* data) c_cairo_surface_observer_add_paint_callback; ///
-  cairo_status_t function(cairo_surface_t* abstractSurface, cairo_surface_observer_callback_t func, void* data) c_cairo_surface_observer_add_stroke_callback; ///
-  double function(cairo_surface_t* abstractSurface) c_cairo_surface_observer_elapsed; ///
-  cairo_status_t function(cairo_surface_t* abstractSurface, cairo_write_func_t writeFunc, void* closure) c_cairo_surface_observer_print; ///
-  cairo_surface_t* function(cairo_surface_t* surface) c_cairo_surface_reference; ///
-  void function(cairo_surface_t* surface, double xOffset, double yOffset) c_cairo_surface_set_device_offset; ///
-  void function(cairo_surface_t* surface, double xScale, double yScale) c_cairo_surface_set_device_scale; ///
-  void function(cairo_surface_t* surface, double xPixelsPerInch, double yPixelsPerInch) c_cairo_surface_set_fallback_resolution; ///
-  cairo_status_t function(cairo_surface_t* surface, const(char)* mimeType, const(ubyte)* data, gulong length, cairo_destroy_func_t destroy, void* closure) c_cairo_surface_set_mime_data; ///
-  cairo_status_t function(cairo_surface_t* surface, const(cairo_user_data_key_t)* key, void* userData, cairo_destroy_func_t destroy) c_cairo_surface_set_user_data; ///
-  void function(cairo_surface_t* surface) c_cairo_surface_show_page; ///
-  cairo_status_t function(cairo_surface_t* surface) c_cairo_surface_status; ///
-  cairo_bool_t function(cairo_surface_t* surface, const(char)* mimeType) c_cairo_surface_supports_mime_type; ///
-  void function(cairo_surface_t* surface, cairo_surface_t* image) c_cairo_surface_unmap_image; ///
-  cairo_status_t function(cairo_surface_t* surface, const(char)* filename) c_cairo_surface_write_to_png; ///
-  cairo_status_t function(cairo_surface_t* surface, cairo_write_func_t writeFunc, void* closure) c_cairo_surface_write_to_png_stream; ///
+// Surface
+private alias c_cairo_gobject_surface_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_cairo_gobject_surface_get_typeFn c_cairo_gobject_surface_get_type; ///
+private alias c_cairo_surface_copy_pageFn = extern(C) void function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_surface_copy_pageFn c_cairo_surface_copy_page; ///
+private alias c_cairo_surface_create_for_rectangleFn = extern(C) cairo_surface_t* function(cairo_surface_t* target, double x, double y, double width, double height) nothrow;
+__gshared c_cairo_surface_create_for_rectangleFn c_cairo_surface_create_for_rectangle; ///
+private alias c_cairo_surface_create_observerFn = extern(C) cairo_surface_t* function(cairo_surface_t* target, cairo_surface_observer_mode_t mode) nothrow;
+__gshared c_cairo_surface_create_observerFn c_cairo_surface_create_observer; ///
+private alias c_cairo_surface_create_similarFn = extern(C) cairo_surface_t* function(cairo_surface_t* other, cairo_content_t content, int width, int height) nothrow;
+__gshared c_cairo_surface_create_similarFn c_cairo_surface_create_similar; ///
+private alias c_cairo_surface_create_similar_imageFn = extern(C) cairo_surface_t* function(cairo_surface_t* other, cairo_format_t format, int width, int height) nothrow;
+__gshared c_cairo_surface_create_similar_imageFn c_cairo_surface_create_similar_image; ///
+private alias c_cairo_surface_destroyFn = extern(C) void function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_surface_destroyFn c_cairo_surface_destroy; ///
+private alias c_cairo_surface_finishFn = extern(C) void function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_surface_finishFn c_cairo_surface_finish; ///
+private alias c_cairo_surface_flushFn = extern(C) void function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_surface_flushFn c_cairo_surface_flush; ///
+private alias c_cairo_surface_get_contentFn = extern(C) cairo_content_t function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_surface_get_contentFn c_cairo_surface_get_content; ///
+private alias c_cairo_surface_get_deviceFn = extern(C) cairo_device_t* function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_surface_get_deviceFn c_cairo_surface_get_device; ///
+private alias c_cairo_surface_get_device_offsetFn = extern(C) void function(cairo_surface_t* surface, double* xOffset, double* yOffset) nothrow;
+__gshared c_cairo_surface_get_device_offsetFn c_cairo_surface_get_device_offset; ///
+private alias c_cairo_surface_get_device_scaleFn = extern(C) void function(cairo_surface_t* surface, double* xScale, double* yScale) nothrow;
+__gshared c_cairo_surface_get_device_scaleFn c_cairo_surface_get_device_scale; ///
+private alias c_cairo_surface_get_fallback_resolutionFn = extern(C) void function(cairo_surface_t* surface, double* xPixelsPerInch, double* yPixelsPerInch) nothrow;
+__gshared c_cairo_surface_get_fallback_resolutionFn c_cairo_surface_get_fallback_resolution; ///
+private alias c_cairo_surface_get_font_optionsFn = extern(C) void function(cairo_surface_t* surface, cairo_font_options_t* options) nothrow;
+__gshared c_cairo_surface_get_font_optionsFn c_cairo_surface_get_font_options; ///
+private alias c_cairo_surface_get_mime_dataFn = extern(C) void function(cairo_surface_t* surface, const(char)* mimeType, const(ubyte*)* data, gulong* length) nothrow;
+__gshared c_cairo_surface_get_mime_dataFn c_cairo_surface_get_mime_data; ///
+private alias c_cairo_surface_get_reference_countFn = extern(C) uint function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_surface_get_reference_countFn c_cairo_surface_get_reference_count; ///
+private alias c_cairo_surface_get_typeFn = extern(C) cairo_surface_type_t function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_surface_get_typeFn c_cairo_surface_get_type; ///
+private alias c_cairo_surface_get_user_dataFn = extern(C) void* function(cairo_surface_t* surface, const(cairo_user_data_key_t)* key) nothrow;
+__gshared c_cairo_surface_get_user_dataFn c_cairo_surface_get_user_data; ///
+private alias c_cairo_surface_has_show_text_glyphsFn = extern(C) cairo_bool_t function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_surface_has_show_text_glyphsFn c_cairo_surface_has_show_text_glyphs; ///
+private alias c_cairo_surface_map_to_imageFn = extern(C) cairo_surface_t* function(cairo_surface_t* surface, const(cairo_rectangle_int_t)* extents) nothrow;
+__gshared c_cairo_surface_map_to_imageFn c_cairo_surface_map_to_image; ///
+private alias c_cairo_surface_mark_dirtyFn = extern(C) void function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_surface_mark_dirtyFn c_cairo_surface_mark_dirty; ///
+private alias c_cairo_surface_mark_dirty_rectangleFn = extern(C) void function(cairo_surface_t* surface, int x, int y, int width, int height) nothrow;
+__gshared c_cairo_surface_mark_dirty_rectangleFn c_cairo_surface_mark_dirty_rectangle; ///
+private alias c_cairo_surface_observer_add_fill_callbackFn = extern(C) cairo_status_t function(cairo_surface_t* abstractSurface, cairo_surface_observer_callback_t func, void* data) nothrow;
+__gshared c_cairo_surface_observer_add_fill_callbackFn c_cairo_surface_observer_add_fill_callback; ///
+private alias c_cairo_surface_observer_add_finish_callbackFn = extern(C) cairo_status_t function(cairo_surface_t* abstractSurface, cairo_surface_observer_callback_t func, void* data) nothrow;
+__gshared c_cairo_surface_observer_add_finish_callbackFn c_cairo_surface_observer_add_finish_callback; ///
+private alias c_cairo_surface_observer_add_flush_callbackFn = extern(C) cairo_status_t function(cairo_surface_t* abstractSurface, cairo_surface_observer_callback_t func, void* data) nothrow;
+__gshared c_cairo_surface_observer_add_flush_callbackFn c_cairo_surface_observer_add_flush_callback; ///
+private alias c_cairo_surface_observer_add_glyphs_callbackFn = extern(C) cairo_status_t function(cairo_surface_t* abstractSurface, cairo_surface_observer_callback_t func, void* data) nothrow;
+__gshared c_cairo_surface_observer_add_glyphs_callbackFn c_cairo_surface_observer_add_glyphs_callback; ///
+private alias c_cairo_surface_observer_add_mask_callbackFn = extern(C) cairo_status_t function(cairo_surface_t* abstractSurface, cairo_surface_observer_callback_t func, void* data) nothrow;
+__gshared c_cairo_surface_observer_add_mask_callbackFn c_cairo_surface_observer_add_mask_callback; ///
+private alias c_cairo_surface_observer_add_paint_callbackFn = extern(C) cairo_status_t function(cairo_surface_t* abstractSurface, cairo_surface_observer_callback_t func, void* data) nothrow;
+__gshared c_cairo_surface_observer_add_paint_callbackFn c_cairo_surface_observer_add_paint_callback; ///
+private alias c_cairo_surface_observer_add_stroke_callbackFn = extern(C) cairo_status_t function(cairo_surface_t* abstractSurface, cairo_surface_observer_callback_t func, void* data) nothrow;
+__gshared c_cairo_surface_observer_add_stroke_callbackFn c_cairo_surface_observer_add_stroke_callback; ///
+private alias c_cairo_surface_observer_elapsedFn = extern(C) double function(cairo_surface_t* abstractSurface) nothrow;
+__gshared c_cairo_surface_observer_elapsedFn c_cairo_surface_observer_elapsed; ///
+private alias c_cairo_surface_observer_printFn = extern(C) cairo_status_t function(cairo_surface_t* abstractSurface, cairo_write_func_t writeFunc, void* closure) nothrow;
+__gshared c_cairo_surface_observer_printFn c_cairo_surface_observer_print; ///
+private alias c_cairo_surface_referenceFn = extern(C) cairo_surface_t* function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_surface_referenceFn c_cairo_surface_reference; ///
+private alias c_cairo_surface_set_device_offsetFn = extern(C) void function(cairo_surface_t* surface, double xOffset, double yOffset) nothrow;
+__gshared c_cairo_surface_set_device_offsetFn c_cairo_surface_set_device_offset; ///
+private alias c_cairo_surface_set_device_scaleFn = extern(C) void function(cairo_surface_t* surface, double xScale, double yScale) nothrow;
+__gshared c_cairo_surface_set_device_scaleFn c_cairo_surface_set_device_scale; ///
+private alias c_cairo_surface_set_fallback_resolutionFn = extern(C) void function(cairo_surface_t* surface, double xPixelsPerInch, double yPixelsPerInch) nothrow;
+__gshared c_cairo_surface_set_fallback_resolutionFn c_cairo_surface_set_fallback_resolution; ///
+private alias c_cairo_surface_set_mime_dataFn = extern(C) cairo_status_t function(cairo_surface_t* surface, const(char)* mimeType, const(ubyte)* data, gulong length, cairo_destroy_func_t destroy, void* closure) nothrow;
+__gshared c_cairo_surface_set_mime_dataFn c_cairo_surface_set_mime_data; ///
+private alias c_cairo_surface_set_user_dataFn = extern(C) cairo_status_t function(cairo_surface_t* surface, const(cairo_user_data_key_t)* key, void* userData, cairo_destroy_func_t destroy) nothrow;
+__gshared c_cairo_surface_set_user_dataFn c_cairo_surface_set_user_data; ///
+private alias c_cairo_surface_show_pageFn = extern(C) void function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_surface_show_pageFn c_cairo_surface_show_page; ///
+private alias c_cairo_surface_statusFn = extern(C) cairo_status_t function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_surface_statusFn c_cairo_surface_status; ///
+private alias c_cairo_surface_supports_mime_typeFn = extern(C) cairo_bool_t function(cairo_surface_t* surface, const(char)* mimeType) nothrow;
+__gshared c_cairo_surface_supports_mime_typeFn c_cairo_surface_supports_mime_type; ///
+private alias c_cairo_surface_unmap_imageFn = extern(C) void function(cairo_surface_t* surface, cairo_surface_t* image) nothrow;
+__gshared c_cairo_surface_unmap_imageFn c_cairo_surface_unmap_image; ///
+private alias c_cairo_surface_write_to_pngFn = extern(C) cairo_status_t function(cairo_surface_t* surface, const(char)* filename) nothrow;
+__gshared c_cairo_surface_write_to_pngFn c_cairo_surface_write_to_png; ///
+private alias c_cairo_surface_write_to_png_streamFn = extern(C) cairo_status_t function(cairo_surface_t* surface, cairo_write_func_t writeFunc, void* closure) nothrow;
+__gshared c_cairo_surface_write_to_png_streamFn c_cairo_surface_write_to_png_stream; ///
 
-  // TextCluster
-  GType function() c_cairo_gobject_text_cluster_get_type; ///
-  void function(cairo_text_cluster_t* clusters) c_cairo_text_cluster_free; ///
+// TextCluster
+private alias c_cairo_gobject_text_cluster_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_cairo_gobject_text_cluster_get_typeFn c_cairo_gobject_text_cluster_get_type; ///
+private alias c_cairo_text_cluster_freeFn = extern(C) void function(cairo_text_cluster_t* clusters) nothrow;
+__gshared c_cairo_text_cluster_freeFn c_cairo_text_cluster_free; ///
 
-  // global
-  cairo_t* function(cairo_surface_t* target) c_cairo_create; ///
-  void function() c_cairo_debug_reset_static_data; ///
-  void function(cairo_t* cr) c_cairo_destroy; ///
-  cairo_font_options_t* function() c_cairo_font_options_create; ///
-  int function(cairo_format_t format, int width) c_cairo_format_stride_for_width; ///
-  uint function(cairo_t* cr) c_cairo_get_reference_count; ///
-  void* function(cairo_t* cr, const(cairo_user_data_key_t)* key) c_cairo_get_user_data; ///
-  cairo_glyph_t* function(int numGlyphs) c_cairo_glyph_allocate; ///
-  cairo_surface_t* function(cairo_format_t format, int width, int height) c_cairo_image_surface_create; ///
-  cairo_surface_t* function(ubyte* data, cairo_format_t format, int width, int height, int stride) c_cairo_image_surface_create_for_data; ///
-  cairo_surface_t* function(const(char)* filename) c_cairo_image_surface_create_from_png; ///
-  cairo_surface_t* function(cairo_read_func_t readFunc, void* closure) c_cairo_image_surface_create_from_png_stream; ///
-  ubyte* function(cairo_surface_t* surface) c_cairo_image_surface_get_data; ///
-  cairo_format_t function(cairo_surface_t* surface) c_cairo_image_surface_get_format; ///
-  int function(cairo_surface_t* surface) c_cairo_image_surface_get_height; ///
-  int function(cairo_surface_t* surface) c_cairo_image_surface_get_stride; ///
-  int function(cairo_surface_t* surface) c_cairo_image_surface_get_width; ///
-  void function(cairo_pattern_t* pattern) c_cairo_mesh_pattern_begin_patch; ///
-  void function(cairo_pattern_t* pattern, double x1, double y1, double x2, double y2, double x3, double y3) c_cairo_mesh_pattern_curve_to; ///
-  void function(cairo_pattern_t* pattern) c_cairo_mesh_pattern_end_patch; ///
-  cairo_status_t function(cairo_pattern_t* pattern, uint patchNum, uint pointNum, double* x, double* y) c_cairo_mesh_pattern_get_control_point; ///
-  cairo_status_t function(cairo_pattern_t* pattern, uint patchNum, uint cornerNum, double* red, double* green, double* blue, double* alpha) c_cairo_mesh_pattern_get_corner_color_rgba; ///
-  cairo_status_t function(cairo_pattern_t* pattern, uint* count) c_cairo_mesh_pattern_get_patch_count; ///
-  cairo_path_t* function(cairo_pattern_t* pattern, uint patchNum) c_cairo_mesh_pattern_get_path; ///
-  void function(cairo_pattern_t* pattern, double x, double y) c_cairo_mesh_pattern_line_to; ///
-  void function(cairo_pattern_t* pattern, double x, double y) c_cairo_mesh_pattern_move_to; ///
-  void function(cairo_pattern_t* pattern, uint pointNum, double x, double y) c_cairo_mesh_pattern_set_control_point; ///
-  void function(cairo_pattern_t* pattern, uint cornerNum, double red, double green, double blue) c_cairo_mesh_pattern_set_corner_color_rgb; ///
-  void function(cairo_pattern_t* pattern, uint cornerNum, double red, double green, double blue, double alpha) c_cairo_mesh_pattern_set_corner_color_rgba; ///
-  cairo_pattern_t* function(cairo_surface_t* surface) c_cairo_pattern_create_for_surface; ///
-  cairo_pattern_t* function(double x0, double y0, double x1, double y1) c_cairo_pattern_create_linear; ///
-  cairo_pattern_t* function() c_cairo_pattern_create_mesh; ///
-  cairo_pattern_t* function(double cx0, double cy0, double radius0, double cx1, double cy1, double radius1) c_cairo_pattern_create_radial; ///
-  cairo_pattern_t* function(void* userData, cairo_content_t content, int width, int height) c_cairo_pattern_create_raster_source; ///
-  cairo_pattern_t* function(double red, double green, double blue) c_cairo_pattern_create_rgb; ///
-  cairo_pattern_t* function(double red, double green, double blue, double alpha) c_cairo_pattern_create_rgba; ///
-  void function(const(cairo_pdf_version_t*)* versions, int* numVersions) c_cairo_pdf_get_versions; ///
-  int function(cairo_surface_t* surface, int parentId, const(char)* utf8, const(char)* linkAttribs, cairo_pdf_outline_flags_t flags) c_cairo_pdf_surface_add_outline; ///
-  cairo_surface_t* function(const(char)* filename, double widthInPoints, double heightInPoints) c_cairo_pdf_surface_create; ///
-  cairo_surface_t* function(cairo_write_func_t writeFunc, void* closure, double widthInPoints, double heightInPoints) c_cairo_pdf_surface_create_for_stream; ///
-  void function(cairo_surface_t* surface, cairo_pdf_version_t version_) c_cairo_pdf_surface_restrict_to_version; ///
-  void function(cairo_surface_t* surface, const(char)* name, const(char)* value) c_cairo_pdf_surface_set_custom_metadata; ///
-  void function(cairo_surface_t* surface, cairo_pdf_metadata_t metadata, const(char)* utf8) c_cairo_pdf_surface_set_metadata; ///
-  void function(cairo_surface_t* surface, const(char)* utf8) c_cairo_pdf_surface_set_page_label; ///
-  void function(cairo_surface_t* surface, double widthInPoints, double heightInPoints) c_cairo_pdf_surface_set_size; ///
-  void function(cairo_surface_t* surface, int width, int height) c_cairo_pdf_surface_set_thumbnail_size; ///
-  const(char)* function(cairo_pdf_version_t version_) c_cairo_pdf_version_to_string; ///
-  void function(const(cairo_ps_level_t*)* levels, int* numLevels) c_cairo_ps_get_levels; ///
-  const(char)* function(cairo_ps_level_t level) c_cairo_ps_level_to_string; ///
-  cairo_surface_t* function(const(char)* filename, double widthInPoints, double heightInPoints) c_cairo_ps_surface_create; ///
-  cairo_surface_t* function(cairo_write_func_t writeFunc, void* closure, double widthInPoints, double heightInPoints) c_cairo_ps_surface_create_for_stream; ///
-  void function(cairo_surface_t* surface) c_cairo_ps_surface_dsc_begin_page_setup; ///
-  void function(cairo_surface_t* surface) c_cairo_ps_surface_dsc_begin_setup; ///
-  void function(cairo_surface_t* surface, const(char)* comment) c_cairo_ps_surface_dsc_comment; ///
-  cairo_bool_t function(cairo_surface_t* surface) c_cairo_ps_surface_get_eps; ///
-  void function(cairo_surface_t* surface, cairo_ps_level_t level) c_cairo_ps_surface_restrict_to_level; ///
-  void function(cairo_surface_t* surface, cairo_bool_t eps) c_cairo_ps_surface_set_eps; ///
-  void function(cairo_surface_t* surface, double widthInPoints, double heightInPoints) c_cairo_ps_surface_set_size; ///
-  void function(cairo_pattern_t* pattern, cairo_raster_source_acquire_func_t* acquire, cairo_raster_source_release_func_t* release) c_cairo_raster_source_pattern_get_acquire; ///
-  void* function(cairo_pattern_t* pattern) c_cairo_raster_source_pattern_get_callback_data; ///
-  cairo_raster_source_copy_func_t function(cairo_pattern_t* pattern) c_cairo_raster_source_pattern_get_copy; ///
-  cairo_raster_source_finish_func_t function(cairo_pattern_t* pattern) c_cairo_raster_source_pattern_get_finish; ///
-  cairo_raster_source_snapshot_func_t function(cairo_pattern_t* pattern) c_cairo_raster_source_pattern_get_snapshot; ///
-  void function(cairo_pattern_t* pattern, cairo_raster_source_acquire_func_t acquire, cairo_raster_source_release_func_t release) c_cairo_raster_source_pattern_set_acquire; ///
-  void function(cairo_pattern_t* pattern, void* data) c_cairo_raster_source_pattern_set_callback_data; ///
-  void function(cairo_pattern_t* pattern, cairo_raster_source_copy_func_t copy) c_cairo_raster_source_pattern_set_copy; ///
-  void function(cairo_pattern_t* pattern, cairo_raster_source_finish_func_t finish) c_cairo_raster_source_pattern_set_finish; ///
-  void function(cairo_pattern_t* pattern, cairo_raster_source_snapshot_func_t snapshot) c_cairo_raster_source_pattern_set_snapshot; ///
-  cairo_surface_t* function(cairo_content_t content, const(cairo_rectangle_t)* extents) c_cairo_recording_surface_create; ///
-  cairo_bool_t function(cairo_surface_t* surface, cairo_rectangle_t* extents) c_cairo_recording_surface_get_extents; ///
-  void function(cairo_surface_t* surface, double* x0, double* y0, double* width, double* height) c_cairo_recording_surface_ink_extents; ///
-  cairo_t* function(cairo_t* cr) c_cairo_reference; ///
-  cairo_region_t* function() c_cairo_region_create; ///
-  cairo_region_t* function(const(cairo_rectangle_int_t)* rectangle) c_cairo_region_create_rectangle; ///
-  cairo_region_t* function(const(cairo_rectangle_int_t)* rects, int count) c_cairo_region_create_rectangles; ///
-  cairo_scaled_font_t* function(cairo_font_face_t* fontFace, const(cairo_matrix_t)* fontMatrix, const(cairo_matrix_t)* ctm, const(cairo_font_options_t)* options) c_cairo_scaled_font_create; ///
-  cairo_device_t* function(const(char)* filename) c_cairo_script_create; ///
-  cairo_device_t* function(cairo_write_func_t writeFunc, void* closure) c_cairo_script_create_for_stream; ///
-  cairo_status_t function(cairo_device_t* script, cairo_surface_t* recordingSurface) c_cairo_script_from_recording_surface; ///
-  cairo_script_mode_t function(cairo_device_t* script) c_cairo_script_get_mode; ///
-  void function(cairo_device_t* script, cairo_script_mode_t mode) c_cairo_script_set_mode; ///
-  cairo_surface_t* function(cairo_device_t* script, cairo_content_t content, double width, double height) c_cairo_script_surface_create; ///
-  cairo_surface_t* function(cairo_device_t* script, cairo_surface_t* target) c_cairo_script_surface_create_for_target; ///
-  void function(cairo_device_t* script, const(char)* comment, int len) c_cairo_script_write_comment; ///
-  cairo_status_t function(cairo_t* cr, const(cairo_user_data_key_t)* key, void* userData, cairo_destroy_func_t destroy) c_cairo_set_user_data; ///
-  const(char)* function(cairo_status_t status) c_cairo_status_to_string; ///
-  void function(const(cairo_svg_version_t*)* versions, int* numVersions) c_cairo_svg_get_versions; ///
-  cairo_surface_t* function(const(char)* filename, double widthInPoints, double heightInPoints) c_cairo_svg_surface_create; ///
-  cairo_surface_t* function(cairo_write_func_t writeFunc, void* closure, double widthInPoints, double heightInPoints) c_cairo_svg_surface_create_for_stream; ///
-  cairo_svg_unit_t function(cairo_surface_t* surface) c_cairo_svg_surface_get_document_unit; ///
-  void function(cairo_surface_t* surface, cairo_svg_version_t version_) c_cairo_svg_surface_restrict_to_version; ///
-  void function(cairo_surface_t* surface, cairo_svg_unit_t unit) c_cairo_svg_surface_set_document_unit; ///
-  const(char)* function(cairo_svg_version_t version_) c_cairo_svg_version_to_string; ///
-  void function(cairo_surface_t* abstractSurface, cairo_surface_t* target) c_cairo_tee_surface_add; ///
-  cairo_surface_t* function(cairo_surface_t* primary) c_cairo_tee_surface_create; ///
-  cairo_surface_t* function(cairo_surface_t* abstractSurface, uint index) c_cairo_tee_surface_index; ///
-  void function(cairo_surface_t* abstractSurface, cairo_surface_t* target) c_cairo_tee_surface_remove; ///
-  cairo_text_cluster_t* function(int numClusters) c_cairo_text_cluster_allocate; ///
-  cairo_font_face_t* function(const(char)* family, cairo_font_slant_t slant, cairo_font_weight_t weight) c_cairo_toy_font_face_create; ///
-  const(char)* function(cairo_font_face_t* fontFace) c_cairo_toy_font_face_get_family; ///
-  cairo_font_slant_t function(cairo_font_face_t* fontFace) c_cairo_toy_font_face_get_slant; ///
-  cairo_font_weight_t function(cairo_font_face_t* fontFace) c_cairo_toy_font_face_get_weight; ///
-  cairo_font_face_t* function() c_cairo_user_font_face_create; ///
-  cairo_user_scaled_font_init_func_t function(cairo_font_face_t* fontFace) c_cairo_user_font_face_get_init_func; ///
-  cairo_user_scaled_font_render_glyph_func_t function(cairo_font_face_t* fontFace) c_cairo_user_font_face_get_render_color_glyph_func; ///
-  cairo_user_scaled_font_render_glyph_func_t function(cairo_font_face_t* fontFace) c_cairo_user_font_face_get_render_glyph_func; ///
-  cairo_user_scaled_font_text_to_glyphs_func_t function(cairo_font_face_t* fontFace) c_cairo_user_font_face_get_text_to_glyphs_func; ///
-  cairo_user_scaled_font_unicode_to_glyph_func_t function(cairo_font_face_t* fontFace) c_cairo_user_font_face_get_unicode_to_glyph_func; ///
-  void function(cairo_font_face_t* fontFace, cairo_user_scaled_font_init_func_t initFunc) c_cairo_user_font_face_set_init_func; ///
-  void function(cairo_font_face_t* fontFace, cairo_user_scaled_font_render_glyph_func_t renderGlyphFunc) c_cairo_user_font_face_set_render_color_glyph_func; ///
-  void function(cairo_font_face_t* fontFace, cairo_user_scaled_font_render_glyph_func_t renderGlyphFunc) c_cairo_user_font_face_set_render_glyph_func; ///
-  void function(cairo_font_face_t* fontFace, cairo_user_scaled_font_text_to_glyphs_func_t textToGlyphsFunc) c_cairo_user_font_face_set_text_to_glyphs_func; ///
-  void function(cairo_font_face_t* fontFace, cairo_user_scaled_font_unicode_to_glyph_func_t unicodeToGlyphFunc) c_cairo_user_font_face_set_unicode_to_glyph_func; ///
-  cairo_pattern_t* function(cairo_scaled_font_t* scaledFont) c_cairo_user_scaled_font_get_foreground_marker; ///
-  cairo_pattern_t* function(cairo_scaled_font_t* scaledFont) c_cairo_user_scaled_font_get_foreground_source; ///
-  int function() c_cairo_version; ///
-  const(char)* function() c_cairo_version_string; ///
-}
+// global
+private alias c_cairo_createFn = extern(C) cairo_t* function(cairo_surface_t* target) nothrow;
+__gshared c_cairo_createFn c_cairo_create; ///
+private alias c_cairo_debug_reset_static_dataFn = extern(C) void function() nothrow;
+__gshared c_cairo_debug_reset_static_dataFn c_cairo_debug_reset_static_data; ///
+private alias c_cairo_destroyFn = extern(C) void function(cairo_t* cr) nothrow;
+__gshared c_cairo_destroyFn c_cairo_destroy; ///
+private alias c_cairo_font_options_createFn = extern(C) cairo_font_options_t* function() nothrow;
+__gshared c_cairo_font_options_createFn c_cairo_font_options_create; ///
+private alias c_cairo_format_stride_for_widthFn = extern(C) int function(cairo_format_t format, int width) nothrow;
+__gshared c_cairo_format_stride_for_widthFn c_cairo_format_stride_for_width; ///
+private alias c_cairo_get_reference_countFn = extern(C) uint function(cairo_t* cr) nothrow;
+__gshared c_cairo_get_reference_countFn c_cairo_get_reference_count; ///
+private alias c_cairo_get_user_dataFn = extern(C) void* function(cairo_t* cr, const(cairo_user_data_key_t)* key) nothrow;
+__gshared c_cairo_get_user_dataFn c_cairo_get_user_data; ///
+private alias c_cairo_glyph_allocateFn = extern(C) cairo_glyph_t* function(int numGlyphs) nothrow;
+__gshared c_cairo_glyph_allocateFn c_cairo_glyph_allocate; ///
+private alias c_cairo_image_surface_createFn = extern(C) cairo_surface_t* function(cairo_format_t format, int width, int height) nothrow;
+__gshared c_cairo_image_surface_createFn c_cairo_image_surface_create; ///
+private alias c_cairo_image_surface_create_for_dataFn = extern(C) cairo_surface_t* function(ubyte* data, cairo_format_t format, int width, int height, int stride) nothrow;
+__gshared c_cairo_image_surface_create_for_dataFn c_cairo_image_surface_create_for_data; ///
+private alias c_cairo_image_surface_create_from_pngFn = extern(C) cairo_surface_t* function(const(char)* filename) nothrow;
+__gshared c_cairo_image_surface_create_from_pngFn c_cairo_image_surface_create_from_png; ///
+private alias c_cairo_image_surface_create_from_png_streamFn = extern(C) cairo_surface_t* function(cairo_read_func_t readFunc, void* closure) nothrow;
+__gshared c_cairo_image_surface_create_from_png_streamFn c_cairo_image_surface_create_from_png_stream; ///
+private alias c_cairo_image_surface_get_dataFn = extern(C) ubyte* function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_image_surface_get_dataFn c_cairo_image_surface_get_data; ///
+private alias c_cairo_image_surface_get_formatFn = extern(C) cairo_format_t function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_image_surface_get_formatFn c_cairo_image_surface_get_format; ///
+private alias c_cairo_image_surface_get_heightFn = extern(C) int function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_image_surface_get_heightFn c_cairo_image_surface_get_height; ///
+private alias c_cairo_image_surface_get_strideFn = extern(C) int function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_image_surface_get_strideFn c_cairo_image_surface_get_stride; ///
+private alias c_cairo_image_surface_get_widthFn = extern(C) int function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_image_surface_get_widthFn c_cairo_image_surface_get_width; ///
+private alias c_cairo_mesh_pattern_begin_patchFn = extern(C) void function(cairo_pattern_t* pattern) nothrow;
+__gshared c_cairo_mesh_pattern_begin_patchFn c_cairo_mesh_pattern_begin_patch; ///
+private alias c_cairo_mesh_pattern_curve_toFn = extern(C) void function(cairo_pattern_t* pattern, double x1, double y1, double x2, double y2, double x3, double y3) nothrow;
+__gshared c_cairo_mesh_pattern_curve_toFn c_cairo_mesh_pattern_curve_to; ///
+private alias c_cairo_mesh_pattern_end_patchFn = extern(C) void function(cairo_pattern_t* pattern) nothrow;
+__gshared c_cairo_mesh_pattern_end_patchFn c_cairo_mesh_pattern_end_patch; ///
+private alias c_cairo_mesh_pattern_get_control_pointFn = extern(C) cairo_status_t function(cairo_pattern_t* pattern, uint patchNum, uint pointNum, double* x, double* y) nothrow;
+__gshared c_cairo_mesh_pattern_get_control_pointFn c_cairo_mesh_pattern_get_control_point; ///
+private alias c_cairo_mesh_pattern_get_corner_color_rgbaFn = extern(C) cairo_status_t function(cairo_pattern_t* pattern, uint patchNum, uint cornerNum, double* red, double* green, double* blue, double* alpha) nothrow;
+__gshared c_cairo_mesh_pattern_get_corner_color_rgbaFn c_cairo_mesh_pattern_get_corner_color_rgba; ///
+private alias c_cairo_mesh_pattern_get_patch_countFn = extern(C) cairo_status_t function(cairo_pattern_t* pattern, uint* count) nothrow;
+__gshared c_cairo_mesh_pattern_get_patch_countFn c_cairo_mesh_pattern_get_patch_count; ///
+private alias c_cairo_mesh_pattern_get_pathFn = extern(C) cairo_path_t* function(cairo_pattern_t* pattern, uint patchNum) nothrow;
+__gshared c_cairo_mesh_pattern_get_pathFn c_cairo_mesh_pattern_get_path; ///
+private alias c_cairo_mesh_pattern_line_toFn = extern(C) void function(cairo_pattern_t* pattern, double x, double y) nothrow;
+__gshared c_cairo_mesh_pattern_line_toFn c_cairo_mesh_pattern_line_to; ///
+private alias c_cairo_mesh_pattern_move_toFn = extern(C) void function(cairo_pattern_t* pattern, double x, double y) nothrow;
+__gshared c_cairo_mesh_pattern_move_toFn c_cairo_mesh_pattern_move_to; ///
+private alias c_cairo_mesh_pattern_set_control_pointFn = extern(C) void function(cairo_pattern_t* pattern, uint pointNum, double x, double y) nothrow;
+__gshared c_cairo_mesh_pattern_set_control_pointFn c_cairo_mesh_pattern_set_control_point; ///
+private alias c_cairo_mesh_pattern_set_corner_color_rgbFn = extern(C) void function(cairo_pattern_t* pattern, uint cornerNum, double red, double green, double blue) nothrow;
+__gshared c_cairo_mesh_pattern_set_corner_color_rgbFn c_cairo_mesh_pattern_set_corner_color_rgb; ///
+private alias c_cairo_mesh_pattern_set_corner_color_rgbaFn = extern(C) void function(cairo_pattern_t* pattern, uint cornerNum, double red, double green, double blue, double alpha) nothrow;
+__gshared c_cairo_mesh_pattern_set_corner_color_rgbaFn c_cairo_mesh_pattern_set_corner_color_rgba; ///
+private alias c_cairo_pattern_create_for_surfaceFn = extern(C) cairo_pattern_t* function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_pattern_create_for_surfaceFn c_cairo_pattern_create_for_surface; ///
+private alias c_cairo_pattern_create_linearFn = extern(C) cairo_pattern_t* function(double x0, double y0, double x1, double y1) nothrow;
+__gshared c_cairo_pattern_create_linearFn c_cairo_pattern_create_linear; ///
+private alias c_cairo_pattern_create_meshFn = extern(C) cairo_pattern_t* function() nothrow;
+__gshared c_cairo_pattern_create_meshFn c_cairo_pattern_create_mesh; ///
+private alias c_cairo_pattern_create_radialFn = extern(C) cairo_pattern_t* function(double cx0, double cy0, double radius0, double cx1, double cy1, double radius1) nothrow;
+__gshared c_cairo_pattern_create_radialFn c_cairo_pattern_create_radial; ///
+private alias c_cairo_pattern_create_raster_sourceFn = extern(C) cairo_pattern_t* function(void* userData, cairo_content_t content, int width, int height) nothrow;
+__gshared c_cairo_pattern_create_raster_sourceFn c_cairo_pattern_create_raster_source; ///
+private alias c_cairo_pattern_create_rgbFn = extern(C) cairo_pattern_t* function(double red, double green, double blue) nothrow;
+__gshared c_cairo_pattern_create_rgbFn c_cairo_pattern_create_rgb; ///
+private alias c_cairo_pattern_create_rgbaFn = extern(C) cairo_pattern_t* function(double red, double green, double blue, double alpha) nothrow;
+__gshared c_cairo_pattern_create_rgbaFn c_cairo_pattern_create_rgba; ///
+private alias c_cairo_pdf_get_versionsFn = extern(C) void function(const(cairo_pdf_version_t*)* versions, int* numVersions) nothrow;
+__gshared c_cairo_pdf_get_versionsFn c_cairo_pdf_get_versions; ///
+private alias c_cairo_pdf_surface_add_outlineFn = extern(C) int function(cairo_surface_t* surface, int parentId, const(char)* utf8, const(char)* linkAttribs, cairo_pdf_outline_flags_t flags) nothrow;
+__gshared c_cairo_pdf_surface_add_outlineFn c_cairo_pdf_surface_add_outline; ///
+private alias c_cairo_pdf_surface_createFn = extern(C) cairo_surface_t* function(const(char)* filename, double widthInPoints, double heightInPoints) nothrow;
+__gshared c_cairo_pdf_surface_createFn c_cairo_pdf_surface_create; ///
+private alias c_cairo_pdf_surface_create_for_streamFn = extern(C) cairo_surface_t* function(cairo_write_func_t writeFunc, void* closure, double widthInPoints, double heightInPoints) nothrow;
+__gshared c_cairo_pdf_surface_create_for_streamFn c_cairo_pdf_surface_create_for_stream; ///
+private alias c_cairo_pdf_surface_restrict_to_versionFn = extern(C) void function(cairo_surface_t* surface, cairo_pdf_version_t version_) nothrow;
+__gshared c_cairo_pdf_surface_restrict_to_versionFn c_cairo_pdf_surface_restrict_to_version; ///
+private alias c_cairo_pdf_surface_set_custom_metadataFn = extern(C) void function(cairo_surface_t* surface, const(char)* name, const(char)* value) nothrow;
+__gshared c_cairo_pdf_surface_set_custom_metadataFn c_cairo_pdf_surface_set_custom_metadata; ///
+private alias c_cairo_pdf_surface_set_metadataFn = extern(C) void function(cairo_surface_t* surface, cairo_pdf_metadata_t metadata, const(char)* utf8) nothrow;
+__gshared c_cairo_pdf_surface_set_metadataFn c_cairo_pdf_surface_set_metadata; ///
+private alias c_cairo_pdf_surface_set_page_labelFn = extern(C) void function(cairo_surface_t* surface, const(char)* utf8) nothrow;
+__gshared c_cairo_pdf_surface_set_page_labelFn c_cairo_pdf_surface_set_page_label; ///
+private alias c_cairo_pdf_surface_set_sizeFn = extern(C) void function(cairo_surface_t* surface, double widthInPoints, double heightInPoints) nothrow;
+__gshared c_cairo_pdf_surface_set_sizeFn c_cairo_pdf_surface_set_size; ///
+private alias c_cairo_pdf_surface_set_thumbnail_sizeFn = extern(C) void function(cairo_surface_t* surface, int width, int height) nothrow;
+__gshared c_cairo_pdf_surface_set_thumbnail_sizeFn c_cairo_pdf_surface_set_thumbnail_size; ///
+private alias c_cairo_pdf_version_to_stringFn = extern(C) const(char)* function(cairo_pdf_version_t version_) nothrow;
+__gshared c_cairo_pdf_version_to_stringFn c_cairo_pdf_version_to_string; ///
+private alias c_cairo_ps_get_levelsFn = extern(C) void function(const(cairo_ps_level_t*)* levels, int* numLevels) nothrow;
+__gshared c_cairo_ps_get_levelsFn c_cairo_ps_get_levels; ///
+private alias c_cairo_ps_level_to_stringFn = extern(C) const(char)* function(cairo_ps_level_t level) nothrow;
+__gshared c_cairo_ps_level_to_stringFn c_cairo_ps_level_to_string; ///
+private alias c_cairo_ps_surface_createFn = extern(C) cairo_surface_t* function(const(char)* filename, double widthInPoints, double heightInPoints) nothrow;
+__gshared c_cairo_ps_surface_createFn c_cairo_ps_surface_create; ///
+private alias c_cairo_ps_surface_create_for_streamFn = extern(C) cairo_surface_t* function(cairo_write_func_t writeFunc, void* closure, double widthInPoints, double heightInPoints) nothrow;
+__gshared c_cairo_ps_surface_create_for_streamFn c_cairo_ps_surface_create_for_stream; ///
+private alias c_cairo_ps_surface_dsc_begin_page_setupFn = extern(C) void function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_ps_surface_dsc_begin_page_setupFn c_cairo_ps_surface_dsc_begin_page_setup; ///
+private alias c_cairo_ps_surface_dsc_begin_setupFn = extern(C) void function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_ps_surface_dsc_begin_setupFn c_cairo_ps_surface_dsc_begin_setup; ///
+private alias c_cairo_ps_surface_dsc_commentFn = extern(C) void function(cairo_surface_t* surface, const(char)* comment) nothrow;
+__gshared c_cairo_ps_surface_dsc_commentFn c_cairo_ps_surface_dsc_comment; ///
+private alias c_cairo_ps_surface_get_epsFn = extern(C) cairo_bool_t function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_ps_surface_get_epsFn c_cairo_ps_surface_get_eps; ///
+private alias c_cairo_ps_surface_restrict_to_levelFn = extern(C) void function(cairo_surface_t* surface, cairo_ps_level_t level) nothrow;
+__gshared c_cairo_ps_surface_restrict_to_levelFn c_cairo_ps_surface_restrict_to_level; ///
+private alias c_cairo_ps_surface_set_epsFn = extern(C) void function(cairo_surface_t* surface, cairo_bool_t eps) nothrow;
+__gshared c_cairo_ps_surface_set_epsFn c_cairo_ps_surface_set_eps; ///
+private alias c_cairo_ps_surface_set_sizeFn = extern(C) void function(cairo_surface_t* surface, double widthInPoints, double heightInPoints) nothrow;
+__gshared c_cairo_ps_surface_set_sizeFn c_cairo_ps_surface_set_size; ///
+private alias c_cairo_raster_source_pattern_get_acquireFn = extern(C) void function(cairo_pattern_t* pattern, cairo_raster_source_acquire_func_t* acquire, cairo_raster_source_release_func_t* release) nothrow;
+__gshared c_cairo_raster_source_pattern_get_acquireFn c_cairo_raster_source_pattern_get_acquire; ///
+private alias c_cairo_raster_source_pattern_get_callback_dataFn = extern(C) void* function(cairo_pattern_t* pattern) nothrow;
+__gshared c_cairo_raster_source_pattern_get_callback_dataFn c_cairo_raster_source_pattern_get_callback_data; ///
+private alias c_cairo_raster_source_pattern_get_copyFn = extern(C) cairo_raster_source_copy_func_t function(cairo_pattern_t* pattern) nothrow;
+__gshared c_cairo_raster_source_pattern_get_copyFn c_cairo_raster_source_pattern_get_copy; ///
+private alias c_cairo_raster_source_pattern_get_finishFn = extern(C) cairo_raster_source_finish_func_t function(cairo_pattern_t* pattern) nothrow;
+__gshared c_cairo_raster_source_pattern_get_finishFn c_cairo_raster_source_pattern_get_finish; ///
+private alias c_cairo_raster_source_pattern_get_snapshotFn = extern(C) cairo_raster_source_snapshot_func_t function(cairo_pattern_t* pattern) nothrow;
+__gshared c_cairo_raster_source_pattern_get_snapshotFn c_cairo_raster_source_pattern_get_snapshot; ///
+private alias c_cairo_raster_source_pattern_set_acquireFn = extern(C) void function(cairo_pattern_t* pattern, cairo_raster_source_acquire_func_t acquire, cairo_raster_source_release_func_t release) nothrow;
+__gshared c_cairo_raster_source_pattern_set_acquireFn c_cairo_raster_source_pattern_set_acquire; ///
+private alias c_cairo_raster_source_pattern_set_callback_dataFn = extern(C) void function(cairo_pattern_t* pattern, void* data) nothrow;
+__gshared c_cairo_raster_source_pattern_set_callback_dataFn c_cairo_raster_source_pattern_set_callback_data; ///
+private alias c_cairo_raster_source_pattern_set_copyFn = extern(C) void function(cairo_pattern_t* pattern, cairo_raster_source_copy_func_t copy) nothrow;
+__gshared c_cairo_raster_source_pattern_set_copyFn c_cairo_raster_source_pattern_set_copy; ///
+private alias c_cairo_raster_source_pattern_set_finishFn = extern(C) void function(cairo_pattern_t* pattern, cairo_raster_source_finish_func_t finish) nothrow;
+__gshared c_cairo_raster_source_pattern_set_finishFn c_cairo_raster_source_pattern_set_finish; ///
+private alias c_cairo_raster_source_pattern_set_snapshotFn = extern(C) void function(cairo_pattern_t* pattern, cairo_raster_source_snapshot_func_t snapshot) nothrow;
+__gshared c_cairo_raster_source_pattern_set_snapshotFn c_cairo_raster_source_pattern_set_snapshot; ///
+private alias c_cairo_recording_surface_createFn = extern(C) cairo_surface_t* function(cairo_content_t content, const(cairo_rectangle_t)* extents) nothrow;
+__gshared c_cairo_recording_surface_createFn c_cairo_recording_surface_create; ///
+private alias c_cairo_recording_surface_get_extentsFn = extern(C) cairo_bool_t function(cairo_surface_t* surface, cairo_rectangle_t* extents) nothrow;
+__gshared c_cairo_recording_surface_get_extentsFn c_cairo_recording_surface_get_extents; ///
+private alias c_cairo_recording_surface_ink_extentsFn = extern(C) void function(cairo_surface_t* surface, double* x0, double* y0, double* width, double* height) nothrow;
+__gshared c_cairo_recording_surface_ink_extentsFn c_cairo_recording_surface_ink_extents; ///
+private alias c_cairo_referenceFn = extern(C) cairo_t* function(cairo_t* cr) nothrow;
+__gshared c_cairo_referenceFn c_cairo_reference; ///
+private alias c_cairo_region_createFn = extern(C) cairo_region_t* function() nothrow;
+__gshared c_cairo_region_createFn c_cairo_region_create; ///
+private alias c_cairo_region_create_rectangleFn = extern(C) cairo_region_t* function(const(cairo_rectangle_int_t)* rectangle) nothrow;
+__gshared c_cairo_region_create_rectangleFn c_cairo_region_create_rectangle; ///
+private alias c_cairo_region_create_rectanglesFn = extern(C) cairo_region_t* function(const(cairo_rectangle_int_t)* rects, int count) nothrow;
+__gshared c_cairo_region_create_rectanglesFn c_cairo_region_create_rectangles; ///
+private alias c_cairo_scaled_font_createFn = extern(C) cairo_scaled_font_t* function(cairo_font_face_t* fontFace, const(cairo_matrix_t)* fontMatrix, const(cairo_matrix_t)* ctm, const(cairo_font_options_t)* options) nothrow;
+__gshared c_cairo_scaled_font_createFn c_cairo_scaled_font_create; ///
+private alias c_cairo_script_createFn = extern(C) cairo_device_t* function(const(char)* filename) nothrow;
+__gshared c_cairo_script_createFn c_cairo_script_create; ///
+private alias c_cairo_script_create_for_streamFn = extern(C) cairo_device_t* function(cairo_write_func_t writeFunc, void* closure) nothrow;
+__gshared c_cairo_script_create_for_streamFn c_cairo_script_create_for_stream; ///
+private alias c_cairo_script_from_recording_surfaceFn = extern(C) cairo_status_t function(cairo_device_t* script, cairo_surface_t* recordingSurface) nothrow;
+__gshared c_cairo_script_from_recording_surfaceFn c_cairo_script_from_recording_surface; ///
+private alias c_cairo_script_get_modeFn = extern(C) cairo_script_mode_t function(cairo_device_t* script) nothrow;
+__gshared c_cairo_script_get_modeFn c_cairo_script_get_mode; ///
+private alias c_cairo_script_set_modeFn = extern(C) void function(cairo_device_t* script, cairo_script_mode_t mode) nothrow;
+__gshared c_cairo_script_set_modeFn c_cairo_script_set_mode; ///
+private alias c_cairo_script_surface_createFn = extern(C) cairo_surface_t* function(cairo_device_t* script, cairo_content_t content, double width, double height) nothrow;
+__gshared c_cairo_script_surface_createFn c_cairo_script_surface_create; ///
+private alias c_cairo_script_surface_create_for_targetFn = extern(C) cairo_surface_t* function(cairo_device_t* script, cairo_surface_t* target) nothrow;
+__gshared c_cairo_script_surface_create_for_targetFn c_cairo_script_surface_create_for_target; ///
+private alias c_cairo_script_write_commentFn = extern(C) void function(cairo_device_t* script, const(char)* comment, int len) nothrow;
+__gshared c_cairo_script_write_commentFn c_cairo_script_write_comment; ///
+private alias c_cairo_set_user_dataFn = extern(C) cairo_status_t function(cairo_t* cr, const(cairo_user_data_key_t)* key, void* userData, cairo_destroy_func_t destroy) nothrow;
+__gshared c_cairo_set_user_dataFn c_cairo_set_user_data; ///
+private alias c_cairo_status_to_stringFn = extern(C) const(char)* function(cairo_status_t status) nothrow;
+__gshared c_cairo_status_to_stringFn c_cairo_status_to_string; ///
+private alias c_cairo_svg_get_versionsFn = extern(C) void function(const(cairo_svg_version_t*)* versions, int* numVersions) nothrow;
+__gshared c_cairo_svg_get_versionsFn c_cairo_svg_get_versions; ///
+private alias c_cairo_svg_surface_createFn = extern(C) cairo_surface_t* function(const(char)* filename, double widthInPoints, double heightInPoints) nothrow;
+__gshared c_cairo_svg_surface_createFn c_cairo_svg_surface_create; ///
+private alias c_cairo_svg_surface_create_for_streamFn = extern(C) cairo_surface_t* function(cairo_write_func_t writeFunc, void* closure, double widthInPoints, double heightInPoints) nothrow;
+__gshared c_cairo_svg_surface_create_for_streamFn c_cairo_svg_surface_create_for_stream; ///
+private alias c_cairo_svg_surface_get_document_unitFn = extern(C) cairo_svg_unit_t function(cairo_surface_t* surface) nothrow;
+__gshared c_cairo_svg_surface_get_document_unitFn c_cairo_svg_surface_get_document_unit; ///
+private alias c_cairo_svg_surface_restrict_to_versionFn = extern(C) void function(cairo_surface_t* surface, cairo_svg_version_t version_) nothrow;
+__gshared c_cairo_svg_surface_restrict_to_versionFn c_cairo_svg_surface_restrict_to_version; ///
+private alias c_cairo_svg_surface_set_document_unitFn = extern(C) void function(cairo_surface_t* surface, cairo_svg_unit_t unit) nothrow;
+__gshared c_cairo_svg_surface_set_document_unitFn c_cairo_svg_surface_set_document_unit; ///
+private alias c_cairo_svg_version_to_stringFn = extern(C) const(char)* function(cairo_svg_version_t version_) nothrow;
+__gshared c_cairo_svg_version_to_stringFn c_cairo_svg_version_to_string; ///
+private alias c_cairo_tee_surface_addFn = extern(C) void function(cairo_surface_t* abstractSurface, cairo_surface_t* target) nothrow;
+__gshared c_cairo_tee_surface_addFn c_cairo_tee_surface_add; ///
+private alias c_cairo_tee_surface_createFn = extern(C) cairo_surface_t* function(cairo_surface_t* primary) nothrow;
+__gshared c_cairo_tee_surface_createFn c_cairo_tee_surface_create; ///
+private alias c_cairo_tee_surface_indexFn = extern(C) cairo_surface_t* function(cairo_surface_t* abstractSurface, uint index) nothrow;
+__gshared c_cairo_tee_surface_indexFn c_cairo_tee_surface_index; ///
+private alias c_cairo_tee_surface_removeFn = extern(C) void function(cairo_surface_t* abstractSurface, cairo_surface_t* target) nothrow;
+__gshared c_cairo_tee_surface_removeFn c_cairo_tee_surface_remove; ///
+private alias c_cairo_text_cluster_allocateFn = extern(C) cairo_text_cluster_t* function(int numClusters) nothrow;
+__gshared c_cairo_text_cluster_allocateFn c_cairo_text_cluster_allocate; ///
+private alias c_cairo_toy_font_face_createFn = extern(C) cairo_font_face_t* function(const(char)* family, cairo_font_slant_t slant, cairo_font_weight_t weight) nothrow;
+__gshared c_cairo_toy_font_face_createFn c_cairo_toy_font_face_create; ///
+private alias c_cairo_toy_font_face_get_familyFn = extern(C) const(char)* function(cairo_font_face_t* fontFace) nothrow;
+__gshared c_cairo_toy_font_face_get_familyFn c_cairo_toy_font_face_get_family; ///
+private alias c_cairo_toy_font_face_get_slantFn = extern(C) cairo_font_slant_t function(cairo_font_face_t* fontFace) nothrow;
+__gshared c_cairo_toy_font_face_get_slantFn c_cairo_toy_font_face_get_slant; ///
+private alias c_cairo_toy_font_face_get_weightFn = extern(C) cairo_font_weight_t function(cairo_font_face_t* fontFace) nothrow;
+__gshared c_cairo_toy_font_face_get_weightFn c_cairo_toy_font_face_get_weight; ///
+private alias c_cairo_user_font_face_createFn = extern(C) cairo_font_face_t* function() nothrow;
+__gshared c_cairo_user_font_face_createFn c_cairo_user_font_face_create; ///
+private alias c_cairo_user_font_face_get_init_funcFn = extern(C) cairo_user_scaled_font_init_func_t function(cairo_font_face_t* fontFace) nothrow;
+__gshared c_cairo_user_font_face_get_init_funcFn c_cairo_user_font_face_get_init_func; ///
+private alias c_cairo_user_font_face_get_render_color_glyph_funcFn = extern(C) cairo_user_scaled_font_render_glyph_func_t function(cairo_font_face_t* fontFace) nothrow;
+__gshared c_cairo_user_font_face_get_render_color_glyph_funcFn c_cairo_user_font_face_get_render_color_glyph_func; ///
+private alias c_cairo_user_font_face_get_render_glyph_funcFn = extern(C) cairo_user_scaled_font_render_glyph_func_t function(cairo_font_face_t* fontFace) nothrow;
+__gshared c_cairo_user_font_face_get_render_glyph_funcFn c_cairo_user_font_face_get_render_glyph_func; ///
+private alias c_cairo_user_font_face_get_text_to_glyphs_funcFn = extern(C) cairo_user_scaled_font_text_to_glyphs_func_t function(cairo_font_face_t* fontFace) nothrow;
+__gshared c_cairo_user_font_face_get_text_to_glyphs_funcFn c_cairo_user_font_face_get_text_to_glyphs_func; ///
+private alias c_cairo_user_font_face_get_unicode_to_glyph_funcFn = extern(C) cairo_user_scaled_font_unicode_to_glyph_func_t function(cairo_font_face_t* fontFace) nothrow;
+__gshared c_cairo_user_font_face_get_unicode_to_glyph_funcFn c_cairo_user_font_face_get_unicode_to_glyph_func; ///
+private alias c_cairo_user_font_face_set_init_funcFn = extern(C) void function(cairo_font_face_t* fontFace, cairo_user_scaled_font_init_func_t initFunc) nothrow;
+__gshared c_cairo_user_font_face_set_init_funcFn c_cairo_user_font_face_set_init_func; ///
+private alias c_cairo_user_font_face_set_render_color_glyph_funcFn = extern(C) void function(cairo_font_face_t* fontFace, cairo_user_scaled_font_render_glyph_func_t renderGlyphFunc) nothrow;
+__gshared c_cairo_user_font_face_set_render_color_glyph_funcFn c_cairo_user_font_face_set_render_color_glyph_func; ///
+private alias c_cairo_user_font_face_set_render_glyph_funcFn = extern(C) void function(cairo_font_face_t* fontFace, cairo_user_scaled_font_render_glyph_func_t renderGlyphFunc) nothrow;
+__gshared c_cairo_user_font_face_set_render_glyph_funcFn c_cairo_user_font_face_set_render_glyph_func; ///
+private alias c_cairo_user_font_face_set_text_to_glyphs_funcFn = extern(C) void function(cairo_font_face_t* fontFace, cairo_user_scaled_font_text_to_glyphs_func_t textToGlyphsFunc) nothrow;
+__gshared c_cairo_user_font_face_set_text_to_glyphs_funcFn c_cairo_user_font_face_set_text_to_glyphs_func; ///
+private alias c_cairo_user_font_face_set_unicode_to_glyph_funcFn = extern(C) void function(cairo_font_face_t* fontFace, cairo_user_scaled_font_unicode_to_glyph_func_t unicodeToGlyphFunc) nothrow;
+__gshared c_cairo_user_font_face_set_unicode_to_glyph_funcFn c_cairo_user_font_face_set_unicode_to_glyph_func; ///
+private alias c_cairo_user_scaled_font_get_foreground_markerFn = extern(C) cairo_pattern_t* function(cairo_scaled_font_t* scaledFont) nothrow;
+__gshared c_cairo_user_scaled_font_get_foreground_markerFn c_cairo_user_scaled_font_get_foreground_marker; ///
+private alias c_cairo_user_scaled_font_get_foreground_sourceFn = extern(C) cairo_pattern_t* function(cairo_scaled_font_t* scaledFont) nothrow;
+__gshared c_cairo_user_scaled_font_get_foreground_sourceFn c_cairo_user_scaled_font_get_foreground_source; ///
+private alias c_cairo_versionFn = extern(C) int function() nothrow;
+__gshared c_cairo_versionFn c_cairo_version; ///
+private alias c_cairo_version_stringFn = extern(C) const(char)* function() nothrow;
+__gshared c_cairo_version_stringFn c_cairo_version_string; ///
 
 // Context
 

@@ -8,20 +8,27 @@ public import gid.glib2.c.types;
 
 private immutable LIBS = ["gmodule-2.0_0"];
 
-__gshared extern(C) nothrow
-{
-  // Module
-  gboolean function(ModuleC* module_) c_g_module_close; ///
-  void function(ModuleC* module_) c_g_module_make_resident; ///
-  const(char)* function(ModuleC* module_) c_g_module_name; ///
-  gboolean function(ModuleC* module_, const(char)* symbolName, void** symbol) c_g_module_symbol; ///
-  char* function(const(char)* directory, const(char)* moduleName) c_g_module_build_path; ///
-  const(char)* function() c_g_module_error; ///
-  GQuark function() c_g_module_error_quark; ///
-  ModuleC* function(const(char)* fileName, GModuleFlags flags) c_g_module_open; ///
-  ModuleC* function(const(char)* fileName, GModuleFlags flags, GError** _err) c_g_module_open_full; ///
-  gboolean function() c_g_module_supported; ///
-}
+// Module
+private alias c_g_module_closeFn = extern(C) gboolean function(ModuleC* module_) nothrow;
+__gshared c_g_module_closeFn c_g_module_close; ///
+private alias c_g_module_make_residentFn = extern(C) void function(ModuleC* module_) nothrow;
+__gshared c_g_module_make_residentFn c_g_module_make_resident; ///
+private alias c_g_module_nameFn = extern(C) const(char)* function(ModuleC* module_) nothrow;
+__gshared c_g_module_nameFn c_g_module_name; ///
+private alias c_g_module_symbolFn = extern(C) gboolean function(ModuleC* module_, const(char)* symbolName, void** symbol) nothrow;
+__gshared c_g_module_symbolFn c_g_module_symbol; ///
+private alias c_g_module_build_pathFn = extern(C) char* function(const(char)* directory, const(char)* moduleName) nothrow;
+__gshared c_g_module_build_pathFn c_g_module_build_path; ///
+private alias c_g_module_errorFn = extern(C) const(char)* function() nothrow;
+__gshared c_g_module_errorFn c_g_module_error; ///
+private alias c_g_module_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_g_module_error_quarkFn c_g_module_error_quark; ///
+private alias c_g_module_openFn = extern(C) ModuleC* function(const(char)* fileName, GModuleFlags flags) nothrow;
+__gshared c_g_module_openFn c_g_module_open; ///
+private alias c_g_module_open_fullFn = extern(C) ModuleC* function(const(char)* fileName, GModuleFlags flags, GError** _err) nothrow;
+__gshared c_g_module_open_fullFn c_g_module_open_full; ///
+private alias c_g_module_supportedFn = extern(C) gboolean function() nothrow;
+__gshared c_g_module_supportedFn c_g_module_supported; ///
 
 // Module
 

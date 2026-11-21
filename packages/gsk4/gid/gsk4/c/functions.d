@@ -9,501 +9,881 @@ public import gid.graphene1.c.types;
 
 private immutable LIBS = ["gtk-4_1"];
 
-__gshared extern(C) nothrow
-{
-  // BlendNode
-  GType function() c_gsk_blend_node_get_type; ///
-  GskRenderNode* function(GskRenderNode* bottom, GskRenderNode* top, GskBlendMode blendMode) c_gsk_blend_node_new; ///
-  GskBlendMode function(const(GskRenderNode)* node) c_gsk_blend_node_get_blend_mode; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_blend_node_get_bottom_child; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_blend_node_get_top_child; ///
+// BlendNode
+private alias c_gsk_blend_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_blend_node_get_typeFn c_gsk_blend_node_get_type; ///
+private alias c_gsk_blend_node_newFn = extern(C) GskRenderNode* function(GskRenderNode* bottom, GskRenderNode* top, GskBlendMode blendMode) nothrow;
+__gshared c_gsk_blend_node_newFn c_gsk_blend_node_new; ///
+private alias c_gsk_blend_node_get_blend_modeFn = extern(C) GskBlendMode function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_blend_node_get_blend_modeFn c_gsk_blend_node_get_blend_mode; ///
+private alias c_gsk_blend_node_get_bottom_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_blend_node_get_bottom_childFn c_gsk_blend_node_get_bottom_child; ///
+private alias c_gsk_blend_node_get_top_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_blend_node_get_top_childFn c_gsk_blend_node_get_top_child; ///
 
-  // BlurNode
-  GType function() c_gsk_blur_node_get_type; ///
-  GskRenderNode* function(GskRenderNode* child, float radius) c_gsk_blur_node_new; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_blur_node_get_child; ///
-  float function(const(GskRenderNode)* node) c_gsk_blur_node_get_radius; ///
+// BlurNode
+private alias c_gsk_blur_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_blur_node_get_typeFn c_gsk_blur_node_get_type; ///
+private alias c_gsk_blur_node_newFn = extern(C) GskRenderNode* function(GskRenderNode* child, float radius) nothrow;
+__gshared c_gsk_blur_node_newFn c_gsk_blur_node_new; ///
+private alias c_gsk_blur_node_get_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_blur_node_get_childFn c_gsk_blur_node_get_child; ///
+private alias c_gsk_blur_node_get_radiusFn = extern(C) float function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_blur_node_get_radiusFn c_gsk_blur_node_get_radius; ///
 
-  // BorderNode
-  GType function() c_gsk_border_node_get_type; ///
-  GskRenderNode* function(const(GskRoundedRect)* outline, const(float)* borderWidth, const(GdkRGBA)* borderColor) c_gsk_border_node_new; ///
-  const(GdkRGBA)* function(const(GskRenderNode)* node) c_gsk_border_node_get_colors; ///
-  const(GskRoundedRect)* function(const(GskRenderNode)* node) c_gsk_border_node_get_outline; ///
-  const(float)* function(const(GskRenderNode)* node) c_gsk_border_node_get_widths; ///
+// BorderNode
+private alias c_gsk_border_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_border_node_get_typeFn c_gsk_border_node_get_type; ///
+private alias c_gsk_border_node_newFn = extern(C) GskRenderNode* function(const(GskRoundedRect)* outline, const(float)* borderWidth, const(GdkRGBA)* borderColor) nothrow;
+__gshared c_gsk_border_node_newFn c_gsk_border_node_new; ///
+private alias c_gsk_border_node_get_colorsFn = extern(C) const(GdkRGBA)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_border_node_get_colorsFn c_gsk_border_node_get_colors; ///
+private alias c_gsk_border_node_get_outlineFn = extern(C) const(GskRoundedRect)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_border_node_get_outlineFn c_gsk_border_node_get_outline; ///
+private alias c_gsk_border_node_get_widthsFn = extern(C) const(float)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_border_node_get_widthsFn c_gsk_border_node_get_widths; ///
 
-  // BroadwayRenderer
-  GType function() c_gsk_broadway_renderer_get_type; ///
-  GskRenderer* function() c_gsk_broadway_renderer_new; ///
+// BroadwayRenderer
+private alias c_gsk_broadway_renderer_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_broadway_renderer_get_typeFn c_gsk_broadway_renderer_get_type; ///
+private alias c_gsk_broadway_renderer_newFn = extern(C) GskRenderer* function() nothrow;
+__gshared c_gsk_broadway_renderer_newFn c_gsk_broadway_renderer_new; ///
 
-  // CairoNode
-  GType function() c_gsk_cairo_node_get_type; ///
-  GskRenderNode* function(const(graphene_rect_t)* bounds) c_gsk_cairo_node_new; ///
-  cairo_t* function(GskRenderNode* node) c_gsk_cairo_node_get_draw_context; ///
-  cairo_surface_t* function(GskRenderNode* node) c_gsk_cairo_node_get_surface; ///
+// CairoNode
+private alias c_gsk_cairo_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_cairo_node_get_typeFn c_gsk_cairo_node_get_type; ///
+private alias c_gsk_cairo_node_newFn = extern(C) GskRenderNode* function(const(graphene_rect_t)* bounds) nothrow;
+__gshared c_gsk_cairo_node_newFn c_gsk_cairo_node_new; ///
+private alias c_gsk_cairo_node_get_draw_contextFn = extern(C) cairo_t* function(GskRenderNode* node) nothrow;
+__gshared c_gsk_cairo_node_get_draw_contextFn c_gsk_cairo_node_get_draw_context; ///
+private alias c_gsk_cairo_node_get_surfaceFn = extern(C) cairo_surface_t* function(GskRenderNode* node) nothrow;
+__gshared c_gsk_cairo_node_get_surfaceFn c_gsk_cairo_node_get_surface; ///
 
-  // CairoRenderer
-  GType function() c_gsk_cairo_renderer_get_type; ///
-  GskRenderer* function() c_gsk_cairo_renderer_new; ///
+// CairoRenderer
+private alias c_gsk_cairo_renderer_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_cairo_renderer_get_typeFn c_gsk_cairo_renderer_get_type; ///
+private alias c_gsk_cairo_renderer_newFn = extern(C) GskRenderer* function() nothrow;
+__gshared c_gsk_cairo_renderer_newFn c_gsk_cairo_renderer_new; ///
 
-  // ClipNode
-  GType function() c_gsk_clip_node_get_type; ///
-  GskRenderNode* function(GskRenderNode* child, const(graphene_rect_t)* clip) c_gsk_clip_node_new; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_clip_node_get_child; ///
-  const(graphene_rect_t)* function(const(GskRenderNode)* node) c_gsk_clip_node_get_clip; ///
+// ClipNode
+private alias c_gsk_clip_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_clip_node_get_typeFn c_gsk_clip_node_get_type; ///
+private alias c_gsk_clip_node_newFn = extern(C) GskRenderNode* function(GskRenderNode* child, const(graphene_rect_t)* clip) nothrow;
+__gshared c_gsk_clip_node_newFn c_gsk_clip_node_new; ///
+private alias c_gsk_clip_node_get_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_clip_node_get_childFn c_gsk_clip_node_get_child; ///
+private alias c_gsk_clip_node_get_clipFn = extern(C) const(graphene_rect_t)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_clip_node_get_clipFn c_gsk_clip_node_get_clip; ///
 
-  // ColorMatrixNode
-  GType function() c_gsk_color_matrix_node_get_type; ///
-  GskRenderNode* function(GskRenderNode* child, const(graphene_matrix_t)* colorMatrix, const(graphene_vec4_t)* colorOffset) c_gsk_color_matrix_node_new; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_color_matrix_node_get_child; ///
-  const(graphene_matrix_t)* function(const(GskRenderNode)* node) c_gsk_color_matrix_node_get_color_matrix; ///
-  const(graphene_vec4_t)* function(const(GskRenderNode)* node) c_gsk_color_matrix_node_get_color_offset; ///
+// ColorMatrixNode
+private alias c_gsk_color_matrix_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_color_matrix_node_get_typeFn c_gsk_color_matrix_node_get_type; ///
+private alias c_gsk_color_matrix_node_newFn = extern(C) GskRenderNode* function(GskRenderNode* child, const(graphene_matrix_t)* colorMatrix, const(graphene_vec4_t)* colorOffset) nothrow;
+__gshared c_gsk_color_matrix_node_newFn c_gsk_color_matrix_node_new; ///
+private alias c_gsk_color_matrix_node_get_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_color_matrix_node_get_childFn c_gsk_color_matrix_node_get_child; ///
+private alias c_gsk_color_matrix_node_get_color_matrixFn = extern(C) const(graphene_matrix_t)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_color_matrix_node_get_color_matrixFn c_gsk_color_matrix_node_get_color_matrix; ///
+private alias c_gsk_color_matrix_node_get_color_offsetFn = extern(C) const(graphene_vec4_t)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_color_matrix_node_get_color_offsetFn c_gsk_color_matrix_node_get_color_offset; ///
 
-  // ColorNode
-  GType function() c_gsk_color_node_get_type; ///
-  GskRenderNode* function(const(GdkRGBA)* rgba, const(graphene_rect_t)* bounds) c_gsk_color_node_new; ///
-  const(GdkRGBA)* function(const(GskRenderNode)* node) c_gsk_color_node_get_color; ///
+// ColorNode
+private alias c_gsk_color_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_color_node_get_typeFn c_gsk_color_node_get_type; ///
+private alias c_gsk_color_node_newFn = extern(C) GskRenderNode* function(const(GdkRGBA)* rgba, const(graphene_rect_t)* bounds) nothrow;
+__gshared c_gsk_color_node_newFn c_gsk_color_node_new; ///
+private alias c_gsk_color_node_get_colorFn = extern(C) const(GdkRGBA)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_color_node_get_colorFn c_gsk_color_node_get_color; ///
 
-  // ComponentTransfer
-  GType function() c_gsk_component_transfer_get_type; ///
-  GskComponentTransfer* function(uint n, float* values) c_gsk_component_transfer_new_discrete; ///
-  GskComponentTransfer* function(float amp, float exp, float ofs) c_gsk_component_transfer_new_gamma; ///
-  GskComponentTransfer* function() c_gsk_component_transfer_new_identity; ///
-  GskComponentTransfer* function(float n) c_gsk_component_transfer_new_levels; ///
-  GskComponentTransfer* function(float m, float b) c_gsk_component_transfer_new_linear; ///
-  GskComponentTransfer* function(uint n, float* values) c_gsk_component_transfer_new_table; ///
-  GskComponentTransfer* function(const(GskComponentTransfer)* other) c_gsk_component_transfer_copy; ///
-  void function(GskComponentTransfer* self) c_gsk_component_transfer_free; ///
-  gboolean function(const(void)* self, const(void)* other) c_gsk_component_transfer_equal; ///
+// ComponentTransfer
+private alias c_gsk_component_transfer_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_component_transfer_get_typeFn c_gsk_component_transfer_get_type; ///
+private alias c_gsk_component_transfer_new_discreteFn = extern(C) GskComponentTransfer* function(uint n, float* values) nothrow;
+__gshared c_gsk_component_transfer_new_discreteFn c_gsk_component_transfer_new_discrete; ///
+private alias c_gsk_component_transfer_new_gammaFn = extern(C) GskComponentTransfer* function(float amp, float exp, float ofs) nothrow;
+__gshared c_gsk_component_transfer_new_gammaFn c_gsk_component_transfer_new_gamma; ///
+private alias c_gsk_component_transfer_new_identityFn = extern(C) GskComponentTransfer* function() nothrow;
+__gshared c_gsk_component_transfer_new_identityFn c_gsk_component_transfer_new_identity; ///
+private alias c_gsk_component_transfer_new_levelsFn = extern(C) GskComponentTransfer* function(float n) nothrow;
+__gshared c_gsk_component_transfer_new_levelsFn c_gsk_component_transfer_new_levels; ///
+private alias c_gsk_component_transfer_new_linearFn = extern(C) GskComponentTransfer* function(float m, float b) nothrow;
+__gshared c_gsk_component_transfer_new_linearFn c_gsk_component_transfer_new_linear; ///
+private alias c_gsk_component_transfer_new_tableFn = extern(C) GskComponentTransfer* function(uint n, float* values) nothrow;
+__gshared c_gsk_component_transfer_new_tableFn c_gsk_component_transfer_new_table; ///
+private alias c_gsk_component_transfer_copyFn = extern(C) GskComponentTransfer* function(const(GskComponentTransfer)* other) nothrow;
+__gshared c_gsk_component_transfer_copyFn c_gsk_component_transfer_copy; ///
+private alias c_gsk_component_transfer_freeFn = extern(C) void function(GskComponentTransfer* self) nothrow;
+__gshared c_gsk_component_transfer_freeFn c_gsk_component_transfer_free; ///
+private alias c_gsk_component_transfer_equalFn = extern(C) gboolean function(const(void)* self, const(void)* other) nothrow;
+__gshared c_gsk_component_transfer_equalFn c_gsk_component_transfer_equal; ///
 
-  // ComponentTransferNode
-  GType function() c_gsk_component_transfer_node_get_type; ///
-  GskRenderNode* function(GskRenderNode* child, const(GskComponentTransfer)* r, const(GskComponentTransfer)* g, const(GskComponentTransfer)* b, const(GskComponentTransfer)* a) c_gsk_component_transfer_node_new; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_component_transfer_node_get_child; ///
-  const(GskComponentTransfer)* function(const(GskRenderNode)* node, GdkColorChannel component) c_gsk_component_transfer_node_get_transfer; ///
+// ComponentTransferNode
+private alias c_gsk_component_transfer_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_component_transfer_node_get_typeFn c_gsk_component_transfer_node_get_type; ///
+private alias c_gsk_component_transfer_node_newFn = extern(C) GskRenderNode* function(GskRenderNode* child, const(GskComponentTransfer)* r, const(GskComponentTransfer)* g, const(GskComponentTransfer)* b, const(GskComponentTransfer)* a) nothrow;
+__gshared c_gsk_component_transfer_node_newFn c_gsk_component_transfer_node_new; ///
+private alias c_gsk_component_transfer_node_get_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_component_transfer_node_get_childFn c_gsk_component_transfer_node_get_child; ///
+private alias c_gsk_component_transfer_node_get_transferFn = extern(C) const(GskComponentTransfer)* function(const(GskRenderNode)* node, GdkColorChannel component) nothrow;
+__gshared c_gsk_component_transfer_node_get_transferFn c_gsk_component_transfer_node_get_transfer; ///
 
-  // CompositeNode
-  GType function() c_gsk_composite_node_get_type; ///
-  GskRenderNode* function(GskRenderNode* child, GskRenderNode* mask, GskPorterDuff op) c_gsk_composite_node_new; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_composite_node_get_child; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_composite_node_get_mask; ///
-  GskPorterDuff function(const(GskRenderNode)* node) c_gsk_composite_node_get_operator; ///
+// CompositeNode
+private alias c_gsk_composite_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_composite_node_get_typeFn c_gsk_composite_node_get_type; ///
+private alias c_gsk_composite_node_newFn = extern(C) GskRenderNode* function(GskRenderNode* child, GskRenderNode* mask, GskPorterDuff op) nothrow;
+__gshared c_gsk_composite_node_newFn c_gsk_composite_node_new; ///
+private alias c_gsk_composite_node_get_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_composite_node_get_childFn c_gsk_composite_node_get_child; ///
+private alias c_gsk_composite_node_get_maskFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_composite_node_get_maskFn c_gsk_composite_node_get_mask; ///
+private alias c_gsk_composite_node_get_operatorFn = extern(C) GskPorterDuff function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_composite_node_get_operatorFn c_gsk_composite_node_get_operator; ///
 
-  // ConicGradientNode
-  GType function() c_gsk_conic_gradient_node_get_type; ///
-  GskRenderNode* function(const(graphene_rect_t)* bounds, const(graphene_point_t)* center, float rotation, const(GskColorStop)* colorStops, size_t nColorStops) c_gsk_conic_gradient_node_new; ///
-  float function(const(GskRenderNode)* node) c_gsk_conic_gradient_node_get_angle; ///
-  const(graphene_point_t)* function(const(GskRenderNode)* node) c_gsk_conic_gradient_node_get_center; ///
-  const(GskColorStop)* function(const(GskRenderNode)* node, size_t* nStops) c_gsk_conic_gradient_node_get_color_stops; ///
-  size_t function(const(GskRenderNode)* node) c_gsk_conic_gradient_node_get_n_color_stops; ///
-  float function(const(GskRenderNode)* node) c_gsk_conic_gradient_node_get_rotation; ///
+// ConicGradientNode
+private alias c_gsk_conic_gradient_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_conic_gradient_node_get_typeFn c_gsk_conic_gradient_node_get_type; ///
+private alias c_gsk_conic_gradient_node_newFn = extern(C) GskRenderNode* function(const(graphene_rect_t)* bounds, const(graphene_point_t)* center, float rotation, const(GskColorStop)* colorStops, size_t nColorStops) nothrow;
+__gshared c_gsk_conic_gradient_node_newFn c_gsk_conic_gradient_node_new; ///
+private alias c_gsk_conic_gradient_node_get_angleFn = extern(C) float function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_conic_gradient_node_get_angleFn c_gsk_conic_gradient_node_get_angle; ///
+private alias c_gsk_conic_gradient_node_get_centerFn = extern(C) const(graphene_point_t)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_conic_gradient_node_get_centerFn c_gsk_conic_gradient_node_get_center; ///
+private alias c_gsk_conic_gradient_node_get_color_stopsFn = extern(C) const(GskColorStop)* function(const(GskRenderNode)* node, size_t* nStops) nothrow;
+__gshared c_gsk_conic_gradient_node_get_color_stopsFn c_gsk_conic_gradient_node_get_color_stops; ///
+private alias c_gsk_conic_gradient_node_get_n_color_stopsFn = extern(C) size_t function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_conic_gradient_node_get_n_color_stopsFn c_gsk_conic_gradient_node_get_n_color_stops; ///
+private alias c_gsk_conic_gradient_node_get_rotationFn = extern(C) float function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_conic_gradient_node_get_rotationFn c_gsk_conic_gradient_node_get_rotation; ///
 
-  // ContainerNode
-  GType function() c_gsk_container_node_get_type; ///
-  GskRenderNode* function(GskRenderNode** children, uint nChildren) c_gsk_container_node_new; ///
-  GskRenderNode* function(const(GskRenderNode)* node, uint idx) c_gsk_container_node_get_child; ///
-  uint function(const(GskRenderNode)* node) c_gsk_container_node_get_n_children; ///
+// ContainerNode
+private alias c_gsk_container_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_container_node_get_typeFn c_gsk_container_node_get_type; ///
+private alias c_gsk_container_node_newFn = extern(C) GskRenderNode* function(GskRenderNode** children, uint nChildren) nothrow;
+__gshared c_gsk_container_node_newFn c_gsk_container_node_new; ///
+private alias c_gsk_container_node_get_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node, uint idx) nothrow;
+__gshared c_gsk_container_node_get_childFn c_gsk_container_node_get_child; ///
+private alias c_gsk_container_node_get_n_childrenFn = extern(C) uint function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_container_node_get_n_childrenFn c_gsk_container_node_get_n_children; ///
 
-  // CopyNode
-  GType function() c_gsk_copy_node_get_type; ///
-  GskRenderNode* function(GskRenderNode* child) c_gsk_copy_node_new; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_copy_node_get_child; ///
+// CopyNode
+private alias c_gsk_copy_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_copy_node_get_typeFn c_gsk_copy_node_get_type; ///
+private alias c_gsk_copy_node_newFn = extern(C) GskRenderNode* function(GskRenderNode* child) nothrow;
+__gshared c_gsk_copy_node_newFn c_gsk_copy_node_new; ///
+private alias c_gsk_copy_node_get_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_copy_node_get_childFn c_gsk_copy_node_get_child; ///
 
-  // CrossFadeNode
-  GType function() c_gsk_cross_fade_node_get_type; ///
-  GskRenderNode* function(GskRenderNode* start, GskRenderNode* end, float progress) c_gsk_cross_fade_node_new; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_cross_fade_node_get_end_child; ///
-  float function(const(GskRenderNode)* node) c_gsk_cross_fade_node_get_progress; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_cross_fade_node_get_start_child; ///
+// CrossFadeNode
+private alias c_gsk_cross_fade_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_cross_fade_node_get_typeFn c_gsk_cross_fade_node_get_type; ///
+private alias c_gsk_cross_fade_node_newFn = extern(C) GskRenderNode* function(GskRenderNode* start, GskRenderNode* end, float progress) nothrow;
+__gshared c_gsk_cross_fade_node_newFn c_gsk_cross_fade_node_new; ///
+private alias c_gsk_cross_fade_node_get_end_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_cross_fade_node_get_end_childFn c_gsk_cross_fade_node_get_end_child; ///
+private alias c_gsk_cross_fade_node_get_progressFn = extern(C) float function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_cross_fade_node_get_progressFn c_gsk_cross_fade_node_get_progress; ///
+private alias c_gsk_cross_fade_node_get_start_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_cross_fade_node_get_start_childFn c_gsk_cross_fade_node_get_start_child; ///
 
-  // DebugNode
-  GType function() c_gsk_debug_node_get_type; ///
-  GskRenderNode* function(GskRenderNode* child, char* message) c_gsk_debug_node_new; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_debug_node_get_child; ///
-  const(char)* function(const(GskRenderNode)* node) c_gsk_debug_node_get_message; ///
+// DebugNode
+private alias c_gsk_debug_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_debug_node_get_typeFn c_gsk_debug_node_get_type; ///
+private alias c_gsk_debug_node_newFn = extern(C) GskRenderNode* function(GskRenderNode* child, char* message) nothrow;
+__gshared c_gsk_debug_node_newFn c_gsk_debug_node_new; ///
+private alias c_gsk_debug_node_get_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_debug_node_get_childFn c_gsk_debug_node_get_child; ///
+private alias c_gsk_debug_node_get_messageFn = extern(C) const(char)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_debug_node_get_messageFn c_gsk_debug_node_get_message; ///
 
-  // FillNode
-  GType function() c_gsk_fill_node_get_type; ///
-  GskRenderNode* function(GskRenderNode* child, GskPath* path, GskFillRule fillRule) c_gsk_fill_node_new; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_fill_node_get_child; ///
-  GskFillRule function(const(GskRenderNode)* node) c_gsk_fill_node_get_fill_rule; ///
-  GskPath* function(const(GskRenderNode)* node) c_gsk_fill_node_get_path; ///
+// FillNode
+private alias c_gsk_fill_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_fill_node_get_typeFn c_gsk_fill_node_get_type; ///
+private alias c_gsk_fill_node_newFn = extern(C) GskRenderNode* function(GskRenderNode* child, GskPath* path, GskFillRule fillRule) nothrow;
+__gshared c_gsk_fill_node_newFn c_gsk_fill_node_new; ///
+private alias c_gsk_fill_node_get_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_fill_node_get_childFn c_gsk_fill_node_get_child; ///
+private alias c_gsk_fill_node_get_fill_ruleFn = extern(C) GskFillRule function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_fill_node_get_fill_ruleFn c_gsk_fill_node_get_fill_rule; ///
+private alias c_gsk_fill_node_get_pathFn = extern(C) GskPath* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_fill_node_get_pathFn c_gsk_fill_node_get_path; ///
 
-  // GLRenderer
-  GType function() c_gsk_gl_renderer_get_type; ///
-  GskRenderer* function() c_gsk_gl_renderer_new; ///
+// GLRenderer
+private alias c_gsk_gl_renderer_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_gl_renderer_get_typeFn c_gsk_gl_renderer_get_type; ///
+private alias c_gsk_gl_renderer_newFn = extern(C) GskRenderer* function() nothrow;
+__gshared c_gsk_gl_renderer_newFn c_gsk_gl_renderer_new; ///
 
-  // GLShader
-  GType function() c_gsk_gl_shader_get_type; ///
-  GskGLShader* function(GBytes* sourcecode) c_gsk_gl_shader_new_from_bytes; ///
-  GskGLShader* function(const(char)* resourcePath) c_gsk_gl_shader_new_from_resource; ///
-  gboolean function(GskGLShader* shader, GskRenderer* renderer, GError** _err) c_gsk_gl_shader_compile; ///
-  int function(GskGLShader* shader, const(char)* name) c_gsk_gl_shader_find_uniform_by_name; ///
-  GBytes* function(GskGLShader* shader,  ...) c_gsk_gl_shader_format_args; ///
-  GBytes* function(GskGLShader* shader, void* uniforms) c_gsk_gl_shader_format_args_va; ///
-  gboolean function(GskGLShader* shader, GBytes* args, int idx) c_gsk_gl_shader_get_arg_bool; ///
-  float function(GskGLShader* shader, GBytes* args, int idx) c_gsk_gl_shader_get_arg_float; ///
-  int function(GskGLShader* shader, GBytes* args, int idx) c_gsk_gl_shader_get_arg_int; ///
-  uint function(GskGLShader* shader, GBytes* args, int idx) c_gsk_gl_shader_get_arg_uint; ///
-  void function(GskGLShader* shader, GBytes* args, int idx, graphene_vec2_t* outValue) c_gsk_gl_shader_get_arg_vec2; ///
-  void function(GskGLShader* shader, GBytes* args, int idx, graphene_vec3_t* outValue) c_gsk_gl_shader_get_arg_vec3; ///
-  void function(GskGLShader* shader, GBytes* args, int idx, graphene_vec4_t* outValue) c_gsk_gl_shader_get_arg_vec4; ///
-  size_t function(GskGLShader* shader) c_gsk_gl_shader_get_args_size; ///
-  int function(GskGLShader* shader) c_gsk_gl_shader_get_n_textures; ///
-  int function(GskGLShader* shader) c_gsk_gl_shader_get_n_uniforms; ///
-  const(char)* function(GskGLShader* shader) c_gsk_gl_shader_get_resource; ///
-  GBytes* function(GskGLShader* shader) c_gsk_gl_shader_get_source; ///
-  const(char)* function(GskGLShader* shader, int idx) c_gsk_gl_shader_get_uniform_name; ///
-  int function(GskGLShader* shader, int idx) c_gsk_gl_shader_get_uniform_offset; ///
-  GskGLUniformType function(GskGLShader* shader, int idx) c_gsk_gl_shader_get_uniform_type; ///
+// GLShader
+private alias c_gsk_gl_shader_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_gl_shader_get_typeFn c_gsk_gl_shader_get_type; ///
+private alias c_gsk_gl_shader_new_from_bytesFn = extern(C) GskGLShader* function(GBytes* sourcecode) nothrow;
+__gshared c_gsk_gl_shader_new_from_bytesFn c_gsk_gl_shader_new_from_bytes; ///
+private alias c_gsk_gl_shader_new_from_resourceFn = extern(C) GskGLShader* function(const(char)* resourcePath) nothrow;
+__gshared c_gsk_gl_shader_new_from_resourceFn c_gsk_gl_shader_new_from_resource; ///
+private alias c_gsk_gl_shader_compileFn = extern(C) gboolean function(GskGLShader* shader, GskRenderer* renderer, GError** _err) nothrow;
+__gshared c_gsk_gl_shader_compileFn c_gsk_gl_shader_compile; ///
+private alias c_gsk_gl_shader_find_uniform_by_nameFn = extern(C) int function(GskGLShader* shader, const(char)* name) nothrow;
+__gshared c_gsk_gl_shader_find_uniform_by_nameFn c_gsk_gl_shader_find_uniform_by_name; ///
+private alias c_gsk_gl_shader_format_argsFn = extern(C) GBytes* function(GskGLShader* shader,  ...) nothrow;
+__gshared c_gsk_gl_shader_format_argsFn c_gsk_gl_shader_format_args; ///
+private alias c_gsk_gl_shader_format_args_vaFn = extern(C) GBytes* function(GskGLShader* shader, void* uniforms) nothrow;
+__gshared c_gsk_gl_shader_format_args_vaFn c_gsk_gl_shader_format_args_va; ///
+private alias c_gsk_gl_shader_get_arg_boolFn = extern(C) gboolean function(GskGLShader* shader, GBytes* args, int idx) nothrow;
+__gshared c_gsk_gl_shader_get_arg_boolFn c_gsk_gl_shader_get_arg_bool; ///
+private alias c_gsk_gl_shader_get_arg_floatFn = extern(C) float function(GskGLShader* shader, GBytes* args, int idx) nothrow;
+__gshared c_gsk_gl_shader_get_arg_floatFn c_gsk_gl_shader_get_arg_float; ///
+private alias c_gsk_gl_shader_get_arg_intFn = extern(C) int function(GskGLShader* shader, GBytes* args, int idx) nothrow;
+__gshared c_gsk_gl_shader_get_arg_intFn c_gsk_gl_shader_get_arg_int; ///
+private alias c_gsk_gl_shader_get_arg_uintFn = extern(C) uint function(GskGLShader* shader, GBytes* args, int idx) nothrow;
+__gshared c_gsk_gl_shader_get_arg_uintFn c_gsk_gl_shader_get_arg_uint; ///
+private alias c_gsk_gl_shader_get_arg_vec2Fn = extern(C) void function(GskGLShader* shader, GBytes* args, int idx, graphene_vec2_t* outValue) nothrow;
+__gshared c_gsk_gl_shader_get_arg_vec2Fn c_gsk_gl_shader_get_arg_vec2; ///
+private alias c_gsk_gl_shader_get_arg_vec3Fn = extern(C) void function(GskGLShader* shader, GBytes* args, int idx, graphene_vec3_t* outValue) nothrow;
+__gshared c_gsk_gl_shader_get_arg_vec3Fn c_gsk_gl_shader_get_arg_vec3; ///
+private alias c_gsk_gl_shader_get_arg_vec4Fn = extern(C) void function(GskGLShader* shader, GBytes* args, int idx, graphene_vec4_t* outValue) nothrow;
+__gshared c_gsk_gl_shader_get_arg_vec4Fn c_gsk_gl_shader_get_arg_vec4; ///
+private alias c_gsk_gl_shader_get_args_sizeFn = extern(C) size_t function(GskGLShader* shader) nothrow;
+__gshared c_gsk_gl_shader_get_args_sizeFn c_gsk_gl_shader_get_args_size; ///
+private alias c_gsk_gl_shader_get_n_texturesFn = extern(C) int function(GskGLShader* shader) nothrow;
+__gshared c_gsk_gl_shader_get_n_texturesFn c_gsk_gl_shader_get_n_textures; ///
+private alias c_gsk_gl_shader_get_n_uniformsFn = extern(C) int function(GskGLShader* shader) nothrow;
+__gshared c_gsk_gl_shader_get_n_uniformsFn c_gsk_gl_shader_get_n_uniforms; ///
+private alias c_gsk_gl_shader_get_resourceFn = extern(C) const(char)* function(GskGLShader* shader) nothrow;
+__gshared c_gsk_gl_shader_get_resourceFn c_gsk_gl_shader_get_resource; ///
+private alias c_gsk_gl_shader_get_sourceFn = extern(C) GBytes* function(GskGLShader* shader) nothrow;
+__gshared c_gsk_gl_shader_get_sourceFn c_gsk_gl_shader_get_source; ///
+private alias c_gsk_gl_shader_get_uniform_nameFn = extern(C) const(char)* function(GskGLShader* shader, int idx) nothrow;
+__gshared c_gsk_gl_shader_get_uniform_nameFn c_gsk_gl_shader_get_uniform_name; ///
+private alias c_gsk_gl_shader_get_uniform_offsetFn = extern(C) int function(GskGLShader* shader, int idx) nothrow;
+__gshared c_gsk_gl_shader_get_uniform_offsetFn c_gsk_gl_shader_get_uniform_offset; ///
+private alias c_gsk_gl_shader_get_uniform_typeFn = extern(C) GskGLUniformType function(GskGLShader* shader, int idx) nothrow;
+__gshared c_gsk_gl_shader_get_uniform_typeFn c_gsk_gl_shader_get_uniform_type; ///
 
-  // GLShaderNode
-  GType function() c_gsk_gl_shader_node_get_type; ///
-  GskRenderNode* function(GskGLShader* shader, const(graphene_rect_t)* bounds, GBytes* args, GskRenderNode** children, uint nChildren) c_gsk_gl_shader_node_new; ///
-  GBytes* function(const(GskRenderNode)* node) c_gsk_gl_shader_node_get_args; ///
-  GskRenderNode* function(const(GskRenderNode)* node, uint idx) c_gsk_gl_shader_node_get_child; ///
-  uint function(const(GskRenderNode)* node) c_gsk_gl_shader_node_get_n_children; ///
-  GskGLShader* function(const(GskRenderNode)* node) c_gsk_gl_shader_node_get_shader; ///
+// GLShaderNode
+private alias c_gsk_gl_shader_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_gl_shader_node_get_typeFn c_gsk_gl_shader_node_get_type; ///
+private alias c_gsk_gl_shader_node_newFn = extern(C) GskRenderNode* function(GskGLShader* shader, const(graphene_rect_t)* bounds, GBytes* args, GskRenderNode** children, uint nChildren) nothrow;
+__gshared c_gsk_gl_shader_node_newFn c_gsk_gl_shader_node_new; ///
+private alias c_gsk_gl_shader_node_get_argsFn = extern(C) GBytes* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_gl_shader_node_get_argsFn c_gsk_gl_shader_node_get_args; ///
+private alias c_gsk_gl_shader_node_get_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node, uint idx) nothrow;
+__gshared c_gsk_gl_shader_node_get_childFn c_gsk_gl_shader_node_get_child; ///
+private alias c_gsk_gl_shader_node_get_n_childrenFn = extern(C) uint function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_gl_shader_node_get_n_childrenFn c_gsk_gl_shader_node_get_n_children; ///
+private alias c_gsk_gl_shader_node_get_shaderFn = extern(C) GskGLShader* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_gl_shader_node_get_shaderFn c_gsk_gl_shader_node_get_shader; ///
 
-  // InsetShadowNode
-  GType function() c_gsk_inset_shadow_node_get_type; ///
-  GskRenderNode* function(const(GskRoundedRect)* outline, const(GdkRGBA)* color, float dx, float dy, float spread, float blurRadius) c_gsk_inset_shadow_node_new; ///
-  float function(const(GskRenderNode)* node) c_gsk_inset_shadow_node_get_blur_radius; ///
-  const(GdkRGBA)* function(const(GskRenderNode)* node) c_gsk_inset_shadow_node_get_color; ///
-  float function(const(GskRenderNode)* node) c_gsk_inset_shadow_node_get_dx; ///
-  float function(const(GskRenderNode)* node) c_gsk_inset_shadow_node_get_dy; ///
-  const(GskRoundedRect)* function(const(GskRenderNode)* node) c_gsk_inset_shadow_node_get_outline; ///
-  float function(const(GskRenderNode)* node) c_gsk_inset_shadow_node_get_spread; ///
+// InsetShadowNode
+private alias c_gsk_inset_shadow_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_inset_shadow_node_get_typeFn c_gsk_inset_shadow_node_get_type; ///
+private alias c_gsk_inset_shadow_node_newFn = extern(C) GskRenderNode* function(const(GskRoundedRect)* outline, const(GdkRGBA)* color, float dx, float dy, float spread, float blurRadius) nothrow;
+__gshared c_gsk_inset_shadow_node_newFn c_gsk_inset_shadow_node_new; ///
+private alias c_gsk_inset_shadow_node_get_blur_radiusFn = extern(C) float function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_inset_shadow_node_get_blur_radiusFn c_gsk_inset_shadow_node_get_blur_radius; ///
+private alias c_gsk_inset_shadow_node_get_colorFn = extern(C) const(GdkRGBA)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_inset_shadow_node_get_colorFn c_gsk_inset_shadow_node_get_color; ///
+private alias c_gsk_inset_shadow_node_get_dxFn = extern(C) float function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_inset_shadow_node_get_dxFn c_gsk_inset_shadow_node_get_dx; ///
+private alias c_gsk_inset_shadow_node_get_dyFn = extern(C) float function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_inset_shadow_node_get_dyFn c_gsk_inset_shadow_node_get_dy; ///
+private alias c_gsk_inset_shadow_node_get_outlineFn = extern(C) const(GskRoundedRect)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_inset_shadow_node_get_outlineFn c_gsk_inset_shadow_node_get_outline; ///
+private alias c_gsk_inset_shadow_node_get_spreadFn = extern(C) float function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_inset_shadow_node_get_spreadFn c_gsk_inset_shadow_node_get_spread; ///
 
-  // IsolationNode
-  GType function() c_gsk_isolation_node_get_type; ///
-  GskRenderNode* function(GskRenderNode* child, GskIsolation isolations) c_gsk_isolation_node_new; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_isolation_node_get_child; ///
-  GskIsolation function(const(GskRenderNode)* node) c_gsk_isolation_node_get_isolations; ///
+// IsolationNode
+private alias c_gsk_isolation_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_isolation_node_get_typeFn c_gsk_isolation_node_get_type; ///
+private alias c_gsk_isolation_node_newFn = extern(C) GskRenderNode* function(GskRenderNode* child, GskIsolation isolations) nothrow;
+__gshared c_gsk_isolation_node_newFn c_gsk_isolation_node_new; ///
+private alias c_gsk_isolation_node_get_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_isolation_node_get_childFn c_gsk_isolation_node_get_child; ///
+private alias c_gsk_isolation_node_get_isolationsFn = extern(C) GskIsolation function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_isolation_node_get_isolationsFn c_gsk_isolation_node_get_isolations; ///
 
-  // LinearGradientNode
-  GType function() c_gsk_linear_gradient_node_get_type; ///
-  GskRenderNode* function(const(graphene_rect_t)* bounds, const(graphene_point_t)* start, const(graphene_point_t)* end, const(GskColorStop)* colorStops, size_t nColorStops) c_gsk_linear_gradient_node_new; ///
-  const(GskColorStop)* function(const(GskRenderNode)* node, size_t* nStops) c_gsk_linear_gradient_node_get_color_stops; ///
-  const(graphene_point_t)* function(const(GskRenderNode)* node) c_gsk_linear_gradient_node_get_end; ///
-  size_t function(const(GskRenderNode)* node) c_gsk_linear_gradient_node_get_n_color_stops; ///
-  const(graphene_point_t)* function(const(GskRenderNode)* node) c_gsk_linear_gradient_node_get_start; ///
+// LinearGradientNode
+private alias c_gsk_linear_gradient_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_linear_gradient_node_get_typeFn c_gsk_linear_gradient_node_get_type; ///
+private alias c_gsk_linear_gradient_node_newFn = extern(C) GskRenderNode* function(const(graphene_rect_t)* bounds, const(graphene_point_t)* start, const(graphene_point_t)* end, const(GskColorStop)* colorStops, size_t nColorStops) nothrow;
+__gshared c_gsk_linear_gradient_node_newFn c_gsk_linear_gradient_node_new; ///
+private alias c_gsk_linear_gradient_node_get_color_stopsFn = extern(C) const(GskColorStop)* function(const(GskRenderNode)* node, size_t* nStops) nothrow;
+__gshared c_gsk_linear_gradient_node_get_color_stopsFn c_gsk_linear_gradient_node_get_color_stops; ///
+private alias c_gsk_linear_gradient_node_get_endFn = extern(C) const(graphene_point_t)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_linear_gradient_node_get_endFn c_gsk_linear_gradient_node_get_end; ///
+private alias c_gsk_linear_gradient_node_get_n_color_stopsFn = extern(C) size_t function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_linear_gradient_node_get_n_color_stopsFn c_gsk_linear_gradient_node_get_n_color_stops; ///
+private alias c_gsk_linear_gradient_node_get_startFn = extern(C) const(graphene_point_t)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_linear_gradient_node_get_startFn c_gsk_linear_gradient_node_get_start; ///
 
-  // MaskNode
-  GType function() c_gsk_mask_node_get_type; ///
-  GskRenderNode* function(GskRenderNode* source, GskRenderNode* mask, GskMaskMode maskMode) c_gsk_mask_node_new; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_mask_node_get_mask; ///
-  GskMaskMode function(const(GskRenderNode)* node) c_gsk_mask_node_get_mask_mode; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_mask_node_get_source; ///
+// MaskNode
+private alias c_gsk_mask_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_mask_node_get_typeFn c_gsk_mask_node_get_type; ///
+private alias c_gsk_mask_node_newFn = extern(C) GskRenderNode* function(GskRenderNode* source, GskRenderNode* mask, GskMaskMode maskMode) nothrow;
+__gshared c_gsk_mask_node_newFn c_gsk_mask_node_new; ///
+private alias c_gsk_mask_node_get_maskFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_mask_node_get_maskFn c_gsk_mask_node_get_mask; ///
+private alias c_gsk_mask_node_get_mask_modeFn = extern(C) GskMaskMode function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_mask_node_get_mask_modeFn c_gsk_mask_node_get_mask_mode; ///
+private alias c_gsk_mask_node_get_sourceFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_mask_node_get_sourceFn c_gsk_mask_node_get_source; ///
 
-  // NglRenderer
-  GType function() c_gsk_ngl_renderer_get_type; ///
-  GskRenderer* function() c_gsk_ngl_renderer_new; ///
+// NglRenderer
+private alias c_gsk_ngl_renderer_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_ngl_renderer_get_typeFn c_gsk_ngl_renderer_get_type; ///
+private alias c_gsk_ngl_renderer_newFn = extern(C) GskRenderer* function() nothrow;
+__gshared c_gsk_ngl_renderer_newFn c_gsk_ngl_renderer_new; ///
 
-  // OpacityNode
-  GType function() c_gsk_opacity_node_get_type; ///
-  GskRenderNode* function(GskRenderNode* child, float opacity) c_gsk_opacity_node_new; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_opacity_node_get_child; ///
-  float function(const(GskRenderNode)* node) c_gsk_opacity_node_get_opacity; ///
+// OpacityNode
+private alias c_gsk_opacity_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_opacity_node_get_typeFn c_gsk_opacity_node_get_type; ///
+private alias c_gsk_opacity_node_newFn = extern(C) GskRenderNode* function(GskRenderNode* child, float opacity) nothrow;
+__gshared c_gsk_opacity_node_newFn c_gsk_opacity_node_new; ///
+private alias c_gsk_opacity_node_get_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_opacity_node_get_childFn c_gsk_opacity_node_get_child; ///
+private alias c_gsk_opacity_node_get_opacityFn = extern(C) float function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_opacity_node_get_opacityFn c_gsk_opacity_node_get_opacity; ///
 
-  // OutsetShadowNode
-  GType function() c_gsk_outset_shadow_node_get_type; ///
-  GskRenderNode* function(const(GskRoundedRect)* outline, const(GdkRGBA)* color, float dx, float dy, float spread, float blurRadius) c_gsk_outset_shadow_node_new; ///
-  float function(const(GskRenderNode)* node) c_gsk_outset_shadow_node_get_blur_radius; ///
-  const(GdkRGBA)* function(const(GskRenderNode)* node) c_gsk_outset_shadow_node_get_color; ///
-  float function(const(GskRenderNode)* node) c_gsk_outset_shadow_node_get_dx; ///
-  float function(const(GskRenderNode)* node) c_gsk_outset_shadow_node_get_dy; ///
-  const(GskRoundedRect)* function(const(GskRenderNode)* node) c_gsk_outset_shadow_node_get_outline; ///
-  float function(const(GskRenderNode)* node) c_gsk_outset_shadow_node_get_spread; ///
+// OutsetShadowNode
+private alias c_gsk_outset_shadow_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_outset_shadow_node_get_typeFn c_gsk_outset_shadow_node_get_type; ///
+private alias c_gsk_outset_shadow_node_newFn = extern(C) GskRenderNode* function(const(GskRoundedRect)* outline, const(GdkRGBA)* color, float dx, float dy, float spread, float blurRadius) nothrow;
+__gshared c_gsk_outset_shadow_node_newFn c_gsk_outset_shadow_node_new; ///
+private alias c_gsk_outset_shadow_node_get_blur_radiusFn = extern(C) float function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_outset_shadow_node_get_blur_radiusFn c_gsk_outset_shadow_node_get_blur_radius; ///
+private alias c_gsk_outset_shadow_node_get_colorFn = extern(C) const(GdkRGBA)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_outset_shadow_node_get_colorFn c_gsk_outset_shadow_node_get_color; ///
+private alias c_gsk_outset_shadow_node_get_dxFn = extern(C) float function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_outset_shadow_node_get_dxFn c_gsk_outset_shadow_node_get_dx; ///
+private alias c_gsk_outset_shadow_node_get_dyFn = extern(C) float function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_outset_shadow_node_get_dyFn c_gsk_outset_shadow_node_get_dy; ///
+private alias c_gsk_outset_shadow_node_get_outlineFn = extern(C) const(GskRoundedRect)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_outset_shadow_node_get_outlineFn c_gsk_outset_shadow_node_get_outline; ///
+private alias c_gsk_outset_shadow_node_get_spreadFn = extern(C) float function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_outset_shadow_node_get_spreadFn c_gsk_outset_shadow_node_get_spread; ///
 
-  // PasteNode
-  GType function() c_gsk_paste_node_get_type; ///
-  GskRenderNode* function(const(graphene_rect_t)* bounds, size_t depth) c_gsk_paste_node_new; ///
-  size_t function(const(GskRenderNode)* node) c_gsk_paste_node_get_depth; ///
+// PasteNode
+private alias c_gsk_paste_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_paste_node_get_typeFn c_gsk_paste_node_get_type; ///
+private alias c_gsk_paste_node_newFn = extern(C) GskRenderNode* function(const(graphene_rect_t)* bounds, size_t depth) nothrow;
+__gshared c_gsk_paste_node_newFn c_gsk_paste_node_new; ///
+private alias c_gsk_paste_node_get_depthFn = extern(C) size_t function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_paste_node_get_depthFn c_gsk_paste_node_get_depth; ///
 
-  // Path
-  GType function() c_gsk_path_get_type; ///
-  gboolean function(const(GskPath)* path1, const(GskPath)* path2) c_gsk_path_equal; ///
-  gboolean function(GskPath* self, GskPathForeachFlags flags, GskPathForeachFunc func, void* userData) c_gsk_path_foreach; ///
-  gboolean function(GskPath* path1, GskPath* path2, GskPathIntersectionFunc func, void* userData) c_gsk_path_foreach_intersection; ///
-  gboolean function(GskPath* self, graphene_rect_t* bounds) c_gsk_path_get_bounds; ///
-  gboolean function(GskPath* self, const(graphene_point_t)* point, float threshold, GskPathPoint* result, float* distance) c_gsk_path_get_closest_point; ///
-  gboolean function(GskPath* self, GskPathPoint* result) c_gsk_path_get_end_point; ///
-  gboolean function(GskPath* self, GskPathPoint* point) c_gsk_path_get_next; ///
-  gboolean function(GskPath* self, GskPathPoint* point) c_gsk_path_get_previous; ///
-  gboolean function(GskPath* self, GskPathPoint* result) c_gsk_path_get_start_point; ///
-  gboolean function(GskPath* self, const(GskStroke)* stroke, graphene_rect_t* bounds) c_gsk_path_get_stroke_bounds; ///
-  gboolean function(GskPath* self, graphene_rect_t* bounds) c_gsk_path_get_tight_bounds; ///
-  gboolean function(GskPath* self, const(graphene_point_t)* point, GskFillRule fillRule) c_gsk_path_in_fill; ///
-  gboolean function(GskPath* self) c_gsk_path_is_closed; ///
-  gboolean function(GskPath* self) c_gsk_path_is_empty; ///
-  void function(GskPath* self, GString* string_) c_gsk_path_print; ///
-  GskPath* function(GskPath* self) c_gsk_path_ref; ///
-  void function(GskPath* self, cairo_t* cr) c_gsk_path_to_cairo; ///
-  char* function(GskPath* self) c_gsk_path_to_string; ///
-  void function(GskPath* self) c_gsk_path_unref; ///
-  GskPath* function(const(char)* string_) c_gsk_path_parse; ///
+// Path
+private alias c_gsk_path_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_path_get_typeFn c_gsk_path_get_type; ///
+private alias c_gsk_path_equalFn = extern(C) gboolean function(const(GskPath)* path1, const(GskPath)* path2) nothrow;
+__gshared c_gsk_path_equalFn c_gsk_path_equal; ///
+private alias c_gsk_path_foreachFn = extern(C) gboolean function(GskPath* self, GskPathForeachFlags flags, GskPathForeachFunc func, void* userData) nothrow;
+__gshared c_gsk_path_foreachFn c_gsk_path_foreach; ///
+private alias c_gsk_path_foreach_intersectionFn = extern(C) gboolean function(GskPath* path1, GskPath* path2, GskPathIntersectionFunc func, void* userData) nothrow;
+__gshared c_gsk_path_foreach_intersectionFn c_gsk_path_foreach_intersection; ///
+private alias c_gsk_path_get_boundsFn = extern(C) gboolean function(GskPath* self, graphene_rect_t* bounds) nothrow;
+__gshared c_gsk_path_get_boundsFn c_gsk_path_get_bounds; ///
+private alias c_gsk_path_get_closest_pointFn = extern(C) gboolean function(GskPath* self, const(graphene_point_t)* point, float threshold, GskPathPoint* result, float* distance) nothrow;
+__gshared c_gsk_path_get_closest_pointFn c_gsk_path_get_closest_point; ///
+private alias c_gsk_path_get_end_pointFn = extern(C) gboolean function(GskPath* self, GskPathPoint* result) nothrow;
+__gshared c_gsk_path_get_end_pointFn c_gsk_path_get_end_point; ///
+private alias c_gsk_path_get_nextFn = extern(C) gboolean function(GskPath* self, GskPathPoint* point) nothrow;
+__gshared c_gsk_path_get_nextFn c_gsk_path_get_next; ///
+private alias c_gsk_path_get_previousFn = extern(C) gboolean function(GskPath* self, GskPathPoint* point) nothrow;
+__gshared c_gsk_path_get_previousFn c_gsk_path_get_previous; ///
+private alias c_gsk_path_get_start_pointFn = extern(C) gboolean function(GskPath* self, GskPathPoint* result) nothrow;
+__gshared c_gsk_path_get_start_pointFn c_gsk_path_get_start_point; ///
+private alias c_gsk_path_get_stroke_boundsFn = extern(C) gboolean function(GskPath* self, const(GskStroke)* stroke, graphene_rect_t* bounds) nothrow;
+__gshared c_gsk_path_get_stroke_boundsFn c_gsk_path_get_stroke_bounds; ///
+private alias c_gsk_path_get_tight_boundsFn = extern(C) gboolean function(GskPath* self, graphene_rect_t* bounds) nothrow;
+__gshared c_gsk_path_get_tight_boundsFn c_gsk_path_get_tight_bounds; ///
+private alias c_gsk_path_in_fillFn = extern(C) gboolean function(GskPath* self, const(graphene_point_t)* point, GskFillRule fillRule) nothrow;
+__gshared c_gsk_path_in_fillFn c_gsk_path_in_fill; ///
+private alias c_gsk_path_is_closedFn = extern(C) gboolean function(GskPath* self) nothrow;
+__gshared c_gsk_path_is_closedFn c_gsk_path_is_closed; ///
+private alias c_gsk_path_is_emptyFn = extern(C) gboolean function(GskPath* self) nothrow;
+__gshared c_gsk_path_is_emptyFn c_gsk_path_is_empty; ///
+private alias c_gsk_path_printFn = extern(C) void function(GskPath* self, GString* string_) nothrow;
+__gshared c_gsk_path_printFn c_gsk_path_print; ///
+private alias c_gsk_path_refFn = extern(C) GskPath* function(GskPath* self) nothrow;
+__gshared c_gsk_path_refFn c_gsk_path_ref; ///
+private alias c_gsk_path_to_cairoFn = extern(C) void function(GskPath* self, cairo_t* cr) nothrow;
+__gshared c_gsk_path_to_cairoFn c_gsk_path_to_cairo; ///
+private alias c_gsk_path_to_stringFn = extern(C) char* function(GskPath* self) nothrow;
+__gshared c_gsk_path_to_stringFn c_gsk_path_to_string; ///
+private alias c_gsk_path_unrefFn = extern(C) void function(GskPath* self) nothrow;
+__gshared c_gsk_path_unrefFn c_gsk_path_unref; ///
+private alias c_gsk_path_parseFn = extern(C) GskPath* function(const(char)* string_) nothrow;
+__gshared c_gsk_path_parseFn c_gsk_path_parse; ///
 
-  // PathBuilder
-  GType function() c_gsk_path_builder_get_type; ///
-  GskPathBuilder* function() c_gsk_path_builder_new; ///
-  void function(GskPathBuilder* self, const(cairo_path_t)* path) c_gsk_path_builder_add_cairo_path; ///
-  void function(GskPathBuilder* self, const(graphene_point_t)* center, float radius) c_gsk_path_builder_add_circle; ///
-  void function(GskPathBuilder* self, PangoLayout* layout) c_gsk_path_builder_add_layout; ///
-  void function(GskPathBuilder* self, GskPath* path) c_gsk_path_builder_add_path; ///
-  void function(GskPathBuilder* self, const(graphene_rect_t)* rect) c_gsk_path_builder_add_rect; ///
-  void function(GskPathBuilder* self, GskPath* path) c_gsk_path_builder_add_reverse_path; ///
-  void function(GskPathBuilder* self, const(GskRoundedRect)* rect) c_gsk_path_builder_add_rounded_rect; ///
-  void function(GskPathBuilder* self, GskPath* path, const(GskPathPoint)* start, const(GskPathPoint)* end) c_gsk_path_builder_add_segment; ///
-  void function(GskPathBuilder* self, float x1, float y1, float x2, float y2) c_gsk_path_builder_arc_to; ///
-  void function(GskPathBuilder* self) c_gsk_path_builder_close; ///
-  void function(GskPathBuilder* self, float x1, float y1, float x2, float y2, float weight) c_gsk_path_builder_conic_to; ///
-  void function(GskPathBuilder* self, float x1, float y1, float x2, float y2, float x3, float y3) c_gsk_path_builder_cubic_to; ///
-  GskPath* function(GskPathBuilder* self) c_gsk_path_builder_free_to_path; ///
-  const(graphene_point_t)* function(GskPathBuilder* self) c_gsk_path_builder_get_current_point; ///
-  void function(GskPathBuilder* self, float x1, float y1, float x2, float y2, float radius) c_gsk_path_builder_html_arc_to; ///
-  void function(GskPathBuilder* self, float x, float y) c_gsk_path_builder_line_to; ///
-  void function(GskPathBuilder* self, float x, float y) c_gsk_path_builder_move_to; ///
-  void function(GskPathBuilder* self, float x1, float y1, float x2, float y2) c_gsk_path_builder_quad_to; ///
-  GskPathBuilder* function(GskPathBuilder* self) c_gsk_path_builder_ref; ///
-  void function(GskPathBuilder* self, float x1, float y1, float x2, float y2) c_gsk_path_builder_rel_arc_to; ///
-  void function(GskPathBuilder* self, float x1, float y1, float x2, float y2, float weight) c_gsk_path_builder_rel_conic_to; ///
-  void function(GskPathBuilder* self, float x1, float y1, float x2, float y2, float x3, float y3) c_gsk_path_builder_rel_cubic_to; ///
-  void function(GskPathBuilder* self, float x1, float y1, float x2, float y2, float radius) c_gsk_path_builder_rel_html_arc_to; ///
-  void function(GskPathBuilder* self, float x, float y) c_gsk_path_builder_rel_line_to; ///
-  void function(GskPathBuilder* self, float x, float y) c_gsk_path_builder_rel_move_to; ///
-  void function(GskPathBuilder* self, float x1, float y1, float x2, float y2) c_gsk_path_builder_rel_quad_to; ///
-  void function(GskPathBuilder* self, float rx, float ry, float xAxisRotation, gboolean largeArc, gboolean positiveSweep, float x, float y) c_gsk_path_builder_rel_svg_arc_to; ///
-  void function(GskPathBuilder* self, float rx, float ry, float xAxisRotation, gboolean largeArc, gboolean positiveSweep, float x, float y) c_gsk_path_builder_svg_arc_to; ///
-  GskPath* function(GskPathBuilder* self) c_gsk_path_builder_to_path; ///
-  void function(GskPathBuilder* self) c_gsk_path_builder_unref; ///
+// PathBuilder
+private alias c_gsk_path_builder_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_path_builder_get_typeFn c_gsk_path_builder_get_type; ///
+private alias c_gsk_path_builder_newFn = extern(C) GskPathBuilder* function() nothrow;
+__gshared c_gsk_path_builder_newFn c_gsk_path_builder_new; ///
+private alias c_gsk_path_builder_add_cairo_pathFn = extern(C) void function(GskPathBuilder* self, const(cairo_path_t)* path) nothrow;
+__gshared c_gsk_path_builder_add_cairo_pathFn c_gsk_path_builder_add_cairo_path; ///
+private alias c_gsk_path_builder_add_circleFn = extern(C) void function(GskPathBuilder* self, const(graphene_point_t)* center, float radius) nothrow;
+__gshared c_gsk_path_builder_add_circleFn c_gsk_path_builder_add_circle; ///
+private alias c_gsk_path_builder_add_layoutFn = extern(C) void function(GskPathBuilder* self, PangoLayout* layout) nothrow;
+__gshared c_gsk_path_builder_add_layoutFn c_gsk_path_builder_add_layout; ///
+private alias c_gsk_path_builder_add_pathFn = extern(C) void function(GskPathBuilder* self, GskPath* path) nothrow;
+__gshared c_gsk_path_builder_add_pathFn c_gsk_path_builder_add_path; ///
+private alias c_gsk_path_builder_add_rectFn = extern(C) void function(GskPathBuilder* self, const(graphene_rect_t)* rect) nothrow;
+__gshared c_gsk_path_builder_add_rectFn c_gsk_path_builder_add_rect; ///
+private alias c_gsk_path_builder_add_reverse_pathFn = extern(C) void function(GskPathBuilder* self, GskPath* path) nothrow;
+__gshared c_gsk_path_builder_add_reverse_pathFn c_gsk_path_builder_add_reverse_path; ///
+private alias c_gsk_path_builder_add_rounded_rectFn = extern(C) void function(GskPathBuilder* self, const(GskRoundedRect)* rect) nothrow;
+__gshared c_gsk_path_builder_add_rounded_rectFn c_gsk_path_builder_add_rounded_rect; ///
+private alias c_gsk_path_builder_add_segmentFn = extern(C) void function(GskPathBuilder* self, GskPath* path, const(GskPathPoint)* start, const(GskPathPoint)* end) nothrow;
+__gshared c_gsk_path_builder_add_segmentFn c_gsk_path_builder_add_segment; ///
+private alias c_gsk_path_builder_arc_toFn = extern(C) void function(GskPathBuilder* self, float x1, float y1, float x2, float y2) nothrow;
+__gshared c_gsk_path_builder_arc_toFn c_gsk_path_builder_arc_to; ///
+private alias c_gsk_path_builder_closeFn = extern(C) void function(GskPathBuilder* self) nothrow;
+__gshared c_gsk_path_builder_closeFn c_gsk_path_builder_close; ///
+private alias c_gsk_path_builder_conic_toFn = extern(C) void function(GskPathBuilder* self, float x1, float y1, float x2, float y2, float weight) nothrow;
+__gshared c_gsk_path_builder_conic_toFn c_gsk_path_builder_conic_to; ///
+private alias c_gsk_path_builder_cubic_toFn = extern(C) void function(GskPathBuilder* self, float x1, float y1, float x2, float y2, float x3, float y3) nothrow;
+__gshared c_gsk_path_builder_cubic_toFn c_gsk_path_builder_cubic_to; ///
+private alias c_gsk_path_builder_free_to_pathFn = extern(C) GskPath* function(GskPathBuilder* self) nothrow;
+__gshared c_gsk_path_builder_free_to_pathFn c_gsk_path_builder_free_to_path; ///
+private alias c_gsk_path_builder_get_current_pointFn = extern(C) const(graphene_point_t)* function(GskPathBuilder* self) nothrow;
+__gshared c_gsk_path_builder_get_current_pointFn c_gsk_path_builder_get_current_point; ///
+private alias c_gsk_path_builder_html_arc_toFn = extern(C) void function(GskPathBuilder* self, float x1, float y1, float x2, float y2, float radius) nothrow;
+__gshared c_gsk_path_builder_html_arc_toFn c_gsk_path_builder_html_arc_to; ///
+private alias c_gsk_path_builder_line_toFn = extern(C) void function(GskPathBuilder* self, float x, float y) nothrow;
+__gshared c_gsk_path_builder_line_toFn c_gsk_path_builder_line_to; ///
+private alias c_gsk_path_builder_move_toFn = extern(C) void function(GskPathBuilder* self, float x, float y) nothrow;
+__gshared c_gsk_path_builder_move_toFn c_gsk_path_builder_move_to; ///
+private alias c_gsk_path_builder_quad_toFn = extern(C) void function(GskPathBuilder* self, float x1, float y1, float x2, float y2) nothrow;
+__gshared c_gsk_path_builder_quad_toFn c_gsk_path_builder_quad_to; ///
+private alias c_gsk_path_builder_refFn = extern(C) GskPathBuilder* function(GskPathBuilder* self) nothrow;
+__gshared c_gsk_path_builder_refFn c_gsk_path_builder_ref; ///
+private alias c_gsk_path_builder_rel_arc_toFn = extern(C) void function(GskPathBuilder* self, float x1, float y1, float x2, float y2) nothrow;
+__gshared c_gsk_path_builder_rel_arc_toFn c_gsk_path_builder_rel_arc_to; ///
+private alias c_gsk_path_builder_rel_conic_toFn = extern(C) void function(GskPathBuilder* self, float x1, float y1, float x2, float y2, float weight) nothrow;
+__gshared c_gsk_path_builder_rel_conic_toFn c_gsk_path_builder_rel_conic_to; ///
+private alias c_gsk_path_builder_rel_cubic_toFn = extern(C) void function(GskPathBuilder* self, float x1, float y1, float x2, float y2, float x3, float y3) nothrow;
+__gshared c_gsk_path_builder_rel_cubic_toFn c_gsk_path_builder_rel_cubic_to; ///
+private alias c_gsk_path_builder_rel_html_arc_toFn = extern(C) void function(GskPathBuilder* self, float x1, float y1, float x2, float y2, float radius) nothrow;
+__gshared c_gsk_path_builder_rel_html_arc_toFn c_gsk_path_builder_rel_html_arc_to; ///
+private alias c_gsk_path_builder_rel_line_toFn = extern(C) void function(GskPathBuilder* self, float x, float y) nothrow;
+__gshared c_gsk_path_builder_rel_line_toFn c_gsk_path_builder_rel_line_to; ///
+private alias c_gsk_path_builder_rel_move_toFn = extern(C) void function(GskPathBuilder* self, float x, float y) nothrow;
+__gshared c_gsk_path_builder_rel_move_toFn c_gsk_path_builder_rel_move_to; ///
+private alias c_gsk_path_builder_rel_quad_toFn = extern(C) void function(GskPathBuilder* self, float x1, float y1, float x2, float y2) nothrow;
+__gshared c_gsk_path_builder_rel_quad_toFn c_gsk_path_builder_rel_quad_to; ///
+private alias c_gsk_path_builder_rel_svg_arc_toFn = extern(C) void function(GskPathBuilder* self, float rx, float ry, float xAxisRotation, gboolean largeArc, gboolean positiveSweep, float x, float y) nothrow;
+__gshared c_gsk_path_builder_rel_svg_arc_toFn c_gsk_path_builder_rel_svg_arc_to; ///
+private alias c_gsk_path_builder_svg_arc_toFn = extern(C) void function(GskPathBuilder* self, float rx, float ry, float xAxisRotation, gboolean largeArc, gboolean positiveSweep, float x, float y) nothrow;
+__gshared c_gsk_path_builder_svg_arc_toFn c_gsk_path_builder_svg_arc_to; ///
+private alias c_gsk_path_builder_to_pathFn = extern(C) GskPath* function(GskPathBuilder* self) nothrow;
+__gshared c_gsk_path_builder_to_pathFn c_gsk_path_builder_to_path; ///
+private alias c_gsk_path_builder_unrefFn = extern(C) void function(GskPathBuilder* self) nothrow;
+__gshared c_gsk_path_builder_unrefFn c_gsk_path_builder_unref; ///
 
-  // PathMeasure
-  GType function() c_gsk_path_measure_get_type; ///
-  GskPathMeasure* function(GskPath* path) c_gsk_path_measure_new; ///
-  GskPathMeasure* function(GskPath* path, float tolerance) c_gsk_path_measure_new_with_tolerance; ///
-  float function(GskPathMeasure* self) c_gsk_path_measure_get_length; ///
-  GskPath* function(GskPathMeasure* self) c_gsk_path_measure_get_path; ///
-  gboolean function(GskPathMeasure* self, float distance, GskPathPoint* result) c_gsk_path_measure_get_point; ///
-  float function(GskPathMeasure* self) c_gsk_path_measure_get_tolerance; ///
-  GskPathMeasure* function(GskPathMeasure* self) c_gsk_path_measure_ref; ///
-  void function(GskPathMeasure* self) c_gsk_path_measure_unref; ///
+// PathMeasure
+private alias c_gsk_path_measure_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_path_measure_get_typeFn c_gsk_path_measure_get_type; ///
+private alias c_gsk_path_measure_newFn = extern(C) GskPathMeasure* function(GskPath* path) nothrow;
+__gshared c_gsk_path_measure_newFn c_gsk_path_measure_new; ///
+private alias c_gsk_path_measure_new_with_toleranceFn = extern(C) GskPathMeasure* function(GskPath* path, float tolerance) nothrow;
+__gshared c_gsk_path_measure_new_with_toleranceFn c_gsk_path_measure_new_with_tolerance; ///
+private alias c_gsk_path_measure_get_lengthFn = extern(C) float function(GskPathMeasure* self) nothrow;
+__gshared c_gsk_path_measure_get_lengthFn c_gsk_path_measure_get_length; ///
+private alias c_gsk_path_measure_get_pathFn = extern(C) GskPath* function(GskPathMeasure* self) nothrow;
+__gshared c_gsk_path_measure_get_pathFn c_gsk_path_measure_get_path; ///
+private alias c_gsk_path_measure_get_pointFn = extern(C) gboolean function(GskPathMeasure* self, float distance, GskPathPoint* result) nothrow;
+__gshared c_gsk_path_measure_get_pointFn c_gsk_path_measure_get_point; ///
+private alias c_gsk_path_measure_get_toleranceFn = extern(C) float function(GskPathMeasure* self) nothrow;
+__gshared c_gsk_path_measure_get_toleranceFn c_gsk_path_measure_get_tolerance; ///
+private alias c_gsk_path_measure_refFn = extern(C) GskPathMeasure* function(GskPathMeasure* self) nothrow;
+__gshared c_gsk_path_measure_refFn c_gsk_path_measure_ref; ///
+private alias c_gsk_path_measure_unrefFn = extern(C) void function(GskPathMeasure* self) nothrow;
+__gshared c_gsk_path_measure_unrefFn c_gsk_path_measure_unref; ///
 
-  // PathPoint
-  GType function() c_gsk_path_point_get_type; ///
-  int function(const(GskPathPoint)* point1, const(GskPathPoint)* point2) c_gsk_path_point_compare; ///
-  GskPathPoint* function(GskPathPoint* point) c_gsk_path_point_copy; ///
-  gboolean function(const(GskPathPoint)* point1, const(GskPathPoint)* point2) c_gsk_path_point_equal; ///
-  void function(GskPathPoint* point) c_gsk_path_point_free; ///
-  float function(const(GskPathPoint)* point, GskPath* path, GskPathDirection direction, graphene_point_t* center) c_gsk_path_point_get_curvature; ///
-  float function(const(GskPathPoint)* point, GskPathMeasure* measure) c_gsk_path_point_get_distance; ///
-  void function(const(GskPathPoint)* point, GskPath* path, graphene_point_t* position) c_gsk_path_point_get_position; ///
-  float function(const(GskPathPoint)* point, GskPath* path, GskPathDirection direction) c_gsk_path_point_get_rotation; ///
-  void function(const(GskPathPoint)* point, GskPath* path, GskPathDirection direction, graphene_vec2_t* tangent) c_gsk_path_point_get_tangent; ///
+// PathPoint
+private alias c_gsk_path_point_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_path_point_get_typeFn c_gsk_path_point_get_type; ///
+private alias c_gsk_path_point_compareFn = extern(C) int function(const(GskPathPoint)* point1, const(GskPathPoint)* point2) nothrow;
+__gshared c_gsk_path_point_compareFn c_gsk_path_point_compare; ///
+private alias c_gsk_path_point_copyFn = extern(C) GskPathPoint* function(GskPathPoint* point) nothrow;
+__gshared c_gsk_path_point_copyFn c_gsk_path_point_copy; ///
+private alias c_gsk_path_point_equalFn = extern(C) gboolean function(const(GskPathPoint)* point1, const(GskPathPoint)* point2) nothrow;
+__gshared c_gsk_path_point_equalFn c_gsk_path_point_equal; ///
+private alias c_gsk_path_point_freeFn = extern(C) void function(GskPathPoint* point) nothrow;
+__gshared c_gsk_path_point_freeFn c_gsk_path_point_free; ///
+private alias c_gsk_path_point_get_curvatureFn = extern(C) float function(const(GskPathPoint)* point, GskPath* path, GskPathDirection direction, graphene_point_t* center) nothrow;
+__gshared c_gsk_path_point_get_curvatureFn c_gsk_path_point_get_curvature; ///
+private alias c_gsk_path_point_get_distanceFn = extern(C) float function(const(GskPathPoint)* point, GskPathMeasure* measure) nothrow;
+__gshared c_gsk_path_point_get_distanceFn c_gsk_path_point_get_distance; ///
+private alias c_gsk_path_point_get_positionFn = extern(C) void function(const(GskPathPoint)* point, GskPath* path, graphene_point_t* position) nothrow;
+__gshared c_gsk_path_point_get_positionFn c_gsk_path_point_get_position; ///
+private alias c_gsk_path_point_get_rotationFn = extern(C) float function(const(GskPathPoint)* point, GskPath* path, GskPathDirection direction) nothrow;
+__gshared c_gsk_path_point_get_rotationFn c_gsk_path_point_get_rotation; ///
+private alias c_gsk_path_point_get_tangentFn = extern(C) void function(const(GskPathPoint)* point, GskPath* path, GskPathDirection direction, graphene_vec2_t* tangent) nothrow;
+__gshared c_gsk_path_point_get_tangentFn c_gsk_path_point_get_tangent; ///
 
-  // RadialGradientNode
-  GType function() c_gsk_radial_gradient_node_get_type; ///
-  GskRenderNode* function(const(graphene_rect_t)* bounds, const(graphene_point_t)* center, float hradius, float vradius, float start, float end, const(GskColorStop)* colorStops, size_t nColorStops) c_gsk_radial_gradient_node_new; ///
-  const(graphene_point_t)* function(const(GskRenderNode)* node) c_gsk_radial_gradient_node_get_center; ///
-  const(GskColorStop)* function(const(GskRenderNode)* node, size_t* nStops) c_gsk_radial_gradient_node_get_color_stops; ///
-  float function(const(GskRenderNode)* node) c_gsk_radial_gradient_node_get_end; ///
-  float function(const(GskRenderNode)* node) c_gsk_radial_gradient_node_get_hradius; ///
-  size_t function(const(GskRenderNode)* node) c_gsk_radial_gradient_node_get_n_color_stops; ///
-  float function(const(GskRenderNode)* node) c_gsk_radial_gradient_node_get_start; ///
-  float function(const(GskRenderNode)* node) c_gsk_radial_gradient_node_get_vradius; ///
+// RadialGradientNode
+private alias c_gsk_radial_gradient_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_radial_gradient_node_get_typeFn c_gsk_radial_gradient_node_get_type; ///
+private alias c_gsk_radial_gradient_node_newFn = extern(C) GskRenderNode* function(const(graphene_rect_t)* bounds, const(graphene_point_t)* center, float hradius, float vradius, float start, float end, const(GskColorStop)* colorStops, size_t nColorStops) nothrow;
+__gshared c_gsk_radial_gradient_node_newFn c_gsk_radial_gradient_node_new; ///
+private alias c_gsk_radial_gradient_node_get_centerFn = extern(C) const(graphene_point_t)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_radial_gradient_node_get_centerFn c_gsk_radial_gradient_node_get_center; ///
+private alias c_gsk_radial_gradient_node_get_color_stopsFn = extern(C) const(GskColorStop)* function(const(GskRenderNode)* node, size_t* nStops) nothrow;
+__gshared c_gsk_radial_gradient_node_get_color_stopsFn c_gsk_radial_gradient_node_get_color_stops; ///
+private alias c_gsk_radial_gradient_node_get_endFn = extern(C) float function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_radial_gradient_node_get_endFn c_gsk_radial_gradient_node_get_end; ///
+private alias c_gsk_radial_gradient_node_get_hradiusFn = extern(C) float function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_radial_gradient_node_get_hradiusFn c_gsk_radial_gradient_node_get_hradius; ///
+private alias c_gsk_radial_gradient_node_get_n_color_stopsFn = extern(C) size_t function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_radial_gradient_node_get_n_color_stopsFn c_gsk_radial_gradient_node_get_n_color_stops; ///
+private alias c_gsk_radial_gradient_node_get_startFn = extern(C) float function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_radial_gradient_node_get_startFn c_gsk_radial_gradient_node_get_start; ///
+private alias c_gsk_radial_gradient_node_get_vradiusFn = extern(C) float function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_radial_gradient_node_get_vradiusFn c_gsk_radial_gradient_node_get_vradius; ///
 
-  // RenderNode
-  GType function() c_gsk_render_node_get_type; ///
-  GskRenderNode* function(GBytes* bytes, GskParseErrorFunc errorFunc, void* userData) c_gsk_render_node_deserialize; ///
-  void function(GskRenderNode* node, cairo_t* cr) c_gsk_render_node_draw; ///
-  void function(GskRenderNode* node, graphene_rect_t* bounds) c_gsk_render_node_get_bounds; ///
-  GskRenderNode** function(GskRenderNode* self, size_t* nChildren) c_gsk_render_node_get_children; ///
-  GskRenderNodeType function(const(GskRenderNode)* node) c_gsk_render_node_get_node_type; ///
-  gboolean function(GskRenderNode* self, graphene_rect_t* outOpaque) c_gsk_render_node_get_opaque_rect; ///
-  GskRenderNode* function(GskRenderNode* node) c_gsk_render_node_ref; ///
-  GBytes* function(GskRenderNode* node) c_gsk_render_node_serialize; ///
-  void function(GskRenderNode* node) c_gsk_render_node_unref; ///
-  gboolean function(GskRenderNode* node, const(char)* filename, GError** _err) c_gsk_render_node_write_to_file; ///
+// RenderNode
+private alias c_gsk_render_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_render_node_get_typeFn c_gsk_render_node_get_type; ///
+private alias c_gsk_render_node_deserializeFn = extern(C) GskRenderNode* function(GBytes* bytes, GskParseErrorFunc errorFunc, void* userData) nothrow;
+__gshared c_gsk_render_node_deserializeFn c_gsk_render_node_deserialize; ///
+private alias c_gsk_render_node_drawFn = extern(C) void function(GskRenderNode* node, cairo_t* cr) nothrow;
+__gshared c_gsk_render_node_drawFn c_gsk_render_node_draw; ///
+private alias c_gsk_render_node_get_boundsFn = extern(C) void function(GskRenderNode* node, graphene_rect_t* bounds) nothrow;
+__gshared c_gsk_render_node_get_boundsFn c_gsk_render_node_get_bounds; ///
+private alias c_gsk_render_node_get_childrenFn = extern(C) GskRenderNode** function(GskRenderNode* self, size_t* nChildren) nothrow;
+__gshared c_gsk_render_node_get_childrenFn c_gsk_render_node_get_children; ///
+private alias c_gsk_render_node_get_node_typeFn = extern(C) GskRenderNodeType function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_render_node_get_node_typeFn c_gsk_render_node_get_node_type; ///
+private alias c_gsk_render_node_get_opaque_rectFn = extern(C) gboolean function(GskRenderNode* self, graphene_rect_t* outOpaque) nothrow;
+__gshared c_gsk_render_node_get_opaque_rectFn c_gsk_render_node_get_opaque_rect; ///
+private alias c_gsk_render_node_refFn = extern(C) GskRenderNode* function(GskRenderNode* node) nothrow;
+__gshared c_gsk_render_node_refFn c_gsk_render_node_ref; ///
+private alias c_gsk_render_node_serializeFn = extern(C) GBytes* function(GskRenderNode* node) nothrow;
+__gshared c_gsk_render_node_serializeFn c_gsk_render_node_serialize; ///
+private alias c_gsk_render_node_unrefFn = extern(C) void function(GskRenderNode* node) nothrow;
+__gshared c_gsk_render_node_unrefFn c_gsk_render_node_unref; ///
+private alias c_gsk_render_node_write_to_fileFn = extern(C) gboolean function(GskRenderNode* node, const(char)* filename, GError** _err) nothrow;
+__gshared c_gsk_render_node_write_to_fileFn c_gsk_render_node_write_to_file; ///
 
-  // RenderReplay
-  GType function() c_gsk_render_replay_get_type; ///
-  GskRenderReplay* function() c_gsk_render_replay_new; ///
-  GskRenderNode* function(GskRenderReplay* self, GskRenderNode* node) c_gsk_render_replay_default; ///
-  PangoFont* function(GskRenderReplay* self, PangoFont* font) c_gsk_render_replay_filter_font; ///
-  GskRenderNode* function(GskRenderReplay* self, GskRenderNode* node) c_gsk_render_replay_filter_node; ///
-  GdkTexture* function(GskRenderReplay* self, GdkTexture* texture) c_gsk_render_replay_filter_texture; ///
-  void function(GskRenderReplay* self) c_gsk_render_replay_free; ///
-  void function(GskRenderReplay* self, GskRenderReplayFontFilter filter, void* userData, GDestroyNotify userDestroy) c_gsk_render_replay_set_font_filter; ///
-  void function(GskRenderReplay* self, GskRenderReplayNodeFilter filter, void* userData, GDestroyNotify userDestroy) c_gsk_render_replay_set_node_filter; ///
-  void function(GskRenderReplay* self, GskRenderReplayTextureFilter filter, void* userData, GDestroyNotify userDestroy) c_gsk_render_replay_set_texture_filter; ///
+// RenderReplay
+private alias c_gsk_render_replay_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_render_replay_get_typeFn c_gsk_render_replay_get_type; ///
+private alias c_gsk_render_replay_newFn = extern(C) GskRenderReplay* function() nothrow;
+__gshared c_gsk_render_replay_newFn c_gsk_render_replay_new; ///
+private alias c_gsk_render_replay_defaultFn = extern(C) GskRenderNode* function(GskRenderReplay* self, GskRenderNode* node) nothrow;
+__gshared c_gsk_render_replay_defaultFn c_gsk_render_replay_default; ///
+private alias c_gsk_render_replay_filter_fontFn = extern(C) PangoFont* function(GskRenderReplay* self, PangoFont* font) nothrow;
+__gshared c_gsk_render_replay_filter_fontFn c_gsk_render_replay_filter_font; ///
+private alias c_gsk_render_replay_filter_nodeFn = extern(C) GskRenderNode* function(GskRenderReplay* self, GskRenderNode* node) nothrow;
+__gshared c_gsk_render_replay_filter_nodeFn c_gsk_render_replay_filter_node; ///
+private alias c_gsk_render_replay_filter_textureFn = extern(C) GdkTexture* function(GskRenderReplay* self, GdkTexture* texture) nothrow;
+__gshared c_gsk_render_replay_filter_textureFn c_gsk_render_replay_filter_texture; ///
+private alias c_gsk_render_replay_freeFn = extern(C) void function(GskRenderReplay* self) nothrow;
+__gshared c_gsk_render_replay_freeFn c_gsk_render_replay_free; ///
+private alias c_gsk_render_replay_set_font_filterFn = extern(C) void function(GskRenderReplay* self, GskRenderReplayFontFilter filter, void* userData, GDestroyNotify userDestroy) nothrow;
+__gshared c_gsk_render_replay_set_font_filterFn c_gsk_render_replay_set_font_filter; ///
+private alias c_gsk_render_replay_set_node_filterFn = extern(C) void function(GskRenderReplay* self, GskRenderReplayNodeFilter filter, void* userData, GDestroyNotify userDestroy) nothrow;
+__gshared c_gsk_render_replay_set_node_filterFn c_gsk_render_replay_set_node_filter; ///
+private alias c_gsk_render_replay_set_texture_filterFn = extern(C) void function(GskRenderReplay* self, GskRenderReplayTextureFilter filter, void* userData, GDestroyNotify userDestroy) nothrow;
+__gshared c_gsk_render_replay_set_texture_filterFn c_gsk_render_replay_set_texture_filter; ///
 
-  // Renderer
-  GType function() c_gsk_renderer_get_type; ///
-  GskRenderer* function(GdkSurface* surface) c_gsk_renderer_new_for_surface; ///
-  GdkSurface* function(GskRenderer* renderer) c_gsk_renderer_get_surface; ///
-  gboolean function(GskRenderer* renderer) c_gsk_renderer_is_realized; ///
-  gboolean function(GskRenderer* renderer, GdkSurface* surface, GError** _err) c_gsk_renderer_realize; ///
-  gboolean function(GskRenderer* renderer, GdkDisplay* display, GError** _err) c_gsk_renderer_realize_for_display; ///
-  void function(GskRenderer* renderer, GskRenderNode* root, const(cairo_region_t)* region) c_gsk_renderer_render; ///
-  GdkTexture* function(GskRenderer* renderer, GskRenderNode* root, const(graphene_rect_t)* viewport) c_gsk_renderer_render_texture; ///
-  void function(GskRenderer* renderer) c_gsk_renderer_unrealize; ///
+// Renderer
+private alias c_gsk_renderer_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_renderer_get_typeFn c_gsk_renderer_get_type; ///
+private alias c_gsk_renderer_new_for_surfaceFn = extern(C) GskRenderer* function(GdkSurface* surface) nothrow;
+__gshared c_gsk_renderer_new_for_surfaceFn c_gsk_renderer_new_for_surface; ///
+private alias c_gsk_renderer_get_surfaceFn = extern(C) GdkSurface* function(GskRenderer* renderer) nothrow;
+__gshared c_gsk_renderer_get_surfaceFn c_gsk_renderer_get_surface; ///
+private alias c_gsk_renderer_is_realizedFn = extern(C) gboolean function(GskRenderer* renderer) nothrow;
+__gshared c_gsk_renderer_is_realizedFn c_gsk_renderer_is_realized; ///
+private alias c_gsk_renderer_realizeFn = extern(C) gboolean function(GskRenderer* renderer, GdkSurface* surface, GError** _err) nothrow;
+__gshared c_gsk_renderer_realizeFn c_gsk_renderer_realize; ///
+private alias c_gsk_renderer_realize_for_displayFn = extern(C) gboolean function(GskRenderer* renderer, GdkDisplay* display, GError** _err) nothrow;
+__gshared c_gsk_renderer_realize_for_displayFn c_gsk_renderer_realize_for_display; ///
+private alias c_gsk_renderer_renderFn = extern(C) void function(GskRenderer* renderer, GskRenderNode* root, const(cairo_region_t)* region) nothrow;
+__gshared c_gsk_renderer_renderFn c_gsk_renderer_render; ///
+private alias c_gsk_renderer_render_textureFn = extern(C) GdkTexture* function(GskRenderer* renderer, GskRenderNode* root, const(graphene_rect_t)* viewport) nothrow;
+__gshared c_gsk_renderer_render_textureFn c_gsk_renderer_render_texture; ///
+private alias c_gsk_renderer_unrealizeFn = extern(C) void function(GskRenderer* renderer) nothrow;
+__gshared c_gsk_renderer_unrealizeFn c_gsk_renderer_unrealize; ///
 
-  // RepeatNode
-  GType function() c_gsk_repeat_node_get_type; ///
-  GskRenderNode* function(const(graphene_rect_t)* bounds, GskRenderNode* child, const(graphene_rect_t)* childBounds) c_gsk_repeat_node_new; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_repeat_node_get_child; ///
-  const(graphene_rect_t)* function(const(GskRenderNode)* node) c_gsk_repeat_node_get_child_bounds; ///
+// RepeatNode
+private alias c_gsk_repeat_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_repeat_node_get_typeFn c_gsk_repeat_node_get_type; ///
+private alias c_gsk_repeat_node_newFn = extern(C) GskRenderNode* function(const(graphene_rect_t)* bounds, GskRenderNode* child, const(graphene_rect_t)* childBounds) nothrow;
+__gshared c_gsk_repeat_node_newFn c_gsk_repeat_node_new; ///
+private alias c_gsk_repeat_node_get_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_repeat_node_get_childFn c_gsk_repeat_node_get_child; ///
+private alias c_gsk_repeat_node_get_child_boundsFn = extern(C) const(graphene_rect_t)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_repeat_node_get_child_boundsFn c_gsk_repeat_node_get_child_bounds; ///
 
-  // RepeatingLinearGradientNode
-  GType function() c_gsk_repeating_linear_gradient_node_get_type; ///
-  GskRenderNode* function(const(graphene_rect_t)* bounds, const(graphene_point_t)* start, const(graphene_point_t)* end, const(GskColorStop)* colorStops, size_t nColorStops) c_gsk_repeating_linear_gradient_node_new; ///
+// RepeatingLinearGradientNode
+private alias c_gsk_repeating_linear_gradient_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_repeating_linear_gradient_node_get_typeFn c_gsk_repeating_linear_gradient_node_get_type; ///
+private alias c_gsk_repeating_linear_gradient_node_newFn = extern(C) GskRenderNode* function(const(graphene_rect_t)* bounds, const(graphene_point_t)* start, const(graphene_point_t)* end, const(GskColorStop)* colorStops, size_t nColorStops) nothrow;
+__gshared c_gsk_repeating_linear_gradient_node_newFn c_gsk_repeating_linear_gradient_node_new; ///
 
-  // RepeatingRadialGradientNode
-  GType function() c_gsk_repeating_radial_gradient_node_get_type; ///
-  GskRenderNode* function(const(graphene_rect_t)* bounds, const(graphene_point_t)* center, float hradius, float vradius, float start, float end, const(GskColorStop)* colorStops, size_t nColorStops) c_gsk_repeating_radial_gradient_node_new; ///
+// RepeatingRadialGradientNode
+private alias c_gsk_repeating_radial_gradient_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_repeating_radial_gradient_node_get_typeFn c_gsk_repeating_radial_gradient_node_get_type; ///
+private alias c_gsk_repeating_radial_gradient_node_newFn = extern(C) GskRenderNode* function(const(graphene_rect_t)* bounds, const(graphene_point_t)* center, float hradius, float vradius, float start, float end, const(GskColorStop)* colorStops, size_t nColorStops) nothrow;
+__gshared c_gsk_repeating_radial_gradient_node_newFn c_gsk_repeating_radial_gradient_node_new; ///
 
-  // RoundedClipNode
-  GType function() c_gsk_rounded_clip_node_get_type; ///
-  GskRenderNode* function(GskRenderNode* child, const(GskRoundedRect)* clip) c_gsk_rounded_clip_node_new; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_rounded_clip_node_get_child; ///
-  const(GskRoundedRect)* function(const(GskRenderNode)* node) c_gsk_rounded_clip_node_get_clip; ///
+// RoundedClipNode
+private alias c_gsk_rounded_clip_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_rounded_clip_node_get_typeFn c_gsk_rounded_clip_node_get_type; ///
+private alias c_gsk_rounded_clip_node_newFn = extern(C) GskRenderNode* function(GskRenderNode* child, const(GskRoundedRect)* clip) nothrow;
+__gshared c_gsk_rounded_clip_node_newFn c_gsk_rounded_clip_node_new; ///
+private alias c_gsk_rounded_clip_node_get_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_rounded_clip_node_get_childFn c_gsk_rounded_clip_node_get_child; ///
+private alias c_gsk_rounded_clip_node_get_clipFn = extern(C) const(GskRoundedRect)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_rounded_clip_node_get_clipFn c_gsk_rounded_clip_node_get_clip; ///
 
-  // RoundedRect
-  gboolean function(const(GskRoundedRect)* self, const(graphene_point_t)* point) c_gsk_rounded_rect_contains_point; ///
-  gboolean function(const(GskRoundedRect)* self, const(graphene_rect_t)* rect) c_gsk_rounded_rect_contains_rect; ///
-  GskRoundedRect* function(GskRoundedRect* self, const(graphene_rect_t)* bounds, const(graphene_size_t)* topLeft, const(graphene_size_t)* topRight, const(graphene_size_t)* bottomRight, const(graphene_size_t)* bottomLeft) c_gsk_rounded_rect_init; ///
-  GskRoundedRect* function(GskRoundedRect* self, const(GskRoundedRect)* src) c_gsk_rounded_rect_init_copy; ///
-  GskRoundedRect* function(GskRoundedRect* self, const(graphene_rect_t)* bounds, float radius) c_gsk_rounded_rect_init_from_rect; ///
-  gboolean function(const(GskRoundedRect)* self, const(graphene_rect_t)* rect) c_gsk_rounded_rect_intersects_rect; ///
-  gboolean function(const(GskRoundedRect)* self) c_gsk_rounded_rect_is_rectilinear; ///
-  GskRoundedRect* function(GskRoundedRect* self) c_gsk_rounded_rect_normalize; ///
-  GskRoundedRect* function(GskRoundedRect* self, float dx, float dy) c_gsk_rounded_rect_offset; ///
-  GskRoundedRect* function(GskRoundedRect* self, float top, float right, float bottom, float left) c_gsk_rounded_rect_shrink; ///
+// RoundedRect
+private alias c_gsk_rounded_rect_contains_pointFn = extern(C) gboolean function(const(GskRoundedRect)* self, const(graphene_point_t)* point) nothrow;
+__gshared c_gsk_rounded_rect_contains_pointFn c_gsk_rounded_rect_contains_point; ///
+private alias c_gsk_rounded_rect_contains_rectFn = extern(C) gboolean function(const(GskRoundedRect)* self, const(graphene_rect_t)* rect) nothrow;
+__gshared c_gsk_rounded_rect_contains_rectFn c_gsk_rounded_rect_contains_rect; ///
+private alias c_gsk_rounded_rect_initFn = extern(C) GskRoundedRect* function(GskRoundedRect* self, const(graphene_rect_t)* bounds, const(graphene_size_t)* topLeft, const(graphene_size_t)* topRight, const(graphene_size_t)* bottomRight, const(graphene_size_t)* bottomLeft) nothrow;
+__gshared c_gsk_rounded_rect_initFn c_gsk_rounded_rect_init; ///
+private alias c_gsk_rounded_rect_init_copyFn = extern(C) GskRoundedRect* function(GskRoundedRect* self, const(GskRoundedRect)* src) nothrow;
+__gshared c_gsk_rounded_rect_init_copyFn c_gsk_rounded_rect_init_copy; ///
+private alias c_gsk_rounded_rect_init_from_rectFn = extern(C) GskRoundedRect* function(GskRoundedRect* self, const(graphene_rect_t)* bounds, float radius) nothrow;
+__gshared c_gsk_rounded_rect_init_from_rectFn c_gsk_rounded_rect_init_from_rect; ///
+private alias c_gsk_rounded_rect_intersects_rectFn = extern(C) gboolean function(const(GskRoundedRect)* self, const(graphene_rect_t)* rect) nothrow;
+__gshared c_gsk_rounded_rect_intersects_rectFn c_gsk_rounded_rect_intersects_rect; ///
+private alias c_gsk_rounded_rect_is_rectilinearFn = extern(C) gboolean function(const(GskRoundedRect)* self) nothrow;
+__gshared c_gsk_rounded_rect_is_rectilinearFn c_gsk_rounded_rect_is_rectilinear; ///
+private alias c_gsk_rounded_rect_normalizeFn = extern(C) GskRoundedRect* function(GskRoundedRect* self) nothrow;
+__gshared c_gsk_rounded_rect_normalizeFn c_gsk_rounded_rect_normalize; ///
+private alias c_gsk_rounded_rect_offsetFn = extern(C) GskRoundedRect* function(GskRoundedRect* self, float dx, float dy) nothrow;
+__gshared c_gsk_rounded_rect_offsetFn c_gsk_rounded_rect_offset; ///
+private alias c_gsk_rounded_rect_shrinkFn = extern(C) GskRoundedRect* function(GskRoundedRect* self, float top, float right, float bottom, float left) nothrow;
+__gshared c_gsk_rounded_rect_shrinkFn c_gsk_rounded_rect_shrink; ///
 
-  // ShaderArgsBuilder
-  GType function() c_gsk_shader_args_builder_get_type; ///
-  GskShaderArgsBuilder* function(GskGLShader* shader, GBytes* initialValues) c_gsk_shader_args_builder_new; ///
-  GBytes* function(GskShaderArgsBuilder* builder) c_gsk_shader_args_builder_free_to_args; ///
-  GskShaderArgsBuilder* function(GskShaderArgsBuilder* builder) c_gsk_shader_args_builder_ref; ///
-  void function(GskShaderArgsBuilder* builder, int idx, gboolean value) c_gsk_shader_args_builder_set_bool; ///
-  void function(GskShaderArgsBuilder* builder, int idx, float value) c_gsk_shader_args_builder_set_float; ///
-  void function(GskShaderArgsBuilder* builder, int idx, int value) c_gsk_shader_args_builder_set_int; ///
-  void function(GskShaderArgsBuilder* builder, int idx, uint value) c_gsk_shader_args_builder_set_uint; ///
-  void function(GskShaderArgsBuilder* builder, int idx, const(graphene_vec2_t)* value) c_gsk_shader_args_builder_set_vec2; ///
-  void function(GskShaderArgsBuilder* builder, int idx, const(graphene_vec3_t)* value) c_gsk_shader_args_builder_set_vec3; ///
-  void function(GskShaderArgsBuilder* builder, int idx, const(graphene_vec4_t)* value) c_gsk_shader_args_builder_set_vec4; ///
-  GBytes* function(GskShaderArgsBuilder* builder) c_gsk_shader_args_builder_to_args; ///
-  void function(GskShaderArgsBuilder* builder) c_gsk_shader_args_builder_unref; ///
+// ShaderArgsBuilder
+private alias c_gsk_shader_args_builder_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_shader_args_builder_get_typeFn c_gsk_shader_args_builder_get_type; ///
+private alias c_gsk_shader_args_builder_newFn = extern(C) GskShaderArgsBuilder* function(GskGLShader* shader, GBytes* initialValues) nothrow;
+__gshared c_gsk_shader_args_builder_newFn c_gsk_shader_args_builder_new; ///
+private alias c_gsk_shader_args_builder_free_to_argsFn = extern(C) GBytes* function(GskShaderArgsBuilder* builder) nothrow;
+__gshared c_gsk_shader_args_builder_free_to_argsFn c_gsk_shader_args_builder_free_to_args; ///
+private alias c_gsk_shader_args_builder_refFn = extern(C) GskShaderArgsBuilder* function(GskShaderArgsBuilder* builder) nothrow;
+__gshared c_gsk_shader_args_builder_refFn c_gsk_shader_args_builder_ref; ///
+private alias c_gsk_shader_args_builder_set_boolFn = extern(C) void function(GskShaderArgsBuilder* builder, int idx, gboolean value) nothrow;
+__gshared c_gsk_shader_args_builder_set_boolFn c_gsk_shader_args_builder_set_bool; ///
+private alias c_gsk_shader_args_builder_set_floatFn = extern(C) void function(GskShaderArgsBuilder* builder, int idx, float value) nothrow;
+__gshared c_gsk_shader_args_builder_set_floatFn c_gsk_shader_args_builder_set_float; ///
+private alias c_gsk_shader_args_builder_set_intFn = extern(C) void function(GskShaderArgsBuilder* builder, int idx, int value) nothrow;
+__gshared c_gsk_shader_args_builder_set_intFn c_gsk_shader_args_builder_set_int; ///
+private alias c_gsk_shader_args_builder_set_uintFn = extern(C) void function(GskShaderArgsBuilder* builder, int idx, uint value) nothrow;
+__gshared c_gsk_shader_args_builder_set_uintFn c_gsk_shader_args_builder_set_uint; ///
+private alias c_gsk_shader_args_builder_set_vec2Fn = extern(C) void function(GskShaderArgsBuilder* builder, int idx, const(graphene_vec2_t)* value) nothrow;
+__gshared c_gsk_shader_args_builder_set_vec2Fn c_gsk_shader_args_builder_set_vec2; ///
+private alias c_gsk_shader_args_builder_set_vec3Fn = extern(C) void function(GskShaderArgsBuilder* builder, int idx, const(graphene_vec3_t)* value) nothrow;
+__gshared c_gsk_shader_args_builder_set_vec3Fn c_gsk_shader_args_builder_set_vec3; ///
+private alias c_gsk_shader_args_builder_set_vec4Fn = extern(C) void function(GskShaderArgsBuilder* builder, int idx, const(graphene_vec4_t)* value) nothrow;
+__gshared c_gsk_shader_args_builder_set_vec4Fn c_gsk_shader_args_builder_set_vec4; ///
+private alias c_gsk_shader_args_builder_to_argsFn = extern(C) GBytes* function(GskShaderArgsBuilder* builder) nothrow;
+__gshared c_gsk_shader_args_builder_to_argsFn c_gsk_shader_args_builder_to_args; ///
+private alias c_gsk_shader_args_builder_unrefFn = extern(C) void function(GskShaderArgsBuilder* builder) nothrow;
+__gshared c_gsk_shader_args_builder_unrefFn c_gsk_shader_args_builder_unref; ///
 
-  // ShadowNode
-  GType function() c_gsk_shadow_node_get_type; ///
-  GskRenderNode* function(GskRenderNode* child, const(GskShadow)* shadows, size_t nShadows) c_gsk_shadow_node_new; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_shadow_node_get_child; ///
-  size_t function(const(GskRenderNode)* node) c_gsk_shadow_node_get_n_shadows; ///
-  const(GskShadow)* function(const(GskRenderNode)* node, size_t i) c_gsk_shadow_node_get_shadow; ///
+// ShadowNode
+private alias c_gsk_shadow_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_shadow_node_get_typeFn c_gsk_shadow_node_get_type; ///
+private alias c_gsk_shadow_node_newFn = extern(C) GskRenderNode* function(GskRenderNode* child, const(GskShadow)* shadows, size_t nShadows) nothrow;
+__gshared c_gsk_shadow_node_newFn c_gsk_shadow_node_new; ///
+private alias c_gsk_shadow_node_get_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_shadow_node_get_childFn c_gsk_shadow_node_get_child; ///
+private alias c_gsk_shadow_node_get_n_shadowsFn = extern(C) size_t function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_shadow_node_get_n_shadowsFn c_gsk_shadow_node_get_n_shadows; ///
+private alias c_gsk_shadow_node_get_shadowFn = extern(C) const(GskShadow)* function(const(GskRenderNode)* node, size_t i) nothrow;
+__gshared c_gsk_shadow_node_get_shadowFn c_gsk_shadow_node_get_shadow; ///
 
-  // Stroke
-  GType function() c_gsk_stroke_get_type; ///
-  GskStroke* function(float lineWidth) c_gsk_stroke_new; ///
-  GskStroke* function(const(GskStroke)* other) c_gsk_stroke_copy; ///
-  void function(GskStroke* self) c_gsk_stroke_free; ///
-  const(float)* function(const(GskStroke)* self, size_t* nDash) c_gsk_stroke_get_dash; ///
-  float function(const(GskStroke)* self) c_gsk_stroke_get_dash_offset; ///
-  GskLineCap function(const(GskStroke)* self) c_gsk_stroke_get_line_cap; ///
-  GskLineJoin function(const(GskStroke)* self) c_gsk_stroke_get_line_join; ///
-  float function(const(GskStroke)* self) c_gsk_stroke_get_line_width; ///
-  float function(const(GskStroke)* self) c_gsk_stroke_get_miter_limit; ///
-  void function(GskStroke* self, const(float)* dash, size_t nDash) c_gsk_stroke_set_dash; ///
-  void function(GskStroke* self, float offset) c_gsk_stroke_set_dash_offset; ///
-  void function(GskStroke* self, GskLineCap lineCap) c_gsk_stroke_set_line_cap; ///
-  void function(GskStroke* self, GskLineJoin lineJoin) c_gsk_stroke_set_line_join; ///
-  void function(GskStroke* self, float lineWidth) c_gsk_stroke_set_line_width; ///
-  void function(GskStroke* self, float limit) c_gsk_stroke_set_miter_limit; ///
-  void function(const(GskStroke)* self, cairo_t* cr) c_gsk_stroke_to_cairo; ///
-  gboolean function(const(void)* stroke1, const(void)* stroke2) c_gsk_stroke_equal; ///
+// Stroke
+private alias c_gsk_stroke_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_stroke_get_typeFn c_gsk_stroke_get_type; ///
+private alias c_gsk_stroke_newFn = extern(C) GskStroke* function(float lineWidth) nothrow;
+__gshared c_gsk_stroke_newFn c_gsk_stroke_new; ///
+private alias c_gsk_stroke_copyFn = extern(C) GskStroke* function(const(GskStroke)* other) nothrow;
+__gshared c_gsk_stroke_copyFn c_gsk_stroke_copy; ///
+private alias c_gsk_stroke_freeFn = extern(C) void function(GskStroke* self) nothrow;
+__gshared c_gsk_stroke_freeFn c_gsk_stroke_free; ///
+private alias c_gsk_stroke_get_dashFn = extern(C) const(float)* function(const(GskStroke)* self, size_t* nDash) nothrow;
+__gshared c_gsk_stroke_get_dashFn c_gsk_stroke_get_dash; ///
+private alias c_gsk_stroke_get_dash_offsetFn = extern(C) float function(const(GskStroke)* self) nothrow;
+__gshared c_gsk_stroke_get_dash_offsetFn c_gsk_stroke_get_dash_offset; ///
+private alias c_gsk_stroke_get_line_capFn = extern(C) GskLineCap function(const(GskStroke)* self) nothrow;
+__gshared c_gsk_stroke_get_line_capFn c_gsk_stroke_get_line_cap; ///
+private alias c_gsk_stroke_get_line_joinFn = extern(C) GskLineJoin function(const(GskStroke)* self) nothrow;
+__gshared c_gsk_stroke_get_line_joinFn c_gsk_stroke_get_line_join; ///
+private alias c_gsk_stroke_get_line_widthFn = extern(C) float function(const(GskStroke)* self) nothrow;
+__gshared c_gsk_stroke_get_line_widthFn c_gsk_stroke_get_line_width; ///
+private alias c_gsk_stroke_get_miter_limitFn = extern(C) float function(const(GskStroke)* self) nothrow;
+__gshared c_gsk_stroke_get_miter_limitFn c_gsk_stroke_get_miter_limit; ///
+private alias c_gsk_stroke_set_dashFn = extern(C) void function(GskStroke* self, const(float)* dash, size_t nDash) nothrow;
+__gshared c_gsk_stroke_set_dashFn c_gsk_stroke_set_dash; ///
+private alias c_gsk_stroke_set_dash_offsetFn = extern(C) void function(GskStroke* self, float offset) nothrow;
+__gshared c_gsk_stroke_set_dash_offsetFn c_gsk_stroke_set_dash_offset; ///
+private alias c_gsk_stroke_set_line_capFn = extern(C) void function(GskStroke* self, GskLineCap lineCap) nothrow;
+__gshared c_gsk_stroke_set_line_capFn c_gsk_stroke_set_line_cap; ///
+private alias c_gsk_stroke_set_line_joinFn = extern(C) void function(GskStroke* self, GskLineJoin lineJoin) nothrow;
+__gshared c_gsk_stroke_set_line_joinFn c_gsk_stroke_set_line_join; ///
+private alias c_gsk_stroke_set_line_widthFn = extern(C) void function(GskStroke* self, float lineWidth) nothrow;
+__gshared c_gsk_stroke_set_line_widthFn c_gsk_stroke_set_line_width; ///
+private alias c_gsk_stroke_set_miter_limitFn = extern(C) void function(GskStroke* self, float limit) nothrow;
+__gshared c_gsk_stroke_set_miter_limitFn c_gsk_stroke_set_miter_limit; ///
+private alias c_gsk_stroke_to_cairoFn = extern(C) void function(const(GskStroke)* self, cairo_t* cr) nothrow;
+__gshared c_gsk_stroke_to_cairoFn c_gsk_stroke_to_cairo; ///
+private alias c_gsk_stroke_equalFn = extern(C) gboolean function(const(void)* stroke1, const(void)* stroke2) nothrow;
+__gshared c_gsk_stroke_equalFn c_gsk_stroke_equal; ///
 
-  // StrokeNode
-  GType function() c_gsk_stroke_node_get_type; ///
-  GskRenderNode* function(GskRenderNode* child, GskPath* path, const(GskStroke)* stroke) c_gsk_stroke_node_new; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_stroke_node_get_child; ///
-  GskPath* function(const(GskRenderNode)* node) c_gsk_stroke_node_get_path; ///
-  const(GskStroke)* function(const(GskRenderNode)* node) c_gsk_stroke_node_get_stroke; ///
+// StrokeNode
+private alias c_gsk_stroke_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_stroke_node_get_typeFn c_gsk_stroke_node_get_type; ///
+private alias c_gsk_stroke_node_newFn = extern(C) GskRenderNode* function(GskRenderNode* child, GskPath* path, const(GskStroke)* stroke) nothrow;
+__gshared c_gsk_stroke_node_newFn c_gsk_stroke_node_new; ///
+private alias c_gsk_stroke_node_get_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_stroke_node_get_childFn c_gsk_stroke_node_get_child; ///
+private alias c_gsk_stroke_node_get_pathFn = extern(C) GskPath* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_stroke_node_get_pathFn c_gsk_stroke_node_get_path; ///
+private alias c_gsk_stroke_node_get_strokeFn = extern(C) const(GskStroke)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_stroke_node_get_strokeFn c_gsk_stroke_node_get_stroke; ///
 
-  // SubsurfaceNode
-  GType function() c_gsk_subsurface_node_get_type; ///
-  GskRenderNode* function(GskRenderNode* child, void* subsurface) c_gsk_subsurface_node_new; ///
-  void* function(const(GskRenderNode)* node) c_gsk_subsurface_node_get_subsurface; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_subsurface_node_get_child; ///
+// SubsurfaceNode
+private alias c_gsk_subsurface_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_subsurface_node_get_typeFn c_gsk_subsurface_node_get_type; ///
+private alias c_gsk_subsurface_node_newFn = extern(C) GskRenderNode* function(GskRenderNode* child, void* subsurface) nothrow;
+__gshared c_gsk_subsurface_node_newFn c_gsk_subsurface_node_new; ///
+private alias c_gsk_subsurface_node_get_subsurfaceFn = extern(C) void* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_subsurface_node_get_subsurfaceFn c_gsk_subsurface_node_get_subsurface; ///
+private alias c_gsk_subsurface_node_get_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_subsurface_node_get_childFn c_gsk_subsurface_node_get_child; ///
 
-  // TextNode
-  GType function() c_gsk_text_node_get_type; ///
-  GskRenderNode* function(PangoFont* font, PangoGlyphString* glyphs, const(GdkRGBA)* color, const(graphene_point_t)* offset) c_gsk_text_node_new; ///
-  const(GdkRGBA)* function(const(GskRenderNode)* node) c_gsk_text_node_get_color; ///
-  PangoFont* function(const(GskRenderNode)* node) c_gsk_text_node_get_font; ///
-  const(PangoGlyphInfo)* function(const(GskRenderNode)* node, uint* nGlyphs) c_gsk_text_node_get_glyphs; ///
-  uint function(const(GskRenderNode)* node) c_gsk_text_node_get_num_glyphs; ///
-  const(graphene_point_t)* function(const(GskRenderNode)* node) c_gsk_text_node_get_offset; ///
-  gboolean function(const(GskRenderNode)* node) c_gsk_text_node_has_color_glyphs; ///
+// TextNode
+private alias c_gsk_text_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_text_node_get_typeFn c_gsk_text_node_get_type; ///
+private alias c_gsk_text_node_newFn = extern(C) GskRenderNode* function(PangoFont* font, PangoGlyphString* glyphs, const(GdkRGBA)* color, const(graphene_point_t)* offset) nothrow;
+__gshared c_gsk_text_node_newFn c_gsk_text_node_new; ///
+private alias c_gsk_text_node_get_colorFn = extern(C) const(GdkRGBA)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_text_node_get_colorFn c_gsk_text_node_get_color; ///
+private alias c_gsk_text_node_get_fontFn = extern(C) PangoFont* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_text_node_get_fontFn c_gsk_text_node_get_font; ///
+private alias c_gsk_text_node_get_glyphsFn = extern(C) const(PangoGlyphInfo)* function(const(GskRenderNode)* node, uint* nGlyphs) nothrow;
+__gshared c_gsk_text_node_get_glyphsFn c_gsk_text_node_get_glyphs; ///
+private alias c_gsk_text_node_get_num_glyphsFn = extern(C) uint function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_text_node_get_num_glyphsFn c_gsk_text_node_get_num_glyphs; ///
+private alias c_gsk_text_node_get_offsetFn = extern(C) const(graphene_point_t)* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_text_node_get_offsetFn c_gsk_text_node_get_offset; ///
+private alias c_gsk_text_node_has_color_glyphsFn = extern(C) gboolean function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_text_node_has_color_glyphsFn c_gsk_text_node_has_color_glyphs; ///
 
-  // TextureNode
-  GType function() c_gsk_texture_node_get_type; ///
-  GskRenderNode* function(GdkTexture* texture, const(graphene_rect_t)* bounds) c_gsk_texture_node_new; ///
-  GdkTexture* function(const(GskRenderNode)* node) c_gsk_texture_node_get_texture; ///
+// TextureNode
+private alias c_gsk_texture_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_texture_node_get_typeFn c_gsk_texture_node_get_type; ///
+private alias c_gsk_texture_node_newFn = extern(C) GskRenderNode* function(GdkTexture* texture, const(graphene_rect_t)* bounds) nothrow;
+__gshared c_gsk_texture_node_newFn c_gsk_texture_node_new; ///
+private alias c_gsk_texture_node_get_textureFn = extern(C) GdkTexture* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_texture_node_get_textureFn c_gsk_texture_node_get_texture; ///
 
-  // TextureScaleNode
-  GType function() c_gsk_texture_scale_node_get_type; ///
-  GskRenderNode* function(GdkTexture* texture, const(graphene_rect_t)* bounds, GskScalingFilter filter) c_gsk_texture_scale_node_new; ///
-  GskScalingFilter function(const(GskRenderNode)* node) c_gsk_texture_scale_node_get_filter; ///
-  GdkTexture* function(const(GskRenderNode)* node) c_gsk_texture_scale_node_get_texture; ///
+// TextureScaleNode
+private alias c_gsk_texture_scale_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_texture_scale_node_get_typeFn c_gsk_texture_scale_node_get_type; ///
+private alias c_gsk_texture_scale_node_newFn = extern(C) GskRenderNode* function(GdkTexture* texture, const(graphene_rect_t)* bounds, GskScalingFilter filter) nothrow;
+__gshared c_gsk_texture_scale_node_newFn c_gsk_texture_scale_node_new; ///
+private alias c_gsk_texture_scale_node_get_filterFn = extern(C) GskScalingFilter function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_texture_scale_node_get_filterFn c_gsk_texture_scale_node_get_filter; ///
+private alias c_gsk_texture_scale_node_get_textureFn = extern(C) GdkTexture* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_texture_scale_node_get_textureFn c_gsk_texture_scale_node_get_texture; ///
 
-  // Transform
-  GType function() c_gsk_transform_get_type; ///
-  GskTransform* function() c_gsk_transform_new; ///
-  gboolean function(GskTransform* first, GskTransform* second) c_gsk_transform_equal; ///
-  GskTransformCategory function(GskTransform* self) c_gsk_transform_get_category; ///
-  GskTransform* function(GskTransform* self) c_gsk_transform_invert; ///
-  GskTransform* function(GskTransform* next, const(graphene_matrix_t)* matrix) c_gsk_transform_matrix; ///
-  GskTransform* function(GskTransform* next, float xx, float yx, float xy, float yy, float dx, float dy) c_gsk_transform_matrix_2d; ///
-  GskTransform* function(GskTransform* next, float depth) c_gsk_transform_perspective; ///
-  void function(GskTransform* self, GString* string_) c_gsk_transform_print; ///
-  GskTransform* function(GskTransform* self) c_gsk_transform_ref; ///
-  GskTransform* function(GskTransform* next, float angle) c_gsk_transform_rotate; ///
-  GskTransform* function(GskTransform* next, float angle, const(graphene_vec3_t)* axis) c_gsk_transform_rotate_3d; ///
-  GskTransform* function(GskTransform* next, float factorX, float factorY) c_gsk_transform_scale; ///
-  GskTransform* function(GskTransform* next, float factorX, float factorY, float factorZ) c_gsk_transform_scale_3d; ///
-  GskTransform* function(GskTransform* next, float skewX, float skewY) c_gsk_transform_skew; ///
-  void function(GskTransform* self, float* outXx, float* outYx, float* outXy, float* outYy, float* outDx, float* outDy) c_gsk_transform_to_2d; ///
-  void function(GskTransform* self, float* outSkewX, float* outSkewY, float* outScaleX, float* outScaleY, float* outAngle, float* outDx, float* outDy) c_gsk_transform_to_2d_components; ///
-  void function(GskTransform* self, float* outScaleX, float* outScaleY, float* outDx, float* outDy) c_gsk_transform_to_affine; ///
-  void function(GskTransform* self, graphene_matrix_t* outMatrix) c_gsk_transform_to_matrix; ///
-  char* function(GskTransform* self) c_gsk_transform_to_string; ///
-  void function(GskTransform* self, float* outDx, float* outDy) c_gsk_transform_to_translate; ///
-  GskTransform* function(GskTransform* next, GskTransform* other) c_gsk_transform_transform; ///
-  void function(GskTransform* self, const(graphene_rect_t)* rect, graphene_rect_t* outRect) c_gsk_transform_transform_bounds; ///
-  void function(GskTransform* self, const(graphene_point_t)* point, graphene_point_t* outPoint) c_gsk_transform_transform_point; ///
-  GskTransform* function(GskTransform* next, const(graphene_point_t)* point) c_gsk_transform_translate; ///
-  GskTransform* function(GskTransform* next, const(graphene_point3d_t)* point) c_gsk_transform_translate_3d; ///
-  void function(GskTransform* self) c_gsk_transform_unref; ///
-  gboolean function(const(char)* string_, GskTransform** outTransform) c_gsk_transform_parse; ///
+// Transform
+private alias c_gsk_transform_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_transform_get_typeFn c_gsk_transform_get_type; ///
+private alias c_gsk_transform_newFn = extern(C) GskTransform* function() nothrow;
+__gshared c_gsk_transform_newFn c_gsk_transform_new; ///
+private alias c_gsk_transform_equalFn = extern(C) gboolean function(GskTransform* first, GskTransform* second) nothrow;
+__gshared c_gsk_transform_equalFn c_gsk_transform_equal; ///
+private alias c_gsk_transform_get_categoryFn = extern(C) GskTransformCategory function(GskTransform* self) nothrow;
+__gshared c_gsk_transform_get_categoryFn c_gsk_transform_get_category; ///
+private alias c_gsk_transform_invertFn = extern(C) GskTransform* function(GskTransform* self) nothrow;
+__gshared c_gsk_transform_invertFn c_gsk_transform_invert; ///
+private alias c_gsk_transform_matrixFn = extern(C) GskTransform* function(GskTransform* next, const(graphene_matrix_t)* matrix) nothrow;
+__gshared c_gsk_transform_matrixFn c_gsk_transform_matrix; ///
+private alias c_gsk_transform_matrix_2dFn = extern(C) GskTransform* function(GskTransform* next, float xx, float yx, float xy, float yy, float dx, float dy) nothrow;
+__gshared c_gsk_transform_matrix_2dFn c_gsk_transform_matrix_2d; ///
+private alias c_gsk_transform_perspectiveFn = extern(C) GskTransform* function(GskTransform* next, float depth) nothrow;
+__gshared c_gsk_transform_perspectiveFn c_gsk_transform_perspective; ///
+private alias c_gsk_transform_printFn = extern(C) void function(GskTransform* self, GString* string_) nothrow;
+__gshared c_gsk_transform_printFn c_gsk_transform_print; ///
+private alias c_gsk_transform_refFn = extern(C) GskTransform* function(GskTransform* self) nothrow;
+__gshared c_gsk_transform_refFn c_gsk_transform_ref; ///
+private alias c_gsk_transform_rotateFn = extern(C) GskTransform* function(GskTransform* next, float angle) nothrow;
+__gshared c_gsk_transform_rotateFn c_gsk_transform_rotate; ///
+private alias c_gsk_transform_rotate_3dFn = extern(C) GskTransform* function(GskTransform* next, float angle, const(graphene_vec3_t)* axis) nothrow;
+__gshared c_gsk_transform_rotate_3dFn c_gsk_transform_rotate_3d; ///
+private alias c_gsk_transform_scaleFn = extern(C) GskTransform* function(GskTransform* next, float factorX, float factorY) nothrow;
+__gshared c_gsk_transform_scaleFn c_gsk_transform_scale; ///
+private alias c_gsk_transform_scale_3dFn = extern(C) GskTransform* function(GskTransform* next, float factorX, float factorY, float factorZ) nothrow;
+__gshared c_gsk_transform_scale_3dFn c_gsk_transform_scale_3d; ///
+private alias c_gsk_transform_skewFn = extern(C) GskTransform* function(GskTransform* next, float skewX, float skewY) nothrow;
+__gshared c_gsk_transform_skewFn c_gsk_transform_skew; ///
+private alias c_gsk_transform_to_2dFn = extern(C) void function(GskTransform* self, float* outXx, float* outYx, float* outXy, float* outYy, float* outDx, float* outDy) nothrow;
+__gshared c_gsk_transform_to_2dFn c_gsk_transform_to_2d; ///
+private alias c_gsk_transform_to_2d_componentsFn = extern(C) void function(GskTransform* self, float* outSkewX, float* outSkewY, float* outScaleX, float* outScaleY, float* outAngle, float* outDx, float* outDy) nothrow;
+__gshared c_gsk_transform_to_2d_componentsFn c_gsk_transform_to_2d_components; ///
+private alias c_gsk_transform_to_affineFn = extern(C) void function(GskTransform* self, float* outScaleX, float* outScaleY, float* outDx, float* outDy) nothrow;
+__gshared c_gsk_transform_to_affineFn c_gsk_transform_to_affine; ///
+private alias c_gsk_transform_to_matrixFn = extern(C) void function(GskTransform* self, graphene_matrix_t* outMatrix) nothrow;
+__gshared c_gsk_transform_to_matrixFn c_gsk_transform_to_matrix; ///
+private alias c_gsk_transform_to_stringFn = extern(C) char* function(GskTransform* self) nothrow;
+__gshared c_gsk_transform_to_stringFn c_gsk_transform_to_string; ///
+private alias c_gsk_transform_to_translateFn = extern(C) void function(GskTransform* self, float* outDx, float* outDy) nothrow;
+__gshared c_gsk_transform_to_translateFn c_gsk_transform_to_translate; ///
+private alias c_gsk_transform_transformFn = extern(C) GskTransform* function(GskTransform* next, GskTransform* other) nothrow;
+__gshared c_gsk_transform_transformFn c_gsk_transform_transform; ///
+private alias c_gsk_transform_transform_boundsFn = extern(C) void function(GskTransform* self, const(graphene_rect_t)* rect, graphene_rect_t* outRect) nothrow;
+__gshared c_gsk_transform_transform_boundsFn c_gsk_transform_transform_bounds; ///
+private alias c_gsk_transform_transform_pointFn = extern(C) void function(GskTransform* self, const(graphene_point_t)* point, graphene_point_t* outPoint) nothrow;
+__gshared c_gsk_transform_transform_pointFn c_gsk_transform_transform_point; ///
+private alias c_gsk_transform_translateFn = extern(C) GskTransform* function(GskTransform* next, const(graphene_point_t)* point) nothrow;
+__gshared c_gsk_transform_translateFn c_gsk_transform_translate; ///
+private alias c_gsk_transform_translate_3dFn = extern(C) GskTransform* function(GskTransform* next, const(graphene_point3d_t)* point) nothrow;
+__gshared c_gsk_transform_translate_3dFn c_gsk_transform_translate_3d; ///
+private alias c_gsk_transform_unrefFn = extern(C) void function(GskTransform* self) nothrow;
+__gshared c_gsk_transform_unrefFn c_gsk_transform_unref; ///
+private alias c_gsk_transform_parseFn = extern(C) gboolean function(const(char)* string_, GskTransform** outTransform) nothrow;
+__gshared c_gsk_transform_parseFn c_gsk_transform_parse; ///
 
-  // TransformNode
-  GType function() c_gsk_transform_node_get_type; ///
-  GskRenderNode* function(GskRenderNode* child, GskTransform* transform) c_gsk_transform_node_new; ///
-  GskRenderNode* function(const(GskRenderNode)* node) c_gsk_transform_node_get_child; ///
-  GskTransform* function(const(GskRenderNode)* node) c_gsk_transform_node_get_transform; ///
+// TransformNode
+private alias c_gsk_transform_node_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_transform_node_get_typeFn c_gsk_transform_node_get_type; ///
+private alias c_gsk_transform_node_newFn = extern(C) GskRenderNode* function(GskRenderNode* child, GskTransform* transform) nothrow;
+__gshared c_gsk_transform_node_newFn c_gsk_transform_node_new; ///
+private alias c_gsk_transform_node_get_childFn = extern(C) GskRenderNode* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_transform_node_get_childFn c_gsk_transform_node_get_child; ///
+private alias c_gsk_transform_node_get_transformFn = extern(C) GskTransform* function(const(GskRenderNode)* node) nothrow;
+__gshared c_gsk_transform_node_get_transformFn c_gsk_transform_node_get_transform; ///
 
-  // VulkanRenderer
-  GType function() c_gsk_vulkan_renderer_get_type; ///
-  GskRenderer* function() c_gsk_vulkan_renderer_new; ///
+// VulkanRenderer
+private alias c_gsk_vulkan_renderer_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gsk_vulkan_renderer_get_typeFn c_gsk_vulkan_renderer_get_type; ///
+private alias c_gsk_vulkan_renderer_newFn = extern(C) GskRenderer* function() nothrow;
+__gshared c_gsk_vulkan_renderer_newFn c_gsk_vulkan_renderer_new; ///
 
-  // global
-  GskRenderNode* function(const(GValue)* value) c_gsk_value_dup_render_node; ///
-  GskRenderNode* function(const(GValue)* value) c_gsk_value_get_render_node; ///
-  void function(GValue* value, GskRenderNode* node) c_gsk_value_set_render_node; ///
-  void function(GValue* value, GskRenderNode* node) c_gsk_value_take_render_node; ///
+// global
+private alias c_gsk_value_dup_render_nodeFn = extern(C) GskRenderNode* function(const(GValue)* value) nothrow;
+__gshared c_gsk_value_dup_render_nodeFn c_gsk_value_dup_render_node; ///
+private alias c_gsk_value_get_render_nodeFn = extern(C) GskRenderNode* function(const(GValue)* value) nothrow;
+__gshared c_gsk_value_get_render_nodeFn c_gsk_value_get_render_node; ///
+private alias c_gsk_value_set_render_nodeFn = extern(C) void function(GValue* value, GskRenderNode* node) nothrow;
+__gshared c_gsk_value_set_render_nodeFn c_gsk_value_set_render_node; ///
+private alias c_gsk_value_take_render_nodeFn = extern(C) void function(GValue* value, GskRenderNode* node) nothrow;
+__gshared c_gsk_value_take_render_nodeFn c_gsk_value_take_render_node; ///
 
-  // SerializationError
-  GQuark function() c_gsk_serialization_error_quark; ///
-}
+// SerializationError
+private alias c_gsk_serialization_error_quarkFn = extern(C) GQuark function() nothrow;
+__gshared c_gsk_serialization_error_quarkFn c_gsk_serialization_error_quark; ///
 
 // BlendNode
 

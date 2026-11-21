@@ -8,204 +8,377 @@ public import gid.gst1.c.types;
 
 private immutable LIBS = ["gstsdp-1.0_0"];
 
-__gshared extern(C) nothrow
-{
-  // MIKEYMessage
-  GType function() c_gst_mikey_message_get_type; ///
-  GstMIKEYMessage* function() c_gst_mikey_message_new; ///
-  GstMIKEYMessage* function(GBytes* bytes, GstMIKEYDecryptInfo* info, GError** _err) c_gst_mikey_message_new_from_bytes; ///
-  GstMIKEYMessage* function(GstCaps* caps) c_gst_mikey_message_new_from_caps; ///
-  GstMIKEYMessage* function(const(void)* data, size_t size, GstMIKEYDecryptInfo* info, GError** _err) c_gst_mikey_message_new_from_data; ///
-  gboolean function(GstMIKEYMessage* msg, ubyte policy, uint ssrc, uint roc) c_gst_mikey_message_add_cs_srtp; ///
-  gboolean function(GstMIKEYMessage* msg, GstMIKEYPayload* payload) c_gst_mikey_message_add_payload; ///
-  gboolean function(GstMIKEYMessage* msg, GstMIKEYCacheType C, ushort dataLen, const(ubyte)* data) c_gst_mikey_message_add_pke; ///
-  gboolean function(GstMIKEYMessage* msg, ubyte len, const(ubyte)* rand) c_gst_mikey_message_add_rand; ///
-  gboolean function(GstMIKEYMessage* msg, ubyte len) c_gst_mikey_message_add_rand_len; ///
-  gboolean function(GstMIKEYMessage* msg, GstMIKEYTSType type, const(ubyte)* tsValue) c_gst_mikey_message_add_t; ///
-  gboolean function(GstMIKEYMessage* msg) c_gst_mikey_message_add_t_now_ntp_utc; ///
-  char* function(GstMIKEYMessage* msg) c_gst_mikey_message_base64_encode; ///
-  const(GstMIKEYPayload)* function(const(GstMIKEYMessage)* msg, GstMIKEYPayloadType type, uint nth) c_gst_mikey_message_find_payload; ///
-  const(GstMIKEYMapSRTP)* function(const(GstMIKEYMessage)* msg, uint idx) c_gst_mikey_message_get_cs_srtp; ///
-  uint function(const(GstMIKEYMessage)* msg) c_gst_mikey_message_get_n_cs; ///
-  uint function(const(GstMIKEYMessage)* msg) c_gst_mikey_message_get_n_payloads; ///
-  const(GstMIKEYPayload)* function(const(GstMIKEYMessage)* msg, uint idx) c_gst_mikey_message_get_payload; ///
-  gboolean function(GstMIKEYMessage* msg, int idx, const(GstMIKEYMapSRTP)* map) c_gst_mikey_message_insert_cs_srtp; ///
-  gboolean function(GstMIKEYMessage* msg, uint idx, GstMIKEYPayload* payload) c_gst_mikey_message_insert_payload; ///
-  gboolean function(GstMIKEYMessage* msg, int idx) c_gst_mikey_message_remove_cs_srtp; ///
-  gboolean function(GstMIKEYMessage* msg, uint idx) c_gst_mikey_message_remove_payload; ///
-  gboolean function(GstMIKEYMessage* msg, int idx, const(GstMIKEYMapSRTP)* map) c_gst_mikey_message_replace_cs_srtp; ///
-  gboolean function(GstMIKEYMessage* msg, uint idx, GstMIKEYPayload* payload) c_gst_mikey_message_replace_payload; ///
-  gboolean function(GstMIKEYMessage* msg, ubyte version_, GstMIKEYType type, gboolean V, GstMIKEYPRFFunc prfFunc, uint CSBId, GstMIKEYMapType mapType) c_gst_mikey_message_set_info; ///
-  GBytes* function(GstMIKEYMessage* msg, GstMIKEYEncryptInfo* info, GError** _err) c_gst_mikey_message_to_bytes; ///
-  gboolean function(const(GstMIKEYMessage)* msg, GstCaps* caps) c_gst_mikey_message_to_caps; ///
+// MIKEYMessage
+private alias c_gst_mikey_message_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_mikey_message_get_typeFn c_gst_mikey_message_get_type; ///
+private alias c_gst_mikey_message_newFn = extern(C) GstMIKEYMessage* function() nothrow;
+__gshared c_gst_mikey_message_newFn c_gst_mikey_message_new; ///
+private alias c_gst_mikey_message_new_from_bytesFn = extern(C) GstMIKEYMessage* function(GBytes* bytes, GstMIKEYDecryptInfo* info, GError** _err) nothrow;
+__gshared c_gst_mikey_message_new_from_bytesFn c_gst_mikey_message_new_from_bytes; ///
+private alias c_gst_mikey_message_new_from_capsFn = extern(C) GstMIKEYMessage* function(GstCaps* caps) nothrow;
+__gshared c_gst_mikey_message_new_from_capsFn c_gst_mikey_message_new_from_caps; ///
+private alias c_gst_mikey_message_new_from_dataFn = extern(C) GstMIKEYMessage* function(const(void)* data, size_t size, GstMIKEYDecryptInfo* info, GError** _err) nothrow;
+__gshared c_gst_mikey_message_new_from_dataFn c_gst_mikey_message_new_from_data; ///
+private alias c_gst_mikey_message_add_cs_srtpFn = extern(C) gboolean function(GstMIKEYMessage* msg, ubyte policy, uint ssrc, uint roc) nothrow;
+__gshared c_gst_mikey_message_add_cs_srtpFn c_gst_mikey_message_add_cs_srtp; ///
+private alias c_gst_mikey_message_add_payloadFn = extern(C) gboolean function(GstMIKEYMessage* msg, GstMIKEYPayload* payload) nothrow;
+__gshared c_gst_mikey_message_add_payloadFn c_gst_mikey_message_add_payload; ///
+private alias c_gst_mikey_message_add_pkeFn = extern(C) gboolean function(GstMIKEYMessage* msg, GstMIKEYCacheType C, ushort dataLen, const(ubyte)* data) nothrow;
+__gshared c_gst_mikey_message_add_pkeFn c_gst_mikey_message_add_pke; ///
+private alias c_gst_mikey_message_add_randFn = extern(C) gboolean function(GstMIKEYMessage* msg, ubyte len, const(ubyte)* rand) nothrow;
+__gshared c_gst_mikey_message_add_randFn c_gst_mikey_message_add_rand; ///
+private alias c_gst_mikey_message_add_rand_lenFn = extern(C) gboolean function(GstMIKEYMessage* msg, ubyte len) nothrow;
+__gshared c_gst_mikey_message_add_rand_lenFn c_gst_mikey_message_add_rand_len; ///
+private alias c_gst_mikey_message_add_tFn = extern(C) gboolean function(GstMIKEYMessage* msg, GstMIKEYTSType type, const(ubyte)* tsValue) nothrow;
+__gshared c_gst_mikey_message_add_tFn c_gst_mikey_message_add_t; ///
+private alias c_gst_mikey_message_add_t_now_ntp_utcFn = extern(C) gboolean function(GstMIKEYMessage* msg) nothrow;
+__gshared c_gst_mikey_message_add_t_now_ntp_utcFn c_gst_mikey_message_add_t_now_ntp_utc; ///
+private alias c_gst_mikey_message_base64_encodeFn = extern(C) char* function(GstMIKEYMessage* msg) nothrow;
+__gshared c_gst_mikey_message_base64_encodeFn c_gst_mikey_message_base64_encode; ///
+private alias c_gst_mikey_message_find_payloadFn = extern(C) const(GstMIKEYPayload)* function(const(GstMIKEYMessage)* msg, GstMIKEYPayloadType type, uint nth) nothrow;
+__gshared c_gst_mikey_message_find_payloadFn c_gst_mikey_message_find_payload; ///
+private alias c_gst_mikey_message_get_cs_srtpFn = extern(C) const(GstMIKEYMapSRTP)* function(const(GstMIKEYMessage)* msg, uint idx) nothrow;
+__gshared c_gst_mikey_message_get_cs_srtpFn c_gst_mikey_message_get_cs_srtp; ///
+private alias c_gst_mikey_message_get_n_csFn = extern(C) uint function(const(GstMIKEYMessage)* msg) nothrow;
+__gshared c_gst_mikey_message_get_n_csFn c_gst_mikey_message_get_n_cs; ///
+private alias c_gst_mikey_message_get_n_payloadsFn = extern(C) uint function(const(GstMIKEYMessage)* msg) nothrow;
+__gshared c_gst_mikey_message_get_n_payloadsFn c_gst_mikey_message_get_n_payloads; ///
+private alias c_gst_mikey_message_get_payloadFn = extern(C) const(GstMIKEYPayload)* function(const(GstMIKEYMessage)* msg, uint idx) nothrow;
+__gshared c_gst_mikey_message_get_payloadFn c_gst_mikey_message_get_payload; ///
+private alias c_gst_mikey_message_insert_cs_srtpFn = extern(C) gboolean function(GstMIKEYMessage* msg, int idx, const(GstMIKEYMapSRTP)* map) nothrow;
+__gshared c_gst_mikey_message_insert_cs_srtpFn c_gst_mikey_message_insert_cs_srtp; ///
+private alias c_gst_mikey_message_insert_payloadFn = extern(C) gboolean function(GstMIKEYMessage* msg, uint idx, GstMIKEYPayload* payload) nothrow;
+__gshared c_gst_mikey_message_insert_payloadFn c_gst_mikey_message_insert_payload; ///
+private alias c_gst_mikey_message_remove_cs_srtpFn = extern(C) gboolean function(GstMIKEYMessage* msg, int idx) nothrow;
+__gshared c_gst_mikey_message_remove_cs_srtpFn c_gst_mikey_message_remove_cs_srtp; ///
+private alias c_gst_mikey_message_remove_payloadFn = extern(C) gboolean function(GstMIKEYMessage* msg, uint idx) nothrow;
+__gshared c_gst_mikey_message_remove_payloadFn c_gst_mikey_message_remove_payload; ///
+private alias c_gst_mikey_message_replace_cs_srtpFn = extern(C) gboolean function(GstMIKEYMessage* msg, int idx, const(GstMIKEYMapSRTP)* map) nothrow;
+__gshared c_gst_mikey_message_replace_cs_srtpFn c_gst_mikey_message_replace_cs_srtp; ///
+private alias c_gst_mikey_message_replace_payloadFn = extern(C) gboolean function(GstMIKEYMessage* msg, uint idx, GstMIKEYPayload* payload) nothrow;
+__gshared c_gst_mikey_message_replace_payloadFn c_gst_mikey_message_replace_payload; ///
+private alias c_gst_mikey_message_set_infoFn = extern(C) gboolean function(GstMIKEYMessage* msg, ubyte version_, GstMIKEYType type, gboolean V, GstMIKEYPRFFunc prfFunc, uint CSBId, GstMIKEYMapType mapType) nothrow;
+__gshared c_gst_mikey_message_set_infoFn c_gst_mikey_message_set_info; ///
+private alias c_gst_mikey_message_to_bytesFn = extern(C) GBytes* function(GstMIKEYMessage* msg, GstMIKEYEncryptInfo* info, GError** _err) nothrow;
+__gshared c_gst_mikey_message_to_bytesFn c_gst_mikey_message_to_bytes; ///
+private alias c_gst_mikey_message_to_capsFn = extern(C) gboolean function(const(GstMIKEYMessage)* msg, GstCaps* caps) nothrow;
+__gshared c_gst_mikey_message_to_capsFn c_gst_mikey_message_to_caps; ///
 
-  // MIKEYPayload
-  GType function() c_gst_mikey_payload_get_type; ///
-  GstMIKEYPayload* function(GstMIKEYPayloadType type) c_gst_mikey_payload_new; ///
-  gboolean function(GstMIKEYPayload* payload, GstMIKEYPayload* newpay) c_gst_mikey_payload_kemac_add_sub; ///
-  uint function(const(GstMIKEYPayload)* payload) c_gst_mikey_payload_kemac_get_n_sub; ///
-  const(GstMIKEYPayload)* function(const(GstMIKEYPayload)* payload, uint idx) c_gst_mikey_payload_kemac_get_sub; ///
-  gboolean function(GstMIKEYPayload* payload, uint idx) c_gst_mikey_payload_kemac_remove_sub; ///
-  gboolean function(GstMIKEYPayload* payload, GstMIKEYEncAlg encAlg, GstMIKEYMacAlg macAlg) c_gst_mikey_payload_kemac_set; ///
-  gboolean function(GstMIKEYPayload* payload, ubyte vfLen, const(ubyte)* vfData, ubyte vtLen, const(ubyte)* vtData) c_gst_mikey_payload_key_data_set_interval; ///
-  gboolean function(GstMIKEYPayload* payload, GstMIKEYKeyDataType keyType, ushort keyLen, const(ubyte)* keyData) c_gst_mikey_payload_key_data_set_key; ///
-  gboolean function(GstMIKEYPayload* payload, ushort saltLen, const(ubyte)* saltData) c_gst_mikey_payload_key_data_set_salt; ///
-  gboolean function(GstMIKEYPayload* payload, ubyte spiLen, const(ubyte)* spiData) c_gst_mikey_payload_key_data_set_spi; ///
-  gboolean function(GstMIKEYPayload* payload, GstMIKEYCacheType C, ushort dataLen, const(ubyte)* data) c_gst_mikey_payload_pke_set; ///
-  gboolean function(GstMIKEYPayload* payload, ubyte len, const(ubyte)* rand) c_gst_mikey_payload_rand_set; ///
-  gboolean function(GstMIKEYPayload* payload, ubyte type, ubyte len, const(ubyte)* val) c_gst_mikey_payload_sp_add_param; ///
-  uint function(const(GstMIKEYPayload)* payload) c_gst_mikey_payload_sp_get_n_params; ///
-  const(GstMIKEYPayloadSPParam)* function(const(GstMIKEYPayload)* payload, uint idx) c_gst_mikey_payload_sp_get_param; ///
-  gboolean function(GstMIKEYPayload* payload, uint idx) c_gst_mikey_payload_sp_remove_param; ///
-  gboolean function(GstMIKEYPayload* payload, uint policy, GstMIKEYSecProto proto) c_gst_mikey_payload_sp_set; ///
-  gboolean function(GstMIKEYPayload* payload, GstMIKEYTSType type, const(ubyte)* tsValue) c_gst_mikey_payload_t_set; ///
+// MIKEYPayload
+private alias c_gst_mikey_payload_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_mikey_payload_get_typeFn c_gst_mikey_payload_get_type; ///
+private alias c_gst_mikey_payload_newFn = extern(C) GstMIKEYPayload* function(GstMIKEYPayloadType type) nothrow;
+__gshared c_gst_mikey_payload_newFn c_gst_mikey_payload_new; ///
+private alias c_gst_mikey_payload_kemac_add_subFn = extern(C) gboolean function(GstMIKEYPayload* payload, GstMIKEYPayload* newpay) nothrow;
+__gshared c_gst_mikey_payload_kemac_add_subFn c_gst_mikey_payload_kemac_add_sub; ///
+private alias c_gst_mikey_payload_kemac_get_n_subFn = extern(C) uint function(const(GstMIKEYPayload)* payload) nothrow;
+__gshared c_gst_mikey_payload_kemac_get_n_subFn c_gst_mikey_payload_kemac_get_n_sub; ///
+private alias c_gst_mikey_payload_kemac_get_subFn = extern(C) const(GstMIKEYPayload)* function(const(GstMIKEYPayload)* payload, uint idx) nothrow;
+__gshared c_gst_mikey_payload_kemac_get_subFn c_gst_mikey_payload_kemac_get_sub; ///
+private alias c_gst_mikey_payload_kemac_remove_subFn = extern(C) gboolean function(GstMIKEYPayload* payload, uint idx) nothrow;
+__gshared c_gst_mikey_payload_kemac_remove_subFn c_gst_mikey_payload_kemac_remove_sub; ///
+private alias c_gst_mikey_payload_kemac_setFn = extern(C) gboolean function(GstMIKEYPayload* payload, GstMIKEYEncAlg encAlg, GstMIKEYMacAlg macAlg) nothrow;
+__gshared c_gst_mikey_payload_kemac_setFn c_gst_mikey_payload_kemac_set; ///
+private alias c_gst_mikey_payload_key_data_set_intervalFn = extern(C) gboolean function(GstMIKEYPayload* payload, ubyte vfLen, const(ubyte)* vfData, ubyte vtLen, const(ubyte)* vtData) nothrow;
+__gshared c_gst_mikey_payload_key_data_set_intervalFn c_gst_mikey_payload_key_data_set_interval; ///
+private alias c_gst_mikey_payload_key_data_set_keyFn = extern(C) gboolean function(GstMIKEYPayload* payload, GstMIKEYKeyDataType keyType, ushort keyLen, const(ubyte)* keyData) nothrow;
+__gshared c_gst_mikey_payload_key_data_set_keyFn c_gst_mikey_payload_key_data_set_key; ///
+private alias c_gst_mikey_payload_key_data_set_saltFn = extern(C) gboolean function(GstMIKEYPayload* payload, ushort saltLen, const(ubyte)* saltData) nothrow;
+__gshared c_gst_mikey_payload_key_data_set_saltFn c_gst_mikey_payload_key_data_set_salt; ///
+private alias c_gst_mikey_payload_key_data_set_spiFn = extern(C) gboolean function(GstMIKEYPayload* payload, ubyte spiLen, const(ubyte)* spiData) nothrow;
+__gshared c_gst_mikey_payload_key_data_set_spiFn c_gst_mikey_payload_key_data_set_spi; ///
+private alias c_gst_mikey_payload_pke_setFn = extern(C) gboolean function(GstMIKEYPayload* payload, GstMIKEYCacheType C, ushort dataLen, const(ubyte)* data) nothrow;
+__gshared c_gst_mikey_payload_pke_setFn c_gst_mikey_payload_pke_set; ///
+private alias c_gst_mikey_payload_rand_setFn = extern(C) gboolean function(GstMIKEYPayload* payload, ubyte len, const(ubyte)* rand) nothrow;
+__gshared c_gst_mikey_payload_rand_setFn c_gst_mikey_payload_rand_set; ///
+private alias c_gst_mikey_payload_sp_add_paramFn = extern(C) gboolean function(GstMIKEYPayload* payload, ubyte type, ubyte len, const(ubyte)* val) nothrow;
+__gshared c_gst_mikey_payload_sp_add_paramFn c_gst_mikey_payload_sp_add_param; ///
+private alias c_gst_mikey_payload_sp_get_n_paramsFn = extern(C) uint function(const(GstMIKEYPayload)* payload) nothrow;
+__gshared c_gst_mikey_payload_sp_get_n_paramsFn c_gst_mikey_payload_sp_get_n_params; ///
+private alias c_gst_mikey_payload_sp_get_paramFn = extern(C) const(GstMIKEYPayloadSPParam)* function(const(GstMIKEYPayload)* payload, uint idx) nothrow;
+__gshared c_gst_mikey_payload_sp_get_paramFn c_gst_mikey_payload_sp_get_param; ///
+private alias c_gst_mikey_payload_sp_remove_paramFn = extern(C) gboolean function(GstMIKEYPayload* payload, uint idx) nothrow;
+__gshared c_gst_mikey_payload_sp_remove_paramFn c_gst_mikey_payload_sp_remove_param; ///
+private alias c_gst_mikey_payload_sp_setFn = extern(C) gboolean function(GstMIKEYPayload* payload, uint policy, GstMIKEYSecProto proto) nothrow;
+__gshared c_gst_mikey_payload_sp_setFn c_gst_mikey_payload_sp_set; ///
+private alias c_gst_mikey_payload_t_setFn = extern(C) gboolean function(GstMIKEYPayload* payload, GstMIKEYTSType type, const(ubyte)* tsValue) nothrow;
+__gshared c_gst_mikey_payload_t_setFn c_gst_mikey_payload_t_set; ///
 
-  // SDPAttribute
-  GstSDPResult function(GstSDPAttribute* attr) c_gst_sdp_attribute_clear; ///
-  GstSDPResult function(GstSDPAttribute* attr, const(char)* key, const(char)* value) c_gst_sdp_attribute_set; ///
+// SDPAttribute
+private alias c_gst_sdp_attribute_clearFn = extern(C) GstSDPResult function(GstSDPAttribute* attr) nothrow;
+__gshared c_gst_sdp_attribute_clearFn c_gst_sdp_attribute_clear; ///
+private alias c_gst_sdp_attribute_setFn = extern(C) GstSDPResult function(GstSDPAttribute* attr, const(char)* key, const(char)* value) nothrow;
+__gshared c_gst_sdp_attribute_setFn c_gst_sdp_attribute_set; ///
 
-  // SDPBandwidth
-  GstSDPResult function(GstSDPBandwidth* bw) c_gst_sdp_bandwidth_clear; ///
-  GstSDPResult function(GstSDPBandwidth* bw, const(char)* bwtype, uint bandwidth) c_gst_sdp_bandwidth_set; ///
+// SDPBandwidth
+private alias c_gst_sdp_bandwidth_clearFn = extern(C) GstSDPResult function(GstSDPBandwidth* bw) nothrow;
+__gshared c_gst_sdp_bandwidth_clearFn c_gst_sdp_bandwidth_clear; ///
+private alias c_gst_sdp_bandwidth_setFn = extern(C) GstSDPResult function(GstSDPBandwidth* bw, const(char)* bwtype, uint bandwidth) nothrow;
+__gshared c_gst_sdp_bandwidth_setFn c_gst_sdp_bandwidth_set; ///
 
-  // SDPConnection
-  GstSDPResult function(GstSDPConnection* conn) c_gst_sdp_connection_clear; ///
-  GstSDPResult function(GstSDPConnection* conn, const(char)* nettype, const(char)* addrtype, const(char)* address, uint ttl, uint addrNumber) c_gst_sdp_connection_set; ///
+// SDPConnection
+private alias c_gst_sdp_connection_clearFn = extern(C) GstSDPResult function(GstSDPConnection* conn) nothrow;
+__gshared c_gst_sdp_connection_clearFn c_gst_sdp_connection_clear; ///
+private alias c_gst_sdp_connection_setFn = extern(C) GstSDPResult function(GstSDPConnection* conn, const(char)* nettype, const(char)* addrtype, const(char)* address, uint ttl, uint addrNumber) nothrow;
+__gshared c_gst_sdp_connection_setFn c_gst_sdp_connection_set; ///
 
-  // SDPMedia
-  GstSDPResult function(GstSDPMedia* media, const(char)* key, const(char)* value) c_gst_sdp_media_add_attribute; ///
-  GstSDPResult function(GstSDPMedia* media, const(char)* bwtype, uint bandwidth) c_gst_sdp_media_add_bandwidth; ///
-  GstSDPResult function(GstSDPMedia* media, const(char)* nettype, const(char)* addrtype, const(char)* address, uint ttl, uint addrNumber) c_gst_sdp_media_add_connection; ///
-  GstSDPResult function(GstSDPMedia* media, const(char)* format) c_gst_sdp_media_add_format; ///
-  char* function(const(GstSDPMedia)* media) c_gst_sdp_media_as_text; ///
-  uint function(const(GstSDPMedia)* media) c_gst_sdp_media_attributes_len; ///
-  GstSDPResult function(const(GstSDPMedia)* media, GstCaps* caps) c_gst_sdp_media_attributes_to_caps; ///
-  uint function(const(GstSDPMedia)* media) c_gst_sdp_media_bandwidths_len; ///
-  uint function(const(GstSDPMedia)* media) c_gst_sdp_media_connections_len; ///
-  GstSDPResult function(const(GstSDPMedia)* media, GstSDPMedia** copy) c_gst_sdp_media_copy; ///
-  uint function(const(GstSDPMedia)* media) c_gst_sdp_media_formats_len; ///
-  GstSDPResult function(GstSDPMedia* media) c_gst_sdp_media_free; ///
-  const(GstSDPAttribute)* function(const(GstSDPMedia)* media, uint idx) c_gst_sdp_media_get_attribute; ///
-  const(char)* function(const(GstSDPMedia)* media, const(char)* key) c_gst_sdp_media_get_attribute_val; ///
-  const(char)* function(const(GstSDPMedia)* media, const(char)* key, uint nth) c_gst_sdp_media_get_attribute_val_n; ///
-  const(GstSDPBandwidth)* function(const(GstSDPMedia)* media, uint idx) c_gst_sdp_media_get_bandwidth; ///
-  GstCaps* function(const(GstSDPMedia)* media, int pt) c_gst_sdp_media_get_caps_from_media; ///
-  const(GstSDPConnection)* function(const(GstSDPMedia)* media, uint idx) c_gst_sdp_media_get_connection; ///
-  const(char)* function(const(GstSDPMedia)* media, uint idx) c_gst_sdp_media_get_format; ///
-  const(char)* function(const(GstSDPMedia)* media) c_gst_sdp_media_get_information; ///
-  const(GstSDPKey)* function(const(GstSDPMedia)* media) c_gst_sdp_media_get_key; ///
-  const(char)* function(const(GstSDPMedia)* media) c_gst_sdp_media_get_media; ///
-  uint function(const(GstSDPMedia)* media) c_gst_sdp_media_get_num_ports; ///
-  uint function(const(GstSDPMedia)* media) c_gst_sdp_media_get_port; ///
-  const(char)* function(const(GstSDPMedia)* media) c_gst_sdp_media_get_proto; ///
-  GstSDPResult function(GstSDPMedia* media, int idx, GstSDPAttribute* attr) c_gst_sdp_media_insert_attribute; ///
-  GstSDPResult function(GstSDPMedia* media, int idx, GstSDPBandwidth* bw) c_gst_sdp_media_insert_bandwidth; ///
-  GstSDPResult function(GstSDPMedia* media, int idx, GstSDPConnection* conn) c_gst_sdp_media_insert_connection; ///
-  GstSDPResult function(GstSDPMedia* media, int idx, const(char)* format) c_gst_sdp_media_insert_format; ///
-  GstSDPResult function(const(GstSDPMedia)* media, GstMIKEYMessage** mikey) c_gst_sdp_media_parse_keymgmt; ///
-  GstSDPResult function(GstSDPMedia* media, uint idx) c_gst_sdp_media_remove_attribute; ///
-  GstSDPResult function(GstSDPMedia* media, uint idx) c_gst_sdp_media_remove_bandwidth; ///
-  GstSDPResult function(GstSDPMedia* media, uint idx) c_gst_sdp_media_remove_connection; ///
-  GstSDPResult function(GstSDPMedia* media, uint idx) c_gst_sdp_media_remove_format; ///
-  GstSDPResult function(GstSDPMedia* media, uint idx, GstSDPAttribute* attr) c_gst_sdp_media_replace_attribute; ///
-  GstSDPResult function(GstSDPMedia* media, uint idx, GstSDPBandwidth* bw) c_gst_sdp_media_replace_bandwidth; ///
-  GstSDPResult function(GstSDPMedia* media, uint idx, GstSDPConnection* conn) c_gst_sdp_media_replace_connection; ///
-  GstSDPResult function(GstSDPMedia* media, uint idx, const(char)* format) c_gst_sdp_media_replace_format; ///
-  GstSDPResult function(GstSDPMedia* media, const(char)* information) c_gst_sdp_media_set_information; ///
-  GstSDPResult function(GstSDPMedia* media, const(char)* type, const(char)* data) c_gst_sdp_media_set_key; ///
-  GstSDPResult function(GstSDPMedia* media, const(char)* med) c_gst_sdp_media_set_media; ///
-  GstSDPResult function(GstSDPMedia* media, uint port, uint numPorts) c_gst_sdp_media_set_port_info; ///
-  GstSDPResult function(GstSDPMedia* media, const(char)* proto) c_gst_sdp_media_set_proto; ///
-  GstSDPResult function(GstSDPMedia* media) c_gst_sdp_media_uninit; ///
-  GstSDPResult function(const(GstStructure)* structure, GstSDPMedia* media) c_gst_sdp_media_add_media_from_structure; ///
-  GstSDPResult function(GstSDPMedia* media) c_gst_sdp_media_init; ///
-  GstSDPResult function(GstSDPMedia** media) c_gst_sdp_media_new; ///
-  GstSDPResult function(const(GstCaps)* caps, GstSDPMedia* media) c_gst_sdp_media_set_media_from_caps; ///
+// SDPMedia
+private alias c_gst_sdp_media_add_attributeFn = extern(C) GstSDPResult function(GstSDPMedia* media, const(char)* key, const(char)* value) nothrow;
+__gshared c_gst_sdp_media_add_attributeFn c_gst_sdp_media_add_attribute; ///
+private alias c_gst_sdp_media_add_bandwidthFn = extern(C) GstSDPResult function(GstSDPMedia* media, const(char)* bwtype, uint bandwidth) nothrow;
+__gshared c_gst_sdp_media_add_bandwidthFn c_gst_sdp_media_add_bandwidth; ///
+private alias c_gst_sdp_media_add_connectionFn = extern(C) GstSDPResult function(GstSDPMedia* media, const(char)* nettype, const(char)* addrtype, const(char)* address, uint ttl, uint addrNumber) nothrow;
+__gshared c_gst_sdp_media_add_connectionFn c_gst_sdp_media_add_connection; ///
+private alias c_gst_sdp_media_add_formatFn = extern(C) GstSDPResult function(GstSDPMedia* media, const(char)* format) nothrow;
+__gshared c_gst_sdp_media_add_formatFn c_gst_sdp_media_add_format; ///
+private alias c_gst_sdp_media_as_textFn = extern(C) char* function(const(GstSDPMedia)* media) nothrow;
+__gshared c_gst_sdp_media_as_textFn c_gst_sdp_media_as_text; ///
+private alias c_gst_sdp_media_attributes_lenFn = extern(C) uint function(const(GstSDPMedia)* media) nothrow;
+__gshared c_gst_sdp_media_attributes_lenFn c_gst_sdp_media_attributes_len; ///
+private alias c_gst_sdp_media_attributes_to_capsFn = extern(C) GstSDPResult function(const(GstSDPMedia)* media, GstCaps* caps) nothrow;
+__gshared c_gst_sdp_media_attributes_to_capsFn c_gst_sdp_media_attributes_to_caps; ///
+private alias c_gst_sdp_media_bandwidths_lenFn = extern(C) uint function(const(GstSDPMedia)* media) nothrow;
+__gshared c_gst_sdp_media_bandwidths_lenFn c_gst_sdp_media_bandwidths_len; ///
+private alias c_gst_sdp_media_connections_lenFn = extern(C) uint function(const(GstSDPMedia)* media) nothrow;
+__gshared c_gst_sdp_media_connections_lenFn c_gst_sdp_media_connections_len; ///
+private alias c_gst_sdp_media_copyFn = extern(C) GstSDPResult function(const(GstSDPMedia)* media, GstSDPMedia** copy) nothrow;
+__gshared c_gst_sdp_media_copyFn c_gst_sdp_media_copy; ///
+private alias c_gst_sdp_media_formats_lenFn = extern(C) uint function(const(GstSDPMedia)* media) nothrow;
+__gshared c_gst_sdp_media_formats_lenFn c_gst_sdp_media_formats_len; ///
+private alias c_gst_sdp_media_freeFn = extern(C) GstSDPResult function(GstSDPMedia* media) nothrow;
+__gshared c_gst_sdp_media_freeFn c_gst_sdp_media_free; ///
+private alias c_gst_sdp_media_get_attributeFn = extern(C) const(GstSDPAttribute)* function(const(GstSDPMedia)* media, uint idx) nothrow;
+__gshared c_gst_sdp_media_get_attributeFn c_gst_sdp_media_get_attribute; ///
+private alias c_gst_sdp_media_get_attribute_valFn = extern(C) const(char)* function(const(GstSDPMedia)* media, const(char)* key) nothrow;
+__gshared c_gst_sdp_media_get_attribute_valFn c_gst_sdp_media_get_attribute_val; ///
+private alias c_gst_sdp_media_get_attribute_val_nFn = extern(C) const(char)* function(const(GstSDPMedia)* media, const(char)* key, uint nth) nothrow;
+__gshared c_gst_sdp_media_get_attribute_val_nFn c_gst_sdp_media_get_attribute_val_n; ///
+private alias c_gst_sdp_media_get_bandwidthFn = extern(C) const(GstSDPBandwidth)* function(const(GstSDPMedia)* media, uint idx) nothrow;
+__gshared c_gst_sdp_media_get_bandwidthFn c_gst_sdp_media_get_bandwidth; ///
+private alias c_gst_sdp_media_get_caps_from_mediaFn = extern(C) GstCaps* function(const(GstSDPMedia)* media, int pt) nothrow;
+__gshared c_gst_sdp_media_get_caps_from_mediaFn c_gst_sdp_media_get_caps_from_media; ///
+private alias c_gst_sdp_media_get_connectionFn = extern(C) const(GstSDPConnection)* function(const(GstSDPMedia)* media, uint idx) nothrow;
+__gshared c_gst_sdp_media_get_connectionFn c_gst_sdp_media_get_connection; ///
+private alias c_gst_sdp_media_get_formatFn = extern(C) const(char)* function(const(GstSDPMedia)* media, uint idx) nothrow;
+__gshared c_gst_sdp_media_get_formatFn c_gst_sdp_media_get_format; ///
+private alias c_gst_sdp_media_get_informationFn = extern(C) const(char)* function(const(GstSDPMedia)* media) nothrow;
+__gshared c_gst_sdp_media_get_informationFn c_gst_sdp_media_get_information; ///
+private alias c_gst_sdp_media_get_keyFn = extern(C) const(GstSDPKey)* function(const(GstSDPMedia)* media) nothrow;
+__gshared c_gst_sdp_media_get_keyFn c_gst_sdp_media_get_key; ///
+private alias c_gst_sdp_media_get_mediaFn = extern(C) const(char)* function(const(GstSDPMedia)* media) nothrow;
+__gshared c_gst_sdp_media_get_mediaFn c_gst_sdp_media_get_media; ///
+private alias c_gst_sdp_media_get_num_portsFn = extern(C) uint function(const(GstSDPMedia)* media) nothrow;
+__gshared c_gst_sdp_media_get_num_portsFn c_gst_sdp_media_get_num_ports; ///
+private alias c_gst_sdp_media_get_portFn = extern(C) uint function(const(GstSDPMedia)* media) nothrow;
+__gshared c_gst_sdp_media_get_portFn c_gst_sdp_media_get_port; ///
+private alias c_gst_sdp_media_get_protoFn = extern(C) const(char)* function(const(GstSDPMedia)* media) nothrow;
+__gshared c_gst_sdp_media_get_protoFn c_gst_sdp_media_get_proto; ///
+private alias c_gst_sdp_media_insert_attributeFn = extern(C) GstSDPResult function(GstSDPMedia* media, int idx, GstSDPAttribute* attr) nothrow;
+__gshared c_gst_sdp_media_insert_attributeFn c_gst_sdp_media_insert_attribute; ///
+private alias c_gst_sdp_media_insert_bandwidthFn = extern(C) GstSDPResult function(GstSDPMedia* media, int idx, GstSDPBandwidth* bw) nothrow;
+__gshared c_gst_sdp_media_insert_bandwidthFn c_gst_sdp_media_insert_bandwidth; ///
+private alias c_gst_sdp_media_insert_connectionFn = extern(C) GstSDPResult function(GstSDPMedia* media, int idx, GstSDPConnection* conn) nothrow;
+__gshared c_gst_sdp_media_insert_connectionFn c_gst_sdp_media_insert_connection; ///
+private alias c_gst_sdp_media_insert_formatFn = extern(C) GstSDPResult function(GstSDPMedia* media, int idx, const(char)* format) nothrow;
+__gshared c_gst_sdp_media_insert_formatFn c_gst_sdp_media_insert_format; ///
+private alias c_gst_sdp_media_parse_keymgmtFn = extern(C) GstSDPResult function(const(GstSDPMedia)* media, GstMIKEYMessage** mikey) nothrow;
+__gshared c_gst_sdp_media_parse_keymgmtFn c_gst_sdp_media_parse_keymgmt; ///
+private alias c_gst_sdp_media_remove_attributeFn = extern(C) GstSDPResult function(GstSDPMedia* media, uint idx) nothrow;
+__gshared c_gst_sdp_media_remove_attributeFn c_gst_sdp_media_remove_attribute; ///
+private alias c_gst_sdp_media_remove_bandwidthFn = extern(C) GstSDPResult function(GstSDPMedia* media, uint idx) nothrow;
+__gshared c_gst_sdp_media_remove_bandwidthFn c_gst_sdp_media_remove_bandwidth; ///
+private alias c_gst_sdp_media_remove_connectionFn = extern(C) GstSDPResult function(GstSDPMedia* media, uint idx) nothrow;
+__gshared c_gst_sdp_media_remove_connectionFn c_gst_sdp_media_remove_connection; ///
+private alias c_gst_sdp_media_remove_formatFn = extern(C) GstSDPResult function(GstSDPMedia* media, uint idx) nothrow;
+__gshared c_gst_sdp_media_remove_formatFn c_gst_sdp_media_remove_format; ///
+private alias c_gst_sdp_media_replace_attributeFn = extern(C) GstSDPResult function(GstSDPMedia* media, uint idx, GstSDPAttribute* attr) nothrow;
+__gshared c_gst_sdp_media_replace_attributeFn c_gst_sdp_media_replace_attribute; ///
+private alias c_gst_sdp_media_replace_bandwidthFn = extern(C) GstSDPResult function(GstSDPMedia* media, uint idx, GstSDPBandwidth* bw) nothrow;
+__gshared c_gst_sdp_media_replace_bandwidthFn c_gst_sdp_media_replace_bandwidth; ///
+private alias c_gst_sdp_media_replace_connectionFn = extern(C) GstSDPResult function(GstSDPMedia* media, uint idx, GstSDPConnection* conn) nothrow;
+__gshared c_gst_sdp_media_replace_connectionFn c_gst_sdp_media_replace_connection; ///
+private alias c_gst_sdp_media_replace_formatFn = extern(C) GstSDPResult function(GstSDPMedia* media, uint idx, const(char)* format) nothrow;
+__gshared c_gst_sdp_media_replace_formatFn c_gst_sdp_media_replace_format; ///
+private alias c_gst_sdp_media_set_informationFn = extern(C) GstSDPResult function(GstSDPMedia* media, const(char)* information) nothrow;
+__gshared c_gst_sdp_media_set_informationFn c_gst_sdp_media_set_information; ///
+private alias c_gst_sdp_media_set_keyFn = extern(C) GstSDPResult function(GstSDPMedia* media, const(char)* type, const(char)* data) nothrow;
+__gshared c_gst_sdp_media_set_keyFn c_gst_sdp_media_set_key; ///
+private alias c_gst_sdp_media_set_mediaFn = extern(C) GstSDPResult function(GstSDPMedia* media, const(char)* med) nothrow;
+__gshared c_gst_sdp_media_set_mediaFn c_gst_sdp_media_set_media; ///
+private alias c_gst_sdp_media_set_port_infoFn = extern(C) GstSDPResult function(GstSDPMedia* media, uint port, uint numPorts) nothrow;
+__gshared c_gst_sdp_media_set_port_infoFn c_gst_sdp_media_set_port_info; ///
+private alias c_gst_sdp_media_set_protoFn = extern(C) GstSDPResult function(GstSDPMedia* media, const(char)* proto) nothrow;
+__gshared c_gst_sdp_media_set_protoFn c_gst_sdp_media_set_proto; ///
+private alias c_gst_sdp_media_uninitFn = extern(C) GstSDPResult function(GstSDPMedia* media) nothrow;
+__gshared c_gst_sdp_media_uninitFn c_gst_sdp_media_uninit; ///
+private alias c_gst_sdp_media_add_media_from_structureFn = extern(C) GstSDPResult function(const(GstStructure)* structure, GstSDPMedia* media) nothrow;
+__gshared c_gst_sdp_media_add_media_from_structureFn c_gst_sdp_media_add_media_from_structure; ///
+private alias c_gst_sdp_media_initFn = extern(C) GstSDPResult function(GstSDPMedia* media) nothrow;
+__gshared c_gst_sdp_media_initFn c_gst_sdp_media_init; ///
+private alias c_gst_sdp_media_newFn = extern(C) GstSDPResult function(GstSDPMedia** media) nothrow;
+__gshared c_gst_sdp_media_newFn c_gst_sdp_media_new; ///
+private alias c_gst_sdp_media_set_media_from_capsFn = extern(C) GstSDPResult function(const(GstCaps)* caps, GstSDPMedia* media) nothrow;
+__gshared c_gst_sdp_media_set_media_from_capsFn c_gst_sdp_media_set_media_from_caps; ///
 
-  // SDPMessage
-  GType function() c_gst_sdp_message_get_type; ///
-  GstSDPResult function(GstSDPMessage* msg, const(char)* key, const(char)* value) c_gst_sdp_message_add_attribute; ///
-  GstSDPResult function(GstSDPMessage* msg, const(char)* bwtype, uint bandwidth) c_gst_sdp_message_add_bandwidth; ///
-  GstSDPResult function(GstSDPMessage* msg, const(char)* email) c_gst_sdp_message_add_email; ///
-  GstSDPResult function(GstSDPMessage* msg, GstSDPMedia* media) c_gst_sdp_message_add_media; ///
-  GstSDPResult function(GstSDPMessage* msg, const(char)* phone) c_gst_sdp_message_add_phone; ///
-  GstSDPResult function(GstSDPMessage* msg, const(char)* start, const(char)* stop, const(char*)* repeat) c_gst_sdp_message_add_time; ///
-  GstSDPResult function(GstSDPMessage* msg, const(char)* adjTime, const(char)* typedTime) c_gst_sdp_message_add_zone; ///
-  char* function(const(GstSDPMessage)* msg) c_gst_sdp_message_as_text; ///
-  uint function(const(GstSDPMessage)* msg) c_gst_sdp_message_attributes_len; ///
-  GstSDPResult function(const(GstSDPMessage)* msg, GstCaps* caps) c_gst_sdp_message_attributes_to_caps; ///
-  uint function(const(GstSDPMessage)* msg) c_gst_sdp_message_bandwidths_len; ///
-  GstSDPResult function(const(GstSDPMessage)* msg, GstSDPMessage** copy) c_gst_sdp_message_copy; ///
-  GstSDPResult function(const(GstSDPMessage)* msg) c_gst_sdp_message_dump; ///
-  uint function(const(GstSDPMessage)* msg) c_gst_sdp_message_emails_len; ///
-  GstSDPResult function(GstSDPMessage* msg) c_gst_sdp_message_free; ///
-  const(GstSDPAttribute)* function(const(GstSDPMessage)* msg, uint idx) c_gst_sdp_message_get_attribute; ///
-  const(char)* function(const(GstSDPMessage)* msg, const(char)* key) c_gst_sdp_message_get_attribute_val; ///
-  const(char)* function(const(GstSDPMessage)* msg, const(char)* key, uint nth) c_gst_sdp_message_get_attribute_val_n; ///
-  const(GstSDPBandwidth)* function(const(GstSDPMessage)* msg, uint idx) c_gst_sdp_message_get_bandwidth; ///
-  const(GstSDPConnection)* function(const(GstSDPMessage)* msg) c_gst_sdp_message_get_connection; ///
-  const(char)* function(const(GstSDPMessage)* msg, uint idx) c_gst_sdp_message_get_email; ///
-  const(char)* function(const(GstSDPMessage)* msg) c_gst_sdp_message_get_information; ///
-  const(GstSDPKey)* function(const(GstSDPMessage)* msg) c_gst_sdp_message_get_key; ///
-  const(GstSDPMedia)* function(const(GstSDPMessage)* msg, uint idx) c_gst_sdp_message_get_media; ///
-  const(GstSDPOrigin)* function(const(GstSDPMessage)* msg) c_gst_sdp_message_get_origin; ///
-  const(char)* function(const(GstSDPMessage)* msg, uint idx) c_gst_sdp_message_get_phone; ///
-  const(char)* function(const(GstSDPMessage)* msg) c_gst_sdp_message_get_session_name; ///
-  const(GstSDPTime)* function(const(GstSDPMessage)* msg, uint idx) c_gst_sdp_message_get_time; ///
-  const(char)* function(const(GstSDPMessage)* msg) c_gst_sdp_message_get_uri; ///
-  const(char)* function(const(GstSDPMessage)* msg) c_gst_sdp_message_get_version; ///
-  const(GstSDPZone)* function(const(GstSDPMessage)* msg, uint idx) c_gst_sdp_message_get_zone; ///
-  GstSDPResult function(GstSDPMessage* msg, int idx, GstSDPAttribute* attr) c_gst_sdp_message_insert_attribute; ///
-  GstSDPResult function(GstSDPMessage* msg, int idx, GstSDPBandwidth* bw) c_gst_sdp_message_insert_bandwidth; ///
-  GstSDPResult function(GstSDPMessage* msg, int idx, const(char)* email) c_gst_sdp_message_insert_email; ///
-  GstSDPResult function(GstSDPMessage* msg, int idx, const(char)* phone) c_gst_sdp_message_insert_phone; ///
-  GstSDPResult function(GstSDPMessage* msg, int idx, GstSDPTime* t) c_gst_sdp_message_insert_time; ///
-  GstSDPResult function(GstSDPMessage* msg, int idx, GstSDPZone* zone) c_gst_sdp_message_insert_zone; ///
-  uint function(const(GstSDPMessage)* msg) c_gst_sdp_message_medias_len; ///
-  GstSDPResult function(const(GstSDPMessage)* msg, GstMIKEYMessage** mikey) c_gst_sdp_message_parse_keymgmt; ///
-  uint function(const(GstSDPMessage)* msg) c_gst_sdp_message_phones_len; ///
-  GstSDPResult function(GstSDPMessage* msg, uint idx) c_gst_sdp_message_remove_attribute; ///
-  GstSDPResult function(GstSDPMessage* msg, uint idx) c_gst_sdp_message_remove_bandwidth; ///
-  GstSDPResult function(GstSDPMessage* msg, uint idx) c_gst_sdp_message_remove_email; ///
-  GstSDPResult function(GstSDPMessage* msg, uint idx) c_gst_sdp_message_remove_media; ///
-  GstSDPResult function(GstSDPMessage* msg, uint idx) c_gst_sdp_message_remove_phone; ///
-  GstSDPResult function(GstSDPMessage* msg, uint idx) c_gst_sdp_message_remove_time; ///
-  GstSDPResult function(GstSDPMessage* msg, uint idx) c_gst_sdp_message_remove_zone; ///
-  GstSDPResult function(GstSDPMessage* msg, uint idx, GstSDPAttribute* attr) c_gst_sdp_message_replace_attribute; ///
-  GstSDPResult function(GstSDPMessage* msg, uint idx, GstSDPBandwidth* bw) c_gst_sdp_message_replace_bandwidth; ///
-  GstSDPResult function(GstSDPMessage* msg, uint idx, const(char)* email) c_gst_sdp_message_replace_email; ///
-  GstSDPResult function(GstSDPMessage* msg, uint idx, const(char)* phone) c_gst_sdp_message_replace_phone; ///
-  GstSDPResult function(GstSDPMessage* msg, uint idx, GstSDPTime* t) c_gst_sdp_message_replace_time; ///
-  GstSDPResult function(GstSDPMessage* msg, uint idx, GstSDPZone* zone) c_gst_sdp_message_replace_zone; ///
-  GstSDPResult function(GstSDPMessage* msg, const(char)* nettype, const(char)* addrtype, const(char)* address, uint ttl, uint addrNumber) c_gst_sdp_message_set_connection; ///
-  GstSDPResult function(GstSDPMessage* msg, const(char)* information) c_gst_sdp_message_set_information; ///
-  GstSDPResult function(GstSDPMessage* msg, const(char)* type, const(char)* data) c_gst_sdp_message_set_key; ///
-  GstSDPResult function(GstSDPMessage* msg, const(char)* username, const(char)* sessId, const(char)* sessVersion, const(char)* nettype, const(char)* addrtype, const(char)* addr) c_gst_sdp_message_set_origin; ///
-  GstSDPResult function(GstSDPMessage* msg, const(char)* sessionName) c_gst_sdp_message_set_session_name; ///
-  GstSDPResult function(GstSDPMessage* msg, const(char)* uri) c_gst_sdp_message_set_uri; ///
-  GstSDPResult function(GstSDPMessage* msg, const(char)* version_) c_gst_sdp_message_set_version; ///
-  uint function(const(GstSDPMessage)* msg) c_gst_sdp_message_times_len; ///
-  GstSDPResult function(GstSDPMessage* msg) c_gst_sdp_message_uninit; ///
-  uint function(const(GstSDPMessage)* msg) c_gst_sdp_message_zones_len; ///
-  char* function(const(char)* scheme, const(GstSDPMessage)* msg) c_gst_sdp_message_as_uri; ///
-  GstSDPResult function(GstSDPMessage* msg) c_gst_sdp_message_init; ///
-  GstSDPResult function(GstSDPMessage** msg) c_gst_sdp_message_new; ///
-  GstSDPResult function(const(char)* text, GstSDPMessage** msg) c_gst_sdp_message_new_from_text; ///
-  GstSDPResult function(const(ubyte)* data, uint size, GstSDPMessage* msg) c_gst_sdp_message_parse_buffer; ///
-  GstSDPResult function(const(char)* uri, GstSDPMessage* msg) c_gst_sdp_message_parse_uri; ///
+// SDPMessage
+private alias c_gst_sdp_message_get_typeFn = extern(C) GType function() nothrow;
+__gshared c_gst_sdp_message_get_typeFn c_gst_sdp_message_get_type; ///
+private alias c_gst_sdp_message_add_attributeFn = extern(C) GstSDPResult function(GstSDPMessage* msg, const(char)* key, const(char)* value) nothrow;
+__gshared c_gst_sdp_message_add_attributeFn c_gst_sdp_message_add_attribute; ///
+private alias c_gst_sdp_message_add_bandwidthFn = extern(C) GstSDPResult function(GstSDPMessage* msg, const(char)* bwtype, uint bandwidth) nothrow;
+__gshared c_gst_sdp_message_add_bandwidthFn c_gst_sdp_message_add_bandwidth; ///
+private alias c_gst_sdp_message_add_emailFn = extern(C) GstSDPResult function(GstSDPMessage* msg, const(char)* email) nothrow;
+__gshared c_gst_sdp_message_add_emailFn c_gst_sdp_message_add_email; ///
+private alias c_gst_sdp_message_add_mediaFn = extern(C) GstSDPResult function(GstSDPMessage* msg, GstSDPMedia* media) nothrow;
+__gshared c_gst_sdp_message_add_mediaFn c_gst_sdp_message_add_media; ///
+private alias c_gst_sdp_message_add_phoneFn = extern(C) GstSDPResult function(GstSDPMessage* msg, const(char)* phone) nothrow;
+__gshared c_gst_sdp_message_add_phoneFn c_gst_sdp_message_add_phone; ///
+private alias c_gst_sdp_message_add_timeFn = extern(C) GstSDPResult function(GstSDPMessage* msg, const(char)* start, const(char)* stop, const(char*)* repeat) nothrow;
+__gshared c_gst_sdp_message_add_timeFn c_gst_sdp_message_add_time; ///
+private alias c_gst_sdp_message_add_zoneFn = extern(C) GstSDPResult function(GstSDPMessage* msg, const(char)* adjTime, const(char)* typedTime) nothrow;
+__gshared c_gst_sdp_message_add_zoneFn c_gst_sdp_message_add_zone; ///
+private alias c_gst_sdp_message_as_textFn = extern(C) char* function(const(GstSDPMessage)* msg) nothrow;
+__gshared c_gst_sdp_message_as_textFn c_gst_sdp_message_as_text; ///
+private alias c_gst_sdp_message_attributes_lenFn = extern(C) uint function(const(GstSDPMessage)* msg) nothrow;
+__gshared c_gst_sdp_message_attributes_lenFn c_gst_sdp_message_attributes_len; ///
+private alias c_gst_sdp_message_attributes_to_capsFn = extern(C) GstSDPResult function(const(GstSDPMessage)* msg, GstCaps* caps) nothrow;
+__gshared c_gst_sdp_message_attributes_to_capsFn c_gst_sdp_message_attributes_to_caps; ///
+private alias c_gst_sdp_message_bandwidths_lenFn = extern(C) uint function(const(GstSDPMessage)* msg) nothrow;
+__gshared c_gst_sdp_message_bandwidths_lenFn c_gst_sdp_message_bandwidths_len; ///
+private alias c_gst_sdp_message_copyFn = extern(C) GstSDPResult function(const(GstSDPMessage)* msg, GstSDPMessage** copy) nothrow;
+__gshared c_gst_sdp_message_copyFn c_gst_sdp_message_copy; ///
+private alias c_gst_sdp_message_dumpFn = extern(C) GstSDPResult function(const(GstSDPMessage)* msg) nothrow;
+__gshared c_gst_sdp_message_dumpFn c_gst_sdp_message_dump; ///
+private alias c_gst_sdp_message_emails_lenFn = extern(C) uint function(const(GstSDPMessage)* msg) nothrow;
+__gshared c_gst_sdp_message_emails_lenFn c_gst_sdp_message_emails_len; ///
+private alias c_gst_sdp_message_freeFn = extern(C) GstSDPResult function(GstSDPMessage* msg) nothrow;
+__gshared c_gst_sdp_message_freeFn c_gst_sdp_message_free; ///
+private alias c_gst_sdp_message_get_attributeFn = extern(C) const(GstSDPAttribute)* function(const(GstSDPMessage)* msg, uint idx) nothrow;
+__gshared c_gst_sdp_message_get_attributeFn c_gst_sdp_message_get_attribute; ///
+private alias c_gst_sdp_message_get_attribute_valFn = extern(C) const(char)* function(const(GstSDPMessage)* msg, const(char)* key) nothrow;
+__gshared c_gst_sdp_message_get_attribute_valFn c_gst_sdp_message_get_attribute_val; ///
+private alias c_gst_sdp_message_get_attribute_val_nFn = extern(C) const(char)* function(const(GstSDPMessage)* msg, const(char)* key, uint nth) nothrow;
+__gshared c_gst_sdp_message_get_attribute_val_nFn c_gst_sdp_message_get_attribute_val_n; ///
+private alias c_gst_sdp_message_get_bandwidthFn = extern(C) const(GstSDPBandwidth)* function(const(GstSDPMessage)* msg, uint idx) nothrow;
+__gshared c_gst_sdp_message_get_bandwidthFn c_gst_sdp_message_get_bandwidth; ///
+private alias c_gst_sdp_message_get_connectionFn = extern(C) const(GstSDPConnection)* function(const(GstSDPMessage)* msg) nothrow;
+__gshared c_gst_sdp_message_get_connectionFn c_gst_sdp_message_get_connection; ///
+private alias c_gst_sdp_message_get_emailFn = extern(C) const(char)* function(const(GstSDPMessage)* msg, uint idx) nothrow;
+__gshared c_gst_sdp_message_get_emailFn c_gst_sdp_message_get_email; ///
+private alias c_gst_sdp_message_get_informationFn = extern(C) const(char)* function(const(GstSDPMessage)* msg) nothrow;
+__gshared c_gst_sdp_message_get_informationFn c_gst_sdp_message_get_information; ///
+private alias c_gst_sdp_message_get_keyFn = extern(C) const(GstSDPKey)* function(const(GstSDPMessage)* msg) nothrow;
+__gshared c_gst_sdp_message_get_keyFn c_gst_sdp_message_get_key; ///
+private alias c_gst_sdp_message_get_mediaFn = extern(C) const(GstSDPMedia)* function(const(GstSDPMessage)* msg, uint idx) nothrow;
+__gshared c_gst_sdp_message_get_mediaFn c_gst_sdp_message_get_media; ///
+private alias c_gst_sdp_message_get_originFn = extern(C) const(GstSDPOrigin)* function(const(GstSDPMessage)* msg) nothrow;
+__gshared c_gst_sdp_message_get_originFn c_gst_sdp_message_get_origin; ///
+private alias c_gst_sdp_message_get_phoneFn = extern(C) const(char)* function(const(GstSDPMessage)* msg, uint idx) nothrow;
+__gshared c_gst_sdp_message_get_phoneFn c_gst_sdp_message_get_phone; ///
+private alias c_gst_sdp_message_get_session_nameFn = extern(C) const(char)* function(const(GstSDPMessage)* msg) nothrow;
+__gshared c_gst_sdp_message_get_session_nameFn c_gst_sdp_message_get_session_name; ///
+private alias c_gst_sdp_message_get_timeFn = extern(C) const(GstSDPTime)* function(const(GstSDPMessage)* msg, uint idx) nothrow;
+__gshared c_gst_sdp_message_get_timeFn c_gst_sdp_message_get_time; ///
+private alias c_gst_sdp_message_get_uriFn = extern(C) const(char)* function(const(GstSDPMessage)* msg) nothrow;
+__gshared c_gst_sdp_message_get_uriFn c_gst_sdp_message_get_uri; ///
+private alias c_gst_sdp_message_get_versionFn = extern(C) const(char)* function(const(GstSDPMessage)* msg) nothrow;
+__gshared c_gst_sdp_message_get_versionFn c_gst_sdp_message_get_version; ///
+private alias c_gst_sdp_message_get_zoneFn = extern(C) const(GstSDPZone)* function(const(GstSDPMessage)* msg, uint idx) nothrow;
+__gshared c_gst_sdp_message_get_zoneFn c_gst_sdp_message_get_zone; ///
+private alias c_gst_sdp_message_insert_attributeFn = extern(C) GstSDPResult function(GstSDPMessage* msg, int idx, GstSDPAttribute* attr) nothrow;
+__gshared c_gst_sdp_message_insert_attributeFn c_gst_sdp_message_insert_attribute; ///
+private alias c_gst_sdp_message_insert_bandwidthFn = extern(C) GstSDPResult function(GstSDPMessage* msg, int idx, GstSDPBandwidth* bw) nothrow;
+__gshared c_gst_sdp_message_insert_bandwidthFn c_gst_sdp_message_insert_bandwidth; ///
+private alias c_gst_sdp_message_insert_emailFn = extern(C) GstSDPResult function(GstSDPMessage* msg, int idx, const(char)* email) nothrow;
+__gshared c_gst_sdp_message_insert_emailFn c_gst_sdp_message_insert_email; ///
+private alias c_gst_sdp_message_insert_phoneFn = extern(C) GstSDPResult function(GstSDPMessage* msg, int idx, const(char)* phone) nothrow;
+__gshared c_gst_sdp_message_insert_phoneFn c_gst_sdp_message_insert_phone; ///
+private alias c_gst_sdp_message_insert_timeFn = extern(C) GstSDPResult function(GstSDPMessage* msg, int idx, GstSDPTime* t) nothrow;
+__gshared c_gst_sdp_message_insert_timeFn c_gst_sdp_message_insert_time; ///
+private alias c_gst_sdp_message_insert_zoneFn = extern(C) GstSDPResult function(GstSDPMessage* msg, int idx, GstSDPZone* zone) nothrow;
+__gshared c_gst_sdp_message_insert_zoneFn c_gst_sdp_message_insert_zone; ///
+private alias c_gst_sdp_message_medias_lenFn = extern(C) uint function(const(GstSDPMessage)* msg) nothrow;
+__gshared c_gst_sdp_message_medias_lenFn c_gst_sdp_message_medias_len; ///
+private alias c_gst_sdp_message_parse_keymgmtFn = extern(C) GstSDPResult function(const(GstSDPMessage)* msg, GstMIKEYMessage** mikey) nothrow;
+__gshared c_gst_sdp_message_parse_keymgmtFn c_gst_sdp_message_parse_keymgmt; ///
+private alias c_gst_sdp_message_phones_lenFn = extern(C) uint function(const(GstSDPMessage)* msg) nothrow;
+__gshared c_gst_sdp_message_phones_lenFn c_gst_sdp_message_phones_len; ///
+private alias c_gst_sdp_message_remove_attributeFn = extern(C) GstSDPResult function(GstSDPMessage* msg, uint idx) nothrow;
+__gshared c_gst_sdp_message_remove_attributeFn c_gst_sdp_message_remove_attribute; ///
+private alias c_gst_sdp_message_remove_bandwidthFn = extern(C) GstSDPResult function(GstSDPMessage* msg, uint idx) nothrow;
+__gshared c_gst_sdp_message_remove_bandwidthFn c_gst_sdp_message_remove_bandwidth; ///
+private alias c_gst_sdp_message_remove_emailFn = extern(C) GstSDPResult function(GstSDPMessage* msg, uint idx) nothrow;
+__gshared c_gst_sdp_message_remove_emailFn c_gst_sdp_message_remove_email; ///
+private alias c_gst_sdp_message_remove_mediaFn = extern(C) GstSDPResult function(GstSDPMessage* msg, uint idx) nothrow;
+__gshared c_gst_sdp_message_remove_mediaFn c_gst_sdp_message_remove_media; ///
+private alias c_gst_sdp_message_remove_phoneFn = extern(C) GstSDPResult function(GstSDPMessage* msg, uint idx) nothrow;
+__gshared c_gst_sdp_message_remove_phoneFn c_gst_sdp_message_remove_phone; ///
+private alias c_gst_sdp_message_remove_timeFn = extern(C) GstSDPResult function(GstSDPMessage* msg, uint idx) nothrow;
+__gshared c_gst_sdp_message_remove_timeFn c_gst_sdp_message_remove_time; ///
+private alias c_gst_sdp_message_remove_zoneFn = extern(C) GstSDPResult function(GstSDPMessage* msg, uint idx) nothrow;
+__gshared c_gst_sdp_message_remove_zoneFn c_gst_sdp_message_remove_zone; ///
+private alias c_gst_sdp_message_replace_attributeFn = extern(C) GstSDPResult function(GstSDPMessage* msg, uint idx, GstSDPAttribute* attr) nothrow;
+__gshared c_gst_sdp_message_replace_attributeFn c_gst_sdp_message_replace_attribute; ///
+private alias c_gst_sdp_message_replace_bandwidthFn = extern(C) GstSDPResult function(GstSDPMessage* msg, uint idx, GstSDPBandwidth* bw) nothrow;
+__gshared c_gst_sdp_message_replace_bandwidthFn c_gst_sdp_message_replace_bandwidth; ///
+private alias c_gst_sdp_message_replace_emailFn = extern(C) GstSDPResult function(GstSDPMessage* msg, uint idx, const(char)* email) nothrow;
+__gshared c_gst_sdp_message_replace_emailFn c_gst_sdp_message_replace_email; ///
+private alias c_gst_sdp_message_replace_phoneFn = extern(C) GstSDPResult function(GstSDPMessage* msg, uint idx, const(char)* phone) nothrow;
+__gshared c_gst_sdp_message_replace_phoneFn c_gst_sdp_message_replace_phone; ///
+private alias c_gst_sdp_message_replace_timeFn = extern(C) GstSDPResult function(GstSDPMessage* msg, uint idx, GstSDPTime* t) nothrow;
+__gshared c_gst_sdp_message_replace_timeFn c_gst_sdp_message_replace_time; ///
+private alias c_gst_sdp_message_replace_zoneFn = extern(C) GstSDPResult function(GstSDPMessage* msg, uint idx, GstSDPZone* zone) nothrow;
+__gshared c_gst_sdp_message_replace_zoneFn c_gst_sdp_message_replace_zone; ///
+private alias c_gst_sdp_message_set_connectionFn = extern(C) GstSDPResult function(GstSDPMessage* msg, const(char)* nettype, const(char)* addrtype, const(char)* address, uint ttl, uint addrNumber) nothrow;
+__gshared c_gst_sdp_message_set_connectionFn c_gst_sdp_message_set_connection; ///
+private alias c_gst_sdp_message_set_informationFn = extern(C) GstSDPResult function(GstSDPMessage* msg, const(char)* information) nothrow;
+__gshared c_gst_sdp_message_set_informationFn c_gst_sdp_message_set_information; ///
+private alias c_gst_sdp_message_set_keyFn = extern(C) GstSDPResult function(GstSDPMessage* msg, const(char)* type, const(char)* data) nothrow;
+__gshared c_gst_sdp_message_set_keyFn c_gst_sdp_message_set_key; ///
+private alias c_gst_sdp_message_set_originFn = extern(C) GstSDPResult function(GstSDPMessage* msg, const(char)* username, const(char)* sessId, const(char)* sessVersion, const(char)* nettype, const(char)* addrtype, const(char)* addr) nothrow;
+__gshared c_gst_sdp_message_set_originFn c_gst_sdp_message_set_origin; ///
+private alias c_gst_sdp_message_set_session_nameFn = extern(C) GstSDPResult function(GstSDPMessage* msg, const(char)* sessionName) nothrow;
+__gshared c_gst_sdp_message_set_session_nameFn c_gst_sdp_message_set_session_name; ///
+private alias c_gst_sdp_message_set_uriFn = extern(C) GstSDPResult function(GstSDPMessage* msg, const(char)* uri) nothrow;
+__gshared c_gst_sdp_message_set_uriFn c_gst_sdp_message_set_uri; ///
+private alias c_gst_sdp_message_set_versionFn = extern(C) GstSDPResult function(GstSDPMessage* msg, const(char)* version_) nothrow;
+__gshared c_gst_sdp_message_set_versionFn c_gst_sdp_message_set_version; ///
+private alias c_gst_sdp_message_times_lenFn = extern(C) uint function(const(GstSDPMessage)* msg) nothrow;
+__gshared c_gst_sdp_message_times_lenFn c_gst_sdp_message_times_len; ///
+private alias c_gst_sdp_message_uninitFn = extern(C) GstSDPResult function(GstSDPMessage* msg) nothrow;
+__gshared c_gst_sdp_message_uninitFn c_gst_sdp_message_uninit; ///
+private alias c_gst_sdp_message_zones_lenFn = extern(C) uint function(const(GstSDPMessage)* msg) nothrow;
+__gshared c_gst_sdp_message_zones_lenFn c_gst_sdp_message_zones_len; ///
+private alias c_gst_sdp_message_as_uriFn = extern(C) char* function(const(char)* scheme, const(GstSDPMessage)* msg) nothrow;
+__gshared c_gst_sdp_message_as_uriFn c_gst_sdp_message_as_uri; ///
+private alias c_gst_sdp_message_initFn = extern(C) GstSDPResult function(GstSDPMessage* msg) nothrow;
+__gshared c_gst_sdp_message_initFn c_gst_sdp_message_init; ///
+private alias c_gst_sdp_message_newFn = extern(C) GstSDPResult function(GstSDPMessage** msg) nothrow;
+__gshared c_gst_sdp_message_newFn c_gst_sdp_message_new; ///
+private alias c_gst_sdp_message_new_from_textFn = extern(C) GstSDPResult function(const(char)* text, GstSDPMessage** msg) nothrow;
+__gshared c_gst_sdp_message_new_from_textFn c_gst_sdp_message_new_from_text; ///
+private alias c_gst_sdp_message_parse_bufferFn = extern(C) GstSDPResult function(const(ubyte)* data, uint size, GstSDPMessage* msg) nothrow;
+__gshared c_gst_sdp_message_parse_bufferFn c_gst_sdp_message_parse_buffer; ///
+private alias c_gst_sdp_message_parse_uriFn = extern(C) GstSDPResult function(const(char)* uri, GstSDPMessage* msg) nothrow;
+__gshared c_gst_sdp_message_parse_uriFn c_gst_sdp_message_parse_uri; ///
 
-  // SDPTime
-  GstSDPResult function(GstSDPTime* t) c_gst_sdp_time_clear; ///
-  GstSDPResult function(GstSDPTime* t, const(char)* start, const(char)* stop, const(char*)* repeat) c_gst_sdp_time_set; ///
+// SDPTime
+private alias c_gst_sdp_time_clearFn = extern(C) GstSDPResult function(GstSDPTime* t) nothrow;
+__gshared c_gst_sdp_time_clearFn c_gst_sdp_time_clear; ///
+private alias c_gst_sdp_time_setFn = extern(C) GstSDPResult function(GstSDPTime* t, const(char)* start, const(char)* stop, const(char*)* repeat) nothrow;
+__gshared c_gst_sdp_time_setFn c_gst_sdp_time_set; ///
 
-  // SDPZone
-  GstSDPResult function(GstSDPZone* zone) c_gst_sdp_zone_clear; ///
-  GstSDPResult function(GstSDPZone* zone, const(char)* adjTime, const(char)* typedTime) c_gst_sdp_zone_set; ///
+// SDPZone
+private alias c_gst_sdp_zone_clearFn = extern(C) GstSDPResult function(GstSDPZone* zone) nothrow;
+__gshared c_gst_sdp_zone_clearFn c_gst_sdp_zone_clear; ///
+private alias c_gst_sdp_zone_setFn = extern(C) GstSDPResult function(GstSDPZone* zone, const(char)* adjTime, const(char)* typedTime) nothrow;
+__gshared c_gst_sdp_zone_setFn c_gst_sdp_zone_set; ///
 
-  // global
-  gboolean function(const(char)* nettype, const(char)* addrtype, const(char)* addr) c_gst_sdp_address_is_multicast; ///
-  char* function(const(char)* uri, const(char)* base64) c_gst_sdp_make_keymgmt; ///
-}
+// global
+private alias c_gst_sdp_address_is_multicastFn = extern(C) gboolean function(const(char)* nettype, const(char)* addrtype, const(char)* addr) nothrow;
+__gshared c_gst_sdp_address_is_multicastFn c_gst_sdp_address_is_multicast; ///
+private alias c_gst_sdp_make_keymgmtFn = extern(C) char* function(const(char)* uri, const(char)* base64) nothrow;
+__gshared c_gst_sdp_make_keymgmtFn c_gst_sdp_make_keymgmt; ///
 
 // MIKEYMessage
 
