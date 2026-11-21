@@ -19,11 +19,13 @@ This package repository currently contains bindings for the following libraries:
  * [Panel](https://github.com/GNOME/libpanel) - Dock/panel library for Gtk4 and Adw (for use with IDEs and other applications benefiting from dynamic interfaces)
  * [Vte](https://github.com/GNOME/vte) - Virtual terminal widget library for Gtk (supports versions for Gtk3 and Gtk4)
  * [GtkSource](https://gitlab.gnome.org/GNOME/gtksourceview/) - Source code viewer widget for Gtk (supports versions for Gtk3 and Gtk4)
- * [Apache Arrow](https://arrow.apache.org/) - The universal columnar format and multi-language toolbox for fast data interchange and in-memory analytics
  * [libsoup](https://github.com/GNOME/libsoup) - An HTTP client/server library
  * [Rsvg](https://github.com/GNOME/librsvg) - SVG graphics rendering library
  * [json-glib](https://github.com/GNOME/json-glib) - JSON library
  * And [more](packages)!
+
+The [Apache Arrow](https://arrow.apache.org/) and Parquet bindings (several versions of each) are in the separate
+[gid_apache](https://github.com/Kymorphia/gid_apache) repository, which uses the packages of this repository as dependencies.
 
 Additional useful libraries with GObject Introspection interfaces will be added based on interest.
 Potentially any of those listed in the Python [PyGObject API Reference](https://lazka.github.io/pgi-docs/) for example.
