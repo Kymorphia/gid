@@ -6,8 +6,8 @@
   "license": "MIT",
   "homepage": "https://webkit.org",
   "targetType": "library",
-  "importPaths": [".", ".."],
-  "sourcePaths": ["webkit"],
+  "importPaths": ["."],
+  "sourcePaths": ["gid"],
   "dependencies": {
     "gid:gtk4": "*",
     "gid:javascriptcore6": "*",

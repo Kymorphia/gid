@@ -1,0 +1,770 @@
+/// Module for [SwipeTracker] class
+module gid.adw1.swipe_tracker;
+
+public import gid.core.basictypes;
+import gid.adw1.c.functions;
+import gid.adw1.c.types;
+import gid.adw1.swipeable;
+import gid.adw1.types;
+import gid.core.gid;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.orientable;
+import gid.gtk4.orientable_mixin;
+
+/**
+    A swipe tracker used in [gid.adw1.carousel.Carousel], [gid.adw1.navigation_view.NavigationView] and
+    [gid.adw1.overlay_split_view.OverlaySplitView].
+    
+    The [gid.adw1.swipe_tracker.SwipeTracker] object can be used for implementing widgets with swipe
+    gestures. It supports touch-based swipes, pointer dragging, and touchpad
+    scrolling.
+    
+    The widgets will probably want to expose the [gid.adw1.swipe_tracker.SwipeTracker.enabled]
+    property. If they expect to use horizontal orientation,
+    [gid.adw1.swipe_tracker.SwipeTracker.reversed] can be used for supporting RTL text
+    direction.
+*/
+class SwipeTracker : gid.gobject2.object.ObjectWrap, gid.gtk4.orientable.Orientable
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())adw_swipe_tracker_get_type != &gidSymbolNotFound ? adw_swipe_tracker_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwSwipeTracker";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override SwipeTracker self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.adw1.swipe_tracker.SwipeTracker]
+      Returns: New builder object
+  */
+  static SwipeTrackerGidBuilder builder() nothrow
+  {
+    return new SwipeTrackerGidBuilder;
+  }
+
+  /**
+      Get `allowLongSwipes` property.
+      Returns: Whether to allow swiping for more than one snap point at a time.
+        
+        If the value is `FALSE`, each swipe can only move to the adjacent snap
+        points.
+  */
+  @property bool allowLongSwipes() nothrow
+  {
+    return getAllowLongSwipes();
+  }
+
+  /**
+      Set `allowLongSwipes` property.
+      Params:
+        propval = Whether to allow swiping for more than one snap point at a time.
+          
+          If the value is `FALSE`, each swipe can only move to the adjacent snap
+          points.
+  */
+  @property void allowLongSwipes(bool propval) nothrow
+  {
+    setAllowLongSwipes(propval);
+  }
+
+  /**
+      Get `allowMouseDrag` property.
+      Returns: Whether to allow dragging with mouse pointer.
+  */
+  @property bool allowMouseDrag() nothrow
+  {
+    return getAllowMouseDrag();
+  }
+
+  /**
+      Set `allowMouseDrag` property.
+      Params:
+        propval = Whether to allow dragging with mouse pointer.
+  */
+  @property void allowMouseDrag(bool propval) nothrow
+  {
+    setAllowMouseDrag(propval);
+  }
+
+  /**
+      Get `allowWindowHandle` property.
+      Returns: Whether to allow touchscreen swiping from [gid.gtk4.window_handle.WindowHandle].
+        
+        This will make dragging the window impossible.
+  */
+  @property bool allowWindowHandle() nothrow
+  {
+    return getAllowWindowHandle();
+  }
+
+  /**
+      Set `allowWindowHandle` property.
+      Params:
+        propval = Whether to allow touchscreen swiping from [gid.gtk4.window_handle.WindowHandle].
+          
+          This will make dragging the window impossible.
+  */
+  @property void allowWindowHandle(bool propval) nothrow
+  {
+    setAllowWindowHandle(propval);
+  }
+
+  /**
+      Get `enabled` property.
+      Returns: Whether the swipe tracker is enabled.
+        
+        When it's not enabled, no events will be processed. Usually widgets will
+        want to expose this via a property.
+  */
+  @property bool enabled() nothrow
+  {
+    return getEnabled();
+  }
+
+  /**
+      Set `enabled` property.
+      Params:
+        propval = Whether the swipe tracker is enabled.
+          
+          When it's not enabled, no events will be processed. Usually widgets will
+          want to expose this via a property.
+  */
+  @property void enabled(bool propval) nothrow
+  {
+    setEnabled(propval);
+  }
+
+  /**
+      Get `lowerOvershoot` property.
+      Returns: Whether to allow swiping past the first available snap point.
+  */
+  @property bool lowerOvershoot() nothrow
+  {
+    return getLowerOvershoot();
+  }
+
+  /**
+      Set `lowerOvershoot` property.
+      Params:
+        propval = Whether to allow swiping past the first available snap point.
+  */
+  @property void lowerOvershoot(bool propval) nothrow
+  {
+    setLowerOvershoot(propval);
+  }
+
+  /**
+      Get `reversed` property.
+      Returns: Whether to reverse the swipe direction.
+        
+        If the swipe tracker is horizontal, it can be used for supporting RTL text
+        direction.
+  */
+  @property bool reversed() nothrow
+  {
+    return getReversed();
+  }
+
+  /**
+      Set `reversed` property.
+      Params:
+        propval = Whether to reverse the swipe direction.
+          
+          If the swipe tracker is horizontal, it can be used for supporting RTL text
+          direction.
+  */
+  @property void reversed(bool propval) nothrow
+  {
+    setReversed(propval);
+  }
+
+  /**
+      Get `swipeable` property.
+      Returns: The widget the swipe tracker is attached to.
+  */
+  @property gid.adw1.swipeable.Swipeable swipeable() nothrow
+  {
+    return getSwipeable();
+  }
+
+  /**
+      Get `upperOvershoot` property.
+      Returns: Whether to allow swiping past the last available snap point.
+  */
+  @property bool upperOvershoot() nothrow
+  {
+    return getUpperOvershoot();
+  }
+
+  /**
+      Set `upperOvershoot` property.
+      Params:
+        propval = Whether to allow swiping past the last available snap point.
+  */
+  @property void upperOvershoot(bool propval) nothrow
+  {
+    setUpperOvershoot(propval);
+  }
+
+  mixin OrientableT!();
+
+  /**
+      Creates a new [gid.adw1.swipe_tracker.SwipeTracker] for widget.
+  
+      Params:
+        swipeable = a widget to add the tracker on
+      Returns: the newly created [gid.adw1.swipe_tracker.SwipeTracker]
+  */
+  this(gid.adw1.swipeable.Swipeable swipeable) nothrow
+  {
+    AdwSwipeTracker* _cretval;
+    _cretval = adw_swipe_tracker_new(swipeable ? cast(AdwSwipeable*)(cast(gid.gobject2.object.ObjectWrap)swipeable)._cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Gets whether to allow swiping for more than one snap point at a time.
+      Returns: whether long swipes are allowed
+  */
+  bool getAllowLongSwipes() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_swipe_tracker_get_allow_long_swipes(cast(AdwSwipeTracker*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether self can be dragged with mouse pointer.
+      Returns: whether mouse dragging is allowed
+  */
+  bool getAllowMouseDrag() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_swipe_tracker_get_allow_mouse_drag(cast(AdwSwipeTracker*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether to allow touchscreen swiping from [gid.gtk4.window_handle.WindowHandle].
+      Returns: whether swiping from window handles is allowed
+  */
+  bool getAllowWindowHandle() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_swipe_tracker_get_allow_window_handle(cast(AdwSwipeTracker*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether self is enabled.
+      Returns: whether self is enabled
+  */
+  bool getEnabled() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_swipe_tracker_get_enabled(cast(AdwSwipeTracker*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether to allow swiping past the first available snap point.
+      Returns: whether to allow swiping past the first available snap point
+  */
+  bool getLowerOvershoot() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_swipe_tracker_get_lower_overshoot(cast(AdwSwipeTracker*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether self is reversing the swipe direction.
+      Returns: whether the direction is reversed
+  */
+  bool getReversed() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_swipe_tracker_get_reversed(cast(AdwSwipeTracker*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Get the widget self is attached to.
+      Returns: the swipeable widget
+  */
+  gid.adw1.swipeable.Swipeable getSwipeable() nothrow
+  {
+    AdwSwipeable* _cretval;
+    _cretval = adw_swipe_tracker_get_swipeable(cast(AdwSwipeTracker*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.adw1.swipeable.Swipeable)(cast(AdwSwipeable*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets whether to allow swiping past the last available snap point.
+      Returns: whether to allow swiping past the last available snap point
+  */
+  bool getUpperOvershoot() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_swipe_tracker_get_upper_overshoot(cast(AdwSwipeTracker*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Sets whether to allow swiping for more than one snap point at a time.
+      
+      If the value is `FALSE`, each swipe can only move to the adjacent snap
+      points.
+  
+      Params:
+        allowLongSwipes = whether to allow long swipes
+  */
+  void setAllowLongSwipes(bool allowLongSwipes) nothrow
+  {
+    adw_swipe_tracker_set_allow_long_swipes(cast(AdwSwipeTracker*)this._cPtr, allowLongSwipes);
+  }
+
+  /**
+      Sets whether self can be dragged with mouse pointer.
+  
+      Params:
+        allowMouseDrag = whether to allow mouse dragging
+  */
+  void setAllowMouseDrag(bool allowMouseDrag) nothrow
+  {
+    adw_swipe_tracker_set_allow_mouse_drag(cast(AdwSwipeTracker*)this._cPtr, allowMouseDrag);
+  }
+
+  /**
+      Sets whether to allow touchscreen swiping from [gid.gtk4.window_handle.WindowHandle].
+      
+      Setting it to `TRUE` will make dragging the window impossible.
+  
+      Params:
+        allowWindowHandle = whether to allow swiping from window handles
+  */
+  void setAllowWindowHandle(bool allowWindowHandle) nothrow
+  {
+    adw_swipe_tracker_set_allow_window_handle(cast(AdwSwipeTracker*)this._cPtr, allowWindowHandle);
+  }
+
+  /**
+      Sets whether self is enabled.
+      
+      When it's not enabled, no events will be processed. Usually widgets will want
+      to expose this via a property.
+  
+      Params:
+        enabled = whether self is enabled
+  */
+  void setEnabled(bool enabled) nothrow
+  {
+    adw_swipe_tracker_set_enabled(cast(AdwSwipeTracker*)this._cPtr, enabled);
+  }
+
+  /**
+      Sets whether to allow swiping past the first available snap point.
+  
+      Params:
+        overshoot = whether to allow swiping past the first available snap point
+  */
+  void setLowerOvershoot(bool overshoot) nothrow
+  {
+    adw_swipe_tracker_set_lower_overshoot(cast(AdwSwipeTracker*)this._cPtr, overshoot);
+  }
+
+  /**
+      Sets whether to reverse the swipe direction.
+      
+      If the swipe tracker is horizontal, it can be used for supporting RTL text
+      direction.
+  
+      Params:
+        reversed = whether to reverse the swipe direction
+  */
+  void setReversed(bool reversed) nothrow
+  {
+    adw_swipe_tracker_set_reversed(cast(AdwSwipeTracker*)this._cPtr, reversed);
+  }
+
+  /**
+      Sets whether to allow swiping past the last available snap point.
+  
+      Params:
+        overshoot = whether to allow swiping past the last available snap point
+  */
+  void setUpperOvershoot(bool overshoot) nothrow
+  {
+    adw_swipe_tracker_set_upper_overshoot(cast(AdwSwipeTracker*)this._cPtr, overshoot);
+  }
+
+  /**
+      Moves the current progress value by delta.
+      
+      This can be used to adjust the current position if snap points move during
+      the gesture.
+  
+      Params:
+        delta = the position delta
+  */
+  void shiftPosition(double delta) nothrow
+  {
+    adw_swipe_tracker_shift_position(cast(AdwSwipeTracker*)this._cPtr, delta);
+  }
+
+  /**
+      Connect to `BeginSwipe` signal.
+  
+      This signal is emitted right before a swipe will be started, after the
+        drag threshold has been passed.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.adw1.swipe_tracker.SwipeTracker swipeTracker)`
+  
+          `swipeTracker` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectBeginSwipe(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.adw1.swipe_tracker.SwipeTracker)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.adw1.swipe_tracker.SwipeTracker.beginSwipe");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("begin-swipe", closure, after);
+  }
+
+  /**
+      Connect to `EndSwipe` signal.
+  
+      This signal is emitted as soon as the gesture has stopped.
+        
+        The user is expected to animate the deceleration from the current progress
+        value to to with an animation using velocity as the initial velocity,
+        provided in pixels per second. [gid.adw1.spring_animation.SpringAnimation] is usually a good
+        fit for this.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(double velocity, double to, gid.adw1.swipe_tracker.SwipeTracker swipeTracker)`
+  
+          `velocity` the velocity of the swipe (optional)
+  
+          `to` the progress value to animate to (optional)
+  
+          `swipeTracker` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectEndSwipe(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == double)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gid.adw1.swipe_tracker.SwipeTracker)))
+  && Parameters!T.length < 4)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 3, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.adw1.swipe_tracker.SwipeTracker.endSwipe");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("end-swipe", closure, after);
+  }
+
+  /**
+      Connect to `Prepare` signal.
+  
+      This signal is emitted when a possible swipe is detected.
+        
+        The direction value can be used to restrict the swipe to a certain
+        direction.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.adw1.types.NavigationDirection direction, gid.adw1.swipe_tracker.SwipeTracker swipeTracker)`
+  
+          `direction` the direction of the swipe (optional)
+  
+          `swipeTracker` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectPrepare(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.adw1.types.NavigationDirection)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.adw1.swipe_tracker.SwipeTracker)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.adw1.swipe_tracker.SwipeTracker.prepare");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("prepare", closure, after);
+  }
+
+  /**
+      Connect to `UpdateSwipe` signal.
+  
+      This signal is emitted every time the progress value changes.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(double progress, gid.adw1.swipe_tracker.SwipeTracker swipeTracker)`
+  
+          `progress` the current animation progress value (optional)
+  
+          `swipeTracker` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectUpdateSwipe(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.adw1.swipe_tracker.SwipeTracker)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.adw1.swipe_tracker.SwipeTracker.updateSwipe");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("update-swipe", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.adw1.swipe_tracker.SwipeTracker]
+class SwipeTrackerGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T, gid.gtk4.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `allowLongSwipes` property.
+      Params:
+        propval = Whether to allow swiping for more than one snap point at a time.
+          
+          If the value is `FALSE`, each swipe can only move to the adjacent snap
+          points.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowLongSwipes(bool propval) nothrow
+  {
+    return setProperty("allow-long-swipes", propval);
+  }
+
+  /**
+      Set `allowMouseDrag` property.
+      Params:
+        propval = Whether to allow dragging with mouse pointer.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowMouseDrag(bool propval) nothrow
+  {
+    return setProperty("allow-mouse-drag", propval);
+  }
+
+  /**
+      Set `allowWindowHandle` property.
+      Params:
+        propval = Whether to allow touchscreen swiping from [gid.gtk4.window_handle.WindowHandle].
+          
+          This will make dragging the window impossible.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowWindowHandle(bool propval) nothrow
+  {
+    return setProperty("allow-window-handle", propval);
+  }
+
+  /**
+      Set `enabled` property.
+      Params:
+        propval = Whether the swipe tracker is enabled.
+          
+          When it's not enabled, no events will be processed. Usually widgets will
+          want to expose this via a property.
+      Returns: Builder instance for fluent chaining
+  */
+  T enabled(bool propval) nothrow
+  {
+    return setProperty("enabled", propval);
+  }
+
+  /**
+      Set `lowerOvershoot` property.
+      Params:
+        propval = Whether to allow swiping past the first available snap point.
+      Returns: Builder instance for fluent chaining
+  */
+  T lowerOvershoot(bool propval) nothrow
+  {
+    return setProperty("lower-overshoot", propval);
+  }
+
+  /**
+      Set `reversed` property.
+      Params:
+        propval = Whether to reverse the swipe direction.
+          
+          If the swipe tracker is horizontal, it can be used for supporting RTL text
+          direction.
+      Returns: Builder instance for fluent chaining
+  */
+  T reversed(bool propval) nothrow
+  {
+    return setProperty("reversed", propval);
+  }
+
+  /**
+      Set `swipeable` property.
+      Params:
+        propval = The widget the swipe tracker is attached to.
+      Returns: Builder instance for fluent chaining
+  */
+  T swipeable(gid.adw1.swipeable.Swipeable propval) nothrow
+  {
+    return setProperty("swipeable", propval);
+  }
+
+  /**
+      Set `upperOvershoot` property.
+      Params:
+        propval = Whether to allow swiping past the last available snap point.
+      Returns: Builder instance for fluent chaining
+  */
+  T upperOvershoot(bool propval) nothrow
+  {
+    return setProperty("upper-overshoot", propval);
+  }
+}
+
+/// Fluent builder for [gid.adw1.swipe_tracker.SwipeTracker]
+final class SwipeTrackerGidBuilder : SwipeTrackerGidBuilderImpl!SwipeTrackerGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  SwipeTracker build() nothrow
+  {
+    return new SwipeTracker(cast(void*)createGObject(SwipeTracker._getGType), Yes.Take);
+  }
+}

@@ -1,0 +1,97 @@
+/// Module for [ConsoleMessage] class
+module gid.webkitwebprocessextension6.console_message;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.boxed;
+import gid.webkitwebprocessextension6.c.functions;
+import gid.webkitwebprocessextension6.c.types;
+import gid.webkitwebprocessextension6.types;
+
+/** */
+class ConsoleMessage : gid.gobject2.boxed.BoxedWrap!(webkit_console_message_get_type)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ConsoleMessage self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Make a copy of console_message.
+      Returns: A copy of passed in #WebKitConsoleMessage
+  */
+  gid.webkitwebprocessextension6.console_message.ConsoleMessage copy() nothrow
+  {
+    WebKitConsoleMessage* _cretval;
+    _cretval = webkit_console_message_copy(cast(WebKitConsoleMessage*)this._cPtr);
+    auto _retval = _cretval ? new gid.webkitwebprocessextension6.console_message.ConsoleMessage(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the log level of a #WebKitConsoleMessage
+      Returns: a #WebKitConsoleMessageLevel indicating the log level of console_message
+  */
+  gid.webkitwebprocessextension6.types.ConsoleMessageLevel getLevel() nothrow
+  {
+    WebKitConsoleMessageLevel _cretval;
+    _cretval = webkit_console_message_get_level(cast(WebKitConsoleMessage*)this._cPtr);
+    gid.webkitwebprocessextension6.types.ConsoleMessageLevel _retval = cast(gid.webkitwebprocessextension6.types.ConsoleMessageLevel)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the line number of a #WebKitConsoleMessage
+      Returns: the line number of console_message
+  */
+  uint getLine() nothrow
+  {
+    uint _retval;
+    _retval = webkit_console_message_get_line(cast(WebKitConsoleMessage*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the source of a #WebKitConsoleMessage
+      Returns: a #WebKitConsoleMessageSource indicating the source of console_message
+  */
+  gid.webkitwebprocessextension6.types.ConsoleMessageSource getSource() nothrow
+  {
+    WebKitConsoleMessageSource _cretval;
+    _cretval = webkit_console_message_get_source(cast(WebKitConsoleMessage*)this._cPtr);
+    gid.webkitwebprocessextension6.types.ConsoleMessageSource _retval = cast(gid.webkitwebprocessextension6.types.ConsoleMessageSource)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the source identifier of a #WebKitConsoleMessage
+      Returns: the source identifier of console_message
+  */
+  string getSourceId() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = webkit_console_message_get_source_id(cast(WebKitConsoleMessage*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the text message of a #WebKitConsoleMessage
+      Returns: the text message of console_message
+  */
+  string getText() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = webkit_console_message_get_text(cast(WebKitConsoleMessage*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+}

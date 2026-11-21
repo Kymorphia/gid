@@ -1,0 +1,359 @@
+/// Module for [TimedValueControlSource] class
+module gid.gstcontroller1.timed_value_control_source;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.glib2.sequence_iter;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gst1.control_source;
+import gid.gst1.types;
+import gid.gstcontroller1.c.functions;
+import gid.gstcontroller1.c.types;
+import gid.gstcontroller1.control_point;
+import gid.gstcontroller1.types;
+
+/**
+    Base class for #GstControlSource that use time-stamped values.
+    
+    When overriding bind, chain up first to give this bind implementation a
+    chance to setup things.
+    
+    All functions are MT-safe.
+*/
+class TimedValueControlSource : gid.gst1.control_source.ControlSource
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gst_timed_value_control_source_get_type != &gidSymbolNotFound ? gst_timed_value_control_source_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstTimedValueControlSource";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override TimedValueControlSource self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gstcontroller1.timed_value_control_source.TimedValueControlSource]
+      Returns: New builder object
+  */
+  static TimedValueControlSourceGidBuilder builder() nothrow
+  {
+    return new TimedValueControlSourceGidBuilder;
+  }
+
+  /**
+      Find last value before given timestamp in control point list.
+      If all values in the control point list come after the given
+      timestamp or no values exist, null is returned.
+      
+      For use in control source implementations.
+  
+      Params:
+        timestamp = the search key
+      Returns: the found #GSequenceIter or null
+  */
+  gid.glib2.sequence_iter.SequenceIter findControlPointIter(gid.gst1.types.ClockTime timestamp) nothrow
+  {
+    GSequenceIter* _cretval;
+    _cretval = gst_timed_value_control_source_find_control_point_iter(cast(GstTimedValueControlSource*)this._cPtr, timestamp);
+    auto _retval = _cretval ? new gid.glib2.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns a read-only copy of the list of #GstControlPoint for the given property.
+      Free the list after done with it.
+      Returns: a copy
+        of the list, or null if the property isn't handled by the controller
+  
+      Deprecated: Use [gid.gstcontroller1.timed_value_control_source.TimedValueControlSource.listControlPoints] instead.
+  */
+  gid.gstcontroller1.control_point.ControlPoint[] getAll() nothrow
+  {
+    GList* _cretval;
+    _cretval = gst_timed_value_control_source_get_all(cast(GstTimedValueControlSource*)this._cPtr);
+    auto _retval = gListToD!(gid.gstcontroller1.control_point.ControlPoint, GidOwnership.Container)(cast(GList*)_cretval);
+    return _retval;
+  }
+
+  /**
+      Get the number of control points that are set.
+      Returns: the number of control points that are set.
+  */
+  int getCount() nothrow
+  {
+    int _retval;
+    _retval = gst_timed_value_control_source_get_count(cast(GstTimedValueControlSource*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns an array of #GstTimedValue representing the control points
+      that have been set on this control source. To modify the value of a
+      control point, use #gst_timed_value_control_source_set.
+      Returns: an array of
+        control points, or null if no control points are set.
+  */
+  gid.gst1.types.TimedValue[] listControlPoints() nothrow
+  {
+    GstTimedValue* _cretval;
+    size_t _cretlength;
+    _cretval = gst_timed_value_control_source_list_control_points(cast(GstTimedValueControlSource*)this._cPtr, &_cretlength);
+    gid.gst1.types.TimedValue[] _retval;
+
+    if (_cretval)
+    {
+      _retval = new gid.gst1.types.TimedValue[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i];
+      gFree(cast(void*)_cretval);
+    }
+    return _retval;
+  }
+
+  /**
+      Set the value of given controller-handled property at a certain time.
+  
+      Params:
+        timestamp = the time the control-change is scheduled for
+        value = the control-value
+      Returns: FALSE if the values couldn't be set, TRUE otherwise.
+  */
+  bool set(gid.gst1.types.ClockTime timestamp, double value) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_timed_value_control_source_set(cast(GstTimedValueControlSource*)this._cPtr, timestamp, value);
+    return _retval;
+  }
+
+  /**
+      Sets multiple timed values at once.
+  
+      Params:
+        timedvalues = a list
+          with #GstTimedValue items
+      Returns: FALSE if the values couldn't be set, TRUE otherwise.
+  */
+  bool setFromList(gid.gst1.types.TimedValue[] timedvalues) nothrow
+  {
+    bool _retval;
+    auto _timedvalues = gSListFromD!(gid.gst1.types.TimedValue)(timedvalues);
+    scope(exit) containerFree!(GSList*, gid.gst1.types.TimedValue, GidOwnership.None)(_timedvalues);
+    _retval = cast(bool)gst_timed_value_control_source_set_from_list(cast(GstTimedValueControlSource*)this._cPtr, _timedvalues);
+    return _retval;
+  }
+
+  /**
+      Used to remove the value of given controller-handled property at a certain
+      time.
+  
+      Params:
+        timestamp = the time the control-change should be removed from
+      Returns: FALSE if the value couldn't be unset (i.e. not found, TRUE otherwise.
+  */
+  bool unset(gid.gst1.types.ClockTime timestamp) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_timed_value_control_source_unset(cast(GstTimedValueControlSource*)this._cPtr, timestamp);
+    return _retval;
+  }
+
+  /**
+      Used to remove all time-stamped values of given controller-handled property
+  */
+  void unsetAll() nothrow
+  {
+    gst_timed_value_control_source_unset_all(cast(GstTimedValueControlSource*)this._cPtr);
+  }
+
+  /**
+      Connect to `ValueAdded` signal.
+  
+      Emitted right after the new value has been added to self
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gstcontroller1.control_point.ControlPoint timedValue, gid.gstcontroller1.timed_value_control_source.TimedValueControlSource timedValueControlSource)`
+  
+          `timedValue` The newly added #GstTimedValue (optional)
+  
+          `timedValueControlSource` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectValueAdded(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.gstcontroller1.control_point.ControlPoint)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gstcontroller1.timed_value_control_source.TimedValueControlSource)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gstcontroller1.timed_value_control_source.TimedValueControlSource.valueAdded");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("value-added", closure, after);
+  }
+
+  /**
+      Connect to `ValueChanged` signal.
+  
+      Emitted right after the new value has been set on timed_signals
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gstcontroller1.control_point.ControlPoint timedValue, gid.gstcontroller1.timed_value_control_source.TimedValueControlSource timedValueControlSource)`
+  
+          `timedValue` The #GstTimedValue where the value changed (optional)
+  
+          `timedValueControlSource` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.gstcontroller1.control_point.ControlPoint)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gstcontroller1.timed_value_control_source.TimedValueControlSource)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gstcontroller1.timed_value_control_source.TimedValueControlSource.valueChanged");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("value-changed", closure, after);
+  }
+
+  /**
+      Connect to `ValueRemoved` signal.
+  
+      Emitted when timed_value is removed from self
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gstcontroller1.control_point.ControlPoint timedValue, gid.gstcontroller1.timed_value_control_source.TimedValueControlSource timedValueControlSource)`
+  
+          `timedValue` The removed #GstTimedValue (optional)
+  
+          `timedValueControlSource` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectValueRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.gstcontroller1.control_point.ControlPoint)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gstcontroller1.timed_value_control_source.TimedValueControlSource)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gstcontroller1.timed_value_control_source.TimedValueControlSource.valueRemoved");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("value-removed", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gstcontroller1.timed_value_control_source.TimedValueControlSource]
+class TimedValueControlSourceGidBuilderImpl(T) : gid.gst1.control_source.ControlSourceGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gstcontroller1.timed_value_control_source.TimedValueControlSource]
+final class TimedValueControlSourceGidBuilder : TimedValueControlSourceGidBuilderImpl!TimedValueControlSourceGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  TimedValueControlSource build() nothrow
+  {
+    return new TimedValueControlSource(cast(void*)createGObject(TimedValueControlSource._getGType), Yes.Take);
+  }
+}

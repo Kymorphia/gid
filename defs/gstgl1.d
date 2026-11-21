@@ -84,12 +84,12 @@
   // Set a uniform value array with a count of vectors/matrices of size values (logs a critical if not a multiple)
   private void _setUniformArray(alias cFunc, size_t size, T, A...)(string funcName, string name, T[] value, A matrixArgs) nothrow
   {
-    import glib.c.functions : g_log;
-    import glib.c.types : GLogLevelFlags;
+    import gid.glib2.c.functions : g_log;
+    import gid.glib2.c.types : GLogLevelFlags;
 
     if (value.length % size != 0)
     {
-      g_log("Gid", GLogLevelFlags.LevelCritical, "gstgl.glshader.GLShader.%.*s value length %d is not a multiple of %d",
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gid.gstgl1.glshader.GLShader.%.*s value length %d is not a multiple of %d",
         cast(int)funcName.length, funcName.ptr, cast(int)value.length, cast(int)size);
       return;
     }

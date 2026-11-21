@@ -47,7 +47,7 @@
 private extern(C) GstRTSPTransport* rtspTransportCopy(const(GstRTSPTransport)* transport) nothrow
 {
   auto copy = mallocDup(cast(GstRTSPTransport*)transport);
-  copy.destination = gid.gid.strdup(transport.destination);
-  copy.source = gid.gid.strdup(transport.source);
+  copy.destination = gid.core.gid.strdup(transport.destination);
+  copy.source = gid.core.gid.strdup(transport.source);
   return copy;
 }

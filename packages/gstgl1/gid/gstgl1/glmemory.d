@@ -1,0 +1,357 @@
+/// Module for [GLMemory] class
+module gid.gstgl1.glmemory;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.boxed;
+import gid.gstgl1.c.functions;
+import gid.gstgl1.c.types;
+import gid.gstgl1.glbase_memory;
+import gid.gstgl1.types;
+import gid.gstvideo1.video_alignment;
+import gid.gstvideo1.video_info;
+
+/**
+    GstGLMemory is a #GstGLBaseMemory subclass providing support for the mapping of
+    OpenGL textures.
+    
+    #GstGLMemory is created or wrapped through [gid.gstgl1.glbase_memory.GLBaseMemory.alloc]
+    with #GstGLVideoAllocationParams.
+    
+    Data is uploaded or downloaded from the GPU as is necessary.
+    
+    The #GstCaps that is used for #GstGLMemory based buffers should contain
+    the [gid.gstgl1.types.CAPS_FEATURE_MEMORY_GL_MEMORY] as a #GstCapsFeatures and should
+    contain a 'texture-target' field with one of the #GstGLTextureTarget values
+    as a string, i.e. some combination of 'texture-target=(string){2D,
+    rectangle, external-oes}'.
+*/
+class GLMemory : gid.gobject2.boxed.BoxedWrap!(gst_gl_memory_get_type)
+{
+  /**
+      Create a `glmemory.GLMemory` boxed type.
+      Params:
+        texId = the GL texture id for this memory
+        texTarget = the GL texture target for this memory
+        texFormat = the texture type
+        valign = data alignment for system memory mapping
+        plane = data plane in @info
+        texScaling = GL shader scaling parameters for @valign and/or width/height
+        textureWrapped = 
+        unpackLength = 
+        texWidth = 
+  */
+  this(uint texId = uint.init, gid.gstgl1.types.GLTextureTarget texTarget = gid.gstgl1.types.GLTextureTarget.init, gid.gstgl1.types.GLFormat texFormat = gid.gstgl1.types.GLFormat.init, gid.gstvideo1.video_alignment.VideoAlignment valign = gid.gstvideo1.video_alignment.VideoAlignment.init, uint plane = uint.init, float[2] texScaling = (float[2]).init, bool textureWrapped = bool.init, uint unpackLength = uint.init, uint texWidth = uint.init) nothrow
+  {
+    super(boxedNew!GstGLMemory(_getGType), Yes.Take);
+    this.texId = texId;
+    this.texTarget = texTarget;
+    this.texFormat = texFormat;
+    this.valign = valign;
+    this.plane = plane;
+    this.texScaling = texScaling;
+    this.textureWrapped = textureWrapped;
+    this.unpackLength = unpackLength;
+    this.texWidth = texWidth;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override GLMemory self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get `mem` field.
+      Returns: the parent #GstGLBaseMemory object
+  */
+  @property gid.gstgl1.glbase_memory.GLBaseMemory mem() nothrow
+  {
+    return cToD!(gid.gstgl1.glbase_memory.GLBaseMemory)(cast(void*)&(cast(GstGLMemory*)this._cPtr).mem);
+  }
+
+  /**
+      Get `texId` field.
+      Returns: the GL texture id for this memory
+  */
+  @property uint texId() nothrow
+  {
+    return (cast(GstGLMemory*)this._cPtr).texId;
+  }
+
+  /**
+      Set `texId` field.
+      Params:
+        propval = the GL texture id for this memory
+  */
+  @property void texId(uint propval) nothrow
+  {
+    (cast(GstGLMemory*)this._cPtr).texId = propval;
+  }
+
+  /**
+      Get `texTarget` field.
+      Returns: the GL texture target for this memory
+  */
+  @property gid.gstgl1.types.GLTextureTarget texTarget() nothrow
+  {
+    return cast(gid.gstgl1.types.GLTextureTarget)(cast(GstGLMemory*)this._cPtr).texTarget;
+  }
+
+  /**
+      Set `texTarget` field.
+      Params:
+        propval = the GL texture target for this memory
+  */
+  @property void texTarget(gid.gstgl1.types.GLTextureTarget propval) nothrow
+  {
+    (cast(GstGLMemory*)this._cPtr).texTarget = cast(GstGLTextureTarget)propval;
+  }
+
+  /**
+      Get `texFormat` field.
+      Returns: the texture type
+  */
+  @property gid.gstgl1.types.GLFormat texFormat() nothrow
+  {
+    return cast(gid.gstgl1.types.GLFormat)(cast(GstGLMemory*)this._cPtr).texFormat;
+  }
+
+  /**
+      Set `texFormat` field.
+      Params:
+        propval = the texture type
+  */
+  @property void texFormat(gid.gstgl1.types.GLFormat propval) nothrow
+  {
+    (cast(GstGLMemory*)this._cPtr).texFormat = cast(GstGLFormat)propval;
+  }
+
+  /**
+      Get `info` field.
+      Returns: the texture's #GstVideoInfo
+  */
+  @property gid.gstvideo1.video_info.VideoInfo info() nothrow
+  {
+    return cToD!(gid.gstvideo1.video_info.VideoInfo)(cast(void*)&(cast(GstGLMemory*)this._cPtr).info);
+  }
+
+  /**
+      Get `valign` field.
+      Returns: data alignment for system memory mapping
+  */
+  @property gid.gstvideo1.video_alignment.VideoAlignment valign() nothrow
+  {
+    return cToD!(gid.gstvideo1.video_alignment.VideoAlignment)(cast(void*)&(cast(GstGLMemory*)this._cPtr).valign);
+  }
+
+  /**
+      Set `valign` field.
+      Params:
+        propval = data alignment for system memory mapping
+  */
+  @property void valign(gid.gstvideo1.video_alignment.VideoAlignment propval) nothrow
+  {
+    (cast(GstGLMemory*)this._cPtr).valign = cast(GstVideoAlignment)propval;
+  }
+
+  /**
+      Get `plane` field.
+      Returns: data plane in @info
+  */
+  @property uint plane() nothrow
+  {
+    return (cast(GstGLMemory*)this._cPtr).plane;
+  }
+
+  /**
+      Set `plane` field.
+      Params:
+        propval = data plane in @info
+  */
+  @property void plane(uint propval) nothrow
+  {
+    (cast(GstGLMemory*)this._cPtr).plane = propval;
+  }
+
+  /**
+      Get `texScaling` field.
+      Returns: GL shader scaling parameters for @valign and/or width/height
+  */
+  @property float[2] texScaling() nothrow
+  {
+    return *cast(float[2]*)&(cast(GstGLMemory*)this._cPtr).texScaling;
+  }
+
+  /**
+      Set `texScaling` field.
+      Params:
+        propval = GL shader scaling parameters for @valign and/or width/height
+  */
+  @property void texScaling(float[2] propval) nothrow
+  {
+    (cast(GstGLMemory*)this._cPtr).texScaling = *cast(float[2]*)&propval;
+  }
+
+  /** */
+  @property bool textureWrapped() nothrow
+  {
+    return cast(bool)(cast(GstGLMemory*)this._cPtr).textureWrapped;
+  }
+
+  /** */
+  @property void textureWrapped(bool propval) nothrow
+  {
+    (cast(GstGLMemory*)this._cPtr).textureWrapped = propval;
+  }
+
+  /** */
+  @property uint unpackLength() nothrow
+  {
+    return (cast(GstGLMemory*)this._cPtr).unpackLength;
+  }
+
+  /** */
+  @property void unpackLength(uint propval) nothrow
+  {
+    (cast(GstGLMemory*)this._cPtr).unpackLength = propval;
+  }
+
+  /** */
+  @property uint texWidth() nothrow
+  {
+    return (cast(GstGLMemory*)this._cPtr).texWidth;
+  }
+
+  /** */
+  @property void texWidth(uint propval) nothrow
+  {
+    (cast(GstGLMemory*)this._cPtr).texWidth = propval;
+  }
+
+  /**
+      Copies gl_mem into the texture specified by tex_id.  The format of tex_id
+      is specified by tex_format, width and height.
+  
+      Params:
+        texId = OpenGL texture id
+        target = the #GstGLTextureTarget
+        texFormat = the #GstGLFormat
+        width = width of tex_id
+        height = height of tex_id
+      Returns: Whether the copy succeeded
+  */
+  bool copyInto(uint texId, gid.gstgl1.types.GLTextureTarget target, gid.gstgl1.types.GLFormat texFormat, int width, int height) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_gl_memory_copy_into(cast(GstGLMemory*)this._cPtr, texId, target, texFormat, width, height);
+    return _retval;
+  }
+
+  /**
+      Copies the texture in #GstGLMemory into the texture specified by tex_id,
+      out_target, out_tex_format, out_width and out_height.
+  
+      Params:
+        texId = the destination texture id
+        outTarget = the destination #GstGLTextureTarget
+        outTexFormat = the destination #GstGLFormat
+        outWidth = the destination width
+        outHeight = the destination height
+      Returns: whether the copy succeeded.
+  */
+  bool copyTeximage(uint texId, gid.gstgl1.types.GLTextureTarget outTarget, gid.gstgl1.types.GLFormat outTexFormat, int outWidth, int outHeight) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_gl_memory_copy_teximage(cast(GstGLMemory*)this._cPtr, texId, outTarget, outTexFormat, outWidth, outHeight);
+    return _retval;
+  }
+
+  /** */
+  gid.gstgl1.types.GLFormat getTextureFormat() nothrow
+  {
+    GstGLFormat _cretval;
+    _cretval = gst_gl_memory_get_texture_format(cast(GstGLMemory*)this._cPtr);
+    gid.gstgl1.types.GLFormat _retval = cast(gid.gstgl1.types.GLFormat)_cretval;
+    return _retval;
+  }
+
+  /** */
+  int getTextureHeight() nothrow
+  {
+    int _retval;
+    _retval = gst_gl_memory_get_texture_height(cast(GstGLMemory*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  uint getTextureId() nothrow
+  {
+    uint _retval;
+    _retval = gst_gl_memory_get_texture_id(cast(GstGLMemory*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  gid.gstgl1.types.GLTextureTarget getTextureTarget() nothrow
+  {
+    GstGLTextureTarget _cretval;
+    _cretval = gst_gl_memory_get_texture_target(cast(GstGLMemory*)this._cPtr);
+    gid.gstgl1.types.GLTextureTarget _retval = cast(gid.gstgl1.types.GLTextureTarget)_cretval;
+    return _retval;
+  }
+
+  /** */
+  int getTextureWidth() nothrow
+  {
+    int _retval;
+    _retval = gst_gl_memory_get_texture_width(cast(GstGLMemory*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Reads the texture in #GstGLMemory into write_pointer if no buffer is bound
+      to `GL_PIXEL_PACK_BUFFER`.  Otherwise write_pointer is the byte offset into
+      the currently bound `GL_PIXEL_PACK_BUFFER` buffer to store the result of
+      glReadPixels.  See the OpenGL specification for glReadPixels for more
+      details.
+  
+      Params:
+        writePointer = the data pointer to pass to glReadPixels
+      Returns: whether theread operation succeeded
+  */
+  bool readPixels(void* writePointer = null) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_gl_memory_read_pixels(cast(GstGLMemory*)this._cPtr, writePointer);
+    return _retval;
+  }
+
+  /**
+      Reads the texture in read_pointer into gl_mem.
+      
+      See [gid.gstgl1.glmemory.GLMemory.readPixels] for what read_pointer signifies.
+  
+      Params:
+        readPointer = the data pointer to pass to glTexSubImage
+  */
+  void texsubimage(void* readPointer = null) nothrow
+  {
+    gst_gl_memory_texsubimage(cast(GstGLMemory*)this._cPtr, readPointer);
+  }
+
+  /**
+      Initializes the GL Base Texture allocator. It is safe to call this function
+      multiple times.  This must be called before any other GstGLMemory operation.
+  */
+  static void initOnce() nothrow
+  {
+    gst_gl_memory_init_once();
+  }
+}

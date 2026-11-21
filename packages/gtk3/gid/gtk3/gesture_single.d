@@ -1,0 +1,280 @@
+/// Module for [GestureSingle] class
+module gid.gtk3.gesture_single;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gdk3.event_sequence;
+import gid.gobject2.gid_builder;
+import gid.gtk3.c.functions;
+import gid.gtk3.c.types;
+import gid.gtk3.gesture;
+import gid.gtk3.types;
+
+/**
+    #GtkGestureSingle is a subclass of #GtkGesture, optimized (although
+    not restricted) for dealing with mouse and single-touch gestures. Under
+    interaction, these gestures stick to the first interacting sequence, which
+    is accessible through [gid.gtk4.gesture_single.GestureSingle.getCurrentSequence] while the
+    gesture is being interacted with.
+    
+    By default gestures react to both [gid.gdk4.types.BUTTON_PRIMARY] and touch
+    events, [gid.gtk4.gesture_single.GestureSingle.setTouchOnly] can be used to change the
+    touch behavior. Callers may also specify a different mouse button number
+    to interact with through [gid.gtk4.gesture_single.GestureSingle.setButton], or react to any
+    mouse button by setting 0. While the gesture is active, the button being
+    currently pressed can be known through [gid.gtk4.gesture_single.GestureSingle.getCurrentButton].
+*/
+class GestureSingle : gid.gtk3.gesture.Gesture
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_gesture_single_get_type != &gidSymbolNotFound ? gtk_gesture_single_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkGestureSingle";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override GestureSingle self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk3.gesture_single.GestureSingle]
+      Returns: New builder object
+  */
+  static GestureSingleGidBuilder builder() nothrow
+  {
+    return new GestureSingleGidBuilder;
+  }
+
+  /**
+      Get `button` property.
+      Returns: Mouse button number to listen to, or 0 to listen for any button.
+  */
+  @property uint button() nothrow
+  {
+    return getButton();
+  }
+
+  /**
+      Set `button` property.
+      Params:
+        propval = Mouse button number to listen to, or 0 to listen for any button.
+  */
+  @property void button(uint propval) nothrow
+  {
+    setButton(propval);
+  }
+
+  /**
+      Get `exclusive` property.
+      Returns: Whether the gesture is exclusive. Exclusive gestures only listen to pointer
+        and pointer emulated events.
+  */
+  @property bool exclusive() nothrow
+  {
+    return getExclusive();
+  }
+
+  /**
+      Set `exclusive` property.
+      Params:
+        propval = Whether the gesture is exclusive. Exclusive gestures only listen to pointer
+          and pointer emulated events.
+  */
+  @property void exclusive(bool propval) nothrow
+  {
+    setExclusive(propval);
+  }
+
+  /**
+      Get `touchOnly` property.
+      Returns: Whether the gesture handles only touch events.
+  */
+  @property bool touchOnly() nothrow
+  {
+    return getTouchOnly();
+  }
+
+  /**
+      Set `touchOnly` property.
+      Params:
+        propval = Whether the gesture handles only touch events.
+  */
+  @property void touchOnly(bool propval) nothrow
+  {
+    setTouchOnly(propval);
+  }
+
+  /**
+      Returns the button number gesture listens for, or 0 if gesture
+      reacts to any button press.
+      Returns: The button number, or 0 for any button
+  */
+  uint getButton() nothrow
+  {
+    uint _retval;
+    _retval = gtk_gesture_single_get_button(cast(GtkGestureSingle*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the button number currently interacting with gesture, or 0 if there
+      is none.
+      Returns: The current button number
+  */
+  uint getCurrentButton() nothrow
+  {
+    uint _retval;
+    _retval = gtk_gesture_single_get_current_button(cast(GtkGestureSingle*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the event sequence currently interacting with gesture.
+      This is only meaningful if [gid.gtk4.gesture.Gesture.isActive] returns true.
+      Returns: the current sequence
+  */
+  gid.gdk3.event_sequence.EventSequence getCurrentSequence() nothrow
+  {
+    GdkEventSequence* _cretval;
+    _cretval = gtk_gesture_single_get_current_sequence(cast(GtkGestureSingle*)this._cPtr);
+    auto _retval = _cretval ? new gid.gdk3.event_sequence.EventSequence(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets whether a gesture is exclusive. For more information, see
+      [gid.gtk4.gesture_single.GestureSingle.setExclusive].
+      Returns: Whether the gesture is exclusive
+  */
+  bool getExclusive() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_gesture_single_get_exclusive(cast(GtkGestureSingle*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns true if the gesture is only triggered by touch events.
+      Returns: true if the gesture only handles touch events
+  */
+  bool getTouchOnly() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_gesture_single_get_touch_only(cast(GtkGestureSingle*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Sets the button number gesture listens to. If non-0, every
+      button press from a different button number will be ignored.
+      Touch events implicitly match with button 1.
+  
+      Params:
+        button = button number to listen to, or 0 for any button
+  */
+  void setButton(uint button) nothrow
+  {
+    gtk_gesture_single_set_button(cast(GtkGestureSingle*)this._cPtr, button);
+  }
+
+  /**
+      Sets whether gesture is exclusive. An exclusive gesture will
+      only handle pointer and "pointer emulated" touch events, so at
+      any given time, there is only one sequence able to interact with
+      those.
+  
+      Params:
+        exclusive = true to make gesture exclusive
+  */
+  void setExclusive(bool exclusive) nothrow
+  {
+    gtk_gesture_single_set_exclusive(cast(GtkGestureSingle*)this._cPtr, exclusive);
+  }
+
+  /**
+      If touch_only is true, gesture will only handle events of type
+      #GDK_TOUCH_BEGIN, #GDK_TOUCH_UPDATE or #GDK_TOUCH_END. If false,
+      mouse events will be handled too.
+  
+      Params:
+        touchOnly = whether gesture handles only touch events
+  */
+  void setTouchOnly(bool touchOnly) nothrow
+  {
+    gtk_gesture_single_set_touch_only(cast(GtkGestureSingle*)this._cPtr, touchOnly);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk3.gesture_single.GestureSingle]
+class GestureSingleGidBuilderImpl(T) : gid.gtk3.gesture.GestureGidBuilderImpl!T
+{
+
+  /**
+      Set `button` property.
+      Params:
+        propval = Mouse button number to listen to, or 0 to listen for any button.
+      Returns: Builder instance for fluent chaining
+  */
+  T button(uint propval) nothrow
+  {
+    return setProperty("button", propval);
+  }
+
+  /**
+      Set `exclusive` property.
+      Params:
+        propval = Whether the gesture is exclusive. Exclusive gestures only listen to pointer
+          and pointer emulated events.
+      Returns: Builder instance for fluent chaining
+  */
+  T exclusive(bool propval) nothrow
+  {
+    return setProperty("exclusive", propval);
+  }
+
+  /**
+      Set `touchOnly` property.
+      Params:
+        propval = Whether the gesture handles only touch events.
+      Returns: Builder instance for fluent chaining
+  */
+  T touchOnly(bool propval) nothrow
+  {
+    return setProperty("touch-only", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk3.gesture_single.GestureSingle]
+final class GestureSingleGidBuilder : GestureSingleGidBuilderImpl!GestureSingleGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  GestureSingle build() nothrow
+  {
+    return new GestureSingle(cast(void*)createGObject(GestureSingle._getGType), Yes.Take);
+  }
+}

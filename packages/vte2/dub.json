@@ -6,8 +6,8 @@
   "license": "MIT",
   "homepage": "https://wiki.gnome.org/Apps/Terminal",
   "targetType": "library",
-  "importPaths": [".", ".."],
-  "sourcePaths": ["vte"],
+  "importPaths": ["."],
+  "sourcePaths": ["gid"],
   "dependencies": {
     "gid:cairo1": "*",
     "gid:gdk3": "*",

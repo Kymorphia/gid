@@ -6,8 +6,8 @@
   "license": "MIT",
   "homepage": "https://gstreamer.freedesktop.org",
   "targetType": "library",
-  "importPaths": [".", ".."],
-  "sourcePaths": ["gstnet"],
+  "importPaths": ["."],
+  "sourcePaths": ["gid"],
   "dependencies": {
     "gid:gio2": "*",
     "gid:glib2": "*",

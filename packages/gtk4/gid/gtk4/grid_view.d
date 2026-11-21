@@ -1,0 +1,625 @@
+/// Module for [GridView] class
+module gid.gtk4.grid_view;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.accessible;
+import gid.gtk4.accessible_mixin;
+import gid.gtk4.buildable;
+import gid.gtk4.buildable_mixin;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.constraint_target;
+import gid.gtk4.constraint_target_mixin;
+import gid.gtk4.list_base;
+import gid.gtk4.list_item_factory;
+import gid.gtk4.orientable;
+import gid.gtk4.orientable_mixin;
+import gid.gtk4.scroll_info;
+import gid.gtk4.scrollable;
+import gid.gtk4.scrollable_mixin;
+import gid.gtk4.selection_model;
+import gid.gtk4.types;
+
+/**
+    Presents a large dynamic grid of items.
+    
+    [gid.gtk4.grid_view.GridView] uses its factory to generate one child widget for each
+    visible item and shows them in a grid. The orientation of the grid view
+    determines if the grid reflows vertically or horizontally.
+    
+    [gid.gtk4.grid_view.GridView] allows the user to select items according to the selection
+    characteristics of the model. For models that allow multiple selected items,
+    it is possible to turn on _rubberband selection_, using
+    [gid.gtk4.grid_view.GridView.enableRubberband].
+    
+    To learn more about the list widget framework, see the
+    [overview](section-list-widget.html).
+    
+    # Actions
+    
+    [gid.gtk4.grid_view.GridView] defines a set of built-in actions:
+    
+    - `list.activate-item` activates the item at given position by emitting the
+      the [gid.gtk4.grid_view.GridView.activate] signal.
+    
+    # CSS nodes
+    
+    ```
+    gridview
+    ├── child[.activatable]
+    │
+    ├── child[.activatable]
+    │
+    ┊
+    ╰── [rubberband]
+    ```
+    
+    [gid.gtk4.grid_view.GridView] uses a single CSS node with name `gridview`. Each child uses
+    a single CSS node with name `child`. If the [gid.gtk4.list_item.ListItem.activatable]
+    property is set, the corresponding row will have the `.activatable` style
+    class. For rubberband selection, a subnode with name `rubberband` is used.
+    
+    # Accessibility
+    
+    [gid.gtk4.grid_view.GridView] uses the [gid.gtk4.types.AccessibleRole.Grid] role, and the items
+    use the [gid.gtk4.types.AccessibleRole.GridCell] role.
+*/
+class GridView : gid.gtk4.list_base.ListBase
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_grid_view_get_type != &gidSymbolNotFound ? gtk_grid_view_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkGridView";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override GridView self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.grid_view.GridView]
+      Returns: New builder object
+  */
+  static GridViewGidBuilder builder() nothrow
+  {
+    return new GridViewGidBuilder;
+  }
+
+  /**
+      Get `enableRubberband` property.
+      Returns: Allow rubberband selection.
+  */
+  @property bool enableRubberband() nothrow
+  {
+    return getEnableRubberband();
+  }
+
+  /**
+      Set `enableRubberband` property.
+      Params:
+        propval = Allow rubberband selection.
+  */
+  @property void enableRubberband(bool propval) nothrow
+  {
+    setEnableRubberband(propval);
+  }
+
+  /**
+      Get `factory` property.
+      Returns: Factory for populating list items.
+        
+        The factory must be for configuring [gid.gtk4.list_item.ListItem] objects.
+  */
+  @property gid.gtk4.list_item_factory.ListItemFactory factory() nothrow
+  {
+    return getFactory();
+  }
+
+  /**
+      Set `factory` property.
+      Params:
+        propval = Factory for populating list items.
+          
+          The factory must be for configuring [gid.gtk4.list_item.ListItem] objects.
+  */
+  @property void factory(gid.gtk4.list_item_factory.ListItemFactory propval) nothrow
+  {
+    setFactory(propval);
+  }
+
+  /**
+      Get `maxColumns` property.
+      Returns: Maximum number of columns per row.
+        
+        If this number is smaller than [gid.gtk4.grid_view.GridView.minColumns],
+        that value is used instead.
+  */
+  @property uint maxColumns() nothrow
+  {
+    return getMaxColumns();
+  }
+
+  /**
+      Set `maxColumns` property.
+      Params:
+        propval = Maximum number of columns per row.
+          
+          If this number is smaller than [gid.gtk4.grid_view.GridView.minColumns],
+          that value is used instead.
+  */
+  @property void maxColumns(uint propval) nothrow
+  {
+    setMaxColumns(propval);
+  }
+
+  /**
+      Get `minColumns` property.
+      Returns: Minimum number of columns per row.
+  */
+  @property uint minColumns() nothrow
+  {
+    return getMinColumns();
+  }
+
+  /**
+      Set `minColumns` property.
+      Params:
+        propval = Minimum number of columns per row.
+  */
+  @property void minColumns(uint propval) nothrow
+  {
+    setMinColumns(propval);
+  }
+
+  /**
+      Get `model` property.
+      Returns: Model for the items displayed.
+  */
+  @property gid.gtk4.selection_model.SelectionModel model() nothrow
+  {
+    return getModel();
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = Model for the items displayed.
+  */
+  @property void model(gid.gtk4.selection_model.SelectionModel propval) nothrow
+  {
+    setModel(propval);
+  }
+
+  /**
+      Get `singleClickActivate` property.
+      Returns: Activate rows on single click and select them on hover.
+  */
+  @property bool singleClickActivate() nothrow
+  {
+    return getSingleClickActivate();
+  }
+
+  /**
+      Set `singleClickActivate` property.
+      Params:
+        propval = Activate rows on single click and select them on hover.
+  */
+  @property void singleClickActivate(bool propval) nothrow
+  {
+    setSingleClickActivate(propval);
+  }
+
+  /**
+      Get `tabBehavior` property.
+      Returns: Behavior of the <kbd>Tab</kbd> key
+  */
+  @property gid.gtk4.types.ListTabBehavior tabBehavior() nothrow
+  {
+    return getTabBehavior();
+  }
+
+  /**
+      Set `tabBehavior` property.
+      Params:
+        propval = Behavior of the <kbd>Tab</kbd> key
+  */
+  @property void tabBehavior(gid.gtk4.types.ListTabBehavior propval) nothrow
+  {
+    setTabBehavior(propval);
+  }
+
+  /**
+      Creates a new [gid.gtk4.grid_view.GridView] that uses the given factory for
+      mapping items to widgets.
+      
+      The function takes ownership of the
+      arguments, so you can write code like
+      ```c
+      grid_view = gtk_grid_view_new (create_model (),
+        gtk_builder_list_item_factory_new_from_resource ("/resource.ui"));
+      ```
+  
+      Params:
+        model = the model to use
+        factory = The factory to populate items with
+      Returns: a new [gid.gtk4.grid_view.GridView] using the given model and factory
+  */
+  this(gid.gtk4.selection_model.SelectionModel model = null, gid.gtk4.list_item_factory.ListItemFactory factory = null) nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_grid_view_new(model ? cast(GtkSelectionModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(Yes.Dup) : null, factory ? cast(GtkListItemFactory*)factory._cPtr(Yes.Dup) : null);
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Returns whether rows can be selected by dragging with the mouse.
+      Returns: true if rubberband selection is enabled
+  */
+  bool getEnableRubberband() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_grid_view_get_enable_rubberband(cast(GtkGridView*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the factory that's currently used to populate list items.
+      Returns: The factory in use
+  */
+  gid.gtk4.list_item_factory.ListItemFactory getFactory() nothrow
+  {
+    GtkListItemFactory* _cretval;
+    _cretval = gtk_grid_view_get_factory(cast(GtkGridView*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the maximum number of columns that the grid will use.
+      Returns: The maximum number of columns
+  */
+  uint getMaxColumns() nothrow
+  {
+    uint _retval;
+    _retval = gtk_grid_view_get_max_columns(cast(GtkGridView*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the minimum number of columns that the grid will use.
+      Returns: The minimum number of columns
+  */
+  uint getMinColumns() nothrow
+  {
+    uint _retval;
+    _retval = gtk_grid_view_get_min_columns(cast(GtkGridView*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the model that's currently used to read the items displayed.
+      Returns: The model in use
+  */
+  gid.gtk4.selection_model.SelectionModel getModel() nothrow
+  {
+    GtkSelectionModel* _cretval;
+    _cretval = gtk_grid_view_get_model(cast(GtkGridView*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns whether items will be activated on single click and
+      selected on hover.
+      Returns: true if items are activated on single click
+  */
+  bool getSingleClickActivate() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_grid_view_get_single_click_activate(cast(GtkGridView*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the behavior set for the <kbd>Tab</kbd> key.
+      Returns: The behavior of the <kbd>Tab</kbd> key
+  */
+  gid.gtk4.types.ListTabBehavior getTabBehavior() nothrow
+  {
+    GtkListTabBehavior _cretval;
+    _cretval = gtk_grid_view_get_tab_behavior(cast(GtkGridView*)this._cPtr);
+    gid.gtk4.types.ListTabBehavior _retval = cast(gid.gtk4.types.ListTabBehavior)_cretval;
+    return _retval;
+  }
+
+  /**
+      Scrolls to the item at the given position and performs the actions
+      specified in flags.
+      
+      This function works no matter if the gridview is shown or focused.
+      If it isn't, then the changes will take effect once that happens.
+  
+      Params:
+        pos = position of the item. Must be less than the number of
+            items in the view.
+        flags = actions to perform
+        scroll = details of how to perform
+            the scroll operation or null to scroll into view
+  */
+  void scrollTo(uint pos, gid.gtk4.types.ListScrollFlags flags, gid.gtk4.scroll_info.ScrollInfo scroll = null) nothrow
+  {
+    gtk_grid_view_scroll_to(cast(GtkGridView*)this._cPtr, pos, flags, scroll ? cast(GtkScrollInfo*)scroll._cPtr(Yes.Dup) : null);
+  }
+
+  /**
+      Sets whether selections can be changed by dragging with the mouse.
+  
+      Params:
+        enableRubberband = true to enable rubberband selection
+  */
+  void setEnableRubberband(bool enableRubberband) nothrow
+  {
+    gtk_grid_view_set_enable_rubberband(cast(GtkGridView*)this._cPtr, enableRubberband);
+  }
+
+  /**
+      Sets the [gid.gtk4.list_item_factory.ListItemFactory] to use for populating list items.
+  
+      Params:
+        factory = the factory to use
+  */
+  void setFactory(gid.gtk4.list_item_factory.ListItemFactory factory = null) nothrow
+  {
+    gtk_grid_view_set_factory(cast(GtkGridView*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the maximum number of columns to use.
+      
+      This number must be at least 1.
+      
+      If max_columns is smaller than the minimum set via
+      [gid.gtk4.grid_view.GridView.setMinColumns], that value is used instead.
+  
+      Params:
+        maxColumns = The maximum number of columns
+  */
+  void setMaxColumns(uint maxColumns) nothrow
+  {
+    gtk_grid_view_set_max_columns(cast(GtkGridView*)this._cPtr, maxColumns);
+  }
+
+  /**
+      Sets the minimum number of columns to use.
+      
+      This number must be at least 1.
+      
+      If min_columns is smaller than the minimum set via
+      [gid.gtk4.grid_view.GridView.setMaxColumns], that value is ignored.
+  
+      Params:
+        minColumns = The minimum number of columns
+  */
+  void setMinColumns(uint minColumns) nothrow
+  {
+    gtk_grid_view_set_min_columns(cast(GtkGridView*)this._cPtr, minColumns);
+  }
+
+  /**
+      Sets the model to use.
+      
+      This must be a [gid.gtk4.selection_model.SelectionModel].
+  
+      Params:
+        model = the model to use
+  */
+  void setModel(gid.gtk4.selection_model.SelectionModel model = null) nothrow
+  {
+    gtk_grid_view_set_model(cast(GtkGridView*)this._cPtr, model ? cast(GtkSelectionModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets whether items should be activated on single click and
+      selected on hover.
+  
+      Params:
+        singleClickActivate = true to activate items on single click
+  */
+  void setSingleClickActivate(bool singleClickActivate) nothrow
+  {
+    gtk_grid_view_set_single_click_activate(cast(GtkGridView*)this._cPtr, singleClickActivate);
+  }
+
+  /**
+      Sets the behavior of the <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd> keys.
+  
+      Params:
+        tabBehavior = The desired tab behavior
+  */
+  void setTabBehavior(gid.gtk4.types.ListTabBehavior tabBehavior) nothrow
+  {
+    gtk_grid_view_set_tab_behavior(cast(GtkGridView*)this._cPtr, tabBehavior);
+  }
+
+  /**
+      Connect to `Activate` signal.
+  
+      Emitted when a cell has been activated by the user,
+        usually via activating the GtkGridView|list.activate-item action.
+        
+        This allows for a convenient way to handle activation in a gridview.
+        See [gid.gtk4.list_item.ListItem.activatable] for details on how to use
+        this signal.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(uint position, gid.gtk4.grid_view.GridView gridView)`
+  
+          `position` position of item to activate (optional)
+  
+          `gridView` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gtk4.grid_view.GridView)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.grid_view.GridView.activate");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("activate", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.grid_view.GridView]
+class GridViewGidBuilderImpl(T) : gid.gtk4.list_base.ListBaseGidBuilderImpl!T
+{
+
+
+  /**
+      Set `enableRubberband` property.
+      Params:
+        propval = Allow rubberband selection.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableRubberband(bool propval) nothrow
+  {
+    return setProperty("enable-rubberband", propval);
+  }
+
+  /**
+      Set `factory` property.
+      Params:
+        propval = Factory for populating list items.
+          
+          The factory must be for configuring [gid.gtk4.list_item.ListItem] objects.
+      Returns: Builder instance for fluent chaining
+  */
+  T factory(gid.gtk4.list_item_factory.ListItemFactory propval) nothrow
+  {
+    return setProperty("factory", propval);
+  }
+
+  /**
+      Set `maxColumns` property.
+      Params:
+        propval = Maximum number of columns per row.
+          
+          If this number is smaller than [gid.gtk4.grid_view.GridView.minColumns],
+          that value is used instead.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxColumns(uint propval) nothrow
+  {
+    return setProperty("max-columns", propval);
+  }
+
+  /**
+      Set `minColumns` property.
+      Params:
+        propval = Minimum number of columns per row.
+      Returns: Builder instance for fluent chaining
+  */
+  T minColumns(uint propval) nothrow
+  {
+    return setProperty("min-columns", propval);
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = Model for the items displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gid.gtk4.selection_model.SelectionModel propval) nothrow
+  {
+    return setProperty("model", propval);
+  }
+
+  /**
+      Set `singleClickActivate` property.
+      Params:
+        propval = Activate rows on single click and select them on hover.
+      Returns: Builder instance for fluent chaining
+  */
+  T singleClickActivate(bool propval) nothrow
+  {
+    return setProperty("single-click-activate", propval);
+  }
+
+  /**
+      Set `tabBehavior` property.
+      Params:
+        propval = Behavior of the <kbd>Tab</kbd> key
+      Returns: Builder instance for fluent chaining
+  */
+  T tabBehavior(gid.gtk4.types.ListTabBehavior propval) nothrow
+  {
+    return setProperty("tab-behavior", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk4.grid_view.GridView]
+final class GridViewGidBuilder : GridViewGidBuilderImpl!GridViewGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  GridView build() nothrow
+  {
+    return new GridView(cast(void*)createGObject(GridView._getGType), Yes.Take);
+  }
+}

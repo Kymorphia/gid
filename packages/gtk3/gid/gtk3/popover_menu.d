@@ -1,0 +1,201 @@
+/// Module for [PopoverMenu] class
+module gid.gtk3.popover_menu;
+
+public import gid.core.basictypes;
+import gid.atk1.implementor_iface;
+import gid.atk1.implementor_iface_mixin;
+import gid.core.gid;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk3.buildable;
+import gid.gtk3.buildable_mixin;
+import gid.gtk3.c.functions;
+import gid.gtk3.c.types;
+import gid.gtk3.popover;
+import gid.gtk3.types;
+
+/**
+    GtkPopoverMenu is a subclass of #GtkPopover that treats its
+    children like menus and allows switching between them. It is
+    meant to be used primarily together with #GtkModelButton, but
+    any widget can be used, such as #GtkSpinButton or #GtkScale.
+    In this respect, GtkPopoverMenu is more flexible than popovers
+    that are created from a #GMenuModel with [gid.gtk3.popover.Popover.newFromModel].
+    
+    To add a child as a submenu, set the #GtkPopoverMenu:submenu
+    child property to the name of the submenu. To let the user open
+    this submenu, add a #GtkModelButton whose #GtkModelButton:menu-name
+    property is set to the name you've given to the submenu.
+    
+    By convention, the first child of a submenu should be a #GtkModelButton
+    to switch back to the parent menu. Such a button should use the
+    #GtkModelButton:inverted and #GtkModelButton:centered properties
+    to achieve a title-like appearance and place the submenu indicator
+    at the opposite side. To switch back to the main menu, use "main"
+    as the menu name.
+    
+    # Example
+    
+    ```xml
+    <object class="GtkPopoverMenu">
+      <child>
+        <object class="GtkBox">
+          <property name="visible">True</property>
+          <property name="margin">10</property>
+          <child>
+            <object class="GtkModelButton">
+              <property name="visible">True</property>
+              <property name="action-name">win.frob</property>
+              <property name="text" translatable="yes">Frob</property>
+            </object>
+          </child>
+          <child>
+            <object class="GtkModelButton">
+              <property name="visible">True</property>
+              <property name="menu-name">more</property>
+              <property name="text" translatable="yes">More</property>
+            </object>
+          </child>
+        </object>
+      </child>
+      <child>
+        <object class="GtkBox">
+          <property name="visible">True</property>
+          <property name="margin">10</property>
+          <child>
+            <object class="GtkModelButton">
+              <property name="visible">True</property>
+              <property name="action-name">win.foo</property>
+              <property name="text" translatable="yes">Foo</property>
+            </object>
+          </child>
+          <child>
+            <object class="GtkModelButton">
+              <property name="visible">True</property>
+              <property name="action-name">win.bar</property>
+              <property name="text" translatable="yes">Bar</property>
+            </object>
+          </child>
+        </object>
+        <packing>
+          <property name="submenu">more</property>
+        </packing>
+      </child>
+    </object>
+    ```
+    
+    Just like normal popovers created using gtk_popover_new_from_model,
+    #GtkPopoverMenu instances have a single css node called "popover"
+    and get the .menu style class.
+*/
+class PopoverMenu : gid.gtk3.popover.Popover
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_popover_menu_get_type != &gidSymbolNotFound ? gtk_popover_menu_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkPopoverMenu";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override PopoverMenu self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk3.popover_menu.PopoverMenu]
+      Returns: New builder object
+  */
+  static PopoverMenuGidBuilder builder() nothrow
+  {
+    return new PopoverMenuGidBuilder;
+  }
+
+  /** */
+  @property string visibleSubmenu() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(string)("visible-submenu");
+  }
+
+  /** */
+  @property void visibleSubmenu(string propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(string)("visible-submenu", propval);
+  }
+
+  /**
+      Creates a new popover menu.
+      Returns: a new #GtkPopoverMenu
+  */
+  this() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_popover_menu_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Opens a submenu of the popover. The name
+      must be one of the names given to the submenus
+      of popover with #GtkPopoverMenu:submenu, or
+      "main" to switch back to the main menu.
+      
+      #GtkModelButton will open submenus automatically
+      when the #GtkModelButton:menu-name property is set,
+      so this function is only needed when you are using
+      other kinds of widgets to initiate menu changes.
+  
+      Params:
+        name = the name of the menu to switch to
+  */
+  void openSubmenu(string name) nothrow
+  {
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    gtk_popover_menu_open_submenu(cast(GtkPopoverMenu*)this._cPtr, _name);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk3.popover_menu.PopoverMenu]
+class PopoverMenuGidBuilderImpl(T) : gid.gtk3.popover.PopoverGidBuilderImpl!T
+{
+
+
+  /** */
+  T visibleSubmenu(string propval) nothrow
+  {
+    return setProperty("visible-submenu", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk3.popover_menu.PopoverMenu]
+final class PopoverMenuGidBuilder : PopoverMenuGidBuilderImpl!PopoverMenuGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  PopoverMenu build() nothrow
+  {
+    return new PopoverMenu(cast(void*)createGObject(PopoverMenu._getGType), Yes.Take);
+  }
+}

@@ -14,13 +14,13 @@
 
 //!class LayeredSettings pre
 
-import glib.variant_type;
-import gobject.value;
+import gid.glib2.variant_type;
+import gid.gobject2.value;
 
 //!class LayeredSettings
 
   /**
-      Creates a new binding similar to [gio.settings.Settings.bind] but applying from the resolved value via the layered
+      Creates a new binding similar to [gid.gio2.settings.Settings.bind] but applying from the resolved value via the layered
       settings and allowing transforming to and from settings storage using getMapping and setMapping.
       Params:
         key = the settings key to bind
@@ -32,8 +32,8 @@ import gobject.value;
         setMapping = the set mapping delegate (value to variant), it should return a new variant or null on failure,
           or null to use the default conversion
   */
-  void bindWithMapping(string key, gobject.object.ObjectWrap object, string property, gio.types.SettingsBindFlags flags,
-    gio.types.SettingsBindGetMapping getMapping = null, gio.types.SettingsBindSetMapping setMapping = null) nothrow
+  void bindWithMapping(string key, gid.gobject2.object.ObjectWrap object, string property, gid.gio2.types.SettingsBindFlags flags,
+    gid.gio2.types.SettingsBindGetMapping getMapping = null, gid.gio2.types.SettingsBindSetMapping setMapping = null) nothrow
   {
     const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
@@ -48,12 +48,12 @@ import gobject.value;
   // null if there are no mapping delegates
   package static struct _MappingDelegates
   {
-    gio.types.SettingsBindGetMapping getMapping;
-    gio.types.SettingsBindSetMapping setMapping;
+    gid.gio2.types.SettingsBindGetMapping getMapping;
+    gid.gio2.types.SettingsBindSetMapping setMapping;
   }
 
-  package static void* _mappingData(gio.types.SettingsBindGetMapping getMapping,
-    gio.types.SettingsBindSetMapping setMapping) nothrow
+  package static void* _mappingData(gid.gio2.types.SettingsBindGetMapping getMapping,
+    gid.gio2.types.SettingsBindSetMapping setMapping) nothrow
   {
     if (!getMapping && !setMapping)
       return null;
@@ -65,7 +65,7 @@ import gobject.value;
 
   package static extern(C) gboolean _getMappingCallback(GValue* value, GVariant* variant, void* userData) nothrow
   {
-    import gobject.c.functions : g_value_copy;
+    import gid.gobject2.c.functions : g_value_copy;
 
     auto _data = cast(_MappingDelegates*)userData;
 
@@ -73,15 +73,15 @@ import gobject.value;
 
     try
     {
-      auto _value = new gobject.value.Value(cast(void*)value, No.Take); // Copy of the initialized value, copied back on success
-      _dretval = _data.getMapping(_value, variant ? new glib.variant.Variant(cast(void*)variant, No.Take) : null);
+      auto _value = new gid.gobject2.value.Value(cast(void*)value, No.Take); // Copy of the initialized value, copied back on success
+      _dretval = _data.getMapping(_value, variant ? new gid.glib2.variant.Variant(cast(void*)variant, No.Take) : null);
 
       if (_dretval)
         g_value_copy(cast(GValue*)_value._cPtr, value);
     }
     catch (Exception e)
     {
-      gidInvokeCallbackExceptionHandler(e, "gio.types.SettingsBindGetMapping");
+      gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.SettingsBindGetMapping");
       _dretval = false;
     }
 
@@ -93,16 +93,16 @@ import gobject.value;
   {
     auto _data = cast(_MappingDelegates*)userData;
 
-    glib.variant.Variant _dretval;
+    gid.glib2.variant.Variant _dretval;
 
     try
     {
-      _dretval = _data.setMapping(value ? new gobject.value.Value(cast(void*)value, No.Take) : null,
-        expectedType ? new glib.variant_type.VariantType(cast(void*)expectedType, No.Take) : null);
+      _dretval = _data.setMapping(value ? new gid.gobject2.value.Value(cast(void*)value, No.Take) : null,
+        expectedType ? new gid.glib2.variant_type.VariantType(cast(void*)expectedType, No.Take) : null);
     }
     catch (Exception e)
     {
-      gidInvokeCallbackExceptionHandler(e, "gio.types.SettingsBindSetMapping");
+      gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.SettingsBindSetMapping");
       _dretval = null;
     }
 
@@ -112,9 +112,9 @@ import gobject.value;
 //!class Settings
 
   /**
-      Like [panel.settings.Settings.bind] but allows transforming to and from settings storage using getMapping and
+      Like [gid.panel1.settings.Settings.bind] but allows transforming to and from settings storage using getMapping and
       setMapping.
-      Call [panel.settings.Settings.unbind] to unbind the mapping.
+      Call [gid.panel1.settings.Settings.unbind] to unbind the mapping.
       Params:
         key = the settings key
         object = the object to bind to
@@ -125,10 +125,10 @@ import gobject.value;
         setMapping = the set mapping delegate (value to variant), it should return a new variant or null on failure,
           or null to use the default conversion
   */
-  void bindWithMapping(string key, gobject.object.ObjectWrap object, string property, gio.types.SettingsBindFlags flags,
-    gio.types.SettingsBindGetMapping getMapping = null, gio.types.SettingsBindSetMapping setMapping = null) nothrow
+  void bindWithMapping(string key, gid.gobject2.object.ObjectWrap object, string property, gid.gio2.types.SettingsBindFlags flags,
+    gid.gio2.types.SettingsBindGetMapping getMapping = null, gid.gio2.types.SettingsBindSetMapping setMapping = null) nothrow
   {
-    import panel.layered_settings : LayeredSettings;
+    import gid.panel1.layered_settings : LayeredSettings;
 
     const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     const(char)* _property = property.toCString!(No.Malloc, No.Nullable);

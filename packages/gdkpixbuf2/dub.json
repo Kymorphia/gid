@@ -6,8 +6,8 @@
   "license": "MIT",
   "homepage": "https://gtk.org",
   "targetType": "library",
-  "importPaths": [".", ".."],
-  "sourcePaths": ["gdkpixbuf"],
+  "importPaths": ["."],
+  "sourcePaths": ["gid"],
   "dependencies": {
     "gid:gio2": "*",
     "gid:gmodule2": "*"

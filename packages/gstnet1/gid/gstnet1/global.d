@@ -1,0 +1,231 @@
+/// Global functions for gstnet1 library
+module gid.gstnet1.global;
+
+import gid.core.gid;
+import gid.gio2.socket;
+import gid.gio2.socket_address;
+import gid.gio2.socket_control_message;
+import gid.gobject2.types;
+import gid.gst1.buffer;
+import gid.gst1.structure;
+import gid.gstnet1.c.functions;
+import gid.gstnet1.c.types;
+import gid.gstnet1.net_address_meta;
+import gid.gstnet1.net_control_message_meta;
+import gid.gstnet1.types;
+
+
+/**
+    Attaches addr as metadata in a #GstNetAddressMeta to buffer.
+
+    Params:
+      buffer = a #GstBuffer
+      addr = a GSocketAddress to connect to buffer
+    Returns: a #GstNetAddressMeta connected to buffer
+*/
+gid.gstnet1.net_address_meta.NetAddressMeta bufferAddNetAddressMeta(gid.gst1.buffer.Buffer buffer, gid.gio2.socket_address.SocketAddress addr) nothrow
+{
+  GstNetAddressMeta* _cretval;
+  _cretval = gst_buffer_add_net_address_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, addr ? cast(GSocketAddress*)addr._cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new gid.gstnet1.net_address_meta.NetAddressMeta(cast(GstNetAddressMeta*)_cretval, buffer) : null;
+  return _retval;
+}
+
+/**
+    Attaches message as metadata in a #GstNetControlMessageMeta to buffer.
+
+    Params:
+      buffer = a #GstBuffer
+      message = a GSocketControlMessage to attach to buffer
+    Returns: a #GstNetControlMessageMeta connected to buffer
+*/
+gid.gstnet1.net_control_message_meta.NetControlMessageMeta bufferAddNetControlMessageMeta(gid.gst1.buffer.Buffer buffer, gid.gio2.socket_control_message.SocketControlMessage message) nothrow
+{
+  GstNetControlMessageMeta* _cretval;
+  _cretval = gst_buffer_add_net_control_message_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, message ? cast(GSocketControlMessage*)message._cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new gid.gstnet1.net_control_message_meta.NetControlMessageMeta(cast(GstNetControlMessageMeta*)_cretval, buffer) : null;
+  return _retval;
+}
+
+/**
+    Find the #GstNetAddressMeta on buffer.
+
+    Params:
+      buffer = a #GstBuffer
+    Returns: the #GstNetAddressMeta or null when there
+      is no such metadata on buffer.
+*/
+gid.gstnet1.net_address_meta.NetAddressMeta bufferGetNetAddressMeta(gid.gst1.buffer.Buffer buffer) nothrow
+{
+  GstNetAddressMeta* _cretval;
+  _cretval = gst_buffer_get_net_address_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new gid.gstnet1.net_address_meta.NetAddressMeta(cast(GstNetAddressMeta*)_cretval, buffer) : null;
+  return _retval;
+}
+
+/** */
+gid.gobject2.types.GType netAddressMetaApiGetType() nothrow
+{
+  gid.gobject2.types.GType _retval;
+  _retval = gst_net_address_meta_api_get_type();
+  return _retval;
+}
+
+/** */
+gid.gobject2.types.GType netControlMessageMetaApiGetType() nothrow
+{
+  gid.gobject2.types.GType _retval;
+  _retval = gst_net_control_message_meta_api_get_type();
+  return _retval;
+}
+
+/**
+    Configures IP_TOS value of socket, i.e. sets QoS DSCP.
+
+    Params:
+      socket = Socket to configure
+      qosDscp = QoS DSCP value
+    Returns: TRUE if successful, FALSE in case an error occurred.
+*/
+bool netUtilsSetSocketTos(gid.gio2.socket.Socket socket, int qosDscp) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_net_utils_set_socket_tos(socket ? cast(GSocket*)socket._cPtr(No.Dup) : null, qosDscp);
+  return _retval;
+}
+
+/**
+    Deinitialize the GStreamer PTP subsystem and stop the PTP clock. If there
+    are any remaining GstPtpClock instances, they won't be further synchronized
+    to the PTP network clock.
+*/
+void ptpDeinit() nothrow
+{
+  gst_ptp_deinit();
+}
+
+/**
+    Initialize the GStreamer PTP subsystem and create a PTP ordinary clock in
+    slave-only mode for all domains on the given interfaces with the
+    given clock_id.
+    
+    If clock_id is [gid.gstnet1.types.PTP_CLOCK_ID_NONE], a clock id is automatically
+    generated from the MAC address of the first network interface.
+    
+    This function is automatically called by [gid.gstnet1.ptp_clock.PtpClock.new_] with default
+    parameters if it wasn't called before.
+
+    Params:
+      clockId = PTP clock id of this process' clock or [gid.gstnet1.types.PTP_CLOCK_ID_NONE]
+      interfaces = network interfaces to run the clock on
+    Returns: true if the GStreamer PTP clock subsystem could be initialized.
+*/
+bool ptpInit(ulong clockId, string[] interfaces = null) nothrow
+{
+  bool _retval;
+  auto _interfaces_arr = new char*[](interfaces.length + 1);
+  auto _interfaces = cast(char**)_interfaces_arr.ptr;
+  foreach (i, s; interfaces) _interfaces[i] = s.toCString!(No.Malloc);
+  _retval = cast(bool)gst_ptp_init(clockId, _interfaces);
+  return _retval;
+}
+
+/**
+    Initialize the GStreamer PTP subsystem and create a PTP ordinary clock in
+    slave-only mode according to the config.
+    
+    config is a #GstStructure with the following optional fields:
+    * #guint64 `clock-id`: The clock ID to use for the local clock. If the
+        clock-id is not provided or [gid.gstnet1.types.PTP_CLOCK_ID_NONE] is provided, a clock
+        id is automatically generated from the MAC address of the first network
+        interface.
+    * #GStrv `interfaces`: The interface names to listen on for PTP packets. If
+        none are provided then all compatible interfaces will be used.
+    * #guint `ttl`: The TTL to use for multicast packets sent out by GStreamer.
+        This defaults to 1, i.e. packets will not leave the local network.
+    
+    This function is automatically called by [gid.gstnet1.ptp_clock.PtpClock.new_] with default
+    parameters if it wasn't called before.
+
+    Params:
+      config = Configuration for initializing the GStreamer PTP subsystem
+    Returns: true if the GStreamer PTP clock subsystem could be initialized.
+*/
+bool ptpInitFull(gid.gst1.structure.Structure config) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_ptp_init_full(config ? cast(const(GstStructure)*)config._cPtr(No.Dup) : null);
+  return _retval;
+}
+
+/**
+    Check if the GStreamer PTP clock subsystem is initialized.
+    Returns: true if the GStreamer PTP clock subsystem is initialized.
+*/
+bool ptpIsInitialized() nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_ptp_is_initialized();
+  return _retval;
+}
+
+/**
+    Check if PTP clocks are generally supported on this system, and if previous
+    initializations did not fail.
+    Returns: true if PTP clocks are generally supported on this system, and
+      previous initializations did not fail.
+*/
+bool ptpIsSupported() nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_ptp_is_supported();
+  return _retval;
+}
+
+/**
+    Installs a new statistics callback for gathering PTP statistics. See
+    GstPtpStatisticsCallback for a list of statistics that are provided.
+
+    Params:
+      callback = GstPtpStatisticsCallback to call
+    Returns: Id for the callback that can be passed to
+      [gid.gstnet1.global.ptpStatisticsCallbackRemove]
+*/
+gulong ptpStatisticsCallbackAdd(gid.gstnet1.types.PtpStatisticsCallback callback) nothrow
+{
+  extern(C) gboolean _callbackCallback(ubyte domain, const(GstStructure)* stats, void* userData) nothrow
+  {
+    bool _dretval;
+    auto _dlg = cast(gid.gstnet1.types.PtpStatisticsCallback*)userData;
+
+    try
+    {
+      _dretval = (*_dlg)(domain, stats ? new gid.gst1.structure.Structure(cast(void*)stats, No.Take) : null);
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gid.gstnet1.types.PtpStatisticsCallback");
+    }
+    auto _retval = cast(gboolean)_dretval;
+
+    return _retval;
+  }
+  auto _callbackCB = callback ? &_callbackCallback : null;
+  gulong _retval;
+  auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+  GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
+  _retval = gst_ptp_statistics_callback_add(_callbackCB, _callback, _callbackDestroyCB);
+  return _retval;
+}
+
+/**
+    Removes a PTP statistics callback that was previously added with
+    [gid.gstnet1.global.ptpStatisticsCallbackAdd].
+
+    Params:
+      id = Callback id to remove
+*/
+void ptpStatisticsCallbackRemove(gulong id) nothrow
+{
+  gst_ptp_statistics_callback_remove(id);
+}

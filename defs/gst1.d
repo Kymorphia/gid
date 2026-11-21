@@ -23,7 +23,7 @@
 
 //!kind Structure Boxed
 
-//# Ignore: Fundamental GValue types with no C structure, bound as D value types in gst.types instead (see gst1-types.d)
+//# Ignore: Fundamental GValue types with no C structure, bound as D value types in gid.gst1.types instead (see gst1-types.d)
 //!set class[Bitmask][ignore] 1
 //!set class[DoubleRange][ignore] 1
 //!set class[FlagSet][ignore] 1
@@ -173,8 +173,8 @@
     contents of buffer is invalid for any other return value.
 
     This function is installed on a source pad with
-    [gst.pad.Pad.setGetrangeFunctionFull] and can only be called on source pads after
-    they are successfully activated with [gst.pad.Pad.activateMode] with the
+    [gid.gst1.pad.Pad.setGetrangeFunctionFull] and can only be called on source pads after
+    they are successfully activated with [gid.gst1.pad.Pad.activateMode] with the
     #GST_PAD_MODE_PULL.
 
     offset and length are always given in byte units. offset must normally be a value
@@ -217,7 +217,7 @@
     Returns: #GST_FLOW_OK for success and a valid buffer in buffer. Any other
       return value leaves buffer undefined.
 */
-alias PadGetRangeFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.object.ObjectWrap parent, ulong offset, uint length, ref gst.buffer.Buffer buffer);
+alias PadGetRangeFunction = gid.gst1.types.FlowReturn delegate(gid.gst1.pad.Pad pad, gid.gst1.object.ObjectWrap parent, ulong offset, uint length, ref gid.gst1.buffer.Buffer buffer);
 
 //!class Pad
 
@@ -229,27 +229,27 @@ alias PadGetRangeFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.o
       Params:
         get = the #GstPadGetRangeFunction to set.
   */
-  void setGetrangeFunctionFull(gst.types.PadGetRangeFunction get) nothrow
+  void setGetrangeFunctionFull(gid.gst1.types.PadGetRangeFunction get) nothrow
   {
     extern(C) GstFlowReturn _getCallback(GstPad* pad, GstObject* parent, ulong offset, uint length, GstBuffer** buffer) nothrow
     {
-      gst.types.FlowReturn _dretval;
-      auto _dlg = cast(gst.types.PadGetRangeFunction*)pad.getrangedata;
+      gid.gst1.types.FlowReturn _dretval;
+      auto _dlg = cast(gid.gst1.types.PadGetRangeFunction*)pad.getrangedata;
 
       // A caller provided buffer is borrowed: its reference is taken for the call and stolen back afterwards, so
       // the buffer stays writable (single reference) while it is filled
-      auto _provided = *buffer ? new gst.buffer.Buffer(cast(void*)*buffer, Yes.Take) : null;
+      auto _provided = *buffer ? new gid.gst1.buffer.Buffer(cast(void*)*buffer, Yes.Take) : null;
       auto _buffer = _provided;
 
       try
       {
-        _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take),
-          gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take), offset, length,
+        _dretval = (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.pad.Pad)(cast(void*)pad, No.Take),
+          gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.object.ObjectWrap)(cast(void*)parent, No.Take), offset, length,
           _buffer);
       }
       catch (Exception e)
       {
-        gidInvokeCallbackExceptionHandler(e, "gst.types.PadGetRangeFunction");
+        gidInvokeCallbackExceptionHandler(e, "gid.gst1.types.PadGetRangeFunction");
       }
 
       auto _retval = cast(GstFlowReturn)_dretval;
@@ -260,10 +260,10 @@ alias PadGetRangeFunction = gst.types.FlowReturn delegate(gst.pad.Pad pad, gst.o
 
         if (_buffer !is _provided)
         {
-          import glib.c.functions : g_log;
-          import glib.c.types : GLogLevelFlags;
+          import gid.glib2.c.functions : g_log;
+          import gid.glib2.c.types : GLogLevelFlags;
           g_log("Gid", GLogLevelFlags.LevelCritical, "%s",
-            "gst.types.PadGetRangeFunction replaced the caller provided buffer".ptr);
+            "gid.gst1.types.PadGetRangeFunction replaced the caller provided buffer".ptr);
           _retval = GstFlowReturn.Error;
         }
       }

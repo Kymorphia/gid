@@ -1,0 +1,91 @@
+/// Module for [VirtualMachine] class
+module gid.javascriptcore6.virtual_machine;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.javascriptcore6.c.functions;
+import gid.javascriptcore6.c.types;
+import gid.javascriptcore6.types;
+
+/**
+    JSCVirtualMachine represents a group of JSCContext<!-- -->s. It allows
+    concurrent JavaScript execution by creating a different instance of
+    JSCVirtualMachine in each thread.
+    
+    To create a group of JSCContext<!-- -->s pass the same JSCVirtualMachine
+    instance to every JSCContext constructor.
+*/
+class VirtualMachine : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())jsc_virtual_machine_get_type != &gidSymbolNotFound ? jsc_virtual_machine_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "JSCVirtualMachine";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override VirtualMachine self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.javascriptcore6.virtual_machine.VirtualMachine]
+      Returns: New builder object
+  */
+  static VirtualMachineGidBuilder builder() nothrow
+  {
+    return new VirtualMachineGidBuilder;
+  }
+
+  /**
+      Create a new #JSCVirtualMachine.
+      Returns: the newly created #JSCVirtualMachine.
+  */
+  this() nothrow
+  {
+    JSCVirtualMachine* _cretval;
+    _cretval = jsc_virtual_machine_new();
+    this(_cretval, Yes.Take);
+  }
+}
+
+/// Fluent builder implementation template for [gid.javascriptcore6.virtual_machine.VirtualMachine]
+class VirtualMachineGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.javascriptcore6.virtual_machine.VirtualMachine]
+final class VirtualMachineGidBuilder : VirtualMachineGidBuilderImpl!VirtualMachineGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  VirtualMachine build() nothrow
+  {
+    return new VirtualMachine(cast(void*)createGObject(VirtualMachine._getGType), Yes.Take);
+  }
+}

@@ -1,0 +1,214 @@
+/// Module for [OptionMenu] class
+module gid.webkit6.option_menu;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gdk4.event;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.webkit6.c.functions;
+import gid.webkit6.c.types;
+import gid.webkit6.option_menu_item;
+import gid.webkit6.types;
+
+/**
+    Represents the dropdown menu of a `select` element in a #WebKitWebView.
+    
+    When a select element in a #WebKitWebView needs to display a dropdown menu, the signal
+    #WebKitWebView::show-option-menu is emitted, providing a WebKitOptionMenu with the
+    #WebKitOptionMenuItem<!-- -->s that should be displayed.
+*/
+class OptionMenu : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())webkit_option_menu_get_type != &gidSymbolNotFound ? webkit_option_menu_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitOptionMenu";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override OptionMenu self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.webkit6.option_menu.OptionMenu]
+      Returns: New builder object
+  */
+  static OptionMenuGidBuilder builder() nothrow
+  {
+    return new OptionMenuGidBuilder;
+  }
+
+  /**
+      Activates the #WebKitOptionMenuItem at index in menu.
+      
+      Activating an item changes the value
+      of the element making the item the active one. You are expected to close the menu with
+      [gid.webkit6.option_menu.OptionMenu.close] after activating an item, calling this function again will have no
+      effect.
+  
+      Params:
+        index = the index of the item
+  */
+  void activateItem(uint index) nothrow
+  {
+    webkit_option_menu_activate_item(cast(WebKitOptionMenu*)this._cPtr, index);
+  }
+
+  /**
+      Request to close a #WebKitOptionMenu.
+      
+      This emits WebKitOptionMenu::close signal.
+      This function should always be called to notify WebKit that the associated
+      menu has been closed. If the menu is closed and neither [gid.webkit6.option_menu.OptionMenu.selectItem]
+      nor [gid.webkit6.option_menu.OptionMenu.activateItem] have been called, the element value remains
+      unchanged.
+  */
+  void close() nothrow
+  {
+    webkit_option_menu_close(cast(WebKitOptionMenu*)this._cPtr);
+  }
+
+  /**
+      Gets the #GdkEvent that triggered the dropdown menu.
+      If menu was not triggered by a user interaction, like a mouse click,
+      null is returned.
+      Returns: the menu event or null.
+  */
+  gid.gdk4.event.Event getEvent() nothrow
+  {
+    GdkEvent* _cretval;
+    _cretval = webkit_option_menu_get_event(cast(WebKitOptionMenu*)this._cPtr);
+    auto _retval = _cretval ? new gid.gdk4.event.Event(cast(GdkEvent*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns the #WebKitOptionMenuItem at index in menu.
+  
+      Params:
+        index = the index of the item
+      Returns: a #WebKitOptionMenuItem of menu.
+  */
+  gid.webkit6.option_menu_item.OptionMenuItem getItem(uint index) nothrow
+  {
+    WebKitOptionMenuItem* _cretval;
+    _cretval = webkit_option_menu_get_item(cast(WebKitOptionMenu*)this._cPtr, index);
+    auto _retval = _cretval ? new gid.webkit6.option_menu_item.OptionMenuItem(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the length of the menu.
+      Returns: the number of #WebKitOptionMenuItem<!-- -->s in menu
+  */
+  uint getNItems() nothrow
+  {
+    uint _retval;
+    _retval = webkit_option_menu_get_n_items(cast(WebKitOptionMenu*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Selects the #WebKitOptionMenuItem at index in menu.
+      
+      Selecting an item changes the
+      text shown by the combo button, but it doesn't change the value of the element. You need to
+      explicitly activate the item with [gid.webkit6.option_menu.OptionMenu.selectItem] or close the menu with
+      [gid.webkit6.option_menu.OptionMenu.close] in which case the currently selected item will be activated.
+  
+      Params:
+        index = the index of the item
+  */
+  void selectItem(uint index) nothrow
+  {
+    webkit_option_menu_select_item(cast(WebKitOptionMenu*)this._cPtr, index);
+  }
+
+  /**
+      Connect to `Close` signal.
+  
+      Emitted when closing a #WebKitOptionMenu is requested. This can happen
+        when the user explicitly calls [gid.webkit6.option_menu.OptionMenu.close] or when the
+        element is detached from the current page.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.webkit6.option_menu.OptionMenu optionMenu)`
+  
+          `optionMenu` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectClose(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.webkit6.option_menu.OptionMenu)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.webkit6.option_menu.OptionMenu.close");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("close", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.webkit6.option_menu.OptionMenu]
+class OptionMenuGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.webkit6.option_menu.OptionMenu]
+final class OptionMenuGidBuilder : OptionMenuGidBuilderImpl!OptionMenuGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  OptionMenu build() nothrow
+  {
+    return new OptionMenu(cast(void*)createGObject(OptionMenu._getGType), Yes.Take);
+  }
+}

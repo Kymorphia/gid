@@ -1,0 +1,75 @@
+/// Module for [PermissionStateQuery] class
+module gid.webkit6.permission_state_query;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.boxed;
+import gid.webkit6.c.functions;
+import gid.webkit6.c.types;
+import gid.webkit6.security_origin;
+import gid.webkit6.types;
+
+/**
+    This query represents a user's choice to allow or deny access to "powerful features" of the
+    platform, as specified in the [Permissions W3C
+    Specification](https://w3c.github.io/permissions/).
+    
+    When signalled by the #WebKitWebView through the `query-permission-state` signal, the application
+    has to eventually respond, via `[gid.webkit6.permission_state_query.PermissionStateQuery.finish]`, whether it grants,
+    denies or requests a dedicated permission prompt for the given query.
+    
+    When a #WebKitPermissionStateQuery is not handled by the user, the user-agent is instructed to
+    `prompt` the user for the given permission.
+*/
+class PermissionStateQuery : gid.gobject2.boxed.BoxedWrap!(webkit_permission_state_query_get_type)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override PermissionStateQuery self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Notify the web-engine of the selected permission state for the given query. This function should
+      only be called as a response to the `WebKitWebView::query-permission-state` signal.
+  
+      Params:
+        state = a #WebKitPermissionState
+  */
+  void finish(gid.webkit6.types.PermissionState state) nothrow
+  {
+    webkit_permission_state_query_finish(cast(WebKitPermissionStateQuery*)this._cPtr, state);
+  }
+
+  /**
+      Get the permission name for which access is being queried.
+      Returns: the permission name for query
+  */
+  string getName() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = webkit_permission_state_query_get_name(cast(WebKitPermissionStateQuery*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Get the permission origin for which access is being queried.
+      Returns: A #WebKitSecurityOrigin representing the origin from which the
+        query was emitted.
+  */
+  gid.webkit6.security_origin.SecurityOrigin getSecurityOrigin() nothrow
+  {
+    WebKitSecurityOrigin* _cretval;
+    _cretval = webkit_permission_state_query_get_security_origin(cast(WebKitPermissionStateQuery*)this._cPtr);
+    auto _retval = _cretval ? new gid.webkit6.security_origin.SecurityOrigin(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+}

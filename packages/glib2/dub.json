@@ -6,6 +6,6 @@
   "license": "MIT",
   "homepage": "https://gtk.org",
   "targetType": "library",
-  "importPaths": [".", ".."],
-  "sourcePaths": ["glib", "gobject", "gid"]
+  "importPaths": ["."],
+  "sourcePaths": ["gid"]
 }

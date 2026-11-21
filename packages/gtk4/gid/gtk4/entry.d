@@ -1,0 +1,2686 @@
+/// Module for [Entry] class
+module gid.gtk4.entry;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gdk4.content_provider;
+import gid.gdk4.paintable;
+import gid.gdk4.rectangle;
+import gid.gdk4.types;
+import gid.gio2.icon;
+import gid.gio2.menu_model;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.accessible;
+import gid.gtk4.accessible_mixin;
+import gid.gtk4.buildable;
+import gid.gtk4.buildable_mixin;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.cell_editable;
+import gid.gtk4.cell_editable_mixin;
+import gid.gtk4.constraint_target;
+import gid.gtk4.constraint_target_mixin;
+import gid.gtk4.editable;
+import gid.gtk4.editable_mixin;
+import gid.gtk4.entry_buffer;
+import gid.gtk4.entry_completion;
+import gid.gtk4.types;
+import gid.gtk4.widget;
+import gid.pango1.attr_list;
+import gid.pango1.tab_array;
+
+/**
+    A single-line text entry widget.
+    
+    <picture>
+      <source srcset="entry-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkEntry" src="entry.png">
+    </picture>
+    
+    A fairly large set of key bindings are supported by default. If the
+    entered text is longer than the allocation of the widget, the widget
+    will scroll so that the cursor position is visible.
+    
+    When using an entry for passwords and other sensitive information, it
+    can be put into “password mode” using [gid.gtk4.entry.Entry.setVisibility].
+    In this mode, entered text is displayed using a “invisible” character.
+    By default, GTK picks the best invisible character that is available
+    in the current font, but it can be changed with
+    [gid.gtk4.entry.Entry.setInvisibleChar].
+    
+    [gid.gtk4.entry.Entry] has the ability to display progress or activity
+    information behind the text. To make an entry display such information,
+    use [gid.gtk4.entry.Entry.setProgressFraction] or
+    [gid.gtk4.entry.Entry.setProgressPulseStep].
+    
+    Additionally, [gid.gtk4.entry.Entry] can show icons at either side of the entry.
+    These icons can be activatable by clicking, can be set up as drag source
+    and can have tooltips. To add an icon, use
+    [gid.gtk4.entry.Entry.setIconFromGicon] or one of the various other functions
+    that set an icon from an icon name or a paintable. To trigger an action when
+    the user clicks an icon, connect to the [gid.gtk4.entry.Entry.iconPress] signal.
+    To allow DND operations from an icon, use
+    [gid.gtk4.entry.Entry.setIconDragSource]. To set a tooltip on an icon, use
+    [gid.gtk4.entry.Entry.setIconTooltipText] or the corresponding function
+    for markup.
+    
+    Note that functionality or information that is only available by clicking
+    on an icon in an entry may not be accessible at all to users which are not
+    able to use a mouse or other pointing device. It is therefore recommended
+    that any such functionality should also be available by other means, e.g.
+    via the context menu of the entry.
+    
+    # CSS nodes
+    
+    ```
+    entry[.flat][.warning][.error]
+    ├── text[.readonly]
+    ├── image.left
+    ├── image.right
+    ╰── [progress[.pulse]]
+    ```
+    
+    [gid.gtk4.entry.Entry] has a main node with the name entry. Depending on the properties
+    of the entry, the style classes .read-only and .flat may appear. The style
+    classes .warning and .error may also be used with entries.
+    
+    When the entry shows icons, it adds subnodes with the name image and the
+    style class .left or .right, depending on where the icon appears.
+    
+    When the entry shows progress, it adds a subnode with the name progress.
+    The node has the style class .pulse when the shown progress is pulsing.
+    
+    For all the subnodes added to the text node in various situations,
+    see [gid.gtk4.text.Text].
+    
+    # GtkEntry as GtkBuildable
+    
+    The [gid.gtk4.entry.Entry] implementation of the [gid.gtk4.buildable.Buildable] interface supports a
+    custom `<attributes>` element, which supports any number of `<attribute>`
+    elements. The `<attribute>` element has attributes named “name“, “value“,
+    “start“ and “end“ and allows you to specify [gid.pango1.attribute.Attribute] values for
+    this label.
+    
+    An example of a UI definition fragment specifying Pango attributes:
+    ```xml
+    <object class="GtkEntry">
+      <attributes>
+        <attribute name="weight" value="PANGO_WEIGHT_BOLD"/>
+        <attribute name="background" value="red" start="5" end="10"/>
+      </attributes>
+    </object>
+    ```
+    
+    The start and end attributes specify the range of characters to which the
+    Pango attribute applies. If start and end are not specified, the attribute
+    is applied to the whole text. Note that specifying ranges does not make much
+    sense with translatable attributes. Use markup embedded in the translatable
+    content instead.
+    
+    # Accessibility
+    
+    [gid.gtk4.entry.Entry] uses the [gid.gtk4.types.AccessibleRole.TextBox] role.
+*/
+class Entry : gid.gtk4.widget.Widget, gid.gtk4.cell_editable.CellEditable, gid.gtk4.editable.Editable
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_entry_get_type != &gidSymbolNotFound ? gtk_entry_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkEntry";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Entry self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.entry.Entry]
+      Returns: New builder object
+  */
+  static EntryGidBuilder builder() nothrow
+  {
+    return new EntryGidBuilder;
+  }
+
+  /**
+      Get `activatesDefault` property.
+      Returns: Whether to activate the default widget when Enter is pressed.
+  */
+  @property bool activatesDefault() nothrow
+  {
+    return getActivatesDefault();
+  }
+
+  /**
+      Set `activatesDefault` property.
+      Params:
+        propval = Whether to activate the default widget when Enter is pressed.
+  */
+  @property void activatesDefault(bool propval) nothrow
+  {
+    setActivatesDefault(propval);
+  }
+
+  /**
+      Get `attributes` property.
+      Returns: A list of Pango attributes to apply to the text of the entry.
+        
+        This is mainly useful to change the size or weight of the text.
+        
+        The [gid.pango1.attribute.Attribute]'s @start_index and @end_index must refer to the
+        [gid.gtk4.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
+  */
+  @property gid.pango1.attr_list.AttrList attributes() nothrow
+  {
+    return getAttributes();
+  }
+
+  /**
+      Set `attributes` property.
+      Params:
+        propval = A list of Pango attributes to apply to the text of the entry.
+          
+          This is mainly useful to change the size or weight of the text.
+          
+          The [gid.pango1.attribute.Attribute]'s @start_index and @end_index must refer to the
+          [gid.gtk4.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
+  */
+  @property void attributes(gid.pango1.attr_list.AttrList propval) nothrow
+  {
+    setAttributes(propval);
+  }
+
+  /**
+      Get `buffer` property.
+      Returns: The buffer object which actually stores the text.
+  */
+  @property gid.gtk4.entry_buffer.EntryBuffer buffer() nothrow
+  {
+    return getBuffer();
+  }
+
+  /**
+      Set `buffer` property.
+      Params:
+        propval = The buffer object which actually stores the text.
+  */
+  @property void buffer(gid.gtk4.entry_buffer.EntryBuffer propval) nothrow
+  {
+    setBuffer(propval);
+  }
+
+  /**
+      Get `completion` property.
+      Returns: The auxiliary completion object to use with the entry.
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  @property gid.gtk4.entry_completion.EntryCompletion completion() nothrow
+  {
+    return getCompletion();
+  }
+
+  /**
+      Set `completion` property.
+      Params:
+        propval = The auxiliary completion object to use with the entry.
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  @property void completion(gid.gtk4.entry_completion.EntryCompletion propval) nothrow
+  {
+    setCompletion(propval);
+  }
+
+  /**
+      Get `enableEmojiCompletion` property.
+      Returns: Whether to suggest Emoji replacements for :-delimited names
+        like `:heart:`.
+  */
+  @property bool enableEmojiCompletion() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("enable-emoji-completion");
+  }
+
+  /**
+      Set `enableEmojiCompletion` property.
+      Params:
+        propval = Whether to suggest Emoji replacements for :-delimited names
+          like `:heart:`.
+  */
+  @property void enableEmojiCompletion(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("enable-emoji-completion", propval);
+  }
+
+  /**
+      Get `extraMenu` property.
+      Returns: A menu model whose contents will be appended to the context menu.
+  */
+  @property gid.gio2.menu_model.MenuModel extraMenu() nothrow
+  {
+    return getExtraMenu();
+  }
+
+  /**
+      Set `extraMenu` property.
+      Params:
+        propval = A menu model whose contents will be appended to the context menu.
+  */
+  @property void extraMenu(gid.gio2.menu_model.MenuModel propval) nothrow
+  {
+    setExtraMenu(propval);
+  }
+
+  /**
+      Get `hasFrame` property.
+      Returns: Whether the entry should draw a frame.
+  */
+  @property bool hasFrame() nothrow
+  {
+    return getHasFrame();
+  }
+
+  /**
+      Set `hasFrame` property.
+      Params:
+        propval = Whether the entry should draw a frame.
+  */
+  @property void hasFrame(bool propval) nothrow
+  {
+    setHasFrame(propval);
+  }
+
+  /**
+      Get `imModule` property.
+      Returns: Which IM (input method) module should be used for this entry.
+        
+        See [gid.gtk4.imcontext.IMContext].
+        
+        Setting this to a non-null value overrides the system-wide IM
+        module setting. See the GtkSettings [gid.gtk4.settings.Settings.gtkImModule]
+        property.
+  */
+  @property string imModule() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(string)("im-module");
+  }
+
+  /**
+      Set `imModule` property.
+      Params:
+        propval = Which IM (input method) module should be used for this entry.
+          
+          See [gid.gtk4.imcontext.IMContext].
+          
+          Setting this to a non-null value overrides the system-wide IM
+          module setting. See the GtkSettings [gid.gtk4.settings.Settings.gtkImModule]
+          property.
+  */
+  @property void imModule(string propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(string)("im-module", propval);
+  }
+
+  /**
+      Get `inputHints` property.
+      Returns: Additional hints that allow input methods to fine-tune their behavior.
+        
+        Also see [gid.gtk4.entry.Entry.inputPurpose]
+  */
+  @property gid.gtk4.types.InputHints inputHints() nothrow
+  {
+    return getInputHints();
+  }
+
+  /**
+      Set `inputHints` property.
+      Params:
+        propval = Additional hints that allow input methods to fine-tune their behavior.
+          
+          Also see [gid.gtk4.entry.Entry.inputPurpose]
+  */
+  @property void inputHints(gid.gtk4.types.InputHints propval) nothrow
+  {
+    setInputHints(propval);
+  }
+
+  /**
+      Get `inputPurpose` property.
+      Returns: The purpose of this text field.
+        
+        This property can be used by on-screen keyboards and other input
+        methods to adjust their behaviour.
+        
+        Note that setting the purpose to [gid.gtk4.types.InputPurpose.Password] or
+        [gid.gtk4.types.InputPurpose.Pin] is independent from setting
+        [gid.gtk4.entry.Entry.visibility].
+  */
+  @property gid.gtk4.types.InputPurpose inputPurpose() nothrow
+  {
+    return getInputPurpose();
+  }
+
+  /**
+      Set `inputPurpose` property.
+      Params:
+        propval = The purpose of this text field.
+          
+          This property can be used by on-screen keyboards and other input
+          methods to adjust their behaviour.
+          
+          Note that setting the purpose to [gid.gtk4.types.InputPurpose.Password] or
+          [gid.gtk4.types.InputPurpose.Pin] is independent from setting
+          [gid.gtk4.entry.Entry.visibility].
+  */
+  @property void inputPurpose(gid.gtk4.types.InputPurpose propval) nothrow
+  {
+    setInputPurpose(propval);
+  }
+
+  /**
+      Get `invisibleChar` property.
+      Returns: The character to use when masking entry contents (“password mode”).
+  */
+  @property uint invisibleChar() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(uint)("invisible-char");
+  }
+
+  /**
+      Set `invisibleChar` property.
+      Params:
+        propval = The character to use when masking entry contents (“password mode”).
+  */
+  @property void invisibleChar(uint propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(uint)("invisible-char", propval);
+  }
+
+  /**
+      Get `invisibleCharSet` property.
+      Returns: Whether the invisible char has been set for the [gid.gtk4.entry.Entry].
+  */
+  @property bool invisibleCharSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("invisible-char-set");
+  }
+
+  /**
+      Set `invisibleCharSet` property.
+      Params:
+        propval = Whether the invisible char has been set for the [gid.gtk4.entry.Entry].
+  */
+  @property void invisibleCharSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("invisible-char-set", propval);
+  }
+
+  /**
+      Get `maxLength` property.
+      Returns: Maximum number of characters for this entry.
+  */
+  @property int maxLength() nothrow
+  {
+    return getMaxLength();
+  }
+
+  /**
+      Set `maxLength` property.
+      Params:
+        propval = Maximum number of characters for this entry.
+  */
+  @property void maxLength(int propval) nothrow
+  {
+    setMaxLength(propval);
+  }
+
+  /**
+      Get `menuEntryIconPrimaryText` property.
+      Returns: Text for an item in the context menu to activate the primary icon action.
+        
+        When the primary icon is activatable and this property has been set, a new entry
+        in the context menu of this GtkEntry will appear with this text. Selecting that
+        menu entry will result in the primary icon being activated, exactly in the same way
+        as it would be activated from a mouse click.
+        
+        This simplifies adding accessibility support to applications using activatable
+        icons. The activatable icons aren't focusable when navigating the interface with
+        the keyboard This is why Gtk recommends to also add those actions in the context
+        menu. This set of methods greatly simplifies this, by adding a menu item that, when
+        enabled, calls the same callback than clicking on the icon.
+  */
+  @property string menuEntryIconPrimaryText() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(string)("menu-entry-icon-primary-text");
+  }
+
+  /**
+      Set `menuEntryIconPrimaryText` property.
+      Params:
+        propval = Text for an item in the context menu to activate the primary icon action.
+          
+          When the primary icon is activatable and this property has been set, a new entry
+          in the context menu of this GtkEntry will appear with this text. Selecting that
+          menu entry will result in the primary icon being activated, exactly in the same way
+          as it would be activated from a mouse click.
+          
+          This simplifies adding accessibility support to applications using activatable
+          icons. The activatable icons aren't focusable when navigating the interface with
+          the keyboard This is why Gtk recommends to also add those actions in the context
+          menu. This set of methods greatly simplifies this, by adding a menu item that, when
+          enabled, calls the same callback than clicking on the icon.
+  */
+  @property void menuEntryIconPrimaryText(string propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(string)("menu-entry-icon-primary-text", propval);
+  }
+
+  /**
+      Get `menuEntryIconSecondaryText` property.
+      Returns: Text for an item in the context menu to activate the secondary icon action.
+        
+        When the primary icon is activatable and this property has been set, a new entry
+        in the context menu of this GtkEntry will appear with this text. Selecting that
+        menu entry will result in the primary icon being activated, exactly in the same way
+        as it would be activated from a mouse click.
+        
+        This simplifies adding accessibility support to applications using activatable
+        icons. The activatable icons aren't focusable when navigating the interface with
+        the keyboard This is why Gtk recommends to also add those actions in the context
+        menu. This set of methods greatly simplifies this, by adding a menu item that, when
+        enabled, calls the same callback than clicking on the icon.
+  */
+  @property string menuEntryIconSecondaryText() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(string)("menu-entry-icon-secondary-text");
+  }
+
+  /**
+      Set `menuEntryIconSecondaryText` property.
+      Params:
+        propval = Text for an item in the context menu to activate the secondary icon action.
+          
+          When the primary icon is activatable and this property has been set, a new entry
+          in the context menu of this GtkEntry will appear with this text. Selecting that
+          menu entry will result in the primary icon being activated, exactly in the same way
+          as it would be activated from a mouse click.
+          
+          This simplifies adding accessibility support to applications using activatable
+          icons. The activatable icons aren't focusable when navigating the interface with
+          the keyboard This is why Gtk recommends to also add those actions in the context
+          menu. This set of methods greatly simplifies this, by adding a menu item that, when
+          enabled, calls the same callback than clicking on the icon.
+  */
+  @property void menuEntryIconSecondaryText(string propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(string)("menu-entry-icon-secondary-text", propval);
+  }
+
+  /**
+      Get `overwriteMode` property.
+      Returns: If text is overwritten when typing in the [gid.gtk4.entry.Entry].
+  */
+  @property bool overwriteMode() nothrow
+  {
+    return getOverwriteMode();
+  }
+
+  /**
+      Set `overwriteMode` property.
+      Params:
+        propval = If text is overwritten when typing in the [gid.gtk4.entry.Entry].
+  */
+  @property void overwriteMode(bool propval) nothrow
+  {
+    setOverwriteMode(propval);
+  }
+
+  /**
+      Get `placeholderText` property.
+      Returns: The text that will be displayed in the [gid.gtk4.entry.Entry] when it is empty
+        and unfocused.
+  */
+  @property string placeholderText() nothrow
+  {
+    return getPlaceholderText();
+  }
+
+  /**
+      Set `placeholderText` property.
+      Params:
+        propval = The text that will be displayed in the [gid.gtk4.entry.Entry] when it is empty
+          and unfocused.
+  */
+  @property void placeholderText(string propval) nothrow
+  {
+    setPlaceholderText(propval);
+  }
+
+  /**
+      Get `primaryIconActivatable` property.
+      Returns: Whether the primary icon is activatable.
+        
+        GTK emits the [gid.gtk4.entry.Entry.iconPress] and
+        [gid.gtk4.entry.Entry.iconRelease] signals only on sensitive,
+        activatable icons.
+        
+        Sensitive, but non-activatable icons can be used for purely
+        informational purposes.
+  */
+  @property bool primaryIconActivatable() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("primary-icon-activatable");
+  }
+
+  /**
+      Set `primaryIconActivatable` property.
+      Params:
+        propval = Whether the primary icon is activatable.
+          
+          GTK emits the [gid.gtk4.entry.Entry.iconPress] and
+          [gid.gtk4.entry.Entry.iconRelease] signals only on sensitive,
+          activatable icons.
+          
+          Sensitive, but non-activatable icons can be used for purely
+          informational purposes.
+  */
+  @property void primaryIconActivatable(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("primary-icon-activatable", propval);
+  }
+
+  /**
+      Get `primaryIconGicon` property.
+      Returns: The [gid.gio2.icon.Icon] to use for the primary icon for the entry.
+  */
+  @property gid.gio2.icon.Icon primaryIconGicon() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gio2.icon.Icon)("primary-icon-gicon");
+  }
+
+  /**
+      Set `primaryIconGicon` property.
+      Params:
+        propval = The [gid.gio2.icon.Icon] to use for the primary icon for the entry.
+  */
+  @property void primaryIconGicon(gid.gio2.icon.Icon propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.gio2.icon.Icon)("primary-icon-gicon", propval);
+  }
+
+  /**
+      Get `primaryIconName` property.
+      Returns: The icon name to use for the primary icon for the entry.
+  */
+  @property string primaryIconName() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(string)("primary-icon-name");
+  }
+
+  /**
+      Set `primaryIconName` property.
+      Params:
+        propval = The icon name to use for the primary icon for the entry.
+  */
+  @property void primaryIconName(string propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(string)("primary-icon-name", propval);
+  }
+
+  /**
+      Get `primaryIconPaintable` property.
+      Returns: A [gid.gdk4.paintable.Paintable] to use as the primary icon for the entry.
+  */
+  @property gid.gdk4.paintable.Paintable primaryIconPaintable() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gdk4.paintable.Paintable)("primary-icon-paintable");
+  }
+
+  /**
+      Set `primaryIconPaintable` property.
+      Params:
+        propval = A [gid.gdk4.paintable.Paintable] to use as the primary icon for the entry.
+  */
+  @property void primaryIconPaintable(gid.gdk4.paintable.Paintable propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.gdk4.paintable.Paintable)("primary-icon-paintable", propval);
+  }
+
+  /**
+      Get `primaryIconSensitive` property.
+      Returns: Whether the primary icon is sensitive.
+        
+        An insensitive icon appears grayed out. GTK does not emit the
+        [gid.gtk4.entry.Entry.iconPress] and [gid.gtk4.entry.Entry.iconRelease]
+        signals and does not allow DND from insensitive icons.
+        
+        An icon should be set insensitive if the action that would trigger
+        when clicked is currently not available.
+  */
+  @property bool primaryIconSensitive() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("primary-icon-sensitive");
+  }
+
+  /**
+      Set `primaryIconSensitive` property.
+      Params:
+        propval = Whether the primary icon is sensitive.
+          
+          An insensitive icon appears grayed out. GTK does not emit the
+          [gid.gtk4.entry.Entry.iconPress] and [gid.gtk4.entry.Entry.iconRelease]
+          signals and does not allow DND from insensitive icons.
+          
+          An icon should be set insensitive if the action that would trigger
+          when clicked is currently not available.
+  */
+  @property void primaryIconSensitive(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("primary-icon-sensitive", propval);
+  }
+
+  /**
+      Get `primaryIconStorageType` property.
+      Returns: The representation which is used for the primary icon of the entry.
+  */
+  @property gid.gtk4.types.ImageType primaryIconStorageType() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gtk4.types.ImageType)("primary-icon-storage-type");
+  }
+
+  /**
+      Get `primaryIconTooltipMarkup` property.
+      Returns: The contents of the tooltip on the primary icon, with markup.
+        
+        Also see [gid.gtk4.entry.Entry.setIconTooltipMarkup].
+  */
+  @property string primaryIconTooltipMarkup() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(string)("primary-icon-tooltip-markup");
+  }
+
+  /**
+      Set `primaryIconTooltipMarkup` property.
+      Params:
+        propval = The contents of the tooltip on the primary icon, with markup.
+          
+          Also see [gid.gtk4.entry.Entry.setIconTooltipMarkup].
+  */
+  @property void primaryIconTooltipMarkup(string propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(string)("primary-icon-tooltip-markup", propval);
+  }
+
+  /**
+      Get `primaryIconTooltipText` property.
+      Returns: The contents of the tooltip on the primary icon.
+        
+        Also see [gid.gtk4.entry.Entry.setIconTooltipText].
+  */
+  @property string primaryIconTooltipText() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(string)("primary-icon-tooltip-text");
+  }
+
+  /**
+      Set `primaryIconTooltipText` property.
+      Params:
+        propval = The contents of the tooltip on the primary icon.
+          
+          Also see [gid.gtk4.entry.Entry.setIconTooltipText].
+  */
+  @property void primaryIconTooltipText(string propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(string)("primary-icon-tooltip-text", propval);
+  }
+
+  /**
+      Get `progressFraction` property.
+      Returns: The current fraction of the task that's been completed.
+  */
+  @property double progressFraction() nothrow
+  {
+    return getProgressFraction();
+  }
+
+  /**
+      Set `progressFraction` property.
+      Params:
+        propval = The current fraction of the task that's been completed.
+  */
+  @property void progressFraction(double propval) nothrow
+  {
+    setProgressFraction(propval);
+  }
+
+  /**
+      Get `progressPulseStep` property.
+      Returns: The fraction of total entry width to move the progress
+        bouncing block for each pulse.
+        
+        See [gid.gtk4.entry.Entry.progressPulse].
+  */
+  @property double progressPulseStep() nothrow
+  {
+    return getProgressPulseStep();
+  }
+
+  /**
+      Set `progressPulseStep` property.
+      Params:
+        propval = The fraction of total entry width to move the progress
+          bouncing block for each pulse.
+          
+          See [gid.gtk4.entry.Entry.progressPulse].
+  */
+  @property void progressPulseStep(double propval) nothrow
+  {
+    setProgressPulseStep(propval);
+  }
+
+  /**
+      Get `scrollOffset` property.
+      Returns: Number of pixels of the entry scrolled off the screen to the left.
+  */
+  @property int scrollOffset() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(int)("scroll-offset");
+  }
+
+  /**
+      Get `secondaryIconActivatable` property.
+      Returns: Whether the secondary icon is activatable.
+        
+        GTK emits the [gid.gtk4.entry.Entry.iconPress] and
+        [gid.gtk4.entry.Entry.iconRelease] signals only on sensitive,
+        activatable icons.
+        
+        Sensitive, but non-activatable icons can be used for purely
+        informational purposes.
+  */
+  @property bool secondaryIconActivatable() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("secondary-icon-activatable");
+  }
+
+  /**
+      Set `secondaryIconActivatable` property.
+      Params:
+        propval = Whether the secondary icon is activatable.
+          
+          GTK emits the [gid.gtk4.entry.Entry.iconPress] and
+          [gid.gtk4.entry.Entry.iconRelease] signals only on sensitive,
+          activatable icons.
+          
+          Sensitive, but non-activatable icons can be used for purely
+          informational purposes.
+  */
+  @property void secondaryIconActivatable(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("secondary-icon-activatable", propval);
+  }
+
+  /**
+      Get `secondaryIconGicon` property.
+      Returns: The [gid.gio2.icon.Icon] to use for the secondary icon for the entry.
+  */
+  @property gid.gio2.icon.Icon secondaryIconGicon() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gio2.icon.Icon)("secondary-icon-gicon");
+  }
+
+  /**
+      Set `secondaryIconGicon` property.
+      Params:
+        propval = The [gid.gio2.icon.Icon] to use for the secondary icon for the entry.
+  */
+  @property void secondaryIconGicon(gid.gio2.icon.Icon propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.gio2.icon.Icon)("secondary-icon-gicon", propval);
+  }
+
+  /**
+      Get `secondaryIconName` property.
+      Returns: The icon name to use for the secondary icon for the entry.
+  */
+  @property string secondaryIconName() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(string)("secondary-icon-name");
+  }
+
+  /**
+      Set `secondaryIconName` property.
+      Params:
+        propval = The icon name to use for the secondary icon for the entry.
+  */
+  @property void secondaryIconName(string propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(string)("secondary-icon-name", propval);
+  }
+
+  /**
+      Get `secondaryIconPaintable` property.
+      Returns: A [gid.gdk4.paintable.Paintable] to use as the secondary icon for the entry.
+  */
+  @property gid.gdk4.paintable.Paintable secondaryIconPaintable() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gdk4.paintable.Paintable)("secondary-icon-paintable");
+  }
+
+  /**
+      Set `secondaryIconPaintable` property.
+      Params:
+        propval = A [gid.gdk4.paintable.Paintable] to use as the secondary icon for the entry.
+  */
+  @property void secondaryIconPaintable(gid.gdk4.paintable.Paintable propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.gdk4.paintable.Paintable)("secondary-icon-paintable", propval);
+  }
+
+  /**
+      Get `secondaryIconSensitive` property.
+      Returns: Whether the secondary icon is sensitive.
+        
+        An insensitive icon appears grayed out. GTK does not emit the
+        [gid.gtk4.entry.Entry.iconPress]
+        signals and does not allow DND from insensitive icons.
+        
+        An icon should be set insensitive if the action that would trigger
+        when clicked is currently not available.
+  */
+  @property bool secondaryIconSensitive() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("secondary-icon-sensitive");
+  }
+
+  /**
+      Set `secondaryIconSensitive` property.
+      Params:
+        propval = Whether the secondary icon is sensitive.
+          
+          An insensitive icon appears grayed out. GTK does not emit the
+          [gid.gtk4.entry.Entry.iconPress]
+          signals and does not allow DND from insensitive icons.
+          
+          An icon should be set insensitive if the action that would trigger
+          when clicked is currently not available.
+  */
+  @property void secondaryIconSensitive(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("secondary-icon-sensitive", propval);
+  }
+
+  /**
+      Get `secondaryIconStorageType` property.
+      Returns: The representation which is used for the secondary icon of the entry.
+  */
+  @property gid.gtk4.types.ImageType secondaryIconStorageType() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gtk4.types.ImageType)("secondary-icon-storage-type");
+  }
+
+  /**
+      Get `secondaryIconTooltipMarkup` property.
+      Returns: The contents of the tooltip on the secondary icon, with markup.
+        
+        Also see [gid.gtk4.entry.Entry.setIconTooltipMarkup].
+  */
+  @property string secondaryIconTooltipMarkup() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(string)("secondary-icon-tooltip-markup");
+  }
+
+  /**
+      Set `secondaryIconTooltipMarkup` property.
+      Params:
+        propval = The contents of the tooltip on the secondary icon, with markup.
+          
+          Also see [gid.gtk4.entry.Entry.setIconTooltipMarkup].
+  */
+  @property void secondaryIconTooltipMarkup(string propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(string)("secondary-icon-tooltip-markup", propval);
+  }
+
+  /**
+      Get `secondaryIconTooltipText` property.
+      Returns: The contents of the tooltip on the secondary icon.
+        
+        Also see [gid.gtk4.entry.Entry.setIconTooltipText].
+  */
+  @property string secondaryIconTooltipText() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(string)("secondary-icon-tooltip-text");
+  }
+
+  /**
+      Set `secondaryIconTooltipText` property.
+      Params:
+        propval = The contents of the tooltip on the secondary icon.
+          
+          Also see [gid.gtk4.entry.Entry.setIconTooltipText].
+  */
+  @property void secondaryIconTooltipText(string propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(string)("secondary-icon-tooltip-text", propval);
+  }
+
+  /**
+      Get `showEmojiIcon` property.
+      Returns: Whether the entry will show an Emoji icon in the secondary icon position
+        to open the Emoji chooser.
+  */
+  @property bool showEmojiIcon() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("show-emoji-icon");
+  }
+
+  /**
+      Set `showEmojiIcon` property.
+      Params:
+        propval = Whether the entry will show an Emoji icon in the secondary icon position
+          to open the Emoji chooser.
+  */
+  @property void showEmojiIcon(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("show-emoji-icon", propval);
+  }
+
+  /**
+      Get `tabs` property.
+      Returns: A list of tabstops to apply to the text of the entry.
+  */
+  @property gid.pango1.tab_array.TabArray tabs() nothrow
+  {
+    return getTabs();
+  }
+
+  /**
+      Set `tabs` property.
+      Params:
+        propval = A list of tabstops to apply to the text of the entry.
+  */
+  @property void tabs(gid.pango1.tab_array.TabArray propval) nothrow
+  {
+    setTabs(propval);
+  }
+
+  /**
+      Get `textLength` property.
+      Returns: The length of the text in the [gid.gtk4.entry.Entry].
+  */
+  @property uint textLength() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(uint)("text-length");
+  }
+
+  /**
+      Get `truncateMultiline` property.
+      Returns: When true, pasted multi-line text is truncated to the first line.
+  */
+  @property bool truncateMultiline() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("truncate-multiline");
+  }
+
+  /**
+      Set `truncateMultiline` property.
+      Params:
+        propval = When true, pasted multi-line text is truncated to the first line.
+  */
+  @property void truncateMultiline(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("truncate-multiline", propval);
+  }
+
+  /**
+      Get `visibility` property.
+      Returns: Whether the entry should show the “invisible char” instead of the
+        actual text (“password mode”).
+  */
+  @property bool visibility() nothrow
+  {
+    return getVisibility();
+  }
+
+  /**
+      Set `visibility` property.
+      Params:
+        propval = Whether the entry should show the “invisible char” instead of the
+          actual text (“password mode”).
+  */
+  @property void visibility(bool propval) nothrow
+  {
+    setVisibility(propval);
+  }
+
+  mixin CellEditableT!();
+  mixin EditableT!();
+
+  /**
+      Creates a new entry.
+      Returns: a new [gid.gtk4.entry.Entry].
+  */
+  this() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_entry_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Creates a new entry with the specified text buffer.
+  
+      Params:
+        buffer = The buffer to use for the new [gid.gtk4.entry.Entry].
+      Returns: a new [gid.gtk4.entry.Entry]
+  */
+  static gid.gtk4.entry.Entry newWithBuffer(gid.gtk4.entry_buffer.EntryBuffer buffer) nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_entry_new_with_buffer(buffer ? cast(GtkEntryBuffer*)buffer._cPtr(No.Dup) : null);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.entry.Entry)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Retrieves the value set by [gid.gtk4.entry.Entry.setActivatesDefault].
+      Returns: true if the entry will activate the default widget
+  */
+  bool getActivatesDefault() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_entry_get_activates_default(cast(GtkEntry*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the value set by [gid.gtk4.entry.Entry.setAlignment].
+      
+      See also: [gid.gtk4.editable.Editable.xalign]
+      Returns: the alignment
+  */
+  float getAlignment() nothrow
+  {
+    float _retval;
+    _retval = gtk_entry_get_alignment(cast(GtkEntry*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the attribute list of the [gid.gtk4.entry.Entry].
+      
+      See [gid.gtk4.entry.Entry.setAttributes].
+      Returns: the attribute list
+  */
+  gid.pango1.attr_list.AttrList getAttributes() nothrow
+  {
+    PangoAttrList* _cretval;
+    _cretval = gtk_entry_get_attributes(cast(GtkEntry*)this._cPtr);
+    auto _retval = _cretval ? new gid.pango1.attr_list.AttrList(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Get the [gid.gtk4.entry_buffer.EntryBuffer] object which holds the text for
+      this widget.
+      Returns: A [gid.gtk4.entry_buffer.EntryBuffer] object.
+  */
+  gid.gtk4.entry_buffer.EntryBuffer getBuffer() nothrow
+  {
+    GtkEntryBuffer* _cretval;
+    _cretval = gtk_entry_get_buffer(cast(GtkEntry*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.entry_buffer.EntryBuffer)(cast(GtkEntryBuffer*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the auxiliary completion object currently
+      in use by entry.
+      Returns: The auxiliary
+          completion object currently in use by entry
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  gid.gtk4.entry_completion.EntryCompletion getCompletion() nothrow
+  {
+    GtkEntryCompletion* _cretval;
+    _cretval = gtk_entry_get_completion(cast(GtkEntry*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.entry_completion.EntryCompletion)(cast(GtkEntryCompletion*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the index of the icon which is the source of the
+      current  DND operation, or -1.
+      Returns: index of the icon which is the source of the
+          current DND operation, or -1.
+  */
+  int getCurrentIconDragSource() nothrow
+  {
+    int _retval;
+    _retval = gtk_entry_get_current_icon_drag_source(cast(GtkEntry*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the menu model set with [gid.gtk4.entry.Entry.setExtraMenu].
+      Returns: the menu model
+  */
+  gid.gio2.menu_model.MenuModel getExtraMenu() nothrow
+  {
+    GMenuModel* _cretval;
+    _cretval = gtk_entry_get_extra_menu(cast(GtkEntry*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the value set by [gid.gtk4.entry.Entry.setHasFrame].
+      Returns: whether the entry has a beveled frame
+  */
+  bool getHasFrame() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_entry_get_has_frame(cast(GtkEntry*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns whether the icon is activatable.
+  
+      Params:
+        iconPos = Icon position
+      Returns: true if the icon is activatable.
+  */
+  bool getIconActivatable(gid.gtk4.types.EntryIconPosition iconPos) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_entry_get_icon_activatable(cast(GtkEntry*)this._cPtr, iconPos);
+    return _retval;
+  }
+
+  /**
+      Gets the area where entry’s icon at icon_pos is drawn.
+      
+      This function is useful when drawing something to the
+      entry in a draw callback.
+      
+      If the entry is not realized or has no icon at the given
+      position, icon_area is filled with zeros. Otherwise,
+      icon_area will be filled with the icon's allocation,
+      relative to entry's allocation.
+  
+      Params:
+        iconPos = Icon position
+        iconArea = Return location for the icon’s area
+  */
+  void getIconArea(gid.gtk4.types.EntryIconPosition iconPos, out gid.gdk4.rectangle.Rectangle iconArea) nothrow
+  {
+    gtk_entry_get_icon_area(cast(GtkEntry*)this._cPtr, iconPos, cast(GdkRectangle*)&iconArea);
+  }
+
+  /**
+      Finds the icon at the given position and return its index.
+      
+      The position’s coordinates are relative to the entry’s
+      top left corner. If `x`, `y` doesn’t lie inside an icon,
+      -1 is returned. This function is intended for use in a
+      [gid.gtk4.widget.Widget.queryTooltip] signal handler.
+  
+      Params:
+        x = the x coordinate of the position to find, relative to entry
+        y = the y coordinate of the position to find, relative to entry
+      Returns: the index of the icon at the given position, or -1
+  */
+  int getIconAtPos(int x, int y) nothrow
+  {
+    int _retval;
+    _retval = gtk_entry_get_icon_at_pos(cast(GtkEntry*)this._cPtr, x, y);
+    return _retval;
+  }
+
+  /**
+      Retrieves the [gid.gio2.icon.Icon] used for the icon.
+      
+      null will be returned if there is no icon or if the icon was
+      set by some other method (e.g., by [gid.gdk4.paintable.Paintable] or icon name).
+  
+      Params:
+        iconPos = Icon position
+      Returns: A [gid.gio2.icon.Icon]
+  */
+  gid.gio2.icon.Icon getIconGicon(gid.gtk4.types.EntryIconPosition iconPos) nothrow
+  {
+    GIcon* _cretval;
+    _cretval = gtk_entry_get_icon_gicon(cast(GtkEntry*)this._cPtr, iconPos);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Retrieves the icon name used for the icon.
+      
+      null is returned if there is no icon or if the icon was set
+      by some other method (e.g., by [gid.gdk4.paintable.Paintable] or gicon).
+  
+      Params:
+        iconPos = Icon position
+      Returns: An icon name
+  */
+  string getIconName(gid.gtk4.types.EntryIconPosition iconPos) nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_entry_get_icon_name(cast(GtkEntry*)this._cPtr, iconPos);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Retrieves the [gid.gdk4.paintable.Paintable] used for the icon.
+      
+      If no [gid.gdk4.paintable.Paintable] was used for the icon, null is returned.
+  
+      Params:
+        iconPos = Icon position
+      Returns: A [gid.gdk4.paintable.Paintable]
+          if no icon is set for this position or the icon set is not
+          a [gid.gdk4.paintable.Paintable].
+  */
+  gid.gdk4.paintable.Paintable getIconPaintable(gid.gtk4.types.EntryIconPosition iconPos) nothrow
+  {
+    GdkPaintable* _cretval;
+    _cretval = gtk_entry_get_icon_paintable(cast(GtkEntry*)this._cPtr, iconPos);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk4.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns whether the icon appears sensitive or insensitive.
+  
+      Params:
+        iconPos = Icon position
+      Returns: true if the icon is sensitive.
+  */
+  bool getIconSensitive(gid.gtk4.types.EntryIconPosition iconPos) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_entry_get_icon_sensitive(cast(GtkEntry*)this._cPtr, iconPos);
+    return _retval;
+  }
+
+  /**
+      Gets the type of representation being used by the icon
+      to store image data.
+      
+      If the icon has no image data, the return value will
+      be [gid.gtk4.types.ImageType.Empty].
+  
+      Params:
+        iconPos = Icon position
+      Returns: image representation being used
+  */
+  gid.gtk4.types.ImageType getIconStorageType(gid.gtk4.types.EntryIconPosition iconPos) nothrow
+  {
+    GtkImageType _cretval;
+    _cretval = gtk_entry_get_icon_storage_type(cast(GtkEntry*)this._cPtr, iconPos);
+    gid.gtk4.types.ImageType _retval = cast(gid.gtk4.types.ImageType)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the contents of the tooltip on the icon at the specified
+      position in entry.
+  
+      Params:
+        iconPos = the icon position
+      Returns: the tooltip text
+  */
+  string getIconTooltipMarkup(gid.gtk4.types.EntryIconPosition iconPos) nothrow
+  {
+    char* _cretval;
+    _cretval = gtk_entry_get_icon_tooltip_markup(cast(GtkEntry*)this._cPtr, iconPos);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the contents of the tooltip on the icon at the specified
+      position in entry.
+  
+      Params:
+        iconPos = the icon position
+      Returns: the tooltip text
+  */
+  string getIconTooltipText(gid.gtk4.types.EntryIconPosition iconPos) nothrow
+  {
+    char* _cretval;
+    _cretval = gtk_entry_get_icon_tooltip_text(cast(GtkEntry*)this._cPtr, iconPos);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the input hints of this [gid.gtk4.entry.Entry].
+      Returns: the input hints
+  */
+  gid.gtk4.types.InputHints getInputHints() nothrow
+  {
+    GtkInputHints _cretval;
+    _cretval = gtk_entry_get_input_hints(cast(GtkEntry*)this._cPtr);
+    gid.gtk4.types.InputHints _retval = cast(gid.gtk4.types.InputHints)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the input purpose of the [gid.gtk4.entry.Entry].
+      Returns: the input purpose
+  */
+  gid.gtk4.types.InputPurpose getInputPurpose() nothrow
+  {
+    GtkInputPurpose _cretval;
+    _cretval = gtk_entry_get_input_purpose(cast(GtkEntry*)this._cPtr);
+    gid.gtk4.types.InputPurpose _retval = cast(gid.gtk4.types.InputPurpose)_cretval;
+    return _retval;
+  }
+
+  /**
+      Retrieves the character displayed in place of the actual text
+      in “password mode”.
+      Returns: the current invisible char, or 0, if the entry does not
+          show invisible text at all.
+  */
+  dchar getInvisibleChar() nothrow
+  {
+    dchar _retval;
+    _retval = gtk_entry_get_invisible_char(cast(GtkEntry*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves the maximum allowed length of the text in entry.
+      
+      See [gid.gtk4.entry.Entry.setMaxLength].
+      Returns: the maximum allowed number of characters
+          in [gid.gtk4.entry.Entry], or 0 if there is no maximum.
+  */
+  int getMaxLength() nothrow
+  {
+    int _retval;
+    _retval = gtk_entry_get_max_length(cast(GtkEntry*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the text that will be used in the context menu of the [gid.gtk4.entry.Entry]
+      when the specified icon is activatable. Selecting this item in the menu
+      results, from all aspects, the same than clicking on the specified icon.
+      This greatly simplifies making accessible applications, because the icons
+      aren't focusable when using keyboard navigation. This is why Gtk recommends
+      to add the same action to the context menu.
+  
+      Params:
+        iconPos = either GTK_ENTRY_ICON_PRIMARY or GTK_ENTRY_ICON_SECONDARY
+      Returns: the text that will be used in the menu item,
+          or NULL if no menu item is desired.
+  */
+  string getMenuEntryIconText(gid.gtk4.types.EntryIconPosition iconPos) nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_entry_get_menu_entry_icon_text(cast(GtkEntry*)this._cPtr, iconPos);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets whether the [gid.gtk4.entry.Entry] is in overwrite mode.
+      Returns: whether the text is overwritten when typing.
+  */
+  bool getOverwriteMode() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_entry_get_overwrite_mode(cast(GtkEntry*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves the text that will be displayed when entry
+      is empty and unfocused
+      Returns: a pointer to the
+          placeholder text as a string. This string points to
+          internally allocated storage in the widget and must
+          not be freed, modified or stored. If no placeholder
+          text has been set, null will be returned.
+  */
+  string getPlaceholderText() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_entry_get_placeholder_text(cast(GtkEntry*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Returns the current fraction of the task that’s been completed.
+      
+      See [gid.gtk4.entry.Entry.setProgressFraction].
+      Returns: a fraction from 0.0 to 1.0
+  */
+  double getProgressFraction() nothrow
+  {
+    double _retval;
+    _retval = gtk_entry_get_progress_fraction(cast(GtkEntry*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves the pulse step set with
+      [gid.gtk4.entry.Entry.setProgressPulseStep].
+      Returns: a fraction from 0.0 to 1.0
+  */
+  double getProgressPulseStep() nothrow
+  {
+    double _retval;
+    _retval = gtk_entry_get_progress_pulse_step(cast(GtkEntry*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the tabstops of the [gid.gtk4.entry.Entry].
+      
+      See [gid.gtk4.entry.Entry.setTabs].
+      Returns: the tabstops
+  */
+  gid.pango1.tab_array.TabArray getTabs() nothrow
+  {
+    PangoTabArray* _cretval;
+    _cretval = gtk_entry_get_tabs(cast(GtkEntry*)this._cPtr);
+    auto _retval = _cretval ? new gid.pango1.tab_array.TabArray(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Retrieves the current length of the text in entry.
+      
+      This is equivalent to getting entry's [gid.gtk4.entry_buffer.EntryBuffer]
+      and calling [gid.gtk4.entry_buffer.EntryBuffer.getLength] on it.
+      Returns: the current number of characters
+          in [gid.gtk4.entry.Entry], or 0 if there are none.
+  */
+  ushort getTextLength() nothrow
+  {
+    ushort _retval;
+    _retval = gtk_entry_get_text_length(cast(GtkEntry*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves whether the text in entry is visible.
+      
+      See [gid.gtk4.entry.Entry.setVisibility].
+      Returns: true if the text is currently visible
+  */
+  bool getVisibility() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_entry_get_visibility(cast(GtkEntry*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Causes entry to have keyboard focus.
+      
+      It behaves like [gid.gtk4.widget.Widget.grabFocus], except that it doesn't
+      select the contents of the entry. You only want to call this on some
+      special entries which the user usually doesn't want to replace all text
+      in, such as search-as-you-type entries.
+      Returns: true if focus is now inside self
+  */
+  bool grabFocusWithoutSelecting() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_entry_grab_focus_without_selecting(cast(GtkEntry*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Indicates that some progress is made, but you don’t
+      know how much.
+      
+      Causes the entry’s progress indicator to enter “activity
+      mode”, where a block bounces back and forth. Each call to
+      [gid.gtk4.entry.Entry.progressPulse] causes the block to move by a
+      little bit (the amount of movement per pulse is determined
+      by [gid.gtk4.entry.Entry.setProgressPulseStep]).
+  */
+  void progressPulse() nothrow
+  {
+    gtk_entry_progress_pulse(cast(GtkEntry*)this._cPtr);
+  }
+
+  /**
+      Reset the input method context of the entry if needed.
+      
+      This can be necessary in the case where modifying the buffer
+      would confuse on-going input method behavior.
+  */
+  void resetImContext() nothrow
+  {
+    gtk_entry_reset_im_context(cast(GtkEntry*)this._cPtr);
+  }
+
+  /**
+      Sets whether pressing Enter in the entry will activate the default
+      widget for the window containing the entry.
+      
+      This usually means that the dialog containing the entry will be closed,
+      since the default widget is usually one of the dialog buttons.
+  
+      Params:
+        setting = true to activate window’s default widget on Enter keypress
+  */
+  void setActivatesDefault(bool setting) nothrow
+  {
+    gtk_entry_set_activates_default(cast(GtkEntry*)this._cPtr, setting);
+  }
+
+  /**
+      Sets the alignment for the contents of the entry.
+      
+      This controls the horizontal positioning of the contents when
+      the displayed text is shorter than the width of the entry.
+      
+      See also: [gid.gtk4.editable.Editable.xalign]
+  
+      Params:
+        xalign = The horizontal alignment, from 0 (left) to 1 (right).
+            Reversed for RTL layouts
+  */
+  void setAlignment(float xalign) nothrow
+  {
+    gtk_entry_set_alignment(cast(GtkEntry*)this._cPtr, xalign);
+  }
+
+  /**
+      Sets a [gid.pango1.attr_list.AttrList].
+      
+      The attributes in the list are applied to the entry text.
+      
+      Since the attributes will be applied to text that changes
+      as the user types, it makes most sense to use attributes
+      with unlimited extent.
+  
+      Params:
+        attrs = a [gid.pango1.attr_list.AttrList]
+  */
+  void setAttributes(gid.pango1.attr_list.AttrList attrs) nothrow
+  {
+    gtk_entry_set_attributes(cast(GtkEntry*)this._cPtr, attrs ? cast(PangoAttrList*)attrs._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Set the [gid.gtk4.entry_buffer.EntryBuffer] object which holds the text for
+      this widget.
+  
+      Params:
+        buffer = a [gid.gtk4.entry_buffer.EntryBuffer]
+  */
+  void setBuffer(gid.gtk4.entry_buffer.EntryBuffer buffer) nothrow
+  {
+    gtk_entry_set_buffer(cast(GtkEntry*)this._cPtr, buffer ? cast(GtkEntryBuffer*)buffer._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets completion to be the auxiliary completion object
+      to use with entry.
+      
+      All further configuration of the completion mechanism is
+      done on completion using the [gid.gtk4.entry_completion.EntryCompletion] API.
+      Completion is disabled if completion is set to null.
+  
+      Params:
+        completion = The [gid.gtk4.entry_completion.EntryCompletion]
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  void setCompletion(gid.gtk4.entry_completion.EntryCompletion completion = null) nothrow
+  {
+    gtk_entry_set_completion(cast(GtkEntry*)this._cPtr, completion ? cast(GtkEntryCompletion*)completion._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets a menu model to add when constructing
+      the context menu for entry.
+  
+      Params:
+        model = a [gid.gio2.menu_model.MenuModel]
+  */
+  void setExtraMenu(gid.gio2.menu_model.MenuModel model = null) nothrow
+  {
+    gtk_entry_set_extra_menu(cast(GtkEntry*)this._cPtr, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets whether the entry has a beveled frame around it.
+  
+      Params:
+        setting = new value
+  */
+  void setHasFrame(bool setting) nothrow
+  {
+    gtk_entry_set_has_frame(cast(GtkEntry*)this._cPtr, setting);
+  }
+
+  /**
+      Sets whether the icon is activatable.
+  
+      Params:
+        iconPos = Icon position
+        activatable = true if the icon should be activatable
+  */
+  void setIconActivatable(gid.gtk4.types.EntryIconPosition iconPos, bool activatable) nothrow
+  {
+    gtk_entry_set_icon_activatable(cast(GtkEntry*)this._cPtr, iconPos, activatable);
+  }
+
+  /**
+      Sets up the icon at the given position as drag source.
+      
+      This makes it so that GTK will start a drag
+      operation when the user clicks and drags the icon.
+  
+      Params:
+        iconPos = icon position
+        provider = a [gid.gdk4.content_provider.ContentProvider]
+        actions = a bitmask of the allowed drag actions
+  */
+  void setIconDragSource(gid.gtk4.types.EntryIconPosition iconPos, gid.gdk4.content_provider.ContentProvider provider, gid.gdk4.types.DragAction actions) nothrow
+  {
+    gtk_entry_set_icon_drag_source(cast(GtkEntry*)this._cPtr, iconPos, provider ? cast(GdkContentProvider*)provider._cPtr(No.Dup) : null, actions);
+  }
+
+  /**
+      Sets the icon shown in the entry at the specified position
+      from the current icon theme.
+      
+      If the icon isn’t known, a “broken image” icon will be
+      displayed instead.
+      
+      If icon is null, no icon will be shown in the
+      specified position.
+  
+      Params:
+        iconPos = The position at which to set the icon
+        icon = The icon to set
+  */
+  void setIconFromGicon(gid.gtk4.types.EntryIconPosition iconPos, gid.gio2.icon.Icon icon = null) nothrow
+  {
+    gtk_entry_set_icon_from_gicon(cast(GtkEntry*)this._cPtr, iconPos, icon ? cast(GIcon*)(cast(gid.gobject2.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the icon shown in the entry at the specified position
+      from the current icon theme.
+      
+      If the icon name isn’t known, a “broken image” icon will be
+      displayed instead.
+      
+      If icon_name is null, no icon will be shown in the
+      specified position.
+  
+      Params:
+        iconPos = The position at which to set the icon
+        iconName = An icon name
+  */
+  void setIconFromIconName(gid.gtk4.types.EntryIconPosition iconPos, string iconName = null) nothrow
+  {
+    const(char)* _iconName = iconName.toCString!(No.Malloc, Yes.Nullable);
+    gtk_entry_set_icon_from_icon_name(cast(GtkEntry*)this._cPtr, iconPos, _iconName);
+  }
+
+  /**
+      Sets the icon shown in the specified position using a [gid.gdk4.paintable.Paintable].
+      
+      If paintable is null, no icon will be shown in the specified position.
+  
+      Params:
+        iconPos = Icon position
+        paintable = A [gid.gdk4.paintable.Paintable]
+  */
+  void setIconFromPaintable(gid.gtk4.types.EntryIconPosition iconPos, gid.gdk4.paintable.Paintable paintable = null) nothrow
+  {
+    gtk_entry_set_icon_from_paintable(cast(GtkEntry*)this._cPtr, iconPos, paintable ? cast(GdkPaintable*)(cast(gid.gobject2.object.ObjectWrap)paintable)._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the sensitivity for the specified icon.
+  
+      Params:
+        iconPos = Icon position
+        sensitive = Specifies whether the icon should appear
+            sensitive or insensitive
+  */
+  void setIconSensitive(gid.gtk4.types.EntryIconPosition iconPos, bool sensitive) nothrow
+  {
+    gtk_entry_set_icon_sensitive(cast(GtkEntry*)this._cPtr, iconPos, sensitive);
+  }
+
+  /**
+      Sets tooltip as the contents of the tooltip for the icon at
+      the specified position.
+      
+      tooltip is assumed to be marked up with Pango Markup.
+      
+      Use null for tooltip to remove an existing tooltip.
+      
+      See also [gid.gtk4.widget.Widget.setTooltipMarkup] and
+      [gid.gtk4.entry.Entry.setIconTooltipText].
+  
+      Params:
+        iconPos = the icon position
+        tooltip = the contents of the tooltip for the icon
+  */
+  void setIconTooltipMarkup(gid.gtk4.types.EntryIconPosition iconPos, string tooltip = null) nothrow
+  {
+    const(char)* _tooltip = tooltip.toCString!(No.Malloc, Yes.Nullable);
+    gtk_entry_set_icon_tooltip_markup(cast(GtkEntry*)this._cPtr, iconPos, _tooltip);
+  }
+
+  /**
+      Sets tooltip as the contents of the tooltip for the icon
+      at the specified position.
+      
+      Use null for tooltip to remove an existing tooltip.
+      
+      See also [gid.gtk4.widget.Widget.setTooltipText] and
+      [gid.gtk4.entry.Entry.setIconTooltipMarkup].
+      
+      If you unset the widget tooltip via
+      [gid.gtk4.widget.Widget.setTooltipText] or
+      [gid.gtk4.widget.Widget.setTooltipMarkup], this sets
+      [gid.gtk4.widget.Widget.hasTooltip] to false, which suppresses
+      icon tooltips too. You can resolve this by then calling
+      [gid.gtk4.widget.Widget.setHasTooltip] to set
+      [gid.gtk4.widget.Widget.hasTooltip] back to true, or
+      setting at least one non-empty tooltip on any icon
+      achieves the same result.
+  
+      Params:
+        iconPos = the icon position
+        tooltip = the contents of the tooltip for the icon
+  */
+  void setIconTooltipText(gid.gtk4.types.EntryIconPosition iconPos, string tooltip = null) nothrow
+  {
+    const(char)* _tooltip = tooltip.toCString!(No.Malloc, Yes.Nullable);
+    gtk_entry_set_icon_tooltip_text(cast(GtkEntry*)this._cPtr, iconPos, _tooltip);
+  }
+
+  /**
+      Set additional hints which allow input methods to
+      fine-tune their behavior.
+  
+      Params:
+        hints = the hints
+  */
+  void setInputHints(gid.gtk4.types.InputHints hints) nothrow
+  {
+    gtk_entry_set_input_hints(cast(GtkEntry*)this._cPtr, hints);
+  }
+
+  /**
+      Sets the input purpose which can be used by input methods
+      to adjust their behavior.
+  
+      Params:
+        purpose = the purpose
+  */
+  void setInputPurpose(gid.gtk4.types.InputPurpose purpose) nothrow
+  {
+    gtk_entry_set_input_purpose(cast(GtkEntry*)this._cPtr, purpose);
+  }
+
+  /**
+      Sets the character to use in place of the actual text
+      in “password mode”.
+      
+      See [gid.gtk4.entry.Entry.setVisibility] for how to enable
+      “password mode”.
+      
+      By default, GTK picks the best invisible char available in
+      the current font. If you set the invisible char to 0, then
+      the user will get no feedback at all; there will be no text
+      on the screen as they type.
+  
+      Params:
+        ch = a Unicode character
+  */
+  void setInvisibleChar(dchar ch) nothrow
+  {
+    gtk_entry_set_invisible_char(cast(GtkEntry*)this._cPtr, ch);
+  }
+
+  /**
+      Sets the maximum allowed length of the contents of the widget.
+      
+      If the current contents are longer than the given length, then
+      they will be truncated to fit. The length is in characters.
+      
+      This is equivalent to getting entry's [gid.gtk4.entry_buffer.EntryBuffer] and
+      calling [gid.gtk4.entry_buffer.EntryBuffer.setMaxLength] on it.
+  
+      Params:
+        max = the maximum length of the entry, or 0 for no maximum.
+            (other than the maximum length of entries.) The value passed in will
+            be clamped to the range 0-65536.
+  */
+  void setMaxLength(int max) nothrow
+  {
+    gtk_entry_set_max_length(cast(GtkEntry*)this._cPtr, max);
+  }
+
+  /**
+      Sets the text that will be used in the context menu of the [gid.gtk4.entry.Entry]
+      when the specified icon is activatable. Selecting this item in the menu
+      results, from all aspects, the same than clicking on the specified icon.
+      This greatly simplifies making accessible applications, because the icons
+      aren't focusable when using keyboard navigation. This is why Gtk recommends
+      to add the same action to the context menu.
+  
+      Params:
+        iconPos = either GTK_ENTRY_ICON_PRIMARY or GTK_ENTRY_ICON_SECONDARY
+        text = the text used for the menu item in the context menu, or NULL to not add a menu item.
+  */
+  void setMenuEntryIconText(gid.gtk4.types.EntryIconPosition iconPos, string text) nothrow
+  {
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
+    gtk_entry_set_menu_entry_icon_text(cast(GtkEntry*)this._cPtr, iconPos, _text);
+  }
+
+  /**
+      Sets whether the text is overwritten when typing in the [gid.gtk4.entry.Entry].
+  
+      Params:
+        overwrite = new value
+  */
+  void setOverwriteMode(bool overwrite) nothrow
+  {
+    gtk_entry_set_overwrite_mode(cast(GtkEntry*)this._cPtr, overwrite);
+  }
+
+  /**
+      Sets text to be displayed in entry when it is empty.
+      
+      This can be used to give a visual hint of the expected
+      contents of the [gid.gtk4.entry.Entry].
+  
+      Params:
+        text = a string to be displayed when entry is empty and unfocused
+  */
+  void setPlaceholderText(string text = null) nothrow
+  {
+    const(char)* _text = text.toCString!(No.Malloc, Yes.Nullable);
+    gtk_entry_set_placeholder_text(cast(GtkEntry*)this._cPtr, _text);
+  }
+
+  /**
+      Causes the entry’s progress indicator to “fill in” the given
+      fraction of the bar.
+      
+      The fraction should be between 0.0 and 1.0, inclusive.
+  
+      Params:
+        fraction = fraction of the task that’s been completed
+  */
+  void setProgressFraction(double fraction) nothrow
+  {
+    gtk_entry_set_progress_fraction(cast(GtkEntry*)this._cPtr, fraction);
+  }
+
+  /**
+      Sets the fraction of total entry width to move the progress
+      bouncing block for each pulse.
+      
+      Use [gid.gtk4.entry.Entry.progressPulse] to pulse
+      the progress.
+  
+      Params:
+        fraction = fraction between 0.0 and 1.0
+  */
+  void setProgressPulseStep(double fraction) nothrow
+  {
+    gtk_entry_set_progress_pulse_step(cast(GtkEntry*)this._cPtr, fraction);
+  }
+
+  /**
+      Sets a [gid.pango1.tab_array.TabArray].
+      
+      The tabstops in the array are applied to the entry text.
+  
+      Params:
+        tabs = a [gid.pango1.tab_array.TabArray]
+  */
+  void setTabs(gid.pango1.tab_array.TabArray tabs = null) nothrow
+  {
+    gtk_entry_set_tabs(cast(GtkEntry*)this._cPtr, tabs ? cast(PangoTabArray*)tabs._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets whether the contents of the entry are visible or not.
+      
+      When visibility is set to false, characters are displayed
+      as the invisible char, and will also appear that way when
+      the text in the entry widget is copied elsewhere.
+      
+      By default, GTK picks the best invisible character available
+      in the current font, but it can be changed with
+      [gid.gtk4.entry.Entry.setInvisibleChar].
+      
+      Note that you probably want to set [gid.gtk4.entry.Entry.inputPurpose]
+      to [gid.gtk4.types.InputPurpose.Password] or [gid.gtk4.types.InputPurpose.Pin] to
+      inform input methods about the purpose of this entry,
+      in addition to setting visibility to false.
+  
+      Params:
+        visible = true if the contents of the entry are displayed as plaintext
+  */
+  void setVisibility(bool visible) nothrow
+  {
+    gtk_entry_set_visibility(cast(GtkEntry*)this._cPtr, visible);
+  }
+
+  /**
+      Unsets the invisible char, so that the default invisible char
+      is used again. See [gid.gtk4.entry.Entry.setInvisibleChar].
+  */
+  void unsetInvisibleChar() nothrow
+  {
+    gtk_entry_unset_invisible_char(cast(GtkEntry*)this._cPtr);
+  }
+
+  /**
+      Connect to `Activate` signal.
+  
+      Emitted when the entry is activated.
+        
+        The keybindings for this signal are all forms of the Enter key.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk4.entry.Entry entry)`
+  
+          `entry` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk4.entry.Entry)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.entry.Entry.activate");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("activate", closure, after);
+  }
+
+  /**
+      Connect to `IconPress` signal.
+  
+      Emitted when an activatable icon is clicked.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk4.types.EntryIconPosition iconPos, gid.gtk4.entry.Entry entry)`
+  
+          `iconPos` The position of the clicked icon (optional)
+  
+          `entry` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectIconPress(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.gtk4.types.EntryIconPosition)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gtk4.entry.Entry)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.entry.Entry.iconPress");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("icon-press", closure, after);
+  }
+
+  /**
+      Connect to `IconRelease` signal.
+  
+      Emitted on the button release from a mouse click
+        over an activatable icon.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk4.types.EntryIconPosition iconPos, gid.gtk4.entry.Entry entry)`
+  
+          `iconPos` The position of the clicked icon (optional)
+  
+          `entry` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectIconRelease(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.gtk4.types.EntryIconPosition)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gtk4.entry.Entry)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.entry.Entry.iconRelease");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("icon-release", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.entry.Entry]
+class EntryGidBuilderImpl(T) : gid.gtk4.widget.WidgetGidBuilderImpl!T, gid.gtk4.cell_editable.CellEditableGidBuilderImpl!T, gid.gtk4.editable.EditableGidBuilderImpl!T
+{
+
+  mixin CellEditableGidBuilderT!();
+  mixin EditableGidBuilderT!();
+
+  /**
+      Set `activatesDefault` property.
+      Params:
+        propval = Whether to activate the default widget when Enter is pressed.
+      Returns: Builder instance for fluent chaining
+  */
+  T activatesDefault(bool propval) nothrow
+  {
+    return setProperty("activates-default", propval);
+  }
+
+  /**
+      Set `attributes` property.
+      Params:
+        propval = A list of Pango attributes to apply to the text of the entry.
+          
+          This is mainly useful to change the size or weight of the text.
+          
+          The [gid.pango1.attribute.Attribute]'s @start_index and @end_index must refer to the
+          [gid.gtk4.entry_buffer.EntryBuffer] text, i.e. without the preedit string.
+      Returns: Builder instance for fluent chaining
+  */
+  T attributes(gid.pango1.attr_list.AttrList propval) nothrow
+  {
+    return setProperty("attributes", propval);
+  }
+
+  /**
+      Set `buffer` property.
+      Params:
+        propval = The buffer object which actually stores the text.
+      Returns: Builder instance for fluent chaining
+  */
+  T buffer(gid.gtk4.entry_buffer.EntryBuffer propval) nothrow
+  {
+    return setProperty("buffer", propval);
+  }
+
+  /**
+      Set `completion` property.
+      Params:
+        propval = The auxiliary completion object to use with the entry.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  T completion(gid.gtk4.entry_completion.EntryCompletion propval) nothrow
+  {
+    return setProperty("completion", propval);
+  }
+
+  /**
+      Set `enableEmojiCompletion` property.
+      Params:
+        propval = Whether to suggest Emoji replacements for :-delimited names
+          like `:heart:`.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableEmojiCompletion(bool propval) nothrow
+  {
+    return setProperty("enable-emoji-completion", propval);
+  }
+
+  /**
+      Set `extraMenu` property.
+      Params:
+        propval = A menu model whose contents will be appended to the context menu.
+      Returns: Builder instance for fluent chaining
+  */
+  T extraMenu(gid.gio2.menu_model.MenuModel propval) nothrow
+  {
+    return setProperty("extra-menu", propval);
+  }
+
+  /**
+      Set `hasFrame` property.
+      Params:
+        propval = Whether the entry should draw a frame.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasFrame(bool propval) nothrow
+  {
+    return setProperty("has-frame", propval);
+  }
+
+  /**
+      Set `imModule` property.
+      Params:
+        propval = Which IM (input method) module should be used for this entry.
+          
+          See [gid.gtk4.imcontext.IMContext].
+          
+          Setting this to a non-null value overrides the system-wide IM
+          module setting. See the GtkSettings [gid.gtk4.settings.Settings.gtkImModule]
+          property.
+      Returns: Builder instance for fluent chaining
+  */
+  T imModule(string propval) nothrow
+  {
+    return setProperty("im-module", propval);
+  }
+
+  /**
+      Set `inputHints` property.
+      Params:
+        propval = Additional hints that allow input methods to fine-tune their behavior.
+          
+          Also see [gid.gtk4.entry.Entry.inputPurpose]
+      Returns: Builder instance for fluent chaining
+  */
+  T inputHints(gid.gtk4.types.InputHints propval) nothrow
+  {
+    return setProperty("input-hints", propval);
+  }
+
+  /**
+      Set `inputPurpose` property.
+      Params:
+        propval = The purpose of this text field.
+          
+          This property can be used by on-screen keyboards and other input
+          methods to adjust their behaviour.
+          
+          Note that setting the purpose to [gid.gtk4.types.InputPurpose.Password] or
+          [gid.gtk4.types.InputPurpose.Pin] is independent from setting
+          [gid.gtk4.entry.Entry.visibility].
+      Returns: Builder instance for fluent chaining
+  */
+  T inputPurpose(gid.gtk4.types.InputPurpose propval) nothrow
+  {
+    return setProperty("input-purpose", propval);
+  }
+
+  /**
+      Set `invisibleChar` property.
+      Params:
+        propval = The character to use when masking entry contents (“password mode”).
+      Returns: Builder instance for fluent chaining
+  */
+  T invisibleChar(uint propval) nothrow
+  {
+    return setProperty("invisible-char", propval);
+  }
+
+  /**
+      Set `invisibleCharSet` property.
+      Params:
+        propval = Whether the invisible char has been set for the [gid.gtk4.entry.Entry].
+      Returns: Builder instance for fluent chaining
+  */
+  T invisibleCharSet(bool propval) nothrow
+  {
+    return setProperty("invisible-char-set", propval);
+  }
+
+  /**
+      Set `maxLength` property.
+      Params:
+        propval = Maximum number of characters for this entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxLength(int propval) nothrow
+  {
+    return setProperty("max-length", propval);
+  }
+
+  /**
+      Set `menuEntryIconPrimaryText` property.
+      Params:
+        propval = Text for an item in the context menu to activate the primary icon action.
+          
+          When the primary icon is activatable and this property has been set, a new entry
+          in the context menu of this GtkEntry will appear with this text. Selecting that
+          menu entry will result in the primary icon being activated, exactly in the same way
+          as it would be activated from a mouse click.
+          
+          This simplifies adding accessibility support to applications using activatable
+          icons. The activatable icons aren't focusable when navigating the interface with
+          the keyboard This is why Gtk recommends to also add those actions in the context
+          menu. This set of methods greatly simplifies this, by adding a menu item that, when
+          enabled, calls the same callback than clicking on the icon.
+      Returns: Builder instance for fluent chaining
+  */
+  T menuEntryIconPrimaryText(string propval) nothrow
+  {
+    return setProperty("menu-entry-icon-primary-text", propval);
+  }
+
+  /**
+      Set `menuEntryIconSecondaryText` property.
+      Params:
+        propval = Text for an item in the context menu to activate the secondary icon action.
+          
+          When the primary icon is activatable and this property has been set, a new entry
+          in the context menu of this GtkEntry will appear with this text. Selecting that
+          menu entry will result in the primary icon being activated, exactly in the same way
+          as it would be activated from a mouse click.
+          
+          This simplifies adding accessibility support to applications using activatable
+          icons. The activatable icons aren't focusable when navigating the interface with
+          the keyboard This is why Gtk recommends to also add those actions in the context
+          menu. This set of methods greatly simplifies this, by adding a menu item that, when
+          enabled, calls the same callback than clicking on the icon.
+      Returns: Builder instance for fluent chaining
+  */
+  T menuEntryIconSecondaryText(string propval) nothrow
+  {
+    return setProperty("menu-entry-icon-secondary-text", propval);
+  }
+
+  /**
+      Set `overwriteMode` property.
+      Params:
+        propval = If text is overwritten when typing in the [gid.gtk4.entry.Entry].
+      Returns: Builder instance for fluent chaining
+  */
+  T overwriteMode(bool propval) nothrow
+  {
+    return setProperty("overwrite-mode", propval);
+  }
+
+  /**
+      Set `placeholderText` property.
+      Params:
+        propval = The text that will be displayed in the [gid.gtk4.entry.Entry] when it is empty
+          and unfocused.
+      Returns: Builder instance for fluent chaining
+  */
+  T placeholderText(string propval) nothrow
+  {
+    return setProperty("placeholder-text", propval);
+  }
+
+  /**
+      Set `primaryIconActivatable` property.
+      Params:
+        propval = Whether the primary icon is activatable.
+          
+          GTK emits the [gid.gtk4.entry.Entry.iconPress] and
+          [gid.gtk4.entry.Entry.iconRelease] signals only on sensitive,
+          activatable icons.
+          
+          Sensitive, but non-activatable icons can be used for purely
+          informational purposes.
+      Returns: Builder instance for fluent chaining
+  */
+  T primaryIconActivatable(bool propval) nothrow
+  {
+    return setProperty("primary-icon-activatable", propval);
+  }
+
+  /**
+      Set `primaryIconGicon` property.
+      Params:
+        propval = The [gid.gio2.icon.Icon] to use for the primary icon for the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T primaryIconGicon(gid.gio2.icon.Icon propval) nothrow
+  {
+    return setProperty("primary-icon-gicon", propval);
+  }
+
+  /**
+      Set `primaryIconName` property.
+      Params:
+        propval = The icon name to use for the primary icon for the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T primaryIconName(string propval) nothrow
+  {
+    return setProperty("primary-icon-name", propval);
+  }
+
+  /**
+      Set `primaryIconPaintable` property.
+      Params:
+        propval = A [gid.gdk4.paintable.Paintable] to use as the primary icon for the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T primaryIconPaintable(gid.gdk4.paintable.Paintable propval) nothrow
+  {
+    return setProperty("primary-icon-paintable", propval);
+  }
+
+  /**
+      Set `primaryIconSensitive` property.
+      Params:
+        propval = Whether the primary icon is sensitive.
+          
+          An insensitive icon appears grayed out. GTK does not emit the
+          [gid.gtk4.entry.Entry.iconPress] and [gid.gtk4.entry.Entry.iconRelease]
+          signals and does not allow DND from insensitive icons.
+          
+          An icon should be set insensitive if the action that would trigger
+          when clicked is currently not available.
+      Returns: Builder instance for fluent chaining
+  */
+  T primaryIconSensitive(bool propval) nothrow
+  {
+    return setProperty("primary-icon-sensitive", propval);
+  }
+
+  /**
+      Set `primaryIconTooltipMarkup` property.
+      Params:
+        propval = The contents of the tooltip on the primary icon, with markup.
+          
+          Also see [gid.gtk4.entry.Entry.setIconTooltipMarkup].
+      Returns: Builder instance for fluent chaining
+  */
+  T primaryIconTooltipMarkup(string propval) nothrow
+  {
+    return setProperty("primary-icon-tooltip-markup", propval);
+  }
+
+  /**
+      Set `primaryIconTooltipText` property.
+      Params:
+        propval = The contents of the tooltip on the primary icon.
+          
+          Also see [gid.gtk4.entry.Entry.setIconTooltipText].
+      Returns: Builder instance for fluent chaining
+  */
+  T primaryIconTooltipText(string propval) nothrow
+  {
+    return setProperty("primary-icon-tooltip-text", propval);
+  }
+
+  /**
+      Set `progressFraction` property.
+      Params:
+        propval = The current fraction of the task that's been completed.
+      Returns: Builder instance for fluent chaining
+  */
+  T progressFraction(double propval) nothrow
+  {
+    return setProperty("progress-fraction", propval);
+  }
+
+  /**
+      Set `progressPulseStep` property.
+      Params:
+        propval = The fraction of total entry width to move the progress
+          bouncing block for each pulse.
+          
+          See [gid.gtk4.entry.Entry.progressPulse].
+      Returns: Builder instance for fluent chaining
+  */
+  T progressPulseStep(double propval) nothrow
+  {
+    return setProperty("progress-pulse-step", propval);
+  }
+
+  /**
+      Set `secondaryIconActivatable` property.
+      Params:
+        propval = Whether the secondary icon is activatable.
+          
+          GTK emits the [gid.gtk4.entry.Entry.iconPress] and
+          [gid.gtk4.entry.Entry.iconRelease] signals only on sensitive,
+          activatable icons.
+          
+          Sensitive, but non-activatable icons can be used for purely
+          informational purposes.
+      Returns: Builder instance for fluent chaining
+  */
+  T secondaryIconActivatable(bool propval) nothrow
+  {
+    return setProperty("secondary-icon-activatable", propval);
+  }
+
+  /**
+      Set `secondaryIconGicon` property.
+      Params:
+        propval = The [gid.gio2.icon.Icon] to use for the secondary icon for the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T secondaryIconGicon(gid.gio2.icon.Icon propval) nothrow
+  {
+    return setProperty("secondary-icon-gicon", propval);
+  }
+
+  /**
+      Set `secondaryIconName` property.
+      Params:
+        propval = The icon name to use for the secondary icon for the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T secondaryIconName(string propval) nothrow
+  {
+    return setProperty("secondary-icon-name", propval);
+  }
+
+  /**
+      Set `secondaryIconPaintable` property.
+      Params:
+        propval = A [gid.gdk4.paintable.Paintable] to use as the secondary icon for the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T secondaryIconPaintable(gid.gdk4.paintable.Paintable propval) nothrow
+  {
+    return setProperty("secondary-icon-paintable", propval);
+  }
+
+  /**
+      Set `secondaryIconSensitive` property.
+      Params:
+        propval = Whether the secondary icon is sensitive.
+          
+          An insensitive icon appears grayed out. GTK does not emit the
+          [gid.gtk4.entry.Entry.iconPress]
+          signals and does not allow DND from insensitive icons.
+          
+          An icon should be set insensitive if the action that would trigger
+          when clicked is currently not available.
+      Returns: Builder instance for fluent chaining
+  */
+  T secondaryIconSensitive(bool propval) nothrow
+  {
+    return setProperty("secondary-icon-sensitive", propval);
+  }
+
+  /**
+      Set `secondaryIconTooltipMarkup` property.
+      Params:
+        propval = The contents of the tooltip on the secondary icon, with markup.
+          
+          Also see [gid.gtk4.entry.Entry.setIconTooltipMarkup].
+      Returns: Builder instance for fluent chaining
+  */
+  T secondaryIconTooltipMarkup(string propval) nothrow
+  {
+    return setProperty("secondary-icon-tooltip-markup", propval);
+  }
+
+  /**
+      Set `secondaryIconTooltipText` property.
+      Params:
+        propval = The contents of the tooltip on the secondary icon.
+          
+          Also see [gid.gtk4.entry.Entry.setIconTooltipText].
+      Returns: Builder instance for fluent chaining
+  */
+  T secondaryIconTooltipText(string propval) nothrow
+  {
+    return setProperty("secondary-icon-tooltip-text", propval);
+  }
+
+  /**
+      Set `showEmojiIcon` property.
+      Params:
+        propval = Whether the entry will show an Emoji icon in the secondary icon position
+          to open the Emoji chooser.
+      Returns: Builder instance for fluent chaining
+  */
+  T showEmojiIcon(bool propval) nothrow
+  {
+    return setProperty("show-emoji-icon", propval);
+  }
+
+  /**
+      Set `tabs` property.
+      Params:
+        propval = A list of tabstops to apply to the text of the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T tabs(gid.pango1.tab_array.TabArray propval) nothrow
+  {
+    return setProperty("tabs", propval);
+  }
+
+  /**
+      Set `truncateMultiline` property.
+      Params:
+        propval = When true, pasted multi-line text is truncated to the first line.
+      Returns: Builder instance for fluent chaining
+  */
+  T truncateMultiline(bool propval) nothrow
+  {
+    return setProperty("truncate-multiline", propval);
+  }
+
+  /**
+      Set `visibility` property.
+      Params:
+        propval = Whether the entry should show the “invisible char” instead of the
+          actual text (“password mode”).
+      Returns: Builder instance for fluent chaining
+  */
+  T visibility(bool propval) nothrow
+  {
+    return setProperty("visibility", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk4.entry.Entry]
+final class EntryGidBuilder : EntryGidBuilderImpl!EntryGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Entry build() nothrow
+  {
+    return new Entry(cast(void*)createGObject(Entry._getGType), Yes.Take);
+  }
+}

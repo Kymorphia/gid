@@ -1,0 +1,327 @@
+/// Module for [PixbufModule] class
+module gid.gdkpixbuf2.pixbuf_module;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gdkpixbuf2.c.functions;
+import gid.gdkpixbuf2.c.types;
+import gid.gdkpixbuf2.pixbuf_format;
+import gid.gdkpixbuf2.types;
+import gid.gmodule2.module_;
+
+/**
+    A [gid.gdkpixbuf2.pixbuf_module.PixbufModule] contains the necessary functions to load and save
+    images in a certain file format.
+    
+    If [gid.gdkpixbuf2.pixbuf.Pixbuf] has been compiled with [gid.gmodule2.module_.Module] support, it can be extended
+    by modules which can load (and perhaps also save) new image and animation
+    formats.
+    
+    ## Implementing modules
+    
+    The [gid.gdkpixbuf2.pixbuf.Pixbuf] interfaces needed for implementing modules are contained in
+    `gdk-pixbuf-io.h` (and `gdk-pixbuf-animation.h` if the module supports
+    animations). They are not covered by the same stability guarantees as the
+    regular GdkPixbuf API. To underline this fact, they are protected by the
+    `GDK_PIXBUF_ENABLE_BACKEND` pre-processor symbol.
+    
+    Each loadable module must contain a [gid.gdkpixbuf2.types.PixbufModuleFillVtableFunc] function
+    named `fill_vtable`, which will get called when the module
+    is loaded and must set the function pointers of the [gid.gdkpixbuf2.pixbuf_module.PixbufModule].
+    
+    In order to make format-checking work before actually loading the modules
+    (which may require calling `dlopen` to load image libraries), modules export
+    their signatures (and other information) via the `fill_info` function. An
+    external utility, `gdk-pixbuf-query-loaders`, uses this to create a text
+    file containing a list of all available loaders and  their signatures.
+    This file is then read at runtime by [gid.gdkpixbuf2.pixbuf.Pixbuf] to obtain the list of
+    available loaders and their signatures.
+    
+    Modules may only implement a subset of the functionality available via
+    [gid.gdkpixbuf2.pixbuf_module.PixbufModule]. If a particular functionality is not implemented, the
+    `fill_vtable` function will simply not set the corresponding
+    function pointers of the [gid.gdkpixbuf2.pixbuf_module.PixbufModule] structure. If a module supports
+    incremental loading (i.e. provides `begin_load`, `stop_load` and
+    `load_increment`), it doesn't have to implement `load`, since [gid.gdkpixbuf2.pixbuf.Pixbuf]
+    can supply a generic `load` implementation wrapping the incremental loading.
+    
+    ## Installing modules
+    
+    Installing a module is a two-step process:
+    
+     - copy the module file(s) to the loader directory (normally
+       `$libdir/gdk-pixbuf-2.0/$version/loaders`, unless overridden by the
+       environment variable `GDK_PIXBUF_MODULEDIR`)
+     - call `gdk-pixbuf-query-loaders` to update the module file (normally
+       `$libdir/gdk-pixbuf-2.0/$version/loaders.cache`, unless overridden
+       by the environment variable `GDK_PIXBUF_MODULE_FILE`)
+*/
+class PixbufModule : StructWrap!(GdkPixbufModule)
+{
+  /**
+      Create a `pixbuf_module.PixbufModule` wrap type.
+      Params:
+        moduleName = the name of the module, usually the same as the
+           usual file extension for images of this type, eg. "xpm", "jpeg" or "png".
+        modulePath = the path from which the module is loaded.
+        info = a [gid.gdkpixbuf2.pixbuf_format.PixbufFormat] holding information about the module.
+        load = loads an image from a file.
+        loadXpmData = loads an image from data in memory.
+        stopLoad = stops an incremental load.
+        loadIncrement = continues an incremental load.
+        loadAnimation = loads an animation from a file.
+        save = saves a [gid.gdkpixbuf2.pixbuf.Pixbuf] to a file.
+        isSaveOptionSupported = returns whether a save option key is supported by the module
+  */
+  this(string moduleName = string.init, string modulePath = string.init, gid.gdkpixbuf2.pixbuf_format.PixbufFormat info = gid.gdkpixbuf2.pixbuf_format.PixbufFormat.init, GdkPixbufModuleLoadFunc load = GdkPixbufModuleLoadFunc.init, GdkPixbufModuleLoadXpmDataFunc loadXpmData = GdkPixbufModuleLoadXpmDataFunc.init, GdkPixbufModuleStopLoadFunc stopLoad = GdkPixbufModuleStopLoadFunc.init, GdkPixbufModuleIncrementLoadFunc loadIncrement = GdkPixbufModuleIncrementLoadFunc.init, GdkPixbufModuleLoadAnimationFunc loadAnimation = GdkPixbufModuleLoadAnimationFunc.init, GdkPixbufModuleSaveFunc save = GdkPixbufModuleSaveFunc.init, GdkPixbufModuleSaveOptionSupportedFunc isSaveOptionSupported = GdkPixbufModuleSaveOptionSupportedFunc.init) nothrow
+  {
+    this.moduleName = moduleName;
+    this.modulePath = modulePath;
+    this.info = info;
+    this.load = load;
+    this.loadXpmData = loadXpmData;
+    this.stopLoad = stopLoad;
+    this.loadIncrement = loadIncrement;
+    this.loadAnimation = loadAnimation;
+    this.save = save;
+    this.isSaveOptionSupported = isSaveOptionSupported;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _moduleNameRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `moduleName` field.
+      Returns: the name of the module, usually the same as the
+         usual file extension for images of this type, eg. "xpm", "jpeg" or "png".
+  */
+  @property string moduleName() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GdkPixbufModule*)this._cPtr).moduleName);
+  }
+
+  /**
+      Set `moduleName` field.
+      Params:
+        propval = the name of the module, usually the same as the
+           usual file extension for images of this type, eg. "xpm", "jpeg" or "png".
+  */
+  @property void moduleName(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("moduleName"))
+      return;
+
+    _moduleNameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GdkPixbufModule*)this._cPtr).moduleName = cast(char*)_moduleNameRef;
+  }
+
+  private const(char)* _modulePathRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `modulePath` field.
+      Returns: the path from which the module is loaded.
+  */
+  @property string modulePath() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GdkPixbufModule*)this._cPtr).modulePath);
+  }
+
+  /**
+      Set `modulePath` field.
+      Params:
+        propval = the path from which the module is loaded.
+  */
+  @property void modulePath(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("modulePath"))
+      return;
+
+    _modulePathRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GdkPixbufModule*)this._cPtr).modulePath = cast(char*)_modulePathRef;
+  }
+
+  /**
+      Get `module_` field.
+      Returns: the loaded [gid.gmodule2.module_.Module].
+  */
+  @property gid.gmodule2.module_.Module module_() nothrow
+  {
+    return new gid.gmodule2.module_.Module(cast(ModuleC*)(cast(GdkPixbufModule*)this._cPtr).module_, No.Take);
+  }
+
+  private gid.gdkpixbuf2.pixbuf_format.PixbufFormat _infoRef; // Keeps borrowed field value alive
+
+  /**
+      Get `info` field.
+      Returns: a [gid.gdkpixbuf2.pixbuf_format.PixbufFormat] holding information about the module.
+  */
+  @property gid.gdkpixbuf2.pixbuf_format.PixbufFormat info() nothrow
+  {
+    return cToD!(gid.gdkpixbuf2.pixbuf_format.PixbufFormat)(cast(void*)(cast(GdkPixbufModule*)this._cPtr).info);
+  }
+
+  /**
+      Set `info` field.
+      Params:
+        propval = a [gid.gdkpixbuf2.pixbuf_format.PixbufFormat] holding information about the module.
+  */
+  @property void info(gid.gdkpixbuf2.pixbuf_format.PixbufFormat propval) nothrow
+  {
+    if (_refuseBorrowedStore("info"))
+      return;
+
+    _infoRef = propval;
+    (cast(GdkPixbufModule*)this._cPtr).info = propval ? cast(GdkPixbufFormat*)propval._cPtr(No.Dup) : null;
+  }
+
+  /**
+      Get `load` field.
+      Returns: loads an image from a file.
+  */
+  @property GdkPixbufModuleLoadFunc load() nothrow
+  {
+    return (cast(GdkPixbufModule*)this._cPtr).load;
+  }
+
+  /**
+      Set `load` field.
+      Params:
+        propval = loads an image from a file.
+  */
+
+  @property void load(GdkPixbufModuleLoadFunc propval) nothrow
+  {
+    (cast(GdkPixbufModule*)this._cPtr).load = propval;
+  }
+
+  /**
+      Get `loadXpmData` field.
+      Returns: loads an image from data in memory.
+  */
+  @property GdkPixbufModuleLoadXpmDataFunc loadXpmData() nothrow
+  {
+    return (cast(GdkPixbufModule*)this._cPtr).loadXpmData;
+  }
+
+  /**
+      Set `loadXpmData` field.
+      Params:
+        propval = loads an image from data in memory.
+  */
+
+  @property void loadXpmData(GdkPixbufModuleLoadXpmDataFunc propval) nothrow
+  {
+    (cast(GdkPixbufModule*)this._cPtr).loadXpmData = propval;
+  }
+
+  /**
+      Get `stopLoad` field.
+      Returns: stops an incremental load.
+  */
+  @property GdkPixbufModuleStopLoadFunc stopLoad() nothrow
+  {
+    return (cast(GdkPixbufModule*)this._cPtr).stopLoad;
+  }
+
+  /**
+      Set `stopLoad` field.
+      Params:
+        propval = stops an incremental load.
+  */
+
+  @property void stopLoad(GdkPixbufModuleStopLoadFunc propval) nothrow
+  {
+    (cast(GdkPixbufModule*)this._cPtr).stopLoad = propval;
+  }
+
+  /**
+      Get `loadIncrement` field.
+      Returns: continues an incremental load.
+  */
+  @property GdkPixbufModuleIncrementLoadFunc loadIncrement() nothrow
+  {
+    return (cast(GdkPixbufModule*)this._cPtr).loadIncrement;
+  }
+
+  /**
+      Set `loadIncrement` field.
+      Params:
+        propval = continues an incremental load.
+  */
+
+  @property void loadIncrement(GdkPixbufModuleIncrementLoadFunc propval) nothrow
+  {
+    (cast(GdkPixbufModule*)this._cPtr).loadIncrement = propval;
+  }
+
+  /**
+      Get `loadAnimation` field.
+      Returns: loads an animation from a file.
+  */
+  @property GdkPixbufModuleLoadAnimationFunc loadAnimation() nothrow
+  {
+    return (cast(GdkPixbufModule*)this._cPtr).loadAnimation;
+  }
+
+  /**
+      Set `loadAnimation` field.
+      Params:
+        propval = loads an animation from a file.
+  */
+
+  @property void loadAnimation(GdkPixbufModuleLoadAnimationFunc propval) nothrow
+  {
+    (cast(GdkPixbufModule*)this._cPtr).loadAnimation = propval;
+  }
+
+  /**
+      Get `save` field.
+      Returns: saves a [gid.gdkpixbuf2.pixbuf.Pixbuf] to a file.
+  */
+  @property GdkPixbufModuleSaveFunc save() nothrow
+  {
+    return (cast(GdkPixbufModule*)this._cPtr).save;
+  }
+
+  /**
+      Set `save` field.
+      Params:
+        propval = saves a [gid.gdkpixbuf2.pixbuf.Pixbuf] to a file.
+  */
+
+  @property void save(GdkPixbufModuleSaveFunc propval) nothrow
+  {
+    (cast(GdkPixbufModule*)this._cPtr).save = propval;
+  }
+
+  /**
+      Get `isSaveOptionSupported` field.
+      Returns: returns whether a save option key is supported by the module
+  */
+  @property GdkPixbufModuleSaveOptionSupportedFunc isSaveOptionSupported() nothrow
+  {
+    return (cast(GdkPixbufModule*)this._cPtr).isSaveOptionSupported;
+  }
+
+  /**
+      Set `isSaveOptionSupported` field.
+      Params:
+        propval = returns whether a save option key is supported by the module
+  */
+
+  @property void isSaveOptionSupported(GdkPixbufModuleSaveOptionSupportedFunc propval) nothrow
+  {
+    (cast(GdkPixbufModule*)this._cPtr).isSaveOptionSupported = propval;
+  }
+}

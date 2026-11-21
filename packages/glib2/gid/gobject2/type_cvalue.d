@@ -1,0 +1,118 @@
+/// Module for [TypeCValue] class
+module gid.gobject2.type_cvalue;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.c.functions;
+import gid.gobject2.c.types;
+import gid.gobject2.types;
+
+/**
+    A union holding one collected value.
+*/
+class TypeCValue : StructWrap!(GTypeCValue)
+{
+  /**
+      Create a `type_cvalue.TypeCValue` wrap type.
+      Params:
+        vInt = the field for holding integer values
+        vLong = the field for holding long integer values
+        vInt64 = the field for holding 64 bit integer values
+        vDouble = the field for holding floating point values
+  */
+  this(int vInt = int.init, glong vLong = glong.init, long vInt64 = long.init, double vDouble = 0.0) nothrow
+  {
+    this.vInt = vInt;
+    this.vLong = vLong;
+    this.vInt64 = vInt64;
+    this.vDouble = vDouble;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /**
+      Get `vInt` field.
+      Returns: the field for holding integer values
+  */
+  @property int vInt() nothrow
+  {
+    return (cast(GTypeCValue*)this._cPtr).vInt;
+  }
+
+  /**
+      Set `vInt` field.
+      Params:
+        propval = the field for holding integer values
+  */
+  @property void vInt(int propval) nothrow
+  {
+    (cast(GTypeCValue*)this._cPtr).vInt = propval;
+  }
+
+  /**
+      Get `vLong` field.
+      Returns: the field for holding long integer values
+  */
+  @property glong vLong() nothrow
+  {
+    return (cast(GTypeCValue*)this._cPtr).vLong;
+  }
+
+  /**
+      Set `vLong` field.
+      Params:
+        propval = the field for holding long integer values
+  */
+  @property void vLong(glong propval) nothrow
+  {
+    (cast(GTypeCValue*)this._cPtr).vLong = propval;
+  }
+
+  /**
+      Get `vInt64` field.
+      Returns: the field for holding 64 bit integer values
+  */
+  @property long vInt64() nothrow
+  {
+    return (cast(GTypeCValue*)this._cPtr).vInt64;
+  }
+
+  /**
+      Set `vInt64` field.
+      Params:
+        propval = the field for holding 64 bit integer values
+  */
+  @property void vInt64(long propval) nothrow
+  {
+    (cast(GTypeCValue*)this._cPtr).vInt64 = propval;
+  }
+
+  /**
+      Get `vDouble` field.
+      Returns: the field for holding floating point values
+  */
+  @property double vDouble() nothrow
+  {
+    return (cast(GTypeCValue*)this._cPtr).vDouble;
+  }
+
+  /**
+      Set `vDouble` field.
+      Params:
+        propval = the field for holding floating point values
+  */
+  @property void vDouble(double propval) nothrow
+  {
+    (cast(GTypeCValue*)this._cPtr).vDouble = propval;
+  }
+}

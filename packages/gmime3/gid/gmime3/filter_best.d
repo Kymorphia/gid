@@ -1,0 +1,131 @@
+/// Module for [FilterBest] class
+module gid.gmime3.filter_best;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gmime3.c.functions;
+import gid.gmime3.c.types;
+import gid.gmime3.filter;
+import gid.gmime3.types;
+import gid.gobject2.gid_builder;
+
+/**
+    A filter for calculating the best encoding and/or charset to encode
+    the data passed through it.
+*/
+class FilterBest : gid.gmime3.filter.Filter
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())g_mime_filter_best_get_type != &gidSymbolNotFound ? g_mime_filter_best_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeFilterBest";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override FilterBest self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gmime3.filter_best.FilterBest]
+      Returns: New builder object
+  */
+  static FilterBestGidBuilder builder() nothrow
+  {
+    return new FilterBestGidBuilder;
+  }
+
+  /**
+      Creates a new GMimeFilterBest filter. flags are used to determine
+      which information to keep statistics of. If the
+      #GMIME_FILTER_BEST_CHARSET bit is set, the filter will be able to
+      compute the best charset for encoding the stream of data
+      filtered. If the #GMIME_FILTER_BEST_ENCODING bit is set, the filter
+      will be able to compute the best Content-Transfer-Encoding for use
+      with the stream being filtered.
+      
+      Note: In order for the [gid.gmime3.filter_best.FilterBest.charset] function to
+      work, the stream being filtered MUST already be encoded in UTF-8.
+  
+      Params:
+        flags = filter flags
+      Returns: a new best filter with flags flags.
+  */
+  this(gid.gmime3.types.FilterBestFlags flags) nothrow
+  {
+    GMimeFilter* _cretval;
+    _cretval = g_mime_filter_best_new(flags);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Calculates the best charset for encoding the content filtered
+      through the best filter.
+      Returns: the name of the charset most suitable for encoding
+        the content that has been passed through the filter or null
+        if the filter was not configured to detect this.
+  */
+  string charset() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = g_mime_filter_best_charset(cast(GMimeFilterBest*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Calculates the most efficient Content-Transfer-Encoding for the
+      content filtered through best that fits within the encoding
+      constraint.
+  
+      Params:
+        constraint = a #GMimeEncodingConstraint
+      Returns: the best encoding for the content filtered by best.
+  */
+  gid.gmime3.types.ContentEncoding encoding(gid.gmime3.types.EncodingConstraint constraint) nothrow
+  {
+    GMimeContentEncoding _cretval;
+    _cretval = g_mime_filter_best_encoding(cast(GMimeFilterBest*)this._cPtr, constraint);
+    gid.gmime3.types.ContentEncoding _retval = cast(gid.gmime3.types.ContentEncoding)_cretval;
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [gid.gmime3.filter_best.FilterBest]
+class FilterBestGidBuilderImpl(T) : gid.gmime3.filter.FilterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gmime3.filter_best.FilterBest]
+final class FilterBestGidBuilder : FilterBestGidBuilderImpl!FilterBestGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  FilterBest build() nothrow
+  {
+    return new FilterBest(cast(void*)createGObject(FilterBest._getGType), Yes.Take);
+  }
+}

@@ -7,12 +7,12 @@ import std.conv : to;
 import std.exception : assumeWontThrow;
 public import std.typecons : Flag, No, Yes;
 
-import gid.basictypes;
-import glib.types;
-import glib.c.functions;
-import gobject.boxed;
-import gobject.dclosure;
-import gobject.value;
+import gid.core.basictypes;
+import gid.glib2.types;
+import gid.glib2.c.functions;
+import gid.gobject2.boxed;
+import gid.gobject2.dclosure;
+import gid.gobject2.value;
 
 debug
 {
@@ -551,7 +551,7 @@ class ObjectWrap : GidWrap
 
     // Enums, flags and boxed classes use the property GType (D enums have no GType of their own, a null boxed value
     // has no instance to get the GType from), as well as ulong which is also GType and gulong (on 64 bit systems)
-    static if (is(T == enum) || is(T : gobject.boxed.Boxed) || is(T == ulong) || is(T == long))
+    static if (is(T == enum) || is(T : gid.gobject2.boxed.Boxed) || is(T == ulong) || is(T == long))
     {
       auto pspec = g_object_class_find_property(cast(GObjectClass*)(cast(GTypeInstance*)_cInstancePtr).gClass, cPropName);
       if (!pspec)
@@ -580,7 +580,7 @@ class ObjectWrap : GidWrap
 
     // Enums, flags and boxed classes use the property GType (D enums have no GType of their own, a null boxed value
     // has no instance to get the GType from), as well as ulong which is also GType and gulong (on 64 bit systems)
-    static if (is(T == enum) || is(T : gobject.boxed.Boxed) || is(T == ulong) || is(T == long))
+    static if (is(T == enum) || is(T : gid.gobject2.boxed.Boxed) || is(T == ulong) || is(T == long))
     {
       auto pspec = g_object_class_find_property(cast(GObjectClass*)(cast(GTypeInstance*)_cInstancePtr).gClass, cPropName);
       if (!pspec)

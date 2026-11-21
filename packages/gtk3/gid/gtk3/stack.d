@@ -1,0 +1,591 @@
+/// Module for [Stack] class
+module gid.gtk3.stack;
+
+public import gid.core.basictypes;
+import gid.atk1.implementor_iface;
+import gid.atk1.implementor_iface_mixin;
+import gid.core.gid;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk3.buildable;
+import gid.gtk3.buildable_mixin;
+import gid.gtk3.c.functions;
+import gid.gtk3.c.types;
+import gid.gtk3.container;
+import gid.gtk3.types;
+import gid.gtk3.widget;
+
+/**
+    The GtkStack widget is a container which only shows
+    one of its children at a time. In contrast to GtkNotebook,
+    GtkStack does not provide a means for users to change the
+    visible child. Instead, the #GtkStackSwitcher widget can be
+    used with GtkStack to provide this functionality.
+    
+    Transitions between pages can be animated as slides or
+    fades. This can be controlled with [gid.gtk4.stack.Stack.setTransitionType].
+    These animations respect the #GtkSettings:gtk-enable-animations
+    setting.
+    
+    The GtkStack widget was added in GTK+ 3.10.
+    
+    # CSS nodes
+    
+    GtkStack has a single CSS node named stack.
+*/
+class Stack : gid.gtk3.container.Container
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_stack_get_type != &gidSymbolNotFound ? gtk_stack_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkStack";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Stack self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk3.stack.Stack]
+      Returns: New builder object
+  */
+  static StackGidBuilder builder() nothrow
+  {
+    return new StackGidBuilder;
+  }
+
+  /**
+      Get `hhomogeneous` property.
+      Returns: true if the stack allocates the same width for all children.
+  */
+  @property bool hhomogeneous() nothrow
+  {
+    return getHhomogeneous();
+  }
+
+  /**
+      Set `hhomogeneous` property.
+      Params:
+        propval = true if the stack allocates the same width for all children.
+  */
+  @property void hhomogeneous(bool propval) nothrow
+  {
+    setHhomogeneous(propval);
+  }
+
+  /** */
+  @property bool homogeneous() nothrow
+  {
+    return getHomogeneous();
+  }
+
+  /** */
+  @property void homogeneous(bool propval) nothrow
+  {
+    setHomogeneous(propval);
+  }
+
+  /** */
+  @property bool interpolateSize() nothrow
+  {
+    return getInterpolateSize();
+  }
+
+  /** */
+  @property void interpolateSize(bool propval) nothrow
+  {
+    setInterpolateSize(propval);
+  }
+
+  /** */
+  @property uint transitionDuration() nothrow
+  {
+    return getTransitionDuration();
+  }
+
+  /** */
+  @property void transitionDuration(uint propval) nothrow
+  {
+    setTransitionDuration(propval);
+  }
+
+  /** */
+  @property bool transitionRunning() nothrow
+  {
+    return getTransitionRunning();
+  }
+
+  /** */
+  @property gid.gtk3.types.StackTransitionType transitionType() nothrow
+  {
+    return getTransitionType();
+  }
+
+  /** */
+  @property void transitionType(gid.gtk3.types.StackTransitionType propval) nothrow
+  {
+    setTransitionType(propval);
+  }
+
+  /**
+      Get `vhomogeneous` property.
+      Returns: true if the stack allocates the same height for all children.
+  */
+  @property bool vhomogeneous() nothrow
+  {
+    return getVhomogeneous();
+  }
+
+  /**
+      Set `vhomogeneous` property.
+      Params:
+        propval = true if the stack allocates the same height for all children.
+  */
+  @property void vhomogeneous(bool propval) nothrow
+  {
+    setVhomogeneous(propval);
+  }
+
+  /** */
+  @property gid.gtk3.widget.Widget visibleChild() nothrow
+  {
+    return getVisibleChild();
+  }
+
+  /** */
+  @property void visibleChild(gid.gtk3.widget.Widget propval) nothrow
+  {
+    setVisibleChild(propval);
+  }
+
+  /** */
+  @property string visibleChildName() nothrow
+  {
+    return getVisibleChildName();
+  }
+
+  /** */
+  @property void visibleChildName(string propval) nothrow
+  {
+    setVisibleChildName(propval);
+  }
+
+  /**
+      Creates a new #GtkStack container.
+      Returns: a new #GtkStack
+  */
+  this() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_stack_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Adds a child to stack.
+      The child is identified by the name.
+  
+      Params:
+        child = the widget to add
+        name = the name for child
+  */
+  void addNamed(gid.gtk3.widget.Widget child, string name) nothrow
+  {
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    gtk_stack_add_named(cast(GtkStack*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _name);
+  }
+
+  /**
+      Adds a child to stack.
+      The child is identified by the name. The title
+      will be used by #GtkStackSwitcher to represent
+      child in a tab bar, so it should be short.
+  
+      Params:
+        child = the widget to add
+        name = the name for child
+        title = a human-readable title for child
+  */
+  void addTitled(gid.gtk3.widget.Widget child, string name, string title) nothrow
+  {
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
+    gtk_stack_add_titled(cast(GtkStack*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _name, _title);
+  }
+
+  /**
+      Finds the child of the #GtkStack with the name given as
+      the argument. Returns null if there is no child with this
+      name.
+  
+      Params:
+        name = the name of the child to find
+      Returns: the requested child of the #GtkStack
+  */
+  gid.gtk3.widget.Widget getChildByName(string name) nothrow
+  {
+    GtkWidget* _cretval;
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    _cretval = gtk_stack_get_child_by_name(cast(GtkStack*)this._cPtr, _name);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets whether stack is horizontally homogeneous.
+      See [gid.gtk4.stack.Stack.setHhomogeneous].
+      Returns: whether stack is horizontally homogeneous.
+  */
+  bool getHhomogeneous() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_stack_get_hhomogeneous(cast(GtkStack*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether stack is homogeneous.
+      See [gid.gtk3.stack.Stack.setHomogeneous].
+      Returns: whether stack is homogeneous.
+  */
+  bool getHomogeneous() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_stack_get_homogeneous(cast(GtkStack*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns wether the #GtkStack is set up to interpolate between
+      the sizes of children on page switch.
+      Returns: true if child sizes are interpolated
+  */
+  bool getInterpolateSize() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_stack_get_interpolate_size(cast(GtkStack*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the amount of time (in milliseconds) that
+      transitions between pages in stack will take.
+      Returns: the transition duration
+  */
+  uint getTransitionDuration() nothrow
+  {
+    uint _retval;
+    _retval = gtk_stack_get_transition_duration(cast(GtkStack*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns whether the stack is currently in a transition from one page to
+      another.
+      Returns: true if the transition is currently running, false otherwise.
+  */
+  bool getTransitionRunning() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_stack_get_transition_running(cast(GtkStack*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the type of animation that will be used
+      for transitions between pages in stack.
+      Returns: the current transition type of stack
+  */
+  gid.gtk3.types.StackTransitionType getTransitionType() nothrow
+  {
+    GtkStackTransitionType _cretval;
+    _cretval = gtk_stack_get_transition_type(cast(GtkStack*)this._cPtr);
+    gid.gtk3.types.StackTransitionType _retval = cast(gid.gtk3.types.StackTransitionType)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets whether stack is vertically homogeneous.
+      See [gid.gtk4.stack.Stack.setVhomogeneous].
+      Returns: whether stack is vertically homogeneous.
+  */
+  bool getVhomogeneous() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_stack_get_vhomogeneous(cast(GtkStack*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the currently visible child of stack, or null if
+      there are no visible children.
+      Returns: the visible child of the #GtkStack
+  */
+  gid.gtk3.widget.Widget getVisibleChild() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_stack_get_visible_child(cast(GtkStack*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the name of the currently visible child of stack, or
+      null if there is no visible child.
+      Returns: the name of the visible child of the #GtkStack
+  */
+  string getVisibleChildName() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_stack_get_visible_child_name(cast(GtkStack*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Sets the #GtkStack to be horizontally homogeneous or not.
+      If it is homogeneous, the #GtkStack will request the same
+      width for all its children. If it isn't, the stack
+      may change width when a different child becomes visible.
+  
+      Params:
+        hhomogeneous = true to make stack horizontally homogeneous
+  */
+  void setHhomogeneous(bool hhomogeneous) nothrow
+  {
+    gtk_stack_set_hhomogeneous(cast(GtkStack*)this._cPtr, hhomogeneous);
+  }
+
+  /**
+      Sets the #GtkStack to be homogeneous or not. If it
+      is homogeneous, the #GtkStack will request the same
+      size for all its children. If it isn't, the stack
+      may change size when a different child becomes visible.
+      
+      Since 3.16, homogeneity can be controlled separately
+      for horizontal and vertical size, with the
+      #GtkStack:hhomogeneous and #GtkStack:vhomogeneous.
+  
+      Params:
+        homogeneous = true to make stack homogeneous
+  */
+  void setHomogeneous(bool homogeneous) nothrow
+  {
+    gtk_stack_set_homogeneous(cast(GtkStack*)this._cPtr, homogeneous);
+  }
+
+  /**
+      Sets whether or not stack will interpolate its size when
+      changing the visible child. If the #GtkStack:interpolate-size
+      property is set to true, stack will interpolate its size between
+      the current one and the one it'll take after changing the
+      visible child, according to the set transition duration.
+  
+      Params:
+        interpolateSize = the new value
+  */
+  void setInterpolateSize(bool interpolateSize) nothrow
+  {
+    gtk_stack_set_interpolate_size(cast(GtkStack*)this._cPtr, interpolateSize);
+  }
+
+  /**
+      Sets the duration that transitions between pages in stack
+      will take.
+  
+      Params:
+        duration = the new duration, in milliseconds
+  */
+  void setTransitionDuration(uint duration) nothrow
+  {
+    gtk_stack_set_transition_duration(cast(GtkStack*)this._cPtr, duration);
+  }
+
+  /**
+      Sets the type of animation that will be used for
+      transitions between pages in stack. Available
+      types include various kinds of fades and slides.
+      
+      The transition type can be changed without problems
+      at runtime, so it is possible to change the animation
+      based on the page that is about to become current.
+  
+      Params:
+        transition = the new transition type
+  */
+  void setTransitionType(gid.gtk3.types.StackTransitionType transition) nothrow
+  {
+    gtk_stack_set_transition_type(cast(GtkStack*)this._cPtr, transition);
+  }
+
+  /**
+      Sets the #GtkStack to be vertically homogeneous or not.
+      If it is homogeneous, the #GtkStack will request the same
+      height for all its children. If it isn't, the stack
+      may change height when a different child becomes visible.
+  
+      Params:
+        vhomogeneous = true to make stack vertically homogeneous
+  */
+  void setVhomogeneous(bool vhomogeneous) nothrow
+  {
+    gtk_stack_set_vhomogeneous(cast(GtkStack*)this._cPtr, vhomogeneous);
+  }
+
+  /**
+      Makes child the visible child of stack.
+      
+      If child is different from the currently
+      visible child, the transition between the
+      two will be animated with the current
+      transition type of stack.
+      
+      Note that the child widget has to be visible itself
+      (see [gid.gtk4.widget.Widget.show]) in order to become the visible
+      child of stack.
+  
+      Params:
+        child = a child of stack
+  */
+  void setVisibleChild(gid.gtk3.widget.Widget child) nothrow
+  {
+    gtk_stack_set_visible_child(cast(GtkStack*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Makes the child with the given name visible.
+      
+      Note that the child widget has to be visible itself
+      (see [gid.gtk4.widget.Widget.show]) in order to become the visible
+      child of stack.
+  
+      Params:
+        name = the name of the child to make visible
+        transition = the transition type to use
+  */
+  void setVisibleChildFull(string name, gid.gtk3.types.StackTransitionType transition) nothrow
+  {
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    gtk_stack_set_visible_child_full(cast(GtkStack*)this._cPtr, _name, transition);
+  }
+
+  /**
+      Makes the child with the given name visible.
+      
+      If child is different from the currently
+      visible child, the transition between the
+      two will be animated with the current
+      transition type of stack.
+      
+      Note that the child widget has to be visible itself
+      (see [gid.gtk4.widget.Widget.show]) in order to become the visible
+      child of stack.
+  
+      Params:
+        name = the name of the child to make visible
+  */
+  void setVisibleChildName(string name) nothrow
+  {
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    gtk_stack_set_visible_child_name(cast(GtkStack*)this._cPtr, _name);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk3.stack.Stack]
+class StackGidBuilderImpl(T) : gid.gtk3.container.ContainerGidBuilderImpl!T
+{
+
+
+  /**
+      Set `hhomogeneous` property.
+      Params:
+        propval = true if the stack allocates the same width for all children.
+      Returns: Builder instance for fluent chaining
+  */
+  T hhomogeneous(bool propval) nothrow
+  {
+    return setProperty("hhomogeneous", propval);
+  }
+
+  /** */
+  T homogeneous(bool propval) nothrow
+  {
+    return setProperty("homogeneous", propval);
+  }
+
+  /** */
+  T interpolateSize(bool propval) nothrow
+  {
+    return setProperty("interpolate-size", propval);
+  }
+
+  /** */
+  T transitionDuration(uint propval) nothrow
+  {
+    return setProperty("transition-duration", propval);
+  }
+
+  /** */
+  T transitionType(gid.gtk3.types.StackTransitionType propval) nothrow
+  {
+    return setProperty("transition-type", propval);
+  }
+
+  /**
+      Set `vhomogeneous` property.
+      Params:
+        propval = true if the stack allocates the same height for all children.
+      Returns: Builder instance for fluent chaining
+  */
+  T vhomogeneous(bool propval) nothrow
+  {
+    return setProperty("vhomogeneous", propval);
+  }
+
+  /** */
+  T visibleChild(gid.gtk3.widget.Widget propval) nothrow
+  {
+    return setProperty("visible-child", propval);
+  }
+
+  /** */
+  T visibleChildName(string propval) nothrow
+  {
+    return setProperty("visible-child-name", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk3.stack.Stack]
+final class StackGidBuilder : StackGidBuilderImpl!StackGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Stack build() nothrow
+  {
+    return new Stack(cast(void*)createGObject(Stack._getGType), Yes.Take);
+  }
+}

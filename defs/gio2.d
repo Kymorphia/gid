@@ -141,25 +141,25 @@
 
 //!class InputMessage pre
 
-import gio.socket_address;
-import gio.socket_control_message;
-import gobject.object;
+import gid.gio2.socket_address;
+import gid.gio2.socket_control_message;
+import gid.gobject2.object;
 
 //!class InputMessage
 
-  private gio.types.InputVector[] _vectorsRef; // Vectors array referenced by the C structure (references the buffers)
+  private gid.gio2.types.InputVector[] _vectorsRef; // Vectors array referenced by the C structure (references the buffers)
   private bool _receiveAddress; // Receive the source address of the message
   private bool _receiveControlMessages; // Receive the control messages of the message
-  private gio.socket_address.SocketAddress _address; // Source address of the last receive
-  private gio.socket_control_message.SocketControlMessage[] _controlMessages; // Control messages of the last receive
+  private gid.gio2.socket_address.SocketAddress _address; // Source address of the last receive
+  private gid.gio2.socket_control_message.SocketControlMessage[] _controlMessages; // Control messages of the last receive
 
   /**
       Create an input message which receives data into buffers.
       Params:
         buffers = the buffers to receive the message data into (scatter input, in order), kept alive by the message
-        receiveAddress = true to receive the source address of the message (see [gio.input_message.InputMessage.address])
+        receiveAddress = true to receive the source address of the message (see [gid.gio2.input_message.InputMessage.address])
         receiveControlMessages = true to receive the control messages of the message (see
-          [gio.input_message.InputMessage.controlMessages])
+          [gid.gio2.input_message.InputMessage.controlMessages])
   */
   this(ubyte[][] buffers, bool receiveAddress = false, bool receiveControlMessages = false) nothrow
   {
@@ -178,7 +178,7 @@ import gobject.object;
     if (_refuseBorrowedStore("vectors"))
       return;
 
-    _vectorsRef = new gio.types.InputVector[](propval.length);
+    _vectorsRef = new gid.gio2.types.InputVector[](propval.length);
 
     foreach (i, buf; propval)
     {
@@ -200,7 +200,7 @@ import gobject.object;
   }
 
   /**
-      Set whether the source address of the message is received (see [gio.input_message.InputMessage.address]).
+      Set whether the source address of the message is received (see [gid.gio2.input_message.InputMessage.address]).
       Params:
         propval = true to receive the source address
   */
@@ -220,7 +220,7 @@ import gobject.object;
 
   /**
       Set whether the control messages of the message are received (see
-      [gio.input_message.InputMessage.controlMessages]).
+      [gid.gio2.input_message.InputMessage.controlMessages]).
       Params:
         propval = true to receive the control messages
   */
@@ -231,9 +231,9 @@ import gobject.object;
 
   /**
       Get the source address of the message received by the last receive operation.
-      Returns: the source address or null if not received (see [gio.input_message.InputMessage.receiveAddress])
+      Returns: the source address or null if not received (see [gid.gio2.input_message.InputMessage.receiveAddress])
   */
-  @property gio.socket_address.SocketAddress address() nothrow
+  @property gid.gio2.socket_address.SocketAddress address() nothrow
   {
     return _address;
   }
@@ -241,16 +241,16 @@ import gobject.object;
   /**
       Get the control messages received with the message by the last receive operation.
       Returns: the control messages, empty if none were received (see
-        [gio.input_message.InputMessage.receiveControlMessages])
+        [gid.gio2.input_message.InputMessage.receiveControlMessages])
   */
-  @property gio.socket_control_message.SocketControlMessage[] controlMessages() nothrow
+  @property gid.gio2.socket_control_message.SocketControlMessage[] controlMessages() nothrow
   {
     return _controlMessages;
   }
 
   /**
-      Receive messages with a C receive function (used by [gio.socket.Socket.receiveMessages] and
-      [gio.datagram_based.DatagramBased.receiveMessages]). The C messages are temporary copies, with the address and
+      Receive messages with a C receive function (used by [gid.gio2.socket.Socket.receiveMessages] and
+      [gid.gio2.datagram_based.DatagramBased.receiveMessages]). The C messages are temporary copies, with the address and
       control messages return locations set as requested by the messages, which take ownership of the received
       addresses and control messages afterwards.
       Params:
@@ -259,11 +259,11 @@ import gobject.object;
         receive = delegate which calls the C receive function with the C messages and their count
       Returns: the receive function result, -1 if a message is null
   */
-  package static int _receiveMessages(gio.input_message.InputMessage[] messages, string context,
+  package static int _receiveMessages(gid.gio2.input_message.InputMessage[] messages, string context,
     scope int delegate(GInputMessage* cMessages, uint numMessages) nothrow receive) nothrow
   {
-    import glib.c.functions : g_free, g_log;
-    import glib.c.types : GLogLevelFlags;
+    import gid.glib2.c.functions : g_free, g_log;
+    import gid.glib2.c.types : GLogLevelFlags;
 
     foreach (i, msg; messages)
     {
@@ -297,16 +297,16 @@ import gobject.object;
       cMsg.flags = cMessages[i].flags;
 
       msg._address = addresses[i]
-        ? gobject.object.ObjectWrap._getDObject!(gio.socket_address.SocketAddress)(addresses[i], Yes.Take) : null;
+        ? gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.socket_address.SocketAddress)(addresses[i], Yes.Take) : null;
       msg._controlMessages = null;
 
       if (controlArrays[i])
       {
-        msg._controlMessages = new gio.socket_control_message.SocketControlMessage[](numControls[i]);
+        msg._controlMessages = new gid.gio2.socket_control_message.SocketControlMessage[](numControls[i]);
 
         foreach (j; 0 .. numControls[i])
-          msg._controlMessages[j] = gobject.object.ObjectWrap._getDObject!(
-            gio.socket_control_message.SocketControlMessage)(controlArrays[i][j], Yes.Take);
+          msg._controlMessages[j] = gid.gobject2.object.ObjectWrap._getDObject!(
+            gid.gio2.socket_control_message.SocketControlMessage)(controlArrays[i][j], Yes.Take);
 
         g_free(controlArrays[i]);
       }
@@ -317,41 +317,41 @@ import gobject.object;
 
 //!class Socket pre
 
-import gio.input_message;
+import gid.gio2.input_message;
 
 //!class Socket
 
   /**
       Receive multiple data messages from socket in one go. This is the most complicated and fully-featured version of
-      this call. For easier use, see [gio.socket.Socket.receive], [gio.socket.Socket.receiveFrom], and
-      [gio.socket.Socket.receiveMessage].
+      this call. For easier use, see [gid.gio2.socket.Socket.receive], [gid.gio2.socket.Socket.receiveFrom], and
+      [gid.gio2.socket.Socket.receiveMessage].
 
-      messages must be an array of [gio.input_message.InputMessage] objects, each of which receives data into its
-      buffers (see [gio.input_message.InputMessage.buffers]) and is updated with the number of bytes received, the
+      messages must be an array of [gid.gio2.input_message.InputMessage] objects, each of which receives data into its
+      buffers (see [gid.gio2.input_message.InputMessage.buffers]) and is updated with the number of bytes received, the
       message flags, and the source address and control messages if requested (see
-      [gio.input_message.InputMessage.receiveAddress] and [gio.input_message.InputMessage.receiveControlMessages]).
+      [gid.gio2.input_message.InputMessage.receiveAddress] and [gid.gio2.input_message.InputMessage.receiveControlMessages]).
 
       flags modify how all messages are received. The commonly available arguments for this are available in the
       #GSocketMsgFlags enum, but the values there are the same as the system values, and the flags are passed in as-is,
       so you can pass in system-specific flags too. These flags affect the overall receive operation. Flags affecting
-      individual messages are returned in [gio.input_message.InputMessage.flags].
+      individual messages are returned in [gid.gio2.input_message.InputMessage.flags].
 
       If the socket is blocking then the call will block until one or more messages are received (or an error or
-      cancellation occurs), otherwise [gio.types.IOErrorEnum.WouldBlock] is thrown if no messages are available.
+      cancellation occurs), otherwise [gid.gio2.types.IOErrorEnum.WouldBlock] is thrown if no messages are available.
 
       Params:
         messages = an array of input messages
         flags = an int containing #GSocketMsgFlags flags for the overall operation, which may additionally contain
           [MSG_WAITFORONE](https://man7.org/linux/man-pages/man2/recvmmsg.2.html) to request blocking only until the
           first message is received
-        cancellable = a [gio.cancellable.Cancellable] or null
+        cancellable = a [gid.gio2.cancellable.Cancellable] or null
       Returns: number of messages received, which may be less than the number of messages
       Throws: [ErrorWrap]
   */
-  int receiveMessages(gio.input_message.InputMessage[] messages, int flags, gio.cancellable.Cancellable cancellable = null)
+  int receiveMessages(gid.gio2.input_message.InputMessage[] messages, int flags, gid.gio2.cancellable.Cancellable cancellable = null)
   {
     GError* _err;
-    auto _retval = gio.input_message.InputMessage._receiveMessages(messages, "gio.socket.Socket.receiveMessages",
+    auto _retval = gid.gio2.input_message.InputMessage._receiveMessages(messages, "gid.gio2.socket.Socket.receiveMessages",
       (GInputMessage* cMessages, uint numMessages) => g_socket_receive_messages(cast(GSocket*)this._cPtr, cMessages,
         numMessages, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err));
 
@@ -364,45 +364,45 @@ import gio.input_message;
 //!class DatagramBased pre
 
 // Public import for the interface mixin template (resolved where it is mixed in), receiveMessages is hand-written
-public import gio.input_message;
-import gobject.object;
+public import gid.gio2.input_message;
+import gid.gobject2.object;
 
 //!class DatagramBased
 
   /**
       Receive one or more data messages from datagram_based in one go.
 
-      messages must be an array of [gio.input_message.InputMessage] objects, each of which receives data into its
-      buffers (see [gio.input_message.InputMessage.buffers]) and is updated with the number of bytes received, the
+      messages must be an array of [gid.gio2.input_message.InputMessage] objects, each of which receives data into its
+      buffers (see [gid.gio2.input_message.InputMessage.buffers]) and is updated with the number of bytes received, the
       message flags, and the source address and control messages if requested (see
-      [gio.input_message.InputMessage.receiveAddress] and [gio.input_message.InputMessage.receiveControlMessages]).
+      [gid.gio2.input_message.InputMessage.receiveAddress] and [gid.gio2.input_message.InputMessage.receiveControlMessages]).
 
       flags modify how all messages are received. The commonly available arguments for this are available in the
       #GSocketMsgFlags enum, but the values there are the same as the system values, and the flags are passed in as-is,
       so you can pass in system-specific flags too. These flags affect the overall receive operation. Flags affecting
-      individual messages are returned in [gio.input_message.InputMessage.flags].
+      individual messages are returned in [gid.gio2.input_message.InputMessage.flags].
 
       If timeout is negative the call will block until at least one message is received, cancellable is cancelled, or
       an error occurs. If timeout is 0 the call will return up to the number of messages without blocking, or
-      [gio.types.IOErrorEnum.WouldBlock] if no messages are queued. If timeout is positive the call will block on the
-      same conditions as if timeout were negative, or until the timeout elapses ([gio.types.IOErrorEnum.TimedOut]).
+      [gid.gio2.types.IOErrorEnum.WouldBlock] if no messages are queued. If timeout is positive the call will block on the
+      same conditions as if timeout were negative, or until the timeout elapses ([gid.gio2.types.IOErrorEnum.TimedOut]).
 
       Params:
         messages = an array of input messages
         flags = an int containing #GSocketMsgFlags flags for the overall operation
         timeout = the maximum time (in microseconds) to wait, 0 to not block, or -1 to block indefinitely
-        cancellable = a [gio.cancellable.Cancellable] or null
+        cancellable = a [gid.gio2.cancellable.Cancellable] or null
       Returns: number of messages received, which may be less than the number of messages if timeout is zero or
         positive, if the peer closed the connection, or if the number of messages was larger than `UIO_MAXIOV` (1024)
       Throws: [ErrorWrap]
   */
-  int receiveMessages()(gio.input_message.InputMessage[] messages, int flags, long timeout,
-    gio.cancellable.Cancellable cancellable = null)
+  int receiveMessages()(gid.gio2.input_message.InputMessage[] messages, int flags, long timeout,
+    gid.gio2.cancellable.Cancellable cancellable = null)
   {
     GError* _err;
-    auto _retval = gio.input_message.InputMessage._receiveMessages(messages,
-      "gio.datagram_based.DatagramBased.receiveMessages", (GInputMessage* cMessages, uint numMessages) =>
-      g_datagram_based_receive_messages(cast(GDatagramBased*)(cast(gobject.object.ObjectWrap)this)._cPtr, cMessages,
+    auto _retval = gid.gio2.input_message.InputMessage._receiveMessages(messages,
+      "gid.gio2.datagram_based.DatagramBased.receiveMessages", (GInputMessage* cMessages, uint numMessages) =>
+      g_datagram_based_receive_messages(cast(GDatagramBased*)(cast(gid.gobject2.object.ObjectWrap)this)._cPtr, cMessages,
         numMessages, flags, timeout, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err));
 
     if (_err)
@@ -421,10 +421,10 @@ import gobject.object;
   */
   ubyte[][] getAcceptedCas()() nothrow
   {
-    import glib.c.functions : g_byte_array_unref, g_list_free;
-    import glib.c.types : GByteArray, GList;
+    import gid.glib2.c.functions : g_byte_array_unref, g_list_free;
+    import gid.glib2.c.types : GByteArray, GList;
 
-    auto _list = g_tls_client_connection_get_accepted_cas(cast(GTlsClientConnection*)(cast(gobject.object.ObjectWrap)this)._cPtr);
+    auto _list = g_tls_client_connection_get_accepted_cas(cast(GTlsClientConnection*)(cast(gid.gobject2.object.ObjectWrap)this)._cPtr);
     ubyte[][] _retval;
 
     for (auto n = _list; n; n = n.next) // List and GByteArray items owned by the caller (transfer full)
@@ -450,10 +450,10 @@ import gobject.object;
   */
   ubyte[][] getAcceptedCas()() nothrow
   {
-    import glib.c.functions : g_byte_array_unref, g_list_free;
-    import glib.c.types : GByteArray, GList;
+    import gid.glib2.c.functions : g_byte_array_unref, g_list_free;
+    import gid.glib2.c.types : GByteArray, GList;
 
-    auto _list = g_dtls_client_connection_get_accepted_cas(cast(GDtlsClientConnection*)(cast(gobject.object.ObjectWrap)this)._cPtr);
+    auto _list = g_dtls_client_connection_get_accepted_cas(cast(GDtlsClientConnection*)(cast(gid.gobject2.object.ObjectWrap)this)._cPtr);
     ubyte[][] _retval;
 
     for (auto n = _list; n; n = n.next) // List and GByteArray items owned by the caller (transfer full)
@@ -489,8 +489,8 @@ import gobject.object;
    */
   T getItem(T)(uint position) nothrow
   {
-    auto gobj = cast(GObject*)g_list_model_get_object(cast(GListModel*)(cast(gobject.object.ObjectWrap)this)._cPtr, position);
-    return gobject.object.ObjectWrap._getDObject!T(gobj, Yes.Take);
+    auto gobj = cast(GObject*)g_list_model_get_object(cast(GListModel*)(cast(gid.gobject2.object.ObjectWrap)this)._cPtr, position);
+    return gid.gobject2.object.ObjectWrap._getDObject!T(gobj, Yes.Take);
   }
 
 //# Ignore: ListStore.findWithEqualFuncFull with unnecessary additional user_data
@@ -530,9 +530,9 @@ import gobject.object;
    * Returns: Whether store contains item. If it was found, position will be
    *   set to the position where item occurred for the first time.
    */
-  bool findWithEqualFunc(gobject.object.ObjectWrap item, bool delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) equalFunc, out uint position) nothrow
+  bool findWithEqualFunc(gid.gobject2.object.ObjectWrap item, bool delegate(gid.gobject2.object.ObjectWrap, gid.gobject2.object.ObjectWrap) equalFunc, out uint position) nothrow
   {
-    static bool delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) _static_equalFunc;
+    static bool delegate(gid.gobject2.object.ObjectWrap, gid.gobject2.object.ObjectWrap) _static_equalFunc;
 
     extern(C) gboolean _equalFuncCallback(const(void)* a, const(void)* b) nothrow
     {
@@ -540,11 +540,11 @@ import gobject.object;
 
       try
       {
-        _retval = _static_equalFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a, No.Take),
-          gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b, No.Take));
+        _retval = _static_equalFunc(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)a, No.Take),
+          gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)b, No.Take));
       }
       catch (Exception e)
-        gidInvokeCallbackExceptionHandler(e, "gio.list_store.ListStore.findWithEqualFunc");
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.list_store.ListStore.findWithEqualFunc");
 
       return _retval;
     }
@@ -568,9 +568,9 @@ import gobject.object;
    *   compareFunc = pairwise comparison function for sorting
    * Returns: the position at which item was inserted
    */
-  uint insertSorted(gobject.object.ObjectWrap item, int delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) compareFunc) nothrow
+  uint insertSorted(gid.gobject2.object.ObjectWrap item, int delegate(gid.gobject2.object.ObjectWrap, gid.gobject2.object.ObjectWrap) compareFunc) nothrow
   {
-    static int delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) _static_compareFunc;
+    static int delegate(gid.gobject2.object.ObjectWrap, gid.gobject2.object.ObjectWrap) _static_compareFunc;
 
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
@@ -578,11 +578,11 @@ import gobject.object;
 
       try
       {
-        _retval = _static_compareFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a, No.Take),
-          gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b, No.Take));
+        _retval = _static_compareFunc(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)a, No.Take),
+          gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)b, No.Take));
       }
       catch (Exception e)
-        gidInvokeCallbackExceptionHandler(e, "gio.list_store.ListStore.insertSorted");
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.list_store.ListStore.insertSorted");
 
       return _retval;
     }
@@ -599,9 +599,9 @@ import gobject.object;
    * Params:
    *   compareFunc = pairwise comparison function for sorting
    */
-  void sort(int delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) compareFunc) nothrow
+  void sort(int delegate(gid.gobject2.object.ObjectWrap, gid.gobject2.object.ObjectWrap) compareFunc) nothrow
   {
-    static int delegate(gobject.object.ObjectWrap, gobject.object.ObjectWrap) _static_compareFunc;
+    static int delegate(gid.gobject2.object.ObjectWrap, gid.gobject2.object.ObjectWrap) _static_compareFunc;
 
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
@@ -609,11 +609,11 @@ import gobject.object;
 
       try
       {
-        _retval = _static_compareFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a, No.Take),
-          gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b, No.Take));
+        _retval = _static_compareFunc(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)a, No.Take),
+          gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)b, No.Take));
       }
       catch (Exception e)
-        gidInvokeCallbackExceptionHandler(e, "gio.list_store.ListStore.sort");
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.list_store.ListStore.sort");
 
       return _retval;
     }

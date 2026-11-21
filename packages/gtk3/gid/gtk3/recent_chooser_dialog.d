@@ -1,0 +1,125 @@
+/// Module for [RecentChooserDialog] class
+module gid.gtk3.recent_chooser_dialog;
+
+public import gid.core.basictypes;
+import gid.atk1.implementor_iface;
+import gid.atk1.implementor_iface_mixin;
+import gid.core.gid;
+import gid.gobject2.gid_builder;
+import gid.gtk3.buildable;
+import gid.gtk3.buildable_mixin;
+import gid.gtk3.c.functions;
+import gid.gtk3.c.types;
+import gid.gtk3.dialog;
+import gid.gtk3.recent_chooser;
+import gid.gtk3.recent_chooser_mixin;
+import gid.gtk3.types;
+
+/**
+    #GtkRecentChooserDialog is a dialog box suitable for displaying the recently
+    used documents.  This widgets works by putting a #GtkRecentChooserWidget inside
+    a #GtkDialog.  It exposes the #GtkRecentChooserIface interface, so you can use
+    all the #GtkRecentChooser functions on the recent chooser dialog as well as
+    those for #GtkDialog.
+    
+    Note that #GtkRecentChooserDialog does not have any methods of its own.
+    Instead, you should use the functions that work on a #GtkRecentChooser.
+    
+    ## Typical usage ## {#gtkrecentchooser-typical-usage}
+    
+    In the simplest of cases, you can use the following code to use
+    a #GtkRecentChooserDialog to select a recently used file:
+    
+    ```c
+    GtkWidget *dialog;
+    gint res;
+    
+    dialog = gtk_recent_chooser_dialog_new ("Recent Documents",
+                                            parent_window,
+                                            _("_Cancel"),
+                                            GTK_RESPONSE_CANCEL,
+                                            _("_Open"),
+                                            GTK_RESPONSE_ACCEPT,
+                                            NULL);
+    
+    res = gtk_dialog_run (GTK_DIALOG (dialog));
+    if (res == GTK_RESPONSE_ACCEPT)
+      {
+        GtkRecentInfo *info;
+        GtkRecentChooser *chooser = GTK_RECENT_CHOOSER (dialog);
+    
+        info = gtk_recent_chooser_get_current_item (chooser);
+        open_file (gtk_recent_info_get_uri (info));
+        gtk_recent_info_unref (info);
+      }
+    
+    gtk_widget_destroy (dialog);
+    ```
+    
+    Recently used files are supported since GTK+ 2.10.
+*/
+class RecentChooserDialog : gid.gtk3.dialog.Dialog, gid.gtk3.recent_chooser.RecentChooser
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_recent_chooser_dialog_get_type != &gidSymbolNotFound ? gtk_recent_chooser_dialog_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkRecentChooserDialog";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override RecentChooserDialog self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk3.recent_chooser_dialog.RecentChooserDialog]
+      Returns: New builder object
+  */
+  static RecentChooserDialogGidBuilder builder() nothrow
+  {
+    return new RecentChooserDialogGidBuilder;
+  }
+
+  mixin RecentChooserT!();
+}
+
+/// Fluent builder implementation template for [gid.gtk3.recent_chooser_dialog.RecentChooserDialog]
+class RecentChooserDialogGidBuilderImpl(T) : gid.gtk3.dialog.DialogGidBuilderImpl!T, gid.gtk3.recent_chooser.RecentChooserGidBuilderImpl!T
+{
+
+  mixin RecentChooserGidBuilderT!();
+}
+
+/// Fluent builder for [gid.gtk3.recent_chooser_dialog.RecentChooserDialog]
+final class RecentChooserDialogGidBuilder : RecentChooserDialogGidBuilderImpl!RecentChooserDialogGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  RecentChooserDialog build() nothrow
+  {
+    return new RecentChooserDialog(cast(void*)createGObject(RecentChooserDialog._getGType), Yes.Take);
+  }
+}

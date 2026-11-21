@@ -1,0 +1,1113 @@
+/// Module for [Builder] class
+module gid.gtk4.builder;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.glib2.error;
+import gid.gobject2.closure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gobject2.param_spec;
+import gid.gobject2.types;
+import gid.gobject2.value;
+import gid.gtk4.builder_scope;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.types;
+
+/**
+    Reads XML descriptions of a user interface and instantiates the described objects.
+    
+    To create a [gid.gtk4.builder.Builder] from a user interface description, call
+    [gid.gtk4.builder.Builder.newFromFile], [gid.gtk4.builder.Builder.newFromResource]
+    or [gid.gtk4.builder.Builder.newFromString].
+    
+    In the (unusual) case that you want to add user interface
+    descriptions from multiple sources to the same [gid.gtk4.builder.Builder] you can
+    call [gid.gtk4.builder.Builder.new_] to get an empty builder and populate it by
+    (multiple) calls to [gid.gtk4.builder.Builder.addFromFile],
+    [gid.gtk4.builder.Builder.addFromResource] or
+    [gid.gtk4.builder.Builder.addFromString].
+    
+    A [gid.gtk4.builder.Builder] holds a reference to all objects that it has constructed
+    and drops these references when it is finalized. This finalization can
+    cause the destruction of non-widget objects or widgets which are not
+    contained in a toplevel window. For toplevel windows constructed by a
+    builder, it is the responsibility of the user to call
+    [gid.gtk4.window.Window.destroy] to get rid of them and all the widgets
+    they contain.
+    
+    The functions [gid.gtk4.builder.Builder.getObject] and
+    [gid.gtk4.builder.Builder.getObjects] can be used to access the widgets in
+    the interface by the names assigned to them inside the UI description.
+    Toplevel windows returned by these functions will stay around until the
+    user explicitly destroys them with [gid.gtk4.window.Window.destroy]. Other
+    widgets will either be part of a larger hierarchy constructed by the
+    builder (in which case you should not have to worry about their lifecycle),
+    or without a parent, in which case they have to be added to some container
+    to make use of them. Non-widget objects need to be reffed with
+    [gid.gobject2.object.ObjectWrap.ref_] to keep them beyond the lifespan of the builder.
+    
+    ## GtkBuilder UI Definitions
+    
+    [gid.gtk4.builder.Builder] parses textual descriptions of user interfaces which are
+    specified in XML format. We refer to these descriptions as “GtkBuilder
+    UI definitions” or just “UI definitions” if the context is clear.
+    
+    ### Structure of UI definitions
+    
+    UI definition files are always encoded in UTF-8.
+    
+    The toplevel element is `<interface>`. It optionally takes a “domain”
+    attribute, which will make the builder look for translated strings
+    using `dgettext()` in the domain specified. This can also be done by
+    calling [gid.gtk4.builder.Builder.setTranslationDomain] on the builder.
+    For example:
+    
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <interface domain="your-app">
+      ...
+    </interface>
+    ```
+    
+    ### Requirements
+    
+    The target toolkit version(s) are described by `<requires>` elements,
+    the “lib” attribute specifies the widget library in question (currently
+    the only supported value is “gtk”) and the “version” attribute specifies
+    the target version in the form “`<major>`.`<minor>`”. [gid.gtk4.builder.Builder] will
+    error out if the version requirements are not met. For example:
+    
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <interface domain="your-app">
+      <requires lib="gtk" version="4.0" />
+    </interface>
+    ```
+    
+    ### Objects
+    
+    Objects are defined as children of the `<interface>` element.
+    
+    Objects are described by `<object>` elements, which can contain
+    `<property>` elements to set properties, `<signal>` elements which
+    connect signals to handlers, and `<child>` elements, which describe
+    child objects.
+    
+    Typically, the specific kind of object represented by an `<object>`
+    element is specified by the “class” attribute. If the type has not
+    been loaded yet, GTK tries to find the `get_type()` function from the
+    class name by applying heuristics. This works in most cases, but if
+    necessary, it is possible to specify the name of the `get_type()`
+    function explicitly with the "type-func" attribute. If your UI definition
+    is referencing internal types, you should make sure to call
+    `[gid.gobject2.global.typeEnsure]` for each object type before parsing the UI definition.
+    
+    Objects may be given a name with the “id” attribute, which allows the
+    application to retrieve them from the builder with
+    [gid.gtk4.builder.Builder.getObject]. An id is also necessary to use the
+    object as property value in other parts of the UI definition. GTK
+    reserves ids starting and ending with `___` (three consecutive
+    underscores) for its own purposes.
+    
+    ### Properties
+    
+    Setting properties of objects is pretty straightforward with the
+    `<property>` element: the “name” attribute specifies the name of the
+    property, and the content of the element specifies the value:
+    
+    ```xml
+    <object class="GtkButton">
+      <property name="label">Hello, world</property>
+    </object>
+    ```
+    
+    If the “translatable” attribute is set to a true value, GTK uses
+    `gettext()` (or `dgettext()` if the builder has a translation domain set)
+    to find a translation for the value. This happens before the value
+    is parsed, so it can be used for properties of any type, but it is
+    probably most useful for string properties. It is also possible to
+    specify a context to disambiguate short strings, and comments which
+    may help the translators:
+    
+    ```xml
+    <object class="GtkButton">
+      <property name="label"
+                translatable="yes"
+                context="button"
+                comments="A classic">Hello, world</property>
+    </object>
+    ```
+    
+    The xgettext tool that is part of gettext can extract these strings,
+    but note that it only looks for translatable="yes".
+    
+    [gid.gtk4.builder.Builder] can parse textual representations for the most common
+    property types:
+    
+    - characters
+    - strings
+    - integers
+    - floating-point numbers
+    - booleans (strings like “TRUE”, “t”, “yes”, “y”, “1” are interpreted
+      as true values, strings like “FALSE”, “f”, “no”, “n”, “0” are interpreted
+      as false values)
+    - string lists (separated by newlines)
+    - enumeration types (can be specified by their full C identifier their short
+      name used when registering the enumeration type, or their integer value)
+    - flag types (can be specified by their C identifier or short name,
+      optionally combined with “|” for bitwise OR, or a single integer value
+      e.g., “GTK_INPUT_HINT_EMOJI|GTK_INPUT_HINT_LOWERCASE”, or “emoji|lowercase” or 520).
+    - colors (in the format understood by [gid.gdk4.rgba.RGBA.parse])
+    - transforms (in the format understood by [gid.gsk4.transform.Transform.parse])
+    - Pango attribute lists (in the format understood by [gid.pango1.attr_list.AttrList.toString_])
+    - Pango tab arrays (in the format understood by [gid.pango1.tab_array.TabArray.toString_])
+    - Pango font descriptions (in the format understood by [gid.pango1.font_description.FontDescription.fromString])
+    - [gid.glib2.variant.Variant] (in the format understood by [gid.glib2.variant.Variant.parse])
+    - textures (can be specified as an object id, a resource path or a filename of an image file to load relative to the Builder file or the CWD if [gid.gtk4.builder.Builder.addFromString] was used)
+    - GFile (like textures, can be specified as an object id, a URI or a filename of a file to load relative to the Builder file or the CWD if [gid.gtk4.builder.Builder.addFromString] was used)
+    
+    Objects can be referred to by their name and by default refer to
+    objects declared in the local XML fragment and objects exposed via
+    [gid.gtk4.builder.Builder.exposeObject]. In general, [gid.gtk4.builder.Builder] allows
+    forward references to objects declared in the local XML; an object
+    doesn’t have to be constructed before it can be referred to. The
+    exception to this rule is that an object has to be constructed before
+    it can be used as the value of a construct-only property.
+    
+    ### Child objects
+    
+    Many widgets have properties for child widgets, such as
+    [gid.gtk4.expander.Expander.child]. In this case, the preferred way to
+    specify the child widget in a ui file is to simply set the property:
+    
+    ```xml
+    <object class="GtkExpander">
+      <property name="child">
+        <object class="GtkLabel">
+        ...
+        </object>
+      </property>
+    </object>
+    ```
+    
+    Generic containers that can contain an arbitrary number of children,
+    such as [gid.gtk4.box.Box] instead use the `<child>` element. A `<child>`
+    element contains an `<object>` element which describes the child object.
+    Most often, child objects are widgets inside a container, but they can
+    also be, e.g., actions in an action group, or columns in a tree model.
+    
+    Any object type that implements the [gid.gtk4.buildable.Buildable] interface can
+    specify how children may be added to it. Since many objects and widgets that
+    are included with GTK already implement the [gid.gtk4.buildable.Buildable] interface,
+    typically child objects can be added using the `<child>` element without
+    having to be concerned about the underlying implementation.
+    
+    See the [[gid.gtk4.widget.Widget] documentation](class.Widget.html#gtkwidget-as-gtkbuildable)
+    for many examples of using [gid.gtk4.builder.Builder] with widgets, including setting
+    child objects using the `<child>` element.
+    
+    A noteworthy special case to the general rule that only objects implementing
+    [gid.gtk4.buildable.Buildable] may specify how to handle the `<child>` element is that
+    [gid.gtk4.builder.Builder] provides special support for adding objects to a
+    [gid.gio2.list_store.ListStore] by using the `<child>` element. For instance:
+    
+    ```xml
+    <object class="GListStore">
+      <property name="item-type">MyObject</property>
+      <child>
+        <object class="MyObject" />
+      </child>
+      ...
+    </object>
+    ```
+    
+    ### Property bindings
+    
+    It is also possible to bind a property value to another object's
+    property value using the attributes "bind-source" to specify the
+    source object of the binding, and optionally, "bind-property" and
+    "bind-flags" to specify the source property and source binding flags
+    respectively. Internally, [gid.gtk4.builder.Builder] implements this using
+    [gid.gobject2.binding.Binding] objects.
+    
+    For instance, in the example below the “label” property of the
+    `bottom_label` widget is bound to the “label” property of the
+    `top_button` widget:
+    
+    ```xml
+    <object class="GtkBox">
+      <property name="orientation">vertical</property>
+      <child>
+        <object class="GtkButton" id="top_button">
+          <property name="label">Hello, world</property>
+        </object>
+      </child>
+      <child>
+        <object class="GtkLabel" id="bottom_label">
+          <property name="label"
+                    bind-source="top_button"
+                    bind-property="label"
+                    bind-flags="sync-create" />
+        </object>
+      </child>
+    </object>
+    ```
+    
+    For more information, see the documentation of the
+    [gid.gobject2.object.ObjectWrap.bindProperty] method.
+    
+    Please note that another way to set up bindings between objects in .ui files
+    is to use the [gid.gtk4.expression.Expression] methodology. See the
+    [[gid.gtk4.expression.Expression] documentation](class.Expression.html#gtkexpression-in-ui-files)
+    for more information.
+    
+    ### Internal children
+    
+    Sometimes it is necessary to refer to widgets which have implicitly
+    been constructed by GTK as part of a composite widget, to set
+    properties on them or to add further children (e.g. the content area
+    of a [gid.gtk4.dialog.Dialog]). This can be achieved by setting the “internal-child”
+    property of the `<child>` element to a true value. Note that [gid.gtk4.builder.Builder]
+    still requires an `<object>` element for the internal child, even if it
+    has already been constructed.
+    
+    ### Specialized children
+    
+    A number of widgets have different places where a child can be added
+    (e.g. tabs vs. page content in notebooks). This can be reflected in
+    a UI definition by specifying the “type” attribute on a `<child>`
+    The possible values for the “type” attribute are described in the
+    sections describing the widget-specific portions of UI definitions.
+    
+    ### Signal handlers and function pointers
+    
+    Signal handlers are set up with the `<signal>` element. The “name”
+    attribute specifies the name of the signal, and the “handler” attribute
+    specifies the function to connect to the signal.
+    
+    ```xml
+    <object class="GtkButton" id="hello_button">
+      <signal name="clicked" handler="hello_button__clicked" />
+    </object>
+    ```
+    
+    The remaining attributes, “after”, “swapped” and “object”, have the
+    same meaning as the corresponding parameters of the
+    `func@GObject.signal_connect_object` or `func@GObject.signal_connect_data`
+    functions:
+    
+    - “after” matches the [gid.gobject2.types.ConnectFlags.After] flag, and will ensure that the
+      handler is called after the default class closure for the signal
+    - “swapped” matches the [gid.gobject2.types.ConnectFlags.Swapped] flag, and will swap the
+      instance and closure arguments when invoking the signal handler
+    - “object” will bind the signal handler to the lifetime of the object
+      referenced by the attribute
+    
+    By default "swapped" will be set to "yes" if not specified otherwise, in
+    the case where "object" is set, for convenience. A “last_modification_time”
+    attribute is also allowed, but it does not have a meaning to the builder.
+    
+    When compiling applications for Windows, you must declare signal callbacks
+    with the `G_MODULE_EXPORT` decorator, or they will not be put in the symbol
+    table:
+    
+    ```c
+    G_MODULE_EXPORT void
+    hello_button__clicked (GtkButton *button,
+                           gpointer data)
+    {
+      // ...
+    }
+    ```
+    
+    On Linux and Unix, this is not necessary; applications should instead
+    be compiled with the `-Wl,--export-dynamic` argument inside their compiler
+    flags, and linked against `gmodule-export-2.0`.
+    
+    ## Example UI Definition
+    
+    ```xml
+    <interface>
+      <object class="GtkDialog" id="dialog1">
+        <child internal-child="content_area">
+          <object class="GtkBox">
+            <child internal-child="action_area">
+              <object class="GtkBox">
+                <child>
+                  <object class="GtkButton" id="ok_button">
+                    <property name="label" translatable="yes">_Ok</property>
+                    <property name="use-underline">True</property>
+                    <signal name="clicked" handler="ok_button_clicked"/>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </interface>
+    ```
+    
+    ## Using GtkBuildable for extending UI definitions
+    
+    Objects can implement the [gid.gtk4.buildable.Buildable] interface to add custom
+    elements and attributes to the XML. Typically, any extension will be
+    documented in each type that implements the interface.
+    
+    ## Menus
+    
+    In addition to objects with properties that are created with `<object>` and
+    `<property>` elements, [gid.gtk4.builder.Builder] also allows to parse XML menu definitions
+    as used by [gid.gio2.menu.Menu] when exporting menu models over D-Bus, and as
+    described in the [gid.gtk4.popover_menu.PopoverMenu] documentation. Menus can be defined
+    as toplevel elements, or as property values for properties of type [gid.gio2.menu_model.MenuModel].
+    
+    ## Templates
+    
+    When describing a [gid.gtk4.widget.Widget], you can use the `<template>` tag to
+    describe a UI bound to a specific widget type. GTK will automatically load
+    the UI definition when instantiating the type, and bind children and
+    signal handlers to instance fields and function symbols.
+    
+    For more information, see the [[gid.gtk4.widget.Widget] documentation](class.Widget.html#building-composite-widgets-from-template-xml)
+    for details.
+*/
+class Builder : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_builder_get_type != &gidSymbolNotFound ? gtk_builder_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkBuilder";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Builder self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.builder.Builder]
+      Returns: New builder object
+  */
+  static BuilderGidBuilder builder() nothrow
+  {
+    return new BuilderGidBuilder;
+  }
+
+  /**
+      Get `currentObject` property.
+      Returns: The object the builder is evaluating for.
+  */
+  @property gid.gobject2.object.ObjectWrap currentObject() nothrow
+  {
+    return getCurrentObject();
+  }
+
+  /**
+      Set `currentObject` property.
+      Params:
+        propval = The object the builder is evaluating for.
+  */
+  @property void currentObject(gid.gobject2.object.ObjectWrap propval) nothrow
+  {
+    setCurrentObject(propval);
+  }
+
+  /**
+      Get `scope_` property.
+      Returns: The scope the builder is operating in
+  */
+  @property gid.gtk4.builder_scope.BuilderScope scope_() nothrow
+  {
+    return getScope();
+  }
+
+  /**
+      Set `scope_` property.
+      Params:
+        propval = The scope the builder is operating in
+  */
+  @property void scope_(gid.gtk4.builder_scope.BuilderScope propval) nothrow
+  {
+    setScope(propval);
+  }
+
+  /**
+      Get `translationDomain` property.
+      Returns: The translation domain used when translating property values that
+        have been marked as translatable.
+        
+        If the translation domain is null, [gid.gtk4.builder.Builder] uses gettext(),
+        otherwise [gid.glib2.global.dgettext].
+  */
+  @property string translationDomain() nothrow
+  {
+    return getTranslationDomain();
+  }
+
+  /**
+      Set `translationDomain` property.
+      Params:
+        propval = The translation domain used when translating property values that
+          have been marked as translatable.
+          
+          If the translation domain is null, [gid.gtk4.builder.Builder] uses gettext(),
+          otherwise [gid.glib2.global.dgettext].
+  */
+  @property void translationDomain(string propval) nothrow
+  {
+    setTranslationDomain(propval);
+  }
+
+  /**
+      Creates a new empty builder object.
+      
+      This function is only useful if you intend to make multiple calls
+      to [gid.gtk4.builder.Builder.addFromFile], [gid.gtk4.builder.Builder.addFromResource]
+      or [gid.gtk4.builder.Builder.addFromString] in order to merge multiple UI
+      descriptions into a single builder.
+      Returns: a new (empty) [gid.gtk4.builder.Builder] object
+  */
+  this() nothrow
+  {
+    GtkBuilder* _cretval;
+    _cretval = gtk_builder_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Parses the UI definition in the file filename.
+      
+      If there is an error opening the file or parsing the description then
+      the program will be aborted. You should only ever attempt to parse
+      user interface descriptions that are shipped as part of your program.
+  
+      Params:
+        filename = filename of user interface description file
+      Returns: a [gid.gtk4.builder.Builder] containing the described interface
+  */
+  static gid.gtk4.builder.Builder newFromFile(string filename) nothrow
+  {
+    GtkBuilder* _cretval;
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
+    _cretval = gtk_builder_new_from_file(_filename);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.builder.Builder)(cast(GtkBuilder*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Parses the UI definition at resource_path.
+      
+      If there is an error locating the resource or parsing the
+      description, then the program will be aborted.
+  
+      Params:
+        resourcePath = a [gid.gio2.resource.Resource] resource path
+      Returns: a [gid.gtk4.builder.Builder] containing the described interface
+  */
+  static gid.gtk4.builder.Builder newFromResource(string resourcePath) nothrow
+  {
+    GtkBuilder* _cretval;
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, No.Nullable);
+    _cretval = gtk_builder_new_from_resource(_resourcePath);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.builder.Builder)(cast(GtkBuilder*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Parses the UI definition in string.
+      
+      If string is null-terminated, then length should be -1.
+      If length is not -1, then it is the length of string.
+      
+      If there is an error parsing string then the program will be
+      aborted. You should not attempt to parse user interface description
+      from untrusted sources.
+  
+      Params:
+        string_ = a user interface (XML) description
+      Returns: a [gid.gtk4.builder.Builder] containing the interface described by string
+  */
+  static gid.gtk4.builder.Builder newFromString(string string_) nothrow
+  {
+    GtkBuilder* _cretval;
+    ptrdiff_t _length;
+    if (string_)
+      _length = cast(ptrdiff_t)string_.length;
+
+    auto _string_ = cast(char*)string_.ptr;
+    _cretval = gtk_builder_new_from_string(_string_, _length);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.builder.Builder)(cast(GtkBuilder*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Parses a file containing a UI definition and merges it with
+      the current contents of builder.
+      
+      This function is useful if you need to call
+      [gid.gtk4.builder.Builder.setCurrentObject]) to add user data to
+      callbacks before loading GtkBuilder UI. Otherwise, you probably
+      want [gid.gtk4.builder.Builder.newFromFile] instead.
+      
+      If an error occurs, 0 will be returned and error will be assigned a
+      [gid.glib2.error.ErrorWrap] from the `GTK_BUILDER_ERROR`, `G_MARKUP_ERROR` or `G_FILE_ERROR`
+      domains.
+      
+      It’s not really reasonable to attempt to handle failures of this
+      call. You should not use this function with untrusted files (ie:
+      files that are not part of your application). Broken [gid.gtk4.builder.Builder]
+      files can easily crash your program, and it’s possible that memory
+      was leaked leading up to the reported failure. The only reasonable
+      thing to do when an error is detected is to call `g_error()`.
+  
+      Params:
+        filename = the name of the file to parse
+      Returns: true on success, false if an error occurred
+      Throws: [ErrorWrap]
+  */
+  bool addFromFile(string filename)
+  {
+    bool _retval;
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
+    GError *_err;
+    _retval = cast(bool)gtk_builder_add_from_file(cast(GtkBuilder*)this._cPtr, _filename, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Parses a resource file containing a UI definition
+      and merges it with the current contents of builder.
+      
+      This function is useful if you need to call
+      [gid.gtk4.builder.Builder.setCurrentObject] to add user data to
+      callbacks before loading GtkBuilder UI. Otherwise, you probably
+      want [gid.gtk4.builder.Builder.newFromResource] instead.
+      
+      If an error occurs, 0 will be returned and error will be assigned a
+      [gid.glib2.error.ErrorWrap] from the `GTK_BUILDER_ERROR`, `G_MARKUP_ERROR` or `G_RESOURCE_ERROR`
+      domain.
+      
+      It’s not really reasonable to attempt to handle failures of this
+      call.  The only reasonable thing to do when an error is detected is
+      to call g_error().
+  
+      Params:
+        resourcePath = the path of the resource file to parse
+      Returns: true on success, false if an error occurred
+      Throws: [ErrorWrap]
+  */
+  bool addFromResource(string resourcePath)
+  {
+    bool _retval;
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, No.Nullable);
+    GError *_err;
+    _retval = cast(bool)gtk_builder_add_from_resource(cast(GtkBuilder*)this._cPtr, _resourcePath, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Parses a string containing a UI definition and merges it
+      with the current contents of builder.
+      
+      This function is useful if you need to call
+      [gid.gtk4.builder.Builder.setCurrentObject] to add user data to
+      callbacks before loading [gid.gtk4.builder.Builder] UI. Otherwise, you probably
+      want [gid.gtk4.builder.Builder.newFromString] instead.
+      
+      Upon errors false will be returned and error will be assigned a
+      [gid.glib2.error.ErrorWrap] from the `GTK_BUILDER_ERROR`, `G_MARKUP_ERROR` or
+      `G_VARIANT_PARSE_ERROR` domain.
+      
+      It’s not really reasonable to attempt to handle failures of this
+      call.  The only reasonable thing to do when an error is detected is
+      to call g_error().
+  
+      Params:
+        buffer = the string to parse
+      Returns: true on success, false if an error occurred
+      Throws: [ErrorWrap]
+  */
+  bool addFromString(string buffer)
+  {
+    bool _retval;
+    ptrdiff_t _length;
+    if (buffer)
+      _length = cast(ptrdiff_t)buffer.length;
+
+    auto _buffer = cast(char*)buffer.ptr;
+    GError *_err;
+    _retval = cast(bool)gtk_builder_add_from_string(cast(GtkBuilder*)this._cPtr, _buffer, _length, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Parses a file containing a UI definition building only the
+      requested objects and merges them with the current contents
+      of builder.
+      
+      Upon errors, 0 will be returned and error will be assigned a
+      [gid.glib2.error.ErrorWrap] from the `GTK_BUILDER_ERROR`, `G_MARKUP_ERROR` or `G_FILE_ERROR`
+      domain.
+      
+      If you are adding an object that depends on an object that is not
+      its child (for instance a [gid.gtk4.tree_view.TreeView] that depends on its
+      [gid.gtk4.tree_model.TreeModel]), you have to explicitly list all of them in object_ids.
+  
+      Params:
+        filename = the name of the file to parse
+        objectIds = nul-terminated array of objects to build
+      Returns: true on success, false if an error occurred
+      Throws: [ErrorWrap]
+  */
+  bool addObjectsFromFile(string filename, string[] objectIds)
+  {
+    bool _retval;
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
+    auto _objectIds_arr = new char*[](objectIds.length + 1);
+    auto _objectIds = cast(char**)_objectIds_arr.ptr;
+    foreach (i, s; objectIds) _objectIds[i] = s.toCString!(No.Malloc);
+    GError *_err;
+    _retval = cast(bool)gtk_builder_add_objects_from_file(cast(GtkBuilder*)this._cPtr, _filename, _objectIds, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Parses a resource file containing a UI definition, building
+      only the requested objects and merges them with the current
+      contents of builder.
+      
+      Upon errors, 0 will be returned and error will be assigned a
+      [gid.glib2.error.ErrorWrap] from the `GTK_BUILDER_ERROR`, `G_MARKUP_ERROR` or `G_RESOURCE_ERROR`
+      domain.
+      
+      If you are adding an object that depends on an object that is not
+      its child (for instance a [gid.gtk4.tree_view.TreeView] that depends on its
+      [gid.gtk4.tree_model.TreeModel]), you have to explicitly list all of them in object_ids.
+  
+      Params:
+        resourcePath = the path of the resource file to parse
+        objectIds = nul-terminated array of objects to build
+      Returns: true on success, false if an error occurred
+      Throws: [ErrorWrap]
+  */
+  bool addObjectsFromResource(string resourcePath, string[] objectIds)
+  {
+    bool _retval;
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, No.Nullable);
+    auto _objectIds_arr = new char*[](objectIds.length + 1);
+    auto _objectIds = cast(char**)_objectIds_arr.ptr;
+    foreach (i, s; objectIds) _objectIds[i] = s.toCString!(No.Malloc);
+    GError *_err;
+    _retval = cast(bool)gtk_builder_add_objects_from_resource(cast(GtkBuilder*)this._cPtr, _resourcePath, _objectIds, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Parses a string containing a UI definition, building only the
+      requested objects and merges them with the current contents of
+      builder.
+      
+      Upon errors false will be returned and error will be assigned a
+      [gid.glib2.error.ErrorWrap] from the `GTK_BUILDER_ERROR` or `G_MARKUP_ERROR` domain.
+      
+      If you are adding an object that depends on an object that is not
+      its child (for instance a [gid.gtk4.tree_view.TreeView] that depends on its
+      [gid.gtk4.tree_model.TreeModel]), you have to explicitly list all of them in object_ids.
+  
+      Params:
+        buffer = the string to parse
+        objectIds = nul-terminated array of objects to build
+      Returns: true on success, false if an error occurred
+      Throws: [ErrorWrap]
+  */
+  bool addObjectsFromString(string buffer, string[] objectIds)
+  {
+    bool _retval;
+    ptrdiff_t _length;
+    if (buffer)
+      _length = cast(ptrdiff_t)buffer.length;
+
+    auto _buffer = cast(char*)buffer.ptr;
+    auto _objectIds_arr = new char*[](objectIds.length + 1);
+    auto _objectIds = cast(char**)_objectIds_arr.ptr;
+    foreach (i, s; objectIds) _objectIds[i] = s.toCString!(No.Malloc);
+    GError *_err;
+    _retval = cast(bool)gtk_builder_add_objects_from_string(cast(GtkBuilder*)this._cPtr, _buffer, _length, _objectIds, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Creates a closure to invoke the function called function_name.
+      
+      This is using the create_closure() implementation of builder's
+      [gid.gtk4.builder_scope.BuilderScope].
+      
+      If no closure could be created, null will be returned and error
+      will be set.
+  
+      Params:
+        functionName = name of the function to look up
+        flags = closure creation flags
+        object = Object to create the closure with
+      Returns: A new closure for invoking function_name
+      Throws: [ErrorWrap]
+  */
+  gid.gobject2.closure.Closure createClosure(string functionName, gid.gtk4.types.BuilderClosureFlags flags, gid.gobject2.object.ObjectWrap object = null)
+  {
+    GClosure* _cretval;
+    const(char)* _functionName = functionName.toCString!(No.Malloc, No.Nullable);
+    GError *_err;
+    _cretval = gtk_builder_create_closure(cast(GtkBuilder*)this._cPtr, _functionName, flags, object ? cast(GObject*)object._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = _cretval ? new gid.gobject2.closure.Closure(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Add object to the builder object pool so it can be
+      referenced just like any other object built by builder.
+      
+      Only a single object may be added using name. However,
+      it is not an error to expose the same object under multiple
+      names. `[gid.gtk4.builder.Builder.getObject]` may be used to determine
+      if an object has already been added with name.
+  
+      Params:
+        name = the name of the object exposed to the builder
+        object = the object to expose
+  */
+  void exposeObject(string name, gid.gobject2.object.ObjectWrap object) nothrow
+  {
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    gtk_builder_expose_object(cast(GtkBuilder*)this._cPtr, _name, object ? cast(GObject*)object._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Main private entry point for building composite components
+      from template XML.
+      
+      Most likely you do not need to call this function in applications as
+      templates are handled by [gid.gtk4.widget.Widget].
+  
+      Params:
+        object = the object that is being extended
+        templateType = the type that the template is for
+        buffer = the string to parse
+      Returns: A positive value on success, 0 if an error occurred
+      Throws: [ErrorWrap]
+  */
+  bool extendWithTemplate(gid.gobject2.object.ObjectWrap object, gid.gobject2.types.GType templateType, string buffer)
+  {
+    bool _retval;
+    ptrdiff_t _length;
+    if (buffer)
+      _length = cast(ptrdiff_t)buffer.length;
+
+    auto _buffer = cast(char*)buffer.ptr;
+    GError *_err;
+    _retval = cast(bool)gtk_builder_extend_with_template(cast(GtkBuilder*)this._cPtr, object ? cast(GObject*)object._cPtr(No.Dup) : null, templateType, _buffer, _length, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the current object set via [gid.gtk4.builder.Builder.setCurrentObject].
+      Returns: the current object
+  */
+  gid.gobject2.object.ObjectWrap getCurrentObject() nothrow
+  {
+    GObject* _cretval;
+    _cretval = gtk_builder_get_current_object(cast(GtkBuilder*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the object named name.
+      
+      Note that this function does not increment the reference count
+      of the returned object.
+  
+      Params:
+        name = name of object to get
+      Returns: the object named name
+  */
+  gid.gobject2.object.ObjectWrap getObject(string name) nothrow
+  {
+    GObject* _cretval;
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    _cretval = gtk_builder_get_object(cast(GtkBuilder*)this._cPtr, _name);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets all objects that have been constructed by builder.
+      
+      Note that this function does not increment the reference
+      counts of the returned objects.
+      Returns: a
+          newly-allocated [gid.glib2.slist.SList] containing all the objects
+          constructed by the `GtkBuilder instance`. It should be
+          freed by [gid.glib2.slist.SList.free]
+  */
+  gid.gobject2.object.ObjectWrap[] getObjects() nothrow
+  {
+    GSList* _cretval;
+    _cretval = gtk_builder_get_objects(cast(GtkBuilder*)this._cPtr);
+    auto _retval = gSListToD!(gid.gobject2.object.ObjectWrap, GidOwnership.Container)(cast(GSList*)_cretval);
+    return _retval;
+  }
+
+  /**
+      Gets the scope in use that was set via [gid.gtk4.builder.Builder.setScope].
+      Returns: the current scope
+  */
+  gid.gtk4.builder_scope.BuilderScope getScope() nothrow
+  {
+    GtkBuilderScope* _cretval;
+    _cretval = gtk_builder_get_scope(cast(GtkBuilder*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.builder_scope.BuilderScope)(cast(GtkBuilderScope*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the translation domain of builder.
+      Returns: the translation domain
+  */
+  string getTranslationDomain() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_builder_get_translation_domain(cast(GtkBuilder*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Looks up a type by name.
+      
+      This is using the virtual function that [gid.gtk4.builder.Builder] has
+      for that purpose. This is mainly used when implementing
+      the [gid.gtk4.buildable.Buildable] interface on a type.
+  
+      Params:
+        typeName = type name to lookup
+      Returns: the `GType` found for type_name or `G_TYPE_INVALID`
+          if no type was found
+  */
+  gid.gobject2.types.GType getTypeFromName(string typeName) nothrow
+  {
+    gid.gobject2.types.GType _retval;
+    const(char)* _typeName = typeName.toCString!(No.Malloc, No.Nullable);
+    _retval = gtk_builder_get_type_from_name(cast(GtkBuilder*)this._cPtr, _typeName);
+    return _retval;
+  }
+
+  /**
+      Sets the current object for the builder.
+      
+      The current object can be thought of as the `this` object that the
+      builder is working for and will often be used as the default object
+      when an object is optional.
+      
+      [gid.gtk4.widget.Widget.initTemplate] for example will set the current
+      object to the widget the template is inited for. For functions like
+      [gid.gtk4.builder.Builder.newFromResource], the current object will be null.
+  
+      Params:
+        currentObject = the new current object
+  */
+  void setCurrentObject(gid.gobject2.object.ObjectWrap currentObject = null) nothrow
+  {
+    gtk_builder_set_current_object(cast(GtkBuilder*)this._cPtr, currentObject ? cast(GObject*)currentObject._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the scope the builder should operate in.
+      
+      If scope is null, a new [gid.gtk4.builder_cscope.BuilderCScope] will be created.
+  
+      Params:
+        scope_ = the scope to use
+  */
+  void setScope(gid.gtk4.builder_scope.BuilderScope scope_ = null) nothrow
+  {
+    gtk_builder_set_scope(cast(GtkBuilder*)this._cPtr, scope_ ? cast(GtkBuilderScope*)(cast(gid.gobject2.object.ObjectWrap)scope_)._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the translation domain of builder.
+  
+      Params:
+        domain = the translation domain
+  */
+  void setTranslationDomain(string domain = null) nothrow
+  {
+    const(char)* _domain = domain.toCString!(No.Malloc, Yes.Nullable);
+    gtk_builder_set_translation_domain(cast(GtkBuilder*)this._cPtr, _domain);
+  }
+
+  /**
+      Demarshals a value from a string.
+      
+      This function calls [gid.gobject2.value.Value.init_] on the value argument,
+      so it need not be initialised beforehand.
+      
+      Can handle char, uchar, boolean, int, uint, long,
+      ulong, enum, flags, float, double, string, [gid.gdk4.rgba.RGBA] and
+      [gid.gtk4.adjustment.Adjustment] type values.
+      
+      Upon errors false will be returned and error will be
+      assigned a [gid.glib2.error.ErrorWrap] from the `GTK_BUILDER_ERROR` domain.
+  
+      Params:
+        pspec = the [gid.gobject2.param_spec.ParamSpec] for the property
+        string_ = the string representation of the value
+        value = the [gid.gobject2.value.Value] to store the result in
+      Returns: true on success
+      Throws: [ErrorWrap]
+  */
+  bool valueFromString(gid.gobject2.param_spec.ParamSpec pspec, string string_, out gid.gobject2.value.Value value)
+  {
+    bool _retval;
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
+    auto _value = boxedNew!GValue(gid.gobject2.value.Value._getGType);
+    GError *_err;
+    _retval = cast(bool)gtk_builder_value_from_string(cast(GtkBuilder*)this._cPtr, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, _string_, _value, &_err);
+    if (_err)
+    {
+      gid.gobject2.value.Value._cFree(_value);
+      throw new ErrorWrap(_err, Yes.Take);
+    }
+    value = new gid.gobject2.value.Value(cast(void*)_value, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Demarshals a value from a string.
+      
+      Unlike [gid.gtk4.builder.Builder.valueFromString], this function
+      takes a `GType` instead of [gid.gobject2.param_spec.ParamSpec].
+      
+      Calls [gid.gobject2.value.Value.init_] on the value argument, so it
+      need not be initialised beforehand.
+      
+      Upon errors false will be returned and error will be
+      assigned a [gid.glib2.error.ErrorWrap] from the `GTK_BUILDER_ERROR` domain.
+  
+      Params:
+        type = the `GType` of the value
+        string_ = the string representation of the value
+        value = the [gid.gobject2.value.Value] to store the result in
+      Returns: true on success
+      Throws: [ErrorWrap]
+  */
+  bool valueFromStringType(gid.gobject2.types.GType type, string string_, out gid.gobject2.value.Value value)
+  {
+    bool _retval;
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
+    auto _value = boxedNew!GValue(gid.gobject2.value.Value._getGType);
+    GError *_err;
+    _retval = cast(bool)gtk_builder_value_from_string_type(cast(GtkBuilder*)this._cPtr, type, _string_, _value, &_err);
+    if (_err)
+    {
+      gid.gobject2.value.Value._cFree(_value);
+      throw new ErrorWrap(_err, Yes.Take);
+    }
+    value = new gid.gobject2.value.Value(cast(void*)_value, Yes.Take);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.builder.Builder]
+class BuilderGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `currentObject` property.
+      Params:
+        propval = The object the builder is evaluating for.
+      Returns: Builder instance for fluent chaining
+  */
+  T currentObject(gid.gobject2.object.ObjectWrap propval) nothrow
+  {
+    return setProperty("current-object", propval);
+  }
+
+  /**
+      Set `scope_` property.
+      Params:
+        propval = The scope the builder is operating in
+      Returns: Builder instance for fluent chaining
+  */
+  T scope_(gid.gtk4.builder_scope.BuilderScope propval) nothrow
+  {
+    return setProperty("scope", propval);
+  }
+
+  /**
+      Set `translationDomain` property.
+      Params:
+        propval = The translation domain used when translating property values that
+          have been marked as translatable.
+          
+          If the translation domain is null, [gid.gtk4.builder.Builder] uses gettext(),
+          otherwise [gid.glib2.global.dgettext].
+      Returns: Builder instance for fluent chaining
+  */
+  T translationDomain(string propval) nothrow
+  {
+    return setProperty("translation-domain", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk4.builder.Builder]
+final class BuilderGidBuilder : BuilderGidBuilderImpl!BuilderGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Builder build() nothrow
+  {
+    return new Builder(cast(void*)createGObject(Builder._getGType), Yes.Take);
+  }
+}

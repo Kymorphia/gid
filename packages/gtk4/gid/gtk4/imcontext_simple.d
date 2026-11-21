@@ -1,0 +1,135 @@
+/// Module for [IMContextSimple] class
+module gid.gtk4.imcontext_simple;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.gid_builder;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.imcontext;
+import gid.gtk4.types;
+
+/**
+    Supports compose sequences, dead keys and numeric Unicode input.
+    
+    ## Compose sequences
+    
+    [gid.gtk4.imcontext_simple.IMContextSimple] reads compose sequences from the first of the
+    following files that is found: ~/.config/gtk-4.0/Compose, ~/.XCompose,
+    /usr/share/X11/locale/$locale/Compose (for locales that have a nontrivial
+    Compose file). A subset of the file syntax described in the Compose(5)
+    manual page is supported. Additionally, `include "%L"` loads GTK’s built-in
+    table of compose sequences rather than the locale-specific one from X11.
+    
+    If none of these files is found, [gid.gtk4.imcontext_simple.IMContextSimple] uses a built-in table
+    of compose sequences that is derived from the X11 Compose files.
+    
+    Note that compose sequences typically start with the Compose_key, which is
+    often not available as a dedicated key on keyboards. Keyboard layouts may
+    map this keysym to other keys, such as the right Control key.
+    
+    ## Unicode characters
+    
+    [gid.gtk4.imcontext_simple.IMContextSimple] also supports numeric entry of Unicode characters
+    by typing <kbd>Ctrl</kbd>-<kbd>Shift</kbd>-<kbd>u</kbd>, followed by a
+    hexadecimal Unicode codepoint.
+    
+    For example,
+    
+        Ctrl-Shift-u 1 2 3 Enter
+    
+    yields U+0123 LATIN SMALL LETTER G WITH CEDILLA, i.e. ģ.
+    
+    ## Dead keys
+    
+    [gid.gtk4.imcontext_simple.IMContextSimple] supports dead keys. For example, typing
+    
+        dead_acute a
+    
+     yields U+00E! LATIN SMALL LETTER_A WITH ACUTE, i.e. á. Note that this
+     depends on the keyboard layout including dead keys.
+*/
+class IMContextSimple : gid.gtk4.imcontext.IMContext
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_im_context_simple_get_type != &gidSymbolNotFound ? gtk_im_context_simple_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkIMContextSimple";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override IMContextSimple self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.imcontext_simple.IMContextSimple]
+      Returns: New builder object
+  */
+  static IMContextSimpleGidBuilder builder() nothrow
+  {
+    return new IMContextSimpleGidBuilder;
+  }
+
+  /**
+      Creates a new [gid.gtk4.imcontext_simple.IMContextSimple].
+      Returns: a new [gid.gtk4.imcontext_simple.IMContextSimple]
+  */
+  this() nothrow
+  {
+    GtkIMContext* _cretval;
+    _cretval = gtk_im_context_simple_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Adds an additional table from the X11 compose file.
+  
+      Params:
+        composeFile = The path of compose file
+  */
+  void addComposeFile(string composeFile) nothrow
+  {
+    const(char)* _composeFile = composeFile.toCString!(No.Malloc, No.Nullable);
+    gtk_im_context_simple_add_compose_file(cast(GtkIMContextSimple*)this._cPtr, _composeFile);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.imcontext_simple.IMContextSimple]
+class IMContextSimpleGidBuilderImpl(T) : gid.gtk4.imcontext.IMContextGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gtk4.imcontext_simple.IMContextSimple]
+final class IMContextSimpleGidBuilder : IMContextSimpleGidBuilderImpl!IMContextSimpleGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  IMContextSimple build() nothrow
+  {
+    return new IMContextSimple(cast(void*)createGObject(IMContextSimple._getGType), Yes.Take);
+  }
+}

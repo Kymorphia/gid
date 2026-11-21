@@ -1,0 +1,71 @@
+/// Module for [PadEvent] class
+module gid.gdk4.pad_event;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gdk4.c.functions;
+import gid.gdk4.c.types;
+import gid.gdk4.event;
+import gid.gdk4.types;
+
+/**
+    An event related to a pad-based device.
+*/
+class PadEvent : gid.gdk4.event.Event
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gdk_pad_event_get_type != &gidSymbolNotFound ? gdk_pad_event_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /**
+      Extracts the information from a pad strip or ring event.
+  
+      Params:
+        index = Return location for the axis index
+        value = Return location for the axis value
+  */
+  void getAxisValue(out uint index, out double value) nothrow
+  {
+    gdk_pad_event_get_axis_value(cast(GdkEvent*)this._cPtr, cast(uint*)&index, cast(double*)&value);
+  }
+
+  /**
+      Extracts information about the pressed button from
+      a pad event.
+      Returns: the button of event
+  */
+  uint getButton() nothrow
+  {
+    uint _retval;
+    _retval = gdk_pad_event_get_button(cast(GdkEvent*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Extracts group and mode information from a pad event.
+  
+      Params:
+        group = return location for the group
+        mode = return location for the mode
+  */
+  void getGroupMode(out uint group, out uint mode) nothrow
+  {
+    gdk_pad_event_get_group_mode(cast(GdkEvent*)this._cPtr, cast(uint*)&group, cast(uint*)&mode);
+  }
+}

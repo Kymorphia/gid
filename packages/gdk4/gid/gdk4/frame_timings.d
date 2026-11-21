@@ -1,0 +1,141 @@
+/// Module for [FrameTimings] class
+module gid.gdk4.frame_timings;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gdk4.c.functions;
+import gid.gdk4.c.types;
+import gid.gdk4.types;
+import gid.gobject2.boxed;
+
+/**
+    Holds timing information for a single frame of the application’s displays.
+    
+    To retrieve [gid.gdk4.frame_timings.FrameTimings] objects, use [gid.gdk4.frame_clock.FrameClock.getTimings]
+    or [gid.gdk4.frame_clock.FrameClock.getCurrentTimings]. The information in
+    [gid.gdk4.frame_timings.FrameTimings] is useful for precise synchronization of video with
+    the event or audio streams, and for measuring quality metrics for the
+    application’s display, such as latency and jitter.
+*/
+class FrameTimings : gid.gobject2.boxed.BoxedWrap!(gdk_frame_timings_get_type)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override FrameTimings self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Returns whether timings are complete.
+      
+      The timing information in a [gid.gdk4.frame_timings.FrameTimings] is filled in
+      incrementally as the frame as drawn and passed off to the
+      window system for processing and display to the user. The
+      accessor functions for [gid.gdk4.frame_timings.FrameTimings] can return 0 to
+      indicate an unavailable value for two reasons: either because
+      the information is not yet available, or because it isn't
+      available at all.
+      
+      Once this function returns true for a frame, you can be
+      certain that no further values will become available and be
+      stored in the [gid.gdk4.frame_timings.FrameTimings].
+      Returns: true if all information that will be available
+          for the frame has been filled in.
+  */
+  bool getComplete() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gdk_frame_timings_get_complete(cast(GdkFrameTimings*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the frame counter value of the [gid.gdk4.frame_clock.FrameClock] when
+      this frame was drawn.
+      Returns: the frame counter value for this frame
+  */
+  long getFrameCounter() nothrow
+  {
+    long _retval;
+    _retval = gdk_frame_timings_get_frame_counter(cast(GdkFrameTimings*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the frame time for the frame.
+      
+      This is the time value that is typically used to time
+      animations for the frame. See [gid.gdk4.frame_clock.FrameClock.getFrameTime].
+      Returns: the frame time for the frame, in the timescale
+         of [gid.glib2.global.getMonotonicTime]
+  */
+  long getFrameTime() nothrow
+  {
+    long _retval;
+    _retval = gdk_frame_timings_get_frame_time(cast(GdkFrameTimings*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the predicted time at which this frame will be displayed.
+      
+      Although no predicted time may be available, if one is available,
+      it will be available while the frame is being generated, in contrast
+      to [gid.gdk4.frame_timings.FrameTimings.getPresentationTime], which is only
+      available after the frame has been presented.
+      
+      In general, if you are simply animating, you should use
+      [gid.gdk4.frame_clock.FrameClock.getFrameTime] rather than this function,
+      but this function is useful for applications that want exact control
+      over latency. For example, a movie player may want this information
+      for Audio/Video synchronization.
+      Returns: The predicted time at which the frame will be presented,
+          in the timescale of [gid.glib2.global.getMonotonicTime], or 0 if no predicted
+          presentation time is available.
+  */
+  long getPredictedPresentationTime() nothrow
+  {
+    long _retval;
+    _retval = gdk_frame_timings_get_predicted_presentation_time(cast(GdkFrameTimings*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Reurns the presentation time.
+      
+      This is the time at which the frame became visible to the user.
+      Returns: the time the frame was displayed to the user, in the
+          timescale of [gid.glib2.global.getMonotonicTime], or 0 if no presentation
+          time is available. See [gid.gdk4.frame_timings.FrameTimings.getComplete]
+  */
+  long getPresentationTime() nothrow
+  {
+    long _retval;
+    _retval = gdk_frame_timings_get_presentation_time(cast(GdkFrameTimings*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the natural interval between presentation times for
+      the display that this frame was displayed on.
+      
+      Frame presentation usually happens during the “vertical
+      blanking interval”.
+      Returns: the refresh interval of the display, in microseconds,
+          or 0 if the refresh interval is not available.
+          See [gid.gdk4.frame_timings.FrameTimings.getComplete].
+  */
+  long getRefreshInterval() nothrow
+  {
+    long _retval;
+    _retval = gdk_frame_timings_get_refresh_interval(cast(GdkFrameTimings*)this._cPtr);
+    return _retval;
+  }
+}

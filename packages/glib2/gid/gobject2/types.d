@@ -1,0 +1,802 @@
+/// D types for gobject2 library
+module gid.gobject2.types;
+
+import gid.core.gid;
+import gid.gobject2.binding;
+import gid.gobject2.c.functions;
+import gid.gobject2.c.types;
+import gid.gobject2.closure;
+import gid.gobject2.object;
+import gid.gobject2.param_spec;
+import gid.gobject2.type_class;
+import gid.gobject2.type_cvalue;
+import gid.gobject2.type_instance;
+import gid.gobject2.value;
+
+
+// Aliases
+
+/** */
+alias SignalCMarshaller = gid.gobject2.types.ClosureMarshal;
+
+/** */
+alias GType = gid.gobject2.c.types.GType;
+
+// Enums
+
+/** */
+alias BindingFlags = GBindingFlags;
+
+/** */
+alias ConnectFlags = GConnectFlags;
+
+/** */
+alias ParamFlags = GParamFlags;
+
+/** */
+alias SignalFlags = GSignalFlags;
+
+/** */
+alias SignalMatchType = GSignalMatchType;
+
+/** */
+alias TypeDebugFlags = GTypeDebugFlags;
+
+/** */
+alias TypeFlags = GTypeFlags;
+
+/** */
+alias TypeFundamentalFlags = GTypeFundamentalFlags;
+
+// Structs
+
+/** */
+alias ClosureNotifyData = GClosureNotifyData;
+
+/** */
+alias ParamSpecTypeInfo = GParamSpecTypeInfo;
+
+/** */
+alias SignalInvocationHint = GSignalInvocationHint;
+
+/** */
+alias TypeFundamentalInfo = GTypeFundamentalInfo;
+
+// Callbacks
+
+/**
+    A callback function used by the type system to finalize those portions
+    of a derived types class structure that were setup from the corresponding
+    GBaseInitFunc() function.
+    
+    Class finalization basically works the inverse way in which class
+    initialization is performed.
+    
+    See GClassInitFunc() for a discussion of the class initialization process.
+
+    Params:
+      gClass = The #GTypeClass structure to finalize
+*/
+alias BaseFinalizeFunc = void delegate(gid.gobject2.type_class.TypeClass gClass);
+
+/**
+    A callback function used by the type system to do base initialization
+    of the class structures of derived types.
+    
+    This function is called as part of the initialization process of all derived
+    classes and should reallocate or reset all dynamic class members copied over
+    from the parent class.
+    
+    For example, class members (such as strings) that are not sufficiently
+    handled by a plain memory copy of the parent class into the derived class
+    have to be altered. See GClassInitFunc() for a discussion of the class
+    initialization process.
+
+    Params:
+      gClass = The #GTypeClass structure to initialize
+*/
+alias BaseInitFunc = void delegate(gid.gobject2.type_class.TypeClass gClass);
+
+/**
+    A function to be called to transform from_value to to_value.
+    
+    If this is the transform_to function of a binding, then from_value
+    is the source_property on the source object, and to_value is the
+    target_property on the target object. If this is the
+    transform_from function of a [gid.gobject2.types.BindingFlags.Bidirectional] binding,
+    then those roles are reversed.
+
+    Params:
+      binding = a #GBinding
+      fromValue = the #GValue containing the value to transform
+      toValue = the #GValue in which to store the transformed value (modified in place, changes are seen by the caller)
+    Returns: true if the transformation was successful, and false
+        otherwise
+*/
+alias BindingTransformFunc = bool delegate(gid.gobject2.binding.Binding binding, gid.gobject2.value.Value fromValue, gid.gobject2.value.Value toValue);
+
+/**
+    This function is provided by the user and should produce a copy
+    of the passed in boxed structure.
+
+    Params:
+      boxed = The boxed structure to be copied.
+    Returns: The newly created copy of the boxed structure.
+*/
+alias BoxedCopyFunc = void* delegate(void* boxed);
+
+/**
+    This function is provided by the user and should free the boxed
+    structure passed.
+
+    Params:
+      boxed = The boxed structure to be freed.
+*/
+alias BoxedFreeFunc = void delegate(void* boxed);
+
+/**
+    The type used for callback functions in structure definitions and function
+    signatures.
+    
+    This doesn't mean that all callback functions must take no  parameters and
+    return void. The required signature of a callback function is determined by
+    the context in which is used (e.g. the signal to which it is connected).
+    
+    Use G_CALLBACK() to cast the callback function to a #GCallback.
+*/
+alias Callback = void delegate();
+
+/**
+    A callback function used by the type system to finalize a class.
+    
+    This function is rarely needed, as dynamically allocated class resources
+    should be handled by GBaseInitFunc() and GBaseFinalizeFunc().
+    
+    Also, specification of a GClassFinalizeFunc() in the #GTypeInfo
+    structure of a static type is invalid, because classes of static types
+    will never be finalized (they are artificially kept alive when their
+    reference count drops to zero).
+
+    Params:
+      gClass = The #GTypeClass structure to finalize
+*/
+alias ClassFinalizeFunc = void delegate(gid.gobject2.type_class.TypeClass gClass);
+
+/**
+    A callback function used by the type system to initialize the class
+    of a specific type.
+    
+    This function should initialize all static class members.
+    
+    The initialization process of a class involves:
+    
+    - Copying common members from the parent class over to the
+      derived class structure.
+    - Zero initialization of the remaining members not copied
+      over from the parent class.
+    - Invocation of the GBaseInitFunc() initializers of all parent
+      types and the class' type.
+    - Invocation of the class' GClassInitFunc() initializer.
+    
+    Since derived classes are partially initialized through a memory copy
+    of the parent class, the general rule is that GBaseInitFunc() and
+    GBaseFinalizeFunc() should take care of necessary reinitialization
+    and release of those class members that were introduced by the type
+    that specified these GBaseInitFunc()/GBaseFinalizeFunc().
+    GClassInitFunc() should only care about initializing static
+    class members, while dynamic class members (such as allocated strings
+    or reference counted resources) are better handled by a GBaseInitFunc()
+    for this type, so proper initialization of the dynamic class members
+    is performed for class initialization of derived types as well.
+    
+    An example may help to correspond the intend of the different class
+    initializers:
+    
+    ```c
+    typedef struct {
+      GObjectClass parent_class;
+      gint         static_integer;
+      gchar       *dynamic_string;
+    } TypeAClass;
+    static void
+    type_a_base_class_init (TypeAClass *class)
+    {
+      class->dynamic_string = g_strdup ("some string");
+    }
+    static void
+    type_a_base_class_finalize (TypeAClass *class)
+    {
+      g_free (class->dynamic_string);
+    }
+    static void
+    type_a_class_init (TypeAClass *class)
+    {
+      class->static_integer = 42;
+    }
+    
+    typedef struct {
+      TypeAClass   parent_class;
+      gfloat       static_float;
+      GString     *dynamic_gstring;
+    } TypeBClass;
+    static void
+    type_b_base_class_init (TypeBClass *class)
+    {
+      class->dynamic_gstring = g_string_new ("some other string");
+    }
+    static void
+    type_b_base_class_finalize (TypeBClass *class)
+    {
+      g_string_free (class->dynamic_gstring);
+    }
+    static void
+    type_b_class_init (TypeBClass *class)
+    {
+      class->static_float = 3.14159265358979323846;
+    }
+    ```
+    
+    Initialization of TypeBClass will first cause initialization of
+    TypeAClass (derived classes reference their parent classes, see
+    [gid.gobject2.type_class.TypeClass.ref_] on this).
+    
+    Initialization of TypeAClass roughly involves zero-initializing its fields,
+    then calling its GBaseInitFunc() type_a_base_class_init() to allocate
+    its dynamic members (dynamic_string), and finally calling its GClassInitFunc()
+    type_a_class_init() to initialize its static members (static_integer).
+    The first step in the initialization process of TypeBClass is then
+    a plain memory copy of the contents of TypeAClass into TypeBClass and
+    zero-initialization of the remaining fields in TypeBClass.
+    The dynamic members of TypeAClass within TypeBClass now need
+    reinitialization which is performed by calling type_a_base_class_init()
+    with an argument of TypeBClass.
+    
+    After that, the GBaseInitFunc() of TypeBClass, type_b_base_class_init()
+    is called to allocate the dynamic members of TypeBClass (dynamic_gstring),
+    and finally the GClassInitFunc() of TypeBClass, type_b_class_init(),
+    is called to complete the initialization process with the static members
+    (static_float).
+    
+    Corresponding finalization counter parts to the GBaseInitFunc() functions
+    have to be provided to release allocated resources at class finalization
+    time.
+
+    Params:
+      gClass = The #GTypeClass structure to initialize.
+*/
+alias ClassInitFunc = void delegate(gid.gobject2.type_class.TypeClass gClass);
+
+/**
+    The type used for marshaller functions.
+
+    Params:
+      closure = the #GClosure to which the marshaller belongs (modified in place, changes are seen by the caller)
+      returnValue = a #GValue to store the return
+         value. May be null if the callback of closure doesn't return a
+         value. (modified in place, changes are seen by the caller)
+      paramValues = an array of
+         #GValues holding the arguments on which to invoke the
+         callback of closure
+      invocationHint = the invocation hint given as the
+         last argument to [gid.gobject2.closure.Closure.invoke]
+*/
+alias ClosureMarshal = void delegate(gid.gobject2.closure.Closure closure, gid.gobject2.value.Value returnValue, gid.gobject2.value.Value[] paramValues, void* invocationHint);
+
+/**
+    The type used for the various notification callbacks which can be registered
+    on closures.
+
+    Params:
+      closure = the #GClosure on which the notification is emitted (modified in place, changes are seen by the caller)
+*/
+alias ClosureNotify = void delegate(gid.gobject2.closure.Closure closure);
+
+/**
+    A callback function used by the type system to initialize a new
+    instance of a type.
+    
+    This function initializes all instance members and allocates any resources
+    required by it.
+    
+    Initialization of a derived instance involves calling all its parent
+    types instance initializers, so the class member of the instance
+    is altered during its initialization to always point to the class that
+    belongs to the type the current initializer was introduced for.
+    
+    The extended members of instance are guaranteed to have been filled with
+    zeros before this function is called.
+
+    Params:
+      instance = The instance to initialize (borrowed, only valid during the callback)
+      gClass = The class of the type the instance is
+           created for
+*/
+alias InstanceInitFunc = void delegate(gid.gobject2.type_instance.TypeInstance instance, gid.gobject2.type_class.TypeClass gClass);
+
+/**
+    The type of the finalize function of #GObjectClass.
+
+    Params:
+      object = the #GObject being finalized
+*/
+alias ObjectFinalizeFunc = void delegate(gid.gobject2.object.ObjectWrap object);
+
+/**
+    The type of the get_property function of #GObjectClass.
+
+    Params:
+      object = a #GObject
+      propertyId = the numeric id under which the property was registered with
+         [gid.gobject2.object_class.ObjectClass.installProperty].
+      value = a #GValue to return the property value in (modified in place, changes are seen by the caller)
+      pspec = the #GParamSpec describing the property
+*/
+alias ObjectGetPropertyFunc = void delegate(gid.gobject2.object.ObjectWrap object, uint propertyId, gid.gobject2.value.Value value, gid.gobject2.param_spec.ParamSpec pspec);
+
+/**
+    The type of the set_property function of #GObjectClass.
+
+    Params:
+      object = a #GObject
+      propertyId = the numeric id under which the property was registered with
+         [gid.gobject2.object_class.ObjectClass.installProperty].
+      value = the new value for the property
+      pspec = the #GParamSpec describing the property
+*/
+alias ObjectSetPropertyFunc = void delegate(gid.gobject2.object.ObjectWrap object, uint propertyId, gid.gobject2.value.Value value, gid.gobject2.param_spec.ParamSpec pspec);
+
+/**
+    The signal accumulator is a special callback function that can be used
+    to collect return values of the various callbacks that are called
+    during a signal emission.
+    
+    The signal accumulator is specified at signal creation time, if it is
+    left null, no accumulation of callback return values is performed.
+    The return value of signal emissions is then the value returned by the
+    last callback.
+
+    Params:
+      ihint = Signal invocation hint, see #GSignalInvocationHint.
+      returnAccu = Accumulator to collect callback return values in, this
+         is the return value of the current signal emission. (modified in place, changes are seen by the caller)
+      handlerReturn = A #GValue holding the return value of the signal handler.
+    Returns: The accumulator function returns whether the signal emission
+       should be aborted. Returning true will continue with
+       the signal emission. Returning false will abort the current emission.
+       Since 2.62, returning false will skip to the CLEANUP stage. In this case,
+       emission will occur as normal in the CLEANUP stage and the handler's
+       return value will be accumulated.
+*/
+alias SignalAccumulator = bool delegate(gid.gobject2.types.SignalInvocationHint ihint, gid.gobject2.value.Value returnAccu, gid.gobject2.value.Value handlerReturn);
+
+/**
+    A simple function pointer to get invoked when the signal is emitted.
+    
+    Emission hooks allow you to tie a hook to the signal type, so that it will
+    trap all emissions of that signal, from any object.
+    
+    You may not attach these to signals created with the [gid.gobject2.types.SignalFlags.NoHooks] flag.
+
+    Params:
+      ihint = Signal invocation hint, see #GSignalInvocationHint.
+      paramValues = the instance on which
+         the signal was emitted, followed by the parameters of the emission.
+    Returns: whether it wants to stay connected. If it returns false, the signal
+       hook is disconnected (and destroyed).
+*/
+alias SignalEmissionHook = bool delegate(gid.gobject2.types.SignalInvocationHint ihint, gid.gobject2.value.Value[] paramValues);
+
+/**
+    A callback function used for notification when the state
+    of a toggle reference changes.
+    
+    See also: [gid.gobject2.object.ObjectWrap.addToggleRef]
+
+    Params:
+      object = The object on which [gid.gobject2.object.ObjectWrap.addToggleRef] was called.
+      isLastRef = true if the toggle reference is now the
+         last reference to the object. false if the toggle
+         reference was the last reference and there are now other
+         references.
+*/
+alias ToggleNotify = void delegate(gid.gobject2.object.ObjectWrap object, bool isLastRef);
+
+/**
+    A callback function which is called when the reference count of a class
+    drops to zero.
+    
+    It may use [gid.gobject2.type_class.TypeClass.ref_] to prevent the class from being freed. You
+    should not call [gid.gobject2.type_class.TypeClass.unref] from a #GTypeClassCacheFunc function
+    to prevent infinite recursion, use [gid.gobject2.type_class.TypeClass.unrefUncached] instead.
+    
+    The functions have to check the class id passed in to figure
+    whether they actually want to cache the class of this type, since all
+    classes are routed through the same #GTypeClassCacheFunc chain.
+
+    Params:
+      gClass = The #GTypeClass structure which is
+           unreferenced
+    Returns: true to stop further #GTypeClassCacheFuncs from being
+       called, false to continue
+*/
+alias TypeClassCacheFunc = bool delegate(gid.gobject2.type_class.TypeClass gClass);
+
+/**
+    This function is responsible for converting the values collected from
+    a variadic argument list into contents suitable for storage in a #GValue.
+    
+    This function should setup value similar to #GTypeValueInitFunc; e.g.
+    for a string value that does not allow `NULL` pointers, it needs to either
+    emit an error, or do an implicit conversion by storing an empty string.
+    
+    The value passed in to this function has a zero-filled data array, so
+    just like for #GTypeValueInitFunc it is guaranteed to not contain any old
+    contents that might need freeing.
+    
+    The n_collect_values argument is the string length of the `collect_format`
+    field of #GTypeValueTable, and `collect_values` is an array of #GTypeCValue
+    with length of n_collect_values, containing the collected values according
+    to `collect_format`.
+    
+    The collect_flags argument provided as a hint by the caller. It may
+    contain the flag [gid.gobject2.types.VALUE_NOCOPY_CONTENTS] indicating that the collected
+    value contents may be considered ‘static’ for the duration of the value
+    lifetime. Thus an extra copy of the contents stored in collect_values is
+    not required for assignment to value.
+    
+    For our above string example, we continue with:
+    
+    ```c
+    if (!collect_values[0].v_pointer)
+      value->data[0].v_pointer = g_strdup ("");
+    else if (collect_flags & G_VALUE_NOCOPY_CONTENTS)
+      {
+        value->data[0].v_pointer = collect_values[0].v_pointer;
+        // keep a flag for the value_free() implementation to not free this string
+        value->data[1].v_uint = G_VALUE_NOCOPY_CONTENTS;
+      }
+    else
+      value->data[0].v_pointer = g_strdup (collect_values[0].v_pointer);
+    return NULL;
+    ```
+    
+    It should be noted, that it is generally a bad idea to follow the
+    [gid.gobject2.types.VALUE_NOCOPY_CONTENTS] hint for reference counted types. Due to
+    reentrancy requirements and reference count assertions performed
+    by the signal emission code, reference counts should always be
+    incremented for reference counted contents stored in the `value->data`
+    array. To deviate from our string example for a moment, and taking
+    a look at an exemplary implementation for `GTypeValueTable.collect_value()`
+    of [gid.gobject2.object.ObjectWrap]:
+    
+    ```c
+    GObject *object = G_OBJECT (collect_values[0].v_pointer);
+    g_return_val_if_fail (object != NULL,
+       g_strdup_printf ("Object %p passed as invalid NULL pointer", object));
+    // never honour G_VALUE_NOCOPY_CONTENTS for ref-counted types
+    value->data[0].v_pointer = g_object_ref (object);
+    return NULL;
+    ```
+    
+    The reference count for valid objects is always incremented, regardless
+    of `collect_flags`. For invalid objects, the example returns a newly
+    allocated string without altering `value`.
+    
+    Upon success, `collect_value()` needs to return `NULL`. If, however,
+    an error condition occurred, `collect_value()` should return a newly
+    allocated string containing an error diagnostic.
+    
+    The calling code makes no assumptions about the `value` contents being
+    valid upon error returns, `value` is simply thrown away without further
+    freeing. As such, it is a good idea to not allocate [gid.gobject2.value.Value] contents
+    prior to returning an error; however, `collect_values()` is not obliged
+    to return a correctly setup value for error returns, simply because
+    any non-`NULL` return is considered a fatal programming error, and
+    further program behaviour is undefined.
+
+    Params:
+      value = the value to initialize (modified in place, changes are seen by the caller)
+      collectValues = the collected values (borrowed, only valid during the callback)
+      collectFlags = optional flags
+    Returns: `NULL` on success, otherwise a
+        newly allocated error string on failure
+*/
+alias TypeValueCollectFunc = string delegate(gid.gobject2.value.Value value, gid.gobject2.type_cvalue.TypeCValue[] collectValues, uint collectFlags);
+
+/**
+    Copies the content of a #GValue into another.
+    
+    The dest_value is a #GValue with zero-filled data section and src_value
+    is a properly initialized #GValue of same type, or derived type.
+    
+    The purpose of this function is to copy the contents of src_value
+    into dest_value in a way, that even after src_value has been freed, the
+    contents of dest_value remain valid. String type example:
+    
+    ```c
+    dest_value->data[0].v_pointer = g_strdup (src_value->data[0].v_pointer);
+    ```
+
+    Params:
+      srcValue = the value to copy
+      destValue = the location of the copy
+*/
+alias TypeValueCopyFunc = void delegate(gid.gobject2.value.Value srcValue, out gid.gobject2.value.Value destValue);
+
+/**
+    Frees any old contents that might be left in the `value->data` array of
+    the given value.
+    
+    No resources may remain allocated through the #GValue contents after this
+    function returns. E.g. for our above string type:
+    
+    ```c
+    // only free strings without a specific flag for static storage
+    if (!(value->data[1].v_uint & G_VALUE_NOCOPY_CONTENTS))
+      g_free (value->data[0].v_pointer);
+    ```
+
+    Params:
+      value = the value to free (modified in place, changes are seen by the caller)
+*/
+alias TypeValueFreeFunc = void delegate(gid.gobject2.value.Value value);
+
+/**
+    Initializes the value contents by setting the fields of the `value->data`
+    array.
+    
+    The data array of the #GValue passed into this function was zero-filled
+    with `memset()`, so no care has to be taken to free any old contents.
+    For example, in the case of a string value that may never be null, the
+    implementation might look like:
+    
+    ```c
+    value->data[0].v_pointer = g_strdup ("");
+    ```
+
+    Params:
+      value = the value to initialize (modified in place, changes are seen by the caller)
+*/
+alias TypeValueInitFunc = void delegate(gid.gobject2.value.Value value);
+
+/**
+    This function is responsible for storing the `value`
+    contents into arguments passed through a variadic argument list which
+    got collected into `collect_values` according to `lcopy_format`.
+    
+    The `n_collect_values` argument equals the string length of
+    `lcopy_format`, and `collect_flags` may contain [gid.gobject2.types.VALUE_NOCOPY_CONTENTS].
+    
+    In contrast to #GTypeValueCollectFunc, this function is obliged to always
+    properly support [gid.gobject2.types.VALUE_NOCOPY_CONTENTS].
+    
+    Similar to #GTypeValueCollectFunc the function may prematurely abort by
+    returning a newly allocated string describing an error condition. To
+    complete the string example:
+    
+    ```c
+    gchar **string_p = collect_values[0].v_pointer;
+    g_return_val_if_fail (string_p != NULL,
+      g_strdup ("string location passed as NULL"));
+    
+    if (collect_flags & G_VALUE_NOCOPY_CONTENTS)
+      *string_p = value->data[0].v_pointer;
+    else
+      *string_p = g_strdup (value->data[0].v_pointer);
+    ```
+    
+    And an illustrative version of this function for reference-counted
+    types:
+    
+    ```c
+    GObject **object_p = collect_values[0].v_pointer;
+    g_return_val_if_fail (object_p != NULL,
+      g_strdup ("object location passed as NULL"));
+    
+    if (value->data[0].v_pointer == NULL)
+      *object_p = NULL;
+    else if (collect_flags & G_VALUE_NOCOPY_CONTENTS) // always honour
+      *object_p = value->data[0].v_pointer;
+    else
+      *object_p = g_object_ref (value->data[0].v_pointer);
+    
+    return NULL;
+    ```
+
+    Params:
+      value = the value to lcopy
+      collectValues = the collected
+          locations for storage (borrowed, only valid during the callback)
+      collectFlags = optional flags
+    Returns: `NULL` on success, otherwise
+        a newly allocated error string on failure
+*/
+alias TypeValueLCopyFunc = string delegate(gid.gobject2.value.Value value, gid.gobject2.type_cvalue.TypeCValue[] collectValues, uint collectFlags);
+
+/**
+    If the value contents fit into a pointer, such as objects or strings,
+    return this pointer, so the caller can peek at the current contents.
+    
+    To extend on our above string example:
+    
+    ```c
+    return value->data[0].v_pointer;
+    ```
+
+    Params:
+      value = the value to peek
+    Returns: a pointer to the value contents
+*/
+alias TypeValuePeekPointerFunc = void* delegate(gid.gobject2.value.Value value);
+
+/**
+    The type of value transformation functions which can be registered with
+    [gid.gobject2.value.Value.registerTransformFunc].
+    
+    dest_value will be initialized to the correct destination type.
+
+    Params:
+      srcValue = source value
+      destValue = target value (modified in place, changes are seen by the caller)
+*/
+alias ValueTransform = void delegate(gid.gobject2.value.Value srcValue, gid.gobject2.value.Value destValue);
+
+/**
+    A #GWeakNotify function can be added to an object as a callback that gets
+    triggered when the object is finalized.
+    
+    Since the object is already being disposed when the #GWeakNotify is called,
+    there's not much you could do with the object, apart from e.g. using its
+    address as hash-index or the like.
+    
+    In particular, this means it’s invalid to call [gid.gobject2.object.ObjectWrap.ref_],
+    [gid.gobject2.weak_ref.WeakRef.init_], [gid.gobject2.weak_ref.WeakRef.set], [gid.gobject2.object.ObjectWrap.addToggleRef],
+    [gid.gobject2.object.ObjectWrap.weakRef], [gid.gobject2.object.ObjectWrap.addWeakPointer] or any function which calls
+    them on the object from this callback.
+
+    Params:
+      whereTheObjectWas = the object being disposed
+*/
+alias WeakNotify = void delegate(gid.gobject2.object.ObjectWrap whereTheObjectWas);
+
+/**
+    Mask containing the bits of #GParamSpec.flags which are reserved for GLib.
+*/
+enum PARAM_MASK = 255;
+
+/**
+    #GParamFlags value alias for [gid.gobject2.types.ParamFlags.StaticName] | [gid.gobject2.types.ParamFlags.StaticNick] | [gid.gobject2.types.ParamFlags.StaticBlurb].
+    
+    It is recommended to use this for all properties by default, as it allows for
+    internal performance improvements in GObject.
+    
+    It is very rare that a property would have a dynamically constructed name,
+    nickname or blurb.
+    
+    Since 2.13.0
+*/
+enum PARAM_STATIC_STRINGS = 224;
+
+/**
+    Minimum shift count to be used for user defined flags, to be stored in
+    #GParamSpec.flags. The maximum allowed is 10.
+*/
+enum PARAM_USER_SHIFT = 8;
+
+/**
+    A mask for all #GSignalFlags bits.
+*/
+enum SIGNAL_FLAGS_MASK = 511;
+
+/**
+    A mask for all #GSignalMatchType bits.
+*/
+enum SIGNAL_MATCH_MASK = 63;
+
+/**
+    A bit in the type number that's supposed to be left untouched.
+*/
+enum TYPE_FLAG_RESERVED_ID_BIT = 1;
+
+/**
+    An integer constant that represents the number of identifiers reserved
+    for types that are assigned at compile-time.
+*/
+enum TYPE_FUNDAMENTAL_MAX = 1020;
+
+/**
+    Shift value used in converting numbers to type IDs.
+*/
+enum TYPE_FUNDAMENTAL_SHIFT = 2;
+
+/**
+    First fundamental type number to create a new fundamental type id with
+    G_TYPE_MAKE_FUNDAMENTAL() reserved for BSE.
+*/
+enum TYPE_RESERVED_BSE_FIRST = 32;
+
+/**
+    Last fundamental type number reserved for BSE.
+*/
+enum TYPE_RESERVED_BSE_LAST = 48;
+
+/**
+    First fundamental type number to create a new fundamental type id with
+    G_TYPE_MAKE_FUNDAMENTAL() reserved for GLib.
+*/
+enum TYPE_RESERVED_GLIB_FIRST = 22;
+
+/**
+    Last fundamental type number reserved for GLib.
+*/
+enum TYPE_RESERVED_GLIB_LAST = 31;
+
+/**
+    First available fundamental type number to create new fundamental
+    type id with G_TYPE_MAKE_FUNDAMENTAL().
+*/
+enum TYPE_RESERVED_USER_FIRST = 49;
+
+/**
+    The maximal number of #GTypeCValues which can be collected for a
+    single #GValue.
+*/
+enum VALUE_COLLECT_FORMAT_MAX_LENGTH = 8;
+
+/**
+    Flag to indicate that a string in a [gid.gobject2.value.Value] is canonical and
+    will exist for the duration of the process.
+    
+    See [gid.gobject2.value.Value.setInternedString].
+    
+    This flag should be checked by implementations of
+    [gid.gobject2.types.TypeValueFreeFunc], [gid.gobject2.types.TypeValueCollectFunc]
+    and [gid.gobject2.types.TypeValueLCopyFunc].
+*/
+enum VALUE_INTERNED_STRING = 268435456;
+
+/**
+    Flag to indicate that allocated data in a [gid.gobject2.value.Value] shouldn’t be
+    copied.
+    
+    If passed to `func@GObject.VALUE_COLLECT`, allocated data won’t be copied
+    but used verbatim. This does not affect ref-counted types like objects.
+    
+    This does not affect usage of [gid.gobject2.value.Value.copy]: the data will
+    be copied if it is not ref-counted.
+    
+    This flag should be checked by implementations of
+    [gid.gobject2.types.TypeValueFreeFunc], [gid.gobject2.types.TypeValueCollectFunc]
+    and [gid.gobject2.types.TypeValueLCopyFunc].
+*/
+enum VALUE_NOCOPY_CONTENTS = 134217728;
+
+enum GTypeFundamentalShift = 2; /// Fundamental GType shift value (G_TYPE_FUNDAMENTAL_SHIFT)
+
+/// Fundamental GType values as an enum
+enum GTypeEnum
+{
+  Invalid = 0 << GTypeFundamentalShift,
+  None = 1 << GTypeFundamentalShift,
+  Interface = 2 << GTypeFundamentalShift,
+  Char = 3 << GTypeFundamentalShift,
+  Uchar = 4 << GTypeFundamentalShift,
+  Boolean = 5 << GTypeFundamentalShift,
+  Int = 6 << GTypeFundamentalShift,
+  Uint = 7 << GTypeFundamentalShift,
+  Long = 8 << GTypeFundamentalShift,
+  Ulong = 9 << GTypeFundamentalShift,
+  Int64 = 10 << GTypeFundamentalShift,
+  Uint64 = 11 << GTypeFundamentalShift,
+  Enum = 12 << GTypeFundamentalShift,
+  Flags = 13 << GTypeFundamentalShift,
+  Float = 14 << GTypeFundamentalShift,
+  Double = 15 << GTypeFundamentalShift,
+  String = 16 << GTypeFundamentalShift,
+  Pointer = 17 << GTypeFundamentalShift,
+  Boxed = 18 << GTypeFundamentalShift,
+  Param = 19 << GTypeFundamentalShift,
+  Object = 20 << GTypeFundamentalShift,
+  Variant = 21 << GTypeFundamentalShift,
+}
+

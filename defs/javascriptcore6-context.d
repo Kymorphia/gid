@@ -4,10 +4,10 @@ import std.traits;
 
 import std.exception : assumeWontThrow;
 
-import gobject.c.functions;
-import javascriptcore.class_;
+import gid.gobject2.c.functions;
+import gid.javascriptcore6.class_;
 
-class Context : gobject.object.ObjectWrap
+class Context : gid.gobject2.object.ObjectWrap
 {
   private Class[TypeInfo] classRegistry; // JSC Classes registered by D class TypeInfo
   private TypeInfo[string] classNameToType; // JSC class name to D class TypeInfo

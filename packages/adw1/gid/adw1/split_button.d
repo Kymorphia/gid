@@ -1,0 +1,894 @@
+/// Module for [SplitButton] class
+module gid.adw1.split_button;
+
+public import gid.core.basictypes;
+import gid.adw1.c.functions;
+import gid.adw1.c.types;
+import gid.adw1.types;
+import gid.core.gid;
+import gid.gio2.menu_model;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.accessible;
+import gid.gtk4.accessible_mixin;
+import gid.gtk4.actionable;
+import gid.gtk4.actionable_mixin;
+import gid.gtk4.buildable;
+import gid.gtk4.buildable_mixin;
+import gid.gtk4.constraint_target;
+import gid.gtk4.constraint_target_mixin;
+import gid.gtk4.popover;
+import gid.gtk4.types;
+import gid.gtk4.widget;
+
+/**
+    A combined button and dropdown widget.
+    
+    <picture>
+      <source srcset="split-button-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="split-button.png" alt="split-button">
+    </picture>
+    
+    [gid.adw1.split_button.SplitButton] is typically used to present a set of actions in a menu,
+    but allow access to one of them with a single click.
+    
+    The API is very similar to [gid.gtk4.button.Button] and [gid.gtk4.menu_button.MenuButton], see
+    their documentation for details.
+    
+    ## CSS nodes
+    
+    ```
+    splitbutton[.image-button][.text-button]
+    ├── button
+    │   ╰── <content>
+    ├── separator
+    ╰── menubutton
+        ╰── button.toggle
+            ╰── arrow
+    ```
+    
+    [gid.adw1.split_button.SplitButton]'s CSS node is called `splitbutton`. It contains the css
+    nodes: `button`, `separator`, `menubutton`. See [gid.gtk4.menu_button.MenuButton]
+    documentation for the `menubutton` contents.
+    
+    The main CSS node will contain the `.image-button` or `.text-button` style
+    classes matching the button contents. The nested button nodes will never
+    contain them.
+    
+    ## Style classes
+    
+    [gid.adw1.split_button.SplitButton] can use some of the same style classes as [gid.gtk4.button.Button]:
+    
+    - [`.suggested-action`](style-classes.html#suggested-action)
+    - [`.destructive-action`](style-classes.html#destructive-action)
+    - [`.flat`](style-classes.html#flat)
+    - [`.raised`](style-classes.html#raised)
+    
+    Other style classes, like `.pill`, cannot be used.
+    
+    ## Accessibility
+    
+    [gid.adw1.split_button.SplitButton] uses the [gid.gtk4.types.AccessibleRole.Group] role.
+*/
+class SplitButton : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())adw_split_button_get_type != &gidSymbolNotFound ? adw_split_button_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwSplitButton";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override SplitButton self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.adw1.split_button.SplitButton]
+      Returns: New builder object
+  */
+  static SplitButtonGidBuilder builder() nothrow
+  {
+    return new SplitButtonGidBuilder;
+  }
+
+  /**
+      Get `canShrink` property.
+      Returns: Whether the button can be smaller than the natural size of its contents.
+        
+        If set to `TRUE`, the label will ellipsize.
+        
+        See [gid.gtk4.button.Button.canShrink] and
+        [gid.gtk4.menu_button.MenuButton.canShrink].
+  */
+  @property bool canShrink() nothrow
+  {
+    return getCanShrink();
+  }
+
+  /**
+      Set `canShrink` property.
+      Params:
+        propval = Whether the button can be smaller than the natural size of its contents.
+          
+          If set to `TRUE`, the label will ellipsize.
+          
+          See [gid.gtk4.button.Button.canShrink] and
+          [gid.gtk4.menu_button.MenuButton.canShrink].
+  */
+  @property void canShrink(bool propval) nothrow
+  {
+    setCanShrink(propval);
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+        
+        Setting the child widget will set [gid.adw1.split_button.SplitButton.label] and
+        [gid.adw1.split_button.SplitButton.iconName] to `NULL`.
+  */
+  @property gid.gtk4.widget.Widget child() nothrow
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+          
+          Setting the child widget will set [gid.adw1.split_button.SplitButton.label] and
+          [gid.adw1.split_button.SplitButton.iconName] to `NULL`.
+  */
+  @property void child(gid.gtk4.widget.Widget propval) nothrow
+  {
+    setChild(propval);
+  }
+
+  /**
+      Get `direction` property.
+      Returns: The direction in which the popup will be popped up.
+        
+        The dropdown arrow icon will point at the same direction.
+        
+        If the does not fit in the available space in the given direction, GTK will
+        try its best to keep it inside the screen and fully visible.
+        
+        [gid.gtk4.types.ArrowType.None] behaves same as [gid.gtk4.types.ArrowType.Down].
+  */
+  @property gid.gtk4.types.ArrowType direction() nothrow
+  {
+    return getDirection();
+  }
+
+  /**
+      Set `direction` property.
+      Params:
+        propval = The direction in which the popup will be popped up.
+          
+          The dropdown arrow icon will point at the same direction.
+          
+          If the does not fit in the available space in the given direction, GTK will
+          try its best to keep it inside the screen and fully visible.
+          
+          [gid.gtk4.types.ArrowType.None] behaves same as [gid.gtk4.types.ArrowType.Down].
+  */
+  @property void direction(gid.gtk4.types.ArrowType propval) nothrow
+  {
+    setDirection(propval);
+  }
+
+  /**
+      Get `dropdownTooltip` property.
+      Returns: The tooltip of the dropdown button.
+        
+        The tooltip can be marked up with the Pango text markup language.
+  */
+  @property string dropdownTooltip() nothrow
+  {
+    return getDropdownTooltip();
+  }
+
+  /**
+      Set `dropdownTooltip` property.
+      Params:
+        propval = The tooltip of the dropdown button.
+          
+          The tooltip can be marked up with the Pango text markup language.
+  */
+  @property void dropdownTooltip(string propval) nothrow
+  {
+    setDropdownTooltip(propval);
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The name of the icon used to automatically populate the button.
+        
+        Setting the icon name will set [gid.adw1.split_button.SplitButton.label] and
+        [gid.adw1.split_button.SplitButton.child] to `NULL`.
+  */
+  @property string iconName() nothrow
+  {
+    return getIconName();
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of the icon used to automatically populate the button.
+          
+          Setting the icon name will set [gid.adw1.split_button.SplitButton.label] and
+          [gid.adw1.split_button.SplitButton.child] to `NULL`.
+  */
+  @property void iconName(string propval) nothrow
+  {
+    setIconName(propval);
+  }
+
+  /**
+      Get `label` property.
+      Returns: The label for the button.
+        
+        Setting the label will set [gid.adw1.split_button.SplitButton.iconName] and
+        [gid.adw1.split_button.SplitButton.child] to `NULL`.
+  */
+  @property string label() nothrow
+  {
+    return getLabel();
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The label for the button.
+          
+          Setting the label will set [gid.adw1.split_button.SplitButton.iconName] and
+          [gid.adw1.split_button.SplitButton.child] to `NULL`.
+  */
+  @property void label(string propval) nothrow
+  {
+    setLabel(propval);
+  }
+
+  /**
+      Get `menuModel` property.
+      Returns: The [gid.gio2.menu_model.MenuModel] from which the popup will be created.
+        
+        If the menu model is `NULL`, the dropdown is disabled.
+        
+        A [gid.gtk4.popover.Popover] will be created from the menu model with
+        [gid.gtk4.popover_menu.PopoverMenu.newFromModel]. Actions will be connected as
+        documented for this function.
+        
+        If [gid.adw1.split_button.SplitButton.popover] is already set, it will be dissociated
+        from the button, and the property is set to `NULL`.
+  */
+  @property gid.gio2.menu_model.MenuModel menuModel() nothrow
+  {
+    return getMenuModel();
+  }
+
+  /**
+      Set `menuModel` property.
+      Params:
+        propval = The [gid.gio2.menu_model.MenuModel] from which the popup will be created.
+          
+          If the menu model is `NULL`, the dropdown is disabled.
+          
+          A [gid.gtk4.popover.Popover] will be created from the menu model with
+          [gid.gtk4.popover_menu.PopoverMenu.newFromModel]. Actions will be connected as
+          documented for this function.
+          
+          If [gid.adw1.split_button.SplitButton.popover] is already set, it will be dissociated
+          from the button, and the property is set to `NULL`.
+  */
+  @property void menuModel(gid.gio2.menu_model.MenuModel propval) nothrow
+  {
+    setMenuModel(propval);
+  }
+
+  /**
+      Get `popover` property.
+      Returns: The [gid.gtk4.popover.Popover] that will be popped up when the dropdown is clicked.
+        
+        If the popover is `NULL`, the dropdown is disabled.
+        
+        If [gid.adw1.split_button.SplitButton.menuModel] is set, the menu model is dissociated
+        from the button, and the property is set to `NULL`.
+  */
+  @property gid.gtk4.popover.Popover popover() nothrow
+  {
+    return getPopover();
+  }
+
+  /**
+      Set `popover` property.
+      Params:
+        propval = The [gid.gtk4.popover.Popover] that will be popped up when the dropdown is clicked.
+          
+          If the popover is `NULL`, the dropdown is disabled.
+          
+          If [gid.adw1.split_button.SplitButton.menuModel] is set, the menu model is dissociated
+          from the button, and the property is set to `NULL`.
+  */
+  @property void popover(gid.gtk4.popover.Popover propval) nothrow
+  {
+    setPopover(propval);
+  }
+
+  /**
+      Get `useUnderline` property.
+      Returns: Whether an underline in the text indicates a mnemonic.
+        
+        See [gid.adw1.split_button.SplitButton.label].
+  */
+  @property bool useUnderline() nothrow
+  {
+    return getUseUnderline();
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = Whether an underline in the text indicates a mnemonic.
+          
+          See [gid.adw1.split_button.SplitButton.label].
+  */
+  @property void useUnderline(bool propval) nothrow
+  {
+    setUseUnderline(propval);
+  }
+
+  mixin ActionableT!();
+
+  /**
+      Creates a new [gid.adw1.split_button.SplitButton].
+      Returns: the newly created [gid.adw1.split_button.SplitButton]
+  */
+  this() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = adw_split_button_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+      gets whether the button can be smaller than the natural size of its contents.
+      Returns: whether the button can shrink
+  */
+  bool getCanShrink() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_split_button_get_can_shrink(cast(AdwSplitButton*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the child widget.
+      Returns: the child widget
+  */
+  gid.gtk4.widget.Widget getChild() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = adw_split_button_get_child(cast(AdwSplitButton*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  alias getDirection = gid.gtk4.widget.Widget.getDirection;
+
+  /**
+      Gets the direction in which the popup will be popped up.
+      Returns: the direction
+  */
+  gid.gtk4.types.ArrowType getDirection() nothrow
+  {
+    GtkArrowType _cretval;
+    _cretval = adw_split_button_get_direction(cast(AdwSplitButton*)this._cPtr);
+    gid.gtk4.types.ArrowType _retval = cast(gid.gtk4.types.ArrowType)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the tooltip of the dropdown button of self.
+      Returns: the dropdown tooltip of self
+  */
+  string getDropdownTooltip() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = adw_split_button_get_dropdown_tooltip(cast(AdwSplitButton*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the name of the icon used to automatically populate the button.
+      Returns: the icon name
+  */
+  string getIconName() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = adw_split_button_get_icon_name(cast(AdwSplitButton*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the label for self.
+      Returns: the label for self
+  */
+  string getLabel() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = adw_split_button_get_label(cast(AdwSplitButton*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the menu model from which the popup will be created.
+      Returns: the menu model
+  */
+  gid.gio2.menu_model.MenuModel getMenuModel() nothrow
+  {
+    GMenuModel* _cretval;
+    _cretval = adw_split_button_get_menu_model(cast(AdwSplitButton*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the popover that will be popped up when the dropdown is clicked.
+      Returns: the popover
+  */
+  gid.gtk4.popover.Popover getPopover() nothrow
+  {
+    GtkPopover* _cretval;
+    _cretval = adw_split_button_get_popover(cast(AdwSplitButton*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.popover.Popover)(cast(GtkPopover*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets whether an underline in the text indicates a mnemonic.
+      Returns: whether an underline in the text indicates a mnemonic
+  */
+  bool getUseUnderline() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_split_button_get_use_underline(cast(AdwSplitButton*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Dismisses the menu.
+  */
+  void popdown() nothrow
+  {
+    adw_split_button_popdown(cast(AdwSplitButton*)this._cPtr);
+  }
+
+  /**
+      Pops up the menu.
+  */
+  void popup() nothrow
+  {
+    adw_split_button_popup(cast(AdwSplitButton*)this._cPtr);
+  }
+
+  /**
+      Sets whether the button can be smaller than the natural size of its contents.
+      
+      If set to `TRUE`, the label will ellipsize.
+      
+      See [gid.gtk4.button.Button.setCanShrink] and
+      [gid.gtk4.menu_button.MenuButton.setCanShrink].
+  
+      Params:
+        canShrink = whether the button can shrink
+  */
+  void setCanShrink(bool canShrink) nothrow
+  {
+    adw_split_button_set_can_shrink(cast(AdwSplitButton*)this._cPtr, canShrink);
+  }
+
+  /**
+      Sets the child widget.
+      
+      Setting the child widget will set [gid.adw1.split_button.SplitButton.label] and
+      [gid.adw1.split_button.SplitButton.iconName] to `NULL`.
+  
+      Params:
+        child = the new child widget
+  */
+  void setChild(gid.gtk4.widget.Widget child = null) nothrow
+  {
+    adw_split_button_set_child(cast(AdwSplitButton*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+
+  alias setDirection = gid.gtk4.widget.Widget.setDirection;
+
+  /**
+      Sets the direction in which the popup will be popped up.
+      
+      The dropdown arrow icon will point at the same direction.
+      
+      If the does not fit in the available space in the given direction, GTK will
+      try its best to keep it inside the screen and fully visible.
+      
+      [gid.gtk4.types.ArrowType.None] behaves same as [gid.gtk4.types.ArrowType.Down].
+  
+      Params:
+        direction = the direction
+  */
+  void setDirection(gid.gtk4.types.ArrowType direction) nothrow
+  {
+    adw_split_button_set_direction(cast(AdwSplitButton*)this._cPtr, direction);
+  }
+
+  /**
+      Sets the tooltip of the dropdown button of self.
+      
+      The tooltip can be marked up with the Pango text markup language.
+  
+      Params:
+        tooltip = the dropdown tooltip of self
+  */
+  void setDropdownTooltip(string tooltip) nothrow
+  {
+    const(char)* _tooltip = tooltip.toCString!(No.Malloc, No.Nullable);
+    adw_split_button_set_dropdown_tooltip(cast(AdwSplitButton*)this._cPtr, _tooltip);
+  }
+
+  /**
+      Sets the name of the icon used to automatically populate the button.
+      
+      Setting the icon name will set [gid.adw1.split_button.SplitButton.label] and
+      [gid.adw1.split_button.SplitButton.child] to `NULL`.
+  
+      Params:
+        iconName = the icon name to set
+  */
+  void setIconName(string iconName) nothrow
+  {
+    const(char)* _iconName = iconName.toCString!(No.Malloc, No.Nullable);
+    adw_split_button_set_icon_name(cast(AdwSplitButton*)this._cPtr, _iconName);
+  }
+
+  /**
+      Sets the label for self.
+      
+      Setting the label will set [gid.adw1.split_button.SplitButton.iconName] and
+      [gid.adw1.split_button.SplitButton.child] to `NULL`.
+  
+      Params:
+        label = the label to set
+  */
+  void setLabel(string label) nothrow
+  {
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
+    adw_split_button_set_label(cast(AdwSplitButton*)this._cPtr, _label);
+  }
+
+  /**
+      Sets the menu model from which the popup will be created.
+      
+      If the menu model is `NULL`, the dropdown is disabled.
+      
+      A [gid.gtk4.popover.Popover] will be created from the menu model with
+      [gid.gtk4.popover_menu.PopoverMenu.newFromModel]. Actions will be connected as
+      documented for this function.
+      
+      If [gid.adw1.split_button.SplitButton.popover] is already set, it will be dissociated from
+      the button, and the property is set to `NULL`.
+  
+      Params:
+        menuModel = the menu model
+  */
+  void setMenuModel(gid.gio2.menu_model.MenuModel menuModel = null) nothrow
+  {
+    adw_split_button_set_menu_model(cast(AdwSplitButton*)this._cPtr, menuModel ? cast(GMenuModel*)menuModel._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the popover that will be popped up when the dropdown is clicked.
+      
+      If the popover is `NULL`, the dropdown is disabled.
+      
+      If [gid.adw1.split_button.SplitButton.menuModel] is set, the menu model is dissociated
+      from the button, and the property is set to `NULL`.
+  
+      Params:
+        popover = the popover
+  */
+  void setPopover(gid.gtk4.popover.Popover popover = null) nothrow
+  {
+    adw_split_button_set_popover(cast(AdwSplitButton*)this._cPtr, popover ? cast(GtkPopover*)popover._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets whether an underline in the text indicates a mnemonic.
+      
+      See [gid.adw1.split_button.SplitButton.label].
+  
+      Params:
+        useUnderline = whether an underline in the text indicates a mnemonic
+  */
+  void setUseUnderline(bool useUnderline) nothrow
+  {
+    adw_split_button_set_use_underline(cast(AdwSplitButton*)this._cPtr, useUnderline);
+  }
+
+  /**
+      Connect to `Activate` signal.
+  
+      Emitted to animate press then release.
+        
+        This is an action signal. Applications should never connect to this signal,
+        but use the [gid.adw1.split_button.SplitButton.clicked] signal.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.adw1.split_button.SplitButton splitButton)`
+  
+          `splitButton` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.adw1.split_button.SplitButton)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.adw1.split_button.SplitButton.activate");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("activate", closure, after);
+  }
+
+  /**
+      Connect to `Clicked` signal.
+  
+      Emitted when the button has been activated (pressed and released).
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.adw1.split_button.SplitButton splitButton)`
+  
+          `splitButton` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectClicked(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.adw1.split_button.SplitButton)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.adw1.split_button.SplitButton.clicked");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("clicked", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.adw1.split_button.SplitButton]
+class SplitButtonGidBuilderImpl(T) : gid.gtk4.widget.WidgetGidBuilderImpl!T, gid.gtk4.actionable.ActionableGidBuilderImpl!T
+{
+
+  mixin ActionableGidBuilderT!();
+
+  /**
+      Set `canShrink` property.
+      Params:
+        propval = Whether the button can be smaller than the natural size of its contents.
+          
+          If set to `TRUE`, the label will ellipsize.
+          
+          See [gid.gtk4.button.Button.canShrink] and
+          [gid.gtk4.menu_button.MenuButton.canShrink].
+      Returns: Builder instance for fluent chaining
+  */
+  T canShrink(bool propval) nothrow
+  {
+    return setProperty("can-shrink", propval);
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+          
+          Setting the child widget will set [gid.adw1.split_button.SplitButton.label] and
+          [gid.adw1.split_button.SplitButton.iconName] to `NULL`.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gid.gtk4.widget.Widget propval) nothrow
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `direction` property.
+      Params:
+        propval = The direction in which the popup will be popped up.
+          
+          The dropdown arrow icon will point at the same direction.
+          
+          If the does not fit in the available space in the given direction, GTK will
+          try its best to keep it inside the screen and fully visible.
+          
+          [gid.gtk4.types.ArrowType.None] behaves same as [gid.gtk4.types.ArrowType.Down].
+      Returns: Builder instance for fluent chaining
+  */
+  T direction(gid.gtk4.types.ArrowType propval) nothrow
+  {
+    return setProperty("direction", propval);
+  }
+
+  /**
+      Set `dropdownTooltip` property.
+      Params:
+        propval = The tooltip of the dropdown button.
+          
+          The tooltip can be marked up with the Pango text markup language.
+      Returns: Builder instance for fluent chaining
+  */
+  T dropdownTooltip(string propval) nothrow
+  {
+    return setProperty("dropdown-tooltip", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The name of the icon used to automatically populate the button.
+          
+          Setting the icon name will set [gid.adw1.split_button.SplitButton.label] and
+          [gid.adw1.split_button.SplitButton.child] to `NULL`.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconName(string propval) nothrow
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /**
+      Set `label` property.
+      Params:
+        propval = The label for the button.
+          
+          Setting the label will set [gid.adw1.split_button.SplitButton.iconName] and
+          [gid.adw1.split_button.SplitButton.child] to `NULL`.
+      Returns: Builder instance for fluent chaining
+  */
+  T label(string propval) nothrow
+  {
+    return setProperty("label", propval);
+  }
+
+  /**
+      Set `menuModel` property.
+      Params:
+        propval = The [gid.gio2.menu_model.MenuModel] from which the popup will be created.
+          
+          If the menu model is `NULL`, the dropdown is disabled.
+          
+          A [gid.gtk4.popover.Popover] will be created from the menu model with
+          [gid.gtk4.popover_menu.PopoverMenu.newFromModel]. Actions will be connected as
+          documented for this function.
+          
+          If [gid.adw1.split_button.SplitButton.popover] is already set, it will be dissociated
+          from the button, and the property is set to `NULL`.
+      Returns: Builder instance for fluent chaining
+  */
+  T menuModel(gid.gio2.menu_model.MenuModel propval) nothrow
+  {
+    return setProperty("menu-model", propval);
+  }
+
+  /**
+      Set `popover` property.
+      Params:
+        propval = The [gid.gtk4.popover.Popover] that will be popped up when the dropdown is clicked.
+          
+          If the popover is `NULL`, the dropdown is disabled.
+          
+          If [gid.adw1.split_button.SplitButton.menuModel] is set, the menu model is dissociated
+          from the button, and the property is set to `NULL`.
+      Returns: Builder instance for fluent chaining
+  */
+  T popover(gid.gtk4.popover.Popover propval) nothrow
+  {
+    return setProperty("popover", propval);
+  }
+
+  /**
+      Set `useUnderline` property.
+      Params:
+        propval = Whether an underline in the text indicates a mnemonic.
+          
+          See [gid.adw1.split_button.SplitButton.label].
+      Returns: Builder instance for fluent chaining
+  */
+  T useUnderline(bool propval) nothrow
+  {
+    return setProperty("use-underline", propval);
+  }
+}
+
+/// Fluent builder for [gid.adw1.split_button.SplitButton]
+final class SplitButtonGidBuilder : SplitButtonGidBuilderImpl!SplitButtonGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  SplitButton build() nothrow
+  {
+    return new SplitButton(cast(void*)createGObject(SplitButton._getGType), Yes.Take);
+  }
+}

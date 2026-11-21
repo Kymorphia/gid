@@ -1,0 +1,392 @@
+/// Module for [ListBoxRow] class
+module gid.gtk4.list_box_row;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.accessible;
+import gid.gtk4.accessible_mixin;
+import gid.gtk4.actionable;
+import gid.gtk4.actionable_mixin;
+import gid.gtk4.buildable;
+import gid.gtk4.buildable_mixin;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.constraint_target;
+import gid.gtk4.constraint_target_mixin;
+import gid.gtk4.types;
+import gid.gtk4.widget;
+
+/**
+    The kind of widget that can be added to a [gid.gtk4.list_box.ListBox].
+    
+    [gid.gtk4.list_box.ListBox] will automatically wrap its children in a `GtkListboxRow`
+    when necessary.
+*/
+class ListBoxRow : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_list_box_row_get_type != &gidSymbolNotFound ? gtk_list_box_row_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkListBoxRow";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ListBoxRow self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.list_box_row.ListBoxRow]
+      Returns: New builder object
+  */
+  static ListBoxRowGidBuilder builder() nothrow
+  {
+    return new ListBoxRowGidBuilder;
+  }
+
+  /**
+      Get `activatable` property.
+      Returns: Determines whether the ::row-activated
+        signal will be emitted for this row.
+  */
+  @property bool activatable() nothrow
+  {
+    return getActivatable();
+  }
+
+  /**
+      Set `activatable` property.
+      Params:
+        propval = Determines whether the ::row-activated
+          signal will be emitted for this row.
+  */
+  @property void activatable(bool propval) nothrow
+  {
+    setActivatable(propval);
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gid.gtk4.widget.Widget child() nothrow
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gid.gtk4.widget.Widget propval) nothrow
+  {
+    setChild(propval);
+  }
+
+  /**
+      Get `selectable` property.
+      Returns: Determines whether this row can be selected.
+  */
+  @property bool selectable() nothrow
+  {
+    return getSelectable();
+  }
+
+  /**
+      Set `selectable` property.
+      Params:
+        propval = Determines whether this row can be selected.
+  */
+  @property void selectable(bool propval) nothrow
+  {
+    setSelectable(propval);
+  }
+
+  mixin ActionableT!();
+
+  /**
+      Creates a new [gid.gtk4.list_box_row.ListBoxRow].
+      Returns: a new [gid.gtk4.list_box_row.ListBoxRow]
+  */
+  this() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_list_box_row_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Marks row as changed, causing any state that depends on this
+      to be updated.
+      
+      This affects sorting, filtering and headers.
+      
+      Note that calls to this method must be in sync with the data
+      used for the row functions. For instance, if the list is
+      mirroring some external data set, and *two* rows changed in the
+      external data set then when you call [gid.gtk4.list_box_row.ListBoxRow.changed]
+      on the first row the sort function must only read the new data
+      for the first of the two changed rows, otherwise the resorting
+      of the rows will be wrong.
+      
+      This generally means that if you don’t fully control the data
+      model you have to duplicate the data that affects the listbox
+      row functions into the row widgets themselves. Another alternative
+      is to call [gid.gtk4.list_box.ListBox.invalidateSort] on any model change,
+      but that is more expensive.
+  */
+  void changed() nothrow
+  {
+    gtk_list_box_row_changed(cast(GtkListBoxRow*)this._cPtr);
+  }
+
+  /**
+      Gets whether the row is activatable.
+      Returns: true if the row is activatable
+  */
+  bool getActivatable() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_list_box_row_get_activatable(cast(GtkListBoxRow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the child widget of row.
+      Returns: the child widget of row
+  */
+  gid.gtk4.widget.Widget getChild() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_list_box_row_get_child(cast(GtkListBoxRow*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the current header of the row.
+      
+      This can be used
+      in a [gid.gtk4.types.ListBoxUpdateHeaderFunc] to see if
+      there is a header set already, and if so to update
+      the state of it.
+      Returns: the current header
+  */
+  gid.gtk4.widget.Widget getHeader() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_list_box_row_get_header(cast(GtkListBoxRow*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the current index of the row in its [gid.gtk4.list_box.ListBox] container.
+      Returns: the index of the row, or -1 if the row is not in a listbox
+  */
+  int getIndex() nothrow
+  {
+    int _retval;
+    _retval = gtk_list_box_row_get_index(cast(GtkListBoxRow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether the row can be selected.
+      Returns: true if the row is selectable
+  */
+  bool getSelectable() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_list_box_row_get_selectable(cast(GtkListBoxRow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns whether the child is currently selected in its
+      [gid.gtk4.list_box.ListBox] container.
+      Returns: true if row is selected
+  */
+  bool isSelected() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_list_box_row_is_selected(cast(GtkListBoxRow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Set whether the row is activatable.
+  
+      Params:
+        activatable = true to mark the row as activatable
+  */
+  void setActivatable(bool activatable) nothrow
+  {
+    gtk_list_box_row_set_activatable(cast(GtkListBoxRow*)this._cPtr, activatable);
+  }
+
+  /**
+      Sets the child widget of self.
+  
+      Params:
+        child = the child widget
+  */
+  void setChild(gid.gtk4.widget.Widget child = null) nothrow
+  {
+    gtk_list_box_row_set_child(cast(GtkListBoxRow*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the current header of the row.
+      
+      This is only allowed to be called
+      from a [gid.gtk4.types.ListBoxUpdateHeaderFunc].
+      It will replace any existing header in the row,
+      and be shown in front of the row in the listbox.
+  
+      Params:
+        header = the header
+  */
+  void setHeader(gid.gtk4.widget.Widget header = null) nothrow
+  {
+    gtk_list_box_row_set_header(cast(GtkListBoxRow*)this._cPtr, header ? cast(GtkWidget*)header._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Set whether the row can be selected.
+  
+      Params:
+        selectable = true to mark the row as selectable
+  */
+  void setSelectable(bool selectable) nothrow
+  {
+    gtk_list_box_row_set_selectable(cast(GtkListBoxRow*)this._cPtr, selectable);
+  }
+
+  /**
+      Connect to `Activate` signal.
+  
+      This is a keybinding signal, which will cause this row to be activated.
+        
+        If you want to be notified when the user activates a row (by key or not),
+        use the [gid.gtk4.list_box.ListBox.rowActivated] signal on the row’s parent
+        [gid.gtk4.list_box.ListBox].
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk4.list_box_row.ListBoxRow listBoxRow)`
+  
+          `listBoxRow` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk4.list_box_row.ListBoxRow)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.list_box_row.ListBoxRow.activate");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("activate", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.list_box_row.ListBoxRow]
+class ListBoxRowGidBuilderImpl(T) : gid.gtk4.widget.WidgetGidBuilderImpl!T, gid.gtk4.actionable.ActionableGidBuilderImpl!T
+{
+
+  mixin ActionableGidBuilderT!();
+
+  /**
+      Set `activatable` property.
+      Params:
+        propval = Determines whether the ::row-activated
+          signal will be emitted for this row.
+      Returns: Builder instance for fluent chaining
+  */
+  T activatable(bool propval) nothrow
+  {
+    return setProperty("activatable", propval);
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gid.gtk4.widget.Widget propval) nothrow
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `selectable` property.
+      Params:
+        propval = Determines whether this row can be selected.
+      Returns: Builder instance for fluent chaining
+  */
+  T selectable(bool propval) nothrow
+  {
+    return setProperty("selectable", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk4.list_box_row.ListBoxRow]
+final class ListBoxRowGidBuilder : ListBoxRowGidBuilderImpl!ListBoxRowGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  ListBoxRow build() nothrow
+  {
+    return new ListBoxRow(cast(void*)createGObject(ListBoxRow._getGType), Yes.Take);
+  }
+}

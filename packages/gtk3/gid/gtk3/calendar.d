@@ -1,0 +1,942 @@
+/// Module for [Calendar] class
+module gid.gtk3.calendar;
+
+public import gid.core.basictypes;
+import gid.atk1.implementor_iface;
+import gid.atk1.implementor_iface_mixin;
+import gid.core.gid;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk3.buildable;
+import gid.gtk3.buildable_mixin;
+import gid.gtk3.c.functions;
+import gid.gtk3.c.types;
+import gid.gtk3.types;
+import gid.gtk3.widget;
+
+/**
+    #GtkCalendar is a widget that displays a Gregorian calendar, one month
+    at a time. It can be created with [gid.gtk4.calendar.Calendar.new_].
+    
+    The month and year currently displayed can be altered with
+    [gid.gtk3.calendar.Calendar.selectMonth]. The exact day can be selected from the
+    displayed month using [gid.gtk4.calendar.Calendar.selectDay].
+    
+    To place a visual marker on a particular day, use [gid.gtk4.calendar.Calendar.markDay]
+    and to remove the marker, [gid.gtk4.calendar.Calendar.unmarkDay]. Alternative, all
+    marks can be cleared with [gid.gtk4.calendar.Calendar.clearMarks].
+    
+    The way in which the calendar itself is displayed can be altered using
+    [gid.gtk3.calendar.Calendar.setDisplayOptions].
+    
+    The selected date can be retrieved from a #GtkCalendar using
+    [gid.gtk4.calendar.Calendar.getDate].
+    
+    Users should be aware that, although the Gregorian calendar is the
+    legal calendar in most countries, it was adopted progressively
+    between 1582 and 1929. Display before these dates is likely to be
+    historically incorrect.
+*/
+class Calendar : gid.gtk3.widget.Widget
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_calendar_get_type != &gidSymbolNotFound ? gtk_calendar_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkCalendar";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Calendar self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk3.calendar.Calendar]
+      Returns: New builder object
+  */
+  static CalendarGidBuilder builder() nothrow
+  {
+    return new CalendarGidBuilder;
+  }
+
+  /**
+      Get `day` property.
+      Returns: The selected day (as a number between 1 and 31, or 0
+        to unselect the currently selected day).
+        This property gets initially set to the current day.
+  */
+  @property int day() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(int)("day");
+  }
+
+  /**
+      Set `day` property.
+      Params:
+        propval = The selected day (as a number between 1 and 31, or 0
+          to unselect the currently selected day).
+          This property gets initially set to the current day.
+  */
+  @property void day(int propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(int)("day", propval);
+  }
+
+  /**
+      Get `detailHeightRows` property.
+      Returns: Height of a detail cell, in rows.
+        A value of 0 allows any width. See [gid.gtk3.calendar.Calendar.setDetailFunc].
+  */
+  @property int detailHeightRows() nothrow
+  {
+    return getDetailHeightRows();
+  }
+
+  /**
+      Set `detailHeightRows` property.
+      Params:
+        propval = Height of a detail cell, in rows.
+          A value of 0 allows any width. See [gid.gtk3.calendar.Calendar.setDetailFunc].
+  */
+  @property void detailHeightRows(int propval) nothrow
+  {
+    setDetailHeightRows(propval);
+  }
+
+  /**
+      Get `detailWidthChars` property.
+      Returns: Width of a detail cell, in characters.
+        A value of 0 allows any width. See [gid.gtk3.calendar.Calendar.setDetailFunc].
+  */
+  @property int detailWidthChars() nothrow
+  {
+    return getDetailWidthChars();
+  }
+
+  /**
+      Set `detailWidthChars` property.
+      Params:
+        propval = Width of a detail cell, in characters.
+          A value of 0 allows any width. See [gid.gtk3.calendar.Calendar.setDetailFunc].
+  */
+  @property void detailWidthChars(int propval) nothrow
+  {
+    setDetailWidthChars(propval);
+  }
+
+  /**
+      Get `month` property.
+      Returns: The selected month (as a number between 0 and 11).
+        This property gets initially set to the current month.
+  */
+  @property int month() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(int)("month");
+  }
+
+  /**
+      Set `month` property.
+      Params:
+        propval = The selected month (as a number between 0 and 11).
+          This property gets initially set to the current month.
+  */
+  @property void month(int propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(int)("month", propval);
+  }
+
+  /**
+      Get `noMonthChange` property.
+      Returns: Determines whether the selected month can be changed.
+  */
+  @property bool noMonthChange() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("no-month-change");
+  }
+
+  /**
+      Set `noMonthChange` property.
+      Params:
+        propval = Determines whether the selected month can be changed.
+  */
+  @property void noMonthChange(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("no-month-change", propval);
+  }
+
+  /**
+      Get `showDayNames` property.
+      Returns: Determines whether day names are displayed.
+  */
+  @property bool showDayNames() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("show-day-names");
+  }
+
+  /**
+      Set `showDayNames` property.
+      Params:
+        propval = Determines whether day names are displayed.
+  */
+  @property void showDayNames(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("show-day-names", propval);
+  }
+
+  /**
+      Get `showDetails` property.
+      Returns: Determines whether details are shown directly in the widget, or if they are
+        available only as tooltip. When this property is set days with details are
+        marked.
+  */
+  @property bool showDetails() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("show-details");
+  }
+
+  /**
+      Set `showDetails` property.
+      Params:
+        propval = Determines whether details are shown directly in the widget, or if they are
+          available only as tooltip. When this property is set days with details are
+          marked.
+  */
+  @property void showDetails(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("show-details", propval);
+  }
+
+  /**
+      Get `showHeading` property.
+      Returns: Determines whether a heading is displayed.
+  */
+  @property bool showHeading() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("show-heading");
+  }
+
+  /**
+      Set `showHeading` property.
+      Params:
+        propval = Determines whether a heading is displayed.
+  */
+  @property void showHeading(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("show-heading", propval);
+  }
+
+  /**
+      Get `showWeekNumbers` property.
+      Returns: Determines whether week numbers are displayed.
+  */
+  @property bool showWeekNumbers() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("show-week-numbers");
+  }
+
+  /**
+      Set `showWeekNumbers` property.
+      Params:
+        propval = Determines whether week numbers are displayed.
+  */
+  @property void showWeekNumbers(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("show-week-numbers", propval);
+  }
+
+  /**
+      Get `year` property.
+      Returns: The selected year.
+        This property gets initially set to the current year.
+  */
+  @property int year() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(int)("year");
+  }
+
+  /**
+      Set `year` property.
+      Params:
+        propval = The selected year.
+          This property gets initially set to the current year.
+  */
+  @property void year(int propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(int)("year", propval);
+  }
+
+  /**
+      Creates a new calendar, with the current date being selected.
+      Returns: a newly #GtkCalendar widget
+  */
+  this() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_calendar_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Remove all visual markers.
+  */
+  void clearMarks() nothrow
+  {
+    gtk_calendar_clear_marks(cast(GtkCalendar*)this._cPtr);
+  }
+
+  /**
+      Obtains the selected date from a #GtkCalendar.
+  
+      Params:
+        year = location to store the year as a decimal
+              number (e.g. 2011), or null
+        month = location to store the month number
+              (between 0 and 11), or null
+        day = location to store the day number (between
+              1 and 31), or null
+  */
+  void getDate(out uint year, out uint month, out uint day) nothrow
+  {
+    gtk_calendar_get_date(cast(GtkCalendar*)this._cPtr, cast(uint*)&year, cast(uint*)&month, cast(uint*)&day);
+  }
+
+  /**
+      Returns if the day of the calendar is already marked.
+  
+      Params:
+        day = the day number between 1 and 31.
+      Returns: whether the day is marked.
+  */
+  bool getDayIsMarked(uint day) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_calendar_get_day_is_marked(cast(GtkCalendar*)this._cPtr, day);
+    return _retval;
+  }
+
+  /**
+      Queries the height of detail cells, in rows.
+      See #GtkCalendar:detail-width-chars.
+      Returns: The height of detail cells, in rows.
+  */
+  int getDetailHeightRows() nothrow
+  {
+    int _retval;
+    _retval = gtk_calendar_get_detail_height_rows(cast(GtkCalendar*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Queries the width of detail cells, in characters.
+      See #GtkCalendar:detail-width-chars.
+      Returns: The width of detail cells, in characters.
+  */
+  int getDetailWidthChars() nothrow
+  {
+    int _retval;
+    _retval = gtk_calendar_get_detail_width_chars(cast(GtkCalendar*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the current display options of calendar.
+      Returns: the display options.
+  */
+  gid.gtk3.types.CalendarDisplayOptions getDisplayOptions() nothrow
+  {
+    GtkCalendarDisplayOptions _cretval;
+    _cretval = gtk_calendar_get_display_options(cast(GtkCalendar*)this._cPtr);
+    gid.gtk3.types.CalendarDisplayOptions _retval = cast(gid.gtk3.types.CalendarDisplayOptions)_cretval;
+    return _retval;
+  }
+
+  /**
+      Places a visual marker on a particular day.
+  
+      Params:
+        day = the day number to mark between 1 and 31.
+  */
+  void markDay(uint day) nothrow
+  {
+    gtk_calendar_mark_day(cast(GtkCalendar*)this._cPtr, day);
+  }
+
+  /**
+      Selects a day from the current month.
+  
+      Params:
+        day = the day number between 1 and 31, or 0 to unselect
+            the currently selected day.
+  */
+  void selectDay(uint day) nothrow
+  {
+    gtk_calendar_select_day(cast(GtkCalendar*)this._cPtr, day);
+  }
+
+  /**
+      Shifts the calendar to a different month.
+  
+      Params:
+        month = a month number between 0 and 11.
+        year = the year the month is in.
+  */
+  void selectMonth(uint month, uint year) nothrow
+  {
+    gtk_calendar_select_month(cast(GtkCalendar*)this._cPtr, month, year);
+  }
+
+  /**
+      Installs a function which provides Pango markup with detail information
+      for each day. Examples for such details are holidays or appointments. That
+      information is shown below each day when #GtkCalendar:show-details is set.
+      A tooltip containing with full detail information is provided, if the entire
+      text should not fit into the details area, or if #GtkCalendar:show-details
+      is not set.
+      
+      The size of the details area can be restricted by setting the
+      #GtkCalendar:detail-width-chars and #GtkCalendar:detail-height-rows
+      properties.
+  
+      Params:
+        func = a function providing details for each day.
+  */
+  void setDetailFunc(gid.gtk3.types.CalendarDetailFunc func) nothrow
+  {
+    extern(C) char* _funcCallback(GtkCalendar* calendar, uint year, uint month, uint day, void* userData) nothrow
+    {
+      string _dretval;
+      auto _dlg = cast(gid.gtk3.types.CalendarDetailFunc*)userData;
+
+      try
+      {
+        _dretval = (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.calendar.Calendar)(cast(void*)calendar, No.Take), year, month, day);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.types.CalendarDetailFunc");
+      }
+      auto _retval = toCString!(Yes.Malloc, Yes.Nullable)(_dretval);
+
+      return _retval;
+    }
+    auto _funcCB = func ? &_funcCallback : null;
+    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+    gtk_calendar_set_detail_func(cast(GtkCalendar*)this._cPtr, _funcCB, _func, _funcDestroyCB);
+  }
+
+  /**
+      Updates the height of detail cells.
+      See #GtkCalendar:detail-height-rows.
+  
+      Params:
+        rows = detail height in rows.
+  */
+  void setDetailHeightRows(int rows) nothrow
+  {
+    gtk_calendar_set_detail_height_rows(cast(GtkCalendar*)this._cPtr, rows);
+  }
+
+  /**
+      Updates the width of detail cells.
+      See #GtkCalendar:detail-width-chars.
+  
+      Params:
+        chars = detail width in characters.
+  */
+  void setDetailWidthChars(int chars) nothrow
+  {
+    gtk_calendar_set_detail_width_chars(cast(GtkCalendar*)this._cPtr, chars);
+  }
+
+  /**
+      Sets display options (whether to display the heading and the month
+      headings).
+  
+      Params:
+        flags = the display options to set
+  */
+  void setDisplayOptions(gid.gtk3.types.CalendarDisplayOptions flags) nothrow
+  {
+    gtk_calendar_set_display_options(cast(GtkCalendar*)this._cPtr, flags);
+  }
+
+  /**
+      Removes the visual marker from a particular day.
+  
+      Params:
+        day = the day number to unmark between 1 and 31.
+  */
+  void unmarkDay(uint day) nothrow
+  {
+    gtk_calendar_unmark_day(cast(GtkCalendar*)this._cPtr, day);
+  }
+
+  /**
+      Connect to `DaySelected` signal.
+  
+      Emitted when the user selects a day.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk3.calendar.Calendar calendar)`
+  
+          `calendar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectDaySelected(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk3.calendar.Calendar)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.calendar.Calendar.daySelected");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("day-selected", closure, after);
+  }
+
+  /**
+      Connect to `DaySelectedDoubleClick` signal.
+  
+      Emitted when the user double-clicks a day.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk3.calendar.Calendar calendar)`
+  
+          `calendar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectDaySelectedDoubleClick(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk3.calendar.Calendar)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.calendar.Calendar.daySelectedDoubleClick");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("day-selected-double-click", closure, after);
+  }
+
+  /**
+      Connect to `MonthChanged` signal.
+  
+      Emitted when the user clicks a button to change the selected month on a
+        calendar.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk3.calendar.Calendar calendar)`
+  
+          `calendar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectMonthChanged(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk3.calendar.Calendar)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.calendar.Calendar.monthChanged");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("month-changed", closure, after);
+  }
+
+  /**
+      Connect to `NextMonth` signal.
+  
+      Emitted when the user switched to the next month.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk3.calendar.Calendar calendar)`
+  
+          `calendar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectNextMonth(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk3.calendar.Calendar)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.calendar.Calendar.nextMonth");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("next-month", closure, after);
+  }
+
+  /**
+      Connect to `NextYear` signal.
+  
+      Emitted when user switched to the next year.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk3.calendar.Calendar calendar)`
+  
+          `calendar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectNextYear(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk3.calendar.Calendar)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.calendar.Calendar.nextYear");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("next-year", closure, after);
+  }
+
+  /**
+      Connect to `PrevMonth` signal.
+  
+      Emitted when the user switched to the previous month.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk3.calendar.Calendar calendar)`
+  
+          `calendar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectPrevMonth(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk3.calendar.Calendar)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.calendar.Calendar.prevMonth");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("prev-month", closure, after);
+  }
+
+  /**
+      Connect to `PrevYear` signal.
+  
+      Emitted when user switched to the previous year.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk3.calendar.Calendar calendar)`
+  
+          `calendar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectPrevYear(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk3.calendar.Calendar)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.calendar.Calendar.prevYear");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("prev-year", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk3.calendar.Calendar]
+class CalendarGidBuilderImpl(T) : gid.gtk3.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `day` property.
+      Params:
+        propval = The selected day (as a number between 1 and 31, or 0
+          to unselect the currently selected day).
+          This property gets initially set to the current day.
+      Returns: Builder instance for fluent chaining
+  */
+  T day(int propval) nothrow
+  {
+    return setProperty("day", propval);
+  }
+
+  /**
+      Set `detailHeightRows` property.
+      Params:
+        propval = Height of a detail cell, in rows.
+          A value of 0 allows any width. See [gid.gtk3.calendar.Calendar.setDetailFunc].
+      Returns: Builder instance for fluent chaining
+  */
+  T detailHeightRows(int propval) nothrow
+  {
+    return setProperty("detail-height-rows", propval);
+  }
+
+  /**
+      Set `detailWidthChars` property.
+      Params:
+        propval = Width of a detail cell, in characters.
+          A value of 0 allows any width. See [gid.gtk3.calendar.Calendar.setDetailFunc].
+      Returns: Builder instance for fluent chaining
+  */
+  T detailWidthChars(int propval) nothrow
+  {
+    return setProperty("detail-width-chars", propval);
+  }
+
+  /**
+      Set `month` property.
+      Params:
+        propval = The selected month (as a number between 0 and 11).
+          This property gets initially set to the current month.
+      Returns: Builder instance for fluent chaining
+  */
+  T month(int propval) nothrow
+  {
+    return setProperty("month", propval);
+  }
+
+  /**
+      Set `noMonthChange` property.
+      Params:
+        propval = Determines whether the selected month can be changed.
+      Returns: Builder instance for fluent chaining
+  */
+  T noMonthChange(bool propval) nothrow
+  {
+    return setProperty("no-month-change", propval);
+  }
+
+  /**
+      Set `showDayNames` property.
+      Params:
+        propval = Determines whether day names are displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T showDayNames(bool propval) nothrow
+  {
+    return setProperty("show-day-names", propval);
+  }
+
+  /**
+      Set `showDetails` property.
+      Params:
+        propval = Determines whether details are shown directly in the widget, or if they are
+          available only as tooltip. When this property is set days with details are
+          marked.
+      Returns: Builder instance for fluent chaining
+  */
+  T showDetails(bool propval) nothrow
+  {
+    return setProperty("show-details", propval);
+  }
+
+  /**
+      Set `showHeading` property.
+      Params:
+        propval = Determines whether a heading is displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T showHeading(bool propval) nothrow
+  {
+    return setProperty("show-heading", propval);
+  }
+
+  /**
+      Set `showWeekNumbers` property.
+      Params:
+        propval = Determines whether week numbers are displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T showWeekNumbers(bool propval) nothrow
+  {
+    return setProperty("show-week-numbers", propval);
+  }
+
+  /**
+      Set `year` property.
+      Params:
+        propval = The selected year.
+          This property gets initially set to the current year.
+      Returns: Builder instance for fluent chaining
+  */
+  T year(int propval) nothrow
+  {
+    return setProperty("year", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk3.calendar.Calendar]
+final class CalendarGidBuilder : CalendarGidBuilderImpl!CalendarGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Calendar build() nothrow
+  {
+    return new Calendar(cast(void*)createGObject(Calendar._getGType), Yes.Take);
+  }
+}

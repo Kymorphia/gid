@@ -61,7 +61,7 @@
   */
   ubyte[] resetAndGetData() nothrow
   {
-    import glib.c.functions : g_free;
+    import gid.glib2.c.functions : g_free;
 
     auto writer = cast(GstBitWriter*)this._cPtr;
     auto size = (writer.bitSize + 7) / 8;
@@ -83,7 +83,7 @@
   */
   ubyte[] resetAndGetData() nothrow
   {
-    import glib.c.functions : g_free;
+    import gid.glib2.c.functions : g_free;
 
     auto writer = cast(GstByteWriter*)this._cPtr;
     auto size = writer.parent.size;

@@ -1,0 +1,26 @@
+/// Global functions for gstglegl1 library
+module gid.gstglegl1.global;
+
+import gid.core.gid;
+import gid.gst1.memory;
+import gid.gstglegl1.c.functions;
+import gid.gstglegl1.c.types;
+import gid.gstglegl1.types;
+
+
+/** */
+string eglGetErrorString(int err) nothrow
+{
+  const(char)* _cretval;
+  _cretval = gst_egl_get_error_string(err);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+  return _retval;
+}
+
+/** */
+bool isGlMemoryEgl(gid.gst1.memory.Memory mem) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_is_gl_memory_egl(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
+  return _retval;
+}

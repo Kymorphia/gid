@@ -1,0 +1,276 @@
+/// Module for [ShortcutTrigger] class
+module gid.gtk4.shortcut_trigger;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gdk4.display;
+import gid.gdk4.event;
+import gid.gdk4.types;
+import gid.glib2.string_;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.types;
+
+/**
+    Tracks how a [gid.gtk4.shortcut.Shortcut] can be activated.
+    
+    To find out if a [gid.gtk4.shortcut_trigger.ShortcutTrigger] triggers, you can call
+    [gid.gtk4.shortcut_trigger.ShortcutTrigger.trigger] on a [gid.gdk4.event.Event].
+    
+    `GtkShortcutTriggers` contain functions that allow easy presentation
+    to end users as well as being printed for debugging.
+    
+    All `GtkShortcutTriggers` are immutable, you can only specify their
+    properties during construction. If you want to change a trigger, you
+    have to replace it with a new one.
+*/
+class ShortcutTrigger : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_shortcut_trigger_get_type != &gidSymbolNotFound ? gtk_shortcut_trigger_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkShortcutTrigger";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ShortcutTrigger self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.shortcut_trigger.ShortcutTrigger]
+      Returns: New builder object
+  */
+  static ShortcutTriggerGidBuilder builder() nothrow
+  {
+    return new ShortcutTriggerGidBuilder;
+  }
+
+  /**
+      Tries to parse the given string into a trigger.
+      
+      On success, the parsed trigger is returned.
+      When parsing failed, null is returned.
+      
+      The accepted strings are:
+      
+        - `never`, for [gid.gtk4.never_trigger.NeverTrigger]
+        - a string parsed by [gid.gtk4.global.acceleratorParse], for a [gid.gtk4.keyval_trigger.KeyvalTrigger], e.g. `<Control>C`
+        - underscore, followed by a single character, for [gid.gtk4.mnemonic_trigger.MnemonicTrigger], e.g. `_l`
+        - two valid trigger strings, separated by a `|` character, for a
+          [gid.gtk4.alternative_trigger.AlternativeTrigger]: `<Control>q|<Control>w`
+      
+      Note that you will have to escape the `<` and `>` characters when specifying
+      triggers in XML files, such as GtkBuilder ui files. Use `&lt;` instead of
+      `<` and `&gt;` instead of `>`.
+  
+      Params:
+        string_ = the string to parse
+      Returns: a new [gid.gtk4.shortcut_trigger.ShortcutTrigger]
+  */
+  static gid.gtk4.shortcut_trigger.ShortcutTrigger parseString(string string_) nothrow
+  {
+    GtkShortcutTrigger* _cretval;
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
+    _cretval = gtk_shortcut_trigger_parse_string(_string_);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      The types of trigger1 and trigger2 are `gconstpointer` only to allow
+      use of this function as a [gid.glib2.types.CompareFunc].
+      
+      They must each be a [gid.gtk4.shortcut_trigger.ShortcutTrigger].
+  
+      Params:
+        trigger2 = a [gid.gtk4.shortcut_trigger.ShortcutTrigger]
+      Returns: An integer less than, equal to, or greater than zero if
+          trigger1 is found, respectively, to be less than, to match,
+          or be greater than trigger2.
+  */
+  int compare(gid.gtk4.shortcut_trigger.ShortcutTrigger trigger2) nothrow
+  {
+    int _retval;
+    _retval = gtk_shortcut_trigger_compare(cast(GtkShortcutTrigger*)this._cPtr, trigger2 ? cast(GtkShortcutTrigger*)trigger2._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Checks if trigger1 and trigger2 trigger under the same conditions.
+      
+      The types of one and two are `gconstpointer` only to allow use of this
+      function with [gid.glib2.hash_table.HashTable]. They must each be a [gid.gtk4.shortcut_trigger.ShortcutTrigger].
+  
+      Params:
+        trigger2 = a [gid.gtk4.shortcut_trigger.ShortcutTrigger]
+      Returns: true if trigger1 and trigger2 are equal
+  */
+  bool equal(gid.gtk4.shortcut_trigger.ShortcutTrigger trigger2) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_shortcut_trigger_equal(cast(GtkShortcutTrigger*)this._cPtr, trigger2 ? cast(GtkShortcutTrigger*)trigger2._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Generates a hash value for a [gid.gtk4.shortcut_trigger.ShortcutTrigger].
+      
+      The output of this function is guaranteed to be the same for a given
+      value only per-process. It may change between different processor
+      architectures or even different versions of GTK. Do not use this
+      function as a basis for building protocols or file formats.
+      
+      The types of trigger is `gconstpointer` only to allow use of this
+      function with [gid.glib2.hash_table.HashTable]. They must each be a [gid.gtk4.shortcut_trigger.ShortcutTrigger].
+      Returns: a hash value corresponding to trigger
+  */
+  uint hash() nothrow
+  {
+    uint _retval;
+    _retval = gtk_shortcut_trigger_hash(cast(GtkShortcutTrigger*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Prints the given trigger into a string for the developer.
+      This is meant for debugging and logging.
+      
+      The form of the representation may change at any time
+      and is not guaranteed to stay identical.
+  
+      Params:
+        string_ = a [gid.glib2.string_.String] to print into
+  */
+  void print(gid.glib2.string_.String string_) nothrow
+  {
+    gtk_shortcut_trigger_print(cast(GtkShortcutTrigger*)this._cPtr, string_ ? cast(GString*)string_._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Prints the given trigger into a string.
+      
+      This function is returning a translated string for presentation
+      to end users for example in menu items or in help texts.
+      
+      The display in use may influence the resulting string in
+      various forms, such as resolving hardware keycodes or by
+      causing display-specific modifier names.
+      
+      The form of the representation may change at any time and is
+      not guaranteed to stay identical.
+  
+      Params:
+        display = [gid.gdk4.display.Display] to print for
+        string_ = a [gid.glib2.string_.String] to print into
+      Returns: true if something was printed or false if the
+          trigger did not have a textual representation suitable
+          for end users.
+  */
+  bool printLabel(gid.gdk4.display.Display display, gid.glib2.string_.String string_) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_shortcut_trigger_print_label(cast(GtkShortcutTrigger*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, string_ ? cast(GString*)string_._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Gets textual representation for the given trigger.
+      
+      This function is returning a translated string for
+      presentation to end users for example in menu items
+      or in help texts.
+      
+      The display in use may influence the resulting string in
+      various forms, such as resolving hardware keycodes or by
+      causing display-specific modifier names.
+      
+      The form of the representation may change at any time and is
+      not guaranteed to stay identical.
+  
+      Params:
+        display = [gid.gdk4.display.Display] to print for
+      Returns: a new string
+  */
+  string toLabel(gid.gdk4.display.Display display) nothrow
+  {
+    char* _cretval;
+    _cretval = gtk_shortcut_trigger_to_label(cast(GtkShortcutTrigger*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Prints the given trigger into a human-readable string.
+      
+      This is a small wrapper around [gid.gtk4.shortcut_trigger.ShortcutTrigger.print]
+      to help when debugging.
+      Returns: a new string
+  */
+  string toString_() nothrow
+  {
+    char* _cretval;
+    _cretval = gtk_shortcut_trigger_to_string(cast(GtkShortcutTrigger*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Checks if the given event triggers self.
+  
+      Params:
+        event = the event to check
+        enableMnemonics = true if mnemonics should trigger. Usually the
+            value of this property is determined by checking that the passed
+            in event is a Key event and has the right modifiers set.
+      Returns: Whether the event triggered the shortcut
+  */
+  gid.gdk4.types.KeyMatch trigger(gid.gdk4.event.Event event, bool enableMnemonics) nothrow
+  {
+    GdkKeyMatch _cretval;
+    _cretval = gtk_shortcut_trigger_trigger(cast(GtkShortcutTrigger*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, enableMnemonics);
+    gid.gdk4.types.KeyMatch _retval = cast(gid.gdk4.types.KeyMatch)_cretval;
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.shortcut_trigger.ShortcutTrigger]
+class ShortcutTriggerGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gtk4.shortcut_trigger.ShortcutTrigger]
+final class ShortcutTriggerGidBuilder : ShortcutTriggerGidBuilderImpl!ShortcutTriggerGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  ShortcutTrigger build() nothrow
+  {
+    return new ShortcutTrigger(cast(void*)createGObject(ShortcutTrigger._getGType), Yes.Take);
+  }
+}

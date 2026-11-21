@@ -1,0 +1,113 @@
+/// Module for [VideoSink] class
+module gid.gstvideo1.video_sink;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gstbase1.base_sink;
+import gid.gstvideo1.c.functions;
+import gid.gstvideo1.c.types;
+import gid.gstvideo1.types;
+
+/**
+    Provides useful functions and a base class for video sinks.
+    
+    GstVideoSink will configure the default base sink to drop frames that
+    arrive later than 20ms as this is considered the default threshold for
+    observing out-of-sync frames.
+*/
+class VideoSink : gid.gstbase1.base_sink.BaseSink
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gst_video_sink_get_type != &gidSymbolNotFound ? gst_video_sink_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstVideoSink";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override VideoSink self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gstvideo1.video_sink.VideoSink]
+      Returns: New builder object
+  */
+  static VideoSinkGidBuilder builder() nothrow
+  {
+    return new VideoSinkGidBuilder;
+  }
+
+  /**
+      Get `showPrerollFrame` property.
+      Returns: Whether to show video frames during preroll. If set to false, video
+        frames will only be rendered in PLAYING state.
+  */
+  @property bool showPrerollFrame() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("show-preroll-frame");
+  }
+
+  /**
+      Set `showPrerollFrame` property.
+      Params:
+        propval = Whether to show video frames during preroll. If set to false, video
+          frames will only be rendered in PLAYING state.
+  */
+  @property void showPrerollFrame(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("show-preroll-frame", propval);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gstvideo1.video_sink.VideoSink]
+class VideoSinkGidBuilderImpl(T) : gid.gstbase1.base_sink.BaseSinkGidBuilderImpl!T
+{
+
+  /**
+      Set `showPrerollFrame` property.
+      Params:
+        propval = Whether to show video frames during preroll. If set to false, video
+          frames will only be rendered in PLAYING state.
+      Returns: Builder instance for fluent chaining
+  */
+  T showPrerollFrame(bool propval) nothrow
+  {
+    return setProperty("show-preroll-frame", propval);
+  }
+}
+
+/// Fluent builder for [gid.gstvideo1.video_sink.VideoSink]
+final class VideoSinkGidBuilder : VideoSinkGidBuilderImpl!VideoSinkGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  VideoSink build() nothrow
+  {
+    return new VideoSink(cast(void*)createGObject(VideoSink._getGType), Yes.Take);
+  }
+}

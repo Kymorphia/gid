@@ -1,0 +1,155 @@
+/// Module for [EventSetting] class
+module gid.gdk3.event_setting;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gdk3.c.functions;
+import gid.gdk3.c.types;
+import gid.gdk3.types;
+import gid.gdk3.window;
+
+/**
+    Generated when a setting is modified.
+*/
+class EventSetting : StructWrap!(GdkEventSetting, gdk_event_copy, gdk_event_free)
+{
+  /**
+      Create a `event_setting.EventSetting` wrap type.
+      Params:
+        type = the type of the event ([gid.gdk3.types.EventType.Setting]).
+        window = the window which received the event.
+        sendEvent = true if the event was sent explicitly.
+        action = what happened to the setting ([gid.gdk3.types.SettingAction.New],
+            [gid.gdk3.types.SettingAction.Changed] or [gid.gdk3.types.SettingAction.Deleted]).
+        name = the name of the setting.
+  */
+  this(gid.gdk3.types.EventType type = gid.gdk3.types.EventType.init, gid.gdk3.window.Window window = gid.gdk3.window.Window.init, byte sendEvent = byte.init, gid.gdk3.types.SettingAction action = gid.gdk3.types.SettingAction.init, string name = string.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.action = action;
+    this.name = name;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /**
+      Get `type` field.
+      Returns: the type of the event ([gid.gdk3.types.EventType.Setting]).
+  */
+  @property gid.gdk3.types.EventType type() nothrow
+  {
+    return cast(gid.gdk3.types.EventType)(cast(GdkEventSetting*)this._cPtr).type;
+  }
+
+  /**
+      Set `type` field.
+      Params:
+        propval = the type of the event ([gid.gdk3.types.EventType.Setting]).
+  */
+  @property void type(gid.gdk3.types.EventType propval) nothrow
+  {
+    (cast(GdkEventSetting*)this._cPtr).type = cast(GdkEventType)propval;
+  }
+
+  private gid.gdk3.window.Window _windowRef; // Keeps borrowed field value alive
+
+  /**
+      Get `window` field.
+      Returns: the window which received the event.
+  */
+  @property gid.gdk3.window.Window window() nothrow
+  {
+    return cToD!(gid.gdk3.window.Window)(cast(void*)(cast(GdkEventSetting*)this._cPtr).window);
+  }
+
+  /**
+      Set `window` field.
+      Params:
+        propval = the window which received the event.
+  */
+  @property void window(gid.gdk3.window.Window propval) nothrow
+  {
+    if (_refuseBorrowedStore("window"))
+      return;
+
+    _windowRef = propval;
+    (cast(GdkEventSetting*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
+  }
+
+  /**
+      Get `sendEvent` field.
+      Returns: true if the event was sent explicitly.
+  */
+  @property byte sendEvent() nothrow
+  {
+    return (cast(GdkEventSetting*)this._cPtr).sendEvent;
+  }
+
+  /**
+      Set `sendEvent` field.
+      Params:
+        propval = true if the event was sent explicitly.
+  */
+  @property void sendEvent(byte propval) nothrow
+  {
+    (cast(GdkEventSetting*)this._cPtr).sendEvent = propval;
+  }
+
+  /**
+      Get `action` field.
+      Returns: what happened to the setting ([gid.gdk3.types.SettingAction.New],
+          [gid.gdk3.types.SettingAction.Changed] or [gid.gdk3.types.SettingAction.Deleted]).
+  */
+  @property gid.gdk3.types.SettingAction action() nothrow
+  {
+    return cast(gid.gdk3.types.SettingAction)(cast(GdkEventSetting*)this._cPtr).action;
+  }
+
+  /**
+      Set `action` field.
+      Params:
+        propval = what happened to the setting ([gid.gdk3.types.SettingAction.New],
+            [gid.gdk3.types.SettingAction.Changed] or [gid.gdk3.types.SettingAction.Deleted]).
+  */
+  @property void action(gid.gdk3.types.SettingAction propval) nothrow
+  {
+    (cast(GdkEventSetting*)this._cPtr).action = cast(GdkSettingAction)propval;
+  }
+
+  private const(char)* _nameRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `name` field.
+      Returns: the name of the setting.
+  */
+  @property string name() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GdkEventSetting*)this._cPtr).name);
+  }
+
+  /**
+      Set `name` field.
+      Params:
+        propval = the name of the setting.
+  */
+  @property void name(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("name"))
+      return;
+
+    _nameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GdkEventSetting*)this._cPtr).name = cast(char*)_nameRef;
+  }
+}

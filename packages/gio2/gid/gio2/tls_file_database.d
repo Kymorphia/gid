@@ -1,0 +1,87 @@
+/// Module for [TlsFileDatabase] interface
+module gid.gio2.tls_file_database;
+
+public import gid.core.basictypes;
+public import gid.gio2.tls_file_database_iface_proxy;
+import gid.core.gid;
+import gid.gio2.c.functions;
+import gid.gio2.c.types;
+import gid.gio2.types;
+import gid.glib2.error;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+
+/**
+    [gid.gio2.tls_file_database.TlsFileDatabase] is implemented by [gid.gio2.tls_database.TlsDatabase] objects which
+    load their certificate information from a file. It is an interface which
+    TLS library specific subtypes implement.
+*/
+interface TlsFileDatabase : GidWrap
+{
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())g_tls_file_database_get_type != &gidSymbolNotFound ? g_tls_file_database_get_type() : cast(GType)0;
+  }
+
+  /**
+      Get `anchors` property.
+      Returns: The path to a file containing PEM encoded certificate authority
+        root anchors. The certificates in this file will be treated as
+        root authorities for the purpose of verifying other certificates
+        via the [gid.gio2.tls_database.TlsDatabase.verifyChain] operation.
+  */
+  @property string anchors() nothrow;
+
+  /**
+      Set `anchors` property.
+      Params:
+        propval = The path to a file containing PEM encoded certificate authority
+          root anchors. The certificates in this file will be treated as
+          root authorities for the purpose of verifying other certificates
+          via the [gid.gio2.tls_database.TlsDatabase.verifyChain] operation.
+  */
+  @property void anchors(string propval) nothrow;
+
+  /**
+      Creates a new #GTlsFileDatabase which uses anchor certificate authorities
+      in anchors to verify certificate chains.
+      
+      The certificates in anchors must be PEM encoded.
+  
+      Params:
+        anchors = filename of anchor certificate authorities.
+      Returns: the new
+        #GTlsFileDatabase, or null on error
+      Throws: [ErrorWrap]
+  */
+  static gid.gio2.tls_file_database.TlsFileDatabase new_(string anchors)
+  {
+    GTlsDatabase* _cretval;
+    const(char)* _anchors = anchors.toCString!(No.Malloc, No.Nullable);
+    GError *_err;
+    _cretval = g_tls_file_database_new(_anchors, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.tls_file_database.TlsFileDatabase)(cast(GTlsDatabase*)_cretval, Yes.Take);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [gid.gio2.tls_file_database.TlsFileDatabase]
+interface TlsFileDatabaseGidBuilderImpl(T)
+{
+
+  /**
+      Set `anchors` property.
+      Params:
+        propval = The path to a file containing PEM encoded certificate authority
+          root anchors. The certificates in this file will be treated as
+          root authorities for the purpose of verifying other certificates
+          via the [gid.gio2.tls_database.TlsDatabase.verifyChain] operation.
+      Returns: Builder instance for fluent chaining
+  */
+  T anchors(string propval) nothrow;
+}

@@ -1,0 +1,91 @@
+/// Module for [MetaInfo] struct
+module gid.gst1.meta_info;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.types;
+import gid.gst1.c.functions;
+import gid.gst1.c.types;
+import gid.gst1.types;
+
+/**
+    The #GstMetaInfo provides information about a specific metadata
+    structure.
+*/
+struct MetaInfo
+{
+  /**
+      tag identifying the metadata structure and api
+  */
+  GType api;
+
+  /**
+      type identifying the implementor of the api
+  */
+  GType type;
+
+  /**
+      size of the metadata
+  */
+  size_t size;
+
+  /**
+      function for initializing the metadata
+  */
+  GstMetaInitFunction initFunc;
+
+  /**
+      function for freeing the metadata
+  */
+  GstMetaFreeFunction freeFunc;
+
+  /**
+      function for transforming the metadata
+  */
+  GstMetaTransformFunction transformFunc;
+
+  /**
+      Function for serializing the metadata, or null if not supported by this
+      meta.
+  */
+  GstMetaSerializeFunction serializeFunc;
+
+  /**
+      Function for deserializing the metadata, or null if not supported by this
+      meta.
+  */
+  GstMetaDeserializeFunction deserializeFunc;
+
+  /**
+      Function for clearing the metadata, or null if not supported by this
+      meta. This is called by the buffer pool when a buffer is returned for
+      pooled metas.
+  */
+  GstMetaClearFunction clearFunc;
+
+  /** */
+  bool isCustom() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_meta_info_is_custom(cast(const(GstMetaInfo)*)&this);
+    return _retval;
+  }
+
+  /**
+      Registers a new meta.
+      
+      Use the structure returned by [gid.gst1.meta_info.MetaInfo.new_], it consumes it and the
+      structure shouldnt be used after. The one returned by the function can be
+      kept.
+      Returns: the registered meta
+  */
+  gid.gst1.meta_info.MetaInfo register() nothrow
+  {
+    const(GstMetaInfo)* _cretval;
+    _cretval = gst_meta_info_register(cast(GstMetaInfo*)&this);
+    gid.gst1.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gid.gst1.meta_info.MetaInfo*)_cretval;
+    return _retval;
+  }
+}

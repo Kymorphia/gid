@@ -1,0 +1,236 @@
+/// Module for [AudioBaseSrc] class
+module gid.gstaudio1.audio_base_src;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gst1.element;
+import gid.gstaudio1.audio_ring_buffer;
+import gid.gstaudio1.c.functions;
+import gid.gstaudio1.c.types;
+import gid.gstaudio1.types;
+import gid.gstbase1.push_src;
+
+/**
+    This is the base class for audio sources. Subclasses need to implement the
+    ::create_ringbuffer vmethod. This base class will then take care of
+    reading samples from the ringbuffer, synchronisation and flushing.
+*/
+class AudioBaseSrc : gid.gstbase1.push_src.PushSrc
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gst_audio_base_src_get_type != &gidSymbolNotFound ? gst_audio_base_src_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstAudioBaseSrc";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override AudioBaseSrc self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gstaudio1.audio_base_src.AudioBaseSrc]
+      Returns: New builder object
+  */
+  static AudioBaseSrcGidBuilder builder() nothrow
+  {
+    return new AudioBaseSrcGidBuilder;
+  }
+
+  /**
+      Get `actualBufferTime` property.
+      Returns: Actual configured size of audio buffer in microseconds.
+  */
+  @property long actualBufferTime() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(long)("actual-buffer-time");
+  }
+
+  /**
+      Get `actualLatencyTime` property.
+      Returns: Actual configured audio latency in microseconds.
+  */
+  @property long actualLatencyTime() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(long)("actual-latency-time");
+  }
+
+  /** */
+  @property long bufferTime() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(long)("buffer-time");
+  }
+
+  /** */
+  @property void bufferTime(long propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(long)("buffer-time", propval);
+  }
+
+  /** */
+  @property long latencyTime() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(long)("latency-time");
+  }
+
+  /** */
+  @property void latencyTime(long propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(long)("latency-time", propval);
+  }
+
+  alias provideClock = gid.gst1.element.Element.provideClock;
+
+  /** */
+  @property bool provideClock() nothrow
+  {
+    return getProvideClock();
+  }
+
+  alias provideClock = gid.gst1.element.Element.provideClock;
+
+  /** */
+  @property void provideClock(bool propval) nothrow
+  {
+    setProvideClock(propval);
+  }
+
+  /** */
+  @property gid.gstaudio1.types.AudioBaseSrcSlaveMethod slaveMethod() nothrow
+  {
+    return getSlaveMethod();
+  }
+
+  /** */
+  @property void slaveMethod(gid.gstaudio1.types.AudioBaseSrcSlaveMethod propval) nothrow
+  {
+    setSlaveMethod(propval);
+  }
+
+  /**
+      Create and return the #GstAudioRingBuffer for src. This function will call
+      the ::create_ringbuffer vmethod and will set src as the parent of the
+      returned buffer (see [gid.gst1.object.ObjectWrap.setParent]).
+      Returns: The new ringbuffer of src.
+  */
+  gid.gstaudio1.audio_ring_buffer.AudioRingBuffer createRingbuffer() nothrow
+  {
+    GstAudioRingBuffer* _cretval;
+    _cretval = gst_audio_base_src_create_ringbuffer(cast(GstAudioBaseSrc*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)(cast(GstAudioRingBuffer*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Queries whether src will provide a clock or not. See also
+      gst_audio_base_src_set_provide_clock.
+      Returns: true if src will provide a clock.
+  */
+  bool getProvideClock() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_audio_base_src_get_provide_clock(cast(GstAudioBaseSrc*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Get the current slave method used by src.
+      Returns: The current slave method used by src.
+  */
+  gid.gstaudio1.types.AudioBaseSrcSlaveMethod getSlaveMethod() nothrow
+  {
+    GstAudioBaseSrcSlaveMethod _cretval;
+    _cretval = gst_audio_base_src_get_slave_method(cast(GstAudioBaseSrc*)this._cPtr);
+    gid.gstaudio1.types.AudioBaseSrcSlaveMethod _retval = cast(gid.gstaudio1.types.AudioBaseSrcSlaveMethod)_cretval;
+    return _retval;
+  }
+
+  /**
+      Controls whether src will provide a clock or not. If provide is true,
+      [gid.gst1.element.Element.provideClock] will return a clock that reflects the datarate
+      of src. If provide is false, [gid.gst1.element.Element.provideClock] will return NULL.
+  
+      Params:
+        provide = new state
+  */
+  void setProvideClock(bool provide) nothrow
+  {
+    gst_audio_base_src_set_provide_clock(cast(GstAudioBaseSrc*)this._cPtr, provide);
+  }
+
+  /**
+      Controls how clock slaving will be performed in src.
+  
+      Params:
+        method = the new slave method
+  */
+  void setSlaveMethod(gid.gstaudio1.types.AudioBaseSrcSlaveMethod method) nothrow
+  {
+    gst_audio_base_src_set_slave_method(cast(GstAudioBaseSrc*)this._cPtr, method);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gstaudio1.audio_base_src.AudioBaseSrc]
+class AudioBaseSrcGidBuilderImpl(T) : gid.gstbase1.push_src.PushSrcGidBuilderImpl!T
+{
+
+  /** */
+  T bufferTime(long propval) nothrow
+  {
+    return setProperty("buffer-time", propval);
+  }
+
+  /** */
+  T latencyTime(long propval) nothrow
+  {
+    return setProperty("latency-time", propval);
+  }
+
+  /** */
+  T provideClock(bool propval) nothrow
+  {
+    return setProperty("provide-clock", propval);
+  }
+
+  /** */
+  T slaveMethod(gid.gstaudio1.types.AudioBaseSrcSlaveMethod propval) nothrow
+  {
+    return setProperty("slave-method", propval);
+  }
+}
+
+/// Fluent builder for [gid.gstaudio1.audio_base_src.AudioBaseSrc]
+final class AudioBaseSrcGidBuilder : AudioBaseSrcGidBuilderImpl!AudioBaseSrcGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  AudioBaseSrc build() nothrow
+  {
+    return new AudioBaseSrc(cast(void*)createGObject(AudioBaseSrc._getGType), Yes.Take);
+  }
+}

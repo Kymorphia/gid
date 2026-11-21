@@ -1,0 +1,101 @@
+/// Module for [CheckABIStruct] class
+module gid.gstcheck1.check_abistruct;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gstcheck1.c.functions;
+import gid.gstcheck1.c.types;
+import gid.gstcheck1.types;
+
+/** */
+class CheckABIStruct : StructWrap!(GstCheckABIStruct)
+{
+  /**
+      Create a `check_abistruct.CheckABIStruct` wrap type.
+      Params:
+        name = The name of the structure
+        size = The current size of a structure
+        abiSize = The reference size of the structure
+  */
+  this(string name = string.init, int size = int.init, int abiSize = int.init) nothrow
+  {
+    this.name = name;
+    this.size = size;
+    this.abiSize = abiSize;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _nameRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `name` field.
+      Returns: The name of the structure
+  */
+  @property string name() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GstCheckABIStruct*)this._cPtr).name);
+  }
+
+  /**
+      Set `name` field.
+      Params:
+        propval = The name of the structure
+  */
+  @property void name(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("name"))
+      return;
+
+    _nameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstCheckABIStruct*)this._cPtr).name = cast(const(char)*)_nameRef;
+  }
+
+  /**
+      Get `size` field.
+      Returns: The current size of a structure
+  */
+  @property int size() nothrow
+  {
+    return (cast(GstCheckABIStruct*)this._cPtr).size;
+  }
+
+  /**
+      Set `size` field.
+      Params:
+        propval = The current size of a structure
+  */
+  @property void size(int propval) nothrow
+  {
+    (cast(GstCheckABIStruct*)this._cPtr).size = propval;
+  }
+
+  /**
+      Get `abiSize` field.
+      Returns: The reference size of the structure
+  */
+  @property int abiSize() nothrow
+  {
+    return (cast(GstCheckABIStruct*)this._cPtr).abiSize;
+  }
+
+  /**
+      Set `abiSize` field.
+      Params:
+        propval = The reference size of the structure
+  */
+  @property void abiSize(int propval) nothrow
+  {
+    (cast(GstCheckABIStruct*)this._cPtr).abiSize = propval;
+  }
+}

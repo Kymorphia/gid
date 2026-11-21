@@ -1,0 +1,121 @@
+/// Module for [FilterWindows] class
+module gid.gmime3.filter_windows;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gmime3.c.functions;
+import gid.gmime3.c.types;
+import gid.gmime3.filter;
+import gid.gmime3.types;
+import gid.gobject2.gid_builder;
+
+/**
+    A filter for detecting whether or not a text stream claimed to be
+    iso-8859-X is really that charset or if it is really a
+    Windows-CP125x charset.
+*/
+class FilterWindows : gid.gmime3.filter.Filter
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())g_mime_filter_windows_get_type != &gidSymbolNotFound ? g_mime_filter_windows_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeFilterWindows";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override FilterWindows self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gmime3.filter_windows.FilterWindows]
+      Returns: New builder object
+  */
+  static FilterWindowsGidBuilder builder() nothrow
+  {
+    return new FilterWindowsGidBuilder;
+  }
+
+  /**
+      Creates a new GMimeFilterWindows filter. When a stream of text has
+      been filtered, it can be determined whether or not said text stream
+      was in claimed_charset or the equivalent Windows-CP125# charset.
+  
+      Params:
+        claimedCharset = charset that a text stream claims to be
+      Returns: a new windows filter.
+  */
+  this(string claimedCharset) nothrow
+  {
+    GMimeFilter* _cretval;
+    const(char)* _claimedCharset = claimedCharset.toCString!(No.Malloc, No.Nullable);
+    _cretval = g_mime_filter_windows_new(_claimedCharset);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Determines whether or not a Windows-CP125# charset has been
+      detected so far.
+      Returns: true if the filtered stream has been detected to contain
+        Windows-CP125# characters or false otherwise.
+  */
+  bool isWindowsCharset() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_mime_filter_windows_is_windows_charset(cast(GMimeFilterWindows*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Figures out the real charset that the text is encoded in based on whether or not Windows-CP125# characters were found.
+      Returns: a const string pointer to the claimed charset if filtered
+        text stream was found not to contain any Windows-CP125# characters
+        or the proper Windows-CP125# charset.
+  */
+  string realCharset() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = g_mime_filter_windows_real_charset(cast(GMimeFilterWindows*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [gid.gmime3.filter_windows.FilterWindows]
+class FilterWindowsGidBuilderImpl(T) : gid.gmime3.filter.FilterGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gmime3.filter_windows.FilterWindows]
+final class FilterWindowsGidBuilder : FilterWindowsGidBuilderImpl!FilterWindowsGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  FilterWindows build() nothrow
+  {
+    return new FilterWindows(cast(void*)createGObject(FilterWindows._getGType), Yes.Take);
+  }
+}

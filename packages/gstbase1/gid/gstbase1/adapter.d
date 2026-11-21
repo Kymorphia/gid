@@ -1,0 +1,797 @@
+/// Module for [Adapter] class
+module gid.gstbase1.adapter;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.glib2.bytes;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gst1.buffer;
+import gid.gst1.buffer_list;
+import gid.gst1.types;
+import gid.gstbase1.c.functions;
+import gid.gstbase1.c.types;
+import gid.gstbase1.types;
+
+/**
+    This class is for elements that receive buffers in an undesired size.
+    While for example raw video contains one image per buffer, the same is not
+    true for a lot of other formats, especially those that come directly from
+    a file. So if you have undefined buffer sizes and require a specific size,
+    this object is for you.
+    
+    An adapter is created with [gid.gstbase1.adapter.Adapter.new_]. It can be freed again with
+    [gid.gobject2.object.ObjectWrap.unref].
+    
+    The theory of operation is like this: All buffers received are put
+    into the adapter using [gid.gstbase1.adapter.Adapter.push] and the data is then read back
+    in chunks of the desired size using [gid.gstbase1.adapter.Adapter.map]/[gid.gstbase1.adapter.Adapter.unmap]
+    and/or [gid.gstbase1.adapter.Adapter.copy]. After the data has been processed, it is freed
+    using [gid.gstbase1.adapter.Adapter.unmap].
+    
+    Other methods such as [gid.gstbase1.adapter.Adapter.take] and [gid.gstbase1.adapter.Adapter.takeBuffer]
+    combine [gid.gstbase1.adapter.Adapter.map] and [gid.gstbase1.adapter.Adapter.unmap] in one method and are
+    potentially more convenient for some use cases.
+    
+    For example, a sink pad's chain function that needs to pass data to a library
+    in 512-byte chunks could be implemented like this:
+    ```c
+    static GstFlowReturn
+    sink_pad_chain (GstPad *pad, GstObject *parent, GstBuffer *buffer)
+    {
+      MyElement *this;
+      GstAdapter *adapter;
+      GstFlowReturn ret = GST_FLOW_OK;
+    
+      this = MY_ELEMENT (parent);
+    
+      adapter = this->adapter;
+    
+      // put buffer into adapter
+      gst_adapter_push (adapter, buffer);
+    
+      // while we can read out 512 bytes, process them
+      while (gst_adapter_available (adapter) >= 512 && ret == GST_FLOW_OK) {
+        const guint8 *data = gst_adapter_map (adapter, 512);
+        // use flowreturn as an error value
+        ret = my_library_foo (data);
+        gst_adapter_unmap (adapter);
+        gst_adapter_flush (adapter, 512);
+      }
+      return ret;
+    }
+    ```
+    
+    For another example, a simple element inside GStreamer that uses #GstAdapter
+    is the libvisual element.
+    
+    An element using #GstAdapter in its sink pad chain function should ensure that
+    when the FLUSH_STOP event is received, that any queued data is cleared using
+    [gid.gstbase1.adapter.Adapter.clear]. Data should also be cleared or processed on EOS and
+    when changing state from [gid.gst1.types.State.Paused] to [gid.gst1.types.State.Ready].
+    
+    Also check the GST_BUFFER_FLAG_DISCONT flag on the buffer. Some elements might
+    need to clear the adapter after a discontinuity.
+    
+    The adapter will keep track of the timestamps of the buffers
+    that were pushed. The last seen timestamp before the current position
+    can be queried with [gid.gstbase1.adapter.Adapter.prevPts]. This function can
+    optionally return the number of bytes between the start of the buffer that
+    carried the timestamp and the current adapter position. The distance is
+    useful when dealing with, for example, raw audio samples because it allows
+    you to calculate the timestamp of the current adapter position by using the
+    last seen timestamp and the amount of bytes since.  Additionally, the
+    [gid.gstbase1.adapter.Adapter.prevPtsAtOffset] can be used to determine the last
+    seen timestamp at a particular offset in the adapter.
+    
+    The adapter will also keep track of the offset of the buffers
+    (#GST_BUFFER_OFFSET) that were pushed. The last seen offset before the
+    current position can be queried with [gid.gstbase1.adapter.Adapter.prevOffset]. This function
+    can optionally return the number of bytes between the start of the buffer
+    that carried the offset and the current adapter position.
+    
+    Additionally the adapter also keeps track of the PTS, DTS and buffer offset
+    at the last discontinuity, which can be retrieved with
+    [gid.gstbase1.adapter.Adapter.ptsAtDiscont], [gid.gstbase1.adapter.Adapter.dtsAtDiscont] and
+    [gid.gstbase1.adapter.Adapter.offsetAtDiscont]. The number of bytes that were consumed
+    since then can be queried with [gid.gstbase1.adapter.Adapter.distanceFromDiscont].
+    
+    A last thing to note is that while #GstAdapter is pretty optimized,
+    merging buffers still might be an operation that requires a `malloc()` and
+    `memcpy()` operation, and these operations are not the fastest. Because of
+    this, some functions like [gid.gstbase1.adapter.Adapter.availableFast] are provided to help
+    speed up such cases should you want to. To avoid repeated memory allocations,
+    [gid.gstbase1.adapter.Adapter.copy] can be used to copy data into a (statically allocated)
+    user provided buffer.
+    
+    #GstAdapter is not MT safe. All operations on an adapter must be serialized by
+    the caller. This is not normally a problem, however, as the normal use case
+    of #GstAdapter is inside one pad's chain function, in which case access is
+    serialized via the pad's STREAM_LOCK.
+    
+    Note that [gid.gstbase1.adapter.Adapter.push] takes ownership of the buffer passed. Use
+    [gid.gst1.buffer.Buffer.ref_] before pushing it into the adapter if you still want to
+    access the buffer later. The adapter will never modify the data in the
+    buffer pushed in it.
+*/
+class Adapter : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gst_adapter_get_type != &gidSymbolNotFound ? gst_adapter_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstAdapter";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Adapter self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gstbase1.adapter.Adapter]
+      Returns: New builder object
+  */
+  static AdapterGidBuilder builder() nothrow
+  {
+    return new AdapterGidBuilder;
+  }
+
+  /**
+      Creates a new #GstAdapter. Free with [gid.gobject2.object.ObjectWrap.unref].
+      Returns: a new #GstAdapter
+  */
+  this() nothrow
+  {
+    GstAdapter* _cretval;
+    _cretval = gst_adapter_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Gets the maximum amount of bytes available, that is it returns the maximum
+      value that can be supplied to [gid.gstbase1.adapter.Adapter.map] without that function
+      returning null.
+      
+      Calling [gid.gstbase1.adapter.Adapter.map] with the amount of bytes returned by this function
+      may require expensive operations (like copying the data into a temporary
+      buffer) in some cases.
+      Returns: number of bytes available in adapter
+  */
+  size_t available() nothrow
+  {
+    size_t _retval;
+    _retval = gst_adapter_available(cast(GstAdapter*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the maximum number of bytes that can be retrieved in a single map
+      operation without merging buffers.
+      
+      Calling [gid.gstbase1.adapter.Adapter.map] with the amount of bytes returned by this function
+      will never require any expensive operations (like copying the data into a
+      temporary buffer).
+      Returns: number of bytes that are available in adapter without expensive
+        operations
+  */
+  size_t availableFast() nothrow
+  {
+    size_t _retval;
+    _retval = gst_adapter_available_fast(cast(GstAdapter*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Removes all buffers from adapter.
+  */
+  void clear() nothrow
+  {
+    gst_adapter_clear(cast(GstAdapter*)this._cPtr);
+  }
+
+  /**
+      Similar to gst_adapter_copy, but more suitable for language bindings. size
+      bytes of data starting at offset will be copied out of the buffers contained
+      in adapter and into a new #GBytes structure which is returned. Depending on
+      the value of the size argument an empty #GBytes structure may be returned.
+  
+      Params:
+        offset = the bytes offset in the adapter to start from
+        size = the number of bytes to copy
+      Returns: A new #GBytes structure containing the copied data.
+  */
+  gid.glib2.bytes.Bytes copy(size_t offset, size_t size) nothrow
+  {
+    GBytes* _cretval;
+    _cretval = gst_adapter_copy_bytes(cast(GstAdapter*)this._cPtr, offset, size);
+    auto _retval = _cretval ? new gid.glib2.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Get the distance in bytes since the last buffer with the
+      [gid.gst1.types.BufferFlags.Discont] flag.
+      
+      The distance will be reset to 0 for all buffers with
+      [gid.gst1.types.BufferFlags.Discont] on them, and then calculated for all other
+      following buffers based on their size.
+      Returns: The offset. Can be [gid.gst1.types.BUFFER_OFFSET_NONE].
+  */
+  ulong distanceFromDiscont() nothrow
+  {
+    ulong _retval;
+    _retval = gst_adapter_distance_from_discont(cast(GstAdapter*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Get the DTS that was on the last buffer with the GST_BUFFER_FLAG_DISCONT
+      flag, or GST_CLOCK_TIME_NONE.
+      Returns: The DTS at the last discont or GST_CLOCK_TIME_NONE.
+  */
+  gid.gst1.types.ClockTime dtsAtDiscont() nothrow
+  {
+    gid.gst1.types.ClockTime _retval;
+    _retval = gst_adapter_dts_at_discont(cast(GstAdapter*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Flushes the first flush bytes in the adapter. The caller must ensure that
+      at least this many bytes are available.
+      
+      See also: [gid.gstbase1.adapter.Adapter.map], [gid.gstbase1.adapter.Adapter.unmap]
+  
+      Params:
+        flush = the number of bytes to flush
+  */
+  void flush(size_t flush) nothrow
+  {
+    gst_adapter_flush(cast(GstAdapter*)this._cPtr, flush);
+  }
+
+  /**
+      Returns a #GstBuffer containing the first nbytes of the adapter, but
+      does not flush them from the adapter. See [gid.gstbase1.adapter.Adapter.takeBuffer]
+      for details.
+      
+      Caller owns a reference to the returned buffer. [gid.gst1.buffer.Buffer.unref] after
+      usage.
+      
+      Free-function: gst_buffer_unref
+  
+      Params:
+        nbytes = the number of bytes to get
+      Returns: a #GstBuffer containing the first
+            nbytes of the adapter, or null if nbytes bytes are not available.
+            [gid.gst1.buffer.Buffer.unref] when no longer needed.
+  */
+  gid.gst1.buffer.Buffer getBuffer(size_t nbytes) nothrow
+  {
+    GstBuffer* _cretval;
+    _cretval = gst_adapter_get_buffer(cast(GstAdapter*)this._cPtr, nbytes);
+    auto _retval = _cretval ? new gid.gst1.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns a #GstBuffer containing the first nbytes of the adapter, but
+      does not flush them from the adapter. See [gid.gstbase1.adapter.Adapter.takeBufferFast]
+      for details.
+      
+      Caller owns a reference to the returned buffer. [gid.gst1.buffer.Buffer.unref] after
+      usage.
+      
+      Free-function: gst_buffer_unref
+  
+      Params:
+        nbytes = the number of bytes to get
+      Returns: a #GstBuffer containing the first
+            nbytes of the adapter, or null if nbytes bytes are not available.
+            [gid.gst1.buffer.Buffer.unref] when no longer needed.
+  */
+  gid.gst1.buffer.Buffer getBufferFast(size_t nbytes) nothrow
+  {
+    GstBuffer* _cretval;
+    _cretval = gst_adapter_get_buffer_fast(cast(GstAdapter*)this._cPtr, nbytes);
+    auto _retval = _cretval ? new gid.gst1.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns a #GstBufferList of buffers containing the first nbytes bytes of
+      the adapter but does not flush them from the adapter. See
+      [gid.gstbase1.adapter.Adapter.takeBufferList] for details.
+      
+      Caller owns the returned list. Call [gid.gst1.buffer_list.BufferList.unref] to free
+      the list after usage.
+  
+      Params:
+        nbytes = the number of bytes to get
+      Returns: a #GstBufferList of buffers containing
+            the first nbytes of the adapter, or null if nbytes bytes are not
+            available
+  */
+  gid.gst1.buffer_list.BufferList getBufferList(size_t nbytes) nothrow
+  {
+    GstBufferList* _cretval;
+    _cretval = gst_adapter_get_buffer_list(cast(GstAdapter*)this._cPtr, nbytes);
+    auto _retval = _cretval ? new gid.gst1.buffer_list.BufferList(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns a #GList of buffers containing the first nbytes bytes of the
+      adapter, but does not flush them from the adapter. See
+      [gid.gstbase1.adapter.Adapter.takeList] for details.
+      
+      Caller owns returned list and contained buffers. [gid.gst1.buffer.Buffer.unref] each
+      buffer in the list before freeing the list after usage.
+  
+      Params:
+        nbytes = the number of bytes to get
+      Returns: a #GList of
+            buffers containing the first nbytes of the adapter, or null if nbytes
+            bytes are not available
+  */
+  gid.gst1.buffer.Buffer[] getList(size_t nbytes) nothrow
+  {
+    GList* _cretval;
+    _cretval = gst_adapter_get_list(cast(GstAdapter*)this._cPtr, nbytes);
+    auto _retval = gListToD!(gid.gst1.buffer.Buffer, GidOwnership.Full)(cast(GList*)_cretval);
+    return _retval;
+  }
+
+  /**
+      Gets the first size bytes stored in the adapter. The returned pointer is
+      valid until the next function is called on the adapter.
+      
+      Note that setting the returned pointer as the data of a #GstBuffer is
+      incorrect for general-purpose plugins. The reason is that if a downstream
+      element stores the buffer so that it has access to it outside of the bounds
+      of its chain function, the buffer will have an invalid data pointer after
+      your element flushes the bytes. In that case you should use
+      [gid.gstbase1.adapter.Adapter.take], which returns a freshly-allocated buffer that you can set
+      as #GstBuffer memory or the potentially more performant
+      [gid.gstbase1.adapter.Adapter.takeBuffer].
+      
+      Returns null if size bytes are not available.
+  
+      Params:
+        size = the number of bytes to map/peek
+      Returns: a pointer to the first size bytes of data, or null
+  */
+  ubyte[] map(size_t size) nothrow
+  {
+    const(void)* _cretval;
+    _cretval = gst_adapter_map(cast(GstAdapter*)this._cPtr, size);
+    ubyte[] _retval;
+
+    if (_cretval)
+    {
+      _retval = cast(ubyte[])_cretval[0 .. size].dup;
+    }
+    return _retval;
+  }
+
+  /**
+      Scan for pattern pattern with applied mask mask in the adapter data,
+      starting from offset offset.
+      
+      The bytes in pattern and mask are interpreted left-to-right, regardless
+      of endianness.  All four bytes of the pattern must be present in the
+      adapter for it to match, even if the first or last bytes are masked out.
+      
+      It is an error to call this function without making sure that there is
+      enough data (offset+size bytes) in the adapter.
+      
+      This function calls [gid.gstbase1.adapter.Adapter.maskedScanUint32Peek] passing null
+      for value.
+  
+      Params:
+        mask = mask to apply to data before matching against pattern
+        pattern = pattern to match (after mask is applied)
+        offset = offset into the adapter data from which to start scanning, returns
+                   the last scanned position.
+        size = number of bytes to scan from offset
+      Returns: offset of the first match, or -1 if no match was found.
+        
+        Example:
+        ```
+        // Assume the adapter contains 0x00 0x01 0x02 ... 0xfe 0xff
+        
+        gst_adapter_masked_scan_uint32 (adapter, 0xffffffff, 0x00010203, 0, 256);
+        // -> returns 0
+        gst_adapter_masked_scan_uint32 (adapter, 0xffffffff, 0x00010203, 1, 255);
+        // -> returns -1
+        gst_adapter_masked_scan_uint32 (adapter, 0xffffffff, 0x01020304, 1, 255);
+        // -> returns 1
+        gst_adapter_masked_scan_uint32 (adapter, 0xffff, 0x0001, 0, 256);
+        // -> returns -1
+        gst_adapter_masked_scan_uint32 (adapter, 0xffff, 0x0203, 0, 256);
+        // -> returns 0
+        gst_adapter_masked_scan_uint32 (adapter, 0xffff0000, 0x02030000, 0, 256);
+        // -> returns 2
+        gst_adapter_masked_scan_uint32 (adapter, 0xffff0000, 0x02030000, 0, 4);
+        // -> returns -1
+        ```
+  */
+  ptrdiff_t maskedScanUint32(uint mask, uint pattern, size_t offset, size_t size) nothrow
+  {
+    ptrdiff_t _retval;
+    _retval = gst_adapter_masked_scan_uint32(cast(GstAdapter*)this._cPtr, mask, pattern, offset, size);
+    return _retval;
+  }
+
+  /**
+      Scan for pattern pattern with applied mask mask in the adapter data,
+      starting from offset offset.  If a match is found, the value that matched
+      is returned through value, otherwise value is left untouched.
+      
+      The bytes in pattern and mask are interpreted left-to-right, regardless
+      of endianness.  All four bytes of the pattern must be present in the
+      adapter for it to match, even if the first or last bytes are masked out.
+      
+      It is an error to call this function without making sure that there is
+      enough data (offset+size bytes) in the adapter.
+  
+      Params:
+        mask = mask to apply to data before matching against pattern
+        pattern = pattern to match (after mask is applied)
+        offset = offset into the adapter data from which to start scanning, returns
+                   the last scanned position.
+        size = number of bytes to scan from offset
+        value = pointer to uint32 to return matching data
+      Returns: offset of the first match, or -1 if no match was found.
+  */
+  ptrdiff_t maskedScanUint32Peek(uint mask, uint pattern, size_t offset, size_t size, out uint value) nothrow
+  {
+    ptrdiff_t _retval;
+    _retval = gst_adapter_masked_scan_uint32_peek(cast(GstAdapter*)this._cPtr, mask, pattern, offset, size, cast(uint*)&value);
+    return _retval;
+  }
+
+  /**
+      Get the offset that was on the last buffer with the GST_BUFFER_FLAG_DISCONT
+      flag, or GST_BUFFER_OFFSET_NONE.
+      Returns: The offset at the last discont or GST_BUFFER_OFFSET_NONE.
+  */
+  ulong offsetAtDiscont() nothrow
+  {
+    ulong _retval;
+    _retval = gst_adapter_offset_at_discont(cast(GstAdapter*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Get the dts that was before the current byte in the adapter. When
+      distance is given, the amount of bytes between the dts and the current
+      position is returned.
+      
+      The dts is reset to GST_CLOCK_TIME_NONE and the distance is set to 0 when
+      the adapter is first created or when it is cleared. This also means that before
+      the first byte with a dts is added to the adapter, the dts
+      and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.
+  
+      Params:
+        distance = pointer to location for distance, or null
+      Returns: The previously seen dts.
+  */
+  gid.gst1.types.ClockTime prevDts(out ulong distance) nothrow
+  {
+    gid.gst1.types.ClockTime _retval;
+    _retval = gst_adapter_prev_dts(cast(GstAdapter*)this._cPtr, cast(ulong*)&distance);
+    return _retval;
+  }
+
+  /**
+      Get the dts that was before the byte at offset offset in the adapter. When
+      distance is given, the amount of bytes between the dts and the current
+      position is returned.
+      
+      The dts is reset to GST_CLOCK_TIME_NONE and the distance is set to 0 when
+      the adapter is first created or when it is cleared. This also means that before
+      the first byte with a dts is added to the adapter, the dts
+      and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.
+  
+      Params:
+        offset = the offset in the adapter at which to get timestamp
+        distance = pointer to location for distance, or null
+      Returns: The previously seen dts at given offset.
+  */
+  gid.gst1.types.ClockTime prevDtsAtOffset(size_t offset, out ulong distance) nothrow
+  {
+    gid.gst1.types.ClockTime _retval;
+    _retval = gst_adapter_prev_dts_at_offset(cast(GstAdapter*)this._cPtr, offset, cast(ulong*)&distance);
+    return _retval;
+  }
+
+  /**
+      Get the offset that was before the current byte in the adapter. When
+      distance is given, the amount of bytes between the offset and the current
+      position is returned.
+      
+      The offset is reset to GST_BUFFER_OFFSET_NONE and the distance is set to 0
+      when the adapter is first created or when it is cleared. This also means that
+      before the first byte with an offset is added to the adapter, the offset
+      and distance returned are GST_BUFFER_OFFSET_NONE and 0 respectively.
+  
+      Params:
+        distance = pointer to a location for distance, or null
+      Returns: The previous seen offset.
+  */
+  ulong prevOffset(out ulong distance) nothrow
+  {
+    ulong _retval;
+    _retval = gst_adapter_prev_offset(cast(GstAdapter*)this._cPtr, cast(ulong*)&distance);
+    return _retval;
+  }
+
+  /**
+      Get the pts that was before the current byte in the adapter. When
+      distance is given, the amount of bytes between the pts and the current
+      position is returned.
+      
+      The pts is reset to GST_CLOCK_TIME_NONE and the distance is set to 0 when
+      the adapter is first created or when it is cleared. This also means that before
+      the first byte with a pts is added to the adapter, the pts
+      and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.
+  
+      Params:
+        distance = pointer to location for distance, or null
+      Returns: The previously seen pts.
+  */
+  gid.gst1.types.ClockTime prevPts(out ulong distance) nothrow
+  {
+    gid.gst1.types.ClockTime _retval;
+    _retval = gst_adapter_prev_pts(cast(GstAdapter*)this._cPtr, cast(ulong*)&distance);
+    return _retval;
+  }
+
+  /**
+      Get the pts that was before the byte at offset offset in the adapter. When
+      distance is given, the amount of bytes between the pts and the current
+      position is returned.
+      
+      The pts is reset to GST_CLOCK_TIME_NONE and the distance is set to 0 when
+      the adapter is first created or when it is cleared. This also means that before
+      the first byte with a pts is added to the adapter, the pts
+      and distance returned are GST_CLOCK_TIME_NONE and 0 respectively.
+  
+      Params:
+        offset = the offset in the adapter at which to get timestamp
+        distance = pointer to location for distance, or null
+      Returns: The previously seen pts at given offset.
+  */
+  gid.gst1.types.ClockTime prevPtsAtOffset(size_t offset, out ulong distance) nothrow
+  {
+    gid.gst1.types.ClockTime _retval;
+    _retval = gst_adapter_prev_pts_at_offset(cast(GstAdapter*)this._cPtr, offset, cast(ulong*)&distance);
+    return _retval;
+  }
+
+  /**
+      Get the PTS that was on the last buffer with the GST_BUFFER_FLAG_DISCONT
+      flag, or GST_CLOCK_TIME_NONE.
+      Returns: The PTS at the last discont or GST_CLOCK_TIME_NONE.
+  */
+  gid.gst1.types.ClockTime ptsAtDiscont() nothrow
+  {
+    gid.gst1.types.ClockTime _retval;
+    _retval = gst_adapter_pts_at_discont(cast(GstAdapter*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Adds the data from buf to the data stored inside adapter and takes
+      ownership of the buffer.
+  
+      Params:
+        buf = a #GstBuffer to add to queue in the adapter
+  */
+  void push(gid.gst1.buffer.Buffer buf) nothrow
+  {
+    gst_adapter_push(cast(GstAdapter*)this._cPtr, buf ? cast(GstBuffer*)buf._cPtr(Yes.Dup) : null);
+  }
+
+  /**
+      Returns a freshly allocated buffer containing the first nbytes bytes of the
+      adapter. The returned bytes will be flushed from the adapter.
+      
+      Caller owns returned value. g_free after usage.
+      
+      Free-function: g_free
+  
+      Params:
+        nbytes = the number of bytes to take
+      Returns: oven-fresh hot data, or null if nbytes bytes are not available
+  */
+  ubyte[] take(size_t nbytes) nothrow
+  {
+    void* _cretval;
+    _cretval = gst_adapter_take(cast(GstAdapter*)this._cPtr, nbytes);
+    ubyte[] _retval;
+
+    if (_cretval)
+    {
+      _retval = cast(ubyte[])_cretval[0 .. nbytes].dup;
+      gFree(cast(void*)_cretval);
+    }
+    return _retval;
+  }
+
+  /**
+      Returns a #GstBuffer containing the first nbytes bytes of the
+      adapter. The returned bytes will be flushed from the adapter.
+      This function is potentially more performant than
+      [gid.gstbase1.adapter.Adapter.take] since it can reuse the memory in pushed buffers
+      by subbuffering or merging. This function will always return a
+      buffer with a single memory region.
+      
+      Note that no assumptions should be made as to whether certain buffer
+      flags such as the DISCONT flag are set on the returned buffer, or not.
+      The caller needs to explicitly set or unset flags that should be set or
+      unset.
+      
+      Likewise, no assumptions should be made about timestamps and offset of the
+      returned buffer. The caller should use [gid.gstbase1.adapter.Adapter.prevPts],
+      [gid.gstbase1.adapter.Adapter.prevDts], and [gid.gstbase1.adapter.Adapter.prevOffset] to obtain the relevant
+      information.
+      
+      The returned buffer might not be writable, use [gid.gst1.buffer.Buffer.makeWritable]
+      if you need to change e.g. flags or timestamps.
+      
+      Since 1.6 this will also copy over all GstMeta of the input buffers except
+      for meta with the [gid.gst1.types.MetaFlags.Pooled] flag or with the "memory" tag.
+      
+      Caller owns a reference to the returned buffer. [gid.gst1.buffer.Buffer.unref] after
+      usage.
+      
+      Free-function: gst_buffer_unref
+  
+      Params:
+        nbytes = the number of bytes to take
+      Returns: a #GstBuffer containing the first
+            nbytes of the adapter, or null if nbytes bytes are not available.
+            [gid.gst1.buffer.Buffer.unref] when no longer needed.
+  */
+  gid.gst1.buffer.Buffer takeBuffer(size_t nbytes) nothrow
+  {
+    GstBuffer* _cretval;
+    _cretval = gst_adapter_take_buffer(cast(GstAdapter*)this._cPtr, nbytes);
+    auto _retval = _cretval ? new gid.gst1.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns a #GstBuffer containing the first nbytes of the adapter.
+      The returned bytes will be flushed from the adapter.  This function
+      is potentially more performant than [gid.gstbase1.adapter.Adapter.takeBuffer] since
+      it can reuse the memory in pushed buffers by subbuffering or
+      merging. Unlike [gid.gstbase1.adapter.Adapter.takeBuffer], the returned buffer may
+      be composed of multiple non-contiguous #GstMemory objects, no
+      copies are made.
+      
+      Note that no assumptions should be made as to whether certain buffer
+      flags such as the DISCONT flag are set on the returned buffer, or not.
+      The caller needs to explicitly set or unset flags that should be set or
+      unset.
+      
+      This will also copy over all GstMeta of the input buffers except
+      for meta with the [gid.gst1.types.MetaFlags.Pooled] flag or with the "memory" tag.
+      
+      This function can return buffer up to the return value of
+      [gid.gstbase1.adapter.Adapter.available] without making copies if possible.
+      
+      Caller owns a reference to the returned buffer. [gid.gst1.buffer.Buffer.unref] after
+      usage.
+      
+      Free-function: gst_buffer_unref
+  
+      Params:
+        nbytes = the number of bytes to take
+      Returns: a #GstBuffer containing the first
+            nbytes of the adapter, or null if nbytes bytes are not available.
+            [gid.gst1.buffer.Buffer.unref] when no longer needed.
+  */
+  gid.gst1.buffer.Buffer takeBufferFast(size_t nbytes) nothrow
+  {
+    GstBuffer* _cretval;
+    _cretval = gst_adapter_take_buffer_fast(cast(GstAdapter*)this._cPtr, nbytes);
+    auto _retval = _cretval ? new gid.gst1.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns a #GstBufferList of buffers containing the first nbytes bytes of
+      the adapter. The returned bytes will be flushed from the adapter.
+      When the caller can deal with individual buffers, this function is more
+      performant because no memory should be copied.
+      
+      Caller owns the returned list. Call [gid.gst1.buffer_list.BufferList.unref] to free
+      the list after usage.
+  
+      Params:
+        nbytes = the number of bytes to take
+      Returns: a #GstBufferList of buffers containing
+            the first nbytes of the adapter, or null if nbytes bytes are not
+            available
+  */
+  gid.gst1.buffer_list.BufferList takeBufferList(size_t nbytes) nothrow
+  {
+    GstBufferList* _cretval;
+    _cretval = gst_adapter_take_buffer_list(cast(GstAdapter*)this._cPtr, nbytes);
+    auto _retval = _cretval ? new gid.gst1.buffer_list.BufferList(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns a #GList of buffers containing the first nbytes bytes of the
+      adapter. The returned bytes will be flushed from the adapter.
+      When the caller can deal with individual buffers, this function is more
+      performant because no memory should be copied.
+      
+      Caller owns returned list and contained buffers. [gid.gst1.buffer.Buffer.unref] each
+      buffer in the list before freeing the list after usage.
+  
+      Params:
+        nbytes = the number of bytes to take
+      Returns: a #GList of
+            buffers containing the first nbytes of the adapter, or null if nbytes
+            bytes are not available
+  */
+  gid.gst1.buffer.Buffer[] takeList(size_t nbytes) nothrow
+  {
+    GList* _cretval;
+    _cretval = gst_adapter_take_list(cast(GstAdapter*)this._cPtr, nbytes);
+    auto _retval = gListToD!(gid.gst1.buffer.Buffer, GidOwnership.Full)(cast(GList*)_cretval);
+    return _retval;
+  }
+
+  /**
+      Releases the memory obtained with the last [gid.gstbase1.adapter.Adapter.map].
+  */
+  void unmap() nothrow
+  {
+    gst_adapter_unmap(cast(GstAdapter*)this._cPtr);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gstbase1.adapter.Adapter]
+class AdapterGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gstbase1.adapter.Adapter]
+final class AdapterGidBuilder : AdapterGidBuilderImpl!AdapterGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Adapter build() nothrow
+  {
+    return new Adapter(cast(void*)createGObject(Adapter._getGType), Yes.Take);
+  }
+}

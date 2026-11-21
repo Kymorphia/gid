@@ -1,0 +1,189 @@
+/// Module for [EventGrabBroken] class
+module gid.gdk3.event_grab_broken;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gdk3.c.functions;
+import gid.gdk3.c.types;
+import gid.gdk3.types;
+import gid.gdk3.window;
+
+/**
+    Generated when a pointer or keyboard grab is broken. On X11, this happens
+    when the grab window becomes unviewable (i.e. it or one of its ancestors
+    is unmapped), or if the same application grabs the pointer or keyboard
+    again. Note that implicit grabs (which are initiated by button presses)
+    can also cause #GdkEventGrabBroken events.
+*/
+class EventGrabBroken : StructWrap!(GdkEventGrabBroken, gdk_event_copy, gdk_event_free)
+{
+  /**
+      Create a `event_grab_broken.EventGrabBroken` wrap type.
+      Params:
+        type = the type of the event ([gid.gdk4.types.EventType.GrabBroken])
+        window = the window which received the event, i.e. the window
+            that previously owned the grab
+        sendEvent = true if the event was sent explicitly.
+        keyboard = true if a keyboard grab was broken, false if a pointer
+            grab was broken
+        implicit = true if the broken grab was implicit
+        grabWindow = If this event is caused by another grab in the same
+            application, @grab_window contains the new grab window. Otherwise
+            @grab_window is null.
+  */
+  this(gid.gdk3.types.EventType type = gid.gdk3.types.EventType.init, gid.gdk3.window.Window window = gid.gdk3.window.Window.init, byte sendEvent = byte.init, bool keyboard = bool.init, bool implicit = bool.init, gid.gdk3.window.Window grabWindow = gid.gdk3.window.Window.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.keyboard = keyboard;
+    this.implicit = implicit;
+    this.grabWindow = grabWindow;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /**
+      Get `type` field.
+      Returns: the type of the event ([gid.gdk4.types.EventType.GrabBroken])
+  */
+  @property gid.gdk3.types.EventType type() nothrow
+  {
+    return cast(gid.gdk3.types.EventType)(cast(GdkEventGrabBroken*)this._cPtr).type;
+  }
+
+  /**
+      Set `type` field.
+      Params:
+        propval = the type of the event ([gid.gdk4.types.EventType.GrabBroken])
+  */
+  @property void type(gid.gdk3.types.EventType propval) nothrow
+  {
+    (cast(GdkEventGrabBroken*)this._cPtr).type = cast(GdkEventType)propval;
+  }
+
+  private gid.gdk3.window.Window _windowRef; // Keeps borrowed field value alive
+
+  /**
+      Get `window` field.
+      Returns: the window which received the event, i.e. the window
+          that previously owned the grab
+  */
+  @property gid.gdk3.window.Window window() nothrow
+  {
+    return cToD!(gid.gdk3.window.Window)(cast(void*)(cast(GdkEventGrabBroken*)this._cPtr).window);
+  }
+
+  /**
+      Set `window` field.
+      Params:
+        propval = the window which received the event, i.e. the window
+            that previously owned the grab
+  */
+  @property void window(gid.gdk3.window.Window propval) nothrow
+  {
+    if (_refuseBorrowedStore("window"))
+      return;
+
+    _windowRef = propval;
+    (cast(GdkEventGrabBroken*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
+  }
+
+  /**
+      Get `sendEvent` field.
+      Returns: true if the event was sent explicitly.
+  */
+  @property byte sendEvent() nothrow
+  {
+    return (cast(GdkEventGrabBroken*)this._cPtr).sendEvent;
+  }
+
+  /**
+      Set `sendEvent` field.
+      Params:
+        propval = true if the event was sent explicitly.
+  */
+  @property void sendEvent(byte propval) nothrow
+  {
+    (cast(GdkEventGrabBroken*)this._cPtr).sendEvent = propval;
+  }
+
+  /**
+      Get `keyboard` field.
+      Returns: true if a keyboard grab was broken, false if a pointer
+          grab was broken
+  */
+  @property bool keyboard() nothrow
+  {
+    return cast(bool)(cast(GdkEventGrabBroken*)this._cPtr).keyboard;
+  }
+
+  /**
+      Set `keyboard` field.
+      Params:
+        propval = true if a keyboard grab was broken, false if a pointer
+            grab was broken
+  */
+  @property void keyboard(bool propval) nothrow
+  {
+    (cast(GdkEventGrabBroken*)this._cPtr).keyboard = propval;
+  }
+
+  /**
+      Get `implicit` field.
+      Returns: true if the broken grab was implicit
+  */
+  @property bool implicit() nothrow
+  {
+    return cast(bool)(cast(GdkEventGrabBroken*)this._cPtr).implicit;
+  }
+
+  /**
+      Set `implicit` field.
+      Params:
+        propval = true if the broken grab was implicit
+  */
+  @property void implicit(bool propval) nothrow
+  {
+    (cast(GdkEventGrabBroken*)this._cPtr).implicit = propval;
+  }
+
+  private gid.gdk3.window.Window _grabWindowRef; // Keeps borrowed field value alive
+
+  /**
+      Get `grabWindow` field.
+      Returns: If this event is caused by another grab in the same
+          application, @grab_window contains the new grab window. Otherwise
+          @grab_window is null.
+  */
+  @property gid.gdk3.window.Window grabWindow() nothrow
+  {
+    return cToD!(gid.gdk3.window.Window)(cast(void*)(cast(GdkEventGrabBroken*)this._cPtr).grabWindow);
+  }
+
+  /**
+      Set `grabWindow` field.
+      Params:
+        propval = If this event is caused by another grab in the same
+            application, @grab_window contains the new grab window. Otherwise
+            @grab_window is null.
+  */
+  @property void grabWindow(gid.gdk3.window.Window propval) nothrow
+  {
+    if (_refuseBorrowedStore("grabWindow"))
+      return;
+
+    _grabWindowRef = propval;
+    (cast(GdkEventGrabBroken*)this._cPtr).grabWindow = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
+  }
+}

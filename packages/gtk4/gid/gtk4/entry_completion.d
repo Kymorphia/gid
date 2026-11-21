@@ -1,0 +1,1069 @@
+/// Module for [EntryCompletion] class
+module gid.gtk4.entry_completion;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.buildable;
+import gid.gtk4.buildable_mixin;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.cell_area;
+import gid.gtk4.cell_layout;
+import gid.gtk4.cell_layout_mixin;
+import gid.gtk4.tree_iter;
+import gid.gtk4.tree_model;
+import gid.gtk4.types;
+import gid.gtk4.widget;
+
+/**
+    [gid.gtk4.entry_completion.EntryCompletion] is an auxiliary object to provide completion functionality
+    for [gid.gtk4.entry.Entry].
+    
+    It implements the [gid.gtk4.cell_layout.CellLayout] interface, to allow the user
+    to add extra cells to the [gid.gtk4.tree_view.TreeView] with completion matches.
+    
+    “Completion functionality” means that when the user modifies the text
+    in the entry, [gid.gtk4.entry_completion.EntryCompletion] checks which rows in the model match
+    the current content of the entry, and displays a list of matches.
+    By default, the matching is done by comparing the entry text
+    case-insensitively against the text column of the model (see
+    [gid.gtk4.entry_completion.EntryCompletion.setTextColumn]), but this can be overridden
+    with a custom match function (see [gid.gtk4.entry_completion.EntryCompletion.setMatchFunc]).
+    
+    When the user selects a completion, the content of the entry is
+    updated. By default, the content of the entry is replaced by the
+    text column of the model, but this can be overridden by connecting
+    to the [gid.gtk4.entry_completion.EntryCompletion.matchSelected] signal and updating the
+    entry in the signal handler. Note that you should return true from
+    the signal handler to suppress the default behaviour.
+    
+    To add completion functionality to an entry, use
+    [gid.gtk4.entry.Entry.setCompletion].
+    
+    [gid.gtk4.entry_completion.EntryCompletion] uses a [gid.gtk4.tree_model_filter.TreeModelFilter] model to
+    represent the subset of the entire model that is currently matching.
+    While the [gid.gtk4.entry_completion.EntryCompletion] signals
+    [gid.gtk4.entry_completion.EntryCompletion.matchSelected] and
+    [gid.gtk4.entry_completion.EntryCompletion.cursorOnMatch] take the original model
+    and an iter pointing to that model as arguments, other callbacks and
+    signals (such as [gid.gtk4.types.CellLayoutDataFunc] or
+    [gid.gtk4.cell_area.CellArea.applyAttributes]
+    will generally take the filter model as argument. As long as you are
+    only calling [gid.gtk4.tree_model.TreeModel.get], this will make no difference to
+    you. If for some reason, you need the original model, use
+    [gid.gtk4.tree_model_filter.TreeModelFilter.getModel]. Don’t forget to use
+    [gid.gtk4.tree_model_filter.TreeModelFilter.convertIterToChildIter] to obtain a
+    matching iter.
+*/
+class EntryCompletion : gid.gobject2.object.ObjectWrap, gid.gtk4.buildable.Buildable, gid.gtk4.cell_layout.CellLayout
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_entry_completion_get_type != &gidSymbolNotFound ? gtk_entry_completion_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkEntryCompletion";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override EntryCompletion self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.entry_completion.EntryCompletion]
+      Returns: New builder object
+  */
+  static EntryCompletionGidBuilder builder() nothrow
+  {
+    return new EntryCompletionGidBuilder;
+  }
+
+  /**
+      Get `cellArea` property.
+      Returns: The [gid.gtk4.cell_area.CellArea] used to layout cell renderers in the treeview column.
+        
+        If no area is specified when creating the entry completion with
+        [gid.gtk4.entry_completion.EntryCompletion.newWithArea], a horizontally oriented
+        [gid.gtk4.cell_area_box.CellAreaBox] will be used.
+  */
+  @property gid.gtk4.cell_area.CellArea cellArea() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gtk4.cell_area.CellArea)("cell-area");
+  }
+
+  /**
+      Get `inlineCompletion` property.
+      Returns: Determines whether the common prefix of the possible completions
+        should be inserted automatically in the entry.
+        
+        Note that this requires text-column to be set, even if you are
+        using a custom match function.
+  */
+  @property bool inlineCompletion() nothrow
+  {
+    return getInlineCompletion();
+  }
+
+  /**
+      Set `inlineCompletion` property.
+      Params:
+        propval = Determines whether the common prefix of the possible completions
+          should be inserted automatically in the entry.
+          
+          Note that this requires text-column to be set, even if you are
+          using a custom match function.
+  */
+  @property void inlineCompletion(bool propval) nothrow
+  {
+    setInlineCompletion(propval);
+  }
+
+  /**
+      Get `inlineSelection` property.
+      Returns: Determines whether the possible completions on the popup
+        will appear in the entry as you navigate through them.
+  */
+  @property bool inlineSelection() nothrow
+  {
+    return getInlineSelection();
+  }
+
+  /**
+      Set `inlineSelection` property.
+      Params:
+        propval = Determines whether the possible completions on the popup
+          will appear in the entry as you navigate through them.
+  */
+  @property void inlineSelection(bool propval) nothrow
+  {
+    setInlineSelection(propval);
+  }
+
+  /**
+      Get `minimumKeyLength` property.
+      Returns: The minimum key length as set for completion.
+  */
+  @property int minimumKeyLength() nothrow
+  {
+    return getMinimumKeyLength();
+  }
+
+  /**
+      Set `minimumKeyLength` property.
+      Params:
+        propval = The minimum key length as set for completion.
+  */
+  @property void minimumKeyLength(int propval) nothrow
+  {
+    setMinimumKeyLength(propval);
+  }
+
+  /**
+      Get `model` property.
+      Returns: The model used as data source.
+  */
+  @property gid.gtk4.tree_model.TreeModel model() nothrow
+  {
+    return getModel();
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model used as data source.
+  */
+  @property void model(gid.gtk4.tree_model.TreeModel propval) nothrow
+  {
+    setModel(propval);
+  }
+
+  /**
+      Get `popupCompletion` property.
+      Returns: Determines whether the possible completions should be
+        shown in a popup window.
+  */
+  @property bool popupCompletion() nothrow
+  {
+    return getPopupCompletion();
+  }
+
+  /**
+      Set `popupCompletion` property.
+      Params:
+        propval = Determines whether the possible completions should be
+          shown in a popup window.
+  */
+  @property void popupCompletion(bool propval) nothrow
+  {
+    setPopupCompletion(propval);
+  }
+
+  /**
+      Get `popupSetWidth` property.
+      Returns: Determines whether the completions popup window will be
+        resized to the width of the entry.
+  */
+  @property bool popupSetWidth() nothrow
+  {
+    return getPopupSetWidth();
+  }
+
+  /**
+      Set `popupSetWidth` property.
+      Params:
+        propval = Determines whether the completions popup window will be
+          resized to the width of the entry.
+  */
+  @property void popupSetWidth(bool propval) nothrow
+  {
+    setPopupSetWidth(propval);
+  }
+
+  /**
+      Get `popupSingleMatch` property.
+      Returns: Determines whether the completions popup window will shown
+        for a single possible completion.
+        
+        You probably want to set this to false if you are using
+        [gid.gtk4.entry_completion.EntryCompletion.inlineCompletion].
+  */
+  @property bool popupSingleMatch() nothrow
+  {
+    return getPopupSingleMatch();
+  }
+
+  /**
+      Set `popupSingleMatch` property.
+      Params:
+        propval = Determines whether the completions popup window will shown
+          for a single possible completion.
+          
+          You probably want to set this to false if you are using
+          [gid.gtk4.entry_completion.EntryCompletion.inlineCompletion].
+  */
+  @property void popupSingleMatch(bool propval) nothrow
+  {
+    setPopupSingleMatch(propval);
+  }
+
+  /**
+      Get `textColumn` property.
+      Returns: The column of the model containing the strings.
+        
+        Note that the strings must be UTF-8.
+  */
+  @property int textColumn() nothrow
+  {
+    return getTextColumn();
+  }
+
+  /**
+      Set `textColumn` property.
+      Params:
+        propval = The column of the model containing the strings.
+          
+          Note that the strings must be UTF-8.
+  */
+  @property void textColumn(int propval) nothrow
+  {
+    setTextColumn(propval);
+  }
+
+  mixin BuildableT!();
+  mixin CellLayoutT!();
+
+  /**
+      Creates a new [gid.gtk4.entry_completion.EntryCompletion] object.
+      Returns: A newly created [gid.gtk4.entry_completion.EntryCompletion] object
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  this() nothrow
+  {
+    GtkEntryCompletion* _cretval;
+    _cretval = gtk_entry_completion_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Creates a new [gid.gtk4.entry_completion.EntryCompletion] object using the
+      specified area.
+      
+      The [gid.gtk4.cell_area.CellArea] is used to layout cells in the underlying
+      [gid.gtk4.tree_view_column.TreeViewColumn] for the drop-down menu.
+  
+      Params:
+        area = the [gid.gtk4.cell_area.CellArea] used to layout cells
+      Returns: A newly created [gid.gtk4.entry_completion.EntryCompletion] object
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  static gid.gtk4.entry_completion.EntryCompletion newWithArea(gid.gtk4.cell_area.CellArea area) nothrow
+  {
+    GtkEntryCompletion* _cretval;
+    _cretval = gtk_entry_completion_new_with_area(area ? cast(GtkCellArea*)area._cPtr(No.Dup) : null);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.entry_completion.EntryCompletion)(cast(GtkEntryCompletion*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Requests a completion operation, or in other words a refiltering of the
+      current list with completions, using the current key.
+      
+      The completion list view will be updated accordingly.
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  void complete() nothrow
+  {
+    gtk_entry_completion_complete(cast(GtkEntryCompletion*)this._cPtr);
+  }
+
+  /**
+      Computes the common prefix that is shared by all rows in completion
+      that start with key.
+      
+      If no row matches key, null will be returned.
+      Note that a text column must have been set for this function to work,
+      see [gid.gtk4.entry_completion.EntryCompletion.setTextColumn] for details.
+  
+      Params:
+        key = The text to complete for
+      Returns: The common prefix all rows
+          starting with key
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  string computePrefix(string key) nothrow
+  {
+    char* _cretval;
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    _cretval = gtk_entry_completion_compute_prefix(cast(GtkEntryCompletion*)this._cPtr, _key);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Get the original text entered by the user that triggered
+      the completion or null if there’s no completion ongoing.
+      Returns: the prefix for the current completion
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  string getCompletionPrefix() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_entry_completion_get_completion_prefix(cast(GtkEntryCompletion*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the entry completion has been attached to.
+      Returns: The entry completion has been attached to
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  gid.gtk4.widget.Widget getEntry() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_entry_completion_get_entry(cast(GtkEntryCompletion*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns whether the common prefix of the possible completions should
+      be automatically inserted in the entry.
+      Returns: true if inline completion is turned on
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  bool getInlineCompletion() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_entry_completion_get_inline_completion(cast(GtkEntryCompletion*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns true if inline-selection mode is turned on.
+      Returns: true if inline-selection mode is on
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  bool getInlineSelection() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_entry_completion_get_inline_selection(cast(GtkEntryCompletion*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the minimum key length as set for completion.
+      Returns: The currently used minimum key length
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  int getMinimumKeyLength() nothrow
+  {
+    int _retval;
+    _retval = gtk_entry_completion_get_minimum_key_length(cast(GtkEntryCompletion*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the model the [gid.gtk4.entry_completion.EntryCompletion] is using as data source.
+      
+      Returns null if the model is unset.
+      Returns: A [gid.gtk4.tree_model.TreeModel]
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  gid.gtk4.tree_model.TreeModel getModel() nothrow
+  {
+    GtkTreeModel* _cretval;
+    _cretval = gtk_entry_completion_get_model(cast(GtkEntryCompletion*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns whether the completions should be presented in a popup window.
+      Returns: true if popup completion is turned on
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  bool getPopupCompletion() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_entry_completion_get_popup_completion(cast(GtkEntryCompletion*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns whether the completion popup window will be resized to the
+      width of the entry.
+      Returns: true if the popup window will be resized to the width of
+          the entry
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  bool getPopupSetWidth() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_entry_completion_get_popup_set_width(cast(GtkEntryCompletion*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns whether the completion popup window will appear even if there is
+      only a single match.
+      Returns: true if the popup window will appear regardless of the
+           number of matches
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  bool getPopupSingleMatch() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_entry_completion_get_popup_single_match(cast(GtkEntryCompletion*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the column in the model of completion to get strings from.
+      Returns: the column containing the strings
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  int getTextColumn() nothrow
+  {
+    int _retval;
+    _retval = gtk_entry_completion_get_text_column(cast(GtkEntryCompletion*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Requests a prefix insertion.
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  void insertPrefix() nothrow
+  {
+    gtk_entry_completion_insert_prefix(cast(GtkEntryCompletion*)this._cPtr);
+  }
+
+  /**
+      Sets whether the common prefix of the possible completions should
+      be automatically inserted in the entry.
+  
+      Params:
+        inlineCompletion = true to do inline completion
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  void setInlineCompletion(bool inlineCompletion) nothrow
+  {
+    gtk_entry_completion_set_inline_completion(cast(GtkEntryCompletion*)this._cPtr, inlineCompletion);
+  }
+
+  /**
+      Sets whether it is possible to cycle through the possible completions
+      inside the entry.
+  
+      Params:
+        inlineSelection = true to do inline selection
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  void setInlineSelection(bool inlineSelection) nothrow
+  {
+    gtk_entry_completion_set_inline_selection(cast(GtkEntryCompletion*)this._cPtr, inlineSelection);
+  }
+
+  /**
+      Sets the match function for completion to be func.
+      
+      The match function is used to determine if a row should or
+      should not be in the completion list.
+  
+      Params:
+        func = the [gid.gtk4.entry_completion.EntryCompletion]MatchFunc to use
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  void setMatchFunc(gid.gtk4.types.EntryCompletionMatchFunc func) nothrow
+  {
+    extern(C) gboolean _funcCallback(GtkEntryCompletion* completion, const(char)* key, GtkTreeIter* iter, void* userData) nothrow
+    {
+      bool _dretval;
+      auto _dlg = cast(gid.gtk4.types.EntryCompletionMatchFunc*)userData;
+      string _key = key.fromCString!(No.Free);
+      auto _iter = iter ? new gid.gtk4.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+
+      try
+      {
+        _dretval = (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.entry_completion.EntryCompletion)(cast(void*)completion, No.Take), _key, _iter);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.types.EntryCompletionMatchFunc");
+      }
+      auto _retval = cast(gboolean)_dretval;
+      if (_iter)
+        _iter._cUnborrow;
+
+      return _retval;
+    }
+    auto _funcCB = func ? &_funcCallback : null;
+    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+    gtk_entry_completion_set_match_func(cast(GtkEntryCompletion*)this._cPtr, _funcCB, _func, _funcDestroyCB);
+  }
+
+  /**
+      Requires the length of the search key for completion to be at least
+      length.
+      
+      This is useful for long lists, where completing using a small
+      key takes a lot of time and will come up with meaningless results anyway
+      (ie, a too large dataset).
+  
+      Params:
+        length = the minimum length of the key in order to start completing
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  void setMinimumKeyLength(int length) nothrow
+  {
+    gtk_entry_completion_set_minimum_key_length(cast(GtkEntryCompletion*)this._cPtr, length);
+  }
+
+  /**
+      Sets the model for a [gid.gtk4.entry_completion.EntryCompletion].
+      
+      If completion already has a model set, it will remove it
+      before setting the new model. If model is null, then it
+      will unset the model.
+  
+      Params:
+        model = the [gid.gtk4.tree_model.TreeModel]
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  void setModel(gid.gtk4.tree_model.TreeModel model = null) nothrow
+  {
+    gtk_entry_completion_set_model(cast(GtkEntryCompletion*)this._cPtr, model ? cast(GtkTreeModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets whether the completions should be presented in a popup window.
+  
+      Params:
+        popupCompletion = true to do popup completion
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  void setPopupCompletion(bool popupCompletion) nothrow
+  {
+    gtk_entry_completion_set_popup_completion(cast(GtkEntryCompletion*)this._cPtr, popupCompletion);
+  }
+
+  /**
+      Sets whether the completion popup window will be resized to be the same
+      width as the entry.
+  
+      Params:
+        popupSetWidth = true to make the width of the popup the same as the entry
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  void setPopupSetWidth(bool popupSetWidth) nothrow
+  {
+    gtk_entry_completion_set_popup_set_width(cast(GtkEntryCompletion*)this._cPtr, popupSetWidth);
+  }
+
+  /**
+      Sets whether the completion popup window will appear even if there is
+      only a single match.
+      
+      You may want to set this to false if you
+      are using [gid.gtk4.entry_completion.EntryCompletion.inlineCompletion].
+  
+      Params:
+        popupSingleMatch = true if the popup should appear even for a single match
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  void setPopupSingleMatch(bool popupSingleMatch) nothrow
+  {
+    gtk_entry_completion_set_popup_single_match(cast(GtkEntryCompletion*)this._cPtr, popupSingleMatch);
+  }
+
+  /**
+      Convenience function for setting up the most used case of this code: a
+      completion list with just strings.
+      
+      This function will set up completion
+      to have a list displaying all (and just) strings in the completion list,
+      and to get those strings from column in the model of completion.
+      
+      This functions creates and adds a [gid.gtk4.cell_renderer_text.CellRendererText] for the selected
+      column. If you need to set the text column, but don't want the cell
+      renderer, use [gid.gobject2.object.ObjectWrap.set] to set the
+      [gid.gtk4.entry_completion.EntryCompletion.textColumn] property directly.
+  
+      Params:
+        column = the column in the model of completion to get strings from
+  
+      Deprecated: GtkEntryCompletion will be removed in GTK 5.
+  */
+  void setTextColumn(int column) nothrow
+  {
+    gtk_entry_completion_set_text_column(cast(GtkEntryCompletion*)this._cPtr, column);
+  }
+
+  /**
+      Connect to `CursorOnMatch` signal.
+  
+      Emitted when a match from the cursor is on a match of the list.
+        
+        The default behaviour is to replace the contents
+        of the entry with the contents of the text column in the row
+        pointed to by iter.
+        
+        Note that model is the model that was passed to
+        [gid.gtk4.entry_completion.EntryCompletion.setModel].
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `bool callback(gid.gtk4.tree_model.TreeModel model, gid.gtk4.tree_iter.TreeIter iter, gid.gtk4.entry_completion.EntryCompletion entryCompletion)`
+  
+          `model` the [gid.gtk4.tree_model.TreeModel] containing the matches (optional)
+  
+          `iter` a [gid.gtk4.tree_iter.TreeIter] positioned at the selected match (optional)
+  
+          `entryCompletion` the instance the signal is connected to (optional)
+  
+          `Returns` true if the signal has been handled
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectCursorOnMatch(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk4.tree_model.TreeModel)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gid.gtk4.tree_iter.TreeIter)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gid.gtk4.entry_completion.EntryCompletion)))
+  && Parameters!T.length < 4)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 3, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.entry_completion.EntryCompletion.cursorOnMatch");
+      }
+
+      setVal!(bool)(_returnValue, _retval);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("cursor-on-match", closure, after);
+  }
+
+  /**
+      Connect to `InsertPrefix` signal.
+  
+      Emitted when the inline autocompletion is triggered.
+        
+        The default behaviour is to make the entry display the
+        whole prefix and select the newly inserted part.
+        
+        Applications may connect to this signal in order to insert only a
+        smaller part of the prefix into the entry - e.g. the entry used in
+        the [gid.gtk4.file_chooser.FileChooser] inserts only the part of the prefix up to the
+        next '/'.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `bool callback(string prefix, gid.gtk4.entry_completion.EntryCompletion entryCompletion)`
+  
+          `prefix` the common prefix of all possible completions (optional)
+  
+          `entryCompletion` the instance the signal is connected to (optional)
+  
+          `Returns` true if the signal has been handled
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectInsertPrefix(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gtk4.entry_completion.EntryCompletion)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.entry_completion.EntryCompletion.insertPrefix");
+      }
+
+      setVal!(bool)(_returnValue, _retval);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("insert-prefix", closure, after);
+  }
+
+  /**
+      Connect to `MatchSelected` signal.
+  
+      Emitted when a match from the list is selected.
+        
+        The default behaviour is to replace the contents of the
+        entry with the contents of the text column in the row
+        pointed to by iter.
+        
+        Note that model is the model that was passed to
+        [gid.gtk4.entry_completion.EntryCompletion.setModel].
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `bool callback(gid.gtk4.tree_model.TreeModel model, gid.gtk4.tree_iter.TreeIter iter, gid.gtk4.entry_completion.EntryCompletion entryCompletion)`
+  
+          `model` the [gid.gtk4.tree_model.TreeModel] containing the matches (optional)
+  
+          `iter` a [gid.gtk4.tree_iter.TreeIter] positioned at the selected match (optional)
+  
+          `entryCompletion` the instance the signal is connected to (optional)
+  
+          `Returns` true if the signal has been handled
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectMatchSelected(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk4.tree_model.TreeModel)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == gid.gtk4.tree_iter.TreeIter)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gid.gtk4.entry_completion.EntryCompletion)))
+  && Parameters!T.length < 4)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 3, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.entry_completion.EntryCompletion.matchSelected");
+      }
+
+      setVal!(bool)(_returnValue, _retval);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("match-selected", closure, after);
+  }
+
+  /**
+      Connect to `NoMatches` signal.
+  
+      Emitted when the filter model has zero
+        number of rows in completion_complete method.
+        
+        In other words when [gid.gtk4.entry_completion.EntryCompletion] is out of suggestions.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk4.entry_completion.EntryCompletion entryCompletion)`
+  
+          `entryCompletion` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectNoMatches(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk4.entry_completion.EntryCompletion)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.entry_completion.EntryCompletion.noMatches");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("no-matches", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.entry_completion.EntryCompletion]
+class EntryCompletionGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T, gid.gtk4.buildable.BuildableGidBuilderImpl!T, gid.gtk4.cell_layout.CellLayoutGidBuilderImpl!T
+{
+
+  mixin BuildableGidBuilderT!();
+  mixin CellLayoutGidBuilderT!();
+
+  /**
+      Set `cellArea` property.
+      Params:
+        propval = The [gid.gtk4.cell_area.CellArea] used to layout cell renderers in the treeview column.
+          
+          If no area is specified when creating the entry completion with
+          [gid.gtk4.entry_completion.EntryCompletion.newWithArea], a horizontally oriented
+          [gid.gtk4.cell_area_box.CellAreaBox] will be used.
+      Returns: Builder instance for fluent chaining
+  */
+  T cellArea(gid.gtk4.cell_area.CellArea propval) nothrow
+  {
+    return setProperty("cell-area", propval);
+  }
+
+  /**
+      Set `inlineCompletion` property.
+      Params:
+        propval = Determines whether the common prefix of the possible completions
+          should be inserted automatically in the entry.
+          
+          Note that this requires text-column to be set, even if you are
+          using a custom match function.
+      Returns: Builder instance for fluent chaining
+  */
+  T inlineCompletion(bool propval) nothrow
+  {
+    return setProperty("inline-completion", propval);
+  }
+
+  /**
+      Set `inlineSelection` property.
+      Params:
+        propval = Determines whether the possible completions on the popup
+          will appear in the entry as you navigate through them.
+      Returns: Builder instance for fluent chaining
+  */
+  T inlineSelection(bool propval) nothrow
+  {
+    return setProperty("inline-selection", propval);
+  }
+
+  /**
+      Set `minimumKeyLength` property.
+      Params:
+        propval = The minimum key length as set for completion.
+      Returns: Builder instance for fluent chaining
+  */
+  T minimumKeyLength(int propval) nothrow
+  {
+    return setProperty("minimum-key-length", propval);
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model used as data source.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gid.gtk4.tree_model.TreeModel propval) nothrow
+  {
+    return setProperty("model", propval);
+  }
+
+  /**
+      Set `popupCompletion` property.
+      Params:
+        propval = Determines whether the possible completions should be
+          shown in a popup window.
+      Returns: Builder instance for fluent chaining
+  */
+  T popupCompletion(bool propval) nothrow
+  {
+    return setProperty("popup-completion", propval);
+  }
+
+  /**
+      Set `popupSetWidth` property.
+      Params:
+        propval = Determines whether the completions popup window will be
+          resized to the width of the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T popupSetWidth(bool propval) nothrow
+  {
+    return setProperty("popup-set-width", propval);
+  }
+
+  /**
+      Set `popupSingleMatch` property.
+      Params:
+        propval = Determines whether the completions popup window will shown
+          for a single possible completion.
+          
+          You probably want to set this to false if you are using
+          [gid.gtk4.entry_completion.EntryCompletion.inlineCompletion].
+      Returns: Builder instance for fluent chaining
+  */
+  T popupSingleMatch(bool propval) nothrow
+  {
+    return setProperty("popup-single-match", propval);
+  }
+
+  /**
+      Set `textColumn` property.
+      Params:
+        propval = The column of the model containing the strings.
+          
+          Note that the strings must be UTF-8.
+      Returns: Builder instance for fluent chaining
+  */
+  T textColumn(int propval) nothrow
+  {
+    return setProperty("text-column", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk4.entry_completion.EntryCompletion]
+final class EntryCompletionGidBuilder : EntryCompletionGidBuilderImpl!EntryCompletionGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  EntryCompletion build() nothrow
+  {
+    return new EntryCompletion(cast(void*)createGObject(EntryCompletion._getGType), Yes.Take);
+  }
+}

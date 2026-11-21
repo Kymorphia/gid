@@ -1,0 +1,364 @@
+/// Module for [SelectionData] class
+module gid.gtk3.selection_data;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gdk3.atom;
+import gid.gdk3.display;
+import gid.gdkpixbuf2.pixbuf;
+import gid.gobject2.boxed;
+import gid.gobject2.object;
+import gid.gtk3.c.functions;
+import gid.gtk3.c.types;
+import gid.gtk3.text_buffer;
+import gid.gtk3.types;
+
+/** */
+class SelectionData : gid.gobject2.boxed.BoxedWrap!(gtk_selection_data_get_type)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override SelectionData self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Makes a copy of a #GtkSelectionData-struct and its data.
+      Returns: a pointer to a copy of data.
+  */
+  gid.gtk3.selection_data.SelectionData copy() nothrow
+  {
+    GtkSelectionData* _cretval;
+    _cretval = gtk_selection_data_copy(cast(const(GtkSelectionData)*)this._cPtr);
+    auto _retval = _cretval ? new gid.gtk3.selection_data.SelectionData(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Retrieves the data type of the selection.
+      Returns: the data type of the selection.
+  */
+  gid.gdk3.atom.Atom getDataType() nothrow
+  {
+    GdkAtom _cretval;
+    _cretval = gtk_selection_data_get_data_type(cast(const(GtkSelectionData)*)this._cPtr);
+    auto _retval = _cretval ? new gid.gdk3.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Retrieves the raw data of the selection along with its length.
+      Returns: the raw data of the selection
+  */
+  ubyte[] getData() nothrow
+  {
+    const(ubyte)* _cretval;
+    int _cretlength;
+    _cretval = gtk_selection_data_get_data_with_length(cast(const(GtkSelectionData)*)this._cPtr, &_cretlength);
+    ubyte[] _retval;
+
+    if (_cretval)
+    {
+      _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
+    }
+    return _retval;
+  }
+
+  /**
+      Retrieves the display of the selection.
+      Returns: the display of the selection.
+  */
+  gid.gdk3.display.Display getDisplay() nothrow
+  {
+    GdkDisplay* _cretval;
+    _cretval = gtk_selection_data_get_display(cast(const(GtkSelectionData)*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk3.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Retrieves the format of the selection.
+      Returns: the format of the selection.
+  */
+  int getFormat() nothrow
+  {
+    int _retval;
+    _retval = gtk_selection_data_get_format(cast(const(GtkSelectionData)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves the length of the raw data of the selection.
+      Returns: the length of the data of the selection.
+  */
+  int getLength() nothrow
+  {
+    int _retval;
+    _retval = gtk_selection_data_get_length(cast(const(GtkSelectionData)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the contents of the selection data as a #GdkPixbuf.
+      Returns: if the selection data
+          contained a recognized image type and it could be converted to a
+          #GdkPixbuf, a newly allocated pixbuf is returned, otherwise
+          null.  If the result is non-null it must be freed with
+          [gid.gobject2.object.ObjectWrap.unref].
+  */
+  gid.gdkpixbuf2.pixbuf.Pixbuf getPixbuf() nothrow
+  {
+    GdkPixbuf* _cretval;
+    _cretval = gtk_selection_data_get_pixbuf(cast(const(GtkSelectionData)*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gdkpixbuf2.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Retrieves the selection #GdkAtom of the selection data.
+      Returns: the selection #GdkAtom of the selection data.
+  */
+  gid.gdk3.atom.Atom getSelection() nothrow
+  {
+    GdkAtom _cretval;
+    _cretval = gtk_selection_data_get_selection(cast(const(GtkSelectionData)*)this._cPtr);
+    auto _retval = _cretval ? new gid.gdk3.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Retrieves the target of the selection.
+      Returns: the target of the selection.
+  */
+  gid.gdk3.atom.Atom getTarget() nothrow
+  {
+    GdkAtom _cretval;
+    _cretval = gtk_selection_data_get_target(cast(const(GtkSelectionData)*)this._cPtr);
+    auto _retval = _cretval ? new gid.gdk3.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the contents of selection_data as an array of targets.
+      This can be used to interpret the results of getting
+      the standard TARGETS target that is always supplied for
+      any selection.
+  
+      Params:
+        targets = location to store an array of targets. The result stored
+                    here must be freed with [gid.glib2.global.gfree].
+      Returns: true if selection_data contains a valid
+           array of targets, otherwise false.
+  */
+  bool getTargets(out gid.gdk3.atom.Atom[] targets) nothrow
+  {
+    bool _retval;
+    int _nAtoms;
+    GdkAtom* _targets;
+    _retval = cast(bool)gtk_selection_data_get_targets(cast(const(GtkSelectionData)*)this._cPtr, &_targets, &_nAtoms);
+    targets.length = _nAtoms;
+    foreach (i; 0 .. _nAtoms)
+      targets[i] = new gid.gdk3.atom.Atom(cast(void*)_targets[i], No.Take);
+    gFree(cast(void*)_targets);
+    return _retval;
+  }
+
+  /**
+      Gets the contents of the selection data as a UTF-8 string.
+      Returns: if the selection data contained a
+          recognized text type and it could be converted to UTF-8, a newly
+          allocated string containing the converted text, otherwise null.
+          If the result is non-null it must be freed with [gid.glib2.global.gfree].
+  */
+  string getText() nothrow
+  {
+    ubyte* _cretval;
+    _cretval = gtk_selection_data_get_text(cast(const(GtkSelectionData)*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the contents of the selection data as array of URIs.
+      
+      Since 3.24.37, this may involve using the FileTransfer
+      portal to send files between sandboxed apps.
+      Returns: if
+          the selection data contains a list of
+          URIs, a newly allocated null-terminated string array
+          containing the URIs, otherwise null. If the result is
+          non-null it must be freed with [gid.glib2.global.strfreev].
+  */
+  string[] getUris() nothrow
+  {
+    char** _cretval;
+    _cretval = gtk_selection_data_get_uris(cast(const(GtkSelectionData)*)this._cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
+      gFree(cast(void*)_cretval);
+    }
+    return _retval;
+  }
+
+  /**
+      Stores new data into a #GtkSelectionData object. Should
+      only be called from a selection handler callback.
+      Zero-terminates the stored data.
+  
+      Params:
+        type = the type of selection data
+        format = format (number of bits in a unit)
+        data = pointer to the data (will be copied)
+  */
+  void set(gid.gdk3.atom.Atom type, int format, ubyte[] data) nothrow
+  {
+    int _length;
+    if (data)
+      _length = cast(int)data.length;
+
+    auto _data = cast(ubyte*)data.ptr;
+    gtk_selection_data_set(cast(GtkSelectionData*)this._cPtr, type ? cast(GdkAtom)type._cPtr : null, format, _data, _length);
+  }
+
+  /**
+      Sets the contents of the selection from a #GdkPixbuf
+      The pixbuf is converted to the form determined by
+      selection_data->target.
+  
+      Params:
+        pixbuf = a #GdkPixbuf
+      Returns: true if the selection was successfully set,
+          otherwise false.
+  */
+  bool setPixbuf(gid.gdkpixbuf2.pixbuf.Pixbuf pixbuf) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_selection_data_set_pixbuf(cast(GtkSelectionData*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Sets the contents of the selection from a UTF-8 encoded string.
+      The string is converted to the form determined by
+      selection_data->target.
+  
+      Params:
+        str = a UTF-8 string
+      Returns: true if the selection was successfully set,
+          otherwise false.
+  */
+  bool setText(string str) nothrow
+  {
+    bool _retval;
+    int _len;
+    if (str)
+      _len = cast(int)str.length;
+
+    auto _str = cast(char*)str.ptr;
+    _retval = cast(bool)gtk_selection_data_set_text(cast(GtkSelectionData*)this._cPtr, _str, _len);
+    return _retval;
+  }
+
+  /**
+      Sets the contents of the selection from a list of URIs.
+      The string is converted to the form determined by
+      selection_data->target.
+      
+      Since 3.24.37, this may involve using the FileTransfer
+      portal to send files between sandboxed apps.
+  
+      Params:
+        uris = a null-terminated array of
+              strings holding URIs
+      Returns: true if the selection was successfully set,
+          otherwise false.
+  */
+  bool setUris(string[] uris) nothrow
+  {
+    bool _retval;
+    auto _uris_arr = new char*[](uris.length + 1);
+    auto _uris = cast(char**)_uris_arr.ptr;
+    foreach (i, s; uris) _uris[i] = s.toCString!(No.Malloc);
+    _retval = cast(bool)gtk_selection_data_set_uris(cast(GtkSelectionData*)this._cPtr, _uris);
+    return _retval;
+  }
+
+  /**
+      Given a #GtkSelectionData object holding a list of targets,
+      determines if any of the targets in targets can be used to
+      provide a #GdkPixbuf.
+  
+      Params:
+        writable = whether to accept only targets for which GTK+ knows
+            how to convert a pixbuf into the format
+      Returns: true if selection_data holds a list of targets,
+          and a suitable target for images is included, otherwise false.
+  */
+  bool targetsIncludeImage(bool writable) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_selection_data_targets_include_image(cast(const(GtkSelectionData)*)this._cPtr, writable);
+    return _retval;
+  }
+
+  /**
+      Given a #GtkSelectionData object holding a list of targets,
+      determines if any of the targets in targets can be used to
+      provide rich text.
+  
+      Params:
+        buffer = a #GtkTextBuffer
+      Returns: true if selection_data holds a list of targets,
+                      and a suitable target for rich text is included,
+                      otherwise false.
+  */
+  bool targetsIncludeRichText(gid.gtk3.text_buffer.TextBuffer buffer) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_selection_data_targets_include_rich_text(cast(const(GtkSelectionData)*)this._cPtr, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Given a #GtkSelectionData object holding a list of targets,
+      determines if any of the targets in targets can be used to
+      provide text.
+      Returns: true if selection_data holds a list of targets,
+          and a suitable target for text is included, otherwise false.
+  */
+  bool targetsIncludeText() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_selection_data_targets_include_text(cast(const(GtkSelectionData)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Given a #GtkSelectionData object holding a list of targets,
+      determines if any of the targets in targets can be used to
+      provide a list or URIs.
+      Returns: true if selection_data holds a list of targets,
+          and a suitable target for URI lists is included, otherwise false.
+  */
+  bool targetsIncludeUri() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_selection_data_targets_include_uri(cast(const(GtkSelectionData)*)this._cPtr);
+    return _retval;
+  }
+}

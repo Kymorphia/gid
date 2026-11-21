@@ -1,0 +1,602 @@
+/// Module for [Completion] class
+module gid.gtksource5.completion;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.text_view;
+import gid.gtksource5.buffer;
+import gid.gtksource5.c.functions;
+import gid.gtksource5.c.types;
+import gid.gtksource5.completion_provider;
+import gid.gtksource5.types;
+import gid.gtksource5.view;
+import gid.pango1.attr_list;
+
+/**
+    Main Completion Object.
+    
+    The completion system helps the user when they writes some text,
+    such as words, command names, functions, and suchlike. Proposals can
+    be shown, to complete the text the user is writing. Each proposal can
+    contain an additional piece of information (for example
+    documentation), that is displayed when the "Details" button is
+    clicked.
+    
+    Proposals are created via a [gid.gtksource5.completion_provider.CompletionProvider]. There can
+    be for example a provider to complete words (see [gid.gtksource5.completion_words.CompletionWords]),
+    another provider for the completion of
+    function names, etc. To add a provider, call
+    [gid.gtksource5.completion.Completion.addProvider].
+    
+    The [gid.gtksource5.completion_proposal.CompletionProposal] interface represents a proposal.
+    
+    If a proposal contains extra information (see
+    [gid.gtksource5.types.CompletionColumn.Details]), it will be
+    displayed in a supplemental details window, which appears when
+    the "Details" button is clicked.
+    
+    Each [gid.gtksource5.view.View] object is associated with a [gid.gtksource5.completion.Completion]
+    instance. This instance can be obtained with
+    [gid.gtksource5.view.View.getCompletion]. The [gid.gtksource5.view.View] class contains also the
+    [gid.gtksource5.view.View.showCompletion] signal.
+    
+    A same [gid.gtksource5.completion_provider.CompletionProvider] object can be used for several
+    [gid.gtksource5.completion.Completion]'s.
+*/
+class Completion : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_source_completion_get_type != &gidSymbolNotFound ? gtk_source_completion_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceCompletion";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Completion self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtksource5.completion.Completion]
+      Returns: New builder object
+  */
+  static CompletionGidBuilder builder() nothrow
+  {
+    return new CompletionGidBuilder;
+  }
+
+  /**
+      Get `buffer` property.
+      Returns: The #GtkTextBuffer for the #GtkSourceCompletion:view.
+        This is a convenience property for providers.
+  */
+  @property gid.gtk4.text_view.TextView buffer() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gtk4.text_view.TextView)("buffer");
+  }
+
+  /**
+      Get `pageSize` property.
+      Returns: The number of rows to display to the user before scrolling.
+  */
+  @property uint pageSize() nothrow
+  {
+    return getPageSize();
+  }
+
+  /**
+      Set `pageSize` property.
+      Params:
+        propval = The number of rows to display to the user before scrolling.
+  */
+  @property void pageSize(uint propval) nothrow
+  {
+    setPageSize(propval);
+  }
+
+  /**
+      Get `rememberInfoVisibility` property.
+      Returns: Determines whether the visibility of the info window should be saved when the
+        completion is hidden, and restored when the completion is shown again.
+  */
+  @property bool rememberInfoVisibility() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("remember-info-visibility");
+  }
+
+  /**
+      Set `rememberInfoVisibility` property.
+      Params:
+        propval = Determines whether the visibility of the info window should be saved when the
+          completion is hidden, and restored when the completion is shown again.
+  */
+  @property void rememberInfoVisibility(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("remember-info-visibility", propval);
+  }
+
+  /**
+      Get `selectOnShow` property.
+      Returns: Determines whether the first proposal should be selected when the completion
+        is first shown.
+  */
+  @property bool selectOnShow() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("select-on-show");
+  }
+
+  /**
+      Set `selectOnShow` property.
+      Params:
+        propval = Determines whether the first proposal should be selected when the completion
+          is first shown.
+  */
+  @property void selectOnShow(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("select-on-show", propval);
+  }
+
+  /**
+      Get `showIcons` property.
+      Returns: The "show-icons" property denotes if icons should be displayed within
+        the list of completions presented to the user.
+  */
+  @property bool showIcons() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("show-icons");
+  }
+
+  /**
+      Set `showIcons` property.
+      Params:
+        propval = The "show-icons" property denotes if icons should be displayed within
+          the list of completions presented to the user.
+  */
+  @property void showIcons(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("show-icons", propval);
+  }
+
+  /**
+      Get `view` property.
+      Returns: The "view" property is the #GtkTextView for which this #GtkSourceCompletion
+        is providing completion features.
+  */
+  @property gid.gtksource5.view.View view() nothrow
+  {
+    return getView();
+  }
+
+  /**
+      This will add `<b>` tags around matched characters in haystack
+      based on casefold_query.
+  
+      Params:
+        haystack = the string to be highlighted
+        casefoldQuery = the typed-text used to highlight haystack
+      Returns: a #PangoAttrList or null
+  */
+  static gid.pango1.attr_list.AttrList fuzzyHighlight(string haystack, string casefoldQuery) nothrow
+  {
+    PangoAttrList* _cretval;
+    const(char)* _haystack = haystack.toCString!(No.Malloc, No.Nullable);
+    const(char)* _casefoldQuery = casefoldQuery.toCString!(No.Malloc, No.Nullable);
+    _cretval = gtk_source_completion_fuzzy_highlight(_haystack, _casefoldQuery);
+    auto _retval = _cretval ? new gid.pango1.attr_list.AttrList(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      This helper function can do a fuzzy match for you giving a haystack and
+      casefolded needle.
+      
+      Casefold your needle using `funcGLib.utf8_casefold` before
+      running the query.
+      
+      Score will be set with the score of the match upon success. Otherwise,
+      it will be set to zero.
+  
+      Params:
+        haystack = the string to be searched.
+        casefoldNeedle = A [gid.glib2.global.utf8Casefold] version of the needle.
+        priority = An optional location for the score of the match
+      Returns: true if haystack matched casefold_needle, otherwise false.
+  */
+  static bool fuzzyMatch(string haystack, string casefoldNeedle, out uint priority) nothrow
+  {
+    bool _retval;
+    const(char)* _haystack = haystack.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _casefoldNeedle = casefoldNeedle.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)gtk_source_completion_fuzzy_match(_haystack, _casefoldNeedle, cast(uint*)&priority);
+    return _retval;
+  }
+
+  /**
+      Adds a [gid.gtksource5.completion_provider.CompletionProvider] to the list of providers to be queried
+      for completion results.
+  
+      Params:
+        provider = a #GtkSourceCompletionProvider
+  */
+  void addProvider(gid.gtksource5.completion_provider.CompletionProvider provider) nothrow
+  {
+    gtk_source_completion_add_provider(cast(GtkSourceCompletion*)this._cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gid.gobject2.object.ObjectWrap)provider)._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  void blockInteractive() nothrow
+  {
+    gtk_source_completion_block_interactive(cast(GtkSourceCompletion*)this._cPtr);
+  }
+
+  /**
+      Gets the connected [gid.gtksource5.view.View]'s [gid.gtksource5.buffer.Buffer]
+      Returns: A #GtkSourceBuffer
+  */
+  gid.gtksource5.buffer.Buffer getBuffer() nothrow
+  {
+    GtkSourceBuffer* _cretval;
+    _cretval = gtk_source_completion_get_buffer(cast(GtkSourceCompletion*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtksource5.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /** */
+  uint getPageSize() nothrow
+  {
+    uint _retval;
+    _retval = gtk_source_completion_get_page_size(cast(GtkSourceCompletion*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the [gid.gtksource5.view.View] that owns the [gid.gtksource5.completion.Completion].
+      Returns: A #GtkSourceView
+  */
+  gid.gtksource5.view.View getView() nothrow
+  {
+    GtkSourceView* _cretval;
+    _cretval = gtk_source_completion_get_view(cast(GtkSourceCompletion*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtksource5.view.View)(cast(GtkSourceView*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Emits the "hide" signal.
+      
+      When the "hide" signal is emitted, the completion window will be
+      dismissed.
+  */
+  void hide() nothrow
+  {
+    gtk_source_completion_hide(cast(GtkSourceCompletion*)this._cPtr);
+  }
+
+  /**
+      Removes a [gid.gtksource5.completion_provider.CompletionProvider] previously added with
+      [gid.gtksource5.completion.Completion.addProvider].
+  
+      Params:
+        provider = a #GtkSourceCompletionProvider
+  */
+  void removeProvider(gid.gtksource5.completion_provider.CompletionProvider provider) nothrow
+  {
+    gtk_source_completion_remove_provider(cast(GtkSourceCompletion*)this._cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gid.gobject2.object.ObjectWrap)provider)._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  void setPageSize(uint pageSize) nothrow
+  {
+    gtk_source_completion_set_page_size(cast(GtkSourceCompletion*)this._cPtr, pageSize);
+  }
+
+  /**
+      Emits the "show" signal.
+      
+      When the "show" signal is emitted, the completion window will be
+      displayed if there are any results available.
+  */
+  void show() nothrow
+  {
+    gtk_source_completion_show(cast(GtkSourceCompletion*)this._cPtr);
+  }
+
+  /** */
+  void unblockInteractive() nothrow
+  {
+    gtk_source_completion_unblock_interactive(cast(GtkSourceCompletion*)this._cPtr);
+  }
+
+  /**
+      Connect to `Hide` signal.
+  
+      The "hide" signal is emitted when the completion window should
+        be hidden.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtksource5.completion.Completion completion)`
+  
+          `completion` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectHide(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtksource5.completion.Completion)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtksource5.completion.Completion.hide");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("hide", closure, after);
+  }
+
+  /**
+      Connect to `ProviderAdded` signal.
+  
+      The "provided-added" signal is emitted when a new provider is
+        added to the completion.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtksource5.completion_provider.CompletionProvider provider, gid.gtksource5.completion.Completion completion)`
+  
+          `provider` a #GtkSourceCompletionProvider (optional)
+  
+          `completion` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectProviderAdded(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtksource5.completion_provider.CompletionProvider)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gtksource5.completion.Completion)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtksource5.completion.Completion.providerAdded");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("provider-added", closure, after);
+  }
+
+  /**
+      Connect to `ProviderRemoved` signal.
+  
+      The "provided-removed" signal is emitted when a provider has
+        been removed from the completion.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtksource5.completion_provider.CompletionProvider provider, gid.gtksource5.completion.Completion completion)`
+  
+          `provider` a #GtkSourceCompletionProvider (optional)
+  
+          `completion` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectProviderRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtksource5.completion_provider.CompletionProvider)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gtksource5.completion.Completion)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtksource5.completion.Completion.providerRemoved");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("provider-removed", closure, after);
+  }
+
+  /**
+      Connect to `Show` signal.
+  
+      The "show" signal is emitted when the completion window should
+        be shown.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtksource5.completion.Completion completion)`
+  
+          `completion` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectShow(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtksource5.completion.Completion)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtksource5.completion.Completion.show");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("show", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtksource5.completion.Completion]
+class CompletionGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `pageSize` property.
+      Params:
+        propval = The number of rows to display to the user before scrolling.
+      Returns: Builder instance for fluent chaining
+  */
+  T pageSize(uint propval) nothrow
+  {
+    return setProperty("page-size", propval);
+  }
+
+  /**
+      Set `rememberInfoVisibility` property.
+      Params:
+        propval = Determines whether the visibility of the info window should be saved when the
+          completion is hidden, and restored when the completion is shown again.
+      Returns: Builder instance for fluent chaining
+  */
+  T rememberInfoVisibility(bool propval) nothrow
+  {
+    return setProperty("remember-info-visibility", propval);
+  }
+
+  /**
+      Set `selectOnShow` property.
+      Params:
+        propval = Determines whether the first proposal should be selected when the completion
+          is first shown.
+      Returns: Builder instance for fluent chaining
+  */
+  T selectOnShow(bool propval) nothrow
+  {
+    return setProperty("select-on-show", propval);
+  }
+
+  /**
+      Set `showIcons` property.
+      Params:
+        propval = The "show-icons" property denotes if icons should be displayed within
+          the list of completions presented to the user.
+      Returns: Builder instance for fluent chaining
+  */
+  T showIcons(bool propval) nothrow
+  {
+    return setProperty("show-icons", propval);
+  }
+
+  /**
+      Set `view` property.
+      Params:
+        propval = The "view" property is the #GtkTextView for which this #GtkSourceCompletion
+          is providing completion features.
+      Returns: Builder instance for fluent chaining
+  */
+  T view(gid.gtksource5.view.View propval) nothrow
+  {
+    return setProperty("view", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtksource5.completion.Completion]
+final class CompletionGidBuilder : CompletionGidBuilderImpl!CompletionGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Completion build() nothrow
+  {
+    return new Completion(cast(void*)createGObject(Completion._getGType), Yes.Take);
+  }
+}

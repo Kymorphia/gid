@@ -1,0 +1,195 @@
+/// Module for [SDPConnection] class
+module gid.gstsdp1.sdpconnection;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gstsdp1.c.functions;
+import gid.gstsdp1.c.types;
+import gid.gstsdp1.types;
+
+/**
+    The contents of the SDP "c=" field which contains connection data.
+*/
+class SDPConnection : StructWrap!(GstSDPConnection)
+{
+  /**
+      Create a `sdpconnection.SDPConnection` wrap type.
+      Params:
+        nettype = the type of network. "IN" is defined to have the meaning
+             "Internet".
+        addrtype = the type of @address.
+        address = the address
+        ttl = the time to live of the address
+        addrNumber = the number of layers
+  */
+  this(string nettype = string.init, string addrtype = string.init, string address = string.init, uint ttl = uint.init, uint addrNumber = uint.init) nothrow
+  {
+    this.nettype = nettype;
+    this.addrtype = addrtype;
+    this.address = address;
+    this.ttl = ttl;
+    this.addrNumber = addrNumber;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _nettypeRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `nettype` field.
+      Returns: the type of network. "IN" is defined to have the meaning
+           "Internet".
+  */
+  @property string nettype() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GstSDPConnection*)this._cPtr).nettype);
+  }
+
+  /**
+      Set `nettype` field.
+      Params:
+        propval = the type of network. "IN" is defined to have the meaning
+             "Internet".
+  */
+  @property void nettype(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("nettype"))
+      return;
+
+    _nettypeRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPConnection*)this._cPtr).nettype = cast(char*)_nettypeRef;
+  }
+
+  private const(char)* _addrtypeRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `addrtype` field.
+      Returns: the type of @address.
+  */
+  @property string addrtype() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GstSDPConnection*)this._cPtr).addrtype);
+  }
+
+  /**
+      Set `addrtype` field.
+      Params:
+        propval = the type of @address.
+  */
+  @property void addrtype(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("addrtype"))
+      return;
+
+    _addrtypeRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPConnection*)this._cPtr).addrtype = cast(char*)_addrtypeRef;
+  }
+
+  private const(char)* _addressRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `address` field.
+      Returns: the address
+  */
+  @property string address() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GstSDPConnection*)this._cPtr).address);
+  }
+
+  /**
+      Set `address` field.
+      Params:
+        propval = the address
+  */
+  @property void address(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("address"))
+      return;
+
+    _addressRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPConnection*)this._cPtr).address = cast(char*)_addressRef;
+  }
+
+  /**
+      Get `ttl` field.
+      Returns: the time to live of the address
+  */
+  @property uint ttl() nothrow
+  {
+    return (cast(GstSDPConnection*)this._cPtr).ttl;
+  }
+
+  /**
+      Set `ttl` field.
+      Params:
+        propval = the time to live of the address
+  */
+  @property void ttl(uint propval) nothrow
+  {
+    (cast(GstSDPConnection*)this._cPtr).ttl = propval;
+  }
+
+  /**
+      Get `addrNumber` field.
+      Returns: the number of layers
+  */
+  @property uint addrNumber() nothrow
+  {
+    return (cast(GstSDPConnection*)this._cPtr).addrNumber;
+  }
+
+  /**
+      Set `addrNumber` field.
+      Params:
+        propval = the number of layers
+  */
+  @property void addrNumber(uint propval) nothrow
+  {
+    (cast(GstSDPConnection*)this._cPtr).addrNumber = propval;
+  }
+
+  /**
+      Clear the connection.
+      Returns: GST_SDP_OK.
+  */
+  gid.gstsdp1.types.SDPResult clear() nothrow
+  {
+    GstSDPResult _cretval;
+    _cretval = gst_sdp_connection_clear(cast(GstSDPConnection*)this._cPtr);
+    gid.gstsdp1.types.SDPResult _retval = cast(gid.gstsdp1.types.SDPResult)_cretval;
+    return _retval;
+  }
+
+  /**
+      Set the connection with the given parameters.
+  
+      Params:
+        nettype = the type of network. "IN" is defined to have the meaning
+          "Internet".
+        addrtype = the type of address.
+        address = the address
+        ttl = the time to live of the address
+        addrNumber = the number of layers
+      Returns: GST_SDP_OK.
+  */
+  gid.gstsdp1.types.SDPResult set(string nettype, string addrtype, string address, uint ttl, uint addrNumber) nothrow
+  {
+    GstSDPResult _cretval;
+    const(char)* _nettype = nettype.toCString!(No.Malloc, No.Nullable);
+    const(char)* _addrtype = addrtype.toCString!(No.Malloc, No.Nullable);
+    const(char)* _address = address.toCString!(No.Malloc, No.Nullable);
+    _cretval = gst_sdp_connection_set(cast(GstSDPConnection*)this._cPtr, _nettype, _addrtype, _address, ttl, addrNumber);
+    gid.gstsdp1.types.SDPResult _retval = cast(gid.gstsdp1.types.SDPResult)_cretval;
+    return _retval;
+  }
+}

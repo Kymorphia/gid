@@ -1,0 +1,588 @@
+/// Module for [MainContext] class
+module gid.glib2.main_context;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.glib2.c.functions;
+import gid.glib2.c.types;
+import gid.glib2.source;
+import gid.glib2.types;
+import gid.gobject2.boxed;
+
+/**
+    The [gid.glib2.main_context.MainContext] struct is an opaque data
+    type representing a set of sources to be handled in a main loop.
+*/
+class MainContext : gid.gobject2.boxed.BoxedWrap!(g_main_context_get_type)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override MainContext self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Creates a new [gid.glib2.main_context.MainContext] structure.
+      Returns: the new main context
+  */
+  this() nothrow
+  {
+    GMainContext* _cretval;
+    _cretval = g_main_context_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Creates a new [gid.glib2.main_context.MainContext] structure.
+  
+      Params:
+        flags = a bitwise-OR combination of flags that can only be set at creation
+            time
+      Returns: the new main context
+  */
+  static gid.glib2.main_context.MainContext newWithFlags(gid.glib2.types.MainContextFlags flags) nothrow
+  {
+    GMainContext* _cretval;
+    _cretval = g_main_context_new_with_flags(flags);
+    auto _retval = _cretval ? new gid.glib2.main_context.MainContext(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Tries to become the owner of the specified context.
+      
+      If some other thread is the owner of the context,
+      returns false immediately. Ownership is properly
+      recursive: the owner can require ownership again
+      and will release ownership when [gid.glib2.main_context.MainContext.release]
+      is called as many times as [gid.glib2.main_context.MainContext.acquire].
+      
+      You must be the owner of a context before you
+      can call [gid.glib2.main_context.MainContext.prepare], [gid.glib2.main_context.MainContext.query],
+      [gid.glib2.main_context.MainContext.check], [gid.glib2.main_context.MainContext.dispatch],
+      [gid.glib2.main_context.MainContext.release].
+      
+      Since 2.76 context can be `NULL` to use the global-default
+      main context.
+      Returns: true if this thread is now the owner of context, false otherwise
+  */
+  bool acquire() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_main_context_acquire(cast(GMainContext*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Adds a file descriptor to the set of file descriptors polled for
+      this context.
+      
+      This will very seldom be used directly. Instead
+      a typical event source will use `[gid.glib2.source.Source.addUnixFd]` instead.
+  
+      Params:
+        fd = a [gid.glib2.types.PollFD] structure holding information about a file
+            descriptor to watch.
+        priority = the priority for this file descriptor which should be
+            the same as the priority used for [gid.glib2.source.Source.attach] to ensure
+            that the file descriptor is polled whenever the results may be needed.
+  */
+  void addPoll(gid.glib2.types.PollFD fd, int priority) nothrow
+  {
+    g_main_context_add_poll(cast(GMainContext*)this._cPtr, cast(GPollFD*)&fd, priority);
+  }
+
+  /**
+      Passes the results of polling back to the main loop.
+      
+      You should be
+      careful to pass fds and its length n_fds as received from
+      [gid.glib2.main_context.MainContext.query], as this functions relies on assumptions
+      on how fds is filled.
+      
+      You must have successfully acquired the context with
+      [gid.glib2.main_context.MainContext.acquire] before you may call this function.
+      
+      Since 2.76 context can be `NULL` to use the global-default
+      main context.
+  
+      Params:
+        maxPriority = the maximum numerical priority of sources to check
+        fds = array of [gid.glib2.types.PollFD]s that was passed to
+            the last call to [gid.glib2.main_context.MainContext.query]
+      Returns: true if some sources are ready to be dispatched, false otherwise
+  */
+  bool check(int maxPriority, gid.glib2.types.PollFD[] fds) nothrow
+  {
+    bool _retval;
+    int _nFds;
+    if (fds)
+      _nFds = cast(int)fds.length;
+
+    auto _fds = cast(GPollFD*)fds.ptr;
+    _retval = cast(bool)g_main_context_check(cast(GMainContext*)this._cPtr, maxPriority, _fds, _nFds);
+    return _retval;
+  }
+
+  /**
+      Dispatches all pending sources.
+      
+      You must have successfully acquired the context with
+      [gid.glib2.main_context.MainContext.acquire] before you may call this function.
+      
+      Since 2.76 context can be `NULL` to use the global-default
+      main context.
+  */
+  void dispatch() nothrow
+  {
+    g_main_context_dispatch(cast(GMainContext*)this._cPtr);
+  }
+
+  /**
+      Finds a source with the given source functions and user data.
+      
+      If multiple sources exist with the same source function and user data,
+      the first one found will be returned.
+  
+      Params:
+        funcs = the source_funcs passed to [gid.glib2.source.Source.new_]
+        userData = the user data from the callback
+      Returns: the source, if one was found,
+          otherwise `NULL`
+  */
+  gid.glib2.source.Source findSourceByFuncsUserData(gid.glib2.types.SourceFuncs funcs, void* userData = null) nothrow
+  {
+    GSource* _cretval;
+    _cretval = g_main_context_find_source_by_funcs_user_data(cast(GMainContext*)this._cPtr, cast(GSourceFuncs*)&funcs, userData);
+    auto _retval = _cretval ? new gid.glib2.source.Source(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Finds a [gid.glib2.source.Source] given a pair of context and ID.
+      
+      It is a programmer error to attempt to look up a non-existent source.
+      
+      More specifically: source IDs can be reissued after a source has been
+      destroyed and therefore it is never valid to use this function with a
+      source ID which may have already been removed.  An example is when
+      scheduling an idle to run in another thread with `funcGLib.idle_add`: the
+      idle may already have run and been removed by the time this function
+      is called on its (now invalid) source ID.  This source ID may have
+      been reissued, leading to the operation being performed against the
+      wrong source.
+  
+      Params:
+        sourceId = the source ID, as returned by [gid.glib2.source.Source.getId]
+      Returns: the source
+  */
+  gid.glib2.source.Source findSourceById(uint sourceId) nothrow
+  {
+    GSource* _cretval;
+    _cretval = g_main_context_find_source_by_id(cast(GMainContext*)this._cPtr, sourceId);
+    auto _retval = _cretval ? new gid.glib2.source.Source(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Finds a source with the given user data for the callback.
+      
+      If multiple sources exist with the same user data, the first
+      one found will be returned.
+  
+      Params:
+        userData = the user_data for the callback
+      Returns: the source, if one was found,
+          otherwise `NULL`
+  */
+  gid.glib2.source.Source findSourceByUserData(void* userData = null) nothrow
+  {
+    GSource* _cretval;
+    _cretval = g_main_context_find_source_by_user_data(cast(GMainContext*)this._cPtr, userData);
+    auto _retval = _cretval ? new gid.glib2.source.Source(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Invokes a function in such a way that context is owned during the
+      invocation of function.
+      
+      This function is the same as [gid.glib2.main_context.MainContext.invoke] except that it
+      lets you specify the priority in case function ends up being
+      scheduled as an idle and also lets you give a [gid.glib2.types.DestroyNotify]
+      for data.
+      
+      The notify function should not assume that it is called from any particular
+      thread or with any particular context acquired.
+  
+      Params:
+        priority = the priority at which to run function
+        function_ = function to call
+  */
+  void invokeFull(int priority, gid.glib2.types.SourceFunc function_) nothrow
+  {
+    extern(C) gboolean _function_Callback(void* userData) nothrow
+    {
+      bool _dretval;
+      auto _dlg = cast(gid.glib2.types.SourceFunc*)userData;
+
+      try
+      {
+        _dretval = (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.glib2.types.SourceFunc");
+      }
+      auto _retval = cast(gboolean)_dretval;
+
+      return _retval;
+    }
+    auto _function_CB = function_ ? &_function_Callback : null;
+    auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
+    GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;
+    g_main_context_invoke_full(cast(GMainContext*)this._cPtr, priority, _function_CB, _function_, _function_DestroyCB);
+  }
+
+  /**
+      Determines whether this thread holds the (recursive)
+      ownership of this [gid.glib2.main_context.MainContext].
+      
+      This is useful to
+      know before waiting on another thread that may be
+      blocking to get ownership of context.
+      Returns: true if current thread is owner of context, false otherwise
+  */
+  bool isOwner() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_main_context_is_owner(cast(GMainContext*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Runs a single iteration for the given main loop.
+      
+      This involves
+      checking to see if any event sources are ready to be processed,
+      then if no events sources are ready and may_block is true, waiting
+      for a source to become ready, then dispatching the highest priority
+      events sources that are ready. Otherwise, if may_block is false,
+      this function does not wait for sources to become ready, and only the highest
+      priority sources which are already ready (if any) will be dispatched.
+      
+      Note that even when may_block is true, it is still possible for
+      [gid.glib2.main_context.MainContext.iteration] to return false, since the wait may
+      be interrupted for other reasons than an event source becoming ready.
+  
+      Params:
+        mayBlock = whether the call may block
+      Returns: true if events were dispatched, false otherwise
+  */
+  bool iteration(bool mayBlock) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_main_context_iteration(cast(GMainContext*)this._cPtr, mayBlock);
+    return _retval;
+  }
+
+  /**
+      Checks if any sources have pending events for the given context.
+      Returns: true if events are pending, false otherwise
+  */
+  bool pending() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_main_context_pending(cast(GMainContext*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Pops context off the thread-default context stack (verifying that
+      it was on the top of the stack).
+  */
+  void popThreadDefault() nothrow
+  {
+    g_main_context_pop_thread_default(cast(GMainContext*)this._cPtr);
+  }
+
+  /**
+      Prepares to poll sources within a main loop.
+      
+      The resulting information
+      for polling is determined by calling [gid.glib2.main_context.MainContext.query].
+      
+      You must have successfully acquired the context with
+      [gid.glib2.main_context.MainContext.acquire] before you may call this function.
+  
+      Params:
+        priority = location to store priority of highest priority
+            source already ready
+      Returns: true if some source is ready to be dispatched prior to polling,
+          false otherwise
+  */
+  bool prepare(out int priority) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_main_context_prepare(cast(GMainContext*)this._cPtr, cast(int*)&priority);
+    return _retval;
+  }
+
+  /**
+      Acquires context and sets it as the thread-default context for the
+      current thread. This will cause certain asynchronous operations
+      (such as most [Gio](../gio/index.html)-based I/O) which are
+      started in this thread to run under context and deliver their
+      results to its main loop, rather than running under the global
+      default main context in the main thread. Note that calling this function
+      changes the context returned by [gid.glib2.main_context.MainContext.getThreadDefault],
+      not the one returned by [gid.glib2.main_context.MainContext.default_], so it does not
+      affect the context used by functions like `funcGLib.idle_add`.
+      
+      Normally you would call this function shortly after creating a new
+      thread, passing it a [gid.glib2.main_context.MainContext] which will be run by a
+      [gid.glib2.main_loop.MainLoop] in that thread, to set a new default context for all
+      async operations in that thread. In this case you may not need to
+      ever call [gid.glib2.main_context.MainContext.popThreadDefault], assuming you want
+      the new [gid.glib2.main_context.MainContext] to be the default for the whole lifecycle
+      of the thread.
+      
+      If you don’t have control over how the new thread was created (e.g.
+      in the new thread isn’t newly created, or if the thread life
+      cycle is managed by a #GThreadPool), it is always suggested to wrap
+      the logic that needs to use the new [gid.glib2.main_context.MainContext] inside a
+      [gid.glib2.main_context.MainContext.pushThreadDefault] /
+      [gid.glib2.main_context.MainContext.popThreadDefault] pair, otherwise threads that
+      are re-used will end up never explicitly releasing the
+      [gid.glib2.main_context.MainContext] reference they hold.
+      
+      In some cases you may want to schedule a single operation in a
+      non-default context, or temporarily use a non-default context in
+      the main thread. In that case, you can wrap the call to the
+      asynchronous operation inside a
+      [gid.glib2.main_context.MainContext.pushThreadDefault] /
+      [gid.glib2.main_context.MainContext.popThreadDefault] pair, but it is up to you to
+      ensure that no other asynchronous operations accidentally get
+      started while the non-default context is active.
+      
+      Beware that libraries that predate this function may not correctly
+      handle being used from a thread with a thread-default context. For example,
+      see `[gid.gio2.file.File.supportsThreadContexts]`.
+  */
+  void pushThreadDefault() nothrow
+  {
+    g_main_context_push_thread_default(cast(GMainContext*)this._cPtr);
+  }
+
+  /**
+      Push main_context as the new thread-default main context for the current
+      thread, using [gid.glib2.main_context.MainContext.pushThreadDefault], and return a
+      new [gid.glib2.types.void]. Pop with [gid.glib2.main_context.MainContext.pusherFree].
+      Using [gid.glib2.main_context.MainContext.popThreadDefault] on main_context while a
+      [gid.glib2.types.void] exists for it can lead to undefined behaviour.
+      
+      Using two [gid.glib2.types.void]s in the same scope is not allowed,
+      as it leads to an undefined pop order.
+      
+      This is intended to be used with g_autoptr().  Note that g_autoptr()
+      is only available when using GCC or clang, so the following example
+      will only work with those compilers:
+      ```
+      typedef struct
+      {
+        ...
+        GMainContext *context;
+        ...
+      } MyObject;
+      
+      static void
+      my_object_do_stuff (MyObject *self)
+      {
+        g_autoptr(GMainContextPusher) pusher = g_main_context_pusher_new (self->context);
+      
+        // Code with main context as the thread default here
+      
+        if (cond)
+          // No need to pop
+          return;
+      
+        // Optionally early pop
+        g_clear_pointer (&pusher, g_main_context_pusher_free);
+      
+        // Code with main context no longer the thread default here
+      }
+      ```
+      Returns: a #GMainContextPusher
+  */
+  gid.glib2.types.MainContextPusher* pusherNew() nothrow
+  {
+    gid.glib2.types.MainContextPusher* _retval;
+    _retval = g_main_context_pusher_new(cast(GMainContext*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Determines information necessary to poll this main loop.
+      
+      You should
+      be careful to pass the resulting fds array and its length n_fds
+      as-is when calling [gid.glib2.main_context.MainContext.check], as this function relies
+      on assumptions made when the array is filled.
+      
+      You must have successfully acquired the context with
+      [gid.glib2.main_context.MainContext.acquire] before you may call this function.
+  
+      Params:
+        maxPriority = maximum priority source to check
+        timeout = location to store timeout to be used in polling
+        fds = location to
+            store [gid.glib2.types.PollFD] records that need to be polled
+      Returns: the number of records actually stored in fds,
+          or, if more than n_fds records need to be stored, the number
+          of records that need to be stored
+  */
+  int query(int maxPriority, out int timeout, ref gid.glib2.types.PollFD[] fds) nothrow
+  {
+    int _retval;
+    int _nFds;
+    _nFds = cast(int)fds.length;
+    _retval = g_main_context_query(cast(GMainContext*)this._cPtr, maxPriority, cast(int*)&timeout, fds.ptr, _nFds);
+    return _retval;
+  }
+
+  /**
+      Releases ownership of a context previously acquired by this thread
+      with [gid.glib2.main_context.MainContext.acquire].
+      
+      If the context was acquired multiple
+      times, the ownership will be released only when [gid.glib2.main_context.MainContext.release]
+      is called as many times as it was acquired.
+      
+      You must have successfully acquired the context with
+      [gid.glib2.main_context.MainContext.acquire] before you may call this function.
+  */
+  void release() nothrow
+  {
+    g_main_context_release(cast(GMainContext*)this._cPtr);
+  }
+
+  /**
+      Removes file descriptor from the set of file descriptors to be
+      polled for a particular context.
+  
+      Params:
+        fd = a [gid.glib2.types.PollFD] descriptor previously added with
+            [gid.glib2.main_context.MainContext.addPoll]
+  */
+  void removePoll(gid.glib2.types.PollFD fd) nothrow
+  {
+    g_main_context_remove_poll(cast(GMainContext*)this._cPtr, cast(GPollFD*)&fd);
+  }
+
+  /**
+      Wake up context if it’s currently blocking in
+      [gid.glib2.main_context.MainContext.iteration], causing it to stop blocking.
+      
+      The context could be blocking waiting for a source to become ready.
+      Otherwise, if context is not currently blocking, this function causes the
+      next invocation of [gid.glib2.main_context.MainContext.iteration] to return without
+      blocking.
+      
+      This API is useful for low-level control over [gid.glib2.main_context.MainContext]; for
+      example, integrating it with main loop implementations such as
+      [gid.glib2.main_loop.MainLoop].
+      
+      Another related use for this function is when implementing a main
+      loop with a termination condition, computed from multiple threads:
+      
+      ```c
+        #define NUM_TASKS 10
+        static gint tasks_remaining = NUM_TASKS;  // (atomic)
+        ...
+       
+        while (g_atomic_int_get (&tasks_remaining) != 0)
+          g_main_context_iteration (NULL, TRUE);
+      ```
+       
+      Then in a thread:
+      ```c
+        perform_work ();
+      
+        if (g_atomic_int_dec_and_test (&tasks_remaining))
+          g_main_context_wakeup (NULL);
+      ```
+  */
+  void wakeup() nothrow
+  {
+    g_main_context_wakeup(cast(GMainContext*)this._cPtr);
+  }
+
+  /**
+      Returns the global-default main context.
+      
+      This is the main context
+      used for main loop functions when a main loop is not explicitly
+      specified, and corresponds to the ‘main’ main loop. See also
+      [gid.glib2.main_context.MainContext.getThreadDefault].
+      Returns: the global-default main context.
+  */
+  static gid.glib2.main_context.MainContext default_() nothrow
+  {
+    GMainContext* _cretval;
+    _cretval = g_main_context_default();
+    auto _retval = _cretval ? new gid.glib2.main_context.MainContext(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the thread-default main context for this thread.
+      
+      Asynchronous operations that want to be able to be run in contexts other than
+      the default one should call this method or
+      [gid.glib2.main_context.MainContext.refThreadDefault] to get a
+      [gid.glib2.main_context.MainContext] to add their [gid.glib2.source.Source]s to. (Note that
+      even in single-threaded programs applications may sometimes want to
+      temporarily push a non-default context, so it is not safe to assume that
+      this will always return `NULL` if you are running in the default thread.)
+      
+      If you need to hold a reference on the context, use
+      [gid.glib2.main_context.MainContext.refThreadDefault] instead.
+      Returns: the thread-default main context, or
+          `NULL` if the thread-default context is the global-default main context
+  */
+  static gid.glib2.main_context.MainContext getThreadDefault() nothrow
+  {
+    GMainContext* _cretval;
+    _cretval = g_main_context_get_thread_default();
+    auto _retval = _cretval ? new gid.glib2.main_context.MainContext(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets a reference to the thread-default [gid.glib2.main_context.MainContext] for this
+      thread
+      
+      This is the same as [gid.glib2.main_context.MainContext.getThreadDefault], but it also
+      adds a reference to the returned main context with [gid.glib2.main_context.MainContext.ref_].
+      In addition, unlike
+      [gid.glib2.main_context.MainContext.getThreadDefault], if the thread-default context
+      is the global-default context, this will return that
+      [gid.glib2.main_context.MainContext] (with a ref added to it) rather than returning
+      `NULL`.
+      Returns: the thread-default main context
+  */
+  static gid.glib2.main_context.MainContext refThreadDefault() nothrow
+  {
+    GMainContext* _cretval;
+    _cretval = g_main_context_ref_thread_default();
+    auto _retval = _cretval ? new gid.glib2.main_context.MainContext(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+}

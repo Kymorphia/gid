@@ -6,8 +6,8 @@
   "license": "MIT",
   "homepage": "https://freetype.org",
   "targetType": "library",
-  "importPaths": [".", ".."],
-  "sourcePaths": ["freetype2"],
+  "importPaths": ["."],
+  "sourcePaths": ["gid"],
   "dependencies": {
     "gid:glib2": "*"
   }

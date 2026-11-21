@@ -1,0 +1,181 @@
+/// Module for [DrawingContext] class
+module gid.gdk3.drawing_context;
+
+public import gid.core.basictypes;
+import gid.cairo1.context;
+import gid.cairo1.region;
+import gid.core.gid;
+import gid.gdk3.c.functions;
+import gid.gdk3.c.types;
+import gid.gdk3.types;
+import gid.gdk3.window;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+
+/**
+    #GdkDrawingContext is an object that represents the current drawing
+    state of a #GdkWindow.
+    
+    It's possible to use a #GdkDrawingContext to draw on a #GdkWindow
+    via rendering API like Cairo or OpenGL.
+    
+    A #GdkDrawingContext can only be created by calling [gid.gdk3.window.Window.beginDrawFrame]
+    and will be valid until a call to [gid.gdk3.window.Window.endDrawFrame].
+    
+    #GdkDrawingContext is available since GDK 3.22
+*/
+class DrawingContext : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gdk_drawing_context_get_type != &gidSymbolNotFound ? gdk_drawing_context_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkDrawingContext";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override DrawingContext self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gdk3.drawing_context.DrawingContext]
+      Returns: New builder object
+  */
+  static DrawingContextGidBuilder builder() nothrow
+  {
+    return new DrawingContextGidBuilder;
+  }
+
+  /**
+      Get `clip` property.
+      Returns: The clip region applied to the drawing context.
+  */
+  @property gid.cairo1.region.Region clip() nothrow
+  {
+    return getClip();
+  }
+
+  /**
+      Get `window` property.
+      Returns: The #GdkWindow that created the drawing context.
+  */
+  @property gid.gdk3.window.Window window() nothrow
+  {
+    return getWindow();
+  }
+
+  /**
+      Retrieves a Cairo context to be used to draw on the #GdkWindow
+      that created the #GdkDrawingContext.
+      
+      The returned context is guaranteed to be valid as long as the
+      #GdkDrawingContext is valid, that is between a call to
+      [gid.gdk3.window.Window.beginDrawFrame] and [gid.gdk3.window.Window.endDrawFrame].
+      Returns: a Cairo context to be used to draw
+          the contents of the #GdkWindow. The context is owned by the
+          #GdkDrawingContext and should not be destroyed
+  */
+  gid.cairo1.context.Context getCairoContext() nothrow
+  {
+    cairo_t* _cretval;
+    _cretval = gdk_drawing_context_get_cairo_context(cast(GdkDrawingContext*)this._cPtr);
+    auto _retval = _cretval ? new gid.cairo1.context.Context(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Retrieves a copy of the clip region used when creating the context.
+      Returns: a Cairo region
+  */
+  gid.cairo1.region.Region getClip() nothrow
+  {
+    cairo_region_t* _cretval;
+    _cretval = gdk_drawing_context_get_clip(cast(GdkDrawingContext*)this._cPtr);
+    auto _retval = _cretval ? new gid.cairo1.region.Region(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Retrieves the window that created the drawing context.
+      Returns: a #GdkWindow
+  */
+  gid.gdk3.window.Window getWindow() nothrow
+  {
+    GdkWindow* _cretval;
+    _cretval = gdk_drawing_context_get_window(cast(GdkDrawingContext*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk3.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Checks whether the given #GdkDrawingContext is valid.
+      Returns: true if the context is valid
+  */
+  bool isValid() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gdk_drawing_context_is_valid(cast(GdkDrawingContext*)this._cPtr);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [gid.gdk3.drawing_context.DrawingContext]
+class DrawingContextGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `clip` property.
+      Params:
+        propval = The clip region applied to the drawing context.
+      Returns: Builder instance for fluent chaining
+  */
+  T clip(gid.cairo1.region.Region propval) nothrow
+  {
+    return setProperty("clip", propval);
+  }
+
+  /**
+      Set `window` property.
+      Params:
+        propval = The #GdkWindow that created the drawing context.
+      Returns: Builder instance for fluent chaining
+  */
+  T window(gid.gdk3.window.Window propval) nothrow
+  {
+    return setProperty("window", propval);
+  }
+}
+
+/// Fluent builder for [gid.gdk3.drawing_context.DrawingContext]
+final class DrawingContextGidBuilder : DrawingContextGidBuilderImpl!DrawingContextGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  DrawingContext build() nothrow
+  {
+    return new DrawingContext(cast(void*)createGObject(DrawingContext._getGType), Yes.Take);
+  }
+}

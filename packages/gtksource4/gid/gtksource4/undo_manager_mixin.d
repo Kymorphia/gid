@@ -1,0 +1,185 @@
+/// Module for [UndoManager] interface mixin
+module gid.gtksource4.undo_manager_mixin;
+
+public import gid.core.basictypes;
+public import gid.gtksource4.undo_manager_iface_proxy;
+public import gid.core.gid;
+public import gid.gobject2.dclosure;
+public import gid.gobject2.gid_builder;
+public import gid.gtksource4.c.functions;
+public import gid.gtksource4.c.types;
+public import gid.gtksource4.types;
+
+/** */
+template UndoManagerT()
+{
+
+  /**
+      Begin a not undoable action on the buffer. All changes between this call
+      and the call to [gid.gtksource4.undo_manager.UndoManager.endNotUndoableAction] cannot
+      be undone. This function should be re-entrant.
+  */
+  override void beginNotUndoableAction() nothrow
+  {
+    gtk_source_undo_manager_begin_not_undoable_action(cast(GtkSourceUndoManager*)this._cPtr);
+  }
+
+  /**
+      Get whether there are redo operations available.
+      Returns: true if there are redo operations available, false otherwise
+  */
+  override bool canRedo() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_source_undo_manager_can_redo(cast(GtkSourceUndoManager*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Emits the #GtkSourceUndoManager::can-redo-changed signal.
+  */
+  override void canRedoChanged() nothrow
+  {
+    gtk_source_undo_manager_can_redo_changed(cast(GtkSourceUndoManager*)this._cPtr);
+  }
+
+  /**
+      Get whether there are undo operations available.
+      Returns: true if there are undo operations available, false otherwise
+  */
+  override bool canUndo() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_source_undo_manager_can_undo(cast(GtkSourceUndoManager*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Emits the #GtkSourceUndoManager::can-undo-changed signal.
+  */
+  override void canUndoChanged() nothrow
+  {
+    gtk_source_undo_manager_can_undo_changed(cast(GtkSourceUndoManager*)this._cPtr);
+  }
+
+  /**
+      Ends a not undoable action on the buffer.
+  */
+  override void endNotUndoableAction() nothrow
+  {
+    gtk_source_undo_manager_end_not_undoable_action(cast(GtkSourceUndoManager*)this._cPtr);
+  }
+
+  /**
+      Perform a single redo. Calling this function when there are no redo operations
+      available is an error. Use [gid.gtksource4.undo_manager.UndoManager.canRedo] to find out
+      if there are redo operations available.
+  */
+  override void redo() nothrow
+  {
+    gtk_source_undo_manager_redo(cast(GtkSourceUndoManager*)this._cPtr);
+  }
+
+  /**
+      Perform a single undo. Calling this function when there are no undo operations
+      available is an error. Use [gid.gtksource4.undo_manager.UndoManager.canUndo] to find out
+      if there are undo operations available.
+  */
+  override void undo() nothrow
+  {
+    gtk_source_undo_manager_undo(cast(GtkSourceUndoManager*)this._cPtr);
+  }
+
+  /**
+      Connect to `CanRedoChanged` signal.
+  
+      Emitted when the ability to redo has changed.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtksource4.undo_manager.UndoManager undoManager)`
+  
+          `undoManager` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectCanRedoChanged(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtksource4.undo_manager.UndoManager)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtksource4.undo_manager.UndoManager.canRedoChanged");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("can-redo-changed", closure, after);
+  }
+
+  /**
+      Connect to `CanUndoChanged` signal.
+  
+      Emitted when the ability to undo has changed.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtksource4.undo_manager.UndoManager undoManager)`
+  
+          `undoManager` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectCanUndoChanged(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtksource4.undo_manager.UndoManager)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtksource4.undo_manager.UndoManager.canUndoChanged");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("can-undo-changed", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtksource4.undo_manager.UndoManager]
+template UndoManagerGidBuilderT()
+{
+}

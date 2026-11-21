@@ -1,0 +1,44 @@
+/// Module for [VideoDither] class
+module gid.gstvideo1.video_dither;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gstvideo1.c.functions;
+import gid.gstvideo1.c.types;
+import gid.gstvideo1.types;
+
+/**
+    GstVideoDither provides implementations of several dithering algorithms
+    that can be applied to lines of video pixels to quantize and dither them.
+*/
+class VideoDither : OpaqueWrap!(GstVideoDither*, void, void)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /**
+      Dither width pixels starting from offset `x` in line using dither.
+      
+      `y` is the line number of line in the output image.
+  
+      Params:
+        line = pointer to the pixels of the line
+        x = x coordinate
+        y = y coordinate
+        width = the width
+  */
+  void line(void* line, uint x, uint y, uint width) nothrow
+  {
+    gst_video_dither_line(cast(GstVideoDither*)this._cPtr, line, x, y, width);
+  }
+}

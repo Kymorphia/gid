@@ -1,0 +1,128 @@
+/// Module for [VideoTimeCodeConfig] class
+module gid.gstvideo1.video_time_code_config;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.glib2.date_time;
+import gid.gstvideo1.c.functions;
+import gid.gstvideo1.c.types;
+import gid.gstvideo1.types;
+
+/**
+    Supported frame rates: 30000/1001, 60000/1001 (both with and without drop
+    frame), and integer frame rates e.g. 25/1, 30/1, 50/1, 60/1.
+    
+    The configuration of the time code.
+*/
+class VideoTimeCodeConfig : StructWrap!(GstVideoTimeCodeConfig)
+{
+  /**
+      Create a `video_time_code_config.VideoTimeCodeConfig` wrap type.
+      Params:
+        fpsN = Numerator of the frame rate
+        fpsD = Denominator of the frame rate
+        flags = the corresponding #GstVideoTimeCodeFlags
+        latestDailyJam = The latest daily jam information, if present, or NULL
+  */
+  this(uint fpsN = uint.init, uint fpsD = uint.init, gid.gstvideo1.types.VideoTimeCodeFlags flags = gid.gstvideo1.types.VideoTimeCodeFlags.init, gid.glib2.date_time.DateTime latestDailyJam = gid.glib2.date_time.DateTime.init) nothrow
+  {
+    this.fpsN = fpsN;
+    this.fpsD = fpsD;
+    this.flags = flags;
+    this.latestDailyJam = latestDailyJam;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /**
+      Get `fpsN` field.
+      Returns: Numerator of the frame rate
+  */
+  @property uint fpsN() nothrow
+  {
+    return (cast(GstVideoTimeCodeConfig*)this._cPtr).fpsN;
+  }
+
+  /**
+      Set `fpsN` field.
+      Params:
+        propval = Numerator of the frame rate
+  */
+  @property void fpsN(uint propval) nothrow
+  {
+    (cast(GstVideoTimeCodeConfig*)this._cPtr).fpsN = propval;
+  }
+
+  /**
+      Get `fpsD` field.
+      Returns: Denominator of the frame rate
+  */
+  @property uint fpsD() nothrow
+  {
+    return (cast(GstVideoTimeCodeConfig*)this._cPtr).fpsD;
+  }
+
+  /**
+      Set `fpsD` field.
+      Params:
+        propval = Denominator of the frame rate
+  */
+  @property void fpsD(uint propval) nothrow
+  {
+    (cast(GstVideoTimeCodeConfig*)this._cPtr).fpsD = propval;
+  }
+
+  /**
+      Get `flags` field.
+      Returns: the corresponding #GstVideoTimeCodeFlags
+  */
+  @property gid.gstvideo1.types.VideoTimeCodeFlags flags() nothrow
+  {
+    return cast(gid.gstvideo1.types.VideoTimeCodeFlags)(cast(GstVideoTimeCodeConfig*)this._cPtr).flags;
+  }
+
+  /**
+      Set `flags` field.
+      Params:
+        propval = the corresponding #GstVideoTimeCodeFlags
+  */
+  @property void flags(gid.gstvideo1.types.VideoTimeCodeFlags propval) nothrow
+  {
+    (cast(GstVideoTimeCodeConfig*)this._cPtr).flags = cast(GstVideoTimeCodeFlags)propval;
+  }
+
+  private gid.glib2.date_time.DateTime _latestDailyJamRef; // Keeps borrowed field value alive
+
+  /**
+      Get `latestDailyJam` field.
+      Returns: The latest daily jam information, if present, or NULL
+  */
+  @property gid.glib2.date_time.DateTime latestDailyJam() nothrow
+  {
+    return cToD!(gid.glib2.date_time.DateTime)(cast(void*)(cast(GstVideoTimeCodeConfig*)this._cPtr).latestDailyJam);
+  }
+
+  /**
+      Set `latestDailyJam` field.
+      Params:
+        propval = The latest daily jam information, if present, or NULL
+  */
+  @property void latestDailyJam(gid.glib2.date_time.DateTime propval) nothrow
+  {
+    if (_refuseBorrowedStore("latestDailyJam"))
+      return;
+
+    _latestDailyJamRef = propval;
+    (cast(GstVideoTimeCodeConfig*)this._cPtr).latestDailyJam = propval ? cast(GDateTime*)propval._cPtr(No.Dup) : null;
+  }
+}

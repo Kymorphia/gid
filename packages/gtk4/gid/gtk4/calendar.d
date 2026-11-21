@@ -1,0 +1,864 @@
+/// Module for [Calendar] class
+module gid.gtk4.calendar;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.glib2.date_time;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gtk4.accessible;
+import gid.gtk4.accessible_mixin;
+import gid.gtk4.buildable;
+import gid.gtk4.buildable_mixin;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.constraint_target;
+import gid.gtk4.constraint_target_mixin;
+import gid.gtk4.types;
+import gid.gtk4.widget;
+
+/**
+    Displays a Gregorian calendar, one month at a time.
+    
+    <picture>
+      <source srcset="calendar-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkCalendar" src="calendar.png">
+    </picture>
+    
+    A [gid.gtk4.calendar.Calendar] can be created with [gid.gtk4.calendar.Calendar.new_].
+    
+    The selected date can be retrieved from a [gid.gtk4.calendar.Calendar] using
+    [gid.gtk4.calendar.Calendar.getDate].
+    It can be altered with [gid.gtk4.calendar.Calendar.setDate].
+    
+    To place a visual marker on a particular day, use
+    [gid.gtk4.calendar.Calendar.markDay] and to remove the marker,
+    [gid.gtk4.calendar.Calendar.unmarkDay]. Alternative, all
+    marks can be cleared with [gid.gtk4.calendar.Calendar.clearMarks].
+    
+    Users should be aware that, although the Gregorian calendar is the
+    legal calendar in most countries, it was adopted progressively
+    between 1582 and 1929. Display before these dates is likely to be
+    historically incorrect.
+    
+    # Shortcuts and Gestures
+    
+    [gid.gtk4.calendar.Calendar] supports the following gestures:
+    
+    - Scrolling up or down will switch to the previous or next month.
+    - Date strings can be dropped for setting the current day.
+    
+    # CSS nodes
+    
+    ```
+    calendar.view
+    ├── header
+    │   ├── button
+    │   ├── stack.month
+    │   ├── button
+    │   ├── button
+    │   ├── label.year
+    │   ╰── button
+    ╰── grid
+        ╰── label[.day-name][.week-number][.day-number][.other-month][.today]
+    ```
+    
+    [gid.gtk4.calendar.Calendar] has a main node with name calendar. It contains a subnode
+    called header containing the widgets for switching between years and months.
+    
+    The grid subnode contains all day labels, including week numbers on the left
+    (marked with the .week-number css class) and day names on top (marked with the
+    .day-name css class).
+    
+    Day labels that belong to the previous or next month get the .other-month
+    style class. The label of the current day get the .today style class.
+    
+    Marked day labels get the :selected state assigned.
+*/
+class Calendar : gid.gtk4.widget.Widget
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_calendar_get_type != &gidSymbolNotFound ? gtk_calendar_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkCalendar";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Calendar self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.calendar.Calendar]
+      Returns: New builder object
+  */
+  static CalendarGidBuilder builder() nothrow
+  {
+    return new CalendarGidBuilder;
+  }
+
+  /**
+      Get `date` property.
+      Returns: The selected date.
+        
+        This property gets initially set to the current date.
+  */
+  @property gid.glib2.date_time.DateTime date() nothrow
+  {
+    return getDate();
+  }
+
+  /**
+      Set `date` property.
+      Params:
+        propval = The selected date.
+          
+          This property gets initially set to the current date.
+  */
+  @property void date(gid.glib2.date_time.DateTime propval) nothrow
+  {
+    setDate(propval);
+  }
+
+  /**
+      Get `day` property.
+      Returns: The selected day (as a number between 1 and 31).
+  
+      Deprecated: This property will be removed in GTK 5.
+          Use [gid.gtk4.calendar.Calendar.date] instead.
+  */
+  @property int day() nothrow
+  {
+    return getDay();
+  }
+
+  /**
+      Set `day` property.
+      Params:
+        propval = The selected day (as a number between 1 and 31).
+  
+      Deprecated: This property will be removed in GTK 5.
+          Use [gid.gtk4.calendar.Calendar.date] instead.
+  */
+  @property void day(int propval) nothrow
+  {
+    setDay(propval);
+  }
+
+  /**
+      Get `month` property.
+      Returns: The selected month (as a number between 0 and 11).
+        
+        This property gets initially set to the current month.
+  
+      Deprecated: This property will be removed in GTK 5.
+          Use [gid.gtk4.calendar.Calendar.date] instead.
+  */
+  @property int month() nothrow
+  {
+    return getMonth();
+  }
+
+  /**
+      Set `month` property.
+      Params:
+        propval = The selected month (as a number between 0 and 11).
+          
+          This property gets initially set to the current month.
+  
+      Deprecated: This property will be removed in GTK 5.
+          Use [gid.gtk4.calendar.Calendar.date] instead.
+  */
+  @property void month(int propval) nothrow
+  {
+    setMonth(propval);
+  }
+
+  /**
+      Get `showDayNames` property.
+      Returns: Determines whether day names are displayed.
+  */
+  @property bool showDayNames() nothrow
+  {
+    return getShowDayNames();
+  }
+
+  /**
+      Set `showDayNames` property.
+      Params:
+        propval = Determines whether day names are displayed.
+  */
+  @property void showDayNames(bool propval) nothrow
+  {
+    setShowDayNames(propval);
+  }
+
+  /**
+      Get `showHeading` property.
+      Returns: Determines whether a heading is displayed.
+  */
+  @property bool showHeading() nothrow
+  {
+    return getShowHeading();
+  }
+
+  /**
+      Set `showHeading` property.
+      Params:
+        propval = Determines whether a heading is displayed.
+  */
+  @property void showHeading(bool propval) nothrow
+  {
+    setShowHeading(propval);
+  }
+
+  /**
+      Get `showWeekNumbers` property.
+      Returns: Determines whether week numbers are displayed.
+  */
+  @property bool showWeekNumbers() nothrow
+  {
+    return getShowWeekNumbers();
+  }
+
+  /**
+      Set `showWeekNumbers` property.
+      Params:
+        propval = Determines whether week numbers are displayed.
+  */
+  @property void showWeekNumbers(bool propval) nothrow
+  {
+    setShowWeekNumbers(propval);
+  }
+
+  /**
+      Get `year` property.
+      Returns: The selected year.
+        
+        This property gets initially set to the current year.
+  
+      Deprecated: This property will be removed in GTK 5.
+          Use [gid.gtk4.calendar.Calendar.date] instead.
+  */
+  @property int year() nothrow
+  {
+    return getYear();
+  }
+
+  /**
+      Set `year` property.
+      Params:
+        propval = The selected year.
+          
+          This property gets initially set to the current year.
+  
+      Deprecated: This property will be removed in GTK 5.
+          Use [gid.gtk4.calendar.Calendar.date] instead.
+  */
+  @property void year(int propval) nothrow
+  {
+    setYear(propval);
+  }
+
+  /**
+      Creates a new calendar, with the current date being selected.
+      Returns: a newly [gid.gtk4.calendar.Calendar] widget
+  */
+  this() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_calendar_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Remove all visual markers.
+  */
+  void clearMarks() nothrow
+  {
+    gtk_calendar_clear_marks(cast(GtkCalendar*)this._cPtr);
+  }
+
+  /**
+      Returns a [gid.glib2.date_time.DateTime] representing the shown
+      year, month and the selected day.
+      
+      The returned date is in the local time zone.
+      Returns: the [gid.glib2.date_time.DateTime] representing the selected date
+  */
+  gid.glib2.date_time.DateTime getDate() nothrow
+  {
+    GDateTime* _cretval;
+    _cretval = gtk_calendar_get_date(cast(GtkCalendar*)this._cPtr);
+    auto _retval = _cretval ? new gid.glib2.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the day of the selected date.
+      Returns: the day of the selected date.
+  */
+  int getDay() nothrow
+  {
+    int _retval;
+    _retval = gtk_calendar_get_day(cast(GtkCalendar*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns if the day of the calendar is already marked.
+  
+      Params:
+        day = the day number between 1 and 31.
+      Returns: whether the day is marked.
+  */
+  bool getDayIsMarked(uint day) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_calendar_get_day_is_marked(cast(GtkCalendar*)this._cPtr, day);
+    return _retval;
+  }
+
+  /**
+      Gets the month of the selected date.
+      Returns: The month of the selected date (as a number between 0 and 11).
+  */
+  int getMonth() nothrow
+  {
+    int _retval;
+    _retval = gtk_calendar_get_month(cast(GtkCalendar*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns whether self is currently showing the names
+      of the week days.
+      
+      This is the value of the [gid.gtk4.calendar.Calendar.showDayNames]
+      property.
+      Returns: Whether the calendar shows day names.
+  */
+  bool getShowDayNames() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_calendar_get_show_day_names(cast(GtkCalendar*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns whether self is currently showing the heading.
+      
+      This is the value of the [gid.gtk4.calendar.Calendar.showHeading]
+      property.
+      Returns: Whether the calendar is showing a heading.
+  */
+  bool getShowHeading() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_calendar_get_show_heading(cast(GtkCalendar*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns whether self is showing week numbers right
+      now.
+      
+      This is the value of the [gid.gtk4.calendar.Calendar.showWeekNumbers]
+      property.
+      Returns: Whether the calendar is showing week numbers.
+  */
+  bool getShowWeekNumbers() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_calendar_get_show_week_numbers(cast(GtkCalendar*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the year of the selected date.
+      Returns: the year of the selected date.
+  */
+  int getYear() nothrow
+  {
+    int _retval;
+    _retval = gtk_calendar_get_year(cast(GtkCalendar*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Places a visual marker on a particular day of the current month.
+  
+      Params:
+        day = the day number to mark between 1 and 31.
+  */
+  void markDay(uint day) nothrow
+  {
+    gtk_calendar_mark_day(cast(GtkCalendar*)this._cPtr, day);
+  }
+
+  /**
+      Switches to date's year and month and select its day.
+  
+      Params:
+        date = a [gid.glib2.date_time.DateTime] representing the day to select
+  
+      Deprecated: Use [gid.gtk4.calendar.Calendar.setDate] instead.
+  */
+  void selectDay(gid.glib2.date_time.DateTime date) nothrow
+  {
+    gtk_calendar_select_day(cast(GtkCalendar*)this._cPtr, date ? cast(GDateTime*)date._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Switches to date's year and month and selects its day.
+  
+      Params:
+        date = a [gid.glib2.date_time.DateTime] representing the day to select
+  */
+  void setDate(gid.glib2.date_time.DateTime date) nothrow
+  {
+    gtk_calendar_set_date(cast(GtkCalendar*)this._cPtr, date ? cast(GDateTime*)date._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the day for the selected date.
+      
+      The new date must be valid. For example, setting the day to 31 when the
+      month is February will fail.
+  
+      Params:
+        day = The desired day for the selected date (as a number between 1 and 31).
+  */
+  void setDay(int day) nothrow
+  {
+    gtk_calendar_set_day(cast(GtkCalendar*)this._cPtr, day);
+  }
+
+  /**
+      Sets the month for the selected date.
+      
+      The new date must be valid. For example, setting the month to 1 (February)
+      when the day is 31 will fail.
+  
+      Params:
+        month = The desired month for the selected date (as a number between 0 and 11).
+  */
+  void setMonth(int month) nothrow
+  {
+    gtk_calendar_set_month(cast(GtkCalendar*)this._cPtr, month);
+  }
+
+  /**
+      Sets whether the calendar shows day names.
+  
+      Params:
+        value = Whether to show day names above the day numbers
+  */
+  void setShowDayNames(bool value) nothrow
+  {
+    gtk_calendar_set_show_day_names(cast(GtkCalendar*)this._cPtr, value);
+  }
+
+  /**
+      Sets whether the calendar should show a heading.
+      
+      The heading contains the current year and month as well as
+      buttons for changing both.
+  
+      Params:
+        value = Whether to show the heading in the calendar
+  */
+  void setShowHeading(bool value) nothrow
+  {
+    gtk_calendar_set_show_heading(cast(GtkCalendar*)this._cPtr, value);
+  }
+
+  /**
+      Sets whether week numbers are shown in the calendar.
+  
+      Params:
+        value = whether to show week numbers alongside the days
+  */
+  void setShowWeekNumbers(bool value) nothrow
+  {
+    gtk_calendar_set_show_week_numbers(cast(GtkCalendar*)this._cPtr, value);
+  }
+
+  /**
+      Sets the year for the selected date.
+      
+      The new date must be valid. For example, setting the year to 2023 when the
+      date is February 29 will fail.
+  
+      Params:
+        year = The desired year for the selected date (within [gid.glib2.date_time.DateTime]
+            limits, i.e. from 0001 to 9999).
+  */
+  void setYear(int year) nothrow
+  {
+    gtk_calendar_set_year(cast(GtkCalendar*)this._cPtr, year);
+  }
+
+  /**
+      Removes the visual marker from a particular day.
+  
+      Params:
+        day = the day number to unmark between 1 and 31.
+  */
+  void unmarkDay(uint day) nothrow
+  {
+    gtk_calendar_unmark_day(cast(GtkCalendar*)this._cPtr, day);
+  }
+
+  /**
+      Connect to `DaySelected` signal.
+  
+      Emitted when the user selects a day.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk4.calendar.Calendar calendar)`
+  
+          `calendar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectDaySelected(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk4.calendar.Calendar)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.calendar.Calendar.daySelected");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("day-selected", closure, after);
+  }
+
+  /**
+      Connect to `NextMonth` signal.
+  
+      Emitted when the user switches to the next month.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk4.calendar.Calendar calendar)`
+  
+          `calendar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectNextMonth(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk4.calendar.Calendar)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.calendar.Calendar.nextMonth");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("next-month", closure, after);
+  }
+
+  /**
+      Connect to `NextYear` signal.
+  
+      Emitted when user switches to the next year.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk4.calendar.Calendar calendar)`
+  
+          `calendar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectNextYear(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk4.calendar.Calendar)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.calendar.Calendar.nextYear");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("next-year", closure, after);
+  }
+
+  /**
+      Connect to `PrevMonth` signal.
+  
+      Emitted when the user switches to the previous month.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk4.calendar.Calendar calendar)`
+  
+          `calendar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectPrevMonth(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk4.calendar.Calendar)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.calendar.Calendar.prevMonth");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("prev-month", closure, after);
+  }
+
+  /**
+      Connect to `PrevYear` signal.
+  
+      Emitted when user switches to the previous year.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk4.calendar.Calendar calendar)`
+  
+          `calendar` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectPrevYear(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk4.calendar.Calendar)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.calendar.Calendar.prevYear");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("prev-year", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.calendar.Calendar]
+class CalendarGidBuilderImpl(T) : gid.gtk4.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `date` property.
+      Params:
+        propval = The selected date.
+          
+          This property gets initially set to the current date.
+      Returns: Builder instance for fluent chaining
+  */
+  T date(gid.glib2.date_time.DateTime propval) nothrow
+  {
+    return setProperty("date", propval);
+  }
+
+  /**
+      Set `day` property.
+      Params:
+        propval = The selected day (as a number between 1 and 31).
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: This property will be removed in GTK 5.
+          Use [gid.gtk4.calendar.Calendar.date] instead.
+  */
+  T day(int propval) nothrow
+  {
+    return setProperty("day", propval);
+  }
+
+  /**
+      Set `month` property.
+      Params:
+        propval = The selected month (as a number between 0 and 11).
+          
+          This property gets initially set to the current month.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: This property will be removed in GTK 5.
+          Use [gid.gtk4.calendar.Calendar.date] instead.
+  */
+  T month(int propval) nothrow
+  {
+    return setProperty("month", propval);
+  }
+
+  /**
+      Set `showDayNames` property.
+      Params:
+        propval = Determines whether day names are displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T showDayNames(bool propval) nothrow
+  {
+    return setProperty("show-day-names", propval);
+  }
+
+  /**
+      Set `showHeading` property.
+      Params:
+        propval = Determines whether a heading is displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T showHeading(bool propval) nothrow
+  {
+    return setProperty("show-heading", propval);
+  }
+
+  /**
+      Set `showWeekNumbers` property.
+      Params:
+        propval = Determines whether week numbers are displayed.
+      Returns: Builder instance for fluent chaining
+  */
+  T showWeekNumbers(bool propval) nothrow
+  {
+    return setProperty("show-week-numbers", propval);
+  }
+
+  /**
+      Set `year` property.
+      Params:
+        propval = The selected year.
+          
+          This property gets initially set to the current year.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: This property will be removed in GTK 5.
+          Use [gid.gtk4.calendar.Calendar.date] instead.
+  */
+  T year(int propval) nothrow
+  {
+    return setProperty("year", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk4.calendar.Calendar]
+final class CalendarGidBuilder : CalendarGidBuilderImpl!CalendarGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Calendar build() nothrow
+  {
+    return new Calendar(cast(void*)createGObject(Calendar._getGType), Yes.Take);
+  }
+}

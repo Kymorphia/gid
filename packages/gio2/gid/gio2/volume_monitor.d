@@ -1,0 +1,833 @@
+/// Module for [VolumeMonitor] class
+module gid.gio2.volume_monitor;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gio2.c.functions;
+import gid.gio2.c.types;
+import gid.gio2.drive;
+import gid.gio2.mount;
+import gid.gio2.types;
+import gid.gio2.volume;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+
+/**
+    [gid.gio2.volume_monitor.VolumeMonitor] is for listing the user interesting devices and volumes
+    on the computer. In other words, what a file selector or file manager
+    would show in a sidebar.
+    
+    [gid.gio2.volume_monitor.VolumeMonitor] is not
+    thread-default-context aware (see
+    [gid.glib2.main_context.MainContext.pushThreadDefault]), and so should not be used
+    other than from the main thread, with no thread-default-context active.
+    
+    In order to receive updates about volumes and mounts monitored through GVFS,
+    a main loop must be running.
+*/
+class VolumeMonitor : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())g_volume_monitor_get_type != &gidSymbolNotFound ? g_volume_monitor_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GVolumeMonitor";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override VolumeMonitor self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gio2.volume_monitor.VolumeMonitor]
+      Returns: New builder object
+  */
+  static VolumeMonitorGidBuilder builder() nothrow
+  {
+    return new VolumeMonitorGidBuilder;
+  }
+
+  /**
+      This function should be called by any #GVolumeMonitor
+      implementation when a new #GMount object is created that is not
+      associated with a #GVolume object. It must be called just before
+      emitting the mount_added signal.
+      
+      If the return value is not null, the caller must associate the
+      returned #GVolume object with the #GMount. This involves returning
+      it in its [gid.gio2.mount.Mount.getVolume] implementation. The caller must
+      also listen for the "removed" signal on the returned object
+      and give up its reference when handling that signal
+      
+      Similarly, if implementing [gid.gio2.volume_monitor.VolumeMonitor.adoptOrphanMount],
+      the implementor must take a reference to mount and return it in
+      its [gid.gio2.volume.Volume.getMount] implemented. Also, the implementor must
+      listen for the "unmounted" signal on mount and give up its
+      reference upon handling that signal.
+      
+      There are two main use cases for this function.
+      
+      One is when implementing a user space file system driver that reads
+      blocks of a block device that is already represented by the native
+      volume monitor (for example a CD Audio file system driver). Such
+      a driver will generate its own #GMount object that needs to be
+      associated with the #GVolume object that represents the volume.
+      
+      The other is for implementing a #GVolumeMonitor whose sole purpose
+      is to return #GVolume objects representing entries in the users
+      "favorite servers" list or similar.
+  
+      Params:
+        mount = a #GMount object to find a parent for
+      Returns: the #GVolume object that is the parent for mount or null
+        if no wants to adopt the #GMount.
+  
+      Deprecated: Instead of using this function, #GVolumeMonitor
+        implementations should instead create shadow mounts with the URI of
+        the mount they intend to adopt. See the proxy volume monitor in
+        gvfs for an example of this. Also see [gid.gio2.mount.Mount.isShadowed],
+        [gid.gio2.mount.Mount.shadow] and [gid.gio2.mount.Mount.unshadow] functions.
+  */
+  static gid.gio2.volume.Volume adoptOrphanMount(gid.gio2.mount.Mount mount) nothrow
+  {
+    GVolume* _cretval;
+    _cretval = g_volume_monitor_adopt_orphan_mount(mount ? cast(GMount*)(cast(gid.gobject2.object.ObjectWrap)mount)._cPtr(No.Dup) : null);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.volume.Volume)(cast(GVolume*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the volume monitor used by gio.
+      Returns: a reference to the #GVolumeMonitor used by gio. Call
+           [gid.gobject2.object.ObjectWrap.unref] when done with it, after disconnecting any signal handlers.
+  */
+  static gid.gio2.volume_monitor.VolumeMonitor get() nothrow
+  {
+    GVolumeMonitor* _cretval;
+    _cretval = g_volume_monitor_get();
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.volume_monitor.VolumeMonitor)(cast(GVolumeMonitor*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets a list of drives connected to the system.
+      
+      The returned list should be freed with [gid.glib2.list.List.free], after
+      its elements have been unreffed with [gid.gobject2.object.ObjectWrap.unref].
+      Returns: a #GList of connected #GDrive objects.
+  */
+  gid.gio2.drive.Drive[] getConnectedDrives() nothrow
+  {
+    GList* _cretval;
+    _cretval = g_volume_monitor_get_connected_drives(cast(GVolumeMonitor*)this._cPtr);
+    auto _retval = gListToD!(gid.gio2.drive.Drive, GidOwnership.Full)(cast(GList*)_cretval);
+    return _retval;
+  }
+
+  /**
+      Finds a #GMount object by its UUID (see [gid.gio2.mount.Mount.getUuid])
+  
+      Params:
+        uuid = the UUID to look for
+      Returns: a #GMount or null if no such mount is available.
+            Free the returned object with [gid.gobject2.object.ObjectWrap.unref].
+  */
+  gid.gio2.mount.Mount getMountForUuid(string uuid) nothrow
+  {
+    GMount* _cretval;
+    const(char)* _uuid = uuid.toCString!(No.Malloc, No.Nullable);
+    _cretval = g_volume_monitor_get_mount_for_uuid(cast(GVolumeMonitor*)this._cPtr, _uuid);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets a list of the mounts on the system.
+      
+      The returned list should be freed with [gid.glib2.list.List.free], after
+      its elements have been unreffed with [gid.gobject2.object.ObjectWrap.unref].
+      Returns: a #GList of #GMount objects.
+  */
+  gid.gio2.mount.Mount[] getMounts() nothrow
+  {
+    GList* _cretval;
+    _cretval = g_volume_monitor_get_mounts(cast(GVolumeMonitor*)this._cPtr);
+    auto _retval = gListToD!(gid.gio2.mount.Mount, GidOwnership.Full)(cast(GList*)_cretval);
+    return _retval;
+  }
+
+  /**
+      Finds a #GVolume object by its UUID (see [gid.gio2.volume.Volume.getUuid])
+  
+      Params:
+        uuid = the UUID to look for
+      Returns: a #GVolume or null if no such volume is available.
+            Free the returned object with [gid.gobject2.object.ObjectWrap.unref].
+  */
+  gid.gio2.volume.Volume getVolumeForUuid(string uuid) nothrow
+  {
+    GVolume* _cretval;
+    const(char)* _uuid = uuid.toCString!(No.Malloc, No.Nullable);
+    _cretval = g_volume_monitor_get_volume_for_uuid(cast(GVolumeMonitor*)this._cPtr, _uuid);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.volume.Volume)(cast(GVolume*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets a list of the volumes on the system.
+      
+      The returned list should be freed with [gid.glib2.list.List.free], after
+      its elements have been unreffed with [gid.gobject2.object.ObjectWrap.unref].
+      Returns: a #GList of #GVolume objects.
+  */
+  gid.gio2.volume.Volume[] getVolumes() nothrow
+  {
+    GList* _cretval;
+    _cretval = g_volume_monitor_get_volumes(cast(GVolumeMonitor*)this._cPtr);
+    auto _retval = gListToD!(gid.gio2.volume.Volume, GidOwnership.Full)(cast(GList*)_cretval);
+    return _retval;
+  }
+
+  /**
+      Connect to `DriveChanged` signal.
+  
+      Emitted when a drive changes.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gio2.drive.Drive drive, gid.gio2.volume_monitor.VolumeMonitor volumeMonitor)`
+  
+          `drive` the drive that changed (optional)
+  
+          `volumeMonitor` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectDriveChanged(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gio2.drive.Drive)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gio2.volume_monitor.VolumeMonitor)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.volume_monitor.VolumeMonitor.driveChanged");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("drive-changed", closure, after);
+  }
+
+  /**
+      Connect to `DriveConnected` signal.
+  
+      Emitted when a drive is connected to the system.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gio2.drive.Drive drive, gid.gio2.volume_monitor.VolumeMonitor volumeMonitor)`
+  
+          `drive` a #GDrive that was connected. (optional)
+  
+          `volumeMonitor` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectDriveConnected(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gio2.drive.Drive)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gio2.volume_monitor.VolumeMonitor)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.volume_monitor.VolumeMonitor.driveConnected");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("drive-connected", closure, after);
+  }
+
+  /**
+      Connect to `DriveDisconnected` signal.
+  
+      Emitted when a drive is disconnected from the system.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gio2.drive.Drive drive, gid.gio2.volume_monitor.VolumeMonitor volumeMonitor)`
+  
+          `drive` a #GDrive that was disconnected. (optional)
+  
+          `volumeMonitor` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectDriveDisconnected(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gio2.drive.Drive)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gio2.volume_monitor.VolumeMonitor)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.volume_monitor.VolumeMonitor.driveDisconnected");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("drive-disconnected", closure, after);
+  }
+
+  /**
+      Connect to `DriveEjectButton` signal.
+  
+      Emitted when the eject button is pressed on drive.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gio2.drive.Drive drive, gid.gio2.volume_monitor.VolumeMonitor volumeMonitor)`
+  
+          `drive` the drive where the eject button was pressed (optional)
+  
+          `volumeMonitor` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectDriveEjectButton(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gio2.drive.Drive)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gio2.volume_monitor.VolumeMonitor)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.volume_monitor.VolumeMonitor.driveEjectButton");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("drive-eject-button", closure, after);
+  }
+
+  /**
+      Connect to `DriveStopButton` signal.
+  
+      Emitted when the stop button is pressed on drive.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gio2.drive.Drive drive, gid.gio2.volume_monitor.VolumeMonitor volumeMonitor)`
+  
+          `drive` the drive where the stop button was pressed (optional)
+  
+          `volumeMonitor` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectDriveStopButton(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gio2.drive.Drive)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gio2.volume_monitor.VolumeMonitor)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.volume_monitor.VolumeMonitor.driveStopButton");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("drive-stop-button", closure, after);
+  }
+
+  /**
+      Connect to `MountAdded` signal.
+  
+      Emitted when a mount is added.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gio2.mount.Mount mount, gid.gio2.volume_monitor.VolumeMonitor volumeMonitor)`
+  
+          `mount` a #GMount that was added. (optional)
+  
+          `volumeMonitor` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectMountAdded(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gio2.mount.Mount)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gio2.volume_monitor.VolumeMonitor)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.volume_monitor.VolumeMonitor.mountAdded");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("mount-added", closure, after);
+  }
+
+  /**
+      Connect to `MountChanged` signal.
+  
+      Emitted when a mount changes.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gio2.mount.Mount mount, gid.gio2.volume_monitor.VolumeMonitor volumeMonitor)`
+  
+          `mount` a #GMount that changed. (optional)
+  
+          `volumeMonitor` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectMountChanged(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gio2.mount.Mount)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gio2.volume_monitor.VolumeMonitor)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.volume_monitor.VolumeMonitor.mountChanged");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("mount-changed", closure, after);
+  }
+
+  /**
+      Connect to `MountPreUnmount` signal.
+  
+      May be emitted when a mount is about to be removed.
+        
+        This signal depends on the backend and is only emitted if
+        GIO was used to unmount.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gio2.mount.Mount mount, gid.gio2.volume_monitor.VolumeMonitor volumeMonitor)`
+  
+          `mount` a #GMount that is being unmounted. (optional)
+  
+          `volumeMonitor` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectMountPreUnmount(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gio2.mount.Mount)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gio2.volume_monitor.VolumeMonitor)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.volume_monitor.VolumeMonitor.mountPreUnmount");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("mount-pre-unmount", closure, after);
+  }
+
+  /**
+      Connect to `MountRemoved` signal.
+  
+      Emitted when a mount is removed.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gio2.mount.Mount mount, gid.gio2.volume_monitor.VolumeMonitor volumeMonitor)`
+  
+          `mount` a #GMount that was removed. (optional)
+  
+          `volumeMonitor` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectMountRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gio2.mount.Mount)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gio2.volume_monitor.VolumeMonitor)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.volume_monitor.VolumeMonitor.mountRemoved");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("mount-removed", closure, after);
+  }
+
+  /**
+      Connect to `VolumeAdded` signal.
+  
+      Emitted when a mountable volume is added to the system.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gio2.volume.Volume volume, gid.gio2.volume_monitor.VolumeMonitor volumeMonitor)`
+  
+          `volume` a #GVolume that was added. (optional)
+  
+          `volumeMonitor` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectVolumeAdded(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gio2.volume.Volume)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gio2.volume_monitor.VolumeMonitor)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.volume_monitor.VolumeMonitor.volumeAdded");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("volume-added", closure, after);
+  }
+
+  /**
+      Connect to `VolumeChanged` signal.
+  
+      Emitted when mountable volume is changed.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gio2.volume.Volume volume, gid.gio2.volume_monitor.VolumeMonitor volumeMonitor)`
+  
+          `volume` a #GVolume that changed. (optional)
+  
+          `volumeMonitor` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectVolumeChanged(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gio2.volume.Volume)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gio2.volume_monitor.VolumeMonitor)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.volume_monitor.VolumeMonitor.volumeChanged");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("volume-changed", closure, after);
+  }
+
+  /**
+      Connect to `VolumeRemoved` signal.
+  
+      Emitted when a mountable volume is removed from the system.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gio2.volume.Volume volume, gid.gio2.volume_monitor.VolumeMonitor volumeMonitor)`
+  
+          `volume` a #GVolume that was removed. (optional)
+  
+          `volumeMonitor` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectVolumeRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gio2.volume.Volume)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gio2.volume_monitor.VolumeMonitor)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.volume_monitor.VolumeMonitor.volumeRemoved");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("volume-removed", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gio2.volume_monitor.VolumeMonitor]
+class VolumeMonitorGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gio2.volume_monitor.VolumeMonitor]
+final class VolumeMonitorGidBuilder : VolumeMonitorGidBuilderImpl!VolumeMonitorGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  VolumeMonitor build() nothrow
+  {
+    return new VolumeMonitor(cast(void*)createGObject(VolumeMonitor._getGType), Yes.Take);
+  }
+}

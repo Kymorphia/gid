@@ -1,0 +1,197 @@
+/// Module for [VideoInfoDmaDrm] class
+module gid.gstvideo1.video_info_dma_drm;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.boxed;
+import gid.gst1.caps;
+import gid.gstvideo1.c.functions;
+import gid.gstvideo1.c.types;
+import gid.gstvideo1.types;
+import gid.gstvideo1.video_info;
+
+/**
+    Information describing a DMABuf image properties. It wraps #GstVideoInfo and
+    adds DRM information such as drm-fourcc and drm-modifier, required for
+    negotiation and mapping.
+*/
+class VideoInfoDmaDrm : gid.gobject2.boxed.BoxedWrap!(gst_video_info_dma_drm_get_type)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override VideoInfoDmaDrm self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get `vinfo` field.
+      Returns: the associated #GstVideoInfo
+  */
+  @property gid.gstvideo1.video_info.VideoInfo vinfo() nothrow
+  {
+    return cToD!(gid.gstvideo1.video_info.VideoInfo)(cast(void*)&(cast(GstVideoInfoDmaDrm*)this._cPtr).vinfo);
+  }
+
+  /**
+      Get `drmFourcc` field.
+      Returns: the fourcc defined by drm
+  */
+  @property uint drmFourcc() nothrow
+  {
+    return (cast(GstVideoInfoDmaDrm*)this._cPtr).drmFourcc;
+  }
+
+  /**
+      Set `drmFourcc` field.
+      Params:
+        propval = the fourcc defined by drm
+  */
+  @property void drmFourcc(uint propval) nothrow
+  {
+    (cast(GstVideoInfoDmaDrm*)this._cPtr).drmFourcc = propval;
+  }
+
+  /**
+      Get `drmModifier` field.
+      Returns: the drm modifier
+  */
+  @property ulong drmModifier() nothrow
+  {
+    return (cast(GstVideoInfoDmaDrm*)this._cPtr).drmModifier;
+  }
+
+  /**
+      Set `drmModifier` field.
+      Params:
+        propval = the drm modifier
+  */
+  @property void drmModifier(ulong propval) nothrow
+  {
+    (cast(GstVideoInfoDmaDrm*)this._cPtr).drmModifier = propval;
+  }
+
+  /**
+      Allocate a new #GstVideoInfoDmaDrm that is also initialized with
+      [gid.gstvideo1.video_info_dma_drm.VideoInfoDmaDrm.init_].
+      Returns: a new #GstVideoInfoDmaDrm.
+        Free it with [gid.gstvideo1.video_info_dma_drm.VideoInfoDmaDrm.free].
+  */
+  this() nothrow
+  {
+    GstVideoInfoDmaDrm* _cretval;
+    _cretval = gst_video_info_dma_drm_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Parse caps to generate a #GstVideoInfoDmaDrm. Please note that the
+      caps should be a dma drm caps. The [gid.gstvideo1.global.videoIsDmaDrmCaps] can
+      be used to verify it before calling this function.
+  
+      Params:
+        caps = a #GstCaps
+      Returns: A #GstVideoInfoDmaDrm,
+          or null if caps couldn't be parsed.
+  */
+  static gid.gstvideo1.video_info_dma_drm.VideoInfoDmaDrm newFromCaps(gid.gst1.caps.Caps caps) nothrow
+  {
+    GstVideoInfoDmaDrm* _cretval;
+    _cretval = gst_video_info_dma_drm_new_from_caps(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gid.gstvideo1.video_info_dma_drm.VideoInfoDmaDrm(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Convert the values of drm_info into a #GstCaps. Please note that the
+      caps returned will be a dma drm caps which sets format field to DMA_DRM,
+      and contains a new drm-format field. The value of drm-format field is
+      composed of a drm fourcc and a modifier, such as NV12:0x0100000000000002.
+      Returns: a new #GstCaps containing the
+        info in drm_info.
+  */
+  gid.gst1.caps.Caps toCaps() nothrow
+  {
+    GstCaps* _cretval;
+    _cretval = gst_video_info_dma_drm_to_caps(cast(const(GstVideoInfoDmaDrm)*)this._cPtr);
+    auto _retval = _cretval ? new gid.gst1.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Convert the #GstVideoInfoDmaDrm into a traditional #GstVideoInfo with
+      recognized video format. For DMA kind memory, the non linear DMA format
+      should be recognized as #GST_VIDEO_FORMAT_DMA_DRM. This helper function
+      sets info's video format into the default value according to drm_info's
+      drm_fourcc field.
+  
+      Params:
+        info = #GstVideoInfo
+      Returns: true if info is converted correctly.
+  */
+  bool toVideoInfo(out gid.gstvideo1.video_info.VideoInfo info) nothrow
+  {
+    bool _retval;
+    auto _info = boxedNew!GstVideoInfo(gid.gstvideo1.video_info.VideoInfo._getGType);
+    _retval = cast(bool)gst_video_info_dma_drm_to_video_info(cast(const(GstVideoInfoDmaDrm)*)this._cPtr, _info);
+    info = new gid.gstvideo1.video_info.VideoInfo(cast(void*)_info, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Parse caps and update info. Please note that the caps should be
+      a dma drm caps. The [gid.gstvideo1.global.videoIsDmaDrmCaps] can be used to verify
+      it before calling this function.
+  
+      Params:
+        drmInfo = #GstVideoInfoDmaDrm
+        caps = a #GstCaps
+      Returns: TRUE if caps could be parsed
+  */
+  static bool fromCaps(out gid.gstvideo1.video_info_dma_drm.VideoInfoDmaDrm drmInfo, gid.gst1.caps.Caps caps) nothrow
+  {
+    bool _retval;
+    auto _drmInfo = boxedNew!GstVideoInfoDmaDrm(gid.gstvideo1.video_info_dma_drm.VideoInfoDmaDrm._getGType);
+    _retval = cast(bool)gst_video_info_dma_drm_from_caps(_drmInfo, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
+    drmInfo = new gid.gstvideo1.video_info_dma_drm.VideoInfoDmaDrm(cast(void*)_drmInfo, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Fills drm_info if info's format has a valid drm format and modifier is also
+      valid
+  
+      Params:
+        drmInfo = #GstVideoInfoDmaDrm
+        info = a #GstVideoInfo
+        modifier = the associated modifier value.
+      Returns: true if drm_info is filled correctly.
+  */
+  static bool fromVideoInfo(out gid.gstvideo1.video_info_dma_drm.VideoInfoDmaDrm drmInfo, gid.gstvideo1.video_info.VideoInfo info, ulong modifier) nothrow
+  {
+    bool _retval;
+    auto _drmInfo = boxedNew!GstVideoInfoDmaDrm(gid.gstvideo1.video_info_dma_drm.VideoInfoDmaDrm._getGType);
+    _retval = cast(bool)gst_video_info_dma_drm_from_video_info(_drmInfo, info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, modifier);
+    drmInfo = new gid.gstvideo1.video_info_dma_drm.VideoInfoDmaDrm(cast(void*)_drmInfo, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Initialize drm_info with default values.
+  
+      Params:
+        drmInfo = a #GstVideoInfoDmaDrm
+  */
+  static void init_(out gid.gstvideo1.video_info_dma_drm.VideoInfoDmaDrm drmInfo) nothrow
+  {
+    auto _drmInfo = boxedNew!GstVideoInfoDmaDrm(gid.gstvideo1.video_info_dma_drm.VideoInfoDmaDrm._getGType);
+    gst_video_info_dma_drm_init(_drmInfo);
+    drmInfo = new gid.gstvideo1.video_info_dma_drm.VideoInfoDmaDrm(cast(void*)_drmInfo, Yes.Take);
+  }
+}

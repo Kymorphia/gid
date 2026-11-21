@@ -1,0 +1,206 @@
+/// Module for [TypeFindFactory] class
+module gid.gst1.type_find_factory;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.gid_builder;
+import gid.gst1.c.functions;
+import gid.gst1.c.types;
+import gid.gst1.caps;
+import gid.gst1.plugin_feature;
+import gid.gst1.type_find;
+import gid.gst1.types;
+
+/**
+    These functions allow querying information about registered typefind
+    functions. How to create and register these functions is described in
+    the section <link linkend="gstreamer-Writing-typefind-functions">
+    "Writing typefind functions"</link>.
+    
+    The following example shows how to write a very simple typefinder that
+    identifies the given data. You can get quite a bit more complicated than
+    that though.
+    ```c
+      typedef struct {
+        guint8 *data;
+        guint size;
+        guint probability;
+        GstCaps *data;
+      } MyTypeFind;
+      static void
+      my_peek (gpointer data, gint64 offset, guint size)
+      {
+        MyTypeFind *find = (MyTypeFind *) data;
+        if (offset >= 0 && offset + size <= find->size) {
+          return find->data + offset;
+        }
+        return NULL;
+      }
+      static void
+      my_suggest (gpointer data, guint probability, GstCaps *caps)
+      {
+        MyTypeFind *find = (MyTypeFind *) data;
+        if (probability > find->probability) {
+          find->probability = probability;
+          gst_caps_replace (&find->caps, caps);
+        }
+      }
+      static GstCaps *
+      find_type (guint8 *data, guint size)
+      {
+        GList *walk, *type_list;
+        MyTypeFind find = {data, size, 0, NULL};
+        GstTypeFind gst_find = {my_peek, my_suggest, &find, };
+        walk = type_list = gst_type_find_factory_get_list ();
+        while (walk) {
+          GstTypeFindFactory *factory = GST_TYPE_FIND_FACTORY (walk->data);
+          walk = g_list_next (walk)
+          gst_type_find_factory_call_function (factory, &gst_find);
+        }
+        g_list_free (type_list);
+        return find.caps;
+      };
+    ```
+*/
+class TypeFindFactory : gid.gst1.plugin_feature.PluginFeature
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gst_type_find_factory_get_type != &gidSymbolNotFound ? gst_type_find_factory_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstTypeFindFactory";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override TypeFindFactory self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gst1.type_find_factory.TypeFindFactory]
+      Returns: New builder object
+  */
+  static TypeFindFactoryGidBuilder builder() nothrow
+  {
+    return new TypeFindFactoryGidBuilder;
+  }
+
+  /**
+      Gets the list of all registered typefind factories. You must free the
+      list using [gid.gst1.plugin_feature.PluginFeature.listFree].
+      
+      The returned factories are sorted by highest rank first, and then by
+      factory name.
+      
+      Free-function: gst_plugin_feature_list_free
+      Returns: the list of all
+            registered #GstTypeFindFactory.
+  */
+  static gid.gst1.type_find_factory.TypeFindFactory[] getList() nothrow
+  {
+    GList* _cretval;
+    _cretval = gst_type_find_factory_get_list();
+    auto _retval = gListToD!(gid.gst1.type_find_factory.TypeFindFactory, GidOwnership.Full)(cast(GList*)_cretval);
+    return _retval;
+  }
+
+  /**
+      Calls the #GstTypeFindFunction associated with this factory.
+  
+      Params:
+        find = a properly setup #GstTypeFind entry. The get_data
+              and suggest_type members must be set.
+  */
+  void callFunction(gid.gst1.type_find.TypeFind find) nothrow
+  {
+    gst_type_find_factory_call_function(cast(GstTypeFindFactory*)this._cPtr, find ? cast(GstTypeFind*)find._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Gets the #GstCaps associated with a typefind factory.
+      Returns: the #GstCaps associated with this factory
+  */
+  gid.gst1.caps.Caps getCaps() nothrow
+  {
+    GstCaps* _cretval;
+    _cretval = gst_type_find_factory_get_caps(cast(GstTypeFindFactory*)this._cPtr);
+    auto _retval = _cretval ? new gid.gst1.caps.Caps(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the extensions associated with a #GstTypeFindFactory. The returned
+      array should not be changed. If you need to change stuff in it, you should
+      copy it using [gid.glib2.global.strdupv].  This function may return null to indicate
+      a 0-length list.
+      Returns: a null-terminated array of extensions associated with this factory
+  */
+  string[] getExtensions() nothrow
+  {
+    const(char*)* _cretval;
+    _cretval = gst_type_find_factory_get_extensions(cast(GstTypeFindFactory*)this._cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString!(No.Free);
+    }
+    return _retval;
+  }
+
+  /**
+      Check whether the factory has a typefind function. Typefind factories
+      without typefind functions are a last-effort fallback mechanism to
+      e.g. assume a certain media type based on the file extension.
+      Returns: true if the factory has a typefind functions set, otherwise false
+  */
+  bool hasFunction() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_type_find_factory_has_function(cast(GstTypeFindFactory*)this._cPtr);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [gid.gst1.type_find_factory.TypeFindFactory]
+class TypeFindFactoryGidBuilderImpl(T) : gid.gst1.plugin_feature.PluginFeatureGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gst1.type_find_factory.TypeFindFactory]
+final class TypeFindFactoryGidBuilder : TypeFindFactoryGidBuilderImpl!TypeFindFactoryGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  TypeFindFactory build() nothrow
+  {
+    return new TypeFindFactory(cast(void*)createGObject(TypeFindFactory._getGType), Yes.Take);
+  }
+}

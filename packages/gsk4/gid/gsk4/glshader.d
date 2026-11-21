@@ -1,0 +1,617 @@
+/// Module for [GLShader] class
+module gid.gsk4.glshader;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.glib2.bytes;
+import gid.glib2.error;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.graphene1.vec2;
+import gid.graphene1.vec3;
+import gid.graphene1.vec4;
+import gid.gsk4.c.functions;
+import gid.gsk4.c.types;
+import gid.gsk4.renderer;
+import gid.gsk4.types;
+
+/**
+    Implements a fragment shader using GLSL.
+    
+    A fragment shader gets the coordinates being rendered as input and
+    produces the pixel values for that particular pixel. Additionally,
+    the shader can declare a set of other input arguments, called
+    uniforms (as they are uniform over all the calls to your shader in
+    each instance of use). A shader can also receive up to 4
+    textures that it can use as input when producing the pixel data.
+    
+    [gid.gsk4.glshader.GLShader] is usually used with [gid.gtk4.snapshot.Snapshot.pushGlShader]
+    to produce a [gid.gsk4.glshader_node.GLShaderNode] in the rendering hierarchy,
+    and then its input textures are constructed by rendering the child
+    nodes to textures before rendering the shader node itself. (You can
+    pass texture nodes as children if you want to directly use a texture
+    as input).
+    
+    The actual shader code is GLSL code that gets combined with
+    some other code into the fragment shader. Since the exact
+    capabilities of the GPU driver differs between different OpenGL
+    drivers and hardware, GTK adds some defines that you can use
+    to ensure your GLSL code runs on as many drivers as it can.
+    
+    If the OpenGL driver is GLES, then the shader language version
+    is set to 100, and GSK_GLES will be defined in the shader.
+    
+    Otherwise, if the OpenGL driver does not support the 3.2 core profile,
+    then the shader will run with language version 110 for GL2 and 130 for GL3,
+    and GSK_LEGACY will be defined in the shader.
+    
+    If the OpenGL driver supports the 3.2 code profile, it will be used,
+    the shader language version is set to 150, and GSK_GL3 will be defined
+    in the shader.
+    
+    The main function the shader must implement is:
+    
+    ```glsl
+     void mainImage(out vec4 fragColor,
+                    in vec2 fragCoord,
+                    in vec2 resolution,
+                    in vec2 uv)
+    ```
+    
+    Where the input @fragCoord is the coordinate of the pixel we're
+    currently rendering, relative to the boundary rectangle that was
+    specified in the [gid.gsk4.glshader_node.GLShaderNode], and @resolution is the width and
+    height of that rectangle. This is in the typical GTK coordinate
+    system with the origin in the top left. @uv contains the u and v
+    coordinates that can be used to index a texture at the
+    corresponding point. These coordinates are in the [0..1]x[0..1]
+    region, with 0, 0 being in the lower left corder (which is typical
+    for OpenGL).
+    
+    The output @fragColor should be a RGBA color (with
+    premultiplied alpha) that will be used as the output for the
+    specified pixel location. Note that this output will be
+    automatically clipped to the clip region of the glshader node.
+    
+    In addition to the function arguments the shader can define
+    up to 4 uniforms for textures which must be called u_textureN
+    (i.e. u_texture1 to u_texture4) as well as any custom uniforms
+    you want of types int, uint, bool, float, vec2, vec3 or vec4.
+    
+    All textures sources contain premultiplied alpha colors, but if some
+    there are outer sources of colors there is a gsk_premultiply() helper
+    to compute premultiplication when needed.
+    
+    Note that GTK parses the uniform declarations, so each uniform has to
+    be on a line by itself with no other code, like so:
+    
+    ```glsl
+    uniform float u_time;
+    uniform vec3 u_color;
+    uniform sampler2D u_texture1;
+    uniform sampler2D u_texture2;
+    ```
+    
+    GTK uses the "gsk" namespace in the symbols it uses in the
+    shader, so your code should not use any symbols with the prefix gsk
+    or GSK. There are some helper functions declared that you can use:
+    
+    ```glsl
+    vec4 GskTexture(sampler2D sampler, vec2 texCoords);
+    ```
+    
+    This samples a texture (e.g. u_texture1) at the specified
+    coordinates, and contains some helper ifdefs to ensure that
+    it works on all OpenGL versions.
+    
+    You can compile the shader yourself using [gid.gsk4.glshader.GLShader.compile],
+    otherwise the GSK renderer will do it when it handling the glshader
+    node. If errors occurs, the returned @error will include the glsl
+    sources, so you can see what GSK was passing to the compiler. You
+    can also set GSK_DEBUG=shaders in the environment to see the sources
+    and other relevant information about all shaders that GSK is handling.
+    
+    # An example shader
+    
+    ```glsl
+    uniform float position;
+    uniform sampler2D u_texture1;
+    uniform sampler2D u_texture2;
+    
+    void mainImage(out vec4 fragColor,
+                   in vec2 fragCoord,
+                   in vec2 resolution,
+                   in vec2 uv) {
+      vec4 source1 = GskTexture(u_texture1, uv);
+      vec4 source2 = GskTexture(u_texture2, uv);
+    
+      fragColor = position * source1 + (1.0 - position) * source2;
+    }
+    ```
+
+    Deprecated: This feature was deprecated in GTK 4.16 after the new
+      rendering infrastructure introduced in 4.14 did not support it. The lack
+      of Vulkan integration would have made it a very hard feature to support.
+      If you want to use OpenGL directly, you should look at
+      [GtkGLArea](../gtk4/class.GLArea.html), which uses a different approach
+      and is still well-supported.
+*/
+class GLShader : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gsk_gl_shader_get_type != &gidSymbolNotFound ? gsk_gl_shader_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GskGLShader";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override GLShader self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gsk4.glshader.GLShader]
+      Returns: New builder object
+  */
+  static GLShaderGidBuilder builder() nothrow
+  {
+    return new GLShaderGidBuilder;
+  }
+
+  /**
+      Get `resource` property.
+      Returns: Resource containing the source code for the shader.
+        
+        If the shader source is not coming from a resource, this
+        will be null.
+  */
+  @property string resource() nothrow
+  {
+    return getResource();
+  }
+
+  /**
+      Get `source` property.
+      Returns: The source code for the shader, as a [gid.glib2.bytes.Bytes].
+  */
+  @property gid.glib2.bytes.Bytes source() nothrow
+  {
+    return getSource();
+  }
+
+  /**
+      Creates a [gid.gsk4.glshader.GLShader] that will render pixels using the specified code.
+  
+      Params:
+        sourcecode = GLSL sourcecode for the shader, as a [gid.glib2.bytes.Bytes]
+      Returns: A new [gid.gsk4.glshader.GLShader]
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
+  */
+  static gid.gsk4.glshader.GLShader newFromBytes(gid.glib2.bytes.Bytes sourcecode) nothrow
+  {
+    GskGLShader* _cretval;
+    _cretval = gsk_gl_shader_new_from_bytes(sourcecode ? cast(GBytes*)sourcecode._cPtr(No.Dup) : null);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gsk4.glshader.GLShader)(cast(GskGLShader*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Creates a [gid.gsk4.glshader.GLShader] that will render pixels using the specified code.
+  
+      Params:
+        resourcePath = path to a resource that contains the GLSL sourcecode for
+              the shader
+      Returns: A new [gid.gsk4.glshader.GLShader]
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
+  */
+  static gid.gsk4.glshader.GLShader newFromResource(string resourcePath) nothrow
+  {
+    GskGLShader* _cretval;
+    const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, No.Nullable);
+    _cretval = gsk_gl_shader_new_from_resource(_resourcePath);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gsk4.glshader.GLShader)(cast(GskGLShader*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Tries to compile the shader for the given renderer.
+      
+      If there is a problem, this function returns false and reports
+      an error. You should use this function before relying on the shader
+      for rendering and use a fallback with a simpler shader or without
+      shaders if it fails.
+      
+      Note that this will modify the rendering state (for example
+      change the current GL context) and requires the renderer to be
+      set up. This means that the widget has to be realized. Commonly you
+      want to call this from the realize signal of a widget, or during
+      widget snapshot.
+  
+      Params:
+        renderer = a [gid.gsk4.renderer.Renderer]
+      Returns: true on success, false if an error occurred
+      Throws: [ErrorWrap]
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
+  */
+  bool compile(gid.gsk4.renderer.Renderer renderer)
+  {
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)gsk_gl_shader_compile(cast(GskGLShader*)this._cPtr, renderer ? cast(GskRenderer*)renderer._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Looks for a uniform by the name name, and returns the index
+      of the uniform, or -1 if it was not found.
+  
+      Params:
+        name = uniform name
+      Returns: The index of the uniform, or -1
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
+  */
+  int findUniformByName(string name) nothrow
+  {
+    int _retval;
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    _retval = gsk_gl_shader_find_uniform_by_name(cast(GskGLShader*)this._cPtr, _name);
+    return _retval;
+  }
+
+  /**
+      Gets the value of the uniform idx in the args block.
+      
+      The uniform must be of bool type.
+  
+      Params:
+        args = uniform arguments
+        idx = index of the uniform
+      Returns: The value
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
+  */
+  bool getArgBool(gid.glib2.bytes.Bytes args, int idx) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gsk_gl_shader_get_arg_bool(cast(GskGLShader*)this._cPtr, args ? cast(GBytes*)args._cPtr(No.Dup) : null, idx);
+    return _retval;
+  }
+
+  /**
+      Gets the value of the uniform idx in the args block.
+      
+      The uniform must be of float type.
+  
+      Params:
+        args = uniform arguments
+        idx = index of the uniform
+      Returns: The value
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
+  */
+  float getArgFloat(gid.glib2.bytes.Bytes args, int idx) nothrow
+  {
+    float _retval;
+    _retval = gsk_gl_shader_get_arg_float(cast(GskGLShader*)this._cPtr, args ? cast(GBytes*)args._cPtr(No.Dup) : null, idx);
+    return _retval;
+  }
+
+  /**
+      Gets the value of the uniform idx in the args block.
+      
+      The uniform must be of int type.
+  
+      Params:
+        args = uniform arguments
+        idx = index of the uniform
+      Returns: The value
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
+  */
+  int getArgInt(gid.glib2.bytes.Bytes args, int idx) nothrow
+  {
+    int _retval;
+    _retval = gsk_gl_shader_get_arg_int(cast(GskGLShader*)this._cPtr, args ? cast(GBytes*)args._cPtr(No.Dup) : null, idx);
+    return _retval;
+  }
+
+  /**
+      Gets the value of the uniform idx in the args block.
+      
+      The uniform must be of uint type.
+  
+      Params:
+        args = uniform arguments
+        idx = index of the uniform
+      Returns: The value
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
+  */
+  uint getArgUint(gid.glib2.bytes.Bytes args, int idx) nothrow
+  {
+    uint _retval;
+    _retval = gsk_gl_shader_get_arg_uint(cast(GskGLShader*)this._cPtr, args ? cast(GBytes*)args._cPtr(No.Dup) : null, idx);
+    return _retval;
+  }
+
+  /**
+      Gets the value of the uniform idx in the args block.
+      
+      The uniform must be of vec2 type.
+  
+      Params:
+        args = uniform arguments
+        idx = index of the uniform
+        outValue = location to store the uniform value in
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
+  */
+  void getArgVec2(gid.glib2.bytes.Bytes args, int idx, gid.graphene1.vec2.Vec2 outValue) nothrow
+  {
+    gsk_gl_shader_get_arg_vec2(cast(GskGLShader*)this._cPtr, args ? cast(GBytes*)args._cPtr(No.Dup) : null, idx, outValue ? cast(graphene_vec2_t*)outValue._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Gets the value of the uniform idx in the args block.
+      
+      The uniform must be of vec3 type.
+  
+      Params:
+        args = uniform arguments
+        idx = index of the uniform
+        outValue = location to store the uniform value in
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
+  */
+  void getArgVec3(gid.glib2.bytes.Bytes args, int idx, gid.graphene1.vec3.Vec3 outValue) nothrow
+  {
+    gsk_gl_shader_get_arg_vec3(cast(GskGLShader*)this._cPtr, args ? cast(GBytes*)args._cPtr(No.Dup) : null, idx, outValue ? cast(graphene_vec3_t*)outValue._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Gets the value of the uniform idx in the args block.
+      
+      The uniform must be of vec4 type.
+  
+      Params:
+        args = uniform arguments
+        idx = index of the uniform
+        outValue = location to store set the uniform value in
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
+  */
+  void getArgVec4(gid.glib2.bytes.Bytes args, int idx, gid.graphene1.vec4.Vec4 outValue) nothrow
+  {
+    gsk_gl_shader_get_arg_vec4(cast(GskGLShader*)this._cPtr, args ? cast(GBytes*)args._cPtr(No.Dup) : null, idx, outValue ? cast(graphene_vec4_t*)outValue._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Get the size of the data block used to specify arguments for this shader.
+      Returns: The size of the data block
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
+  */
+  size_t getArgsSize() nothrow
+  {
+    size_t _retval;
+    _retval = gsk_gl_shader_get_args_size(cast(GskGLShader*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the number of textures that the shader requires.
+      
+      This can be used to check that the a passed shader works
+      in your usecase. It is determined by looking at the highest
+      u_textureN value that the shader defines.
+      Returns: The number of texture inputs required by shader
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
+  */
+  int getNTextures() nothrow
+  {
+    int _retval;
+    _retval = gsk_gl_shader_get_n_textures(cast(GskGLShader*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Get the number of declared uniforms for this shader.
+      Returns: The number of declared uniforms
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
+  */
+  int getNUniforms() nothrow
+  {
+    int _retval;
+    _retval = gsk_gl_shader_get_n_uniforms(cast(GskGLShader*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the resource path for the GLSL sourcecode being used
+      to render this shader.
+      Returns: The resource path for the shader
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
+  */
+  string getResource() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gsk_gl_shader_get_resource(cast(GskGLShader*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the GLSL sourcecode being used to render this shader.
+      Returns: The source code for the shader
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
+  */
+  gid.glib2.bytes.Bytes getSource() nothrow
+  {
+    GBytes* _cretval;
+    _cretval = gsk_gl_shader_get_source(cast(GskGLShader*)this._cPtr);
+    auto _retval = _cretval ? new gid.glib2.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Get the name of the declared uniform for this shader at index idx.
+  
+      Params:
+        idx = index of the uniform
+      Returns: The name of the declared uniform
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
+  */
+  string getUniformName(int idx) nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gsk_gl_shader_get_uniform_name(cast(GskGLShader*)this._cPtr, idx);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Get the offset into the data block where data for this uniforms is stored.
+  
+      Params:
+        idx = index of the uniform
+      Returns: The data offset
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
+  */
+  int getUniformOffset(int idx) nothrow
+  {
+    int _retval;
+    _retval = gsk_gl_shader_get_uniform_offset(cast(GskGLShader*)this._cPtr, idx);
+    return _retval;
+  }
+
+  /**
+      Get the type of the declared uniform for this shader at index idx.
+  
+      Params:
+        idx = index of the uniform
+      Returns: The type of the declared uniform
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [GtkGLArea](../gtk4/class.GLArea.html)
+          for OpenGL rendering.
+  */
+  gid.gsk4.types.GLUniformType getUniformType(int idx) nothrow
+  {
+    GskGLUniformType _cretval;
+    _cretval = gsk_gl_shader_get_uniform_type(cast(GskGLShader*)this._cPtr, idx);
+    gid.gsk4.types.GLUniformType _retval = cast(gid.gsk4.types.GLUniformType)_cretval;
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [gid.gsk4.glshader.GLShader]
+class GLShaderGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `resource` property.
+      Params:
+        propval = Resource containing the source code for the shader.
+          
+          If the shader source is not coming from a resource, this
+          will be null.
+      Returns: Builder instance for fluent chaining
+  */
+  T resource(string propval) nothrow
+  {
+    return setProperty("resource", propval);
+  }
+
+  /**
+      Set `source` property.
+      Params:
+        propval = The source code for the shader, as a [gid.glib2.bytes.Bytes].
+      Returns: Builder instance for fluent chaining
+  */
+  T source(gid.glib2.bytes.Bytes propval) nothrow
+  {
+    return setProperty("source", propval);
+  }
+}
+
+/// Fluent builder for [gid.gsk4.glshader.GLShader]
+final class GLShaderGidBuilder : GLShaderGidBuilderImpl!GLShaderGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  GLShader build() nothrow
+  {
+    return new GLShader(cast(void*)createGObject(GLShader._getGType), Yes.Take);
+  }
+}

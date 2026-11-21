@@ -1,0 +1,128 @@
+/// Module for [ColorBalanceChannel] class
+module gid.gstvideo1.color_balance_channel;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gstvideo1.c.functions;
+import gid.gstvideo1.c.types;
+import gid.gstvideo1.types;
+
+/**
+    The #GstColorBalanceChannel object represents a parameter
+    for modifying the color balance implemented by an element providing the
+    #GstColorBalance interface. For example, Hue or Saturation.
+*/
+class ColorBalanceChannel : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gst_color_balance_channel_get_type != &gidSymbolNotFound ? gst_color_balance_channel_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstColorBalanceChannel";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ColorBalanceChannel self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gstvideo1.color_balance_channel.ColorBalanceChannel]
+      Returns: New builder object
+  */
+  static ColorBalanceChannelGidBuilder builder() nothrow
+  {
+    return new ColorBalanceChannelGidBuilder;
+  }
+
+  /**
+      Connect to `ValueChanged` signal.
+  
+      Fired when the value of the indicated channel has changed.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(int value, gid.gstvideo1.color_balance_channel.ColorBalanceChannel colorBalanceChannel)`
+  
+          `value` The new value (optional)
+  
+          `colorBalanceChannel` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectValueChanged(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gstvideo1.color_balance_channel.ColorBalanceChannel)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.color_balance_channel.ColorBalanceChannel.valueChanged");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("value-changed", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gstvideo1.color_balance_channel.ColorBalanceChannel]
+class ColorBalanceChannelGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gstvideo1.color_balance_channel.ColorBalanceChannel]
+final class ColorBalanceChannelGidBuilder : ColorBalanceChannelGidBuilderImpl!ColorBalanceChannelGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  ColorBalanceChannel build() nothrow
+  {
+    return new ColorBalanceChannel(cast(void*)createGObject(ColorBalanceChannel._getGType), Yes.Take);
+  }
+}

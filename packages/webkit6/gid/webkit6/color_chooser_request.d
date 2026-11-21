@@ -1,0 +1,229 @@
+/// Module for [ColorChooserRequest] class
+module gid.webkit6.color_chooser_request;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gdk4.rectangle;
+import gid.gdk4.rgba;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.webkit6.c.functions;
+import gid.webkit6.c.types;
+import gid.webkit6.types;
+
+/**
+    A request to open a color chooser.
+    
+    Whenever the user interacts with an <input type='color' />
+    HTML element, WebKit will need to show a dialog to choose a color. For that
+    to happen in a general way, instead of just opening a #GtkColorChooser
+    (which might be not desirable in some cases, which could prefer to use their
+    own color chooser dialog), WebKit will fire the
+    #WebKitWebView::run-color-chooser signal with a #WebKitColorChooserRequest
+    object, which will allow the client application to specify the color to be
+    selected, to inspect the details of the request (e.g. to get initial color)
+    and to cancel the request, in case nothing was selected.
+    
+    In case the client application does not wish to handle this signal,
+    WebKit will provide a default handler which will asynchronously run
+    a regular #GtkColorChooserDialog for the user to interact with.
+*/
+class ColorChooserRequest : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())webkit_color_chooser_request_get_type != &gidSymbolNotFound ? webkit_color_chooser_request_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitColorChooserRequest";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ColorChooserRequest self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.webkit6.color_chooser_request.ColorChooserRequest]
+      Returns: New builder object
+  */
+  static ColorChooserRequestGidBuilder builder() nothrow
+  {
+    return new ColorChooserRequestGidBuilder;
+  }
+
+  /**
+      Get `rgba` property.
+      Returns: The #GdkRGBA color of the request
+  */
+  @property gid.gdk4.rgba.RGBA rgba() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gdk4.rgba.RGBA)("rgba");
+  }
+
+  /**
+      Set `rgba` property.
+      Params:
+        propval = The #GdkRGBA color of the request
+  */
+  @property void rgba(gid.gdk4.rgba.RGBA propval) nothrow
+  {
+    setRgba(propval);
+  }
+
+  /**
+      Cancels request and the input element changes to use the initial color.
+      
+      Cancels request and the input element changes to use the initial color
+      it has before the request started.
+      The signal #WebKitColorChooserRequest::finished
+      is emitted to notify that the request has finished.
+  */
+  void cancel() nothrow
+  {
+    webkit_color_chooser_request_cancel(cast(WebKitColorChooserRequest*)this._cPtr);
+  }
+
+  /**
+      Finishes request and the input element keeps the current value of
+      #WebKitColorChooserRequest:rgba.
+      
+      Finishes request and the input element keeps the current value of
+      #WebKitColorChooserRequest:rgba.
+      The signal #WebKitColorChooserRequest::finished
+      is emitted to notify that the request has finished.
+  */
+  void finish() nothrow
+  {
+    webkit_color_chooser_request_finish(cast(WebKitColorChooserRequest*)this._cPtr);
+  }
+
+  /**
+      Gets the bounding box of the color input element.
+  
+      Params:
+        rect = a #GdkRectangle to fill in with the element area
+  */
+  void getElementRectangle(out gid.gdk4.rectangle.Rectangle rect) nothrow
+  {
+    webkit_color_chooser_request_get_element_rectangle(cast(WebKitColorChooserRequest*)this._cPtr, cast(GdkRectangle*)&rect);
+  }
+
+  /**
+      Gets the current #GdkRGBA color of request
+  
+      Params:
+        rgba = a #GdkRGBA to fill in with the current color.
+  */
+  void getRgba(out gid.gdk4.rgba.RGBA rgba) nothrow
+  {
+    webkit_color_chooser_request_get_rgba(cast(WebKitColorChooserRequest*)this._cPtr, cast(GdkRGBA*)&rgba);
+  }
+
+  /**
+      Sets the current #GdkRGBA color of request
+  
+      Params:
+        rgba = a pointer #GdkRGBA
+  */
+  void setRgba(gid.gdk4.rgba.RGBA rgba) nothrow
+  {
+    webkit_color_chooser_request_set_rgba(cast(WebKitColorChooserRequest*)this._cPtr, cast(const(GdkRGBA)*)&rgba);
+  }
+
+  /**
+      Connect to `Finished` signal.
+  
+      Emitted when the request finishes. This signal can be emitted because the
+        user completed the request calling [gid.webkit6.color_chooser_request.ColorChooserRequest.finish],
+        or cancelled it with [gid.webkit6.color_chooser_request.ColorChooserRequest.cancel] or because the
+        color input element is removed from the DOM.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.webkit6.color_chooser_request.ColorChooserRequest colorChooserRequest)`
+  
+          `colorChooserRequest` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectFinished(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.webkit6.color_chooser_request.ColorChooserRequest)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.webkit6.color_chooser_request.ColorChooserRequest.finished");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("finished", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.webkit6.color_chooser_request.ColorChooserRequest]
+class ColorChooserRequestGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `rgba` property.
+      Params:
+        propval = The #GdkRGBA color of the request
+      Returns: Builder instance for fluent chaining
+  */
+  T rgba(gid.gdk4.rgba.RGBA propval) nothrow
+  {
+    return setProperty("rgba", propval);
+  }
+}
+
+/// Fluent builder for [gid.webkit6.color_chooser_request.ColorChooserRequest]
+final class ColorChooserRequestGidBuilder : ColorChooserRequestGidBuilderImpl!ColorChooserRequestGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  ColorChooserRequest build() nothrow
+  {
+    return new ColorChooserRequest(cast(void*)createGObject(ColorChooserRequest._getGType), Yes.Take);
+  }
+}

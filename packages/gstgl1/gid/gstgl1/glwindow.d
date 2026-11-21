@@ -1,0 +1,676 @@
+/// Module for [GLWindow] class
+module gid.gstgl1.glwindow;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gst1.object;
+import gid.gstgl1.c.functions;
+import gid.gstgl1.c.types;
+import gid.gstgl1.glcontext;
+import gid.gstgl1.gldisplay;
+import gid.gstgl1.types;
+
+/**
+    GstGLWindow represents a window that elements can render into.  A window can
+    either be a user visible window (onscreen) or hidden (offscreen).
+*/
+class GLWindow : gid.gst1.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gst_gl_window_get_type != &gidSymbolNotFound ? gst_gl_window_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstGLWindow";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override GLWindow self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gstgl1.glwindow.GLWindow]
+      Returns: New builder object
+  */
+  static GLWindowGidBuilder builder() nothrow
+  {
+    return new GLWindowGidBuilder;
+  }
+
+  /** */
+  this(gid.gstgl1.gldisplay.GLDisplay display) nothrow
+  {
+    GstGLWindow* _cretval;
+    _cretval = gst_gl_window_new(display ? cast(GstGLDisplay*)display._cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Checks if window controls the GL viewport.
+      Returns: true if window controls the GL viewport, otherwise false
+  */
+  bool controlsViewport() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_gl_window_controls_viewport(cast(GstGLWindow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Redraw the window contents.  Implementations should invoke the draw callback.
+  */
+  void draw() nothrow
+  {
+    gst_gl_window_draw(cast(GstGLWindow*)this._cPtr);
+  }
+
+  /** */
+  gid.gstgl1.glcontext.GLContext getContext() nothrow
+  {
+    GstGLContext* _cretval;
+    _cretval = gst_gl_window_get_context(cast(GstGLWindow*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gstgl1.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /** */
+  size_t getDisplay() nothrow
+  {
+    size_t _retval;
+    _retval = gst_gl_window_get_display(cast(GstGLWindow*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  bool getRequestOutputSurface() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_gl_window_get_request_output_surface(cast(GstGLWindow*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  void getSurfaceDimensions(out uint width, out uint height) nothrow
+  {
+    gst_gl_window_get_surface_dimensions(cast(GstGLWindow*)this._cPtr, cast(uint*)&width, cast(uint*)&height);
+  }
+
+  /** */
+  size_t getWindowHandle() nothrow
+  {
+    size_t _retval;
+    _retval = gst_gl_window_get_window_handle(cast(GstGLWindow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Tell a window that it should handle events from the window system. These
+      events are forwarded upstream as navigation events. In some window systems
+      events are not propagated in the window hierarchy if a client is listening
+      for them. This method allows you to disable events handling completely
+      from the window.
+  
+      Params:
+        handleEvents = a #gboolean indicating if events should be handled or not.
+  */
+  void handleEvents(bool handleEvents) nothrow
+  {
+    gst_gl_window_handle_events(cast(GstGLWindow*)this._cPtr, handleEvents);
+  }
+
+  /**
+      Query whether window has output surface or not
+      Returns: true if window has useable output surface
+  */
+  bool hasOutputSurface() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_gl_window_has_output_surface(cast(GstGLWindow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Queue resizing of window.
+  */
+  void queueResize() nothrow
+  {
+    gst_gl_window_queue_resize(cast(GstGLWindow*)this._cPtr);
+  }
+
+  /**
+      Quit the runloop's execution.
+  */
+  void quit() nothrow
+  {
+    gst_gl_window_quit(cast(GstGLWindow*)this._cPtr);
+  }
+
+  /**
+      Resize window to the given width and height.
+  
+      Params:
+        width = new width
+        height = new height
+  */
+  void resize(uint width, uint height) nothrow
+  {
+    gst_gl_window_resize(cast(GstGLWindow*)this._cPtr, width, height);
+  }
+
+  /**
+      Start the execution of the runloop.
+  */
+  void run() nothrow
+  {
+    gst_gl_window_run(cast(GstGLWindow*)this._cPtr);
+  }
+
+  /** */
+  void sendKeyEvent(string eventType, string keyStr) nothrow
+  {
+    const(char)* _eventType = eventType.toCString!(No.Malloc, No.Nullable);
+    const(char)* _keyStr = keyStr.toCString!(No.Malloc, No.Nullable);
+    gst_gl_window_send_key_event(cast(GstGLWindow*)this._cPtr, _eventType, _keyStr);
+  }
+
+  /**
+      Invoke callback with data on the window thread.  callback is guaranteed to
+      have executed when this function returns.
+  
+      Params:
+        callback = function to invoke
+  */
+  void sendMessage(gid.gstgl1.types.GLWindowCB callback) nothrow
+  {
+    extern(C) void _callbackCallback(void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gstgl1.types.GLWindowCB*)data;
+
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.types.GLWindowCB");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    gst_gl_window_send_message(cast(GstGLWindow*)this._cPtr, _callbackCB, _callback);
+  }
+
+  /**
+      Invoke callback with data on the window thread.  The callback may not
+      have been executed when this function returns.
+  
+      Params:
+        callback = function to invoke
+  */
+  void sendMessageAsync(gid.gstgl1.types.GLWindowCB callback) nothrow
+  {
+    extern(C) void _callbackCallback(void* data) nothrow
+    {
+      auto _dlg = cast(gid.gstgl1.types.GLWindowCB*)data;
+
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.types.GLWindowCB");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
+    gst_gl_window_send_message_async(cast(GstGLWindow*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
+  }
+
+  /** */
+  void sendMouseEvent(string eventType, int button, double posx, double posy) nothrow
+  {
+    const(char)* _eventType = eventType.toCString!(No.Malloc, No.Nullable);
+    gst_gl_window_send_mouse_event(cast(GstGLWindow*)this._cPtr, _eventType, button, posx, posy);
+  }
+
+  /**
+      Notify a window about a scroll event. A scroll signal holding the event
+      coordinates will be emitted.
+  
+      Params:
+        posx = x position of the mouse cursor
+        posy = y position of the mouse cursor
+        deltaX = the x offset of the scroll event
+        deltaY = the y offset of the scroll event
+  */
+  void sendScrollEvent(double posx, double posy, double deltaX, double deltaY) nothrow
+  {
+    gst_gl_window_send_scroll_event(cast(GstGLWindow*)this._cPtr, posx, posy, deltaX, deltaY);
+  }
+
+  /**
+      Sets the callback called when the window is about to close.
+  
+      Params:
+        callback = function to invoke
+  */
+  void setCloseCallback(gid.gstgl1.types.GLWindowCB callback) nothrow
+  {
+    extern(C) void _callbackCallback(void* data) nothrow
+    {
+      auto _dlg = cast(gid.gstgl1.types.GLWindowCB*)data;
+
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.types.GLWindowCB");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
+    gst_gl_window_set_close_callback(cast(GstGLWindow*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
+  }
+
+  /**
+      Sets the draw callback called every time [gid.gstgl1.glwindow.GLWindow.draw] is called
+  
+      Params:
+        callback = function to invoke
+  */
+  void setDrawCallback(gid.gstgl1.types.GLWindowCB callback) nothrow
+  {
+    extern(C) void _callbackCallback(void* data) nothrow
+    {
+      auto _dlg = cast(gid.gstgl1.types.GLWindowCB*)data;
+
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.types.GLWindowCB");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
+    gst_gl_window_set_draw_callback(cast(GstGLWindow*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
+  }
+
+  /**
+      Set the preferred width and height of the window.  Implementations are free
+      to ignore this information.
+  
+      Params:
+        width = new preferred width
+        height = new preferred height
+  */
+  void setPreferredSize(int width, int height) nothrow
+  {
+    gst_gl_window_set_preferred_size(cast(GstGLWindow*)this._cPtr, width, height);
+  }
+
+  /**
+      Tell a window that it should render into a specific region of the window
+      according to the #GstVideoOverlay interface.
+  
+      Params:
+        x = x position
+        y = y position
+        width = width
+        height = height
+      Returns: whether the specified region could be set
+  */
+  bool setRenderRectangle(int x, int y, int width, int height) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_gl_window_set_render_rectangle(cast(GstGLWindow*)this._cPtr, x, y, width, height);
+    return _retval;
+  }
+
+  /**
+      Configure whether a visible output surface is requested.
+  
+      Params:
+        outputSurface = whether to request an output surface.
+  */
+  void setRequestOutputSurface(bool outputSurface) nothrow
+  {
+    gst_gl_window_set_request_output_surface(cast(GstGLWindow*)this._cPtr, outputSurface);
+  }
+
+  /**
+      Sets the resize callback called every time a resize of the window occurs.
+  
+      Params:
+        callback = function to invoke
+  */
+  void setResizeCallback(gid.gstgl1.types.GLWindowResizeCB callback) nothrow
+  {
+    extern(C) void _callbackCallback(void* data, uint width, uint height) nothrow
+    {
+      auto _dlg = cast(gid.gstgl1.types.GLWindowResizeCB*)data;
+
+      try
+      {
+        (*_dlg)(width, height);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.types.GLWindowResizeCB");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
+    gst_gl_window_set_resize_callback(cast(GstGLWindow*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
+  }
+
+  /**
+      Sets the window that this window should render into.  Some implementations
+      require this to be called with a valid handle before drawing can commence.
+  
+      Params:
+        handle = handle to the window
+  */
+  void setWindowHandle(size_t handle) nothrow
+  {
+    gst_gl_window_set_window_handle(cast(GstGLWindow*)this._cPtr, handle);
+  }
+
+  /**
+      Present the window to the screen.
+  */
+  void show() nothrow
+  {
+    gst_gl_window_show(cast(GstGLWindow*)this._cPtr);
+  }
+
+  /**
+      Connect to `KeyEvent` signal.
+  
+      Will be emitted when a key event is received by the GstGLwindow.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(string id, string key, gid.gstgl1.glwindow.GLWindow gLWindow)`
+  
+          `id` the name of the event (optional)
+  
+          `key` the id of the key pressed (optional)
+  
+          `gLWindow` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectKeyEvent(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gid.gstgl1.glwindow.GLWindow)))
+  && Parameters!T.length < 4)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 3, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.glwindow.GLWindow.keyEvent");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("key-event", closure, after);
+  }
+
+  /**
+      Connect to `MouseEvent` signal.
+  
+      Will be emitted when a mouse event is received by the GstGLwindow.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(string id, int button, double x, double y, gid.gstgl1.glwindow.GLWindow gLWindow)`
+  
+          `id` the name of the event (optional)
+  
+          `button` the id of the button (optional)
+  
+          `x` the x coordinate of the mouse event (optional)
+  
+          `y` the y coordinate of the mouse event (optional)
+  
+          `gLWindow` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectMouseEvent(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == double)))
+  && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] == double)))
+  && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gid.gstgl1.glwindow.GLWindow)))
+  && Parameters!T.length < 6)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 5, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);
+
+      static if (Parameters!T.length > 3)
+        _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[4]);
+
+      static if (Parameters!T.length > 4)
+        _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.glwindow.GLWindow.mouseEvent");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("mouse-event", closure, after);
+  }
+
+  /**
+      Connect to `ScrollEvent` signal.
+  
+      Will be emitted when a mouse scroll event is received by the GstGLwindow.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(double x, double y, double deltaX, double deltaY, gid.gstgl1.glwindow.GLWindow gLWindow)`
+  
+          `x` the x coordinate of the mouse event (optional)
+  
+          `y` the y coordinate of the mouse event (optional)
+  
+          `deltaX` the x offset of the scroll event (optional)
+  
+          `deltaY` the y offset of the scroll event (optional)
+  
+          `gLWindow` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectScrollEvent(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == double)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == double)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] == double)))
+  && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] == double)))
+  && (Parameters!T.length < 5 || (ParameterStorageClassTuple!T[4] == ParameterStorageClass.none && is(Parameters!T[4] : gid.gstgl1.glwindow.GLWindow)))
+  && Parameters!T.length < 6)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 5, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);
+
+      static if (Parameters!T.length > 3)
+        _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[4]);
+
+      static if (Parameters!T.length > 4)
+        _paramTuple[4] = getVal!(Parameters!T[4])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.glwindow.GLWindow.scrollEvent");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("scroll-event", closure, after);
+  }
+
+  /**
+      Connect to `WindowHandleChanged` signal.
+  
+      Will be emitted when the window handle has been set into the native
+        implementation, but before the context is re-activated. By using this
+        signal, elements can refresh associated resource without relying on
+        direct handle comparision.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gstgl1.glwindow.GLWindow gLWindow)`
+  
+          `gLWindow` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectWindowHandleChanged(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gstgl1.glwindow.GLWindow)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.glwindow.GLWindow.windowHandleChanged");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("window-handle-changed", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gstgl1.glwindow.GLWindow]
+class GLWindowGidBuilderImpl(T) : gid.gst1.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gstgl1.glwindow.GLWindow]
+final class GLWindowGidBuilder : GLWindowGidBuilderImpl!GLWindowGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  GLWindow build() nothrow
+  {
+    return new GLWindow(cast(void*)createGObject(GLWindow._getGType), Yes.Take);
+  }
+}

@@ -1,0 +1,514 @@
+/// Module for [Vec3] class
+module gid.graphene1.vec3;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.boxed;
+import gid.graphene1.c.functions;
+import gid.graphene1.c.types;
+import gid.graphene1.types;
+import gid.graphene1.vec2;
+import gid.graphene1.vec4;
+
+/**
+    A structure capable of holding a vector with three dimensions: x, y, and z.
+    
+    The contents of the #graphene_vec3_t structure are private and should
+    never be accessed directly.
+*/
+class Vec3 : gid.gobject2.boxed.BoxedWrap!(graphene_vec3_get_type)
+{
+  /**
+      Create a `vec3.Vec3` boxed type.
+  */
+  this() nothrow
+  {
+    super(boxedNew!graphene_vec3_t(_getGType), Yes.Take);
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Vec3 self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Allocates a new #graphene_vec3_t structure.
+      
+      The contents of the returned structure are undefined.
+      
+      Use [gid.graphene1.vec3.Vec3.init_] to initialize the vector.
+      Returns: the newly allocated #graphene_vec3_t
+          structure. Use [gid.graphene1.vec3.Vec3.free] to free the resources allocated
+          by this function.
+  */
+  static gid.graphene1.vec3.Vec3 alloc() nothrow
+  {
+    graphene_vec3_t* _cretval;
+    _cretval = graphene_vec3_alloc();
+    auto _retval = _cretval ? new gid.graphene1.vec3.Vec3(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Adds each component of the two given vectors.
+  
+      Params:
+        b = a #graphene_vec3_t
+        res = return location for the resulting vector
+  */
+  void add(gid.graphene1.vec3.Vec3 b, out gid.graphene1.vec3.Vec3 res) nothrow
+  {
+    auto _res = boxedNew!graphene_vec3_t(gid.graphene1.vec3.Vec3._getGType);
+    graphene_vec3_add(cast(const(graphene_vec3_t)*)this._cPtr, b ? cast(const(graphene_vec3_t)*)b._cPtr(No.Dup) : null, _res);
+    res = new gid.graphene1.vec3.Vec3(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Computes the cross product of the two given vectors.
+  
+      Params:
+        b = a #graphene_vec3_t
+        res = return location for the resulting vector
+  */
+  void cross(gid.graphene1.vec3.Vec3 b, out gid.graphene1.vec3.Vec3 res) nothrow
+  {
+    auto _res = boxedNew!graphene_vec3_t(gid.graphene1.vec3.Vec3._getGType);
+    graphene_vec3_cross(cast(const(graphene_vec3_t)*)this._cPtr, b ? cast(const(graphene_vec3_t)*)b._cPtr(No.Dup) : null, _res);
+    res = new gid.graphene1.vec3.Vec3(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Divides each component of the first operand `a` by the corresponding
+      component of the second operand `b`, and places the results into the
+      vector res.
+  
+      Params:
+        b = a #graphene_vec3_t
+        res = return location for the resulting vector
+  */
+  void divide(gid.graphene1.vec3.Vec3 b, out gid.graphene1.vec3.Vec3 res) nothrow
+  {
+    auto _res = boxedNew!graphene_vec3_t(gid.graphene1.vec3.Vec3._getGType);
+    graphene_vec3_divide(cast(const(graphene_vec3_t)*)this._cPtr, b ? cast(const(graphene_vec3_t)*)b._cPtr(No.Dup) : null, _res);
+    res = new gid.graphene1.vec3.Vec3(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Computes the dot product of the two given vectors.
+  
+      Params:
+        b = a #graphene_vec3_t
+      Returns: the value of the dot product
+  */
+  float dot(gid.graphene1.vec3.Vec3 b) nothrow
+  {
+    float _retval;
+    _retval = graphene_vec3_dot(cast(const(graphene_vec3_t)*)this._cPtr, b ? cast(const(graphene_vec3_t)*)b._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Checks whether the two given #graphene_vec3_t are equal.
+  
+      Params:
+        v2 = a #graphene_vec3_t
+      Returns: `true` if the two vectors are equal, and false otherwise
+  */
+  bool equal(gid.graphene1.vec3.Vec3 v2) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)graphene_vec3_equal(cast(const(graphene_vec3_t)*)this._cPtr, v2 ? cast(const(graphene_vec3_t)*)v2._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Retrieves the first component of the given vector `v`.
+      Returns: the value of the first component of the vector
+  */
+  float getX() nothrow
+  {
+    float _retval;
+    _retval = graphene_vec3_get_x(cast(const(graphene_vec3_t)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Creates a #graphene_vec2_t that contains the first and second
+      components of the given #graphene_vec3_t.
+  
+      Params:
+        res = return location for a #graphene_vec2_t
+  */
+  void getXy(out gid.graphene1.vec2.Vec2 res) nothrow
+  {
+    auto _res = boxedNew!graphene_vec2_t(gid.graphene1.vec2.Vec2._getGType);
+    graphene_vec3_get_xy(cast(const(graphene_vec3_t)*)this._cPtr, _res);
+    res = new gid.graphene1.vec2.Vec2(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Creates a #graphene_vec3_t that contains the first two components of
+      the given #graphene_vec3_t, and the third component set to 0.
+  
+      Params:
+        res = return location for a #graphene_vec3_t
+  */
+  void getXy0(out gid.graphene1.vec3.Vec3 res) nothrow
+  {
+    auto _res = boxedNew!graphene_vec3_t(gid.graphene1.vec3.Vec3._getGType);
+    graphene_vec3_get_xy0(cast(const(graphene_vec3_t)*)this._cPtr, _res);
+    res = new gid.graphene1.vec3.Vec3(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Converts a #graphene_vec3_t in a #graphene_vec4_t using 0.0
+      as the value for the fourth component of the resulting vector.
+  
+      Params:
+        res = return location for the vector
+  */
+  void getXyz0(out gid.graphene1.vec4.Vec4 res) nothrow
+  {
+    auto _res = boxedNew!graphene_vec4_t(gid.graphene1.vec4.Vec4._getGType);
+    graphene_vec3_get_xyz0(cast(const(graphene_vec3_t)*)this._cPtr, _res);
+    res = new gid.graphene1.vec4.Vec4(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Converts a #graphene_vec3_t in a #graphene_vec4_t using 1.0
+      as the value for the fourth component of the resulting vector.
+  
+      Params:
+        res = return location for the vector
+  */
+  void getXyz1(out gid.graphene1.vec4.Vec4 res) nothrow
+  {
+    auto _res = boxedNew!graphene_vec4_t(gid.graphene1.vec4.Vec4._getGType);
+    graphene_vec3_get_xyz1(cast(const(graphene_vec3_t)*)this._cPtr, _res);
+    res = new gid.graphene1.vec4.Vec4(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Converts a #graphene_vec3_t in a #graphene_vec4_t using `w` as
+      the value of the fourth component of the resulting vector.
+  
+      Params:
+        w = the value of the W component
+        res = return location for the vector
+  */
+  void getXyzw(float w, out gid.graphene1.vec4.Vec4 res) nothrow
+  {
+    auto _res = boxedNew!graphene_vec4_t(gid.graphene1.vec4.Vec4._getGType);
+    graphene_vec3_get_xyzw(cast(const(graphene_vec3_t)*)this._cPtr, w, _res);
+    res = new gid.graphene1.vec4.Vec4(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Retrieves the second component of the given vector `v`.
+      Returns: the value of the second component of the vector
+  */
+  float getY() nothrow
+  {
+    float _retval;
+    _retval = graphene_vec3_get_y(cast(const(graphene_vec3_t)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves the third component of the given vector `v`.
+      Returns: the value of the third component of the vector
+  */
+  float getZ() nothrow
+  {
+    float _retval;
+    _retval = graphene_vec3_get_z(cast(const(graphene_vec3_t)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Initializes a #graphene_vec3_t using the given values.
+      
+      This function can be called multiple times.
+  
+      Params:
+        x = the X field of the vector
+        y = the Y field of the vector
+        z = the Z field of the vector
+      Returns: a pointer to the initialized
+          vector
+  */
+  gid.graphene1.vec3.Vec3 init_(float x, float y, float z) nothrow
+  {
+    graphene_vec3_t* _cretval;
+    _cretval = graphene_vec3_init(cast(graphene_vec3_t*)this._cPtr, x, y, z);
+    auto _retval = _cretval ? new gid.graphene1.vec3.Vec3(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Initializes a #graphene_vec3_t with the values from an array.
+  
+      Params:
+        src = an array of 3 floating point values
+      Returns: the initialized vector
+  */
+  gid.graphene1.vec3.Vec3 initFromFloat(float[] src) nothrow
+  {
+    graphene_vec3_t* _cretval;
+    if (src.length > 3) src = src[0 .. 3];
+    auto _src = cast(float*)src.ptr;
+    typeof(*_src)[3] _src_fixed = void;
+    if (src.length < 3)
+    {
+      (cast(ubyte[])_src_fixed[])[] = 0;
+      _src_fixed[0 .. src.length] = _src[0 .. src.length];
+      _src = _src_fixed.ptr;
+    }
+    _cretval = graphene_vec3_init_from_float(cast(graphene_vec3_t*)this._cPtr, _src);
+    auto _retval = _cretval ? new gid.graphene1.vec3.Vec3(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Initializes a #graphene_vec3_t with the values of another
+      #graphene_vec3_t.
+  
+      Params:
+        src = a #graphene_vec3_t
+      Returns: the initialized vector
+  */
+  gid.graphene1.vec3.Vec3 initFromVec3(gid.graphene1.vec3.Vec3 src) nothrow
+  {
+    graphene_vec3_t* _cretval;
+    _cretval = graphene_vec3_init_from_vec3(cast(graphene_vec3_t*)this._cPtr, src ? cast(const(graphene_vec3_t)*)src._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gid.graphene1.vec3.Vec3(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Linearly interpolates v1 and v2 using the given factor.
+  
+      Params:
+        v2 = a #graphene_vec3_t
+        factor = the interpolation factor
+        res = the interpolated vector
+  */
+  void interpolate(gid.graphene1.vec3.Vec3 v2, double factor, out gid.graphene1.vec3.Vec3 res) nothrow
+  {
+    auto _res = boxedNew!graphene_vec3_t(gid.graphene1.vec3.Vec3._getGType);
+    graphene_vec3_interpolate(cast(const(graphene_vec3_t)*)this._cPtr, v2 ? cast(const(graphene_vec3_t)*)v2._cPtr(No.Dup) : null, factor, _res);
+    res = new gid.graphene1.vec3.Vec3(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Retrieves the length of the given vector `v`.
+      Returns: the value of the length of the vector
+  */
+  float length() nothrow
+  {
+    float _retval;
+    _retval = graphene_vec3_length(cast(const(graphene_vec3_t)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Compares each component of the two given vectors and creates a
+      vector that contains the maximum values.
+  
+      Params:
+        b = a #graphene_vec3_t
+        res = return location for the result vector
+  */
+  void max(gid.graphene1.vec3.Vec3 b, out gid.graphene1.vec3.Vec3 res) nothrow
+  {
+    auto _res = boxedNew!graphene_vec3_t(gid.graphene1.vec3.Vec3._getGType);
+    graphene_vec3_max(cast(const(graphene_vec3_t)*)this._cPtr, b ? cast(const(graphene_vec3_t)*)b._cPtr(No.Dup) : null, _res);
+    res = new gid.graphene1.vec3.Vec3(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Compares each component of the two given vectors and creates a
+      vector that contains the minimum values.
+  
+      Params:
+        b = a #graphene_vec3_t
+        res = return location for the result vector
+  */
+  void min(gid.graphene1.vec3.Vec3 b, out gid.graphene1.vec3.Vec3 res) nothrow
+  {
+    auto _res = boxedNew!graphene_vec3_t(gid.graphene1.vec3.Vec3._getGType);
+    graphene_vec3_min(cast(const(graphene_vec3_t)*)this._cPtr, b ? cast(const(graphene_vec3_t)*)b._cPtr(No.Dup) : null, _res);
+    res = new gid.graphene1.vec3.Vec3(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Multiplies each component of the two given vectors.
+  
+      Params:
+        b = a #graphene_vec3_t
+        res = return location for the resulting vector
+  */
+  void multiply(gid.graphene1.vec3.Vec3 b, out gid.graphene1.vec3.Vec3 res) nothrow
+  {
+    auto _res = boxedNew!graphene_vec3_t(gid.graphene1.vec3.Vec3._getGType);
+    graphene_vec3_multiply(cast(const(graphene_vec3_t)*)this._cPtr, b ? cast(const(graphene_vec3_t)*)b._cPtr(No.Dup) : null, _res);
+    res = new gid.graphene1.vec3.Vec3(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Compares the two given #graphene_vec3_t vectors and checks
+      whether their values are within the given epsilon.
+  
+      Params:
+        v2 = a #graphene_vec3_t
+        epsilon = the threshold between the two vectors
+      Returns: `true` if the two vectors are near each other
+  */
+  bool near(gid.graphene1.vec3.Vec3 v2, float epsilon) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)graphene_vec3_near(cast(const(graphene_vec3_t)*)this._cPtr, v2 ? cast(const(graphene_vec3_t)*)v2._cPtr(No.Dup) : null, epsilon);
+    return _retval;
+  }
+
+  /**
+      Negates the given #graphene_vec3_t.
+  
+      Params:
+        res = return location for the result vector
+  */
+  void negate(out gid.graphene1.vec3.Vec3 res) nothrow
+  {
+    auto _res = boxedNew!graphene_vec3_t(gid.graphene1.vec3.Vec3._getGType);
+    graphene_vec3_negate(cast(const(graphene_vec3_t)*)this._cPtr, _res);
+    res = new gid.graphene1.vec3.Vec3(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Normalizes the given #graphene_vec3_t.
+  
+      Params:
+        res = return location for the normalized vector
+  */
+  void normalize(out gid.graphene1.vec3.Vec3 res) nothrow
+  {
+    auto _res = boxedNew!graphene_vec3_t(gid.graphene1.vec3.Vec3._getGType);
+    graphene_vec3_normalize(cast(const(graphene_vec3_t)*)this._cPtr, _res);
+    res = new gid.graphene1.vec3.Vec3(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Multiplies all components of the given vector with the given scalar factor.
+  
+      Params:
+        factor = the scalar factor
+        res = return location for the result vector
+  */
+  void scale(float factor, out gid.graphene1.vec3.Vec3 res) nothrow
+  {
+    auto _res = boxedNew!graphene_vec3_t(gid.graphene1.vec3.Vec3._getGType);
+    graphene_vec3_scale(cast(const(graphene_vec3_t)*)this._cPtr, factor, _res);
+    res = new gid.graphene1.vec3.Vec3(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Subtracts from each component of the first operand `a` the
+      corresponding component of the second operand `b` and places
+      each result into the components of res.
+  
+      Params:
+        b = a #graphene_vec3_t
+        res = return location for the resulting vector
+  */
+  void subtract(gid.graphene1.vec3.Vec3 b, out gid.graphene1.vec3.Vec3 res) nothrow
+  {
+    auto _res = boxedNew!graphene_vec3_t(gid.graphene1.vec3.Vec3._getGType);
+    graphene_vec3_subtract(cast(const(graphene_vec3_t)*)this._cPtr, b ? cast(const(graphene_vec3_t)*)b._cPtr(No.Dup) : null, _res);
+    res = new gid.graphene1.vec3.Vec3(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Copies the components of a #graphene_vec3_t into the given array.
+  
+      Params:
+        dest = return location for
+            an array of floating point values
+  */
+  void toFloat(out float[] dest) nothrow
+  {
+    dest.length = 3;
+    graphene_vec3_to_float(cast(const(graphene_vec3_t)*)this._cPtr, dest.ptr);
+  }
+
+  /**
+      Provides a constant pointer to a vector with three components,
+      all sets to 1.
+      Returns: a constant vector
+  */
+  static gid.graphene1.vec3.Vec3 one() nothrow
+  {
+    const(graphene_vec3_t)* _cretval;
+    _cretval = graphene_vec3_one();
+    auto _retval = _cretval ? new gid.graphene1.vec3.Vec3(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Provides a constant pointer to a vector with three components
+      with values set to (1, 0, 0).
+      Returns: a constant vector
+  */
+  static gid.graphene1.vec3.Vec3 xAxis() nothrow
+  {
+    const(graphene_vec3_t)* _cretval;
+    _cretval = graphene_vec3_x_axis();
+    auto _retval = _cretval ? new gid.graphene1.vec3.Vec3(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Provides a constant pointer to a vector with three components
+      with values set to (0, 1, 0).
+      Returns: a constant vector
+  */
+  static gid.graphene1.vec3.Vec3 yAxis() nothrow
+  {
+    const(graphene_vec3_t)* _cretval;
+    _cretval = graphene_vec3_y_axis();
+    auto _retval = _cretval ? new gid.graphene1.vec3.Vec3(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Provides a constant pointer to a vector with three components
+      with values set to (0, 0, 1).
+      Returns: a constant vector
+  */
+  static gid.graphene1.vec3.Vec3 zAxis() nothrow
+  {
+    const(graphene_vec3_t)* _cretval;
+    _cretval = graphene_vec3_z_axis();
+    auto _retval = _cretval ? new gid.graphene1.vec3.Vec3(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Provides a constant pointer to a vector with three components,
+      all sets to 0.
+      Returns: a constant vector
+  */
+  static gid.graphene1.vec3.Vec3 zero() nothrow
+  {
+    const(graphene_vec3_t)* _cretval;
+    _cretval = graphene_vec3_zero();
+    auto _retval = _cretval ? new gid.graphene1.vec3.Vec3(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+}

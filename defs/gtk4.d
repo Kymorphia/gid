@@ -86,14 +86,14 @@
   */
   void reorder(int[] newOrder) nothrow
   {
-    import glib.c.functions : g_log;
-    import glib.c.types : GLogLevelFlags;
+    import gid.glib2.c.functions : g_log;
+    import gid.glib2.c.types : GLogLevelFlags;
 
     auto nRows = gtk_tree_model_iter_n_children(cast(GtkTreeModel*)this._cPtr, null);
 
     if (newOrder.length != nRows)
     {
-      g_log("Gid", GLogLevelFlags.LevelCritical, "gtk.list_store.ListStore.reorder newOrder length %d does not match the number of rows %d",
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gid.gtk4.list_store.ListStore.reorder newOrder length %d does not match the number of rows %d",
         cast(int)newOrder.length, nRows);
       return;
     }
@@ -105,10 +105,10 @@
 //!class CustomSorter
 //!set class[CustomSorter].constructor[new][ignore] 1
 //!set class[CustomSorter].method[set_sort_func][ignore] 1
-  import gobject.object;
+  import gid.gobject2.object;
 
   // Define a sort delegate that takes ObjectWrap objects, instead of the CompareDataFunc which is passed raw GObject pointers
-  alias CustomSortDelegate = int delegate(gobject.object.ObjectWrap aObj, gobject.object.ObjectWrap bObj);
+  alias CustomSortDelegate = int delegate(gid.gobject2.object.ObjectWrap aObj, gid.gobject2.object.ObjectWrap bObj);
 
   /**
    * Creates a new `GtkSorter` that works by calling
@@ -129,11 +129,11 @@
 
       try
       {
-        _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(aObj, No.Take),
-          gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(bObj, No.Take));
+        _retval = (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(aObj, No.Take),
+          gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(bObj, No.Take));
       }
       catch (Exception e)
-        gidInvokeCallbackExceptionHandler(e, "gtk.custom_sorter.CustomSorter");
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.custom_sorter.CustomSorter");
 
       return _retval;
     }
@@ -165,11 +165,11 @@
 
       try
       {
-        _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(aObj, No.Take),
-          gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(bObj, No.Take));
+        _retval = (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(aObj, No.Take),
+          gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(bObj, No.Take));
       }
       catch (Exception e)
-        gidInvokeCallbackExceptionHandler(e, "gtk.custom_sorter.CustomSorter.setSortFunc");
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.custom_sorter.CustomSorter.setSortFunc");
 
       return _retval;
     }
@@ -190,7 +190,7 @@
           
           This property adds margin outside of the widget's normal size
           request, the margin will be added in addition to the size from
-          [gtk.widget.Widget.setSizeRequest] for example.
+          [gid.gtk4.widget.Widget.setSizeRequest] for example.
   */
   @property void margin(int propval) nothrow
   {
@@ -210,7 +210,7 @@
           
           This property adds margin outside of the widget's normal size
           request, the margin will be added in addition to the size from
-          [gtk.widget.Widget.setSizeRequest] for example.
+          [gid.gtk4.widget.Widget.setSizeRequest] for example.
       Returns: Builder instance for fluent chaining
   */
   T margin(int propval) nothrow

@@ -1,0 +1,253 @@
+/// Module for [VideoRegionOfInterestMeta] class
+module gid.gstvideo1.video_region_of_interest_meta;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.glib2.types;
+import gid.gst1.meta;
+import gid.gst1.meta_info;
+import gid.gst1.structure;
+import gid.gstvideo1.c.functions;
+import gid.gstvideo1.c.types;
+import gid.gstvideo1.types;
+
+/**
+    Extra buffer metadata describing an image region of interest
+*/
+class VideoRegionOfInterestMeta : StructWrap!(GstVideoRegionOfInterestMeta)
+{
+  /**
+      Create a `video_region_of_interest_meta.VideoRegionOfInterestMeta` wrap type.
+      Params:
+        roiType = GQuark describing the semantic of the Roi (f.i. a face, a pedestrian)
+        id = identifier of this particular ROI
+        parentId = identifier of its parent ROI, used f.i. for ROI hierarchisation.
+        x = x component of upper-left corner
+        y = y component of upper-left corner
+        w = bounding box width
+        h = bounding box height
+  */
+  this(gid.glib2.types.Quark roiType = gid.glib2.types.Quark.init, int id = int.init, int parentId = int.init, uint x = uint.init, uint y = uint.init, uint w = uint.init, uint h = uint.init) nothrow
+  {
+    this.roiType = roiType;
+    this.id = id;
+    this.parentId = parentId;
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /**
+      Get `meta` field.
+      Returns: parent #GstMeta
+  */
+  @property gid.gst1.meta.Meta meta() nothrow
+  {
+    return new gid.gst1.meta.Meta(cast(GstMeta*)&(cast(GstVideoRegionOfInterestMeta*)this._cPtr).meta, this);
+  }
+
+  /**
+      Get `roiType` field.
+      Returns: GQuark describing the semantic of the Roi (f.i. a face, a pedestrian)
+  */
+  @property gid.glib2.types.Quark roiType() nothrow
+  {
+    return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).roiType;
+  }
+
+  /**
+      Set `roiType` field.
+      Params:
+        propval = GQuark describing the semantic of the Roi (f.i. a face, a pedestrian)
+  */
+  @property void roiType(gid.glib2.types.Quark propval) nothrow
+  {
+    (cast(GstVideoRegionOfInterestMeta*)this._cPtr).roiType = propval;
+  }
+
+  /**
+      Get `id` field.
+      Returns: identifier of this particular ROI
+  */
+  @property int id() nothrow
+  {
+    return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).id;
+  }
+
+  /**
+      Set `id` field.
+      Params:
+        propval = identifier of this particular ROI
+  */
+  @property void id(int propval) nothrow
+  {
+    (cast(GstVideoRegionOfInterestMeta*)this._cPtr).id = propval;
+  }
+
+  /**
+      Get `parentId` field.
+      Returns: identifier of its parent ROI, used f.i. for ROI hierarchisation.
+  */
+  @property int parentId() nothrow
+  {
+    return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).parentId;
+  }
+
+  /**
+      Set `parentId` field.
+      Params:
+        propval = identifier of its parent ROI, used f.i. for ROI hierarchisation.
+  */
+  @property void parentId(int propval) nothrow
+  {
+    (cast(GstVideoRegionOfInterestMeta*)this._cPtr).parentId = propval;
+  }
+
+  /**
+      Get `x` field.
+      Returns: x component of upper-left corner
+  */
+  @property uint x() nothrow
+  {
+    return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).x;
+  }
+
+  /**
+      Set `x` field.
+      Params:
+        propval = x component of upper-left corner
+  */
+  @property void x(uint propval) nothrow
+  {
+    (cast(GstVideoRegionOfInterestMeta*)this._cPtr).x = propval;
+  }
+
+  /**
+      Get `y` field.
+      Returns: y component of upper-left corner
+  */
+  @property uint y() nothrow
+  {
+    return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).y;
+  }
+
+  /**
+      Set `y` field.
+      Params:
+        propval = y component of upper-left corner
+  */
+  @property void y(uint propval) nothrow
+  {
+    (cast(GstVideoRegionOfInterestMeta*)this._cPtr).y = propval;
+  }
+
+  /**
+      Get `w` field.
+      Returns: bounding box width
+  */
+  @property uint w() nothrow
+  {
+    return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).w;
+  }
+
+  /**
+      Set `w` field.
+      Params:
+        propval = bounding box width
+  */
+  @property void w(uint propval) nothrow
+  {
+    (cast(GstVideoRegionOfInterestMeta*)this._cPtr).w = propval;
+  }
+
+  /**
+      Get `h` field.
+      Returns: bounding box height
+  */
+  @property uint h() nothrow
+  {
+    return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).h;
+  }
+
+  /**
+      Set `h` field.
+      Params:
+        propval = bounding box height
+  */
+  @property void h(uint propval) nothrow
+  {
+    (cast(GstVideoRegionOfInterestMeta*)this._cPtr).h = propval;
+  }
+
+  /**
+      Get `params` field.
+      Returns: list of #GstStructure containing element-specific params for downstream,
+                 see [gid.gstvideo1.video_region_of_interest_meta.VideoRegionOfInterestMeta.addParam]. (Since: 1.14)
+  */
+  @property void*[] params() nothrow
+  {
+    return gListToD!(void*)((cast(GstVideoRegionOfInterestMeta*)this._cPtr).params);
+  }
+
+  /**
+      Attach element-specific parameters to meta meant to be used by downstream
+      elements which may handle this ROI.
+      The name of `s` is used to identify the element these parameters are meant for.
+      
+      This is typically used to tell encoders how they should encode this specific region.
+      For example, a structure named "roi/x264enc" could be used to give the
+      QP offsets this encoder should use when encoding the region described in meta.
+      Multiple parameters can be defined for the same meta so different encoders
+      can be supported by cross platform applications).
+  
+      Params:
+        s = a #GstStructure
+  */
+  void addParam(gid.gst1.structure.Structure s) nothrow
+  {
+    gst_video_region_of_interest_meta_add_param(cast(GstVideoRegionOfInterestMeta*)this._cPtr, s ? cast(GstStructure*)s._cPtr(Yes.Dup) : null);
+  }
+
+  /**
+      Retrieve the parameter for meta having name as structure name,
+      or null if there is none.
+  
+      Params:
+        name = a name.
+      Returns: a #GstStructure
+  
+      Version: See also: gst_video_region_of_interest_meta_add_param()
+  */
+  gid.gst1.structure.Structure getParam(string name) nothrow
+  {
+    GstStructure* _cretval;
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    _cretval = gst_video_region_of_interest_meta_get_param(cast(GstVideoRegionOfInterestMeta*)this._cPtr, _name);
+    auto _retval = _cretval ? new gid.gst1.structure.Structure(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /** */
+  static gid.gst1.meta_info.MetaInfo getInfo() nothrow
+  {
+    const(GstMetaInfo)* _cretval;
+    _cretval = gst_video_region_of_interest_meta_get_info();
+    gid.gst1.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gid.gst1.meta_info.MetaInfo*)_cretval;
+    return _retval;
+  }
+}

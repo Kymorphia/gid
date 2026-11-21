@@ -1,7 +1,7 @@
 //!class Variant pre
 
-import glib.variant_builder;
-import glib.variant_type;
+import gid.glib2.variant_builder;
+import gid.glib2.variant_type;
 
 import std.conv : to;
 import std.exception : assumeWontThrow;

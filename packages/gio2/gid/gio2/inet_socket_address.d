@@ -1,0 +1,261 @@
+/// Module for [InetSocketAddress] class
+module gid.gio2.inet_socket_address;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gio2.c.functions;
+import gid.gio2.c.types;
+import gid.gio2.inet_address;
+import gid.gio2.socket_address;
+import gid.gio2.socket_connectable;
+import gid.gio2.socket_connectable_mixin;
+import gid.gio2.types;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+
+/**
+    An IPv4 or IPv6 socket address. That is, the combination of a
+    [gid.gio2.inet_address.InetAddress] and a port number.
+    
+    In UNIX terms, [gid.gio2.inet_socket_address.InetSocketAddress] corresponds to a
+    [`struct sockaddr_in` or `struct sockaddr_in6`](man:sockaddr(3type)).
+*/
+class InetSocketAddress : gid.gio2.socket_address.SocketAddress
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())g_inet_socket_address_get_type != &gidSymbolNotFound ? g_inet_socket_address_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GInetSocketAddress";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override InetSocketAddress self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gio2.inet_socket_address.InetSocketAddress]
+      Returns: New builder object
+  */
+  static InetSocketAddressGidBuilder builder() nothrow
+  {
+    return new InetSocketAddressGidBuilder;
+  }
+
+  /**
+      Get `address` property.
+      Returns: The address.
+  */
+  @property gid.gio2.inet_address.InetAddress address() nothrow
+  {
+    return getAddress();
+  }
+
+  /**
+      Get `flowinfo` property.
+      Returns: The `sin6_flowinfo` field, for IPv6 addresses.
+        
+        If unset this property is inherited from [gid.gio2.inet_socket_address.InetSocketAddress.address].
+  */
+  @property uint flowinfo() nothrow
+  {
+    return getFlowinfo();
+  }
+
+  /**
+      Get `port` property.
+      Returns: The port.
+  */
+  @property uint port() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(uint)("port");
+  }
+
+  /**
+      Get `scopeId` property.
+      Returns: The `sin6_scope_id` field, for IPv6 addresses.
+        
+        If unset this property is inherited from [gid.gio2.inet_socket_address.InetSocketAddress.address].
+  */
+  @property uint scopeId() nothrow
+  {
+    return getScopeId();
+  }
+
+  /**
+      Creates a new #GInetSocketAddress for address and port.
+  
+      Params:
+        address = a #GInetAddress
+        port = a port number
+      Returns: a new #GInetSocketAddress
+  */
+  this(gid.gio2.inet_address.InetAddress address, ushort port) nothrow
+  {
+    GSocketAddress* _cretval;
+    _cretval = g_inet_socket_address_new(address ? cast(GInetAddress*)address._cPtr(No.Dup) : null, port);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Creates a new #GInetSocketAddress for address and port.
+      
+      If address is an IPv6 address, it can also contain a scope ID
+      (separated from the address by a `%`). Note that currently this
+      behavior is platform specific. This may change in a future release.
+  
+      Params:
+        address = the string form of an IP address
+        port = a port number
+      Returns: a new #GInetSocketAddress,
+        or null if address cannot be parsed.
+  */
+  static gid.gio2.inet_socket_address.InetSocketAddress newFromString(string address, uint port) nothrow
+  {
+    GSocketAddress* _cretval;
+    const(char)* _address = address.toCString!(No.Malloc, No.Nullable);
+    _cretval = g_inet_socket_address_new_from_string(_address, port);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.inet_socket_address.InetSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets address's #GInetAddress.
+      Returns: the #GInetAddress for address, which must be
+        [gid.gobject2.object.ObjectWrap.ref_]'d if it will be stored
+  */
+  gid.gio2.inet_address.InetAddress getAddress() nothrow
+  {
+    GInetAddress* _cretval;
+    _cretval = g_inet_socket_address_get_address(cast(GInetSocketAddress*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.inet_address.InetAddress)(cast(GInetAddress*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the `sin6_flowinfo` field from address,
+      which must be an IPv6 address.
+      
+      If not overridden this value will be inherited from [gid.gio2.inet_socket_address.InetSocketAddress.address].
+      Returns: the flowinfo field
+  */
+  uint getFlowinfo() nothrow
+  {
+    uint _retval;
+    _retval = g_inet_socket_address_get_flowinfo(cast(GInetSocketAddress*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets address's port.
+      Returns: the port for address
+  */
+  ushort getPort() nothrow
+  {
+    ushort _retval;
+    _retval = g_inet_socket_address_get_port(cast(GInetSocketAddress*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the `sin6_scope_id` field from address,
+      which must be an IPv6 address.
+      
+      If not overridden this value will be inherited from [gid.gio2.inet_socket_address.InetSocketAddress.address].
+      Returns: the scope id field
+  */
+  uint getScopeId() nothrow
+  {
+    uint _retval;
+    _retval = g_inet_socket_address_get_scope_id(cast(GInetSocketAddress*)this._cPtr);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [gid.gio2.inet_socket_address.InetSocketAddress]
+class InetSocketAddressGidBuilderImpl(T) : gid.gio2.socket_address.SocketAddressGidBuilderImpl!T
+{
+
+
+  /**
+      Set `address` property.
+      Params:
+        propval = The address.
+      Returns: Builder instance for fluent chaining
+  */
+  T address(gid.gio2.inet_address.InetAddress propval) nothrow
+  {
+    return setProperty("address", propval);
+  }
+
+  /**
+      Set `flowinfo` property.
+      Params:
+        propval = The `sin6_flowinfo` field, for IPv6 addresses.
+          
+          If unset this property is inherited from [gid.gio2.inet_socket_address.InetSocketAddress.address].
+      Returns: Builder instance for fluent chaining
+  */
+  T flowinfo(uint propval) nothrow
+  {
+    return setProperty("flowinfo", propval);
+  }
+
+  /**
+      Set `port` property.
+      Params:
+        propval = The port.
+      Returns: Builder instance for fluent chaining
+  */
+  T port(uint propval) nothrow
+  {
+    return setProperty("port", propval);
+  }
+
+  /**
+      Set `scopeId` property.
+      Params:
+        propval = The `sin6_scope_id` field, for IPv6 addresses.
+          
+          If unset this property is inherited from [gid.gio2.inet_socket_address.InetSocketAddress.address].
+      Returns: Builder instance for fluent chaining
+  */
+  T scopeId(uint propval) nothrow
+  {
+    return setProperty("scope-id", propval);
+  }
+}
+
+/// Fluent builder for [gid.gio2.inet_socket_address.InetSocketAddress]
+final class InetSocketAddressGidBuilder : InetSocketAddressGidBuilderImpl!InetSocketAddressGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  InetSocketAddress build() nothrow
+  {
+    return new InetSocketAddress(cast(void*)createGObject(InetSocketAddress._getGType), Yes.Take);
+  }
+}

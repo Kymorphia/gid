@@ -1,0 +1,417 @@
+/// Module for [PaperSize] class
+module gid.gtk4.paper_size;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.glib2.error;
+import gid.glib2.key_file;
+import gid.glib2.variant;
+import gid.gobject2.boxed;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.types;
+
+/**
+    [gid.gtk4.paper_size.PaperSize] handles paper sizes.
+    
+    It uses the standard called
+    [PWG 5101.1-2002 PWG: Standard for Media Standardized Names](http://www.pwg.org/standards.html)
+    to name the paper sizes (and to get the data for the page sizes).
+    In addition to standard paper sizes, [gid.gtk4.paper_size.PaperSize] allows to
+    construct custom paper sizes with arbitrary dimensions.
+    
+    The [gid.gtk4.paper_size.PaperSize] object stores not only the dimensions (width
+    and height) of a paper size and its name, it also provides
+    default print margins.
+*/
+class PaperSize : gid.gobject2.boxed.BoxedWrap!(gtk_paper_size_get_type)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override PaperSize self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Creates a new [gid.gtk4.paper_size.PaperSize] object by parsing a
+      [PWG 5101.1-2002](ftp://ftp.pwg.org/pub/pwg/candidates/cs-pwgmsn10-20020226-5101.1.pdf)
+      paper name.
+      
+      If name is null, the default paper size is returned,
+      see [gid.gtk4.paper_size.PaperSize.getDefault].
+  
+      Params:
+        name = a paper size name
+      Returns: a new [gid.gtk4.paper_size.PaperSize], use [gid.gtk4.paper_size.PaperSize.free]
+        to free it
+  */
+  this(string name = null) nothrow
+  {
+    GtkPaperSize* _cretval;
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+    _cretval = gtk_paper_size_new(_name);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Creates a new [gid.gtk4.paper_size.PaperSize] object with the
+      given parameters.
+  
+      Params:
+        name = the paper name
+        displayName = the human-readable name
+        width = the paper width, in units of unit
+        height = the paper height, in units of unit
+        unit = the unit for width and height. not [gid.gtk4.types.Unit.None].
+      Returns: a new [gid.gtk4.paper_size.PaperSize] object, use [gid.gtk4.paper_size.PaperSize.free]
+        to free it
+  */
+  static gid.gtk4.paper_size.PaperSize newCustom(string name, string displayName, double width, double height, gid.gtk4.types.Unit unit) nothrow
+  {
+    GtkPaperSize* _cretval;
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _displayName = displayName.toCString!(No.Malloc, No.Nullable);
+    _cretval = gtk_paper_size_new_custom(_name, _displayName, width, height, unit);
+    auto _retval = _cretval ? new gid.gtk4.paper_size.PaperSize(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Deserialize a paper size from a [gid.glib2.variant.Variant].
+      
+      The `GVariant must be in the format produced by
+      [gid.gtk4.paper_size.PaperSize.toGvariant].
+  
+      Params:
+        variant = an a{sv} [gid.glib2.variant.Variant]
+      Returns: a new [gid.gtk4.paper_size.PaperSize] object
+  */
+  static gid.gtk4.paper_size.PaperSize newFromGvariant(gid.glib2.variant.Variant variant) nothrow
+  {
+    GtkPaperSize* _cretval;
+    _cretval = gtk_paper_size_new_from_gvariant(variant ? cast(GVariant*)variant._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gid.gtk4.paper_size.PaperSize(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Creates a new [gid.gtk4.paper_size.PaperSize] object by using
+      IPP information.
+      
+      If ipp_name is not a recognized paper name,
+      width and height are used to
+      construct a custom [gid.gtk4.paper_size.PaperSize] object.
+  
+      Params:
+        ippName = an IPP paper name
+        width = the paper width, in points
+        height = the paper height in points
+      Returns: a new [gid.gtk4.paper_size.PaperSize], use [gid.gtk4.paper_size.PaperSize.free]
+        to free it
+  */
+  static gid.gtk4.paper_size.PaperSize newFromIpp(string ippName, double width, double height) nothrow
+  {
+    GtkPaperSize* _cretval;
+    const(char)* _ippName = ippName.toCString!(No.Malloc, No.Nullable);
+    _cretval = gtk_paper_size_new_from_ipp(_ippName, width, height);
+    auto _retval = _cretval ? new gid.gtk4.paper_size.PaperSize(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Reads a paper size from the group group_name in the key file
+      key_file.
+  
+      Params:
+        keyFile = the [gid.glib2.key_file.KeyFile] to retrieve the papersize from
+        groupName = the name of the group in the key file to read,
+            or null to read the first group
+      Returns: a new [gid.gtk4.paper_size.PaperSize] object with the restored paper size
+      Throws: [ErrorWrap]
+  */
+  static gid.gtk4.paper_size.PaperSize newFromKeyFile(gid.glib2.key_file.KeyFile keyFile, string groupName = null)
+  {
+    GtkPaperSize* _cretval;
+    const(char)* _groupName = groupName.toCString!(No.Malloc, Yes.Nullable);
+    GError *_err;
+    _cretval = gtk_paper_size_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = _cretval ? new gid.gtk4.paper_size.PaperSize(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Creates a new [gid.gtk4.paper_size.PaperSize] object by using
+      PPD information.
+      
+      If ppd_name is not a recognized PPD paper name,
+      ppd_display_name, width and height are used to
+      construct a custom [gid.gtk4.paper_size.PaperSize] object.
+  
+      Params:
+        ppdName = a PPD paper name
+        ppdDisplayName = the corresponding human-readable name
+        width = the paper width, in points
+        height = the paper height in points
+      Returns: a new [gid.gtk4.paper_size.PaperSize], use [gid.gtk4.paper_size.PaperSize.free]
+        to free it
+  */
+  static gid.gtk4.paper_size.PaperSize newFromPpd(string ppdName, string ppdDisplayName, double width, double height) nothrow
+  {
+    GtkPaperSize* _cretval;
+    const(char)* _ppdName = ppdName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _ppdDisplayName = ppdDisplayName.toCString!(No.Malloc, No.Nullable);
+    _cretval = gtk_paper_size_new_from_ppd(_ppdName, _ppdDisplayName, width, height);
+    auto _retval = _cretval ? new gid.gtk4.paper_size.PaperSize(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Copies an existing [gid.gtk4.paper_size.PaperSize].
+      Returns: a copy of other
+  */
+  gid.gtk4.paper_size.PaperSize copy() nothrow
+  {
+    GtkPaperSize* _cretval;
+    _cretval = gtk_paper_size_copy(cast(GtkPaperSize*)this._cPtr);
+    auto _retval = _cretval ? new gid.gtk4.paper_size.PaperSize(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the default bottom margin for the [gid.gtk4.paper_size.PaperSize].
+  
+      Params:
+        unit = the unit for the return value, not [gid.gtk4.types.Unit.None]
+      Returns: the default bottom margin
+  */
+  double getDefaultBottomMargin(gid.gtk4.types.Unit unit) nothrow
+  {
+    double _retval;
+    _retval = gtk_paper_size_get_default_bottom_margin(cast(GtkPaperSize*)this._cPtr, unit);
+    return _retval;
+  }
+
+  /**
+      Gets the default left margin for the [gid.gtk4.paper_size.PaperSize].
+  
+      Params:
+        unit = the unit for the return value, not [gid.gtk4.types.Unit.None]
+      Returns: the default left margin
+  */
+  double getDefaultLeftMargin(gid.gtk4.types.Unit unit) nothrow
+  {
+    double _retval;
+    _retval = gtk_paper_size_get_default_left_margin(cast(GtkPaperSize*)this._cPtr, unit);
+    return _retval;
+  }
+
+  /**
+      Gets the default right margin for the [gid.gtk4.paper_size.PaperSize].
+  
+      Params:
+        unit = the unit for the return value, not [gid.gtk4.types.Unit.None]
+      Returns: the default right margin
+  */
+  double getDefaultRightMargin(gid.gtk4.types.Unit unit) nothrow
+  {
+    double _retval;
+    _retval = gtk_paper_size_get_default_right_margin(cast(GtkPaperSize*)this._cPtr, unit);
+    return _retval;
+  }
+
+  /**
+      Gets the default top margin for the [gid.gtk4.paper_size.PaperSize].
+  
+      Params:
+        unit = the unit for the return value, not [gid.gtk4.types.Unit.None]
+      Returns: the default top margin
+  */
+  double getDefaultTopMargin(gid.gtk4.types.Unit unit) nothrow
+  {
+    double _retval;
+    _retval = gtk_paper_size_get_default_top_margin(cast(GtkPaperSize*)this._cPtr, unit);
+    return _retval;
+  }
+
+  /**
+      Gets the human-readable name of the [gid.gtk4.paper_size.PaperSize].
+      Returns: the human-readable name of size
+  */
+  string getDisplayName() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_paper_size_get_display_name(cast(GtkPaperSize*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the paper height of the [gid.gtk4.paper_size.PaperSize], in
+      units of unit.
+  
+      Params:
+        unit = the unit for the return value, not [gid.gtk4.types.Unit.None]
+      Returns: the paper height
+  */
+  double getHeight(gid.gtk4.types.Unit unit) nothrow
+  {
+    double _retval;
+    _retval = gtk_paper_size_get_height(cast(GtkPaperSize*)this._cPtr, unit);
+    return _retval;
+  }
+
+  /**
+      Gets the name of the [gid.gtk4.paper_size.PaperSize].
+      Returns: the name of size
+  */
+  string getName() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_paper_size_get_name(cast(GtkPaperSize*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the PPD name of the [gid.gtk4.paper_size.PaperSize], which
+      may be null.
+      Returns: the PPD name of size
+  */
+  string getPpdName() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_paper_size_get_ppd_name(cast(GtkPaperSize*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the paper width of the [gid.gtk4.paper_size.PaperSize], in
+      units of unit.
+  
+      Params:
+        unit = the unit for the return value, not [gid.gtk4.types.Unit.None]
+      Returns: the paper width
+  */
+  double getWidth(gid.gtk4.types.Unit unit) nothrow
+  {
+    double _retval;
+    _retval = gtk_paper_size_get_width(cast(GtkPaperSize*)this._cPtr, unit);
+    return _retval;
+  }
+
+  /**
+      Returns true if size is not a standard paper size.
+      Returns: whether size is a custom paper size.
+  */
+  bool isCustom() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_paper_size_is_custom(cast(GtkPaperSize*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Compares two [gid.gtk4.paper_size.PaperSize] objects.
+  
+      Params:
+        size2 = another [gid.gtk4.paper_size.PaperSize] object
+      Returns: true, if size1 and size2
+        represent the same paper size
+  */
+  bool isEqual(gid.gtk4.paper_size.PaperSize size2) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_paper_size_is_equal(cast(GtkPaperSize*)this._cPtr, size2 ? cast(GtkPaperSize*)size2._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Returns true if size is an IPP standard paper size.
+      Returns: whether size is not an IPP custom paper size.
+  */
+  bool isIpp() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_paper_size_is_ipp(cast(GtkPaperSize*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Changes the dimensions of a size to width x height.
+  
+      Params:
+        width = the new width in units of unit
+        height = the new height in units of unit
+        unit = the unit for width and height
+  */
+  void setSize(double width, double height, gid.gtk4.types.Unit unit) nothrow
+  {
+    gtk_paper_size_set_size(cast(GtkPaperSize*)this._cPtr, width, height, unit);
+  }
+
+  /**
+      Serialize a paper size to an `a{sv}` variant.
+      Returns: a new, floating, [gid.glib2.variant.Variant]
+  */
+  gid.glib2.variant.Variant toGvariant() nothrow
+  {
+    GVariant* _cretval;
+    _cretval = gtk_paper_size_to_gvariant(cast(GtkPaperSize*)this._cPtr);
+    auto _retval = _cretval ? new gid.glib2.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      This function adds the paper size from size to key_file.
+  
+      Params:
+        keyFile = the [gid.glib2.key_file.KeyFile] to save the paper size to
+        groupName = the group to add the settings to in key_file
+  */
+  void toKeyFile(gid.glib2.key_file.KeyFile keyFile, string groupName) nothrow
+  {
+    const(char)* _groupName = groupName.toCString!(No.Malloc, No.Nullable);
+    gtk_paper_size_to_key_file(cast(GtkPaperSize*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName);
+  }
+
+  /**
+      Returns the name of the default paper size, which
+      depends on the current locale.
+      Returns: the name of the default paper size. The string
+        is owned by GTK and should not be modified.
+  */
+  static string getDefault() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_paper_size_get_default();
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Creates a list of known paper sizes.
+  
+      Params:
+        includeCustom = whether to include custom paper sizes
+            as defined in the page setup dialog
+      Returns: a newly allocated list of newly
+           allocated [gid.gtk4.paper_size.PaperSize] objects
+  */
+  static gid.gtk4.paper_size.PaperSize[] getPaperSizes(bool includeCustom) nothrow
+  {
+    GList* _cretval;
+    _cretval = gtk_paper_size_get_paper_sizes(includeCustom);
+    auto _retval = gListToD!(gid.gtk4.paper_size.PaperSize, GidOwnership.Full)(cast(GList*)_cretval);
+    return _retval;
+  }
+}

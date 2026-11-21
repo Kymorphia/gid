@@ -1,0 +1,254 @@
+/// Module for [TypeValueTable] class
+module gid.gobject2.type_value_table;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.c.functions;
+import gid.gobject2.c.types;
+import gid.gobject2.types;
+
+/**
+    - `'i'`: Integers, passed as `collect_values[].v_int`
+      - `'l'`: Longs, passed as `collect_values[].v_long`
+      - `'d'`: Doubles, passed as `collect_values[].v_double`
+      - `'p'`: Pointers, passed as `collect_values[].v_pointer`
+    
+      It should be noted that for variable argument list construction,
+      ANSI C promotes every type smaller than an integer to an int, and
+      floats to doubles. So for collection of short int or char, `'i'`
+      needs to be used, and for collection of floats `'d'`.
+    The #GTypeValueTable provides the functions required by the #GValue
+    implementation, to serve as a container for values of a type.
+*/
+class TypeValueTable : StructWrap!(GTypeValueTable)
+{
+  /**
+      Create a `type_value_table.TypeValueTable` wrap type.
+      Params:
+        valueInit = Function to initialize a GValue
+        valueFree = Function to free a GValue
+        valueCopy = Function to copy a GValue
+        valuePeekPointer = Function to peek the contents of a GValue if they fit
+            into a pointer
+        collectFormat = A string format describing how to collect the contents of
+            this value bit-by-bit. Each character in the format represents
+            an argument to be collected, and the characters themselves indicate
+            the type of the argument. Currently supported arguments are:
+        collectValue = Function to initialize a GValue from the values
+            collected from variadic arguments
+        lcopyFormat = Format description of the arguments to collect for @lcopy_value,
+            analogous to @collect_format. Usually, @lcopy_format string consists
+            only of `'p'`s to provide lcopy_value() with pointers to storage locations.
+        lcopyValue = Function to store the contents of a value into the
+            locations collected from variadic arguments
+  */
+  this(GTypeValueInitFunc valueInit = GTypeValueInitFunc.init, GTypeValueFreeFunc valueFree = GTypeValueFreeFunc.init, GTypeValueCopyFunc valueCopy = GTypeValueCopyFunc.init, GTypeValuePeekPointerFunc valuePeekPointer = GTypeValuePeekPointerFunc.init, string collectFormat = string.init, GTypeValueCollectFunc collectValue = GTypeValueCollectFunc.init, string lcopyFormat = string.init, GTypeValueLCopyFunc lcopyValue = GTypeValueLCopyFunc.init) nothrow
+  {
+    this.valueInit = valueInit;
+    this.valueFree = valueFree;
+    this.valueCopy = valueCopy;
+    this.valuePeekPointer = valuePeekPointer;
+    this.collectFormat = collectFormat;
+    this.collectValue = collectValue;
+    this.lcopyFormat = lcopyFormat;
+    this.lcopyValue = lcopyValue;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /**
+      Get `valueInit` field.
+      Returns: Function to initialize a GValue
+  */
+  @property GTypeValueInitFunc valueInit() nothrow
+  {
+    return (cast(GTypeValueTable*)this._cPtr).valueInit;
+  }
+
+  /**
+      Set `valueInit` field.
+      Params:
+        propval = Function to initialize a GValue
+  */
+
+  @property void valueInit(GTypeValueInitFunc propval) nothrow
+  {
+    (cast(GTypeValueTable*)this._cPtr).valueInit = propval;
+  }
+
+  /**
+      Get `valueFree` field.
+      Returns: Function to free a GValue
+  */
+  @property GTypeValueFreeFunc valueFree() nothrow
+  {
+    return (cast(GTypeValueTable*)this._cPtr).valueFree;
+  }
+
+  /**
+      Set `valueFree` field.
+      Params:
+        propval = Function to free a GValue
+  */
+
+  @property void valueFree(GTypeValueFreeFunc propval) nothrow
+  {
+    (cast(GTypeValueTable*)this._cPtr).valueFree = propval;
+  }
+
+  /**
+      Get `valueCopy` field.
+      Returns: Function to copy a GValue
+  */
+  @property GTypeValueCopyFunc valueCopy() nothrow
+  {
+    return (cast(GTypeValueTable*)this._cPtr).valueCopy;
+  }
+
+  /**
+      Set `valueCopy` field.
+      Params:
+        propval = Function to copy a GValue
+  */
+
+  @property void valueCopy(GTypeValueCopyFunc propval) nothrow
+  {
+    (cast(GTypeValueTable*)this._cPtr).valueCopy = propval;
+  }
+
+  /**
+      Get `valuePeekPointer` field.
+      Returns: Function to peek the contents of a GValue if they fit
+          into a pointer
+  */
+  @property GTypeValuePeekPointerFunc valuePeekPointer() nothrow
+  {
+    return (cast(GTypeValueTable*)this._cPtr).valuePeekPointer;
+  }
+
+  /**
+      Set `valuePeekPointer` field.
+      Params:
+        propval = Function to peek the contents of a GValue if they fit
+            into a pointer
+  */
+
+  @property void valuePeekPointer(GTypeValuePeekPointerFunc propval) nothrow
+  {
+    (cast(GTypeValueTable*)this._cPtr).valuePeekPointer = propval;
+  }
+
+  private const(char)* _collectFormatRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `collectFormat` field.
+      Returns: A string format describing how to collect the contents of
+          this value bit-by-bit. Each character in the format represents
+          an argument to be collected, and the characters themselves indicate
+          the type of the argument. Currently supported arguments are:
+  */
+  @property string collectFormat() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GTypeValueTable*)this._cPtr).collectFormat);
+  }
+
+  /**
+      Set `collectFormat` field.
+      Params:
+        propval = A string format describing how to collect the contents of
+            this value bit-by-bit. Each character in the format represents
+            an argument to be collected, and the characters themselves indicate
+            the type of the argument. Currently supported arguments are:
+  */
+  @property void collectFormat(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("collectFormat"))
+      return;
+
+    _collectFormatRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GTypeValueTable*)this._cPtr).collectFormat = cast(const(char)*)_collectFormatRef;
+  }
+
+  /**
+      Get `collectValue` field.
+      Returns: Function to initialize a GValue from the values
+          collected from variadic arguments
+  */
+  @property GTypeValueCollectFunc collectValue() nothrow
+  {
+    return (cast(GTypeValueTable*)this._cPtr).collectValue;
+  }
+
+  /**
+      Set `collectValue` field.
+      Params:
+        propval = Function to initialize a GValue from the values
+            collected from variadic arguments
+  */
+
+  @property void collectValue(GTypeValueCollectFunc propval) nothrow
+  {
+    (cast(GTypeValueTable*)this._cPtr).collectValue = propval;
+  }
+
+  private const(char)* _lcopyFormatRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `lcopyFormat` field.
+      Returns: Format description of the arguments to collect for @lcopy_value,
+          analogous to @collect_format. Usually, @lcopy_format string consists
+          only of `'p'`s to provide lcopy_value() with pointers to storage locations.
+  */
+  @property string lcopyFormat() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GTypeValueTable*)this._cPtr).lcopyFormat);
+  }
+
+  /**
+      Set `lcopyFormat` field.
+      Params:
+        propval = Format description of the arguments to collect for @lcopy_value,
+            analogous to @collect_format. Usually, @lcopy_format string consists
+            only of `'p'`s to provide lcopy_value() with pointers to storage locations.
+  */
+  @property void lcopyFormat(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("lcopyFormat"))
+      return;
+
+    _lcopyFormatRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GTypeValueTable*)this._cPtr).lcopyFormat = cast(const(char)*)_lcopyFormatRef;
+  }
+
+  /**
+      Get `lcopyValue` field.
+      Returns: Function to store the contents of a value into the
+          locations collected from variadic arguments
+  */
+  @property GTypeValueLCopyFunc lcopyValue() nothrow
+  {
+    return (cast(GTypeValueTable*)this._cPtr).lcopyValue;
+  }
+
+  /**
+      Set `lcopyValue` field.
+      Params:
+        propval = Function to store the contents of a value into the
+            locations collected from variadic arguments
+  */
+
+  @property void lcopyValue(GTypeValueLCopyFunc propval) nothrow
+  {
+    (cast(GTypeValueTable*)this._cPtr).lcopyValue = propval;
+  }
+}

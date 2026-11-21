@@ -1,0 +1,585 @@
+/// Module for [ListStore] class
+module gid.gtk4.list_store;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gobject2.types;
+import gid.gobject2.value;
+import gid.gtk4.buildable;
+import gid.gtk4.buildable_mixin;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.tree_drag_dest;
+import gid.gtk4.tree_drag_dest_mixin;
+import gid.gtk4.tree_drag_source;
+import gid.gtk4.tree_drag_source_mixin;
+import gid.gtk4.tree_iter;
+import gid.gtk4.tree_model;
+import gid.gtk4.tree_model_mixin;
+import gid.gtk4.tree_sortable;
+import gid.gtk4.tree_sortable_mixin;
+import gid.gtk4.types;
+
+/**
+    A list-like data structure that can be used with the [gid.gtk4.tree_view.TreeView].
+    
+    The [gid.gtk4.list_store.ListStore] object is a list model for use with a [gid.gtk4.tree_view.TreeView]
+    widget.  It implements the [gid.gtk4.tree_model.TreeModel] interface, and consequentialy,
+    can use all of the methods available there.  It also implements the
+    [gid.gtk4.tree_sortable.TreeSortable] interface so it can be sorted by the view.
+    Finally, it also implements the tree
+    [drag](iface.TreeDragSource.html) and [drop](iface.TreeDragDest.html)
+    interfaces.
+    
+    The [gid.gtk4.list_store.ListStore] can accept most `GType`s as a column type, though
+    it can’t accept all custom types.  Internally, it will keep a copy of
+    data passed in (such as a string or a boxed pointer).  Columns that
+    accept [gid.gobject2.object.ObjectWrap]s are handled a little differently.  The
+    [gid.gtk4.list_store.ListStore] will keep a reference to the object instead of copying the
+    value.  As a result, if the object is modified, it is up to the
+    application writer to call [gid.gtk4.tree_model.TreeModel.rowChanged] to emit the
+    `signal@Gtk.TreeModel::row_changed` signal. This most commonly affects lists
+    with [gid.gdk4.texture.Texture]s stored.
+    
+    An example for creating a simple list store:
+    
+    ```c
+    enum {
+      COLUMN_STRING,
+      COLUMN_INT,
+      COLUMN_BOOLEAN,
+      N_COLUMNS
+    };
+    
+    {
+      GtkListStore *list_store;
+      GtkTreePath *path;
+      GtkTreeIter iter;
+      int i;
+    
+      list_store = gtk_list_store_new (N_COLUMNS,
+                                       G_TYPE_STRING,
+                                       G_TYPE_INT,
+                                       G_TYPE_BOOLEAN);
+    
+      for (i = 0; i < 10; i++)
+        {
+          char *some_data;
+    
+          some_data = get_some_data (i);
+    
+          // Add a new row to the model
+          gtk_list_store_append (list_store, &iter);
+          gtk_list_store_set (list_store, &iter,
+                              COLUMN_STRING, some_data,
+                              COLUMN_INT, i,
+                              COLUMN_BOOLEAN,  FALSE,
+                              -1);
+    
+          // As the store will keep a copy of the string internally,
+          // we free some_data.
+          g_free (some_data);
+        }
+    
+      // Modify a particular row
+      path = gtk_tree_path_new_from_string ("4");
+      gtk_tree_model_get_iter (GTK_TREE_MODEL (list_store),
+                               &iter,
+                               path);
+      gtk_tree_path_free (path);
+      gtk_list_store_set (list_store, &iter,
+                          COLUMN_BOOLEAN, TRUE,
+                          -1);
+    }
+    ```
+    
+    [gid.gtk4.list_store.ListStore] is deprecated since GTK 4.10, and should not be used in newly
+    written code. You should use [gid.gio2.list_store.ListStore] instead, and the various
+    list models provided by GTK.
+    
+    ## Performance Considerations
+    
+    Internally, the [gid.gtk4.list_store.ListStore] was originally implemented with a linked list
+    with a tail pointer.  As a result, it was fast at data insertion and deletion,
+    and not fast at random data access.  The [gid.gtk4.list_store.ListStore] sets the
+    [gid.gtk4.types.TreeModelFlags.ItersPersist] flag, which means that [gid.gtk4.tree_iter.TreeIter]s can be
+    cached while the row exists.  Thus, if access to a particular row is needed
+    often and your code is expected to run on older versions of GTK, it is worth
+    keeping the iter around.
+    
+    ## Atomic Operations
+    
+    It is important to note that only the methods
+    [gid.gtk4.list_store.ListStore.insertWithValues] and [gid.gtk4.list_store.ListStore.insertWithValuesv]
+    are atomic, in the sense that the row is being appended to the store and the
+    values filled in in a single operation with regard to [gid.gtk4.tree_model.TreeModel] signaling.
+    In contrast, using e.g. [gid.gtk4.list_store.ListStore.append] and then [gid.gtk4.list_store.ListStore.set]
+    will first create a row, which triggers the `GtkTreeModel::row-inserted` signal
+    on [gid.gtk4.list_store.ListStore]. The row, however, is still empty, and any signal handler
+    connecting to `GtkTreeModel::row-inserted` on this particular store should be prepared
+    for the situation that the row might be empty. This is especially important
+    if you are wrapping the [gid.gtk4.list_store.ListStore] inside a [gid.gtk4.tree_model.TreeModel]Filter and are
+    using a [gid.gtk4.tree_model.TreeModel]FilterVisibleFunc. Using any of the non-atomic operations
+    to append rows to the [gid.gtk4.list_store.ListStore] will cause the
+    [gid.gtk4.tree_model.TreeModel]FilterVisibleFunc to be visited with an empty row first; the
+    function must be prepared for that.
+    
+    ## GtkListStore as GtkBuildable
+    
+    The GtkListStore implementation of the [gid.gtk4.buildable.Buildable] interface allows
+    to specify the model columns with a `<columns>` element that may contain
+    multiple `<column>` elements, each specifying one model column. The “type”
+    attribute specifies the data type for the column.
+    
+    Additionally, it is possible to specify content for the list store
+    in the UI definition, with the `<data>` element. It can contain multiple
+    `<row>` elements, each specifying to content for one row of the list model.
+    Inside a `<row>`, the `<col>` elements specify the content for individual cells.
+    
+    Note that it is probably more common to define your models in the code,
+    and one might consider it a layering violation to specify the content of
+    a list store in a UI definition, data, not presentation, and common wisdom
+    is to separate the two, as far as possible.
+    
+    An example of a UI Definition fragment for a list store:
+    
+    ```xml
+    <object class="GtkListStore">
+      <columns>
+        <column type="gchararray"/>
+        <column type="gchararray"/>
+        <column type="gint"/>
+      </columns>
+      <data>
+        <row>
+          <col id="0">John</col>
+          <col id="1">Doe</col>
+          <col id="2">25</col>
+        </row>
+        <row>
+          <col id="0">Johan</col>
+          <col id="1">Dahlin</col>
+          <col id="2">50</col>
+        </row>
+      </data>
+    </object>
+    ```
+
+    Deprecated: Use [gid.gio2.list_store.ListStore] instead
+*/
+class ListStore : gid.gobject2.object.ObjectWrap, gid.gtk4.buildable.Buildable, gid.gtk4.tree_drag_dest.TreeDragDest, gid.gtk4.tree_drag_source.TreeDragSource, gid.gtk4.tree_model.TreeModel, gid.gtk4.tree_sortable.TreeSortable
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_list_store_get_type != &gidSymbolNotFound ? gtk_list_store_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkListStore";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ListStore self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.list_store.ListStore]
+      Returns: New builder object
+  */
+  static ListStoreGidBuilder builder() nothrow
+  {
+    return new ListStoreGidBuilder;
+  }
+
+  mixin BuildableT!();
+  mixin TreeDragDestT!();
+  mixin TreeDragSourceT!();
+  mixin TreeModelT!();
+  mixin TreeSortableT!();
+
+  /**
+  Reorders the store to follow the order indicated by newOrder. Note that this function only works with unsorted
+  stores.
+  Params:
+  newOrder = an array of integers mapping the new position of each child to its old position before the
+  re-ordering, i.e. `newOrder[newpos] = oldpos`. Its length must be the number of rows in the store.
+  */
+  void reorder(int[] newOrder) nothrow
+  {
+    import gid.glib2.c.functions : g_log;
+    import gid.glib2.c.types : GLogLevelFlags;
+
+    auto nRows = gtk_tree_model_iter_n_children(cast(GtkTreeModel*)this._cPtr, null);
+
+    if (newOrder.length != nRows)
+    {
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gid.gtk4.list_store.ListStore.reorder newOrder length %d does not match the number of rows %d",
+      cast(int)newOrder.length, nRows);
+      return;
+    }
+
+    if (nRows > 0)
+      gtk_list_store_reorder(cast(GtkListStore*)this._cPtr, newOrder.ptr);
+  }
+
+
+  /**
+      Creates a new [gid.gtk4.list_store.ListStore].
+      
+      This function is meant to be used by language bindings.
+  
+      Params:
+        types = an array of `GType` types for the columns, from first to last
+      Returns: a new [gid.gtk4.list_store.ListStore]
+  
+      Deprecated: Use [gid.gio2.list_store.ListStore] instead
+  */
+  static gid.gtk4.list_store.ListStore new_(gid.gobject2.types.GType[] types) nothrow
+  {
+    GtkListStore* _cretval;
+    int _nColumns;
+    if (types)
+      _nColumns = cast(int)types.length;
+
+    auto _types = cast(GType*)types.ptr;
+    _cretval = gtk_list_store_newv(_nColumns, _types);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.list_store.ListStore)(cast(GtkListStore*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Appends a new row to list_store.  iter will be changed to point to this new
+      row.  The row will be empty after this function is called.  To fill in
+      values, you need to call [gid.gtk4.list_store.ListStore.set] or [gid.gtk4.list_store.ListStore.setValue].
+  
+      Params:
+        iter = An unset [gid.gtk4.tree_iter.TreeIter] to set to the appended row
+  
+      Deprecated: Use list models
+  */
+  void append(out gid.gtk4.tree_iter.TreeIter iter) nothrow
+  {
+    auto _iter = boxedNew!GtkTreeIter(gid.gtk4.tree_iter.TreeIter._getGType);
+    gtk_list_store_append(cast(GtkListStore*)this._cPtr, _iter);
+    iter = new gid.gtk4.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
+  }
+
+  /**
+      Removes all rows from the list store.
+  
+      Deprecated: Use list models
+  */
+  void clear() nothrow
+  {
+    gtk_list_store_clear(cast(GtkListStore*)this._cPtr);
+  }
+
+  /**
+      Creates a new row at position.  iter will be changed to point to this new
+      row.  If position is -1 or is larger than the number of rows on the list,
+      then the new row will be appended to the list. The row will be empty after
+      this function is called.  To fill in values, you need to call
+      [gid.gtk4.list_store.ListStore.set] or [gid.gtk4.list_store.ListStore.setValue].
+  
+      Params:
+        iter = An unset [gid.gtk4.tree_iter.TreeIter] to set to the new row
+        position = position to insert the new row, or -1 for last
+  
+      Deprecated: Use list models
+  */
+  void insert(out gid.gtk4.tree_iter.TreeIter iter, int position) nothrow
+  {
+    auto _iter = boxedNew!GtkTreeIter(gid.gtk4.tree_iter.TreeIter._getGType);
+    gtk_list_store_insert(cast(GtkListStore*)this._cPtr, _iter, position);
+    iter = new gid.gtk4.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
+  }
+
+  /**
+      Inserts a new row after sibling. If sibling is null, then the row will be
+      prepended to the beginning of the list. iter will be changed to point to
+      this new row. The row will be empty after this function is called. To fill
+      in values, you need to call [gid.gtk4.list_store.ListStore.set] or [gid.gtk4.list_store.ListStore.setValue].
+  
+      Params:
+        iter = An unset [gid.gtk4.tree_iter.TreeIter] to set to the new row
+        sibling = A valid [gid.gtk4.tree_iter.TreeIter]
+  
+      Deprecated: Use list models
+  */
+  void insertAfter(out gid.gtk4.tree_iter.TreeIter iter, gid.gtk4.tree_iter.TreeIter sibling = null) nothrow
+  {
+    auto _iter = boxedNew!GtkTreeIter(gid.gtk4.tree_iter.TreeIter._getGType);
+    gtk_list_store_insert_after(cast(GtkListStore*)this._cPtr, _iter, sibling ? cast(GtkTreeIter*)sibling._cPtr(No.Dup) : null);
+    iter = new gid.gtk4.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
+  }
+
+  /**
+      Inserts a new row before sibling. If sibling is null, then the row will
+      be appended to the end of the list. iter will be changed to point to this
+      new row. The row will be empty after this function is called. To fill in
+      values, you need to call [gid.gtk4.list_store.ListStore.set] or [gid.gtk4.list_store.ListStore.setValue].
+  
+      Params:
+        iter = An unset [gid.gtk4.tree_iter.TreeIter] to set to the new row
+        sibling = A valid [gid.gtk4.tree_iter.TreeIter]
+  
+      Deprecated: Use list models
+  */
+  void insertBefore(out gid.gtk4.tree_iter.TreeIter iter, gid.gtk4.tree_iter.TreeIter sibling = null) nothrow
+  {
+    auto _iter = boxedNew!GtkTreeIter(gid.gtk4.tree_iter.TreeIter._getGType);
+    gtk_list_store_insert_before(cast(GtkListStore*)this._cPtr, _iter, sibling ? cast(GtkTreeIter*)sibling._cPtr(No.Dup) : null);
+    iter = new gid.gtk4.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
+  }
+
+  /**
+      A variant of [gid.gtk4.list_store.ListStore.insertWithValues] which
+      takes the columns and values as two arrays, instead of
+      varargs.
+      
+      This function is mainly intended for language-bindings.
+  
+      Params:
+        iter = An unset [gid.gtk4.tree_iter.TreeIter] to set to the new row
+        position = position to insert the new row, or -1 for last
+        columns = an array of column numbers
+        values = an array of GValues
+  
+      Deprecated: Use list models
+  */
+  void insertWithValues(out gid.gtk4.tree_iter.TreeIter iter, int position, int[] columns, gid.gobject2.value.Value[] values) nothrow
+  {
+    auto _iter = boxedNew!GtkTreeIter(gid.gtk4.tree_iter.TreeIter._getGType);
+    int _nValues;
+    if (columns)
+      _nValues = cast(int)columns.length;
+
+    auto _columns = cast(int*)columns.ptr;
+    if (values)
+      _nValues = cast(int)values.length;
+
+    auto _values_arr = new GValue[](values.length);
+    auto _values = _values_arr.ptr;
+    foreach (i, obj; values) _values[i] = obj ? *cast(GValue*)obj._cPtr(No.Dup) : GValue.init;
+    gtk_list_store_insert_with_valuesv(cast(GtkListStore*)this._cPtr, _iter, position, _columns, _values, _nValues);
+    iter = new gid.gtk4.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
+  }
+
+  /**
+      Checks if the given iter is a valid iter for this [gid.gtk4.list_store.ListStore].
+      
+      This function is slow. Only use it for debugging and/or testing
+      purposes.
+  
+      Params:
+        iter = the iterator to check
+      Returns: true if the iter is valid, false if the iter is invalid.
+  
+      Deprecated: Use list models
+  */
+  bool iterIsValid(gid.gtk4.tree_iter.TreeIter iter) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_list_store_iter_is_valid(cast(GtkListStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Moves iter in store to the position after position. Note that this
+      function only works with unsorted stores. If position is null, iter
+      will be moved to the start of the list.
+  
+      Params:
+        iter = A [gid.gtk4.tree_iter.TreeIter]
+        position = A [gid.gtk4.tree_iter.TreeIter]
+  
+      Deprecated: Use list models
+  */
+  void moveAfter(gid.gtk4.tree_iter.TreeIter iter, gid.gtk4.tree_iter.TreeIter position = null) nothrow
+  {
+    gtk_list_store_move_after(cast(GtkListStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, position ? cast(GtkTreeIter*)position._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Moves iter in store to the position before position. Note that this
+      function only works with unsorted stores. If position is null, iter
+      will be moved to the end of the list.
+  
+      Params:
+        iter = A [gid.gtk4.tree_iter.TreeIter]
+        position = A [gid.gtk4.tree_iter.TreeIter]
+  
+      Deprecated: Use list models
+  */
+  void moveBefore(gid.gtk4.tree_iter.TreeIter iter, gid.gtk4.tree_iter.TreeIter position = null) nothrow
+  {
+    gtk_list_store_move_before(cast(GtkListStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, position ? cast(GtkTreeIter*)position._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Prepends a new row to list_store. iter will be changed to point to this new
+      row. The row will be empty after this function is called. To fill in
+      values, you need to call [gid.gtk4.list_store.ListStore.set] or [gid.gtk4.list_store.ListStore.setValue].
+  
+      Params:
+        iter = An unset [gid.gtk4.tree_iter.TreeIter] to set to the prepend row
+  
+      Deprecated: Use list models
+  */
+  void prepend(out gid.gtk4.tree_iter.TreeIter iter) nothrow
+  {
+    auto _iter = boxedNew!GtkTreeIter(gid.gtk4.tree_iter.TreeIter._getGType);
+    gtk_list_store_prepend(cast(GtkListStore*)this._cPtr, _iter);
+    iter = new gid.gtk4.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
+  }
+
+  /**
+      Removes the given row from the list store.  After being removed,
+      iter is set to be the next valid row, or invalidated if it pointed
+      to the last row in list_store.
+  
+      Params:
+        iter = A valid [gid.gtk4.tree_iter.TreeIter]
+      Returns: true if iter is valid, false if not.
+  
+      Deprecated: Use list models
+  */
+  bool remove(gid.gtk4.tree_iter.TreeIter iter) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_list_store_remove(cast(GtkListStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Sets the types of the columns of a list store.
+      
+      This function is meant primarily for objects that inherit
+      from [gid.gtk4.list_store.ListStore], and should only be used when constructing
+      a new instance.
+      
+      This function cannot be called after a row has been added, or
+      a method on the [gid.gtk4.tree_model.TreeModel] interface is called.
+  
+      Params:
+        types = An array length n of `GType`s
+  
+      Deprecated: Use list models
+  */
+  void setColumnTypes(gid.gobject2.types.GType[] types) nothrow
+  {
+    int _nColumns;
+    if (types)
+      _nColumns = cast(int)types.length;
+
+    auto _types = cast(GType*)types.ptr;
+    gtk_list_store_set_column_types(cast(GtkListStore*)this._cPtr, _nColumns, _types);
+  }
+
+  /**
+      Sets the data in the cell specified by iter and column.
+      The type of value must be convertible to the type of the
+      column.
+  
+      Params:
+        iter = A valid [gid.gtk4.tree_iter.TreeIter] for the row being modified
+        column = column number to modify
+        value = new value for the cell
+  
+      Deprecated: Use list models
+  */
+  void setValue(gid.gtk4.tree_iter.TreeIter iter, int column, gid.gobject2.value.Value value) nothrow
+  {
+    gtk_list_store_set_value(cast(GtkListStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, column, value ? cast(GValue*)value._cPtr(No.Dup) : null);
+  }
+
+  /**
+      A variant of [gid.gtk4.list_store.ListStore.setValist] which
+      takes the columns and values as two arrays, instead of
+      varargs. This function is mainly intended for
+      language-bindings and in case the number of columns to
+      change is not known until run-time.
+  
+      Params:
+        iter = A valid [gid.gtk4.tree_iter.TreeIter] for the row being modified
+        columns = an array of column numbers
+        values = an array of GValues
+  
+      Deprecated: Use list models
+  */
+  void set(gid.gtk4.tree_iter.TreeIter iter, int[] columns, gid.gobject2.value.Value[] values) nothrow
+  {
+    int _nValues;
+    if (columns)
+      _nValues = cast(int)columns.length;
+
+    auto _columns = cast(int*)columns.ptr;
+    if (values)
+      _nValues = cast(int)values.length;
+
+    auto _values_arr = new GValue[](values.length);
+    auto _values = _values_arr.ptr;
+    foreach (i, obj; values) _values[i] = obj ? *cast(GValue*)obj._cPtr(No.Dup) : GValue.init;
+    gtk_list_store_set_valuesv(cast(GtkListStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, _columns, _values, _nValues);
+  }
+
+  /**
+      Swaps `a` and `b` in store. Note that this function only works with
+      unsorted stores.
+  
+      Params:
+        a = A [gid.gtk4.tree_iter.TreeIter]
+        b = Another [gid.gtk4.tree_iter.TreeIter]
+  
+      Deprecated: Use list models
+  */
+  void swap(gid.gtk4.tree_iter.TreeIter a, gid.gtk4.tree_iter.TreeIter b) nothrow
+  {
+    gtk_list_store_swap(cast(GtkListStore*)this._cPtr, a ? cast(GtkTreeIter*)a._cPtr(No.Dup) : null, b ? cast(GtkTreeIter*)b._cPtr(No.Dup) : null);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.list_store.ListStore]
+class ListStoreGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T, gid.gtk4.buildable.BuildableGidBuilderImpl!T, gid.gtk4.tree_drag_dest.TreeDragDestGidBuilderImpl!T, gid.gtk4.tree_drag_source.TreeDragSourceGidBuilderImpl!T, gid.gtk4.tree_model.TreeModelGidBuilderImpl!T, gid.gtk4.tree_sortable.TreeSortableGidBuilderImpl!T
+{
+
+  mixin BuildableGidBuilderT!();
+  mixin TreeDragDestGidBuilderT!();
+  mixin TreeDragSourceGidBuilderT!();
+  mixin TreeModelGidBuilderT!();
+  mixin TreeSortableGidBuilderT!();
+}
+
+/// Fluent builder for [gid.gtk4.list_store.ListStore]
+final class ListStoreGidBuilder : ListStoreGidBuilderImpl!ListStoreGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  ListStore build() nothrow
+  {
+    return new ListStore(cast(void*)createGObject(ListStore._getGType), Yes.Take);
+  }
+}

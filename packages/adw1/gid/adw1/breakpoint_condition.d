@@ -1,0 +1,194 @@
+/// Module for [BreakpointCondition] class
+module gid.adw1.breakpoint_condition;
+
+public import gid.core.basictypes;
+import gid.adw1.c.functions;
+import gid.adw1.c.types;
+import gid.adw1.types;
+import gid.core.gid;
+import gid.gobject2.boxed;
+
+/**
+    Describes condition for an [gid.adw1.breakpoint.Breakpoint].
+*/
+class BreakpointCondition : gid.gobject2.boxed.BoxedWrap!(adw_breakpoint_condition_get_type)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override BreakpointCondition self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Creates a condition that triggers when condition_1 and condition_2 are both
+      true.
+  
+      Params:
+        condition1 = first condition
+        condition2 = second condition
+      Returns: the newly created condition
+  */
+  static gid.adw1.breakpoint_condition.BreakpointCondition newAnd(gid.adw1.breakpoint_condition.BreakpointCondition condition1, gid.adw1.breakpoint_condition.BreakpointCondition condition2) nothrow
+  {
+    AdwBreakpointCondition* _cretval;
+    _cretval = adw_breakpoint_condition_new_and(condition1 ? cast(AdwBreakpointCondition*)condition1._cPtr(Yes.Dup) : null, condition2 ? cast(AdwBreakpointCondition*)condition2._cPtr(Yes.Dup) : null);
+    auto _retval = _cretval ? new gid.adw1.breakpoint_condition.BreakpointCondition(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Creates a condition that triggers on length changes.
+  
+      Params:
+        type = the length type
+        value = the length value
+        unit = the length unit
+      Returns: the newly created condition
+  */
+  static gid.adw1.breakpoint_condition.BreakpointCondition newLength(gid.adw1.types.BreakpointConditionLengthType type, double value, gid.adw1.types.LengthUnit unit) nothrow
+  {
+    AdwBreakpointCondition* _cretval;
+    _cretval = adw_breakpoint_condition_new_length(type, value, unit);
+    auto _retval = _cretval ? new gid.adw1.breakpoint_condition.BreakpointCondition(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Creates a condition that triggers when either condition_1 or condition_2 is
+      true.
+  
+      Params:
+        condition1 = first condition
+        condition2 = second condition
+      Returns: the newly created condition
+  */
+  static gid.adw1.breakpoint_condition.BreakpointCondition newOr(gid.adw1.breakpoint_condition.BreakpointCondition condition1, gid.adw1.breakpoint_condition.BreakpointCondition condition2) nothrow
+  {
+    AdwBreakpointCondition* _cretval;
+    _cretval = adw_breakpoint_condition_new_or(condition1 ? cast(AdwBreakpointCondition*)condition1._cPtr(Yes.Dup) : null, condition2 ? cast(AdwBreakpointCondition*)condition2._cPtr(Yes.Dup) : null);
+    auto _retval = _cretval ? new gid.adw1.breakpoint_condition.BreakpointCondition(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Creates a condition that triggers on ratio changes.
+      
+      The ratio is represented as width divided by height.
+  
+      Params:
+        type = the ratio type
+        width = ratio width
+        height = ratio height
+      Returns: the newly created condition
+  */
+  static gid.adw1.breakpoint_condition.BreakpointCondition newRatio(gid.adw1.types.BreakpointConditionRatioType type, int width, int height) nothrow
+  {
+    AdwBreakpointCondition* _cretval;
+    _cretval = adw_breakpoint_condition_new_ratio(type, width, height);
+    auto _retval = _cretval ? new gid.adw1.breakpoint_condition.BreakpointCondition(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Copies self.
+      Returns: a copy of self
+  */
+  gid.adw1.breakpoint_condition.BreakpointCondition copy() nothrow
+  {
+    AdwBreakpointCondition* _cretval;
+    _cretval = adw_breakpoint_condition_copy(cast(AdwBreakpointCondition*)this._cPtr);
+    auto _retval = _cretval ? new gid.adw1.breakpoint_condition.BreakpointCondition(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns a textual representation of self.
+      
+      The returned string can be parsed by [gid.adw1.breakpoint_condition.BreakpointCondition.parse].
+      Returns: A newly allocated text string
+  */
+  string toString_() nothrow
+  {
+    char* _cretval;
+    _cretval = adw_breakpoint_condition_to_string(cast(AdwBreakpointCondition*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Parses a condition from a string.
+      
+      Length conditions are specified as `<type>: <value>[<unit>]`, where:
+      
+      - `<type>` can be `min-width`, `max-width`, `min-height` or `max-height`
+      - `<value>` is a fractional number
+      - `<unit>` can be `px`, `pt` or `sp`
+      
+      If the unit is omitted, `px` is assumed.
+      
+      See [gid.adw1.breakpoint_condition.BreakpointCondition.newLength].
+      
+      Examples:
+      
+      - `min-width: 500px`
+      - `min-height: 400pt`
+      - `max-width: 100sp`
+      - `max-height: 500`
+      
+      Ratio conditions are specified as `<type>: <width>[/<height>]`, where:
+      
+      - `<type>` can be `min-aspect-ratio` or `max-aspect-ratio`
+      - `<width>` and `<height>` are integer numbers
+      
+      See [gid.adw1.breakpoint_condition.BreakpointCondition.newRatio].
+      
+      The ratio is represented as `<width>` divided by `<height>`.
+      
+      If `<height>` is omitted, it's assumed to be 1.
+      
+      Examples:
+      
+      - `min-aspect-ratio: 4/3`
+      - `max-aspect-ratio: 1`
+      
+      The logical operators `and`, `or` can be used to compose a complex condition
+      as follows:
+      
+      - `<condition> and <condition>`: the condition is true when both
+        `<condition>`s are true, same as when using
+        [gid.adw1.breakpoint_condition.BreakpointCondition.newAnd]
+      - `<condition> or <condition>`: the condition is true when either of the
+        `<condition>`s is true, same as when using
+        [gid.adw1.breakpoint_condition.BreakpointCondition.newOr]
+      
+      Examples:
+      
+      - `min-width: 400px and max-aspect-ratio: 4/3`
+      - `max-width: 360sp or max-width: 360px`
+      
+      Conditions can be further nested using parentheses, for example:
+      
+      - `min-width: 400px and (max-aspect-ratio: 4/3 or max-height: 400px)`
+      
+      If parentheses are omitted, the first operator takes priority.
+  
+      Params:
+        str = the string specifying the condition
+      Returns: the parsed condition
+  */
+  static gid.adw1.breakpoint_condition.BreakpointCondition parse(string str) nothrow
+  {
+    AdwBreakpointCondition* _cretval;
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
+    _cretval = adw_breakpoint_condition_parse(_str);
+    auto _retval = _cretval ? new gid.adw1.breakpoint_condition.BreakpointCondition(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+}

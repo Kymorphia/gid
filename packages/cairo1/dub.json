@@ -6,8 +6,8 @@
   "license": "MIT",
   "homepage": "https://cairographics.org",
   "targetType": "library",
-  "importPaths": [".", ".."],
-  "sourcePaths": ["cairo"],
+  "importPaths": ["."],
+  "sourcePaths": ["gid"],
   "dependencies": {
     "gid:freetype2": "*",
     "gid:glib2": "*"

@@ -1,0 +1,671 @@
+/// Module for [ColumnViewColumn] class
+module gid.gtk4.column_view_column;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gio2.menu_model;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.column_view;
+import gid.gtk4.list_item_factory;
+import gid.gtk4.sorter;
+import gid.gtk4.types;
+
+/**
+    Represents the columns in a [gid.gtk4.column_view.ColumnView].
+    
+    The main ingredient for a [gid.gtk4.column_view_column.ColumnViewColumn] is the [gid.gtk4.list_item_factory.ListItemFactory]
+    that tells the columnview how to create cells for this column from items in
+    the model.
+    
+    Columns have a title, and can optionally have a header menu set
+    with [gid.gtk4.column_view_column.ColumnViewColumn.setHeaderMenu].
+    
+    A sorter can be associated with a column using
+    [gid.gtk4.column_view_column.ColumnViewColumn.setSorter], to let users influence sorting
+    by clicking on the column header.
+*/
+class ColumnViewColumn : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_column_view_column_get_type != &gidSymbolNotFound ? gtk_column_view_column_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkColumnViewColumn";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ColumnViewColumn self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.column_view_column.ColumnViewColumn]
+      Returns: New builder object
+  */
+  static ColumnViewColumnGidBuilder builder() nothrow
+  {
+    return new ColumnViewColumnGidBuilder;
+  }
+
+  /**
+      Get `columnView` property.
+      Returns: The [gid.gtk4.column_view.ColumnView] this column is a part of.
+  */
+  @property gid.gtk4.column_view.ColumnView columnView() nothrow
+  {
+    return getColumnView();
+  }
+
+  /**
+      Get `expand` property.
+      Returns: Column gets share of extra width allocated to the view.
+  */
+  @property bool expand() nothrow
+  {
+    return getExpand();
+  }
+
+  /**
+      Set `expand` property.
+      Params:
+        propval = Column gets share of extra width allocated to the view.
+  */
+  @property void expand(bool propval) nothrow
+  {
+    setExpand(propval);
+  }
+
+  /**
+      Get `factory` property.
+      Returns: Factory for populating list items.
+        
+        The factory must be for configuring [gid.gtk4.column_view_cell.ColumnViewCell] objects.
+  */
+  @property gid.gtk4.list_item_factory.ListItemFactory factory() nothrow
+  {
+    return getFactory();
+  }
+
+  /**
+      Set `factory` property.
+      Params:
+        propval = Factory for populating list items.
+          
+          The factory must be for configuring [gid.gtk4.column_view_cell.ColumnViewCell] objects.
+  */
+  @property void factory(gid.gtk4.list_item_factory.ListItemFactory propval) nothrow
+  {
+    setFactory(propval);
+  }
+
+  /**
+      Get `fixedWidth` property.
+      Returns: If not -1, this is the width that the column is allocated,
+        regardless of the size of its content.
+  */
+  @property int fixedWidth() nothrow
+  {
+    return getFixedWidth();
+  }
+
+  /**
+      Set `fixedWidth` property.
+      Params:
+        propval = If not -1, this is the width that the column is allocated,
+          regardless of the size of its content.
+  */
+  @property void fixedWidth(int propval) nothrow
+  {
+    setFixedWidth(propval);
+  }
+
+  /**
+      Get `headerMenu` property.
+      Returns: Menu model used to create the context menu for the column header.
+  */
+  @property gid.gio2.menu_model.MenuModel headerMenu() nothrow
+  {
+    return getHeaderMenu();
+  }
+
+  /**
+      Set `headerMenu` property.
+      Params:
+        propval = Menu model used to create the context menu for the column header.
+  */
+  @property void headerMenu(gid.gio2.menu_model.MenuModel propval) nothrow
+  {
+    setHeaderMenu(propval);
+  }
+
+  /**
+      Get `id` property.
+      Returns: An ID for the column.
+        
+        GTK is not currently using the ID for anything, but
+        it can be used by applications when saving column view
+        configurations.
+        
+        It is up to applications to ensure uniqueness of IDs.
+  */
+  @property string id() nothrow
+  {
+    return getId();
+  }
+
+  /**
+      Set `id` property.
+      Params:
+        propval = An ID for the column.
+          
+          GTK is not currently using the ID for anything, but
+          it can be used by applications when saving column view
+          configurations.
+          
+          It is up to applications to ensure uniqueness of IDs.
+  */
+  @property void id(string propval) nothrow
+  {
+    setId(propval);
+  }
+
+  /**
+      Get `resizable` property.
+      Returns: Whether this column is resizable.
+  */
+  @property bool resizable() nothrow
+  {
+    return getResizable();
+  }
+
+  /**
+      Set `resizable` property.
+      Params:
+        propval = Whether this column is resizable.
+  */
+  @property void resizable(bool propval) nothrow
+  {
+    setResizable(propval);
+  }
+
+  /**
+      Get `sorter` property.
+      Returns: Sorter for sorting items according to this column.
+  */
+  @property gid.gtk4.sorter.Sorter sorter() nothrow
+  {
+    return getSorter();
+  }
+
+  /**
+      Set `sorter` property.
+      Params:
+        propval = Sorter for sorting items according to this column.
+  */
+  @property void sorter(gid.gtk4.sorter.Sorter propval) nothrow
+  {
+    setSorter(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: Title displayed in the header.
+  */
+  @property string title() nothrow
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = Title displayed in the header.
+  */
+  @property void title(string propval) nothrow
+  {
+    setTitle(propval);
+  }
+
+  /**
+      Get `visible` property.
+      Returns: Whether this column is visible.
+  */
+  @property bool visible() nothrow
+  {
+    return getVisible();
+  }
+
+  /**
+      Set `visible` property.
+      Params:
+        propval = Whether this column is visible.
+  */
+  @property void visible(bool propval) nothrow
+  {
+    setVisible(propval);
+  }
+
+  /**
+      Creates a new [gid.gtk4.column_view_column.ColumnViewColumn] that uses the given factory for
+      mapping items to widgets.
+      
+      You most likely want to call [gid.gtk4.column_view.ColumnView.appendColumn] next.
+      
+      The function takes ownership of the argument, so you can write code like:
+      
+      ```c
+      column = gtk_column_view_column_new (_("Name"),
+        gtk_builder_list_item_factory_new_from_resource ("/name.ui"));
+      ```
+  
+      Params:
+        title = Title to use for this column
+        factory = The factory to populate items with
+      Returns: a new [gid.gtk4.column_view_column.ColumnViewColumn] using the given factory
+  */
+  this(string title = null, gid.gtk4.list_item_factory.ListItemFactory factory = null) nothrow
+  {
+    GtkColumnViewColumn* _cretval;
+    const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
+    _cretval = gtk_column_view_column_new(_title, factory ? cast(GtkListItemFactory*)factory._cPtr(Yes.Dup) : null);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Gets the column view that's currently displaying this column.
+      
+      If self has not been added to a column view yet, `NULL` is returned.
+      Returns: The column view displaying self.
+  */
+  gid.gtk4.column_view.ColumnView getColumnView() nothrow
+  {
+    GtkColumnView* _cretval;
+    _cretval = gtk_column_view_column_get_column_view(cast(GtkColumnViewColumn*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.column_view.ColumnView)(cast(GtkColumnView*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns whether this column should expand.
+      Returns: true if this column expands
+  */
+  bool getExpand() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_column_view_column_get_expand(cast(GtkColumnViewColumn*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the factory that's currently used to populate list items
+      for this column.
+      Returns: The factory in use
+  */
+  gid.gtk4.list_item_factory.ListItemFactory getFactory() nothrow
+  {
+    GtkListItemFactory* _cretval;
+    _cretval = gtk_column_view_column_get_factory(cast(GtkColumnViewColumn*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the fixed width of the column.
+      Returns: the fixed with of the column
+  */
+  int getFixedWidth() nothrow
+  {
+    int _retval;
+    _retval = gtk_column_view_column_get_fixed_width(cast(GtkColumnViewColumn*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the menu model that is used to create the context menu
+      for the column header.
+      Returns: the [gid.gio2.menu_model.MenuModel]
+  */
+  gid.gio2.menu_model.MenuModel getHeaderMenu() nothrow
+  {
+    GMenuModel* _cretval;
+    _cretval = gtk_column_view_column_get_header_menu(cast(GtkColumnViewColumn*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the ID set with [gid.gtk4.column_view_column.ColumnViewColumn.setId].
+      Returns: The column's ID
+  */
+  string getId() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_column_view_column_get_id(cast(GtkColumnViewColumn*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Returns whether this column is resizable.
+      Returns: true if this column is resizable
+  */
+  bool getResizable() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_column_view_column_get_resizable(cast(GtkColumnViewColumn*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the sorter that is associated with the column.
+      Returns: the [gid.gtk4.sorter.Sorter] of self
+  */
+  gid.gtk4.sorter.Sorter getSorter() nothrow
+  {
+    GtkSorter* _cretval;
+    _cretval = gtk_column_view_column_get_sorter(cast(GtkColumnViewColumn*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the title set with [gid.gtk4.column_view_column.ColumnViewColumn.setTitle].
+      Returns: The column's title
+  */
+  string getTitle() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_column_view_column_get_title(cast(GtkColumnViewColumn*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Returns whether this column is visible.
+      Returns: true if this column is visible
+  */
+  bool getVisible() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_column_view_column_get_visible(cast(GtkColumnViewColumn*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Sets the column to take available extra space.
+      
+      The extra space is shared equally amongst all columns that
+      have are set to expand.
+  
+      Params:
+        expand = whether this column should expand to fill available space
+  */
+  void setExpand(bool expand) nothrow
+  {
+    gtk_column_view_column_set_expand(cast(GtkColumnViewColumn*)this._cPtr, expand);
+  }
+
+  /**
+      Sets the [gid.gtk4.list_item_factory.ListItemFactory] to use for populating list items
+      for this column.
+  
+      Params:
+        factory = the factory to use
+  */
+  void setFactory(gid.gtk4.list_item_factory.ListItemFactory factory = null) nothrow
+  {
+    gtk_column_view_column_set_factory(cast(GtkColumnViewColumn*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the fixed width of the column.
+      
+      If fixed_width is -1, the fixed width of the column is unset.
+      
+      Setting a fixed width overrides the automatically calculated
+      width. Interactive resizing also sets the “fixed-width” property.
+  
+      Params:
+        fixedWidth = the new fixed width, or -1
+  */
+  void setFixedWidth(int fixedWidth) nothrow
+  {
+    gtk_column_view_column_set_fixed_width(cast(GtkColumnViewColumn*)this._cPtr, fixedWidth);
+  }
+
+  /**
+      Sets the menu model that is used to create the context menu
+      for the column header.
+  
+      Params:
+        menu = a [gid.gio2.menu_model.MenuModel]
+  */
+  void setHeaderMenu(gid.gio2.menu_model.MenuModel menu = null) nothrow
+  {
+    gtk_column_view_column_set_header_menu(cast(GtkColumnViewColumn*)this._cPtr, menu ? cast(GMenuModel*)menu._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the id of this column.
+      
+      GTK makes no use of this, but applications can use it when
+      storing column view configuration.
+      
+      It is up to callers to ensure uniqueness of IDs.
+  
+      Params:
+        id = ID to use for this column
+  */
+  void setId(string id = null) nothrow
+  {
+    const(char)* _id = id.toCString!(No.Malloc, Yes.Nullable);
+    gtk_column_view_column_set_id(cast(GtkColumnViewColumn*)this._cPtr, _id);
+  }
+
+  /**
+      Sets whether this column should be resizable by dragging.
+  
+      Params:
+        resizable = whether this column should be resizable
+  */
+  void setResizable(bool resizable) nothrow
+  {
+    gtk_column_view_column_set_resizable(cast(GtkColumnViewColumn*)this._cPtr, resizable);
+  }
+
+  /**
+      Associates a sorter with the column.
+      
+      If sorter is unset, the column will not let users change
+      the sorting by clicking on its header.
+      
+      This sorter can be made active by clicking on the column
+      header, or by calling [gid.gtk4.column_view.ColumnView.sortByColumn].
+      
+      See [gid.gtk4.column_view.ColumnView.getSorter] for the necessary steps
+      for setting up customizable sorting for [gid.gtk4.column_view.ColumnView].
+  
+      Params:
+        sorter = the [gid.gtk4.sorter.Sorter] to associate with column
+  */
+  void setSorter(gid.gtk4.sorter.Sorter sorter = null) nothrow
+  {
+    gtk_column_view_column_set_sorter(cast(GtkColumnViewColumn*)this._cPtr, sorter ? cast(GtkSorter*)sorter._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the title of this column.
+      
+      The title is displayed in the header of a [gid.gtk4.column_view.ColumnView]
+      for this column and is therefore user-facing text that should
+      be translated.
+  
+      Params:
+        title = Title to use for this column
+  */
+  void setTitle(string title = null) nothrow
+  {
+    const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
+    gtk_column_view_column_set_title(cast(GtkColumnViewColumn*)this._cPtr, _title);
+  }
+
+  /**
+      Sets whether this column should be visible in views.
+  
+      Params:
+        visible = whether this column should be visible
+  */
+  void setVisible(bool visible) nothrow
+  {
+    gtk_column_view_column_set_visible(cast(GtkColumnViewColumn*)this._cPtr, visible);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.column_view_column.ColumnViewColumn]
+class ColumnViewColumnGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `expand` property.
+      Params:
+        propval = Column gets share of extra width allocated to the view.
+      Returns: Builder instance for fluent chaining
+  */
+  T expand(bool propval) nothrow
+  {
+    return setProperty("expand", propval);
+  }
+
+  /**
+      Set `factory` property.
+      Params:
+        propval = Factory for populating list items.
+          
+          The factory must be for configuring [gid.gtk4.column_view_cell.ColumnViewCell] objects.
+      Returns: Builder instance for fluent chaining
+  */
+  T factory(gid.gtk4.list_item_factory.ListItemFactory propval) nothrow
+  {
+    return setProperty("factory", propval);
+  }
+
+  /**
+      Set `fixedWidth` property.
+      Params:
+        propval = If not -1, this is the width that the column is allocated,
+          regardless of the size of its content.
+      Returns: Builder instance for fluent chaining
+  */
+  T fixedWidth(int propval) nothrow
+  {
+    return setProperty("fixed-width", propval);
+  }
+
+  /**
+      Set `headerMenu` property.
+      Params:
+        propval = Menu model used to create the context menu for the column header.
+      Returns: Builder instance for fluent chaining
+  */
+  T headerMenu(gid.gio2.menu_model.MenuModel propval) nothrow
+  {
+    return setProperty("header-menu", propval);
+  }
+
+  /**
+      Set `id` property.
+      Params:
+        propval = An ID for the column.
+          
+          GTK is not currently using the ID for anything, but
+          it can be used by applications when saving column view
+          configurations.
+          
+          It is up to applications to ensure uniqueness of IDs.
+      Returns: Builder instance for fluent chaining
+  */
+  T id(string propval) nothrow
+  {
+    return setProperty("id", propval);
+  }
+
+  /**
+      Set `resizable` property.
+      Params:
+        propval = Whether this column is resizable.
+      Returns: Builder instance for fluent chaining
+  */
+  T resizable(bool propval) nothrow
+  {
+    return setProperty("resizable", propval);
+  }
+
+  /**
+      Set `sorter` property.
+      Params:
+        propval = Sorter for sorting items according to this column.
+      Returns: Builder instance for fluent chaining
+  */
+  T sorter(gid.gtk4.sorter.Sorter propval) nothrow
+  {
+    return setProperty("sorter", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = Title displayed in the header.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval) nothrow
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `visible` property.
+      Params:
+        propval = Whether this column is visible.
+      Returns: Builder instance for fluent chaining
+  */
+  T visible(bool propval) nothrow
+  {
+    return setProperty("visible", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk4.column_view_column.ColumnViewColumn]
+final class ColumnViewColumnGidBuilder : ColumnViewColumnGidBuilderImpl!ColumnViewColumnGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  ColumnViewColumn build() nothrow
+  {
+    return new ColumnViewColumn(cast(void*)createGObject(ColumnViewColumn._getGType), Yes.Take);
+  }
+}

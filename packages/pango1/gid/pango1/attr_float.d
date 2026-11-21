@@ -1,0 +1,66 @@
+/// Module for [AttrFloat] class
+module gid.pango1.attr_float;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.pango1.attribute;
+import gid.pango1.c.functions;
+import gid.pango1.c.types;
+import gid.pango1.types;
+
+/**
+    The [gid.pango1.attr_float.AttrFloat] structure is used to represent attributes with
+    a float or double value.
+*/
+class AttrFloat : StructWrap!(PangoAttrFloat)
+{
+  /**
+      Create a `attr_float.AttrFloat` wrap type.
+      Params:
+        value = the value of the attribute
+  */
+  this(double value = 0.0) nothrow
+  {
+    this.value = value;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /**
+      Get `attr` field.
+      Returns: the common portion of the attribute
+  */
+  @property gid.pango1.attribute.Attribute attr() nothrow
+  {
+    return cToD!(gid.pango1.attribute.Attribute)(cast(void*)&(cast(PangoAttrFloat*)this._cPtr).attr);
+  }
+
+  /**
+      Get `value` field.
+      Returns: the value of the attribute
+  */
+  @property double value() nothrow
+  {
+    return (cast(PangoAttrFloat*)this._cPtr).value;
+  }
+
+  /**
+      Set `value` field.
+      Params:
+        propval = the value of the attribute
+  */
+  @property void value(double propval) nothrow
+  {
+    (cast(PangoAttrFloat*)this._cPtr).value = propval;
+  }
+}

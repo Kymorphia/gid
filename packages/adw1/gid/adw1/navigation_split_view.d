@@ -1,0 +1,862 @@
+/// Module for [NavigationSplitView] class
+module gid.adw1.navigation_split_view;
+
+public import gid.core.basictypes;
+import gid.adw1.c.functions;
+import gid.adw1.c.types;
+import gid.adw1.navigation_page;
+import gid.adw1.types;
+import gid.core.gid;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.accessible;
+import gid.gtk4.accessible_mixin;
+import gid.gtk4.buildable;
+import gid.gtk4.buildable_mixin;
+import gid.gtk4.constraint_target;
+import gid.gtk4.constraint_target_mixin;
+import gid.gtk4.types;
+import gid.gtk4.widget;
+
+/**
+    A widget presenting sidebar and content side by side or as a navigation view.
+    
+    <picture>
+      <source srcset="navigation-split-view-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="navigation-split-view.png" alt="navigation-split-view">
+    </picture>
+    <picture>
+      <source srcset="navigation-split-view-collapsed-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="navigation-split-view-collapsed.png" alt="navigation-split-view-collapsed">
+    </picture>
+    
+    [gid.adw1.navigation_split_view.NavigationSplitView] has two [gid.adw1.navigation_page.NavigationPage] children: sidebar and
+    content, and displays them side by side.
+    
+    When [gid.adw1.navigation_split_view.NavigationSplitView.collapsed] is set to `TRUE`, it instead
+    puts both children inside an [gid.adw1.navigation_view.NavigationView]. The
+    [gid.adw1.navigation_split_view.NavigationSplitView.showContent] controls which child is visible
+    while collapsed.
+    
+    See also [gid.adw1.overlay_split_view.OverlaySplitView].
+    
+    [gid.adw1.navigation_split_view.NavigationSplitView] is typically used together with an [gid.adw1.breakpoint.Breakpoint]
+    setting the `collapsed` property to `TRUE` on small widths, as follows:
+    
+    ```xml
+    <object class="AdwWindow">
+      <property name="default-width">800</property>
+      <property name="default-height">800</property>
+      <child>
+        <object class="AdwBreakpoint">
+          <condition>max-width: 400sp</condition>
+          <setter object="split_view" property="collapsed">True</setter>
+        </object>
+      </child>
+      <property name="content">
+        <object class="AdwNavigationSplitView" id="split_view">
+          <property name="sidebar">
+            <object class="AdwNavigationPage">
+              <property name="title" translatable="yes">Sidebar</property>
+              <property name="child">
+                <!-- ... -->
+              </property>
+            </object>
+          </property>
+          <property name="content">
+            <object class="AdwNavigationPage">
+              <property name="title" translatable="yes">Content</property>
+              <property name="child">
+                <!-- ... -->
+              </property>
+            </object>
+          </property>
+        </object>
+      </property>
+    </object>
+    ```
+    
+    ## Sizing
+    
+    When not collapsed, [gid.adw1.navigation_split_view.NavigationSplitView] changes the sidebar width
+    depending on its own width.
+    
+    If possible, it tries to allocate a fraction of the total width, controlled
+    with the [gid.adw1.navigation_split_view.NavigationSplitView.sidebarWidthFraction] property.
+    
+    The sidebar also has minimum and maximum sizes, controlled with the
+    [gid.adw1.navigation_split_view.NavigationSplitView.minSidebarWidth] and
+    [gid.adw1.navigation_split_view.NavigationSplitView.maxSidebarWidth] properties.
+    
+    The minimum and maximum sizes are using the length unit specified with the
+    [gid.adw1.navigation_split_view.NavigationSplitView.sidebarWidthUnit].
+    
+    By default, sidebar is using 25% of the total width, with 180sp as the
+    minimum size and 280sp as the maximum size.
+    
+    ## Header Bar Integration
+    
+    When used inside [gid.adw1.navigation_split_view.NavigationSplitView], [gid.adw1.header_bar.HeaderBar] will
+    automatically hide the window buttons in the middle.
+    
+    When collapsed, it also displays a back button for the content widget, as
+    well as the page titles. See [gid.adw1.navigation_view.NavigationView] documentation for details.
+    
+    ## Actions
+    
+    [gid.adw1.navigation_split_view.NavigationSplitView] defines the same actions as [gid.adw1.navigation_view.NavigationView], but
+    they can be used even when the split view is not collapsed:
+    
+    - `navigation.push` takes a string parameter specifying the tag of the page
+    to push. If it matches the tag of the content widget, it sets
+    [gid.adw1.navigation_split_view.NavigationSplitView.showContent] to `TRUE`.
+    
+    - `navigation.pop` doesn't take any parameters and sets
+    [gid.adw1.navigation_split_view.NavigationSplitView.showContent] to `FALSE`.
+    
+    ## [gid.adw1.navigation_split_view.NavigationSplitView] as [gid.gtk4.buildable.Buildable]
+    
+    The [gid.adw1.navigation_split_view.NavigationSplitView] implementation of the [gid.gtk4.buildable.Buildable]
+    interface supports setting the sidebar widget by specifying “sidebar” as the
+    “type” attribute of a `<child>` element, Specifying “content” child type or
+    omitting it results in setting the content widget.
+    
+    ## CSS nodes
+    
+    [gid.adw1.navigation_split_view.NavigationSplitView] has a single CSS node with the name
+    `navigation-split-view`.
+    
+    When collapsed, it contains a child node with the name `navigation-view`
+    containing both children.
+    
+    ```
+    navigation-split-view
+    ╰── navigation-view
+        ├── [sidebar child]
+        ╰── [content child]
+    ```
+    
+    When not collapsed, it contains two nodes with the name `widget`, one with
+    the `.sidebar-pane` style class, the other one with `.content-view` style
+    class, containing the sidebar and content children respectively.
+    
+    ```
+    navigation-split-view
+    ├── widget.sidebar-pane
+    │   ╰── [sidebar child]
+    ╰── widget.content-pane
+        ╰── [content child]
+    ```
+    
+    ## Accessibility
+    
+    [gid.adw1.navigation_split_view.NavigationSplitView] uses the [gid.gtk4.types.AccessibleRole.Group] role.
+*/
+class NavigationSplitView : gid.gtk4.widget.Widget
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())adw_navigation_split_view_get_type != &gidSymbolNotFound ? adw_navigation_split_view_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwNavigationSplitView";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override NavigationSplitView self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.adw1.navigation_split_view.NavigationSplitView]
+      Returns: New builder object
+  */
+  static NavigationSplitViewGidBuilder builder() nothrow
+  {
+    return new NavigationSplitViewGidBuilder;
+  }
+
+  /**
+      Get `collapsed` property.
+      Returns: Whether the split view is collapsed.
+        
+        When collapsed, the children are put inside an [gid.adw1.navigation_view.NavigationView],
+        otherwise they are displayed side by side.
+        
+        The [gid.adw1.navigation_split_view.NavigationSplitView.showContent] controls which child is
+        visible while collapsed.
+  */
+  @property bool collapsed() nothrow
+  {
+    return getCollapsed();
+  }
+
+  /**
+      Set `collapsed` property.
+      Params:
+        propval = Whether the split view is collapsed.
+          
+          When collapsed, the children are put inside an [gid.adw1.navigation_view.NavigationView],
+          otherwise they are displayed side by side.
+          
+          The [gid.adw1.navigation_split_view.NavigationSplitView.showContent] controls which child is
+          visible while collapsed.
+  */
+  @property void collapsed(bool propval) nothrow
+  {
+    setCollapsed(propval);
+  }
+
+  /**
+      Get `content` property.
+      Returns: The content widget.
+  */
+  @property gid.adw1.navigation_page.NavigationPage content() nothrow
+  {
+    return getContent();
+  }
+
+  /**
+      Set `content` property.
+      Params:
+        propval = The content widget.
+  */
+  @property void content(gid.adw1.navigation_page.NavigationPage propval) nothrow
+  {
+    setContent(propval);
+  }
+
+  /**
+      Get `maxSidebarWidth` property.
+      Returns: The maximum sidebar width.
+        
+        Maximum width is affected by
+        [gid.adw1.navigation_split_view.NavigationSplitView.sidebarWidthUnit].
+        
+        The sidebar widget can still be allocated with larger width if its own
+        minimum width exceeds it.
+  */
+  @property double maxSidebarWidth() nothrow
+  {
+    return getMaxSidebarWidth();
+  }
+
+  /**
+      Set `maxSidebarWidth` property.
+      Params:
+        propval = The maximum sidebar width.
+          
+          Maximum width is affected by
+          [gid.adw1.navigation_split_view.NavigationSplitView.sidebarWidthUnit].
+          
+          The sidebar widget can still be allocated with larger width if its own
+          minimum width exceeds it.
+  */
+  @property void maxSidebarWidth(double propval) nothrow
+  {
+    setMaxSidebarWidth(propval);
+  }
+
+  /**
+      Get `minSidebarWidth` property.
+      Returns: The minimum sidebar width.
+        
+        Minimum width is affected by
+        [gid.adw1.navigation_split_view.NavigationSplitView.sidebarWidthUnit].
+        
+        The sidebar widget can still be allocated with larger width if its own
+        minimum width exceeds it.
+  */
+  @property double minSidebarWidth() nothrow
+  {
+    return getMinSidebarWidth();
+  }
+
+  /**
+      Set `minSidebarWidth` property.
+      Params:
+        propval = The minimum sidebar width.
+          
+          Minimum width is affected by
+          [gid.adw1.navigation_split_view.NavigationSplitView.sidebarWidthUnit].
+          
+          The sidebar widget can still be allocated with larger width if its own
+          minimum width exceeds it.
+  */
+  @property void minSidebarWidth(double propval) nothrow
+  {
+    setMinSidebarWidth(propval);
+  }
+
+  /**
+      Get `showContent` property.
+      Returns: Determines the visible page when collapsed.
+        
+        If set to `TRUE`, the content widget will be the visible page when
+        [gid.adw1.navigation_split_view.NavigationSplitView.collapsed] is `TRUE`; otherwise the sidebar
+        widget will be visible.
+        
+        If the split view is already collapsed, the visible page changes
+        immediately.
+  */
+  @property bool showContent() nothrow
+  {
+    return getShowContent();
+  }
+
+  /**
+      Set `showContent` property.
+      Params:
+        propval = Determines the visible page when collapsed.
+          
+          If set to `TRUE`, the content widget will be the visible page when
+          [gid.adw1.navigation_split_view.NavigationSplitView.collapsed] is `TRUE`; otherwise the sidebar
+          widget will be visible.
+          
+          If the split view is already collapsed, the visible page changes
+          immediately.
+  */
+  @property void showContent(bool propval) nothrow
+  {
+    setShowContent(propval);
+  }
+
+  /**
+      Get `sidebar` property.
+      Returns: The sidebar widget.
+  */
+  @property gid.adw1.navigation_page.NavigationPage sidebar() nothrow
+  {
+    return getSidebar();
+  }
+
+  /**
+      Set `sidebar` property.
+      Params:
+        propval = The sidebar widget.
+  */
+  @property void sidebar(gid.adw1.navigation_page.NavigationPage propval) nothrow
+  {
+    setSidebar(propval);
+  }
+
+  /**
+      Get `sidebarPosition` property.
+      Returns: The sidebar position.
+        
+        If set to [gid.gtk4.types.PackType.Start], the sidebar is displayed before the
+        content, and the sidebar will be the root page when collapsed.
+        
+        If set to [gid.gtk4.types.PackType.End], the sidebar is displayed after the
+        content, and the content will be the root page.
+  */
+  @property gid.gtk4.types.PackType sidebarPosition() nothrow
+  {
+    return getSidebarPosition();
+  }
+
+  /**
+      Set `sidebarPosition` property.
+      Params:
+        propval = The sidebar position.
+          
+          If set to [gid.gtk4.types.PackType.Start], the sidebar is displayed before the
+          content, and the sidebar will be the root page when collapsed.
+          
+          If set to [gid.gtk4.types.PackType.End], the sidebar is displayed after the
+          content, and the content will be the root page.
+  */
+  @property void sidebarPosition(gid.gtk4.types.PackType propval) nothrow
+  {
+    setSidebarPosition(propval);
+  }
+
+  /**
+      Get `sidebarWidthFraction` property.
+      Returns: The preferred sidebar width as a fraction of the total width.
+        
+        The preferred width is additionally limited by
+        [gid.adw1.navigation_split_view.NavigationSplitView.minSidebarWidth] and
+        [gid.adw1.navigation_split_view.NavigationSplitView.maxSidebarWidth].
+        
+        The sidebar widget can be allocated with larger width if its own minimum
+        width exceeds the preferred width.
+  */
+  @property double sidebarWidthFraction() nothrow
+  {
+    return getSidebarWidthFraction();
+  }
+
+  /**
+      Set `sidebarWidthFraction` property.
+      Params:
+        propval = The preferred sidebar width as a fraction of the total width.
+          
+          The preferred width is additionally limited by
+          [gid.adw1.navigation_split_view.NavigationSplitView.minSidebarWidth] and
+          [gid.adw1.navigation_split_view.NavigationSplitView.maxSidebarWidth].
+          
+          The sidebar widget can be allocated with larger width if its own minimum
+          width exceeds the preferred width.
+  */
+  @property void sidebarWidthFraction(double propval) nothrow
+  {
+    setSidebarWidthFraction(propval);
+  }
+
+  /**
+      Get `sidebarWidthUnit` property.
+      Returns: The length unit for minimum and maximum sidebar widths.
+        
+        See [gid.adw1.navigation_split_view.NavigationSplitView.minSidebarWidth] and
+        [gid.adw1.navigation_split_view.NavigationSplitView.maxSidebarWidth].
+  */
+  @property gid.adw1.types.LengthUnit sidebarWidthUnit() nothrow
+  {
+    return getSidebarWidthUnit();
+  }
+
+  /**
+      Set `sidebarWidthUnit` property.
+      Params:
+        propval = The length unit for minimum and maximum sidebar widths.
+          
+          See [gid.adw1.navigation_split_view.NavigationSplitView.minSidebarWidth] and
+          [gid.adw1.navigation_split_view.NavigationSplitView.maxSidebarWidth].
+  */
+  @property void sidebarWidthUnit(gid.adw1.types.LengthUnit propval) nothrow
+  {
+    setSidebarWidthUnit(propval);
+  }
+
+  /**
+      Creates a new [gid.adw1.navigation_split_view.NavigationSplitView].
+      Returns: the newly created [gid.adw1.navigation_split_view.NavigationSplitView]
+  */
+  this() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = adw_navigation_split_view_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Gets whether self is collapsed.
+      Returns: whether self is collapsed
+  */
+  bool getCollapsed() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_navigation_split_view_get_collapsed(cast(AdwNavigationSplitView*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Sets the content widget for self.
+      Returns: the content widget
+  */
+  gid.adw1.navigation_page.NavigationPage getContent() nothrow
+  {
+    AdwNavigationPage* _cretval;
+    _cretval = adw_navigation_split_view_get_content(cast(AdwNavigationSplitView*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.adw1.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the maximum sidebar width for self.
+      Returns: the maximum width
+  */
+  double getMaxSidebarWidth() nothrow
+  {
+    double _retval;
+    _retval = adw_navigation_split_view_get_max_sidebar_width(cast(AdwNavigationSplitView*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the minimum sidebar width for self.
+      Returns: the minimum width
+  */
+  double getMinSidebarWidth() nothrow
+  {
+    double _retval;
+    _retval = adw_navigation_split_view_get_min_sidebar_width(cast(AdwNavigationSplitView*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets which page is visible when self is collapsed.
+      Returns: whether to show content when collapsed
+  */
+  bool getShowContent() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_navigation_split_view_get_show_content(cast(AdwNavigationSplitView*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the sidebar widget for self.
+      Returns: the sidebar widget
+  */
+  gid.adw1.navigation_page.NavigationPage getSidebar() nothrow
+  {
+    AdwNavigationPage* _cretval;
+    _cretval = adw_navigation_split_view_get_sidebar(cast(AdwNavigationSplitView*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.adw1.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the sidebar position for self.
+      Returns: the sidebar position for self
+  */
+  gid.gtk4.types.PackType getSidebarPosition() nothrow
+  {
+    GtkPackType _cretval;
+    _cretval = adw_navigation_split_view_get_sidebar_position(cast(AdwNavigationSplitView*)this._cPtr);
+    gid.gtk4.types.PackType _retval = cast(gid.gtk4.types.PackType)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the preferred sidebar width fraction for self.
+      Returns: the preferred width fraction
+  */
+  double getSidebarWidthFraction() nothrow
+  {
+    double _retval;
+    _retval = adw_navigation_split_view_get_sidebar_width_fraction(cast(AdwNavigationSplitView*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the length unit for minimum and maximum sidebar widths.
+      Returns: the length unit
+  */
+  gid.adw1.types.LengthUnit getSidebarWidthUnit() nothrow
+  {
+    AdwLengthUnit _cretval;
+    _cretval = adw_navigation_split_view_get_sidebar_width_unit(cast(AdwNavigationSplitView*)this._cPtr);
+    gid.adw1.types.LengthUnit _retval = cast(gid.adw1.types.LengthUnit)_cretval;
+    return _retval;
+  }
+
+  /**
+      Sets whether self is collapsed.
+      
+      When collapsed, the children are put inside an [gid.adw1.navigation_view.NavigationView],
+      otherwise they are displayed side by side.
+      
+      The [gid.adw1.navigation_split_view.NavigationSplitView.showContent] controls which child is
+      visible while collapsed.
+  
+      Params:
+        collapsed = whether self is collapsed
+  */
+  void setCollapsed(bool collapsed) nothrow
+  {
+    adw_navigation_split_view_set_collapsed(cast(AdwNavigationSplitView*)this._cPtr, collapsed);
+  }
+
+  /**
+      Sets the content widget for self.
+  
+      Params:
+        content = the content widget
+  */
+  void setContent(gid.adw1.navigation_page.NavigationPage content = null) nothrow
+  {
+    adw_navigation_split_view_set_content(cast(AdwNavigationSplitView*)this._cPtr, content ? cast(AdwNavigationPage*)content._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the maximum sidebar width for self.
+      
+      Maximum width is affected by
+      [gid.adw1.navigation_split_view.NavigationSplitView.sidebarWidthUnit].
+      
+      The sidebar widget can still be allocated with larger width if its own
+      minimum width exceeds it.
+  
+      Params:
+        width = the maximum width
+  */
+  void setMaxSidebarWidth(double width) nothrow
+  {
+    adw_navigation_split_view_set_max_sidebar_width(cast(AdwNavigationSplitView*)this._cPtr, width);
+  }
+
+  /**
+      Sets the minimum sidebar width for self.
+      
+      Minimum width is affected by
+      [gid.adw1.navigation_split_view.NavigationSplitView.sidebarWidthUnit].
+      
+      The sidebar widget can still be allocated with larger width if its own
+      minimum width exceeds it.
+  
+      Params:
+        width = the minimum width
+  */
+  void setMinSidebarWidth(double width) nothrow
+  {
+    adw_navigation_split_view_set_min_sidebar_width(cast(AdwNavigationSplitView*)this._cPtr, width);
+  }
+
+  /**
+      Sets which page is visible when self is collapsed.
+      
+      If set to `TRUE`, the content widget will be the visible page when
+      [gid.adw1.navigation_split_view.NavigationSplitView.collapsed] is `TRUE`; otherwise the sidebar
+      widget will be visible.
+      
+      If the split view is already collapsed, the visible page changes immediately.
+  
+      Params:
+        showContent = whether to show content when collapsed
+  */
+  void setShowContent(bool showContent) nothrow
+  {
+    adw_navigation_split_view_set_show_content(cast(AdwNavigationSplitView*)this._cPtr, showContent);
+  }
+
+  /**
+      Sets the sidebar widget for self.
+  
+      Params:
+        sidebar = the sidebar widget
+  */
+  void setSidebar(gid.adw1.navigation_page.NavigationPage sidebar = null) nothrow
+  {
+    adw_navigation_split_view_set_sidebar(cast(AdwNavigationSplitView*)this._cPtr, sidebar ? cast(AdwNavigationPage*)sidebar._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the sidebar position for self.
+      
+      If set to [gid.gtk4.types.PackType.Start], the sidebar is displayed before the
+      content, and the sidebar will be the root page when collapsed.
+      
+      If set to [gid.gtk4.types.PackType.End], the sidebar is displayed after the
+      content, and the content will be the root page.
+  
+      Params:
+        position = the new position
+  */
+  void setSidebarPosition(gid.gtk4.types.PackType position) nothrow
+  {
+    adw_navigation_split_view_set_sidebar_position(cast(AdwNavigationSplitView*)this._cPtr, position);
+  }
+
+  /**
+      Sets the preferred sidebar width as a fraction of the total width of self.
+      
+      The preferred width is additionally limited by
+      [gid.adw1.navigation_split_view.NavigationSplitView.minSidebarWidth] and
+      [gid.adw1.navigation_split_view.NavigationSplitView.maxSidebarWidth].
+      
+      The sidebar widget can be allocated with larger width if its own minimum
+      width exceeds the preferred width.
+  
+      Params:
+        fraction = the preferred width fraction
+  */
+  void setSidebarWidthFraction(double fraction) nothrow
+  {
+    adw_navigation_split_view_set_sidebar_width_fraction(cast(AdwNavigationSplitView*)this._cPtr, fraction);
+  }
+
+  /**
+      Sets the length unit for minimum and maximum sidebar widths.
+      
+      See [gid.adw1.navigation_split_view.NavigationSplitView.minSidebarWidth] and
+      [gid.adw1.navigation_split_view.NavigationSplitView.maxSidebarWidth].
+  
+      Params:
+        unit = the length unit
+  */
+  void setSidebarWidthUnit(gid.adw1.types.LengthUnit unit) nothrow
+  {
+    adw_navigation_split_view_set_sidebar_width_unit(cast(AdwNavigationSplitView*)this._cPtr, unit);
+  }
+}
+
+/// Fluent builder implementation template for [gid.adw1.navigation_split_view.NavigationSplitView]
+class NavigationSplitViewGidBuilderImpl(T) : gid.gtk4.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `collapsed` property.
+      Params:
+        propval = Whether the split view is collapsed.
+          
+          When collapsed, the children are put inside an [gid.adw1.navigation_view.NavigationView],
+          otherwise they are displayed side by side.
+          
+          The [gid.adw1.navigation_split_view.NavigationSplitView.showContent] controls which child is
+          visible while collapsed.
+      Returns: Builder instance for fluent chaining
+  */
+  T collapsed(bool propval) nothrow
+  {
+    return setProperty("collapsed", propval);
+  }
+
+  /**
+      Set `content` property.
+      Params:
+        propval = The content widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T content(gid.adw1.navigation_page.NavigationPage propval) nothrow
+  {
+    return setProperty("content", propval);
+  }
+
+  /**
+      Set `maxSidebarWidth` property.
+      Params:
+        propval = The maximum sidebar width.
+          
+          Maximum width is affected by
+          [gid.adw1.navigation_split_view.NavigationSplitView.sidebarWidthUnit].
+          
+          The sidebar widget can still be allocated with larger width if its own
+          minimum width exceeds it.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxSidebarWidth(double propval) nothrow
+  {
+    return setProperty("max-sidebar-width", propval);
+  }
+
+  /**
+      Set `minSidebarWidth` property.
+      Params:
+        propval = The minimum sidebar width.
+          
+          Minimum width is affected by
+          [gid.adw1.navigation_split_view.NavigationSplitView.sidebarWidthUnit].
+          
+          The sidebar widget can still be allocated with larger width if its own
+          minimum width exceeds it.
+      Returns: Builder instance for fluent chaining
+  */
+  T minSidebarWidth(double propval) nothrow
+  {
+    return setProperty("min-sidebar-width", propval);
+  }
+
+  /**
+      Set `showContent` property.
+      Params:
+        propval = Determines the visible page when collapsed.
+          
+          If set to `TRUE`, the content widget will be the visible page when
+          [gid.adw1.navigation_split_view.NavigationSplitView.collapsed] is `TRUE`; otherwise the sidebar
+          widget will be visible.
+          
+          If the split view is already collapsed, the visible page changes
+          immediately.
+      Returns: Builder instance for fluent chaining
+  */
+  T showContent(bool propval) nothrow
+  {
+    return setProperty("show-content", propval);
+  }
+
+  /**
+      Set `sidebar` property.
+      Params:
+        propval = The sidebar widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T sidebar(gid.adw1.navigation_page.NavigationPage propval) nothrow
+  {
+    return setProperty("sidebar", propval);
+  }
+
+  /**
+      Set `sidebarPosition` property.
+      Params:
+        propval = The sidebar position.
+          
+          If set to [gid.gtk4.types.PackType.Start], the sidebar is displayed before the
+          content, and the sidebar will be the root page when collapsed.
+          
+          If set to [gid.gtk4.types.PackType.End], the sidebar is displayed after the
+          content, and the content will be the root page.
+      Returns: Builder instance for fluent chaining
+  */
+  T sidebarPosition(gid.gtk4.types.PackType propval) nothrow
+  {
+    return setProperty("sidebar-position", propval);
+  }
+
+  /**
+      Set `sidebarWidthFraction` property.
+      Params:
+        propval = The preferred sidebar width as a fraction of the total width.
+          
+          The preferred width is additionally limited by
+          [gid.adw1.navigation_split_view.NavigationSplitView.minSidebarWidth] and
+          [gid.adw1.navigation_split_view.NavigationSplitView.maxSidebarWidth].
+          
+          The sidebar widget can be allocated with larger width if its own minimum
+          width exceeds the preferred width.
+      Returns: Builder instance for fluent chaining
+  */
+  T sidebarWidthFraction(double propval) nothrow
+  {
+    return setProperty("sidebar-width-fraction", propval);
+  }
+
+  /**
+      Set `sidebarWidthUnit` property.
+      Params:
+        propval = The length unit for minimum and maximum sidebar widths.
+          
+          See [gid.adw1.navigation_split_view.NavigationSplitView.minSidebarWidth] and
+          [gid.adw1.navigation_split_view.NavigationSplitView.maxSidebarWidth].
+      Returns: Builder instance for fluent chaining
+  */
+  T sidebarWidthUnit(gid.adw1.types.LengthUnit propval) nothrow
+  {
+    return setProperty("sidebar-width-unit", propval);
+  }
+}
+
+/// Fluent builder for [gid.adw1.navigation_split_view.NavigationSplitView]
+final class NavigationSplitViewGidBuilder : NavigationSplitViewGidBuilderImpl!NavigationSplitViewGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  NavigationSplitView build() nothrow
+  {
+    return new NavigationSplitView(cast(void*)createGObject(NavigationSplitView._getGType), Yes.Take);
+  }
+}

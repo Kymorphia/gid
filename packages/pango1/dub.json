@@ -6,8 +6,8 @@
   "license": "MIT",
   "homepage": "https://gitlab.gnome.org/GNOME/pango",
   "targetType": "library",
-  "importPaths": [".", ".."],
-  "sourcePaths": ["pango"],
+  "importPaths": ["."],
+  "sourcePaths": ["gid"],
   "dependencies": {
     "gid:cairo1": "*",
     "gid:gio2": "*",

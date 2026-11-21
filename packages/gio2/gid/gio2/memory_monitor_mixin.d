@@ -1,0 +1,131 @@
+/// Module for [MemoryMonitor] interface mixin
+module gid.gio2.memory_monitor_mixin;
+
+public import gid.core.basictypes;
+public import gid.gio2.memory_monitor_iface_proxy;
+public import gid.core.gid;
+public import gid.gio2.c.functions;
+public import gid.gio2.c.types;
+public import gid.gio2.types;
+public import gid.gobject2.dclosure;
+public import gid.gobject2.gid_builder;
+public import gid.gobject2.object;
+
+/**
+    [gid.gio2.memory_monitor.MemoryMonitor] will monitor system memory and suggest to the application
+    when to free memory so as to leave more room for other applications.
+    It is implemented on Linux using the
+    [Low Memory Monitor](https://gitlab.freedesktop.org/hadess/low-memory-monitor/)
+    ([API documentation](https://hadess.pages.freedesktop.org/low-memory-monitor/)).
+    
+    There is also an implementation for use inside Flatpak sandboxes.
+    
+    Possible actions to take when the signal is received are:
+    
+     - Free caches
+     - Save files that haven’t been looked at in a while to disk, ready to be reopened when needed
+     - Run a garbage collection cycle
+     - Try and compress fragmented allocations
+     - Exit on idle if the process has no reason to stay around
+     - Call [`malloc_trim(3)`](man:malloc_trim(3)) to return cached heap pages to
+       the kernel (if supported by your libc)
+    
+    Note that some actions may not always improve system performance, and so
+    should be profiled for your application. `malloc_trim()`, for example, may
+    make future heap allocations slower (due to releasing cached heap pages back
+    to the kernel).
+    
+    See [gid.gio2.types.MemoryMonitorWarningLevel] for details on the various warning
+    levels.
+    
+    ```c
+    static void
+    warning_cb (GMemoryMonitor *m, GMemoryMonitorWarningLevel level)
+    {
+      g_debug ("Warning level: %d", level);
+      if (warning_level > G_MEMORY_MONITOR_WARNING_LEVEL_LOW)
+        drop_caches ();
+    }
+    
+    static GMemoryMonitor *
+    monitor_low_memory (void)
+    {
+      GMemoryMonitor *m;
+      m = g_memory_monitor_dup_default ();
+      g_signal_connect (G_OBJECT (m), "low-memory-warning",
+                        G_CALLBACK (warning_cb), NULL);
+      return m;
+    }
+    ```
+    
+    Don’t forget to disconnect the [gid.gio2.memory_monitor.MemoryMonitor.lowMemoryWarning]
+    signal, and unref the [gid.gio2.memory_monitor.MemoryMonitor] itself when exiting.
+*/
+template MemoryMonitorT()
+{
+
+
+  /**
+      Connect to `LowMemoryWarning` signal.
+  
+      Emitted when the system is running low on free memory.
+        
+        The signal
+        handler should then take the appropriate action depending on the
+        warning level. See the #GMemoryMonitorWarningLevel documentation for
+        details.
+        
+        Since the [gid.gio2.memory_monitor.MemoryMonitor] is a singleton, this signal will be
+        emitted in the [gid.glib2.main_context.MainContext.default_][global-default main
+        context].
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gio2.types.MemoryMonitorWarningLevel level, gid.gio2.memory_monitor.MemoryMonitor memoryMonitor)`
+  
+          `level` the #GMemoryMonitorWarningLevel warning level (optional)
+  
+          `memoryMonitor` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectLowMemoryWarning(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.gio2.types.MemoryMonitorWarningLevel)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gio2.memory_monitor.MemoryMonitor)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.memory_monitor.MemoryMonitor.lowMemoryWarning");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("low-memory-warning", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gio2.memory_monitor.MemoryMonitor]
+template MemoryMonitorGidBuilderT()
+{
+}

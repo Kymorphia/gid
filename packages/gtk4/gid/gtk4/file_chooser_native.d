@@ -1,0 +1,388 @@
+/// Module for [FileChooserNative] class
+module gid.gtk4.file_chooser_native;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.gid_builder;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.file_chooser;
+import gid.gtk4.file_chooser_mixin;
+import gid.gtk4.native_dialog;
+import gid.gtk4.types;
+import gid.gtk4.window;
+
+/**
+    [gid.gtk4.file_chooser_native.FileChooserNative] is an abstraction of a dialog suitable
+    for use with “File Open” or “File Save as” commands.
+    
+    By default, this just uses a [gid.gtk4.file_chooser_dialog.FileChooserDialog] to implement
+    the actual dialog. However, on some platforms, such as Windows and
+    macOS, the native platform file chooser is used instead. When the
+    application is running in a sandboxed environment without direct
+    filesystem access (such as Flatpak), [gid.gtk4.file_chooser_native.FileChooserNative] may call
+    the proper APIs (portals) to let the user choose a file and make it
+    available to the application.
+    
+    While the API of [gid.gtk4.file_chooser_native.FileChooserNative] closely mirrors [gid.gtk4.file_chooser_dialog.FileChooserDialog],
+    the main difference is that there is no access to any [gid.gtk4.window.Window] or [gid.gtk4.widget.Widget]
+    for the dialog. This is required, as there may not be one in the case of a
+    platform native dialog.
+    
+    Showing, hiding and running the dialog is handled by the
+    [gid.gtk4.native_dialog.NativeDialog] functions.
+    
+    Note that unlike [gid.gtk4.file_chooser_dialog.FileChooserDialog], [gid.gtk4.file_chooser_native.FileChooserNative] objects
+    are not toplevel widgets, and GTK does not keep them alive. It is your
+    responsibility to keep a reference until you are done with the
+    object.
+    
+    ## Typical usage
+    
+    In the simplest of cases, you can the following code to use
+    [gid.gtk4.file_chooser_native.FileChooserNative] to select a file for opening:
+    
+    ```c
+    static void
+    on_response (GtkNativeDialog *native,
+                 int              response)
+    {
+      if (response == GTK_RESPONSE_ACCEPT)
+        {
+          GtkFileChooser *chooser = GTK_FILE_CHOOSER (native);
+          GFile *file = gtk_file_chooser_get_file (chooser);
+    
+          open_file (file);
+    
+          g_object_unref (file);
+        }
+    
+      g_object_unref (native);
+    }
+    
+      // ...
+      GtkFileChooserNative *native;
+      GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
+    
+      native = gtk_file_chooser_native_new ("Open File",
+                                            parent_window,
+                                            action,
+                                            "_Open",
+                                            "_Cancel");
+    
+      g_signal_connect (native, "response", G_CALLBACK (on_response), NULL);
+      gtk_native_dialog_show (GTK_NATIVE_DIALOG (native));
+    ```
+    
+    To use a [gid.gtk4.file_chooser_native.FileChooserNative] for saving, you can use this:
+    
+    ```c
+    static void
+    on_response (GtkNativeDialog *native,
+                 int              response)
+    {
+      if (response == GTK_RESPONSE_ACCEPT)
+        {
+          GtkFileChooser *chooser = GTK_FILE_CHOOSER (native);
+          GFile *file = gtk_file_chooser_get_file (chooser);
+    
+          save_to_file (file);
+    
+          g_object_unref (file);
+        }
+    
+      g_object_unref (native);
+    }
+    
+      // ...
+      GtkFileChooserNative *native;
+      GtkFileChooser *chooser;
+      GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_SAVE;
+    
+      native = gtk_file_chooser_native_new ("Save File",
+                                            parent_window,
+                                            action,
+                                            "_Save",
+                                            "_Cancel");
+      chooser = GTK_FILE_CHOOSER (native);
+    
+      if (user_edited_a_new_document)
+        gtk_file_chooser_set_current_name (chooser, _("Untitled document"));
+      else
+        gtk_file_chooser_set_file (chooser, existing_file, NULL);
+    
+      g_signal_connect (native, "response", G_CALLBACK (on_response), NULL);
+      gtk_native_dialog_show (GTK_NATIVE_DIALOG (native));
+    ```
+    
+    For more information on how to best set up a file dialog,
+    see the [gid.gtk4.file_chooser_dialog.FileChooserDialog] documentation.
+    
+    ## Response Codes
+    
+    [gid.gtk4.file_chooser_native.FileChooserNative] inherits from [gid.gtk4.native_dialog.NativeDialog],
+    which means it will return [gid.gtk4.types.ResponseType.Accept] if the user accepted,
+    and [gid.gtk4.types.ResponseType.Cancel] if he pressed cancel. It can also return
+    [gid.gtk4.types.ResponseType.DeleteEvent] if the window was unexpectedly closed.
+    
+    ## Differences from [gid.gtk4.file_chooser_dialog.FileChooserDialog]
+    
+    There are a few things in the [gid.gtk4.file_chooser.FileChooser] interface that
+    are not possible to use with [gid.gtk4.file_chooser_native.FileChooserNative], as such use would
+    prohibit the use of a native dialog.
+    
+    No operations that change the dialog work while the dialog is visible.
+    Set all the properties that are required before showing the dialog.
+    
+    ## Win32 details
+    
+    On windows the `IFileDialog` implementation (added in Windows Vista) is
+    used. It supports many of the features that [gid.gtk4.file_chooser.FileChooser] has, but
+    there are some things it does not handle:
+    
+    * Any [gid.gtk4.file_filter.FileFilter] added using a mimetype
+    
+    If any of these features are used the regular [gid.gtk4.file_chooser_dialog.FileChooserDialog]
+    will be used in place of the native one.
+    
+    ## Portal details
+    
+    When the `org.freedesktop.portal.FileChooser` portal is available on
+    the session bus, it is used to bring up an out-of-process file chooser.
+    Depending on the kind of session the application is running in, this may
+    or may not be a GTK file chooser.
+    
+    ## macOS details
+    
+    On macOS the `NSSavePanel` and `NSOpenPanel` classes are used to provide
+    native file chooser dialogs. Some features provided by [gid.gtk4.file_chooser.FileChooser]
+    are not supported:
+    
+    * Shortcut folders.
+
+    Deprecated: Use [gid.gtk4.file_dialog.FileDialog] instead
+*/
+class FileChooserNative : gid.gtk4.native_dialog.NativeDialog, gid.gtk4.file_chooser.FileChooser
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_file_chooser_native_get_type != &gidSymbolNotFound ? gtk_file_chooser_native_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkFileChooserNative";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override FileChooserNative self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.file_chooser_native.FileChooserNative]
+      Returns: New builder object
+  */
+  static FileChooserNativeGidBuilder builder() nothrow
+  {
+    return new FileChooserNativeGidBuilder;
+  }
+
+  /**
+      Get `acceptLabel` property.
+      Returns: The text used for the label on the accept button in the dialog, or
+        null to use the default text.
+  */
+  @property string acceptLabel() nothrow
+  {
+    return getAcceptLabel();
+  }
+
+  /**
+      Set `acceptLabel` property.
+      Params:
+        propval = The text used for the label on the accept button in the dialog, or
+          null to use the default text.
+  */
+  @property void acceptLabel(string propval) nothrow
+  {
+    setAcceptLabel(propval);
+  }
+
+  /**
+      Get `cancelLabel` property.
+      Returns: The text used for the label on the cancel button in the dialog, or
+        null to use the default text.
+  */
+  @property string cancelLabel() nothrow
+  {
+    return getCancelLabel();
+  }
+
+  /**
+      Set `cancelLabel` property.
+      Params:
+        propval = The text used for the label on the cancel button in the dialog, or
+          null to use the default text.
+  */
+  @property void cancelLabel(string propval) nothrow
+  {
+    setCancelLabel(propval);
+  }
+
+  mixin FileChooserT!();
+
+  /**
+      Creates a new [gid.gtk4.file_chooser_native.FileChooserNative].
+  
+      Params:
+        title = Title of the native
+        parent = Transient parent of the native
+        action = Open or save mode for the dialog
+        acceptLabel = text to go in the accept button, or null for the default
+        cancelLabel = text to go in the cancel button, or null for the default
+      Returns: a new [gid.gtk4.file_chooser_native.FileChooserNative]
+  
+      Deprecated: Use [gid.gtk4.file_dialog.FileDialog] instead
+  */
+  this(string title, gid.gtk4.window.Window parent, gid.gtk4.types.FileChooserAction action, string acceptLabel = null, string cancelLabel = null) nothrow
+  {
+    GtkFileChooserNative* _cretval;
+    const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _acceptLabel = acceptLabel.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _cancelLabel = cancelLabel.toCString!(No.Malloc, Yes.Nullable);
+    _cretval = gtk_file_chooser_native_new(_title, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, action, _acceptLabel, _cancelLabel);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Retrieves the custom label text for the accept button.
+      Returns: The custom label
+  
+      Deprecated: Use [gid.gtk4.file_dialog.FileDialog] instead
+  */
+  string getAcceptLabel() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_file_chooser_native_get_accept_label(cast(GtkFileChooserNative*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Retrieves the custom label text for the cancel button.
+      Returns: The custom label
+  
+      Deprecated: Use [gid.gtk4.file_dialog.FileDialog] instead
+  */
+  string getCancelLabel() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_file_chooser_native_get_cancel_label(cast(GtkFileChooserNative*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Sets the custom label text for the accept button.
+      
+      If characters in label are preceded by an underscore, they are
+      underlined. If you need a literal underscore character in a label,
+      use “__” (two underscores). The first underlined character represents
+      a keyboard accelerator called a mnemonic.
+      
+      Pressing Alt and that key should activate the button.
+  
+      Params:
+        acceptLabel = custom label
+  
+      Deprecated: Use [gid.gtk4.file_dialog.FileDialog] instead
+  */
+  void setAcceptLabel(string acceptLabel = null) nothrow
+  {
+    const(char)* _acceptLabel = acceptLabel.toCString!(No.Malloc, Yes.Nullable);
+    gtk_file_chooser_native_set_accept_label(cast(GtkFileChooserNative*)this._cPtr, _acceptLabel);
+  }
+
+  /**
+      Sets the custom label text for the cancel button.
+      
+      If characters in label are preceded by an underscore, they are
+      underlined. If you need a literal underscore character in a label,
+      use “__” (two underscores). The first underlined character represents
+      a keyboard accelerator called a mnemonic.
+      
+      Pressing Alt and that key should activate the button.
+  
+      Params:
+        cancelLabel = custom label
+  
+      Deprecated: Use [gid.gtk4.file_dialog.FileDialog] instead
+  */
+  void setCancelLabel(string cancelLabel = null) nothrow
+  {
+    const(char)* _cancelLabel = cancelLabel.toCString!(No.Malloc, Yes.Nullable);
+    gtk_file_chooser_native_set_cancel_label(cast(GtkFileChooserNative*)this._cPtr, _cancelLabel);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.file_chooser_native.FileChooserNative]
+class FileChooserNativeGidBuilderImpl(T) : gid.gtk4.native_dialog.NativeDialogGidBuilderImpl!T, gid.gtk4.file_chooser.FileChooserGidBuilderImpl!T
+{
+
+  mixin FileChooserGidBuilderT!();
+
+  /**
+      Set `acceptLabel` property.
+      Params:
+        propval = The text used for the label on the accept button in the dialog, or
+          null to use the default text.
+      Returns: Builder instance for fluent chaining
+  */
+  T acceptLabel(string propval) nothrow
+  {
+    return setProperty("accept-label", propval);
+  }
+
+  /**
+      Set `cancelLabel` property.
+      Params:
+        propval = The text used for the label on the cancel button in the dialog, or
+          null to use the default text.
+      Returns: Builder instance for fluent chaining
+  */
+  T cancelLabel(string propval) nothrow
+  {
+    return setProperty("cancel-label", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk4.file_chooser_native.FileChooserNative]
+final class FileChooserNativeGidBuilder : FileChooserNativeGidBuilderImpl!FileChooserNativeGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  FileChooserNative build() nothrow
+  {
+    return new FileChooserNative(cast(void*)createGObject(FileChooserNative._getGType), Yes.Take);
+  }
+}

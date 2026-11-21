@@ -1,0 +1,133 @@
+/// Module for [VulkanContext] class
+module gid.gdk4.vulkan_context;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gdk4.c.functions;
+import gid.gdk4.c.types;
+import gid.gdk4.draw_context;
+import gid.gdk4.types;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+
+/**
+    Represents the platform-specific Vulkan draw context.
+    
+    [gid.gdk4.vulkan_context.VulkanContext]s are created for a surface using
+    [gid.gdk4.surface.Surface.createVulkanContext], and the context will match
+    the characteristics of the surface.
+    
+    Support for [gid.gdk4.vulkan_context.VulkanContext] is platform-specific and context creation
+    can fail, returning null context.
+
+    Deprecated: GTK does not expose any Vulkan internals. This
+        struct is a leftover that was accidentally exposed.
+*/
+class VulkanContext : gid.gdk4.draw_context.DrawContext
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gdk_vulkan_context_get_type != &gidSymbolNotFound ? gdk_vulkan_context_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkVulkanContext";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override VulkanContext self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gdk4.vulkan_context.VulkanContext]
+      Returns: New builder object
+  */
+  static VulkanContextGidBuilder builder() nothrow
+  {
+    return new VulkanContextGidBuilder;
+  }
+
+  /**
+      Connect to `ImagesUpdated` signal.
+  
+      Emitted when the images managed by this context have changed.
+        
+        Usually this means that the swapchain had to be recreated,
+        for example in response to a change of the surface size.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gdk4.vulkan_context.VulkanContext vulkanContext)`
+  
+          `vulkanContext` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectImagesUpdated(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gdk4.vulkan_context.VulkanContext)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gdk4.vulkan_context.VulkanContext.imagesUpdated");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("images-updated", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gdk4.vulkan_context.VulkanContext]
+class VulkanContextGidBuilderImpl(T) : gid.gdk4.draw_context.DrawContextGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gdk4.vulkan_context.VulkanContext]
+final class VulkanContextGidBuilder : VulkanContextGidBuilderImpl!VulkanContextGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  VulkanContext build() nothrow
+  {
+    return new VulkanContext(cast(void*)createGObject(VulkanContext._getGType), Yes.Take);
+  }
+}

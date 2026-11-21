@@ -1,0 +1,459 @@
+/// Module for [DragContext] class
+module gid.gdk3.drag_context;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gdk3.atom;
+import gid.gdk3.c.functions;
+import gid.gdk3.c.types;
+import gid.gdk3.device;
+import gid.gdk3.types;
+import gid.gdk3.window;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+
+/** */
+class DragContext : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gdk_drag_context_get_type != &gidSymbolNotFound ? gdk_drag_context_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkDragContext";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override DragContext self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gdk3.drag_context.DragContext]
+      Returns: New builder object
+  */
+  static DragContextGidBuilder builder() nothrow
+  {
+    return new DragContextGidBuilder;
+  }
+
+  /**
+      Determines the bitmask of actions proposed by the source if
+      [gid.gdk3.drag_context.DragContext.getSuggestedAction] returns [gid.gdk4.types.DragAction.Ask].
+      Returns: the #GdkDragAction flags
+  */
+  gid.gdk3.types.DragAction getActions() nothrow
+  {
+    GdkDragAction _cretval;
+    _cretval = gdk_drag_context_get_actions(cast(GdkDragContext*)this._cPtr);
+    gid.gdk3.types.DragAction _retval = cast(gid.gdk3.types.DragAction)_cretval;
+    return _retval;
+  }
+
+  /**
+      Returns the destination window for the DND operation.
+      Returns: a #GdkWindow
+  */
+  gid.gdk3.window.Window getDestWindow() nothrow
+  {
+    GdkWindow* _cretval;
+    _cretval = gdk_drag_context_get_dest_window(cast(GdkDragContext*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk3.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the #GdkDevice associated to the drag context.
+      Returns: The #GdkDevice associated to context.
+  */
+  gid.gdk3.device.Device getDevice() nothrow
+  {
+    GdkDevice* _cretval;
+    _cretval = gdk_drag_context_get_device(cast(GdkDragContext*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk3.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the window on which the drag icon should be rendered
+      during the drag operation. Note that the window may not be
+      available until the drag operation has begun. GDK will move
+      the window in accordance with the ongoing drag operation.
+      The window is owned by context and will be destroyed when
+      the drag operation is over.
+      Returns: the drag window, or null
+  */
+  gid.gdk3.window.Window getDragWindow() nothrow
+  {
+    GdkWindow* _cretval;
+    _cretval = gdk_drag_context_get_drag_window(cast(GdkDragContext*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk3.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the drag protocol that is used by this context.
+      Returns: the drag protocol
+  */
+  gid.gdk3.types.DragProtocol getProtocol() nothrow
+  {
+    GdkDragProtocol _cretval;
+    _cretval = gdk_drag_context_get_protocol(cast(GdkDragContext*)this._cPtr);
+    gid.gdk3.types.DragProtocol _retval = cast(gid.gdk3.types.DragProtocol)_cretval;
+    return _retval;
+  }
+
+  /**
+      Determines the action chosen by the drag destination.
+      Returns: a #GdkDragAction value
+  */
+  gid.gdk3.types.DragAction getSelectedAction() nothrow
+  {
+    GdkDragAction _cretval;
+    _cretval = gdk_drag_context_get_selected_action(cast(GdkDragContext*)this._cPtr);
+    gid.gdk3.types.DragAction _retval = cast(gid.gdk3.types.DragAction)_cretval;
+    return _retval;
+  }
+
+  /**
+      Returns the #GdkWindow where the DND operation started.
+      Returns: a #GdkWindow
+  */
+  gid.gdk3.window.Window getSourceWindow() nothrow
+  {
+    GdkWindow* _cretval;
+    _cretval = gdk_drag_context_get_source_window(cast(GdkDragContext*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk3.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Determines the suggested drag action of the context.
+      Returns: a #GdkDragAction value
+  */
+  gid.gdk3.types.DragAction getSuggestedAction() nothrow
+  {
+    GdkDragAction _cretval;
+    _cretval = gdk_drag_context_get_suggested_action(cast(GdkDragContext*)this._cPtr);
+    gid.gdk3.types.DragAction _retval = cast(gid.gdk3.types.DragAction)_cretval;
+    return _retval;
+  }
+
+  /**
+      Retrieves the list of targets of the context.
+      Returns: a #GList of targets
+  */
+  gid.gdk3.atom.Atom[] listTargets() nothrow
+  {
+    GList* _cretval;
+    _cretval = gdk_drag_context_list_targets(cast(GdkDragContext*)this._cPtr);
+    auto _retval = gListToD!(gid.gdk3.atom.Atom, GidOwnership.None)(cast(GList*)_cretval);
+    return _retval;
+  }
+
+  /**
+      Requests the drag and drop operation to be managed by context.
+      When a drag and drop operation becomes managed, the #GdkDragContext
+      will internally handle all input and source-side #GdkEventDND events
+      as required by the windowing system.
+      
+      Once the drag and drop operation is managed, the drag context will
+      emit the following signals:
+      - The #GdkDragContext::action-changed signal whenever the final action
+        to be performed by the drag and drop operation changes.
+      - The #GdkDragContext::drop-performed signal after the user performs
+        the drag and drop gesture (typically by releasing the mouse button).
+      - The #GdkDragContext::dnd-finished signal after the drag and drop
+        operation concludes (after all #GdkSelection transfers happen).
+      - The #GdkDragContext::cancel signal if the drag and drop operation is
+        finished but doesn't happen over an accepting destination, or is
+        cancelled through other means.
+  
+      Params:
+        ipcWindow = Window to use for IPC messaging/events
+        actions = the actions supported by the drag source
+      Returns: #TRUE if the drag and drop operation is managed.
+  */
+  bool manageDnd(gid.gdk3.window.Window ipcWindow, gid.gdk3.types.DragAction actions) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gdk_drag_context_manage_dnd(cast(GdkDragContext*)this._cPtr, ipcWindow ? cast(GdkWindow*)ipcWindow._cPtr(No.Dup) : null, actions);
+    return _retval;
+  }
+
+  /**
+      Associates a #GdkDevice to context, so all Drag and Drop events
+      for context are emitted as if they came from this device.
+  
+      Params:
+        device = a #GdkDevice
+  */
+  void setDevice(gid.gdk3.device.Device device) nothrow
+  {
+    gdk_drag_context_set_device(cast(GdkDragContext*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the position of the drag window that will be kept
+      under the cursor hotspot. Initially, the hotspot is at the
+      top left corner of the drag window.
+  
+      Params:
+        hotX = x coordinate of the drag window hotspot
+        hotY = y coordinate of the drag window hotspot
+  */
+  void setHotspot(int hotX, int hotY) nothrow
+  {
+    gdk_drag_context_set_hotspot(cast(GdkDragContext*)this._cPtr, hotX, hotY);
+  }
+
+  /**
+      Connect to `ActionChanged` signal.
+  
+      A new action is being chosen for the drag and drop operation.
+        
+        This signal will only be emitted if the #GdkDragContext manages
+        the drag and drop operation. See [gid.gdk3.drag_context.DragContext.manageDnd]
+        for more information.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gdk3.types.DragAction action, gid.gdk3.drag_context.DragContext dragContext)`
+  
+          `action` The action currently chosen (optional)
+  
+          `dragContext` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectActionChanged(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.gdk3.types.DragAction)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gdk3.drag_context.DragContext)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gdk3.drag_context.DragContext.actionChanged");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("action-changed", closure, after);
+  }
+
+  /**
+      Connect to `Cancel` signal.
+  
+      The drag and drop operation was cancelled.
+        
+        This signal will only be emitted if the #GdkDragContext manages
+        the drag and drop operation. See [gid.gdk3.drag_context.DragContext.manageDnd]
+        for more information.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gdk3.types.DragCancelReason reason, gid.gdk3.drag_context.DragContext dragContext)`
+  
+          `reason` The reason the context was cancelled (optional)
+  
+          `dragContext` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectCancel(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.gdk3.types.DragCancelReason)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gdk3.drag_context.DragContext)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gdk3.drag_context.DragContext.cancel");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("cancel", closure, after);
+  }
+
+  /**
+      Connect to `DndFinished` signal.
+  
+      The drag and drop operation was finished, the drag destination
+        finished reading all data. The drag source can now free all
+        miscellaneous data.
+        
+        This signal will only be emitted if the #GdkDragContext manages
+        the drag and drop operation. See [gid.gdk3.drag_context.DragContext.manageDnd]
+        for more information.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gdk3.drag_context.DragContext dragContext)`
+  
+          `dragContext` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectDndFinished(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gdk3.drag_context.DragContext)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gdk3.drag_context.DragContext.dndFinished");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("dnd-finished", closure, after);
+  }
+
+  /**
+      Connect to `DropPerformed` signal.
+  
+      The drag and drop operation was performed on an accepting client.
+        
+        This signal will only be emitted if the #GdkDragContext manages
+        the drag and drop operation. See [gid.gdk3.drag_context.DragContext.manageDnd]
+        for more information.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(int time, gid.gdk3.drag_context.DragContext dragContext)`
+  
+          `time` the time at which the drop happened. (optional)
+  
+          `dragContext` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectDropPerformed(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == int)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gdk3.drag_context.DragContext)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gdk3.drag_context.DragContext.dropPerformed");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("drop-performed", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gdk3.drag_context.DragContext]
+class DragContextGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gdk3.drag_context.DragContext]
+final class DragContextGidBuilder : DragContextGidBuilderImpl!DragContextGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  DragContext build() nothrow
+  {
+    return new DragContext(cast(void*)createGObject(DragContext._getGType), Yes.Take);
+  }
+}

@@ -1,0 +1,953 @@
+/// Module for [Parser] class
+module gid.json1.parser;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gio2.async_result;
+import gid.gio2.cancellable;
+import gid.gio2.input_stream;
+import gid.gio2.types;
+import gid.glib2.error;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.json1.array;
+import gid.json1.c.functions;
+import gid.json1.c.types;
+import gid.json1.node;
+import gid.json1.object;
+import gid.json1.types;
+
+/**
+    [gid.json1.parser.Parser] provides an object for parsing a JSON data stream, either
+    inside a file or inside a static buffer.
+    
+    ## Using [gid.json1.parser.Parser]
+    
+    The [gid.json1.parser.Parser] API is fairly simple:
+    
+    ```c
+    gboolean
+    parse_json (const char *filename)
+    {
+      g_autoptr(JsonParser) parser = json_parser_new ();
+      g_autoptr(GError) error = NULL
+    
+      json_parser_load_from_file (parser, filename, &error);
+      if (error != NULL)
+        {
+          g_critical ("Unable to parse '%s': %s", filename, error->message);
+          return FALSE;
+        }
+    
+      g_autoptr(JsonNode) root = json_parser_get_root (parser);
+    
+      // manipulate the object tree from the root node
+    
+      return TRUE
+    }
+    ```
+    
+    By default, the entire process of loading the data and parsing it is
+    synchronous; the [gid.json1.parser.Parser.loadFromStreamAsync] API will
+    load the data asynchronously, but parse it in the main context as the
+    signals of the parser must be emitted in the same thread. If you do
+    not use signals, and you wish to also parse the JSON data without blocking,
+    you should use a [gid.gio2.task.Task] and the synchronous [gid.json1.parser.Parser] API inside the
+    task itself.
+*/
+class Parser : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())json_parser_get_type != &gidSymbolNotFound ? json_parser_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "JsonParser";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Parser self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.json1.parser.Parser]
+      Returns: New builder object
+  */
+  static ParserGidBuilder builder() nothrow
+  {
+    return new ParserGidBuilder;
+  }
+
+  /**
+      Get `immutable_` property.
+      Returns: Whether the tree built by the parser should be immutable
+        when created.
+        
+        Making the output immutable on creation avoids the expense
+        of traversing it to make it immutable later.
+  */
+  @property bool immutable_() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("immutable");
+  }
+
+  /**
+      Get `strict` property.
+      Returns: Whether the parser should be strictly conforming to the
+        JSON format, or allow custom extensions like comments.
+  */
+  @property bool strict() nothrow
+  {
+    return getStrict();
+  }
+
+  /**
+      Set `strict` property.
+      Params:
+        propval = Whether the parser should be strictly conforming to the
+          JSON format, or allow custom extensions like comments.
+  */
+  @property void strict(bool propval) nothrow
+  {
+    setStrict(propval);
+  }
+
+  /**
+      Creates a new JSON parser.
+      
+      You can use the [gid.json1.parser.Parser] to load a JSON stream from either a file or a
+      buffer and then walk the hierarchy using the data types API.
+      Returns: the newly created parser
+  */
+  this() nothrow
+  {
+    JsonParser* _cretval;
+    _cretval = json_parser_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Creates a new parser instance with its [gid.json1.parser.Parser.immutable_]
+      property set to `TRUE` to create immutable output trees.
+      Returns: the newly created parser
+  */
+  static gid.json1.parser.Parser newImmutable() nothrow
+  {
+    JsonParser* _cretval;
+    _cretval = json_parser_new_immutable();
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.json1.parser.Parser)(cast(JsonParser*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Retrieves the line currently parsed, starting from 1.
+      
+      This function has defined behaviour only while parsing; calling this
+      function from outside the signal handlers emitted by the parser will
+      yield 0.
+      Returns: the currently parsed line, or 0.
+  */
+  uint getCurrentLine() nothrow
+  {
+    uint _retval;
+    _retval = json_parser_get_current_line(cast(JsonParser*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves the current position inside the current line, starting
+      from 0.
+      
+      This function has defined behaviour only while parsing; calling this
+      function from outside the signal handlers emitted by the parser will
+      yield 0.
+      Returns: the position in the current line, or 0.
+  */
+  uint getCurrentPos() nothrow
+  {
+    uint _retval;
+    _retval = json_parser_get_current_pos(cast(JsonParser*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves the top level node from the parsed JSON stream.
+      
+      If the parser input was an empty string, or if parsing failed, the root
+      will be `NULL`. It will also be `NULL` if it has been stolen using
+      [gid.json1.parser.Parser.stealRoot].
+      Returns: the root node.
+  */
+  gid.json1.node.Node getRoot() nothrow
+  {
+    JsonNode* _cretval;
+    _cretval = json_parser_get_root(cast(JsonParser*)this._cPtr);
+    auto _retval = _cretval ? new gid.json1.node.Node(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Retrieves whether the parser is operating in strict mode.
+      Returns: true if the parser is strict, and false otherwise
+  */
+  bool getStrict() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)json_parser_get_strict(cast(JsonParser*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      A JSON data stream might sometimes contain an assignment, like:
+      
+      ```
+      var _json_data = { "member_name" : [ ...
+      ```
+      
+      even though it would technically constitute a violation of the RFC.
+      
+      [gid.json1.parser.Parser] will ignore the left hand identifier and parse the right
+      hand value of the assignment. [gid.json1.parser.Parser] will record, though, the
+      existence of the assignment in the data stream and the variable name
+      used.
+  
+      Params:
+        variableName = the variable name
+      Returns: `TRUE` if there was an assignment, and `FALSE` otherwise
+  */
+  bool hasAssignment(out string variableName) nothrow
+  {
+    bool _retval;
+    char* _variableName;
+    _retval = cast(bool)json_parser_has_assignment(cast(JsonParser*)this._cPtr, &_variableName);
+    variableName = _variableName.fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Loads a JSON stream from a buffer and parses it.
+      
+      You can call this function multiple times with the same parser, but the
+      contents of the parser will be destroyed each time.
+  
+      Params:
+        data = the buffer to parse
+      Returns: `TRUE` if the buffer was succesfully parsed
+      Throws: [ErrorWrap]
+  */
+  bool loadFromData(string data)
+  {
+    bool _retval;
+    ptrdiff_t _length;
+    if (data)
+      _length = cast(ptrdiff_t)data.length;
+
+    auto _data = cast(char*)data.ptr;
+    GError *_err;
+    _retval = cast(bool)json_parser_load_from_data(cast(JsonParser*)this._cPtr, _data, _length, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Loads a JSON stream from the content of `filename` and parses it.
+      
+      If the file is large or shared between processes,
+      [gid.json1.parser.Parser.loadFromMappedFile] may be a more efficient
+      way to load it.
+      
+      See also: [gid.json1.parser.Parser.loadFromData]
+  
+      Params:
+        filename = the path for the file to parse
+      Returns: `TRUE` if the file was successfully loaded and parsed.
+      Throws: [ErrorWrap]
+  */
+  bool loadFromFile(string filename)
+  {
+    bool _retval;
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
+    GError *_err;
+    _retval = cast(bool)json_parser_load_from_file(cast(JsonParser*)this._cPtr, _filename, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Loads a JSON stream from the content of `filename` and parses it.
+      
+      Unlike [gid.json1.parser.Parser.loadFromFile], `filename` will be memory
+      mapped as read-only and parsed. `filename` will be unmapped before this
+      function returns.
+      
+      If mapping or reading the file fails, a `G_FILE_ERROR` will be returned.
+  
+      Params:
+        filename = the path for the file to parse
+      Returns: `TRUE` if the file was successfully loaded and parsed.
+      Throws: [ErrorWrap]
+  */
+  bool loadFromMappedFile(string filename)
+  {
+    bool _retval;
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
+    GError *_err;
+    _retval = cast(bool)json_parser_load_from_mapped_file(cast(JsonParser*)this._cPtr, _filename, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Loads the contents of an input stream and parses them.
+      
+      If `cancellable` is not `NULL`, then the operation can be cancelled by
+      triggering the cancellable object from another thread. If the
+      operation was cancelled, [gid.gio2.types.IOErrorEnum.Cancelled] will be set
+      on the given `error`.
+  
+      Params:
+        stream = the input stream with the JSON data
+        cancellable = a #GCancellable
+      Returns: `TRUE` if the data stream was successfully read and
+          parsed, and `FALSE` otherwise
+      Throws: [ErrorWrap]
+  */
+  bool loadFromStream(gid.gio2.input_stream.InputStream stream, gid.gio2.cancellable.Cancellable cancellable = null)
+  {
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)json_parser_load_from_stream(cast(JsonParser*)this._cPtr, stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Asynchronously reads the contents of a stream.
+      
+      For more details, see [gid.json1.parser.Parser.loadFromStream], which is the
+      synchronous version of this call.
+      
+      When the operation is finished, callback will be called. You should
+      then call [gid.json1.parser.Parser.loadFromStreamFinish] to get the result
+      of the operation.
+  
+      Params:
+        stream = the input stream with the JSON data
+        cancellable = a #GCancellable
+        callback = the function to call when the request is satisfied
+  */
+  void loadFromStreamAsync(gid.gio2.input_stream.InputStream stream, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null) nothrow
+  {
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    json_parser_load_from_stream_async(cast(JsonParser*)this._cPtr, stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Finishes an asynchronous stream loading started with
+      [gid.json1.parser.Parser.loadFromStreamAsync].
+  
+      Params:
+        result = the result of the asynchronous operation
+      Returns: `TRUE` if the content of the stream was successfully retrieved
+          and parsed, and `FALSE` otherwise
+      Throws: [ErrorWrap]
+  */
+  bool loadFromStreamFinish(gid.gio2.async_result.AsyncResult result)
+  {
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)json_parser_load_from_stream_finish(cast(JsonParser*)this._cPtr, result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Sets whether the parser should operate in strict mode.
+      
+      If strict is true, [gid.json1.parser.Parser] will strictly conform to
+      the JSON format.
+      
+      If strict is false, [gid.json1.parser.Parser] will allow custom extensions
+      to the JSON format, like comments.
+  
+      Params:
+        strict = whether the parser should be strict
+  */
+  void setStrict(bool strict) nothrow
+  {
+    json_parser_set_strict(cast(JsonParser*)this._cPtr, strict);
+  }
+
+  /**
+      Steals the top level node from the parsed JSON stream.
+      
+      This will be `NULL` in the same situations as [gid.json1.parser.Parser.getRoot]
+      return `NULL`.
+      Returns: the root node
+  */
+  gid.json1.node.Node stealRoot() nothrow
+  {
+    JsonNode* _cretval;
+    _cretval = json_parser_steal_root(cast(JsonParser*)this._cPtr);
+    auto _retval = _cretval ? new gid.json1.node.Node(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Connect to `ArrayElement` signal.
+  
+      The `::array-element` signal is emitted each time a parser
+        has successfully parsed a single element of a JSON array.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.json1.array.Array array, int index, gid.json1.parser.Parser parser)`
+  
+          `array` a JSON array (optional)
+  
+          `index` the index of the newly parsed array element (optional)
+  
+          `parser` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  
+      Deprecated: Derive your own parser type from [gid.json1.parser.Parser] and
+          override the `vfuncJson.Parser.array_element` virtual function
+  */
+  gulong connectArrayElement(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.json1.array.Array)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == int)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gid.json1.parser.Parser)))
+  && Parameters!T.length < 4)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 3, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.json1.parser.Parser.arrayElement");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("array-element", closure, after);
+  }
+
+  /**
+      Connect to `ArrayEnd` signal.
+  
+      The `::array-end` signal is emitted each time a parser
+        has successfully parsed an entire JSON array.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.json1.array.Array array, gid.json1.parser.Parser parser)`
+  
+          `array` the parsed JSON array (optional)
+  
+          `parser` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  
+      Deprecated: Derive your own parser type from [gid.json1.parser.Parser] and
+          override the `vfuncJson.Parser.array_end` virtual function
+  */
+  gulong connectArrayEnd(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.json1.array.Array)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.json1.parser.Parser)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.json1.parser.Parser.arrayEnd");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("array-end", closure, after);
+  }
+
+  /**
+      Connect to `ArrayStart` signal.
+  
+      The `::array-start` signal is emitted each time a parser
+        starts parsing a JSON array.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.json1.parser.Parser parser)`
+  
+          `parser` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  
+      Deprecated: Derive your own parser type from [gid.json1.parser.Parser] and
+          override the `vfuncJson.Parser.array_start` virtual function
+  */
+  gulong connectArrayStart(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.json1.parser.Parser)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.json1.parser.Parser.arrayStart");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("array-start", closure, after);
+  }
+
+  /**
+      Connect to `Error` signal.
+  
+      The `::error` signal is emitted each time a parser encounters
+        an error in a JSON stream.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(void* error, gid.json1.parser.Parser parser)`
+  
+          `error` the error (optional)
+  
+          `parser` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  
+      Deprecated: Derive your own parser type from [gid.json1.parser.Parser] and
+          override the `vfuncJson.Parser.error` virtual function
+  */
+  gulong connectError(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == void*)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.json1.parser.Parser)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.json1.parser.Parser.error");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("error", closure, after);
+  }
+
+  /**
+      Connect to `ObjectEnd` signal.
+  
+      The `::object-end` signal is emitted each time a parser
+        has successfully parsed an entire JSON object.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.json1.object.ObjectWrap object, gid.json1.parser.Parser parser)`
+  
+          `object` the parsed JSON object (optional)
+  
+          `parser` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  
+      Deprecated: Derive your own parser type from [gid.json1.parser.Parser] and
+          override the `vfuncJson.Parser.object_end` virtual function
+  */
+  gulong connectObjectEnd(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.json1.object.ObjectWrap)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.json1.parser.Parser)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.json1.parser.Parser.objectEnd");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("object-end", closure, after);
+  }
+
+  /**
+      Connect to `ObjectMember` signal.
+  
+      The `::object-member` signal is emitted each time a parser
+        has successfully parsed a single member of a JSON object.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.json1.object.ObjectWrap object, string memberName, gid.json1.parser.Parser parser)`
+  
+          `object` the JSON object being parsed (optional)
+  
+          `memberName` the name of the newly parsed member (optional)
+  
+          `parser` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  
+      Deprecated: Derive your own parser type from [gid.json1.parser.Parser] and
+          override the `vfuncJson.Parser.object_member` virtual function
+  */
+  gulong connectObjectMember(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.json1.object.ObjectWrap)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == string)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gid.json1.parser.Parser)))
+  && Parameters!T.length < 4)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 3, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.json1.parser.Parser.objectMember");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("object-member", closure, after);
+  }
+
+  /**
+      Connect to `ObjectStart` signal.
+  
+      This signal is emitted each time a parser starts parsing a JSON object.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.json1.parser.Parser parser)`
+  
+          `parser` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  
+      Deprecated: Derive your own parser type from [gid.json1.parser.Parser] and
+          override the `vfuncJson.Parser.object_start` virtual function
+  */
+  gulong connectObjectStart(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.json1.parser.Parser)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.json1.parser.Parser.objectStart");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("object-start", closure, after);
+  }
+
+  /**
+      Connect to `ParseEnd` signal.
+  
+      This signal is emitted when a parser successfully finished parsing a
+        JSON data stream.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.json1.parser.Parser parser)`
+  
+          `parser` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  
+      Deprecated: Derive your own parser type from [gid.json1.parser.Parser] and
+          override the `vfuncJson.Parser.parse_end` virtual function
+  */
+  gulong connectParseEnd(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.json1.parser.Parser)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.json1.parser.Parser.parseEnd");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("parse-end", closure, after);
+  }
+
+  /**
+      Connect to `ParseStart` signal.
+  
+      This signal is emitted when a parser starts parsing a JSON data stream.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.json1.parser.Parser parser)`
+  
+          `parser` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  
+      Deprecated: Derive your own parser type from [gid.json1.parser.Parser] and
+          override the `vfuncJson.Parser.parse_start` virtual function
+  */
+  gulong connectParseStart(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.json1.parser.Parser)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.json1.parser.Parser.parseStart");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("parse-start", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.json1.parser.Parser]
+class ParserGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `immutable_` property.
+      Params:
+        propval = Whether the tree built by the parser should be immutable
+          when created.
+          
+          Making the output immutable on creation avoids the expense
+          of traversing it to make it immutable later.
+      Returns: Builder instance for fluent chaining
+  */
+  T immutable_(bool propval) nothrow
+  {
+    return setProperty("immutable", propval);
+  }
+
+  /**
+      Set `strict` property.
+      Params:
+        propval = Whether the parser should be strictly conforming to the
+          JSON format, or allow custom extensions like comments.
+      Returns: Builder instance for fluent chaining
+  */
+  T strict(bool propval) nothrow
+  {
+    return setProperty("strict", propval);
+  }
+}
+
+/// Fluent builder for [gid.json1.parser.Parser]
+final class ParserGidBuilder : ParserGidBuilderImpl!ParserGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Parser build() nothrow
+  {
+    return new Parser(cast(void*)createGObject(Parser._getGType), Yes.Take);
+  }
+}

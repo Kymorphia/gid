@@ -104,9 +104,9 @@
       pbaseDir = input base direction, and output resolved direction
     Returns: the embedding levels, one item per character (not byte)
 */
-ubyte[] log2visGetEmbeddingLevels(string text, ref pango.types.Direction pbaseDir) nothrow
+ubyte[] log2visGetEmbeddingLevels(string text, ref gid.pango1.types.Direction pbaseDir) nothrow
 {
-  import glib.c.functions : g_free, g_utf8_strlen;
+  import gid.glib2.c.functions : g_free, g_utf8_strlen;
 
   auto nChars = text.length > 0 ? g_utf8_strlen(text.ptr, text.length) : 0; // Same count as Pango uses for the array
   auto _cretval = pango_log2vis_get_embedding_levels(text.length > 0 ? text.ptr : "".ptr, cast(int)text.length, &pbaseDir);
@@ -121,7 +121,7 @@ ubyte[] log2visGetEmbeddingLevels(string text, ref pango.types.Direction pbaseDi
       Given a glyph item and the corresponding text, determine the width corresponding to each character.
       When multiple characters compose a single cluster, the width of the entire cluster is divided equally among the
       characters.
-      See also [pango.glyph_string.GlyphString.getLogicalWidths].
+      See also [gid.pango1.glyph_string.GlyphString.getLogicalWidths].
       Params:
         text = text that the glyph item corresponds to (the item offset is an offset from the start of text)
       Returns: the logical widths, one for each character of the item, or null if text is too short for the item
@@ -144,12 +144,12 @@ ubyte[] log2visGetEmbeddingLevels(string text, ref pango.types.Direction pbaseDi
         text = text that the glyph item corresponds to (the item offset is an offset from the start of text)
         logAttrs = logical attributes for the item, the first logical attribute refers to the position before the first
           character in the item (at least the item's number of characters + 1 elements, see
-          [pango.global.getLogAttrs] and [pango.layout.Layout.getLogAttrsReadonly])
+          [gid.pango1.global.getLogAttrs] and [gid.pango1.layout.Layout.getLogAttrsReadonly])
         letterSpacing = amount of letter spacing to add in Pango units, may be negative, though too large negative
           values will give ugly results
       Returns: true on success, false if text or logAttrs is too short for the item (nothing is done)
   */
-  bool letterSpace(string text, pango.types.LogAttr[] logAttrs, int letterSpacing) nothrow
+  bool letterSpace(string text, gid.pango1.types.LogAttr[] logAttrs, int letterSpacing) nothrow
   {
     auto item = (cast(PangoGlyphItem*)this._cPtr).item;
 
@@ -166,7 +166,7 @@ ubyte[] log2visGetEmbeddingLevels(string text, ref pango.types.Direction pbaseDi
       Given a glyph string and corresponding text, determine the width corresponding to each character.
       When multiple characters compose a single cluster, the width of the entire cluster is divided equally among the
       characters.
-      See also [pango.glyph_item.GlyphItem.getLogicalWidths].
+      See also [gid.pango1.glyph_item.GlyphItem.getLogicalWidths].
       Params:
         text = the text corresponding to the glyphs
         embeddingLevel = the embedding level of the string
@@ -193,14 +193,14 @@ ubyte[] log2visGetEmbeddingLevels(string text, ref pango.types.Direction pbaseDi
 //!class TabArray
 
   /**
-      Get the alignments and locations of the tab stops, arrays of length [pango.tab_array.TabArray.getSize].
+      Get the alignments and locations of the tab stops, arrays of length [gid.pango1.tab_array.TabArray.getSize].
       Params:
         alignments = Output tab stop alignments
         locations = Output tab stop locations
   */
-  void getTabs(out pango.types.TabAlign[] alignments, out int[] locations) nothrow
+  void getTabs(out gid.pango1.types.TabAlign[] alignments, out int[] locations) nothrow
   {
-    import glib.c.functions : g_free;
+    import gid.glib2.c.functions : g_free;
 
     PangoTabAlign* _alignments;
     int* _locations;

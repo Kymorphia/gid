@@ -1,0 +1,73 @@
+/// Module for [TreeNode] class
+module gid.glib2.tree_node;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.glib2.c.functions;
+import gid.glib2.c.types;
+import gid.glib2.types;
+
+/**
+    An opaque type which identifies a specific node in a #GTree.
+*/
+class TreeNode : OpaqueWrap!(GTreeNode*, void, void)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /**
+      Gets the key stored at a particular tree node.
+      Returns: the key at the node.
+  */
+  void* key() nothrow
+  {
+    auto _retval = g_tree_node_key(cast(GTreeNode*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the next in-order node of the tree, or null
+      if the passed node was already the last one.
+      Returns: the next node in the tree
+  */
+  gid.glib2.tree_node.TreeNode next() nothrow
+  {
+    GTreeNode* _cretval;
+    _cretval = g_tree_node_next(cast(GTreeNode*)this._cPtr);
+    auto _retval = _cretval ? new gid.glib2.tree_node.TreeNode(cast(GTreeNode*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns the previous in-order node of the tree, or null
+      if the passed node was already the first one.
+      Returns: the previous node in the tree
+  */
+  gid.glib2.tree_node.TreeNode previous() nothrow
+  {
+    GTreeNode* _cretval;
+    _cretval = g_tree_node_previous(cast(GTreeNode*)this._cPtr);
+    auto _retval = _cretval ? new gid.glib2.tree_node.TreeNode(cast(GTreeNode*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the value stored at a particular tree node.
+      Returns: the value at the node.
+  */
+  void* value() nothrow
+  {
+    auto _retval = g_tree_node_value(cast(GTreeNode*)this._cPtr);
+    return _retval;
+  }
+}

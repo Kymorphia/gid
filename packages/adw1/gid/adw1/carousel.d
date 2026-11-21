@@ -1,0 +1,746 @@
+/// Module for [Carousel] class
+module gid.adw1.carousel;
+
+public import gid.core.basictypes;
+import gid.adw1.c.functions;
+import gid.adw1.c.types;
+import gid.adw1.spring_params;
+import gid.adw1.swipeable;
+import gid.adw1.swipeable_mixin;
+import gid.adw1.types;
+import gid.core.gid;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.accessible;
+import gid.gtk4.accessible_mixin;
+import gid.gtk4.buildable;
+import gid.gtk4.buildable_mixin;
+import gid.gtk4.constraint_target;
+import gid.gtk4.constraint_target_mixin;
+import gid.gtk4.orientable;
+import gid.gtk4.orientable_mixin;
+import gid.gtk4.widget;
+
+/**
+    A paginated scrolling widget.
+    
+    <picture>
+      <source srcset="carousel-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="carousel.png" alt="carousel">
+    </picture>
+    
+    The [gid.adw1.carousel.Carousel] widget can be used to display a set of pages with
+    swipe-based navigation between them.
+    
+    [gid.adw1.carousel_indicator_dots.CarouselIndicatorDots] and [gid.adw1.carousel_indicator_lines.CarouselIndicatorLines] can be used
+    to provide page indicators for [gid.adw1.carousel.Carousel].
+    
+    ## CSS nodes
+    
+    [gid.adw1.carousel.Carousel] has a single CSS node with name `carousel`.
+*/
+class Carousel : gid.gtk4.widget.Widget, gid.adw1.swipeable.Swipeable, gid.gtk4.orientable.Orientable
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())adw_carousel_get_type != &gidSymbolNotFound ? adw_carousel_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwCarousel";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Carousel self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.adw1.carousel.Carousel]
+      Returns: New builder object
+  */
+  static CarouselGidBuilder builder() nothrow
+  {
+    return new CarouselGidBuilder;
+  }
+
+  /**
+      Get `allowLongSwipes` property.
+      Returns: Whether to allow swiping for more than one page at a time.
+        
+        If the value is `FALSE`, each swipe can only move to the adjacent pages.
+  */
+  @property bool allowLongSwipes() nothrow
+  {
+    return getAllowLongSwipes();
+  }
+
+  /**
+      Set `allowLongSwipes` property.
+      Params:
+        propval = Whether to allow swiping for more than one page at a time.
+          
+          If the value is `FALSE`, each swipe can only move to the adjacent pages.
+  */
+  @property void allowLongSwipes(bool propval) nothrow
+  {
+    setAllowLongSwipes(propval);
+  }
+
+  /**
+      Get `allowMouseDrag` property.
+      Returns: Sets whether the [gid.adw1.carousel.Carousel] can be dragged with mouse pointer.
+        
+        If the value is `FALSE`, dragging is only available on touch.
+  */
+  @property bool allowMouseDrag() nothrow
+  {
+    return getAllowMouseDrag();
+  }
+
+  /**
+      Set `allowMouseDrag` property.
+      Params:
+        propval = Sets whether the [gid.adw1.carousel.Carousel] can be dragged with mouse pointer.
+          
+          If the value is `FALSE`, dragging is only available on touch.
+  */
+  @property void allowMouseDrag(bool propval) nothrow
+  {
+    setAllowMouseDrag(propval);
+  }
+
+  /**
+      Get `allowScrollWheel` property.
+      Returns: Whether the widget will respond to scroll wheel events.
+        
+        If the value is `FALSE`, wheel events will be ignored.
+  */
+  @property bool allowScrollWheel() nothrow
+  {
+    return getAllowScrollWheel();
+  }
+
+  /**
+      Set `allowScrollWheel` property.
+      Params:
+        propval = Whether the widget will respond to scroll wheel events.
+          
+          If the value is `FALSE`, wheel events will be ignored.
+  */
+  @property void allowScrollWheel(bool propval) nothrow
+  {
+    setAllowScrollWheel(propval);
+  }
+
+  /**
+      Get `interactive` property.
+      Returns: Whether the carousel can be navigated.
+        
+        This can be used to temporarily disable the carousel to only allow
+        navigating it in a certain state.
+  */
+  @property bool interactive() nothrow
+  {
+    return getInteractive();
+  }
+
+  /**
+      Set `interactive` property.
+      Params:
+        propval = Whether the carousel can be navigated.
+          
+          This can be used to temporarily disable the carousel to only allow
+          navigating it in a certain state.
+  */
+  @property void interactive(bool propval) nothrow
+  {
+    setInteractive(propval);
+  }
+
+  /**
+      Get `nPages` property.
+      Returns: The number of pages in a [gid.adw1.carousel.Carousel].
+  */
+  @property uint nPages() nothrow
+  {
+    return getNPages();
+  }
+
+  /**
+      Get `position` property.
+      Returns: Current scrolling position, unitless.
+        
+        1 matches 1 page. Use [gid.adw1.carousel.Carousel.scrollTo] for changing it.
+  */
+  @property double position() nothrow
+  {
+    return getPosition();
+  }
+
+  /**
+      Get `revealDuration` property.
+      Returns: Page reveal duration, in milliseconds.
+        
+        Reveal duration is used when animating adding or removing pages.
+  */
+  @property uint revealDuration() nothrow
+  {
+    return getRevealDuration();
+  }
+
+  /**
+      Set `revealDuration` property.
+      Params:
+        propval = Page reveal duration, in milliseconds.
+          
+          Reveal duration is used when animating adding or removing pages.
+  */
+  @property void revealDuration(uint propval) nothrow
+  {
+    setRevealDuration(propval);
+  }
+
+  /**
+      Get `scrollParams` property.
+      Returns: Scroll animation spring parameters.
+        
+        The default value is equivalent to:
+        
+        ```c
+        adw_spring_params_new (1, 0.5, 500)
+        ```
+  */
+  @property gid.adw1.spring_params.SpringParams scrollParams() nothrow
+  {
+    return getScrollParams();
+  }
+
+  /**
+      Set `scrollParams` property.
+      Params:
+        propval = Scroll animation spring parameters.
+          
+          The default value is equivalent to:
+          
+          ```c
+          adw_spring_params_new (1, 0.5, 500)
+          ```
+  */
+  @property void scrollParams(gid.adw1.spring_params.SpringParams propval) nothrow
+  {
+    setScrollParams(propval);
+  }
+
+  /**
+      Get `spacing` property.
+      Returns: Spacing between pages in pixels.
+  */
+  @property uint spacing() nothrow
+  {
+    return getSpacing();
+  }
+
+  /**
+      Set `spacing` property.
+      Params:
+        propval = Spacing between pages in pixels.
+  */
+  @property void spacing(uint propval) nothrow
+  {
+    setSpacing(propval);
+  }
+
+  mixin SwipeableT!();
+  mixin OrientableT!();
+
+  /**
+      Creates a new [gid.adw1.carousel.Carousel].
+      Returns: the newly created [gid.adw1.carousel.Carousel]
+  */
+  this() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = adw_carousel_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Appends child to self.
+  
+      Params:
+        child = a widget to add
+  */
+  void append(gid.gtk4.widget.Widget child) nothrow
+  {
+    adw_carousel_append(cast(AdwCarousel*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Gets whether to allow swiping for more than one page at a time.
+      Returns: `TRUE` if long swipes are allowed
+  */
+  bool getAllowLongSwipes() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_carousel_get_allow_long_swipes(cast(AdwCarousel*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Sets whether self can be dragged with mouse pointer.
+      Returns: whether self can be dragged with mouse pointer
+  */
+  bool getAllowMouseDrag() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_carousel_get_allow_mouse_drag(cast(AdwCarousel*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether self will respond to scroll wheel events.
+      Returns: `TRUE` if self will respond to scroll wheel events
+  */
+  bool getAllowScrollWheel() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_carousel_get_allow_scroll_wheel(cast(AdwCarousel*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether self can be navigated.
+      Returns: whether self can be navigated
+  */
+  bool getInteractive() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_carousel_get_interactive(cast(AdwCarousel*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the number of pages in self.
+      Returns: the number of pages in self
+  */
+  uint getNPages() nothrow
+  {
+    uint _retval;
+    _retval = adw_carousel_get_n_pages(cast(AdwCarousel*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the page at position `n`.
+  
+      Params:
+        n = index of the page
+      Returns: the page
+  */
+  gid.gtk4.widget.Widget getNthPage(uint n) nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = adw_carousel_get_nth_page(cast(AdwCarousel*)this._cPtr, n);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets current scroll position in self, unitless.
+      
+      1 matches 1 page. Use [gid.adw1.carousel.Carousel.scrollTo] for changing it.
+      Returns: the scroll position
+  */
+  double getPosition() nothrow
+  {
+    double _retval;
+    _retval = adw_carousel_get_position(cast(AdwCarousel*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the page reveal duration, in milliseconds.
+      Returns: the duration
+  */
+  uint getRevealDuration() nothrow
+  {
+    uint _retval;
+    _retval = adw_carousel_get_reveal_duration(cast(AdwCarousel*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the scroll animation spring parameters for self.
+      Returns: the animation parameters
+  */
+  gid.adw1.spring_params.SpringParams getScrollParams() nothrow
+  {
+    AdwSpringParams* _cretval;
+    _cretval = adw_carousel_get_scroll_params(cast(AdwCarousel*)this._cPtr);
+    auto _retval = _cretval ? new gid.adw1.spring_params.SpringParams(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets spacing between pages in pixels.
+      Returns: spacing between pages
+  */
+  uint getSpacing() nothrow
+  {
+    uint _retval;
+    _retval = adw_carousel_get_spacing(cast(AdwCarousel*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Inserts child into self at position position.
+      
+      If position is -1, or larger than the number of pages,
+      child will be appended to the end.
+  
+      Params:
+        child = a widget to add
+        position = the position to insert child at
+  */
+  void insert(gid.gtk4.widget.Widget child, int position) nothrow
+  {
+    adw_carousel_insert(cast(AdwCarousel*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, position);
+  }
+
+  /**
+      Prepends child to self.
+  
+      Params:
+        child = a widget to add
+  */
+  void prepend(gid.gtk4.widget.Widget child) nothrow
+  {
+    adw_carousel_prepend(cast(AdwCarousel*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Removes child from self.
+  
+      Params:
+        child = a widget to remove
+  */
+  void remove(gid.gtk4.widget.Widget child) nothrow
+  {
+    adw_carousel_remove(cast(AdwCarousel*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Moves child into position position.
+      
+      If position is -1, or larger than the number of pages, child will be moved
+      at the end.
+  
+      Params:
+        child = a widget to add
+        position = the position to move child to
+  */
+  void reorder(gid.gtk4.widget.Widget child, int position) nothrow
+  {
+    adw_carousel_reorder(cast(AdwCarousel*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, position);
+  }
+
+  /**
+      Scrolls to widget.
+      
+      If animate is `TRUE`, the transition will be animated.
+  
+      Params:
+        widget = a child of self
+        animate = whether to animate the transition
+  */
+  void scrollTo(gid.gtk4.widget.Widget widget, bool animate) nothrow
+  {
+    adw_carousel_scroll_to(cast(AdwCarousel*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, animate);
+  }
+
+  /**
+      Sets whether to allow swiping for more than one page at a time.
+      
+      If allow_long_swipes is `FALSE`, each swipe can only move to the adjacent
+      pages.
+  
+      Params:
+        allowLongSwipes = whether to allow long swipes
+  */
+  void setAllowLongSwipes(bool allowLongSwipes) nothrow
+  {
+    adw_carousel_set_allow_long_swipes(cast(AdwCarousel*)this._cPtr, allowLongSwipes);
+  }
+
+  /**
+      Sets whether self can be dragged with mouse pointer.
+      
+      If allow_mouse_drag is `FALSE`, dragging is only available on touch.
+  
+      Params:
+        allowMouseDrag = whether self can be dragged with mouse pointer
+  */
+  void setAllowMouseDrag(bool allowMouseDrag) nothrow
+  {
+    adw_carousel_set_allow_mouse_drag(cast(AdwCarousel*)this._cPtr, allowMouseDrag);
+  }
+
+  /**
+      Sets whether self will respond to scroll wheel events.
+      
+      If allow_scroll_wheel is `FALSE`, wheel events will be ignored.
+  
+      Params:
+        allowScrollWheel = whether self will respond to scroll wheel events
+  */
+  void setAllowScrollWheel(bool allowScrollWheel) nothrow
+  {
+    adw_carousel_set_allow_scroll_wheel(cast(AdwCarousel*)this._cPtr, allowScrollWheel);
+  }
+
+  /**
+      Sets whether self can be navigated.
+      
+      This can be used to temporarily disable the carousel to only allow navigating
+      it in a certain state.
+  
+      Params:
+        interactive = whether self can be navigated
+  */
+  void setInteractive(bool interactive) nothrow
+  {
+    adw_carousel_set_interactive(cast(AdwCarousel*)this._cPtr, interactive);
+  }
+
+  /**
+      Sets the page reveal duration, in milliseconds.
+      
+      Reveal duration is used when animating adding or removing pages.
+  
+      Params:
+        revealDuration = the new reveal duration value
+  */
+  void setRevealDuration(uint revealDuration) nothrow
+  {
+    adw_carousel_set_reveal_duration(cast(AdwCarousel*)this._cPtr, revealDuration);
+  }
+
+  /**
+      Sets the scroll animation spring parameters for self.
+      
+      The default value is equivalent to:
+      
+      ```c
+      adw_spring_params_new (1, 0.5, 500)
+      ```
+  
+      Params:
+        params = the new parameters
+  */
+  void setScrollParams(gid.adw1.spring_params.SpringParams params) nothrow
+  {
+    adw_carousel_set_scroll_params(cast(AdwCarousel*)this._cPtr, params ? cast(AdwSpringParams*)params._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets spacing between pages in pixels.
+  
+      Params:
+        spacing = the new spacing value
+  */
+  void setSpacing(uint spacing) nothrow
+  {
+    adw_carousel_set_spacing(cast(AdwCarousel*)this._cPtr, spacing);
+  }
+
+  /**
+      Connect to `PageChanged` signal.
+  
+      This signal is emitted after a page has been changed.
+        
+        It can be used to implement "infinite scrolling" by amending the pages
+        after every scroll.
+        
+        ::: note
+            An empty carousel is indicated by `(int)index == -1`.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(uint index, gid.adw1.carousel.Carousel carousel)`
+  
+          `index` current page (optional)
+  
+          `carousel` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectPageChanged(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == uint)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.adw1.carousel.Carousel)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.adw1.carousel.Carousel.pageChanged");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("page-changed", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.adw1.carousel.Carousel]
+class CarouselGidBuilderImpl(T) : gid.gtk4.widget.WidgetGidBuilderImpl!T, gid.adw1.swipeable.SwipeableGidBuilderImpl!T, gid.gtk4.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin SwipeableGidBuilderT!();
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `allowLongSwipes` property.
+      Params:
+        propval = Whether to allow swiping for more than one page at a time.
+          
+          If the value is `FALSE`, each swipe can only move to the adjacent pages.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowLongSwipes(bool propval) nothrow
+  {
+    return setProperty("allow-long-swipes", propval);
+  }
+
+  /**
+      Set `allowMouseDrag` property.
+      Params:
+        propval = Sets whether the [gid.adw1.carousel.Carousel] can be dragged with mouse pointer.
+          
+          If the value is `FALSE`, dragging is only available on touch.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowMouseDrag(bool propval) nothrow
+  {
+    return setProperty("allow-mouse-drag", propval);
+  }
+
+  /**
+      Set `allowScrollWheel` property.
+      Params:
+        propval = Whether the widget will respond to scroll wheel events.
+          
+          If the value is `FALSE`, wheel events will be ignored.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowScrollWheel(bool propval) nothrow
+  {
+    return setProperty("allow-scroll-wheel", propval);
+  }
+
+  /**
+      Set `interactive` property.
+      Params:
+        propval = Whether the carousel can be navigated.
+          
+          This can be used to temporarily disable the carousel to only allow
+          navigating it in a certain state.
+      Returns: Builder instance for fluent chaining
+  */
+  T interactive(bool propval) nothrow
+  {
+    return setProperty("interactive", propval);
+  }
+
+  /**
+      Set `revealDuration` property.
+      Params:
+        propval = Page reveal duration, in milliseconds.
+          
+          Reveal duration is used when animating adding or removing pages.
+      Returns: Builder instance for fluent chaining
+  */
+  T revealDuration(uint propval) nothrow
+  {
+    return setProperty("reveal-duration", propval);
+  }
+
+  /**
+      Set `scrollParams` property.
+      Params:
+        propval = Scroll animation spring parameters.
+          
+          The default value is equivalent to:
+          
+          ```c
+          adw_spring_params_new (1, 0.5, 500)
+          ```
+      Returns: Builder instance for fluent chaining
+  */
+  T scrollParams(gid.adw1.spring_params.SpringParams propval) nothrow
+  {
+    return setProperty("scroll-params", propval);
+  }
+
+  /**
+      Set `spacing` property.
+      Params:
+        propval = Spacing between pages in pixels.
+      Returns: Builder instance for fluent chaining
+  */
+  T spacing(uint propval) nothrow
+  {
+    return setProperty("spacing", propval);
+  }
+}
+
+/// Fluent builder for [gid.adw1.carousel.Carousel]
+final class CarouselGidBuilder : CarouselGidBuilderImpl!CarouselGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Carousel build() nothrow
+  {
+    return new Carousel(cast(void*)createGObject(Carousel._getGType), Yes.Take);
+  }
+}

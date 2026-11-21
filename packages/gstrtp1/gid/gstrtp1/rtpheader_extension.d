@@ -1,0 +1,343 @@
+/// Module for [RTPHeaderExtension] class
+module gid.gstrtp1.rtpheader_extension;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gst1.buffer;
+import gid.gst1.caps;
+import gid.gst1.element;
+import gid.gstrtp1.c.functions;
+import gid.gstrtp1.c.types;
+import gid.gstrtp1.types;
+
+/**
+    Instance struct for a RTP Audio/Video header extension.
+*/
+class RTPHeaderExtension : gid.gst1.element.Element
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gst_rtp_header_extension_get_type != &gidSymbolNotFound ? gst_rtp_header_extension_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstRTPHeaderExtension";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override RTPHeaderExtension self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gstrtp1.rtpheader_extension.RTPHeaderExtension]
+      Returns: New builder object
+  */
+  static RTPHeaderExtensionGidBuilder builder() nothrow
+  {
+    return new RTPHeaderExtensionGidBuilder;
+  }
+
+  /** */
+  static gid.gstrtp1.rtpheader_extension.RTPHeaderExtension createFromUri(string uri) nothrow
+  {
+    GstRTPHeaderExtension* _cretval;
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
+    _cretval = gst_rtp_header_extension_create_from_uri(_uri);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gstrtp1.rtpheader_extension.RTPHeaderExtension)(cast(GstRTPHeaderExtension*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Retrieve the direction
+      Returns: The direction
+  */
+  gid.gstrtp1.types.RTPHeaderExtensionDirection getDirection() nothrow
+  {
+    GstRTPHeaderExtensionDirection _cretval;
+    _cretval = gst_rtp_header_extension_get_direction(cast(GstRTPHeaderExtension*)this._cPtr);
+    gid.gstrtp1.types.RTPHeaderExtensionDirection _retval = cast(gid.gstrtp1.types.RTPHeaderExtensionDirection)_cretval;
+    return _retval;
+  }
+
+  /** */
+  uint getId() nothrow
+  {
+    uint _retval;
+    _retval = gst_rtp_header_extension_get_id(cast(GstRTPHeaderExtension*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      This is used to know how much data a certain header extension will need for
+      both allocating the resulting data, and deciding how much payload data can
+      be generated.
+      
+      Implementations should return as accurate a value as is possible using the
+      information given in the input buffer.
+  
+      Params:
+        inputMeta = a #GstBuffer
+      Returns: the maximum size of the data written by this extension
+  */
+  size_t getMaxSize(gid.gst1.buffer.Buffer inputMeta) nothrow
+  {
+    size_t _retval;
+    _retval = gst_rtp_header_extension_get_max_size(cast(GstRTPHeaderExtension*)this._cPtr, inputMeta ? cast(const(GstBuffer)*)inputMeta._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  string getSdpCapsFieldName() nothrow
+  {
+    char* _cretval;
+    _cretval = gst_rtp_header_extension_get_sdp_caps_field_name(cast(GstRTPHeaderExtension*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /** */
+  gid.gstrtp1.types.RTPHeaderExtensionFlags getSupportedFlags() nothrow
+  {
+    GstRTPHeaderExtensionFlags _cretval;
+    _cretval = gst_rtp_header_extension_get_supported_flags(cast(GstRTPHeaderExtension*)this._cPtr);
+    gid.gstrtp1.types.RTPHeaderExtensionFlags _retval = cast(gid.gstrtp1.types.RTPHeaderExtensionFlags)_cretval;
+    return _retval;
+  }
+
+  /** */
+  string getUri() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gst_rtp_header_extension_get_uri(cast(GstRTPHeaderExtension*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Read the RTP header extension from data.
+  
+      Params:
+        readFlags = #GstRTPHeaderExtensionFlags for how the extension should
+                        be written
+        data = location to read the rtp header extension from
+        buffer = a #GstBuffer to modify if necessary
+      Returns: whether the extension could be read from data
+  */
+  bool read(gid.gstrtp1.types.RTPHeaderExtensionFlags readFlags, ubyte[] data, gid.gst1.buffer.Buffer buffer) nothrow
+  {
+    bool _retval;
+    size_t _size;
+    if (data)
+      _size = cast(size_t)data.length;
+
+    auto _data = cast(ubyte*)data.ptr;
+    _retval = cast(bool)gst_rtp_header_extension_read(cast(GstRTPHeaderExtension*)this._cPtr, readFlags, _data, _size, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      [gid.gstrtp1.rtpheader_extension.RTPHeaderExtension.setId] must have been called with a valid
+      extension id that is contained in these caps.
+      
+      The only current known caps format is based on the SDP standard as produced
+      by [gid.gstsdp1.sdpmedia.SDPMedia.attributesToCaps].
+  
+      Params:
+        caps = the #GstCaps to configure this extension with
+      Returns: whether the caps could be successfully set on ext.
+  */
+  bool setAttributesFromCaps(gid.gst1.caps.Caps caps) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_rtp_header_extension_set_attributes_from_caps(cast(GstRTPHeaderExtension*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      [gid.gstrtp1.rtpheader_extension.RTPHeaderExtension.setId] must have been called with a valid
+      extension id that is contained in these caps.
+      
+      The only current known caps format is based on the SDP standard as produced
+      by [gid.gstsdp1.sdpmedia.SDPMedia.attributesToCaps].
+  
+      Params:
+        caps = writable #GstCaps to modify
+      Returns: whether the configured attributes on ext can successfully be set on
+        	caps
+  */
+  bool setCapsFromAttributes(gid.gst1.caps.Caps caps) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_rtp_header_extension_set_caps_from_attributes(cast(GstRTPHeaderExtension*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Helper implementation for GstRTPExtensionClass::set_caps_from_attributes
+      that sets the ext uri on caps with the specified extension id as required
+      for sdp #GstCaps.
+      
+      Requires that the extension does not have any attributes or direction
+      advertised in caps.
+  
+      Params:
+        caps = #GstCaps to write fields into
+        attributes = 
+      Returns: whether the ext attributes could be set on caps.
+  */
+  bool setCapsFromAttributesHelper(gid.gst1.caps.Caps caps, string attributes) nothrow
+  {
+    bool _retval;
+    const(char)* _attributes = attributes.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)gst_rtp_header_extension_set_caps_from_attributes_helper(cast(GstRTPHeaderExtension*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, _attributes);
+    return _retval;
+  }
+
+  /**
+      Set the direction that this header extension should be used in.
+      If #GST_RTP_HEADER_EXTENSION_DIRECTION_INHERITED is included, the
+      direction will not be included in the caps (as it shouldn't be in the
+      extmap line in the SDP).
+  
+      Params:
+        direction = The direction
+  */
+  void setDirection(gid.gstrtp1.types.RTPHeaderExtensionDirection direction) nothrow
+  {
+    gst_rtp_header_extension_set_direction(cast(GstRTPHeaderExtension*)this._cPtr, direction);
+  }
+
+  /**
+      sets the RTP extension id on ext
+  
+      Params:
+        extId = The id of this extension
+  */
+  void setId(uint extId) nothrow
+  {
+    gst_rtp_header_extension_set_id(cast(GstRTPHeaderExtension*)this._cPtr, extId);
+  }
+
+  /**
+      Passes RTP payloader's sink (i.e. not payloaded) caps to the header
+      extension.
+  
+      Params:
+        caps = sink #GstCaps
+      Returns: Whether caps could be read successfully
+  */
+  bool setNonRtpSinkCaps(gid.gst1.caps.Caps caps) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_rtp_header_extension_set_non_rtp_sink_caps(cast(GstRTPHeaderExtension*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Call this function in a subclass from #GstRTPHeaderExtensionClass::read to
+      tell the depayloader whether the data just parsed from RTP packet require
+      updating its src (non-RTP) caps. If state is TRUE, #GstRTPBaseDepayload will
+      eventually invoke [gid.gstrtp1.rtpheader_extension.RTPHeaderExtension.updateNonRtpSrcCaps] to
+      have the caps update applied. Applying the update also flips the internal
+      "wants update" flag back to FALSE.
+  
+      Params:
+        state = TRUE if caps update is needed
+  */
+  void setWantsUpdateNonRtpSrcCaps(bool state) nothrow
+  {
+    gst_rtp_header_extension_set_wants_update_non_rtp_src_caps(cast(GstRTPHeaderExtension*)this._cPtr, state);
+  }
+
+  /**
+      Updates depayloader src caps based on the information received in RTP header.
+      caps must be writable as this function may modify them.
+  
+      Params:
+        caps = src #GstCaps to modify
+      Returns: whether caps were modified successfully
+  */
+  bool updateNonRtpSrcCaps(gid.gst1.caps.Caps caps) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_rtp_header_extension_update_non_rtp_src_caps(cast(GstRTPHeaderExtension*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Call this function after [gid.gstrtp1.rtpheader_extension.RTPHeaderExtension.read] to check if
+      the depayloader's src caps need updating with data received in the last RTP
+      packet.
+      Returns: Whether ext wants to update depayloader's src caps.
+  */
+  bool wantsUpdateNonRtpSrcCaps() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_rtp_header_extension_wants_update_non_rtp_src_caps(cast(GstRTPHeaderExtension*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Writes the RTP header extension to data using information available from
+      the input_meta.  data will be sized to be at least the value returned
+      from [gid.gstrtp1.rtpheader_extension.RTPHeaderExtension.getMaxSize].
+  
+      Params:
+        inputMeta = the input #GstBuffer to read information from if necessary
+        writeFlags = #GstRTPHeaderExtensionFlags for how the extension should
+                        be written
+        output = output RTP #GstBuffer
+        data = location to write the rtp header extension into
+      Returns: the size of the data written, < 0 on failure
+  */
+  ptrdiff_t write(gid.gst1.buffer.Buffer inputMeta, gid.gstrtp1.types.RTPHeaderExtensionFlags writeFlags, gid.gst1.buffer.Buffer output, ubyte[] data) nothrow
+  {
+    ptrdiff_t _retval;
+    size_t _size;
+    if (data)
+      _size = cast(size_t)data.length;
+
+    auto _data = cast(ubyte*)data.ptr;
+    _retval = gst_rtp_header_extension_write(cast(GstRTPHeaderExtension*)this._cPtr, inputMeta ? cast(const(GstBuffer)*)inputMeta._cPtr(No.Dup) : null, writeFlags, output ? cast(GstBuffer*)output._cPtr(No.Dup) : null, _data, _size);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [gid.gstrtp1.rtpheader_extension.RTPHeaderExtension]
+class RTPHeaderExtensionGidBuilderImpl(T) : gid.gst1.element.ElementGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gstrtp1.rtpheader_extension.RTPHeaderExtension]
+final class RTPHeaderExtensionGidBuilder : RTPHeaderExtensionGidBuilderImpl!RTPHeaderExtensionGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  RTPHeaderExtension build() nothrow
+  {
+    return new RTPHeaderExtension(cast(void*)createGObject(RTPHeaderExtension._getGType), Yes.Take);
+  }
+}

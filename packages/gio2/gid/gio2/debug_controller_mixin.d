@@ -1,0 +1,92 @@
+/// Module for [DebugController] interface mixin
+module gid.gio2.debug_controller_mixin;
+
+public import gid.core.basictypes;
+public import gid.gio2.debug_controller_iface_proxy;
+public import gid.core.gid;
+public import gid.gio2.c.functions;
+public import gid.gio2.c.types;
+public import gid.gio2.types;
+public import gid.gobject2.gid_builder;
+
+/**
+    [gid.gio2.debug_controller.DebugController] is an interface to expose control of debugging features and
+    debug output.
+    
+    It is implemented on Linux using [gid.gio2.debug_controller_dbus.DebugControllerDBus], which
+    exposes a D-Bus interface to allow authenticated peers to control debug
+    features in this process.
+    
+    Whether debug output is enabled is exposed as
+    [gid.gio2.debug_controller.DebugController.debugEnabled]. This controls
+    `func@GLib.log_set_debug_enabled` by default. Application code may
+    connect to the [gid.gobject2.object.ObjectWrap.notify] signal for it
+    to control other parts of its debug infrastructure as necessary.
+    
+    If your application or service is using the default GLib log writer function,
+    creating one of the built-in implementations of [gid.gio2.debug_controller.DebugController] should be
+    all that’s needed to dynamically enable or disable debug output.
+*/
+template DebugControllerT()
+{
+
+  /**
+      Get `debugEnabled` property.
+      Returns: true if debug output should be exposed (for example by forwarding it to
+        the journal), false otherwise.
+  */
+  @property bool debugEnabled() nothrow
+  {
+    return getDebugEnabled();
+  }
+
+  /**
+      Set `debugEnabled` property.
+      Params:
+        propval = true if debug output should be exposed (for example by forwarding it to
+          the journal), false otherwise.
+  */
+  @property void debugEnabled(bool propval) nothrow
+  {
+    setDebugEnabled(propval);
+  }
+
+  /**
+      Get the value of #GDebugController:debug-enabled.
+      Returns: true if debug output should be exposed, false otherwise
+  */
+  override bool getDebugEnabled() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_debug_controller_get_debug_enabled(cast(GDebugController*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Set the value of #GDebugController:debug-enabled.
+  
+      Params:
+        debugEnabled = true if debug output should be exposed, false otherwise
+  */
+  override void setDebugEnabled(bool debugEnabled) nothrow
+  {
+    g_debug_controller_set_debug_enabled(cast(GDebugController*)this._cPtr, debugEnabled);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gio2.debug_controller.DebugController]
+template DebugControllerGidBuilderT()
+{
+
+  /**
+      Set `debugEnabled` property.
+      Params:
+        propval = true if debug output should be exposed (for example by forwarding it to
+          the journal), false otherwise.
+      Returns: Builder instance for fluent chaining
+  */
+  T debugEnabled(bool propval) nothrow
+  {
+    return setProperty("debug-enabled", propval);
+  }
+}

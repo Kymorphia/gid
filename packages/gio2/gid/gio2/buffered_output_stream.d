@@ -1,0 +1,233 @@
+/// Module for [BufferedOutputStream] class
+module gid.gio2.buffered_output_stream;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gio2.c.functions;
+import gid.gio2.c.types;
+import gid.gio2.filter_output_stream;
+import gid.gio2.output_stream;
+import gid.gio2.seekable;
+import gid.gio2.seekable_mixin;
+import gid.gio2.types;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+
+/**
+    Buffered output stream implements [gid.gio2.filter_output_stream.FilterOutputStream] and provides
+    for buffered writes.
+    
+    By default, [gid.gio2.buffered_output_stream.BufferedOutputStream]'s buffer size is set at 4 kilobytes.
+    
+    To create a buffered output stream, use [gid.gio2.buffered_output_stream.BufferedOutputStream.new_],
+    or [gid.gio2.buffered_output_stream.BufferedOutputStream.newSized] to specify the buffer's size
+    at construction.
+    
+    To get the size of a buffer within a buffered input stream, use
+    [gid.gio2.buffered_output_stream.BufferedOutputStream.getBufferSize]. To change the size of a
+    buffered output stream's buffer, use [gid.gio2.buffered_output_stream.BufferedOutputStream.setBufferSize].
+    Note that the buffer's size cannot be reduced below the size of the data within the buffer.
+*/
+class BufferedOutputStream : gid.gio2.filter_output_stream.FilterOutputStream, gid.gio2.seekable.Seekable
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())g_buffered_output_stream_get_type != &gidSymbolNotFound ? g_buffered_output_stream_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GBufferedOutputStream";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override BufferedOutputStream self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gio2.buffered_output_stream.BufferedOutputStream]
+      Returns: New builder object
+  */
+  static BufferedOutputStreamGidBuilder builder() nothrow
+  {
+    return new BufferedOutputStreamGidBuilder;
+  }
+
+  /**
+      Get `autoGrow` property.
+      Returns: Whether the buffer should automatically grow.
+  */
+  @property bool autoGrow() nothrow
+  {
+    return getAutoGrow();
+  }
+
+  /**
+      Set `autoGrow` property.
+      Params:
+        propval = Whether the buffer should automatically grow.
+  */
+  @property void autoGrow(bool propval) nothrow
+  {
+    setAutoGrow(propval);
+  }
+
+  /**
+      Get `bufferSize` property.
+      Returns: The size of the backend buffer, in bytes.
+  */
+  @property uint bufferSize() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(uint)("buffer-size");
+  }
+
+  /**
+      Set `bufferSize` property.
+      Params:
+        propval = The size of the backend buffer, in bytes.
+  */
+  @property void bufferSize(uint propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(uint)("buffer-size", propval);
+  }
+
+  mixin SeekableT!();
+
+  /**
+      Creates a new buffered output stream for a base stream.
+  
+      Params:
+        baseStream = a [gid.gio2.output_stream.OutputStream].
+      Returns: a [gid.gio2.output_stream.OutputStream] for the given base_stream.
+  */
+  this(gid.gio2.output_stream.OutputStream baseStream) nothrow
+  {
+    GOutputStream* _cretval;
+    _cretval = g_buffered_output_stream_new(baseStream ? cast(GOutputStream*)baseStream._cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Creates a new buffered output stream with a given buffer size.
+  
+      Params:
+        baseStream = a [gid.gio2.output_stream.OutputStream].
+        size = a #gsize.
+      Returns: a [gid.gio2.output_stream.OutputStream] with an internal buffer set to size.
+  */
+  static gid.gio2.buffered_output_stream.BufferedOutputStream newSized(gid.gio2.output_stream.OutputStream baseStream, size_t size) nothrow
+  {
+    GOutputStream* _cretval;
+    _cretval = g_buffered_output_stream_new_sized(baseStream ? cast(GOutputStream*)baseStream._cPtr(No.Dup) : null, size);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.buffered_output_stream.BufferedOutputStream)(cast(GOutputStream*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Checks if the buffer automatically grows as data is added.
+      Returns: `TRUE` if the stream's buffer automatically grows,
+        `FALSE` otherwise.
+  */
+  bool getAutoGrow() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_buffered_output_stream_get_auto_grow(cast(GBufferedOutputStream*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the size of the buffer in the stream.
+      Returns: the current size of the buffer.
+  */
+  size_t getBufferSize() nothrow
+  {
+    size_t _retval;
+    _retval = g_buffered_output_stream_get_buffer_size(cast(GBufferedOutputStream*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Sets whether or not the stream's buffer should automatically grow.
+      If auto_grow is true, then each write will just make the buffer
+      larger, and you must manually flush the buffer to actually write out
+      the data to the underlying stream.
+  
+      Params:
+        autoGrow = a #gboolean.
+  */
+  void setAutoGrow(bool autoGrow) nothrow
+  {
+    g_buffered_output_stream_set_auto_grow(cast(GBufferedOutputStream*)this._cPtr, autoGrow);
+  }
+
+  /**
+      Sets the size of the internal buffer to size.
+  
+      Params:
+        size = a #gsize.
+  */
+  void setBufferSize(size_t size) nothrow
+  {
+    g_buffered_output_stream_set_buffer_size(cast(GBufferedOutputStream*)this._cPtr, size);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gio2.buffered_output_stream.BufferedOutputStream]
+class BufferedOutputStreamGidBuilderImpl(T) : gid.gio2.filter_output_stream.FilterOutputStreamGidBuilderImpl!T, gid.gio2.seekable.SeekableGidBuilderImpl!T
+{
+
+  mixin SeekableGidBuilderT!();
+
+  /**
+      Set `autoGrow` property.
+      Params:
+        propval = Whether the buffer should automatically grow.
+      Returns: Builder instance for fluent chaining
+  */
+  T autoGrow(bool propval) nothrow
+  {
+    return setProperty("auto-grow", propval);
+  }
+
+  /**
+      Set `bufferSize` property.
+      Params:
+        propval = The size of the backend buffer, in bytes.
+      Returns: Builder instance for fluent chaining
+  */
+  T bufferSize(uint propval) nothrow
+  {
+    return setProperty("buffer-size", propval);
+  }
+}
+
+/// Fluent builder for [gid.gio2.buffered_output_stream.BufferedOutputStream]
+final class BufferedOutputStreamGidBuilder : BufferedOutputStreamGidBuilderImpl!BufferedOutputStreamGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  BufferedOutputStream build() nothrow
+  {
+    return new BufferedOutputStream(cast(void*)createGObject(BufferedOutputStream._getGType), Yes.Take);
+  }
+}

@@ -1,0 +1,1145 @@
+/// Module for [PrintSettings] class
+module gid.gtk4.print_settings;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.glib2.error;
+import gid.glib2.key_file;
+import gid.glib2.variant;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.paper_size;
+import gid.gtk4.types;
+
+/**
+    Collects the settings of a print dialog in a system-independent way.
+    
+    The main use for this object is that once you’ve printed you can get a
+    settings object that represents the settings the user chose, and the next
+    time you print you can pass that object in so that the user doesn’t have
+    to re-set all his settings.
+    
+    Its also possible to enumerate the settings so that you can easily save
+    the settings for the next time your app runs, or even store them in a
+    document. The predefined keys try to use shared values as much as possible
+    so that moving such a document between systems still works.
+*/
+class PrintSettings : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_print_settings_get_type != &gidSymbolNotFound ? gtk_print_settings_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkPrintSettings";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override PrintSettings self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.print_settings.PrintSettings]
+      Returns: New builder object
+  */
+  static PrintSettingsGidBuilder builder() nothrow
+  {
+    return new PrintSettingsGidBuilder;
+  }
+
+  /**
+      Creates a new [gid.gtk4.print_settings.PrintSettings] object.
+      Returns: a new [gid.gtk4.print_settings.PrintSettings] object
+  */
+  this() nothrow
+  {
+    GtkPrintSettings* _cretval;
+    _cretval = gtk_print_settings_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Reads the print settings from file_name.
+      
+      Returns a new [gid.gtk4.print_settings.PrintSettings] object with the restored settings,
+      or null if an error occurred. If the file could not be loaded then
+      error is set to either a [gid.glib2.types.FileError] or [gid.glib2.types.KeyFileError].
+      
+      See [gid.gtk4.print_settings.PrintSettings.toFile].
+  
+      Params:
+        fileName = the filename to read the settings from
+      Returns: the restored [gid.gtk4.print_settings.PrintSettings]
+      Throws: [ErrorWrap]
+  */
+  static gid.gtk4.print_settings.PrintSettings newFromFile(string fileName)
+  {
+    GtkPrintSettings* _cretval;
+    const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
+    GError *_err;
+    _cretval = gtk_print_settings_new_from_file(_fileName, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Deserialize print settings from an a{sv} variant.
+      
+      The variant must be in the format produced by
+      [gid.gtk4.print_settings.PrintSettings.toGvariant].
+  
+      Params:
+        variant = an a{sv} [gid.glib2.variant.Variant]
+      Returns: a new [gid.gtk4.print_settings.PrintSettings] object
+  */
+  static gid.gtk4.print_settings.PrintSettings newFromGvariant(gid.glib2.variant.Variant variant) nothrow
+  {
+    GtkPrintSettings* _cretval;
+    _cretval = gtk_print_settings_new_from_gvariant(variant ? cast(GVariant*)variant._cPtr(No.Dup) : null);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Reads the print settings from the group group_name in key_file.
+      
+      Returns a new [gid.gtk4.print_settings.PrintSettings] object with the restored settings,
+      or null if an error occurred. If the file could not be loaded then
+      error is set to either [gid.glib2.types.FileError] or [gid.glib2.types.KeyFileError].
+  
+      Params:
+        keyFile = the [gid.glib2.key_file.KeyFile] to retrieve the settings from
+        groupName = the name of the group to use, or null to use
+            the default “Print Settings”
+      Returns: the restored [gid.gtk4.print_settings.PrintSettings]
+      Throws: [ErrorWrap]
+  */
+  static gid.gtk4.print_settings.PrintSettings newFromKeyFile(gid.glib2.key_file.KeyFile keyFile, string groupName = null)
+  {
+    GtkPrintSettings* _cretval;
+    const(char)* _groupName = groupName.toCString!(No.Malloc, Yes.Nullable);
+    GError *_err;
+    _cretval = gtk_print_settings_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Copies a [gid.gtk4.print_settings.PrintSettings] object.
+      Returns: a newly allocated copy of other
+  */
+  gid.gtk4.print_settings.PrintSettings copy() nothrow
+  {
+    GtkPrintSettings* _cretval;
+    _cretval = gtk_print_settings_copy(cast(GtkPrintSettings*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Calls func for each key-value pair of settings.
+  
+      Params:
+        func = the function to call
+  */
+  void foreach_(gid.gtk4.types.PrintSettingsFunc func) nothrow
+  {
+    extern(C) void _funcCallback(const(char)* key, const(char)* value, void* userData) nothrow
+    {
+      auto _dlg = cast(gid.gtk4.types.PrintSettingsFunc*)userData;
+      string _key = key.fromCString!(No.Free);
+      string _value = value.fromCString!(No.Free);
+
+      try
+      {
+        (*_dlg)(_key, _value);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.types.PrintSettingsFunc");
+      }
+    }
+    auto _funcCB = func ? &_funcCallback : null;
+    auto _func = func ? cast(void*)&(func) : null;
+    gtk_print_settings_foreach(cast(GtkPrintSettings*)this._cPtr, _funcCB, _func);
+  }
+
+  /**
+      Looks up the string value associated with key.
+  
+      Params:
+        key = a key
+      Returns: the string value for key
+  */
+  string get(string key) nothrow
+  {
+    const(char)* _cretval;
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    _cretval = gtk_print_settings_get(cast(GtkPrintSettings*)this._cPtr, _key);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Returns the boolean represented by the value
+      that is associated with key.
+      
+      The string “true” represents true, any other
+      string false.
+  
+      Params:
+        key = a key
+      Returns: true, if key maps to a true value.
+  */
+  bool getBool(string key) nothrow
+  {
+    bool _retval;
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)gtk_print_settings_get_bool(cast(GtkPrintSettings*)this._cPtr, _key);
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_COLLATE].
+      Returns: whether to collate the printed pages
+  */
+  bool getCollate() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_print_settings_get_collate(cast(GtkPrintSettings*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_DEFAULT_SOURCE].
+      Returns: the default source
+  */
+  string getDefaultSource() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_print_settings_get_default_source(cast(GtkPrintSettings*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_DITHER].
+      Returns: the dithering that is used
+  */
+  string getDither() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_print_settings_get_dither(cast(GtkPrintSettings*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Returns the double value associated with key, or 0.
+  
+      Params:
+        key = a key
+      Returns: the double value of key
+  */
+  double getDouble(string key) nothrow
+  {
+    double _retval;
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    _retval = gtk_print_settings_get_double(cast(GtkPrintSettings*)this._cPtr, _key);
+    return _retval;
+  }
+
+  /**
+      Returns the floating point number represented by
+      the value that is associated with key, or default_val
+      if the value does not represent a floating point number.
+      
+      Floating point numbers are parsed with [gid.glib2.global.asciiStrtod].
+  
+      Params:
+        key = a key
+        def = the default value
+      Returns: the floating point number associated with key
+  */
+  double getDoubleWithDefault(string key, double def) nothrow
+  {
+    double _retval;
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    _retval = gtk_print_settings_get_double_with_default(cast(GtkPrintSettings*)this._cPtr, _key, def);
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_DUPLEX].
+      Returns: whether to print the output in duplex.
+  */
+  gid.gtk4.types.PrintDuplex getDuplex() nothrow
+  {
+    GtkPrintDuplex _cretval;
+    _cretval = gtk_print_settings_get_duplex(cast(GtkPrintSettings*)this._cPtr);
+    gid.gtk4.types.PrintDuplex _retval = cast(gid.gtk4.types.PrintDuplex)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_FINISHINGS].
+      Returns: the finishings
+  */
+  string getFinishings() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_print_settings_get_finishings(cast(GtkPrintSettings*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Returns the integer value of key, or 0.
+  
+      Params:
+        key = a key
+      Returns: the integer value of key
+  */
+  int getInt(string key) nothrow
+  {
+    int _retval;
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    _retval = gtk_print_settings_get_int(cast(GtkPrintSettings*)this._cPtr, _key);
+    return _retval;
+  }
+
+  /**
+      Returns the value of key, interpreted as
+      an integer, or the default value.
+  
+      Params:
+        key = a key
+        def = the default value
+      Returns: the integer value of key
+  */
+  int getIntWithDefault(string key, int def) nothrow
+  {
+    int _retval;
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    _retval = gtk_print_settings_get_int_with_default(cast(GtkPrintSettings*)this._cPtr, _key, def);
+    return _retval;
+  }
+
+  /**
+      Returns the value associated with key, interpreted
+      as a length.
+      
+      The returned value is converted to units.
+  
+      Params:
+        key = a key
+        unit = the unit of the return value
+      Returns: the length value of key, converted to unit
+  */
+  double getLength(string key, gid.gtk4.types.Unit unit) nothrow
+  {
+    double _retval;
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    _retval = gtk_print_settings_get_length(cast(GtkPrintSettings*)this._cPtr, _key, unit);
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_MEDIA_TYPE].
+      
+      The set of media types is defined in PWG 5101.1-2002 PWG.
+      Returns: the media type
+  */
+  string getMediaType() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_print_settings_get_media_type(cast(GtkPrintSettings*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_N_COPIES].
+      Returns: the number of copies to print
+  */
+  int getNCopies() nothrow
+  {
+    int _retval;
+    _retval = gtk_print_settings_get_n_copies(cast(GtkPrintSettings*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_NUMBER_UP].
+      Returns: the number of pages per sheet
+  */
+  int getNumberUp() nothrow
+  {
+    int _retval;
+    _retval = gtk_print_settings_get_number_up(cast(GtkPrintSettings*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_NUMBER_UP_LAYOUT].
+      Returns: layout of page in number-up mode
+  */
+  gid.gtk4.types.NumberUpLayout getNumberUpLayout() nothrow
+  {
+    GtkNumberUpLayout _cretval;
+    _cretval = gtk_print_settings_get_number_up_layout(cast(GtkPrintSettings*)this._cPtr);
+    gid.gtk4.types.NumberUpLayout _retval = cast(gid.gtk4.types.NumberUpLayout)_cretval;
+    return _retval;
+  }
+
+  /**
+      Get the value of [gid.gtk4.types.PRINT_SETTINGS_ORIENTATION],
+      converted to a [gid.gtk4.types.PageOrientation].
+      Returns: the orientation
+  */
+  gid.gtk4.types.PageOrientation getOrientation() nothrow
+  {
+    GtkPageOrientation _cretval;
+    _cretval = gtk_print_settings_get_orientation(cast(GtkPrintSettings*)this._cPtr);
+    gid.gtk4.types.PageOrientation _retval = cast(gid.gtk4.types.PageOrientation)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_OUTPUT_BIN].
+      Returns: the output bin
+  */
+  string getOutputBin() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_print_settings_get_output_bin(cast(GtkPrintSettings*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_PAGE_RANGES].
+      Returns: an array
+          of [gid.gtk4.types.PageRange]s. Use [gid.glib2.global.gfree] to free the array when
+          it is no longer needed.
+  */
+  gid.gtk4.types.PageRange[] getPageRanges() nothrow
+  {
+    GtkPageRange* _cretval;
+    int _cretlength;
+    _cretval = gtk_print_settings_get_page_ranges(cast(GtkPrintSettings*)this._cPtr, &_cretlength);
+    gid.gtk4.types.PageRange[] _retval;
+
+    if (_cretval)
+    {
+      _retval = new gid.gtk4.types.PageRange[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i];
+      gFree(cast(void*)_cretval);
+    }
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_PAGE_SET].
+      Returns: the set of pages to print
+  */
+  gid.gtk4.types.PageSet getPageSet() nothrow
+  {
+    GtkPageSet _cretval;
+    _cretval = gtk_print_settings_get_page_set(cast(GtkPrintSettings*)this._cPtr);
+    gid.gtk4.types.PageSet _retval = cast(gid.gtk4.types.PageSet)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_PAPER_HEIGHT],
+      converted to unit.
+  
+      Params:
+        unit = the unit for the return value
+      Returns: the paper height, in units of unit
+  */
+  double getPaperHeight(gid.gtk4.types.Unit unit) nothrow
+  {
+    double _retval;
+    _retval = gtk_print_settings_get_paper_height(cast(GtkPrintSettings*)this._cPtr, unit);
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_PAPER_FORMAT],
+      converted to a [gid.gtk4.paper_size.PaperSize].
+      Returns: the paper size
+  */
+  gid.gtk4.paper_size.PaperSize getPaperSize() nothrow
+  {
+    GtkPaperSize* _cretval;
+    _cretval = gtk_print_settings_get_paper_size(cast(GtkPrintSettings*)this._cPtr);
+    auto _retval = _cretval ? new gid.gtk4.paper_size.PaperSize(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_PAPER_WIDTH],
+      converted to unit.
+  
+      Params:
+        unit = the unit for the return value
+      Returns: the paper width, in units of unit
+  */
+  double getPaperWidth(gid.gtk4.types.Unit unit) nothrow
+  {
+    double _retval;
+    _retval = gtk_print_settings_get_paper_width(cast(GtkPrintSettings*)this._cPtr, unit);
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_PRINT_PAGES].
+      Returns: which pages to print
+  */
+  gid.gtk4.types.PrintPages getPrintPages() nothrow
+  {
+    GtkPrintPages _cretval;
+    _cretval = gtk_print_settings_get_print_pages(cast(GtkPrintSettings*)this._cPtr);
+    gid.gtk4.types.PrintPages _retval = cast(gid.gtk4.types.PrintPages)_cretval;
+    return _retval;
+  }
+
+  /**
+      Convenience function to obtain the value of
+      [gid.gtk4.types.PRINT_SETTINGS_PRINTER].
+      Returns: the printer name
+  */
+  string getPrinter() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_print_settings_get_printer(cast(GtkPrintSettings*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_PRINTER_LPI].
+      Returns: the resolution in lpi (lines per inch)
+  */
+  double getPrinterLpi() nothrow
+  {
+    double _retval;
+    _retval = gtk_print_settings_get_printer_lpi(cast(GtkPrintSettings*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_QUALITY].
+      Returns: the print quality
+  */
+  gid.gtk4.types.PrintQuality getQuality() nothrow
+  {
+    GtkPrintQuality _cretval;
+    _cretval = gtk_print_settings_get_quality(cast(GtkPrintSettings*)this._cPtr);
+    gid.gtk4.types.PrintQuality _retval = cast(gid.gtk4.types.PrintQuality)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_RESOLUTION].
+      Returns: the resolution in dpi
+  */
+  int getResolution() nothrow
+  {
+    int _retval;
+    _retval = gtk_print_settings_get_resolution(cast(GtkPrintSettings*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_RESOLUTION_X].
+      Returns: the horizontal resolution in dpi
+  */
+  int getResolutionX() nothrow
+  {
+    int _retval;
+    _retval = gtk_print_settings_get_resolution_x(cast(GtkPrintSettings*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_RESOLUTION_Y].
+      Returns: the vertical resolution in dpi
+  */
+  int getResolutionY() nothrow
+  {
+    int _retval;
+    _retval = gtk_print_settings_get_resolution_y(cast(GtkPrintSettings*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_REVERSE].
+      Returns: whether to reverse the order of the printed pages
+  */
+  bool getReverse() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_print_settings_get_reverse(cast(GtkPrintSettings*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_SCALE].
+      Returns: the scale in percent
+  */
+  double getScale() nothrow
+  {
+    double _retval;
+    _retval = gtk_print_settings_get_scale(cast(GtkPrintSettings*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the value of [gid.gtk4.types.PRINT_SETTINGS_USE_COLOR].
+      Returns: whether to use color
+  */
+  bool getUseColor() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_print_settings_get_use_color(cast(GtkPrintSettings*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns true, if a value is associated with key.
+  
+      Params:
+        key = a key
+      Returns: true, if key has a value
+  */
+  bool hasKey(string key) nothrow
+  {
+    bool _retval;
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)gtk_print_settings_has_key(cast(GtkPrintSettings*)this._cPtr, _key);
+    return _retval;
+  }
+
+  /**
+      Reads the print settings from file_name.
+      
+      If the file could not be loaded then error is set to either
+      a [gid.glib2.types.FileError] or [gid.glib2.types.KeyFileError].
+      
+      See [gid.gtk4.print_settings.PrintSettings.toFile].
+  
+      Params:
+        fileName = the filename to read the settings from
+      Returns: true on success
+      Throws: [ErrorWrap]
+  */
+  bool loadFile(string fileName)
+  {
+    bool _retval;
+    const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
+    GError *_err;
+    _retval = cast(bool)gtk_print_settings_load_file(cast(GtkPrintSettings*)this._cPtr, _fileName, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Reads the print settings from the group group_name in key_file.
+      
+      If the file could not be loaded then error is set to either a
+      [gid.glib2.types.FileError] or [gid.glib2.types.KeyFileError].
+  
+      Params:
+        keyFile = the [gid.glib2.key_file.KeyFile] to retrieve the settings from
+        groupName = the name of the group to use, or null
+            to use the default “Print Settings”
+      Returns: true on success
+      Throws: [ErrorWrap]
+  */
+  bool loadKeyFile(gid.glib2.key_file.KeyFile keyFile, string groupName = null)
+  {
+    bool _retval;
+    const(char)* _groupName = groupName.toCString!(No.Malloc, Yes.Nullable);
+    GError *_err;
+    _retval = cast(bool)gtk_print_settings_load_key_file(cast(GtkPrintSettings*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Associates value with key.
+  
+      Params:
+        key = a key
+        value = a string value
+  */
+  void set(string key, string value = null) nothrow
+  {
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, Yes.Nullable);
+    gtk_print_settings_set(cast(GtkPrintSettings*)this._cPtr, _key, _value);
+  }
+
+  /**
+      Sets key to a boolean value.
+  
+      Params:
+        key = a key
+        value = a boolean
+  */
+  void setBool(string key, bool value) nothrow
+  {
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    gtk_print_settings_set_bool(cast(GtkPrintSettings*)this._cPtr, _key, value);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_COLLATE].
+  
+      Params:
+        collate = whether to collate the output
+  */
+  void setCollate(bool collate) nothrow
+  {
+    gtk_print_settings_set_collate(cast(GtkPrintSettings*)this._cPtr, collate);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_DEFAULT_SOURCE].
+  
+      Params:
+        defaultSource = the default source
+  */
+  void setDefaultSource(string defaultSource) nothrow
+  {
+    const(char)* _defaultSource = defaultSource.toCString!(No.Malloc, No.Nullable);
+    gtk_print_settings_set_default_source(cast(GtkPrintSettings*)this._cPtr, _defaultSource);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_DITHER].
+  
+      Params:
+        dither = the dithering that is used
+  */
+  void setDither(string dither) nothrow
+  {
+    const(char)* _dither = dither.toCString!(No.Malloc, No.Nullable);
+    gtk_print_settings_set_dither(cast(GtkPrintSettings*)this._cPtr, _dither);
+  }
+
+  /**
+      Sets key to a double value.
+  
+      Params:
+        key = a key
+        value = a double value
+  */
+  void setDouble(string key, double value) nothrow
+  {
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    gtk_print_settings_set_double(cast(GtkPrintSettings*)this._cPtr, _key, value);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_DUPLEX].
+  
+      Params:
+        duplex = a [gid.gtk4.types.PrintDuplex] value
+  */
+  void setDuplex(gid.gtk4.types.PrintDuplex duplex) nothrow
+  {
+    gtk_print_settings_set_duplex(cast(GtkPrintSettings*)this._cPtr, duplex);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_FINISHINGS].
+  
+      Params:
+        finishings = the finishings
+  */
+  void setFinishings(string finishings) nothrow
+  {
+    const(char)* _finishings = finishings.toCString!(No.Malloc, No.Nullable);
+    gtk_print_settings_set_finishings(cast(GtkPrintSettings*)this._cPtr, _finishings);
+  }
+
+  /**
+      Sets key to an integer value.
+  
+      Params:
+        key = a key
+        value = an integer
+  */
+  void setInt(string key, int value) nothrow
+  {
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    gtk_print_settings_set_int(cast(GtkPrintSettings*)this._cPtr, _key, value);
+  }
+
+  /**
+      Associates a length in units of unit with key.
+  
+      Params:
+        key = a key
+        value = a length
+        unit = the unit of length
+  */
+  void setLength(string key, double value, gid.gtk4.types.Unit unit) nothrow
+  {
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    gtk_print_settings_set_length(cast(GtkPrintSettings*)this._cPtr, _key, value, unit);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_MEDIA_TYPE].
+      
+      The set of media types is defined in PWG 5101.1-2002 PWG.
+  
+      Params:
+        mediaType = the media type
+  */
+  void setMediaType(string mediaType) nothrow
+  {
+    const(char)* _mediaType = mediaType.toCString!(No.Malloc, No.Nullable);
+    gtk_print_settings_set_media_type(cast(GtkPrintSettings*)this._cPtr, _mediaType);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_N_COPIES].
+  
+      Params:
+        numCopies = the number of copies
+  */
+  void setNCopies(int numCopies) nothrow
+  {
+    gtk_print_settings_set_n_copies(cast(GtkPrintSettings*)this._cPtr, numCopies);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_NUMBER_UP].
+  
+      Params:
+        numberUp = the number of pages per sheet
+  */
+  void setNumberUp(int numberUp) nothrow
+  {
+    gtk_print_settings_set_number_up(cast(GtkPrintSettings*)this._cPtr, numberUp);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_NUMBER_UP_LAYOUT].
+  
+      Params:
+        numberUpLayout = a [gid.gtk4.types.NumberUpLayout] value
+  */
+  void setNumberUpLayout(gid.gtk4.types.NumberUpLayout numberUpLayout) nothrow
+  {
+    gtk_print_settings_set_number_up_layout(cast(GtkPrintSettings*)this._cPtr, numberUpLayout);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_ORIENTATION].
+  
+      Params:
+        orientation = a page orientation
+  */
+  void setOrientation(gid.gtk4.types.PageOrientation orientation) nothrow
+  {
+    gtk_print_settings_set_orientation(cast(GtkPrintSettings*)this._cPtr, orientation);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_OUTPUT_BIN].
+  
+      Params:
+        outputBin = the output bin
+  */
+  void setOutputBin(string outputBin) nothrow
+  {
+    const(char)* _outputBin = outputBin.toCString!(No.Malloc, No.Nullable);
+    gtk_print_settings_set_output_bin(cast(GtkPrintSettings*)this._cPtr, _outputBin);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_PAGE_RANGES].
+  
+      Params:
+        pageRanges = an array of [gid.gtk4.types.PageRange]s
+  */
+  void setPageRanges(gid.gtk4.types.PageRange[] pageRanges) nothrow
+  {
+    int _numRanges;
+    if (pageRanges)
+      _numRanges = cast(int)pageRanges.length;
+
+    auto _pageRanges = cast(GtkPageRange*)pageRanges.ptr;
+    gtk_print_settings_set_page_ranges(cast(GtkPrintSettings*)this._cPtr, _pageRanges, _numRanges);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_PAGE_SET].
+  
+      Params:
+        pageSet = a [gid.gtk4.types.PageSet] value
+  */
+  void setPageSet(gid.gtk4.types.PageSet pageSet) nothrow
+  {
+    gtk_print_settings_set_page_set(cast(GtkPrintSettings*)this._cPtr, pageSet);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_PAPER_HEIGHT].
+  
+      Params:
+        height = the paper height
+        unit = the units of height
+  */
+  void setPaperHeight(double height, gid.gtk4.types.Unit unit) nothrow
+  {
+    gtk_print_settings_set_paper_height(cast(GtkPrintSettings*)this._cPtr, height, unit);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_PAPER_FORMAT],
+      [gid.gtk4.types.PRINT_SETTINGS_PAPER_WIDTH] and
+      [gid.gtk4.types.PRINT_SETTINGS_PAPER_HEIGHT].
+  
+      Params:
+        paperSize = a paper size
+  */
+  void setPaperSize(gid.gtk4.paper_size.PaperSize paperSize) nothrow
+  {
+    gtk_print_settings_set_paper_size(cast(GtkPrintSettings*)this._cPtr, paperSize ? cast(GtkPaperSize*)paperSize._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_PAPER_WIDTH].
+  
+      Params:
+        width = the paper width
+        unit = the units of width
+  */
+  void setPaperWidth(double width, gid.gtk4.types.Unit unit) nothrow
+  {
+    gtk_print_settings_set_paper_width(cast(GtkPrintSettings*)this._cPtr, width, unit);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_PRINT_PAGES].
+  
+      Params:
+        pages = a [gid.gtk4.types.PrintPages] value
+  */
+  void setPrintPages(gid.gtk4.types.PrintPages pages) nothrow
+  {
+    gtk_print_settings_set_print_pages(cast(GtkPrintSettings*)this._cPtr, pages);
+  }
+
+  /**
+      Convenience function to set [gid.gtk4.types.PRINT_SETTINGS_PRINTER]
+      to printer.
+  
+      Params:
+        printer = the printer name
+  */
+  void setPrinter(string printer) nothrow
+  {
+    const(char)* _printer = printer.toCString!(No.Malloc, No.Nullable);
+    gtk_print_settings_set_printer(cast(GtkPrintSettings*)this._cPtr, _printer);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_PRINTER_LPI].
+  
+      Params:
+        lpi = the resolution in lpi (lines per inch)
+  */
+  void setPrinterLpi(double lpi) nothrow
+  {
+    gtk_print_settings_set_printer_lpi(cast(GtkPrintSettings*)this._cPtr, lpi);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_QUALITY].
+  
+      Params:
+        quality = a [gid.gtk4.types.PrintQuality] value
+  */
+  void setQuality(gid.gtk4.types.PrintQuality quality) nothrow
+  {
+    gtk_print_settings_set_quality(cast(GtkPrintSettings*)this._cPtr, quality);
+  }
+
+  /**
+      Sets the values of [gid.gtk4.types.PRINT_SETTINGS_RESOLUTION],
+      [gid.gtk4.types.PRINT_SETTINGS_RESOLUTION_X] and
+      [gid.gtk4.types.PRINT_SETTINGS_RESOLUTION_Y].
+  
+      Params:
+        resolution = the resolution in dpi
+  */
+  void setResolution(int resolution) nothrow
+  {
+    gtk_print_settings_set_resolution(cast(GtkPrintSettings*)this._cPtr, resolution);
+  }
+
+  /**
+      Sets the values of [gid.gtk4.types.PRINT_SETTINGS_RESOLUTION],
+      [gid.gtk4.types.PRINT_SETTINGS_RESOLUTION_X] and
+      [gid.gtk4.types.PRINT_SETTINGS_RESOLUTION_Y].
+  
+      Params:
+        resolutionX = the horizontal resolution in dpi
+        resolutionY = the vertical resolution in dpi
+  */
+  void setResolutionXy(int resolutionX, int resolutionY) nothrow
+  {
+    gtk_print_settings_set_resolution_xy(cast(GtkPrintSettings*)this._cPtr, resolutionX, resolutionY);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_REVERSE].
+  
+      Params:
+        reverse = whether to reverse the output
+  */
+  void setReverse(bool reverse) nothrow
+  {
+    gtk_print_settings_set_reverse(cast(GtkPrintSettings*)this._cPtr, reverse);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_SCALE].
+  
+      Params:
+        scale = the scale in percent
+  */
+  void setScale(double scale) nothrow
+  {
+    gtk_print_settings_set_scale(cast(GtkPrintSettings*)this._cPtr, scale);
+  }
+
+  /**
+      Sets the value of [gid.gtk4.types.PRINT_SETTINGS_USE_COLOR].
+  
+      Params:
+        useColor = whether to use color
+  */
+  void setUseColor(bool useColor) nothrow
+  {
+    gtk_print_settings_set_use_color(cast(GtkPrintSettings*)this._cPtr, useColor);
+  }
+
+  /**
+      This function saves the print settings from settings to file_name.
+      
+      If the file could not be written then error is set to either a
+      [gid.glib2.types.FileError] or [gid.glib2.types.KeyFileError].
+  
+      Params:
+        fileName = the file to save to
+      Returns: true on success
+      Throws: [ErrorWrap]
+  */
+  bool toFile(string fileName)
+  {
+    bool _retval;
+    const(char)* _fileName = fileName.toCString!(No.Malloc, No.Nullable);
+    GError *_err;
+    _retval = cast(bool)gtk_print_settings_to_file(cast(GtkPrintSettings*)this._cPtr, _fileName, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Serialize print settings to an a{sv} variant.
+      Returns: a new, floating, [gid.glib2.variant.Variant]
+  */
+  gid.glib2.variant.Variant toGvariant() nothrow
+  {
+    GVariant* _cretval;
+    _cretval = gtk_print_settings_to_gvariant(cast(GtkPrintSettings*)this._cPtr);
+    auto _retval = _cretval ? new gid.glib2.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      This function adds the print settings from settings to key_file.
+  
+      Params:
+        keyFile = the [gid.glib2.key_file.KeyFile] to save the print settings to
+        groupName = the group to add the settings to in key_file, or
+            null to use the default “Print Settings”
+  */
+  void toKeyFile(gid.glib2.key_file.KeyFile keyFile, string groupName = null) nothrow
+  {
+    const(char)* _groupName = groupName.toCString!(No.Malloc, Yes.Nullable);
+    gtk_print_settings_to_key_file(cast(GtkPrintSettings*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName);
+  }
+
+  /**
+      Removes any value associated with key.
+      
+      This has the same effect as setting the value to null.
+  
+      Params:
+        key = a key
+  */
+  void unset(string key) nothrow
+  {
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    gtk_print_settings_unset(cast(GtkPrintSettings*)this._cPtr, _key);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.print_settings.PrintSettings]
+class PrintSettingsGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gtk4.print_settings.PrintSettings]
+final class PrintSettingsGidBuilder : PrintSettingsGidBuilderImpl!PrintSettingsGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  PrintSettings build() nothrow
+  {
+    return new PrintSettings(cast(void*)createGObject(PrintSettings._getGType), Yes.Take);
+  }
+}

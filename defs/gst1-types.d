@@ -1,12 +1,12 @@
 //# GStreamer fundamental value types (Fraction, ranges, lists, etc), which have no C structure of their own and are
 //# only accessible via GValues. They are bound as D value types which convert to and from GValues using the
-//# gobject.value.isGidValueType hook, so they can be used with gobject.value.Value, properties, Structure fields, etc.
+//# gid.gobject2.value.isGidValueType hook, so they can be used with gid.gobject2.value.Value, properties, Structure fields, etc.
 
-import gobject.c.functions;
-import gobject.c.types;
-import gobject.value;
-import gst.c.functions;
-import gst.c.types;
+import gid.gobject2.c.functions;
+import gid.gobject2.c.types;
+import gid.gobject2.value;
+import gid.gst1.c.functions;
+import gid.gst1.c.types;
 import std.typecons : No;
 
 /// GStreamer fraction value type (GstFraction), such as a framerate.
@@ -170,7 +170,7 @@ struct Bitmask
 
 /**
  * GStreamer flag set value type (GstFlagSet), a set of flags and a mask of the flags which are relevant.
- * Values of derived flag set types (such as gstvideo.types.VideoMultiviewFlagsSet) can also be read as a FlagSet.
+ * Values of derived flag set types (such as gid.gstvideo1.types.VideoMultiviewFlagsSet) can also be read as a FlagSet.
  */
 struct FlagSet
 {
@@ -215,7 +215,7 @@ private mixin template GstValueContainer(alias getTypeFunc, alias getSizeFunc, a
   /**
    * Create from an array of D values.
    * Params:
-   *   T = The D type of the values (any type supported by gobject.value.Value)
+   *   T = The D type of the values (any type supported by gid.gobject2.value.Value)
    *   items = The items
    * Returns: The new container
    */
@@ -254,7 +254,7 @@ private mixin template GstValueContainer(alias getTypeFunc, alias getSizeFunc, a
   /// Get the GType of the container values (0 if not supported by the GStreamer library).
   static GType _gidValueGType() nothrow
   {
-    import gid.loader : gidSymbolNotFound;
+    import gid.core.loader : gidSymbolNotFound;
     return cast(void function())getTypeFunc != &gidSymbolNotFound ? getTypeFunc() : cast(GType)0;
   }
 
@@ -296,7 +296,7 @@ struct ValueList
 
 /**
  * GStreamer ordered array value type (GstValueArray). Not to be confused with the deprecated GObject ValueArray
- * (gobject.value_array.ValueArray).
+ * (gid.gobject2.value_array.ValueArray).
  */
 struct ValueArray
 {

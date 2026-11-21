@@ -1,4 +1,5 @@
 //!info name gid
+//!info root gid
 //!info description "GObject introspection D binding package repository"
 //!info copyright "Copyright © 2024-2026, Kymorphia, PBC"
 //!info authors "Element Green <element@kymorphia.com>"

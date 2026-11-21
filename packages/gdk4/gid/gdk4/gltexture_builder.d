@@ -1,0 +1,729 @@
+/// Module for [GLTextureBuilder] class
+module gid.gdk4.gltexture_builder;
+
+public import gid.core.basictypes;
+import gid.cairo1.region;
+import gid.core.gid;
+import gid.gdk4.c.functions;
+import gid.gdk4.c.types;
+import gid.gdk4.color_state;
+import gid.gdk4.glcontext;
+import gid.gdk4.texture;
+import gid.gdk4.types;
+import gid.glib2.types;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+
+/**
+    Constructs [gid.gdk4.texture.Texture] objects from GL textures.
+    
+    The operation is quite simple: Create a texture builder, set all the necessary
+    properties - keep in mind that the properties [gid.gdk4.gltexture_builder.GLTextureBuilder.context],
+    [gid.gdk4.gltexture_builder.GLTextureBuilder.id], [gid.gdk4.gltexture_builder.GLTextureBuilder.width], and
+    [gid.gdk4.gltexture_builder.GLTextureBuilder.height] are mandatory - and then call
+    [gid.gdk4.gltexture_builder.GLTextureBuilder.build] to create the new texture.
+    
+    [gid.gdk4.gltexture_builder.GLTextureBuilder] can be used for quick one-shot construction of
+    textures as well as kept around and reused to construct multiple textures.
+*/
+class GLTextureBuilder : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gdk_gl_texture_builder_get_type != &gidSymbolNotFound ? gdk_gl_texture_builder_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GdkGLTextureBuilder";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override GLTextureBuilder self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gdk4.gltexture_builder.GLTextureBuilder]
+      Returns: New builder object
+  */
+  static GLTextureBuilderGidBuilder builder() nothrow
+  {
+    return new GLTextureBuilderGidBuilder;
+  }
+
+  /**
+      Get `colorState` property.
+      Returns: The color state of the texture.
+  */
+  @property gid.gdk4.color_state.ColorState colorState() nothrow
+  {
+    return getColorState();
+  }
+
+  /**
+      Set `colorState` property.
+      Params:
+        propval = The color state of the texture.
+  */
+  @property void colorState(gid.gdk4.color_state.ColorState propval) nothrow
+  {
+    setColorState(propval);
+  }
+
+  /**
+      Get `context` property.
+      Returns: The context owning the texture.
+  */
+  @property gid.gdk4.glcontext.GLContext context() nothrow
+  {
+    return getContext();
+  }
+
+  /**
+      Set `context` property.
+      Params:
+        propval = The context owning the texture.
+  */
+  @property void context(gid.gdk4.glcontext.GLContext propval) nothrow
+  {
+    setContext(propval);
+  }
+
+  /**
+      Get `format` property.
+      Returns: The format when downloading the texture.
+  */
+  @property gid.gdk4.types.MemoryFormat format() nothrow
+  {
+    return getFormat();
+  }
+
+  /**
+      Set `format` property.
+      Params:
+        propval = The format when downloading the texture.
+  */
+  @property void format(gid.gdk4.types.MemoryFormat propval) nothrow
+  {
+    setFormat(propval);
+  }
+
+  /**
+      Get `hasMipmap` property.
+      Returns: If the texture has a mipmap.
+  */
+  @property bool hasMipmap() nothrow
+  {
+    return getHasMipmap();
+  }
+
+  /**
+      Set `hasMipmap` property.
+      Params:
+        propval = If the texture has a mipmap.
+  */
+  @property void hasMipmap(bool propval) nothrow
+  {
+    setHasMipmap(propval);
+  }
+
+  /**
+      Get `height` property.
+      Returns: The height of the texture.
+  */
+  @property int height() nothrow
+  {
+    return getHeight();
+  }
+
+  /**
+      Set `height` property.
+      Params:
+        propval = The height of the texture.
+  */
+  @property void height(int propval) nothrow
+  {
+    setHeight(propval);
+  }
+
+  /**
+      Get `id` property.
+      Returns: The texture ID to use.
+  */
+  @property uint id() nothrow
+  {
+    return getId();
+  }
+
+  /**
+      Set `id` property.
+      Params:
+        propval = The texture ID to use.
+  */
+  @property void id(uint propval) nothrow
+  {
+    setId(propval);
+  }
+
+  /**
+      Get `sync` property.
+      Returns: An optional `GLSync` object.
+        
+        If this is set, GTK will wait on it before using the texture.
+  */
+  @property void* sync() nothrow
+  {
+    return getSync();
+  }
+
+  /**
+      Set `sync` property.
+      Params:
+        propval = An optional `GLSync` object.
+          
+          If this is set, GTK will wait on it before using the texture.
+  */
+  @property void sync(void* propval) nothrow
+  {
+    setSync(propval);
+  }
+
+  /**
+      Get `updateRegion` property.
+      Returns: The update region for [gid.gdk4.gltexture_builder.GLTextureBuilder.updateTexture].
+  */
+  @property gid.cairo1.region.Region updateRegion() nothrow
+  {
+    return getUpdateRegion();
+  }
+
+  /**
+      Set `updateRegion` property.
+      Params:
+        propval = The update region for [gid.gdk4.gltexture_builder.GLTextureBuilder.updateTexture].
+  */
+  @property void updateRegion(gid.cairo1.region.Region propval) nothrow
+  {
+    setUpdateRegion(propval);
+  }
+
+  /**
+      Get `updateTexture` property.
+      Returns: The texture [gid.gdk4.gltexture_builder.GLTextureBuilder.updateRegion] is an update for.
+  */
+  @property gid.gdk4.texture.Texture updateTexture() nothrow
+  {
+    return getUpdateTexture();
+  }
+
+  /**
+      Set `updateTexture` property.
+      Params:
+        propval = The texture [gid.gdk4.gltexture_builder.GLTextureBuilder.updateRegion] is an update for.
+  */
+  @property void updateTexture(gid.gdk4.texture.Texture propval) nothrow
+  {
+    setUpdateTexture(propval);
+  }
+
+  /**
+      Get `width` property.
+      Returns: The width of the texture.
+  */
+  @property int width() nothrow
+  {
+    return getWidth();
+  }
+
+  /**
+      Set `width` property.
+      Params:
+        propval = The width of the texture.
+  */
+  @property void width(int propval) nothrow
+  {
+    setWidth(propval);
+  }
+
+  /**
+      Creates a new texture builder.
+      Returns: the new `GdkTextureBuilder`
+  */
+  this() nothrow
+  {
+    GdkGLTextureBuilder* _cretval;
+    _cretval = gdk_gl_texture_builder_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Builds a new [gid.gdk4.texture.Texture] with the values set up in the builder.
+      
+      The `destroy` function gets called when the returned texture gets released;
+      either when the texture is finalized or by an explicit call to
+      [gid.gdk4.gltexture.GLTexture.release]. It should release all GL resources associated
+      with the texture, such as the [gid.gdk4.gltexture_builder.GLTextureBuilder.id] and the
+      [gid.gdk4.gltexture_builder.GLTextureBuilder.sync].
+      
+      Note that it is a programming error to call this function if any mandatory
+      property has not been set.
+      
+      It is possible to call this function multiple times to create multiple textures,
+      possibly with changing properties in between.
+  
+      Params:
+        destroy = destroy function to be called when the texture is
+            released
+      Returns: a newly built [gid.gdk4.texture.Texture]
+  */
+  gid.gdk4.texture.Texture build(gid.glib2.types.DestroyNotify destroy = null) nothrow
+  {
+    extern(C) void _destroyCallback(void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gid.glib2.types.DestroyNotify*)data;
+
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.glib2.types.DestroyNotify");
+      }
+    }
+    auto _destroyCB = destroy ? &_destroyCallback : null;
+    GdkTexture* _cretval;
+    auto _destroy = destroy ? freezeDelegate(cast(void*)&destroy) : null;
+    _cretval = gdk_gl_texture_builder_build(cast(GdkGLTextureBuilder*)this._cPtr, _destroyCB, _destroy);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk4.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the color state previously set via [gid.gdk4.gltexture_builder.GLTextureBuilder.setColorState].
+      Returns: the color state
+  */
+  gid.gdk4.color_state.ColorState getColorState() nothrow
+  {
+    GdkColorState* _cretval;
+    _cretval = gdk_gl_texture_builder_get_color_state(cast(GdkGLTextureBuilder*)this._cPtr);
+    auto _retval = _cretval ? new gid.gdk4.color_state.ColorState(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the context previously set via [gid.gdk4.gltexture_builder.GLTextureBuilder.setContext] or
+      null if none was set.
+      Returns: The context
+  */
+  gid.gdk4.glcontext.GLContext getContext() nothrow
+  {
+    GdkGLContext* _cretval;
+    _cretval = gdk_gl_texture_builder_get_context(cast(GdkGLTextureBuilder*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk4.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the format previously set via [gid.gdk4.gltexture_builder.GLTextureBuilder.setFormat].
+      Returns: The format
+  */
+  gid.gdk4.types.MemoryFormat getFormat() nothrow
+  {
+    GdkMemoryFormat _cretval;
+    _cretval = gdk_gl_texture_builder_get_format(cast(GdkGLTextureBuilder*)this._cPtr);
+    gid.gdk4.types.MemoryFormat _retval = cast(gid.gdk4.types.MemoryFormat)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets whether the texture has a mipmap.
+      Returns: Whether the texture has a mipmap
+  */
+  bool getHasMipmap() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gdk_gl_texture_builder_get_has_mipmap(cast(GdkGLTextureBuilder*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the height previously set via [gid.gdk4.gltexture_builder.GLTextureBuilder.setHeight] or
+      0 if the height wasn't set.
+      Returns: The height
+  */
+  int getHeight() nothrow
+  {
+    int _retval;
+    _retval = gdk_gl_texture_builder_get_height(cast(GdkGLTextureBuilder*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the texture id previously set via [gid.gdk4.gltexture_builder.GLTextureBuilder.setId] or
+      0 if the id wasn't set.
+      Returns: The id
+  */
+  uint getId() nothrow
+  {
+    uint _retval;
+    _retval = gdk_gl_texture_builder_get_id(cast(GdkGLTextureBuilder*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the `GLsync` previously set via [gid.gdk4.gltexture_builder.GLTextureBuilder.setSync].
+      Returns: the `GLSync`
+  */
+  void* getSync() nothrow
+  {
+    auto _retval = gdk_gl_texture_builder_get_sync(cast(GdkGLTextureBuilder*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the region previously set via [gid.gdk4.gltexture_builder.GLTextureBuilder.setUpdateRegion] or
+      null if none was set.
+      Returns: The region
+  */
+  gid.cairo1.region.Region getUpdateRegion() nothrow
+  {
+    cairo_region_t* _cretval;
+    _cretval = gdk_gl_texture_builder_get_update_region(cast(GdkGLTextureBuilder*)this._cPtr);
+    auto _retval = _cretval ? new gid.cairo1.region.Region(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the texture previously set via [gid.gdk4.gltexture_builder.GLTextureBuilder.setUpdateTexture] or
+      null if none was set.
+      Returns: The texture
+  */
+  gid.gdk4.texture.Texture getUpdateTexture() nothrow
+  {
+    GdkTexture* _cretval;
+    _cretval = gdk_gl_texture_builder_get_update_texture(cast(GdkGLTextureBuilder*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk4.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the width previously set via [gid.gdk4.gltexture_builder.GLTextureBuilder.setWidth] or
+      0 if the width wasn't set.
+      Returns: The width
+  */
+  int getWidth() nothrow
+  {
+    int _retval;
+    _retval = gdk_gl_texture_builder_get_width(cast(GdkGLTextureBuilder*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Sets the color state for the texture.
+      
+      By default, the sRGB colorstate is used. If you don't know what
+      colorstates are, this is probably the right thing.
+  
+      Params:
+        colorState = a [gid.gdk4.color_state.ColorState]
+  */
+  void setColorState(gid.gdk4.color_state.ColorState colorState) nothrow
+  {
+    gdk_gl_texture_builder_set_color_state(cast(GdkGLTextureBuilder*)this._cPtr, colorState ? cast(GdkColorState*)colorState._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the context to be used for the texture. This is the context that owns
+      the texture.
+      
+      The context must be set before calling [gid.gdk4.gltexture_builder.GLTextureBuilder.build].
+  
+      Params:
+        context = The context the texture belongs to or null to unset
+  */
+  void setContext(gid.gdk4.glcontext.GLContext context = null) nothrow
+  {
+    gdk_gl_texture_builder_set_context(cast(GdkGLTextureBuilder*)this._cPtr, context ? cast(GdkGLContext*)context._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the format of the texture. The default is [gid.gdk4.types.MemoryFormat.R8g8b8a8Premultiplied].
+      
+      The format is the preferred format the texture data should be downloaded to. The
+      format must be supported by the GL version of [gid.gdk4.gltexture_builder.GLTextureBuilder.context].
+      
+      GDK's texture download code assumes that the format corresponds to the storage
+      parameters of the GL texture in an obvious way. For example, a format of
+      [gid.gdk4.types.MemoryFormat.R16g16b16a16Premultiplied] is expected to be stored as `GL_RGBA16`
+      texture, and [gid.gdk4.types.MemoryFormat.G8a8] is expected to be stored as `GL_RG8` texture.
+      
+      Setting the right format is particularly useful when using high bit depth textures
+      to preserve the bit depth, to set the correct value for unpremultiplied textures
+      and to make sure opaque textures are treated as such.
+      
+      Non-RGBA textures need to have swizzling parameters set up properly to be usable
+      in GSK's shaders.
+  
+      Params:
+        format = The texture's format
+  */
+  void setFormat(gid.gdk4.types.MemoryFormat format) nothrow
+  {
+    gdk_gl_texture_builder_set_format(cast(GdkGLTextureBuilder*)this._cPtr, format);
+  }
+
+  /**
+      Sets whether the texture has a mipmap. This allows the renderer and other users of the
+      generated texture to use a higher quality downscaling.
+      
+      Typically, the `glGenerateMipmap` function is used to generate a mimap.
+  
+      Params:
+        hasMipmap = Whether the texture has a mipmap
+  */
+  void setHasMipmap(bool hasMipmap) nothrow
+  {
+    gdk_gl_texture_builder_set_has_mipmap(cast(GdkGLTextureBuilder*)this._cPtr, hasMipmap);
+  }
+
+  /**
+      Sets the height of the texture.
+      
+      The height must be set before calling [gid.gdk4.gltexture_builder.GLTextureBuilder.build].
+  
+      Params:
+        height = The texture's height or 0 to unset
+  */
+  void setHeight(int height) nothrow
+  {
+    gdk_gl_texture_builder_set_height(cast(GdkGLTextureBuilder*)this._cPtr, height);
+  }
+
+  /**
+      Sets the texture id of the texture. The texture id must remain unmodified
+      until the texture was finalized. See [gid.gdk4.gltexture_builder.GLTextureBuilder.build]
+      for a longer discussion.
+      
+      The id must be set before calling [gid.gdk4.gltexture_builder.GLTextureBuilder.build].
+  
+      Params:
+        id = The texture id to be used for creating the texture
+  */
+  void setId(uint id) nothrow
+  {
+    gdk_gl_texture_builder_set_id(cast(GdkGLTextureBuilder*)this._cPtr, id);
+  }
+
+  /**
+      Sets the GLSync object to use for the texture.
+      
+      GTK will wait on this object before using the created [gid.gdk4.texture.Texture].
+      
+      The `destroy` function that is passed to [gid.gdk4.gltexture_builder.GLTextureBuilder.build]
+      is responsible for freeing the sync object when it is no longer needed.
+      The texture builder does not destroy it and it is the callers
+      responsibility to make sure it doesn't leak.
+  
+      Params:
+        sync = the GLSync object
+  */
+  void setSync(void* sync = null) nothrow
+  {
+    gdk_gl_texture_builder_set_sync(cast(GdkGLTextureBuilder*)this._cPtr, sync);
+  }
+
+  /**
+      Sets the region to be updated by this texture. Together with
+      [gid.gdk4.gltexture_builder.GLTextureBuilder.updateTexture] this describes an
+      update of a previous texture.
+      
+      When rendering animations of large textures, it is possible that
+      consecutive textures are only updating contents in parts of the texture.
+      It is then possible to describe this update via these two properties,
+      so that GTK can avoid rerendering parts that did not change.
+      
+      An example would be a screen recording where only the mouse pointer moves.
+  
+      Params:
+        region = the region to update
+  */
+  void setUpdateRegion(gid.cairo1.region.Region region = null) nothrow
+  {
+    gdk_gl_texture_builder_set_update_region(cast(GdkGLTextureBuilder*)this._cPtr, region ? cast(cairo_region_t*)region._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the texture to be updated by this texture. See
+      [gid.gdk4.gltexture_builder.GLTextureBuilder.setUpdateRegion] for an explanation.
+  
+      Params:
+        texture = the texture to update
+  */
+  void setUpdateTexture(gid.gdk4.texture.Texture texture = null) nothrow
+  {
+    gdk_gl_texture_builder_set_update_texture(cast(GdkGLTextureBuilder*)this._cPtr, texture ? cast(GdkTexture*)texture._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the width of the texture.
+      
+      The width must be set before calling [gid.gdk4.gltexture_builder.GLTextureBuilder.build].
+  
+      Params:
+        width = The texture's width or 0 to unset
+  */
+  void setWidth(int width) nothrow
+  {
+    gdk_gl_texture_builder_set_width(cast(GdkGLTextureBuilder*)this._cPtr, width);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gdk4.gltexture_builder.GLTextureBuilder]
+class GLTextureBuilderGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `colorState` property.
+      Params:
+        propval = The color state of the texture.
+      Returns: Builder instance for fluent chaining
+  */
+  T colorState(gid.gdk4.color_state.ColorState propval) nothrow
+  {
+    return setProperty("color-state", propval);
+  }
+
+  /**
+      Set `context` property.
+      Params:
+        propval = The context owning the texture.
+      Returns: Builder instance for fluent chaining
+  */
+  T context(gid.gdk4.glcontext.GLContext propval) nothrow
+  {
+    return setProperty("context", propval);
+  }
+
+  /**
+      Set `format` property.
+      Params:
+        propval = The format when downloading the texture.
+      Returns: Builder instance for fluent chaining
+  */
+  T format(gid.gdk4.types.MemoryFormat propval) nothrow
+  {
+    return setProperty("format", propval);
+  }
+
+  /**
+      Set `hasMipmap` property.
+      Params:
+        propval = If the texture has a mipmap.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasMipmap(bool propval) nothrow
+  {
+    return setProperty("has-mipmap", propval);
+  }
+
+  /**
+      Set `height` property.
+      Params:
+        propval = The height of the texture.
+      Returns: Builder instance for fluent chaining
+  */
+  T height(int propval) nothrow
+  {
+    return setProperty("height", propval);
+  }
+
+  /**
+      Set `id` property.
+      Params:
+        propval = The texture ID to use.
+      Returns: Builder instance for fluent chaining
+  */
+  T id(uint propval) nothrow
+  {
+    return setProperty("id", propval);
+  }
+
+  /**
+      Set `sync` property.
+      Params:
+        propval = An optional `GLSync` object.
+          
+          If this is set, GTK will wait on it before using the texture.
+      Returns: Builder instance for fluent chaining
+  */
+  T sync(void* propval) nothrow
+  {
+    return setProperty("sync", propval);
+  }
+
+  /**
+      Set `updateRegion` property.
+      Params:
+        propval = The update region for [gid.gdk4.gltexture_builder.GLTextureBuilder.updateTexture].
+      Returns: Builder instance for fluent chaining
+  */
+  T updateRegion(gid.cairo1.region.Region propval) nothrow
+  {
+    return setProperty("update-region", propval);
+  }
+
+  /**
+      Set `updateTexture` property.
+      Params:
+        propval = The texture [gid.gdk4.gltexture_builder.GLTextureBuilder.updateRegion] is an update for.
+      Returns: Builder instance for fluent chaining
+  */
+  T updateTexture(gid.gdk4.texture.Texture propval) nothrow
+  {
+    return setProperty("update-texture", propval);
+  }
+
+  /**
+      Set `width` property.
+      Params:
+        propval = The width of the texture.
+      Returns: Builder instance for fluent chaining
+  */
+  T width(int propval) nothrow
+  {
+    return setProperty("width", propval);
+  }
+}
+
+/// Fluent builder for [gid.gdk4.gltexture_builder.GLTextureBuilder]
+final class GLTextureBuilderGidBuilder : GLTextureBuilderGidBuilderImpl!GLTextureBuilderGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  GLTextureBuilder build() nothrow
+  {
+    return new GLTextureBuilder(cast(void*)createGObject(GLTextureBuilder._getGType), Yes.Take);
+  }
+}

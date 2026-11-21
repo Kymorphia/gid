@@ -1,0 +1,323 @@
+/// Module for [StringFilter] class
+module gid.gtk4.string_filter;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.gid_builder;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.expression;
+import gid.gtk4.filter;
+import gid.gtk4.types;
+
+/**
+    Determines whether to include items by comparing strings to a fixed search term.
+    
+    The strings are obtained from the items by evaluating an expression
+    set with [gid.gtk4.string_filter.StringFilter.setExpression], and they are
+    compared against a search term set with [gid.gtk4.string_filter.StringFilter.setSearch].
+    
+    [gid.gtk4.string_filter.StringFilter] has several different modes of comparison - it
+    can match the whole string, just a prefix, or any substring. Use
+    [gid.gtk4.string_filter.StringFilter.setMatchMode] choose a mode.
+    
+    It is also possible to make case-insensitive comparisons, with
+    [gid.gtk4.string_filter.StringFilter.setIgnoreCase].
+*/
+class StringFilter : gid.gtk4.filter.Filter
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_string_filter_get_type != &gidSymbolNotFound ? gtk_string_filter_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkStringFilter";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override StringFilter self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.string_filter.StringFilter]
+      Returns: New builder object
+  */
+  static StringFilterGidBuilder builder() nothrow
+  {
+    return new StringFilterGidBuilder;
+  }
+
+  /**
+      Get `expression` property.
+      Returns: The expression to evaluate on each item to get a
+        string to compare with.
+  */
+  @property gid.gtk4.expression.Expression expression() nothrow
+  {
+    return getExpression();
+  }
+
+  /**
+      Set `expression` property.
+      Params:
+        propval = The expression to evaluate on each item to get a
+          string to compare with.
+  */
+  @property void expression(gid.gtk4.expression.Expression propval) nothrow
+  {
+    setExpression(propval);
+  }
+
+  /**
+      Get `ignoreCase` property.
+      Returns: If matching is case sensitive.
+  */
+  @property bool ignoreCase() nothrow
+  {
+    return getIgnoreCase();
+  }
+
+  /**
+      Set `ignoreCase` property.
+      Params:
+        propval = If matching is case sensitive.
+  */
+  @property void ignoreCase(bool propval) nothrow
+  {
+    setIgnoreCase(propval);
+  }
+
+  /**
+      Get `matchMode` property.
+      Returns: If exact matches are necessary or if substrings are allowed.
+  */
+  @property gid.gtk4.types.StringFilterMatchMode matchMode() nothrow
+  {
+    return getMatchMode();
+  }
+
+  /**
+      Set `matchMode` property.
+      Params:
+        propval = If exact matches are necessary or if substrings are allowed.
+  */
+  @property void matchMode(gid.gtk4.types.StringFilterMatchMode propval) nothrow
+  {
+    setMatchMode(propval);
+  }
+
+  /**
+      Get `search` property.
+      Returns: The search term.
+  */
+  @property string search() nothrow
+  {
+    return getSearch();
+  }
+
+  /**
+      Set `search` property.
+      Params:
+        propval = The search term.
+  */
+  @property void search(string propval) nothrow
+  {
+    setSearch(propval);
+  }
+
+  /**
+      Creates a new string filter.
+      
+      You will want to set up the filter by providing a string to search for
+      and by providing a property to look up on the item.
+  
+      Params:
+        expression = the expression to evaluate
+      Returns: a new [gid.gtk4.string_filter.StringFilter]
+  */
+  this(gid.gtk4.expression.Expression expression = null) nothrow
+  {
+    GtkStringFilter* _cretval;
+    _cretval = gtk_string_filter_new(expression ? cast(GtkExpression*)expression._cPtr(Yes.Dup) : null);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Gets the expression that the string filter uses to
+      obtain strings from items.
+      Returns: the expression
+  */
+  gid.gtk4.expression.Expression getExpression() nothrow
+  {
+    GtkExpression* _cretval;
+    _cretval = gtk_string_filter_get_expression(cast(GtkStringFilter*)this._cPtr);
+    auto _retval = _cretval ? new gid.gtk4.expression.Expression(cast(GtkExpression*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns whether the filter ignores case differences.
+      Returns: true if the filter ignores case
+  */
+  bool getIgnoreCase() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_string_filter_get_ignore_case(cast(GtkStringFilter*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the match mode that the filter is using.
+      Returns: the match mode of the filter
+  */
+  gid.gtk4.types.StringFilterMatchMode getMatchMode() nothrow
+  {
+    GtkStringFilterMatchMode _cretval;
+    _cretval = gtk_string_filter_get_match_mode(cast(GtkStringFilter*)this._cPtr);
+    gid.gtk4.types.StringFilterMatchMode _retval = cast(gid.gtk4.types.StringFilterMatchMode)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the search term.
+      Returns: the search term
+  */
+  string getSearch() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_string_filter_get_search(cast(GtkStringFilter*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Sets the expression that the string filter uses to
+      obtain strings from items.
+      
+      The expression must have a value type of `G_TYPE_STRING`.
+  
+      Params:
+        expression = the expression
+  */
+  void setExpression(gid.gtk4.expression.Expression expression = null) nothrow
+  {
+    gtk_string_filter_set_expression(cast(GtkStringFilter*)this._cPtr, expression ? cast(GtkExpression*)expression._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets whether the filter ignores case differences.
+  
+      Params:
+        ignoreCase = true to ignore case
+  */
+  void setIgnoreCase(bool ignoreCase) nothrow
+  {
+    gtk_string_filter_set_ignore_case(cast(GtkStringFilter*)this._cPtr, ignoreCase);
+  }
+
+  /**
+      Sets the match mode for the filter.
+  
+      Params:
+        mode = the new match mode
+  */
+  void setMatchMode(gid.gtk4.types.StringFilterMatchMode mode) nothrow
+  {
+    gtk_string_filter_set_match_mode(cast(GtkStringFilter*)this._cPtr, mode);
+  }
+
+  /**
+      Sets the string to search for.
+  
+      Params:
+        search = the string to search for
+  */
+  void setSearch(string search = null) nothrow
+  {
+    const(char)* _search = search.toCString!(No.Malloc, Yes.Nullable);
+    gtk_string_filter_set_search(cast(GtkStringFilter*)this._cPtr, _search);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.string_filter.StringFilter]
+class StringFilterGidBuilderImpl(T) : gid.gtk4.filter.FilterGidBuilderImpl!T
+{
+
+  /**
+      Set `expression` property.
+      Params:
+        propval = The expression to evaluate on each item to get a
+          string to compare with.
+      Returns: Builder instance for fluent chaining
+  */
+  T expression(gid.gtk4.expression.Expression propval) nothrow
+  {
+    return setProperty("expression", propval);
+  }
+
+  /**
+      Set `ignoreCase` property.
+      Params:
+        propval = If matching is case sensitive.
+      Returns: Builder instance for fluent chaining
+  */
+  T ignoreCase(bool propval) nothrow
+  {
+    return setProperty("ignore-case", propval);
+  }
+
+  /**
+      Set `matchMode` property.
+      Params:
+        propval = If exact matches are necessary or if substrings are allowed.
+      Returns: Builder instance for fluent chaining
+  */
+  T matchMode(gid.gtk4.types.StringFilterMatchMode propval) nothrow
+  {
+    return setProperty("match-mode", propval);
+  }
+
+  /**
+      Set `search` property.
+      Params:
+        propval = The search term.
+      Returns: Builder instance for fluent chaining
+  */
+  T search(string propval) nothrow
+  {
+    return setProperty("search", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk4.string_filter.StringFilter]
+final class StringFilterGidBuilder : StringFilterGidBuilderImpl!StringFilterGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  StringFilter build() nothrow
+  {
+    return new StringFilter(cast(void*)createGObject(StringFilter._getGType), Yes.Take);
+  }
+}

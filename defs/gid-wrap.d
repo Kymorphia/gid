@@ -3,13 +3,13 @@
 
 /**
  * Base interface and class templates for giD wrapper classes of C types.
- * Publicly imported by gid.gid.
+ * Publicly imported by gid.core.gid.
  */
 
-import gid.gid;
-import glib.c.functions : g_log;
-import glib.c.types;
-import gobject.c.types;
+import gid.core.gid;
+import gid.glib2.c.functions : g_log;
+import gid.glib2.c.types;
+import gid.gobject2.c.types;
 
 /**
  * Interface implemented by all giD wrapper classes of C types (ObjectWrap, Boxed, OpaqueWrap, ReffedWrap and StructWrap),

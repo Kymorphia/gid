@@ -1,0 +1,106 @@
+/// Module for [AudioAggregatorPad] class
+module gid.gstaudio1.audio_aggregator_pad;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gstaudio1.c.functions;
+import gid.gstaudio1.c.types;
+import gid.gstaudio1.types;
+import gid.gstbase1.aggregator_pad;
+
+/**
+    The default implementation of GstPad used with #GstAudioAggregator
+*/
+class AudioAggregatorPad : gid.gstbase1.aggregator_pad.AggregatorPad
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gst_audio_aggregator_pad_get_type != &gidSymbolNotFound ? gst_audio_aggregator_pad_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstAudioAggregatorPad";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override AudioAggregatorPad self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gstaudio1.audio_aggregator_pad.AudioAggregatorPad]
+      Returns: New builder object
+  */
+  static AudioAggregatorPadGidBuilder builder() nothrow
+  {
+    return new AudioAggregatorPadGidBuilder;
+  }
+
+  /**
+      Get `qosMessages` property.
+      Returns: Emit QoS messages when dropping buffers.
+  */
+  @property bool qosMessages() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("qos-messages");
+  }
+
+  /**
+      Set `qosMessages` property.
+      Params:
+        propval = Emit QoS messages when dropping buffers.
+  */
+  @property void qosMessages(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("qos-messages", propval);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gstaudio1.audio_aggregator_pad.AudioAggregatorPad]
+class AudioAggregatorPadGidBuilderImpl(T) : gid.gstbase1.aggregator_pad.AggregatorPadGidBuilderImpl!T
+{
+
+  /**
+      Set `qosMessages` property.
+      Params:
+        propval = Emit QoS messages when dropping buffers.
+      Returns: Builder instance for fluent chaining
+  */
+  T qosMessages(bool propval) nothrow
+  {
+    return setProperty("qos-messages", propval);
+  }
+}
+
+/// Fluent builder for [gid.gstaudio1.audio_aggregator_pad.AudioAggregatorPad]
+final class AudioAggregatorPadGidBuilder : AudioAggregatorPadGidBuilderImpl!AudioAggregatorPadGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  AudioAggregatorPad build() nothrow
+  {
+    return new AudioAggregatorPad(cast(void*)createGObject(AudioAggregatorPad._getGType), Yes.Take);
+  }
+}

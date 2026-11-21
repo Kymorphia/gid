@@ -1,0 +1,107 @@
+/// Module for [VideoAffineTransformationMeta] class
+module gid.gstvideo1.video_affine_transformation_meta;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gst1.meta;
+import gid.gst1.meta_info;
+import gid.gstvideo1.c.functions;
+import gid.gstvideo1.c.types;
+import gid.gstvideo1.types;
+
+/**
+    Extra buffer metadata for performing an affine transformation using a 4x4
+    matrix. The transformation matrix can be composed with
+    [gid.gstvideo1.video_affine_transformation_meta.VideoAffineTransformationMeta.applyMatrix].
+    
+    The vertices operated on are all in the range 0 to 1, not in
+    Normalized Device Coordinates (-1 to +1). Transforming points in this space
+    are assumed to have an origin at (0.5, 0.5, 0.5) in a left-handed coordinate
+    system with the x-axis moving horizontally (positive values to the right),
+    the y-axis moving vertically (positive values up the screen) and the z-axis
+    perpendicular to the screen (positive values into the screen).
+*/
+class VideoAffineTransformationMeta : StructWrap!(GstVideoAffineTransformationMeta)
+{
+  /**
+      Create a `video_affine_transformation_meta.VideoAffineTransformationMeta` wrap type.
+      Params:
+        matrix = the column-major 4x4 transformation matrix
+  */
+  this(float[16] matrix = (float[16]).init) nothrow
+  {
+    this.matrix = matrix;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /**
+      Get `meta` field.
+      Returns: parent #GstMeta
+  */
+  @property gid.gst1.meta.Meta meta() nothrow
+  {
+    return new gid.gst1.meta.Meta(cast(GstMeta*)&(cast(GstVideoAffineTransformationMeta*)this._cPtr).meta, this);
+  }
+
+  /**
+      Get `matrix` field.
+      Returns: the column-major 4x4 transformation matrix
+  */
+  @property float[16] matrix() nothrow
+  {
+    return *cast(float[16]*)&(cast(GstVideoAffineTransformationMeta*)this._cPtr).matrix;
+  }
+
+  /**
+      Set `matrix` field.
+      Params:
+        propval = the column-major 4x4 transformation matrix
+  */
+  @property void matrix(float[16] propval) nothrow
+  {
+    (cast(GstVideoAffineTransformationMeta*)this._cPtr).matrix = *cast(float[16]*)&propval;
+  }
+
+  /**
+      Apply a transformation using the given 4x4 transformation matrix.
+      Performs the multiplication, meta->matrix X matrix.
+  
+      Params:
+        matrix = a 4x4 transformation matrix to be applied
+  */
+  void applyMatrix(float[] matrix) nothrow
+  {
+    if (matrix.length > 16) matrix = matrix[0 .. 16];
+    auto _matrix = cast(float*)matrix.ptr;
+    typeof(*_matrix)[16] _matrix_fixed = void;
+    if (matrix.length < 16)
+    {
+      (cast(ubyte[])_matrix_fixed[])[] = 0;
+      _matrix_fixed[0 .. matrix.length] = _matrix[0 .. matrix.length];
+      _matrix = _matrix_fixed.ptr;
+    }
+    gst_video_affine_transformation_meta_apply_matrix(cast(GstVideoAffineTransformationMeta*)this._cPtr, _matrix);
+  }
+
+  /** */
+  static gid.gst1.meta_info.MetaInfo getInfo() nothrow
+  {
+    const(GstMetaInfo)* _cretval;
+    _cretval = gst_video_affine_transformation_meta_get_info();
+    gid.gst1.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gid.gst1.meta_info.MetaInfo*)_cretval;
+    return _retval;
+  }
+}

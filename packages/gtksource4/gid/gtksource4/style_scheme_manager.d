@@ -1,0 +1,244 @@
+/// Module for [StyleSchemeManager] class
+module gid.gtksource4.style_scheme_manager;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtksource4.c.functions;
+import gid.gtksource4.c.types;
+import gid.gtksource4.style_scheme;
+import gid.gtksource4.types;
+
+/** */
+class StyleSchemeManager : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_source_style_scheme_manager_get_type != &gidSymbolNotFound ? gtk_source_style_scheme_manager_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceStyleSchemeManager";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override StyleSchemeManager self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtksource4.style_scheme_manager.StyleSchemeManager]
+      Returns: New builder object
+  */
+  static StyleSchemeManagerGidBuilder builder() nothrow
+  {
+    return new StyleSchemeManagerGidBuilder;
+  }
+
+  /** */
+  @property string[] schemeIds() nothrow
+  {
+    return getSchemeIds();
+  }
+
+  /** */
+  @property string[] searchPath() nothrow
+  {
+    return getSearchPath();
+  }
+
+  /** */
+  @property void searchPath(string[] propval) nothrow
+  {
+    setSearchPath(propval);
+  }
+
+  /**
+      Creates a new style manager. If you do not need more than one style
+      manager then use [gid.gtksource5.style_scheme_manager.StyleSchemeManager.getDefault] instead.
+      Returns: a new #GtkSourceStyleSchemeManager.
+  */
+  this() nothrow
+  {
+    GtkSourceStyleSchemeManager* _cretval;
+    _cretval = gtk_source_style_scheme_manager_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Returns the default #GtkSourceStyleSchemeManager instance.
+      Returns: a #GtkSourceStyleSchemeManager. Return value
+        is owned by GtkSourceView library and must not be unref'ed.
+  */
+  static gid.gtksource4.style_scheme_manager.StyleSchemeManager getDefault() nothrow
+  {
+    GtkSourceStyleSchemeManager* _cretval;
+    _cretval = gtk_source_style_scheme_manager_get_default();
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtksource4.style_scheme_manager.StyleSchemeManager)(cast(GtkSourceStyleSchemeManager*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Appends path to the list of directories where the manager looks for
+      style scheme files.
+      See [gid.gtksource5.style_scheme_manager.StyleSchemeManager.setSearchPath] for details.
+  
+      Params:
+        path = a directory or a filename.
+  */
+  void appendSearchPath(string path) nothrow
+  {
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    gtk_source_style_scheme_manager_append_search_path(cast(GtkSourceStyleSchemeManager*)this._cPtr, _path);
+  }
+
+  /**
+      Mark any currently cached information about the available style scehems
+      as invalid. All the available style schemes will be reloaded next time
+      the manager is accessed.
+  */
+  void forceRescan() nothrow
+  {
+    gtk_source_style_scheme_manager_force_rescan(cast(GtkSourceStyleSchemeManager*)this._cPtr);
+  }
+
+  /**
+      Looks up style scheme by id.
+  
+      Params:
+        schemeId = style scheme id to find.
+      Returns: a #GtkSourceStyleScheme object.
+          The returned value is owned by manager and must not be unref'ed.
+  */
+  gid.gtksource4.style_scheme.StyleScheme getScheme(string schemeId) nothrow
+  {
+    GtkSourceStyleScheme* _cretval;
+    const(char)* _schemeId = schemeId.toCString!(No.Malloc, No.Nullable);
+    _cretval = gtk_source_style_scheme_manager_get_scheme(cast(GtkSourceStyleSchemeManager*)this._cPtr, _schemeId);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtksource4.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the ids of the available style schemes.
+      Returns: a null-terminated array of strings containing the ids of the available
+        style schemes or null if no style scheme is available.
+        The array is sorted alphabetically according to the scheme name.
+        The array is owned by the manager and must not be modified.
+  */
+  string[] getSchemeIds() nothrow
+  {
+    const(char*)* _cretval;
+    _cretval = gtk_source_style_scheme_manager_get_scheme_ids(cast(GtkSourceStyleSchemeManager*)this._cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString!(No.Free);
+    }
+    return _retval;
+  }
+
+  /**
+      Returns the current search path for the manager.
+      See [gid.gtksource5.style_scheme_manager.StyleSchemeManager.setSearchPath] for details.
+      Returns: a null-terminated array
+        of string containing the search path.
+        The array is owned by the manager and must not be modified.
+  */
+  string[] getSearchPath() nothrow
+  {
+    const(char*)* _cretval;
+    _cretval = gtk_source_style_scheme_manager_get_search_path(cast(GtkSourceStyleSchemeManager*)this._cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString!(No.Free);
+    }
+    return _retval;
+  }
+
+  /**
+      Prepends path to the list of directories where the manager looks
+      for style scheme files.
+      See [gid.gtksource5.style_scheme_manager.StyleSchemeManager.setSearchPath] for details.
+  
+      Params:
+        path = a directory or a filename.
+  */
+  void prependSearchPath(string path) nothrow
+  {
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    gtk_source_style_scheme_manager_prepend_search_path(cast(GtkSourceStyleSchemeManager*)this._cPtr, _path);
+  }
+
+  /**
+      Sets the list of directories where the manager looks for
+      style scheme files.
+      If path is null, the search path is reset to default.
+  
+      Params:
+        path = a null-terminated array of strings or null.
+  */
+  void setSearchPath(string[] path = null) nothrow
+  {
+    auto _path_arr = new char*[](path.length + 1);
+    auto _path = cast(char**)_path_arr.ptr;
+    foreach (i, s; path) _path[i] = s.toCString!(No.Malloc);
+    gtk_source_style_scheme_manager_set_search_path(cast(GtkSourceStyleSchemeManager*)this._cPtr, _path);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtksource4.style_scheme_manager.StyleSchemeManager]
+class StyleSchemeManagerGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T searchPath(string[] propval) nothrow
+  {
+    return setProperty("search-path", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtksource4.style_scheme_manager.StyleSchemeManager]
+final class StyleSchemeManagerGidBuilder : StyleSchemeManagerGidBuilderImpl!StyleSchemeManagerGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  StyleSchemeManager build() nothrow
+  {
+    return new StyleSchemeManager(cast(void*)createGObject(StyleSchemeManager._getGType), Yes.Take);
+  }
+}

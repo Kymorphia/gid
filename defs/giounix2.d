@@ -19,7 +19,7 @@
   */
   static string[][] search(string searchString) nothrow
   {
-    import glib.c.functions : g_free, g_strfreev;
+    import gid.glib2.c.functions : g_free, g_strfreev;
 
     const(char)* _searchString = searchString.toCString!(No.Malloc, No.Nullable);
     char*** _cretval = g_desktop_app_info_search(_searchString);

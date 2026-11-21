@@ -1,0 +1,188 @@
+/// Module for [StyleScheme] class
+module gid.gtksource4.style_scheme;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtksource4.c.functions;
+import gid.gtksource4.c.types;
+import gid.gtksource4.style;
+import gid.gtksource4.types;
+
+/** */
+class StyleScheme : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_source_style_scheme_get_type != &gidSymbolNotFound ? gtk_source_style_scheme_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceStyleScheme";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override StyleScheme self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtksource4.style_scheme.StyleScheme]
+      Returns: New builder object
+  */
+  static StyleSchemeGidBuilder builder() nothrow
+  {
+    return new StyleSchemeGidBuilder;
+  }
+
+  /**
+      Get `description` property.
+      Returns: Style scheme description, a translatable string to present to the user.
+  */
+  @property string description() nothrow
+  {
+    return getDescription();
+  }
+
+  /**
+      Get `filename` property.
+      Returns: Style scheme filename or null.
+  */
+  @property string filename() nothrow
+  {
+    return getFilename();
+  }
+
+  /**
+      Get `id` property.
+      Returns: Style scheme id, a unique string used to identify the style scheme
+        in #GtkSourceStyleSchemeManager.
+  */
+  @property string id() nothrow
+  {
+    return getId();
+  }
+
+  /**
+      Get `name` property.
+      Returns: Style scheme name, a translatable string to present to the user.
+  */
+  @property string name() nothrow
+  {
+    return getName();
+  }
+
+  /** */
+  string[] getAuthors() nothrow
+  {
+    const(char*)* _cretval;
+    _cretval = gtk_source_style_scheme_get_authors(cast(GtkSourceStyleScheme*)this._cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString!(No.Free);
+    }
+    return _retval;
+  }
+
+  /** */
+  string getDescription() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_source_style_scheme_get_description(cast(GtkSourceStyleScheme*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /** */
+  string getFilename() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_source_style_scheme_get_filename(cast(GtkSourceStyleScheme*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /** */
+  string getId() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_source_style_scheme_get_id(cast(GtkSourceStyleScheme*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /** */
+  string getName() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_source_style_scheme_get_name(cast(GtkSourceStyleScheme*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /** */
+  gid.gtksource4.style.Style getStyle(string styleId) nothrow
+  {
+    GtkSourceStyle* _cretval;
+    const(char)* _styleId = styleId.toCString!(No.Malloc, No.Nullable);
+    _cretval = gtk_source_style_scheme_get_style(cast(GtkSourceStyleScheme*)this._cPtr, _styleId);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtksource4.style.Style)(cast(GtkSourceStyle*)_cretval, No.Take);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtksource4.style_scheme.StyleScheme]
+class StyleSchemeGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `id` property.
+      Params:
+        propval = Style scheme id, a unique string used to identify the style scheme
+          in #GtkSourceStyleSchemeManager.
+      Returns: Builder instance for fluent chaining
+  */
+  T id(string propval) nothrow
+  {
+    return setProperty("id", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtksource4.style_scheme.StyleScheme]
+final class StyleSchemeGidBuilder : StyleSchemeGidBuilderImpl!StyleSchemeGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  StyleScheme build() nothrow
+  {
+    return new StyleScheme(cast(void*)createGObject(StyleScheme._getGType), Yes.Take);
+  }
+}

@@ -1,0 +1,275 @@
+/// Module for [HeaderList] class
+module gid.gmime3.header_list;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gmime3.c.functions;
+import gid.gmime3.c.types;
+import gid.gmime3.format_options;
+import gid.gmime3.header;
+import gid.gmime3.parser_options;
+import gid.gmime3.stream;
+import gid.gmime3.types;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+
+/**
+    A list of message or mime-part headers.
+*/
+class HeaderList : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())g_mime_header_list_get_type != &gidSymbolNotFound ? g_mime_header_list_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeHeaderList";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override HeaderList self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gmime3.header_list.HeaderList]
+      Returns: New builder object
+  */
+  static HeaderListGidBuilder builder() nothrow
+  {
+    return new HeaderListGidBuilder;
+  }
+
+  /**
+      Creates a new #GMimeHeaderList object.
+  
+      Params:
+        options = a #GMimeParserOptions or null
+      Returns: a new header list object.
+  */
+  this(gid.gmime3.parser_options.ParserOptions options = null) nothrow
+  {
+    GMimeHeaderList* _cretval;
+    _cretval = g_mime_header_list_new(options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Appends a header. If value is null, a space will be set aside for it
+      (useful for setting the order of headers before values can be
+      obtained for them) otherwise the header will be unset.
+  
+      Params:
+        name = header name
+        value = header value
+        charset = a charset
+  */
+  void append(string name, string value, string charset = null) nothrow
+  {
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
+    const(char)* _charset = charset.toCString!(No.Malloc, Yes.Nullable);
+    g_mime_header_list_append(cast(GMimeHeaderList*)this._cPtr, _name, _value, _charset);
+  }
+
+  /**
+      Removes all of the headers from the #GMimeHeaderList.
+  */
+  void clear() nothrow
+  {
+    g_mime_header_list_clear(cast(GMimeHeaderList*)this._cPtr);
+  }
+
+  /**
+      Checks whether or not a header exists.
+  
+      Params:
+        name = header name
+      Returns: true if the specified header exists or false otherwise.
+  */
+  bool contains(string name) nothrow
+  {
+    bool _retval;
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)g_mime_header_list_contains(cast(GMimeHeaderList*)this._cPtr, _name);
+    return _retval;
+  }
+
+  /**
+      Gets the number of headers contained within the header list.
+      Returns: the number of headers in the header list.
+  */
+  int getCount() nothrow
+  {
+    int _retval;
+    _retval = g_mime_header_list_get_count(cast(GMimeHeaderList*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the first header with the specified name.
+  
+      Params:
+        name = header name
+      Returns: a #GMimeHeader for the specified name.
+  */
+  gid.gmime3.header.Header getHeader(string name) nothrow
+  {
+    GMimeHeader* _cretval;
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    _cretval = g_mime_header_list_get_header(cast(GMimeHeaderList*)this._cPtr, _name);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gmime3.header.Header)(cast(GMimeHeader*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the header at the specified index within the list.
+  
+      Params:
+        index = the 0-based index of the header
+      Returns: the header at position index.
+  */
+  gid.gmime3.header.Header getHeaderAt(int index) nothrow
+  {
+    GMimeHeader* _cretval;
+    _cretval = g_mime_header_list_get_header_at(cast(GMimeHeaderList*)this._cPtr, index);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gmime3.header.Header)(cast(GMimeHeader*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Prepends a header. If value is null, a space will be set aside
+      for it (useful for setting the order of headers before values can
+      be obtained for them) otherwise the header will be unset.
+  
+      Params:
+        name = header name
+        value = header value
+        charset = a charset
+  */
+  void prepend(string name, string value, string charset = null) nothrow
+  {
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
+    const(char)* _charset = charset.toCString!(No.Malloc, Yes.Nullable);
+    g_mime_header_list_prepend(cast(GMimeHeaderList*)this._cPtr, _name, _value, _charset);
+  }
+
+  /**
+      Remove the first instance of the specified header.
+  
+      Params:
+        name = header name
+      Returns: true if the header was successfully removed or false if
+        the specified header could not be found.
+  */
+  bool remove(string name) nothrow
+  {
+    bool _retval;
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)g_mime_header_list_remove(cast(GMimeHeaderList*)this._cPtr, _name);
+    return _retval;
+  }
+
+  /**
+      Removes the header at the specified index from headers.
+  
+      Params:
+        index = the 0-based index of the header to remove
+  */
+  void removeAt(int index) nothrow
+  {
+    g_mime_header_list_remove_at(cast(GMimeHeaderList*)this._cPtr, index);
+  }
+
+  /**
+      Set the value of the specified header. If value is null and the
+      header, name, had not been previously set, a space will be set
+      aside for it (useful for setting the order of headers before values
+      can be obtained for them) otherwise the header will be unset.
+      
+      Note: If there are multiple headers with the specified field name,
+      the first instance of the header will be replaced and further
+      instances will be removed.
+  
+      Params:
+        name = header name
+        value = header value
+        charset = a charset
+  */
+  void set(string name, string value, string charset = null) nothrow
+  {
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
+    const(char)* _charset = charset.toCString!(No.Malloc, Yes.Nullable);
+    g_mime_header_list_set(cast(GMimeHeaderList*)this._cPtr, _name, _value, _charset);
+  }
+
+  /**
+      Allocates a string buffer containing the raw rfc822 headers
+      contained in headers.
+  
+      Params:
+        options = a #GMimeFormatOptions or null
+      Returns: a string containing the header block.
+  */
+  string toString_(gid.gmime3.format_options.FormatOptions options = null) nothrow
+  {
+    char* _cretval;
+    _cretval = g_mime_header_list_to_string(cast(GMimeHeaderList*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Write the headers to a stream.
+  
+      Params:
+        options = a #GMimeFormatOptions or null
+        stream = output stream
+      Returns: the number of bytes written or %-1 on fail.
+  */
+  ptrdiff_t writeToStream(gid.gmime3.format_options.FormatOptions options, gid.gmime3.stream.Stream stream) nothrow
+  {
+    ptrdiff_t _retval;
+    _retval = g_mime_header_list_write_to_stream(cast(GMimeHeaderList*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, stream ? cast(GMimeStream*)stream._cPtr(No.Dup) : null);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [gid.gmime3.header_list.HeaderList]
+class HeaderListGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gmime3.header_list.HeaderList]
+final class HeaderListGidBuilder : HeaderListGidBuilderImpl!HeaderListGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  HeaderList build() nothrow
+  {
+    return new HeaderList(cast(void*)createGObject(HeaderList._getGType), Yes.Take);
+  }
+}

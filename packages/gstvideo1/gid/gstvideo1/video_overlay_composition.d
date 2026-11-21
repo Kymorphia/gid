@@ -1,0 +1,190 @@
+/// Module for [VideoOverlayComposition] class
+module gid.gstvideo1.video_overlay_composition;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.boxed;
+import gid.gstvideo1.c.functions;
+import gid.gstvideo1.c.types;
+import gid.gstvideo1.types;
+import gid.gstvideo1.video_frame;
+import gid.gstvideo1.video_overlay_rectangle;
+
+/**
+    Functions to create and handle overlay compositions on video buffers.
+    
+    An overlay composition describes one or more overlay rectangles to be
+    blended on top of a video buffer.
+    
+    This API serves two main purposes:
+    
+    * it can be used to attach overlay information (subtitles or logos)
+      to non-raw video buffers such as GL/VAAPI/VDPAU surfaces. The actual
+      blending of the overlay can then be done by e.g. the video sink that
+      processes these non-raw buffers.
+    
+    * it can also be used to blend overlay rectangles on top of raw video
+      buffers, thus consolidating blending functionality for raw video in
+      one place.
+    
+    Together, this allows existing overlay elements to easily handle raw
+    and non-raw video as input in without major changes (once the overlays
+    have been put into a #GstVideoOverlayComposition object anyway) - for raw
+    video the overlay can just use the blending function to blend the data
+    on top of the video, and for surface buffers it can just attach them to
+    the buffer and let the sink render the overlays.
+*/
+class VideoOverlayComposition : gid.gobject2.boxed.BoxedWrap!(gst_video_overlay_composition_get_type)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override VideoOverlayComposition self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Creates a new video overlay composition object to hold one or more
+      overlay rectangles.
+      
+      Note that since 1.20 this allows to pass null for rectangle.
+  
+      Params:
+        rectangle = a #GstVideoOverlayRectangle to add to the
+              composition
+      Returns: a new #GstVideoOverlayComposition. Unref with
+            gst_video_overlay_composition_unref() when no longer needed.
+  */
+  this(gid.gstvideo1.video_overlay_rectangle.VideoOverlayRectangle rectangle = null) nothrow
+  {
+    GstVideoOverlayComposition* _cretval;
+    _cretval = gst_video_overlay_composition_new(rectangle ? cast(GstVideoOverlayRectangle*)rectangle._cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Adds an overlay rectangle to an existing overlay composition object. This
+      must be done right after creating the overlay composition.
+  
+      Params:
+        rectangle = a #GstVideoOverlayRectangle to add to the
+              composition
+  */
+  void addRectangle(gid.gstvideo1.video_overlay_rectangle.VideoOverlayRectangle rectangle) nothrow
+  {
+    gst_video_overlay_composition_add_rectangle(cast(GstVideoOverlayComposition*)this._cPtr, rectangle ? cast(GstVideoOverlayRectangle*)rectangle._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Blends the overlay rectangles in comp on top of the raw video data
+      contained in video_buf. The data in video_buf must be writable and
+      mapped appropriately.
+      
+      Since video_buf data is read and will be modified, it ought be
+      mapped with flag GST_MAP_READWRITE.
+  
+      Params:
+        videoBuf = a #GstVideoFrame containing raw video data in a
+                      supported format. It should be mapped using GST_MAP_READWRITE
+      Returns: 
+  */
+  bool blend(gid.gstvideo1.video_frame.VideoFrame videoBuf) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_video_overlay_composition_blend(cast(GstVideoOverlayComposition*)this._cPtr, videoBuf ? cast(GstVideoFrame*)videoBuf._cPtr : null);
+    return _retval;
+  }
+
+  /**
+      Makes a copy of comp and all contained rectangles, so that it is possible
+      to modify the composition and contained rectangles (e.g. add additional
+      rectangles or change the render co-ordinates or render dimension). The
+      actual overlay pixel data buffers contained in the rectangles are not
+      copied.
+      
+      This should be avoided unless rectangles need to be modified because it
+      invalidates caching in sinks and compositor elements. To add extra rectangles
+      it is rather recommended to add an extra composition meta using
+      [gid.gstvideo1.global.bufferAddVideoOverlayCompositionMeta].
+      Returns: a new #GstVideoOverlayComposition equivalent
+            to comp.
+  */
+  gid.gstvideo1.video_overlay_composition.VideoOverlayComposition copy() nothrow
+  {
+    GstVideoOverlayComposition* _cretval;
+    _cretval = gst_video_overlay_composition_copy(cast(GstVideoOverlayComposition*)this._cPtr);
+    auto _retval = _cretval ? new gid.gstvideo1.video_overlay_composition.VideoOverlayComposition(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns the `n`-th #GstVideoOverlayRectangle contained in comp.
+  
+      Params:
+        n = number of the rectangle to get
+      Returns: the `n`-th rectangle, or NULL if `n` is out of
+            bounds. Will not return a new reference, the caller will need to
+            obtain her own reference using gst_video_overlay_rectangle_ref()
+            if needed.
+  */
+  gid.gstvideo1.video_overlay_rectangle.VideoOverlayRectangle getRectangle(uint n) nothrow
+  {
+    GstVideoOverlayRectangle* _cretval;
+    _cretval = gst_video_overlay_composition_get_rectangle(cast(GstVideoOverlayComposition*)this._cPtr, n);
+    auto _retval = _cretval ? new gid.gstvideo1.video_overlay_rectangle.VideoOverlayRectangle(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns the sequence number of this composition. Sequence numbers are
+      monotonically increasing and unique for overlay compositions and rectangles
+      (meaning there will never be a rectangle with the same sequence number as
+      a composition).
+      Returns: the sequence number of comp
+  */
+  uint getSeqnum() nothrow
+  {
+    uint _retval;
+    _retval = gst_video_overlay_composition_get_seqnum(cast(GstVideoOverlayComposition*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Takes ownership of comp and returns a version of comp that is writable
+      (i.e. can be modified). Will either return comp right away, or create a
+      new writable copy of comp and unref comp itself. All the contained
+      rectangles will also be copied, but the actual overlay pixel data buffers
+      contained in the rectangles are not copied.
+      
+      This should be avoided unless rectangles need to be modified because it
+      invalidates caching in sinks and compositor elements. To add extra rectangles
+      it is rather recommended to add an extra composition meta using
+      [gid.gstvideo1.global.bufferAddVideoOverlayCompositionMeta].
+      Returns: a writable #GstVideoOverlayComposition
+            equivalent to comp.
+  */
+  gid.gstvideo1.video_overlay_composition.VideoOverlayComposition makeWritable() nothrow
+  {
+    GstVideoOverlayComposition* _cretval;
+    _cretval = gst_video_overlay_composition_make_writable(cast(GstVideoOverlayComposition*)this._cPtr(Yes.Dup));
+    auto _retval = _cretval ? new gid.gstvideo1.video_overlay_composition.VideoOverlayComposition(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns the number of #GstVideoOverlayRectangle<!-- -->s contained in comp.
+      Returns: the number of rectangles
+  */
+  uint nRectangles() nothrow
+  {
+    uint _retval;
+    _retval = gst_video_overlay_composition_n_rectangles(cast(GstVideoOverlayComposition*)this._cPtr);
+    return _retval;
+  }
+}

@@ -1,0 +1,1104 @@
+/// Module for [MessageDialog] class
+module gid.adw1.message_dialog;
+
+public import gid.core.basictypes;
+import gid.adw1.c.functions;
+import gid.adw1.c.types;
+import gid.adw1.types;
+import gid.core.gid;
+import gid.gio2.async_result;
+import gid.gio2.cancellable;
+import gid.gio2.types;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.accessible;
+import gid.gtk4.accessible_mixin;
+import gid.gtk4.buildable;
+import gid.gtk4.buildable_mixin;
+import gid.gtk4.constraint_target;
+import gid.gtk4.constraint_target_mixin;
+import gid.gtk4.native;
+import gid.gtk4.native_mixin;
+import gid.gtk4.root;
+import gid.gtk4.root_mixin;
+import gid.gtk4.shortcut_manager;
+import gid.gtk4.shortcut_manager_mixin;
+import gid.gtk4.widget;
+import gid.gtk4.window;
+
+/**
+    A dialog presenting a message or a question.
+    
+    <picture>
+      <source srcset="message-dialog-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="message-dialog.png" alt="message-dialog">
+    </picture>
+    
+    Message dialogs have a heading, a body, an optional child widget, and one or
+    multiple responses, each presented as a button.
+    
+    Each response has a unique string ID, and a button label. Additionally, each
+    response can be enabled or disabled, and can have a suggested or destructive
+    appearance.
+    
+    When one of the responses is activated, or the dialog is closed, the
+    [gid.adw1.message_dialog.MessageDialog.response] signal will be emitted. This signal is
+    detailed, and the detail, as well as the `response` parameter will be set to
+    the ID of the activated response, or to the value of the
+    [gid.adw1.message_dialog.MessageDialog.closeResponse] property if the dialog had been
+    closed without activating any of the responses.
+    
+    Response buttons can be presented horizontally or vertically depending on
+    available space.
+    
+    When a response is activated, [gid.adw1.message_dialog.MessageDialog] is closed automatically.
+    
+    An example of using a message dialog:
+    
+    ```c
+    GtkWidget *dialog;
+    
+    dialog = adw_message_dialog_new (parent, _("Replace File?"), NULL);
+    
+    adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dialog),
+                                    _("A file named “%s” already exists. Do you want to replace it?"),
+                                    filename);
+    
+    adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dialog),
+                                      "cancel",  _("_Cancel"),
+                                      "replace", _("_Replace"),
+                                      NULL);
+    
+    adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog), "replace", ADW_RESPONSE_DESTRUCTIVE);
+    
+    adw_message_dialog_set_default_response (ADW_MESSAGE_DIALOG (dialog), "cancel");
+    adw_message_dialog_set_close_response (ADW_MESSAGE_DIALOG (dialog), "cancel");
+    
+    g_signal_connect (dialog, "response", G_CALLBACK (response_cb), self);
+    
+    gtk_window_present (GTK_WINDOW (dialog));
+    ```
+    
+    ## Async API
+    
+    [gid.adw1.message_dialog.MessageDialog] can also be used via the [gid.adw1.message_dialog.MessageDialog.choose]
+    method. This API follows the GIO async pattern, for example:
+    
+    ```c
+    static void
+    dialog_cb (AdwMessageDialog *dialog,
+               GAsyncResult     *result,
+               MyWindow         *self)
+    {
+      const char *response = adw_message_dialog_choose_finish (dialog, result);
+    
+      // ...
+    }
+    
+    static void
+    show_dialog (MyWindow *self)
+    {
+      GtkWidget *dialog;
+    
+      dialog = adw_message_dialog_new (GTK_WINDOW (self), _("Replace File?"), NULL);
+    
+      adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dialog),
+                                      _("A file named “%s” already exists. Do you want to replace it?"),
+                                      filename);
+    
+      adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dialog),
+                                        "cancel",  _("_Cancel"),
+                                        "replace", _("_Replace"),
+                                        NULL);
+    
+      adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog), "replace", ADW_RESPONSE_DESTRUCTIVE);
+    
+      adw_message_dialog_set_default_response (ADW_MESSAGE_DIALOG (dialog), "cancel");
+      adw_message_dialog_set_close_response (ADW_MESSAGE_DIALOG (dialog), "cancel");
+    
+      adw_message_dialog_choose (ADW_MESSAGE_DIALOG (dialog), NULL, (GAsyncReadyCallback) dialog_cb, self);
+    }
+    ```
+    
+    ## AdwMessageDialog as GtkBuildable
+    
+    [gid.adw1.message_dialog.MessageDialog] supports adding responses in UI definitions by via the
+    `<responses>` element that may contain multiple `<response>` elements, each
+    representing a response.
+    
+    Each of the `<response>` elements must have the `id` attribute specifying the
+    response ID. The contents of the element are used as the response label.
+    
+    Response labels can be translated with the usual `translatable`, `context`
+    and `comments` attributes.
+    
+    The `<response>` elements can also have `enabled` and/or `appearance`
+    attributes. See [gid.adw1.message_dialog.MessageDialog.setResponseEnabled] and
+    [gid.adw1.message_dialog.MessageDialog.setResponseAppearance] for details.
+    
+    Example of an [gid.adw1.message_dialog.MessageDialog] UI definition:
+    
+    ```xml
+    <object class="AdwMessageDialog" id="dialog">
+      <property name="heading" translatable="yes">Save Changes?</property>
+      <property name="body" translatable="yes">Open documents contain unsaved changes. Changes which are not saved will be permanently lost.</property>
+      <property name="default-response">save</property>
+      <property name="close-response">cancel</property>
+      <signal name="response" handler="response_cb"/>
+      <responses>
+        <response id="cancel" translatable="yes">_Cancel</response>
+        <response id="discard" translatable="yes" appearance="destructive">_Discard</response>
+        <response id="save" translatable="yes" appearance="suggested" enabled="false">_Save</response>
+      </responses>
+    </object>
+    ```
+    
+    ## Accessibility
+    
+    [gid.adw1.message_dialog.MessageDialog] uses the [gid.gtk4.types.AccessibleRole.Dialog] role.
+
+    Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+*/
+class MessageDialog : gid.gtk4.window.Window
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())adw_message_dialog_get_type != &gidSymbolNotFound ? adw_message_dialog_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwMessageDialog";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override MessageDialog self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.adw1.message_dialog.MessageDialog]
+      Returns: New builder object
+  */
+  static MessageDialogGidBuilder builder() nothrow
+  {
+    return new MessageDialogGidBuilder;
+  }
+
+  /**
+      Get `body_` property.
+      Returns: The body text of the dialog.
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  @property string body_() nothrow
+  {
+    return getBody();
+  }
+
+  /**
+      Set `body_` property.
+      Params:
+        propval = The body text of the dialog.
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  @property void body_(string propval) nothrow
+  {
+    setBody(propval);
+  }
+
+  /**
+      Get `bodyUseMarkup` property.
+      Returns: Whether the body text includes Pango markup.
+        
+        See `func@Pango.parse_markup`.
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  @property bool bodyUseMarkup() nothrow
+  {
+    return getBodyUseMarkup();
+  }
+
+  /**
+      Set `bodyUseMarkup` property.
+      Params:
+        propval = Whether the body text includes Pango markup.
+          
+          See `func@Pango.parse_markup`.
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  @property void bodyUseMarkup(bool propval) nothrow
+  {
+    setBodyUseMarkup(propval);
+  }
+
+  /**
+      Get `closeResponse` property.
+      Returns: The ID of the close response.
+        
+        It will be passed to [gid.adw1.message_dialog.MessageDialog.response] if the window is
+        closed by pressing <kbd>Escape</kbd> or with a system action.
+        
+        It doesn't have to correspond to any of the responses in the dialog.
+        
+        The default close response is `close`.
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  @property string closeResponse() nothrow
+  {
+    return getCloseResponse();
+  }
+
+  /**
+      Set `closeResponse` property.
+      Params:
+        propval = The ID of the close response.
+          
+          It will be passed to [gid.adw1.message_dialog.MessageDialog.response] if the window is
+          closed by pressing <kbd>Escape</kbd> or with a system action.
+          
+          It doesn't have to correspond to any of the responses in the dialog.
+          
+          The default close response is `close`.
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  @property void closeResponse(string propval) nothrow
+  {
+    setCloseResponse(propval);
+  }
+
+  /**
+      Get `defaultResponse` property.
+      Returns: The response ID of the default response.
+        
+        The button corresponding to this response will be set as the default widget
+        of the dialog.
+        
+        If not set, the default widget will not be set, and the last added response
+        will be focused by default.
+        
+        See [gid.gtk4.window.Window.defaultWidget].
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  @property string defaultResponse() nothrow
+  {
+    return getDefaultResponse();
+  }
+
+  /**
+      Set `defaultResponse` property.
+      Params:
+        propval = The response ID of the default response.
+          
+          The button corresponding to this response will be set as the default widget
+          of the dialog.
+          
+          If not set, the default widget will not be set, and the last added response
+          will be focused by default.
+          
+          See [gid.gtk4.window.Window.defaultWidget].
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  @property void defaultResponse(string propval) nothrow
+  {
+    setDefaultResponse(propval);
+  }
+
+  /**
+      Get `extraChild` property.
+      Returns: The child widget.
+        
+        Displayed below the heading and body.
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  @property gid.gtk4.widget.Widget extraChild() nothrow
+  {
+    return getExtraChild();
+  }
+
+  /**
+      Set `extraChild` property.
+      Params:
+        propval = The child widget.
+          
+          Displayed below the heading and body.
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  @property void extraChild(gid.gtk4.widget.Widget propval) nothrow
+  {
+    setExtraChild(propval);
+  }
+
+  /**
+      Get `heading` property.
+      Returns: The heading of the dialog.
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  @property string heading() nothrow
+  {
+    return getHeading();
+  }
+
+  /**
+      Set `heading` property.
+      Params:
+        propval = The heading of the dialog.
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  @property void heading(string propval) nothrow
+  {
+    setHeading(propval);
+  }
+
+  /**
+      Get `headingUseMarkup` property.
+      Returns: Whether the heading includes Pango markup.
+        
+        See `func@Pango.parse_markup`.
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  @property bool headingUseMarkup() nothrow
+  {
+    return getHeadingUseMarkup();
+  }
+
+  /**
+      Set `headingUseMarkup` property.
+      Params:
+        propval = Whether the heading includes Pango markup.
+          
+          See `func@Pango.parse_markup`.
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  @property void headingUseMarkup(bool propval) nothrow
+  {
+    setHeadingUseMarkup(propval);
+  }
+
+  /**
+      Creates a new [gid.adw1.message_dialog.MessageDialog].
+      
+      heading and body can be set to `NULL`. This can be useful if they need to
+      be formatted or use markup. In that case, set them to `NULL` and call
+      [gid.adw1.message_dialog.MessageDialog.formatBody] or similar methods afterwards:
+      
+      ```c
+      GtkWidget *dialog;
+      
+      dialog = adw_message_dialog_new (parent, _("Replace File?"), NULL);
+      adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (dialog),
+                                      _("A file named “%s” already exists.  Do you want to replace it?"),
+                                      filename);
+      ```
+  
+      Params:
+        parent = transient parent
+        heading = the heading
+        body_ = the body text
+      Returns: the newly created [gid.adw1.message_dialog.MessageDialog]
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  this(gid.gtk4.window.Window parent = null, string heading = null, string body_ = null) nothrow
+  {
+    GtkWidget* _cretval;
+    const(char)* _heading = heading.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _body_ = body_.toCString!(No.Malloc, Yes.Nullable);
+    _cretval = adw_message_dialog_new(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, _heading, _body_);
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Adds a response with id and label to self.
+      
+      Responses are represented as buttons in the dialog.
+      
+      Response ID must be unique. It will be used in
+      [gid.adw1.message_dialog.MessageDialog.response] to tell which response had been activated,
+      as well as to inspect and modify the response later.
+      
+      An embedded underline in label indicates a mnemonic.
+      
+      [gid.adw1.message_dialog.MessageDialog.setResponseLabel] can be used to change the response
+      label after it had been added.
+      
+      [gid.adw1.message_dialog.MessageDialog.setResponseEnabled] and
+      [gid.adw1.message_dialog.MessageDialog.setResponseAppearance] can be used to customize the
+      responses further.
+  
+      Params:
+        id = the response ID
+        label = the response label
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  void addResponse(string id, string label) nothrow
+  {
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
+    adw_message_dialog_add_response(cast(AdwMessageDialog*)this._cPtr, _id, _label);
+  }
+
+  /**
+      This function shows self to the user.
+  
+      Params:
+        cancellable = a [gid.gio2.cancellable.Cancellable] to cancel the operation
+        callback = a callback to call when the operation is complete
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  void choose(gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null) nothrow
+  {
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    adw_message_dialog_choose(cast(AdwMessageDialog*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Finishes the [gid.adw1.message_dialog.MessageDialog.choose] call and returns the response ID.
+  
+      Params:
+        result = a [gid.gio2.async_result.AsyncResult]
+      Returns: the ID of the response that was selected, or
+          [gid.adw1.message_dialog.MessageDialog.closeResponse] if the call was cancelled.
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  string chooseFinish(gid.gio2.async_result.AsyncResult result) nothrow
+  {
+    const(char)* _cretval;
+    _cretval = adw_message_dialog_choose_finish(cast(AdwMessageDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the body text of self.
+      Returns: the body of self.
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  string getBody() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = adw_message_dialog_get_body(cast(AdwMessageDialog*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets whether the body text of self includes Pango markup.
+      Returns: whether self uses markup for body text
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  bool getBodyUseMarkup() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_message_dialog_get_body_use_markup(cast(AdwMessageDialog*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the ID of the close response of self.
+      Returns: the close response ID
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  string getCloseResponse() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = adw_message_dialog_get_close_response(cast(AdwMessageDialog*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the ID of the default response of self.
+      Returns: the default response ID
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  string getDefaultResponse() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = adw_message_dialog_get_default_response(cast(AdwMessageDialog*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the child widget of self.
+      Returns: the child widget of self.
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  gid.gtk4.widget.Widget getExtraChild() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = adw_message_dialog_get_extra_child(cast(AdwMessageDialog*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the heading of self.
+      Returns: the heading of self.
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  string getHeading() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = adw_message_dialog_get_heading(cast(AdwMessageDialog*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets whether the heading of self includes Pango markup.
+      Returns: whether self uses markup for heading
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  bool getHeadingUseMarkup() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_message_dialog_get_heading_use_markup(cast(AdwMessageDialog*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the appearance of response.
+      
+      See [gid.adw1.message_dialog.MessageDialog.setResponseAppearance].
+  
+      Params:
+        response = a response ID
+      Returns: the appearance of response
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  gid.adw1.types.ResponseAppearance getResponseAppearance(string response) nothrow
+  {
+    AdwResponseAppearance _cretval;
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
+    _cretval = adw_message_dialog_get_response_appearance(cast(AdwMessageDialog*)this._cPtr, _response);
+    gid.adw1.types.ResponseAppearance _retval = cast(gid.adw1.types.ResponseAppearance)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets whether response is enabled.
+      
+      See [gid.adw1.message_dialog.MessageDialog.setResponseEnabled].
+  
+      Params:
+        response = a response ID
+      Returns: whether response is enabled
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  bool getResponseEnabled(string response) nothrow
+  {
+    bool _retval;
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)adw_message_dialog_get_response_enabled(cast(AdwMessageDialog*)this._cPtr, _response);
+    return _retval;
+  }
+
+  /**
+      Gets the label of response.
+      
+      See [gid.adw1.message_dialog.MessageDialog.setResponseLabel].
+  
+      Params:
+        response = a response ID
+      Returns: the label of response
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  string getResponseLabel(string response) nothrow
+  {
+    const(char)* _cretval;
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
+    _cretval = adw_message_dialog_get_response_label(cast(AdwMessageDialog*)this._cPtr, _response);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets whether self has a response with the ID response.
+  
+      Params:
+        response = response ID
+      Returns: whether self has a response with the ID response.
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  bool hasResponse(string response) nothrow
+  {
+    bool _retval;
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)adw_message_dialog_has_response(cast(AdwMessageDialog*)this._cPtr, _response);
+    return _retval;
+  }
+
+  /**
+      Removes a response from self.
+  
+      Params:
+        id = the response ID
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  void removeResponse(string id) nothrow
+  {
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
+    adw_message_dialog_remove_response(cast(AdwMessageDialog*)this._cPtr, _id);
+  }
+
+  /**
+      Emits the [gid.adw1.message_dialog.MessageDialog.response] signal with the given response ID.
+      
+      Used to indicate that the user has responded to the dialog in some way.
+  
+      Params:
+        response = response ID
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  void response(string response) nothrow
+  {
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
+    adw_message_dialog_response(cast(AdwMessageDialog*)this._cPtr, _response);
+  }
+
+  /**
+      Sets the body text of self.
+  
+      Params:
+        body_ = the body of self
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  void setBody(string body_) nothrow
+  {
+    const(char)* _body_ = body_.toCString!(No.Malloc, No.Nullable);
+    adw_message_dialog_set_body(cast(AdwMessageDialog*)this._cPtr, _body_);
+  }
+
+  /**
+      Sets whether the body text of self includes Pango markup.
+      
+      See `funcPango.parse_markup`.
+  
+      Params:
+        useMarkup = whether to use markup for body text
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  void setBodyUseMarkup(bool useMarkup) nothrow
+  {
+    adw_message_dialog_set_body_use_markup(cast(AdwMessageDialog*)this._cPtr, useMarkup);
+  }
+
+  /**
+      Sets the ID of the close response of self.
+      
+      It will be passed to [gid.adw1.message_dialog.MessageDialog.response] if the window is
+      closed by pressing <kbd>Escape</kbd> or with a system action.
+      
+      It doesn't have to correspond to any of the responses in the dialog.
+      
+      The default close response is `close`.
+  
+      Params:
+        response = the close response ID
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  void setCloseResponse(string response) nothrow
+  {
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
+    adw_message_dialog_set_close_response(cast(AdwMessageDialog*)this._cPtr, _response);
+  }
+
+  /**
+      Sets the ID of the default response of self.
+      
+      The button corresponding to this response will be set as the default widget
+      of self.
+      
+      If not set, the default widget will not be set, and the last added response
+      will be focused by default.
+      
+      See [gid.gtk4.window.Window.defaultWidget].
+  
+      Params:
+        response = the default response ID
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  void setDefaultResponse(string response = null) nothrow
+  {
+    const(char)* _response = response.toCString!(No.Malloc, Yes.Nullable);
+    adw_message_dialog_set_default_response(cast(AdwMessageDialog*)this._cPtr, _response);
+  }
+
+  /**
+      Sets the child widget of self.
+      
+      The child widget is displayed below the heading and body.
+  
+      Params:
+        child = the child widget
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  void setExtraChild(gid.gtk4.widget.Widget child = null) nothrow
+  {
+    adw_message_dialog_set_extra_child(cast(AdwMessageDialog*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the heading of self.
+  
+      Params:
+        heading = the heading of self
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  void setHeading(string heading = null) nothrow
+  {
+    const(char)* _heading = heading.toCString!(No.Malloc, Yes.Nullable);
+    adw_message_dialog_set_heading(cast(AdwMessageDialog*)this._cPtr, _heading);
+  }
+
+  /**
+      Sets whether the heading of self includes Pango markup.
+      
+      See `funcPango.parse_markup`.
+  
+      Params:
+        useMarkup = whether to use markup for heading
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  void setHeadingUseMarkup(bool useMarkup) nothrow
+  {
+    adw_message_dialog_set_heading_use_markup(cast(AdwMessageDialog*)this._cPtr, useMarkup);
+  }
+
+  /**
+      Sets the appearance for response.
+      
+      <picture>
+        <source srcset="message-dialog-appearance-dark.png" media="(prefers-color-scheme: dark)">
+        <img src="message-dialog-appearance.png" alt="message-dialog-appearance">
+      </picture>
+      
+      Use [gid.adw1.types.ResponseAppearance.Suggested] to mark important responses such
+      as the affirmative action, like the Save button in the example.
+      
+      Use [gid.adw1.types.ResponseAppearance.Destructive] to draw attention to the
+      potentially damaging consequences of using response. This appearance acts as
+      a warning to the user. The Discard button in the example is using this
+      appearance.
+      
+      The default appearance is [gid.adw1.types.ResponseAppearance.Default].
+      
+      Negative responses like Cancel or Close should use the default appearance.
+  
+      Params:
+        response = a response ID
+        appearance = appearance for response
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  void setResponseAppearance(string response, gid.adw1.types.ResponseAppearance appearance) nothrow
+  {
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
+    adw_message_dialog_set_response_appearance(cast(AdwMessageDialog*)this._cPtr, _response, appearance);
+  }
+
+  /**
+      Sets whether response is enabled.
+      
+      If response is not enabled, the corresponding button will have
+      [gid.gtk4.widget.Widget.sensitive] set to `FALSE` and it can't be activated as
+      a default response.
+      
+      response can still be used as [gid.adw1.message_dialog.MessageDialog.closeResponse] while
+      it's not enabled.
+      
+      Responses are enabled by default.
+  
+      Params:
+        response = a response ID
+        enabled = whether to enable response
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  void setResponseEnabled(string response, bool enabled) nothrow
+  {
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
+    adw_message_dialog_set_response_enabled(cast(AdwMessageDialog*)this._cPtr, _response, enabled);
+  }
+
+  /**
+      Sets the label of response to label.
+      
+      Labels are displayed on the dialog buttons. An embedded underline in label
+      indicates a mnemonic.
+  
+      Params:
+        response = a response ID
+        label = the label of response
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  void setResponseLabel(string response, string label) nothrow
+  {
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
+    adw_message_dialog_set_response_label(cast(AdwMessageDialog*)this._cPtr, _response, _label);
+  }
+
+  /**
+      Connect to `Response` signal.
+  
+      This signal is emitted when the dialog is closed.
+        
+        response will be set to the response ID of the button that had been
+        activated.
+        
+        if the dialog was closed by pressing <kbd>Escape</kbd> or with a system
+        action, response will be set to the value of
+        [gid.adw1.message_dialog.MessageDialog.closeResponse].
+  
+      Params:
+        detail = Signal detail or null (default)
+        callback = signal callback delegate or function to connect
+  
+          `void callback(string response, gid.adw1.message_dialog.MessageDialog messageDialog)`
+  
+          `response` the response ID (optional)
+  
+          `messageDialog` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  gulong connectResponse(T)(string detail = null, T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.adw1.message_dialog.MessageDialog)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.adw1.message_dialog.MessageDialog.response");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("response"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.adw1.message_dialog.MessageDialog]
+class MessageDialogGidBuilderImpl(T) : gid.gtk4.window.WindowGidBuilderImpl!T
+{
+
+
+  /**
+      Set `body_` property.
+      Params:
+        propval = The body text of the dialog.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  T body_(string propval) nothrow
+  {
+    return setProperty("body", propval);
+  }
+
+  /**
+      Set `bodyUseMarkup` property.
+      Params:
+        propval = Whether the body text includes Pango markup.
+          
+          See `func@Pango.parse_markup`.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  T bodyUseMarkup(bool propval) nothrow
+  {
+    return setProperty("body-use-markup", propval);
+  }
+
+  /**
+      Set `closeResponse` property.
+      Params:
+        propval = The ID of the close response.
+          
+          It will be passed to [gid.adw1.message_dialog.MessageDialog.response] if the window is
+          closed by pressing <kbd>Escape</kbd> or with a system action.
+          
+          It doesn't have to correspond to any of the responses in the dialog.
+          
+          The default close response is `close`.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  T closeResponse(string propval) nothrow
+  {
+    return setProperty("close-response", propval);
+  }
+
+  /**
+      Set `defaultResponse` property.
+      Params:
+        propval = The response ID of the default response.
+          
+          The button corresponding to this response will be set as the default widget
+          of the dialog.
+          
+          If not set, the default widget will not be set, and the last added response
+          will be focused by default.
+          
+          See [gid.gtk4.window.Window.defaultWidget].
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  T defaultResponse(string propval) nothrow
+  {
+    return setProperty("default-response", propval);
+  }
+
+  /**
+      Set `extraChild` property.
+      Params:
+        propval = The child widget.
+          
+          Displayed below the heading and body.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  T extraChild(gid.gtk4.widget.Widget propval) nothrow
+  {
+    return setProperty("extra-child", propval);
+  }
+
+  /**
+      Set `heading` property.
+      Params:
+        propval = The heading of the dialog.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  T heading(string propval) nothrow
+  {
+    return setProperty("heading", propval);
+  }
+
+  /**
+      Set `headingUseMarkup` property.
+      Params:
+        propval = Whether the heading includes Pango markup.
+          
+          See `func@Pango.parse_markup`.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  T headingUseMarkup(bool propval) nothrow
+  {
+    return setProperty("heading-use-markup", propval);
+  }
+}
+
+/// Fluent builder for [gid.adw1.message_dialog.MessageDialog]
+final class MessageDialogGidBuilder : MessageDialogGidBuilderImpl!MessageDialogGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  MessageDialog build() nothrow
+  {
+    return new MessageDialog(cast(void*)createGObject(MessageDialog._getGType), Yes.Take);
+  }
+}

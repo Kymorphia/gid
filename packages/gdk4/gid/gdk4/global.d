@@ -1,0 +1,672 @@
+/// Global functions for gdk4 library
+module gid.gdk4.global;
+
+import gid.cairo1.context;
+import gid.cairo1.region;
+import gid.cairo1.surface;
+import gid.core.gid;
+import gid.gdk4.c.functions;
+import gid.gdk4.c.types;
+import gid.gdk4.event;
+import gid.gdk4.rectangle;
+import gid.gdk4.rgba;
+import gid.gdk4.surface;
+import gid.gdk4.texture;
+import gid.gdk4.types;
+import gid.gdkpixbuf2.pixbuf;
+import gid.gio2.async_result;
+import gid.gio2.cancellable;
+import gid.gio2.input_stream;
+import gid.gio2.output_stream;
+import gid.gio2.types;
+import gid.glib2.error;
+import gid.gobject2.object;
+import gid.gobject2.types;
+import gid.gobject2.value;
+
+
+import gid.gdk4.content_deserializer;
+import gid.gdk4.content_serializer;
+
+private extern(C) void _contentSerializeCallback(GdkContentSerializer* serializer) nothrow
+{
+  auto _dlg = cast(gid.gdk4.types.ContentSerializeFunc*)gdk_content_serializer_get_user_data(serializer);
+
+  try
+  {
+    (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk4.content_serializer.ContentSerializer)(cast(void*)serializer, No.Take));
+  }
+  catch (Exception e)
+  {
+    gidInvokeCallbackExceptionHandler(e, "gid.gdk4.types.ContentSerializeFunc");
+  }
+}
+
+private extern(C) void _contentDeserializeCallback(GdkContentDeserializer* deserializer) nothrow
+{
+  auto _dlg = cast(gid.gdk4.types.ContentDeserializeFunc*)gdk_content_deserializer_get_user_data(deserializer);
+
+  try
+  {
+    (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk4.content_deserializer.ContentDeserializer)(cast(void*)deserializer, No.Take));
+  }
+  catch (Exception e)
+  {
+    gidInvokeCallbackExceptionHandler(e, "gid.gdk4.types.ContentDeserializeFunc");
+  }
+}
+
+/**
+Registers a function to serialize objects of a given type.
+The delegate is called with the [gid.gdk4.content_serializer.ContentSerializer] of the operation, it must call
+[gid.gdk4.content_serializer.ContentSerializer.returnSuccess] or
+[gid.gdk4.content_serializer.ContentSerializer.returnError] when done (possibly asynchronously). The registration is
+permanent, the delegate is kept alive for the lifetime of the process.
+Params:
+type = the type of objects that the function can serialize
+mimeType = the mime type to serialize to
+serialize = the delegate to call to serialize
+*/
+void contentRegisterSerializer(gid.gobject2.types.GType type, string mimeType, gid.gdk4.types.ContentSerializeFunc serialize) nothrow
+{
+  import gid.glib2.c.functions : g_log;
+  import gid.glib2.c.types : GLogLevelFlags;
+
+  if (!mimeType || !serialize)
+  {
+    g_log("Gid", GLogLevelFlags.LevelCritical, "gid.gdk4.global.contentRegisterSerializer: assertion 'mimeType && serialize' failed");
+    return;
+  }
+
+  const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
+  auto _serialize = freezeDelegate(cast(void*)&serialize);
+  gdk_content_register_serializer(type, _mimeType, &_contentSerializeCallback, _serialize, &thawDelegate);
+}
+
+/**
+Registers a function to deserialize object of a given type.
+The delegate is called with the [gid.gdk4.content_deserializer.ContentDeserializer] of the operation, it must set the
+value ([gid.gdk4.content_deserializer.ContentDeserializer.setValue]) and call
+[gid.gdk4.content_deserializer.ContentDeserializer.returnSuccess] or
+[gid.gdk4.content_deserializer.ContentDeserializer.returnError] when done (possibly asynchronously). The registration
+is permanent, the delegate is kept alive for the lifetime of the process.
+Params:
+mimeType = the mime type which the function can deserialize from
+type = the type of objects that the function creates
+deserialize = the delegate to call to deserialize
+*/
+void contentRegisterDeserializer(string mimeType, gid.gobject2.types.GType type, gid.gdk4.types.ContentDeserializeFunc deserialize) nothrow
+{
+  import gid.glib2.c.functions : g_log;
+  import gid.glib2.c.types : GLogLevelFlags;
+
+  if (!mimeType || !deserialize)
+  {
+    g_log("Gid", GLogLevelFlags.LevelCritical, "gid.gdk4.global.contentRegisterDeserializer: assertion 'mimeType && deserialize' failed");
+    return;
+  }
+
+  const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
+  auto _deserialize = freezeDelegate(cast(void*)&deserialize);
+  gdk_content_register_deserializer(_mimeType, type, &_contentDeserializeCallback, _deserialize, &thawDelegate);
+}
+
+/**
+    Draws GL content onto a cairo context.
+    
+    It takes a render buffer ID (source_type == GL_RENDERBUFFER) or a texture
+    id (source_type == GL_TEXTURE) and draws it onto cr with an OVER operation,
+    respecting the current clip. The top left corner of the rectangle specified
+    by `x`, `y`, width and height will be drawn at the current (0,0) position of
+    the [gid.cairo1.context.Context].
+    
+    This will work for *all* [gid.cairo1.context.Context], as long as surface is realized, but the
+    fallback implementation that reads back the pixels from the buffer may be
+    used in the general case. In the case of direct drawing to a surface with
+    no special effects applied to cr it will however use a more efficient
+    approach.
+    
+    For GL_RENDERBUFFER the code will always fall back to software for buffers
+    with alpha components, so make sure you use GL_TEXTURE if using alpha.
+    
+    Calling this may change the current GL context.
+
+    Params:
+      cr = a cairo context
+      surface = The surface we're rendering for (not necessarily into)
+      source = The GL ID of the source buffer
+      sourceType = The type of the source
+      bufferScale = The scale-factor that the source buffer is allocated for
+      x = The source x position in source to start copying from in GL coordinates
+      y = The source y position in source to start copying from in GL coordinates
+      width = The width of the region to draw
+      height = The height of the region to draw
+
+    Deprecated: The function is overly complex and produces broken output
+        in various combinations of arguments. If you want to draw with GL textures
+        in GTK, use [gid.gdk4.gltexture.GLTexture.new_]; if you want to use that texture in
+        Cairo, use [gid.gdk4.texture.Texture.download] to download the data into a Cairo
+        image surface.
+*/
+void cairoDrawFromGl(gid.cairo1.context.Context cr, gid.gdk4.surface.Surface surface, int source, int sourceType, int bufferScale, int x, int y, int width, int height) nothrow
+{
+  gdk_cairo_draw_from_gl(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, surface ? cast(GdkSurface*)surface._cPtr(No.Dup) : null, source, sourceType, bufferScale, x, y, width, height);
+}
+
+/**
+    Adds the given rectangle to the current path of cr.
+
+    Params:
+      cr = a cairo context
+      rectangle = a [gid.gtk4.types.Rectangle]
+*/
+void cairoRectangle(gid.cairo1.context.Context cr, gid.gdk4.rectangle.Rectangle rectangle) nothrow
+{
+  gdk_cairo_rectangle(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&rectangle);
+}
+
+/**
+    Adds the given region to the current path of cr.
+
+    Params:
+      cr = a cairo context
+      region = a [gid.cairo1.region.Region]
+*/
+void cairoRegion(gid.cairo1.context.Context cr, gid.cairo1.region.Region region) nothrow
+{
+  gdk_cairo_region(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null);
+}
+
+/**
+    Creates region that covers the area where the given
+    surface is more than 50% opaque.
+    
+    This function takes into account device offsets that might be
+    set with [gid.cairo1.surface.Surface.setDeviceOffset].
+
+    Params:
+      surface = a cairo surface
+    Returns: A [gid.cairo1.region.Region]
+*/
+gid.cairo1.region.Region cairoRegionCreateFromSurface(gid.cairo1.surface.Surface surface) nothrow
+{
+  cairo_region_t* _cretval;
+  _cretval = gdk_cairo_region_create_from_surface(surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new gid.cairo1.region.Region(cast(void*)_cretval, Yes.Take) : null;
+  return _retval;
+}
+
+/**
+    Sets the given pixbuf as the source pattern for cr.
+    
+    The pattern has an extend mode of [gid.cairo1.types.Extend.None] and is aligned
+    so that the origin of pixbuf is pixbuf_x, pixbuf_y.
+
+    Params:
+      cr = a cairo context
+      pixbuf = a [gid.gdkpixbuf2.pixbuf.Pixbuf]
+      pixbufX = X coordinate of location to place upper left corner of pixbuf
+      pixbufY = Y coordinate of location to place upper left corner of pixbuf
+
+    Deprecated: Use [gid.cairo1.context.Context.setSourceSurface] and [gid.gdk4.texture.Texture.download]
+*/
+void cairoSetSourcePixbuf(gid.cairo1.context.Context cr, gid.gdkpixbuf2.pixbuf.Pixbuf pixbuf, double pixbufX, double pixbufY) nothrow
+{
+  gdk_cairo_set_source_pixbuf(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, pixbuf ? cast(const(GdkPixbuf)*)pixbuf._cPtr(No.Dup) : null, pixbufX, pixbufY);
+}
+
+/**
+    Sets the specified [gid.gdk4.rgba.RGBA] as the source color of cr.
+
+    Params:
+      cr = a cairo context
+      rgba = a [gid.gdk4.rgba.RGBA]
+*/
+void cairoSetSourceRgba(gid.cairo1.context.Context cr, gid.gdk4.rgba.RGBA rgba) nothrow
+{
+  gdk_cairo_set_source_rgba(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(const(GdkRGBA)*)&rgba);
+}
+
+/**
+    Reads content from the given input stream and deserialize it, asynchronously.
+    
+    The default I/O priority is [gid.glib2.types.PRIORITY_DEFAULT] (i.e. 0), and lower numbers
+    indicate a higher priority.
+
+    Params:
+      stream = a [gid.gio2.input_stream.InputStream] to read the serialized content from
+      mimeType = the mime type to deserialize from
+      type = the GType to deserialize from
+      ioPriority = the I/O priority of the operation
+      cancellable = optional [gid.gio2.cancellable.Cancellable] object
+      callback = callback to call when the operation is done
+*/
+void contentDeserializeAsync(gid.gio2.input_stream.InputStream stream, string mimeType, gid.gobject2.types.GType type, int ioPriority, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null) nothrow
+{
+  extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+  {
+    ptrThawGC(data);
+    auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+    try
+    {
+      (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+    }
+  }
+  auto _callbackCB = callback ? &_callbackCallback : null;
+  const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
+  auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+  gdk_content_deserialize_async(stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, _mimeType, type, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+}
+
+/**
+    Finishes a content deserialization operation.
+
+    Params:
+      result = the [gid.gio2.async_result.AsyncResult]
+      value = return location for the result of the operation
+    Returns: true if the operation was successful. In this case,
+        value is set. false if an error occurred. In this case,
+        error is set
+    Throws: [ErrorWrap]
+*/
+bool contentDeserializeFinish(gid.gio2.async_result.AsyncResult result, out gid.gobject2.value.Value value)
+{
+  bool _retval;
+  auto _value = boxedNew!GValue(gid.gobject2.value.Value._getGType);
+  GError *_err;
+  _retval = cast(bool)gdk_content_deserialize_finish(result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, _value, &_err);
+  if (_err)
+  {
+    gid.gobject2.value.Value._cFree(_value);
+    throw new ErrorWrap(_err, Yes.Take);
+  }
+  value = new gid.gobject2.value.Value(cast(void*)_value, Yes.Take);
+  return _retval;
+}
+
+/**
+    Serialize content and write it to the given output stream, asynchronously.
+    
+    The default I/O priority is [gid.glib2.types.PRIORITY_DEFAULT] (i.e. 0), and lower numbers
+    indicate a higher priority.
+
+    Params:
+      stream = a [gid.gio2.output_stream.OutputStream] to write the serialized content to
+      mimeType = the mime type to serialize to
+      value = the content to serialize
+      ioPriority = the I/O priority of the operation
+      cancellable = optional [gid.gio2.cancellable.Cancellable] object
+      callback = callback to call when the operation is done
+*/
+void contentSerializeAsync(gid.gio2.output_stream.OutputStream stream, string mimeType, gid.gobject2.value.Value value, int ioPriority, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null) nothrow
+{
+  extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+  {
+    ptrThawGC(data);
+    auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+    try
+    {
+      (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+    }
+    catch (Exception e)
+    {
+      gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+    }
+  }
+  auto _callbackCB = callback ? &_callbackCallback : null;
+  const(char)* _mimeType = mimeType.toCString!(No.Malloc, No.Nullable);
+  auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+  gdk_content_serialize_async(stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, _mimeType, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+}
+
+/**
+    Finishes a content serialization operation.
+
+    Params:
+      result = the [gid.gio2.async_result.AsyncResult]
+    Returns: true if the operation was successful, false if an
+        error occurred. In this case, error is set
+    Throws: [ErrorWrap]
+*/
+bool contentSerializeFinish(gid.gio2.async_result.AsyncResult result)
+{
+  bool _retval;
+  GError *_err;
+  _retval = cast(bool)gdk_content_serialize_finish(result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+  if (_err)
+    throw new ErrorWrap(_err, Yes.Take);
+  return _retval;
+}
+
+/**
+    Returns the relative angle from event1 to event2.
+    
+    The relative angle is the angle between the X axis and the line
+    through both events' positions. The rotation direction for positive
+    angles is from the positive X axis towards the positive Y axis.
+    
+    This assumes that both events have X/Y information.
+    If not, this function returns false.
+
+    Params:
+      event1 = first [gid.gdk4.event.Event]
+      event2 = second [gid.gdk4.event.Event]
+      angle = return location for the relative angle between both events
+    Returns: true if the angle could be calculated.
+*/
+bool eventsGetAngle(gid.gdk4.event.Event event1, gid.gdk4.event.Event event2, out double angle) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gdk_events_get_angle(event1 ? cast(GdkEvent*)event1._cPtr(No.Dup) : null, event2 ? cast(GdkEvent*)event2._cPtr(No.Dup) : null, cast(double*)&angle);
+  return _retval;
+}
+
+/**
+    Returns the point halfway between the events' positions.
+    
+    This assumes that both events have X/Y information.
+    If not, this function returns false.
+
+    Params:
+      event1 = first [gid.gdk4.event.Event]
+      event2 = second [gid.gdk4.event.Event]
+      x = return location for the X coordinate of the center
+      y = return location for the Y coordinate of the center
+    Returns: true if the center could be calculated.
+*/
+bool eventsGetCenter(gid.gdk4.event.Event event1, gid.gdk4.event.Event event2, out double x, out double y) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gdk_events_get_center(event1 ? cast(GdkEvent*)event1._cPtr(No.Dup) : null, event2 ? cast(GdkEvent*)event2._cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
+  return _retval;
+}
+
+/**
+    Returns the distance between the event locations.
+    
+    This assumes that both events have X/Y information.
+    If not, this function returns false.
+
+    Params:
+      event1 = first [gid.gdk4.event.Event]
+      event2 = second [gid.gdk4.event.Event]
+      distance = return location for the distance
+    Returns: true if the distance could be calculated.
+*/
+bool eventsGetDistance(gid.gdk4.event.Event event1, gid.gdk4.event.Event event2, out double distance) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gdk_events_get_distance(event1 ? cast(GdkEvent*)event1._cPtr(No.Dup) : null, event2 ? cast(GdkEvent*)event2._cPtr(No.Dup) : null, cast(double*)&distance);
+  return _retval;
+}
+
+/**
+    Canonicalizes the given mime type and interns the result.
+    
+    If string is not a valid mime type, null is returned instead.
+    See RFC 2048 for the syntax if mime types.
+
+    Params:
+      string_ = string of a potential mime type
+    Returns: An interned string for the canonicalized
+        mime type or null if the string wasn't a valid mime type
+*/
+string internMimeType(string string_) nothrow
+{
+  const(char)* _cretval;
+  const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
+  _cretval = gdk_intern_mime_type(_string_);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+  return _retval;
+}
+
+/**
+    Obtains the upper- and lower-case versions of the keyval symbol.
+    
+    Examples of keyvals are [gid.gdk4.types.KEY_a], `GDK_KEY_Enter`, [gid.gdk4.types.KEY_F1], etc.
+
+    Params:
+      symbol = a keyval
+      lower = return location for lowercase version of symbol
+      upper = return location for uppercase version of symbol
+*/
+void keyvalConvertCase(uint symbol, out uint lower, out uint upper) nothrow
+{
+  gdk_keyval_convert_case(symbol, cast(uint*)&lower, cast(uint*)&upper);
+}
+
+/**
+    Converts a key name to a key value.
+    
+    The names are the same as those in the
+    `gdk/gdkkeysyms.h` header file
+    but without the leading “GDK_KEY_”.
+
+    Params:
+      keyvalName = a key name
+    Returns: the corresponding key value, or [gid.gdk4.types.KEY_VoidSymbol]
+        if the key name is not a valid key
+*/
+uint keyvalFromName(string keyvalName) nothrow
+{
+  uint _retval;
+  const(char)* _keyvalName = keyvalName.toCString!(No.Malloc, No.Nullable);
+  _retval = gdk_keyval_from_name(_keyvalName);
+  return _retval;
+}
+
+/**
+    Returns true if the given key value is in lower case.
+
+    Params:
+      keyval = a key value.
+    Returns: true if keyval is in lower case, or if keyval is not
+        subject to case conversion.
+*/
+bool keyvalIsLower(uint keyval) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gdk_keyval_is_lower(keyval);
+  return _retval;
+}
+
+/**
+    Returns true if the given key value is in upper case.
+
+    Params:
+      keyval = a key value.
+    Returns: true if keyval is in upper case, or if keyval is not subject to
+       case conversion.
+*/
+bool keyvalIsUpper(uint keyval) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gdk_keyval_is_upper(keyval);
+  return _retval;
+}
+
+/**
+    Converts a key value into a symbolic name.
+    
+    The names are the same as those in the
+    `gdk/gdkkeysyms.h` header file
+    but without the leading “GDK_KEY_”.
+
+    Params:
+      keyval = a key value
+    Returns: a string containing the name
+        of the key
+*/
+string keyvalName(uint keyval) nothrow
+{
+  const(char)* _cretval;
+  _cretval = gdk_keyval_name(keyval);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+  return _retval;
+}
+
+/**
+    Converts a key value to lower case, if applicable.
+
+    Params:
+      keyval = a key value.
+    Returns: the lower case form of keyval, or keyval itself if it is already
+       in lower case or it is not subject to case conversion.
+*/
+uint keyvalToLower(uint keyval) nothrow
+{
+  uint _retval;
+  _retval = gdk_keyval_to_lower(keyval);
+  return _retval;
+}
+
+/**
+    Converts from a GDK key symbol to the corresponding Unicode
+    character.
+    
+    Note that the conversion does not take the current locale
+    into consideration, which might be expected for particular
+    keyvals, such as [gid.gdk4.types.KEY_KP_Decimal].
+
+    Params:
+      keyval = a GDK key symbol
+    Returns: the corresponding unicode character, or 0 if there
+        is no corresponding character.
+*/
+uint keyvalToUnicode(uint keyval) nothrow
+{
+  uint _retval;
+  _retval = gdk_keyval_to_unicode(keyval);
+  return _retval;
+}
+
+/**
+    Converts a key value to upper case, if applicable.
+
+    Params:
+      keyval = a key value.
+    Returns: the upper case form of keyval, or keyval itself if it is already
+        in upper case or it is not subject to case conversion.
+*/
+uint keyvalToUpper(uint keyval) nothrow
+{
+  uint _retval;
+  _retval = gdk_keyval_to_upper(keyval);
+  return _retval;
+}
+
+/**
+    Transfers image data from a [gid.cairo1.surface.Surface] and converts it
+    to a [gid.gdkpixbuf2.pixbuf.Pixbuf].
+    
+    This allows you to efficiently read individual pixels from cairo surfaces.
+    
+    This function will create an RGB pixbuf with 8 bits per channel.
+    The pixbuf will contain an alpha channel if the surface contains one.
+
+    Params:
+      surface = surface to copy from
+      srcX = Source X coordinate within surface
+      srcY = Source Y coordinate within surface
+      width = Width in pixels of region to get
+      height = Height in pixels of region to get
+    Returns: A newly-created pixbuf with a
+        reference count of 1
+
+    Deprecated: Use [gid.gdk4.texture.Texture] and subclasses instead
+        cairo surfaces and pixbufs
+*/
+gid.gdkpixbuf2.pixbuf.Pixbuf pixbufGetFromSurface(gid.cairo1.surface.Surface surface, int srcX, int srcY, int width, int height) nothrow
+{
+  GdkPixbuf* _cretval;
+  _cretval = gdk_pixbuf_get_from_surface(surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null, srcX, srcY, width, height);
+  auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gdkpixbuf2.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
+  return _retval;
+}
+
+/**
+    Creates a new pixbuf from texture.
+    
+    This should generally not be used in newly written code as later
+    stages will almost certainly convert the pixbuf back into a texture
+    to draw it on screen.
+
+    Params:
+      texture = a [gid.gdk4.texture.Texture]
+    Returns: a new [gid.gdkpixbuf2.pixbuf.Pixbuf]
+
+    Deprecated: Use [gid.gdk4.texture.Texture] and subclasses instead
+        cairo surfaces and pixbufs
+*/
+gid.gdkpixbuf2.pixbuf.Pixbuf pixbufGetFromTexture(gid.gdk4.texture.Texture texture) nothrow
+{
+  GdkPixbuf* _cretval;
+  _cretval = gdk_pixbuf_get_from_texture(texture ? cast(GdkTexture*)texture._cPtr(No.Dup) : null);
+  auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gdkpixbuf2.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
+  return _retval;
+}
+
+/**
+    Sets a list of backends that GDK should try to use.
+    
+    This can be useful if your application does not
+    work with certain GDK backends.
+    
+    By default, GDK tries all included backends.
+    
+    For example:
+    
+    ```c
+    gdk_set_allowed_backends ("wayland,macos,*");
+    ```
+    
+    instructs GDK to try the Wayland backend first, followed by the
+    MacOs backend, and then all others.
+    
+    If the `GDK_BACKEND` environment variable is set, it determines
+    what backends are tried in what order, while still respecting the
+    set of allowed backends that are specified by this function.
+    
+    The possible backend names are:
+    
+      - `broadway`
+      - `macos`
+      - `wayland`.
+      - `win32`
+      - `x11`
+    
+    You can also include a `*` in the list to try all remaining backends.
+    
+    This call must happen prior to functions that open a display, such
+    as [gid.gdk4.display.Display.open], `[gid.gtk4.global.init_]`, or `[gid.gtk4.global.initCheck]`
+    in order to take effect.
+
+    Params:
+      backends = a comma-separated list of backends
+*/
+void setAllowedBackends(string backends) nothrow
+{
+  const(char)* _backends = backends.toCString!(No.Malloc, No.Nullable);
+  gdk_set_allowed_backends(_backends);
+}
+
+/**
+    Converts from a Unicode character to a key symbol.
+
+    Params:
+      wc = a Unicode character
+    Returns: the corresponding GDK key symbol, if one exists,
+        or, if there is no corresponding symbol, `wc | 0x01000000`
+*/
+uint unicodeToKeyval(uint wc) nothrow
+{
+  uint _retval;
+  _retval = gdk_unicode_to_keyval(wc);
+  return _retval;
+}

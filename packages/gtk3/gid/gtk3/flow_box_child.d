@@ -1,0 +1,188 @@
+/// Module for [FlowBoxChild] class
+module gid.gtk3.flow_box_child;
+
+public import gid.core.basictypes;
+import gid.atk1.implementor_iface;
+import gid.atk1.implementor_iface_mixin;
+import gid.core.gid;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gtk3.bin;
+import gid.gtk3.buildable;
+import gid.gtk3.buildable_mixin;
+import gid.gtk3.c.functions;
+import gid.gtk3.c.types;
+import gid.gtk3.types;
+
+/** */
+class FlowBoxChild : gid.gtk3.bin.Bin
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_flow_box_child_get_type != &gidSymbolNotFound ? gtk_flow_box_child_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkFlowBoxChild";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override FlowBoxChild self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk3.flow_box_child.FlowBoxChild]
+      Returns: New builder object
+  */
+  static FlowBoxChildGidBuilder builder() nothrow
+  {
+    return new FlowBoxChildGidBuilder;
+  }
+
+  /**
+      Creates a new #GtkFlowBoxChild, to be used as a child
+      of a #GtkFlowBox.
+      Returns: a new #GtkFlowBoxChild
+  */
+  this() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_flow_box_child_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Marks child as changed, causing any state that depends on this
+      to be updated. This affects sorting and filtering.
+      
+      Note that calls to this method must be in sync with the data
+      used for the sorting and filtering functions. For instance, if
+      the list is mirroring some external data set, and *two* children
+      changed in the external data set when you call
+      [gid.gtk4.flow_box_child.FlowBoxChild.changed] on the first child, the sort function
+      must only read the new data for the first of the two changed
+      children, otherwise the resorting of the children will be wrong.
+      
+      This generally means that if you don’t fully control the data
+      model, you have to duplicate the data that affects the sorting
+      and filtering functions into the widgets themselves. Another
+      alternative is to call [gid.gtk4.flow_box.FlowBox.invalidateSort] on any
+      model change, but that is more expensive.
+  */
+  void changed() nothrow
+  {
+    gtk_flow_box_child_changed(cast(GtkFlowBoxChild*)this._cPtr);
+  }
+
+  /**
+      Gets the current index of the child in its #GtkFlowBox container.
+      Returns: the index of the child, or -1 if the child is not
+            in a flow box.
+  */
+  int getIndex() nothrow
+  {
+    int _retval;
+    _retval = gtk_flow_box_child_get_index(cast(GtkFlowBoxChild*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns whether the child is currently selected in its
+      #GtkFlowBox container.
+      Returns: true if child is selected
+  */
+  bool isSelected() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_flow_box_child_is_selected(cast(GtkFlowBoxChild*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Connect to `Activate` signal.
+  
+      The ::activate signal is emitted when the user activates
+        a child widget in a #GtkFlowBox, either by clicking or
+        double-clicking, or by using the Space or Enter key.
+        
+        While this signal is used as a
+        [keybinding signal][GtkBindingSignal],
+        it can be used by applications for their own purposes.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk3.flow_box_child.FlowBoxChild flowBoxChild)`
+  
+          `flowBoxChild` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk3.flow_box_child.FlowBoxChild)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.flow_box_child.FlowBoxChild.activate");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("activate", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk3.flow_box_child.FlowBoxChild]
+class FlowBoxChildGidBuilderImpl(T) : gid.gtk3.bin.BinGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gid.gtk3.flow_box_child.FlowBoxChild]
+final class FlowBoxChildGidBuilder : FlowBoxChildGidBuilderImpl!FlowBoxChildGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  FlowBoxChild build() nothrow
+  {
+    return new FlowBoxChild(cast(void*)createGObject(FlowBoxChild._getGType), Yes.Take);
+  }
+}

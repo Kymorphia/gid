@@ -1,0 +1,149 @@
+/// Module for [ActionMuxer] class
+module gid.panel1.action_muxer;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gio2.action_group;
+import gid.gio2.action_group_mixin;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.panel1.c.functions;
+import gid.panel1.c.types;
+import gid.panel1.types;
+
+/** */
+class ActionMuxer : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.ActionGroup
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())panel_action_muxer_get_type != &gidSymbolNotFound ? panel_action_muxer_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PanelActionMuxer";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ActionMuxer self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.panel1.action_muxer.ActionMuxer]
+      Returns: New builder object
+  */
+  static ActionMuxerGidBuilder builder() nothrow
+  {
+    return new ActionMuxerGidBuilder;
+  }
+
+  mixin ActionGroupT!();
+
+  /** */
+  this() nothrow
+  {
+    PanelActionMuxer* _cretval;
+    _cretval = panel_action_muxer_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Locates the #GActionGroup inserted as prefix.
+      
+      If no group was found matching group, null is returned.
+  
+      Params:
+        prefix = the name of the inserted action group
+      Returns: a #GActionGroup matching prefix if
+          found, otherwise null.
+  */
+  gid.gio2.action_group.ActionGroup getActionGroup(string prefix) nothrow
+  {
+    GActionGroup* _cretval;
+    const(char)* _prefix = prefix.toCString!(No.Malloc, No.Nullable);
+    _cretval = panel_action_muxer_get_action_group(cast(PanelActionMuxer*)this._cPtr, _prefix);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.action_group.ActionGroup)(cast(GActionGroup*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /** */
+  void insertActionGroup(string prefix, gid.gio2.action_group.ActionGroup actionGroup) nothrow
+  {
+    const(char)* _prefix = prefix.toCString!(No.Malloc, No.Nullable);
+    panel_action_muxer_insert_action_group(cast(PanelActionMuxer*)this._cPtr, _prefix, actionGroup ? cast(GActionGroup*)(cast(gid.gobject2.object.ObjectWrap)actionGroup)._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Gets a list of group names in the muxer.
+      Returns: an array containing the names of groups within the muxer
+  */
+  string[] listGroups() nothrow
+  {
+    char** _cretval;
+    _cretval = panel_action_muxer_list_groups(cast(PanelActionMuxer*)this._cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
+      gFree(cast(void*)_cretval);
+    }
+    return _retval;
+  }
+
+  /** */
+  void removeActionGroup(string prefix) nothrow
+  {
+    const(char)* _prefix = prefix.toCString!(No.Malloc, No.Nullable);
+    panel_action_muxer_remove_action_group(cast(PanelActionMuxer*)this._cPtr, _prefix);
+  }
+
+  /** */
+  void removeAll() nothrow
+  {
+    panel_action_muxer_remove_all(cast(PanelActionMuxer*)this._cPtr);
+  }
+}
+
+/// Fluent builder implementation template for [gid.panel1.action_muxer.ActionMuxer]
+class ActionMuxerGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T, gid.gio2.action_group.ActionGroupGidBuilderImpl!T
+{
+
+  mixin ActionGroupGidBuilderT!();
+}
+
+/// Fluent builder for [gid.panel1.action_muxer.ActionMuxer]
+final class ActionMuxerGidBuilder : ActionMuxerGidBuilderImpl!ActionMuxerGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  ActionMuxer build() nothrow
+  {
+    return new ActionMuxer(cast(void*)createGObject(ActionMuxer._getGType), Yes.Take);
+  }
+}

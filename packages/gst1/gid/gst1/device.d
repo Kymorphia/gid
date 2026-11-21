@@ -1,0 +1,302 @@
+/// Module for [Device] class
+module gid.gst1.device;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gst1.c.functions;
+import gid.gst1.c.types;
+import gid.gst1.caps;
+import gid.gst1.element;
+import gid.gst1.object;
+import gid.gst1.structure;
+import gid.gst1.types;
+
+/**
+    #GstDevice are objects representing a device, they contain
+    relevant metadata about the device, such as its class and the #GstCaps
+    representing the media types it can produce or handle.
+    
+    #GstDevice are created by #GstDeviceProvider objects which can be
+    aggregated by #GstDeviceMonitor objects.
+*/
+class Device : gid.gst1.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gst_device_get_type != &gidSymbolNotFound ? gst_device_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstDevice";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Device self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gst1.device.Device]
+      Returns: New builder object
+  */
+  static DeviceGidBuilder builder() nothrow
+  {
+    return new DeviceGidBuilder;
+  }
+
+  /** */
+  @property gid.gst1.caps.Caps caps() nothrow
+  {
+    return getCaps();
+  }
+
+  /** */
+  @property string deviceClass() nothrow
+  {
+    return getDeviceClass();
+  }
+
+  /** */
+  @property string displayName() nothrow
+  {
+    return getDisplayName();
+  }
+
+  /** */
+  @property gid.gst1.structure.Structure properties() nothrow
+  {
+    return getProperties();
+  }
+
+  /**
+      Creates the element with all of the required parameters set to use
+      this device.
+  
+      Params:
+        name = name of new element, or null to automatically
+          create a unique name.
+      Returns: a new #GstElement configured to use
+        this device
+  */
+  gid.gst1.element.Element createElement(string name = null) nothrow
+  {
+    GstElement* _cretval;
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+    _cretval = gst_device_create_element(cast(GstDevice*)this._cPtr, _name);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.element.Element)(cast(GstElement*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Getter for the #GstCaps that this device supports.
+      Returns: The #GstCaps supported by this device. Unref with
+        [gid.gst1.caps.Caps.unref] when done.
+  */
+  gid.gst1.caps.Caps getCaps() nothrow
+  {
+    GstCaps* _cretval;
+    _cretval = gst_device_get_caps(cast(GstDevice*)this._cPtr);
+    auto _retval = _cretval ? new gid.gst1.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the "class" of a device. This is a "/" separated list of
+      classes that represent this device. They are a subset of the
+      classes of the #GstDeviceProvider that produced this device.
+      Returns: The device class. Free with [gid.glib2.global.gfree] after use.
+  */
+  string getDeviceClass() nothrow
+  {
+    char* _cretval;
+    _cretval = gst_device_get_device_class(cast(GstDevice*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the user-friendly name of the device.
+      Returns: The device name. Free with [gid.glib2.global.gfree] after use.
+  */
+  string getDisplayName() nothrow
+  {
+    char* _cretval;
+    _cretval = gst_device_get_display_name(cast(GstDevice*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the extra properties of a device.
+      Returns: The extra properties or null when there are none.
+                 Free with [gid.gst1.structure.Structure.free] after use.
+  */
+  gid.gst1.structure.Structure getProperties() nothrow
+  {
+    GstStructure* _cretval;
+    _cretval = gst_device_get_properties(cast(GstDevice*)this._cPtr);
+    auto _retval = _cretval ? new gid.gst1.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Check if device matches all of the given classes
+  
+      Params:
+        classes = a "/"-separated list of device classes to match, only match if
+           all classes are matched
+      Returns: true if device matches.
+  */
+  bool hasClasses(string classes) nothrow
+  {
+    bool _retval;
+    const(char)* _classes = classes.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)gst_device_has_classes(cast(GstDevice*)this._cPtr, _classes);
+    return _retval;
+  }
+
+  /**
+      Check if factory matches all of the given classes
+  
+      Params:
+        classes = a null terminated array of classes
+            to match, only match if all classes are matched
+      Returns: true if device matches.
+  */
+  bool hasClassesv(string[] classes) nothrow
+  {
+    bool _retval;
+    auto _classes_arr = new char*[](classes.length + 1);
+    auto _classes = cast(char**)_classes_arr.ptr;
+    foreach (i, s; classes) _classes[i] = s.toCString!(No.Malloc);
+    _retval = cast(bool)gst_device_has_classesv(cast(GstDevice*)this._cPtr, _classes);
+    return _retval;
+  }
+
+  /**
+      Tries to reconfigure an existing element to use the device. If this
+      function fails, then one must destroy the element and create a new one
+      using [gid.gst1.device.Device.createElement].
+      
+      Note: This should only be implemented for elements can change their
+      device in the PLAYING state.
+  
+      Params:
+        element = a #GstElement
+      Returns: true if the element could be reconfigured to use this device,
+        false otherwise.
+  */
+  bool reconfigureElement(gid.gst1.element.Element element) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_device_reconfigure_element(cast(GstDevice*)this._cPtr, element ? cast(GstElement*)element._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Connect to `Removed` signal.
+  
+      
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gst1.device.Device device)`
+  
+          `device` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectRemoved(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gst1.device.Device)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gst1.device.Device.removed");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("removed", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gst1.device.Device]
+class DeviceGidBuilderImpl(T) : gid.gst1.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T caps(gid.gst1.caps.Caps propval) nothrow
+  {
+    return setProperty("caps", propval);
+  }
+
+  /** */
+  T deviceClass(string propval) nothrow
+  {
+    return setProperty("device-class", propval);
+  }
+
+  /** */
+  T displayName(string propval) nothrow
+  {
+    return setProperty("display-name", propval);
+  }
+
+  /** */
+  T properties(gid.gst1.structure.Structure propval) nothrow
+  {
+    return setProperty("properties", propval);
+  }
+}
+
+/// Fluent builder for [gid.gst1.device.Device]
+final class DeviceGidBuilder : DeviceGidBuilderImpl!DeviceGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Device build() nothrow
+  {
+    return new Device(cast(void*)createGObject(Device._getGType), Yes.Take);
+  }
+}

@@ -7,16 +7,16 @@ public import std.traits : isCallable, Parameters, ParameterStorageClass, Parame
 import core.memory : GC;
 import core.stdc.string : strlen;
 public import core.stdc.string : memset;
-public import gid.wrap;
+public import gid.core.wrap;
 import std.conv : to;
 import std.string : toStringz;
 import std.traits : hasMember, isScalarType;
-import glib.c.functions;
-import glib.c.types;
-import glib.types : SOURCE_REMOVE;
-import gobject.boxed;
-import gobject.object;
-import gobject.c.functions;
+import gid.glib2.c.functions;
+import gid.glib2.c.types;
+import gid.glib2.types : SOURCE_REMOVE;
+import gid.gobject2.boxed;
+import gid.gobject2.object;
+import gid.gobject2.c.functions;
 
 /// Container ownership
 enum GidOwnership
@@ -647,7 +647,7 @@ GHashTable* gHashTableFromD(K, V)(V[K] map) nothrow
 {
   GDestroyNotify valDestroyFunc;
 
-  static if (is(V : gobject.object.ObjectWrap) || is(V == interface))
+  static if (is(V : gid.gobject2.object.ObjectWrap) || is(V == interface))
     valDestroyFunc = cast(GDestroyNotify)g_object_unref;
   else static if (is(V : string))
     valDestroyFunc = g_free;
@@ -716,7 +716,7 @@ bool isHashTablePtrIntType(V)() nothrow
  */
 bool isHashTableValueType(V)() nothrow
 {
-  return is(V : gobject.object.ObjectWrap) || is(V == interface) || is(V == string) || is(V == void*)
+  return is(V : gid.gobject2.object.ObjectWrap) || is(V == interface) || is(V == string) || is(V == void*)
     || (isTypeCopyableStruct!V && !isTypeWrap!V) || isHashTablePtrIntType!V;
 }
 
@@ -810,7 +810,7 @@ bool isTypeCopyableStruct(T)() nothrow
   static if (is(T : OpaqueWrapBase))
     return T._copyable;
   else
-    return is(T : gobject.boxed.Boxed) || is(T : ReffedWrapBase) || is(T : StructWrapBase);
+    return is(T : gid.gobject2.boxed.Boxed) || is(T : ReffedWrapBase) || is(T : StructWrapBase);
 }
 
 /**
@@ -857,8 +857,8 @@ bool isTypeSimple(T)() nothrow
 T cToD(T)(void* data) nothrow
   if (containerTypeIsSupported!T)
 {
-  static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
-    return gobject.object.ObjectWrap._getDObject!T(data, No.Take);
+  static if (is(T : gid.gobject2.object.ObjectWrap) || is(T == interface))
+    return gid.gobject2.object.ObjectWrap._getDObject!T(data, No.Take);
   else static if (is(T == string))
     return fromCString(cast(const(char)*)data);
   else static if (is(T : GidWrap))
@@ -903,7 +903,7 @@ void cValueFree(T)(void* data) nothrow
   if (containerTypeIsSupported!T)
 {
   static if (is(T == interface))
-    gobject.object.ObjectWrap._cFree(data);
+    gid.gobject2.object.ObjectWrap._cFree(data);
   else static if (is(T : GidWrap))
   {
     static if (!isTypeOpaque!T) // Opaque container elements are borrowed
@@ -965,7 +965,7 @@ bool isBoxed(T)() nothrow
   static if (is(T == struct))
     return hasMember!(T, "_getGType");
   else
-    return is(T : gobject.boxed.Boxed);
+    return is(T : gid.gobject2.boxed.Boxed);
 }
 
 /**

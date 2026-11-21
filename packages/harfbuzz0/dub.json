@@ -6,8 +6,8 @@
   "license": "MIT",
   "homepage": "https://github.com/harfbuzz/harfbuzz",
   "targetType": "library",
-  "importPaths": [".", ".."],
-  "sourcePaths": ["harfbuzz"],
+  "importPaths": ["."],
+  "sourcePaths": ["gid"],
   "dependencies": {
     "gid:freetype2": "*",
     "gid:glib2": "*"

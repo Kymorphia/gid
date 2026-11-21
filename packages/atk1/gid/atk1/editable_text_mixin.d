@@ -1,0 +1,112 @@
+/// Module for [EditableText] interface mixin
+module gid.atk1.editable_text_mixin;
+
+public import gid.core.basictypes;
+public import gid.atk1.editable_text_iface_proxy;
+public import gid.atk1.c.functions;
+public import gid.atk1.c.types;
+public import gid.atk1.types;
+public import gid.core.gid;
+public import gid.gobject2.gid_builder;
+
+/**
+    The ATK interface implemented by components containing user-editable text content.
+    
+    #AtkEditableText should be implemented by UI components which
+    contain text which the user can edit, via the #AtkObject
+    corresponding to that component (see #AtkObject).
+    
+    #AtkEditableText is a subclass of #AtkText, and as such, an object
+    which implements #AtkEditableText is by definition an #AtkText
+    implementor as well.
+    
+    See `iface@AtkText`
+*/
+template EditableTextT()
+{
+
+  /**
+      Copy text from start_pos up to, but not including end_pos
+      to the clipboard.
+  
+      Params:
+        startPos = start position
+        endPos = end position
+  */
+  override void copyText(int startPos, int endPos) nothrow
+  {
+    atk_editable_text_copy_text(cast(AtkEditableText*)this._cPtr, startPos, endPos);
+  }
+
+  /**
+      Copy text from start_pos up to, but not including end_pos
+      to the clipboard and then delete from the widget.
+  
+      Params:
+        startPos = start position
+        endPos = end position
+  */
+  override void cutText(int startPos, int endPos) nothrow
+  {
+    atk_editable_text_cut_text(cast(AtkEditableText*)this._cPtr, startPos, endPos);
+  }
+
+  /**
+      Delete text start_pos up to, but not including end_pos.
+  
+      Params:
+        startPos = start position
+        endPos = end position
+  */
+  override void deleteText(int startPos, int endPos) nothrow
+  {
+    atk_editable_text_delete_text(cast(AtkEditableText*)this._cPtr, startPos, endPos);
+  }
+
+  /**
+      Insert text at a given position.
+  
+      Params:
+        string_ = the text to insert
+        position = The caller initializes this to
+          the position at which to insert the text. After the call it
+          points at the position after the newly inserted text.
+  */
+  override void insertText(string string_, ref int position) nothrow
+  {
+    int _length;
+    if (string_)
+      _length = cast(int)string_.length;
+
+    auto _string_ = cast(char*)string_.ptr;
+    atk_editable_text_insert_text(cast(AtkEditableText*)this._cPtr, _string_, _length, cast(int*)&position);
+  }
+
+  /**
+      Paste text from clipboard to specified position.
+  
+      Params:
+        position = position to paste
+  */
+  override void pasteText(int position) nothrow
+  {
+    atk_editable_text_paste_text(cast(AtkEditableText*)this._cPtr, position);
+  }
+
+  /**
+      Set text contents of text.
+  
+      Params:
+        string_ = string to set for text contents of text
+  */
+  override void setTextContents(string string_) nothrow
+  {
+    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
+    atk_editable_text_set_text_contents(cast(AtkEditableText*)this._cPtr, _string_);
+  }
+}
+
+/// Fluent builder implementation template for [gid.atk1.editable_text.EditableText]
+template EditableTextGidBuilderT()
+{
+}

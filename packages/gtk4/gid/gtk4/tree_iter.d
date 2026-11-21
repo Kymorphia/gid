@@ -1,0 +1,78 @@
+/// Module for [TreeIter] class
+module gid.gtk4.tree_iter;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.boxed;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.types;
+
+/**
+    The [gid.gtk4.tree_iter.TreeIter] is the primary structure
+    for accessing a [gid.gtk4.tree_model.TreeModel]. Models are expected to put a unique
+    integer in the @stamp member, and put
+    model-specific data in the three @user_data
+    members.
+*/
+class TreeIter : gid.gobject2.boxed.BoxedWrap!(gtk_tree_iter_get_type)
+{
+  /**
+      Create a `tree_iter.TreeIter` boxed type.
+      Params:
+        stamp = a unique stamp to catch invalid iterators
+  */
+  this(int stamp = int.init) nothrow
+  {
+    super(boxedNew!GtkTreeIter(_getGType), Yes.Take);
+    this.stamp = stamp;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override TreeIter self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get `stamp` field.
+      Returns: a unique stamp to catch invalid iterators
+  */
+  @property int stamp() nothrow
+  {
+    return (cast(GtkTreeIter*)this._cPtr).stamp;
+  }
+
+  /**
+      Set `stamp` field.
+      Params:
+        propval = a unique stamp to catch invalid iterators
+  */
+  @property void stamp(int propval) nothrow
+  {
+    (cast(GtkTreeIter*)this._cPtr).stamp = propval;
+  }
+
+  /**
+      Creates a dynamically allocated tree iterator as a copy of iter.
+      
+      This function is not intended for use in applications,
+      because you can just copy the structs by value
+      (`GtkTreeIter new_iter = iter;`).
+      You must free this iter with [gid.gtk4.tree_iter.TreeIter.free].
+      Returns: a newly-allocated copy of iter
+  */
+  gid.gtk4.tree_iter.TreeIter copy() nothrow
+  {
+    GtkTreeIter* _cretval;
+    _cretval = gtk_tree_iter_copy(cast(GtkTreeIter*)this._cPtr);
+    auto _retval = _cretval ? new gid.gtk4.tree_iter.TreeIter(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+}

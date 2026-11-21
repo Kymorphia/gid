@@ -1,0 +1,431 @@
+/// Module for [DirectoryList] class
+module gid.gtk4.directory_list;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gio2.file;
+import gid.gio2.list_model;
+import gid.gio2.list_model_mixin;
+import gid.glib2.error;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gobject2.types;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.types;
+
+/**
+    A list model that wraps [gid.gio2.file.File.enumerateChildrenAsync].
+    
+    It presents a [gid.gio2.list_model.ListModel] and fills it asynchronously with the [gid.gio2.file_info.FileInfo]s
+    returned from that function.
+    
+    Enumeration will start automatically when the
+    [gid.gtk4.directory_list.DirectoryList.file] property is set.
+    
+    While the [gid.gtk4.directory_list.DirectoryList] is being filled, the
+    [gid.gtk4.directory_list.DirectoryList.loading] property will be set to true. You can
+    listen to that property if you want to show information like a [gid.gtk4.spinner.Spinner]
+    or a "Loading..." text.
+    
+    If loading fails at any point, the [gid.gtk4.directory_list.DirectoryList.error]
+    property will be set to give more indication about the failure.
+    
+    The [gid.gio2.file_info.FileInfo]s returned from a [gid.gtk4.directory_list.DirectoryList] have the "standard::file"
+    attribute set to the [gid.gio2.file.File] they refer to. This way you can get at the file
+    that is referred to in the same way you would via [gid.gio2.file_enumerator.FileEnumerator.getChild].
+    This means you do not need access to the [gid.gtk4.directory_list.DirectoryList], but can access
+    the [gid.gio2.file.File] directly from the [gid.gio2.file_info.FileInfo] when operating with a [gid.gtk4.list_view.ListView]
+    or similar.
+*/
+class DirectoryList : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_directory_list_get_type != &gidSymbolNotFound ? gtk_directory_list_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkDirectoryList";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override DirectoryList self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.directory_list.DirectoryList]
+      Returns: New builder object
+  */
+  static DirectoryListGidBuilder builder() nothrow
+  {
+    return new DirectoryListGidBuilder;
+  }
+
+  /**
+      Get `attributes` property.
+      Returns: The attributes to query.
+  */
+  @property string attributes() nothrow
+  {
+    return getAttributes();
+  }
+
+  /**
+      Set `attributes` property.
+      Params:
+        propval = The attributes to query.
+  */
+  @property void attributes(string propval) nothrow
+  {
+    setAttributes(propval);
+  }
+
+  /**
+      Get `error` property.
+      Returns: Error encountered while loading files.
+  */
+  @property gid.glib2.error.ErrorWrap error() nothrow
+  {
+    return getError();
+  }
+
+  /**
+      Get `file` property.
+      Returns: File to query.
+  */
+  @property gid.gio2.file.File file() nothrow
+  {
+    return getFile();
+  }
+
+  /**
+      Set `file` property.
+      Params:
+        propval = File to query.
+  */
+  @property void file(gid.gio2.file.File propval) nothrow
+  {
+    setFile(propval);
+  }
+
+  /**
+      Get `ioPriority` property.
+      Returns: Priority used when loading.
+  */
+  @property int ioPriority() nothrow
+  {
+    return getIoPriority();
+  }
+
+  /**
+      Set `ioPriority` property.
+      Params:
+        propval = Priority used when loading.
+  */
+  @property void ioPriority(int propval) nothrow
+  {
+    setIoPriority(propval);
+  }
+
+  /**
+      Get `itemType` property.
+      Returns: The type of items. See [gid.gio2.list_model.ListModel.getItemType].
+  */
+  @property gid.gobject2.types.GType itemType() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gobject2.types.GType)("item-type");
+  }
+
+  /**
+      Get `loading` property.
+      Returns: true if files are being loaded.
+  */
+  @property bool loading() nothrow
+  {
+    return isLoading();
+  }
+
+  /**
+      Get `monitored` property.
+      Returns: true if the directory is monitored for changed.
+  */
+  @property bool monitored() nothrow
+  {
+    return getMonitored();
+  }
+
+  /**
+      Set `monitored` property.
+      Params:
+        propval = true if the directory is monitored for changed.
+  */
+  @property void monitored(bool propval) nothrow
+  {
+    setMonitored(propval);
+  }
+
+  /**
+      Get `nItems` property.
+      Returns: The number of items. See [gid.gio2.list_model.ListModel.getNItems].
+  */
+  @property uint nItems() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(uint)("n-items");
+  }
+
+  mixin ListModelT!();
+
+  /**
+      Creates a new [gid.gtk4.directory_list.DirectoryList].
+      
+      The [gid.gtk4.directory_list.DirectoryList] is querying the given file
+      with the given attributes.
+  
+      Params:
+        attributes = The attributes to query with
+        file = The file to query
+      Returns: a new [gid.gtk4.directory_list.DirectoryList]
+  */
+  this(string attributes = null, gid.gio2.file.File file = null) nothrow
+  {
+    GtkDirectoryList* _cretval;
+    const(char)* _attributes = attributes.toCString!(No.Malloc, Yes.Nullable);
+    _cretval = gtk_directory_list_new(_attributes, file ? cast(GFile*)(cast(gid.gobject2.object.ObjectWrap)file)._cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Gets the attributes queried on the children.
+      Returns: The queried attributes
+  */
+  string getAttributes() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_directory_list_get_attributes(cast(GtkDirectoryList*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the loading error, if any.
+      
+      If an error occurs during the loading process, the loading process
+      will finish and this property allows querying the error that happened.
+      This error will persist until a file is loaded again.
+      
+      An error being set does not mean that no files were loaded, and all
+      successfully queried files will remain in the list.
+      Returns: The loading error or null if
+          loading finished successfully
+  */
+  gid.glib2.error.ErrorWrap getError() nothrow
+  {
+    const(GError)* _cretval;
+    _cretval = gtk_directory_list_get_error(cast(GtkDirectoryList*)this._cPtr);
+    auto _retval = _cretval ? new gid.glib2.error.ErrorWrap(cast(GError*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the file whose children are currently enumerated.
+      Returns: The file whose children are enumerated
+  */
+  gid.gio2.file.File getFile() nothrow
+  {
+    GFile* _cretval;
+    _cretval = gtk_directory_list_get_file(cast(GtkDirectoryList*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.file.File)(cast(GFile*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the IO priority set via [gid.gtk4.directory_list.DirectoryList.setIoPriority].
+      Returns: The IO priority.
+  */
+  int getIoPriority() nothrow
+  {
+    int _retval;
+    _retval = gtk_directory_list_get_io_priority(cast(GtkDirectoryList*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns whether the directory list is monitoring
+      the directory for changes.
+      Returns: true if the directory is monitored
+  */
+  bool getMonitored() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_directory_list_get_monitored(cast(GtkDirectoryList*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns true if the children enumeration is currently in
+      progress.
+      
+      Files will be added to self from time to time while loading is
+      going on. The order in which are added is undefined and may change
+      in between runs.
+      Returns: true if self is loading
+  */
+  bool isLoading() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_directory_list_is_loading(cast(GtkDirectoryList*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Sets the attributes to be enumerated and starts the enumeration.
+      
+      If attributes is null, the list of file infos will still be created, it will just
+      not contain any extra attributes.
+  
+      Params:
+        attributes = the attributes to enumerate
+  */
+  void setAttributes(string attributes = null) nothrow
+  {
+    const(char)* _attributes = attributes.toCString!(No.Malloc, Yes.Nullable);
+    gtk_directory_list_set_attributes(cast(GtkDirectoryList*)this._cPtr, _attributes);
+  }
+
+  /**
+      Sets the file to be enumerated and starts the enumeration.
+      
+      If file is null, the result will be an empty list.
+  
+      Params:
+        file = the [gid.gio2.file.File] to be enumerated
+  */
+  void setFile(gid.gio2.file.File file = null) nothrow
+  {
+    gtk_directory_list_set_file(cast(GtkDirectoryList*)this._cPtr, file ? cast(GFile*)(cast(gid.gobject2.object.ObjectWrap)file)._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the IO priority to use while loading directories.
+      
+      Setting the priority while self is loading will reprioritize the
+      ongoing load as soon as possible.
+      
+      The default IO priority is [gid.glib2.types.PRIORITY_DEFAULT], which is higher than
+      the GTK redraw priority. If you are loading a lot of directories in
+      parallel, lowering it to something like [gid.glib2.types.PRIORITY_DEFAULT_IDLE]
+      may increase responsiveness.
+  
+      Params:
+        ioPriority = IO priority to use
+  */
+  void setIoPriority(int ioPriority) nothrow
+  {
+    gtk_directory_list_set_io_priority(cast(GtkDirectoryList*)this._cPtr, ioPriority);
+  }
+
+  /**
+      Sets whether the directory list will monitor the directory
+      for changes.
+      
+      If monitoring is enabled, the ::items-changed signal will
+      be emitted when the directory contents change.
+      
+      
+      When monitoring is turned on after the initial creation
+      of the directory list, the directory is reloaded to avoid
+      missing files that appeared between the initial loading
+      and when monitoring was turned on.
+  
+      Params:
+        monitored = true to monitor the directory for changes
+  */
+  void setMonitored(bool monitored) nothrow
+  {
+    gtk_directory_list_set_monitored(cast(GtkDirectoryList*)this._cPtr, monitored);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.directory_list.DirectoryList]
+class DirectoryListGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T, gid.gio2.list_model.ListModelGidBuilderImpl!T
+{
+
+  mixin ListModelGidBuilderT!();
+
+  /**
+      Set `attributes` property.
+      Params:
+        propval = The attributes to query.
+      Returns: Builder instance for fluent chaining
+  */
+  T attributes(string propval) nothrow
+  {
+    return setProperty("attributes", propval);
+  }
+
+  /**
+      Set `file` property.
+      Params:
+        propval = File to query.
+      Returns: Builder instance for fluent chaining
+  */
+  T file(gid.gio2.file.File propval) nothrow
+  {
+    return setProperty("file", propval);
+  }
+
+  /**
+      Set `ioPriority` property.
+      Params:
+        propval = Priority used when loading.
+      Returns: Builder instance for fluent chaining
+  */
+  T ioPriority(int propval) nothrow
+  {
+    return setProperty("io-priority", propval);
+  }
+
+  /**
+      Set `monitored` property.
+      Params:
+        propval = true if the directory is monitored for changed.
+      Returns: Builder instance for fluent chaining
+  */
+  T monitored(bool propval) nothrow
+  {
+    return setProperty("monitored", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk4.directory_list.DirectoryList]
+final class DirectoryListGidBuilder : DirectoryListGidBuilderImpl!DirectoryListGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  DirectoryList build() nothrow
+  {
+    return new DirectoryList(cast(void*)createGObject(DirectoryList._getGType), Yes.Take);
+  }
+}

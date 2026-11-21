@@ -1,0 +1,228 @@
+/// Module for [PluginFeature] class
+module gid.gst1.plugin_feature;
+
+public import gid.core.basictypes;
+import gid.core.gid;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gst1.c.functions;
+import gid.gst1.c.types;
+import gid.gst1.object;
+import gid.gst1.plugin;
+import gid.gst1.types;
+
+/**
+    This is a base class for anything that can be added to a #GstPlugin.
+*/
+class PluginFeature : gid.gst1.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gst_plugin_feature_get_type != &gidSymbolNotFound ? gst_plugin_feature_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstPluginFeature";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override PluginFeature self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gst1.plugin_feature.PluginFeature]
+      Returns: New builder object
+  */
+  static PluginFeatureGidBuilder builder() nothrow
+  {
+    return new PluginFeatureGidBuilder;
+  }
+
+  /**
+      Copies the list of features. Caller should call gst_plugin_feature_list_free
+      when done with the list.
+  
+      Params:
+        list = list
+              of #GstPluginFeature
+      Returns: a copy of list,
+            with each feature's reference count incremented.
+  */
+  static gid.gst1.plugin_feature.PluginFeature[] listCopy(gid.gst1.plugin_feature.PluginFeature[] list) nothrow
+  {
+    GList* _cretval;
+    auto _list = gListFromD!(gid.gst1.plugin_feature.PluginFeature)(list);
+    scope(exit) containerFree!(GList*, gid.gst1.plugin_feature.PluginFeature, GidOwnership.None)(_list);
+    _cretval = gst_plugin_feature_list_copy(_list);
+    auto _retval = gListToD!(gid.gst1.plugin_feature.PluginFeature, GidOwnership.Full)(cast(GList*)_cretval);
+    return _retval;
+  }
+
+  /**
+      Debug the plugin feature names in list.
+  
+      Params:
+        list = a #GList of
+              plugin features
+  */
+  static void listDebug(gid.gst1.plugin_feature.PluginFeature[] list) nothrow
+  {
+    auto _list = gListFromD!(gid.gst1.plugin_feature.PluginFeature)(list);
+    scope(exit) containerFree!(GList*, gid.gst1.plugin_feature.PluginFeature, GidOwnership.None)(_list);
+    gst_plugin_feature_list_debug(_list);
+  }
+
+  /**
+      Compares the two given #GstPluginFeature instances. This function can be
+      used as a #GCompareFunc when sorting by rank and then by name.
+  
+      Params:
+        p1 = a #GstPluginFeature
+        p2 = a #GstPluginFeature
+      Returns: negative value if the rank of p1 > the rank of p2 or the ranks are
+        equal but the name of p1 comes before the name of p2; zero if the rank
+        and names are equal; positive value if the rank of p1 < the rank of p2 or the
+        ranks are equal but the name of p2 comes before the name of p1
+  */
+  static int rankCompareFunc(const(void)* p1 = null, const(void)* p2 = null) nothrow
+  {
+    int _retval;
+    _retval = gst_plugin_feature_rank_compare_func(p1, p2);
+    return _retval;
+  }
+
+  /**
+      Checks whether the given plugin feature is at least the required version.
+      
+      Note: Since version 1.24 this function no longer returns true if the
+      version is a git development version (e.g. 1.23.0.1) and the check is
+      for the "next" micro version, that is it will no longer return true for
+      e.g. 1.23.0.1 if the check is for 1.23.1. It is still possible to parse
+      the nano version from the string and do this check that way if needed.
+  
+      Params:
+        minMajor = minimum required major version
+        minMinor = minimum required minor version
+        minMicro = minimum required micro version
+      Returns: true if the plugin feature has at least
+         the required version, otherwise false.
+  */
+  bool checkVersion(uint minMajor, uint minMinor, uint minMicro) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_plugin_feature_check_version(cast(GstPluginFeature*)this._cPtr, minMajor, minMinor, minMicro);
+    return _retval;
+  }
+
+  /**
+      Get the plugin that provides this feature.
+      Returns: the plugin that provides this
+            feature, or null.  Unref with [gid.gst1.object.ObjectWrap.unref] when no
+            longer needed.
+  */
+  gid.gst1.plugin.Plugin getPlugin() nothrow
+  {
+    GstPlugin* _cretval;
+    _cretval = gst_plugin_feature_get_plugin(cast(GstPluginFeature*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Get the name of the plugin that provides this feature.
+      Returns: the name of the plugin that provides this
+            feature, or null if the feature is not associated with a
+            plugin.
+  */
+  string getPluginName() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gst_plugin_feature_get_plugin_name(cast(GstPluginFeature*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the rank of a plugin feature.
+      Returns: The rank of the feature
+  */
+  uint getRank() nothrow
+  {
+    uint _retval;
+    _retval = gst_plugin_feature_get_rank(cast(GstPluginFeature*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Loads the plugin containing feature if it's not already loaded. feature is
+      unaffected; use the return value instead.
+      
+      Normally this function is used like this:
+      ```c
+      GstPluginFeature *loaded_feature;
+      
+      loaded_feature = gst_plugin_feature_load (feature);
+      // presumably, we're no longer interested in the potentially-unloaded feature
+      gst_object_unref (feature);
+      feature = loaded_feature;
+      ```
+      Returns: a reference to the loaded
+        feature, or null on error
+  */
+  gid.gst1.plugin_feature.PluginFeature load() nothrow
+  {
+    GstPluginFeature* _cretval;
+    _cretval = gst_plugin_feature_load(cast(GstPluginFeature*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.plugin_feature.PluginFeature)(cast(GstPluginFeature*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Specifies a rank for a plugin feature, so that autoplugging uses
+      the most appropriate feature.
+  
+      Params:
+        rank = rank value - higher number means more priority rank
+  */
+  void setRank(uint rank) nothrow
+  {
+    gst_plugin_feature_set_rank(cast(GstPluginFeature*)this._cPtr, rank);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gst1.plugin_feature.PluginFeature]
+class PluginFeatureGidBuilderImpl(T) : gid.gst1.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gst1.plugin_feature.PluginFeature]
+final class PluginFeatureGidBuilder : PluginFeatureGidBuilderImpl!PluginFeatureGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  PluginFeature build() nothrow
+  {
+    return new PluginFeature(cast(void*)createGObject(PluginFeature._getGType), Yes.Take);
+  }
+}
