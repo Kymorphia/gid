@@ -1,4 +1,4 @@
-//!kind gid Namespace
+//!kind utils Namespace
 //!inhibit imports init funcs
 
 public import std.typecons : Flag, No, Tuple, Yes;

@@ -146,8 +146,9 @@ Underscores are inserted in the snake case name only when transitioning from a l
 For example: the **GLArea** class is in **gid.gtk4.glarea**, because there are no transitions from lowercase to uppercase.
 Another example would be the class **SpinButton**, in **gid.gtk4.spin_button**.
 
-The giD runtime modules have no version and live under **gid.core**: `gid.core.gid`, `gid.core.loader`, `gid.core.basictypes`,
-`gid.core.wrap`, `gid.core.types`, `gid.core.global`, `gid.core.c.types`, and `gid.core.c.functions`. They are part of the **glib2** package.
+The giD runtime modules have no version and live under **gid.core**: `gid.core.utils`, `gid.core.loader`, `gid.core.basictypes`,
+`gid.core.wrap`, `gid.core.types`, and `gid.core.global` (plus the low-level `gid.core.c.types` and `gid.core.c.functions`).
+They are part of the **glib2** package. `import gid.core;` publicly imports the D-facing runtime modules (not the `c.*` modules).
 
 Interfaces result in 3 modules being written which is described further in the [Interfaces](#interfaces) section.
 

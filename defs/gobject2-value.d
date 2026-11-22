@@ -3,7 +3,7 @@
 import core.stdc.string : strlen;
 import std.traits : isPointer;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.c.functions : g_strv_get_type;
 import gid.gobject2.object;
 import gid.gobject2.types;
