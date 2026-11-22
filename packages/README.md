@@ -2,6 +2,10 @@
 
 This is the top-level [Dub](https://dub.pm/) package for [giD](https://github.com/Kymorphia/gid) the GObject Introspection D Language Binding Repository.
 
+Modules are named `gid.<package>.<module>`, for example `import gid.gtk4.widget;`.
+The latest major of a library also provides unversioned shims such as `import gid.gtk.widget;` (GTK 4).
+Applications should depend on the versioned subpackages they need (`gid:gtk4`), not the top-level `gid` package.
+
 ## Sub Package Information
 
 | Library | Dub Package | D API | C API |

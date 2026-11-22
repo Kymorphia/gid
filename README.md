@@ -60,16 +60,20 @@ For a quickstart guide to developing Gtk4 GUI applications, please consult the [
 
 Dejan Lekic has several example projects for giD libraries in his [gid-examples](https://codeberg.org/dejan/gid-examples/) project.
 
-**NOTE:** When adding giD package dependencies to a project, the top-level `gid` project should not be used.
-Using it will result in linker issues, since there are multiple versions of packages, gtk3 vs gtk4 for example,
-which will result in duplicate symbol errors. See [Project Dependences](#project-dependencies) for more details.
+**NOTE:** When adding giD package dependencies to a project, depend on the versioned subpackages you need
+(`gid:gtk4`, `gid:gst1`, …), not the top-level `gid` package. The top-level package would pull in every binding,
+including multiple majors of the same library. See [Project Dependencies](#project-dependencies) for more details.
 
 
 ## Versions and API Stability
 
 Currently the giD API should be considered to be unstable.  This is the reason for the current versions being **0.9.x**.
-The API may break on each 0.9.x release and therefore any applications depending on giD libraries should specify the exact version, `==0.9.6` for example.
-Once v1.0.0 is released, an increment in the micro version will be backwards compatible, and minor version increments may break backwards compatibility.
+The API may break on each 0.9.x release and therefore any applications depending on giD libraries should specify the exact version, `==0.9.16` for example.
+
+Once v1.0.0 is released, a micro (patch) increment is backwards compatible. A new major version of a library, which
+changes what unversioned imports such as `gid.gtk.widget` point to, is only added in a **minor** version bump of giD.
+A dependency such as `"gid:gtk4": "~>1.0"` (allowing 1.0.x, but not 1.1) therefore never switches default majors unexpectedly.
+To pin a library major regardless of the giD version, use a versioned import (`import gid.gtk4.widget;` or `import gid.gtk3.widget;`).
 
 
 ## API Reference Documentation
@@ -84,25 +88,24 @@ And finally the D binding source code itself can be used as a reference.
 
 ## Dub Packages
 
-Each library has its own binding dub sub-package, within the `gid` package, each with a single source directory (package name).
-One notable exception is that the **glib** package contains glib, gobject, and the gid directory top-level module paths.
+Each library has its own binding dub sub-package, named with the lowercase GIR `namespace` followed by the major version number.
+For example, the Gtk 4 library uses the GIR namespace `Gtk` and version `4.0`, which becomes the dub sub-package `gid:gtk4`.
+GTK 3 is a separate sub-package, `gid:gtk3`. Applications depend on these versioned subpackages, not the top-level `gid` package.
+
+The **glib2** package is a notable exception: it also contains the GObject modules and the giD runtime (`gid.core.*`).
 This was done to resolve interdependencies between these modules.
 
-Sub-packages are named using the lowercase name of their GIR `namespace` followed by the major version number.
-For example, the Gtk library uses `Gtk` as the GIR namespace and the version is `4`.
-This results in the full dub package name `gid:gtk4` with the toplevel package directory namespace `gtk`.
-
-**NOTE:** giD supports multiple versions of some packages, such as for Gtk.
-The same top-level module directory is used for both, which while less verbose, means that only one version can be used in an application.
+GTK 3 and GTK 4 (and other pairs of majors) can be used together in the same application. Their modules have different names
+(`gid.gtk3.widget` and `gid.gtk4.widget`) and can be linked together.
 
 
 ### Project Dependencies
 
-Projects should not use the top-level gid project as a dependency, which will result in duplicate symbol errors,
-but instead use the relevant dub sub-packages which are required.
-The dependencies of a sub-package do not need to be added though, since dub will automatically resolve dependencies recursively.
-For example, if a project uses gtksource and Gtk 4, only `gid:gtksource5` would need to be added to the `dub.json` file.
-Since `gid:gtk4` is a dependency of it, it would automatically be included as well as all of its recursive dependencies.
+Projects should depend on the versioned dub subpackages they need, not the top-level `gid` package (which would pull in every binding).
+The dependencies of a sub-package do not need to be added, since dub will automatically resolve dependencies recursively.
+For example, if a project uses GtkSource and Gtk 4, only `gid:gtksource5` needs to be added to the `dub.json` file.
+Since `gid:gtk4` is a dependency of it, it is included automatically, as are its recursive dependencies.
+To use both GTK 3 and GTK 4, depend on both `gid:gtk3` and `gid:gtk4`.
 
 
 ### Example dub.json
@@ -116,33 +119,68 @@ Example `dub.json file` for a Gtk4 project:
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
   "dependencies": {
-    "gid:gtk4": "==0.9.7"
+    "gid:gtk4": "==0.9.16"
   }
 }
 ```
 
 **NOTE:** If you are publicly distributing your application, we recommend specifying the exact giD version that your application works with for now.
 This is because backwards compatibility may be broken with newer 0.9.x versions.
-Once version 1.0.0 is released, this will no longer be an issue and backwards compatibility will be maintained within the same major.minor versions.
+Once version 1.0.0 is released, a constraint such as `"gid:gtk4": "~>1.0"` can be used, which allows compatible 1.0.x releases
+without picking up a later minor version that may add a new default library major. See [Versions and API Stability](#versions-and-api-stability).
 
 
 ## Module Names
 
-Each library consists of several modules. Each object and wrapped structure type gets its own D module with the name of the type in **snake_case**.
+Modules are named `gid.<package>.<module>`, where *package* includes the library major version. For example:
+
+```D
+import gid.gtk4.widget;
+import gid.gtk4.c.types;
+import gid.gobject2.object;
+import gid.glib2.variant;
+```
+
+Each object and wrapped structure type gets its own D module with the name of the type in **snake_case**.
 Underscores are inserted in the snake case name only when transitioning from a lowercase letter to an uppercase letter.
-For example: the **GLArea** class will be written to a module named **gtk.glarea**, because there are no transitions from lowercase to uppercase.
-Another example would be the class **SpinButton** which would be written to a module named **gtk.spin_button**.
+For example: the **GLArea** class is in **gid.gtk4.glarea**, because there are no transitions from lowercase to uppercase.
+Another example would be the class **SpinButton**, in **gid.gtk4.spin_button**.
+
+The giD runtime modules have no version and live under **gid.core**: `gid.core.gid`, `gid.core.loader`, `gid.core.basictypes`,
+`gid.core.wrap`, `gid.core.types`, `gid.core.global`, `gid.core.c.types`, and `gid.core.c.functions`. They are part of the **glib2** package.
 
 Interfaces result in 3 modules being written which is described further in the [Interfaces](#interfaces) section.
 
 Additionally there are the following built-in modules for each package:
 
- * **namespace.c.functions** - Contains all the C function pointers which are dynamically loaded at runtime.
+ * **gid.gtk4.c.functions** - Contains all the C function pointers which are dynamically loaded at runtime.
    These pointers have the same name as the C API functions, for example `g_object_ref`, and can be called like any other C function.
- * **namespace.c.types** - Contains all C API types, including: enum aliases, flags, structs, unions, and function callback types.
- * **namespace.global** - Contains package global D functions which aren't associated with a class or structure instance.
- * **namespace.types** - Contains D types for the package, including: aliases, enums, flags, structs, delegates, and constants.
+ * **gid.gtk4.c.types** - Contains all C API types, including: enum aliases, flags, structs, unions, and function callback types.
+ * **gid.gtk4.global** - Contains package global D functions which aren't associated with a class or structure instance.
+ * **gid.gtk4.types** - Contains D types for the package, including: aliases, enums, flags, structs, delegates, and constants.
    Many D types are simply aliases to the underlying C types with a different D symbol name.
+
+### Unversioned Shims
+
+The latest major of a library also provides unversioned shim modules, which simply public-import the versioned ones.
+`import gid.gtk.widget;` is the same as `import gid.gtk4.widget;` (the current latest GTK major). These shims are
+included in the latest major's package (`gid:gtk4`); `gid:gtk3` has none, so GTK 3 is imported as `gid.gtk3.widget`.
+The same pattern applies to other libraries (`gid.glib.variant` is `gid.glib2.variant`, `gid.gobject.object` is `gid.gobject2.object`).
+Packages whose versioned name is already unversioned, such as `freetype2` and `libxml2`, have no shims.
+
+A new library major, which changes what an unversioned import points to, is only added in a giD minor version bump.
+See [Versions and API Stability](#versions-and-api-stability). To pin a specific major, use the versioned import.
+
+GTK 3 and GTK 4 modules can be imported and linked in the same application. If both define the same type name (for example `Widget`),
+use a renamed import or `static import`:
+
+```D
+import Gtk4 = gid.gtk4.widget;
+import Gtk3 = gid.gtk3.widget;
+// or
+static import gid.gtk4.widget;
+static import gid.gtk3.widget;
+```
 
 
 ## Symbol Renaming
@@ -160,7 +198,7 @@ Here are some general rules about symbol renaming:
    after removing the module prefix. `GTK_INPUT_ERROR` for example becomes just `INPUT_ERROR`.
  * Any reserved words have an underscore appended to them.
    For example a function argument named `version` is a reserved D word and would therefore become `version_`. This also applies to module names,
-   for example **Gtk.Switch** is written to the module **gtk.switch_**.
+   for example **Gtk.Switch** is written to the module **gid.gtk4.switch_**.
  * Signal names are in **kebab-case** in GIR API definitions and are converted to signal **connectKebabCase** method templates.
 
 
@@ -174,7 +212,7 @@ Here are some general rules about symbol renaming:
 | Monitor          | MonitorWrap       |
 
 These renames were done to avoid conflicts with built in D types and apply to all packages.
-For example: GObject.Object is renamed to gobject.object.ObjectWrap and Atk.Object is atk.object.ObjectWrap.
+For example: GObject.Object is renamed to gid.gobject2.object.ObjectWrap and Atk.Object is gid.atk1.object.ObjectWrap.
 
 
 ## Output and Input/Output Arguments
@@ -239,7 +277,7 @@ GHashTable arguments and return values are converted between D associative array
 
 ## Objects
 
-C `GObject` types are wrapped as [gobject.object.ObjectWrap](https://www.kymorphia.com/gid/gobject.object.ObjectWrap.html) classes.
+C `GObject` types are wrapped as [gid.gobject2.object.ObjectWrap](https://www.kymorphia.com/gid/gid.gobject2.object.ObjectWrap.html) classes.
 This rename was done instead of `Object` so as not to conflict with D's native Object type.
 
 
@@ -293,24 +331,24 @@ The other useful feature that signal connection method templates provide is the 
 This avoids having to cast an argument of the expected object type to the desired type.
 For example, a ApplicationWindow argument could be used in place of a Window argument expected by the CloseRequest signal of Window.
 
-Here is an example of what the [command-line](https://www.kymorphia.com/gid/gio.application.Application.connectCommandLine.html)
-signal of [Gio.Application](https://www.kymorphia.com/gid/gio.application.Application.html) looks like:
+Here is an example of what the [command-line](https://www.kymorphia.com/gid/gid.gio2.application.Application.connectCommandLine.html)
+signal of [Gio.Application](https://www.kymorphia.com/gid/gid.gio2.application.Application.html) looks like:
 
 ```D
 ulong connectCommandLine(T)(T callback, Flag!"After" after = No.After)
 if (isCallable!T &&
   is(ReturnType!T == int)
-  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gio.application_command_line.ApplicationCommandLine)))
-  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gio.application.Application)))
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gio2.application_command_line.ApplicationCommandLine)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gio2.application.Application)))
   && Parameters!T.length < 3
 )
 ```
 
 The return value from the connect template is a signal handle,
-which can be passed to functions in GObject.Global such as: [signalHandlerBlock](https://www.kymorphia.com/gid/gobject.global.signalHandlerBlock.html),
-[signalHandlerDisconnect](https://www.kymorphia.com/gid/gobject.global.signalHandlerDisconnect.html), etc.
+which can be passed to functions in GObject.Global such as: [signalHandlerBlock](https://www.kymorphia.com/gid/gid.gobject2.global.signalHandlerBlock.html),
+[signalHandlerDisconnect](https://www.kymorphia.com/gid/gid.gobject2.global.signalHandlerDisconnect.html), etc.
 
-**NOTE:** The return value from signal connection templates is of type `gulong` from the `gid.basictypes` module.
+**NOTE:** The return value from signal connection templates is of type `gulong` from the `gid.core.basictypes` module.
 This type is an alias to `ulong` (64 bit) on Linux and MacOS, but aliases to `uint` (32 bit) on Windows.
 To maintain portability, it is recommended that signal handle variables be declared as type `gulong` (or auto assignment), otherwise compile errors will likely occur on Windows.
 
@@ -319,8 +357,8 @@ To maintain portability, it is recommended that signal handle variables be decla
 
 Interfaces result in an interface D module and two additional modules `interface_mixin` and `interface_iface_proxy` which are primarily used internally.
 Where **interface** is the interface type name in **snake_case**.
-For example, the [gio.file.File](https://www.kymorphia.com/gid/gio.file.File.html)
-interface would have **file**, **file_mixin**, and **file_iface_proxy** modules.
+For example, the [gid.gio2.file.File](https://www.kymorphia.com/gid/gid.gio2.file.File.html)
+interface would have **gid.gio2.file**, **gid.gio2.file_mixin**, and **gid.gio2.file_iface_proxy** modules.
 The first one defines the interface and static methods,
 the second defines a mixin template that contains method implementations which is mixed into objects implementing the interface,
 and the third defines an interface proxy wrapper object that is used when a C GObject with an unknown type is cast as the interface.
@@ -328,7 +366,7 @@ and the third defines an interface proxy wrapper object that is used when a C GO
 
 ## Boxed Types
 
-GBoxed types are wrapped with an object derived from the abstract [gobject.boxed.Boxed](https://www.kymorphia.com/gid/gobject.boxed.Boxed.html) object.
+GBoxed types are wrapped with an object derived from the abstract [gid.gobject2.boxed.Boxed](https://www.kymorphia.com/gid/gid.gobject2.boxed.Boxed.html) object.
 Consult the API documentation for more details on methods specific to these types.
 
 
@@ -344,9 +382,9 @@ Some non-trivial GIR structure types are not GObject or boxed types but have ref
 These are wrapped in D objects, but may lack the ability to copy the underlying C object if no methods are provided to do so.
 These types can also inherit from others.
 
-One notable example is [gtk.expression.Expression](https://www.kymorphia.com/gid/gtk.expression.Expression.html)
+One notable example is [gid.gtk4.expression.Expression](https://www.kymorphia.com/gid/gid.gtk4.expression.Expression.html)
 which is an abstract type that several others like
-[gtk.property_expression.ProperyExpression](https://www.kymorphia.com/gid/gtk.property_expression.PropertyExpression.html) are derived from.
+[gid.gtk4.property_expression.ProperyExpression](https://www.kymorphia.com/gid/gid.gtk4.property_expression.PropertyExpression.html) are derived from.
 The only useful built-in method is `cPtr` which behaves similar to other uses in the giD API,
 with a `Flag!Dup` argument for adding a reference (defaults to No.Dup).
 
@@ -365,7 +403,7 @@ Opaque structures which have methods are also wrapped in order to provide conven
 
 ## Value
 
-The [gobject.value.Value](https://www.kymorphia.com/gid/gobject.value.Value.html)
+The [gid.gobject2.value.Value](https://www.kymorphia.com/gid/gid.gobject2.value.Value.html)
 wildcard type is wrapped as a boxed type with some additional templates and methods for converting between D types.
 
 
@@ -397,7 +435,7 @@ The `setVal` template is also available for setting a GValue directly without a 
 
 ## GLib Variant
 
-The [glib.variant.Variant](https://www.kymorphia.com/gid/glib.variant.Variant.html)
+The [gid.glib2.variant.Variant](https://www.kymorphia.com/gid/gid.glib2.variant.Variant.html)
 type provides a way to store structured data of varying types and is very similar to the functionality offered by D
 [std.variant](https://dlang.org/phobos/std_variant.html).
 
@@ -408,12 +446,12 @@ The following are some of the more prominent giD GLib `Variant` methods.
 Please consult the API documentation for a more extensive list.
 
 ```D
-static glib.variant.Variant create(T)(T val)
+static gid.glib2.variant.Variant create(T)(T val)
 ```
 For creating a Variant from a single statically typed D value.
 
 ```D
-static glib.variant.Variant create(T...)(T vals)
+static gid.glib2.variant.Variant create(T...)(T vals)
 ```
 For creating a Variant from multiple statically typed D values, the result is a Variant tuple.
 
@@ -430,7 +468,7 @@ Get multiple values from a Variant as static D types. The types must match the V
 
 ## VariantType
 
-[glib.variant_type.VariantType](https://www.kymorphia.com/gid/glib.variant_type.VariantType.html)
+[gid.glib2.variant_type.VariantType](https://www.kymorphia.com/gid/gid.glib2.variant_type.VariantType.html)
 describes the type of data assigned to a GVariant. It is a boxed type and thus inherits the methods for Boxed.
 
 
@@ -472,8 +510,8 @@ It can also be useful to add a periodic garbage collection cycle, when troublesh
 The following can be added to your application to run GC.collect once a second for example:
 
 ```D
-import glib.global : timeoutAddSeconds;
-import glib.types : PRIORITY_DEFAULT, SOURCE_CONTINUE;
+import gid.glib2.global : timeoutAddSeconds;
+import gid.glib2.types : PRIORITY_DEFAULT, SOURCE_CONTINUE;
 import core.memory : GC;
 import std.stdio : writeln;
 
@@ -523,7 +561,7 @@ However, signal or other delegate callbacks which are connected to a child objec
 results in reference cycles. Gtk3 would call g_object_run_despose() on the window in response to a delete event when closed.
 
 One solution to this is to connect to the `CloseRequest` signal of the Window and call
-[runDispose](https://www.kymorphia.com/gid/gobject.object.ObjectWrap.runDispose.html) on the Window.
+[runDispose](https://www.kymorphia.com/gid/gid.gobject2.object.ObjectWrap.runDispose.html) on the Window.
 Here is an [example](https://github.com/Kymorphia/gid-gtk4-examples/blob/c0572c039510659ee321b841b8094d543f6275e4/source/app_tree.d#L145) of this.
 This causes the tree of C GObjects to remove references to each-other, allowing for D to clean up the wrapper objects.
 Even though there still may be reference cycles, they will only be found in D memory which is properly handled.
