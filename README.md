@@ -72,7 +72,8 @@ The API may break on each 0.9.x release and therefore any applications depending
 
 Once v1.0.0 is released, a micro (patch) increment is backwards compatible. A new major version of a library, which
 changes what unversioned imports such as `gid.gtk.widget` point to, is only added in a **minor** version bump of giD.
-A dependency such as `"gid:gtk4": "~>1.0"` (allowing 1.0.x, but not 1.1) therefore never switches default majors unexpectedly.
+Users who rely on unversioned shim imports should use a constraint such as `"gid:gtk4": "~>1.0.0"` (`>=1.0.0 <1.1.0`).
+In dub, `~>1.0` means `>=1.0.0 <2.0.0` and would include a later 1.x that may change the default major of a library.
 To pin a library major regardless of the giD version, use a versioned import (`import gid.gtk4.widget;` or `import gid.gtk3.widget;`).
 
 
@@ -95,8 +96,9 @@ GTK 3 is a separate sub-package, `gid:gtk3`. Applications depend on these versio
 The **glib2** package is a notable exception: it also contains the GObject modules and the giD runtime (`gid.core.*`).
 This was done to resolve interdependencies between these modules.
 
-GTK 3 and GTK 4 (and other pairs of majors) can be used together in the same application. Their modules have different names
-(`gid.gtk3.widget` and `gid.gtk4.widget`) and can be linked together.
+GTK 3 and GTK 4 (and other pairs of majors) can be linked together in the same application. Their modules have different names
+(`gid.gtk3.widget` and `gid.gtk4.widget`). Only one major of a library can be used per process; GTK aborts if GTK 3 and
+GTK 4 are both loaded at runtime.
 
 
 ### Project Dependencies
@@ -105,7 +107,7 @@ Projects should depend on the versioned dub subpackages they need, not the top-l
 The dependencies of a sub-package do not need to be added, since dub will automatically resolve dependencies recursively.
 For example, if a project uses GtkSource and Gtk 4, only `gid:gtksource5` needs to be added to the `dub.json` file.
 Since `gid:gtk4` is a dependency of it, it is included automatically, as are its recursive dependencies.
-To use both GTK 3 and GTK 4, depend on both `gid:gtk3` and `gid:gtk4`.
+Two majors can be linked in one program, but only one major of a library can be used per process.
 
 
 ### Example dub.json
@@ -126,8 +128,10 @@ Example `dub.json file` for a Gtk4 project:
 
 **NOTE:** If you are publicly distributing your application, we recommend specifying the exact giD version that your application works with for now.
 This is because backwards compatibility may be broken with newer 0.9.x versions.
-Once version 1.0.0 is released, a constraint such as `"gid:gtk4": "~>1.0"` can be used, which allows compatible 1.0.x releases
-without picking up a later minor version that may add a new default library major. See [Versions and API Stability](#versions-and-api-stability).
+Once version 1.0.0 is released, users who rely on unversioned shim imports should use a constraint such as
+`"gid:gtk4": "~>1.0.0"`, which allows compatible 1.0.x releases (`>=1.0.0 <1.1.0`) without picking up a later minor
+version that may add a new default library major. In dub, `~>1.0` means `>=1.0.0 <2.0.0`. See
+[Versions and API Stability](#versions-and-api-stability).
 
 
 ## Module Names
@@ -172,8 +176,8 @@ Packages whose versioned name is already unversioned, such as `freetype2` and `l
 A new library major, which changes what an unversioned import points to, is only added in a giD minor version bump.
 See [Versions and API Stability](#versions-and-api-stability). To pin a specific major, use the versioned import.
 
-GTK 3 and GTK 4 modules can be imported and linked in the same application. If both define the same type name (for example `Widget`),
-use a renamed import or `static import`:
+Versioned modules of two majors can be imported and linked in the same application, but only one major of a library can be
+used per process. If both define the same type name (for example `Widget`), use a renamed import or `static import`:
 
 ```D
 import Gtk4 = gid.gtk4.widget;
