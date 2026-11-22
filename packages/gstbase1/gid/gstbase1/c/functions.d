@@ -4,12 +4,15 @@ module gid.gstbase1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gstbase1.c.types;
+static import gid.gstbase1.c._gidlib_GstBase;
 public import gid.glib2.c.types;
 public import gid.gmodule2.c.types;
 public import gid.gobject2.c.types;
 public import gid.gst1.c.types;
 
 private immutable LIBS = ["gstbase-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gstbase1.c._gidlib_GstBase.gidLibLinked;
 
 // Adapter
 private alias c_gst_adapter_get_typeFn = extern(C) GType function() nothrow;
@@ -2044,7 +2047,7 @@ alias gst_type_find_list_factories_for_caps = c_gst_type_find_list_factories_for
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gstbase1");
+  auto libs = gidResolveLibs(LIBS, "gid.gstbase1", "GstBase");
 
   // Adapter
   gidLink(cast(void**)&gst_adapter_get_type, "gst_adapter_get_type", libs);

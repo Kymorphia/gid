@@ -4,10 +4,13 @@ module gid.gtksource4.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gtksource4.c.types;
+static import gid.gtksource4.c._gidlib_GtkSource;
 public import gid.gdk3.c.types;
 public import gid.gtk3.c.types;
 
 private immutable LIBS = ["gtksourceview-4_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gtksource4.c._gidlib_GtkSource.gidLibLinked;
 
 // Buffer
 private alias c_gtk_source_buffer_get_typeFn = extern(C) GType function() nothrow;
@@ -2216,7 +2219,7 @@ alias gtk_source_file_saver_error_quark = c_gtk_source_file_saver_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gtksource4");
+  auto libs = gidResolveLibs(LIBS, "gid.gtksource4", "GtkSource");
 
   // Buffer
   gidLink(cast(void**)&gtk_source_buffer_get_type, "gtk_source_buffer_get_type", libs);

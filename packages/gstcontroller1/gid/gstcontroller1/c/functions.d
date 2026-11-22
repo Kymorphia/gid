@@ -4,12 +4,15 @@ module gid.gstcontroller1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gstcontroller1.c.types;
+static import gid.gstcontroller1.c._gidlib_GstController;
 public import gid.glib2.c.types;
 public import gid.gmodule2.c.types;
 public import gid.gobject2.c.types;
 public import gid.gst1.c.types;
 
 private immutable LIBS = ["gstcontroller-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gstcontroller1.c._gidlib_GstController.gidLibLinked;
 
 // ARGBControlBinding
 private alias c_gst_argb_control_binding_get_typeFn = extern(C) GType function() nothrow;
@@ -179,7 +182,7 @@ alias gst_timed_value_control_invalidate_cache = c_gst_timed_value_control_inval
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gstcontroller1");
+  auto libs = gidResolveLibs(LIBS, "gid.gstcontroller1", "GstController");
 
   // ARGBControlBinding
   gidLink(cast(void**)&gst_argb_control_binding_get_type, "gst_argb_control_binding_get_type", libs);

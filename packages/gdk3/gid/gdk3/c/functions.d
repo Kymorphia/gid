@@ -4,12 +4,15 @@ module gid.gdk3.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gdk3.c.types;
+static import gid.gdk3.c._gidlib_Gdk;
 public import gid.cairo1.c.types;
 public import gid.gdkpixbuf2.c.types;
 public import gid.gio2.c.types;
 public import gid.pango1.c.types;
 
 private immutable LIBS = ["gdk-3_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gdk3.c._gidlib_Gdk.gidLibLinked;
 
 // AppLaunchContext
 private alias c_gdk_app_launch_context_get_typeFn = extern(C) GType function() nothrow;
@@ -3096,7 +3099,7 @@ alias gdk_gl_error_quark = c_gdk_gl_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gdk3");
+  auto libs = gidResolveLibs(LIBS, "gid.gdk3", "Gdk");
 
   // AppLaunchContext
   gidLink(cast(void**)&gdk_app_launch_context_get_type, "gdk_app_launch_context_get_type", libs);

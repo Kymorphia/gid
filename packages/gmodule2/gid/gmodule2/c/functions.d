@@ -4,9 +4,12 @@ module gid.gmodule2.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gmodule2.c.types;
+static import gid.gmodule2.c._gidlib_GModule;
 public import gid.glib2.c.types;
 
 private immutable LIBS = ["gmodule-2.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gmodule2.c._gidlib_GModule.gidLibLinked;
 
 // Module
 private alias c_g_module_closeFn = extern(C) gboolean function(ModuleC* module_) nothrow;
@@ -64,7 +67,7 @@ alias g_module_supported = c_g_module_supported;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gmodule2");
+  auto libs = gidResolveLibs(LIBS, "gid.gmodule2", "GModule");
 
   // Module
   gidLink(cast(void**)&g_module_close, "g_module_close", libs);

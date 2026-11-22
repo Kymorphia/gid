@@ -4,9 +4,12 @@ module gid.soup3.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.soup3.c.types;
+static import gid.soup3.c._gidlib_Soup;
 public import gid.gio2.c.types;
 
 private immutable LIBS = ["soup-3.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.soup3.c._gidlib_Soup.gidLibLinked;
 
 // Auth
 private alias c_soup_auth_get_typeFn = extern(C) GType function() nothrow;
@@ -2335,7 +2338,7 @@ alias soup_websocket_error_quark = c_soup_websocket_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.soup3");
+  auto libs = gidResolveLibs(LIBS, "gid.soup3", "Soup");
 
   // Auth
   gidLink(cast(void**)&soup_auth_get_type, "soup_auth_get_type", libs);

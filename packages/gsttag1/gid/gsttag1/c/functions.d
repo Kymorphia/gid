@@ -4,10 +4,13 @@ module gid.gsttag1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gsttag1.c.types;
+static import gid.gsttag1.c._gidlib_GstTag;
 public import gid.gst1.c.types;
 public import gid.gstbase1.c.types;
 
 private immutable LIBS = ["gsttag-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gsttag1.c._gidlib_GstTag.gidLibLinked;
 
 // TagDemux
 private alias c_gst_tag_demux_get_typeFn = extern(C) GType function() nothrow;
@@ -272,7 +275,7 @@ alias gst_vorbis_tag_add = c_gst_vorbis_tag_add;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gsttag1");
+  auto libs = gidResolveLibs(LIBS, "gid.gsttag1", "GstTag");
 
   // TagDemux
   gidLink(cast(void**)&gst_tag_demux_get_type, "gst_tag_demux_get_type", libs);

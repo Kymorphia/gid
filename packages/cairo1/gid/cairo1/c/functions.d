@@ -4,10 +4,13 @@ module gid.cairo1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.cairo1.c.types;
+static import gid.cairo1.c._gidlib_cairo;
 public import gid.freetype2.c.types;
 public import gid.gobject2.c.types;
 
 private immutable LIBS = ["cairo-gobject_2", "cairo_2"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.cairo1.c._gidlib_cairo.gidLibLinked;
 
 // Context
 private alias c_cairo_gobject_context_get_typeFn = extern(C) GType function() nothrow;
@@ -2080,7 +2083,7 @@ alias cairo_version_string = c_cairo_version_string;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.cairo1");
+  auto libs = gidResolveLibs(LIBS, "gid.cairo1", "cairo");
 
   // Context
   gidLink(cast(void**)&cairo_gobject_context_get_type, "cairo_gobject_context_get_type", libs);

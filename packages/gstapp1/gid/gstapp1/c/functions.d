@@ -4,10 +4,13 @@ module gid.gstapp1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gstapp1.c.types;
+static import gid.gstapp1.c._gidlib_GstApp;
 public import gid.gst1.c.types;
 public import gid.gstbase1.c.types;
 
 private immutable LIBS = ["gstapp-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gstapp1.c._gidlib_GstApp.gidLibLinked;
 
 // AppSink
 private alias c_gst_app_sink_get_typeFn = extern(C) GType function() nothrow;
@@ -412,7 +415,7 @@ alias gst_app_src_simple_callbacks_unref = c_gst_app_src_simple_callbacks_unref;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gstapp1");
+  auto libs = gidResolveLibs(LIBS, "gid.gstapp1", "GstApp");
 
   // AppSink
   gidLink(cast(void**)&gst_app_sink_get_type, "gst_app_sink_get_type", libs);

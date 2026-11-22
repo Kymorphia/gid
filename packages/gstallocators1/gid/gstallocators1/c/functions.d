@@ -4,9 +4,12 @@ module gid.gstallocators1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gstallocators1.c.types;
+static import gid.gstallocators1.c._gidlib_GstAllocators;
 public import gid.gst1.c.types;
 
 private immutable LIBS = ["gstallocators-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gstallocators1.c._gidlib_GstAllocators.gidLibLinked;
 
 // DRMDumbAllocator
 private alias c_gst_drm_dumb_allocator_get_typeFn = extern(C) GType function() nothrow;
@@ -183,7 +186,7 @@ alias gst_phys_memory_get_phys_addr = c_gst_phys_memory_get_phys_addr;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gstallocators1");
+  auto libs = gidResolveLibs(LIBS, "gid.gstallocators1", "GstAllocators");
 
   // DRMDumbAllocator
   gidLink(cast(void**)&gst_drm_dumb_allocator_get_type, "gst_drm_dumb_allocator_get_type", libs);

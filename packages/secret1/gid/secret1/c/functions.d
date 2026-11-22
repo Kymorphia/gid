@@ -4,10 +4,13 @@ module gid.secret1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.secret1.c.types;
+static import gid.secret1.c._gidlib_Secret;
 public import gid.gio2.c.types;
 public import gid.gobject2.c.types;
 
 private immutable LIBS = ["secret-1_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.secret1.c._gidlib_Secret.gidLibLinked;
 
 // Backend
 private alias c_secret_backend_get_typeFn = extern(C) GType function() nothrow;
@@ -1130,7 +1133,7 @@ alias secret_error_get_quark = c_secret_error_get_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.secret1");
+  auto libs = gidResolveLibs(LIBS, "gid.secret1", "Secret");
 
   // Backend
   gidLink(cast(void**)&secret_backend_get_type, "secret_backend_get_type", libs);

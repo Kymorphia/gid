@@ -4,6 +4,7 @@ module gid.gdk4.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gdk4.c.types;
+static import gid.gdk4.c._gidlib_Gdk;
 public import gid.cairo1.c.types;
 public import gid.gdkpixbuf2.c.types;
 public import gid.gio2.c.types;
@@ -11,6 +12,8 @@ public import gid.pango1.c.types;
 public import gid.pangocairo1.c.types;
 
 private immutable LIBS = ["gtk-4_1"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gdk4.c._gidlib_Gdk.gidLibLinked;
 
 // AppLaunchContext
 private alias c_gdk_app_launch_context_get_typeFn = extern(C) GType function() nothrow;
@@ -3446,7 +3449,7 @@ alias gdk_vulkan_error_quark = c_gdk_vulkan_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gdk4");
+  auto libs = gidResolveLibs(LIBS, "gid.gdk4", "Gdk");
 
   // AppLaunchContext
   gidLink(cast(void**)&gdk_app_launch_context_get_type, "gdk_app_launch_context_get_type", libs);

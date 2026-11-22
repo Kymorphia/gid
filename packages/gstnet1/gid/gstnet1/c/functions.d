@@ -4,6 +4,7 @@ module gid.gstnet1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gstnet1.c.types;
+static import gid.gstnet1.c._gidlib_GstNet;
 public import gid.gio2.c.types;
 public import gid.glib2.c.types;
 public import gid.gmodule2.c.types;
@@ -11,6 +12,8 @@ public import gid.gobject2.c.types;
 public import gid.gst1.c.types;
 
 private immutable LIBS = ["gstnet-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gstnet1.c._gidlib_GstNet.gidLibLinked;
 
 // NetAddressMeta
 private alias c_gst_net_address_meta_get_infoFn = extern(C) const(GstMetaInfo)* function() nothrow;
@@ -201,7 +204,7 @@ alias gst_ptp_statistics_callback_remove = c_gst_ptp_statistics_callback_remove;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gstnet1");
+  auto libs = gidResolveLibs(LIBS, "gid.gstnet1", "GstNet");
 
   // NetAddressMeta
   gidLink(cast(void**)&gst_net_address_meta_get_info, "gst_net_address_meta_get_info", libs);

@@ -4,9 +4,12 @@ module gid.graphene1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.graphene1.c.types;
+static import gid.graphene1.c._gidlib_Graphene;
 public import gid.gobject2.c.types;
 
 private immutable LIBS = ["graphene-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.graphene1.c._gidlib_Graphene.gidLibLinked;
 
 // Box
 private alias c_graphene_box_get_typeFn = extern(C) GType function() nothrow;
@@ -2083,7 +2086,7 @@ alias graphene_vec4_zero = c_graphene_vec4_zero;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.graphene1");
+  auto libs = gidResolveLibs(LIBS, "gid.graphene1", "Graphene");
 
   // Box
   gidLink(cast(void**)&graphene_box_get_type, "graphene_box_get_type", libs);

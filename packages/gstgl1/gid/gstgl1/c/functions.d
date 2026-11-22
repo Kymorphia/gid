@@ -4,11 +4,14 @@ module gid.gstgl1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gstgl1.c.types;
+static import gid.gstgl1.c._gidlib_GstGL;
 public import gid.gst1.c.types;
 public import gid.gstbase1.c.types;
 public import gid.gstvideo1.c.types;
 
 private immutable LIBS = ["gstgl-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gstgl1.c._gidlib_GstGL.gidLibLinked;
 
 // GLAllocationParams
 private alias c_gst_gl_allocation_params_get_typeFn = extern(C) GType function() nothrow;
@@ -1943,7 +1946,7 @@ alias gst_gl_window_error_quark = c_gst_gl_window_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gstgl1");
+  auto libs = gidResolveLibs(LIBS, "gid.gstgl1", "GstGL");
 
   // GLAllocationParams
   gidLink(cast(void**)&gst_gl_allocation_params_get_type, "gst_gl_allocation_params_get_type", libs);

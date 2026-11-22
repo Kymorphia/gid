@@ -4,9 +4,12 @@ module gid.glibunix2.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.glibunix2.c.types;
+static import gid.glibunix2.c._gidlib_GLibUnix;
 public import gid.glib2.c.types;
 
 private immutable LIBS = ["gobject-2.0_0", "glib-2.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.glibunix2.c._gidlib_GLibUnix.gidLibLinked;
 
 // global
 private alias c_g_closefromFn = extern(C) int function(int lowfd) nothrow;
@@ -79,7 +82,7 @@ alias g_unix_signal_source_new = c_g_unix_signal_source_new;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.glibunix2");
+  auto libs = gidResolveLibs(LIBS, "gid.glibunix2", "GLibUnix");
 
   // global
   gidLink(cast(void**)&g_closefrom, "g_closefrom", libs);

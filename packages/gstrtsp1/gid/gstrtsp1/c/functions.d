@@ -4,12 +4,15 @@ module gid.gstrtsp1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gstrtsp1.c.types;
+static import gid.gstrtsp1.c._gidlib_GstRtsp;
 public import gid.gio2.c.types;
 public import gid.gst1.c.types;
 public import gid.gstbase1.c.types;
 public import gid.gstsdp1.c.types;
 
 private immutable LIBS = ["gstrtsp-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gstrtsp1.c._gidlib_GstRtsp.gidLibLinked;
 
 // RTSPAuthCredential
 private alias c_gst_rtsp_auth_credential_get_typeFn = extern(C) GType function() nothrow;
@@ -821,7 +824,7 @@ alias gst_rtsp_version_as_text = c_gst_rtsp_version_as_text;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gstrtsp1");
+  auto libs = gidResolveLibs(LIBS, "gid.gstrtsp1", "GstRtsp");
 
   // RTSPAuthCredential
   gidLink(cast(void**)&gst_rtsp_auth_credential_get_type, "gst_rtsp_auth_credential_get_type", libs);

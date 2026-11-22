@@ -4,11 +4,14 @@ module gid.gst1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gst1.c.types;
+static import gid.gst1.c._gidlib_Gst;
 public import gid.glib2.c.types;
 public import gid.gmodule2.c.types;
 public import gid.gobject2.c.types;
 
 private immutable LIBS = ["gstreamer-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gst1.c._gidlib_Gst.gidLibLinked;
 
 // AllocationParams
 private alias c_gst_allocation_params_get_typeFn = extern(C) GType function() nothrow;
@@ -9917,7 +9920,7 @@ alias gst_uri_error_quark = c_gst_uri_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gst1");
+  auto libs = gidResolveLibs(LIBS, "gid.gst1", "Gst");
 
   // AllocationParams
   gidLink(cast(void**)&gst_allocation_params_get_type, "gst_allocation_params_get_type", libs);

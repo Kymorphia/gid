@@ -4,9 +4,12 @@ module gid.gstsdp1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gstsdp1.c.types;
+static import gid.gstsdp1.c._gidlib_GstSdp;
 public import gid.gst1.c.types;
 
 private immutable LIBS = ["gstsdp-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gstsdp1.c._gidlib_GstSdp.gidLibLinked;
 
 // MIKEYMessage
 private alias c_gst_mikey_message_get_typeFn = extern(C) GType function() nothrow;
@@ -930,7 +933,7 @@ alias gst_sdp_make_keymgmt = c_gst_sdp_make_keymgmt;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gstsdp1");
+  auto libs = gidResolveLibs(LIBS, "gid.gstsdp1", "GstSdp");
 
   // MIKEYMessage
   gidLink(cast(void**)&gst_mikey_message_get_type, "gst_mikey_message_get_type", libs);

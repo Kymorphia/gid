@@ -4,12 +4,15 @@ module gid.gstcheck1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gstcheck1.c.types;
+static import gid.gstcheck1.c._gidlib_GstCheck;
 public import gid.glib2.c.types;
 public import gid.gmodule2.c.types;
 public import gid.gobject2.c.types;
 public import gid.gst1.c.types;
 
 private immutable LIBS = ["gstcheck-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gstcheck1.c._gidlib_GstCheck.gidLibLinked;
 
 // Harness
 private alias c_gst_harness_add_element_fullFn = extern(C) void function(GstHarness* h, GstElement* element, GstStaticPadTemplate* hsrc, const(char)* elementSinkpadName, GstStaticPadTemplate* hsink, const(char)* elementSrcpadName) nothrow;
@@ -715,7 +718,7 @@ alias gst_consistency_checker_reset = c_gst_consistency_checker_reset;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gstcheck1");
+  auto libs = gidResolveLibs(LIBS, "gid.gstcheck1", "GstCheck");
 
   // Harness
   gidLink(cast(void**)&gst_harness_add_element_full, "gst_harness_add_element_full", libs);

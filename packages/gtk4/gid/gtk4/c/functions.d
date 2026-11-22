@@ -4,10 +4,13 @@ module gid.gtk4.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gtk4.c.types;
+static import gid.gtk4.c._gidlib_Gtk;
 public import gid.gdk4.c.types;
 public import gid.gsk4.c.types;
 
 private immutable LIBS = ["gtk-4_1"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gtk4.c._gidlib_Gtk.gidLibLinked;
 
 // ATContext
 private alias c_gtk_at_context_get_typeFn = extern(C) GType function() nothrow;
@@ -21822,7 +21825,7 @@ alias gtk_svg_error_quark = c_gtk_svg_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gtk4");
+  auto libs = gidResolveLibs(LIBS, "gid.gtk4", "Gtk");
 
   // ATContext
   gidLink(cast(void**)&gtk_at_context_get_type, "gtk_at_context_get_type", libs);

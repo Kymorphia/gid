@@ -4,11 +4,14 @@ module gid.gtk3.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gtk3.c.types;
+static import gid.gtk3.c._gidlib_Gtk;
 public import gid.atk1.c.types;
 public import gid.gdk3.c.types;
 public import gid.xlib2.c.types;
 
 private immutable LIBS = ["gtk-3_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gtk3.c._gidlib_Gtk.gidLibLinked;
 
 // AboutDialog
 private alias c_gtk_about_dialog_get_typeFn = extern(C) GType function() nothrow;
@@ -22564,7 +22567,7 @@ alias gtk_recent_manager_error_quark = c_gtk_recent_manager_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gtk3");
+  auto libs = gidResolveLibs(LIBS, "gid.gtk3", "Gtk");
 
   // AboutDialog
   gidLink(cast(void**)&gtk_about_dialog_get_type, "gtk_about_dialog_get_type", libs);

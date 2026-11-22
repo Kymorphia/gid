@@ -4,10 +4,13 @@ module gid.gdkpixbuf2.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gdkpixbuf2.c.types;
+static import gid.gdkpixbuf2.c._gidlib_GdkPixbuf;
 public import gid.gio2.c.types;
 public import gid.gmodule2.c.types;
 
 private immutable LIBS = ["gdk_pixbuf-2.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gdkpixbuf2.c._gidlib_GdkPixbuf.gidLibLinked;
 
 // Pixbuf
 private alias c_gdk_pixbuf_get_typeFn = extern(C) GType function() nothrow;
@@ -632,7 +635,7 @@ alias gdk_pixbuf_error_quark = c_gdk_pixbuf_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gdkpixbuf2");
+  auto libs = gidResolveLibs(LIBS, "gid.gdkpixbuf2", "GdkPixbuf");
 
   // Pixbuf
   gidLink(cast(void**)&gdk_pixbuf_get_type, "gdk_pixbuf_get_type", libs);

@@ -4,10 +4,13 @@ module gid.gstrtp1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gstrtp1.c.types;
+static import gid.gstrtp1.c._gidlib_GstRtp;
 public import gid.gst1.c.types;
 public import gid.gstbase1.c.types;
 
 private immutable LIBS = ["gstrtp-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gstrtp1.c._gidlib_GstRtp.gidLibLinked;
 
 // RTCPBuffer
 private alias c_gst_rtcp_buffer_add_packetFn = extern(C) gboolean function(GstRTCPBuffer* rtcp, GstRTCPType type, GstRTCPPacket* packet) nothrow;
@@ -1085,7 +1088,7 @@ alias gst_rtp_source_meta_api_get_type = c_gst_rtp_source_meta_api_get_type;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gstrtp1");
+  auto libs = gidResolveLibs(LIBS, "gid.gstrtp1", "GstRtp");
 
   // RTCPBuffer
   gidLink(cast(void**)&gst_rtcp_buffer_add_packet, "gst_rtcp_buffer_add_packet", libs);

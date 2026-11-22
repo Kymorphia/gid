@@ -4,6 +4,7 @@ module gid.vte3.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.vte3.c.types;
+static import gid.vte3.c._gidlib_Vte;
 public import gid.cairo1.c.types;
 public import gid.gdk4.c.types;
 public import gid.graphene1.c.types;
@@ -12,6 +13,8 @@ public import gid.gtk4.c.types;
 public import gid.pango1.c.types;
 
 private immutable LIBS = ["vte-2.91-gtk4_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.vte3.c._gidlib_Vte.gidLibLinked;
 
 // EventContext
 private alias c_vte_event_context_get_typeFn = extern(C) GType function() nothrow;
@@ -1177,7 +1180,7 @@ alias vte_regex_error_quark = c_vte_regex_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.vte3");
+  auto libs = gidResolveLibs(LIBS, "gid.vte3", "Vte");
 
   // EventContext
   gidLink(cast(void**)&vte_event_context_get_type, "vte_event_context_get_type", libs);

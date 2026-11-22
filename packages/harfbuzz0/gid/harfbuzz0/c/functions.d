@@ -4,10 +4,13 @@ module gid.harfbuzz0.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.harfbuzz0.c.types;
+static import gid.harfbuzz0.c._gidlib_HarfBuzz;
 public import gid.freetype2.c.types;
 public import gid.gobject2.c.types;
 
 private immutable LIBS = ["harfbuzz-gobject_0", "harfbuzz_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.harfbuzz0.c._gidlib_HarfBuzz.gidLibLinked;
 
 // Blob
 private alias c_hb_gobject_blob_get_typeFn = extern(C) GType function() nothrow;
@@ -2858,7 +2861,7 @@ alias hb_gobject_glyph_position_get_type = c_hb_gobject_glyph_position_get_type;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.harfbuzz0");
+  auto libs = gidResolveLibs(LIBS, "gid.harfbuzz0", "HarfBuzz");
 
   // Blob
   gidLink(cast(void**)&hb_gobject_blob_get_type, "hb_gobject_blob_get_type", libs);

@@ -4,9 +4,12 @@ module gid.gobject2.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gobject2.c.types;
+static import gid.gobject2.c._gidlib_GObject;
 public import gid.glib2.c.types;
 
 private immutable LIBS = ["gobject-2.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gobject2.c._gidlib_GObject.gidLibLinked;
 
 // Binding
 private alias c_g_binding_get_typeFn = extern(C) GType function() nothrow;
@@ -2275,7 +2278,7 @@ alias g_type_test_flags = c_g_type_test_flags;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gobject2");
+  auto libs = gidResolveLibs(LIBS, "gid.gobject2", "GObject");
 
   // Binding
   gidLink(cast(void**)&g_binding_get_type, "g_binding_get_type", libs);

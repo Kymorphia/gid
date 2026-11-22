@@ -4,11 +4,14 @@ module gid.pangocairo1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.pangocairo1.c.types;
+static import gid.pangocairo1.c._gidlib_PangoCairo;
 public import gid.cairo1.c.types;
 public import gid.gobject2.c.types;
 public import gid.pango1.c.types;
 
 private immutable LIBS = ["pangocairo-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.pangocairo1.c._gidlib_PangoCairo.gidLibLinked;
 
 // Font
 private alias c_pango_cairo_font_get_typeFn = extern(C) GType function() nothrow;
@@ -174,7 +177,7 @@ alias pango_cairo_update_layout = c_pango_cairo_update_layout;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.pangocairo1");
+  auto libs = gidResolveLibs(LIBS, "gid.pangocairo1", "PangoCairo");
 
   // Font
   gidLink(cast(void**)&pango_cairo_font_get_type, "pango_cairo_font_get_type", libs);

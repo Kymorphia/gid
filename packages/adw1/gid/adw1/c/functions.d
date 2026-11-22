@@ -4,10 +4,13 @@ module gid.adw1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.adw1.c.types;
+static import gid.adw1.c._gidlib_Adw;
 public import gid.gio2.c.types;
 public import gid.gtk4.c.types;
 
 private immutable LIBS = ["adwaita-1_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.adw1.c._gidlib_Adw.gidLibLinked;
 
 // AboutDialog
 private alias c_adw_about_dialog_get_typeFn = extern(C) GType function() nothrow;
@@ -7364,7 +7367,7 @@ alias adw_length_unit_to_px = c_adw_length_unit_to_px;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.adw1");
+  auto libs = gidResolveLibs(LIBS, "gid.adw1", "Adw");
 
   // AboutDialog
   gidLink(cast(void**)&adw_about_dialog_get_type, "adw_about_dialog_get_type", libs);

@@ -4,6 +4,7 @@ module gid.rsvg2.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.rsvg2.c.types;
+static import gid.rsvg2.c._gidlib_Rsvg;
 public import gid.cairo1.c.types;
 public import gid.gdkpixbuf2.c.types;
 public import gid.gio2.c.types;
@@ -11,6 +12,8 @@ public import gid.glib2.c.types;
 public import gid.gobject2.c.types;
 
 private immutable LIBS = ["rsvg-2_2"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.rsvg2.c._gidlib_Rsvg.gidLibLinked;
 
 // Handle
 private alias c_rsvg_handle_get_typeFn = extern(C) GType function() nothrow;
@@ -276,7 +279,7 @@ alias rsvg_error_quark = c_rsvg_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.rsvg2");
+  auto libs = gidResolveLibs(LIBS, "gid.rsvg2", "Rsvg");
 
   // Handle
   gidLink(cast(void**)&rsvg_handle_get_type, "rsvg_handle_get_type", libs);

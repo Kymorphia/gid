@@ -4,6 +4,7 @@ module gid.gstaudio1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gstaudio1.c.types;
+static import gid.gstaudio1.c._gidlib_GstAudio;
 public import gid.glib2.c.types;
 public import gid.gmodule2.c.types;
 public import gid.gobject2.c.types;
@@ -11,6 +12,8 @@ public import gid.gst1.c.types;
 public import gid.gstbase1.c.types;
 
 private immutable LIBS = ["gstaudio-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gstaudio1.c._gidlib_GstAudio.gidLibLinked;
 
 // AudioAggregator
 private alias c_gst_audio_aggregator_get_typeFn = extern(C) GType function() nothrow;
@@ -1422,7 +1425,7 @@ alias gst_dsd_format_to_string = c_gst_dsd_format_to_string;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gstaudio1");
+  auto libs = gidResolveLibs(LIBS, "gid.gstaudio1", "GstAudio");
 
   // AudioAggregator
   gidLink(cast(void**)&gst_audio_aggregator_get_type, "gst_audio_aggregator_get_type", libs);

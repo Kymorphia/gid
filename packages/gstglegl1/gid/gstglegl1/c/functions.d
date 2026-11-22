@@ -4,12 +4,15 @@ module gid.gstglegl1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gstglegl1.c.types;
+static import gid.gstglegl1.c._gidlib_GstGLEGL;
 public import gid.gst1.c.types;
 public import gid.gstbase1.c.types;
 public import gid.gstgl1.c.types;
 public import gid.gstvideo1.c.types;
 
 private immutable LIBS = ["gstgl-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gstglegl1.c._gidlib_GstGLEGL.gidLibLinked;
 
 // EGLImage
 private alias c_gst_egl_image_get_typeFn = extern(C) GType function() nothrow;
@@ -172,7 +175,7 @@ alias gst_is_gl_memory_egl = c_gst_is_gl_memory_egl;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gstglegl1");
+  auto libs = gidResolveLibs(LIBS, "gid.gstglegl1", "GstGLEGL");
 
   // EGLImage
   gidLink(cast(void**)&gst_egl_image_get_type, "gst_egl_image_get_type", libs);

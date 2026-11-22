@@ -4,9 +4,12 @@ module gid.atk1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.atk1.c.types;
+static import gid.atk1.c._gidlib_Atk;
 public import gid.gobject2.c.types;
 
 private immutable LIBS = ["atk-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.atk1.c._gidlib_Atk.gidLibLinked;
 
 // Action
 private alias c_atk_action_get_typeFn = extern(C) GType function() nothrow;
@@ -1590,7 +1593,7 @@ alias atk_value_type_get_name = c_atk_value_type_get_name;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.atk1");
+  auto libs = gidResolveLibs(LIBS, "gid.atk1", "Atk");
 
   // Action
   gidLink(cast(void**)&atk_action_get_type, "atk_action_get_type", libs);

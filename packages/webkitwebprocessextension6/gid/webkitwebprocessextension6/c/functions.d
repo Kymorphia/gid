@@ -4,11 +4,14 @@ module gid.webkitwebprocessextension6.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.webkitwebprocessextension6.c.types;
+static import gid.webkitwebprocessextension6.c._gidlib_WebKitWebProcessExtension;
 public import gid.gtk4.c.types;
 public import gid.javascriptcore6.c.types;
 public import gid.soup3.c.types;
 
 private immutable LIBS = ["webkitgtk-6.0_4", "javascriptcoregtk-6.0_1"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.webkitwebprocessextension6.c._gidlib_WebKitWebProcessExtension.gidLibLinked;
 
 // ConsoleMessage
 private alias c_webkit_console_message_get_typeFn = extern(C) GType function() nothrow;
@@ -643,7 +646,7 @@ alias webkit_web_process_extension_send_message_to_context_finish = c_webkit_web
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.webkitwebprocessextension6");
+  auto libs = gidResolveLibs(LIBS, "gid.webkitwebprocessextension6", "WebKitWebProcessExtension");
 
   // ConsoleMessage
   gidLink(cast(void**)&webkit_console_message_get_type, "webkit_console_message_get_type", libs);

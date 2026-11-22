@@ -4,11 +4,14 @@ module gid.webkit6.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.webkit6.c.types;
+static import gid.webkit6.c._gidlib_WebKit;
 public import gid.gtk4.c.types;
 public import gid.javascriptcore6.c.types;
 public import gid.soup3.c.types;
 
 private immutable LIBS = ["webkitgtk-6.0_4", "javascriptcoregtk-6.0_1"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.webkit6.c._gidlib_WebKit.gidLibLinked;
 
 // ApplicationInfo
 private alias c_webkit_application_info_get_typeFn = extern(C) GType function() nothrow;
@@ -4380,7 +4383,7 @@ alias webkit_web_extension_match_pattern_error_quark = c_webkit_web_extension_ma
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.webkit6");
+  auto libs = gidResolveLibs(LIBS, "gid.webkit6", "WebKit");
 
   // ApplicationInfo
   gidLink(cast(void**)&webkit_application_info_get_type, "webkit_application_info_get_type", libs);

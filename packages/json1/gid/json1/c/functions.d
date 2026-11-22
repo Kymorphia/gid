@@ -4,10 +4,13 @@ module gid.json1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.json1.c.types;
+static import gid.json1.c._gidlib_Json;
 public import gid.gio2.c.types;
 public import gid.gobject2.c.types;
 
 private immutable LIBS = ["json-glib-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.json1.c._gidlib_Json.gidLibLinked;
 
 // Array
 private alias c_json_array_get_typeFn = extern(C) GType function() nothrow;
@@ -1172,7 +1175,7 @@ alias json_reader_error_quark = c_json_reader_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.json1");
+  auto libs = gidResolveLibs(LIBS, "gid.json1", "Json");
 
   // Array
   gidLink(cast(void**)&json_array_get_type, "json_array_get_type", libs);

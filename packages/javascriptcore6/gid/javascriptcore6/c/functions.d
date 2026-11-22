@@ -4,9 +4,12 @@ module gid.javascriptcore6.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.javascriptcore6.c.types;
+static import gid.javascriptcore6.c._gidlib_JavaScriptCore;
 public import gid.gobject2.c.types;
 
 private immutable LIBS = ["javascriptcoregtk-6.0_1"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.javascriptcore6.c._gidlib_JavaScriptCore.gidLibLinked;
 
 // Class
 private alias c_jsc_class_get_typeFn = extern(C) GType function() nothrow;
@@ -698,7 +701,7 @@ alias jsc_options_set_uint = c_jsc_options_set_uint;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.javascriptcore6");
+  auto libs = gidResolveLibs(LIBS, "gid.javascriptcore6", "JavaScriptCore");
 
   // Class
   gidLink(cast(void**)&jsc_class_get_type, "jsc_class_get_type", libs);

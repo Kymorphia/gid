@@ -4,10 +4,13 @@ module gid.gmime3.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gmime3.c.types;
+static import gid.gmime3.c._gidlib_GMime;
 public import gid.gio2.c.types;
 public import gid.gobject2.c.types;
 
 private immutable LIBS = ["gmime-3.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gmime3.c._gidlib_GMime.gidLibLinked;
 
 // ApplicationPkcs7Mime
 private alias c_g_mime_application_pkcs7_mime_get_typeFn = extern(C) GType function() nothrow;
@@ -3450,7 +3453,7 @@ alias g_mime_yencode_step = c_g_mime_yencode_step;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gmime3");
+  auto libs = gidResolveLibs(LIBS, "gid.gmime3", "GMime");
 
   // ApplicationPkcs7Mime
   gidLink(cast(void**)&g_mime_application_pkcs7_mime_get_type, "g_mime_application_pkcs7_mime_get_type", libs);

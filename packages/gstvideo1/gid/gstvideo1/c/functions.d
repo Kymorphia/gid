@@ -4,10 +4,13 @@ module gid.gstvideo1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gstvideo1.c.types;
+static import gid.gstvideo1.c._gidlib_GstVideo;
 public import gid.gst1.c.types;
 public import gid.gstbase1.c.types;
 
 private immutable LIBS = ["gstvideo-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gstvideo1.c._gidlib_GstVideo.gidLibLinked;
 
 // AncillaryMeta
 private alias c_gst_ancillary_meta_get_infoFn = extern(C) const(GstMetaInfo)* function() nothrow;
@@ -2477,7 +2480,7 @@ alias gst_video_transfer_function_to_iso = c_gst_video_transfer_function_to_iso;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gstvideo1");
+  auto libs = gidResolveLibs(LIBS, "gid.gstvideo1", "GstVideo");
 
   // AncillaryMeta
   gidLink(cast(void**)&gst_ancillary_meta_get_info, "gst_ancillary_meta_get_info", libs);

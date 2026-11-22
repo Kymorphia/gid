@@ -4,10 +4,13 @@ module gid.gsk4.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gsk4.c.types;
+static import gid.gsk4.c._gidlib_Gsk;
 public import gid.gdk4.c.types;
 public import gid.graphene1.c.types;
 
 private immutable LIBS = ["gtk-4_1"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gsk4.c._gidlib_Gsk.gidLibLinked;
 
 // BlendNode
 private alias c_gsk_blend_node_get_typeFn = extern(C) GType function() nothrow;
@@ -2146,7 +2149,7 @@ alias gsk_serialization_error_quark = c_gsk_serialization_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gsk4");
+  auto libs = gidResolveLibs(LIBS, "gid.gsk4", "Gsk");
 
   // BlendNode
   gidLink(cast(void**)&gsk_blend_node_get_type, "gsk_blend_node_get_type", libs);

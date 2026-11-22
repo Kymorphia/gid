@@ -4,12 +4,15 @@ module gid.gstglwayland1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gstglwayland1.c.types;
+static import gid.gstglwayland1.c._gidlib_GstGLWayland;
 public import gid.gst1.c.types;
 public import gid.gstbase1.c.types;
 public import gid.gstgl1.c.types;
 public import gid.gstvideo1.c.types;
 
 private immutable LIBS = ["gstgl-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gstglwayland1.c._gidlib_GstGLWayland.gidLibLinked;
 
 // GLDisplayWayland
 private alias c_gst_gl_display_wayland_get_typeFn = extern(C) GType function() nothrow;
@@ -32,7 +35,7 @@ alias gst_gl_display_wayland_new_with_display = c_gst_gl_display_wayland_new_wit
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gstglwayland1");
+  auto libs = gidResolveLibs(LIBS, "gid.gstglwayland1", "GstGLWayland");
 
   // GLDisplayWayland
   gidLink(cast(void**)&gst_gl_display_wayland_get_type, "gst_gl_display_wayland_get_type", libs);

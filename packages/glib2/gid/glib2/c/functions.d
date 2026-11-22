@@ -4,9 +4,12 @@ module gid.glib2.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.glib2.c.types;
+static import gid.glib2.c._gidlib_GLib;
 public import gid.gobject2.c.types;
 
 private immutable LIBS = ["gobject-2.0_0", "glib-2.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.glib2.c._gidlib_GLib.gidLibLinked;
 
 // Allocator
 private alias c_g_allocator_freeFn = extern(C) void function(GAllocator* allocator) nothrow;
@@ -9647,7 +9650,7 @@ alias g_unicode_script_to_iso15924 = c_g_unicode_script_to_iso15924;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.glib2");
+  auto libs = gidResolveLibs(LIBS, "gid.glib2", "GLib");
 
   // Allocator
   gidLink(cast(void**)&g_allocator_free, "g_allocator_free", libs);

@@ -4,12 +4,15 @@ module gid.gstpbutils1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gstpbutils1.c.types;
+static import gid.gstpbutils1.c._gidlib_GstPbutils;
 public import gid.gst1.c.types;
 public import gid.gstaudio1.c.types;
 public import gid.gstbase1.c.types;
 public import gid.gstvideo1.c.types;
 
 private immutable LIBS = ["gstpbutils-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gstpbutils1.c._gidlib_GstPbutils.gidLibLinked;
 
 // AudioVisualizer
 private alias c_gst_audio_visualizer_get_typeFn = extern(C) GType function() nothrow;
@@ -1072,7 +1075,7 @@ alias gst_install_plugins_return_get_name = c_gst_install_plugins_return_get_nam
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gstpbutils1");
+  auto libs = gidResolveLibs(LIBS, "gid.gstpbutils1", "GstPbutils");
 
   // AudioVisualizer
   gidLink(cast(void**)&gst_audio_visualizer_get_type, "gst_audio_visualizer_get_type", libs);

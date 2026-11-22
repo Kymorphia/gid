@@ -4,9 +4,12 @@ module gid.gtksource5.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gtksource5.c.types;
+static import gid.gtksource5.c._gidlib_GtkSource;
 public import gid.gtk4.c.types;
 
 private immutable LIBS = ["gtksourceview-5_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gtksource5.c._gidlib_GtkSource.gidLibLinked;
 
 // Annotation
 private alias c_gtk_source_annotation_get_typeFn = extern(C) GType function() nothrow;
@@ -2802,7 +2805,7 @@ alias gtk_source_file_saver_error_quark = c_gtk_source_file_saver_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gtksource5");
+  auto libs = gidResolveLibs(LIBS, "gid.gtksource5", "GtkSource");
 
   // Annotation
   gidLink(cast(void**)&gtk_source_annotation_get_type, "gtk_source_annotation_get_type", libs);

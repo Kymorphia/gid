@@ -4,10 +4,13 @@ module gid.panel1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.panel1.c.types;
+static import gid.panel1.c._gidlib_Panel;
 public import gid.adw1.c.types;
 public import gid.gtk4.c.types;
 
 private immutable LIBS = ["panel-1_1"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.panel1.c._gidlib_Panel.gidLibLinked;
 
 // ActionMuxer
 private alias c_panel_action_muxer_get_typeFn = extern(C) GType function() nothrow;
@@ -1902,7 +1905,7 @@ alias panel_marshal_OBJECT__OBJECTv = c_panel_marshal_OBJECT__OBJECTv;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.panel1");
+  auto libs = gidResolveLibs(LIBS, "gid.panel1", "Panel");
 
   // ActionMuxer
   gidLink(cast(void**)&panel_action_muxer_get_type, "panel_action_muxer_get_type", libs);

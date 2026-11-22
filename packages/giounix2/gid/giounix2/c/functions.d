@@ -4,12 +4,15 @@ module gid.giounix2.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.giounix2.c.types;
+static import gid.giounix2.c._gidlib_GioUnix;
 public import gid.gio2.c.types;
 public import gid.glib2.c.types;
 public import gid.gmodule2.c.types;
 public import gid.gobject2.c.types;
 
 private immutable LIBS = ["gio-2.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.giounix2.c._gidlib_GioUnix.gidLibLinked;
 
 // DesktopAppInfo
 private alias c_g_desktop_app_info_get_typeFn = extern(C) GType function() nothrow;
@@ -613,7 +616,7 @@ alias g_unix_mounts_get_from_file = c_g_unix_mounts_get_from_file;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.giounix2");
+  auto libs = gidResolveLibs(LIBS, "gid.giounix2", "GioUnix");
 
   // DesktopAppInfo
   gidLink(cast(void**)&g_desktop_app_info_get_type, "g_desktop_app_info_get_type", libs);

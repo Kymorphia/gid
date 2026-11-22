@@ -4,12 +4,15 @@ module gid.pango1.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.pango1.c.types;
+static import gid.pango1.c._gidlib_Pango;
 public import gid.cairo1.c.types;
 public import gid.gio2.c.types;
 public import gid.gobject2.c.types;
 public import gid.harfbuzz0.c.types;
 
 private immutable LIBS = ["pango-1.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.pango1.c._gidlib_Pango.gidLibLinked;
 
 // AttrFontDesc
 private alias c_pango_attr_font_desc_newFn = extern(C) PangoAttribute* function(const(PangoFontDescription)* desc) nothrow;
@@ -2481,7 +2484,7 @@ alias pango_script_get_sample_language = c_pango_script_get_sample_language;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.pango1");
+  auto libs = gidResolveLibs(LIBS, "gid.pango1", "Pango");
 
   // AttrFontDesc
   gidLink(cast(void**)&pango_attr_font_desc_new, "pango_attr_font_desc_new", libs);

@@ -4,11 +4,14 @@ module gid.gio2.c.functions;
 public import gid.core.basictypes;
 import gid.core.loader;
 import gid.gio2.c.types;
+static import gid.gio2.c._gidlib_Gio;
 public import gid.glib2.c.types;
 public import gid.gmodule2.c.types;
 public import gid.gobject2.c.types;
 
 private immutable LIBS = ["gio-2.0_0"];
+
+private __gshared immutable(bool)* _gidLibMarker = &gid.gio2.c._gidlib_Gio.gidLibLinked;
 
 // Action
 private alias c_g_action_get_typeFn = extern(C) GType function() nothrow;
@@ -10434,7 +10437,7 @@ alias g_tls_error_quark = c_g_tls_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS, "gid.gio2");
+  auto libs = gidResolveLibs(LIBS, "gid.gio2", "Gio");
 
   // Action
   gidLink(cast(void**)&g_action_get_type, "g_action_get_type", libs);
