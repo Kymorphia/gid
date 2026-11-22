@@ -174,7 +174,7 @@ alias pango_cairo_update_layout = c_pango_cairo_update_layout;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.pangocairo1");
 
   // Font
   gidLink(cast(void**)&pango_cairo_font_get_type, "pango_cairo_font_get_type", libs);

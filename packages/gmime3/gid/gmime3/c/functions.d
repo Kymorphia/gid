@@ -3450,7 +3450,7 @@ alias g_mime_yencode_step = c_g_mime_yencode_step;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gmime3");
 
   // ApplicationPkcs7Mime
   gidLink(cast(void**)&g_mime_application_pkcs7_mime_get_type, "g_mime_application_pkcs7_mime_get_type", libs);

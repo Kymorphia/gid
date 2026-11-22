@@ -412,7 +412,7 @@ alias gst_app_src_simple_callbacks_unref = c_gst_app_src_simple_callbacks_unref;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gstapp1");
 
   // AppSink
   gidLink(cast(void**)&gst_app_sink_get_type, "gst_app_sink_get_type", libs);

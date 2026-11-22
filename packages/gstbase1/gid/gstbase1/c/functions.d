@@ -2044,7 +2044,7 @@ alias gst_type_find_list_factories_for_caps = c_gst_type_find_list_factories_for
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gstbase1");
 
   // Adapter
   gidLink(cast(void**)&gst_adapter_get_type, "gst_adapter_get_type", libs);

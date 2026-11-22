@@ -2146,7 +2146,7 @@ alias gsk_serialization_error_quark = c_gsk_serialization_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gsk4");
 
   // BlendNode
   gidLink(cast(void**)&gsk_blend_node_get_type, "gsk_blend_node_get_type", libs);

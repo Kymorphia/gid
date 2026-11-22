@@ -32,7 +32,7 @@ alias gst_gl_display_wayland_new_with_display = c_gst_gl_display_wayland_new_wit
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gstglwayland1");
 
   // GLDisplayWayland
   gidLink(cast(void**)&gst_gl_display_wayland_get_type, "gst_gl_display_wayland_get_type", libs);

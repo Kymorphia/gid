@@ -2275,7 +2275,7 @@ alias g_type_test_flags = c_g_type_test_flags;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gobject2");
 
   // Binding
   gidLink(cast(void**)&g_binding_get_type, "g_binding_get_type", libs);

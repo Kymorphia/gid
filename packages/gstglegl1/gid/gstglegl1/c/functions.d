@@ -172,7 +172,7 @@ alias gst_is_gl_memory_egl = c_gst_is_gl_memory_egl;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gstglegl1");
 
   // EGLImage
   gidLink(cast(void**)&gst_egl_image_get_type, "gst_egl_image_get_type", libs);

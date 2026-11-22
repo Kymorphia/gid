@@ -9647,7 +9647,7 @@ alias g_unicode_script_to_iso15924 = c_g_unicode_script_to_iso15924;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.glib2");
 
   // Allocator
   gidLink(cast(void**)&g_allocator_free, "g_allocator_free", libs);

@@ -2080,7 +2080,7 @@ alias cairo_version_string = c_cairo_version_string;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.cairo1");
 
   // Context
   gidLink(cast(void**)&cairo_gobject_context_get_type, "cairo_gobject_context_get_type", libs);

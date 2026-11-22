@@ -4380,7 +4380,7 @@ alias webkit_web_extension_match_pattern_error_quark = c_webkit_web_extension_ma
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.webkit6");
 
   // ApplicationInfo
   gidLink(cast(void**)&webkit_application_info_get_type, "webkit_application_info_get_type", libs);

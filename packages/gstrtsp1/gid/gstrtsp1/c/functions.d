@@ -821,7 +821,7 @@ alias gst_rtsp_version_as_text = c_gst_rtsp_version_as_text;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gstrtsp1");
 
   // RTSPAuthCredential
   gidLink(cast(void**)&gst_rtsp_auth_credential_get_type, "gst_rtsp_auth_credential_get_type", libs);

@@ -64,7 +64,7 @@ alias g_module_supported = c_g_module_supported;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gmodule2");
 
   // Module
   gidLink(cast(void**)&g_module_close, "g_module_close", libs);

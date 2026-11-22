@@ -22564,7 +22564,7 @@ alias gtk_recent_manager_error_quark = c_gtk_recent_manager_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gtk3");
 
   // AboutDialog
   gidLink(cast(void**)&gtk_about_dialog_get_type, "gtk_about_dialog_get_type", libs);

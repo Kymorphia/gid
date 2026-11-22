@@ -698,7 +698,7 @@ alias jsc_options_set_uint = c_jsc_options_set_uint;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.javascriptcore6");
 
   // Class
   gidLink(cast(void**)&jsc_class_get_type, "jsc_class_get_type", libs);

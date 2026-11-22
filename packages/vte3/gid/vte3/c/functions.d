@@ -1177,7 +1177,7 @@ alias vte_regex_error_quark = c_vte_regex_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.vte3");
 
   // EventContext
   gidLink(cast(void**)&vte_event_context_get_type, "vte_event_context_get_type", libs);

@@ -10434,7 +10434,7 @@ alias g_tls_error_quark = c_g_tls_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gio2");
 
   // Action
   gidLink(cast(void**)&g_action_get_type, "g_action_get_type", libs);

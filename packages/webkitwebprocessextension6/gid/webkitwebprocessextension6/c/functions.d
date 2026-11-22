@@ -643,7 +643,7 @@ alias webkit_web_process_extension_send_message_to_context_finish = c_webkit_web
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.webkitwebprocessextension6");
 
   // ConsoleMessage
   gidLink(cast(void**)&webkit_console_message_get_type, "webkit_console_message_get_type", libs);

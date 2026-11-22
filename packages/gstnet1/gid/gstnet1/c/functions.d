@@ -201,7 +201,7 @@ alias gst_ptp_statistics_callback_remove = c_gst_ptp_statistics_callback_remove;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gstnet1");
 
   // NetAddressMeta
   gidLink(cast(void**)&gst_net_address_meta_get_info, "gst_net_address_meta_get_info", libs);

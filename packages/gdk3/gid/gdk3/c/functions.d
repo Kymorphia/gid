@@ -3096,7 +3096,7 @@ alias gdk_gl_error_quark = c_gdk_gl_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gdk3");
 
   // AppLaunchContext
   gidLink(cast(void**)&gdk_app_launch_context_get_type, "gdk_app_launch_context_get_type", libs);

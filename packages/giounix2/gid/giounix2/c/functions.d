@@ -613,7 +613,7 @@ alias g_unix_mounts_get_from_file = c_g_unix_mounts_get_from_file;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.giounix2");
 
   // DesktopAppInfo
   gidLink(cast(void**)&g_desktop_app_info_get_type, "g_desktop_app_info_get_type", libs);

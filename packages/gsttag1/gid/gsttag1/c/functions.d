@@ -272,7 +272,7 @@ alias gst_vorbis_tag_add = c_gst_vorbis_tag_add;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gsttag1");
 
   // TagDemux
   gidLink(cast(void**)&gst_tag_demux_get_type, "gst_tag_demux_get_type", libs);

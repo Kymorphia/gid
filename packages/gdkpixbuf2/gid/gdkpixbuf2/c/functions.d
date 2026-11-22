@@ -632,7 +632,7 @@ alias gdk_pixbuf_error_quark = c_gdk_pixbuf_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gdkpixbuf2");
 
   // Pixbuf
   gidLink(cast(void**)&gdk_pixbuf_get_type, "gdk_pixbuf_get_type", libs);

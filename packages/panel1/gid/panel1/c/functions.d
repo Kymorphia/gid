@@ -1902,7 +1902,7 @@ alias panel_marshal_OBJECT__OBJECTv = c_panel_marshal_OBJECT__OBJECTv;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.panel1");
 
   // ActionMuxer
   gidLink(cast(void**)&panel_action_muxer_get_type, "panel_action_muxer_get_type", libs);

@@ -9917,7 +9917,7 @@ alias gst_uri_error_quark = c_gst_uri_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gst1");
 
   // AllocationParams
   gidLink(cast(void**)&gst_allocation_params_get_type, "gst_allocation_params_get_type", libs);

@@ -1085,7 +1085,7 @@ alias gst_rtp_source_meta_api_get_type = c_gst_rtp_source_meta_api_get_type;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gstrtp1");
 
   // RTCPBuffer
   gidLink(cast(void**)&gst_rtcp_buffer_add_packet, "gst_rtcp_buffer_add_packet", libs);

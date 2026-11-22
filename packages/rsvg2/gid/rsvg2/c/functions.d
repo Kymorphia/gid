@@ -276,7 +276,7 @@ alias rsvg_error_quark = c_rsvg_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.rsvg2");
 
   // Handle
   gidLink(cast(void**)&rsvg_handle_get_type, "rsvg_handle_get_type", libs);

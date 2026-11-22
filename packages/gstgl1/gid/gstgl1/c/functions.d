@@ -1943,7 +1943,7 @@ alias gst_gl_window_error_quark = c_gst_gl_window_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gstgl1");
 
   // GLAllocationParams
   gidLink(cast(void**)&gst_gl_allocation_params_get_type, "gst_gl_allocation_params_get_type", libs);

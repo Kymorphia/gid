@@ -21822,7 +21822,7 @@ alias gtk_svg_error_quark = c_gtk_svg_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gtk4");
 
   // ATContext
   gidLink(cast(void**)&gtk_at_context_get_type, "gtk_at_context_get_type", libs);

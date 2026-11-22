@@ -2216,7 +2216,7 @@ alias gtk_source_file_saver_error_quark = c_gtk_source_file_saver_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gtksource4");
 
   // Buffer
   gidLink(cast(void**)&gtk_source_buffer_get_type, "gtk_source_buffer_get_type", libs);

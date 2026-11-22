@@ -179,7 +179,7 @@ alias gst_timed_value_control_invalidate_cache = c_gst_timed_value_control_inval
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gstcontroller1");
 
   // ARGBControlBinding
   gidLink(cast(void**)&gst_argb_control_binding_get_type, "gst_argb_control_binding_get_type", libs);

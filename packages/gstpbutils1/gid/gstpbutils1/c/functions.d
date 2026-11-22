@@ -1072,7 +1072,7 @@ alias gst_install_plugins_return_get_name = c_gst_install_plugins_return_get_nam
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gstpbutils1");
 
   // AudioVisualizer
   gidLink(cast(void**)&gst_audio_visualizer_get_type, "gst_audio_visualizer_get_type", libs);

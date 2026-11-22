@@ -7364,7 +7364,7 @@ alias adw_length_unit_to_px = c_adw_length_unit_to_px;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.adw1");
 
   // AboutDialog
   gidLink(cast(void**)&adw_about_dialog_get_type, "adw_about_dialog_get_type", libs);

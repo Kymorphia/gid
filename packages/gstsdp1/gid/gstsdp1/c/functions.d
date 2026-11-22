@@ -930,7 +930,7 @@ alias gst_sdp_make_keymgmt = c_gst_sdp_make_keymgmt;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gstsdp1");
 
   // MIKEYMessage
   gidLink(cast(void**)&gst_mikey_message_get_type, "gst_mikey_message_get_type", libs);

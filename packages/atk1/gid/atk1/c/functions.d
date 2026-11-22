@@ -1590,7 +1590,7 @@ alias atk_value_type_get_name = c_atk_value_type_get_name;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.atk1");
 
   // Action
   gidLink(cast(void**)&atk_action_get_type, "atk_action_get_type", libs);

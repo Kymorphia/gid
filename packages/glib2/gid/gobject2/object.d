@@ -23,6 +23,7 @@ import std.exception : assumeWontThrow;
 public import std.typecons : Flag, No, Yes;
 
 import gid.core.basictypes;
+import gid.core.loader : gidLibHandleOfAddress, gidPackageHasLibHandle, gidPackageLibs, gidPackageOfModule, isLibAvailable;
 import gid.glib2.types;
 import gid.glib2.c.functions;
 import gid.gobject2.boxed;
@@ -52,10 +53,11 @@ private extern (C) Object _d_newclass(const TypeInfo_Class ci);
 private immutable Quark gidObjectQuark;
 
 // One time initialized on first use and considered immutable there-after
-private __gshared TypeInfo_Class[string] gtypeNameClasses; // Map of GType names to D class info (see ObjectWrap._gTypeName)
+private __gshared TypeInfo_Class[][string] gtypeNameClasses; // Map of GType names to D class info candidates, there is more than one when several versions of a library are linked (see ObjectWrap._gTypeName)
 private __gshared TypeInfo_Class[GType] gtypeClasses; // Map of GTypes to D class info, for classes without a GType name
 private __gshared TypeInfo_Class[TypeInfo_Interface] ifaceProxyClasses; // Map of interface type info to proxy class info
 private __gshared bool classMapsInitialized;
+private __gshared void*[][GType] gtypeOwnerLibs; // Cache of the libraries which registered a GType, for choosing between versions of a class
 
 /**
 * A convenient string mixin to be used for ObjectWrap derived classes to declare boilerplate constructors.
@@ -388,18 +390,29 @@ class ObjectWrap : GidWrap
     for (auto gTypeClass = (cast(GTypeInstance*)cptr).gClass; gTypeClass;
     gTypeClass = g_type_class_peek_parent(gTypeClass))
     {
-      auto dClassType = gTypeClass.gType in gtypeClasses;
+      TypeInfo_Class dClassType;
+      bool found;
 
-      if (!dClassType)
-        if (auto typeName = g_type_name(gTypeClass.gType))
-        dClassType = cast(string)typeName[0 .. strlen(typeName)] in gtypeNameClasses; // Not stored, cast is safe
+      if (auto c = gTypeClass.gType in gtypeClasses)
+      {
+        dClassType = *c;
+        found = true;
+      }
+      else if (auto typeName = g_type_name(gTypeClass.gType))
+      {
+        if (auto cands = cast(string)typeName[0 .. strlen(typeName)] in gtypeNameClasses) // Not stored, cast is safe
+        {
+          found = true;
+          dClassType = (*cands).length == 1 ? (*cands)[0] : selectClass!T(*cands, gTypeClass.gType);
+        }
+      }
 
-      if (dClassType)
-      { // If T is an interface type, make sure the matching object class implements it
-        if (is(T == interface) && !typeid(T).isBaseOf(cast(const)*dClassType))
+      if (found)
+      { // If T is an interface type, make sure the matching object class implements it (and a class was found)
+        if (!dClassType || (is(T == interface) && !typeid(T).isBaseOf(cast(const)dClassType)))
           break;
 
-        if (auto obj = assumeWontThrow(_d_newclass(cast()*dClassType)))
+        if (auto obj = assumeWontThrow(_d_newclass(cast()dClassType)))
         {
           (cast(ObjectWrap)obj)._setGObject(cptr, take);
           return cast(T)obj;
@@ -493,6 +506,111 @@ class ObjectWrap : GidWrap
     }
   }
 
+  /**
+  * Choose the D class of a GType when several D classes have its GType name, which is the case when more than one
+  * version of a library is linked (`gid.gtk3.widget.Widget` and `gid.gtk4.widget.Widget`). D classes of a version
+  * whose C library was not loaded can't be it. Of the others, the classes compatible with the requested type `T` are
+  * kept and then the class of the library that registered the GType is chosen.
+  *
+  * The `get_type()` functions of the candidates are never called, since calling that of a version which didn't
+  * register the GType would try to register the same GType name again.
+  * Params:
+  *   T = The requested D type
+  *   cands = The candidate D classes, in link order
+  *   gType = The GType of the C object (or one of its ancestors)
+  * Returns: The D class, or null if none of the candidates can be used as `T`
+  */
+  static private TypeInfo_Class selectClass(T)(TypeInfo_Class[] cands, GType gType) nothrow
+  {
+    TypeInfo_Class[] usable;
+
+    foreach (c; cands)
+    {
+      if (!typeid(T).isBaseOf(cast(const)c))
+        continue;
+
+      auto pkg = gidPackageOfModule(c.name);
+
+      if (pkg in gidPackageLibs && !isLibAvailable(pkg)) // The library of this version wasn't found
+        continue;
+
+      usable ~= c;
+    }
+
+    if (usable.length <= 1)
+      return usable.length ? usable[0] : null;
+
+    auto owners = ownerLibs(gType);
+
+    foreach (c; usable)
+    {
+      auto pkg = gidPackageOfModule(c.name);
+
+      foreach (h; owners)
+        if (gidPackageHasLibHandle(pkg, h))
+        return c;
+    }
+
+    return usable[0]; // No way to tell, use the first (link order)
+  }
+
+  /**
+  * Get the libraries that registered a GType, determined from the class structure of the GType. Class initialization
+  * of a GType (in the library which registered it) assigns its virtual functions, so the class structure values which
+  * differ from those of the parent class and point into a loaded library identify the library.
+  * Params:
+  *   gType = The GType, which must have an initialized class (an instance of it exists)
+  * Returns: The handles of libraries found, empty if undetermined
+  */
+  static private void*[] ownerLibs(GType gType) nothrow
+  {
+    synchronized
+    {
+      if (auto cached = gType in gtypeOwnerLibs)
+        return *cached;
+
+      void*[] libs;
+
+      if (auto klassPtr = g_type_class_peek(gType))
+      {
+        auto klass = cast(size_t*)klassPtr;
+        size_t* parent;
+        size_t parentSlots;
+        GTypeQuery query, parentQuery;
+        g_type_query(gType, &query);
+
+        if (auto parentClass = g_type_class_peek_parent(klassPtr))
+        {
+          parent = cast(size_t*)parentClass;
+          g_type_query(parentClass.gType, &parentQuery);
+          parentSlots = parentQuery.classSize / size_t.sizeof;
+        }
+
+        foreach (i; 1 .. query.classSize / size_t.sizeof) // Skip the GType of the GTypeClass
+        {
+          auto val = klass[i];
+
+          if (val == 0 || (i < parentSlots && val == parent[i])) // Unset or inherited from the parent class
+            continue;
+
+          if (auto handle = gidLibHandleOfAddress(cast(void*)val))
+          {
+            bool known;
+
+            foreach (h; libs)
+              known = known || h is handle;
+
+            if (!known)
+              libs ~= handle;
+          }
+        }
+      }
+
+      gtypeOwnerLibs[gType] = libs;
+      return libs;
+    }
+  }
+
   static private void createClassMaps()
   {
     auto gobjClass = typeid(ObjectWrap);
@@ -540,7 +658,7 @@ class ObjectWrap : GidWrap
             {
               if (auto name = obj._gTypeName)
               {
-                gtypeNameClasses[name] = c;
+                gtypeNameClasses[name] ~= c;
                 continue;
               }
             }

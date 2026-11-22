@@ -2335,7 +2335,7 @@ alias soup_websocket_error_quark = c_soup_websocket_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.soup3");
 
   // Auth
   gidLink(cast(void**)&soup_auth_get_type, "soup_auth_get_type", libs);

@@ -3446,7 +3446,7 @@ alias gdk_vulkan_error_quark = c_gdk_vulkan_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gdk4");
 
   // AppLaunchContext
   gidLink(cast(void**)&gdk_app_launch_context_get_type, "gdk_app_launch_context_get_type", libs);

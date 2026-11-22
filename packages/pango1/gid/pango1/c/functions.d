@@ -2481,7 +2481,7 @@ alias pango_script_get_sample_language = c_pango_script_get_sample_language;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.pango1");
 
   // AttrFontDesc
   gidLink(cast(void**)&pango_attr_font_desc_new, "pango_attr_font_desc_new", libs);

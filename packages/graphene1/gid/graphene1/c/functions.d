@@ -2083,7 +2083,7 @@ alias graphene_vec4_zero = c_graphene_vec4_zero;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.graphene1");
 
   // Box
   gidLink(cast(void**)&graphene_box_get_type, "graphene_box_get_type", libs);

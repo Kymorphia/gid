@@ -1172,7 +1172,7 @@ alias json_reader_error_quark = c_json_reader_error_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.json1");
 
   // Array
   gidLink(cast(void**)&json_array_get_type, "json_array_get_type", libs);

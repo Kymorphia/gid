@@ -183,7 +183,7 @@ alias gst_phys_memory_get_phys_addr = c_gst_phys_memory_get_phys_addr;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gstallocators1");
 
   // DRMDumbAllocator
   gidLink(cast(void**)&gst_drm_dumb_allocator_get_type, "gst_drm_dumb_allocator_get_type", libs);

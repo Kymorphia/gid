@@ -1130,7 +1130,7 @@ alias secret_error_get_quark = c_secret_error_get_quark;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.secret1");
 
   // Backend
   gidLink(cast(void**)&secret_backend_get_type, "secret_backend_get_type", libs);

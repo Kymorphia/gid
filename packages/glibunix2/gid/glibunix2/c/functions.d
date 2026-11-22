@@ -79,7 +79,7 @@ alias g_unix_signal_source_new = c_g_unix_signal_source_new;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.glibunix2");
 
   // global
   gidLink(cast(void**)&g_closefrom, "g_closefrom", libs);

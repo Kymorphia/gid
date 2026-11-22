@@ -2477,7 +2477,7 @@ alias gst_video_transfer_function_to_iso = c_gst_video_transfer_function_to_iso;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gstvideo1");
 
   // AncillaryMeta
   gidLink(cast(void**)&gst_ancillary_meta_get_info, "gst_ancillary_meta_get_info", libs);

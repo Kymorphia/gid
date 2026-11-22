@@ -715,7 +715,7 @@ alias gst_consistency_checker_reset = c_gst_consistency_checker_reset;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gstcheck1");
 
   // Harness
   gidLink(cast(void**)&gst_harness_add_element_full, "gst_harness_add_element_full", libs);

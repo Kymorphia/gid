@@ -2858,7 +2858,7 @@ alias hb_gobject_glyph_position_get_type = c_hb_gobject_glyph_position_get_type;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.harfbuzz0");
 
   // Blob
   gidLink(cast(void**)&hb_gobject_blob_get_type, "hb_gobject_blob_get_type", libs);

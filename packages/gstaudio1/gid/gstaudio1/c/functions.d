@@ -1422,7 +1422,7 @@ alias gst_dsd_format_to_string = c_gst_dsd_format_to_string;
 
 shared static this()
 {
-  auto libs = gidResolveLibs(LIBS);
+  auto libs = gidResolveLibs(LIBS, "gid.gstaudio1");
 
   // AudioAggregator
   gidLink(cast(void**)&gst_audio_aggregator_get_type, "gst_audio_aggregator_get_type", libs);
