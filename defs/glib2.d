@@ -348,7 +348,7 @@
 //!set record[OptionGroup].method[set_translate_func][ignore] 1
 
 //# LogWriterFunc fields are borrowed and LogField has no copy function (_dup is shallow), keep values with valueString/valueBytes
-//!set callback[LogWriterFunc].parameters.parameter[fields].doc '<doc xml:space="preserve">fields forming the message, use [glib.log_field.LogField.valueString] or [glib.log_field.LogField.valueBytes] to keep field values</doc>'
+//!set callback[LogWriterFunc].parameters.parameter[fields].doc '<doc xml:space="preserve">fields forming the message, use [gid.glib2.log_field.LogField.valueString] or [gid.glib2.log_field.LogField.valueBytes] to keep field values</doc>'
 
 //# Structured logging: LogField string/binary value helpers, and D replacements for the varargs g_log_structured()
 //# and the g_log_structured_standard() macro (not introspectable)
@@ -445,17 +445,17 @@
       logLevel = The log level
     Returns: The priority string ("3" to "7")
 */
-string logLevelPriority(glib.types.LogLevelFlags logLevel) nothrow
+string logLevelPriority(gid.glib2.types.LogLevelFlags logLevel) nothrow
 {
-  if (logLevel & glib.types.LogLevelFlags.LevelError)
+  if (logLevel & gid.glib2.types.LogLevelFlags.LevelError)
     return "3";
-  else if (logLevel & (glib.types.LogLevelFlags.LevelCritical | glib.types.LogLevelFlags.LevelWarning))
+  else if (logLevel & (gid.glib2.types.LogLevelFlags.LevelCritical | gid.glib2.types.LogLevelFlags.LevelWarning))
     return "4";
-  else if (logLevel & glib.types.LogLevelFlags.LevelMessage)
+  else if (logLevel & gid.glib2.types.LogLevelFlags.LevelMessage)
     return "5";
-  else if (logLevel & glib.types.LogLevelFlags.LevelInfo)
+  else if (logLevel & gid.glib2.types.LogLevelFlags.LevelInfo)
     return "6";
-  else if (logLevel & glib.types.LogLevelFlags.LevelDebug)
+  else if (logLevel & gid.glib2.types.LogLevelFlags.LevelDebug)
     return "7";
 
   return "5";
@@ -465,36 +465,36 @@ string logLevelPriority(glib.types.LogLevelFlags logLevel) nothrow
     Log a message with structured data (D version of the C varargs g_log_structured()).
     The `PRIORITY` field (from logLevel) and the `GLIB_DOMAIN` field (if logDomain is not null) are added before
     fields, which should include a `MESSAGE` field. The message is passed to the log writer function (see
-    [glib.global.logSetWriterFunc]). If the level is [glib.types.LogLevelFlags.LevelError] the program is aborted.
+    [gid.glib2.global.logSetWriterFunc]). If the level is [gid.glib2.types.LogLevelFlags.LevelError] the program is aborted.
     Params:
       logDomain = log domain, usually the application or library name, or null
-      logLevel = log level, either from [glib.types.LogLevelFlags], or a user-defined level
+      logLevel = log level, either from [gid.glib2.types.LogLevelFlags], or a user-defined level
       fields = key-value pairs of structured data to add to the log message
 */
-void logStructured(string logDomain, glib.types.LogLevelFlags logLevel, glib.log_field.LogField[] fields) nothrow
+void logStructured(string logDomain, gid.glib2.types.LogLevelFlags logLevel, gid.glib2.log_field.LogField[] fields) nothrow
 {
-  glib.log_field.LogField[] allFields = [new glib.log_field.LogField("PRIORITY", logLevelPriority(logLevel))];
+  gid.glib2.log_field.LogField[] allFields = [new gid.glib2.log_field.LogField("PRIORITY", logLevelPriority(logLevel))];
 
   if (logDomain)
-    allFields ~= new glib.log_field.LogField("GLIB_DOMAIN", logDomain);
+    allFields ~= new gid.glib2.log_field.LogField("GLIB_DOMAIN", logDomain);
 
   logStructuredArray(logLevel, allFields ~ fields);
 }
 
 /**
     Log a message with structured string data (D version of the C varargs g_log_structured()).
-    See [glib.global.logStructured] with a LogField array, field order follows the associative array.
+    See [gid.glib2.global.logStructured] with a LogField array, field order follows the associative array.
     Params:
       logDomain = log domain, usually the application or library name, or null
-      logLevel = log level, either from [glib.types.LogLevelFlags], or a user-defined level
+      logLevel = log level, either from [gid.glib2.types.LogLevelFlags], or a user-defined level
       fields = key-value string pairs of structured data to add to the log message (should include `MESSAGE`)
 */
-void logStructured(string logDomain, glib.types.LogLevelFlags logLevel, string[string] fields) nothrow
+void logStructured(string logDomain, gid.glib2.types.LogLevelFlags logLevel, string[string] fields) nothrow
 {
-  glib.log_field.LogField[] logFields;
+  gid.glib2.log_field.LogField[] logFields;
 
   foreach (kv; fields.byKeyValue)
-    logFields ~= new glib.log_field.LogField(kv.key, kv.value);
+    logFields ~= new gid.glib2.log_field.LogField(kv.key, kv.value);
 
   logStructured(logDomain, logLevel, logFields);
 }
@@ -504,13 +504,13 @@ void logStructured(string logDomain, glib.types.LogLevelFlags logLevel, string[s
     Adds `CODE_FILE`, `CODE_LINE`, `CODE_FUNC` and `MESSAGE` fields.
     Params:
       logDomain = log domain, usually the application or library name, or null
-      logLevel = log level, either from [glib.types.LogLevelFlags], or a user-defined level
+      logLevel = log level, either from [gid.glib2.types.LogLevelFlags], or a user-defined level
       message = the log message (not a format string, use std.format to format it)
       file = source file (defaults to the caller's)
       line = source line (defaults to the caller's)
       func = source function (defaults to the caller's)
 */
-void logStructuredStandard(string logDomain, glib.types.LogLevelFlags logLevel, string message, string file = __FILE__, size_t line = __LINE__, string func = __PRETTY_FUNCTION__) nothrow
+void logStructuredStandard(string logDomain, gid.glib2.types.LogLevelFlags logLevel, string message, string file = __FILE__, size_t line = __LINE__, string func = __PRETTY_FUNCTION__) nothrow
 {
   import std.conv : to;
 
@@ -521,11 +521,11 @@ void logStructuredStandard(string logDomain, glib.types.LogLevelFlags logLevel, 
   catch (Exception)
     lineStr = "0";
 
-  glib.log_field.LogField[] fields;
-  fields ~= new glib.log_field.LogField("CODE_FILE", file);
-  fields ~= new glib.log_field.LogField("CODE_LINE", lineStr);
-  fields ~= new glib.log_field.LogField("CODE_FUNC", func);
-  fields ~= new glib.log_field.LogField("MESSAGE", message);
+  gid.glib2.log_field.LogField[] fields;
+  fields ~= new gid.glib2.log_field.LogField("CODE_FILE", file);
+  fields ~= new gid.glib2.log_field.LogField("CODE_LINE", lineStr);
+  fields ~= new gid.glib2.log_field.LogField("CODE_FUNC", func);
+  fields ~= new gid.glib2.log_field.LogField("MESSAGE", message);
   logStructured(logDomain, logLevel, fields);
 }
 
@@ -601,7 +601,7 @@ private extern(C) void freePool(GThreadPool* pool) nothrow
       
       This function does not provide any conversion specifiers in
       addition to those implemented by the platform's C library.
-      For example, don't expect that using [glib.date.Date.strftime] would
+      For example, don't expect that using [gid.glib2.date.Date.strftime] would
       make the \`F` provided by the C99 strftime() work on Windows
       where the C library only complies to C89.
   

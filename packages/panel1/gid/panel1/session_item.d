@@ -1,0 +1,380 @@
+/// Module for [SessionItem] class
+module gid.panel1.session_item;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.glib2.variant;
+import gid.glib2.variant_type;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.panel1.c.functions;
+import gid.panel1.c.types;
+import gid.panel1.position;
+import gid.panel1.types;
+
+/** */
+class SessionItem : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())panel_session_item_get_type != &gidSymbolNotFound ? panel_session_item_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PanelSessionItem";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override SessionItem self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.panel1.session_item.SessionItem]
+      Returns: New builder object
+  */
+  static SessionItemGidBuilder builder() nothrow
+  {
+    return new SessionItemGidBuilder;
+  }
+
+  /** */
+  @property string id() nothrow
+  {
+    return getId();
+  }
+
+  /** */
+  @property void id(string propval) nothrow
+  {
+    setId(propval);
+  }
+
+  /** */
+  @property string moduleName() nothrow
+  {
+    return getModuleName();
+  }
+
+  /** */
+  @property void moduleName(string propval) nothrow
+  {
+    setModuleName(propval);
+  }
+
+  /** */
+  @property gid.panel1.position.Position position() nothrow
+  {
+    return getPosition();
+  }
+
+  /** */
+  @property void position(gid.panel1.position.Position propval) nothrow
+  {
+    setPosition(propval);
+  }
+
+  /** */
+  @property string typeHint() nothrow
+  {
+    return getTypeHint();
+  }
+
+  /** */
+  @property void typeHint(string propval) nothrow
+  {
+    setTypeHint(propval);
+  }
+
+  /** */
+  @property string workspace() nothrow
+  {
+    return getWorkspace();
+  }
+
+  /** */
+  @property void workspace(string propval) nothrow
+  {
+    setWorkspace(propval);
+  }
+
+  /** */
+  this() nothrow
+  {
+    PanelSessionItem* _cretval;
+    _cretval = panel_session_item_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Gets the id for the session item, if any.
+      Returns: a string containing the id; otherwise null
+  */
+  string getId() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = panel_session_item_get_id(cast(PanelSessionItem*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Retrieves the metadata value for key.
+      
+      If expected_type is non-null, any non-null value returned from this
+      function will match expected_type.
+  
+      Params:
+        key = the metadata key
+        expectedType = a #GVariantType or null
+      Returns: a non-floating #GVariant which should
+          be released with [gid.glib2.variant.Variant.unref]; otherwise null.
+  */
+  gid.glib2.variant.Variant getMetadataValue(string key, gid.glib2.variant_type.VariantType expectedType = null) nothrow
+  {
+    GVariant* _cretval;
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    _cretval = panel_session_item_get_metadata_value(cast(PanelSessionItem*)this._cPtr, _key, expectedType ? cast(const(GVariantType)*)expectedType._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gid.glib2.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the module-name that created an item.
+      Returns: a module-name or null
+  */
+  string getModuleName() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = panel_session_item_get_module_name(cast(PanelSessionItem*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the #PanelPosition for the item.
+      Returns: a #PanelPosition or null
+  */
+  gid.panel1.position.Position getPosition() nothrow
+  {
+    PanelPosition* _cretval;
+    _cretval = panel_session_item_get_position(cast(PanelSessionItem*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.panel1.position.Position)(cast(PanelPosition*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the type hint for an item.
+      Returns: a type-hint or null
+  */
+  string getTypeHint() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = panel_session_item_get_type_hint(cast(PanelSessionItem*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the workspace id for the item.
+      Returns: a workspace or null
+  */
+  string getWorkspace() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = panel_session_item_get_workspace(cast(PanelSessionItem*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      If the item contains a metadata value for key.
+      
+      Checks if a value exists for a metadata key and retrieves the #GVariantType
+      for that key.
+  
+      Params:
+        key = the name of the metadata
+        valueType = a location for a #GVariantType or null
+      Returns: true if self contains metadata named key and value_type is set
+          to the value's #GVariantType. Otherwise false and value_type is unchanged.
+  */
+  bool hasMetadata(string key, out gid.glib2.variant_type.VariantType valueType) nothrow
+  {
+    bool _retval;
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    const(GVariantType)* _valueType;
+    _retval = cast(bool)panel_session_item_has_metadata(cast(PanelSessionItem*)this._cPtr, _key, &_valueType);
+    if (_valueType)
+      valueType = new gid.glib2.variant_type.VariantType(cast(void*)_valueType, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Checks if the item contains metadata key with expected_type.
+  
+      Params:
+        key = the metadata key
+        expectedType = the #GVariantType to check for key
+      Returns: true if a value was found for key matching expected_typed;
+          otherwise false is returned.
+  */
+  bool hasMetadataWithType(string key, gid.glib2.variant_type.VariantType expectedType) nothrow
+  {
+    bool _retval;
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)panel_session_item_has_metadata_with_type(cast(PanelSessionItem*)this._cPtr, _key, expectedType ? cast(const(GVariantType)*)expectedType._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Sets the identifier for the item.
+      
+      The identifier should generally be global to the session as it would
+      not be expected to come across multiple items with the same id.
+  
+      Params:
+        id = an optional identifier for the item
+  */
+  void setId(string id = null) nothrow
+  {
+    const(char)* _id = id.toCString!(No.Malloc, Yes.Nullable);
+    panel_session_item_set_id(cast(PanelSessionItem*)this._cPtr, _id);
+  }
+
+  /**
+      Sets the value for metadata key.
+      
+      If value is null, the metadata key is unset.
+  
+      Params:
+        key = the metadata key
+        value = the value for key or null
+  */
+  void setMetadataValue(string key, gid.glib2.variant.Variant value = null) nothrow
+  {
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    panel_session_item_set_metadata_value(cast(PanelSessionItem*)this._cPtr, _key, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the module-name for the session item.
+      
+      This is generally used to help determine which plugin created
+      the item when decoding them at project load time.
+  
+      Params:
+        moduleName = the module name owning the item
+  */
+  void setModuleName(string moduleName = null) nothrow
+  {
+    const(char)* _moduleName = moduleName.toCString!(No.Malloc, Yes.Nullable);
+    panel_session_item_set_module_name(cast(PanelSessionItem*)this._cPtr, _moduleName);
+  }
+
+  /**
+      Sets the position for self, if any.
+  
+      Params:
+        position = a #PanelPosition or null
+  */
+  void setPosition(gid.panel1.position.Position position = null) nothrow
+  {
+    panel_session_item_set_position(cast(PanelSessionItem*)this._cPtr, position ? cast(PanelPosition*)position._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the type-hint value for the item.
+      
+      This is generally used to help inflate the right version of
+      an object when loading session items.
+  
+      Params:
+        typeHint = a type hint string for the item
+  */
+  void setTypeHint(string typeHint = null) nothrow
+  {
+    const(char)* _typeHint = typeHint.toCString!(No.Malloc, Yes.Nullable);
+    panel_session_item_set_type_hint(cast(PanelSessionItem*)this._cPtr, _typeHint);
+  }
+
+  /**
+      Sets the workspace id for the item.
+      
+      This is generally used to tie an item to a specific workspace.
+  
+      Params:
+        workspace = a workspace string for the item
+  */
+  void setWorkspace(string workspace = null) nothrow
+  {
+    const(char)* _workspace = workspace.toCString!(No.Malloc, Yes.Nullable);
+    panel_session_item_set_workspace(cast(PanelSessionItem*)this._cPtr, _workspace);
+  }
+}
+
+/// Fluent builder implementation template for [gid.panel1.session_item.SessionItem]
+class SessionItemGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T id(string propval) nothrow
+  {
+    return setProperty("id", propval);
+  }
+
+  /** */
+  T moduleName(string propval) nothrow
+  {
+    return setProperty("module-name", propval);
+  }
+
+  /** */
+  T position(gid.panel1.position.Position propval) nothrow
+  {
+    return setProperty("position", propval);
+  }
+
+  /** */
+  T typeHint(string propval) nothrow
+  {
+    return setProperty("type-hint", propval);
+  }
+
+  /** */
+  T workspace(string propval) nothrow
+  {
+    return setProperty("workspace", propval);
+  }
+}
+
+/// Fluent builder for [gid.panel1.session_item.SessionItem]
+final class SessionItemGidBuilder : SessionItemGidBuilderImpl!SessionItemGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  SessionItem build() nothrow
+  {
+    return new SessionItem(cast(void*)createGObject(SessionItem._getGType), Yes.Take);
+  }
+}

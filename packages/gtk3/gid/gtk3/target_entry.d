@@ -1,0 +1,125 @@
+/// Module for [TargetEntry] class
+module gid.gtk3.target_entry;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.boxed;
+import gid.gtk3.c.functions;
+import gid.gtk3.c.types;
+import gid.gtk3.types;
+
+/**
+    A #GtkTargetEntry represents a single type of
+    data than can be supplied for by a widget for a selection
+    or for supplied or received during drag-and-drop.
+*/
+class TargetEntry : gid.gobject2.boxed.BoxedWrap!(gtk_target_entry_get_type)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override TargetEntry self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get `target` field.
+      Returns: a string representation of the target type
+  */
+  @property string target() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GtkTargetEntry*)this._cPtr).target);
+  }
+
+  /**
+      Set `target` field.
+      Params:
+        propval = a string representation of the target type
+  */
+  @property void target(string propval) nothrow
+  {
+    cValueFree!(string)(cast(void*)(cast(GtkTargetEntry*)this._cPtr).target);
+    (cast(GtkTargetEntry*)this._cPtr).target = toCString!(Yes.Malloc, Yes.Nullable)(propval);
+  }
+
+  /**
+      Get `flags` field.
+      Returns: #GtkTargetFlags for DND
+  */
+  @property uint flags() nothrow
+  {
+    return (cast(GtkTargetEntry*)this._cPtr).flags;
+  }
+
+  /**
+      Set `flags` field.
+      Params:
+        propval = #GtkTargetFlags for DND
+  */
+  @property void flags(uint propval) nothrow
+  {
+    (cast(GtkTargetEntry*)this._cPtr).flags = propval;
+  }
+
+  /**
+      Get `info` field.
+      Returns: an application-assigned integer ID which will
+            get passed as a parameter to e.g the #GtkWidget::selection-get
+            signal. It allows the application to identify the target
+            type without extensive string compares.
+  */
+  @property uint info() nothrow
+  {
+    return (cast(GtkTargetEntry*)this._cPtr).info;
+  }
+
+  /**
+      Set `info` field.
+      Params:
+        propval = an application-assigned integer ID which will
+              get passed as a parameter to e.g the #GtkWidget::selection-get
+              signal. It allows the application to identify the target
+              type without extensive string compares.
+  */
+  @property void info(uint propval) nothrow
+  {
+    (cast(GtkTargetEntry*)this._cPtr).info = propval;
+  }
+
+  /**
+      Makes a new #GtkTargetEntry.
+  
+      Params:
+        target = String identifier for target
+        flags = Set of flags, see #GtkTargetFlags
+        info = an ID that will be passed back to the application
+      Returns: a pointer to a new #GtkTargetEntry.
+            Free with [gid.gtk3.target_entry.TargetEntry.free]
+  */
+  this(string target, uint flags, uint info) nothrow
+  {
+    GtkTargetEntry* _cretval;
+    const(char)* _target = target.toCString!(No.Malloc, No.Nullable);
+    _cretval = gtk_target_entry_new(_target, flags, info);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Makes a copy of a #GtkTargetEntry and its data.
+      Returns: a pointer to a copy of data.
+            Free with [gid.gtk3.target_entry.TargetEntry.free]
+  */
+  gid.gtk3.target_entry.TargetEntry copy() nothrow
+  {
+    GtkTargetEntry* _cretval;
+    _cretval = gtk_target_entry_copy(cast(GtkTargetEntry*)this._cPtr);
+    auto _retval = _cretval ? new gid.gtk3.target_entry.TargetEntry(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+}

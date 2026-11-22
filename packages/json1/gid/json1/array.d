@@ -1,0 +1,459 @@
+/// Module for [Array] class
+module gid.json1.array;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.boxed;
+import gid.json1.c.functions;
+import gid.json1.c.types;
+import gid.json1.node;
+import gid.json1.object;
+import gid.json1.types;
+
+/**
+    [gid.json1.array.Array] is the representation of the array type inside JSON.
+    
+    A [gid.json1.array.Array] contains [gid.json1.node.Node] elements, which may contain
+    fundamental types, other arrays or objects.
+    
+    Since arrays can be arbitrarily big, copying them can be expensive; for
+    this reason, they are reference counted. You can control the lifetime of
+    a [gid.json1.array.Array] using [gid.json1.array.Array.ref_] and [gid.json1.array.Array.unref].
+    
+    To append an element, use [gid.json1.array.Array.addElement].
+    
+    To extract an element at a given index, use [gid.json1.array.Array.getElement].
+    
+    To retrieve the entire array in list form, use [gid.json1.array.Array.getElements].
+    
+    To retrieve the length of the array, use [gid.json1.array.Array.getLength].
+*/
+class Array : gid.gobject2.boxed.BoxedWrap!(json_array_get_type)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Array self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Creates a new array.
+      Returns: the newly created array
+  */
+  this() nothrow
+  {
+    JsonArray* _cretval;
+    _cretval = json_array_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Creates a new array with `n_elements` slots already allocated.
+  
+      Params:
+        nElements = number of slots to pre-allocate
+      Returns: the newly created array
+  */
+  static gid.json1.array.Array sizedNew(uint nElements) nothrow
+  {
+    JsonArray* _cretval;
+    _cretval = json_array_sized_new(nElements);
+    auto _retval = _cretval ? new gid.json1.array.Array(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Conveniently adds an array element into an array.
+      
+      If `value` is `NULL`, a `null` element will be added instead.
+      
+      See also: [gid.json1.array.Array.addElement], [gid.json1.node.Node.takeArray]
+  
+      Params:
+        value = the array to add
+  */
+  void addArrayElement(gid.json1.array.Array value = null) nothrow
+  {
+    json_array_add_array_element(cast(JsonArray*)this._cPtr, value ? cast(JsonArray*)value._cPtr(Yes.Dup) : null);
+  }
+
+  /**
+      Conveniently adds the given boolean value into an array.
+      
+      See also: [gid.json1.array.Array.addElement], [gid.json1.node.Node.setBoolean]
+  
+      Params:
+        value = the boolean value to add
+  */
+  void addBooleanElement(bool value) nothrow
+  {
+    json_array_add_boolean_element(cast(JsonArray*)this._cPtr, value);
+  }
+
+  /**
+      Conveniently adds the given floating point value into an array.
+      
+      See also: [gid.json1.array.Array.addElement], [gid.json1.node.Node.setDouble]
+  
+      Params:
+        value = the floating point value to add
+  */
+  void addDoubleElement(double value) nothrow
+  {
+    json_array_add_double_element(cast(JsonArray*)this._cPtr, value);
+  }
+
+  /**
+      Appends the given `node` inside an array.
+  
+      Params:
+        node = the element to add
+  */
+  void addElement(gid.json1.node.Node node) nothrow
+  {
+    json_array_add_element(cast(JsonArray*)this._cPtr, node ? cast(JsonNode*)node._cPtr(Yes.Dup) : null);
+  }
+
+  /**
+      Conveniently adds the given integer value into an array.
+      
+      See also: [gid.json1.array.Array.addElement], [gid.json1.node.Node.setInt]
+  
+      Params:
+        value = the integer value to add
+  */
+  void addIntElement(long value) nothrow
+  {
+    json_array_add_int_element(cast(JsonArray*)this._cPtr, value);
+  }
+
+  /**
+      Conveniently adds a `null` element into an array
+      
+      See also: [gid.json1.array.Array.addElement], [gid.json1.types.NodeType.Null]
+  */
+  void addNullElement() nothrow
+  {
+    json_array_add_null_element(cast(JsonArray*)this._cPtr);
+  }
+
+  /**
+      Conveniently adds an object into an array.
+      
+      If `value` is `NULL`, a `null` element will be added instead.
+      
+      See also: [gid.json1.array.Array.addElement], [gid.json1.node.Node.takeObject]
+  
+      Params:
+        value = the object to add
+  */
+  void addObjectElement(gid.json1.object.ObjectWrap value = null) nothrow
+  {
+    json_array_add_object_element(cast(JsonArray*)this._cPtr, value ? cast(JsonObject*)value._cPtr(Yes.Dup) : null);
+  }
+
+  /**
+      Conveniently adds the given string value into an array.
+      
+      See also: [gid.json1.array.Array.addElement], [gid.json1.node.Node.setString]
+  
+      Params:
+        value = the string value to add
+  */
+  void addStringElement(string value) nothrow
+  {
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
+    json_array_add_string_element(cast(JsonArray*)this._cPtr, _value);
+  }
+
+  /**
+      Retrieves a copy of the element at the given position in the array.
+  
+      Params:
+        index = the index of the element to retrieve
+      Returns: a copy of the element at the given position
+  */
+  gid.json1.node.Node dupElement(uint index) nothrow
+  {
+    JsonNode* _cretval;
+    _cretval = json_array_dup_element(cast(JsonArray*)this._cPtr, index);
+    auto _retval = _cretval ? new gid.json1.node.Node(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Check whether two arrays are equal.
+      
+      Equality is defined as:
+      
+       - the array have the same number of elements
+       - the values of elements in corresponding positions are equal
+  
+      Params:
+        b = another JSON array
+      Returns: `TRUE` if the arrays are equal, and `FALSE` otherwise
+  */
+  bool equal(gid.json1.array.Array b) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)json_array_equal(cast(JsonArray*)this._cPtr, b ? cast(JsonArray*)b._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Iterates over all elements of an array, and calls a function on
+      each one of them.
+      
+      It is safe to change the value of an element of the array while
+      iterating over it, but it is not safe to add or remove elements
+      from the array.
+  
+      Params:
+        func = the function to be called on each element
+  */
+  void foreachElement(gid.json1.types.ArrayForeach func) nothrow
+  {
+    extern(C) void _funcCallback(JsonArray* array, uint index, JsonNode* elementNode, void* userData) nothrow
+    {
+      auto _dlg = cast(gid.json1.types.ArrayForeach*)userData;
+      auto _array = array ? new gid.json1.array.Array(cast(void*)array, Yes.Take)._cBorrow : null;
+      auto _elementNode = elementNode ? new gid.json1.node.Node(cast(void*)elementNode, Yes.Take)._cBorrow : null;
+
+      try
+      {
+        (*_dlg)(_array, index, _elementNode);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.json1.types.ArrayForeach");
+      }
+      if (_array)
+        _array._cUnborrow;
+      if (_elementNode)
+        _elementNode._cUnborrow;
+
+    }
+    auto _funcCB = func ? &_funcCallback : null;
+    auto _func = func ? cast(void*)&(func) : null;
+    json_array_foreach_element(cast(JsonArray*)this._cPtr, _funcCB, _func);
+  }
+
+  /**
+      Conveniently retrieves the array at the given position inside an array.
+      
+      See also: [gid.json1.array.Array.getElement], [gid.json1.node.Node.getArray]
+  
+      Params:
+        index = the index of the element to retrieve
+      Returns: the array
+  */
+  gid.json1.array.Array getArrayElement(uint index) nothrow
+  {
+    JsonArray* _cretval;
+    _cretval = json_array_get_array_element(cast(JsonArray*)this._cPtr, index);
+    auto _retval = _cretval ? new gid.json1.array.Array(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Conveniently retrieves the boolean value of the element at the given
+      position inside an array.
+      
+      See also: [gid.json1.array.Array.getElement], [gid.json1.node.Node.getBoolean]
+  
+      Params:
+        index = the index of the element to retrieve
+      Returns: the boolean value
+  */
+  bool getBooleanElement(uint index) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)json_array_get_boolean_element(cast(JsonArray*)this._cPtr, index);
+    return _retval;
+  }
+
+  /**
+      Conveniently retrieves the floating point value of the element at
+      the given position inside an array.
+      
+      See also: [gid.json1.array.Array.getElement], [gid.json1.node.Node.getDouble]
+  
+      Params:
+        index = the index of the element to retrieve
+      Returns: the floating point value
+  */
+  double getDoubleElement(uint index) nothrow
+  {
+    double _retval;
+    _retval = json_array_get_double_element(cast(JsonArray*)this._cPtr, index);
+    return _retval;
+  }
+
+  /**
+      Retrieves the element at the given position in the array.
+  
+      Params:
+        index = the index of the element to retrieve
+      Returns: the element at the given position
+  */
+  gid.json1.node.Node getElement(uint index) nothrow
+  {
+    JsonNode* _cretval;
+    _cretval = json_array_get_element(cast(JsonArray*)this._cPtr, index);
+    auto _retval = _cretval ? new gid.json1.node.Node(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Retrieves all the elements of an array as a list of nodes.
+      Returns: the elements
+          of the array
+  */
+  gid.json1.node.Node[] getElements() nothrow
+  {
+    GList* _cretval;
+    _cretval = json_array_get_elements(cast(JsonArray*)this._cPtr);
+    auto _retval = gListToD!(gid.json1.node.Node, GidOwnership.Container)(cast(GList*)_cretval);
+    return _retval;
+  }
+
+  /**
+      Conveniently retrieves the integer value of the element at the given
+      position inside an array.
+      
+      See also: [gid.json1.array.Array.getElement], [gid.json1.node.Node.getInt]
+  
+      Params:
+        index = the index of the element to retrieve
+      Returns: the integer value
+  */
+  long getIntElement(uint index) nothrow
+  {
+    long _retval;
+    _retval = json_array_get_int_element(cast(JsonArray*)this._cPtr, index);
+    return _retval;
+  }
+
+  /**
+      Retrieves the length of the given array
+      Returns: the length of the array
+  */
+  uint getLength() nothrow
+  {
+    uint _retval;
+    _retval = json_array_get_length(cast(JsonArray*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Conveniently checks whether the element at the given position inside the
+      array contains a `null` value.
+      
+      See also: [gid.json1.array.Array.getElement], [gid.json1.node.Node.isNull]
+  
+      Params:
+        index = the index of the element to retrieve
+      Returns: `TRUE` if the element is `null`
+  */
+  bool getNullElement(uint index) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)json_array_get_null_element(cast(JsonArray*)this._cPtr, index);
+    return _retval;
+  }
+
+  /**
+      Conveniently retrieves the object at the given position inside an array.
+      
+      See also: [gid.json1.array.Array.getElement], [gid.json1.node.Node.getObject]
+  
+      Params:
+        index = the index of the element to retrieve
+      Returns: the object
+  */
+  gid.json1.object.ObjectWrap getObjectElement(uint index) nothrow
+  {
+    JsonObject* _cretval;
+    _cretval = json_array_get_object_element(cast(JsonArray*)this._cPtr, index);
+    auto _retval = _cretval ? new gid.json1.object.ObjectWrap(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Conveniently retrieves the string value of the element at the given
+      position inside an array.
+      
+      See also: [gid.json1.array.Array.getElement], [gid.json1.node.Node.getString]
+  
+      Params:
+        index = the index of the element to retrieve
+      Returns: the string value
+  */
+  string getStringElement(uint index) nothrow
+  {
+    const(char)* _cretval;
+    _cretval = json_array_get_string_element(cast(JsonArray*)this._cPtr, index);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Calculates a hash value for the given `key`.
+      
+      The hash is calculated over the array and all its elements, recursively.
+      
+      If the array is immutable, this is a fast operation; otherwise, it scales
+      proportionally with the length of the array.
+      Returns: hash value for the key
+  */
+  uint hash() nothrow
+  {
+    uint _retval;
+    _retval = json_array_hash(cast(JsonArray*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Check whether the given `array` has been marked as immutable by calling
+      [gid.json1.array.Array.seal] on it.
+      Returns: true if the array is immutable
+  */
+  bool isImmutable() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)json_array_is_immutable(cast(JsonArray*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Removes the element at the given position inside an array.
+      
+      This function will release the reference held on the element.
+  
+      Params:
+        index = the position of the element to be removed
+  */
+  void removeElement(uint index) nothrow
+  {
+    json_array_remove_element(cast(JsonArray*)this._cPtr, index);
+  }
+
+  /**
+      Seals the given array, making it immutable to further changes.
+      
+      This function will recursively seal all elements in the array too.
+      
+      If the `array` is already immutable, this is a no-op.
+  */
+  void seal() nothrow
+  {
+    json_array_seal(cast(JsonArray*)this._cPtr);
+  }
+}

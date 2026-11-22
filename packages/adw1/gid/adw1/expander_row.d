@@ -1,0 +1,606 @@
+/// Module for [ExpanderRow] class
+module gid.adw1.expander_row;
+
+public import gid.core.basictypes;
+import gid.adw1.c.functions;
+import gid.adw1.c.types;
+import gid.adw1.preferences_row;
+import gid.adw1.types;
+import gid.core.utils;
+import gid.gobject2.gid_builder;
+import gid.gtk4.accessible;
+import gid.gtk4.accessible_mixin;
+import gid.gtk4.actionable;
+import gid.gtk4.actionable_mixin;
+import gid.gtk4.buildable;
+import gid.gtk4.buildable_mixin;
+import gid.gtk4.constraint_target;
+import gid.gtk4.constraint_target_mixin;
+import gid.gtk4.widget;
+
+/**
+    A [gid.gtk4.list_box_row.ListBoxRow] used to reveal widgets.
+    
+    <picture>
+      <source srcset="expander-row-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="expander-row.png" alt="expander-row">
+    </picture>
+    
+    The [gid.adw1.expander_row.ExpanderRow] widget allows the user to reveal or hide widgets below
+    it. It also allows the user to enable the expansion of the row, allowing to
+    disable all that the row contains.
+    
+    ## AdwExpanderRow as GtkBuildable
+    
+    The [gid.adw1.expander_row.ExpanderRow] implementation of the [gid.gtk4.buildable.Buildable] interface
+    supports adding a child as an suffix widget by specifying “suffix” as the
+    “type” attribute of a <child> element.
+    
+    It also supports adding it as a prefix widget by specifying “prefix” as the
+    “type” attribute of a <child> element.
+    
+    ## CSS nodes
+    
+    [gid.adw1.expander_row.ExpanderRow] has a main CSS node with name `row` and the `.expander`
+    style class. It has the `.empty` style class when it contains no children.
+    
+    It contains the subnodes `row.header` for its main embedded row,
+    `list.nested` for the list it can expand, and `image.expander-row-arrow` for
+    its arrow.
+    
+    ## Style classes
+    
+    [gid.adw1.expander_row.ExpanderRow] can use the [`.`](style-classes.html#property-rows)
+    style class to emphasize the row subtitle instead of the row title, which is
+    useful for displaying read-only properties.
+    
+    When used together with the `.monospace` style class, only the subtitle
+    becomes monospace, not the title or any extra widgets.
+*/
+class ExpanderRow : gid.adw1.preferences_row.PreferencesRow
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())adw_expander_row_get_type != &gidSymbolNotFound ? adw_expander_row_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwExpanderRow";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ExpanderRow self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.adw1.expander_row.ExpanderRow]
+      Returns: New builder object
+  */
+  static ExpanderRowGidBuilder builder() nothrow
+  {
+    return new ExpanderRowGidBuilder;
+  }
+
+  /**
+      Get `enableExpansion` property.
+      Returns: Whether expansion is enabled.
+  */
+  @property bool enableExpansion() nothrow
+  {
+    return getEnableExpansion();
+  }
+
+  /**
+      Set `enableExpansion` property.
+      Params:
+        propval = Whether expansion is enabled.
+  */
+  @property void enableExpansion(bool propval) nothrow
+  {
+    setEnableExpansion(propval);
+  }
+
+  /**
+      Get `expanded` property.
+      Returns: Whether the row is expanded.
+  */
+  @property bool expanded() nothrow
+  {
+    return getExpanded();
+  }
+
+  /**
+      Set `expanded` property.
+      Params:
+        propval = Whether the row is expanded.
+  */
+  @property void expanded(bool propval) nothrow
+  {
+    setExpanded(propval);
+  }
+
+  /**
+      Get `iconName` property.
+      Returns: The icon name for this row.
+  
+      Deprecated: Use [gid.adw1.expander_row.ExpanderRow.addPrefix] to add an icon.
+  */
+  @property string iconName() nothrow
+  {
+    return getIconName();
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The icon name for this row.
+  
+      Deprecated: Use [gid.adw1.expander_row.ExpanderRow.addPrefix] to add an icon.
+  */
+  @property void iconName(string propval) nothrow
+  {
+    setIconName(propval);
+  }
+
+  /**
+      Get `showEnableSwitch` property.
+      Returns: Whether the switch enabling the expansion is visible.
+  */
+  @property bool showEnableSwitch() nothrow
+  {
+    return getShowEnableSwitch();
+  }
+
+  /**
+      Set `showEnableSwitch` property.
+      Params:
+        propval = Whether the switch enabling the expansion is visible.
+  */
+  @property void showEnableSwitch(bool propval) nothrow
+  {
+    setShowEnableSwitch(propval);
+  }
+
+  /**
+      Get `subtitle` property.
+      Returns: The subtitle for this row.
+        
+        The subtitle is interpreted as Pango markup unless
+        [gid.adw1.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
+  */
+  @property string subtitle() nothrow
+  {
+    return getSubtitle();
+  }
+
+  /**
+      Set `subtitle` property.
+      Params:
+        propval = The subtitle for this row.
+          
+          The subtitle is interpreted as Pango markup unless
+          [gid.adw1.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
+  */
+  @property void subtitle(string propval) nothrow
+  {
+    setSubtitle(propval);
+  }
+
+  /**
+      Get `subtitleLines` property.
+      Returns: The number of lines at the end of which the subtitle label will be
+        ellipsized.
+        
+        If the value is 0, the number of lines won't be limited.
+  */
+  @property int subtitleLines() nothrow
+  {
+    return getSubtitleLines();
+  }
+
+  /**
+      Set `subtitleLines` property.
+      Params:
+        propval = The number of lines at the end of which the subtitle label will be
+          ellipsized.
+          
+          If the value is 0, the number of lines won't be limited.
+  */
+  @property void subtitleLines(int propval) nothrow
+  {
+    setSubtitleLines(propval);
+  }
+
+  /**
+      Get `titleLines` property.
+      Returns: The number of lines at the end of which the title label will be ellipsized.
+        
+        If the value is 0, the number of lines won't be limited.
+  */
+  @property int titleLines() nothrow
+  {
+    return getTitleLines();
+  }
+
+  /**
+      Set `titleLines` property.
+      Params:
+        propval = The number of lines at the end of which the title label will be ellipsized.
+          
+          If the value is 0, the number of lines won't be limited.
+  */
+  @property void titleLines(int propval) nothrow
+  {
+    setTitleLines(propval);
+  }
+
+  /**
+      Creates a new [gid.adw1.expander_row.ExpanderRow].
+      Returns: the newly created [gid.adw1.expander_row.ExpanderRow]
+  */
+  this() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = adw_expander_row_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Adds an action widget to self.
+  
+      Params:
+        widget = a widget
+  
+      Deprecated: Use [gid.adw1.expander_row.ExpanderRow.addSuffix] to add a suffix.
+  */
+  void addAction(gid.gtk4.widget.Widget widget) nothrow
+  {
+    adw_expander_row_add_action(cast(AdwExpanderRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Adds a prefix widget to self.
+  
+      Params:
+        widget = a widget
+  */
+  void addPrefix(gid.gtk4.widget.Widget widget) nothrow
+  {
+    adw_expander_row_add_prefix(cast(AdwExpanderRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Adds a widget to self.
+      
+      The widget will appear in the expanding list below self.
+  
+      Params:
+        child = a widget
+  */
+  void addRow(gid.gtk4.widget.Widget child) nothrow
+  {
+    adw_expander_row_add_row(cast(AdwExpanderRow*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Adds an suffix widget to self.
+  
+      Params:
+        widget = a widget
+  */
+  void addSuffix(gid.gtk4.widget.Widget widget) nothrow
+  {
+    adw_expander_row_add_suffix(cast(AdwExpanderRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Gets whether the expansion of self is enabled.
+      Returns: whether the expansion of self is enabled.
+  */
+  bool getEnableExpansion() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_expander_row_get_enable_expansion(cast(AdwExpanderRow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether self is expanded.
+      Returns: whether self is expanded
+  */
+  bool getExpanded() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_expander_row_get_expanded(cast(AdwExpanderRow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the icon name for self.
+      Returns: the icon name for self
+  
+      Deprecated: Use [gid.adw1.expander_row.ExpanderRow.addPrefix] to add an icon.
+  */
+  string getIconName() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = adw_expander_row_get_icon_name(cast(AdwExpanderRow*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets whether the switch enabling the expansion of self is visible.
+      Returns: whether the switch enabling the expansion is visible
+  */
+  bool getShowEnableSwitch() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_expander_row_get_show_enable_switch(cast(AdwExpanderRow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the subtitle for self.
+      Returns: the subtitle for self
+  */
+  string getSubtitle() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = adw_expander_row_get_subtitle(cast(AdwExpanderRow*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the number of lines at the end of which the subtitle label will be
+      ellipsized.
+      Returns: the number of lines at the end of which the subtitle label will be
+          ellipsized
+  */
+  int getSubtitleLines() nothrow
+  {
+    int _retval;
+    _retval = adw_expander_row_get_subtitle_lines(cast(AdwExpanderRow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the number of lines at the end of which the title label will be
+      ellipsized.
+      Returns: the number of lines at the end of which the title label will be
+          ellipsized
+  */
+  int getTitleLines() nothrow
+  {
+    int _retval;
+    _retval = adw_expander_row_get_title_lines(cast(AdwExpanderRow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Removes a child from self.
+  
+      Params:
+        child = the child to be removed
+  */
+  void remove(gid.gtk4.widget.Widget child) nothrow
+  {
+    adw_expander_row_remove(cast(AdwExpanderRow*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets whether the expansion of self is enabled.
+  
+      Params:
+        enableExpansion = whether to enable the expansion
+  */
+  void setEnableExpansion(bool enableExpansion) nothrow
+  {
+    adw_expander_row_set_enable_expansion(cast(AdwExpanderRow*)this._cPtr, enableExpansion);
+  }
+
+  /**
+      Sets whether self is expanded.
+  
+      Params:
+        expanded = whether to expand the row
+  */
+  void setExpanded(bool expanded) nothrow
+  {
+    adw_expander_row_set_expanded(cast(AdwExpanderRow*)this._cPtr, expanded);
+  }
+
+  /**
+      Sets the icon name for self.
+  
+      Params:
+        iconName = the icon name
+  
+      Deprecated: Use [gid.adw1.expander_row.ExpanderRow.addPrefix] to add an icon.
+  */
+  void setIconName(string iconName = null) nothrow
+  {
+    const(char)* _iconName = iconName.toCString!(No.Malloc, Yes.Nullable);
+    adw_expander_row_set_icon_name(cast(AdwExpanderRow*)this._cPtr, _iconName);
+  }
+
+  /**
+      Sets whether the switch enabling the expansion of self is visible.
+  
+      Params:
+        showEnableSwitch = whether to show the switch enabling the expansion
+  */
+  void setShowEnableSwitch(bool showEnableSwitch) nothrow
+  {
+    adw_expander_row_set_show_enable_switch(cast(AdwExpanderRow*)this._cPtr, showEnableSwitch);
+  }
+
+  /**
+      Sets the subtitle for self.
+      
+      The subtitle is interpreted as Pango markup unless
+      [gid.adw1.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
+  
+      Params:
+        subtitle = the subtitle
+  */
+  void setSubtitle(string subtitle) nothrow
+  {
+    const(char)* _subtitle = subtitle.toCString!(No.Malloc, No.Nullable);
+    adw_expander_row_set_subtitle(cast(AdwExpanderRow*)this._cPtr, _subtitle);
+  }
+
+  /**
+      Sets the number of lines at the end of which the subtitle label will be
+      ellipsized.
+      
+      If the value is 0, the number of lines won't be limited.
+  
+      Params:
+        subtitleLines = the number of lines at the end of which the subtitle label will be ellipsized
+  */
+  void setSubtitleLines(int subtitleLines) nothrow
+  {
+    adw_expander_row_set_subtitle_lines(cast(AdwExpanderRow*)this._cPtr, subtitleLines);
+  }
+
+  /**
+      Sets the number of lines at the end of which the title label will be
+      ellipsized.
+      
+      If the value is 0, the number of lines won't be limited.
+  
+      Params:
+        titleLines = the number of lines at the end of which the title label will be ellipsized
+  */
+  void setTitleLines(int titleLines) nothrow
+  {
+    adw_expander_row_set_title_lines(cast(AdwExpanderRow*)this._cPtr, titleLines);
+  }
+}
+
+/// Fluent builder implementation template for [gid.adw1.expander_row.ExpanderRow]
+class ExpanderRowGidBuilderImpl(T) : gid.adw1.preferences_row.PreferencesRowGidBuilderImpl!T
+{
+
+
+  /**
+      Set `enableExpansion` property.
+      Params:
+        propval = Whether expansion is enabled.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableExpansion(bool propval) nothrow
+  {
+    return setProperty("enable-expansion", propval);
+  }
+
+  /**
+      Set `expanded` property.
+      Params:
+        propval = Whether the row is expanded.
+      Returns: Builder instance for fluent chaining
+  */
+  T expanded(bool propval) nothrow
+  {
+    return setProperty("expanded", propval);
+  }
+
+  /**
+      Set `iconName` property.
+      Params:
+        propval = The icon name for this row.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Use [gid.adw1.expander_row.ExpanderRow.addPrefix] to add an icon.
+  */
+  T iconName(string propval) nothrow
+  {
+    return setProperty("icon-name", propval);
+  }
+
+  /**
+      Set `showEnableSwitch` property.
+      Params:
+        propval = Whether the switch enabling the expansion is visible.
+      Returns: Builder instance for fluent chaining
+  */
+  T showEnableSwitch(bool propval) nothrow
+  {
+    return setProperty("show-enable-switch", propval);
+  }
+
+  /**
+      Set `subtitle` property.
+      Params:
+        propval = The subtitle for this row.
+          
+          The subtitle is interpreted as Pango markup unless
+          [gid.adw1.preferences_row.PreferencesRow.useMarkup] is set to `FALSE`.
+      Returns: Builder instance for fluent chaining
+  */
+  T subtitle(string propval) nothrow
+  {
+    return setProperty("subtitle", propval);
+  }
+
+  /**
+      Set `subtitleLines` property.
+      Params:
+        propval = The number of lines at the end of which the subtitle label will be
+          ellipsized.
+          
+          If the value is 0, the number of lines won't be limited.
+      Returns: Builder instance for fluent chaining
+  */
+  T subtitleLines(int propval) nothrow
+  {
+    return setProperty("subtitle-lines", propval);
+  }
+
+  /**
+      Set `titleLines` property.
+      Params:
+        propval = The number of lines at the end of which the title label will be ellipsized.
+          
+          If the value is 0, the number of lines won't be limited.
+      Returns: Builder instance for fluent chaining
+  */
+  T titleLines(int propval) nothrow
+  {
+    return setProperty("title-lines", propval);
+  }
+}
+
+/// Fluent builder for [gid.adw1.expander_row.ExpanderRow]
+final class ExpanderRowGidBuilder : ExpanderRowGidBuilderImpl!ExpanderRowGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  ExpanderRow build() nothrow
+  {
+    return new ExpanderRow(cast(void*)createGObject(ExpanderRow._getGType), Yes.Take);
+  }
+}

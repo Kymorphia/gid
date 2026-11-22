@@ -1,0 +1,333 @@
+/// Module for [ColorDialog] class
+module gid.gtk4.color_dialog;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gdk4.rgba;
+import gid.gio2.async_result;
+import gid.gio2.cancellable;
+import gid.gio2.types;
+import gid.glib2.error;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.types;
+import gid.gtk4.window;
+
+/**
+    Asynchronous API to present a color chooser dialog.
+    
+    [gid.gtk4.color_dialog.ColorDialog] collects the arguments that are needed to present
+    the dialog to the user, such as a title for the dialog and whether
+    it should be modal.
+    
+    The dialog is shown with the [gid.gtk4.color_dialog.ColorDialog.chooseRgba]
+    function.
+    
+    See [gid.gtk4.color_dialog_button.ColorDialogButton] for a convenient control
+    that uses [gid.gtk4.color_dialog.ColorDialog] and presents the results.
+*/
+class ColorDialog : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_color_dialog_get_type != &gidSymbolNotFound ? gtk_color_dialog_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkColorDialog";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ColorDialog self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.color_dialog.ColorDialog]
+      Returns: New builder object
+  */
+  static ColorDialogGidBuilder builder() nothrow
+  {
+    return new ColorDialogGidBuilder;
+  }
+
+  /**
+      Get `modal` property.
+      Returns: Whether the color chooser dialog is modal.
+  */
+  @property bool modal() nothrow
+  {
+    return getModal();
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the color chooser dialog is modal.
+  */
+  @property void modal(bool propval) nothrow
+  {
+    setModal(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: A title that may be shown on the color chooser dialog.
+  */
+  @property string title() nothrow
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = A title that may be shown on the color chooser dialog.
+  */
+  @property void title(string propval) nothrow
+  {
+    setTitle(propval);
+  }
+
+  /**
+      Get `withAlpha` property.
+      Returns: Whether colors may have alpha (translucency).
+        
+        When with-alpha is false, the color that is selected
+        will be forced to have alpha == 1.
+  */
+  @property bool withAlpha() nothrow
+  {
+    return getWithAlpha();
+  }
+
+  /**
+      Set `withAlpha` property.
+      Params:
+        propval = Whether colors may have alpha (translucency).
+          
+          When with-alpha is false, the color that is selected
+          will be forced to have alpha == 1.
+  */
+  @property void withAlpha(bool propval) nothrow
+  {
+    setWithAlpha(propval);
+  }
+
+  /**
+      Creates a new [gid.gtk4.color_dialog.ColorDialog] object.
+      Returns: the new [gid.gtk4.color_dialog.ColorDialog]
+  */
+  this() nothrow
+  {
+    GtkColorDialog* _cretval;
+    _cretval = gtk_color_dialog_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Presents a color chooser dialog to the user.
+  
+      Params:
+        parent = the parent window
+        initialColor = the color to select initially
+        cancellable = a cancellable to cancel the operation
+        callback = a callback to call
+            when the operation is complete
+  */
+  void chooseRgba(gid.gtk4.window.Window parent = null, gid.gdk4.rgba.RGBA* initialColor = null, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null) nothrow
+  {
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    gtk_color_dialog_choose_rgba(cast(GtkColorDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, cast(const(GdkRGBA)*)initialColor, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Finishes the [gid.gtk4.color_dialog.ColorDialog.chooseRgba] call
+      
+      Note that this function returns a `errorGtk.DialogError.DISMISSED`
+      error if the user cancels the dialog.
+  
+      Params:
+        result = the result
+      Returns: the selected color
+      Throws: [ErrorWrap]
+  */
+  gid.gdk4.rgba.RGBA chooseRgbaFinish(gid.gio2.async_result.AsyncResult result)
+  {
+    GdkRGBA* _cretval;
+    GError *_err;
+    _cretval = gtk_color_dialog_choose_rgba_finish(cast(GtkColorDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    gid.gdk4.rgba.RGBA _retval;
+    if (_cretval)
+    {
+      _retval = *cast(gid.gdk4.rgba.RGBA*)_cretval;
+      cValueFree!(gid.gdk4.rgba.RGBA)(_cretval);
+    }
+    return _retval;
+  }
+
+  /**
+      Returns whether the color chooser dialog
+      blocks interaction with the parent window
+      while it is presented.
+      Returns: true if the color chooser dialog is modal
+  */
+  bool getModal() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_color_dialog_get_modal(cast(GtkColorDialog*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the title that will be shown on the
+      color chooser dialog.
+      Returns: the title
+  */
+  string getTitle() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_color_dialog_get_title(cast(GtkColorDialog*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Returns whether colors may have alpha.
+      Returns: true if colors may have alpha
+  */
+  bool getWithAlpha() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_color_dialog_get_with_alpha(cast(GtkColorDialog*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Sets whether the color chooser dialog
+      blocks interaction with the parent window
+      while it is presented.
+  
+      Params:
+        modal = the new value
+  */
+  void setModal(bool modal) nothrow
+  {
+    gtk_color_dialog_set_modal(cast(GtkColorDialog*)this._cPtr, modal);
+  }
+
+  /**
+      Sets the title that will be shown on the
+      color chooser dialog.
+  
+      Params:
+        title = the new title
+  */
+  void setTitle(string title) nothrow
+  {
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
+    gtk_color_dialog_set_title(cast(GtkColorDialog*)this._cPtr, _title);
+  }
+
+  /**
+      Sets whether colors may have alpha.
+  
+      Params:
+        withAlpha = the new value
+  */
+  void setWithAlpha(bool withAlpha) nothrow
+  {
+    gtk_color_dialog_set_with_alpha(cast(GtkColorDialog*)this._cPtr, withAlpha);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.color_dialog.ColorDialog]
+class ColorDialogGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the color chooser dialog is modal.
+      Returns: Builder instance for fluent chaining
+  */
+  T modal(bool propval) nothrow
+  {
+    return setProperty("modal", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = A title that may be shown on the color chooser dialog.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval) nothrow
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `withAlpha` property.
+      Params:
+        propval = Whether colors may have alpha (translucency).
+          
+          When with-alpha is false, the color that is selected
+          will be forced to have alpha == 1.
+      Returns: Builder instance for fluent chaining
+  */
+  T withAlpha(bool propval) nothrow
+  {
+    return setProperty("with-alpha", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk4.color_dialog.ColorDialog]
+final class ColorDialogGidBuilder : ColorDialogGidBuilderImpl!ColorDialogGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  ColorDialog build() nothrow
+  {
+    return new ColorDialog(cast(void*)createGObject(ColorDialog._getGType), Yes.Take);
+  }
+}

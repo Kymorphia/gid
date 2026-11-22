@@ -1,0 +1,136 @@
+/// Module for [VideoFormat] enum namespace
+module gid.gstvideo1.video_format;
+
+import gid.core.utils;
+import gid.gstvideo1.c.functions;
+import gid.gstvideo1.c.types;
+import gid.gstvideo1.types;
+import gid.gstvideo1.video_format_info;
+
+/// Namespace for [VideoFormat] enum
+struct VideoFormat
+{
+  alias Enum = gid.gstvideo1.types.VideoFormat; ///
+
+  /**
+      Converts a FOURCC value into the corresponding #GstVideoFormat.
+      If the FOURCC cannot be represented by #GstVideoFormat,
+      #GST_VIDEO_FORMAT_UNKNOWN is returned.
+  
+      Params:
+        fourcc = a FOURCC value representing raw YUV video
+      Returns: the #GstVideoFormat describing the FOURCC value
+  */
+  static gid.gstvideo1.types.VideoFormat fromFourcc(uint fourcc) nothrow
+  {
+    GstVideoFormat _cretval;
+    _cretval = gst_video_format_from_fourcc(fourcc);
+    gid.gstvideo1.types.VideoFormat _retval = cast(gid.gstvideo1.types.VideoFormat)_cretval;
+    return _retval;
+  }
+
+  /**
+      Find the #GstVideoFormat for the given parameters.
+  
+      Params:
+        depth = the amount of bits used for a pixel
+        bpp = the amount of bits used to store a pixel. This value is bigger than
+            depth
+        endianness = the endianness of the masks, #G_LITTLE_ENDIAN or #G_BIG_ENDIAN
+        redMask = the red mask
+        greenMask = the green mask
+        blueMask = the blue mask
+        alphaMask = the alpha mask, or 0 if no alpha mask
+      Returns: a #GstVideoFormat or GST_VIDEO_FORMAT_UNKNOWN when the parameters to
+        not specify a known format.
+  */
+  static gid.gstvideo1.types.VideoFormat fromMasks(int depth, int bpp, int endianness, uint redMask, uint greenMask, uint blueMask, uint alphaMask) nothrow
+  {
+    GstVideoFormat _cretval;
+    _cretval = gst_video_format_from_masks(depth, bpp, endianness, redMask, greenMask, blueMask, alphaMask);
+    gid.gstvideo1.types.VideoFormat _retval = cast(gid.gstvideo1.types.VideoFormat)_cretval;
+    return _retval;
+  }
+
+  /**
+      Convert the format string to its #GstVideoFormat.
+  
+      Params:
+        format = a format string
+      Returns: the #GstVideoFormat for format or GST_VIDEO_FORMAT_UNKNOWN when the
+        string is not a known format.
+  */
+  static gid.gstvideo1.types.VideoFormat fromString(string format) nothrow
+  {
+    GstVideoFormat _cretval;
+    const(char)* _format = format.toCString!(No.Malloc, No.Nullable);
+    _cretval = gst_video_format_from_string(_format);
+    gid.gstvideo1.types.VideoFormat _retval = cast(gid.gstvideo1.types.VideoFormat)_cretval;
+    return _retval;
+  }
+
+  /**
+      Get the #GstVideoFormatInfo for format
+  
+      Params:
+        format = a #GstVideoFormat
+      Returns: The #GstVideoFormatInfo for format.
+  */
+  static gid.gstvideo1.video_format_info.VideoFormatInfo getInfo(gid.gstvideo1.types.VideoFormat format) nothrow
+  {
+    const(GstVideoFormatInfo)* _cretval;
+    _cretval = gst_video_format_get_info(format);
+    auto _retval = _cretval ? new gid.gstvideo1.video_format_info.VideoFormatInfo(cast(GstVideoFormatInfo*)_cretval, null) : null;
+    return _retval;
+  }
+
+  /**
+      Get the default palette of format. This the palette used in the pack
+      function for paletted formats.
+  
+      Params:
+        format = a #GstVideoFormat
+        size = size of the palette in bytes
+      Returns: the default palette of format or null when
+        format does not have a palette.
+  */
+  static const(void)* getPalette(gid.gstvideo1.types.VideoFormat format, out size_t size) nothrow
+  {
+    auto _retval = gst_video_format_get_palette(format, cast(size_t*)&size);
+    return _retval;
+  }
+
+  /**
+      Converts a #GstVideoFormat value into the corresponding FOURCC.  Only
+      a few YUV formats have corresponding FOURCC values.  If format has
+      no corresponding FOURCC value, 0 is returned.
+  
+      Params:
+        format = a #GstVideoFormat video format
+      Returns: the FOURCC corresponding to format
+  */
+  static uint toFourcc(gid.gstvideo1.types.VideoFormat format) nothrow
+  {
+    uint _retval;
+    _retval = gst_video_format_to_fourcc(format);
+    return _retval;
+  }
+
+  /**
+      Returns a string containing a descriptive name for the #GstVideoFormat.
+      
+      Since 1.26 this can also be used with [gid.gstvideo1.types.VideoFormat.Unknown], previous
+      versions were printing a critical warning and returned null.
+  
+      Params:
+        format = a #GstVideoFormat video format
+      Returns: the name corresponding to format
+  */
+  static string toString_(gid.gstvideo1.types.VideoFormat format) nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gst_video_format_to_string(format);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+}

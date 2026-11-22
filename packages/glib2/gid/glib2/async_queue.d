@@ -1,0 +1,521 @@
+/// Module for [AsyncQueue] class
+module gid.glib2.async_queue;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.glib2.c.functions;
+import gid.glib2.c.types;
+import gid.glib2.time_val;
+import gid.glib2.types;
+
+/**
+    An opaque data structure which represents an asynchronous queue.
+    
+    It should only be accessed through the `g_async_queue_*` functions.
+*/
+class AsyncQueue : OpaqueWrap!(GAsyncQueue*, g_async_queue_unref, g_async_queue_ref)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /**
+      Returns the length of the queue.
+      
+      Actually this function returns the number of data items in
+      the queue minus the number of waiting threads, so a negative
+      value means waiting threads, and a positive value means available
+      entries in the queue. A return value of 0 could mean n entries
+      in the queue and n threads waiting. This can happen due to locking
+      of the queue or due to scheduling.
+      Returns: the length of the queue
+  */
+  int length() nothrow
+  {
+    int _retval;
+    _retval = g_async_queue_length(cast(GAsyncQueue*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the length of the queue.
+      
+      Actually this function returns the number of data items in
+      the queue minus the number of waiting threads, so a negative
+      value means waiting threads, and a positive value means available
+      entries in the queue. A return value of 0 could mean n entries
+      in the queue and n threads waiting. This can happen due to locking
+      of the queue or due to scheduling.
+      
+      This function must be called while holding the queue's lock.
+      Returns: the length of the queue.
+  */
+  int lengthUnlocked() nothrow
+  {
+    int _retval;
+    _retval = g_async_queue_length_unlocked(cast(GAsyncQueue*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Acquires the queue's lock. If another thread is already
+      holding the lock, this call will block until the lock
+      becomes available.
+      
+      Call [gid.glib2.async_queue.AsyncQueue.unlock] to drop the lock again.
+      
+      While holding the lock, you can only call the
+      g_async_queue_*_unlocked() functions on queue. Otherwise,
+      deadlock may occur.
+  */
+  void lock() nothrow
+  {
+    g_async_queue_lock(cast(GAsyncQueue*)this._cPtr);
+  }
+
+  /**
+      Pops data from the queue. If queue is empty, this function
+      blocks until data becomes available.
+      Returns: data from the queue
+  */
+  void* pop() nothrow
+  {
+    auto _retval = g_async_queue_pop(cast(GAsyncQueue*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Pops data from the queue. If queue is empty, this function
+      blocks until data becomes available.
+      
+      This function must be called while holding the queue's lock.
+      Returns: data from the queue.
+  */
+  void* popUnlocked() nothrow
+  {
+    auto _retval = g_async_queue_pop_unlocked(cast(GAsyncQueue*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Pushes the data into the queue.
+      
+      The data parameter must not be null.
+  
+      Params:
+        data = data to push onto the queue
+  */
+  void push(void* data) nothrow
+  {
+    g_async_queue_push(cast(GAsyncQueue*)this._cPtr, data);
+  }
+
+  /**
+      Pushes the item into the queue. item must not be null.
+      In contrast to [gid.glib2.async_queue.AsyncQueue.push], this function
+      pushes the new item ahead of the items already in the queue,
+      so that it will be the next one to be popped off the queue.
+  
+      Params:
+        item = data to push into the queue
+  */
+  void pushFront(void* item) nothrow
+  {
+    g_async_queue_push_front(cast(GAsyncQueue*)this._cPtr, item);
+  }
+
+  /**
+      Pushes the item into the queue. item must not be null.
+      In contrast to [gid.glib2.async_queue.AsyncQueue.pushUnlocked], this function
+      pushes the new item ahead of the items already in the queue,
+      so that it will be the next one to be popped off the queue.
+      
+      This function must be called while holding the queue's lock.
+  
+      Params:
+        item = data to push into the queue
+  */
+  void pushFrontUnlocked(void* item) nothrow
+  {
+    g_async_queue_push_front_unlocked(cast(GAsyncQueue*)this._cPtr, item);
+  }
+
+  /**
+      Inserts data into queue using func to determine the new
+      position.
+      
+      This function requires that the queue is sorted before pushing on
+      new elements, see [gid.glib2.async_queue.AsyncQueue.sort].
+      
+      This function will lock queue before it sorts the queue and unlock
+      it when it is finished.
+      
+      For an example of func see [gid.glib2.async_queue.AsyncQueue.sort].
+  
+      Params:
+        data = the data to push into the queue
+        func = the #GCompareDataFunc is used to sort queue
+  */
+  void pushSorted(void* data, gid.glib2.types.CompareDataFunc func) nothrow
+  {
+    extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData) nothrow
+    {
+      int _retval;
+      auto _dlg = cast(gid.glib2.types.CompareDataFunc*)userData;
+
+      try
+      {
+        _retval = (*_dlg)(a, b);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.glib2.types.CompareDataFunc");
+      }
+      return _retval;
+    }
+    auto _funcCB = func ? &_funcCallback : null;
+    auto _func = func ? cast(void*)&(func) : null;
+    g_async_queue_push_sorted(cast(GAsyncQueue*)this._cPtr, data, _funcCB, _func);
+  }
+
+  /**
+      Inserts data into queue using func to determine the new
+      position.
+      
+      The sort function func is passed two elements of the queue.
+      It should return 0 if they are equal, a negative value if the
+      first element should be higher in the queue or a positive value
+      if the first element should be lower in the queue than the second
+      element.
+      
+      This function requires that the queue is sorted before pushing on
+      new elements, see [gid.glib2.async_queue.AsyncQueue.sort].
+      
+      This function must be called while holding the queue's lock.
+      
+      For an example of func see [gid.glib2.async_queue.AsyncQueue.sort].
+  
+      Params:
+        data = the data to push into the queue
+        func = the #GCompareDataFunc is used to sort queue
+  */
+  void pushSortedUnlocked(void* data, gid.glib2.types.CompareDataFunc func) nothrow
+  {
+    extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData) nothrow
+    {
+      int _retval;
+      auto _dlg = cast(gid.glib2.types.CompareDataFunc*)userData;
+
+      try
+      {
+        _retval = (*_dlg)(a, b);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.glib2.types.CompareDataFunc");
+      }
+      return _retval;
+    }
+    auto _funcCB = func ? &_funcCallback : null;
+    auto _func = func ? cast(void*)&(func) : null;
+    g_async_queue_push_sorted_unlocked(cast(GAsyncQueue*)this._cPtr, data, _funcCB, _func);
+  }
+
+  /**
+      Pushes the data into the queue.
+      
+      The data parameter must not be null.
+      
+      This function must be called while holding the queue's lock.
+  
+      Params:
+        data = data to push onto the queue
+  */
+  void pushUnlocked(void* data) nothrow
+  {
+    g_async_queue_push_unlocked(cast(GAsyncQueue*)this._cPtr, data);
+  }
+
+  /**
+      Increases the reference count of the asynchronous queue by 1.
+  
+      Deprecated: Reference counting is done atomically.
+        so [gid.glib2.async_queue.AsyncQueue.ref_] can be used regardless of the queue's
+        lock.
+  */
+  void refUnlocked() nothrow
+  {
+    g_async_queue_ref_unlocked(cast(GAsyncQueue*)this._cPtr);
+  }
+
+  /**
+      Remove an item from the queue.
+  
+      Params:
+        item = the data to remove from the queue
+      Returns: true if the item was removed
+  */
+  bool remove(void* item) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_async_queue_remove(cast(GAsyncQueue*)this._cPtr, item);
+    return _retval;
+  }
+
+  /**
+      Remove an item from the queue.
+      
+      This function must be called while holding the queue's lock.
+  
+      Params:
+        item = the data to remove from the queue
+      Returns: true if the item was removed
+  */
+  bool removeUnlocked(void* item) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_async_queue_remove_unlocked(cast(GAsyncQueue*)this._cPtr, item);
+    return _retval;
+  }
+
+  /**
+      Sorts queue using func.
+      
+      The sort function func is passed two elements of the queue.
+      It should return 0 if they are equal, a negative value if the
+      first element should be higher in the queue or a positive value
+      if the first element should be lower in the queue than the second
+      element.
+      
+      This function will lock queue before it sorts the queue and unlock
+      it when it is finished.
+      
+      If you were sorting a list of priority numbers to make sure the
+      lowest priority would be at the top of the queue, you could use:
+      ```c
+       gint32 id1;
+       gint32 id2;
+      
+       id1 = GPOINTER_TO_INT (element1);
+       id2 = GPOINTER_TO_INT (element2);
+      
+       return (id1 > id2 ? +1 : id1 == id2 ? 0 : -1);
+      ```
+  
+      Params:
+        func = the #GCompareDataFunc is used to sort queue
+  */
+  void sort(gid.glib2.types.CompareDataFunc func) nothrow
+  {
+    extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData) nothrow
+    {
+      int _retval;
+      auto _dlg = cast(gid.glib2.types.CompareDataFunc*)userData;
+
+      try
+      {
+        _retval = (*_dlg)(a, b);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.glib2.types.CompareDataFunc");
+      }
+      return _retval;
+    }
+    auto _funcCB = func ? &_funcCallback : null;
+    auto _func = func ? cast(void*)&(func) : null;
+    g_async_queue_sort(cast(GAsyncQueue*)this._cPtr, _funcCB, _func);
+  }
+
+  /**
+      Sorts queue using func.
+      
+      The sort function func is passed two elements of the queue.
+      It should return 0 if they are equal, a negative value if the
+      first element should be higher in the queue or a positive value
+      if the first element should be lower in the queue than the second
+      element.
+      
+      This function must be called while holding the queue's lock.
+  
+      Params:
+        func = the #GCompareDataFunc is used to sort queue
+  */
+  void sortUnlocked(gid.glib2.types.CompareDataFunc func) nothrow
+  {
+    extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData) nothrow
+    {
+      int _retval;
+      auto _dlg = cast(gid.glib2.types.CompareDataFunc*)userData;
+
+      try
+      {
+        _retval = (*_dlg)(a, b);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.glib2.types.CompareDataFunc");
+      }
+      return _retval;
+    }
+    auto _funcCB = func ? &_funcCallback : null;
+    auto _func = func ? cast(void*)&(func) : null;
+    g_async_queue_sort_unlocked(cast(GAsyncQueue*)this._cPtr, _funcCB, _func);
+  }
+
+  /**
+      Pops data from the queue. If the queue is empty, blocks until
+      end_time or until data becomes available.
+      
+      If no data is received before end_time, null is returned.
+      
+      To easily calculate end_time, a combination of [gid.glib2.global.getRealTime]
+      and [gid.glib2.time_val.TimeVal.add] can be used.
+  
+      Params:
+        endTime = a #GTimeVal, determining the final time
+      Returns: data from the queue or null, when no
+          data is received before end_time.
+  
+      Deprecated: use [gid.glib2.async_queue.AsyncQueue.timeoutPop].
+  */
+  void* timedPop(gid.glib2.time_val.TimeVal endTime) nothrow
+  {
+    auto _retval = g_async_queue_timed_pop(cast(GAsyncQueue*)this._cPtr, cast(GTimeVal*)&endTime);
+    return _retval;
+  }
+
+  /**
+      Pops data from the queue. If the queue is empty, blocks until
+      end_time or until data becomes available.
+      
+      If no data is received before end_time, null is returned.
+      
+      To easily calculate end_time, a combination of [gid.glib2.global.getRealTime]
+      and [gid.glib2.time_val.TimeVal.add] can be used.
+      
+      This function must be called while holding the queue's lock.
+  
+      Params:
+        endTime = a #GTimeVal, determining the final time
+      Returns: data from the queue or null, when no
+          data is received before end_time.
+  
+      Deprecated: use [gid.glib2.async_queue.AsyncQueue.timeoutPopUnlocked].
+  */
+  void* timedPopUnlocked(gid.glib2.time_val.TimeVal endTime) nothrow
+  {
+    auto _retval = g_async_queue_timed_pop_unlocked(cast(GAsyncQueue*)this._cPtr, cast(GTimeVal*)&endTime);
+    return _retval;
+  }
+
+  /**
+      Pops data from the queue. If the queue is empty, blocks for
+      timeout microseconds, or until data becomes available.
+      
+      If no data is received before the timeout, null is returned.
+  
+      Params:
+        timeout = the number of microseconds to wait
+      Returns: data from the queue or null, when no
+          data is received before the timeout.
+  */
+  void* timeoutPop(ulong timeout) nothrow
+  {
+    auto _retval = g_async_queue_timeout_pop(cast(GAsyncQueue*)this._cPtr, timeout);
+    return _retval;
+  }
+
+  /**
+      Pops data from the queue. If the queue is empty, blocks for
+      timeout microseconds, or until data becomes available.
+      
+      If no data is received before the timeout, null is returned.
+      
+      This function must be called while holding the queue's lock.
+  
+      Params:
+        timeout = the number of microseconds to wait
+      Returns: data from the queue or null, when no
+          data is received before the timeout.
+  */
+  void* timeoutPopUnlocked(ulong timeout) nothrow
+  {
+    auto _retval = g_async_queue_timeout_pop_unlocked(cast(GAsyncQueue*)this._cPtr, timeout);
+    return _retval;
+  }
+
+  /**
+      Tries to pop data from the queue. If no data is available,
+      null is returned.
+      Returns: data from the queue or null, when no
+          data is available immediately.
+  */
+  void* tryPop() nothrow
+  {
+    auto _retval = g_async_queue_try_pop(cast(GAsyncQueue*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Tries to pop data from the queue. If no data is available,
+      null is returned.
+      
+      This function must be called while holding the queue's lock.
+      Returns: data from the queue or null, when no
+          data is available immediately.
+  */
+  void* tryPopUnlocked() nothrow
+  {
+    auto _retval = g_async_queue_try_pop_unlocked(cast(GAsyncQueue*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Releases the queue's lock.
+      
+      Calling this function when you have not acquired
+      the with [gid.glib2.async_queue.AsyncQueue.lock] leads to undefined
+      behaviour.
+  */
+  void unlock() nothrow
+  {
+    g_async_queue_unlock(cast(GAsyncQueue*)this._cPtr);
+  }
+
+  /**
+      Decreases the reference count of the asynchronous queue by 1
+      and releases the lock. This function must be called while holding
+      the queue's lock. If the reference count went to 0, the queue
+      will be destroyed and the memory allocated will be freed.
+  
+      Deprecated: Reference counting is done atomically.
+        so [gid.glib2.async_queue.AsyncQueue.unref] can be used regardless of the queue's
+        lock.
+  */
+  void unrefAndUnlock() nothrow
+  {
+    g_async_queue_unref_and_unlock(cast(GAsyncQueue*)this._cPtr(Yes.Dup));
+  }
+
+  /**
+      Creates a new asynchronous queue.
+      Returns: a new #GAsyncQueue. Free with [gid.glib2.async_queue.AsyncQueue.unref]
+  */
+  static gid.glib2.async_queue.AsyncQueue new_() nothrow
+  {
+    GAsyncQueue* _cretval;
+    _cretval = g_async_queue_new();
+    auto _retval = _cretval ? new gid.glib2.async_queue.AsyncQueue(cast(GAsyncQueue*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+}

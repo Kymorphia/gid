@@ -59,12 +59,12 @@ libxml2                    |   10    0    0   100 |    0    0    0   100 |    0 
 xlib2                      |   12    0    0   100 |    1    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 
 [Disabled Funcs]
-gstaudio.audio_resampler.AudioResampler.resample
-gstglegl.eglimage.EGLImage.newWrapped
-gstglegl.eglimage.EGLImage.exportDmabuf
-gstglegl.eglimage.EGLImage.fromDmabufDirect
-gstglegl.eglimage.EGLImage.fromDmabufDirectTarget
-gstglegl.eglimage.EGLImage.fromDmabufDirectTargetWithDmaDrm
-gstglegl.eglimage.EGLImage.fromTexture
-gstvideo.video_scaler.VideoScaler.vertical
-gstvideo.global.videoChromaResample
+gid.gstaudio1.audio_resampler.AudioResampler.resample
+gid.gstglegl1.eglimage.EGLImage.newWrapped
+gid.gstglegl1.eglimage.EGLImage.exportDmabuf
+gid.gstglegl1.eglimage.EGLImage.fromDmabufDirect
+gid.gstglegl1.eglimage.EGLImage.fromDmabufDirectTarget
+gid.gstglegl1.eglimage.EGLImage.fromDmabufDirectTargetWithDmaDrm
+gid.gstglegl1.eglimage.EGLImage.fromTexture
+gid.gstvideo1.video_scaler.VideoScaler.vertical
+gid.gstvideo1.global.videoChromaResample

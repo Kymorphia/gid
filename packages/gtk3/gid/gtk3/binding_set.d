@@ -1,0 +1,209 @@
+/// Module for [BindingSet] class
+module gid.gtk3.binding_set;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gdk3.types;
+import gid.gobject2.object;
+import gid.gtk3.binding_entry;
+import gid.gtk3.c.functions;
+import gid.gtk3.c.types;
+import gid.gtk3.types;
+
+/**
+    A binding set maintains a list of activatable key bindings.
+    A single binding set can match multiple types of widgets.
+    Similar to style contexts, can be matched by any information contained
+    in a widgets #GtkWidgetPath. When a binding within a set is matched upon
+    activation, an action signal is emitted on the target widget to carry out
+    the actual activation.
+*/
+class BindingSet : StructWrap!(GtkBindingSet)
+{
+  /**
+      Create a `binding_set.BindingSet` wrap type.
+      Params:
+        setName = unique name of this binding set
+        priority = unused
+        parsed = whether this binding set stems from a CSS file and is reset upon theme changes
+  */
+  this(string setName = string.init, int priority = int.init, uint parsed = uint.init) nothrow
+  {
+    this.setName = setName;
+    this.priority = priority;
+    this.parsed = parsed;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _setNameRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `setName` field.
+      Returns: unique name of this binding set
+  */
+  @property string setName() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GtkBindingSet*)this._cPtr).setName);
+  }
+
+  /**
+      Set `setName` field.
+      Params:
+        propval = unique name of this binding set
+  */
+  @property void setName(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("setName"))
+      return;
+
+    _setNameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GtkBindingSet*)this._cPtr).setName = cast(char*)_setNameRef;
+  }
+
+  /**
+      Get `priority` field.
+      Returns: unused
+  */
+  @property int priority() nothrow
+  {
+    return (cast(GtkBindingSet*)this._cPtr).priority;
+  }
+
+  /**
+      Set `priority` field.
+      Params:
+        propval = unused
+  */
+  @property void priority(int propval) nothrow
+  {
+    (cast(GtkBindingSet*)this._cPtr).priority = propval;
+  }
+
+  /**
+      Get `widgetPathPspecs` field.
+      Returns: unused
+  */
+  @property void*[] widgetPathPspecs() nothrow
+  {
+    return gSListToD!(void*)((cast(GtkBindingSet*)this._cPtr).widgetPathPspecs);
+  }
+
+  /**
+      Get `widgetClassPspecs` field.
+      Returns: unused
+  */
+  @property void*[] widgetClassPspecs() nothrow
+  {
+    return gSListToD!(void*)((cast(GtkBindingSet*)this._cPtr).widgetClassPspecs);
+  }
+
+  /**
+      Get `classBranchPspecs` field.
+      Returns: unused
+  */
+  @property void*[] classBranchPspecs() nothrow
+  {
+    return gSListToD!(void*)((cast(GtkBindingSet*)this._cPtr).classBranchPspecs);
+  }
+
+  /**
+      Get `entries` field.
+      Returns: the key binding entries in this binding set
+  */
+  @property gid.gtk3.binding_entry.BindingEntry entries() nothrow
+  {
+    return (cast(GtkBindingSet*)this._cPtr).entries ? new gid.gtk3.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingSet*)this._cPtr).entries, this) : null;
+  }
+
+  /**
+      Get `current` field.
+      Returns: implementation detail
+  */
+  @property gid.gtk3.binding_entry.BindingEntry current() nothrow
+  {
+    return (cast(GtkBindingSet*)this._cPtr).current ? new gid.gtk3.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingSet*)this._cPtr).current, this) : null;
+  }
+
+  /**
+      Get `parsed` field.
+      Returns: whether this binding set stems from a CSS file and is reset upon theme changes
+  */
+  @property uint parsed() nothrow
+  {
+    return (cast(GtkBindingSet*)this._cPtr).parsed;
+  }
+
+  /**
+      Set `parsed` field.
+      Params:
+        propval = whether this binding set stems from a CSS file and is reset upon theme changes
+  */
+  @property void parsed(uint propval) nothrow
+  {
+    (cast(GtkBindingSet*)this._cPtr).parsed = propval;
+  }
+
+  /**
+      Find a key binding matching keyval and modifiers within
+      binding_set and activate the binding on object.
+  
+      Params:
+        keyval = key value of the binding
+        modifiers = key modifier of the binding
+        object = object to activate when binding found
+      Returns: true if a binding was found and activated
+  */
+  bool activate(uint keyval, gid.gdk3.types.ModifierType modifiers, gid.gobject2.object.ObjectWrap object) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_binding_set_activate(cast(GtkBindingSet*)this._cPtr, keyval, modifiers, object ? cast(GObject*)object._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      This function was used internally by the GtkRC parsing mechanism
+      to assign match patterns to #GtkBindingSet structures.
+      
+      In GTK+ 3, these match patterns are unused.
+  
+      Params:
+        pathType = path type the pattern applies to
+        pathPattern = the actual match pattern
+        priority = binding priority
+  */
+  void addPath(gid.gtk3.types.PathType pathType, string pathPattern, gid.gtk3.types.PathPriorityType priority) nothrow
+  {
+    const(char)* _pathPattern = pathPattern.toCString!(No.Malloc, No.Nullable);
+    gtk_binding_set_add_path(cast(GtkBindingSet*)this._cPtr, pathType, _pathPattern, priority);
+  }
+
+  /**
+      Find a binding set by its globally unique name.
+      
+      The set_name can either be a name used for [gid.gtk3.binding_set.BindingSet.new_]
+      or the type name of a class used in [gid.gtk3.binding_set.BindingSet.byClass].
+  
+      Params:
+        setName = unique binding set name
+      Returns: null or the specified binding set
+  */
+  static gid.gtk3.binding_set.BindingSet find(string setName) nothrow
+  {
+    GtkBindingSet* _cretval;
+    const(char)* _setName = setName.toCString!(No.Malloc, No.Nullable);
+    _cretval = gtk_binding_set_find(_setName);
+    auto _retval = _cretval ? new gid.gtk3.binding_set.BindingSet(cast(GtkBindingSet*)_cretval, null) : null;
+    return _retval;
+  }
+}

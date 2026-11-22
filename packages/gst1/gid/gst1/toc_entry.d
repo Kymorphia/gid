@@ -1,0 +1,227 @@
+/// Module for [TocEntry] class
+module gid.gst1.toc_entry;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.boxed;
+import gid.gst1.c.functions;
+import gid.gst1.c.types;
+import gid.gst1.tag_list;
+import gid.gst1.toc;
+import gid.gst1.types;
+
+/** */
+class TocEntry : gid.gobject2.boxed.BoxedWrap!(gst_toc_entry_get_type)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override TocEntry self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Create new #GstTocEntry structure.
+  
+      Params:
+        type = entry type.
+        uid = unique ID (UID) in the whole TOC.
+      Returns: newly allocated #GstTocEntry structure, free it with gst_toc_entry_unref().
+  */
+  this(gid.gst1.types.TocEntryType type, string uid) nothrow
+  {
+    GstTocEntry* _cretval;
+    const(char)* _uid = uid.toCString!(No.Malloc, No.Nullable);
+    _cretval = gst_toc_entry_new(type, _uid);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Appends the #GstTocEntry subentry to entry.
+  
+      Params:
+        subentry = A #GstTocEntry
+  */
+  void appendSubEntry(gid.gst1.toc_entry.TocEntry subentry) nothrow
+  {
+    gst_toc_entry_append_sub_entry(cast(GstTocEntry*)this._cPtr, subentry ? cast(GstTocEntry*)subentry._cPtr(Yes.Dup) : null);
+  }
+
+  /** */
+  gid.gst1.types.TocEntryType getEntryType() nothrow
+  {
+    GstTocEntryType _cretval;
+    _cretval = gst_toc_entry_get_entry_type(cast(const(GstTocEntry)*)this._cPtr);
+    gid.gst1.types.TocEntryType _retval = cast(gid.gst1.types.TocEntryType)_cretval;
+    return _retval;
+  }
+
+  /**
+      Get loop_type and repeat_count values from the entry and write them into
+      appropriate storages. Loops are e.g. used by sampled instruments. GStreamer
+      is not automatically applying the loop. The application can process this
+      meta data and use it e.g. to send a seek-event to loop a section.
+  
+      Params:
+        loopType = the storage for the loop_type
+                      value, leave null if not need.
+        repeatCount = the storage for the repeat_count
+                         value, leave null if not need.
+      Returns: true if all non-null storage pointers were filled with appropriate
+        values, false otherwise.
+  */
+  bool getLoop(out gid.gst1.types.TocLoopType loopType, out int repeatCount) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_toc_entry_get_loop(cast(const(GstTocEntry)*)this._cPtr, &loopType, cast(int*)&repeatCount);
+    return _retval;
+  }
+
+  /**
+      Gets the parent #GstTocEntry of entry.
+      Returns: The parent #GstTocEntry of entry
+  */
+  gid.gst1.toc_entry.TocEntry getParent() nothrow
+  {
+    GstTocEntry* _cretval;
+    _cretval = gst_toc_entry_get_parent(cast(GstTocEntry*)this._cPtr);
+    auto _retval = _cretval ? new gid.gst1.toc_entry.TocEntry(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Get start and stop values from the entry and write them into appropriate
+      storages.
+  
+      Params:
+        start = the storage for the start value, leave
+            null if not need.
+        stop = the storage for the stop value, leave
+            null if not need.
+      Returns: true if all non-null storage pointers were filled with appropriate
+        values, false otherwise.
+  */
+  bool getStartStopTimes(out long start, out long stop) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_toc_entry_get_start_stop_times(cast(const(GstTocEntry)*)this._cPtr, cast(long*)&start, cast(long*)&stop);
+    return _retval;
+  }
+
+  /**
+      Gets the sub-entries of entry.
+      Returns: A #GList of #GstTocEntry of entry
+  */
+  gid.gst1.toc_entry.TocEntry[] getSubEntries() nothrow
+  {
+    GList* _cretval;
+    _cretval = gst_toc_entry_get_sub_entries(cast(const(GstTocEntry)*)this._cPtr);
+    auto _retval = gListToD!(gid.gst1.toc_entry.TocEntry, GidOwnership.None)(cast(GList*)_cretval);
+    return _retval;
+  }
+
+  /**
+      Gets the tags for entry.
+      Returns: A #GstTagList for entry
+  */
+  gid.gst1.tag_list.TagList getTags() nothrow
+  {
+    GstTagList* _cretval;
+    _cretval = gst_toc_entry_get_tags(cast(const(GstTocEntry)*)this._cPtr);
+    auto _retval = _cretval ? new gid.gst1.tag_list.TagList(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the parent #GstToc of entry.
+      Returns: The parent #GstToc of entry
+  */
+  gid.gst1.toc.Toc getToc() nothrow
+  {
+    GstToc* _cretval;
+    _cretval = gst_toc_entry_get_toc(cast(GstTocEntry*)this._cPtr);
+    auto _retval = _cretval ? new gid.gst1.toc.Toc(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the UID of entry.
+      Returns: The UID of entry
+  */
+  string getUid() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gst_toc_entry_get_uid(cast(const(GstTocEntry)*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /** */
+  bool isAlternative() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_toc_entry_is_alternative(cast(const(GstTocEntry)*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  bool isSequence() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_toc_entry_is_sequence(cast(const(GstTocEntry)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Merge tags into the existing tags of entry using mode.
+  
+      Params:
+        tags = A #GstTagList or null
+        mode = A #GstTagMergeMode
+  */
+  void mergeTags(gid.gst1.tag_list.TagList tags, gid.gst1.types.TagMergeMode mode) nothrow
+  {
+    gst_toc_entry_merge_tags(cast(GstTocEntry*)this._cPtr, tags ? cast(GstTagList*)tags._cPtr(No.Dup) : null, mode);
+  }
+
+  /**
+      Set loop_type and repeat_count values for the entry.
+  
+      Params:
+        loopType = loop_type value to set.
+        repeatCount = repeat_count value to set.
+  */
+  void setLoop(gid.gst1.types.TocLoopType loopType, int repeatCount) nothrow
+  {
+    gst_toc_entry_set_loop(cast(GstTocEntry*)this._cPtr, loopType, repeatCount);
+  }
+
+  /**
+      Set start and stop values for the entry.
+  
+      Params:
+        start = start value to set.
+        stop = stop value to set.
+  */
+  void setStartStopTimes(long start, long stop) nothrow
+  {
+    gst_toc_entry_set_start_stop_times(cast(GstTocEntry*)this._cPtr, start, stop);
+  }
+
+  /**
+      Set a #GstTagList with tags for the complete entry.
+  
+      Params:
+        tags = A #GstTagList or null
+  */
+  void setTags(gid.gst1.tag_list.TagList tags = null) nothrow
+  {
+    gst_toc_entry_set_tags(cast(GstTocEntry*)this._cPtr, tags ? cast(GstTagList*)tags._cPtr(Yes.Dup) : null);
+  }
+}

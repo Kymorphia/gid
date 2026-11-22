@@ -1,0 +1,524 @@
+/// Global functions for gstgl1 library
+module gid.gstgl1.global;
+
+import gid.core.utils;
+import gid.gobject2.object;
+import gid.gobject2.types;
+import gid.gobject2.value;
+import gid.gst1.buffer;
+import gid.gst1.context;
+import gid.gst1.element;
+import gid.gst1.memory;
+import gid.gst1.query;
+import gid.gst1.structure;
+import gid.gstgl1.c.functions;
+import gid.gstgl1.c.types;
+import gid.gstgl1.glallocation_params;
+import gid.gstgl1.glcontext;
+import gid.gstgl1.gldisplay;
+import gid.gstgl1.glsync_meta;
+import gid.gstgl1.types;
+import gid.gstvideo1.types;
+import gid.gstvideo1.video_affine_transformation_meta;
+import gid.gstvideo1.video_alignment;
+import gid.gstvideo1.video_info;
+
+
+/** */
+gid.gstgl1.glsync_meta.GLSyncMeta bufferAddGlSyncMeta(gid.gstgl1.glcontext.GLContext context, gid.gst1.buffer.Buffer buffer) nothrow
+{
+  GstGLSyncMeta* _cretval;
+  _cretval = gst_buffer_add_gl_sync_meta(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new gid.gstgl1.glsync_meta.GLSyncMeta(cast(GstGLSyncMeta*)_cretval, buffer) : null;
+  return _retval;
+}
+
+/** */
+gid.gstgl1.glsync_meta.GLSyncMeta bufferAddGlSyncMetaFull(gid.gstgl1.glcontext.GLContext context, gid.gst1.buffer.Buffer buffer, void* data = null) nothrow
+{
+  GstGLSyncMeta* _cretval;
+  _cretval = gst_buffer_add_gl_sync_meta_full(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, data);
+  auto _retval = _cretval ? new gid.gstgl1.glsync_meta.GLSyncMeta(cast(GstGLSyncMeta*)_cretval, buffer) : null;
+  return _retval;
+}
+
+/** */
+gid.gstgl1.glallocation_params.GLAllocationParams bufferPoolConfigGetGlAllocationParams(gid.gst1.structure.Structure config) nothrow
+{
+  GstGLAllocationParams* _cretval;
+  _cretval = gst_buffer_pool_config_get_gl_allocation_params(config ? cast(GstStructure*)config._cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new gid.gstgl1.glallocation_params.GLAllocationParams(cast(void*)_cretval, Yes.Take) : null;
+  return _retval;
+}
+
+/**
+    See [gid.gstgl1.global.bufferPoolConfigSetGlMinFreeQueueSize].
+
+    Params:
+      config = a buffer pool config
+    Returns: then number of buffers configured the free queue
+*/
+uint bufferPoolConfigGetGlMinFreeQueueSize(gid.gst1.structure.Structure config) nothrow
+{
+  uint _retval;
+  _retval = gst_buffer_pool_config_get_gl_min_free_queue_size(config ? cast(GstStructure*)config._cPtr(No.Dup) : null);
+  return _retval;
+}
+
+/**
+    Sets params on config
+
+    Params:
+      config = a buffer pool config
+      params = a #GstGLAllocationParams
+*/
+void bufferPoolConfigSetGlAllocationParams(gid.gst1.structure.Structure config, gid.gstgl1.glallocation_params.GLAllocationParams params = null) nothrow
+{
+  gst_buffer_pool_config_set_gl_allocation_params(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, params ? cast(const(GstGLAllocationParams)*)params._cPtr(No.Dup) : null);
+}
+
+/**
+    Instructs the #GstGLBufferPool to keep queue_size amount of buffers around
+    before allowing them for reuse.
+    
+    This is helpful to allow GPU processing to complete before the CPU
+    operations on the same buffer could start.  Particularly useful when
+    uploading or downloading data to/from the GPU.
+    
+    A value of 0 disabled this functionality.
+    
+    This value must be less than the configured maximum amount of buffers for
+    this config.
+
+    Params:
+      config = a buffer pool config
+      queueSize = the number of buffers
+*/
+void bufferPoolConfigSetGlMinFreeQueueSize(gid.gst1.structure.Structure config, uint queueSize) nothrow
+{
+  gst_buffer_pool_config_set_gl_min_free_queue_size(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, queueSize);
+}
+
+/** */
+bool contextGetGlDisplay(gid.gst1.context.Context context, out gid.gstgl1.gldisplay.GLDisplay display) nothrow
+{
+  bool _retval;
+  GstGLDisplay* _display;
+  _retval = cast(bool)gst_context_get_gl_display(context ? cast(GstContext*)context._cPtr(No.Dup) : null, &_display);
+  display = gid.gobject2.object.ObjectWrap._getDObject!(gid.gstgl1.gldisplay.GLDisplay)(_display, Yes.Take);
+  return _retval;
+}
+
+/**
+    Sets display on context
+
+    Params:
+      context = a #GstContext
+      display = resulting #GstGLDisplay
+*/
+void contextSetGlDisplay(gid.gst1.context.Context context, gid.gstgl1.gldisplay.GLDisplay display = null) nothrow
+{
+  gst_context_set_gl_display(context ? cast(GstContext*)context._cPtr(No.Dup) : null, display ? cast(GstGLDisplay*)display._cPtr(No.Dup) : null);
+}
+
+/** */
+bool glCheckExtension(string name, string ext) nothrow
+{
+  bool _retval;
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  const(char)* _ext = ext.toCString!(No.Malloc, No.Nullable);
+  _retval = cast(bool)gst_gl_check_extension(_name, _ext);
+  return _retval;
+}
+
+/**
+    Given the DRM formats in src #GValue, collect corresponding GST formats to
+    dst #GValue. This function returns false if  the context is not an EGL
+    context.
+
+    Params:
+      context = a #GstContext
+      src = value of "drm-format" field in #GstCaps as #GValue
+      flags = transformation flags
+      dst = empty destination #GValue
+    Returns: whether any valid GST video formats were found and stored in dst
+*/
+bool glDmaBufTransformDrmFormatsToGstFormats(gid.gstgl1.glcontext.GLContext context, gid.gobject2.value.Value src, gid.gstgl1.types.GLDrmFormatFlags flags, gid.gobject2.value.Value dst) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_gl_dma_buf_transform_drm_formats_to_gst_formats(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, src ? cast(const(GValue)*)src._cPtr(No.Dup) : null, flags, dst ? cast(GValue*)dst._cPtr(No.Dup) : null);
+  return _retval;
+}
+
+/**
+    Given the video formats in src #GValue, collect corresponding drm formats
+    supported by context into dst #GValue. This function returns false if
+    the context is not an EGL context.
+
+    Params:
+      context = a #GstContext
+      src = value of "format" field in #GstCaps as #GValue
+      flags = transformation flags
+      dst = empty destination #GValue
+    Returns: whether any valid drm formats were found and stored in dst
+*/
+bool glDmaBufTransformGstFormatsToDrmFormats(gid.gstgl1.glcontext.GLContext context, gid.gobject2.value.Value src, gid.gstgl1.types.GLDrmFormatFlags flags, gid.gobject2.value.Value dst) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_gl_dma_buf_transform_gst_formats_to_drm_formats(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, src ? cast(const(GValue)*)src._cPtr(No.Dup) : null, flags, dst ? cast(GValue*)dst._cPtr(No.Dup) : null);
+  return _retval;
+}
+
+/** */
+void glElementPropagateDisplayContext(gid.gst1.element.Element element, gid.gstgl1.gldisplay.GLDisplay display) nothrow
+{
+  gst_gl_element_propagate_display_context(element ? cast(GstElement*)element._cPtr(No.Dup) : null, display ? cast(GstGLDisplay*)display._cPtr(No.Dup) : null);
+}
+
+/**
+    Perform the steps necessary for retrieving a #GstGLDisplay and (optionally)
+    an application provided #GstGLContext from the surrounding elements or from
+    the application using the #GstContext mechanism.
+    
+    If the contents of display_ptr or other_context_ptr are not null, then no
+    #GstContext query is necessary for #GstGLDisplay or #GstGLContext retrieval
+    or is performed.
+    
+    This performs #GstContext queries (if necessary) for a winsys display
+    connection with [gid.gstgl1.types.GL_DISPLAY_CONTEXT_TYPE], "gst.x11.display.handle", and
+    "GstWaylandDisplayHandleContextType" stopping after the first successful
+    retrieval.
+    
+    This also performs a #GstContext query (if necessary) for an optional
+    application provided #GstGLContext using the name "gst.gl.app_context".
+    The returned #GstGLContext will be shared with a GStreamer created OpenGL context.
+
+    Params:
+      element = the #GstElement running the query
+      displayPtr = the resulting #GstGLDisplay
+      otherContextPtr = the resulting #GstGLContext
+    Returns: whether a #GstGLDisplay exists in display_ptr
+*/
+bool glEnsureElementData(gid.gst1.element.Element element, ref gid.gstgl1.gldisplay.GLDisplay displayPtr, ref gid.gstgl1.glcontext.GLContext otherContextPtr) nothrow
+{
+  bool _retval;
+  GstGLDisplay* _displayPtr = displayPtr ? cast(GstGLDisplay*)displayPtr._cPtr(Yes.Dup) : null;
+  GstGLContext* _otherContextPtr = otherContextPtr ? cast(GstGLContext*)otherContextPtr._cPtr(Yes.Dup) : null;
+  _retval = cast(bool)gst_gl_ensure_element_data(element ? cast(GstElement*)element._cPtr(No.Dup) : null, &_displayPtr, &_otherContextPtr);
+  displayPtr = gid.gobject2.object.ObjectWrap._getDObject!(gid.gstgl1.gldisplay.GLDisplay)(_displayPtr, Yes.Take);
+  otherContextPtr = gid.gobject2.object.ObjectWrap._getDObject!(gid.gstgl1.glcontext.GLContext)(_otherContextPtr, Yes.Take);
+  return _retval;
+}
+
+/**
+    Retrieves the stored 4x4 affine transformation matrix stored in meta in
+    NDC coordinates. if meta is NULL, an identity matrix is returned.
+    
+    NDC is a left-handed coordinate system
+    - x - [-1, 1] - +ve X moves right
+    - y - [-1, 1] - +ve Y moves up
+    - z - [-1, 1] - +ve Z moves into
+
+    Params:
+      meta = a #GstVideoAffineTransformationMeta
+      matrix = result of the 4x4 matrix
+*/
+void glGetAffineTransformationMetaAsNdc(gid.gstvideo1.video_affine_transformation_meta.VideoAffineTransformationMeta meta, out float[] matrix) nothrow
+{
+  matrix.length = 16;
+  gst_gl_get_affine_transformation_meta_as_ndc(meta ? cast(GstVideoAffineTransformationMeta*)meta._cPtr : null, matrix.ptr);
+}
+
+/**
+    Retrieve the size in bytes of a video plane of data with a certain alignment
+
+    Params:
+      info = a #GstVideoInfo
+      align_ = a #GstVideoAlignment or null
+      plane = plane number in info to retrieve the data size of
+    Returns: 
+*/
+size_t glGetPlaneDataSize(gid.gstvideo1.video_info.VideoInfo info, gid.gstvideo1.video_alignment.VideoAlignment align_, uint plane) nothrow
+{
+  size_t _retval;
+  _retval = gst_gl_get_plane_data_size(info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, cast(const(GstVideoAlignment)*)&align_, plane);
+  return _retval;
+}
+
+/** */
+size_t glGetPlaneStart(gid.gstvideo1.video_info.VideoInfo info, gid.gstvideo1.video_alignment.VideoAlignment valign, uint plane) nothrow
+{
+  size_t _retval;
+  _retval = gst_gl_get_plane_start(info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, cast(const(GstVideoAlignment)*)&valign, plane);
+  return _retval;
+}
+
+/** */
+bool glHandleContextQuery(gid.gst1.element.Element element, gid.gst1.query.Query query, gid.gstgl1.gldisplay.GLDisplay display = null, gid.gstgl1.glcontext.GLContext context = null, gid.gstgl1.glcontext.GLContext otherContext = null) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_gl_handle_context_query(element ? cast(GstElement*)element._cPtr(No.Dup) : null, query ? cast(GstQuery*)query._cPtr(No.Dup) : null, display ? cast(GstGLDisplay*)display._cPtr(No.Dup) : null, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, otherContext ? cast(GstGLContext*)otherContext._cPtr(No.Dup) : null);
+  return _retval;
+}
+
+/**
+    Helper function for implementing #GstElementClass.set_context() in
+    OpenGL capable elements.
+    
+    Retrieve's the #GstGLDisplay or #GstGLContext in context and places the
+    result in display or other_context respectively.
+
+    Params:
+      element = a #GstElement
+      context = a #GstContext
+      display = location of a #GstGLDisplay
+      otherContext = location of a #GstGLContext
+    Returns: whether the display or other_context could be set successfully
+*/
+bool glHandleSetContext(gid.gst1.element.Element element, gid.gst1.context.Context context, out gid.gstgl1.gldisplay.GLDisplay display, out gid.gstgl1.glcontext.GLContext otherContext) nothrow
+{
+  bool _retval;
+  GstGLDisplay* _display;
+  GstGLContext* _otherContext;
+  _retval = cast(bool)gst_gl_handle_set_context(element ? cast(GstElement*)element._cPtr(No.Dup) : null, context ? cast(GstContext*)context._cPtr(No.Dup) : null, &_display, &_otherContext);
+  display = gid.gobject2.object.ObjectWrap._getDObject!(gid.gstgl1.gldisplay.GLDisplay)(_display, Yes.Take);
+  otherContext = gid.gobject2.object.ObjectWrap._getDObject!(gid.gstgl1.glcontext.GLContext)(_otherContext, Yes.Take);
+  return _retval;
+}
+
+/**
+    Multiplies two 4x4 matrices, `a` and `b`, and stores the result, a
+    2-dimensional array of #gfloat, in result.
+
+    Params:
+      a = a 2-dimensional 4x4 array of #gfloat
+      b = another 2-dimensional 4x4 array of #gfloat
+      result = the result of the multiplication
+*/
+void glMultiplyMatrix4(float[] a, float[] b, out float[] result) nothrow
+{
+  if (a.length > 16) a = a[0 .. 16];
+  auto _a = cast(float*)a.ptr;
+  typeof(*_a)[16] _a_fixed = void;
+  if (a.length < 16)
+  {
+    (cast(ubyte[])_a_fixed[])[] = 0;
+    _a_fixed[0 .. a.length] = _a[0 .. a.length];
+    _a = _a_fixed.ptr;
+  }
+  if (b.length > 16) b = b[0 .. 16];
+  auto _b = cast(float*)b.ptr;
+  typeof(*_b)[16] _b_fixed = void;
+  if (b.length < 16)
+  {
+    (cast(ubyte[])_b_fixed[])[] = 0;
+    _b_fixed[0 .. b.length] = _b[0 .. b.length];
+    _b = _b_fixed.ptr;
+  }
+  result.length = 16;
+  gst_gl_multiply_matrix4(_a, _b, result.ptr);
+}
+
+/**
+    Set the 4x4 affine transformation matrix stored in meta from the
+    NDC coordinates in matrix.
+
+    Params:
+      meta = a #GstVideoAffineTransformationMeta
+      matrix = a 4x4 matrix
+*/
+void glSetAffineTransformationMetaFromNdc(gid.gstvideo1.video_affine_transformation_meta.VideoAffineTransformationMeta meta, float[] matrix) nothrow
+{
+  if (matrix.length > 16) matrix = matrix[0 .. 16];
+  auto _matrix = cast(float*)matrix.ptr;
+  typeof(*_matrix)[16] _matrix_fixed = void;
+  if (matrix.length < 16)
+  {
+    (cast(ubyte[])_matrix_fixed[])[] = 0;
+    _matrix_fixed[0 .. matrix.length] = _matrix[0 .. matrix.length];
+    _matrix = _matrix_fixed.ptr;
+  }
+  gst_gl_set_affine_transformation_meta_from_ndc(meta ? cast(GstVideoAffineTransformationMeta*)meta._cPtr : null, _matrix);
+}
+
+/** */
+uint glSizedGlFormatFromGlFormatType(gid.gstgl1.glcontext.GLContext context, uint format, uint type) nothrow
+{
+  uint _retval;
+  _retval = gst_gl_sized_gl_format_from_gl_format_type(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, format, type);
+  return _retval;
+}
+
+/** */
+gid.gobject2.types.GType glStereoDownmixModeGetType() nothrow
+{
+  gid.gobject2.types.GType _retval;
+  _retval = gst_gl_stereo_downmix_mode_get_type();
+  return _retval;
+}
+
+/**
+    Given swizzle, produce inversion such that:
+    
+    swizzle[inversion[i]] == identity[i] where:
+    - identity = {0, 1, 2,...}
+    - unset fields are marked by -1
+
+    Params:
+      swizzle = input swizzle
+      inversion = resulting inversion
+*/
+void glSwizzleInvert(int[] swizzle, out int[] inversion) nothrow
+{
+  if (swizzle.length > 4) swizzle = swizzle[0 .. 4];
+  auto _swizzle = cast(int*)swizzle.ptr;
+  typeof(*_swizzle)[4] _swizzle_fixed = void;
+  if (swizzle.length < 4)
+  {
+    (cast(ubyte[])_swizzle_fixed[])[] = 0;
+    _swizzle_fixed[0 .. swizzle.length] = _swizzle[0 .. swizzle.length];
+    _swizzle = _swizzle_fixed.ptr;
+  }
+  inversion.length = 4;
+  gst_gl_swizzle_invert(_swizzle, inversion.ptr);
+}
+
+/** */
+gid.gobject2.types.GType glSyncMetaApiGetType() nothrow
+{
+  gid.gobject2.types.GType _retval;
+  _retval = gst_gl_sync_meta_api_get_type();
+  return _retval;
+}
+
+/**
+    See [gid.gstgl1.global.glValueSetTextureTargetFromMask] for what entails a mask
+
+    Params:
+      value = an initialized #GValue of type G_TYPE_STRING
+    Returns: the mask of #GstGLTextureTarget's in value or
+          [gid.gstgl1.types.GLTextureTarget.None] on failure
+*/
+gid.gstgl1.types.GLTextureTarget glValueGetTextureTargetMask(gid.gobject2.value.Value value) nothrow
+{
+  GstGLTextureTarget _cretval;
+  _cretval = gst_gl_value_get_texture_target_mask(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
+  gid.gstgl1.types.GLTextureTarget _retval = cast(gid.gstgl1.types.GLTextureTarget)_cretval;
+  return _retval;
+}
+
+/** */
+bool glValueSetTextureTarget(gid.gobject2.value.Value value, gid.gstgl1.types.GLTextureTarget target) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_gl_value_set_texture_target(value ? cast(GValue*)value._cPtr(No.Dup) : null, target);
+  return _retval;
+}
+
+/**
+    A mask is a bitwise OR of (1 << target) where target is a valid
+    #GstGLTextureTarget
+
+    Params:
+      value = an uninitialized #GValue
+      targetMask = a bitwise mask of #GstGLTextureTarget's
+    Returns: whether the target_mask could be set on value
+*/
+bool glValueSetTextureTargetFromMask(gid.gobject2.value.Value value, gid.gstgl1.types.GLTextureTarget targetMask) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_gl_value_set_texture_target_from_mask(value ? cast(GValue*)value._cPtr(No.Dup) : null, targetMask);
+  return _retval;
+}
+
+/** */
+gid.gstgl1.types.GLSLVersion glVersionToGlslVersion(gid.gstgl1.types.GLAPI glApi, int maj, int min) nothrow
+{
+  GstGLSLVersion _cretval;
+  _cretval = gst_gl_version_to_glsl_version(glApi, maj, min);
+  gid.gstgl1.types.GLSLVersion _retval = cast(gid.gstgl1.types.GLSLVersion)_cretval;
+  return _retval;
+}
+
+/**
+    Calculates the swizzle indices for video_format and gl_format in order to
+    access a texture such that accessing a texel from a texture through the swizzle
+    index produces values in the order (R, G, B, A) or (Y, U, V, A).
+    
+    For multi-planer formats, the swizzle index uses the same component order (RGBA/YUVA)
+    and should be applied after combining multiple planes into a single rgba/yuva value.
+    e.g. sampling from a NV12 format would have Y from one texture and UV from
+    another texture into a (Y, U, V) value.  Add an Aplha component and then
+    perform swizzling.  Sampling from NV21 would produce (Y, V, U) which is then
+    swizzled to (Y, U, V).
+
+    Params:
+      videoFormat = the #GstVideoFormat in use
+      swizzle = the returned swizzle indices
+    Returns: whether valid swizzle indices could be found
+*/
+bool glVideoFormatSwizzle(gid.gstvideo1.types.VideoFormat videoFormat, out int[] swizzle) nothrow
+{
+  bool _retval;
+  swizzle.length = 4;
+  _retval = cast(bool)gst_gl_video_format_swizzle(videoFormat, swizzle.ptr);
+  return _retval;
+}
+
+/**
+    Note: this function first searches the first 1 kilobytes for a `#version`
+    preprocessor directive and then executes [gid.gstgl1.global.glslVersionProfileFromString].
+
+    Params:
+      s = string to search for a valid `#version` string
+      version_ = resulting #GstGLSLVersion
+      profile = resulting #GstGLSLProfile
+    Returns: TRUE if a valid `#version` string was found, FALSE otherwise
+*/
+bool glslStringGetVersionProfile(string s, out gid.gstgl1.types.GLSLVersion version_, out gid.gstgl1.types.GLSLProfile profile) nothrow
+{
+  bool _retval;
+  const(char)* _s = s.toCString!(No.Malloc, No.Nullable);
+  _retval = cast(bool)gst_glsl_string_get_version_profile(_s, &version_, &profile);
+  return _retval;
+}
+
+/** */
+bool isGlBaseMemory(gid.gst1.memory.Memory mem) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_is_gl_base_memory(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
+  return _retval;
+}
+
+/** */
+bool isGlBuffer(gid.gst1.memory.Memory mem) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_is_gl_buffer(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
+  return _retval;
+}
+
+/** */
+bool isGlMemory(gid.gst1.memory.Memory mem) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_is_gl_memory(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
+  return _retval;
+}
+
+/** */
+bool isGlMemoryPbo(gid.gst1.memory.Memory mem) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_is_gl_memory_pbo(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
+  return _retval;
+}
+
+/** */
+bool isGlRenderbuffer(gid.gst1.memory.Memory mem) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_is_gl_renderbuffer(mem ? cast(GstMemory*)mem._cPtr(No.Dup) : null);
+  return _retval;
+}

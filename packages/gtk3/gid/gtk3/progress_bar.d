@@ -1,0 +1,486 @@
+/// Module for [ProgressBar] class
+module gid.gtk3.progress_bar;
+
+public import gid.core.basictypes;
+import gid.atk1.implementor_iface;
+import gid.atk1.implementor_iface_mixin;
+import gid.core.utils;
+import gid.gobject2.gid_builder;
+import gid.gtk3.buildable;
+import gid.gtk3.buildable_mixin;
+import gid.gtk3.c.functions;
+import gid.gtk3.c.types;
+import gid.gtk3.orientable;
+import gid.gtk3.orientable_mixin;
+import gid.gtk3.types;
+import gid.gtk3.widget;
+import gid.pango1.types;
+
+/**
+    The #GtkProgressBar is typically used to display the progress of a long
+    running operation. It provides a visual clue that processing is underway.
+    The GtkProgressBar can be used in two different modes: percentage mode
+    and activity mode.
+    
+    When an application can determine how much work needs to take place
+    (e.g. read a fixed number of bytes from a file) and can monitor its
+    progress, it can use the GtkProgressBar in percentage mode and the
+    user sees a growing bar indicating the percentage of the work that
+    has been completed. In this mode, the application is required to call
+    [gid.gtk4.progress_bar.ProgressBar.setFraction] periodically to update the progress bar.
+    
+    When an application has no accurate way of knowing the amount of work
+    to do, it can use the #GtkProgressBar in activity mode, which shows
+    activity by a block moving back and forth within the progress area. In
+    this mode, the application is required to call [gid.gtk4.progress_bar.ProgressBar.pulse]
+    periodically to update the progress bar.
+    
+    There is quite a bit of flexibility provided to control the appearance
+    of the #GtkProgressBar. Functions are provided to control the orientation
+    of the bar, optional text can be displayed along with the bar, and the
+    step size used in activity mode can be set.
+    
+    # CSS nodes
+    
+    ```plain
+    progressbar[.osd]
+    ├── [text]
+    ╰── trough[.empty][.full]
+        ╰── progress[.pulse]
+    ```
+    
+    GtkProgressBar has a main CSS node with name progressbar and subnodes with
+    names text and trough, of which the latter has a subnode named progress. The
+    text subnode is only present if text is shown. The progress subnode has the
+    style class .pulse when in activity mode. It gets the style classes .left,
+    .right, .top or .bottom added when the progress 'touches' the corresponding
+    end of the GtkProgressBar. The .osd class on the progressbar node is for use
+    in overlays like the one Epiphany has for page loading progress.
+*/
+class ProgressBar : gid.gtk3.widget.Widget, gid.gtk3.orientable.Orientable
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_progress_bar_get_type != &gidSymbolNotFound ? gtk_progress_bar_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkProgressBar";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ProgressBar self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk3.progress_bar.ProgressBar]
+      Returns: New builder object
+  */
+  static ProgressBarGidBuilder builder() nothrow
+  {
+    return new ProgressBarGidBuilder;
+  }
+
+  /**
+      Get `ellipsize` property.
+      Returns: The preferred place to ellipsize the string, if the progress bar does
+        not have enough room to display the entire string, specified as a
+        #PangoEllipsizeMode.
+        
+        Note that setting this property to a value other than
+        [gid.pango1.types.EllipsizeMode.None] has the side-effect that the progress bar requests
+        only enough space to display the ellipsis ("..."). Another means to set a
+        progress bar's width is [gid.gtk4.widget.Widget.setSizeRequest].
+  */
+  @property gid.pango1.types.EllipsizeMode ellipsize() nothrow
+  {
+    return getEllipsize();
+  }
+
+  /**
+      Set `ellipsize` property.
+      Params:
+        propval = The preferred place to ellipsize the string, if the progress bar does
+          not have enough room to display the entire string, specified as a
+          #PangoEllipsizeMode.
+          
+          Note that setting this property to a value other than
+          [gid.pango1.types.EllipsizeMode.None] has the side-effect that the progress bar requests
+          only enough space to display the ellipsis ("..."). Another means to set a
+          progress bar's width is [gid.gtk4.widget.Widget.setSizeRequest].
+  */
+  @property void ellipsize(gid.pango1.types.EllipsizeMode propval) nothrow
+  {
+    setEllipsize(propval);
+  }
+
+  /** */
+  @property double fraction() nothrow
+  {
+    return getFraction();
+  }
+
+  /** */
+  @property void fraction(double propval) nothrow
+  {
+    setFraction(propval);
+  }
+
+  /** */
+  @property bool inverted() nothrow
+  {
+    return getInverted();
+  }
+
+  /** */
+  @property void inverted(bool propval) nothrow
+  {
+    setInverted(propval);
+  }
+
+  /** */
+  @property double pulseStep() nothrow
+  {
+    return getPulseStep();
+  }
+
+  /** */
+  @property void pulseStep(double propval) nothrow
+  {
+    setPulseStep(propval);
+  }
+
+  /**
+      Get `showText` property.
+      Returns: Sets whether the progress bar will show a text in addition
+        to the bar itself. The shown text is either the value of
+        the #GtkProgressBar:text property or, if that is null,
+        the #GtkProgressBar:fraction value, as a percentage.
+        
+        To make a progress bar that is styled and sized suitably for
+        showing text (even if the actual text is blank), set
+        #GtkProgressBar:show-text to true and #GtkProgressBar:text
+        to the empty string (not null).
+  */
+  @property bool showText() nothrow
+  {
+    return getShowText();
+  }
+
+  /**
+      Set `showText` property.
+      Params:
+        propval = Sets whether the progress bar will show a text in addition
+          to the bar itself. The shown text is either the value of
+          the #GtkProgressBar:text property or, if that is null,
+          the #GtkProgressBar:fraction value, as a percentage.
+          
+          To make a progress bar that is styled and sized suitably for
+          showing text (even if the actual text is blank), set
+          #GtkProgressBar:show-text to true and #GtkProgressBar:text
+          to the empty string (not null).
+  */
+  @property void showText(bool propval) nothrow
+  {
+    setShowText(propval);
+  }
+
+  /** */
+  @property string text() nothrow
+  {
+    return getText();
+  }
+
+  /** */
+  @property void text(string propval) nothrow
+  {
+    setText(propval);
+  }
+
+  mixin OrientableT!();
+
+  /**
+      Creates a new #GtkProgressBar.
+      Returns: a #GtkProgressBar.
+  */
+  this() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_progress_bar_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Returns the ellipsizing position of the progress bar.
+      See [gid.gtk4.progress_bar.ProgressBar.setEllipsize].
+      Returns: #PangoEllipsizeMode
+  */
+  gid.pango1.types.EllipsizeMode getEllipsize() nothrow
+  {
+    PangoEllipsizeMode _cretval;
+    _cretval = gtk_progress_bar_get_ellipsize(cast(GtkProgressBar*)this._cPtr);
+    gid.pango1.types.EllipsizeMode _retval = cast(gid.pango1.types.EllipsizeMode)_cretval;
+    return _retval;
+  }
+
+  /**
+      Returns the current fraction of the task that’s been completed.
+      Returns: a fraction from 0.0 to 1.0
+  */
+  double getFraction() nothrow
+  {
+    double _retval;
+    _retval = gtk_progress_bar_get_fraction(cast(GtkProgressBar*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the value set by [gid.gtk4.progress_bar.ProgressBar.setInverted].
+      Returns: true if the progress bar is inverted
+  */
+  bool getInverted() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_progress_bar_get_inverted(cast(GtkProgressBar*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves the pulse step set with [gid.gtk4.progress_bar.ProgressBar.setPulseStep].
+      Returns: a fraction from 0.0 to 1.0
+  */
+  double getPulseStep() nothrow
+  {
+    double _retval;
+    _retval = gtk_progress_bar_get_pulse_step(cast(GtkProgressBar*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the value of the #GtkProgressBar:show-text property.
+      See [gid.gtk4.progress_bar.ProgressBar.setShowText].
+      Returns: true if text is shown in the progress bar
+  */
+  bool getShowText() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_progress_bar_get_show_text(cast(GtkProgressBar*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves the text that is displayed with the progress bar,
+      if any, otherwise null. The return value is a reference
+      to the text, not a copy of it, so will become invalid
+      if you change the text in the progress bar.
+      Returns: text, or null; this string is owned by the widget
+        and should not be modified or freed.
+  */
+  string getText() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_progress_bar_get_text(cast(GtkProgressBar*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Indicates that some progress has been made, but you don’t know how much.
+      Causes the progress bar to enter “activity mode,” where a block
+      bounces back and forth. Each call to [gid.gtk4.progress_bar.ProgressBar.pulse]
+      causes the block to move by a little bit (the amount of movement
+      per pulse is determined by [gid.gtk4.progress_bar.ProgressBar.setPulseStep]).
+  */
+  void pulse() nothrow
+  {
+    gtk_progress_bar_pulse(cast(GtkProgressBar*)this._cPtr);
+  }
+
+  /**
+      Sets the mode used to ellipsize (add an ellipsis: "...") the
+      text if there is not enough space to render the entire string.
+  
+      Params:
+        mode = a #PangoEllipsizeMode
+  */
+  void setEllipsize(gid.pango1.types.EllipsizeMode mode) nothrow
+  {
+    gtk_progress_bar_set_ellipsize(cast(GtkProgressBar*)this._cPtr, mode);
+  }
+
+  /**
+      Causes the progress bar to “fill in” the given fraction
+      of the bar. The fraction should be between 0.0 and 1.0,
+      inclusive.
+  
+      Params:
+        fraction = fraction of the task that’s been completed
+  */
+  void setFraction(double fraction) nothrow
+  {
+    gtk_progress_bar_set_fraction(cast(GtkProgressBar*)this._cPtr, fraction);
+  }
+
+  /**
+      Progress bars normally grow from top to bottom or left to right.
+      Inverted progress bars grow in the opposite direction.
+  
+      Params:
+        inverted = true to invert the progress bar
+  */
+  void setInverted(bool inverted) nothrow
+  {
+    gtk_progress_bar_set_inverted(cast(GtkProgressBar*)this._cPtr, inverted);
+  }
+
+  /**
+      Sets the fraction of total progress bar length to move the
+      bouncing block for each call to [gid.gtk4.progress_bar.ProgressBar.pulse].
+  
+      Params:
+        fraction = fraction between 0.0 and 1.0
+  */
+  void setPulseStep(double fraction) nothrow
+  {
+    gtk_progress_bar_set_pulse_step(cast(GtkProgressBar*)this._cPtr, fraction);
+  }
+
+  /**
+      Sets whether the progress bar will show text next to the bar.
+      The shown text is either the value of the #GtkProgressBar:text
+      property or, if that is null, the #GtkProgressBar:fraction value,
+      as a percentage.
+      
+      To make a progress bar that is styled and sized suitably for containing
+      text (even if the actual text is blank), set #GtkProgressBar:show-text to
+      true and #GtkProgressBar:text to the empty string (not null).
+  
+      Params:
+        showText = whether to show text
+  */
+  void setShowText(bool showText) nothrow
+  {
+    gtk_progress_bar_set_show_text(cast(GtkProgressBar*)this._cPtr, showText);
+  }
+
+  /**
+      Causes the given text to appear next to the progress bar.
+      
+      If text is null and #GtkProgressBar:show-text is true, the current
+      value of #GtkProgressBar:fraction will be displayed as a percentage.
+      
+      If text is non-null and #GtkProgressBar:show-text is true, the text
+      will be displayed. In this case, it will not display the progress
+      percentage. If text is the empty string, the progress bar will still
+      be styled and sized suitably for containing text, as long as
+      #GtkProgressBar:show-text is true.
+  
+      Params:
+        text = a UTF-8 string, or null
+  */
+  void setText(string text = null) nothrow
+  {
+    const(char)* _text = text.toCString!(No.Malloc, Yes.Nullable);
+    gtk_progress_bar_set_text(cast(GtkProgressBar*)this._cPtr, _text);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk3.progress_bar.ProgressBar]
+class ProgressBarGidBuilderImpl(T) : gid.gtk3.widget.WidgetGidBuilderImpl!T, gid.gtk3.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `ellipsize` property.
+      Params:
+        propval = The preferred place to ellipsize the string, if the progress bar does
+          not have enough room to display the entire string, specified as a
+          #PangoEllipsizeMode.
+          
+          Note that setting this property to a value other than
+          [gid.pango1.types.EllipsizeMode.None] has the side-effect that the progress bar requests
+          only enough space to display the ellipsis ("..."). Another means to set a
+          progress bar's width is [gid.gtk4.widget.Widget.setSizeRequest].
+      Returns: Builder instance for fluent chaining
+  */
+  T ellipsize(gid.pango1.types.EllipsizeMode propval) nothrow
+  {
+    return setProperty("ellipsize", propval);
+  }
+
+  /** */
+  T fraction(double propval) nothrow
+  {
+    return setProperty("fraction", propval);
+  }
+
+  /** */
+  T inverted(bool propval) nothrow
+  {
+    return setProperty("inverted", propval);
+  }
+
+  /** */
+  T pulseStep(double propval) nothrow
+  {
+    return setProperty("pulse-step", propval);
+  }
+
+  /**
+      Set `showText` property.
+      Params:
+        propval = Sets whether the progress bar will show a text in addition
+          to the bar itself. The shown text is either the value of
+          the #GtkProgressBar:text property or, if that is null,
+          the #GtkProgressBar:fraction value, as a percentage.
+          
+          To make a progress bar that is styled and sized suitably for
+          showing text (even if the actual text is blank), set
+          #GtkProgressBar:show-text to true and #GtkProgressBar:text
+          to the empty string (not null).
+      Returns: Builder instance for fluent chaining
+  */
+  T showText(bool propval) nothrow
+  {
+    return setProperty("show-text", propval);
+  }
+
+  /** */
+  T text(string propval) nothrow
+  {
+    return setProperty("text", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk3.progress_bar.ProgressBar]
+final class ProgressBarGidBuilder : ProgressBarGidBuilderImpl!ProgressBarGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  ProgressBar build() nothrow
+  {
+    return new ProgressBar(cast(void*)createGObject(ProgressBar._getGType), Yes.Take);
+  }
+}

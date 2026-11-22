@@ -1,0 +1,305 @@
+/// Module for [Notification] class
+module gid.gio2.notification;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gio2.c.functions;
+import gid.gio2.c.types;
+import gid.gio2.icon;
+import gid.gio2.types;
+import gid.glib2.variant;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+
+/**
+    [gid.gio2.notification.Notification] is a mechanism for creating a notification to be shown
+    to the user — typically as a pop-up notification presented by the
+    desktop environment shell.
+    
+    The key difference between [gid.gio2.notification.Notification] and other similar APIs is
+    that, if supported by the desktop environment, notifications sent
+    with [gid.gio2.notification.Notification] will persist after the application has exited,
+    and even across system reboots.
+    
+    Since the user may click on a notification while the application is
+    not running, applications using [gid.gio2.notification.Notification] should be able to be
+    started as a D-Bus service, using [gid.gio2.application.Application].
+    
+    In order for [gid.gio2.notification.Notification] to work, the application must have installed
+    a `.desktop` file. For example:
+    ```
+    [Desktop Entry]
+    Name=Test Application
+    Comment=Description of what Test Application does
+    Exec=gnome-test-application
+    Icon=org.gnome.TestApplication
+    Terminal=false
+    Type=Application
+    Categories=GNOME;GTK;TestApplication Category;
+    StartupNotify=true
+    DBusActivatable=true
+    X-GNOME-UsesNotifications=true
+    ```
+    
+    The `X-GNOME-UsesNotifications` key indicates to GNOME Control Center
+    that this application uses notifications, so it can be listed in the
+    Control Center’s ‘Notifications’ panel.
+    
+    The `.desktop` file must be named as `org.gnome.TestApplication.desktop`,
+    where `org.gnome.TestApplication` is the ID passed to
+    [gid.gio2.application.Application.new_].
+    
+    User interaction with a notification (either the default action, or
+    buttons) must be associated with actions on the application (ie:
+    `app.` actions).  It is not possible to route user interaction
+    through the notification itself, because the object will not exist if
+    the application is autostarted as a result of a notification being
+    clicked.
+    
+    A notification can be sent with [gid.gio2.application.Application.sendNotification].
+    
+    In Windows, notification actions are unsupported, when sending the notification
+    a warning will be printed if a default action or action buttons were added.
+*/
+class Notification : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())g_notification_get_type != &gidSymbolNotFound ? g_notification_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GNotification";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Notification self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gio2.notification.Notification]
+      Returns: New builder object
+  */
+  static NotificationGidBuilder builder() nothrow
+  {
+    return new NotificationGidBuilder;
+  }
+
+  /**
+      Creates a new #GNotification with title as its title.
+      
+      After populating notification with more details, it can be sent to
+      the desktop shell with [gid.gio2.application.Application.sendNotification]. Changing
+      any properties after this call will not have any effect until
+      resending notification.
+  
+      Params:
+        title = the title of the notification
+      Returns: a new #GNotification instance
+  */
+  this(string title) nothrow
+  {
+    GNotification* _cretval;
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
+    _cretval = g_notification_new(_title);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Adds a button to notification that activates the action in
+      detailed_action when clicked. That action must be an
+      application-wide action (starting with "app."). If detailed_action
+      contains a target, the action will be activated with that target as
+      its parameter.
+      
+      See [gid.gio2.action.Action.parseDetailedName] for a description of the format
+      for detailed_action.
+  
+      Params:
+        label = label of the button
+        detailedAction = a detailed action name
+  */
+  void addButton(string label, string detailedAction) nothrow
+  {
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
+    const(char)* _detailedAction = detailedAction.toCString!(No.Malloc, No.Nullable);
+    g_notification_add_button(cast(GNotification*)this._cPtr, _label, _detailedAction);
+  }
+
+  /**
+      Adds a button to notification that activates action when clicked.
+      action must be an application-wide action (it must start with "app.").
+      
+      If target is non-null, action will be activated with target as
+      its parameter.
+  
+      Params:
+        label = label of the button
+        action = an action name
+        target = a #GVariant to use as action's parameter, or null
+  */
+  void addButtonWithTarget(string label, string action, gid.glib2.variant.Variant target = null) nothrow
+  {
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
+    const(char)* _action = action.toCString!(No.Malloc, No.Nullable);
+    g_notification_add_button_with_target_value(cast(GNotification*)this._cPtr, _label, _action, target ? cast(GVariant*)target._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the body of notification to body.
+  
+      Params:
+        body_ = the new body for notification, or null
+  */
+  void setBody(string body_ = null) nothrow
+  {
+    const(char)* _body_ = body_.toCString!(No.Malloc, Yes.Nullable);
+    g_notification_set_body(cast(GNotification*)this._cPtr, _body_);
+  }
+
+  /**
+      Sets the type of notification to category. Categories have a main
+      type like `email`, `im` or `device` and can have a detail separated
+      by a `.`, e.g. `im.received` or `email.arrived`. Setting the category
+      helps the notification server to select proper feedback to the user.
+      
+      Standard categories are [listed in the specification](https://specifications.freedesktop.org/notification-spec/latest/ar01s06.html).
+  
+      Params:
+        category = the category for notification, or null for no category
+  */
+  void setCategory(string category = null) nothrow
+  {
+    const(char)* _category = category.toCString!(No.Malloc, Yes.Nullable);
+    g_notification_set_category(cast(GNotification*)this._cPtr, _category);
+  }
+
+  /**
+      Sets the default action of notification to detailed_action. This
+      action is activated when the notification is clicked on.
+      
+      The action in detailed_action must be an application-wide action (it
+      must start with "app."). If detailed_action contains a target, the
+      given action will be activated with that target as its parameter.
+      See [gid.gio2.action.Action.parseDetailedName] for a description of the format
+      for detailed_action.
+      
+      When no default action is set, the application that the notification
+      was sent on is activated.
+  
+      Params:
+        detailedAction = a detailed action name
+  */
+  void setDefaultAction(string detailedAction) nothrow
+  {
+    const(char)* _detailedAction = detailedAction.toCString!(No.Malloc, No.Nullable);
+    g_notification_set_default_action(cast(GNotification*)this._cPtr, _detailedAction);
+  }
+
+  /**
+      Sets the default action of notification to action. This action is
+      activated when the notification is clicked on. It must be an
+      application-wide action (start with "app.").
+      
+      If target is non-null, action will be activated with target as
+      its parameter. If target is floating, it will be consumed.
+      
+      When no default action is set, the application that the notification
+      was sent on is activated.
+  
+      Params:
+        action = an action name
+        target = a #GVariant to use as action's parameter, or null
+  */
+  void setDefaultActionAndTarget(string action, gid.glib2.variant.Variant target = null) nothrow
+  {
+    const(char)* _action = action.toCString!(No.Malloc, No.Nullable);
+    g_notification_set_default_action_and_target_value(cast(GNotification*)this._cPtr, _action, target ? cast(GVariant*)target._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the icon of notification to icon.
+  
+      Params:
+        icon = the icon to be shown in notification, as a #GIcon
+  */
+  void setIcon(gid.gio2.icon.Icon icon) nothrow
+  {
+    g_notification_set_icon(cast(GNotification*)this._cPtr, icon ? cast(GIcon*)(cast(gid.gobject2.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the priority of notification to priority. See
+      #GNotificationPriority for possible values.
+  
+      Params:
+        priority = a #GNotificationPriority
+  */
+  void setPriority(gid.gio2.types.NotificationPriority priority) nothrow
+  {
+    g_notification_set_priority(cast(GNotification*)this._cPtr, priority);
+  }
+
+  /**
+      Sets the title of notification to title.
+  
+      Params:
+        title = the new title for notification
+  */
+  void setTitle(string title) nothrow
+  {
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
+    g_notification_set_title(cast(GNotification*)this._cPtr, _title);
+  }
+
+  /**
+      Deprecated in favor of [gid.gio2.notification.Notification.setPriority].
+  
+      Params:
+        urgent = true if notification is urgent
+  
+      Deprecated: Since 2.42, this has been deprecated in favour of
+           [gid.gio2.notification.Notification.setPriority].
+  */
+  void setUrgent(bool urgent) nothrow
+  {
+    g_notification_set_urgent(cast(GNotification*)this._cPtr, urgent);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gio2.notification.Notification]
+class NotificationGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gio2.notification.Notification]
+final class NotificationGidBuilder : NotificationGidBuilderImpl!NotificationGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Notification build() nothrow
+  {
+    return new Notification(cast(void*)createGObject(Notification._getGType), Yes.Take);
+  }
+}

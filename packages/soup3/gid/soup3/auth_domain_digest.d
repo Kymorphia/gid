@@ -1,0 +1,186 @@
+/// Module for [AuthDomainDigest] class
+module gid.soup3.auth_domain_digest;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.soup3.auth_domain;
+import gid.soup3.c.functions;
+import gid.soup3.c.types;
+import gid.soup3.server_message;
+import gid.soup3.types;
+
+/**
+    Server-side "Digest" authentication.
+    
+    [gid.soup3.auth_domain_digest.AuthDomainDigest] handles the server side of HTTP "Digest"
+    authentication.
+*/
+class AuthDomainDigest : gid.soup3.auth_domain.AuthDomain
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())soup_auth_domain_digest_get_type != &gidSymbolNotFound ? soup_auth_domain_digest_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupAuthDomainDigest";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override AuthDomainDigest self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.soup3.auth_domain_digest.AuthDomainDigest]
+      Returns: New builder object
+  */
+  static AuthDomainDigestGidBuilder builder() nothrow
+  {
+    return new AuthDomainDigestGidBuilder;
+  }
+
+  /**
+      Get `authData` property.
+      Returns: The data to pass to the [gid.soup3.types.AuthDomainDigestAuthCallback].
+  */
+  @property void* authData() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(void*)("auth-data");
+  }
+
+  /**
+      Set `authData` property.
+      Params:
+        propval = The data to pass to the [gid.soup3.types.AuthDomainDigestAuthCallback].
+  */
+  @property void authData(void* propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(void*)("auth-data", propval);
+  }
+
+  /**
+      Encodes the username/realm/password triplet for Digest
+      authentication.
+      
+      That is, it returns a stringified MD5 hash of
+      username, realm, and password concatenated together. This is
+      the form that is needed as the return value of
+      [gid.soup3.auth_domain_digest.AuthDomainDigest]'s auth handler.
+      
+      For security reasons, you should store the encoded hash, rather
+      than storing the cleartext password itself and calling this method
+      only when you need to verify it. This way, if your server is
+      compromised, the attackers will not gain access to cleartext
+      passwords which might also be usable at other sites. (Note also
+      that the encoded password returned by this method is identical to
+      the encoded password stored in an Apache .htdigest file.)
+  
+      Params:
+        username = a username
+        realm = an auth realm name
+        password = the password for username in realm
+      Returns: the encoded password
+  */
+  static string encodePassword(string username, string realm, string password) nothrow
+  {
+    char* _cretval;
+    const(char)* _username = username.toCString!(No.Malloc, No.Nullable);
+    const(char)* _realm = realm.toCString!(No.Malloc, No.Nullable);
+    const(char)* _password = password.toCString!(No.Malloc, No.Nullable);
+    _cretval = soup_auth_domain_digest_encode_password(_username, _realm, _password);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Sets the callback that domain will use to authenticate incoming
+      requests.
+      
+      For each request containing authorization, domain will
+      invoke the callback, and then either accept or reject the request
+      based on callback's return value.
+      
+      You can also set the auth callback by setting the
+      [gid.soup3.auth_domain_digest.AuthDomainDigest.authCallback] and
+      [gid.soup3.auth_domain_digest.AuthDomainDigest.authData] properties, which can also be used to
+      set the callback at construct time.
+  
+      Params:
+        callback = the callback
+  */
+  void setAuthCallback(gid.soup3.types.AuthDomainDigestAuthCallback callback) nothrow
+  {
+    extern(C) char* _callbackCallback(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, void* userData) nothrow
+    {
+      string _dretval;
+      auto _dlg = cast(gid.soup3.types.AuthDomainDigestAuthCallback*)userData;
+      string _username = username.fromCString!(No.Free);
+
+      try
+      {
+        _dretval = (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.soup3.auth_domain_digest.AuthDomainDigest)(cast(void*)domain, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.soup3.server_message.ServerMessage)(cast(void*)msg, No.Take), _username);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.soup3.types.AuthDomainDigestAuthCallback");
+      }
+      auto _retval = toCString!(Yes.Malloc, Yes.Nullable)(_dretval);
+
+      return _retval;
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
+    soup_auth_domain_digest_set_auth_callback(cast(SoupAuthDomain*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
+  }
+}
+
+/// Fluent builder implementation template for [gid.soup3.auth_domain_digest.AuthDomainDigest]
+class AuthDomainDigestGidBuilderImpl(T) : gid.soup3.auth_domain.AuthDomainGidBuilderImpl!T
+{
+
+  /**
+      Set `authData` property.
+      Params:
+        propval = The data to pass to the [gid.soup3.types.AuthDomainDigestAuthCallback].
+      Returns: Builder instance for fluent chaining
+  */
+  T authData(void* propval) nothrow
+  {
+    return setProperty("auth-data", propval);
+  }
+}
+
+/// Fluent builder for [gid.soup3.auth_domain_digest.AuthDomainDigest]
+final class AuthDomainDigestGidBuilder : AuthDomainDigestGidBuilderImpl!AuthDomainDigestGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  AuthDomainDigest build() nothrow
+  {
+    return new AuthDomainDigest(cast(void*)createGObject(AuthDomainDigest._getGType), Yes.Take);
+  }
+}

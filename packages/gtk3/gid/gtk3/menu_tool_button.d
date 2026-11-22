@@ -1,0 +1,268 @@
+/// Module for [MenuToolButton] class
+module gid.gtk3.menu_tool_button;
+
+public import gid.core.basictypes;
+import gid.atk1.implementor_iface;
+import gid.atk1.implementor_iface_mixin;
+import gid.core.utils;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk3.actionable;
+import gid.gtk3.actionable_mixin;
+import gid.gtk3.activatable;
+import gid.gtk3.activatable_mixin;
+import gid.gtk3.buildable;
+import gid.gtk3.buildable_mixin;
+import gid.gtk3.c.functions;
+import gid.gtk3.c.types;
+import gid.gtk3.menu;
+import gid.gtk3.tool_button;
+import gid.gtk3.types;
+import gid.gtk3.widget;
+
+/**
+    A #GtkMenuToolButton is a #GtkToolItem that contains a button and
+    a small additional button with an arrow. When clicked, the arrow
+    button pops up a dropdown menu.
+    
+    Use [gid.gtk3.menu_tool_button.MenuToolButton.new_] to create a new
+    #GtkMenuToolButton.
+    
+    # GtkMenuToolButton as GtkBuildable
+    
+    The GtkMenuToolButton implementation of the GtkBuildable interface
+    supports adding a menu by specifying “menu” as the “type” attribute
+    of a `<child>` element.
+    
+    An example for a UI definition fragment with menus:
+    
+    ```xml
+    <object class="GtkMenuToolButton">
+      <child type="menu">
+        <object class="GtkMenu"/>
+      </child>
+    </object>
+    ```
+*/
+class MenuToolButton : gid.gtk3.tool_button.ToolButton
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_menu_tool_button_get_type != &gidSymbolNotFound ? gtk_menu_tool_button_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkMenuToolButton";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override MenuToolButton self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk3.menu_tool_button.MenuToolButton]
+      Returns: New builder object
+  */
+  static MenuToolButtonGidBuilder builder() nothrow
+  {
+    return new MenuToolButtonGidBuilder;
+  }
+
+  /** */
+  @property gid.gtk3.menu.Menu menu() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gtk3.menu.Menu)("menu");
+  }
+
+  /** */
+  @property void menu(gid.gtk3.menu.Menu propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.gtk3.menu.Menu)("menu", propval);
+  }
+
+  /**
+      Creates a new #GtkMenuToolButton using icon_widget as icon and
+      label as label.
+  
+      Params:
+        iconWidget = a widget that will be used as icon widget, or null
+        label = a string that will be used as label, or null
+      Returns: the new #GtkMenuToolButton
+  */
+  this(gid.gtk3.widget.Widget iconWidget = null, string label = null) nothrow
+  {
+    GtkToolItem* _cretval;
+    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
+    _cretval = gtk_menu_tool_button_new(iconWidget ? cast(GtkWidget*)iconWidget._cPtr(No.Dup) : null, _label);
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Creates a new #GtkMenuToolButton.
+      The new #GtkMenuToolButton will contain an icon and label from
+      the stock item indicated by stock_id.
+  
+      Params:
+        stockId = the name of a stock item
+      Returns: the new #GtkMenuToolButton
+  
+      Deprecated: Use [gid.gtk3.menu_tool_button.MenuToolButton.new_] instead.
+  */
+  static gid.gtk3.menu_tool_button.MenuToolButton newFromStock(string stockId) nothrow
+  {
+    GtkToolItem* _cretval;
+    const(char)* _stockId = stockId.toCString!(No.Malloc, No.Nullable);
+    _cretval = gtk_menu_tool_button_new_from_stock(_stockId);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.menu_tool_button.MenuToolButton)(cast(GtkToolItem*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the #GtkMenu associated with #GtkMenuToolButton.
+      Returns: the #GtkMenu associated
+            with #GtkMenuToolButton
+  */
+  gid.gtk3.widget.Widget getMenu() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_menu_tool_button_get_menu(cast(GtkMenuToolButton*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Sets the tooltip markup text to be used as tooltip for the arrow button
+      which pops up the menu.  See [gid.gtk3.tool_item.ToolItem.setTooltipText] for setting
+      a tooltip on the whole #GtkMenuToolButton.
+  
+      Params:
+        markup = markup text to be used as tooltip text for button’s arrow button
+  */
+  void setArrowTooltipMarkup(string markup) nothrow
+  {
+    const(char)* _markup = markup.toCString!(No.Malloc, No.Nullable);
+    gtk_menu_tool_button_set_arrow_tooltip_markup(cast(GtkMenuToolButton*)this._cPtr, _markup);
+  }
+
+  /**
+      Sets the tooltip text to be used as tooltip for the arrow button which
+      pops up the menu.  See [gid.gtk3.tool_item.ToolItem.setTooltipText] for setting a tooltip
+      on the whole #GtkMenuToolButton.
+  
+      Params:
+        text = text to be used as tooltip text for button’s arrow button
+  */
+  void setArrowTooltipText(string text) nothrow
+  {
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
+    gtk_menu_tool_button_set_arrow_tooltip_text(cast(GtkMenuToolButton*)this._cPtr, _text);
+  }
+
+  /**
+      Sets the #GtkMenu that is popped up when the user clicks on the arrow.
+      If menu is NULL, the arrow button becomes insensitive.
+  
+      Params:
+        menu = the #GtkMenu associated with #GtkMenuToolButton
+  */
+  void setMenu(gid.gtk3.widget.Widget menu) nothrow
+  {
+    gtk_menu_tool_button_set_menu(cast(GtkMenuToolButton*)this._cPtr, menu ? cast(GtkWidget*)menu._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Connect to `ShowMenu` signal.
+  
+      The ::show-menu signal is emitted before the menu is shown.
+        
+        It can be used to populate the menu on demand, using
+        [gid.gtk3.menu_tool_button.MenuToolButton.setMenu].
+        
+        Note that even if you populate the menu dynamically in this way,
+        you must set an empty menu on the #GtkMenuToolButton beforehand,
+        since the arrow is made insensitive if the menu is not set.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk3.menu_tool_button.MenuToolButton menuToolButton)`
+  
+          `menuToolButton` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectShowMenu(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk3.menu_tool_button.MenuToolButton)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.menu_tool_button.MenuToolButton.showMenu");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("show-menu", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk3.menu_tool_button.MenuToolButton]
+class MenuToolButtonGidBuilderImpl(T) : gid.gtk3.tool_button.ToolButtonGidBuilderImpl!T
+{
+
+
+  /** */
+  T menu(gid.gtk3.menu.Menu propval) nothrow
+  {
+    return setProperty("menu", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk3.menu_tool_button.MenuToolButton]
+final class MenuToolButtonGidBuilder : MenuToolButtonGidBuilderImpl!MenuToolButtonGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  MenuToolButton build() nothrow
+  {
+    return new MenuToolButton(cast(void*)createGObject(MenuToolButton._getGType), Yes.Take);
+  }
+}

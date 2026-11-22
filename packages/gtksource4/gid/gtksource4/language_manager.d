@@ -1,0 +1,268 @@
+/// Module for [LanguageManager] class
+module gid.gtksource4.language_manager;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtksource4.c.functions;
+import gid.gtksource4.c.types;
+import gid.gtksource4.language;
+import gid.gtksource4.types;
+
+/** */
+class LanguageManager : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_source_language_manager_get_type != &gidSymbolNotFound ? gtk_source_language_manager_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceLanguageManager";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override LanguageManager self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtksource4.language_manager.LanguageManager]
+      Returns: New builder object
+  */
+  static LanguageManagerGidBuilder builder() nothrow
+  {
+    return new LanguageManagerGidBuilder;
+  }
+
+  /** */
+  @property string[] languageIds() nothrow
+  {
+    return getLanguageIds();
+  }
+
+  /** */
+  @property string[] searchPath() nothrow
+  {
+    return getSearchPath();
+  }
+
+  /** */
+  @property void searchPath(string[] propval) nothrow
+  {
+    setSearchPath(propval);
+  }
+
+  /**
+      Creates a new language manager. If you do not need more than one language
+      manager or a private language manager instance then use
+      [gid.gtksource5.language_manager.LanguageManager.getDefault] instead.
+      Returns: a new #GtkSourceLanguageManager.
+  */
+  this() nothrow
+  {
+    GtkSourceLanguageManager* _cretval;
+    _cretval = gtk_source_language_manager_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Returns the default #GtkSourceLanguageManager instance.
+      Returns: a #GtkSourceLanguageManager.
+        Return value is owned by GtkSourceView library and must not be unref'ed.
+  */
+  static gid.gtksource4.language_manager.LanguageManager getDefault() nothrow
+  {
+    GtkSourceLanguageManager* _cretval;
+    _cretval = gtk_source_language_manager_get_default();
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtksource4.language_manager.LanguageManager)(cast(GtkSourceLanguageManager*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the #GtkSourceLanguage identified by the given id in the language
+      manager.
+  
+      Params:
+        id = a language id.
+      Returns: a #GtkSourceLanguage, or null
+        if there is no language identified by the given id. Return value is
+        owned by lm and should not be freed.
+  */
+  gid.gtksource4.language.Language getLanguage(string id) nothrow
+  {
+    GtkSourceLanguage* _cretval;
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
+    _cretval = gtk_source_language_manager_get_language(cast(GtkSourceLanguageManager*)this._cPtr, _id);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtksource4.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the ids of the available languages.
+      Returns: a null-terminated array of strings containing the ids of the available
+        languages or null if no language is available.
+        The array is sorted alphabetically according to the language name.
+        The array is owned by lm and must not be modified.
+  */
+  string[] getLanguageIds() nothrow
+  {
+    const(char*)* _cretval;
+    _cretval = gtk_source_language_manager_get_language_ids(cast(GtkSourceLanguageManager*)this._cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString!(No.Free);
+    }
+    return _retval;
+  }
+
+  /**
+      Gets the list directories where lm looks for language files.
+      Returns: null-terminated array
+        containg a list of language files directories.
+        The array is owned by lm and must not be modified.
+  */
+  string[] getSearchPath() nothrow
+  {
+    const(char*)* _cretval;
+    _cretval = gtk_source_language_manager_get_search_path(cast(GtkSourceLanguageManager*)this._cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString!(No.Free);
+    }
+    return _retval;
+  }
+
+  /**
+      Picks a #GtkSourceLanguage for given file name and content type,
+      according to the information in lang files. Either filename or
+      content_type may be null. This function can be used as follows:
+      
+      <informalexample><programlisting>
+        GtkSourceLanguage *lang;
+        lang = gtk_source_language_manager_guess_language (filename, NULL);
+        gtk_source_buffer_set_language (buffer, lang);
+      </programlisting></informalexample>
+      
+      or
+      
+      <informalexample><programlisting>
+        GtkSourceLanguage *lang = NULL;
+        gboolean result_uncertain;
+        gchar *content_type;
+      
+        content_type = g_content_type_guess (filename, NULL, 0, &result_uncertain);
+        if (result_uncertain)
+          {
+            g_free (content_type);
+            content_type = NULL;
+          }
+      
+        lang = gtk_source_language_manager_guess_language (manager, filename, content_type);
+        gtk_source_buffer_set_language (buffer, lang);
+      
+        g_free (content_type);
+      </programlisting></informalexample>
+      
+      etc. Use [gid.gtksource5.language.Language.getMimeTypes] and [gid.gtksource5.language.Language.getGlobs]
+      if you need full control over file -> language mapping.
+  
+      Params:
+        filename = a filename in Glib filename encoding, or null.
+        contentType = a content type (as in GIO API), or null.
+      Returns: a #GtkSourceLanguage, or null if there
+        is no suitable language for given filename and/or content_type. Return
+        value is owned by lm and should not be freed.
+  */
+  gid.gtksource4.language.Language guessLanguage(string filename = null, string contentType = null) nothrow
+  {
+    GtkSourceLanguage* _cretval;
+    const(char)* _filename = filename.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _contentType = contentType.toCString!(No.Malloc, Yes.Nullable);
+    _cretval = gtk_source_language_manager_guess_language(cast(GtkSourceLanguageManager*)this._cPtr, _filename, _contentType);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtksource4.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Sets the list of directories where the lm looks for
+      language files.
+      If dirs is null, the search path is reset to default.
+      
+      <note>
+        <para>
+          At the moment this function can be called only before the
+          language files are loaded for the first time. In practice
+          to set a custom search path for a #GtkSourceLanguageManager,
+          you have to call this function right after creating it.
+        </para>
+      </note>
+  
+      Params:
+        dirs = a null-terminated array of strings or null.
+  */
+  void setSearchPath(string[] dirs = null) nothrow
+  {
+    auto _dirs_arr = new char*[](dirs.length + 1);
+    auto _dirs = cast(char**)_dirs_arr.ptr;
+    foreach (i, s; dirs) _dirs[i] = s.toCString!(No.Malloc);
+    gtk_source_language_manager_set_search_path(cast(GtkSourceLanguageManager*)this._cPtr, _dirs);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtksource4.language_manager.LanguageManager]
+class LanguageManagerGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T searchPath(string[] propval) nothrow
+  {
+    return setProperty("search-path", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtksource4.language_manager.LanguageManager]
+final class LanguageManagerGidBuilder : LanguageManagerGidBuilderImpl!LanguageManagerGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  LanguageManager build() nothrow
+  {
+    return new LanguageManager(cast(void*)createGObject(LanguageManager._getGType), Yes.Take);
+  }
+}

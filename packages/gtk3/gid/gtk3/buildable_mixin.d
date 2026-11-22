@@ -1,0 +1,183 @@
+/// Module for [Buildable] interface mixin
+module gid.gtk3.buildable_mixin;
+
+public import gid.core.basictypes;
+public import gid.gtk3.buildable_iface_proxy;
+public import gid.core.utils;
+public import gid.glib2.types;
+public import gid.gobject2.gid_builder;
+public import gid.gobject2.object;
+public import gid.gobject2.value;
+public import gid.gtk3.builder;
+public import gid.gtk3.c.functions;
+public import gid.gtk3.c.types;
+public import gid.gtk3.types;
+
+/**
+    GtkBuildable allows objects to extend and customize their deserialization
+    from [GtkBuilder UI descriptions][BUILDER-UI].
+    The interface includes methods for setting names and properties of objects,
+    parsing custom tags and constructing child objects.
+    
+    The GtkBuildable interface is implemented by all widgets and
+    many of the non-widget objects that are provided by GTK+. The
+    main user of this interface is #GtkBuilder. There should be
+    very little need for applications to call any of these functions directly.
+    
+    An object only needs to implement this interface if it needs to extend the
+    #GtkBuilder format or run any extra routines at deserialization time.
+*/
+template BuildableT()
+{
+
+  /**
+      Adds a child to buildable. type is an optional string
+      describing how the child should be added.
+  
+      Params:
+        builder = a #GtkBuilder
+        child = child to add
+        type = kind of child or null
+  */
+  override void addChild(gid.gtk3.builder.Builder builder, gid.gobject2.object.ObjectWrap child, string type = null) nothrow
+  {
+    const(char)* _type = type.toCString!(No.Malloc, Yes.Nullable);
+    gtk_buildable_add_child(cast(GtkBuildable*)this._cPtr, builder ? cast(GtkBuilder*)builder._cPtr(No.Dup) : null, child ? cast(GObject*)child._cPtr(No.Dup) : null, _type);
+  }
+
+  /**
+      Constructs a child of buildable with the name name.
+      
+      #GtkBuilder calls this function if a “constructor” has been
+      specified in the UI definition.
+  
+      Params:
+        builder = #GtkBuilder used to construct this object
+        name = name of child to construct
+      Returns: the constructed child
+  */
+  override gid.gobject2.object.ObjectWrap constructChild(gid.gtk3.builder.Builder builder, string name) nothrow
+  {
+    GObject* _cretval;
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    _cretval = gtk_buildable_construct_child(cast(GtkBuildable*)this._cPtr, builder ? cast(GtkBuilder*)builder._cPtr(No.Dup) : null, _name);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      This is similar to [gid.gtk3.buildable.Buildable.parserFinished] but is
+      called once for each custom tag handled by the buildable.
+  
+      Params:
+        builder = a #GtkBuilder
+        child = child object or null for non-child tags
+        tagname = the name of the tag
+        data = user data created in custom_tag_start
+  */
+  override void customFinished(gid.gtk3.builder.Builder builder, gid.gobject2.object.ObjectWrap child, string tagname, void* data = null) nothrow
+  {
+    const(char)* _tagname = tagname.toCString!(No.Malloc, No.Nullable);
+    gtk_buildable_custom_finished(cast(GtkBuildable*)this._cPtr, builder ? cast(GtkBuilder*)builder._cPtr(No.Dup) : null, child ? cast(GObject*)child._cPtr(No.Dup) : null, _tagname, data);
+  }
+
+  /**
+      This is called for each unknown element under `<child>`.
+  
+      Params:
+        builder = a #GtkBuilder used to construct this object
+        child = child object or null for non-child tags
+        tagname = name of tag
+        parser = a #GMarkupParser to fill in
+        data = return location for user data that will be passed in
+            to parser functions
+      Returns: true if a object has a custom implementation, false
+                 if it doesn't.
+  */
+  override bool customTagStart(gid.gtk3.builder.Builder builder, gid.gobject2.object.ObjectWrap child, string tagname, out gid.glib2.types.MarkupParser parser, out void* data) nothrow
+  {
+    bool _retval;
+    const(char)* _tagname = tagname.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)gtk_buildable_custom_tag_start(cast(GtkBuildable*)this._cPtr, builder ? cast(GtkBuilder*)builder._cPtr(No.Dup) : null, child ? cast(GObject*)child._cPtr(No.Dup) : null, _tagname, cast(GMarkupParser*)&parser, cast(void**)&data);
+    return _retval;
+  }
+
+  /**
+      Get the internal child called childname of the buildable object.
+  
+      Params:
+        builder = a #GtkBuilder
+        childname = name of child
+      Returns: the internal child of the buildable object
+  */
+  override gid.gobject2.object.ObjectWrap getInternalChild(gid.gtk3.builder.Builder builder, string childname) nothrow
+  {
+    GObject* _cretval;
+    const(char)* _childname = childname.toCString!(No.Malloc, No.Nullable);
+    _cretval = gtk_buildable_get_internal_child(cast(GtkBuildable*)this._cPtr, builder ? cast(GtkBuilder*)builder._cPtr(No.Dup) : null, _childname);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the name of the buildable object.
+      
+      #GtkBuilder sets the name based on the
+      [GtkBuilder UI definition][BUILDER-UI]
+      used to construct the buildable.
+      Returns: the name set with [gid.gtk3.buildable.Buildable.setName]
+  */
+  override string getName() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_buildable_get_name(cast(GtkBuildable*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Called when the builder finishes the parsing of a
+      [GtkBuilder UI definition][BUILDER-UI].
+      Note that this will be called once for each time
+      [gid.gtk4.builder.Builder.addFromFile] or [gid.gtk4.builder.Builder.addFromString]
+      is called on a builder.
+  
+      Params:
+        builder = a #GtkBuilder
+  */
+  override void parserFinished(gid.gtk3.builder.Builder builder) nothrow
+  {
+    gtk_buildable_parser_finished(cast(GtkBuildable*)this._cPtr, builder ? cast(GtkBuilder*)builder._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the property name name to value on the buildable object.
+  
+      Params:
+        builder = a #GtkBuilder
+        name = name of property
+        value = value of property
+  */
+  override void setBuildableProperty(gid.gtk3.builder.Builder builder, string name, gid.gobject2.value.Value value) nothrow
+  {
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    gtk_buildable_set_buildable_property(cast(GtkBuildable*)this._cPtr, builder ? cast(GtkBuilder*)builder._cPtr(No.Dup) : null, _name, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the name of the buildable object.
+  
+      Params:
+        name = name to set
+  */
+  override void setName(string name) nothrow
+  {
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    gtk_buildable_set_name(cast(GtkBuildable*)this._cPtr, _name);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk3.buildable.Buildable]
+template BuildableGidBuilderT()
+{
+}

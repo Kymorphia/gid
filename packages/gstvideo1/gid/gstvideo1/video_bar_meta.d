@@ -1,0 +1,169 @@
+/// Module for [VideoBarMeta] class
+module gid.gstvideo1.video_bar_meta;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gst1.meta;
+import gid.gst1.meta_info;
+import gid.gstvideo1.c.functions;
+import gid.gstvideo1.c.types;
+import gid.gstvideo1.types;
+
+/**
+    Bar data should be included in video user data
+    whenever the rectangular picture area containing useful information
+    does not extend to the full height or width of the coded frame
+    and AFD alone is insufficient to describe the extent of the image.
+    
+    Note: either vertical or horizontal bars are specified, but not both.
+    
+    For more details, see:
+    
+    https://www.atsc.org/wp-content/uploads/2015/03/a_53-Part-4-2009.pdf
+    
+    and SMPTE ST2016-1
+*/
+class VideoBarMeta : StructWrap!(GstVideoBarMeta)
+{
+  /**
+      Create a `video_bar_meta.VideoBarMeta` wrap type.
+      Params:
+        field = 0 for progressive or field 1 and 1 for field 2
+        isLetterbox = if true then bar data specifies letterbox, otherwise pillarbox
+        barData1 = If @is_letterbox is true, then the value specifies the
+               last line of a horizontal letterbox bar area at top of reconstructed frame.
+               Otherwise, it specifies the last horizontal luminance sample of a vertical pillarbox
+               bar area at the left side of the reconstructed frame
+        barData2 = If @is_letterbox is true, then the value specifies the
+               first line of a horizontal letterbox bar area at bottom of reconstructed frame.
+               Otherwise, it specifies the first horizontal
+               luminance sample of a vertical pillarbox bar area at the right side of the reconstructed frame.
+  */
+  this(ubyte field = ubyte.init, bool isLetterbox = bool.init, uint barData1 = uint.init, uint barData2 = uint.init) nothrow
+  {
+    this.field = field;
+    this.isLetterbox = isLetterbox;
+    this.barData1 = barData1;
+    this.barData2 = barData2;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /**
+      Get `meta` field.
+      Returns: parent #GstMeta
+  */
+  @property gid.gst1.meta.Meta meta() nothrow
+  {
+    return new gid.gst1.meta.Meta(cast(GstMeta*)&(cast(GstVideoBarMeta*)this._cPtr).meta, this);
+  }
+
+  /**
+      Get `field` field.
+      Returns: 0 for progressive or field 1 and 1 for field 2
+  */
+  @property ubyte field() nothrow
+  {
+    return (cast(GstVideoBarMeta*)this._cPtr).field;
+  }
+
+  /**
+      Set `field` field.
+      Params:
+        propval = 0 for progressive or field 1 and 1 for field 2
+  */
+  @property void field(ubyte propval) nothrow
+  {
+    (cast(GstVideoBarMeta*)this._cPtr).field = propval;
+  }
+
+  /**
+      Get `isLetterbox` field.
+      Returns: if true then bar data specifies letterbox, otherwise pillarbox
+  */
+  @property bool isLetterbox() nothrow
+  {
+    return cast(bool)(cast(GstVideoBarMeta*)this._cPtr).isLetterbox;
+  }
+
+  /**
+      Set `isLetterbox` field.
+      Params:
+        propval = if true then bar data specifies letterbox, otherwise pillarbox
+  */
+  @property void isLetterbox(bool propval) nothrow
+  {
+    (cast(GstVideoBarMeta*)this._cPtr).isLetterbox = propval;
+  }
+
+  /**
+      Get `barData1` field.
+      Returns: If @is_letterbox is true, then the value specifies the
+             last line of a horizontal letterbox bar area at top of reconstructed frame.
+             Otherwise, it specifies the last horizontal luminance sample of a vertical pillarbox
+             bar area at the left side of the reconstructed frame
+  */
+  @property uint barData1() nothrow
+  {
+    return (cast(GstVideoBarMeta*)this._cPtr).barData1;
+  }
+
+  /**
+      Set `barData1` field.
+      Params:
+        propval = If @is_letterbox is true, then the value specifies the
+               last line of a horizontal letterbox bar area at top of reconstructed frame.
+               Otherwise, it specifies the last horizontal luminance sample of a vertical pillarbox
+               bar area at the left side of the reconstructed frame
+  */
+  @property void barData1(uint propval) nothrow
+  {
+    (cast(GstVideoBarMeta*)this._cPtr).barData1 = propval;
+  }
+
+  /**
+      Get `barData2` field.
+      Returns: If @is_letterbox is true, then the value specifies the
+             first line of a horizontal letterbox bar area at bottom of reconstructed frame.
+             Otherwise, it specifies the first horizontal
+             luminance sample of a vertical pillarbox bar area at the right side of the reconstructed frame.
+  */
+  @property uint barData2() nothrow
+  {
+    return (cast(GstVideoBarMeta*)this._cPtr).barData2;
+  }
+
+  /**
+      Set `barData2` field.
+      Params:
+        propval = If @is_letterbox is true, then the value specifies the
+               first line of a horizontal letterbox bar area at bottom of reconstructed frame.
+               Otherwise, it specifies the first horizontal
+               luminance sample of a vertical pillarbox bar area at the right side of the reconstructed frame.
+  */
+  @property void barData2(uint propval) nothrow
+  {
+    (cast(GstVideoBarMeta*)this._cPtr).barData2 = propval;
+  }
+
+  /** */
+  static gid.gst1.meta_info.MetaInfo getInfo() nothrow
+  {
+    const(GstMetaInfo)* _cretval;
+    _cretval = gst_video_bar_meta_get_info();
+    gid.gst1.meta_info.MetaInfo _retval;
+    if (_cretval)
+      _retval = *cast(gid.gst1.meta_info.MetaInfo*)_cretval;
+    return _retval;
+  }
+}

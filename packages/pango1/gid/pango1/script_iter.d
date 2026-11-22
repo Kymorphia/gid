@@ -1,0 +1,97 @@
+/// Module for [ScriptIter] class
+module gid.pango1.script_iter;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.boxed;
+import gid.pango1.c.functions;
+import gid.pango1.c.types;
+import gid.pango1.types;
+
+/**
+    A [gid.pango1.script_iter.ScriptIter] is used to iterate through a string
+    and identify ranges in different scripts.
+*/
+class ScriptIter : gid.gobject2.boxed.BoxedWrap!(pango_script_iter_get_type)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ScriptIter self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Create a new [gid.pango1.script_iter.ScriptIter], used to break a string of
+      Unicode text into runs by Unicode script.
+      
+      No copy is made of text, so the caller needs to make
+      sure it remains valid until the iterator is freed with
+      [gid.pango1.script_iter.ScriptIter.free].
+  
+      Params:
+        text = a UTF-8 string
+      Returns: the new script iterator, initialized
+         to point at the first range in the text, which should be
+         freed with [gid.pango1.script_iter.ScriptIter.free]. If the string is
+         empty, it will point at an empty range.
+  */
+  this(string text) nothrow
+  {
+    PangoScriptIter* _cretval;
+    int _length;
+    if (text)
+      _length = cast(int)text.length;
+
+    auto _text = cast(char*)text.ptr;
+    _cretval = pango_script_iter_new(_text, _length);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Gets information about the range to which iter currently points.
+      
+      The range is the set of locations p where *start <= p < *end.
+      (That is, it doesn't include the character stored at *end)
+      
+      Note that while the type of the script argument is declared
+      as [gid.pango1.types.Script], as of Pango 1.18, this function simply returns
+      [gid.glib2.types.UnicodeScript] values. Callers must be prepared to handle unknown
+      values.
+  
+      Params:
+        start = location to store start
+            position of the range
+        end = location to store end position
+            of the range
+        script = location to store script for range
+  */
+  void getRange(out string start, out string end, out gid.pango1.types.Script script) nothrow
+  {
+    char* _start;
+    char* _end;
+    pango_script_iter_get_range(cast(PangoScriptIter*)this._cPtr, &_start, &_end, &script);
+    start = _start.fromCString!(No.Free);
+    end = _end.fromCString!(No.Free);
+  }
+
+  /**
+      Advances a [gid.pango1.script_iter.ScriptIter] to the next range.
+      
+      If iter is already at the end, it is left unchanged
+      and false is returned.
+      Returns: true if iter was successfully advanced
+  */
+  bool next() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)pango_script_iter_next(cast(PangoScriptIter*)this._cPtr);
+    return _retval;
+  }
+}

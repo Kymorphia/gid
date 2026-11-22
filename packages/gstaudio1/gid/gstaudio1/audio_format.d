@@ -1,0 +1,103 @@
+/// Module for [AudioFormat] enum namespace
+module gid.gstaudio1.audio_format;
+
+import gid.core.utils;
+import gid.gstaudio1.audio_format_info;
+import gid.gstaudio1.c.functions;
+import gid.gstaudio1.c.types;
+import gid.gstaudio1.types;
+
+/// Namespace for [AudioFormat] enum
+struct AudioFormat
+{
+  alias Enum = gid.gstaudio1.types.AudioFormat; ///
+
+  /**
+      Construct a #GstAudioFormat with given parameters.
+  
+      Params:
+        sign = signed or unsigned format
+        endianness = G_LITTLE_ENDIAN or G_BIG_ENDIAN
+        width = amount of bits used per sample
+        depth = amount of used bits in width
+      Returns: a #GstAudioFormat or GST_AUDIO_FORMAT_UNKNOWN when no audio format
+        exists with the given parameters.
+  */
+  static gid.gstaudio1.types.AudioFormat buildInteger(bool sign, int endianness, int width, int depth) nothrow
+  {
+    GstAudioFormat _cretval;
+    _cretval = gst_audio_format_build_integer(sign, endianness, width, depth);
+    gid.gstaudio1.types.AudioFormat _retval = cast(gid.gstaudio1.types.AudioFormat)_cretval;
+    return _retval;
+  }
+
+  /**
+      Fill length bytes in dest with silence samples for info.
+  
+      Params:
+        info = a #GstAudioFormatInfo
+        dest = a destination
+            to fill
+  
+      Deprecated: Use [gid.gstaudio1.audio_format_info.AudioFormatInfo.fillSilence] instead.
+  */
+  static void fillSilence(gid.gstaudio1.audio_format_info.AudioFormatInfo info, ubyte[] dest) nothrow
+  {
+    size_t _length;
+    if (dest)
+      _length = cast(size_t)dest.length;
+
+    auto _dest = cast(ubyte*)dest.ptr;
+    gst_audio_format_fill_silence(info ? cast(const(GstAudioFormatInfo)*)info._cPtr(No.Dup) : null, _dest, _length);
+  }
+
+  /**
+      Convert the format string to its #GstAudioFormat.
+  
+      Params:
+        format = a format string
+      Returns: the #GstAudioFormat for format or GST_AUDIO_FORMAT_UNKNOWN when the
+        string is not a known format.
+  */
+  static gid.gstaudio1.types.AudioFormat fromString(string format) nothrow
+  {
+    GstAudioFormat _cretval;
+    const(char)* _format = format.toCString!(No.Malloc, No.Nullable);
+    _cretval = gst_audio_format_from_string(_format);
+    gid.gstaudio1.types.AudioFormat _retval = cast(gid.gstaudio1.types.AudioFormat)_cretval;
+    return _retval;
+  }
+
+  /**
+      Get the #GstAudioFormatInfo for format
+  
+      Params:
+        format = a #GstAudioFormat
+      Returns: The #GstAudioFormatInfo for format.
+  */
+  static gid.gstaudio1.audio_format_info.AudioFormatInfo getInfo(gid.gstaudio1.types.AudioFormat format) nothrow
+  {
+    const(GstAudioFormatInfo)* _cretval;
+    _cretval = gst_audio_format_get_info(format);
+    auto _retval = _cretval ? new gid.gstaudio1.audio_format_info.AudioFormatInfo(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns a string containing a descriptive name for the #GstAudioFormat.
+      
+      Since 1.26 this can also be used with [gid.gstaudio1.types.AudioFormat.Unknown], previous
+      versions were printing a critical warning and returned null.
+  
+      Params:
+        format = a #GstAudioFormat audio format
+      Returns: the name corresponding to format
+  */
+  static string toString_(gid.gstaudio1.types.AudioFormat format) nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gst_audio_format_to_string(format);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+}

@@ -1,0 +1,291 @@
+/// Module for [CellLayout] interface mixin
+module gid.gtk4.cell_layout_mixin;
+
+public import gid.core.basictypes;
+public import gid.gtk4.cell_layout_iface_proxy;
+public import gid.core.utils;
+public import gid.gobject2.gid_builder;
+public import gid.gobject2.object;
+public import gid.gtk4.c.functions;
+public import gid.gtk4.c.types;
+public import gid.gtk4.cell_area;
+public import gid.gtk4.cell_renderer;
+public import gid.gtk4.tree_iter;
+public import gid.gtk4.tree_model;
+public import gid.gtk4.types;
+
+/**
+    An interface for packing cells
+    
+    [gid.gtk4.cell_layout.CellLayout] is an interface to be implemented by all objects which
+    want to provide a [gid.gtk4.tree_view_column.TreeViewColumn] like API for packing cells,
+    setting attributes and data funcs.
+    
+    One of the notable features provided by implementations of
+    [gid.gtk4.cell_layout.CellLayout] are attributes. Attributes let you set the properties
+    in flexible ways. They can just be set to constant values like regular
+    properties. But they can also be mapped to a column of the underlying
+    tree model with [gid.gtk4.cell_layout.CellLayout.setAttributes], which means that the value
+    of the attribute can change from cell to cell as they are rendered by
+    the cell renderer. Finally, it is possible to specify a function with
+    [gid.gtk4.cell_layout.CellLayout.setCellDataFunc] that is called to determine the
+    value of the attribute for each cell that is rendered.
+    
+    ## GtkCellLayouts as GtkBuildable
+    
+    Implementations of GtkCellLayout which also implement the GtkBuildable
+    interface ([gid.gtk4.cell_view.CellView], [gid.gtk4.icon_view.IconView], [gid.gtk4.combo_box.ComboBox],
+    [gid.gtk4.entry_completion.EntryCompletion], [gid.gtk4.tree_view_column.TreeViewColumn]) accept [gid.gtk4.cell_renderer.CellRenderer] objects
+    as `<child>` elements in UI definitions. They support a custom `<attributes>`
+    element for their children, which can contain multiple `<attribute>`
+    elements. Each `<attribute>` element has a name attribute which specifies
+    a property of the cell renderer; the content of the element is the
+    attribute value.
+    
+    This is an example of a UI definition fragment specifying attributes:
+    
+    ```xml
+    <object class="GtkCellView">
+      <child>
+        <object class="GtkCellRendererText"/>
+        <attributes>
+          <attribute name="text">0</attribute>
+        </attributes>
+      </child>
+    </object>
+    ```
+    
+    Furthermore for implementations of [gid.gtk4.cell_layout.CellLayout] that use a [gid.gtk4.cell_area.CellArea]
+    to lay out cells (all [gid.gtk4.cell_layout.CellLayout]s in GTK use a [gid.gtk4.cell_area.CellArea])
+    [cell properties](class.CellArea.html#cell-properties) can also be defined
+    in the format by specifying the custom `<cell-packing>` attribute which can
+    contain multiple `<property>` elements.
+    
+    Here is a UI definition fragment specifying cell properties:
+    
+    ```xml
+    <object class="GtkTreeViewColumn">
+      <child>
+        <object class="GtkCellRendererText"/>
+        <cell-packing>
+          <property name="align">True</property>
+          <property name="expand">False</property>
+        </cell-packing>
+      </child>
+    </object>
+    ```
+    
+    ## Subclassing GtkCellLayout implementations
+    
+    When subclassing a widget that implements [gid.gtk4.cell_layout.CellLayout] like
+    [gid.gtk4.icon_view.IconView] or [gid.gtk4.combo_box.ComboBox], there are some considerations related
+    to the fact that these widgets internally use a [gid.gtk4.cell_area.CellArea].
+    The cell area is exposed as a construct-only property by these
+    widgets. This means that it is possible to e.g. do
+    
+    ```c
+    GtkWIdget *combo =
+      g_object_new (GTK_TYPE_COMBO_BOX, "cell-area", my_cell_area, NULL);
+    ```
+    
+    to use a custom cell area with a combo box. But construct properties
+    are only initialized after instance `init()`
+    functions have run, which means that using functions which rely on
+    the existence of the cell area in your subclass `init()` function will
+    cause the default cell area to be instantiated. In this case, a provided
+    construct property value will be ignored (with a warning, to alert
+    you to the problem).
+    
+    ```c
+    static void
+    my_combo_box_init (MyComboBox *b)
+    {
+      GtkCellRenderer *cell;
+    
+      cell = gtk_cell_renderer_pixbuf_new ();
+    
+      // The following call causes the default cell area for combo boxes,
+      // a GtkCellAreaBox, to be instantiated
+      gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (b), cell, FALSE);
+      ...
+    }
+    
+    GtkWidget *
+    my_combo_box_new (GtkCellArea *area)
+    {
+      // This call is going to cause a warning about area being ignored
+      return g_object_new (MY_TYPE_COMBO_BOX, "cell-area", area, NULL);
+    }
+    ```
+    
+    If supporting alternative cell areas with your derived widget is
+    not important, then this does not have to concern you. If you want
+    to support alternative cell areas, you can do so by moving the
+    problematic calls out of `init()` and into a `constructor()`
+    for your class.
+
+    Deprecated: List views use widgets to display their contents.
+        See [gid.gtk4.layout_manager.LayoutManager] for layout manager delegate objects
+*/
+template CellLayoutT()
+{
+
+  /**
+      Adds an attribute mapping to the list in cell_layout.
+      
+      The column is the column of the model to get a value from, and the
+      attribute is the property on cell to be set from that value. So for
+      example if column 2 of the model contains strings, you could have the
+      “text” attribute of a [gid.gtk4.cell_renderer_text.CellRendererText] get its values from column 2.
+      In this context "attribute" and "property" are used interchangeably.
+  
+      Params:
+        cell = a [gid.gtk4.cell_renderer.CellRenderer]
+        attribute = a property on the renderer
+        column = the column position on the model to get the attribute from
+  */
+  override void addAttribute(gid.gtk4.cell_renderer.CellRenderer cell, string attribute, int column) nothrow
+  {
+    const(char)* _attribute = attribute.toCString!(No.Malloc, No.Nullable);
+    gtk_cell_layout_add_attribute(cast(GtkCellLayout*)this._cPtr, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, _attribute, column);
+  }
+
+  /**
+      Unsets all the mappings on all renderers on cell_layout and
+      removes all renderers from cell_layout.
+  */
+  override void clear() nothrow
+  {
+    gtk_cell_layout_clear(cast(GtkCellLayout*)this._cPtr);
+  }
+
+  /**
+      Clears all existing attributes previously set with
+      [gid.gtk4.cell_layout.CellLayout.setAttributes].
+  
+      Params:
+        cell = a [gid.gtk4.cell_renderer.CellRenderer] to clear the attribute mapping on
+  */
+  override void clearAttributes(gid.gtk4.cell_renderer.CellRenderer cell) nothrow
+  {
+    gtk_cell_layout_clear_attributes(cast(GtkCellLayout*)this._cPtr, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Returns the underlying [gid.gtk4.cell_area.CellArea] which might be cell_layout
+      if called on a [gid.gtk4.cell_area.CellArea] or might be null if no [gid.gtk4.cell_area.CellArea]
+      is used by cell_layout.
+      Returns: the cell area used by cell_layout
+  */
+  override gid.gtk4.cell_area.CellArea getArea() nothrow
+  {
+    GtkCellArea* _cretval;
+    _cretval = gtk_cell_layout_get_area(cast(GtkCellLayout*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.cell_area.CellArea)(cast(GtkCellArea*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the cell renderers which have been added to cell_layout.
+      Returns: a list of cell renderers. The list, but not the renderers has
+          been newly allocated and should be freed with [gid.glib2.list.List.free]
+          when no longer needed.
+  */
+  override gid.gtk4.cell_renderer.CellRenderer[] getCells() nothrow
+  {
+    GList* _cretval;
+    _cretval = gtk_cell_layout_get_cells(cast(GtkCellLayout*)this._cPtr);
+    auto _retval = gListToD!(gid.gtk4.cell_renderer.CellRenderer, GidOwnership.Container)(cast(GList*)_cretval);
+    return _retval;
+  }
+
+  /**
+      Adds the cell to the end of cell_layout. If expand is false, then the
+      cell is allocated no more space than it needs. Any unused space is
+      divided evenly between cells for which expand is true.
+      
+      Note that reusing the same cell renderer is not supported.
+  
+      Params:
+        cell = a [gid.gtk4.cell_renderer.CellRenderer]
+        expand = true if cell is to be given extra space allocated to cell_layout
+  */
+  override void packEnd(gid.gtk4.cell_renderer.CellRenderer cell, bool expand) nothrow
+  {
+    gtk_cell_layout_pack_end(cast(GtkCellLayout*)this._cPtr, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, expand);
+  }
+
+  /**
+      Packs the cell into the beginning of cell_layout. If expand is false,
+      then the cell is allocated no more space than it needs. Any unused space
+      is divided evenly between cells for which expand is true.
+      
+      Note that reusing the same cell renderer is not supported.
+  
+      Params:
+        cell = a [gid.gtk4.cell_renderer.CellRenderer]
+        expand = true if cell is to be given extra space allocated to cell_layout
+  */
+  override void packStart(gid.gtk4.cell_renderer.CellRenderer cell, bool expand) nothrow
+  {
+    gtk_cell_layout_pack_start(cast(GtkCellLayout*)this._cPtr, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, expand);
+  }
+
+  /**
+      Re-inserts cell at position.
+      
+      Note that cell has already to be packed into cell_layout
+      for this to function properly.
+  
+      Params:
+        cell = a [gid.gtk4.cell_renderer.CellRenderer] to reorder
+        position = new position to insert cell at
+  */
+  override void reorder(gid.gtk4.cell_renderer.CellRenderer cell, int position) nothrow
+  {
+    gtk_cell_layout_reorder(cast(GtkCellLayout*)this._cPtr, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, position);
+  }
+
+  /**
+      Sets the [gid.gtk4.cell_layout.CellLayout]DataFunc to use for cell_layout.
+      
+      This function is used instead of the standard attributes mapping
+      for setting the column value, and should set the value of cell_layout’s
+      cell renderer(s) as appropriate.
+      
+      func may be null to remove a previously set function.
+  
+      Params:
+        cell = a [gid.gtk4.cell_renderer.CellRenderer]
+        func = the [gid.gtk4.cell_layout.CellLayout]DataFunc to use
+  */
+  override void setCellDataFunc(gid.gtk4.cell_renderer.CellRenderer cell, gid.gtk4.types.CellLayoutDataFunc func = null) nothrow
+  {
+    extern(C) void _funcCallback(GtkCellLayout* cellLayout, GtkCellRenderer* cell, GtkTreeModel* treeModel, GtkTreeIter* iter, void* data) nothrow
+    {
+      auto _dlg = cast(gid.gtk4.types.CellLayoutDataFunc*)data;
+      auto _iter = iter ? new gid.gtk4.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.cell_layout.CellLayout)(cast(void*)cellLayout, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.cell_renderer.CellRenderer)(cast(void*)cell, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.tree_model.TreeModel)(cast(void*)treeModel, No.Take), _iter);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.types.CellLayoutDataFunc");
+      }
+      if (_iter)
+        _iter._cUnborrow;
+
+    }
+    auto _funcCB = func ? &_funcCallback : null;
+    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+    gtk_cell_layout_set_cell_data_func(cast(GtkCellLayout*)this._cPtr, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.cell_layout.CellLayout]
+template CellLayoutGidBuilderT()
+{
+}

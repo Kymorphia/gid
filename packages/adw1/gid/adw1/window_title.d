@@ -1,0 +1,239 @@
+/// Module for [WindowTitle] class
+module gid.adw1.window_title;
+
+public import gid.core.basictypes;
+import gid.adw1.c.functions;
+import gid.adw1.c.types;
+import gid.adw1.types;
+import gid.core.utils;
+import gid.gobject2.gid_builder;
+import gid.gtk4.accessible;
+import gid.gtk4.accessible_mixin;
+import gid.gtk4.buildable;
+import gid.gtk4.buildable_mixin;
+import gid.gtk4.constraint_target;
+import gid.gtk4.constraint_target_mixin;
+import gid.gtk4.widget;
+
+/**
+    A helper widget for setting a window's title and subtitle.
+    
+    <picture>
+      <source srcset="window-title-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="window-title.png" alt="window-title">
+    </picture>
+    
+    [gid.adw1.window_title.WindowTitle] shows a title and subtitle. It's intended to be used as the
+    title child of [gid.gtk4.header_bar.HeaderBar] or [gid.adw1.header_bar.HeaderBar].
+    
+    ## CSS nodes
+    
+    [gid.adw1.window_title.WindowTitle] has a single CSS node with name `windowtitle`.
+*/
+class WindowTitle : gid.gtk4.widget.Widget
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())adw_window_title_get_type != &gidSymbolNotFound ? adw_window_title_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwWindowTitle";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override WindowTitle self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.adw1.window_title.WindowTitle]
+      Returns: New builder object
+  */
+  static WindowTitleGidBuilder builder() nothrow
+  {
+    return new WindowTitleGidBuilder;
+  }
+
+  /**
+      Get `subtitle` property.
+      Returns: The subtitle to display.
+        
+        The subtitle should give the user additional details.
+  */
+  @property string subtitle() nothrow
+  {
+    return getSubtitle();
+  }
+
+  /**
+      Set `subtitle` property.
+      Params:
+        propval = The subtitle to display.
+          
+          The subtitle should give the user additional details.
+  */
+  @property void subtitle(string propval) nothrow
+  {
+    setSubtitle(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title to display.
+        
+        The title typically identifies the current view or content item, and
+        generally does not use the application name.
+  */
+  @property string title() nothrow
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title to display.
+          
+          The title typically identifies the current view or content item, and
+          generally does not use the application name.
+  */
+  @property void title(string propval) nothrow
+  {
+    setTitle(propval);
+  }
+
+  /**
+      Creates a new [gid.adw1.window_title.WindowTitle].
+  
+      Params:
+        title = a title
+        subtitle = a subtitle
+      Returns: the newly created [gid.adw1.window_title.WindowTitle]
+  */
+  this(string title, string subtitle) nothrow
+  {
+    GtkWidget* _cretval;
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
+    const(char)* _subtitle = subtitle.toCString!(No.Malloc, No.Nullable);
+    _cretval = adw_window_title_new(_title, _subtitle);
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Gets the subtitle of self.
+      Returns: the subtitle
+  */
+  string getSubtitle() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = adw_window_title_get_subtitle(cast(AdwWindowTitle*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the title of self.
+      Returns: the title
+  */
+  string getTitle() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = adw_window_title_get_title(cast(AdwWindowTitle*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Sets the subtitle of self.
+      
+      The subtitle should give the user additional details.
+  
+      Params:
+        subtitle = a subtitle
+  */
+  void setSubtitle(string subtitle) nothrow
+  {
+    const(char)* _subtitle = subtitle.toCString!(No.Malloc, No.Nullable);
+    adw_window_title_set_subtitle(cast(AdwWindowTitle*)this._cPtr, _subtitle);
+  }
+
+  /**
+      Sets the title of self.
+      
+      The title typically identifies the current view or content item, and
+      generally does not use the application name.
+  
+      Params:
+        title = a title
+  */
+  void setTitle(string title) nothrow
+  {
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
+    adw_window_title_set_title(cast(AdwWindowTitle*)this._cPtr, _title);
+  }
+}
+
+/// Fluent builder implementation template for [gid.adw1.window_title.WindowTitle]
+class WindowTitleGidBuilderImpl(T) : gid.gtk4.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `subtitle` property.
+      Params:
+        propval = The subtitle to display.
+          
+          The subtitle should give the user additional details.
+      Returns: Builder instance for fluent chaining
+  */
+  T subtitle(string propval) nothrow
+  {
+    return setProperty("subtitle", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title to display.
+          
+          The title typically identifies the current view or content item, and
+          generally does not use the application name.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval) nothrow
+  {
+    return setProperty("title", propval);
+  }
+}
+
+/// Fluent builder for [gid.adw1.window_title.WindowTitle]
+final class WindowTitleGidBuilder : WindowTitleGidBuilderImpl!WindowTitleGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  WindowTitle build() nothrow
+  {
+    return new WindowTitle(cast(void*)createGObject(WindowTitle._getGType), Yes.Take);
+  }
+}

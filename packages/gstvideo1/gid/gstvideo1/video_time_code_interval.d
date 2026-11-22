@@ -1,0 +1,96 @@
+/// Module for [VideoTimeCodeInterval] struct
+module gid.gstvideo1.video_time_code_interval;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gstvideo1.c.functions;
+import gid.gstvideo1.c.types;
+import gid.gstvideo1.types;
+
+/**
+    A representation of a difference between two #GstVideoTimeCode instances.
+    Will not necessarily correspond to a real timecode (e.g. 00:00:10;00)
+*/
+struct VideoTimeCodeInterval
+{
+  /**
+      the hours field of #GstVideoTimeCodeInterval
+  */
+  uint hours;
+
+  /**
+      the minutes field of #GstVideoTimeCodeInterval
+  */
+  uint minutes;
+
+  /**
+      the seconds field of #GstVideoTimeCodeInterval
+  */
+  uint seconds;
+
+  /**
+      the frames field of #GstVideoTimeCodeInterval
+  */
+  uint frames;
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gst_video_time_code_interval_get_type != &gidSymbolNotFound ? gst_video_time_code_interval_get_type() : cast(GType)0;
+  }
+
+  /** */
+  @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  static void* _cDup(void* ptr) nothrow
+  {
+    return boxedCopy(_getGType, ptr);
+  }
+
+  /** */
+  static void _cFree(void* ptr) nothrow
+  {
+    boxedFree(_getGType, ptr);
+  }
+
+  /**
+      Initializes tc with empty/zero/NULL values.
+  */
+  void clear() nothrow
+  {
+    gst_video_time_code_interval_clear(cast(GstVideoTimeCodeInterval*)&this);
+  }
+
+  /** */
+  gid.gstvideo1.video_time_code_interval.VideoTimeCodeInterval copy() nothrow
+  {
+    GstVideoTimeCodeInterval* _cretval;
+    _cretval = gst_video_time_code_interval_copy(cast(const(GstVideoTimeCodeInterval)*)&this);
+    gid.gstvideo1.video_time_code_interval.VideoTimeCodeInterval _retval;
+    if (_cretval)
+    {
+      _retval = *cast(gid.gstvideo1.video_time_code_interval.VideoTimeCodeInterval*)_cretval;
+      cValueFree!(gid.gstvideo1.video_time_code_interval.VideoTimeCodeInterval)(_cretval);
+    }
+    return _retval;
+  }
+
+  /**
+      Initializes tc with the given values.
+  
+      Params:
+        hours = the hours field of #GstVideoTimeCodeInterval
+        minutes = the minutes field of #GstVideoTimeCodeInterval
+        seconds = the seconds field of #GstVideoTimeCodeInterval
+        frames = the frames field of #GstVideoTimeCodeInterval
+  */
+  void init_(uint hours, uint minutes, uint seconds, uint frames) nothrow
+  {
+    gst_video_time_code_interval_init(cast(GstVideoTimeCodeInterval*)&this, hours, minutes, seconds, frames);
+  }
+}

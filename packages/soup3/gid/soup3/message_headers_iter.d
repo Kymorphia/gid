@@ -1,0 +1,81 @@
+/// Module for [MessageHeadersIter] class
+module gid.soup3.message_headers_iter;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.soup3.c.functions;
+import gid.soup3.c.types;
+import gid.soup3.message_headers;
+import gid.soup3.types;
+
+/**
+    An opaque type used to iterate over a [gid.soup3.message_headers.MessageHeaders] structure
+    
+    After intializing the iterator with [gid.soup3.message_headers_iter.MessageHeadersIter.init_], call
+    [gid.soup3.message_headers_iter.MessageHeadersIter.next] to fetch data from it.
+    
+    You may not modify the headers while iterating over them.
+*/
+class MessageHeadersIter : StructWrap!(SoupMessageHeadersIter)
+{
+  /**
+      Create a `message_headers_iter.MessageHeadersIter` wrap type.
+  */
+  this() nothrow
+  {
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /**
+      Initializes iter for iterating hdrs.
+  
+      Params:
+        iter = a pointer to a #SoupMessageHeadersIter structure
+        hdrs = a #SoupMessageHeaders
+  */
+  static void init_(out gid.soup3.message_headers_iter.MessageHeadersIter iter, gid.soup3.message_headers.MessageHeaders hdrs) nothrow
+  {
+    SoupMessageHeadersIter _iter;
+    soup_message_headers_iter_init(&_iter, hdrs ? cast(SoupMessageHeaders*)hdrs._cPtr(No.Dup) : null);
+    iter = new gid.soup3.message_headers_iter.MessageHeadersIter(cast(void*)&_iter, No.Take);
+  }
+
+  /**
+      Yields the next name/value pair in the [gid.soup3.message_headers.MessageHeaders] being
+      iterated by iter.
+      
+      If iter has already yielded the last header, then
+      [gid.soup3.message_headers_iter.MessageHeadersIter.next] will return false and name and value
+      will be unchanged.
+  
+      Params:
+        iter = a #SoupMessageHeadersIter
+        name = pointer to a variable to return
+            the header name in
+        value = pointer to a variable to return
+            the header value in
+      Returns: true if another name and value were returned, false
+          if the end of the headers has been reached.
+  */
+  static bool next(gid.soup3.message_headers_iter.MessageHeadersIter iter, out string name, out string value) nothrow
+  {
+    bool _retval;
+    char* _name;
+    char* _value;
+    _retval = cast(bool)soup_message_headers_iter_next(iter ? cast(SoupMessageHeadersIter*)iter._cPtr : null, &_name, &_value);
+    name = _name.fromCString!(No.Free);
+    value = _value.fromCString!(No.Free);
+    return _retval;
+  }
+}

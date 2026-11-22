@@ -6,8 +6,8 @@
   "license": "MIT",
   "homepage": "https://gtk.org",
   "targetType": "library",
-  "importPaths": [".", ".."],
-  "sourcePaths": ["glibunix"],
+  "importPaths": ["."],
+  "sourcePaths": ["gid"],
   "dependencies": {
     "gid:glib2": "*"
   }

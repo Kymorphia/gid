@@ -4,9 +4,9 @@
 
 import std.conv : to;
 
-import gobject.closure;
-public import gobject.value;
-import glib.variant;
+import gid.gobject2.closure;
+public import gid.gobject2.value;
+import gid.glib2.variant;
 
 /**
  * Closure used for D delegates.
@@ -62,7 +62,7 @@ class DClosure : Closure
       mixin(callbackMixin!T);
     }
     catch (Exception e)
-      gidInvokeCallbackExceptionHandler(e, "gobject.dclosure.DGClosure.cb");
+      gidInvokeCallbackExceptionHandler(e, "gid.gobject2.dclosure.DGClosure.cb");
   }
 
   private static string callbackMixin(T)() nothrow

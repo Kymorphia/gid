@@ -1,0 +1,97 @@
+/// Module for [Range] class
+module gid.atk1.range;
+
+public import gid.core.basictypes;
+import gid.atk1.c.functions;
+import gid.atk1.c.types;
+import gid.atk1.types;
+import gid.core.utils;
+import gid.gobject2.boxed;
+
+/**
+    A given range or subrange, to be used with #AtkValue
+    
+    #AtkRange are used on #AtkValue, in order to represent the full
+    range of a given component (for example an slider or a range
+    control), or to define each individual subrange this full range is
+    splitted if available. See #AtkValue documentation for further
+    details.
+*/
+class Range : gid.gobject2.boxed.BoxedWrap!(atk_range_get_type)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Range self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Creates a new #AtkRange.
+  
+      Params:
+        lowerLimit = inferior limit for this range
+        upperLimit = superior limit for this range
+        description = human readable description of this range.
+      Returns: a new #AtkRange
+  */
+  this(double lowerLimit, double upperLimit, string description) nothrow
+  {
+    AtkRange* _cretval;
+    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
+    _cretval = atk_range_new(lowerLimit, upperLimit, _description);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Returns a new #AtkRange that is a exact copy of src
+      Returns: a new #AtkRange copy of src
+  */
+  gid.atk1.range.Range copy() nothrow
+  {
+    AtkRange* _cretval;
+    _cretval = atk_range_copy(cast(AtkRange*)this._cPtr);
+    auto _retval = _cretval ? new gid.atk1.range.Range(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns the human readable description of range
+      Returns: the human-readable description of range
+  */
+  string getDescription() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = atk_range_get_description(cast(AtkRange*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Returns the lower limit of range
+      Returns: the lower limit of range
+  */
+  double getLowerLimit() nothrow
+  {
+    double _retval;
+    _retval = atk_range_get_lower_limit(cast(AtkRange*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the upper limit of range
+      Returns: the upper limit of range
+  */
+  double getUpperLimit() nothrow
+  {
+    double _retval;
+    _retval = atk_range_get_upper_limit(cast(AtkRange*)this._cPtr);
+    return _retval;
+  }
+}

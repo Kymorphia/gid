@@ -32,7 +32,7 @@
 //!set function[buffer_get_video_region_of_interest_meta_id].return-value[][gid-borrow] buffer
 //!set enumeration[VideoFormat].function[get_info].return-value[][gid-borrow] static
 
-//# Ignore: Fundamental GValue type derived from Gst.FlagSet, bound as a D value type in gstvideo.types instead
+//# Ignore: Fundamental GValue type derived from Gst.FlagSet, bound as a D value type in gid.gstvideo1.types instead
 //!set class[VideoMultiviewFlagsSet][ignore] 1
 
 //# Ignore: deprecated and replaced by gst_video_meta_set_alignment_full
@@ -137,12 +137,12 @@
 //# VideoMultiviewFlagsSet D value type (GstVideoMultiviewFlagsSet GValue flag set type, see gst1-types.d)
 //!class types pre
 
-import gobject.c.types;
-import gst.c.functions;
+import gid.gobject2.c.types;
+import gid.gst1.c.functions;
 
 /**
-    Multiview flag set value type (GstVideoMultiviewFlagsSet), a [gst.types.FlagSet] of
-    [gstvideo.types.VideoMultiviewFlags], such as the caps `multiview-flags` field.
+    Multiview flag set value type (GstVideoMultiviewFlagsSet), a [gid.gst1.types.FlagSet] of
+    [gid.gstvideo1.types.VideoMultiviewFlags], such as the caps `multiview-flags` field.
 */
 struct VideoMultiviewFlagsSet
 {
@@ -174,9 +174,9 @@ struct VideoMultiviewFlagsSet
   /**
       Get the data of a plane of a mapped video frame.
       The returned slice references the mapped memory of the frame and is only valid while the frame is mapped (see
-      [gstvideo.video_frame.VideoFrame.map]). Writing to it modifies the frame if it was mapped for writing.
+      [gid.gstvideo1.video_frame.VideoFrame.map]). Writing to it modifies the frame if it was mapped for writing.
       For formats which are not tiled the length is the plane stride times the plane height, otherwise it extends to
-      the end of the mapped memory. Use the stride of the plane from [gstvideo.video_frame.VideoFrame.info] to access
+      the end of the mapped memory. Use the stride of the plane from [gid.gstvideo1.video_frame.VideoFrame.info] to access
       rows.
       Params:
         plane = the plane index (less than the number of planes of the video format)
@@ -262,7 +262,7 @@ struct VideoMultiviewFlagsSet
 
 //!class VideoVBIEncoder pre
 
-package uint _vbiLineSize(gstvideo.types.VideoFormat format, uint pixelWidth) nothrow
+package uint _vbiLineSize(gid.gstvideo1.types.VideoFormat format, uint pixelWidth) nothrow
 {
   auto info = gst_video_info_new();
   scope(exit) gst_video_info_free(info);
@@ -284,7 +284,7 @@ package uint _vbiLineSize(gstvideo.types.VideoFormat format, uint pixelWidth) no
         format = a #GstVideoFormat
         pixelWidth = The width in pixel to use
   */
-  this(gstvideo.types.VideoFormat format, uint pixelWidth) nothrow
+  this(gid.gstvideo1.types.VideoFormat format, uint pixelWidth) nothrow
   {
     auto _cretval = gst_video_vbi_encoder_new(cast(GstVideoFormat)format, pixelWidth);
     this(_cretval, Yes.Take);
@@ -297,10 +297,10 @@ package uint _vbiLineSize(gstvideo.types.VideoFormat format, uint pixelWidth) no
       Copy the encoder.
       Returns: a copy of the encoder
   */
-  gstvideo.video_vbiencoder.VideoVBIEncoder copy() nothrow
+  gid.gstvideo1.video_vbiencoder.VideoVBIEncoder copy() nothrow
   {
     auto _cretval = gst_video_vbi_encoder_copy(cast(const(GstVideoVBIEncoder)*)this._cPtr);
-    auto _retval = _cretval ? new gstvideo.video_vbiencoder.VideoVBIEncoder(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gid.gstvideo1.video_vbiencoder.VideoVBIEncoder(cast(void*)_cretval, Yes.Take) : null;
 
     if (_retval)
       _retval._lineSize = _lineSize;
@@ -320,22 +320,22 @@ package uint _vbiLineSize(gstvideo.types.VideoFormat format, uint pixelWidth) no
   /**
       Write the pending ancillary data as a line of the format and pixel width the encoder was created with.
       Params:
-        data = the line to write to, its length must be at least [gstvideo.video_vbiencoder.VideoVBIEncoder.lineSize]
+        data = the line to write to, its length must be at least [gid.gstvideo1.video_vbiencoder.VideoVBIEncoder.lineSize]
   */
   void writeLine(ubyte[] data) nothrow
   {
-    import glib.c.functions : g_log;
-    import glib.c.types : GLogLevelFlags;
+    import gid.glib2.c.functions : g_log;
+    import gid.glib2.c.types : GLogLevelFlags;
 
     if (_lineSize == 0)
     {
-      g_log("Gid", GLogLevelFlags.LevelCritical, "gstvideo.video_vbiencoder.VideoVBIEncoder.writeLine line size unknown (not created with the constructor or copy)");
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gid.gstvideo1.video_vbiencoder.VideoVBIEncoder.writeLine line size unknown (not created with the constructor or copy)");
       return;
     }
 
     if (data.length < _lineSize)
     {
-      g_log("Gid", GLogLevelFlags.LevelCritical, "gstvideo.video_vbiencoder.VideoVBIEncoder.writeLine data length %d is less than the line size %u",
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gid.gstvideo1.video_vbiencoder.VideoVBIEncoder.writeLine data length %d is less than the line size %u",
         cast(int)data.length, _lineSize);
       return;
     }
@@ -345,7 +345,7 @@ package uint _vbiLineSize(gstvideo.types.VideoFormat format, uint pixelWidth) no
 
 //!class VideoVBIParser pre
 
-import gstvideo.video_vbiencoder : _vbiLineSize;
+import gid.gstvideo1.video_vbiencoder : _vbiLineSize;
 
 //!class VideoVBIParser
 
@@ -358,7 +358,7 @@ import gstvideo.video_vbiencoder : _vbiLineSize;
         format = a #GstVideoFormat
         pixelWidth = The width in pixel to use
   */
-  this(gstvideo.types.VideoFormat format, uint pixelWidth) nothrow
+  this(gid.gstvideo1.types.VideoFormat format, uint pixelWidth) nothrow
   {
     auto _cretval = gst_video_vbi_parser_new(cast(GstVideoFormat)format, pixelWidth);
     this(_cretval, Yes.Take);
@@ -371,10 +371,10 @@ import gstvideo.video_vbiencoder : _vbiLineSize;
       Copy the parser.
       Returns: a copy of the parser
   */
-  gstvideo.video_vbiparser.VideoVBIParser copy() nothrow
+  gid.gstvideo1.video_vbiparser.VideoVBIParser copy() nothrow
   {
     auto _cretval = gst_video_vbi_parser_copy(cast(const(GstVideoVBIParser)*)this._cPtr);
-    auto _retval = _cretval ? new gstvideo.video_vbiparser.VideoVBIParser(cast(void*)_cretval, Yes.Take) : null;
+    auto _retval = _cretval ? new gid.gstvideo1.video_vbiparser.VideoVBIParser(cast(void*)_cretval, Yes.Take) : null;
 
     if (_retval)
       _retval._lineSize = _lineSize;
@@ -392,26 +392,26 @@ import gstvideo.video_vbiencoder : _vbiLineSize;
   }
 
   /**
-      Provide a new line of data to the parser. Call [gstvideo.video_vbiparser.VideoVBIParser.getAncillary] to get the
+      Provide a new line of data to the parser. Call [gid.gstvideo1.video_vbiparser.VideoVBIParser.getAncillary] to get the
       Ancillary data that might be present on that line.
       Params:
         data = the line of data to parse, its length must be at least
-          [gstvideo.video_vbiparser.VideoVBIParser.lineSize]
+          [gid.gstvideo1.video_vbiparser.VideoVBIParser.lineSize]
   */
   void addLine(ubyte[] data) nothrow
   {
-    import glib.c.functions : g_log;
-    import glib.c.types : GLogLevelFlags;
+    import gid.glib2.c.functions : g_log;
+    import gid.glib2.c.types : GLogLevelFlags;
 
     if (_lineSize == 0)
     {
-      g_log("Gid", GLogLevelFlags.LevelCritical, "gstvideo.video_vbiparser.VideoVBIParser.addLine line size unknown (not created with the constructor or copy)");
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gid.gstvideo1.video_vbiparser.VideoVBIParser.addLine line size unknown (not created with the constructor or copy)");
       return;
     }
 
     if (data.length < _lineSize)
     {
-      g_log("Gid", GLogLevelFlags.LevelCritical, "gstvideo.video_vbiparser.VideoVBIParser.addLine data length %d is less than the line size %u",
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gid.gstvideo1.video_vbiparser.VideoVBIParser.addLine data length %d is less than the line size %u",
         cast(int)data.length, _lineSize);
       return;
     }

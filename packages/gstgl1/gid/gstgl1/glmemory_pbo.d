@@ -1,0 +1,92 @@
+/// Module for [GLMemoryPBO] class
+module gid.gstgl1.glmemory_pbo;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.boxed;
+import gid.gstgl1.c.functions;
+import gid.gstgl1.c.types;
+import gid.gstgl1.types;
+
+/**
+    #GstGLMemoryPBO is created or wrapped through [gid.gstgl1.glbase_memory.GLBaseMemory.alloc]
+    with #GstGLVideoAllocationParams.
+    
+    Data is uploaded or downloaded from the GPU as is necessary.
+*/
+class GLMemoryPBO : gid.gobject2.boxed.BoxedWrap!(gst_gl_memory_pbo_get_type)
+{
+  /**
+      Create a `glmemory_pbo.GLMemoryPBO` boxed type.
+  */
+  this() nothrow
+  {
+    super(boxedNew!GstGLMemoryPBO(_getGType), Yes.Take);
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override GLMemoryPBO self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Copies gl_mem into the texture specified by tex_id.  The format of tex_id
+      is specified by tex_format, width and height.
+      
+      If respecify is true, then the copy is performed in terms of the texture
+      data.  This is useful for splitting RGBA textures into RG or R textures or
+      vice versa. The requirement for this to succeed is that the backing texture
+      data must be the same size, i.e. say a RGBA8 texture is converted into a RG8
+      texture, then the RG texture must have twice as many pixels available for
+      output as the RGBA texture.
+      
+      Otherwise, if respecify is false, then the copy is performed per texel
+      using glCopyTexImage.  See the OpenGL specification for details on the
+      mappings between texture formats.
+  
+      Params:
+        texId = the destination texture id
+        target = the destination #GstGLTextureTarget
+        texFormat = the destination #GstGLFormat
+        width = width of tex_id
+        height = height of tex_id
+        stride = stride of the backing texture data
+        respecify = whether to copy the data or copy per texel
+      Returns: Whether the copy succeeded
+  */
+  bool copyIntoTexture(uint texId, gid.gstgl1.types.GLTextureTarget target, gid.gstgl1.types.GLFormat texFormat, int width, int height, int stride, bool respecify) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_gl_memory_pbo_copy_into_texture(cast(GstGLMemoryPBO*)this._cPtr, texId, target, texFormat, width, height, stride, respecify);
+    return _retval;
+  }
+
+  /**
+      Transfer the texture data from the texture into the PBO if necessary.
+  */
+  void downloadTransfer() nothrow
+  {
+    gst_gl_memory_pbo_download_transfer(cast(GstGLMemoryPBO*)this._cPtr);
+  }
+
+  /**
+      Transfer the texture data from the PBO into the texture if necessary.
+  */
+  void uploadTransfer() nothrow
+  {
+    gst_gl_memory_pbo_upload_transfer(cast(GstGLMemoryPBO*)this._cPtr);
+  }
+
+  /** */
+  static void initOnce() nothrow
+  {
+    gst_gl_memory_pbo_init_once();
+  }
+}

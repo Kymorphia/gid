@@ -1,0 +1,333 @@
+/// Module for [PluginDesc] class
+module gid.gst1.plugin_desc;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gst1.c.functions;
+import gid.gst1.c.types;
+import gid.gst1.types;
+
+/**
+    A plugin should export a variable of this type called plugin_desc. The plugin
+    loader will use the data provided there to initialize the plugin.
+    
+    The @licence parameter must be one of: LGPL, GPL, QPL, GPL/QPL, MPL,
+    BSD, MIT/X11, Proprietary, unknown.
+*/
+class PluginDesc : StructWrap!(GstPluginDesc)
+{
+  /**
+      Create a `plugin_desc.PluginDesc` wrap type.
+      Params:
+        majorVersion = the major version number of core that plugin was compiled for
+        minorVersion = the minor version number of core that plugin was compiled for
+        name = a unique name of the plugin
+        description = description of plugin
+        pluginInit = pointer to the init function of this plugin.
+        version_ = version of the plugin
+        license = effective license of plugin
+        source = source module plugin belongs to
+        package_ = shipped package plugin belongs to
+        origin = URL to provider of plugin
+        releaseDatetime = date time string in ISO 8601
+              format (or rather, a subset thereof), or null. Allowed are the
+              following formats: "YYYY-MM-DD" and "YYY-MM-DDTHH:MMZ" (with
+              'T' a separator and 'Z' indicating UTC/Zulu time). This field
+              should be set via the GST_PACKAGE_RELEASE_DATETIME
+              preprocessor macro.
+  */
+  this(int majorVersion = int.init, int minorVersion = int.init, string name = string.init, string description = string.init, GstPluginInitFunc pluginInit = GstPluginInitFunc.init, string version_ = string.init, string license = string.init, string source = string.init, string package_ = string.init, string origin = string.init, string releaseDatetime = string.init) nothrow
+  {
+    this.majorVersion = majorVersion;
+    this.minorVersion = minorVersion;
+    this.name = name;
+    this.description = description;
+    this.pluginInit = pluginInit;
+    this.version_ = version_;
+    this.license = license;
+    this.source = source;
+    this.package_ = package_;
+    this.origin = origin;
+    this.releaseDatetime = releaseDatetime;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /**
+      Get `majorVersion` field.
+      Returns: the major version number of core that plugin was compiled for
+  */
+  @property int majorVersion() nothrow
+  {
+    return (cast(GstPluginDesc*)this._cPtr).majorVersion;
+  }
+
+  /**
+      Set `majorVersion` field.
+      Params:
+        propval = the major version number of core that plugin was compiled for
+  */
+  @property void majorVersion(int propval) nothrow
+  {
+    (cast(GstPluginDesc*)this._cPtr).majorVersion = propval;
+  }
+
+  /**
+      Get `minorVersion` field.
+      Returns: the minor version number of core that plugin was compiled for
+  */
+  @property int minorVersion() nothrow
+  {
+    return (cast(GstPluginDesc*)this._cPtr).minorVersion;
+  }
+
+  /**
+      Set `minorVersion` field.
+      Params:
+        propval = the minor version number of core that plugin was compiled for
+  */
+  @property void minorVersion(int propval) nothrow
+  {
+    (cast(GstPluginDesc*)this._cPtr).minorVersion = propval;
+  }
+
+  private const(char)* _nameRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `name` field.
+      Returns: a unique name of the plugin
+  */
+  @property string name() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).name);
+  }
+
+  /**
+      Set `name` field.
+      Params:
+        propval = a unique name of the plugin
+  */
+  @property void name(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("name"))
+      return;
+
+    _nameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstPluginDesc*)this._cPtr).name = cast(const(char)*)_nameRef;
+  }
+
+  private const(char)* _descriptionRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `description` field.
+      Returns: description of plugin
+  */
+  @property string description() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).description);
+  }
+
+  /**
+      Set `description` field.
+      Params:
+        propval = description of plugin
+  */
+  @property void description(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("description"))
+      return;
+
+    _descriptionRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstPluginDesc*)this._cPtr).description = cast(const(char)*)_descriptionRef;
+  }
+
+  /**
+      Get `pluginInit` field.
+      Returns: pointer to the init function of this plugin.
+  */
+  @property GstPluginInitFunc pluginInit() nothrow
+  {
+    return (cast(GstPluginDesc*)this._cPtr).pluginInit;
+  }
+
+  /**
+      Set `pluginInit` field.
+      Params:
+        propval = pointer to the init function of this plugin.
+  */
+
+  @property void pluginInit(GstPluginInitFunc propval) nothrow
+  {
+    (cast(GstPluginDesc*)this._cPtr).pluginInit = propval;
+  }
+
+  private const(char)* _version_Ref; // Keeps borrowed GC string alive
+
+  /**
+      Get `version_` field.
+      Returns: version of the plugin
+  */
+  @property string version_() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).version_);
+  }
+
+  /**
+      Set `version_` field.
+      Params:
+        propval = version of the plugin
+  */
+  @property void version_(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("version_"))
+      return;
+
+    _version_Ref = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstPluginDesc*)this._cPtr).version_ = cast(const(char)*)_version_Ref;
+  }
+
+  private const(char)* _licenseRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `license` field.
+      Returns: effective license of plugin
+  */
+  @property string license() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).license);
+  }
+
+  /**
+      Set `license` field.
+      Params:
+        propval = effective license of plugin
+  */
+  @property void license(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("license"))
+      return;
+
+    _licenseRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstPluginDesc*)this._cPtr).license = cast(const(char)*)_licenseRef;
+  }
+
+  private const(char)* _sourceRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `source` field.
+      Returns: source module plugin belongs to
+  */
+  @property string source() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).source);
+  }
+
+  /**
+      Set `source` field.
+      Params:
+        propval = source module plugin belongs to
+  */
+  @property void source(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("source"))
+      return;
+
+    _sourceRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstPluginDesc*)this._cPtr).source = cast(const(char)*)_sourceRef;
+  }
+
+  private const(char)* _package_Ref; // Keeps borrowed GC string alive
+
+  /**
+      Get `package_` field.
+      Returns: shipped package plugin belongs to
+  */
+  @property string package_() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).package_);
+  }
+
+  /**
+      Set `package_` field.
+      Params:
+        propval = shipped package plugin belongs to
+  */
+  @property void package_(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("package_"))
+      return;
+
+    _package_Ref = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstPluginDesc*)this._cPtr).package_ = cast(const(char)*)_package_Ref;
+  }
+
+  private const(char)* _originRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `origin` field.
+      Returns: URL to provider of plugin
+  */
+  @property string origin() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).origin);
+  }
+
+  /**
+      Set `origin` field.
+      Params:
+        propval = URL to provider of plugin
+  */
+  @property void origin(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("origin"))
+      return;
+
+    _originRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstPluginDesc*)this._cPtr).origin = cast(const(char)*)_originRef;
+  }
+
+  private const(char)* _releaseDatetimeRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `releaseDatetime` field.
+      Returns: date time string in ISO 8601
+            format (or rather, a subset thereof), or null. Allowed are the
+            following formats: "YYYY-MM-DD" and "YYY-MM-DDTHH:MMZ" (with
+            'T' a separator and 'Z' indicating UTC/Zulu time). This field
+            should be set via the GST_PACKAGE_RELEASE_DATETIME
+            preprocessor macro.
+  */
+  @property string releaseDatetime() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).releaseDatetime);
+  }
+
+  /**
+      Set `releaseDatetime` field.
+      Params:
+        propval = date time string in ISO 8601
+              format (or rather, a subset thereof), or null. Allowed are the
+              following formats: "YYYY-MM-DD" and "YYY-MM-DDTHH:MMZ" (with
+              'T' a separator and 'Z' indicating UTC/Zulu time). This field
+              should be set via the GST_PACKAGE_RELEASE_DATETIME
+              preprocessor macro.
+  */
+  @property void releaseDatetime(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("releaseDatetime"))
+      return;
+
+    _releaseDatetimeRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstPluginDesc*)this._cPtr).releaseDatetime = cast(const(char)*)_releaseDatetimeRef;
+  }
+}

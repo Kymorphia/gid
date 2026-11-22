@@ -1,0 +1,344 @@
+/// Module for [PixbufFormat] class
+module gid.gdkpixbuf2.pixbuf_format;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gdkpixbuf2.c.functions;
+import gid.gdkpixbuf2.c.types;
+import gid.gdkpixbuf2.pixbuf_module_pattern;
+import gid.gdkpixbuf2.types;
+import gid.gobject2.boxed;
+
+/**
+    A [gid.gdkpixbuf2.pixbuf_format.PixbufFormat] contains information about the image format accepted
+    by a module.
+    
+    Only modules should access the fields directly, applications should
+    use the `gdk_pixbuf_format_*` family of functions.
+*/
+class PixbufFormat : gid.gobject2.boxed.BoxedWrap!(gdk_pixbuf_format_get_type)
+{
+  /**
+      Create a `pixbuf_format.PixbufFormat` boxed type.
+      Params:
+        flags = a combination of [gid.gdkpixbuf2.types.PixbufFormatFlags]
+        disabled = a boolean determining whether the loader is disabled`
+  */
+  this(uint flags = uint.init, bool disabled = bool.init) nothrow
+  {
+    super(boxedNew!GdkPixbufFormat(_getGType), Yes.Take);
+    this.flags = flags;
+    this.disabled = disabled;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override PixbufFormat self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get `name` field.
+      Returns: the name of the image format
+  */
+  @property string name() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GdkPixbufFormat*)this._cPtr).name);
+  }
+
+  /**
+      Get `signature` field.
+      Returns: the signature of the module
+  */
+  @property gid.gdkpixbuf2.pixbuf_module_pattern.PixbufModulePattern signature() nothrow
+  {
+    return (cast(GdkPixbufFormat*)this._cPtr).signature ? new gid.gdkpixbuf2.pixbuf_module_pattern.PixbufModulePattern(cast(GdkPixbufModulePattern*)(cast(GdkPixbufFormat*)this._cPtr).signature, this) : null;
+  }
+
+  /**
+      Get `domain` field.
+      Returns: the message domain for the `description`
+  */
+  @property string domain() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GdkPixbufFormat*)this._cPtr).domain);
+  }
+
+  /**
+      Get `description` field.
+      Returns: a description of the image format
+  */
+  @property string description() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GdkPixbufFormat*)this._cPtr).description);
+  }
+
+  /**
+      Get `mimeTypes` field.
+      Returns: the MIME types for the image format
+  */
+  @property string[] mimeTypes() nothrow
+  {
+    uint len;
+    if ((cast(GdkPixbufFormat*)this._cPtr).mimeTypes)
+    {
+      for (; (cast(GdkPixbufFormat*)this._cPtr).mimeTypes[len] !is null; len++)
+      {
+      }
+    }
+
+    auto _retval = new string[](len);
+    foreach (i; 0 .. len)
+      _retval[i] = (cast(GdkPixbufFormat*)this._cPtr).mimeTypes[i].fromCString;
+    return _retval;
+  }
+
+  /**
+      Get `extensions` field.
+      Returns: typical filename extensions for the
+          image format
+  */
+  @property string[] extensions() nothrow
+  {
+    uint len;
+    if ((cast(GdkPixbufFormat*)this._cPtr).extensions)
+    {
+      for (; (cast(GdkPixbufFormat*)this._cPtr).extensions[len] !is null; len++)
+      {
+      }
+    }
+
+    auto _retval = new string[](len);
+    foreach (i; 0 .. len)
+      _retval[i] = (cast(GdkPixbufFormat*)this._cPtr).extensions[i].fromCString;
+    return _retval;
+  }
+
+  /**
+      Get `flags` field.
+      Returns: a combination of [gid.gdkpixbuf2.types.PixbufFormatFlags]
+  */
+  @property uint flags() nothrow
+  {
+    return (cast(GdkPixbufFormat*)this._cPtr).flags;
+  }
+
+  /**
+      Set `flags` field.
+      Params:
+        propval = a combination of [gid.gdkpixbuf2.types.PixbufFormatFlags]
+  */
+  @property void flags(uint propval) nothrow
+  {
+    (cast(GdkPixbufFormat*)this._cPtr).flags = propval;
+  }
+
+  /**
+      Get `disabled` field.
+      Returns: a boolean determining whether the loader is disabled`
+  */
+  @property bool disabled() nothrow
+  {
+    return cast(bool)(cast(GdkPixbufFormat*)this._cPtr).disabled;
+  }
+
+  /**
+      Set `disabled` field.
+      Params:
+        propval = a boolean determining whether the loader is disabled`
+  */
+  @property void disabled(bool propval) nothrow
+  {
+    (cast(GdkPixbufFormat*)this._cPtr).disabled = propval;
+  }
+
+  /**
+      Get `license` field.
+      Returns: a string containing license information, typically set to
+          shorthands like "GPL", "LGPL", etc.
+  */
+  @property string license() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GdkPixbufFormat*)this._cPtr).license);
+  }
+
+  /**
+      Creates a copy of `format`.
+      Returns: the newly allocated copy of a [gid.gdkpixbuf2.pixbuf_format.PixbufFormat]. Use
+          [gid.gdkpixbuf2.pixbuf_format.PixbufFormat.free] to free the resources when done
+  */
+  gid.gdkpixbuf2.pixbuf_format.PixbufFormat copy() nothrow
+  {
+    GdkPixbufFormat* _cretval;
+    _cretval = gdk_pixbuf_format_copy(cast(const(GdkPixbufFormat)*)this._cPtr);
+    auto _retval = _cretval ? new gid.gdkpixbuf2.pixbuf_format.PixbufFormat(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns a description of the format.
+      Returns: a description of the format.
+  */
+  string getDescription() nothrow
+  {
+    char* _cretval;
+    _cretval = gdk_pixbuf_format_get_description(cast(GdkPixbufFormat*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Returns the filename extensions typically used for files in the
+      given format.
+      Returns: an array of
+          filename extensions
+  */
+  string[] getExtensions() nothrow
+  {
+    char** _cretval;
+    _cretval = gdk_pixbuf_format_get_extensions(cast(GdkPixbufFormat*)this._cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
+      gFree(cast(void*)_cretval);
+    }
+    return _retval;
+  }
+
+  /**
+      Returns information about the license of the image loader for the format.
+      
+      The returned string should be a shorthand for a well known license, e.g.
+      "LGPL", "GPL", "QPL", "GPL/QPL", or "other" to indicate some other license.
+      Returns: a string describing the license of the pixbuf format
+  */
+  string getLicense() nothrow
+  {
+    char* _cretval;
+    _cretval = gdk_pixbuf_format_get_license(cast(GdkPixbufFormat*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Returns the mime types supported by the format.
+      Returns: an array of mime types
+  */
+  string[] getMimeTypes() nothrow
+  {
+    char** _cretval;
+    _cretval = gdk_pixbuf_format_get_mime_types(cast(GdkPixbufFormat*)this._cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
+      gFree(cast(void*)_cretval);
+    }
+    return _retval;
+  }
+
+  /**
+      Returns the name of the format.
+      Returns: the name of the format.
+  */
+  string getName() nothrow
+  {
+    char* _cretval;
+    _cretval = gdk_pixbuf_format_get_name(cast(GdkPixbufFormat*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Returns whether this image format is disabled.
+      
+      See [gid.gdkpixbuf2.pixbuf_format.PixbufFormat.setDisabled].
+      Returns: whether this image format is disabled.
+  */
+  bool isDisabled() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gdk_pixbuf_format_is_disabled(cast(GdkPixbufFormat*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns `TRUE` if the save option specified by option_key is supported when
+      saving a pixbuf using the module implementing format.
+      
+      See [gid.gdkpixbuf2.pixbuf.Pixbuf.save] for more information about option keys.
+  
+      Params:
+        optionKey = the name of an option
+      Returns: `TRUE` if the specified option is supported
+  */
+  bool isSaveOptionSupported(string optionKey) nothrow
+  {
+    bool _retval;
+    const(char)* _optionKey = optionKey.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)gdk_pixbuf_format_is_save_option_supported(cast(GdkPixbufFormat*)this._cPtr, _optionKey);
+    return _retval;
+  }
+
+  /**
+      Returns whether this image format is scalable.
+      
+      If a file is in a scalable format, it is preferable to load it at
+      the desired size, rather than loading it at the default size and
+      scaling the resulting pixbuf to the desired size.
+      Returns: whether this image format is scalable.
+  */
+  bool isScalable() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gdk_pixbuf_format_is_scalable(cast(GdkPixbufFormat*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns whether pixbufs can be saved in the given format.
+      Returns: whether pixbufs can be saved in the given format.
+  */
+  bool isWritable() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gdk_pixbuf_format_is_writable(cast(GdkPixbufFormat*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Disables or enables an image format.
+      
+      If a format is disabled, GdkPixbuf won't use the image loader for
+      this format to load images.
+      
+      Applications can use this to avoid using image loaders with an
+      inappropriate license, see [gid.gdkpixbuf2.pixbuf_format.PixbufFormat.getLicense].
+  
+      Params:
+        disabled = `TRUE` to disable the format format
+  */
+  void setDisabled(bool disabled) nothrow
+  {
+    gdk_pixbuf_format_set_disabled(cast(GdkPixbufFormat*)this._cPtr, disabled);
+  }
+}

@@ -1,0 +1,233 @@
+/// Global functions for gstrtp1 library
+module gid.gstrtp1.global;
+
+import gid.core.utils;
+import gid.gobject2.types;
+import gid.gst1.buffer;
+import gid.gst1.element_factory;
+import gid.gstrtp1.c.functions;
+import gid.gstrtp1.c.types;
+import gid.gstrtp1.rtpsource_meta;
+import gid.gstrtp1.types;
+
+
+import gid.gstrtp1.rtpsource_meta;
+
+/**
+Attaches RTP source information to buffer.
+Params:
+buffer = a #GstBuffer
+csrc = the CSRCs (at most GST_RTP_SOURCE_META_MAX_CSRC_COUNT)
+Returns: the #GstRTPSourceMeta on buffer (borrowed from it) or null on error
+*/
+gid.gstrtp1.rtpsource_meta.RTPSourceMeta bufferAddRtpSourceMeta(gid.gst1.buffer.Buffer buffer, uint[] csrc = null) nothrow
+{
+  return _bufferAddRtpSourceMeta(buffer, null, csrc);
+}
+
+/**
+Attaches RTP source information to buffer.
+Params:
+buffer = a #GstBuffer
+ssrc = the SSRC
+csrc = the CSRCs (at most GST_RTP_SOURCE_META_MAX_CSRC_COUNT)
+Returns: the #GstRTPSourceMeta on buffer (borrowed from it) or null on error
+*/
+gid.gstrtp1.rtpsource_meta.RTPSourceMeta bufferAddRtpSourceMeta(gid.gst1.buffer.Buffer buffer, uint ssrc, uint[] csrc = null) nothrow
+{
+  return _bufferAddRtpSourceMeta(buffer, &ssrc, csrc);
+}
+
+private gid.gstrtp1.rtpsource_meta.RTPSourceMeta _bufferAddRtpSourceMeta(gid.gst1.buffer.Buffer buffer, const(uint)* ssrc,
+uint[] csrc) nothrow
+{
+  auto _csrcCount = csrc.length <= uint.max ? cast(uint)csrc.length : uint.max; // Count validated by the C function
+  auto _cretval = gst_buffer_add_rtp_source_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, ssrc,
+  _csrcCount > 0 ? csrc.ptr : null, _csrcCount);
+  return _cretval ? new gid.gstrtp1.rtpsource_meta.RTPSourceMeta(cast(GstRTPSourceMeta*)_cretval, buffer) : null;
+}
+
+
+/**
+    Find the #GstRTPSourceMeta on buffer.
+
+    Params:
+      buffer = a #GstBuffer
+    Returns: the #GstRTPSourceMeta or null when there
+      is no such metadata on buffer.
+*/
+gid.gstrtp1.rtpsource_meta.RTPSourceMeta bufferGetRtpSourceMeta(gid.gst1.buffer.Buffer buffer) nothrow
+{
+  GstRTPSourceMeta* _cretval;
+  _cretval = gst_buffer_get_rtp_source_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
+  auto _retval = _cretval ? new gid.gstrtp1.rtpsource_meta.RTPSourceMeta(cast(GstRTPSourceMeta*)_cretval, buffer) : null;
+  return _retval;
+}
+
+/**
+    Converts an NTP time to UNIX nanoseconds. ntptime can typically be
+    the NTP time of an SR RTCP message and contains, in the upper 32 bits, the
+    number of seconds since 1900 and, in the lower 32 bits, the fractional
+    seconds. The resulting value will be the number of nanoseconds since 1970.
+
+    Params:
+      ntptime = an NTP timestamp
+    Returns: the UNIX time for ntptime in nanoseconds.
+*/
+ulong rtcpNtpToUnix(ulong ntptime) nothrow
+{
+  ulong _retval;
+  _retval = gst_rtcp_ntp_to_unix(ntptime);
+  return _retval;
+}
+
+/**
+    Convert name into a GstRTCPSDESType. name is typically a key in a
+    #GstStructure containing SDES items.
+
+    Params:
+      name = a SDES name
+    Returns: the #GstRTCPSDESType for name or #GST_RTCP_SDES_PRIV when name
+      is a private sdes item.
+*/
+gid.gstrtp1.types.RTCPSDESType rtcpSdesNameToType(string name) nothrow
+{
+  GstRTCPSDESType _cretval;
+  const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+  _cretval = gst_rtcp_sdes_name_to_type(_name);
+  gid.gstrtp1.types.RTCPSDESType _retval = cast(gid.gstrtp1.types.RTCPSDESType)_cretval;
+  return _retval;
+}
+
+/**
+    Converts type to the string equivalent. The string is typically used as a
+    key in a #GstStructure containing SDES items.
+
+    Params:
+      type = a #GstRTCPSDESType
+    Returns: the string equivalent of type
+*/
+string rtcpSdesTypeToName(gid.gstrtp1.types.RTCPSDESType type) nothrow
+{
+  const(char)* _cretval;
+  _cretval = gst_rtcp_sdes_type_to_name(type);
+  string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+  return _retval;
+}
+
+/**
+    Converts a UNIX timestamp in nanoseconds to an NTP time. The caller should
+    pass a value with nanoseconds since 1970. The NTP time will, in the upper
+    32 bits, contain the number of seconds since 1900 and, in the lower 32
+    bits, the fractional seconds. The resulting value can be used as an ntptime
+    for constructing SR RTCP packets.
+
+    Params:
+      unixtime = an UNIX timestamp in nanoseconds
+    Returns: the NTP time for unixtime.
+*/
+ulong rtcpUnixToNtp(ulong unixtime) nothrow
+{
+  ulong _retval;
+  _retval = gst_rtcp_unix_to_ntp(unixtime);
+  return _retval;
+}
+
+/**
+    Retrieve all the factories of the currently registered RTP header
+    extensions.  Call [gid.gst1.element_factory.ElementFactory.create] with each factory to create
+    the associated #GstRTPHeaderExtension.
+    Returns: a #GList of
+          #GstElementFactory's. Use [gid.gst1.plugin_feature.PluginFeature.listFree] after use
+*/
+gid.gst1.element_factory.ElementFactory[] rtpGetHeaderExtensionList() nothrow
+{
+  GList* _cretval;
+  _cretval = gst_rtp_get_header_extension_list();
+  auto _retval = gListToD!(gid.gst1.element_factory.ElementFactory, GidOwnership.Full)(cast(GList*)_cretval);
+  return _retval;
+}
+
+/**
+    Reads the NTP time from the size NTP-56 extension bytes in data and store the
+    result in ntptime.
+
+    Params:
+      data = the data to read from
+      ntptime = the result NTP time
+    Returns: true on success.
+*/
+bool rtpHdrextGetNtp56(ubyte[] data, out ulong ntptime) nothrow
+{
+  bool _retval;
+  uint _size;
+  if (data)
+    _size = cast(uint)data.length;
+
+  auto _data = cast(ubyte*)data.ptr;
+  _retval = cast(bool)gst_rtp_hdrext_get_ntp_56(_data, _size, cast(ulong*)&ntptime);
+  return _retval;
+}
+
+/**
+    Reads the NTP time from the size NTP-64 extension bytes in data and store the
+    result in ntptime.
+
+    Params:
+      data = the data to read from
+      ntptime = the result NTP time
+    Returns: true on success.
+*/
+bool rtpHdrextGetNtp64(ubyte[] data, out ulong ntptime) nothrow
+{
+  bool _retval;
+  uint _size;
+  if (data)
+    _size = cast(uint)data.length;
+
+  auto _data = cast(ubyte*)data.ptr;
+  _retval = cast(bool)gst_rtp_hdrext_get_ntp_64(_data, _size, cast(ulong*)&ntptime);
+  return _retval;
+}
+
+/**
+    Writes the NTP time in ntptime to the format required for the NTP-56 header
+    extension. data must hold at least #GST_RTP_HDREXT_NTP_56_SIZE bytes.
+
+    Params:
+      data = the data to write to
+      size = the size of data
+      ntptime = the NTP time
+    Returns: true on success.
+*/
+bool rtpHdrextSetNtp56(void* data, uint size, ulong ntptime) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_rtp_hdrext_set_ntp_56(data, size, ntptime);
+  return _retval;
+}
+
+/**
+    Writes the NTP time in ntptime to the format required for the NTP-64 header
+    extension. data must hold at least #GST_RTP_HDREXT_NTP_64_SIZE bytes.
+
+    Params:
+      data = the data to write to
+      size = the size of data
+      ntptime = the NTP time
+    Returns: true on success.
+*/
+bool rtpHdrextSetNtp64(void* data, uint size, ulong ntptime) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)gst_rtp_hdrext_set_ntp_64(data, size, ntptime);
+  return _retval;
+}
+
+/** */
+gid.gobject2.types.GType rtpSourceMetaApiGetType() nothrow
+{
+  gid.gobject2.types.GType _retval;
+  _retval = gst_rtp_source_meta_api_get_type();
+  return _retval;
+}

@@ -1,0 +1,145 @@
+/// Module for [OpenPGPMarker] class
+module gid.gmime3.open_pgpmarker;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gmime3.c.functions;
+import gid.gmime3.c.types;
+import gid.gmime3.types;
+
+/**
+    An OpenPGP marker for use with GMime's internal state machines used for detecting OpenPGP blocks.
+*/
+class OpenPGPMarker : StructWrap!(GMimeOpenPGPMarker)
+{
+  /**
+      Create a `open_pgpmarker.OpenPGPMarker` wrap type.
+      Params:
+        marker = The OpenPGP marker.
+        len = The length of the OpenPGP marker.
+        before = The #GMimeOpenPGPState that the state machine must be in before encountering this marker.
+        after = The #GMimeOpenPGPState that the state machine will transition into once this marker is found.
+        isEndMarker = true if the marker is an end marker; otherwise, false.
+  */
+  this(string marker = string.init, size_t len = size_t.init, gid.gmime3.types.OpenPGPState before = gid.gmime3.types.OpenPGPState.init, gid.gmime3.types.OpenPGPState after = gid.gmime3.types.OpenPGPState.init, bool isEndMarker = bool.init) nothrow
+  {
+    this.marker = marker;
+    this.len = len;
+    this.before = before;
+    this.after = after;
+    this.isEndMarker = isEndMarker;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _markerRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `marker` field.
+      Returns: The OpenPGP marker.
+  */
+  @property string marker() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GMimeOpenPGPMarker*)this._cPtr).marker);
+  }
+
+  /**
+      Set `marker` field.
+      Params:
+        propval = The OpenPGP marker.
+  */
+  @property void marker(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("marker"))
+      return;
+
+    _markerRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GMimeOpenPGPMarker*)this._cPtr).marker = cast(const(char)*)_markerRef;
+  }
+
+  /**
+      Get `len` field.
+      Returns: The length of the OpenPGP marker.
+  */
+  @property size_t len() nothrow
+  {
+    return (cast(GMimeOpenPGPMarker*)this._cPtr).len;
+  }
+
+  /**
+      Set `len` field.
+      Params:
+        propval = The length of the OpenPGP marker.
+  */
+  @property void len(size_t propval) nothrow
+  {
+    (cast(GMimeOpenPGPMarker*)this._cPtr).len = propval;
+  }
+
+  /**
+      Get `before` field.
+      Returns: The #GMimeOpenPGPState that the state machine must be in before encountering this marker.
+  */
+  @property gid.gmime3.types.OpenPGPState before() nothrow
+  {
+    return cast(gid.gmime3.types.OpenPGPState)(cast(GMimeOpenPGPMarker*)this._cPtr).before;
+  }
+
+  /**
+      Set `before` field.
+      Params:
+        propval = The #GMimeOpenPGPState that the state machine must be in before encountering this marker.
+  */
+  @property void before(gid.gmime3.types.OpenPGPState propval) nothrow
+  {
+    (cast(GMimeOpenPGPMarker*)this._cPtr).before = cast(GMimeOpenPGPState)propval;
+  }
+
+  /**
+      Get `after` field.
+      Returns: The #GMimeOpenPGPState that the state machine will transition into once this marker is found.
+  */
+  @property gid.gmime3.types.OpenPGPState after() nothrow
+  {
+    return cast(gid.gmime3.types.OpenPGPState)(cast(GMimeOpenPGPMarker*)this._cPtr).after;
+  }
+
+  /**
+      Set `after` field.
+      Params:
+        propval = The #GMimeOpenPGPState that the state machine will transition into once this marker is found.
+  */
+  @property void after(gid.gmime3.types.OpenPGPState propval) nothrow
+  {
+    (cast(GMimeOpenPGPMarker*)this._cPtr).after = cast(GMimeOpenPGPState)propval;
+  }
+
+  /**
+      Get `isEndMarker` field.
+      Returns: true if the marker is an end marker; otherwise, false.
+  */
+  @property bool isEndMarker() nothrow
+  {
+    return cast(bool)(cast(GMimeOpenPGPMarker*)this._cPtr).isEndMarker;
+  }
+
+  /**
+      Set `isEndMarker` field.
+      Params:
+        propval = true if the marker is an end marker; otherwise, false.
+  */
+  @property void isEndMarker(bool propval) nothrow
+  {
+    (cast(GMimeOpenPGPMarker*)this._cPtr).isEndMarker = propval;
+  }
+}

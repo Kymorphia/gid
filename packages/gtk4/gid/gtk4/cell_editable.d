@@ -1,0 +1,197 @@
+/// Module for [CellEditable] interface
+module gid.gtk4.cell_editable;
+
+public import gid.core.basictypes;
+public import gid.gtk4.cell_editable_iface_proxy;
+import gid.core.utils;
+import gid.gdk4.event;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.types;
+
+/**
+    Interface for widgets that can be used for editing cells
+    
+    The [gid.gtk4.cell_editable.CellEditable] interface must be implemented for widgets to be usable
+    to edit the contents of a [gid.gtk4.tree_view.TreeView] cell. It provides a way to specify how
+    temporary widgets should be configured for editing, get the new value, etc.
+
+    Deprecated: List views use widgets for displaying their
+        contents. See [gid.gtk4.editable.Editable] for editable text widgets
+*/
+interface CellEditable : GidWrap
+{
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_cell_editable_get_type != &gidSymbolNotFound ? gtk_cell_editable_get_type() : cast(GType)0;
+  }
+
+  /**
+      Get `editingCanceled` property.
+      Returns: Indicates whether editing on the cell has been canceled.
+  */
+  @property bool editingCanceled() nothrow;
+
+  /**
+      Set `editingCanceled` property.
+      Params:
+        propval = Indicates whether editing on the cell has been canceled.
+  */
+  @property void editingCanceled(bool propval) nothrow;
+
+  /**
+      Emits the `GtkCellEditable::editing-done` signal.
+  */
+  void editingDone();
+
+  /**
+      Emits the `GtkCellEditable::remove-widget` signal.
+  */
+  void removeWidget();
+
+  /**
+      Begins editing on a cell_editable.
+      
+      The [gid.gtk4.cell_renderer.CellRenderer] for the cell creates and returns a [gid.gtk4.cell_editable.CellEditable] from
+      [gid.gtk4.cell_renderer.CellRenderer.startEditing], configured for the [gid.gtk4.cell_renderer.CellRenderer] type.
+      
+      [gid.gtk4.cell_editable.CellEditable.startEditing] can then set up cell_editable suitably for
+      editing a cell, e.g. making the Esc key emit `GtkCellEditable::editing-done`.
+      
+      Note that the cell_editable is created on-demand for the current edit; its
+      lifetime is temporary and does not persist across other edits and/or cells.
+  
+      Params:
+        event = The [gid.gdk4.event.Event] that began the editing process, or
+            null if editing was initiated programmatically
+  */
+  void startEditing(gid.gdk4.event.Event event = null);
+
+  /**
+      Connect to `EditingDone` signal.
+  
+      This signal is a sign for the cell renderer to update its
+        value from the cell_editable.
+        
+        Implementations of [gid.gtk4.cell_editable.CellEditable] are responsible for
+        emitting this signal when they are done editing, e.g.
+        [gid.gtk4.entry.Entry] emits this signal when the user presses Enter. Typical things to
+        do in a handler for ::editing-done are to capture the edited value,
+        disconnect the cell_editable from signals on the [gid.gtk4.cell_renderer.CellRenderer], etc.
+        
+        [gid.gtk4.cell_editable.CellEditable.editingDone] is a convenience method
+        for emitting `GtkCellEditable::editing-done`.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk4.cell_editable.CellEditable cellEditable)`
+  
+          `cellEditable` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectEditingDone(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk4.cell_editable.CellEditable)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.cell_editable.CellEditable.editingDone");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return (cast(gid.gobject2.object.ObjectWrap)this).connectSignalClosure("editing-done", closure, after);
+  }
+
+  /**
+      Connect to `RemoveWidget` signal.
+  
+      This signal is meant to indicate that the cell is finished
+        editing, and the cell_editable widget is being removed and may
+        subsequently be destroyed.
+        
+        Implementations of [gid.gtk4.cell_editable.CellEditable] are responsible for
+        emitting this signal when they are done editing. It must
+        be emitted after the `GtkCellEditable::editing-done` signal,
+        to give the cell renderer a chance to update the cell's value
+        before the widget is removed.
+        
+        [gid.gtk4.cell_editable.CellEditable.removeWidget] is a convenience method
+        for emitting `GtkCellEditable::remove-widget`.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk4.cell_editable.CellEditable cellEditable)`
+  
+          `cellEditable` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectRemoveWidget(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk4.cell_editable.CellEditable)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.cell_editable.CellEditable.removeWidget");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return (cast(gid.gobject2.object.ObjectWrap)this).connectSignalClosure("remove-widget", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.cell_editable.CellEditable]
+interface CellEditableGidBuilderImpl(T)
+{
+
+  /**
+      Set `editingCanceled` property.
+      Params:
+        propval = Indicates whether editing on the cell has been canceled.
+      Returns: Builder instance for fluent chaining
+  */
+  T editingCanceled(bool propval) nothrow;
+}

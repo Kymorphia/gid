@@ -1,0 +1,199 @@
+/// Module for [PartIter] class
+module gid.gmime3.part_iter;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gmime3.c.functions;
+import gid.gmime3.c.types;
+import gid.gmime3.object;
+import gid.gmime3.types;
+import gid.gobject2.boxed;
+import gid.gobject2.object;
+
+/**
+    A MIME part iterator.
+*/
+class PartIter : gid.gobject2.boxed.BoxedWrap!(g_mime_part_iter_get_type)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override PartIter self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Creates a new #GMimePartIter for iterating over toplevel's subparts.
+  
+      Params:
+        toplevel = a #GMimeObject to use as the toplevel
+      Returns: a newly allocated #GMimePartIter which should be freed
+        using [gid.gmime3.part_iter.PartIter.free] when finished with it.
+  */
+  this(gid.gmime3.object.ObjectWrap toplevel) nothrow
+  {
+    GMimePartIter* _cretval;
+    _cretval = g_mime_part_iter_new(toplevel ? cast(GMimeObject*)toplevel._cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Clones the iter, including its current state.
+      Returns: a new #GMimePartIter that is identical to iter.
+  */
+  gid.gmime3.part_iter.PartIter clone() nothrow
+  {
+    GMimePartIter* _cretval;
+    _cretval = g_mime_part_iter_clone(cast(GMimePartIter*)this._cPtr);
+    auto _retval = _cretval ? new gid.gmime3.part_iter.PartIter(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the #GMimeObject at the current #GMimePartIter position.
+      Returns: the current #GMimeObject or null if the
+        state of iter is invalid.
+  */
+  gid.gmime3.object.ObjectWrap getCurrent() nothrow
+  {
+    GMimeObject* _cretval;
+    _cretval = g_mime_part_iter_get_current(cast(GMimePartIter*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gmime3.object.ObjectWrap)(cast(GMimeObject*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the parent of the #GMimeObject at the current #GMimePartIter
+      position.
+      Returns: the parent #GMimeObject or null if the
+        state of iter is invalid.
+  */
+  gid.gmime3.object.ObjectWrap getParent() nothrow
+  {
+    GMimeObject* _cretval;
+    _cretval = g_mime_part_iter_get_parent(cast(GMimePartIter*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gmime3.object.ObjectWrap)(cast(GMimeObject*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the path of the current #GMimeObject in the MIME structure
+      used to initialize iter.
+      Returns: a newly allocated string representation of the path to the
+        #GMimeObject at the current #GMimePartIter position.
+  */
+  string getPath() nothrow
+  {
+    char* _cretval;
+    _cretval = g_mime_part_iter_get_path(cast(GMimePartIter*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the toplevel #GMimeObject used to initialize iter.
+      Returns: the toplevel #GMimeObject.
+  */
+  gid.gmime3.object.ObjectWrap getToplevel() nothrow
+  {
+    GMimeObject* _cretval;
+    _cretval = g_mime_part_iter_get_toplevel(cast(GMimePartIter*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gmime3.object.ObjectWrap)(cast(GMimeObject*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Checks that the current state of iter is valid.
+      Returns: true if iter is valid or false otherwise.
+  */
+  bool isValid() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_mime_part_iter_is_valid(cast(GMimePartIter*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Updates the state of iter to point to the #GMimeObject specified
+      by path.
+  
+      Params:
+        path = a string representing the path to jump to
+      Returns: true if the #GMimeObject specified by path exists or
+        false otherwise.
+  */
+  bool jumpTo(string path) nothrow
+  {
+    bool _retval;
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)g_mime_part_iter_jump_to(cast(GMimePartIter*)this._cPtr, _path);
+    return _retval;
+  }
+
+  /**
+      Advances to the next part in the MIME structure used to initialize
+      iter.
+      Returns: true if successful or false otherwise.
+  */
+  bool next() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_mime_part_iter_next(cast(GMimePartIter*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Rewinds to the previous part in the MIME structure used to
+      initialize iter.
+      Returns: true if successful or false otherwise.
+  */
+  bool prev() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_mime_part_iter_prev(cast(GMimePartIter*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Removes the #GMimeObject at the current position from its
+      parent. If successful, iter is advanced to the next position
+      (since the current position will become invalid).
+      Returns: true if the part at the current position was removed or
+        false otherwise.
+  */
+  bool remove() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_mime_part_iter_remove(cast(GMimePartIter*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Replaces the #GMimeObject at the current position with replacement.
+  
+      Params:
+        replacement = a #GMimeObject
+      Returns: true if the part at the current position was replaced or
+        false otherwise.
+  */
+  bool replace(gid.gmime3.object.ObjectWrap replacement) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_mime_part_iter_replace(cast(GMimePartIter*)this._cPtr, replacement ? cast(GMimeObject*)replacement._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Resets the state of iter to its initial state.
+  */
+  void reset() nothrow
+  {
+    g_mime_part_iter_reset(cast(GMimePartIter*)this._cPtr);
+  }
+}

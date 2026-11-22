@@ -1,0 +1,283 @@
+/// Module for [TokenValue] class
+module gid.glib2.token_value;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.glib2.c.functions;
+import gid.glib2.c.types;
+import gid.glib2.types;
+
+/**
+    A union holding the value of the token.
+*/
+class TokenValue : StructWrap!(GTokenValue)
+{
+  /**
+      Create a `token_value.TokenValue` wrap type.
+      Params:
+        vIdentifier = token identifier value
+        vBinary = token binary integer value
+        vOctal = octal integer value
+        vInt = integer value
+        vInt64 = 64-bit integer value
+        vFloat = floating point value
+        vHex = hex integer value
+        vString = string value
+        vComment = comment value
+        vChar = character value
+        vError = error value
+  */
+  this(string vIdentifier = string.init, gulong vBinary = gulong.init, gulong vOctal = gulong.init, gulong vInt = gulong.init, ulong vInt64 = ulong.init, double vFloat = 0.0, gulong vHex = gulong.init, string vString = string.init, string vComment = string.init, ubyte vChar = ubyte.init, uint vError = uint.init) nothrow
+  {
+    this.vIdentifier = vIdentifier;
+    this.vBinary = vBinary;
+    this.vOctal = vOctal;
+    this.vInt = vInt;
+    this.vInt64 = vInt64;
+    this.vFloat = vFloat;
+    this.vHex = vHex;
+    this.vString = vString;
+    this.vComment = vComment;
+    this.vChar = vChar;
+    this.vError = vError;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _vIdentifierRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `vIdentifier` field.
+      Returns: token identifier value
+  */
+  @property string vIdentifier() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GTokenValue*)this._cPtr).vIdentifier);
+  }
+
+  /**
+      Set `vIdentifier` field.
+      Params:
+        propval = token identifier value
+  */
+  @property void vIdentifier(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("vIdentifier"))
+      return;
+
+    _vIdentifierRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GTokenValue*)this._cPtr).vIdentifier = cast(char*)_vIdentifierRef;
+  }
+
+  /**
+      Get `vBinary` field.
+      Returns: token binary integer value
+  */
+  @property gulong vBinary() nothrow
+  {
+    return (cast(GTokenValue*)this._cPtr).vBinary;
+  }
+
+  /**
+      Set `vBinary` field.
+      Params:
+        propval = token binary integer value
+  */
+  @property void vBinary(gulong propval) nothrow
+  {
+    (cast(GTokenValue*)this._cPtr).vBinary = propval;
+  }
+
+  /**
+      Get `vOctal` field.
+      Returns: octal integer value
+  */
+  @property gulong vOctal() nothrow
+  {
+    return (cast(GTokenValue*)this._cPtr).vOctal;
+  }
+
+  /**
+      Set `vOctal` field.
+      Params:
+        propval = octal integer value
+  */
+  @property void vOctal(gulong propval) nothrow
+  {
+    (cast(GTokenValue*)this._cPtr).vOctal = propval;
+  }
+
+  /**
+      Get `vInt` field.
+      Returns: integer value
+  */
+  @property gulong vInt() nothrow
+  {
+    return (cast(GTokenValue*)this._cPtr).vInt;
+  }
+
+  /**
+      Set `vInt` field.
+      Params:
+        propval = integer value
+  */
+  @property void vInt(gulong propval) nothrow
+  {
+    (cast(GTokenValue*)this._cPtr).vInt = propval;
+  }
+
+  /**
+      Get `vInt64` field.
+      Returns: 64-bit integer value
+  */
+  @property ulong vInt64() nothrow
+  {
+    return (cast(GTokenValue*)this._cPtr).vInt64;
+  }
+
+  /**
+      Set `vInt64` field.
+      Params:
+        propval = 64-bit integer value
+  */
+  @property void vInt64(ulong propval) nothrow
+  {
+    (cast(GTokenValue*)this._cPtr).vInt64 = propval;
+  }
+
+  /**
+      Get `vFloat` field.
+      Returns: floating point value
+  */
+  @property double vFloat() nothrow
+  {
+    return (cast(GTokenValue*)this._cPtr).vFloat;
+  }
+
+  /**
+      Set `vFloat` field.
+      Params:
+        propval = floating point value
+  */
+  @property void vFloat(double propval) nothrow
+  {
+    (cast(GTokenValue*)this._cPtr).vFloat = propval;
+  }
+
+  /**
+      Get `vHex` field.
+      Returns: hex integer value
+  */
+  @property gulong vHex() nothrow
+  {
+    return (cast(GTokenValue*)this._cPtr).vHex;
+  }
+
+  /**
+      Set `vHex` field.
+      Params:
+        propval = hex integer value
+  */
+  @property void vHex(gulong propval) nothrow
+  {
+    (cast(GTokenValue*)this._cPtr).vHex = propval;
+  }
+
+  private const(char)* _vStringRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `vString` field.
+      Returns: string value
+  */
+  @property string vString() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GTokenValue*)this._cPtr).vString);
+  }
+
+  /**
+      Set `vString` field.
+      Params:
+        propval = string value
+  */
+  @property void vString(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("vString"))
+      return;
+
+    _vStringRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GTokenValue*)this._cPtr).vString = cast(char*)_vStringRef;
+  }
+
+  private const(char)* _vCommentRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `vComment` field.
+      Returns: comment value
+  */
+  @property string vComment() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GTokenValue*)this._cPtr).vComment);
+  }
+
+  /**
+      Set `vComment` field.
+      Params:
+        propval = comment value
+  */
+  @property void vComment(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("vComment"))
+      return;
+
+    _vCommentRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GTokenValue*)this._cPtr).vComment = cast(char*)_vCommentRef;
+  }
+
+  /**
+      Get `vChar` field.
+      Returns: character value
+  */
+  @property ubyte vChar() nothrow
+  {
+    return (cast(GTokenValue*)this._cPtr).vChar;
+  }
+
+  /**
+      Set `vChar` field.
+      Params:
+        propval = character value
+  */
+  @property void vChar(ubyte propval) nothrow
+  {
+    (cast(GTokenValue*)this._cPtr).vChar = propval;
+  }
+
+  /**
+      Get `vError` field.
+      Returns: error value
+  */
+  @property uint vError() nothrow
+  {
+    return (cast(GTokenValue*)this._cPtr).vError;
+  }
+
+  /**
+      Set `vError` field.
+      Params:
+        propval = error value
+  */
+  @property void vError(uint propval) nothrow
+  {
+    (cast(GTokenValue*)this._cPtr).vError = propval;
+  }
+}

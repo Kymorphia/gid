@@ -1,0 +1,696 @@
+/// Module for [ScannerConfig] class
+module gid.glib2.scanner_config;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.glib2.c.functions;
+import gid.glib2.c.types;
+import gid.glib2.types;
+
+/**
+    Specifies the #GScanner parser configuration. Most settings can
+    be changed during the parsing phase and will affect the lexical
+    parsing of the next unpeeked token.
+*/
+class ScannerConfig : StructWrap!(GScannerConfig)
+{
+  /**
+      Create a `scanner_config.ScannerConfig` wrap type.
+      Params:
+        csetSkipCharacters = specifies which characters should be skipped
+              by the scanner (the default is the whitespace characters: space,
+              tab, carriage-return and line-feed).
+        csetIdentifierFirst = specifies the characters which can start
+              identifiers (the default is [gid.glib2.types.CSET_a_2_z], "_", and [gid.glib2.types.CSET_A_2_Z]).
+        csetIdentifierNth = specifies the characters which can be used
+              in identifiers, after the first character (the default is
+              [gid.glib2.types.CSET_a_2_z], "_0123456789", [gid.glib2.types.CSET_A_2_Z], `G_CSET_LATINS`,
+              `G_CSET_LATINC`).
+        cpairCommentSingle = specifies the characters at the start and
+              end of single-line comments. The default is "#\n" which means
+              that single-line comments start with a '#' and continue until
+              a '\n' (end of line).
+        caseSensitive = specifies if symbols are case sensitive (the
+              default is false).
+        skipCommentMulti = specifies if multi-line comments are skipped
+              and not returned as tokens (the default is true).
+        skipCommentSingle = specifies if single-line comments are skipped
+              and not returned as tokens (the default is true).
+        scanCommentMulti = specifies if multi-line comments are recognized
+              (the default is true).
+        scanIdentifier = specifies if identifiers are recognized (the
+              default is true).
+        scanIdentifier1char = specifies if single-character
+              identifiers are recognized (the default is false).
+        scanIdentifierNULL = specifies if null is reported as
+              [gid.glib2.types.TokenType.IdentifierNull] (the default is false).
+        scanSymbols = specifies if symbols are recognized (the default
+              is true).
+        scanBinary = specifies if binary numbers are recognized (the
+              default is false).
+        scanOctal = specifies if octal numbers are recognized (the
+              default is true).
+        scanFloat = specifies if floating point numbers are recognized
+              (the default is true).
+        scanHex = specifies if hexadecimal numbers are recognized (the
+              default is true).
+        scanHexDollar = specifies if '$' is recognized as a prefix for
+              hexadecimal numbers (the default is false).
+        scanStringSq = specifies if strings can be enclosed in single
+              quotes (the default is true).
+        scanStringDq = specifies if strings can be enclosed in double
+              quotes (the default is true).
+        numbers2Int = specifies if binary, octal and hexadecimal numbers
+              are reported as [gid.glib2.types.TokenType.Int] (the default is true).
+        int2Float = specifies if all numbers are reported as [gid.glib2.types.TokenType.Float]
+              (the default is false).
+        identifier2String = specifies if identifiers are reported as strings
+              (the default is false).
+        char2Token = specifies if characters are reported by setting
+              `token = ch` or as [gid.glib2.types.TokenType.Char] (the default is true).
+        symbol2Token = specifies if symbols are reported by setting
+              `token = v_symbol` or as [gid.glib2.types.TokenType.Symbol] (the default is false).
+        scope0Fallback = specifies if a symbol is searched for in the
+              default scope in addition to the current scope (the default is false).
+        storeInt64 = use value.v_int64 rather than v_int
+  */
+  this(string csetSkipCharacters = string.init, string csetIdentifierFirst = string.init, string csetIdentifierNth = string.init, string cpairCommentSingle = string.init, uint caseSensitive = uint.init, uint skipCommentMulti = uint.init, uint skipCommentSingle = uint.init, uint scanCommentMulti = uint.init, uint scanIdentifier = uint.init, uint scanIdentifier1char = uint.init, uint scanIdentifierNULL = uint.init, uint scanSymbols = uint.init, uint scanBinary = uint.init, uint scanOctal = uint.init, uint scanFloat = uint.init, uint scanHex = uint.init, uint scanHexDollar = uint.init, uint scanStringSq = uint.init, uint scanStringDq = uint.init, uint numbers2Int = uint.init, uint int2Float = uint.init, uint identifier2String = uint.init, uint char2Token = uint.init, uint symbol2Token = uint.init, uint scope0Fallback = uint.init, uint storeInt64 = uint.init) nothrow
+  {
+    this.csetSkipCharacters = csetSkipCharacters;
+    this.csetIdentifierFirst = csetIdentifierFirst;
+    this.csetIdentifierNth = csetIdentifierNth;
+    this.cpairCommentSingle = cpairCommentSingle;
+    this.caseSensitive = caseSensitive;
+    this.skipCommentMulti = skipCommentMulti;
+    this.skipCommentSingle = skipCommentSingle;
+    this.scanCommentMulti = scanCommentMulti;
+    this.scanIdentifier = scanIdentifier;
+    this.scanIdentifier1char = scanIdentifier1char;
+    this.scanIdentifierNULL = scanIdentifierNULL;
+    this.scanSymbols = scanSymbols;
+    this.scanBinary = scanBinary;
+    this.scanOctal = scanOctal;
+    this.scanFloat = scanFloat;
+    this.scanHex = scanHex;
+    this.scanHexDollar = scanHexDollar;
+    this.scanStringSq = scanStringSq;
+    this.scanStringDq = scanStringDq;
+    this.numbers2Int = numbers2Int;
+    this.int2Float = int2Float;
+    this.identifier2String = identifier2String;
+    this.char2Token = char2Token;
+    this.symbol2Token = symbol2Token;
+    this.scope0Fallback = scope0Fallback;
+    this.storeInt64 = storeInt64;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _csetSkipCharactersRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `csetSkipCharacters` field.
+      Returns: specifies which characters should be skipped
+            by the scanner (the default is the whitespace characters: space,
+            tab, carriage-return and line-feed).
+  */
+  @property string csetSkipCharacters() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).csetSkipCharacters);
+  }
+
+  /**
+      Set `csetSkipCharacters` field.
+      Params:
+        propval = specifies which characters should be skipped
+              by the scanner (the default is the whitespace characters: space,
+              tab, carriage-return and line-feed).
+  */
+  @property void csetSkipCharacters(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("csetSkipCharacters"))
+      return;
+
+    _csetSkipCharactersRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GScannerConfig*)this._cPtr).csetSkipCharacters = cast(char*)_csetSkipCharactersRef;
+  }
+
+  private const(char)* _csetIdentifierFirstRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `csetIdentifierFirst` field.
+      Returns: specifies the characters which can start
+            identifiers (the default is [gid.glib2.types.CSET_a_2_z], "_", and [gid.glib2.types.CSET_A_2_Z]).
+  */
+  @property string csetIdentifierFirst() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).csetIdentifierFirst);
+  }
+
+  /**
+      Set `csetIdentifierFirst` field.
+      Params:
+        propval = specifies the characters which can start
+              identifiers (the default is [gid.glib2.types.CSET_a_2_z], "_", and [gid.glib2.types.CSET_A_2_Z]).
+  */
+  @property void csetIdentifierFirst(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("csetIdentifierFirst"))
+      return;
+
+    _csetIdentifierFirstRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GScannerConfig*)this._cPtr).csetIdentifierFirst = cast(char*)_csetIdentifierFirstRef;
+  }
+
+  private const(char)* _csetIdentifierNthRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `csetIdentifierNth` field.
+      Returns: specifies the characters which can be used
+            in identifiers, after the first character (the default is
+            [gid.glib2.types.CSET_a_2_z], "_0123456789", [gid.glib2.types.CSET_A_2_Z], `G_CSET_LATINS`,
+            `G_CSET_LATINC`).
+  */
+  @property string csetIdentifierNth() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).csetIdentifierNth);
+  }
+
+  /**
+      Set `csetIdentifierNth` field.
+      Params:
+        propval = specifies the characters which can be used
+              in identifiers, after the first character (the default is
+              [gid.glib2.types.CSET_a_2_z], "_0123456789", [gid.glib2.types.CSET_A_2_Z], `G_CSET_LATINS`,
+              `G_CSET_LATINC`).
+  */
+  @property void csetIdentifierNth(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("csetIdentifierNth"))
+      return;
+
+    _csetIdentifierNthRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GScannerConfig*)this._cPtr).csetIdentifierNth = cast(char*)_csetIdentifierNthRef;
+  }
+
+  private const(char)* _cpairCommentSingleRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `cpairCommentSingle` field.
+      Returns: specifies the characters at the start and
+            end of single-line comments. The default is "#\n" which means
+            that single-line comments start with a '#' and continue until
+            a '\n' (end of line).
+  */
+  @property string cpairCommentSingle() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).cpairCommentSingle);
+  }
+
+  /**
+      Set `cpairCommentSingle` field.
+      Params:
+        propval = specifies the characters at the start and
+              end of single-line comments. The default is "#\n" which means
+              that single-line comments start with a '#' and continue until
+              a '\n' (end of line).
+  */
+  @property void cpairCommentSingle(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("cpairCommentSingle"))
+      return;
+
+    _cpairCommentSingleRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GScannerConfig*)this._cPtr).cpairCommentSingle = cast(char*)_cpairCommentSingleRef;
+  }
+
+  /**
+      Get `caseSensitive` field.
+      Returns: specifies if symbols are case sensitive (the
+            default is false).
+  */
+  @property uint caseSensitive() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).caseSensitive;
+  }
+
+  /**
+      Set `caseSensitive` field.
+      Params:
+        propval = specifies if symbols are case sensitive (the
+              default is false).
+  */
+  @property void caseSensitive(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).caseSensitive = propval;
+  }
+
+  /**
+      Get `skipCommentMulti` field.
+      Returns: specifies if multi-line comments are skipped
+            and not returned as tokens (the default is true).
+  */
+  @property uint skipCommentMulti() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).skipCommentMulti;
+  }
+
+  /**
+      Set `skipCommentMulti` field.
+      Params:
+        propval = specifies if multi-line comments are skipped
+              and not returned as tokens (the default is true).
+  */
+  @property void skipCommentMulti(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).skipCommentMulti = propval;
+  }
+
+  /**
+      Get `skipCommentSingle` field.
+      Returns: specifies if single-line comments are skipped
+            and not returned as tokens (the default is true).
+  */
+  @property uint skipCommentSingle() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).skipCommentSingle;
+  }
+
+  /**
+      Set `skipCommentSingle` field.
+      Params:
+        propval = specifies if single-line comments are skipped
+              and not returned as tokens (the default is true).
+  */
+  @property void skipCommentSingle(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).skipCommentSingle = propval;
+  }
+
+  /**
+      Get `scanCommentMulti` field.
+      Returns: specifies if multi-line comments are recognized
+            (the default is true).
+  */
+  @property uint scanCommentMulti() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).scanCommentMulti;
+  }
+
+  /**
+      Set `scanCommentMulti` field.
+      Params:
+        propval = specifies if multi-line comments are recognized
+              (the default is true).
+  */
+  @property void scanCommentMulti(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).scanCommentMulti = propval;
+  }
+
+  /**
+      Get `scanIdentifier` field.
+      Returns: specifies if identifiers are recognized (the
+            default is true).
+  */
+  @property uint scanIdentifier() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).scanIdentifier;
+  }
+
+  /**
+      Set `scanIdentifier` field.
+      Params:
+        propval = specifies if identifiers are recognized (the
+              default is true).
+  */
+  @property void scanIdentifier(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).scanIdentifier = propval;
+  }
+
+  /**
+      Get `scanIdentifier1char` field.
+      Returns: specifies if single-character
+            identifiers are recognized (the default is false).
+  */
+  @property uint scanIdentifier1char() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).scanIdentifier1char;
+  }
+
+  /**
+      Set `scanIdentifier1char` field.
+      Params:
+        propval = specifies if single-character
+              identifiers are recognized (the default is false).
+  */
+  @property void scanIdentifier1char(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).scanIdentifier1char = propval;
+  }
+
+  /**
+      Get `scanIdentifierNULL` field.
+      Returns: specifies if null is reported as
+            [gid.glib2.types.TokenType.IdentifierNull] (the default is false).
+  */
+  @property uint scanIdentifierNULL() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).scanIdentifierNULL;
+  }
+
+  /**
+      Set `scanIdentifierNULL` field.
+      Params:
+        propval = specifies if null is reported as
+              [gid.glib2.types.TokenType.IdentifierNull] (the default is false).
+  */
+  @property void scanIdentifierNULL(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).scanIdentifierNULL = propval;
+  }
+
+  /**
+      Get `scanSymbols` field.
+      Returns: specifies if symbols are recognized (the default
+            is true).
+  */
+  @property uint scanSymbols() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).scanSymbols;
+  }
+
+  /**
+      Set `scanSymbols` field.
+      Params:
+        propval = specifies if symbols are recognized (the default
+              is true).
+  */
+  @property void scanSymbols(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).scanSymbols = propval;
+  }
+
+  /**
+      Get `scanBinary` field.
+      Returns: specifies if binary numbers are recognized (the
+            default is false).
+  */
+  @property uint scanBinary() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).scanBinary;
+  }
+
+  /**
+      Set `scanBinary` field.
+      Params:
+        propval = specifies if binary numbers are recognized (the
+              default is false).
+  */
+  @property void scanBinary(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).scanBinary = propval;
+  }
+
+  /**
+      Get `scanOctal` field.
+      Returns: specifies if octal numbers are recognized (the
+            default is true).
+  */
+  @property uint scanOctal() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).scanOctal;
+  }
+
+  /**
+      Set `scanOctal` field.
+      Params:
+        propval = specifies if octal numbers are recognized (the
+              default is true).
+  */
+  @property void scanOctal(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).scanOctal = propval;
+  }
+
+  /**
+      Get `scanFloat` field.
+      Returns: specifies if floating point numbers are recognized
+            (the default is true).
+  */
+  @property uint scanFloat() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).scanFloat;
+  }
+
+  /**
+      Set `scanFloat` field.
+      Params:
+        propval = specifies if floating point numbers are recognized
+              (the default is true).
+  */
+  @property void scanFloat(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).scanFloat = propval;
+  }
+
+  /**
+      Get `scanHex` field.
+      Returns: specifies if hexadecimal numbers are recognized (the
+            default is true).
+  */
+  @property uint scanHex() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).scanHex;
+  }
+
+  /**
+      Set `scanHex` field.
+      Params:
+        propval = specifies if hexadecimal numbers are recognized (the
+              default is true).
+  */
+  @property void scanHex(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).scanHex = propval;
+  }
+
+  /**
+      Get `scanHexDollar` field.
+      Returns: specifies if '$' is recognized as a prefix for
+            hexadecimal numbers (the default is false).
+  */
+  @property uint scanHexDollar() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).scanHexDollar;
+  }
+
+  /**
+      Set `scanHexDollar` field.
+      Params:
+        propval = specifies if '$' is recognized as a prefix for
+              hexadecimal numbers (the default is false).
+  */
+  @property void scanHexDollar(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).scanHexDollar = propval;
+  }
+
+  /**
+      Get `scanStringSq` field.
+      Returns: specifies if strings can be enclosed in single
+            quotes (the default is true).
+  */
+  @property uint scanStringSq() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).scanStringSq;
+  }
+
+  /**
+      Set `scanStringSq` field.
+      Params:
+        propval = specifies if strings can be enclosed in single
+              quotes (the default is true).
+  */
+  @property void scanStringSq(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).scanStringSq = propval;
+  }
+
+  /**
+      Get `scanStringDq` field.
+      Returns: specifies if strings can be enclosed in double
+            quotes (the default is true).
+  */
+  @property uint scanStringDq() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).scanStringDq;
+  }
+
+  /**
+      Set `scanStringDq` field.
+      Params:
+        propval = specifies if strings can be enclosed in double
+              quotes (the default is true).
+  */
+  @property void scanStringDq(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).scanStringDq = propval;
+  }
+
+  /**
+      Get `numbers2Int` field.
+      Returns: specifies if binary, octal and hexadecimal numbers
+            are reported as [gid.glib2.types.TokenType.Int] (the default is true).
+  */
+  @property uint numbers2Int() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).numbers2Int;
+  }
+
+  /**
+      Set `numbers2Int` field.
+      Params:
+        propval = specifies if binary, octal and hexadecimal numbers
+              are reported as [gid.glib2.types.TokenType.Int] (the default is true).
+  */
+  @property void numbers2Int(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).numbers2Int = propval;
+  }
+
+  /**
+      Get `int2Float` field.
+      Returns: specifies if all numbers are reported as [gid.glib2.types.TokenType.Float]
+            (the default is false).
+  */
+  @property uint int2Float() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).int2Float;
+  }
+
+  /**
+      Set `int2Float` field.
+      Params:
+        propval = specifies if all numbers are reported as [gid.glib2.types.TokenType.Float]
+              (the default is false).
+  */
+  @property void int2Float(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).int2Float = propval;
+  }
+
+  /**
+      Get `identifier2String` field.
+      Returns: specifies if identifiers are reported as strings
+            (the default is false).
+  */
+  @property uint identifier2String() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).identifier2String;
+  }
+
+  /**
+      Set `identifier2String` field.
+      Params:
+        propval = specifies if identifiers are reported as strings
+              (the default is false).
+  */
+  @property void identifier2String(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).identifier2String = propval;
+  }
+
+  /**
+      Get `char2Token` field.
+      Returns: specifies if characters are reported by setting
+            `token = ch` or as [gid.glib2.types.TokenType.Char] (the default is true).
+  */
+  @property uint char2Token() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).char2Token;
+  }
+
+  /**
+      Set `char2Token` field.
+      Params:
+        propval = specifies if characters are reported by setting
+              `token = ch` or as [gid.glib2.types.TokenType.Char] (the default is true).
+  */
+  @property void char2Token(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).char2Token = propval;
+  }
+
+  /**
+      Get `symbol2Token` field.
+      Returns: specifies if symbols are reported by setting
+            `token = v_symbol` or as [gid.glib2.types.TokenType.Symbol] (the default is false).
+  */
+  @property uint symbol2Token() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).symbol2Token;
+  }
+
+  /**
+      Set `symbol2Token` field.
+      Params:
+        propval = specifies if symbols are reported by setting
+              `token = v_symbol` or as [gid.glib2.types.TokenType.Symbol] (the default is false).
+  */
+  @property void symbol2Token(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).symbol2Token = propval;
+  }
+
+  /**
+      Get `scope0Fallback` field.
+      Returns: specifies if a symbol is searched for in the
+            default scope in addition to the current scope (the default is false).
+  */
+  @property uint scope0Fallback() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).scope0Fallback;
+  }
+
+  /**
+      Set `scope0Fallback` field.
+      Params:
+        propval = specifies if a symbol is searched for in the
+              default scope in addition to the current scope (the default is false).
+  */
+  @property void scope0Fallback(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).scope0Fallback = propval;
+  }
+
+  /**
+      Get `storeInt64` field.
+      Returns: use value.v_int64 rather than v_int
+  */
+  @property uint storeInt64() nothrow
+  {
+    return (cast(GScannerConfig*)this._cPtr).storeInt64;
+  }
+
+  /**
+      Set `storeInt64` field.
+      Params:
+        propval = use value.v_int64 rather than v_int
+  */
+  @property void storeInt64(uint propval) nothrow
+  {
+    (cast(GScannerConfig*)this._cPtr).storeInt64 = propval;
+  }
+}

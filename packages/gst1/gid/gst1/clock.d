@@ -1,0 +1,877 @@
+/// Module for [Clock] class
+module gid.gst1.clock;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gst1.c.functions;
+import gid.gst1.c.types;
+import gid.gst1.object;
+import gid.gst1.types;
+
+/**
+    GStreamer uses a global clock to synchronize the plugins in a pipeline.
+    Different clock implementations are possible by implementing this abstract
+    base class or, more conveniently, by subclassing #GstSystemClock.
+    
+    The #GstClock returns a monotonically increasing time with the method
+    [gid.gst1.clock.Clock.getTime]. Its accuracy and base time depend on the specific
+    clock implementation but time is always expressed in nanoseconds. Since the
+    baseline of the clock is undefined, the clock time returned is not
+    meaningful in itself, what matters are the deltas between two clock times.
+    The time returned by a clock is called the absolute time.
+    
+    The pipeline uses the clock to calculate the running time. Usually all
+    renderers synchronize to the global clock using the buffer timestamps, the
+    #GST_EVENT_SEGMENT events and the element's base time, see #GstPipeline.
+    
+    A clock implementation can support periodic and single shot clock
+    notifications both synchronous and asynchronous.
+    
+    One first needs to create a #GstClockID for the periodic or single shot
+    notification using [gid.gst1.clock.Clock.newSingleShotId] or
+    [gid.gst1.clock.Clock.newPeriodicId].
+    
+    To perform a blocking wait for the specific time of the #GstClockID use
+    [gid.gst1.clock.Clock.idWait]. To receive a callback when the specific time is reached
+    in the clock use [gid.gst1.clock.Clock.idWaitAsync]. Both these calls can be
+    interrupted with the [gid.gst1.clock.Clock.idUnschedule] call. If the blocking wait is
+    unscheduled a return value of #GST_CLOCK_UNSCHEDULED is returned.
+    
+    Periodic callbacks scheduled async will be repeatedly called automatically
+    until they are unscheduled. To schedule a sync periodic callback,
+    [gid.gst1.clock.Clock.idWait] should be called repeatedly.
+    
+    The async callbacks can happen from any thread, either provided by the core
+    or from a streaming thread. The application should be prepared for this.
+    
+    A #GstClockID that has been unscheduled cannot be used again for any wait
+    operation, a new #GstClockID should be created and the old unscheduled one
+    should be destroyed with [gid.gst1.clock.Clock.idUnref].
+    
+    It is possible to perform a blocking wait on the same #GstClockID from
+    multiple threads. However, registering the same #GstClockID for multiple
+    async notifications is not possible, the callback will only be called for
+    the thread registering the entry last.
+    
+    None of the wait operations unref the #GstClockID, the owner is responsible
+    for unreffing the ids itself. This holds for both periodic and single shot
+    notifications. The reason being that the owner of the #GstClockID has to
+    keep a handle to the #GstClockID to unblock the wait on FLUSHING events or
+    state changes and if the entry would be unreffed automatically, the handle
+    might become invalid without any notification.
+    
+    These clock operations do not operate on the running time, so the callbacks
+    will also occur when not in PLAYING state as if the clock just keeps on
+    running. Some clocks however do not progress when the element that provided
+    the clock is not PLAYING.
+    
+    When a clock has the #GST_CLOCK_FLAG_CAN_SET_MASTER flag set, it can be
+    slaved to another #GstClock with [gid.gst1.clock.Clock.setMaster]. The clock will
+    then automatically be synchronized to this master clock by repeatedly
+    sampling the master clock and the slave clock and recalibrating the slave
+    clock with [gid.gst1.clock.Clock.setCalibration]. This feature is mostly useful for
+    plugins that have an internal clock but must operate with another clock
+    selected by the #GstPipeline.  They can track the offset and rate difference
+    of their internal clock relative to the master clock by using the
+    [gid.gst1.clock.Clock.getCalibration] function.
+    
+    The master/slave synchronisation can be tuned with the #GstClock:timeout,
+    #GstClock:window-size and #GstClock:window-threshold properties.
+    The #GstClock:timeout property defines the interval to sample the master
+    clock and run the calibration functions. #GstClock:window-size defines the
+    number of samples to use when calibrating and #GstClock:window-threshold
+    defines the minimum number of samples before the calibration is performed.
+*/
+class Clock : gid.gst1.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gst_clock_get_type != &gidSymbolNotFound ? gst_clock_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GstClock";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Clock self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gst1.clock.Clock]
+      Returns: New builder object
+  */
+  static ClockGidBuilder builder() nothrow
+  {
+    return new ClockGidBuilder;
+  }
+
+  /** */
+  @property ulong timeout() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(ulong)("timeout");
+  }
+
+  /** */
+  @property void timeout(ulong propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(ulong)("timeout", propval);
+  }
+
+  /** */
+  @property int windowSize() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(int)("window-size");
+  }
+
+  /** */
+  @property void windowSize(int propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(int)("window-size", propval);
+  }
+
+  /** */
+  @property int windowThreshold() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(int)("window-threshold");
+  }
+
+  /** */
+  @property void windowThreshold(int propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(int)("window-threshold", propval);
+  }
+
+  /**
+      Compares the two #GstClockID instances. This function can be used
+      as a GCompareFunc when sorting ids.
+  
+      Params:
+        id1 = A #GstClockID
+        id2 = A #GstClockID to compare with
+      Returns: negative value if `a < b`; zero if `a = b`; positive value if `a > b`
+  */
+  static int idCompareFunc(const(void)* id1 = null, const(void)* id2 = null) nothrow
+  {
+    int _retval;
+    _retval = gst_clock_id_compare_func(id1, id2);
+    return _retval;
+  }
+
+  /**
+      This function returns the underlying clock.
+  
+      Params:
+        id = a #GstClockID
+      Returns: a #GstClock or null when the
+            underlying clock has been freed.
+  */
+  static gid.gst1.clock.Clock idGetClock(gid.gst1.types.ClockID id) nothrow
+  {
+    GstClock* _cretval;
+    _cretval = gst_clock_id_get_clock(id);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the time of the clock ID
+  
+      Params:
+        id = The #GstClockID to query
+      Returns: the time of the given clock id.
+  */
+  static gid.gst1.types.ClockTime idGetTime(gid.gst1.types.ClockID id) nothrow
+  {
+    gid.gst1.types.ClockTime _retval;
+    _retval = gst_clock_id_get_time(id);
+    return _retval;
+  }
+
+  /**
+      Increases the refcount of given id.
+  
+      Params:
+        id = The #GstClockID to ref
+      Returns: The same #GstClockID with increased refcount.
+  */
+  static gid.gst1.types.ClockID idRef(gid.gst1.types.ClockID id) nothrow
+  {
+    gid.gst1.types.ClockID _retval;
+    _retval = gst_clock_id_ref(id);
+    return _retval;
+  }
+
+  /**
+      Unrefs given id. When the refcount reaches 0 the
+      #GstClockID will be freed.
+  
+      Params:
+        id = The #GstClockID to unref
+  */
+  static void idUnref(gid.gst1.types.ClockID id) nothrow
+  {
+    gst_clock_id_unref(id);
+  }
+
+  /**
+      Cancels an outstanding request with id. This can either
+      be an outstanding async notification or a pending sync notification.
+      After this call, id cannot be used anymore to receive sync or
+      async notifications, you need to create a new #GstClockID.
+  
+      Params:
+        id = The id to unschedule
+  */
+  static void idUnschedule(gid.gst1.types.ClockID id) nothrow
+  {
+    gst_clock_id_unschedule(id);
+  }
+
+  /**
+      This function returns whether id uses clock as the underlying clock.
+      clock can be NULL, in which case the return value indicates whether
+      the underlying clock has been freed.  If this is the case, the id is
+      no longer usable and should be freed.
+  
+      Params:
+        id = a #GstClockID to check
+        clock = a #GstClock to compare against
+      Returns: whether the clock id uses the same underlying #GstClock clock.
+  */
+  static bool idUsesClock(gid.gst1.types.ClockID id, gid.gst1.clock.Clock clock) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_clock_id_uses_clock(id, clock ? cast(GstClock*)clock._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Performs a blocking wait on id.
+      id should have been created with [gid.gst1.clock.Clock.newSingleShotId]
+      or [gid.gst1.clock.Clock.newPeriodicId] and should not have been unscheduled
+      with a call to [gid.gst1.clock.Clock.idUnschedule].
+      
+      If the jitter argument is not null and this function returns #GST_CLOCK_OK
+      or #GST_CLOCK_EARLY, it will contain the difference
+      against the clock and the time of id when this method was
+      called.
+      Positive values indicate how late id was relative to the clock
+      (in which case this function will return #GST_CLOCK_EARLY).
+      Negative values indicate how much time was spent waiting on the clock
+      before this function returned.
+  
+      Params:
+        id = The #GstClockID to wait on
+        jitter = a pointer that will contain the jitter,
+              can be null.
+      Returns: the result of the blocking wait. #GST_CLOCK_EARLY will be returned
+        if the current clock time is past the time of id, #GST_CLOCK_OK if
+        id was scheduled in time. #GST_CLOCK_UNSCHEDULED if id was
+        unscheduled with [gid.gst1.clock.Clock.idUnschedule].
+  */
+  static gid.gst1.types.ClockReturn idWait(gid.gst1.types.ClockID id, out gid.gst1.types.ClockTimeDiff jitter) nothrow
+  {
+    GstClockReturn _cretval;
+    _cretval = gst_clock_id_wait(id, cast(GstClockTimeDiff*)&jitter);
+    gid.gst1.types.ClockReturn _retval = cast(gid.gst1.types.ClockReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      Registers a callback on the given #GstClockID id with the given
+      function and user_data. When passing a #GstClockID with an invalid
+      time to this function, the callback will be called immediately
+      with  a time set to [gid.gst1.types.CLOCK_TIME_NONE]. The callback will
+      be called when the time of id has been reached.
+      
+      The callback func can be invoked from any thread, either provided by the
+      core or from a streaming thread. The application should be prepared for this.
+  
+      Params:
+        id = a #GstClockID to wait on
+        func = The callback function
+      Returns: the result of the non blocking wait.
+  */
+  static gid.gst1.types.ClockReturn idWaitAsync(gid.gst1.types.ClockID id, gid.gst1.types.ClockCallback func) nothrow
+  {
+    extern(C) gboolean _funcCallback(GstClock* clock, GstClockTime time, GstClockID id, void* userData) nothrow
+    {
+      bool _dretval;
+      auto _dlg = cast(gid.gst1.types.ClockCallback*)userData;
+
+      try
+      {
+        _dretval = (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.clock.Clock)(cast(void*)clock, No.Take), time, id);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gst1.types.ClockCallback");
+      }
+      auto _retval = cast(gboolean)_dretval;
+
+      return _retval;
+    }
+    auto _funcCB = func ? &_funcCallback : null;
+    GstClockReturn _cretval;
+    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+    _cretval = gst_clock_id_wait_async(id, _funcCB, _func, _funcDestroyCB);
+    gid.gst1.types.ClockReturn _retval = cast(gid.gst1.types.ClockReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      The time observation_external of the external or master clock and the time
+      observation_internal of the internal or slave clock are added to the list of
+      observations. If enough observations are available, a linear regression
+      algorithm is run on the observations and clock is recalibrated.
+      
+      If this functions returns true, r_squared will contain the
+      correlation coefficient of the interpolation. A value of 1.0
+      means a perfect regression was performed. This value can
+      be used to control the sampling frequency of the master and slave
+      clocks.
+  
+      Params:
+        observationInternal = a time on the internal clock
+        observationExternal = a time on the external clock
+        rSquared = a pointer to hold the result
+      Returns: true if enough observations were added to run the
+        regression algorithm.
+  */
+  bool addObservation(gid.gst1.types.ClockTime observationInternal, gid.gst1.types.ClockTime observationExternal, out double rSquared) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_clock_add_observation(cast(GstClock*)this._cPtr, observationInternal, observationExternal, cast(double*)&rSquared);
+    return _retval;
+  }
+
+  /**
+      Add a clock observation to the internal slaving algorithm the same as
+      [gid.gst1.clock.Clock.addObservation], and return the result of the external or master
+      clock estimation, without updating the internal calibration.
+      
+      The caller can then take the results and call [gid.gst1.clock.Clock.setCalibration]
+      with the values, or some modified version of them.
+  
+      Params:
+        observationInternal = a time on the internal clock
+        observationExternal = a time on the external clock
+        rSquared = a pointer to hold the result
+        internal = a location to store the internal time
+        external = a location to store the external time
+        rateNum = a location to store the rate numerator
+        rateDenom = a location to store the rate denominator
+      Returns: true if enough observations were added to run the
+        regression algorithm.
+  */
+  bool addObservationUnapplied(gid.gst1.types.ClockTime observationInternal, gid.gst1.types.ClockTime observationExternal, out double rSquared, out gid.gst1.types.ClockTime internal, out gid.gst1.types.ClockTime external, out gid.gst1.types.ClockTime rateNum, out gid.gst1.types.ClockTime rateDenom) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_clock_add_observation_unapplied(cast(GstClock*)this._cPtr, observationInternal, observationExternal, cast(double*)&rSquared, cast(GstClockTime*)&internal, cast(GstClockTime*)&external, cast(GstClockTime*)&rateNum, cast(GstClockTime*)&rateDenom);
+    return _retval;
+  }
+
+  /**
+      Converts the given internal clock time to the external time, adjusting for the
+      rate and reference time set with [gid.gst1.clock.Clock.setCalibration] and making sure
+      that the returned time is increasing. This function should be called with the
+      clock's OBJECT_LOCK held and is mainly used by clock subclasses.
+      
+      This function is the reverse of [gid.gst1.clock.Clock.unadjustUnlocked].
+  
+      Params:
+        internal = a clock time
+      Returns: the converted time of the clock.
+  */
+  gid.gst1.types.ClockTime adjustUnlocked(gid.gst1.types.ClockTime internal) nothrow
+  {
+    gid.gst1.types.ClockTime _retval;
+    _retval = gst_clock_adjust_unlocked(cast(GstClock*)this._cPtr, internal);
+    return _retval;
+  }
+
+  /**
+      Converts the given internal_target clock time to the external time,
+      using the passed calibration parameters. This function performs the
+      same calculation as [gid.gst1.clock.Clock.adjustUnlocked] when called using the
+      current calibration parameters, but doesn't ensure a monotonically
+      increasing result as [gid.gst1.clock.Clock.adjustUnlocked] does.
+      
+      Note: The clock parameter is unused and can be NULL
+  
+      Params:
+        internalTarget = a clock time
+        cinternal = a reference internal time
+        cexternal = a reference external time
+        cnum = the numerator of the rate of the clock relative to its
+                 internal time
+        cdenom = the denominator of the rate of the clock
+      Returns: the converted time of the clock.
+  */
+  gid.gst1.types.ClockTime adjustWithCalibration(gid.gst1.types.ClockTime internalTarget, gid.gst1.types.ClockTime cinternal, gid.gst1.types.ClockTime cexternal, gid.gst1.types.ClockTime cnum, gid.gst1.types.ClockTime cdenom) nothrow
+  {
+    gid.gst1.types.ClockTime _retval;
+    _retval = gst_clock_adjust_with_calibration(cast(GstClock*)this._cPtr, internalTarget, cinternal, cexternal, cnum, cdenom);
+    return _retval;
+  }
+
+  /**
+      Gets the internal rate and reference time of clock. See
+      [gid.gst1.clock.Clock.setCalibration] for more information.
+      
+      internal, external, rate_num, and rate_denom can be left null if the
+      caller is not interested in the values.
+  
+      Params:
+        internal = a location to store the internal time
+        external = a location to store the external time
+        rateNum = a location to store the rate numerator
+        rateDenom = a location to store the rate denominator
+  */
+  void getCalibration(out gid.gst1.types.ClockTime internal, out gid.gst1.types.ClockTime external, out gid.gst1.types.ClockTime rateNum, out gid.gst1.types.ClockTime rateDenom) nothrow
+  {
+    gst_clock_get_calibration(cast(GstClock*)this._cPtr, cast(GstClockTime*)&internal, cast(GstClockTime*)&external, cast(GstClockTime*)&rateNum, cast(GstClockTime*)&rateDenom);
+  }
+
+  /**
+      Gets the current internal time of the given clock. The time is returned
+      unadjusted for the offset and the rate.
+      Returns: the internal time of the clock. Or [gid.gst1.types.CLOCK_TIME_NONE] when
+        given invalid input.
+  */
+  gid.gst1.types.ClockTime getInternalTime() nothrow
+  {
+    gid.gst1.types.ClockTime _retval;
+    _retval = gst_clock_get_internal_time(cast(GstClock*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the master clock that clock is slaved to or null when the clock is
+      not slaved to any master clock.
+      Returns: a master #GstClock or null
+            when this clock is not slaved to a master clock.
+  */
+  gid.gst1.clock.Clock getMaster() nothrow
+  {
+    GstClock* _cretval;
+    _cretval = gst_clock_get_master(cast(GstClock*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the accuracy of the clock. The accuracy of the clock is the granularity
+      of the values returned by [gid.gst1.clock.Clock.getTime].
+      Returns: the resolution of the clock in units of #GstClockTime.
+  */
+  gid.gst1.types.ClockTime getResolution() nothrow
+  {
+    gid.gst1.types.ClockTime _retval;
+    _retval = gst_clock_get_resolution(cast(GstClock*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the current time of the given clock. The time is always
+      monotonically increasing and adjusted according to the current
+      offset and rate.
+      Returns: the time of the clock. Or [gid.gst1.types.CLOCK_TIME_NONE] when
+        given invalid input.
+  */
+  gid.gst1.types.ClockTime getTime() nothrow
+  {
+    gid.gst1.types.ClockTime _retval;
+    _retval = gst_clock_get_time(cast(GstClock*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the amount of time that master and slave clocks are sampled.
+      Returns: the interval between samples.
+  */
+  gid.gst1.types.ClockTime getTimeout() nothrow
+  {
+    gid.gst1.types.ClockTime _retval;
+    _retval = gst_clock_get_timeout(cast(GstClock*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Checks if the clock is currently synced, by looking at whether
+      [gid.gst1.types.ClockFlags.NeedsStartupSync] is set.
+      Returns: true if the clock is currently synced
+  */
+  bool isSynced() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_clock_is_synced(cast(GstClock*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Checks that clock is the default system clock, as returned by
+      [gid.gst1.system_clock.SystemClock.obtain], and is of type [gid.gst1.types.ClockType.Monotonic].
+      Returns: true if clock is the default system monotonic clock,
+          false otherwise.
+  */
+  bool isSystemMonotonic() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_clock_is_system_monotonic(cast(GstClock*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets an ID from clock to trigger a periodic notification.
+      The periodic notifications will start at time start_time and
+      will then be fired with the given interval.
+  
+      Params:
+        startTime = the requested start time
+        interval = the requested interval
+      Returns: a #GstClockID that can be used to request the
+            time notification.
+  */
+  gid.gst1.types.ClockID newPeriodicId(gid.gst1.types.ClockTime startTime, gid.gst1.types.ClockTime interval) nothrow
+  {
+    gid.gst1.types.ClockID _retval;
+    _retval = gst_clock_new_periodic_id(cast(GstClock*)this._cPtr, startTime, interval);
+    return _retval;
+  }
+
+  /**
+      Gets a #GstClockID from clock to trigger a single shot
+      notification at the requested time.
+  
+      Params:
+        time = the requested time
+      Returns: a #GstClockID that can be used to request the
+            time notification.
+  */
+  gid.gst1.types.ClockID newSingleShotId(gid.gst1.types.ClockTime time) nothrow
+  {
+    gid.gst1.types.ClockID _retval;
+    _retval = gst_clock_new_single_shot_id(cast(GstClock*)this._cPtr, time);
+    return _retval;
+  }
+
+  /**
+      Reinitializes the provided periodic id to the provided start time and
+      interval. Does not modify the reference count.
+  
+      Params:
+        id = a #GstClockID
+        startTime = the requested start time
+        interval = the requested interval
+      Returns: true if the GstClockID could be reinitialized to the provided
+        time, else false.
+  */
+  bool periodicIdReinit(gid.gst1.types.ClockID id, gid.gst1.types.ClockTime startTime, gid.gst1.types.ClockTime interval) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_clock_periodic_id_reinit(cast(GstClock*)this._cPtr, id, startTime, interval);
+    return _retval;
+  }
+
+  /**
+      Adjusts the rate and time of clock. A rate of 1/1 is the normal speed of
+      the clock. Values bigger than 1/1 make the clock go faster.
+      
+      internal and external are calibration parameters that arrange that
+      [gid.gst1.clock.Clock.getTime] should have been external at internal time internal.
+      This internal time should not be in the future; that is, it should be less
+      than the value of [gid.gst1.clock.Clock.getInternalTime] when this function is called.
+      
+      Subsequent calls to [gid.gst1.clock.Clock.getTime] will return clock times computed as
+      follows:
+      
+      ``` C
+        time = (internal_time - internal) * rate_num / rate_denom + external
+      ```
+      
+      This formula is implemented in [gid.gst1.clock.Clock.adjustUnlocked]. Of course, it
+      tries to do the integer arithmetic as precisely as possible.
+      
+      Note that [gid.gst1.clock.Clock.getTime] always returns increasing values so when you
+      move the clock backwards, [gid.gst1.clock.Clock.getTime] will report the previous value
+      until the clock catches up.
+  
+      Params:
+        internal = a reference internal time
+        external = a reference external time
+        rateNum = the numerator of the rate of the clock relative to its
+                     internal time
+        rateDenom = the denominator of the rate of the clock
+  */
+  void setCalibration(gid.gst1.types.ClockTime internal, gid.gst1.types.ClockTime external, gid.gst1.types.ClockTime rateNum, gid.gst1.types.ClockTime rateDenom) nothrow
+  {
+    gst_clock_set_calibration(cast(GstClock*)this._cPtr, internal, external, rateNum, rateDenom);
+  }
+
+  /**
+      Sets master as the master clock for clock. clock will be automatically
+      calibrated so that [gid.gst1.clock.Clock.getTime] reports the same time as the
+      master clock.
+      
+      A clock provider that slaves its clock to a master can get the current
+      calibration values with [gid.gst1.clock.Clock.getCalibration].
+      
+      master can be null in which case clock will not be slaved anymore. It will
+      however keep reporting its time adjusted with the last configured rate
+      and time offsets.
+  
+      Params:
+        master = a master #GstClock
+      Returns: true if the clock is capable of being slaved to a master clock.
+        Trying to set a master on a clock without the
+        #GST_CLOCK_FLAG_CAN_SET_MASTER flag will make this function return false.
+  */
+  bool setMaster(gid.gst1.clock.Clock master = null) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_clock_set_master(cast(GstClock*)this._cPtr, master ? cast(GstClock*)master._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Sets the accuracy of the clock. Some clocks have the possibility to operate
+      with different accuracy at the expense of more resource usage. There is
+      normally no need to change the default resolution of a clock. The resolution
+      of a clock can only be changed if the clock has the
+      #GST_CLOCK_FLAG_CAN_SET_RESOLUTION flag set.
+  
+      Params:
+        resolution = The resolution to set
+      Returns: the new resolution of the clock.
+  */
+  gid.gst1.types.ClockTime setResolution(gid.gst1.types.ClockTime resolution) nothrow
+  {
+    gid.gst1.types.ClockTime _retval;
+    _retval = gst_clock_set_resolution(cast(GstClock*)this._cPtr, resolution);
+    return _retval;
+  }
+
+  /**
+      Sets clock to synced and emits the #GstClock::synced signal, and wakes up any
+      thread waiting in [gid.gst1.clock.Clock.waitForSync].
+      
+      This function must only be called if [gid.gst1.types.ClockFlags.NeedsStartupSync]
+      is set on the clock, and is intended to be called by subclasses only.
+  
+      Params:
+        synced = if the clock is synced
+  */
+  void setSynced(bool synced) nothrow
+  {
+    gst_clock_set_synced(cast(GstClock*)this._cPtr, synced);
+  }
+
+  /**
+      Sets the amount of time, in nanoseconds, to sample master and slave
+      clocks
+  
+      Params:
+        timeout = a timeout
+  */
+  void setTimeout(gid.gst1.types.ClockTime timeout) nothrow
+  {
+    gst_clock_set_timeout(cast(GstClock*)this._cPtr, timeout);
+  }
+
+  /**
+      Reinitializes the provided single shot id to the provided time. Does not
+      modify the reference count.
+  
+      Params:
+        id = a #GstClockID
+        time = The requested time.
+      Returns: true if the GstClockID could be reinitialized to the provided
+        time, else false.
+  */
+  bool singleShotIdReinit(gid.gst1.types.ClockID id, gid.gst1.types.ClockTime time) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_clock_single_shot_id_reinit(cast(GstClock*)this._cPtr, id, time);
+    return _retval;
+  }
+
+  /**
+      Converts the given external clock time to the internal time of clock,
+      using the rate and reference time set with [gid.gst1.clock.Clock.setCalibration].
+      This function should be called with the clock's OBJECT_LOCK held and
+      is mainly used by clock subclasses.
+      
+      This function is the reverse of [gid.gst1.clock.Clock.adjustUnlocked].
+  
+      Params:
+        external = an external clock time
+      Returns: the internal time of the clock corresponding to external.
+  */
+  gid.gst1.types.ClockTime unadjustUnlocked(gid.gst1.types.ClockTime external) nothrow
+  {
+    gid.gst1.types.ClockTime _retval;
+    _retval = gst_clock_unadjust_unlocked(cast(GstClock*)this._cPtr, external);
+    return _retval;
+  }
+
+  /**
+      Converts the given external_target clock time to the internal time,
+      using the passed calibration parameters. This function performs the
+      same calculation as [gid.gst1.clock.Clock.unadjustUnlocked] when called using the
+      current calibration parameters.
+      
+      Note: The clock parameter is unused and can be NULL
+  
+      Params:
+        externalTarget = a clock time
+        cinternal = a reference internal time
+        cexternal = a reference external time
+        cnum = the numerator of the rate of the clock relative to its
+                 internal time
+        cdenom = the denominator of the rate of the clock
+      Returns: the converted time of the clock.
+  */
+  gid.gst1.types.ClockTime unadjustWithCalibration(gid.gst1.types.ClockTime externalTarget, gid.gst1.types.ClockTime cinternal, gid.gst1.types.ClockTime cexternal, gid.gst1.types.ClockTime cnum, gid.gst1.types.ClockTime cdenom) nothrow
+  {
+    gid.gst1.types.ClockTime _retval;
+    _retval = gst_clock_unadjust_with_calibration(cast(GstClock*)this._cPtr, externalTarget, cinternal, cexternal, cnum, cdenom);
+    return _retval;
+  }
+
+  /**
+      Waits until clock is synced for reporting the current time. If timeout
+      is [gid.gst1.types.CLOCK_TIME_NONE] it will wait forever, otherwise it will time out
+      after timeout nanoseconds.
+      
+      For asynchronous waiting, the #GstClock::synced signal can be used.
+      
+      This returns immediately with true if [gid.gst1.types.ClockFlags.NeedsStartupSync]
+      is not set on the clock, or if the clock is already synced.
+  
+      Params:
+        timeout = timeout for waiting or [gid.gst1.types.CLOCK_TIME_NONE]
+      Returns: true if waiting was successful, or false on timeout
+  */
+  bool waitForSync(gid.gst1.types.ClockTime timeout) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_clock_wait_for_sync(cast(GstClock*)this._cPtr, timeout);
+    return _retval;
+  }
+
+  /**
+      Connect to `Synced` signal.
+  
+      Signaled on clocks with [gid.gst1.types.ClockFlags.NeedsStartupSync] set once
+        the clock is synchronized, or when it completely lost synchronization.
+        This signal will not be emitted on clocks without the flag.
+        
+        This signal will be emitted from an arbitrary thread, most likely not
+        the application's main thread.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(bool synced, gid.gst1.clock.Clock clock)`
+  
+          `synced` if the clock is synced now (optional)
+  
+          `clock` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectSynced(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == bool)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gst1.clock.Clock)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gst1.clock.Clock.synced");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("synced", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gst1.clock.Clock]
+class ClockGidBuilderImpl(T) : gid.gst1.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /** */
+  T timeout(ulong propval) nothrow
+  {
+    return setProperty("timeout", propval);
+  }
+
+  /** */
+  T windowSize(int propval) nothrow
+  {
+    return setProperty("window-size", propval);
+  }
+
+  /** */
+  T windowThreshold(int propval) nothrow
+  {
+    return setProperty("window-threshold", propval);
+  }
+}
+
+/// Fluent builder for [gid.gst1.clock.Clock]
+final class ClockGidBuilder : ClockGidBuilderImpl!ClockGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Clock build() nothrow
+  {
+    return new Clock(cast(void*)createGObject(Clock._getGType), Yes.Take);
+  }
+}

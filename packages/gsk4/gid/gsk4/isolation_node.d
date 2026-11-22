@@ -1,0 +1,82 @@
+/// Module for [IsolationNode] class
+module gid.gsk4.isolation_node;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gsk4.c.functions;
+import gid.gsk4.c.types;
+import gid.gsk4.render_node;
+import gid.gsk4.types;
+
+/**
+    A render node that isolates its child from surrounding rendernodes.
+*/
+class IsolationNode : gid.gsk4.render_node.RenderNode
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gsk_isolation_node_get_type != &gidSymbolNotFound ? gsk_isolation_node_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /**
+      Creates a [gid.gsk4.render_node.RenderNode] that isolates the drawing operations of
+      the child from surrounding ones.
+      
+      You can express "everything but these flags" in a forward compatible
+      way by using bit math:
+      `GSK_ISOLATION_ALL & ~(GSK_ISOLATION_BACKGROUND | GSK_ISOLATION_COPY_PASTE)`
+      will isolate everything but background and copy/paste.
+      
+      For the available isolations, see [gid.gsk4.types.Isolation].
+  
+      Params:
+        child = The child
+        isolations = features to isolate
+      Returns: A new [gid.gsk4.render_node.RenderNode]
+  */
+  this(gid.gsk4.render_node.RenderNode child, gid.gsk4.types.Isolation isolations) nothrow
+  {
+    GskRenderNode* _cretval;
+    _cretval = gsk_isolation_node_new(child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, isolations);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Gets the child node that is getting drawn by the given node.
+      Returns: the child [gid.gsk4.render_node.RenderNode]
+  */
+  gid.gsk4.render_node.RenderNode getChild() nothrow
+  {
+    GskRenderNode* _cretval;
+    _cretval = gsk_isolation_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
+    auto _retval = _cretval ? new gid.gsk4.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the isolation features that are enforced by this node.
+      Returns: the isolation features
+  */
+  gid.gsk4.types.Isolation getIsolations() nothrow
+  {
+    GskIsolation _cretval;
+    _cretval = gsk_isolation_node_get_isolations(cast(const(GskRenderNode)*)this._cPtr);
+    gid.gsk4.types.Isolation _retval = cast(gid.gsk4.types.Isolation)_cretval;
+    return _retval;
+  }
+}

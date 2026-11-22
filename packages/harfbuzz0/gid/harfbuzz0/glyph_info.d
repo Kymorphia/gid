@@ -1,0 +1,112 @@
+/// Module for [GlyphInfo] class
+module gid.harfbuzz0.glyph_info;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.boxed;
+import gid.harfbuzz0.c.functions;
+import gid.harfbuzz0.c.types;
+import gid.harfbuzz0.types;
+
+/**
+    The #hb_glyph_info_t is the structure that holds information about the
+    glyphs and their relation to input text.
+*/
+class GlyphInfo : gid.gobject2.boxed.BoxedWrap!(hb_gobject_glyph_info_get_type)
+{
+  /**
+      Create a `glyph_info.GlyphInfo` boxed type.
+      Params:
+        codepoint = either a Unicode code point (before shaping) or a glyph index
+                      (after shaping).
+        cluster = the index of the character in the original text that corresponds
+                    to this #hb_glyph_info_t, or whatever the client passes to
+                    [gid.harfbuzz0.global.bufferAdd]. More than one #hb_glyph_info_t can have the same
+                    @cluster value, if they resulted from the same character (e.g. one
+                    to many glyph substitution), and when more than one character gets
+                    merged in the same glyph (e.g. many to one glyph substitution) the
+                    #hb_glyph_info_t will have the smallest cluster value of them.
+                    By default some characters are merged into the same cluster
+                    (e.g. combining marks have the same cluster as their bases)
+                    even if they are separate glyphs, [gid.harfbuzz0.global.bufferSetClusterLevel]
+                    allow selecting more fine-grained cluster handling.
+  */
+  this(gid.harfbuzz0.types.Codepoint codepoint = gid.harfbuzz0.types.Codepoint.init, uint cluster = uint.init) nothrow
+  {
+    super(boxedNew!hb_glyph_info_t(_getGType), Yes.Take);
+    this.codepoint = codepoint;
+    this.cluster = cluster;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override GlyphInfo self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get `codepoint` field.
+      Returns: either a Unicode code point (before shaping) or a glyph index
+                    (after shaping).
+  */
+  @property gid.harfbuzz0.types.Codepoint codepoint() nothrow
+  {
+    return (cast(hb_glyph_info_t*)this._cPtr).codepoint;
+  }
+
+  /**
+      Set `codepoint` field.
+      Params:
+        propval = either a Unicode code point (before shaping) or a glyph index
+                      (after shaping).
+  */
+  @property void codepoint(gid.harfbuzz0.types.Codepoint propval) nothrow
+  {
+    (cast(hb_glyph_info_t*)this._cPtr).codepoint = propval;
+  }
+
+  /**
+      Get `cluster` field.
+      Returns: the index of the character in the original text that corresponds
+                  to this #hb_glyph_info_t, or whatever the client passes to
+                  [gid.harfbuzz0.global.bufferAdd]. More than one #hb_glyph_info_t can have the same
+                  @cluster value, if they resulted from the same character (e.g. one
+                  to many glyph substitution), and when more than one character gets
+                  merged in the same glyph (e.g. many to one glyph substitution) the
+                  #hb_glyph_info_t will have the smallest cluster value of them.
+                  By default some characters are merged into the same cluster
+                  (e.g. combining marks have the same cluster as their bases)
+                  even if they are separate glyphs, [gid.harfbuzz0.global.bufferSetClusterLevel]
+                  allow selecting more fine-grained cluster handling.
+  */
+  @property uint cluster() nothrow
+  {
+    return (cast(hb_glyph_info_t*)this._cPtr).cluster;
+  }
+
+  /**
+      Set `cluster` field.
+      Params:
+        propval = the index of the character in the original text that corresponds
+                    to this #hb_glyph_info_t, or whatever the client passes to
+                    [gid.harfbuzz0.global.bufferAdd]. More than one #hb_glyph_info_t can have the same
+                    @cluster value, if they resulted from the same character (e.g. one
+                    to many glyph substitution), and when more than one character gets
+                    merged in the same glyph (e.g. many to one glyph substitution) the
+                    #hb_glyph_info_t will have the smallest cluster value of them.
+                    By default some characters are merged into the same cluster
+                    (e.g. combining marks have the same cluster as their bases)
+                    even if they are separate glyphs, [gid.harfbuzz0.global.bufferSetClusterLevel]
+                    allow selecting more fine-grained cluster handling.
+  */
+  @property void cluster(uint propval) nothrow
+  {
+    (cast(hb_glyph_info_t*)this._cPtr).cluster = propval;
+  }
+}

@@ -2,8 +2,8 @@
 //!kind Boxed Boxed
 //!inhibit init funcs
 
-import glib.c.functions;
-import glib.types;
+import gid.glib2.c.functions;
+import gid.glib2.types;
 
 /// Class wrapper for boxed types
 abstract class Boxed : GidWrap
@@ -165,7 +165,7 @@ abstract class BoxedWrap(alias getTypeFunc) : Boxed
    */
   static GType _getGType() nothrow
   {
-    import gid.loader : gidSymbolNotFound;
+    import gid.core.loader : gidSymbolNotFound;
     return cast(void function())getTypeFunc != &gidSymbolNotFound ? getTypeFunc() : cast(GType)0;
   }
 

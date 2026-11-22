@@ -1,0 +1,472 @@
+/// Module for [NetworkSession] class
+module gid.webkit6.network_session;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gio2.async_result;
+import gid.gio2.cancellable;
+import gid.gio2.tls_certificate;
+import gid.gio2.types;
+import gid.glib2.error;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.webkit6.c.functions;
+import gid.webkit6.c.types;
+import gid.webkit6.cookie_manager;
+import gid.webkit6.download;
+import gid.webkit6.itpthird_party;
+import gid.webkit6.memory_pressure_settings;
+import gid.webkit6.network_proxy_settings;
+import gid.webkit6.types;
+import gid.webkit6.website_data_manager;
+
+/**
+    Manages network configuration.
+*/
+class NetworkSession : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())webkit_network_session_get_type != &gidSymbolNotFound ? webkit_network_session_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitNetworkSession";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override NetworkSession self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.webkit6.network_session.NetworkSession]
+      Returns: New builder object
+  */
+  static NetworkSessionGidBuilder builder() nothrow
+  {
+    return new NetworkSessionGidBuilder;
+  }
+
+  /**
+      Creates a new #WebKitNetworkSession with a persistent #WebKitWebsiteDataManager.
+      The parameters data_directory and cache_directory will be used as construct
+      properties of the #WebKitWebsiteDataManager of the network session. Note that if
+      null is passed, the default directory will be passed to #WebKitWebsiteDataManager
+      so that [gid.webkit6.website_data_manager.WebsiteDataManager.getBaseDataDirectory] and
+      [gid.webkit6.website_data_manager.WebsiteDataManager.getBaseCacheDirectory] always return a value for
+      non ephemeral sessions.
+      
+      It must be passed as construct parameter of a #WebKitWebView.
+  
+      Params:
+        dataDirectory = a base directory for data, or null
+        cacheDirectory = a base directory for caches, or null
+      Returns: the newly created #WebKitNetworkSession
+  */
+  this(string dataDirectory = null, string cacheDirectory = null) nothrow
+  {
+    WebKitNetworkSession* _cretval;
+    const(char)* _dataDirectory = dataDirectory.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _cacheDirectory = cacheDirectory.toCString!(No.Malloc, Yes.Nullable);
+    _cretval = webkit_network_session_new(_dataDirectory, _cacheDirectory);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Creates a new #WebKitNetworkSession with an ephemeral #WebKitWebsiteDataManager.
+      Returns: a new ephemeral #WebKitNetworkSession.
+  */
+  static gid.webkit6.network_session.NetworkSession newEphemeral() nothrow
+  {
+    WebKitNetworkSession* _cretval;
+    _cretval = webkit_network_session_new_ephemeral();
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.webkit6.network_session.NetworkSession)(cast(WebKitNetworkSession*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Get the default network session.
+      The default network session is created using [gid.webkit6.network_session.NetworkSession.new_] and passing
+      null as data and cache directories.
+      Returns: a #WebKitNetworkSession
+  */
+  static gid.webkit6.network_session.NetworkSession getDefault() nothrow
+  {
+    WebKitNetworkSession* _cretval;
+    _cretval = webkit_network_session_get_default();
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.webkit6.network_session.NetworkSession)(cast(WebKitNetworkSession*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Sets settings as the #WebKitMemoryPressureSettings.
+      
+      Sets settings as the #WebKitMemoryPressureSettings to be used by the network
+      process created by any instance of #WebKitNetworkSession after this function
+      is called.
+      
+      Be sure to call this function before creating any #WebKitNetworkSession.
+      
+      The periodic check for used memory is disabled by default on network processes. This will
+      be enabled only if custom settings have been set using this function. After that, in order
+      to remove the custom settings and disable the periodic check, this function must be called
+      passing null as the value of settings.
+  
+      Params:
+        settings = a WebKitMemoryPressureSettings.
+  */
+  static void setMemoryPressureSettings(gid.webkit6.memory_pressure_settings.MemoryPressureSettings settings) nothrow
+  {
+    webkit_network_session_set_memory_pressure_settings(settings ? cast(WebKitMemoryPressureSettings*)settings._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Ignore further TLS errors on the host for the certificate present in info.
+      
+      If host is an IPv6 address, it should not be surrounded by brackets. This
+      expectation matches [gid.glib2.uri.Uri.getHost].
+  
+      Params:
+        certificate = a #GTlsCertificate
+        host = the host for which a certificate is to be allowed
+  */
+  void allowTlsCertificateForHost(gid.gio2.tls_certificate.TlsCertificate certificate, string host) nothrow
+  {
+    const(char)* _host = host.toCString!(No.Malloc, No.Nullable);
+    webkit_network_session_allow_tls_certificate_for_host(cast(WebKitNetworkSession*)this._cPtr, certificate ? cast(GTlsCertificate*)certificate._cPtr(No.Dup) : null, _host);
+  }
+
+  /**
+      Requests downloading of the specified URI string.
+      
+      The download operation will not be associated to any #WebKitWebView,
+      if you are interested in starting a download from a particular #WebKitWebView use
+      [gid.webkit6.web_view.WebView.downloadUri] instead.
+  
+      Params:
+        uri = the URI to download
+      Returns: a new #WebKitDownload representing
+           the download operation.
+  */
+  gid.webkit6.download.Download downloadUri(string uri) nothrow
+  {
+    WebKitDownload* _cretval;
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
+    _cretval = webkit_network_session_download_uri(cast(WebKitNetworkSession*)this._cPtr, _uri);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.webkit6.download.Download)(cast(WebKitDownload*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Get the #WebKitCookieManager of session.
+      Returns: a #WebKitCookieManager
+  */
+  gid.webkit6.cookie_manager.CookieManager getCookieManager() nothrow
+  {
+    WebKitCookieManager* _cretval;
+    _cretval = webkit_network_session_get_cookie_manager(cast(WebKitNetworkSession*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.webkit6.cookie_manager.CookieManager)(cast(WebKitCookieManager*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Get whether Intelligent Tracking Prevention (ITP) is enabled or not.
+      Returns: true if ITP is enabled, or false otherwise.
+  */
+  bool getItpEnabled() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)webkit_network_session_get_itp_enabled(cast(WebKitNetworkSession*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Asynchronously get the list of #WebKitITPThirdParty seen for session.
+      
+      Every #WebKitITPThirdParty
+      contains the list of #WebKitITPFirstParty under which it has been seen.
+      
+      When the operation is finished, callback will be called. You can then call
+      [gid.webkit6.network_session.NetworkSession.getItpSummaryFinish] to get the result of the operation.
+  
+      Params:
+        cancellable = a #GCancellable or null to ignore
+        callback = a #GAsyncReadyCallback to call when the request is satisfied
+  */
+  void getItpSummary(gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null) nothrow
+  {
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    webkit_network_session_get_itp_summary(cast(WebKitNetworkSession*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Finish an asynchronous operation started with [gid.webkit6.network_session.NetworkSession.getItpSummary].
+  
+      Params:
+        result = a #GAsyncResult
+      Returns: a #GList of #WebKitITPThirdParty.
+           You must free the #GList with [gid.glib2.list.List.free] and unref the #WebKitITPThirdParty<!-- -->s with
+           [gid.webkit6.itpthird_party.ITPThirdParty.unref] when you're done with them.
+      Throws: [ErrorWrap]
+  */
+  gid.webkit6.itpthird_party.ITPThirdParty[] getItpSummaryFinish(gid.gio2.async_result.AsyncResult result)
+  {
+    GList* _cretval;
+    GError *_err;
+    _cretval = webkit_network_session_get_itp_summary_finish(cast(WebKitNetworkSession*)this._cPtr, result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gListToD!(gid.webkit6.itpthird_party.ITPThirdParty, GidOwnership.Full)(cast(GList*)_cretval);
+    return _retval;
+  }
+
+  /**
+      Get whether persistent credential storage is enabled or not.
+      
+      See also [gid.webkit6.network_session.NetworkSession.setPersistentCredentialStorageEnabled].
+      Returns: true if persistent credential storage is enabled, or false otherwise.
+  */
+  bool getPersistentCredentialStorageEnabled() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)webkit_network_session_get_persistent_credential_storage_enabled(cast(WebKitNetworkSession*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Get the TLS errors policy of session.
+      Returns: a #WebKitTLSErrorsPolicy
+  */
+  gid.webkit6.types.TLSErrorsPolicy getTlsErrorsPolicy() nothrow
+  {
+    WebKitTLSErrorsPolicy _cretval;
+    _cretval = webkit_network_session_get_tls_errors_policy(cast(WebKitNetworkSession*)this._cPtr);
+    gid.webkit6.types.TLSErrorsPolicy _retval = cast(gid.webkit6.types.TLSErrorsPolicy)_cretval;
+    return _retval;
+  }
+
+  /**
+      Get the #WebKitWebsiteDataManager of session.
+      Returns: a #WebKitWebsiteDataManager
+  */
+  gid.webkit6.website_data_manager.WebsiteDataManager getWebsiteDataManager() nothrow
+  {
+    WebKitWebsiteDataManager* _cretval;
+    _cretval = webkit_network_session_get_website_data_manager(cast(WebKitNetworkSession*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.webkit6.website_data_manager.WebsiteDataManager)(cast(WebKitWebsiteDataManager*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Get whether session is ephemeral.
+      A #WebKitNetworkSession is ephemeral when its #WebKitWebsiteDataManager is ephemeral.
+      See #WebKitWebsiteDataManager:is-ephemeral for more details.
+      Returns: true if session is pehmeral, or false otherwise
+  */
+  bool isEphemeral() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)webkit_network_session_is_ephemeral(cast(WebKitNetworkSession*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Resolve the domain name of the given hostname in advance, so that if a URI
+      of hostname is requested the load will be performed more quickly.
+  
+      Params:
+        hostname = a hostname to be resolved
+  */
+  void prefetchDns(string hostname) nothrow
+  {
+    const(char)* _hostname = hostname.toCString!(No.Malloc, No.Nullable);
+    webkit_network_session_prefetch_dns(cast(WebKitNetworkSession*)this._cPtr, _hostname);
+  }
+
+  /**
+      Enable or disable Intelligent Tracking Prevention (ITP).
+      
+      When ITP is enabled resource load statistics
+      are collected and used to decide whether to allow or block third-party cookies and prevent user tracking.
+      Note that while ITP is enabled the accept policy [gid.webkit6.types.CookieAcceptPolicy.NoThirdParty] is ignored and
+      [gid.webkit6.types.CookieAcceptPolicy.Always] is used instead. See also webkit_cookie_session_set_accept_policy().
+  
+      Params:
+        enabled = value to set
+  */
+  void setItpEnabled(bool enabled) nothrow
+  {
+    webkit_network_session_set_itp_enabled(cast(WebKitNetworkSession*)this._cPtr, enabled);
+  }
+
+  /**
+      Enable or disable persistent credential storage.
+      
+      When enabled, which is the default for
+      non-ephemeral sessions, the network process will try to read and write HTTP authentiacation
+      credentials from persistent storage.
+  
+      Params:
+        enabled = value to set
+  */
+  void setPersistentCredentialStorageEnabled(bool enabled) nothrow
+  {
+    webkit_network_session_set_persistent_credential_storage_enabled(cast(WebKitNetworkSession*)this._cPtr, enabled);
+  }
+
+  /**
+      Set the network proxy settings to be used by connections started in session session.
+      
+      By default [gid.webkit6.types.NetworkProxyMode.Default] is used, which means that the
+      system settings will be used ([gid.gio2.proxy_resolver.ProxyResolver.getDefault]).
+      If you want to override the system default settings, you can either use
+      [gid.webkit6.types.NetworkProxyMode.NoProxy] to make sure no proxies are used at all,
+      or [gid.webkit6.types.NetworkProxyMode.Custom] to provide your own proxy settings.
+      When proxy_mode is [gid.webkit6.types.NetworkProxyMode.Custom] proxy_settings must be
+      a valid #WebKitNetworkProxySettings; otherwise, proxy_settings must be null.
+  
+      Params:
+        proxyMode = a #WebKitNetworkProxyMode
+        proxySettings = a #WebKitNetworkProxySettings, or null
+  */
+  void setProxySettings(gid.webkit6.types.NetworkProxyMode proxyMode, gid.webkit6.network_proxy_settings.NetworkProxySettings proxySettings = null) nothrow
+  {
+    webkit_network_session_set_proxy_settings(cast(WebKitNetworkSession*)this._cPtr, proxyMode, proxySettings ? cast(WebKitNetworkProxySettings*)proxySettings._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Set the TLS errors policy of session as policy.
+  
+      Params:
+        policy = a #WebKitTLSErrorsPolicy
+  */
+  void setTlsErrorsPolicy(gid.webkit6.types.TLSErrorsPolicy policy) nothrow
+  {
+    webkit_network_session_set_tls_errors_policy(cast(WebKitNetworkSession*)this._cPtr, policy);
+  }
+
+  /**
+      Connect to `DownloadStarted` signal.
+  
+      This signal is emitted when a new download request is made.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.webkit6.download.Download download, gid.webkit6.network_session.NetworkSession networkSession)`
+  
+          `download` the #WebKitDownload associated with this event (optional)
+  
+          `networkSession` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectDownloadStarted(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.webkit6.download.Download)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.webkit6.network_session.NetworkSession)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.webkit6.network_session.NetworkSession.downloadStarted");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("download-started", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.webkit6.network_session.NetworkSession]
+class NetworkSessionGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `cacheDirectory` property.
+      Params:
+        propval = The base caches directory used to create the #WebKitWebsiteDataManager. If null, a default location will be used.
+      Returns: Builder instance for fluent chaining
+  */
+  T cacheDirectory(string propval) nothrow
+  {
+    return setProperty("cache-directory", propval);
+  }
+
+  /**
+      Set `dataDirectory` property.
+      Params:
+        propval = The base data directory used to create the #WebKitWebsiteDataManager. If null, a default location will be used.
+      Returns: Builder instance for fluent chaining
+  */
+  T dataDirectory(string propval) nothrow
+  {
+    return setProperty("data-directory", propval);
+  }
+}
+
+/// Fluent builder for [gid.webkit6.network_session.NetworkSession]
+final class NetworkSessionGidBuilder : NetworkSessionGidBuilderImpl!NetworkSessionGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  NetworkSession build() nothrow
+  {
+    return new NetworkSession(cast(void*)createGObject(NetworkSession._getGType), Yes.Take);
+  }
+}

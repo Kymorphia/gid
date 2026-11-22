@@ -1,0 +1,1210 @@
+/// Module for [Server] class
+module gid.soup3.server;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gio2.iostream;
+import gid.gio2.socket;
+import gid.gio2.socket_address;
+import gid.gio2.tls_certificate;
+import gid.gio2.tls_database;
+import gid.gio2.types;
+import gid.glib2.error;
+import gid.glib2.uri;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gobject2.types;
+import gid.soup3.auth_domain;
+import gid.soup3.c.functions;
+import gid.soup3.c.types;
+import gid.soup3.server_message;
+import gid.soup3.types;
+import gid.soup3.websocket_connection;
+
+/**
+    [gid.soup3.server.Server] provides a basic implementation of an HTTP server. The
+    recommended usage of this server is for internal use, tasks like
+    a mock server for tests, a private service for IPC, etc. It is not
+    recommended to be exposed to untrusted clients as it may be vulnerable
+    to denial of service attacks or other exploits.
+    
+    To begin, create a server using [gid.soup3.server.Server.new_]. Add at least one
+    handler by calling [gid.soup3.server.Server.addHandler] or
+    [gid.soup3.server.Server.addEarlyHandler]; the handler will be called to
+    process any requests underneath the path you pass. (If you want all
+    requests to go to the same handler, just pass "/" (or null) for
+    the path.)
+    
+    When a new connection is accepted (or a new request is started on
+    an existing persistent connection), the [gid.soup3.server.Server] will emit
+    [gid.soup3.server.Server.requestStarted] and then begin processing the request
+    as described below, but note that once the message is assigned a
+    status-code, then callbacks after that point will be
+    skipped. Note also that it is not defined when the callbacks happen
+    relative to various [gid.soup3.server_message.ServerMessage] signals.
+    
+    Once the headers have been read, [gid.soup3.server.Server] will check if there is
+    a [gid.soup3.auth_domain.AuthDomain] `(qv)` covering the Request-URI; if so, and if the
+    message does not contain suitable authorization, then the
+    [gid.soup3.auth_domain.AuthDomain] will set a status of [gid.soup3.types.Status.Unauthorized] on
+    the message.
+    
+    After checking for authorization, [gid.soup3.server.Server] will look for "early"
+    handlers (added with [gid.soup3.server.Server.addEarlyHandler]) matching the
+    Request-URI. If one is found, it will be run; in particular, this
+    can be used to connect to signals to do a streaming read of the
+    request body.
+    
+    (At this point, if the request headers contain `Expect:
+    100-continue`, and a status code has been set, then
+    [gid.soup3.server.Server] will skip the remaining steps and return the response.
+    If the request headers contain `Expect:
+    100-continue` and no status code has been set,
+    [gid.soup3.server.Server] will return a [gid.soup3.types.Status.Continue] status before
+    continuing.)
+    
+    The server will then read in the response body (if present). At
+    this point, if there are no handlers at all defined for the
+    Request-URI, then the server will return [gid.soup3.types.Status.NotFound] to
+    the client.
+    
+    Otherwise (assuming no previous step assigned a status to the
+    message) any "normal" handlers (added with
+    [gid.soup3.server.Server.addHandler]) for the message's Request-URI will be
+    run.
+    
+    Then, if the path has a WebSocket handler registered (and has
+    not yet been assigned a status), [gid.soup3.server.Server] will attempt to
+    validate the WebSocket handshake, filling in the response and
+    setting a status of [gid.soup3.types.Status.SwitchingProtocols] or
+    [gid.soup3.types.Status.BadRequest] accordingly.
+    
+    If the message still has no status code at this point (and has not
+    been paused with [gid.soup3.server_message.ServerMessage.pause]), then it will be
+    given a status of [gid.soup3.types.Status.InternalServerError] (because at
+    least one handler ran, but returned without assigning a status).
+    
+    Finally, the server will emit [gid.soup3.server.Server.requestFinished] (or
+    [gid.soup3.server.Server.requestAborted] if an I/O error occurred before
+    handling was completed).
+    
+    If you want to handle the special "*" URI (eg, "OPTIONS *"), you
+    must explicitly register a handler for "*"; the default handler
+    will not be used for that case.
+    
+    If you want to process https connections in addition to (or instead
+    of) http connections, you can set the [gid.soup3.server.Server.tlsCertificate]
+    property.
+    
+    Once the server is set up, make one or more calls to
+    [gid.soup3.server.Server.listen], [gid.soup3.server.Server.listenLocal], or
+    [gid.soup3.server.Server.listenAll] to tell it where to listen for
+    connections. (All ports on a [gid.soup3.server.Server] use the same handlers; if
+    you need to handle some ports differently, such as returning
+    different data for http and https, you'll need to create multiple
+    [gid.soup3.server.Server]s, or else check the passed-in URI in the handler
+    function.).
+    
+    [gid.soup3.server.Server] will begin processing connections as soon as you return
+    to (or start) the main loop for the current thread-default
+    [gid.glib2.main_context.MainContext].
+*/
+class Server : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())soup_server_get_type != &gidSymbolNotFound ? soup_server_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "SoupServer";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Server self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.soup3.server.Server]
+      Returns: New builder object
+  */
+  static ServerGidBuilder builder() nothrow
+  {
+    return new ServerGidBuilder;
+  }
+
+  /**
+      Get `rawPaths` property.
+      Returns: If true, percent-encoding in the Request-URI path will not be
+        automatically decoded.
+  */
+  @property bool rawPaths() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("raw-paths");
+  }
+
+  /**
+      Get `serverHeader` property.
+      Returns: Server header.
+        
+        If non-null, the value to use for the "Server" header on
+        [gid.soup3.server_message.ServerMessage]s processed by this server.
+        
+        The Server header is the server equivalent of the
+        User-Agent header, and provides information about the
+        server and its components. It contains a list of one or
+        more product tokens, separated by whitespace, with the most
+        significant product token coming first. The tokens must be
+        brief, ASCII, and mostly alphanumeric (although "-", "_",
+        and "." are also allowed), and may optionally include a "/"
+        followed by a version string. You may also put comments,
+        enclosed in parentheses, between or after the tokens.
+        
+        Some HTTP server implementations intentionally do not use
+        version numbers in their Server header, so that
+        installations running older versions of the server don't
+        end up advertising their vulnerability to specific security
+        holes.
+        
+        As with `property@Session:user_agent`, if you set a
+        [gid.soup3.server.Server.serverHeader] property that has trailing
+        whitespace, [gid.soup3.server.Server] will append its own product token (eg,
+        `libsoup/2.3.2`) to the end of the header for you.
+  */
+  @property string serverHeader() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(string)("server-header");
+  }
+
+  /**
+      Set `serverHeader` property.
+      Params:
+        propval = Server header.
+          
+          If non-null, the value to use for the "Server" header on
+          [gid.soup3.server_message.ServerMessage]s processed by this server.
+          
+          The Server header is the server equivalent of the
+          User-Agent header, and provides information about the
+          server and its components. It contains a list of one or
+          more product tokens, separated by whitespace, with the most
+          significant product token coming first. The tokens must be
+          brief, ASCII, and mostly alphanumeric (although "-", "_",
+          and "." are also allowed), and may optionally include a "/"
+          followed by a version string. You may also put comments,
+          enclosed in parentheses, between or after the tokens.
+          
+          Some HTTP server implementations intentionally do not use
+          version numbers in their Server header, so that
+          installations running older versions of the server don't
+          end up advertising their vulnerability to specific security
+          holes.
+          
+          As with `property@Session:user_agent`, if you set a
+          [gid.soup3.server.Server.serverHeader] property that has trailing
+          whitespace, [gid.soup3.server.Server] will append its own product token (eg,
+          `libsoup/2.3.2`) to the end of the header for you.
+  */
+  @property void serverHeader(string propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(string)("server-header", propval);
+  }
+
+  /**
+      Get `tlsAuthMode` property.
+      Returns: A [gid.gio2.types.TlsAuthenticationMode] for SSL/TLS client authentication.
+  */
+  @property gid.gio2.types.TlsAuthenticationMode tlsAuthMode() nothrow
+  {
+    return getTlsAuthMode();
+  }
+
+  /**
+      Set `tlsAuthMode` property.
+      Params:
+        propval = A [gid.gio2.types.TlsAuthenticationMode] for SSL/TLS client authentication.
+  */
+  @property void tlsAuthMode(gid.gio2.types.TlsAuthenticationMode propval) nothrow
+  {
+    setTlsAuthMode(propval);
+  }
+
+  /**
+      Get `tlsCertificate` property.
+      Returns: A [gid.gio2.tls_certificate.TlsCertificate] that has a
+        [gid.gio2.tls_certificate.TlsCertificate.privateKey] set.
+        
+        If this is set, then the server will be able to speak
+        https in addition to (or instead of) plain http.
+  */
+  @property gid.gio2.tls_certificate.TlsCertificate tlsCertificate() nothrow
+  {
+    return getTlsCertificate();
+  }
+
+  /**
+      Set `tlsCertificate` property.
+      Params:
+        propval = A [gid.gio2.tls_certificate.TlsCertificate] that has a
+          [gid.gio2.tls_certificate.TlsCertificate.privateKey] set.
+          
+          If this is set, then the server will be able to speak
+          https in addition to (or instead of) plain http.
+  */
+  @property void tlsCertificate(gid.gio2.tls_certificate.TlsCertificate propval) nothrow
+  {
+    setTlsCertificate(propval);
+  }
+
+  /**
+      Get `tlsDatabase` property.
+      Returns: A [gid.gio2.tls_database.TlsDatabase] to use for validating SSL/TLS client
+        certificates.
+  */
+  @property gid.gio2.tls_database.TlsDatabase tlsDatabase() nothrow
+  {
+    return getTlsDatabase();
+  }
+
+  /**
+      Set `tlsDatabase` property.
+      Params:
+        propval = A [gid.gio2.tls_database.TlsDatabase] to use for validating SSL/TLS client
+          certificates.
+  */
+  @property void tlsDatabase(gid.gio2.tls_database.TlsDatabase propval) nothrow
+  {
+    setTlsDatabase(propval);
+  }
+
+  /**
+      Adds a new client stream to the server.
+  
+      Params:
+        stream = a #GIOStream
+        localAddr = the local #GSocketAddress associated with the
+            stream
+        remoteAddr = the remote #GSocketAddress associated with the
+            stream
+      Returns: true on success, false if the stream could not be
+          accepted or any other error occurred (in which case error will be
+          set).
+      Throws: [ErrorWrap]
+  */
+  bool acceptIostream(gid.gio2.iostream.IOStream stream, gid.gio2.socket_address.SocketAddress localAddr = null, gid.gio2.socket_address.SocketAddress remoteAddr = null)
+  {
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)soup_server_accept_iostream(cast(SoupServer*)this._cPtr, stream ? cast(GIOStream*)stream._cPtr(No.Dup) : null, localAddr ? cast(GSocketAddress*)localAddr._cPtr(No.Dup) : null, remoteAddr ? cast(GSocketAddress*)remoteAddr._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Adds an authentication domain to server.
+      
+      Each auth domain will have the chance to require authentication for each
+      request that comes in; normally auth domains will require authentication for
+      requests on certain paths that they have been set up to watch, or that meet
+      other criteria set by the caller. If an auth domain determines that a request
+      requires authentication (and the request doesn't contain authentication),
+      server will automatically reject the request with an appropriate status (401
+      Unauthorized or 407 Proxy Authentication Required). If the request used the
+      SoupServer:100-continue Expectation, server will reject it before the
+      request body is sent.
+  
+      Params:
+        authDomain = a #SoupAuthDomain
+  */
+  void addAuthDomain(gid.soup3.auth_domain.AuthDomain authDomain) nothrow
+  {
+    soup_server_add_auth_domain(cast(SoupServer*)this._cPtr, authDomain ? cast(SoupAuthDomain*)authDomain._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Adds an "early" handler to server for requests prefixed by path.
+      
+      Note that "normal" and "early" handlers are matched up together, so if you
+      add a normal handler for "/foo" and an early handler for "/foo/bar", then a
+      request to "/foo/bar" (or any path below it) will run only the early handler.
+      (But if you add both handlers at the same path, then both will get run.)
+      
+      For requests under path (that have not already been assigned a
+      status code by a [gid.soup3.auth_domain.AuthDomain] or a signal handler), callback
+      will be invoked after receiving the request headers, but before
+      receiving the request body; the message's method and
+      request-headers properties will be set.
+      
+      Early handlers are generally used for processing requests with request bodies
+      in a streaming fashion. If you determine that the request will contain a
+      message body, normally you would call [gid.soup3.message_body.MessageBody.setAccumulate] on
+      the message's request-body to turn off request-body accumulation, and connect
+      to the message's [gid.soup3.server_message.ServerMessage.gotChunk] signal to process each
+      chunk as it comes in.
+      
+      To complete the message processing after the full message body has
+      been read, you can either also connect to [gid.soup3.server_message.ServerMessage.gotBody],
+      or else you can register a non-early handler for path as well. As
+      long as you have not set the status-code by the time
+      [gid.soup3.server_message.ServerMessage.gotBody] is emitted, the non-early handler will be
+      run as well.
+  
+      Params:
+        path = the toplevel path for the handler
+        callback = callback to invoke for
+            requests under path
+  */
+  void addEarlyHandler(string path, gid.soup3.types.ServerCallback callback) nothrow
+  {
+    extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, GHashTable* query, void* userData) nothrow
+    {
+      auto _dlg = cast(gid.soup3.types.ServerCallback*)userData;
+      string _path = path.fromCString!(No.Free);
+      auto _query = gHashTableToD!(string, string, GidOwnership.None)(query);
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.soup3.server.Server)(cast(void*)server, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.soup3.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, _query);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.soup3.types.ServerCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    const(char)* _path = path.toCString!(No.Malloc, Yes.Nullable);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
+    soup_server_add_early_handler(cast(SoupServer*)this._cPtr, _path, _callbackCB, _callback, _callbackDestroyCB);
+  }
+
+  /**
+      Adds a handler to server for requests prefixed by path.
+      
+      If path is null or "/", then this will be the default handler for all
+      requests that don't have a more specific handler. (Note though that if you
+      want to handle requests to the special "*" URI, you must explicitly register
+      a handler for "*"; the default handler will not be used for that case.)
+      
+      For requests under path (that have not already been assigned a
+      status code by a [gid.soup3.auth_domain.AuthDomain], an early server handler, or a
+      signal handler), callback will be invoked after receiving the
+      request body; the [gid.soup3.server_message.ServerMessage]'s method, request-headers,
+      and request-body properties will be set.
+      
+      After determining what to do with the request, the callback must at a minimum
+      call [gid.soup3.server_message.ServerMessage.setStatus] on the message to set the response
+      status code. Additionally, it may set response headers and/or fill in the
+      response body.
+      
+      If the callback cannot fully fill in the response before returning
+      (eg, if it needs to wait for information from a database, or
+      another network server), it should call [gid.soup3.server_message.ServerMessage.pause]
+      to tell server to not send the response right away. When the
+      response is ready, call [gid.soup3.server_message.ServerMessage.unpause] to cause it
+      to be sent.
+      
+      To send the response body a bit at a time using "chunked" encoding, first
+      call [gid.soup3.message_headers.MessageHeaders.setEncoding] to set [gid.soup3.types.Encoding.Chunked] on
+      the response-headers. Then call [gid.soup3.message_body.MessageBody.append] (or
+      [gid.soup3.message_body.MessageBody.appendBytes])) to append each chunk as it becomes ready,
+      and [gid.soup3.server_message.ServerMessage.unpause] to make sure it's running. (The server
+      will automatically pause the message if it is using chunked encoding but no
+      more chunks are available.) When you are done, call
+      [gid.soup3.message_body.MessageBody.complete] to indicate that no more chunks are coming.
+  
+      Params:
+        path = the toplevel path for the handler
+        callback = callback to invoke for
+            requests under path
+  */
+  void addHandler(string path, gid.soup3.types.ServerCallback callback) nothrow
+  {
+    extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, GHashTable* query, void* userData) nothrow
+    {
+      auto _dlg = cast(gid.soup3.types.ServerCallback*)userData;
+      string _path = path.fromCString!(No.Free);
+      auto _query = gHashTableToD!(string, string, GidOwnership.None)(query);
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.soup3.server.Server)(cast(void*)server, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.soup3.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, _query);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.soup3.types.ServerCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    const(char)* _path = path.toCString!(No.Malloc, Yes.Nullable);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
+    soup_server_add_handler(cast(SoupServer*)this._cPtr, _path, _callbackCB, _callback, _callbackDestroyCB);
+  }
+
+  /**
+      Add support for a WebSocket extension of the given extension_type.
+      
+      When a WebSocket client requests an extension of extension_type,
+      a new [gid.soup3.websocket_extension.WebsocketExtension] of type extension_type will be created
+      to handle the request.
+      
+      Note that [gid.soup3.websocket_extension_deflate.WebsocketExtensionDeflate] is supported by default, use
+      [gid.soup3.server.Server.removeWebsocketExtension] if you want to disable it.
+  
+      Params:
+        extensionType = a #GType
+  */
+  void addWebsocketExtension(gid.gobject2.types.GType extensionType) nothrow
+  {
+    soup_server_add_websocket_extension(cast(SoupServer*)this._cPtr, extensionType);
+  }
+
+  /**
+      Adds a WebSocket handler to server for requests prefixed by path.
+      
+      If path is null or "/", then this will be the default handler for all
+      requests that don't have a more specific handler.
+      
+      When a path has a WebSocket handler registered, server will check
+      incoming requests for WebSocket handshakes after all other handlers
+      have run (unless some earlier handler has already set a status code
+      on the message), and update the request's status, response headers,
+      and response body accordingly.
+      
+      If origin is non-null, then only requests containing a matching
+      "Origin" header will be accepted. If protocols is non-null, then
+      only requests containing a compatible "Sec-WebSocket-Protocols"
+      header will be accepted. More complicated requirements can be
+      handled by adding a normal handler to path, and having it perform
+      whatever checks are needed and
+      setting a failure status code if the handshake should be rejected.
+  
+      Params:
+        path = the toplevel path for the handler
+        origin = the origin of the connection
+        protocols = the protocols
+            supported by this handler
+        callback = callback to invoke for
+            successful WebSocket requests under path
+  */
+  void addWebsocketHandler(string path, string origin, string[] protocols, gid.soup3.types.ServerWebsocketCallback callback) nothrow
+  {
+    extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, SoupWebsocketConnection* connection, void* userData) nothrow
+    {
+      auto _dlg = cast(gid.soup3.types.ServerWebsocketCallback*)userData;
+      string _path = path.fromCString!(No.Free);
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.soup3.server.Server)(cast(void*)server, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.soup3.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, gid.gobject2.object.ObjectWrap._getDObject!(gid.soup3.websocket_connection.WebsocketConnection)(cast(void*)connection, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.soup3.types.ServerWebsocketCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    const(char)* _path = path.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _origin = origin.toCString!(No.Malloc, Yes.Nullable);
+    auto _protocols_arr = new char*[](protocols.length + 1);
+    auto _protocols = cast(char**)_protocols_arr.ptr;
+    foreach (i, s; protocols) _protocols[i] = s.toCString!(No.Malloc);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
+    soup_server_add_websocket_handler(cast(SoupServer*)this._cPtr, _path, _origin, _protocols, _callbackCB, _callback, _callbackDestroyCB);
+  }
+
+  /**
+      Closes and frees server's listening sockets.
+      
+      Note that if there are currently requests in progress on server, that they
+      will continue to be processed if server's [gid.glib2.main_context.MainContext] is still
+      running.
+      
+      You can call [gid.soup3.server.Server.listen], etc, after calling this function
+      if you want to start listening again.
+  */
+  void disconnect() nothrow
+  {
+    soup_server_disconnect(cast(SoupServer*)this._cPtr);
+  }
+
+  /**
+      Gets server's list of listening sockets.
+      
+      You should treat these sockets as read-only; writing to or
+      modifiying any of these sockets may cause server to malfunction.
+      Returns: a
+          list of listening sockets.
+  */
+  gid.gio2.socket.Socket[] getListeners() nothrow
+  {
+    GSList* _cretval;
+    _cretval = soup_server_get_listeners(cast(SoupServer*)this._cPtr);
+    auto _retval = gSListToD!(gid.gio2.socket.Socket, GidOwnership.Container)(cast(GSList*)_cretval);
+    return _retval;
+  }
+
+  /**
+      Gets the server SSL/TLS client authentication mode.
+      Returns: a #GTlsAuthenticationMode
+  */
+  gid.gio2.types.TlsAuthenticationMode getTlsAuthMode() nothrow
+  {
+    GTlsAuthenticationMode _cretval;
+    _cretval = soup_server_get_tls_auth_mode(cast(SoupServer*)this._cPtr);
+    gid.gio2.types.TlsAuthenticationMode _retval = cast(gid.gio2.types.TlsAuthenticationMode)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the server SSL/TLS certificate.
+      Returns: a #GTlsCertificate or null
+  */
+  gid.gio2.tls_certificate.TlsCertificate getTlsCertificate() nothrow
+  {
+    GTlsCertificate* _cretval;
+    _cretval = soup_server_get_tls_certificate(cast(SoupServer*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the server SSL/TLS database.
+      Returns: a #GTlsDatabase
+  */
+  gid.gio2.tls_database.TlsDatabase getTlsDatabase() nothrow
+  {
+    GTlsDatabase* _cretval;
+    _cretval = soup_server_get_tls_database(cast(SoupServer*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets a list of URIs corresponding to the interfaces server is
+      listening on.
+      
+      These will contain IP addresses, not hostnames, and will also indicate
+      whether the given listener is http or https.
+      
+      Note that if you used [gid.soup3.server.Server.listenAll] the returned URIs will use
+      the addresses `0.0.0.0` and `::`, rather than actually returning separate
+      URIs for each interface on the system.
+      Returns: a list of [gid.glib2.uri.Uri], which you
+          must free with each element with [gid.glib2.uri.Uri.unref] when you are done with it.
+  */
+  gid.glib2.uri.Uri[] getUris() nothrow
+  {
+    GSList* _cretval;
+    _cretval = soup_server_get_uris(cast(SoupServer*)this._cPtr);
+    auto _retval = gSListToD!(gid.glib2.uri.Uri, GidOwnership.Full)(cast(GSList*)_cretval);
+    return _retval;
+  }
+
+  /**
+      Checks whether server is capable of https.
+      
+      In order for a server to run https, you must call
+      [gid.soup3.server.Server.setTlsCertificate], or set the
+      [gid.soup3.server.Server.tlsCertificate] property, to provide it with a
+      certificate to use.
+      
+      If you are using the deprecated single-listener APIs, then a return value of
+      true indicates that the [gid.soup3.server.Server] serves https exclusively. If you are
+      using [gid.soup3.server.Server.listen], etc, then a true return value merely indicates
+      that the server is *able* to do https, regardless of whether it actually
+      currently is or not. Use [gid.soup3.server.Server.getUris] to see if it currently has
+      any https listeners.
+      Returns: true if server is configured to serve https.
+  */
+  bool isHttps() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)soup_server_is_https(cast(SoupServer*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Attempts to set up server to listen for connections on address.
+      
+      If options includes [gid.soup3.types.ServerListenOptions.Https], and server has
+      been configured for TLS, then server will listen for https
+      connections on this port. Otherwise it will listen for plain http.
+      
+      You may call this method (along with the other "listen" methods)
+      any number of times on a server, if you want to listen on multiple
+      ports, or set up both http and https service.
+      
+      After calling this method, server will begin accepting and processing
+      connections as soon as the appropriate [gid.glib2.main_context.MainContext] is run.
+      
+      Note that this API does not make use of dual IPv4/IPv6 sockets; if
+      address is an IPv6 address, it will only accept IPv6 connections.
+      You must configure IPv4 listening separately.
+  
+      Params:
+        address = the address of the interface to listen on
+        options = listening options for this server
+      Returns: true on success, false if address could not be
+          bound or any other error occurred (in which case error will be
+          set).
+      Throws: [ErrorWrap]
+  */
+  bool listen(gid.gio2.socket_address.SocketAddress address, gid.soup3.types.ServerListenOptions options)
+  {
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)soup_server_listen(cast(SoupServer*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, options, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Attempts to set up server to listen for connections on all interfaces
+      on the system.
+      
+      That is, it listens on the addresses `0.0.0.0` and/or `::`, depending on
+      whether options includes [gid.soup3.types.ServerListenOptions.Ipv4Only],
+      [gid.soup3.types.ServerListenOptions.Ipv6Only], or neither.) If port is specified, server
+      will listen on that port. If it is 0, server will find an unused port to
+      listen on. (In that case, you can use [gid.soup3.server.Server.getUris] to find out
+      what port it ended up choosing.
+      
+      See [gid.soup3.server.Server.listen] for more details.
+  
+      Params:
+        port = the port to listen on, or 0
+        options = listening options for this server
+      Returns: true on success, false if port could not be bound
+          or any other error occurred (in which case error will be set).
+      Throws: [ErrorWrap]
+  */
+  bool listenAll(uint port, gid.soup3.types.ServerListenOptions options)
+  {
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)soup_server_listen_all(cast(SoupServer*)this._cPtr, port, options, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Attempts to set up server to listen for connections on "localhost".
+      
+      That is, `127.0.0.1` and/or `::1`, depending on whether options includes
+      [gid.soup3.types.ServerListenOptions.Ipv4Only], [gid.soup3.types.ServerListenOptions.Ipv6Only], or neither). If
+      port is specified, server will listen on that port. If it is 0, server
+      will find an unused port to listen on. (In that case, you can use
+      [gid.soup3.server.Server.getUris] to find out what port it ended up choosing.
+      
+      See [gid.soup3.server.Server.listen] for more details.
+  
+      Params:
+        port = the port to listen on, or 0
+        options = listening options for this server
+      Returns: true on success, false if port could not be bound
+          or any other error occurred (in which case error will be set).
+      Throws: [ErrorWrap]
+  */
+  bool listenLocal(uint port, gid.soup3.types.ServerListenOptions options)
+  {
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)soup_server_listen_local(cast(SoupServer*)this._cPtr, port, options, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Attempts to set up server to listen for connections on socket.
+      
+      See [gid.soup3.server.Server.listen] for more details.
+  
+      Params:
+        socket = a listening #GSocket
+        options = listening options for this server
+      Returns: true on success, false if an error occurred (in
+          which case error will be set).
+      Throws: [ErrorWrap]
+  */
+  bool listenSocket(gid.gio2.socket.Socket socket, gid.soup3.types.ServerListenOptions options)
+  {
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)soup_server_listen_socket(cast(SoupServer*)this._cPtr, socket ? cast(GSocket*)socket._cPtr(No.Dup) : null, options, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Pauses I/O on msg.
+      
+      This can be used when you need to return from the server handler without
+      having the full response ready yet. Use [gid.soup3.server.Server.unpauseMessage] to
+      resume I/O.
+      
+      This must only be called on a [gid.soup3.server_message.ServerMessage] which was created by the
+      [gid.soup3.server.Server] and are currently doing I/O, such as those passed into a
+      [gid.soup3.types.ServerCallback] or emitted in a [gid.soup3.server.Server.requestRead]
+      signal.
+  
+      Params:
+        msg = a #SoupServerMessage associated with server.
+  
+      Deprecated: Use [gid.soup3.server_message.ServerMessage.pause] instead.
+  */
+  void pauseMessage(gid.soup3.server_message.ServerMessage msg) nothrow
+  {
+    soup_server_pause_message(cast(SoupServer*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Removes auth_domain from server.
+  
+      Params:
+        authDomain = a #SoupAuthDomain
+  */
+  void removeAuthDomain(gid.soup3.auth_domain.AuthDomain authDomain) nothrow
+  {
+    soup_server_remove_auth_domain(cast(SoupServer*)this._cPtr, authDomain ? cast(SoupAuthDomain*)authDomain._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Removes all handlers (early and normal) registered at path.
+  
+      Params:
+        path = the toplevel path for the handler
+  */
+  void removeHandler(string path) nothrow
+  {
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    soup_server_remove_handler(cast(SoupServer*)this._cPtr, _path);
+  }
+
+  /**
+      Removes support for WebSocket extension of type extension_type (or any subclass of
+      extension_type) from server.
+  
+      Params:
+        extensionType = a #GType
+  */
+  void removeWebsocketExtension(gid.gobject2.types.GType extensionType) nothrow
+  {
+    soup_server_remove_websocket_extension(cast(SoupServer*)this._cPtr, extensionType);
+  }
+
+  /**
+      Sets server's #GTlsAuthenticationMode to use for SSL/TLS client authentication.
+  
+      Params:
+        mode = a #GTlsAuthenticationMode
+  */
+  void setTlsAuthMode(gid.gio2.types.TlsAuthenticationMode mode) nothrow
+  {
+    soup_server_set_tls_auth_mode(cast(SoupServer*)this._cPtr, mode);
+  }
+
+  /**
+      Sets server up to do https, using the given SSL/TLS certificate.
+  
+      Params:
+        certificate = a #GTlsCertificate
+  */
+  void setTlsCertificate(gid.gio2.tls_certificate.TlsCertificate certificate) nothrow
+  {
+    soup_server_set_tls_certificate(cast(SoupServer*)this._cPtr, certificate ? cast(GTlsCertificate*)certificate._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets server's #GTlsDatabase to use for validating SSL/TLS client certificates.
+  
+      Params:
+        tlsDatabase = a #GTlsDatabase
+  */
+  void setTlsDatabase(gid.gio2.tls_database.TlsDatabase tlsDatabase) nothrow
+  {
+    soup_server_set_tls_database(cast(SoupServer*)this._cPtr, tlsDatabase ? cast(GTlsDatabase*)tlsDatabase._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Resumes I/O on msg.
+      
+      Use this to resume after calling [gid.soup3.server.Server.pauseMessage], or after
+      adding a new chunk to a chunked response.
+      
+      I/O won't actually resume until you return to the main loop.
+      
+      This must only be called on a [gid.soup3.server_message.ServerMessage] which was created by the
+      [gid.soup3.server.Server] and are currently doing I/O, such as those passed into a
+      [gid.soup3.types.ServerCallback] or emitted in a [gid.soup3.server.Server.requestRead]
+      signal.
+  
+      Params:
+        msg = a #SoupServerMessage associated with server.
+  
+      Deprecated: Use [gid.soup3.server_message.ServerMessage.unpause] instead.
+  */
+  void unpauseMessage(gid.soup3.server_message.ServerMessage msg) nothrow
+  {
+    soup_server_unpause_message(cast(SoupServer*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Connect to `RequestAborted` signal.
+  
+      Emitted when processing has failed for a message.
+        
+        This could mean either that it could not be read (if
+        [gid.soup3.server.Server.requestRead] has not been emitted for it yet), or that
+        the response could not be written back (if [gid.soup3.server.Server.requestRead]
+        has been emitted but [gid.soup3.server.Server.requestFinished] has not been).
+        
+        message is in an undefined state when this signal is
+        emitted; the signal exists primarily to allow the server to
+        free any state that it may have allocated in
+        [gid.soup3.server.Server.requestStarted].
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.soup3.server_message.ServerMessage message, gid.soup3.server.Server server)`
+  
+          `message` the message (optional)
+  
+          `server` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectRequestAborted(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.soup3.server_message.ServerMessage)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.soup3.server.Server)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.soup3.server.Server.requestAborted");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("request-aborted", closure, after);
+  }
+
+  /**
+      Connect to `RequestFinished` signal.
+  
+      Emitted when the server has finished writing a response to
+        a request.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.soup3.server_message.ServerMessage message, gid.soup3.server.Server server)`
+  
+          `message` the message (optional)
+  
+          `server` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectRequestFinished(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.soup3.server_message.ServerMessage)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.soup3.server.Server)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.soup3.server.Server.requestFinished");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("request-finished", closure, after);
+  }
+
+  /**
+      Connect to `RequestRead` signal.
+  
+      Emitted when the server has successfully read a request.
+        
+        message will have all of its request-side information
+        filled in, and if the message was authenticated, client
+        will have information about that. This signal is emitted
+        before any (non-early) handlers are called for the message,
+        and if it sets the message's #status_code, then normal
+        handler processing will be skipped.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.soup3.server_message.ServerMessage message, gid.soup3.server.Server server)`
+  
+          `message` the message (optional)
+  
+          `server` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectRequestRead(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.soup3.server_message.ServerMessage)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.soup3.server.Server)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.soup3.server.Server.requestRead");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("request-read", closure, after);
+  }
+
+  /**
+      Connect to `RequestStarted` signal.
+  
+      Emitted when the server has started reading a new request.
+        
+        message will be completely blank; not even the
+        Request-Line will have been read yet. About the only thing
+        you can usefully do with it is connect to its signals.
+        
+        If the request is read successfully, this will eventually
+        be followed by a `signalServer::request_read signal`. If a
+        response is then sent, the request processing will end with
+        a [gid.soup3.server.Server.requestFinished] signal. If a network error
+        occurs, the processing will instead end with
+        [gid.soup3.server.Server.requestAborted].
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.soup3.server_message.ServerMessage message, gid.soup3.server.Server server)`
+  
+          `message` the new message (optional)
+  
+          `server` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectRequestStarted(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.soup3.server_message.ServerMessage)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.soup3.server.Server)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.soup3.server.Server.requestStarted");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("request-started", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.soup3.server.Server]
+class ServerGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `rawPaths` property.
+      Params:
+        propval = If true, percent-encoding in the Request-URI path will not be
+          automatically decoded.
+      Returns: Builder instance for fluent chaining
+  */
+  T rawPaths(bool propval) nothrow
+  {
+    return setProperty("raw-paths", propval);
+  }
+
+  /**
+      Set `serverHeader` property.
+      Params:
+        propval = Server header.
+          
+          If non-null, the value to use for the "Server" header on
+          [gid.soup3.server_message.ServerMessage]s processed by this server.
+          
+          The Server header is the server equivalent of the
+          User-Agent header, and provides information about the
+          server and its components. It contains a list of one or
+          more product tokens, separated by whitespace, with the most
+          significant product token coming first. The tokens must be
+          brief, ASCII, and mostly alphanumeric (although "-", "_",
+          and "." are also allowed), and may optionally include a "/"
+          followed by a version string. You may also put comments,
+          enclosed in parentheses, between or after the tokens.
+          
+          Some HTTP server implementations intentionally do not use
+          version numbers in their Server header, so that
+          installations running older versions of the server don't
+          end up advertising their vulnerability to specific security
+          holes.
+          
+          As with `property@Session:user_agent`, if you set a
+          [gid.soup3.server.Server.serverHeader] property that has trailing
+          whitespace, [gid.soup3.server.Server] will append its own product token (eg,
+          `libsoup/2.3.2`) to the end of the header for you.
+      Returns: Builder instance for fluent chaining
+  */
+  T serverHeader(string propval) nothrow
+  {
+    return setProperty("server-header", propval);
+  }
+
+  /**
+      Set `tlsAuthMode` property.
+      Params:
+        propval = A [gid.gio2.types.TlsAuthenticationMode] for SSL/TLS client authentication.
+      Returns: Builder instance for fluent chaining
+  */
+  T tlsAuthMode(gid.gio2.types.TlsAuthenticationMode propval) nothrow
+  {
+    return setProperty("tls-auth-mode", propval);
+  }
+
+  /**
+      Set `tlsCertificate` property.
+      Params:
+        propval = A [gid.gio2.tls_certificate.TlsCertificate] that has a
+          [gid.gio2.tls_certificate.TlsCertificate.privateKey] set.
+          
+          If this is set, then the server will be able to speak
+          https in addition to (or instead of) plain http.
+      Returns: Builder instance for fluent chaining
+  */
+  T tlsCertificate(gid.gio2.tls_certificate.TlsCertificate propval) nothrow
+  {
+    return setProperty("tls-certificate", propval);
+  }
+
+  /**
+      Set `tlsDatabase` property.
+      Params:
+        propval = A [gid.gio2.tls_database.TlsDatabase] to use for validating SSL/TLS client
+          certificates.
+      Returns: Builder instance for fluent chaining
+  */
+  T tlsDatabase(gid.gio2.tls_database.TlsDatabase propval) nothrow
+  {
+    return setProperty("tls-database", propval);
+  }
+}
+
+/// Fluent builder for [gid.soup3.server.Server]
+final class ServerGidBuilder : ServerGidBuilderImpl!ServerGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Server build() nothrow
+  {
+    return new Server(cast(void*)createGObject(Server._getGType), Yes.Take);
+  }
+}

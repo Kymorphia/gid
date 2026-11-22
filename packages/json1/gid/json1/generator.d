@@ -1,0 +1,420 @@
+/// Module for [Generator] class
+module gid.json1.generator;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gio2.cancellable;
+import gid.gio2.output_stream;
+import gid.glib2.error;
+import gid.glib2.string_;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.json1.c.functions;
+import gid.json1.c.types;
+import gid.json1.node;
+import gid.json1.types;
+
+/**
+    [gid.json1.generator.Generator] provides an object for generating a JSON data stream
+    from a tree of [gid.json1.node.Node] instances, and put it into a buffer
+    or a file.
+*/
+class Generator : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())json_generator_get_type != &gidSymbolNotFound ? json_generator_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "JsonGenerator";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Generator self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.json1.generator.Generator]
+      Returns: New builder object
+  */
+  static GeneratorGidBuilder builder() nothrow
+  {
+    return new GeneratorGidBuilder;
+  }
+
+  /**
+      Get `indent` property.
+      Returns: Number of spaces to be used to indent when pretty printing.
+  */
+  @property uint indent() nothrow
+  {
+    return getIndent();
+  }
+
+  /**
+      Set `indent` property.
+      Params:
+        propval = Number of spaces to be used to indent when pretty printing.
+  */
+  @property void indent(uint propval) nothrow
+  {
+    setIndent(propval);
+  }
+
+  /**
+      Get `indentChar` property.
+      Returns: The character that should be used when indenting in pretty print.
+  */
+  @property uint indentChar() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(uint)("indent-char");
+  }
+
+  /**
+      Set `indentChar` property.
+      Params:
+        propval = The character that should be used when indenting in pretty print.
+  */
+  @property void indentChar(uint propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(uint)("indent-char", propval);
+  }
+
+  /**
+      Get `pretty` property.
+      Returns: Whether the output should be "pretty-printed", with indentation and
+        newlines.
+        
+        The indentation level can be controlled by using the
+        [gid.json1.generator.Generator.indent] property.
+  */
+  @property bool pretty() nothrow
+  {
+    return getPretty();
+  }
+
+  /**
+      Set `pretty` property.
+      Params:
+        propval = Whether the output should be "pretty-printed", with indentation and
+          newlines.
+          
+          The indentation level can be controlled by using the
+          [gid.json1.generator.Generator.indent] property.
+  */
+  @property void pretty(bool propval) nothrow
+  {
+    setPretty(propval);
+  }
+
+  /**
+      Get `root` property.
+      Returns: The root node to be used when constructing a JSON data
+        stream.
+  */
+  @property gid.json1.node.Node root() nothrow
+  {
+    return getRoot();
+  }
+
+  /**
+      Set `root` property.
+      Params:
+        propval = The root node to be used when constructing a JSON data
+          stream.
+  */
+  @property void root(gid.json1.node.Node propval) nothrow
+  {
+    setRoot(propval);
+  }
+
+  /**
+      Creates a new [gid.json1.generator.Generator].
+      
+      You can use this object to generate a JSON data stream starting from a
+      data object model composed by [gid.json1.node.Node]s.
+      Returns: the newly created generator instance
+  */
+  this() nothrow
+  {
+    JsonGenerator* _cretval;
+    _cretval = json_generator_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Retrieves the value set using [gid.json1.generator.Generator.setIndent].
+      Returns: the number of repetitions per indentation level
+  */
+  uint getIndent() nothrow
+  {
+    uint _retval;
+    _retval = json_generator_get_indent(cast(JsonGenerator*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves the value set using [gid.json1.generator.Generator.setIndentChar].
+      Returns: the character to be used when indenting
+  */
+  dchar getIndentChar() nothrow
+  {
+    dchar _retval;
+    _retval = json_generator_get_indent_char(cast(JsonGenerator*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves the value set using [gid.json1.generator.Generator.setPretty].
+      Returns: `TRUE` if the generated JSON should be pretty-printed, and
+          `FALSE` otherwise
+  */
+  bool getPretty() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)json_generator_get_pretty(cast(JsonGenerator*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves a pointer to the root node set using
+      [gid.json1.generator.Generator.setRoot].
+      Returns: the root node
+  */
+  gid.json1.node.Node getRoot() nothrow
+  {
+    JsonNode* _cretval;
+    _cretval = json_generator_get_root(cast(JsonGenerator*)this._cPtr);
+    auto _retval = _cretval ? new gid.json1.node.Node(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Sets the number of repetitions for each indentation level.
+  
+      Params:
+        indentLevel = the number of repetitions of the indentation character
+            that should be applied when pretty printing
+  */
+  void setIndent(uint indentLevel) nothrow
+  {
+    json_generator_set_indent(cast(JsonGenerator*)this._cPtr, indentLevel);
+  }
+
+  /**
+      Sets the character to be used when indenting.
+  
+      Params:
+        indentChar = a Unicode character to be used when indenting
+  */
+  void setIndentChar(dchar indentChar) nothrow
+  {
+    json_generator_set_indent_char(cast(JsonGenerator*)this._cPtr, indentChar);
+  }
+
+  /**
+      Sets whether the generated JSON should be pretty printed.
+      
+      Pretty printing will use indentation character specified in the
+      [gid.json1.generator.Generator.indentChar] property and the spacing
+      specified in the [gid.json1.generator.Generator.indent] property.
+  
+      Params:
+        isPretty = whether the generated string should be pretty printed
+  */
+  void setPretty(bool isPretty) nothrow
+  {
+    json_generator_set_pretty(cast(JsonGenerator*)this._cPtr, isPretty);
+  }
+
+  /**
+      Sets the root of the JSON data stream to be serialized by
+      the given generator.
+      
+      The passed `node` is copied by the generator object, so it can be
+      safely freed after calling this function.
+  
+      Params:
+        node = the root node
+  */
+  void setRoot(gid.json1.node.Node node) nothrow
+  {
+    json_generator_set_root(cast(JsonGenerator*)this._cPtr, node ? cast(JsonNode*)node._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the root of the JSON data stream to be serialized by
+      the given generator.
+      
+      The ownership of the passed `node` is transferred to the generator object.
+  
+      Params:
+        node = the root node
+  */
+  void takeRoot(gid.json1.node.Node node = null) nothrow
+  {
+    json_generator_take_root(cast(JsonGenerator*)this._cPtr, node ? cast(JsonNode*)node._cPtr(Yes.Dup) : null);
+  }
+
+  /**
+      Generates a JSON data stream from generator and returns it as a
+      buffer.
+  
+      Params:
+        length = return location for the length of the returned
+            buffer
+      Returns: a newly allocated string holding a JSON data stream
+  */
+  string toData(out size_t length) nothrow
+  {
+    char* _cretval;
+    _cretval = json_generator_to_data(cast(JsonGenerator*)this._cPtr, cast(size_t*)&length);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Creates a JSON data stream and puts it inside `filename`, overwriting
+      the file's current contents.
+      
+      This operation is atomic, in the sense that the data is written to a
+      temporary file which is then renamed to the given `filename`.
+  
+      Params:
+        filename = the path to the target file
+      Returns: true if saving was successful.
+      Throws: [ErrorWrap]
+  */
+  bool toFile(string filename)
+  {
+    bool _retval;
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
+    GError *_err;
+    _retval = cast(bool)json_generator_to_file(cast(JsonGenerator*)this._cPtr, _filename, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Generates a JSON data stream and appends it to the string buffer.
+  
+      Params:
+        string_ = a string buffer
+      Returns: the passed string, updated with
+          the generated JSON data
+  */
+  gid.glib2.string_.String toGstring(gid.glib2.string_.String string_) nothrow
+  {
+    GString* _cretval;
+    _cretval = json_generator_to_gstring(cast(JsonGenerator*)this._cPtr, string_ ? cast(GString*)string_._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gid.glib2.string_.String(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Outputs JSON data and writes it (synchronously) to the given stream.
+  
+      Params:
+        stream = the output stream used to write the JSON data
+        cancellable = a [gid.gio2.cancellable.Cancellable]
+      Returns: whether the write operation was successful
+      Throws: [ErrorWrap]
+  */
+  bool toStream(gid.gio2.output_stream.OutputStream stream, gid.gio2.cancellable.Cancellable cancellable = null)
+  {
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)json_generator_to_stream(cast(JsonGenerator*)this._cPtr, stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [gid.json1.generator.Generator]
+class GeneratorGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `indent` property.
+      Params:
+        propval = Number of spaces to be used to indent when pretty printing.
+      Returns: Builder instance for fluent chaining
+  */
+  T indent(uint propval) nothrow
+  {
+    return setProperty("indent", propval);
+  }
+
+  /**
+      Set `indentChar` property.
+      Params:
+        propval = The character that should be used when indenting in pretty print.
+      Returns: Builder instance for fluent chaining
+  */
+  T indentChar(uint propval) nothrow
+  {
+    return setProperty("indent-char", propval);
+  }
+
+  /**
+      Set `pretty` property.
+      Params:
+        propval = Whether the output should be "pretty-printed", with indentation and
+          newlines.
+          
+          The indentation level can be controlled by using the
+          [gid.json1.generator.Generator.indent] property.
+      Returns: Builder instance for fluent chaining
+  */
+  T pretty(bool propval) nothrow
+  {
+    return setProperty("pretty", propval);
+  }
+
+  /**
+      Set `root` property.
+      Params:
+        propval = The root node to be used when constructing a JSON data
+          stream.
+      Returns: Builder instance for fluent chaining
+  */
+  T root(gid.json1.node.Node propval) nothrow
+  {
+    return setProperty("root", propval);
+  }
+}
+
+/// Fluent builder for [gid.json1.generator.Generator]
+final class GeneratorGidBuilder : GeneratorGidBuilderImpl!GeneratorGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Generator build() nothrow
+  {
+    return new Generator(cast(void*)createGObject(Generator._getGType), Yes.Take);
+  }
+}

@@ -1,0 +1,154 @@
+/// Module for [MessagePartial] class
+module gid.gmime3.message_partial;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gmime3.c.functions;
+import gid.gmime3.c.types;
+import gid.gmime3.message;
+import gid.gmime3.part;
+import gid.gmime3.types;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+
+/**
+    A message/partial MIME part.
+*/
+class MessagePartial : gid.gmime3.part.Part
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())g_mime_message_partial_get_type != &gidSymbolNotFound ? g_mime_message_partial_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeMessagePartial";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override MessagePartial self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gmime3.message_partial.MessagePartial]
+      Returns: New builder object
+  */
+  static MessagePartialGidBuilder builder() nothrow
+  {
+    return new MessagePartialGidBuilder;
+  }
+
+  /**
+      Creates a new MIME message/partial object.
+  
+      Params:
+        id = message/partial part id
+        number = message/partial part number
+        total = total number of message/partial parts
+      Returns: an empty MIME message/partial object.
+  */
+  this(string id, int number, int total) nothrow
+  {
+    GMimeMessagePartial* _cretval;
+    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
+    _cretval = g_mime_message_partial_new(_id, number, total);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Reconstructs the GMimeMessage from the given message/partial parts
+      in partials.
+  
+      Params:
+        partials = an array of message/partial mime parts
+      Returns: a GMimeMessage object on success or null
+        on fail.
+  */
+  static gid.gmime3.message.Message reconstructMessage(gid.gmime3.message_partial.MessagePartial[] partials) nothrow
+  {
+    GMimeMessage* _cretval;
+    size_t _num;
+    if (partials)
+      _num = cast(size_t)partials.length;
+
+    auto _partials_arr = new GMimeMessagePartial*[](partials.length);
+    auto _partials = cast(GMimeMessagePartial**)_partials_arr.ptr;
+    foreach (i, obj; partials) _partials[i] = obj ? cast(GMimeMessagePartial*)obj._cPtr(No.Dup) : null;
+    _cretval = g_mime_message_partial_reconstruct_message(_partials, _num);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gmime3.message.Message)(cast(GMimeMessage*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the message/partial id parameter value.
+      Returns: the message/partial id or null on fail.
+  */
+  string getId() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = g_mime_message_partial_get_id(cast(GMimeMessagePartial*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the message/partial part number.
+      Returns: the message/partial part number or %-1 on fail.
+  */
+  int getNumber() nothrow
+  {
+    int _retval;
+    _retval = g_mime_message_partial_get_number(cast(GMimeMessagePartial*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the total number of message/partial parts needed to
+      reconstruct the original message.
+      Returns: the total number of message/partial parts needed to
+        reconstruct the original message or -1 on fail.
+  */
+  int getTotal() nothrow
+  {
+    int _retval;
+    _retval = g_mime_message_partial_get_total(cast(GMimeMessagePartial*)this._cPtr);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [gid.gmime3.message_partial.MessagePartial]
+class MessagePartialGidBuilderImpl(T) : gid.gmime3.part.PartGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gmime3.message_partial.MessagePartial]
+final class MessagePartialGidBuilder : MessagePartialGidBuilderImpl!MessagePartialGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  MessagePartial build() nothrow
+  {
+    return new MessagePartial(cast(void*)createGObject(MessagePartial._getGType), Yes.Take);
+  }
+}

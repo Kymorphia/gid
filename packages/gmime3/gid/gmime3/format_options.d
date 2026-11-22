@@ -1,0 +1,190 @@
+/// Module for [FormatOptions] class
+module gid.gmime3.format_options;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gmime3.c.functions;
+import gid.gmime3.c.types;
+import gid.gmime3.filter;
+import gid.gmime3.types;
+import gid.gobject2.boxed;
+import gid.gobject2.object;
+
+/**
+    Format options for serializing various GMime objects.
+*/
+class FormatOptions : gid.gobject2.boxed.BoxedWrap!(g_mime_format_options_get_type)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override FormatOptions self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Creates a new set of #GMimeFormatOptions.
+      Returns: a newly allocated set of #GMimeFormatOptions with the default values.
+  */
+  this() nothrow
+  {
+    GMimeFormatOptions* _cretval;
+    _cretval = g_mime_format_options_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Adds the given header to the list of headers that should be hidden.
+  
+      Params:
+        header = a header name
+  */
+  void addHiddenHeader(string header) nothrow
+  {
+    const(char)* _header = header.toCString!(No.Malloc, No.Nullable);
+    g_mime_format_options_add_hidden_header(cast(GMimeFormatOptions*)this._cPtr, _header);
+  }
+
+  /**
+      Clears the list of headers that should be hidden.
+  */
+  void clearHiddenHeaders() nothrow
+  {
+    g_mime_format_options_clear_hidden_headers(cast(GMimeFormatOptions*)this._cPtr);
+  }
+
+  /**
+      Clones a #GMimeFormatOptions.
+      Returns: a newly allocated #GMimeFormatOptions.
+  */
+  gid.gmime3.format_options.FormatOptions clone() nothrow
+  {
+    GMimeFormatOptions* _cretval;
+    _cretval = g_mime_format_options_clone(cast(GMimeFormatOptions*)this._cPtr);
+    auto _retval = _cretval ? new gid.gmime3.format_options.FormatOptions(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Creates a #GMimeFilter suitable for converting line-endings to the
+      currently set new-line format.
+  
+      Params:
+        ensureNewline = true if the output must *always* end with a new line
+      Returns: a #GMimeFilter to convert to the specified new-line format.
+  */
+  gid.gmime3.filter.Filter createNewlineFilter(bool ensureNewline) nothrow
+  {
+    GMimeFilter* _cretval;
+    _cretval = g_mime_format_options_create_newline_filter(cast(GMimeFormatOptions*)this._cPtr, ensureNewline);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gmime3.filter.Filter)(cast(GMimeFilter*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets a string representing the currently set new-line format.
+      Returns: a new-line character sequence.
+  */
+  string getNewline() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = g_mime_format_options_get_newline(cast(GMimeFormatOptions*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the new-line format to use when writing out messages and headers.
+      Returns: the new-line format that is currently set.
+  */
+  gid.gmime3.types.NewLineFormat getNewlineFormat() nothrow
+  {
+    GMimeNewLineFormat _cretval;
+    _cretval = g_mime_format_options_get_newline_format(cast(GMimeFormatOptions*)this._cPtr);
+    gid.gmime3.types.NewLineFormat _retval = cast(gid.gmime3.types.NewLineFormat)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the parameter encoding method to use for #GMimeParam parameters that do not
+      already have an encoding method specified.
+      Returns: the encoding method that is currently set.
+  */
+  gid.gmime3.types.ParamEncodingMethod getParamEncodingMethod() nothrow
+  {
+    GMimeParamEncodingMethod _cretval;
+    _cretval = g_mime_format_options_get_param_encoding_method(cast(GMimeFormatOptions*)this._cPtr);
+    gid.gmime3.types.ParamEncodingMethod _retval = cast(gid.gmime3.types.ParamEncodingMethod)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets whether or not the specified header should be hidden.
+  
+      Params:
+        header = the name of a header
+      Returns: true if the header should be hidden or false otherwise.
+  */
+  bool isHiddenHeader(string header) nothrow
+  {
+    bool _retval;
+    const(char)* _header = header.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)g_mime_format_options_is_hidden_header(cast(GMimeFormatOptions*)this._cPtr, _header);
+    return _retval;
+  }
+
+  /**
+      Removes the given header from the list of headers that should be hidden.
+  
+      Params:
+        header = a header name
+  */
+  void removeHiddenHeader(string header) nothrow
+  {
+    const(char)* _header = header.toCString!(No.Malloc, No.Nullable);
+    g_mime_format_options_remove_hidden_header(cast(GMimeFormatOptions*)this._cPtr, _header);
+  }
+
+  /**
+      Sets the new-line format that should be used when writing headers and messages.
+  
+      Params:
+        newline = a #GMimeNewLineFormat
+  */
+  void setNewlineFormat(gid.gmime3.types.NewLineFormat newline) nothrow
+  {
+    g_mime_format_options_set_newline_format(cast(GMimeFormatOptions*)this._cPtr, newline);
+  }
+
+  /**
+      Sets the parameter encoding method to use when encoding parameters which
+      do not have an encoding method specified.
+      
+      Note: #GMIME_PARAM_ENCODING_METHOD_DEFAULT is not allowed.
+  
+      Params:
+        method = a #GMimeParamEncodingMethod
+  */
+  void setParamEncodingMethod(gid.gmime3.types.ParamEncodingMethod method) nothrow
+  {
+    g_mime_format_options_set_param_encoding_method(cast(GMimeFormatOptions*)this._cPtr, method);
+  }
+
+  /**
+      Gets the default format options.
+      Returns: the default format options.
+  */
+  static gid.gmime3.format_options.FormatOptions getDefault() nothrow
+  {
+    GMimeFormatOptions* _cretval;
+    _cretval = g_mime_format_options_get_default();
+    auto _retval = _cretval ? new gid.gmime3.format_options.FormatOptions(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+}

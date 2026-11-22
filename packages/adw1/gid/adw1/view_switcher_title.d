@@ -1,0 +1,488 @@
+/// Module for [ViewSwitcherTitle] class
+module gid.adw1.view_switcher_title;
+
+public import gid.core.basictypes;
+import gid.adw1.c.functions;
+import gid.adw1.c.types;
+import gid.adw1.types;
+import gid.adw1.view_stack;
+import gid.core.utils;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.accessible;
+import gid.gtk4.accessible_mixin;
+import gid.gtk4.buildable;
+import gid.gtk4.buildable_mixin;
+import gid.gtk4.constraint_target;
+import gid.gtk4.constraint_target_mixin;
+import gid.gtk4.widget;
+
+/**
+    A view switcher title.
+    
+    <picture>
+      <source srcset="view-switcher-title-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="view-switcher-title.png" alt="view-switcher-title">
+    </picture>
+    
+    A widget letting you switch between multiple views contained by a
+    [gid.adw1.view_stack.ViewStack] via an [gid.adw1.view_switcher.ViewSwitcher].
+    
+    It is designed to be used as the title widget of a [gid.adw1.header_bar.HeaderBar], and
+    will display the window's title when the window is too narrow to fit the view
+    switcher e.g. on mobile phones, or if there are less than two views.
+    
+    In order to center the title in narrow windows, the header bar should have
+    [gid.adw1.header_bar.HeaderBar.centeringPolicy] set to
+    [gid.adw1.types.CenteringPolicy.Strict].
+    
+    [gid.adw1.view_switcher_title.ViewSwitcherTitle] is intended to be used together with
+    [gid.adw1.view_switcher_bar.ViewSwitcherBar].
+    
+    A common use case is to bind the [gid.adw1.view_switcher_bar.ViewSwitcherBar.reveal] property
+    to [gid.adw1.view_switcher_title.ViewSwitcherTitle.titleVisible] to automatically reveal the
+    view switcher bar when the title label is displayed in place of the view
+    switcher, as follows:
+    
+    ```xml
+    <object class="AdwWindow">
+      <property name="content">
+        <object class="AdwToolbarView">
+          <child type="top">
+            <object class="AdwHeaderBar">
+              <property name="centering-policy">strict</property>
+              <property name="title-widget">
+                <object class="AdwViewSwitcherTitle" id="title">
+                  <property name="stack">stack</property>
+                </object>
+              </property>
+            </object>
+          </child>
+          <property name="content">
+            <object class="AdwViewStack" id="stack"/>
+          </property>
+          <child type="bottom">
+            <object class="AdwViewSwitcherBar">
+              <property name="stack">stack</property>
+              <binding name="reveal">
+                <lookup name="title-visible">title</lookup>
+              </binding>
+            </object>
+          </child>
+        </object>
+      </property>
+    </object>
+    ```
+    
+    ## CSS nodes
+    
+    [gid.adw1.view_switcher_title.ViewSwitcherTitle] has a single CSS node with name `viewswitchertitle`.
+
+    Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+*/
+class ViewSwitcherTitle : gid.gtk4.widget.Widget
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())adw_view_switcher_title_get_type != &gidSymbolNotFound ? adw_view_switcher_title_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwViewSwitcherTitle";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ViewSwitcherTitle self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.adw1.view_switcher_title.ViewSwitcherTitle]
+      Returns: New builder object
+  */
+  static ViewSwitcherTitleGidBuilder builder() nothrow
+  {
+    return new ViewSwitcherTitleGidBuilder;
+  }
+
+  /**
+      Get `stack` property.
+      Returns: The stack the view switcher controls.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  @property gid.adw1.view_stack.ViewStack stack() nothrow
+  {
+    return getStack();
+  }
+
+  /**
+      Set `stack` property.
+      Params:
+        propval = The stack the view switcher controls.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  @property void stack(gid.adw1.view_stack.ViewStack propval) nothrow
+  {
+    setStack(propval);
+  }
+
+  /**
+      Get `subtitle` property.
+      Returns: The subtitle to display.
+        
+        The subtitle should give the user additional details.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  @property string subtitle() nothrow
+  {
+    return getSubtitle();
+  }
+
+  /**
+      Set `subtitle` property.
+      Params:
+        propval = The subtitle to display.
+          
+          The subtitle should give the user additional details.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  @property void subtitle(string propval) nothrow
+  {
+    setSubtitle(propval);
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title to display.
+        
+        The title typically identifies the current view or content item, and
+        generally does not use the application name.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  @property string title() nothrow
+  {
+    return getTitle();
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title to display.
+          
+          The title typically identifies the current view or content item, and
+          generally does not use the application name.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  @property void title(string propval) nothrow
+  {
+    setTitle(propval);
+  }
+
+  /**
+      Get `titleVisible` property.
+      Returns: Whether the title is currently visible.
+        
+        If the title is visible, it means the view switcher is hidden an it may be
+        wanted to show an alternative switcher, e.g. a [gid.adw1.view_switcher_bar.ViewSwitcherBar].
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  @property bool titleVisible() nothrow
+  {
+    return getTitleVisible();
+  }
+
+  /**
+      Get `viewSwitcherEnabled` property.
+      Returns: Whether the view switcher is enabled.
+        
+        If it is disabled, the title will be displayed instead. This allows to
+        programmatically hide the view switcher even if it fits in the available
+        space.
+        
+        This can be used e.g. to ensure the view switcher is hidden below a certain
+        window width, or any other constraint you find suitable.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  @property bool viewSwitcherEnabled() nothrow
+  {
+    return getViewSwitcherEnabled();
+  }
+
+  /**
+      Set `viewSwitcherEnabled` property.
+      Params:
+        propval = Whether the view switcher is enabled.
+          
+          If it is disabled, the title will be displayed instead. This allows to
+          programmatically hide the view switcher even if it fits in the available
+          space.
+          
+          This can be used e.g. to ensure the view switcher is hidden below a certain
+          window width, or any other constraint you find suitable.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  @property void viewSwitcherEnabled(bool propval) nothrow
+  {
+    setViewSwitcherEnabled(propval);
+  }
+
+  /**
+      Creates a new [gid.adw1.view_switcher_title.ViewSwitcherTitle].
+      Returns: the newly created [gid.adw1.view_switcher_title.ViewSwitcherTitle]
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  this() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = adw_view_switcher_title_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Gets the stack controlled by self.
+      Returns: the stack
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  gid.adw1.view_stack.ViewStack getStack() nothrow
+  {
+    AdwViewStack* _cretval;
+    _cretval = adw_view_switcher_title_get_stack(cast(AdwViewSwitcherTitle*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.adw1.view_stack.ViewStack)(cast(AdwViewStack*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the subtitle of self.
+      Returns: the subtitle
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  string getSubtitle() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = adw_view_switcher_title_get_subtitle(cast(AdwViewSwitcherTitle*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the title of self.
+      Returns: the title
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  string getTitle() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = adw_view_switcher_title_get_title(cast(AdwViewSwitcherTitle*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets whether the title of self is currently visible.
+      
+      If the title is visible, it means the view switcher is hidden an it may be
+      wanted to show an alternative switcher, e.g. a [gid.adw1.view_switcher_bar.ViewSwitcherBar].
+      Returns: whether the title of self is currently visible
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  bool getTitleVisible() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_view_switcher_title_get_title_visible(cast(AdwViewSwitcherTitle*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether self's view switcher is enabled.
+      Returns: whether the view switcher is enabled
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  bool getViewSwitcherEnabled() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_view_switcher_title_get_view_switcher_enabled(cast(AdwViewSwitcherTitle*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Sets the stack controlled by self.
+  
+      Params:
+        stack = a stack
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  void setStack(gid.adw1.view_stack.ViewStack stack = null) nothrow
+  {
+    adw_view_switcher_title_set_stack(cast(AdwViewSwitcherTitle*)this._cPtr, stack ? cast(AdwViewStack*)stack._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the subtitle of self.
+      
+      The subtitle should give the user additional details.
+  
+      Params:
+        subtitle = a subtitle
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  void setSubtitle(string subtitle) nothrow
+  {
+    const(char)* _subtitle = subtitle.toCString!(No.Malloc, No.Nullable);
+    adw_view_switcher_title_set_subtitle(cast(AdwViewSwitcherTitle*)this._cPtr, _subtitle);
+  }
+
+  /**
+      Sets the title of self.
+      
+      The title typically identifies the current view or content item, and
+      generally does not use the application name.
+  
+      Params:
+        title = a title
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  void setTitle(string title) nothrow
+  {
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
+    adw_view_switcher_title_set_title(cast(AdwViewSwitcherTitle*)this._cPtr, _title);
+  }
+
+  /**
+      Sets whether self's view switcher is enabled.
+      
+      If it is disabled, the title will be displayed instead. This allows to
+      programmatically hide the view switcher even if it fits in the available
+      space.
+      
+      This can be used e.g. to ensure the view switcher is hidden below a certain
+      window width, or any other constraint you find suitable.
+  
+      Params:
+        enabled = whether the view switcher is enabled
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  void setViewSwitcherEnabled(bool enabled) nothrow
+  {
+    adw_view_switcher_title_set_view_switcher_enabled(cast(AdwViewSwitcherTitle*)this._cPtr, enabled);
+  }
+}
+
+/// Fluent builder implementation template for [gid.adw1.view_switcher_title.ViewSwitcherTitle]
+class ViewSwitcherTitleGidBuilderImpl(T) : gid.gtk4.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `stack` property.
+      Params:
+        propval = The stack the view switcher controls.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  T stack(gid.adw1.view_stack.ViewStack propval) nothrow
+  {
+    return setProperty("stack", propval);
+  }
+
+  /**
+      Set `subtitle` property.
+      Params:
+        propval = The subtitle to display.
+          
+          The subtitle should give the user additional details.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  T subtitle(string propval) nothrow
+  {
+    return setProperty("subtitle", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title to display.
+          
+          The title typically identifies the current view or content item, and
+          generally does not use the application name.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  T title(string propval) nothrow
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `viewSwitcherEnabled` property.
+      Params:
+        propval = Whether the view switcher is enabled.
+          
+          If it is disabled, the title will be displayed instead. This allows to
+          programmatically hide the view switcher even if it fits in the available
+          space.
+          
+          This can be used e.g. to ensure the view switcher is hidden below a certain
+          window width, or any other constraint you find suitable.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwviewswitchertitle)
+  */
+  T viewSwitcherEnabled(bool propval) nothrow
+  {
+    return setProperty("view-switcher-enabled", propval);
+  }
+}
+
+/// Fluent builder for [gid.adw1.view_switcher_title.ViewSwitcherTitle]
+final class ViewSwitcherTitleGidBuilder : ViewSwitcherTitleGidBuilderImpl!ViewSwitcherTitleGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  ViewSwitcherTitle build() nothrow
+  {
+    return new ViewSwitcherTitle(cast(void*)createGObject(ViewSwitcherTitle._getGType), Yes.Take);
+  }
+}

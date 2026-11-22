@@ -4,7 +4,7 @@
 
 public import std.typecons : Flag, No, Yes;
 
-import glib.types;
+import gid.glib2.types;
 
 class ErrorWrap : Exception
 {
@@ -47,7 +47,7 @@ class ErrorWrap : Exception
   }
 
   /**
-   * Steal the wrapped C GError, transferring ownership to the caller (see gid.wrap.GidWrap._cSteal). The exception
+   * Steal the wrapped C GError, transferring ownership to the caller (see gid.core.wrap.GidWrap._cSteal). The exception
    * is left without a GError, so it must not be used afterwards.
    * Returns: The C GError pointer, owned by the caller
    */

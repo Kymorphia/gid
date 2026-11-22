@@ -1,0 +1,402 @@
+/// Module for [MIKEYPayload] class
+module gid.gstsdp1.mikeypayload;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.boxed;
+import gid.gstsdp1.c.functions;
+import gid.gstsdp1.c.types;
+import gid.gstsdp1.mikeypayload_spparam;
+import gid.gstsdp1.types;
+
+/**
+    Hold the common fields for all payloads
+*/
+class MIKEYPayload : gid.gobject2.boxed.BoxedWrap!(gst_mikey_payload_get_type)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override MIKEYPayload self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get `type` field.
+      Returns: the payload type
+  */
+  @property gid.gstsdp1.types.MIKEYPayloadType type() nothrow
+  {
+    return cast(gid.gstsdp1.types.MIKEYPayloadType)(cast(GstMIKEYPayload*)this._cPtr).type;
+  }
+
+  /**
+      Set `type` field.
+      Params:
+        propval = the payload type
+  */
+  @property void type(gid.gstsdp1.types.MIKEYPayloadType propval) nothrow
+  {
+    (cast(GstMIKEYPayload*)this._cPtr).type = cast(GstMIKEYPayloadType)propval;
+  }
+
+  /**
+      Get `len` field.
+      Returns: length of the payload
+  */
+  @property uint len() nothrow
+  {
+    return (cast(GstMIKEYPayload*)this._cPtr).len;
+  }
+
+  /**
+      Set `len` field.
+      Params:
+        propval = length of the payload
+  */
+  @property void len(uint propval) nothrow
+  {
+    (cast(GstMIKEYPayload*)this._cPtr).len = propval;
+  }
+
+  /**
+  Get the length of a timestamp value.
+  Params:
+  type = the timestamp type
+  Returns: the length in bytes of the timestamp value of type (8 for NTP-UTC and NTP, 4 for COUNTER) or -1 if
+  type is not a valid timestamp type
+  */
+  static int tsValueLength(gid.gstsdp1.types.MIKEYTSType type) nothrow
+  {
+    if (type == gid.gstsdp1.types.MIKEYTSType.NtpUtc || type == gid.gstsdp1.types.MIKEYTSType.Ntp)
+      return 8;
+
+    if (type == gid.gstsdp1.types.MIKEYTSType.Counter)
+      return 4;
+
+    return -1;
+  }
+
+  /**
+  Set the timestamp in a [gid.gstsdp1.types.MIKEYPayloadType.T] payload.
+  Params:
+  type = the timestamp type
+  tsValue = the timestamp value, its length must be [gid.gstsdp1.mikeypayload.MIKEYPayload.tsValueLength] of type
+  Returns: true on success, false if type is not a valid timestamp type or tsValue has the wrong length
+  */
+  bool tSet(gid.gstsdp1.types.MIKEYTSType type, ubyte[] tsValue) nothrow
+  {
+    auto _len = tsValueLength(type);
+
+    if (_len < 0)
+      return false;
+
+    if (tsValue.length != _len)
+    {
+      import gid.glib2.c.functions : g_log;
+      import gid.glib2.c.types : GLogLevelFlags;
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gid.gstsdp1.mikeypayload.MIKEYPayload.tSet tsValue length %d does not match the timestamp type length %d",
+      cast(int)tsValue.length, _len);
+      return false;
+    }
+
+    return cast(bool)gst_mikey_payload_t_set(cast(GstMIKEYPayload*)this._cPtr, cast(GstMIKEYTSType)type, tsValue.ptr);
+  }
+
+
+  /**
+      Make a new #GstMIKEYPayload with type.
+  
+      Params:
+        type = a #GstMIKEYPayloadType
+      Returns: a new #GstMIKEYPayload or null on failure.
+  */
+  this(gid.gstsdp1.types.MIKEYPayloadType type) nothrow
+  {
+    GstMIKEYPayload* _cretval;
+    _cretval = gst_mikey_payload_new(type);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Add a new sub payload to payload.
+  
+      Params:
+        newpay = a #GstMIKEYPayload to add
+      Returns: true on success.
+  */
+  bool kemacAddSub(gid.gstsdp1.mikeypayload.MIKEYPayload newpay) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_mikey_payload_kemac_add_sub(cast(GstMIKEYPayload*)this._cPtr, newpay ? cast(GstMIKEYPayload*)newpay._cPtr(Yes.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Get the number of sub payloads of payload. payload should be of type
+      [gid.gstsdp1.types.MIKEYPayloadType.Kemac].
+      Returns: the number of sub payloads in payload
+  */
+  uint kemacGetNSub() nothrow
+  {
+    uint _retval;
+    _retval = gst_mikey_payload_kemac_get_n_sub(cast(const(GstMIKEYPayload)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Get the sub payload of payload at idx. payload should be of type
+      [gid.gstsdp1.types.MIKEYPayloadType.Kemac].
+  
+      Params:
+        idx = an index
+      Returns: the #GstMIKEYPayload at idx.
+  */
+  gid.gstsdp1.mikeypayload.MIKEYPayload kemacGetSub(uint idx) nothrow
+  {
+    const(GstMIKEYPayload)* _cretval;
+    _cretval = gst_mikey_payload_kemac_get_sub(cast(const(GstMIKEYPayload)*)this._cPtr, idx);
+    auto _retval = _cretval ? new gid.gstsdp1.mikeypayload.MIKEYPayload(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Remove the sub payload at idx in payload.
+  
+      Params:
+        idx = the index to remove
+      Returns: true on success.
+  */
+  bool kemacRemoveSub(uint idx) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_mikey_payload_kemac_remove_sub(cast(GstMIKEYPayload*)this._cPtr, idx);
+    return _retval;
+  }
+
+  /**
+      Set the KEMAC parameters. payload should point to a [gid.gstsdp1.types.MIKEYPayloadType.Kemac]
+      payload.
+  
+      Params:
+        encAlg = the #GstMIKEYEncAlg
+        macAlg = a #GstMIKEYMacAlg
+      Returns: true on success
+  */
+  bool kemacSet(gid.gstsdp1.types.MIKEYEncAlg encAlg, gid.gstsdp1.types.MIKEYMacAlg macAlg) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_mikey_payload_kemac_set(cast(GstMIKEYPayload*)this._cPtr, encAlg, macAlg);
+    return _retval;
+  }
+
+  /**
+      Set the key validity period in the [gid.gstsdp1.types.MIKEYPayloadType.KeyData] payload.
+  
+      Params:
+        vfData = the Valid From data
+        vtData = the Valid To data
+      Returns: true on success
+  */
+  bool keyDataSetInterval(ubyte[] vfData, ubyte[] vtData) nothrow
+  {
+    bool _retval;
+    ubyte _vfLen;
+    if (vfData)
+      _vfLen = cast(ubyte)vfData.length;
+
+    auto _vfData = cast(ubyte*)vfData.ptr;
+    ubyte _vtLen;
+    if (vtData)
+      _vtLen = cast(ubyte)vtData.length;
+
+    auto _vtData = cast(ubyte*)vtData.ptr;
+    _retval = cast(bool)gst_mikey_payload_key_data_set_interval(cast(GstMIKEYPayload*)this._cPtr, _vfLen, _vfData, _vtLen, _vtData);
+    return _retval;
+  }
+
+  /**
+      Set key_len bytes of key_data of type key_type as the key for the
+      [gid.gstsdp1.types.MIKEYPayloadType.KeyData] payload.
+  
+      Params:
+        keyType = a #GstMIKEYKeyDataType
+        keyData = the key of type key_type
+      Returns: true on success
+  */
+  bool keyDataSetKey(gid.gstsdp1.types.MIKEYKeyDataType keyType, ubyte[] keyData) nothrow
+  {
+    bool _retval;
+    ushort _keyLen;
+    if (keyData)
+      _keyLen = cast(ushort)keyData.length;
+
+    auto _keyData = cast(ubyte*)keyData.ptr;
+    _retval = cast(bool)gst_mikey_payload_key_data_set_key(cast(GstMIKEYPayload*)this._cPtr, keyType, _keyLen, _keyData);
+    return _retval;
+  }
+
+  /**
+      Set the salt key data. If salt_len is 0 and salt_data is null, the
+      salt data will be removed.
+  
+      Params:
+        saltData = the salt
+      Returns: true on success
+  */
+  bool keyDataSetSalt(ubyte[] saltData = null) nothrow
+  {
+    bool _retval;
+    ushort _saltLen;
+    if (saltData)
+      _saltLen = cast(ushort)saltData.length;
+
+    auto _saltData = cast(ubyte*)saltData.ptr;
+    _retval = cast(bool)gst_mikey_payload_key_data_set_salt(cast(GstMIKEYPayload*)this._cPtr, _saltLen, _saltData);
+    return _retval;
+  }
+
+  /**
+      Set the SPI/MKI validity in the [gid.gstsdp1.types.MIKEYPayloadType.KeyData] payload.
+  
+      Params:
+        spiData = the SPI/MKI data
+      Returns: true on success
+  */
+  bool keyDataSetSpi(ubyte[] spiData) nothrow
+  {
+    bool _retval;
+    ubyte _spiLen;
+    if (spiData)
+      _spiLen = cast(ubyte)spiData.length;
+
+    auto _spiData = cast(ubyte*)spiData.ptr;
+    _retval = cast(bool)gst_mikey_payload_key_data_set_spi(cast(GstMIKEYPayload*)this._cPtr, _spiLen, _spiData);
+    return _retval;
+  }
+
+  /**
+      Set the PKE values in payload. payload must be of type
+      [gid.gstsdp1.types.MIKEYPayloadType.Pke].
+  
+      Params:
+        C = envelope key cache indicator
+        data = the encrypted envelope key
+      Returns: true on success
+  */
+  bool pkeSet(gid.gstsdp1.types.MIKEYCacheType C, ubyte[] data) nothrow
+  {
+    bool _retval;
+    ushort _dataLen;
+    if (data)
+      _dataLen = cast(ushort)data.length;
+
+    auto _data = cast(ubyte*)data.ptr;
+    _retval = cast(bool)gst_mikey_payload_pke_set(cast(GstMIKEYPayload*)this._cPtr, C, _dataLen, _data);
+    return _retval;
+  }
+
+  /**
+      Set the random values in a [gid.gstsdp1.types.MIKEYPayloadType.Rand] payload.
+  
+      Params:
+        rand = random values
+      Returns: true on success
+  */
+  bool randSet(ubyte[] rand) nothrow
+  {
+    bool _retval;
+    ubyte _len;
+    if (rand)
+      _len = cast(ubyte)rand.length;
+
+    auto _rand = cast(ubyte*)rand.ptr;
+    _retval = cast(bool)gst_mikey_payload_rand_set(cast(GstMIKEYPayload*)this._cPtr, _len, _rand);
+    return _retval;
+  }
+
+  /**
+      Add a new parameter to the [gid.gstsdp1.types.MIKEYPayloadType.Sp] payload with type, len
+      and val.
+  
+      Params:
+        type = a type
+        val = len bytes of data
+      Returns: true on success
+  */
+  bool spAddParam(ubyte type, ubyte[] val) nothrow
+  {
+    bool _retval;
+    ubyte _len;
+    if (val)
+      _len = cast(ubyte)val.length;
+
+    auto _val = cast(ubyte*)val.ptr;
+    _retval = cast(bool)gst_mikey_payload_sp_add_param(cast(GstMIKEYPayload*)this._cPtr, type, _len, _val);
+    return _retval;
+  }
+
+  /**
+      Get the number of security policy parameters in a [gid.gstsdp1.types.MIKEYPayloadType.Sp]
+      payload.
+      Returns: the number of parameters in payload
+  */
+  uint spGetNParams() nothrow
+  {
+    uint _retval;
+    _retval = gst_mikey_payload_sp_get_n_params(cast(const(GstMIKEYPayload)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Get the Security Policy parameter in a [gid.gstsdp1.types.MIKEYPayloadType.Sp] payload
+      at idx.
+  
+      Params:
+        idx = an index
+      Returns: the #GstMIKEYPayloadSPParam at idx in payload
+  */
+  gid.gstsdp1.mikeypayload_spparam.MIKEYPayloadSPParam spGetParam(uint idx) nothrow
+  {
+    const(GstMIKEYPayloadSPParam)* _cretval;
+    _cretval = gst_mikey_payload_sp_get_param(cast(const(GstMIKEYPayload)*)this._cPtr, idx);
+    auto _retval = _cretval ? new gid.gstsdp1.mikeypayload_spparam.MIKEYPayloadSPParam(cast(GstMIKEYPayloadSPParam*)_cretval, this) : null;
+    return _retval;
+  }
+
+  /**
+      Remove the Security Policy parameters from a [gid.gstsdp1.types.MIKEYPayloadType.Sp]
+      payload at idx.
+  
+      Params:
+        idx = an index
+      Returns: true on success
+  */
+  bool spRemoveParam(uint idx) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_mikey_payload_sp_remove_param(cast(GstMIKEYPayload*)this._cPtr, idx);
+    return _retval;
+  }
+
+  /**
+      Set the Security Policy parameters for payload.
+  
+      Params:
+        policy = the policy number
+        proto = a #GstMIKEYSecProto
+      Returns: true on success
+  */
+  bool spSet(uint policy, gid.gstsdp1.types.MIKEYSecProto proto) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gst_mikey_payload_sp_set(cast(GstMIKEYPayload*)this._cPtr, policy, proto);
+    return _retval;
+  }
+}

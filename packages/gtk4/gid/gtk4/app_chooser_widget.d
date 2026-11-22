@@ -1,0 +1,635 @@
+/// Module for [AppChooserWidget] class
+module gid.gtk4.app_chooser_widget;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gio2.app_info;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gtk4.accessible;
+import gid.gtk4.accessible_mixin;
+import gid.gtk4.app_chooser;
+import gid.gtk4.app_chooser_mixin;
+import gid.gtk4.buildable;
+import gid.gtk4.buildable_mixin;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.constraint_target;
+import gid.gtk4.constraint_target_mixin;
+import gid.gtk4.types;
+import gid.gtk4.widget;
+
+/**
+    [gid.gtk4.app_chooser_widget.AppChooserWidget] is a widget for selecting applications.
+    
+    It is the main building block for [gid.gtk4.app_chooser_dialog.AppChooserDialog].
+    Most applications only need to use the latter; but you can use
+    this widget as part of a larger widget if you have special needs.
+    
+    [gid.gtk4.app_chooser_widget.AppChooserWidget] offers detailed control over what applications
+    are shown, using the
+    [gid.gtk4.app_chooser_widget.AppChooserWidget.showDefault],
+    [gid.gtk4.app_chooser_widget.AppChooserWidget.showRecommended],
+    [gid.gtk4.app_chooser_widget.AppChooserWidget.showFallback],
+    [gid.gtk4.app_chooser_widget.AppChooserWidget.showOther] and
+    [gid.gtk4.app_chooser_widget.AppChooserWidget.showAll] properties. See the
+    [gid.gtk4.app_chooser.AppChooser] documentation for more information about these
+    groups of applications.
+    
+    To keep track of the selected application, use the
+    [gid.gtk4.app_chooser_widget.AppChooserWidget.applicationSelected] and
+    [gid.gtk4.app_chooser_widget.AppChooserWidget.applicationActivated] signals.
+    
+    ## CSS nodes
+    
+    [gid.gtk4.app_chooser_widget.AppChooserWidget] has a single CSS node with name appchooser.
+
+    Deprecated: The application selection widgets should be
+        implemented according to the design of each platform and/or
+        application requiring them.
+*/
+class AppChooserWidget : gid.gtk4.widget.Widget, gid.gtk4.app_chooser.AppChooser
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_app_chooser_widget_get_type != &gidSymbolNotFound ? gtk_app_chooser_widget_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkAppChooserWidget";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override AppChooserWidget self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.app_chooser_widget.AppChooserWidget]
+      Returns: New builder object
+  */
+  static AppChooserWidgetGidBuilder builder() nothrow
+  {
+    return new AppChooserWidgetGidBuilder;
+  }
+
+  /**
+      Get `defaultText` property.
+      Returns: The text that appears in the widget when there are no applications
+        for the given content type.
+  */
+  @property string defaultText() nothrow
+  {
+    return getDefaultText();
+  }
+
+  /**
+      Set `defaultText` property.
+      Params:
+        propval = The text that appears in the widget when there are no applications
+          for the given content type.
+  */
+  @property void defaultText(string propval) nothrow
+  {
+    setDefaultText(propval);
+  }
+
+  /**
+      Get `showAll` property.
+      Returns: If true, the app chooser presents all applications
+        in a single list, without subsections for default,
+        recommended or related applications.
+  */
+  @property bool showAll() nothrow
+  {
+    return getShowAll();
+  }
+
+  /**
+      Set `showAll` property.
+      Params:
+        propval = If true, the app chooser presents all applications
+          in a single list, without subsections for default,
+          recommended or related applications.
+  */
+  @property void showAll(bool propval) nothrow
+  {
+    setShowAll(propval);
+  }
+
+  /**
+      Get `showDefault` property.
+      Returns: Determines whether the app chooser should show the default
+        handler for the content type in a separate section.
+        
+        If false, the default handler is listed among the recommended
+        applications.
+  */
+  @property bool showDefault() nothrow
+  {
+    return getShowDefault();
+  }
+
+  /**
+      Set `showDefault` property.
+      Params:
+        propval = Determines whether the app chooser should show the default
+          handler for the content type in a separate section.
+          
+          If false, the default handler is listed among the recommended
+          applications.
+  */
+  @property void showDefault(bool propval) nothrow
+  {
+    setShowDefault(propval);
+  }
+
+  /**
+      Get `showFallback` property.
+      Returns: Determines whether the app chooser should show a section
+        for fallback applications.
+        
+        If false, the fallback applications are listed among the
+        other applications.
+  */
+  @property bool showFallback() nothrow
+  {
+    return getShowFallback();
+  }
+
+  /**
+      Set `showFallback` property.
+      Params:
+        propval = Determines whether the app chooser should show a section
+          for fallback applications.
+          
+          If false, the fallback applications are listed among the
+          other applications.
+  */
+  @property void showFallback(bool propval) nothrow
+  {
+    setShowFallback(propval);
+  }
+
+  /**
+      Get `showOther` property.
+      Returns: Determines whether the app chooser should show a section
+        for other applications.
+  */
+  @property bool showOther() nothrow
+  {
+    return getShowOther();
+  }
+
+  /**
+      Set `showOther` property.
+      Params:
+        propval = Determines whether the app chooser should show a section
+          for other applications.
+  */
+  @property void showOther(bool propval) nothrow
+  {
+    setShowOther(propval);
+  }
+
+  /**
+      Get `showRecommended` property.
+      Returns: Determines whether the app chooser should show a section
+        for recommended applications.
+        
+        If false, the recommended applications are listed
+        among the other applications.
+  */
+  @property bool showRecommended() nothrow
+  {
+    return getShowRecommended();
+  }
+
+  /**
+      Set `showRecommended` property.
+      Params:
+        propval = Determines whether the app chooser should show a section
+          for recommended applications.
+          
+          If false, the recommended applications are listed
+          among the other applications.
+  */
+  @property void showRecommended(bool propval) nothrow
+  {
+    setShowRecommended(propval);
+  }
+
+  mixin AppChooserT!();
+
+  /**
+      Creates a new [gid.gtk4.app_chooser_widget.AppChooserWidget] for applications
+      that can handle content of the given type.
+  
+      Params:
+        contentType = the content type to show applications for
+      Returns: a newly created [gid.gtk4.app_chooser_widget.AppChooserWidget]
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  this(string contentType) nothrow
+  {
+    GtkWidget* _cretval;
+    const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
+    _cretval = gtk_app_chooser_widget_new(_contentType);
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Returns the text that is shown if there are not applications
+      that can handle the content type.
+      Returns: the value of [gid.gtk4.app_chooser_widget.AppChooserWidget.defaultText]
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  string getDefaultText() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_app_chooser_widget_get_default_text(cast(GtkAppChooserWidget*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets whether the app chooser should show all applications
+      in a flat list.
+      Returns: the value of [gid.gtk4.app_chooser_widget.AppChooserWidget.showAll]
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  bool getShowAll() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_app_chooser_widget_get_show_all(cast(GtkAppChooserWidget*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether the app chooser should show the default handler
+      for the content type in a separate section.
+      Returns: the value of [gid.gtk4.app_chooser_widget.AppChooserWidget.showDefault]
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  bool getShowDefault() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_app_chooser_widget_get_show_default(cast(GtkAppChooserWidget*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether the app chooser should show related applications
+      for the content type in a separate section.
+      Returns: the value of [gid.gtk4.app_chooser_widget.AppChooserWidget.showFallback]
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  bool getShowFallback() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_app_chooser_widget_get_show_fallback(cast(GtkAppChooserWidget*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether the app chooser should show applications
+      which are unrelated to the content type.
+      Returns: the value of [gid.gtk4.app_chooser_widget.AppChooserWidget.showOther]
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  bool getShowOther() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_app_chooser_widget_get_show_other(cast(GtkAppChooserWidget*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether the app chooser should show recommended applications
+      for the content type in a separate section.
+      Returns: the value of [gid.gtk4.app_chooser_widget.AppChooserWidget.showRecommended]
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  bool getShowRecommended() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_app_chooser_widget_get_show_recommended(cast(GtkAppChooserWidget*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Sets the text that is shown if there are not applications
+      that can handle the content type.
+  
+      Params:
+        text = the new value for [gid.gtk4.app_chooser_widget.AppChooserWidget.defaultText]
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  void setDefaultText(string text) nothrow
+  {
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
+    gtk_app_chooser_widget_set_default_text(cast(GtkAppChooserWidget*)this._cPtr, _text);
+  }
+
+  /**
+      Sets whether the app chooser should show all applications
+      in a flat list.
+  
+      Params:
+        setting = the new value for [gid.gtk4.app_chooser_widget.AppChooserWidget.showAll]
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  void setShowAll(bool setting) nothrow
+  {
+    gtk_app_chooser_widget_set_show_all(cast(GtkAppChooserWidget*)this._cPtr, setting);
+  }
+
+  /**
+      Sets whether the app chooser should show the default handler
+      for the content type in a separate section.
+  
+      Params:
+        setting = the new value for [gid.gtk4.app_chooser_widget.AppChooserWidget.showDefault]
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  void setShowDefault(bool setting) nothrow
+  {
+    gtk_app_chooser_widget_set_show_default(cast(GtkAppChooserWidget*)this._cPtr, setting);
+  }
+
+  /**
+      Sets whether the app chooser should show related applications
+      for the content type in a separate section.
+  
+      Params:
+        setting = the new value for [gid.gtk4.app_chooser_widget.AppChooserWidget.showFallback]
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  void setShowFallback(bool setting) nothrow
+  {
+    gtk_app_chooser_widget_set_show_fallback(cast(GtkAppChooserWidget*)this._cPtr, setting);
+  }
+
+  /**
+      Sets whether the app chooser should show applications
+      which are unrelated to the content type.
+  
+      Params:
+        setting = the new value for [gid.gtk4.app_chooser_widget.AppChooserWidget.showOther]
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  void setShowOther(bool setting) nothrow
+  {
+    gtk_app_chooser_widget_set_show_other(cast(GtkAppChooserWidget*)this._cPtr, setting);
+  }
+
+  /**
+      Sets whether the app chooser should show recommended applications
+      for the content type in a separate section.
+  
+      Params:
+        setting = the new value for [gid.gtk4.app_chooser_widget.AppChooserWidget.showRecommended]
+  
+      Deprecated: This widget will be removed in GTK 5
+  */
+  void setShowRecommended(bool setting) nothrow
+  {
+    gtk_app_chooser_widget_set_show_recommended(cast(GtkAppChooserWidget*)this._cPtr, setting);
+  }
+
+  /**
+      Connect to `ApplicationActivated` signal.
+  
+      Emitted when an application item is activated from the widget's list.
+        
+        This usually happens when the user double clicks an item, or an item
+        is selected and the user presses one of the keys Space, Shift+Space,
+        Return or Enter.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gio2.app_info.AppInfo application, gid.gtk4.app_chooser_widget.AppChooserWidget appChooserWidget)`
+  
+          `application` the activated [gid.gio2.app_info.AppInfo] (optional)
+  
+          `appChooserWidget` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectApplicationActivated(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gio2.app_info.AppInfo)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gtk4.app_chooser_widget.AppChooserWidget)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.app_chooser_widget.AppChooserWidget.applicationActivated");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("application-activated", closure, after);
+  }
+
+  /**
+      Connect to `ApplicationSelected` signal.
+  
+      Emitted when an application item is selected from the widget's list.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gio2.app_info.AppInfo application, gid.gtk4.app_chooser_widget.AppChooserWidget appChooserWidget)`
+  
+          `application` the selected [gid.gio2.app_info.AppInfo] (optional)
+  
+          `appChooserWidget` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectApplicationSelected(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gio2.app_info.AppInfo)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gtk4.app_chooser_widget.AppChooserWidget)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.app_chooser_widget.AppChooserWidget.applicationSelected");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("application-selected", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.app_chooser_widget.AppChooserWidget]
+class AppChooserWidgetGidBuilderImpl(T) : gid.gtk4.widget.WidgetGidBuilderImpl!T, gid.gtk4.app_chooser.AppChooserGidBuilderImpl!T
+{
+
+  mixin AppChooserGidBuilderT!();
+
+  /**
+      Set `defaultText` property.
+      Params:
+        propval = The text that appears in the widget when there are no applications
+          for the given content type.
+      Returns: Builder instance for fluent chaining
+  */
+  T defaultText(string propval) nothrow
+  {
+    return setProperty("default-text", propval);
+  }
+
+  /**
+      Set `showAll` property.
+      Params:
+        propval = If true, the app chooser presents all applications
+          in a single list, without subsections for default,
+          recommended or related applications.
+      Returns: Builder instance for fluent chaining
+  */
+  T showAll(bool propval) nothrow
+  {
+    return setProperty("show-all", propval);
+  }
+
+  /**
+      Set `showDefault` property.
+      Params:
+        propval = Determines whether the app chooser should show the default
+          handler for the content type in a separate section.
+          
+          If false, the default handler is listed among the recommended
+          applications.
+      Returns: Builder instance for fluent chaining
+  */
+  T showDefault(bool propval) nothrow
+  {
+    return setProperty("show-default", propval);
+  }
+
+  /**
+      Set `showFallback` property.
+      Params:
+        propval = Determines whether the app chooser should show a section
+          for fallback applications.
+          
+          If false, the fallback applications are listed among the
+          other applications.
+      Returns: Builder instance for fluent chaining
+  */
+  T showFallback(bool propval) nothrow
+  {
+    return setProperty("show-fallback", propval);
+  }
+
+  /**
+      Set `showOther` property.
+      Params:
+        propval = Determines whether the app chooser should show a section
+          for other applications.
+      Returns: Builder instance for fluent chaining
+  */
+  T showOther(bool propval) nothrow
+  {
+    return setProperty("show-other", propval);
+  }
+
+  /**
+      Set `showRecommended` property.
+      Params:
+        propval = Determines whether the app chooser should show a section
+          for recommended applications.
+          
+          If false, the recommended applications are listed
+          among the other applications.
+      Returns: Builder instance for fluent chaining
+  */
+  T showRecommended(bool propval) nothrow
+  {
+    return setProperty("show-recommended", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk4.app_chooser_widget.AppChooserWidget]
+final class AppChooserWidgetGidBuilder : AppChooserWidgetGidBuilderImpl!AppChooserWidgetGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  AppChooserWidget build() nothrow
+  {
+    return new AppChooserWidget(cast(void*)createGObject(AppChooserWidget._getGType), Yes.Take);
+  }
+}

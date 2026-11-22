@@ -1,0 +1,303 @@
+/// Module for [CellRendererToggle] class
+module gid.gtk4.cell_renderer_toggle;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.cell_renderer;
+import gid.gtk4.types;
+
+/**
+    Renders a toggle button in a cell
+    
+    [gid.gtk4.cell_renderer_toggle.CellRendererToggle] renders a toggle button in a cell. The
+    button is drawn as a radio or a checkbutton, depending on the
+    `GtkCellRendererToggle:radio` property.
+    When activated, it emits the `GtkCellRendererToggle::toggled` signal.
+
+    Deprecated: List views use widgets to display their contents.
+        You should use [gid.gtk4.toggle_button.ToggleButton] instead
+*/
+class CellRendererToggle : gid.gtk4.cell_renderer.CellRenderer
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_cell_renderer_toggle_get_type != &gidSymbolNotFound ? gtk_cell_renderer_toggle_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkCellRendererToggle";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override CellRendererToggle self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.cell_renderer_toggle.CellRendererToggle]
+      Returns: New builder object
+  */
+  static CellRendererToggleGidBuilder builder() nothrow
+  {
+    return new CellRendererToggleGidBuilder;
+  }
+
+  /** */
+  @property bool activatable() nothrow
+  {
+    return getActivatable();
+  }
+
+  /** */
+  @property void activatable(bool propval) nothrow
+  {
+    setActivatable(propval);
+  }
+
+  /** */
+  @property bool active() nothrow
+  {
+    return getActive();
+  }
+
+  /** */
+  @property void active(bool propval) nothrow
+  {
+    setActive(propval);
+  }
+
+  /** */
+  @property bool inconsistent() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("inconsistent");
+  }
+
+  /** */
+  @property void inconsistent(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("inconsistent", propval);
+  }
+
+  /** */
+  @property bool radio() nothrow
+  {
+    return getRadio();
+  }
+
+  /** */
+  @property void radio(bool propval) nothrow
+  {
+    setRadio(propval);
+  }
+
+  /**
+      Creates a new [gid.gtk4.cell_renderer_toggle.CellRendererToggle]. Adjust rendering
+      parameters using object properties. Object properties can be set
+      globally (with [gid.gobject2.object.ObjectWrap.set]). Also, with [gid.gtk4.tree_view_column.TreeViewColumn], you
+      can bind a property to a value in a [gid.gtk4.tree_model.TreeModel]. For example, you
+      can bind the “active” property on the cell renderer to a boolean value
+      in the model, thus causing the check button to reflect the state of
+      the model.
+      Returns: the new cell renderer
+  */
+  this() nothrow
+  {
+    GtkCellRenderer* _cretval;
+    _cretval = gtk_cell_renderer_toggle_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Returns whether the cell renderer is activatable. See
+      [gid.gtk4.cell_renderer_toggle.CellRendererToggle.setActivatable].
+      Returns: true if the cell renderer is activatable.
+  */
+  bool getActivatable() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_cell_renderer_toggle_get_activatable(cast(GtkCellRendererToggle*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns whether the cell renderer is active. See
+      [gid.gtk4.cell_renderer_toggle.CellRendererToggle.setActive].
+      Returns: true if the cell renderer is active.
+  */
+  bool getActive() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_cell_renderer_toggle_get_active(cast(GtkCellRendererToggle*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns whether we’re rendering radio toggles rather than checkboxes.
+      Returns: true if we’re rendering radio toggles rather than checkboxes
+  */
+  bool getRadio() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_cell_renderer_toggle_get_radio(cast(GtkCellRendererToggle*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Makes the cell renderer activatable.
+  
+      Params:
+        setting = the value to set.
+  */
+  void setActivatable(bool setting) nothrow
+  {
+    gtk_cell_renderer_toggle_set_activatable(cast(GtkCellRendererToggle*)this._cPtr, setting);
+  }
+
+  /**
+      Activates or deactivates a cell renderer.
+  
+      Params:
+        setting = the value to set.
+  */
+  void setActive(bool setting) nothrow
+  {
+    gtk_cell_renderer_toggle_set_active(cast(GtkCellRendererToggle*)this._cPtr, setting);
+  }
+
+  /**
+      If radio is true, the cell renderer renders a radio toggle
+      (i.e. a toggle in a group of mutually-exclusive toggles).
+      If false, it renders a check toggle (a standalone boolean option).
+      This can be set globally for the cell renderer, or changed just
+      before rendering each cell in the model (for [gid.gtk4.tree_view.TreeView], you set
+      up a per-row setting using [gid.gtk4.tree_view_column.TreeViewColumn] to associate model
+      columns with cell renderer properties).
+  
+      Params:
+        radio = true to make the toggle look like a radio button
+  */
+  void setRadio(bool radio) nothrow
+  {
+    gtk_cell_renderer_toggle_set_radio(cast(GtkCellRendererToggle*)this._cPtr, radio);
+  }
+
+  /**
+      Connect to `Toggled` signal.
+  
+      The ::toggled signal is emitted when the cell is toggled.
+        
+        It is the responsibility of the application to update the model
+        with the correct value to store at path.  Often this is simply the
+        opposite of the value currently stored at path.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(string path, gid.gtk4.cell_renderer_toggle.CellRendererToggle cellRendererToggle)`
+  
+          `path` string representation of [gid.gtk4.tree_path.TreePath] describing the
+                   event location (optional)
+  
+          `cellRendererToggle` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectToggled(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gtk4.cell_renderer_toggle.CellRendererToggle)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.cell_renderer_toggle.CellRendererToggle.toggled");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("toggled", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.cell_renderer_toggle.CellRendererToggle]
+class CellRendererToggleGidBuilderImpl(T) : gid.gtk4.cell_renderer.CellRendererGidBuilderImpl!T
+{
+
+  /** */
+  T activatable(bool propval) nothrow
+  {
+    return setProperty("activatable", propval);
+  }
+
+  /** */
+  T active(bool propval) nothrow
+  {
+    return setProperty("active", propval);
+  }
+
+  /** */
+  T inconsistent(bool propval) nothrow
+  {
+    return setProperty("inconsistent", propval);
+  }
+
+  /** */
+  T radio(bool propval) nothrow
+  {
+    return setProperty("radio", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk4.cell_renderer_toggle.CellRendererToggle]
+final class CellRendererToggleGidBuilder : CellRendererToggleGidBuilderImpl!CellRendererToggleGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  CellRendererToggle build() nothrow
+  {
+    return new CellRendererToggle(cast(void*)createGObject(CellRendererToggle._getGType), Yes.Take);
+  }
+}

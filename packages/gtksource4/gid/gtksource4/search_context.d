@@ -1,0 +1,611 @@
+/// Module for [SearchContext] class
+module gid.gtksource4.search_context;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gio2.async_result;
+import gid.gio2.cancellable;
+import gid.gio2.types;
+import gid.glib2.error;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk3.text_iter;
+import gid.gtksource4.buffer;
+import gid.gtksource4.c.functions;
+import gid.gtksource4.c.types;
+import gid.gtksource4.search_settings;
+import gid.gtksource4.style;
+import gid.gtksource4.types;
+
+/** */
+class SearchContext : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_source_search_context_get_type != &gidSymbolNotFound ? gtk_source_search_context_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceSearchContext";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override SearchContext self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtksource4.search_context.SearchContext]
+      Returns: New builder object
+  */
+  static SearchContextGidBuilder builder() nothrow
+  {
+    return new SearchContextGidBuilder;
+  }
+
+  /**
+      Get `buffer` property.
+      Returns: The #GtkSourceBuffer associated to the search context.
+  */
+  @property gid.gtksource4.buffer.Buffer buffer() nothrow
+  {
+    return getBuffer();
+  }
+
+  /**
+      Get `highlight` property.
+      Returns: Highlight the search occurrences.
+  */
+  @property bool highlight() nothrow
+  {
+    return getHighlight();
+  }
+
+  /**
+      Set `highlight` property.
+      Params:
+        propval = Highlight the search occurrences.
+  */
+  @property void highlight(bool propval) nothrow
+  {
+    setHighlight(propval);
+  }
+
+  /**
+      Get `matchStyle` property.
+      Returns: A #GtkSourceStyle, or null for theme's scheme default style.
+  */
+  @property gid.gtksource4.style.Style matchStyle() nothrow
+  {
+    return getMatchStyle();
+  }
+
+  /**
+      Set `matchStyle` property.
+      Params:
+        propval = A #GtkSourceStyle, or null for theme's scheme default style.
+  */
+  @property void matchStyle(gid.gtksource4.style.Style propval) nothrow
+  {
+    setMatchStyle(propval);
+  }
+
+  /**
+      Get `occurrencesCount` property.
+      Returns: The total number of search occurrences. If the search is disabled,
+        the value is 0. If the buffer is not already fully scanned, the value
+        is -1.
+  */
+  @property int occurrencesCount() nothrow
+  {
+    return getOccurrencesCount();
+  }
+
+  /**
+      Get `regexError` property.
+      Returns: If the regex search pattern doesn't follow all the rules, this
+        #GError property will be set. If the pattern is valid, the value is
+        null.
+        
+        Free with [gid.glib2.error.ErrorWrap.free].
+  */
+  @property void* regexError() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(void*)("regex-error");
+  }
+
+  /**
+      Get `settings` property.
+      Returns: The #GtkSourceSearchSettings associated to the search context.
+        
+        This property is construct-only since version 4.0.
+  */
+  @property gid.gtksource4.search_settings.SearchSettings settings() nothrow
+  {
+    return getSettings();
+  }
+
+  /**
+      Creates a new search context, associated with buffer, and customized with
+      settings. If settings is null, a new #GtkSourceSearchSettings object will
+      be created, that you can retrieve with
+      [gid.gtksource5.search_context.SearchContext.getSettings].
+  
+      Params:
+        buffer = a #GtkSourceBuffer.
+        settings = a #GtkSourceSearchSettings, or null.
+      Returns: a new search context.
+  */
+  this(gid.gtksource4.buffer.Buffer buffer, gid.gtksource4.search_settings.SearchSettings settings = null) nothrow
+  {
+    GtkSourceSearchContext* _cretval;
+    _cretval = gtk_source_search_context_new(buffer ? cast(GtkSourceBuffer*)buffer._cPtr(No.Dup) : null, settings ? cast(GtkSourceSearchSettings*)settings._cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Synchronous backward search. It is recommended to use the asynchronous
+      functions instead, to not block the user interface. However, if you are sure
+      that the buffer is small, this function is more convenient to use.
+      
+      If the #GtkSourceSearchSettings:wrap-around property is false, this function
+      doesn't try to wrap around.
+      
+      The has_wrapped_around out parameter is set independently of whether a match
+      is found. So if this function returns false, has_wrapped_around will have
+      the same value as the #GtkSourceSearchSettings:wrap-around property.
+  
+      Params:
+        iter = start of search.
+        matchStart = return location for start of match, or null.
+        matchEnd = return location for end of match, or null.
+        hasWrappedAround = return location to know whether the
+            search has wrapped around, or null.
+      Returns: whether a match was found.
+  */
+  bool backward(gid.gtk3.text_iter.TextIter iter, out gid.gtk3.text_iter.TextIter matchStart, out gid.gtk3.text_iter.TextIter matchEnd, out bool hasWrappedAround) nothrow
+  {
+    bool _retval;
+    auto _matchStart = boxedNew!GtkTextIter(gid.gtk3.text_iter.TextIter._getGType);
+    auto _matchEnd = boxedNew!GtkTextIter(gid.gtk3.text_iter.TextIter._getGType);
+    gboolean _hasWrappedAround;
+    _retval = cast(bool)gtk_source_search_context_backward(cast(GtkSourceSearchContext*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, _matchStart, _matchEnd, &_hasWrappedAround);
+    matchStart = new gid.gtk3.text_iter.TextIter(cast(void*)_matchStart, Yes.Take);
+    matchEnd = new gid.gtk3.text_iter.TextIter(cast(void*)_matchEnd, Yes.Take);
+    hasWrappedAround = cast(bool)_hasWrappedAround;
+    return _retval;
+  }
+
+  /**
+      The asynchronous version of [gid.gtksource5.search_context.SearchContext.backward].
+      
+      See the documentation of [gid.gtksource5.search_context.SearchContext.backward] for more
+      details.
+      
+      See the #GAsyncResult documentation to know how to use this function.
+      
+      If the operation is cancelled, the callback will only be called if
+      cancellable was not null. [gid.gtksource5.search_context.SearchContext.backwardAsync] takes
+      ownership of cancellable, so you can unref it after calling this function.
+  
+      Params:
+        iter = start of search.
+        cancellable = a #GCancellable, or null.
+        callback = a #GAsyncReadyCallback to call when the operation is finished.
+  */
+  void backwardAsync(gid.gtk3.text_iter.TextIter iter, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null) nothrow
+  {
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    gtk_source_search_context_backward_async(cast(GtkSourceSearchContext*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Finishes a backward search started with
+      [gid.gtksource5.search_context.SearchContext.backwardAsync].
+      
+      See the documentation of [gid.gtksource5.search_context.SearchContext.backward] for more
+      details.
+  
+      Params:
+        result = a #GAsyncResult.
+        matchStart = return location for start of match, or null.
+        matchEnd = return location for end of match, or null.
+        hasWrappedAround = return location to know whether the
+            search has wrapped around, or null.
+      Returns: whether a match was found.
+      Throws: [ErrorWrap]
+  */
+  bool backwardFinish(gid.gio2.async_result.AsyncResult result, out gid.gtk3.text_iter.TextIter matchStart, out gid.gtk3.text_iter.TextIter matchEnd, out bool hasWrappedAround)
+  {
+    bool _retval;
+    auto _matchStart = boxedNew!GtkTextIter(gid.gtk3.text_iter.TextIter._getGType);
+    auto _matchEnd = boxedNew!GtkTextIter(gid.gtk3.text_iter.TextIter._getGType);
+    gboolean _hasWrappedAround;
+    GError *_err;
+    _retval = cast(bool)gtk_source_search_context_backward_finish(cast(GtkSourceSearchContext*)this._cPtr, result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, _matchStart, _matchEnd, &_hasWrappedAround, &_err);
+    if (_err)
+    {
+      gid.gtk3.text_iter.TextIter._cFree(_matchStart);
+      gid.gtk3.text_iter.TextIter._cFree(_matchEnd);
+      throw new ErrorWrap(_err, Yes.Take);
+    }
+    matchStart = new gid.gtk3.text_iter.TextIter(cast(void*)_matchStart, Yes.Take);
+    matchEnd = new gid.gtk3.text_iter.TextIter(cast(void*)_matchEnd, Yes.Take);
+    hasWrappedAround = cast(bool)_hasWrappedAround;
+    return _retval;
+  }
+
+  /**
+      Synchronous forward search. It is recommended to use the asynchronous
+      functions instead, to not block the user interface. However, if you are sure
+      that the buffer is small, this function is more convenient to use.
+      
+      If the #GtkSourceSearchSettings:wrap-around property is false, this function
+      doesn't try to wrap around.
+      
+      The has_wrapped_around out parameter is set independently of whether a match
+      is found. So if this function returns false, has_wrapped_around will have
+      the same value as the #GtkSourceSearchSettings:wrap-around property.
+  
+      Params:
+        iter = start of search.
+        matchStart = return location for start of match, or null.
+        matchEnd = return location for end of match, or null.
+        hasWrappedAround = return location to know whether the
+            search has wrapped around, or null.
+      Returns: whether a match was found.
+  */
+  bool forward(gid.gtk3.text_iter.TextIter iter, out gid.gtk3.text_iter.TextIter matchStart, out gid.gtk3.text_iter.TextIter matchEnd, out bool hasWrappedAround) nothrow
+  {
+    bool _retval;
+    auto _matchStart = boxedNew!GtkTextIter(gid.gtk3.text_iter.TextIter._getGType);
+    auto _matchEnd = boxedNew!GtkTextIter(gid.gtk3.text_iter.TextIter._getGType);
+    gboolean _hasWrappedAround;
+    _retval = cast(bool)gtk_source_search_context_forward(cast(GtkSourceSearchContext*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, _matchStart, _matchEnd, &_hasWrappedAround);
+    matchStart = new gid.gtk3.text_iter.TextIter(cast(void*)_matchStart, Yes.Take);
+    matchEnd = new gid.gtk3.text_iter.TextIter(cast(void*)_matchEnd, Yes.Take);
+    hasWrappedAround = cast(bool)_hasWrappedAround;
+    return _retval;
+  }
+
+  /**
+      The asynchronous version of [gid.gtksource5.search_context.SearchContext.forward].
+      
+      See the documentation of [gid.gtksource5.search_context.SearchContext.forward] for more
+      details.
+      
+      See the #GAsyncResult documentation to know how to use this function.
+      
+      If the operation is cancelled, the callback will only be called if
+      cancellable was not null. [gid.gtksource5.search_context.SearchContext.forwardAsync] takes
+      ownership of cancellable, so you can unref it after calling this function.
+  
+      Params:
+        iter = start of search.
+        cancellable = a #GCancellable, or null.
+        callback = a #GAsyncReadyCallback to call when the operation is finished.
+  */
+  void forwardAsync(gid.gtk3.text_iter.TextIter iter, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null) nothrow
+  {
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    gtk_source_search_context_forward_async(cast(GtkSourceSearchContext*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Finishes a forward search started with
+      [gid.gtksource5.search_context.SearchContext.forwardAsync].
+      
+      See the documentation of [gid.gtksource5.search_context.SearchContext.forward] for more
+      details.
+  
+      Params:
+        result = a #GAsyncResult.
+        matchStart = return location for start of match, or null.
+        matchEnd = return location for end of match, or null.
+        hasWrappedAround = return location to know whether the
+            search has wrapped around, or null.
+      Returns: whether a match was found.
+      Throws: [ErrorWrap]
+  */
+  bool forwardFinish(gid.gio2.async_result.AsyncResult result, out gid.gtk3.text_iter.TextIter matchStart, out gid.gtk3.text_iter.TextIter matchEnd, out bool hasWrappedAround)
+  {
+    bool _retval;
+    auto _matchStart = boxedNew!GtkTextIter(gid.gtk3.text_iter.TextIter._getGType);
+    auto _matchEnd = boxedNew!GtkTextIter(gid.gtk3.text_iter.TextIter._getGType);
+    gboolean _hasWrappedAround;
+    GError *_err;
+    _retval = cast(bool)gtk_source_search_context_forward_finish(cast(GtkSourceSearchContext*)this._cPtr, result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, _matchStart, _matchEnd, &_hasWrappedAround, &_err);
+    if (_err)
+    {
+      gid.gtk3.text_iter.TextIter._cFree(_matchStart);
+      gid.gtk3.text_iter.TextIter._cFree(_matchEnd);
+      throw new ErrorWrap(_err, Yes.Take);
+    }
+    matchStart = new gid.gtk3.text_iter.TextIter(cast(void*)_matchStart, Yes.Take);
+    matchEnd = new gid.gtk3.text_iter.TextIter(cast(void*)_matchEnd, Yes.Take);
+    hasWrappedAround = cast(bool)_hasWrappedAround;
+    return _retval;
+  }
+
+  /** */
+  gid.gtksource4.buffer.Buffer getBuffer() nothrow
+  {
+    GtkSourceBuffer* _cretval;
+    _cretval = gtk_source_search_context_get_buffer(cast(GtkSourceSearchContext*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtksource4.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /** */
+  bool getHighlight() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_source_search_context_get_highlight(cast(GtkSourceSearchContext*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  gid.gtksource4.style.Style getMatchStyle() nothrow
+  {
+    GtkSourceStyle* _cretval;
+    _cretval = gtk_source_search_context_get_match_style(cast(GtkSourceSearchContext*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtksource4.style.Style)(cast(GtkSourceStyle*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the position of a search occurrence. If the buffer is not already fully
+      scanned, the position may be unknown, and -1 is returned. If 0 is returned,
+      it means that this part of the buffer has already been scanned, and that
+      match_start and match_end don't delimit an occurrence.
+  
+      Params:
+        matchStart = the start of the occurrence.
+        matchEnd = the end of the occurrence.
+      Returns: the position of the search occurrence. The first occurrence has the
+        position 1 (not 0). Returns 0 if match_start and match_end don't delimit
+        an occurrence. Returns -1 if the position is not yet known.
+  */
+  int getOccurrencePosition(gid.gtk3.text_iter.TextIter matchStart, gid.gtk3.text_iter.TextIter matchEnd) nothrow
+  {
+    int _retval;
+    _retval = gtk_source_search_context_get_occurrence_position(cast(GtkSourceSearchContext*)this._cPtr, matchStart ? cast(const(GtkTextIter)*)matchStart._cPtr(No.Dup) : null, matchEnd ? cast(const(GtkTextIter)*)matchEnd._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Gets the total number of search occurrences. If the buffer is not already
+      fully scanned, the total number of occurrences is unknown, and -1 is
+      returned.
+      Returns: the total number of search occurrences, or -1 if unknown.
+  */
+  int getOccurrencesCount() nothrow
+  {
+    int _retval;
+    _retval = gtk_source_search_context_get_occurrences_count(cast(GtkSourceSearchContext*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Regular expression patterns must follow certain rules. If
+      #GtkSourceSearchSettings:search-text breaks a rule, the error can be retrieved
+      with this function. The error domain is #G_REGEX_ERROR.
+      
+      Free the return value with [gid.glib2.error.ErrorWrap.free].
+      Returns: the #GError, or null if the pattern is valid.
+  */
+  gid.glib2.error.ErrorWrap getRegexError() nothrow
+  {
+    GError* _cretval;
+    _cretval = gtk_source_search_context_get_regex_error(cast(GtkSourceSearchContext*)this._cPtr);
+    auto _retval = _cretval ? new gid.glib2.error.ErrorWrap(cast(GError*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /** */
+  gid.gtksource4.search_settings.SearchSettings getSettings() nothrow
+  {
+    GtkSourceSearchSettings* _cretval;
+    _cretval = gtk_source_search_context_get_settings(cast(GtkSourceSearchContext*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtksource4.search_settings.SearchSettings)(cast(GtkSourceSearchSettings*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Replaces a search match by another text. If match_start and match_end
+      doesn't correspond to a search match, false is returned.
+      
+      match_start and match_end iters are revalidated to point to the replacement
+      text boundaries.
+      
+      For a regular expression replacement, you can check if replace is valid by
+      calling [gid.glib2.regex.Regex.checkReplacement]. The replace text can contain
+      backreferences; read the [gid.glib2.regex.Regex.replace] documentation for more details.
+  
+      Params:
+        matchStart = the start of the match to replace.
+        matchEnd = the end of the match to replace.
+        replace = the replacement text.
+      Returns: whether the match has been replaced.
+      Throws: [ErrorWrap]
+  */
+  bool replace(gid.gtk3.text_iter.TextIter matchStart, gid.gtk3.text_iter.TextIter matchEnd, string replace)
+  {
+    bool _retval;
+    int _replaceLength;
+    if (replace)
+      _replaceLength = cast(int)replace.length;
+
+    auto _replace = cast(char*)replace.ptr;
+    GError *_err;
+    _retval = cast(bool)gtk_source_search_context_replace(cast(GtkSourceSearchContext*)this._cPtr, matchStart ? cast(GtkTextIter*)matchStart._cPtr(No.Dup) : null, matchEnd ? cast(GtkTextIter*)matchEnd._cPtr(No.Dup) : null, _replace, _replaceLength, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Replaces all search matches by another text. It is a synchronous function, so
+      it can block the user interface.
+      
+      For a regular expression replacement, you can check if replace is valid by
+      calling [gid.glib2.regex.Regex.checkReplacement]. The replace text can contain
+      backreferences; read the [gid.glib2.regex.Regex.replace] documentation for more details.
+  
+      Params:
+        replace = the replacement text.
+      Returns: the number of replaced matches.
+      Throws: [ErrorWrap]
+  */
+  uint replaceAll(string replace)
+  {
+    uint _retval;
+    int _replaceLength;
+    if (replace)
+      _replaceLength = cast(int)replace.length;
+
+    auto _replace = cast(char*)replace.ptr;
+    GError *_err;
+    _retval = gtk_source_search_context_replace_all(cast(GtkSourceSearchContext*)this._cPtr, _replace, _replaceLength, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Enables or disables the search occurrences highlighting.
+  
+      Params:
+        highlight = the setting.
+  */
+  void setHighlight(bool highlight) nothrow
+  {
+    gtk_source_search_context_set_highlight(cast(GtkSourceSearchContext*)this._cPtr, highlight);
+  }
+
+  /**
+      Set the style to apply on search matches. If match_style is null, default
+      theme's scheme 'match-style' will be used.
+      To enable or disable the search highlighting, use
+      [gid.gtksource5.search_context.SearchContext.setHighlight].
+  
+      Params:
+        matchStyle = a #GtkSourceStyle, or null.
+  */
+  void setMatchStyle(gid.gtksource4.style.Style matchStyle = null) nothrow
+  {
+    gtk_source_search_context_set_match_style(cast(GtkSourceSearchContext*)this._cPtr, matchStyle ? cast(GtkSourceStyle*)matchStyle._cPtr(No.Dup) : null);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtksource4.search_context.SearchContext]
+class SearchContextGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `buffer` property.
+      Params:
+        propval = The #GtkSourceBuffer associated to the search context.
+      Returns: Builder instance for fluent chaining
+  */
+  T buffer(gid.gtksource4.buffer.Buffer propval) nothrow
+  {
+    return setProperty("buffer", propval);
+  }
+
+  /**
+      Set `highlight` property.
+      Params:
+        propval = Highlight the search occurrences.
+      Returns: Builder instance for fluent chaining
+  */
+  T highlight(bool propval) nothrow
+  {
+    return setProperty("highlight", propval);
+  }
+
+  /**
+      Set `matchStyle` property.
+      Params:
+        propval = A #GtkSourceStyle, or null for theme's scheme default style.
+      Returns: Builder instance for fluent chaining
+  */
+  T matchStyle(gid.gtksource4.style.Style propval) nothrow
+  {
+    return setProperty("match-style", propval);
+  }
+
+  /**
+      Set `settings` property.
+      Params:
+        propval = The #GtkSourceSearchSettings associated to the search context.
+          
+          This property is construct-only since version 4.0.
+      Returns: Builder instance for fluent chaining
+  */
+  T settings(gid.gtksource4.search_settings.SearchSettings propval) nothrow
+  {
+    return setProperty("settings", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtksource4.search_context.SearchContext]
+final class SearchContextGidBuilder : SearchContextGidBuilderImpl!SearchContextGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  SearchContext build() nothrow
+  {
+    return new SearchContext(cast(void*)createGObject(SearchContext._getGType), Yes.Take);
+  }
+}

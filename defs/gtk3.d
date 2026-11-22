@@ -140,14 +140,14 @@
   */
   void reorder(int[] newOrder) nothrow
   {
-    import glib.c.functions : g_log;
-    import glib.c.types : GLogLevelFlags;
+    import gid.glib2.c.functions : g_log;
+    import gid.glib2.c.types : GLogLevelFlags;
 
     auto nRows = gtk_tree_model_iter_n_children(cast(GtkTreeModel*)this._cPtr, null);
 
     if (newOrder.length != nRows)
     {
-      g_log("Gid", GLogLevelFlags.LevelCritical, "gtk.list_store.ListStore.reorder newOrder length %d does not match the number of rows %d",
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gid.gtk3.list_store.ListStore.reorder newOrder length %d does not match the number of rows %d",
         cast(int)newOrder.length, nRows);
       return;
     }
@@ -160,34 +160,34 @@
 
   /**
       Attaches the menu to the widget and provides a callback function that will be invoked when the menu calls
-      [gtk.menu.Menu.detach] during its destruction.
+      [gid.gtk3.menu.Menu.detach] during its destruction.
       If the menu is attached to the widget then it will be destroyed when the widget is destroyed, as if it was a
       child widget. An attached menu will also move between screens correctly if the widgets moves between screens.
       Params:
         attachWidget = the widget that the menu will be attached to
         detacher = the user supplied callback function that will be called when the menu calls
-          [gtk.menu.Menu.detach] (kept alive by the menu), or null
+          [gid.gtk3.menu.Menu.detach] (kept alive by the menu), or null
   */
-  void attachToWidget(gtk.widget.Widget attachWidget, gtk.types.MenuDetachFunc detacher = null) nothrow
+  void attachToWidget(gid.gtk3.widget.Widget attachWidget, gid.gtk3.types.MenuDetachFunc detacher = null) nothrow
   {
-    import gobject.c.functions : g_object_get_data, g_object_set_data_full;
-    import gobject.c.types : GObject;
+    import gid.gobject2.c.functions : g_object_get_data, g_object_set_data_full;
+    import gid.gobject2.c.types : GObject;
 
     static extern(C) void _detacherCallback(GtkWidget* attachWidget, GtkMenu* menu) nothrow
     {
-      auto _dlg = cast(gtk.types.MenuDetachFunc*)g_object_get_data(cast(GObject*)menu, "gid-menu-detacher");
+      auto _dlg = cast(gid.gtk3.types.MenuDetachFunc*)g_object_get_data(cast(GObject*)menu, "gid-menu-detacher");
 
       if (!_dlg || !*_dlg)
         return;
 
       try
       {
-        (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)attachWidget, No.Take),
-          gobject.object.ObjectWrap._getDObject!(gtk.menu.Menu)(cast(void*)menu, No.Take));
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)attachWidget, No.Take),
+          gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.menu.Menu)(cast(void*)menu, No.Take));
       }
       catch (Exception e)
       {
-        gidInvokeCallbackExceptionHandler(e, "gtk.types.MenuDetachFunc");
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.types.MenuDetachFunc");
       }
     }
 

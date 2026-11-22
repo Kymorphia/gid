@@ -1,0 +1,3 @@
+/// Unversioned import of the latest major version of this module, [gid.gtk4.every_filter]
+module gid.gtk.every_filter;
+public import gid.gtk4.every_filter;

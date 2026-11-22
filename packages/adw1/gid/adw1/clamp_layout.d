@@ -1,0 +1,342 @@
+/// Module for [ClampLayout] class
+module gid.adw1.clamp_layout;
+
+public import gid.core.basictypes;
+import gid.adw1.c.functions;
+import gid.adw1.c.types;
+import gid.adw1.types;
+import gid.core.utils;
+import gid.gobject2.gid_builder;
+import gid.gtk4.layout_manager;
+import gid.gtk4.orientable;
+import gid.gtk4.orientable_mixin;
+
+/**
+    A layout manager constraining its children to a given size.
+    
+    <picture>
+      <source srcset="clamp-wide-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="clamp-wide.png" alt="clamp-wide">
+    </picture>
+    <picture>
+      <source srcset="clamp-narrow-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="clamp-narrow.png" alt="clamp-narrow">
+    </picture>
+    
+    [gid.adw1.clamp_layout.ClampLayout] constraints the size of the widgets it contains to a given
+    maximum size. It will constrain the width if it is horizontal, or the height
+    if it is vertical. The expansion of the children from their minimum to their
+    maximum size is eased out for a smooth transition.
+    
+    If a child requires more than the requested maximum size, it will be
+    allocated the minimum size it can fit in instead.
+    
+    [gid.adw1.clamp_layout.ClampLayout] can scale with the text scale factor, use the
+    [gid.adw1.clamp_layout.ClampLayout.unit] property to enable that behavior.
+    
+    See also: [gid.adw1.clamp.Clamp], [gid.adw1.clamp_scrollable.ClampScrollable].
+*/
+class ClampLayout : gid.gtk4.layout_manager.LayoutManager, gid.gtk4.orientable.Orientable
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())adw_clamp_layout_get_type != &gidSymbolNotFound ? adw_clamp_layout_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwClampLayout";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ClampLayout self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.adw1.clamp_layout.ClampLayout]
+      Returns: New builder object
+  */
+  static ClampLayoutGidBuilder builder() nothrow
+  {
+    return new ClampLayoutGidBuilder;
+  }
+
+  /**
+      Get `maximumSize` property.
+      Returns: The maximum size to allocate to the children.
+        
+        It is the width if the layout is horizontal, or the height if it is
+        vertical.
+  */
+  @property int maximumSize() nothrow
+  {
+    return getMaximumSize();
+  }
+
+  /**
+      Set `maximumSize` property.
+      Params:
+        propval = The maximum size to allocate to the children.
+          
+          It is the width if the layout is horizontal, or the height if it is
+          vertical.
+  */
+  @property void maximumSize(int propval) nothrow
+  {
+    setMaximumSize(propval);
+  }
+
+  /**
+      Get `tighteningThreshold` property.
+      Returns: The size above which the children are clamped.
+        
+        Starting from this size, the layout will tighten its grip on the children,
+        slowly allocating less and less of the available size up to the maximum
+        allocated size. Below that threshold and below the maximum size, the
+        children will be allocated all the available size.
+        
+        If the threshold is greater than the maximum size to allocate to the
+        children, they will be allocated the whole size up to the maximum. If the
+        threshold is lower than the minimum size to allocate to the children, that
+        size will be used as the tightening threshold.
+        
+        Effectively, tightening the grip on a child before it reaches its maximum
+        size makes transitions to and from the maximum size smoother when resizing.
+  */
+  @property int tighteningThreshold() nothrow
+  {
+    return getTighteningThreshold();
+  }
+
+  /**
+      Set `tighteningThreshold` property.
+      Params:
+        propval = The size above which the children are clamped.
+          
+          Starting from this size, the layout will tighten its grip on the children,
+          slowly allocating less and less of the available size up to the maximum
+          allocated size. Below that threshold and below the maximum size, the
+          children will be allocated all the available size.
+          
+          If the threshold is greater than the maximum size to allocate to the
+          children, they will be allocated the whole size up to the maximum. If the
+          threshold is lower than the minimum size to allocate to the children, that
+          size will be used as the tightening threshold.
+          
+          Effectively, tightening the grip on a child before it reaches its maximum
+          size makes transitions to and from the maximum size smoother when resizing.
+  */
+  @property void tighteningThreshold(int propval) nothrow
+  {
+    setTighteningThreshold(propval);
+  }
+
+  /**
+      Get `unit` property.
+      Returns: The length unit for maximum size and tightening threshold.
+        
+        Allows the sizes to vary depending on the text scale factor.
+  */
+  @property gid.adw1.types.LengthUnit unit() nothrow
+  {
+    return getUnit();
+  }
+
+  /**
+      Set `unit` property.
+      Params:
+        propval = The length unit for maximum size and tightening threshold.
+          
+          Allows the sizes to vary depending on the text scale factor.
+  */
+  @property void unit(gid.adw1.types.LengthUnit propval) nothrow
+  {
+    setUnit(propval);
+  }
+
+  mixin OrientableT!();
+
+  /**
+      Creates a new [gid.adw1.clamp_layout.ClampLayout].
+      Returns: the newly created [gid.adw1.clamp_layout.ClampLayout]
+  */
+  this() nothrow
+  {
+    GtkLayoutManager* _cretval;
+    _cretval = adw_clamp_layout_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Gets the maximum size allocated to the children.
+      Returns: the maximum size to allocate to the children
+  */
+  int getMaximumSize() nothrow
+  {
+    int _retval;
+    _retval = adw_clamp_layout_get_maximum_size(cast(AdwClampLayout*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the size above which the children are clamped.
+      Returns: the size above which the children are clamped
+  */
+  int getTighteningThreshold() nothrow
+  {
+    int _retval;
+    _retval = adw_clamp_layout_get_tightening_threshold(cast(AdwClampLayout*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the length unit for maximum size and tightening threshold.
+      Returns: the length unit
+  */
+  gid.adw1.types.LengthUnit getUnit() nothrow
+  {
+    AdwLengthUnit _cretval;
+    _cretval = adw_clamp_layout_get_unit(cast(AdwClampLayout*)this._cPtr);
+    gid.adw1.types.LengthUnit _retval = cast(gid.adw1.types.LengthUnit)_cretval;
+    return _retval;
+  }
+
+  /**
+      Sets the maximum size allocated to the children.
+      
+      It is the width if the layout is horizontal, or the height if it is vertical.
+  
+      Params:
+        maximumSize = the maximum size
+  */
+  void setMaximumSize(int maximumSize) nothrow
+  {
+    adw_clamp_layout_set_maximum_size(cast(AdwClampLayout*)this._cPtr, maximumSize);
+  }
+
+  /**
+      Sets the size above which the children are clamped.
+      
+      Starting from this size, the layout will tighten its grip on the children,
+      slowly allocating less and less of the available size up to the maximum
+      allocated size. Below that threshold and below the maximum size, the children
+      will be allocated all the available size.
+      
+      If the threshold is greater than the maximum size to allocate to the
+      children, they will be allocated the whole size up to the maximum. If the
+      threshold is lower than the minimum size to allocate to the children, that
+      size will be used as the tightening threshold.
+      
+      Effectively, tightening the grip on a child before it reaches its maximum
+      size makes transitions to and from the maximum size smoother when resizing.
+  
+      Params:
+        tighteningThreshold = the tightening threshold
+  */
+  void setTighteningThreshold(int tighteningThreshold) nothrow
+  {
+    adw_clamp_layout_set_tightening_threshold(cast(AdwClampLayout*)this._cPtr, tighteningThreshold);
+  }
+
+  /**
+      Sets the length unit for maximum size and tightening threshold.
+      
+      Allows the sizes to vary depending on the text scale factor.
+  
+      Params:
+        unit = the length unit
+  */
+  void setUnit(gid.adw1.types.LengthUnit unit) nothrow
+  {
+    adw_clamp_layout_set_unit(cast(AdwClampLayout*)this._cPtr, unit);
+  }
+}
+
+/// Fluent builder implementation template for [gid.adw1.clamp_layout.ClampLayout]
+class ClampLayoutGidBuilderImpl(T) : gid.gtk4.layout_manager.LayoutManagerGidBuilderImpl!T, gid.gtk4.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `maximumSize` property.
+      Params:
+        propval = The maximum size to allocate to the children.
+          
+          It is the width if the layout is horizontal, or the height if it is
+          vertical.
+      Returns: Builder instance for fluent chaining
+  */
+  T maximumSize(int propval) nothrow
+  {
+    return setProperty("maximum-size", propval);
+  }
+
+  /**
+      Set `tighteningThreshold` property.
+      Params:
+        propval = The size above which the children are clamped.
+          
+          Starting from this size, the layout will tighten its grip on the children,
+          slowly allocating less and less of the available size up to the maximum
+          allocated size. Below that threshold and below the maximum size, the
+          children will be allocated all the available size.
+          
+          If the threshold is greater than the maximum size to allocate to the
+          children, they will be allocated the whole size up to the maximum. If the
+          threshold is lower than the minimum size to allocate to the children, that
+          size will be used as the tightening threshold.
+          
+          Effectively, tightening the grip on a child before it reaches its maximum
+          size makes transitions to and from the maximum size smoother when resizing.
+      Returns: Builder instance for fluent chaining
+  */
+  T tighteningThreshold(int propval) nothrow
+  {
+    return setProperty("tightening-threshold", propval);
+  }
+
+  /**
+      Set `unit` property.
+      Params:
+        propval = The length unit for maximum size and tightening threshold.
+          
+          Allows the sizes to vary depending on the text scale factor.
+      Returns: Builder instance for fluent chaining
+  */
+  T unit(gid.adw1.types.LengthUnit propval) nothrow
+  {
+    return setProperty("unit", propval);
+  }
+}
+
+/// Fluent builder for [gid.adw1.clamp_layout.ClampLayout]
+final class ClampLayoutGidBuilder : ClampLayoutGidBuilderImpl!ClampLayoutGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  ClampLayout build() nothrow
+  {
+    return new ClampLayout(cast(void*)createGObject(ClampLayout._getGType), Yes.Take);
+  }
+}

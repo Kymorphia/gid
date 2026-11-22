@@ -1,0 +1,785 @@
+/// Module for [Toplevel] interface mixin
+module gid.gdk4.toplevel_mixin;
+
+public import gid.core.basictypes;
+public import gid.gdk4.toplevel_iface_proxy;
+public import gid.core.utils;
+public import gid.gdk4.c.functions;
+public import gid.gdk4.c.types;
+public import gid.gdk4.device;
+public import gid.gdk4.event;
+public import gid.gdk4.surface;
+public import gid.gdk4.texture;
+public import gid.gdk4.toplevel_layout;
+public import gid.gdk4.toplevel_size;
+public import gid.gdk4.types;
+public import gid.gobject2.dclosure;
+public import gid.gobject2.gid_builder;
+public import gid.gobject2.object;
+
+/**
+    A freestanding toplevel surface.
+    
+    The [gid.gdk4.toplevel.Toplevel] interface provides useful APIs for interacting with
+    the windowing system, such as controlling maximization and size of the
+    surface, setting icons and transient parents for dialogs.
+*/
+template ToplevelT()
+{
+
+  /**
+      Get `capabilities` property.
+      Returns: The capabilities that are available for this toplevel.
+  */
+  @property gid.gdk4.types.ToplevelCapabilities capabilities() nothrow
+  {
+    return getCapabilities();
+  }
+
+  /**
+      Get `decorated` property.
+      Returns: Whether the window manager should add decorations.
+  */
+  @property bool decorated() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("decorated");
+  }
+
+  /**
+      Set `decorated` property.
+      Params:
+        propval = Whether the window manager should add decorations.
+  */
+  @property void decorated(bool propval) nothrow
+  {
+    setDecorated(propval);
+  }
+
+  /**
+      Get `deletable` property.
+      Returns: Whether the window manager should allow to close the surface.
+  */
+  @property bool deletable() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("deletable");
+  }
+
+  /**
+      Set `deletable` property.
+      Params:
+        propval = Whether the window manager should allow to close the surface.
+  */
+  @property void deletable(bool propval) nothrow
+  {
+    setDeletable(propval);
+  }
+
+  /**
+      Get `fullscreenMode` property.
+      Returns: The fullscreen mode of the surface.
+  */
+  @property gid.gdk4.types.FullscreenMode fullscreenMode() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gdk4.types.FullscreenMode)("fullscreen-mode");
+  }
+
+  /**
+      Set `fullscreenMode` property.
+      Params:
+        propval = The fullscreen mode of the surface.
+  */
+  @property void fullscreenMode(gid.gdk4.types.FullscreenMode propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.gdk4.types.FullscreenMode)("fullscreen-mode", propval);
+  }
+
+  /**
+      Get `gravity` property.
+      Returns: The gravity to use when resizing a surface programmatically.
+        
+        Gravity describes which point of the surface we want to keep
+        fixed (meaning that the surface will grow in the opposite direction).
+        For example, a gravity of [gid.gdk4.types.Gravity.NorthEast] means that we
+        want to fix top right corner of the surface.
+        
+        This property is just a hint that may affect the result when negotiating
+        toplevel sizes with the windowing system. It does not affect interactive
+        resizes started with [gid.gdk4.toplevel.Toplevel.beginResize].
+  */
+  @property gid.gdk4.types.Gravity gravity() nothrow
+  {
+    return getGravity();
+  }
+
+  /**
+      Set `gravity` property.
+      Params:
+        propval = The gravity to use when resizing a surface programmatically.
+          
+          Gravity describes which point of the surface we want to keep
+          fixed (meaning that the surface will grow in the opposite direction).
+          For example, a gravity of [gid.gdk4.types.Gravity.NorthEast] means that we
+          want to fix top right corner of the surface.
+          
+          This property is just a hint that may affect the result when negotiating
+          toplevel sizes with the windowing system. It does not affect interactive
+          resizes started with [gid.gdk4.toplevel.Toplevel.beginResize].
+  */
+  @property void gravity(gid.gdk4.types.Gravity propval) nothrow
+  {
+    setGravity(propval);
+  }
+
+  /**
+      Get `iconList` property.
+      Returns: A list of textures to use as icon.
+  */
+  @property void* iconList() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(void*)("icon-list");
+  }
+
+  /**
+      Set `iconList` property.
+      Params:
+        propval = A list of textures to use as icon.
+  */
+  @property void iconList(void* propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(void*)("icon-list", propval);
+  }
+
+  /**
+      Get `modal` property.
+      Returns: Whether the surface is modal.
+  */
+  @property bool modal() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("modal");
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the surface is modal.
+  */
+  @property void modal(bool propval) nothrow
+  {
+    setModal(propval);
+  }
+
+  /**
+      Get `shortcutsInhibited` property.
+      Returns: Whether the surface should inhibit keyboard shortcuts.
+  */
+  @property bool shortcutsInhibited() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("shortcuts-inhibited");
+  }
+
+  /**
+      Get `startupId` property.
+      Returns: The startup ID of the surface.
+        
+        See [gid.gdk4.app_launch_context.AppLaunchContext] for more information about
+        startup feedback.
+  */
+  @property string startupId() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(string)("startup-id");
+  }
+
+  /**
+      Set `startupId` property.
+      Params:
+        propval = The startup ID of the surface.
+          
+          See [gid.gdk4.app_launch_context.AppLaunchContext] for more information about
+          startup feedback.
+  */
+  @property void startupId(string propval) nothrow
+  {
+    setStartupId(propval);
+  }
+
+  /**
+      Get `state` property.
+      Returns: The state of the toplevel.
+  */
+  @property gid.gdk4.types.ToplevelState state() nothrow
+  {
+    return getState();
+  }
+
+  /**
+      Get `title` property.
+      Returns: The title of the surface.
+  */
+  @property string title() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(string)("title");
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the surface.
+  */
+  @property void title(string propval) nothrow
+  {
+    setTitle(propval);
+  }
+
+  /**
+      Get `transientFor` property.
+      Returns: The transient parent of the surface.
+  */
+  @property gid.gdk4.surface.Surface transientFor() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gdk4.surface.Surface)("transient-for");
+  }
+
+  /**
+      Set `transientFor` property.
+      Params:
+        propval = The transient parent of the surface.
+  */
+  @property void transientFor(gid.gdk4.surface.Surface propval) nothrow
+  {
+    setTransientFor(propval);
+  }
+
+  /**
+      Begins an interactive move operation.
+      
+      You might use this function to implement draggable titlebars.
+  
+      Params:
+        device = the device used for the operation
+        button = the button being used to drag, or 0 for a keyboard-initiated drag
+        x = surface X coordinate of mouse click that began the drag
+        y = surface Y coordinate of mouse click that began the drag
+        timestamp = timestamp of mouse click that began the drag (use
+            [gid.gdk4.event.Event.getTime])
+  */
+  override void beginMove(gid.gdk4.device.Device device, int button, double x, double y, uint timestamp) nothrow
+  {
+    gdk_toplevel_begin_move(cast(GdkToplevel*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, button, x, y, timestamp);
+  }
+
+  /**
+      Begins an interactive resize operation.
+      
+      You might use this function to implement a “window resize grip.”
+  
+      Params:
+        edge = the edge or corner from which the drag is started
+        device = the device used for the operation
+        button = the button being used to drag, or 0 for a keyboard-initiated drag
+        x = surface X coordinate of mouse click that began the drag
+        y = surface Y coordinate of mouse click that began the drag
+        timestamp = timestamp of mouse click that began the drag (use
+            [gid.gdk4.event.Event.getTime])
+  */
+  override void beginResize(gid.gdk4.types.SurfaceEdge edge, gid.gdk4.device.Device device, int button, double x, double y, uint timestamp) nothrow
+  {
+    gdk_toplevel_begin_resize(cast(GdkToplevel*)this._cPtr, edge, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, button, x, y, timestamp);
+  }
+
+  /**
+      Sets keyboard focus to surface.
+      
+      In most cases, [[gid.gtk4.window.Window.presentWithTime]](../gtk4/method.Window.present_with_time.html)
+      should be used on a [GtkWindow](../gtk4/class.Window.html), rather than
+      calling this function.
+  
+      Params:
+        timestamp = timestamp of the event triggering the surface focus
+  */
+  override void focus(uint timestamp) nothrow
+  {
+    gdk_toplevel_focus(cast(GdkToplevel*)this._cPtr, timestamp);
+  }
+
+  /**
+      The capabilities that are available for this toplevel.
+      Returns: the capabilities of the [gid.gdk4.toplevel.Toplevel].
+  */
+  override gid.gdk4.types.ToplevelCapabilities getCapabilities() nothrow
+  {
+    GdkToplevelCapabilities _cretval;
+    _cretval = gdk_toplevel_get_capabilities(cast(GdkToplevel*)this._cPtr);
+    gid.gdk4.types.ToplevelCapabilities _retval = cast(gid.gdk4.types.ToplevelCapabilities)_cretval;
+    return _retval;
+  }
+
+  /**
+      Returns the gravity that is used when changing the toplevel
+      size programmatically.
+      Returns: the gravity
+  */
+  override gid.gdk4.types.Gravity getGravity() nothrow
+  {
+    GdkGravity _cretval;
+    _cretval = gdk_toplevel_get_gravity(cast(GdkToplevel*)this._cPtr);
+    gid.gdk4.types.Gravity _retval = cast(gid.gdk4.types.Gravity)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the bitwise or of the currently active surface state flags,
+      from the [gid.gdk4.types.ToplevelState] enumeration.
+      Returns: surface state bitfield
+  */
+  override gid.gdk4.types.ToplevelState getState() nothrow
+  {
+    GdkToplevelState _cretval;
+    _cretval = gdk_toplevel_get_state(cast(GdkToplevel*)this._cPtr);
+    gid.gdk4.types.ToplevelState _retval = cast(gid.gdk4.types.ToplevelState)_cretval;
+    return _retval;
+  }
+
+  /**
+      Requests that the toplevel inhibit the system shortcuts.
+      
+      This is asking the desktop environment/windowing system to let all
+      keyboard events reach the surface, as long as it is focused, instead
+      of triggering system actions.
+      
+      If granted, the rerouting remains active until the default shortcuts
+      processing is restored with [gid.gdk4.toplevel.Toplevel.restoreSystemShortcuts],
+      or the request is revoked by the desktop environment, windowing system
+      or the user.
+      
+      A typical use case for this API is remote desktop or virtual machine
+      viewers which need to inhibit the default system keyboard shortcuts
+      so that the remote session or virtual host gets those instead of the
+      local environment.
+      
+      The windowing system or desktop environment may ask the user to grant
+      or deny the request or even choose to ignore the request entirely.
+      
+      The caller can be notified whenever the request is granted or revoked
+      by listening to the [gid.gdk4.toplevel.Toplevel.shortcutsInhibited] property.
+  
+      Params:
+        event = the [gid.gdk4.event.Event] that is triggering the inhibit
+            request, or null if none is available
+  */
+  override void inhibitSystemShortcuts(gid.gdk4.event.Event event = null) nothrow
+  {
+    gdk_toplevel_inhibit_system_shortcuts(cast(GdkToplevel*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Asks to lower the toplevel below other windows.
+      
+      The windowing system may choose to ignore the request.
+      Returns: true if the surface was lowered
+  */
+  override bool lower() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gdk_toplevel_lower(cast(GdkToplevel*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Asks to minimize the toplevel.
+      
+      The windowing system may choose to ignore the request.
+      Returns: true if the surface was minimized
+  */
+  override bool minimize() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gdk_toplevel_minimize(cast(GdkToplevel*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Present toplevel after having processed the [gid.gdk4.toplevel_layout.ToplevelLayout] rules.
+      
+      If the toplevel was previously not showing, it will be showed,
+      otherwise it will change layout according to layout.
+      
+      GDK may emit the [gid.gdk4.toplevel.Toplevel.computeSize] signal to let
+      the user of this toplevel compute the preferred size of the toplevel
+      surface.
+      
+      Presenting is asynchronous and the specified layout parameters are not
+      guaranteed to be respected.
+  
+      Params:
+        layout = the [gid.gdk4.toplevel_layout.ToplevelLayout] object used to layout
+  */
+  override void present(gid.gdk4.toplevel_layout.ToplevelLayout layout) nothrow
+  {
+    gdk_toplevel_present(cast(GdkToplevel*)this._cPtr, layout ? cast(GdkToplevelLayout*)layout._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Restore default system keyboard shortcuts which were previously
+      inhibited.
+      
+      This undoes the effect of [gid.gdk4.toplevel.Toplevel.inhibitSystemShortcuts].
+  */
+  override void restoreSystemShortcuts() nothrow
+  {
+    gdk_toplevel_restore_system_shortcuts(cast(GdkToplevel*)this._cPtr);
+  }
+
+  /**
+      Sets the toplevel to be decorated.
+      
+      Setting decorated to false hints the desktop environment
+      that the surface has its own, client-side decorations and
+      does not need to have window decorations added.
+  
+      Params:
+        decorated = true to request decorations
+  */
+  override void setDecorated(bool decorated) nothrow
+  {
+    gdk_toplevel_set_decorated(cast(GdkToplevel*)this._cPtr, decorated);
+  }
+
+  /**
+      Sets the toplevel to be deletable.
+      
+      Setting deletable to true hints the desktop environment
+      that it should offer the user a way to close the surface.
+  
+      Params:
+        deletable = true to request a delete button
+  */
+  override void setDeletable(bool deletable) nothrow
+  {
+    gdk_toplevel_set_deletable(cast(GdkToplevel*)this._cPtr, deletable);
+  }
+
+  /**
+      Sets the gravity that is used when changing the toplevel
+      size programmatically.
+  
+      Params:
+        gravity = the new gravity
+  */
+  override void setGravity(gid.gdk4.types.Gravity gravity) nothrow
+  {
+    gdk_toplevel_set_gravity(cast(GdkToplevel*)this._cPtr, gravity);
+  }
+
+  /**
+      Sets a list of icons for the surface.
+      
+      One of these will be used to represent the surface in iconic form.
+      The icon may be shown in window lists or task bars. Which icon
+      size is shown depends on the window manager. The window manager
+      can scale the icon but setting several size icons can give better
+      image quality.
+      
+      Note that some platforms don't support surface icons.
+  
+      Params:
+        surfaces = A list of textures to use as icon, of different sizes
+  */
+  override void setIconList(gid.gdk4.texture.Texture[] surfaces) nothrow
+  {
+    auto _surfaces = gListFromD!(gid.gdk4.texture.Texture)(surfaces);
+    scope(exit) containerFree!(GList*, gid.gdk4.texture.Texture, GidOwnership.None)(_surfaces);
+    gdk_toplevel_set_icon_list(cast(GdkToplevel*)this._cPtr, _surfaces);
+  }
+
+  /**
+      Sets the toplevel to be modal.
+      
+      The application can use this hint to tell the
+      window manager that a certain surface has modal
+      behaviour. The window manager can use this information
+      to handle modal surfaces in a special way.
+      
+      You should only use this on surfaces for which you have
+      previously called [gid.gdk4.toplevel.Toplevel.setTransientFor].
+  
+      Params:
+        modal = true if the surface is modal, false otherwise.
+  */
+  override void setModal(bool modal) nothrow
+  {
+    gdk_toplevel_set_modal(cast(GdkToplevel*)this._cPtr, modal);
+  }
+
+  /**
+      Sets the startup notification ID.
+      
+      When using GTK, typically you should use
+      [[gid.gtk4.window.Window.setStartupId]](../gtk4/method.Window.set_startup_id.html)
+      instead of this low-level function.
+  
+      Params:
+        startupId = a string with startup-notification identifier
+  */
+  override void setStartupId(string startupId) nothrow
+  {
+    const(char)* _startupId = startupId.toCString!(No.Malloc, No.Nullable);
+    gdk_toplevel_set_startup_id(cast(GdkToplevel*)this._cPtr, _startupId);
+  }
+
+  /**
+      Sets the title of a toplevel surface.
+      
+      The title maybe be displayed in the titlebar,
+      in lists of windows, etc.
+  
+      Params:
+        title = title of surface
+  */
+  override void setTitle(string title) nothrow
+  {
+    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
+    gdk_toplevel_set_title(cast(GdkToplevel*)this._cPtr, _title);
+  }
+
+  /**
+      Sets a transient-for parent.
+      
+      Indicates to the window manager that surface is a transient
+      dialog associated with the application surface parent. This
+      allows the window manager to do things like center surface
+      on parent and keep surface above parent.
+      
+      See [[gid.gtk4.window.Window.setTransientFor]](../gtk4/method.Window.set_transient_for.html)
+      if you’re using [GtkWindow](../gtk4/class.Window.html).
+  
+      Params:
+        parent = another toplevel [gid.gdk4.surface.Surface]
+  */
+  override void setTransientFor(gid.gdk4.surface.Surface parent) nothrow
+  {
+    gdk_toplevel_set_transient_for(cast(GdkToplevel*)this._cPtr, parent ? cast(GdkSurface*)parent._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Asks the windowing system to show the window menu.
+      
+      The window menu is the menu shown when right-clicking the titlebar
+      on traditional windows managed by the window manager. This is useful
+      for windows using client-side decorations, activating it with a
+      right-click on the window decorations.
+  
+      Params:
+        event = a [gid.gdk4.event.Event] to show the menu for
+      Returns: true if the window menu was shown and false otherwise.
+  */
+  override bool showWindowMenu(gid.gdk4.event.Event event) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gdk_toplevel_show_window_menu(cast(GdkToplevel*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Returns whether the desktop environment supports
+      tiled window states.
+      Returns: true if the desktop environment supports tiled window states
+  */
+  override bool supportsEdgeConstraints() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gdk_toplevel_supports_edge_constraints(cast(GdkToplevel*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Performs a title bar gesture.
+  
+      Params:
+        gesture = a [gid.gdk4.types.TitlebarGesture]
+      Returns: whether the gesture was performed
+  */
+  override bool titlebarGesture(gid.gdk4.types.TitlebarGesture gesture) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gdk_toplevel_titlebar_gesture(cast(GdkToplevel*)this._cPtr, gesture);
+    return _retval;
+  }
+
+  /**
+      Connect to `ComputeSize` signal.
+  
+      Emitted when the size for the surface needs to be computed, when
+        it is present.
+        
+        This signal will normally be emitted during or after a call to
+        [gid.gdk4.toplevel.Toplevel.present], depending on the configuration
+        received by the windowing system. It may also be emitted at any
+        other point in time, in response to the windowing system
+        spontaneously changing the configuration of the toplevel surface.
+        
+        It is the responsibility of the toplevel user to handle this signal
+        and compute the desired size of the toplevel, given the information
+        passed via the [gid.gdk4.toplevel_size.ToplevelSize] object. Failing to do so
+        will result in an arbitrary size being used as a result.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gdk4.toplevel_size.ToplevelSize size, gid.gdk4.toplevel.Toplevel toplevel)`
+  
+          `size` a [gid.gdk4.toplevel_size.ToplevelSize] (optional)
+  
+          `toplevel` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectComputeSize(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.gdk4.toplevel_size.ToplevelSize)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gdk4.toplevel.Toplevel)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gdk4.toplevel.Toplevel.computeSize");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("compute-size", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gdk4.toplevel.Toplevel]
+template ToplevelGidBuilderT()
+{
+
+  /**
+      Set `decorated` property.
+      Params:
+        propval = Whether the window manager should add decorations.
+      Returns: Builder instance for fluent chaining
+  */
+  T decorated(bool propval) nothrow
+  {
+    return setProperty("decorated", propval);
+  }
+
+  /**
+      Set `deletable` property.
+      Params:
+        propval = Whether the window manager should allow to close the surface.
+      Returns: Builder instance for fluent chaining
+  */
+  T deletable(bool propval) nothrow
+  {
+    return setProperty("deletable", propval);
+  }
+
+  /**
+      Set `fullscreenMode` property.
+      Params:
+        propval = The fullscreen mode of the surface.
+      Returns: Builder instance for fluent chaining
+  */
+  T fullscreenMode(gid.gdk4.types.FullscreenMode propval) nothrow
+  {
+    return setProperty("fullscreen-mode", propval);
+  }
+
+  /**
+      Set `gravity` property.
+      Params:
+        propval = The gravity to use when resizing a surface programmatically.
+          
+          Gravity describes which point of the surface we want to keep
+          fixed (meaning that the surface will grow in the opposite direction).
+          For example, a gravity of [gid.gdk4.types.Gravity.NorthEast] means that we
+          want to fix top right corner of the surface.
+          
+          This property is just a hint that may affect the result when negotiating
+          toplevel sizes with the windowing system. It does not affect interactive
+          resizes started with [gid.gdk4.toplevel.Toplevel.beginResize].
+      Returns: Builder instance for fluent chaining
+  */
+  T gravity(gid.gdk4.types.Gravity propval) nothrow
+  {
+    return setProperty("gravity", propval);
+  }
+
+  /**
+      Set `iconList` property.
+      Params:
+        propval = A list of textures to use as icon.
+      Returns: Builder instance for fluent chaining
+  */
+  T iconList(void* propval) nothrow
+  {
+    return setProperty("icon-list", propval);
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the surface is modal.
+      Returns: Builder instance for fluent chaining
+  */
+  T modal(bool propval) nothrow
+  {
+    return setProperty("modal", propval);
+  }
+
+  /**
+      Set `startupId` property.
+      Params:
+        propval = The startup ID of the surface.
+          
+          See [gid.gdk4.app_launch_context.AppLaunchContext] for more information about
+          startup feedback.
+      Returns: Builder instance for fluent chaining
+  */
+  T startupId(string propval) nothrow
+  {
+    return setProperty("startup-id", propval);
+  }
+
+  /**
+      Set `title` property.
+      Params:
+        propval = The title of the surface.
+      Returns: Builder instance for fluent chaining
+  */
+  T title(string propval) nothrow
+  {
+    return setProperty("title", propval);
+  }
+
+  /**
+      Set `transientFor` property.
+      Params:
+        propval = The transient parent of the surface.
+      Returns: Builder instance for fluent chaining
+  */
+  T transientFor(gid.gdk4.surface.Surface propval) nothrow
+  {
+    return setProperty("transient-for", propval);
+  }
+}

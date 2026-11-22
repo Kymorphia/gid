@@ -15,7 +15,7 @@ The gidgen utility will then be able to export the resulting GIR XML API descrip
 
 giD can *consume* GObject types from D. It cannot yet register a new GType for a D class or fill a class/interface vtable.
 
-**Wrapping and identity.** `gobject.object.ObjectWrap` (`packages/glib2/gobject/object.d`) is the root of every GObject proxy. A C instance is bound to its unique D proxy with `g_object_set_qdata` (`gidObjectQuark`) and a toggle ref (`g_object_add_toggle_ref` / `_cObjToggleNotify`) so the D object stays alive while C holds a strong ref, without a ref cycle. `_getDObject!T` returns the existing proxy, or constructs one if needed.
+**Wrapping and identity.** `gid.gobject2.object.ObjectWrap` (`packages/glib2/gid/gobject2/object.d`) is the root of every GObject proxy. A C instance is bound to its unique D proxy with `g_object_set_qdata` (`gidObjectQuark`) and a toggle ref (`g_object_add_toggle_ref` / `_cObjToggleNotify`) so the D object stays alive while C holds a strong ref, without a ref cycle. `_getDObject!T` returns the existing proxy, or constructs one if needed.
 
 **Class maps.** On first wrap, `createClassMaps` walks loaded `ModuleInfo` and records:
 
@@ -25,7 +25,7 @@ giD can *consume* GObject types from D. It cannot yet register a new GType for a
 
 A D subclass that does not override `_gType` / `_gTypeName` is skipped (`"D subclass without its own GType"`). Function-pointer comparison of those two properties is already used (`(&obj._gType).funcptr !is (&baseObj._gType).funcptr`).
 
-**Construction.** Generated classes expose `this(void* ptr, Flag!"Take" take)` and `_getGType` / `_gType` / `_gTypeName` (`gir/structure.d`). `ObjectWrap.this(GType)` / `createGObject` instantiate an *already registered* C type. The C APIs `g_type_register_static_simple` and `g_type_add_interface_static` are bound, but nothing in giD calls them for a user D class. Interface *consumption* uses a D `interface` plus a mixin of C wrappers (e.g. `gio.list_model.ListModel` / `list_model_mixin.d`) and `IfaceProxy` for unknown implementors.
+**Construction.** Generated classes expose `this(void* ptr, Flag!"Take" take)` and `_getGType` / `_gType` / `_gTypeName` (`gir/structure.d`). `ObjectWrap.this(GType)` / `createGObject` instantiate an *already registered* C type. The C APIs `g_type_register_static_simple` and `g_type_add_interface_static` are bound, but nothing in giD calls them for a user D class. Interface *consumption* uses a D `interface` plus a mixin of C wrappers (e.g. `gid.gio2.list_model.ListModel` / `list_model_mixin.d`) and `IfaceProxy` for unknown implementors.
 
 **gidgen and virtual methods.** `FuncType.VirtualMethod` and `"virtual-method"` exist in `gir/func.d`, and `fixup()` would mark such funcs `Active.Ignored`. In practice they never reach that path: `gir/repo.d` (`case "virtual-method"`) does `goto noRecurse` and never builds a `Func`. The comment there treats vfuncs as a C implementation detail. Class/interface *structs* are still generated (`GtkWidgetClass`, `GListModelInterface`, `GdkContentProviderClass`, …) with `extern(C)` function-pointer fields, because those come from the GIR record, not from `virtual-method` nodes.
 
@@ -74,15 +74,15 @@ class ColorBlock : Widget
     super(); // or: register and g_object_new of ColorBlock's GType
   }
 
-  override gtk.types.SizeRequestMode vfuncGetRequestMode()
+  override gid.gtk4.types.SizeRequestMode vfuncGetRequestMode()
   {
-    return gtk.types.SizeRequestMode.ConstantSize;
+    return gid.gtk4.types.SizeRequestMode.ConstantSize;
   }
 
-  override void vfuncMeasure(gtk.types.Orientation orientation, int forSize,
+  override void vfuncMeasure(gid.gtk4.types.Orientation orientation, int forSize,
       out int minimum, out int natural, out int minimumBaseline, out int naturalBaseline)
   {
-    minimum = natural = (orientation == gtk.types.Orientation.Horizontal) ? 80 : 40;
+    minimum = natural = (orientation == gid.gtk4.types.Orientation.Horizontal) ? 80 : 40;
     minimumBaseline = naturalBaseline = -1;
   }
 
@@ -91,7 +91,7 @@ class ColorBlock : Widget
     super.vfuncSizeAllocate(width, height, baseline);
   }
 
-  override void vfuncSnapshot(gtk.snapshot.Snapshot snapshot)
+  override void vfuncSnapshot(gid.gtk4.snapshot.Snapshot snapshot)
   {
     // draw, then optionally chain up
     super.vfuncSnapshot(snapshot);
@@ -104,15 +104,15 @@ w.measure(/* ... */);       // gtk_widget_measure → vfunc trampoline → vfunc
 ```
 
 ```d
-class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel
+class StringList : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
 {
   mixin GObjectSubclass;     // registers GType and adds GListModel
   mixin ListModelT!();       // existing public wrappers (getNItems, itemsChanged, …)
   string[] items;
 
-  override gobject.types.GType vfuncGetItemType() { return ObjectWrap._getGType; }
+  override gid.gobject2.types.GType vfuncGetItemType() { return ObjectWrap._getGType; }
   override uint vfuncGetNItems() { return cast(uint)items.length; }
-  override gobject.object.ObjectWrap vfuncGetItem(uint position)
+  override gid.gobject2.object.ObjectWrap vfuncGetItem(uint position)
   {
     return position < items.length ? /* wrap string or a GObject item */ null : null;
   }
@@ -128,7 +128,7 @@ Overriding existing vfuncs (sections 3–4) is enough for custom GTK widgets and
 **Declaring the API.** A D class (or interface) marks members with UDAs. Compile-time introspection of those attributes drives registration, trampolines, and later GIR:
 
 ```d
-class Foo : gobject.object.ObjectWrap
+class Foo : gid.gobject2.object.ObjectWrap
 {
   mixin GObjectExport!("Mylib", "Foo"); // GType, class struct, get_type, invokers
 

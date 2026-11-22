@@ -1,0 +1,143 @@
+/// Global functions for adw1 library
+module gid.adw1.global;
+
+import gid.adw1.c.functions;
+import gid.adw1.c.types;
+import gid.adw1.types;
+import gid.core.utils;
+import gid.gdk4.rgba;
+import gid.gtk4.widget;
+
+
+/**
+    Checks whether animations are enabled for widget.
+    
+    This should be used when implementing an animated widget to know whether to
+    animate it or not.
+
+    Params:
+      widget = a [gid.gtk4.widget.Widget]
+    Returns: whether animations are enabled for widget
+*/
+bool getEnableAnimations(gid.gtk4.widget.Widget widget) nothrow
+{
+  bool _retval;
+  _retval = cast(bool)adw_get_enable_animations(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+  return _retval;
+}
+
+/**
+    Returns the major version number of the Adwaita library.
+    
+    For example, in libadwaita version 1.2.3 this is 1.
+    
+    This function is in the library, so it represents the libadwaita library your
+    code is running against. Contrast with the [gid.adw1.types.MAJOR_VERSION] constant,
+    which represents the major version of the libadwaita headers you have
+    included when compiling your code.
+    Returns: the major version number of the Adwaita library
+*/
+uint getMajorVersion() nothrow
+{
+  uint _retval;
+  _retval = adw_get_major_version();
+  return _retval;
+}
+
+/**
+    Returns the micro version number of the Adwaita library.
+    
+    For example, in libadwaita version 1.2.3 this is 3.
+    
+    This function is in the library, so it represents the libadwaita library your
+    code is running against. Contrast with the [gid.adw1.types.MAJOR_VERSION] constant,
+    which represents the micro version of the libadwaita headers you have
+    included when compiling your code.
+    Returns: the micro version number of the Adwaita library
+*/
+uint getMicroVersion() nothrow
+{
+  uint _retval;
+  _retval = adw_get_micro_version();
+  return _retval;
+}
+
+/**
+    Returns the minor version number of the Adwaita library.
+    
+    For example, in libadwaita version 1.2.3 this is 2.
+    
+    This function is in the library, so it represents the libadwaita library your
+    code is running against. Contrast with the [gid.adw1.types.MAJOR_VERSION] constant,
+    which represents the minor version of the libadwaita headers you have
+    included when compiling your code.
+    Returns: the minor version number of the Adwaita library
+*/
+uint getMinorVersion() nothrow
+{
+  uint _retval;
+  _retval = adw_get_minor_version();
+  return _retval;
+}
+
+/**
+    Initializes Libadwaita.
+    
+    This function can be used instead of `funcGtk.init` as it initializes GTK
+    implicitly.
+    
+    There's no need to call this function if you're using [gid.adw1.application.Application].
+    
+    If Libadwaita has already been initialized, the function will simply return.
+    
+    This makes sure translations, types, themes, and icons for the Adwaita
+    library are set up properly.
+*/
+void init_() nothrow
+{
+  adw_init();
+}
+
+/**
+    Use this function to check if libadwaita has been initialized with
+    `funcinit`.
+    Returns: the initialization status
+*/
+bool isInitialized() nothrow
+{
+  bool _retval;
+  _retval = cast(bool)adw_is_initialized();
+  return _retval;
+}
+
+/**
+    Computes the linear interpolation between `a` and `b` for `t`.
+
+    Params:
+      a = the start
+      b = the end
+      t = the interpolation rate
+    Returns: the computed value
+*/
+double lerp(double a, double b, double t) nothrow
+{
+  double _retval;
+  _retval = adw_lerp(a, b, t);
+  return _retval;
+}
+
+/**
+    Adjusts rgba to be suitable as a standalone color.
+    
+    It will typically be darker for light background, and lighter for dark
+    background, ensuring contrast.
+
+    Params:
+      rgba = a background color
+      dark = Whether to calculate standalone color for light or dark background
+      standaloneRgba = return location for the standalone color
+*/
+void rgbaToStandalone(gid.gdk4.rgba.RGBA rgba, bool dark, out gid.gdk4.rgba.RGBA standaloneRgba) nothrow
+{
+  adw_rgba_to_standalone(cast(const(GdkRGBA)*)&rgba, dark, cast(GdkRGBA*)&standaloneRgba);
+}

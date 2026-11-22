@@ -1,0 +1,108 @@
+/// Module for [RcStyle] class
+module gid.gtk3.rc_style;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk3.c.functions;
+import gid.gtk3.c.types;
+import gid.gtk3.types;
+
+/**
+    The #GtkRcStyle-struct is used to represent a set
+    of information about the appearance of a widget.
+    This can later be composited together with other
+    #GtkRcStyle-struct<!-- -->s to form a #GtkStyle.
+*/
+class RcStyle : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_rc_style_get_type != &gidSymbolNotFound ? gtk_rc_style_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkRcStyle";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override RcStyle self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk3.rc_style.RcStyle]
+      Returns: New builder object
+  */
+  static RcStyleGidBuilder builder() nothrow
+  {
+    return new RcStyleGidBuilder;
+  }
+
+  /**
+      Creates a new #GtkRcStyle with no fields set and
+      a reference count of 1.
+      Returns: the newly-created #GtkRcStyle
+  
+      Deprecated: Use #GtkCssProvider instead.
+  */
+  this() nothrow
+  {
+    GtkRcStyle* _cretval;
+    _cretval = gtk_rc_style_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Makes a copy of the specified #GtkRcStyle. This function
+      will correctly copy an RC style that is a member of a class
+      derived from #GtkRcStyle.
+      Returns: the resulting #GtkRcStyle
+  
+      Deprecated: Use #GtkCssProvider instead.
+  */
+  gid.gtk3.rc_style.RcStyle copy() nothrow
+  {
+    GtkRcStyle* _cretval;
+    _cretval = gtk_rc_style_copy(cast(GtkRcStyle*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.rc_style.RcStyle)(cast(GtkRcStyle*)_cretval, Yes.Take);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk3.rc_style.RcStyle]
+class RcStyleGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gtk3.rc_style.RcStyle]
+final class RcStyleGidBuilder : RcStyleGidBuilderImpl!RcStyleGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  RcStyle build() nothrow
+  {
+    return new RcStyle(cast(void*)createGObject(RcStyle._getGType), Yes.Take);
+  }
+}

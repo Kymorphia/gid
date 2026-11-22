@@ -192,11 +192,11 @@
     The surface keeps a reference to data, preventing it from being garbage collected until the surface is destroyed
     (also when the surface is still referenced from C after the D object is gone), so data does not need to be kept
     by the caller. The initial contents of data are used as the initial image contents and drawing to the surface
-    modifies data. Call [cairo.surface.Surface.flush] before accessing data directly after drawing, and
-    [cairo.surface.Surface.markDirty] after modifying it.
+    modifies data. Call [gid.cairo1.surface.Surface.flush] before accessing data directly after drawing, and
+    [gid.cairo1.surface.Surface.markDirty] after modifying it.
 
     The stride may be larger than width times the bytes per pixel to provide alignment for each pixel and row, use
-    [cairo.global.formatStrideForWidth] to get a valid stride for format and width.
+    [gid.cairo1.global.formatStrideForWidth] to get a valid stride for format and width.
 
     Params:
       data = pixel data buffer, must be at least stride * height bytes long
@@ -206,10 +206,10 @@
       stride = the number of bytes between the start of rows in the buffer as allocated
     Returns: the newly created surface. This function never returns null, in case of an error such as an invalid
       stride or data being too short for stride * height a "nil" surface is returned whose
-      [cairo.surface.Surface.status] is [cairo.types.Status.InvalidStride] (or another error status like
-      [cairo.types.Status.InvalidFormat], [cairo.types.Status.InvalidSize] or [cairo.types.Status.NoMemory]).
+      [gid.cairo1.surface.Surface.status] is [gid.cairo1.types.Status.InvalidStride] (or another error status like
+      [gid.cairo1.types.Status.InvalidFormat], [gid.cairo1.types.Status.InvalidSize] or [gid.cairo1.types.Status.NoMemory]).
 */
-cairo.surface.Surface imageSurfaceCreateForData(ubyte[] data, cairo.types.Format format, int width, int height, int stride) nothrow
+gid.cairo1.surface.Surface imageSurfaceCreateForData(ubyte[] data, gid.cairo1.types.Format format, int width, int height, int stride) nothrow
 {
   import core.memory : GC;
 
@@ -236,17 +236,17 @@ cairo.surface.Surface imageSurfaceCreateForData(ubyte[] data, cairo.types.Format
     }
   }
 
-  return new cairo.surface.Surface(cast(void*)_cretval, Yes.Take);
+  return new gid.cairo1.surface.Surface(cast(void*)_cretval, Yes.Take);
 }
 
 //!class ScaledFont pre
-import cairo.text_cluster;
+import gid.cairo1.text_cluster;
 
 //!class ScaledFont
 
   /**
       Converts UTF-8 text to an array of glyphs, with cluster mapping, that can be used to render later using this
-      scaled font (with [cairo.context.Context.showTextGlyphs] for example).
+      scaled font (with [gid.cairo1.context.Context.showTextGlyphs] for example).
       Params:
         x = X position to place first glyph
         y = Y position to place first glyph
@@ -254,13 +254,13 @@ import cairo.text_cluster;
         glyphs = Output array of glyphs (empty on error)
         clusters = Output array of cluster mapping information (empty on error)
         clusterFlags = Output cluster mapping flags
-      Returns: [cairo.types.Status.Success] upon success, or an error status if the input values are wrong or if
+      Returns: [gid.cairo1.types.Status.Success] upon success, or an error status if the input values are wrong or if
         conversion failed. If the scaled font is in an error state, its status is returned.
   */
-  cairo.types.Status textToGlyphs(double x, double y, string utf8, out cairo.glyph.Glyph[] glyphs, out cairo.text_cluster.TextCluster[] clusters, out cairo.types.TextClusterFlags clusterFlags) nothrow
+  gid.cairo1.types.Status textToGlyphs(double x, double y, string utf8, out gid.cairo1.glyph.Glyph[] glyphs, out gid.cairo1.text_cluster.TextCluster[] clusters, out gid.cairo1.types.TextClusterFlags clusterFlags) nothrow
   {
-    import cairo.glyph : Glyph;
-    import cairo.text_cluster : TextCluster;
+    import gid.cairo1.glyph : Glyph;
+    import gid.cairo1.text_cluster : TextCluster;
 
     cairo_glyph_t* _glyphs; // Allocated by cairo (initial null)
     int _numGlyphs;
@@ -281,18 +281,18 @@ import cairo.text_cluster;
 
   /**
       Converts UTF-8 text to an array of glyphs, without cluster mapping, that can be used to render later using this
-      scaled font (with [cairo.context.Context.showGlyphs] for example).
+      scaled font (with [gid.cairo1.context.Context.showGlyphs] for example).
       Params:
         x = X position to place first glyph
         y = Y position to place first glyph
         utf8 = a string of text encoded in UTF-8
         glyphs = Output array of glyphs (empty on error)
-      Returns: [cairo.types.Status.Success] upon success, or an error status if the input values are wrong or if
+      Returns: [gid.cairo1.types.Status.Success] upon success, or an error status if the input values are wrong or if
         conversion failed. If the scaled font is in an error state, its status is returned.
   */
-  cairo.types.Status textToGlyphs(double x, double y, string utf8, out cairo.glyph.Glyph[] glyphs) nothrow
+  gid.cairo1.types.Status textToGlyphs(double x, double y, string utf8, out gid.cairo1.glyph.Glyph[] glyphs) nothrow
   {
-    import cairo.glyph : Glyph;
+    import gid.cairo1.glyph : Glyph;
 
     cairo_glyph_t* _glyphs; // Allocated by cairo (initial null)
     int _numGlyphs;

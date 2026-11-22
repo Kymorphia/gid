@@ -1,0 +1,120 @@
+/// Module for [SDPZone] class
+module gid.gstsdp1.sdpzone;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gstsdp1.c.functions;
+import gid.gstsdp1.c.types;
+import gid.gstsdp1.types;
+
+/**
+    The contents of the SDP "z=" field which allows the sender to
+    specify a list of time zone adjustments and offsets from the base
+    time.
+*/
+class SDPZone : StructWrap!(GstSDPZone)
+{
+  /**
+      Create a `sdpzone.SDPZone` wrap type.
+      Params:
+        time = the NTP time that a time zone adjustment happens
+        typedTime = the offset from the time when the session was first scheduled
+  */
+  this(string time = string.init, string typedTime = string.init) nothrow
+  {
+    this.time = time;
+    this.typedTime = typedTime;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _timeRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `time` field.
+      Returns: the NTP time that a time zone adjustment happens
+  */
+  @property string time() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GstSDPZone*)this._cPtr).time);
+  }
+
+  /**
+      Set `time` field.
+      Params:
+        propval = the NTP time that a time zone adjustment happens
+  */
+  @property void time(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("time"))
+      return;
+
+    _timeRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPZone*)this._cPtr).time = cast(char*)_timeRef;
+  }
+
+  private const(char)* _typedTimeRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `typedTime` field.
+      Returns: the offset from the time when the session was first scheduled
+  */
+  @property string typedTime() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GstSDPZone*)this._cPtr).typedTime);
+  }
+
+  /**
+      Set `typedTime` field.
+      Params:
+        propval = the offset from the time when the session was first scheduled
+  */
+  @property void typedTime(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("typedTime"))
+      return;
+
+    _typedTimeRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GstSDPZone*)this._cPtr).typedTime = cast(char*)_typedTimeRef;
+  }
+
+  /**
+      Reset the zone information in zone.
+      Returns: a #GstSDPResult.
+  */
+  gid.gstsdp1.types.SDPResult clear() nothrow
+  {
+    GstSDPResult _cretval;
+    _cretval = gst_sdp_zone_clear(cast(GstSDPZone*)this._cPtr);
+    gid.gstsdp1.types.SDPResult _retval = cast(gid.gstsdp1.types.SDPResult)_cretval;
+    return _retval;
+  }
+
+  /**
+      Set zone information in zone.
+  
+      Params:
+        adjTime = the NTP time that a time zone adjustment happens
+        typedTime = the offset from the time when the session was first scheduled
+      Returns: a #GstSDPResult.
+  */
+  gid.gstsdp1.types.SDPResult set(string adjTime, string typedTime) nothrow
+  {
+    GstSDPResult _cretval;
+    const(char)* _adjTime = adjTime.toCString!(No.Malloc, No.Nullable);
+    const(char)* _typedTime = typedTime.toCString!(No.Malloc, No.Nullable);
+    _cretval = gst_sdp_zone_set(cast(GstSDPZone*)this._cPtr, _adjTime, _typedTime);
+    gid.gstsdp1.types.SDPResult _retval = cast(gid.gstsdp1.types.SDPResult)_cretval;
+    return _retval;
+  }
+}

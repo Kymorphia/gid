@@ -1,0 +1,188 @@
+/// Module for [EventConfigure] class
+module gid.gdk3.event_configure;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gdk3.c.functions;
+import gid.gdk3.c.types;
+import gid.gdk3.types;
+import gid.gdk3.window;
+
+/**
+    Generated when a window size or position has changed.
+*/
+class EventConfigure : StructWrap!(GdkEventConfigure, gdk_event_copy, gdk_event_free)
+{
+  /**
+      Create a `event_configure.EventConfigure` wrap type.
+      Params:
+        type = the type of the event ([gid.gdk3.types.EventType.Configure]).
+        window = the window which received the event.
+        sendEvent = true if the event was sent explicitly.
+        x = the new x coordinate of the window, relative to its parent.
+        y = the new y coordinate of the window, relative to its parent.
+        width = the new width of the window.
+        height = the new height of the window.
+  */
+  this(gid.gdk3.types.EventType type = gid.gdk3.types.EventType.init, gid.gdk3.window.Window window = gid.gdk3.window.Window.init, byte sendEvent = byte.init, int x = int.init, int y = int.init, int width = int.init, int height = int.init) nothrow
+  {
+    this.type = type;
+    this.window = window;
+    this.sendEvent = sendEvent;
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /**
+      Get `type` field.
+      Returns: the type of the event ([gid.gdk3.types.EventType.Configure]).
+  */
+  @property gid.gdk3.types.EventType type() nothrow
+  {
+    return cast(gid.gdk3.types.EventType)(cast(GdkEventConfigure*)this._cPtr).type;
+  }
+
+  /**
+      Set `type` field.
+      Params:
+        propval = the type of the event ([gid.gdk3.types.EventType.Configure]).
+  */
+  @property void type(gid.gdk3.types.EventType propval) nothrow
+  {
+    (cast(GdkEventConfigure*)this._cPtr).type = cast(GdkEventType)propval;
+  }
+
+  private gid.gdk3.window.Window _windowRef; // Keeps borrowed field value alive
+
+  /**
+      Get `window` field.
+      Returns: the window which received the event.
+  */
+  @property gid.gdk3.window.Window window() nothrow
+  {
+    return cToD!(gid.gdk3.window.Window)(cast(void*)(cast(GdkEventConfigure*)this._cPtr).window);
+  }
+
+  /**
+      Set `window` field.
+      Params:
+        propval = the window which received the event.
+  */
+  @property void window(gid.gdk3.window.Window propval) nothrow
+  {
+    if (_refuseBorrowedStore("window"))
+      return;
+
+    _windowRef = propval;
+    (cast(GdkEventConfigure*)this._cPtr).window = propval ? cast(GdkWindow*)propval._cPtr(No.Dup) : null;
+  }
+
+  /**
+      Get `sendEvent` field.
+      Returns: true if the event was sent explicitly.
+  */
+  @property byte sendEvent() nothrow
+  {
+    return (cast(GdkEventConfigure*)this._cPtr).sendEvent;
+  }
+
+  /**
+      Set `sendEvent` field.
+      Params:
+        propval = true if the event was sent explicitly.
+  */
+  @property void sendEvent(byte propval) nothrow
+  {
+    (cast(GdkEventConfigure*)this._cPtr).sendEvent = propval;
+  }
+
+  /**
+      Get `x` field.
+      Returns: the new x coordinate of the window, relative to its parent.
+  */
+  @property int x() nothrow
+  {
+    return (cast(GdkEventConfigure*)this._cPtr).x;
+  }
+
+  /**
+      Set `x` field.
+      Params:
+        propval = the new x coordinate of the window, relative to its parent.
+  */
+  @property void x(int propval) nothrow
+  {
+    (cast(GdkEventConfigure*)this._cPtr).x = propval;
+  }
+
+  /**
+      Get `y` field.
+      Returns: the new y coordinate of the window, relative to its parent.
+  */
+  @property int y() nothrow
+  {
+    return (cast(GdkEventConfigure*)this._cPtr).y;
+  }
+
+  /**
+      Set `y` field.
+      Params:
+        propval = the new y coordinate of the window, relative to its parent.
+  */
+  @property void y(int propval) nothrow
+  {
+    (cast(GdkEventConfigure*)this._cPtr).y = propval;
+  }
+
+  /**
+      Get `width` field.
+      Returns: the new width of the window.
+  */
+  @property int width() nothrow
+  {
+    return (cast(GdkEventConfigure*)this._cPtr).width;
+  }
+
+  /**
+      Set `width` field.
+      Params:
+        propval = the new width of the window.
+  */
+  @property void width(int propval) nothrow
+  {
+    (cast(GdkEventConfigure*)this._cPtr).width = propval;
+  }
+
+  /**
+      Get `height` field.
+      Returns: the new height of the window.
+  */
+  @property int height() nothrow
+  {
+    return (cast(GdkEventConfigure*)this._cPtr).height;
+  }
+
+  /**
+      Set `height` field.
+      Params:
+        propval = the new height of the window.
+  */
+  @property void height(int propval) nothrow
+  {
+    (cast(GdkEventConfigure*)this._cPtr).height = propval;
+  }
+}

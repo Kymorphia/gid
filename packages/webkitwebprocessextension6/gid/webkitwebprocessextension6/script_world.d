@@ -1,0 +1,201 @@
+/// Module for [ScriptWorld] class
+module gid.webkitwebprocessextension6.script_world;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.webkitwebprocessextension6.c.functions;
+import gid.webkitwebprocessextension6.c.types;
+import gid.webkitwebprocessextension6.frame;
+import gid.webkitwebprocessextension6.types;
+import gid.webkitwebprocessextension6.web_page;
+
+/** */
+class ScriptWorld : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())webkit_script_world_get_type != &gidSymbolNotFound ? webkit_script_world_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "WebKitScriptWorld";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ScriptWorld self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.webkitwebprocessextension6.script_world.ScriptWorld]
+      Returns: New builder object
+  */
+  static ScriptWorldGidBuilder builder() nothrow
+  {
+    return new ScriptWorldGidBuilder;
+  }
+
+  /**
+      Creates a new isolated #WebKitScriptWorld. Scripts executed in
+      isolated worlds have access to the DOM but not to other variable
+      or functions created by the page.
+      The #WebKitScriptWorld is created with a generated unique name. Use
+      [gid.webkitwebprocessextension6.script_world.ScriptWorld.newWithName] if you want to create it with a
+      custom name.
+      You can get the JavaScript execution context of a #WebKitScriptWorld
+      for a given #WebKitFrame with webkit_frame_get_javascript_context_for_script_world().
+      Returns: a new isolated #WebKitScriptWorld
+  */
+  this() nothrow
+  {
+    WebKitScriptWorld* _cretval;
+    _cretval = webkit_script_world_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Creates a new isolated #WebKitScriptWorld with a name. Scripts executed in
+      isolated worlds have access to the DOM but not to other variable
+      or functions created by the page.
+      You can get the JavaScript execution context of a #WebKitScriptWorld
+      for a given #WebKitFrame with webkit_frame_get_javascript_context_for_script_world().
+  
+      Params:
+        name = a name for the script world
+      Returns: a new isolated #WebKitScriptWorld
+  */
+  static gid.webkitwebprocessextension6.script_world.ScriptWorld newWithName(string name) nothrow
+  {
+    WebKitScriptWorld* _cretval;
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    _cretval = webkit_script_world_new_with_name(_name);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.webkitwebprocessextension6.script_world.ScriptWorld)(cast(WebKitScriptWorld*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Get the default #WebKitScriptWorld. This is the normal script world
+      where all scripts are executed by default.
+      You can get the JavaScript execution context of a #WebKitScriptWorld
+      for a given #WebKitFrame with webkit_frame_get_javascript_context_for_script_world().
+      Returns: the default #WebKitScriptWorld
+  */
+  static gid.webkitwebprocessextension6.script_world.ScriptWorld getDefault() nothrow
+  {
+    WebKitScriptWorld* _cretval;
+    _cretval = webkit_script_world_get_default();
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.webkitwebprocessextension6.script_world.ScriptWorld)(cast(WebKitScriptWorld*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Get the name of a #WebKitScriptWorld.
+      Returns: the name of world
+  */
+  string getName() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = webkit_script_world_get_name(cast(WebKitScriptWorld*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Connect to `WindowObjectCleared` signal.
+  
+      Emitted when the JavaScript window object in a #WebKitScriptWorld has been
+        cleared. This is the preferred place to set custom properties on the window
+        object using the JavaScriptCore API. You can get the window object of frame
+        from the JavaScript execution context of world that is returned by
+        [gid.webkitwebprocessextension6.frame.Frame.getJsContextForScriptWorld].
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.webkitwebprocessextension6.web_page.WebPage page, gid.webkitwebprocessextension6.frame.Frame frame, gid.webkitwebprocessextension6.script_world.ScriptWorld scriptWorld)`
+  
+          `page` a #WebKitWebPage (optional)
+  
+          `frame` the #WebKitFrame  to which world belongs (optional)
+  
+          `scriptWorld` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectWindowObjectCleared(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.webkitwebprocessextension6.web_page.WebPage)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.webkitwebprocessextension6.frame.Frame)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gid.webkitwebprocessextension6.script_world.ScriptWorld)))
+  && Parameters!T.length < 4)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 3, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.webkitwebprocessextension6.script_world.ScriptWorld.windowObjectCleared");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("window-object-cleared", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.webkitwebprocessextension6.script_world.ScriptWorld]
+class ScriptWorldGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.webkitwebprocessextension6.script_world.ScriptWorld]
+final class ScriptWorldGidBuilder : ScriptWorldGidBuilderImpl!ScriptWorldGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  ScriptWorld build() nothrow
+  {
+    return new ScriptWorld(cast(void*)createGObject(ScriptWorld._getGType), Yes.Take);
+  }
+}

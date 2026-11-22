@@ -1,0 +1,179 @@
+/// Module for [StreamMem] class
+module gid.gmime3.stream_mem;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gmime3.c.functions;
+import gid.gmime3.c.types;
+import gid.gmime3.stream;
+import gid.gmime3.types;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+
+/**
+    A memory-backed #GMimeStream.
+*/
+class StreamMem : gid.gmime3.stream.Stream
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())g_mime_stream_mem_get_type != &gidSymbolNotFound ? g_mime_stream_mem_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GMimeStreamMem";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override StreamMem self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gmime3.stream_mem.StreamMem]
+      Returns: New builder object
+  */
+  static StreamMemGidBuilder builder() nothrow
+  {
+    return new StreamMemGidBuilder;
+  }
+
+  /**
+      Creates a new #GMimeStreamMem object.
+      Returns: a new memory stream.
+  */
+  this() nothrow
+  {
+    GMimeStream* _cretval;
+    _cretval = g_mime_stream_mem_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Creates a new #GMimeStreamMem object and initializes the stream
+      contents with the first len bytes of buffer.
+  
+      Params:
+        buffer = stream data
+      Returns: a new memory stream initialized with buffer.
+  */
+  static gid.gmime3.stream_mem.StreamMem newWithBuffer(ubyte[] buffer) nothrow
+  {
+    GMimeStream* _cretval;
+    size_t _len;
+    if (buffer)
+      _len = cast(size_t)buffer.length;
+
+    auto _buffer = cast(ubyte*)buffer.ptr;
+    _cretval = g_mime_stream_mem_new_with_buffer(_buffer, _len);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gmime3.stream_mem.StreamMem)(cast(GMimeStream*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Creates a new #GMimeStreamMem with data array.
+  
+      Params:
+        array = source data
+      Returns: a new memory stream using array.
+  */
+  static gid.gmime3.stream_mem.StreamMem newWithByteArray(ubyte[] array) nothrow
+  {
+    GMimeStream* _cretval;
+    auto _array = gByteArrayFromD(array);
+    scope(exit) containerFree!(GByteArray*, ubyte, GidOwnership.None)(_array);
+    _cretval = g_mime_stream_mem_new_with_byte_array(_array);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gmime3.stream_mem.StreamMem)(cast(GMimeStream*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the byte array from the memory stream.
+      Returns: the byte array from the memory stream.
+  */
+  ubyte[] getByteArray() nothrow
+  {
+    GByteArray* _cretval;
+    _cretval = g_mime_stream_mem_get_byte_array(cast(GMimeStreamMem*)this._cPtr);
+    auto _retval = gByteArrayToD(cast(GByteArray*)_cretval);
+    return _retval;
+  }
+
+  /**
+      Gets whether or not mem owns the backend memory buffer.
+      Returns: true if mem owns the backend memory buffer or false
+        otherwise.
+  */
+  bool getOwner() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_mime_stream_mem_get_owner(cast(GMimeStreamMem*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Sets the byte array on the memory stream.
+      
+      Note: The memory stream is not responsible for freeing the byte
+      array. Use [gid.gmime3.stream_mem.StreamMem.setOwner] to change this behavior.
+  
+      Params:
+        array = stream data
+  */
+  void setByteArray(ubyte[] array) nothrow
+  {
+    auto _array = gByteArrayFromD(array);
+    scope(exit) containerFree!(GByteArray*, ubyte, GidOwnership.None)(_array);
+    g_mime_stream_mem_set_byte_array(cast(GMimeStreamMem*)this._cPtr, _array);
+  }
+
+  /**
+      Sets whether or not mem owns the backend memory buffer.
+      
+      Note: owner should be true if the stream should free the backend
+      memory buffer when destroyed or false otherwise.
+  
+      Params:
+        owner = true if this stream should own the #GByteArray or false otherwise
+  */
+  void setOwner(bool owner) nothrow
+  {
+    g_mime_stream_mem_set_owner(cast(GMimeStreamMem*)this._cPtr, owner);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gmime3.stream_mem.StreamMem]
+class StreamMemGidBuilderImpl(T) : gid.gmime3.stream.StreamGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gmime3.stream_mem.StreamMem]
+final class StreamMemGidBuilder : StreamMemGidBuilderImpl!StreamMemGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  StreamMem build() nothrow
+  {
+    return new StreamMem(cast(void*)createGObject(StreamMem._getGType), Yes.Take);
+  }
+}

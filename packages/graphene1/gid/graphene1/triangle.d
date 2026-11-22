@@ -1,0 +1,330 @@
+/// Module for [Triangle] class
+module gid.graphene1.triangle;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.boxed;
+import gid.graphene1.box;
+import gid.graphene1.c.functions;
+import gid.graphene1.c.types;
+import gid.graphene1.plane;
+import gid.graphene1.point3_d;
+import gid.graphene1.types;
+import gid.graphene1.vec2;
+import gid.graphene1.vec3;
+
+/**
+    A triangle.
+*/
+class Triangle : gid.gobject2.boxed.BoxedWrap!(graphene_triangle_get_type)
+{
+  /**
+      Create a `triangle.Triangle` boxed type.
+  */
+  this() nothrow
+  {
+    super(boxedNew!graphene_triangle_t(_getGType), Yes.Take);
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Triangle self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Allocates a new #graphene_triangle_t.
+      
+      The contents of the returned structure are undefined.
+      Returns: the newly allocated #graphene_triangle_t
+          structure. Use [gid.graphene1.triangle.Triangle.free] to free the resources
+          allocated by this function
+  */
+  static gid.graphene1.triangle.Triangle alloc() nothrow
+  {
+    graphene_triangle_t* _cretval;
+    _cretval = graphene_triangle_alloc();
+    auto _retval = _cretval ? new gid.graphene1.triangle.Triangle(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Checks whether the given triangle `t` contains the point `p`.
+  
+      Params:
+        p = a #graphene_point3d_t
+      Returns: `true` if the point is inside the triangle
+  */
+  bool containsPoint(gid.graphene1.point3_d.Point3D p) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)graphene_triangle_contains_point(cast(const(graphene_triangle_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&p);
+    return _retval;
+  }
+
+  /**
+      Checks whether the two given #graphene_triangle_t are equal.
+  
+      Params:
+        b = a #graphene_triangle_t
+      Returns: `true` if the triangles are equal
+  */
+  bool equal(gid.graphene1.triangle.Triangle b) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)graphene_triangle_equal(cast(const(graphene_triangle_t)*)this._cPtr, b ? cast(const(graphene_triangle_t)*)b._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Computes the area of the given #graphene_triangle_t.
+      Returns: the area of the triangle
+  */
+  float getArea() nothrow
+  {
+    float _retval;
+    _retval = graphene_triangle_get_area(cast(const(graphene_triangle_t)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Computes the [barycentric coordinates](http://en.wikipedia.org/wiki/Barycentric_coordinate_system)
+      of the given point `p`.
+      
+      The point `p` must lie on the same plane as the triangle `t`; if the
+      point is not coplanar, the result of this function is undefined.
+      
+      If we place the origin in the coordinates of the triangle's A point,
+      the barycentric coordinates are `u`, which is on the AC vector; and `v`
+      which is on the AB vector:
+      
+      ![](triangle-barycentric.png)
+      
+      The returned #graphene_vec2_t contains the following values, in order:
+      
+       - `res.x = u`
+       - `res.y = v`
+  
+      Params:
+        p = a #graphene_point3d_t
+        res = return location for the vector
+            with the barycentric coordinates
+      Returns: `true` if the barycentric coordinates are valid
+  */
+  bool getBarycoords(gid.graphene1.point3_d.Point3D* p, out gid.graphene1.vec2.Vec2 res) nothrow
+  {
+    bool _retval;
+    auto _res = boxedNew!graphene_vec2_t(gid.graphene1.vec2.Vec2._getGType);
+    _retval = cast(bool)graphene_triangle_get_barycoords(cast(const(graphene_triangle_t)*)this._cPtr, cast(const(graphene_point3d_t)*)p, _res);
+    res = new gid.graphene1.vec2.Vec2(cast(void*)_res, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Computes the bounding box of the given #graphene_triangle_t.
+  
+      Params:
+        res = return location for the box
+  */
+  void getBoundingBox(out gid.graphene1.box.Box res) nothrow
+  {
+    auto _res = boxedNew!graphene_box_t(gid.graphene1.box.Box._getGType);
+    graphene_triangle_get_bounding_box(cast(const(graphene_triangle_t)*)this._cPtr, _res);
+    res = new gid.graphene1.box.Box(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Computes the coordinates of the midpoint of the given #graphene_triangle_t.
+      
+      The midpoint G is the [centroid](https://en.wikipedia.org/wiki/Centroid#Triangle_centroid)
+      of the triangle, i.e. the intersection of its medians.
+  
+      Params:
+        res = return location for the coordinates of
+            the midpoint
+  */
+  void getMidpoint(out gid.graphene1.point3_d.Point3D res) nothrow
+  {
+    graphene_triangle_get_midpoint(cast(const(graphene_triangle_t)*)this._cPtr, cast(graphene_point3d_t*)&res);
+  }
+
+  /**
+      Computes the normal vector of the given #graphene_triangle_t.
+  
+      Params:
+        res = return location for the normal vector
+  */
+  void getNormal(out gid.graphene1.vec3.Vec3 res) nothrow
+  {
+    auto _res = boxedNew!graphene_vec3_t(gid.graphene1.vec3.Vec3._getGType);
+    graphene_triangle_get_normal(cast(const(graphene_triangle_t)*)this._cPtr, _res);
+    res = new gid.graphene1.vec3.Vec3(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Computes the plane based on the vertices of the given #graphene_triangle_t.
+  
+      Params:
+        res = return location for the plane
+  */
+  void getPlane(out gid.graphene1.plane.Plane res) nothrow
+  {
+    auto _res = boxedNew!graphene_plane_t(gid.graphene1.plane.Plane._getGType);
+    graphene_triangle_get_plane(cast(const(graphene_triangle_t)*)this._cPtr, _res);
+    res = new gid.graphene1.plane.Plane(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Retrieves the three vertices of the given #graphene_triangle_t and returns
+      their coordinates as #graphene_point3d_t.
+  
+      Params:
+        a = return location for the coordinates
+            of the first vertex
+        b = return location for the coordinates
+            of the second vertex
+        c = return location for the coordinates
+            of the third vertex
+  */
+  void getPoints(out gid.graphene1.point3_d.Point3D a, out gid.graphene1.point3_d.Point3D b, out gid.graphene1.point3_d.Point3D c) nothrow
+  {
+    graphene_triangle_get_points(cast(const(graphene_triangle_t)*)this._cPtr, cast(graphene_point3d_t*)&a, cast(graphene_point3d_t*)&b, cast(graphene_point3d_t*)&c);
+  }
+
+  /**
+      Computes the UV coordinates of the given point `p`.
+      
+      The point `p` must lie on the same plane as the triangle `t`; if the point
+      is not coplanar, the result of this function is undefined. If `p` is null,
+      the point will be set in (0, 0, 0).
+      
+      The UV coordinates will be placed in the res vector:
+      
+       - `res.x = u`
+       - `res.y = v`
+      
+      See also: [gid.graphene1.triangle.Triangle.getBarycoords]
+  
+      Params:
+        p = a #graphene_point3d_t
+        uvA = the UV coordinates of the first point
+        uvB = the UV coordinates of the second point
+        uvC = the UV coordinates of the third point
+        res = a vector containing the UV coordinates
+            of the given point `p`
+      Returns: `true` if the coordinates are valid
+  */
+  bool getUv(gid.graphene1.point3_d.Point3D* p, gid.graphene1.vec2.Vec2 uvA, gid.graphene1.vec2.Vec2 uvB, gid.graphene1.vec2.Vec2 uvC, out gid.graphene1.vec2.Vec2 res) nothrow
+  {
+    bool _retval;
+    auto _res = boxedNew!graphene_vec2_t(gid.graphene1.vec2.Vec2._getGType);
+    _retval = cast(bool)graphene_triangle_get_uv(cast(const(graphene_triangle_t)*)this._cPtr, cast(const(graphene_point3d_t)*)p, uvA ? cast(const(graphene_vec2_t)*)uvA._cPtr(No.Dup) : null, uvB ? cast(const(graphene_vec2_t)*)uvB._cPtr(No.Dup) : null, uvC ? cast(const(graphene_vec2_t)*)uvC._cPtr(No.Dup) : null, _res);
+    res = new gid.graphene1.vec2.Vec2(cast(void*)_res, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Retrieves the three vertices of the given #graphene_triangle_t.
+  
+      Params:
+        a = return location for the first vertex
+        b = return location for the second vertex
+        c = return location for the third vertex
+  */
+  void getVertices(out gid.graphene1.vec3.Vec3 a, out gid.graphene1.vec3.Vec3 b, out gid.graphene1.vec3.Vec3 c) nothrow
+  {
+    auto _a = boxedNew!graphene_vec3_t(gid.graphene1.vec3.Vec3._getGType);
+    auto _b = boxedNew!graphene_vec3_t(gid.graphene1.vec3.Vec3._getGType);
+    auto _c = boxedNew!graphene_vec3_t(gid.graphene1.vec3.Vec3._getGType);
+    graphene_triangle_get_vertices(cast(const(graphene_triangle_t)*)this._cPtr, _a, _b, _c);
+    a = new gid.graphene1.vec3.Vec3(cast(void*)_a, Yes.Take);
+    b = new gid.graphene1.vec3.Vec3(cast(void*)_b, Yes.Take);
+    c = new gid.graphene1.vec3.Vec3(cast(void*)_c, Yes.Take);
+  }
+
+  /**
+      Initializes a #graphene_triangle_t using the three given arrays
+      of floating point values, each representing the coordinates of
+      a point in 3D space.
+  
+      Params:
+        a = an array of 3 floating point values
+        b = an array of 3 floating point values
+        c = an array of 3 floating point values
+      Returns: the initialized #graphene_triangle_t
+  */
+  gid.graphene1.triangle.Triangle initFromFloat(float[] a, float[] b, float[] c) nothrow
+  {
+    graphene_triangle_t* _cretval;
+    if (a.length > 3) a = a[0 .. 3];
+    auto _a = cast(float*)a.ptr;
+    typeof(*_a)[3] _a_fixed = void;
+    if (a.length < 3)
+    {
+      (cast(ubyte[])_a_fixed[])[] = 0;
+      _a_fixed[0 .. a.length] = _a[0 .. a.length];
+      _a = _a_fixed.ptr;
+    }
+    if (b.length > 3) b = b[0 .. 3];
+    auto _b = cast(float*)b.ptr;
+    typeof(*_b)[3] _b_fixed = void;
+    if (b.length < 3)
+    {
+      (cast(ubyte[])_b_fixed[])[] = 0;
+      _b_fixed[0 .. b.length] = _b[0 .. b.length];
+      _b = _b_fixed.ptr;
+    }
+    if (c.length > 3) c = c[0 .. 3];
+    auto _c = cast(float*)c.ptr;
+    typeof(*_c)[3] _c_fixed = void;
+    if (c.length < 3)
+    {
+      (cast(ubyte[])_c_fixed[])[] = 0;
+      _c_fixed[0 .. c.length] = _c[0 .. c.length];
+      _c = _c_fixed.ptr;
+    }
+    _cretval = graphene_triangle_init_from_float(cast(graphene_triangle_t*)this._cPtr, _a, _b, _c);
+    auto _retval = _cretval ? new gid.graphene1.triangle.Triangle(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Initializes a #graphene_triangle_t using the three given 3D points.
+  
+      Params:
+        a = a #graphene_point3d_t
+        b = a #graphene_point3d_t
+        c = a #graphene_point3d_t
+      Returns: the initialized #graphene_triangle_t
+  */
+  gid.graphene1.triangle.Triangle initFromPoint3d(gid.graphene1.point3_d.Point3D* a = null, gid.graphene1.point3_d.Point3D* b = null, gid.graphene1.point3_d.Point3D* c = null) nothrow
+  {
+    graphene_triangle_t* _cretval;
+    _cretval = graphene_triangle_init_from_point3d(cast(graphene_triangle_t*)this._cPtr, cast(const(graphene_point3d_t)*)a, cast(const(graphene_point3d_t)*)b, cast(const(graphene_point3d_t)*)c);
+    auto _retval = _cretval ? new gid.graphene1.triangle.Triangle(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Initializes a #graphene_triangle_t using the three given vectors.
+  
+      Params:
+        a = a #graphene_vec3_t
+        b = a #graphene_vec3_t
+        c = a #graphene_vec3_t
+      Returns: the initialized #graphene_triangle_t
+  */
+  gid.graphene1.triangle.Triangle initFromVec3(gid.graphene1.vec3.Vec3 a = null, gid.graphene1.vec3.Vec3 b = null, gid.graphene1.vec3.Vec3 c = null) nothrow
+  {
+    graphene_triangle_t* _cretval;
+    _cretval = graphene_triangle_init_from_vec3(cast(graphene_triangle_t*)this._cPtr, a ? cast(const(graphene_vec3_t)*)a._cPtr(No.Dup) : null, b ? cast(const(graphene_vec3_t)*)b._cPtr(No.Dup) : null, c ? cast(const(graphene_vec3_t)*)c._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gid.graphene1.triangle.Triangle(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+}

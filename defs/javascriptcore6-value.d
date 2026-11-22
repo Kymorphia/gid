@@ -3,11 +3,11 @@
 import core.memory : GC;
 import std.exception : enforce;
 import std.traits : isNumeric;
-import gobject.types : GTypeEnum;
-import glib.c.functions : g_strfreev;
-import gobject.c.functions : g_object_ref, g_object_unref;
+import gid.gobject2.types : GTypeEnum;
+import gid.glib2.c.functions : g_strfreev;
+import gid.gobject2.c.functions : g_object_ref, g_object_unref;
 
-class Value : gobject.object.ObjectWrap
+class Value : gid.gobject2.object.ObjectWrap
 {
   /**
   * Create a function in context which calls a D callback.
@@ -103,7 +103,7 @@ static T getJsVal(T)(JSCValue* jsval) nothrow
   else static if (is(T == string))
     return jsc_value_to_string(jsval).fromCString!(Yes.Free);
   else static if (is(T == Value))
-    return gobject.object.ObjectWrap._getDObject!Value(jsval, No.Take);
+    return gid.gobject2.object.ObjectWrap._getDObject!Value(jsval, No.Take);
   else static if (is(T == U[], U))
   {
     enforce(jsc_value_is_array(jsval), "JSCValue is not a JavaScript array");

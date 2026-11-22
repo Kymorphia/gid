@@ -87,14 +87,14 @@
 //# Ignore: Untyped raw pointer fields (gpointer user/private data), not useful from D
 //!set record[RTPBuffer].field[data][ignore] 1
 
-//# Ignore: Property type Gst.ValueArray is a fundamental GValue type, replaced by gst.types.ValueArray properties below
+//# Ignore: Property type Gst.ValueArray is a fundamental GValue type, replaced by gid.gst1.types.ValueArray properties below
 //!set class[RTPBaseDepayload].property[extensions][ignore] 1
 //!set class[RTPBasePayload].property[extensions][ignore] 1
 
-//# Add read-only extensions properties, using the gst.types.ValueArray D value type (values are gstrtp.rtpheader_extension.RTPHeaderExtension objects)
+//# Add read-only extensions properties, using the gid.gst1.types.ValueArray D value type (values are gid.gstrtp1.rtpheader_extension.RTPHeaderExtension objects)
 //!class global pre
 
-import gstrtp.rtpsource_meta;
+import gid.gstrtp1.rtpsource_meta;
 
 /**
     Attaches RTP source information to buffer.
@@ -103,7 +103,7 @@ import gstrtp.rtpsource_meta;
       csrc = the CSRCs (at most GST_RTP_SOURCE_META_MAX_CSRC_COUNT)
     Returns: the #GstRTPSourceMeta on buffer (borrowed from it) or null on error
 */
-gstrtp.rtpsource_meta.RTPSourceMeta bufferAddRtpSourceMeta(gst.buffer.Buffer buffer, uint[] csrc = null) nothrow
+gid.gstrtp1.rtpsource_meta.RTPSourceMeta bufferAddRtpSourceMeta(gid.gst1.buffer.Buffer buffer, uint[] csrc = null) nothrow
 {
   return _bufferAddRtpSourceMeta(buffer, null, csrc);
 }
@@ -116,18 +116,18 @@ gstrtp.rtpsource_meta.RTPSourceMeta bufferAddRtpSourceMeta(gst.buffer.Buffer buf
       csrc = the CSRCs (at most GST_RTP_SOURCE_META_MAX_CSRC_COUNT)
     Returns: the #GstRTPSourceMeta on buffer (borrowed from it) or null on error
 */
-gstrtp.rtpsource_meta.RTPSourceMeta bufferAddRtpSourceMeta(gst.buffer.Buffer buffer, uint ssrc, uint[] csrc = null) nothrow
+gid.gstrtp1.rtpsource_meta.RTPSourceMeta bufferAddRtpSourceMeta(gid.gst1.buffer.Buffer buffer, uint ssrc, uint[] csrc = null) nothrow
 {
   return _bufferAddRtpSourceMeta(buffer, &ssrc, csrc);
 }
 
-private gstrtp.rtpsource_meta.RTPSourceMeta _bufferAddRtpSourceMeta(gst.buffer.Buffer buffer, const(uint)* ssrc,
+private gid.gstrtp1.rtpsource_meta.RTPSourceMeta _bufferAddRtpSourceMeta(gid.gst1.buffer.Buffer buffer, const(uint)* ssrc,
   uint[] csrc) nothrow
 {
   auto _csrcCount = csrc.length <= uint.max ? cast(uint)csrc.length : uint.max; // Count validated by the C function
   auto _cretval = gst_buffer_add_rtp_source_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, ssrc,
     _csrcCount > 0 ? csrc.ptr : null, _csrcCount);
-  return _cretval ? new gstrtp.rtpsource_meta.RTPSourceMeta(cast(GstRTPSourceMeta*)_cretval, buffer) : null;
+  return _cretval ? new gid.gstrtp1.rtpsource_meta.RTPSourceMeta(cast(GstRTPSourceMeta*)_cretval, buffer) : null;
 }
 
 //!class RTPBaseDepayload
@@ -145,9 +145,9 @@ private gstrtp.rtpsource_meta.RTPSourceMeta _bufferAddRtpSourceMeta(gst.buffer.B
         Dynamic updates of this property can be received by subscribing to its corresponding "notify" signal, i.e.
         "notify::extensions".
   */
-  @property gst.types.ValueArray extensions() nothrow
+  @property gid.gst1.types.ValueArray extensions() nothrow
   {
-    return gobject.object.ObjectWrap.getProperty!(gst.types.ValueArray)("extensions");
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gst1.types.ValueArray)("extensions");
   }
 
 //!class RTPBasePayload
@@ -165,7 +165,7 @@ private gstrtp.rtpsource_meta.RTPSourceMeta _bufferAddRtpSourceMeta(gst.buffer.B
         Dynamic updates of this property can be received by subscribing to its corresponding "notify" signal, i.e.
         "notify::extensions".
   */
-  @property gst.types.ValueArray extensions() nothrow
+  @property gid.gst1.types.ValueArray extensions() nothrow
   {
-    return gobject.object.ObjectWrap.getProperty!(gst.types.ValueArray)("extensions");
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gst1.types.ValueArray)("extensions");
   }

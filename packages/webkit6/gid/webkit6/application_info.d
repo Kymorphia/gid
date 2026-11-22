@@ -1,0 +1,100 @@
+/// Module for [ApplicationInfo] class
+module gid.webkit6.application_info;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.boxed;
+import gid.webkit6.c.functions;
+import gid.webkit6.c.types;
+import gid.webkit6.types;
+
+/**
+    Information about an application running in automation mode.
+*/
+class ApplicationInfo : gid.gobject2.boxed.BoxedWrap!(webkit_application_info_get_type)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ApplicationInfo self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Creates a new #WebKitApplicationInfo
+      Returns: the newly created #WebKitApplicationInfo.
+  */
+  this() nothrow
+  {
+    WebKitApplicationInfo* _cretval;
+    _cretval = webkit_application_info_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Get the name of the application.
+      
+      If [gid.webkit6.application_info.ApplicationInfo.setName] hasn't been
+      called with a valid name, this returns [gid.glib2.global.getPrgname].
+      Returns: the application name
+  */
+  string getName() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = webkit_application_info_get_name(cast(WebKitApplicationInfo*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Get the application version previously set with [gid.webkit6.application_info.ApplicationInfo.setVersion].
+  
+      Params:
+        major = return location for the major version number
+        minor = return location for the minor version number
+        micro = return location for the micro version number
+  */
+  void getVersion(out ulong major, out ulong minor, out ulong micro) nothrow
+  {
+    webkit_application_info_get_version(cast(WebKitApplicationInfo*)this._cPtr, cast(ulong*)&major, cast(ulong*)&minor, cast(ulong*)&micro);
+  }
+
+  /**
+      Set the name of the application.
+      
+      If not provided, or null is passed,
+      [gid.glib2.global.getPrgname] will be used.
+  
+      Params:
+        name = the application name
+  */
+  void setName(string name) nothrow
+  {
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    webkit_application_info_set_name(cast(WebKitApplicationInfo*)this._cPtr, _name);
+  }
+
+  /**
+      Set the application version.
+      
+      If the application doesn't use the format
+      major.minor.micro you can pass 0 as the micro to use major.minor, or pass
+      0 as both micro and minor to use only major number. Any other format must
+      be converted to major.minor.micro so that it can be used in version comparisons.
+  
+      Params:
+        major = the major version number
+        minor = the minor version number
+        micro = the micro version number
+  */
+  void setVersion(ulong major, ulong minor, ulong micro) nothrow
+  {
+    webkit_application_info_set_version(cast(WebKitApplicationInfo*)this._cPtr, major, minor, micro);
+  }
+}

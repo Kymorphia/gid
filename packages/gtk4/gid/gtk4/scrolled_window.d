@@ -1,0 +1,1361 @@
+/// Module for [ScrolledWindow] class
+module gid.gtk4.scrolled_window;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.accessible;
+import gid.gtk4.accessible_mixin;
+import gid.gtk4.adjustment;
+import gid.gtk4.buildable;
+import gid.gtk4.buildable_mixin;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.constraint_target;
+import gid.gtk4.constraint_target_mixin;
+import gid.gtk4.types;
+import gid.gtk4.widget;
+
+/**
+    Makes its child scrollable.
+    
+    <picture>
+      <source srcset="scrolledwindow-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkScrolledWindow" src="scrolledwindow.png">
+    </picture>
+    
+    It does so using either internally added scrollbars or externally
+    associated adjustments, and optionally draws a frame around the child.
+    
+    Widgets with native scrolling support, i.e. those whose classes implement
+    the [gid.gtk4.scrollable.Scrollable] interface, are added directly. For other types
+    of widget, the class [gid.gtk4.viewport.Viewport] acts as an adaptor, giving
+    scrollability to other widgets. [gid.gtk4.scrolled_window.ScrolledWindow.setChild]
+    intelligently accounts for whether or not the added child is a [gid.gtk4.scrollable.Scrollable].
+    If it isn’t, then it wraps the child in a [gid.gtk4.viewport.Viewport]. Therefore, you can
+    just add any child widget and not worry about the details.
+    
+    If [gid.gtk4.scrolled_window.ScrolledWindow.setChild] has added a [gid.gtk4.viewport.Viewport] for you,
+    it will be automatically removed when you unset the child.
+    Unless [gid.gtk4.scrolled_window.ScrolledWindow.hscrollbarPolicy] and
+    [gid.gtk4.scrolled_window.ScrolledWindow.vscrollbarPolicy] are [gid.gtk4.types.PolicyType.Never] or
+    [gid.gtk4.types.PolicyType.External], [gid.gtk4.scrolled_window.ScrolledWindow] adds internal [gid.gtk4.scrollbar.Scrollbar] widgets
+    around its child. The scroll position of the child, and if applicable the
+    scrollbars, is controlled by the [gid.gtk4.scrolled_window.ScrolledWindow.hadjustment]
+    and [gid.gtk4.scrolled_window.ScrolledWindow.vadjustment] that are associated with the
+    [gid.gtk4.scrolled_window.ScrolledWindow]. See the docs on [gid.gtk4.scrollbar.Scrollbar] for the details,
+    but note that the “step_increment” and “page_increment” fields are only
+    effective if the policy causes scrollbars to be present.
+    
+    If a [gid.gtk4.scrolled_window.ScrolledWindow] doesn’t behave quite as you would like, or
+    doesn’t have exactly the right layout, it’s very possible to set up
+    your own scrolling with [gid.gtk4.scrollbar.Scrollbar] and for example a [gid.gtk4.grid.Grid].
+    
+    # Touch support
+    
+    [gid.gtk4.scrolled_window.ScrolledWindow] has built-in support for touch devices. When a
+    touchscreen is used, swiping will move the scrolled window, and will
+    expose 'kinetic' behavior. This can be turned off with the
+    [gid.gtk4.scrolled_window.ScrolledWindow.kineticScrolling] property if it is undesired.
+    
+    [gid.gtk4.scrolled_window.ScrolledWindow] also displays visual 'overshoot' indication when
+    the content is pulled beyond the end, and this situation can be
+    captured with the [gid.gtk4.scrolled_window.ScrolledWindow.edgeOvershot] signal.
+    
+    If no mouse device is present, the scrollbars will overlaid as
+    narrow, auto-hiding indicators over the content. If traditional
+    scrollbars are desired although no mouse is present, this behaviour
+    can be turned off with the [gid.gtk4.scrolled_window.ScrolledWindow.overlayScrolling]
+    property.
+    
+    # Shortcuts and Gestures
+    
+    The following signals have default keybindings:
+    
+    - [gid.gtk4.scrolled_window.ScrolledWindow.scrollChild]
+    
+    # CSS nodes
+    
+    [gid.gtk4.scrolled_window.ScrolledWindow] has a main CSS node with name scrolledwindow.
+    It gets a .frame style class added when [gid.gtk4.scrolled_window.ScrolledWindow.hasFrame]
+    is true.
+    
+    It uses subnodes with names overshoot and undershoot to draw the overflow
+    and underflow indications. These nodes get the .left, .right, .top or .bottom
+    style class added depending on where the indication is drawn.
+    
+    [gid.gtk4.scrolled_window.ScrolledWindow] also sets the positional style classes (.left, .right,
+    .top, .bottom) and style classes related to overlay scrolling
+    (.overlay-indicator, .dragging, .hovering) on its scrollbars.
+    
+    If both scrollbars are visible, the area where they meet is drawn
+    with a subnode named junction.
+    
+    # Accessibility
+    
+    Until GTK 4.10, [gid.gtk4.scrolled_window.ScrolledWindow] used the [gid.gtk4.types.AccessibleRole.Group] role.
+    
+    Starting from GTK 4.12, [gid.gtk4.scrolled_window.ScrolledWindow] uses the [gid.gtk4.types.AccessibleRole.Generic]
+    role.
+*/
+class ScrolledWindow : gid.gtk4.widget.Widget
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_scrolled_window_get_type != &gidSymbolNotFound ? gtk_scrolled_window_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkScrolledWindow";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ScrolledWindow self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.scrolled_window.ScrolledWindow]
+      Returns: New builder object
+  */
+  static ScrolledWindowGidBuilder builder() nothrow
+  {
+    return new ScrolledWindowGidBuilder;
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+        
+        When setting this property, if the child widget does not implement
+        [gid.gtk4.scrollable.Scrollable], the scrolled window will add the child to
+        a [gid.gtk4.viewport.Viewport] and then set the viewport as the child.
+  */
+  @property gid.gtk4.widget.Widget child() nothrow
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+          
+          When setting this property, if the child widget does not implement
+          [gid.gtk4.scrollable.Scrollable], the scrolled window will add the child to
+          a [gid.gtk4.viewport.Viewport] and then set the viewport as the child.
+  */
+  @property void child(gid.gtk4.widget.Widget propval) nothrow
+  {
+    setChild(propval);
+  }
+
+  /**
+      Get `hadjustment` property.
+      Returns: The [gid.gtk4.adjustment.Adjustment] for the horizontal position.
+  */
+  @property gid.gtk4.adjustment.Adjustment hadjustment() nothrow
+  {
+    return getHadjustment();
+  }
+
+  /**
+      Set `hadjustment` property.
+      Params:
+        propval = The [gid.gtk4.adjustment.Adjustment] for the horizontal position.
+  */
+  @property void hadjustment(gid.gtk4.adjustment.Adjustment propval) nothrow
+  {
+    setHadjustment(propval);
+  }
+
+  /**
+      Get `hasFrame` property.
+      Returns: Whether to draw a frame around the contents.
+  */
+  @property bool hasFrame() nothrow
+  {
+    return getHasFrame();
+  }
+
+  /**
+      Set `hasFrame` property.
+      Params:
+        propval = Whether to draw a frame around the contents.
+  */
+  @property void hasFrame(bool propval) nothrow
+  {
+    setHasFrame(propval);
+  }
+
+  /**
+      Get `hscrollbarPolicy` property.
+      Returns: When the horizontal scrollbar is displayed.
+        
+        Use [gid.gtk4.scrolled_window.ScrolledWindow.setPolicy] to set
+        this property.
+  */
+  @property gid.gtk4.types.PolicyType hscrollbarPolicy() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gtk4.types.PolicyType)("hscrollbar-policy");
+  }
+
+  /**
+      Set `hscrollbarPolicy` property.
+      Params:
+        propval = When the horizontal scrollbar is displayed.
+          
+          Use [gid.gtk4.scrolled_window.ScrolledWindow.setPolicy] to set
+          this property.
+  */
+  @property void hscrollbarPolicy(gid.gtk4.types.PolicyType propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.gtk4.types.PolicyType)("hscrollbar-policy", propval);
+  }
+
+  /**
+      Get `kineticScrolling` property.
+      Returns: Whether kinetic scrolling is enabled or not.
+        
+        Kinetic scrolling only applies to devices with source [gid.gdk4.types.InputSource.Touchscreen].
+  */
+  @property bool kineticScrolling() nothrow
+  {
+    return getKineticScrolling();
+  }
+
+  /**
+      Set `kineticScrolling` property.
+      Params:
+        propval = Whether kinetic scrolling is enabled or not.
+          
+          Kinetic scrolling only applies to devices with source [gid.gdk4.types.InputSource.Touchscreen].
+  */
+  @property void kineticScrolling(bool propval) nothrow
+  {
+    setKineticScrolling(propval);
+  }
+
+  /**
+      Get `maxContentHeight` property.
+      Returns: The maximum content height of @scrolled_window.
+  */
+  @property int maxContentHeight() nothrow
+  {
+    return getMaxContentHeight();
+  }
+
+  /**
+      Set `maxContentHeight` property.
+      Params:
+        propval = The maximum content height of @scrolled_window.
+  */
+  @property void maxContentHeight(int propval) nothrow
+  {
+    setMaxContentHeight(propval);
+  }
+
+  /**
+      Get `maxContentWidth` property.
+      Returns: The maximum content width of @scrolled_window.
+  */
+  @property int maxContentWidth() nothrow
+  {
+    return getMaxContentWidth();
+  }
+
+  /**
+      Set `maxContentWidth` property.
+      Params:
+        propval = The maximum content width of @scrolled_window.
+  */
+  @property void maxContentWidth(int propval) nothrow
+  {
+    setMaxContentWidth(propval);
+  }
+
+  /**
+      Get `minContentHeight` property.
+      Returns: The minimum content height of @scrolled_window.
+  */
+  @property int minContentHeight() nothrow
+  {
+    return getMinContentHeight();
+  }
+
+  /**
+      Set `minContentHeight` property.
+      Params:
+        propval = The minimum content height of @scrolled_window.
+  */
+  @property void minContentHeight(int propval) nothrow
+  {
+    setMinContentHeight(propval);
+  }
+
+  /**
+      Get `minContentWidth` property.
+      Returns: The minimum content width of @scrolled_window.
+  */
+  @property int minContentWidth() nothrow
+  {
+    return getMinContentWidth();
+  }
+
+  /**
+      Set `minContentWidth` property.
+      Params:
+        propval = The minimum content width of @scrolled_window.
+  */
+  @property void minContentWidth(int propval) nothrow
+  {
+    setMinContentWidth(propval);
+  }
+
+  /**
+      Get `overlayScrolling` property.
+      Returns: Whether overlay scrolling is enabled or not.
+        
+        If it is, the scrollbars are only added as traditional widgets
+        when a mouse is present. Otherwise, they are overlaid on top of
+        the content, as narrow indicators.
+        
+        Note that overlay scrolling can also be globally disabled, with
+        the [gid.gtk4.settings.Settings.gtkOverlayScrolling] setting.
+  */
+  @property bool overlayScrolling() nothrow
+  {
+    return getOverlayScrolling();
+  }
+
+  /**
+      Set `overlayScrolling` property.
+      Params:
+        propval = Whether overlay scrolling is enabled or not.
+          
+          If it is, the scrollbars are only added as traditional widgets
+          when a mouse is present. Otherwise, they are overlaid on top of
+          the content, as narrow indicators.
+          
+          Note that overlay scrolling can also be globally disabled, with
+          the [gid.gtk4.settings.Settings.gtkOverlayScrolling] setting.
+  */
+  @property void overlayScrolling(bool propval) nothrow
+  {
+    setOverlayScrolling(propval);
+  }
+
+  /**
+      Get `propagateNaturalHeight` property.
+      Returns: Whether the natural height of the child should be calculated and propagated
+        through the scrolled window’s requested natural height.
+        
+        This is useful in cases where an attempt should be made to allocate exactly
+        enough space for the natural size of the child.
+  */
+  @property bool propagateNaturalHeight() nothrow
+  {
+    return getPropagateNaturalHeight();
+  }
+
+  /**
+      Set `propagateNaturalHeight` property.
+      Params:
+        propval = Whether the natural height of the child should be calculated and propagated
+          through the scrolled window’s requested natural height.
+          
+          This is useful in cases where an attempt should be made to allocate exactly
+          enough space for the natural size of the child.
+  */
+  @property void propagateNaturalHeight(bool propval) nothrow
+  {
+    setPropagateNaturalHeight(propval);
+  }
+
+  /**
+      Get `propagateNaturalWidth` property.
+      Returns: Whether the natural width of the child should be calculated and propagated
+        through the scrolled window’s requested natural width.
+        
+        This is useful in cases where an attempt should be made to allocate exactly
+        enough space for the natural size of the child.
+  */
+  @property bool propagateNaturalWidth() nothrow
+  {
+    return getPropagateNaturalWidth();
+  }
+
+  /**
+      Set `propagateNaturalWidth` property.
+      Params:
+        propval = Whether the natural width of the child should be calculated and propagated
+          through the scrolled window’s requested natural width.
+          
+          This is useful in cases where an attempt should be made to allocate exactly
+          enough space for the natural size of the child.
+  */
+  @property void propagateNaturalWidth(bool propval) nothrow
+  {
+    setPropagateNaturalWidth(propval);
+  }
+
+  /**
+      Get `vadjustment` property.
+      Returns: The [gid.gtk4.adjustment.Adjustment] for the vertical position.
+  */
+  @property gid.gtk4.adjustment.Adjustment vadjustment() nothrow
+  {
+    return getVadjustment();
+  }
+
+  /**
+      Set `vadjustment` property.
+      Params:
+        propval = The [gid.gtk4.adjustment.Adjustment] for the vertical position.
+  */
+  @property void vadjustment(gid.gtk4.adjustment.Adjustment propval) nothrow
+  {
+    setVadjustment(propval);
+  }
+
+  /**
+      Get `vscrollbarPolicy` property.
+      Returns: When the vertical scrollbar is displayed.
+        
+        Use [gid.gtk4.scrolled_window.ScrolledWindow.setPolicy] to set
+        this property.
+  */
+  @property gid.gtk4.types.PolicyType vscrollbarPolicy() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gtk4.types.PolicyType)("vscrollbar-policy");
+  }
+
+  /**
+      Set `vscrollbarPolicy` property.
+      Params:
+        propval = When the vertical scrollbar is displayed.
+          
+          Use [gid.gtk4.scrolled_window.ScrolledWindow.setPolicy] to set
+          this property.
+  */
+  @property void vscrollbarPolicy(gid.gtk4.types.PolicyType propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.gtk4.types.PolicyType)("vscrollbar-policy", propval);
+  }
+
+  /**
+      Get `windowPlacement` property.
+      Returns: Where the contents are located with respect to the scrollbars.
+  */
+  @property gid.gtk4.types.CornerType windowPlacement() nothrow
+  {
+    return getPlacement();
+  }
+
+  /**
+      Set `windowPlacement` property.
+      Params:
+        propval = Where the contents are located with respect to the scrollbars.
+  */
+  @property void windowPlacement(gid.gtk4.types.CornerType propval) nothrow
+  {
+    setPlacement(propval);
+  }
+
+  /**
+      Creates a new scrolled window.
+      Returns: a new scrolled window
+  */
+  this() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_scrolled_window_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Gets the child widget of scrolled_window.
+      
+      If the scrolled window automatically added a [gid.gtk4.viewport.Viewport], this
+      function will return the viewport widget, and you can retrieve its child
+      using [gid.gtk4.viewport.Viewport.getChild].
+      Returns: the child widget of scrolled_window
+  */
+  gid.gtk4.widget.Widget getChild() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_scrolled_window_get_child(cast(GtkScrolledWindow*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the horizontal scrollbar’s adjustment.
+      
+      This is the adjustment used to connect the horizontal scrollbar
+      to the child widget’s horizontal scroll functionality.
+      Returns: the horizontal [gid.gtk4.adjustment.Adjustment]
+  */
+  gid.gtk4.adjustment.Adjustment getHadjustment() nothrow
+  {
+    GtkAdjustment* _cretval;
+    _cretval = gtk_scrolled_window_get_hadjustment(cast(GtkScrolledWindow*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets whether the scrolled window draws a frame.
+      Returns: true if the scrolled_window has a frame
+  */
+  bool getHasFrame() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_scrolled_window_get_has_frame(cast(GtkScrolledWindow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the horizontal scrollbar of scrolled_window.
+      Returns: the horizontal scrollbar of the scrolled window.
+  */
+  gid.gtk4.widget.Widget getHscrollbar() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_scrolled_window_get_hscrollbar(cast(GtkScrolledWindow*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the specified kinetic scrolling behavior.
+      Returns: the scrolling behavior flags.
+  */
+  bool getKineticScrolling() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_scrolled_window_get_kinetic_scrolling(cast(GtkScrolledWindow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the maximum content height set.
+      Returns: the maximum content height, or -1
+  */
+  int getMaxContentHeight() nothrow
+  {
+    int _retval;
+    _retval = gtk_scrolled_window_get_max_content_height(cast(GtkScrolledWindow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the maximum content width set.
+      Returns: the maximum content width, or -1
+  */
+  int getMaxContentWidth() nothrow
+  {
+    int _retval;
+    _retval = gtk_scrolled_window_get_max_content_width(cast(GtkScrolledWindow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the minimal content height of scrolled_window.
+      Returns: the minimal content height
+  */
+  int getMinContentHeight() nothrow
+  {
+    int _retval;
+    _retval = gtk_scrolled_window_get_min_content_height(cast(GtkScrolledWindow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the minimum content width of scrolled_window.
+      Returns: the minimum content width
+  */
+  int getMinContentWidth() nothrow
+  {
+    int _retval;
+    _retval = gtk_scrolled_window_get_min_content_width(cast(GtkScrolledWindow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns whether overlay scrolling is enabled for this scrolled window.
+      Returns: true if overlay scrolling is enabled
+  */
+  bool getOverlayScrolling() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_scrolled_window_get_overlay_scrolling(cast(GtkScrolledWindow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the placement of the contents with respect to the scrollbars.
+      Returns: the current placement value.
+  */
+  gid.gtk4.types.CornerType getPlacement() nothrow
+  {
+    GtkCornerType _cretval;
+    _cretval = gtk_scrolled_window_get_placement(cast(GtkScrolledWindow*)this._cPtr);
+    gid.gtk4.types.CornerType _retval = cast(gid.gtk4.types.CornerType)_cretval;
+    return _retval;
+  }
+
+  /**
+      Retrieves the current policy values for the horizontal and vertical
+      scrollbars.
+      
+      See [gid.gtk4.scrolled_window.ScrolledWindow.setPolicy].
+  
+      Params:
+        hscrollbarPolicy = location to store the policy
+            for the horizontal scrollbar
+        vscrollbarPolicy = location to store the policy
+            for the vertical scrollbar
+  */
+  void getPolicy(out gid.gtk4.types.PolicyType hscrollbarPolicy, out gid.gtk4.types.PolicyType vscrollbarPolicy) nothrow
+  {
+    gtk_scrolled_window_get_policy(cast(GtkScrolledWindow*)this._cPtr, &hscrollbarPolicy, &vscrollbarPolicy);
+  }
+
+  /**
+      Reports whether the natural height of the child will be calculated
+      and propagated through the scrolled window’s requested natural height.
+      Returns: whether natural height propagation is enabled.
+  */
+  bool getPropagateNaturalHeight() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_scrolled_window_get_propagate_natural_height(cast(GtkScrolledWindow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Reports whether the natural width of the child will be calculated
+      and propagated through the scrolled window’s requested natural width.
+      Returns: whether natural width propagation is enabled.
+  */
+  bool getPropagateNaturalWidth() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_scrolled_window_get_propagate_natural_width(cast(GtkScrolledWindow*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the vertical scrollbar’s adjustment.
+      
+      This is the adjustment used to connect the vertical
+      scrollbar to the child widget’s vertical scroll functionality.
+      Returns: the vertical [gid.gtk4.adjustment.Adjustment]
+  */
+  gid.gtk4.adjustment.Adjustment getVadjustment() nothrow
+  {
+    GtkAdjustment* _cretval;
+    _cretval = gtk_scrolled_window_get_vadjustment(cast(GtkScrolledWindow*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the vertical scrollbar of scrolled_window.
+      Returns: the vertical scrollbar of the scrolled window.
+  */
+  gid.gtk4.widget.Widget getVscrollbar() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_scrolled_window_get_vscrollbar(cast(GtkScrolledWindow*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Sets the child widget of scrolled_window.
+      
+      If child does not implement the [gid.gtk4.scrollable.Scrollable] interface,
+      the scrolled window will add child to a [gid.gtk4.viewport.Viewport] instance
+      and then add the viewport as its child widget.
+  
+      Params:
+        child = the child widget
+  */
+  void setChild(gid.gtk4.widget.Widget child = null) nothrow
+  {
+    gtk_scrolled_window_set_child(cast(GtkScrolledWindow*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the [gid.gtk4.adjustment.Adjustment] for the horizontal scrollbar.
+  
+      Params:
+        hadjustment = the [gid.gtk4.adjustment.Adjustment] to use, or null to create a new one
+  */
+  void setHadjustment(gid.gtk4.adjustment.Adjustment hadjustment = null) nothrow
+  {
+    gtk_scrolled_window_set_hadjustment(cast(GtkScrolledWindow*)this._cPtr, hadjustment ? cast(GtkAdjustment*)hadjustment._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Changes the frame drawn around the contents of scrolled_window.
+  
+      Params:
+        hasFrame = whether to draw a frame around scrolled window contents
+  */
+  void setHasFrame(bool hasFrame) nothrow
+  {
+    gtk_scrolled_window_set_has_frame(cast(GtkScrolledWindow*)this._cPtr, hasFrame);
+  }
+
+  /**
+      Turns kinetic scrolling on or off.
+      
+      Kinetic scrolling only applies to devices with source
+      [gid.gdk4.types.InputSource.Touchscreen].
+  
+      Params:
+        kineticScrolling = true to enable kinetic scrolling
+  */
+  void setKineticScrolling(bool kineticScrolling) nothrow
+  {
+    gtk_scrolled_window_set_kinetic_scrolling(cast(GtkScrolledWindow*)this._cPtr, kineticScrolling);
+  }
+
+  /**
+      Sets the maximum height that scrolled_window should keep visible.
+      
+      The scrolled_window will grow up to this height before it starts
+      scrolling the content.
+      
+      It is a programming error to set the maximum content height to a value
+      smaller than [gid.gtk4.scrolled_window.ScrolledWindow.minContentHeight].
+  
+      Params:
+        height = the maximum content height
+  */
+  void setMaxContentHeight(int height) nothrow
+  {
+    gtk_scrolled_window_set_max_content_height(cast(GtkScrolledWindow*)this._cPtr, height);
+  }
+
+  /**
+      Sets the maximum width that scrolled_window should keep visible.
+      
+      The scrolled_window will grow up to this width before it starts
+      scrolling the content.
+      
+      It is a programming error to set the maximum content width to a
+      value smaller than [gid.gtk4.scrolled_window.ScrolledWindow.minContentWidth].
+  
+      Params:
+        width = the maximum content width
+  */
+  void setMaxContentWidth(int width) nothrow
+  {
+    gtk_scrolled_window_set_max_content_width(cast(GtkScrolledWindow*)this._cPtr, width);
+  }
+
+  /**
+      Sets the minimum height that scrolled_window should keep visible.
+      
+      Note that this can and (usually will) be smaller than the minimum
+      size of the content.
+      
+      It is a programming error to set the minimum content height to a
+      value greater than [gid.gtk4.scrolled_window.ScrolledWindow.maxContentHeight].
+  
+      Params:
+        height = the minimal content height
+  */
+  void setMinContentHeight(int height) nothrow
+  {
+    gtk_scrolled_window_set_min_content_height(cast(GtkScrolledWindow*)this._cPtr, height);
+  }
+
+  /**
+      Sets the minimum width that scrolled_window should keep visible.
+      
+      Note that this can and (usually will) be smaller than the minimum
+      size of the content.
+      
+      It is a programming error to set the minimum content width to a
+      value greater than [gid.gtk4.scrolled_window.ScrolledWindow.maxContentWidth].
+  
+      Params:
+        width = the minimal content width
+  */
+  void setMinContentWidth(int width) nothrow
+  {
+    gtk_scrolled_window_set_min_content_width(cast(GtkScrolledWindow*)this._cPtr, width);
+  }
+
+  /**
+      Enables or disables overlay scrolling for this scrolled window.
+  
+      Params:
+        overlayScrolling = whether to enable overlay scrolling
+  */
+  void setOverlayScrolling(bool overlayScrolling) nothrow
+  {
+    gtk_scrolled_window_set_overlay_scrolling(cast(GtkScrolledWindow*)this._cPtr, overlayScrolling);
+  }
+
+  /**
+      Sets the placement of the contents with respect to the scrollbars
+      for the scrolled window.
+      
+      The default is [gid.gtk4.types.CornerType.TopLeft], meaning the child is
+      in the top left, with the scrollbars underneath and to the right.
+      Other values in [gid.gtk4.types.CornerType] are [gid.gtk4.types.CornerType.TopRight],
+      [gid.gtk4.types.CornerType.BottomLeft], and [gid.gtk4.types.CornerType.BottomRight].
+      
+      See also [gid.gtk4.scrolled_window.ScrolledWindow.getPlacement] and
+      [gid.gtk4.scrolled_window.ScrolledWindow.unsetPlacement].
+  
+      Params:
+        windowPlacement = position of the child window
+  */
+  void setPlacement(gid.gtk4.types.CornerType windowPlacement) nothrow
+  {
+    gtk_scrolled_window_set_placement(cast(GtkScrolledWindow*)this._cPtr, windowPlacement);
+  }
+
+  /**
+      Sets the scrollbar policy for the horizontal and vertical scrollbars.
+      
+      The policy determines when the scrollbar should appear; it is a value
+      from the [gid.gtk4.types.PolicyType] enumeration. If [gid.gtk4.types.PolicyType.Always], the
+      scrollbar is always present; if [gid.gtk4.types.PolicyType.Never], the scrollbar is
+      never present; if [gid.gtk4.types.PolicyType.Automatic], the scrollbar is present only
+      if needed (that is, if the slider part of the bar would be smaller
+      than the trough — the display is larger than the page size).
+  
+      Params:
+        hscrollbarPolicy = policy for horizontal bar
+        vscrollbarPolicy = policy for vertical bar
+  */
+  void setPolicy(gid.gtk4.types.PolicyType hscrollbarPolicy, gid.gtk4.types.PolicyType vscrollbarPolicy) nothrow
+  {
+    gtk_scrolled_window_set_policy(cast(GtkScrolledWindow*)this._cPtr, hscrollbarPolicy, vscrollbarPolicy);
+  }
+
+  /**
+      Sets whether the natural height of the child should be calculated
+      and propagated through the scrolled window’s requested natural height.
+  
+      Params:
+        propagate = whether to propagate natural height
+  */
+  void setPropagateNaturalHeight(bool propagate) nothrow
+  {
+    gtk_scrolled_window_set_propagate_natural_height(cast(GtkScrolledWindow*)this._cPtr, propagate);
+  }
+
+  /**
+      Sets whether the natural width of the child should be calculated
+      and propagated through the scrolled window’s requested natural width.
+  
+      Params:
+        propagate = whether to propagate natural width
+  */
+  void setPropagateNaturalWidth(bool propagate) nothrow
+  {
+    gtk_scrolled_window_set_propagate_natural_width(cast(GtkScrolledWindow*)this._cPtr, propagate);
+  }
+
+  /**
+      Sets the [gid.gtk4.adjustment.Adjustment] for the vertical scrollbar.
+  
+      Params:
+        vadjustment = the [gid.gtk4.adjustment.Adjustment] to use, or null to create a new one
+  */
+  void setVadjustment(gid.gtk4.adjustment.Adjustment vadjustment = null) nothrow
+  {
+    gtk_scrolled_window_set_vadjustment(cast(GtkScrolledWindow*)this._cPtr, vadjustment ? cast(GtkAdjustment*)vadjustment._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Unsets the placement of the contents with respect to the scrollbars.
+      
+      If no window placement is set for a scrolled window,
+      it defaults to [gid.gtk4.types.CornerType.TopLeft].
+  */
+  void unsetPlacement() nothrow
+  {
+    gtk_scrolled_window_unset_placement(cast(GtkScrolledWindow*)this._cPtr);
+  }
+
+  /**
+      Connect to `EdgeOvershot` signal.
+  
+      Emitted whenever user initiated scrolling makes the scrolled
+        window firmly surpass the limits defined by the adjustment
+        in that orientation.
+        
+        A similar behavior without edge resistance is provided by the
+        [gid.gtk4.scrolled_window.ScrolledWindow.edgeReached] signal.
+        
+        Note: The pos argument is LTR/RTL aware, so callers should be
+        aware too if intending to provide behavior on horizontal edges.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk4.types.PositionType pos, gid.gtk4.scrolled_window.ScrolledWindow scrolledWindow)`
+  
+          `pos` edge side that was hit (optional)
+  
+          `scrolledWindow` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectEdgeOvershot(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.gtk4.types.PositionType)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gtk4.scrolled_window.ScrolledWindow)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.scrolled_window.ScrolledWindow.edgeOvershot");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("edge-overshot", closure, after);
+  }
+
+  /**
+      Connect to `EdgeReached` signal.
+  
+      Emitted whenever user-initiated scrolling makes the scrolled
+        window exactly reach the lower or upper limits defined by the
+        adjustment in that orientation.
+        
+        A similar behavior with edge resistance is provided by the
+        [gid.gtk4.scrolled_window.ScrolledWindow.edgeOvershot] signal.
+        
+        Note: The pos argument is LTR/RTL aware, so callers should be
+        aware too if intending to provide behavior on horizontal edges.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk4.types.PositionType pos, gid.gtk4.scrolled_window.ScrolledWindow scrolledWindow)`
+  
+          `pos` edge side that was reached (optional)
+  
+          `scrolledWindow` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectEdgeReached(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.gtk4.types.PositionType)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gtk4.scrolled_window.ScrolledWindow)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.scrolled_window.ScrolledWindow.edgeReached");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("edge-reached", closure, after);
+  }
+
+  /**
+      Connect to `MoveFocusOut` signal.
+  
+      Emitted when focus is moved away from the scrolled window by a
+        keybinding.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal are
+        <kbd>Ctrl</kbd>+<kbd>Tab</kbd> to move forward and
+        <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Tab</kbd>` to move backward.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk4.types.DirectionType directionType, gid.gtk4.scrolled_window.ScrolledWindow scrolledWindow)`
+  
+          `directionType` either [gid.gtk4.types.DirectionType.TabForward] or
+              [gid.gtk4.types.DirectionType.TabBackward] (optional)
+  
+          `scrolledWindow` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectMoveFocusOut(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.gtk4.types.DirectionType)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gtk4.scrolled_window.ScrolledWindow)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.scrolled_window.ScrolledWindow.moveFocusOut");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("move-focus-out", closure, after);
+  }
+
+  /**
+      Connect to `ScrollChild` signal.
+  
+      Emitted when a keybinding that scrolls is pressed.
+        
+        This is a [keybinding signal](class.SignalAction.html).
+        
+        The horizontal or vertical adjustment is updated which triggers a
+        signal that the scrolled window’s child may listen to and scroll itself.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `bool callback(gid.gtk4.types.ScrollType scroll, bool horizontal, gid.gtk4.scrolled_window.ScrolledWindow scrolledWindow)`
+  
+          `scroll` a [gid.gtk4.types.ScrollType] describing how much to scroll (optional)
+  
+          `horizontal` whether the keybinding scrolls the child
+              horizontally or not (optional)
+  
+          `scrolledWindow` the instance the signal is connected to (optional)
+  
+          `Returns` whether the scroll happened
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectScrollChild(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.gtk4.types.ScrollType)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] == bool)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gid.gtk4.scrolled_window.ScrolledWindow)))
+  && Parameters!T.length < 4)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 3, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[0]);
+
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.scrolled_window.ScrolledWindow.scrollChild");
+      }
+
+      setVal!(bool)(_returnValue, _retval);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("scroll-child", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.scrolled_window.ScrolledWindow]
+class ScrolledWindowGidBuilderImpl(T) : gid.gtk4.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+          
+          When setting this property, if the child widget does not implement
+          [gid.gtk4.scrollable.Scrollable], the scrolled window will add the child to
+          a [gid.gtk4.viewport.Viewport] and then set the viewport as the child.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gid.gtk4.widget.Widget propval) nothrow
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `hadjustment` property.
+      Params:
+        propval = The [gid.gtk4.adjustment.Adjustment] for the horizontal position.
+      Returns: Builder instance for fluent chaining
+  */
+  T hadjustment(gid.gtk4.adjustment.Adjustment propval) nothrow
+  {
+    return setProperty("hadjustment", propval);
+  }
+
+  /**
+      Set `hasFrame` property.
+      Params:
+        propval = Whether to draw a frame around the contents.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasFrame(bool propval) nothrow
+  {
+    return setProperty("has-frame", propval);
+  }
+
+  /**
+      Set `hscrollbarPolicy` property.
+      Params:
+        propval = When the horizontal scrollbar is displayed.
+          
+          Use [gid.gtk4.scrolled_window.ScrolledWindow.setPolicy] to set
+          this property.
+      Returns: Builder instance for fluent chaining
+  */
+  T hscrollbarPolicy(gid.gtk4.types.PolicyType propval) nothrow
+  {
+    return setProperty("hscrollbar-policy", propval);
+  }
+
+  /**
+      Set `kineticScrolling` property.
+      Params:
+        propval = Whether kinetic scrolling is enabled or not.
+          
+          Kinetic scrolling only applies to devices with source [gid.gdk4.types.InputSource.Touchscreen].
+      Returns: Builder instance for fluent chaining
+  */
+  T kineticScrolling(bool propval) nothrow
+  {
+    return setProperty("kinetic-scrolling", propval);
+  }
+
+  /**
+      Set `maxContentHeight` property.
+      Params:
+        propval = The maximum content height of @scrolled_window.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxContentHeight(int propval) nothrow
+  {
+    return setProperty("max-content-height", propval);
+  }
+
+  /**
+      Set `maxContentWidth` property.
+      Params:
+        propval = The maximum content width of @scrolled_window.
+      Returns: Builder instance for fluent chaining
+  */
+  T maxContentWidth(int propval) nothrow
+  {
+    return setProperty("max-content-width", propval);
+  }
+
+  /**
+      Set `minContentHeight` property.
+      Params:
+        propval = The minimum content height of @scrolled_window.
+      Returns: Builder instance for fluent chaining
+  */
+  T minContentHeight(int propval) nothrow
+  {
+    return setProperty("min-content-height", propval);
+  }
+
+  /**
+      Set `minContentWidth` property.
+      Params:
+        propval = The minimum content width of @scrolled_window.
+      Returns: Builder instance for fluent chaining
+  */
+  T minContentWidth(int propval) nothrow
+  {
+    return setProperty("min-content-width", propval);
+  }
+
+  /**
+      Set `overlayScrolling` property.
+      Params:
+        propval = Whether overlay scrolling is enabled or not.
+          
+          If it is, the scrollbars are only added as traditional widgets
+          when a mouse is present. Otherwise, they are overlaid on top of
+          the content, as narrow indicators.
+          
+          Note that overlay scrolling can also be globally disabled, with
+          the [gid.gtk4.settings.Settings.gtkOverlayScrolling] setting.
+      Returns: Builder instance for fluent chaining
+  */
+  T overlayScrolling(bool propval) nothrow
+  {
+    return setProperty("overlay-scrolling", propval);
+  }
+
+  /**
+      Set `propagateNaturalHeight` property.
+      Params:
+        propval = Whether the natural height of the child should be calculated and propagated
+          through the scrolled window’s requested natural height.
+          
+          This is useful in cases where an attempt should be made to allocate exactly
+          enough space for the natural size of the child.
+      Returns: Builder instance for fluent chaining
+  */
+  T propagateNaturalHeight(bool propval) nothrow
+  {
+    return setProperty("propagate-natural-height", propval);
+  }
+
+  /**
+      Set `propagateNaturalWidth` property.
+      Params:
+        propval = Whether the natural width of the child should be calculated and propagated
+          through the scrolled window’s requested natural width.
+          
+          This is useful in cases where an attempt should be made to allocate exactly
+          enough space for the natural size of the child.
+      Returns: Builder instance for fluent chaining
+  */
+  T propagateNaturalWidth(bool propval) nothrow
+  {
+    return setProperty("propagate-natural-width", propval);
+  }
+
+  /**
+      Set `vadjustment` property.
+      Params:
+        propval = The [gid.gtk4.adjustment.Adjustment] for the vertical position.
+      Returns: Builder instance for fluent chaining
+  */
+  T vadjustment(gid.gtk4.adjustment.Adjustment propval) nothrow
+  {
+    return setProperty("vadjustment", propval);
+  }
+
+  /**
+      Set `vscrollbarPolicy` property.
+      Params:
+        propval = When the vertical scrollbar is displayed.
+          
+          Use [gid.gtk4.scrolled_window.ScrolledWindow.setPolicy] to set
+          this property.
+      Returns: Builder instance for fluent chaining
+  */
+  T vscrollbarPolicy(gid.gtk4.types.PolicyType propval) nothrow
+  {
+    return setProperty("vscrollbar-policy", propval);
+  }
+
+  /**
+      Set `windowPlacement` property.
+      Params:
+        propval = Where the contents are located with respect to the scrollbars.
+      Returns: Builder instance for fluent chaining
+  */
+  T windowPlacement(gid.gtk4.types.CornerType propval) nothrow
+  {
+    return setProperty("window-placement", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk4.scrolled_window.ScrolledWindow]
+final class ScrolledWindowGidBuilder : ScrolledWindowGidBuilderImpl!ScrolledWindowGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  ScrolledWindow build() nothrow
+  {
+    return new ScrolledWindow(cast(void*)createGObject(ScrolledWindow._getGType), Yes.Take);
+  }
+}

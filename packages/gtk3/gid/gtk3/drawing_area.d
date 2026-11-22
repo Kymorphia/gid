@@ -1,0 +1,173 @@
+/// Module for [DrawingArea] class
+module gid.gtk3.drawing_area;
+
+public import gid.core.basictypes;
+import gid.atk1.implementor_iface;
+import gid.atk1.implementor_iface_mixin;
+import gid.core.utils;
+import gid.gobject2.gid_builder;
+import gid.gtk3.buildable;
+import gid.gtk3.buildable_mixin;
+import gid.gtk3.c.functions;
+import gid.gtk3.c.types;
+import gid.gtk3.types;
+import gid.gtk3.widget;
+
+/**
+    The #GtkDrawingArea widget is used for creating custom user interface
+    elements. It’s essentially a blank widget; you can draw on it. After
+    creating a drawing area, the application may want to connect to:
+    
+    - Mouse and button press signals to respond to input from
+      the user. (Use [gid.gtk3.widget.Widget.addEvents] to enable events
+      you wish to receive.)
+    
+    - The #GtkWidget::realize signal to take any necessary actions
+      when the widget is instantiated on a particular display.
+      (Create GDK resources in response to this signal.)
+    
+    - The #GtkWidget::size-allocate signal to take any necessary
+      actions when the widget changes size.
+    
+    - The #GtkWidget::draw signal to handle redrawing the
+      contents of the widget.
+    
+    The following code portion demonstrates using a drawing
+    area to display a circle in the normal widget foreground
+    color.
+    
+    Note that GDK automatically clears the exposed area before sending
+    the expose event, and that drawing is implicitly clipped to the exposed
+    area. If you want to have a theme-provided background, you need
+    to call [gid.gtk4.global.renderBackground] in your ::draw method.
+    
+    ## Simple GtkDrawingArea usage
+    
+    ```c
+    gboolean
+    draw_callback (GtkWidget *widget, cairo_t *cr, gpointer data)
+    {
+      guint width, height;
+      GdkRGBA color;
+      GtkStyleContext *context;
+    
+      context = gtk_widget_get_style_context (widget);
+    
+      width = gtk_widget_get_allocated_width (widget);
+      height = gtk_widget_get_allocated_height (widget);
+    
+      gtk_render_background (context, cr, 0, 0, width, height);
+    
+      cairo_arc (cr,
+                 width / 2.0, height / 2.0,
+                 MIN (width, height) / 2.0,
+                 0, 2 * G_PI);
+    
+      gtk_style_context_get_color (context,
+                                   gtk_style_context_get_state (context),
+                                   &color);
+      gdk_cairo_set_source_rgba (cr, &color);
+    
+      cairo_fill (cr);
+    
+     return FALSE;
+    }
+    [...]
+      GtkWidget *drawing_area = gtk_drawing_area_new ();
+      gtk_widget_set_size_request (drawing_area, 100, 100);
+      g_signal_connect (G_OBJECT (drawing_area), "draw",
+                        G_CALLBACK (draw_callback), NULL);
+    ```
+    
+    Draw signals are normally delivered when a drawing area first comes
+    onscreen, or when it’s covered by another window and then uncovered.
+    You can also force an expose event by adding to the “damage region”
+    of the drawing area’s window; [gid.gtk3.widget.Widget.queueDrawArea] and
+    [gid.gdk3.window.Window.invalidateRect] are equally good ways to do this.
+    You’ll then get a draw signal for the invalid region.
+    
+    The available routines for drawing are documented on the
+    [GDK Drawing Primitives][gdk3-Cairo-Interaction] page
+    and the cairo documentation.
+    
+    To receive mouse events on a drawing area, you will need to enable
+    them with [gid.gtk3.widget.Widget.addEvents]. To receive keyboard events, you
+    will need to set the “can-focus” property on the drawing area, and you
+    should probably draw some user-visible indication that the drawing
+    area is focused. Use [gid.gtk4.widget.Widget.hasFocus] in your expose event
+    handler to decide whether to draw the focus indicator. See
+    [gid.gtk4.global.renderFocus] for one way to draw focus.
+*/
+class DrawingArea : gid.gtk3.widget.Widget
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_drawing_area_get_type != &gidSymbolNotFound ? gtk_drawing_area_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkDrawingArea";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override DrawingArea self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk3.drawing_area.DrawingArea]
+      Returns: New builder object
+  */
+  static DrawingAreaGidBuilder builder() nothrow
+  {
+    return new DrawingAreaGidBuilder;
+  }
+
+  /**
+      Creates a new drawing area.
+      Returns: a new #GtkDrawingArea
+  */
+  this() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_drawing_area_new();
+    this(_cretval, No.Take);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk3.drawing_area.DrawingArea]
+class DrawingAreaGidBuilderImpl(T) : gid.gtk3.widget.WidgetGidBuilderImpl!T
+{
+
+}
+
+/// Fluent builder for [gid.gtk3.drawing_area.DrawingArea]
+final class DrawingAreaGidBuilder : DrawingAreaGidBuilderImpl!DrawingAreaGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  DrawingArea build() nothrow
+  {
+    return new DrawingArea(cast(void*)createGObject(DrawingArea._getGType), Yes.Take);
+  }
+}

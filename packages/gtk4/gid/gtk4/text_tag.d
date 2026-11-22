@@ -1,0 +1,2933 @@
+/// Module for [TextTag] class
+module gid.gtk4.text_tag;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gdk4.rgba;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.types;
+import gid.pango1.font_description;
+import gid.pango1.tab_array;
+import gid.pango1.types;
+
+/**
+    Can be applied to text contained in a [gid.gtk4.text_buffer.TextBuffer].
+    
+    You may wish to begin by reading the
+    [text widget conceptual overview](section-text-widget.html),
+    which gives an overview of all the objects and data types
+    related to the text widget and how they work together.
+    
+    Tags should be in the [gid.gtk4.text_tag_table.TextTagTable] for a given
+    [gid.gtk4.text_buffer.TextBuffer] before using them with that buffer.
+    
+    [gid.gtk4.text_buffer.TextBuffer.createTag] is the best way to create tags.
+    See “gtk4-demo” for numerous examples.
+    
+    For each property of [gid.gtk4.text_tag.TextTag], there is a “set” property, e.g.
+    “font-set” corresponds to “font”. These “set” properties reflect
+    whether a property has been set or not.
+    
+    They are maintained by GTK and you should not set them independently.
+*/
+class TextTag : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_text_tag_get_type != &gidSymbolNotFound ? gtk_text_tag_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkTextTag";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override TextTag self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.text_tag.TextTag]
+      Returns: New builder object
+  */
+  static TextTagGidBuilder builder() nothrow
+  {
+    return new TextTagGidBuilder;
+  }
+
+  /**
+      Get `accumulativeMargin` property.
+      Returns: Whether the margins accumulate or override each other.
+        
+        When set to true the margins of this tag are added to the margins
+        of any other non-accumulative margins present. When set to false
+        the margins override one another (the default).
+  */
+  @property bool accumulativeMargin() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("accumulative-margin");
+  }
+
+  /**
+      Set `accumulativeMargin` property.
+      Params:
+        propval = Whether the margins accumulate or override each other.
+          
+          When set to true the margins of this tag are added to the margins
+          of any other non-accumulative margins present. When set to false
+          the margins override one another (the default).
+  */
+  @property void accumulativeMargin(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("accumulative-margin", propval);
+  }
+
+  /**
+      Get `allowBreaks` property.
+      Returns: Whether breaks are allowed.
+  */
+  @property bool allowBreaks() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("allow-breaks");
+  }
+
+  /**
+      Set `allowBreaks` property.
+      Params:
+        propval = Whether breaks are allowed.
+  */
+  @property void allowBreaks(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("allow-breaks", propval);
+  }
+
+  /**
+      Get `allowBreaksSet` property.
+      Returns: Whether the `allow-breaks` property is set.
+  */
+  @property bool allowBreaksSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("allow-breaks-set");
+  }
+
+  /**
+      Set `allowBreaksSet` property.
+      Params:
+        propval = Whether the `allow-breaks` property is set.
+  */
+  @property void allowBreaksSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("allow-breaks-set", propval);
+  }
+
+  /**
+      Set `background` property.
+      Params:
+        propval = Background color as a string.
+  */
+  @property void background(string propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(string)("background", propval);
+  }
+
+  /**
+      Get `backgroundFullHeight` property.
+      Returns: Whether the background color fills the entire line height
+        or only the height of the tagged characters.
+  */
+  @property bool backgroundFullHeight() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("background-full-height");
+  }
+
+  /**
+      Set `backgroundFullHeight` property.
+      Params:
+        propval = Whether the background color fills the entire line height
+          or only the height of the tagged characters.
+  */
+  @property void backgroundFullHeight(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("background-full-height", propval);
+  }
+
+  /**
+      Get `backgroundFullHeightSet` property.
+      Returns: Whether the `background-full-height` property is set.
+  */
+  @property bool backgroundFullHeightSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("background-full-height-set");
+  }
+
+  /**
+      Set `backgroundFullHeightSet` property.
+      Params:
+        propval = Whether the `background-full-height` property is set.
+  */
+  @property void backgroundFullHeightSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("background-full-height-set", propval);
+  }
+
+  /**
+      Get `backgroundRgba` property.
+      Returns: Background color as a [gid.gdk4.rgba.RGBA].
+  */
+  @property gid.gdk4.rgba.RGBA backgroundRgba() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gdk4.rgba.RGBA)("background-rgba");
+  }
+
+  /**
+      Set `backgroundRgba` property.
+      Params:
+        propval = Background color as a [gid.gdk4.rgba.RGBA].
+  */
+  @property void backgroundRgba(gid.gdk4.rgba.RGBA propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.gdk4.rgba.RGBA)("background-rgba", propval);
+  }
+
+  /**
+      Get `backgroundSet` property.
+      Returns: Whether the `background` property is set.
+  */
+  @property bool backgroundSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("background-set");
+  }
+
+  /**
+      Set `backgroundSet` property.
+      Params:
+        propval = Whether the `background` property is set.
+  */
+  @property void backgroundSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("background-set", propval);
+  }
+
+  /**
+      Get `direction` property.
+      Returns: Text direction, e.g. right-to-left or left-to-right.
+  */
+  @property gid.gtk4.types.TextDirection direction() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gtk4.types.TextDirection)("direction");
+  }
+
+  /**
+      Set `direction` property.
+      Params:
+        propval = Text direction, e.g. right-to-left or left-to-right.
+  */
+  @property void direction(gid.gtk4.types.TextDirection propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.gtk4.types.TextDirection)("direction", propval);
+  }
+
+  /**
+      Get `editable` property.
+      Returns: Whether the text can be modified by the user.
+  */
+  @property bool editable() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("editable");
+  }
+
+  /**
+      Set `editable` property.
+      Params:
+        propval = Whether the text can be modified by the user.
+  */
+  @property void editable(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("editable", propval);
+  }
+
+  /**
+      Get `editableSet` property.
+      Returns: Whether the `editable` property is set.
+  */
+  @property bool editableSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("editable-set");
+  }
+
+  /**
+      Set `editableSet` property.
+      Params:
+        propval = Whether the `editable` property is set.
+  */
+  @property void editableSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("editable-set", propval);
+  }
+
+  /**
+      Get `fallback` property.
+      Returns: Whether font fallback is enabled.
+        
+        When set to true, other fonts will be substituted
+        where the current font is missing glyphs.
+  */
+  @property bool fallback() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("fallback");
+  }
+
+  /**
+      Set `fallback` property.
+      Params:
+        propval = Whether font fallback is enabled.
+          
+          When set to true, other fonts will be substituted
+          where the current font is missing glyphs.
+  */
+  @property void fallback(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("fallback", propval);
+  }
+
+  /**
+      Get `fallbackSet` property.
+      Returns: Whether the `fallback` property is set.
+  */
+  @property bool fallbackSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("fallback-set");
+  }
+
+  /**
+      Set `fallbackSet` property.
+      Params:
+        propval = Whether the `fallback` property is set.
+  */
+  @property void fallbackSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("fallback-set", propval);
+  }
+
+  /**
+      Get `family` property.
+      Returns: Name of the font family, e.g. Sans, Helvetica, Times, Monospace.
+  */
+  @property string family() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(string)("family");
+  }
+
+  /**
+      Set `family` property.
+      Params:
+        propval = Name of the font family, e.g. Sans, Helvetica, Times, Monospace.
+  */
+  @property void family(string propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(string)("family", propval);
+  }
+
+  /**
+      Get `familySet` property.
+      Returns: Whether the `family` property is set.
+  */
+  @property bool familySet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("family-set");
+  }
+
+  /**
+      Set `familySet` property.
+      Params:
+        propval = Whether the `family` property is set.
+  */
+  @property void familySet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("family-set", propval);
+  }
+
+  /**
+      Get `font` property.
+      Returns: Font description as string, e.g. \"Sans Italic 12\".
+        
+        Note that the initial value of this property depends on
+        the internals of [gid.pango1.font_description.FontDescription].
+  */
+  @property string font() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(string)("font");
+  }
+
+  /**
+      Set `font` property.
+      Params:
+        propval = Font description as string, e.g. \"Sans Italic 12\".
+          
+          Note that the initial value of this property depends on
+          the internals of [gid.pango1.font_description.FontDescription].
+  */
+  @property void font(string propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(string)("font", propval);
+  }
+
+  /**
+      Get `fontDesc` property.
+      Returns: Font description as a [gid.pango1.font_description.FontDescription].
+  */
+  @property gid.pango1.font_description.FontDescription fontDesc() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.pango1.font_description.FontDescription)("font-desc");
+  }
+
+  /**
+      Set `fontDesc` property.
+      Params:
+        propval = Font description as a [gid.pango1.font_description.FontDescription].
+  */
+  @property void fontDesc(gid.pango1.font_description.FontDescription propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.pango1.font_description.FontDescription)("font-desc", propval);
+  }
+
+  /**
+      Get `fontFeatures` property.
+      Returns: OpenType font features, as a string.
+  */
+  @property string fontFeatures() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(string)("font-features");
+  }
+
+  /**
+      Set `fontFeatures` property.
+      Params:
+        propval = OpenType font features, as a string.
+  */
+  @property void fontFeatures(string propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(string)("font-features", propval);
+  }
+
+  /**
+      Get `fontFeaturesSet` property.
+      Returns: Whether the `font-features` property is set.
+  */
+  @property bool fontFeaturesSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("font-features-set");
+  }
+
+  /**
+      Set `fontFeaturesSet` property.
+      Params:
+        propval = Whether the `font-features` property is set.
+  */
+  @property void fontFeaturesSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("font-features-set", propval);
+  }
+
+  /**
+      Set `foreground` property.
+      Params:
+        propval = Foreground color as a string.
+  */
+  @property void foreground(string propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(string)("foreground", propval);
+  }
+
+  /**
+      Get `foregroundRgba` property.
+      Returns: Foreground color as a [gid.gdk4.rgba.RGBA].
+  */
+  @property gid.gdk4.rgba.RGBA foregroundRgba() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gdk4.rgba.RGBA)("foreground-rgba");
+  }
+
+  /**
+      Set `foregroundRgba` property.
+      Params:
+        propval = Foreground color as a [gid.gdk4.rgba.RGBA].
+  */
+  @property void foregroundRgba(gid.gdk4.rgba.RGBA propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.gdk4.rgba.RGBA)("foreground-rgba", propval);
+  }
+
+  /**
+      Get `foregroundSet` property.
+      Returns: Whether the `foreground` property is set.
+  */
+  @property bool foregroundSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("foreground-set");
+  }
+
+  /**
+      Set `foregroundSet` property.
+      Params:
+        propval = Whether the `foreground` property is set.
+  */
+  @property void foregroundSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("foreground-set", propval);
+  }
+
+  /**
+      Get `indent` property.
+      Returns: Amount to indent the paragraph, in pixels.
+        
+        A negative value of indent will produce a hanging indentation.
+        That is, the first line will have the full width, and subsequent
+        lines will be indented by the absolute value of indent.
+  */
+  @property int indent() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(int)("indent");
+  }
+
+  /**
+      Set `indent` property.
+      Params:
+        propval = Amount to indent the paragraph, in pixels.
+          
+          A negative value of indent will produce a hanging indentation.
+          That is, the first line will have the full width, and subsequent
+          lines will be indented by the absolute value of indent.
+  */
+  @property void indent(int propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(int)("indent", propval);
+  }
+
+  /**
+      Get `indentSet` property.
+      Returns: Whether the `indent` property is set.
+  */
+  @property bool indentSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("indent-set");
+  }
+
+  /**
+      Set `indentSet` property.
+      Params:
+        propval = Whether the `indent` property is set.
+  */
+  @property void indentSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("indent-set", propval);
+  }
+
+  /**
+      Get `insertHyphens` property.
+      Returns: Whether to insert hyphens at breaks.
+  */
+  @property bool insertHyphens() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("insert-hyphens");
+  }
+
+  /**
+      Set `insertHyphens` property.
+      Params:
+        propval = Whether to insert hyphens at breaks.
+  */
+  @property void insertHyphens(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("insert-hyphens", propval);
+  }
+
+  /**
+      Get `insertHyphensSet` property.
+      Returns: Whether the `insert-hyphens` property is set.
+  */
+  @property bool insertHyphensSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("insert-hyphens-set");
+  }
+
+  /**
+      Set `insertHyphensSet` property.
+      Params:
+        propval = Whether the `insert-hyphens` property is set.
+  */
+  @property void insertHyphensSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("insert-hyphens-set", propval);
+  }
+
+  /**
+      Get `invisible` property.
+      Returns: Whether this text is hidden.
+        
+        Note that there may still be problems with the support for invisible
+        text, in particular when navigating programmatically inside a buffer
+        containing invisible segments.
+  */
+  @property bool invisible() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("invisible");
+  }
+
+  /**
+      Set `invisible` property.
+      Params:
+        propval = Whether this text is hidden.
+          
+          Note that there may still be problems with the support for invisible
+          text, in particular when navigating programmatically inside a buffer
+          containing invisible segments.
+  */
+  @property void invisible(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("invisible", propval);
+  }
+
+  /**
+      Get `invisibleSet` property.
+      Returns: Whether the `invisible` property is set.
+  */
+  @property bool invisibleSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("invisible-set");
+  }
+
+  /**
+      Set `invisibleSet` property.
+      Params:
+        propval = Whether the `invisible` property is set.
+  */
+  @property void invisibleSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("invisible-set", propval);
+  }
+
+  /**
+      Get `justification` property.
+      Returns: Left, right, or center justification.
+  */
+  @property gid.gtk4.types.Justification justification() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gtk4.types.Justification)("justification");
+  }
+
+  /**
+      Set `justification` property.
+      Params:
+        propval = Left, right, or center justification.
+  */
+  @property void justification(gid.gtk4.types.Justification propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.gtk4.types.Justification)("justification", propval);
+  }
+
+  /**
+      Get `justificationSet` property.
+      Returns: Whether the `justification` property is set.
+  */
+  @property bool justificationSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("justification-set");
+  }
+
+  /**
+      Set `justificationSet` property.
+      Params:
+        propval = Whether the `justification` property is set.
+  */
+  @property void justificationSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("justification-set", propval);
+  }
+
+  /**
+      Get `language` property.
+      Returns: The language this text is in, as an ISO code.
+        
+        Pango can use this as a hint when rendering the text.
+        If not set, an appropriate default will be used.
+        
+        Note that the initial value of this property depends
+        on the current locale, see also `func@Gtk.get_default_language`.
+  */
+  @property string language() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(string)("language");
+  }
+
+  /**
+      Set `language` property.
+      Params:
+        propval = The language this text is in, as an ISO code.
+          
+          Pango can use this as a hint when rendering the text.
+          If not set, an appropriate default will be used.
+          
+          Note that the initial value of this property depends
+          on the current locale, see also `func@Gtk.get_default_language`.
+  */
+  @property void language(string propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(string)("language", propval);
+  }
+
+  /**
+      Get `languageSet` property.
+      Returns: Whether the `language` property is set.
+  */
+  @property bool languageSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("language-set");
+  }
+
+  /**
+      Set `languageSet` property.
+      Params:
+        propval = Whether the `language` property is set.
+  */
+  @property void languageSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("language-set", propval);
+  }
+
+  /**
+      Get `leftMargin` property.
+      Returns: Width of the left margin in pixels.
+  */
+  @property int leftMargin() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(int)("left-margin");
+  }
+
+  /**
+      Set `leftMargin` property.
+      Params:
+        propval = Width of the left margin in pixels.
+  */
+  @property void leftMargin(int propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(int)("left-margin", propval);
+  }
+
+  /**
+      Get `leftMarginSet` property.
+      Returns: Whether the `left-margin` property is set.
+  */
+  @property bool leftMarginSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("left-margin-set");
+  }
+
+  /**
+      Set `leftMarginSet` property.
+      Params:
+        propval = Whether the `left-margin` property is set.
+  */
+  @property void leftMarginSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("left-margin-set", propval);
+  }
+
+  /**
+      Get `letterSpacing` property.
+      Returns: Extra spacing between graphemes, in Pango units.
+  */
+  @property int letterSpacing() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(int)("letter-spacing");
+  }
+
+  /**
+      Set `letterSpacing` property.
+      Params:
+        propval = Extra spacing between graphemes, in Pango units.
+  */
+  @property void letterSpacing(int propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(int)("letter-spacing", propval);
+  }
+
+  /**
+      Get `letterSpacingSet` property.
+      Returns: Whether the `letter-spacing` property is set.
+  */
+  @property bool letterSpacingSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("letter-spacing-set");
+  }
+
+  /**
+      Set `letterSpacingSet` property.
+      Params:
+        propval = Whether the `letter-spacing` property is set.
+  */
+  @property void letterSpacingSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("letter-spacing-set", propval);
+  }
+
+  /**
+      Get `lineHeight` property.
+      Returns: Factor to scale line height by.
+  */
+  @property float lineHeight() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(float)("line-height");
+  }
+
+  /**
+      Set `lineHeight` property.
+      Params:
+        propval = Factor to scale line height by.
+  */
+  @property void lineHeight(float propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(float)("line-height", propval);
+  }
+
+  /**
+      Get `lineHeightSet` property.
+      Returns: Whether the `line-height` property is set.
+  */
+  @property bool lineHeightSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("line-height-set");
+  }
+
+  /**
+      Set `lineHeightSet` property.
+      Params:
+        propval = Whether the `line-height` property is set.
+  */
+  @property void lineHeightSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("line-height-set", propval);
+  }
+
+  /**
+      Get `name` property.
+      Returns: The name used to refer to the tag.
+        
+        null for anonymous tags.
+  */
+  @property string name() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(string)("name");
+  }
+
+  /**
+      Get `overline` property.
+      Returns: Style of overline for this text.
+  */
+  @property gid.pango1.types.Overline overline() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.pango1.types.Overline)("overline");
+  }
+
+  /**
+      Set `overline` property.
+      Params:
+        propval = Style of overline for this text.
+  */
+  @property void overline(gid.pango1.types.Overline propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.pango1.types.Overline)("overline", propval);
+  }
+
+  /**
+      Get `overlineRgba` property.
+      Returns: This property modifies the color of overlines.
+        
+        If not set, overlines will use the foreground color.
+  */
+  @property gid.gdk4.rgba.RGBA overlineRgba() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gdk4.rgba.RGBA)("overline-rgba");
+  }
+
+  /**
+      Set `overlineRgba` property.
+      Params:
+        propval = This property modifies the color of overlines.
+          
+          If not set, overlines will use the foreground color.
+  */
+  @property void overlineRgba(gid.gdk4.rgba.RGBA propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.gdk4.rgba.RGBA)("overline-rgba", propval);
+  }
+
+  /**
+      Get `overlineRgbaSet` property.
+      Returns: Whether the `overline-rgba` property is set.
+  */
+  @property bool overlineRgbaSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("overline-rgba-set");
+  }
+
+  /**
+      Set `overlineRgbaSet` property.
+      Params:
+        propval = Whether the `overline-rgba` property is set.
+  */
+  @property void overlineRgbaSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("overline-rgba-set", propval);
+  }
+
+  /**
+      Get `overlineSet` property.
+      Returns: Whether the `overline` property is set.
+  */
+  @property bool overlineSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("overline-set");
+  }
+
+  /**
+      Set `overlineSet` property.
+      Params:
+        propval = Whether the `overline` property is set.
+  */
+  @property void overlineSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("overline-set", propval);
+  }
+
+  /**
+      Set `paragraphBackground` property.
+      Params:
+        propval = The paragraph background color as a string.
+  */
+  @property void paragraphBackground(string propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(string)("paragraph-background", propval);
+  }
+
+  /**
+      Get `paragraphBackgroundRgba` property.
+      Returns: The paragraph background color as a [gid.gdk4.rgba.RGBA].
+  */
+  @property gid.gdk4.rgba.RGBA paragraphBackgroundRgba() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gdk4.rgba.RGBA)("paragraph-background-rgba");
+  }
+
+  /**
+      Set `paragraphBackgroundRgba` property.
+      Params:
+        propval = The paragraph background color as a [gid.gdk4.rgba.RGBA].
+  */
+  @property void paragraphBackgroundRgba(gid.gdk4.rgba.RGBA propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.gdk4.rgba.RGBA)("paragraph-background-rgba", propval);
+  }
+
+  /**
+      Get `paragraphBackgroundSet` property.
+      Returns: Whether the `paragraph-background` property is set.
+  */
+  @property bool paragraphBackgroundSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("paragraph-background-set");
+  }
+
+  /**
+      Set `paragraphBackgroundSet` property.
+      Params:
+        propval = Whether the `paragraph-background` property is set.
+  */
+  @property void paragraphBackgroundSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("paragraph-background-set", propval);
+  }
+
+  /**
+      Get `pixelsAboveLines` property.
+      Returns: Pixels of blank space above paragraphs.
+  */
+  @property int pixelsAboveLines() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(int)("pixels-above-lines");
+  }
+
+  /**
+      Set `pixelsAboveLines` property.
+      Params:
+        propval = Pixels of blank space above paragraphs.
+  */
+  @property void pixelsAboveLines(int propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(int)("pixels-above-lines", propval);
+  }
+
+  /**
+      Get `pixelsAboveLinesSet` property.
+      Returns: Whether the `pixels-above-lines` property is set.
+  */
+  @property bool pixelsAboveLinesSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("pixels-above-lines-set");
+  }
+
+  /**
+      Set `pixelsAboveLinesSet` property.
+      Params:
+        propval = Whether the `pixels-above-lines` property is set.
+  */
+  @property void pixelsAboveLinesSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("pixels-above-lines-set", propval);
+  }
+
+  /**
+      Get `pixelsBelowLines` property.
+      Returns: Pixels of blank space below paragraphs.
+  */
+  @property int pixelsBelowLines() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(int)("pixels-below-lines");
+  }
+
+  /**
+      Set `pixelsBelowLines` property.
+      Params:
+        propval = Pixels of blank space below paragraphs.
+  */
+  @property void pixelsBelowLines(int propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(int)("pixels-below-lines", propval);
+  }
+
+  /**
+      Get `pixelsBelowLinesSet` property.
+      Returns: Whether the `pixels-below-lines` property is set.
+  */
+  @property bool pixelsBelowLinesSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("pixels-below-lines-set");
+  }
+
+  /**
+      Set `pixelsBelowLinesSet` property.
+      Params:
+        propval = Whether the `pixels-below-lines` property is set.
+  */
+  @property void pixelsBelowLinesSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("pixels-below-lines-set", propval);
+  }
+
+  /**
+      Get `pixelsInsideWrap` property.
+      Returns: Pixels of blank space between wrapped lines in a paragraph.
+  */
+  @property int pixelsInsideWrap() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(int)("pixels-inside-wrap");
+  }
+
+  /**
+      Set `pixelsInsideWrap` property.
+      Params:
+        propval = Pixels of blank space between wrapped lines in a paragraph.
+  */
+  @property void pixelsInsideWrap(int propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(int)("pixels-inside-wrap", propval);
+  }
+
+  /**
+      Get `pixelsInsideWrapSet` property.
+      Returns: Whether the `pixels-inside-wrap` property is set.
+  */
+  @property bool pixelsInsideWrapSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("pixels-inside-wrap-set");
+  }
+
+  /**
+      Set `pixelsInsideWrapSet` property.
+      Params:
+        propval = Whether the `pixels-inside-wrap` property is set.
+  */
+  @property void pixelsInsideWrapSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("pixels-inside-wrap-set", propval);
+  }
+
+  /**
+      Get `rightMargin` property.
+      Returns: Width of the right margin, in pixels.
+  */
+  @property int rightMargin() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(int)("right-margin");
+  }
+
+  /**
+      Set `rightMargin` property.
+      Params:
+        propval = Width of the right margin, in pixels.
+  */
+  @property void rightMargin(int propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(int)("right-margin", propval);
+  }
+
+  /**
+      Get `rightMarginSet` property.
+      Returns: Whether the `right-margin` property is set.
+  */
+  @property bool rightMarginSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("right-margin-set");
+  }
+
+  /**
+      Set `rightMarginSet` property.
+      Params:
+        propval = Whether the `right-margin` property is set.
+  */
+  @property void rightMarginSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("right-margin-set", propval);
+  }
+
+  /**
+      Get `rise` property.
+      Returns: Offset of text above the baseline, in Pango units.
+        
+        Negative values go below the baseline.
+  */
+  @property int rise() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(int)("rise");
+  }
+
+  /**
+      Set `rise` property.
+      Params:
+        propval = Offset of text above the baseline, in Pango units.
+          
+          Negative values go below the baseline.
+  */
+  @property void rise(int propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(int)("rise", propval);
+  }
+
+  /**
+      Get `riseSet` property.
+      Returns: Whether the `rise` property is set.
+  */
+  @property bool riseSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("rise-set");
+  }
+
+  /**
+      Set `riseSet` property.
+      Params:
+        propval = Whether the `rise` property is set.
+  */
+  @property void riseSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("rise-set", propval);
+  }
+
+  /**
+      Get `scale` property.
+      Returns: Font size as a scale factor relative to the default font size.
+        
+        This properly adapts to theme changes, etc. so is recommended.
+        Pango predefines some scales such as `PANGO_SCALE_X_LARGE`.
+  */
+  @property double scale() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(double)("scale");
+  }
+
+  /**
+      Set `scale` property.
+      Params:
+        propval = Font size as a scale factor relative to the default font size.
+          
+          This properly adapts to theme changes, etc. so is recommended.
+          Pango predefines some scales such as `PANGO_SCALE_X_LARGE`.
+  */
+  @property void scale(double propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(double)("scale", propval);
+  }
+
+  /**
+      Get `scaleSet` property.
+      Returns: Whether the `scale` property is set.
+  */
+  @property bool scaleSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("scale-set");
+  }
+
+  /**
+      Set `scaleSet` property.
+      Params:
+        propval = Whether the `scale` property is set.
+  */
+  @property void scaleSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("scale-set", propval);
+  }
+
+  /**
+      Get `sentence` property.
+      Returns: Whether this tag represents a single sentence.
+        
+        This affects cursor movement.
+  */
+  @property bool sentence() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("sentence");
+  }
+
+  /**
+      Set `sentence` property.
+      Params:
+        propval = Whether this tag represents a single sentence.
+          
+          This affects cursor movement.
+  */
+  @property void sentence(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("sentence", propval);
+  }
+
+  /**
+      Get `sentenceSet` property.
+      Returns: Whether the `sentence` property is set.
+  */
+  @property bool sentenceSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("sentence-set");
+  }
+
+  /**
+      Set `sentenceSet` property.
+      Params:
+        propval = Whether the `sentence` property is set.
+  */
+  @property void sentenceSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("sentence-set", propval);
+  }
+
+  /**
+      Get `showSpaces` property.
+      Returns: How to render invisible characters.
+  */
+  @property gid.pango1.types.ShowFlags showSpaces() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.pango1.types.ShowFlags)("show-spaces");
+  }
+
+  /**
+      Set `showSpaces` property.
+      Params:
+        propval = How to render invisible characters.
+  */
+  @property void showSpaces(gid.pango1.types.ShowFlags propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.pango1.types.ShowFlags)("show-spaces", propval);
+  }
+
+  /**
+      Get `showSpacesSet` property.
+      Returns: Whether the `show-spaces` property is set.
+  */
+  @property bool showSpacesSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("show-spaces-set");
+  }
+
+  /**
+      Set `showSpacesSet` property.
+      Params:
+        propval = Whether the `show-spaces` property is set.
+  */
+  @property void showSpacesSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("show-spaces-set", propval);
+  }
+
+  /**
+      Get `size` property.
+      Returns: Font size in Pango units.
+  */
+  @property int size() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(int)("size");
+  }
+
+  /**
+      Set `size` property.
+      Params:
+        propval = Font size in Pango units.
+  */
+  @property void size(int propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(int)("size", propval);
+  }
+
+  /**
+      Get `sizePoints` property.
+      Returns: Font size in points.
+  */
+  @property double sizePoints() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(double)("size-points");
+  }
+
+  /**
+      Set `sizePoints` property.
+      Params:
+        propval = Font size in points.
+  */
+  @property void sizePoints(double propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(double)("size-points", propval);
+  }
+
+  /**
+      Get `sizeSet` property.
+      Returns: Whether the `size` property is set.
+  */
+  @property bool sizeSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("size-set");
+  }
+
+  /**
+      Set `sizeSet` property.
+      Params:
+        propval = Whether the `size` property is set.
+  */
+  @property void sizeSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("size-set", propval);
+  }
+
+  /**
+      Get `stretch` property.
+      Returns: Font stretch as a [gid.pango1.types.Stretch], e.g. [gid.pango1.types.Stretch.Condensed].
+  */
+  @property gid.pango1.types.Stretch stretch() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.pango1.types.Stretch)("stretch");
+  }
+
+  /**
+      Set `stretch` property.
+      Params:
+        propval = Font stretch as a [gid.pango1.types.Stretch], e.g. [gid.pango1.types.Stretch.Condensed].
+  */
+  @property void stretch(gid.pango1.types.Stretch propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.pango1.types.Stretch)("stretch", propval);
+  }
+
+  /**
+      Get `stretchSet` property.
+      Returns: Whether the `stretch` property is set.
+  */
+  @property bool stretchSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("stretch-set");
+  }
+
+  /**
+      Set `stretchSet` property.
+      Params:
+        propval = Whether the `stretch` property is set.
+  */
+  @property void stretchSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("stretch-set", propval);
+  }
+
+  /**
+      Get `strikethrough` property.
+      Returns: Whether to strike through the text.
+  */
+  @property bool strikethrough() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("strikethrough");
+  }
+
+  /**
+      Set `strikethrough` property.
+      Params:
+        propval = Whether to strike through the text.
+  */
+  @property void strikethrough(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("strikethrough", propval);
+  }
+
+  /**
+      Get `strikethroughRgba` property.
+      Returns: This property modifies the color of strikeouts.
+        
+        If not set, strikeouts will use the foreground color.
+  */
+  @property gid.gdk4.rgba.RGBA strikethroughRgba() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gdk4.rgba.RGBA)("strikethrough-rgba");
+  }
+
+  /**
+      Set `strikethroughRgba` property.
+      Params:
+        propval = This property modifies the color of strikeouts.
+          
+          If not set, strikeouts will use the foreground color.
+  */
+  @property void strikethroughRgba(gid.gdk4.rgba.RGBA propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.gdk4.rgba.RGBA)("strikethrough-rgba", propval);
+  }
+
+  /**
+      Get `strikethroughRgbaSet` property.
+      Returns: If the `strikethrough-rgba` property has been set.
+  */
+  @property bool strikethroughRgbaSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("strikethrough-rgba-set");
+  }
+
+  /**
+      Set `strikethroughRgbaSet` property.
+      Params:
+        propval = If the `strikethrough-rgba` property has been set.
+  */
+  @property void strikethroughRgbaSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("strikethrough-rgba-set", propval);
+  }
+
+  /**
+      Get `strikethroughSet` property.
+      Returns: Whether the `strikethrough` property is set.
+  */
+  @property bool strikethroughSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("strikethrough-set");
+  }
+
+  /**
+      Set `strikethroughSet` property.
+      Params:
+        propval = Whether the `strikethrough` property is set.
+  */
+  @property void strikethroughSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("strikethrough-set", propval);
+  }
+
+  /**
+      Get `style` property.
+      Returns: Font style as a [gid.pango1.types.Style], e.g. [gid.pango1.types.Style.Italic].
+  */
+  @property gid.pango1.types.Style style() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.pango1.types.Style)("style");
+  }
+
+  /**
+      Set `style` property.
+      Params:
+        propval = Font style as a [gid.pango1.types.Style], e.g. [gid.pango1.types.Style.Italic].
+  */
+  @property void style(gid.pango1.types.Style propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.pango1.types.Style)("style", propval);
+  }
+
+  /**
+      Get `styleSet` property.
+      Returns: Whether the `style` property is set.
+  */
+  @property bool styleSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("style-set");
+  }
+
+  /**
+      Set `styleSet` property.
+      Params:
+        propval = Whether the `style` property is set.
+  */
+  @property void styleSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("style-set", propval);
+  }
+
+  /**
+      Get `tabs` property.
+      Returns: Custom tabs for this text.
+  */
+  @property gid.pango1.tab_array.TabArray tabs() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.pango1.tab_array.TabArray)("tabs");
+  }
+
+  /**
+      Set `tabs` property.
+      Params:
+        propval = Custom tabs for this text.
+  */
+  @property void tabs(gid.pango1.tab_array.TabArray propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.pango1.tab_array.TabArray)("tabs", propval);
+  }
+
+  /**
+      Get `tabsSet` property.
+      Returns: Whether the `tabs` property is set.
+  */
+  @property bool tabsSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("tabs-set");
+  }
+
+  /**
+      Set `tabsSet` property.
+      Params:
+        propval = Whether the `tabs` property is set.
+  */
+  @property void tabsSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("tabs-set", propval);
+  }
+
+  /**
+      Get `textTransform` property.
+      Returns: How to transform the text for display.
+  */
+  @property gid.pango1.types.TextTransform textTransform() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.pango1.types.TextTransform)("text-transform");
+  }
+
+  /**
+      Set `textTransform` property.
+      Params:
+        propval = How to transform the text for display.
+  */
+  @property void textTransform(gid.pango1.types.TextTransform propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.pango1.types.TextTransform)("text-transform", propval);
+  }
+
+  /**
+      Get `textTransformSet` property.
+      Returns: Whether the `text-transform` property is set.
+  */
+  @property bool textTransformSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("text-transform-set");
+  }
+
+  /**
+      Set `textTransformSet` property.
+      Params:
+        propval = Whether the `text-transform` property is set.
+  */
+  @property void textTransformSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("text-transform-set", propval);
+  }
+
+  /**
+      Get `underline` property.
+      Returns: Style of underline for this text.
+  */
+  @property gid.pango1.types.Underline underline() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.pango1.types.Underline)("underline");
+  }
+
+  /**
+      Set `underline` property.
+      Params:
+        propval = Style of underline for this text.
+  */
+  @property void underline(gid.pango1.types.Underline propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.pango1.types.Underline)("underline", propval);
+  }
+
+  /**
+      Get `underlineRgba` property.
+      Returns: This property modifies the color of underlines.
+        
+        If not set, underlines will use the foreground color.
+        
+        If [gid.gtk4.text_tag.TextTag.underline] is set to [gid.pango1.types.Underline.Error],
+        an alternate color may be applied instead of the foreground. Setting
+        this property will always override those defaults.
+  */
+  @property gid.gdk4.rgba.RGBA underlineRgba() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gdk4.rgba.RGBA)("underline-rgba");
+  }
+
+  /**
+      Set `underlineRgba` property.
+      Params:
+        propval = This property modifies the color of underlines.
+          
+          If not set, underlines will use the foreground color.
+          
+          If [gid.gtk4.text_tag.TextTag.underline] is set to [gid.pango1.types.Underline.Error],
+          an alternate color may be applied instead of the foreground. Setting
+          this property will always override those defaults.
+  */
+  @property void underlineRgba(gid.gdk4.rgba.RGBA propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.gdk4.rgba.RGBA)("underline-rgba", propval);
+  }
+
+  /**
+      Get `underlineRgbaSet` property.
+      Returns: If the `underline-rgba` property has been set.
+  */
+  @property bool underlineRgbaSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("underline-rgba-set");
+  }
+
+  /**
+      Set `underlineRgbaSet` property.
+      Params:
+        propval = If the `underline-rgba` property has been set.
+  */
+  @property void underlineRgbaSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("underline-rgba-set", propval);
+  }
+
+  /**
+      Get `underlineSet` property.
+      Returns: Whether the `underline` property is set.
+  */
+  @property bool underlineSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("underline-set");
+  }
+
+  /**
+      Set `underlineSet` property.
+      Params:
+        propval = Whether the `underline` property is set.
+  */
+  @property void underlineSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("underline-set", propval);
+  }
+
+  /**
+      Get `variant` property.
+      Returns: Font variant as a [gid.pango1.types.Variant], e.g. [gid.pango1.types.Variant.SmallCaps].
+  */
+  @property gid.pango1.types.Variant variant() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.pango1.types.Variant)("variant");
+  }
+
+  /**
+      Set `variant` property.
+      Params:
+        propval = Font variant as a [gid.pango1.types.Variant], e.g. [gid.pango1.types.Variant.SmallCaps].
+  */
+  @property void variant(gid.pango1.types.Variant propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.pango1.types.Variant)("variant", propval);
+  }
+
+  /**
+      Get `variantSet` property.
+      Returns: Whether the `variant` property is set.
+  */
+  @property bool variantSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("variant-set");
+  }
+
+  /**
+      Set `variantSet` property.
+      Params:
+        propval = Whether the `variant` property is set.
+  */
+  @property void variantSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("variant-set", propval);
+  }
+
+  /**
+      Get `weight` property.
+      Returns: Font weight as an integer.
+  */
+  @property int weight() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(int)("weight");
+  }
+
+  /**
+      Set `weight` property.
+      Params:
+        propval = Font weight as an integer.
+  */
+  @property void weight(int propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(int)("weight", propval);
+  }
+
+  /**
+      Get `weightSet` property.
+      Returns: Whether the `weight` property is set.
+  */
+  @property bool weightSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("weight-set");
+  }
+
+  /**
+      Set `weightSet` property.
+      Params:
+        propval = Whether the `weight` property is set.
+  */
+  @property void weightSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("weight-set", propval);
+  }
+
+  /**
+      Get `word` property.
+      Returns: Whether this tag represents a single word.
+        
+        This affects line breaks and cursor movement.
+  */
+  @property bool word() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("word");
+  }
+
+  /**
+      Set `word` property.
+      Params:
+        propval = Whether this tag represents a single word.
+          
+          This affects line breaks and cursor movement.
+  */
+  @property void word(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("word", propval);
+  }
+
+  /**
+      Get `wordSet` property.
+      Returns: Whether the `word` property is set.
+  */
+  @property bool wordSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("word-set");
+  }
+
+  /**
+      Set `wordSet` property.
+      Params:
+        propval = Whether the `word` property is set.
+  */
+  @property void wordSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("word-set", propval);
+  }
+
+  /**
+      Get `wrapMode` property.
+      Returns: Whether to wrap lines never, at word boundaries, or
+        at character boundaries.
+  */
+  @property gid.gtk4.types.WrapMode wrapMode() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gtk4.types.WrapMode)("wrap-mode");
+  }
+
+  /**
+      Set `wrapMode` property.
+      Params:
+        propval = Whether to wrap lines never, at word boundaries, or
+          at character boundaries.
+  */
+  @property void wrapMode(gid.gtk4.types.WrapMode propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.gtk4.types.WrapMode)("wrap-mode", propval);
+  }
+
+  /**
+      Get `wrapModeSet` property.
+      Returns: Whether the `wrap-mode` property is set.
+  */
+  @property bool wrapModeSet() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("wrap-mode-set");
+  }
+
+  /**
+      Set `wrapModeSet` property.
+      Params:
+        propval = Whether the `wrap-mode` property is set.
+  */
+  @property void wrapModeSet(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("wrap-mode-set", propval);
+  }
+
+  /**
+      Creates a [gid.gtk4.text_tag.TextTag].
+  
+      Params:
+        name = tag name
+      Returns: a new [gid.gtk4.text_tag.TextTag]
+  */
+  this(string name = null) nothrow
+  {
+    GtkTextTag* _cretval;
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+    _cretval = gtk_text_tag_new(_name);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Emits the [gid.gtk4.text_tag_table.TextTagTable.tagChanged] signal on the
+      [gid.gtk4.text_tag_table.TextTagTable] where the tag is included.
+      
+      The signal is already emitted when setting a [gid.gtk4.text_tag.TextTag] property.
+      This function is useful for a [gid.gtk4.text_tag.TextTag] subclass.
+  
+      Params:
+        sizeChanged = whether the change affects the [gid.gtk4.text_view.TextView] layout
+  */
+  void changed(bool sizeChanged) nothrow
+  {
+    gtk_text_tag_changed(cast(GtkTextTag*)this._cPtr, sizeChanged);
+  }
+
+  /**
+      Get the tag priority.
+      Returns: The tag’s priority.
+  */
+  int getPriority() nothrow
+  {
+    int _retval;
+    _retval = gtk_text_tag_get_priority(cast(GtkTextTag*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Sets the priority of a [gid.gtk4.text_tag.TextTag].
+      
+      Valid priorities start at 0 and go to one less than
+      [gid.gtk4.text_tag_table.TextTagTable.getSize]. Each tag in a table
+      has a unique priority; setting the priority of one tag shifts
+      the priorities of all the other tags in the table to maintain
+      a unique priority for each tag.
+      
+      Higher priority tags “win” if two tags both set the same text
+      attribute. When adding a tag to a tag table, it will be assigned
+      the highest priority in the table by default; so normally the
+      precedence of a set of tags is the order in which they were added
+      to the table, or created with [gid.gtk4.text_buffer.TextBuffer.createTag],
+      which adds the tag to the buffer’s table automatically.
+  
+      Params:
+        priority = the new priority
+  */
+  void setPriority(int priority) nothrow
+  {
+    gtk_text_tag_set_priority(cast(GtkTextTag*)this._cPtr, priority);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.text_tag.TextTag]
+class TextTagGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `accumulativeMargin` property.
+      Params:
+        propval = Whether the margins accumulate or override each other.
+          
+          When set to true the margins of this tag are added to the margins
+          of any other non-accumulative margins present. When set to false
+          the margins override one another (the default).
+      Returns: Builder instance for fluent chaining
+  */
+  T accumulativeMargin(bool propval) nothrow
+  {
+    return setProperty("accumulative-margin", propval);
+  }
+
+  /**
+      Set `allowBreaks` property.
+      Params:
+        propval = Whether breaks are allowed.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowBreaks(bool propval) nothrow
+  {
+    return setProperty("allow-breaks", propval);
+  }
+
+  /**
+      Set `allowBreaksSet` property.
+      Params:
+        propval = Whether the `allow-breaks` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T allowBreaksSet(bool propval) nothrow
+  {
+    return setProperty("allow-breaks-set", propval);
+  }
+
+  /**
+      Set `background` property.
+      Params:
+        propval = Background color as a string.
+      Returns: Builder instance for fluent chaining
+  */
+  T background(string propval) nothrow
+  {
+    return setProperty("background", propval);
+  }
+
+  /**
+      Set `backgroundFullHeight` property.
+      Params:
+        propval = Whether the background color fills the entire line height
+          or only the height of the tagged characters.
+      Returns: Builder instance for fluent chaining
+  */
+  T backgroundFullHeight(bool propval) nothrow
+  {
+    return setProperty("background-full-height", propval);
+  }
+
+  /**
+      Set `backgroundFullHeightSet` property.
+      Params:
+        propval = Whether the `background-full-height` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T backgroundFullHeightSet(bool propval) nothrow
+  {
+    return setProperty("background-full-height-set", propval);
+  }
+
+  /**
+      Set `backgroundRgba` property.
+      Params:
+        propval = Background color as a [gid.gdk4.rgba.RGBA].
+      Returns: Builder instance for fluent chaining
+  */
+  T backgroundRgba(gid.gdk4.rgba.RGBA propval) nothrow
+  {
+    return setProperty("background-rgba", propval);
+  }
+
+  /**
+      Set `backgroundSet` property.
+      Params:
+        propval = Whether the `background` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T backgroundSet(bool propval) nothrow
+  {
+    return setProperty("background-set", propval);
+  }
+
+  /**
+      Set `direction` property.
+      Params:
+        propval = Text direction, e.g. right-to-left or left-to-right.
+      Returns: Builder instance for fluent chaining
+  */
+  T direction(gid.gtk4.types.TextDirection propval) nothrow
+  {
+    return setProperty("direction", propval);
+  }
+
+  /**
+      Set `editable` property.
+      Params:
+        propval = Whether the text can be modified by the user.
+      Returns: Builder instance for fluent chaining
+  */
+  T editable(bool propval) nothrow
+  {
+    return setProperty("editable", propval);
+  }
+
+  /**
+      Set `editableSet` property.
+      Params:
+        propval = Whether the `editable` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T editableSet(bool propval) nothrow
+  {
+    return setProperty("editable-set", propval);
+  }
+
+  /**
+      Set `fallback` property.
+      Params:
+        propval = Whether font fallback is enabled.
+          
+          When set to true, other fonts will be substituted
+          where the current font is missing glyphs.
+      Returns: Builder instance for fluent chaining
+  */
+  T fallback(bool propval) nothrow
+  {
+    return setProperty("fallback", propval);
+  }
+
+  /**
+      Set `fallbackSet` property.
+      Params:
+        propval = Whether the `fallback` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T fallbackSet(bool propval) nothrow
+  {
+    return setProperty("fallback-set", propval);
+  }
+
+  /**
+      Set `family` property.
+      Params:
+        propval = Name of the font family, e.g. Sans, Helvetica, Times, Monospace.
+      Returns: Builder instance for fluent chaining
+  */
+  T family(string propval) nothrow
+  {
+    return setProperty("family", propval);
+  }
+
+  /**
+      Set `familySet` property.
+      Params:
+        propval = Whether the `family` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T familySet(bool propval) nothrow
+  {
+    return setProperty("family-set", propval);
+  }
+
+  /**
+      Set `font` property.
+      Params:
+        propval = Font description as string, e.g. \"Sans Italic 12\".
+          
+          Note that the initial value of this property depends on
+          the internals of [gid.pango1.font_description.FontDescription].
+      Returns: Builder instance for fluent chaining
+  */
+  T font(string propval) nothrow
+  {
+    return setProperty("font", propval);
+  }
+
+  /**
+      Set `fontDesc` property.
+      Params:
+        propval = Font description as a [gid.pango1.font_description.FontDescription].
+      Returns: Builder instance for fluent chaining
+  */
+  T fontDesc(gid.pango1.font_description.FontDescription propval) nothrow
+  {
+    return setProperty("font-desc", propval);
+  }
+
+  /**
+      Set `fontFeatures` property.
+      Params:
+        propval = OpenType font features, as a string.
+      Returns: Builder instance for fluent chaining
+  */
+  T fontFeatures(string propval) nothrow
+  {
+    return setProperty("font-features", propval);
+  }
+
+  /**
+      Set `fontFeaturesSet` property.
+      Params:
+        propval = Whether the `font-features` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T fontFeaturesSet(bool propval) nothrow
+  {
+    return setProperty("font-features-set", propval);
+  }
+
+  /**
+      Set `foreground` property.
+      Params:
+        propval = Foreground color as a string.
+      Returns: Builder instance for fluent chaining
+  */
+  T foreground(string propval) nothrow
+  {
+    return setProperty("foreground", propval);
+  }
+
+  /**
+      Set `foregroundRgba` property.
+      Params:
+        propval = Foreground color as a [gid.gdk4.rgba.RGBA].
+      Returns: Builder instance for fluent chaining
+  */
+  T foregroundRgba(gid.gdk4.rgba.RGBA propval) nothrow
+  {
+    return setProperty("foreground-rgba", propval);
+  }
+
+  /**
+      Set `foregroundSet` property.
+      Params:
+        propval = Whether the `foreground` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T foregroundSet(bool propval) nothrow
+  {
+    return setProperty("foreground-set", propval);
+  }
+
+  /**
+      Set `indent` property.
+      Params:
+        propval = Amount to indent the paragraph, in pixels.
+          
+          A negative value of indent will produce a hanging indentation.
+          That is, the first line will have the full width, and subsequent
+          lines will be indented by the absolute value of indent.
+      Returns: Builder instance for fluent chaining
+  */
+  T indent(int propval) nothrow
+  {
+    return setProperty("indent", propval);
+  }
+
+  /**
+      Set `indentSet` property.
+      Params:
+        propval = Whether the `indent` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T indentSet(bool propval) nothrow
+  {
+    return setProperty("indent-set", propval);
+  }
+
+  /**
+      Set `insertHyphens` property.
+      Params:
+        propval = Whether to insert hyphens at breaks.
+      Returns: Builder instance for fluent chaining
+  */
+  T insertHyphens(bool propval) nothrow
+  {
+    return setProperty("insert-hyphens", propval);
+  }
+
+  /**
+      Set `insertHyphensSet` property.
+      Params:
+        propval = Whether the `insert-hyphens` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T insertHyphensSet(bool propval) nothrow
+  {
+    return setProperty("insert-hyphens-set", propval);
+  }
+
+  /**
+      Set `invisible` property.
+      Params:
+        propval = Whether this text is hidden.
+          
+          Note that there may still be problems with the support for invisible
+          text, in particular when navigating programmatically inside a buffer
+          containing invisible segments.
+      Returns: Builder instance for fluent chaining
+  */
+  T invisible(bool propval) nothrow
+  {
+    return setProperty("invisible", propval);
+  }
+
+  /**
+      Set `invisibleSet` property.
+      Params:
+        propval = Whether the `invisible` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T invisibleSet(bool propval) nothrow
+  {
+    return setProperty("invisible-set", propval);
+  }
+
+  /**
+      Set `justification` property.
+      Params:
+        propval = Left, right, or center justification.
+      Returns: Builder instance for fluent chaining
+  */
+  T justification(gid.gtk4.types.Justification propval) nothrow
+  {
+    return setProperty("justification", propval);
+  }
+
+  /**
+      Set `justificationSet` property.
+      Params:
+        propval = Whether the `justification` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T justificationSet(bool propval) nothrow
+  {
+    return setProperty("justification-set", propval);
+  }
+
+  /**
+      Set `language` property.
+      Params:
+        propval = The language this text is in, as an ISO code.
+          
+          Pango can use this as a hint when rendering the text.
+          If not set, an appropriate default will be used.
+          
+          Note that the initial value of this property depends
+          on the current locale, see also `func@Gtk.get_default_language`.
+      Returns: Builder instance for fluent chaining
+  */
+  T language(string propval) nothrow
+  {
+    return setProperty("language", propval);
+  }
+
+  /**
+      Set `languageSet` property.
+      Params:
+        propval = Whether the `language` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T languageSet(bool propval) nothrow
+  {
+    return setProperty("language-set", propval);
+  }
+
+  /**
+      Set `leftMargin` property.
+      Params:
+        propval = Width of the left margin in pixels.
+      Returns: Builder instance for fluent chaining
+  */
+  T leftMargin(int propval) nothrow
+  {
+    return setProperty("left-margin", propval);
+  }
+
+  /**
+      Set `leftMarginSet` property.
+      Params:
+        propval = Whether the `left-margin` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T leftMarginSet(bool propval) nothrow
+  {
+    return setProperty("left-margin-set", propval);
+  }
+
+  /**
+      Set `letterSpacing` property.
+      Params:
+        propval = Extra spacing between graphemes, in Pango units.
+      Returns: Builder instance for fluent chaining
+  */
+  T letterSpacing(int propval) nothrow
+  {
+    return setProperty("letter-spacing", propval);
+  }
+
+  /**
+      Set `letterSpacingSet` property.
+      Params:
+        propval = Whether the `letter-spacing` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T letterSpacingSet(bool propval) nothrow
+  {
+    return setProperty("letter-spacing-set", propval);
+  }
+
+  /**
+      Set `lineHeight` property.
+      Params:
+        propval = Factor to scale line height by.
+      Returns: Builder instance for fluent chaining
+  */
+  T lineHeight(float propval) nothrow
+  {
+    return setProperty("line-height", propval);
+  }
+
+  /**
+      Set `lineHeightSet` property.
+      Params:
+        propval = Whether the `line-height` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T lineHeightSet(bool propval) nothrow
+  {
+    return setProperty("line-height-set", propval);
+  }
+
+  /**
+      Set `name` property.
+      Params:
+        propval = The name used to refer to the tag.
+          
+          null for anonymous tags.
+      Returns: Builder instance for fluent chaining
+  */
+  T name(string propval) nothrow
+  {
+    return setProperty("name", propval);
+  }
+
+  /**
+      Set `overline` property.
+      Params:
+        propval = Style of overline for this text.
+      Returns: Builder instance for fluent chaining
+  */
+  T overline(gid.pango1.types.Overline propval) nothrow
+  {
+    return setProperty("overline", propval);
+  }
+
+  /**
+      Set `overlineRgba` property.
+      Params:
+        propval = This property modifies the color of overlines.
+          
+          If not set, overlines will use the foreground color.
+      Returns: Builder instance for fluent chaining
+  */
+  T overlineRgba(gid.gdk4.rgba.RGBA propval) nothrow
+  {
+    return setProperty("overline-rgba", propval);
+  }
+
+  /**
+      Set `overlineRgbaSet` property.
+      Params:
+        propval = Whether the `overline-rgba` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T overlineRgbaSet(bool propval) nothrow
+  {
+    return setProperty("overline-rgba-set", propval);
+  }
+
+  /**
+      Set `overlineSet` property.
+      Params:
+        propval = Whether the `overline` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T overlineSet(bool propval) nothrow
+  {
+    return setProperty("overline-set", propval);
+  }
+
+  /**
+      Set `paragraphBackground` property.
+      Params:
+        propval = The paragraph background color as a string.
+      Returns: Builder instance for fluent chaining
+  */
+  T paragraphBackground(string propval) nothrow
+  {
+    return setProperty("paragraph-background", propval);
+  }
+
+  /**
+      Set `paragraphBackgroundRgba` property.
+      Params:
+        propval = The paragraph background color as a [gid.gdk4.rgba.RGBA].
+      Returns: Builder instance for fluent chaining
+  */
+  T paragraphBackgroundRgba(gid.gdk4.rgba.RGBA propval) nothrow
+  {
+    return setProperty("paragraph-background-rgba", propval);
+  }
+
+  /**
+      Set `paragraphBackgroundSet` property.
+      Params:
+        propval = Whether the `paragraph-background` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T paragraphBackgroundSet(bool propval) nothrow
+  {
+    return setProperty("paragraph-background-set", propval);
+  }
+
+  /**
+      Set `pixelsAboveLines` property.
+      Params:
+        propval = Pixels of blank space above paragraphs.
+      Returns: Builder instance for fluent chaining
+  */
+  T pixelsAboveLines(int propval) nothrow
+  {
+    return setProperty("pixels-above-lines", propval);
+  }
+
+  /**
+      Set `pixelsAboveLinesSet` property.
+      Params:
+        propval = Whether the `pixels-above-lines` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T pixelsAboveLinesSet(bool propval) nothrow
+  {
+    return setProperty("pixels-above-lines-set", propval);
+  }
+
+  /**
+      Set `pixelsBelowLines` property.
+      Params:
+        propval = Pixels of blank space below paragraphs.
+      Returns: Builder instance for fluent chaining
+  */
+  T pixelsBelowLines(int propval) nothrow
+  {
+    return setProperty("pixels-below-lines", propval);
+  }
+
+  /**
+      Set `pixelsBelowLinesSet` property.
+      Params:
+        propval = Whether the `pixels-below-lines` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T pixelsBelowLinesSet(bool propval) nothrow
+  {
+    return setProperty("pixels-below-lines-set", propval);
+  }
+
+  /**
+      Set `pixelsInsideWrap` property.
+      Params:
+        propval = Pixels of blank space between wrapped lines in a paragraph.
+      Returns: Builder instance for fluent chaining
+  */
+  T pixelsInsideWrap(int propval) nothrow
+  {
+    return setProperty("pixels-inside-wrap", propval);
+  }
+
+  /**
+      Set `pixelsInsideWrapSet` property.
+      Params:
+        propval = Whether the `pixels-inside-wrap` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T pixelsInsideWrapSet(bool propval) nothrow
+  {
+    return setProperty("pixels-inside-wrap-set", propval);
+  }
+
+  /**
+      Set `rightMargin` property.
+      Params:
+        propval = Width of the right margin, in pixels.
+      Returns: Builder instance for fluent chaining
+  */
+  T rightMargin(int propval) nothrow
+  {
+    return setProperty("right-margin", propval);
+  }
+
+  /**
+      Set `rightMarginSet` property.
+      Params:
+        propval = Whether the `right-margin` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T rightMarginSet(bool propval) nothrow
+  {
+    return setProperty("right-margin-set", propval);
+  }
+
+  /**
+      Set `rise` property.
+      Params:
+        propval = Offset of text above the baseline, in Pango units.
+          
+          Negative values go below the baseline.
+      Returns: Builder instance for fluent chaining
+  */
+  T rise(int propval) nothrow
+  {
+    return setProperty("rise", propval);
+  }
+
+  /**
+      Set `riseSet` property.
+      Params:
+        propval = Whether the `rise` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T riseSet(bool propval) nothrow
+  {
+    return setProperty("rise-set", propval);
+  }
+
+  /**
+      Set `scale` property.
+      Params:
+        propval = Font size as a scale factor relative to the default font size.
+          
+          This properly adapts to theme changes, etc. so is recommended.
+          Pango predefines some scales such as `PANGO_SCALE_X_LARGE`.
+      Returns: Builder instance for fluent chaining
+  */
+  T scale(double propval) nothrow
+  {
+    return setProperty("scale", propval);
+  }
+
+  /**
+      Set `scaleSet` property.
+      Params:
+        propval = Whether the `scale` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T scaleSet(bool propval) nothrow
+  {
+    return setProperty("scale-set", propval);
+  }
+
+  /**
+      Set `sentence` property.
+      Params:
+        propval = Whether this tag represents a single sentence.
+          
+          This affects cursor movement.
+      Returns: Builder instance for fluent chaining
+  */
+  T sentence(bool propval) nothrow
+  {
+    return setProperty("sentence", propval);
+  }
+
+  /**
+      Set `sentenceSet` property.
+      Params:
+        propval = Whether the `sentence` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T sentenceSet(bool propval) nothrow
+  {
+    return setProperty("sentence-set", propval);
+  }
+
+  /**
+      Set `showSpaces` property.
+      Params:
+        propval = How to render invisible characters.
+      Returns: Builder instance for fluent chaining
+  */
+  T showSpaces(gid.pango1.types.ShowFlags propval) nothrow
+  {
+    return setProperty("show-spaces", propval);
+  }
+
+  /**
+      Set `showSpacesSet` property.
+      Params:
+        propval = Whether the `show-spaces` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T showSpacesSet(bool propval) nothrow
+  {
+    return setProperty("show-spaces-set", propval);
+  }
+
+  /**
+      Set `size` property.
+      Params:
+        propval = Font size in Pango units.
+      Returns: Builder instance for fluent chaining
+  */
+  T size(int propval) nothrow
+  {
+    return setProperty("size", propval);
+  }
+
+  /**
+      Set `sizePoints` property.
+      Params:
+        propval = Font size in points.
+      Returns: Builder instance for fluent chaining
+  */
+  T sizePoints(double propval) nothrow
+  {
+    return setProperty("size-points", propval);
+  }
+
+  /**
+      Set `sizeSet` property.
+      Params:
+        propval = Whether the `size` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T sizeSet(bool propval) nothrow
+  {
+    return setProperty("size-set", propval);
+  }
+
+  /**
+      Set `stretch` property.
+      Params:
+        propval = Font stretch as a [gid.pango1.types.Stretch], e.g. [gid.pango1.types.Stretch.Condensed].
+      Returns: Builder instance for fluent chaining
+  */
+  T stretch(gid.pango1.types.Stretch propval) nothrow
+  {
+    return setProperty("stretch", propval);
+  }
+
+  /**
+      Set `stretchSet` property.
+      Params:
+        propval = Whether the `stretch` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T stretchSet(bool propval) nothrow
+  {
+    return setProperty("stretch-set", propval);
+  }
+
+  /**
+      Set `strikethrough` property.
+      Params:
+        propval = Whether to strike through the text.
+      Returns: Builder instance for fluent chaining
+  */
+  T strikethrough(bool propval) nothrow
+  {
+    return setProperty("strikethrough", propval);
+  }
+
+  /**
+      Set `strikethroughRgba` property.
+      Params:
+        propval = This property modifies the color of strikeouts.
+          
+          If not set, strikeouts will use the foreground color.
+      Returns: Builder instance for fluent chaining
+  */
+  T strikethroughRgba(gid.gdk4.rgba.RGBA propval) nothrow
+  {
+    return setProperty("strikethrough-rgba", propval);
+  }
+
+  /**
+      Set `strikethroughRgbaSet` property.
+      Params:
+        propval = If the `strikethrough-rgba` property has been set.
+      Returns: Builder instance for fluent chaining
+  */
+  T strikethroughRgbaSet(bool propval) nothrow
+  {
+    return setProperty("strikethrough-rgba-set", propval);
+  }
+
+  /**
+      Set `strikethroughSet` property.
+      Params:
+        propval = Whether the `strikethrough` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T strikethroughSet(bool propval) nothrow
+  {
+    return setProperty("strikethrough-set", propval);
+  }
+
+  /**
+      Set `style` property.
+      Params:
+        propval = Font style as a [gid.pango1.types.Style], e.g. [gid.pango1.types.Style.Italic].
+      Returns: Builder instance for fluent chaining
+  */
+  T style(gid.pango1.types.Style propval) nothrow
+  {
+    return setProperty("style", propval);
+  }
+
+  /**
+      Set `styleSet` property.
+      Params:
+        propval = Whether the `style` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T styleSet(bool propval) nothrow
+  {
+    return setProperty("style-set", propval);
+  }
+
+  /**
+      Set `tabs` property.
+      Params:
+        propval = Custom tabs for this text.
+      Returns: Builder instance for fluent chaining
+  */
+  T tabs(gid.pango1.tab_array.TabArray propval) nothrow
+  {
+    return setProperty("tabs", propval);
+  }
+
+  /**
+      Set `tabsSet` property.
+      Params:
+        propval = Whether the `tabs` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T tabsSet(bool propval) nothrow
+  {
+    return setProperty("tabs-set", propval);
+  }
+
+  /**
+      Set `textTransform` property.
+      Params:
+        propval = How to transform the text for display.
+      Returns: Builder instance for fluent chaining
+  */
+  T textTransform(gid.pango1.types.TextTransform propval) nothrow
+  {
+    return setProperty("text-transform", propval);
+  }
+
+  /**
+      Set `textTransformSet` property.
+      Params:
+        propval = Whether the `text-transform` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T textTransformSet(bool propval) nothrow
+  {
+    return setProperty("text-transform-set", propval);
+  }
+
+  /**
+      Set `underline` property.
+      Params:
+        propval = Style of underline for this text.
+      Returns: Builder instance for fluent chaining
+  */
+  T underline(gid.pango1.types.Underline propval) nothrow
+  {
+    return setProperty("underline", propval);
+  }
+
+  /**
+      Set `underlineRgba` property.
+      Params:
+        propval = This property modifies the color of underlines.
+          
+          If not set, underlines will use the foreground color.
+          
+          If [gid.gtk4.text_tag.TextTag.underline] is set to [gid.pango1.types.Underline.Error],
+          an alternate color may be applied instead of the foreground. Setting
+          this property will always override those defaults.
+      Returns: Builder instance for fluent chaining
+  */
+  T underlineRgba(gid.gdk4.rgba.RGBA propval) nothrow
+  {
+    return setProperty("underline-rgba", propval);
+  }
+
+  /**
+      Set `underlineRgbaSet` property.
+      Params:
+        propval = If the `underline-rgba` property has been set.
+      Returns: Builder instance for fluent chaining
+  */
+  T underlineRgbaSet(bool propval) nothrow
+  {
+    return setProperty("underline-rgba-set", propval);
+  }
+
+  /**
+      Set `underlineSet` property.
+      Params:
+        propval = Whether the `underline` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T underlineSet(bool propval) nothrow
+  {
+    return setProperty("underline-set", propval);
+  }
+
+  /**
+      Set `variant` property.
+      Params:
+        propval = Font variant as a [gid.pango1.types.Variant], e.g. [gid.pango1.types.Variant.SmallCaps].
+      Returns: Builder instance for fluent chaining
+  */
+  T variant(gid.pango1.types.Variant propval) nothrow
+  {
+    return setProperty("variant", propval);
+  }
+
+  /**
+      Set `variantSet` property.
+      Params:
+        propval = Whether the `variant` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T variantSet(bool propval) nothrow
+  {
+    return setProperty("variant-set", propval);
+  }
+
+  /**
+      Set `weight` property.
+      Params:
+        propval = Font weight as an integer.
+      Returns: Builder instance for fluent chaining
+  */
+  T weight(int propval) nothrow
+  {
+    return setProperty("weight", propval);
+  }
+
+  /**
+      Set `weightSet` property.
+      Params:
+        propval = Whether the `weight` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T weightSet(bool propval) nothrow
+  {
+    return setProperty("weight-set", propval);
+  }
+
+  /**
+      Set `word` property.
+      Params:
+        propval = Whether this tag represents a single word.
+          
+          This affects line breaks and cursor movement.
+      Returns: Builder instance for fluent chaining
+  */
+  T word(bool propval) nothrow
+  {
+    return setProperty("word", propval);
+  }
+
+  /**
+      Set `wordSet` property.
+      Params:
+        propval = Whether the `word` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T wordSet(bool propval) nothrow
+  {
+    return setProperty("word-set", propval);
+  }
+
+  /**
+      Set `wrapMode` property.
+      Params:
+        propval = Whether to wrap lines never, at word boundaries, or
+          at character boundaries.
+      Returns: Builder instance for fluent chaining
+  */
+  T wrapMode(gid.gtk4.types.WrapMode propval) nothrow
+  {
+    return setProperty("wrap-mode", propval);
+  }
+
+  /**
+      Set `wrapModeSet` property.
+      Params:
+        propval = Whether the `wrap-mode` property is set.
+      Returns: Builder instance for fluent chaining
+  */
+  T wrapModeSet(bool propval) nothrow
+  {
+    return setProperty("wrap-mode-set", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk4.text_tag.TextTag]
+final class TextTagGidBuilder : TextTagGidBuilderImpl!TextTagGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  TextTag build() nothrow
+  {
+    return new TextTag(cast(void*)createGObject(TextTag._getGType), Yes.Take);
+  }
+}

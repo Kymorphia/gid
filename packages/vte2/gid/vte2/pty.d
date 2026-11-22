@@ -1,0 +1,453 @@
+/// Module for [Pty] class
+module gid.vte2.pty;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gio2.async_result;
+import gid.gio2.cancellable;
+import gid.gio2.initable;
+import gid.gio2.initable_mixin;
+import gid.gio2.types;
+import gid.glib2.error;
+import gid.glib2.types;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.vte2.c.functions;
+import gid.vte2.c.types;
+import gid.vte2.types;
+
+/** */
+class Pty : gid.gobject2.object.ObjectWrap, gid.gio2.initable.Initable
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())vte_pty_get_type != &gidSymbolNotFound ? vte_pty_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "VtePty";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Pty self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.vte2.pty.Pty]
+      Returns: New builder object
+  */
+  static PtyGidBuilder builder() nothrow
+  {
+    return new PtyGidBuilder;
+  }
+
+  /**
+      Get `fd` property.
+      Returns: The file descriptor of the PTY master.
+  */
+  @property int fd() nothrow
+  {
+    return getFd();
+  }
+
+  /**
+      Get `flags` property.
+      Returns: Flags.
+  */
+  @property gid.vte2.types.PtyFlags flags() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.vte2.types.PtyFlags)("flags");
+  }
+
+  mixin InitableT!();
+
+  /**
+      Creates a new #VtePty for the PTY master fd.
+      
+      No entry will be made in the lastlog, utmp or wtmp system files.
+      
+      Note that the newly created #VtePty will take ownership of fd
+      and close it on finalize.
+  
+      Params:
+        fd = a file descriptor to the PTY
+        cancellable = a #GCancellable, or null
+      Returns: a new #VtePty for fd, or null on error with error filled in
+      Throws: [ErrorWrap]
+  */
+  static gid.vte2.pty.Pty newForeignSync(int fd, gid.gio2.cancellable.Cancellable cancellable = null)
+  {
+    VtePty* _cretval;
+    GError *_err;
+    _cretval = vte_pty_new_foreign_sync(fd, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.vte2.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Allocates a new pseudo-terminal.
+      
+      You can later use fork() or the [gid.glib2.global.spawnAsync] family of functions
+      to start a process on the PTY.
+      
+      If using fork(), you MUST call [gid.vte3.pty.Pty.childSetup] in the child.
+      
+      If using [gid.glib2.global.spawnAsync] and friends, you MUST either use
+      [gid.vte3.pty.Pty.childSetup] directly as the child setup function, or call
+      [gid.vte3.pty.Pty.childSetup] from your own child setup function supplied.
+      
+      When using [gid.vte3.terminal.Terminal.spawnSync] with a custom child setup
+      function, [gid.vte3.pty.Pty.childSetup] will be called before the supplied
+      function; you must not call it again.
+      
+      Also, you MUST pass the [gid.glib2.types.SpawnFlags.DoNotReapChild] flag.
+      
+      Note also that [gid.glib2.types.SpawnFlags.StdoutToDevNull], [gid.glib2.types.SpawnFlags.StderrToDevNull],
+      and [gid.glib2.types.SpawnFlags.ChildInheritsStdin] are not supported, since stdin, stdout
+      and stderr of the child process will always be connected to the PTY.
+      
+      Note that you should set the PTY's size using [gid.vte3.pty.Pty.setSize] before
+      spawning the child process, so that the child process has the correct
+      size from the start instead of starting with a default size and then
+      shortly afterwards receiving a <literal>SIGWINCH</literal> signal. You
+      should prefer using [gid.vte3.terminal.Terminal.ptyNewSync] which does this
+      automatically.
+  
+      Params:
+        flags = flags from #VtePtyFlags
+        cancellable = a #GCancellable, or null
+      Returns: a new #VtePty, or null on error with error filled in
+      Throws: [ErrorWrap]
+  */
+  static gid.vte2.pty.Pty newSync(gid.vte2.types.PtyFlags flags, gid.gio2.cancellable.Cancellable cancellable = null)
+  {
+    VtePty* _cretval;
+    GError *_err;
+    _cretval = vte_pty_new_sync(flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.vte2.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /** */
+  void childSetup() nothrow
+  {
+    vte_pty_child_setup(cast(VtePty*)this._cPtr);
+  }
+
+  /**
+      Since 0.42 this is a no-op.
+  */
+  void close() nothrow
+  {
+    vte_pty_close(cast(VtePty*)this._cPtr);
+  }
+
+  /** */
+  int getFd() nothrow
+  {
+    int _retval;
+    _retval = vte_pty_get_fd(cast(VtePty*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Reads the pseudo terminal's window size.
+      
+      If getting the window size failed, error will be set to a #GIOError.
+  
+      Params:
+        rows = a location to store the number of rows, or null
+        columns = a location to store the number of columns, or null
+      Returns: true on success, false on failure with error filled in
+      Throws: [ErrorWrap]
+  */
+  bool getSize(out int rows, out int columns)
+  {
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)vte_pty_get_size(cast(VtePty*)this._cPtr, cast(int*)&rows, cast(int*)&columns, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Attempts to resize the pseudo terminal's window size.  If successful, the
+      OS kernel will send <literal>SIGWINCH</literal> to the child process group.
+      
+      If setting the window size failed, error will be set to a #GIOError.
+  
+      Params:
+        rows = the desired number of rows
+        columns = the desired number of columns
+      Returns: true on success, false on failure with error filled in
+      Throws: [ErrorWrap]
+  */
+  bool setSize(int rows, int columns)
+  {
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)vte_pty_set_size(cast(VtePty*)this._cPtr, rows, columns, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Tells the kernel whether the terminal is UTF-8 or not, in case it can make
+      use of the info.  Linux 2.6.5 or so defines IUTF8 to make the line
+      discipline do multibyte backspace correctly.
+  
+      Params:
+        utf8 = whether or not the pty is in UTF-8 mode
+      Returns: true on success, false on failure with error filled in
+      Throws: [ErrorWrap]
+  */
+  bool setUtf8(bool utf8)
+  {
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)vte_pty_set_utf8(cast(VtePty*)this._cPtr, utf8, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Like [gid.vte3.pty.Pty.spawnWithFdsAsync], except that this function does not
+      allow passing file descriptors to the child process. See [gid.vte3.pty.Pty.spawnWithFdsAsync]
+      for more information.
+  
+      Params:
+        workingDirectory = the name of a directory the command should start
+            in, or null to use the current working directory
+        argv = child's argument vector
+        envv = a list of environment
+            variables to be added to the environment before starting the process, or null
+        spawnFlags = flags from #GSpawnFlags
+        childSetup = an extra child setup function to run in the child just before exec(), or null
+        timeout = a timeout value in ms, -1 for the default timeout, or G_MAXINT to wait indefinitely
+        cancellable = a #GCancellable, or null
+        callback = a #GAsyncReadyCallback, or null
+  */
+  void spawnAsync(string workingDirectory, string[] argv, string[] envv, gid.glib2.types.SpawnFlags spawnFlags, gid.glib2.types.SpawnChildSetupFunc childSetup, int timeout, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null) nothrow
+  {
+    extern(C) void _childSetupCallback(void* data) nothrow
+    {
+      auto _dlg = cast(gid.glib2.types.SpawnChildSetupFunc*)data;
+
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.glib2.types.SpawnChildSetupFunc");
+      }
+    }
+    auto _childSetupCB = childSetup ? &_childSetupCallback : null;
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
+    auto _argv_arr = new char*[](argv.length + 1);
+    auto _argv = cast(char**)_argv_arr.ptr;
+    foreach (i, s; argv) _argv[i] = s.toCString!(No.Malloc);
+    auto _envv_arr = new char*[](envv.length + 1);
+    auto _envv = cast(char**)_envv_arr.ptr;
+    foreach (i, s; envv) _envv[i] = s.toCString!(No.Malloc);
+    auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
+    GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    vte_pty_spawn_async(cast(VtePty*)this._cPtr, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /** */
+  bool spawnFinish(gid.gio2.async_result.AsyncResult result, out gid.glib2.types.Pid childPid)
+  {
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)vte_pty_spawn_finish(cast(VtePty*)this._cPtr, result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(GPid*)&childPid, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Starts the specified command under the pseudo-terminal pty.
+      The argv and envv lists should be null-terminated.
+      The "TERM" environment variable is automatically set to a default value,
+      but can be overridden from envv.
+      pty_flags controls logging the session to the specified system log files.
+      
+      Note also that [gid.glib2.types.SpawnFlags.StdoutToDevNull], [gid.glib2.types.SpawnFlags.StderrToDevNull],
+      and [gid.glib2.types.SpawnFlags.ChildInheritsStdin] are not supported in spawn_flags, since
+      stdin, stdout and stderr of the child process will always be connected to
+      the PTY. Also [gid.glib2.types.SpawnFlags.LeaveDescriptorsOpen] is not supported; and
+      [gid.glib2.types.SpawnFlags.DoNotReapChild] will always be added to spawn_flags.
+      
+      If fds is not null, the child process will map the file descriptors from
+      fds according to map_fds; n_map_fds must be less or equal to n_fds.
+      This function will take ownership of the file descriptors in fds;
+      you must not use or close them after this call. All file descriptors in fds
+      must have the FD_CLOEXEC flag set on them; it will be unset in the child process
+      before calling man:execve(2). Note also that no file descriptor may be mapped
+      to stdin, stdout, or stderr (file descriptors 0, 1, or 2), since these will be
+      assigned to the PTY. All open file descriptors apart from those mapped as above
+      will be closed when execve() is called.
+      
+      Beginning with 0.60, and on linux only, and unless [gid.vte3.types.SPAWN_NO_SYSTEMD_SCOPE] is
+      passed in spawn_flags, the newly created child process will be moved to its own
+      systemd user scope; and if [gid.vte3.types.SPAWN_REQUIRE_SYSTEMD_SCOPE] is passed, and creation
+      of the systemd user scope fails, the whole spawn will fail.
+      You can override the options used for the systemd user scope by
+      providing a systemd override file for 'vte-spawn-.scope' unit. See man:systemd.unit(5)
+      for further information.
+      
+      See vte_pty_new(), and [gid.vte3.terminal.Terminal.watchChild] for more information.
+  
+      Params:
+        workingDirectory = the name of a directory the command should start
+            in, or null to use the current working directory
+        argv = child's argument vector
+        envv = a list of environment
+            variables to be added to the environment before starting the process, or null
+        fds = an array of file descriptors, or null
+        mapFds = an array of integers, or null
+        spawnFlags = flags from #GSpawnFlags
+        childSetup = an extra child setup function to run in the child just before exec(), or null
+        timeout = a timeout value in ms, -1 for the default timeout, or G_MAXINT to wait indefinitely
+        cancellable = a #GCancellable, or null
+        callback = a #GAsyncReadyCallback, or null
+  */
+  void spawnWithFdsAsync(string workingDirectory, string[] argv, string[] envv, int[] fds, int[] mapFds, gid.glib2.types.SpawnFlags spawnFlags, gid.glib2.types.SpawnChildSetupFunc childSetup, int timeout, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null) nothrow
+  {
+    extern(C) void _childSetupCallback(void* data) nothrow
+    {
+      auto _dlg = cast(gid.glib2.types.SpawnChildSetupFunc*)data;
+
+      try
+      {
+        (*_dlg)();
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.glib2.types.SpawnChildSetupFunc");
+      }
+    }
+    auto _childSetupCB = childSetup ? &_childSetupCallback : null;
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    const(char)* _workingDirectory = workingDirectory.toCString!(No.Malloc, Yes.Nullable);
+    auto _argv_arr = new char*[](argv.length + 1);
+    auto _argv = cast(char**)_argv_arr.ptr;
+    foreach (i, s; argv) _argv[i] = s.toCString!(No.Malloc);
+    auto _envv_arr = new char*[](envv.length + 1);
+    auto _envv = cast(char**)_envv_arr.ptr;
+    foreach (i, s; envv) _envv[i] = s.toCString!(No.Malloc);
+    int _nFds;
+    if (fds)
+      _nFds = cast(int)fds.length;
+
+    auto _fds = cast(int*)fds.ptr;
+    int _nMapFds;
+    if (mapFds)
+      _nMapFds = cast(int)mapFds.length;
+
+    auto _mapFds = cast(int*)mapFds.ptr;
+    auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
+    GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    vte_pty_spawn_with_fds_async(cast(VtePty*)this._cPtr, _workingDirectory, _argv, _envv, _fds, _nFds, _mapFds, _nMapFds, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+}
+
+/// Fluent builder implementation template for [gid.vte2.pty.Pty]
+class PtyGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T, gid.gio2.initable.InitableGidBuilderImpl!T
+{
+
+  mixin InitableGidBuilderT!();
+
+  /**
+      Set `fd` property.
+      Params:
+        propval = The file descriptor of the PTY master.
+      Returns: Builder instance for fluent chaining
+  */
+  T fd(int propval) nothrow
+  {
+    return setProperty("fd", propval);
+  }
+
+  /**
+      Set `flags` property.
+      Params:
+        propval = Flags.
+      Returns: Builder instance for fluent chaining
+  */
+  T flags(gid.vte2.types.PtyFlags propval) nothrow
+  {
+    return setProperty("flags", propval);
+  }
+}
+
+/// Fluent builder for [gid.vte2.pty.Pty]
+final class PtyGidBuilder : PtyGidBuilderImpl!PtyGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Pty build() nothrow
+  {
+    return new Pty(cast(void*)createGObject(Pty._getGType), Yes.Take);
+  }
+}

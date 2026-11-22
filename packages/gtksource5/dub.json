@@ -6,8 +6,8 @@
   "license": "MIT",
   "homepage": "https://gitlab.gnome.org/GNOME/gtksourceview",
   "targetType": "library",
-  "importPaths": [".", ".."],
-  "sourcePaths": ["gtksource"],
+  "importPaths": ["."],
+  "sourcePaths": ["gid"],
   "dependencies": {
     "gid:gtk4": "*"
   }

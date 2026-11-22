@@ -6,8 +6,8 @@
   "license": "MIT",
   "homepage": "https://gitlab.gnome.org/GNOME/libadwaita",
   "targetType": "library",
-  "importPaths": [".", ".."],
-  "sourcePaths": ["adw"],
+  "importPaths": ["."],
+  "sourcePaths": ["gid"],
   "dependencies": {
     "gid:gio2": "*",
     "gid:gtk4": "*"

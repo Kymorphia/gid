@@ -3,10 +3,10 @@
 import core.stdc.string : strlen;
 import std.traits : isPointer;
 
-import gid.gid;
-import glib.c.functions : g_strv_get_type;
-import gobject.object;
-import gobject.types;
+import gid.core.utils;
+import gid.glib2.c.functions : g_strv_get_type;
+import gid.gobject2.object;
+import gid.gobject2.types;
 
 /**
  * Abstract class used as the base for GObject boxed types.
@@ -72,7 +72,7 @@ class Value : BoxedWrap!g_value_get_type
 
 /**
  * Check if a D type converts itself to and from GValues (value types of other packages, such as the GStreamer
- * fundamental types gst.types.Fraction or gst.types.IntRange). Such a type provides the following members:
+ * fundamental types gid.gst1.types.Fraction or gid.gst1.types.IntRange). Such a type provides the following members:
  * ---
  * static GType _gidValueGType() nothrow; // GType of the values (0 if unavailable)
  * static T _gidValueGet(const(GValue)* gval) nothrow; // Get a D value from a GValue of the GType
@@ -113,7 +113,7 @@ void initVal(T)(GValue* gval) nothrow
     static assert(0, "initVal: enums/flags need an explicit GType");
   else static if (is(T == string))
     g_value_init(gval, GTypeEnum.String);
-  else static if (is(T == glib.variant.Variant))
+  else static if (is(T == gid.glib2.variant.Variant))
     g_value_init(gval, GTypeEnum.Variant);
   else static if (is(T : ParamSpec))
     g_value_init(gval, GTypeEnum.Param);
@@ -122,7 +122,7 @@ void initVal(T)(GValue* gval) nothrow
   else static if (isBoxed!T)
   { // Cannot initialize a plain boxed type, it is done in setVal()
   }
-  else static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
+  else static if (is(T : gid.gobject2.object.ObjectWrap) || is(T == interface))
     g_value_init(gval, GTypeEnum.Object);
   else static if (is(T : Object) || isPointer!T)
     g_value_init(gval, GTypeEnum.Pointer);
@@ -170,10 +170,10 @@ T getVal(T)(const(GValue)* gval) nothrow
     return g_type_is_a(gval.gType, GTypeEnum.Flags) ? cast(T)g_value_get_flags(gval) : cast(T)g_value_get_enum(gval);
   else static if (is(T == string))
     return g_value_get_string(gval).fromCString;
-  else static if (is(T == glib.variant.Variant))
+  else static if (is(T == gid.glib2.variant.Variant))
   {
     auto v = g_value_get_variant(gval);
-    return v ? new glib.variant.Variant(v, No.Take) : null;
+    return v ? new gid.glib2.variant.Variant(v, No.Take) : null;
   }
   else static if (is(T : ParamSpec))
   {
@@ -207,10 +207,10 @@ T getVal(T)(const(GValue)* gval) nothrow
     auto v = g_value_get_boxed(gval);
     return v ? *cast(T*)v : T.init;
   }
-  else static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
+  else static if (is(T : gid.gobject2.object.ObjectWrap) || is(T == interface))
   {
     auto v = g_value_get_object(gval);
-    return gobject.object.ObjectWrap._getDObject!T(v, No.Take);
+    return gid.gobject2.object.ObjectWrap._getDObject!T(v, No.Take);
   }
   else static if (is(T == class) && __traits(compiles, new T(cast(void*)null, No.Take)))
   {
@@ -298,7 +298,7 @@ void setVal(T)(GValue* gval, T v) nothrow
   }
   else static if (is(T == string))
     g_value_take_string(gval, toCString!(Yes.Malloc, Yes.Nullable)(v)); // null D string is a NULL C string
-  else static if (is(T == glib.variant.Variant))
+  else static if (is(T == gid.glib2.variant.Variant))
     g_value_set_variant(gval, v ? cast(GVariant*)v._cPtr : null);
   else static if (is(T : ParamSpec))
     g_value_set_param(gval, v ? cast(GParamSpec*)v._cPtr : null);
@@ -325,11 +325,11 @@ void setVal(T)(GValue* gval, T v) nothrow
     g_value_init(gval, v._gType); // Have to initialize the specific boxed type here rather than in initVal
     g_value_set_boxed(gval, cast(void*)&v);
   }
-  else static if (is(T : gobject.object.ObjectWrap))
+  else static if (is(T : gid.gobject2.object.ObjectWrap))
     g_value_set_object(gval, v ? cast(GObject*)v._cPtr(No.Dup) : null);
   else static if (is(T == interface))
   {
-    if (auto objG = cast(gobject.object.ObjectWrap)v)
+    if (auto objG = cast(gid.gobject2.object.ObjectWrap)v)
       g_value_set_object(gval, cast(GObject*)objG._cPtr(No.Dup));
     else if (!v)
       g_value_set_object(gval, null);

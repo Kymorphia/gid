@@ -1,0 +1,563 @@
+/// Module for [Reader] class
+module gid.json1.reader;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.glib2.error;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.json1.c.functions;
+import gid.json1.c.types;
+import gid.json1.node;
+import gid.json1.types;
+
+/**
+    [gid.json1.reader.Reader] provides a simple, cursor-based API for parsing a JSON DOM.
+    
+    It is similar, in spirit, to the XML Reader API.
+    
+    The cursor is moved by the `json_reader_read_*` and the `json_reader_end_*`
+    functions. You can enter a JSON object using [gid.json1.reader.Reader.readMember]
+    with the name of the object member, access the value at that position, and
+    move the cursor back one level using [gid.json1.reader.Reader.endMember]; arrays
+    work in a similar way, using [gid.json1.reader.Reader.readElement] with the
+    index of the element, and using [gid.json1.reader.Reader.endElement] to move
+    the cursor back.
+    
+    ## Using [gid.json1.reader.Reader]
+    
+    ```c
+    g_autoptr(JsonParser) parser = json_parser_new ();
+    
+    // str is defined elsewhere and contains:
+    // { "url" : "http://www.gnome.org/img/flash/two-thirty.png", "size" : [ 652, 242 ] }
+    json_parser_load_from_data (parser, str, -1, NULL);
+    
+    g_autoptr(JsonReader) reader = json_reader_new (json_parser_get_root (parser));
+    
+    // Enter the "url" member of the object
+    json_reader_read_member (reader, "url");
+      const char *url = json_reader_get_string_value (reader);
+      // url now contains "http://www.gnome.org/img/flash/two-thirty.png"
+      json_reader_end_member (reader);
+    
+    // Enter the "size" member of the object
+    json_reader_read_member (reader, "size");
+      // Enter the first element of the array
+      json_reader_read_element (reader, 0);
+        int width = json_reader_get_int_value (reader);
+        // width now contains 652
+        json_reader_end_element (reader);
+      // Enter the second element of the array
+      json_reader_read_element (reader, 1);
+        int height = json_reader_get_int_value (reader);
+        // height now contains 242
+        json_reader_end_element (reader);
+      json_reader_end_member (reader);
+    ```
+    
+    ## Error handling
+    
+    In case of error, [gid.json1.reader.Reader] will be set in an error state; all subsequent
+    calls will simply be ignored until a function that resets the error state is
+    called, e.g.:
+    
+    ```c
+    // ask for the 7th element; if the element does not exist, the
+    // reader will be put in an error state
+    json_reader_read_element (reader, 6);
+    
+    // in case of error, this will return NULL, otherwise it will
+    // return the value of the element
+    str = json_reader_get_string_value (value);
+    
+    // this function resets the error state if any was set
+    json_reader_end_element (reader);
+    ```
+    
+    If you want to detect the error state as soon as possible, you can use
+    [gid.json1.reader.Reader.getError]:
+    
+    ```c
+    // like the example above, but in this case we print out the
+    // error immediately
+    if (!json_reader_read_element (reader, 6))
+      {
+        const GError *error = json_reader_get_error (reader);
+        g_print ("Unable to read the element: %s", error->message);
+      }
+    ```
+*/
+class Reader : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())json_reader_get_type != &gidSymbolNotFound ? json_reader_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "JsonReader";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Reader self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.json1.reader.Reader]
+      Returns: New builder object
+  */
+  static ReaderGidBuilder builder() nothrow
+  {
+    return new ReaderGidBuilder;
+  }
+
+  /**
+      Get `root` property.
+      Returns: The root of the JSON tree that the reader should read.
+  */
+  @property gid.json1.node.Node root() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.json1.node.Node)("root");
+  }
+
+  /**
+      Set `root` property.
+      Params:
+        propval = The root of the JSON tree that the reader should read.
+  */
+  @property void root(gid.json1.node.Node propval) nothrow
+  {
+    setRoot(propval);
+  }
+
+  /**
+      Creates a new reader.
+      
+      You can use this object to read the contents of the JSON tree starting
+      from the given node.
+  
+      Params:
+        node = the root node
+      Returns: the newly created reader
+  */
+  this(gid.json1.node.Node node = null) nothrow
+  {
+    JsonReader* _cretval;
+    _cretval = json_reader_new(node ? cast(JsonNode*)node._cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Counts the elements of the current position, if the reader is
+      positioned on an array.
+      
+      In case of failure, the reader is set to an error state.
+      Returns: the number of elements, or -1.
+  */
+  int countElements() nothrow
+  {
+    int _retval;
+    _retval = json_reader_count_elements(cast(JsonReader*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Counts the members of the current position, if the reader is
+      positioned on an object.
+      
+      In case of failure, the reader is set to an error state.
+      Returns: the number of members, or -1
+  */
+  int countMembers() nothrow
+  {
+    int _retval;
+    _retval = json_reader_count_members(cast(JsonReader*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Moves the cursor back to the previous node after being positioned
+      inside an array.
+      
+      This function resets the error state of the reader, if any was set.
+  */
+  void endElement() nothrow
+  {
+    json_reader_end_element(cast(JsonReader*)this._cPtr);
+  }
+
+  /**
+      Moves the cursor back to the previous node after being positioned
+      inside an object.
+      
+      This function resets the error state of the reader, if any was set.
+  */
+  void endMember() nothrow
+  {
+    json_reader_end_member(cast(JsonReader*)this._cPtr);
+  }
+
+  /**
+      Retrieves the boolean value of the current position of the reader.
+      
+      See also: [gid.json1.reader.Reader.getValue]
+      Returns: the boolean value
+  */
+  bool getBooleanValue() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)json_reader_get_boolean_value(cast(JsonReader*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves the reader node at the current position.
+      Returns: the current node of the reader
+  */
+  gid.json1.node.Node getCurrentNode() nothrow
+  {
+    JsonNode* _cretval;
+    _cretval = json_reader_get_current_node(cast(JsonReader*)this._cPtr);
+    auto _retval = _cretval ? new gid.json1.node.Node(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Retrieves the floating point value of the current position of the reader.
+      
+      See also: [gid.json1.reader.Reader.getValue]
+      Returns: the floating point value
+  */
+  double getDoubleValue() nothrow
+  {
+    double _retval;
+    _retval = json_reader_get_double_value(cast(JsonReader*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves the error currently set on the reader.
+      Returns: the current error
+  */
+  gid.glib2.error.ErrorWrap getError() nothrow
+  {
+    const(GError)* _cretval;
+    _cretval = json_reader_get_error(cast(JsonReader*)this._cPtr);
+    auto _retval = _cretval ? new gid.glib2.error.ErrorWrap(cast(GError*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Retrieves the integer value of the current position of the reader.
+      
+      See also: [gid.json1.reader.Reader.getValue]
+      Returns: the integer value
+  */
+  long getIntValue() nothrow
+  {
+    long _retval;
+    _retval = json_reader_get_int_value(cast(JsonReader*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves the name of the current member.
+      
+      In case of failure, the reader is set to an error state.
+      Returns: the name of the member
+  */
+  string getMemberName() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = json_reader_get_member_name(cast(JsonReader*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Checks whether the value of the current position of the reader is `null`.
+      
+      See also: [gid.json1.reader.Reader.getValue]
+      Returns: `TRUE` if `null` is set, and `FALSE` otherwise
+  */
+  bool getNullValue() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)json_reader_get_null_value(cast(JsonReader*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves the string value of the current position of the reader.
+      
+      See also: [gid.json1.reader.Reader.getValue]
+      Returns: the string value
+  */
+  string getStringValue() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = json_reader_get_string_value(cast(JsonReader*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Retrieves the value node at the current position of the reader.
+      
+      If the current position does not contain a scalar value, the reader
+      is set to an error state.
+      Returns: the current value node
+  */
+  gid.json1.node.Node getValue() nothrow
+  {
+    JsonNode* _cretval;
+    _cretval = json_reader_get_value(cast(JsonReader*)this._cPtr);
+    auto _retval = _cretval ? new gid.json1.node.Node(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Checks whether the reader is currently on an array.
+      Returns: `TRUE` if the reader is on an array
+  */
+  bool isArray() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)json_reader_is_array(cast(JsonReader*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Checks whether the reader is currently on an object.
+      Returns: `TRUE` if the reader is on an object
+  */
+  bool isObject() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)json_reader_is_object(cast(JsonReader*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Checks whether the reader is currently on a value.
+      Returns: `TRUE` if the reader is on a value
+  */
+  bool isValue() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)json_reader_is_value(cast(JsonReader*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves a list of member names from the current position, if the reader
+      is positioned on an object.
+      
+      In case of failure, the reader is set to an error state.
+      Returns: the members of
+          the object
+  */
+  string[] listMembers() nothrow
+  {
+    char** _cretval;
+    _cretval = json_reader_list_members(cast(JsonReader*)this._cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
+      gFree(cast(void*)_cretval);
+    }
+    return _retval;
+  }
+
+  /**
+      Advances the cursor of the reader to the element of the array or
+      the member of the object at the given position.
+      
+      You can use [gid.json1.reader.Reader.getValue] and its wrapper functions to
+      retrieve the value of the element; for instance, the following code will
+      read the first element of the array at the current cursor position:
+      
+      ```c
+      json_reader_read_element (reader, 0);
+      int_value = json_reader_get_int_value (reader);
+      ```
+      
+      After reading the value, you should call [gid.json1.reader.Reader.endElement]
+      to reposition the cursor inside the reader, e.g.:
+      
+      ```c
+      const char *str_value = NULL;
+      
+      json_reader_read_element (reader, 1);
+      str_value = json_reader_get_string_value (reader);
+      json_reader_end_element (reader);
+      
+      json_reader_read_element (reader, 2);
+      str_value = json_reader_get_string_value (reader);
+      json_reader_end_element (reader);
+      ```
+      
+      If the reader is not currently on an array or an object, or if the index is
+      bigger than the size of the array or the object, the reader will be
+      put in an error state until [gid.json1.reader.Reader.endElement] is called. This
+      means that, if used conditionally, [gid.json1.reader.Reader.endElement] must be
+      called on all branches:
+      
+      ```c
+      if (!json_reader_read_element (reader, 1))
+        {
+          g_propagate_error (error, json_reader_get_error (reader));
+          json_reader_end_element (reader);
+          return FALSE;
+        }
+      else
+        {
+          const char *str_value = json_reader_get_string_value (reader);
+          json_reader_end_element (reader);
+      
+          // use str_value
+      
+          return TRUE;
+        }
+      ```c
+  
+      Params:
+        index = the index of the element
+      Returns: `TRUE` on success, and `FALSE` otherwise
+  */
+  bool readElement(uint index) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)json_reader_read_element(cast(JsonReader*)this._cPtr, index);
+    return _retval;
+  }
+
+  /**
+      Advances the cursor of the reader to the `member_name` of the object at
+      the current position.
+      
+      You can use [gid.json1.reader.Reader.getValue] and its wrapper functions to
+      retrieve the value of the member; for instance:
+      
+      ```c
+      json_reader_read_member (reader, "width");
+      width = json_reader_get_int_value (reader);
+      ```
+      
+      After reading the value, `[gid.json1.reader.Reader.endMember]` should be called to
+      reposition the cursor inside the reader, e.g.:
+      
+      ```c
+      json_reader_read_member (reader, "author");
+      author = json_reader_get_string_value (reader);
+      json_reader_end_member (reader);
+      
+      json_reader_read_member (reader, "title");
+      title = json_reader_get_string_value (reader);
+      json_reader_end_member (reader);
+      ```
+      
+      If the reader is not currently on an object, or if the `member_name` is not
+      defined in the object, the reader will be put in an error state until
+      [gid.json1.reader.Reader.endMember] is called. This means that if used
+      conditionally, [gid.json1.reader.Reader.endMember] must be called on all branches:
+      
+      ```c
+      if (!json_reader_read_member (reader, "title"))
+        {
+          g_propagate_error (error, json_reader_get_error (reader));
+          json_reader_end_member (reader);
+          return FALSE;
+        }
+      else
+        {
+          const char *str_value = json_reader_get_string_value (reader);
+          json_reader_end_member (reader);
+      
+          // use str_value
+      
+          return TRUE;
+        }
+      ```
+  
+      Params:
+        memberName = the name of the member to read
+      Returns: `TRUE` on success, and `FALSE` otherwise
+  */
+  bool readMember(string memberName) nothrow
+  {
+    bool _retval;
+    const(char)* _memberName = memberName.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)json_reader_read_member(cast(JsonReader*)this._cPtr, _memberName);
+    return _retval;
+  }
+
+  /**
+      Sets the root node of the JSON tree to be read by reader.
+      
+      The reader will take a copy of the node.
+  
+      Params:
+        root = the root node
+  */
+  void setRoot(gid.json1.node.Node root = null) nothrow
+  {
+    json_reader_set_root(cast(JsonReader*)this._cPtr, root ? cast(JsonNode*)root._cPtr(No.Dup) : null);
+  }
+}
+
+/// Fluent builder implementation template for [gid.json1.reader.Reader]
+class ReaderGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `root` property.
+      Params:
+        propval = The root of the JSON tree that the reader should read.
+      Returns: Builder instance for fluent chaining
+  */
+  T root(gid.json1.node.Node propval) nothrow
+  {
+    return setProperty("root", propval);
+  }
+}
+
+/// Fluent builder for [gid.json1.reader.Reader]
+final class ReaderGidBuilder : ReaderGidBuilderImpl!ReaderGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Reader build() nothrow
+  {
+    return new Reader(cast(void*)createGObject(Reader._getGType), Yes.Take);
+  }
+}

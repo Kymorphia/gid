@@ -1,0 +1,1308 @@
+/// Module for [ComboBox] class
+module gid.gtk4.combo_box;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gdk4.device;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.accessible;
+import gid.gtk4.accessible_mixin;
+import gid.gtk4.buildable;
+import gid.gtk4.buildable_mixin;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.cell_editable;
+import gid.gtk4.cell_editable_mixin;
+import gid.gtk4.cell_layout;
+import gid.gtk4.cell_layout_mixin;
+import gid.gtk4.constraint_target;
+import gid.gtk4.constraint_target_mixin;
+import gid.gtk4.tree_iter;
+import gid.gtk4.tree_model;
+import gid.gtk4.types;
+import gid.gtk4.widget;
+
+/**
+    A [gid.gtk4.combo_box.ComboBox] is a widget that allows the user to choose from a list of
+    valid choices.
+    
+    <picture>
+      <source srcset="combo-box-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="An example GtkComboBox" src="combo-box.png">
+    </picture>
+    
+    The [gid.gtk4.combo_box.ComboBox] displays the selected choice; when activated, the
+    [gid.gtk4.combo_box.ComboBox] displays a popup which allows the user to make a new choice.
+    
+    The [gid.gtk4.combo_box.ComboBox] uses the model-view pattern; the list of valid choices
+    is specified in the form of a tree model, and the display of the choices
+    can be adapted to the data in the model by using cell renderers, as you
+    would in a tree view. This is possible since [gid.gtk4.combo_box.ComboBox] implements the
+    [gid.gtk4.cell_layout.CellLayout] interface. The tree model holding the valid
+    choices is not restricted to a flat list, it can be a real tree, and the
+    popup will reflect the tree structure.
+    
+    To allow the user to enter values not in the model, the
+    [gid.gtk4.combo_box.ComboBox.hasEntry] property allows the [gid.gtk4.combo_box.ComboBox] to
+    contain a [gid.gtk4.entry.Entry]. This entry can be accessed by calling
+    [gid.gtk4.combo_box.ComboBox.getChild] on the combo box.
+    
+    For a simple list of textual choices, the model-view API of [gid.gtk4.combo_box.ComboBox]
+    can be a bit overwhelming. In this case, [gid.gtk4.combo_box_text.ComboBoxText] offers
+    a simple alternative. Both [gid.gtk4.combo_box.ComboBox] and [gid.gtk4.combo_box_text.ComboBoxText] can contain
+    an entry.
+    
+    ## CSS nodes
+    
+    ```
+    combobox
+    ├── box.linked
+    │   ╰── button.combo
+    │       ╰── box
+    │           ├── cellview
+    │           ╰── arrow
+    ╰── window.popup
+    ```
+    
+    A normal combobox contains a box with the .linked class, a button
+    with the .combo class and inside those buttons, there are a cellview and
+    an arrow.
+    
+    ```
+    combobox
+    ├── box.linked
+    │   ├── entry.combo
+    │   ╰── button.combo
+    │       ╰── box
+    │           ╰── arrow
+    ╰── window.popup
+    ```
+    
+    A [gid.gtk4.combo_box.ComboBox] with an entry has a single CSS node with name combobox.
+    It contains a box with the .linked class. That box contains an entry and
+    a button, both with the .combo class added. The button also contains another
+    node with name arrow.
+    
+    ## Accessibility
+    
+    [gid.gtk4.combo_box.ComboBox] uses the [gid.gtk4.types.AccessibleRole.ComboBox] role.
+
+    Deprecated: Use [gid.gtk4.drop_down.DropDown] instead
+*/
+class ComboBox : gid.gtk4.widget.Widget, gid.gtk4.cell_editable.CellEditable, gid.gtk4.cell_layout.CellLayout
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_combo_box_get_type != &gidSymbolNotFound ? gtk_combo_box_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkComboBox";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ComboBox self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.combo_box.ComboBox]
+      Returns: New builder object
+  */
+  static ComboBoxGidBuilder builder() nothrow
+  {
+    return new ComboBoxGidBuilder;
+  }
+
+  /**
+      Get `active` property.
+      Returns: The item which is currently active.
+        
+        If the model is a non-flat treemodel, and the active item is not an
+        immediate child of the root of the tree, this property has the value
+        `gtk_tree_path_get_indices (path)[0]`, where `path` is the
+        [gid.gtk4.tree_path.TreePath] of the active item.
+  */
+  @property int active() nothrow
+  {
+    return getActive();
+  }
+
+  /**
+      Set `active` property.
+      Params:
+        propval = The item which is currently active.
+          
+          If the model is a non-flat treemodel, and the active item is not an
+          immediate child of the root of the tree, this property has the value
+          `gtk_tree_path_get_indices (path)[0]`, where `path` is the
+          [gid.gtk4.tree_path.TreePath] of the active item.
+  */
+  @property void active(int propval) nothrow
+  {
+    setActive(propval);
+  }
+
+  /**
+      Get `activeId` property.
+      Returns: The value of the ID column of the active row.
+  */
+  @property string activeId() nothrow
+  {
+    return getActiveId();
+  }
+
+  /**
+      Set `activeId` property.
+      Params:
+        propval = The value of the ID column of the active row.
+  */
+  @property void activeId(string propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(string)("active-id", propval);
+  }
+
+  /**
+      Get `buttonSensitivity` property.
+      Returns: Whether the dropdown button is sensitive when
+        the model is empty.
+  */
+  @property gid.gtk4.types.SensitivityType buttonSensitivity() nothrow
+  {
+    return getButtonSensitivity();
+  }
+
+  /**
+      Set `buttonSensitivity` property.
+      Params:
+        propval = Whether the dropdown button is sensitive when
+          the model is empty.
+  */
+  @property void buttonSensitivity(gid.gtk4.types.SensitivityType propval) nothrow
+  {
+    setButtonSensitivity(propval);
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gid.gtk4.widget.Widget child() nothrow
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gid.gtk4.widget.Widget propval) nothrow
+  {
+    setChild(propval);
+  }
+
+  /**
+      Get `entryTextColumn` property.
+      Returns: The model column to associate with strings from the entry.
+        
+        This is property only relevant if the combo was created with
+        [gid.gtk4.combo_box.ComboBox.hasEntry] is true.
+  */
+  @property int entryTextColumn() nothrow
+  {
+    return getEntryTextColumn();
+  }
+
+  /**
+      Set `entryTextColumn` property.
+      Params:
+        propval = The model column to associate with strings from the entry.
+          
+          This is property only relevant if the combo was created with
+          [gid.gtk4.combo_box.ComboBox.hasEntry] is true.
+  */
+  @property void entryTextColumn(int propval) nothrow
+  {
+    setEntryTextColumn(propval);
+  }
+
+  /**
+      Get `hasEntry` property.
+      Returns: Whether the combo box has an entry.
+  */
+  @property bool hasEntry() nothrow
+  {
+    return getHasEntry();
+  }
+
+  /**
+      Get `hasFrame` property.
+      Returns: The `has-frame` property controls whether a frame is drawn around the entry.
+  */
+  @property bool hasFrame() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("has-frame");
+  }
+
+  /**
+      Set `hasFrame` property.
+      Params:
+        propval = The `has-frame` property controls whether a frame is drawn around the entry.
+  */
+  @property void hasFrame(bool propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(bool)("has-frame", propval);
+  }
+
+  /**
+      Get `idColumn` property.
+      Returns: The model column that provides string IDs for the values
+        in the model, if != -1.
+  */
+  @property int idColumn() nothrow
+  {
+    return getIdColumn();
+  }
+
+  /**
+      Set `idColumn` property.
+      Params:
+        propval = The model column that provides string IDs for the values
+          in the model, if != -1.
+  */
+  @property void idColumn(int propval) nothrow
+  {
+    setIdColumn(propval);
+  }
+
+  /**
+      Get `model` property.
+      Returns: The model from which the combo box takes its values.
+  */
+  @property gid.gtk4.tree_model.TreeModel model() nothrow
+  {
+    return getModel();
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model from which the combo box takes its values.
+  */
+  @property void model(gid.gtk4.tree_model.TreeModel propval) nothrow
+  {
+    setModel(propval);
+  }
+
+  /**
+      Get `popupFixedWidth` property.
+      Returns: Whether the popup's width should be a fixed width matching the
+        allocated width of the combo box.
+  */
+  @property bool popupFixedWidth() nothrow
+  {
+    return getPopupFixedWidth();
+  }
+
+  /**
+      Set `popupFixedWidth` property.
+      Params:
+        propval = Whether the popup's width should be a fixed width matching the
+          allocated width of the combo box.
+  */
+  @property void popupFixedWidth(bool propval) nothrow
+  {
+    setPopupFixedWidth(propval);
+  }
+
+  /**
+      Get `popupShown` property.
+      Returns: Whether the combo boxes dropdown is popped up.
+        
+        Note that this property is mainly useful, because
+        it allows you to connect to notify::popup-shown.
+  */
+  @property bool popupShown() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(bool)("popup-shown");
+  }
+
+  mixin CellEditableT!();
+  mixin CellLayoutT!();
+
+  /**
+      Creates a new empty [gid.gtk4.combo_box.ComboBox].
+      Returns: A new [gid.gtk4.combo_box.ComboBox]
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  this() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_combo_box_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Creates a new empty [gid.gtk4.combo_box.ComboBox] with an entry.
+      
+      In order to use a combo box with entry, you need to tell it
+      which column of the model contains the text for the entry
+      by calling [gid.gtk4.combo_box.ComboBox.setEntryTextColumn].
+      Returns: A new [gid.gtk4.combo_box.ComboBox]
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  static gid.gtk4.combo_box.ComboBox newWithEntry() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_combo_box_new_with_entry();
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Creates a new [gid.gtk4.combo_box.ComboBox] with a model.
+  
+      Params:
+        model = a [gid.gtk4.tree_model.TreeModel]
+      Returns: A new [gid.gtk4.combo_box.ComboBox]
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  static gid.gtk4.combo_box.ComboBox newWithModel(gid.gtk4.tree_model.TreeModel model) nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_combo_box_new_with_model(model ? cast(GtkTreeModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(No.Dup) : null);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Creates a new empty [gid.gtk4.combo_box.ComboBox] with an entry and a model.
+      
+      See also [gid.gtk4.combo_box.ComboBox.newWithEntry].
+  
+      Params:
+        model = A [gid.gtk4.tree_model.TreeModel]
+      Returns: A new [gid.gtk4.combo_box.ComboBox]
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  static gid.gtk4.combo_box.ComboBox newWithModelAndEntry(gid.gtk4.tree_model.TreeModel model) nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_combo_box_new_with_model_and_entry(model ? cast(GtkTreeModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(No.Dup) : null);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the index of the currently active item.
+      
+      If the model is a non-flat treemodel, and the active item is not
+      an immediate child of the root of the tree, this function returns
+      `gtk_tree_path_get_indices (path)[0]`, where `path` is the
+      [gid.gtk4.tree_path.TreePath] of the active item.
+      Returns: An integer which is the index of the currently active item,
+          or -1 if there’s no active item
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  int getActive() nothrow
+  {
+    int _retval;
+    _retval = gtk_combo_box_get_active(cast(GtkComboBox*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the ID of the active row of combo_box.
+      
+      This value is taken from the active row and the column specified
+      by the [gid.gtk4.combo_box.ComboBox.idColumn] property of combo_box
+      (see [gid.gtk4.combo_box.ComboBox.setIdColumn]).
+      
+      The returned value is an interned string which means that you can
+      compare the pointer by value to other interned strings and that you
+      must not free it.
+      
+      If the [gid.gtk4.combo_box.ComboBox.idColumn] property of combo_box is
+      not set, or if no row is active, or if the active row has a null
+      ID value, then null is returned.
+      Returns: the ID of the active row
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  string getActiveId() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_combo_box_get_active_id(cast(GtkComboBox*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Sets iter to point to the currently active item.
+      
+      If no item is active, iter is left unchanged.
+  
+      Params:
+        iter = A [gid.gtk4.tree_iter.TreeIter]
+      Returns: true if iter was set, false otherwise
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  bool getActiveIter(out gid.gtk4.tree_iter.TreeIter iter) nothrow
+  {
+    bool _retval;
+    auto _iter = boxedNew!GtkTreeIter(gid.gtk4.tree_iter.TreeIter._getGType);
+    _retval = cast(bool)gtk_combo_box_get_active_iter(cast(GtkComboBox*)this._cPtr, _iter);
+    iter = new gid.gtk4.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Returns whether the combo box sets the dropdown button
+      sensitive or not when there are no items in the model.
+      Returns: [gid.gtk4.types.SensitivityType.On] if the dropdown button
+          is sensitive when the model is empty, [gid.gtk4.types.SensitivityType.Off]
+          if the button is always insensitive or [gid.gtk4.types.SensitivityType.Auto]
+          if it is only sensitive as long as the model has one item to
+          be selected.
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  gid.gtk4.types.SensitivityType getButtonSensitivity() nothrow
+  {
+    GtkSensitivityType _cretval;
+    _cretval = gtk_combo_box_get_button_sensitivity(cast(GtkComboBox*)this._cPtr);
+    gid.gtk4.types.SensitivityType _retval = cast(gid.gtk4.types.SensitivityType)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the child widget of combo_box.
+      Returns: the child widget of combo_box
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  gid.gtk4.widget.Widget getChild() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_combo_box_get_child(cast(GtkComboBox*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the column which combo_box is using to get the strings
+      from to display in the internal entry.
+      Returns: A column in the data source model of combo_box.
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  int getEntryTextColumn() nothrow
+  {
+    int _retval;
+    _retval = gtk_combo_box_get_entry_text_column(cast(GtkComboBox*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns whether the combo box has an entry.
+      Returns: whether there is an entry in combo_box.
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  bool getHasEntry() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_combo_box_get_has_entry(cast(GtkComboBox*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the column which combo_box is using to get string IDs
+      for values from.
+      Returns: A column in the data source model of combo_box.
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  int getIdColumn() nothrow
+  {
+    int _retval;
+    _retval = gtk_combo_box_get_id_column(cast(GtkComboBox*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the [gid.gtk4.tree_model.TreeModel] of combo_box.
+      Returns: A [gid.gtk4.tree_model.TreeModel] which was passed
+          during construction.
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  gid.gtk4.tree_model.TreeModel getModel() nothrow
+  {
+    GtkTreeModel* _cretval;
+    _cretval = gtk_combo_box_get_model(cast(GtkComboBox*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets whether the popup uses a fixed width.
+      Returns: true if the popup uses a fixed width
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  bool getPopupFixedWidth() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_combo_box_get_popup_fixed_width(cast(GtkComboBox*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Hides the menu or dropdown list of combo_box.
+      
+      This function is mostly intended for use by accessibility technologies;
+      applications should have little use for it.
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  void popdown() nothrow
+  {
+    gtk_combo_box_popdown(cast(GtkComboBox*)this._cPtr);
+  }
+
+  /**
+      Pops up the menu or dropdown list of combo_box.
+      
+      This function is mostly intended for use by accessibility technologies;
+      applications should have little use for it.
+      
+      Before calling this, combo_box must be mapped, or nothing will happen.
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  void popup() nothrow
+  {
+    gtk_combo_box_popup(cast(GtkComboBox*)this._cPtr);
+  }
+
+  /**
+      Pops up the menu of combo_box.
+      
+      Note that currently this does not do anything with the device, as it was
+      previously only used for list-mode combo boxes, and those were removed
+      in GTK 4. However, it is retained in case similar functionality is added
+      back later.
+  
+      Params:
+        device = a [gid.gdk4.device.Device]
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  void popupForDevice(gid.gdk4.device.Device device) nothrow
+  {
+    gtk_combo_box_popup_for_device(cast(GtkComboBox*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the active item of combo_box to be the item at index.
+  
+      Params:
+        index = An index in the model passed during construction,
+            or -1 to have no active item
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  void setActive(int index) nothrow
+  {
+    gtk_combo_box_set_active(cast(GtkComboBox*)this._cPtr, index);
+  }
+
+  /**
+      Changes the active row of combo_box to the one that has an ID equal to
+      active_id.
+      
+      If active_id is null, the active row is unset. Rows having
+      a null ID string cannot be made active by this function.
+      
+      If the [gid.gtk4.combo_box.ComboBox.idColumn] property of combo_box is
+      unset or if no row has the given ID then the function does nothing
+      and returns false.
+  
+      Params:
+        activeId = the ID of the row to select
+      Returns: true if a row with a matching ID was found. If a null
+          active_id was given to unset the active row, the function
+          always returns true.
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  bool setActiveId(string activeId = null) nothrow
+  {
+    bool _retval;
+    const(char)* _activeId = activeId.toCString!(No.Malloc, Yes.Nullable);
+    _retval = cast(bool)gtk_combo_box_set_active_id(cast(GtkComboBox*)this._cPtr, _activeId);
+    return _retval;
+  }
+
+  /**
+      Sets the current active item to be the one referenced by iter.
+      
+      If iter is null, the active item is unset.
+  
+      Params:
+        iter = The [gid.gtk4.tree_iter.TreeIter]
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  void setActiveIter(gid.gtk4.tree_iter.TreeIter iter = null) nothrow
+  {
+    gtk_combo_box_set_active_iter(cast(GtkComboBox*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets whether the dropdown button of the combo box should update
+      its sensitivity depending on the model contents.
+  
+      Params:
+        sensitivity = specify the sensitivity of the dropdown button
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  void setButtonSensitivity(gid.gtk4.types.SensitivityType sensitivity) nothrow
+  {
+    gtk_combo_box_set_button_sensitivity(cast(GtkComboBox*)this._cPtr, sensitivity);
+  }
+
+  /**
+      Sets the child widget of combo_box.
+  
+      Params:
+        child = the child widget
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  void setChild(gid.gtk4.widget.Widget child = null) nothrow
+  {
+    gtk_combo_box_set_child(cast(GtkComboBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the model column which combo_box should use to get strings
+      from to be text_column.
+      
+      For this column no separate
+      [gid.gtk4.cell_renderer.CellRenderer] is needed.
+      
+      The column text_column in the model of combo_box must be of
+      type `G_TYPE_STRING`.
+      
+      This is only relevant if combo_box has been created with
+      [gid.gtk4.combo_box.ComboBox.hasEntry] as true.
+  
+      Params:
+        textColumn = A column in model to get the strings from for
+            the internal entry
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  void setEntryTextColumn(int textColumn) nothrow
+  {
+    gtk_combo_box_set_entry_text_column(cast(GtkComboBox*)this._cPtr, textColumn);
+  }
+
+  /**
+      Sets the model column which combo_box should use to get string IDs
+      for values from.
+      
+      The column id_column in the model of combo_box must be of type
+      `G_TYPE_STRING`.
+  
+      Params:
+        idColumn = A column in model to get string IDs for values from
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  void setIdColumn(int idColumn) nothrow
+  {
+    gtk_combo_box_set_id_column(cast(GtkComboBox*)this._cPtr, idColumn);
+  }
+
+  /**
+      Sets the model used by combo_box to be model.
+      
+      Will unset a previously set model (if applicable). If model is null,
+      then it will unset the model.
+      
+      Note that this function does not clear the cell renderers, you have to
+      call [gid.gtk4.cell_layout.CellLayout.clear] yourself if you need to set up different
+      cell renderers for the new model.
+  
+      Params:
+        model = A [gid.gtk4.tree_model.TreeModel]
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  void setModel(gid.gtk4.tree_model.TreeModel model = null) nothrow
+  {
+    gtk_combo_box_set_model(cast(GtkComboBox*)this._cPtr, model ? cast(GtkTreeModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Specifies whether the popup’s width should be a fixed width.
+      
+      If fixed is true, the popup's width is set to match the
+      allocated width of the combo box.
+  
+      Params:
+        fixed = whether to use a fixed popup width
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  void setPopupFixedWidth(bool fixed) nothrow
+  {
+    gtk_combo_box_set_popup_fixed_width(cast(GtkComboBox*)this._cPtr, fixed);
+  }
+
+  /**
+      Sets the row separator function, which is used to determine
+      whether a row should be drawn as a separator.
+      
+      If the row separator function is null, no separators are drawn.
+      This is the default value.
+  
+      Params:
+        func = a [gid.gtk4.types.TreeViewRowSeparatorFunc]
+  
+      Deprecated: Use [gid.gtk4.drop_down.DropDown]
+  */
+  void setRowSeparatorFunc(gid.gtk4.types.TreeViewRowSeparatorFunc func = null) nothrow
+  {
+    extern(C) gboolean _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data) nothrow
+    {
+      bool _dretval;
+      auto _dlg = cast(gid.gtk4.types.TreeViewRowSeparatorFunc*)data;
+      auto _iter = iter ? new gid.gtk4.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+
+      try
+      {
+        _dretval = (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.tree_model.TreeModel)(cast(void*)model, No.Take), _iter);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.types.TreeViewRowSeparatorFunc");
+      }
+      auto _retval = cast(gboolean)_dretval;
+      if (_iter)
+        _iter._cUnborrow;
+
+      return _retval;
+    }
+    auto _funcCB = func ? &_funcCallback : null;
+    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+    gtk_combo_box_set_row_separator_func(cast(GtkComboBox*)this._cPtr, _funcCB, _func, _funcDestroyCB);
+  }
+
+  /**
+      Connect to `Activate` signal.
+  
+      Emitted to when the combo box is activated.
+        
+        The `::activate` signal on [gid.gtk4.combo_box.ComboBox] is an action signal and
+        emitting it causes the combo box to pop up its dropdown.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk4.combo_box.ComboBox comboBox)`
+  
+          `comboBox` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectActivate(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk4.combo_box.ComboBox)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.combo_box.ComboBox.activate");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("activate", closure, after);
+  }
+
+  /**
+      Connect to `Changed` signal.
+  
+      Emitted when the active item is changed.
+        
+        The can be due to the user selecting a different item from the list,
+        or due to a call to [gid.gtk4.combo_box.ComboBox.setActiveIter]. It will
+        also be emitted while typing into the entry of a combo box with an entry.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk4.combo_box.ComboBox comboBox)`
+  
+          `comboBox` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectChanged(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk4.combo_box.ComboBox)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.combo_box.ComboBox.changed");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("changed", closure, after);
+  }
+
+  /**
+      Connect to `FormatEntryText` signal.
+  
+      Emitted to allow changing how the text in a combo box's entry is displayed.
+        
+        See [gid.gtk4.combo_box.ComboBox.hasEntry].
+        
+        Connect a signal handler which returns an allocated string representing
+        path. That string will then be used to set the text in the combo box's
+        entry. The default signal handler uses the text from the
+        [gid.gtk4.combo_box.ComboBox.entryTextColumn] model column.
+        
+        Here's an example signal handler which fetches data from the model and
+        displays it in the entry.
+        ```c
+        static char *
+        format_entry_text_callback (GtkComboBox *combo,
+                                    const char *path,
+                                    gpointer     user_data)
+        {
+          GtkTreeIter iter;
+          GtkTreeModel model;
+          double       value;
+        
+          model = gtk_combo_box_get_model (combo);
+        
+          gtk_tree_model_get_iter_from_string (model, &iter, path);
+          gtk_tree_model_get (model, &iter,
+                              THE_DOUBLE_VALUE_COLUMN, &value,
+                              -1);
+        
+          return g_strdup_printf ("%g", value);
+        }
+        ```
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `string callback(string path, gid.gtk4.combo_box.ComboBox comboBox)`
+  
+          `path` the [gid.gtk4.tree_path.TreePath] string from the combo box's current model
+              to format text for (optional)
+  
+          `comboBox` the instance the signal is connected to (optional)
+  
+          `Returns` a newly allocated string representing path
+              for the current [gid.gtk4.combo_box.ComboBox] model.
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectFormatEntryText(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == string)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == string)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gtk4.combo_box.ComboBox)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+      string _retval;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.combo_box.ComboBox.formatEntryText");
+      }
+
+      setVal!(string)(_returnValue, _retval);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("format-entry-text", closure, after);
+  }
+
+  /**
+      Connect to `MoveActive` signal.
+  
+      Emitted to move the active selection.
+        
+        This is an [keybinding signal](class.SignalAction.html).
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk4.types.ScrollType scrollType, gid.gtk4.combo_box.ComboBox comboBox)`
+  
+          `scrollType` a [gid.gtk4.types.ScrollType] (optional)
+  
+          `comboBox` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectMoveActive(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.gtk4.types.ScrollType)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gtk4.combo_box.ComboBox)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.combo_box.ComboBox.moveActive");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("move-active", closure, after);
+  }
+
+  /**
+      Connect to `Popdown` signal.
+  
+      Emitted to popdown the combo box list.
+        
+        This is an [keybinding signal](class.SignalAction.html).
+        
+        The default bindings for this signal are Alt+Up and Escape.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `bool callback(gid.gtk4.combo_box.ComboBox comboBox)`
+  
+          `comboBox` the instance the signal is connected to (optional)
+  
+          `Returns` whether the combo box was popped down
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectPopdown(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == bool)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk4.combo_box.ComboBox)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+      bool _retval;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _retval = _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.combo_box.ComboBox.popdown");
+      }
+
+      setVal!(bool)(_returnValue, _retval);
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("popdown", closure, after);
+  }
+
+  /**
+      Connect to `Popup` signal.
+  
+      Emitted to popup the combo box list.
+        
+        This is an [keybinding signal](class.SignalAction.html).
+        
+        The default binding for this signal is Alt+Down.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gtk4.combo_box.ComboBox comboBox)`
+  
+          `comboBox` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectPopup(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.gtk4.combo_box.ComboBox)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.combo_box.ComboBox.popup");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("popup", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.combo_box.ComboBox]
+class ComboBoxGidBuilderImpl(T) : gid.gtk4.widget.WidgetGidBuilderImpl!T, gid.gtk4.cell_editable.CellEditableGidBuilderImpl!T, gid.gtk4.cell_layout.CellLayoutGidBuilderImpl!T
+{
+
+  mixin CellEditableGidBuilderT!();
+  mixin CellLayoutGidBuilderT!();
+
+  /**
+      Set `active` property.
+      Params:
+        propval = The item which is currently active.
+          
+          If the model is a non-flat treemodel, and the active item is not an
+          immediate child of the root of the tree, this property has the value
+          `gtk_tree_path_get_indices (path)[0]`, where `path` is the
+          [gid.gtk4.tree_path.TreePath] of the active item.
+      Returns: Builder instance for fluent chaining
+  */
+  T active(int propval) nothrow
+  {
+    return setProperty("active", propval);
+  }
+
+  /**
+      Set `activeId` property.
+      Params:
+        propval = The value of the ID column of the active row.
+      Returns: Builder instance for fluent chaining
+  */
+  T activeId(string propval) nothrow
+  {
+    return setProperty("active-id", propval);
+  }
+
+  /**
+      Set `buttonSensitivity` property.
+      Params:
+        propval = Whether the dropdown button is sensitive when
+          the model is empty.
+      Returns: Builder instance for fluent chaining
+  */
+  T buttonSensitivity(gid.gtk4.types.SensitivityType propval) nothrow
+  {
+    return setProperty("button-sensitivity", propval);
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gid.gtk4.widget.Widget propval) nothrow
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `entryTextColumn` property.
+      Params:
+        propval = The model column to associate with strings from the entry.
+          
+          This is property only relevant if the combo was created with
+          [gid.gtk4.combo_box.ComboBox.hasEntry] is true.
+      Returns: Builder instance for fluent chaining
+  */
+  T entryTextColumn(int propval) nothrow
+  {
+    return setProperty("entry-text-column", propval);
+  }
+
+  /**
+      Set `hasEntry` property.
+      Params:
+        propval = Whether the combo box has an entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasEntry(bool propval) nothrow
+  {
+    return setProperty("has-entry", propval);
+  }
+
+  /**
+      Set `hasFrame` property.
+      Params:
+        propval = The `has-frame` property controls whether a frame is drawn around the entry.
+      Returns: Builder instance for fluent chaining
+  */
+  T hasFrame(bool propval) nothrow
+  {
+    return setProperty("has-frame", propval);
+  }
+
+  /**
+      Set `idColumn` property.
+      Params:
+        propval = The model column that provides string IDs for the values
+          in the model, if != -1.
+      Returns: Builder instance for fluent chaining
+  */
+  T idColumn(int propval) nothrow
+  {
+    return setProperty("id-column", propval);
+  }
+
+  /**
+      Set `model` property.
+      Params:
+        propval = The model from which the combo box takes its values.
+      Returns: Builder instance for fluent chaining
+  */
+  T model(gid.gtk4.tree_model.TreeModel propval) nothrow
+  {
+    return setProperty("model", propval);
+  }
+
+  /**
+      Set `popupFixedWidth` property.
+      Params:
+        propval = Whether the popup's width should be a fixed width matching the
+          allocated width of the combo box.
+      Returns: Builder instance for fluent chaining
+  */
+  T popupFixedWidth(bool propval) nothrow
+  {
+    return setProperty("popup-fixed-width", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk4.combo_box.ComboBox]
+final class ComboBoxGidBuilder : ComboBoxGidBuilderImpl!ComboBoxGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  ComboBox build() nothrow
+  {
+    return new ComboBox(cast(void*)createGObject(ComboBox._getGType), Yes.Take);
+  }
+}

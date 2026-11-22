@@ -1,0 +1,66 @@
+/// Module for [AttrInt] class
+module gid.pango1.attr_int;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.pango1.attribute;
+import gid.pango1.c.functions;
+import gid.pango1.c.types;
+import gid.pango1.types;
+
+/**
+    The [gid.pango1.attr_int.AttrInt] structure is used to represent attributes with
+    an integer or enumeration value.
+*/
+class AttrInt : StructWrap!(PangoAttrInt)
+{
+  /**
+      Create a `attr_int.AttrInt` wrap type.
+      Params:
+        value = the value of the attribute
+  */
+  this(int value = int.init) nothrow
+  {
+    this.value = value;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /**
+      Get `attr` field.
+      Returns: the common portion of the attribute
+  */
+  @property gid.pango1.attribute.Attribute attr() nothrow
+  {
+    return cToD!(gid.pango1.attribute.Attribute)(cast(void*)&(cast(PangoAttrInt*)this._cPtr).attr);
+  }
+
+  /**
+      Get `value` field.
+      Returns: the value of the attribute
+  */
+  @property int value() nothrow
+  {
+    return (cast(PangoAttrInt*)this._cPtr).value;
+  }
+
+  /**
+      Set `value` field.
+      Params:
+        propval = the value of the attribute
+  */
+  @property void value(int propval) nothrow
+  {
+    (cast(PangoAttrInt*)this._cPtr).value = propval;
+  }
+}

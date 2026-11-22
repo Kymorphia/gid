@@ -1,0 +1,66 @@
+/// Module for [TocSetter] interface
+module gid.gst1.toc_setter;
+
+public import gid.core.basictypes;
+public import gid.gst1.toc_setter_iface_proxy;
+import gid.core.utils;
+import gid.gobject2.gid_builder;
+import gid.gst1.c.functions;
+import gid.gst1.c.types;
+import gid.gst1.toc;
+import gid.gst1.types;
+
+/**
+    Element interface that allows setting of the TOC.
+    
+    Elements that support some kind of chapters or editions (or tracks like in
+    the FLAC cue sheet) will implement this interface.
+    
+    If you just want to retrieve the TOC in your application then all you
+    need to do is watch for TOC messages on your pipeline's bus (or you can
+    perform TOC query). This interface is only for setting TOC data, not for
+    extracting it. To set TOC from the application, find proper tocsetter element
+    and set TOC using [gid.gst1.toc_setter.TocSetter.setToc].
+    
+    Elements implementing the #GstTocSetter interface can extend existing TOC
+    by getting extend UID for that (you can use [gid.gst1.toc.Toc.findEntry] to retrieve it)
+    with any TOC entries received from downstream.
+*/
+interface TocSetter : GidWrap
+{
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gst_toc_setter_get_type != &gidSymbolNotFound ? gst_toc_setter_get_type() : cast(GType)0;
+  }
+
+  /**
+      Return current TOC the setter uses. The TOC should not be
+      modified without making it writable first.
+      Returns: TOC set, or null. Unref with
+            gst_toc_unref() when no longer needed
+  */
+  gid.gst1.toc.Toc getToc();
+
+  /**
+      Reset the internal TOC. Elements should call this from within the
+      state-change handler.
+  */
+  void reset();
+
+  /**
+      Set the given TOC on the setter. Previously set TOC will be
+      unreffed before setting a new one.
+  
+      Params:
+        toc = a #GstToc to set.
+  */
+  void setToc(gid.gst1.toc.Toc toc = null);
+}
+
+/// Fluent builder implementation template for [gid.gst1.toc_setter.TocSetter]
+interface TocSetterGidBuilderImpl(T)
+{
+}

@@ -1,0 +1,141 @@
+/// Module for [PixbufModulePattern] class
+module gid.gdkpixbuf2.pixbuf_module_pattern;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gdkpixbuf2.c.functions;
+import gid.gdkpixbuf2.c.types;
+import gid.gdkpixbuf2.types;
+
+/**
+    The signature prefix for a module.
+    
+    The signature of a module is a set of prefixes. Prefixes are encoded as
+    pairs of ordinary strings, where the second string, called the mask, if
+    not `NULL`, must be of the same length as the first one and may contain
+    ' ', '!', 'x', 'z', and 'n' to indicate bytes that must be matched,
+    not matched, "don't-care"-bytes, zeros and non-zeros, respectively.
+    
+    Each prefix has an associated integer that describes the relevance of
+    the prefix, with 0 meaning a mismatch and 100 a "perfect match".
+    
+    Starting with gdk-pixbuf 2.8, the first byte of the mask may be '*',
+    indicating an unanchored pattern that matches not only at the beginning,
+    but also in the middle. Versions prior to 2.8 will interpret the '*'
+    like an 'x'.
+    
+    The signature of a module is stored as an array of
+    `GdkPixbufModulePatterns`. The array is terminated by a pattern
+    where the `prefix` is `NULL`.
+    
+    ```c
+    GdkPixbufModulePattern *signature[] = {
+      { "abcdx", " !x z", 100 },
+      { "bla", NULL,  90 },
+      { NULL, NULL, 0 }
+    };
+    ```
+    
+    In the example above, the signature matches e.g. "auud\0" with
+    relevance 100, and "blau" with relevance 90.
+*/
+class PixbufModulePattern : StructWrap!(GdkPixbufModulePattern)
+{
+  /**
+      Create a `pixbuf_module_pattern.PixbufModulePattern` wrap type.
+      Params:
+        prefix = the prefix for this pattern
+        mask = mask containing bytes which modify how the prefix is matched against
+           test data
+        relevance = relevance of this pattern
+  */
+  this(string prefix = string.init, string mask = string.init, int relevance = int.init) nothrow
+  {
+    this.prefix = prefix;
+    this.mask = mask;
+    this.relevance = relevance;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _prefixRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `prefix` field.
+      Returns: the prefix for this pattern
+  */
+  @property string prefix() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GdkPixbufModulePattern*)this._cPtr).prefix);
+  }
+
+  /**
+      Set `prefix` field.
+      Params:
+        propval = the prefix for this pattern
+  */
+  @property void prefix(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("prefix"))
+      return;
+
+    _prefixRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GdkPixbufModulePattern*)this._cPtr).prefix = cast(char*)_prefixRef;
+  }
+
+  private const(char)* _maskRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `mask` field.
+      Returns: mask containing bytes which modify how the prefix is matched against
+         test data
+  */
+  @property string mask() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GdkPixbufModulePattern*)this._cPtr).mask);
+  }
+
+  /**
+      Set `mask` field.
+      Params:
+        propval = mask containing bytes which modify how the prefix is matched against
+           test data
+  */
+  @property void mask(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("mask"))
+      return;
+
+    _maskRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GdkPixbufModulePattern*)this._cPtr).mask = cast(char*)_maskRef;
+  }
+
+  /**
+      Get `relevance` field.
+      Returns: relevance of this pattern
+  */
+  @property int relevance() nothrow
+  {
+    return (cast(GdkPixbufModulePattern*)this._cPtr).relevance;
+  }
+
+  /**
+      Set `relevance` field.
+      Params:
+        propval = relevance of this pattern
+  */
+  @property void relevance(int propval) nothrow
+  {
+    (cast(GdkPixbufModulePattern*)this._cPtr).relevance = propval;
+  }
+}

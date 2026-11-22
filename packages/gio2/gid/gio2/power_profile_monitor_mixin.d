@@ -1,0 +1,71 @@
+/// Module for [PowerProfileMonitor] interface mixin
+module gid.gio2.power_profile_monitor_mixin;
+
+public import gid.core.basictypes;
+public import gid.gio2.power_profile_monitor_iface_proxy;
+public import gid.core.utils;
+public import gid.gio2.c.functions;
+public import gid.gio2.c.types;
+public import gid.gio2.types;
+public import gid.gobject2.gid_builder;
+public import gid.gobject2.object;
+
+/**
+    [gid.gio2.power_profile_monitor.PowerProfileMonitor] makes it possible for applications as well as OS
+    components to monitor system power profiles and act upon them. It currently
+    only exports whether the system is in “Power Saver” mode (known as
+    “Low Power” mode on some systems).
+    
+    When in “Low Power” mode, it is recommended that applications:
+    
+    - disable automatic downloads;
+    - reduce the rate of refresh from online sources such as calendar or
+      email synchronisation;
+    - reduce the use of expensive visual effects.
+    
+    It is also likely that OS components providing services to applications will
+    lower their own background activity, for the sake of the system.
+    
+    There are a variety of tools that exist for power consumption analysis, but those
+    usually depend on the OS and hardware used. On Linux, one could use `upower` to
+    monitor the battery discharge rate, `powertop` to check on the background activity
+    or activity at all), `sysprof` to inspect CPU usage, and `intel_gpu_time` to
+    profile GPU usage.
+    
+    Don’t forget to disconnect the [gid.gobject2.object.ObjectWrap.notify] signal for
+    [gid.gio2.power_profile_monitor.PowerProfileMonitor.powerSaverEnabled], and unref the
+    [gid.gio2.power_profile_monitor.PowerProfileMonitor] itself when exiting.
+*/
+template PowerProfileMonitorT()
+{
+
+  /**
+      Get `powerSaverEnabled` property.
+      Returns: Whether “Power Saver” mode is enabled on the system.
+  */
+  @property bool powerSaverEnabled() nothrow
+  {
+    return getPowerSaverEnabled();
+  }
+
+
+  /**
+      Gets whether the system is in “Power Saver” mode.
+      
+      You are expected to listen to the
+      #GPowerProfileMonitor::notify::power-saver-enabled signal to know when the profile has
+      changed.
+      Returns: Whether the system is in “Power Saver” mode.
+  */
+  override bool getPowerSaverEnabled() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_power_profile_monitor_get_power_saver_enabled(cast(GPowerProfileMonitor*)this._cPtr);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [gid.gio2.power_profile_monitor.PowerProfileMonitor]
+template PowerProfileMonitorGidBuilderT()
+{
+}

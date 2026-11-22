@@ -104,7 +104,7 @@ private extern(C) GstSDPMedia* sdpMediaCopy(const(GstSDPMedia)* media) nothrow
         media = a #GstSDPMedia
       Returns: a #GstSDPResult.
   */
-  gstsdp.types.SDPResult addMedia(gstsdp.sdpmedia.SDPMedia media) nothrow
+  gid.gstsdp1.types.SDPResult addMedia(gid.gstsdp1.sdpmedia.SDPMedia media) nothrow
   {
     auto _media = media ? cast(GstSDPMedia*)media._cPtr(No.Dup) : null;
     GstSDPResult _cretval = gst_sdp_message_add_media(cast(GstSDPMessage*)this._cPtr, _media);
@@ -112,7 +112,7 @@ private extern(C) GstSDPMedia* sdpMediaCopy(const(GstSDPMedia)* media) nothrow
     if (_media && _cretval == GstSDPResult.Ok)
       gst_sdp_media_init(_media);
 
-    return cast(gstsdp.types.SDPResult)_cretval;
+    return cast(gid.gstsdp1.types.SDPResult)_cretval;
   }
 //!class MIKEYPayload
 
@@ -123,25 +123,25 @@ private extern(C) GstSDPMedia* sdpMediaCopy(const(GstSDPMedia)* media) nothrow
       Returns: the length in bytes of the timestamp value of type (8 for NTP-UTC and NTP, 4 for COUNTER) or -1 if
         type is not a valid timestamp type
   */
-  static int tsValueLength(gstsdp.types.MIKEYTSType type) nothrow
+  static int tsValueLength(gid.gstsdp1.types.MIKEYTSType type) nothrow
   {
-    if (type == gstsdp.types.MIKEYTSType.NtpUtc || type == gstsdp.types.MIKEYTSType.Ntp)
+    if (type == gid.gstsdp1.types.MIKEYTSType.NtpUtc || type == gid.gstsdp1.types.MIKEYTSType.Ntp)
       return 8;
 
-    if (type == gstsdp.types.MIKEYTSType.Counter)
+    if (type == gid.gstsdp1.types.MIKEYTSType.Counter)
       return 4;
 
     return -1;
   }
 
   /**
-      Set the timestamp in a [gstsdp.types.MIKEYPayloadType.T] payload.
+      Set the timestamp in a [gid.gstsdp1.types.MIKEYPayloadType.T] payload.
       Params:
         type = the timestamp type
-        tsValue = the timestamp value, its length must be [gstsdp.mikeypayload.MIKEYPayload.tsValueLength] of type
+        tsValue = the timestamp value, its length must be [gid.gstsdp1.mikeypayload.MIKEYPayload.tsValueLength] of type
       Returns: true on success, false if type is not a valid timestamp type or tsValue has the wrong length
   */
-  bool tSet(gstsdp.types.MIKEYTSType type, ubyte[] tsValue) nothrow
+  bool tSet(gid.gstsdp1.types.MIKEYTSType type, ubyte[] tsValue) nothrow
   {
     auto _len = tsValueLength(type);
 
@@ -150,9 +150,9 @@ private extern(C) GstSDPMedia* sdpMediaCopy(const(GstSDPMedia)* media) nothrow
 
     if (tsValue.length != _len)
     {
-      import glib.c.functions : g_log;
-      import glib.c.types : GLogLevelFlags;
-      g_log("Gid", GLogLevelFlags.LevelCritical, "gstsdp.mikeypayload.MIKEYPayload.tSet tsValue length %d does not match the timestamp type length %d",
+      import gid.glib2.c.functions : g_log;
+      import gid.glib2.c.types : GLogLevelFlags;
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gid.gstsdp1.mikeypayload.MIKEYPayload.tSet tsValue length %d does not match the timestamp type length %d",
         cast(int)tsValue.length, _len);
       return false;
     }
@@ -166,12 +166,12 @@ private extern(C) GstSDPMedia* sdpMediaCopy(const(GstSDPMedia)* media) nothrow
       Add a new T payload to msg with the given parameters.
       Params:
         type = specifies the timestamp type used
-        tsValue = the timestamp value, its length must be [gstsdp.mikeypayload.MIKEYPayload.tsValueLength] of type
+        tsValue = the timestamp value, its length must be [gid.gstsdp1.mikeypayload.MIKEYPayload.tsValueLength] of type
       Returns: true on success, false if type is not a valid timestamp type or tsValue has the wrong length
   */
-  bool addT(gstsdp.types.MIKEYTSType type, ubyte[] tsValue) nothrow
+  bool addT(gid.gstsdp1.types.MIKEYTSType type, ubyte[] tsValue) nothrow
   {
-    import gstsdp.mikeypayload : MIKEYPayload;
+    import gid.gstsdp1.mikeypayload : MIKEYPayload;
 
     auto _len = MIKEYPayload.tsValueLength(type);
 
@@ -180,9 +180,9 @@ private extern(C) GstSDPMedia* sdpMediaCopy(const(GstSDPMedia)* media) nothrow
 
     if (tsValue.length != _len)
     {
-      import glib.c.functions : g_log;
-      import glib.c.types : GLogLevelFlags;
-      g_log("Gid", GLogLevelFlags.LevelCritical, "gstsdp.mikeymessage.MIKEYMessage.addT tsValue length %d does not match the timestamp type length %d",
+      import gid.glib2.c.functions : g_log;
+      import gid.glib2.c.types : GLogLevelFlags;
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gid.gstsdp1.mikeymessage.MIKEYMessage.addT tsValue length %d does not match the timestamp type length %d",
         cast(int)tsValue.length, _len);
       return false;
     }
@@ -198,10 +198,10 @@ private extern(C) GstSDPMedia* sdpMediaCopy(const(GstSDPMedia)* media) nothrow
   */
   @property ubyte[] tsValue() nothrow
   {
-    import gstsdp.mikeypayload : MIKEYPayload;
+    import gid.gstsdp1.mikeypayload : MIKEYPayload;
 
     auto payload = cast(GstMIKEYPayloadT*)this._cPtr;
-    auto _len = MIKEYPayload.tsValueLength(cast(gstsdp.types.MIKEYTSType)payload.type);
+    auto _len = MIKEYPayload.tsValueLength(cast(gid.gstsdp1.types.MIKEYTSType)payload.type);
 
     if (!payload.tsValue || _len <= 0)
       return null;
@@ -214,8 +214,8 @@ private extern(C) GstSDPMedia* sdpMediaCopy(const(GstSDPMedia)* media) nothrow
   /**
       Get `kvData` field.
       Returns: the key validity data (copied) for the key validity type: empty for
-        [gstsdp.types.MIKEYKVType.Null], the SPI/MKI for [gstsdp.types.MIKEYKVType.Spi] or the valid from and valid
-        to values for [gstsdp.types.MIKEYKVType.Interval]
+        [gid.gstsdp1.types.MIKEYKVType.Null], the SPI/MKI for [gid.gstsdp1.types.MIKEYKVType.Spi] or the valid from and valid
+        to values for [gid.gstsdp1.types.MIKEYKVType.Interval]
   */
   @property ubyte[][] kvData() nothrow
   {

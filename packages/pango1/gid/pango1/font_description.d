@@ -1,0 +1,757 @@
+/// Module for [FontDescription] class
+module gid.pango1.font_description;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.boxed;
+import gid.pango1.c.functions;
+import gid.pango1.c.types;
+import gid.pango1.types;
+
+/**
+    A [gid.pango1.font_description.FontDescription] describes a font in an implementation-independent
+    manner.
+    
+    [gid.pango1.font_description.FontDescription] structures are used both to list what fonts are
+    available on the system and also for specifying the characteristics of
+    a font to load.
+*/
+class FontDescription : gid.gobject2.boxed.BoxedWrap!(pango_font_description_get_type)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override FontDescription self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Creates a new font description structure with all fields unset.
+      Returns: the newly allocated [gid.pango1.font_description.FontDescription],
+          which should be freed using [gid.pango1.font_description.FontDescription.free].
+  */
+  this() nothrow
+  {
+    PangoFontDescription* _cretval;
+    _cretval = pango_font_description_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Determines if the style attributes of new_match are a closer match
+      for desc than those of old_match are, or if old_match is null,
+      determines if new_match is a match at all.
+      
+      Approximate matching is done for weight and style; other style attributes
+      must match exactly. Style attributes are all attributes other than family
+      and size-related attributes. Approximate matching for style considers
+      [gid.pango1.types.Style.Oblique] and [gid.pango1.types.Style.Italic] as matches, but not as good
+      a match as when the styles are equal.
+      
+      Note that old_match must match desc.
+  
+      Params:
+        oldMatch = a [gid.pango1.font_description.FontDescription], or null
+        newMatch = a [gid.pango1.font_description.FontDescription]
+      Returns: true if new_match is a better match
+  */
+  bool betterMatch(gid.pango1.font_description.FontDescription oldMatch, gid.pango1.font_description.FontDescription newMatch) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)pango_font_description_better_match(cast(const(PangoFontDescription)*)this._cPtr, oldMatch ? cast(const(PangoFontDescription)*)oldMatch._cPtr(No.Dup) : null, newMatch ? cast(const(PangoFontDescription)*)newMatch._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Make a copy of a [gid.pango1.font_description.FontDescription].
+      Returns: the newly allocated [gid.pango1.font_description.FontDescription],
+          which should be freed with [gid.pango1.font_description.FontDescription.free],
+          or null if desc was null.
+  */
+  gid.pango1.font_description.FontDescription copy() nothrow
+  {
+    PangoFontDescription* _cretval;
+    _cretval = pango_font_description_copy(cast(const(PangoFontDescription)*)this._cPtr);
+    auto _retval = _cretval ? new gid.pango1.font_description.FontDescription(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Make a copy of a [gid.pango1.font_description.FontDescription], but don't duplicate
+      allocated fields.
+      
+      This is like [gid.pango1.font_description.FontDescription.copy], but only a shallow
+      copy is made of the family name and other allocated fields. The result
+      can only be used until desc is modified or freed. This is meant
+      to be used when the copy is only needed temporarily.
+      Returns: the newly allocated [gid.pango1.font_description.FontDescription],
+          which should be freed with [gid.pango1.font_description.FontDescription.free],
+          or null if desc was null.
+  */
+  gid.pango1.font_description.FontDescription copyStatic() nothrow
+  {
+    PangoFontDescription* _cretval;
+    _cretval = pango_font_description_copy_static(cast(const(PangoFontDescription)*)this._cPtr);
+    auto _retval = _cretval ? new gid.pango1.font_description.FontDescription(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Compares two font descriptions for equality.
+      
+      Two font descriptions are considered equal if the fonts they describe
+      are provably identical. This means that their masks do not have to match,
+      as long as other fields are all the same. (Two font descriptions may
+      result in identical fonts being loaded, but still compare false.)
+  
+      Params:
+        desc2 = another [gid.pango1.font_description.FontDescription]
+      Returns: true if the two font descriptions are identical,
+          false otherwise.
+  */
+  bool equal(gid.pango1.font_description.FontDescription desc2) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)pango_font_description_equal(cast(const(PangoFontDescription)*)this._cPtr, desc2 ? cast(const(PangoFontDescription)*)desc2._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Returns the color field of the font description.
+      
+      This field determines whether the font description should
+      match fonts that have color glyphs, or fonts that don't.
+      Returns: 
+  */
+  gid.pango1.types.FontColor getColor() nothrow
+  {
+    PangoFontColor _cretval;
+    _cretval = pango_font_description_get_color(cast(const(PangoFontDescription)*)this._cPtr);
+    gid.pango1.types.FontColor _retval = cast(gid.pango1.types.FontColor)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the family name field of a font description.
+      
+      See [gid.pango1.font_description.FontDescription.setFamily].
+      Returns: the family name field for the
+          font description, or null if not previously set. This has the same
+          life-time as the font description itself and should not be freed.
+  */
+  string getFamily() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = pango_font_description_get_family(cast(const(PangoFontDescription)*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the features field of a font description.
+      
+      See [gid.pango1.font_description.FontDescription.setFeatures].
+      Returns: the features field for the font
+          description, or null if not previously set. This has the same
+          life-time as the font description itself and should not be freed.
+  */
+  string getFeatures() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = pango_font_description_get_features(cast(const(PangoFontDescription)*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the gravity field of a font description.
+      
+      See [gid.pango1.font_description.FontDescription.setGravity].
+      Returns: the gravity field for the font description.
+          Use [gid.pango1.font_description.FontDescription.getSetFields] to find out
+          if the field was explicitly set or not.
+  */
+  gid.pango1.types.Gravity getGravity() nothrow
+  {
+    PangoGravity _cretval;
+    _cretval = pango_font_description_get_gravity(cast(const(PangoFontDescription)*)this._cPtr);
+    gid.pango1.types.Gravity _retval = cast(gid.pango1.types.Gravity)_cretval;
+    return _retval;
+  }
+
+  /**
+      Determines which fields in a font description have been set.
+      Returns: a bitmask with bits set corresponding to the
+          fields in desc that have been set.
+  */
+  gid.pango1.types.FontMask getSetFields() nothrow
+  {
+    PangoFontMask _cretval;
+    _cretval = pango_font_description_get_set_fields(cast(const(PangoFontDescription)*)this._cPtr);
+    gid.pango1.types.FontMask _retval = cast(gid.pango1.types.FontMask)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the size field of a font description.
+      
+      See [gid.pango1.font_description.FontDescription.setSize].
+      Returns: the size field for the font description in points
+          or device units. You must call
+          [gid.pango1.font_description.FontDescription.getSizeIsAbsolute] to find out
+          which is the case. Returns 0 if the size field has not previously
+          been set or it has been set to 0 explicitly.
+          Use [gid.pango1.font_description.FontDescription.getSetFields] to find out
+          if the field was explicitly set or not.
+  */
+  int getSize() nothrow
+  {
+    int _retval;
+    _retval = pango_font_description_get_size(cast(const(PangoFontDescription)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Determines whether the size of the font is in points (not absolute)
+      or device units (absolute).
+      
+      See [gid.pango1.font_description.FontDescription.setSize]
+      and [gid.pango1.font_description.FontDescription.setAbsoluteSize].
+      Returns: whether the size for the font description is in
+          points or device units. Use [gid.pango1.font_description.FontDescription.getSetFields]
+          to find out if the size field of the font description was explicitly
+          set or not.
+  */
+  bool getSizeIsAbsolute() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)pango_font_description_get_size_is_absolute(cast(const(PangoFontDescription)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the stretch field of a font description.
+      
+      See [gid.pango1.font_description.FontDescription.setStretch].
+      Returns: the stretch field for the font description.
+          Use [gid.pango1.font_description.FontDescription.getSetFields] to find
+          out if the field was explicitly set or not.
+  */
+  gid.pango1.types.Stretch getStretch() nothrow
+  {
+    PangoStretch _cretval;
+    _cretval = pango_font_description_get_stretch(cast(const(PangoFontDescription)*)this._cPtr);
+    gid.pango1.types.Stretch _retval = cast(gid.pango1.types.Stretch)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the style field of a [gid.pango1.font_description.FontDescription].
+      
+      See [gid.pango1.font_description.FontDescription.setStyle].
+      Returns: the style field for the font description.
+          Use [gid.pango1.font_description.FontDescription.getSetFields] to
+          find out if the field was explicitly set or not.
+  */
+  gid.pango1.types.Style getStyle() nothrow
+  {
+    PangoStyle _cretval;
+    _cretval = pango_font_description_get_style(cast(const(PangoFontDescription)*)this._cPtr);
+    gid.pango1.types.Style _retval = cast(gid.pango1.types.Style)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the variant field of a [gid.pango1.font_description.FontDescription].
+      
+      See [gid.pango1.font_description.FontDescription.setVariant].
+      Returns: the variant field for the font description.
+          Use [gid.pango1.font_description.FontDescription.getSetFields] to find
+          out if the field was explicitly set or not.
+  */
+  gid.pango1.types.Variant getVariant() nothrow
+  {
+    PangoVariant _cretval;
+    _cretval = pango_font_description_get_variant(cast(const(PangoFontDescription)*)this._cPtr);
+    gid.pango1.types.Variant _retval = cast(gid.pango1.types.Variant)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the variations field of a font description.
+      
+      See [gid.pango1.font_description.FontDescription.setVariations].
+      Returns: the variations field for the font
+          description, or null if not previously set. This has the same
+          life-time as the font description itself and should not be freed.
+  */
+  string getVariations() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = pango_font_description_get_variations(cast(const(PangoFontDescription)*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the weight field of a font description.
+      
+      See [gid.pango1.font_description.FontDescription.setWeight].
+      Returns: the weight field for the font description.
+          Use [gid.pango1.font_description.FontDescription.getSetFields] to find
+          out if the field was explicitly set or not.
+  */
+  gid.pango1.types.Weight getWeight() nothrow
+  {
+    PangoWeight _cretval;
+    _cretval = pango_font_description_get_weight(cast(const(PangoFontDescription)*)this._cPtr);
+    gid.pango1.types.Weight _retval = cast(gid.pango1.types.Weight)_cretval;
+    return _retval;
+  }
+
+  /**
+      Computes a hash of a [gid.pango1.font_description.FontDescription] structure.
+      
+      This is suitable to be used, for example, as an argument
+      to [gid.glib2.hash_table.HashTable.new_]. The hash value is independent of desc->mask.
+      Returns: the hash value.
+  */
+  uint hash() nothrow
+  {
+    uint _retval;
+    _retval = pango_font_description_hash(cast(const(PangoFontDescription)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Merges the fields that are set in desc_to_merge into the fields in
+      desc.
+      
+      If replace_existing is false, only fields in desc that
+      are not already set are affected. If true, then fields that are
+      already set will be replaced as well.
+      
+      If desc_to_merge is null, this function performs nothing.
+  
+      Params:
+        descToMerge = the [gid.pango1.font_description.FontDescription] to merge from,
+            or null
+        replaceExisting = if true, replace fields in desc with the
+            corresponding values from desc_to_merge, even if they
+            are already exist.
+  */
+  void merge(gid.pango1.font_description.FontDescription descToMerge, bool replaceExisting) nothrow
+  {
+    pango_font_description_merge(cast(PangoFontDescription*)this._cPtr, descToMerge ? cast(const(PangoFontDescription)*)descToMerge._cPtr(No.Dup) : null, replaceExisting);
+  }
+
+  /**
+      Merges the fields that are set in desc_to_merge into the fields in
+      desc, without copying allocated fields.
+      
+      This is like [gid.pango1.font_description.FontDescription.merge], but only a shallow copy
+      is made of the family name and other allocated fields. desc can only
+      be used until desc_to_merge is modified or freed. This is meant to
+      be used when the merged font description is only needed temporarily.
+  
+      Params:
+        descToMerge = the [gid.pango1.font_description.FontDescription] to merge from
+        replaceExisting = if true, replace fields in desc with the
+            corresponding values from desc_to_merge, even if they
+            are already exist.
+  */
+  void mergeStatic(gid.pango1.font_description.FontDescription descToMerge, bool replaceExisting) nothrow
+  {
+    pango_font_description_merge_static(cast(PangoFontDescription*)this._cPtr, descToMerge ? cast(const(PangoFontDescription)*)descToMerge._cPtr(No.Dup) : null, replaceExisting);
+  }
+
+  /**
+      Sets the size field of a font description, in device units.
+      
+      This is mutually exclusive with [gid.pango1.font_description.FontDescription.setSize]
+      which sets the font size in points.
+  
+      Params:
+        size = the new size, in Pango units. There are [gid.pango1.types.SCALE] Pango units
+            in one device unit. For an output backend where a device unit is a pixel,
+            a size value of 10 * PANGO_SCALE gives a 10 pixel font.
+  */
+  void setAbsoluteSize(double size) nothrow
+  {
+    pango_font_description_set_absolute_size(cast(PangoFontDescription*)this._cPtr, size);
+  }
+
+  /**
+      Sets the color field of a font description.
+      
+      This field determines whether the font description should
+      match fonts that have color glyphs, or fonts that don't.
+  
+      Params:
+        color = the [gid.pango1.types.FontColor] value
+  */
+  void setColor(gid.pango1.types.FontColor color) nothrow
+  {
+    pango_font_description_set_color(cast(PangoFontDescription*)this._cPtr, color);
+  }
+
+  /**
+      Sets the family name field of a font description.
+      
+      The family
+      name represents a family of related font styles, and will
+      resolve to a particular [gid.pango1.font_family.FontFamily]. In some uses of
+      [gid.pango1.font_description.FontDescription], it is also possible to use a comma
+      separated list of family names for this field.
+  
+      Params:
+        family = a string representing the family name.
+  */
+  void setFamily(string family) nothrow
+  {
+    const(char)* _family = family.toCString!(No.Malloc, No.Nullable);
+    pango_font_description_set_family(cast(PangoFontDescription*)this._cPtr, _family);
+  }
+
+  /**
+      Sets the family name field of a font description, without copying the string.
+      
+      This is like [gid.pango1.font_description.FontDescription.setFamily], except that no
+      copy of family is made. The caller must make sure that the
+      string passed in stays around until desc has been freed or the
+      name is set again. This function can be used if family is a static
+      string such as a C string literal, or if desc is only needed temporarily.
+  
+      Params:
+        family = a string representing the family name
+  */
+  void setFamilyStatic(string family) nothrow
+  {
+    const(char)* _family = family.toCString!(No.Malloc, No.Nullable);
+    pango_font_description_set_family_static(cast(PangoFontDescription*)this._cPtr, _family);
+  }
+
+  /**
+      Sets the features field of a font description.
+      
+      OpenType font features allow to enable or disable certain optional
+      features of a font, such as tabular numbers.
+      
+      The format of the features string is comma-separated list of
+      feature assignments, with each assignment being one of these forms:
+      
+          FEATURE=n
+      
+      where FEATURE must be a 4 character tag that identifies and OpenType
+      feature, and n an integer (depending on the feature, the allowed
+      values may be 0, 1 or bigger numbers). Unknown features are ignored.
+      
+      Note that font features set in this way are enabled for the entire text
+      that is using the font, which is not appropriate for all OpenType features.
+      The intended use case is to select character variations (features cv01 - c99),
+      style sets (ss01 - ss20) and the like.
+      
+      Pango does not currently have a way to find supported OpenType features
+      of a font. Both harfbuzz and freetype have API for this. See for example
+      [hb_ot_layout_table_get_feature_tags](https://harfbuzz.github.io/harfbuzz-hb-ot-layout.html#hb-ot-layout-table-get-feature-tags).
+      
+      Features that are not supported by the font are silently ignored.
+  
+      Params:
+        features = a string representing the features
+  */
+  void setFeatures(string features = null) nothrow
+  {
+    const(char)* _features = features.toCString!(No.Malloc, Yes.Nullable);
+    pango_font_description_set_features(cast(PangoFontDescription*)this._cPtr, _features);
+  }
+
+  /**
+      Sets the features field of a font description.
+      
+      This is like [gid.pango1.font_description.FontDescription.setFeatures], except
+      that no copy of featuresis made. The caller must make sure that
+      the string passed in stays around until desc has been freed
+      or the name is set again. This function can be used if
+      features is a static string such as a C string literal,
+      or if desc is only needed temporarily.
+  
+      Params:
+        features = a string representing the features
+  */
+  void setFeaturesStatic(string features) nothrow
+  {
+    const(char)* _features = features.toCString!(No.Malloc, No.Nullable);
+    pango_font_description_set_features_static(cast(PangoFontDescription*)this._cPtr, _features);
+  }
+
+  /**
+      Sets the gravity field of a font description.
+      
+      The gravity field
+      specifies how the glyphs should be rotated. If gravity is
+      [gid.pango1.types.Gravity.Auto], this actually unsets the gravity mask on
+      the font description.
+      
+      This function is seldom useful to the user. Gravity should normally
+      be set on a [gid.pango1.context.Context].
+  
+      Params:
+        gravity = the gravity for the font description.
+  */
+  void setGravity(gid.pango1.types.Gravity gravity) nothrow
+  {
+    pango_font_description_set_gravity(cast(PangoFontDescription*)this._cPtr, gravity);
+  }
+
+  /**
+      Sets the size field of a font description in fractional points.
+      
+      This is mutually exclusive with
+      [gid.pango1.font_description.FontDescription.setAbsoluteSize].
+  
+      Params:
+        size = the size of the font in points, scaled by [gid.pango1.types.SCALE].
+            (That is, a size value of 10 * PANGO_SCALE is a 10 point font.
+            The conversion factor between points and device units depends on
+            system configuration and the output device. For screen display, a
+            logical DPI of 96 is common, in which case a 10 point font corresponds
+            to a 10 * (96 / 72) = 13.3 pixel font.
+            Use [gid.pango1.font_description.FontDescription.setAbsoluteSize] if you need
+            a particular size in device units.
+  */
+  void setSize(int size) nothrow
+  {
+    pango_font_description_set_size(cast(PangoFontDescription*)this._cPtr, size);
+  }
+
+  /**
+      Sets the stretch field of a font description.
+      
+      The [gid.pango1.types.Stretch] field specifies how narrow or
+      wide the font should be.
+  
+      Params:
+        stretch = the stretch for the font description
+  */
+  void setStretch(gid.pango1.types.Stretch stretch) nothrow
+  {
+    pango_font_description_set_stretch(cast(PangoFontDescription*)this._cPtr, stretch);
+  }
+
+  /**
+      Sets the style field of a [gid.pango1.font_description.FontDescription].
+      
+      The [gid.pango1.types.Style] enumeration describes whether the font is
+      slanted and the manner in which it is slanted; it can be either
+      [gid.pango1.types.Style.Normal], [gid.pango1.types.Style.Italic], or [gid.pango1.types.Style.Oblique].
+      
+      Most fonts will either have a italic style or an oblique style,
+      but not both, and font matching in Pango will match italic
+      specifications with oblique fonts and vice-versa if an exact
+      match is not found.
+  
+      Params:
+        style = the style for the font description
+  */
+  void setStyle(gid.pango1.types.Style style) nothrow
+  {
+    pango_font_description_set_style(cast(PangoFontDescription*)this._cPtr, style);
+  }
+
+  /**
+      Sets the variant field of a font description.
+      
+      The [gid.pango1.types.Variant] can either be [gid.pango1.types.Variant.Normal]
+      or [gid.pango1.types.Variant.SmallCaps].
+  
+      Params:
+        variant = the variant type for the font description.
+  */
+  void setVariant(gid.pango1.types.Variant variant) nothrow
+  {
+    pango_font_description_set_variant(cast(PangoFontDescription*)this._cPtr, variant);
+  }
+
+  /**
+      Sets the variations field of a font description.
+      
+      OpenType font variations allow to select a font instance by
+      specifying values for a number of axes, such as width or weight.
+      
+      The format of the variations string is
+      
+          AXIS1=VALUE,AXIS2=VALUE...
+      
+      with each AXIS a 4 character tag that identifies a font axis,
+      and each VALUE a floating point number. Unknown axes are ignored,
+      and values are clamped to their allowed range.
+      
+      Pango does not currently have a way to find supported axes of
+      a font. Both harfbuzz and freetype have API for this. See
+      for example [hb_ot_var_get_axis_infos](https://harfbuzz.github.io/harfbuzz-hb-ot-var.html#hb-ot-var-get-axis-infos).
+  
+      Params:
+        variations = a string representing the variations
+  */
+  void setVariations(string variations = null) nothrow
+  {
+    const(char)* _variations = variations.toCString!(No.Malloc, Yes.Nullable);
+    pango_font_description_set_variations(cast(PangoFontDescription*)this._cPtr, _variations);
+  }
+
+  /**
+      Sets the variations field of a font description.
+      
+      This is like [gid.pango1.font_description.FontDescription.setVariations], except
+      that no copy of variations is made. The caller must make sure that
+      the string passed in stays around until desc has been freed
+      or the name is set again. This function can be used if
+      variations is a static string such as a C string literal,
+      or if desc is only needed temporarily.
+  
+      Params:
+        variations = a string representing the variations
+  */
+  void setVariationsStatic(string variations) nothrow
+  {
+    const(char)* _variations = variations.toCString!(No.Malloc, No.Nullable);
+    pango_font_description_set_variations_static(cast(PangoFontDescription*)this._cPtr, _variations);
+  }
+
+  /**
+      Sets the weight field of a font description.
+      
+      The weight field
+      specifies how bold or light the font should be. In addition
+      to the values of the [gid.pango1.types.Weight] enumeration, other
+      intermediate numeric values are possible.
+  
+      Params:
+        weight = the weight for the font description.
+  */
+  void setWeight(gid.pango1.types.Weight weight) nothrow
+  {
+    pango_font_description_set_weight(cast(PangoFontDescription*)this._cPtr, weight);
+  }
+
+  /**
+      Creates a filename representation of a font description.
+      
+      The filename is identical to the result from calling
+      [gid.pango1.font_description.FontDescription.toString_], but with underscores
+      instead of characters that are untypical in filenames, and in
+      lower case only.
+      Returns: a new string that must be freed with [gid.glib2.global.gfree].
+  */
+  string toFilename() nothrow
+  {
+    char* _cretval;
+    _cretval = pango_font_description_to_filename(cast(const(PangoFontDescription)*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Creates a string representation of a font description.
+      
+      See [gid.pango1.font_description.FontDescription.fromString] for a description
+      of the format of the string representation. The family list in
+      the string description will only have a terminating comma if
+      the last word of the list is a valid style option.
+      Returns: a new string that must be freed with [gid.glib2.global.gfree].
+  */
+  string toString_() nothrow
+  {
+    char* _cretval;
+    _cretval = pango_font_description_to_string(cast(const(PangoFontDescription)*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Unsets some of the fields in a [gid.pango1.font_description.FontDescription].
+      
+      The unset fields will get back to their default values.
+  
+      Params:
+        toUnset = bitmask of fields in the desc to unset.
+  */
+  void unsetFields(gid.pango1.types.FontMask toUnset) nothrow
+  {
+    pango_font_description_unset_fields(cast(PangoFontDescription*)this._cPtr, toUnset);
+  }
+
+  /**
+      Creates a new font description from a string representation.
+      
+      The string must have the form
+      
+          [FAMILY-LIST] [STYLE-OPTIONS] [SIZE] [VARIATIONS] [FEATURES]
+      
+      where FAMILY-LIST is a comma-separated list of families optionally
+      terminated by a comma, STYLE_OPTIONS is a whitespace-separated list
+      of words where each word describes one of style, variant, weight,
+      stretch, or gravity, and SIZE is a decimal number (size in points)
+      or optionally followed by the unit modifier "px" for absolute size.
+      
+      The following words are understood as styles:
+      "Normal", "Roman", "Oblique", "Italic".
+      
+      The following words are understood as variants:
+      "Small-Caps", "All-Small-Caps", "Petite-Caps", "All-Petite-Caps",
+      "Unicase", "Title-Caps".
+      
+      The following words are understood as weights:
+      "Thin", "Ultra-Light", "Extra-Light", "Light", "Semi-Light",
+      "Demi-Light", "Book", "Regular", "Medium", "Semi-Bold", "Demi-Bold",
+      "Bold", "Ultra-Bold", "Extra-Bold", "Heavy", "Black", "Ultra-Black",
+      "Extra-Black".
+      
+      The following words are understood as stretch values:
+      "Ultra-Condensed", "Extra-Condensed", "Condensed", "Semi-Condensed",
+      "Semi-Expanded", "Expanded", "Extra-Expanded", "Ultra-Expanded".
+      
+      The following words are understood as gravity values:
+      "Not-Rotated", "South", "Upside-Down", "North", "Rotated-Left",
+      "East", "Rotated-Right", "West".
+      
+      The following words are understood as color values:
+      "With-Color", "Without-Color".
+      
+      VARIATIONS is a comma-separated list of font variations
+      of the form @‍axis1=value,axis2=value,...
+      
+      FEATURES is a comma-separated list of font features of the form
+      \#‍feature1=value,feature2=value,...
+      The =value part can be ommitted if the value is 1.
+      
+      Any one of the options may be absent. If FAMILY-LIST is absent, then
+      the family_name field of the resulting font description will be
+      initialized to null. If STYLE-OPTIONS is missing, then all style
+      options will be set to the default values. If SIZE is missing, the
+      size in the resulting font description will be set to 0.
+      
+      A typical example:
+      
+          Cantarell Italic Light 15 @‍wght=200 #‍tnum=1
+  
+      Params:
+        str = string representation of a font description.
+      Returns: a new [gid.pango1.font_description.FontDescription].
+  */
+  static gid.pango1.font_description.FontDescription fromString(string str) nothrow
+  {
+    PangoFontDescription* _cretval;
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
+    _cretval = pango_font_description_from_string(_str);
+    auto _retval = _cretval ? new gid.pango1.font_description.FontDescription(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+}

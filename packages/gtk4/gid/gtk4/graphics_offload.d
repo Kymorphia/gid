@@ -1,0 +1,305 @@
+/// Module for [GraphicsOffload] class
+module gid.gtk4.graphics_offload;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.accessible;
+import gid.gtk4.accessible_mixin;
+import gid.gtk4.buildable;
+import gid.gtk4.buildable_mixin;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.constraint_target;
+import gid.gtk4.constraint_target_mixin;
+import gid.gtk4.types;
+import gid.gtk4.widget;
+
+/**
+    Bypasses gsk rendering by passing the content of its child directly to the compositor.
+    
+    Graphics offload is an optimization to reduce overhead and battery use that is
+    most useful for video content. It only works on some platforms and in certain
+    situations. GTK will automatically fall back to normal rendering if it doesn't.
+    
+    Graphics offload is most efficient if there are no controls drawn on top of the
+    video content.
+    
+    You should consider using graphics offload for your main widget if it shows
+    frequently changing content (such as a video, or a VM display) and you provide
+    the content in the form of dmabuf textures (see [gid.gdk4.dmabuf_texture_builder.DmabufTextureBuilder]),
+    in particular if it may be fullscreen.
+    
+    Numerous factors can prohibit graphics offload:
+    
+    - Unsupported platforms. Currently, graphics offload only works on Linux with Wayland.
+    
+    - Clipping, such as rounded corners that cause the video content to not be rectangular
+    
+    - Unsupported dmabuf formats (see [gid.gdk4.display.Display.getDmabufFormats])
+    
+    - Translucent video content (content with an alpha channel, even if it isn't used)
+    
+    - Transforms that are more complex than translations and scales
+    
+    - Filters such as opacity, grayscale or similar
+    
+    To investigate problems related graphics offload, GTK offers debug flags to print
+    out information about graphics offload and dmabuf use:
+    
+        GDK_DEBUG=offload
+        GDK_DEBUG=dmabuf
+    
+    The GTK inspector provides a visual debugging tool for graphics offload.
+*/
+class GraphicsOffload : gid.gtk4.widget.Widget
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_graphics_offload_get_type != &gidSymbolNotFound ? gtk_graphics_offload_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkGraphicsOffload";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override GraphicsOffload self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.graphics_offload.GraphicsOffload]
+      Returns: New builder object
+  */
+  static GraphicsOffloadGidBuilder builder() nothrow
+  {
+    return new GraphicsOffloadGidBuilder;
+  }
+
+  /**
+      Get `blackBackground` property.
+      Returns: Whether to draw a black background.
+  */
+  @property bool blackBackground() nothrow
+  {
+    return getBlackBackground();
+  }
+
+  /**
+      Set `blackBackground` property.
+      Params:
+        propval = Whether to draw a black background.
+  */
+  @property void blackBackground(bool propval) nothrow
+  {
+    setBlackBackground(propval);
+  }
+
+  /**
+      Get `child` property.
+      Returns: The child widget.
+  */
+  @property gid.gtk4.widget.Widget child() nothrow
+  {
+    return getChild();
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+  */
+  @property void child(gid.gtk4.widget.Widget propval) nothrow
+  {
+    setChild(propval);
+  }
+
+  /**
+      Get `enabled` property.
+      Returns: Whether graphics offload is enabled.
+  */
+  @property gid.gtk4.types.GraphicsOffloadEnabled enabled() nothrow
+  {
+    return getEnabled();
+  }
+
+  /**
+      Set `enabled` property.
+      Params:
+        propval = Whether graphics offload is enabled.
+  */
+  @property void enabled(gid.gtk4.types.GraphicsOffloadEnabled propval) nothrow
+  {
+    setEnabled(propval);
+  }
+
+  /**
+      Creates a new GtkGraphicsOffload widget.
+  
+      Params:
+        child = the child widget
+      Returns: the new widget
+  */
+  this(gid.gtk4.widget.Widget child = null) nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_graphics_offload_new(child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Returns whether the widget draws a black background.
+      
+      See [gid.gtk4.graphics_offload.GraphicsOffload.setBlackBackground].
+      Returns: `TRUE` if black background is drawn
+  */
+  bool getBlackBackground() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_graphics_offload_get_black_background(cast(GtkGraphicsOffload*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the child of self.
+      Returns: the child widget
+  */
+  gid.gtk4.widget.Widget getChild() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = gtk_graphics_offload_get_child(cast(GtkGraphicsOffload*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns whether offload is enabled for self.
+      Returns: whether offload is enabled
+  */
+  gid.gtk4.types.GraphicsOffloadEnabled getEnabled() nothrow
+  {
+    GtkGraphicsOffloadEnabled _cretval;
+    _cretval = gtk_graphics_offload_get_enabled(cast(GtkGraphicsOffload*)this._cPtr);
+    gid.gtk4.types.GraphicsOffloadEnabled _retval = cast(gid.gtk4.types.GraphicsOffloadEnabled)_cretval;
+    return _retval;
+  }
+
+  /**
+      Sets whether this GtkGraphicsOffload widget will draw a black
+      background.
+      
+      A main use case for this is **_letterboxing_** where black bars are
+      visible next to the content if the aspect ratio of the content does
+      not match the dimensions of the monitor.
+      
+      Using this property for letterboxing instead of CSS allows compositors
+      to show content with maximum efficiency, using direct scanout to avoid
+      extra copies in the compositor.
+      
+      On Wayland, this is implemented using the
+      [single-pixel buffer](https://wayland.app/protocols/single-pixel-buffer-v1)
+      protocol.
+  
+      Params:
+        value = whether to draw a black background behind the content
+  */
+  void setBlackBackground(bool value) nothrow
+  {
+    gtk_graphics_offload_set_black_background(cast(GtkGraphicsOffload*)this._cPtr, value);
+  }
+
+  /**
+      Sets the child of self.
+  
+      Params:
+        child = the child widget
+  */
+  void setChild(gid.gtk4.widget.Widget child = null) nothrow
+  {
+    gtk_graphics_offload_set_child(cast(GtkGraphicsOffload*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets whether this GtkGraphicsOffload widget will attempt
+      to offload the content of its child widget.
+  
+      Params:
+        enabled = whether to enable offload
+  */
+  void setEnabled(gid.gtk4.types.GraphicsOffloadEnabled enabled) nothrow
+  {
+    gtk_graphics_offload_set_enabled(cast(GtkGraphicsOffload*)this._cPtr, enabled);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.graphics_offload.GraphicsOffload]
+class GraphicsOffloadGidBuilderImpl(T) : gid.gtk4.widget.WidgetGidBuilderImpl!T
+{
+
+
+  /**
+      Set `blackBackground` property.
+      Params:
+        propval = Whether to draw a black background.
+      Returns: Builder instance for fluent chaining
+  */
+  T blackBackground(bool propval) nothrow
+  {
+    return setProperty("black-background", propval);
+  }
+
+  /**
+      Set `child` property.
+      Params:
+        propval = The child widget.
+      Returns: Builder instance for fluent chaining
+  */
+  T child(gid.gtk4.widget.Widget propval) nothrow
+  {
+    return setProperty("child", propval);
+  }
+
+  /**
+      Set `enabled` property.
+      Params:
+        propval = Whether graphics offload is enabled.
+      Returns: Builder instance for fluent chaining
+  */
+  T enabled(gid.gtk4.types.GraphicsOffloadEnabled propval) nothrow
+  {
+    return setProperty("enabled", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtk4.graphics_offload.GraphicsOffload]
+final class GraphicsOffloadGidBuilder : GraphicsOffloadGidBuilderImpl!GraphicsOffloadGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  GraphicsOffload build() nothrow
+  {
+    return new GraphicsOffload(cast(void*)createGObject(GraphicsOffload._getGType), Yes.Take);
+  }
+}

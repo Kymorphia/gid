@@ -1,0 +1,872 @@
+/// Module for [Clipboard] class
+module gid.gtk3.clipboard;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gdk3.atom;
+import gid.gdk3.display;
+import gid.gdk3.event_owner_change;
+import gid.gdkpixbuf2.pixbuf;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk3.c.functions;
+import gid.gtk3.c.types;
+import gid.gtk3.selection_data;
+import gid.gtk3.target_entry;
+import gid.gtk3.text_buffer;
+import gid.gtk3.types;
+
+/**
+    The #GtkClipboard object represents a clipboard of data shared
+    between different processes or between different widgets in
+    the same process. Each clipboard is identified by a name encoded as a
+    #GdkAtom. (Conversion to and from strings can be done with
+    [gid.gdk3.atom.Atom.intern] and [gid.gdk3.atom.Atom.name].) The default clipboard
+    corresponds to the “CLIPBOARD” atom; another commonly used clipboard
+    is the “PRIMARY” clipboard, which, in X, traditionally contains
+    the currently selected text.
+    
+    To support having a number of different formats on the clipboard
+    at the same time, the clipboard mechanism allows providing
+    callbacks instead of the actual data.  When you set the contents
+    of the clipboard, you can either supply the data directly (via
+    functions like [gid.gtk3.clipboard.Clipboard.setText]), or you can supply a
+    callback to be called at a later time when the data is needed (via
+    [gid.gtk3.clipboard.Clipboard.setWithData] or [gid.gtk3.clipboard.Clipboard.setWithOwner].)
+    Providing a callback also avoids having to make copies of the data
+    when it is not needed.
+    
+    [gid.gtk3.clipboard.Clipboard.setWithData] and [gid.gtk3.clipboard.Clipboard.setWithOwner]
+    are quite similar; the choice between the two depends mostly on
+    which is more convenient in a particular situation.
+    The former is most useful when you want to have a blob of data
+    with callbacks to convert it into the various data types that you
+    advertise. When the @clear_func you provided is called, you
+    simply free the data blob. The latter is more useful when the
+    contents of clipboard reflect the internal state of a #GObject
+    (As an example, for the PRIMARY clipboard, when an entry widget
+    provides the clipboard’s contents the contents are simply the
+    text within the selected region.) If the contents change, the
+    entry widget can call [gid.gtk3.clipboard.Clipboard.setWithOwner] to update
+    the timestamp for clipboard ownership, without having to worry
+    about @clear_func being called.
+    
+    Requesting the data from the clipboard is essentially
+    asynchronous. If the contents of the clipboard are provided within
+    the same process, then a direct function call will be made to
+    retrieve the data, but if they are provided by another process,
+    then the data needs to be retrieved from the other process, which
+    may take some time. To avoid blocking the user interface, the call
+    to request the selection, [gid.gtk3.clipboard.Clipboard.requestContents] takes a
+    callback that will be called when the contents are received (or
+    when the request fails.) If you don’t want to deal with providing
+    a separate callback, you can also use [gid.gtk3.clipboard.Clipboard.waitForContents].
+    What this does is run the GLib main loop recursively waiting for
+    the contents. This can simplify the code flow, but you still have
+    to be aware that other callbacks in your program can be called
+    while this recursive mainloop is running.
+    
+    Along with the functions to get the clipboard contents as an
+    arbitrary data chunk, there are also functions to retrieve
+    it as text, [gid.gtk3.clipboard.Clipboard.requestText] and
+    [gid.gtk3.clipboard.Clipboard.waitForText]. These functions take care of
+    determining which formats are advertised by the clipboard
+    provider, asking for the clipboard in the best available format
+    and converting the results into the UTF-8 encoding. (The standard
+    form for representing strings in GTK+.)
+*/
+class Clipboard : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_clipboard_get_type != &gidSymbolNotFound ? gtk_clipboard_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkClipboard";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Clipboard self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk3.clipboard.Clipboard]
+      Returns: New builder object
+  */
+  static ClipboardGidBuilder builder() nothrow
+  {
+    return new ClipboardGidBuilder;
+  }
+
+  /**
+      Returns the clipboard object for the given selection.
+      See [gid.gtk3.clipboard.Clipboard.getForDisplay] for complete details.
+  
+      Params:
+        selection = a #GdkAtom which identifies the clipboard to use
+      Returns: the appropriate clipboard object. If no clipboard
+            already exists, a new one will be created. Once a clipboard
+            object has been created, it is persistent and, since it is
+            owned by GTK+, must not be freed or unreffed.
+  */
+  static gid.gtk3.clipboard.Clipboard get(gid.gdk3.atom.Atom selection) nothrow
+  {
+    GtkClipboard* _cretval;
+    _cretval = gtk_clipboard_get(selection ? cast(GdkAtom)selection._cPtr : null);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.clipboard.Clipboard)(cast(GtkClipboard*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the default clipboard object for use with cut/copy/paste menu items
+      and keyboard shortcuts.
+  
+      Params:
+        display = the #GdkDisplay for which the clipboard is to be retrieved.
+      Returns: the default clipboard object.
+  */
+  static gid.gtk3.clipboard.Clipboard getDefault(gid.gdk3.display.Display display) nothrow
+  {
+    GtkClipboard* _cretval;
+    _cretval = gtk_clipboard_get_default(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.clipboard.Clipboard)(cast(GtkClipboard*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the clipboard object for the given selection.
+      Cut/copy/paste menu items and keyboard shortcuts should use
+      the default clipboard, returned by passing `GDK_SELECTION_CLIPBOARD` for selection.
+      (`GDK_NONE` is supported as a synonym for GDK_SELECTION_CLIPBOARD
+      for backwards compatibility reasons.)
+      The currently-selected object or text should be provided on the clipboard
+      identified by #GDK_SELECTION_PRIMARY. Cut/copy/paste menu items
+      conceptually copy the contents of the #GDK_SELECTION_PRIMARY clipboard
+      to the default clipboard, i.e. they copy the selection to what the
+      user sees as the clipboard.
+      
+      (Passing #GDK_NONE is the same as using `gdk_atom_intern
+      ("CLIPBOARD", FALSE)`.
+      
+      See the
+      [FreeDesktop Clipboard Specification](http://www.freedesktop.org/Standards/clipboards-spec)
+      for a detailed discussion of the “CLIPBOARD” vs. “PRIMARY”
+      selections under the X window system. On Win32 the
+      #GDK_SELECTION_PRIMARY clipboard is essentially ignored.)
+      
+      It’s possible to have arbitrary named clipboards; if you do invent
+      new clipboards, you should prefix the selection name with an
+      underscore (because the ICCCM requires that nonstandard atoms are
+      underscore-prefixed), and namespace it as well. For example,
+      if your application called “Foo” has a special-purpose
+      clipboard, you might call it “_FOO_SPECIAL_CLIPBOARD”.
+  
+      Params:
+        display = the #GdkDisplay for which the clipboard is to be retrieved or created.
+        selection = a #GdkAtom which identifies the clipboard to use.
+      Returns: the appropriate clipboard object. If no
+          clipboard already exists, a new one will be created. Once a clipboard
+          object has been created, it is persistent and, since it is owned by
+          GTK+, must not be freed or unrefd.
+  */
+  static gid.gtk3.clipboard.Clipboard getForDisplay(gid.gdk3.display.Display display, gid.gdk3.atom.Atom selection) nothrow
+  {
+    GtkClipboard* _cretval;
+    _cretval = gtk_clipboard_get_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, selection ? cast(GdkAtom)selection._cPtr : null);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.clipboard.Clipboard)(cast(GtkClipboard*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Clears the contents of the clipboard. Generally this should only
+      be called between the time you call [gid.gtk3.clipboard.Clipboard.setWithOwner]
+      or [gid.gtk3.clipboard.Clipboard.setWithData],
+      and when the clear_func you supplied is called. Otherwise, the
+      clipboard may be owned by someone else.
+  */
+  void clear() nothrow
+  {
+    gtk_clipboard_clear(cast(GtkClipboard*)this._cPtr);
+  }
+
+  /**
+      Gets the #GdkDisplay associated with clipboard
+      Returns: the #GdkDisplay associated with clipboard
+  */
+  gid.gdk3.display.Display getDisplay() nothrow
+  {
+    GdkDisplay* _cretval;
+    _cretval = gtk_clipboard_get_display(cast(GtkClipboard*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk3.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      If the clipboard contents callbacks were set with
+      [gid.gtk3.clipboard.Clipboard.setWithOwner], and the [gid.gtk3.clipboard.Clipboard.setWithData] or
+      [gid.gtk3.clipboard.Clipboard.clear] has not subsequently called, returns the owner set
+      by [gid.gtk3.clipboard.Clipboard.setWithOwner].
+      Returns: the owner of the clipboard, if any;
+            otherwise null.
+  */
+  gid.gobject2.object.ObjectWrap getOwner() nothrow
+  {
+    GObject* _cretval;
+    _cretval = gtk_clipboard_get_owner(cast(GtkClipboard*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the selection that this clipboard is for.
+      Returns: the selection
+  */
+  gid.gdk3.atom.Atom getSelection() nothrow
+  {
+    GdkAtom _cretval;
+    _cretval = gtk_clipboard_get_selection(cast(GtkClipboard*)this._cPtr);
+    auto _retval = _cretval ? new gid.gdk3.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Requests the contents of clipboard as the given target.
+      When the results of the result are later received the supplied callback
+      will be called.
+  
+      Params:
+        target = an atom representing the form into which the clipboard
+              owner should convert the selection.
+        callback = A function to call when the results are received
+              (or the retrieval fails). If the retrieval fails the length field of
+              selection_data will be negative.
+  */
+  void requestContents(gid.gdk3.atom.Atom target, gid.gtk3.types.ClipboardReceivedFunc callback) nothrow
+  {
+    extern(C) void _callbackCallback(GtkClipboard* clipboard, GtkSelectionData* selectionData, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gtk3.types.ClipboardReceivedFunc*)data;
+      auto _selectionData = selectionData ? new gid.gtk3.selection_data.SelectionData(cast(void*)selectionData, Yes.Take)._cBorrow : null;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.clipboard.Clipboard)(cast(void*)clipboard, No.Take), _selectionData);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.types.ClipboardReceivedFunc");
+      }
+      if (_selectionData)
+        _selectionData._cUnborrow;
+
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    gtk_clipboard_request_contents(cast(GtkClipboard*)this._cPtr, target ? cast(GdkAtom)target._cPtr : null, _callbackCB, _callback);
+  }
+
+  /**
+      Requests the contents of the clipboard as image. When the image is
+      later received, it will be converted to a #GdkPixbuf, and
+      callback will be called.
+      
+      The pixbuf parameter to callback will contain the resulting
+      #GdkPixbuf if the request succeeded, or null if it failed. This
+      could happen for various reasons, in particular if the clipboard
+      was empty or if the contents of the clipboard could not be
+      converted into an image.
+  
+      Params:
+        callback = a function to call when the image is received,
+              or the retrieval fails. (It will always be called one way or the other.)
+  */
+  void requestImage(gid.gtk3.types.ClipboardImageReceivedFunc callback) nothrow
+  {
+    extern(C) void _callbackCallback(GtkClipboard* clipboard, GdkPixbuf* pixbuf, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gtk3.types.ClipboardImageReceivedFunc*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.clipboard.Clipboard)(cast(void*)clipboard, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gdkpixbuf2.pixbuf.Pixbuf)(cast(void*)pixbuf, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.types.ClipboardImageReceivedFunc");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    gtk_clipboard_request_image(cast(GtkClipboard*)this._cPtr, _callbackCB, _callback);
+  }
+
+  /**
+      Requests the contents of the clipboard as rich text. When the rich
+      text is later received, callback will be called.
+      
+      The text parameter to callback will contain the resulting rich
+      text if the request succeeded, or null if it failed. The length
+      parameter will contain text’s length. This function can fail for
+      various reasons, in particular if the clipboard was empty or if the
+      contents of the clipboard could not be converted into rich text form.
+  
+      Params:
+        buffer = a #GtkTextBuffer
+        callback = a function to call when the text is received,
+              or the retrieval fails. (It will always be called one way or the other.)
+  */
+  void requestRichText(gid.gtk3.text_buffer.TextBuffer buffer, gid.gtk3.types.ClipboardRichTextReceivedFunc callback) nothrow
+  {
+    extern(C) void _callbackCallback(GtkClipboard* clipboard, GdkAtom format, const(char)* text, size_t length, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gtk3.types.ClipboardRichTextReceivedFunc*)data;
+      char[] _text;
+      _text.length = length;
+      _text[0 .. length] = text[0 .. length];
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.clipboard.Clipboard)(cast(void*)clipboard, No.Take), format ? new gid.gdk3.atom.Atom(cast(void*)format, No.Take) : null, _text);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.types.ClipboardRichTextReceivedFunc");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    gtk_clipboard_request_rich_text(cast(GtkClipboard*)this._cPtr, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Requests the contents of the clipboard as list of supported targets.
+      When the list is later received, callback will be called.
+      
+      The targets parameter to callback will contain the resulting targets if
+      the request succeeded, or null if it failed.
+  
+      Params:
+        callback = a function to call when the targets are
+              received, or the retrieval fails. (It will always be called
+              one way or the other.)
+  */
+  void requestTargets(gid.gtk3.types.ClipboardTargetsReceivedFunc callback) nothrow
+  {
+    extern(C) void _callbackCallback(GtkClipboard* clipboard, GdkAtom* atoms, int nAtoms, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gtk3.types.ClipboardTargetsReceivedFunc*)data;
+      gid.gdk3.atom.Atom[] _atoms;
+      _atoms.length = nAtoms;
+      foreach (i; 0 .. nAtoms)
+        _atoms[i] = new gid.gdk3.atom.Atom(cast(void*)atoms[i], No.Take);
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.clipboard.Clipboard)(cast(void*)clipboard, No.Take), _atoms);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.types.ClipboardTargetsReceivedFunc");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    gtk_clipboard_request_targets(cast(GtkClipboard*)this._cPtr, _callbackCB, _callback);
+  }
+
+  /**
+      Requests the contents of the clipboard as text. When the text is
+      later received, it will be converted to UTF-8 if necessary, and
+      callback will be called.
+      
+      The text parameter to callback will contain the resulting text if
+      the request succeeded, or null if it failed. This could happen for
+      various reasons, in particular if the clipboard was empty or if the
+      contents of the clipboard could not be converted into text form.
+  
+      Params:
+        callback = a function to call when the text is received,
+              or the retrieval fails. (It will always be called one way or the other.)
+  */
+  void requestText(gid.gtk3.types.ClipboardTextReceivedFunc callback) nothrow
+  {
+    extern(C) void _callbackCallback(GtkClipboard* clipboard, const(char)* text, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gtk3.types.ClipboardTextReceivedFunc*)data;
+      string _text = text.fromCString!(No.Free);
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.clipboard.Clipboard)(cast(void*)clipboard, No.Take), _text);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.types.ClipboardTextReceivedFunc");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    gtk_clipboard_request_text(cast(GtkClipboard*)this._cPtr, _callbackCB, _callback);
+  }
+
+  /**
+      Requests the contents of the clipboard as URIs. When the URIs are
+      later received callback will be called.
+      
+      The uris parameter to callback will contain the resulting array of
+      URIs if the request succeeded, or null if it failed. This could happen
+      for various reasons, in particular if the clipboard was empty or if the
+      contents of the clipboard could not be converted into URI form.
+  
+      Params:
+        callback = a function to call when the URIs are received,
+              or the retrieval fails. (It will always be called one way or the other.)
+  */
+  void requestUris(gid.gtk3.types.ClipboardURIReceivedFunc callback) nothrow
+  {
+    extern(C) void _callbackCallback(GtkClipboard* clipboard, char** uris, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gtk3.types.ClipboardURIReceivedFunc*)data;
+      string[] _uris;
+      uint _lenuris;
+      if (uris)
+      {
+        for (; uris[_lenuris] !is null; _lenuris++)
+        {
+        }
+      }
+
+      _uris.length = _lenuris;
+      foreach (i; 0 .. _lenuris)
+        _uris[i] = uris[i].fromCString!(No.Free);
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.clipboard.Clipboard)(cast(void*)clipboard, No.Take), _uris);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.types.ClipboardURIReceivedFunc");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    gtk_clipboard_request_uris(cast(GtkClipboard*)this._cPtr, _callbackCB, _callback);
+  }
+
+  /**
+      Hints that the clipboard data should be stored somewhere when the
+      application exits or when gtk_clipboard_store () is called.
+      
+      This value is reset when the clipboard owner changes.
+      Where the clipboard data is stored is platform dependent,
+      see gdk_display_store_clipboard () for more information.
+  
+      Params:
+        targets = array containing
+                    information about which forms should be stored or null
+                    to indicate that all forms should be stored.
+  */
+  void setCanStore(gid.gtk3.target_entry.TargetEntry[] targets = null) nothrow
+  {
+    int _nTargets;
+    if (targets)
+      _nTargets = cast(int)targets.length;
+
+    auto _targets_arr = new GtkTargetEntry[](targets.length);
+    auto _targets = _targets_arr.ptr;
+    foreach (i, obj; targets) _targets[i] = obj ? *cast(GtkTargetEntry*)obj._cPtr(No.Dup) : GtkTargetEntry.init;
+    gtk_clipboard_set_can_store(cast(GtkClipboard*)this._cPtr, _targets, _nTargets);
+  }
+
+  /**
+      Sets the contents of the clipboard to the given #GdkPixbuf.
+      GTK+ will take responsibility for responding for requests
+      for the image, and for converting the image into the
+      requested format.
+  
+      Params:
+        pixbuf = a #GdkPixbuf
+  */
+  void setImage(gid.gdkpixbuf2.pixbuf.Pixbuf pixbuf) nothrow
+  {
+    gtk_clipboard_set_image(cast(GtkClipboard*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the contents of the clipboard to the given UTF-8 string. GTK+ will
+      make a copy of the text and take responsibility for responding
+      for requests for the text, and for converting the text into
+      the requested format.
+  
+      Params:
+        text = a UTF-8 string.
+  */
+  void setText(string text) nothrow
+  {
+    int _len;
+    if (text)
+      _len = cast(int)text.length;
+
+    auto _text = cast(char*)text.ptr;
+    gtk_clipboard_set_text(cast(GtkClipboard*)this._cPtr, _text, _len);
+  }
+
+  /**
+      Stores the current clipboard data somewhere so that it will stay
+      around after the application has quit.
+  */
+  void store() nothrow
+  {
+    gtk_clipboard_store(cast(GtkClipboard*)this._cPtr);
+  }
+
+  /**
+      Requests the contents of the clipboard using the given target.
+      This function waits for the data to be received using the main
+      loop, so events, timeouts, etc, may be dispatched during the wait.
+  
+      Params:
+        target = an atom representing the form into which the clipboard
+                   owner should convert the selection.
+      Returns: a newly-allocated #GtkSelectionData object or null
+                      if retrieving the given target failed. If non-null,
+                      this value must be freed with [gid.gtk3.selection_data.SelectionData.free]
+                      when you are finished with it.
+  */
+  gid.gtk3.selection_data.SelectionData waitForContents(gid.gdk3.atom.Atom target) nothrow
+  {
+    GtkSelectionData* _cretval;
+    _cretval = gtk_clipboard_wait_for_contents(cast(GtkClipboard*)this._cPtr, target ? cast(GdkAtom)target._cPtr : null);
+    auto _retval = _cretval ? new gid.gtk3.selection_data.SelectionData(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Requests the contents of the clipboard as image and converts
+      the result to a #GdkPixbuf. This function waits for
+      the data to be received using the main loop, so events,
+      timeouts, etc, may be dispatched during the wait.
+      Returns: a newly-allocated #GdkPixbuf
+            object which must be disposed with [gid.gobject2.object.ObjectWrap.unref], or
+            null if retrieving the selection data failed. (This could
+            happen for various reasons, in particular if the clipboard
+            was empty or if the contents of the clipboard could not be
+            converted into an image.)
+  */
+  gid.gdkpixbuf2.pixbuf.Pixbuf waitForImage() nothrow
+  {
+    GdkPixbuf* _cretval;
+    _cretval = gtk_clipboard_wait_for_image(cast(GtkClipboard*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gdkpixbuf2.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Requests the contents of the clipboard as rich text.  This function
+      waits for the data to be received using the main loop, so events,
+      timeouts, etc, may be dispatched during the wait.
+  
+      Params:
+        buffer = a #GtkTextBuffer
+        format = return location for the format of the returned data
+      Returns: a
+                      newly-allocated binary block of data which must be
+                      freed with [gid.glib2.global.gfree], or null if retrieving the
+                      selection data failed. (This could happen for various
+                      reasons, in particular if the clipboard was empty or
+                      if the contents of the clipboard could not be
+                      converted into text form.)
+  */
+  ubyte[] waitForRichText(gid.gtk3.text_buffer.TextBuffer buffer, out gid.gdk3.atom.Atom format) nothrow
+  {
+    ubyte* _cretval;
+    size_t _cretlength;
+    GdkAtom _format;
+    _cretval = gtk_clipboard_wait_for_rich_text(cast(GtkClipboard*)this._cPtr, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null, &_format, &_cretlength);
+    ubyte[] _retval;
+
+    if (_cretval)
+    {
+      _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
+      gFree(cast(void*)_cretval);
+    }
+    if (_format)
+      format = new gid.gdk3.atom.Atom(cast(void*)_format, No.Take);
+    return _retval;
+  }
+
+  /**
+      Returns a list of targets that are present on the clipboard, or null
+      if there aren’t any targets available. The returned list must be
+      freed with [gid.glib2.global.gfree].
+      This function waits for the data to be received using the main
+      loop, so events, timeouts, etc, may be dispatched during the wait.
+  
+      Params:
+        targets = location
+                    to store an array of targets. The result stored here must
+                    be freed with [gid.glib2.global.gfree].
+      Returns: true if any targets are present on the clipboard,
+                      otherwise false.
+  */
+  bool waitForTargets(out gid.gdk3.atom.Atom[] targets) nothrow
+  {
+    bool _retval;
+    int _nTargets;
+    GdkAtom* _targets;
+    _retval = cast(bool)gtk_clipboard_wait_for_targets(cast(GtkClipboard*)this._cPtr, &_targets, &_nTargets);
+    targets.length = _nTargets;
+    foreach (i; 0 .. _nTargets)
+      targets[i] = new gid.gdk3.atom.Atom(cast(void*)_targets[i], No.Take);
+    gFree(cast(void*)_targets);
+    return _retval;
+  }
+
+  /**
+      Requests the contents of the clipboard as text and converts
+      the result to UTF-8 if necessary. This function waits for
+      the data to be received using the main loop, so events,
+      timeouts, etc, may be dispatched during the wait.
+      Returns: a newly-allocated UTF-8 string which must
+                      be freed with [gid.glib2.global.gfree], or null if retrieving
+                      the selection data failed. (This could happen
+                      for various reasons, in particular if the
+                      clipboard was empty or if the contents of the
+                      clipboard could not be converted into text form.)
+  */
+  string waitForText() nothrow
+  {
+    char* _cretval;
+    _cretval = gtk_clipboard_wait_for_text(cast(GtkClipboard*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Requests the contents of the clipboard as URIs. This function waits
+      for the data to be received using the main loop, so events,
+      timeouts, etc, may be dispatched during the wait.
+      Returns: a newly-allocated null-terminated array of strings which must
+            be freed with [gid.glib2.global.strfreev], or null if retrieving the
+            selection data failed. (This could happen for various reasons,
+            in particular if the clipboard was empty or if the contents of
+            the clipboard could not be converted into URI form.)
+  */
+  string[] waitForUris() nothrow
+  {
+    char** _cretval;
+    _cretval = gtk_clipboard_wait_for_uris(cast(GtkClipboard*)this._cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString!(Yes.Free);
+      gFree(cast(void*)_cretval);
+    }
+    return _retval;
+  }
+
+  /**
+      Test to see if there is an image available to be pasted
+      This is done by requesting the TARGETS atom and checking
+      if it contains any of the supported image targets. This function
+      waits for the data to be received using the main loop, so events,
+      timeouts, etc, may be dispatched during the wait.
+      
+      This function is a little faster than calling
+      [gid.gtk3.clipboard.Clipboard.waitForImage] since it doesn’t need to retrieve
+      the actual image data.
+      Returns: true is there is an image available, false otherwise.
+  */
+  bool waitIsImageAvailable() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_clipboard_wait_is_image_available(cast(GtkClipboard*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Test to see if there is rich text available to be pasted
+      This is done by requesting the TARGETS atom and checking
+      if it contains any of the supported rich text targets. This function
+      waits for the data to be received using the main loop, so events,
+      timeouts, etc, may be dispatched during the wait.
+      
+      This function is a little faster than calling
+      [gid.gtk3.clipboard.Clipboard.waitForRichText] since it doesn’t need to retrieve
+      the actual text.
+  
+      Params:
+        buffer = a #GtkTextBuffer
+      Returns: true is there is rich text available, false otherwise.
+  */
+  bool waitIsRichTextAvailable(gid.gtk3.text_buffer.TextBuffer buffer) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_clipboard_wait_is_rich_text_available(cast(GtkClipboard*)this._cPtr, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Checks if a clipboard supports pasting data of a given type. This
+      function can be used to determine if a “Paste” menu item should be
+      insensitive or not.
+      
+      If you want to see if there’s text available on the clipboard, use
+      gtk_clipboard_wait_is_text_available () instead.
+  
+      Params:
+        target = A #GdkAtom indicating which target to look for.
+      Returns: true if the target is available, false otherwise.
+  */
+  bool waitIsTargetAvailable(gid.gdk3.atom.Atom target) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_clipboard_wait_is_target_available(cast(GtkClipboard*)this._cPtr, target ? cast(GdkAtom)target._cPtr : null);
+    return _retval;
+  }
+
+  /**
+      Test to see if there is text available to be pasted
+      This is done by requesting the TARGETS atom and checking
+      if it contains any of the supported text targets. This function
+      waits for the data to be received using the main loop, so events,
+      timeouts, etc, may be dispatched during the wait.
+      
+      This function is a little faster than calling
+      [gid.gtk3.clipboard.Clipboard.waitForText] since it doesn’t need to retrieve
+      the actual text.
+      Returns: true is there is text available, false otherwise.
+  */
+  bool waitIsTextAvailable() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_clipboard_wait_is_text_available(cast(GtkClipboard*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Test to see if there is a list of URIs available to be pasted
+      This is done by requesting the TARGETS atom and checking
+      if it contains the URI targets. This function
+      waits for the data to be received using the main loop, so events,
+      timeouts, etc, may be dispatched during the wait.
+      
+      This function is a little faster than calling
+      [gid.gtk3.clipboard.Clipboard.waitForUris] since it doesn’t need to retrieve
+      the actual URI data.
+      Returns: true is there is an URI list available, false otherwise.
+  */
+  bool waitIsUrisAvailable() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_clipboard_wait_is_uris_available(cast(GtkClipboard*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Connect to `OwnerChange` signal.
+  
+      The ::owner-change signal is emitted when GTK+ receives an
+        event that indicates that the ownership of the selection
+        associated with clipboard has changed.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gdk3.event_owner_change.EventOwnerChange event, gid.gtk3.clipboard.Clipboard clipboard)`
+  
+          `event` the GdkEventOwnerChange event (borrowed, only valid during the callback, use `_dup` to keep a copy) (optional)
+  
+          `clipboard` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectOwnerChange(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.gdk3.event_owner_change.EventOwnerChange)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gtk3.clipboard.Clipboard)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+      {
+        auto _event = getVal!(void*)(&_paramVals[1]);
+        _paramTuple[0] = _event ? new gid.gdk3.event_owner_change.EventOwnerChange(_event, null) : null;
+      }
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.clipboard.Clipboard.ownerChange");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("owner-change", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk3.clipboard.Clipboard]
+class ClipboardGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gtk3.clipboard.Clipboard]
+final class ClipboardGidBuilder : ClipboardGidBuilderImpl!ClipboardGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Clipboard build() nothrow
+  {
+    return new Clipboard(cast(void*)createGObject(Clipboard._getGType), Yes.Take);
+  }
+}

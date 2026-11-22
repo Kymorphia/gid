@@ -1,6 +1,11 @@
-# gid -GObject introspection D binding package repository
+# gid - GObject introspection D binding package repository
 
 This is the top-level [Dub](https://dub.pm/) package for [giD](https://github.com/Kymorphia/gid) the GObject Introspection D Language Binding Repository.
+
+Modules are named `gid.<package>.<module>`, for example `import gid.adw1.types;`.
+The latest major of a library also provides unversioned shims such as `import gid.adw.types;`.
+Applications should depend on the versioned subpackages they need (`gid:adw1`), not the top-level `gid` package.
+If you rely on unversioned shim imports, use a dub constraint such as `"~>1.0.0"` (`>=1.0.0 <1.1.0`). In dub, `~>1.0` means `>=1.0.0 <2.0.0`.
 
 ## Sub Package Information
 

@@ -1,0 +1,1375 @@
+/// Module for [Layout] class
+module gid.pango1.layout;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.glib2.bytes;
+import gid.glib2.error;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.pango1.attr_list;
+import gid.pango1.c.functions;
+import gid.pango1.c.types;
+import gid.pango1.context;
+import gid.pango1.font_description;
+import gid.pango1.layout_iter;
+import gid.pango1.layout_line;
+import gid.pango1.tab_array;
+import gid.pango1.types;
+
+/**
+    A [gid.pango1.layout.Layout] structure represents an entire paragraph of text.
+    
+    While complete access to the layout capabilities of Pango is provided
+    using the detailed interfaces for itemization and shaping, using
+    that functionality directly involves writing a fairly large amount
+    of code. [gid.pango1.layout.Layout] provides a high-level driver for formatting
+    entire paragraphs of text at once. This includes paragraph-level
+    functionality such as line breaking, justification, alignment and
+    ellipsization.
+    
+    A [gid.pango1.layout.Layout] is initialized with a [gid.pango1.context.Context], UTF-8 string
+    and set of attributes for that string. Once that is done, the set of
+    formatted lines can be extracted from the object, the layout can be
+    rendered, and conversion between logical character positions within
+    the layout's text, and the physical position of the resulting glyphs
+    can be made.
+    
+    There are a number of parameters to adjust the formatting of a
+    [gid.pango1.layout.Layout]. The following image shows adjustable parameters
+    (on the left) and font metrics (on the right):
+    
+    <picture>
+      <source srcset="layout-dark.png" media="(prefers-color-scheme: dark)">
+      <img alt="Pango Layout Parameters" src="layout-light.png">
+    </picture>
+    
+    The following images demonstrate the effect of alignment and
+    justification on the layout of text:
+    
+    | | |
+    | --- | --- |
+    | ![align=left](align-left.png) | ![align=left, justify](align-left-justify.png) |
+    | ![align=center](align-center.png) | ![align=center, justify](align-center-justify.png) |
+    | ![align=right](align-right.png) | ![align=right, justify](align-right-justify.png) |
+    
+    
+    It is possible, as well, to ignore the 2-D setup,
+    and simply treat the results of a [gid.pango1.layout.Layout] as a list of lines.
+*/
+class Layout : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())pango_layout_get_type != &gidSymbolNotFound ? pango_layout_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "PangoLayout";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Layout self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.pango1.layout.Layout]
+      Returns: New builder object
+  */
+  static LayoutGidBuilder builder() nothrow
+  {
+    return new LayoutGidBuilder;
+  }
+
+  /**
+      Create a new [gid.pango1.layout.Layout] object with attributes initialized to
+      default values for a particular [gid.pango1.context.Context].
+  
+      Params:
+        context = a [gid.pango1.context.Context]
+      Returns: the newly allocated [gid.pango1.layout.Layout]
+  */
+  this(gid.pango1.context.Context context) nothrow
+  {
+    PangoLayout* _cretval;
+    _cretval = pango_layout_new(context ? cast(PangoContext*)context._cPtr(No.Dup) : null);
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Loads data previously created via [gid.pango1.layout.Layout.serialize].
+      
+      For a discussion of the supported format, see that function.
+      
+      Note: to verify that the returned layout is identical to
+      the one that was serialized, you can compare bytes to the
+      result of serializing the layout again.
+  
+      Params:
+        context = a [gid.pango1.context.Context]
+        bytes = the bytes containing the data
+        flags = [gid.pango1.types.LayoutDeserializeFlags]
+      Returns: a new [gid.pango1.layout.Layout]
+      Throws: [ErrorWrap]
+  */
+  static gid.pango1.layout.Layout deserialize(gid.pango1.context.Context context, gid.glib2.bytes.Bytes bytes, gid.pango1.types.LayoutDeserializeFlags flags)
+  {
+    PangoLayout* _cretval;
+    GError *_err;
+    _cretval = pango_layout_deserialize(context ? cast(PangoContext*)context._cPtr(No.Dup) : null, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, flags, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.pango1.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Forces recomputation of any state in the [gid.pango1.layout.Layout] that
+      might depend on the layout's context.
+      
+      This function should be called if you make changes to the context
+      subsequent to creating the layout.
+  */
+  void contextChanged() nothrow
+  {
+    pango_layout_context_changed(cast(PangoLayout*)this._cPtr);
+  }
+
+  /**
+      Creates a deep copy-by-value of the layout.
+      
+      The attribute list, tab array, and text from the original layout
+      are all copied by value.
+      Returns: the newly allocated [gid.pango1.layout.Layout]
+  */
+  gid.pango1.layout.Layout copy() nothrow
+  {
+    PangoLayout* _cretval;
+    _cretval = pango_layout_copy(cast(PangoLayout*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.pango1.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the alignment for the layout: how partial lines are
+      positioned within the horizontal space available.
+      Returns: the alignment
+  */
+  gid.pango1.types.Alignment getAlignment() nothrow
+  {
+    PangoAlignment _cretval;
+    _cretval = pango_layout_get_alignment(cast(PangoLayout*)this._cPtr);
+    gid.pango1.types.Alignment _retval = cast(gid.pango1.types.Alignment)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the attribute list for the layout, if any.
+      Returns: a [gid.pango1.attr_list.AttrList]
+  */
+  gid.pango1.attr_list.AttrList getAttributes() nothrow
+  {
+    PangoAttrList* _cretval;
+    _cretval = pango_layout_get_attributes(cast(PangoLayout*)this._cPtr);
+    auto _retval = _cretval ? new gid.pango1.attr_list.AttrList(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets whether to calculate the base direction for the layout
+      according to its contents.
+      
+      See [gid.pango1.layout.Layout.setAutoDir].
+      Returns: true if the bidirectional base direction
+          is computed from the layout's contents, false otherwise
+  */
+  bool getAutoDir() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)pango_layout_get_auto_dir(cast(PangoLayout*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the Y position of baseline of the first line in layout.
+      Returns: baseline of first line, from top of layout
+  */
+  int getBaseline() nothrow
+  {
+    int _retval;
+    _retval = pango_layout_get_baseline(cast(PangoLayout*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Given an index within a layout, determines the positions that of the
+      strong and weak cursors if the insertion point is at that index.
+      
+      This is a variant of [gid.pango1.layout.Layout.getCursorPos] that applies
+      font metric information about caret slope and offset to the positions
+      it returns.
+      
+      <picture>
+        <source srcset="caret-metrics-dark.png" media="(prefers-color-scheme: dark)">
+        <img alt="Caret metrics" src="caret-metrics-light.png">
+      </picture>
+  
+      Params:
+        index = the byte index of the cursor
+        strongPos = location to store the strong cursor position
+        weakPos = location to store the weak cursor position
+  */
+  void getCaretPos(int index, out gid.pango1.types.Rectangle strongPos, out gid.pango1.types.Rectangle weakPos) nothrow
+  {
+    pango_layout_get_caret_pos(cast(PangoLayout*)this._cPtr, index, cast(PangoRectangle*)&strongPos, cast(PangoRectangle*)&weakPos);
+  }
+
+  /**
+      Returns the number of Unicode characters in the
+      the text of layout.
+      Returns: the number of Unicode characters
+          in the text of layout
+  */
+  int getCharacterCount() nothrow
+  {
+    int _retval;
+    _retval = pango_layout_get_character_count(cast(PangoLayout*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves the [gid.pango1.context.Context] used for this layout.
+      Returns: the [gid.pango1.context.Context] for the layout
+  */
+  gid.pango1.context.Context getContext() nothrow
+  {
+    PangoContext* _cretval;
+    _cretval = pango_layout_get_context(cast(PangoLayout*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.pango1.context.Context)(cast(PangoContext*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Given an index within a layout, determines the positions that of the
+      strong and weak cursors if the insertion point is at that index.
+      
+      The position of each cursor is stored as a zero-width rectangle
+      with the height of the run extents.
+      
+      <picture>
+        <source srcset="cursor-positions-dark.png" media="(prefers-color-scheme: dark)">
+        <img alt="Cursor positions" src="cursor-positions-light.png">
+      </picture>
+      
+      The strong cursor location is the location where characters of the
+      directionality equal to the base direction of the layout are inserted.
+      The weak cursor location is the location where characters of the
+      directionality opposite to the base direction of the layout are inserted.
+      
+      The following example shows text with both a strong and a weak cursor.
+      
+      <picture>
+        <source srcset="split-cursor-dark.png" media="(prefers-color-scheme: dark)">
+        <img alt="Strong and weak cursors" src="split-cursor-light.png">
+      </picture>
+      
+      The strong cursor has a little arrow pointing to the right, the weak
+      cursor to the left. Typing a 'c' in this situation will insert the
+      character after the 'b', and typing another Hebrew character, like 'ג',
+      will insert it at the end.
+  
+      Params:
+        index = the byte index of the cursor
+        strongPos = location to store the strong cursor position
+        weakPos = location to store the weak cursor position
+  */
+  void getCursorPos(int index, out gid.pango1.types.Rectangle strongPos, out gid.pango1.types.Rectangle weakPos) nothrow
+  {
+    pango_layout_get_cursor_pos(cast(PangoLayout*)this._cPtr, index, cast(PangoRectangle*)&strongPos, cast(PangoRectangle*)&weakPos);
+  }
+
+  /**
+      Gets the text direction at the given character position in layout.
+  
+      Params:
+        index = the byte index of the char
+      Returns: the text direction at index
+  */
+  gid.pango1.types.Direction getDirection(int index) nothrow
+  {
+    PangoDirection _cretval;
+    _cretval = pango_layout_get_direction(cast(PangoLayout*)this._cPtr, index);
+    gid.pango1.types.Direction _retval = cast(gid.pango1.types.Direction)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the type of ellipsization being performed for layout.
+      
+      See [gid.pango1.layout.Layout.setEllipsize].
+      
+      Use [gid.pango1.layout.Layout.isEllipsized] to query whether any
+      paragraphs were actually ellipsized.
+      Returns: the current ellipsization mode for layout
+  */
+  gid.pango1.types.EllipsizeMode getEllipsize() nothrow
+  {
+    PangoEllipsizeMode _cretval;
+    _cretval = pango_layout_get_ellipsize(cast(PangoLayout*)this._cPtr);
+    gid.pango1.types.EllipsizeMode _retval = cast(gid.pango1.types.EllipsizeMode)_cretval;
+    return _retval;
+  }
+
+  /**
+      Computes the logical and ink extents of layout.
+      
+      Logical extents are usually what you want for positioning things. Note
+      that both extents may have non-zero x and y. You may want to use those
+      to offset where you render the layout. Not doing that is a very typical
+      bug that shows up as right-to-left layouts not being correctly positioned
+      in a layout with a set width.
+      
+      The extents are given in layout coordinates and in Pango units; layout
+      coordinates begin at the top left corner of the layout.
+  
+      Params:
+        inkRect = rectangle used to store the extents of the
+            layout as drawn
+        logicalRect = rectangle used to store the logical
+            extents of the layout
+  */
+  void getExtents(out gid.pango1.types.Rectangle inkRect, out gid.pango1.types.Rectangle logicalRect) nothrow
+  {
+    pango_layout_get_extents(cast(PangoLayout*)this._cPtr, cast(PangoRectangle*)&inkRect, cast(PangoRectangle*)&logicalRect);
+  }
+
+  /**
+      Gets the font description for the layout, if any.
+      Returns: a pointer to the
+          layout's font description, or null if the font description
+          from the layout's context is inherited.
+  */
+  gid.pango1.font_description.FontDescription getFontDescription() nothrow
+  {
+    const(PangoFontDescription)* _cretval;
+    _cretval = pango_layout_get_font_description(cast(PangoLayout*)this._cPtr);
+    auto _retval = _cretval ? new gid.pango1.font_description.FontDescription(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the height of layout used for ellipsization.
+      
+      See [gid.pango1.layout.Layout.setHeight] for details.
+      Returns: the height, in Pango units if positive,
+          or number of lines if negative.
+  */
+  int getHeight() nothrow
+  {
+    int _retval;
+    _retval = pango_layout_get_height(cast(PangoLayout*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the paragraph indent width in Pango units.
+      
+      A negative value indicates a hanging indentation.
+      Returns: the indent in Pango units
+  */
+  int getIndent() nothrow
+  {
+    int _retval;
+    _retval = pango_layout_get_indent(cast(PangoLayout*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns an iterator to iterate over the visual extents of the layout.
+      Returns: the new [gid.pango1.layout_iter.LayoutIter]
+  */
+  gid.pango1.layout_iter.LayoutIter getIter() nothrow
+  {
+    PangoLayoutIter* _cretval;
+    _cretval = pango_layout_get_iter(cast(PangoLayout*)this._cPtr);
+    auto _retval = _cretval ? new gid.pango1.layout_iter.LayoutIter(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets whether each complete line should be stretched to fill the entire
+      width of the layout.
+      Returns: the justify value
+  */
+  bool getJustify() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)pango_layout_get_justify(cast(PangoLayout*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether the last line should be stretched
+      to fill the entire width of the layout.
+      Returns: the justify value
+  */
+  bool getJustifyLastLine() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)pango_layout_get_justify_last_line(cast(PangoLayout*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves a particular line from a [gid.pango1.layout.Layout].
+      
+      Use the faster [gid.pango1.layout.Layout.getLineReadonly] if you do not
+      plan to modify the contents of the line (glyphs, glyph widths, etc.).
+  
+      Params:
+        line = the index of a line, which must be between 0 and
+            `pango_layout_get_line_count(layout) - 1`, inclusive.
+      Returns: the requested [gid.pango1.layout_line.LayoutLine],
+          or null if the index is out of range. This layout line can be ref'ed
+          and retained, but will become invalid if changes are made to the
+          [gid.pango1.layout.Layout].
+  */
+  gid.pango1.layout_line.LayoutLine getLine(int line) nothrow
+  {
+    PangoLayoutLine* _cretval;
+    _cretval = pango_layout_get_line(cast(PangoLayout*)this._cPtr, line);
+    auto _retval = _cretval ? new gid.pango1.layout_line.LayoutLine(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Retrieves the count of lines for the layout.
+      Returns: the line count
+  */
+  int getLineCount() nothrow
+  {
+    int _retval;
+    _retval = pango_layout_get_line_count(cast(PangoLayout*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves a particular line from a [gid.pango1.layout.Layout].
+      
+      This is a faster alternative to [gid.pango1.layout.Layout.getLine],
+      but the user is not expected to modify the contents of the line
+      (glyphs, glyph widths, etc.).
+  
+      Params:
+        line = the index of a line, which must be between 0 and
+            `pango_layout_get_line_count(layout) - 1`, inclusive.
+      Returns: the requested [gid.pango1.layout_line.LayoutLine],
+          or null if the index is out of range. This layout line can be ref'ed
+          and retained, but will become invalid if changes are made to the
+          [gid.pango1.layout.Layout]. No changes should be made to the line.
+  */
+  gid.pango1.layout_line.LayoutLine getLineReadonly(int line) nothrow
+  {
+    PangoLayoutLine* _cretval;
+    _cretval = pango_layout_get_line_readonly(cast(PangoLayout*)this._cPtr, line);
+    auto _retval = _cretval ? new gid.pango1.layout_line.LayoutLine(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the line spacing factor of layout.
+      
+      See [gid.pango1.layout.Layout.setLineSpacing].
+      Returns: 
+  */
+  float getLineSpacing() nothrow
+  {
+    float _retval;
+    _retval = pango_layout_get_line_spacing(cast(PangoLayout*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the lines of the layout as a list.
+      
+      Use the faster [gid.pango1.layout.Layout.getLinesReadonly] if you do not
+      plan to modify the contents of the lines (glyphs, glyph widths, etc.).
+      Returns: a [gid.glib2.slist.SList]
+          containing the lines in the layout. This points to internal data of the
+          [gid.pango1.layout.Layout] and must be used with care. It will become invalid on any
+          change to the layout's text or properties.
+  */
+  gid.pango1.layout_line.LayoutLine[] getLines() nothrow
+  {
+    GSList* _cretval;
+    _cretval = pango_layout_get_lines(cast(PangoLayout*)this._cPtr);
+    auto _retval = gSListToD!(gid.pango1.layout_line.LayoutLine, GidOwnership.None)(cast(GSList*)_cretval);
+    return _retval;
+  }
+
+  /**
+      Returns the lines of the layout as a list.
+      
+      This is a faster alternative to [gid.pango1.layout.Layout.getLines],
+      but the user is not expected to modify the contents of the lines
+      (glyphs, glyph widths, etc.).
+      Returns: a [gid.glib2.slist.SList]
+          containing the lines in the layout. This points to internal data of the
+          [gid.pango1.layout.Layout] and must be used with care. It will become invalid on any
+          change to the layout's text or properties. No changes should be made to
+          the lines.
+  */
+  gid.pango1.layout_line.LayoutLine[] getLinesReadonly() nothrow
+  {
+    GSList* _cretval;
+    _cretval = pango_layout_get_lines_readonly(cast(PangoLayout*)this._cPtr);
+    auto _retval = gSListToD!(gid.pango1.layout_line.LayoutLine, GidOwnership.None)(cast(GSList*)_cretval);
+    return _retval;
+  }
+
+  /**
+      Retrieves an array of logical attributes for each character in
+      the layout.
+  
+      Params:
+        attrs = location to store a pointer to an array of logical attributes.
+            This value must be freed with [gid.glib2.global.gfree].
+  */
+  void getLogAttrs(out gid.pango1.types.LogAttr[] attrs) nothrow
+  {
+    int _nAttrs;
+    PangoLogAttr* _attrs;
+    pango_layout_get_log_attrs(cast(PangoLayout*)this._cPtr, &_attrs, &_nAttrs);
+    attrs.length = _nAttrs;
+    attrs[0 .. $] = (cast(gid.pango1.types.LogAttr*)_attrs)[0 .. _nAttrs];
+    gFree(cast(void*)_attrs);
+  }
+
+  /**
+      Retrieves an array of logical attributes for each character in
+      the layout.
+      
+      This is a faster alternative to [gid.pango1.layout.Layout.getLogAttrs].
+      The returned array is part of layout and must not be modified.
+      Modifying the layout will invalidate the returned array.
+      
+      The number of attributes returned in n_attrs will be one more
+      than the total number of characters in the layout, since there
+      need to be attributes corresponding to both the position before
+      the first character and the position after the last character.
+      Returns: an array of logical attributes
+  */
+  gid.pango1.types.LogAttr[] getLogAttrsReadonly() nothrow
+  {
+    const(PangoLogAttr)* _cretval;
+    int _cretlength;
+    _cretval = pango_layout_get_log_attrs_readonly(cast(PangoLayout*)this._cPtr, &_cretlength);
+    gid.pango1.types.LogAttr[] _retval;
+
+    if (_cretval)
+    {
+      _retval = new gid.pango1.types.LogAttr[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i];
+    }
+    return _retval;
+  }
+
+  /**
+      Computes the logical and ink extents of layout in device units.
+      
+      This function just calls [gid.pango1.layout.Layout.getExtents] followed by
+      two `funcextents_to_pixels` calls, rounding ink_rect and logical_rect
+      such that the rounded rectangles fully contain the unrounded one (that is,
+      passes them as first argument to `funcPango.extents_to_pixels`).
+  
+      Params:
+        inkRect = rectangle used to store the extents of the
+            layout as drawn
+        logicalRect = rectangle used to store the logical
+            extents of the layout
+  */
+  void getPixelExtents(out gid.pango1.types.Rectangle inkRect, out gid.pango1.types.Rectangle logicalRect) nothrow
+  {
+    pango_layout_get_pixel_extents(cast(PangoLayout*)this._cPtr, cast(PangoRectangle*)&inkRect, cast(PangoRectangle*)&logicalRect);
+  }
+
+  /**
+      Determines the logical width and height of a [gid.pango1.layout.Layout] in device
+      units.
+      
+      [gid.pango1.layout.Layout.getSize] returns the width and height
+      scaled by [gid.pango1.types.SCALE]. This is simply a convenience function
+      around [gid.pango1.layout.Layout.getPixelExtents].
+  
+      Params:
+        width = location to store the logical width
+        height = location to store the logical height
+  */
+  void getPixelSize(out int width, out int height) nothrow
+  {
+    pango_layout_get_pixel_size(cast(PangoLayout*)this._cPtr, cast(int*)&width, cast(int*)&height);
+  }
+
+  /**
+      Returns the current serial number of layout.
+      
+      The serial number is initialized to an small number larger than zero
+      when a new layout is created and is increased whenever the layout is
+      changed using any of the setter functions, or the [gid.pango1.context.Context] it
+      uses has changed. The serial may wrap, but will never have the value 0.
+      Since it can wrap, never compare it with "less than", always use "not equals".
+      
+      This can be used to automatically detect changes to a [gid.pango1.layout.Layout],
+      and is useful for example to decide whether a layout needs redrawing.
+      To force the serial to be increased, use
+      [gid.pango1.layout.Layout.contextChanged].
+      Returns: The current serial number of layout.
+  */
+  uint getSerial() nothrow
+  {
+    uint _retval;
+    _retval = pango_layout_get_serial(cast(PangoLayout*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Obtains whether layout is in single paragraph mode.
+      
+      See [gid.pango1.layout.Layout.setSingleParagraphMode].
+      Returns: true if the layout does not break paragraphs
+          at paragraph separator characters, false otherwise
+  */
+  bool getSingleParagraphMode() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)pango_layout_get_single_paragraph_mode(cast(PangoLayout*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Determines the logical width and height of a [gid.pango1.layout.Layout] in Pango
+      units.
+      
+      This is simply a convenience function around [gid.pango1.layout.Layout.getExtents].
+  
+      Params:
+        width = location to store the logical width
+        height = location to store the logical height
+  */
+  void getSize(out int width, out int height) nothrow
+  {
+    pango_layout_get_size(cast(PangoLayout*)this._cPtr, cast(int*)&width, cast(int*)&height);
+  }
+
+  /**
+      Gets the amount of spacing between the lines of the layout.
+      Returns: the spacing in Pango units
+  */
+  int getSpacing() nothrow
+  {
+    int _retval;
+    _retval = pango_layout_get_spacing(cast(PangoLayout*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the current [gid.pango1.tab_array.TabArray] used by this layout.
+      
+      If no [gid.pango1.tab_array.TabArray] has been set, then the default tabs are
+      in use and null is returned. Default tabs are every 8 spaces.
+      
+      The return value should be freed with [gid.pango1.tab_array.TabArray.free].
+      Returns: a copy of the tabs for this layout
+  */
+  gid.pango1.tab_array.TabArray getTabs() nothrow
+  {
+    PangoTabArray* _cretval;
+    _cretval = pango_layout_get_tabs(cast(PangoLayout*)this._cPtr);
+    auto _retval = _cretval ? new gid.pango1.tab_array.TabArray(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the text in the layout.
+      
+      The returned text should not be freed or modified.
+      Returns: the text in the layout
+  */
+  string getText() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = pango_layout_get_text(cast(PangoLayout*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Counts the number of unknown glyphs in layout.
+      
+      This function can be used to determine if there are any fonts
+      available to render all characters in a certain string, or when
+      used in combination with [gid.pango1.types.AttrType.Fallback], to check if a
+      certain font supports all the characters in the string.
+      Returns: The number of unknown glyphs in layout
+  */
+  int getUnknownGlyphsCount() nothrow
+  {
+    int _retval;
+    _retval = pango_layout_get_unknown_glyphs_count(cast(PangoLayout*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the width to which the lines of the [gid.pango1.layout.Layout] should wrap.
+      Returns: the width in Pango units, or -1 if no width set.
+  */
+  int getWidth() nothrow
+  {
+    int _retval;
+    _retval = pango_layout_get_width(cast(PangoLayout*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the wrap mode for the layout.
+      
+      Use [gid.pango1.layout.Layout.isWrapped] to query whether
+      any paragraphs were actually wrapped.
+      Returns: active wrap mode.
+  */
+  gid.pango1.types.WrapMode getWrap() nothrow
+  {
+    PangoWrapMode _cretval;
+    _cretval = pango_layout_get_wrap(cast(PangoLayout*)this._cPtr);
+    gid.pango1.types.WrapMode _retval = cast(gid.pango1.types.WrapMode)_cretval;
+    return _retval;
+  }
+
+  /**
+      Converts from byte index_ within the layout to line and X position.
+      
+      The X position is measured from the left edge of the line.
+  
+      Params:
+        index = the byte index of a grapheme within the layout
+        trailing = an integer indicating the edge of the grapheme to retrieve the
+            position of. If > 0, the trailing edge of the grapheme, if 0,
+            the leading of the grapheme
+        line = location to store resulting line index. (which will
+            between 0 and pango_layout_get_line_count(layout) - 1)
+        xPos = location to store resulting position within line
+            ([gid.pango1.types.SCALE] units per device unit)
+  */
+  void indexToLineX(int index, bool trailing, out int line, out int xPos) nothrow
+  {
+    pango_layout_index_to_line_x(cast(PangoLayout*)this._cPtr, index, trailing, cast(int*)&line, cast(int*)&xPos);
+  }
+
+  /**
+      Converts from an index within a [gid.pango1.layout.Layout] to the onscreen position
+      corresponding to the grapheme at that index.
+      
+      The returns is represented as rectangle. Note that `pos->x` is
+      always the leading edge of the grapheme and `pos->x + pos->width` the
+      trailing edge of the grapheme. If the directionality of the grapheme
+      is right-to-left, then `pos->width` will be negative.
+  
+      Params:
+        index = byte index within layout
+        pos = rectangle in which to store the position of the grapheme
+  */
+  void indexToPos(int index, out gid.pango1.types.Rectangle pos) nothrow
+  {
+    pango_layout_index_to_pos(cast(PangoLayout*)this._cPtr, index, cast(PangoRectangle*)&pos);
+  }
+
+  /**
+      Queries whether the layout had to ellipsize any paragraphs.
+      
+      This returns true if the ellipsization mode for layout
+      is not [gid.pango1.types.EllipsizeMode.None], a positive width is set on layout,
+      and there are paragraphs exceeding that width that have to be
+      ellipsized.
+      Returns: true if any paragraphs had to be ellipsized,
+          false otherwise
+  */
+  bool isEllipsized() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)pango_layout_is_ellipsized(cast(PangoLayout*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Queries whether the layout had to wrap any paragraphs.
+      
+      This returns true if a positive width is set on layout,
+      and there are paragraphs exceeding the layout width that have
+      to be wrapped.
+      Returns: true if any paragraphs had to be wrapped, false
+          otherwise
+  */
+  bool isWrapped() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)pango_layout_is_wrapped(cast(PangoLayout*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Computes a new cursor position from an old position and a direction.
+      
+      If direction is positive, then the new position will cause the strong
+      or weak cursor to be displayed one position to right of where it was
+      with the old cursor position. If direction is negative, it will be
+      moved to the left.
+      
+      In the presence of bidirectional text, the correspondence between
+      logical and visual order will depend on the direction of the current
+      run, and there may be jumps when the cursor is moved off of the end
+      of a run.
+      
+      Motion here is in cursor positions, not in characters, so a single
+      call to this function may move the cursor over multiple characters
+      when multiple characters combine to form a single grapheme.
+  
+      Params:
+        strong = whether the moving cursor is the strong cursor or the
+            weak cursor. The strong cursor is the cursor corresponding
+            to text insertion in the base direction for the layout.
+        oldIndex = the byte index of the current cursor position
+        oldTrailing = if 0, the cursor was at the leading edge of the
+            grapheme indicated by old_index, if > 0, the cursor
+            was at the trailing edge.
+        direction = direction to move cursor. A negative
+            value indicates motion to the left
+        newIndex = location to store the new cursor byte index.
+            A value of -1 indicates that the cursor has been moved off the
+            beginning of the layout. A value of `G_MAXINT` indicates that
+            the cursor has been moved off the end of the layout.
+        newTrailing = number of characters to move forward from
+            the location returned for new_index to get the position where
+            the cursor should be displayed. This allows distinguishing the
+            position at the beginning of one line from the position at the
+            end of the preceding line. new_index is always on the line where
+            the cursor should be displayed.
+  */
+  void moveCursorVisually(bool strong, int oldIndex, int oldTrailing, int direction, out int newIndex, out int newTrailing) nothrow
+  {
+    pango_layout_move_cursor_visually(cast(PangoLayout*)this._cPtr, strong, oldIndex, oldTrailing, direction, cast(int*)&newIndex, cast(int*)&newTrailing);
+  }
+
+  /**
+      Serializes the layout for later deserialization via [gid.pango1.layout.Layout.deserialize].
+      
+      There are no guarantees about the format of the output across different
+      versions of Pango and [gid.pango1.layout.Layout.deserialize] will reject data
+      that it cannot parse.
+      
+      The intended use of this function is testing, benchmarking and debugging.
+      The format is not meant as a permanent storage format.
+  
+      Params:
+        flags = [gid.pango1.types.LayoutSerializeFlags]
+      Returns: a [gid.glib2.bytes.Bytes] containing the serialized form of layout
+  */
+  gid.glib2.bytes.Bytes serialize(gid.pango1.types.LayoutSerializeFlags flags) nothrow
+  {
+    GBytes* _cretval;
+    _cretval = pango_layout_serialize(cast(PangoLayout*)this._cPtr, flags);
+    auto _retval = _cretval ? new gid.glib2.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Sets the alignment for the layout: how partial lines are
+      positioned within the horizontal space available.
+      
+      The default alignment is [gid.pango1.types.Alignment.Left].
+  
+      Params:
+        alignment = the alignment
+  */
+  void setAlignment(gid.pango1.types.Alignment alignment) nothrow
+  {
+    pango_layout_set_alignment(cast(PangoLayout*)this._cPtr, alignment);
+  }
+
+  /**
+      Sets the text attributes for a layout object.
+      
+      References attrs, so the caller can unref its reference.
+  
+      Params:
+        attrs = a [gid.pango1.attr_list.AttrList]
+  */
+  void setAttributes(gid.pango1.attr_list.AttrList attrs = null) nothrow
+  {
+    pango_layout_set_attributes(cast(PangoLayout*)this._cPtr, attrs ? cast(PangoAttrList*)attrs._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets whether to calculate the base direction
+      for the layout according to its contents.
+      
+      When this flag is on (the default), then paragraphs in layout that
+      begin with strong right-to-left characters (Arabic and Hebrew principally),
+      will have right-to-left layout, paragraphs with letters from other scripts
+      will have left-to-right layout. Paragraphs with only neutral characters
+      get their direction from the surrounding paragraphs.
+      
+      When false, the choice between left-to-right and right-to-left
+      layout is done according to the base direction of the layout's
+      [gid.pango1.context.Context]. (See [gid.pango1.context.Context.setBaseDir]).
+      
+      When the auto-computed direction of a paragraph differs from the
+      base direction of the context, the interpretation of
+      [gid.pango1.types.Alignment.Left] and [gid.pango1.types.Alignment.Right] are swapped.
+  
+      Params:
+        autoDir = if true, compute the bidirectional base direction
+            from the layout's contents
+  */
+  void setAutoDir(bool autoDir) nothrow
+  {
+    pango_layout_set_auto_dir(cast(PangoLayout*)this._cPtr, autoDir);
+  }
+
+  /**
+      Sets the type of ellipsization being performed for layout.
+      
+      Depending on the ellipsization mode ellipsize text is
+      removed from the start, middle, or end of text so they
+      fit within the width and height of layout set with
+      [gid.pango1.layout.Layout.setWidth] and [gid.pango1.layout.Layout.setHeight].
+      
+      If the layout contains characters such as newlines that
+      force it to be layed out in multiple paragraphs, then whether
+      each paragraph is ellipsized separately or the entire layout
+      is ellipsized as a whole depends on the set height of the layout.
+      
+      The default value is [gid.pango1.types.EllipsizeMode.None].
+      
+      See [gid.pango1.layout.Layout.setHeight] for details.
+  
+      Params:
+        ellipsize = the new ellipsization mode for layout
+  */
+  void setEllipsize(gid.pango1.types.EllipsizeMode ellipsize) nothrow
+  {
+    pango_layout_set_ellipsize(cast(PangoLayout*)this._cPtr, ellipsize);
+  }
+
+  /**
+      Sets the default font description for the layout.
+      
+      If no font description is set on the layout, the
+      font description from the layout's context is used.
+  
+      Params:
+        desc = the new [gid.pango1.font_description.FontDescription]
+            to unset the current font description
+  */
+  void setFontDescription(gid.pango1.font_description.FontDescription desc = null) nothrow
+  {
+    pango_layout_set_font_description(cast(PangoLayout*)this._cPtr, desc ? cast(const(PangoFontDescription)*)desc._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the height to which the [gid.pango1.layout.Layout] should be ellipsized at.
+      
+      There are two different behaviors, based on whether height is positive
+      or negative.
+      
+      If height is positive, it will be the maximum height of the layout. Only
+      lines would be shown that would fit, and if there is any text omitted,
+      an ellipsis added. At least one line is included in each paragraph regardless
+      of how small the height value is. A value of zero will render exactly one
+      line for the entire layout.
+      
+      If height is negative, it will be the (negative of) maximum number of lines
+      per paragraph. That is, the total number of lines shown may well be more than
+      this value if the layout contains multiple paragraphs of text.
+      The default value of -1 means that the first line of each paragraph is ellipsized.
+      This behavior may be changed in the future to act per layout instead of per
+      paragraph. File a bug against pango at
+      [https://gitlab.gnome.org/gnome/pango](https://gitlab.gnome.org/gnome/pango)
+      if your code relies on this behavior.
+      
+      Height setting only has effect if a positive width is set on
+      layout and ellipsization mode of layout is not [gid.pango1.types.EllipsizeMode.None].
+      The behavior is undefined if a height other than -1 is set and
+      ellipsization mode is set to [gid.pango1.types.EllipsizeMode.None], and may change in the
+      future.
+  
+      Params:
+        height = the desired height of the layout in Pango units if positive,
+            or desired number of lines if negative.
+  */
+  void setHeight(int height) nothrow
+  {
+    pango_layout_set_height(cast(PangoLayout*)this._cPtr, height);
+  }
+
+  /**
+      Sets the width in Pango units to indent each paragraph.
+      
+      A negative value of indent will produce a hanging indentation.
+      That is, the first line will have the full width, and subsequent
+      lines will be indented by the absolute value of indent.
+      
+      The indent setting is ignored if layout alignment is set to
+      [gid.pango1.types.Alignment.Center].
+      
+      The default value is 0.
+  
+      Params:
+        indent = the amount by which to indent
+  */
+  void setIndent(int indent) nothrow
+  {
+    pango_layout_set_indent(cast(PangoLayout*)this._cPtr, indent);
+  }
+
+  /**
+      Sets whether each complete line should be stretched to fill the
+      entire width of the layout.
+      
+      Stretching is typically done by adding whitespace, but for some scripts
+      (such as Arabic), the justification may be done in more complex ways,
+      like extending the characters.
+      
+      Note that this setting is not implemented and so is ignored in
+      Pango older than 1.18.
+      
+      Note that tabs and justification conflict with each other:
+      Justification will move content away from its tab-aligned
+      positions.
+      
+      The default value is false.
+      
+      Also see [gid.pango1.layout.Layout.setJustifyLastLine].
+  
+      Params:
+        justify = whether the lines in the layout should be justified
+  */
+  void setJustify(bool justify) nothrow
+  {
+    pango_layout_set_justify(cast(PangoLayout*)this._cPtr, justify);
+  }
+
+  /**
+      Sets whether the last line should be stretched to fill the
+      entire width of the layout.
+      
+      This only has an effect if [gid.pango1.layout.Layout.setJustify] has
+      been called as well.
+      
+      The default value is false.
+  
+      Params:
+        justify = whether the last line in the layout should be justified
+  */
+  void setJustifyLastLine(bool justify) nothrow
+  {
+    pango_layout_set_justify_last_line(cast(PangoLayout*)this._cPtr, justify);
+  }
+
+  /**
+      Sets a factor for line spacing.
+      
+      Typical values are: 0, 1, 1.5, 2. The default values is 0.
+      
+      If factor is non-zero, lines are placed so that
+      
+          baseline2 = baseline1 + factor * height2
+      
+      where height2 is the line height of the second line
+      (as determined by the font(s)). In this case, the spacing
+      set with [gid.pango1.layout.Layout.setSpacing] is ignored.
+      
+      If factor is zero (the default), spacing is applied as before.
+      
+      Note: for semantics that are closer to the CSS line-height
+      property, see `funcPango.attr_line_height_new`.
+  
+      Params:
+        factor = the new line spacing factor
+  */
+  void setLineSpacing(float factor) nothrow
+  {
+    pango_layout_set_line_spacing(cast(PangoLayout*)this._cPtr, factor);
+  }
+
+  /**
+      Sets the layout text and attribute list from marked-up text.
+      
+      See [Pango Markup](pango_markup.html)).
+      
+      Replaces the current text and attribute list.
+      
+      This is the same as [gid.pango1.layout.Layout.setMarkupWithAccel],
+      but the markup text isn't scanned for accelerators.
+  
+      Params:
+        markup = marked-up text
+  */
+  void setMarkup(string markup) nothrow
+  {
+    int _length;
+    if (markup)
+      _length = cast(int)markup.length;
+
+    auto _markup = cast(char*)markup.ptr;
+    pango_layout_set_markup(cast(PangoLayout*)this._cPtr, _markup, _length);
+  }
+
+  /**
+      Sets the layout text and attribute list from marked-up text.
+      
+      See [Pango Markup](pango_markup.html)).
+      
+      Replaces the current text and attribute list.
+      
+      If accel_marker is nonzero, the given character will mark the
+      character following it as an accelerator. For example, accel_marker
+      might be an ampersand or underscore. All characters marked
+      as an accelerator will receive a [gid.pango1.types.Underline.Low] attribute,
+      and the first character so marked will be returned in accel_char.
+      Two accel_marker characters following each other produce a single
+      literal accel_marker character.
+  
+      Params:
+        markup = marked-up text (see [Pango Markup](pango_markup.html))
+        accelMarker = marker for accelerators in the text
+        accelChar = return location
+            for first located accelerator
+  */
+  void setMarkupWithAccel(string markup, dchar accelMarker, out dchar accelChar) nothrow
+  {
+    int _length;
+    if (markup)
+      _length = cast(int)markup.length;
+
+    auto _markup = cast(char*)markup.ptr;
+    pango_layout_set_markup_with_accel(cast(PangoLayout*)this._cPtr, _markup, _length, accelMarker, cast(dchar*)&accelChar);
+  }
+
+  /**
+      Sets the single paragraph mode of layout.
+      
+      If setting is true, do not treat newlines and similar characters
+      as paragraph separators; instead, keep all text in a single paragraph,
+      and display a glyph for paragraph separator characters. Used when
+      you want to allow editing of newlines on a single text line.
+      
+      The default value is false.
+  
+      Params:
+        setting = new setting
+  */
+  void setSingleParagraphMode(bool setting) nothrow
+  {
+    pango_layout_set_single_paragraph_mode(cast(PangoLayout*)this._cPtr, setting);
+  }
+
+  /**
+      Sets the amount of spacing in Pango units between
+      the lines of the layout.
+      
+      When placing lines with spacing, Pango arranges things so that
+      
+          line2.top = line1.bottom + spacing
+      
+      The default value is 0.
+      
+      Note: Since 1.44, Pango is using the line height (as determined
+      by the font) for placing lines when the line spacing factor is set
+      to a non-zero value with [gid.pango1.layout.Layout.setLineSpacing].
+      In that case, the spacing set with this function is ignored.
+      
+      Note: for semantics that are closer to the CSS line-height
+      property, see `funcPango.attr_line_height_new`.
+  
+      Params:
+        spacing = the amount of spacing
+  */
+  void setSpacing(int spacing) nothrow
+  {
+    pango_layout_set_spacing(cast(PangoLayout*)this._cPtr, spacing);
+  }
+
+  /**
+      Sets the tabs to use for layout, overriding the default tabs.
+      
+      [gid.pango1.layout.Layout] will place content at the next tab position
+      whenever it meets a Tab character (U+0009).
+      
+      By default, tabs are every 8 spaces. If tabs is null, the
+      default tabs are reinstated. tabs is copied into the layout;
+      you must free your copy of tabs yourself.
+      
+      Note that tabs and justification conflict with each other:
+      Justification will move content away from its tab-aligned
+      positions. The same is true for alignments other than
+      [gid.pango1.types.Alignment.Left].
+  
+      Params:
+        tabs = a [gid.pango1.tab_array.TabArray]
+  */
+  void setTabs(gid.pango1.tab_array.TabArray tabs = null) nothrow
+  {
+    pango_layout_set_tabs(cast(PangoLayout*)this._cPtr, tabs ? cast(PangoTabArray*)tabs._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the text of the layout.
+      
+      This function validates text and renders invalid UTF-8
+      with a placeholder glyph.
+      
+      Note that if you have used [gid.pango1.layout.Layout.setMarkup] or
+      [gid.pango1.layout.Layout.setMarkupWithAccel] on layout before, you
+      may want to call [gid.pango1.layout.Layout.setAttributes] to clear the
+      attributes set on the layout from the markup as this function does
+      not clear attributes.
+  
+      Params:
+        text = the text
+  */
+  void setText(string text) nothrow
+  {
+    int _length;
+    if (text)
+      _length = cast(int)text.length;
+
+    auto _text = cast(char*)text.ptr;
+    pango_layout_set_text(cast(PangoLayout*)this._cPtr, _text, _length);
+  }
+
+  /**
+      Sets the width to which the lines of the [gid.pango1.layout.Layout] should wrap or
+      get ellipsized.
+      
+      The default value is -1: no width set.
+  
+      Params:
+        width = the desired width in Pango units, or -1 to indicate that no
+            wrapping or ellipsization should be performed.
+  */
+  void setWidth(int width) nothrow
+  {
+    pango_layout_set_width(cast(PangoLayout*)this._cPtr, width);
+  }
+
+  /**
+      Sets the wrap mode.
+      
+      The wrap mode only has effect if a width is set on the layout
+      with [gid.pango1.layout.Layout.setWidth]. To turn off wrapping,
+      set the width to -1.
+      
+      The default value is [gid.pango1.types.WrapMode.Word].
+  
+      Params:
+        wrap = the wrap mode
+  */
+  void setWrap(gid.pango1.types.WrapMode wrap) nothrow
+  {
+    pango_layout_set_wrap(cast(PangoLayout*)this._cPtr, wrap);
+  }
+
+  /**
+      A convenience method to serialize a layout to a file.
+      
+      It is equivalent to calling [gid.pango1.layout.Layout.serialize]
+      followed by `funcGLib.file_set_contents`.
+      
+      See those two functions for details on the arguments.
+      
+      It is mostly intended for use inside a debugger to quickly dump
+      a layout to a file for later inspection.
+  
+      Params:
+        flags = [gid.pango1.types.LayoutSerializeFlags]
+        filename = the file to save it to
+      Returns: true if saving was successful
+      Throws: [ErrorWrap]
+  */
+  bool writeToFile(gid.pango1.types.LayoutSerializeFlags flags, string filename)
+  {
+    bool _retval;
+    const(char)* _filename = filename.toCString!(No.Malloc, No.Nullable);
+    GError *_err;
+    _retval = cast(bool)pango_layout_write_to_file(cast(PangoLayout*)this._cPtr, flags, _filename, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Converts from X and Y position within a layout to the byte index to the
+      character at that logical position.
+      
+      If the Y position is not inside the layout, the closest position is
+      chosen (the position will be clamped inside the layout). If the X position
+      is not within the layout, then the start or the end of the line is
+      chosen as described for [gid.pango1.layout_line.LayoutLine.xToIndex]. If either
+      the X or Y positions were not inside the layout, then the function returns
+      false; on an exact hit, it returns true.
+  
+      Params:
+        x = the X offset (in Pango units) from the left edge of the layout
+        y = the Y offset (in Pango units) from the top edge of the layout
+        index = location to store calculated byte index
+        trailing = location to store a integer indicating where
+            in the grapheme the user clicked. It will either be zero, or the
+            number of characters in the grapheme. 0 represents the leading edge
+            of the grapheme.
+      Returns: true if the coordinates were inside text, false otherwise
+  */
+  bool xyToIndex(int x, int y, out int index, out int trailing) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)pango_layout_xy_to_index(cast(PangoLayout*)this._cPtr, x, y, cast(int*)&index, cast(int*)&trailing);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [gid.pango1.layout.Layout]
+class LayoutGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.pango1.layout.Layout]
+final class LayoutGidBuilder : LayoutGidBuilderImpl!LayoutGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Layout build() nothrow
+  {
+    return new Layout(cast(void*)createGObject(Layout._getGType), Yes.Take);
+  }
+}

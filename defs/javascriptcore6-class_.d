@@ -1,9 +1,9 @@
 //!class Class pre
 
-import glib.types;
-import glib.c.functions;
-import gobject.c.functions;
-import javascriptcore.value;
+import gid.glib2.types;
+import gid.glib2.c.functions;
+import gid.gobject2.c.functions;
+import gid.javascriptcore6.value;
 
 shared static this()
 {
@@ -13,7 +13,7 @@ shared static this()
 // String quark used to assign the D object to the C JSCValue object instance keyed-data list
 immutable Quark jscObjectQuark;
 
-class Class : gobject.object.ObjectWrap
+class Class : gid.gobject2.object.ObjectWrap
 {
   /**
    * Add a constructor to a Class. If name is empty (null), the class name will be used.

@@ -1,0 +1,278 @@
+/// Module for [ParserOptions] class
+module gid.gmime3.parser_options;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gmime3.c.functions;
+import gid.gmime3.c.types;
+import gid.gmime3.types;
+import gid.gobject2.boxed;
+
+/**
+    A set of parser options used by #GMimeParser and various other parsing functions.
+*/
+class ParserOptions : gid.gobject2.boxed.BoxedWrap!(g_mime_parser_options_get_type)
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override ParserOptions self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Creates a new set of #GMimeParserOptions.
+      Returns: a newly allocated set of #GMimeParserOptions with the default values.
+  */
+  this() nothrow
+  {
+    GMimeParserOptions* _cretval;
+    _cretval = g_mime_parser_options_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Clones a #GMimeParserOptions.
+      Returns: a newly allocated #GMimeParserOptions.
+  */
+  gid.gmime3.parser_options.ParserOptions clone() nothrow
+  {
+    GMimeParserOptions* _cretval;
+    _cretval = g_mime_parser_options_clone(cast(GMimeParserOptions*)this._cPtr);
+    auto _retval = _cretval ? new gid.gmime3.parser_options.ParserOptions(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the compliance mode that should be used when parsing rfc822 addresses.
+      
+      Note: Even in #GMIME_RFC_COMPLIANCE_STRICT mode, the address parser is fairly liberal in
+      what it accepts. Setting it to #GMIME_RFC_COMPLIANCE_LOOSE just makes it try harder to
+      deal with garbage input.
+      Returns: the compliance mode that is currently set.
+  */
+  gid.gmime3.types.RfcComplianceMode getAddressComplianceMode() nothrow
+  {
+    GMimeRfcComplianceMode _cretval;
+    _cretval = g_mime_parser_options_get_address_compliance_mode(cast(GMimeParserOptions*)this._cPtr);
+    gid.gmime3.types.RfcComplianceMode _retval = cast(gid.gmime3.types.RfcComplianceMode)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets whether or not the rfc822 address parser should allow addresses without a domain.
+      
+      In general, you'll probably want this value to be false (the default) as it allows
+      maximum interoperability with existing (broken) mail clients and other mail software
+      such as sloppily written perl scripts (aka spambots) that do not properly quote the
+      name when it contains a comma.
+      
+      This option exists in order to allow parsing of mailbox addresses that do not have a
+      domain component. These types of addresses are rare and were typically only used when
+      sending mail to other users on the same UNIX system.
+      Returns: true if the address parser should allow addresses without a domain.
+  */
+  bool getAllowAddressesWithoutDomain() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_mime_parser_options_get_allow_addresses_without_domain(cast(GMimeParserOptions*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the fallback charsets to try when decoding 8-bit headers.
+      Returns: a null-terminated list of charsets to try when
+        decoding 8-bit headers.
+  */
+  string[] getFallbackCharsets() nothrow
+  {
+    const(char*)* _cretval;
+    _cretval = g_mime_parser_options_get_fallback_charsets(cast(GMimeParserOptions*)this._cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString!(No.Free);
+    }
+    return _retval;
+  }
+
+  /**
+      Gets the compliance mode that should be used when parsing Content-Type and
+      Content-Disposition parameters.
+      
+      Note: Even in #GMIME_RFC_COMPLIANCE_STRICT mode, the parameter parser is fairly liberal
+      in what it accepts. Setting it to #GMIME_RFC_COMPLIANCE_LOOSE just makes it try harder
+      to deal with garbage input.
+      Returns: the compliance mode that is currently set.
+  */
+  gid.gmime3.types.RfcComplianceMode getParameterComplianceMode() nothrow
+  {
+    GMimeRfcComplianceMode _cretval;
+    _cretval = g_mime_parser_options_get_parameter_compliance_mode(cast(GMimeParserOptions*)this._cPtr);
+    gid.gmime3.types.RfcComplianceMode _retval = cast(gid.gmime3.types.RfcComplianceMode)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the compliance mode that should be used when parsing rfc2047 encoded words.
+      
+      Note: Even in #GMIME_RFC_COMPLIANCE_STRICT mode, the rfc2047 parser is fairly liberal
+      in what it accepts. Setting it to #GMIME_RFC_COMPLIANCE_LOOSE just makes it try harder
+      to deal with garbage input.
+      Returns: the compliance mode that is currently set.
+  */
+  gid.gmime3.types.RfcComplianceMode getRfc2047ComplianceMode() nothrow
+  {
+    GMimeRfcComplianceMode _cretval;
+    _cretval = g_mime_parser_options_get_rfc2047_compliance_mode(cast(GMimeParserOptions*)this._cPtr);
+    gid.gmime3.types.RfcComplianceMode _retval = cast(gid.gmime3.types.RfcComplianceMode)_cretval;
+    return _retval;
+  }
+
+  /**
+      Sets the compliance mode that should be used when parsing rfc822 addresses.
+      
+      In general, you'll probably want this value to be #GMIME_RFC_COMPLIANCE_LOOSE
+      (the default) as it allows maximum interoperability with existing (broken) mail clients
+      and other mail software such as sloppily written perl scripts (aka spambots).
+      
+      Note: Even in #GMIME_RFC_COMPLIANCE_STRICT mode, the address parser is fairly liberal in
+      what it accepts. Setting it to #GMIME_RFC_COMPLIANCE_LOOSE just makes it try harder to
+      deal with garbage input.
+  
+      Params:
+        mode = a #GMimeRfcComplianceMode
+  */
+  void setAddressComplianceMode(gid.gmime3.types.RfcComplianceMode mode) nothrow
+  {
+    g_mime_parser_options_set_address_compliance_mode(cast(GMimeParserOptions*)this._cPtr, mode);
+  }
+
+  /**
+      Sets whether the rfc822 address parser should allow addresses without a domain.
+      
+      In general, you'll probably want this value to be false (the default) as it allows
+      maximum interoperability with existing (broken) mail clients and other mail software
+      such as sloppily written perl scripts (aka spambots) that do not properly quote the
+      name when it contains a comma.
+      
+      This option exists in order to allow parsing of mailbox addresses that do not have a
+      domain component. These types of addresses are rare and were typically only used when
+      sending mail to other users on the same UNIX system.
+  
+      Params:
+        allow = true if the parser should allow addresses without a domain or false otherwise
+  */
+  void setAllowAddressesWithoutDomain(bool allow) nothrow
+  {
+    g_mime_parser_options_set_allow_addresses_without_domain(cast(GMimeParserOptions*)this._cPtr, allow);
+  }
+
+  /**
+      Sets the fallback charsets to try when decoding 8-bit headers.
+      
+      Note: It is recommended that the list of charsets start with utf-8
+      and end with iso-8859-1.
+  
+      Params:
+        charsets = a null-terminated list of charsets or null for the default list
+  */
+  void setFallbackCharsets(string[] charsets) nothrow
+  {
+    auto _charsets_arr = new char*[](charsets.length + 1);
+    auto _charsets = cast(char**)_charsets_arr.ptr;
+    foreach (i, s; charsets) _charsets[i] = s.toCString!(No.Malloc);
+    g_mime_parser_options_set_fallback_charsets(cast(GMimeParserOptions*)this._cPtr, _charsets);
+  }
+
+  /**
+      Sets the compliance mode that should be used when parsing Content-Type and
+      Content-Disposition parameters.
+      
+      In general, you'll probably want this value to be #GMIME_RFC_COMPLIANCE_LOOSE
+      (the default) as it allows maximum interoperability with existing (broken) mail clients
+      and other mail software such as sloppily written perl scripts (aka spambots).
+      
+      Note: Even in #GMIME_RFC_COMPLIANCE_STRICT mode, the parameter parser is fairly liberal
+      in what it accepts. Setting it to #GMIME_RFC_COMPLIANCE_LOOSE just makes it try harder
+      to deal with garbage input.
+  
+      Params:
+        mode = a #GMimeRfcComplianceMode
+  */
+  void setParameterComplianceMode(gid.gmime3.types.RfcComplianceMode mode) nothrow
+  {
+    g_mime_parser_options_set_parameter_compliance_mode(cast(GMimeParserOptions*)this._cPtr, mode);
+  }
+
+  /**
+      Sets the compliance mode that should be used when parsing rfc2047 encoded words.
+      
+      In general, you'll probably want this value to be #GMIME_RFC_COMPLIANCE_LOOSE
+      (the default) as it allows maximum interoperability with existing (broken) mail clients
+      and other mail software such as sloppily written perl scripts (aka spambots).
+      
+      Note: Even in #GMIME_RFC_COMPLIANCE_STRICT mode, the parameter parser is fairly liberal
+      in what it accepts. Setting it to #GMIME_RFC_COMPLIANCE_LOOSE just makes it try harder
+      to deal with garbage input.
+  
+      Params:
+        mode = a #GMimeRfcComplianceMode
+  */
+  void setRfc2047ComplianceMode(gid.gmime3.types.RfcComplianceMode mode) nothrow
+  {
+    g_mime_parser_options_set_rfc2047_compliance_mode(cast(GMimeParserOptions*)this._cPtr, mode);
+  }
+
+  /**
+      Registers the callback function being called if the parser detects any issues.
+  
+      Params:
+        warningCb = a #GMimeParserWarningFunc or null to clear the callback
+  */
+  void setWarningCallback(gid.gmime3.types.ParserWarningFunc warningCb) nothrow
+  {
+    extern(C) void _warningCbCallback(long offset, GMimeParserWarning errcode, const(char)* item, void* userData) nothrow
+    {
+      auto _dlg = cast(gid.gmime3.types.ParserWarningFunc*)userData;
+      string _item = item.fromCString!(No.Free);
+
+      try
+      {
+        (*_dlg)(offset, errcode, _item);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gmime3.types.ParserWarningFunc");
+      }
+    }
+    auto _warningCbCB = warningCb ? &_warningCbCallback : null;
+    auto _warningCb = warningCb ? freezeDelegate(cast(void*)&warningCb) : null;
+    GDestroyNotify _warningCbDestroyCB = warningCb ? &thawDelegate : null;
+    g_mime_parser_options_set_warning_callback(cast(GMimeParserOptions*)this._cPtr, _warningCbCB, _warningCb, _warningCbDestroyCB);
+  }
+
+  /**
+      Gets the default parser options.
+      Returns: the default parser options.
+  */
+  static gid.gmime3.parser_options.ParserOptions getDefault() nothrow
+  {
+    GMimeParserOptions* _cretval;
+    _cretval = g_mime_parser_options_get_default();
+    auto _retval = _cretval ? new gid.gmime3.parser_options.ParserOptions(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+}

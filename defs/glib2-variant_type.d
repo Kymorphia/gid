@@ -1,6 +1,6 @@
 //!class VariantType pre
 
-import glib.variant;
+import gid.glib2.variant;
 import std.traits : isSomeString;
 import std.typecons : isTuple;
 
@@ -54,7 +54,7 @@ class VariantType : BoxedWrap!g_variant_type_get_gtype
         typeStr ~= "a" ~ getStr!E;
       else static if (is(Arg : V[K], V, K))
         typeStr ~= "a{" ~ getStr!K ~ getStr!V ~ "}";
-      else static if (is(Arg : glib.variant.Variant))
+      else static if (is(Arg : gid.glib2.variant.Variant))
         typeStr ~= "v";
       else static if (isTuple!Arg)
         typeStr ~= "r";

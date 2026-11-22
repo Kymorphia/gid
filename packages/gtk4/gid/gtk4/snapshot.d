@@ -1,0 +1,1076 @@
+/// Module for [Snapshot] class
+module gid.gtk4.snapshot;
+
+public import gid.core.basictypes;
+import gid.cairo1.context;
+import gid.core.utils;
+import gid.gdk4.paintable;
+import gid.gdk4.rgba;
+import gid.gdk4.snapshot;
+import gid.gdk4.texture;
+import gid.glib2.bytes;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.graphene1.matrix;
+import gid.graphene1.point3_d;
+import gid.graphene1.point;
+import gid.graphene1.rect;
+import gid.graphene1.size;
+import gid.graphene1.vec3;
+import gid.graphene1.vec4;
+import gid.gsk4.color_stop;
+import gid.gsk4.component_transfer;
+import gid.gsk4.glshader;
+import gid.gsk4.path;
+import gid.gsk4.render_node;
+import gid.gsk4.rounded_rect;
+import gid.gsk4.shadow;
+import gid.gsk4.stroke;
+import gid.gsk4.transform;
+import gid.gsk4.types;
+import gid.gtk4.c.functions;
+import gid.gtk4.c.types;
+import gid.gtk4.style_context;
+import gid.gtk4.types;
+import gid.pango1.layout;
+import gid.pango1.types;
+
+/**
+    Assists in creating [gid.gsk4.render_node.RenderNode]s for widgets.
+    
+    It functions in a similar way to a cairo context, and maintains a stack
+    of render nodes and their associated transformations.
+    
+    The node at the top of the stack is the one that `gtk_snapshot_append_…()`
+    functions operate on. Use the `gtk_snapshot_push_…()` functions and
+    [gid.gtk4.snapshot.Snapshot.pop] to change the current node.
+    
+    The typical way to obtain a [gid.gtk4.snapshot.Snapshot] object is as an argument to
+    the `vfunc@Gtk.Widget.snapshot` vfunc. If you need to create your own
+    [gid.gtk4.snapshot.Snapshot], use [gid.gtk4.snapshot.Snapshot.new_].
+    
+    Note that [gid.gtk4.snapshot.Snapshot] applies some optimizations, so the node
+    it produces may not match the API calls 1:1. For example, it will
+    omit clip nodes if the child node is entirely contained within the
+    clip rectangle.
+*/
+class Snapshot : gid.gdk4.snapshot.Snapshot
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_snapshot_get_type != &gidSymbolNotFound ? gtk_snapshot_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSnapshot";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Snapshot self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtk4.snapshot.Snapshot]
+      Returns: New builder object
+  */
+  static SnapshotGidBuilder builder() nothrow
+  {
+    return new SnapshotGidBuilder;
+  }
+
+  /**
+      Creates a new [gid.gtk4.snapshot.Snapshot].
+      Returns: a newly-allocated [gid.gtk4.snapshot.Snapshot]
+  */
+  this() nothrow
+  {
+    GtkSnapshot* _cretval;
+    _cretval = gtk_snapshot_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Appends a stroked border rectangle inside the given outline.
+      
+      The four sides of the border can have different widths and colors.
+  
+      Params:
+        outline = the outline of the border
+        borderWidth = the stroke width of the border on
+            the top, right, bottom and left side respectively.
+        borderColor = the color used on the top, right,
+            bottom and left side.
+  */
+  void appendBorder(gid.gsk4.rounded_rect.RoundedRect outline, float[] borderWidth, gid.gdk4.rgba.RGBA[] borderColor) nothrow
+  {
+    if (borderWidth.length > 4) borderWidth = borderWidth[0 .. 4];
+    auto _borderWidth = cast(float*)borderWidth.ptr;
+    typeof(*_borderWidth)[4] _borderWidth_fixed = void;
+    if (borderWidth.length < 4)
+    {
+      (cast(ubyte[])_borderWidth_fixed[])[] = 0;
+      _borderWidth_fixed[0 .. borderWidth.length] = _borderWidth[0 .. borderWidth.length];
+      _borderWidth = _borderWidth_fixed.ptr;
+    }
+    if (borderColor.length > 4) borderColor = borderColor[0 .. 4];
+    auto _borderColor = cast(GdkRGBA*)borderColor.ptr;
+    typeof(*_borderColor)[4] _borderColor_fixed = void;
+    if (borderColor.length < 4)
+    {
+      (cast(ubyte[])_borderColor_fixed[])[] = 0;
+      _borderColor_fixed[0 .. borderColor.length] = _borderColor[0 .. borderColor.length];
+      _borderColor = _borderColor_fixed.ptr;
+    }
+    gtk_snapshot_append_border(cast(GtkSnapshot*)this._cPtr, outline ? cast(const(GskRoundedRect)*)outline._cPtr : null, _borderWidth, _borderColor);
+  }
+
+  /**
+      Creates a new [gid.gsk4.cairo_node.CairoNode] and appends it to the current
+      render node of snapshot, without changing the current node.
+  
+      Params:
+        bounds = the bounds for the new node
+      Returns: a [gid.cairo1.context.Context] suitable for drawing the contents of
+          the newly created render node
+  */
+  gid.cairo1.context.Context appendCairo(gid.graphene1.rect.Rect bounds) nothrow
+  {
+    cairo_t* _cretval;
+    _cretval = gtk_snapshot_append_cairo(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gid.cairo1.context.Context(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Creates a new render node drawing the color into the
+      given bounds and appends it to the current render node
+      of snapshot.
+      
+      You should try to avoid calling this function if
+      color is transparent.
+  
+      Params:
+        color = the color to draw
+        bounds = the bounds for the new node
+  */
+  void appendColor(gid.gdk4.rgba.RGBA color, gid.graphene1.rect.Rect bounds) nothrow
+  {
+    gtk_snapshot_append_color(cast(GtkSnapshot*)this._cPtr, cast(const(GdkRGBA)*)&color, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Appends a conic gradient node with the given stops to snapshot.
+  
+      Params:
+        bounds = the rectangle to render the gradient into
+        center = the center point of the conic gradient
+        rotation = the clockwise rotation in degrees of the starting angle.
+            0 means the starting angle is the top.
+        stops = the color stops defining the gradient
+  */
+  void appendConicGradient(gid.graphene1.rect.Rect bounds, gid.graphene1.point.Point center, float rotation, gid.gsk4.color_stop.ColorStop[] stops) nothrow
+  {
+    size_t _nStops;
+    if (stops)
+      _nStops = cast(size_t)stops.length;
+
+    auto _stops_arr = new GskColorStop[](stops.length);
+    auto _stops = _stops_arr.ptr;
+    foreach (i, obj; stops) _stops[i] = *cast(GskColorStop*)obj._cPtr;
+    gtk_snapshot_append_conic_gradient(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(const(graphene_point_t)*)&center, rotation, _stops, _nStops);
+  }
+
+  /**
+      A convenience method to fill a path with a color.
+      
+      See [gid.gtk4.snapshot.Snapshot.pushFill] if you need
+      to fill a path with more complex content than
+      a color.
+  
+      Params:
+        path = The path describing the area to fill
+        fillRule = The fill rule to use
+        color = the color to fill the path with
+  */
+  void appendFill(gid.gsk4.path.Path path, gid.gsk4.types.FillRule fillRule, gid.gdk4.rgba.RGBA color) nothrow
+  {
+    gtk_snapshot_append_fill(cast(GtkSnapshot*)this._cPtr, path ? cast(GskPath*)path._cPtr(No.Dup) : null, fillRule, cast(const(GdkRGBA)*)&color);
+  }
+
+  /**
+      Appends an inset shadow into the box given by outline.
+  
+      Params:
+        outline = outline of the region surrounded by shadow
+        color = color of the shadow
+        dx = horizontal offset of shadow
+        dy = vertical offset of shadow
+        spread = how far the shadow spreads towards the inside
+        blurRadius = how much blur to apply to the shadow
+  */
+  void appendInsetShadow(gid.gsk4.rounded_rect.RoundedRect outline, gid.gdk4.rgba.RGBA color, float dx, float dy, float spread, float blurRadius) nothrow
+  {
+    gtk_snapshot_append_inset_shadow(cast(GtkSnapshot*)this._cPtr, outline ? cast(const(GskRoundedRect)*)outline._cPtr : null, cast(const(GdkRGBA)*)&color, dx, dy, spread, blurRadius);
+  }
+
+  /**
+      Creates render nodes for rendering layout in the given foregound color
+      and appends them to the current node of snapshot without changing the
+      current node. The current theme's foreground color for a widget can be
+      obtained with [gid.gtk4.widget.Widget.getColor].
+      
+      Note that if the layout does not produce any visible output, then nodes
+      may not be added to the snapshot.
+  
+      Params:
+        layout = the [gid.pango1.layout.Layout] to render
+        color = the foreground color to render the layout in
+  */
+  void appendLayout(gid.pango1.layout.Layout layout, gid.gdk4.rgba.RGBA color) nothrow
+  {
+    gtk_snapshot_append_layout(cast(GtkSnapshot*)this._cPtr, layout ? cast(PangoLayout*)layout._cPtr(No.Dup) : null, cast(const(GdkRGBA)*)&color);
+  }
+
+  /**
+      Appends a linear gradient node with the given stops to snapshot.
+  
+      Params:
+        bounds = the rectangle to render the linear gradient into
+        startPoint = the point at which the linear gradient will begin
+        endPoint = the point at which the linear gradient will finish
+        stops = the color stops defining the gradient
+  */
+  void appendLinearGradient(gid.graphene1.rect.Rect bounds, gid.graphene1.point.Point startPoint, gid.graphene1.point.Point endPoint, gid.gsk4.color_stop.ColorStop[] stops) nothrow
+  {
+    size_t _nStops;
+    if (stops)
+      _nStops = cast(size_t)stops.length;
+
+    auto _stops_arr = new GskColorStop[](stops.length);
+    auto _stops = _stops_arr.ptr;
+    foreach (i, obj; stops) _stops[i] = *cast(GskColorStop*)obj._cPtr;
+    gtk_snapshot_append_linear_gradient(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(const(graphene_point_t)*)&startPoint, cast(const(graphene_point_t)*)&endPoint, _stops, _nStops);
+  }
+
+  /**
+      Appends node to the current render node of snapshot,
+      without changing the current node.
+      
+      If snapshot does not have a current node yet, node
+      will become the initial node.
+  
+      Params:
+        node = a [gid.gsk4.render_node.RenderNode]
+  */
+  void appendNode(gid.gsk4.render_node.RenderNode node) nothrow
+  {
+    gtk_snapshot_append_node(cast(GtkSnapshot*)this._cPtr, node ? cast(GskRenderNode*)node._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Appends an outset shadow node around the box given by outline.
+  
+      Params:
+        outline = outline of the region surrounded by shadow
+        color = color of the shadow
+        dx = horizontal offset of shadow
+        dy = vertical offset of shadow
+        spread = how far the shadow spreads towards the outside
+        blurRadius = how much blur to apply to the shadow
+  */
+  void appendOutsetShadow(gid.gsk4.rounded_rect.RoundedRect outline, gid.gdk4.rgba.RGBA color, float dx, float dy, float spread, float blurRadius) nothrow
+  {
+    gtk_snapshot_append_outset_shadow(cast(GtkSnapshot*)this._cPtr, outline ? cast(const(GskRoundedRect)*)outline._cPtr : null, cast(const(GdkRGBA)*)&color, dx, dy, spread, blurRadius);
+  }
+
+  /**
+      Creates a new render node that pastes the contents
+      copied by a previous call to [gid.gtk4.snapshot.Snapshot.pushCopy]
+  
+      Params:
+        bounds = the bounds for the new node
+        nth = the index of the copy, with 0 being the latest
+           copy, 1 being the copy before that, and so on.
+  */
+  void appendPaste(gid.graphene1.rect.Rect bounds, size_t nth) nothrow
+  {
+    gtk_snapshot_append_paste(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, nth);
+  }
+
+  /**
+      Appends a radial gradient node with the given stops to snapshot.
+  
+      Params:
+        bounds = the rectangle to render the readial gradient into
+        center = the center point for the radial gradient
+        hradius = the horizontal radius
+        vradius = the vertical radius
+        start = the start position (on the horizontal axis)
+        end = the end position (on the horizontal axis)
+        stops = the color stops defining the gradient
+  */
+  void appendRadialGradient(gid.graphene1.rect.Rect bounds, gid.graphene1.point.Point center, float hradius, float vradius, float start, float end, gid.gsk4.color_stop.ColorStop[] stops) nothrow
+  {
+    size_t _nStops;
+    if (stops)
+      _nStops = cast(size_t)stops.length;
+
+    auto _stops_arr = new GskColorStop[](stops.length);
+    auto _stops = _stops_arr.ptr;
+    foreach (i, obj; stops) _stops[i] = *cast(GskColorStop*)obj._cPtr;
+    gtk_snapshot_append_radial_gradient(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(const(graphene_point_t)*)&center, hradius, vradius, start, end, _stops, _nStops);
+  }
+
+  /**
+      Appends a repeating linear gradient node with the given stops to snapshot.
+  
+      Params:
+        bounds = the rectangle to render the linear gradient into
+        startPoint = the point at which the linear gradient will begin
+        endPoint = the point at which the linear gradient will finish
+        stops = the color stops defining the gradient
+  */
+  void appendRepeatingLinearGradient(gid.graphene1.rect.Rect bounds, gid.graphene1.point.Point startPoint, gid.graphene1.point.Point endPoint, gid.gsk4.color_stop.ColorStop[] stops) nothrow
+  {
+    size_t _nStops;
+    if (stops)
+      _nStops = cast(size_t)stops.length;
+
+    auto _stops_arr = new GskColorStop[](stops.length);
+    auto _stops = _stops_arr.ptr;
+    foreach (i, obj; stops) _stops[i] = *cast(GskColorStop*)obj._cPtr;
+    gtk_snapshot_append_repeating_linear_gradient(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(const(graphene_point_t)*)&startPoint, cast(const(graphene_point_t)*)&endPoint, _stops, _nStops);
+  }
+
+  /**
+      Appends a repeating radial gradient node with the given stops to snapshot.
+  
+      Params:
+        bounds = the rectangle to render the readial gradient into
+        center = the center point for the radial gradient
+        hradius = the horizontal radius
+        vradius = the vertical radius
+        start = the start position (on the horizontal axis)
+        end = the end position (on the horizontal axis)
+        stops = the color stops defining the gradient
+  */
+  void appendRepeatingRadialGradient(gid.graphene1.rect.Rect bounds, gid.graphene1.point.Point center, float hradius, float vradius, float start, float end, gid.gsk4.color_stop.ColorStop[] stops) nothrow
+  {
+    size_t _nStops;
+    if (stops)
+      _nStops = cast(size_t)stops.length;
+
+    auto _stops_arr = new GskColorStop[](stops.length);
+    auto _stops = _stops_arr.ptr;
+    foreach (i, obj; stops) _stops[i] = *cast(GskColorStop*)obj._cPtr;
+    gtk_snapshot_append_repeating_radial_gradient(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, cast(const(graphene_point_t)*)&center, hradius, vradius, start, end, _stops, _nStops);
+  }
+
+  /**
+      Creates a new render node drawing the texture
+      into the given bounds and appends it to the
+      current render node of snapshot.
+      
+      In contrast to [gid.gtk4.snapshot.Snapshot.appendTexture],
+      this function provides control about how the filter
+      that is used when scaling.
+  
+      Params:
+        texture = the texture to render
+        filter = the filter to use
+        bounds = the bounds for the new node
+  */
+  void appendScaledTexture(gid.gdk4.texture.Texture texture, gid.gsk4.types.ScalingFilter filter, gid.graphene1.rect.Rect bounds) nothrow
+  {
+    gtk_snapshot_append_scaled_texture(cast(GtkSnapshot*)this._cPtr, texture ? cast(GdkTexture*)texture._cPtr(No.Dup) : null, filter, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null);
+  }
+
+  /**
+      A convenience method to stroke a path with a color.
+      
+      See [gid.gtk4.snapshot.Snapshot.pushStroke] if you need
+      to stroke a path with more complex content than
+      a color.
+  
+      Params:
+        path = The path describing the area to fill
+        stroke = The stroke attributes
+        color = the color to fill the path with
+  */
+  void appendStroke(gid.gsk4.path.Path path, gid.gsk4.stroke.Stroke stroke, gid.gdk4.rgba.RGBA color) nothrow
+  {
+    gtk_snapshot_append_stroke(cast(GtkSnapshot*)this._cPtr, path ? cast(GskPath*)path._cPtr(No.Dup) : null, stroke ? cast(const(GskStroke)*)stroke._cPtr(No.Dup) : null, cast(const(GdkRGBA)*)&color);
+  }
+
+  /**
+      Creates a new render node drawing the texture
+      into the given bounds and appends it to the
+      current render node of snapshot.
+      
+      If the texture needs to be scaled to fill bounds,
+      linear filtering is used. See [gid.gtk4.snapshot.Snapshot.appendScaledTexture]
+      if you need other filtering, such as nearest-neighbour.
+  
+      Params:
+        texture = the texture to render
+        bounds = the bounds for the new node
+  */
+  void appendTexture(gid.gdk4.texture.Texture texture, gid.graphene1.rect.Rect bounds) nothrow
+  {
+    gtk_snapshot_append_texture(cast(GtkSnapshot*)this._cPtr, texture ? cast(GdkTexture*)texture._cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Removes the top element from the stack of render nodes and
+      adds it to the nearest [gid.gsk4.glshader_node.GLShaderNode] below it.
+      
+      This must be called the same number of times as the number
+      of textures is needed for the shader in
+      [gid.gtk4.snapshot.Snapshot.pushGlShader].
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [gid.gtk4.glarea.GLArea] for
+          OpenGL rendering.
+  */
+  void glShaderPopTexture() nothrow
+  {
+    gtk_snapshot_gl_shader_pop_texture(cast(GtkSnapshot*)this._cPtr);
+  }
+
+  /**
+      Applies a perspective projection transform.
+      
+      See [gid.gsk4.transform.Transform.perspective] for a discussion on the details.
+  
+      Params:
+        depth = distance of the z=0 plane
+  */
+  void perspective(float depth) nothrow
+  {
+    gtk_snapshot_perspective(cast(GtkSnapshot*)this._cPtr, depth);
+  }
+
+  /**
+      Removes the top element from the stack of render nodes,
+      and appends it to the node underneath it.
+  */
+  void pop() nothrow
+  {
+    gtk_snapshot_pop(cast(GtkSnapshot*)this._cPtr);
+  }
+
+  /**
+      Blends together two images with the given blend mode.
+      
+      Until the first call to [gid.gtk4.snapshot.Snapshot.pop], the
+      bottom image for the blend operation will be recorded.
+      After that call, the top image to be blended will be
+      recorded until the second call to [gid.gtk4.snapshot.Snapshot.pop].
+      
+      Calling this function requires two subsequent calls
+      to [gid.gtk4.snapshot.Snapshot.pop].
+  
+      Params:
+        blendMode = blend mode to use
+  */
+  void pushBlend(gid.gsk4.types.BlendMode blendMode) nothrow
+  {
+    gtk_snapshot_push_blend(cast(GtkSnapshot*)this._cPtr, blendMode);
+  }
+
+  /**
+      Blurs an image.
+      
+      The image is recorded until the next call to [gid.gtk4.snapshot.Snapshot.pop].
+  
+      Params:
+        radius = the blur radius to use. Must be positive
+  */
+  void pushBlur(double radius) nothrow
+  {
+    gtk_snapshot_push_blur(cast(GtkSnapshot*)this._cPtr, radius);
+  }
+
+  /**
+      Clips an image to a rectangle.
+      
+      The image is recorded until the next call to [gid.gtk4.snapshot.Snapshot.pop].
+  
+      Params:
+        bounds = the rectangle to clip to
+  */
+  void pushClip(gid.graphene1.rect.Rect bounds) nothrow
+  {
+    gtk_snapshot_push_clip(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Modifies the colors of an image by applying an affine transformation
+      in RGB space.
+      
+      In particular, the colors will be transformed by applying
+      
+          pixel = transpose(color_matrix) * pixel + color_offset
+      
+      for every pixel. The transformation operates on unpremultiplied
+      colors, with color components ordered R, G, B, A.
+      
+      The image is recorded until the next call to [gid.gtk4.snapshot.Snapshot.pop].
+  
+      Params:
+        colorMatrix = the color matrix to use
+        colorOffset = the color offset to use
+  */
+  void pushColorMatrix(gid.graphene1.matrix.Matrix colorMatrix, gid.graphene1.vec4.Vec4 colorOffset) nothrow
+  {
+    gtk_snapshot_push_color_matrix(cast(GtkSnapshot*)this._cPtr, colorMatrix ? cast(const(graphene_matrix_t)*)colorMatrix._cPtr(No.Dup) : null, colorOffset ? cast(const(graphene_vec4_t)*)colorOffset._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Modifies the colors of an image by applying a transfer
+      function for each component.
+      
+      The transfer functions operate on unpremultiplied colors.
+      
+      The image is recorded until the next call to [gid.gtk4.snapshot.Snapshot.pop].
+  
+      Params:
+        red = the transfer for the red component
+        green = the transfer for the green component
+        blue = the transfer for the blue component
+        alpha = the transfer for the alpha component
+  */
+  void pushComponentTransfer(gid.gsk4.component_transfer.ComponentTransfer red, gid.gsk4.component_transfer.ComponentTransfer green, gid.gsk4.component_transfer.ComponentTransfer blue, gid.gsk4.component_transfer.ComponentTransfer alpha) nothrow
+  {
+    gtk_snapshot_push_component_transfer(cast(GtkSnapshot*)this._cPtr, red ? cast(const(GskComponentTransfer)*)red._cPtr(No.Dup) : null, green ? cast(const(GskComponentTransfer)*)green._cPtr(No.Dup) : null, blue ? cast(const(GskComponentTransfer)*)blue._cPtr(No.Dup) : null, alpha ? cast(const(GskComponentTransfer)*)alpha._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Until the first call to [gid.gtk4.snapshot.Snapshot.pop], the
+      mask image for the mask operation will be recorded.
+      
+      After that call, the child image will be recorded until
+      the second call to [gid.gtk4.snapshot.Snapshot.pop].
+      
+      Calling this function requires 2 subsequent calls to [gid.gtk4.snapshot.Snapshot.pop].
+  
+      Params:
+        op = The Porter/Duff compositing operator to use
+  */
+  void pushComposite(gid.gsk4.types.PorterDuff op) nothrow
+  {
+    gtk_snapshot_push_composite(cast(GtkSnapshot*)this._cPtr, op);
+  }
+
+  /**
+      Stores the current rendering state for later pasting via
+      [gid.gtk4.snapshot.Snapshot.appendPaste].
+      
+      Pasting is possible until the matching call to [gid.gtk4.snapshot.Snapshot.pop].
+  */
+  void pushCopy() nothrow
+  {
+    gtk_snapshot_push_copy(cast(GtkSnapshot*)this._cPtr);
+  }
+
+  /**
+      Snapshots a cross-fade operation between two images with the
+      given progress.
+      
+      Until the first call to [gid.gtk4.snapshot.Snapshot.pop], the start image
+      will be snapshot. After that call, the end image will be recorded
+      until the second call to [gid.gtk4.snapshot.Snapshot.pop].
+      
+      Calling this function requires two subsequent calls
+      to [gid.gtk4.snapshot.Snapshot.pop].
+  
+      Params:
+        progress = progress between 0.0 and 1.0
+  */
+  void pushCrossFade(double progress) nothrow
+  {
+    gtk_snapshot_push_cross_fade(cast(GtkSnapshot*)this._cPtr, progress);
+  }
+
+  /**
+      Fills the area given by path and fill_rule with an image and discards everything
+      outside of it.
+      
+      The image is recorded until the next call to [gid.gtk4.snapshot.Snapshot.pop].
+      
+      If you want to fill the path with a color, [gid.gtk4.snapshot.Snapshot.appendFill]
+      than rendering new ones, use [gid.gtk4.snapshot.Snapshot.appendFill]
+      may be more convenient.
+  
+      Params:
+        path = The path describing the area to fill
+        fillRule = The fill rule to use
+  */
+  void pushFill(gid.gsk4.path.Path path, gid.gsk4.types.FillRule fillRule) nothrow
+  {
+    gtk_snapshot_push_fill(cast(GtkSnapshot*)this._cPtr, path ? cast(GskPath*)path._cPtr(No.Dup) : null, fillRule);
+  }
+
+  /**
+      Push a [gid.gsk4.glshader_node.GLShaderNode].
+      
+      The node uses the given [gid.gsk4.glshader.GLShader] and uniform values
+      Additionally this takes a list of n_children other nodes
+      which will be passed to the [gid.gsk4.glshader_node.GLShaderNode].
+      
+      The take_args argument is a block of data to use for uniform
+      arguments, as per types and offsets defined by the shader.
+      Normally this is generated by [gid.gsk4.glshader.GLShader.formatArgs]
+      or [gid.gsk4.shader_args_builder.ShaderArgsBuilder].
+      
+      The snapshotter takes ownership of take_args, so the caller should
+      not free it after this.
+      
+      If the renderer doesn't support GL shaders, or if there is any
+      problem when compiling the shader, then the node will draw pink.
+      You should use [gid.gsk4.glshader.GLShader.compile] to ensure the shader
+      will work for the renderer before using it.
+      
+      If the shader requires textures (see [gid.gsk4.glshader.GLShader.getNTextures]),
+      then it is expected that you call [gid.gtk4.snapshot.Snapshot.glShaderPopTexture]
+      the number of times that are required. Each of these calls will generate
+      a node that is added as a child to the [gid.gsk4.glshader_node.GLShaderNode], which in turn
+      will render these offscreen and pass as a texture to the shader.
+      
+      Once all textures (if any) are pop:ed, you must call the regular
+      [gid.gtk4.snapshot.Snapshot.pop].
+      
+      If you want to use pre-existing textures as input to the shader rather
+      than rendering new ones, use [gid.gtk4.snapshot.Snapshot.appendTexture] to
+      push a texture node. These will be used directly rather than being
+      re-rendered.
+      
+      For details on how to write shaders, see [gid.gsk4.glshader.GLShader].
+  
+      Params:
+        shader = The code to run
+        bounds = the rectangle to render into
+        takeArgs = Data block with arguments for the shader.
+  
+      Deprecated: GTK's new Vulkan-focused rendering
+          does not support this feature. Use [gid.gtk4.glarea.GLArea] for
+          OpenGL rendering.
+  */
+  void pushGlShader(gid.gsk4.glshader.GLShader shader, gid.graphene1.rect.Rect bounds, gid.glib2.bytes.Bytes takeArgs) nothrow
+  {
+    gtk_snapshot_push_gl_shader(cast(GtkSnapshot*)this._cPtr, shader ? cast(GskGLShader*)shader._cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, takeArgs ? cast(GBytes*)takeArgs._cPtr(Yes.Dup) : null);
+  }
+
+  /**
+      Isolates the following drawing operations from previous ones.
+      
+      You can express "everything but these flags" in a forward compatible
+      way by using bit math:
+      `GSK_ISOLATION_ALL & ~(GSK_ISOLATION_BACKGROUND | GSK_ISOLATION_COPY_PASTE)`
+      will isolate everything but background and copy/paste.
+      
+      For what isolation features exist, see [gid.gsk4.types.Isolation].
+      
+      Content is isolated until the next call to [gid.gtk4.snapshot.Snapshot.pop].
+  
+      Params:
+        features = features that are isolated
+  */
+  void pushIsolation(gid.gsk4.types.Isolation features) nothrow
+  {
+    gtk_snapshot_push_isolation(cast(GtkSnapshot*)this._cPtr, features);
+  }
+
+  /**
+      Until the first call to [gid.gtk4.snapshot.Snapshot.pop], the
+      mask image for the mask operation will be recorded.
+      
+      After that call, the source image will be recorded until
+      the second call to [gid.gtk4.snapshot.Snapshot.pop].
+      
+      Calling this function requires 2 subsequent calls to [gid.gtk4.snapshot.Snapshot.pop].
+  
+      Params:
+        maskMode = mask mode to use
+  */
+  void pushMask(gid.gsk4.types.MaskMode maskMode) nothrow
+  {
+    gtk_snapshot_push_mask(cast(GtkSnapshot*)this._cPtr, maskMode);
+  }
+
+  /**
+      Modifies the opacity of an image.
+      
+      The image is recorded until the next call to [gid.gtk4.snapshot.Snapshot.pop].
+  
+      Params:
+        opacity = the opacity to use
+  */
+  void pushOpacity(double opacity) nothrow
+  {
+    gtk_snapshot_push_opacity(cast(GtkSnapshot*)this._cPtr, opacity);
+  }
+
+  /**
+      Creates a node that repeats the child node.
+      
+      The child is recorded until the next call to [gid.gtk4.snapshot.Snapshot.pop].
+  
+      Params:
+        bounds = the bounds within which to repeat
+        childBounds = the bounds of the child or null
+            to use the full size of the collected child node
+  */
+  void pushRepeat(gid.graphene1.rect.Rect bounds, gid.graphene1.rect.Rect childBounds = null) nothrow
+  {
+    gtk_snapshot_push_repeat(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, childBounds ? cast(const(graphene_rect_t)*)childBounds._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Clips an image to a rounded rectangle.
+      
+      The image is recorded until the next call to [gid.gtk4.snapshot.Snapshot.pop].
+  
+      Params:
+        bounds = the rounded rectangle to clip to
+  */
+  void pushRoundedClip(gid.gsk4.rounded_rect.RoundedRect bounds) nothrow
+  {
+    gtk_snapshot_push_rounded_clip(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(GskRoundedRect)*)bounds._cPtr : null);
+  }
+
+  /**
+      Applies a shadow to an image.
+      
+      The image is recorded until the next call to [gid.gtk4.snapshot.Snapshot.pop].
+  
+      Params:
+        shadow = the first shadow specification
+  */
+  void pushShadow(gid.gsk4.shadow.Shadow[] shadow) nothrow
+  {
+    size_t _nShadows;
+    if (shadow)
+      _nShadows = cast(size_t)shadow.length;
+
+    auto _shadow_arr = new GskShadow[](shadow.length);
+    auto _shadow = _shadow_arr.ptr;
+    foreach (i, obj; shadow) _shadow[i] = *cast(GskShadow*)obj._cPtr;
+    gtk_snapshot_push_shadow(cast(GtkSnapshot*)this._cPtr, _shadow, _nShadows);
+  }
+
+  /**
+      Strokes the given path with the attributes given by stroke and
+      an image.
+      
+      The image is recorded until the next call to [gid.gtk4.snapshot.Snapshot.pop].
+      
+      Note that the strokes are subject to the same transformation as
+      everything else, so uneven scaling will cause horizontal and vertical
+      strokes to have different widths.
+      
+      If you want to stroke the path with a color, [gid.gtk4.snapshot.Snapshot.appendStroke]
+      may be more convenient.
+  
+      Params:
+        path = The path to stroke
+        stroke = The stroke attributes
+  */
+  void pushStroke(gid.gsk4.path.Path path, gid.gsk4.stroke.Stroke stroke) nothrow
+  {
+    gtk_snapshot_push_stroke(cast(GtkSnapshot*)this._cPtr, path ? cast(GskPath*)path._cPtr(No.Dup) : null, stroke ? cast(const(GskStroke)*)stroke._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Creates a render node for the CSS background according to context,
+      and appends it to the current node of snapshot, without changing
+      the current node.
+  
+      Params:
+        context = the style context that defines the background
+        x = X origin of the rectangle
+        y = Y origin of the rectangle
+        width = rectangle width
+        height = rectangle height
+  */
+  void renderBackground(gid.gtk4.style_context.StyleContext context, double x, double y, double width, double height) nothrow
+  {
+    gtk_snapshot_render_background(cast(GtkSnapshot*)this._cPtr, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, x, y, width, height);
+  }
+
+  /**
+      Creates a render node for the focus outline according to context,
+      and appends it to the current node of snapshot, without changing
+      the current node.
+  
+      Params:
+        context = the style context that defines the focus ring
+        x = X origin of the rectangle
+        y = Y origin of the rectangle
+        width = rectangle width
+        height = rectangle height
+  */
+  void renderFocus(gid.gtk4.style_context.StyleContext context, double x, double y, double width, double height) nothrow
+  {
+    gtk_snapshot_render_focus(cast(GtkSnapshot*)this._cPtr, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, x, y, width, height);
+  }
+
+  /**
+      Creates a render node for the CSS border according to context,
+      and appends it to the current node of snapshot, without changing
+      the current node.
+  
+      Params:
+        context = the style context that defines the frame
+        x = X origin of the rectangle
+        y = Y origin of the rectangle
+        width = rectangle width
+        height = rectangle height
+  */
+  void renderFrame(gid.gtk4.style_context.StyleContext context, double x, double y, double width, double height) nothrow
+  {
+    gtk_snapshot_render_frame(cast(GtkSnapshot*)this._cPtr, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, x, y, width, height);
+  }
+
+  /**
+      Draws a text caret using snapshot at the specified index of layout.
+  
+      Params:
+        context = a [gid.gtk4.style_context.StyleContext]
+        x = X origin
+        y = Y origin
+        layout = the [gid.pango1.layout.Layout] of the text
+        index = the index in the [gid.pango1.layout.Layout]
+        direction = the [gid.pango1.types.Direction] of the text
+  */
+  void renderInsertionCursor(gid.gtk4.style_context.StyleContext context, double x, double y, gid.pango1.layout.Layout layout, int index, gid.pango1.types.Direction direction) nothrow
+  {
+    gtk_snapshot_render_insertion_cursor(cast(GtkSnapshot*)this._cPtr, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, x, y, layout ? cast(PangoLayout*)layout._cPtr(No.Dup) : null, index, direction);
+  }
+
+  /**
+      Creates a render node for rendering layout according to the style
+      information in context, and appends it to the current node of snapshot,
+      without changing the current node.
+  
+      Params:
+        context = the style context that defines the text
+        x = X origin of the rectangle
+        y = Y origin of the rectangle
+        layout = the [gid.pango1.layout.Layout] to render
+  */
+  void renderLayout(gid.gtk4.style_context.StyleContext context, double x, double y, gid.pango1.layout.Layout layout) nothrow
+  {
+    gtk_snapshot_render_layout(cast(GtkSnapshot*)this._cPtr, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, x, y, layout ? cast(PangoLayout*)layout._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Restores snapshot to the state saved by a preceding call to
+      [gid.gtk4.snapshot.Snapshot.save] and removes that state from the stack of
+      saved states.
+  */
+  void restore() nothrow
+  {
+    gtk_snapshot_restore(cast(GtkSnapshot*)this._cPtr);
+  }
+
+  /**
+      Rotates @snapshot's coordinate system by angle degrees in 2D space -
+      or in 3D speak, rotates around the Z axis. The rotation happens around
+      the origin point of (0, 0) in the snapshot's current coordinate system.
+      
+      To rotate around axes other than the Z axis, use [gid.gsk4.transform.Transform.rotate3d].
+  
+      Params:
+        angle = the rotation angle, in degrees (clockwise)
+  */
+  void rotate(float angle) nothrow
+  {
+    gtk_snapshot_rotate(cast(GtkSnapshot*)this._cPtr, angle);
+  }
+
+  /**
+      Rotates snapshot's coordinate system by angle degrees around axis.
+      
+      For a rotation in 2D space, use [gid.gsk4.transform.Transform.rotate].
+  
+      Params:
+        angle = the rotation angle, in degrees (clockwise)
+        axis = The rotation axis
+  */
+  void rotate3d(float angle, gid.graphene1.vec3.Vec3 axis) nothrow
+  {
+    gtk_snapshot_rotate_3d(cast(GtkSnapshot*)this._cPtr, angle, axis ? cast(const(graphene_vec3_t)*)axis._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Makes a copy of the current state of snapshot and saves it
+      on an internal stack.
+      
+      When [gid.gtk4.snapshot.Snapshot.restore] is called, snapshot will
+      be restored to the saved state.
+      
+      Multiple calls to [gid.gtk4.snapshot.Snapshot.save] and [gid.gtk4.snapshot.Snapshot.restore]
+      can be nested; each call to `[gid.gtk4.snapshot.Snapshot.restore]` restores the state from
+      the matching paired `[gid.gtk4.snapshot.Snapshot.save]`.
+      
+      It is necessary to clear all saved states with corresponding
+      calls to `[gid.gtk4.snapshot.Snapshot.restore]`.
+  */
+  void save() nothrow
+  {
+    gtk_snapshot_save(cast(GtkSnapshot*)this._cPtr);
+  }
+
+  /**
+      Scales snapshot's coordinate system in 2-dimensional space by
+      the given factors.
+      
+      Use [gid.gtk4.snapshot.Snapshot.scale3d] to scale in all 3 dimensions.
+  
+      Params:
+        factorX = scaling factor on the X axis
+        factorY = scaling factor on the Y axis
+  */
+  void scale(float factorX, float factorY) nothrow
+  {
+    gtk_snapshot_scale(cast(GtkSnapshot*)this._cPtr, factorX, factorY);
+  }
+
+  /**
+      Scales snapshot's coordinate system by the given factors.
+  
+      Params:
+        factorX = scaling factor on the X axis
+        factorY = scaling factor on the Y axis
+        factorZ = scaling factor on the Z axis
+  */
+  void scale3d(float factorX, float factorY, float factorZ) nothrow
+  {
+    gtk_snapshot_scale_3d(cast(GtkSnapshot*)this._cPtr, factorX, factorY, factorZ);
+  }
+
+  /**
+      Returns the render node that was constructed
+      by snapshot.
+      
+      Note that this function may return null if nothing has been
+      added to the snapshot or if its content does not produce pixels
+      to be rendered.
+      
+      After calling this function, it is no longer possible to
+      add more nodes to snapshot. The only function that should
+      be called after this is [gid.gobject2.object.ObjectWrap.unref].
+      Returns: the constructed [gid.gsk4.render_node.RenderNode] or
+          null if there are no nodes to render.
+  */
+  gid.gsk4.render_node.RenderNode toNode() nothrow
+  {
+    GskRenderNode* _cretval;
+    _cretval = gtk_snapshot_to_node(cast(GtkSnapshot*)this._cPtr);
+    auto _retval = _cretval ? new gid.gsk4.render_node.RenderNode(cast(GskRenderNode*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Returns a paintable encapsulating the render node
+      that was constructed by snapshot.
+      
+      After calling this function, it is no longer possible to
+      add more nodes to snapshot. The only function that should
+      be called after this is [gid.gobject2.object.ObjectWrap.unref].
+  
+      Params:
+        size = The size of the resulting paintable
+            or null to use the bounds of the snapshot
+      Returns: a new [gid.gdk4.paintable.Paintable]
+  */
+  gid.gdk4.paintable.Paintable toPaintable(gid.graphene1.size.Size* size = null) nothrow
+  {
+    GdkPaintable* _cretval;
+    _cretval = gtk_snapshot_to_paintable(cast(GtkSnapshot*)this._cPtr, cast(const(graphene_size_t)*)size);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk4.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Transforms snapshot's coordinate system with the given transform.
+  
+      Params:
+        transform = the transform to apply
+  */
+  void transform(gid.gsk4.transform.Transform transform = null) nothrow
+  {
+    gtk_snapshot_transform(cast(GtkSnapshot*)this._cPtr, transform ? cast(GskTransform*)transform._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Transforms snapshot's coordinate system with the given matrix.
+  
+      Params:
+        matrix = the matrix to multiply the transform with
+  */
+  void transformMatrix(gid.graphene1.matrix.Matrix matrix) nothrow
+  {
+    gtk_snapshot_transform_matrix(cast(GtkSnapshot*)this._cPtr, matrix ? cast(const(graphene_matrix_t)*)matrix._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Translates snapshot's coordinate system by point in 2-dimensional space.
+  
+      Params:
+        point = the point to translate the snapshot by
+  */
+  void translate(gid.graphene1.point.Point point) nothrow
+  {
+    gtk_snapshot_translate(cast(GtkSnapshot*)this._cPtr, cast(const(graphene_point_t)*)&point);
+  }
+
+  /**
+      Translates snapshot's coordinate system by point.
+  
+      Params:
+        point = the point to translate the snapshot by
+  */
+  void translate3d(gid.graphene1.point3_d.Point3D point) nothrow
+  {
+    gtk_snapshot_translate_3d(cast(GtkSnapshot*)this._cPtr, cast(const(graphene_point3d_t)*)&point);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk4.snapshot.Snapshot]
+class SnapshotGidBuilderImpl(T) : gid.gdk4.snapshot.SnapshotGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gtk4.snapshot.Snapshot]
+final class SnapshotGidBuilder : SnapshotGidBuilderImpl!SnapshotGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Snapshot build() nothrow
+  {
+    return new Snapshot(cast(void*)createGObject(Snapshot._getGType), Yes.Take);
+  }
+}

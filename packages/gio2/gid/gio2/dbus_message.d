@@ -1,0 +1,829 @@
+/// Module for [DBusMessage] class
+module gid.gio2.dbus_message;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gio2.c.functions;
+import gid.gio2.c.types;
+import gid.gio2.types;
+import gid.gio2.unix_fdlist;
+import gid.glib2.error;
+import gid.glib2.variant;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+
+/**
+    A type for representing D-Bus messages that can be sent or received
+    on a [gid.gio2.dbus_connection.DBusConnection].
+*/
+class DBusMessage : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())g_dbus_message_get_type != &gidSymbolNotFound ? g_dbus_message_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GDBusMessage";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override DBusMessage self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gio2.dbus_message.DBusMessage]
+      Returns: New builder object
+  */
+  static DBusMessageGidBuilder builder() nothrow
+  {
+    return new DBusMessageGidBuilder;
+  }
+
+  /** */
+  @property bool locked() nothrow
+  {
+    return getLocked();
+  }
+
+  /**
+      Creates a new empty #GDBusMessage.
+      Returns: A #GDBusMessage. Free with [gid.gobject2.object.ObjectWrap.unref].
+  */
+  this() nothrow
+  {
+    GDBusMessage* _cretval;
+    _cretval = g_dbus_message_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Creates a new #GDBusMessage from the data stored at blob. The byte
+      order that the message was in can be retrieved using
+      [gid.gio2.dbus_message.DBusMessage.getByteOrder].
+      
+      If the blob cannot be parsed, contains invalid fields, or contains invalid
+      headers, [gid.gio2.types.IOErrorEnum.InvalidArgument] will be returned.
+  
+      Params:
+        blob = A blob representing a binary D-Bus message.
+        capabilities = A #GDBusCapabilityFlags describing what protocol features are supported.
+      Returns: A new #GDBusMessage or null if error is set. Free with
+        [gid.gobject2.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
+  */
+  static gid.gio2.dbus_message.DBusMessage newFromBlob(ubyte[] blob, gid.gio2.types.DBusCapabilityFlags capabilities)
+  {
+    GDBusMessage* _cretval;
+    size_t _blobLen;
+    if (blob)
+      _blobLen = cast(size_t)blob.length;
+
+    auto _blob = cast(ubyte*)blob.ptr;
+    GError *_err;
+    _cretval = g_dbus_message_new_from_blob(_blob, _blobLen, capabilities, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Creates a new #GDBusMessage for a method call.
+  
+      Params:
+        name = A valid D-Bus name or null.
+        path = A valid object path.
+        interface_ = A valid D-Bus interface name or null.
+        method = A valid method name.
+      Returns: A #GDBusMessage. Free with [gid.gobject2.object.ObjectWrap.unref].
+  */
+  static gid.gio2.dbus_message.DBusMessage newMethodCall(string name, string path, string interface_, string method) nothrow
+  {
+    GDBusMessage* _cretval;
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    const(char)* _interface_ = interface_.toCString!(No.Malloc, Yes.Nullable);
+    const(char)* _method = method.toCString!(No.Malloc, No.Nullable);
+    _cretval = g_dbus_message_new_method_call(_name, _path, _interface_, _method);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Creates a new #GDBusMessage for a signal emission.
+  
+      Params:
+        path = A valid object path.
+        interface_ = A valid D-Bus interface name.
+        signal = A valid signal name.
+      Returns: A #GDBusMessage. Free with [gid.gobject2.object.ObjectWrap.unref].
+  */
+  static gid.gio2.dbus_message.DBusMessage newSignal(string path, string interface_, string signal) nothrow
+  {
+    GDBusMessage* _cretval;
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    const(char)* _interface_ = interface_.toCString!(No.Malloc, No.Nullable);
+    const(char)* _signal = signal.toCString!(No.Malloc, No.Nullable);
+    _cretval = g_dbus_message_new_signal(_path, _interface_, _signal);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Utility function to calculate how many bytes are needed to
+      completely deserialize the D-Bus message stored at blob.
+  
+      Params:
+        blob = A blob representing a binary D-Bus message.
+      Returns: Number of bytes needed or -1 if error is set (e.g. if
+        blob contains invalid data or not enough data is available to
+        determine the size).
+      Throws: [ErrorWrap]
+  */
+  static ptrdiff_t bytesNeeded(ubyte[] blob)
+  {
+    ptrdiff_t _retval;
+    size_t _blobLen;
+    if (blob)
+      _blobLen = cast(size_t)blob.length;
+
+    auto _blob = cast(ubyte*)blob.ptr;
+    GError *_err;
+    _retval = g_dbus_message_bytes_needed(_blob, _blobLen, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Copies message. The copy is a deep copy and the returned
+      #GDBusMessage is completely identical except that it is guaranteed
+      to not be locked.
+      
+      This operation can fail if e.g. message contains file descriptors
+      and the per-process or system-wide open files limit is reached.
+      Returns: A new #GDBusMessage or null if error is set.
+            Free with [gid.gobject2.object.ObjectWrap.unref].
+      Throws: [ErrorWrap]
+  */
+  gid.gio2.dbus_message.DBusMessage copy()
+  {
+    GDBusMessage* _cretval;
+    GError *_err;
+    _cretval = g_dbus_message_copy(cast(GDBusMessage*)this._cPtr, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Convenience to get the first item in the body of message.
+      
+      See [gid.gio2.dbus_message.DBusMessage.getArg0Path] for returning object-path-typed
+      arg0 values.
+      Returns: The string item or null if the first item in the body of
+        message is not a string.
+  */
+  string getArg0() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = g_dbus_message_get_arg0(cast(GDBusMessage*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Convenience to get the first item in the body of message.
+      
+      See [gid.gio2.dbus_message.DBusMessage.getArg0] for returning string-typed arg0 values.
+      Returns: The object path item or `NULL` if the first item in the
+          body of message is not an object path.
+  */
+  string getArg0Path() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = g_dbus_message_get_arg0_path(cast(GDBusMessage*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the body of a message.
+      Returns: A #GVariant or null if the body is
+        empty. Do not free, it is owned by message.
+  */
+  gid.glib2.variant.Variant getBody() nothrow
+  {
+    GVariant* _cretval;
+    _cretval = g_dbus_message_get_body(cast(GDBusMessage*)this._cPtr);
+    auto _retval = _cretval ? new gid.glib2.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the byte order of message.
+      Returns: The byte order.
+  */
+  gid.gio2.types.DBusMessageByteOrder getByteOrder() nothrow
+  {
+    GDBusMessageByteOrder _cretval;
+    _cretval = g_dbus_message_get_byte_order(cast(GDBusMessage*)this._cPtr);
+    gid.gio2.types.DBusMessageByteOrder _retval = cast(gid.gio2.types.DBusMessageByteOrder)_cretval;
+    return _retval;
+  }
+
+  /**
+      Convenience getter for the [gid.gio2.types.DBusMessageHeaderField.Destination] header field.
+      Returns: The value.
+  */
+  string getDestination() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = g_dbus_message_get_destination(cast(GDBusMessage*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Convenience getter for the [gid.gio2.types.DBusMessageHeaderField.ErrorName] header field.
+      Returns: The value.
+  */
+  string getErrorName() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = g_dbus_message_get_error_name(cast(GDBusMessage*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the flags for message.
+      Returns: Flags that are set (typically values from the #GDBusMessageFlags enumeration bitwise ORed together).
+  */
+  gid.gio2.types.DBusMessageFlags getFlags() nothrow
+  {
+    GDBusMessageFlags _cretval;
+    _cretval = g_dbus_message_get_flags(cast(GDBusMessage*)this._cPtr);
+    gid.gio2.types.DBusMessageFlags _retval = cast(gid.gio2.types.DBusMessageFlags)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets a header field on message.
+      
+      The caller is responsible for checking the type of the returned #GVariant
+      matches what is expected.
+  
+      Params:
+        headerField = A 8-bit unsigned integer (typically a value from the #GDBusMessageHeaderField enumeration)
+      Returns: A #GVariant with the value if the header was found, null
+        otherwise. Do not free, it is owned by message.
+  */
+  gid.glib2.variant.Variant getHeader(gid.gio2.types.DBusMessageHeaderField headerField) nothrow
+  {
+    GVariant* _cretval;
+    _cretval = g_dbus_message_get_header(cast(GDBusMessage*)this._cPtr, headerField);
+    auto _retval = _cretval ? new gid.glib2.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets an array of all header fields on message that are set.
+      Returns: An array of header fields
+        terminated by [gid.gio2.types.DBusMessageHeaderField.Invalid].  Each element
+        is a #guchar. Free with [gid.glib2.global.gfree].
+  */
+  ubyte[] getHeaderFields() nothrow
+  {
+    ubyte* _cretval;
+    _cretval = g_dbus_message_get_header_fields(cast(GDBusMessage*)this._cPtr);
+    ubyte[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] != 0)
+        _cretlength++;
+      _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
+    }
+    return _retval;
+  }
+
+  /**
+      Convenience getter for the [gid.gio2.types.DBusMessageHeaderField.Interface] header field.
+      Returns: The value.
+  */
+  string getInterface() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = g_dbus_message_get_interface(cast(GDBusMessage*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Checks whether message is locked. To monitor changes to this
+      value, connect to the #GObject::notify signal to listen for changes
+      on the #GDBusMessage:locked property.
+      Returns: true if message is locked, false otherwise.
+  */
+  bool getLocked() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_dbus_message_get_locked(cast(GDBusMessage*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Convenience getter for the [gid.gio2.types.DBusMessageHeaderField.Member] header field.
+      Returns: The value.
+  */
+  string getMember() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = g_dbus_message_get_member(cast(GDBusMessage*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the type of message.
+      Returns: A 8-bit unsigned integer (typically a value from the #GDBusMessageType enumeration).
+  */
+  gid.gio2.types.DBusMessageType getMessageType() nothrow
+  {
+    GDBusMessageType _cretval;
+    _cretval = g_dbus_message_get_message_type(cast(GDBusMessage*)this._cPtr);
+    gid.gio2.types.DBusMessageType _retval = cast(gid.gio2.types.DBusMessageType)_cretval;
+    return _retval;
+  }
+
+  /**
+      Convenience getter for the [gid.gio2.types.DBusMessageHeaderField.NumUnixFds] header field.
+      Returns: The value.
+  */
+  uint getNumUnixFds() nothrow
+  {
+    uint _retval;
+    _retval = g_dbus_message_get_num_unix_fds(cast(GDBusMessage*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Convenience getter for the [gid.gio2.types.DBusMessageHeaderField.Path] header field.
+      Returns: The value.
+  */
+  string getPath() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = g_dbus_message_get_path(cast(GDBusMessage*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Convenience getter for the [gid.gio2.types.DBusMessageHeaderField.ReplySerial] header field.
+      Returns: The value.
+  */
+  uint getReplySerial() nothrow
+  {
+    uint _retval;
+    _retval = g_dbus_message_get_reply_serial(cast(GDBusMessage*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Convenience getter for the [gid.gio2.types.DBusMessageHeaderField.Sender] header field.
+      Returns: The value.
+  */
+  string getSender() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = g_dbus_message_get_sender(cast(GDBusMessage*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the serial for message.
+      Returns: A #guint32.
+  */
+  uint getSerial() nothrow
+  {
+    uint _retval;
+    _retval = g_dbus_message_get_serial(cast(GDBusMessage*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Convenience getter for the [gid.gio2.types.DBusMessageHeaderField.Signature] header field.
+      
+      This will always be non-null, but may be an empty string.
+      Returns: The value.
+  */
+  string getSignature() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = g_dbus_message_get_signature(cast(GDBusMessage*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the UNIX file descriptors associated with message, if any.
+      
+      This method is only available on UNIX.
+      
+      The file descriptors normally correspond to `G_VARIANT_TYPE_HANDLE`
+      values in the body of the message. For example,
+      if [gid.glib2.variant.Variant.getHandle] returns 5, that is intended to be a reference
+      to the file descriptor that can be accessed by
+      `g_unix_fd_list_get (list, 5, ...)`.
+      Returns: A #GUnixFDList or null if no file descriptors are
+        associated. Do not free, this object is owned by message.
+  */
+  gid.gio2.unix_fdlist.UnixFDList getUnixFdList() nothrow
+  {
+    GUnixFDList* _cretval;
+    _cretval = g_dbus_message_get_unix_fd_list(cast(GDBusMessage*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      If message is locked, does nothing. Otherwise locks the message.
+  */
+  void lock() nothrow
+  {
+    g_dbus_message_lock(cast(GDBusMessage*)this._cPtr);
+  }
+
+  /**
+      Creates a new #GDBusMessage that is an error reply to method_call_message.
+  
+      Params:
+        errorName = A valid D-Bus error name.
+        errorMessage = The D-Bus error message.
+      Returns: A #GDBusMessage. Free with [gid.gobject2.object.ObjectWrap.unref].
+  */
+  gid.gio2.dbus_message.DBusMessage newMethodErrorLiteral(string errorName, string errorMessage) nothrow
+  {
+    GDBusMessage* _cretval;
+    const(char)* _errorName = errorName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _errorMessage = errorMessage.toCString!(No.Malloc, No.Nullable);
+    _cretval = g_dbus_message_new_method_error_literal(cast(GDBusMessage*)this._cPtr, _errorName, _errorMessage);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Creates a new #GDBusMessage that is a reply to method_call_message.
+      Returns: #GDBusMessage. Free with [gid.gobject2.object.ObjectWrap.unref].
+  */
+  gid.gio2.dbus_message.DBusMessage newMethodReply() nothrow
+  {
+    GDBusMessage* _cretval;
+    _cretval = g_dbus_message_new_method_reply(cast(GDBusMessage*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Produces a human-readable multi-line description of message.
+      
+      The contents of the description has no ABI guarantees, the contents
+      and formatting is subject to change at any time. Typical output
+      looks something like this:
+      ```
+      Flags:   none
+      Version: 0
+      Serial:  4
+      Headers:
+        path -> objectpath '/org/gtk/GDBus/TestObject'
+        interface -> 'org.gtk.GDBus.TestInterface'
+        member -> 'GimmeStdout'
+        destination -> ':1.146'
+      Body: ()
+      UNIX File Descriptors:
+        (none)
+      ```
+      or
+      ```
+      Flags:   no-reply-expected
+      Version: 0
+      Serial:  477
+      Headers:
+        reply-serial -> uint32 4
+        destination -> ':1.159'
+        sender -> ':1.146'
+        num-unix-fds -> uint32 1
+      Body: ()
+      UNIX File Descriptors:
+        fd 12: dev=0:10,mode=020620,ino=5,uid=500,gid=5,rdev=136:2,size=0,atime=1273085037,mtime=1273085851,ctime=1272982635
+      ```
+  
+      Params:
+        indent = Indentation level.
+      Returns: A string that should be freed with `funcGLib.free`.
+  */
+  string print(uint indent) nothrow
+  {
+    char* _cretval;
+    _cretval = g_dbus_message_print(cast(GDBusMessage*)this._cPtr, indent);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Sets the body message. As a side-effect the
+      [gid.gio2.types.DBusMessageHeaderField.Signature] header field is set to the
+      type string of body (or cleared if body is null).
+      
+      If body is floating, message assumes ownership of body.
+  
+      Params:
+        body_ = Either null or a #GVariant that is a tuple.
+  */
+  void setBody(gid.glib2.variant.Variant body_) nothrow
+  {
+    g_dbus_message_set_body(cast(GDBusMessage*)this._cPtr, body_ ? cast(GVariant*)body_._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the byte order of message.
+  
+      Params:
+        byteOrder = The byte order.
+  */
+  void setByteOrder(gid.gio2.types.DBusMessageByteOrder byteOrder) nothrow
+  {
+    g_dbus_message_set_byte_order(cast(GDBusMessage*)this._cPtr, byteOrder);
+  }
+
+  /**
+      Convenience setter for the [gid.gio2.types.DBusMessageHeaderField.Destination] header field.
+  
+      Params:
+        value = The value to set.
+  */
+  void setDestination(string value = null) nothrow
+  {
+    const(char)* _value = value.toCString!(No.Malloc, Yes.Nullable);
+    g_dbus_message_set_destination(cast(GDBusMessage*)this._cPtr, _value);
+  }
+
+  /**
+      Convenience setter for the [gid.gio2.types.DBusMessageHeaderField.ErrorName] header field.
+  
+      Params:
+        value = The value to set.
+  */
+  void setErrorName(string value) nothrow
+  {
+    const(char)* _value = value.toCString!(No.Malloc, No.Nullable);
+    g_dbus_message_set_error_name(cast(GDBusMessage*)this._cPtr, _value);
+  }
+
+  /**
+      Sets the flags to set on message.
+  
+      Params:
+        flags = Flags for message that are set (typically values from the #GDBusMessageFlags
+          enumeration bitwise ORed together).
+  */
+  void setFlags(gid.gio2.types.DBusMessageFlags flags) nothrow
+  {
+    g_dbus_message_set_flags(cast(GDBusMessage*)this._cPtr, flags);
+  }
+
+  /**
+      Sets a header field on message.
+      
+      If value is floating, message assumes ownership of value.
+  
+      Params:
+        headerField = A 8-bit unsigned integer (typically a value from the #GDBusMessageHeaderField enumeration)
+        value = A #GVariant to set the header field or null to clear the header field.
+  */
+  void setHeader(gid.gio2.types.DBusMessageHeaderField headerField, gid.glib2.variant.Variant value = null) nothrow
+  {
+    g_dbus_message_set_header(cast(GDBusMessage*)this._cPtr, headerField, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Convenience setter for the [gid.gio2.types.DBusMessageHeaderField.Interface] header field.
+  
+      Params:
+        value = The value to set.
+  */
+  void setInterface(string value = null) nothrow
+  {
+    const(char)* _value = value.toCString!(No.Malloc, Yes.Nullable);
+    g_dbus_message_set_interface(cast(GDBusMessage*)this._cPtr, _value);
+  }
+
+  /**
+      Convenience setter for the [gid.gio2.types.DBusMessageHeaderField.Member] header field.
+  
+      Params:
+        value = The value to set.
+  */
+  void setMember(string value = null) nothrow
+  {
+    const(char)* _value = value.toCString!(No.Malloc, Yes.Nullable);
+    g_dbus_message_set_member(cast(GDBusMessage*)this._cPtr, _value);
+  }
+
+  /**
+      Sets message to be of type.
+  
+      Params:
+        type = A 8-bit unsigned integer (typically a value from the #GDBusMessageType enumeration).
+  */
+  void setMessageType(gid.gio2.types.DBusMessageType type) nothrow
+  {
+    g_dbus_message_set_message_type(cast(GDBusMessage*)this._cPtr, type);
+  }
+
+  /**
+      Convenience setter for the [gid.gio2.types.DBusMessageHeaderField.NumUnixFds] header field.
+  
+      Params:
+        value = The value to set.
+  */
+  void setNumUnixFds(uint value) nothrow
+  {
+    g_dbus_message_set_num_unix_fds(cast(GDBusMessage*)this._cPtr, value);
+  }
+
+  /**
+      Convenience setter for the [gid.gio2.types.DBusMessageHeaderField.Path] header field.
+  
+      Params:
+        value = The value to set.
+  */
+  void setPath(string value = null) nothrow
+  {
+    const(char)* _value = value.toCString!(No.Malloc, Yes.Nullable);
+    g_dbus_message_set_path(cast(GDBusMessage*)this._cPtr, _value);
+  }
+
+  /**
+      Convenience setter for the [gid.gio2.types.DBusMessageHeaderField.ReplySerial] header field.
+  
+      Params:
+        value = The value to set.
+  */
+  void setReplySerial(uint value) nothrow
+  {
+    g_dbus_message_set_reply_serial(cast(GDBusMessage*)this._cPtr, value);
+  }
+
+  /**
+      Convenience setter for the [gid.gio2.types.DBusMessageHeaderField.Sender] header field.
+  
+      Params:
+        value = The value to set.
+  */
+  void setSender(string value = null) nothrow
+  {
+    const(char)* _value = value.toCString!(No.Malloc, Yes.Nullable);
+    g_dbus_message_set_sender(cast(GDBusMessage*)this._cPtr, _value);
+  }
+
+  /**
+      Sets the serial for message.
+      
+      The [D-Bus specification](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-messages)
+      does not allow the serial to be zero.
+  
+      Params:
+        serial = A #guint32, which must not be zero.
+  */
+  void setSerial(uint serial) nothrow
+  {
+    g_dbus_message_set_serial(cast(GDBusMessage*)this._cPtr, serial);
+  }
+
+  /**
+      Convenience setter for the [gid.gio2.types.DBusMessageHeaderField.Signature] header field.
+  
+      Params:
+        value = The value to set.
+  */
+  void setSignature(string value = null) nothrow
+  {
+    const(char)* _value = value.toCString!(No.Malloc, Yes.Nullable);
+    g_dbus_message_set_signature(cast(GDBusMessage*)this._cPtr, _value);
+  }
+
+  /**
+      Sets the UNIX file descriptors associated with message. As a
+      side-effect the [gid.gio2.types.DBusMessageHeaderField.NumUnixFds] header
+      field is set to the number of fds in fd_list (or cleared if
+      fd_list is null).
+      
+      This method is only available on UNIX.
+      
+      When designing D-Bus APIs that are intended to be interoperable,
+      please note that non-GDBus implementations of D-Bus can usually only
+      access file descriptors if they are referenced by a value of type
+      `G_VARIANT_TYPE_HANDLE` in the body of the message.
+  
+      Params:
+        fdList = A #GUnixFDList or null.
+  */
+  void setUnixFdList(gid.gio2.unix_fdlist.UnixFDList fdList = null) nothrow
+  {
+    g_dbus_message_set_unix_fd_list(cast(GDBusMessage*)this._cPtr, fdList ? cast(GUnixFDList*)fdList._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Serializes message to a blob. The byte order returned by
+      [gid.gio2.dbus_message.DBusMessage.getByteOrder] will be used.
+  
+      Params:
+        capabilities = A #GDBusCapabilityFlags describing what protocol features are supported.
+      Returns: A pointer to a
+        valid binary D-Bus message of out_size bytes generated by message
+        or null if error is set. Free with [gid.glib2.global.gfree].
+      Throws: [ErrorWrap]
+  */
+  ubyte[] toBlob(gid.gio2.types.DBusCapabilityFlags capabilities)
+  {
+    ubyte* _cretval;
+    size_t _cretlength;
+    GError *_err;
+    _cretval = g_dbus_message_to_blob(cast(GDBusMessage*)this._cPtr, &_cretlength, capabilities, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    ubyte[] _retval;
+
+    if (_cretval)
+    {
+      _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
+      gFree(cast(void*)_cretval);
+    }
+    return _retval;
+  }
+
+  /**
+      If message is not of type [gid.gio2.types.DBusMessageType.Error] does
+      nothing and returns false.
+      
+      Otherwise this method encodes the error in message as a #GError
+      using [gid.gio2.dbus_error.DBusError.setDbusError] using the information in the
+      [gid.gio2.types.DBusMessageHeaderField.ErrorName] header field of message as
+      well as the first string item in message's body.
+      Returns: true if error was set, false otherwise.
+      Throws: [ErrorWrap]
+  */
+  bool toGerror()
+  {
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)g_dbus_message_to_gerror(cast(GDBusMessage*)this._cPtr, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+}
+
+/// Fluent builder implementation template for [gid.gio2.dbus_message.DBusMessage]
+class DBusMessageGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+}
+
+/// Fluent builder for [gid.gio2.dbus_message.DBusMessage]
+final class DBusMessageGidBuilder : DBusMessageGidBuilderImpl!DBusMessageGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  DBusMessage build() nothrow
+  {
+    return new DBusMessage(cast(void*)createGObject(DBusMessage._getGType), Yes.Take);
+  }
+}

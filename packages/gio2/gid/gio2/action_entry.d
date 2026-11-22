@@ -1,0 +1,170 @@
+/// Module for [ActionEntry] class
+module gid.gio2.action_entry;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gio2.c.functions;
+import gid.gio2.c.types;
+import gid.gio2.types;
+
+/**
+    This struct defines a single action.  It is for use with
+    [gid.gio2.action_map.ActionMap.addActionEntries].
+    
+    The order of the items in the structure are intended to reflect
+    frequency of use.  It is permissible to use an incomplete initialiser
+    in order to leave some of the later values as `NULL`.  All values
+    after @name are optional.  Additional optional fields may be added in
+    the future.
+    
+    See [gid.gio2.action_map.ActionMap.addActionEntries] for an example.
+*/
+class ActionEntry : StructWrap!(GActionEntry)
+{
+  /**
+      Create a `action_entry.ActionEntry` wrap type.
+      Params:
+        name = the name of the action
+        parameterType = the type of the parameter that must be passed to the
+            activate function for this action, given as a single GVariant type string
+            (or `NULL` for no parameter)
+        state = the initial state for this action, given in
+            [GVariant text format](../glib/gvariant-text-format.html).  The state is parsed
+            with no extra type information, so type tags must be added to the string
+            if they are necessary.  Stateless actions should give `NULL` here.
+  */
+  this(string name = string.init, string parameterType = string.init, string state = string.init) nothrow
+  {
+    this.name = name;
+    this.parameterType = parameterType;
+    this.state = state;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private const(char)* _nameRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `name` field.
+      Returns: the name of the action
+  */
+  @property string name() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GActionEntry*)this._cPtr).name);
+  }
+
+  /**
+      Set `name` field.
+      Params:
+        propval = the name of the action
+  */
+  @property void name(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("name"))
+      return;
+
+    _nameRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GActionEntry*)this._cPtr).name = cast(const(char)*)_nameRef;
+  }
+
+  /** Function alias for field `activate` */
+  alias ActivateFuncType = extern(C) void function(GSimpleAction* action, GVariant* parameter, void* userData);
+
+  /**
+      Get `activate` field.
+      Returns: the callback to connect to the "activate" signal of the action.
+          Since GLib 2.40, this can be `NULL` for stateful actions, in which case
+          the default handler is used. For boolean-stated actions with no
+          parameter, this is a toggle. For other state types (and parameter type
+          equal to the state type) this will be a function that just calls
+          @change_state (which you should provide).
+  */
+  @property ActivateFuncType activate() nothrow
+  {
+    return (cast(GActionEntry*)this._cPtr).activate;
+  }
+
+  private const(char)* _parameterTypeRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `parameterType` field.
+      Returns: the type of the parameter that must be passed to the
+          activate function for this action, given as a single GVariant type string
+          (or `NULL` for no parameter)
+  */
+  @property string parameterType() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GActionEntry*)this._cPtr).parameterType);
+  }
+
+  /**
+      Set `parameterType` field.
+      Params:
+        propval = the type of the parameter that must be passed to the
+            activate function for this action, given as a single GVariant type string
+            (or `NULL` for no parameter)
+  */
+  @property void parameterType(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("parameterType"))
+      return;
+
+    _parameterTypeRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GActionEntry*)this._cPtr).parameterType = cast(const(char)*)_parameterTypeRef;
+  }
+
+  private const(char)* _stateRef; // Keeps borrowed GC string alive
+
+  /**
+      Get `state` field.
+      Returns: the initial state for this action, given in
+          [GVariant text format](../glib/gvariant-text-format.html).  The state is parsed
+          with no extra type information, so type tags must be added to the string
+          if they are necessary.  Stateless actions should give `NULL` here.
+  */
+  @property string state() nothrow
+  {
+    return cToD!(string)(cast(void*)(cast(GActionEntry*)this._cPtr).state);
+  }
+
+  /**
+      Set `state` field.
+      Params:
+        propval = the initial state for this action, given in
+            [GVariant text format](../glib/gvariant-text-format.html).  The state is parsed
+            with no extra type information, so type tags must be added to the string
+            if they are necessary.  Stateless actions should give `NULL` here.
+  */
+  @property void state(string propval) nothrow
+  {
+    if (_refuseBorrowedStore("state"))
+      return;
+
+    _stateRef = toCString!(No.Malloc, Yes.Nullable)(propval);
+    (cast(GActionEntry*)this._cPtr).state = cast(const(char)*)_stateRef;
+  }
+
+  /** Function alias for field `changeState` */
+  alias ChangeStateFuncType = extern(C) void function(GSimpleAction* action, GVariant* value, void* userData);
+
+  /**
+      Get `changeState` field.
+      Returns: the callback to connect to the "change-state" signal of the
+          action.  All stateful actions should provide a handler here; stateless
+          actions should not.
+  */
+  @property ChangeStateFuncType changeState() nothrow
+  {
+    return (cast(GActionEntry*)this._cPtr).changeState;
+  }
+}

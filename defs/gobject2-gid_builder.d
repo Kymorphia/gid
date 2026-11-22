@@ -3,8 +3,8 @@
 //!inhibit init funcs
 
 import std.typecons : Yes;
-import gobject.object;
-import gobject.value;
+import gid.gobject2.object;
+import gid.gobject2.value;
 
 /// giD GObject builder base class
 abstract class GidBuilder(T)

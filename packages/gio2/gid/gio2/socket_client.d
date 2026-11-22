@@ -1,0 +1,1245 @@
+/// Module for [SocketClient] class
+module gid.gio2.socket_client;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gio2.async_result;
+import gid.gio2.c.functions;
+import gid.gio2.c.types;
+import gid.gio2.cancellable;
+import gid.gio2.iostream;
+import gid.gio2.proxy_resolver;
+import gid.gio2.socket_address;
+import gid.gio2.socket_connectable;
+import gid.gio2.socket_connection;
+import gid.gio2.types;
+import gid.glib2.error;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+
+/**
+    [gid.gio2.socket_client.SocketClient] is a lightweight high-level utility class for connecting to
+    a network host using a connection oriented socket type.
+    
+    You create a [gid.gio2.socket_client.SocketClient] object, set any options you want, and then
+    call a sync or async connect operation, which returns a
+    [gid.gio2.socket_connection.SocketConnection] subclass on success.
+    
+    The type of the [gid.gio2.socket_connection.SocketConnection] object returned depends on the
+    type of the underlying socket that is in use. For instance, for a TCP/IP
+    connection it will be a [gid.gio2.tcp_connection.TcpConnection].
+    
+    As [gid.gio2.socket_client.SocketClient] is a lightweight object, you don't need to cache it. You
+    can just create a new one any time you need one.
+*/
+class SocketClient : gid.gobject2.object.ObjectWrap
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())g_socket_client_get_type != &gidSymbolNotFound ? g_socket_client_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GSocketClient";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override SocketClient self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gio2.socket_client.SocketClient]
+      Returns: New builder object
+  */
+  static SocketClientGidBuilder builder() nothrow
+  {
+    return new SocketClientGidBuilder;
+  }
+
+  /**
+      Get `enableProxy` property.
+      Returns: Enable proxy support.
+  */
+  @property bool enableProxy() nothrow
+  {
+    return getEnableProxy();
+  }
+
+  /**
+      Set `enableProxy` property.
+      Params:
+        propval = Enable proxy support.
+  */
+  @property void enableProxy(bool propval) nothrow
+  {
+    setEnableProxy(propval);
+  }
+
+  /**
+      Get `family` property.
+      Returns: The address family to use for socket construction.
+  */
+  @property gid.gio2.types.SocketFamily family() nothrow
+  {
+    return getFamily();
+  }
+
+  /**
+      Set `family` property.
+      Params:
+        propval = The address family to use for socket construction.
+  */
+  @property void family(gid.gio2.types.SocketFamily propval) nothrow
+  {
+    setFamily(propval);
+  }
+
+  /**
+      Get `localAddress` property.
+      Returns: The local address constructed sockets will be bound to.
+  */
+  @property gid.gio2.socket_address.SocketAddress localAddress() nothrow
+  {
+    return getLocalAddress();
+  }
+
+  /**
+      Set `localAddress` property.
+      Params:
+        propval = The local address constructed sockets will be bound to.
+  */
+  @property void localAddress(gid.gio2.socket_address.SocketAddress propval) nothrow
+  {
+    setLocalAddress(propval);
+  }
+
+  /**
+      Get `protocol` property.
+      Returns: The protocol to use for socket construction, or `0` for default.
+  */
+  @property gid.gio2.types.SocketProtocol protocol() nothrow
+  {
+    return getProtocol();
+  }
+
+  /**
+      Set `protocol` property.
+      Params:
+        propval = The protocol to use for socket construction, or `0` for default.
+  */
+  @property void protocol(gid.gio2.types.SocketProtocol propval) nothrow
+  {
+    setProtocol(propval);
+  }
+
+  /**
+      Get `proxyResolver` property.
+      Returns: The proxy resolver to use
+  */
+  @property gid.gio2.proxy_resolver.ProxyResolver proxyResolver() nothrow
+  {
+    return getProxyResolver();
+  }
+
+  /**
+      Set `proxyResolver` property.
+      Params:
+        propval = The proxy resolver to use
+  */
+  @property void proxyResolver(gid.gio2.proxy_resolver.ProxyResolver propval) nothrow
+  {
+    setProxyResolver(propval);
+  }
+
+  /**
+      Get `timeout` property.
+      Returns: The I/O timeout for sockets, in seconds, or `0` for none.
+  */
+  @property uint timeout() nothrow
+  {
+    return getTimeout();
+  }
+
+  /**
+      Set `timeout` property.
+      Params:
+        propval = The I/O timeout for sockets, in seconds, or `0` for none.
+  */
+  @property void timeout(uint propval) nothrow
+  {
+    setTimeout(propval);
+  }
+
+  /**
+      Get `tls` property.
+      Returns: Whether to create TLS connections.
+  */
+  @property bool tls() nothrow
+  {
+    return getTls();
+  }
+
+  /**
+      Set `tls` property.
+      Params:
+        propval = Whether to create TLS connections.
+  */
+  @property void tls(bool propval) nothrow
+  {
+    setTls(propval);
+  }
+
+  /**
+      Get `tlsValidationFlags` property.
+      Returns: The TLS validation flags used when creating TLS connections. The
+        default value is [gid.gio2.types.TlsCertificateFlags.ValidateAll].
+        
+        GLib guarantees that if certificate verification fails, at least one
+        flag will be set, but it does not guarantee that all possible flags
+        will be set. Accordingly, you may not safely decide to ignore any
+        particular type of error. For example, it would be incorrect to mask
+        [gid.gio2.types.TlsCertificateFlags.Expired] if you want to allow expired certificates,
+        because this could potentially be the only error flag set even if
+        other problems exist with the certificate. Therefore, there is no
+        safe way to use this property. This is not a horrible problem,
+        though, because you should not be attempting to ignore validation
+        errors anyway. If you really must ignore TLS certificate errors,
+        connect to the #GSocketClient::event signal, wait for it to be
+        emitted with [gid.gio2.types.SocketClientEvent.TlsHandshaking], and use that to
+        connect to #GTlsConnection::accept-certificate.
+  
+      Deprecated: Do not attempt to ignore validation errors.
+  */
+  @property gid.gio2.types.TlsCertificateFlags tlsValidationFlags() nothrow
+  {
+    return getTlsValidationFlags();
+  }
+
+  /**
+      Set `tlsValidationFlags` property.
+      Params:
+        propval = The TLS validation flags used when creating TLS connections. The
+          default value is [gid.gio2.types.TlsCertificateFlags.ValidateAll].
+          
+          GLib guarantees that if certificate verification fails, at least one
+          flag will be set, but it does not guarantee that all possible flags
+          will be set. Accordingly, you may not safely decide to ignore any
+          particular type of error. For example, it would be incorrect to mask
+          [gid.gio2.types.TlsCertificateFlags.Expired] if you want to allow expired certificates,
+          because this could potentially be the only error flag set even if
+          other problems exist with the certificate. Therefore, there is no
+          safe way to use this property. This is not a horrible problem,
+          though, because you should not be attempting to ignore validation
+          errors anyway. If you really must ignore TLS certificate errors,
+          connect to the #GSocketClient::event signal, wait for it to be
+          emitted with [gid.gio2.types.SocketClientEvent.TlsHandshaking], and use that to
+          connect to #GTlsConnection::accept-certificate.
+  
+      Deprecated: Do not attempt to ignore validation errors.
+  */
+  @property void tlsValidationFlags(gid.gio2.types.TlsCertificateFlags propval) nothrow
+  {
+    setTlsValidationFlags(propval);
+  }
+
+  /**
+      Get `type` property.
+      Returns: The type to use for socket construction.
+  */
+  @property gid.gio2.types.SocketType type() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gio2.types.SocketType)("type");
+  }
+
+  /**
+      Set `type` property.
+      Params:
+        propval = The type to use for socket construction.
+  */
+  @property void type(gid.gio2.types.SocketType propval) nothrow
+  {
+    gid.gobject2.object.ObjectWrap.setProperty!(gid.gio2.types.SocketType)("type", propval);
+  }
+
+  /**
+      Creates a new #GSocketClient with the default options.
+      Returns: a #GSocketClient.
+            Free the returned object with [gid.gobject2.object.ObjectWrap.unref].
+  */
+  this() nothrow
+  {
+    GSocketClient* _cretval;
+    _cretval = g_socket_client_new();
+    this(_cretval, Yes.Take);
+  }
+
+  /**
+      Enable proxy protocols to be handled by the application. When the
+      indicated proxy protocol is returned by the #GProxyResolver,
+      #GSocketClient will consider this protocol as supported but will
+      not try to find a #GProxy instance to handle handshaking. The
+      application must check for this case by calling
+      [gid.gio2.socket_connection.SocketConnection.getRemoteAddress] on the returned
+      #GSocketConnection, and seeing if it's a #GProxyAddress of the
+      appropriate type, to determine whether or not it needs to handle
+      the proxy handshaking itself.
+      
+      This should be used for proxy protocols that are dialects of
+      another protocol such as HTTP proxy. It also allows cohabitation of
+      proxy protocols that are reused between protocols. A good example
+      is HTTP. It can be used to proxy HTTP, FTP and Gopher and can also
+      be use as generic socket proxy through the HTTP CONNECT method.
+      
+      When the proxy is detected as being an application proxy, TLS handshake
+      will be skipped. This is required to let the application do the proxy
+      specific handshake.
+  
+      Params:
+        protocol = The proxy protocol
+  */
+  void addApplicationProxy(string protocol) nothrow
+  {
+    const(char)* _protocol = protocol.toCString!(No.Malloc, No.Nullable);
+    g_socket_client_add_application_proxy(cast(GSocketClient*)this._cPtr, _protocol);
+  }
+
+  /**
+      Tries to resolve the connectable and make a network connection to it.
+      
+      Upon a successful connection, a new #GSocketConnection is constructed
+      and returned.  The caller owns this new object and must drop their
+      reference to it when finished with it.
+      
+      The type of the #GSocketConnection object returned depends on the type of
+      the underlying socket that is used. For instance, for a TCP/IP connection
+      it will be a #GTcpConnection.
+      
+      The socket created will be the same family as the address that the
+      connectable resolves to, unless family is set with [gid.gio2.socket_client.SocketClient.setFamily]
+      or indirectly via [gid.gio2.socket_client.SocketClient.setLocalAddress]. The socket type
+      defaults to [gid.gio2.types.SocketType.Stream] but can be set with
+      [gid.gio2.socket_client.SocketClient.setSocketType].
+      
+      If a local address is specified with [gid.gio2.socket_client.SocketClient.setLocalAddress] the
+      socket will be bound to this address before connecting.
+  
+      Params:
+        connectable = a #GSocketConnectable specifying the remote address.
+        cancellable = optional #GCancellable object, null to ignore.
+      Returns: a #GSocketConnection on success, null on error.
+      Throws: [ErrorWrap]
+  */
+  gid.gio2.socket_connection.SocketConnection connect(gid.gio2.socket_connectable.SocketConnectable connectable, gid.gio2.cancellable.Cancellable cancellable = null)
+  {
+    GSocketConnection* _cretval;
+    GError *_err;
+    _cretval = g_socket_client_connect(cast(GSocketClient*)this._cPtr, connectable ? cast(GSocketConnectable*)(cast(gid.gobject2.object.ObjectWrap)connectable)._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      This is the asynchronous version of [gid.gio2.socket_client.SocketClient.connect].
+      
+      You may wish to prefer the asynchronous version even in synchronous
+      command line programs because, since 2.60, it implements
+      [RFC 8305](https://tools.ietf.org/html/rfc8305) "Happy Eyeballs"
+      recommendations to work around long connection timeouts in networks
+      where IPv6 is broken by performing an IPv4 connection simultaneously
+      without waiting for IPv6 to time out, which is not supported by the
+      synchronous call. (This is not an API guarantee, and may change in
+      the future.)
+      
+      When the operation is finished callback will be
+      called. You can then call [gid.gio2.socket_client.SocketClient.connectFinish] to get
+      the result of the operation.
+  
+      Params:
+        connectable = a #GSocketConnectable specifying the remote address.
+        cancellable = a #GCancellable, or null
+        callback = a #GAsyncReadyCallback
+  */
+  void connectAsync(gid.gio2.socket_connectable.SocketConnectable connectable, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null) nothrow
+  {
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_socket_client_connect_async(cast(GSocketClient*)this._cPtr, connectable ? cast(GSocketConnectable*)(cast(gid.gobject2.object.ObjectWrap)connectable)._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Finishes an async connect operation. See [gid.gio2.socket_client.SocketClient.connectAsync]
+  
+      Params:
+        result = a #GAsyncResult.
+      Returns: a #GSocketConnection on success, null on error.
+      Throws: [ErrorWrap]
+  */
+  gid.gio2.socket_connection.SocketConnection connectFinish(gid.gio2.async_result.AsyncResult result)
+  {
+    GSocketConnection* _cretval;
+    GError *_err;
+    _cretval = g_socket_client_connect_finish(cast(GSocketClient*)this._cPtr, result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      This is a helper function for [gid.gio2.socket_client.SocketClient.connect].
+      
+      Attempts to create a TCP connection to the named host.
+      
+      host_and_port may be in any of a number of recognized formats; an IPv6
+      address, an IPv4 address, or a domain name (in which case a DNS
+      lookup is performed).  Quoting with [] is supported for all address
+      types.  A port override may be specified in the usual way with a
+      colon.  Ports may be given as decimal numbers or symbolic names (in
+      which case an /etc/services lookup is performed).
+      
+      If no port override is given in host_and_port then default_port will be
+      used as the port number to connect to.
+      
+      In general, host_and_port is expected to be provided by the user (allowing
+      them to give the hostname, and a port override if necessary) and
+      default_port is expected to be provided by the application.
+      
+      In the case that an IP address is given, a single connection
+      attempt is made.  In the case that a name is given, multiple
+      connection attempts may be made, in turn and according to the
+      number of address records in DNS, until a connection succeeds.
+      
+      Upon a successful connection, a new #GSocketConnection is constructed
+      and returned.  The caller owns this new object and must drop their
+      reference to it when finished with it.
+      
+      In the event of any failure (DNS error, service not found, no hosts
+      connectable) null is returned and error (if non-null) is set
+      accordingly.
+  
+      Params:
+        hostAndPort = the name and optionally port of the host to connect to
+        defaultPort = the default port to connect to
+        cancellable = a #GCancellable, or null
+      Returns: a #GSocketConnection on success, null on error.
+      Throws: [ErrorWrap]
+  */
+  gid.gio2.socket_connection.SocketConnection connectToHost(string hostAndPort, ushort defaultPort, gid.gio2.cancellable.Cancellable cancellable = null)
+  {
+    GSocketConnection* _cretval;
+    const(char)* _hostAndPort = hostAndPort.toCString!(No.Malloc, No.Nullable);
+    GError *_err;
+    _cretval = g_socket_client_connect_to_host(cast(GSocketClient*)this._cPtr, _hostAndPort, defaultPort, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      This is the asynchronous version of [gid.gio2.socket_client.SocketClient.connectToHost].
+      
+      When the operation is finished callback will be
+      called. You can then call [gid.gio2.socket_client.SocketClient.connectToHostFinish] to get
+      the result of the operation.
+  
+      Params:
+        hostAndPort = the name and optionally the port of the host to connect to
+        defaultPort = the default port to connect to
+        cancellable = a #GCancellable, or null
+        callback = a #GAsyncReadyCallback
+  */
+  void connectToHostAsync(string hostAndPort, ushort defaultPort, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null) nothrow
+  {
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    const(char)* _hostAndPort = hostAndPort.toCString!(No.Malloc, No.Nullable);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_socket_client_connect_to_host_async(cast(GSocketClient*)this._cPtr, _hostAndPort, defaultPort, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Finishes an async connect operation. See [gid.gio2.socket_client.SocketClient.connectToHostAsync]
+  
+      Params:
+        result = a #GAsyncResult.
+      Returns: a #GSocketConnection on success, null on error.
+      Throws: [ErrorWrap]
+  */
+  gid.gio2.socket_connection.SocketConnection connectToHostFinish(gid.gio2.async_result.AsyncResult result)
+  {
+    GSocketConnection* _cretval;
+    GError *_err;
+    _cretval = g_socket_client_connect_to_host_finish(cast(GSocketClient*)this._cPtr, result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Attempts to create a TCP connection to a service.
+      
+      This call looks up the SRV record for service at domain for the
+      "tcp" protocol.  It then attempts to connect, in turn, to each of
+      the hosts providing the service until either a connection succeeds
+      or there are no hosts remaining.
+      
+      Upon a successful connection, a new #GSocketConnection is constructed
+      and returned.  The caller owns this new object and must drop their
+      reference to it when finished with it.
+      
+      In the event of any failure (DNS error, service not found, no hosts
+      connectable) null is returned and error (if non-null) is set
+      accordingly.
+  
+      Params:
+        domain = a domain name
+        service = the name of the service to connect to
+        cancellable = a #GCancellable, or null
+      Returns: a #GSocketConnection if successful, or null on error
+      Throws: [ErrorWrap]
+  */
+  gid.gio2.socket_connection.SocketConnection connectToService(string domain, string service, gid.gio2.cancellable.Cancellable cancellable = null)
+  {
+    GSocketConnection* _cretval;
+    const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
+    const(char)* _service = service.toCString!(No.Malloc, No.Nullable);
+    GError *_err;
+    _cretval = g_socket_client_connect_to_service(cast(GSocketClient*)this._cPtr, _domain, _service, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      This is the asynchronous version of
+      [gid.gio2.socket_client.SocketClient.connectToService].
+  
+      Params:
+        domain = a domain name
+        service = the name of the service to connect to
+        cancellable = a #GCancellable, or null
+        callback = a #GAsyncReadyCallback
+  */
+  void connectToServiceAsync(string domain, string service, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null) nothrow
+  {
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
+    const(char)* _service = service.toCString!(No.Malloc, No.Nullable);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_socket_client_connect_to_service_async(cast(GSocketClient*)this._cPtr, _domain, _service, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Finishes an async connect operation. See [gid.gio2.socket_client.SocketClient.connectToServiceAsync]
+  
+      Params:
+        result = a #GAsyncResult.
+      Returns: a #GSocketConnection on success, null on error.
+      Throws: [ErrorWrap]
+  */
+  gid.gio2.socket_connection.SocketConnection connectToServiceFinish(gid.gio2.async_result.AsyncResult result)
+  {
+    GSocketConnection* _cretval;
+    GError *_err;
+    _cretval = g_socket_client_connect_to_service_finish(cast(GSocketClient*)this._cPtr, result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      This is a helper function for [gid.gio2.socket_client.SocketClient.connect].
+      
+      Attempts to create a TCP connection with a network URI.
+      
+      uri may be any valid URI containing an "authority" (hostname/port)
+      component. If a port is not specified in the URI, default_port
+      will be used. TLS will be negotiated if #GSocketClient:tls is true.
+      (#GSocketClient does not know to automatically assume TLS for
+      certain URI schemes.)
+      
+      Using this rather than [gid.gio2.socket_client.SocketClient.connect] or
+      [gid.gio2.socket_client.SocketClient.connectToHost] allows #GSocketClient to
+      determine when to use application-specific proxy protocols.
+      
+      Upon a successful connection, a new #GSocketConnection is constructed
+      and returned.  The caller owns this new object and must drop their
+      reference to it when finished with it.
+      
+      In the event of any failure (DNS error, service not found, no hosts
+      connectable) null is returned and error (if non-null) is set
+      accordingly.
+  
+      Params:
+        uri = A network URI
+        defaultPort = the default port to connect to
+        cancellable = a #GCancellable, or null
+      Returns: a #GSocketConnection on success, null on error.
+      Throws: [ErrorWrap]
+  */
+  gid.gio2.socket_connection.SocketConnection connectToUri(string uri, ushort defaultPort, gid.gio2.cancellable.Cancellable cancellable = null)
+  {
+    GSocketConnection* _cretval;
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
+    GError *_err;
+    _cretval = g_socket_client_connect_to_uri(cast(GSocketClient*)this._cPtr, _uri, defaultPort, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      This is the asynchronous version of [gid.gio2.socket_client.SocketClient.connectToUri].
+      
+      When the operation is finished callback will be
+      called. You can then call [gid.gio2.socket_client.SocketClient.connectToUriFinish] to get
+      the result of the operation.
+  
+      Params:
+        uri = a network uri
+        defaultPort = the default port to connect to
+        cancellable = a #GCancellable, or null
+        callback = a #GAsyncReadyCallback
+  */
+  void connectToUriAsync(string uri, ushort defaultPort, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null) nothrow
+  {
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    g_socket_client_connect_to_uri_async(cast(GSocketClient*)this._cPtr, _uri, defaultPort, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Finishes an async connect operation. See [gid.gio2.socket_client.SocketClient.connectToUriAsync]
+  
+      Params:
+        result = a #GAsyncResult.
+      Returns: a #GSocketConnection on success, null on error.
+      Throws: [ErrorWrap]
+  */
+  gid.gio2.socket_connection.SocketConnection connectToUriFinish(gid.gio2.async_result.AsyncResult result)
+  {
+    GSocketConnection* _cretval;
+    GError *_err;
+    _cretval = g_socket_client_connect_to_uri_finish(cast(GSocketClient*)this._cPtr, result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.socket_connection.SocketConnection)(cast(GSocketConnection*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the proxy enable state; see [gid.gio2.socket_client.SocketClient.setEnableProxy]
+      Returns: whether proxying is enabled
+  */
+  bool getEnableProxy() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_socket_client_get_enable_proxy(cast(GSocketClient*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the socket family of the socket client.
+      
+      See [gid.gio2.socket_client.SocketClient.setFamily] for details.
+      Returns: a #GSocketFamily
+  */
+  gid.gio2.types.SocketFamily getFamily() nothrow
+  {
+    GSocketFamily _cretval;
+    _cretval = g_socket_client_get_family(cast(GSocketClient*)this._cPtr);
+    gid.gio2.types.SocketFamily _retval = cast(gid.gio2.types.SocketFamily)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the local address of the socket client.
+      
+      See [gid.gio2.socket_client.SocketClient.setLocalAddress] for details.
+      Returns: a #GSocketAddress or null. Do not free.
+  */
+  gid.gio2.socket_address.SocketAddress getLocalAddress() nothrow
+  {
+    GSocketAddress* _cretval;
+    _cretval = g_socket_client_get_local_address(cast(GSocketClient*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the protocol name type of the socket client.
+      
+      See [gid.gio2.socket_client.SocketClient.setProtocol] for details.
+      Returns: a #GSocketProtocol
+  */
+  gid.gio2.types.SocketProtocol getProtocol() nothrow
+  {
+    GSocketProtocol _cretval;
+    _cretval = g_socket_client_get_protocol(cast(GSocketClient*)this._cPtr);
+    gid.gio2.types.SocketProtocol _retval = cast(gid.gio2.types.SocketProtocol)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the #GProxyResolver being used by client. Normally, this will
+      be the resolver returned by [gid.gio2.proxy_resolver.ProxyResolver.getDefault], but you
+      can override it with [gid.gio2.socket_client.SocketClient.setProxyResolver].
+      Returns: The #GProxyResolver being used by
+          client.
+  */
+  gid.gio2.proxy_resolver.ProxyResolver getProxyResolver() nothrow
+  {
+    GProxyResolver* _cretval;
+    _cretval = g_socket_client_get_proxy_resolver(cast(GSocketClient*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.proxy_resolver.ProxyResolver)(cast(GProxyResolver*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the socket type of the socket client.
+      
+      See [gid.gio2.socket_client.SocketClient.setSocketType] for details.
+      Returns: a #GSocketFamily
+  */
+  gid.gio2.types.SocketType getSocketType() nothrow
+  {
+    GSocketType _cretval;
+    _cretval = g_socket_client_get_socket_type(cast(GSocketClient*)this._cPtr);
+    gid.gio2.types.SocketType _retval = cast(gid.gio2.types.SocketType)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the I/O timeout time for sockets created by client.
+      
+      See [gid.gio2.socket_client.SocketClient.setTimeout] for details.
+      Returns: the timeout in seconds
+  */
+  uint getTimeout() nothrow
+  {
+    uint _retval;
+    _retval = g_socket_client_get_timeout(cast(GSocketClient*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether client creates TLS connections. See
+      [gid.gio2.socket_client.SocketClient.setTls] for details.
+      Returns: whether client uses TLS
+  */
+  bool getTls() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_socket_client_get_tls(cast(GSocketClient*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the TLS validation flags used creating TLS connections via
+      client.
+      
+      This function does not work as originally designed and is impossible
+      to use correctly. See #GSocketClient:tls-validation-flags for more
+      information.
+      Returns: the TLS validation flags
+  
+      Deprecated: Do not attempt to ignore validation errors.
+  */
+  gid.gio2.types.TlsCertificateFlags getTlsValidationFlags() nothrow
+  {
+    GTlsCertificateFlags _cretval;
+    _cretval = g_socket_client_get_tls_validation_flags(cast(GSocketClient*)this._cPtr);
+    gid.gio2.types.TlsCertificateFlags _retval = cast(gid.gio2.types.TlsCertificateFlags)_cretval;
+    return _retval;
+  }
+
+  /**
+      Sets whether or not client attempts to make connections via a
+      proxy server. When enabled (the default), #GSocketClient will use a
+      #GProxyResolver to determine if a proxy protocol such as SOCKS is
+      needed, and automatically do the necessary proxy negotiation.
+      
+      See also [gid.gio2.socket_client.SocketClient.setProxyResolver].
+  
+      Params:
+        enable = whether to enable proxies
+  */
+  void setEnableProxy(bool enable) nothrow
+  {
+    g_socket_client_set_enable_proxy(cast(GSocketClient*)this._cPtr, enable);
+  }
+
+  /**
+      Sets the socket family of the socket client.
+      If this is set to something other than [gid.gio2.types.SocketFamily.Invalid]
+      then the sockets created by this object will be of the specified
+      family.
+      
+      This might be useful for instance if you want to force the local
+      connection to be an ipv4 socket, even though the address might
+      be an ipv6 mapped to ipv4 address.
+  
+      Params:
+        family = a #GSocketFamily
+  */
+  void setFamily(gid.gio2.types.SocketFamily family) nothrow
+  {
+    g_socket_client_set_family(cast(GSocketClient*)this._cPtr, family);
+  }
+
+  /**
+      Sets the local address of the socket client.
+      The sockets created by this object will bound to the
+      specified address (if not null) before connecting.
+      
+      This is useful if you want to ensure that the local
+      side of the connection is on a specific port, or on
+      a specific interface.
+  
+      Params:
+        address = a #GSocketAddress, or null
+  */
+  void setLocalAddress(gid.gio2.socket_address.SocketAddress address = null) nothrow
+  {
+    g_socket_client_set_local_address(cast(GSocketClient*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the protocol of the socket client.
+      The sockets created by this object will use of the specified
+      protocol.
+      
+      If protocol is [gid.gio2.types.SocketProtocol.Default] that means to use the default
+      protocol for the socket family and type.
+  
+      Params:
+        protocol = a #GSocketProtocol
+  */
+  void setProtocol(gid.gio2.types.SocketProtocol protocol) nothrow
+  {
+    g_socket_client_set_protocol(cast(GSocketClient*)this._cPtr, protocol);
+  }
+
+  /**
+      Overrides the #GProxyResolver used by client. You can call this if
+      you want to use specific proxies, rather than using the system
+      default proxy settings.
+      
+      Note that whether or not the proxy resolver is actually used
+      depends on the setting of #GSocketClient:enable-proxy, which is not
+      changed by this function (but which is true by default)
+  
+      Params:
+        proxyResolver = a #GProxyResolver, or null for the
+            default.
+  */
+  void setProxyResolver(gid.gio2.proxy_resolver.ProxyResolver proxyResolver = null) nothrow
+  {
+    g_socket_client_set_proxy_resolver(cast(GSocketClient*)this._cPtr, proxyResolver ? cast(GProxyResolver*)(cast(gid.gobject2.object.ObjectWrap)proxyResolver)._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the socket type of the socket client.
+      The sockets created by this object will be of the specified
+      type.
+      
+      It doesn't make sense to specify a type of [gid.gio2.types.SocketType.Datagram],
+      as GSocketClient is used for connection oriented services.
+  
+      Params:
+        type = a #GSocketType
+  */
+  void setSocketType(gid.gio2.types.SocketType type) nothrow
+  {
+    g_socket_client_set_socket_type(cast(GSocketClient*)this._cPtr, type);
+  }
+
+  /**
+      Sets the I/O timeout for sockets created by client. timeout is a
+      time in seconds, or 0 for no timeout (the default).
+      
+      The timeout value affects the initial connection attempt as well,
+      so setting this may cause calls to [gid.gio2.socket_client.SocketClient.connect], etc,
+      to fail with [gid.gio2.types.IOErrorEnum.TimedOut].
+  
+      Params:
+        timeout = the timeout
+  */
+  void setTimeout(uint timeout) nothrow
+  {
+    g_socket_client_set_timeout(cast(GSocketClient*)this._cPtr, timeout);
+  }
+
+  /**
+      Sets whether client creates TLS (aka SSL) connections. If tls is
+      true, client will wrap its connections in a #GTlsClientConnection
+      and perform a TLS handshake when connecting.
+      
+      Note that since #GSocketClient must return a #GSocketConnection,
+      but #GTlsClientConnection is not a #GSocketConnection, this
+      actually wraps the resulting #GTlsClientConnection in a
+      #GTcpWrapperConnection when returning it. You can use
+      [gid.gio2.tcp_wrapper_connection.TcpWrapperConnection.getBaseIoStream] on the return value
+      to extract the #GTlsClientConnection.
+      
+      If you need to modify the behavior of the TLS handshake (eg, by
+      setting a client-side certificate to use, or connecting to the
+      #GTlsConnection::accept-certificate signal), you can connect to
+      client's #GSocketClient::event signal and wait for it to be
+      emitted with [gid.gio2.types.SocketClientEvent.TlsHandshaking], which will give you
+      a chance to see the #GTlsClientConnection before the handshake
+      starts.
+  
+      Params:
+        tls = whether to use TLS
+  */
+  void setTls(bool tls) nothrow
+  {
+    g_socket_client_set_tls(cast(GSocketClient*)this._cPtr, tls);
+  }
+
+  /**
+      Sets the TLS validation flags used when creating TLS connections
+      via client. The default value is [gid.gio2.types.TlsCertificateFlags.ValidateAll].
+      
+      This function does not work as originally designed and is impossible
+      to use correctly. See #GSocketClient:tls-validation-flags for more
+      information.
+  
+      Params:
+        flags = the validation flags
+  
+      Deprecated: Do not attempt to ignore validation errors.
+  */
+  void setTlsValidationFlags(gid.gio2.types.TlsCertificateFlags flags) nothrow
+  {
+    g_socket_client_set_tls_validation_flags(cast(GSocketClient*)this._cPtr, flags);
+  }
+
+  /**
+      Connect to `Event` signal.
+  
+      Emitted when client's activity on connectable changes state.
+        Among other things, this can be used to provide progress
+        information about a network connection in the UI. The meanings of
+        the different event values are as follows:
+        
+        - [gid.gio2.types.SocketClientEvent.Resolving]: client is about to look up connectable
+          in DNS. connection will be null.
+        
+        - [gid.gio2.types.SocketClientEvent.Resolved]:  client has successfully resolved
+          connectable in DNS. connection will be null.
+        
+        - [gid.gio2.types.SocketClientEvent.Connecting]: client is about to make a connection
+          to a remote host; either a proxy server or the destination server
+          itself. connection is the #GSocketConnection, which is not yet
+          connected.  Since GLib 2.40, you can access the remote
+          address via [gid.gio2.socket_connection.SocketConnection.getRemoteAddress].
+        
+        - [gid.gio2.types.SocketClientEvent.Connected]: client has successfully connected
+          to a remote host. connection is the connected #GSocketConnection.
+        
+        - [gid.gio2.types.SocketClientEvent.ProxyNegotiating]: client is about to negotiate
+          with a proxy to get it to connect to connectable. connection is
+          the #GSocketConnection to the proxy server.
+        
+        - [gid.gio2.types.SocketClientEvent.ProxyNegotiated]: client has negotiated a
+          connection to connectable through a proxy server. connection is
+          the stream returned from [gid.gio2.proxy.Proxy.connect], which may or may not
+          be a #GSocketConnection.
+        
+        - [gid.gio2.types.SocketClientEvent.TlsHandshaking]: client is about to begin a TLS
+          handshake. connection is a #GTlsClientConnection.
+        
+        - [gid.gio2.types.SocketClientEvent.TlsHandshaked]: client has successfully completed
+          the TLS handshake. connection is a #GTlsClientConnection.
+        
+        - [gid.gio2.types.SocketClientEvent.Complete]: client has either successfully connected
+          to connectable (in which case connection is the #GSocketConnection
+          that it will be returning to the caller) or has failed (in which
+          case connection is null and the client is about to return an error).
+        
+        Each event except [gid.gio2.types.SocketClientEvent.Complete] may be emitted
+        multiple times (or not at all) for a given connectable (in
+        particular, if client ends up attempting to connect to more than
+        one address). However, if client emits the #GSocketClient::event
+        signal at all for a given connectable, then it will always emit
+        it with [gid.gio2.types.SocketClientEvent.Complete] when it is done.
+        
+        Note that there may be additional #GSocketClientEvent values in
+        the future; unrecognized event values should be ignored.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gio2.types.SocketClientEvent event, gid.gio2.socket_connectable.SocketConnectable connectable, gid.gio2.iostream.IOStream connection, gid.gio2.socket_client.SocketClient socketClient)`
+  
+          `event` the event that is occurring (optional)
+  
+          `connectable` the #GSocketConnectable that event is occurring on (optional)
+  
+          `connection` the current representation of the connection (optional)
+  
+          `socketClient` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectEvent(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.gio2.types.SocketClientEvent)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gio2.socket_connectable.SocketConnectable)))
+  && (Parameters!T.length < 3 || (ParameterStorageClassTuple!T[2] == ParameterStorageClass.none && is(Parameters!T[2] : gid.gio2.iostream.IOStream)))
+  && (Parameters!T.length < 4 || (ParameterStorageClassTuple!T[3] == ParameterStorageClass.none && is(Parameters!T[3] : gid.gio2.socket_client.SocketClient)))
+  && Parameters!T.length < 5)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 4, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[2]);
+
+      static if (Parameters!T.length > 2)
+        _paramTuple[2] = getVal!(Parameters!T[2])(&_paramVals[3]);
+
+      static if (Parameters!T.length > 3)
+        _paramTuple[3] = getVal!(Parameters!T[3])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.socket_client.SocketClient.event");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("event", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gio2.socket_client.SocketClient]
+class SocketClientGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T
+{
+
+  /**
+      Set `enableProxy` property.
+      Params:
+        propval = Enable proxy support.
+      Returns: Builder instance for fluent chaining
+  */
+  T enableProxy(bool propval) nothrow
+  {
+    return setProperty("enable-proxy", propval);
+  }
+
+  /**
+      Set `family` property.
+      Params:
+        propval = The address family to use for socket construction.
+      Returns: Builder instance for fluent chaining
+  */
+  T family(gid.gio2.types.SocketFamily propval) nothrow
+  {
+    return setProperty("family", propval);
+  }
+
+  /**
+      Set `localAddress` property.
+      Params:
+        propval = The local address constructed sockets will be bound to.
+      Returns: Builder instance for fluent chaining
+  */
+  T localAddress(gid.gio2.socket_address.SocketAddress propval) nothrow
+  {
+    return setProperty("local-address", propval);
+  }
+
+  /**
+      Set `protocol` property.
+      Params:
+        propval = The protocol to use for socket construction, or `0` for default.
+      Returns: Builder instance for fluent chaining
+  */
+  T protocol(gid.gio2.types.SocketProtocol propval) nothrow
+  {
+    return setProperty("protocol", propval);
+  }
+
+  /**
+      Set `proxyResolver` property.
+      Params:
+        propval = The proxy resolver to use
+      Returns: Builder instance for fluent chaining
+  */
+  T proxyResolver(gid.gio2.proxy_resolver.ProxyResolver propval) nothrow
+  {
+    return setProperty("proxy-resolver", propval);
+  }
+
+  /**
+      Set `timeout` property.
+      Params:
+        propval = The I/O timeout for sockets, in seconds, or `0` for none.
+      Returns: Builder instance for fluent chaining
+  */
+  T timeout(uint propval) nothrow
+  {
+    return setProperty("timeout", propval);
+  }
+
+  /**
+      Set `tls` property.
+      Params:
+        propval = Whether to create TLS connections.
+      Returns: Builder instance for fluent chaining
+  */
+  T tls(bool propval) nothrow
+  {
+    return setProperty("tls", propval);
+  }
+
+  /**
+      Set `tlsValidationFlags` property.
+      Params:
+        propval = The TLS validation flags used when creating TLS connections. The
+          default value is [gid.gio2.types.TlsCertificateFlags.ValidateAll].
+          
+          GLib guarantees that if certificate verification fails, at least one
+          flag will be set, but it does not guarantee that all possible flags
+          will be set. Accordingly, you may not safely decide to ignore any
+          particular type of error. For example, it would be incorrect to mask
+          [gid.gio2.types.TlsCertificateFlags.Expired] if you want to allow expired certificates,
+          because this could potentially be the only error flag set even if
+          other problems exist with the certificate. Therefore, there is no
+          safe way to use this property. This is not a horrible problem,
+          though, because you should not be attempting to ignore validation
+          errors anyway. If you really must ignore TLS certificate errors,
+          connect to the #GSocketClient::event signal, wait for it to be
+          emitted with [gid.gio2.types.SocketClientEvent.TlsHandshaking], and use that to
+          connect to #GTlsConnection::accept-certificate.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: Do not attempt to ignore validation errors.
+  */
+  T tlsValidationFlags(gid.gio2.types.TlsCertificateFlags propval) nothrow
+  {
+    return setProperty("tls-validation-flags", propval);
+  }
+
+  /**
+      Set `type` property.
+      Params:
+        propval = The type to use for socket construction.
+      Returns: Builder instance for fluent chaining
+  */
+  T type(gid.gio2.types.SocketType propval) nothrow
+  {
+    return setProperty("type", propval);
+  }
+}
+
+/// Fluent builder for [gid.gio2.socket_client.SocketClient]
+final class SocketClientGidBuilder : SocketClientGidBuilderImpl!SocketClientGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  SocketClient build() nothrow
+  {
+    return new SocketClient(cast(void*)createGObject(SocketClient._getGType), Yes.Take);
+  }
+}

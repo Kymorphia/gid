@@ -1,0 +1,277 @@
+/// Module for [Hyperlink] class
+module gid.atk1.hyperlink;
+
+public import gid.core.basictypes;
+import gid.atk1.action;
+import gid.atk1.action_mixin;
+import gid.atk1.c.functions;
+import gid.atk1.c.types;
+import gid.atk1.object;
+import gid.atk1.types;
+import gid.core.utils;
+import gid.gobject2.dclosure;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+
+/**
+    An ATK object which encapsulates a link or set of links in a hypertext document.
+    
+    An ATK object which encapsulates a link or set of links (for
+    instance in the case of client-side image maps) in a hypertext
+    document.  It may implement the AtkAction interface.  AtkHyperlink
+    may also be used to refer to inline embedded content, since it
+    allows specification of a start and end offset within the host
+    AtkHypertext object.
+*/
+class Hyperlink : gid.gobject2.object.ObjectWrap, gid.atk1.action.Action
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())atk_hyperlink_get_type != &gidSymbolNotFound ? atk_hyperlink_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AtkHyperlink";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Hyperlink self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.atk1.hyperlink.Hyperlink]
+      Returns: New builder object
+  */
+  static HyperlinkGidBuilder builder() nothrow
+  {
+    return new HyperlinkGidBuilder;
+  }
+
+  /** */
+  @property int endIndex() nothrow
+  {
+    return getEndIndex();
+  }
+
+  /** */
+  @property int numberOfAnchors() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(int)("number-of-anchors");
+  }
+
+  /**
+      Get `selectedLink` property.
+      Returns: Selected link
+  
+      Deprecated: Please use ATK_STATE_FOCUSABLE for all links, and
+        ATK_STATE_FOCUSED for focused links.
+  */
+  @property bool selectedLink() nothrow
+  {
+    return isSelectedLink();
+  }
+
+  /** */
+  @property int startIndex() nothrow
+  {
+    return getStartIndex();
+  }
+
+  mixin ActionT!();
+
+  /**
+      Gets the index with the hypertext document at which this link ends.
+      Returns: the index with the hypertext document at which this link ends
+  */
+  int getEndIndex() nothrow
+  {
+    int _retval;
+    _retval = atk_hyperlink_get_end_index(cast(AtkHyperlink*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the number of anchors associated with this hyperlink.
+      Returns: the number of anchors associated with this hyperlink
+  */
+  int getNAnchors() nothrow
+  {
+    int _retval;
+    _retval = atk_hyperlink_get_n_anchors(cast(AtkHyperlink*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the item associated with this hyperlinks nth anchor.
+      For instance, the returned #AtkObject will implement #AtkText
+      if link_ is a text hyperlink, #AtkImage if link_ is an image
+      hyperlink etc.
+      
+      Multiple anchors are primarily used by client-side image maps.
+  
+      Params:
+        i = a (zero-index) integer specifying the desired anchor
+      Returns: an #AtkObject associated with this hyperlinks
+        i-th anchor
+  */
+  gid.atk1.object.ObjectWrap getObject(int i) nothrow
+  {
+    AtkObject* _cretval;
+    _cretval = atk_hyperlink_get_object(cast(AtkHyperlink*)this._cPtr, i);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.atk1.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the index with the hypertext document at which this link begins.
+      Returns: the index with the hypertext document at which this link begins
+  */
+  int getStartIndex() nothrow
+  {
+    int _retval;
+    _retval = atk_hyperlink_get_start_index(cast(AtkHyperlink*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Get a the URI associated with the anchor specified
+      by `i` of link_.
+      
+      Multiple anchors are primarily used by client-side image maps.
+  
+      Params:
+        i = a (zero-index) integer specifying the desired anchor
+      Returns: a string specifying the URI
+  */
+  string getUri(int i) nothrow
+  {
+    char* _cretval;
+    _cretval = atk_hyperlink_get_uri(cast(AtkHyperlink*)this._cPtr, i);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Indicates whether the link currently displays some or all of its
+                content inline.  Ordinary HTML links will usually return
+                false, but an inline &lt;src&gt; HTML element will return
+                true.
+      Returns: whether or not this link displays its content inline.
+  */
+  bool isInline() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)atk_hyperlink_is_inline(cast(AtkHyperlink*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Determines whether this AtkHyperlink is selected
+      Returns: True if the AtkHyperlink is selected, False otherwise
+  
+      Deprecated: Please use ATK_STATE_FOCUSABLE for all links,
+        and ATK_STATE_FOCUSED for focused links.
+  */
+  bool isSelectedLink() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)atk_hyperlink_is_selected_link(cast(AtkHyperlink*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Since the document that a link is associated with may have changed
+      this method returns true if the link is still valid (with
+      respect to the document it references) and false otherwise.
+      Returns: whether or not this link is still valid
+  */
+  bool isValid() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)atk_hyperlink_is_valid(cast(AtkHyperlink*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Connect to `LinkActivated` signal.
+  
+      The signal link-activated is emitted when a link is activated.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.atk1.hyperlink.Hyperlink hyperlink)`
+  
+          `hyperlink` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectLinkActivated(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] : gid.atk1.hyperlink.Hyperlink)))
+  && Parameters!T.length < 2)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 1, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.atk1.hyperlink.Hyperlink.linkActivated");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("link-activated", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.atk1.hyperlink.Hyperlink]
+class HyperlinkGidBuilderImpl(T) : gid.gobject2.object.ObjectWrapGidBuilderImpl!T, gid.atk1.action.ActionGidBuilderImpl!T
+{
+
+  mixin ActionGidBuilderT!();
+}
+
+/// Fluent builder for [gid.atk1.hyperlink.Hyperlink]
+final class HyperlinkGidBuilder : HyperlinkGidBuilderImpl!HyperlinkGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Hyperlink build() nothrow
+  {
+    return new Hyperlink(cast(void*)createGObject(Hyperlink._getGType), Yes.Take);
+  }
+}

@@ -1,0 +1,253 @@
+/// Module for [Plane] class
+module gid.graphene1.plane;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.boxed;
+import gid.graphene1.c.functions;
+import gid.graphene1.c.types;
+import gid.graphene1.matrix;
+import gid.graphene1.point3_d;
+import gid.graphene1.types;
+import gid.graphene1.vec3;
+import gid.graphene1.vec4;
+
+/**
+    A 2D plane that extends infinitely in a 3D volume.
+    
+    The contents of the [gid.graphene1.plane.Plane] are private, and should not be
+    modified directly.
+*/
+class Plane : gid.gobject2.boxed.BoxedWrap!(graphene_plane_get_type)
+{
+  /**
+      Create a `plane.Plane` boxed type.
+  */
+  this() nothrow
+  {
+    super(boxedNew!graphene_plane_t(_getGType), Yes.Take);
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Plane self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Allocates a new #graphene_plane_t structure.
+      
+      The contents of the returned structure are undefined.
+      Returns: the newly allocated #graphene_plane_t.
+          Use [gid.graphene1.plane.Plane.free] to free the resources allocated by
+          this function
+  */
+  static gid.graphene1.plane.Plane alloc() nothrow
+  {
+    graphene_plane_t* _cretval;
+    _cretval = graphene_plane_alloc();
+    auto _retval = _cretval ? new gid.graphene1.plane.Plane(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Computes the distance of `p`oint from a #graphene_plane_t.
+  
+      Params:
+        point = a #graphene_point3d_t
+      Returns: the distance of the given #graphene_point3d_t from the plane
+  */
+  float distance(gid.graphene1.point3_d.Point3D point) nothrow
+  {
+    float _retval;
+    _retval = graphene_plane_distance(cast(const(graphene_plane_t)*)this._cPtr, cast(const(graphene_point3d_t)*)&point);
+    return _retval;
+  }
+
+  /**
+      Checks whether the two given #graphene_plane_t are equal.
+  
+      Params:
+        b = a #graphene_plane_t
+      Returns: `true` if the given planes are equal
+  */
+  bool equal(gid.graphene1.plane.Plane b) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)graphene_plane_equal(cast(const(graphene_plane_t)*)this._cPtr, b ? cast(const(graphene_plane_t)*)b._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Retrieves the distance along the normal vector of the
+      given #graphene_plane_t from the origin.
+      Returns: the constant value of the plane
+  */
+  float getConstant() nothrow
+  {
+    float _retval;
+    _retval = graphene_plane_get_constant(cast(const(graphene_plane_t)*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves the normal vector pointing towards the origin of the
+      given #graphene_plane_t.
+  
+      Params:
+        normal = return location for the normal vector
+  */
+  void getNormal(out gid.graphene1.vec3.Vec3 normal) nothrow
+  {
+    auto _normal = boxedNew!graphene_vec3_t(gid.graphene1.vec3.Vec3._getGType);
+    graphene_plane_get_normal(cast(const(graphene_plane_t)*)this._cPtr, _normal);
+    normal = new gid.graphene1.vec3.Vec3(cast(void*)_normal, Yes.Take);
+  }
+
+  /**
+      Initializes the given #graphene_plane_t using the given normal vector
+      and constant values.
+  
+      Params:
+        normal = a unit length normal vector defining the plane
+            pointing towards the origin; if unset, we use the X axis by default
+        constant = the distance from the origin to the plane along the
+            normal vector; the sign determines the half-space occupied by the
+            plane
+      Returns: the initialized plane
+  */
+  gid.graphene1.plane.Plane init_(gid.graphene1.vec3.Vec3 normal, float constant) nothrow
+  {
+    graphene_plane_t* _cretval;
+    _cretval = graphene_plane_init(cast(graphene_plane_t*)this._cPtr, normal ? cast(const(graphene_vec3_t)*)normal._cPtr(No.Dup) : null, constant);
+    auto _retval = _cretval ? new gid.graphene1.plane.Plane(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Initializes the given #graphene_plane_t using the normal
+      vector and constant of another #graphene_plane_t.
+  
+      Params:
+        src = a #graphene_plane_t
+      Returns: the initialized plane
+  */
+  gid.graphene1.plane.Plane initFromPlane(gid.graphene1.plane.Plane src) nothrow
+  {
+    graphene_plane_t* _cretval;
+    _cretval = graphene_plane_init_from_plane(cast(graphene_plane_t*)this._cPtr, src ? cast(const(graphene_plane_t)*)src._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gid.graphene1.plane.Plane(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Initializes the given #graphene_plane_t using the given normal vector
+      and an arbitrary co-planar point.
+  
+      Params:
+        normal = a normal vector defining the plane pointing towards the origin
+        point = a #graphene_point3d_t
+      Returns: the initialized plane
+  */
+  gid.graphene1.plane.Plane initFromPoint(gid.graphene1.vec3.Vec3 normal, gid.graphene1.point3_d.Point3D point) nothrow
+  {
+    graphene_plane_t* _cretval;
+    _cretval = graphene_plane_init_from_point(cast(graphene_plane_t*)this._cPtr, normal ? cast(const(graphene_vec3_t)*)normal._cPtr(No.Dup) : null, cast(const(graphene_point3d_t)*)&point);
+    auto _retval = _cretval ? new gid.graphene1.plane.Plane(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Initializes the given #graphene_plane_t using the 3 provided co-planar
+      points.
+      
+      The winding order is counter-clockwise, and determines which direction
+      the normal vector will point.
+  
+      Params:
+        a = a #graphene_point3d_t
+        b = a #graphene_point3d_t
+        c = a #graphene_point3d_t
+      Returns: the initialized plane
+  */
+  gid.graphene1.plane.Plane initFromPoints(gid.graphene1.point3_d.Point3D a, gid.graphene1.point3_d.Point3D b, gid.graphene1.point3_d.Point3D c) nothrow
+  {
+    graphene_plane_t* _cretval;
+    _cretval = graphene_plane_init_from_points(cast(graphene_plane_t*)this._cPtr, cast(const(graphene_point3d_t)*)&a, cast(const(graphene_point3d_t)*)&b, cast(const(graphene_point3d_t)*)&c);
+    auto _retval = _cretval ? new gid.graphene1.plane.Plane(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Initializes the given #graphene_plane_t using the components of
+      the given #graphene_vec4_t vector.
+  
+      Params:
+        src = a #graphene_vec4_t containing the normal vector in its first
+            three components, and the distance in its fourth component
+      Returns: the initialized plane
+  */
+  gid.graphene1.plane.Plane initFromVec4(gid.graphene1.vec4.Vec4 src) nothrow
+  {
+    graphene_plane_t* _cretval;
+    _cretval = graphene_plane_init_from_vec4(cast(graphene_plane_t*)this._cPtr, src ? cast(const(graphene_vec4_t)*)src._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gid.graphene1.plane.Plane(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Negates the normal vector and constant of a #graphene_plane_t, effectively
+      mirroring the plane across the origin.
+  
+      Params:
+        res = return location for the negated plane
+  */
+  void negate(out gid.graphene1.plane.Plane res) nothrow
+  {
+    auto _res = boxedNew!graphene_plane_t(gid.graphene1.plane.Plane._getGType);
+    graphene_plane_negate(cast(const(graphene_plane_t)*)this._cPtr, _res);
+    res = new gid.graphene1.plane.Plane(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Normalizes the vector of the given #graphene_plane_t,
+      and adjusts the constant accordingly.
+  
+      Params:
+        res = return location for the normalized plane
+  */
+  void normalize(out gid.graphene1.plane.Plane res) nothrow
+  {
+    auto _res = boxedNew!graphene_plane_t(gid.graphene1.plane.Plane._getGType);
+    graphene_plane_normalize(cast(const(graphene_plane_t)*)this._cPtr, _res);
+    res = new gid.graphene1.plane.Plane(cast(void*)_res, Yes.Take);
+  }
+
+  /**
+      Transforms a #graphene_plane_t `p` using the given matrix
+      and normal_matrix.
+      
+      If normal_matrix is null, a transformation matrix for the plane
+      normal will be computed from matrix. If you are transforming
+      multiple planes using the same matrix it's recommended to compute
+      the normal matrix beforehand to avoid incurring in the cost of
+      recomputing it every time.
+  
+      Params:
+        matrix = a #graphene_matrix_t
+        normalMatrix = a #graphene_matrix_t
+        res = the transformed plane
+  */
+  void transform(gid.graphene1.matrix.Matrix matrix, gid.graphene1.matrix.Matrix normalMatrix, out gid.graphene1.plane.Plane res) nothrow
+  {
+    auto _res = boxedNew!graphene_plane_t(gid.graphene1.plane.Plane._getGType);
+    graphene_plane_transform(cast(const(graphene_plane_t)*)this._cPtr, matrix ? cast(const(graphene_matrix_t)*)matrix._cPtr(No.Dup) : null, normalMatrix ? cast(const(graphene_matrix_t)*)normalMatrix._cPtr(No.Dup) : null, _res);
+    res = new gid.graphene1.plane.Plane(cast(void*)_res, Yes.Take);
+  }
+}

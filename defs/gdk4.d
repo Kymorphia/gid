@@ -35,56 +35,56 @@
 
 //!class global pre
 
-import gdk.content_deserializer;
-import gdk.content_serializer;
+import gid.gdk4.content_deserializer;
+import gid.gdk4.content_serializer;
 
 private extern(C) void _contentSerializeCallback(GdkContentSerializer* serializer) nothrow
 {
-  auto _dlg = cast(gdk.types.ContentSerializeFunc*)gdk_content_serializer_get_user_data(serializer);
+  auto _dlg = cast(gid.gdk4.types.ContentSerializeFunc*)gdk_content_serializer_get_user_data(serializer);
 
   try
   {
-    (*_dlg)(gobject.object.ObjectWrap._getDObject!(gdk.content_serializer.ContentSerializer)(cast(void*)serializer, No.Take));
+    (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk4.content_serializer.ContentSerializer)(cast(void*)serializer, No.Take));
   }
   catch (Exception e)
   {
-    gidInvokeCallbackExceptionHandler(e, "gdk.types.ContentSerializeFunc");
+    gidInvokeCallbackExceptionHandler(e, "gid.gdk4.types.ContentSerializeFunc");
   }
 }
 
 private extern(C) void _contentDeserializeCallback(GdkContentDeserializer* deserializer) nothrow
 {
-  auto _dlg = cast(gdk.types.ContentDeserializeFunc*)gdk_content_deserializer_get_user_data(deserializer);
+  auto _dlg = cast(gid.gdk4.types.ContentDeserializeFunc*)gdk_content_deserializer_get_user_data(deserializer);
 
   try
   {
-    (*_dlg)(gobject.object.ObjectWrap._getDObject!(gdk.content_deserializer.ContentDeserializer)(cast(void*)deserializer, No.Take));
+    (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk4.content_deserializer.ContentDeserializer)(cast(void*)deserializer, No.Take));
   }
   catch (Exception e)
   {
-    gidInvokeCallbackExceptionHandler(e, "gdk.types.ContentDeserializeFunc");
+    gidInvokeCallbackExceptionHandler(e, "gid.gdk4.types.ContentDeserializeFunc");
   }
 }
 
 /**
     Registers a function to serialize objects of a given type.
-    The delegate is called with the [gdk.content_serializer.ContentSerializer] of the operation, it must call
-    [gdk.content_serializer.ContentSerializer.returnSuccess] or
-    [gdk.content_serializer.ContentSerializer.returnError] when done (possibly asynchronously). The registration is
+    The delegate is called with the [gid.gdk4.content_serializer.ContentSerializer] of the operation, it must call
+    [gid.gdk4.content_serializer.ContentSerializer.returnSuccess] or
+    [gid.gdk4.content_serializer.ContentSerializer.returnError] when done (possibly asynchronously). The registration is
     permanent, the delegate is kept alive for the lifetime of the process.
     Params:
       type = the type of objects that the function can serialize
       mimeType = the mime type to serialize to
       serialize = the delegate to call to serialize
 */
-void contentRegisterSerializer(gobject.types.GType type, string mimeType, gdk.types.ContentSerializeFunc serialize) nothrow
+void contentRegisterSerializer(gid.gobject2.types.GType type, string mimeType, gid.gdk4.types.ContentSerializeFunc serialize) nothrow
 {
-  import glib.c.functions : g_log;
-  import glib.c.types : GLogLevelFlags;
+  import gid.glib2.c.functions : g_log;
+  import gid.glib2.c.types : GLogLevelFlags;
 
   if (!mimeType || !serialize)
   {
-    g_log("Gid", GLogLevelFlags.LevelCritical, "gdk.global.contentRegisterSerializer: assertion 'mimeType && serialize' failed");
+    g_log("Gid", GLogLevelFlags.LevelCritical, "gid.gdk4.global.contentRegisterSerializer: assertion 'mimeType && serialize' failed");
     return;
   }
 
@@ -95,24 +95,24 @@ void contentRegisterSerializer(gobject.types.GType type, string mimeType, gdk.ty
 
 /**
     Registers a function to deserialize object of a given type.
-    The delegate is called with the [gdk.content_deserializer.ContentDeserializer] of the operation, it must set the
-    value ([gdk.content_deserializer.ContentDeserializer.setValue]) and call
-    [gdk.content_deserializer.ContentDeserializer.returnSuccess] or
-    [gdk.content_deserializer.ContentDeserializer.returnError] when done (possibly asynchronously). The registration
+    The delegate is called with the [gid.gdk4.content_deserializer.ContentDeserializer] of the operation, it must set the
+    value ([gid.gdk4.content_deserializer.ContentDeserializer.setValue]) and call
+    [gid.gdk4.content_deserializer.ContentDeserializer.returnSuccess] or
+    [gid.gdk4.content_deserializer.ContentDeserializer.returnError] when done (possibly asynchronously). The registration
     is permanent, the delegate is kept alive for the lifetime of the process.
     Params:
       mimeType = the mime type which the function can deserialize from
       type = the type of objects that the function creates
       deserialize = the delegate to call to deserialize
 */
-void contentRegisterDeserializer(string mimeType, gobject.types.GType type, gdk.types.ContentDeserializeFunc deserialize) nothrow
+void contentRegisterDeserializer(string mimeType, gid.gobject2.types.GType type, gid.gdk4.types.ContentDeserializeFunc deserialize) nothrow
 {
-  import glib.c.functions : g_log;
-  import glib.c.types : GLogLevelFlags;
+  import gid.glib2.c.functions : g_log;
+  import gid.glib2.c.types : GLogLevelFlags;
 
   if (!mimeType || !deserialize)
   {
-    g_log("Gid", GLogLevelFlags.LevelCritical, "gdk.global.contentRegisterDeserializer: assertion 'mimeType && deserialize' failed");
+    g_log("Gid", GLogLevelFlags.LevelCritical, "gid.gdk4.global.contentRegisterDeserializer: assertion 'mimeType && deserialize' failed");
     return;
   }
 
@@ -123,21 +123,21 @@ void contentRegisterDeserializer(string mimeType, gobject.types.GType type, gdk.
 //!class ContentDeserializer
 
   /**
-      Set the deserialized value of the current operation ([gdk.content_deserializer.ContentDeserializer.getValue]
+      Set the deserialized value of the current operation ([gid.gdk4.content_deserializer.ContentDeserializer.getValue]
       returns a copy, so changes to it are not seen by the operation).
       Params:
         value = the deserialized value, its type must be compatible with the type of the operation
-          ([gdk.content_deserializer.ContentDeserializer.getGtype])
+          ([gid.gdk4.content_deserializer.ContentDeserializer.getGtype])
   */
-  void setValue(gobject.value.Value value) nothrow
+  void setValue(gid.gobject2.value.Value value) nothrow
   {
-    import gobject.c.functions : g_value_copy;
+    import gid.gobject2.c.functions : g_value_copy;
 
     if (!value)
     {
-      import glib.c.functions : g_log;
-      import glib.c.types : GLogLevelFlags;
-      g_log("Gid", GLogLevelFlags.LevelCritical, "gdk.content_deserializer.ContentDeserializer.setValue: assertion 'value' failed");
+      import gid.glib2.c.functions : g_log;
+      import gid.glib2.c.types : GLogLevelFlags;
+      g_log("Gid", GLogLevelFlags.LevelCritical, "gid.gdk4.content_deserializer.ContentDeserializer.setValue: assertion 'value' failed");
       return;
     }
 

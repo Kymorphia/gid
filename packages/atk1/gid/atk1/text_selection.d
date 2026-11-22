@@ -1,0 +1,176 @@
+/// Module for [TextSelection] class
+module gid.atk1.text_selection;
+
+public import gid.core.basictypes;
+import gid.atk1.c.functions;
+import gid.atk1.c.types;
+import gid.atk1.object;
+import gid.atk1.types;
+import gid.core.utils;
+
+/**
+    This structure represents a single  text selection within a document. This
+    selection is defined by two points in the content, where each one is defined
+    by an AtkObject supporting the AtkText interface and a character offset
+    relative to it.
+    
+    The end object must appear after the start object in the accessibility tree,
+    i.e. the end object must be reachable from the start object by navigating
+    forward (next, first child etc).
+    
+    This struct also contains a @start_is_active boolean, to communicate if the
+    start of the selection is the active point or not.
+    
+    The active point corresponds to the user's focus or point of interest. The
+    user moves the active point to expand or collapse the range. The anchor
+    point is the other point of the range and typically remains constant. In
+    most cases, anchor is the start of the range and active is the end. However,
+    when selecting backwards (e.g. pressing shift+left arrow in a text field),
+    the start of the range is the active point, as the user moves this to
+    manipulate the selection.
+*/
+class TextSelection : StructWrap!(AtkTextSelection)
+{
+  /**
+      Create a `text_selection.TextSelection` wrap type.
+      Params:
+        startObject = the AtkText containing the start of the selection.
+        startOffset = the text offset of the beginning of the selection within
+                         @start_object.
+        endObject = the AtkText containing the end of the selection.
+        endOffset = the text offset of the end of the selection within @end_object.
+        startIsActive = a gboolean indicating whether the start of the selection
+                           is the active point.
+  */
+  this(gid.atk1.object.ObjectWrap startObject = gid.atk1.object.ObjectWrap.init, int startOffset = int.init, gid.atk1.object.ObjectWrap endObject = gid.atk1.object.ObjectWrap.init, int endOffset = int.init, bool startIsActive = bool.init) nothrow
+  {
+    this.startObject = startObject;
+    this.startOffset = startOffset;
+    this.endObject = endObject;
+    this.endOffset = endOffset;
+    this.startIsActive = startIsActive;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  private gid.atk1.object.ObjectWrap _startObjectRef; // Keeps borrowed field value alive
+
+  /**
+      Get `startObject` field.
+      Returns: the AtkText containing the start of the selection.
+  */
+  @property gid.atk1.object.ObjectWrap startObject() nothrow
+  {
+    return cToD!(gid.atk1.object.ObjectWrap)(cast(void*)(cast(AtkTextSelection*)this._cPtr).startObject);
+  }
+
+  /**
+      Set `startObject` field.
+      Params:
+        propval = the AtkText containing the start of the selection.
+  */
+  @property void startObject(gid.atk1.object.ObjectWrap propval) nothrow
+  {
+    if (_refuseBorrowedStore("startObject"))
+      return;
+
+    _startObjectRef = propval;
+    (cast(AtkTextSelection*)this._cPtr).startObject = propval ? cast(AtkObject*)propval._cPtr(No.Dup) : null;
+  }
+
+  /**
+      Get `startOffset` field.
+      Returns: the text offset of the beginning of the selection within
+                       @start_object.
+  */
+  @property int startOffset() nothrow
+  {
+    return (cast(AtkTextSelection*)this._cPtr).startOffset;
+  }
+
+  /**
+      Set `startOffset` field.
+      Params:
+        propval = the text offset of the beginning of the selection within
+                         @start_object.
+  */
+  @property void startOffset(int propval) nothrow
+  {
+    (cast(AtkTextSelection*)this._cPtr).startOffset = propval;
+  }
+
+  private gid.atk1.object.ObjectWrap _endObjectRef; // Keeps borrowed field value alive
+
+  /**
+      Get `endObject` field.
+      Returns: the AtkText containing the end of the selection.
+  */
+  @property gid.atk1.object.ObjectWrap endObject() nothrow
+  {
+    return cToD!(gid.atk1.object.ObjectWrap)(cast(void*)(cast(AtkTextSelection*)this._cPtr).endObject);
+  }
+
+  /**
+      Set `endObject` field.
+      Params:
+        propval = the AtkText containing the end of the selection.
+  */
+  @property void endObject(gid.atk1.object.ObjectWrap propval) nothrow
+  {
+    if (_refuseBorrowedStore("endObject"))
+      return;
+
+    _endObjectRef = propval;
+    (cast(AtkTextSelection*)this._cPtr).endObject = propval ? cast(AtkObject*)propval._cPtr(No.Dup) : null;
+  }
+
+  /**
+      Get `endOffset` field.
+      Returns: the text offset of the end of the selection within @end_object.
+  */
+  @property int endOffset() nothrow
+  {
+    return (cast(AtkTextSelection*)this._cPtr).endOffset;
+  }
+
+  /**
+      Set `endOffset` field.
+      Params:
+        propval = the text offset of the end of the selection within @end_object.
+  */
+  @property void endOffset(int propval) nothrow
+  {
+    (cast(AtkTextSelection*)this._cPtr).endOffset = propval;
+  }
+
+  /**
+      Get `startIsActive` field.
+      Returns: a gboolean indicating whether the start of the selection
+                         is the active point.
+  */
+  @property bool startIsActive() nothrow
+  {
+    return cast(bool)(cast(AtkTextSelection*)this._cPtr).startIsActive;
+  }
+
+  /**
+      Set `startIsActive` field.
+      Params:
+        propval = a gboolean indicating whether the start of the selection
+                           is the active point.
+  */
+  @property void startIsActive(bool propval) nothrow
+  {
+    (cast(AtkTextSelection*)this._cPtr).startIsActive = propval;
+  }
+}

@@ -1,0 +1,245 @@
+/// Module for [HookList] class
+module gid.glib2.hook_list;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.glib2.c.functions;
+import gid.glib2.c.types;
+import gid.glib2.hook;
+import gid.glib2.types;
+
+/**
+    The #GHookList struct represents a list of hook functions.
+*/
+class HookList : StructWrap!(GHookList)
+{
+  /**
+      Create a `hook_list.HookList` wrap type.
+      Params:
+        seqId = the next free #GHook id
+        hookSize = the size of the #GHookList elements, in bytes
+        isSetup = 1 if the #GHookList has been initialized
+        finalizeHook = the function to call to finalize a #GHook element.
+              The default behaviour is to call the hooks @destroy function
+  */
+  this(gulong seqId = gulong.init, uint hookSize = uint.init, uint isSetup = uint.init, GHookFinalizeFunc finalizeHook = GHookFinalizeFunc.init) nothrow
+  {
+    this.seqId = seqId;
+    this.hookSize = hookSize;
+    this.isSetup = isSetup;
+    this.finalizeHook = finalizeHook;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /**
+      Get `seqId` field.
+      Returns: the next free #GHook id
+  */
+  @property gulong seqId() nothrow
+  {
+    return (cast(GHookList*)this._cPtr).seqId;
+  }
+
+  /**
+      Set `seqId` field.
+      Params:
+        propval = the next free #GHook id
+  */
+  @property void seqId(gulong propval) nothrow
+  {
+    (cast(GHookList*)this._cPtr).seqId = propval;
+  }
+
+  /**
+      Get `hookSize` field.
+      Returns: the size of the #GHookList elements, in bytes
+  */
+  @property uint hookSize() nothrow
+  {
+    return (cast(GHookList*)this._cPtr).hookSize;
+  }
+
+  /**
+      Set `hookSize` field.
+      Params:
+        propval = the size of the #GHookList elements, in bytes
+  */
+  @property void hookSize(uint propval) nothrow
+  {
+    (cast(GHookList*)this._cPtr).hookSize = propval;
+  }
+
+  /**
+      Get `isSetup` field.
+      Returns: 1 if the #GHookList has been initialized
+  */
+  @property uint isSetup() nothrow
+  {
+    return (cast(GHookList*)this._cPtr).isSetup;
+  }
+
+  /**
+      Set `isSetup` field.
+      Params:
+        propval = 1 if the #GHookList has been initialized
+  */
+  @property void isSetup(uint propval) nothrow
+  {
+    (cast(GHookList*)this._cPtr).isSetup = propval;
+  }
+
+  /**
+      Get `hooks` field.
+      Returns: the first #GHook element in the list
+  */
+  @property gid.glib2.hook.Hook hooks() nothrow
+  {
+    return (cast(GHookList*)this._cPtr).hooks ? new gid.glib2.hook.Hook(cast(GHook*)(cast(GHookList*)this._cPtr).hooks, this) : null;
+  }
+
+  /**
+      Get `finalizeHook` field.
+      Returns: the function to call to finalize a #GHook element.
+            The default behaviour is to call the hooks @destroy function
+  */
+  @property GHookFinalizeFunc finalizeHook() nothrow
+  {
+    return (cast(GHookList*)this._cPtr).finalizeHook;
+  }
+
+  /**
+      Set `finalizeHook` field.
+      Params:
+        propval = the function to call to finalize a #GHook element.
+              The default behaviour is to call the hooks @destroy function
+  */
+
+  @property void finalizeHook(GHookFinalizeFunc propval) nothrow
+  {
+    (cast(GHookList*)this._cPtr).finalizeHook = propval;
+  }
+
+  /**
+      Removes all the #GHook elements from a #GHookList.
+  */
+  void clear() nothrow
+  {
+    g_hook_list_clear(cast(GHookList*)this._cPtr);
+  }
+
+  /**
+      Initializes a #GHookList.
+      This must be called before the #GHookList is used.
+  
+      Params:
+        hookSize = the size of each element in the #GHookList,
+              typically `sizeof (GHook)`.
+  */
+  void init_(uint hookSize) nothrow
+  {
+    g_hook_list_init(cast(GHookList*)this._cPtr, hookSize);
+  }
+
+  /**
+      Calls all of the #GHook functions in a #GHookList.
+  
+      Params:
+        mayRecurse = true if functions which are already running
+              (e.g. in another thread) can be called. If set to false,
+              these are skipped
+  */
+  void invoke(bool mayRecurse) nothrow
+  {
+    g_hook_list_invoke(cast(GHookList*)this._cPtr, mayRecurse);
+  }
+
+  /**
+      Calls all of the #GHook functions in a #GHookList.
+      Any function which returns false is removed from the #GHookList.
+  
+      Params:
+        mayRecurse = true if functions which are already running
+              (e.g. in another thread) can be called. If set to false,
+              these are skipped
+  */
+  void invokeCheck(bool mayRecurse) nothrow
+  {
+    g_hook_list_invoke_check(cast(GHookList*)this._cPtr, mayRecurse);
+  }
+
+  /**
+      Calls a function on each valid #GHook.
+  
+      Params:
+        mayRecurse = true if hooks which are currently running
+              (e.g. in another thread) are considered valid. If set to false,
+              these are skipped
+        marshaller = the function to call for each #GHook
+  */
+  void marshal(bool mayRecurse, gid.glib2.types.HookMarshaller marshaller) nothrow
+  {
+    extern(C) void _marshallerCallback(GHook* hook, void* marshalData) nothrow
+    {
+      auto _dlg = cast(gid.glib2.types.HookMarshaller*)marshalData;
+      auto _hook = hook ? new gid.glib2.hook.Hook(cast(void*)hook, null) : null;
+
+      try
+      {
+        (*_dlg)(_hook);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.glib2.types.HookMarshaller");
+      }
+    }
+    auto _marshallerCB = marshaller ? &_marshallerCallback : null;
+    auto _marshaller = marshaller ? cast(void*)&(marshaller) : null;
+    g_hook_list_marshal(cast(GHookList*)this._cPtr, mayRecurse, _marshallerCB, _marshaller);
+  }
+
+  /**
+      Calls a function on each valid #GHook and destroys it if the
+      function returns false.
+  
+      Params:
+        mayRecurse = true if hooks which are currently running
+              (e.g. in another thread) are considered valid. If set to false,
+              these are skipped
+        marshaller = the function to call for each #GHook
+  */
+  void marshalCheck(bool mayRecurse, gid.glib2.types.HookCheckMarshaller marshaller) nothrow
+  {
+    extern(C) gboolean _marshallerCallback(GHook* hook, void* marshalData) nothrow
+    {
+      bool _dretval;
+      auto _dlg = cast(gid.glib2.types.HookCheckMarshaller*)marshalData;
+      auto _hook = hook ? new gid.glib2.hook.Hook(cast(void*)hook, null) : null;
+
+      try
+      {
+        _dretval = (*_dlg)(_hook);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.glib2.types.HookCheckMarshaller");
+      }
+      auto _retval = cast(gboolean)_dretval;
+
+      return _retval;
+    }
+    auto _marshallerCB = marshaller ? &_marshallerCallback : null;
+    auto _marshaller = marshaller ? cast(void*)&(marshaller) : null;
+    g_hook_list_marshal_check(cast(GHookList*)this._cPtr, mayRecurse, _marshallerCB, _marshaller);
+  }
+}

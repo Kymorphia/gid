@@ -6,8 +6,8 @@
   "license": "MIT",
   "homepage": "https://github.com/GNOME/libxml2",
   "targetType": "library",
-  "importPaths": [".", ".."],
-  "sourcePaths": ["libxml2"],
+  "importPaths": ["."],
+  "sourcePaths": ["gid"],
   "dependencies": {
     "gid:glib2": "*"
   }

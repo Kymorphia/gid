@@ -1,0 +1,82 @@
+/// Module for [GidBuilder] class
+module gid.gobject2.gid_builder;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.c.functions;
+import gid.gobject2.c.types;
+import gid.gobject2.types;
+
+
+import std.typecons : Yes;
+import gid.gobject2.object;
+import gid.gobject2.value;
+
+/// giD GObject builder base class
+/** */
+abstract class GidBuilder(T)
+{
+  protected T _self() nothrow
+  {
+    return cast(T)this;
+  }
+
+  /**
+  * Set a property.
+  * Params:
+  *   name = The property name
+  *   val = The D type value to assign to the property
+  */
+  T setProperty(V)(immutable(char)* name, V val) nothrow
+  {
+    _propNames ~= name;
+    _propSetters ~= (GValue* gval, GType propType) nothrow
+    {
+      static if (is(V == enum)) // Enums and flags use the property GType, since the D enum has no GType of its own
+        g_value_init(gval, propType);
+      else
+        initVal!V(gval); // g_object_new_with_properties transforms the value to the property type if needed
+
+      setVal(gval, val);
+    };
+    return _self;
+  }
+
+  /**
+  * Build the object.
+  * Returns: New D wrapped ObjectWrap
+  */
+  GObject* createGObject(GType gtype) nothrow
+  {
+    auto typeClass = g_type_class_ref(gtype);
+    scope(exit) g_type_class_unref(typeClass);
+    auto klass = cast(GObjectClass*)typeClass;
+    immutable(char)*[] names;
+    GValue[] values;
+
+    foreach (i, name; _propNames)
+    {
+      auto pspec = g_object_class_find_property(klass, name);
+      if (!pspec) // Unknown property, g_object_new_with_properties would just warn and ignore it too
+        continue;
+
+      names ~= name;
+      values ~= GValue();
+      _propSetters[i](&values[$ - 1], pspec.valueType);
+    }
+
+    auto obj = g_object_new_with_properties(gtype, cast(uint)names.length, names.ptr, values.ptr);
+
+    foreach (ref val; values)
+      g_value_unset(&val);
+
+    if (g_object_is_floating(obj))
+      g_object_ref_sink(obj); // Convert floating ref to a strong owned ref (no count change)
+
+    return obj;
+  }
+
+  private:
+  immutable(char)*[] _propNames;
+  void delegate(GValue*, GType) nothrow[] _propSetters;
+}

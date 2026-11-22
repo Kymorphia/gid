@@ -1,0 +1,247 @@
+/// Module for [ColorChooser] interface mixin
+module gid.gtk3.color_chooser_mixin;
+
+public import gid.core.basictypes;
+public import gid.gtk3.color_chooser_iface_proxy;
+public import gid.core.utils;
+public import gid.gdk3.rgba;
+public import gid.gobject2.dclosure;
+public import gid.gobject2.gid_builder;
+public import gid.gobject2.object;
+public import gid.gtk3.c.functions;
+public import gid.gtk3.c.types;
+public import gid.gtk3.types;
+
+/**
+    #GtkColorChooser is an interface that is implemented by widgets
+    for choosing colors. Depending on the situation, colors may be
+    allowed to have alpha (translucency).
+    
+    In GTK+, the main widgets that implement this interface are
+    #GtkColorChooserWidget, #GtkColorChooserDialog and #GtkColorButton.
+*/
+template ColorChooserT()
+{
+
+  /**
+      Get `rgba` property.
+      Returns: The ::rgba property contains the currently selected color,
+        as a #GdkRGBA struct. The property can be set to change
+        the current selection programmatically.
+  */
+  @property gid.gdk3.rgba.RGBA rgba() nothrow
+  {
+    return gid.gobject2.object.ObjectWrap.getProperty!(gid.gdk3.rgba.RGBA)("rgba");
+  }
+
+  /**
+      Set `rgba` property.
+      Params:
+        propval = The ::rgba property contains the currently selected color,
+          as a #GdkRGBA struct. The property can be set to change
+          the current selection programmatically.
+  */
+  @property void rgba(gid.gdk3.rgba.RGBA propval) nothrow
+  {
+    setRgba(propval);
+  }
+
+  /**
+      Get `useAlpha` property.
+      Returns: When ::use-alpha is true, colors may have alpha (translucency)
+        information. When it is false, the #GdkRGBA struct obtained
+        via the #GtkColorChooser:rgba property will be forced to have
+        alpha == 1.
+        
+        Implementations are expected to show alpha by rendering the color
+        over a non-uniform background (like a checkerboard pattern).
+  */
+  @property bool useAlpha() nothrow
+  {
+    return getUseAlpha();
+  }
+
+  /**
+      Set `useAlpha` property.
+      Params:
+        propval = When ::use-alpha is true, colors may have alpha (translucency)
+          information. When it is false, the #GdkRGBA struct obtained
+          via the #GtkColorChooser:rgba property will be forced to have
+          alpha == 1.
+          
+          Implementations are expected to show alpha by rendering the color
+          over a non-uniform background (like a checkerboard pattern).
+  */
+  @property void useAlpha(bool propval) nothrow
+  {
+    setUseAlpha(propval);
+  }
+
+  /**
+      Adds a palette to the color chooser. If orientation is horizontal,
+      the colors are grouped in rows, with colors_per_line colors
+      in each row. If horizontal is false, the colors are grouped
+      in columns instead.
+      
+      The default color palette of #GtkColorChooserWidget has
+      27 colors, organized in columns of 3 colors. The default gray
+      palette has 9 grays in a single row.
+      
+      The layout of the color chooser widget works best when the
+      palettes have 9-10 columns.
+      
+      Calling this function for the first time has the
+      side effect of removing the default color and gray palettes
+      from the color chooser.
+      
+      If colors is null, removes all previously added palettes.
+  
+      Params:
+        orientation = [gid.gtk4.types.Orientation.Horizontal] if the palette should
+              be displayed in rows, [gid.gtk4.types.Orientation.Vertical] for columns
+        colorsPerLine = the number of colors to show in each row/column
+        colors = the colors of the palette, or null
+  */
+  override void addPalette(gid.gtk3.types.Orientation orientation, int colorsPerLine, gid.gdk3.rgba.RGBA[] colors = null) nothrow
+  {
+    int _nColors;
+    if (colors)
+      _nColors = cast(int)colors.length;
+
+    auto _colors = cast(GdkRGBA*)colors.ptr;
+    gtk_color_chooser_add_palette(cast(GtkColorChooser*)this._cPtr, orientation, colorsPerLine, _nColors, _colors);
+  }
+
+  /**
+      Gets the currently-selected color.
+  
+      Params:
+        color = a #GdkRGBA to fill in with the current color
+  */
+  override void getRgba(out gid.gdk3.rgba.RGBA color) nothrow
+  {
+    gtk_color_chooser_get_rgba(cast(GtkColorChooser*)this._cPtr, cast(GdkRGBA*)&color);
+  }
+
+  /**
+      Returns whether the color chooser shows the alpha channel.
+      Returns: true if the color chooser uses the alpha channel,
+            false if not
+  */
+  override bool getUseAlpha() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_color_chooser_get_use_alpha(cast(GtkColorChooser*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Sets the color.
+  
+      Params:
+        color = the new color
+  */
+  override void setRgba(gid.gdk3.rgba.RGBA color) nothrow
+  {
+    gtk_color_chooser_set_rgba(cast(GtkColorChooser*)this._cPtr, cast(const(GdkRGBA)*)&color);
+  }
+
+  /**
+      Sets whether or not the color chooser should use the alpha channel.
+  
+      Params:
+        useAlpha = true if color chooser should use alpha channel, false if not
+  */
+  override void setUseAlpha(bool useAlpha) nothrow
+  {
+    gtk_color_chooser_set_use_alpha(cast(GtkColorChooser*)this._cPtr, useAlpha);
+  }
+
+  /**
+      Connect to `ColorActivated` signal.
+  
+      Emitted when a color is activated from the color chooser.
+        This usually happens when the user clicks a color swatch,
+        or a color is selected and the user presses one of the keys
+        Space, Shift+Space, Return or Enter.
+  
+      Params:
+        callback = signal callback delegate or function to connect
+  
+          `void callback(gid.gdk3.rgba.RGBA color, gid.gtk3.color_chooser.ColorChooser colorChooser)`
+  
+          `color` the color (optional)
+  
+          `colorChooser` the instance the signal is connected to (optional)
+  
+        after = Yes.After to execute callback after default handler, No.After to execute before (default)
+      Returns: Signal ID
+  */
+  gulong connectColorActivated(T)(T callback, Flag!"After" after = No.After) nothrow
+  if (isCallable!T
+  && is(ReturnType!T == void)
+  && (Parameters!T.length < 1 || (ParameterStorageClassTuple!T[0] == ParameterStorageClass.none && is(Parameters!T[0] == gid.gdk3.rgba.RGBA)))
+  && (Parameters!T.length < 2 || (ParameterStorageClassTuple!T[1] == ParameterStorageClass.none && is(Parameters!T[1] : gid.gtk3.color_chooser.ColorChooser)))
+  && Parameters!T.length < 3)
+  {
+    extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
+    {
+      assert(_nParams == 2, "Unexpected number of signal parameters");
+      auto _dClosure = cast(DGClosure!T*)_closure;
+      Tuple!(Parameters!T) _paramTuple;
+
+      static if (Parameters!T.length > 0)
+        _paramTuple[0] = getVal!(Parameters!T[0])(&_paramVals[1]);
+
+      static if (Parameters!T.length > 1)
+        _paramTuple[1] = getVal!(Parameters!T[1])(&_paramVals[0]);
+
+      try
+      {
+        _dClosure.cb(_paramTuple[]);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.color_chooser.ColorChooser.colorActivated");
+      }
+    }
+
+    auto closure = new DClosure(callback, &_cmarshal);
+    return connectSignalClosure("color-activated", closure, after);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtk3.color_chooser.ColorChooser]
+template ColorChooserGidBuilderT()
+{
+
+  /**
+      Set `rgba` property.
+      Params:
+        propval = The ::rgba property contains the currently selected color,
+          as a #GdkRGBA struct. The property can be set to change
+          the current selection programmatically.
+      Returns: Builder instance for fluent chaining
+  */
+  T rgba(gid.gdk3.rgba.RGBA propval) nothrow
+  {
+    return setProperty("rgba", propval);
+  }
+
+  /**
+      Set `useAlpha` property.
+      Params:
+        propval = When ::use-alpha is true, colors may have alpha (translucency)
+          information. When it is false, the #GdkRGBA struct obtained
+          via the #GtkColorChooser:rgba property will be forced to have
+          alpha == 1.
+          
+          Implementations are expected to show alpha by rendering the color
+          over a non-uniform background (like a checkerboard pattern).
+      Returns: Builder instance for fluent chaining
+  */
+  T useAlpha(bool propval) nothrow
+  {
+    return setProperty("use-alpha", propval);
+  }
+}

@@ -1,0 +1,248 @@
+/// Module for [Hook] class
+module gid.glib2.hook;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.glib2.c.functions;
+import gid.glib2.c.types;
+import gid.glib2.hook_list;
+import gid.glib2.types;
+
+/**
+    The #GHook struct represents a single hook function in a #GHookList.
+*/
+class Hook : StructWrap!(GHook)
+{
+  /**
+      Create a `hook.Hook` wrap type.
+      Params:
+        refCount = the reference count of this hook
+        hookId = the id of this hook, which is unique within its list
+        flags = flags which are set for this hook. See #GHookFlagMask for
+              predefined flags
+  */
+  this(uint refCount = uint.init, gulong hookId = gulong.init, uint flags = uint.init) nothrow
+  {
+    this.refCount = refCount;
+    this.hookId = hookId;
+    this.flags = flags;
+  }
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  this(void* ptr, Object owner) nothrow
+  {
+    super(ptr, owner);
+  }
+
+  /**
+      Get `next` field.
+      Returns: pointer to the next hook in the list
+  */
+  @property gid.glib2.hook.Hook next() nothrow
+  {
+    return (cast(GHook*)this._cPtr).next ? new gid.glib2.hook.Hook(cast(GHook*)(cast(GHook*)this._cPtr).next, this) : null;
+  }
+
+  /**
+      Get `prev` field.
+      Returns: pointer to the previous hook in the list
+  */
+  @property gid.glib2.hook.Hook prev() nothrow
+  {
+    return (cast(GHook*)this._cPtr).prev ? new gid.glib2.hook.Hook(cast(GHook*)(cast(GHook*)this._cPtr).prev, this) : null;
+  }
+
+  /**
+      Get `refCount` field.
+      Returns: the reference count of this hook
+  */
+  @property uint refCount() nothrow
+  {
+    return (cast(GHook*)this._cPtr).refCount;
+  }
+
+  /**
+      Set `refCount` field.
+      Params:
+        propval = the reference count of this hook
+  */
+  @property void refCount(uint propval) nothrow
+  {
+    (cast(GHook*)this._cPtr).refCount = propval;
+  }
+
+  /**
+      Get `hookId` field.
+      Returns: the id of this hook, which is unique within its list
+  */
+  @property gulong hookId() nothrow
+  {
+    return (cast(GHook*)this._cPtr).hookId;
+  }
+
+  /**
+      Set `hookId` field.
+      Params:
+        propval = the id of this hook, which is unique within its list
+  */
+  @property void hookId(gulong propval) nothrow
+  {
+    (cast(GHook*)this._cPtr).hookId = propval;
+  }
+
+  /**
+      Get `flags` field.
+      Returns: flags which are set for this hook. See #GHookFlagMask for
+            predefined flags
+  */
+  @property uint flags() nothrow
+  {
+    return (cast(GHook*)this._cPtr).flags;
+  }
+
+  /**
+      Set `flags` field.
+      Params:
+        propval = flags which are set for this hook. See #GHookFlagMask for
+              predefined flags
+  */
+  @property void flags(uint propval) nothrow
+  {
+    (cast(GHook*)this._cPtr).flags = propval;
+  }
+
+  /**
+      Compares the ids of two #GHook elements, returning a negative value
+      if the second id is greater than the first.
+  
+      Params:
+        sibling = a #GHook to compare with new_hook
+      Returns: a value <= 0 if the id of sibling is >= the id of new_hook
+  */
+  int compareIds(gid.glib2.hook.Hook sibling) nothrow
+  {
+    int _retval;
+    _retval = g_hook_compare_ids(cast(GHook*)this._cPtr, sibling ? cast(GHook*)sibling._cPtr : null);
+    return _retval;
+  }
+
+  /**
+      Destroys a #GHook, given its ID.
+  
+      Params:
+        hookList = a #GHookList
+        hookId = a hook ID
+      Returns: true if the #GHook was found in the #GHookList and destroyed
+  */
+  static bool destroy(gid.glib2.hook_list.HookList hookList, gulong hookId) nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)g_hook_destroy(hookList ? cast(GHookList*)hookList._cPtr : null, hookId);
+    return _retval;
+  }
+
+  /**
+      Removes one #GHook from a #GHookList, marking it
+      inactive and calling [gid.glib2.hook.Hook.unref] on it.
+  
+      Params:
+        hookList = a #GHookList
+        hook = the #GHook to remove
+  */
+  static void destroyLink(gid.glib2.hook_list.HookList hookList, gid.glib2.hook.Hook hook) nothrow
+  {
+    g_hook_destroy_link(hookList ? cast(GHookList*)hookList._cPtr : null, hook ? cast(GHook*)hook._cPtr : null);
+  }
+
+  /**
+      Calls the #GHookList finalize_hook function if it exists,
+      and frees the memory allocated for the #GHook.
+  
+      Params:
+        hookList = a #GHookList
+        hook = the #GHook to free
+  */
+  static void free(gid.glib2.hook_list.HookList hookList, gid.glib2.hook.Hook hook) nothrow
+  {
+    g_hook_free(hookList ? cast(GHookList*)hookList._cPtr : null, hook ? cast(GHook*)hook._cPtr : null);
+  }
+
+  /**
+      Inserts a #GHook into a #GHookList, before a given #GHook.
+  
+      Params:
+        hookList = a #GHookList
+        sibling = the #GHook to insert the new #GHook before
+        hook = the #GHook to insert
+  */
+  static void insertBefore(gid.glib2.hook_list.HookList hookList, gid.glib2.hook.Hook sibling, gid.glib2.hook.Hook hook) nothrow
+  {
+    g_hook_insert_before(hookList ? cast(GHookList*)hookList._cPtr : null, sibling ? cast(GHook*)sibling._cPtr : null, hook ? cast(GHook*)hook._cPtr : null);
+  }
+
+  /**
+      Inserts a #GHook into a #GHookList, sorted by the given function.
+  
+      Params:
+        hookList = a #GHookList
+        hook = the #GHook to insert
+        func = the comparison function used to sort the #GHook elements
+  */
+  static void insertSorted(gid.glib2.hook_list.HookList hookList, gid.glib2.hook.Hook hook, gid.glib2.types.HookCompareFunc func) nothrow
+  {
+    static gid.glib2.types.HookCompareFunc _static_func;
+
+    extern(C) int _funcCallback(GHook* newHook, GHook* sibling) nothrow
+    {
+      int _retval;
+      auto _newHook = newHook ? new gid.glib2.hook.Hook(cast(void*)newHook, null) : null;
+      auto _sibling = sibling ? new gid.glib2.hook.Hook(cast(void*)sibling, null) : null;
+
+      try
+      {
+        _retval = _static_func(_newHook, _sibling);
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.glib2.types.HookCompareFunc");
+      }
+      return _retval;
+    }
+    auto _funcCB = func ? &_funcCallback : null;
+    _static_func = func;
+    g_hook_insert_sorted(hookList ? cast(GHookList*)hookList._cPtr : null, hook ? cast(GHook*)hook._cPtr : null, _funcCB);
+    _static_func = null;
+  }
+
+  /**
+      Prepends a #GHook on the start of a #GHookList.
+  
+      Params:
+        hookList = a #GHookList
+        hook = the #GHook to add to the start of hook_list
+  */
+  static void prepend(gid.glib2.hook_list.HookList hookList, gid.glib2.hook.Hook hook) nothrow
+  {
+    g_hook_prepend(hookList ? cast(GHookList*)hookList._cPtr : null, hook ? cast(GHook*)hook._cPtr : null);
+  }
+
+  /**
+      Decrements the reference count of a #GHook.
+      If the reference count falls to 0, the #GHook is removed
+      from the #GHookList and [gid.glib2.hook.Hook.free] is called to free it.
+  
+      Params:
+        hookList = a #GHookList
+        hook = the #GHook to unref
+  */
+  static void unref(gid.glib2.hook_list.HookList hookList, gid.glib2.hook.Hook hook) nothrow
+  {
+    g_hook_unref(hookList ? cast(GHookList*)hookList._cPtr : null, hook ? cast(GHook*)hook._cPtr : null);
+  }
+}

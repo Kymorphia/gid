@@ -1,0 +1,1273 @@
+/// Module for [Flap] class
+module gid.adw1.flap;
+
+public import gid.core.basictypes;
+import gid.adw1.c.functions;
+import gid.adw1.c.types;
+import gid.adw1.spring_params;
+import gid.adw1.swipeable;
+import gid.adw1.swipeable_mixin;
+import gid.adw1.types;
+import gid.core.utils;
+import gid.gobject2.gid_builder;
+import gid.gobject2.object;
+import gid.gtk4.accessible;
+import gid.gtk4.accessible_mixin;
+import gid.gtk4.buildable;
+import gid.gtk4.buildable_mixin;
+import gid.gtk4.constraint_target;
+import gid.gtk4.constraint_target_mixin;
+import gid.gtk4.orientable;
+import gid.gtk4.orientable_mixin;
+import gid.gtk4.types;
+import gid.gtk4.widget;
+
+/**
+    An adaptive container acting like a box or an overlay.
+    
+    <picture>
+      <source srcset="flap-wide-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="flap-wide.png" alt="flap-wide">
+    </picture>
+    <picture>
+      <source srcset="flap-narrow-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="flap-narrow.png" alt="flap-narrow">
+    </picture>
+    
+    The [gid.adw1.flap.Flap] widget can display its children like a [gid.gtk4.box.Box] does or
+    like a [gid.gtk4.overlay.Overlay] does, according to the
+    [gid.adw1.flap.Flap.foldPolicy] value.
+    
+    [gid.adw1.flap.Flap] has at most three children: [gid.adw1.flap.Flap.content],
+    [gid.adw1.flap.Flap.flap] and [gid.adw1.flap.Flap.separator]. Content is the primary
+    child, flap is displayed next to it when unfolded, or overlays it when
+    folded. Flap can be shown or hidden by changing the
+    [gid.adw1.flap.Flap.revealFlap] value, as well as via swipe gestures if
+    [gid.adw1.flap.Flap.swipeToOpen] and/or [gid.adw1.flap.Flap.swipeToClose] are set
+    to `TRUE`.
+    
+    Optionally, a separator can be provided, which would be displayed between
+    the content and the flap when there's no shadow to separate them, depending
+    on the transition type.
+    
+    [gid.adw1.flap.Flap.flap] is transparent by default; add the
+    [`.background`](style-classes.html#background) style class to it if this is
+    unwanted.
+    
+    If [gid.adw1.flap.Flap.modal] is set to `TRUE`, content becomes completely
+    inaccessible when the flap is revealed while folded.
+    
+    The position of the flap and separator children relative to the content is
+    determined by orientation, as well as the [gid.adw1.flap.Flap.flapPosition]
+    value.
+    
+    Folding the flap will automatically hide the flap widget, and unfolding it
+    will automatically reveal it. If this behavior is not desired, the
+    [gid.adw1.flap.Flap.locked] property can be used to override it.
+    
+    Common use cases include sidebars, header bars that need to be able to
+    overlap the window content (for example, in fullscreen mode) and bottom
+    sheets.
+    
+    ## AdwFlap as GtkBuildable
+    
+    The [gid.adw1.flap.Flap] implementation of the [gid.gtk4.buildable.Buildable] interface supports
+    setting the flap child by specifying “flap” as the “type” attribute of a
+    `<child>` element, and separator by specifying “separator”. Specifying
+    “content” child type or omitting it results in setting the content child.
+    
+    ## CSS nodes
+    
+    [gid.adw1.flap.Flap] has a single CSS node with name `flap`. The node will get the style
+    classes `.folded` when it is folded, and `.unfolded` when it's not.
+
+    Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+*/
+class Flap : gid.gtk4.widget.Widget, gid.adw1.swipeable.Swipeable, gid.gtk4.orientable.Orientable
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())adw_flap_get_type != &gidSymbolNotFound ? adw_flap_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "AdwFlap";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override Flap self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.adw1.flap.Flap]
+      Returns: New builder object
+  */
+  static FlapGidBuilder builder() nothrow
+  {
+    return new FlapGidBuilder;
+  }
+
+  /**
+      Get `content` property.
+      Returns: The content widget.
+        
+        It's always displayed when unfolded, and partially visible when folded.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property gid.gtk4.widget.Widget content() nothrow
+  {
+    return getContent();
+  }
+
+  /**
+      Set `content` property.
+      Params:
+        propval = The content widget.
+          
+          It's always displayed when unfolded, and partially visible when folded.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property void content(gid.gtk4.widget.Widget propval) nothrow
+  {
+    setContent(propval);
+  }
+
+  /**
+      Get `flap` property.
+      Returns: The flap widget.
+        
+        It's only visible when [gid.adw1.flap.Flap.revealProgress] is greater than 0.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property gid.gtk4.widget.Widget flap() nothrow
+  {
+    return getFlap();
+  }
+
+  /**
+      Set `flap` property.
+      Params:
+        propval = The flap widget.
+          
+          It's only visible when [gid.adw1.flap.Flap.revealProgress] is greater than 0.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property void flap(gid.gtk4.widget.Widget propval) nothrow
+  {
+    setFlap(propval);
+  }
+
+  /**
+      Get `flapPosition` property.
+      Returns: The flap position.
+        
+        If it's set to [gid.gtk4.types.PackType.Start], the flap is displayed before the
+        content, if [gid.gtk4.types.PackType.End], it's displayed after the content.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property gid.gtk4.types.PackType flapPosition() nothrow
+  {
+    return getFlapPosition();
+  }
+
+  /**
+      Set `flapPosition` property.
+      Params:
+        propval = The flap position.
+          
+          If it's set to [gid.gtk4.types.PackType.Start], the flap is displayed before the
+          content, if [gid.gtk4.types.PackType.End], it's displayed after the content.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property void flapPosition(gid.gtk4.types.PackType propval) nothrow
+  {
+    setFlapPosition(propval);
+  }
+
+  /**
+      Get `foldDuration` property.
+      Returns: The fold transition animation duration, in milliseconds.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property uint foldDuration() nothrow
+  {
+    return getFoldDuration();
+  }
+
+  /**
+      Set `foldDuration` property.
+      Params:
+        propval = The fold transition animation duration, in milliseconds.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property void foldDuration(uint propval) nothrow
+  {
+    setFoldDuration(propval);
+  }
+
+  /**
+      Get `foldPolicy` property.
+      Returns: The fold policy for the flap.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property gid.adw1.types.FlapFoldPolicy foldPolicy() nothrow
+  {
+    return getFoldPolicy();
+  }
+
+  /**
+      Set `foldPolicy` property.
+      Params:
+        propval = The fold policy for the flap.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property void foldPolicy(gid.adw1.types.FlapFoldPolicy propval) nothrow
+  {
+    setFoldPolicy(propval);
+  }
+
+  /**
+      Get `foldThresholdPolicy` property.
+      Returns: Determines when the flap will fold.
+        
+        If set to [gid.adw1.types.FoldThresholdPolicy.Minimum], flap will only fold when
+        the children cannot fit anymore. With [gid.adw1.types.FoldThresholdPolicy.Natural],
+        it will fold as soon as children don't get their natural size.
+        
+        This can be useful if you have a long ellipsizing label and want to let it
+        ellipsize instead of immediately folding.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property gid.adw1.types.FoldThresholdPolicy foldThresholdPolicy() nothrow
+  {
+    return getFoldThresholdPolicy();
+  }
+
+  /**
+      Set `foldThresholdPolicy` property.
+      Params:
+        propval = Determines when the flap will fold.
+          
+          If set to [gid.adw1.types.FoldThresholdPolicy.Minimum], flap will only fold when
+          the children cannot fit anymore. With [gid.adw1.types.FoldThresholdPolicy.Natural],
+          it will fold as soon as children don't get their natural size.
+          
+          This can be useful if you have a long ellipsizing label and want to let it
+          ellipsize instead of immediately folding.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property void foldThresholdPolicy(gid.adw1.types.FoldThresholdPolicy propval) nothrow
+  {
+    setFoldThresholdPolicy(propval);
+  }
+
+  /**
+      Get `folded` property.
+      Returns: Whether the flap is currently folded.
+        
+        See [gid.adw1.flap.Flap.foldPolicy].
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property bool folded() nothrow
+  {
+    return getFolded();
+  }
+
+  /**
+      Get `locked` property.
+      Returns: Whether the flap is locked.
+        
+        If `FALSE`, folding when the flap is revealed automatically closes it, and
+        unfolding it when the flap is not revealed opens it. If `TRUE`,
+        [gid.adw1.flap.Flap.revealFlap] value never changes on its own.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property bool locked() nothrow
+  {
+    return getLocked();
+  }
+
+  /**
+      Set `locked` property.
+      Params:
+        propval = Whether the flap is locked.
+          
+          If `FALSE`, folding when the flap is revealed automatically closes it, and
+          unfolding it when the flap is not revealed opens it. If `TRUE`,
+          [gid.adw1.flap.Flap.revealFlap] value never changes on its own.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property void locked(bool propval) nothrow
+  {
+    setLocked(propval);
+  }
+
+  /**
+      Get `modal` property.
+      Returns: Whether the flap is modal.
+        
+        If `TRUE`, clicking the content widget while flap is revealed, as well as
+        pressing the <kbd>Esc</kbd> key, will close the flap. If `FALSE`, clicks
+        are passed through to the content widget.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property bool modal() nothrow
+  {
+    return getModal();
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the flap is modal.
+          
+          If `TRUE`, clicking the content widget while flap is revealed, as well as
+          pressing the <kbd>Esc</kbd> key, will close the flap. If `FALSE`, clicks
+          are passed through to the content widget.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property void modal(bool propval) nothrow
+  {
+    setModal(propval);
+  }
+
+  /**
+      Get `revealFlap` property.
+      Returns: Whether the flap widget is revealed.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property bool revealFlap() nothrow
+  {
+    return getRevealFlap();
+  }
+
+  /**
+      Set `revealFlap` property.
+      Params:
+        propval = Whether the flap widget is revealed.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property void revealFlap(bool propval) nothrow
+  {
+    setRevealFlap(propval);
+  }
+
+  /**
+      Get `revealParams` property.
+      Returns: The reveal animation spring parameters.
+        
+        The default value is equivalent to:
+        
+        ```c
+        adw_spring_params_new (1, 0.5, 500)
+        ```
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property gid.adw1.spring_params.SpringParams revealParams() nothrow
+  {
+    return getRevealParams();
+  }
+
+  /**
+      Set `revealParams` property.
+      Params:
+        propval = The reveal animation spring parameters.
+          
+          The default value is equivalent to:
+          
+          ```c
+          adw_spring_params_new (1, 0.5, 500)
+          ```
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property void revealParams(gid.adw1.spring_params.SpringParams propval) nothrow
+  {
+    setRevealParams(propval);
+  }
+
+  /**
+      Get `revealProgress` property.
+      Returns: The current reveal transition progress.
+        
+        0 means fully hidden, 1 means fully revealed.
+        
+        See [gid.adw1.flap.Flap.revealFlap].
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property double revealProgress() nothrow
+  {
+    return getRevealProgress();
+  }
+
+  /**
+      Get `separator` property.
+      Returns: The separator widget.
+        
+        It's displayed between content and flap when there's no shadow to display.
+        When exactly it's visible depends on the [gid.adw1.flap.Flap.transitionType]
+        value.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property gid.gtk4.widget.Widget separator() nothrow
+  {
+    return getSeparator();
+  }
+
+  /**
+      Set `separator` property.
+      Params:
+        propval = The separator widget.
+          
+          It's displayed between content and flap when there's no shadow to display.
+          When exactly it's visible depends on the [gid.adw1.flap.Flap.transitionType]
+          value.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property void separator(gid.gtk4.widget.Widget propval) nothrow
+  {
+    setSeparator(propval);
+  }
+
+  /**
+      Get `swipeToClose` property.
+      Returns: Whether the flap can be closed with a swipe gesture.
+        
+        The area that can be swiped depends on the [gid.adw1.flap.Flap.transitionType]
+        value.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property bool swipeToClose() nothrow
+  {
+    return getSwipeToClose();
+  }
+
+  /**
+      Set `swipeToClose` property.
+      Params:
+        propval = Whether the flap can be closed with a swipe gesture.
+          
+          The area that can be swiped depends on the [gid.adw1.flap.Flap.transitionType]
+          value.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property void swipeToClose(bool propval) nothrow
+  {
+    setSwipeToClose(propval);
+  }
+
+  /**
+      Get `swipeToOpen` property.
+      Returns: Whether the flap can be opened with a swipe gesture.
+        
+        The area that can be swiped depends on the [gid.adw1.flap.Flap.transitionType]
+        value.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property bool swipeToOpen() nothrow
+  {
+    return getSwipeToOpen();
+  }
+
+  /**
+      Set `swipeToOpen` property.
+      Params:
+        propval = Whether the flap can be opened with a swipe gesture.
+          
+          The area that can be swiped depends on the [gid.adw1.flap.Flap.transitionType]
+          value.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property void swipeToOpen(bool propval) nothrow
+  {
+    setSwipeToOpen(propval);
+  }
+
+  /**
+      Get `transitionType` property.
+      Returns: the type of animation used for reveal and fold transitions.
+        
+        [gid.adw1.flap.Flap.flap] is transparent by default, which means the content
+        will be seen through it with [gid.adw1.types.FlapTransitionType.Over] transitions;
+        add the [`.background`](style-classes.html#background) style class to it if
+        this is unwanted.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property gid.adw1.types.FlapTransitionType transitionType() nothrow
+  {
+    return getTransitionType();
+  }
+
+  /**
+      Set `transitionType` property.
+      Params:
+        propval = the type of animation used for reveal and fold transitions.
+          
+          [gid.adw1.flap.Flap.flap] is transparent by default, which means the content
+          will be seen through it with [gid.adw1.types.FlapTransitionType.Over] transitions;
+          add the [`.background`](style-classes.html#background) style class to it if
+          this is unwanted.
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  @property void transitionType(gid.adw1.types.FlapTransitionType propval) nothrow
+  {
+    setTransitionType(propval);
+  }
+
+  mixin SwipeableT!();
+  mixin OrientableT!();
+
+  /**
+      Creates a new [gid.adw1.flap.Flap].
+      Returns: the newly created [gid.adw1.flap.Flap]
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  this() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = adw_flap_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Gets the content widget for self.
+      Returns: the content widget for self
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  gid.gtk4.widget.Widget getContent() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = adw_flap_get_content(cast(AdwFlap*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the flap widget for self.
+      Returns: the flap widget for self
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  gid.gtk4.widget.Widget getFlap() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = adw_flap_get_flap(cast(AdwFlap*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the flap position for self.
+      Returns: the flap position for self
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  gid.gtk4.types.PackType getFlapPosition() nothrow
+  {
+    GtkPackType _cretval;
+    _cretval = adw_flap_get_flap_position(cast(AdwFlap*)this._cPtr);
+    gid.gtk4.types.PackType _retval = cast(gid.gtk4.types.PackType)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the fold transition animation duration for self, in milliseconds.
+      Returns: the fold transition duration
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  uint getFoldDuration() nothrow
+  {
+    uint _retval;
+    _retval = adw_flap_get_fold_duration(cast(AdwFlap*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the fold policy for self.
+      Returns: the fold policy for self
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  gid.adw1.types.FlapFoldPolicy getFoldPolicy() nothrow
+  {
+    AdwFlapFoldPolicy _cretval;
+    _cretval = adw_flap_get_fold_policy(cast(AdwFlap*)this._cPtr);
+    gid.adw1.types.FlapFoldPolicy _retval = cast(gid.adw1.types.FlapFoldPolicy)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the fold threshold policy for self.
+      Returns: the fold threshold policy
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  gid.adw1.types.FoldThresholdPolicy getFoldThresholdPolicy() nothrow
+  {
+    AdwFoldThresholdPolicy _cretval;
+    _cretval = adw_flap_get_fold_threshold_policy(cast(AdwFlap*)this._cPtr);
+    gid.adw1.types.FoldThresholdPolicy _retval = cast(gid.adw1.types.FoldThresholdPolicy)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets whether self is currently folded.
+      
+      See [gid.adw1.flap.Flap.foldPolicy].
+      Returns: `TRUE` if self is currently folded
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  bool getFolded() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_flap_get_folded(cast(AdwFlap*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether self is locked.
+      Returns: `TRUE` if self is locked
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  bool getLocked() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_flap_get_locked(cast(AdwFlap*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether self is modal.
+      Returns: `TRUE` if self is modal
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  bool getModal() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_flap_get_modal(cast(AdwFlap*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether the flap widget is revealed for self.
+      Returns: `TRUE` if the flap widget is revealed
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  bool getRevealFlap() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_flap_get_reveal_flap(cast(AdwFlap*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the reveal animation spring parameters for self.
+      Returns: the reveal animation parameters
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  gid.adw1.spring_params.SpringParams getRevealParams() nothrow
+  {
+    AdwSpringParams* _cretval;
+    _cretval = adw_flap_get_reveal_params(cast(AdwFlap*)this._cPtr);
+    auto _retval = _cretval ? new gid.adw1.spring_params.SpringParams(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the current reveal progress for self.
+      
+      0 means fully hidden, 1 means fully revealed.
+      
+      See [gid.adw1.flap.Flap.revealFlap].
+      Returns: the current reveal progress for self
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  double getRevealProgress() nothrow
+  {
+    double _retval;
+    _retval = adw_flap_get_reveal_progress(cast(AdwFlap*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the separator widget for self.
+      Returns: the separator widget for self
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  gid.gtk4.widget.Widget getSeparator() nothrow
+  {
+    GtkWidget* _cretval;
+    _cretval = adw_flap_get_separator(cast(AdwFlap*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets whether self can be closed with a swipe gesture.
+      Returns: `TRUE` if self can be closed with a swipe gesture
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  bool getSwipeToClose() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_flap_get_swipe_to_close(cast(AdwFlap*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets whether self can be opened with a swipe gesture.
+      Returns: `TRUE` if self can be opened with a swipe gesture
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  bool getSwipeToOpen() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)adw_flap_get_swipe_to_open(cast(AdwFlap*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the type of animation used for reveal and fold transitions in self.
+      Returns: the current transition type of self
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  gid.adw1.types.FlapTransitionType getTransitionType() nothrow
+  {
+    AdwFlapTransitionType _cretval;
+    _cretval = adw_flap_get_transition_type(cast(AdwFlap*)this._cPtr);
+    gid.adw1.types.FlapTransitionType _retval = cast(gid.adw1.types.FlapTransitionType)_cretval;
+    return _retval;
+  }
+
+  /**
+      Sets the content widget for self.
+      
+      It's always displayed when unfolded, and partially visible when folded.
+  
+      Params:
+        content = the content widget
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  void setContent(gid.gtk4.widget.Widget content = null) nothrow
+  {
+    adw_flap_set_content(cast(AdwFlap*)this._cPtr, content ? cast(GtkWidget*)content._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the flap widget for self.
+      
+      It's only visible when [gid.adw1.flap.Flap.revealProgress] is greater than 0.
+  
+      Params:
+        flap = the flap widget
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  void setFlap(gid.gtk4.widget.Widget flap = null) nothrow
+  {
+    adw_flap_set_flap(cast(AdwFlap*)this._cPtr, flap ? cast(GtkWidget*)flap._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the flap position for self.
+      
+      If it's set to [gid.gtk4.types.PackType.Start], the flap is displayed before the
+      content, if [gid.gtk4.types.PackType.End], it's displayed after the content.
+  
+      Params:
+        position = the new value
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  void setFlapPosition(gid.gtk4.types.PackType position) nothrow
+  {
+    adw_flap_set_flap_position(cast(AdwFlap*)this._cPtr, position);
+  }
+
+  /**
+      Sets the fold transition animation duration for self, in milliseconds.
+  
+      Params:
+        duration = the new duration, in milliseconds
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  void setFoldDuration(uint duration) nothrow
+  {
+    adw_flap_set_fold_duration(cast(AdwFlap*)this._cPtr, duration);
+  }
+
+  /**
+      Sets the fold policy for self.
+  
+      Params:
+        policy = the fold policy
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  void setFoldPolicy(gid.adw1.types.FlapFoldPolicy policy) nothrow
+  {
+    adw_flap_set_fold_policy(cast(AdwFlap*)this._cPtr, policy);
+  }
+
+  /**
+      Sets the fold threshold policy for self.
+      
+      If set to [gid.adw1.types.FoldThresholdPolicy.Minimum], flap will only fold when
+      the children cannot fit anymore. With [gid.adw1.types.FoldThresholdPolicy.Natural],
+      it will fold as soon as children don't get their natural size.
+      
+      This can be useful if you have a long ellipsizing label and want to let it
+      ellipsize instead of immediately folding.
+  
+      Params:
+        policy = the policy to use
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  void setFoldThresholdPolicy(gid.adw1.types.FoldThresholdPolicy policy) nothrow
+  {
+    adw_flap_set_fold_threshold_policy(cast(AdwFlap*)this._cPtr, policy);
+  }
+
+  /**
+      Sets whether self is locked.
+      
+      If `FALSE`, folding when the flap is revealed automatically closes it, and
+      unfolding it when the flap is not revealed opens it. If `TRUE`,
+      [gid.adw1.flap.Flap.revealFlap] value never changes on its own.
+  
+      Params:
+        locked = the new value
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  void setLocked(bool locked) nothrow
+  {
+    adw_flap_set_locked(cast(AdwFlap*)this._cPtr, locked);
+  }
+
+  /**
+      Sets whether self is modal.
+      
+      If `TRUE`, clicking the content widget while flap is revealed, as well as
+      pressing the <kbd>Esc</kbd> key, will close the flap. If `FALSE`, clicks are
+      passed through to the content widget.
+  
+      Params:
+        modal = whether self is modal
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  void setModal(bool modal) nothrow
+  {
+    adw_flap_set_modal(cast(AdwFlap*)this._cPtr, modal);
+  }
+
+  /**
+      Sets whether the flap widget is revealed for self.
+  
+      Params:
+        revealFlap = whether to reveal the flap widget
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  void setRevealFlap(bool revealFlap) nothrow
+  {
+    adw_flap_set_reveal_flap(cast(AdwFlap*)this._cPtr, revealFlap);
+  }
+
+  /**
+      Sets the reveal animation spring parameters for self.
+      
+      The default value is equivalent to:
+      
+      ```c
+      adw_spring_params_new (1, 0.5, 500)
+      ```
+  
+      Params:
+        params = the new parameters
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  void setRevealParams(gid.adw1.spring_params.SpringParams params) nothrow
+  {
+    adw_flap_set_reveal_params(cast(AdwFlap*)this._cPtr, params ? cast(AdwSpringParams*)params._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the separator widget for self.
+      
+      It's displayed between content and flap when there's no shadow to display.
+      When exactly it's visible depends on the [gid.adw1.flap.Flap.transitionType]
+      value.
+  
+      Params:
+        separator = the separator widget
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  void setSeparator(gid.gtk4.widget.Widget separator = null) nothrow
+  {
+    adw_flap_set_separator(cast(AdwFlap*)this._cPtr, separator ? cast(GtkWidget*)separator._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets whether self can be closed with a swipe gesture.
+      
+      The area that can be swiped depends on the [gid.adw1.flap.Flap.transitionType]
+      value.
+  
+      Params:
+        swipeToClose = whether self can be closed with a swipe gesture
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  void setSwipeToClose(bool swipeToClose) nothrow
+  {
+    adw_flap_set_swipe_to_close(cast(AdwFlap*)this._cPtr, swipeToClose);
+  }
+
+  /**
+      Sets whether self can be opened with a swipe gesture.
+      
+      The area that can be swiped depends on the [gid.adw1.flap.Flap.transitionType]
+      value.
+  
+      Params:
+        swipeToOpen = whether self can be opened with a swipe gesture
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  void setSwipeToOpen(bool swipeToOpen) nothrow
+  {
+    adw_flap_set_swipe_to_open(cast(AdwFlap*)this._cPtr, swipeToOpen);
+  }
+
+  /**
+      Sets the type of animation used for reveal and fold transitions in self.
+      
+      [gid.adw1.flap.Flap.flap] is transparent by default, which means the content will
+      be seen through it with [gid.adw1.types.FlapTransitionType.Over] transitions; add
+      the [`.background`](style-classes.html#background) style class to it if this
+      is unwanted.
+  
+      Params:
+        transitionType = the new transition type
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  void setTransitionType(gid.adw1.types.FlapTransitionType transitionType) nothrow
+  {
+    adw_flap_set_transition_type(cast(AdwFlap*)this._cPtr, transitionType);
+  }
+}
+
+/// Fluent builder implementation template for [gid.adw1.flap.Flap]
+class FlapGidBuilderImpl(T) : gid.gtk4.widget.WidgetGidBuilderImpl!T, gid.adw1.swipeable.SwipeableGidBuilderImpl!T, gid.gtk4.orientable.OrientableGidBuilderImpl!T
+{
+
+  mixin SwipeableGidBuilderT!();
+  mixin OrientableGidBuilderT!();
+
+  /**
+      Set `content` property.
+      Params:
+        propval = The content widget.
+          
+          It's always displayed when unfolded, and partially visible when folded.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T content(gid.gtk4.widget.Widget propval) nothrow
+  {
+    return setProperty("content", propval);
+  }
+
+  /**
+      Set `flap` property.
+      Params:
+        propval = The flap widget.
+          
+          It's only visible when [gid.adw1.flap.Flap.revealProgress] is greater than 0.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T flap(gid.gtk4.widget.Widget propval) nothrow
+  {
+    return setProperty("flap", propval);
+  }
+
+  /**
+      Set `flapPosition` property.
+      Params:
+        propval = The flap position.
+          
+          If it's set to [gid.gtk4.types.PackType.Start], the flap is displayed before the
+          content, if [gid.gtk4.types.PackType.End], it's displayed after the content.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T flapPosition(gid.gtk4.types.PackType propval) nothrow
+  {
+    return setProperty("flap-position", propval);
+  }
+
+  /**
+      Set `foldDuration` property.
+      Params:
+        propval = The fold transition animation duration, in milliseconds.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T foldDuration(uint propval) nothrow
+  {
+    return setProperty("fold-duration", propval);
+  }
+
+  /**
+      Set `foldPolicy` property.
+      Params:
+        propval = The fold policy for the flap.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T foldPolicy(gid.adw1.types.FlapFoldPolicy propval) nothrow
+  {
+    return setProperty("fold-policy", propval);
+  }
+
+  /**
+      Set `foldThresholdPolicy` property.
+      Params:
+        propval = Determines when the flap will fold.
+          
+          If set to [gid.adw1.types.FoldThresholdPolicy.Minimum], flap will only fold when
+          the children cannot fit anymore. With [gid.adw1.types.FoldThresholdPolicy.Natural],
+          it will fold as soon as children don't get their natural size.
+          
+          This can be useful if you have a long ellipsizing label and want to let it
+          ellipsize instead of immediately folding.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T foldThresholdPolicy(gid.adw1.types.FoldThresholdPolicy propval) nothrow
+  {
+    return setProperty("fold-threshold-policy", propval);
+  }
+
+  /**
+      Set `locked` property.
+      Params:
+        propval = Whether the flap is locked.
+          
+          If `FALSE`, folding when the flap is revealed automatically closes it, and
+          unfolding it when the flap is not revealed opens it. If `TRUE`,
+          [gid.adw1.flap.Flap.revealFlap] value never changes on its own.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T locked(bool propval) nothrow
+  {
+    return setProperty("locked", propval);
+  }
+
+  /**
+      Set `modal` property.
+      Params:
+        propval = Whether the flap is modal.
+          
+          If `TRUE`, clicking the content widget while flap is revealed, as well as
+          pressing the <kbd>Esc</kbd> key, will close the flap. If `FALSE`, clicks
+          are passed through to the content widget.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T modal(bool propval) nothrow
+  {
+    return setProperty("modal", propval);
+  }
+
+  /**
+      Set `revealFlap` property.
+      Params:
+        propval = Whether the flap widget is revealed.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T revealFlap(bool propval) nothrow
+  {
+    return setProperty("reveal-flap", propval);
+  }
+
+  /**
+      Set `revealParams` property.
+      Params:
+        propval = The reveal animation spring parameters.
+          
+          The default value is equivalent to:
+          
+          ```c
+          adw_spring_params_new (1, 0.5, 500)
+          ```
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T revealParams(gid.adw1.spring_params.SpringParams propval) nothrow
+  {
+    return setProperty("reveal-params", propval);
+  }
+
+  /**
+      Set `separator` property.
+      Params:
+        propval = The separator widget.
+          
+          It's displayed between content and flap when there's no shadow to display.
+          When exactly it's visible depends on the [gid.adw1.flap.Flap.transitionType]
+          value.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T separator(gid.gtk4.widget.Widget propval) nothrow
+  {
+    return setProperty("separator", propval);
+  }
+
+  /**
+      Set `swipeToClose` property.
+      Params:
+        propval = Whether the flap can be closed with a swipe gesture.
+          
+          The area that can be swiped depends on the [gid.adw1.flap.Flap.transitionType]
+          value.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T swipeToClose(bool propval) nothrow
+  {
+    return setProperty("swipe-to-close", propval);
+  }
+
+  /**
+      Set `swipeToOpen` property.
+      Params:
+        propval = Whether the flap can be opened with a swipe gesture.
+          
+          The area that can be swiped depends on the [gid.adw1.flap.Flap.transitionType]
+          value.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T swipeToOpen(bool propval) nothrow
+  {
+    return setProperty("swipe-to-open", propval);
+  }
+
+  /**
+      Set `transitionType` property.
+      Params:
+        propval = the type of animation used for reveal and fold transitions.
+          
+          [gid.adw1.flap.Flap.flap] is transparent by default, which means the content
+          will be seen through it with [gid.adw1.types.FlapTransitionType.Over] transitions;
+          add the [`.background`](style-classes.html#background) style class to it if
+          this is unwanted.
+      Returns: Builder instance for fluent chaining
+  
+      Deprecated: See [the migration guide](migrating-to-breakpoints.html#replace-adwflap)
+  */
+  T transitionType(gid.adw1.types.FlapTransitionType propval) nothrow
+  {
+    return setProperty("transition-type", propval);
+  }
+}
+
+/// Fluent builder for [gid.adw1.flap.Flap]
+final class FlapGidBuilder : FlapGidBuilderImpl!FlapGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  Flap build() nothrow
+  {
+    return new Flap(cast(void*)createGObject(Flap._getGType), Yes.Take);
+  }
+}

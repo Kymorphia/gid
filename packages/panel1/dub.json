@@ -6,8 +6,8 @@
   "license": "MIT",
   "homepage": "https://gitlab.gnome.org/GNOME/libpanel",
   "targetType": "library",
-  "importPaths": [".", ".."],
-  "sourcePaths": ["panel"],
+  "importPaths": ["."],
+  "sourcePaths": ["gid"],
   "dependencies": {
     "gid:adw1": "*",
     "gid:gtk4": "*"

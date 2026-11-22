@@ -1,0 +1,379 @@
+/// Module for [SnippetChunk] class
+module gid.gtksource5.snippet_chunk;
+
+public import gid.core.basictypes;
+import gid.core.utils;
+import gid.gobject2.gid_builder;
+import gid.gobject2.initially_unowned;
+import gid.gobject2.object;
+import gid.gtksource5.c.functions;
+import gid.gtksource5.c.types;
+import gid.gtksource5.snippet_context;
+import gid.gtksource5.types;
+
+/**
+    A chunk of text within the source snippet.
+    
+    The [gid.gtksource5.snippet_chunk.SnippetChunk] represents a single chunk of text that
+    may or may not be an edit point within the snippet. Chunks that are
+    an edit point (also called a tab stop) have the
+    [gid.gtksource5.snippet_chunk.SnippetChunk.focusPosition] property set.
+*/
+class SnippetChunk : gid.gobject2.initially_unowned.InitiallyUnowned
+{
+
+  /** */
+  this(void* ptr, Flag!"Take" take) nothrow
+  {
+    super(ptr, take);
+  }
+
+  /** */
+  static GType _getGType() nothrow
+  {
+    import gid.core.loader : gidSymbolNotFound;
+    return cast(void function())gtk_source_snippet_chunk_get_type != &gidSymbolNotFound ? gtk_source_snippet_chunk_get_type() : cast(GType)0;
+  }
+
+  /** */
+  override @property GType _gType() nothrow
+  {
+    return _getGType();
+  }
+
+  /** */
+  override @property string _gTypeName() nothrow
+  {
+    return "GtkSourceSnippetChunk";
+  }
+
+  /** Returns `this`, for use in `with` statements. */
+  override SnippetChunk self() nothrow
+  {
+    return this;
+  }
+
+  /**
+      Get builder for [gid.gtksource5.snippet_chunk.SnippetChunk]
+      Returns: New builder object
+  */
+  static SnippetChunkGidBuilder builder() nothrow
+  {
+    return new SnippetChunkGidBuilder;
+  }
+
+  /** */
+  @property gid.gtksource5.snippet_context.SnippetContext context() nothrow
+  {
+    return getContext();
+  }
+
+  /** */
+  @property void context(gid.gtksource5.snippet_context.SnippetContext propval) nothrow
+  {
+    setContext(propval);
+  }
+
+  /** */
+  @property int focusPosition() nothrow
+  {
+    return getFocusPosition();
+  }
+
+  /** */
+  @property void focusPosition(int propval) nothrow
+  {
+    setFocusPosition(propval);
+  }
+
+  /** */
+  @property string spec() nothrow
+  {
+    return getSpec();
+  }
+
+  /** */
+  @property void spec(string propval) nothrow
+  {
+    setSpec(propval);
+  }
+
+  /** */
+  @property string text() nothrow
+  {
+    return getText();
+  }
+
+  /** */
+  @property void text(string propval) nothrow
+  {
+    setText(propval);
+  }
+
+  /** */
+  @property bool textSet() nothrow
+  {
+    return getTextSet();
+  }
+
+  /** */
+  @property void textSet(bool propval) nothrow
+  {
+    setTextSet(propval);
+  }
+
+  /** */
+  @property string tooltipText() nothrow
+  {
+    return getTooltipText();
+  }
+
+  /** */
+  @property void tooltipText(string propval) nothrow
+  {
+    setTooltipText(propval);
+  }
+
+  /**
+      Create a new [gid.gtksource5.snippet_chunk.SnippetChunk] that can be added to
+      a [gid.gtksource5.snippet.Snippet].
+      Returns: 
+  */
+  this() nothrow
+  {
+    GtkSourceSnippetChunk* _cretval;
+    _cretval = gtk_source_snippet_chunk_new();
+    this(_cretval, No.Take);
+  }
+
+  /**
+      Copies the source snippet.
+      Returns: A #GtkSourceSnippetChunk
+  */
+  gid.gtksource5.snippet_chunk.SnippetChunk copy() nothrow
+  {
+    GtkSourceSnippetChunk* _cretval;
+    _cretval = gtk_source_snippet_chunk_copy(cast(GtkSourceSnippetChunk*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtksource5.snippet_chunk.SnippetChunk)(cast(GtkSourceSnippetChunk*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the context for the snippet insertion.
+      Returns: A #GtkSourceSnippetContext
+  */
+  gid.gtksource5.snippet_context.SnippetContext getContext() nothrow
+  {
+    GtkSourceSnippetContext* _cretval;
+    _cretval = gtk_source_snippet_chunk_get_context(cast(GtkSourceSnippetChunk*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtksource5.snippet_context.SnippetContext)(cast(GtkSourceSnippetContext*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the [gid.gtksource5.snippet_chunk.SnippetChunk.focusPosition].
+      
+      The focus-position is used to determine how many tabs it takes for the
+      snippet to advanced to this chunk.
+      
+      A focus-position of zero will be the last focus position of the snippet
+      and snippet editing ends when it has been reached.
+      
+      A focus-position of -1 means the chunk cannot be focused by the user.
+      Returns: the focus-position
+  */
+  int getFocusPosition() nothrow
+  {
+    int _retval;
+    _retval = gtk_source_snippet_chunk_get_focus_position(cast(GtkSourceSnippetChunk*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the specification for the chunk.
+      
+      The specification is evaluated for variables when other chunks are edited
+      within the snippet context. If the user has changed the text, the
+      [gid.gtksource5.snippet_chunk.SnippetChunk.text] and [gid.gtksource5.snippet_chunk.SnippetChunk.textSet] properties
+      are updated.
+      Returns: the specification, if any
+  */
+  string getSpec() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_source_snippet_chunk_get_spec(cast(GtkSourceSnippetChunk*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the [gid.gtksource5.snippet_chunk.SnippetChunk.text] property.
+      
+      The text property is updated when the user edits the text of the chunk.
+      If it has not been edited, the [gid.gtksource5.snippet_chunk.SnippetChunk.spec] property is
+      returned.
+      Returns: the text of the chunk
+  */
+  string getText() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_source_snippet_chunk_get_text(cast(GtkSourceSnippetChunk*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the [gid.gtksource5.snippet_chunk.SnippetChunk.textSet] property.
+      
+      This is typically set when the user has edited a snippet chunk.
+      Returns: 
+  */
+  bool getTextSet() nothrow
+  {
+    bool _retval;
+    _retval = cast(bool)gtk_source_snippet_chunk_get_text_set(cast(GtkSourceSnippetChunk*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  string getTooltipText() nothrow
+  {
+    const(char)* _cretval;
+    _cretval = gtk_source_snippet_chunk_get_tooltip_text(cast(GtkSourceSnippetChunk*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /** */
+  void setContext(gid.gtksource5.snippet_context.SnippetContext context) nothrow
+  {
+    gtk_source_snippet_chunk_set_context(cast(GtkSourceSnippetChunk*)this._cPtr, context ? cast(GtkSourceSnippetContext*)context._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the [gid.gtksource5.snippet_chunk.SnippetChunk.focusPosition] property.
+      
+      The focus-position is used to determine how many tabs it takes for the
+      snippet to advanced to this chunk.
+      
+      A focus-position of zero will be the last focus position of the snippet
+      and snippet editing ends when it has been reached.
+      
+      A focus-position of -1 means the chunk cannot be focused by the user.
+  
+      Params:
+        focusPosition = the focus-position
+  */
+  void setFocusPosition(int focusPosition) nothrow
+  {
+    gtk_source_snippet_chunk_set_focus_position(cast(GtkSourceSnippetChunk*)this._cPtr, focusPosition);
+  }
+
+  /**
+      Sets the specification for the chunk.
+      
+      The specification is evaluated for variables when other chunks are edited
+      within the snippet context. If the user has changed the text, the
+      [gid.gtksource5.snippet_chunk.SnippetChunk.text] [gid.gtksource5.snippet_chunk.SnippetChunk.textSet] properties
+      are updated.
+  
+      Params:
+        spec = the new specification for the chunk
+  */
+  void setSpec(string spec) nothrow
+  {
+    const(char)* _spec = spec.toCString!(No.Malloc, No.Nullable);
+    gtk_source_snippet_chunk_set_spec(cast(GtkSourceSnippetChunk*)this._cPtr, _spec);
+  }
+
+  /**
+      Sets the text for the snippet chunk.
+      
+      This is usually used by the snippet engine to update the text, but may
+      be useful when creating custom snippets to avoid expansion of any
+      specification.
+  
+      Params:
+        text = the text of the property
+  */
+  void setText(string text) nothrow
+  {
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
+    gtk_source_snippet_chunk_set_text(cast(GtkSourceSnippetChunk*)this._cPtr, _text);
+  }
+
+  /**
+      Sets the [gid.gtksource5.snippet_chunk.SnippetChunk.textSet] property.
+      
+      This is typically set when the user has edited a snippet chunk by the
+      snippet engine.
+  
+      Params:
+        textSet = the property value
+  */
+  void setTextSet(bool textSet) nothrow
+  {
+    gtk_source_snippet_chunk_set_text_set(cast(GtkSourceSnippetChunk*)this._cPtr, textSet);
+  }
+
+  /** */
+  void setTooltipText(string tooltipText) nothrow
+  {
+    const(char)* _tooltipText = tooltipText.toCString!(No.Malloc, No.Nullable);
+    gtk_source_snippet_chunk_set_tooltip_text(cast(GtkSourceSnippetChunk*)this._cPtr, _tooltipText);
+  }
+}
+
+/// Fluent builder implementation template for [gid.gtksource5.snippet_chunk.SnippetChunk]
+class SnippetChunkGidBuilderImpl(T) : gid.gobject2.initially_unowned.InitiallyUnownedGidBuilderImpl!T
+{
+
+  /** */
+  T context(gid.gtksource5.snippet_context.SnippetContext propval) nothrow
+  {
+    return setProperty("context", propval);
+  }
+
+  /** */
+  T focusPosition(int propval) nothrow
+  {
+    return setProperty("focus-position", propval);
+  }
+
+  /** */
+  T spec(string propval) nothrow
+  {
+    return setProperty("spec", propval);
+  }
+
+  /** */
+  T text(string propval) nothrow
+  {
+    return setProperty("text", propval);
+  }
+
+  /** */
+  T textSet(bool propval) nothrow
+  {
+    return setProperty("text-set", propval);
+  }
+
+  /** */
+  T tooltipText(string propval) nothrow
+  {
+    return setProperty("tooltip-text", propval);
+  }
+}
+
+/// Fluent builder for [gid.gtksource5.snippet_chunk.SnippetChunk]
+final class SnippetChunkGidBuilder : SnippetChunkGidBuilderImpl!SnippetChunkGidBuilder
+{
+  /**
+      Create object from builder.
+      Returns: New object
+  */
+  SnippetChunk build() nothrow
+  {
+    return new SnippetChunk(cast(void*)createGObject(SnippetChunk._getGType), Yes.Take);
+  }
+}
