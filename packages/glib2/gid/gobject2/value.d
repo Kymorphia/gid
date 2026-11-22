@@ -1052,13 +1052,23 @@ T getVal(T)(const(GValue)* gval) nothrow
   return g_value_get_schar(gval);
   else static if (is(T == ubyte))
   return g_value_get_uchar(gval);
-  else static if (is(T == int))
-  return g_value_get_int(gval);
-  else static if (is(T == uint))
-  return g_value_get_uint(gval);
-  else static if (is(T == long)) // Also glong on 64 bit systems (where c_long is long), use the actual GValue type
+  else static if (is(T == int)) // Also glong on Windows (where c_long is int). Cast needed on 64-bit systems, where glong is long.
+  {
+    if (gval.gType == GTypeEnum.Long)
+      return cast(int)g_value_get_long(gval);
+    else
+      return g_value_get_int(gval);
+  }
+  else static if (is(T == uint)) // Also gulong on Windows (where c_ulong is uint). Cast needed on 64-bit systems, where gulong is ulong.
+  {
+    if (gval.gType == GTypeEnum.Ulong)
+      return cast(uint)g_value_get_ulong(gval);
+    else
+      return g_value_get_uint(gval);
+  }
+  else static if (is(T == long)) // Also glong on 64-bit systems (where c_long is long); use the actual GValue type
   return gval.gType == GTypeEnum.Long ? g_value_get_long(gval) : g_value_get_int64(gval);
-  else static if (is(T == ulong)) // Also gulong on 64 bit systems and GType (an alias of ulong)
+  else static if (is(T == ulong)) // Also gulong on 64-bit systems and GType (an alias of ulong)
   {
     if (gval.gType == GTypeEnum.Ulong)
       return g_value_get_ulong(gval);
@@ -1170,18 +1180,28 @@ void setVal(T)(GValue* gval, T v) nothrow
   g_value_set_schar(gval, v);
   else static if (is(T == ubyte))
   g_value_set_uchar(gval, v);
-  else static if (is(T == int))
-  g_value_set_int(gval, v);
-  else static if (is(T == uint))
-  g_value_set_uint(gval, v);
-  else static if (is(T == long)) // Also glong (cast needed: c_long is 32 bit on Windows), use the actual GValue type
+  else static if (is(T == int)) // Also glong on Windows (where c_long is int); use the actual GValue type
+  {
+    if (gval.gType == GTypeEnum.Long)
+      g_value_set_long(gval, v);
+    else
+      g_value_set_int(gval, v);
+  }
+  else static if (is(T == uint)) // Also gulong on Windows (where c_ulong is uint); use the actual GValue type
+  {
+    if (gval.gType == GTypeEnum.Ulong)
+      g_value_set_ulong(gval, v);
+    else
+      g_value_set_uint(gval, v);
+  }
+  else static if (is(T == long)) // Also glong on 64-bit systems (where c_long is long). Cast needed on Windows, where c_long is 32-bit.
   {
     if (gval.gType == GTypeEnum.Long)
       g_value_set_long(gval, cast(glong)v);
     else
       g_value_set_int64(gval, v);
   }
-  else static if (is(T == ulong)) // Also gulong and GType (cast needed: c_ulong is 32 bit on Windows)
+  else static if (is(T == ulong)) // Also gulong on 64-bit systems and GType. Cast needed on Windows, where c_ulong is 32-bit.
   {
     if (gval.gType == GTypeEnum.Ulong)
       g_value_set_ulong(gval, cast(gulong)v);
