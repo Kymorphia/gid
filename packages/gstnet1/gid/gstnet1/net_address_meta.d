@@ -2,7 +2,7 @@
 module gid.gstnet1.net_address_meta;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.socket_address;
 import gid.gst1.meta;
 import gid.gst1.meta_info;

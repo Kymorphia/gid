@@ -2,7 +2,7 @@
 module gid.gtk4.mount_operation;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.display;
 import gid.gio2.mount_operation;
 import gid.gobject2.gid_builder;

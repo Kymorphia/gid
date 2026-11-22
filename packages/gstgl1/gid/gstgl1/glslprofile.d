@@ -1,7 +1,7 @@
 /// Module for [GLSLProfile] flags namespace
 module gid.gstgl1.glslprofile;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstgl1.c.functions;
 import gid.gstgl1.c.types;
 import gid.gstgl1.types;

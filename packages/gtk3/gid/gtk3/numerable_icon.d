@@ -2,7 +2,7 @@
 module gid.gtk3.numerable_icon;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.emblemed_icon;
 import gid.gio2.icon;
 import gid.gio2.icon_mixin;

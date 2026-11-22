@@ -2,7 +2,7 @@
 module gid.panel1.statusbar;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gtk4.accessible;
 import gid.gtk4.accessible_mixin;

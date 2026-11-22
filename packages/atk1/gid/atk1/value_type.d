@@ -4,7 +4,7 @@ module gid.atk1.value_type;
 import gid.atk1.c.functions;
 import gid.atk1.c.types;
 import gid.atk1.types;
-import gid.core.gid;
+import gid.core.utils;
 
 /// Namespace for [ValueType] enum
 struct ValueType

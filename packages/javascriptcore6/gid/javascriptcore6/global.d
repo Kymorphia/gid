@@ -1,7 +1,7 @@
 /// Global functions for javascriptcore6 library
 module gid.javascriptcore6.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.option_group;
 import gid.javascriptcore6.c.functions;
 import gid.javascriptcore6.c.types;

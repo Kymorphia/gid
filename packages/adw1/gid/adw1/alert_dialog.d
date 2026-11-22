@@ -6,7 +6,7 @@ import gid.adw1.c.functions;
 import gid.adw1.c.types;
 import gid.adw1.dialog;
 import gid.adw1.types;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.async_result;
 import gid.gio2.cancellable;
 import gid.gio2.types;

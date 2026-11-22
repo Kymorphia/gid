@@ -1,7 +1,7 @@
 /// Module for [InstallPluginsReturn] enum namespace
 module gid.gstpbutils1.install_plugins_return;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstpbutils1.c.functions;
 import gid.gstpbutils1.c.types;
 import gid.gstpbutils1.types;

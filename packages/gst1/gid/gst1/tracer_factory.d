@@ -2,7 +2,7 @@
 module gid.gst1.tracer_factory;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gobject2.types;
 import gid.gst1.c.functions;

@@ -2,7 +2,7 @@
 module gid.gst1.parent_buffer_meta;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.buffer;
 import gid.gst1.c.functions;
 import gid.gst1.c.types;

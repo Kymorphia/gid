@@ -1,7 +1,7 @@
 /// Module for [FileSaverError] enum namespace
 module gid.gtksource5.file_saver_error;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.types;
 import gid.gtksource5.c.functions;

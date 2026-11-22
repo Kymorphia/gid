@@ -2,7 +2,7 @@
 module gid.gtk3.theming_engine;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.rgba;
 import gid.gdk3.screen;
 import gid.gobject2.gid_builder;

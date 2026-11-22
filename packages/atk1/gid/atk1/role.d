@@ -4,7 +4,7 @@ module gid.atk1.role;
 import gid.atk1.c.functions;
 import gid.atk1.c.types;
 import gid.atk1.types;
-import gid.core.gid;
+import gid.core.utils;
 
 /// Namespace for [Role] enum
 struct Role

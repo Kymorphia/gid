@@ -3,7 +3,7 @@ module gid.gsk4.render_node;
 
 public import gid.core.basictypes;
 import gid.cairo1.context;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.bytes;
 import gid.glib2.error;
 import gid.graphene1.rect;

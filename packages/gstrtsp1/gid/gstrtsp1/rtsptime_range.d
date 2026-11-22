@@ -2,7 +2,7 @@
 module gid.gstrtsp1.rtsptime_range;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstrtsp1.c.functions;
 import gid.gstrtsp1.c.types;
 import gid.gstrtsp1.types;

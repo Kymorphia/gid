@@ -2,7 +2,7 @@
 module gid.gstrtsp1.rtsptransport;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstrtsp1.c.functions;
 import gid.gstrtsp1.c.types;
 import gid.gstrtsp1.rtsprange;
@@ -12,8 +12,8 @@ import gid.gstrtsp1.types;
 private extern(C) GstRTSPTransport* rtspTransportCopy(const(GstRTSPTransport)* transport) nothrow
 {
   auto copy = mallocDup(cast(GstRTSPTransport*)transport);
-  copy.destination = gid.core.gid.strdup(transport.destination);
-  copy.source = gid.core.gid.strdup(transport.source);
+  copy.destination = gid.core.utils.strdup(transport.destination);
+  copy.source = gid.core.utils.strdup(transport.source);
   return copy;
 }
 /**

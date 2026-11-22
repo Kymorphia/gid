@@ -3,7 +3,7 @@ module gid.gtk4.widget;
 
 public import gid.core.basictypes;
 import gid.cairo1.font_options;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.clipboard;
 import gid.gdk4.cursor;
 import gid.gdk4.display;

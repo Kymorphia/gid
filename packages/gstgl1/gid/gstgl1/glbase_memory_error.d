@@ -1,7 +1,7 @@
 /// Module for [GLBaseMemoryError] enum namespace
 module gid.gstgl1.glbase_memory_error;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.types;
 import gid.gstgl1.c.functions;

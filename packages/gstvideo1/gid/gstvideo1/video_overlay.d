@@ -3,7 +3,7 @@ module gid.gstvideo1.video_overlay;
 
 public import gid.core.basictypes;
 public import gid.gstvideo1.video_overlay_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;
 import gid.gobject2.value;

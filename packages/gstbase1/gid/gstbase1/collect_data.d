@@ -2,7 +2,7 @@
 module gid.gstbase1.collect_data;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.buffer;
 import gid.gst1.pad;
 import gid.gst1.segment;

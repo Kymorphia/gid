@@ -2,7 +2,7 @@
 module gid.gstrtsp1.rtspwatch;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.main_context;
 import gid.glib2.time_val;
 import gid.gstrtsp1.c.functions;

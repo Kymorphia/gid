@@ -3,7 +3,7 @@ module gid.gio2.action_map;
 
 public import gid.core.basictypes;
 public import gid.gio2.action_map_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.action;
 import gid.gio2.action_entry;
 import gid.gio2.c.functions;

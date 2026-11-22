@@ -1,7 +1,7 @@
 /// Global functions for gstcheck1 library
 module gid.gstcheck1.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.types;
 import gid.gobject2.object;
 import gid.gst1.buffer;

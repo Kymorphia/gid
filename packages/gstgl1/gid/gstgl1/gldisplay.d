@@ -2,7 +2,7 @@
 module gid.gstgl1.gldisplay;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.thread;
 import gid.gobject2.dclosure;

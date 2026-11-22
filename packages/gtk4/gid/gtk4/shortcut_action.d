@@ -2,7 +2,7 @@
 module gid.gtk4.shortcut_action;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.string_;
 import gid.glib2.variant;
 import gid.gobject2.gid_builder;

@@ -2,7 +2,7 @@
 module gid.gstrtsp1.rtspurl;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.gstrtsp1.c.functions;
 import gid.gstrtsp1.c.types;

@@ -2,7 +2,7 @@
 module gid.gstgl1.glbuffer_allocation_params;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.gst1.allocation_params;
 import gid.gstgl1.c.functions;

@@ -2,7 +2,7 @@
 module gid.gtk4.bitset_iter;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.gtk4.bitset;
 import gid.gtk4.c.functions;

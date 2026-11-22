@@ -1,7 +1,7 @@
 /// Module for [PolicyError] enum namespace
 module gid.webkit6.policy_error;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.types;
 import gid.webkit6.c.functions;

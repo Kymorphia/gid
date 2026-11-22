@@ -6,7 +6,7 @@ import gid.adw1.c.functions;
 import gid.adw1.c.types;
 import gid.adw1.sidebar_section;
 import gid.adw1.types;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.paintable;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;

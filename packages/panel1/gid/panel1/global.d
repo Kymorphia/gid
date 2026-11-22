@@ -1,7 +1,7 @@
 /// Global functions for panel1 library
 module gid.panel1.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.resource;
 import gid.gobject2.closure;
 import gid.gobject2.value;

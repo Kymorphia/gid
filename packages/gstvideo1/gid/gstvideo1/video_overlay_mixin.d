@@ -3,7 +3,7 @@ module gid.gstvideo1.video_overlay_mixin;
 
 public import gid.core.basictypes;
 public import gid.gstvideo1.video_overlay_iface_proxy;
-public import gid.core.gid;
+public import gid.core.utils;
 public import gid.gobject2.gid_builder;
 public import gid.gobject2.object;
 public import gid.gobject2.value;

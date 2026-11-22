@@ -1,7 +1,7 @@
 /// Global functions for gstpbutils1 library
 module gid.gstpbutils1.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.buffer;
 import gid.gst1.caps;
 import gid.gst1.element;

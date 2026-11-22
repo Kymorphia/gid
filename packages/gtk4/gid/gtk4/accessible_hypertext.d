@@ -3,7 +3,7 @@ module gid.gtk4.accessible_hypertext;
 
 public import gid.core.basictypes;
 public import gid.gtk4.accessible_hypertext_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gtk4.accessible;
 import gid.gtk4.c.functions;

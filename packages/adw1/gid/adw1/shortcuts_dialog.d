@@ -7,7 +7,7 @@ import gid.adw1.c.types;
 import gid.adw1.dialog;
 import gid.adw1.shortcuts_section;
 import gid.adw1.types;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gtk4.accessible;
 import gid.gtk4.accessible_mixin;

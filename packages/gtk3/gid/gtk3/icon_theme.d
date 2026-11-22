@@ -3,7 +3,7 @@ module gid.gtk3.icon_theme;
 
 public import gid.core.basictypes;
 import gid.cairo1.surface;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.screen;
 import gid.gdk3.window;
 import gid.gdkpixbuf2.pixbuf;

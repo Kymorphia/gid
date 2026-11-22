@@ -2,7 +2,7 @@
 module gid.soup3.message_metrics;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.soup3.c.functions;
 import gid.soup3.c.types;

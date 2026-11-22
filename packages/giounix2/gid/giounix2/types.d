@@ -1,7 +1,7 @@
 /// D types for giounix2 library
 module gid.giounix2.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.giounix2.c.functions;
 import gid.giounix2.c.types;
 import gid.giounix2.desktop_app_info;

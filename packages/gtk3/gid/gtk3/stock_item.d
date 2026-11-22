@@ -2,7 +2,7 @@
 module gid.gtk3.stock_item;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.types;
 import gid.gtk3.c.functions;
 import gid.gtk3.c.types;

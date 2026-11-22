@@ -1,7 +1,7 @@
 /// Module for [ResourceError] enum namespace
 module gid.gio2.resource_error;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.c.functions;
 import gid.gio2.c.types;
 import gid.gio2.types;

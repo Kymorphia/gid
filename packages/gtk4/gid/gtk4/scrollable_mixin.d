@@ -3,7 +3,7 @@ module gid.gtk4.scrollable_mixin;
 
 public import gid.core.basictypes;
 public import gid.gtk4.scrollable_iface_proxy;
-public import gid.core.gid;
+public import gid.core.utils;
 public import gid.gobject2.gid_builder;
 public import gid.gobject2.object;
 public import gid.gtk4.adjustment;

@@ -2,7 +2,7 @@
 module gid.gtk3.recent_info;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdkpixbuf2.pixbuf;
 import gid.gio2.app_info;
 import gid.gio2.icon;

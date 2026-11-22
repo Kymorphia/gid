@@ -2,7 +2,7 @@
 module gid.gtk4.tree_row_reference;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.gobject2.object;
 import gid.gtk4.c.functions;

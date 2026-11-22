@@ -6,7 +6,7 @@ import gid.adw1.c.functions;
 import gid.adw1.c.types;
 import gid.adw1.style_manager;
 import gid.adw1.types;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.action_group;
 import gid.gio2.action_group_mixin;
 import gid.gio2.action_map;

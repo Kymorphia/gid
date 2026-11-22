@@ -2,7 +2,7 @@
 module gid.gstnet1.ntp_clock;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gst1.types;
 import gid.gstnet1.c.functions;

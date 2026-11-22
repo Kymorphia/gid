@@ -3,7 +3,7 @@ module gid.rsvg2.handle;
 
 public import gid.core.basictypes;
 import gid.cairo1.context;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdkpixbuf2.pixbuf;
 import gid.gio2.cancellable;
 import gid.gio2.file;

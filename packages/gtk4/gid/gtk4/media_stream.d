@@ -2,7 +2,7 @@
 module gid.gtk4.media_stream;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.paintable;
 import gid.gdk4.paintable_mixin;
 import gid.gdk4.surface;

@@ -2,7 +2,7 @@
 module gid.gtksource4.completion_item;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdkpixbuf2.pixbuf;
 import gid.gio2.icon;
 import gid.gobject2.gid_builder;

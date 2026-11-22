@@ -5,7 +5,7 @@ public import gid.core.basictypes;
 import gid.atk1.c.functions;
 import gid.atk1.c.types;
 import gid.atk1.types;
-import gid.core.gid;
+import gid.core.utils;
 
 /**
     Encapsulates information about a key event.

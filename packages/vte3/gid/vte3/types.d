@@ -1,7 +1,7 @@
 /// D types for vte3 library
 module gid.vte3.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.types;
 import gid.vte3.c.functions;

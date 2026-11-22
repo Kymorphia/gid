@@ -2,7 +2,7 @@
 module gid.gtk4.font_chooser_widget;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.action;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;

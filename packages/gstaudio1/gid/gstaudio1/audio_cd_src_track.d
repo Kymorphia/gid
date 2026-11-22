@@ -2,7 +2,7 @@
 module gid.gstaudio1.audio_cd_src_track;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.tag_list;
 import gid.gstaudio1.c.functions;
 import gid.gstaudio1.c.types;

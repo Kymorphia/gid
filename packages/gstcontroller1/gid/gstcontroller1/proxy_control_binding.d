@@ -2,7 +2,7 @@
 module gid.gstcontroller1.proxy_control_binding;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gst1.control_binding;
 import gid.gst1.object;

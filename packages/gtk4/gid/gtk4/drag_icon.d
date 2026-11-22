@@ -2,7 +2,7 @@
 module gid.gtk4.drag_icon;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.drag;
 import gid.gdk4.paintable;
 import gid.gobject2.gid_builder;

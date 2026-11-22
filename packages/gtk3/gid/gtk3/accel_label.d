@@ -4,7 +4,7 @@ module gid.gtk3.accel_label;
 public import gid.core.basictypes;
 import gid.atk1.implementor_iface;
 import gid.atk1.implementor_iface_mixin;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.types;
 import gid.gobject2.closure;
 import gid.gobject2.gid_builder;

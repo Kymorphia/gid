@@ -1,7 +1,7 @@
 /// D types for gstvideo1 library
 module gid.gstvideo1.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.gst1.sample;
 import gid.gstvideo1.c.functions;

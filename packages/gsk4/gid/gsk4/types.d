@@ -1,7 +1,7 @@
 /// D types for gsk4 library
 module gid.gsk4.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.texture;
 import gid.glib2.error;
 import gid.graphene1.point;

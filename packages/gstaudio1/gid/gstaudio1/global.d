@@ -1,7 +1,7 @@
 /// Global functions for gstaudio1 library
 module gid.gstaudio1.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.types;
 import gid.gst1.buffer;
 import gid.gst1.caps;

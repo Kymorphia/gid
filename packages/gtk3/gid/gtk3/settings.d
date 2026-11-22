@@ -2,7 +2,7 @@
 module gid.gtk3.settings;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.screen;
 import gid.glib2.string_;
 import gid.gobject2.gid_builder;

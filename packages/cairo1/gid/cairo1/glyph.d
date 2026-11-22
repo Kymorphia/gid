@@ -5,7 +5,7 @@ public import gid.core.basictypes;
 import gid.cairo1.c.functions;
 import gid.cairo1.c.types;
 import gid.cairo1.types;
-import gid.core.gid;
+import gid.core.utils;
 
 /**
     The #cairo_glyph_t structure holds information about a single glyph

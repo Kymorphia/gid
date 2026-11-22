@@ -2,7 +2,7 @@
 module gid.gtk4.icon_view;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.content_formats;
 import gid.gdk4.paintable;
 import gid.gdk4.rectangle;

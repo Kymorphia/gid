@@ -1,7 +1,7 @@
 /// Module for [TLDError] enum namespace
 module gid.soup3.tlderror;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.types;
 import gid.soup3.c.functions;

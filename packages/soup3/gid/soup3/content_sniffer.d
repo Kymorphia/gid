@@ -2,7 +2,7 @@
 module gid.soup3.content_sniffer;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.bytes;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;

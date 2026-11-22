@@ -3,7 +3,7 @@ module gid.panel1.application;
 
 public import gid.core.basictypes;
 import gid.adw1.application;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.action_group;
 import gid.gio2.action_group_mixin;
 import gid.gio2.action_map;

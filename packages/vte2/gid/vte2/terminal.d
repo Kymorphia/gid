@@ -6,7 +6,7 @@ import gid.atk1.implementor_iface;
 import gid.atk1.implementor_iface_mixin;
 import gid.cairo1.font_options;
 import gid.cairo1.surface;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.cursor;
 import gid.gdk3.event;
 import gid.gdk3.rectangle;

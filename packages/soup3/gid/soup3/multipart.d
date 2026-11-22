@@ -2,7 +2,7 @@
 module gid.soup3.multipart;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.bytes;
 import gid.gobject2.boxed;
 import gid.soup3.c.functions;

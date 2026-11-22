@@ -1,7 +1,7 @@
 /// D types for javascriptcore6 library
 module gid.javascriptcore6.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.javascriptcore6.c.functions;
 import gid.javascriptcore6.c.types;
 import gid.javascriptcore6.class_;

@@ -2,7 +2,7 @@
 module gid.gtksource5.snippet_chunk;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gobject2.initially_unowned;
 import gid.gobject2.object;

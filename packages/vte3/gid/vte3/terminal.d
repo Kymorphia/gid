@@ -4,7 +4,7 @@ module gid.vte3.terminal;
 public import gid.core.basictypes;
 import gid.cairo1.font_options;
 import gid.cairo1.surface;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.cursor;
 import gid.gdk4.rectangle;
 import gid.gdk4.rgba;

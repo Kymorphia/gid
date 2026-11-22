@@ -1,7 +1,7 @@
 /// D types for gio2 library
 module gid.gio2.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.async_result;
 import gid.gio2.c.functions;
 import gid.gio2.c.types;

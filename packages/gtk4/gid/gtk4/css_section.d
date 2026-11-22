@@ -2,7 +2,7 @@
 module gid.gtk4.css_section;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.file;
 import gid.glib2.bytes;
 import gid.glib2.string_;

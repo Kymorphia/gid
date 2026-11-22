@@ -2,7 +2,7 @@
 module gid.gtk4.pad_controller;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.device;
 import gid.gio2.action_group;
 import gid.gobject2.gid_builder;

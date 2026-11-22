@@ -1,7 +1,7 @@
 /// D types for gstnet1 library
 module gid.gstnet1.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.structure;
 import gid.gstnet1.c.functions;
 import gid.gstnet1.c.types;

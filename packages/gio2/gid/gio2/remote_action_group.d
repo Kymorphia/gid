@@ -3,7 +3,7 @@ module gid.gio2.remote_action_group;
 
 public import gid.core.basictypes;
 public import gid.gio2.remote_action_group_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.action_group;
 import gid.gio2.c.functions;
 import gid.gio2.c.types;

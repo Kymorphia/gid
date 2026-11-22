@@ -1,7 +1,7 @@
 /// Module for [VideoCaptionType] enum namespace
 module gid.gstvideo1.video_caption_type;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.caps;
 import gid.gstvideo1.c.functions;
 import gid.gstvideo1.c.types;

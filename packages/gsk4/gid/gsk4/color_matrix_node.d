@@ -2,7 +2,7 @@
 module gid.gsk4.color_matrix_node;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.graphene1.matrix;
 import gid.graphene1.vec4;
 import gid.gsk4.c.functions;

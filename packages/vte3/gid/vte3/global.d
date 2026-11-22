@@ -1,7 +1,7 @@
 /// Global functions for vte3 library
 module gid.vte3.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.vte3.c.functions;
 import gid.vte3.c.types;
 import gid.vte3.types;

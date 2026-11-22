@@ -5,7 +5,7 @@ public import gid.core.basictypes;
 import gid.atk1.implementor_iface;
 import gid.atk1.implementor_iface_mixin;
 import gid.cairo1.surface;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.rectangle;
 import gid.gdk3.types;
 import gid.gdk3.window;

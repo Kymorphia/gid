@@ -2,7 +2,7 @@
 module gid.gsttag1.tag_demux;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gst1.element;
 import gid.gsttag1.c.functions;

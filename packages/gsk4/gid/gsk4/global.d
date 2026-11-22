@@ -1,7 +1,7 @@
 /// Global functions for gsk4 library
 module gid.gsk4.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.value;
 import gid.gsk4.c.functions;
 import gid.gsk4.c.types;

@@ -2,7 +2,7 @@
 module gid.pango1.fontset_simple;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.pango1.c.functions;
 import gid.pango1.c.types;

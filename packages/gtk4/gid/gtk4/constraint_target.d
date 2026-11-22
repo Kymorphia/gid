@@ -3,7 +3,7 @@ module gid.gtk4.constraint_target;
 
 public import gid.core.basictypes;
 public import gid.gtk4.constraint_target_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gtk4.c.functions;
 import gid.gtk4.c.types;

@@ -2,7 +2,7 @@
 module gid.gtk3.tree_view_column;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.rectangle;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;

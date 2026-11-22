@@ -2,7 +2,7 @@
 module gid.vte2.char_attributes;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.vte2.c.functions;
 import gid.vte2.c.types;
 import gid.vte2.types;

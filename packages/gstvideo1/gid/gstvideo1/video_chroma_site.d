@@ -1,7 +1,7 @@
 /// Module for [VideoChromaSite] flags namespace
 module gid.gstvideo1.video_chroma_site;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstvideo1.c.functions;
 import gid.gstvideo1.c.types;
 import gid.gstvideo1.types;

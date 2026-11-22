@@ -1,7 +1,7 @@
 /// Module for [AudioFormat] enum namespace
 module gid.gstaudio1.audio_format;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstaudio1.audio_format_info;
 import gid.gstaudio1.c.functions;
 import gid.gstaudio1.c.types;

@@ -4,7 +4,7 @@ module gid.gtk3.widget_accessible;
 public import gid.core.basictypes;
 import gid.atk1.component;
 import gid.atk1.component_mixin;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gtk3.accessible;
 import gid.gtk3.c.functions;

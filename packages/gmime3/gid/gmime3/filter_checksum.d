@@ -2,7 +2,7 @@
 module gid.gmime3.filter_checksum;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.types;
 import gid.gmime3.c.functions;
 import gid.gmime3.c.types;

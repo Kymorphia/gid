@@ -3,7 +3,7 @@ module gid.secret1.backend;
 
 public import gid.core.basictypes;
 public import gid.secret1.backend_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.async_initable;
 import gid.gio2.async_result;
 import gid.gio2.cancellable;

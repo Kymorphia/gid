@@ -4,7 +4,7 @@ module gid.gtk3.model_button;
 public import gid.core.basictypes;
 import gid.atk1.implementor_iface;
 import gid.atk1.implementor_iface_mixin;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.icon;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;

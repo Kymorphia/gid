@@ -7,7 +7,7 @@ import gid.cairo1.c.types;
 import gid.cairo1.device;
 import gid.cairo1.font_options;
 import gid.cairo1.types;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 
 /**

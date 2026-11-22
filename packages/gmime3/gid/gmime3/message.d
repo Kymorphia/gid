@@ -2,7 +2,7 @@
 module gid.gmime3.message;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.date_time;
 import gid.glib2.error;
 import gid.gmime3.autocrypt_header;

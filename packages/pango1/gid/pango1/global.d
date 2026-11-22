@@ -1,7 +1,7 @@
 /// Global functions for pango1 library
 module gid.pango1.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.markup_parse_context;
 import gid.glib2.string_;

@@ -3,7 +3,7 @@ module gid.gtk3.color_chooser_mixin;
 
 public import gid.core.basictypes;
 public import gid.gtk3.color_chooser_iface_proxy;
-public import gid.core.gid;
+public import gid.core.utils;
 public import gid.gdk3.rgba;
 public import gid.gobject2.dclosure;
 public import gid.gobject2.gid_builder;

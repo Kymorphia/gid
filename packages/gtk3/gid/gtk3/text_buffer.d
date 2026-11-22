@@ -2,7 +2,7 @@
 module gid.gtk3.text_buffer;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.atom;
 import gid.gdkpixbuf2.pixbuf;
 import gid.glib2.error;

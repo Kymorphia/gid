@@ -1,7 +1,7 @@
 /// Module for [Error] enum namespace
 module gid.secret1.error;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.types;
 import gid.secret1.c.functions;
 import gid.secret1.c.types;

@@ -4,7 +4,7 @@ module gid.gtk3.application_window;
 public import gid.core.basictypes;
 import gid.atk1.implementor_iface;
 import gid.atk1.implementor_iface_mixin;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.action_group;
 import gid.gio2.action_group_mixin;
 import gid.gio2.action_map;

@@ -4,7 +4,7 @@ module gid.gtk3.vbutton_box;
 public import gid.core.basictypes;
 import gid.atk1.implementor_iface;
 import gid.atk1.implementor_iface_mixin;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gtk3.buildable;
 import gid.gtk3.buildable_mixin;

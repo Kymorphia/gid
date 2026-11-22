@@ -1,7 +1,7 @@
 /// Module for [PadMode] enum namespace
 module gid.gst1.pad_mode;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.c.functions;
 import gid.gst1.c.types;
 import gid.gst1.types;

@@ -1,7 +1,7 @@
 /// Module for [Gravity] enum namespace
 module gid.pango1.gravity;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.pango1.c.functions;
 import gid.pango1.c.types;
 import gid.pango1.matrix;

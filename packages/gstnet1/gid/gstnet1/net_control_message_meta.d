@@ -2,7 +2,7 @@
 module gid.gstnet1.net_control_message_meta;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.socket_control_message;
 import gid.gst1.meta;
 import gid.gst1.meta_info;

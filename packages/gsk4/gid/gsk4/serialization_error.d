@@ -1,7 +1,7 @@
 /// Module for [SerializationError] enum namespace
 module gid.gsk4.serialization_error;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.types;
 import gid.gsk4.c.functions;

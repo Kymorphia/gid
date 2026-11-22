@@ -4,7 +4,7 @@ module gid.adw1.accent_color;
 import gid.adw1.c.functions;
 import gid.adw1.c.types;
 import gid.adw1.types;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.rgba;
 
 /// Namespace for [AccentColor] enum

@@ -2,7 +2,7 @@
 module gid.gtk3.css_section;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.file;
 import gid.gobject2.boxed;
 import gid.gobject2.object;

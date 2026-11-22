@@ -2,7 +2,7 @@
 module gid.gtk4.app_chooser_widget;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.app_info;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;

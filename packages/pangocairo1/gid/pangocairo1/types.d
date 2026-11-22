@@ -2,7 +2,7 @@
 module gid.pangocairo1.types;
 
 import gid.cairo1.context;
-import gid.core.gid;
+import gid.core.utils;
 import gid.pango1.attr_shape;
 import gid.pangocairo1.c.functions;
 import gid.pangocairo1.c.types;

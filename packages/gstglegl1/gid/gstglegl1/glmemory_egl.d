@@ -2,7 +2,7 @@
 module gid.gstglegl1.glmemory_egl;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.gstglegl1.c.functions;
 import gid.gstglegl1.c.types;

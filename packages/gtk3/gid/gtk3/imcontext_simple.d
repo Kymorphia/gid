@@ -2,7 +2,7 @@
 module gid.gtk3.imcontext_simple;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gtk3.c.functions;
 import gid.gtk3.c.types;

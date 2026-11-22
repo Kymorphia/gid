@@ -2,7 +2,7 @@
 module gid.gsk4.glshader_node;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.bytes;
 import gid.gobject2.object;
 import gid.graphene1.rect;

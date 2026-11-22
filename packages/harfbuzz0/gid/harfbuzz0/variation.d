@@ -2,7 +2,7 @@
 module gid.harfbuzz0.variation;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.harfbuzz0.c.functions;
 import gid.harfbuzz0.c.types;
 import gid.harfbuzz0.types;

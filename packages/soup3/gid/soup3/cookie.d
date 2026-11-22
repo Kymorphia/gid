@@ -2,7 +2,7 @@
 module gid.soup3.cookie;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.date_time;
 import gid.glib2.uri;
 import gid.gobject2.boxed;

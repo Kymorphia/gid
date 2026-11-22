@@ -1,7 +1,7 @@
 /// Module for [FaviconDatabaseError] enum namespace
 module gid.webkit6.favicon_database_error;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.types;
 import gid.webkit6.c.functions;

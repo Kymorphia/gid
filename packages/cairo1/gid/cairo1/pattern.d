@@ -7,7 +7,7 @@ import gid.cairo1.c.types;
 import gid.cairo1.matrix;
 import gid.cairo1.surface;
 import gid.cairo1.types;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 
 /**

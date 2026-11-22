@@ -3,7 +3,7 @@ module gid.gtk3.style;
 
 public import gid.core.basictypes;
 import gid.cairo1.context;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.color;
 import gid.gdk3.window;
 import gid.gdkpixbuf2.pixbuf;

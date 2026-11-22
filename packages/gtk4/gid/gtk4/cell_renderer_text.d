@@ -2,7 +2,7 @@
 module gid.gtk4.cell_renderer_text;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.rgba;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;

@@ -3,7 +3,7 @@ module gid.gstaudio1.stream_volume;
 
 public import gid.core.basictypes;
 public import gid.gstaudio1.stream_volume_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gstaudio1.c.functions;
 import gid.gstaudio1.c.types;

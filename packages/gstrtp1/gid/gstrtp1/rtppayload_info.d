@@ -2,7 +2,7 @@
 module gid.gstrtp1.rtppayload_info;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstrtp1.c.functions;
 import gid.gstrtp1.c.types;
 import gid.gstrtp1.types;

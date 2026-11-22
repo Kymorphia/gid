@@ -1,7 +1,7 @@
 /// D types for gstcontroller1 library
 module gid.gstcontroller1.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.value;
 import gid.gstcontroller1.c.functions;
 import gid.gstcontroller1.c.types;

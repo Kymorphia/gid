@@ -2,7 +2,7 @@
 module gid.gtk3.text_iter;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdkpixbuf2.pixbuf;
 import gid.gobject2.boxed;
 import gid.gobject2.object;

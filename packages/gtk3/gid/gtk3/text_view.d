@@ -4,7 +4,7 @@ module gid.gtk3.text_view;
 public import gid.core.basictypes;
 import gid.atk1.implementor_iface;
 import gid.atk1.implementor_iface_mixin;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.event_key;
 import gid.gdk3.rectangle;
 import gid.gdk3.window;

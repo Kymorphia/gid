@@ -2,7 +2,7 @@
 module gid.json1.object;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.json1.array;
 import gid.json1.c.functions;

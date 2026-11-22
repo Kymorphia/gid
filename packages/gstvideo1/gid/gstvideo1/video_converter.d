@@ -2,7 +2,7 @@
 module gid.gstvideo1.video_converter;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.buffer;
 import gid.gst1.structure;
 import gid.gstvideo1.c.functions;

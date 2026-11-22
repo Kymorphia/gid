@@ -1,7 +1,7 @@
 /// D types for gdk4 library
 module gid.gdk4.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.c.functions;
 import gid.gdk4.c.types;
 import gid.gdk4.content_deserializer;

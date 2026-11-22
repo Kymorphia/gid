@@ -2,7 +2,7 @@
 module gid.pango1.attr_shape;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.types;
 import gid.pango1.attribute;
 import gid.pango1.c.functions;

@@ -2,7 +2,7 @@
 module gid.gstnet1.net_time_packet;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.socket;
 import gid.gio2.socket_address;
 import gid.glib2.error;

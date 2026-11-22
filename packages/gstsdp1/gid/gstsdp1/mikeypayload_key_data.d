@@ -2,7 +2,7 @@
 module gid.gstsdp1.mikeypayload_key_data;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstsdp1.c.functions;
 import gid.gstsdp1.c.types;
 import gid.gstsdp1.mikeypayload;

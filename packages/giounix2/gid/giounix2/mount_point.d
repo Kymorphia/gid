@@ -2,7 +2,7 @@
 module gid.giounix2.mount_point;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.icon;
 import gid.giounix2.c.functions;
 import gid.giounix2.c.types;

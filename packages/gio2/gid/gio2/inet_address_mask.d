@@ -2,7 +2,7 @@
 module gid.gio2.inet_address_mask;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.c.functions;
 import gid.gio2.c.types;
 import gid.gio2.inet_address;

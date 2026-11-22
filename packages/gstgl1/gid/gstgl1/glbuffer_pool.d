@@ -2,7 +2,7 @@
 module gid.gstgl1.glbuffer_pool;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gst1.buffer_pool;
 import gid.gstgl1.c.functions;

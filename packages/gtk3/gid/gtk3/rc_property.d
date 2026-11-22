@@ -2,7 +2,7 @@
 module gid.gtk3.rc_property;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.string_;
 import gid.glib2.types;
 import gid.gobject2.param_spec;

@@ -3,7 +3,7 @@ module gid.gtk4.selection_model;
 
 public import gid.core.basictypes;
 public import gid.gtk4.selection_model_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.list_model;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;

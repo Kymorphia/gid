@@ -3,7 +3,7 @@ module gid.gtksource4.completion_proposal;
 
 public import gid.core.basictypes;
 public import gid.gtksource4.completion_proposal_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdkpixbuf2.pixbuf;
 import gid.gio2.icon;
 import gid.gobject2.dclosure;

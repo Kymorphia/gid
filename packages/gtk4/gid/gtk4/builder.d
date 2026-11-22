@@ -2,7 +2,7 @@
 module gid.gtk4.builder;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.gobject2.closure;
 import gid.gobject2.gid_builder;

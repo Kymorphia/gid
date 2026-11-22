@@ -3,7 +3,7 @@ module gid.json1.serializable;
 
 public import gid.core.basictypes;
 public import gid.json1.serializable_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gobject2.param_spec;
 import gid.gobject2.value;

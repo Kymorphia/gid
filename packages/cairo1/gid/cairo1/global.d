@@ -14,7 +14,7 @@ import gid.cairo1.region;
 import gid.cairo1.scaled_font;
 import gid.cairo1.surface;
 import gid.cairo1.types;
-import gid.core.gid;
+import gid.core.utils;
 
 
 /**

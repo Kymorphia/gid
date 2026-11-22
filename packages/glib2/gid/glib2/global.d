@@ -1,7 +1,7 @@
 /// Global functions for glib2 library
 module gid.glib2.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.bytes;
 import gid.glib2.c.functions;
 import gid.glib2.c.types;

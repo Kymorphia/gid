@@ -3,7 +3,7 @@ module gid.gio2.proxy;
 
 public import gid.core.basictypes;
 public import gid.gio2.proxy_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.async_result;
 import gid.gio2.c.functions;
 import gid.gio2.c.types;

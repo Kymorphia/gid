@@ -2,7 +2,7 @@
 module gid.gstnet1.net_time_provider;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.initable;
 import gid.gio2.initable_mixin;
 import gid.gobject2.gid_builder;

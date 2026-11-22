@@ -3,7 +3,7 @@ module gid.soup3.session_feature_mixin;
 
 public import gid.core.basictypes;
 public import gid.soup3.session_feature_iface_proxy;
-public import gid.core.gid;
+public import gid.core.utils;
 public import gid.gobject2.gid_builder;
 public import gid.soup3.c.functions;
 public import gid.soup3.c.types;

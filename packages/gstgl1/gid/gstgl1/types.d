@@ -1,7 +1,7 @@
 /// D types for gstgl1 library
 module gid.gstgl1.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.map_info;
 import gid.gstgl1.c.functions;
 import gid.gstgl1.c.types;

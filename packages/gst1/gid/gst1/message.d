@@ -2,7 +2,7 @@
 module gid.gst1.message;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.gobject2.boxed;
 import gid.gobject2.object;

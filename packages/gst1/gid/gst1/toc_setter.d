@@ -3,7 +3,7 @@ module gid.gst1.toc_setter;
 
 public import gid.core.basictypes;
 public import gid.gst1.toc_setter_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gst1.c.functions;
 import gid.gst1.c.types;

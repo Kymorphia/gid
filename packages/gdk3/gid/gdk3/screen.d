@@ -3,7 +3,7 @@ module gid.gdk3.screen;
 
 public import gid.core.basictypes;
 import gid.cairo1.font_options;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.c.functions;
 import gid.gdk3.c.types;
 import gid.gdk3.display;

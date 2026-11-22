@@ -1,7 +1,7 @@
 /// Global functions for webkit6 library
 module gid.webkit6.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.webkit6.c.functions;
 import gid.webkit6.c.types;
 import gid.webkit6.media_key_system_permission_request;

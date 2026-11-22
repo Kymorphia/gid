@@ -1,7 +1,7 @@
 /// D types for gobject2 library
 module gid.gobject2.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.binding;
 import gid.gobject2.c.functions;
 import gid.gobject2.c.types;

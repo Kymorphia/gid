@@ -2,7 +2,7 @@
 module gid.giounix2.mount_monitor;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.giounix2.c.functions;
 import gid.giounix2.c.types;
 import gid.giounix2.types;

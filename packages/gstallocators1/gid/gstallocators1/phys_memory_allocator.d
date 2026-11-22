@@ -3,7 +3,7 @@ module gid.gstallocators1.phys_memory_allocator;
 
 public import gid.core.basictypes;
 public import gid.gstallocators1.phys_memory_allocator_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gstallocators1.c.functions;
 import gid.gstallocators1.c.types;

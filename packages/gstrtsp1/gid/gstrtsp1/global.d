@@ -1,7 +1,7 @@
 /// Global functions for gstrtsp1 library
 module gid.gstrtsp1.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstrtsp1.c.functions;
 import gid.gstrtsp1.c.types;
 import gid.gstrtsp1.rtspmessage;

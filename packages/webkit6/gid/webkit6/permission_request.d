@@ -3,7 +3,7 @@ module gid.webkit6.permission_request;
 
 public import gid.core.basictypes;
 public import gid.webkit6.permission_request_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.webkit6.c.functions;
 import gid.webkit6.c.types;

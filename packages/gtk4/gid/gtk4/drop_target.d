@@ -2,7 +2,7 @@
 module gid.gtk4.drop_target;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.content_formats;
 import gid.gdk4.drop;
 import gid.gdk4.types;

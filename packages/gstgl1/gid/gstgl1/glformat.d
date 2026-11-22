@@ -1,7 +1,7 @@
 /// Module for [GLFormat] enum namespace
 module gid.gstgl1.glformat;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstgl1.c.functions;
 import gid.gstgl1.c.types;
 import gid.gstgl1.glcontext;

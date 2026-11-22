@@ -1,7 +1,7 @@
 /// Module for [PixbufError] enum namespace
 module gid.gdkpixbuf2.pixbuf_error;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdkpixbuf2.c.functions;
 import gid.gdkpixbuf2.c.types;
 import gid.gdkpixbuf2.types;

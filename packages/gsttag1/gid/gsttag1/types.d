@@ -1,7 +1,7 @@
 /// D types for gsttag1 library
 module gid.gsttag1.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gsttag1.c.functions;
 import gid.gsttag1.c.types;
 

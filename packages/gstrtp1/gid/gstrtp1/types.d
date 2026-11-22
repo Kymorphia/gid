@@ -1,7 +1,7 @@
 /// D types for gstrtp1 library
 module gid.gstrtp1.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstrtp1.c.functions;
 import gid.gstrtp1.c.types;
 

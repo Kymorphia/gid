@@ -1,7 +1,7 @@
 /// D types for gdkpixbuf2 library
 module gid.gdkpixbuf2.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdkpixbuf2.c.functions;
 import gid.gdkpixbuf2.c.types;
 import gid.gdkpixbuf2.pixbuf;

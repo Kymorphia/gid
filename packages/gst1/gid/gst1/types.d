@@ -1,7 +1,7 @@
 /// D types for gst1 library
 module gid.gst1.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.thread;
 import gid.glib2.types;
 import gid.gobject2.object;

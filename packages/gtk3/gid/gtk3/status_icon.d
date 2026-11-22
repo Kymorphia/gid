@@ -2,7 +2,7 @@
 module gid.gtk3.status_icon;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.event_button;
 import gid.gdk3.event_scroll;
 import gid.gdk3.rectangle;

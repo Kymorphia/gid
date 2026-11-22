@@ -1,7 +1,7 @@
 /// Module for [TocEntryType] enum namespace
 module gid.gst1.toc_entry_type;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.c.functions;
 import gid.gst1.c.types;
 import gid.gst1.types;

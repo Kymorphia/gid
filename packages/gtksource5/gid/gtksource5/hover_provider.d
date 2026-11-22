@@ -3,7 +3,7 @@ module gid.gtksource5.hover_provider;
 
 public import gid.core.basictypes;
 public import gid.gtksource5.hover_provider_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.async_result;
 import gid.gio2.cancellable;
 import gid.gio2.types;

@@ -2,7 +2,7 @@
 module gid.gio2.iptos_message;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.c.functions;
 import gid.gio2.c.types;
 import gid.gio2.socket_control_message;

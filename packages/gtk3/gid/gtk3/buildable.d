@@ -3,7 +3,7 @@ module gid.gtk3.buildable;
 
 public import gid.core.basictypes;
 public import gid.gtk3.buildable_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.types;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;

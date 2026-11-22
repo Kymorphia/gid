@@ -2,7 +2,7 @@
 module gid.javascriptcore6.value;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.bytes;
 import gid.glib2.types;
 import gid.gobject2.gid_builder;

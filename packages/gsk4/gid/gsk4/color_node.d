@@ -2,7 +2,7 @@
 module gid.gsk4.color_node;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.rgba;
 import gid.graphene1.rect;
 import gid.gsk4.c.functions;

@@ -3,7 +3,7 @@ module gid.giounix2.desktop_app_info_lookup_mixin;
 
 public import gid.core.basictypes;
 public import gid.giounix2.desktop_app_info_lookup_iface_proxy;
-public import gid.core.gid;
+public import gid.core.utils;
 public import gid.gio2.app_info;
 public import gid.giounix2.c.functions;
 public import gid.giounix2.c.types;

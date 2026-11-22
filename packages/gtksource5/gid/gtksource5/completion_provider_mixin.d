@@ -3,7 +3,7 @@ module gid.gtksource5.completion_provider_mixin;
 
 public import gid.core.basictypes;
 public import gid.gtksource5.completion_provider_iface_proxy;
-public import gid.core.gid;
+public import gid.core.utils;
 public import gid.gdk4.types;
 public import gid.gio2.async_result;
 public import gid.gio2.cancellable;

@@ -1,7 +1,7 @@
 /// Global functions for gstsdp1 library
 module gid.gstsdp1.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstsdp1.c.functions;
 import gid.gstsdp1.c.types;
 import gid.gstsdp1.types;

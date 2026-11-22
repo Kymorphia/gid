@@ -2,7 +2,7 @@
 module gid.pango1.font_metrics;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.pango1.c.functions;
 import gid.pango1.c.types;
 import gid.pango1.types;

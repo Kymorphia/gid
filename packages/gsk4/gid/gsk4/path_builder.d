@@ -3,7 +3,7 @@ module gid.gsk4.path_builder;
 
 public import gid.core.basictypes;
 import gid.cairo1.path;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.graphene1.point;
 import gid.graphene1.rect;

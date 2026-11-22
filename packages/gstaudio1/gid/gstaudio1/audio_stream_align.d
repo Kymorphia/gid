@@ -2,7 +2,7 @@
 module gid.gstaudio1.audio_stream_align;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.gst1.types;
 import gid.gstaudio1.c.functions;

@@ -2,7 +2,7 @@
 module gid.gtk4.recent_info;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.app_info;
 import gid.gio2.icon;
 import gid.glib2.date_time;

@@ -4,7 +4,7 @@ module gid.adw1.length_unit;
 import gid.adw1.c.functions;
 import gid.adw1.c.types;
 import gid.adw1.types;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gtk4.settings;
 
 /// Namespace for [LengthUnit] enum

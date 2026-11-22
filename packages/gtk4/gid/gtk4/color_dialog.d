@@ -2,7 +2,7 @@
 module gid.gtk4.color_dialog;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.rgba;
 import gid.gio2.async_result;
 import gid.gio2.cancellable;

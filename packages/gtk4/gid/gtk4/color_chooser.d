@@ -3,7 +3,7 @@ module gid.gtk4.color_chooser;
 
 public import gid.core.basictypes;
 public import gid.gtk4.color_chooser_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.rgba;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;

@@ -2,7 +2,7 @@
 module gid.gtk4.directory_list;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.file;
 import gid.gio2.list_model;
 import gid.gio2.list_model_mixin;

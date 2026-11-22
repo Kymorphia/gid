@@ -1,7 +1,7 @@
 /// D types for json1 library
 module gid.json1.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.json1.array;
 import gid.json1.c.functions;
 import gid.json1.c.types;

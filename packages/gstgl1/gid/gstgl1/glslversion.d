@@ -1,7 +1,7 @@
 /// Module for [GLSLVersion] enum namespace
 module gid.gstgl1.glslversion;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstgl1.c.functions;
 import gid.gstgl1.c.types;
 import gid.gstgl1.types;

@@ -2,7 +2,7 @@
 module gid.gst1.pad_probe_info;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.buffer;
 import gid.gst1.buffer_list;
 import gid.gst1.c.functions;

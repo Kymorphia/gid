@@ -7,7 +7,7 @@ import gid.adw1.c.types;
 import gid.adw1.tab_page;
 import gid.adw1.tab_view;
 import gid.adw1.types;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.types;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;

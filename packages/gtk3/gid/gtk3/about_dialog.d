@@ -4,7 +4,7 @@ module gid.gtk3.about_dialog;
 public import gid.core.basictypes;
 import gid.atk1.implementor_iface;
 import gid.atk1.implementor_iface_mixin;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdkpixbuf2.pixbuf;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;

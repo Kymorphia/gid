@@ -3,7 +3,7 @@ module gid.gtk4.tree_drag_dest;
 
 public import gid.core.basictypes;
 public import gid.gtk4.tree_drag_dest_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gobject2.value;
 import gid.gtk4.c.functions;

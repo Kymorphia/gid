@@ -2,7 +2,7 @@
 module gid.panel1.session_item;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.variant;
 import gid.glib2.variant_type;
 import gid.gobject2.gid_builder;

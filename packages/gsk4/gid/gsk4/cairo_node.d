@@ -4,7 +4,7 @@ module gid.gsk4.cairo_node;
 public import gid.core.basictypes;
 import gid.cairo1.context;
 import gid.cairo1.surface;
-import gid.core.gid;
+import gid.core.utils;
 import gid.graphene1.rect;
 import gid.gsk4.c.functions;
 import gid.gsk4.c.types;

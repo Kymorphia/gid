@@ -2,7 +2,7 @@
 module gid.webkitwebprocessextension6.console_message;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.webkitwebprocessextension6.c.functions;
 import gid.webkitwebprocessextension6.c.types;

@@ -2,7 +2,7 @@
 module gid.gtk4.text_view;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.event;
 import gid.gdk4.rectangle;
 import gid.gio2.menu_model;

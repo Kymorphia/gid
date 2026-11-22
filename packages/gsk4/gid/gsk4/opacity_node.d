@@ -2,7 +2,7 @@
 module gid.gsk4.opacity_node;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gsk4.c.functions;
 import gid.gsk4.c.types;
 import gid.gsk4.render_node;

@@ -3,7 +3,7 @@ module gid.gdk3.device_pad;
 
 public import gid.core.basictypes;
 public import gid.gdk3.device_pad_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.c.functions;
 import gid.gdk3.c.types;
 import gid.gdk3.types;

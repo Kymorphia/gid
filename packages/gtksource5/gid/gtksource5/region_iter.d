@@ -2,7 +2,7 @@
 module gid.gtksource5.region_iter;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gtk4.text_iter;
 import gid.gtksource5.c.functions;
 import gid.gtksource5.c.types;

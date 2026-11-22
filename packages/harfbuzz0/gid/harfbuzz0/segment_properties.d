@@ -2,7 +2,7 @@
 module gid.harfbuzz0.segment_properties;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.harfbuzz0.c.functions;
 import gid.harfbuzz0.c.types;

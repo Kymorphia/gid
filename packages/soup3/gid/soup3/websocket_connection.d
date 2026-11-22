@@ -2,7 +2,7 @@
 module gid.soup3.websocket_connection;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.iostream;
 import gid.glib2.bytes;
 import gid.glib2.error;

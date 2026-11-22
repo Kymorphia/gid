@@ -7,7 +7,7 @@ import gid.cairo1.context;
 import gid.cairo1.pattern;
 import gid.cairo1.scaled_font;
 import gid.cairo1.surface;
-import gid.core.gid;
+import gid.core.utils;
 
 
 // Aliases

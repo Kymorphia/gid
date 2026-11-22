@@ -2,7 +2,7 @@
 module gid.gstsdp1.sdpmessage;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.gst1.caps;
 import gid.gstsdp1.c.functions;

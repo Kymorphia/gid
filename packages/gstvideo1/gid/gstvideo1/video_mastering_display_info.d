@@ -2,7 +2,7 @@
 module gid.gstvideo1.video_mastering_display_info;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.caps;
 import gid.gstvideo1.c.functions;
 import gid.gstvideo1.c.types;

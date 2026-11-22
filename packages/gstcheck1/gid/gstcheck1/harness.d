@@ -2,7 +2,7 @@
 module gid.gstcheck1.harness;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.bytes;
 import gid.gobject2.object;
 import gid.gobject2.types;

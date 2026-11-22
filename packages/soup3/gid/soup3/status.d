@@ -1,7 +1,7 @@
 /// Module for [Status] enum namespace
 module gid.soup3.status;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.soup3.c.functions;
 import gid.soup3.c.types;
 import gid.soup3.types;

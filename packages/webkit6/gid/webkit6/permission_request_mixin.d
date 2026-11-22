@@ -3,7 +3,7 @@ module gid.webkit6.permission_request_mixin;
 
 public import gid.core.basictypes;
 public import gid.webkit6.permission_request_iface_proxy;
-public import gid.core.gid;
+public import gid.core.utils;
 public import gid.gobject2.gid_builder;
 public import gid.webkit6.c.functions;
 public import gid.webkit6.c.types;

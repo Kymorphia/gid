@@ -2,7 +2,7 @@
 module gid.gstvideo1.video_meta;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.buffer;
 import gid.gst1.map_info;
 import gid.gst1.meta;

@@ -6,7 +6,7 @@ import gid.adw1.c.functions;
 import gid.adw1.c.types;
 import gid.adw1.types;
 import gid.adw1.view_stack_page;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.list_model;
 import gid.gio2.list_model_mixin;
 import gid.gobject2.gid_builder;

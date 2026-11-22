@@ -3,7 +3,7 @@ module gid.gtk3.recent_chooser;
 
 public import gid.core.basictypes;
 public import gid.gtk3.recent_chooser_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;

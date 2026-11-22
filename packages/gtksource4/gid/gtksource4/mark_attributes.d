@@ -2,7 +2,7 @@
 module gid.gtksource4.mark_attributes;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.rgba;
 import gid.gdkpixbuf2.pixbuf;
 import gid.gio2.icon;

@@ -3,7 +3,7 @@ module gid.gtk3.icon_info;
 
 public import gid.core.basictypes;
 import gid.cairo1.surface;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.rectangle;
 import gid.gdk3.rgba;
 import gid.gdk3.types;

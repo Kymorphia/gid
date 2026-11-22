@@ -2,7 +2,7 @@
 module gid.gstaudio1.audio_buffer;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.buffer;
 import gid.gst1.segment;
 import gid.gst1.types;

@@ -3,7 +3,7 @@ module gid.gio2.tls_file_database;
 
 public import gid.core.basictypes;
 public import gid.gio2.tls_file_database_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.c.functions;
 import gid.gio2.c.types;
 import gid.gio2.types;

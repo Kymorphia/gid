@@ -1,7 +1,7 @@
 /// Module for [GLConfigCaveat] enum namespace
 module gid.gstgl1.glconfig_caveat;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstgl1.c.functions;
 import gid.gstgl1.c.types;
 import gid.gstgl1.types;

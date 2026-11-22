@@ -8,7 +8,7 @@ import gid.atk1.property_values;
 import gid.atk1.relation_set;
 import gid.atk1.state_set;
 import gid.atk1.types;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;

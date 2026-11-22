@@ -2,7 +2,7 @@
 module gid.gstvideo1.video_codec_frame;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.types;
 import gid.gobject2.boxed;
 import gid.gst1.buffer;

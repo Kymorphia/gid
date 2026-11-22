@@ -2,7 +2,7 @@
 module gid.gstvideo1.video_time_code_config;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.date_time;
 import gid.gstvideo1.c.functions;
 import gid.gstvideo1.c.types;

@@ -2,7 +2,7 @@
 module gid.gsk4.render_replay;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.texture;
 import gid.gobject2.boxed;
 import gid.gobject2.object;

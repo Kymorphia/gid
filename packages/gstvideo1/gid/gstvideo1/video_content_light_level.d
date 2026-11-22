@@ -2,7 +2,7 @@
 module gid.gstvideo1.video_content_light_level;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.caps;
 import gid.gstvideo1.c.functions;
 import gid.gstvideo1.c.types;

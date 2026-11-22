@@ -2,7 +2,7 @@
 module gid.gsk4.glrenderer;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gsk4.c.functions;
 import gid.gsk4.c.types;

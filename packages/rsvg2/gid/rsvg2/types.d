@@ -1,7 +1,7 @@
 /// D types for rsvg2 library
 module gid.rsvg2.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.rsvg2.c.functions;
 import gid.rsvg2.c.types;
 

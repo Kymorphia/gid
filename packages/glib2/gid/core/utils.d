@@ -1,5 +1,5 @@
-/// Module for [gid] class
-module gid.core.gid;
+/// Module for [utils] class
+module gid.core.utils;
 
 public import gid.core.basictypes;
 

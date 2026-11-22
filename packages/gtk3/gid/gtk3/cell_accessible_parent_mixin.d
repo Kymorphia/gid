@@ -6,7 +6,7 @@ public import gid.gtk3.cell_accessible_parent_iface_proxy;
 public import gid.atk1.object;
 public import gid.atk1.relation_set;
 public import gid.atk1.types;
-public import gid.core.gid;
+public import gid.core.utils;
 public import gid.gdk3.rectangle;
 public import gid.gobject2.gid_builder;
 public import gid.gtk3.c.functions;

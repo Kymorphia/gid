@@ -1,7 +1,7 @@
 /// D types for xlib2 library
 module gid.xlib2.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.xlib2.c.functions;
 import gid.xlib2.c.types;
 

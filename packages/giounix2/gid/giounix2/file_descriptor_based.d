@@ -3,7 +3,7 @@ module gid.giounix2.file_descriptor_based;
 
 public import gid.core.basictypes;
 public import gid.giounix2.file_descriptor_based_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.giounix2.c.functions;
 import gid.giounix2.c.types;
 import gid.giounix2.types;

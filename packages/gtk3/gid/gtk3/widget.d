@@ -8,7 +8,7 @@ import gid.atk1.object;
 import gid.cairo1.context;
 import gid.cairo1.font_options;
 import gid.cairo1.region;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.atom;
 import gid.gdk3.color;
 import gid.gdk3.device;

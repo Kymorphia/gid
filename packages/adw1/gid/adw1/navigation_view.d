@@ -8,7 +8,7 @@ import gid.adw1.navigation_page;
 import gid.adw1.swipeable;
 import gid.adw1.swipeable_mixin;
 import gid.adw1.types;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.list_model;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;

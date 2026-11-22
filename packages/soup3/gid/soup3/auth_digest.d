@@ -2,7 +2,7 @@
 module gid.soup3.auth_digest;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.soup3.auth;
 import gid.soup3.c.functions;

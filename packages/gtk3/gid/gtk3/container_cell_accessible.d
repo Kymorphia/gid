@@ -8,7 +8,7 @@ import gid.atk1.component;
 import gid.atk1.component_mixin;
 import gid.atk1.table_cell;
 import gid.atk1.table_cell_mixin;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gtk3.c.functions;
 import gid.gtk3.c.types;

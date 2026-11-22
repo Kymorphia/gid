@@ -1,7 +1,7 @@
 /// Module for [RTSPVersion] enum namespace
 module gid.gstrtsp1.rtspversion;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstrtsp1.c.functions;
 import gid.gstrtsp1.c.types;
 import gid.gstrtsp1.types;

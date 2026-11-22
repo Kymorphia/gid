@@ -2,7 +2,7 @@
 module gid.gtk4.cell_renderer_pixbuf;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.texture;
 import gid.gdkpixbuf2.pixbuf;
 import gid.gio2.icon;

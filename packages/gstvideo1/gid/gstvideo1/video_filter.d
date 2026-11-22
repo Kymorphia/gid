@@ -2,7 +2,7 @@
 module gid.gstvideo1.video_filter;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gstbase1.base_transform;
 import gid.gstvideo1.c.functions;

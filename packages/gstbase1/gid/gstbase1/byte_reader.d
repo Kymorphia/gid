@@ -2,7 +2,7 @@
 module gid.gstbase1.byte_reader;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstbase1.c.functions;
 import gid.gstbase1.c.types;
 import gid.gstbase1.types;

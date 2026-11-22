@@ -2,7 +2,7 @@
 module gid.gstvideo1.video_afdmeta;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.meta;
 import gid.gst1.meta_info;
 import gid.gstvideo1.c.functions;

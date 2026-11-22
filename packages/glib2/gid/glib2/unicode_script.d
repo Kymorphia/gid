@@ -1,7 +1,7 @@
 /// Module for [UnicodeScript] enum namespace
 module gid.glib2.unicode_script;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.c.functions;
 import gid.glib2.c.types;
 import gid.glib2.types;

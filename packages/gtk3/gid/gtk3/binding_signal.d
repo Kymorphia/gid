@@ -2,7 +2,7 @@
 module gid.gtk3.binding_signal;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gtk3.binding_arg;
 import gid.gtk3.c.functions;
 import gid.gtk3.c.types;

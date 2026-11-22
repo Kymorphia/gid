@@ -1,7 +1,7 @@
 /// D types for gstbase1 library
 module gid.gstbase1.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.buffer;
 import gid.gst1.event;
 import gid.gst1.object;

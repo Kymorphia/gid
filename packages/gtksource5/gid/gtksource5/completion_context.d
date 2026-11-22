@@ -2,7 +2,7 @@
 module gid.gtksource5.completion_context;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.list_model;
 import gid.gio2.list_model_mixin;
 import gid.gobject2.dclosure;

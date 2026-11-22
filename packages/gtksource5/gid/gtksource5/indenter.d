@@ -3,7 +3,7 @@ module gid.gtksource5.indenter;
 
 public import gid.core.basictypes;
 public import gid.gtksource5.indenter_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.types;
 import gid.gobject2.gid_builder;
 import gid.gtk4.text_iter;

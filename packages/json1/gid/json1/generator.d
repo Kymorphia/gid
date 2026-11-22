@@ -2,7 +2,7 @@
 module gid.json1.generator;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.cancellable;
 import gid.gio2.output_stream;
 import gid.glib2.error;

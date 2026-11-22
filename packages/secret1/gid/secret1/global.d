@@ -1,7 +1,7 @@
 /// Global functions for secret1 library
 module gid.secret1.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.async_result;
 import gid.gio2.cancellable;
 import gid.gio2.types;

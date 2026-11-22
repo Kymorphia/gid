@@ -2,7 +2,7 @@
 module gid.gstcheck1.check_abistruct;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstcheck1.c.functions;
 import gid.gstcheck1.c.types;
 import gid.gstcheck1.types;

@@ -1,7 +1,7 @@
 /// Module for [WebsocketError] enum namespace
 module gid.soup3.websocket_error;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.types;
 import gid.soup3.c.functions;

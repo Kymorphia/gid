@@ -2,7 +2,7 @@
 module gid.panel1.menu_manager;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.menu;
 import gid.gio2.menu_model;
 import gid.glib2.error;

@@ -2,7 +2,7 @@
 module gid.gstsdp1.sdpmedia;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.caps;
 import gid.gst1.structure;
 import gid.gstsdp1.c.functions;

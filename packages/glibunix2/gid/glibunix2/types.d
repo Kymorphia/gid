@@ -1,7 +1,7 @@
 /// D types for glibunix2 library
 module gid.glibunix2.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.types;
 import gid.glibunix2.c.functions;
 import gid.glibunix2.c.types;

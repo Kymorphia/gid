@@ -2,7 +2,7 @@
 module gid.gstapp1.app_src_simple_callbacks;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.gobject2.object;
 import gid.gstapp1.app_src;

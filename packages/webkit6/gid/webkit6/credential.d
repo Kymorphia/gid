@@ -2,7 +2,7 @@
 module gid.webkit6.credential;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.tls_certificate;
 import gid.gobject2.boxed;
 import gid.gobject2.object;

@@ -3,7 +3,7 @@ module gid.gtk4.actionable_mixin;
 
 public import gid.core.basictypes;
 public import gid.gtk4.actionable_iface_proxy;
-public import gid.core.gid;
+public import gid.core.utils;
 public import gid.glib2.variant;
 public import gid.gobject2.gid_builder;
 public import gid.gobject2.object;

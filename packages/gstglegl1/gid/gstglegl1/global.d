@@ -1,7 +1,7 @@
 /// Global functions for gstglegl1 library
 module gid.gstglegl1.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.memory;
 import gid.gstglegl1.c.functions;
 import gid.gstglegl1.c.types;

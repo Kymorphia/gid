@@ -2,7 +2,7 @@
 module gid.gtk3.tooltip;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.display;
 import gid.gdk3.rectangle;
 import gid.gdkpixbuf2.pixbuf;

@@ -2,7 +2,7 @@
 module gid.pango1.glyph_item;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.pango1.attr_list;
 import gid.pango1.c.functions;

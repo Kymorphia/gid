@@ -2,7 +2,7 @@
 module gid.gtk3.__mount_operation_handler_skeleton;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gtk3.c.functions;
 import gid.gtk3.c.types;
 import gid.gtk3.types;

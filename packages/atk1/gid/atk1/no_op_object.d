@@ -30,7 +30,7 @@ import gid.atk1.value;
 import gid.atk1.value_mixin;
 import gid.atk1.window;
 import gid.atk1.window_mixin;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;
 

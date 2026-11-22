@@ -1,7 +1,7 @@
 /// Module for [PrintError] enum namespace
 module gid.gtk4.print_error;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.types;
 import gid.gtk4.c.functions;

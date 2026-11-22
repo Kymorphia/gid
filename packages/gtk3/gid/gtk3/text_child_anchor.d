@@ -2,7 +2,7 @@
 module gid.gtk3.text_child_anchor;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;
 import gid.gtk3.c.functions;

@@ -3,7 +3,7 @@ module gid.gtk4.cell_editable;
 
 public import gid.core.basictypes;
 public import gid.gtk4.cell_editable_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.event;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;

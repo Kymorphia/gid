@@ -1,7 +1,7 @@
 /// D types for gstcheck1 library
 module gid.gstcheck1.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.types;
 import gid.gst1.buffer;
 import gid.gst1.event;

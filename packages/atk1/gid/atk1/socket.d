@@ -8,7 +8,7 @@ import gid.atk1.component;
 import gid.atk1.component_mixin;
 import gid.atk1.object;
 import gid.atk1.types;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 
 /**

@@ -1,7 +1,7 @@
 /// Global functions for gstrtp1 library
 module gid.gstrtp1.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.types;
 import gid.gst1.buffer;
 import gid.gst1.element_factory;

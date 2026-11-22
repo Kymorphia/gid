@@ -2,7 +2,7 @@
 module gid.gstglegl1.glmemory_eglallocator;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gstgl1.glmemory_allocator;
 import gid.gstglegl1.c.functions;

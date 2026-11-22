@@ -1,7 +1,7 @@
 /// Global functions for rsvg2 library
 module gid.rsvg2.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdkpixbuf2.pixbuf;
 import gid.glib2.error;
 import gid.gobject2.object;

@@ -2,7 +2,7 @@
 module gid.gobject2.param_spec;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.types;
 import gid.gobject2.c.functions;
 import gid.gobject2.c.types;

@@ -6,7 +6,7 @@ import gid.adw1.c.functions;
 import gid.adw1.c.types;
 import gid.adw1.entry_row;
 import gid.adw1.types;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gtk4.accessible;
 import gid.gtk4.accessible_mixin;

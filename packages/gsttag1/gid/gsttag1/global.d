@@ -1,7 +1,7 @@
 /// Global functions for gsttag1 library
 module gid.gsttag1.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.buffer;
 import gid.gst1.sample;
 import gid.gst1.tag_list;

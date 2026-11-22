@@ -11,7 +11,7 @@ import gid.atk1.editable_text_mixin;
 import gid.atk1.object;
 import gid.atk1.text;
 import gid.atk1.text_mixin;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gtk3.c.functions;
 import gid.gtk3.c.types;

@@ -2,7 +2,7 @@
 module gid.webkit6.navigation_action;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.gobject2.object;
 import gid.webkit6.c.functions;

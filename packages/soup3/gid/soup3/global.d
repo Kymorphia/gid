@@ -1,7 +1,7 @@
 /// Global functions for soup3 library
 module gid.soup3.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.bytes;
 import gid.glib2.date_time;
 import gid.glib2.error;

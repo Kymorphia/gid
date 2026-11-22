@@ -4,7 +4,7 @@ module gid.gtk3.places_sidebar;
 public import gid.core.basictypes;
 import gid.atk1.implementor_iface;
 import gid.atk1.implementor_iface_mixin;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.drag_context;
 import gid.gio2.file;
 import gid.gio2.mount_operation;

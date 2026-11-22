@@ -2,7 +2,7 @@
 module gid.gtk4.drop_controller_motion;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.drop;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;

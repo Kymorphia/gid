@@ -2,7 +2,7 @@
 module gid.gobject2.value;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.variant;
 import gid.gobject2.boxed;
 import gid.gobject2.c.functions;
@@ -16,7 +16,7 @@ import gid.gobject2.types;
 import core.stdc.string : strlen;
 import std.traits : isPointer;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.c.functions : g_strv_get_type;
 import gid.gobject2.object;
 import gid.gobject2.types;

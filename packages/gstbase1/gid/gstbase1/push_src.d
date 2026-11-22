@@ -2,7 +2,7 @@
 module gid.gstbase1.push_src;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gstbase1.base_src;
 import gid.gstbase1.c.functions;

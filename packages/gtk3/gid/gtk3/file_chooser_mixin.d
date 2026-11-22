@@ -3,7 +3,7 @@ module gid.gtk3.file_chooser_mixin;
 
 public import gid.core.basictypes;
 public import gid.gtk3.file_chooser_iface_proxy;
-public import gid.core.gid;
+public import gid.core.utils;
 public import gid.gio2.file;
 public import gid.glib2.error;
 public import gid.gobject2.dclosure;

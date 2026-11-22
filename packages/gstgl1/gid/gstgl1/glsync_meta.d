@@ -2,7 +2,7 @@
 module gid.gstgl1.glsync_meta;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.meta;
 import gid.gst1.meta_info;
 import gid.gstgl1.c.functions;

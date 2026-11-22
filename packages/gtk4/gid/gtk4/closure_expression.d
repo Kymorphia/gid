@@ -2,7 +2,7 @@
 module gid.gtk4.closure_expression;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.closure;
 import gid.gobject2.types;
 import gid.gtk4.c.functions;

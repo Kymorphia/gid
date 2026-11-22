@@ -7,7 +7,7 @@ import gid.adw1.c.types;
 import gid.adw1.sidebar_item;
 import gid.adw1.sidebar_section;
 import gid.adw1.types;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.types;
 import gid.gio2.list_model;
 import gid.gio2.menu_model;

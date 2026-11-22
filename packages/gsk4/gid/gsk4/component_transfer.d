@@ -2,7 +2,7 @@
 module gid.gsk4.component_transfer;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.gsk4.c.functions;
 import gid.gsk4.c.types;

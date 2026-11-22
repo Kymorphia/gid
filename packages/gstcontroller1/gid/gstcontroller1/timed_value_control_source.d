@@ -2,7 +2,7 @@
 module gid.gstcontroller1.timed_value_control_source;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.sequence_iter;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;

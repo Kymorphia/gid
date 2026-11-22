@@ -2,7 +2,7 @@
 module gid.gstbase1.data_queue_item;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.types;
 import gid.gst1.mini_object;
 import gid.gstbase1.c.functions;

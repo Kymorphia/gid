@@ -2,7 +2,7 @@
 module gid.gstrtsp1.rtsprange;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.types;
 import gid.gstrtsp1.c.functions;
 import gid.gstrtsp1.c.types;

@@ -3,7 +3,7 @@ module gid.gdk3.cursor;
 
 public import gid.core.basictypes;
 import gid.cairo1.surface;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.c.functions;
 import gid.gdk3.c.types;
 import gid.gdk3.display;

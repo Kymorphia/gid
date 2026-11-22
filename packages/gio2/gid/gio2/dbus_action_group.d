@@ -2,7 +2,7 @@
 module gid.gio2.dbus_action_group;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.action_group;
 import gid.gio2.action_group_mixin;
 import gid.gio2.c.functions;

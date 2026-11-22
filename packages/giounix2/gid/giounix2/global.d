@@ -1,7 +1,7 @@
 /// Global functions for giounix2 library
 module gid.giounix2.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.icon;
 import gid.giounix2.c.functions;
 import gid.giounix2.c.types;

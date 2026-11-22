@@ -2,7 +2,7 @@
 module gid.gsk4.texture_node;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.texture;
 import gid.gobject2.object;
 import gid.graphene1.rect;

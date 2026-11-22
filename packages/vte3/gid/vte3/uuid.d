@@ -2,7 +2,7 @@
 module gid.vte3.uuid;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.vte3.c.functions;
 import gid.vte3.c.types;

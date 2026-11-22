@@ -2,7 +2,7 @@
 module gid.gtksource5.snippet_context;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;

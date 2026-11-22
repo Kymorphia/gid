@@ -2,7 +2,7 @@
 module gid.gstgl1.glbase_memory;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.gst1.memory;
 import gid.gst1.types;

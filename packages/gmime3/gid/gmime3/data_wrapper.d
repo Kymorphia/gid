@@ -2,7 +2,7 @@
 module gid.gmime3.data_wrapper;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gmime3.c.functions;
 import gid.gmime3.c.types;
 import gid.gmime3.stream;

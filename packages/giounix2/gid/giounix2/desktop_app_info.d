@@ -2,7 +2,7 @@
 module gid.giounix2.desktop_app_info;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.app_info;
 import gid.gio2.app_info_mixin;
 import gid.gio2.app_launch_context;

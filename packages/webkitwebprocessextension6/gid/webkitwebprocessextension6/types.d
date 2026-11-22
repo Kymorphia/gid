@@ -1,7 +1,7 @@
 /// D types for webkitwebprocessextension6 library
 module gid.webkitwebprocessextension6.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.variant;
 import gid.webkitwebprocessextension6.c.functions;
 import gid.webkitwebprocessextension6.c.types;

@@ -1,7 +1,7 @@
 /// Global functions for gstgl1 library
 module gid.gstgl1.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.object;
 import gid.gobject2.types;
 import gid.gobject2.value;

@@ -3,7 +3,7 @@ module gid.gtk4.tree_drag_source_mixin;
 
 public import gid.core.basictypes;
 public import gid.gtk4.tree_drag_source_iface_proxy;
-public import gid.core.gid;
+public import gid.core.utils;
 public import gid.gdk4.content_provider;
 public import gid.gobject2.gid_builder;
 public import gid.gobject2.object;

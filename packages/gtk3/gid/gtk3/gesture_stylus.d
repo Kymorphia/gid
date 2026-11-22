@@ -2,7 +2,7 @@
 module gid.gtk3.gesture_stylus;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.device_tool;
 import gid.gdk3.types;
 import gid.gobject2.dclosure;

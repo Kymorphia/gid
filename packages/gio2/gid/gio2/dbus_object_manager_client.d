@@ -2,7 +2,7 @@
 module gid.gio2.dbus_object_manager_client;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.async_initable;
 import gid.gio2.async_initable_mixin;
 import gid.gio2.async_result;

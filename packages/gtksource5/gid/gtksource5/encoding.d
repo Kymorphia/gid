@@ -2,7 +2,7 @@
 module gid.gtksource5.encoding;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.gtksource5.c.functions;
 import gid.gtksource5.c.types;

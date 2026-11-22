@@ -6,7 +6,7 @@ public import gid.adw1.swipeable_iface_proxy;
 import gid.adw1.c.functions;
 import gid.adw1.c.types;
 import gid.adw1.types;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.rectangle;
 import gid.gobject2.gid_builder;
 

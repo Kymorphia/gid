@@ -4,7 +4,7 @@ module gid.pangocairo1.font_map;
 public import gid.core.basictypes;
 public import gid.pangocairo1.font_map_iface_proxy;
 import gid.cairo1.types;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;
 import gid.pango1.font_map;

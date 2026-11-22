@@ -1,7 +1,7 @@
 /// Module for [LayoutDeserializeError] enum namespace
 module gid.pango1.layout_deserialize_error;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.types;
 import gid.pango1.c.functions;

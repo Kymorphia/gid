@@ -2,7 +2,7 @@
 module gid.gtk3.clipboard;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.atom;
 import gid.gdk3.display;
 import gid.gdk3.event_owner_change;

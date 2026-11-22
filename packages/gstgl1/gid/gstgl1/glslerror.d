@@ -1,7 +1,7 @@
 /// Module for [GLSLError] enum namespace
 module gid.gstgl1.glslerror;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.types;
 import gid.gstgl1.c.functions;

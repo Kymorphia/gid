@@ -4,7 +4,7 @@ module gid.atk1.text_attribute;
 import gid.atk1.c.functions;
 import gid.atk1.c.types;
 import gid.atk1.types;
-import gid.core.gid;
+import gid.core.utils;
 
 /// Namespace for [TextAttribute] enum
 struct TextAttribute

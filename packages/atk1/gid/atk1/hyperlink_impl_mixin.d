@@ -7,7 +7,7 @@ public import gid.atk1.c.functions;
 public import gid.atk1.c.types;
 public import gid.atk1.hyperlink;
 public import gid.atk1.types;
-public import gid.core.gid;
+public import gid.core.utils;
 public import gid.gobject2.gid_builder;
 public import gid.gobject2.object;
 

@@ -4,7 +4,7 @@ module gid.pangocairo1.font_mixin;
 public import gid.core.basictypes;
 public import gid.pangocairo1.font_iface_proxy;
 public import gid.cairo1.scaled_font;
-public import gid.core.gid;
+public import gid.core.utils;
 public import gid.gobject2.gid_builder;
 public import gid.pangocairo1.c.functions;
 public import gid.pangocairo1.c.types;

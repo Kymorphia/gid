@@ -2,7 +2,7 @@
 module gid.gtk3.recent_filter;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gobject2.initially_unowned;
 import gid.gtk3.buildable;

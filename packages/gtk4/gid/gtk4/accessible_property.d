@@ -1,7 +1,7 @@
 /// Module for [AccessibleProperty] enum namespace
 module gid.gtk4.accessible_property;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.value;
 import gid.gtk4.c.functions;
 import gid.gtk4.c.types;

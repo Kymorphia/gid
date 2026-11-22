@@ -2,7 +2,7 @@
 module gid.gtk4.pad_action_entry;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gtk4.c.functions;
 import gid.gtk4.c.types;
 import gid.gtk4.types;

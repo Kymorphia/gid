@@ -2,7 +2,7 @@
 module gid.gstvideo1.video_region_of_interest_meta;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.types;
 import gid.gst1.meta;
 import gid.gst1.meta_info;

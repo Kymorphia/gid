@@ -2,7 +2,7 @@
 module gid.soup3.websocket_extension_deflate;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.soup3.c.functions;
 import gid.soup3.c.types;

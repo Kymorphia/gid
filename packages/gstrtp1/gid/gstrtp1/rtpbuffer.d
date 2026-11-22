@@ -2,7 +2,7 @@
 module gid.gstrtp1.rtpbuffer;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.bytes;
 import gid.gst1.buffer;
 import gid.gst1.types;

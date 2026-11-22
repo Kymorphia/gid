@@ -1,7 +1,7 @@
 /// Global functions for gstcontroller1 library
 module gid.gstcontroller1.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstcontroller1.c.functions;
 import gid.gstcontroller1.c.types;
 import gid.gstcontroller1.timed_value_control_source;

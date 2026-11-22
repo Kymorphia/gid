@@ -3,7 +3,7 @@ module gid.gdk4.dmabuf_texture_builder;
 
 public import gid.core.basictypes;
 import gid.cairo1.region;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.c.functions;
 import gid.gdk4.c.types;
 import gid.gdk4.color_state;

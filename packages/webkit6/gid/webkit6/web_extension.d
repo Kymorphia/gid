@@ -2,7 +2,7 @@
 module gid.webkit6.web_extension;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.icon;
 import gid.gio2.initable;
 import gid.gio2.initable_mixin;

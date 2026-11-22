@@ -1,7 +1,7 @@
 /// D types for gtksource5 library
 module gid.gtksource5.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gtksource5.c.functions;
 import gid.gtksource5.c.types;
 

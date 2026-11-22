@@ -3,7 +3,7 @@ module gid.gsk4.renderer;
 
 public import gid.core.basictypes;
 import gid.cairo1.region;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.display;
 import gid.gdk4.surface;
 import gid.gdk4.texture;

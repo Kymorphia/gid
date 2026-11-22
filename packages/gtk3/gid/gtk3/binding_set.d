@@ -2,7 +2,7 @@
 module gid.gtk3.binding_set;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.types;
 import gid.gobject2.object;
 import gid.gtk3.binding_entry;

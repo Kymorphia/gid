@@ -1,7 +1,7 @@
 /// D types for graphene1 library
 module gid.graphene1.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.graphene1.c.functions;
 import gid.graphene1.c.types;
 

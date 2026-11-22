@@ -1,7 +1,7 @@
 /// Module for [RegexError] enum namespace
 module gid.vte2.regex_error;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.types;
 import gid.vte2.c.functions;

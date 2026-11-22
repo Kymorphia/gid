@@ -1,7 +1,7 @@
 /// Module for [IconThemeError] enum namespace
 module gid.gtk3.icon_theme_error;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.types;
 import gid.gtk3.c.functions;

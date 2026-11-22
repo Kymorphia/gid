@@ -3,7 +3,7 @@ module gid.pangocairo1.global;
 
 import gid.cairo1.context;
 import gid.cairo1.font_options;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.object;
 import gid.pango1.attr_shape;
 import gid.pango1.context;

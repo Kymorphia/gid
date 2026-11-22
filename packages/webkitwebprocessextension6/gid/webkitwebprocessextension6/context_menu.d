@@ -2,7 +2,7 @@
 module gid.webkitwebprocessextension6.context_menu;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.event;
 import gid.glib2.variant;
 import gid.gobject2.gid_builder;

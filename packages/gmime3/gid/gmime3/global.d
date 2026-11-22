@@ -1,7 +1,7 @@
 /// Global functions for gmime3 library
 module gid.gmime3.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.date_time;
 import gid.gmime3.c.functions;
 import gid.gmime3.c.types;

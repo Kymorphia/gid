@@ -2,7 +2,7 @@
 module gid.gtk3.accel_map;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.types;
 import gid.glib2.scanner;
 import gid.gobject2.dclosure;

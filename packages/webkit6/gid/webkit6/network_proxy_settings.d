@@ -2,7 +2,7 @@
 module gid.webkit6.network_proxy_settings;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.webkit6.c.functions;
 import gid.webkit6.c.types;

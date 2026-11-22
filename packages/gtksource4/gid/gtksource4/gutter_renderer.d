@@ -3,7 +3,7 @@ module gid.gtksource4.gutter_renderer;
 
 public import gid.core.basictypes;
 import gid.cairo1.context;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.event;
 import gid.gdk3.rectangle;
 import gid.gdk3.rgba;

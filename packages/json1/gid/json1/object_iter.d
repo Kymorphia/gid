@@ -2,7 +2,7 @@
 module gid.json1.object_iter;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.json1.c.functions;
 import gid.json1.c.types;
 import gid.json1.node;

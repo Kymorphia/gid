@@ -3,7 +3,7 @@ module gid.gst1.tag_setter;
 
 public import gid.core.basictypes;
 public import gid.gst1.tag_setter_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gobject2.value;
 import gid.gst1.c.functions;

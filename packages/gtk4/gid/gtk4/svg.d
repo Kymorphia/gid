@@ -2,7 +2,7 @@
 module gid.gtk4.svg;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.frame_clock;
 import gid.gdk4.paintable;
 import gid.gdk4.paintable_mixin;

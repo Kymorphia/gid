@@ -2,7 +2,7 @@
 module gid.gdk3.display;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.app_launch_context;
 import gid.gdk3.atom;
 import gid.gdk3.c.functions;

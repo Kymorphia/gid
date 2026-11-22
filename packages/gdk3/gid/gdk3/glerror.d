@@ -1,7 +1,7 @@
 /// Module for [GLError] enum namespace
 module gid.gdk3.glerror;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.c.functions;
 import gid.gdk3.c.types;
 import gid.gdk3.types;

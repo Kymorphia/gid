@@ -2,7 +2,7 @@
 module gid.gst1.date_time;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.date_time;
 import gid.gobject2.boxed;
 import gid.gst1.c.functions;

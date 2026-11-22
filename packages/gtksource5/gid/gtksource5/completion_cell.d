@@ -2,7 +2,7 @@
 module gid.gtksource5.completion_cell;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.paintable;
 import gid.gio2.icon;
 import gid.gobject2.gid_builder;

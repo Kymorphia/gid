@@ -2,7 +2,7 @@
 module gid.gtk3.symbolic_color;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.rgba;
 import gid.gobject2.boxed;
 import gid.gtk3.c.functions;

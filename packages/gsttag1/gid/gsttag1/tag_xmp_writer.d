@@ -3,7 +3,7 @@ module gid.gsttag1.tag_xmp_writer;
 
 public import gid.core.basictypes;
 public import gid.gsttag1.tag_xmp_writer_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gst1.buffer;
 import gid.gst1.tag_list;

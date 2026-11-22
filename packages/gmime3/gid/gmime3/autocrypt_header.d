@@ -2,7 +2,7 @@
 module gid.gmime3.autocrypt_header;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.bytes;
 import gid.glib2.date_time;
 import gid.gmime3.c.functions;

@@ -1,7 +1,7 @@
 /// Module for [SessionError] enum namespace
 module gid.soup3.session_error;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.types;
 import gid.soup3.c.functions;

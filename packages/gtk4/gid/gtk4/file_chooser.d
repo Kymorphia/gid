@@ -3,7 +3,7 @@ module gid.gtk4.file_chooser;
 
 public import gid.core.basictypes;
 public import gid.gtk4.file_chooser_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.file;
 import gid.gio2.list_model;
 import gid.glib2.error;

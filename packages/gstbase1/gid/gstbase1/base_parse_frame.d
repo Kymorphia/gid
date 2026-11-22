@@ -2,7 +2,7 @@
 module gid.gstbase1.base_parse_frame;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.gst1.buffer;
 import gid.gstbase1.c.functions;

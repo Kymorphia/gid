@@ -2,7 +2,7 @@
 module gid.webkit6.navigation_policy_decision;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.webkit6.c.functions;
 import gid.webkit6.c.types;

@@ -2,7 +2,7 @@
 module gid.gtk3.page_setup;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.key_file;
 import gid.glib2.variant;

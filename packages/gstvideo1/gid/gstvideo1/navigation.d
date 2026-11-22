@@ -3,7 +3,7 @@ module gid.gstvideo1.navigation;
 
 public import gid.core.basictypes;
 public import gid.gstvideo1.navigation_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gst1.event;
 import gid.gst1.message;

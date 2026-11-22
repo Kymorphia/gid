@@ -2,7 +2,7 @@
 module gid.gstpbutils1.discoverer_info;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.variant;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;

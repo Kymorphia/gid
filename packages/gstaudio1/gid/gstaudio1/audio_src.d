@@ -2,7 +2,7 @@
 module gid.gstaudio1.audio_src;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gstaudio1.audio_base_src;
 import gid.gstaudio1.c.functions;

@@ -1,7 +1,7 @@
 /// Global functions for gobject2 library
 module gid.gobject2.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.source;
 import gid.glib2.types;
 import gid.glib2.variant;

@@ -4,7 +4,7 @@ module gid.gtksource4.style_scheme_chooser_button;
 public import gid.core.basictypes;
 import gid.atk1.implementor_iface;
 import gid.atk1.implementor_iface_mixin;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gtk3.actionable;
 import gid.gtk3.actionable_mixin;

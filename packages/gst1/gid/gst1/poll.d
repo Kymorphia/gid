@@ -2,7 +2,7 @@
 module gid.gst1.poll;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.types;
 import gid.gst1.c.functions;
 import gid.gst1.c.types;

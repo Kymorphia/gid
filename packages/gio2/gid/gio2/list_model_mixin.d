@@ -3,7 +3,7 @@ module gid.gio2.list_model_mixin;
 
 public import gid.core.basictypes;
 public import gid.gio2.list_model_iface_proxy;
-public import gid.core.gid;
+public import gid.core.utils;
 public import gid.gio2.c.functions;
 public import gid.gio2.c.types;
 public import gid.gio2.types;

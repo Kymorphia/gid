@@ -2,7 +2,7 @@
 module gid.gtk4.drag_source;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.content_provider;
 import gid.gdk4.drag;
 import gid.gdk4.paintable;

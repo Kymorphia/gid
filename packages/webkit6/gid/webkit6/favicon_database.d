@@ -2,7 +2,7 @@
 module gid.webkit6.favicon_database;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.texture;
 import gid.gio2.async_result;
 import gid.gio2.cancellable;

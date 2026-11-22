@@ -2,7 +2,7 @@
 module gid.gstaudio1.audio_quantize;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstaudio1.c.functions;
 import gid.gstaudio1.c.types;
 import gid.gstaudio1.types;

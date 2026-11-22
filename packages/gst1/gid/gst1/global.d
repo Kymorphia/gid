@@ -1,7 +1,7 @@
 /// Global functions for gst1 library
 module gid.gst1.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.types;
 import gid.gobject2.object;

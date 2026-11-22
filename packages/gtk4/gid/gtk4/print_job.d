@@ -3,7 +3,7 @@ module gid.gtk4.print_job;
 
 public import gid.core.basictypes;
 import gid.cairo1.surface;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;

@@ -2,7 +2,7 @@
 module gid.gst1.log_context;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.c.functions;
 import gid.gst1.c.types;
 import gid.gst1.types;

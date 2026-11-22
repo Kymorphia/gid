@@ -5,7 +5,7 @@ public import gid.core.basictypes;
 import gid.cairo1.c.functions;
 import gid.cairo1.c.types;
 import gid.cairo1.types;
-import gid.core.gid;
+import gid.core.utils;
 
 /**
     A #cairo_matrix_t holds an affine transformation, such as a scale,

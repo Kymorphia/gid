@@ -1,7 +1,7 @@
 /// D types for gstaudio1 library
 module gid.gstaudio1.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.clock;
 import gid.gst1.types;
 import gid.gstaudio1.audio_base_sink;

@@ -3,7 +3,7 @@ module gid.gtk3.gradient;
 
 public import gid.core.basictypes;
 import gid.cairo1.pattern;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.gtk3.c.functions;
 import gid.gtk3.c.types;

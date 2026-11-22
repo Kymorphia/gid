@@ -3,7 +3,7 @@ module gid.gio2.dbus_object_manager;
 
 public import gid.core.basictypes;
 public import gid.gio2.dbus_object_manager_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.c.functions;
 import gid.gio2.c.types;
 import gid.gio2.dbus_interface;

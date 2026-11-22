@@ -15,7 +15,7 @@ import gid.cairo1.scaled_font;
 import gid.cairo1.surface;
 import gid.cairo1.text_cluster;
 import gid.cairo1.types;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 
 /**

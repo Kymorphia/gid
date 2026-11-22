@@ -2,7 +2,7 @@
 module gid.gsk4.rounded_rect;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.graphene1.point;
 import gid.graphene1.rect;
 import gid.graphene1.size;

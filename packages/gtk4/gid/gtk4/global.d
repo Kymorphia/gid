@@ -2,7 +2,7 @@
 module gid.gtk4.global;
 
 import gid.cairo1.context;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.content_provider;
 import gid.gdk4.display;
 import gid.gdk4.texture;

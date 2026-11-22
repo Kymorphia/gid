@@ -2,7 +2,7 @@
 module gid.webkit6.file_chooser_request;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;
 import gid.gtk4.file_filter;

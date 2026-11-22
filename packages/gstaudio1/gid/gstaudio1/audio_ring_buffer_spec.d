@@ -2,7 +2,7 @@
 module gid.gstaudio1.audio_ring_buffer_spec;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.caps;
 import gid.gstaudio1.audio_info;
 import gid.gstaudio1.c.functions;

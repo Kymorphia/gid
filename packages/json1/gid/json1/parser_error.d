@@ -1,7 +1,7 @@
 /// Module for [ParserError] enum namespace
 module gid.json1.parser_error;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.types;
 import gid.json1.c.functions;

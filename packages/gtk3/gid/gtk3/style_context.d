@@ -2,7 +2,7 @@
 module gid.gtk3.style_context;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.frame_clock;
 import gid.gdk3.rgba;
 import gid.gdk3.screen;

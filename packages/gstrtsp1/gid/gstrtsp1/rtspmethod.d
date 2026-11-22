@@ -1,7 +1,7 @@
 /// Module for [RTSPMethod] flags namespace
 module gid.gstrtsp1.rtspmethod;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstrtsp1.c.functions;
 import gid.gstrtsp1.c.types;
 import gid.gstrtsp1.types;

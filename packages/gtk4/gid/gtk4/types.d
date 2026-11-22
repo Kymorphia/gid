@@ -2,7 +2,7 @@
 module gid.gtk4.types;
 
 import gid.cairo1.context;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.frame_clock;
 import gid.gdk4.rectangle;
 import gid.gio2.list_model;

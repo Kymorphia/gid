@@ -2,7 +2,7 @@
 module gid.panel1.widget;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.action_group;
 import gid.gio2.icon;
 import gid.gio2.menu_model;

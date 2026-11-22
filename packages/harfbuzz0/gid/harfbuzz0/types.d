@@ -1,7 +1,7 @@
 /// D types for harfbuzz0 library
 module gid.harfbuzz0.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.harfbuzz0.blob;
 import gid.harfbuzz0.buffer;
 import gid.harfbuzz0.c.functions;

@@ -1,7 +1,7 @@
 /// D types for gstapp1 library
 module gid.gstapp1.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.query;
 import gid.gst1.types;
 import gid.gstapp1.app_sink;

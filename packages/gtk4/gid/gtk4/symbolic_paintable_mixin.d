@@ -3,7 +3,7 @@ module gid.gtk4.symbolic_paintable_mixin;
 
 public import gid.core.basictypes;
 public import gid.gtk4.symbolic_paintable_iface_proxy;
-public import gid.core.gid;
+public import gid.core.utils;
 public import gid.gdk4.rgba;
 public import gid.gdk4.snapshot;
 public import gid.gobject2.gid_builder;

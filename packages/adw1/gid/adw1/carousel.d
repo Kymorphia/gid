@@ -8,7 +8,7 @@ import gid.adw1.spring_params;
 import gid.adw1.swipeable;
 import gid.adw1.swipeable_mixin;
 import gid.adw1.types;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;

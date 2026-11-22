@@ -2,7 +2,7 @@
 module gid.webkit6.back_forward_list_item;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gobject2.initially_unowned;
 import gid.webkit6.c.functions;

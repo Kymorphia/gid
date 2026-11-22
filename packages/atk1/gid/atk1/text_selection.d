@@ -6,7 +6,7 @@ import gid.atk1.c.functions;
 import gid.atk1.c.types;
 import gid.atk1.object;
 import gid.atk1.types;
-import gid.core.gid;
+import gid.core.utils;
 
 /**
     This structure represents a single  text selection within a document. This

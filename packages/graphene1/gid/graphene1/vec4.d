@@ -2,7 +2,7 @@
 module gid.graphene1.vec4;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.graphene1.c.functions;
 import gid.graphene1.c.types;

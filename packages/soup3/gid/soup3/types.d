@@ -1,7 +1,7 @@
 /// D types for soup3 library
 module gid.soup3.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.soup3.auth_domain;
 import gid.soup3.auth_domain_basic;
 import gid.soup3.auth_domain_digest;

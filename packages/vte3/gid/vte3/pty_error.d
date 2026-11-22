@@ -1,7 +1,7 @@
 /// Module for [PtyError] enum namespace
 module gid.vte3.pty_error;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.types;
 import gid.vte3.c.functions;

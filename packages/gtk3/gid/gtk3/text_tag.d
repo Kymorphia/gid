@@ -2,7 +2,7 @@
 module gid.gtk3.text_tag;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.color;
 import gid.gdk3.event;
 import gid.gdk3.rgba;

@@ -1,7 +1,7 @@
 /// D types for gstpbutils1 library
 module gid.gstpbutils1.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gstpbutils1.audio_visualizer;
 import gid.gstpbutils1.c.functions;
 import gid.gstpbutils1.c.types;

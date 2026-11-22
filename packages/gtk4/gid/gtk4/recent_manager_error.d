@@ -1,7 +1,7 @@
 /// Module for [RecentManagerError] enum namespace
 module gid.gtk4.recent_manager_error;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.types;
 import gid.gtk4.c.functions;

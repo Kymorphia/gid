@@ -2,7 +2,7 @@
 module gid.gtk4.cell_renderer;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.event;
 import gid.gdk4.rectangle;
 import gid.gdk4.rgba;

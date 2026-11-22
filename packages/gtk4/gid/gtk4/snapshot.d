@@ -3,7 +3,7 @@ module gid.gtk4.snapshot;
 
 public import gid.core.basictypes;
 import gid.cairo1.context;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.paintable;
 import gid.gdk4.rgba;
 import gid.gdk4.snapshot;

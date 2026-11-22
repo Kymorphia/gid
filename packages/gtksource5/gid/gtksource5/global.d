@@ -1,7 +1,7 @@
 /// Global functions for gtksource5 library
 module gid.gtksource5.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gtksource5.c.functions;
 import gid.gtksource5.c.types;
 import gid.gtksource5.types;

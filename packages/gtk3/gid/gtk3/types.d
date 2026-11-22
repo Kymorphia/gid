@@ -1,7 +1,7 @@
 /// D types for gtk3 library
 module gid.gtk3.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.atom;
 import gid.gdk3.color;
 import gid.gdk3.display;

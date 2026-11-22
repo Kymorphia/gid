@@ -10,7 +10,7 @@ import gid.atk1.hyperlink_impl;
 import gid.atk1.hyperlink_impl_mixin;
 import gid.atk1.image;
 import gid.atk1.image_mixin;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gtk3.button_accessible;
 import gid.gtk3.c.functions;

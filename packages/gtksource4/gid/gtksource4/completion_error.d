@@ -1,7 +1,7 @@
 /// Module for [CompletionError] enum namespace
 module gid.gtksource4.completion_error;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.types;
 import gid.gtksource4.c.functions;

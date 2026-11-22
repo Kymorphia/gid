@@ -9,7 +9,7 @@ import gid.adw1.navigation_page;
 import gid.adw1.preferences_page;
 import gid.adw1.toast;
 import gid.adw1.types;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;
 import gid.gtk4.accessible;

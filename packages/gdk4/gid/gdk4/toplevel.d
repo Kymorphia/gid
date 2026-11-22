@@ -3,7 +3,7 @@ module gid.gdk4.toplevel;
 
 public import gid.core.basictypes;
 public import gid.gdk4.toplevel_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.c.functions;
 import gid.gdk4.c.types;
 import gid.gdk4.device;

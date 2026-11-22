@@ -2,7 +2,7 @@
 module gid.gio2.simple_action;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.action;
 import gid.gio2.action_mixin;
 import gid.gio2.c.functions;

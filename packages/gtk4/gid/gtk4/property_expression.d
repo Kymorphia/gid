@@ -2,7 +2,7 @@
 module gid.gtk4.property_expression;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.param_spec;
 import gid.gobject2.types;
 import gid.gtk4.c.functions;

@@ -6,7 +6,7 @@ import gid.atk1.c.types;
 import gid.atk1.key_event_struct;
 import gid.atk1.object;
 import gid.atk1.property_values;
-import gid.core.gid;
+import gid.core.utils;
 
 
 // Aliases

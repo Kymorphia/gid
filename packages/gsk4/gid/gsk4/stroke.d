@@ -3,7 +3,7 @@ module gid.gsk4.stroke;
 
 public import gid.core.basictypes;
 import gid.cairo1.context;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.gsk4.c.functions;
 import gid.gsk4.c.types;

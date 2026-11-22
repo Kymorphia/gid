@@ -3,7 +3,7 @@ module gid.gtk3.cell_area;
 
 public import gid.core.basictypes;
 import gid.cairo1.context;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.event;
 import gid.gdk3.rectangle;
 import gid.gobject2.dclosure;

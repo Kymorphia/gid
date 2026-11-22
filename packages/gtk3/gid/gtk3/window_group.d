@@ -2,7 +2,7 @@
 module gid.gtk3.window_group;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.device;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;

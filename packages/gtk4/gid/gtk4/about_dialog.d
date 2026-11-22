@@ -2,7 +2,7 @@
 module gid.gtk4.about_dialog;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.paintable;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;

@@ -2,7 +2,7 @@
 module gid.gstaudio1.dsd_plane_offset_meta;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.meta;
 import gid.gst1.meta_info;
 import gid.gstaudio1.c.functions;

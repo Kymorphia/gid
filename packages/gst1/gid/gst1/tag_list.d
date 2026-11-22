@@ -2,7 +2,7 @@
 module gid.gst1.tag_list;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.date;
 import gid.gobject2.boxed;
 import gid.gobject2.value;

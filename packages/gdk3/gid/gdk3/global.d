@@ -4,7 +4,7 @@ module gid.gdk3.global;
 import gid.cairo1.context;
 import gid.cairo1.region;
 import gid.cairo1.surface;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.atom;
 import gid.gdk3.c.functions;
 import gid.gdk3.c.types;

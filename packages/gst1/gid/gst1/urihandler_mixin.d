@@ -3,7 +3,7 @@ module gid.gst1.urihandler_mixin;
 
 public import gid.core.basictypes;
 public import gid.gst1.urihandler_iface_proxy;
-public import gid.core.gid;
+public import gid.core.utils;
 public import gid.glib2.error;
 public import gid.gobject2.gid_builder;
 public import gid.gst1.c.functions;

@@ -2,7 +2,7 @@
 module gid.gstrtsp1.rtspmessage;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.string_;
 import gid.gobject2.boxed;
 import gid.gst1.buffer;

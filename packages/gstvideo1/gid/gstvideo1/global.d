@@ -1,7 +1,7 @@
 /// Global functions for gstvideo1 library
 module gid.gstvideo1.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.date_time;
 import gid.glib2.error;
 import gid.glib2.types;

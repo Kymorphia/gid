@@ -5,7 +5,7 @@ public import gid.core.basictypes;
 import gid.adw1.c.functions;
 import gid.adw1.c.types;
 import gid.adw1.types;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 
 /**

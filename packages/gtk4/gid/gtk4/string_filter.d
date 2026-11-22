@@ -2,7 +2,7 @@
 module gid.gtk4.string_filter;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gtk4.c.functions;
 import gid.gtk4.c.types;

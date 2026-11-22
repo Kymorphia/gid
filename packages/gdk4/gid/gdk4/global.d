@@ -4,7 +4,7 @@ module gid.gdk4.global;
 import gid.cairo1.context;
 import gid.cairo1.region;
 import gid.cairo1.surface;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.c.functions;
 import gid.gdk4.c.types;
 import gid.gdk4.event;

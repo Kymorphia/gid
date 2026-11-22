@@ -1,7 +1,7 @@
 /// D types for pango1 library
 module gid.pango1.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.pango1.attribute;
 import gid.pango1.c.functions;
 import gid.pango1.c.types;

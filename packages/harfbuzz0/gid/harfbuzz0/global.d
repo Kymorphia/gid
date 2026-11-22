@@ -1,7 +1,7 @@
 /// Global functions for harfbuzz0 library
 module gid.harfbuzz0.global;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.freetype2.types;
 import gid.glib2.bytes;
 import gid.glib2.types;

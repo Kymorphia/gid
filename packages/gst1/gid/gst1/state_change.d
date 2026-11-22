@@ -1,7 +1,7 @@
 /// Module for [StateChange] enum namespace
 module gid.gst1.state_change;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gst1.c.functions;
 import gid.gst1.c.types;
 import gid.gst1.types;

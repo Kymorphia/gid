@@ -2,7 +2,7 @@
 module gid.panel1.layered_settings;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.settings;
 import gid.gio2.settings_schema_key;
 import gid.gio2.types;

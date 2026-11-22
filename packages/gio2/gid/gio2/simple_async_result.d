@@ -2,7 +2,7 @@
 module gid.gio2.simple_async_result;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.async_result;
 import gid.gio2.async_result_mixin;
 import gid.gio2.c.functions;

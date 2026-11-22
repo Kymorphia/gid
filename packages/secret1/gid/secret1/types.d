@@ -1,7 +1,7 @@
 /// D types for secret1 library
 module gid.secret1.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.secret1.c.functions;
 import gid.secret1.c.types;
 

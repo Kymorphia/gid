@@ -3,7 +3,7 @@ module gid.panel1.changes_dialog;
 
 public import gid.core.basictypes;
 import gid.adw1.alert_dialog;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.async_result;
 import gid.gio2.cancellable;
 import gid.gio2.types;

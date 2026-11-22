@@ -2,7 +2,7 @@
 module gid.gstpbutils1.install_plugins_context;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.boxed;
 import gid.gstpbutils1.c.functions;
 import gid.gstpbutils1.c.types;

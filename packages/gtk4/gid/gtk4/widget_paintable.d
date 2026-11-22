@@ -2,7 +2,7 @@
 module gid.gtk4.widget_paintable;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.paintable;
 import gid.gdk4.paintable_mixin;
 import gid.gobject2.gid_builder;

@@ -2,7 +2,7 @@
 module gid.gtk3.gesture_rotate;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;
 import gid.gtk3.c.functions;

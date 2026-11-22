@@ -3,7 +3,7 @@ module gid.gstvideo1.video_orientation;
 
 public import gid.core.basictypes;
 public import gid.gstvideo1.video_orientation_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gst1.tag_list;
 import gid.gstvideo1.c.functions;

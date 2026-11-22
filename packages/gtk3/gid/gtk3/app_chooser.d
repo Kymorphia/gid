@@ -3,7 +3,7 @@ module gid.gtk3.app_chooser;
 
 public import gid.core.basictypes;
 public import gid.gtk3.app_chooser_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.app_info;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;

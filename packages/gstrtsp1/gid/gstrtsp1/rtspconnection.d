@@ -2,7 +2,7 @@
 module gid.gstrtsp1.rtspconnection;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.cancellable;
 import gid.gio2.socket;
 import gid.gio2.tls_certificate;

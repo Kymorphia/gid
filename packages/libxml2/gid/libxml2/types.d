@@ -1,7 +1,7 @@
 /// D types for libxml2 library
 module gid.libxml2.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.libxml2.c.functions;
 import gid.libxml2.c.types;
 

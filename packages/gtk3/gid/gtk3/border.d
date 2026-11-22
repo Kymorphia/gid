@@ -2,7 +2,7 @@
 module gid.gtk3.border;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gtk3.c.functions;
 import gid.gtk3.c.types;
 import gid.gtk3.types;

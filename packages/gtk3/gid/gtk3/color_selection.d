@@ -4,7 +4,7 @@ module gid.gtk3.color_selection;
 public import gid.core.basictypes;
 import gid.atk1.implementor_iface;
 import gid.atk1.implementor_iface_mixin;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk3.color;
 import gid.gdk3.rgba;
 import gid.gobject2.dclosure;

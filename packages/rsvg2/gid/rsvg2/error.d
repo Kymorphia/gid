@@ -1,7 +1,7 @@
 /// Module for [Error] enum namespace
 module gid.rsvg2.error;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.error;
 import gid.glib2.types;
 import gid.rsvg2.c.functions;

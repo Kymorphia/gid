@@ -2,7 +2,7 @@
 module gid.gtk4.window;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.display;
 import gid.gdk4.monitor;
 import gid.gio2.list_model;

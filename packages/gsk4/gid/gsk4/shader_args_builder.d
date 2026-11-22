@@ -2,7 +2,7 @@
 module gid.gsk4.shader_args_builder;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.bytes;
 import gid.gobject2.boxed;
 import gid.graphene1.vec2;

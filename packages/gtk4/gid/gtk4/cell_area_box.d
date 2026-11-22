@@ -2,7 +2,7 @@
 module gid.gtk4.cell_area_box;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gtk4.buildable;
 import gid.gtk4.buildable_mixin;

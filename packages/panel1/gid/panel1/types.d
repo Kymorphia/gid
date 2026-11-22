@@ -1,7 +1,7 @@
 /// D types for panel1 library
 module gid.panel1.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.variant;
 import gid.panel1.c.functions;
 import gid.panel1.c.types;

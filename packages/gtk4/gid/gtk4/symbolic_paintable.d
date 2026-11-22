@@ -3,7 +3,7 @@ module gid.gtk4.symbolic_paintable;
 
 public import gid.core.basictypes;
 public import gid.gtk4.symbolic_paintable_iface_proxy;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.paintable;
 import gid.gdk4.rgba;
 import gid.gdk4.snapshot;

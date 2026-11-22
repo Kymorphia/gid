@@ -2,7 +2,7 @@
 module gid.glib2.checksum;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.glib2.c.functions;
 import gid.glib2.c.types;
 import gid.glib2.types;

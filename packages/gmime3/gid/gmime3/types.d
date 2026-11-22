@@ -1,7 +1,7 @@
 /// D types for gmime3 library
 module gid.gmime3.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gmime3.c.functions;
 import gid.gmime3.c.types;
 import gid.gmime3.crypto_context;

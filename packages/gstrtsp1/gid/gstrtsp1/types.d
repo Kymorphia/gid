@@ -1,7 +1,7 @@
 /// D types for gstrtsp1 library
 module gid.gstrtsp1.types;
 
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.tls_certificate;
 import gid.gio2.tls_connection;
 import gid.gio2.types;

@@ -2,7 +2,7 @@
 module gid.gtk4.shortcut_controller;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gdk4.types;
 import gid.gio2.list_model;
 import gid.gio2.list_model_mixin;

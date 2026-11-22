@@ -4,7 +4,7 @@ module gid.adw1.easing;
 import gid.adw1.c.functions;
 import gid.adw1.c.types;
 import gid.adw1.types;
-import gid.core.gid;
+import gid.core.utils;
 
 /// Namespace for [Easing] enum
 struct Easing

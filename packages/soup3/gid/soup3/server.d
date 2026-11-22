@@ -2,7 +2,7 @@
 module gid.soup3.server;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.iostream;
 import gid.gio2.socket;
 import gid.gio2.socket_address;

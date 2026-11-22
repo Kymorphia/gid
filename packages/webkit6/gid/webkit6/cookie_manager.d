@@ -2,7 +2,7 @@
 module gid.webkit6.cookie_manager;
 
 public import gid.core.basictypes;
-import gid.core.gid;
+import gid.core.utils;
 import gid.gio2.async_result;
 import gid.gio2.cancellable;
 import gid.gio2.types;

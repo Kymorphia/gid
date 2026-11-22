@@ -3,7 +3,7 @@ module gid.gstvideo1.color_balance_mixin;
 
 public import gid.core.basictypes;
 public import gid.gstvideo1.color_balance_iface_proxy;
-public import gid.core.gid;
+public import gid.core.utils;
 public import gid.gobject2.dclosure;
 public import gid.gobject2.gid_builder;
 public import gid.gstvideo1.c.functions;
