@@ -14,6 +14,15 @@ import std.string : fromStringz, indexOf, lastIndexOf, split, toStringz;
 __gshared string[] gidUnresolvedLibs; /// Array of unresolved libraries
 __gshared string[] gidUnresolvedSymbols; /// Array of unresolved function symbols (for libs which were resolved)
 __gshared string gidLibraryPath; /// Override library path either from direct assignment or from GID_LIBRARY_PATH environment var
+__gshared GidPackageLibs[string] gidPackageLibs; /// Libraries of each linked giD package, by package namespace (`gid.gtk4`), see [isLibAvailable]
+
+/// Libraries of a giD package which were requested by its `c.functions` module at startup
+struct GidPackageLibs
+{
+  string[] names; /// Library base names the package asked for
+  void*[] handles; /// Handles of the libraries which were found and opened
+  bool allLoaded; /// true if every library of the package was found and opened
+}
 
 debug private immutable bool gidLoaderDebug; // Set by GID_LOADER_DEBUG=1 to enable loader debugging
 
@@ -23,7 +32,16 @@ shared static this()
   debug gidLoaderDebug = assumeWontThrow(environment.get("GID_LOADER_DEBUG")) == "1";
 }
 
-void*[] gidResolveLibs(immutable(string[]) libs) nothrow
+/**
+ * Open the shared libraries of a giD package. Called by the generated `c.functions` module of each package when the
+ * program starts.
+ * Params:
+ *   libs = Library base names (`gtk-4_1` for libgtk-4.so.1)
+ *   pkg = Package namespace of the calling module (`gid.gtk4`), which is registered so that [isLibAvailable] can
+ *     report whether its libraries were found. Null to not register.
+ * Returns: Handles of the libraries which were opened
+ */
+void*[] gidResolveLibs(immutable(string[]) libs, string pkg = null) nothrow
 {
   version (OSX) // Check for OSX specific library path environment variable hints
   {
@@ -68,7 +86,68 @@ void*[] gidResolveLibs(immutable(string[]) libs) nothrow
     }
   }
 
+  if (pkg.length > 0)
+    gidPackageLibs[pkg] = GidPackageLibs(libs.dup, libHandles, libHandles.length == libs.length);
+
   return libHandles;
+}
+
+/**
+ * Check if the C libraries of a giD package were loaded.
+ *
+ * This is true when the package is part of the program and every shared library it needs was found and opened. It does
+ * not depend on any C function symbol, so it can be used to choose between several versions of a library which are
+ * all linked into the program, such as `gid:gtk3` and `gid:gtk4` or two releases of a library that the application
+ * supports.
+ * Params:
+ *   pkg = The package namespace, `"gid.gtk4"` for example (the root and the dub package name)
+ * Returns: true if the package's libraries were loaded, false if a library is missing or the package isn't linked
+ */
+bool isLibAvailable(string pkg) nothrow
+{
+  if (auto p = pkg in gidPackageLibs)
+    return p.allLoaded;
+
+  return false;
+}
+
+/**
+ * Check if the C libraries of the giD package of a module or other symbol were loaded.
+ *
+ * Use any module or declaration of the package that the application imports, for example:
+ * ---
+ * import gid.gtk4.widget;
+ * import gid.gtk3.widget;
+ *
+ * if (isLibAvailable!(gid.gtk4.widget))
+ *   // use GTK 4
+ * else if (isLibAvailable!(gid.gtk3.widget))
+ *   // use GTK 3
+ * ---
+ * Params:
+ *   sym = A module (`gid.gtk4.widget`) or declaration (`gid.gtk4.widget.Widget`) of the package
+ * Returns: true if the package's libraries were loaded (see the string version of isLibAvailable)
+ */
+bool isLibAvailable(alias sym)() nothrow
+{
+  import std.traits : moduleName;
+
+  enum pkg = gidPackageOfModule(moduleName!sym);
+  return isLibAvailable(pkg);
+}
+
+/// Get the package namespace (root and dub package name, `gid.gtk4`) from a module name (`gid.gtk4.widget`)
+string gidPackageOfModule(string modName) pure nothrow
+{
+  size_t dots;
+
+  foreach (i, c; modName)
+  {
+    if (c == '.' && ++dots == 2)
+      return modName[0 .. i];
+  }
+
+  return modName;
 }
 
 void gidLink(void** funcPtr, string symbol, void*[] libHandles) nothrow
@@ -153,13 +232,15 @@ private void* libraryOpen(string[] candidates, out string found) nothrow
     }
     else
     {
-      import core.sys.posix.dlfcn : dlopen, RTLD_GLOBAL, RTLD_NOW;
+      import core.sys.posix.dlfcn : dlopen, RTLD_LOCAL, RTLD_NOW;
 
+      // RTLD_LOCAL keeps the symbols out of the global scope, so different major versions of a library (GTK 3 and 4)
+      // can be loaded together, symbols are looked up in the handle of each library (gidLink)
       if (gidLibraryPath.length > 0)
-        handle = dlopen(cast(char*)buildPath(gidLibraryPath, lib).toStringz, RTLD_GLOBAL | RTLD_NOW);
+        handle = dlopen(cast(char*)buildPath(gidLibraryPath, lib).toStringz, RTLD_LOCAL | RTLD_NOW);
 
       if (!handle)
-        handle = dlopen(cast(char*)lib.toStringz, RTLD_GLOBAL | RTLD_NOW);
+        handle = dlopen(cast(char*)lib.toStringz, RTLD_LOCAL | RTLD_NOW);
     }
 
     if (handle)
@@ -245,6 +326,56 @@ private string[] libraryCandidates(string baseName) nothrow
   }
 
   return cands;
+}
+
+/**
+ * Get the handle of the loaded library which contains an address (of a function or data). Used to find which version
+ * of a library registered a GType when several versions of it are loaded. Not supported on Windows.
+ * Params:
+ *   addr = The address
+ * Returns: The library handle (the same value that [gidResolveLibs] returned for it) or null if the address is not in
+ *   a loaded library
+ */
+void* gidLibHandleOfAddress(const(void)* addr) nothrow
+{
+  version(Windows)
+    return null;
+  else
+  {
+    import core.sys.posix.dlfcn : dladdr, dlclose, dlopen, Dl_info, RTLD_LAZY, RTLD_NOLOAD;
+
+    Dl_info info;
+
+    if (!addr || !dladdr(addr, &info) || !info.dli_fname)
+      return null;
+
+    if (auto handle = dlopen(info.dli_fname, RTLD_LAZY | RTLD_NOLOAD)) // Same handle as the one that loaded the library
+    {
+      dlclose(handle); // Remove the reference added by dlopen, the library stays loaded by its original handle
+      return handle;
+    }
+
+    return null;
+  }
+}
+
+/**
+ * Check if a library handle is one of the libraries which a giD package opened.
+ * Params:
+ *   pkg = The package namespace (`gid.gtk4`)
+ *   handle = The library handle
+ * Returns: true if the handle belongs to the package
+ */
+bool gidPackageHasLibHandle(string pkg, void* handle) nothrow
+{
+  if (auto p = pkg in gidPackageLibs)
+  {
+    foreach (h; p.handles)
+      if (h is handle)
+        return true;
+  }
+
+  return false;
 }
 
 /// Return a giD unresolved lib/symbol report (might get called by multiple threads)

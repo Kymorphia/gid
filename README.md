@@ -100,6 +100,44 @@ GTK 3 and GTK 4 (and other pairs of majors) can be linked together in the same a
 (`gid.gtk3.widget` and `gid.gtk4.widget`). Only one major of a library can be used per process; GTK aborts if GTK 3 and
 GTK 4 are both loaded at runtime.
 
+### Optional Library Versions
+
+Libraries are opened when the program starts, and a package whose library can't be found is still linked. Its functions
+are not available, and calling one prints a report of the missing libraries and throws an `Error`. This lets a program link several versions of
+a library (for example `gid:gparquet22` and `gid:gparquet23`) and choose one at runtime, based on which is installed.
+`isLibAvailable` in `gid.core` reports whether the library of a package was found and loaded. It takes any module of the
+package, or the package name as a string:
+
+```D
+import gid.core : isLibAvailable;
+static import gid.gparquet22.file_reader;
+static import gid.gparquet23.file_reader;
+
+if (isLibAvailable!(gid.gparquet23.file_reader)) // Is the C library of the gparquet23 package available?
+  openWithV23();
+else if (isLibAvailable!(gid.gparquet22.file_reader))
+  openWithV22();
+else
+  stderr.writeln("No Parquet library found");
+
+bool haveGtk3 = isLibAvailable("gid.gtk3"); // Package name for runtime use
+```
+
+The libraries are opened with `RTLD_LOCAL`, so their symbols are only visible to giD and not to the rest of the process.
+This is what allows `gid:gtk3` and `gid:gtk4` to be linked into the same program: GTK 4 aborts on startup if it
+finds GTK 2/3 symbols in the global symbol scope. With `RTLD_LOCAL`, GTK 4 can be initialized in a program which also
+links `gid:gtk3` (GTK 3 and GTK 4 still can't both be initialized and used in one process).
+Libraries which look up symbols in the global scope, such as a dynamically loaded plugin which expects to find a library by
+symbol name, must link to the library themselves.
+
+To check an individual C function instead, note that a symbol which could not be resolved is not set to `null`,
+it is set to the address of a function that throws an `Error`. To test one, compare to `&gidSymbolNotFound`
+from `gid.core.loader`, for example `cast(void function())gparquet_file_reader_get_type !is &gidSymbolNotFound`.
+`!is null` is always true and does not indicate availability.
+
+Types with the same GType name in two linked versions (for example `GParquetFileReader` in both) are handled when objects
+are returned from C: the D class of the version which actually registered the GType is used.
+
 
 ### Project Dependencies
 
