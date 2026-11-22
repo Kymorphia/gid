@@ -97,8 +97,7 @@ The **glib2** package is a notable exception: it also contains the GObject modul
 This was done to resolve interdependencies between these modules.
 
 GTK 3 and GTK 4 (and other pairs of majors) can be linked together in the same application. Their modules have different names
-(`gid.gtk3.widget` and `gid.gtk4.widget`). Only one major of a library can be used per process; GTK aborts if GTK 3 and
-GTK 4 are both loaded at runtime.
+(`gid.gtk3.widget` and `gid.gtk4.widget`). Only one major of a library can be used per process; GTK aborts if GTK 3 and GTK 4 are both initialized in the same process.
 
 ### Optional Library Versions
 
@@ -123,12 +122,16 @@ else
 bool haveGtk3 = isLibAvailable("gid.gtk3"); // Package name for runtime use
 ```
 
-The libraries are opened with `RTLD_LOCAL`, so their symbols are only visible to giD and not to the rest of the process.
-This is what allows `gid:gtk3` and `gid:gtk4` to be linked into the same program: GTK 4 aborts on startup if it
-finds GTK 2/3 symbols in the global symbol scope. With `RTLD_LOCAL`, GTK 4 can be initialized in a program which also
-links `gid:gtk3` (GTK 3 and GTK 4 still can't both be initialized and used in one process).
-Libraries which look up symbols in the global scope, such as a dynamically loaded plugin which expects to find a library by
-symbol name, must link to the library themselves.
+Libraries are opened with `RTLD_GLOBAL` by default, so other code in the process can find their symbols by name
+(GtkBuilder looking up `*_get_type` functions, `g_module_open(NULL)`, and plugins).
+When two majors of the same library are linked into the program (`gid:gtk3` and `gid:gtk4`, or two versions of a
+library such as Parquet), those packages are opened with `RTLD_LOCAL` instead, so their symbols do not collide.
+That is what allows GTK 4 to be initialized in a program which also links `gid:gtk3`. GTK 4 would otherwise abort
+if it found GTK 2/3 symbols in the global scope. GTK 3 and GTK 4 still can't both be initialized and used in one process.
+
+The `GID_RTLD_LOCAL` and `GID_RTLD_GLOBAL` environment variables override the choice for listed packages, as a
+comma-separated list of package namespaces or package names, for example `GID_RTLD_LOCAL=gid.glib2` or
+`GID_RTLD_GLOBAL=gtk3,gtk4`. `GID_RTLD_LOCAL` is checked first.
 
 To check an individual C function instead, note that a symbol which could not be resolved is not set to `null`,
 it is set to the address of a function that throws an `Error`. To test one, compare to `&gidSymbolNotFound`
