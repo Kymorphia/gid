@@ -1174,17 +1174,17 @@ void setVal(T)(GValue* gval, T v) nothrow
   g_value_set_int(gval, v);
   else static if (is(T == uint))
   g_value_set_uint(gval, v);
-  else static if (is(T == long)) // Also glong on 64 bit systems (where c_long is long), use the actual GValue type
+  else static if (is(T == long)) // Also glong (cast needed: c_long is 32 bit on Windows), use the actual GValue type
   {
     if (gval.gType == GTypeEnum.Long)
-      g_value_set_long(gval, v);
+      g_value_set_long(gval, cast(glong)v);
     else
       g_value_set_int64(gval, v);
   }
-  else static if (is(T == ulong)) // Also gulong on 64 bit systems and GType (an alias of ulong)
+  else static if (is(T == ulong)) // Also gulong and GType (cast needed: c_ulong is 32 bit on Windows)
   {
     if (gval.gType == GTypeEnum.Ulong)
-      g_value_set_ulong(gval, v);
+      g_value_set_ulong(gval, cast(gulong)v);
     else if (gval.gType == g_gtype_get_type())
     g_value_set_gtype(gval, v);
     else

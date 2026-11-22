@@ -108,7 +108,8 @@ ubyte[] log2visGetEmbeddingLevels(string text, ref gid.pango1.types.Direction pb
 {
   import gid.glib2.c.functions : g_free, g_utf8_strlen;
 
-  auto nChars = text.length > 0 ? g_utf8_strlen(text.ptr, text.length) : 0; // Same count as Pango uses for the array
+  // cast needed: the n parameter is C glong which is 32 bit on Windows, while D string length is ulong
+  auto nChars = text.length > 0 ? g_utf8_strlen(text.ptr, cast(glong)text.length) : 0; // Same count as Pango uses for the array
   auto _cretval = pango_log2vis_get_embedding_levels(text.length > 0 ? text.ptr : "".ptr, cast(int)text.length, &pbaseDir);
   auto _retval = _cretval && nChars > 0 ? _cretval[0 .. nChars].dup : null;
   g_free(_cretval);
