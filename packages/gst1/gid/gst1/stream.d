@@ -36,7 +36,7 @@ class Stream : gid.gst1.object.ObjectWrap
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -170,7 +170,7 @@ class Stream : gid.gst1.object.ObjectWrap
   */
   this(string streamId, gid.gst1.caps.Caps caps, gid.gst1.types.StreamType type, gid.gst1.types.StreamFlags flags) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

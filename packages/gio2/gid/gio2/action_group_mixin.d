@@ -75,7 +75,7 @@ template ActionGroupT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncActionAdded`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected void vfuncActionAdded(string actionName)
@@ -100,7 +100,7 @@ template ActionGroupT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncActionEnabledChanged`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected void vfuncActionEnabledChanged(string actionName, bool enabled)
@@ -124,7 +124,7 @@ template ActionGroupT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncActionRemoved`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected void vfuncActionRemoved(string actionName)
@@ -149,7 +149,7 @@ template ActionGroupT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncActionStateChanged`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected void vfuncActionStateChanged(string actionName, gid.glib2.variant.Variant state)
@@ -204,7 +204,7 @@ template ActionGroupT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncActivateAction`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected void vfuncActivateAction(string actionName, gid.glib2.variant.Variant parameter = null)
@@ -237,7 +237,7 @@ template ActionGroupT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncChangeActionState`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected void vfuncChangeActionState(string actionName, gid.glib2.variant.Variant value)
@@ -263,7 +263,7 @@ template ActionGroupT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetActionEnabled`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected bool vfuncGetActionEnabled(string actionName)
@@ -300,7 +300,7 @@ template ActionGroupT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetActionParameterType`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected gid.glib2.variant_type.VariantType vfuncGetActionParameterType(string actionName)
@@ -333,7 +333,7 @@ template ActionGroupT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetActionState`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected gid.glib2.variant.Variant vfuncGetActionState(string actionName)
@@ -376,7 +376,7 @@ template ActionGroupT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetActionStateHint`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected gid.glib2.variant.Variant vfuncGetActionStateHint(string actionName)
@@ -417,7 +417,7 @@ template ActionGroupT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetActionStateType`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected gid.glib2.variant_type.VariantType vfuncGetActionStateType(string actionName)
@@ -443,7 +443,7 @@ template ActionGroupT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncHasAction`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected bool vfuncHasAction(string actionName)
@@ -469,7 +469,7 @@ template ActionGroupT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncListActions`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected string[] vfuncListActions()
@@ -536,7 +536,7 @@ template ActionGroupT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncQueryAction`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected bool vfuncQueryAction(string actionName, out bool enabled, out gid.glib2.variant_type.VariantType parameterType, out gid.glib2.variant_type.VariantType stateType, out gid.glib2.variant.Variant stateHint, out gid.glib2.variant.Variant state)
@@ -1157,7 +1157,7 @@ template ActionGroupT()
 
   /**
       Install the C trampolines of the gid.gio2.action_group.ActionGroup vfunc methods which a D class overrides into the interface
-      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      structure of its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overriding a vfunc method which has no
       trampoline is a compile error.
       Params:
         T = D class

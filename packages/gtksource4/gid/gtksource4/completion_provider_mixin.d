@@ -44,7 +44,7 @@ template CompletionProviderT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncActivateProposal`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected bool vfuncActivateProposal(gid.gtksource4.completion_proposal.CompletionProposal proposal, gid.gtk3.text_iter.TextIter iter)
@@ -65,7 +65,7 @@ template CompletionProviderT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetActivation`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected gid.gtksource4.types.CompletionActivation vfuncGetActivation()
@@ -88,7 +88,7 @@ template CompletionProviderT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetGicon`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected gid.gio2.icon.Icon vfuncGetGicon()
@@ -111,7 +111,7 @@ template CompletionProviderT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetIcon`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected gid.gdkpixbuf2.pixbuf.Pixbuf vfuncGetIcon()
@@ -175,7 +175,7 @@ template CompletionProviderT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetInfoWidget`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected gid.gtk3.widget.Widget vfuncGetInfoWidget(gid.gtksource4.completion_proposal.CompletionProposal proposal)
@@ -199,7 +199,7 @@ template CompletionProviderT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetInteractiveDelay`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected int vfuncGetInteractiveDelay()
@@ -222,7 +222,7 @@ template CompletionProviderT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetName`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected string vfuncGetName()
@@ -246,7 +246,7 @@ template CompletionProviderT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetPriority`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected int vfuncGetPriority()
@@ -283,7 +283,7 @@ template CompletionProviderT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetStartIter`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected bool vfuncGetStartIter(gid.gtksource4.completion_context.CompletionContext context, gid.gtksource4.completion_proposal.CompletionProposal proposal, out gid.gtk3.text_iter.TextIter iter)
@@ -310,7 +310,7 @@ template CompletionProviderT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncMatch`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected bool vfuncMatch(gid.gtksource4.completion_context.CompletionContext context)
@@ -334,7 +334,7 @@ template CompletionProviderT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncPopulate`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected void vfuncPopulate(gid.gtksource4.completion_context.CompletionContext context)
@@ -363,7 +363,7 @@ template CompletionProviderT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncUpdateInfo`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected void vfuncUpdateInfo(gid.gtksource4.completion_proposal.CompletionProposal proposal, gid.gtksource4.completion_info.CompletionInfo info)
@@ -602,7 +602,7 @@ template CompletionProviderT()
 
   /**
       Install the C trampolines of the gid.gtksource4.completion_provider.CompletionProvider vfunc methods which a D class overrides into the interface
-      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      structure of its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overriding a vfunc method which has no
       trampoline is a compile error.
       Params:
         T = D class

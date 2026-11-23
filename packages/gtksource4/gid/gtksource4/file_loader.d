@@ -30,7 +30,7 @@ class FileLoader : gid.gobject2.object.ObjectWrap
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -126,7 +126,7 @@ class FileLoader : gid.gobject2.object.ObjectWrap
   */
   this(gid.gtksource4.buffer.Buffer buffer, gid.gtksource4.file.File file) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

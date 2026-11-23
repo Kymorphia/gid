@@ -56,7 +56,7 @@ class NavigationPage : gid.gtk4.widget.Widget
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -225,7 +225,7 @@ class NavigationPage : gid.gtk4.widget.Widget
   */
   this(gid.gtk4.widget.Widget child, string title) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }
@@ -263,7 +263,7 @@ class NavigationPage : gid.gtk4.widget.Widget
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncHidden` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncHidden()
   {
@@ -280,7 +280,7 @@ class NavigationPage : gid.gtk4.widget.Widget
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncHiding` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncHiding()
   {
@@ -297,7 +297,7 @@ class NavigationPage : gid.gtk4.widget.Widget
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncShowing` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncShowing()
   {
@@ -314,7 +314,7 @@ class NavigationPage : gid.gtk4.widget.Widget
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncShown` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncShown()
   {
@@ -637,7 +637,7 @@ class NavigationPage : gid.gtk4.widget.Widget
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from NavigationPage

@@ -42,7 +42,7 @@ template PollableOutputStreamT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncCanPoll`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected bool vfuncCanPoll()
@@ -76,7 +76,7 @@ template PollableOutputStreamT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncCreateSource`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected gid.glib2.source.Source vfuncCreateSource(gid.gio2.cancellable.Cancellable cancellable = null)
@@ -111,7 +111,7 @@ template PollableOutputStreamT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncIsWritable`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected bool vfuncIsWritable()
@@ -155,7 +155,7 @@ template PollableOutputStreamT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncWriteNonblocking`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected ptrdiff_t vfuncWriteNonblocking(ubyte[] buffer = null)
@@ -211,7 +211,7 @@ template PollableOutputStreamT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncWritevNonblocking`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected gid.gio2.types.PollableReturn vfuncWritevNonblocking(gid.gio2.types.OutputVector[] vectors, out size_t bytesWritten)
@@ -396,7 +396,7 @@ template PollableOutputStreamT()
 
   /**
       Install the C trampolines of the gid.gio2.pollable_output_stream.PollableOutputStream vfunc methods which a D class overrides into the interface
-      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      structure of its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overriding a vfunc method which has no
       trampoline is a compile error.
       Params:
         T = D class

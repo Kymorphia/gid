@@ -270,7 +270,7 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
   */
   this() nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
     }
@@ -377,7 +377,7 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncActivate` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncActivate()
   {
@@ -393,7 +393,7 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncClicked` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncClicked()
   {
@@ -409,7 +409,7 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncEnter` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   
       Deprecated: Use the #GtkWidget::enter-notify-event signal.
   */
@@ -427,7 +427,7 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncLeave` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   
       Deprecated: Use the #GtkWidget::leave-notify-event signal.
   */
@@ -445,7 +445,7 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncPressed` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   
       Deprecated: Use the #GtkWidget::button-press-event signal.
   */
@@ -463,7 +463,7 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncReleased` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   
       Deprecated: Use the #GtkWidget::button-release-event signal.
   */
@@ -1075,7 +1075,7 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from Button

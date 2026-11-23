@@ -89,7 +89,7 @@ class Element : gid.gst1.object.ObjectWrap
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -248,7 +248,7 @@ class Element : gid.gst1.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncChangeState` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.types.StateChangeReturn vfuncChangeState(gid.gst1.types.StateChange transition)
   {
@@ -300,7 +300,7 @@ class Element : gid.gst1.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncGetState` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.types.StateChangeReturn vfuncGetState(out gid.gst1.types.State state, out gid.gst1.types.State pending, gid.gst1.types.ClockTime timeout)
   {
@@ -327,7 +327,7 @@ class Element : gid.gst1.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncNoMorePads` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncNoMorePads()
   {
@@ -372,7 +372,7 @@ class Element : gid.gst1.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncPostMessage` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncPostMessage(gid.gst1.message.Message message)
   {
@@ -396,7 +396,7 @@ class Element : gid.gst1.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncProvideClock` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.clock.Clock vfuncProvideClock()
   {
@@ -427,7 +427,7 @@ class Element : gid.gst1.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncQuery` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncQuery(gid.gst1.query.Query query)
   {
@@ -448,7 +448,7 @@ class Element : gid.gst1.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncReleasePad` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncReleasePad(gid.gst1.pad.Pad pad)
   {
@@ -477,7 +477,7 @@ class Element : gid.gst1.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncRequestNewPad` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.pad.Pad vfuncRequestNewPad(gid.gst1.pad_template.PadTemplate templ, string name = null, gid.gst1.caps.Caps caps = null)
   {
@@ -509,7 +509,7 @@ class Element : gid.gst1.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSendEvent` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncSendEvent(gid.gst1.event.Event event)
   {
@@ -533,7 +533,7 @@ class Element : gid.gst1.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSetBus` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncSetBus(gid.gst1.bus.Bus bus = null)
   {
@@ -559,7 +559,7 @@ class Element : gid.gst1.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSetClock` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncSetClock(gid.gst1.clock.Clock clock = null)
   {
@@ -582,7 +582,7 @@ class Element : gid.gst1.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSetContext` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncSetContext(gid.gst1.context.Context context)
   {
@@ -616,7 +616,7 @@ class Element : gid.gst1.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSetState` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.types.StateChangeReturn vfuncSetState(gid.gst1.types.State state)
   {
@@ -640,7 +640,7 @@ class Element : gid.gst1.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncStateChanged` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncStateChanged(gid.gst1.types.State oldstate, gid.gst1.types.State newstate, gid.gst1.types.State pending)
   {
@@ -2223,7 +2223,7 @@ class Element : gid.gst1.object.ObjectWrap
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from Element

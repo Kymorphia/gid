@@ -30,7 +30,7 @@ class SimpleAction : gid.gobject2.object.ObjectWrap, gid.gio2.action.Action
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -161,7 +161,7 @@ class SimpleAction : gid.gobject2.object.ObjectWrap, gid.gio2.action.Action
   */
   this(string name, gid.glib2.variant_type.VariantType parameterType = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

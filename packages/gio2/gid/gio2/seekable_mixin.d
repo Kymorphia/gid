@@ -41,7 +41,7 @@ template SeekableT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSeekableCanSeek`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected bool vfuncSeekableCanSeek()
@@ -63,7 +63,7 @@ template SeekableT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSeekableCanTruncate`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected bool vfuncSeekableCanTruncate()
@@ -105,7 +105,7 @@ template SeekableT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSeekableSeek`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected bool vfuncSeekableSeek(long offset, gid.glib2.types.SeekType type, gid.gio2.cancellable.Cancellable cancellable = null)
@@ -130,7 +130,7 @@ template SeekableT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSeekableTell`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected long vfuncSeekableTell()
@@ -166,7 +166,7 @@ template SeekableT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSeekableTruncateFn`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected bool vfuncSeekableTruncateFn(long offset, gid.gio2.cancellable.Cancellable cancellable = null)
@@ -287,7 +287,7 @@ template SeekableT()
 
   /**
       Install the C trampolines of the gid.gio2.seekable.Seekable vfunc methods which a D class overrides into the interface
-      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      structure of its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overriding a vfunc method which has no
       trampoline is a compile error.
       Params:
         T = D class

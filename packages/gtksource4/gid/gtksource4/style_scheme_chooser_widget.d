@@ -67,7 +67,7 @@ class StyleSchemeChooserWidget : gid.gtk3.bin.Bin, gid.gtksource4.style_scheme_c
   */
   this() nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
     }

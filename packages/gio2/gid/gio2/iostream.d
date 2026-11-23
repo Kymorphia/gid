@@ -75,7 +75,7 @@ class IOStream : gid.gobject2.object.ObjectWrap
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -219,7 +219,7 @@ class IOStream : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncCloseFinish` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncCloseFinish(gid.gio2.async_result.AsyncResult result)
   {
@@ -258,7 +258,7 @@ class IOStream : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncGetInputStream` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gio2.input_stream.InputStream vfuncGetInputStream()
   {
@@ -280,7 +280,7 @@ class IOStream : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncGetOutputStream` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gio2.output_stream.OutputStream vfuncGetOutputStream()
   {
@@ -518,7 +518,7 @@ class IOStream : gid.gobject2.object.ObjectWrap
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from IOStream

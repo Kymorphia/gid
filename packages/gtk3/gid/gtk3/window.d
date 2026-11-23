@@ -95,7 +95,7 @@ class Window : gid.gtk3.bin.Bin
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -668,7 +668,7 @@ class Window : gid.gtk3.bin.Bin
   */
   this(gid.gtk3.types.WindowType type) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }
@@ -830,7 +830,7 @@ class Window : gid.gtk3.bin.Bin
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncActivateDefault` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncActivateDefault()
   {
@@ -846,7 +846,7 @@ class Window : gid.gtk3.bin.Bin
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncActivateFocus` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncActivateFocus()
   {
@@ -867,7 +867,7 @@ class Window : gid.gtk3.bin.Bin
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncEnableDebugging` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncEnableDebugging(bool toggle)
   {
@@ -886,7 +886,7 @@ class Window : gid.gtk3.bin.Bin
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncKeysChanged` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncKeysChanged()
   {
@@ -910,7 +910,7 @@ class Window : gid.gtk3.bin.Bin
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSetFocus` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncSetFocus(gid.gtk3.widget.Widget focus = null)
   {
@@ -3176,7 +3176,7 @@ class Window : gid.gtk3.bin.Bin
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from Window

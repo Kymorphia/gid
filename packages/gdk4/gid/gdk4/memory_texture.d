@@ -30,7 +30,7 @@ class MemoryTexture : gid.gdk4.texture.Texture
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -87,7 +87,7 @@ class MemoryTexture : gid.gdk4.texture.Texture
   */
   this(int width, int height, gid.gdk4.types.MemoryFormat format, gid.glib2.bytes.Bytes bytes, size_t stride) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

@@ -70,7 +70,7 @@ class CustomFilter : gid.gtk4.filter.Filter
   */
   this(gid.gtk4.types.CustomFilterFunc matchFunc = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, matchFunc !is null), Yes.Take);
     }

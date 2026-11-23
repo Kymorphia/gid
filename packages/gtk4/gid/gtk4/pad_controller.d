@@ -79,7 +79,7 @@ class PadController : gid.gtk4.event_controller.EventController
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -161,7 +161,7 @@ class PadController : gid.gtk4.event_controller.EventController
   */
   this(gid.gio2.action_group.ActionGroup group, gid.gdk4.device.Device pad = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

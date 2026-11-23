@@ -30,7 +30,7 @@ class GLFilter : gid.gstgl1.glbase_filter.GLBaseFilter
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -84,7 +84,7 @@ class GLFilter : gid.gstgl1.glbase_filter.GLBaseFilter
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncFilter` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncFilter(gid.gst1.buffer.Buffer inbuf, gid.gst1.buffer.Buffer outbuf)
   {
@@ -107,7 +107,7 @@ class GLFilter : gid.gstgl1.glbase_filter.GLBaseFilter
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncFilterTexture` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncFilterTexture(gid.gstgl1.glmemory.GLMemory input, gid.gstgl1.glmemory.GLMemory output)
   {
@@ -126,7 +126,7 @@ class GLFilter : gid.gstgl1.glbase_filter.GLBaseFilter
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncInitFbo` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncInitFbo()
   {
@@ -149,7 +149,7 @@ class GLFilter : gid.gstgl1.glbase_filter.GLBaseFilter
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSetCaps` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   override protected bool vfuncSetCaps(gid.gst1.caps.Caps incaps, gid.gst1.caps.Caps outcaps)
   {
@@ -174,7 +174,7 @@ class GLFilter : gid.gstgl1.glbase_filter.GLBaseFilter
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncTransformInternalCaps` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.caps.Caps vfuncTransformInternalCaps(gid.gst1.types.PadDirection direction, gid.gst1.caps.Caps caps, gid.gst1.caps.Caps filterCaps)
   {
@@ -270,7 +270,7 @@ class GLFilter : gid.gstgl1.glbase_filter.GLBaseFilter
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from GLFilter

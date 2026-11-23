@@ -167,7 +167,7 @@ class ShortcutController : gid.gtk4.event_controller.EventController, gid.gio2.l
   */
   this() nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
     }

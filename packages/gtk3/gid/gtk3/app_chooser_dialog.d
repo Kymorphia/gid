@@ -41,7 +41,7 @@ class AppChooserDialog : gid.gtk3.dialog.Dialog, gid.gtk3.app_chooser.AppChooser
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -128,7 +128,7 @@ class AppChooserDialog : gid.gtk3.dialog.Dialog, gid.gtk3.app_chooser.AppChooser
   */
   this(gid.gtk3.window.Window parent, gid.gtk3.types.DialogFlags flags, gid.gio2.file.File file) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

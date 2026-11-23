@@ -39,7 +39,7 @@ template EditableTextT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncCopyText`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected void vfuncCopyText(int startPos, int endPos)
@@ -62,7 +62,7 @@ template EditableTextT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncCutText`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected void vfuncCutText(int startPos, int endPos)
@@ -84,7 +84,7 @@ template EditableTextT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncDeleteText`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected void vfuncDeleteText(int startPos, int endPos)
@@ -105,7 +105,7 @@ template EditableTextT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncPasteText`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected void vfuncPasteText(int position)
@@ -126,7 +126,7 @@ template EditableTextT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSetTextContents`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected void vfuncSetTextContents(string string_)
@@ -224,7 +224,7 @@ template EditableTextT()
 
   /**
       Install the C trampolines of the gid.atk1.editable_text.EditableText vfunc methods which a D class overrides into the interface
-      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      structure of its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overriding a vfunc method which has no
       trampoline is a compile error.
       Params:
         T = D class

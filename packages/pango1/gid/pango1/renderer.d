@@ -36,7 +36,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -82,7 +82,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncBegin` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncBegin()
   {
@@ -112,7 +112,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncDrawErrorUnderline` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncDrawErrorUnderline(int x, int y, int width, int height)
   {
@@ -134,7 +134,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncDrawGlyph` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncDrawGlyph(gid.pango1.font.Font font, gid.pango1.types.Glyph glyph, double x, double y)
   {
@@ -175,7 +175,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncDrawGlyphItem` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncDrawGlyphItem(string text, gid.pango1.glyph_item.GlyphItem glyphItem, int x, int y)
   {
@@ -200,7 +200,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncDrawGlyphs` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncDrawGlyphs(gid.pango1.font.Font font, gid.pango1.glyph_string.GlyphString glyphs, int x, int y)
   {
@@ -229,7 +229,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncDrawRectangle` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncDrawRectangle(gid.pango1.types.RenderPart part, int x, int y, int width, int height)
   {
@@ -252,7 +252,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncDrawShape` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncDrawShape(gid.pango1.attr_shape.AttrShape attr, int x, int y)
   {
@@ -278,7 +278,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncDrawTrapezoid` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncDrawTrapezoid(gid.pango1.types.RenderPart part, double y1, double x11, double x21, double y2, double x12, double x22)
   {
@@ -294,7 +294,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncEnd` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncEnd()
   {
@@ -327,7 +327,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncPartChanged` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncPartChanged(gid.pango1.types.RenderPart part)
   {
@@ -346,7 +346,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncPrepareRun` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncPrepareRun(gid.pango1.types.LayoutRun run)
   {
@@ -705,7 +705,7 @@ class Renderer : gid.gobject2.object.ObjectWrap
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from Renderer

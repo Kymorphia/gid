@@ -162,7 +162,7 @@ class GraphicsOffload : gid.gtk4.widget.Widget
   */
   this(gid.gtk4.widget.Widget child = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, child !is null), Yes.Take);
     }

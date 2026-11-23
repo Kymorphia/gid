@@ -162,7 +162,7 @@ class Reader : gid.gobject2.object.ObjectWrap
   */
   this(gid.json1.node.Node node = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, node !is null), Yes.Take);
     }

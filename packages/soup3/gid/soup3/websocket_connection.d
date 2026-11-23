@@ -49,7 +49,7 @@ class WebsocketConnection : gid.gobject2.object.ObjectWrap
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -254,7 +254,7 @@ class WebsocketConnection : gid.gobject2.object.ObjectWrap
   */
   this(gid.gio2.iostream.IOStream stream, gid.glib2.uri.Uri uri, gid.soup3.types.WebsocketConnectionType type, string origin, string protocol, gid.soup3.websocket_extension.WebsocketExtension[] extensions) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

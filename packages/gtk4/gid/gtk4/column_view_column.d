@@ -288,7 +288,7 @@ class ColumnViewColumn : gid.gobject2.object.ObjectWrap
   */
   this(string title = null, gid.gtk4.list_item_factory.ListItemFactory factory = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, title !is null || factory !is null), Yes.Take);
     }

@@ -103,7 +103,7 @@ class SignalListItemFactory : gid.gtk4.list_item_factory.ListItemFactory
   */
   this() nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
     }

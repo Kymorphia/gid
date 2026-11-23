@@ -161,7 +161,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -358,7 +358,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   */
   this(string applicationId, gid.gio2.types.ApplicationFlags flags) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }
@@ -458,7 +458,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncActivate` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncActivate()
   {
@@ -478,7 +478,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncAddPlatformData` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncAddPlatformData(gid.glib2.variant_builder.VariantBuilder builder)
   {
@@ -499,7 +499,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncAfterEmit` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncAfterEmit(gid.glib2.variant.Variant platformData)
   {
@@ -520,7 +520,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncBeforeEmit` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncBeforeEmit(gid.glib2.variant.Variant platformData)
   {
@@ -541,7 +541,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncCommandLine` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected int vfuncCommandLine(gid.gio2.application_command_line.ApplicationCommandLine commandLine)
   {
@@ -571,7 +571,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncDbusRegister` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncDbusRegister(gid.gio2.dbus_connection.DBusConnection connection, string objectPath)
   {
@@ -599,7 +599,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncDbusUnregister` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncDbusUnregister(gid.gio2.dbus_connection.DBusConnection connection, string objectPath)
   {
@@ -621,7 +621,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncHandleLocalOptions` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected int vfuncHandleLocalOptions(gid.glib2.variant_dict.VariantDict options)
   {
@@ -686,7 +686,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncNameLost` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncNameLost()
   {
@@ -721,7 +721,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncOpen` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncOpen(gid.gio2.file.File[] files, string hint)
   {
@@ -747,7 +747,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncQuitMainloop` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncQuitMainloop()
   {
@@ -766,7 +766,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncRunMainloop` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncRunMainloop()
   {
@@ -783,7 +783,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncShutdown` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncShutdown()
   {
@@ -799,7 +799,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncStartup` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncStartup()
   {
@@ -2079,7 +2079,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from Application

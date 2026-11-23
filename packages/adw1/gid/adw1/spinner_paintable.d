@@ -119,7 +119,7 @@ class SpinnerPaintable : gid.gobject2.object.ObjectWrap, gid.gdk4.paintable.Pain
   */
   this(gid.gtk4.widget.Widget widget = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, widget !is null), Yes.Take);
     }

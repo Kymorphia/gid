@@ -204,7 +204,7 @@ class SortListModel : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListMo
   */
   this(gid.gio2.list_model.ListModel model = null, gid.gtk4.sorter.Sorter sorter = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, model !is null || sorter !is null), Yes.Take);
     }

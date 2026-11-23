@@ -40,7 +40,7 @@ class ContentSerializer : gid.gobject2.object.ObjectWrap, gid.gio2.async_result.
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {

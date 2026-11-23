@@ -36,7 +36,7 @@ class IPTosMessage : gid.gio2.socket_control_message.SocketControlMessage
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -87,7 +87,7 @@ class IPTosMessage : gid.gio2.socket_control_message.SocketControlMessage
   */
   this(ubyte dscp, gid.gio2.types.EcnCodePoint ecn) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

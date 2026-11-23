@@ -71,7 +71,7 @@ class SpinRow : gid.adw1.action_row.ActionRow, gid.gtk4.editable.Editable
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -281,7 +281,7 @@ class SpinRow : gid.adw1.action_row.ActionRow, gid.gtk4.editable.Editable
   */
   this(gid.gtk4.adjustment.Adjustment adjustment, double climbRate, uint digits) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

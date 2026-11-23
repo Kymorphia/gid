@@ -138,7 +138,7 @@ class BaseTransform : gid.gst1.element.Element
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -204,7 +204,7 @@ class BaseTransform : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncAcceptCaps` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncAcceptCaps(gid.gst1.types.PadDirection direction, gid.gst1.caps.Caps caps)
   {
@@ -228,7 +228,7 @@ class BaseTransform : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncBeforeTransform` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncBeforeTransform(gid.gst1.buffer.Buffer buffer)
   {
@@ -252,7 +252,7 @@ class BaseTransform : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncCopyMetadata` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncCopyMetadata(gid.gst1.buffer.Buffer input, gid.gst1.buffer.Buffer outbuf)
   {
@@ -281,7 +281,7 @@ class BaseTransform : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncDecideAllocation` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncDecideAllocation(gid.gst1.query.Query query)
   {
@@ -307,7 +307,7 @@ class BaseTransform : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncFilterMeta` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncFilterMeta(gid.gst1.query.Query query, gid.gobject2.types.GType api, gid.gst1.structure.Structure params)
   {
@@ -394,7 +394,7 @@ class BaseTransform : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncProposeAllocation` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncProposeAllocation(gid.gst1.query.Query decideQuery, gid.gst1.query.Query query)
   {
@@ -422,7 +422,7 @@ class BaseTransform : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncQuery` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncQuery(gid.gst1.types.PadDirection direction, gid.gst1.query.Query query)
   {
@@ -445,7 +445,7 @@ class BaseTransform : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSetCaps` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncSetCaps(gid.gst1.caps.Caps incaps, gid.gst1.caps.Caps outcaps)
   {
@@ -490,7 +490,7 @@ class BaseTransform : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncStart` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncStart()
   {
@@ -511,7 +511,7 @@ class BaseTransform : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncStop` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncStop()
   {
@@ -540,7 +540,7 @@ class BaseTransform : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSubmitInputBuffer` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.types.FlowReturn vfuncSubmitInputBuffer(bool isDiscont, gid.gst1.buffer.Buffer input)
   {
@@ -567,7 +567,7 @@ class BaseTransform : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncTransform` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.types.FlowReturn vfuncTransform(gid.gst1.buffer.Buffer inbuf, gid.gst1.buffer.Buffer outbuf)
   {
@@ -594,7 +594,7 @@ class BaseTransform : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncTransformCaps` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.caps.Caps vfuncTransformCaps(gid.gst1.types.PadDirection direction, gid.gst1.caps.Caps caps, gid.gst1.caps.Caps filter)
   {
@@ -618,7 +618,7 @@ class BaseTransform : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncTransformIp` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.types.FlowReturn vfuncTransformIp(gid.gst1.buffer.Buffer buf)
   {
@@ -646,7 +646,7 @@ class BaseTransform : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncTransformMeta` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncTransformMeta(gid.gst1.buffer.Buffer outbuf, gid.gst1.meta.Meta meta, gid.gst1.buffer.Buffer inbuf)
   {
@@ -907,7 +907,7 @@ class BaseTransform : gid.gst1.element.Element
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from BaseTransform

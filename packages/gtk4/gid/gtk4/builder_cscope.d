@@ -84,7 +84,7 @@ class BuilderCScope : gid.gobject2.object.ObjectWrap, gid.gtk4.builder_scope.Bui
   */
   this() nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
     }

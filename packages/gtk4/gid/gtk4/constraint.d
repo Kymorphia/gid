@@ -38,7 +38,7 @@ class Constraint : gid.gobject2.object.ObjectWrap
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -182,7 +182,7 @@ class Constraint : gid.gobject2.object.ObjectWrap
   */
   this(gid.gtk4.constraint_target.ConstraintTarget target, gid.gtk4.types.ConstraintAttribute targetAttribute, gid.gtk4.types.ConstraintRelation relation, gid.gtk4.constraint_target.ConstraintTarget source, gid.gtk4.types.ConstraintAttribute sourceAttribute, double multiplier, double constant, int strength) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

@@ -29,7 +29,7 @@ class CookieJarText : gid.soup3.cookie_jar.CookieJar
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -95,7 +95,7 @@ class CookieJarText : gid.soup3.cookie_jar.CookieJar
   */
   this(string filename, bool readOnly) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

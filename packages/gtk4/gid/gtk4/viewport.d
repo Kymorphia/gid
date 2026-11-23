@@ -144,7 +144,7 @@ class Viewport : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   */
   this(gid.gtk4.adjustment.Adjustment hadjustment = null, gid.gtk4.adjustment.Adjustment vadjustment = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, hadjustment !is null || vadjustment !is null), Yes.Take);
     }

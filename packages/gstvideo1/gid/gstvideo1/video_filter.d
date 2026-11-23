@@ -31,7 +31,7 @@ class VideoFilter : gid.gstbase1.base_transform.BaseTransform
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -84,7 +84,7 @@ class VideoFilter : gid.gstbase1.base_transform.BaseTransform
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSetInfo` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncSetInfo(gid.gst1.caps.Caps incaps, gid.gstvideo1.video_info.VideoInfo inInfo, gid.gst1.caps.Caps outcaps, gid.gstvideo1.video_info.VideoInfo outInfo)
   {
@@ -107,7 +107,7 @@ class VideoFilter : gid.gstbase1.base_transform.BaseTransform
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncTransformFrame` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.types.FlowReturn vfuncTransformFrame(gid.gstvideo1.video_frame.VideoFrame inframe, gid.gstvideo1.video_frame.VideoFrame outframe)
   {
@@ -130,7 +130,7 @@ class VideoFilter : gid.gstbase1.base_transform.BaseTransform
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncTransformFrameIp` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.types.FlowReturn vfuncTransformFrameIp(gid.gstvideo1.video_frame.VideoFrame frame)
   {
@@ -146,7 +146,7 @@ class VideoFilter : gid.gstbase1.base_transform.BaseTransform
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from VideoFilter

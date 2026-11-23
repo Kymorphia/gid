@@ -140,7 +140,7 @@ class Snippet : gid.gobject2.object.ObjectWrap
   */
   this(string trigger = null, string languageId = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, trigger !is null || languageId !is null), Yes.Take);
     }

@@ -65,7 +65,7 @@ class RTPBaseDepayload : gid.gst1.element.Element
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -227,7 +227,7 @@ class RTPBaseDepayload : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncHandleEvent` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncHandleEvent(gid.gst1.event.Event event)
   {
@@ -249,7 +249,7 @@ class RTPBaseDepayload : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncPacketLost` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncPacketLost(gid.gst1.event.Event event)
   {
@@ -275,7 +275,7 @@ class RTPBaseDepayload : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncProcess` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.buffer.Buffer vfuncProcess(gid.gst1.buffer.Buffer in_)
   {
@@ -305,7 +305,7 @@ class RTPBaseDepayload : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncProcessRtpPacket` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.buffer.Buffer vfuncProcessRtpPacket(gid.gstrtp1.rtpbuffer.RTPBuffer rtpBuffer)
   {
@@ -328,7 +328,7 @@ class RTPBaseDepayload : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSetCaps` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncSetCaps(gid.gst1.caps.Caps caps)
   {
@@ -645,7 +645,7 @@ class RTPBaseDepayload : gid.gst1.element.Element
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from RTPBaseDepayload

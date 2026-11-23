@@ -139,7 +139,7 @@ class FileLauncher : gid.gobject2.object.ObjectWrap
   */
   this(gid.gio2.file.File file = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, file !is null), Yes.Take);
     }

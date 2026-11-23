@@ -208,7 +208,7 @@ class DirectoryList : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListMo
   */
   this(string attributes = null, gid.gio2.file.File file = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, attributes !is null || file !is null), Yes.Take);
     }

@@ -79,7 +79,7 @@ class Scrollbar : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRa
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -153,7 +153,7 @@ class Scrollbar : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRa
   */
   this(gid.gtk4.types.Orientation orientation, gid.gtk4.adjustment.Adjustment adjustment = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

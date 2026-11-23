@@ -122,7 +122,7 @@ class RecentFilter : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk3.b
   */
   this() nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
     }

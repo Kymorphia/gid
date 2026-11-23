@@ -35,7 +35,7 @@ template StyleProviderT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetIconFactory`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   
       Deprecated: Will always return null for all GTK-provided style providers.
   */
@@ -64,7 +64,7 @@ template StyleProviderT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetStyle`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   
       Deprecated: Will always return null for all GTK-provided style providers
             as the interface cannot correctly work the way CSS is specified.
@@ -96,7 +96,7 @@ template StyleProviderT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetStyleProperty`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected bool vfuncGetStyleProperty(gid.gtk3.widget_path.WidgetPath path, gid.gtk3.types.StateFlags state, gid.gobject2.param_spec.ParamSpec pspec, out gid.gobject2.value.Value value)
@@ -175,7 +175,7 @@ template StyleProviderT()
 
   /**
       Install the C trampolines of the gid.gtk3.style_provider.StyleProvider vfunc methods which a D class overrides into the interface
-      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      structure of its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overriding a vfunc method which has no
       trampoline is a compile error.
       Params:
         T = D class

@@ -77,7 +77,7 @@ class Action : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -581,7 +581,7 @@ class Action : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   */
   this(string name, string label = null, string tooltip = null, string stockId = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }
@@ -606,7 +606,7 @@ class Action : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncActivate` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   
       Deprecated: Use [gid.gio2.action_group.ActionGroup.activateAction] on a #GAction instead
   */
@@ -638,7 +638,7 @@ class Action : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncCreateMenu` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   
       Deprecated: Use #GAction and #GMenuModel instead, and create a
         #GtkMenu with [gid.gtk3.menu.Menu.newFromModel]
@@ -661,7 +661,7 @@ class Action : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncCreateMenuItem` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   
       Deprecated: Use [gid.gio2.menu_item.MenuItem.new_] and associate it with a #GAction
         instead.
@@ -684,7 +684,7 @@ class Action : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncCreateToolItem` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   
       Deprecated: Use a #GtkToolItem and associate it with a #GAction using
         [gid.gtk4.actionable.Actionable.setActionName] instead
@@ -1397,7 +1397,7 @@ class Action : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from Action

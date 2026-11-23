@@ -25,7 +25,7 @@ class MenuAccessible : gid.gtk3.menu_shell_accessible.MenuShellAccessible
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {

@@ -27,7 +27,7 @@ class TreeListModel : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListMo
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -143,7 +143,7 @@ class TreeListModel : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListMo
   */
   this(gid.gio2.list_model.ListModel root, bool passthrough, bool autoexpand, gid.gtk4.types.TreeListModelCreateModelFunc createFunc) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

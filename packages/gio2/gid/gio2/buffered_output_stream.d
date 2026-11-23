@@ -39,7 +39,7 @@ class BufferedOutputStream : gid.gio2.filter_output_stream.FilterOutputStream, g
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -129,7 +129,7 @@ class BufferedOutputStream : gid.gio2.filter_output_stream.FilterOutputStream, g
   */
   this(gid.gio2.output_stream.OutputStream baseStream) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

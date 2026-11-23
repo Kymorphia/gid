@@ -68,7 +68,7 @@ class Scrollbar : gid.gtk3.range.Range
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -119,7 +119,7 @@ class Scrollbar : gid.gtk3.range.Range
   */
   this(gid.gtk3.types.Orientation orientation, gid.gtk3.adjustment.Adjustment adjustment = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

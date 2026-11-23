@@ -99,7 +99,7 @@ class Aggregator : gid.gst1.element.Element
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -237,7 +237,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncAggregate` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.types.FlowReturn vfuncAggregate(bool timeout)
   {
@@ -267,7 +267,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncClip` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.buffer.Buffer vfuncClip(gid.gstbase1.aggregator_pad.AggregatorPad aggregatorPad, gid.gst1.buffer.Buffer buf)
   {
@@ -294,7 +294,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncCreateNewPad` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gstbase1.aggregator_pad.AggregatorPad vfuncCreateNewPad(gid.gst1.pad_template.PadTemplate templ, string reqName = null, gid.gst1.caps.Caps caps = null)
   {
@@ -322,7 +322,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncDecideAllocation` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncDecideAllocation(gid.gst1.query.Query query)
   {
@@ -346,7 +346,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncFinishBuffer` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.types.FlowReturn vfuncFinishBuffer(gid.gst1.buffer.Buffer buffer)
   {
@@ -371,7 +371,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncFinishBufferList` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.types.FlowReturn vfuncFinishBufferList(gid.gst1.buffer_list.BufferList bufferlist)
   {
@@ -396,7 +396,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncFixateSrcCaps` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.caps.Caps vfuncFixateSrcCaps(gid.gst1.caps.Caps caps)
   {
@@ -419,7 +419,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncFlush` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.types.FlowReturn vfuncFlush()
   {
@@ -444,7 +444,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncGetNextTime` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.types.ClockTime vfuncGetNextTime()
   {
@@ -465,7 +465,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncNegotiate` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncNegotiate()
   {
@@ -488,7 +488,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncNegotiatedSrcCaps` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncNegotiatedSrcCaps(gid.gst1.caps.Caps caps)
   {
@@ -516,7 +516,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncPeekNextSample` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.sample.Sample vfuncPeekNextSample(gid.gstbase1.aggregator_pad.AggregatorPad aggregatorPad)
   {
@@ -542,7 +542,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncProposeAllocation` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncProposeAllocation(gid.gstbase1.aggregator_pad.AggregatorPad pad, gid.gst1.query.Query decideQuery, gid.gst1.query.Query query)
   {
@@ -566,7 +566,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSinkEvent` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncSinkEvent(gid.gstbase1.aggregator_pad.AggregatorPad aggregatorPad, gid.gst1.event.Event event)
   {
@@ -590,7 +590,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSinkEventPreQueue` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.types.FlowReturn vfuncSinkEventPreQueue(gid.gstbase1.aggregator_pad.AggregatorPad aggregatorPad, gid.gst1.event.Event event)
   {
@@ -616,7 +616,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSinkQuery` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncSinkQuery(gid.gstbase1.aggregator_pad.AggregatorPad aggregatorPad, gid.gst1.query.Query query)
   {
@@ -641,7 +641,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSinkQueryPreQueue` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncSinkQueryPreQueue(gid.gstbase1.aggregator_pad.AggregatorPad aggregatorPad, gid.gst1.query.Query query)
   {
@@ -666,7 +666,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSrcActivate` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncSrcActivate(gid.gst1.types.PadMode mode, bool active)
   {
@@ -689,7 +689,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSrcEvent` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncSrcEvent(gid.gst1.event.Event event)
   {
@@ -713,7 +713,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSrcQuery` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncSrcQuery(gid.gst1.query.Query query)
   {
@@ -735,7 +735,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncStart` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncStart()
   {
@@ -756,7 +756,7 @@ class Aggregator : gid.gst1.element.Element
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncStop` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncStop()
   {
@@ -1123,7 +1123,7 @@ class Aggregator : gid.gst1.element.Element
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from Aggregator

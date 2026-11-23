@@ -56,7 +56,7 @@ class SpringAnimation : gid.adw1.animation.Animation
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -297,7 +297,7 @@ class SpringAnimation : gid.adw1.animation.Animation
   */
   this(gid.gtk4.widget.Widget widget, double from, double to, gid.adw1.spring_params.SpringParams springParams, gid.adw1.animation_target.AnimationTarget target) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

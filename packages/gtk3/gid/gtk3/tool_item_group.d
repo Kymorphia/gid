@@ -39,7 +39,7 @@ class ToolItemGroup : gid.gtk3.container.Container, gid.gtk3.tool_shell.ToolShel
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -152,7 +152,7 @@ class ToolItemGroup : gid.gtk3.container.Container, gid.gtk3.tool_shell.ToolShel
   */
   this(string label) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

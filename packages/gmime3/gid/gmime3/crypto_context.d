@@ -27,7 +27,7 @@ class CryptoContext : gid.gobject2.object.ObjectWrap
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -77,7 +77,7 @@ class CryptoContext : gid.gobject2.object.ObjectWrap
   */
   this(string protocol) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }
@@ -122,7 +122,7 @@ class CryptoContext : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncDecrypt` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gmime3.decrypt_result.DecryptResult vfuncDecrypt(gid.gmime3.types.DecryptFlags flags, string sessionKey, gid.gmime3.stream.Stream istream, gid.gmime3.stream.Stream ostream)
   {
@@ -149,7 +149,7 @@ class CryptoContext : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncDigestId` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gmime3.types.DigestAlgo vfuncDigestId(string name)
   {
@@ -203,7 +203,7 @@ class CryptoContext : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncEncrypt` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected int vfuncEncrypt(bool sign, string userid, gid.gmime3.types.EncryptFlags flags, string[] recipients, gid.gmime3.stream.Stream istream, gid.gmime3.stream.Stream ostream)
   {
@@ -237,7 +237,7 @@ class CryptoContext : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncExportKeys` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected int vfuncExportKeys(string[] keys, gid.gmime3.stream.Stream ostream)
   {
@@ -327,7 +327,7 @@ class CryptoContext : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncImportKeys` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected int vfuncImportKeys(gid.gmime3.stream.Stream istream)
   {
@@ -356,7 +356,7 @@ class CryptoContext : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSign` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected int vfuncSign(bool detach, string userid, gid.gmime3.stream.Stream istream, gid.gmime3.stream.Stream ostream)
   {
@@ -391,7 +391,7 @@ class CryptoContext : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncVerify` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gmime3.signature_list.SignatureList vfuncVerify(gid.gmime3.types.VerifyFlags flags, gid.gmime3.stream.Stream istream, gid.gmime3.stream.Stream sigstream = null, gid.gmime3.stream.Stream ostream = null)
   {
@@ -640,7 +640,7 @@ class CryptoContext : gid.gobject2.object.ObjectWrap
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from CryptoContext

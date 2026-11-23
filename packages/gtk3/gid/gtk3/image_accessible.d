@@ -25,7 +25,7 @@ class ImageAccessible : gid.gtk3.widget_accessible.WidgetAccessible, gid.atk1.im
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {

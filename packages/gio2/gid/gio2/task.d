@@ -638,7 +638,7 @@ class Task : gid.gobject2.object.ObjectWrap, gid.gio2.async_result.AsyncResult
   */
   this(gid.gobject2.object.ObjectWrap sourceObject = null, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, sourceObject !is null || cancellable !is null || callback !is null), Yes.Take);
     }

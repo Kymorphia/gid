@@ -69,7 +69,7 @@ class StreamFile : gid.gmime3.stream.Stream
   */
   this(void* fp = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, fp !is null), Yes.Take);
     }

@@ -112,7 +112,7 @@ class MultiSelection : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListM
   */
   this(gid.gio2.list_model.ListModel model = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, model !is null), Yes.Take);
     }

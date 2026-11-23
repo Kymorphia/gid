@@ -26,7 +26,7 @@ class StackPage : gid.gobject2.object.ObjectWrap, gid.gtk4.accessible.Accessible
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {

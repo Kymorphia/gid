@@ -91,7 +91,7 @@ class MountOperation : gid.gio2.mount_operation.MountOperation
   */
   this(gid.gtk3.window.Window parent = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, parent !is null), Yes.Take);
     }

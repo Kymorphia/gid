@@ -77,7 +77,7 @@ class ListBase : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable, gid.gtk
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {

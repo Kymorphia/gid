@@ -345,7 +345,7 @@ class ColumnView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   */
   this(gid.gtk4.selection_model.SelectionModel model = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, model !is null), Yes.Take);
     }

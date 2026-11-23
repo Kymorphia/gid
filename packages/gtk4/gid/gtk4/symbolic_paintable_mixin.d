@@ -46,7 +46,7 @@ template SymbolicPaintableT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSnapshotSymbolic`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected void vfuncSnapshotSymbolic(gid.gdk4.snapshot.Snapshot snapshot, double width, double height, gid.gdk4.rgba.RGBA[] colors)
@@ -79,7 +79,7 @@ template SymbolicPaintableT()
       Interface virtual method: calls the C implementation of the interface of the object's class (or of the
       nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSnapshotWithWeight`
       to chain up from an override.
-      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the interface structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   @(gid.gobject2.object.GidIfaceVfunc)
   protected void vfuncSnapshotWithWeight(gid.gdk4.snapshot.Snapshot snapshot, double width, double height, gid.gdk4.rgba.RGBA[] colors, double weight)
@@ -146,7 +146,7 @@ template SymbolicPaintableT()
 
   /**
       Install the C trampolines of the gid.gtk4.symbolic_paintable.SymbolicPaintable vfunc methods which a D class overrides into the interface
-      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      structure of its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overriding a vfunc method which has no
       trampoline is a compile error.
       Params:
         T = D class

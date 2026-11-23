@@ -256,7 +256,7 @@ template CellAccessibleParentT()
 
   /**
       Install the C trampolines of the gid.gtk3.cell_accessible_parent.CellAccessibleParent vfunc methods which a D class overrides into the interface
-      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      structure of its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overriding a vfunc method which has no
       trampoline is a compile error.
       Params:
         T = D class

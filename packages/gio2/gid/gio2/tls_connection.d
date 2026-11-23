@@ -37,7 +37,7 @@ class TlsConnection : gid.gio2.iostream.IOStream
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -354,7 +354,7 @@ class TlsConnection : gid.gio2.iostream.IOStream
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncAcceptCertificate` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncAcceptCertificate(gid.gio2.tls_certificate.TlsCertificate peerCert, gid.gio2.types.TlsCertificateFlags errors)
   {
@@ -378,7 +378,7 @@ class TlsConnection : gid.gio2.iostream.IOStream
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncGetBindingData` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncGetBindingData(gid.gio2.types.TlsChannelBindingType type, ubyte[] data)
   {
@@ -462,7 +462,7 @@ class TlsConnection : gid.gio2.iostream.IOStream
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncHandshake` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncHandshake(gid.gio2.cancellable.Cancellable cancellable = null)
   {
@@ -529,7 +529,7 @@ class TlsConnection : gid.gio2.iostream.IOStream
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncHandshakeFinish` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncHandshakeFinish(gid.gio2.async_result.AsyncResult result)
   {
@@ -1133,7 +1133,7 @@ class TlsConnection : gid.gio2.iostream.IOStream
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from TlsConnection

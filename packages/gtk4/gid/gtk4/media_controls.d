@@ -98,7 +98,7 @@ class MediaControls : gid.gtk4.widget.Widget
   */
   this(gid.gtk4.media_stream.MediaStream stream = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, stream !is null), Yes.Take);
     }

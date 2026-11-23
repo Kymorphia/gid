@@ -248,7 +248,7 @@ class SimpleAsyncResult : gid.gobject2.object.ObjectWrap, gid.gio2.async_result.
   */
   this(gid.gobject2.object.ObjectWrap sourceObject = null, gid.gio2.types.AsyncReadyCallback callback = null, void* sourceTag = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, sourceObject !is null || callback !is null || sourceTag !is null), Yes.Take);
     }

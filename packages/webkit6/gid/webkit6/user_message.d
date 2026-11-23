@@ -33,7 +33,7 @@ class UserMessage : gid.gobject2.initially_unowned.InitiallyUnowned
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -113,7 +113,7 @@ class UserMessage : gid.gobject2.initially_unowned.InitiallyUnowned
   */
   this(string name, gid.glib2.variant.Variant parameters = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

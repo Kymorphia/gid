@@ -1148,7 +1148,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
   */
   this() nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
     }
@@ -1182,7 +1182,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncActivate` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncActivate()
   {
@@ -1199,7 +1199,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncBackspace` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncBackspace()
   {
@@ -1216,7 +1216,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncCopyClipboard` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncCopyClipboard()
   {
@@ -1233,7 +1233,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncCutClipboard` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncCutClipboard()
   {
@@ -1255,7 +1255,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncDeleteFromCursor` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncDeleteFromCursor(gid.gtk3.types.DeleteType type, int count)
   {
@@ -1275,7 +1275,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncInsertAtCursor` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncInsertAtCursor(string str)
   {
@@ -1309,7 +1309,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncMoveCursor` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncMoveCursor(gid.gtk3.types.MovementStep step, int count, bool extendSelection)
   {
@@ -1327,7 +1327,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncPasteClipboard` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncPasteClipboard()
   {
@@ -1348,7 +1348,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncPopulatePopup` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncPopulatePopup(gid.gtk3.widget.Widget popup)
   {
@@ -1375,7 +1375,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncToggleOverwrite` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncToggleOverwrite()
   {
@@ -3367,7 +3367,7 @@ class Entry : gid.gtk3.widget.Widget, gid.gtk3.cell_editable.CellEditable, gid.g
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from Entry

@@ -157,7 +157,7 @@ class StringFilter : gid.gtk4.filter.Filter
   */
   this(gid.gtk4.expression.Expression expression = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, expression !is null), Yes.Take);
     }

@@ -77,7 +77,7 @@ class MenuItem : gid.gobject2.object.ObjectWrap
   */
   this(string label = null, string detailedAction = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, label !is null || detailedAction !is null), Yes.Take);
     }

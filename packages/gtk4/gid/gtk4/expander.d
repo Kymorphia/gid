@@ -295,7 +295,7 @@ class Expander : gid.gtk4.widget.Widget
   */
   this(string label = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, label !is null), Yes.Take);
     }

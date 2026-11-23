@@ -210,7 +210,7 @@ class CellRendererProgress : gid.gtk3.cell_renderer.CellRenderer, gid.gtk3.orien
   */
   this() nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
     }

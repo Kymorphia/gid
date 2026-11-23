@@ -70,7 +70,7 @@ class GutterRenderer : gid.gtk4.widget.Widget
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -257,7 +257,7 @@ class GutterRenderer : gid.gtk4.widget.Widget
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncActivate` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncActivate(gid.gtk4.text_iter.TextIter iter, gid.gdk4.rectangle.Rectangle area, uint button, gid.gdk4.types.ModifierType state, int nPresses)
   {
@@ -286,7 +286,7 @@ class GutterRenderer : gid.gtk4.widget.Widget
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncChangeBuffer` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncChangeBuffer(gid.gtksource5.buffer.Buffer oldBuffer = null)
   {
@@ -305,7 +305,7 @@ class GutterRenderer : gid.gtk4.widget.Widget
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncChangeView` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncChangeView(gid.gtksource5.view.View oldView = null)
   {
@@ -338,7 +338,7 @@ class GutterRenderer : gid.gtk4.widget.Widget
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncQueryActivatable` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncQueryActivatable(gid.gtk4.text_iter.TextIter iter, gid.gdk4.rectangle.Rectangle area)
   {
@@ -780,7 +780,7 @@ class GutterRenderer : gid.gtk4.widget.Widget
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from GutterRenderer

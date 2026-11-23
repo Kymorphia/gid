@@ -342,7 +342,7 @@ class DropDown : gid.gtk4.widget.Widget
   */
   this(gid.gio2.list_model.ListModel model = null, gid.gtk4.expression.Expression expression = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, model !is null || expression !is null), Yes.Take);
     }

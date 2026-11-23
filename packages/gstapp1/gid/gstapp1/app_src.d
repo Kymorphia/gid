@@ -97,7 +97,7 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -576,7 +576,7 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncEndOfStream` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.types.FlowReturn vfuncEndOfStream()
   {
@@ -625,7 +625,7 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncPushBuffer` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.types.FlowReturn vfuncPushBuffer(gid.gst1.buffer.Buffer buffer)
   {
@@ -655,7 +655,7 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncPushBufferList` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.types.FlowReturn vfuncPushBufferList(gid.gst1.buffer_list.BufferList bufferList)
   {
@@ -690,7 +690,7 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncPushSample` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gst1.types.FlowReturn vfuncPushSample(gid.gst1.sample.Sample sample)
   {
@@ -1515,7 +1515,7 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from AppSrc

@@ -127,7 +127,7 @@ class CompletionWords : gid.gobject2.object.ObjectWrap, gid.gtksource5.completio
   /** */
   this(string title = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, title !is null), Yes.Take);
     }

@@ -68,7 +68,7 @@ class HeaderList : gid.gobject2.object.ObjectWrap
   */
   this(gid.gmime3.parser_options.ParserOptions options = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, options !is null), Yes.Take);
     }

@@ -107,7 +107,7 @@ class FontChooserDialog : gid.gtk4.dialog.Dialog, gid.gtk4.font_chooser.FontChoo
   */
   this(string title = null, gid.gtk4.window.Window parent = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, title !is null || parent !is null), Yes.Take);
     }

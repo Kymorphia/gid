@@ -28,7 +28,7 @@ class EventControllerMotion : gid.gtk3.event_controller.EventController
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -79,7 +79,7 @@ class EventControllerMotion : gid.gtk3.event_controller.EventController
   */
   this(gid.gtk3.widget.Widget widget) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

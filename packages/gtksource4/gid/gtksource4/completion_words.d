@@ -165,7 +165,7 @@ class CompletionWords : gid.gobject2.object.ObjectWrap, gid.gtksource4.completio
   /** */
   this(string name = null, gid.gdkpixbuf2.pixbuf.Pixbuf icon = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, name !is null || icon !is null), Yes.Take);
     }

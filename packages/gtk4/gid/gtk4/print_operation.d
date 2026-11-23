@@ -602,7 +602,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk4.print_operation_
   */
   this() nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
     }
@@ -623,7 +623,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk4.print_operation_
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncBeginPrint` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncBeginPrint(gid.gtk4.print_context.PrintContext context)
   {
@@ -643,7 +643,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk4.print_operation_
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncCustomWidgetApply` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncCustomWidgetApply(gid.gtk4.widget.Widget widget)
   {
@@ -663,7 +663,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk4.print_operation_
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncDone` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncDone(gid.gtk4.types.PrintOperationResult result)
   {
@@ -683,7 +683,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk4.print_operation_
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncDrawPage` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncDrawPage(gid.gtk4.print_context.PrintContext context, int pageNr)
   {
@@ -702,7 +702,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk4.print_operation_
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncEndPrint` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncEndPrint(gid.gtk4.print_context.PrintContext context)
   {
@@ -723,7 +723,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk4.print_operation_
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncPaginate` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncPaginate(gid.gtk4.print_context.PrintContext context)
   {
@@ -748,7 +748,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk4.print_operation_
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncPreview` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncPreview(gid.gtk4.print_operation_preview.PrintOperationPreview preview, gid.gtk4.print_context.PrintContext context, gid.gtk4.window.Window parent)
   {
@@ -772,7 +772,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk4.print_operation_
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncRequestPageSetup` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncRequestPageSetup(gid.gtk4.print_context.PrintContext context, int pageNr, gid.gtk4.page_setup.PageSetup setup)
   {
@@ -789,7 +789,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk4.print_operation_
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncStatusChanged` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncStatusChanged()
   {
@@ -810,7 +810,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk4.print_operation_
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncUpdateCustomWidget` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncUpdateCustomWidget(gid.gtk4.widget.Widget widget, gid.gtk4.page_setup.PageSetup setup, gid.gtk4.print_settings.PrintSettings settings)
   {
@@ -2055,7 +2055,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk4.print_operation_
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from PrintOperation

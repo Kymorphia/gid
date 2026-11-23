@@ -43,7 +43,7 @@ class MultipartInputStream : gid.gio2.filter_input_stream.FilterInputStream, gid
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -110,7 +110,7 @@ class MultipartInputStream : gid.gio2.filter_input_stream.FilterInputStream, gid
   */
   this(gid.soup3.message.Message msg, gid.gio2.input_stream.InputStream baseStream) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

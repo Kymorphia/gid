@@ -37,7 +37,7 @@ class TlsDatabase : gid.gobject2.object.ObjectWrap
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -95,7 +95,7 @@ class TlsDatabase : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncCreateCertificateHandle` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected string vfuncCreateCertificateHandle(gid.gio2.tls_certificate.TlsCertificate certificate)
   {
@@ -134,7 +134,7 @@ class TlsDatabase : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncLookupCertificateForHandle` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gio2.tls_certificate.TlsCertificate vfuncLookupCertificateForHandle(string handle, gid.gio2.tls_interaction.TlsInteraction interaction, gid.gio2.types.TlsDatabaseLookupFlags flags, gid.gio2.cancellable.Cancellable cancellable = null)
   {
@@ -209,7 +209,7 @@ class TlsDatabase : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncLookupCertificateForHandleFinish` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gio2.tls_certificate.TlsCertificate vfuncLookupCertificateForHandleFinish(gid.gio2.async_result.AsyncResult result)
   {
@@ -259,7 +259,7 @@ class TlsDatabase : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncLookupCertificateIssuer` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gio2.tls_certificate.TlsCertificate vfuncLookupCertificateIssuer(gid.gio2.tls_certificate.TlsCertificate certificate, gid.gio2.tls_interaction.TlsInteraction interaction, gid.gio2.types.TlsDatabaseLookupFlags flags, gid.gio2.cancellable.Cancellable cancellable = null)
   {
@@ -329,7 +329,7 @@ class TlsDatabase : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncLookupCertificateIssuerFinish` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gio2.tls_certificate.TlsCertificate vfuncLookupCertificateIssuerFinish(gid.gio2.async_result.AsyncResult result)
   {
@@ -363,7 +363,7 @@ class TlsDatabase : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncLookupCertificatesIssuedBy` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gio2.tls_certificate.TlsCertificate[] vfuncLookupCertificatesIssuedBy(ubyte[] issuerRawDn, gid.gio2.tls_interaction.TlsInteraction interaction, gid.gio2.types.TlsDatabaseLookupFlags flags, gid.gio2.cancellable.Cancellable cancellable = null)
   {
@@ -441,7 +441,7 @@ class TlsDatabase : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncLookupCertificatesIssuedByFinish` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gio2.tls_certificate.TlsCertificate[] vfuncLookupCertificatesIssuedByFinish(gid.gio2.async_result.AsyncResult result)
   {
@@ -533,7 +533,7 @@ class TlsDatabase : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncVerifyChain` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gio2.types.TlsCertificateFlags vfuncVerifyChain(gid.gio2.tls_certificate.TlsCertificate chain, string purpose, gid.gio2.socket_connectable.SocketConnectable identity, gid.gio2.tls_interaction.TlsInteraction interaction, gid.gio2.types.TlsDatabaseVerifyFlags flags, gid.gio2.cancellable.Cancellable cancellable = null)
   {
@@ -617,7 +617,7 @@ class TlsDatabase : gid.gobject2.object.ObjectWrap
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncVerifyChainFinish` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gio2.types.TlsCertificateFlags vfuncVerifyChainFinish(gid.gio2.async_result.AsyncResult result)
   {
@@ -1088,7 +1088,7 @@ class TlsDatabase : gid.gobject2.object.ObjectWrap
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from TlsDatabase

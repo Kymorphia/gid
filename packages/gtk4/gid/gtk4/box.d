@@ -67,7 +67,7 @@ class Box : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -200,7 +200,7 @@ class Box : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
   */
   this(gid.gtk4.types.Orientation orientation, int spacing) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

@@ -99,7 +99,7 @@ class TreeListRowSorter : gid.gtk4.sorter.Sorter
   */
   this(gid.gtk4.sorter.Sorter sorter = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, sorter !is null), Yes.Take);
     }

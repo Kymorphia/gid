@@ -117,7 +117,7 @@ class Tag : gid.gtk3.text_tag.TextTag
   */
   this(string name = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, name !is null), Yes.Take);
     }

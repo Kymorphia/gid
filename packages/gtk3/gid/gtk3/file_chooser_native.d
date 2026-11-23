@@ -181,7 +181,7 @@ class FileChooserNative : gid.gtk3.native_dialog.NativeDialog, gid.gtk3.file_cho
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -279,7 +279,7 @@ class FileChooserNative : gid.gtk3.native_dialog.NativeDialog, gid.gtk3.file_cho
   */
   this(string title, gid.gtk3.window.Window parent, gid.gtk3.types.FileChooserAction action, string acceptLabel = null, string cancelLabel = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

@@ -85,7 +85,7 @@ class NetworkSession : gid.gobject2.object.ObjectWrap
   */
   this(string dataDirectory = null, string cacheDirectory = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, dataDirectory !is null || cacheDirectory !is null), Yes.Take);
     }

@@ -24,7 +24,7 @@ class EncodingVideoProfile : gid.gstpbutils1.encoding_profile.EncodingProfile
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -88,7 +88,7 @@ class EncodingVideoProfile : gid.gstpbutils1.encoding_profile.EncodingProfile
   */
   this(gid.gst1.caps.Caps format, string preset, gid.gst1.caps.Caps restriction, uint presence) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

@@ -35,7 +35,7 @@ class NetTimeProvider : gid.gst1.object.ObjectWrap, gid.gio2.initable.Initable
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -132,7 +132,7 @@ class NetTimeProvider : gid.gst1.object.ObjectWrap, gid.gio2.initable.Initable
   */
   this(gid.gst1.clock.Clock clock, string address, int port) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

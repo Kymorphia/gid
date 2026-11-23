@@ -34,7 +34,7 @@ class Hyperlink : gid.gobject2.object.ObjectWrap, gid.atk1.action.Action
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -113,7 +113,7 @@ class Hyperlink : gid.gobject2.object.ObjectWrap, gid.atk1.action.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncGetEndIndex` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected int vfuncGetEndIndex()
   {
@@ -132,7 +132,7 @@ class Hyperlink : gid.gobject2.object.ObjectWrap, gid.atk1.action.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncGetNAnchors` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected int vfuncGetNAnchors()
   {
@@ -160,7 +160,7 @@ class Hyperlink : gid.gobject2.object.ObjectWrap, gid.atk1.action.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncGetObject` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.atk1.object.ObjectWrap vfuncGetObject(int i)
   {
@@ -180,7 +180,7 @@ class Hyperlink : gid.gobject2.object.ObjectWrap, gid.atk1.action.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncGetStartIndex` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected int vfuncGetStartIndex()
   {
@@ -205,7 +205,7 @@ class Hyperlink : gid.gobject2.object.ObjectWrap, gid.atk1.action.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncGetUri` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected string vfuncGetUri(int i)
   {
@@ -225,7 +225,7 @@ class Hyperlink : gid.gobject2.object.ObjectWrap, gid.atk1.action.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncIsSelectedLink` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   
       Deprecated: Please use ATK_STATE_FOCUSABLE for all links,
         and ATK_STATE_FOCUSED for focused links.
@@ -249,7 +249,7 @@ class Hyperlink : gid.gobject2.object.ObjectWrap, gid.atk1.action.Action
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncIsValid` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncIsValid()
   {
@@ -444,7 +444,7 @@ class Hyperlink : gid.gobject2.object.ObjectWrap, gid.atk1.action.Action
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from Hyperlink

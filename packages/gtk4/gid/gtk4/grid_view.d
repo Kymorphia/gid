@@ -272,7 +272,7 @@ class GridView : gid.gtk4.list_base.ListBase
   */
   this(gid.gtk4.selection_model.SelectionModel model = null, gid.gtk4.list_item_factory.ListItemFactory factory = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, model !is null || factory !is null), Yes.Take);
     }

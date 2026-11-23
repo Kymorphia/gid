@@ -67,7 +67,7 @@ class GLDisplayWayland : gid.gstgl1.gldisplay.GLDisplay
   */
   this(string name = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, name !is null), Yes.Take);
     }

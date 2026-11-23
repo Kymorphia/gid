@@ -27,7 +27,7 @@ class RadioMenuItemAccessible : gid.gtk3.check_menu_item_accessible.CheckMenuIte
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {

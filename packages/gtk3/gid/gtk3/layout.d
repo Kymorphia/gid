@@ -114,7 +114,7 @@ class Layout : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
   */
   this(gid.gtk3.adjustment.Adjustment hadjustment = null, gid.gtk3.adjustment.Adjustment vadjustment = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, hadjustment !is null || vadjustment !is null), Yes.Take);
     }

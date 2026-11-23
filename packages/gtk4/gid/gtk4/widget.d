@@ -448,7 +448,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -1288,7 +1288,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncContains` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncContains(double x, double y)
   {
@@ -1312,7 +1312,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncCssChanged` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncCssChanged(gid.gtk4.types.CssStyleChange change)
   {
@@ -1332,7 +1332,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncDirectionChanged` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncDirectionChanged(gid.gtk4.types.TextDirection previousDirection)
   {
@@ -1352,7 +1352,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncFocus` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncFocus(gid.gtk4.types.DirectionType direction)
   {
@@ -1377,7 +1377,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncGetRequestMode` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gtk4.types.SizeRequestMode vfuncGetRequestMode()
   {
@@ -1405,7 +1405,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncGrabFocus` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncGrabFocus()
   {
@@ -1425,7 +1425,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncHide` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   
       Deprecated: Use [gid.gtk4.widget.Widget.setVisible] instead
   */
@@ -1476,7 +1476,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncKeynavFailed` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncKeynavFailed(gid.gtk4.types.DirectionType direction)
   {
@@ -1496,7 +1496,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncMap` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncMap()
   {
@@ -1533,7 +1533,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncMeasure` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncMeasure(gid.gtk4.types.Orientation orientation, int forSize, out int minimum, out int natural, out int minimumBaseline, out int naturalBaseline)
   {
@@ -1553,7 +1553,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncMnemonicActivate` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncMnemonicActivate(bool groupCycling)
   {
@@ -1574,7 +1574,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncMoveFocus` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncMoveFocus(gid.gtk4.types.DirectionType direction)
   {
@@ -1599,7 +1599,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncQueryTooltip` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncQueryTooltip(int x, int y, bool keyboardTooltip, gid.gtk4.tooltip.Tooltip tooltip)
   {
@@ -1632,7 +1632,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncRealize` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncRealize()
   {
@@ -1649,7 +1649,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncRoot` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncRoot()
   {
@@ -1673,7 +1673,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSetFocusChild` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncSetFocusChild(gid.gtk4.widget.Widget child = null)
   {
@@ -1698,7 +1698,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncShow` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   
       Deprecated: Use [gid.gtk4.widget.Widget.setVisible] instead
   */
@@ -1722,7 +1722,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSizeAllocate` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncSizeAllocate(int width, int height, int baseline)
   {
@@ -1741,7 +1741,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSnapshot` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncSnapshot(gid.gtk4.snapshot.Snapshot snapshot)
   {
@@ -1761,7 +1761,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncStateFlagsChanged` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncStateFlagsChanged(gid.gtk4.types.StateFlags previousStateFlags)
   {
@@ -1780,7 +1780,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSystemSettingChanged` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncSystemSettingChanged(gid.gtk4.types.SystemSetting settings)
   {
@@ -1798,7 +1798,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncUnmap` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncUnmap()
   {
@@ -1818,7 +1818,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncUnrealize` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncUnrealize()
   {
@@ -1835,7 +1835,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncUnroot` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncUnroot()
   {
@@ -5537,7 +5537,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from Widget

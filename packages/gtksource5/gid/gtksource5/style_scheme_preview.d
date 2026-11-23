@@ -39,7 +39,7 @@ class StyleSchemePreview : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionabl
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -110,7 +110,7 @@ class StyleSchemePreview : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionabl
   */
   this(gid.gtksource5.style_scheme.StyleScheme scheme) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

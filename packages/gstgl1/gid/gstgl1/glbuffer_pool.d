@@ -32,7 +32,7 @@ class GLBufferPool : gid.gst1.buffer_pool.BufferPool
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -76,7 +76,7 @@ class GLBufferPool : gid.gst1.buffer_pool.BufferPool
   /** */
   this(gid.gstgl1.glcontext.GLContext context) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

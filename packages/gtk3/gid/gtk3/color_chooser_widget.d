@@ -114,7 +114,7 @@ class ColorChooserWidget : gid.gtk3.box.Box, gid.gtk3.color_chooser.ColorChooser
   */
   this() nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
     }

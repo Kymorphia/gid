@@ -355,7 +355,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -458,7 +458,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncActivate` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncActivate(gid.gtk4.cell_area_context.CellAreaContext context, gid.gtk4.widget.Widget widget, gid.gdk4.rectangle.Rectangle cellArea, gid.gtk4.types.CellRendererState flags, bool editOnly)
   {
@@ -479,7 +479,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncAdd` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncAdd(gid.gtk4.cell_renderer.CellRenderer renderer)
   {
@@ -503,7 +503,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncApplyAttributes` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncApplyAttributes(gid.gtk4.tree_model.TreeModel treeModel, gid.gtk4.tree_iter.TreeIter iter, bool isExpander, bool isExpanded)
   {
@@ -533,7 +533,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncCopyContext` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gtk4.cell_area_context.CellAreaContext vfuncCopyContext(gid.gtk4.cell_area_context.CellAreaContext context)
   {
@@ -558,7 +558,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncCreateContext` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gtk4.cell_area_context.CellAreaContext vfuncCreateContext()
   {
@@ -585,7 +585,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncEvent` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected int vfuncEvent(gid.gtk4.cell_area_context.CellAreaContext context, gid.gtk4.widget.Widget widget, gid.gdk4.event.Event event, gid.gdk4.rectangle.Rectangle cellArea, gid.gtk4.types.CellRendererState flags)
   {
@@ -613,7 +613,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncFocus` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncFocus(gid.gtk4.types.DirectionType direction)
   {
@@ -721,7 +721,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncGetCellProperty` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncGetCellProperty(gid.gtk4.cell_renderer.CellRenderer renderer, uint propertyId, gid.gobject2.value.Value value, gid.gobject2.param_spec.ParamSpec pspec)
   {
@@ -749,7 +749,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncGetPreferredHeight` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncGetPreferredHeight(gid.gtk4.cell_area_context.CellAreaContext context, gid.gtk4.widget.Widget widget, out int minimumHeight, out int naturalHeight)
   {
@@ -785,7 +785,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncGetPreferredHeightForWidth` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncGetPreferredHeightForWidth(gid.gtk4.cell_area_context.CellAreaContext context, gid.gtk4.widget.Widget widget, int width, out int minimumHeight, out int naturalHeight)
   {
@@ -813,7 +813,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncGetPreferredWidth` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncGetPreferredWidth(gid.gtk4.cell_area_context.CellAreaContext context, gid.gtk4.widget.Widget widget, out int minimumWidth, out int naturalWidth)
   {
@@ -849,7 +849,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncGetPreferredWidthForHeight` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncGetPreferredWidthForHeight(gid.gtk4.cell_area_context.CellAreaContext context, gid.gtk4.widget.Widget widget, int height, out int minimumWidth, out int naturalWidth)
   {
@@ -867,7 +867,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncGetRequestMode` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.gtk4.types.SizeRequestMode vfuncGetRequestMode()
   {
@@ -888,7 +888,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncIsActivatable` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncIsActivatable()
   {
@@ -909,7 +909,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncRemove` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncRemove(gid.gtk4.cell_renderer.CellRenderer renderer)
   {
@@ -933,7 +933,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSetCellProperty` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncSetCellProperty(gid.gtk4.cell_renderer.CellRenderer renderer, uint propertyId, gid.gobject2.value.Value value, gid.gobject2.param_spec.ParamSpec pspec)
   {
@@ -959,7 +959,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSnapshot` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncSnapshot(gid.gtk4.cell_area_context.CellAreaContext context, gid.gtk4.widget.Widget widget, gid.gtk4.snapshot.Snapshot snapshot, gid.gdk4.rectangle.Rectangle backgroundArea, gid.gdk4.rectangle.Rectangle cellArea, gid.gtk4.types.CellRendererState flags, bool paintFocus)
   {
@@ -1941,7 +1941,7 @@ class CellArea : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.build
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from CellArea

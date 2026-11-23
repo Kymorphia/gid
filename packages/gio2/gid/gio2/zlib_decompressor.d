@@ -27,7 +27,7 @@ class ZlibDecompressor : gid.gobject2.object.ObjectWrap, gid.gio2.converter.Conv
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -102,7 +102,7 @@ class ZlibDecompressor : gid.gobject2.object.ObjectWrap, gid.gio2.converter.Conv
   */
   this(gid.gio2.types.ZlibCompressorFormat format) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

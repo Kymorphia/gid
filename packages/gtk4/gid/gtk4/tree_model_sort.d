@@ -128,7 +128,7 @@ class TreeModelSort : gid.gobject2.object.ObjectWrap, gid.gtk4.tree_drag_source.
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {

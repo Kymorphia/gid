@@ -35,7 +35,7 @@ class SimpleIOStream : gid.gio2.iostream.IOStream
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -105,7 +105,7 @@ class SimpleIOStream : gid.gio2.iostream.IOStream
   */
   this(gid.gio2.input_stream.InputStream inputStream, gid.gio2.output_stream.OutputStream outputStream) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

@@ -38,7 +38,7 @@ class AspectFrame : gid.gtk3.frame.Frame
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -145,7 +145,7 @@ class AspectFrame : gid.gtk3.frame.Frame
   */
   this(string label, float xalign, float yalign, float ratio, bool obeyChild) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

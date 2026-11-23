@@ -645,7 +645,7 @@ class TextView : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   */
   this() nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
     }
@@ -683,7 +683,7 @@ class TextView : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncBackspace` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncBackspace()
   {
@@ -700,7 +700,7 @@ class TextView : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncCopyClipboard` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncCopyClipboard()
   {
@@ -717,7 +717,7 @@ class TextView : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncCutClipboard` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncCutClipboard()
   {
@@ -738,7 +738,7 @@ class TextView : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncDeleteFromCursor` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncDeleteFromCursor(gid.gtk4.types.DeleteType type, int count)
   {
@@ -761,7 +761,7 @@ class TextView : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncExtendSelection` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected bool vfuncExtendSelection(gid.gtk4.types.TextExtendSelection granularity, gid.gtk4.text_iter.TextIter location, gid.gtk4.text_iter.TextIter start, gid.gtk4.text_iter.TextIter end)
   {
@@ -783,7 +783,7 @@ class TextView : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncInsertAtCursor` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncInsertAtCursor(string str)
   {
@@ -800,7 +800,7 @@ class TextView : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncInsertEmoji` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncInsertEmoji()
   {
@@ -822,7 +822,7 @@ class TextView : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncMoveCursor` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncMoveCursor(gid.gtk4.types.MovementStep step, int count, bool extendSelection)
   {
@@ -839,7 +839,7 @@ class TextView : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncPasteClipboard` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncPasteClipboard()
   {
@@ -856,7 +856,7 @@ class TextView : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSetAnchor` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncSetAnchor()
   {
@@ -880,7 +880,7 @@ class TextView : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncSnapshotLayer` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncSnapshotLayer(gid.gtk4.types.TextViewLayer layer, gid.gtk4.snapshot.Snapshot snapshot)
   {
@@ -897,7 +897,7 @@ class TextView : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncToggleOverwrite` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncToggleOverwrite()
   {
@@ -2948,7 +2948,7 @@ class TextView : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from TextView

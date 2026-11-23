@@ -83,7 +83,7 @@ class Logger : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.Session
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -181,7 +181,7 @@ class Logger : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.Session
   */
   this(gid.soup3.types.LoggerLogLevel level) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }

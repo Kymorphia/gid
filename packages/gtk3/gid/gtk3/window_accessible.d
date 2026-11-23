@@ -25,7 +25,7 @@ class WindowAccessible : gid.gtk3.container_accessible.ContainerAccessible, gid.
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {

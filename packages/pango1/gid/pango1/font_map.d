@@ -37,7 +37,7 @@ class FontMap : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
 
   /**
       Constructor for D subclasses, creates an instance of the GType of the D class (see
-      [gobject.object.GObjectSubclass]).
+      [gid.gobject2.object.GObjectSubclass]).
   */
   protected this() nothrow
   {
@@ -109,7 +109,7 @@ class FontMap : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncChanged` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected void vfuncChanged()
   {
@@ -129,7 +129,7 @@ class FontMap : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncGetFamily` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.pango1.font_family.FontFamily vfuncGetFamily(string name)
   {
@@ -161,7 +161,7 @@ class FontMap : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncGetSerial` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected uint vfuncGetSerial()
   {
@@ -217,7 +217,7 @@ class FontMap : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncLoadFont` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.pango1.font.Font vfuncLoadFont(gid.pango1.context.Context context, gid.pango1.font_description.FontDescription desc)
   {
@@ -244,7 +244,7 @@ class FontMap : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
   
       Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
       D subclass type), use `super.vfuncLoadFontset` to chain up from an override.
-      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+      Overrides are installed in the class structure of the D subclass GType (see `gid.gobject2.object.GObjectSubclass`).
   */
   protected gid.pango1.fontset.Fontset vfuncLoadFontset(gid.pango1.context.Context context, gid.pango1.font_description.FontDescription desc, gid.pango1.language.Language language)
   {
@@ -442,7 +442,7 @@ class FontMap : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
 
   /**
       Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
-      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      its GType (DiG, see gid.gobject2.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
       installed. Overriding a vfunc method which has no trampoline is a compile error.
       Params:
         T = D class derived from FontMap

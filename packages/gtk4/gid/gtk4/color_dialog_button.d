@@ -151,7 +151,7 @@ class ColorDialogButton : gid.gtk4.widget.Widget
   */
   this(gid.gtk4.color_dialog.ColorDialog dialog = null) nothrow
   {
-    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    if (_usesDSubclassGType) // D subclass GType (see gid.gobject2.object.GObjectSubclass)
     {
       this(_newDSubclassGObject(_dSubclassGType, dialog !is null), Yes.Take);
     }
