@@ -175,6 +175,7 @@
 
     static extern(C) void _detacherCallback(GtkWidget* attachWidget, GtkMenu* menu) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk3.types.MenuDetachFunc*)g_object_get_data(cast(GObject*)menu, "gid-menu-detacher");
 
       if (!_dlg || !*_dlg)

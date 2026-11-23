@@ -536,6 +536,7 @@ import gid.gobject2.object;
 
     extern(C) gboolean _equalFuncCallback(const(void)* a, const(void)* b) nothrow
     {
+      gidAttachThread();
       gboolean _retval;
 
       try
@@ -574,6 +575,7 @@ import gid.gobject2.object;
 
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      gidAttachThread();
       int _retval;
 
       try
@@ -605,6 +607,7 @@ import gid.gobject2.object;
 
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      gidAttachThread();
       int _retval;
 
       try

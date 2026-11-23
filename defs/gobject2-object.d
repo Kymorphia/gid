@@ -3,7 +3,6 @@
 
 import core.atomic;
 import core.stdc.string : strlen;
-import std.conv : to;
 import std.exception : assumeWontThrow;
 public import std.typecons : Flag, No, Yes;
 
@@ -11,6 +10,7 @@ import gid.core.basictypes;
 import gid.core.loader : gidLibHandleOfAddress, gidPackageHasLibHandle, gidPackageLibs, gidPackageOfModule, isLibAvailable;
 import gid.glib2.types;
 import gid.glib2.c.functions;
+import gid.glib2.c.types : GLogLevelFlags;
 import gid.gobject2.boxed;
 import gid.gobject2.dclosure;
 import gid.gobject2.value;
@@ -30,12 +30,16 @@ debug
 shared static this()
 {
   gidObjectQuark = g_quark_from_string("_gidObject");
+  gidSubclassQuark = g_quark_from_string("_gidSubclass");
 }
 
 private extern (C) Object _d_newclass(const TypeInfo_Class ci);
 
 // String quark used to assign the D ObjectWrap to the C GObject keyed-data list
 private immutable Quark gidObjectQuark;
+
+// String quark used to flag a GType registered for a D subclass (GType qdata, see ObjectWrap._setDSubclassGType)
+private immutable Quark gidSubclassQuark;
 
 // One time initialized on first use and considered immutable there-after
 private __gshared TypeInfo_Class[][string] gtypeNameClasses; // Map of GType names to D class info candidates, there is more than one when several versions of a library are linked (see ObjectWrap._gTypeName)
@@ -45,9 +49,11 @@ private __gshared bool classMapsInitialized;
 private __gshared void*[][GType] gtypeOwnerLibs; // Cache of the libraries which registered a GType, for choosing between versions of a class
 
 /**
- * A convenient string mixin to be used for ObjectWrap derived classes to declare boilerplate constructors.
- * Returns: A string value to use with mixin() within ObjectWrap derived classes.
+ * String mixin that used to add a constructor to classes derived from ObjectWrap. No longer needed: derive from
+ * ObjectWrap, call `super()`, and add `mixin GObjectSubclass;` if the class should have its own GObject type.
+ * Returns: A string to use with mixin() in a class derived from ObjectWrap.
  */
+deprecated("objectMixin is no longer needed: derive from ObjectWrap and call super(), optionally with mixin GObjectSubclass")
 string objectMixin() nothrow
 {
   return
@@ -59,43 +65,12 @@ string objectMixin() nothrow
 }
 
 /**
- * Attribute reserved for future support of defining a new GObject virtual method when a D type is exported
- * through GIR. Not functional yet.
+ * Attribute of the interface vfunc methods generated in interface mixin templates (such as `ListModelT`). A vfunc
+ * method resolved through a D class without it is an override or implementation of the D class, which is installed
+ * in the interface structure of its GType (see GObjectSubclass). Not for use in D classes.
  */
-struct gVirtual {}
+struct GidIfaceVfunc {}
 
-/**
- * Attribute reserved for future support of exporting a non-virtual method on a D GObject type through GIR.
- * Not functional yet.
- */
-struct gMethod {}
-
-/**
- * Attribute reserved for future support of declaring a GObject signal on a D type exported through GIR.
- * Not functional yet.
- */
-struct gSignal {}
-
-/**
- * Attribute reserved for future support of declaring a GObject property on a D type exported through GIR.
- * Not functional yet.
- */
-struct gProperty {}
-
-/**
- * Mixin reserved for future support of D subclasses of GObject types (lazy GType registration, class_init, and
- * vfunc override installation). Not functional yet.
- */
-mixin template GObjectSubclass() {}
-
-/**
- * Mixin reserved for future support of exporting a D GObject type through GIR (class struct, get_type, and
- * invokers). Not functional yet.
- * Params:
- *   ns = GIR namespace of the library
- *   name = GObject type name without the namespace prefix
- */
-mixin template GObjectExport(string ns, string name) {}
 
 class ObjectWrap : GidWrap
 {
@@ -103,13 +78,30 @@ class ObjectWrap : GidWrap
   package DClosure[gulong] _signalClosures; // References to signal closures keyed by closure ID, so they don't get garbage collected until the object is finalized
 
   /**
-   * Create an ObjectWrap which is wrapping a C GObject with the given GType.
-   * Useful for creating custom D classes which are derived from ObjectWrap.
+   * Create a GObject of the given type and wrap it.
+   *
+   * Classes derived from ObjectWrap should call `super()` instead. If the class uses GObjectSubclass, passing a type
+   * that is not the class's own type (or a type derived from it) is a critical error.
    * Params:
-   *   type = The GType value to use for creating the wrapped GObject
+   *   type = The GType of the GObject to create
    */
   final this(GType type) nothrow
   {
+    static void* baseDSubclassGType() nothrow // Function pointer (not a delegate) in a static context
+    {
+      return cast(void*)&ObjectWrap._dSubclassGType;
+    }
+
+    // Only call _dSubclassGType for GObjectSubclass classes (registers the GType of the D class)
+    if (cast(void*)(&this._dSubclassGType).funcptr !is baseDSubclassGType)
+    {
+      auto dType = _dSubclassGType;
+
+      if (dType && type != dType && !g_type_is_a(type, dType))
+        g_log("Gid", GLogLevelFlags.LevelCritical, "%s: ObjectWrap.this(GType) called with GType %s by a class using"
+          ~ " GObjectSubclass, use super() instead", g_type_name(dType), g_type_name(type));
+    }
+
     this(createGObject(type), Yes.Take);
   }
 
@@ -121,8 +113,17 @@ class ObjectWrap : GidWrap
    */
   final this(void* cObj, Flag!"Take" take) nothrow
   {
-    if (cObj)
+    if (cObj && cObj !is _cInstancePtr) // Already bound for D subclass GTypes (see _newDSubclassGObject)
       _setGObject(cObj, take);
+  }
+
+  /**
+   * Constructor for D subclasses. Creates a GObject of the class's type (the type registered by GObjectSubclass, or
+   * the type of the GObject class being derived from).
+   */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
   }
 
   ~this() nothrow
@@ -164,19 +165,7 @@ class ObjectWrap : GidWrap
    */
   final void _setGObject(void* cObj, Flag!"Take" take) nothrow
   {
-    assert(!_cInstancePtr);
-
-    _cInstancePtr = cast(GObject*)cObj;
-
-    // Add a data pointer to the D object from the C GObject
-    g_object_set_qdata(_cInstancePtr, gidObjectQuark, cast(void*)this);
-
-    // Add a toggle reference to bind the GObject to this proxy D Object to prevent the GObject from being destroyed, while also preventing ref loops.
-    g_object_add_toggle_ref(_cInstancePtr, &_cObjToggleNotify, cast(void*)this);
-
-    // Add D object as a root to garbage collector so that it doesn't get collected as long as the GObject has a strong reference on it (toggle ref + 1 or more other refs).
-    // There will always be at least 2 references at this point, one from the caller and one for the toggle ref.
-    ptrFreezeGC(cast(void*)this);
+    _bindGObject(cObj);
 
     // If object has a floating reference, remove it
     if (g_object_is_floating(_cInstancePtr))
@@ -191,9 +180,167 @@ class ObjectWrap : GidWrap
     debug objectDebugLog("new");
   }
 
+  // Bind a C GObject to this D object with qdata and a toggle reference, without changing the caller's reference
+  private final void _bindGObject(void* cObj) nothrow
+  {
+    assert(!_cInstancePtr);
+
+    _cInstancePtr = cast(GObject*)cObj;
+
+    // Add a data pointer to the D object from the C GObject
+    g_object_set_qdata(_cInstancePtr, gidObjectQuark, cast(void*)this);
+
+    // Add a toggle reference to bind the GObject to this proxy D Object to prevent the GObject from being destroyed, while also preventing ref loops.
+    g_object_add_toggle_ref(_cInstancePtr, &_cObjToggleNotify, cast(void*)this);
+
+    // Add D object as a root to garbage collector so that it doesn't get collected as long as the GObject has a strong reference on it (toggle ref + 1 or more other refs).
+    // There will always be at least 2 references at this point, one from the caller and one for the toggle ref.
+    ptrFreezeGC(cast(void*)this);
+  }
+
+  // D subclass construction state (thread local, see _newDSubclassGObject and _dSubclassInstanceInit)
+  private static ObjectWrap dSubclassConstructing; // D object constructing a new C instance of a D subclass GType
+  private static GType dSubclassConstructingType; // GType of dSubclassConstructing's C instance
+  private static GObject* dSubclassAdopt; // C created instance of a D subclass GType being bound to a new D object
+  private static GType dSubclassAdoptType; // GType of dSubclassAdopt
+
+  /**
+   * GType registered for the D class by the GObjectSubclass mixin, used by constructors to create the C instance.
+   * Returns: The D subclass GType or 0 if the class does not use the GObjectSubclass mixin
+   */
+  protected GType _dSubclassGType() nothrow
+  {
+    return 0;
+  }
+
+  /**
+   * true if the class uses GObjectSubclass (or GObjectExport), even if GType registration failed.
+   * Returns: true if the class has its own D subclass GType
+   */
+  protected bool _usesDSubclassGType() nothrow
+  {
+    return false;
+  }
+
+  /**
+   * Create the C instance for a D object constructed with a D subclass GType (called by the constructors of bound
+   * classes, before calling the `this(void*, Flag!"Take")` constructor with the result and Yes.Take). The C instance
+   * is bound to the D object in instance_init (see _dSubclassInstanceInit), or if the D object is being constructed
+   * for a C created instance (in its instance_init), that instance is bound and returned.
+   * Params:
+   *   type = The D subclass GType (see _dSubclassGType), 0 to create an instance of _gType
+   *   argsIgnored = true if the calling constructor has arguments which are ignored (critical error)
+   * Returns: The C instance, which is bound to this D object, or a new owned reference if type is 0
+   */
+  protected final void* _newDSubclassGObject(GType type, bool argsIgnored = false) nothrow
+  {
+    if (!type)
+    {
+      if (_usesDSubclassGType) // GObjectSubclass: type 0 means registration failed
+      {
+        import std.string : toStringz;
+        g_log("Gid", GLogLevelFlags.LevelCritical, "Can't create %s: GType registration failed",
+          typeid(this).name.toStringz);
+        return null;
+      }
+
+      return createGObject(_gType);
+    }
+
+    if (argsIgnored)
+      g_log("Gid", GLogLevelFlags.LevelCritical, "%s: base class constructor arguments are not supported for D"
+        ~ " subclass GTypes, set properties after construction", g_type_name(type));
+
+    if (dSubclassAdopt && dSubclassAdoptType == type) // Constructed for a C created instance?
+    {
+      auto cObj = dSubclassAdopt;
+      dSubclassAdopt = null;
+      _bindGObject(cObj);
+      return cObj;
+    }
+
+    auto prevObj = dSubclassConstructing;
+    auto prevType = dSubclassConstructingType;
+    dSubclassConstructing = this;
+    dSubclassConstructingType = type;
+    auto cObj = cast(GObject*)g_object_new_with_properties(type, 0, null, null);
+    dSubclassConstructing = prevObj;
+    dSubclassConstructingType = prevType;
+
+    if (cObj && cObj is _cInstancePtr) // Bound in instance_init: drop the creation reference, the toggle ref remains
+    {
+      if (g_object_is_floating(cObj))
+        g_object_ref_sink(cObj);
+
+      g_object_unref(cObj);
+    }
+    else if (cObj && g_object_is_floating(cObj))
+      g_object_ref_sink(cObj); // Not bound (should not happen), the constructor binds it
+
+    return cObj;
+  }
+
+
+  alias _exportGetTypeSymbol = imported!"gid.gobject2.dig"._exportGetTypeSymbol;
+
+  /**
+   * instance_init of D subclass GTypes. Binds the D object being constructed (see _newDSubclassGObject), or creates
+   * a D object for an instance created from C, constructed with its default constructor if T has a public one
+   * (which binds the instance instead of creating a new one) or without a constructor otherwise. Only the nearest
+   * D subclass type in the instance's type ancestry creates a D object.
+   */
+  package static extern(C) void _dSubclassInstanceInit(T)(GTypeInstance* instance, void* klass) nothrow
+  {
+    gidAttachThread(); // Instances can be created by threads created by C
+    auto cObj = cast(GObject*)instance;
+
+    if (g_object_get_qdata(cObj, gidObjectQuark)) // Already bound to a D object?
+      return;
+
+    auto instType = (cast(GTypeClass*)klass).gType; // klass is the class of the type being instantiated
+
+    if (dSubclassConstructing && dSubclassConstructingType == instType) // Constructed from D?
+    {
+      auto dObj = dSubclassConstructing;
+      dSubclassConstructing = null; // Do not bind other instances created while constructing this one
+      dObj._bindGObject(cObj);
+      return;
+    }
+
+    auto nearest = instType; // Nearest D subclass GType of the instance
+    while (nearest && !g_type_get_qdata(nearest, gidSubclassQuark))
+      nearest = g_type_parent(nearest);
+
+    if (nearest != T._getGType)
+      return;
+
+    static if (__traits(compiles, () => new T())) // Has a public default constructor?
+    {
+      auto prevObj = dSubclassAdopt;
+      auto prevType = dSubclassAdoptType;
+      dSubclassAdopt = cObj;
+      dSubclassAdoptType = nearest;
+
+      try
+        new T();
+      catch (Exception e)
+        gidInvokeCallbackExceptionHandler(e, "new " ~ T.stringof);
+
+      if (dSubclassAdopt is cObj) // The constructor did not bind the instance
+        g_log("Gid", GLogLevelFlags.LevelCritical, "%s: D object constructor did not bind the C instance",
+          g_type_name(instType));
+
+      dSubclassAdopt = prevObj;
+      dSubclassAdoptType = prevType;
+    }
+    else if (auto dObj = cast(ObjectWrap)assumeWontThrow(_d_newclass(typeid(T))))
+      dObj._bindGObject(cObj);
+  }
+
   // Toggle ref callback
   extern(C) static void _cObjToggleNotify(void *dObj, GObject* gObj, gboolean isLastRef) nothrow
   {
+    gidAttachThread(); // The last reference can be dropped on a thread created by C
     debug
     {
       (cast(ObjectWrap)dObj).objectDebugLog(isLastRef ? "_cObjToggleNotify isLastRef=true"
@@ -240,6 +387,73 @@ class ObjectWrap : GidWrap
     }
 
     return cast(void*)_cInstancePtr;
+  }
+
+  /**
+   * Get the C class structure used by generated `vfunc*` virtual methods to call a C implementation. This is the
+   * class of the nearest type in the instance's GType ancestry, starting with the instance's own type, which is not
+   * registered for a D subclass. So the C implementation of the object's actual C type is called, and chaining up
+   * from a D override (`super.vfuncX()`) reaches the implementation the D type inherited rather than its own D
+   * trampoline, regardless of how many D subclass levels there are. If the instance's type was registered by C
+   * code as a subclass of a D subclass type, the search starts at the nearest D subclass type, because the
+   * overrides of the C type have already run (they called the D type), and calling them again would never end.
+   * Returns: The C class structure (a GTypeClass*, cast to the class structure of the virtual method)
+   */
+  protected final void* _vfuncClass() nothrow
+  {
+    return _vfuncClassOf(_cInstancePtr);
+  }
+
+  /**
+   * Get the C class structure of a C instance used to call a C virtual method implementation (see _vfuncClass).
+   * Params:
+   *   cObj = The C GObject instance
+   * Returns: The C class structure
+   */
+  static void* _vfuncClassOf(void* cObj) nothrow
+  {
+    auto gtype = (cast(GTypeInstance*)cObj).gClass.gType;
+
+    // A type that C code registered as a subclass of a D type is not a D subclass type. Its class is skipped, since
+    // its virtual methods call the D type, which would call it again.
+    for (auto t = gtype; t; t = g_type_parent(t))
+    {
+      if (g_type_get_qdata(t, gidSubclassQuark))
+      {
+        gtype = t;
+        break;
+      }
+    }
+
+    while (g_type_get_qdata(gtype, gidSubclassQuark))
+      gtype = g_type_parent(gtype);
+
+    return g_type_class_peek(gtype); // Classes of an instance's ancestor types are always initialized
+  }
+
+  /**
+   * Get the D object bound to a C instance for a virtual method trampoline, without creating a D object if none is
+   * bound (see _installVfuncs).
+   * Params:
+   *   cObj = The C GObject instance
+   * Returns: The D object or null
+   */
+  static ObjectWrap _vfuncDObject(void* cObj) nothrow
+  {
+    return cObj ? cast(ObjectWrap)g_object_get_qdata(cast(GObject*)cObj, gidObjectQuark) : null;
+  }
+
+  /**
+   * Flag a GType as registered for a D subclass, so that vfunc methods chain up to the C implementations of its
+   * nearest ancestor type which is not a D subclass type (see _vfuncClass). Called by GType registration of D
+   * subclasses (see GObjectSubclass).
+   * Params:
+   *   gtype = The GType registered for a D subclass
+   *   dClass = The D class of the GType, used to create D objects for unbound instances (see _getDObject)
+   */
+  static void _setDSubclassGType(GType gtype, const TypeInfo_Class dClass = null) nothrow
+  {
+    g_type_set_qdata(gtype, gidSubclassQuark, dClass ? cast(void*)dClass : cast(void*)1);
   }
 
   /**
@@ -354,7 +568,15 @@ class ObjectWrap : GidWrap
       TypeInfo_Class dClassType;
       bool found;
 
-      if (auto c = gTypeClass.gType in gtypeClasses)
+      // D subclass GTypes store their D class (see _setDSubclassGType)
+      auto dSubclass = g_type_get_qdata(gTypeClass.gType, gidSubclassQuark);
+      auto dSubclassInfo = cast(TypeInfo_Class)dSubclass;
+      if (dSubclass && dSubclass !is cast(void*)1)
+      {
+        dClassType = dSubclassInfo;
+        found = true;
+      }
+      else if (auto c = gTypeClass.gType in gtypeClasses)
       {
         dClassType = *c;
         found = true;
@@ -383,7 +605,11 @@ class ObjectWrap : GidWrap
       }
     }
 
-    static if (is(T == interface))
+    static if (is(T == interface) && is(T._gidDInterfaceOf == T)) // D-defined interface (see GObjectInterface)
+    {
+      return cast(T)new imported!"gid.gobject2.dig_iface"._DIfaceProxy!T(cptr, take);
+    }
+    else static if (is(T == interface))
     {
       if (auto proxyClass = typeid(T) in ifaceProxyClasses) // Interface has a proxy object?
       {
@@ -398,14 +624,23 @@ class ObjectWrap : GidWrap
     }
     else
     {
-      T retval;
+      static if (__traits(compiles, (void* p, Flag!"Take" t) => new T(p, t))) // Lambda: the constructor may throw
+      {
+        T retval;
 
-      try
-        retval = new T(cptr, take); // Fallback to attempting to create Object from this template Object type
-      catch (Exception e)
-        gidInvokeCallbackExceptionHandler(e, "new " ~ T.stringof);
+        try
+          retval = new T(cptr, take); // Fallback to attempting to create Object from this template Object type
+        catch (Exception e)
+          gidInvokeCallbackExceptionHandler(e, "new " ~ T.stringof);
 
-      return retval;
+        return retval;
+      }
+      else
+      { // D class without a wrap constructor (such as a D subclass of ObjectWrap), objects are found by their binding
+        g_log("Gid", GLogLevelFlags.LevelCritical, "No D object for GObject %p (%s) and no wrap constructor in %s",
+          cptr, g_type_name((cast(GTypeInstance*)cptr).gClass.gType), T.stringof.ptr);
+        return null;
+      }
     }
   }
 
@@ -574,6 +809,8 @@ class ObjectWrap : GidWrap
 
   static private void createClassMaps()
   {
+    import core.memory : GC;
+
     auto gobjClass = typeid(ObjectWrap);
     auto ifProxyClass = typeid(IfaceProxy);
 
@@ -590,6 +827,7 @@ class ObjectWrap : GidWrap
             continue;
 
           auto obj = cast(IfaceProxy)_d_newclass(c);
+          scope(exit) GC.free(cast(void*)obj); // Probe object: free it without running the destructor
 
           if (auto ifaceInfo = obj.getIface)
             ifaceProxyClasses[ifaceInfo] = c;
@@ -598,7 +836,14 @@ class ObjectWrap : GidWrap
         { // Create object without calling the constructor which could have side effects - FIXME is there a better way to do this?
           if (auto obj = cast(ObjectWrap)_d_newclass(c))
           {
+            // Probe objects are freed without running destructors, which could have side effects (D subclasses)
+            scope(exit) GC.free(cast(void*)obj);
+
+            if (cast(void*)(&obj._dSubclassGType).funcptr !is cast(void*)&ObjectWrap._dSubclassGType) // GObjectSubclass GTypes store their D class
+              continue;
+
             ObjectWrap baseObj;
+            scope(exit) if (baseObj) GC.free(cast(void*)baseObj);
             bool ownType = true, ownName = true;
 
             if (c !is gobjClass && c.base && gobjClass.isBaseOf(c.base))
@@ -728,3 +973,5 @@ abstract class IfaceProxy : ObjectWrap
 
   abstract TypeInfo_Interface getIface() nothrow;
 }
+
+public import gid.gobject2.dig;

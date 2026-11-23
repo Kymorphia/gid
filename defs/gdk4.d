@@ -32,6 +32,8 @@
 
 //# Arg should be inout caller-allocates GValue, not out
 //!set class[ContentProvider].method[get_value].parameters.parameter[value][direction] inout
+//# The virtual method gets the caller initialized GValue to set (in place), so that D overrides can set it
+//!set class[ContentProvider].virtual-method[get_value].parameters.parameter[value][direction] in
 
 //!class global pre
 
@@ -40,6 +42,7 @@ import gid.gdk4.content_serializer;
 
 private extern(C) void _contentSerializeCallback(GdkContentSerializer* serializer) nothrow
 {
+  gidAttachThread();
   auto _dlg = cast(gid.gdk4.types.ContentSerializeFunc*)gdk_content_serializer_get_user_data(serializer);
 
   try
@@ -54,6 +57,7 @@ private extern(C) void _contentSerializeCallback(GdkContentSerializer* serialize
 
 private extern(C) void _contentDeserializeCallback(GdkContentDeserializer* deserializer) nothrow
 {
+  gidAttachThread();
   auto _dlg = cast(gid.gdk4.types.ContentDeserializeFunc*)gdk_content_deserializer_get_user_data(deserializer);
 
   try

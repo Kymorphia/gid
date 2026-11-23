@@ -51,6 +51,12 @@
 //!set function[type_check_class_is_a][ignore] 1
 //!set function[type_name_from_class][ignore] 1
 
+//# Overrides of dispose and finalize from D are not supported: the D object is unbound from the C object (qdata cleared,
+//# toggle ref removed) by the D destructor before the last reference is dropped, so D overrides would not be called
+//# on destruction (dispose only reached by g_object_run_dispose()) and finalize could never reach a D object
+//!set class[Object].virtual-method[dispose][ignore] 1
+//!set class[Object].virtual-method[finalize][ignore] 1
+
 //# Add c:type for the _Value__data__union used within GValue
 //!set union[_Value__data__union][c:type] _Value__data__union
 //!set union[_Value__data__union][ignore] 1

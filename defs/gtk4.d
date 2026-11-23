@@ -122,6 +122,7 @@
   {
     extern(C) int _sortFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(CustomSortDelegate*)userData;
       auto aObj = cast(GObject*)a;
       auto bObj = cast(GObject*)b;
@@ -158,6 +159,7 @@
   {
     extern(C) int _sortFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(CustomSortDelegate*)userData;
       auto aObj = cast(GObject*)a;
       auto bObj = cast(GObject*)b;

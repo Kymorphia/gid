@@ -151,3 +151,22 @@ class ErrorWrap : Exception
     return _retval;
   }
 }
+
+/**
+ * Set a C GError from a D exception thrown by a D implementation of a throwing C function (such as a D override of a
+ * virtual method called from C). An ErrorWrap exception sets a copy of its GError, other exceptions set a GError in the
+ * "gid-exception" domain with code 0 and the exception message.
+ * Params:
+ *   e = The exception
+ *   err = The C GError return location (may be null if the caller ignores errors)
+ */
+void gidExceptionToGError(Exception e, GError** err) nothrow
+{
+  if (!err)
+    return;
+
+  if (auto ew = cast(ErrorWrap)e)
+    *err = cast(GError*)ew._cPtr(Yes.Dup);
+  else
+    *err = g_error_new_literal(g_quark_from_string("gid-exception"), 0, e.msg.toCString);
+}

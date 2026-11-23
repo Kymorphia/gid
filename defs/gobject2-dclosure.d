@@ -40,6 +40,7 @@ class DClosure : Closure
   private static extern(C) void _cmarshal(T, Flag!"Swap" swap)(GClosure* closure, GValue* returnValue, uint nParams,
     const(GValue)* paramVals, void* invocHint, void* marshalData) nothrow
   {
+    gidAttachThread();
     auto dClosure = cast(DGClosure!T*)closure;
 
     if (Parameters!T.length > nParams)

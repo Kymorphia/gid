@@ -233,6 +233,7 @@ alias PadGetRangeFunction = gid.gst1.types.FlowReturn delegate(gid.gst1.pad.Pad 
   {
     extern(C) GstFlowReturn _getCallback(GstPad* pad, GstObject* parent, ulong offset, uint length, GstBuffer** buffer) nothrow
     {
+      gidAttachThread();
       gid.gst1.types.FlowReturn _dretval;
       auto _dlg = cast(gid.gst1.types.PadGetRangeFunction*)pad.getrangedata;
 

@@ -97,9 +97,9 @@ void initVal(T)(GValue* gval) nothrow
     g_value_init(gval, GTypeEnum.Char);
   else static if (is(T == ubyte))
     g_value_init(gval, GTypeEnum.Uchar);
-  else static if (is(T == int))
+  else static if (is(T == short) || is(T == int))
     g_value_init(gval, GTypeEnum.Int);
-  else static if (is(T == uint))
+  else static if (is(T == ushort) || is(T == uint))
     g_value_init(gval, GTypeEnum.Uint);
   else static if (is(T == long))
     g_value_init(gval, GTypeEnum.Int64);
@@ -147,6 +147,10 @@ T getVal(T)(const(GValue)* gval) nothrow
     return g_value_get_schar(gval);
   else static if (is(T == ubyte))
     return g_value_get_uchar(gval);
+  else static if (is(T == short))
+    return cast(short)g_value_get_int(gval);
+  else static if (is(T == ushort))
+    return cast(ushort)g_value_get_uint(gval);
   else static if (is(T == int)) // Also glong on Windows (where c_long is int). Cast needed on 64-bit systems, where glong is long.
   {
     if (gval.gType == GTypeEnum.Long)
@@ -275,6 +279,10 @@ void setVal(T)(GValue* gval, T v) nothrow
     g_value_set_schar(gval, v);
   else static if (is(T == ubyte))
     g_value_set_uchar(gval, v);
+  else static if (is(T == short) || is(T == int))
+    g_value_set_int(gval, v);
+  else static if (is(T == ushort) || is(T == uint))
+    g_value_set_uint(gval, v);
   else static if (is(T == int)) // Also glong on Windows (where c_long is int); use the actual GValue type
   {
     if (gval.gType == GTypeEnum.Long)
