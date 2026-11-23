@@ -432,7 +432,7 @@ private static GParamSpec* _dPropertyCreateSpec(T, string mem)()
     return g_param_spec_double(namez.ptr, nickz.ptr, blurbz.ptr, -double.max, double.max, def, flags);
   else static if (is(PT == string))
     return g_param_spec_string(namez.ptr, nickz.ptr, blurbz.ptr, def.toStringz, flags);
-  else static if (is(PT == imported!"glib.variant".Variant))
+  else static if (is(PT == imported!"gid.glib2.variant".Variant))
   {
     import gid.glib2.c.functions : g_variant_type_new;
     import gid.glib2.c.types : GVariantType;
@@ -456,11 +456,11 @@ private static GParamSpec* _dPropertyCreateSpec(T, string mem)()
       return null;
     }
 
-    if (g_type_is_a(gtype, imported!"gobject.types".GTypeEnum.Flags))
+    if (g_type_is_a(gtype, imported!"gid.gobject2.types".GTypeEnum.Flags))
       return g_param_spec_flags(namez.ptr, nickz.ptr, blurbz.ptr, gtype, def, flags);
     return g_param_spec_enum(namez.ptr, nickz.ptr, blurbz.ptr, gtype, def, flags);
   }
-  else static if (is(PT : imported!"gobject.boxed".Boxed) || __traits(compiles, PT._getGType()))
+  else static if (is(PT : imported!"gid.gobject2.boxed".Boxed) || __traits(compiles, PT._getGType()))
   {
     auto gtype = _dPropertyValueGType!(T, mem);
     return gtype ? g_param_spec_boxed(namez.ptr, nickz.ptr, blurbz.ptr, gtype, flags) : null;
@@ -493,7 +493,7 @@ private static extern(C) void _dPropertyGet(T)(GObject* obj, uint propertyId, GV
   import gid.core.utils : gidInvokeCallbackExceptionHandler;
   import gid.gobject2.value : setVal;
 
-  imported!"gid.gid".gidAttachThread();
+  imported!"gid.core.utils".gidAttachThread();
 
   auto self = cast(T)imported!"gid.gobject2.object".ObjectWrap._vfuncDObject(obj);
   uint id = 1;
@@ -520,7 +520,7 @@ private static extern(C) void _dPropertyGet(T)(GObject* obj, uint propertyId, GV
                 setVal(value, cur);
             }
             catch (Exception e)
-              imported!"gid.gid".gidInvokeCallbackExceptionHandler(e, "get_property " ~ T.stringof ~ "." ~ mem);
+              imported!"gid.core.utils".gidInvokeCallbackExceptionHandler(e, "get_property " ~ T.stringof ~ "." ~ mem);
           }
         }
         return;
@@ -542,7 +542,7 @@ private static extern(C) void _dPropertySet(T)(GObject* obj, uint propertyId, co
   import gid.gobject2.value : getVal;
   import gid.gobject2.c.functions : g_object_notify_by_pspec;
 
-  imported!"gid.gid".gidAttachThread();
+  imported!"gid.core.utils".gidAttachThread();
 
   auto self = cast(T)imported!"gid.gobject2.object".ObjectWrap._vfuncDObject(obj);
   uint id = 1;
@@ -593,7 +593,7 @@ private static extern(C) void _dPropertySet(T)(GObject* obj, uint propertyId, co
               }
             }
             catch (Exception e)
-              imported!"gid.gid".gidInvokeCallbackExceptionHandler(e, "set_property " ~ T.stringof ~ "." ~ mem);
+              imported!"gid.core.utils".gidInvokeCallbackExceptionHandler(e, "set_property " ~ T.stringof ~ "." ~ mem);
           }
         }
         return;

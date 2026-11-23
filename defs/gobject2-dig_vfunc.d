@@ -167,7 +167,7 @@ private static PT _dVfuncFromC(PT, CT)(CT val)
   else static if (is(PT == enum))
     return cast(PT)val;
   else static if (is(PT == string))
-    return imported!"gid.gid".fromCString(val);
+    return imported!"gid.core.utils".fromCString(val);
   else static if (is(PT : imported!"gid.gobject2.object".ObjectWrap))
     return imported!"gid.gobject2.object".ObjectWrap._getDObject!PT(cast(void*)val, imported!"std.typecons".No.Take);
   else
@@ -289,7 +289,7 @@ private static extern(C) _dVfuncCReturn!(T, mem) _dVfuncTrampoline(T, string mem
   import gid.core.utils : gidInvokeCallbackExceptionHandler;
   import std.typecons : Tuple;
 
-  imported!"gid.gid".gidAttachThread();
+  imported!"gid.core.utils".gidAttachThread();
 
   alias P = _dVfuncParams!(T, mem);
   alias R = _dVfuncReturn!(T, mem);
@@ -316,7 +316,7 @@ private static extern(C) _dVfuncCReturn!(T, mem) _dVfuncTrampoline(T, string mem
         return _dVfuncToC(__traits(getMember, self, impl)(params[]));
     }
     catch (Exception e)
-      imported!"gid.gid".gidInvokeCallbackExceptionHandler(e, where);
+      imported!"gid.core.utils".gidInvokeCallbackExceptionHandler(e, where);
   }
 
   static if (!is(R == void))

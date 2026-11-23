@@ -1184,9 +1184,9 @@ void setVal(T)(GValue* gval, T v) nothrow
   g_value_set_schar(gval, v);
   else static if (is(T == ubyte))
   g_value_set_uchar(gval, v);
-  else static if (is(T == short) || is(T == int))
+  else static if (is(T == short))
   g_value_set_int(gval, v);
-  else static if (is(T == ushort) || is(T == uint))
+  else static if (is(T == ushort))
   g_value_set_uint(gval, v);
   else static if (is(T == int)) // Also glong on Windows (where c_long is int); use the actual GValue type
   {

@@ -112,7 +112,7 @@ void gidInitRuntime() nothrow
 
     // Plain C calls only, the runtime (and the GLib function pointers linked by module constructors) may not be
     // initialized
-    enum msg = "D runtime initialization failed (gid.gid.gidInitRuntime)";
+    enum msg = "D runtime initialization failed (gid.core.utils.gidInitRuntime)";
 
     if (g_log)
       g_log("Gid", GLogLevelFlags.LevelCritical, "%s", msg.ptr);

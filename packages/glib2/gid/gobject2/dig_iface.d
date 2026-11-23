@@ -65,7 +65,7 @@ mixin template GObjectInterface(string typeName = null)
   alias _gidDInterfaceOf = typeof(this);
 
   /// The GType of the interface, registered on first use
-  static imported!"gobject.types".GType _getGType() nothrow
+  static imported!"gid.gobject2.types".GType _getGType() nothrow
   {
     enum name = typeName.length > 0 ? typeName : imported!"gid.gobject2.dig"._dSubclassTypeName!(typeof(this));
     return imported!"gid.gobject2.dig_iface"._registerDInterface!(typeof(this))(name);
@@ -138,12 +138,12 @@ static GType _registerDInterface(I)(string name) nothrow
     }
 
     auto size = imported!"gid.gobject2.dig_vfunc"._dVfuncClassSize!I(cast(uint)GTypeInterface.sizeof);
-    auto t = g_type_register_static_simple(imported!"gobject.types".GTypeEnum.Interface, name.toStringz, size, null, 0,
+    auto t = g_type_register_static_simple(imported!"gid.gobject2.types".GTypeEnum.Interface, name.toStringz, size, null, 0,
     null, cast(GTypeFlags)0);
 
     if (t)
     {
-      g_type_interface_add_prerequisite(t, imported!"gobject.types".GTypeEnum.Object);
+      g_type_interface_add_prerequisite(t, imported!"gid.gobject2.types".GTypeEnum.Object);
 
       static foreach (J; InterfacesTuple!I)
       g_type_interface_add_prerequisite(t, J._getGType());
@@ -169,7 +169,7 @@ package static void _addDInterface(T, I)(GType gtype, GType parent) nothrow
 
   static extern(C) void ifaceInit(void* iface, void* data) nothrow
   {
-    imported!"gid.gid".gidAttachThread();
+    imported!"gid.core.utils".gidAttachThread();
     imported!"gid.gobject2.dig_vfunc"._installDVfuncs!I(iface);
   }
 

@@ -43,7 +43,7 @@ struct gMethod {}
 *
 * Example:
 * ---
-* class MyWidget : gtk.widget.Widget
+* class MyWidget : gid.gtk4.widget.Widget
 * {
 *   mixin GObjectSubclass;
 *
@@ -52,7 +52,7 @@ struct gMethod {}
 *     super();
 *   }
 *
-*   override protected void vfuncSnapshot(gtk.snapshot.Snapshot snapshot)
+*   override protected void vfuncSnapshot(gid.gtk4.snapshot.Snapshot snapshot)
 *   {
 *     super.vfuncSnapshot(snapshot);
 *   }
@@ -68,19 +68,19 @@ mixin template GObjectSubclass(string typeName = null)
   enum string _gidDTypeName = typeName.length > 0 ? typeName
   : imported!"gid.gobject2.dig"._dSubclassTypeName!(typeof(this));
 
-  private __gshared imported!"gobject.types".GType _gidDGType; // Registered GType (0 until registered)
+  private __gshared imported!"gid.gobject2.types".GType _gidDGType; // Registered GType (0 until registered)
 
   /**
   * Get the GType of the D class, registering it on first use.
   * Returns: The GType
   */
-  static imported!"gobject.types".GType _getGType() nothrow
+  static imported!"gid.gobject2.types".GType _getGType() nothrow
   {
     return imported!"gid.gobject2.dig"._registerDSubclass!(typeof(this))(_gidDGType, _gidDTypeName);
   }
 
   /** */
-  override @property imported!"gobject.types".GType _gType() nothrow
+  override @property imported!"gid.gobject2.types".GType _gType() nothrow
   {
     return _getGType;
   }
@@ -92,7 +92,7 @@ mixin template GObjectSubclass(string typeName = null)
   }
 
   /** */
-  override protected imported!"gobject.types".GType _dSubclassGType() nothrow
+  override protected imported!"gid.gobject2.types".GType _dSubclassGType() nothrow
   {
     return _getGType;
   }
@@ -243,10 +243,10 @@ mixin template GObjectExport(string ns = null, string name = null, string cSymbo
 
   /// Exported get_type function of the GType
   pragma(mangle, _gidExportGetTypeSymbol)
-  export extern(C) static imported!"gobject.types".GType _gidExportGetType() nothrow
+  export extern(C) static imported!"gid.gobject2.types".GType _gidExportGetType() nothrow
   {
-    imported!"gid.gid".gidInitRuntime();
-    imported!"gid.gid".gidAttachThread();
+    imported!"gid.core.utils".gidInitRuntime();
+    imported!"gid.core.utils".gidAttachThread();
     return _getGType;
   }
 
@@ -254,7 +254,7 @@ mixin template GObjectExport(string ns = null, string name = null, string cSymbo
   pragma(crt_constructor)
   extern(C) static void _gidExportInit() nothrow
   {
-    imported!"gid.gid".gidInitRuntime();
+    imported!"gid.core.utils".gidInitRuntime();
   }
 }
 
@@ -396,7 +396,7 @@ static GType _registerDSubclass(T)(ref GType gtype, string name) nothrow
 
   static extern(C) void classInit(void* klass, void* classData) nothrow
   {
-    imported!"gid.gid".gidAttachThread(); // Class initialization can happen on a thread created by C
+    imported!"gid.core.utils".gidAttachThread(); // Class initialization can happen on a thread created by C
     T._installVfuncs!T(klass); // Compile error if T overrides a vfunc method without a trampoline
     _installDProperties!T(klass); // @gProperty members of T
     _installDSignals!T(klass); // @gSignal methods of T
@@ -469,7 +469,7 @@ private static void _addDSubclassIface(T, I)(GType gtype, GType parent) nothrow
 
   static if (_isDInterface!I)
     _addDInterface!(T, I)(gtype, parent);
-  else static if (__traits(compiles, I._getGType()) && is(I : imported!"gid.wrap".GidWrap))
+  else static if (__traits(compiles, I._getGType()) && is(I : imported!"gid.core.wrap".GidWrap))
   {
     static foreach (J; InterfacesTuple!I)
     _addDSubclassIface!(T, J)(gtype, parent);
@@ -488,7 +488,7 @@ private static void _addDSubclassIface(T, I)(GType gtype, GType parent) nothrow
 
     static extern(C) void ifaceInit(void* iface, void* data) nothrow
     {
-      imported!"gid.gid".gidAttachThread();
+      imported!"gid.core.utils".gidAttachThread();
       alias install = __traits(getMember, T, "_installIfaceVfuncs_" ~ suffix);
       install!T(iface);
     }

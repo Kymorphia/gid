@@ -203,29 +203,29 @@ private static string _dSignalTypeName(T, string mem, size_t i)() pure nothrow
 private static GType _dSignalValueGType(PT, string typeName, string where)()
 {
   static if (is(PT == void))
-    return imported!"gobject.types".GTypeEnum.None;
+    return imported!"gid.gobject2.types".GTypeEnum.None;
   else static if (is(PT == bool))
-  return imported!"gobject.types".GTypeEnum.Boolean;
+  return imported!"gid.gobject2.types".GTypeEnum.Boolean;
   else static if (is(PT == byte))
-  return imported!"gobject.types".GTypeEnum.Char;
+  return imported!"gid.gobject2.types".GTypeEnum.Char;
   else static if (is(PT == ubyte))
-  return imported!"gobject.types".GTypeEnum.Uchar;
+  return imported!"gid.gobject2.types".GTypeEnum.Uchar;
   else static if (is(PT == short) || is(PT == int))
-  return imported!"gobject.types".GTypeEnum.Int;
+  return imported!"gid.gobject2.types".GTypeEnum.Int;
   else static if (is(PT == ushort) || is(PT == uint))
-  return imported!"gobject.types".GTypeEnum.Uint;
+  return imported!"gid.gobject2.types".GTypeEnum.Uint;
   else static if (is(PT == long))
-  return imported!"gobject.types".GTypeEnum.Int64;
+  return imported!"gid.gobject2.types".GTypeEnum.Int64;
   else static if (is(PT == ulong))
-  return imported!"gobject.types".GTypeEnum.Uint64;
+  return imported!"gid.gobject2.types".GTypeEnum.Uint64;
   else static if (is(PT == float))
-  return imported!"gobject.types".GTypeEnum.Float;
+  return imported!"gid.gobject2.types".GTypeEnum.Float;
   else static if (is(PT == double))
-  return imported!"gobject.types".GTypeEnum.Double;
+  return imported!"gid.gobject2.types".GTypeEnum.Double;
   else static if (is(PT == string))
-  return imported!"gobject.types".GTypeEnum.String;
-  else static if (is(PT == imported!"glib.variant".Variant))
-  return imported!"gobject.types".GTypeEnum.Variant;
+  return imported!"gid.gobject2.types".GTypeEnum.String;
+  else static if (is(PT == imported!"gid.glib2.variant".Variant))
+  return imported!"gid.gobject2.types".GTypeEnum.Variant;
   else static if (__traits(compiles, PT._getGType()))
   return PT._getGType;
   else static if (typeName.length > 0 || is(PT == enum))
@@ -353,7 +353,7 @@ static gulong _dSignalConnect(T, string mem, C)(T self, string detail, C callbac
   extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals,
   void* _invocHint, void* _marshalData) nothrow
   {
-    imported!"gid.gid".gidAttachThread();
+    imported!"gid.core.utils".gidAttachThread();
     assert(_nParams == P.length + 1, "Unexpected number of signal parameters");
     auto _dClosure = cast(DGClosure!C*)_closure;
     Tuple!(Parameters!C) _paramTuple;
@@ -371,7 +371,7 @@ static gulong _dSignalConnect(T, string mem, C)(T self, string detail, C callbac
       try
       _dClosure.cb(_paramTuple[]);
       catch (Exception e)
-      imported!"gid.gid".gidInvokeCallbackExceptionHandler(e, where);
+      imported!"gid.core.utils".gidInvokeCallbackExceptionHandler(e, where);
     }
     else
     {
@@ -380,7 +380,7 @@ static gulong _dSignalConnect(T, string mem, C)(T self, string detail, C callbac
       try
       _retval = _dClosure.cb(_paramTuple[]);
       catch (Exception e)
-      imported!"gid.gid".gidInvokeCallbackExceptionHandler(e, where);
+      imported!"gid.core.utils".gidInvokeCallbackExceptionHandler(e, where);
 
       if (_returnValue)
         setVal!R(_returnValue, _retval);
@@ -400,7 +400,7 @@ uint nParams, const(GValue)* paramVals, void* invocHint, void* marshalData) noth
   import gid.gobject2.c.functions : g_value_get_object;
   import std.typecons : Tuple;
 
-  imported!"gid.gid".gidAttachThread();
+  imported!"gid.core.utils".gidAttachThread();
 
   alias P = _dSignalParams!(T, mem);
   alias R = _dSignalReturn!(T, mem);
@@ -429,7 +429,7 @@ uint nParams, const(GValue)* paramVals, void* invocHint, void* marshalData) noth
     }
   }
   catch (Exception e)
-  imported!"gid.gid".gidInvokeCallbackExceptionHandler(e, where);
+  imported!"gid.core.utils".gidInvokeCallbackExceptionHandler(e, where);
 }
 
 // Custom accumulator of a @gSignal signal: calls the static method named in the attribute
@@ -439,7 +439,7 @@ const(GValue)* handlerReturn, void* data) nothrow
   import gid.gobject2.value : getVal, setVal;
   import gid.core.utils : gidInvokeCallbackExceptionHandler;
 
-  imported!"gid.gid".gidAttachThread();
+  imported!"gid.core.utils".gidAttachThread();
 
   alias R = _dSignalReturn!(T, mem);
   enum fn = _dSignalUDA!(T, mem).accumulator;
@@ -452,7 +452,7 @@ const(GValue)* handlerReturn, void* data) nothrow
     return cont;
   }
   catch (Exception e)
-  imported!"gid.gid".gidInvokeCallbackExceptionHandler(e, T.stringof ~ "." ~ mem ~ " accumulator");
+  imported!"gid.core.utils".gidInvokeCallbackExceptionHandler(e, T.stringof ~ "." ~ mem ~ " accumulator");
 
   return false;
 }
