@@ -47,6 +47,8 @@ interface StyleSchemeChooser : GidWrap
   */
   @property void styleScheme(gid.gtksource5.style_scheme.StyleScheme propval) nothrow;
 
+
+
   /**
       Gets the currently-selected scheme.
       Returns: the currently-selected scheme.

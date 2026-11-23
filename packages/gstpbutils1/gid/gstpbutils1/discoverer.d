@@ -41,6 +41,15 @@ class Discoverer : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -128,12 +137,83 @@ class Discoverer : gid.gobject2.object.ObjectWrap
   */
   this(gid.gst1.types.ClockTime timeout)
   {
-    GstDiscoverer* _cretval;
-    GError *_err;
-    _cretval = gst_discoverer_new(timeout, &_err);
-    if (_err)
-      throw new ErrorWrap(_err, Yes.Take);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GstDiscoverer* _cretval;
+      GError *_err;
+      _cretval = gst_discoverer_new(timeout, &_err);
+      if (_err)
+        throw new ErrorWrap(_err, Yes.Take);
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncDiscovered(gid.gstpbutils1.discoverer_info.DiscovererInfo info, gid.glib2.error.ErrorWrap err)
+  {
+    auto _klass = cast(GstDiscovererClass*)_vfuncClass;
+    if (!_klass.discovered)
+      return;
+
+    _klass.discovered(cast(GstDiscoverer*)this._cPtr, info ? cast(GstDiscovererInfo*)info._cPtr(No.Dup) : null, err ? cast(const(GError)*)err._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncFinished()
+  {
+    auto _klass = cast(GstDiscovererClass*)_vfuncClass;
+    if (!_klass.finished)
+      return;
+
+    _klass.finished(cast(GstDiscoverer*)this._cPtr);
+  }
+
+  /**
+      Loads the serialized info from the given uri.
+  
+      Params:
+        uri = the uri to load the info from
+      Returns: the #GstDiscovererInfo or null if it could not be loaded
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncLoadSerializeInfo` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gstpbutils1.discoverer_info.DiscovererInfo vfuncLoadSerializeInfo(string uri)
+  {
+    auto _klass = cast(GstDiscovererClass*)_vfuncClass;
+    if (!_klass.loadSerializeInfo)
+      return typeof(return).init;
+
+    GstDiscovererInfo* _cretval;
+    char* _uri = uri.toCString!(No.Malloc, No.Nullable);
+    _cretval = _klass.loadSerializeInfo(cast(GstDiscoverer*)this._cPtr, _uri);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gstpbutils1.discoverer_info.DiscovererInfo)(cast(GstDiscovererInfo*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncSourceSetup(gid.gst1.element.Element source)
+  {
+    auto _klass = cast(GstDiscovererClass*)_vfuncClass;
+    if (!_klass.sourceSetup)
+      return;
+
+    _klass.sourceSetup(cast(GstDiscoverer*)this._cPtr, source ? cast(GstElement*)source._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncStarting()
+  {
+    auto _klass = cast(GstDiscovererClass*)_vfuncClass;
+    if (!_klass.starting)
+      return;
+
+    _klass.starting(cast(GstDiscoverer*)this._cPtr);
   }
 
   /**
@@ -237,6 +317,7 @@ class Discoverer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -287,6 +368,7 @@ class Discoverer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -338,6 +420,7 @@ class Discoverer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -397,6 +480,7 @@ class Discoverer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -444,6 +528,7 @@ class Discoverer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -463,6 +548,188 @@ class Discoverer : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("starting", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Discoverer
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gstpbutils1.discoverer.Discoverer), T.stringof ~ " is not derived from gid.gstpbutils1.discoverer.Discoverer");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDiscovered", true)[0]) == gid.gstpbutils1.discoverer.Discoverer))
+      _installVfunc(klass, "discovered");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFinished", true)[0]) == gid.gstpbutils1.discoverer.Discoverer))
+      _installVfunc(klass, "finished");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncLoadSerializeInfo", true)[0]) == gid.gstpbutils1.discoverer.Discoverer))
+      _installVfunc(klass, "load_serialize_info");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSourceSetup", true)[0]) == gid.gstpbutils1.discoverer.Discoverer))
+      _installVfunc(klass, "source_setup");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStarting", true)[0]) == gid.gstpbutils1.discoverer.Discoverer))
+      _installVfunc(klass, "starting");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstDiscovererClass*)klass;
+
+    switch (vfunc)
+    {
+      case "discovered":
+      {
+        static extern(C) void _vfuncDiscoveredTramp(GstDiscoverer* discoverer, GstDiscovererInfo* info, const(GError)* err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstpbutils1.discoverer.Discoverer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)discoverer);
+          if (!_obj)
+          {
+            auto _klass = cast(GstDiscovererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)discoverer);
+            if (_klass.discovered)
+              return (cast(typeof(&_vfuncDiscoveredTramp))_klass.discovered)(discoverer, info, err);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDiscovered(gid.gobject2.object.ObjectWrap._getDObject!(gid.gstpbutils1.discoverer_info.DiscovererInfo)(cast(void*)info, No.Take), err ? new gid.glib2.error.ErrorWrap(cast(void*)err, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstpbutils1.discoverer.Discoverer.vfuncDiscovered");
+          }
+        }
+
+        _klass.discovered = cast(typeof(_klass.discovered))&_vfuncDiscoveredTramp;
+        break;
+      }
+      case "finished":
+      {
+        static extern(C) void _vfuncFinishedTramp(GstDiscoverer* discoverer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstpbutils1.discoverer.Discoverer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)discoverer);
+          if (!_obj)
+          {
+            auto _klass = cast(GstDiscovererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)discoverer);
+            if (_klass.finished)
+              return (cast(typeof(&_vfuncFinishedTramp))_klass.finished)(discoverer);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncFinished();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstpbutils1.discoverer.Discoverer.vfuncFinished");
+          }
+        }
+
+        _klass.finished = cast(typeof(_klass.finished))&_vfuncFinishedTramp;
+        break;
+      }
+      case "load_serialize_info":
+      {
+        static extern(C) GstDiscovererInfo* _vfuncLoadSerializeInfoTramp(GstDiscoverer* dc, char* uri) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstpbutils1.discoverer.Discoverer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dc);
+          if (!_obj)
+          {
+            auto _klass = cast(GstDiscovererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dc);
+            if (_klass.loadSerializeInfo)
+              return (cast(typeof(&_vfuncLoadSerializeInfoTramp))_klass.loadSerializeInfo)(dc, uri);
+            return typeof(return).init;
+          }
+
+          gid.gstpbutils1.discoverer_info.DiscovererInfo _dretval;
+          string _uri = uri.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncLoadSerializeInfo(_uri);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstpbutils1.discoverer.Discoverer.vfuncLoadSerializeInfo");
+          }
+          auto _retval = _dretval ? cast(GstDiscovererInfo*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.loadSerializeInfo = cast(typeof(_klass.loadSerializeInfo))&_vfuncLoadSerializeInfoTramp;
+        break;
+      }
+      case "source_setup":
+      {
+        static extern(C) void _vfuncSourceSetupTramp(GstDiscoverer* discoverer, GstElement* source) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstpbutils1.discoverer.Discoverer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)discoverer);
+          if (!_obj)
+          {
+            auto _klass = cast(GstDiscovererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)discoverer);
+            if (_klass.sourceSetup)
+              return (cast(typeof(&_vfuncSourceSetupTramp))_klass.sourceSetup)(discoverer, source);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSourceSetup(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.element.Element)(cast(void*)source, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstpbutils1.discoverer.Discoverer.vfuncSourceSetup");
+          }
+        }
+
+        _klass.sourceSetup = cast(typeof(_klass.sourceSetup))&_vfuncSourceSetupTramp;
+        break;
+      }
+      case "starting":
+      {
+        static extern(C) void _vfuncStartingTramp(GstDiscoverer* discoverer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstpbutils1.discoverer.Discoverer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)discoverer);
+          if (!_obj)
+          {
+            auto _klass = cast(GstDiscovererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)discoverer);
+            if (_klass.starting)
+              return (cast(typeof(&_vfuncStartingTramp))_klass.starting)(discoverer);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncStarting();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstpbutils1.discoverer.Discoverer.vfuncStarting");
+          }
+        }
+
+        _klass.starting = cast(typeof(_klass.starting))&_vfuncStartingTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

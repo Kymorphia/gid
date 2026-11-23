@@ -137,6 +137,15 @@ interface CellLayout : GidWrap
     return cast(void function())gtk_cell_layout_get_type != &gidSymbolNotFound ? gtk_cell_layout_get_type() : cast(GType)0;
   }
 
+
+
+
+
+
+
+
+
+
   /**
       Adds an attribute mapping to the list in cell_layout.
       

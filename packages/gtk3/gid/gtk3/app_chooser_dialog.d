@@ -39,6 +39,15 @@ class AppChooserDialog : gid.gtk3.dialog.Dialog, gid.gtk3.app_chooser.AppChooser
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -119,9 +128,16 @@ class AppChooserDialog : gid.gtk3.dialog.Dialog, gid.gtk3.app_chooser.AppChooser
   */
   this(gid.gtk3.window.Window parent, gid.gtk3.types.DialogFlags flags, gid.gio2.file.File file) nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_app_chooser_dialog_new(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, flags, file ? cast(GFile*)(cast(gid.gobject2.object.ObjectWrap)file)._cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_app_chooser_dialog_new(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, flags, file ? cast(GFile*)(cast(gid.gobject2.object.ObjectWrap)file)._cPtr(No.Dup) : null);
+      this(_cretval, No.Take);
+    }
   }
 
   /**

@@ -38,6 +38,15 @@ class Filter : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -70,6 +79,56 @@ class Filter : gid.gobject2.object.ObjectWrap
   static FilterGidBuilder builder() nothrow
   {
     return new FilterGidBuilder;
+  }
+
+  /**
+      Gets the known strictness of a filter.
+      
+      If the strictness is not known, [gid.gtk4.types.FilterMatch.Some] is returned.
+      
+      This value may change after emission of the [gid.gtk4.filter.Filter.changed]
+      signal.
+      
+      This function is meant purely for optimization purposes. Filters can
+      choose to omit implementing it, but [gid.gtk4.filter_list_model.FilterListModel] uses it.
+      Returns: the strictness of self
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetStrictness` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gtk4.types.FilterMatch vfuncGetStrictness()
+  {
+    auto _klass = cast(GtkFilterClass*)_vfuncClass;
+    if (!_klass.getStrictness)
+      return typeof(return).init;
+
+    GtkFilterMatch _cretval;
+    _cretval = _klass.getStrictness(cast(GtkFilter*)this._cPtr);
+    gid.gtk4.types.FilterMatch _retval = cast(gid.gtk4.types.FilterMatch)_cretval;
+    return _retval;
+  }
+
+  /**
+      Checks if the given item is matched by the filter or not.
+  
+      Params:
+        item = The item to check
+      Returns: true if the filter matches the item
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncMatch` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncMatch(gid.gobject2.object.ObjectWrap item = null)
+  {
+    auto _klass = cast(GtkFilterClass*)_vfuncClass;
+    if (!_klass.match)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.match(cast(GtkFilter*)this._cPtr, item ? cast(GObject*)item._cPtr(No.Dup) : null);
+    return _retval;
   }
 
   /**
@@ -163,6 +222,7 @@ class Filter : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -185,6 +245,102 @@ class Filter : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Filter
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.filter.Filter), T.stringof ~ " is not derived from gid.gtk4.filter.Filter");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetStrictness", true)[0]) == gid.gtk4.filter.Filter))
+      _installVfunc(klass, "get_strictness");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMatch", true)[0]) == gid.gtk4.filter.Filter))
+      _installVfunc(klass, "match");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkFilterClass*)klass;
+
+    switch (vfunc)
+    {
+      case "get_strictness":
+      {
+        static extern(C) GtkFilterMatch _vfuncGetStrictnessTramp(GtkFilter* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.filter.Filter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.getStrictness)
+              return (cast(typeof(&_vfuncGetStrictnessTramp))_klass.getStrictness)(self);
+            return typeof(return).init;
+          }
+
+          gid.gtk4.types.FilterMatch _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetStrictness();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.filter.Filter.vfuncGetStrictness");
+          }
+          auto _retval = cast(GtkFilterMatch)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getStrictness = cast(typeof(_klass.getStrictness))&_vfuncGetStrictnessTramp;
+        break;
+      }
+      case "match":
+      {
+        static extern(C) gboolean _vfuncMatchTramp(GtkFilter* self, GObject* item) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.filter.Filter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.match)
+              return (cast(typeof(&_vfuncMatchTramp))_klass.match)(self, item);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncMatch(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)item, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.filter.Filter.vfuncMatch");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.match = cast(typeof(_klass.match))&_vfuncMatchTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

@@ -67,6 +67,15 @@ class PadController : gid.gtk3.event_controller.EventController
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -132,9 +141,16 @@ class PadController : gid.gtk3.event_controller.EventController
   */
   this(gid.gtk3.window.Window window, gid.gio2.action_group.ActionGroup group, gid.gdk3.device.Device pad = null) nothrow
   {
-    GtkPadController* _cretval;
-    _cretval = gtk_pad_controller_new(window ? cast(GtkWindow*)window._cPtr(No.Dup) : null, group ? cast(GActionGroup*)(cast(gid.gobject2.object.ObjectWrap)group)._cPtr(No.Dup) : null, pad ? cast(GdkDevice*)pad._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkPadController* _cretval;
+      _cretval = gtk_pad_controller_new(window ? cast(GtkWindow*)window._cPtr(No.Dup) : null, group ? cast(GActionGroup*)(cast(gid.gobject2.object.ObjectWrap)group)._cPtr(No.Dup) : null, pad ? cast(GdkDevice*)pad._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

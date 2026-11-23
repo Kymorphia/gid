@@ -71,9 +71,16 @@ class Menu : gid.gio2.menu_model.MenuModel
   */
   this() nothrow
   {
-    GMenu* _cretval;
-    _cretval = g_menu_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GMenu* _cretval;
+      _cretval = g_menu_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

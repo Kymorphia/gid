@@ -969,9 +969,296 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = vte_terminal_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = vte_terminal_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncBell()
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.bell)
+      return;
+
+    _klass.bell(cast(VteTerminal*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncCharSizeChanged(uint charWidth, uint charHeight)
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.charSizeChanged)
+      return;
+
+    _klass.charSizeChanged(cast(VteTerminal*)this._cPtr, charWidth, charHeight);
+  }
+
+  /** */
+  protected void vfuncChildExited(int status)
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.childExited)
+      return;
+
+    _klass.childExited(cast(VteTerminal*)this._cPtr, status);
+  }
+
+  /** */
+  protected void vfuncCommit(string text, uint size)
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.commit)
+      return;
+
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
+    _klass.commit(cast(VteTerminal*)this._cPtr, _text, size);
+  }
+
+  /** */
+  protected void vfuncContentsChanged()
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.contentsChanged)
+      return;
+
+    _klass.contentsChanged(cast(VteTerminal*)this._cPtr);
+  }
+
+  /**
+      Places the selected text in the terminal in the #GDK_SELECTION_CLIPBOARD
+      selection.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCopyClipboard` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use [gid.vte3.terminal.Terminal.copyClipboardFormat] with [gid.vte3.types.Format.Text]
+          instead.
+  */
+  protected void vfuncCopyClipboard()
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.copyClipboard)
+      return;
+
+    _klass.copyClipboard(cast(VteTerminal*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncCursorMoved()
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.cursorMoved)
+      return;
+
+    _klass.cursorMoved(cast(VteTerminal*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncDecreaseFontSize()
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.decreaseFontSize)
+      return;
+
+    _klass.decreaseFontSize(cast(VteTerminal*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncDeiconifyWindow()
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.deiconifyWindow)
+      return;
+
+    _klass.deiconifyWindow(cast(VteTerminal*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncEncodingChanged()
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.encodingChanged)
+      return;
+
+    _klass.encodingChanged(cast(VteTerminal*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncEof()
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.eof)
+      return;
+
+    _klass.eof(cast(VteTerminal*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncIconTitleChanged()
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.iconTitleChanged)
+      return;
+
+    _klass.iconTitleChanged(cast(VteTerminal*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncIconifyWindow()
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.iconifyWindow)
+      return;
+
+    _klass.iconifyWindow(cast(VteTerminal*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncIncreaseFontSize()
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.increaseFontSize)
+      return;
+
+    _klass.increaseFontSize(cast(VteTerminal*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncLowerWindow()
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.lowerWindow)
+      return;
+
+    _klass.lowerWindow(cast(VteTerminal*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncMaximizeWindow()
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.maximizeWindow)
+      return;
+
+    _klass.maximizeWindow(cast(VteTerminal*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncMoveWindow(uint x, uint y)
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.moveWindow)
+      return;
+
+    _klass.moveWindow(cast(VteTerminal*)this._cPtr, x, y);
+  }
+
+  /**
+      Sends the contents of the #GDK_SELECTION_CLIPBOARD selection to the
+      terminal's child. It's called on paste menu item, or when
+      user presses Shift+Insert.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPasteClipboard` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncPasteClipboard()
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.pasteClipboard)
+      return;
+
+    _klass.pasteClipboard(cast(VteTerminal*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncRaiseWindow()
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.raiseWindow)
+      return;
+
+    _klass.raiseWindow(cast(VteTerminal*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncRefreshWindow()
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.refreshWindow)
+      return;
+
+    _klass.refreshWindow(cast(VteTerminal*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncResizeWindow(uint width, uint height)
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.resizeWindow)
+      return;
+
+    _klass.resizeWindow(cast(VteTerminal*)this._cPtr, width, height);
+  }
+
+  /** */
+  protected void vfuncRestoreWindow()
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.restoreWindow)
+      return;
+
+    _klass.restoreWindow(cast(VteTerminal*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncSelectionChanged()
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.selectionChanged)
+      return;
+
+    _klass.selectionChanged(cast(VteTerminal*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncSetupContextMenu(gid.vte3.event_context.EventContext context)
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.setupContextMenu)
+      return;
+
+    _klass.setupContextMenu(cast(VteTerminal*)this._cPtr, context ? cast(const(VteEventContext)*)context._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncTermpropChanged(string prop)
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.termpropChanged)
+      return;
+
+    const(char)* _prop = prop.toCString!(No.Malloc, No.Nullable);
+    _klass.termpropChanged(cast(VteTerminal*)this._cPtr, _prop);
+  }
+
+  /** */
+  protected void vfuncWindowTitleChanged()
+  {
+    auto _klass = cast(VteTerminalClass*)_vfuncClass;
+    if (!_klass.windowTitleChanged)
+      return;
+
+    _klass.windowTitleChanged(cast(VteTerminal*)this._cPtr);
   }
 
   /**
@@ -3342,6 +3629,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _childSetupCallback(void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.glib2.types.SpawnChildSetupFunc*)data;
 
       try
@@ -3356,6 +3644,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
     auto _childSetupCB = childSetup ? &_childSetupCallback : null;
     extern(C) void _callbackCallback(VteTerminal* terminal, GPid pid, GError* error, void* userData) nothrow
     {
+      gidAttachThread();
       ptrThawGC(userData);
       auto _dlg = cast(gid.vte3.types.TerminalSpawnAsyncCallback*)userData;
 
@@ -3427,6 +3716,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _childSetupCallback(void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.glib2.types.SpawnChildSetupFunc*)data;
 
       try
@@ -3520,6 +3810,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _childSetupCallback(void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.glib2.types.SpawnChildSetupFunc*)data;
 
       try
@@ -3534,6 +3825,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
     auto _childSetupCB = childSetup ? &_childSetupCallback : null;
     extern(C) void _callbackCallback(VteTerminal* terminal, GPid pid, GError* error, void* userData) nothrow
     {
+      gidAttachThread();
       ptrThawGC(userData);
       auto _dlg = cast(gid.vte3.types.TerminalSpawnAsyncCallback*)userData;
 
@@ -3654,6 +3946,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3707,6 +4000,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3761,6 +4055,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3812,6 +4107,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3861,6 +4157,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3905,6 +4202,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3952,6 +4250,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3999,6 +4298,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4044,6 +4344,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4088,6 +4389,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4132,6 +4434,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4178,6 +4481,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4224,6 +4528,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4280,6 +4585,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4332,6 +4638,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4376,6 +4683,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4420,6 +4728,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4464,6 +4773,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4508,6 +4818,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4558,6 +4869,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4608,6 +4920,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4652,6 +4965,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4696,6 +5010,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4746,6 +5061,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4796,6 +5112,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4840,6 +5157,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4899,6 +5217,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4960,6 +5279,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -5028,6 +5348,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -5087,6 +5408,7 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -5106,6 +5428,816 @@ class Terminal : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleText
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("window-title-changed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Terminal
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.vte3.terminal.Terminal), T.stringof ~ " is not derived from gid.vte3.terminal.Terminal");
+
+    gid.gtk4.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncBell", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "bell");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCharSizeChanged", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "char_size_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChildExited", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "child_exited");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCommit", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "commit");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncContentsChanged", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "contents_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCopyClipboard", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "copy_clipboard");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCursorMoved", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "cursor_moved");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDecreaseFontSize", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "decrease_font_size");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDeiconifyWindow", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "deiconify_window");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEncodingChanged", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "encoding_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEof", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "eof");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncIconTitleChanged", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "icon_title_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncIconifyWindow", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "iconify_window");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncIncreaseFontSize", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "increase_font_size");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncLowerWindow", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "lower_window");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMaximizeWindow", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "maximize_window");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMoveWindow", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "move_window");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPasteClipboard", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "paste_clipboard");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRaiseWindow", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "raise_window");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRefreshWindow", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "refresh_window");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncResizeWindow", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "resize_window");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRestoreWindow", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "restore_window");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSelectionChanged", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "selection_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetupContextMenu", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "setup_context_menu");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncTermpropChanged", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "termprop_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncWindowTitleChanged", true)[0]) == gid.vte3.terminal.Terminal))
+      _installVfunc(klass, "window_title_changed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(VteTerminalClass*)klass;
+
+    switch (vfunc)
+    {
+      case "bell":
+      {
+        static extern(C) void _vfuncBellTramp(VteTerminal* terminal) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.bell)
+              return (cast(typeof(&_vfuncBellTramp))_klass.bell)(terminal);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncBell();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncBell");
+          }
+        }
+
+        _klass.bell = cast(typeof(_klass.bell))&_vfuncBellTramp;
+        break;
+      }
+      case "char_size_changed":
+      {
+        static extern(C) void _vfuncCharSizeChangedTramp(VteTerminal* terminal, uint charWidth, uint charHeight) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.charSizeChanged)
+              return (cast(typeof(&_vfuncCharSizeChangedTramp))_klass.charSizeChanged)(terminal, charWidth, charHeight);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncCharSizeChanged(charWidth, charHeight);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncCharSizeChanged");
+          }
+        }
+
+        _klass.charSizeChanged = cast(typeof(_klass.charSizeChanged))&_vfuncCharSizeChangedTramp;
+        break;
+      }
+      case "child_exited":
+      {
+        static extern(C) void _vfuncChildExitedTramp(VteTerminal* terminal, int status) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.childExited)
+              return (cast(typeof(&_vfuncChildExitedTramp))_klass.childExited)(terminal, status);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncChildExited(status);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncChildExited");
+          }
+        }
+
+        _klass.childExited = cast(typeof(_klass.childExited))&_vfuncChildExitedTramp;
+        break;
+      }
+      case "commit":
+      {
+        static extern(C) void _vfuncCommitTramp(VteTerminal* terminal, const(char)* text, uint size) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.commit)
+              return (cast(typeof(&_vfuncCommitTramp))_klass.commit)(terminal, text, size);
+            return;
+          }
+
+          string _text = text.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncCommit(_text, size);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncCommit");
+          }
+        }
+
+        _klass.commit = cast(typeof(_klass.commit))&_vfuncCommitTramp;
+        break;
+      }
+      case "contents_changed":
+      {
+        static extern(C) void _vfuncContentsChangedTramp(VteTerminal* terminal) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.contentsChanged)
+              return (cast(typeof(&_vfuncContentsChangedTramp))_klass.contentsChanged)(terminal);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncContentsChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncContentsChanged");
+          }
+        }
+
+        _klass.contentsChanged = cast(typeof(_klass.contentsChanged))&_vfuncContentsChangedTramp;
+        break;
+      }
+      case "copy_clipboard":
+      {
+        static extern(C) void _vfuncCopyClipboardTramp(VteTerminal* terminal) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.copyClipboard)
+              return (cast(typeof(&_vfuncCopyClipboardTramp))_klass.copyClipboard)(terminal);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncCopyClipboard();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncCopyClipboard");
+          }
+        }
+
+        _klass.copyClipboard = cast(typeof(_klass.copyClipboard))&_vfuncCopyClipboardTramp;
+        break;
+      }
+      case "cursor_moved":
+      {
+        static extern(C) void _vfuncCursorMovedTramp(VteTerminal* terminal) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.cursorMoved)
+              return (cast(typeof(&_vfuncCursorMovedTramp))_klass.cursorMoved)(terminal);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncCursorMoved();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncCursorMoved");
+          }
+        }
+
+        _klass.cursorMoved = cast(typeof(_klass.cursorMoved))&_vfuncCursorMovedTramp;
+        break;
+      }
+      case "decrease_font_size":
+      {
+        static extern(C) void _vfuncDecreaseFontSizeTramp(VteTerminal* terminal) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.decreaseFontSize)
+              return (cast(typeof(&_vfuncDecreaseFontSizeTramp))_klass.decreaseFontSize)(terminal);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDecreaseFontSize();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncDecreaseFontSize");
+          }
+        }
+
+        _klass.decreaseFontSize = cast(typeof(_klass.decreaseFontSize))&_vfuncDecreaseFontSizeTramp;
+        break;
+      }
+      case "deiconify_window":
+      {
+        static extern(C) void _vfuncDeiconifyWindowTramp(VteTerminal* terminal) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.deiconifyWindow)
+              return (cast(typeof(&_vfuncDeiconifyWindowTramp))_klass.deiconifyWindow)(terminal);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDeiconifyWindow();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncDeiconifyWindow");
+          }
+        }
+
+        _klass.deiconifyWindow = cast(typeof(_klass.deiconifyWindow))&_vfuncDeiconifyWindowTramp;
+        break;
+      }
+      case "encoding_changed":
+      {
+        static extern(C) void _vfuncEncodingChangedTramp(VteTerminal* terminal) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.encodingChanged)
+              return (cast(typeof(&_vfuncEncodingChangedTramp))_klass.encodingChanged)(terminal);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncEncodingChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncEncodingChanged");
+          }
+        }
+
+        _klass.encodingChanged = cast(typeof(_klass.encodingChanged))&_vfuncEncodingChangedTramp;
+        break;
+      }
+      case "eof":
+      {
+        static extern(C) void _vfuncEofTramp(VteTerminal* terminal) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.eof)
+              return (cast(typeof(&_vfuncEofTramp))_klass.eof)(terminal);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncEof();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncEof");
+          }
+        }
+
+        _klass.eof = cast(typeof(_klass.eof))&_vfuncEofTramp;
+        break;
+      }
+      case "icon_title_changed":
+      {
+        static extern(C) void _vfuncIconTitleChangedTramp(VteTerminal* terminal) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.iconTitleChanged)
+              return (cast(typeof(&_vfuncIconTitleChangedTramp))_klass.iconTitleChanged)(terminal);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncIconTitleChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncIconTitleChanged");
+          }
+        }
+
+        _klass.iconTitleChanged = cast(typeof(_klass.iconTitleChanged))&_vfuncIconTitleChangedTramp;
+        break;
+      }
+      case "iconify_window":
+      {
+        static extern(C) void _vfuncIconifyWindowTramp(VteTerminal* terminal) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.iconifyWindow)
+              return (cast(typeof(&_vfuncIconifyWindowTramp))_klass.iconifyWindow)(terminal);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncIconifyWindow();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncIconifyWindow");
+          }
+        }
+
+        _klass.iconifyWindow = cast(typeof(_klass.iconifyWindow))&_vfuncIconifyWindowTramp;
+        break;
+      }
+      case "increase_font_size":
+      {
+        static extern(C) void _vfuncIncreaseFontSizeTramp(VteTerminal* terminal) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.increaseFontSize)
+              return (cast(typeof(&_vfuncIncreaseFontSizeTramp))_klass.increaseFontSize)(terminal);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncIncreaseFontSize();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncIncreaseFontSize");
+          }
+        }
+
+        _klass.increaseFontSize = cast(typeof(_klass.increaseFontSize))&_vfuncIncreaseFontSizeTramp;
+        break;
+      }
+      case "lower_window":
+      {
+        static extern(C) void _vfuncLowerWindowTramp(VteTerminal* terminal) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.lowerWindow)
+              return (cast(typeof(&_vfuncLowerWindowTramp))_klass.lowerWindow)(terminal);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncLowerWindow();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncLowerWindow");
+          }
+        }
+
+        _klass.lowerWindow = cast(typeof(_klass.lowerWindow))&_vfuncLowerWindowTramp;
+        break;
+      }
+      case "maximize_window":
+      {
+        static extern(C) void _vfuncMaximizeWindowTramp(VteTerminal* terminal) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.maximizeWindow)
+              return (cast(typeof(&_vfuncMaximizeWindowTramp))_klass.maximizeWindow)(terminal);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMaximizeWindow();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncMaximizeWindow");
+          }
+        }
+
+        _klass.maximizeWindow = cast(typeof(_klass.maximizeWindow))&_vfuncMaximizeWindowTramp;
+        break;
+      }
+      case "move_window":
+      {
+        static extern(C) void _vfuncMoveWindowTramp(VteTerminal* terminal, uint x, uint y) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.moveWindow)
+              return (cast(typeof(&_vfuncMoveWindowTramp))_klass.moveWindow)(terminal, x, y);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMoveWindow(x, y);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncMoveWindow");
+          }
+        }
+
+        _klass.moveWindow = cast(typeof(_klass.moveWindow))&_vfuncMoveWindowTramp;
+        break;
+      }
+      case "paste_clipboard":
+      {
+        static extern(C) void _vfuncPasteClipboardTramp(VteTerminal* terminal) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.pasteClipboard)
+              return (cast(typeof(&_vfuncPasteClipboardTramp))_klass.pasteClipboard)(terminal);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPasteClipboard();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncPasteClipboard");
+          }
+        }
+
+        _klass.pasteClipboard = cast(typeof(_klass.pasteClipboard))&_vfuncPasteClipboardTramp;
+        break;
+      }
+      case "raise_window":
+      {
+        static extern(C) void _vfuncRaiseWindowTramp(VteTerminal* terminal) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.raiseWindow)
+              return (cast(typeof(&_vfuncRaiseWindowTramp))_klass.raiseWindow)(terminal);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRaiseWindow();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncRaiseWindow");
+          }
+        }
+
+        _klass.raiseWindow = cast(typeof(_klass.raiseWindow))&_vfuncRaiseWindowTramp;
+        break;
+      }
+      case "refresh_window":
+      {
+        static extern(C) void _vfuncRefreshWindowTramp(VteTerminal* terminal) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.refreshWindow)
+              return (cast(typeof(&_vfuncRefreshWindowTramp))_klass.refreshWindow)(terminal);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRefreshWindow();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncRefreshWindow");
+          }
+        }
+
+        _klass.refreshWindow = cast(typeof(_klass.refreshWindow))&_vfuncRefreshWindowTramp;
+        break;
+      }
+      case "resize_window":
+      {
+        static extern(C) void _vfuncResizeWindowTramp(VteTerminal* terminal, uint width, uint height) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.resizeWindow)
+              return (cast(typeof(&_vfuncResizeWindowTramp))_klass.resizeWindow)(terminal, width, height);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncResizeWindow(width, height);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncResizeWindow");
+          }
+        }
+
+        _klass.resizeWindow = cast(typeof(_klass.resizeWindow))&_vfuncResizeWindowTramp;
+        break;
+      }
+      case "restore_window":
+      {
+        static extern(C) void _vfuncRestoreWindowTramp(VteTerminal* terminal) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.restoreWindow)
+              return (cast(typeof(&_vfuncRestoreWindowTramp))_klass.restoreWindow)(terminal);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRestoreWindow();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncRestoreWindow");
+          }
+        }
+
+        _klass.restoreWindow = cast(typeof(_klass.restoreWindow))&_vfuncRestoreWindowTramp;
+        break;
+      }
+      case "selection_changed":
+      {
+        static extern(C) void _vfuncSelectionChangedTramp(VteTerminal* terminal) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.selectionChanged)
+              return (cast(typeof(&_vfuncSelectionChangedTramp))_klass.selectionChanged)(terminal);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSelectionChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncSelectionChanged");
+          }
+        }
+
+        _klass.selectionChanged = cast(typeof(_klass.selectionChanged))&_vfuncSelectionChangedTramp;
+        break;
+      }
+      case "setup_context_menu":
+      {
+        static extern(C) void _vfuncSetupContextMenuTramp(VteTerminal* terminal, const(VteEventContext)* context) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.setupContextMenu)
+              return (cast(typeof(&_vfuncSetupContextMenuTramp))_klass.setupContextMenu)(terminal, context);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSetupContextMenu(context ? new gid.vte3.event_context.EventContext(cast(void*)context, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncSetupContextMenu");
+          }
+        }
+
+        _klass.setupContextMenu = cast(typeof(_klass.setupContextMenu))&_vfuncSetupContextMenuTramp;
+        break;
+      }
+      case "termprop_changed":
+      {
+        static extern(C) void _vfuncTermpropChangedTramp(VteTerminal* terminal, const(char)* prop) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.termpropChanged)
+              return (cast(typeof(&_vfuncTermpropChangedTramp))_klass.termpropChanged)(terminal, prop);
+            return;
+          }
+
+          string _prop = prop.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncTermpropChanged(_prop);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncTermpropChanged");
+          }
+        }
+
+        _klass.termpropChanged = cast(typeof(_klass.termpropChanged))&_vfuncTermpropChangedTramp;
+        break;
+      }
+      case "window_title_changed":
+      {
+        static extern(C) void _vfuncWindowTitleChangedTramp(VteTerminal* terminal) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.vte3.terminal.Terminal)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)terminal);
+          if (!_obj)
+          {
+            auto _klass = cast(VteTerminalClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)terminal);
+            if (_klass.windowTitleChanged)
+              return (cast(typeof(&_vfuncWindowTitleChangedTramp))_klass.windowTitleChanged)(terminal);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncWindowTitleChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.vte3.terminal.Terminal.vfuncWindowTitleChanged");
+          }
+        }
+
+        _klass.windowTitleChanged = cast(typeof(_klass.windowTitleChanged))&_vfuncWindowTitleChangedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

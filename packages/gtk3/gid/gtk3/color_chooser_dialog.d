@@ -88,10 +88,17 @@ class ColorChooserDialog : gid.gtk3.dialog.Dialog, gid.gtk3.color_chooser.ColorC
   */
   this(string title = null, gid.gtk3.window.Window parent = null) nothrow
   {
-    GtkWidget* _cretval;
-    const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gtk_color_chooser_dialog_new(_title, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, title !is null || parent !is null), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gtk_color_chooser_dialog_new(_title, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
+      this(_cretval, No.Take);
+    }
   }
 }
 

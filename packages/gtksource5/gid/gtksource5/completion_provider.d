@@ -39,6 +39,16 @@ interface CompletionProvider : GidWrap
     return cast(void function())gtk_source_completion_provider_get_type != &gidSymbolNotFound ? gtk_source_completion_provider_get_type() : cast(GType)0;
   }
 
+
+
+
+
+
+
+
+
+
+
   /**
       This function requests proposal to be activated by the
       #GtkSourceCompletionProvider.

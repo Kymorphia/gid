@@ -208,9 +208,16 @@ class SidebarSection : gid.gobject2.object.ObjectWrap, gid.gtk4.buildable.Builda
   */
   this() nothrow
   {
-    AdwSidebarSection* _cretval;
-    _cretval = adw_sidebar_section_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      AdwSidebarSection* _cretval;
+      _cretval = adw_sidebar_section_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -253,6 +260,7 @@ class SidebarSection : gid.gobject2.object.ObjectWrap, gid.gtk4.buildable.Builda
   {
     extern(C) AdwSidebarItem* _createItemFuncCallback(GObject* item, void* userData) nothrow
     {
+      gidAttachThread();
       gid.adw1.sidebar_item.SidebarItem _dretval;
       auto _dlg = cast(gid.adw1.types.SidebarSectionCreateItemFunc*)userData;
 

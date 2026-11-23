@@ -25,6 +25,15 @@ class TreeListModel : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListMo
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -134,29 +143,37 @@ class TreeListModel : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListMo
   */
   this(gid.gio2.list_model.ListModel root, bool passthrough, bool autoexpand, gid.gtk4.types.TreeListModelCreateModelFunc createFunc) nothrow
   {
-    extern(C) GListModel* _createFuncCallback(GObject* item, void* userData) nothrow
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
     {
-      gid.gio2.list_model.ListModel _dretval;
-      auto _dlg = cast(gid.gtk4.types.TreeListModelCreateModelFunc*)userData;
-
-      try
-      {
-        _dretval = (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)item, No.Take));
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.types.TreeListModelCreateModelFunc");
-      }
-      auto _retval = _dretval ? cast(GListModel*)(cast(gid.gobject2.object.ObjectWrap)_dretval)._cPtr(Yes.Dup) : null;
-
-      return _retval;
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }
-    auto _createFuncCB = createFunc ? &_createFuncCallback : null;
-    GtkTreeListModel* _cretval;
-    auto _createFunc = createFunc ? freezeDelegate(cast(void*)&createFunc) : null;
-    GDestroyNotify _createFuncDestroyCB = createFunc ? &thawDelegate : null;
-    _cretval = gtk_tree_list_model_new(root ? cast(GListModel*)(cast(gid.gobject2.object.ObjectWrap)root)._cPtr(Yes.Dup) : null, passthrough, autoexpand, _createFuncCB, _createFunc, _createFuncDestroyCB);
-    this(_cretval, Yes.Take);
+    else
+    {
+      extern(C) GListModel* _createFuncCallback(GObject* item, void* userData) nothrow
+      {
+        gidAttachThread();
+        gid.gio2.list_model.ListModel _dretval;
+        auto _dlg = cast(gid.gtk4.types.TreeListModelCreateModelFunc*)userData;
+
+        try
+        {
+          _dretval = (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)item, No.Take));
+        }
+        catch (Exception e)
+        {
+          gidInvokeCallbackExceptionHandler(e, "gid.gtk4.types.TreeListModelCreateModelFunc");
+        }
+        auto _retval = _dretval ? cast(GListModel*)(cast(gid.gobject2.object.ObjectWrap)_dretval)._cPtr(Yes.Dup) : null;
+
+        return _retval;
+      }
+      auto _createFuncCB = createFunc ? &_createFuncCallback : null;
+      GtkTreeListModel* _cretval;
+      auto _createFunc = createFunc ? freezeDelegate(cast(void*)&createFunc) : null;
+      GDestroyNotify _createFuncDestroyCB = createFunc ? &thawDelegate : null;
+      _cretval = gtk_tree_list_model_new(root ? cast(GListModel*)(cast(gid.gobject2.object.ObjectWrap)root)._cPtr(Yes.Dup) : null, passthrough, autoexpand, _createFuncCB, _createFunc, _createFuncDestroyCB);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

@@ -28,6 +28,15 @@ class InetAddressMask : gid.gobject2.object.ObjectWrap, gid.gio2.initable.Initab
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -123,12 +132,19 @@ class InetAddressMask : gid.gobject2.object.ObjectWrap, gid.gio2.initable.Initab
   */
   this(gid.gio2.inet_address.InetAddress addr, uint length)
   {
-    GInetAddressMask* _cretval;
-    GError *_err;
-    _cretval = g_inet_address_mask_new(addr ? cast(GInetAddress*)addr._cPtr(No.Dup) : null, length, &_err);
-    if (_err)
-      throw new ErrorWrap(_err, Yes.Take);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GInetAddressMask* _cretval;
+      GError *_err;
+      _cretval = g_inet_address_mask_new(addr ? cast(GInetAddress*)addr._cPtr(No.Dup) : null, length, &_err);
+      if (_err)
+        throw new ErrorWrap(_err, Yes.Take);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

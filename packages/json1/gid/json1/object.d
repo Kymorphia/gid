@@ -124,6 +124,7 @@ class ObjectWrap : gid.gobject2.boxed.BoxedWrap!(json_object_get_type)
   {
     extern(C) void _funcCallback(JsonObject* object, const(char)* memberName, JsonNode* memberNode, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.json1.types.ObjectForeach*)userData;
       auto _object = object ? new gid.json1.object.ObjectWrap(cast(void*)object, Yes.Take)._cBorrow : null;
       string _memberName = memberName.fromCString!(No.Free);

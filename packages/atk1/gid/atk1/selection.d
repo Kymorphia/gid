@@ -36,6 +36,14 @@ interface Selection : GidWrap
     return cast(void function())atk_selection_get_type != &gidSymbolNotFound ? atk_selection_get_type() : cast(GType)0;
   }
 
+
+
+
+
+
+
+
+
   /**
       Adds the specified accessible child of the object to the
       object's selection.
@@ -136,6 +144,7 @@ interface Selection : GidWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

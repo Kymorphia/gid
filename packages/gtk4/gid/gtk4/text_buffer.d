@@ -173,9 +173,343 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
   */
   this(gid.gtk4.text_tag_table.TextTagTable table = null) nothrow
   {
-    GtkTextBuffer* _cretval;
-    _cretval = gtk_text_buffer_new(table ? cast(GtkTextTagTable*)table._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, table !is null), Yes.Take);
+    }
+    else
+    {
+      GtkTextBuffer* _cretval;
+      _cretval = gtk_text_buffer_new(table ? cast(GtkTextTagTable*)table._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /**
+      Emits the “apply-tag” signal on buffer.
+      
+      The default handler for the signal applies
+      tag to the given range. start and end do
+      not have to be in order.
+  
+      Params:
+        tag = a [gid.gtk4.text_tag.TextTag]
+        start = one bound of range to be tagged
+        end = other bound of range to be tagged
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncApplyTag` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncApplyTag(gid.gtk4.text_tag.TextTag tag, gid.gtk4.text_iter.TextIter start, gid.gtk4.text_iter.TextIter end)
+  {
+    auto _klass = cast(GtkTextBufferClass*)_vfuncClass;
+    if (!_klass.applyTag)
+      return;
+
+    _klass.applyTag(cast(GtkTextBuffer*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Called to indicate that the buffer operations between here and a
+      call to [gid.gtk4.text_buffer.TextBuffer.endUserAction] are part of a single
+      user-visible operation.
+      
+      The operations between [gid.gtk4.text_buffer.TextBuffer.beginUserAction] and
+      [gid.gtk4.text_buffer.TextBuffer.endUserAction] can then be grouped when creating
+      an undo stack. [gid.gtk4.text_buffer.TextBuffer] maintains a count of calls to
+      [gid.gtk4.text_buffer.TextBuffer.beginUserAction] that have not been closed with
+      a call to [gid.gtk4.text_buffer.TextBuffer.endUserAction], and emits the
+      “begin-user-action” and “end-user-action” signals only for the
+      outermost pair of calls. This allows you to build user actions
+      from other user actions.
+      
+      The “interactive” buffer mutation functions, such as
+      [gid.gtk4.text_buffer.TextBuffer.insertInteractive], automatically call
+      begin/end user action around the buffer operations they perform,
+      so there's no need to add extra calls if you user action consists
+      solely of a single call to one of those functions.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncBeginUserAction` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncBeginUserAction()
+  {
+    auto _klass = cast(GtkTextBufferClass*)_vfuncClass;
+    if (!_klass.beginUserAction)
+      return;
+
+    _klass.beginUserAction(cast(GtkTextBuffer*)this._cPtr);
+  }
+
+  /**
+      The class handler for the `GtkTextBuffer::changed` signal.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncChanged()
+  {
+    auto _klass = cast(GtkTextBufferClass*)_vfuncClass;
+    if (!_klass.changed)
+      return;
+
+    _klass.changed(cast(GtkTextBuffer*)this._cPtr);
+  }
+
+  /**
+      The class handler for the `GtkTextBuffer::delete-range` signal.
+  
+      Params:
+        start =  (modified in place, changes are seen by the caller)
+        end =  (modified in place, changes are seen by the caller)
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDeleteRange` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDeleteRange(gid.gtk4.text_iter.TextIter start, gid.gtk4.text_iter.TextIter end)
+  {
+    auto _klass = cast(GtkTextBufferClass*)_vfuncClass;
+    if (!_klass.deleteRange)
+      return;
+
+    _klass.deleteRange(cast(GtkTextBuffer*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Ends a user-visible operation.
+      
+      Should be paired with a call to
+      [gid.gtk4.text_buffer.TextBuffer.beginUserAction].
+      See that function for a full explanation.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncEndUserAction` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncEndUserAction()
+  {
+    auto _klass = cast(GtkTextBufferClass*)_vfuncClass;
+    if (!_klass.endUserAction)
+      return;
+
+    _klass.endUserAction(cast(GtkTextBuffer*)this._cPtr);
+  }
+
+  /**
+      Inserts a child widget anchor into the text buffer at iter.
+      
+      The anchor will be counted as one character in character counts, and
+      when obtaining the buffer contents as a string, will be represented
+      by the Unicode “object replacement character” 0xFFFC. Note that the
+      “slice” variants for obtaining portions of the buffer as a string
+      include this character for child anchors, but the “text” variants do
+      not. E.g. see [gid.gtk4.text_buffer.TextBuffer.getSlice] and
+      [gid.gtk4.text_buffer.TextBuffer.getText].
+      
+      Consider [gid.gtk4.text_buffer.TextBuffer.createChildAnchor] as a more
+      convenient alternative to this function. The buffer will add a
+      reference to the anchor, so you can unref it after insertion.
+  
+      Params:
+        iter = location to insert the anchor (modified in place, changes are seen by the caller)
+        anchor = a [gid.gtk4.text_child_anchor.TextChildAnchor]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncInsertChildAnchor` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncInsertChildAnchor(gid.gtk4.text_iter.TextIter iter, gid.gtk4.text_child_anchor.TextChildAnchor anchor)
+  {
+    auto _klass = cast(GtkTextBufferClass*)_vfuncClass;
+    if (!_klass.insertChildAnchor)
+      return;
+
+    _klass.insertChildAnchor(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, anchor ? cast(GtkTextChildAnchor*)anchor._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Inserts an image into the text buffer at iter.
+      
+      The image will be counted as one character in character counts,
+      and when obtaining the buffer contents as a string, will be
+      represented by the Unicode “object replacement character” 0xFFFC.
+      Note that the “slice” variants for obtaining portions of the buffer
+      as a string include this character for paintable, but the “text”
+      variants do not. e.g. see [gid.gtk4.text_buffer.TextBuffer.getSlice] and
+      [gid.gtk4.text_buffer.TextBuffer.getText].
+  
+      Params:
+        iter = location to insert the paintable (modified in place, changes are seen by the caller)
+        paintable = a [gid.gdk4.paintable.Paintable]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncInsertPaintable` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncInsertPaintable(gid.gtk4.text_iter.TextIter iter, gid.gdk4.paintable.Paintable paintable)
+  {
+    auto _klass = cast(GtkTextBufferClass*)_vfuncClass;
+    if (!_klass.insertPaintable)
+      return;
+
+    _klass.insertPaintable(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, paintable ? cast(GdkPaintable*)(cast(gid.gobject2.object.ObjectWrap)paintable)._cPtr(No.Dup) : null);
+  }
+
+  /**
+      The class handler for the `GtkTextBuffer::insert-text` signal.
+  
+      Params:
+        pos =  (modified in place, changes are seen by the caller)
+        newText = 
+        newTextLength = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncInsertText` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncInsertText(gid.gtk4.text_iter.TextIter pos, string newText, int newTextLength)
+  {
+    auto _klass = cast(GtkTextBufferClass*)_vfuncClass;
+    if (!_klass.insertText)
+      return;
+
+    const(char)* _newText = newText.toCString!(No.Malloc, No.Nullable);
+    _klass.insertText(cast(GtkTextBuffer*)this._cPtr, pos ? cast(GtkTextIter*)pos._cPtr(No.Dup) : null, _newText, newTextLength);
+  }
+
+  /**
+      The class handler for the `GtkTextBuffer::mark-deleted` signal.
+  
+      Params:
+        mark = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncMarkDeleted` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncMarkDeleted(gid.gtk4.text_mark.TextMark mark)
+  {
+    auto _klass = cast(GtkTextBufferClass*)_vfuncClass;
+    if (!_klass.markDeleted)
+      return;
+
+    _klass.markDeleted(cast(GtkTextBuffer*)this._cPtr, mark ? cast(GtkTextMark*)mark._cPtr(No.Dup) : null);
+  }
+
+  /**
+      The class handler for the `GtkTextBuffer::mark-set` signal.
+  
+      Params:
+        location = 
+        mark = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncMarkSet` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncMarkSet(gid.gtk4.text_iter.TextIter location, gid.gtk4.text_mark.TextMark mark)
+  {
+    auto _klass = cast(GtkTextBufferClass*)_vfuncClass;
+    if (!_klass.markSet)
+      return;
+
+    _klass.markSet(cast(GtkTextBuffer*)this._cPtr, location ? cast(const(GtkTextIter)*)location._cPtr(No.Dup) : null, mark ? cast(GtkTextMark*)mark._cPtr(No.Dup) : null);
+  }
+
+  /**
+      The class handler for the `GtkTextBuffer::modified-changed` signal.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncModifiedChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncModifiedChanged()
+  {
+    auto _klass = cast(GtkTextBufferClass*)_vfuncClass;
+    if (!_klass.modifiedChanged)
+      return;
+
+    _klass.modifiedChanged(cast(GtkTextBuffer*)this._cPtr);
+  }
+
+  /**
+      The class handler for the `GtkTextBuffer::paste-done` signal.
+  
+      Params:
+        clipboard = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPasteDone` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncPasteDone(gid.gdk4.clipboard.Clipboard clipboard)
+  {
+    auto _klass = cast(GtkTextBufferClass*)_vfuncClass;
+    if (!_klass.pasteDone)
+      return;
+
+    _klass.pasteDone(cast(GtkTextBuffer*)this._cPtr, clipboard ? cast(GdkClipboard*)clipboard._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Redoes the next redoable action on the buffer, if there is one.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRedo` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncRedo()
+  {
+    auto _klass = cast(GtkTextBufferClass*)_vfuncClass;
+    if (!_klass.redo)
+      return;
+
+    _klass.redo(cast(GtkTextBuffer*)this._cPtr);
+  }
+
+  /**
+      Emits the “remove-tag” signal.
+      
+      The default handler for the signal removes all occurrences
+      of tag from the given range. start and end don’t have
+      to be in order.
+  
+      Params:
+        tag = a [gid.gtk4.text_tag.TextTag]
+        start = one bound of range to be untagged
+        end = other bound of range to be untagged
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRemoveTag` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncRemoveTag(gid.gtk4.text_tag.TextTag tag, gid.gtk4.text_iter.TextIter start, gid.gtk4.text_iter.TextIter end)
+  {
+    auto _klass = cast(GtkTextBufferClass*)_vfuncClass;
+    if (!_klass.removeTag)
+      return;
+
+    _klass.removeTag(cast(GtkTextBuffer*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Undoes the last undoable action on the buffer, if there is one.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncUndo` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncUndo()
+  {
+    auto _klass = cast(GtkTextBufferClass*)_vfuncClass;
+    if (!_klass.undo)
+      return;
+
+    _klass.undo(cast(GtkTextBuffer*)this._cPtr);
   }
 
   /**
@@ -202,6 +536,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _commitNotifyCallback(GtkTextBuffer* buffer, GtkTextBufferNotifyFlags flags, uint position, uint length, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk4.types.TextBufferCommitNotify*)userData;
 
       try
@@ -1525,6 +1860,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1587,6 +1923,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1631,6 +1968,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1691,6 +2029,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1751,6 +2090,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1810,6 +2150,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1875,6 +2216,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1941,6 +2283,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1997,6 +2340,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2054,6 +2398,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2106,6 +2451,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2157,6 +2503,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2205,6 +2552,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2267,6 +2615,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2322,6 +2671,7 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2341,6 +2691,506 @@ class TextBuffer : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("undo", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from TextBuffer
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.text_buffer.TextBuffer), T.stringof ~ " is not derived from gid.gtk4.text_buffer.TextBuffer");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncApplyTag", true)[0]) == gid.gtk4.text_buffer.TextBuffer))
+      _installVfunc(klass, "apply_tag");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncBeginUserAction", true)[0]) == gid.gtk4.text_buffer.TextBuffer))
+      _installVfunc(klass, "begin_user_action");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChanged", true)[0]) == gid.gtk4.text_buffer.TextBuffer))
+      _installVfunc(klass, "changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDeleteRange", true)[0]) == gid.gtk4.text_buffer.TextBuffer))
+      _installVfunc(klass, "delete_range");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEndUserAction", true)[0]) == gid.gtk4.text_buffer.TextBuffer))
+      _installVfunc(klass, "end_user_action");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncInsertChildAnchor", true)[0]) == gid.gtk4.text_buffer.TextBuffer))
+      _installVfunc(klass, "insert_child_anchor");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncInsertPaintable", true)[0]) == gid.gtk4.text_buffer.TextBuffer))
+      _installVfunc(klass, "insert_paintable");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncInsertText", true)[0]) == gid.gtk4.text_buffer.TextBuffer))
+      _installVfunc(klass, "insert_text");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMarkDeleted", true)[0]) == gid.gtk4.text_buffer.TextBuffer))
+      _installVfunc(klass, "mark_deleted");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMarkSet", true)[0]) == gid.gtk4.text_buffer.TextBuffer))
+      _installVfunc(klass, "mark_set");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncModifiedChanged", true)[0]) == gid.gtk4.text_buffer.TextBuffer))
+      _installVfunc(klass, "modified_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPasteDone", true)[0]) == gid.gtk4.text_buffer.TextBuffer))
+      _installVfunc(klass, "paste_done");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRedo", true)[0]) == gid.gtk4.text_buffer.TextBuffer))
+      _installVfunc(klass, "redo");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRemoveTag", true)[0]) == gid.gtk4.text_buffer.TextBuffer))
+      _installVfunc(klass, "remove_tag");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUndo", true)[0]) == gid.gtk4.text_buffer.TextBuffer))
+      _installVfunc(klass, "undo");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkTextBufferClass*)klass;
+
+    switch (vfunc)
+    {
+      case "apply_tag":
+      {
+        static extern(C) void _vfuncApplyTagTramp(GtkTextBuffer* buffer, GtkTextTag* tag, const(GtkTextIter)* start, const(GtkTextIter)* end) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.applyTag)
+              return (cast(typeof(&_vfuncApplyTagTramp))_klass.applyTag)(buffer, tag, start, end);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncApplyTag(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.text_tag.TextTag)(cast(void*)tag, No.Take), start ? new gid.gtk4.text_iter.TextIter(cast(void*)start, No.Take) : null, end ? new gid.gtk4.text_iter.TextIter(cast(void*)end, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.text_buffer.TextBuffer.vfuncApplyTag");
+          }
+        }
+
+        _klass.applyTag = cast(typeof(_klass.applyTag))&_vfuncApplyTagTramp;
+        break;
+      }
+      case "begin_user_action":
+      {
+        static extern(C) void _vfuncBeginUserActionTramp(GtkTextBuffer* buffer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.beginUserAction)
+              return (cast(typeof(&_vfuncBeginUserActionTramp))_klass.beginUserAction)(buffer);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncBeginUserAction();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.text_buffer.TextBuffer.vfuncBeginUserAction");
+          }
+        }
+
+        _klass.beginUserAction = cast(typeof(_klass.beginUserAction))&_vfuncBeginUserActionTramp;
+        break;
+      }
+      case "changed":
+      {
+        static extern(C) void _vfuncChangedTramp(GtkTextBuffer* buffer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.changed)
+              return (cast(typeof(&_vfuncChangedTramp))_klass.changed)(buffer);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.text_buffer.TextBuffer.vfuncChanged");
+          }
+        }
+
+        _klass.changed = cast(typeof(_klass.changed))&_vfuncChangedTramp;
+        break;
+      }
+      case "delete_range":
+      {
+        static extern(C) void _vfuncDeleteRangeTramp(GtkTextBuffer* buffer, GtkTextIter* start, GtkTextIter* end) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.deleteRange)
+              return (cast(typeof(&_vfuncDeleteRangeTramp))_klass.deleteRange)(buffer, start, end);
+            return;
+          }
+
+          auto _start = start ? new gid.gtk4.text_iter.TextIter(cast(void*)start, Yes.Take)._cBorrow : null;
+          auto _end = end ? new gid.gtk4.text_iter.TextIter(cast(void*)end, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncDeleteRange(_start, _end);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.text_buffer.TextBuffer.vfuncDeleteRange");
+          }
+          if (_start)
+            _start._cUnborrow;
+          if (_end)
+            _end._cUnborrow;
+
+        }
+
+        _klass.deleteRange = cast(typeof(_klass.deleteRange))&_vfuncDeleteRangeTramp;
+        break;
+      }
+      case "end_user_action":
+      {
+        static extern(C) void _vfuncEndUserActionTramp(GtkTextBuffer* buffer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.endUserAction)
+              return (cast(typeof(&_vfuncEndUserActionTramp))_klass.endUserAction)(buffer);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncEndUserAction();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.text_buffer.TextBuffer.vfuncEndUserAction");
+          }
+        }
+
+        _klass.endUserAction = cast(typeof(_klass.endUserAction))&_vfuncEndUserActionTramp;
+        break;
+      }
+      case "insert_child_anchor":
+      {
+        static extern(C) void _vfuncInsertChildAnchorTramp(GtkTextBuffer* buffer, GtkTextIter* iter, GtkTextChildAnchor* anchor) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.insertChildAnchor)
+              return (cast(typeof(&_vfuncInsertChildAnchorTramp))_klass.insertChildAnchor)(buffer, iter, anchor);
+            return;
+          }
+
+          auto _iter = iter ? new gid.gtk4.text_iter.TextIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncInsertChildAnchor(_iter, gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.text_child_anchor.TextChildAnchor)(cast(void*)anchor, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.text_buffer.TextBuffer.vfuncInsertChildAnchor");
+          }
+          if (_iter)
+            _iter._cUnborrow;
+
+        }
+
+        _klass.insertChildAnchor = cast(typeof(_klass.insertChildAnchor))&_vfuncInsertChildAnchorTramp;
+        break;
+      }
+      case "insert_paintable":
+      {
+        static extern(C) void _vfuncInsertPaintableTramp(GtkTextBuffer* buffer, GtkTextIter* iter, GdkPaintable* paintable) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.insertPaintable)
+              return (cast(typeof(&_vfuncInsertPaintableTramp))_klass.insertPaintable)(buffer, iter, paintable);
+            return;
+          }
+
+          auto _iter = iter ? new gid.gtk4.text_iter.TextIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncInsertPaintable(_iter, gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk4.paintable.Paintable)(cast(void*)paintable, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.text_buffer.TextBuffer.vfuncInsertPaintable");
+          }
+          if (_iter)
+            _iter._cUnborrow;
+
+        }
+
+        _klass.insertPaintable = cast(typeof(_klass.insertPaintable))&_vfuncInsertPaintableTramp;
+        break;
+      }
+      case "insert_text":
+      {
+        static extern(C) void _vfuncInsertTextTramp(GtkTextBuffer* buffer, GtkTextIter* pos, const(char)* newText, int newTextLength) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.insertText)
+              return (cast(typeof(&_vfuncInsertTextTramp))_klass.insertText)(buffer, pos, newText, newTextLength);
+            return;
+          }
+
+          auto _pos = pos ? new gid.gtk4.text_iter.TextIter(cast(void*)pos, Yes.Take)._cBorrow : null;
+          string _newText = newText.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncInsertText(_pos, _newText, newTextLength);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.text_buffer.TextBuffer.vfuncInsertText");
+          }
+          if (_pos)
+            _pos._cUnborrow;
+
+        }
+
+        _klass.insertText = cast(typeof(_klass.insertText))&_vfuncInsertTextTramp;
+        break;
+      }
+      case "mark_deleted":
+      {
+        static extern(C) void _vfuncMarkDeletedTramp(GtkTextBuffer* buffer, GtkTextMark* mark) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.markDeleted)
+              return (cast(typeof(&_vfuncMarkDeletedTramp))_klass.markDeleted)(buffer, mark);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMarkDeleted(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.text_mark.TextMark)(cast(void*)mark, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.text_buffer.TextBuffer.vfuncMarkDeleted");
+          }
+        }
+
+        _klass.markDeleted = cast(typeof(_klass.markDeleted))&_vfuncMarkDeletedTramp;
+        break;
+      }
+      case "mark_set":
+      {
+        static extern(C) void _vfuncMarkSetTramp(GtkTextBuffer* buffer, const(GtkTextIter)* location, GtkTextMark* mark) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.markSet)
+              return (cast(typeof(&_vfuncMarkSetTramp))_klass.markSet)(buffer, location, mark);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMarkSet(location ? new gid.gtk4.text_iter.TextIter(cast(void*)location, No.Take) : null, gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.text_mark.TextMark)(cast(void*)mark, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.text_buffer.TextBuffer.vfuncMarkSet");
+          }
+        }
+
+        _klass.markSet = cast(typeof(_klass.markSet))&_vfuncMarkSetTramp;
+        break;
+      }
+      case "modified_changed":
+      {
+        static extern(C) void _vfuncModifiedChangedTramp(GtkTextBuffer* buffer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.modifiedChanged)
+              return (cast(typeof(&_vfuncModifiedChangedTramp))_klass.modifiedChanged)(buffer);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncModifiedChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.text_buffer.TextBuffer.vfuncModifiedChanged");
+          }
+        }
+
+        _klass.modifiedChanged = cast(typeof(_klass.modifiedChanged))&_vfuncModifiedChangedTramp;
+        break;
+      }
+      case "paste_done":
+      {
+        static extern(C) void _vfuncPasteDoneTramp(GtkTextBuffer* buffer, GdkClipboard* clipboard) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.pasteDone)
+              return (cast(typeof(&_vfuncPasteDoneTramp))_klass.pasteDone)(buffer, clipboard);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPasteDone(gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk4.clipboard.Clipboard)(cast(void*)clipboard, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.text_buffer.TextBuffer.vfuncPasteDone");
+          }
+        }
+
+        _klass.pasteDone = cast(typeof(_klass.pasteDone))&_vfuncPasteDoneTramp;
+        break;
+      }
+      case "redo":
+      {
+        static extern(C) void _vfuncRedoTramp(GtkTextBuffer* buffer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.redo)
+              return (cast(typeof(&_vfuncRedoTramp))_klass.redo)(buffer);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRedo();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.text_buffer.TextBuffer.vfuncRedo");
+          }
+        }
+
+        _klass.redo = cast(typeof(_klass.redo))&_vfuncRedoTramp;
+        break;
+      }
+      case "remove_tag":
+      {
+        static extern(C) void _vfuncRemoveTagTramp(GtkTextBuffer* buffer, GtkTextTag* tag, const(GtkTextIter)* start, const(GtkTextIter)* end) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.removeTag)
+              return (cast(typeof(&_vfuncRemoveTagTramp))_klass.removeTag)(buffer, tag, start, end);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRemoveTag(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.text_tag.TextTag)(cast(void*)tag, No.Take), start ? new gid.gtk4.text_iter.TextIter(cast(void*)start, No.Take) : null, end ? new gid.gtk4.text_iter.TextIter(cast(void*)end, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.text_buffer.TextBuffer.vfuncRemoveTag");
+          }
+        }
+
+        _klass.removeTag = cast(typeof(_klass.removeTag))&_vfuncRemoveTagTramp;
+        break;
+      }
+      case "undo":
+      {
+        static extern(C) void _vfuncUndoTramp(GtkTextBuffer* buffer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.text_buffer.TextBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.undo)
+              return (cast(typeof(&_vfuncUndoTramp))_klass.undo)(buffer);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncUndo();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.text_buffer.TextBuffer.vfuncUndo");
+          }
+        }
+
+        _klass.undo = cast(typeof(_klass.undo))&_vfuncUndoTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

@@ -454,9 +454,16 @@ class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, 
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_icon_view_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_icon_view_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -488,6 +495,112 @@ class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, 
     _cretval = gtk_icon_view_new_with_model(model ? cast(GtkTreeModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(No.Dup) : null);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.icon_view.IconView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+
+  /** */
+  protected bool vfuncActivateCursorItem()
+  {
+    auto _klass = cast(GtkIconViewClass*)_vfuncClass;
+    if (!_klass.activateCursorItem)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.activateCursorItem(cast(GtkIconView*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Activates the item determined by path.
+  
+      Params:
+        path = The #GtkTreePath to be activated (modified in place, changes are seen by the caller)
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncItemActivated` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncItemActivated(gid.gtk3.tree_path.TreePath path)
+  {
+    auto _klass = cast(GtkIconViewClass*)_vfuncClass;
+    if (!_klass.itemActivated)
+      return;
+
+    _klass.itemActivated(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected bool vfuncMoveCursor(gid.gtk3.types.MovementStep step, int count)
+  {
+    auto _klass = cast(GtkIconViewClass*)_vfuncClass;
+    if (!_klass.moveCursor)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.moveCursor(cast(GtkIconView*)this._cPtr, step, count);
+    return _retval;
+  }
+
+  /**
+      Selects all the icons. icon_view must has its selection mode set
+      to #GTK_SELECTION_MULTIPLE.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSelectAll` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSelectAll()
+  {
+    auto _klass = cast(GtkIconViewClass*)_vfuncClass;
+    if (!_klass.selectAll)
+      return;
+
+    _klass.selectAll(cast(GtkIconView*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncSelectCursorItem()
+  {
+    auto _klass = cast(GtkIconViewClass*)_vfuncClass;
+    if (!_klass.selectCursorItem)
+      return;
+
+    _klass.selectCursorItem(cast(GtkIconView*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncSelectionChanged()
+  {
+    auto _klass = cast(GtkIconViewClass*)_vfuncClass;
+    if (!_klass.selectionChanged)
+      return;
+
+    _klass.selectionChanged(cast(GtkIconView*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncToggleCursorItem()
+  {
+    auto _klass = cast(GtkIconViewClass*)_vfuncClass;
+    if (!_klass.toggleCursorItem)
+      return;
+
+    _klass.toggleCursorItem(cast(GtkIconView*)this._cPtr);
+  }
+
+  /**
+      Unselects all the icons.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncUnselectAll` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncUnselectAll()
+  {
+    auto _klass = cast(GtkIconViewClass*)_vfuncClass;
+    if (!_klass.unselectAll)
+      return;
+
+    _klass.unselectAll(cast(GtkIconView*)this._cPtr);
   }
 
   /**
@@ -1078,6 +1191,7 @@ class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, 
   {
     extern(C) void _funcCallback(GtkIconView* iconView, GtkTreePath* path, void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk3.types.IconViewForeachFunc*)data;
       auto _path = path ? new gid.gtk3.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
 
@@ -1448,6 +1562,7 @@ class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, 
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1504,6 +1619,7 @@ class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, 
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1571,6 +1687,7 @@ class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, 
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1631,6 +1748,7 @@ class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, 
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1683,6 +1801,7 @@ class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, 
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1728,6 +1847,7 @@ class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, 
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1781,6 +1901,7 @@ class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, 
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1832,6 +1953,7 @@ class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, 
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1851,6 +1973,287 @@ class IconView : gid.gtk3.container.Container, gid.gtk3.cell_layout.CellLayout, 
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unselect-all", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from IconView
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.icon_view.IconView), T.stringof ~ " is not derived from gid.gtk3.icon_view.IconView");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivateCursorItem", true)[0]) == gid.gtk3.icon_view.IconView))
+      _installVfunc(klass, "activate_cursor_item");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncItemActivated", true)[0]) == gid.gtk3.icon_view.IconView))
+      _installVfunc(klass, "item_activated");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMoveCursor", true)[0]) == gid.gtk3.icon_view.IconView))
+      _installVfunc(klass, "move_cursor");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSelectAll", true)[0]) == gid.gtk3.icon_view.IconView))
+      _installVfunc(klass, "select_all");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSelectCursorItem", true)[0]) == gid.gtk3.icon_view.IconView))
+      _installVfunc(klass, "select_cursor_item");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSelectionChanged", true)[0]) == gid.gtk3.icon_view.IconView))
+      _installVfunc(klass, "selection_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncToggleCursorItem", true)[0]) == gid.gtk3.icon_view.IconView))
+      _installVfunc(klass, "toggle_cursor_item");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUnselectAll", true)[0]) == gid.gtk3.icon_view.IconView))
+      _installVfunc(klass, "unselect_all");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkIconViewClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate_cursor_item":
+      {
+        static extern(C) gboolean _vfuncActivateCursorItemTramp(GtkIconView* iconView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.icon_view.IconView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iconView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkIconViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iconView);
+            if (_klass.activateCursorItem)
+              return (cast(typeof(&_vfuncActivateCursorItemTramp))_klass.activateCursorItem)(iconView);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncActivateCursorItem();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.icon_view.IconView.vfuncActivateCursorItem");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.activateCursorItem = cast(typeof(_klass.activateCursorItem))&_vfuncActivateCursorItemTramp;
+        break;
+      }
+      case "item_activated":
+      {
+        static extern(C) void _vfuncItemActivatedTramp(GtkIconView* iconView, GtkTreePath* path) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.icon_view.IconView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iconView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkIconViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iconView);
+            if (_klass.itemActivated)
+              return (cast(typeof(&_vfuncItemActivatedTramp))_klass.itemActivated)(iconView, path);
+            return;
+          }
+
+          auto _path = path ? new gid.gtk3.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncItemActivated(_path);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.icon_view.IconView.vfuncItemActivated");
+          }
+          if (_path)
+            _path._cUnborrow;
+
+        }
+
+        _klass.itemActivated = cast(typeof(_klass.itemActivated))&_vfuncItemActivatedTramp;
+        break;
+      }
+      case "move_cursor":
+      {
+        static extern(C) gboolean _vfuncMoveCursorTramp(GtkIconView* iconView, GtkMovementStep step, int count) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.icon_view.IconView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iconView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkIconViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iconView);
+            if (_klass.moveCursor)
+              return (cast(typeof(&_vfuncMoveCursorTramp))_klass.moveCursor)(iconView, step, count);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncMoveCursor(step, count);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.icon_view.IconView.vfuncMoveCursor");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.moveCursor = cast(typeof(_klass.moveCursor))&_vfuncMoveCursorTramp;
+        break;
+      }
+      case "select_all":
+      {
+        static extern(C) void _vfuncSelectAllTramp(GtkIconView* iconView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.icon_view.IconView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iconView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkIconViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iconView);
+            if (_klass.selectAll)
+              return (cast(typeof(&_vfuncSelectAllTramp))_klass.selectAll)(iconView);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSelectAll();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.icon_view.IconView.vfuncSelectAll");
+          }
+        }
+
+        _klass.selectAll = cast(typeof(_klass.selectAll))&_vfuncSelectAllTramp;
+        break;
+      }
+      case "select_cursor_item":
+      {
+        static extern(C) void _vfuncSelectCursorItemTramp(GtkIconView* iconView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.icon_view.IconView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iconView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkIconViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iconView);
+            if (_klass.selectCursorItem)
+              return (cast(typeof(&_vfuncSelectCursorItemTramp))_klass.selectCursorItem)(iconView);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSelectCursorItem();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.icon_view.IconView.vfuncSelectCursorItem");
+          }
+        }
+
+        _klass.selectCursorItem = cast(typeof(_klass.selectCursorItem))&_vfuncSelectCursorItemTramp;
+        break;
+      }
+      case "selection_changed":
+      {
+        static extern(C) void _vfuncSelectionChangedTramp(GtkIconView* iconView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.icon_view.IconView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iconView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkIconViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iconView);
+            if (_klass.selectionChanged)
+              return (cast(typeof(&_vfuncSelectionChangedTramp))_klass.selectionChanged)(iconView);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSelectionChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.icon_view.IconView.vfuncSelectionChanged");
+          }
+        }
+
+        _klass.selectionChanged = cast(typeof(_klass.selectionChanged))&_vfuncSelectionChangedTramp;
+        break;
+      }
+      case "toggle_cursor_item":
+      {
+        static extern(C) void _vfuncToggleCursorItemTramp(GtkIconView* iconView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.icon_view.IconView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iconView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkIconViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iconView);
+            if (_klass.toggleCursorItem)
+              return (cast(typeof(&_vfuncToggleCursorItemTramp))_klass.toggleCursorItem)(iconView);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncToggleCursorItem();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.icon_view.IconView.vfuncToggleCursorItem");
+          }
+        }
+
+        _klass.toggleCursorItem = cast(typeof(_klass.toggleCursorItem))&_vfuncToggleCursorItemTramp;
+        break;
+      }
+      case "unselect_all":
+      {
+        static extern(C) void _vfuncUnselectAllTramp(GtkIconView* iconView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.icon_view.IconView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iconView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkIconViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iconView);
+            if (_klass.unselectAll)
+              return (cast(typeof(&_vfuncUnselectAllTramp))_klass.unselectAll)(iconView);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncUnselectAll();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.icon_view.IconView.vfuncUnselectAll");
+          }
+        }
+
+        _klass.unselectAll = cast(typeof(_klass.unselectAll))&_vfuncUnselectAllTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

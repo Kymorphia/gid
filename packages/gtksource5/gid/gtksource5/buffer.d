@@ -248,9 +248,16 @@ class Buffer : gid.gtk4.text_buffer.TextBuffer
   */
   this(gid.gtk4.text_tag_table.TextTagTable table = null) nothrow
   {
-    GtkSourceBuffer* _cretval;
-    _cretval = gtk_source_buffer_new(table ? cast(GtkTextTagTable*)table._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, table !is null), Yes.Take);
+    }
+    else
+    {
+      GtkSourceBuffer* _cretval;
+      _cretval = gtk_source_buffer_new(table ? cast(GtkTextTagTable*)table._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -270,6 +277,16 @@ class Buffer : gid.gtk4.text_buffer.TextBuffer
     _cretval = gtk_source_buffer_new_with_language(language ? cast(GtkSourceLanguage*)language._cPtr(No.Dup) : null);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtksource5.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, Yes.Take);
     return _retval;
+  }
+
+  /** */
+  protected void vfuncBracketMatched(gid.gtk4.text_iter.TextIter iter, gid.gtksource5.types.BracketMatchType state)
+  {
+    auto _klass = cast(GtkSourceBufferClass*)_vfuncClass;
+    if (!_klass.bracketMatched)
+      return;
+
+    _klass.bracketMatched(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, state);
   }
 
   /**
@@ -783,6 +800,7 @@ class Buffer : gid.gtk4.text_buffer.TextBuffer
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -833,6 +851,7 @@ class Buffer : gid.gtk4.text_buffer.TextBuffer
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -885,6 +904,7 @@ class Buffer : gid.gtk4.text_buffer.TextBuffer
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -939,6 +959,7 @@ class Buffer : gid.gtk4.text_buffer.TextBuffer
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -961,6 +982,67 @@ class Buffer : gid.gtk4.text_buffer.TextBuffer
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("source-mark-updated", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Buffer
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtksource5.buffer.Buffer), T.stringof ~ " is not derived from gid.gtksource5.buffer.Buffer");
+
+    gid.gtk4.text_buffer.TextBuffer._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncBracketMatched", true)[0]) == gid.gtksource5.buffer.Buffer))
+      _installVfunc(klass, "bracket_matched");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkSourceBufferClass*)klass;
+
+    switch (vfunc)
+    {
+      case "bracket_matched":
+      {
+        static extern(C) void _vfuncBracketMatchedTramp(GtkSourceBuffer* buffer, GtkTextIter* iter, GtkSourceBracketMatchType state) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource5.buffer.Buffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.bracketMatched)
+              return (cast(typeof(&_vfuncBracketMatchedTramp))_klass.bracketMatched)(buffer, iter, state);
+            return;
+          }
+
+          auto _iter = iter ? new gid.gtk4.text_iter.TextIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncBracketMatched(_iter, state);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource5.buffer.Buffer.vfuncBracketMatched");
+          }
+          if (_iter)
+            _iter._cUnborrow;
+
+        }
+
+        _klass.bracketMatched = cast(typeof(_klass.bracketMatched))&_vfuncBracketMatchedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

@@ -102,9 +102,38 @@ class Statusbar : gid.gtk3.box.Box
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_statusbar_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_statusbar_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncTextPopped(uint contextId, string text)
+  {
+    auto _klass = cast(GtkStatusbarClass*)_vfuncClass;
+    if (!_klass.textPopped)
+      return;
+
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
+    _klass.textPopped(cast(GtkStatusbar*)this._cPtr, contextId, _text);
+  }
+
+  /** */
+  protected void vfuncTextPushed(uint contextId, string text)
+  {
+    auto _klass = cast(GtkStatusbarClass*)_vfuncClass;
+    if (!_klass.textPushed)
+      return;
+
+    const(char)* _text = text.toCString!(No.Malloc, No.Nullable);
+    _klass.textPushed(cast(GtkStatusbar*)this._cPtr, contextId, _text);
   }
 
   /**
@@ -227,6 +256,7 @@ class Statusbar : gid.gtk3.box.Box
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -283,6 +313,7 @@ class Statusbar : gid.gtk3.box.Box
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -308,6 +339,96 @@ class Statusbar : gid.gtk3.box.Box
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("text-pushed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Statusbar
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.statusbar.Statusbar), T.stringof ~ " is not derived from gid.gtk3.statusbar.Statusbar");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncTextPopped", true)[0]) == gid.gtk3.statusbar.Statusbar))
+      _installVfunc(klass, "text_popped");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncTextPushed", true)[0]) == gid.gtk3.statusbar.Statusbar))
+      _installVfunc(klass, "text_pushed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkStatusbarClass*)klass;
+
+    switch (vfunc)
+    {
+      case "text_popped":
+      {
+        static extern(C) void _vfuncTextPoppedTramp(GtkStatusbar* statusbar, uint contextId, const(char)* text) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.statusbar.Statusbar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)statusbar);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkStatusbarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)statusbar);
+            if (_klass.textPopped)
+              return (cast(typeof(&_vfuncTextPoppedTramp))_klass.textPopped)(statusbar, contextId, text);
+            return;
+          }
+
+          string _text = text.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncTextPopped(contextId, _text);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.statusbar.Statusbar.vfuncTextPopped");
+          }
+        }
+
+        _klass.textPopped = cast(typeof(_klass.textPopped))&_vfuncTextPoppedTramp;
+        break;
+      }
+      case "text_pushed":
+      {
+        static extern(C) void _vfuncTextPushedTramp(GtkStatusbar* statusbar, uint contextId, const(char)* text) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.statusbar.Statusbar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)statusbar);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkStatusbarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)statusbar);
+            if (_klass.textPushed)
+              return (cast(typeof(&_vfuncTextPushedTramp))_klass.textPushed)(statusbar, contextId, text);
+            return;
+          }
+
+          string _text = text.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncTextPushed(contextId, _text);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.statusbar.Statusbar.vfuncTextPushed");
+          }
+        }
+
+        _klass.textPushed = cast(typeof(_klass.textPushed))&_vfuncTextPushedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

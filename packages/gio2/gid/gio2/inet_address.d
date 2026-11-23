@@ -30,6 +30,15 @@ class InetAddress : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -306,6 +315,27 @@ class InetAddress : gid.gobject2.object.ObjectWrap
   }
 
   /**
+      Converts address to string form.
+      Returns: a representation of address as a string, which should be
+        freed after use.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncToString` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected string vfuncToString()
+  {
+    auto _klass = cast(GInetAddressClass*)_vfuncClass;
+    if (!_klass.toString_)
+      return typeof(return).init;
+
+    char* _cretval;
+    _cretval = _klass.toString_(cast(GInetAddress*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
       Checks if two #GInetAddress instances are equal, e.g. the same address.
   
       Params:
@@ -491,6 +521,67 @@ class InetAddress : gid.gobject2.object.ObjectWrap
     _cretval = g_inet_address_to_string(cast(GInetAddress*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from InetAddress
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.inet_address.InetAddress), T.stringof ~ " is not derived from gid.gio2.inet_address.InetAddress");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncToString", true)[0]) == gid.gio2.inet_address.InetAddress))
+      _installVfunc(klass, "to_string");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GInetAddressClass*)klass;
+
+    switch (vfunc)
+    {
+      case "to_string":
+      {
+        static extern(C) char* _vfuncToStringTramp(GInetAddress* address) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.inet_address.InetAddress)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)address);
+          if (!_obj)
+          {
+            auto _klass = cast(GInetAddressClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)address);
+            if (_klass.toString_)
+              return (cast(typeof(&_vfuncToStringTramp))_klass.toString_)(address);
+            return typeof(return).init;
+          }
+
+          string _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncToString();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.inet_address.InetAddress.vfuncToString");
+          }
+          auto _retval = toCString!(Yes.Malloc, No.Nullable)(_dretval);
+
+          return _retval;
+        }
+
+        _klass.toString_ = cast(typeof(_klass.toString_))&_vfuncToStringTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

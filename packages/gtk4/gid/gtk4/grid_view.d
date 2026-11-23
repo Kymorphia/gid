@@ -272,9 +272,16 @@ class GridView : gid.gtk4.list_base.ListBase
   */
   this(gid.gtk4.selection_model.SelectionModel model = null, gid.gtk4.list_item_factory.ListItemFactory factory = null) nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_grid_view_new(model ? cast(GtkSelectionModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(Yes.Dup) : null, factory ? cast(GtkListItemFactory*)factory._cPtr(Yes.Dup) : null);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, model !is null || factory !is null), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_grid_view_new(model ? cast(GtkSelectionModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(Yes.Dup) : null, factory ? cast(GtkListItemFactory*)factory._cPtr(Yes.Dup) : null);
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -498,6 +505,7 @@ class GridView : gid.gtk4.list_base.ListBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

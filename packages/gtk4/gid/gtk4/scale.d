@@ -125,6 +125,15 @@ class Scale : gid.gtk4.range.Range
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -246,9 +255,16 @@ class Scale : gid.gtk4.range.Range
   */
   this(gid.gtk4.types.Orientation orientation, gid.gtk4.adjustment.Adjustment adjustment = null) nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_scale_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_scale_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -277,6 +293,33 @@ class Scale : gid.gtk4.range.Range
     _cretval = gtk_scale_new_with_range(orientation, min, max, step);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.scale.Scale)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+
+  /**
+      Obtains the coordinates where the scale will draw the
+      [gid.pango1.layout.Layout] representing the text in the scale.
+      
+      Remember when using the [gid.pango1.layout.Layout] function you need to
+      convert to and from pixels using `PANGO_PIXELS()` or [gid.pango1.types.SCALE].
+      
+      If the [gid.gtk4.scale.Scale.drawValue] property is false, the return
+      values are undefined.
+  
+      Params:
+        x = location to store X offset of layout
+        y = location to store Y offset of layout
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetLayoutOffsets` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncGetLayoutOffsets(out int x, out int y)
+  {
+    auto _klass = cast(GtkScaleClass*)_vfuncClass;
+    if (!_klass.getLayoutOffsets)
+      return;
+
+    _klass.getLayoutOffsets(cast(GtkScale*)this._cPtr, cast(int*)&x, cast(int*)&y);
   }
 
   /**
@@ -448,6 +491,7 @@ class Scale : gid.gtk4.range.Range
   {
     extern(C) char* _funcCallback(GtkScale* scale, double value, void* userData) nothrow
     {
+      gidAttachThread();
       string _dretval;
       auto _dlg = cast(gid.gtk4.types.ScaleFormatValueFunc*)userData;
 
@@ -493,6 +537,70 @@ class Scale : gid.gtk4.range.Range
   void setValuePos(gid.gtk4.types.PositionType pos) nothrow
   {
     gtk_scale_set_value_pos(cast(GtkScale*)this._cPtr, pos);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Scale
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.scale.Scale), T.stringof ~ " is not derived from gid.gtk4.scale.Scale");
+
+    gid.gtk4.range.Range._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetLayoutOffsets", true)[0]) == gid.gtk4.scale.Scale))
+      _installVfunc(klass, "get_layout_offsets");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkScaleClass*)klass;
+
+    switch (vfunc)
+    {
+      case "get_layout_offsets":
+      {
+        static extern(C) void _vfuncGetLayoutOffsetsTramp(GtkScale* scale, int* x, int* y) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.scale.Scale)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)scale);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkScaleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)scale);
+            if (_klass.getLayoutOffsets)
+              return (cast(typeof(&_vfuncGetLayoutOffsetsTramp))_klass.getLayoutOffsets)(scale, x, y);
+            return;
+          }
+
+          typeof(*x) _xNull;
+          if (!x)
+            x = &_xNull;
+
+          typeof(*y) _yNull;
+          if (!y)
+            y = &_yNull;
+
+          try
+          {
+            _obj.vfuncGetLayoutOffsets(*x, *y);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.scale.Scale.vfuncGetLayoutOffsets");
+          }
+        }
+
+        _klass.getLayoutOffsets = cast(typeof(_klass.getLayoutOffsets))&_vfuncGetLayoutOffsetsTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

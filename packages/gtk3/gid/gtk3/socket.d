@@ -119,9 +119,38 @@ class Socket : gid.gtk3.container.Container
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_socket_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_socket_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncPlugAdded()
+  {
+    auto _klass = cast(GtkSocketClass*)_vfuncClass;
+    if (!_klass.plugAdded)
+      return;
+
+    _klass.plugAdded(cast(GtkSocket*)this._cPtr);
+  }
+
+  /** */
+  protected bool vfuncPlugRemoved()
+  {
+    auto _klass = cast(GtkSocketClass*)_vfuncClass;
+    if (!_klass.plugRemoved)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.plugRemoved(cast(GtkSocket*)this._cPtr);
+    return _retval;
   }
 
   /**
@@ -200,6 +229,7 @@ class Socket : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -247,6 +277,7 @@ class Socket : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -269,6 +300,97 @@ class Socket : gid.gtk3.container.Container
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("plug-removed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Socket
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.socket.Socket), T.stringof ~ " is not derived from gid.gtk3.socket.Socket");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPlugAdded", true)[0]) == gid.gtk3.socket.Socket))
+      _installVfunc(klass, "plug_added");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPlugRemoved", true)[0]) == gid.gtk3.socket.Socket))
+      _installVfunc(klass, "plug_removed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkSocketClass*)klass;
+
+    switch (vfunc)
+    {
+      case "plug_added":
+      {
+        static extern(C) void _vfuncPlugAddedTramp(GtkSocket* socket) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.socket.Socket)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)socket);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSocketClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)socket);
+            if (_klass.plugAdded)
+              return (cast(typeof(&_vfuncPlugAddedTramp))_klass.plugAdded)(socket);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPlugAdded();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.socket.Socket.vfuncPlugAdded");
+          }
+        }
+
+        _klass.plugAdded = cast(typeof(_klass.plugAdded))&_vfuncPlugAddedTramp;
+        break;
+      }
+      case "plug_removed":
+      {
+        static extern(C) gboolean _vfuncPlugRemovedTramp(GtkSocket* socket) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.socket.Socket)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)socket);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSocketClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)socket);
+            if (_klass.plugRemoved)
+              return (cast(typeof(&_vfuncPlugRemovedTramp))_klass.plugRemoved)(socket);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncPlugRemoved();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.socket.Socket.vfuncPlugRemoved");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.plugRemoved = cast(typeof(_klass.plugRemoved))&_vfuncPlugRemovedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

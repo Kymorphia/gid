@@ -29,6 +29,15 @@ class DBusInterfaceSkeleton : gid.gobject2.object.ObjectWrap, gid.gio2.dbus_inte
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -83,6 +92,118 @@ class DBusInterfaceSkeleton : gid.gobject2.object.ObjectWrap, gid.gio2.dbus_inte
   }
 
   mixin DBusInterfaceT!();
+
+  /**
+      If interface_ has outstanding changes, request for these changes to be
+      emitted immediately.
+      
+      For example, an exported D-Bus interface may queue up property
+      changes and emit the
+      `org.freedesktop.DBus.Properties.PropertiesChanged`
+      signal later (e.g. in an idle handler). This technique is useful
+      for collapsing multiple property changes into one.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncFlush` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncFlush()
+  {
+    auto _klass = cast(GDBusInterfaceSkeletonClass*)_vfuncClass;
+    if (!_klass.flush)
+      return;
+
+    _klass.flush(cast(GDBusInterfaceSkeleton*)this._cPtr);
+  }
+
+  /**
+      Signal class handler for the #GDBusInterfaceSkeleton::g-authorize-method signal.
+  
+      Params:
+        invocation = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGAuthorizeMethod` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncGAuthorizeMethod(gid.gio2.dbus_method_invocation.DBusMethodInvocation invocation)
+  {
+    auto _klass = cast(GDBusInterfaceSkeletonClass*)_vfuncClass;
+    if (!_klass.gAuthorizeMethod)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.gAuthorizeMethod(cast(GDBusInterfaceSkeleton*)this._cPtr, invocation ? cast(GDBusMethodInvocation*)invocation._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Gets D-Bus introspection information for the D-Bus interface
+      implemented by interface_.
+      Returns: A #GDBusInterfaceInfo (never null). Do not free.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetInfo` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gio2.dbus_interface_info.DBusInterfaceInfo vfuncGetInfo()
+  {
+    auto _klass = cast(GDBusInterfaceSkeletonClass*)_vfuncClass;
+    if (!_klass.getInfo)
+      return typeof(return).init;
+
+    GDBusInterfaceInfo* _cretval;
+    _cretval = _klass.getInfo(cast(GDBusInterfaceSkeleton*)this._cPtr);
+    auto _retval = _cretval ? new gid.gio2.dbus_interface_info.DBusInterfaceInfo(cast(void*)_cretval, No.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets all D-Bus properties for interface_.
+      Returns: A #GVariant of type
+        ['a{sv}'](../glib/gvariant-text-format.html#dictionaries-and-dictionary-entries).
+        Free with [gid.glib2.variant.Variant.unref].
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetProperties` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.glib2.variant.Variant vfuncGetProperties()
+  {
+    auto _klass = cast(GDBusInterfaceSkeletonClass*)_vfuncClass;
+    if (!_klass.getProperties)
+      return typeof(return).init;
+
+    GVariant* _cretval;
+    _cretval = _klass.getProperties(cast(GDBusInterfaceSkeleton*)this._cPtr);
+    auto _retval = _cretval ? new gid.glib2.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the interface vtable for the D-Bus interface implemented by
+      interface_. The returned function pointers should expect interface_
+      itself to be passed as user_data.
+      Returns: the vtable of the D-Bus interface implemented by the skeleton
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetVtable` to chain up from an override.
+      Overriding it from D is not supported (callback structure pointer return value with ownership 'None' is not supported).
+  */
+  protected gid.gio2.types.DBusInterfaceVTable vfuncGetVtable()
+  {
+    auto _klass = cast(GDBusInterfaceSkeletonClass*)_vfuncClass;
+    if (!_klass.getVtable)
+      return typeof(return).init;
+
+    GDBusInterfaceVTable* _cretval;
+    _cretval = _klass.getVtable(cast(GDBusInterfaceSkeleton*)this._cPtr);
+    gid.gio2.types.DBusInterfaceVTable _retval;
+    if (_cretval)
+      _retval = *cast(gid.gio2.types.DBusInterfaceVTable*)_cretval;
+    return _retval;
+  }
 
   /**
       Exports interface_ at object_path on connection.
@@ -332,6 +453,7 @@ class DBusInterfaceSkeleton : gid.gobject2.object.ObjectWrap, gid.gio2.dbus_inte
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -357,6 +479,170 @@ class DBusInterfaceSkeleton : gid.gobject2.object.ObjectWrap, gid.gio2.dbus_inte
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("g-authorize-method", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from DBusInterfaceSkeleton
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton), T.stringof ~ " is not derived from gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFlush", true)[0]) == gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton))
+      _installVfunc(klass, "flush");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGAuthorizeMethod", true)[0]) == gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton))
+      _installVfunc(klass, "g_authorize_method");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetInfo", true)[0]) == gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton))
+      _installVfunc(klass, "get_info");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetProperties", true)[0]) == gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton))
+      _installVfunc(klass, "get_properties");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetVtable", true)[0]) == gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton))
+      static assert(0, "Overriding gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton.vfuncGetVtable is not supported: callback structure pointer return value with ownership 'None' is not supported");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GDBusInterfaceSkeletonClass*)klass;
+
+    switch (vfunc)
+    {
+      case "flush":
+      {
+        static extern(C) void _vfuncFlushTramp(GDBusInterfaceSkeleton* interface_) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)interface_);
+          if (!_obj)
+          {
+            auto _klass = cast(GDBusInterfaceSkeletonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)interface_);
+            if (_klass.flush)
+              return (cast(typeof(&_vfuncFlushTramp))_klass.flush)(interface_);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncFlush();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton.vfuncFlush");
+          }
+        }
+
+        _klass.flush = cast(typeof(_klass.flush))&_vfuncFlushTramp;
+        break;
+      }
+      case "g_authorize_method":
+      {
+        static extern(C) gboolean _vfuncGAuthorizeMethodTramp(GDBusInterfaceSkeleton* interface_, GDBusMethodInvocation* invocation) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)interface_);
+          if (!_obj)
+          {
+            auto _klass = cast(GDBusInterfaceSkeletonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)interface_);
+            if (_klass.gAuthorizeMethod)
+              return (cast(typeof(&_vfuncGAuthorizeMethodTramp))_klass.gAuthorizeMethod)(interface_, invocation);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGAuthorizeMethod(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.dbus_method_invocation.DBusMethodInvocation)(cast(void*)invocation, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton.vfuncGAuthorizeMethod");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.gAuthorizeMethod = cast(typeof(_klass.gAuthorizeMethod))&_vfuncGAuthorizeMethodTramp;
+        break;
+      }
+      case "get_info":
+      {
+        static extern(C) GDBusInterfaceInfo* _vfuncGetInfoTramp(GDBusInterfaceSkeleton* interface_) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)interface_);
+          if (!_obj)
+          {
+            auto _klass = cast(GDBusInterfaceSkeletonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)interface_);
+            if (_klass.getInfo)
+              return (cast(typeof(&_vfuncGetInfoTramp))_klass.getInfo)(interface_);
+            return typeof(return).init;
+          }
+
+          gid.gio2.dbus_interface_info.DBusInterfaceInfo _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetInfo();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton.vfuncGetInfo");
+          }
+          auto _retval = _dretval ? cast(GDBusInterfaceInfo*)_dretval._cPtr(No.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getInfo = cast(typeof(_klass.getInfo))&_vfuncGetInfoTramp;
+        break;
+      }
+      case "get_properties":
+      {
+        static extern(C) GVariant* _vfuncGetPropertiesTramp(GDBusInterfaceSkeleton* interface_) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)interface_);
+          if (!_obj)
+          {
+            auto _klass = cast(GDBusInterfaceSkeletonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)interface_);
+            if (_klass.getProperties)
+              return (cast(typeof(&_vfuncGetPropertiesTramp))_klass.getProperties)(interface_);
+            return typeof(return).init;
+          }
+
+          gid.glib2.variant.Variant _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetProperties();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton.vfuncGetProperties");
+          }
+          auto _retval = _dretval ? cast(GVariant*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getProperties = cast(typeof(_klass.getProperties))&_vfuncGetPropertiesTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

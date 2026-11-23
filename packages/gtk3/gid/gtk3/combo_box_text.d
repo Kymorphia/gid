@@ -123,9 +123,16 @@ class ComboBoxText : gid.gtk3.combo_box.ComboBox
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_combo_box_text_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_combo_box_text_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**

@@ -81,9 +81,16 @@ class TriggerControlSource : gid.gstcontroller1.timed_value_control_source.Timed
   */
   this() nothrow
   {
-    GstControlSource* _cretval;
-    _cretval = gst_trigger_control_source_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GstControlSource* _cretval;
+      _cretval = gst_trigger_control_source_new();
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

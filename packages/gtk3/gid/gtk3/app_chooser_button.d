@@ -55,6 +55,15 @@ class AppChooserButton : gid.gtk3.combo_box.ComboBox, gid.gtk3.app_chooser.AppCh
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -168,10 +177,39 @@ class AppChooserButton : gid.gtk3.combo_box.ComboBox, gid.gtk3.app_chooser.AppCh
   */
   this(string contentType) nothrow
   {
-    GtkWidget* _cretval;
-    const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
-    _cretval = gtk_app_chooser_button_new(_contentType);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
+      _cretval = gtk_app_chooser_button_new(_contentType);
+      this(_cretval, No.Take);
+    }
+  }
+
+  /**
+      Signal emitted when a custom item,
+         previously added with [gid.gtk4.app_chooser_button.AppChooserButton.appendCustomItem],
+         is activated from the dropdown menu.
+  
+      Params:
+        itemName = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCustomItemActivated` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncCustomItemActivated(string itemName)
+  {
+    auto _klass = cast(GtkAppChooserButtonClass*)_vfuncClass;
+    if (!_klass.customItemActivated)
+      return;
+
+    const(char)* _itemName = itemName.toCString!(No.Malloc, No.Nullable);
+    _klass.customItemActivated(cast(GtkAppChooserButton*)this._cPtr, _itemName);
   }
 
   /**
@@ -322,6 +360,7 @@ class AppChooserButton : gid.gtk3.combo_box.ComboBox, gid.gtk3.app_chooser.AppCh
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -344,6 +383,64 @@ class AppChooserButton : gid.gtk3.combo_box.ComboBox, gid.gtk3.app_chooser.AppCh
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("custom-item-activated"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from AppChooserButton
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.app_chooser_button.AppChooserButton), T.stringof ~ " is not derived from gid.gtk3.app_chooser_button.AppChooserButton");
+
+    gid.gtk3.combo_box.ComboBox._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCustomItemActivated", true)[0]) == gid.gtk3.app_chooser_button.AppChooserButton))
+      _installVfunc(klass, "custom_item_activated");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkAppChooserButtonClass*)klass;
+
+    switch (vfunc)
+    {
+      case "custom_item_activated":
+      {
+        static extern(C) void _vfuncCustomItemActivatedTramp(GtkAppChooserButton* self, const(char)* itemName) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.app_chooser_button.AppChooserButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkAppChooserButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.customItemActivated)
+              return (cast(typeof(&_vfuncCustomItemActivatedTramp))_klass.customItemActivated)(self, itemName);
+            return;
+          }
+
+          string _itemName = itemName.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncCustomItemActivated(_itemName);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.app_chooser_button.AppChooserButton.vfuncCustomItemActivated");
+          }
+        }
+
+        _klass.customItemActivated = cast(typeof(_klass.customItemActivated))&_vfuncCustomItemActivatedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

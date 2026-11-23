@@ -76,6 +76,15 @@ class ActionGroup : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -189,10 +198,41 @@ class ActionGroup : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   */
   this(string name) nothrow
   {
-    GtkActionGroup* _cretval;
-    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
-    _cretval = gtk_action_group_new(_name);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkActionGroup* _cretval;
+      const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+      _cretval = gtk_action_group_new(_name);
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /**
+      Looks up an action in the action group by name.
+  
+      Params:
+        actionName = the name of the action
+      Returns: the action, or null if no action by that name exists
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetAction` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gtk3.action.Action vfuncGetAction(string actionName)
+  {
+    auto _klass = cast(GtkActionGroupClass*)_vfuncClass;
+    if (!_klass.getAction)
+      return typeof(return).init;
+
+    GtkAction* _cretval;
+    const(char)* _actionName = actionName.toCString!(No.Malloc, No.Nullable);
+    _cretval = _klass.getAction(cast(GtkActionGroup*)this._cPtr, _actionName);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.action.Action)(cast(GtkAction*)_cretval, No.Take);
+    return _retval;
   }
 
   /**
@@ -359,6 +399,7 @@ class ActionGroup : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   {
     extern(C) char* _funcCallback(const(char)* path, void* funcData) nothrow
     {
+      gidAttachThread();
       string _dretval;
       auto _dlg = cast(gid.gtk3.types.TranslateFunc*)funcData;
       string _path = path.fromCString!(No.Free);
@@ -467,6 +508,7 @@ class ActionGroup : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -528,6 +570,7 @@ class ActionGroup : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -585,6 +628,7 @@ class ActionGroup : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -639,6 +683,7 @@ class ActionGroup : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -661,6 +706,68 @@ class ActionGroup : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("pre-activate", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from ActionGroup
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.action_group.ActionGroup), T.stringof ~ " is not derived from gid.gtk3.action_group.ActionGroup");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetAction", true)[0]) == gid.gtk3.action_group.ActionGroup))
+      _installVfunc(klass, "get_action");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkActionGroupClass*)klass;
+
+    switch (vfunc)
+    {
+      case "get_action":
+      {
+        static extern(C) GtkAction* _vfuncGetActionTramp(GtkActionGroup* actionGroup, const(char)* actionName) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.action_group.ActionGroup)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)actionGroup);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkActionGroupClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)actionGroup);
+            if (_klass.getAction)
+              return (cast(typeof(&_vfuncGetActionTramp))_klass.getAction)(actionGroup, actionName);
+            return typeof(return).init;
+          }
+
+          gid.gtk3.action.Action _dretval;
+          string _actionName = actionName.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncGetAction(_actionName);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.action_group.ActionGroup.vfuncGetAction");
+          }
+          auto _retval = _dretval ? cast(GtkAction*)_dretval._cPtr(No.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getAction = cast(typeof(_klass.getAction))&_vfuncGetActionTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

@@ -23,6 +23,15 @@ class MenuLinkIter : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -55,6 +64,46 @@ class MenuLinkIter : gid.gobject2.object.ObjectWrap
   static MenuLinkIterGidBuilder builder() nothrow
   {
     return new MenuLinkIterGidBuilder;
+  }
+
+  /**
+      This function combines [gid.gio2.menu_link_iter.MenuLinkIter.next] with
+      [gid.gio2.menu_link_iter.MenuLinkIter.getName] and [gid.gio2.menu_link_iter.MenuLinkIter.getValue].
+      
+      First the iterator is advanced to the next (possibly first) link.
+      If that fails, then false is returned and there are no other effects.
+      
+      If successful, out_link and value are set to the name and #GMenuModel
+      of the link that has just been advanced to.  At this point,
+      [gid.gio2.menu_link_iter.MenuLinkIter.getName] and [gid.gio2.menu_link_iter.MenuLinkIter.getValue] will return the
+      same values again.
+      
+      The value returned in out_link remains valid for as long as the iterator
+      remains at the current position.  The value returned in value must
+      be unreffed using [gid.gobject2.object.ObjectWrap.unref] when it is no longer in use.
+  
+      Params:
+        outLink = the name of the link
+        value = the linked #GMenuModel
+      Returns: true on success, or false if there is no additional link
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetNext` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncGetNext(out string outLink, out gid.gio2.menu_model.MenuModel value)
+  {
+    auto _klass = cast(GMenuLinkIterClass*)_vfuncClass;
+    if (!_klass.getNext)
+      return typeof(return).init;
+
+    bool _retval;
+    char* _outLink;
+    GMenuModel* _value;
+    _retval = cast(bool)_klass.getNext(cast(GMenuLinkIter*)this._cPtr, &_outLink, &_value);
+    outLink = _outLink.fromCString!(No.Free);
+    value = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.menu_model.MenuModel)(_value, Yes.Take);
+    return _retval;
   }
 
   /**
@@ -133,6 +182,79 @@ class MenuLinkIter : gid.gobject2.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)g_menu_link_iter_next(cast(GMenuLinkIter*)this._cPtr);
     return _retval;
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from MenuLinkIter
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.menu_link_iter.MenuLinkIter), T.stringof ~ " is not derived from gid.gio2.menu_link_iter.MenuLinkIter");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetNext", true)[0]) == gid.gio2.menu_link_iter.MenuLinkIter))
+      _installVfunc(klass, "get_next");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GMenuLinkIterClass*)klass;
+
+    switch (vfunc)
+    {
+      case "get_next":
+      {
+        static extern(C) gboolean _vfuncGetNextTramp(GMenuLinkIter* iter, const(char*)* outLink, GMenuModel** value) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.menu_link_iter.MenuLinkIter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iter);
+          if (!_obj)
+          {
+            auto _klass = cast(GMenuLinkIterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iter);
+            if (_klass.getNext)
+              return (cast(typeof(&_vfuncGetNextTramp))_klass.getNext)(iter, outLink, value);
+            return typeof(return).init;
+          }
+
+          typeof(*outLink) _outLinkNull;
+          if (!outLink)
+            outLink = &_outLinkNull;
+
+          typeof(*value) _valueNull;
+          if (!value)
+            value = &_valueNull;
+
+          bool _dretval;
+          string _outLink;
+          gid.gio2.menu_model.MenuModel _value;
+
+          try
+          {
+            _dretval = _obj.vfuncGetNext(_outLink, _value);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.menu_link_iter.MenuLinkIter.vfuncGetNext");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          *cast(char**)outLink = _outLink.toCString!(No.Malloc, No.Nullable);
+          *value = _value ? cast(GMenuModel*)_value._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getNext = cast(typeof(_klass.getNext))&_vfuncGetNextTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

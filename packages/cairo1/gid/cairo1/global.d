@@ -273,6 +273,7 @@ gid.cairo1.surface.Surface imageSurfaceCreateFromPngStream(gid.cairo1.types.Read
 {
   extern(C) cairo_status_t _readFuncCallback(void* closure, ubyte* data, uint length) nothrow
   {
+    gidAttachThread();
     gid.cairo1.types.Status _dretval;
     auto _dlg = cast(gid.cairo1.types.ReadFunc*)closure;
     ubyte[] _data;
@@ -1111,6 +1112,7 @@ gid.cairo1.surface.Surface pdfSurfaceCreateForStream(gid.cairo1.types.WriteFunc 
 {
   extern(C) cairo_status_t _writeFuncCallback(void* closure, const(ubyte)* data, uint length) nothrow
   {
+    gidAttachThread();
     gid.cairo1.types.Status _dretval;
     auto _dlg = cast(gid.cairo1.types.WriteFunc*)closure;
     ubyte[] _data;
@@ -1363,6 +1365,7 @@ gid.cairo1.surface.Surface psSurfaceCreateForStream(gid.cairo1.types.WriteFunc w
 {
   extern(C) cairo_status_t _writeFuncCallback(void* closure, const(ubyte)* data, uint length) nothrow
   {
+    gidAttachThread();
     gid.cairo1.types.Status _dretval;
     auto _dlg = cast(gid.cairo1.types.WriteFunc*)closure;
     ubyte[] _data;
@@ -1800,6 +1803,7 @@ gid.cairo1.device.Device scriptCreateForStream(gid.cairo1.types.WriteFunc writeF
 {
   extern(C) cairo_status_t _writeFuncCallback(void* closure, const(ubyte)* data, uint length) nothrow
   {
+    gidAttachThread();
     gid.cairo1.types.Status _dretval;
     auto _dlg = cast(gid.cairo1.types.WriteFunc*)closure;
     ubyte[] _data;
@@ -2034,6 +2038,7 @@ gid.cairo1.surface.Surface svgSurfaceCreateForStream(gid.cairo1.types.WriteFunc 
 {
   extern(C) cairo_status_t _writeFuncCallback(void* closure, const(ubyte)* data, uint length) nothrow
   {
+    gidAttachThread();
     gid.cairo1.types.Status _dretval;
     auto _dlg = cast(gid.cairo1.types.WriteFunc*)closure;
     ubyte[] _data;

@@ -29,6 +29,15 @@ class FileIcon : gid.gobject2.object.ObjectWrap, gid.gio2.icon.Icon, gid.gio2.lo
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -85,9 +94,16 @@ class FileIcon : gid.gobject2.object.ObjectWrap, gid.gio2.icon.Icon, gid.gio2.lo
   */
   this(gid.gio2.file.File file) nothrow
   {
-    GIcon* _cretval;
-    _cretval = g_file_icon_new(file ? cast(GFile*)(cast(gid.gobject2.object.ObjectWrap)file)._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GIcon* _cretval;
+      _cretval = g_file_icon_new(file ? cast(GFile*)(cast(gid.gobject2.object.ObjectWrap)file)._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

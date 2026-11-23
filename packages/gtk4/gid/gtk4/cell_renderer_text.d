@@ -722,9 +722,28 @@ class CellRendererText : gid.gtk4.cell_renderer.CellRenderer
   */
   this() nothrow
   {
-    GtkCellRenderer* _cretval;
-    _cretval = gtk_cell_renderer_text_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkCellRenderer* _cretval;
+      _cretval = gtk_cell_renderer_text_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncEdited(string path, string newText)
+  {
+    auto _klass = cast(GtkCellRendererTextClass*)_vfuncClass;
+    if (!_klass.edited)
+      return;
+
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    const(char)* _newText = newText.toCString!(No.Malloc, No.Nullable);
+    _klass.edited(cast(GtkCellRendererText*)this._cPtr, _path, _newText);
   }
 
   /**
@@ -776,6 +795,7 @@ class CellRendererText : gid.gtk4.cell_renderer.CellRenderer
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -801,6 +821,65 @@ class CellRendererText : gid.gtk4.cell_renderer.CellRenderer
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("edited", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from CellRendererText
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.cell_renderer_text.CellRendererText), T.stringof ~ " is not derived from gid.gtk4.cell_renderer_text.CellRendererText");
+
+    gid.gtk4.cell_renderer.CellRenderer._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEdited", true)[0]) == gid.gtk4.cell_renderer_text.CellRendererText))
+      _installVfunc(klass, "edited");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkCellRendererTextClass*)klass;
+
+    switch (vfunc)
+    {
+      case "edited":
+      {
+        static extern(C) void _vfuncEditedTramp(GtkCellRendererText* cellRendererText, const(char)* path, const(char)* newText) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.cell_renderer_text.CellRendererText)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cellRendererText);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellRendererTextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cellRendererText);
+            if (_klass.edited)
+              return (cast(typeof(&_vfuncEditedTramp))_klass.edited)(cellRendererText, path, newText);
+            return;
+          }
+
+          string _path = path.fromCString!(No.Free);
+          string _newText = newText.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncEdited(_path, _newText);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.cell_renderer_text.CellRendererText.vfuncEdited");
+          }
+        }
+
+        _klass.edited = cast(typeof(_klass.edited))&_vfuncEditedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

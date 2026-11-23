@@ -57,6 +57,7 @@ class AppSinkSimpleCallbacks : gid.gobject2.boxed.BoxedWrap!(gst_app_sink_simple
   {
     extern(C) void _eosCbCallback(GstAppSink* appsink, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gstapp1.types.AppSinkEosCallback*)userData;
 
       try
@@ -87,6 +88,7 @@ class AppSinkSimpleCallbacks : gid.gobject2.boxed.BoxedWrap!(gst_app_sink_simple
   {
     extern(C) gboolean _newEventCbCallback(GstAppSink* appsink, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gstapp1.types.AppSinkNewEventCallback*)userData;
 
@@ -121,6 +123,7 @@ class AppSinkSimpleCallbacks : gid.gobject2.boxed.BoxedWrap!(gst_app_sink_simple
   {
     extern(C) GstFlowReturn _newPrerollCbCallback(GstAppSink* appsink, void* userData) nothrow
     {
+      gidAttachThread();
       gid.gst1.types.FlowReturn _dretval;
       auto _dlg = cast(gid.gstapp1.types.AppSinkNewPrerollCallback*)userData;
 
@@ -155,6 +158,7 @@ class AppSinkSimpleCallbacks : gid.gobject2.boxed.BoxedWrap!(gst_app_sink_simple
   {
     extern(C) GstFlowReturn _newSampleCbCallback(GstAppSink* appsink, void* userData) nothrow
     {
+      gidAttachThread();
       gid.gst1.types.FlowReturn _dretval;
       auto _dlg = cast(gid.gstapp1.types.AppSinkNewSampleCallback*)userData;
 
@@ -189,6 +193,7 @@ class AppSinkSimpleCallbacks : gid.gobject2.boxed.BoxedWrap!(gst_app_sink_simple
   {
     extern(C) gboolean _proposeAllocationCbCallback(GstAppSink* appsink, GstQuery* query, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gstapp1.types.AppSinkProposeAllocationCallback*)userData;
       auto _query = query ? new gid.gst1.query.Query(cast(void*)query, Yes.Take)._cBorrow : null;

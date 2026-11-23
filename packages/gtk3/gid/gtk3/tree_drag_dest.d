@@ -22,6 +22,8 @@ interface TreeDragDest : GidWrap
     return cast(void function())gtk_tree_drag_dest_get_type != &gidSymbolNotFound ? gtk_tree_drag_dest_get_type() : cast(GType)0;
   }
 
+
+
   /**
       Asks the #GtkTreeDragDest to insert a row before the path dest,
       deriving the contents of the row from selection_data. If dest is

@@ -127,6 +127,15 @@ class SizeGroup : gid.gobject2.object.ObjectWrap, gid.gtk4.buildable.Buildable
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -191,9 +200,16 @@ class SizeGroup : gid.gobject2.object.ObjectWrap, gid.gtk4.buildable.Buildable
   */
   this(gid.gtk4.types.SizeGroupMode mode) nothrow
   {
-    GtkSizeGroup* _cretval;
-    _cretval = gtk_size_group_new(mode);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkSizeGroup* _cretval;
+      _cretval = gtk_size_group_new(mode);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

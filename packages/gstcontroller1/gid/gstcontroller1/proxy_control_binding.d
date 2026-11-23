@@ -22,6 +22,15 @@ class ProxyControlBinding : gid.gst1.control_binding.ControlBinding
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -72,11 +81,18 @@ class ProxyControlBinding : gid.gst1.control_binding.ControlBinding
   */
   this(gid.gst1.object.ObjectWrap object, string propertyName, gid.gst1.object.ObjectWrap refObject, string refPropertyName) nothrow
   {
-    GstControlBinding* _cretval;
-    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
-    const(char)* _refPropertyName = refPropertyName.toCString!(No.Malloc, No.Nullable);
-    _cretval = gst_proxy_control_binding_new(object ? cast(GstObject*)object._cPtr(No.Dup) : null, _propertyName, refObject ? cast(GstObject*)refObject._cPtr(No.Dup) : null, _refPropertyName);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GstControlBinding* _cretval;
+      const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
+      const(char)* _refPropertyName = refPropertyName.toCString!(No.Malloc, No.Nullable);
+      _cretval = gst_proxy_control_binding_new(object ? cast(GstObject*)object._cPtr(No.Dup) : null, _propertyName, refObject ? cast(GstObject*)refObject._cPtr(No.Dup) : null, _refPropertyName);
+      this(_cretval, No.Take);
+    }
   }
 }
 

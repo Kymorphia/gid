@@ -260,9 +260,16 @@ class CheckButton : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_check_button_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_check_button_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -296,6 +303,26 @@ class CheckButton : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
     _cretval = gtk_check_button_new_with_mnemonic(_label);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+
+  /** */
+  protected void vfuncActivate()
+  {
+    auto _klass = cast(GtkCheckButtonClass*)_vfuncClass;
+    if (!_klass.activate)
+      return;
+
+    _klass.activate(cast(GtkCheckButton*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncToggled()
+  {
+    auto _klass = cast(GtkCheckButtonClass*)_vfuncClass;
+    if (!_klass.toggled)
+      return;
+
+    _klass.toggled(cast(GtkCheckButton*)this._cPtr);
   }
 
   /**
@@ -490,6 +517,7 @@ class CheckButton : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -535,6 +563,7 @@ class CheckButton : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -554,6 +583,92 @@ class CheckButton : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggled", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from CheckButton
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.check_button.CheckButton), T.stringof ~ " is not derived from gid.gtk4.check_button.CheckButton");
+
+    gid.gtk4.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivate", true)[0]) == gid.gtk4.check_button.CheckButton))
+      _installVfunc(klass, "activate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncToggled", true)[0]) == gid.gtk4.check_button.CheckButton))
+      _installVfunc(klass, "toggled");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkCheckButtonClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate":
+      {
+        static extern(C) void _vfuncActivateTramp(GtkCheckButton* checkButton) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.check_button.CheckButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)checkButton);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCheckButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)checkButton);
+            if (_klass.activate)
+              return (cast(typeof(&_vfuncActivateTramp))_klass.activate)(checkButton);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncActivate();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.check_button.CheckButton.vfuncActivate");
+          }
+        }
+
+        _klass.activate = cast(typeof(_klass.activate))&_vfuncActivateTramp;
+        break;
+      }
+      case "toggled":
+      {
+        static extern(C) void _vfuncToggledTramp(GtkCheckButton* checkButton) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.check_button.CheckButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)checkButton);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCheckButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)checkButton);
+            if (_klass.toggled)
+              return (cast(typeof(&_vfuncToggledTramp))_klass.toggled)(checkButton);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncToggled();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.check_button.CheckButton.vfuncToggled");
+          }
+        }
+
+        _klass.toggled = cast(typeof(_klass.toggled))&_vfuncToggledTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

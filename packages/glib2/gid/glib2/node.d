@@ -117,6 +117,7 @@ class Node : StructWrap!(GNode)
   {
     extern(C) void _funcCallback(GNode* node, void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.glib2.types.NodeForeachFunc*)data;
       auto _node = node ? new gid.glib2.node.Node(cast(void*)node, null) : null;
 
@@ -244,6 +245,7 @@ class Node : StructWrap!(GNode)
   {
     extern(C) gboolean _funcCallback(GNode* node, void* data) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.glib2.types.NodeTraverseFunc*)data;
       auto _node = node ? new gid.glib2.node.Node(cast(void*)node, null) : null;

@@ -5,6 +5,7 @@ public import gid.core.basictypes;
 import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;
+import gid.gst1.buffer;
 import gid.gst1.urihandler;
 import gid.gst1.urihandler_mixin;
 import gid.gstaudio1.audio_cd_src_track;
@@ -65,6 +66,15 @@ class AudioCdSrc : gid.gstbase1.push_src.PushSrc, gid.gst1.urihandler.URIHandler
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
   }
 
   /** */
@@ -140,6 +150,68 @@ class AudioCdSrc : gid.gstbase1.push_src.PushSrc, gid.gst1.urihandler.URIHandler
   mixin URIHandlerT!();
 
   /**
+      closing the device
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncClose` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncClose()
+  {
+    auto _klass = cast(GstAudioCdSrcClass*)_vfuncClass;
+    if (!_klass.close)
+      return;
+
+    _klass.close(cast(GstAudioCdSrc*)this._cPtr);
+  }
+
+  /**
+      opening the device
+  
+      Params:
+        device = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncOpen` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncOpen(string device)
+  {
+    auto _klass = cast(GstAudioCdSrcClass*)_vfuncClass;
+    if (!_klass.open)
+      return typeof(return).init;
+
+    bool _retval;
+    const(char)* _device = device.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)_klass.open(cast(GstAudioCdSrc*)this._cPtr, _device);
+    return _retval;
+  }
+
+  /**
+      reading a sector
+  
+      Params:
+        sector = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncReadSector` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.buffer.Buffer vfuncReadSector(int sector)
+  {
+    auto _klass = cast(GstAudioCdSrcClass*)_vfuncClass;
+    if (!_klass.readSector)
+      return typeof(return).init;
+
+    GstBuffer* _cretval;
+    _cretval = _klass.readSector(cast(GstAudioCdSrc*)this._cPtr, sector);
+    auto _retval = _cretval ? new gid.gst1.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
       CDDA sources use this function from their start vfunc to announce the
       available data and audio tracks to the base source class. The caller
       should allocate track on the stack, the base source will do a shallow
@@ -154,6 +226,133 @@ class AudioCdSrc : gid.gstbase1.push_src.PushSrc, gid.gst1.urihandler.URIHandler
     bool _retval;
     _retval = cast(bool)gst_audio_cd_src_add_track(cast(GstAudioCdSrc*)this._cPtr, track ? cast(GstAudioCdSrcTrack*)track._cPtr : null);
     return _retval;
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from AudioCdSrc
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gstaudio1.audio_cd_src.AudioCdSrc), T.stringof ~ " is not derived from gid.gstaudio1.audio_cd_src.AudioCdSrc");
+
+    gid.gstbase1.push_src.PushSrc._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncClose", true)[0]) == gid.gstaudio1.audio_cd_src.AudioCdSrc))
+      _installVfunc(klass, "close");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncOpen", true)[0]) == gid.gstaudio1.audio_cd_src.AudioCdSrc))
+      _installVfunc(klass, "open");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncReadSector", true)[0]) == gid.gstaudio1.audio_cd_src.AudioCdSrc))
+      _installVfunc(klass, "read_sector");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstAudioCdSrcClass*)klass;
+
+    switch (vfunc)
+    {
+      case "close":
+      {
+        static extern(C) void _vfuncCloseTramp(GstAudioCdSrc* src) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstaudio1.audio_cd_src.AudioCdSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAudioCdSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);
+            if (_klass.close)
+              return (cast(typeof(&_vfuncCloseTramp))_klass.close)(src);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncClose();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstaudio1.audio_cd_src.AudioCdSrc.vfuncClose");
+          }
+        }
+
+        _klass.close = cast(typeof(_klass.close))&_vfuncCloseTramp;
+        break;
+      }
+      case "open":
+      {
+        static extern(C) gboolean _vfuncOpenTramp(GstAudioCdSrc* src, const(char)* device) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstaudio1.audio_cd_src.AudioCdSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAudioCdSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);
+            if (_klass.open)
+              return (cast(typeof(&_vfuncOpenTramp))_klass.open)(src, device);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          string _device = device.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncOpen(_device);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstaudio1.audio_cd_src.AudioCdSrc.vfuncOpen");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.open = cast(typeof(_klass.open))&_vfuncOpenTramp;
+        break;
+      }
+      case "read_sector":
+      {
+        static extern(C) GstBuffer* _vfuncReadSectorTramp(GstAudioCdSrc* src, int sector) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstaudio1.audio_cd_src.AudioCdSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAudioCdSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);
+            if (_klass.readSector)
+              return (cast(typeof(&_vfuncReadSectorTramp))_klass.readSector)(src, sector);
+            return typeof(return).init;
+          }
+
+          gid.gst1.buffer.Buffer _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncReadSector(sector);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstaudio1.audio_cd_src.AudioCdSrc.vfuncReadSector");
+          }
+          auto _retval = _dretval ? cast(GstBuffer*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.readSector = cast(typeof(_klass.readSector))&_vfuncReadSectorTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

@@ -481,9 +481,16 @@ class WrapLayout : gid.gtk4.layout_manager.LayoutManager, gid.gtk4.orientable.Or
   */
   this() nothrow
   {
-    GtkLayoutManager* _cretval;
-    _cretval = adw_wrap_layout_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkLayoutManager* _cretval;
+      _cretval = adw_wrap_layout_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

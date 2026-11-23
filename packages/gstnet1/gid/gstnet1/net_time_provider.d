@@ -33,6 +33,15 @@ class NetTimeProvider : gid.gst1.object.ObjectWrap, gid.gio2.initable.Initable
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -123,10 +132,17 @@ class NetTimeProvider : gid.gst1.object.ObjectWrap, gid.gio2.initable.Initable
   */
   this(gid.gst1.clock.Clock clock, string address, int port) nothrow
   {
-    GstNetTimeProvider* _cretval;
-    const(char)* _address = address.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gst_net_time_provider_new(clock ? cast(GstClock*)clock._cPtr(No.Dup) : null, _address, port);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GstNetTimeProvider* _cretval;
+      const(char)* _address = address.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gst_net_time_provider_new(clock ? cast(GstClock*)clock._cPtr(No.Dup) : null, _address, port);
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

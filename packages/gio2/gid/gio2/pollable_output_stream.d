@@ -33,6 +33,11 @@ interface PollableOutputStream : GidWrap
     return cast(void function())g_pollable_output_stream_get_type != &gidSymbolNotFound ? g_pollable_output_stream_get_type() : cast(GType)0;
   }
 
+
+
+
+
+
   /**
       Checks if stream is actually pollable. Some classes may implement
       #GPollableOutputStream but have only certain instances of that

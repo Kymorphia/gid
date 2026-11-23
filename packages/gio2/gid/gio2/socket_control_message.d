@@ -40,6 +40,15 @@ class SocketControlMessage : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -106,6 +115,89 @@ class SocketControlMessage : gid.gobject2.object.ObjectWrap
       Returns the "level" (i.e. the originating protocol) of the control message.
       This is often SOL_SOCKET.
       Returns: an integer describing the level
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetLevel` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected int vfuncGetLevel()
+  {
+    auto _klass = cast(GSocketControlMessageClass*)_vfuncClass;
+    if (!_klass.getLevel)
+      return typeof(return).init;
+
+    int _retval;
+    _retval = _klass.getLevel(cast(GSocketControlMessage*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns the space required for the control message, not including
+      headers or alignment.
+      Returns: The number of bytes required.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetSize` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected size_t vfuncGetSize()
+  {
+    auto _klass = cast(GSocketControlMessageClass*)_vfuncClass;
+    if (!_klass.getSize)
+      return typeof(return).init;
+
+    size_t _retval;
+    _retval = _klass.getSize(cast(GSocketControlMessage*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      gets the protocol specific type of the message.
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetType` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected int vfuncGetType()
+  {
+    auto _klass = cast(GSocketControlMessageClass*)_vfuncClass;
+    if (!_klass.getType)
+      return typeof(return).init;
+
+    int _retval;
+    _retval = _klass.getType(cast(GSocketControlMessage*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Converts the data in the message to bytes placed in the
+      message.
+      
+      data is guaranteed to have enough space to fit the size
+      returned by [gid.gio2.socket_control_message.SocketControlMessage.getSize] on this
+      object.
+  
+      Params:
+        data = A buffer to write data to
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSerialize` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSerialize(void* data)
+  {
+    auto _klass = cast(GSocketControlMessageClass*)_vfuncClass;
+    if (!_klass.serialize)
+      return;
+
+    _klass.serialize(cast(GSocketControlMessage*)this._cPtr, data);
+  }
+
+  /**
+      Returns the "level" (i.e. the originating protocol) of the control message.
+      This is often SOL_SOCKET.
+      Returns: an integer describing the level
   */
   int getLevel() nothrow
   {
@@ -152,6 +244,161 @@ class SocketControlMessage : gid.gobject2.object.ObjectWrap
   void serialize(void* data) nothrow
   {
     g_socket_control_message_serialize(cast(GSocketControlMessage*)this._cPtr, data);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from SocketControlMessage
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.socket_control_message.SocketControlMessage), T.stringof ~ " is not derived from gid.gio2.socket_control_message.SocketControlMessage");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetLevel", true)[0]) == gid.gio2.socket_control_message.SocketControlMessage))
+      _installVfunc(klass, "get_level");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetSize", true)[0]) == gid.gio2.socket_control_message.SocketControlMessage))
+      _installVfunc(klass, "get_size");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetType", true)[0]) == gid.gio2.socket_control_message.SocketControlMessage))
+      _installVfunc(klass, "get_type");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSerialize", true)[0]) == gid.gio2.socket_control_message.SocketControlMessage))
+      _installVfunc(klass, "serialize");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GSocketControlMessageClass*)klass;
+
+    switch (vfunc)
+    {
+      case "get_level":
+      {
+        static extern(C) int _vfuncGetLevelTramp(GSocketControlMessage* message) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.socket_control_message.SocketControlMessage)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)message);
+          if (!_obj)
+          {
+            auto _klass = cast(GSocketControlMessageClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)message);
+            if (_klass.getLevel)
+              return (cast(typeof(&_vfuncGetLevelTramp))_klass.getLevel)(message);
+            return typeof(return).init;
+          }
+
+          int _retval;
+
+          try
+          {
+            _retval = _obj.vfuncGetLevel();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.socket_control_message.SocketControlMessage.vfuncGetLevel");
+          }
+          return _retval;
+        }
+
+        _klass.getLevel = cast(typeof(_klass.getLevel))&_vfuncGetLevelTramp;
+        break;
+      }
+      case "get_size":
+      {
+        static extern(C) size_t _vfuncGetSizeTramp(GSocketControlMessage* message) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.socket_control_message.SocketControlMessage)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)message);
+          if (!_obj)
+          {
+            auto _klass = cast(GSocketControlMessageClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)message);
+            if (_klass.getSize)
+              return (cast(typeof(&_vfuncGetSizeTramp))_klass.getSize)(message);
+            return typeof(return).init;
+          }
+
+          size_t _retval;
+
+          try
+          {
+            _retval = _obj.vfuncGetSize();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.socket_control_message.SocketControlMessage.vfuncGetSize");
+          }
+          return _retval;
+        }
+
+        _klass.getSize = cast(typeof(_klass.getSize))&_vfuncGetSizeTramp;
+        break;
+      }
+      case "get_type":
+      {
+        static extern(C) int _vfuncGetTypeTramp(GSocketControlMessage* message) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.socket_control_message.SocketControlMessage)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)message);
+          if (!_obj)
+          {
+            auto _klass = cast(GSocketControlMessageClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)message);
+            if (_klass.getType)
+              return (cast(typeof(&_vfuncGetTypeTramp))_klass.getType)(message);
+            return typeof(return).init;
+          }
+
+          int _retval;
+
+          try
+          {
+            _retval = _obj.vfuncGetType();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.socket_control_message.SocketControlMessage.vfuncGetType");
+          }
+          return _retval;
+        }
+
+        _klass.getType = cast(typeof(_klass.getType))&_vfuncGetTypeTramp;
+        break;
+      }
+      case "serialize":
+      {
+        static extern(C) void _vfuncSerializeTramp(GSocketControlMessage* message, void* data) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.socket_control_message.SocketControlMessage)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)message);
+          if (!_obj)
+          {
+            auto _klass = cast(GSocketControlMessageClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)message);
+            if (_klass.serialize)
+              return (cast(typeof(&_vfuncSerializeTramp))_klass.serialize)(message, data);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSerialize(data);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.socket_control_message.SocketControlMessage.vfuncSerialize");
+          }
+        }
+
+        _klass.serialize = cast(typeof(_klass.serialize))&_vfuncSerializeTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

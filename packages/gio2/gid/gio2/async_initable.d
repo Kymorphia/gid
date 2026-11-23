@@ -152,6 +152,7 @@ interface AsyncInitable : GidWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -168,6 +169,8 @@ interface AsyncInitable : GidWrap
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_async_initable_newv_async(objectType, nParameters, parameters ? cast(GParameter*)parameters._cPtr : null, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
+
+
 
   /**
       Starts asynchronous initialization of the object implementing the

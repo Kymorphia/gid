@@ -18,6 +18,7 @@ import gid.gtk4.buildable;
 import gid.gtk4.buildable_mixin;
 import gid.gtk4.constraint_target;
 import gid.gtk4.constraint_target_mixin;
+import gid.gtk4.list_box_row;
 import gid.gtk4.widget;
 
 /**
@@ -273,9 +274,32 @@ class ActionRow : gid.adw1.preferences_row.PreferencesRow
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = adw_action_row_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = adw_action_row_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /**
+      Activates self.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncActivate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  override protected void vfuncActivate()
+  {
+    auto _klass = cast(AdwActionRowClass*)_vfuncClass;
+    if (!_klass.activate)
+      return;
+
+    _klass.activate(cast(AdwActionRow*)this._cPtr);
   }
 
   alias activate = gid.gtk4.widget.Widget.activate;
@@ -507,6 +531,7 @@ class ActionRow : gid.adw1.preferences_row.PreferencesRow
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -526,6 +551,62 @@ class ActionRow : gid.adw1.preferences_row.PreferencesRow
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activated", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from ActionRow
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.adw1.action_row.ActionRow), T.stringof ~ " is not derived from gid.adw1.action_row.ActionRow");
+
+    gid.gtk4.list_box_row.ListBoxRow._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivate", true)[0]) == gid.adw1.action_row.ActionRow))
+      _installVfunc(klass, "activate");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(AdwActionRowClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate":
+      {
+        static extern(C) void _vfuncActivateTramp(AdwActionRow* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.adw1.action_row.ActionRow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(AdwActionRowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.activate)
+              return (cast(typeof(&_vfuncActivateTramp))_klass.activate)(self);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncActivate();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.adw1.action_row.ActionRow.vfuncActivate");
+          }
+        }
+
+        _klass.activate = cast(typeof(_klass.activate))&_vfuncActivateTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

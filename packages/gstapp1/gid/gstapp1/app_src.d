@@ -95,6 +95,15 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -564,6 +573,154 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
       element is the last buffer of the stream.
       Returns: #GST_FLOW_OK when the EOS was successfully queued.
         #GST_FLOW_FLUSHING when appsrc is not PAUSED or PLAYING.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncEndOfStream` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.FlowReturn vfuncEndOfStream()
+  {
+    auto _klass = cast(GstAppSrcClass*)_vfuncClass;
+    if (!_klass.endOfStream)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    _cretval = _klass.endOfStream(cast(GstAppSrc*)this._cPtr);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncEnoughData()
+  {
+    auto _klass = cast(GstAppSrcClass*)_vfuncClass;
+    if (!_klass.enoughData)
+      return;
+
+    _klass.enoughData(cast(GstAppSrc*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncNeedData(uint length)
+  {
+    auto _klass = cast(GstAppSrcClass*)_vfuncClass;
+    if (!_klass.needData)
+      return;
+
+    _klass.needData(cast(GstAppSrc*)this._cPtr, length);
+  }
+
+  /**
+      Adds a buffer to the queue of buffers that the appsrc element will
+      push to its source pad.  This function takes ownership of the buffer.
+      
+      When the block property is TRUE, this function can block until free
+      space becomes available in the queue.
+  
+      Params:
+        buffer = a #GstBuffer to push
+      Returns: #GST_FLOW_OK when the buffer was successfully queued.
+        #GST_FLOW_FLUSHING when appsrc is not PAUSED or PLAYING.
+        #GST_FLOW_EOS when EOS occurred.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPushBuffer` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.FlowReturn vfuncPushBuffer(gid.gst1.buffer.Buffer buffer)
+  {
+    auto _klass = cast(GstAppSrcClass*)_vfuncClass;
+    if (!_klass.pushBuffer)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    _cretval = _klass.pushBuffer(cast(GstAppSrc*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      Adds a buffer list to the queue of buffers and buffer lists that the
+      appsrc element will push to its source pad.  This function takes ownership
+      of buffer_list.
+      
+      When the block property is TRUE, this function can block until free
+      space becomes available in the queue.
+  
+      Params:
+        bufferList = a #GstBufferList to push
+      Returns: #GST_FLOW_OK when the buffer list was successfully queued.
+        #GST_FLOW_FLUSHING when appsrc is not PAUSED or PLAYING.
+        #GST_FLOW_EOS when EOS occurred.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPushBufferList` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.FlowReturn vfuncPushBufferList(gid.gst1.buffer_list.BufferList bufferList)
+  {
+    auto _klass = cast(GstAppSrcClass*)_vfuncClass;
+    if (!_klass.pushBufferList)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    _cretval = _klass.pushBufferList(cast(GstAppSrc*)this._cPtr, bufferList ? cast(GstBufferList*)bufferList._cPtr(Yes.Dup) : null);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      Extract a buffer from the provided sample and adds it to the queue of
+      buffers that the appsrc element will push to its source pad. Any
+      previous caps that were set on appsrc will be replaced by the caps
+      associated with the sample if not equal.
+      
+      This function does not take ownership of the
+      sample so the sample needs to be unreffed after calling this function.
+      
+      When the block property is TRUE, this function can block until free
+      space becomes available in the queue.
+  
+      Params:
+        sample = a #GstSample from which buffer and caps may be
+          extracted (modified in place, changes are seen by the caller)
+      Returns: #GST_FLOW_OK when the buffer was successfully queued.
+        #GST_FLOW_FLUSHING when appsrc is not PAUSED or PLAYING.
+        #GST_FLOW_EOS when EOS occurred.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPushSample` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.FlowReturn vfuncPushSample(gid.gst1.sample.Sample sample)
+  {
+    auto _klass = cast(GstAppSrcClass*)_vfuncClass;
+    if (!_klass.pushSample)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    _cretval = _klass.pushSample(cast(GstAppSrc*)this._cPtr, sample ? cast(GstSample*)sample._cPtr(No.Dup) : null);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncSeekData(ulong offset)
+  {
+    auto _klass = cast(GstAppSrcClass*)_vfuncClass;
+    if (!_klass.seekData)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.seekData(cast(GstAppSrc*)this._cPtr, offset);
+    return _retval;
+  }
+
+  /**
+      Indicates to the appsrc element that the last buffer queued in the
+      element is the last buffer of the stream.
+      Returns: #GST_FLOW_OK when the EOS was successfully queued.
+        #GST_FLOW_FLUSHING when appsrc is not PAUSED or PLAYING.
   */
   gid.gst1.types.FlowReturn endOfStream() nothrow
   {
@@ -976,6 +1133,7 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1025,6 +1183,7 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1079,6 +1238,7 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1138,6 +1298,7 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1200,6 +1361,7 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1266,6 +1428,7 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1322,6 +1485,7 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1347,6 +1511,270 @@ class AppSrc : gid.gstbase1.base_src.BaseSrc, gid.gst1.urihandler.URIHandler
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("seek-data", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from AppSrc
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gstapp1.app_src.AppSrc), T.stringof ~ " is not derived from gid.gstapp1.app_src.AppSrc");
+
+    gid.gstbase1.base_src.BaseSrc._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEndOfStream", true)[0]) == gid.gstapp1.app_src.AppSrc))
+      _installVfunc(klass, "end_of_stream");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEnoughData", true)[0]) == gid.gstapp1.app_src.AppSrc))
+      _installVfunc(klass, "enough_data");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncNeedData", true)[0]) == gid.gstapp1.app_src.AppSrc))
+      _installVfunc(klass, "need_data");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPushBuffer", true)[0]) == gid.gstapp1.app_src.AppSrc))
+      _installVfunc(klass, "push_buffer");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPushBufferList", true)[0]) == gid.gstapp1.app_src.AppSrc))
+      _installVfunc(klass, "push_buffer_list");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPushSample", true)[0]) == gid.gstapp1.app_src.AppSrc))
+      _installVfunc(klass, "push_sample");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSeekData", true)[0]) == gid.gstapp1.app_src.AppSrc))
+      _installVfunc(klass, "seek_data");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstAppSrcClass*)klass;
+
+    switch (vfunc)
+    {
+      case "end_of_stream":
+      {
+        static extern(C) GstFlowReturn _vfuncEndOfStreamTramp(GstAppSrc* appsrc) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstapp1.app_src.AppSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsrc);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAppSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsrc);
+            if (_klass.endOfStream)
+              return (cast(typeof(&_vfuncEndOfStreamTramp))_klass.endOfStream)(appsrc);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.FlowReturn _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncEndOfStream();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstapp1.app_src.AppSrc.vfuncEndOfStream");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+
+          return _retval;
+        }
+
+        _klass.endOfStream = cast(typeof(_klass.endOfStream))&_vfuncEndOfStreamTramp;
+        break;
+      }
+      case "enough_data":
+      {
+        static extern(C) void _vfuncEnoughDataTramp(GstAppSrc* appsrc) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstapp1.app_src.AppSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsrc);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAppSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsrc);
+            if (_klass.enoughData)
+              return (cast(typeof(&_vfuncEnoughDataTramp))_klass.enoughData)(appsrc);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncEnoughData();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstapp1.app_src.AppSrc.vfuncEnoughData");
+          }
+        }
+
+        _klass.enoughData = cast(typeof(_klass.enoughData))&_vfuncEnoughDataTramp;
+        break;
+      }
+      case "need_data":
+      {
+        static extern(C) void _vfuncNeedDataTramp(GstAppSrc* appsrc, uint length) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstapp1.app_src.AppSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsrc);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAppSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsrc);
+            if (_klass.needData)
+              return (cast(typeof(&_vfuncNeedDataTramp))_klass.needData)(appsrc, length);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncNeedData(length);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstapp1.app_src.AppSrc.vfuncNeedData");
+          }
+        }
+
+        _klass.needData = cast(typeof(_klass.needData))&_vfuncNeedDataTramp;
+        break;
+      }
+      case "push_buffer":
+      {
+        static extern(C) GstFlowReturn _vfuncPushBufferTramp(GstAppSrc* appsrc, GstBuffer* buffer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstapp1.app_src.AppSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsrc);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAppSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsrc);
+            if (_klass.pushBuffer)
+              return (cast(typeof(&_vfuncPushBufferTramp))_klass.pushBuffer)(appsrc, buffer);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.FlowReturn _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncPushBuffer(buffer ? new gid.gst1.buffer.Buffer(cast(void*)buffer, Yes.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstapp1.app_src.AppSrc.vfuncPushBuffer");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+
+          return _retval;
+        }
+
+        _klass.pushBuffer = cast(typeof(_klass.pushBuffer))&_vfuncPushBufferTramp;
+        break;
+      }
+      case "push_buffer_list":
+      {
+        static extern(C) GstFlowReturn _vfuncPushBufferListTramp(GstAppSrc* appsrc, GstBufferList* bufferList) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstapp1.app_src.AppSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsrc);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAppSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsrc);
+            if (_klass.pushBufferList)
+              return (cast(typeof(&_vfuncPushBufferListTramp))_klass.pushBufferList)(appsrc, bufferList);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.FlowReturn _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncPushBufferList(bufferList ? new gid.gst1.buffer_list.BufferList(cast(void*)bufferList, Yes.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstapp1.app_src.AppSrc.vfuncPushBufferList");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+
+          return _retval;
+        }
+
+        _klass.pushBufferList = cast(typeof(_klass.pushBufferList))&_vfuncPushBufferListTramp;
+        break;
+      }
+      case "push_sample":
+      {
+        static extern(C) GstFlowReturn _vfuncPushSampleTramp(GstAppSrc* appsrc, GstSample* sample) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstapp1.app_src.AppSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsrc);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAppSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsrc);
+            if (_klass.pushSample)
+              return (cast(typeof(&_vfuncPushSampleTramp))_klass.pushSample)(appsrc, sample);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.FlowReturn _dretval;
+          auto _sample = sample ? new gid.gst1.sample.Sample(cast(void*)sample, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncPushSample(_sample);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstapp1.app_src.AppSrc.vfuncPushSample");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+          if (_sample)
+            _sample._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.pushSample = cast(typeof(_klass.pushSample))&_vfuncPushSampleTramp;
+        break;
+      }
+      case "seek_data":
+      {
+        static extern(C) gboolean _vfuncSeekDataTramp(GstAppSrc* appsrc, ulong offset) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstapp1.app_src.AppSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsrc);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAppSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsrc);
+            if (_klass.seekData)
+              return (cast(typeof(&_vfuncSeekDataTramp))_klass.seekData)(appsrc, offset);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncSeekData(offset);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstapp1.app_src.AppSrc.vfuncSeekData");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.seekData = cast(typeof(_klass.seekData))&_vfuncSeekDataTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

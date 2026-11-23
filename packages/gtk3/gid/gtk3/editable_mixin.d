@@ -4,8 +4,11 @@ module gid.gtk3.editable_mixin;
 public import gid.core.basictypes;
 public import gid.gtk3.editable_iface_proxy;
 public import gid.core.utils;
+public import gid.gobject2.c.functions;
+public import gid.gobject2.c.types;
 public import gid.gobject2.dclosure;
 public import gid.gobject2.gid_builder;
+public import gid.gobject2.object;
 public import gid.gtk3.c.functions;
 public import gid.gtk3.c.types;
 public import gid.gtk3.types;
@@ -49,6 +52,268 @@ public import gid.gtk3.types;
 */
 template EditableT()
 {
+
+  /** */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncChanged()
+  {
+    auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.editable.Editable._getGType);
+    if (!_klass || !_klass.changed)
+      return;
+
+    _klass.changed(cast(GtkEditable*)this._cPtr);
+  }
+
+  /**
+      Deletes a sequence of characters. The characters that are deleted are
+      those characters at positions from start_pos up to, but not including
+      end_pos. If end_pos is negative, then the characters deleted
+      are those from start_pos to the end of the text.
+      
+      Note that the positions are specified in characters, not bytes.
+  
+      Params:
+        startPos = start position
+        endPos = end position
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncDeleteText`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncDeleteText(int startPos, int endPos)
+  {
+    auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.editable.Editable._getGType);
+    if (!_klass || !_klass.deleteText)
+      return;
+
+    _klass.deleteText(cast(GtkEditable*)this._cPtr, startPos, endPos);
+  }
+
+  /**
+      Deletes a sequence of characters. The characters that are deleted are
+      those characters at positions from start_pos up to, but not including
+      end_pos. If end_pos is negative, then the characters deleted
+      are those from start_pos to the end of the text.
+      
+      Note that the positions are specified in characters, not bytes.
+  
+      Params:
+        startPos = start position
+        endPos = end position
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncDoDeleteText`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncDoDeleteText(int startPos, int endPos)
+  {
+    auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.editable.Editable._getGType);
+    if (!_klass || !_klass.doDeleteText)
+      return;
+
+    _klass.doDeleteText(cast(GtkEditable*)this._cPtr, startPos, endPos);
+  }
+
+  /**
+      Inserts new_text_length bytes of new_text into the contents of the
+      widget, at position position.
+      
+      Note that the position is in characters, not in bytes.
+      The function updates position to point after the newly inserted text.
+  
+      Params:
+        newText = the text to append
+        newTextLength = the length of the text in bytes, or -1
+        position = location of the position text will be inserted at
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncDoInsertText`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncDoInsertText(string newText, int newTextLength, ref int position)
+  {
+    auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.editable.Editable._getGType);
+    if (!_klass || !_klass.doInsertText)
+      return;
+
+    const(char)* _newText = newText.toCString!(No.Malloc, No.Nullable);
+    _klass.doInsertText(cast(GtkEditable*)this._cPtr, _newText, newTextLength, cast(int*)&position);
+  }
+
+  /**
+      Retrieves a sequence of characters. The characters that are retrieved
+      are those characters at positions from start_pos up to, but not
+      including end_pos. If end_pos is negative, then the characters
+      retrieved are those characters from start_pos to the end of the text.
+      
+      Note that positions are specified in characters, not bytes.
+  
+      Params:
+        startPos = start of text
+        endPos = end of text
+      Returns: a pointer to the contents of the widget as a
+             string. This string is allocated by the #GtkEditable
+             implementation and should be freed by the caller.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetChars`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected string vfuncGetChars(int startPos, int endPos)
+  {
+    auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.editable.Editable._getGType);
+    if (!_klass || !_klass.getChars)
+      return typeof(return).init;
+
+    char* _cretval;
+    _cretval = _klass.getChars(cast(GtkEditable*)this._cPtr, startPos, endPos);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Retrieves the current position of the cursor relative to the start
+      of the content of the editable.
+      
+      Note that this position is in characters, not in bytes.
+      Returns: the cursor position
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetPosition`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected int vfuncGetPosition()
+  {
+    auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.editable.Editable._getGType);
+    if (!_klass || !_klass.getPosition)
+      return typeof(return).init;
+
+    int _retval;
+    _retval = _klass.getPosition(cast(GtkEditable*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves the selection bound of the editable. start_pos will be filled
+      with the start of the selection and end_pos with end. If no text was
+      selected both will be identical and false will be returned.
+      
+      Note that positions are specified in characters, not bytes.
+  
+      Params:
+        startPos = location to store the starting position, or null
+        endPos = location to store the end position, or null
+      Returns: true if an area is selected, false otherwise
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetSelectionBounds`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncGetSelectionBounds(out int startPos, out int endPos)
+  {
+    auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.editable.Editable._getGType);
+    if (!_klass || !_klass.getSelectionBounds)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.getSelectionBounds(cast(GtkEditable*)this._cPtr, cast(int*)&startPos, cast(int*)&endPos);
+    return _retval;
+  }
+
+  /**
+      Inserts new_text_length bytes of new_text into the contents of the
+      widget, at position position.
+      
+      Note that the position is in characters, not in bytes.
+      The function updates position to point after the newly inserted text.
+  
+      Params:
+        newText = the text to append
+        newTextLength = the length of the text in bytes, or -1
+        position = location of the position text will be inserted at
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncInsertText`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncInsertText(string newText, int newTextLength, ref int position)
+  {
+    auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.editable.Editable._getGType);
+    if (!_klass || !_klass.insertText)
+      return;
+
+    const(char)* _newText = newText.toCString!(No.Malloc, No.Nullable);
+    _klass.insertText(cast(GtkEditable*)this._cPtr, _newText, newTextLength, cast(int*)&position);
+  }
+
+  /**
+      Sets the cursor position in the editable to the given value.
+      
+      The cursor is displayed before the character with the given (base 0)
+      index in the contents of the editable. The value must be less than or
+      equal to the number of characters in the editable. A value of -1
+      indicates that the position should be set after the last character
+      of the editable. Note that position is in characters, not in bytes.
+  
+      Params:
+        position = the position of the cursor
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSetPosition`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncSetPosition(int position)
+  {
+    auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.editable.Editable._getGType);
+    if (!_klass || !_klass.setPosition)
+      return;
+
+    _klass.setPosition(cast(GtkEditable*)this._cPtr, position);
+  }
+
+  /**
+      Selects a region of text. The characters that are selected are
+      those characters at positions from start_pos up to, but not
+      including end_pos. If end_pos is negative, then the
+      characters selected are those characters from start_pos to
+      the end of the text.
+      
+      Note that positions are specified in characters, not bytes.
+  
+      Params:
+        startPos = start of region
+        endPos = end of region
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSetSelectionBounds`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncSetSelectionBounds(int startPos, int endPos)
+  {
+    auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.editable.Editable._getGType);
+    if (!_klass || !_klass.setSelectionBounds)
+      return;
+
+    _klass.setSelectionBounds(cast(GtkEditable*)this._cPtr, startPos, endPos);
+  }
 
   /**
       Copies the contents of the currently selected content in the editable and
@@ -270,6 +535,7 @@ template EditableT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -328,6 +594,7 @@ template EditableT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -393,6 +660,7 @@ template EditableT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -428,6 +696,347 @@ template EditableT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("insert-text", closure, after);
+  }
+
+  /// True if the D class T overrides any vfunc method of gid.gtk3.editable.Editable (DiG)
+  enum bool _ifaceVfuncsOverridden_gid_gtk3_editable_Editable(T) = !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncChanged", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncDeleteText", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncDoDeleteText", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncDoInsertText", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetChars", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetPosition", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetSelectionBounds", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncInsertText", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetPosition", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetSelectionBounds", true)[0], gid.gobject2.object.GidIfaceVfunc);
+
+  /**
+      Install the C trampolines of the gid.gtk3.editable.Editable vfunc methods which a D class overrides into the interface
+      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      trampoline is a compile error.
+      Params:
+        T = D class
+        iface = Interface structure of the GType registered for T
+  */
+  static void _installIfaceVfuncs_gid_gtk3_editable_Editable(T)(void* iface) nothrow
+  {
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncChanged", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_editable_Editable(iface, "changed");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncDeleteText", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_editable_Editable(iface, "delete_text");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncDoDeleteText", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_editable_Editable(iface, "do_delete_text");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncDoInsertText", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_editable_Editable(iface, "do_insert_text");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetChars", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_editable_Editable(iface, "get_chars");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetPosition", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_editable_Editable(iface, "get_position");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetSelectionBounds", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_editable_Editable(iface, "get_selection_bounds");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncInsertText", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_editable_Editable(iface, "insert_text");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetPosition", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_editable_Editable(iface, "set_position");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetSelectionBounds", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_editable_Editable(iface, "set_selection_bounds");
+  }
+
+  private static void _installIfaceVfunc_gid_gtk3_editable_Editable(void* iface, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkEditableInterface*)iface;
+
+    switch (vfunc)
+    {
+      case "changed":
+      {
+        static extern(C) void _vfuncChangedTramp(GtkEditable* editable) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)editable);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)editable), gid.gtk3.editable.Editable._getGType);
+            if (_klass && _klass.changed)
+              return (cast(typeof(&_vfuncChangedTramp))_klass.changed)(editable);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.editable.Editable.vfuncChanged");
+          }
+        }
+
+        _klass.changed = cast(typeof(_klass.changed))&_vfuncChangedTramp;
+        break;
+      }
+      case "delete_text":
+      {
+        static extern(C) void _vfuncDeleteTextTramp(GtkEditable* editable, int startPos, int endPos) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)editable);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)editable), gid.gtk3.editable.Editable._getGType);
+            if (_klass && _klass.deleteText)
+              return (cast(typeof(&_vfuncDeleteTextTramp))_klass.deleteText)(editable, startPos, endPos);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDeleteText(startPos, endPos);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.editable.Editable.vfuncDeleteText");
+          }
+        }
+
+        _klass.deleteText = cast(typeof(_klass.deleteText))&_vfuncDeleteTextTramp;
+        break;
+      }
+      case "do_delete_text":
+      {
+        static extern(C) void _vfuncDoDeleteTextTramp(GtkEditable* editable, int startPos, int endPos) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)editable);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)editable), gid.gtk3.editable.Editable._getGType);
+            if (_klass && _klass.doDeleteText)
+              return (cast(typeof(&_vfuncDoDeleteTextTramp))_klass.doDeleteText)(editable, startPos, endPos);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDoDeleteText(startPos, endPos);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.editable.Editable.vfuncDoDeleteText");
+          }
+        }
+
+        _klass.doDeleteText = cast(typeof(_klass.doDeleteText))&_vfuncDoDeleteTextTramp;
+        break;
+      }
+      case "do_insert_text":
+      {
+        static extern(C) void _vfuncDoInsertTextTramp(GtkEditable* editable, const(char)* newText, int newTextLength, int* position) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)editable);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)editable), gid.gtk3.editable.Editable._getGType);
+            if (_klass && _klass.doInsertText)
+              return (cast(typeof(&_vfuncDoInsertTextTramp))_klass.doInsertText)(editable, newText, newTextLength, position);
+            return;
+          }
+
+          string _newText = newText.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncDoInsertText(_newText, newTextLength, *position);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.editable.Editable.vfuncDoInsertText");
+          }
+        }
+
+        _klass.doInsertText = cast(typeof(_klass.doInsertText))&_vfuncDoInsertTextTramp;
+        break;
+      }
+      case "get_chars":
+      {
+        static extern(C) char* _vfuncGetCharsTramp(GtkEditable* editable, int startPos, int endPos) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)editable);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)editable), gid.gtk3.editable.Editable._getGType);
+            if (_klass && _klass.getChars)
+              return (cast(typeof(&_vfuncGetCharsTramp))_klass.getChars)(editable, startPos, endPos);
+            return typeof(return).init;
+          }
+
+          string _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetChars(startPos, endPos);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.editable.Editable.vfuncGetChars");
+          }
+          auto _retval = toCString!(Yes.Malloc, No.Nullable)(_dretval);
+
+          return _retval;
+        }
+
+        _klass.getChars = cast(typeof(_klass.getChars))&_vfuncGetCharsTramp;
+        break;
+      }
+      case "get_position":
+      {
+        static extern(C) int _vfuncGetPositionTramp(GtkEditable* editable) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)editable);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)editable), gid.gtk3.editable.Editable._getGType);
+            if (_klass && _klass.getPosition)
+              return (cast(typeof(&_vfuncGetPositionTramp))_klass.getPosition)(editable);
+            return typeof(return).init;
+          }
+
+          int _retval;
+
+          try
+          {
+            _retval = _obj.vfuncGetPosition();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.editable.Editable.vfuncGetPosition");
+          }
+          return _retval;
+        }
+
+        _klass.getPosition = cast(typeof(_klass.getPosition))&_vfuncGetPositionTramp;
+        break;
+      }
+      case "get_selection_bounds":
+      {
+        static extern(C) gboolean _vfuncGetSelectionBoundsTramp(GtkEditable* editable, int* startPos, int* endPos) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)editable);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)editable), gid.gtk3.editable.Editable._getGType);
+            if (_klass && _klass.getSelectionBounds)
+              return (cast(typeof(&_vfuncGetSelectionBoundsTramp))_klass.getSelectionBounds)(editable, startPos, endPos);
+            return typeof(return).init;
+          }
+
+          typeof(*startPos) _startPosNull;
+          if (!startPos)
+            startPos = &_startPosNull;
+
+          typeof(*endPos) _endPosNull;
+          if (!endPos)
+            endPos = &_endPosNull;
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetSelectionBounds(*startPos, *endPos);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.editable.Editable.vfuncGetSelectionBounds");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getSelectionBounds = cast(typeof(_klass.getSelectionBounds))&_vfuncGetSelectionBoundsTramp;
+        break;
+      }
+      case "insert_text":
+      {
+        static extern(C) void _vfuncInsertTextTramp(GtkEditable* editable, const(char)* newText, int newTextLength, int* position) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)editable);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)editable), gid.gtk3.editable.Editable._getGType);
+            if (_klass && _klass.insertText)
+              return (cast(typeof(&_vfuncInsertTextTramp))_klass.insertText)(editable, newText, newTextLength, position);
+            return;
+          }
+
+          string _newText = newText.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncInsertText(_newText, newTextLength, *position);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.editable.Editable.vfuncInsertText");
+          }
+        }
+
+        _klass.insertText = cast(typeof(_klass.insertText))&_vfuncInsertTextTramp;
+        break;
+      }
+      case "set_position":
+      {
+        static extern(C) void _vfuncSetPositionTramp(GtkEditable* editable, int position) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)editable);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)editable), gid.gtk3.editable.Editable._getGType);
+            if (_klass && _klass.setPosition)
+              return (cast(typeof(&_vfuncSetPositionTramp))_klass.setPosition)(editable, position);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSetPosition(position);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.editable.Editable.vfuncSetPosition");
+          }
+        }
+
+        _klass.setPosition = cast(typeof(_klass.setPosition))&_vfuncSetPositionTramp;
+        break;
+      }
+      case "set_selection_bounds":
+      {
+        static extern(C) void _vfuncSetSelectionBoundsTramp(GtkEditable* editable, int startPos, int endPos) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)editable);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEditableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)editable), gid.gtk3.editable.Editable._getGType);
+            if (_klass && _klass.setSelectionBounds)
+              return (cast(typeof(&_vfuncSetSelectionBoundsTramp))_klass.setSelectionBounds)(editable, startPos, endPos);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSetSelectionBounds(startPos, endPos);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.editable.Editable.vfuncSetSelectionBounds");
+          }
+        }
+
+        _klass.setSelectionBounds = cast(typeof(_klass.setSelectionBounds))&_vfuncSetSelectionBoundsTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

@@ -30,6 +30,15 @@ class TlsCertificate : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -433,6 +442,62 @@ class TlsCertificate : gid.gobject2.object.ObjectWrap
   }
 
   /**
+      This verifies cert and returns a set of #GTlsCertificateFlags
+      indicating any problems found with it. This can be used to verify a
+      certificate outside the context of making a connection, or to
+      check a certificate against a CA that is not part of the system
+      CA database.
+      
+      If cert is valid, [gid.gio2.types.TlsCertificateFlags.NoFlags] is returned.
+      
+      If identity is not null, cert's name(s) will be compared against
+      it, and [gid.gio2.types.TlsCertificateFlags.BadIdentity] will be set in the return
+      value if it does not match. If identity is null, that bit will
+      never be set in the return value.
+      
+      If trusted_ca is not null, then cert (or one of the certificates
+      in its chain) must be signed by it, or else
+      [gid.gio2.types.TlsCertificateFlags.UnknownCa] will be set in the return value. If
+      trusted_ca is null, that bit will never be set in the return
+      value.
+      
+      GLib guarantees that if certificate verification fails, at least one
+      error will be set in the return value, but it does not guarantee
+      that all possible errors will be set. Accordingly, you may not safely
+      decide to ignore any particular type of error. For example, it would
+      be incorrect to mask [gid.gio2.types.TlsCertificateFlags.Expired] if you want to allow
+      expired certificates, because this could potentially be the only
+      error flag set even if other problems exist with the certificate.
+      
+      Because TLS session context is not used, #GTlsCertificate may not
+      perform as many checks on the certificates as #GTlsConnection would.
+      For example, certificate constraints may not be honored, and
+      revocation checks may not be performed. The best way to verify TLS
+      certificates used by a TLS connection is to let #GTlsConnection
+      handle the verification.
+  
+      Params:
+        identity = the expected peer identity
+        trustedCa = the certificate of a trusted authority
+      Returns: the appropriate #GTlsCertificateFlags
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncVerify` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gio2.types.TlsCertificateFlags vfuncVerify(gid.gio2.socket_connectable.SocketConnectable identity = null, gid.gio2.tls_certificate.TlsCertificate trustedCa = null)
+  {
+    auto _klass = cast(GTlsCertificateClass*)_vfuncClass;
+    if (!_klass.verify)
+      return typeof(return).init;
+
+    GTlsCertificateFlags _cretval;
+    _cretval = _klass.verify(cast(GTlsCertificate*)this._cPtr, identity ? cast(GSocketConnectable*)(cast(gid.gobject2.object.ObjectWrap)identity)._cPtr(No.Dup) : null, trustedCa ? cast(GTlsCertificate*)trustedCa._cPtr(No.Dup) : null);
+    gid.gio2.types.TlsCertificateFlags _retval = cast(gid.gio2.types.TlsCertificateFlags)_cretval;
+    return _retval;
+  }
+
+  /**
       Gets the value of #GTlsCertificate:dns-names.
       Returns: A #GPtrArray of
         #GBytes elements, or null if it's not available.
@@ -584,6 +649,67 @@ class TlsCertificate : gid.gobject2.object.ObjectWrap
     _cretval = g_tls_certificate_verify(cast(GTlsCertificate*)this._cPtr, identity ? cast(GSocketConnectable*)(cast(gid.gobject2.object.ObjectWrap)identity)._cPtr(No.Dup) : null, trustedCa ? cast(GTlsCertificate*)trustedCa._cPtr(No.Dup) : null);
     gid.gio2.types.TlsCertificateFlags _retval = cast(gid.gio2.types.TlsCertificateFlags)_cretval;
     return _retval;
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from TlsCertificate
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.tls_certificate.TlsCertificate), T.stringof ~ " is not derived from gid.gio2.tls_certificate.TlsCertificate");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncVerify", true)[0]) == gid.gio2.tls_certificate.TlsCertificate))
+      _installVfunc(klass, "verify");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GTlsCertificateClass*)klass;
+
+    switch (vfunc)
+    {
+      case "verify":
+      {
+        static extern(C) GTlsCertificateFlags _vfuncVerifyTramp(GTlsCertificate* cert, GSocketConnectable* identity, GTlsCertificate* trustedCa) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.tls_certificate.TlsCertificate)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cert);
+          if (!_obj)
+          {
+            auto _klass = cast(GTlsCertificateClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cert);
+            if (_klass.verify)
+              return (cast(typeof(&_vfuncVerifyTramp))_klass.verify)(cert, identity, trustedCa);
+            return typeof(return).init;
+          }
+
+          gid.gio2.types.TlsCertificateFlags _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncVerify(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.socket_connectable.SocketConnectable)(cast(void*)identity, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.tls_certificate.TlsCertificate)(cast(void*)trustedCa, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.tls_certificate.TlsCertificate.vfuncVerify");
+          }
+          auto _retval = cast(GTlsCertificateFlags)_dretval;
+
+          return _retval;
+        }
+
+        _klass.verify = cast(typeof(_klass.verify))&_vfuncVerifyTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

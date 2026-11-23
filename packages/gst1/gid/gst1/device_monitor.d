@@ -137,9 +137,16 @@ class DeviceMonitor : gid.gst1.object.ObjectWrap
   */
   this() nothrow
   {
-    GstDeviceMonitor* _cretval;
-    _cretval = gst_device_monitor_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GstDeviceMonitor* _cretval;
+      _cretval = gst_device_monitor_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

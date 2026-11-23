@@ -207,6 +207,7 @@ class Scanner : OpaqueWrap!(GScanner*, g_scanner_destroy, void)
   {
     extern(C) void _funcCallback(void* key, void* value, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.glib2.types.HFunc*)userData;
 
       try

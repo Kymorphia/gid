@@ -212,6 +212,7 @@ class RenderReplay : gid.gobject2.boxed.BoxedWrap!(gsk_render_replay_get_type)
   {
     extern(C) PangoFont* _filterCallback(GskRenderReplay* replay, PangoFont* font, void* userData) nothrow
     {
+      gidAttachThread();
       gid.pango1.font.Font _dretval;
       auto _dlg = cast(gid.gsk4.types.RenderReplayFontFilter*)userData;
       auto _replay = replay ? new gid.gsk4.render_replay.RenderReplay(cast(void*)replay, Yes.Take)._cBorrow : null;
@@ -258,6 +259,7 @@ class RenderReplay : gid.gobject2.boxed.BoxedWrap!(gsk_render_replay_get_type)
   {
     extern(C) GskRenderNode* _filterCallback(GskRenderReplay* replay, GskRenderNode* node, void* userData) nothrow
     {
+      gidAttachThread();
       gid.gsk4.render_node.RenderNode _dretval;
       auto _dlg = cast(gid.gsk4.types.RenderReplayNodeFilter*)userData;
       auto _replay = replay ? new gid.gsk4.render_replay.RenderReplay(cast(void*)replay, Yes.Take)._cBorrow : null;
@@ -296,6 +298,7 @@ class RenderReplay : gid.gobject2.boxed.BoxedWrap!(gsk_render_replay_get_type)
   {
     extern(C) GdkTexture* _filterCallback(GskRenderReplay* replay, GdkTexture* texture, void* userData) nothrow
     {
+      gidAttachThread();
       gid.gdk4.texture.Texture _dretval;
       auto _dlg = cast(gid.gsk4.types.RenderReplayTextureFilter*)userData;
       auto _replay = replay ? new gid.gsk4.render_replay.RenderReplay(cast(void*)replay, Yes.Take)._cBorrow : null;

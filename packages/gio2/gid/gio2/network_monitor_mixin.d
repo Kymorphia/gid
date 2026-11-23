@@ -11,6 +11,8 @@ public import gid.gio2.cancellable;
 public import gid.gio2.socket_connectable;
 public import gid.gio2.types;
 public import gid.glib2.error;
+public import gid.gobject2.c.functions;
+public import gid.gobject2.c.types;
 public import gid.gobject2.dclosure;
 public import gid.gobject2.gid_builder;
 public import gid.gobject2.object;
@@ -116,6 +118,151 @@ template NetworkMonitorT()
         cancellable = a #GCancellable, or null
       Returns: true if connectable is reachable, false if not.
       Throws: [ErrorWrap]
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncCanReach`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncCanReach(gid.gio2.socket_connectable.SocketConnectable connectable, gid.gio2.cancellable.Cancellable cancellable = null)
+  {
+    auto _klass = cast(GNetworkMonitorInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gio2.network_monitor.NetworkMonitor._getGType);
+    if (!_klass || !_klass.canReach)
+      return typeof(return).init;
+
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)_klass.canReach(cast(GNetworkMonitor*)this._cPtr, connectable ? cast(GSocketConnectable*)(cast(gid.gobject2.object.ObjectWrap)connectable)._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Asynchronously attempts to determine whether or not the host
+      pointed to by connectable can be reached, without actually
+      trying to connect to it.
+      
+      For more details, see [gid.gio2.network_monitor.NetworkMonitor.canReach].
+      
+      When the operation is finished, callback will be called.
+      You can then call [gid.gio2.network_monitor.NetworkMonitor.canReachFinish]
+      to get the result of the operation.
+  
+      Params:
+        connectable = a #GSocketConnectable
+        cancellable = a #GCancellable, or null
+        callback = a #GAsyncReadyCallback
+              to call when the request is satisfied
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncCanReachAsync`
+      to chain up from an override.
+      Overriding it from D is not supported (parameter 'callback' of kind 'Callback' is not supported).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncCanReachAsync(gid.gio2.socket_connectable.SocketConnectable connectable, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null)
+  {
+    auto _klass = cast(GNetworkMonitorInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gio2.network_monitor.NetworkMonitor._getGType);
+    if (!_klass || !_klass.canReachAsync)
+      return;
+
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      gidAttachThread();
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    _klass.canReachAsync(cast(GNetworkMonitor*)this._cPtr, connectable ? cast(GSocketConnectable*)(cast(gid.gobject2.object.ObjectWrap)connectable)._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Finishes an async network connectivity test.
+      See [gid.gio2.network_monitor.NetworkMonitor.canReachAsync].
+  
+      Params:
+        result = a #GAsyncResult
+      Returns: true if network is reachable, false if not.
+      Throws: [ErrorWrap]
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncCanReachFinish`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncCanReachFinish(gid.gio2.async_result.AsyncResult result)
+  {
+    auto _klass = cast(GNetworkMonitorInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gio2.network_monitor.NetworkMonitor._getGType);
+    if (!_klass || !_klass.canReachFinish)
+      return typeof(return).init;
+
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)_klass.canReachFinish(cast(GNetworkMonitor*)this._cPtr, result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      the virtual function pointer for the
+       GNetworkMonitor::network-changed signal.
+  
+      Params:
+        networkAvailable = 
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncNetworkChanged`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncNetworkChanged(bool networkAvailable)
+  {
+    auto _klass = cast(GNetworkMonitorInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gio2.network_monitor.NetworkMonitor._getGType);
+    if (!_klass || !_klass.networkChanged)
+      return;
+
+    _klass.networkChanged(cast(GNetworkMonitor*)this._cPtr, networkAvailable);
+  }
+
+  /**
+      Attempts to determine whether or not the host pointed to by
+      connectable can be reached, without actually trying to connect to
+      it.
+      
+      This may return true even when #GNetworkMonitor:network-available
+      is false, if, for example, monitor can determine that
+      connectable refers to a host on a local network.
+      
+      If monitor believes that an attempt to connect to connectable
+      will succeed, it will return true. Otherwise, it will return
+      false and set error to an appropriate error (such as
+      [gid.gio2.types.IOErrorEnum.HostUnreachable]).
+      
+      Note that although this does not attempt to connect to
+      connectable, it may still block for a brief period of time (eg,
+      trying to do multicast DNS on the local network), so if you do not
+      want to block, you should use [gid.gio2.network_monitor.NetworkMonitor.canReachAsync].
+  
+      Params:
+        connectable = a #GSocketConnectable
+        cancellable = a #GCancellable, or null
+      Returns: true if connectable is reachable, false if not.
+      Throws: [ErrorWrap]
   */
   override bool canReach(gid.gio2.socket_connectable.SocketConnectable connectable, gid.gio2.cancellable.Cancellable cancellable = null)
   {
@@ -148,6 +295,7 @@ template NetworkMonitorT()
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -266,6 +414,7 @@ template NetworkMonitorT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -288,6 +437,131 @@ template NetworkMonitorT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("network-changed", closure, after);
+  }
+
+  /// True if the D class T overrides any vfunc method of gid.gio2.network_monitor.NetworkMonitor (DiG)
+  enum bool _ifaceVfuncsOverridden_gid_gio2_network_monitor_NetworkMonitor(T) = !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncCanReach", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncCanReachAsync", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncCanReachFinish", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncNetworkChanged", true)[0], gid.gobject2.object.GidIfaceVfunc);
+
+  /**
+      Install the C trampolines of the gid.gio2.network_monitor.NetworkMonitor vfunc methods which a D class overrides into the interface
+      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      trampoline is a compile error.
+      Params:
+        T = D class
+        iface = Interface structure of the GType registered for T
+  */
+  static void _installIfaceVfuncs_gid_gio2_network_monitor_NetworkMonitor(T)(void* iface) nothrow
+  {
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncCanReach", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gio2_network_monitor_NetworkMonitor(iface, "can_reach");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncCanReachAsync", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      static assert(0, "Overriding gid.gio2.network_monitor.NetworkMonitor.vfuncCanReachAsync is not supported: parameter 'callback' of kind 'Callback' is not supported");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncCanReachFinish", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gio2_network_monitor_NetworkMonitor(iface, "can_reach_finish");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncNetworkChanged", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gio2_network_monitor_NetworkMonitor(iface, "network_changed");
+  }
+
+  private static void _installIfaceVfunc_gid_gio2_network_monitor_NetworkMonitor(void* iface, string vfunc) nothrow
+  {
+    auto _klass = cast(GNetworkMonitorInterface*)iface;
+
+    switch (vfunc)
+    {
+      case "can_reach":
+      {
+        static extern(C) gboolean _vfuncCanReachTramp(GNetworkMonitor* monitor, GSocketConnectable* connectable, GCancellable* cancellable, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)monitor);
+          if (!_obj)
+          {
+            auto _klass = cast(GNetworkMonitorInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)monitor), gid.gio2.network_monitor.NetworkMonitor._getGType);
+            if (_klass && _klass.canReach)
+              return (cast(typeof(&_vfuncCanReachTramp))_klass.canReach)(monitor, connectable, cancellable, _err);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCanReach(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.socket_connectable.SocketConnectable)(cast(void*)connectable, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.canReach = cast(typeof(_klass.canReach))&_vfuncCanReachTramp;
+        break;
+      }
+      case "can_reach_finish":
+      {
+        static extern(C) gboolean _vfuncCanReachFinishTramp(GNetworkMonitor* monitor, GAsyncResult* result, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)monitor);
+          if (!_obj)
+          {
+            auto _klass = cast(GNetworkMonitorInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)monitor), gid.gio2.network_monitor.NetworkMonitor._getGType);
+            if (_klass && _klass.canReachFinish)
+              return (cast(typeof(&_vfuncCanReachFinishTramp))_klass.canReachFinish)(monitor, result, _err);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCanReachFinish(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)result, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.canReachFinish = cast(typeof(_klass.canReachFinish))&_vfuncCanReachFinishTramp;
+        break;
+      }
+      case "network_changed":
+      {
+        static extern(C) void _vfuncNetworkChangedTramp(GNetworkMonitor* monitor, gboolean networkAvailable) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)monitor);
+          if (!_obj)
+          {
+            auto _klass = cast(GNetworkMonitorInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)monitor), gid.gio2.network_monitor.NetworkMonitor._getGType);
+            if (_klass && _klass.networkChanged)
+              return (cast(typeof(&_vfuncNetworkChangedTramp))_klass.networkChanged)(monitor, networkAvailable);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncNetworkChanged(cast(bool)networkAvailable);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.network_monitor.NetworkMonitor.vfuncNetworkChanged");
+          }
+        }
+
+        _klass.networkChanged = cast(typeof(_klass.networkChanged))&_vfuncNetworkChangedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

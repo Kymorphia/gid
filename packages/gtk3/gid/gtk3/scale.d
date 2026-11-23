@@ -102,6 +102,15 @@ class Scale : gid.gtk3.range.Range
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -195,9 +204,16 @@ class Scale : gid.gtk3.range.Range
   */
   this(gid.gtk3.types.Orientation orientation, gid.gtk3.adjustment.Adjustment adjustment = null) nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_scale_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_scale_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -224,6 +240,55 @@ class Scale : gid.gtk3.range.Range
     _cretval = gtk_scale_new_with_range(orientation, min, max, step);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.scale.Scale)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+
+  /** */
+  protected void vfuncDrawValue()
+  {
+    auto _klass = cast(GtkScaleClass*)_vfuncClass;
+    if (!_klass.drawValue)
+      return;
+
+    _klass.drawValue(cast(GtkScale*)this._cPtr);
+  }
+
+  /** */
+  protected string vfuncFormatValue(double value)
+  {
+    auto _klass = cast(GtkScaleClass*)_vfuncClass;
+    if (!_klass.formatValue)
+      return typeof(return).init;
+
+    char* _cretval;
+    _cretval = _klass.formatValue(cast(GtkScale*)this._cPtr, value);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Obtains the coordinates where the scale will draw the
+      #PangoLayout representing the text in the scale. Remember
+      when using the #PangoLayout function you need to convert to
+      and from pixels using PANGO_PIXELS() or #PANGO_SCALE.
+      
+      If the #GtkScale:draw-value property is false, the return
+      values are undefined.
+  
+      Params:
+        x = location to store X offset of layout, or null
+        y = location to store Y offset of layout, or null
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetLayoutOffsets` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncGetLayoutOffsets(out int x, out int y)
+  {
+    auto _klass = cast(GtkScaleClass*)_vfuncClass;
+    if (!_klass.getLayoutOffsets)
+      return;
+
+    _klass.getLayoutOffsets(cast(GtkScale*)this._cPtr, cast(int*)&x, cast(int*)&y);
   }
 
   /**
@@ -440,6 +505,7 @@ class Scale : gid.gtk3.range.Range
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -465,6 +531,135 @@ class Scale : gid.gtk3.range.Range
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("format-value", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Scale
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.scale.Scale), T.stringof ~ " is not derived from gid.gtk3.scale.Scale");
+
+    gid.gtk3.range.Range._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDrawValue", true)[0]) == gid.gtk3.scale.Scale))
+      _installVfunc(klass, "draw_value");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFormatValue", true)[0]) == gid.gtk3.scale.Scale))
+      _installVfunc(klass, "format_value");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetLayoutOffsets", true)[0]) == gid.gtk3.scale.Scale))
+      _installVfunc(klass, "get_layout_offsets");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkScaleClass*)klass;
+
+    switch (vfunc)
+    {
+      case "draw_value":
+      {
+        static extern(C) void _vfuncDrawValueTramp(GtkScale* scale) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.scale.Scale)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)scale);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkScaleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)scale);
+            if (_klass.drawValue)
+              return (cast(typeof(&_vfuncDrawValueTramp))_klass.drawValue)(scale);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDrawValue();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.scale.Scale.vfuncDrawValue");
+          }
+        }
+
+        _klass.drawValue = cast(typeof(_klass.drawValue))&_vfuncDrawValueTramp;
+        break;
+      }
+      case "format_value":
+      {
+        static extern(C) char* _vfuncFormatValueTramp(GtkScale* scale, double value) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.scale.Scale)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)scale);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkScaleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)scale);
+            if (_klass.formatValue)
+              return (cast(typeof(&_vfuncFormatValueTramp))_klass.formatValue)(scale, value);
+            return typeof(return).init;
+          }
+
+          string _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncFormatValue(value);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.scale.Scale.vfuncFormatValue");
+          }
+          auto _retval = toCString!(Yes.Malloc, No.Nullable)(_dretval);
+
+          return _retval;
+        }
+
+        _klass.formatValue = cast(typeof(_klass.formatValue))&_vfuncFormatValueTramp;
+        break;
+      }
+      case "get_layout_offsets":
+      {
+        static extern(C) void _vfuncGetLayoutOffsetsTramp(GtkScale* scale, int* x, int* y) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.scale.Scale)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)scale);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkScaleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)scale);
+            if (_klass.getLayoutOffsets)
+              return (cast(typeof(&_vfuncGetLayoutOffsetsTramp))_klass.getLayoutOffsets)(scale, x, y);
+            return;
+          }
+
+          typeof(*x) _xNull;
+          if (!x)
+            x = &_xNull;
+
+          typeof(*y) _yNull;
+          if (!y)
+            y = &_yNull;
+
+          try
+          {
+            _obj.vfuncGetLayoutOffsets(*x, *y);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.scale.Scale.vfuncGetLayoutOffsets");
+          }
+        }
+
+        _klass.getLayoutOffsets = cast(typeof(_klass.getLayoutOffsets))&_vfuncGetLayoutOffsetsTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

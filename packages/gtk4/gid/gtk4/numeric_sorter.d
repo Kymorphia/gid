@@ -109,9 +109,16 @@ class NumericSorter : gid.gtk4.sorter.Sorter
   */
   this(gid.gtk4.expression.Expression expression = null) nothrow
   {
-    GtkNumericSorter* _cretval;
-    _cretval = gtk_numeric_sorter_new(expression ? cast(GtkExpression*)expression._cPtr(Yes.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, expression !is null), Yes.Take);
+    }
+    else
+    {
+      GtkNumericSorter* _cretval;
+      _cretval = gtk_numeric_sorter_new(expression ? cast(GtkExpression*)expression._cPtr(Yes.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

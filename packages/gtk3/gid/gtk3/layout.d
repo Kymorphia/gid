@@ -114,9 +114,16 @@ class Layout : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
   */
   this(gid.gtk3.adjustment.Adjustment hadjustment = null, gid.gtk3.adjustment.Adjustment vadjustment = null) nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_layout_new(hadjustment ? cast(GtkAdjustment*)hadjustment._cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment._cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, hadjustment !is null || vadjustment !is null), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_layout_new(hadjustment ? cast(GtkAdjustment*)hadjustment._cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment._cPtr(No.Dup) : null);
+      this(_cretval, No.Take);
+    }
   }
 
   /**

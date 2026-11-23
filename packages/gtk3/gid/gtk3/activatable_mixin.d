@@ -4,6 +4,8 @@ module gid.gtk3.activatable_mixin;
 public import gid.core.basictypes;
 public import gid.gtk3.activatable_iface_proxy;
 public import gid.core.utils;
+public import gid.gobject2.c.functions;
+public import gid.gobject2.c.types;
 public import gid.gobject2.gid_builder;
 public import gid.gobject2.object;
 public import gid.gtk3.action;
@@ -315,6 +317,55 @@ template ActivatableT()
   }
 
   /**
+      This is called to update the activatable completely, this is called
+      internally when the #GtkActivatable:related-action property is set
+      or unset and by the implementing class when
+      #GtkActivatable:use-action-appearance changes.
+  
+      Params:
+        action = the related #GtkAction or null
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSyncActionProperties`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncSyncActionProperties(gid.gtk3.action.Action action = null)
+  {
+    auto _klass = cast(GtkActivatableIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.activatable.Activatable._getGType);
+    if (!_klass || !_klass.syncActionProperties)
+      return;
+
+    _klass.syncActionProperties(cast(GtkActivatable*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Called to update the activatable when its related action’s properties change.
+      You must check the #GtkActivatable:use-action-appearance property only apply action
+      properties that are meant to effect the appearance accordingly.
+  
+      Params:
+        action = 
+        propertyName = 
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncUpdate`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncUpdate(gid.gtk3.action.Action action, string propertyName)
+  {
+    auto _klass = cast(GtkActivatableIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.activatable.Activatable._getGType);
+    if (!_klass || !_klass.update)
+      return;
+
+    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
+    _klass.update(cast(GtkActivatable*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null, _propertyName);
+  }
+
+  /**
       This is a utility function for #GtkActivatable implementors.
       
       When implementing #GtkActivatable you must call this when
@@ -407,6 +458,92 @@ template ActivatableT()
   override void syncActionProperties(gid.gtk3.action.Action action = null) nothrow
   {
     gtk_activatable_sync_action_properties(cast(GtkActivatable*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null);
+  }
+
+  /// True if the D class T overrides any vfunc method of gid.gtk3.activatable.Activatable (DiG)
+  enum bool _ifaceVfuncsOverridden_gid_gtk3_activatable_Activatable(T) = !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSyncActionProperties", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncUpdate", true)[0], gid.gobject2.object.GidIfaceVfunc);
+
+  /**
+      Install the C trampolines of the gid.gtk3.activatable.Activatable vfunc methods which a D class overrides into the interface
+      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      trampoline is a compile error.
+      Params:
+        T = D class
+        iface = Interface structure of the GType registered for T
+  */
+  static void _installIfaceVfuncs_gid_gtk3_activatable_Activatable(T)(void* iface) nothrow
+  {
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSyncActionProperties", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_activatable_Activatable(iface, "sync_action_properties");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncUpdate", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_activatable_Activatable(iface, "update");
+  }
+
+  private static void _installIfaceVfunc_gid_gtk3_activatable_Activatable(void* iface, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkActivatableIface*)iface;
+
+    switch (vfunc)
+    {
+      case "sync_action_properties":
+      {
+        static extern(C) void _vfuncSyncActionPropertiesTramp(GtkActivatable* activatable, GtkAction* action) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)activatable);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkActivatableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)activatable), gid.gtk3.activatable.Activatable._getGType);
+            if (_klass && _klass.syncActionProperties)
+              return (cast(typeof(&_vfuncSyncActionPropertiesTramp))_klass.syncActionProperties)(activatable, action);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSyncActionProperties(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.action.Action)(cast(void*)action, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.activatable.Activatable.vfuncSyncActionProperties");
+          }
+        }
+
+        _klass.syncActionProperties = cast(typeof(_klass.syncActionProperties))&_vfuncSyncActionPropertiesTramp;
+        break;
+      }
+      case "update":
+      {
+        static extern(C) void _vfuncUpdateTramp(GtkActivatable* activatable, GtkAction* action, const(char)* propertyName) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)activatable);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkActivatableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)activatable), gid.gtk3.activatable.Activatable._getGType);
+            if (_klass && _klass.update)
+              return (cast(typeof(&_vfuncUpdateTramp))_klass.update)(activatable, action, propertyName);
+            return;
+          }
+
+          string _propertyName = propertyName.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncUpdate(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.action.Action)(cast(void*)action, No.Take), _propertyName);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.activatable.Activatable.vfuncUpdate");
+          }
+        }
+
+        _klass.update = cast(typeof(_klass.update))&_vfuncUpdateTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

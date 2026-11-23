@@ -36,6 +36,8 @@ interface SymbolicPaintable : gid.gdk4.paintable.Paintable
     return cast(void function())gtk_symbolic_paintable_get_type != &gidSymbolNotFound ? gtk_symbolic_paintable_get_type() : cast(GType)0;
   }
 
+
+
   /**
       Snapshots the paintable with the given colors.
       

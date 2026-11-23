@@ -97,9 +97,16 @@ class ToggleToolButton : gid.gtk3.tool_button.ToolButton
   */
   this() nothrow
   {
-    GtkToolItem* _cretval;
-    _cretval = gtk_toggle_tool_button_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkToolItem* _cretval;
+      _cretval = gtk_toggle_tool_button_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -122,6 +129,22 @@ class ToggleToolButton : gid.gtk3.tool_button.ToolButton
     _cretval = gtk_toggle_tool_button_new_from_stock(_stockId);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.toggle_tool_button.ToggleToolButton)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
+  }
+
+  /**
+      Signal emitted whenever the toggle tool button changes state.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncToggled` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncToggled()
+  {
+    auto _klass = cast(GtkToggleToolButtonClass*)_vfuncClass;
+    if (!_klass.toggled)
+      return;
+
+    _klass.toggled(cast(GtkToggleToolButton*)this._cPtr);
   }
 
   /**
@@ -172,6 +195,7 @@ class ToggleToolButton : gid.gtk3.tool_button.ToolButton
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -191,6 +215,62 @@ class ToggleToolButton : gid.gtk3.tool_button.ToolButton
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggled", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from ToggleToolButton
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.toggle_tool_button.ToggleToolButton), T.stringof ~ " is not derived from gid.gtk3.toggle_tool_button.ToggleToolButton");
+
+    gid.gtk3.tool_button.ToolButton._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncToggled", true)[0]) == gid.gtk3.toggle_tool_button.ToggleToolButton))
+      _installVfunc(klass, "toggled");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkToggleToolButtonClass*)klass;
+
+    switch (vfunc)
+    {
+      case "toggled":
+      {
+        static extern(C) void _vfuncToggledTramp(GtkToggleToolButton* button) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.toggle_tool_button.ToggleToolButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkToggleToolButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);
+            if (_klass.toggled)
+              return (cast(typeof(&_vfuncToggledTramp))_klass.toggled)(button);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncToggled();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.toggle_tool_button.ToggleToolButton.vfuncToggled");
+          }
+        }
+
+        _klass.toggled = cast(typeof(_klass.toggled))&_vfuncToggledTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

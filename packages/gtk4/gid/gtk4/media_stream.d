@@ -41,6 +41,15 @@ class MediaStream : gid.gobject2.object.ObjectWrap, gid.gdk4.paintable.Paintable
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -188,6 +197,131 @@ class MediaStream : gid.gobject2.object.ObjectWrap, gid.gdk4.paintable.Paintable
   }
 
   mixin PaintableT!();
+
+  /**
+      Pauses playback of the stream.
+      
+      If the stream is not playing, do nothing.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPause` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncPause()
+  {
+    auto _klass = cast(GtkMediaStreamClass*)_vfuncClass;
+    if (!_klass.pause)
+      return;
+
+    _klass.pause(cast(GtkMediaStream*)this._cPtr);
+  }
+
+  /** */
+  protected bool vfuncPlay()
+  {
+    auto _klass = cast(GtkMediaStreamClass*)_vfuncClass;
+    if (!_klass.play)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.play(cast(GtkMediaStream*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Called by users to attach the media stream to a [gid.gdk4.surface.Surface] they manage.
+      
+      The stream can then access the resources of surface for its
+      rendering purposes. In particular, media streams might want to
+      create a [gid.gdk4.glcontext.GLContext] or sync to the [gid.gdk4.frame_clock.FrameClock].
+      
+      Whoever calls this function is responsible for calling
+      [gid.gtk4.media_stream.MediaStream.unrealize] before either the stream
+      or surface get destroyed.
+      
+      Multiple calls to this function may happen from different
+      users of the video, even with the same surface. Each of these
+      calls must be followed by its own call to
+      [gid.gtk4.media_stream.MediaStream.unrealize].
+      
+      It is not required to call this function to make a media stream work.
+  
+      Params:
+        surface = a [gid.gdk4.surface.Surface]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRealize` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncRealize(gid.gdk4.surface.Surface surface)
+  {
+    auto _klass = cast(GtkMediaStreamClass*)_vfuncClass;
+    if (!_klass.realize)
+      return;
+
+    _klass.realize(cast(GtkMediaStream*)this._cPtr, surface ? cast(GdkSurface*)surface._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Start a seek operation on self to timestamp.
+      
+      If timestamp is out of range, it will be clamped.
+      
+      Seek operations may not finish instantly. While a
+      seek operation is in process, the [gid.gtk4.media_stream.MediaStream.seeking]
+      property will be set.
+      
+      When calling [gid.gtk4.media_stream.MediaStream.seek] during an
+      ongoing seek operation, the new seek will override
+      any pending seek.
+  
+      Params:
+        timestamp = timestamp to seek to.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSeek` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSeek(long timestamp)
+  {
+    auto _klass = cast(GtkMediaStreamClass*)_vfuncClass;
+    if (!_klass.seek)
+      return;
+
+    _klass.seek(cast(GtkMediaStream*)this._cPtr, timestamp);
+  }
+
+  /**
+      Undoes a previous call to [gid.gtk4.media_stream.MediaStream.realize].
+      
+      This causes the stream to release all resources it had
+      allocated from surface.
+  
+      Params:
+        surface = the [gid.gdk4.surface.Surface] the stream was realized with
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncUnrealize` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncUnrealize(gid.gdk4.surface.Surface surface)
+  {
+    auto _klass = cast(GtkMediaStreamClass*)_vfuncClass;
+    if (!_klass.unrealize)
+      return;
+
+    _klass.unrealize(cast(GtkMediaStream*)this._cPtr, surface ? cast(GdkSurface*)surface._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncUpdateAudio(bool muted, double volume)
+  {
+    auto _klass = cast(GtkMediaStreamClass*)_vfuncClass;
+    if (!_klass.updateAudio)
+      return;
+
+    _klass.updateAudio(cast(GtkMediaStream*)this._cPtr, muted, volume);
+  }
 
   /**
       Sets self into an error state.
@@ -627,6 +761,217 @@ class MediaStream : gid.gobject2.object.ObjectWrap, gid.gdk4.paintable.Paintable
   void update(long timestamp) nothrow
   {
     gtk_media_stream_update(cast(GtkMediaStream*)this._cPtr, timestamp);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from MediaStream
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.media_stream.MediaStream), T.stringof ~ " is not derived from gid.gtk4.media_stream.MediaStream");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPause", true)[0]) == gid.gtk4.media_stream.MediaStream))
+      _installVfunc(klass, "pause");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPlay", true)[0]) == gid.gtk4.media_stream.MediaStream))
+      _installVfunc(klass, "play");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRealize", true)[0]) == gid.gtk4.media_stream.MediaStream))
+      _installVfunc(klass, "realize");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSeek", true)[0]) == gid.gtk4.media_stream.MediaStream))
+      _installVfunc(klass, "seek");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUnrealize", true)[0]) == gid.gtk4.media_stream.MediaStream))
+      _installVfunc(klass, "unrealize");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUpdateAudio", true)[0]) == gid.gtk4.media_stream.MediaStream))
+      _installVfunc(klass, "update_audio");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkMediaStreamClass*)klass;
+
+    switch (vfunc)
+    {
+      case "pause":
+      {
+        static extern(C) void _vfuncPauseTramp(GtkMediaStream* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.media_stream.MediaStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMediaStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.pause)
+              return (cast(typeof(&_vfuncPauseTramp))_klass.pause)(self);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPause();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.media_stream.MediaStream.vfuncPause");
+          }
+        }
+
+        _klass.pause = cast(typeof(_klass.pause))&_vfuncPauseTramp;
+        break;
+      }
+      case "play":
+      {
+        static extern(C) gboolean _vfuncPlayTramp(GtkMediaStream* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.media_stream.MediaStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMediaStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.play)
+              return (cast(typeof(&_vfuncPlayTramp))_klass.play)(self);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncPlay();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.media_stream.MediaStream.vfuncPlay");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.play = cast(typeof(_klass.play))&_vfuncPlayTramp;
+        break;
+      }
+      case "realize":
+      {
+        static extern(C) void _vfuncRealizeTramp(GtkMediaStream* self, GdkSurface* surface) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.media_stream.MediaStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMediaStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.realize)
+              return (cast(typeof(&_vfuncRealizeTramp))_klass.realize)(self, surface);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRealize(gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk4.surface.Surface)(cast(void*)surface, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.media_stream.MediaStream.vfuncRealize");
+          }
+        }
+
+        _klass.realize = cast(typeof(_klass.realize))&_vfuncRealizeTramp;
+        break;
+      }
+      case "seek":
+      {
+        static extern(C) void _vfuncSeekTramp(GtkMediaStream* self, long timestamp) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.media_stream.MediaStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMediaStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.seek)
+              return (cast(typeof(&_vfuncSeekTramp))_klass.seek)(self, timestamp);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSeek(timestamp);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.media_stream.MediaStream.vfuncSeek");
+          }
+        }
+
+        _klass.seek = cast(typeof(_klass.seek))&_vfuncSeekTramp;
+        break;
+      }
+      case "unrealize":
+      {
+        static extern(C) void _vfuncUnrealizeTramp(GtkMediaStream* self, GdkSurface* surface) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.media_stream.MediaStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMediaStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.unrealize)
+              return (cast(typeof(&_vfuncUnrealizeTramp))_klass.unrealize)(self, surface);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncUnrealize(gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk4.surface.Surface)(cast(void*)surface, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.media_stream.MediaStream.vfuncUnrealize");
+          }
+        }
+
+        _klass.unrealize = cast(typeof(_klass.unrealize))&_vfuncUnrealizeTramp;
+        break;
+      }
+      case "update_audio":
+      {
+        static extern(C) void _vfuncUpdateAudioTramp(GtkMediaStream* self, gboolean muted, double volume) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.media_stream.MediaStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMediaStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.updateAudio)
+              return (cast(typeof(&_vfuncUpdateAudioTramp))_klass.updateAudio)(self, muted, volume);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncUpdateAudio(cast(bool)muted, volume);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.media_stream.MediaStream.vfuncUpdateAudio");
+          }
+        }
+
+        _klass.updateAudio = cast(typeof(_klass.updateAudio))&_vfuncUpdateAudioTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

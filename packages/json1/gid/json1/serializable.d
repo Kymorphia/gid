@@ -30,6 +30,11 @@ interface Serializable : GidWrap
     return cast(void function())json_serializable_get_type != &gidSymbolNotFound ? json_serializable_get_type() : cast(GType)0;
   }
 
+
+
+
+
+
   /**
       Calls the default implementation of the `vfuncJson.Serializable.deserialize_property`
       virtual function.

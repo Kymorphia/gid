@@ -166,9 +166,16 @@ class SearchSettings : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GtkSourceSearchSettings* _cretval;
-    _cretval = gtk_source_search_settings_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkSourceSearchSettings* _cretval;
+      _cretval = gtk_source_search_settings_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /** */

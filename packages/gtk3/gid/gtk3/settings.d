@@ -63,6 +63,15 @@ class Settings : gid.gobject2.object.ObjectWrap, gid.gtk3.style_provider.StylePr
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -1993,6 +2002,7 @@ class Settings : gid.gobject2.object.ObjectWrap, gid.gtk3.style_provider.StylePr
 
     extern(C) gboolean _parserCallback(const(GParamSpec)* pspec, const(GString)* rcString, GValue* propertyValue) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _propertyValue = propertyValue ? new gid.gobject2.value.Value(cast(void*)propertyValue, Yes.Take)._cBorrow : null;
 

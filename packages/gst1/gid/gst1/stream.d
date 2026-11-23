@@ -34,6 +34,15 @@ class Stream : gid.gst1.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -161,10 +170,17 @@ class Stream : gid.gst1.object.ObjectWrap
   */
   this(string streamId, gid.gst1.caps.Caps caps, gid.gst1.types.StreamType type, gid.gst1.types.StreamFlags flags) nothrow
   {
-    GstStream* _cretval;
-    const(char)* _streamId = streamId.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gst_stream_new(_streamId, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, type, flags);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GstStream* _cretval;
+      const(char)* _streamId = streamId.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gst_stream_new(_streamId, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, type, flags);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

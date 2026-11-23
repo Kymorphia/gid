@@ -116,12 +116,19 @@ class StringList : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
   */
   this(string[] strings = null) nothrow
   {
-    GtkStringList* _cretval;
-    auto _strings_arr = new char*[](strings.length + 1);
-    auto _strings = cast(char**)_strings_arr.ptr;
-    foreach (i, s; strings) _strings[i] = s.toCString!(No.Malloc);
-    _cretval = gtk_string_list_new(_strings);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, strings !is null), Yes.Take);
+    }
+    else
+    {
+      GtkStringList* _cretval;
+      auto _strings_arr = new char*[](strings.length + 1);
+      auto _strings = cast(char**)_strings_arr.ptr;
+      foreach (i, s; strings) _strings[i] = s.toCString!(No.Malloc);
+      _cretval = gtk_string_list_new(_strings);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

@@ -8,6 +8,7 @@ import gid.gobject2.gid_builder;
 import gid.gobject2.object;
 import gid.gst1.c.functions;
 import gid.gst1.c.types;
+import gid.gst1.clock_entry;
 import gid.gst1.object;
 import gid.gst1.types;
 
@@ -92,6 +93,15 @@ class Clock : gid.gst1.object.ObjectWrap
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
   }
 
   /** */
@@ -319,6 +329,7 @@ class Clock : gid.gst1.object.ObjectWrap
   {
     extern(C) gboolean _funcCallback(GstClock* clock, GstClockTime time, GstClockID id, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.ClockCallback*)userData;
 
@@ -339,6 +350,141 @@ class Clock : gid.gst1.object.ObjectWrap
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     _cretval = gst_clock_id_wait_async(id, _funcCB, _func, _funcDestroyCB);
+    gid.gst1.types.ClockReturn _retval = cast(gid.gst1.types.ClockReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      Change the resolution of the clock. Not all values might
+      be acceptable.
+  
+      Params:
+        oldResolution = the previous resolution
+        newResolution = the new resolution
+      Returns: the new resolution
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncChangeResolution` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.ClockTime vfuncChangeResolution(gid.gst1.types.ClockTime oldResolution, gid.gst1.types.ClockTime newResolution)
+  {
+    auto _klass = cast(GstClockClass*)_vfuncClass;
+    if (!_klass.changeResolution)
+      return typeof(return).init;
+
+    gid.gst1.types.ClockTime _retval;
+    _retval = _klass.changeResolution(cast(GstClock*)this._cPtr, oldResolution, newResolution);
+    return _retval;
+  }
+
+  /**
+      Gets the current internal time of the given clock. The time is returned
+      unadjusted for the offset and the rate.
+      Returns: the internal time of the clock. Or [gid.gst1.types.CLOCK_TIME_NONE] when
+        given invalid input.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetInternalTime` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.ClockTime vfuncGetInternalTime()
+  {
+    auto _klass = cast(GstClockClass*)_vfuncClass;
+    if (!_klass.getInternalTime)
+      return typeof(return).init;
+
+    gid.gst1.types.ClockTime _retval;
+    _retval = _klass.getInternalTime(cast(GstClock*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the accuracy of the clock. The accuracy of the clock is the granularity
+      of the values returned by [gid.gst1.clock.Clock.getTime].
+      Returns: the resolution of the clock in units of #GstClockTime.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetResolution` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.ClockTime vfuncGetResolution()
+  {
+    auto _klass = cast(GstClockClass*)_vfuncClass;
+    if (!_klass.getResolution)
+      return typeof(return).init;
+
+    gid.gst1.types.ClockTime _retval;
+    _retval = _klass.getResolution(cast(GstClock*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Unblock a blocking or async wait operation.
+  
+      Params:
+        entry = the entry to unschedule (borrowed, only valid during the callback)
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncUnschedule` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncUnschedule(gid.gst1.clock_entry.ClockEntry entry)
+  {
+    auto _klass = cast(GstClockClass*)_vfuncClass;
+    if (!_klass.unschedule)
+      return;
+
+    _klass.unschedule(cast(GstClock*)this._cPtr, entry ? cast(GstClockEntry*)entry._cPtr : null);
+  }
+
+  /**
+      Perform a blocking wait on the given #GstClockEntry and return
+      the jitter.
+  
+      Params:
+        entry = the entry to wait on (borrowed, only valid during the callback)
+        jitter = a pointer that will contain the jitter
+      Returns: the result of the blocking wait. #GST_CLOCK_EARLY will be returned
+        if the current clock time is past the time of id, #GST_CLOCK_OK if
+        id was scheduled in time. #GST_CLOCK_UNSCHEDULED if id was
+        unscheduled with [gid.gst1.clock.Clock.idUnschedule].
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncWait` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.ClockReturn vfuncWait(gid.gst1.clock_entry.ClockEntry entry, out gid.gst1.types.ClockTimeDiff jitter)
+  {
+    auto _klass = cast(GstClockClass*)_vfuncClass;
+    if (!_klass.wait)
+      return typeof(return).init;
+
+    GstClockReturn _cretval;
+    _cretval = _klass.wait(cast(GstClock*)this._cPtr, entry ? cast(GstClockEntry*)entry._cPtr : null, cast(GstClockTimeDiff*)&jitter);
+    gid.gst1.types.ClockReturn _retval = cast(gid.gst1.types.ClockReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      Perform an asynchronous wait on the given #GstClockEntry.
+  
+      Params:
+        entry = the entry to wait on (borrowed, only valid during the callback)
+      Returns: the result of the non blocking wait.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncWaitAsync` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.ClockReturn vfuncWaitAsync(gid.gst1.clock_entry.ClockEntry entry)
+  {
+    auto _klass = cast(GstClockClass*)_vfuncClass;
+    if (!_klass.waitAsync)
+      return typeof(return).init;
+
+    GstClockReturn _cretval;
+    _cretval = _klass.waitAsync(cast(GstClock*)this._cPtr, entry ? cast(GstClockEntry*)entry._cPtr : null);
     gid.gst1.types.ClockReturn _retval = cast(gid.gst1.types.ClockReturn)_cretval;
     return _retval;
   }
@@ -815,6 +961,7 @@ class Clock : gid.gst1.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -837,6 +984,245 @@ class Clock : gid.gst1.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("synced", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Clock
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gst1.clock.Clock), T.stringof ~ " is not derived from gid.gst1.clock.Clock");
+
+    gid.gst1.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChangeResolution", true)[0]) == gid.gst1.clock.Clock))
+      _installVfunc(klass, "change_resolution");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetInternalTime", true)[0]) == gid.gst1.clock.Clock))
+      _installVfunc(klass, "get_internal_time");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetResolution", true)[0]) == gid.gst1.clock.Clock))
+      _installVfunc(klass, "get_resolution");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUnschedule", true)[0]) == gid.gst1.clock.Clock))
+      _installVfunc(klass, "unschedule");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncWait", true)[0]) == gid.gst1.clock.Clock))
+      _installVfunc(klass, "wait");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncWaitAsync", true)[0]) == gid.gst1.clock.Clock))
+      _installVfunc(klass, "wait_async");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstClockClass*)klass;
+
+    switch (vfunc)
+    {
+      case "change_resolution":
+      {
+        static extern(C) GstClockTime _vfuncChangeResolutionTramp(GstClock* clock, GstClockTime oldResolution, GstClockTime newResolution) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.clock.Clock)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)clock);
+          if (!_obj)
+          {
+            auto _klass = cast(GstClockClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)clock);
+            if (_klass.changeResolution)
+              return (cast(typeof(&_vfuncChangeResolutionTramp))_klass.changeResolution)(clock, oldResolution, newResolution);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.ClockTime _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncChangeResolution(oldResolution, newResolution);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.clock.Clock.vfuncChangeResolution");
+          }
+          auto _retval = cast(GstClockTime)_dretval;
+
+          return _retval;
+        }
+
+        _klass.changeResolution = cast(typeof(_klass.changeResolution))&_vfuncChangeResolutionTramp;
+        break;
+      }
+      case "get_internal_time":
+      {
+        static extern(C) GstClockTime _vfuncGetInternalTimeTramp(GstClock* clock) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.clock.Clock)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)clock);
+          if (!_obj)
+          {
+            auto _klass = cast(GstClockClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)clock);
+            if (_klass.getInternalTime)
+              return (cast(typeof(&_vfuncGetInternalTimeTramp))_klass.getInternalTime)(clock);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.ClockTime _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetInternalTime();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.clock.Clock.vfuncGetInternalTime");
+          }
+          auto _retval = cast(GstClockTime)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getInternalTime = cast(typeof(_klass.getInternalTime))&_vfuncGetInternalTimeTramp;
+        break;
+      }
+      case "get_resolution":
+      {
+        static extern(C) GstClockTime _vfuncGetResolutionTramp(GstClock* clock) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.clock.Clock)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)clock);
+          if (!_obj)
+          {
+            auto _klass = cast(GstClockClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)clock);
+            if (_klass.getResolution)
+              return (cast(typeof(&_vfuncGetResolutionTramp))_klass.getResolution)(clock);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.ClockTime _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetResolution();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.clock.Clock.vfuncGetResolution");
+          }
+          auto _retval = cast(GstClockTime)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getResolution = cast(typeof(_klass.getResolution))&_vfuncGetResolutionTramp;
+        break;
+      }
+      case "unschedule":
+      {
+        static extern(C) void _vfuncUnscheduleTramp(GstClock* clock, GstClockEntry* entry) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.clock.Clock)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)clock);
+          if (!_obj)
+          {
+            auto _klass = cast(GstClockClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)clock);
+            if (_klass.unschedule)
+              return (cast(typeof(&_vfuncUnscheduleTramp))_klass.unschedule)(clock, entry);
+            return;
+          }
+
+          auto _entry = entry ? new gid.gst1.clock_entry.ClockEntry(cast(void*)entry, null) : null;
+
+          try
+          {
+            _obj.vfuncUnschedule(_entry);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.clock.Clock.vfuncUnschedule");
+          }
+        }
+
+        _klass.unschedule = cast(typeof(_klass.unschedule))&_vfuncUnscheduleTramp;
+        break;
+      }
+      case "wait":
+      {
+        static extern(C) GstClockReturn _vfuncWaitTramp(GstClock* clock, GstClockEntry* entry, GstClockTimeDiff* jitter) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.clock.Clock)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)clock);
+          if (!_obj)
+          {
+            auto _klass = cast(GstClockClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)clock);
+            if (_klass.wait)
+              return (cast(typeof(&_vfuncWaitTramp))_klass.wait)(clock, entry, jitter);
+            return typeof(return).init;
+          }
+
+          typeof(*jitter) _jitterNull;
+          if (!jitter)
+            jitter = &_jitterNull;
+
+          gid.gst1.types.ClockReturn _dretval;
+          auto _entry = entry ? new gid.gst1.clock_entry.ClockEntry(cast(void*)entry, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncWait(_entry, *jitter);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.clock.Clock.vfuncWait");
+          }
+          auto _retval = cast(GstClockReturn)_dretval;
+
+          return _retval;
+        }
+
+        _klass.wait = cast(typeof(_klass.wait))&_vfuncWaitTramp;
+        break;
+      }
+      case "wait_async":
+      {
+        static extern(C) GstClockReturn _vfuncWaitAsyncTramp(GstClock* clock, GstClockEntry* entry) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.clock.Clock)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)clock);
+          if (!_obj)
+          {
+            auto _klass = cast(GstClockClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)clock);
+            if (_klass.waitAsync)
+              return (cast(typeof(&_vfuncWaitAsyncTramp))_klass.waitAsync)(clock, entry);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.ClockReturn _dretval;
+          auto _entry = entry ? new gid.gst1.clock_entry.ClockEntry(cast(void*)entry, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncWaitAsync(_entry);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.clock.Clock.vfuncWaitAsync");
+          }
+          auto _retval = cast(GstClockReturn)_dretval;
+
+          return _retval;
+        }
+
+        _klass.waitAsync = cast(typeof(_klass.waitAsync))&_vfuncWaitAsyncTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

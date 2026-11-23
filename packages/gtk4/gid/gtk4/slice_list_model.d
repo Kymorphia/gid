@@ -32,6 +32,15 @@ class SliceListModel : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListM
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -158,9 +167,16 @@ class SliceListModel : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListM
   */
   this(gid.gio2.list_model.ListModel model, uint offset, uint size) nothrow
   {
-    GtkSliceListModel* _cretval;
-    _cretval = gtk_slice_list_model_new(model ? cast(GListModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(Yes.Dup) : null, offset, size);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkSliceListModel* _cretval;
+      _cretval = gtk_slice_list_model_new(model ? cast(GListModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(Yes.Dup) : null, offset, size);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

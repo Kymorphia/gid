@@ -119,6 +119,15 @@ class Server : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -297,6 +306,46 @@ class Server : gid.gobject2.object.ObjectWrap
     setTlsDatabase(propval);
   }
 
+  /** */
+  protected void vfuncRequestAborted(gid.soup3.server_message.ServerMessage msg)
+  {
+    auto _klass = cast(SoupServerClass*)_vfuncClass;
+    if (!_klass.requestAborted)
+      return;
+
+    _klass.requestAborted(cast(SoupServer*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncRequestFinished(gid.soup3.server_message.ServerMessage msg)
+  {
+    auto _klass = cast(SoupServerClass*)_vfuncClass;
+    if (!_klass.requestFinished)
+      return;
+
+    _klass.requestFinished(cast(SoupServer*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncRequestRead(gid.soup3.server_message.ServerMessage msg)
+  {
+    auto _klass = cast(SoupServerClass*)_vfuncClass;
+    if (!_klass.requestRead)
+      return;
+
+    _klass.requestRead(cast(SoupServer*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncRequestStarted(gid.soup3.server_message.ServerMessage msg)
+  {
+    auto _klass = cast(SoupServerClass*)_vfuncClass;
+    if (!_klass.requestStarted)
+      return;
+
+    _klass.requestStarted(cast(SoupServer*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null);
+  }
+
   /**
       Adds a new client stream to the server.
   
@@ -379,6 +428,7 @@ class Server : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, GHashTable* query, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.soup3.types.ServerCallback*)userData;
       string _path = path.fromCString!(No.Free);
       auto _query = gHashTableToD!(string, string, GidOwnership.None)(query);
@@ -443,6 +493,7 @@ class Server : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, GHashTable* query, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.soup3.types.ServerCallback*)userData;
       string _path = path.fromCString!(No.Free);
       auto _query = gHashTableToD!(string, string, GidOwnership.None)(query);
@@ -513,6 +564,7 @@ class Server : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(SoupServer* server, SoupServerMessage* msg, const(char)* path, SoupWebsocketConnection* connection, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.soup3.types.ServerWebsocketCallback*)userData;
       string _path = path.fromCString!(No.Free);
 
@@ -912,6 +964,7 @@ class Server : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -963,6 +1016,7 @@ class Server : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1020,6 +1074,7 @@ class Server : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1081,6 +1136,7 @@ class Server : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1103,6 +1159,152 @@ class Server : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("request-started", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Server
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.soup3.server.Server), T.stringof ~ " is not derived from gid.soup3.server.Server");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRequestAborted", true)[0]) == gid.soup3.server.Server))
+      _installVfunc(klass, "request_aborted");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRequestFinished", true)[0]) == gid.soup3.server.Server))
+      _installVfunc(klass, "request_finished");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRequestRead", true)[0]) == gid.soup3.server.Server))
+      _installVfunc(klass, "request_read");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRequestStarted", true)[0]) == gid.soup3.server.Server))
+      _installVfunc(klass, "request_started");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(SoupServerClass*)klass;
+
+    switch (vfunc)
+    {
+      case "request_aborted":
+      {
+        static extern(C) void _vfuncRequestAbortedTramp(SoupServer* server, SoupServerMessage* msg) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.soup3.server.Server)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)server);
+          if (!_obj)
+          {
+            auto _klass = cast(SoupServerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)server);
+            if (_klass.requestAborted)
+              return (cast(typeof(&_vfuncRequestAbortedTramp))_klass.requestAborted)(server, msg);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRequestAborted(gid.gobject2.object.ObjectWrap._getDObject!(gid.soup3.server_message.ServerMessage)(cast(void*)msg, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.soup3.server.Server.vfuncRequestAborted");
+          }
+        }
+
+        _klass.requestAborted = cast(typeof(_klass.requestAborted))&_vfuncRequestAbortedTramp;
+        break;
+      }
+      case "request_finished":
+      {
+        static extern(C) void _vfuncRequestFinishedTramp(SoupServer* server, SoupServerMessage* msg) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.soup3.server.Server)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)server);
+          if (!_obj)
+          {
+            auto _klass = cast(SoupServerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)server);
+            if (_klass.requestFinished)
+              return (cast(typeof(&_vfuncRequestFinishedTramp))_klass.requestFinished)(server, msg);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRequestFinished(gid.gobject2.object.ObjectWrap._getDObject!(gid.soup3.server_message.ServerMessage)(cast(void*)msg, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.soup3.server.Server.vfuncRequestFinished");
+          }
+        }
+
+        _klass.requestFinished = cast(typeof(_klass.requestFinished))&_vfuncRequestFinishedTramp;
+        break;
+      }
+      case "request_read":
+      {
+        static extern(C) void _vfuncRequestReadTramp(SoupServer* server, SoupServerMessage* msg) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.soup3.server.Server)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)server);
+          if (!_obj)
+          {
+            auto _klass = cast(SoupServerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)server);
+            if (_klass.requestRead)
+              return (cast(typeof(&_vfuncRequestReadTramp))_klass.requestRead)(server, msg);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRequestRead(gid.gobject2.object.ObjectWrap._getDObject!(gid.soup3.server_message.ServerMessage)(cast(void*)msg, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.soup3.server.Server.vfuncRequestRead");
+          }
+        }
+
+        _klass.requestRead = cast(typeof(_klass.requestRead))&_vfuncRequestReadTramp;
+        break;
+      }
+      case "request_started":
+      {
+        static extern(C) void _vfuncRequestStartedTramp(SoupServer* server, SoupServerMessage* msg) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.soup3.server.Server)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)server);
+          if (!_obj)
+          {
+            auto _klass = cast(SoupServerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)server);
+            if (_klass.requestStarted)
+              return (cast(typeof(&_vfuncRequestStartedTramp))_klass.requestStarted)(server, msg);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRequestStarted(gid.gobject2.object.ObjectWrap._getDObject!(gid.soup3.server_message.ServerMessage)(cast(void*)msg, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.soup3.server.Server.vfuncRequestStarted");
+          }
+        }
+
+        _klass.requestStarted = cast(typeof(_klass.requestStarted))&_vfuncRequestStartedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

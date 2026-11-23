@@ -264,9 +264,16 @@ class LockButton : gid.gtk4.button.Button
   */
   this(gid.gio2.permission.Permission permission = null) nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_lock_button_new(permission ? cast(GPermission*)permission._cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, permission !is null), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_lock_button_new(permission ? cast(GPermission*)permission._cPtr(No.Dup) : null);
+      this(_cretval, No.Take);
+    }
   }
 
   /**

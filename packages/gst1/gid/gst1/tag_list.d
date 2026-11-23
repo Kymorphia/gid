@@ -119,6 +119,7 @@ class TagList : gid.gobject2.boxed.BoxedWrap!(gst_tag_list_get_type)
   {
     extern(C) void _funcCallback(const(GstTagList)* list, const(char)* tag, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gst1.types.TagForeachFunc*)userData;
       string _tag = tag.fromCString!(No.Free);
 

@@ -80,9 +80,16 @@ class LanguageManager : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GtkSourceLanguageManager* _cretval;
-    _cretval = gtk_source_language_manager_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkSourceLanguageManager* _cretval;
+      _cretval = gtk_source_language_manager_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

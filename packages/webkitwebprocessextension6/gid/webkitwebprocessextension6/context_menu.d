@@ -84,9 +84,16 @@ class ContextMenu : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    WebKitContextMenu* _cretval;
-    _cretval = webkit_context_menu_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      WebKitContextMenu* _cretval;
+      _cretval = webkit_context_menu_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

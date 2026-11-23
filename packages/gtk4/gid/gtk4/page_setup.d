@@ -106,9 +106,16 @@ class PageSetup : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GtkPageSetup* _cretval;
-    _cretval = gtk_page_setup_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkPageSetup* _cretval;
+      _cretval = gtk_page_setup_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

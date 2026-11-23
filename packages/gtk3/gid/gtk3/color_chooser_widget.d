@@ -114,9 +114,16 @@ class ColorChooserWidget : gid.gtk3.box.Box, gid.gtk3.color_chooser.ColorChooser
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_color_chooser_widget_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_color_chooser_widget_new();
+      this(_cretval, No.Take);
+    }
   }
 }
 

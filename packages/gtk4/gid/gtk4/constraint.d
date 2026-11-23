@@ -36,6 +36,15 @@ class Constraint : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -173,9 +182,16 @@ class Constraint : gid.gobject2.object.ObjectWrap
   */
   this(gid.gtk4.constraint_target.ConstraintTarget target, gid.gtk4.types.ConstraintAttribute targetAttribute, gid.gtk4.types.ConstraintRelation relation, gid.gtk4.constraint_target.ConstraintTarget source, gid.gtk4.types.ConstraintAttribute sourceAttribute, double multiplier, double constant, int strength) nothrow
   {
-    GtkConstraint* _cretval;
-    _cretval = gtk_constraint_new(target ? cast(GtkConstraintTarget*)(cast(gid.gobject2.object.ObjectWrap)target)._cPtr(No.Dup) : null, targetAttribute, relation, source ? cast(GtkConstraintTarget*)(cast(gid.gobject2.object.ObjectWrap)source)._cPtr(No.Dup) : null, sourceAttribute, multiplier, constant, strength);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkConstraint* _cretval;
+      _cretval = gtk_constraint_new(target ? cast(GtkConstraintTarget*)(cast(gid.gobject2.object.ObjectWrap)target)._cPtr(No.Dup) : null, targetAttribute, relation, source ? cast(GtkConstraintTarget*)(cast(gid.gobject2.object.ObjectWrap)source)._cPtr(No.Dup) : null, sourceAttribute, multiplier, constant, strength);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

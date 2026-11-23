@@ -457,6 +457,7 @@ class Menu : gid.gtk3.menu_shell.MenuShell
 
     static extern(C) void _detacherCallback(GtkWidget* attachWidget, GtkMenu* menu) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk3.types.MenuDetachFunc*)g_object_get_data(cast(GObject*)menu, "gid-menu-detacher");
 
       if (!_dlg || !*_dlg)
@@ -486,9 +487,16 @@ class Menu : gid.gtk3.menu_shell.MenuShell
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_menu_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_menu_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -727,6 +735,7 @@ class Menu : gid.gtk3.menu_shell.MenuShell
   {
     extern(C) void _funcCallback(GtkMenu* menu, int* x, int* y, gboolean* pushIn, void* userData) nothrow
     {
+      gidAttachThread();
       ptrThawGC(userData);
       auto _dlg = cast(gid.gtk3.types.MenuPositionFunc*)userData;
       bool _pushIn;
@@ -881,6 +890,7 @@ class Menu : gid.gtk3.menu_shell.MenuShell
   {
     extern(C) void _funcCallback(GtkMenu* menu, int* x, int* y, gboolean* pushIn, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk3.types.MenuPositionFunc*)userData;
       bool _pushIn;
 
@@ -1088,6 +1098,7 @@ class Menu : gid.gtk3.menu_shell.MenuShell
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1170,6 +1181,7 @@ class Menu : gid.gtk3.menu_shell.MenuShell
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

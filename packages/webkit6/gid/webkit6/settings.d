@@ -1445,9 +1445,16 @@ class Settings : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    WebKitSettings* _cretval;
-    _cretval = webkit_settings_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      WebKitSettings* _cretval;
+      _cretval = webkit_settings_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

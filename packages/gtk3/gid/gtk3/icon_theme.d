@@ -140,9 +140,16 @@ class IconTheme : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GtkIconTheme* _cretval;
-    _cretval = gtk_icon_theme_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkIconTheme* _cretval;
+      _cretval = gtk_icon_theme_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -214,6 +221,24 @@ class IconTheme : gid.gobject2.object.ObjectWrap
     _cretval = gtk_icon_theme_get_for_screen(screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.icon_theme.IconTheme)(cast(GtkIconTheme*)_cretval, No.Take);
     return _retval;
+  }
+
+  /**
+      Signal emitted when the current icon theme is switched or
+         GTK+ detects that a change has occurred in the contents of the
+         current icon theme.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncChanged()
+  {
+    auto _klass = cast(GtkIconThemeClass*)_vfuncClass;
+    if (!_klass.changed)
+      return;
+
+    _klass.changed(cast(GtkIconTheme*)this._cPtr);
   }
 
   /**
@@ -770,6 +795,7 @@ class IconTheme : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -789,6 +815,62 @@ class IconTheme : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from IconTheme
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.icon_theme.IconTheme), T.stringof ~ " is not derived from gid.gtk3.icon_theme.IconTheme");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChanged", true)[0]) == gid.gtk3.icon_theme.IconTheme))
+      _installVfunc(klass, "changed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkIconThemeClass*)klass;
+
+    switch (vfunc)
+    {
+      case "changed":
+      {
+        static extern(C) void _vfuncChangedTramp(GtkIconTheme* iconTheme) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.icon_theme.IconTheme)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)iconTheme);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkIconThemeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)iconTheme);
+            if (_klass.changed)
+              return (cast(typeof(&_vfuncChangedTramp))_klass.changed)(iconTheme);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.icon_theme.IconTheme.vfuncChanged");
+          }
+        }
+
+        _klass.changed = cast(typeof(_klass.changed))&_vfuncChangedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

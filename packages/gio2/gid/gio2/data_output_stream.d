@@ -27,6 +27,15 @@ class DataOutputStream : gid.gio2.filter_output_stream.FilterOutputStream, gid.g
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -93,9 +102,16 @@ class DataOutputStream : gid.gio2.filter_output_stream.FilterOutputStream, gid.g
   */
   this(gid.gio2.output_stream.OutputStream baseStream) nothrow
   {
-    GDataOutputStream* _cretval;
-    _cretval = g_data_output_stream_new(baseStream ? cast(GOutputStream*)baseStream._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GDataOutputStream* _cretval;
+      _cretval = g_data_output_stream_new(baseStream ? cast(GOutputStream*)baseStream._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

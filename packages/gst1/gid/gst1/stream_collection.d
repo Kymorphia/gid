@@ -102,10 +102,37 @@ class StreamCollection : gid.gst1.object.ObjectWrap
   */
   this(string upstreamId = null) nothrow
   {
-    GstStreamCollection* _cretval;
-    const(char)* _upstreamId = upstreamId.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gst_stream_collection_new(_upstreamId);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, upstreamId !is null), Yes.Take);
+    }
+    else
+    {
+      GstStreamCollection* _cretval;
+      const(char)* _upstreamId = upstreamId.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gst_stream_collection_new(_upstreamId);
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /**
+      default signal handler for the stream-notify signal
+  
+      Params:
+        stream = 
+        pspec = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStreamNotify` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncStreamNotify(gid.gst1.stream.Stream stream, gid.gobject2.param_spec.ParamSpec pspec)
+  {
+    auto _klass = cast(GstStreamCollectionClass*)_vfuncClass;
+    if (!_klass.streamNotify)
+      return;
+
+    _klass.streamNotify(cast(GstStreamCollection*)this._cPtr, stream ? cast(GstStream*)stream._cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
   }
 
   /**
@@ -193,6 +220,7 @@ class StreamCollection : gid.gst1.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -218,6 +246,62 @@ class StreamCollection : gid.gst1.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("stream-notify"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from StreamCollection
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gst1.stream_collection.StreamCollection), T.stringof ~ " is not derived from gid.gst1.stream_collection.StreamCollection");
+
+    gid.gst1.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStreamNotify", true)[0]) == gid.gst1.stream_collection.StreamCollection))
+      _installVfunc(klass, "stream_notify");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstStreamCollectionClass*)klass;
+
+    switch (vfunc)
+    {
+      case "stream_notify":
+      {
+        static extern(C) void _vfuncStreamNotifyTramp(GstStreamCollection* collection, GstStream* stream, GParamSpec* pspec) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.stream_collection.StreamCollection)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)collection);
+          if (!_obj)
+          {
+            auto _klass = cast(GstStreamCollectionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)collection);
+            if (_klass.streamNotify)
+              return (cast(typeof(&_vfuncStreamNotifyTramp))_klass.streamNotify)(collection, stream, pspec);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncStreamNotify(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.stream.Stream)(cast(void*)stream, No.Take), pspec ? new gid.gobject2.param_spec.ParamSpec(cast(void*)pspec, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.stream_collection.StreamCollection.vfuncStreamNotify");
+          }
+        }
+
+        _klass.streamNotify = cast(typeof(_klass.streamNotify))&_vfuncStreamNotifyTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

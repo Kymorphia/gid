@@ -27,6 +27,15 @@ class ButtonBox : gid.gtk3.box.Box
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -82,9 +91,16 @@ class ButtonBox : gid.gtk3.box.Box
   */
   this(gid.gtk3.types.Orientation orientation) nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_button_box_new(orientation);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_button_box_new(orientation);
+      this(_cretval, No.Take);
+    }
   }
 
   /**

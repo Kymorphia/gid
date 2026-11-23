@@ -281,9 +281,16 @@ class Builder : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GtkBuilder* _cretval;
-    _cretval = gtk_builder_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkBuilder* _cretval;
+      _cretval = gtk_builder_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -352,6 +359,32 @@ class Builder : gid.gobject2.object.ObjectWrap
     auto _string_ = cast(char*)string_.ptr;
     _cretval = gtk_builder_new_from_string(_string_, _length);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.builder.Builder)(cast(GtkBuilder*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Looks up a type by name, using the virtual function that
+      #GtkBuilder has for that purpose. This is mainly used when
+      implementing the #GtkBuildable interface on a type.
+  
+      Params:
+        typeName = type name to lookup
+      Returns: the #GType found for type_name or #G_TYPE_INVALID
+          if no type was found
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetTypeFromName` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gobject2.types.GType vfuncGetTypeFromName(string typeName)
+  {
+    auto _klass = cast(GtkBuilderClass*)_vfuncClass;
+    if (!_klass.getTypeFromName)
+      return typeof(return).init;
+
+    gid.gobject2.types.GType _retval;
+    const(char)* _typeName = typeName.toCString!(No.Malloc, No.Nullable);
+    _retval = _klass.getTypeFromName(cast(GtkBuilder*)this._cPtr, _typeName);
     return _retval;
   }
 
@@ -597,6 +630,7 @@ class Builder : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _funcCallback(GtkBuilder* builder, GObject* object, const(char)* signalName, const(char)* handlerName, GObject* connectObject, GConnectFlags flags, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk3.types.BuilderConnectFunc*)userData;
       string _signalName = signalName.fromCString!(No.Free);
       string _handlerName = handlerName.fromCString!(No.Free);
@@ -836,6 +870,68 @@ class Builder : gid.gobject2.object.ObjectWrap
     }
     value = new gid.gobject2.value.Value(cast(void*)_value, Yes.Take);
     return _retval;
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Builder
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.builder.Builder), T.stringof ~ " is not derived from gid.gtk3.builder.Builder");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetTypeFromName", true)[0]) == gid.gtk3.builder.Builder))
+      _installVfunc(klass, "get_type_from_name");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkBuilderClass*)klass;
+
+    switch (vfunc)
+    {
+      case "get_type_from_name":
+      {
+        static extern(C) GType _vfuncGetTypeFromNameTramp(GtkBuilder* builder, const(char)* typeName) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.builder.Builder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)builder);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkBuilderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)builder);
+            if (_klass.getTypeFromName)
+              return (cast(typeof(&_vfuncGetTypeFromNameTramp))_klass.getTypeFromName)(builder, typeName);
+            return typeof(return).init;
+          }
+
+          gid.gobject2.types.GType _dretval;
+          string _typeName = typeName.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncGetTypeFromName(_typeName);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.builder.Builder.vfuncGetTypeFromName");
+          }
+          auto _retval = cast(GType)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getTypeFromName = cast(typeof(_klass.getTypeFromName))&_vfuncGetTypeFromNameTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

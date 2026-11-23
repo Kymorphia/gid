@@ -211,9 +211,16 @@ class FontButton : gid.gtk3.button.Button, gid.gtk3.font_chooser.FontChooser
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_font_button_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_font_button_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -230,6 +237,16 @@ class FontButton : gid.gtk3.button.Button, gid.gtk3.font_chooser.FontChooser
     _cretval = gtk_font_button_new_with_font(_fontname);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.font_button.FontButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+
+  /** */
+  protected void vfuncFontSet()
+  {
+    auto _klass = cast(GtkFontButtonClass*)_vfuncClass;
+    if (!_klass.fontSet)
+      return;
+
+    _klass.fontSet(cast(GtkFontButton*)this._cPtr);
   }
 
   /**
@@ -409,6 +426,7 @@ class FontButton : gid.gtk3.button.Button, gid.gtk3.font_chooser.FontChooser
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -428,6 +446,62 @@ class FontButton : gid.gtk3.button.Button, gid.gtk3.font_chooser.FontChooser
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("font-set", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from FontButton
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.font_button.FontButton), T.stringof ~ " is not derived from gid.gtk3.font_button.FontButton");
+
+    gid.gtk3.button.Button._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFontSet", true)[0]) == gid.gtk3.font_button.FontButton))
+      _installVfunc(klass, "font_set");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkFontButtonClass*)klass;
+
+    switch (vfunc)
+    {
+      case "font_set":
+      {
+        static extern(C) void _vfuncFontSetTramp(GtkFontButton* gfp) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.font_button.FontButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)gfp);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkFontButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)gfp);
+            if (_klass.fontSet)
+              return (cast(typeof(&_vfuncFontSetTramp))_klass.fontSet)(gfp);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncFontSet();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.font_button.FontButton.vfuncFontSet");
+          }
+        }
+
+        _klass.fontSet = cast(typeof(_klass.fontSet))&_vfuncFontSetTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

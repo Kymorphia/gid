@@ -7,6 +7,7 @@ import gid.atk1.implementor_iface_mixin;
 import gid.core.utils;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;
+import gid.gobject2.object;
 import gid.gtk3.buildable;
 import gid.gtk3.buildable_mixin;
 import gid.gtk3.c.functions;
@@ -73,9 +74,16 @@ class HSV : gid.gtk3.widget.Widget
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_hsv_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_hsv_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -95,6 +103,26 @@ class HSV : gid.gtk3.widget.Widget
   static void toRgb(double h, double s, double v, out double r, out double g, out double b) nothrow
   {
     gtk_hsv_to_rgb(h, s, v, cast(double*)&r, cast(double*)&g, cast(double*)&b);
+  }
+
+  /** */
+  protected void vfuncChanged()
+  {
+    auto _klass = cast(GtkHSVClass*)_vfuncClass;
+    if (!_klass.changed)
+      return;
+
+    _klass.changed(cast(GtkHSV*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncMove(gid.gtk3.types.DirectionType type)
+  {
+    auto _klass = cast(GtkHSVClass*)_vfuncClass;
+    if (!_klass.move)
+      return;
+
+    _klass.move(cast(GtkHSV*)this._cPtr, type);
   }
 
   /**
@@ -188,6 +216,7 @@ class HSV : gid.gtk3.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -235,6 +264,7 @@ class HSV : gid.gtk3.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -257,6 +287,92 @@ class HSV : gid.gtk3.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("move", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from HSV
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.hsv.HSV), T.stringof ~ " is not derived from gid.gtk3.hsv.HSV");
+
+    gid.gtk3.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChanged", true)[0]) == gid.gtk3.hsv.HSV))
+      _installVfunc(klass, "changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMove", true)[0]) == gid.gtk3.hsv.HSV))
+      _installVfunc(klass, "move");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkHSVClass*)klass;
+
+    switch (vfunc)
+    {
+      case "changed":
+      {
+        static extern(C) void _vfuncChangedTramp(GtkHSV* hsv) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.hsv.HSV)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)hsv);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkHSVClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)hsv);
+            if (_klass.changed)
+              return (cast(typeof(&_vfuncChangedTramp))_klass.changed)(hsv);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.hsv.HSV.vfuncChanged");
+          }
+        }
+
+        _klass.changed = cast(typeof(_klass.changed))&_vfuncChangedTramp;
+        break;
+      }
+      case "move":
+      {
+        static extern(C) void _vfuncMoveTramp(GtkHSV* hsv, GtkDirectionType type) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.hsv.HSV)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)hsv);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkHSVClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)hsv);
+            if (_klass.move)
+              return (cast(typeof(&_vfuncMoveTramp))_klass.move)(hsv, type);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMove(type);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.hsv.HSV.vfuncMove");
+          }
+        }
+
+        _klass.move = cast(typeof(_klass.move))&_vfuncMoveTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

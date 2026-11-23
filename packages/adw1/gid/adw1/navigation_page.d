@@ -54,6 +54,15 @@ class NavigationPage : gid.gtk4.widget.Widget
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -216,10 +225,17 @@ class NavigationPage : gid.gtk4.widget.Widget
   */
   this(gid.gtk4.widget.Widget child, string title) nothrow
   {
-    AdwNavigationPage* _cretval;
-    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
-    _cretval = adw_navigation_page_new(child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _title);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      AdwNavigationPage* _cretval;
+      const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
+      _cretval = adw_navigation_page_new(child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _title);
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -239,6 +255,74 @@ class NavigationPage : gid.gtk4.widget.Widget
     _cretval = adw_navigation_page_new_with_tag(child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _title, _tag);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.adw1.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
     return _retval;
+  }
+
+  /**
+      Called when the navigation view transition has been completed and the page
+      is fully hidden.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncHidden` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncHidden()
+  {
+    auto _klass = cast(AdwNavigationPageClass*)_vfuncClass;
+    if (!_klass.hidden)
+      return;
+
+    _klass.hidden(cast(AdwNavigationPage*)this._cPtr);
+  }
+
+  /**
+      Called when the page starts hiding at the beginning of the navigation view
+      transition.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncHiding` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncHiding()
+  {
+    auto _klass = cast(AdwNavigationPageClass*)_vfuncClass;
+    if (!_klass.hiding)
+      return;
+
+    _klass.hiding(cast(AdwNavigationPage*)this._cPtr);
+  }
+
+  /**
+      Called when the page shows at the beginning of the navigation view
+      transition.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncShowing` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncShowing()
+  {
+    auto _klass = cast(AdwNavigationPageClass*)_vfuncClass;
+    if (!_klass.showing)
+      return;
+
+    _klass.showing(cast(AdwNavigationPage*)this._cPtr);
+  }
+
+  /**
+      Called when the navigation view transition has been completed and the page
+      is fully shown.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncShown` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncShown()
+  {
+    auto _klass = cast(AdwNavigationPageClass*)_vfuncClass;
+    if (!_klass.shown)
+      return;
+
+    _klass.shown(cast(AdwNavigationPage*)this._cPtr);
   }
 
   /**
@@ -382,6 +466,7 @@ class NavigationPage : gid.gtk4.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -430,6 +515,7 @@ class NavigationPage : gid.gtk4.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -478,6 +564,7 @@ class NavigationPage : gid.gtk4.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -526,6 +613,7 @@ class NavigationPage : gid.gtk4.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -545,6 +633,152 @@ class NavigationPage : gid.gtk4.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("shown", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from NavigationPage
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.adw1.navigation_page.NavigationPage), T.stringof ~ " is not derived from gid.adw1.navigation_page.NavigationPage");
+
+    gid.gtk4.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHidden", true)[0]) == gid.adw1.navigation_page.NavigationPage))
+      _installVfunc(klass, "hidden");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHiding", true)[0]) == gid.adw1.navigation_page.NavigationPage))
+      _installVfunc(klass, "hiding");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncShowing", true)[0]) == gid.adw1.navigation_page.NavigationPage))
+      _installVfunc(klass, "showing");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncShown", true)[0]) == gid.adw1.navigation_page.NavigationPage))
+      _installVfunc(klass, "shown");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(AdwNavigationPageClass*)klass;
+
+    switch (vfunc)
+    {
+      case "hidden":
+      {
+        static extern(C) void _vfuncHiddenTramp(AdwNavigationPage* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.adw1.navigation_page.NavigationPage)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(AdwNavigationPageClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.hidden)
+              return (cast(typeof(&_vfuncHiddenTramp))_klass.hidden)(self);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncHidden();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.adw1.navigation_page.NavigationPage.vfuncHidden");
+          }
+        }
+
+        _klass.hidden = cast(typeof(_klass.hidden))&_vfuncHiddenTramp;
+        break;
+      }
+      case "hiding":
+      {
+        static extern(C) void _vfuncHidingTramp(AdwNavigationPage* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.adw1.navigation_page.NavigationPage)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(AdwNavigationPageClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.hiding)
+              return (cast(typeof(&_vfuncHidingTramp))_klass.hiding)(self);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncHiding();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.adw1.navigation_page.NavigationPage.vfuncHiding");
+          }
+        }
+
+        _klass.hiding = cast(typeof(_klass.hiding))&_vfuncHidingTramp;
+        break;
+      }
+      case "showing":
+      {
+        static extern(C) void _vfuncShowingTramp(AdwNavigationPage* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.adw1.navigation_page.NavigationPage)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(AdwNavigationPageClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.showing)
+              return (cast(typeof(&_vfuncShowingTramp))_klass.showing)(self);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncShowing();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.adw1.navigation_page.NavigationPage.vfuncShowing");
+          }
+        }
+
+        _klass.showing = cast(typeof(_klass.showing))&_vfuncShowingTramp;
+        break;
+      }
+      case "shown":
+      {
+        static extern(C) void _vfuncShownTramp(AdwNavigationPage* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.adw1.navigation_page.NavigationPage)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(AdwNavigationPageClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.shown)
+              return (cast(typeof(&_vfuncShownTramp))_klass.shown)(self);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncShown();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.adw1.navigation_page.NavigationPage.vfuncShown");
+          }
+        }
+
+        _klass.shown = cast(typeof(_klass.shown))&_vfuncShownTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

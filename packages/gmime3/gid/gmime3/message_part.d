@@ -23,6 +23,15 @@ class MessagePart : gid.gmime3.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -68,10 +77,17 @@ class MessagePart : gid.gmime3.object.ObjectWrap
   */
   this(string subtype) nothrow
   {
-    GMimeMessagePart* _cretval;
-    const(char)* _subtype = subtype.toCString!(No.Malloc, No.Nullable);
-    _cretval = g_mime_message_part_new(_subtype);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GMimeMessagePart* _cretval;
+      const(char)* _subtype = subtype.toCString!(No.Malloc, No.Nullable);
+      _cretval = g_mime_message_part_new(_subtype);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

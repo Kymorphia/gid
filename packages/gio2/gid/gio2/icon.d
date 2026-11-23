@@ -95,6 +95,10 @@ interface Icon : GidWrap
     return _retval;
   }
 
+
+
+
+
   /**
       Checks if two icons are equal.
   

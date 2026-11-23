@@ -27,6 +27,11 @@ interface Swipeable : GidWrap
     return cast(void function())adw_swipeable_get_type != &gidSymbolNotFound ? adw_swipeable_get_type() : cast(GType)0;
   }
 
+
+
+
+
+
   /**
       Gets the progress self will snap back to after the gesture is canceled.
       Returns: the cancel progress, unitless

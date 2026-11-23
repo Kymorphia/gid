@@ -80,9 +80,16 @@ class StyleSchemeChooserWidget : gid.gtk4.widget.Widget, gid.gtksource5.style_sc
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_source_style_scheme_chooser_widget_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_source_style_scheme_chooser_widget_new();
+      this(_cretval, No.Take);
+    }
   }
 }
 

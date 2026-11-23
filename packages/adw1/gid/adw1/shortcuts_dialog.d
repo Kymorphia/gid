@@ -154,9 +154,16 @@ class ShortcutsDialog : gid.adw1.dialog.Dialog
   */
   this() nothrow
   {
-    AdwDialog* _cretval;
-    _cretval = adw_shortcuts_dialog_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      AdwDialog* _cretval;
+      _cretval = adw_shortcuts_dialog_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**

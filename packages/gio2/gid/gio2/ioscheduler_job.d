@@ -44,6 +44,7 @@ class IOSchedulerJob : OpaqueWrap!(GIOSchedulerJob*, void, void)
   {
     extern(C) gboolean _funcCallback(void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.glib2.types.SourceFunc*)userData;
 
@@ -87,6 +88,7 @@ class IOSchedulerJob : OpaqueWrap!(GIOSchedulerJob*, void, void)
   {
     extern(C) gboolean _funcCallback(void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.glib2.types.SourceFunc*)userData;
 

@@ -438,9 +438,36 @@ class Session : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    SoupSession* _cretval;
-    _cretval = soup_session_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      SoupSession* _cretval;
+      _cretval = soup_session_new();
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncRequestQueued(gid.soup3.message.Message msg)
+  {
+    auto _klass = cast(SoupSessionClass*)_vfuncClass;
+    if (!_klass.requestQueued)
+      return;
+
+    _klass.requestQueued(cast(SoupSession*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncRequestUnqueued(gid.soup3.message.Message msg)
+  {
+    auto _klass = cast(SoupSessionClass*)_vfuncClass;
+    if (!_klass.requestUnqueued)
+      return;
+
+    _klass.requestUnqueued(cast(SoupSession*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null);
   }
 
   /**
@@ -727,6 +754,7 @@ class Session : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -873,6 +901,7 @@ class Session : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -953,6 +982,7 @@ class Session : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -1008,6 +1038,7 @@ class Session : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -1201,6 +1232,7 @@ class Session : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -1299,6 +1331,7 @@ class Session : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1353,6 +1386,7 @@ class Session : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1375,6 +1409,92 @@ class Session : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("request-unqueued", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Session
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.soup3.session.Session), T.stringof ~ " is not derived from gid.soup3.session.Session");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRequestQueued", true)[0]) == gid.soup3.session.Session))
+      _installVfunc(klass, "request_queued");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRequestUnqueued", true)[0]) == gid.soup3.session.Session))
+      _installVfunc(klass, "request_unqueued");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(SoupSessionClass*)klass;
+
+    switch (vfunc)
+    {
+      case "request_queued":
+      {
+        static extern(C) void _vfuncRequestQueuedTramp(SoupSession* session, SoupMessage* msg) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.soup3.session.Session)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)session);
+          if (!_obj)
+          {
+            auto _klass = cast(SoupSessionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)session);
+            if (_klass.requestQueued)
+              return (cast(typeof(&_vfuncRequestQueuedTramp))_klass.requestQueued)(session, msg);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRequestQueued(gid.gobject2.object.ObjectWrap._getDObject!(gid.soup3.message.Message)(cast(void*)msg, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.soup3.session.Session.vfuncRequestQueued");
+          }
+        }
+
+        _klass.requestQueued = cast(typeof(_klass.requestQueued))&_vfuncRequestQueuedTramp;
+        break;
+      }
+      case "request_unqueued":
+      {
+        static extern(C) void _vfuncRequestUnqueuedTramp(SoupSession* session, SoupMessage* msg) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.soup3.session.Session)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)session);
+          if (!_obj)
+          {
+            auto _klass = cast(SoupSessionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)session);
+            if (_klass.requestUnqueued)
+              return (cast(typeof(&_vfuncRequestUnqueuedTramp))_klass.requestUnqueued)(session, msg);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRequestUnqueued(gid.gobject2.object.ObjectWrap._getDObject!(gid.soup3.message.Message)(cast(void*)msg, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.soup3.session.Session.vfuncRequestUnqueued");
+          }
+        }
+
+        _klass.requestUnqueued = cast(typeof(_klass.requestUnqueued))&_vfuncRequestUnqueuedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

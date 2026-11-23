@@ -82,6 +82,15 @@ class DBusProxy : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.AsyncI
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -439,6 +448,7 @@ class DBusProxy : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.AsyncI
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -478,6 +488,7 @@ class DBusProxy : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.AsyncI
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -496,6 +507,29 @@ class DBusProxy : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.AsyncI
     const(char)* _interfaceName = interfaceName.toCString!(No.Malloc, No.Nullable);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_dbus_proxy_new_for_bus(busType, flags, info ? cast(GDBusInterfaceInfo*)info._cPtr(No.Dup) : null, _name, _objectPath, _interfaceName, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Signal class handler for the #GDBusProxy::g-signal signal.
+  
+      Params:
+        senderName = 
+        signalName = 
+        parameters = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGSignal` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncGSignal(string senderName, string signalName, gid.glib2.variant.Variant parameters)
+  {
+    auto _klass = cast(GDBusProxyClass*)_vfuncClass;
+    if (!_klass.gSignal)
+      return;
+
+    const(char)* _senderName = senderName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _signalName = signalName.toCString!(No.Malloc, No.Nullable);
+    _klass.gSignal(cast(GDBusProxy*)this._cPtr, _senderName, _signalName, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null);
   }
 
   /**
@@ -556,6 +590,7 @@ class DBusProxy : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.AsyncI
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -674,6 +709,7 @@ class DBusProxy : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.AsyncI
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -1021,6 +1057,7 @@ class DBusProxy : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.AsyncI
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1085,6 +1122,7 @@ class DBusProxy : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.AsyncI
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1113,6 +1151,65 @@ class DBusProxy : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.AsyncI
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("g-signal"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from DBusProxy
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.dbus_proxy.DBusProxy), T.stringof ~ " is not derived from gid.gio2.dbus_proxy.DBusProxy");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGSignal", true)[0]) == gid.gio2.dbus_proxy.DBusProxy))
+      _installVfunc(klass, "g_signal");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GDBusProxyClass*)klass;
+
+    switch (vfunc)
+    {
+      case "g_signal":
+      {
+        static extern(C) void _vfuncGSignalTramp(GDBusProxy* proxy, const(char)* senderName, const(char)* signalName, GVariant* parameters) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.dbus_proxy.DBusProxy)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)proxy);
+          if (!_obj)
+          {
+            auto _klass = cast(GDBusProxyClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)proxy);
+            if (_klass.gSignal)
+              return (cast(typeof(&_vfuncGSignalTramp))_klass.gSignal)(proxy, senderName, signalName, parameters);
+            return;
+          }
+
+          string _senderName = senderName.fromCString!(No.Free);
+          string _signalName = signalName.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncGSignal(_senderName, _signalName, parameters ? new gid.glib2.variant.Variant(cast(void*)parameters, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.dbus_proxy.DBusProxy.vfuncGSignal");
+          }
+        }
+
+        _klass.gSignal = cast(typeof(_klass.gSignal))&_vfuncGSignalTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

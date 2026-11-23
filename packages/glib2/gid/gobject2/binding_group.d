@@ -87,9 +87,16 @@ class BindingGroup : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GBindingGroup* _cretval;
-    _cretval = g_binding_group_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GBindingGroup* _cretval;
+      _cretval = g_binding_group_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

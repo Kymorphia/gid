@@ -141,9 +141,16 @@ class SnippetChunk : gid.gobject2.initially_unowned.InitiallyUnowned
   */
   this() nothrow
   {
-    GtkSourceSnippetChunk* _cretval;
-    _cretval = gtk_source_snippet_chunk_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkSourceSnippetChunk* _cretval;
+      _cretval = gtk_source_snippet_chunk_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**

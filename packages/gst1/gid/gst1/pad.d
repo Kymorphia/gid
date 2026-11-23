@@ -92,6 +92,15 @@ class Pad : gid.gst1.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -181,6 +190,7 @@ class Pad : gid.gst1.object.ObjectWrap
   {
     extern(C) GstFlowReturn _getCallback(GstPad* pad, GstObject* parent, ulong offset, uint length, GstBuffer** buffer) nothrow
     {
+      gidAttachThread();
       gid.gst1.types.FlowReturn _dretval;
       auto _dlg = cast(gid.gst1.types.PadGetRangeFunction*)pad.getrangedata;
 
@@ -241,10 +251,17 @@ class Pad : gid.gst1.object.ObjectWrap
   */
   this(string name, gid.gst1.types.PadDirection direction) nothrow
   {
-    GstPad* _cretval;
-    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gst_pad_new(_name, direction);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GstPad* _cretval;
+      const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gst_pad_new(_name, direction);
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -302,6 +319,26 @@ class Pad : gid.gst1.object.ObjectWrap
     return _retval;
   }
 
+  /** */
+  protected void vfuncLinked(gid.gst1.pad.Pad peer)
+  {
+    auto _klass = cast(GstPadClass*)_vfuncClass;
+    if (!_klass.linked)
+      return;
+
+    _klass.linked(cast(GstPad*)this._cPtr, peer ? cast(GstPad*)peer._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncUnlinked(gid.gst1.pad.Pad peer)
+  {
+    auto _klass = cast(GstPadClass*)_vfuncClass;
+    if (!_klass.unlinked)
+      return;
+
+    _klass.unlinked(cast(GstPad*)this._cPtr, peer ? cast(GstPad*)peer._cPtr(No.Dup) : null);
+  }
+
   /**
       Activates or deactivates the given pad in mode via dispatching to the
       pad's activatemodefunc. For use from within pad activation functions only.
@@ -348,6 +385,7 @@ class Pad : gid.gst1.object.ObjectWrap
   {
     extern(C) GstPadProbeReturn _callbackCallback(GstPad* pad, GstPadProbeInfo* info, void* userData) nothrow
     {
+      gidAttachThread();
       gid.gst1.types.PadProbeReturn _dretval;
       auto _dlg = cast(gid.gst1.types.PadProbeCallback*)userData;
       auto _info = info ? new gid.gst1.pad_probe_info.PadProbeInfo(cast(void*)info, null) : null;
@@ -531,6 +569,7 @@ class Pad : gid.gst1.object.ObjectWrap
   {
     extern(C) gboolean _forwardCallback(GstPad* pad, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.PadForwardFunction*)userData;
 
@@ -1525,6 +1564,7 @@ class Pad : gid.gst1.object.ObjectWrap
   {
     extern(C) gboolean _activateCallback(GstPad* pad, GstObject* parent) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.PadActivateFunction*)(cast(GstPad*)pad).activatedata;
 
@@ -1557,6 +1597,7 @@ class Pad : gid.gst1.object.ObjectWrap
   {
     extern(C) gboolean _activatemodeCallback(GstPad* pad, GstObject* parent, GstPadMode mode, gboolean active) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.PadActivateModeFunction*)(cast(GstPad*)pad).activatemodedata;
 
@@ -1613,6 +1654,7 @@ class Pad : gid.gst1.object.ObjectWrap
   {
     extern(C) GstFlowReturn _chainCallback(GstPad* pad, GstObject* parent, GstBuffer* buffer) nothrow
     {
+      gidAttachThread();
       gid.gst1.types.FlowReturn _dretval;
       auto _dlg = cast(gid.gst1.types.PadChainFunction*)(cast(GstPad*)pad).chaindata;
 
@@ -1646,6 +1688,7 @@ class Pad : gid.gst1.object.ObjectWrap
   {
     extern(C) GstFlowReturn _chainlistCallback(GstPad* pad, GstObject* parent, GstBufferList* list) nothrow
     {
+      gidAttachThread();
       gid.gst1.types.FlowReturn _dretval;
       auto _dlg = cast(gid.gst1.types.PadChainListFunction*)(cast(GstPad*)pad).chainlistdata;
 
@@ -1690,6 +1733,7 @@ class Pad : gid.gst1.object.ObjectWrap
   {
     extern(C) GstFlowReturn _eventCallback(GstPad* pad, GstObject* parent, GstEvent* event) nothrow
     {
+      gidAttachThread();
       gid.gst1.types.FlowReturn _dretval;
       auto _dlg = cast(gid.gst1.types.PadEventFullFunction*)(cast(GstPad*)pad).eventdata;
 
@@ -1721,6 +1765,7 @@ class Pad : gid.gst1.object.ObjectWrap
   {
     extern(C) gboolean _eventCallback(GstPad* pad, GstObject* parent, GstEvent* event) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.PadEventFunction*)(cast(GstPad*)pad).eventdata;
 
@@ -1752,6 +1797,7 @@ class Pad : gid.gst1.object.ObjectWrap
   {
     extern(C) GstIterator* _iterintlinkCallback(GstPad* pad, GstObject* parent) nothrow
     {
+      gidAttachThread();
       gid.gst1.iterator.Iterator _dretval;
       auto _dlg = cast(gid.gst1.types.PadIterIntLinkFunction*)(cast(GstPad*)pad).iterintlinkdata;
 
@@ -1793,6 +1839,7 @@ class Pad : gid.gst1.object.ObjectWrap
   {
     extern(C) GstPadLinkReturn _linkCallback(GstPad* pad, GstObject* parent, GstPad* peer) nothrow
     {
+      gidAttachThread();
       gid.gst1.types.PadLinkReturn _dretval;
       auto _dlg = cast(gid.gst1.types.PadLinkFunction*)(cast(GstPad*)pad).linkdata;
 
@@ -1838,6 +1885,7 @@ class Pad : gid.gst1.object.ObjectWrap
   {
     extern(C) gboolean _queryCallback(GstPad* pad, GstObject* parent, GstQuery* query) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.PadQueryFunction*)(cast(GstPad*)pad).querydata;
       auto _query = query ? new gid.gst1.query.Query(cast(void*)query, Yes.Take)._cBorrow : null;
@@ -1877,6 +1925,7 @@ class Pad : gid.gst1.object.ObjectWrap
   {
     extern(C) void _unlinkCallback(GstPad* pad, GstObject* parent) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gst1.types.PadUnlinkFunction*)(cast(GstPad*)pad).unlinkdata;
 
       try
@@ -1908,6 +1957,7 @@ class Pad : gid.gst1.object.ObjectWrap
   {
     extern(C) void _funcCallback(void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gst1.types.TaskFunction*)userData;
 
       try
@@ -1939,6 +1989,7 @@ class Pad : gid.gst1.object.ObjectWrap
   {
     extern(C) gboolean _foreachFuncCallback(GstPad* pad, GstEvent** event, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.PadStickyEventsForeachFunction*)userData;
       auto _event = *event ? new gid.gst1.event.Event(cast(void*)*event, Yes.Take) : null;
@@ -2054,6 +2105,7 @@ class Pad : gid.gst1.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2104,6 +2156,7 @@ class Pad : gid.gst1.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2126,6 +2179,92 @@ class Pad : gid.gst1.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unlinked", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Pad
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gst1.pad.Pad), T.stringof ~ " is not derived from gid.gst1.pad.Pad");
+
+    gid.gst1.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncLinked", true)[0]) == gid.gst1.pad.Pad))
+      _installVfunc(klass, "linked");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUnlinked", true)[0]) == gid.gst1.pad.Pad))
+      _installVfunc(klass, "unlinked");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstPadClass*)klass;
+
+    switch (vfunc)
+    {
+      case "linked":
+      {
+        static extern(C) void _vfuncLinkedTramp(GstPad* pad, GstPad* peer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.pad.Pad)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pad);
+          if (!_obj)
+          {
+            auto _klass = cast(GstPadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pad);
+            if (_klass.linked)
+              return (cast(typeof(&_vfuncLinkedTramp))_klass.linked)(pad, peer);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncLinked(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.pad.Pad)(cast(void*)peer, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.pad.Pad.vfuncLinked");
+          }
+        }
+
+        _klass.linked = cast(typeof(_klass.linked))&_vfuncLinkedTramp;
+        break;
+      }
+      case "unlinked":
+      {
+        static extern(C) void _vfuncUnlinkedTramp(GstPad* pad, GstPad* peer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.pad.Pad)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pad);
+          if (!_obj)
+          {
+            auto _klass = cast(GstPadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pad);
+            if (_klass.unlinked)
+              return (cast(typeof(&_vfuncUnlinkedTramp))_klass.unlinked)(pad, peer);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncUnlinked(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.pad.Pad)(cast(void*)peer, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.pad.Pad.vfuncUnlinked");
+          }
+        }
+
+        _klass.unlinked = cast(typeof(_klass.unlinked))&_vfuncUnlinkedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

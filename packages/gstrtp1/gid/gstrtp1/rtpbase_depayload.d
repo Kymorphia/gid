@@ -8,11 +8,14 @@ import gid.gobject2.gid_builder;
 import gid.gobject2.object;
 import gid.gst1.buffer;
 import gid.gst1.buffer_list;
+import gid.gst1.caps;
 import gid.gst1.element;
+import gid.gst1.event;
 import gid.gst1.structure;
 import gid.gst1.types;
 import gid.gstrtp1.c.functions;
 import gid.gstrtp1.c.types;
+import gid.gstrtp1.rtpbuffer;
 import gid.gstrtp1.rtpheader_extension;
 import gid.gstrtp1.types;
 
@@ -58,6 +61,15 @@ class RTPBaseDepayload : gid.gst1.element.Element
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
   }
 
   /** */
@@ -205,6 +217,129 @@ class RTPBaseDepayload : gid.gst1.element.Element
     return gid.gobject2.object.ObjectWrap.getProperty!(gid.gst1.types.ValueArray)("extensions");
   }
 
+
+  /**
+      custom event handling
+  
+      Params:
+        event =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncHandleEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncHandleEvent(gid.gst1.event.Event event)
+  {
+    auto _klass = cast(GstRTPBaseDepayloadClass*)_vfuncClass;
+    if (!_klass.handleEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.handleEvent(cast(GstRTPBaseDepayload*)this._cPtr, event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      signal the depayloader about packet loss
+  
+      Params:
+        event =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPacketLost` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncPacketLost(gid.gst1.event.Event event)
+  {
+    auto _klass = cast(GstRTPBaseDepayloadClass*)_vfuncClass;
+    if (!_klass.packetLost)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.packetLost(cast(GstRTPBaseDepayload*)this._cPtr, event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      process incoming rtp packets. Subclass must implement either
+        this method or process_rtp_packet to process incoming rtp packets.
+        If the child returns a buffer without a valid timestamp, the timestamp
+        of the provided buffer will be applied to the result buffer and the
+        buffer will be pushed. If this function returns null, nothing is pushed.
+  
+      Params:
+        in_ =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncProcess` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.buffer.Buffer vfuncProcess(gid.gst1.buffer.Buffer in_)
+  {
+    auto _klass = cast(GstRTPBaseDepayloadClass*)_vfuncClass;
+    if (!_klass.process)
+      return typeof(return).init;
+
+    GstBuffer* _cretval;
+    _cretval = _klass.process(cast(GstRTPBaseDepayload*)this._cPtr, in_ ? cast(GstBuffer*)in_._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gid.gst1.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Same as the process virtual function, but slightly more
+      efficient, since it is passed the rtp buffer structure that has already
+      been mapped (with GST_MAP_READ) by the base class and thus does not have
+      to be mapped again by the subclass. Can be used by the subclass to process
+      incoming rtp packets. If the subclass returns a buffer without a valid
+      timestamp, the timestamp of the input buffer will be applied to the result
+      buffer and the output buffer will be pushed out. If this function returns
+      null, nothing is pushed out. Since: 1.6.
+  
+      Params:
+        rtpBuffer =  (borrowed, only valid during the callback)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncProcessRtpPacket` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.buffer.Buffer vfuncProcessRtpPacket(gid.gstrtp1.rtpbuffer.RTPBuffer rtpBuffer)
+  {
+    auto _klass = cast(GstRTPBaseDepayloadClass*)_vfuncClass;
+    if (!_klass.processRtpPacket)
+      return typeof(return).init;
+
+    GstBuffer* _cretval;
+    _cretval = _klass.processRtpPacket(cast(GstRTPBaseDepayload*)this._cPtr, rtpBuffer ? cast(GstRTPBuffer*)rtpBuffer._cPtr : null);
+    auto _retval = _cretval ? new gid.gst1.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      configure the depayloader
+  
+      Params:
+        caps =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetCaps` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncSetCaps(gid.gst1.caps.Caps caps)
+  {
+    auto _klass = cast(GstRTPBaseDepayloadClass*)_vfuncClass;
+    if (!_klass.setCaps)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.setCaps(cast(GstRTPBaseDepayload*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    return _retval;
+  }
 
   /**
       Called from GstRTPBaseDepayload.process or
@@ -376,6 +511,7 @@ class RTPBaseDepayload : gid.gst1.element.Element
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -423,6 +559,7 @@ class RTPBaseDepayload : gid.gst1.element.Element
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -475,6 +612,7 @@ class RTPBaseDepayload : gid.gst1.element.Element
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -503,6 +641,220 @@ class RTPBaseDepayload : gid.gst1.element.Element
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("request-extension", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from RTPBaseDepayload
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload), T.stringof ~ " is not derived from gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload");
+
+    gid.gst1.element.Element._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHandleEvent", true)[0]) == gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload))
+      _installVfunc(klass, "handle_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPacketLost", true)[0]) == gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload))
+      _installVfunc(klass, "packet_lost");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncProcess", true)[0]) == gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload))
+      _installVfunc(klass, "process");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncProcessRtpPacket", true)[0]) == gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload))
+      _installVfunc(klass, "process_rtp_packet");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetCaps", true)[0]) == gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload))
+      _installVfunc(klass, "set_caps");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstRTPBaseDepayloadClass*)klass;
+
+    switch (vfunc)
+    {
+      case "handle_event":
+      {
+        static extern(C) gboolean _vfuncHandleEventTramp(GstRTPBaseDepayload* filter, GstEvent* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filter);
+          if (!_obj)
+          {
+            auto _klass = cast(GstRTPBaseDepayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filter);
+            if (_klass.handleEvent)
+              return (cast(typeof(&_vfuncHandleEventTramp))_klass.handleEvent)(filter, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gst1.event.Event(cast(void*)event, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncHandleEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload.vfuncHandleEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_event)
+            _event._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.handleEvent = cast(typeof(_klass.handleEvent))&_vfuncHandleEventTramp;
+        break;
+      }
+      case "packet_lost":
+      {
+        static extern(C) gboolean _vfuncPacketLostTramp(GstRTPBaseDepayload* filter, GstEvent* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filter);
+          if (!_obj)
+          {
+            auto _klass = cast(GstRTPBaseDepayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filter);
+            if (_klass.packetLost)
+              return (cast(typeof(&_vfuncPacketLostTramp))_klass.packetLost)(filter, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gst1.event.Event(cast(void*)event, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncPacketLost(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload.vfuncPacketLost");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_event)
+            _event._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.packetLost = cast(typeof(_klass.packetLost))&_vfuncPacketLostTramp;
+        break;
+      }
+      case "process":
+      {
+        static extern(C) GstBuffer* _vfuncProcessTramp(GstRTPBaseDepayload* base, GstBuffer* in_) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)base);
+          if (!_obj)
+          {
+            auto _klass = cast(GstRTPBaseDepayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)base);
+            if (_klass.process)
+              return (cast(typeof(&_vfuncProcessTramp))_klass.process)(base, in_);
+            return typeof(return).init;
+          }
+
+          gid.gst1.buffer.Buffer _dretval;
+          auto _in_ = in_ ? new gid.gst1.buffer.Buffer(cast(void*)in_, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncProcess(_in_);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload.vfuncProcess");
+          }
+          auto _retval = _dretval ? cast(GstBuffer*)_dretval._cPtr(Yes.Dup) : null;
+          if (_in_)
+            _in_._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.process = cast(typeof(_klass.process))&_vfuncProcessTramp;
+        break;
+      }
+      case "process_rtp_packet":
+      {
+        static extern(C) GstBuffer* _vfuncProcessRtpPacketTramp(GstRTPBaseDepayload* base, GstRTPBuffer* rtpBuffer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)base);
+          if (!_obj)
+          {
+            auto _klass = cast(GstRTPBaseDepayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)base);
+            if (_klass.processRtpPacket)
+              return (cast(typeof(&_vfuncProcessRtpPacketTramp))_klass.processRtpPacket)(base, rtpBuffer);
+            return typeof(return).init;
+          }
+
+          gid.gst1.buffer.Buffer _dretval;
+          auto _rtpBuffer = rtpBuffer ? new gid.gstrtp1.rtpbuffer.RTPBuffer(cast(void*)rtpBuffer, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncProcessRtpPacket(_rtpBuffer);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload.vfuncProcessRtpPacket");
+          }
+          auto _retval = _dretval ? cast(GstBuffer*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.processRtpPacket = cast(typeof(_klass.processRtpPacket))&_vfuncProcessRtpPacketTramp;
+        break;
+      }
+      case "set_caps":
+      {
+        static extern(C) gboolean _vfuncSetCapsTramp(GstRTPBaseDepayload* filter, GstCaps* caps) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filter);
+          if (!_obj)
+          {
+            auto _klass = cast(GstRTPBaseDepayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filter);
+            if (_klass.setCaps)
+              return (cast(typeof(&_vfuncSetCapsTramp))_klass.setCaps)(filter, caps);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _caps = caps ? new gid.gst1.caps.Caps(cast(void*)caps, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncSetCaps(_caps);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstrtp1.rtpbase_depayload.RTPBaseDepayload.vfuncSetCaps");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_caps)
+            _caps._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.setCaps = cast(typeof(_klass.setCaps))&_vfuncSetCapsTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

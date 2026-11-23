@@ -91,9 +91,79 @@ class HSTSEnforcer : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.S
   */
   this() nothrow
   {
-    SoupHSTSEnforcer* _cretval;
-    _cretval = soup_hsts_enforcer_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      SoupHSTSEnforcer* _cretval;
+      _cretval = soup_hsts_enforcer_new();
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /**
+      The class closure for the [gid.soup3.hstsenforcer.HSTSEnforcer.changed] signal.
+  
+      Params:
+        oldPolicy =  (modified in place, changes are seen by the caller)
+        newPolicy =  (modified in place, changes are seen by the caller)
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncChanged(gid.soup3.hstspolicy.HSTSPolicy oldPolicy, gid.soup3.hstspolicy.HSTSPolicy newPolicy)
+  {
+    auto _klass = cast(SoupHSTSEnforcerClass*)_vfuncClass;
+    if (!_klass.changed)
+      return;
+
+    _klass.changed(cast(SoupHSTSEnforcer*)this._cPtr, oldPolicy ? cast(SoupHSTSPolicy*)oldPolicy._cPtr(No.Dup) : null, newPolicy ? cast(SoupHSTSPolicy*)newPolicy._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Gets whether hsts_enforcer has a currently valid policy for domain.
+  
+      Params:
+        domain = a domain.
+      Returns: true if access to domain should happen over HTTPS, false
+          otherwise.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncHasValidPolicy` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncHasValidPolicy(string domain)
+  {
+    auto _klass = cast(SoupHSTSEnforcerClass*)_vfuncClass;
+    if (!_klass.hasValidPolicy)
+      return typeof(return).init;
+
+    bool _retval;
+    const(char)* _domain = domain.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)_klass.hasValidPolicy(cast(SoupHSTSEnforcer*)this._cPtr, _domain);
+    return _retval;
+  }
+
+  /**
+      Gets whether hsts_enforcer stores policies persistenly.
+      Returns: true if hsts_enforcer storage is persistent or false otherwise.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncIsPersistent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncIsPersistent()
+  {
+    auto _klass = cast(SoupHSTSEnforcerClass*)_vfuncClass;
+    if (!_klass.isPersistent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.isPersistent(cast(SoupHSTSEnforcer*)this._cPtr);
+    return _retval;
   }
 
   /**
@@ -231,6 +301,7 @@ class HSTSEnforcer : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.S
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -256,6 +327,141 @@ class HSTSEnforcer : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.S
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from HSTSEnforcer
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.soup3.hstsenforcer.HSTSEnforcer), T.stringof ~ " is not derived from gid.soup3.hstsenforcer.HSTSEnforcer");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChanged", true)[0]) == gid.soup3.hstsenforcer.HSTSEnforcer))
+      _installVfunc(klass, "changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHasValidPolicy", true)[0]) == gid.soup3.hstsenforcer.HSTSEnforcer))
+      _installVfunc(klass, "has_valid_policy");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncIsPersistent", true)[0]) == gid.soup3.hstsenforcer.HSTSEnforcer))
+      _installVfunc(klass, "is_persistent");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(SoupHSTSEnforcerClass*)klass;
+
+    switch (vfunc)
+    {
+      case "changed":
+      {
+        static extern(C) void _vfuncChangedTramp(SoupHSTSEnforcer* enforcer, SoupHSTSPolicy* oldPolicy, SoupHSTSPolicy* newPolicy) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.soup3.hstsenforcer.HSTSEnforcer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)enforcer);
+          if (!_obj)
+          {
+            auto _klass = cast(SoupHSTSEnforcerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)enforcer);
+            if (_klass.changed)
+              return (cast(typeof(&_vfuncChangedTramp))_klass.changed)(enforcer, oldPolicy, newPolicy);
+            return;
+          }
+
+          auto _oldPolicy = oldPolicy ? new gid.soup3.hstspolicy.HSTSPolicy(cast(void*)oldPolicy, Yes.Take)._cBorrow : null;
+          auto _newPolicy = newPolicy ? new gid.soup3.hstspolicy.HSTSPolicy(cast(void*)newPolicy, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncChanged(_oldPolicy, _newPolicy);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.soup3.hstsenforcer.HSTSEnforcer.vfuncChanged");
+          }
+          if (_oldPolicy)
+            _oldPolicy._cUnborrow;
+          if (_newPolicy)
+            _newPolicy._cUnborrow;
+
+        }
+
+        _klass.changed = cast(typeof(_klass.changed))&_vfuncChangedTramp;
+        break;
+      }
+      case "has_valid_policy":
+      {
+        static extern(C) gboolean _vfuncHasValidPolicyTramp(SoupHSTSEnforcer* hstsEnforcer, const(char)* domain) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.soup3.hstsenforcer.HSTSEnforcer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)hstsEnforcer);
+          if (!_obj)
+          {
+            auto _klass = cast(SoupHSTSEnforcerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)hstsEnforcer);
+            if (_klass.hasValidPolicy)
+              return (cast(typeof(&_vfuncHasValidPolicyTramp))_klass.hasValidPolicy)(hstsEnforcer, domain);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          string _domain = domain.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncHasValidPolicy(_domain);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.soup3.hstsenforcer.HSTSEnforcer.vfuncHasValidPolicy");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.hasValidPolicy = cast(typeof(_klass.hasValidPolicy))&_vfuncHasValidPolicyTramp;
+        break;
+      }
+      case "is_persistent":
+      {
+        static extern(C) gboolean _vfuncIsPersistentTramp(SoupHSTSEnforcer* hstsEnforcer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.soup3.hstsenforcer.HSTSEnforcer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)hstsEnforcer);
+          if (!_obj)
+          {
+            auto _klass = cast(SoupHSTSEnforcerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)hstsEnforcer);
+            if (_klass.isPersistent)
+              return (cast(typeof(&_vfuncIsPersistentTramp))_klass.isPersistent)(hstsEnforcer);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncIsPersistent();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.soup3.hstsenforcer.HSTSEnforcer.vfuncIsPersistent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.isPersistent = cast(typeof(_klass.isPersistent))&_vfuncIsPersistentTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

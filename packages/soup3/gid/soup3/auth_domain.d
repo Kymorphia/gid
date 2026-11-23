@@ -38,6 +38,15 @@ class AuthDomain : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -126,6 +135,78 @@ class AuthDomain : gid.gobject2.object.ObjectWrap
   @property string realm() nothrow
   {
     return getRealm();
+  }
+
+  /** */
+  protected string vfuncAccepts(gid.soup3.server_message.ServerMessage msg, string header)
+  {
+    auto _klass = cast(SoupAuthDomainClass*)_vfuncClass;
+    if (!_klass.accepts)
+      return typeof(return).init;
+
+    char* _cretval;
+    const(char)* _header = header.toCString!(No.Malloc, No.Nullable);
+    _cretval = _klass.accepts(cast(SoupAuthDomain*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null, _header);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Adds a "WWW-Authenticate" or "Proxy-Authenticate" header to msg.
+      
+      It requests that the client authenticate, and sets msg's status accordingly.
+      
+      This is used by [gid.soup3.server.Server] internally and is probably of no use to
+      anyone else.
+  
+      Params:
+        msg = a #SoupServerMessage
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncChallenge` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected string vfuncChallenge(gid.soup3.server_message.ServerMessage msg)
+  {
+    auto _klass = cast(SoupAuthDomainClass*)_vfuncClass;
+    if (!_klass.challenge)
+      return typeof(return).init;
+
+    char* _cretval;
+    _cretval = _klass.challenge(cast(SoupAuthDomain*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Checks if msg authenticates to domain via username and
+      password.
+      
+      This would normally be called from a
+      [gid.soup3.types.AuthDomainGenericAuthCallback].
+  
+      Params:
+        msg = a #SoupServerMessage
+        username = a username
+        password = a password
+      Returns: whether or not the message is authenticated
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCheckPassword` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncCheckPassword(gid.soup3.server_message.ServerMessage msg, string username, string password)
+  {
+    auto _klass = cast(SoupAuthDomainClass*)_vfuncClass;
+    if (!_klass.checkPassword)
+      return typeof(return).init;
+
+    bool _retval;
+    const(char)* _username = username.toCString!(No.Malloc, No.Nullable);
+    const(char)* _password = password.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)_klass.checkPassword(cast(SoupAuthDomain*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null, _username, _password);
+    return _retval;
   }
 
   /**
@@ -295,6 +376,7 @@ class AuthDomain : gid.gobject2.object.ObjectWrap
   {
     extern(C) gboolean _filterCallback(SoupAuthDomain* domain, SoupServerMessage* msg, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.soup3.types.AuthDomainFilter*)userData;
 
@@ -332,6 +414,7 @@ class AuthDomain : gid.gobject2.object.ObjectWrap
   {
     extern(C) gboolean _authCallbackCallback(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.soup3.types.AuthDomainGenericAuthCallback*)userData;
       string _username = username.fromCString!(No.Free);
@@ -352,6 +435,140 @@ class AuthDomain : gid.gobject2.object.ObjectWrap
     auto _authCallback = authCallback ? freezeDelegate(cast(void*)&authCallback) : null;
     GDestroyNotify _authCallbackDestroyCB = authCallback ? &thawDelegate : null;
     soup_auth_domain_set_generic_auth_callback(cast(SoupAuthDomain*)this._cPtr, _authCallbackCB, _authCallback, _authCallbackDestroyCB);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from AuthDomain
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.soup3.auth_domain.AuthDomain), T.stringof ~ " is not derived from gid.soup3.auth_domain.AuthDomain");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAccepts", true)[0]) == gid.soup3.auth_domain.AuthDomain))
+      _installVfunc(klass, "accepts");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChallenge", true)[0]) == gid.soup3.auth_domain.AuthDomain))
+      _installVfunc(klass, "challenge");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCheckPassword", true)[0]) == gid.soup3.auth_domain.AuthDomain))
+      _installVfunc(klass, "check_password");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(SoupAuthDomainClass*)klass;
+
+    switch (vfunc)
+    {
+      case "accepts":
+      {
+        static extern(C) char* _vfuncAcceptsTramp(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* header) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.soup3.auth_domain.AuthDomain)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)domain);
+          if (!_obj)
+          {
+            auto _klass = cast(SoupAuthDomainClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)domain);
+            if (_klass.accepts)
+              return (cast(typeof(&_vfuncAcceptsTramp))_klass.accepts)(domain, msg, header);
+            return typeof(return).init;
+          }
+
+          string _dretval;
+          string _header = header.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncAccepts(gid.gobject2.object.ObjectWrap._getDObject!(gid.soup3.server_message.ServerMessage)(cast(void*)msg, No.Take), _header);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.soup3.auth_domain.AuthDomain.vfuncAccepts");
+          }
+          auto _retval = toCString!(Yes.Malloc, No.Nullable)(_dretval);
+
+          return _retval;
+        }
+
+        _klass.accepts = cast(typeof(_klass.accepts))&_vfuncAcceptsTramp;
+        break;
+      }
+      case "challenge":
+      {
+        static extern(C) char* _vfuncChallengeTramp(SoupAuthDomain* domain, SoupServerMessage* msg) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.soup3.auth_domain.AuthDomain)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)domain);
+          if (!_obj)
+          {
+            auto _klass = cast(SoupAuthDomainClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)domain);
+            if (_klass.challenge)
+              return (cast(typeof(&_vfuncChallengeTramp))_klass.challenge)(domain, msg);
+            return typeof(return).init;
+          }
+
+          string _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncChallenge(gid.gobject2.object.ObjectWrap._getDObject!(gid.soup3.server_message.ServerMessage)(cast(void*)msg, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.soup3.auth_domain.AuthDomain.vfuncChallenge");
+          }
+          auto _retval = toCString!(Yes.Malloc, No.Nullable)(_dretval);
+
+          return _retval;
+        }
+
+        _klass.challenge = cast(typeof(_klass.challenge))&_vfuncChallengeTramp;
+        break;
+      }
+      case "check_password":
+      {
+        static extern(C) gboolean _vfuncCheckPasswordTramp(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, const(char)* password) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.soup3.auth_domain.AuthDomain)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)domain);
+          if (!_obj)
+          {
+            auto _klass = cast(SoupAuthDomainClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)domain);
+            if (_klass.checkPassword)
+              return (cast(typeof(&_vfuncCheckPasswordTramp))_klass.checkPassword)(domain, msg, username, password);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          string _username = username.fromCString!(No.Free);
+          string _password = password.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncCheckPassword(gid.gobject2.object.ObjectWrap._getDObject!(gid.soup3.server_message.ServerMessage)(cast(void*)msg, No.Take), _username, _password);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.soup3.auth_domain.AuthDomain.vfuncCheckPassword");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.checkPassword = cast(typeof(_klass.checkPassword))&_vfuncCheckPasswordTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

@@ -132,9 +132,27 @@ class CellRendererToggle : gid.gtk3.cell_renderer.CellRenderer
   */
   this() nothrow
   {
-    GtkCellRenderer* _cretval;
-    _cretval = gtk_cell_renderer_toggle_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkCellRenderer* _cretval;
+      _cretval = gtk_cell_renderer_toggle_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncToggled(string path)
+  {
+    auto _klass = cast(GtkCellRendererToggleClass*)_vfuncClass;
+    if (!_klass.toggled)
+      return;
+
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    _klass.toggled(cast(GtkCellRendererToggle*)this._cPtr, _path);
   }
 
   /**
@@ -242,6 +260,7 @@ class CellRendererToggle : gid.gtk3.cell_renderer.CellRenderer
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -264,6 +283,64 @@ class CellRendererToggle : gid.gtk3.cell_renderer.CellRenderer
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggled", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from CellRendererToggle
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.cell_renderer_toggle.CellRendererToggle), T.stringof ~ " is not derived from gid.gtk3.cell_renderer_toggle.CellRendererToggle");
+
+    gid.gtk3.cell_renderer.CellRenderer._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncToggled", true)[0]) == gid.gtk3.cell_renderer_toggle.CellRendererToggle))
+      _installVfunc(klass, "toggled");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkCellRendererToggleClass*)klass;
+
+    switch (vfunc)
+    {
+      case "toggled":
+      {
+        static extern(C) void _vfuncToggledTramp(GtkCellRendererToggle* cellRendererToggle, const(char)* path) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.cell_renderer_toggle.CellRendererToggle)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cellRendererToggle);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellRendererToggleClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cellRendererToggle);
+            if (_klass.toggled)
+              return (cast(typeof(&_vfuncToggledTramp))_klass.toggled)(cellRendererToggle, path);
+            return;
+          }
+
+          string _path = path.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncToggled(_path);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_renderer_toggle.CellRendererToggle.vfuncToggled");
+          }
+        }
+
+        _klass.toggled = cast(typeof(_klass.toggled))&_vfuncToggledTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

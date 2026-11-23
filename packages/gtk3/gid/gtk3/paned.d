@@ -94,6 +94,15 @@ class Paned : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -208,9 +217,88 @@ class Paned : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
   */
   this(gid.gtk3.types.Orientation orientation) nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_paned_new(orientation);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_paned_new(orientation);
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected bool vfuncAcceptPosition()
+  {
+    auto _klass = cast(GtkPanedClass*)_vfuncClass;
+    if (!_klass.acceptPosition)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.acceptPosition(cast(GtkPaned*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncCancelPosition()
+  {
+    auto _klass = cast(GtkPanedClass*)_vfuncClass;
+    if (!_klass.cancelPosition)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.cancelPosition(cast(GtkPaned*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncCycleChildFocus(bool reverse)
+  {
+    auto _klass = cast(GtkPanedClass*)_vfuncClass;
+    if (!_klass.cycleChildFocus)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.cycleChildFocus(cast(GtkPaned*)this._cPtr, reverse);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncCycleHandleFocus(bool reverse)
+  {
+    auto _klass = cast(GtkPanedClass*)_vfuncClass;
+    if (!_klass.cycleHandleFocus)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.cycleHandleFocus(cast(GtkPaned*)this._cPtr, reverse);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncMoveHandle(gid.gtk3.types.ScrollType scroll)
+  {
+    auto _klass = cast(GtkPanedClass*)_vfuncClass;
+    if (!_klass.moveHandle)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.moveHandle(cast(GtkPaned*)this._cPtr, scroll);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncToggleHandleFocus()
+  {
+    auto _klass = cast(GtkPanedClass*)_vfuncClass;
+    if (!_klass.toggleHandleFocus)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.toggleHandleFocus(cast(GtkPaned*)this._cPtr);
+    return _retval;
   }
 
   /**
@@ -378,6 +466,7 @@ class Paned : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -432,6 +521,7 @@ class Paned : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -487,6 +577,7 @@ class Paned : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -546,6 +637,7 @@ class Paned : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -603,6 +695,7 @@ class Paned : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -659,6 +752,7 @@ class Paned : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -681,6 +775,242 @@ class Paned : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggle-handle-focus", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Paned
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.paned.Paned), T.stringof ~ " is not derived from gid.gtk3.paned.Paned");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAcceptPosition", true)[0]) == gid.gtk3.paned.Paned))
+      _installVfunc(klass, "accept_position");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCancelPosition", true)[0]) == gid.gtk3.paned.Paned))
+      _installVfunc(klass, "cancel_position");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCycleChildFocus", true)[0]) == gid.gtk3.paned.Paned))
+      _installVfunc(klass, "cycle_child_focus");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCycleHandleFocus", true)[0]) == gid.gtk3.paned.Paned))
+      _installVfunc(klass, "cycle_handle_focus");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMoveHandle", true)[0]) == gid.gtk3.paned.Paned))
+      _installVfunc(klass, "move_handle");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncToggleHandleFocus", true)[0]) == gid.gtk3.paned.Paned))
+      _installVfunc(klass, "toggle_handle_focus");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkPanedClass*)klass;
+
+    switch (vfunc)
+    {
+      case "accept_position":
+      {
+        static extern(C) gboolean _vfuncAcceptPositionTramp(GtkPaned* paned) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.paned.Paned)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)paned);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkPanedClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)paned);
+            if (_klass.acceptPosition)
+              return (cast(typeof(&_vfuncAcceptPositionTramp))_klass.acceptPosition)(paned);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncAcceptPosition();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.paned.Paned.vfuncAcceptPosition");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.acceptPosition = cast(typeof(_klass.acceptPosition))&_vfuncAcceptPositionTramp;
+        break;
+      }
+      case "cancel_position":
+      {
+        static extern(C) gboolean _vfuncCancelPositionTramp(GtkPaned* paned) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.paned.Paned)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)paned);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkPanedClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)paned);
+            if (_klass.cancelPosition)
+              return (cast(typeof(&_vfuncCancelPositionTramp))_klass.cancelPosition)(paned);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCancelPosition();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.paned.Paned.vfuncCancelPosition");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.cancelPosition = cast(typeof(_klass.cancelPosition))&_vfuncCancelPositionTramp;
+        break;
+      }
+      case "cycle_child_focus":
+      {
+        static extern(C) gboolean _vfuncCycleChildFocusTramp(GtkPaned* paned, gboolean reverse) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.paned.Paned)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)paned);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkPanedClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)paned);
+            if (_klass.cycleChildFocus)
+              return (cast(typeof(&_vfuncCycleChildFocusTramp))_klass.cycleChildFocus)(paned, reverse);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCycleChildFocus(cast(bool)reverse);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.paned.Paned.vfuncCycleChildFocus");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.cycleChildFocus = cast(typeof(_klass.cycleChildFocus))&_vfuncCycleChildFocusTramp;
+        break;
+      }
+      case "cycle_handle_focus":
+      {
+        static extern(C) gboolean _vfuncCycleHandleFocusTramp(GtkPaned* paned, gboolean reverse) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.paned.Paned)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)paned);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkPanedClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)paned);
+            if (_klass.cycleHandleFocus)
+              return (cast(typeof(&_vfuncCycleHandleFocusTramp))_klass.cycleHandleFocus)(paned, reverse);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCycleHandleFocus(cast(bool)reverse);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.paned.Paned.vfuncCycleHandleFocus");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.cycleHandleFocus = cast(typeof(_klass.cycleHandleFocus))&_vfuncCycleHandleFocusTramp;
+        break;
+      }
+      case "move_handle":
+      {
+        static extern(C) gboolean _vfuncMoveHandleTramp(GtkPaned* paned, GtkScrollType scroll) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.paned.Paned)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)paned);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkPanedClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)paned);
+            if (_klass.moveHandle)
+              return (cast(typeof(&_vfuncMoveHandleTramp))_klass.moveHandle)(paned, scroll);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncMoveHandle(scroll);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.paned.Paned.vfuncMoveHandle");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.moveHandle = cast(typeof(_klass.moveHandle))&_vfuncMoveHandleTramp;
+        break;
+      }
+      case "toggle_handle_focus":
+      {
+        static extern(C) gboolean _vfuncToggleHandleFocusTramp(GtkPaned* paned) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.paned.Paned)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)paned);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkPanedClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)paned);
+            if (_klass.toggleHandleFocus)
+              return (cast(typeof(&_vfuncToggleHandleFocusTramp))_klass.toggleHandleFocus)(paned);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncToggleHandleFocus();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.paned.Paned.vfuncToggleHandleFocus");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.toggleHandleFocus = cast(typeof(_klass.toggleHandleFocus))&_vfuncToggleHandleFocusTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

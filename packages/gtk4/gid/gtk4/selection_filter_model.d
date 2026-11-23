@@ -108,9 +108,16 @@ class SelectionFilterModel : gid.gobject2.object.ObjectWrap, gid.gio2.list_model
   */
   this(gid.gtk4.selection_model.SelectionModel model = null) nothrow
   {
-    GtkSelectionFilterModel* _cretval;
-    _cretval = gtk_selection_filter_model_new(model ? cast(GtkSelectionModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, model !is null), Yes.Take);
+    }
+    else
+    {
+      GtkSelectionFilterModel* _cretval;
+      _cretval = gtk_selection_filter_model_new(model ? cast(GtkSelectionModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

@@ -656,6 +656,7 @@ class RTSPConnection : OpaqueWrap!(GstRTSPConnection*, void, void)
   {
     extern(C) gboolean _funcCallback(GTlsConnection* conn, GTlsCertificate* peerCert, GTlsCertificateFlags errors, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gstrtsp1.types.RTSPConnectionAcceptCertificateFunc*)userData;
 

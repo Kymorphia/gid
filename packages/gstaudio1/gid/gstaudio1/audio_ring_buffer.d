@@ -32,6 +32,15 @@ class AudioRingBuffer : gid.gst1.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -124,6 +133,303 @@ class AudioRingBuffer : gid.gst1.object.ObjectWrap
   {
     bool _retval;
     _retval = cast(bool)gst_audio_ring_buffer_parse_caps(spec ? cast(GstAudioRingBufferSpec*)spec._cPtr : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Allocate the resources for the ringbuffer. This function fills
+      in the data pointer of the ring buffer with a valid #GstBuffer
+      to which samples can be written.
+  
+      Params:
+        spec = the specs of the buffer (borrowed, only valid during the callback)
+      Returns: TRUE if the device could be acquired, FALSE on error.
+        
+        MT safe.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncAcquire` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncAcquire(gid.gstaudio1.audio_ring_buffer_spec.AudioRingBufferSpec spec)
+  {
+    auto _klass = cast(GstAudioRingBufferClass*)_vfuncClass;
+    if (!_klass.acquire)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.acquire(cast(GstAudioRingBuffer*)this._cPtr, spec ? cast(GstAudioRingBufferSpec*)spec._cPtr : null);
+    return _retval;
+  }
+
+  /**
+      Activate buf to start or stop pulling data.
+      
+      MT safe.
+  
+      Params:
+        active = the new mode
+      Returns: TRUE if the device could be activated in the requested mode,
+        FALSE on error.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncActivate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncActivate(bool active)
+  {
+    auto _klass = cast(GstAudioRingBufferClass*)_vfuncClass;
+    if (!_klass.activate)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.activate(cast(GstAudioRingBuffer*)this._cPtr, active);
+    return _retval;
+  }
+
+  /**
+      Clear all samples from the ringbuffer.
+      
+      MT safe.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncClearAll` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncClearAll()
+  {
+    auto _klass = cast(GstAudioRingBufferClass*)_vfuncClass;
+    if (!_klass.clearAll)
+      return;
+
+    _klass.clearAll(cast(GstAudioRingBuffer*)this._cPtr);
+  }
+
+  /**
+      Close the audio device associated with the ring buffer. The ring buffer
+      should already have been released via [gid.gstaudio1.audio_ring_buffer.AudioRingBuffer.release].
+      Returns: TRUE if the device could be closed, FALSE on error.
+        
+        MT safe.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCloseDevice` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncCloseDevice()
+  {
+    auto _klass = cast(GstAudioRingBufferClass*)_vfuncClass;
+    if (!_klass.closeDevice)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.closeDevice(cast(GstAudioRingBuffer*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Commit in_samples samples pointed to by data to the ringbuffer buf.
+      
+      in_samples and out_samples define the rate conversion to perform on the
+      samples in data. For negative rates, out_samples must be negative and
+      in_samples positive.
+      
+      When out_samples is positive, the first sample will be written at position sample
+      in the ringbuffer. When out_samples is negative, the last sample will be written to
+      sample in reverse order.
+      
+      out_samples does not need to be a multiple of the segment size of the ringbuffer
+      although it is recommended for optimal performance.
+      
+      accum will hold a temporary accumulator used in rate conversion and should be
+      set to 0 when this function is first called. In case the commit operation is
+      interrupted, one can resume the processing by passing the previously returned
+      accum value back to this function.
+      
+      MT safe.
+  
+      Params:
+        sample = the sample position of the data
+        data = the data to commit
+        outSamples = the number of samples to write to the ringbuffer
+        accum = accumulator for rate conversion.
+      Returns: The number of samples written to the ringbuffer or -1 on error. The
+        number of samples written can be less than out_samples when buf was interrupted
+        with a flush or stop.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCommit` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected uint vfuncCommit(ref ulong sample, ubyte[] data, int outSamples, ref int accum)
+  {
+    auto _klass = cast(GstAudioRingBufferClass*)_vfuncClass;
+    if (!_klass.commit)
+      return typeof(return).init;
+
+    uint _retval;
+    int _inSamples;
+    if (data)
+      _inSamples = cast(int)data.length;
+
+    auto _data = cast(ubyte*)data.ptr;
+    _retval = _klass.commit(cast(GstAudioRingBuffer*)this._cPtr, cast(ulong*)&sample, _data, _inSamples, outSamples, cast(int*)&accum);
+    return _retval;
+  }
+
+  /**
+      Get the number of samples queued in the audio device. This is
+      usually less than the segment size but can be bigger when the
+      implementation uses another internal buffer between the audio
+      device.
+      
+      For playback ringbuffers this is the amount of samples transferred from the
+      ringbuffer to the device but still not played.
+      
+      For capture ringbuffers this is the amount of samples in the device that are
+      not yet transferred to the ringbuffer.
+      Returns: The number of samples queued in the audio device.
+        
+        MT safe.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDelay` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected uint vfuncDelay()
+  {
+    auto _klass = cast(GstAudioRingBufferClass*)_vfuncClass;
+    if (!_klass.delay)
+      return typeof(return).init;
+
+    uint _retval;
+    _retval = _klass.delay(cast(GstAudioRingBuffer*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Open the audio device associated with the ring buffer. Does not perform any
+      setup on the device. You must open the device before acquiring the ring
+      buffer.
+      Returns: TRUE if the device could be opened, FALSE on error.
+        
+        MT safe.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncOpenDevice` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncOpenDevice()
+  {
+    auto _klass = cast(GstAudioRingBufferClass*)_vfuncClass;
+    if (!_klass.openDevice)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.openDevice(cast(GstAudioRingBuffer*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Pause processing samples from the ringbuffer.
+      Returns: TRUE if the device could be paused, FALSE on error.
+        
+        MT safe.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPause` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncPause()
+  {
+    auto _klass = cast(GstAudioRingBufferClass*)_vfuncClass;
+    if (!_klass.pause)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.pause(cast(GstAudioRingBuffer*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Free the resources of the ringbuffer.
+      Returns: TRUE if the device could be released, FALSE on error.
+        
+        MT safe.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRelease` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncRelease()
+  {
+    auto _klass = cast(GstAudioRingBufferClass*)_vfuncClass;
+    if (!_klass.release)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.release(cast(GstAudioRingBuffer*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      resume processing of samples after pause
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncResume` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncResume()
+  {
+    auto _klass = cast(GstAudioRingBufferClass*)_vfuncClass;
+    if (!_klass.resume)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.resume(cast(GstAudioRingBuffer*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Start processing samples from the ringbuffer.
+      Returns: TRUE if the device could be started, FALSE on error.
+        
+        MT safe.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStart` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncStart()
+  {
+    auto _klass = cast(GstAudioRingBufferClass*)_vfuncClass;
+    if (!_klass.start)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.start(cast(GstAudioRingBuffer*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Stop processing samples from the ringbuffer.
+      Returns: TRUE if the device could be stopped, FALSE on error.
+        
+        MT safe.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStop` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncStop()
+  {
+    auto _klass = cast(GstAudioRingBufferClass*)_vfuncClass;
+    if (!_klass.stop)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.stop(cast(GstAudioRingBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -512,6 +818,7 @@ class AudioRingBuffer : gid.gst1.object.ObjectWrap
   {
     extern(C) void _cbCallback(GstAudioRingBuffer* rbuf, ubyte* data, uint len, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gstaudio1.types.AudioRingBufferCallback*)userData;
       ubyte[] _data;
       _data.length = len;
@@ -616,6 +923,447 @@ class AudioRingBuffer : gid.gst1.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)gst_audio_ring_buffer_stop(cast(GstAudioRingBuffer*)this._cPtr);
     return _retval;
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from AudioRingBuffer
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gstaudio1.audio_ring_buffer.AudioRingBuffer), T.stringof ~ " is not derived from gid.gstaudio1.audio_ring_buffer.AudioRingBuffer");
+
+    gid.gst1.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAcquire", true)[0]) == gid.gstaudio1.audio_ring_buffer.AudioRingBuffer))
+      _installVfunc(klass, "acquire");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivate", true)[0]) == gid.gstaudio1.audio_ring_buffer.AudioRingBuffer))
+      _installVfunc(klass, "activate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncClearAll", true)[0]) == gid.gstaudio1.audio_ring_buffer.AudioRingBuffer))
+      _installVfunc(klass, "clear_all");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCloseDevice", true)[0]) == gid.gstaudio1.audio_ring_buffer.AudioRingBuffer))
+      _installVfunc(klass, "close_device");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCommit", true)[0]) == gid.gstaudio1.audio_ring_buffer.AudioRingBuffer))
+      _installVfunc(klass, "commit");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDelay", true)[0]) == gid.gstaudio1.audio_ring_buffer.AudioRingBuffer))
+      _installVfunc(klass, "delay");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncOpenDevice", true)[0]) == gid.gstaudio1.audio_ring_buffer.AudioRingBuffer))
+      _installVfunc(klass, "open_device");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPause", true)[0]) == gid.gstaudio1.audio_ring_buffer.AudioRingBuffer))
+      _installVfunc(klass, "pause");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRelease", true)[0]) == gid.gstaudio1.audio_ring_buffer.AudioRingBuffer))
+      _installVfunc(klass, "release");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncResume", true)[0]) == gid.gstaudio1.audio_ring_buffer.AudioRingBuffer))
+      _installVfunc(klass, "resume");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStart", true)[0]) == gid.gstaudio1.audio_ring_buffer.AudioRingBuffer))
+      _installVfunc(klass, "start");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStop", true)[0]) == gid.gstaudio1.audio_ring_buffer.AudioRingBuffer))
+      _installVfunc(klass, "stop");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstAudioRingBufferClass*)klass;
+
+    switch (vfunc)
+    {
+      case "acquire":
+      {
+        static extern(C) gboolean _vfuncAcquireTramp(GstAudioRingBuffer* buf, GstAudioRingBufferSpec* spec) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
+            if (_klass.acquire)
+              return (cast(typeof(&_vfuncAcquireTramp))_klass.acquire)(buf, spec);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _spec = spec ? new gid.gstaudio1.audio_ring_buffer_spec.AudioRingBufferSpec(cast(void*)spec, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncAcquire(_spec);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstaudio1.audio_ring_buffer.AudioRingBuffer.vfuncAcquire");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.acquire = cast(typeof(_klass.acquire))&_vfuncAcquireTramp;
+        break;
+      }
+      case "activate":
+      {
+        static extern(C) gboolean _vfuncActivateTramp(GstAudioRingBuffer* buf, gboolean active) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
+            if (_klass.activate)
+              return (cast(typeof(&_vfuncActivateTramp))_klass.activate)(buf, active);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncActivate(cast(bool)active);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstaudio1.audio_ring_buffer.AudioRingBuffer.vfuncActivate");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.activate = cast(typeof(_klass.activate))&_vfuncActivateTramp;
+        break;
+      }
+      case "clear_all":
+      {
+        static extern(C) void _vfuncClearAllTramp(GstAudioRingBuffer* buf) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
+            if (_klass.clearAll)
+              return (cast(typeof(&_vfuncClearAllTramp))_klass.clearAll)(buf);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncClearAll();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstaudio1.audio_ring_buffer.AudioRingBuffer.vfuncClearAll");
+          }
+        }
+
+        _klass.clearAll = cast(typeof(_klass.clearAll))&_vfuncClearAllTramp;
+        break;
+      }
+      case "close_device":
+      {
+        static extern(C) gboolean _vfuncCloseDeviceTramp(GstAudioRingBuffer* buf) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
+            if (_klass.closeDevice)
+              return (cast(typeof(&_vfuncCloseDeviceTramp))_klass.closeDevice)(buf);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCloseDevice();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstaudio1.audio_ring_buffer.AudioRingBuffer.vfuncCloseDevice");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.closeDevice = cast(typeof(_klass.closeDevice))&_vfuncCloseDeviceTramp;
+        break;
+      }
+      case "commit":
+      {
+        static extern(C) uint _vfuncCommitTramp(GstAudioRingBuffer* buf, ulong* sample, ubyte* data, int inSamples, int outSamples, int* accum) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
+            if (_klass.commit)
+              return (cast(typeof(&_vfuncCommitTramp))_klass.commit)(buf, sample, data, inSamples, outSamples, accum);
+            return typeof(return).init;
+          }
+
+          uint _retval;
+          ubyte[] _data;
+          _data.length = inSamples;
+          _data[0 .. inSamples] = data[0 .. inSamples];
+
+          try
+          {
+            _retval = _obj.vfuncCommit(*sample, _data, outSamples, *accum);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstaudio1.audio_ring_buffer.AudioRingBuffer.vfuncCommit");
+          }
+          return _retval;
+        }
+
+        _klass.commit = cast(typeof(_klass.commit))&_vfuncCommitTramp;
+        break;
+      }
+      case "delay":
+      {
+        static extern(C) uint _vfuncDelayTramp(GstAudioRingBuffer* buf) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
+            if (_klass.delay)
+              return (cast(typeof(&_vfuncDelayTramp))_klass.delay)(buf);
+            return typeof(return).init;
+          }
+
+          uint _retval;
+
+          try
+          {
+            _retval = _obj.vfuncDelay();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstaudio1.audio_ring_buffer.AudioRingBuffer.vfuncDelay");
+          }
+          return _retval;
+        }
+
+        _klass.delay = cast(typeof(_klass.delay))&_vfuncDelayTramp;
+        break;
+      }
+      case "open_device":
+      {
+        static extern(C) gboolean _vfuncOpenDeviceTramp(GstAudioRingBuffer* buf) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
+            if (_klass.openDevice)
+              return (cast(typeof(&_vfuncOpenDeviceTramp))_klass.openDevice)(buf);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncOpenDevice();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstaudio1.audio_ring_buffer.AudioRingBuffer.vfuncOpenDevice");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.openDevice = cast(typeof(_klass.openDevice))&_vfuncOpenDeviceTramp;
+        break;
+      }
+      case "pause":
+      {
+        static extern(C) gboolean _vfuncPauseTramp(GstAudioRingBuffer* buf) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
+            if (_klass.pause)
+              return (cast(typeof(&_vfuncPauseTramp))_klass.pause)(buf);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncPause();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstaudio1.audio_ring_buffer.AudioRingBuffer.vfuncPause");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.pause = cast(typeof(_klass.pause))&_vfuncPauseTramp;
+        break;
+      }
+      case "release":
+      {
+        static extern(C) gboolean _vfuncReleaseTramp(GstAudioRingBuffer* buf) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
+            if (_klass.release)
+              return (cast(typeof(&_vfuncReleaseTramp))_klass.release)(buf);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncRelease();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstaudio1.audio_ring_buffer.AudioRingBuffer.vfuncRelease");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.release = cast(typeof(_klass.release))&_vfuncReleaseTramp;
+        break;
+      }
+      case "resume":
+      {
+        static extern(C) gboolean _vfuncResumeTramp(GstAudioRingBuffer* buf) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
+            if (_klass.resume)
+              return (cast(typeof(&_vfuncResumeTramp))_klass.resume)(buf);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncResume();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstaudio1.audio_ring_buffer.AudioRingBuffer.vfuncResume");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.resume = cast(typeof(_klass.resume))&_vfuncResumeTramp;
+        break;
+      }
+      case "start":
+      {
+        static extern(C) gboolean _vfuncStartTramp(GstAudioRingBuffer* buf) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
+            if (_klass.start)
+              return (cast(typeof(&_vfuncStartTramp))_klass.start)(buf);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncStart();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstaudio1.audio_ring_buffer.AudioRingBuffer.vfuncStart");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.start = cast(typeof(_klass.start))&_vfuncStartTramp;
+        break;
+      }
+      case "stop":
+      {
+        static extern(C) gboolean _vfuncStopTramp(GstAudioRingBuffer* buf) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buf);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAudioRingBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buf);
+            if (_klass.stop)
+              return (cast(typeof(&_vfuncStopTramp))_klass.stop)(buf);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncStop();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstaudio1.audio_ring_buffer.AudioRingBuffer.vfuncStop");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.stop = cast(typeof(_klass.stop))&_vfuncStopTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

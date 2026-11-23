@@ -8,7 +8,11 @@ import gid.gobject2.gid_builder;
 import gid.gobject2.object;
 import gid.gst1.buffer;
 import gid.gst1.buffer_list;
+import gid.gst1.caps;
 import gid.gst1.element;
+import gid.gst1.event;
+import gid.gst1.pad;
+import gid.gst1.query;
 import gid.gst1.structure;
 import gid.gst1.types;
 import gid.gstrtp1.c.functions;
@@ -26,6 +30,15 @@ class RTPBasePayload : gid.gst1.element.Element
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
   }
 
   /** */
@@ -372,6 +385,144 @@ class RTPBasePayload : gid.gst1.element.Element
   }
 
   /**
+      get desired caps
+  
+      Params:
+        pad = 
+        filter =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetCaps` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.caps.Caps vfuncGetCaps(gid.gst1.pad.Pad pad, gid.gst1.caps.Caps filter)
+  {
+    auto _klass = cast(GstRTPBasePayloadClass*)_vfuncClass;
+    if (!_klass.getCaps)
+      return typeof(return).init;
+
+    GstCaps* _cretval;
+    _cretval = _klass.getCaps(cast(GstRTPBasePayload*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gid.gst1.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      process data
+  
+      Params:
+        buffer =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncHandleBuffer` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.FlowReturn vfuncHandleBuffer(gid.gst1.buffer.Buffer buffer)
+  {
+    auto _klass = cast(GstRTPBasePayloadClass*)_vfuncClass;
+    if (!_klass.handleBuffer)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    _cretval = _klass.handleBuffer(cast(GstRTPBasePayload*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    return _retval;
+  }
+
+  alias vfuncQuery = gid.gst1.element.Element.vfuncQuery;
+
+  /**
+      custom query handling
+  
+      Params:
+        pad = 
+        query =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncQuery` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncQuery(gid.gst1.pad.Pad pad, gid.gst1.query.Query query)
+  {
+    auto _klass = cast(GstRTPBasePayloadClass*)_vfuncClass;
+    if (!_klass.query)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.query(cast(GstRTPBasePayload*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      configure the payloader
+  
+      Params:
+        caps =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetCaps` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncSetCaps(gid.gst1.caps.Caps caps)
+  {
+    auto _klass = cast(GstRTPBasePayloadClass*)_vfuncClass;
+    if (!_klass.setCaps)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.setCaps(cast(GstRTPBasePayload*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      custom event handling on the sinkpad
+  
+      Params:
+        event =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSinkEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncSinkEvent(gid.gst1.event.Event event)
+  {
+    auto _klass = cast(GstRTPBasePayloadClass*)_vfuncClass;
+    if (!_klass.sinkEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.sinkEvent(cast(GstRTPBasePayload*)this._cPtr, event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      custom event handling on the srcpad
+  
+      Params:
+        event =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSrcEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncSrcEvent(gid.gst1.event.Event event)
+  {
+    auto _klass = cast(GstRTPBasePayloadClass*)_vfuncClass;
+    if (!_klass.srcEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.srcEvent(cast(GstRTPBasePayload*)this._cPtr, event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
       Allocate a new #GstBuffer with enough data to hold an RTP packet with
       minimum csrc_count CSRCs, a payload length of payload_len and padding of
       pad_len. If payload has #GstRTPBasePayload:source-info true additional
@@ -544,6 +695,7 @@ class RTPBasePayload : gid.gst1.element.Element
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -591,6 +743,7 @@ class RTPBasePayload : gid.gst1.element.Element
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -643,6 +796,7 @@ class RTPBasePayload : gid.gst1.element.Element
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -671,6 +825,260 @@ class RTPBasePayload : gid.gst1.element.Element
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("request-extension", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from RTPBasePayload
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gstrtp1.rtpbase_payload.RTPBasePayload), T.stringof ~ " is not derived from gid.gstrtp1.rtpbase_payload.RTPBasePayload");
+
+    gid.gst1.element.Element._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetCaps", true)[0]) == gid.gstrtp1.rtpbase_payload.RTPBasePayload))
+      _installVfunc(klass, "get_caps");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHandleBuffer", true)[0]) == gid.gstrtp1.rtpbase_payload.RTPBasePayload))
+      _installVfunc(klass, "handle_buffer");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncQuery", true)[0]) == gid.gstrtp1.rtpbase_payload.RTPBasePayload))
+      _installVfunc(klass, "query");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetCaps", true)[0]) == gid.gstrtp1.rtpbase_payload.RTPBasePayload))
+      _installVfunc(klass, "set_caps");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSinkEvent", true)[0]) == gid.gstrtp1.rtpbase_payload.RTPBasePayload))
+      _installVfunc(klass, "sink_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSrcEvent", true)[0]) == gid.gstrtp1.rtpbase_payload.RTPBasePayload))
+      _installVfunc(klass, "src_event");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstRTPBasePayloadClass*)klass;
+
+    switch (vfunc)
+    {
+      case "get_caps":
+      {
+        static extern(C) GstCaps* _vfuncGetCapsTramp(GstRTPBasePayload* payload, GstPad* pad, GstCaps* filter) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstrtp1.rtpbase_payload.RTPBasePayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)payload);
+          if (!_obj)
+          {
+            auto _klass = cast(GstRTPBasePayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)payload);
+            if (_klass.getCaps)
+              return (cast(typeof(&_vfuncGetCapsTramp))_klass.getCaps)(payload, pad, filter);
+            return typeof(return).init;
+          }
+
+          gid.gst1.caps.Caps _dretval;
+          auto _filter = filter ? new gid.gst1.caps.Caps(cast(void*)filter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncGetCaps(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.pad.Pad)(cast(void*)pad, No.Take), _filter);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstrtp1.rtpbase_payload.RTPBasePayload.vfuncGetCaps");
+          }
+          auto _retval = _dretval ? cast(GstCaps*)_dretval._cPtr(Yes.Dup) : null;
+          if (_filter)
+            _filter._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.getCaps = cast(typeof(_klass.getCaps))&_vfuncGetCapsTramp;
+        break;
+      }
+      case "handle_buffer":
+      {
+        static extern(C) GstFlowReturn _vfuncHandleBufferTramp(GstRTPBasePayload* payload, GstBuffer* buffer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstrtp1.rtpbase_payload.RTPBasePayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)payload);
+          if (!_obj)
+          {
+            auto _klass = cast(GstRTPBasePayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)payload);
+            if (_klass.handleBuffer)
+              return (cast(typeof(&_vfuncHandleBufferTramp))_klass.handleBuffer)(payload, buffer);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.FlowReturn _dretval;
+          auto _buffer = buffer ? new gid.gst1.buffer.Buffer(cast(void*)buffer, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncHandleBuffer(_buffer);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstrtp1.rtpbase_payload.RTPBasePayload.vfuncHandleBuffer");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+          if (_buffer)
+            _buffer._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.handleBuffer = cast(typeof(_klass.handleBuffer))&_vfuncHandleBufferTramp;
+        break;
+      }
+      case "query":
+      {
+        static extern(C) gboolean _vfuncQueryTramp(GstRTPBasePayload* payload, GstPad* pad, GstQuery* query) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstrtp1.rtpbase_payload.RTPBasePayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)payload);
+          if (!_obj)
+          {
+            auto _klass = cast(GstRTPBasePayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)payload);
+            if (_klass.query)
+              return (cast(typeof(&_vfuncQueryTramp))_klass.query)(payload, pad, query);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _query = query ? new gid.gst1.query.Query(cast(void*)query, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncQuery(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.pad.Pad)(cast(void*)pad, No.Take), _query);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstrtp1.rtpbase_payload.RTPBasePayload.vfuncQuery");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_query)
+            _query._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.query = cast(typeof(_klass.query))&_vfuncQueryTramp;
+        break;
+      }
+      case "set_caps":
+      {
+        static extern(C) gboolean _vfuncSetCapsTramp(GstRTPBasePayload* payload, GstCaps* caps) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstrtp1.rtpbase_payload.RTPBasePayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)payload);
+          if (!_obj)
+          {
+            auto _klass = cast(GstRTPBasePayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)payload);
+            if (_klass.setCaps)
+              return (cast(typeof(&_vfuncSetCapsTramp))_klass.setCaps)(payload, caps);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _caps = caps ? new gid.gst1.caps.Caps(cast(void*)caps, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncSetCaps(_caps);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstrtp1.rtpbase_payload.RTPBasePayload.vfuncSetCaps");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_caps)
+            _caps._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.setCaps = cast(typeof(_klass.setCaps))&_vfuncSetCapsTramp;
+        break;
+      }
+      case "sink_event":
+      {
+        static extern(C) gboolean _vfuncSinkEventTramp(GstRTPBasePayload* payload, GstEvent* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstrtp1.rtpbase_payload.RTPBasePayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)payload);
+          if (!_obj)
+          {
+            auto _klass = cast(GstRTPBasePayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)payload);
+            if (_klass.sinkEvent)
+              return (cast(typeof(&_vfuncSinkEventTramp))_klass.sinkEvent)(payload, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gst1.event.Event(cast(void*)event, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncSinkEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstrtp1.rtpbase_payload.RTPBasePayload.vfuncSinkEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_event)
+            _event._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.sinkEvent = cast(typeof(_klass.sinkEvent))&_vfuncSinkEventTramp;
+        break;
+      }
+      case "src_event":
+      {
+        static extern(C) gboolean _vfuncSrcEventTramp(GstRTPBasePayload* payload, GstEvent* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstrtp1.rtpbase_payload.RTPBasePayload)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)payload);
+          if (!_obj)
+          {
+            auto _klass = cast(GstRTPBasePayloadClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)payload);
+            if (_klass.srcEvent)
+              return (cast(typeof(&_vfuncSrcEventTramp))_klass.srcEvent)(payload, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gst1.event.Event(cast(void*)event, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncSrcEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstrtp1.rtpbase_payload.RTPBasePayload.vfuncSrcEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_event)
+            _event._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.srcEvent = cast(typeof(_klass.srcEvent))&_vfuncSrcEventTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

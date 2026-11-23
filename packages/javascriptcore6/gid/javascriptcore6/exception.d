@@ -22,6 +22,15 @@ class ExceptionWrap : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -66,10 +75,17 @@ class ExceptionWrap : gid.gobject2.object.ObjectWrap
   */
   this(gid.javascriptcore6.context.Context context, string message) nothrow
   {
-    JSCException* _cretval;
-    const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
-    _cretval = jsc_exception_new(context ? cast(JSCContext*)context._cPtr(No.Dup) : null, _message);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      JSCException* _cretval;
+      const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
+      _cretval = jsc_exception_new(context ? cast(JSCContext*)context._cPtr(No.Dup) : null, _message);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

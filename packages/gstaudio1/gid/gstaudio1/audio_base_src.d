@@ -26,6 +26,15 @@ class AudioBaseSrc : gid.gstbase1.push_src.PushSrc
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -135,6 +144,28 @@ class AudioBaseSrc : gid.gstbase1.push_src.PushSrc
       the ::create_ringbuffer vmethod and will set src as the parent of the
       returned buffer (see [gid.gst1.object.ObjectWrap.setParent]).
       Returns: The new ringbuffer of src.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCreateRingbuffer` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gstaudio1.audio_ring_buffer.AudioRingBuffer vfuncCreateRingbuffer()
+  {
+    auto _klass = cast(GstAudioBaseSrcClass*)_vfuncClass;
+    if (!_klass.createRingbuffer)
+      return typeof(return).init;
+
+    GstAudioRingBuffer* _cretval;
+    _cretval = _klass.createRingbuffer(cast(GstAudioBaseSrc*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gstaudio1.audio_ring_buffer.AudioRingBuffer)(cast(GstAudioRingBuffer*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Create and return the #GstAudioRingBuffer for src. This function will call
+      the ::create_ringbuffer vmethod and will set src as the parent of the
+      returned buffer (see [gid.gst1.object.ObjectWrap.setParent]).
+      Returns: The new ringbuffer of src.
   */
   gid.gstaudio1.audio_ring_buffer.AudioRingBuffer createRingbuffer() nothrow
   {
@@ -190,6 +221,67 @@ class AudioBaseSrc : gid.gstbase1.push_src.PushSrc
   void setSlaveMethod(gid.gstaudio1.types.AudioBaseSrcSlaveMethod method) nothrow
   {
     gst_audio_base_src_set_slave_method(cast(GstAudioBaseSrc*)this._cPtr, method);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from AudioBaseSrc
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gstaudio1.audio_base_src.AudioBaseSrc), T.stringof ~ " is not derived from gid.gstaudio1.audio_base_src.AudioBaseSrc");
+
+    gid.gstbase1.push_src.PushSrc._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCreateRingbuffer", true)[0]) == gid.gstaudio1.audio_base_src.AudioBaseSrc))
+      _installVfunc(klass, "create_ringbuffer");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstAudioBaseSrcClass*)klass;
+
+    switch (vfunc)
+    {
+      case "create_ringbuffer":
+      {
+        static extern(C) GstAudioRingBuffer* _vfuncCreateRingbufferTramp(GstAudioBaseSrc* src) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstaudio1.audio_base_src.AudioBaseSrc)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)src);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAudioBaseSrcClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)src);
+            if (_klass.createRingbuffer)
+              return (cast(typeof(&_vfuncCreateRingbufferTramp))_klass.createRingbuffer)(src);
+            return typeof(return).init;
+          }
+
+          gid.gstaudio1.audio_ring_buffer.AudioRingBuffer _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCreateRingbuffer();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstaudio1.audio_base_src.AudioBaseSrc.vfuncCreateRingbuffer");
+          }
+          auto _retval = _dretval ? cast(GstAudioRingBuffer*)_dretval._cPtr(No.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.createRingbuffer = cast(typeof(_klass.createRingbuffer))&_vfuncCreateRingbufferTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

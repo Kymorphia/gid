@@ -293,9 +293,86 @@ class Calendar : gid.gtk3.widget.Widget
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_calendar_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_calendar_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncDaySelected()
+  {
+    auto _klass = cast(GtkCalendarClass*)_vfuncClass;
+    if (!_klass.daySelected)
+      return;
+
+    _klass.daySelected(cast(GtkCalendar*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncDaySelectedDoubleClick()
+  {
+    auto _klass = cast(GtkCalendarClass*)_vfuncClass;
+    if (!_klass.daySelectedDoubleClick)
+      return;
+
+    _klass.daySelectedDoubleClick(cast(GtkCalendar*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncMonthChanged()
+  {
+    auto _klass = cast(GtkCalendarClass*)_vfuncClass;
+    if (!_klass.monthChanged)
+      return;
+
+    _klass.monthChanged(cast(GtkCalendar*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncNextMonth()
+  {
+    auto _klass = cast(GtkCalendarClass*)_vfuncClass;
+    if (!_klass.nextMonth)
+      return;
+
+    _klass.nextMonth(cast(GtkCalendar*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncNextYear()
+  {
+    auto _klass = cast(GtkCalendarClass*)_vfuncClass;
+    if (!_klass.nextYear)
+      return;
+
+    _klass.nextYear(cast(GtkCalendar*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncPrevMonth()
+  {
+    auto _klass = cast(GtkCalendarClass*)_vfuncClass;
+    if (!_klass.prevMonth)
+      return;
+
+    _klass.prevMonth(cast(GtkCalendar*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncPrevYear()
+  {
+    auto _klass = cast(GtkCalendarClass*)_vfuncClass;
+    if (!_klass.prevYear)
+      return;
+
+    _klass.prevYear(cast(GtkCalendar*)this._cPtr);
   }
 
   /**
@@ -426,6 +503,7 @@ class Calendar : gid.gtk3.widget.Widget
   {
     extern(C) char* _funcCallback(GtkCalendar* calendar, uint year, uint month, uint day, void* userData) nothrow
     {
+      gidAttachThread();
       string _dretval;
       auto _dlg = cast(gid.gtk3.types.CalendarDetailFunc*)userData;
 
@@ -517,6 +595,7 @@ class Calendar : gid.gtk3.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -561,6 +640,7 @@ class Calendar : gid.gtk3.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -606,6 +686,7 @@ class Calendar : gid.gtk3.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -650,6 +731,7 @@ class Calendar : gid.gtk3.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -694,6 +776,7 @@ class Calendar : gid.gtk3.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -738,6 +821,7 @@ class Calendar : gid.gtk3.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -782,6 +866,7 @@ class Calendar : gid.gtk3.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -801,6 +886,242 @@ class Calendar : gid.gtk3.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("prev-year", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Calendar
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.calendar.Calendar), T.stringof ~ " is not derived from gid.gtk3.calendar.Calendar");
+
+    gid.gtk3.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDaySelected", true)[0]) == gid.gtk3.calendar.Calendar))
+      _installVfunc(klass, "day_selected");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDaySelectedDoubleClick", true)[0]) == gid.gtk3.calendar.Calendar))
+      _installVfunc(klass, "day_selected_double_click");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMonthChanged", true)[0]) == gid.gtk3.calendar.Calendar))
+      _installVfunc(klass, "month_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncNextMonth", true)[0]) == gid.gtk3.calendar.Calendar))
+      _installVfunc(klass, "next_month");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncNextYear", true)[0]) == gid.gtk3.calendar.Calendar))
+      _installVfunc(klass, "next_year");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPrevMonth", true)[0]) == gid.gtk3.calendar.Calendar))
+      _installVfunc(klass, "prev_month");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPrevYear", true)[0]) == gid.gtk3.calendar.Calendar))
+      _installVfunc(klass, "prev_year");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkCalendarClass*)klass;
+
+    switch (vfunc)
+    {
+      case "day_selected":
+      {
+        static extern(C) void _vfuncDaySelectedTramp(GtkCalendar* calendar) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.calendar.Calendar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)calendar);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCalendarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)calendar);
+            if (_klass.daySelected)
+              return (cast(typeof(&_vfuncDaySelectedTramp))_klass.daySelected)(calendar);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDaySelected();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.calendar.Calendar.vfuncDaySelected");
+          }
+        }
+
+        _klass.daySelected = cast(typeof(_klass.daySelected))&_vfuncDaySelectedTramp;
+        break;
+      }
+      case "day_selected_double_click":
+      {
+        static extern(C) void _vfuncDaySelectedDoubleClickTramp(GtkCalendar* calendar) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.calendar.Calendar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)calendar);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCalendarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)calendar);
+            if (_klass.daySelectedDoubleClick)
+              return (cast(typeof(&_vfuncDaySelectedDoubleClickTramp))_klass.daySelectedDoubleClick)(calendar);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDaySelectedDoubleClick();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.calendar.Calendar.vfuncDaySelectedDoubleClick");
+          }
+        }
+
+        _klass.daySelectedDoubleClick = cast(typeof(_klass.daySelectedDoubleClick))&_vfuncDaySelectedDoubleClickTramp;
+        break;
+      }
+      case "month_changed":
+      {
+        static extern(C) void _vfuncMonthChangedTramp(GtkCalendar* calendar) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.calendar.Calendar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)calendar);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCalendarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)calendar);
+            if (_klass.monthChanged)
+              return (cast(typeof(&_vfuncMonthChangedTramp))_klass.monthChanged)(calendar);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMonthChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.calendar.Calendar.vfuncMonthChanged");
+          }
+        }
+
+        _klass.monthChanged = cast(typeof(_klass.monthChanged))&_vfuncMonthChangedTramp;
+        break;
+      }
+      case "next_month":
+      {
+        static extern(C) void _vfuncNextMonthTramp(GtkCalendar* calendar) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.calendar.Calendar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)calendar);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCalendarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)calendar);
+            if (_klass.nextMonth)
+              return (cast(typeof(&_vfuncNextMonthTramp))_klass.nextMonth)(calendar);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncNextMonth();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.calendar.Calendar.vfuncNextMonth");
+          }
+        }
+
+        _klass.nextMonth = cast(typeof(_klass.nextMonth))&_vfuncNextMonthTramp;
+        break;
+      }
+      case "next_year":
+      {
+        static extern(C) void _vfuncNextYearTramp(GtkCalendar* calendar) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.calendar.Calendar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)calendar);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCalendarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)calendar);
+            if (_klass.nextYear)
+              return (cast(typeof(&_vfuncNextYearTramp))_klass.nextYear)(calendar);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncNextYear();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.calendar.Calendar.vfuncNextYear");
+          }
+        }
+
+        _klass.nextYear = cast(typeof(_klass.nextYear))&_vfuncNextYearTramp;
+        break;
+      }
+      case "prev_month":
+      {
+        static extern(C) void _vfuncPrevMonthTramp(GtkCalendar* calendar) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.calendar.Calendar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)calendar);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCalendarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)calendar);
+            if (_klass.prevMonth)
+              return (cast(typeof(&_vfuncPrevMonthTramp))_klass.prevMonth)(calendar);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPrevMonth();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.calendar.Calendar.vfuncPrevMonth");
+          }
+        }
+
+        _klass.prevMonth = cast(typeof(_klass.prevMonth))&_vfuncPrevMonthTramp;
+        break;
+      }
+      case "prev_year":
+      {
+        static extern(C) void _vfuncPrevYearTramp(GtkCalendar* calendar) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.calendar.Calendar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)calendar);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCalendarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)calendar);
+            if (_klass.prevYear)
+              return (cast(typeof(&_vfuncPrevYearTramp))_klass.prevYear)(calendar);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPrevYear();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.calendar.Calendar.vfuncPrevYear");
+          }
+        }
+
+        _klass.prevYear = cast(typeof(_klass.prevYear))&_vfuncPrevYearTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

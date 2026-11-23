@@ -46,6 +46,10 @@ interface ProxyResolver : GidWrap
     return _retval;
   }
 
+
+
+
+
   /**
       Checks if resolver can be used on this system. (This is used
       internally; [gid.gio2.proxy_resolver.ProxyResolver.getDefault] will only return a proxy

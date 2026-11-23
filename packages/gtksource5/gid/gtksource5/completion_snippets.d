@@ -90,9 +90,16 @@ class CompletionSnippets : gid.gobject2.object.ObjectWrap, gid.gtksource5.comple
   /** */
   this() nothrow
   {
-    GtkSourceCompletionSnippets* _cretval;
-    _cretval = gtk_source_completion_snippets_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkSourceCompletionSnippets* _cretval;
+      _cretval = gtk_source_completion_snippets_new();
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

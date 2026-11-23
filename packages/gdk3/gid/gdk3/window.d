@@ -40,6 +40,15 @@ class Window : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -111,9 +120,16 @@ class Window : gid.gobject2.object.ObjectWrap
   */
   this(gid.gdk3.window.Window parent, gid.gdk3.window_attr.WindowAttr attributes, gid.gdk3.types.WindowAttributesType attributesMask) nothrow
   {
-    GdkWindow* _cretval;
-    _cretval = gdk_window_new(parent ? cast(GdkWindow*)parent._cPtr(No.Dup) : null, attributes ? cast(GdkWindowAttr*)attributes._cPtr : null, attributesMask);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GdkWindow* _cretval;
+      _cretval = gdk_window_new(parent ? cast(GdkWindow*)parent._cPtr(No.Dup) : null, attributes ? cast(GdkWindowAttr*)attributes._cPtr : null, attributesMask);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -194,6 +210,19 @@ class Window : gid.gobject2.object.ObjectWrap
   static void setDebugUpdates(bool setting) nothrow
   {
     gdk_window_set_debug_updates(setting);
+  }
+
+  /** */
+  protected gid.cairo1.surface.Surface vfuncCreateSurface(int width, int height)
+  {
+    auto _klass = cast(GdkWindowClass*)_vfuncClass;
+    if (!_klass.createSurface)
+      return typeof(return).init;
+
+    cairo_surface_t* _cretval;
+    _cretval = _klass.createSurface(cast(GdkWindow*)this._cPtr, width, height);
+    auto _retval = _cretval ? new gid.cairo1.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
   }
 
   /**
@@ -1591,6 +1620,7 @@ class Window : gid.gobject2.object.ObjectWrap
   {
     extern(C) gboolean _childFuncCallback(GdkWindow* window, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gdk3.types.WindowChildFunc*)userData;
 
@@ -2988,6 +3018,7 @@ class Window : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3058,6 +3089,7 @@ class Window : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3144,6 +3176,7 @@ class Window : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3209,6 +3242,7 @@ class Window : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3279,6 +3313,7 @@ class Window : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3316,6 +3351,67 @@ class Window : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("to-embedder", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Window
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gdk3.window.Window), T.stringof ~ " is not derived from gid.gdk3.window.Window");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCreateSurface", true)[0]) == gid.gdk3.window.Window))
+      _installVfunc(klass, "create_surface");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GdkWindowClass*)klass;
+
+    switch (vfunc)
+    {
+      case "create_surface":
+      {
+        static extern(C) cairo_surface_t* _vfuncCreateSurfaceTramp(GdkWindow* window, int width, int height) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gdk3.window.Window)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          if (!_obj)
+          {
+            auto _klass = cast(GdkWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
+            if (_klass.createSurface)
+              return (cast(typeof(&_vfuncCreateSurfaceTramp))_klass.createSurface)(window, width, height);
+            return typeof(return).init;
+          }
+
+          gid.cairo1.surface.Surface _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCreateSurface(width, height);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gdk3.window.Window.vfuncCreateSurface");
+          }
+          auto _retval = _dretval ? cast(cairo_surface_t*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.createSurface = cast(typeof(_klass.createSurface))&_vfuncCreateSurfaceTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

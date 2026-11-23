@@ -222,6 +222,7 @@ class Array : gid.gobject2.boxed.BoxedWrap!(json_array_get_type)
   {
     extern(C) void _funcCallback(JsonArray* array, uint index, JsonNode* elementNode, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.json1.types.ArrayForeach*)userData;
       auto _array = array ? new gid.json1.array.Array(cast(void*)array, Yes.Take)._cBorrow : null;
       auto _elementNode = elementNode ? new gid.json1.node.Node(cast(void*)elementNode, Yes.Take)._cBorrow : null;

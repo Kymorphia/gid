@@ -66,9 +66,16 @@ class VirtualMachine : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    JSCVirtualMachine* _cretval;
-    _cretval = jsc_virtual_machine_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      JSCVirtualMachine* _cretval;
+      _cretval = jsc_virtual_machine_new();
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

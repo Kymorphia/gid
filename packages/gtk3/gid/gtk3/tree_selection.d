@@ -48,6 +48,15 @@ class TreeSelection : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -101,6 +110,22 @@ class TreeSelection : gid.gobject2.object.ObjectWrap
   @property void mode(gid.gtk3.types.SelectionMode propval) nothrow
   {
     setMode(propval);
+  }
+
+  /**
+      Signal emitted whenever the selection has (possibly) changed.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncChanged()
+  {
+    auto _klass = cast(GtkTreeSelectionClass*)_vfuncClass;
+    if (!_klass.changed)
+      return;
+
+    _klass.changed(cast(GtkTreeSelection*)this._cPtr);
   }
 
   /**
@@ -281,6 +306,7 @@ class TreeSelection : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _funcCallback(GtkTreeModel* model, GtkTreePath* path, GtkTreeIter* iter, void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk3.types.TreeSelectionForeachFunc*)data;
       auto _path = path ? new gid.gtk3.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
       auto _iter = iter ? new gid.gtk3.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
@@ -332,6 +358,7 @@ class TreeSelection : gid.gobject2.object.ObjectWrap
   {
     extern(C) gboolean _funcCallback(GtkTreeSelection* selection, GtkTreeModel* model, GtkTreePath* path, gboolean pathCurrentlySelected, void* data) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gtk3.types.TreeSelectionFunc*)data;
       auto _path = path ? new gid.gtk3.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
@@ -425,6 +452,7 @@ class TreeSelection : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -444,6 +472,62 @@ class TreeSelection : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from TreeSelection
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.tree_selection.TreeSelection), T.stringof ~ " is not derived from gid.gtk3.tree_selection.TreeSelection");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChanged", true)[0]) == gid.gtk3.tree_selection.TreeSelection))
+      _installVfunc(klass, "changed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkTreeSelectionClass*)klass;
+
+    switch (vfunc)
+    {
+      case "changed":
+      {
+        static extern(C) void _vfuncChangedTramp(GtkTreeSelection* selection) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.tree_selection.TreeSelection)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)selection);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeSelectionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)selection);
+            if (_klass.changed)
+              return (cast(typeof(&_vfuncChangedTramp))_klass.changed)(selection);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_selection.TreeSelection.vfuncChanged");
+          }
+        }
+
+        _klass.changed = cast(typeof(_klass.changed))&_vfuncChangedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

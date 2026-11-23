@@ -22,6 +22,15 @@ class EncodingContainerProfile : gid.gstpbutils1.encoding_profile.EncodingProfil
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -69,12 +78,19 @@ class EncodingContainerProfile : gid.gstpbutils1.encoding_profile.EncodingProfil
   */
   this(string name, string description, gid.gst1.caps.Caps format, string preset = null) nothrow
   {
-    GstEncodingContainerProfile* _cretval;
-    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
-    const(char)* _description = description.toCString!(No.Malloc, Yes.Nullable);
-    const(char)* _preset = preset.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gst_encoding_container_profile_new(_name, _description, format ? cast(GstCaps*)format._cPtr(No.Dup) : null, _preset);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GstEncodingContainerProfile* _cretval;
+      const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+      const(char)* _description = description.toCString!(No.Malloc, Yes.Nullable);
+      const(char)* _preset = preset.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gst_encoding_container_profile_new(_name, _description, format ? cast(GstCaps*)format._cPtr(No.Dup) : null, _preset);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

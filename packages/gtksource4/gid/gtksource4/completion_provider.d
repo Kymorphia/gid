@@ -28,6 +28,19 @@ interface CompletionProvider : GidWrap
     return cast(void function())gtk_source_completion_provider_get_type != &gidSymbolNotFound ? gtk_source_completion_provider_get_type() : cast(GType)0;
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
   /**
       Activate proposal at iter. When this functions returns false, the default
       activation of proposal will take place which replaces the word at iter

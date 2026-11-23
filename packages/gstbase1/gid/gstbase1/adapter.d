@@ -163,9 +163,16 @@ class Adapter : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GstAdapter* _cretval;
-    _cretval = gst_adapter_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GstAdapter* _cretval;
+      _cretval = gst_adapter_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

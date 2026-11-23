@@ -280,9 +280,16 @@ class LevelBar : gid.gtk3.widget.Widget, gid.gtk3.orientable.Orientable
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_level_bar_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_level_bar_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -300,6 +307,17 @@ class LevelBar : gid.gtk3.widget.Widget, gid.gtk3.orientable.Orientable
     _cretval = gtk_level_bar_new_for_interval(minValue, maxValue);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.level_bar.LevelBar)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+
+  /** */
+  protected void vfuncOffsetChanged(string name)
+  {
+    auto _klass = cast(GtkLevelBarClass*)_vfuncClass;
+    if (!_klass.offsetChanged)
+      return;
+
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    _klass.offsetChanged(cast(GtkLevelBar*)this._cPtr, _name);
   }
 
   /**
@@ -502,6 +520,7 @@ class LevelBar : gid.gtk3.widget.Widget, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -524,6 +543,64 @@ class LevelBar : gid.gtk3.widget.Widget, gid.gtk3.orientable.Orientable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("offset-changed"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from LevelBar
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.level_bar.LevelBar), T.stringof ~ " is not derived from gid.gtk3.level_bar.LevelBar");
+
+    gid.gtk3.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncOffsetChanged", true)[0]) == gid.gtk3.level_bar.LevelBar))
+      _installVfunc(klass, "offset_changed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkLevelBarClass*)klass;
+
+    switch (vfunc)
+    {
+      case "offset_changed":
+      {
+        static extern(C) void _vfuncOffsetChangedTramp(GtkLevelBar* self, const(char)* name) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.level_bar.LevelBar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkLevelBarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.offsetChanged)
+              return (cast(typeof(&_vfuncOffsetChangedTramp))_klass.offsetChanged)(self, name);
+            return;
+          }
+
+          string _name = name.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncOffsetChanged(_name);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.level_bar.LevelBar.vfuncOffsetChanged");
+          }
+        }
+
+        _klass.offsetChanged = cast(typeof(_klass.offsetChanged))&_vfuncOffsetChangedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

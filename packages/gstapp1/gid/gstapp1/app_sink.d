@@ -66,6 +66,15 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -346,6 +355,230 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
   }
 
   mixin URIHandlerT!();
+
+  /** */
+  protected void vfuncEos()
+  {
+    auto _klass = cast(GstAppSinkClass*)_vfuncClass;
+    if (!_klass.eos)
+      return;
+
+    _klass.eos(cast(GstAppSink*)this._cPtr);
+  }
+
+  /** */
+  protected gid.gst1.types.FlowReturn vfuncNewPreroll()
+  {
+    auto _klass = cast(GstAppSinkClass*)_vfuncClass;
+    if (!_klass.newPreroll)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    _cretval = _klass.newPreroll(cast(GstAppSink*)this._cPtr);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    return _retval;
+  }
+
+  /** */
+  protected gid.gst1.types.FlowReturn vfuncNewSample()
+  {
+    auto _klass = cast(GstAppSinkClass*)_vfuncClass;
+    if (!_klass.newSample)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    _cretval = _klass.newSample(cast(GstAppSink*)this._cPtr);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      Get the last preroll sample in appsink. This was the sample that caused the
+      appsink to preroll in the PAUSED state.
+      
+      This function is typically used when dealing with a pipeline in the PAUSED
+      state. Calling this function after doing a seek will give the sample right
+      after the seek position.
+      
+      Calling this function will clear the internal reference to the preroll
+      buffer.
+      
+      Note that the preroll sample will also be returned as the first sample
+      when calling [gid.gstapp1.app_sink.AppSink.pullSample].
+      
+      If an EOS event was received before any buffers, this function returns
+      null. Use gst_app_sink_is_eos () to check for the EOS condition.
+      
+      This function blocks until a preroll sample or EOS is received or the appsink
+      element is set to the READY/NULL state.
+      Returns: a #GstSample or NULL when the appsink is stopped or EOS.
+                 Call [gid.gst1.sample.Sample.unref] after usage.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPullPreroll` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.sample.Sample vfuncPullPreroll()
+  {
+    auto _klass = cast(GstAppSinkClass*)_vfuncClass;
+    if (!_klass.pullPreroll)
+      return typeof(return).init;
+
+    GstSample* _cretval;
+    _cretval = _klass.pullPreroll(cast(GstAppSink*)this._cPtr);
+    auto _retval = _cretval ? new gid.gst1.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      This function blocks until a sample or EOS becomes available or the appsink
+      element is set to the READY/NULL state.
+      
+      This function will only return samples when the appsink is in the PLAYING
+      state. All rendered buffers will be put in a queue so that the application
+      can pull samples at its own rate. Note that when the application does not
+      pull samples fast enough, the queued buffers could consume a lot of memory,
+      especially when dealing with raw video frames.
+      
+      If an EOS event was received before any buffers, this function returns
+      null. Use gst_app_sink_is_eos () to check for the EOS condition.
+      Returns: a #GstSample or NULL when the appsink is stopped or EOS.
+                 Call [gid.gst1.sample.Sample.unref] after usage.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPullSample` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.sample.Sample vfuncPullSample()
+  {
+    auto _klass = cast(GstAppSinkClass*)_vfuncClass;
+    if (!_klass.pullSample)
+      return typeof(return).init;
+
+    GstSample* _cretval;
+    _cretval = _klass.pullSample(cast(GstAppSink*)this._cPtr);
+    auto _retval = _cretval ? new gid.gst1.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      This function blocks until a sample or an event or EOS becomes available or the appsink
+      element is set to the READY/NULL state or the timeout expires.
+      
+      This function will only return samples when the appsink is in the PLAYING
+      state. All rendered buffers and events will be put in a queue so that the application
+      can pull them at its own rate. Note that when the application does not
+      pull samples fast enough, the queued buffers could consume a lot of memory,
+      especially when dealing with raw video frames.
+      Events can be pulled when the appsink is in the READY, PAUSED or PLAYING state.
+      
+      This function will only pull serialized events, excluding
+      the EOS event for which this functions returns
+      null. Use [gid.gstapp1.app_sink.AppSink.isEos] to check for the EOS condition.
+      
+      This method is a variant of [gid.gstapp1.app_sink.AppSink.tryPullSample] that can be used
+      to handle incoming events events as well as samples.
+      
+      Note that future releases may extend this API to return other object types
+      so make sure that your code is checking for the actual type it is handling.
+  
+      Params:
+        timeout = the maximum amount of time to wait for a sample
+      Returns: a #GstSample, or #GstEvent or NULL when the appsink is stopped or EOS or the timeout expires.
+        Call [gid.gst1.mini_object.MiniObject.unref] after usage.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncTryPullObject` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.mini_object.MiniObject vfuncTryPullObject(gid.gst1.types.ClockTime timeout)
+  {
+    auto _klass = cast(GstAppSinkClass*)_vfuncClass;
+    if (!_klass.tryPullObject)
+      return typeof(return).init;
+
+    GstMiniObject* _cretval;
+    _cretval = _klass.tryPullObject(cast(GstAppSink*)this._cPtr, timeout);
+    auto _retval = _cretval ? new gid.gst1.mini_object.MiniObject(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Get the last preroll sample in appsink. This was the sample that caused the
+      appsink to preroll in the PAUSED state.
+      
+      This function is typically used when dealing with a pipeline in the PAUSED
+      state. Calling this function after doing a seek will give the sample right
+      after the seek position.
+      
+      Calling this function will clear the internal reference to the preroll
+      buffer.
+      
+      Note that the preroll sample will also be returned as the first sample
+      when calling [gid.gstapp1.app_sink.AppSink.pullSample].
+      
+      If an EOS event was received before any buffers or the timeout expires,
+      this function returns null. Use gst_app_sink_is_eos () to check for the EOS
+      condition.
+      
+      This function blocks until a preroll sample or EOS is received, the appsink
+      element is set to the READY/NULL state, or the timeout expires.
+  
+      Params:
+        timeout = the maximum amount of time to wait for the preroll sample
+      Returns: a #GstSample or NULL when the appsink is stopped or EOS or the timeout expires.
+                 Call [gid.gst1.sample.Sample.unref] after usage.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncTryPullPreroll` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.sample.Sample vfuncTryPullPreroll(gid.gst1.types.ClockTime timeout)
+  {
+    auto _klass = cast(GstAppSinkClass*)_vfuncClass;
+    if (!_klass.tryPullPreroll)
+      return typeof(return).init;
+
+    GstSample* _cretval;
+    _cretval = _klass.tryPullPreroll(cast(GstAppSink*)this._cPtr, timeout);
+    auto _retval = _cretval ? new gid.gst1.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      This function blocks until a sample or EOS becomes available or the appsink
+      element is set to the READY/NULL state or the timeout expires.
+      
+      This function will only return samples when the appsink is in the PLAYING
+      state. All rendered buffers will be put in a queue so that the application
+      can pull samples at its own rate. Note that when the application does not
+      pull samples fast enough, the queued buffers could consume a lot of memory,
+      especially when dealing with raw video frames.
+      
+      If an EOS event was received before any buffers or the timeout expires,
+      this function returns null. Use gst_app_sink_is_eos () to check for the EOS
+      condition.
+  
+      Params:
+        timeout = the maximum amount of time to wait for a sample
+      Returns: a #GstSample or NULL when the appsink is stopped or EOS or the timeout expires.
+                 Call [gid.gst1.sample.Sample.unref] after usage.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncTryPullSample` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.sample.Sample vfuncTryPullSample(gid.gst1.types.ClockTime timeout)
+  {
+    auto _klass = cast(GstAppSinkClass*)_vfuncClass;
+    if (!_klass.tryPullSample)
+      return typeof(return).init;
+
+    GstSample* _cretval;
+    _cretval = _klass.tryPullSample(cast(GstAppSink*)this._cPtr, timeout);
+    auto _retval = _cretval ? new gid.gst1.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
 
   /**
       Check if appsink supports buffer lists.
@@ -852,6 +1085,7 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -907,6 +1141,7 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -965,6 +1200,7 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1029,6 +1265,7 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1083,6 +1320,7 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1151,6 +1389,7 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1212,6 +1451,7 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1284,6 +1524,7 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1357,6 +1598,7 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1425,6 +1667,7 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1450,6 +1693,307 @@ class AppSink : gid.gstbase1.base_sink.BaseSink, gid.gst1.urihandler.URIHandler
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("try-pull-sample", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from AppSink
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gstapp1.app_sink.AppSink), T.stringof ~ " is not derived from gid.gstapp1.app_sink.AppSink");
+
+    gid.gstbase1.base_sink.BaseSink._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEos", true)[0]) == gid.gstapp1.app_sink.AppSink))
+      _installVfunc(klass, "eos");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncNewPreroll", true)[0]) == gid.gstapp1.app_sink.AppSink))
+      _installVfunc(klass, "new_preroll");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncNewSample", true)[0]) == gid.gstapp1.app_sink.AppSink))
+      _installVfunc(klass, "new_sample");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPullPreroll", true)[0]) == gid.gstapp1.app_sink.AppSink))
+      _installVfunc(klass, "pull_preroll");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPullSample", true)[0]) == gid.gstapp1.app_sink.AppSink))
+      _installVfunc(klass, "pull_sample");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncTryPullObject", true)[0]) == gid.gstapp1.app_sink.AppSink))
+      _installVfunc(klass, "try_pull_object");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncTryPullPreroll", true)[0]) == gid.gstapp1.app_sink.AppSink))
+      _installVfunc(klass, "try_pull_preroll");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncTryPullSample", true)[0]) == gid.gstapp1.app_sink.AppSink))
+      _installVfunc(klass, "try_pull_sample");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstAppSinkClass*)klass;
+
+    switch (vfunc)
+    {
+      case "eos":
+      {
+        static extern(C) void _vfuncEosTramp(GstAppSink* appsink) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstapp1.app_sink.AppSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAppSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsink);
+            if (_klass.eos)
+              return (cast(typeof(&_vfuncEosTramp))_klass.eos)(appsink);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncEos();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstapp1.app_sink.AppSink.vfuncEos");
+          }
+        }
+
+        _klass.eos = cast(typeof(_klass.eos))&_vfuncEosTramp;
+        break;
+      }
+      case "new_preroll":
+      {
+        static extern(C) GstFlowReturn _vfuncNewPrerollTramp(GstAppSink* appsink) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstapp1.app_sink.AppSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAppSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsink);
+            if (_klass.newPreroll)
+              return (cast(typeof(&_vfuncNewPrerollTramp))_klass.newPreroll)(appsink);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.FlowReturn _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncNewPreroll();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstapp1.app_sink.AppSink.vfuncNewPreroll");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+
+          return _retval;
+        }
+
+        _klass.newPreroll = cast(typeof(_klass.newPreroll))&_vfuncNewPrerollTramp;
+        break;
+      }
+      case "new_sample":
+      {
+        static extern(C) GstFlowReturn _vfuncNewSampleTramp(GstAppSink* appsink) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstapp1.app_sink.AppSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAppSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsink);
+            if (_klass.newSample)
+              return (cast(typeof(&_vfuncNewSampleTramp))_klass.newSample)(appsink);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.FlowReturn _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncNewSample();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstapp1.app_sink.AppSink.vfuncNewSample");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+
+          return _retval;
+        }
+
+        _klass.newSample = cast(typeof(_klass.newSample))&_vfuncNewSampleTramp;
+        break;
+      }
+      case "pull_preroll":
+      {
+        static extern(C) GstSample* _vfuncPullPrerollTramp(GstAppSink* appsink) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstapp1.app_sink.AppSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAppSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsink);
+            if (_klass.pullPreroll)
+              return (cast(typeof(&_vfuncPullPrerollTramp))_klass.pullPreroll)(appsink);
+            return typeof(return).init;
+          }
+
+          gid.gst1.sample.Sample _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncPullPreroll();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstapp1.app_sink.AppSink.vfuncPullPreroll");
+          }
+          auto _retval = _dretval ? cast(GstSample*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.pullPreroll = cast(typeof(_klass.pullPreroll))&_vfuncPullPrerollTramp;
+        break;
+      }
+      case "pull_sample":
+      {
+        static extern(C) GstSample* _vfuncPullSampleTramp(GstAppSink* appsink) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstapp1.app_sink.AppSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAppSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsink);
+            if (_klass.pullSample)
+              return (cast(typeof(&_vfuncPullSampleTramp))_klass.pullSample)(appsink);
+            return typeof(return).init;
+          }
+
+          gid.gst1.sample.Sample _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncPullSample();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstapp1.app_sink.AppSink.vfuncPullSample");
+          }
+          auto _retval = _dretval ? cast(GstSample*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.pullSample = cast(typeof(_klass.pullSample))&_vfuncPullSampleTramp;
+        break;
+      }
+      case "try_pull_object":
+      {
+        static extern(C) GstMiniObject* _vfuncTryPullObjectTramp(GstAppSink* appsink, GstClockTime timeout) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstapp1.app_sink.AppSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAppSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsink);
+            if (_klass.tryPullObject)
+              return (cast(typeof(&_vfuncTryPullObjectTramp))_klass.tryPullObject)(appsink, timeout);
+            return typeof(return).init;
+          }
+
+          gid.gst1.mini_object.MiniObject _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncTryPullObject(timeout);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstapp1.app_sink.AppSink.vfuncTryPullObject");
+          }
+          auto _retval = _dretval ? cast(GstMiniObject*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.tryPullObject = cast(typeof(_klass.tryPullObject))&_vfuncTryPullObjectTramp;
+        break;
+      }
+      case "try_pull_preroll":
+      {
+        static extern(C) GstSample* _vfuncTryPullPrerollTramp(GstAppSink* appsink, GstClockTime timeout) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstapp1.app_sink.AppSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAppSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsink);
+            if (_klass.tryPullPreroll)
+              return (cast(typeof(&_vfuncTryPullPrerollTramp))_klass.tryPullPreroll)(appsink, timeout);
+            return typeof(return).init;
+          }
+
+          gid.gst1.sample.Sample _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncTryPullPreroll(timeout);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstapp1.app_sink.AppSink.vfuncTryPullPreroll");
+          }
+          auto _retval = _dretval ? cast(GstSample*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.tryPullPreroll = cast(typeof(_klass.tryPullPreroll))&_vfuncTryPullPrerollTramp;
+        break;
+      }
+      case "try_pull_sample":
+      {
+        static extern(C) GstSample* _vfuncTryPullSampleTramp(GstAppSink* appsink, GstClockTime timeout) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstapp1.app_sink.AppSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)appsink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAppSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)appsink);
+            if (_klass.tryPullSample)
+              return (cast(typeof(&_vfuncTryPullSampleTramp))_klass.tryPullSample)(appsink, timeout);
+            return typeof(return).init;
+          }
+
+          gid.gst1.sample.Sample _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncTryPullSample(timeout);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstapp1.app_sink.AppSink.vfuncTryPullSample");
+          }
+          auto _retval = _dretval ? cast(GstSample*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.tryPullSample = cast(typeof(_klass.tryPullSample))&_vfuncTryPullSampleTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

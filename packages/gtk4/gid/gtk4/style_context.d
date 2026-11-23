@@ -65,6 +65,15 @@ class StyleContext : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -153,6 +162,16 @@ class StyleContext : gid.gobject2.object.ObjectWrap
   static void removeProviderForDisplay(gid.gdk4.display.Display display, gid.gtk4.style_provider.StyleProvider provider) nothrow
   {
     gtk_style_context_remove_provider_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, provider ? cast(GtkStyleProvider*)(cast(gid.gobject2.object.ObjectWrap)provider)._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncChanged()
+  {
+    auto _klass = cast(GtkStyleContextClass*)_vfuncClass;
+    if (!_klass.changed)
+      return;
+
+    _klass.changed(cast(GtkStyleContext*)this._cPtr);
   }
 
   /**
@@ -471,6 +490,62 @@ class StyleContext : gid.gobject2.object.ObjectWrap
     _cretval = gtk_style_context_to_string(cast(GtkStyleContext*)this._cPtr, flags);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from StyleContext
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.style_context.StyleContext), T.stringof ~ " is not derived from gid.gtk4.style_context.StyleContext");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChanged", true)[0]) == gid.gtk4.style_context.StyleContext))
+      _installVfunc(klass, "changed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkStyleContextClass*)klass;
+
+    switch (vfunc)
+    {
+      case "changed":
+      {
+        static extern(C) void _vfuncChangedTramp(GtkStyleContext* context) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.style_context.StyleContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkStyleContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.changed)
+              return (cast(typeof(&_vfuncChangedTramp))_klass.changed)(context);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.style_context.StyleContext.vfuncChanged");
+          }
+        }
+
+        _klass.changed = cast(typeof(_klass.changed))&_vfuncChangedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

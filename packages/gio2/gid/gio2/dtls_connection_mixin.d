@@ -14,6 +14,8 @@ public import gid.gio2.tls_database;
 public import gid.gio2.tls_interaction;
 public import gid.gio2.types;
 public import gid.glib2.error;
+public import gid.gobject2.c.functions;
+public import gid.gobject2.c.types;
 public import gid.gobject2.dclosure;
 public import gid.gobject2.gid_builder;
 public import gid.gobject2.object;
@@ -281,6 +283,366 @@ template DtlsConnectionT()
   }
 
   /**
+      Check whether to accept a certificate.
+  
+      Params:
+        peerCert = 
+        errors = 
+      Returns: 
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncAcceptCertificate`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncAcceptCertificate(gid.gio2.tls_certificate.TlsCertificate peerCert, gid.gio2.types.TlsCertificateFlags errors)
+  {
+    auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gio2.dtls_connection.DtlsConnection._getGType);
+    if (!_klass || !_klass.acceptCertificate)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.acceptCertificate(cast(GDtlsConnection*)this._cPtr, peerCert ? cast(GTlsCertificate*)peerCert._cPtr(No.Dup) : null, errors);
+    return _retval;
+  }
+
+  /**
+      Retrieve TLS channel binding data (Since: 2.66)
+  
+      Params:
+        type = 
+        data = 
+      Returns: 
+      Throws: [ErrorWrap]
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetBindingData`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncGetBindingData(gid.gio2.types.TlsChannelBindingType type, ubyte[] data)
+  {
+    auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gio2.dtls_connection.DtlsConnection._getGType);
+    if (!_klass || !_klass.getBindingData)
+      return typeof(return).init;
+
+    bool _retval;
+    auto _data = gByteArrayFromD(data);
+    scope(exit) containerFree!(GByteArray*, ubyte, GidOwnership.None)(_data);
+    GError *_err;
+    _retval = cast(bool)_klass.getBindingData(cast(GDtlsConnection*)this._cPtr, type, _data, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the name of the application-layer protocol negotiated during
+      the handshake.
+      
+      If the peer did not use the ALPN extension, or did not advertise a
+      protocol that matched one of conn's protocols, or the TLS backend
+      does not support ALPN, then this will be null. See
+      [gid.gio2.dtls_connection.DtlsConnection.setAdvertisedProtocols].
+      Returns: the negotiated protocol, or null
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetNegotiatedProtocol`
+      to chain up from an override.
+      Overriding it from D is not supported (callback string return value with transfer none is not supported).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected string vfuncGetNegotiatedProtocol()
+  {
+    auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gio2.dtls_connection.DtlsConnection._getGType);
+    if (!_klass || !_klass.getNegotiatedProtocol)
+      return typeof(return).init;
+
+    const(char)* _cretval;
+    _cretval = _klass.getNegotiatedProtocol(cast(GDtlsConnection*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Attempts a TLS handshake on conn.
+      
+      On the client side, it is never necessary to call this method;
+      although the connection needs to perform a handshake after
+      connecting, #GDtlsConnection will handle this for you automatically
+      when you try to send or receive data on the connection. You can call
+      [gid.gio2.dtls_connection.DtlsConnection.handshake] manually if you want to know whether
+      the initial handshake succeeded or failed (as opposed to just
+      immediately trying to use conn to read or write, in which case,
+      if it fails, it may not be possible to tell if it failed before
+      or after completing the handshake), but beware that servers may reject
+      client authentication after the handshake has completed, so a
+      successful handshake does not indicate the connection will be usable.
+      
+      Likewise, on the server side, although a handshake is necessary at
+      the beginning of the communication, you do not need to call this
+      function explicitly unless you want clearer error reporting.
+      
+      Previously, calling [gid.gio2.dtls_connection.DtlsConnection.handshake] after the initial
+      handshake would trigger a rehandshake; however, this usage was
+      deprecated in GLib 2.60 because rehandshaking was removed from the
+      TLS protocol in TLS 1.3. Since GLib 2.64, calling this function after
+      the initial handshake will no longer do anything.
+      
+      #GDtlsConnection::accept_certificate may be emitted during the
+      handshake.
+  
+      Params:
+        cancellable = a #GCancellable, or null
+      Returns: success or failure
+      Throws: [ErrorWrap]
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncHandshake`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncHandshake(gid.gio2.cancellable.Cancellable cancellable = null)
+  {
+    auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gio2.dtls_connection.DtlsConnection._getGType);
+    if (!_klass || !_klass.handshake)
+      return typeof(return).init;
+
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)_klass.handshake(cast(GDtlsConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Asynchronously performs a TLS handshake on conn. See
+      [gid.gio2.dtls_connection.DtlsConnection.handshake] for more information.
+  
+      Params:
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
+        cancellable = a #GCancellable, or null
+        callback = callback to call when the handshake is complete
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncHandshakeAsync`
+      to chain up from an override.
+      Overriding it from D is not supported (parameter 'callback' of kind 'Callback' is not supported).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncHandshakeAsync(int ioPriority, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null)
+  {
+    auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gio2.dtls_connection.DtlsConnection._getGType);
+    if (!_klass || !_klass.handshakeAsync)
+      return;
+
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      gidAttachThread();
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    _klass.handshakeAsync(cast(GDtlsConnection*)this._cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Finish an asynchronous TLS handshake operation. See
+      [gid.gio2.dtls_connection.DtlsConnection.handshake] for more information.
+  
+      Params:
+        result = a #GAsyncResult.
+      Returns: true on success, false on failure, in which
+        case error will be set.
+      Throws: [ErrorWrap]
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncHandshakeFinish`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncHandshakeFinish(gid.gio2.async_result.AsyncResult result)
+  {
+    auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gio2.dtls_connection.DtlsConnection._getGType);
+    if (!_klass || !_klass.handshakeFinish)
+      return typeof(return).init;
+
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)_klass.handshakeFinish(cast(GDtlsConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Sets the list of application-layer protocols to advertise that the
+      caller is willing to speak on this connection. The
+      Application-Layer Protocol Negotiation (ALPN) extension will be
+      used to negotiate a compatible protocol with the peer; use
+      [gid.gio2.dtls_connection.DtlsConnection.getNegotiatedProtocol] to find the negotiated
+      protocol after the handshake.  Specifying null for the the value
+      of protocols will disable ALPN negotiation.
+      
+      See [IANA TLS ALPN Protocol IDs](https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids)
+      for a list of registered protocol IDs.
+  
+      Params:
+        protocols = a null-terminated
+            array of ALPN protocol names (eg, "http/1.1", "h2"), or null
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSetAdvertisedProtocols`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncSetAdvertisedProtocols(string[] protocols = null)
+  {
+    auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gio2.dtls_connection.DtlsConnection._getGType);
+    if (!_klass || !_klass.setAdvertisedProtocols)
+      return;
+
+    auto _protocols_arr = new char*[](protocols.length + 1);
+    auto _protocols = cast(char**)_protocols_arr.ptr;
+    foreach (i, s; protocols) _protocols[i] = s.toCString!(No.Malloc);
+    _klass.setAdvertisedProtocols(cast(GDtlsConnection*)this._cPtr, _protocols);
+  }
+
+  /**
+      Shut down part or all of a DTLS connection.
+      
+      If shutdown_read is true then the receiving side of the connection is shut
+      down, and further reading is disallowed. Subsequent calls to
+      [gid.gio2.datagram_based.DatagramBased.receiveMessages] will return [gid.gio2.types.IOErrorEnum.Closed].
+      
+      If shutdown_write is true then the sending side of the connection is shut
+      down, and further writing is disallowed. Subsequent calls to
+      [gid.gio2.datagram_based.DatagramBased.sendMessages] will return [gid.gio2.types.IOErrorEnum.Closed].
+      
+      It is allowed for both shutdown_read and shutdown_write to be TRUE — this
+      is equivalent to calling [gid.gio2.dtls_connection.DtlsConnection.close].
+      
+      If cancellable is cancelled, the #GDtlsConnection may be left
+      partially-closed and any pending untransmitted data may be lost. Call
+      [gid.gio2.dtls_connection.DtlsConnection.shutdown] again to complete closing the #GDtlsConnection.
+  
+      Params:
+        shutdownRead = true to stop reception of incoming datagrams
+        shutdownWrite = true to stop sending outgoing datagrams
+        cancellable = a #GCancellable, or null
+      Returns: true on success, false otherwise
+      Throws: [ErrorWrap]
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncShutdown`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncShutdown(bool shutdownRead, bool shutdownWrite, gid.gio2.cancellable.Cancellable cancellable = null)
+  {
+    auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gio2.dtls_connection.DtlsConnection._getGType);
+    if (!_klass || !_klass.shutdown)
+      return typeof(return).init;
+
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)_klass.shutdown(cast(GDtlsConnection*)this._cPtr, shutdownRead, shutdownWrite, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Asynchronously shut down part or all of the DTLS connection. See
+      [gid.gio2.dtls_connection.DtlsConnection.shutdown] for more information.
+  
+      Params:
+        shutdownRead = true to stop reception of incoming datagrams
+        shutdownWrite = true to stop sending outgoing datagrams
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
+        cancellable = a #GCancellable, or null
+        callback = callback to call when the shutdown operation is complete
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncShutdownAsync`
+      to chain up from an override.
+      Overriding it from D is not supported (parameter 'callback' of kind 'Callback' is not supported).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncShutdownAsync(bool shutdownRead, bool shutdownWrite, int ioPriority, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null)
+  {
+    auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gio2.dtls_connection.DtlsConnection._getGType);
+    if (!_klass || !_klass.shutdownAsync)
+      return;
+
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      gidAttachThread();
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    _klass.shutdownAsync(cast(GDtlsConnection*)this._cPtr, shutdownRead, shutdownWrite, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Finish an asynchronous TLS shutdown operation. See
+      [gid.gio2.dtls_connection.DtlsConnection.shutdown] for more information.
+  
+      Params:
+        result = a #GAsyncResult
+      Returns: true on success, false on failure, in which
+        case error will be set
+      Throws: [ErrorWrap]
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncShutdownFinish`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncShutdownFinish(gid.gio2.async_result.AsyncResult result)
+  {
+    auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gio2.dtls_connection.DtlsConnection._getGType);
+    if (!_klass || !_klass.shutdownFinish)
+      return typeof(return).init;
+
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)_klass.shutdownFinish(cast(GDtlsConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
       Close the DTLS connection. This is equivalent to calling
       [gid.gio2.dtls_connection.DtlsConnection.shutdown] to shut down both sides of the connection.
       
@@ -329,6 +691,7 @@ template DtlsConnectionT()
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -624,6 +987,7 @@ template DtlsConnectionT()
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -853,6 +1217,7 @@ template DtlsConnectionT()
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -964,6 +1329,7 @@ template DtlsConnectionT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -992,6 +1358,285 @@ template DtlsConnectionT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("accept-certificate", closure, after);
+  }
+
+  /// True if the D class T overrides any vfunc method of gid.gio2.dtls_connection.DtlsConnection (DiG)
+  enum bool _ifaceVfuncsOverridden_gid_gio2_dtls_connection_DtlsConnection(T) = !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncAcceptCertificate", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetBindingData", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetNegotiatedProtocol", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncHandshake", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncHandshakeAsync", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncHandshakeFinish", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetAdvertisedProtocols", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncShutdown", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncShutdownAsync", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncShutdownFinish", true)[0], gid.gobject2.object.GidIfaceVfunc);
+
+  /**
+      Install the C trampolines of the gid.gio2.dtls_connection.DtlsConnection vfunc methods which a D class overrides into the interface
+      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      trampoline is a compile error.
+      Params:
+        T = D class
+        iface = Interface structure of the GType registered for T
+  */
+  static void _installIfaceVfuncs_gid_gio2_dtls_connection_DtlsConnection(T)(void* iface) nothrow
+  {
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncAcceptCertificate", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gio2_dtls_connection_DtlsConnection(iface, "accept_certificate");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetBindingData", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gio2_dtls_connection_DtlsConnection(iface, "get_binding_data");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetNegotiatedProtocol", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      static assert(0, "Overriding gid.gio2.dtls_connection.DtlsConnection.vfuncGetNegotiatedProtocol is not supported: callback string return value with transfer none is not supported");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncHandshake", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gio2_dtls_connection_DtlsConnection(iface, "handshake");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncHandshakeAsync", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      static assert(0, "Overriding gid.gio2.dtls_connection.DtlsConnection.vfuncHandshakeAsync is not supported: parameter 'callback' of kind 'Callback' is not supported");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncHandshakeFinish", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gio2_dtls_connection_DtlsConnection(iface, "handshake_finish");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetAdvertisedProtocols", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gio2_dtls_connection_DtlsConnection(iface, "set_advertised_protocols");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncShutdown", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gio2_dtls_connection_DtlsConnection(iface, "shutdown");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncShutdownAsync", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      static assert(0, "Overriding gid.gio2.dtls_connection.DtlsConnection.vfuncShutdownAsync is not supported: parameter 'callback' of kind 'Callback' is not supported");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncShutdownFinish", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gio2_dtls_connection_DtlsConnection(iface, "shutdown_finish");
+  }
+
+  private static void _installIfaceVfunc_gid_gio2_dtls_connection_DtlsConnection(void* iface, string vfunc) nothrow
+  {
+    auto _klass = cast(GDtlsConnectionInterface*)iface;
+
+    switch (vfunc)
+    {
+      case "accept_certificate":
+      {
+        static extern(C) gboolean _vfuncAcceptCertificateTramp(GDtlsConnection* connection, GTlsCertificate* peerCert, GTlsCertificateFlags errors) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)connection);
+          if (!_obj)
+          {
+            auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)connection), gid.gio2.dtls_connection.DtlsConnection._getGType);
+            if (_klass && _klass.acceptCertificate)
+              return (cast(typeof(&_vfuncAcceptCertificateTramp))_klass.acceptCertificate)(connection, peerCert, errors);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncAcceptCertificate(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.tls_certificate.TlsCertificate)(cast(void*)peerCert, No.Take), errors);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.dtls_connection.DtlsConnection.vfuncAcceptCertificate");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.acceptCertificate = cast(typeof(_klass.acceptCertificate))&_vfuncAcceptCertificateTramp;
+        break;
+      }
+      case "get_binding_data":
+      {
+        static extern(C) gboolean _vfuncGetBindingDataTramp(GDtlsConnection* conn, GTlsChannelBindingType type, GByteArray* data, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)conn);
+          if (!_obj)
+          {
+            auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)conn), gid.gio2.dtls_connection.DtlsConnection._getGType);
+            if (_klass && _klass.getBindingData)
+              return (cast(typeof(&_vfuncGetBindingDataTramp))_klass.getBindingData)(conn, type, data, _err);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _data = gByteArrayToD!(GidOwnership.None)(data);
+
+          try
+          {
+            _dretval = _obj.vfuncGetBindingData(type, _data);
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getBindingData = cast(typeof(_klass.getBindingData))&_vfuncGetBindingDataTramp;
+        break;
+      }
+      case "handshake":
+      {
+        static extern(C) gboolean _vfuncHandshakeTramp(GDtlsConnection* conn, GCancellable* cancellable, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)conn);
+          if (!_obj)
+          {
+            auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)conn), gid.gio2.dtls_connection.DtlsConnection._getGType);
+            if (_klass && _klass.handshake)
+              return (cast(typeof(&_vfuncHandshakeTramp))_klass.handshake)(conn, cancellable, _err);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncHandshake(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.handshake = cast(typeof(_klass.handshake))&_vfuncHandshakeTramp;
+        break;
+      }
+      case "handshake_finish":
+      {
+        static extern(C) gboolean _vfuncHandshakeFinishTramp(GDtlsConnection* conn, GAsyncResult* result, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)conn);
+          if (!_obj)
+          {
+            auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)conn), gid.gio2.dtls_connection.DtlsConnection._getGType);
+            if (_klass && _klass.handshakeFinish)
+              return (cast(typeof(&_vfuncHandshakeFinishTramp))_klass.handshakeFinish)(conn, result, _err);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncHandshakeFinish(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)result, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.handshakeFinish = cast(typeof(_klass.handshakeFinish))&_vfuncHandshakeFinishTramp;
+        break;
+      }
+      case "set_advertised_protocols":
+      {
+        static extern(C) void _vfuncSetAdvertisedProtocolsTramp(GDtlsConnection* conn, const(char*)* protocols) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)conn);
+          if (!_obj)
+          {
+            auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)conn), gid.gio2.dtls_connection.DtlsConnection._getGType);
+            if (_klass && _klass.setAdvertisedProtocols)
+              return (cast(typeof(&_vfuncSetAdvertisedProtocolsTramp))_klass.setAdvertisedProtocols)(conn, protocols);
+            return;
+          }
+
+          string[] _protocols;
+          uint _lenprotocols;
+          if (protocols)
+          {
+            for (; protocols[_lenprotocols] !is null; _lenprotocols++)
+            {
+            }
+          }
+
+          _protocols.length = _lenprotocols;
+          foreach (i; 0 .. _lenprotocols)
+            _protocols[i] = protocols[i].fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncSetAdvertisedProtocols(_protocols);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.dtls_connection.DtlsConnection.vfuncSetAdvertisedProtocols");
+          }
+        }
+
+        _klass.setAdvertisedProtocols = cast(typeof(_klass.setAdvertisedProtocols))&_vfuncSetAdvertisedProtocolsTramp;
+        break;
+      }
+      case "shutdown":
+      {
+        static extern(C) gboolean _vfuncShutdownTramp(GDtlsConnection* conn, gboolean shutdownRead, gboolean shutdownWrite, GCancellable* cancellable, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)conn);
+          if (!_obj)
+          {
+            auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)conn), gid.gio2.dtls_connection.DtlsConnection._getGType);
+            if (_klass && _klass.shutdown)
+              return (cast(typeof(&_vfuncShutdownTramp))_klass.shutdown)(conn, shutdownRead, shutdownWrite, cancellable, _err);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncShutdown(cast(bool)shutdownRead, cast(bool)shutdownWrite, gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.shutdown = cast(typeof(_klass.shutdown))&_vfuncShutdownTramp;
+        break;
+      }
+      case "shutdown_finish":
+      {
+        static extern(C) gboolean _vfuncShutdownFinishTramp(GDtlsConnection* conn, GAsyncResult* result, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)conn);
+          if (!_obj)
+          {
+            auto _klass = cast(GDtlsConnectionInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)conn), gid.gio2.dtls_connection.DtlsConnection._getGType);
+            if (_klass && _klass.shutdownFinish)
+              return (cast(typeof(&_vfuncShutdownFinishTramp))_klass.shutdownFinish)(conn, result, _err);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncShutdownFinish(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)result, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.shutdownFinish = cast(typeof(_klass.shutdownFinish))&_vfuncShutdownFinishTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

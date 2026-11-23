@@ -192,10 +192,27 @@ class Frame : gid.gtk4.widget.Widget
   */
   this(string label = null) nothrow
   {
-    GtkWidget* _cretval;
-    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gtk_frame_new(_label);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, label !is null), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gtk_frame_new(_label);
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncComputeChildAllocation(gid.gtk4.types.Allocation allocation)
+  {
+    auto _klass = cast(GtkFrameClass*)_vfuncClass;
+    if (!_klass.computeChildAllocation)
+      return;
+
+    _klass.computeChildAllocation(cast(GtkFrame*)this._cPtr, cast(GtkAllocation*)&allocation);
   }
 
   /**
@@ -301,6 +318,62 @@ class Frame : gid.gtk4.widget.Widget
   void setLabelWidget(gid.gtk4.widget.Widget labelWidget = null) nothrow
   {
     gtk_frame_set_label_widget(cast(GtkFrame*)this._cPtr, labelWidget ? cast(GtkWidget*)labelWidget._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Frame
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.frame.Frame), T.stringof ~ " is not derived from gid.gtk4.frame.Frame");
+
+    gid.gtk4.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncComputeChildAllocation", true)[0]) == gid.gtk4.frame.Frame))
+      _installVfunc(klass, "compute_child_allocation");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkFrameClass*)klass;
+
+    switch (vfunc)
+    {
+      case "compute_child_allocation":
+      {
+        static extern(C) void _vfuncComputeChildAllocationTramp(GtkFrame* frame, GtkAllocation* allocation) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.frame.Frame)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)frame);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkFrameClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)frame);
+            if (_klass.computeChildAllocation)
+              return (cast(typeof(&_vfuncComputeChildAllocationTramp))_klass.computeChildAllocation)(frame, allocation);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncComputeChildAllocation(*cast(gid.gtk4.types.Allocation*)allocation);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.frame.Frame.vfuncComputeChildAllocation");
+          }
+        }
+
+        _klass.computeChildAllocation = cast(typeof(_klass.computeChildAllocation))&_vfuncComputeChildAllocationTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

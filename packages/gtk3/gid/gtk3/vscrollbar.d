@@ -80,9 +80,16 @@ class VScrollbar : gid.gtk3.scrollbar.Scrollbar
   */
   this(gid.gtk3.adjustment.Adjustment adjustment = null) nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_vscrollbar_new(adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, adjustment !is null), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_vscrollbar_new(adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
+      this(_cretval, No.Take);
+    }
   }
 }
 

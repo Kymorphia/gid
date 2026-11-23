@@ -80,6 +80,15 @@ class Service : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.backend.Backend
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -151,6 +160,7 @@ class Service : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.backend.Backend
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -244,6 +254,7 @@ class Service : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.backend.Backend
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -321,6 +332,161 @@ class Service : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.backend.Backend
   }
 
   /**
+      Get the GObject type for collections instantiated by this service.
+      
+      This will always be either [gid.secret1.collection.Collection] or derived from it.
+      Returns: the gobject type for collections
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetCollectionGtype` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gobject2.types.GType vfuncGetCollectionGtype()
+  {
+    auto _klass = cast(SecretServiceClass*)_vfuncClass;
+    if (!_klass.getCollectionGtype)
+      return typeof(return).init;
+
+    gid.gobject2.types.GType _retval;
+    _retval = _klass.getCollectionGtype(cast(SecretService*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Get the GObject type for items instantiated by this service.
+      
+      This will always be either [gid.secret1.item.Item] or derived from it.
+      Returns: the gobject type for items
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetItemGtype` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gobject2.types.GType vfuncGetItemGtype()
+  {
+    auto _klass = cast(SecretServiceClass*)_vfuncClass;
+    if (!_klass.getItemGtype)
+      return typeof(return).init;
+
+    gid.gobject2.types.GType _retval;
+    _retval = _klass.getItemGtype(cast(SecretService*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      called to perform asynchronous prompting when necessary
+  
+      Params:
+        prompt = 
+        returnType = 
+        cancellable = 
+        callback = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPromptAsync` to chain up from an override.
+      Overriding it from D is not supported (parameter 'callback' of kind 'Callback' is not supported).
+  */
+  protected void vfuncPromptAsync(gid.secret1.prompt.Prompt prompt, gid.glib2.variant_type.VariantType returnType, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null)
+  {
+    auto _klass = cast(SecretServiceClass*)_vfuncClass;
+    if (!_klass.promptAsync)
+      return;
+
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      gidAttachThread();
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    _klass.promptAsync(cast(SecretService*)this._cPtr, prompt ? cast(SecretPrompt*)prompt._cPtr(No.Dup) : null, returnType ? cast(const(GVariantType)*)returnType._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Complete asynchronous operation to perform prompting for a [gid.secret1.prompt.Prompt].
+      
+      Returns a variant result if the prompt was completed and not dismissed. The
+      type of result depends on the action the prompt is completing, and is defined
+      in the Secret Service DBus API specification.
+  
+      Params:
+        result = the asynchronous result passed to the callback
+      Returns: null if the prompt was dismissed or an error occurred,
+          a variant result if the prompt was successful
+      Throws: [ErrorWrap]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPromptFinish` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.glib2.variant.Variant vfuncPromptFinish(gid.gio2.async_result.AsyncResult result)
+  {
+    auto _klass = cast(SecretServiceClass*)_vfuncClass;
+    if (!_klass.promptFinish)
+      return typeof(return).init;
+
+    GVariant* _cretval;
+    GError *_err;
+    _cretval = _klass.promptFinish(cast(SecretService*)this._cPtr, result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = _cretval ? new gid.glib2.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Perform prompting for a [gid.secret1.prompt.Prompt].
+      
+      Runs a prompt and performs the prompting. Returns a variant result if the
+      prompt was completed and not dismissed. The type of result depends on the
+      action the prompt is completing, and is defined in the Secret Service DBus
+      API specification.
+      
+      This function is called by other parts of this library to handle prompts
+      for the various actions that can require prompting.
+      
+      Override the #SecretServiceClass `vfuncService.prompt_sync` virtual method
+      to change the behavior of the prompting. The default behavior is to simply
+      run [gid.secret1.prompt.Prompt.performSync] on the prompt with a null `window_id`.
+  
+      Params:
+        prompt = the prompt
+        cancellable = optional cancellation object
+        returnType = the variant type of the prompt result
+      Returns: null if the prompt was dismissed or an error occurred,
+          a variant result if the prompt was successful
+      Throws: [ErrorWrap]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPromptSync` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.glib2.variant.Variant vfuncPromptSync(gid.secret1.prompt.Prompt prompt, gid.gio2.cancellable.Cancellable cancellable, gid.glib2.variant_type.VariantType returnType)
+  {
+    auto _klass = cast(SecretServiceClass*)_vfuncClass;
+    if (!_klass.promptSync)
+      return typeof(return).init;
+
+    GVariant* _cretval;
+    GError *_err;
+    _cretval = _klass.promptSync(cast(SecretService*)this._cPtr, prompt ? cast(SecretPrompt*)prompt._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, returnType ? cast(const(GVariantType)*)returnType._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = _cretval ? new gid.glib2.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
       Remove unlocked items which match the attributes from the secret service.
       
       The attributes should be a set of key and value string pairs.
@@ -340,6 +506,7 @@ class Service : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.backend.Backend
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -516,6 +683,7 @@ class Service : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.backend.Backend
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -697,6 +865,7 @@ class Service : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.backend.Backend
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -783,6 +952,7 @@ class Service : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.backend.Backend
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -881,6 +1051,7 @@ class Service : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.backend.Backend
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -974,6 +1145,7 @@ class Service : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.backend.Backend
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -1082,6 +1254,7 @@ class Service : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.backend.Backend
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -1186,6 +1359,7 @@ class Service : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.backend.Backend
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -1280,6 +1454,7 @@ class Service : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.backend.Backend
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -1384,6 +1559,7 @@ class Service : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.backend.Backend
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -1460,6 +1636,175 @@ class Service : gid.gio2.dbus_proxy.DBusProxy, gid.secret1.backend.Backend
       throw new ErrorWrap(_err, Yes.Take);
     unlocked = gListToD!(gid.gio2.dbus_proxy.DBusProxy, GidOwnership.Full)(_unlocked);
     return _retval;
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Service
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.secret1.service.Service), T.stringof ~ " is not derived from gid.secret1.service.Service");
+
+    gid.gio2.dbus_proxy.DBusProxy._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetCollectionGtype", true)[0]) == gid.secret1.service.Service))
+      _installVfunc(klass, "get_collection_gtype");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetItemGtype", true)[0]) == gid.secret1.service.Service))
+      _installVfunc(klass, "get_item_gtype");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPromptAsync", true)[0]) == gid.secret1.service.Service))
+      static assert(0, "Overriding gid.secret1.service.Service.vfuncPromptAsync is not supported: parameter 'callback' of kind 'Callback' is not supported");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPromptFinish", true)[0]) == gid.secret1.service.Service))
+      _installVfunc(klass, "prompt_finish");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPromptSync", true)[0]) == gid.secret1.service.Service))
+      _installVfunc(klass, "prompt_sync");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(SecretServiceClass*)klass;
+
+    switch (vfunc)
+    {
+      case "get_collection_gtype":
+      {
+        static extern(C) GType _vfuncGetCollectionGtypeTramp(SecretService* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.secret1.service.Service)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(SecretServiceClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.getCollectionGtype)
+              return (cast(typeof(&_vfuncGetCollectionGtypeTramp))_klass.getCollectionGtype)(self);
+            return typeof(return).init;
+          }
+
+          gid.gobject2.types.GType _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetCollectionGtype();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.secret1.service.Service.vfuncGetCollectionGtype");
+          }
+          auto _retval = cast(GType)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getCollectionGtype = cast(typeof(_klass.getCollectionGtype))&_vfuncGetCollectionGtypeTramp;
+        break;
+      }
+      case "get_item_gtype":
+      {
+        static extern(C) GType _vfuncGetItemGtypeTramp(SecretService* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.secret1.service.Service)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(SecretServiceClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.getItemGtype)
+              return (cast(typeof(&_vfuncGetItemGtypeTramp))_klass.getItemGtype)(self);
+            return typeof(return).init;
+          }
+
+          gid.gobject2.types.GType _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetItemGtype();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.secret1.service.Service.vfuncGetItemGtype");
+          }
+          auto _retval = cast(GType)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getItemGtype = cast(typeof(_klass.getItemGtype))&_vfuncGetItemGtypeTramp;
+        break;
+      }
+      case "prompt_finish":
+      {
+        static extern(C) GVariant* _vfuncPromptFinishTramp(SecretService* self, GAsyncResult* result, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.secret1.service.Service)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(SecretServiceClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.promptFinish)
+              return (cast(typeof(&_vfuncPromptFinishTramp))_klass.promptFinish)(self, result, _err);
+            return typeof(return).init;
+          }
+
+          gid.glib2.variant.Variant _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncPromptFinish(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)result, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = _dretval ? cast(GVariant*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.promptFinish = cast(typeof(_klass.promptFinish))&_vfuncPromptFinishTramp;
+        break;
+      }
+      case "prompt_sync":
+      {
+        static extern(C) GVariant* _vfuncPromptSyncTramp(SecretService* self, SecretPrompt* prompt, GCancellable* cancellable, const(GVariantType)* returnType, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.secret1.service.Service)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(SecretServiceClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.promptSync)
+              return (cast(typeof(&_vfuncPromptSyncTramp))_klass.promptSync)(self, prompt, cancellable, returnType, _err);
+            return typeof(return).init;
+          }
+
+          gid.glib2.variant.Variant _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncPromptSync(gid.gobject2.object.ObjectWrap._getDObject!(gid.secret1.prompt.Prompt)(cast(void*)prompt, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.cancellable.Cancellable)(cast(void*)cancellable, No.Take), returnType ? new gid.glib2.variant_type.VariantType(cast(void*)returnType, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = _dretval ? cast(GVariant*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.promptSync = cast(typeof(_klass.promptSync))&_vfuncPromptSyncTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

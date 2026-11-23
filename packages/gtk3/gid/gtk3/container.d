@@ -233,6 +233,15 @@ class Container : gid.gtk3.widget.Widget
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -295,6 +304,262 @@ class Container : gid.gtk3.widget.Widget
   @property void resizeMode(gid.gtk3.types.ResizeMode propval) nothrow
   {
     setResizeMode(propval);
+  }
+
+  /**
+      Adds widget to container. Typically used for simple containers
+      such as #GtkWindow, #GtkFrame, or #GtkButton; for more complicated
+      layout containers such as #GtkBox or #GtkGrid, this function will
+      pick default packing parameters that may not be correct.  So
+      consider functions such as [gid.gtk3.box.Box.packStart] and
+      [gid.gtk4.grid.Grid.attach] as an alternative to [gid.gtk3.container.Container.add] in
+      those cases. A widget may be added to only one container at a time;
+      you can’t place the same widget inside two different containers.
+      
+      Note that some containers, such as #GtkScrolledWindow or #GtkListBox,
+      may add intermediate children between the added widget and the
+      container.
+  
+      Params:
+        widget = a widget to be placed inside container
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncAdd` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncAdd(gid.gtk3.widget.Widget widget)
+  {
+    auto _klass = cast(GtkContainerClass*)_vfuncClass;
+    if (!_klass.add)
+      return;
+
+    _klass.add(cast(GtkContainer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Signal emitted when a size recalculation is needed.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCheckResize` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncCheckResize()
+  {
+    auto _klass = cast(GtkContainerClass*)_vfuncClass;
+    if (!_klass.checkResize)
+      return;
+
+    _klass.checkResize(cast(GtkContainer*)this._cPtr);
+  }
+
+  /**
+      Returns the type of the children supported by the container.
+      
+      Note that this may return `G_TYPE_NONE` to indicate that no more
+      children can be added, e.g. for a #GtkPaned which already has two
+      children.
+      Returns: a #GType.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncChildType` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gobject2.types.GType vfuncChildType()
+  {
+    auto _klass = cast(GtkContainerClass*)_vfuncClass;
+    if (!_klass.childType)
+      return typeof(return).init;
+
+    gid.gobject2.types.GType _retval;
+    _retval = _klass.childType(cast(GtkContainer*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets a widget’s composite name. Deprecated: 3.10.
+  
+      Params:
+        child = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCompositeName` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected string vfuncCompositeName(gid.gtk3.widget.Widget child)
+  {
+    auto _klass = cast(GtkContainerClass*)_vfuncClass;
+    if (!_klass.compositeName)
+      return typeof(return).init;
+
+    char* _cretval;
+    _cretval = _klass.compositeName(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Invokes callback on each direct child of container, including
+      children that are considered “internal” (implementation details
+      of the container). “Internal” children generally weren’t added
+      by the user of the container, but were added by the container
+      implementation itself.
+      
+      Most applications should use [gid.gtk3.container.Container.foreach_], rather
+      than [gid.gtk3.container.Container.forall].
+  
+      Params:
+        includeInternals = 
+        callback = a callback
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncForall` to chain up from an override.
+      Overriding it from D is not supported (parameter 'callback' of kind 'Callback' is not supported).
+  */
+  protected void vfuncForall(bool includeInternals, gid.gtk3.types.Callback callback)
+  {
+    auto _klass = cast(GtkContainerClass*)_vfuncClass;
+    if (!_klass.forall)
+      return;
+
+    extern(C) void _callbackCallback(GtkWidget* widget, void* data) nothrow
+    {
+      gidAttachThread();
+      auto _dlg = cast(gid.gtk3.types.Callback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)widget, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.types.Callback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? cast(void*)&(callback) : null;
+    _klass.forall(cast(GtkContainer*)this._cPtr, includeInternals, _callbackCB, _callback);
+  }
+
+  /**
+      Get a property from a child of container.
+  
+      Params:
+        child = 
+        propertyId = 
+        value =  (modified in place, changes are seen by the caller)
+        pspec = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetChildProperty` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncGetChildProperty(gid.gtk3.widget.Widget child, uint propertyId, gid.gobject2.value.Value value, gid.gobject2.param_spec.ParamSpec pspec)
+  {
+    auto _klass = cast(GtkContainerClass*)_vfuncClass;
+    if (!_klass.getChildProperty)
+      return;
+
+    _klass.getChildProperty(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, propertyId, value ? cast(GValue*)value._cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Returns a newly created widget path representing all the widget hierarchy
+      from the toplevel down to and including child.
+  
+      Params:
+        child = a child of container
+      Returns: A newly created #GtkWidgetPath
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetPathForChild` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gtk3.widget_path.WidgetPath vfuncGetPathForChild(gid.gtk3.widget.Widget child)
+  {
+    auto _klass = cast(GtkContainerClass*)_vfuncClass;
+    if (!_klass.getPathForChild)
+      return typeof(return).init;
+
+    GtkWidgetPath* _cretval;
+    _cretval = _klass.getPathForChild(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gid.gtk3.widget_path.WidgetPath(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Removes widget from container. widget must be inside container.
+      Note that container will own a reference to widget, and that this
+      may be the last reference held; so removing a widget from its
+      container can destroy that widget. If you want to use widget
+      again, you need to add a reference to it before removing it from
+      a container, using [gid.gobject2.object.ObjectWrap.ref_]. If you don’t want to use widget
+      again it’s usually more efficient to simply destroy it directly
+      using [gid.gtk3.widget.Widget.destroy] since this will remove it from the
+      container and help break any circular reference count cycles.
+  
+      Params:
+        widget = a current child of container
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRemove` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncRemove(gid.gtk3.widget.Widget widget)
+  {
+    auto _klass = cast(GtkContainerClass*)_vfuncClass;
+    if (!_klass.remove)
+      return;
+
+    _klass.remove(cast(GtkContainer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Set a property on a child of container.
+  
+      Params:
+        child = 
+        propertyId = 
+        value = 
+        pspec = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetChildProperty` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSetChildProperty(gid.gtk3.widget.Widget child, uint propertyId, gid.gobject2.value.Value value, gid.gobject2.param_spec.ParamSpec pspec)
+  {
+    auto _klass = cast(GtkContainerClass*)_vfuncClass;
+    if (!_klass.setChildProperty)
+      return;
+
+    _klass.setChildProperty(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, propertyId, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets, or unsets if child is null, the focused child of container.
+      
+      This function emits the GtkContainer::set_focus_child signal of
+      container. Implementations of #GtkContainer can override the
+      default behaviour by overriding the class closure of this signal.
+      
+      This is function is mostly meant to be used by widgets. Applications can use
+      [gid.gtk4.widget.Widget.grabFocus] to manually set the focus to a specific widget.
+  
+      Params:
+        child = a #GtkWidget, or null
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetFocusChild` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSetFocusChild(gid.gtk3.widget.Widget child = null)
+  {
+    auto _klass = cast(GtkContainerClass*)_vfuncClass;
+    if (!_klass.setFocusChild)
+      return;
+
+    _klass.setFocusChild(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -424,6 +689,7 @@ class Container : gid.gtk3.widget.Widget
   {
     extern(C) void _callbackCallback(GtkWidget* widget, void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk3.types.Callback*)data;
 
       try
@@ -460,6 +726,7 @@ class Container : gid.gtk3.widget.Widget
   {
     extern(C) void _callbackCallback(GtkWidget* widget, void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk3.types.Callback*)data;
 
       try
@@ -832,6 +1099,7 @@ class Container : gid.gtk3.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -879,6 +1147,7 @@ class Container : gid.gtk3.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -926,6 +1195,7 @@ class Container : gid.gtk3.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -976,6 +1246,7 @@ class Container : gid.gtk3.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -998,6 +1269,325 @@ class Container : gid.gtk3.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("set-focus-child", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Container
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.container.Container), T.stringof ~ " is not derived from gid.gtk3.container.Container");
+
+    gid.gtk3.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAdd", true)[0]) == gid.gtk3.container.Container))
+      _installVfunc(klass, "add");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCheckResize", true)[0]) == gid.gtk3.container.Container))
+      _installVfunc(klass, "check_resize");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChildType", true)[0]) == gid.gtk3.container.Container))
+      _installVfunc(klass, "child_type");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCompositeName", true)[0]) == gid.gtk3.container.Container))
+      _installVfunc(klass, "composite_name");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncForall", true)[0]) == gid.gtk3.container.Container))
+      static assert(0, "Overriding gid.gtk3.container.Container.vfuncForall is not supported: parameter 'callback' of kind 'Callback' is not supported");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetChildProperty", true)[0]) == gid.gtk3.container.Container))
+      _installVfunc(klass, "get_child_property");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetPathForChild", true)[0]) == gid.gtk3.container.Container))
+      _installVfunc(klass, "get_path_for_child");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRemove", true)[0]) == gid.gtk3.container.Container))
+      _installVfunc(klass, "remove");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetChildProperty", true)[0]) == gid.gtk3.container.Container))
+      _installVfunc(klass, "set_child_property");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetFocusChild", true)[0]) == gid.gtk3.container.Container))
+      _installVfunc(klass, "set_focus_child");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkContainerClass*)klass;
+
+    switch (vfunc)
+    {
+      case "add":
+      {
+        static extern(C) void _vfuncAddTramp(GtkContainer* container, GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.container.Container)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)container);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkContainerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)container);
+            if (_klass.add)
+              return (cast(typeof(&_vfuncAddTramp))_klass.add)(container, widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncAdd(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)widget, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.container.Container.vfuncAdd");
+          }
+        }
+
+        _klass.add = cast(typeof(_klass.add))&_vfuncAddTramp;
+        break;
+      }
+      case "check_resize":
+      {
+        static extern(C) void _vfuncCheckResizeTramp(GtkContainer* container) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.container.Container)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)container);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkContainerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)container);
+            if (_klass.checkResize)
+              return (cast(typeof(&_vfuncCheckResizeTramp))_klass.checkResize)(container);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncCheckResize();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.container.Container.vfuncCheckResize");
+          }
+        }
+
+        _klass.checkResize = cast(typeof(_klass.checkResize))&_vfuncCheckResizeTramp;
+        break;
+      }
+      case "child_type":
+      {
+        static extern(C) GType _vfuncChildTypeTramp(GtkContainer* container) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.container.Container)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)container);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkContainerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)container);
+            if (_klass.childType)
+              return (cast(typeof(&_vfuncChildTypeTramp))_klass.childType)(container);
+            return typeof(return).init;
+          }
+
+          gid.gobject2.types.GType _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncChildType();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.container.Container.vfuncChildType");
+          }
+          auto _retval = cast(GType)_dretval;
+
+          return _retval;
+        }
+
+        _klass.childType = cast(typeof(_klass.childType))&_vfuncChildTypeTramp;
+        break;
+      }
+      case "composite_name":
+      {
+        static extern(C) char* _vfuncCompositeNameTramp(GtkContainer* container, GtkWidget* child) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.container.Container)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)container);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkContainerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)container);
+            if (_klass.compositeName)
+              return (cast(typeof(&_vfuncCompositeNameTramp))_klass.compositeName)(container, child);
+            return typeof(return).init;
+          }
+
+          string _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCompositeName(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)child, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.container.Container.vfuncCompositeName");
+          }
+          auto _retval = toCString!(Yes.Malloc, No.Nullable)(_dretval);
+
+          return _retval;
+        }
+
+        _klass.compositeName = cast(typeof(_klass.compositeName))&_vfuncCompositeNameTramp;
+        break;
+      }
+      case "get_child_property":
+      {
+        static extern(C) void _vfuncGetChildPropertyTramp(GtkContainer* container, GtkWidget* child, uint propertyId, GValue* value, GParamSpec* pspec) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.container.Container)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)container);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkContainerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)container);
+            if (_klass.getChildProperty)
+              return (cast(typeof(&_vfuncGetChildPropertyTramp))_klass.getChildProperty)(container, child, propertyId, value, pspec);
+            return;
+          }
+
+          auto _value = value ? new gid.gobject2.value.Value(cast(void*)value, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncGetChildProperty(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)child, No.Take), propertyId, _value, pspec ? new gid.gobject2.param_spec.ParamSpec(cast(void*)pspec, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.container.Container.vfuncGetChildProperty");
+          }
+          if (_value)
+            _value._cUnborrow;
+
+        }
+
+        _klass.getChildProperty = cast(typeof(_klass.getChildProperty))&_vfuncGetChildPropertyTramp;
+        break;
+      }
+      case "get_path_for_child":
+      {
+        static extern(C) GtkWidgetPath* _vfuncGetPathForChildTramp(GtkContainer* container, GtkWidget* child) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.container.Container)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)container);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkContainerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)container);
+            if (_klass.getPathForChild)
+              return (cast(typeof(&_vfuncGetPathForChildTramp))_klass.getPathForChild)(container, child);
+            return typeof(return).init;
+          }
+
+          gid.gtk3.widget_path.WidgetPath _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetPathForChild(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)child, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.container.Container.vfuncGetPathForChild");
+          }
+          auto _retval = _dretval ? cast(GtkWidgetPath*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getPathForChild = cast(typeof(_klass.getPathForChild))&_vfuncGetPathForChildTramp;
+        break;
+      }
+      case "remove":
+      {
+        static extern(C) void _vfuncRemoveTramp(GtkContainer* container, GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.container.Container)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)container);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkContainerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)container);
+            if (_klass.remove)
+              return (cast(typeof(&_vfuncRemoveTramp))_klass.remove)(container, widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRemove(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)widget, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.container.Container.vfuncRemove");
+          }
+        }
+
+        _klass.remove = cast(typeof(_klass.remove))&_vfuncRemoveTramp;
+        break;
+      }
+      case "set_child_property":
+      {
+        static extern(C) void _vfuncSetChildPropertyTramp(GtkContainer* container, GtkWidget* child, uint propertyId, const(GValue)* value, GParamSpec* pspec) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.container.Container)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)container);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkContainerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)container);
+            if (_klass.setChildProperty)
+              return (cast(typeof(&_vfuncSetChildPropertyTramp))_klass.setChildProperty)(container, child, propertyId, value, pspec);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSetChildProperty(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)child, No.Take), propertyId, value ? new gid.gobject2.value.Value(cast(void*)value, No.Take) : null, pspec ? new gid.gobject2.param_spec.ParamSpec(cast(void*)pspec, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.container.Container.vfuncSetChildProperty");
+          }
+        }
+
+        _klass.setChildProperty = cast(typeof(_klass.setChildProperty))&_vfuncSetChildPropertyTramp;
+        break;
+      }
+      case "set_focus_child":
+      {
+        static extern(C) void _vfuncSetFocusChildTramp(GtkContainer* container, GtkWidget* child) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.container.Container)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)container);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkContainerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)container);
+            if (_klass.setFocusChild)
+              return (cast(typeof(&_vfuncSetFocusChildTramp))_klass.setFocusChild)(container, child);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSetFocusChild(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)child, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.container.Container.vfuncSetFocusChild");
+          }
+        }
+
+        _klass.setFocusChild = cast(typeof(_klass.setFocusChild))&_vfuncSetFocusChildTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

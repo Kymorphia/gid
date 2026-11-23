@@ -183,9 +183,16 @@ class SingleSelection : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.List
   */
   this(gid.gio2.list_model.ListModel model = null) nothrow
   {
-    GtkSingleSelection* _cretval;
-    _cretval = gtk_single_selection_new(model ? cast(GListModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(Yes.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, model !is null), Yes.Take);
+    }
+    else
+    {
+      GtkSingleSelection* _cretval;
+      _cretval = gtk_single_selection_new(model ? cast(GListModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(Yes.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

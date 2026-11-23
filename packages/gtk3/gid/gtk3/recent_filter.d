@@ -122,9 +122,16 @@ class RecentFilter : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk3.b
   */
   this() nothrow
   {
-    GtkRecentFilter* _cretval;
-    _cretval = gtk_recent_filter_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkRecentFilter* _cretval;
+      _cretval = gtk_recent_filter_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -169,6 +176,7 @@ class RecentFilter : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk3.b
   {
     extern(C) gboolean _funcCallback(const(GtkRecentFilterInfo)* filterInfo, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gtk3.types.RecentFilterFunc*)userData;
       auto _filterInfo = filterInfo ? new gid.gtk3.recent_filter_info.RecentFilterInfo(cast(void*)filterInfo, null) : null;

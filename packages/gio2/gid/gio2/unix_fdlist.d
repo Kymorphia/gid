@@ -75,9 +75,16 @@ class UnixFDList : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GUnixFDList* _cretval;
-    _cretval = g_unix_fd_list_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GUnixFDList* _cretval;
+      _cretval = g_unix_fd_list_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

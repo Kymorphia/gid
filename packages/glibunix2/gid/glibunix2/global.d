@@ -65,6 +65,7 @@ uint fdAddFull(int priority, int fd, gid.glib2.types.IOCondition condition, gid.
 {
   extern(C) gboolean _function_Callback(int fd, GIOCondition condition, void* userData) nothrow
   {
+    gidAttachThread();
     bool _dretval;
     auto _dlg = cast(gid.glibunix2.types.FDSourceFunc*)userData;
 
@@ -260,6 +261,7 @@ uint signalAdd(int priority, int signum, gid.glib2.types.SourceFunc handler) not
 {
   extern(C) gboolean _handlerCallback(void* userData) nothrow
   {
+    gidAttachThread();
     bool _dretval;
     auto _dlg = cast(gid.glib2.types.SourceFunc*)userData;
 

@@ -71,9 +71,16 @@ class DBusMessage : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GDBusMessage* _cretval;
-    _cretval = g_dbus_message_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GDBusMessage* _cretval;
+      _cretval = g_dbus_message_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

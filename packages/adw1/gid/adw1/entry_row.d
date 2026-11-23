@@ -290,9 +290,16 @@ class EntryRow : gid.adw1.preferences_row.PreferencesRow, gid.gtk4.editable.Edit
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = adw_entry_row_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = adw_entry_row_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -553,6 +560,7 @@ class EntryRow : gid.adw1.preferences_row.PreferencesRow, gid.gtk4.editable.Edit
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -597,6 +605,7 @@ class EntryRow : gid.adw1.preferences_row.PreferencesRow, gid.gtk4.editable.Edit
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

@@ -13,6 +13,7 @@ import gid.gtk3.buildable;
 import gid.gtk3.buildable_mixin;
 import gid.gtk3.c.functions;
 import gid.gtk3.c.types;
+import gid.gtk3.container;
 import gid.gtk3.dialog;
 import gid.gtk3.file_chooser;
 import gid.gtk3.file_chooser_mixin;
@@ -63,6 +64,15 @@ class FileChooserButton : gid.gtk3.box.Box, gid.gtk3.file_chooser.FileChooser
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
   }
 
   /** */
@@ -149,10 +159,17 @@ class FileChooserButton : gid.gtk3.box.Box, gid.gtk3.file_chooser.FileChooser
   */
   this(string title, gid.gtk3.types.FileChooserAction action) nothrow
   {
-    GtkWidget* _cretval;
-    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
-    _cretval = gtk_file_chooser_button_new(_title, action);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
+      _cretval = gtk_file_chooser_button_new(_title, action);
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -177,6 +194,22 @@ class FileChooserButton : gid.gtk3.box.Box, gid.gtk3.file_chooser.FileChooser
     _cretval = gtk_file_chooser_button_new_with_dialog(dialog ? cast(GtkWidget*)dialog._cPtr(No.Dup) : null);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.file_chooser_button.FileChooserButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+
+  /**
+      Signal emitted when the user selects a file.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncFileSet` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncFileSet()
+  {
+    auto _klass = cast(GtkFileChooserButtonClass*)_vfuncClass;
+    if (!_klass.fileSet)
+      return;
+
+    _klass.fileSet(cast(GtkFileChooserButton*)this._cPtr);
   }
 
   /**
@@ -283,6 +316,7 @@ class FileChooserButton : gid.gtk3.box.Box, gid.gtk3.file_chooser.FileChooser
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -302,6 +336,62 @@ class FileChooserButton : gid.gtk3.box.Box, gid.gtk3.file_chooser.FileChooser
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("file-set", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from FileChooserButton
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.file_chooser_button.FileChooserButton), T.stringof ~ " is not derived from gid.gtk3.file_chooser_button.FileChooserButton");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFileSet", true)[0]) == gid.gtk3.file_chooser_button.FileChooserButton))
+      _installVfunc(klass, "file_set");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkFileChooserButtonClass*)klass;
+
+    switch (vfunc)
+    {
+      case "file_set":
+      {
+        static extern(C) void _vfuncFileSetTramp(GtkFileChooserButton* fc) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.file_chooser_button.FileChooserButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fc);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkFileChooserButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fc);
+            if (_klass.fileSet)
+              return (cast(typeof(&_vfuncFileSetTramp))_klass.fileSet)(fc);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncFileSet();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.file_chooser_button.FileChooserButton.vfuncFileSet");
+          }
+        }
+
+        _klass.fileSet = cast(typeof(_klass.fileSet))&_vfuncFileSetTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

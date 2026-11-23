@@ -35,6 +35,15 @@ class FileMonitor : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -95,6 +104,35 @@ class FileMonitor : gid.gobject2.object.ObjectWrap
   @property void rateLimit(int propval) nothrow
   {
     setRateLimit(propval);
+  }
+
+  /**
+      Cancels a file monitor.
+      Returns: always true
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCancel` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncCancel()
+  {
+    auto _klass = cast(GFileMonitorClass*)_vfuncClass;
+    if (!_klass.cancel)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.cancel(cast(GFileMonitor*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncChanged(gid.gio2.file.File file, gid.gio2.file.File otherFile, gid.gio2.types.FileMonitorEvent eventType)
+  {
+    auto _klass = cast(GFileMonitorClass*)_vfuncClass;
+    if (!_klass.changed)
+      return;
+
+    _klass.changed(cast(GFileMonitor*)this._cPtr, file ? cast(GFile*)(cast(gid.gobject2.object.ObjectWrap)file)._cPtr(No.Dup) : null, otherFile ? cast(GFile*)(cast(gid.gobject2.object.ObjectWrap)otherFile)._cPtr(No.Dup) : null, eventType);
   }
 
   /**
@@ -210,6 +248,7 @@ class FileMonitor : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -238,6 +277,97 @@ class FileMonitor : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from FileMonitor
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.file_monitor.FileMonitor), T.stringof ~ " is not derived from gid.gio2.file_monitor.FileMonitor");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCancel", true)[0]) == gid.gio2.file_monitor.FileMonitor))
+      _installVfunc(klass, "cancel");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChanged", true)[0]) == gid.gio2.file_monitor.FileMonitor))
+      _installVfunc(klass, "changed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GFileMonitorClass*)klass;
+
+    switch (vfunc)
+    {
+      case "cancel":
+      {
+        static extern(C) gboolean _vfuncCancelTramp(GFileMonitor* monitor) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.file_monitor.FileMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)monitor);
+          if (!_obj)
+          {
+            auto _klass = cast(GFileMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)monitor);
+            if (_klass.cancel)
+              return (cast(typeof(&_vfuncCancelTramp))_klass.cancel)(monitor);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCancel();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.file_monitor.FileMonitor.vfuncCancel");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.cancel = cast(typeof(_klass.cancel))&_vfuncCancelTramp;
+        break;
+      }
+      case "changed":
+      {
+        static extern(C) void _vfuncChangedTramp(GFileMonitor* monitor, GFile* file, GFile* otherFile, GFileMonitorEvent eventType) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.file_monitor.FileMonitor)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)monitor);
+          if (!_obj)
+          {
+            auto _klass = cast(GFileMonitorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)monitor);
+            if (_klass.changed)
+              return (cast(typeof(&_vfuncChangedTramp))_klass.changed)(monitor, file, otherFile, eventType);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncChanged(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.file.File)(cast(void*)file, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.file.File)(cast(void*)otherFile, No.Take), eventType);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.file_monitor.FileMonitor.vfuncChanged");
+          }
+        }
+
+        _klass.changed = cast(typeof(_klass.changed))&_vfuncChangedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

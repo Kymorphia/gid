@@ -103,9 +103,42 @@ class SocketListener : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GSocketListener* _cretval;
-    _cretval = g_socket_listener_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GSocketListener* _cretval;
+      _cretval = g_socket_listener_new();
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /**
+      virtual method called when the set of socket listened to changes
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncChanged()
+  {
+    auto _klass = cast(GSocketListenerClass*)_vfuncClass;
+    if (!_klass.changed)
+      return;
+
+    _klass.changed(cast(GSocketListener*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncEvent(gid.gio2.types.SocketListenerEvent event, gid.gio2.socket.Socket socket)
+  {
+    auto _klass = cast(GSocketListenerClass*)_vfuncClass;
+    if (!_klass.event)
+      return;
+
+    _klass.event(cast(GSocketListener*)this._cPtr, event, socket ? cast(GSocket*)socket._cPtr(No.Dup) : null);
   }
 
   /**
@@ -155,6 +188,7 @@ class SocketListener : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -244,6 +278,7 @@ class SocketListener : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -491,6 +526,7 @@ class SocketListener : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -516,6 +552,92 @@ class SocketListener : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("event", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from SocketListener
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.socket_listener.SocketListener), T.stringof ~ " is not derived from gid.gio2.socket_listener.SocketListener");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChanged", true)[0]) == gid.gio2.socket_listener.SocketListener))
+      _installVfunc(klass, "changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEvent", true)[0]) == gid.gio2.socket_listener.SocketListener))
+      _installVfunc(klass, "event");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GSocketListenerClass*)klass;
+
+    switch (vfunc)
+    {
+      case "changed":
+      {
+        static extern(C) void _vfuncChangedTramp(GSocketListener* listener) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.socket_listener.SocketListener)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)listener);
+          if (!_obj)
+          {
+            auto _klass = cast(GSocketListenerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)listener);
+            if (_klass.changed)
+              return (cast(typeof(&_vfuncChangedTramp))_klass.changed)(listener);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.socket_listener.SocketListener.vfuncChanged");
+          }
+        }
+
+        _klass.changed = cast(typeof(_klass.changed))&_vfuncChangedTramp;
+        break;
+      }
+      case "event":
+      {
+        static extern(C) void _vfuncEventTramp(GSocketListener* listener, GSocketListenerEvent event, GSocket* socket) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.socket_listener.SocketListener)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)listener);
+          if (!_obj)
+          {
+            auto _klass = cast(GSocketListenerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)listener);
+            if (_klass.event)
+              return (cast(typeof(&_vfuncEventTramp))_klass.event)(listener, event, socket);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncEvent(event, gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.socket.Socket)(cast(void*)socket, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.socket_listener.SocketListener.vfuncEvent");
+          }
+        }
+
+        _klass.event = cast(typeof(_klass.event))&_vfuncEventTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

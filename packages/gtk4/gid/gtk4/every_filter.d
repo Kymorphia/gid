@@ -73,9 +73,16 @@ class EveryFilter : gid.gtk4.multi_filter.MultiFilter
   */
   this() nothrow
   {
-    GtkEveryFilter* _cretval;
-    _cretval = gtk_every_filter_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkEveryFilter* _cretval;
+      _cretval = gtk_every_filter_new();
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

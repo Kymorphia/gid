@@ -288,9 +288,26 @@ class SocketClient : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GSocketClient* _cretval;
-    _cretval = g_socket_client_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GSocketClient* _cretval;
+      _cretval = g_socket_client_new();
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncEvent(gid.gio2.types.SocketClientEvent event, gid.gio2.socket_connectable.SocketConnectable connectable, gid.gio2.iostream.IOStream connection)
+  {
+    auto _klass = cast(GSocketClientClass*)_vfuncClass;
+    if (!_klass.event)
+      return;
+
+    _klass.event(cast(GSocketClient*)this._cPtr, event, connectable ? cast(GSocketConnectable*)(cast(gid.gobject2.object.ObjectWrap)connectable)._cPtr(No.Dup) : null, connection ? cast(GIOStream*)connection._cPtr(No.Dup) : null);
   }
 
   /**
@@ -385,6 +402,7 @@ class SocketClient : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -489,6 +507,7 @@ class SocketClient : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -576,6 +595,7 @@ class SocketClient : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -673,6 +693,7 @@ class SocketClient : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -1079,6 +1100,7 @@ class SocketClient : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1107,6 +1129,62 @@ class SocketClient : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("event", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from SocketClient
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.socket_client.SocketClient), T.stringof ~ " is not derived from gid.gio2.socket_client.SocketClient");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEvent", true)[0]) == gid.gio2.socket_client.SocketClient))
+      _installVfunc(klass, "event");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GSocketClientClass*)klass;
+
+    switch (vfunc)
+    {
+      case "event":
+      {
+        static extern(C) void _vfuncEventTramp(GSocketClient* client, GSocketClientEvent event, GSocketConnectable* connectable, GIOStream* connection) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.socket_client.SocketClient)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)client);
+          if (!_obj)
+          {
+            auto _klass = cast(GSocketClientClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)client);
+            if (_klass.event)
+              return (cast(typeof(&_vfuncEventTramp))_klass.event)(client, event, connectable, connection);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncEvent(event, gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.socket_connectable.SocketConnectable)(cast(void*)connectable, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.iostream.IOStream)(cast(void*)connection, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.socket_client.SocketClient.vfuncEvent");
+          }
+        }
+
+        _klass.event = cast(typeof(_klass.event))&_vfuncEventTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

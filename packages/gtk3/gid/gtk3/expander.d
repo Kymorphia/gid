@@ -13,6 +13,7 @@ import gid.gtk3.buildable;
 import gid.gtk3.buildable_mixin;
 import gid.gtk3.c.functions;
 import gid.gtk3.c.types;
+import gid.gtk3.container;
 import gid.gtk3.types;
 import gid.gtk3.widget;
 
@@ -283,10 +284,17 @@ class Expander : gid.gtk3.bin.Bin
   */
   this(string label = null) nothrow
   {
-    GtkWidget* _cretval;
-    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gtk_expander_new(_label);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, label !is null), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gtk_expander_new(_label);
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -309,6 +317,22 @@ class Expander : gid.gtk3.bin.Bin
     _cretval = gtk_expander_new_with_mnemonic(_label);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.expander.Expander)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+
+  /**
+      Keybinding signal is emitted when the user hits the Enter key.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncActivate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncActivate()
+  {
+    auto _klass = cast(GtkExpanderClass*)_vfuncClass;
+    if (!_klass.activate)
+      return;
+
+    _klass.activate(cast(GtkExpander*)this._cPtr);
   }
 
   /**
@@ -554,6 +578,7 @@ class Expander : gid.gtk3.bin.Bin
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -573,6 +598,62 @@ class Expander : gid.gtk3.bin.Bin
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Expander
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.expander.Expander), T.stringof ~ " is not derived from gid.gtk3.expander.Expander");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivate", true)[0]) == gid.gtk3.expander.Expander))
+      _installVfunc(klass, "activate");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkExpanderClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate":
+      {
+        static extern(C) void _vfuncActivateTramp(GtkExpander* expander) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.expander.Expander)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)expander);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkExpanderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)expander);
+            if (_klass.activate)
+              return (cast(typeof(&_vfuncActivateTramp))_klass.activate)(expander);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncActivate();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.expander.Expander.vfuncActivate");
+          }
+        }
+
+        _klass.activate = cast(typeof(_klass.activate))&_vfuncActivateTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

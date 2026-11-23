@@ -1831,10 +1831,17 @@ class TextTag : gid.gobject2.object.ObjectWrap
   */
   this(string name = null) nothrow
   {
-    GtkTextTag* _cretval;
-    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gtk_text_tag_new(_name);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, name !is null), Yes.Take);
+    }
+    else
+    {
+      GtkTextTag* _cretval;
+      const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gtk_text_tag_new(_name);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

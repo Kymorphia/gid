@@ -26,6 +26,15 @@ class EncodingTarget : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -85,14 +94,21 @@ class EncodingTarget : gid.gobject2.object.ObjectWrap
   */
   this(string name, string category, string description, gid.gstpbutils1.encoding_profile.EncodingProfile[] profiles) nothrow
   {
-    GstEncodingTarget* _cretval;
-    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
-    const(char)* _category = category.toCString!(No.Malloc, No.Nullable);
-    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
-    auto _profiles = gListFromD!(gid.gstpbutils1.encoding_profile.EncodingProfile)(profiles);
-    scope(exit) containerFree!(GList*, gid.gstpbutils1.encoding_profile.EncodingProfile, GidOwnership.None)(_profiles);
-    _cretval = gst_encoding_target_new(_name, _category, _description, _profiles);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GstEncodingTarget* _cretval;
+      const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+      const(char)* _category = category.toCString!(No.Malloc, No.Nullable);
+      const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
+      auto _profiles = gListFromD!(gid.gstpbutils1.encoding_profile.EncodingProfile)(profiles);
+      scope(exit) containerFree!(GList*, gid.gstpbutils1.encoding_profile.EncodingProfile, GidOwnership.None)(_profiles);
+      _cretval = gst_encoding_target_new(_name, _category, _description, _profiles);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

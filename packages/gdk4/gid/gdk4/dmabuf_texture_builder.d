@@ -324,9 +324,16 @@ class DmabufTextureBuilder : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GdkDmabufTextureBuilder* _cretval;
-    _cretval = gdk_dmabuf_texture_builder_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GdkDmabufTextureBuilder* _cretval;
+      _cretval = gdk_dmabuf_texture_builder_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -358,6 +365,7 @@ class DmabufTextureBuilder : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _destroyCallback(void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.glib2.types.DestroyNotify*)data;
 

@@ -157,9 +157,16 @@ class StringFilter : gid.gtk4.filter.Filter
   */
   this(gid.gtk4.expression.Expression expression = null) nothrow
   {
-    GtkStringFilter* _cretval;
-    _cretval = gtk_string_filter_new(expression ? cast(GtkExpression*)expression._cPtr(Yes.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, expression !is null), Yes.Take);
+    }
+    else
+    {
+      GtkStringFilter* _cretval;
+      _cretval = gtk_string_filter_new(expression ? cast(GtkExpression*)expression._cPtr(Yes.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

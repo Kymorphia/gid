@@ -104,6 +104,7 @@ void contextSetShapeRenderer(gid.pango1.context.Context context, gid.pangocairo1
 {
   extern(C) void _funcCallback(cairo_t* cr, PangoAttrShape* attr, gboolean doPath, void* data) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.pangocairo1.types.ShapeRendererFunc*)data;
     auto _cr = cr ? new gid.cairo1.context.Context(cast(void*)cr, Yes.Take)._cBorrow : null;
     auto _attr = attr ? new gid.pango1.attr_shape.AttrShape(cast(void*)attr, null) : null;

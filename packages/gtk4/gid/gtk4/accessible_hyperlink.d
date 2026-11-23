@@ -28,6 +28,15 @@ class AccessibleHyperlink : gid.gobject2.object.ObjectWrap, gid.gtk4.accessible.
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -79,10 +88,17 @@ class AccessibleHyperlink : gid.gobject2.object.ObjectWrap, gid.gtk4.accessible.
   */
   this(gid.gtk4.accessible_hypertext.AccessibleHypertext parent, uint index, string uri, gid.gtk4.types.AccessibleTextRange bounds) nothrow
   {
-    GtkAccessibleHyperlink* _cretval;
-    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
-    _cretval = gtk_accessible_hyperlink_new(parent ? cast(GtkAccessibleHypertext*)(cast(gid.gobject2.object.ObjectWrap)parent)._cPtr(No.Dup) : null, index, _uri, cast(GtkAccessibleTextRange*)&bounds);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkAccessibleHyperlink* _cretval;
+      const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
+      _cretval = gtk_accessible_hyperlink_new(parent ? cast(GtkAccessibleHypertext*)(cast(gid.gobject2.object.ObjectWrap)parent)._cPtr(No.Dup) : null, index, _uri, cast(GtkAccessibleTextRange*)&bounds);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

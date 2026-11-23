@@ -91,9 +91,16 @@ class MountOperation : gid.gio2.mount_operation.MountOperation
   */
   this(gid.gtk3.window.Window parent = null) nothrow
   {
-    GMountOperation* _cretval;
-    _cretval = gtk_mount_operation_new(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, parent !is null), Yes.Take);
+    }
+    else
+    {
+      GMountOperation* _cretval;
+      _cretval = gtk_mount_operation_new(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

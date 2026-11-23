@@ -95,11 +95,18 @@ class RadioToolButton : gid.gtk3.toggle_tool_button.ToggleToolButton
   */
   this(gid.gtk3.radio_button.RadioButton[] group = null) nothrow
   {
-    GtkToolItem* _cretval;
-    auto _group = gSListFromD!(gid.gtk3.radio_button.RadioButton)(group);
-    scope(exit) containerFree!(GSList*, gid.gtk3.radio_button.RadioButton, GidOwnership.None)(_group);
-    _cretval = gtk_radio_tool_button_new(_group);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, group !is null), Yes.Take);
+    }
+    else
+    {
+      GtkToolItem* _cretval;
+      auto _group = gSListFromD!(gid.gtk3.radio_button.RadioButton)(group);
+      scope(exit) containerFree!(GSList*, gid.gtk3.radio_button.RadioButton, GidOwnership.None)(_group);
+      _cretval = gtk_radio_tool_button_new(_group);
+      this(_cretval, No.Take);
+    }
   }
 
   /**

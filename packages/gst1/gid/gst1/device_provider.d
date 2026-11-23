@@ -36,6 +36,15 @@ class DeviceProvider : gid.gst1.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -88,6 +97,54 @@ class DeviceProvider : gid.gst1.object.ObjectWrap
     const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)gst_device_provider_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, _name, rank, type);
     return _retval;
+  }
+
+  /**
+      Starts providering the devices. This will cause #GST_MESSAGE_DEVICE_ADDED
+      and #GST_MESSAGE_DEVICE_REMOVED messages to be posted on the provider's bus
+      when devices are added or removed from the system.
+      
+      Since the #GstDeviceProvider is a singleton,
+      [gid.gst1.device_provider.DeviceProvider.start] may already have been called by another
+      user of the object, [gid.gst1.device_provider.DeviceProvider.stop] needs to be called the same
+      number of times.
+      
+      After this function has been called, [gid.gst1.device_provider.DeviceProvider.getDevices] will
+      return the same objects that have been received from the
+      #GST_MESSAGE_DEVICE_ADDED messages and will no longer probe.
+      Returns: true if the device providering could be started
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStart` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncStart()
+  {
+    auto _klass = cast(GstDeviceProviderClass*)_vfuncClass;
+    if (!_klass.start)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.start(cast(GstDeviceProvider*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Decreases the use-count by one. If the use count reaches zero, this
+      #GstDeviceProvider will stop providering the devices. This needs to be
+      called the same number of times that [gid.gst1.device_provider.DeviceProvider.start] was called.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStop` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncStop()
+  {
+    auto _klass = cast(GstDeviceProviderClass*)_vfuncClass;
+    if (!_klass.stop)
+      return;
+
+    _klass.stop(cast(GstDeviceProvider*)this._cPtr);
   }
 
   /** */
@@ -330,6 +387,7 @@ class DeviceProvider : gid.gst1.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -380,6 +438,7 @@ class DeviceProvider : gid.gst1.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -402,6 +461,97 @@ class DeviceProvider : gid.gst1.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("provider-unhidden", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from DeviceProvider
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gst1.device_provider.DeviceProvider), T.stringof ~ " is not derived from gid.gst1.device_provider.DeviceProvider");
+
+    gid.gst1.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStart", true)[0]) == gid.gst1.device_provider.DeviceProvider))
+      _installVfunc(klass, "start");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStop", true)[0]) == gid.gst1.device_provider.DeviceProvider))
+      _installVfunc(klass, "stop");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstDeviceProviderClass*)klass;
+
+    switch (vfunc)
+    {
+      case "start":
+      {
+        static extern(C) gboolean _vfuncStartTramp(GstDeviceProvider* provider) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.device_provider.DeviceProvider)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)provider);
+          if (!_obj)
+          {
+            auto _klass = cast(GstDeviceProviderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)provider);
+            if (_klass.start)
+              return (cast(typeof(&_vfuncStartTramp))_klass.start)(provider);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncStart();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.device_provider.DeviceProvider.vfuncStart");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.start = cast(typeof(_klass.start))&_vfuncStartTramp;
+        break;
+      }
+      case "stop":
+      {
+        static extern(C) void _vfuncStopTramp(GstDeviceProvider* provider) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.device_provider.DeviceProvider)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)provider);
+          if (!_obj)
+          {
+            auto _klass = cast(GstDeviceProviderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)provider);
+            if (_klass.stop)
+              return (cast(typeof(&_vfuncStopTramp))_klass.stop)(provider);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncStop();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.device_provider.DeviceProvider.vfuncStop");
+          }
+        }
+
+        _klass.stop = cast(typeof(_klass.stop))&_vfuncStopTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

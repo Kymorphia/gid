@@ -24,6 +24,15 @@ class CallbackAction : gid.gtk4.shortcut_action.ShortcutAction
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -69,29 +78,37 @@ class CallbackAction : gid.gtk4.shortcut_action.ShortcutAction
   */
   this(gid.gtk4.types.ShortcutFunc callback) nothrow
   {
-    extern(C) gboolean _callbackCallback(GtkWidget* widget, GVariant* args, void* userData) nothrow
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
     {
-      bool _dretval;
-      auto _dlg = cast(gid.gtk4.types.ShortcutFunc*)userData;
-
-      try
-      {
-        _dretval = (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(void*)widget, No.Take), args ? new gid.glib2.variant.Variant(cast(void*)args, No.Take) : null);
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.types.ShortcutFunc");
-      }
-      auto _retval = cast(gboolean)_dretval;
-
-      return _retval;
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }
-    auto _callbackCB = callback ? &_callbackCallback : null;
-    GtkShortcutAction* _cretval;
-    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
-    _cretval = gtk_callback_action_new(_callbackCB, _callback, _callbackDestroyCB);
-    this(_cretval, Yes.Take);
+    else
+    {
+      extern(C) gboolean _callbackCallback(GtkWidget* widget, GVariant* args, void* userData) nothrow
+      {
+        gidAttachThread();
+        bool _dretval;
+        auto _dlg = cast(gid.gtk4.types.ShortcutFunc*)userData;
+
+        try
+        {
+          _dretval = (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(void*)widget, No.Take), args ? new gid.glib2.variant.Variant(cast(void*)args, No.Take) : null);
+        }
+        catch (Exception e)
+        {
+          gidInvokeCallbackExceptionHandler(e, "gid.gtk4.types.ShortcutFunc");
+        }
+        auto _retval = cast(gboolean)_dretval;
+
+        return _retval;
+      }
+      auto _callbackCB = callback ? &_callbackCallback : null;
+      GtkShortcutAction* _cretval;
+      auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+      GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
+      _cretval = gtk_callback_action_new(_callbackCB, _callback, _callbackDestroyCB);
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

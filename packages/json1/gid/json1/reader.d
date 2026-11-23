@@ -162,9 +162,16 @@ class Reader : gid.gobject2.object.ObjectWrap
   */
   this(gid.json1.node.Node node = null) nothrow
   {
-    JsonReader* _cretval;
-    _cretval = json_reader_new(node ? cast(JsonNode*)node._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, node !is null), Yes.Take);
+    }
+    else
+    {
+      JsonReader* _cretval;
+      _cretval = json_reader_new(node ? cast(JsonNode*)node._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

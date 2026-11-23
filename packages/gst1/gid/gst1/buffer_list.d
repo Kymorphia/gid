@@ -102,6 +102,7 @@ class BufferList : gid.gobject2.boxed.BoxedWrap!(gst_buffer_list_get_type)
   {
     extern(C) gboolean _funcCallback(GstBuffer** buffer, uint idx, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.BufferListFunc*)userData;
       auto _buffer = *buffer ? new gid.gst1.buffer.Buffer(cast(void*)*buffer, Yes.Take) : null;

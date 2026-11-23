@@ -30,6 +30,7 @@ interface CompletionProposal : GidWrap
     return cast(void function())gtk_source_completion_proposal_get_type != &gidSymbolNotFound ? gtk_source_completion_proposal_get_type() : cast(GType)0;
   }
 
+
   /**
       Gets the typed-text for the proposal, if supported by the implementation.
       

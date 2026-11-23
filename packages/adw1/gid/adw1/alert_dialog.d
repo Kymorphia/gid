@@ -443,11 +443,29 @@ class AlertDialog : gid.adw1.dialog.Dialog
   */
   this(string heading = null, string body_ = null) nothrow
   {
-    AdwDialog* _cretval;
-    const(char)* _heading = heading.toCString!(No.Malloc, Yes.Nullable);
-    const(char)* _body_ = body_.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = adw_alert_dialog_new(_heading, _body_);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, heading !is null || body_ !is null), Yes.Take);
+    }
+    else
+    {
+      AdwDialog* _cretval;
+      const(char)* _heading = heading.toCString!(No.Malloc, Yes.Nullable);
+      const(char)* _body_ = body_.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = adw_alert_dialog_new(_heading, _body_);
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncResponse(string response)
+  {
+    auto _klass = cast(AdwAlertDialogClass*)_vfuncClass;
+    if (!_klass.response)
+      return;
+
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
+    _klass.response(cast(AdwAlertDialog*)this._cPtr, _response);
   }
 
   /**
@@ -494,6 +512,7 @@ class AlertDialog : gid.adw1.dialog.Dialog
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -930,6 +949,7 @@ class AlertDialog : gid.adw1.dialog.Dialog
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -952,6 +972,64 @@ class AlertDialog : gid.adw1.dialog.Dialog
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("response"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from AlertDialog
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.adw1.alert_dialog.AlertDialog), T.stringof ~ " is not derived from gid.adw1.alert_dialog.AlertDialog");
+
+    gid.adw1.dialog.Dialog._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncResponse", true)[0]) == gid.adw1.alert_dialog.AlertDialog))
+      _installVfunc(klass, "response");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(AdwAlertDialogClass*)klass;
+
+    switch (vfunc)
+    {
+      case "response":
+      {
+        static extern(C) void _vfuncResponseTramp(AdwAlertDialog* self, const(char)* response) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.adw1.alert_dialog.AlertDialog)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(AdwAlertDialogClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.response)
+              return (cast(typeof(&_vfuncResponseTramp))_klass.response)(self, response);
+            return;
+          }
+
+          string _response = response.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncResponse(_response);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.adw1.alert_dialog.AlertDialog.vfuncResponse");
+          }
+        }
+
+        _klass.response = cast(typeof(_klass.response))&_vfuncResponseTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

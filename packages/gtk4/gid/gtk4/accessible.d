@@ -71,6 +71,13 @@ interface Accessible : GidWrap
   */
   @property void accessibleRole(gid.gtk4.types.AccessibleRole propval) nothrow;
 
+
+
+
+
+
+
+
   /**
       Requests the user's screen reader to announce the given message.
       

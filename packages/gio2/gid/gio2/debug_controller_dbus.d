@@ -139,6 +139,15 @@ class DebugControllerDBus : gid.gobject2.object.ObjectWrap, gid.gio2.debug_contr
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -207,12 +216,41 @@ class DebugControllerDBus : gid.gobject2.object.ObjectWrap, gid.gio2.debug_contr
   */
   this(gid.gio2.dbus_connection.DBusConnection connection, gid.gio2.cancellable.Cancellable cancellable = null)
   {
-    GDebugControllerDBus* _cretval;
-    GError *_err;
-    _cretval = g_debug_controller_dbus_new(connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
-    if (_err)
-      throw new ErrorWrap(_err, Yes.Take);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GDebugControllerDBus* _cretval;
+      GError *_err;
+      _cretval = g_debug_controller_dbus_new(connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+      if (_err)
+        throw new ErrorWrap(_err, Yes.Take);
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /**
+      Default handler for the #GDebugControllerDBus::authorize signal.
+  
+      Params:
+        invocation = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncAuthorize` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncAuthorize(gid.gio2.dbus_method_invocation.DBusMethodInvocation invocation)
+  {
+    auto _klass = cast(GDebugControllerDBusClass*)_vfuncClass;
+    if (!_klass.authorize)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.authorize(cast(GDebugControllerDBus*)this._cPtr, invocation ? cast(GDBusMethodInvocation*)invocation._cPtr(No.Dup) : null);
+    return _retval;
   }
 
   /**
@@ -281,6 +319,7 @@ class DebugControllerDBus : gid.gobject2.object.ObjectWrap, gid.gio2.debug_contr
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -306,6 +345,67 @@ class DebugControllerDBus : gid.gobject2.object.ObjectWrap, gid.gio2.debug_contr
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("authorize", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from DebugControllerDBus
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.debug_controller_dbus.DebugControllerDBus), T.stringof ~ " is not derived from gid.gio2.debug_controller_dbus.DebugControllerDBus");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAuthorize", true)[0]) == gid.gio2.debug_controller_dbus.DebugControllerDBus))
+      _installVfunc(klass, "authorize");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GDebugControllerDBusClass*)klass;
+
+    switch (vfunc)
+    {
+      case "authorize":
+      {
+        static extern(C) gboolean _vfuncAuthorizeTramp(GDebugControllerDBus* controller, GDBusMethodInvocation* invocation) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.debug_controller_dbus.DebugControllerDBus)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)controller);
+          if (!_obj)
+          {
+            auto _klass = cast(GDebugControllerDBusClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)controller);
+            if (_klass.authorize)
+              return (cast(typeof(&_vfuncAuthorizeTramp))_klass.authorize)(controller, invocation);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncAuthorize(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.dbus_method_invocation.DBusMethodInvocation)(cast(void*)invocation, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.debug_controller_dbus.DebugControllerDBus.vfuncAuthorize");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.authorize = cast(typeof(_klass.authorize))&_vfuncAuthorizeTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

@@ -24,6 +24,15 @@ class PropertyAnimationTarget : gid.adw1.animation_target.AnimationTarget
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -91,10 +100,17 @@ class PropertyAnimationTarget : gid.adw1.animation_target.AnimationTarget
   */
   this(gid.gobject2.object.ObjectWrap object, string propertyName) nothrow
   {
-    AdwAnimationTarget* _cretval;
-    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
-    _cretval = adw_property_animation_target_new(object ? cast(GObject*)object._cPtr(No.Dup) : null, _propertyName);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      AdwAnimationTarget* _cretval;
+      const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
+      _cretval = adw_property_animation_target_new(object ? cast(GObject*)object._cPtr(No.Dup) : null, _propertyName);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

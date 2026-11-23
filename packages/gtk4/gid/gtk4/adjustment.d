@@ -6,6 +6,7 @@ import gid.core.utils;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;
 import gid.gobject2.initially_unowned;
+import gid.gobject2.object;
 import gid.gtk4.c.functions;
 import gid.gtk4.c.types;
 import gid.gtk4.types;
@@ -30,6 +31,15 @@ class Adjustment : gid.gobject2.initially_unowned.InitiallyUnowned
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
   }
 
   /** */
@@ -208,9 +218,36 @@ class Adjustment : gid.gobject2.initially_unowned.InitiallyUnowned
   */
   this(double value, double lower, double upper, double stepIncrement, double pageIncrement, double pageSize) nothrow
   {
-    GtkAdjustment* _cretval;
-    _cretval = gtk_adjustment_new(value, lower, upper, stepIncrement, pageIncrement, pageSize);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkAdjustment* _cretval;
+      _cretval = gtk_adjustment_new(value, lower, upper, stepIncrement, pageIncrement, pageSize);
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncChanged()
+  {
+    auto _klass = cast(GtkAdjustmentClass*)_vfuncClass;
+    if (!_klass.changed)
+      return;
+
+    _klass.changed(cast(GtkAdjustment*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncValueChanged()
+  {
+    auto _klass = cast(GtkAdjustmentClass*)_vfuncClass;
+    if (!_klass.valueChanged)
+      return;
+
+    _klass.valueChanged(cast(GtkAdjustment*)this._cPtr);
   }
 
   /**
@@ -464,6 +501,7 @@ class Adjustment : gid.gobject2.initially_unowned.InitiallyUnowned
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -508,6 +546,7 @@ class Adjustment : gid.gobject2.initially_unowned.InitiallyUnowned
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -527,6 +566,92 @@ class Adjustment : gid.gobject2.initially_unowned.InitiallyUnowned
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("value-changed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Adjustment
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.adjustment.Adjustment), T.stringof ~ " is not derived from gid.gtk4.adjustment.Adjustment");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChanged", true)[0]) == gid.gtk4.adjustment.Adjustment))
+      _installVfunc(klass, "changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncValueChanged", true)[0]) == gid.gtk4.adjustment.Adjustment))
+      _installVfunc(klass, "value_changed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkAdjustmentClass*)klass;
+
+    switch (vfunc)
+    {
+      case "changed":
+      {
+        static extern(C) void _vfuncChangedTramp(GtkAdjustment* adjustment) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.adjustment.Adjustment)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)adjustment);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkAdjustmentClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)adjustment);
+            if (_klass.changed)
+              return (cast(typeof(&_vfuncChangedTramp))_klass.changed)(adjustment);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.adjustment.Adjustment.vfuncChanged");
+          }
+        }
+
+        _klass.changed = cast(typeof(_klass.changed))&_vfuncChangedTramp;
+        break;
+      }
+      case "value_changed":
+      {
+        static extern(C) void _vfuncValueChangedTramp(GtkAdjustment* adjustment) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.adjustment.Adjustment)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)adjustment);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkAdjustmentClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)adjustment);
+            if (_klass.valueChanged)
+              return (cast(typeof(&_vfuncValueChangedTramp))_klass.valueChanged)(adjustment);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncValueChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.adjustment.Adjustment.vfuncValueChanged");
+          }
+        }
+
+        _klass.valueChanged = cast(typeof(_klass.valueChanged))&_vfuncValueChangedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

@@ -134,9 +134,16 @@ class CellRendererSpin : gid.gtk3.cell_renderer_text.CellRendererText
   */
   this() nothrow
   {
-    GtkCellRenderer* _cretval;
-    _cretval = gtk_cell_renderer_spin_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkCellRenderer* _cretval;
+      _cretval = gtk_cell_renderer_spin_new();
+      this(_cretval, No.Take);
+    }
   }
 }
 

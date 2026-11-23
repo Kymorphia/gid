@@ -29,6 +29,9 @@ interface StyleProvider : GidWrap
     return cast(void function())gtk_style_provider_get_type != &gidSymbolNotFound ? gtk_style_provider_get_type() : cast(GType)0;
   }
 
+
+
+
   /**
       Returns the #GtkIconFactory defined to be in use for path, or null if none
       is defined.

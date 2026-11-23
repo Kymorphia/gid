@@ -669,10 +669,17 @@ class Label : gid.gtk3.misc.Misc
   */
   this(string str = null) nothrow
   {
-    GtkWidget* _cretval;
-    const(char)* _str = str.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gtk_label_new(_str);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, str !is null), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      const(char)* _str = str.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gtk_label_new(_str);
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -703,6 +710,49 @@ class Label : gid.gtk3.misc.Misc
     _cretval = gtk_label_new_with_mnemonic(_str);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.label.Label)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+
+  /** */
+  protected bool vfuncActivateLink(string uri)
+  {
+    auto _klass = cast(GtkLabelClass*)_vfuncClass;
+    if (!_klass.activateLink)
+      return typeof(return).init;
+
+    bool _retval;
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)_klass.activateLink(cast(GtkLabel*)this._cPtr, _uri);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncCopyClipboard()
+  {
+    auto _klass = cast(GtkLabelClass*)_vfuncClass;
+    if (!_klass.copyClipboard)
+      return;
+
+    _klass.copyClipboard(cast(GtkLabel*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncMoveCursor(gid.gtk3.types.MovementStep step, int count, bool extendSelection)
+  {
+    auto _klass = cast(GtkLabelClass*)_vfuncClass;
+    if (!_klass.moveCursor)
+      return;
+
+    _klass.moveCursor(cast(GtkLabel*)this._cPtr, step, count, extendSelection);
+  }
+
+  /** */
+  protected void vfuncPopulatePopup(gid.gtk3.menu.Menu menu)
+  {
+    auto _klass = cast(GtkLabelClass*)_vfuncClass;
+    if (!_klass.populatePopup)
+      return;
+
+    _klass.populatePopup(cast(GtkLabel*)this._cPtr, menu ? cast(GtkMenu*)menu._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1434,6 +1484,7 @@ class Label : gid.gtk3.misc.Misc
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1484,6 +1535,7 @@ class Label : gid.gtk3.misc.Misc
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1538,6 +1590,7 @@ class Label : gid.gtk3.misc.Misc
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1607,6 +1660,7 @@ class Label : gid.gtk3.misc.Misc
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1668,6 +1722,7 @@ class Label : gid.gtk3.misc.Misc
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1690,6 +1745,158 @@ class Label : gid.gtk3.misc.Misc
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("populate-popup", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Label
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.label.Label), T.stringof ~ " is not derived from gid.gtk3.label.Label");
+
+    gid.gtk3.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivateLink", true)[0]) == gid.gtk3.label.Label))
+      _installVfunc(klass, "activate_link");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCopyClipboard", true)[0]) == gid.gtk3.label.Label))
+      _installVfunc(klass, "copy_clipboard");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMoveCursor", true)[0]) == gid.gtk3.label.Label))
+      _installVfunc(klass, "move_cursor");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPopulatePopup", true)[0]) == gid.gtk3.label.Label))
+      _installVfunc(klass, "populate_popup");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkLabelClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate_link":
+      {
+        static extern(C) gboolean _vfuncActivateLinkTramp(GtkLabel* label, const(char)* uri) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.label.Label)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)label);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkLabelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)label);
+            if (_klass.activateLink)
+              return (cast(typeof(&_vfuncActivateLinkTramp))_klass.activateLink)(label, uri);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          string _uri = uri.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncActivateLink(_uri);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.label.Label.vfuncActivateLink");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.activateLink = cast(typeof(_klass.activateLink))&_vfuncActivateLinkTramp;
+        break;
+      }
+      case "copy_clipboard":
+      {
+        static extern(C) void _vfuncCopyClipboardTramp(GtkLabel* label) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.label.Label)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)label);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkLabelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)label);
+            if (_klass.copyClipboard)
+              return (cast(typeof(&_vfuncCopyClipboardTramp))_klass.copyClipboard)(label);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncCopyClipboard();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.label.Label.vfuncCopyClipboard");
+          }
+        }
+
+        _klass.copyClipboard = cast(typeof(_klass.copyClipboard))&_vfuncCopyClipboardTramp;
+        break;
+      }
+      case "move_cursor":
+      {
+        static extern(C) void _vfuncMoveCursorTramp(GtkLabel* label, GtkMovementStep step, int count, gboolean extendSelection) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.label.Label)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)label);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkLabelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)label);
+            if (_klass.moveCursor)
+              return (cast(typeof(&_vfuncMoveCursorTramp))_klass.moveCursor)(label, step, count, extendSelection);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMoveCursor(step, count, cast(bool)extendSelection);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.label.Label.vfuncMoveCursor");
+          }
+        }
+
+        _klass.moveCursor = cast(typeof(_klass.moveCursor))&_vfuncMoveCursorTramp;
+        break;
+      }
+      case "populate_popup":
+      {
+        static extern(C) void _vfuncPopulatePopupTramp(GtkLabel* label, GtkMenu* menu) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.label.Label)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)label);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkLabelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)label);
+            if (_klass.populatePopup)
+              return (cast(typeof(&_vfuncPopulatePopupTramp))_klass.populatePopup)(label, menu);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPopulatePopup(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.menu.Menu)(cast(void*)menu, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.label.Label.vfuncPopulatePopup");
+          }
+        }
+
+        _klass.populatePopup = cast(typeof(_klass.populatePopup))&_vfuncPopulatePopupTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

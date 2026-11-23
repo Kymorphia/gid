@@ -90,6 +90,7 @@ class Path : gid.gobject2.boxed.BoxedWrap!(gsk_path_get_type)
   {
     extern(C) gboolean _funcCallback(GskPathOperation op, const(graphene_point_t)* pts, size_t nPts, float weight, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gsk4.types.PathForeachFunc*)userData;
       gid.graphene1.point.Point[] _pts;
@@ -141,6 +142,7 @@ class Path : gid.gobject2.boxed.BoxedWrap!(gsk_path_get_type)
   {
     extern(C) gboolean _funcCallback(GskPath* path1, const(GskPathPoint)* point1, GskPath* path2, const(GskPathPoint)* point2, GskPathIntersection kind, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gsk4.types.PathIntersectionFunc*)userData;
       auto _path1 = path1 ? new gid.gsk4.path.Path(cast(void*)path1, Yes.Take)._cBorrow : null;

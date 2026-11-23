@@ -109,9 +109,83 @@ class Assistant : gid.gtk3.window.Window
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_assistant_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_assistant_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /**
+      Signal emitted when the apply button is clicked.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncApply` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncApply()
+  {
+    auto _klass = cast(GtkAssistantClass*)_vfuncClass;
+    if (!_klass.apply)
+      return;
+
+    _klass.apply(cast(GtkAssistant*)this._cPtr);
+  }
+
+  /**
+      Signal emitted when the cancel button is clicked.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCancel` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncCancel()
+  {
+    auto _klass = cast(GtkAssistantClass*)_vfuncClass;
+    if (!_klass.cancel)
+      return;
+
+    _klass.cancel(cast(GtkAssistant*)this._cPtr);
+  }
+
+  /**
+      Signal emitted either when the close button or last page apply button is clicked.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncClose` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncClose()
+  {
+    auto _klass = cast(GtkAssistantClass*)_vfuncClass;
+    if (!_klass.close)
+      return;
+
+    _klass.close(cast(GtkAssistant*)this._cPtr);
+  }
+
+  /**
+      Signal emitted when a new page is set as the assistant’s current page, before making the new page visible.
+  
+      Params:
+        page = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPrepare` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncPrepare(gid.gtk3.widget.Widget page)
+  {
+    auto _klass = cast(GtkAssistantClass*)_vfuncClass;
+    if (!_klass.prepare)
+      return;
+
+    _klass.prepare(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null);
   }
 
   /**
@@ -408,6 +482,7 @@ class Assistant : gid.gtk3.window.Window
   {
     extern(C) int _pageFuncCallback(int currentPage, void* data) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.gtk3.types.AssistantPageFunc*)data;
 
@@ -567,6 +642,7 @@ class Assistant : gid.gtk3.window.Window
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -611,6 +687,7 @@ class Assistant : gid.gtk3.window.Window
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -657,6 +734,7 @@ class Assistant : gid.gtk3.window.Window
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -701,6 +779,7 @@ class Assistant : gid.gtk3.window.Window
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -752,6 +831,7 @@ class Assistant : gid.gtk3.window.Window
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -774,6 +854,152 @@ class Assistant : gid.gtk3.window.Window
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("prepare", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Assistant
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.assistant.Assistant), T.stringof ~ " is not derived from gid.gtk3.assistant.Assistant");
+
+    gid.gtk3.window.Window._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncApply", true)[0]) == gid.gtk3.assistant.Assistant))
+      _installVfunc(klass, "apply");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCancel", true)[0]) == gid.gtk3.assistant.Assistant))
+      _installVfunc(klass, "cancel");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncClose", true)[0]) == gid.gtk3.assistant.Assistant))
+      _installVfunc(klass, "close");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPrepare", true)[0]) == gid.gtk3.assistant.Assistant))
+      _installVfunc(klass, "prepare");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkAssistantClass*)klass;
+
+    switch (vfunc)
+    {
+      case "apply":
+      {
+        static extern(C) void _vfuncApplyTramp(GtkAssistant* assistant) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.assistant.Assistant)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)assistant);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkAssistantClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)assistant);
+            if (_klass.apply)
+              return (cast(typeof(&_vfuncApplyTramp))_klass.apply)(assistant);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncApply();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.assistant.Assistant.vfuncApply");
+          }
+        }
+
+        _klass.apply = cast(typeof(_klass.apply))&_vfuncApplyTramp;
+        break;
+      }
+      case "cancel":
+      {
+        static extern(C) void _vfuncCancelTramp(GtkAssistant* assistant) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.assistant.Assistant)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)assistant);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkAssistantClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)assistant);
+            if (_klass.cancel)
+              return (cast(typeof(&_vfuncCancelTramp))_klass.cancel)(assistant);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncCancel();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.assistant.Assistant.vfuncCancel");
+          }
+        }
+
+        _klass.cancel = cast(typeof(_klass.cancel))&_vfuncCancelTramp;
+        break;
+      }
+      case "close":
+      {
+        static extern(C) void _vfuncCloseTramp(GtkAssistant* assistant) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.assistant.Assistant)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)assistant);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkAssistantClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)assistant);
+            if (_klass.close)
+              return (cast(typeof(&_vfuncCloseTramp))_klass.close)(assistant);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncClose();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.assistant.Assistant.vfuncClose");
+          }
+        }
+
+        _klass.close = cast(typeof(_klass.close))&_vfuncCloseTramp;
+        break;
+      }
+      case "prepare":
+      {
+        static extern(C) void _vfuncPrepareTramp(GtkAssistant* assistant, GtkWidget* page) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.assistant.Assistant)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)assistant);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkAssistantClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)assistant);
+            if (_klass.prepare)
+              return (cast(typeof(&_vfuncPrepareTramp))_klass.prepare)(assistant, page);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPrepare(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)page, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.assistant.Assistant.vfuncPrepare");
+          }
+        }
+
+        _klass.prepare = cast(typeof(_klass.prepare))&_vfuncPrepareTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

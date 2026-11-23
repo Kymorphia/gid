@@ -106,9 +106,16 @@ class WidgetPaintable : gid.gobject2.object.ObjectWrap, gid.gdk4.paintable.Paint
   */
   this(gid.gtk4.widget.Widget widget = null) nothrow
   {
-    GdkPaintable* _cretval;
-    _cretval = gtk_widget_paintable_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, widget !is null), Yes.Take);
+    }
+    else
+    {
+      GdkPaintable* _cretval;
+      _cretval = gtk_widget_paintable_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

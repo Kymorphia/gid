@@ -8,11 +8,13 @@ import gid.core.utils;
 import gid.gdk3.rectangle;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;
+import gid.gobject2.object;
 import gid.gtk3.bin;
 import gid.gtk3.buildable;
 import gid.gtk3.buildable_mixin;
 import gid.gtk3.c.functions;
 import gid.gtk3.c.types;
+import gid.gtk3.container;
 import gid.gtk3.types;
 import gid.gtk3.widget;
 
@@ -94,9 +96,40 @@ class Overlay : gid.gtk3.bin.Bin
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_overlay_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_overlay_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /**
+      Signal emitted to determine the position and
+         size of any overlay child widgets.
+  
+      Params:
+        widget = 
+        allocation = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetChildPosition` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncGetChildPosition(gid.gtk3.widget.Widget widget, gid.gtk3.types.Allocation allocation)
+  {
+    auto _klass = cast(GtkOverlayClass*)_vfuncClass;
+    if (!_klass.getChildPosition)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.getChildPosition(cast(GtkOverlay*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cast(GtkAllocation*)&allocation);
+    return _retval;
   }
 
   /**
@@ -207,6 +240,7 @@ class Overlay : gid.gtk3.bin.Bin
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -238,6 +272,67 @@ class Overlay : gid.gtk3.bin.Bin
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("get-child-position", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Overlay
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.overlay.Overlay), T.stringof ~ " is not derived from gid.gtk3.overlay.Overlay");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetChildPosition", true)[0]) == gid.gtk3.overlay.Overlay))
+      _installVfunc(klass, "get_child_position");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkOverlayClass*)klass;
+
+    switch (vfunc)
+    {
+      case "get_child_position":
+      {
+        static extern(C) gboolean _vfuncGetChildPositionTramp(GtkOverlay* overlay, GtkWidget* widget, GtkAllocation* allocation) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.overlay.Overlay)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)overlay);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkOverlayClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)overlay);
+            if (_klass.getChildPosition)
+              return (cast(typeof(&_vfuncGetChildPositionTramp))_klass.getChildPosition)(overlay, widget, allocation);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetChildPosition(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)widget, No.Take), *cast(gid.gtk3.types.Allocation*)allocation);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.overlay.Overlay.vfuncGetChildPosition");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getChildPosition = cast(typeof(_klass.getChildPosition))&_vfuncGetChildPositionTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

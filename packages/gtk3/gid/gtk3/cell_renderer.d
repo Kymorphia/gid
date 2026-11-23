@@ -65,6 +65,15 @@ class CellRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -295,6 +304,301 @@ class CellRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
   @property void ypad(uint propval) nothrow
   {
     gid.gobject2.object.ObjectWrap.setProperty!(uint)("ypad", propval);
+  }
+
+  /**
+      Passes an activate event to the cell renderer for possible processing.
+      Some cell renderers may use events; for example, #GtkCellRendererToggle
+      toggles when it gets a mouse click.
+  
+      Params:
+        event = a #GdkEvent (modified in place, changes are seen by the caller)
+        widget = widget that received the event
+        path = widget-dependent string representation of the event location;
+             e.g. for #GtkTreeView, a string representation of #GtkTreePath
+        backgroundArea = background area as passed to [gid.gtk3.cell_renderer.CellRenderer.render]
+        cellArea = cell area as passed to [gid.gtk3.cell_renderer.CellRenderer.render]
+        flags = render flags
+      Returns: true if the event was consumed/handled
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncActivate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncActivate(gid.gdk3.event.Event event, gid.gtk3.widget.Widget widget, string path, gid.gdk3.rectangle.Rectangle backgroundArea, gid.gdk3.rectangle.Rectangle cellArea, gid.gtk3.types.CellRendererState flags)
+  {
+    auto _klass = cast(GtkCellRendererClass*)_vfuncClass;
+    if (!_klass.activate)
+      return typeof(return).init;
+
+    bool _retval;
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)_klass.activate(cast(GtkCellRenderer*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _path, cast(const(GdkRectangle)*)&backgroundArea, cast(const(GdkRectangle)*)&cellArea, flags);
+    return _retval;
+  }
+
+  /**
+      Signal gets emitted when the user cancels the process of editing a cell.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncEditingCanceled` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncEditingCanceled()
+  {
+    auto _klass = cast(GtkCellRendererClass*)_vfuncClass;
+    if (!_klass.editingCanceled)
+      return;
+
+    _klass.editingCanceled(cast(GtkCellRenderer*)this._cPtr);
+  }
+
+  /**
+      Signal gets emitted when a cell starts to be edited.
+  
+      Params:
+        editable = 
+        path = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncEditingStarted` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncEditingStarted(gid.gtk3.cell_editable.CellEditable editable, string path)
+  {
+    auto _klass = cast(GtkCellRendererClass*)_vfuncClass;
+    if (!_klass.editingStarted)
+      return;
+
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    _klass.editingStarted(cast(GtkCellRenderer*)this._cPtr, editable ? cast(GtkCellEditable*)(cast(gid.gobject2.object.ObjectWrap)editable)._cPtr(No.Dup) : null, _path);
+  }
+
+  /**
+      Gets the aligned area used by cell inside cell_area. Used for finding
+      the appropriate edit and focus rectangle.
+  
+      Params:
+        widget = the #GtkWidget this cell will be rendering to
+        flags = render flags
+        cellArea = cell area which would be passed to [gid.gtk3.cell_renderer.CellRenderer.render]
+        alignedArea = the return location for the space inside cell_area
+                         that would acually be used to render.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetAlignedArea` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncGetAlignedArea(gid.gtk3.widget.Widget widget, gid.gtk3.types.CellRendererState flags, gid.gdk3.rectangle.Rectangle cellArea, out gid.gdk3.rectangle.Rectangle alignedArea)
+  {
+    auto _klass = cast(GtkCellRendererClass*)_vfuncClass;
+    if (!_klass.getAlignedArea)
+      return;
+
+    _klass.getAlignedArea(cast(GtkCellRenderer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, flags, cast(const(GdkRectangle)*)&cellArea, cast(GdkRectangle*)&alignedArea);
+  }
+
+  /**
+      Retreives a renderer’s natural size when rendered to widget.
+  
+      Params:
+        widget = the #GtkWidget this cell will be rendering to
+        minimumSize = location to store the minimum size, or null
+        naturalSize = location to store the natural size, or null
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetPreferredHeight` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncGetPreferredHeight(gid.gtk3.widget.Widget widget, out int minimumSize, out int naturalSize)
+  {
+    auto _klass = cast(GtkCellRendererClass*)_vfuncClass;
+    if (!_klass.getPreferredHeight)
+      return;
+
+    _klass.getPreferredHeight(cast(GtkCellRenderer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cast(int*)&minimumSize, cast(int*)&naturalSize);
+  }
+
+  /**
+      Retreives a cell renderers’s minimum and natural height if it were rendered to
+      widget with the specified width.
+  
+      Params:
+        widget = the #GtkWidget this cell will be rendering to
+        width = the size which is available for allocation
+        minimumHeight = location for storing the minimum size, or null
+        naturalHeight = location for storing the preferred size, or null
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetPreferredHeightForWidth` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncGetPreferredHeightForWidth(gid.gtk3.widget.Widget widget, int width, out int minimumHeight, out int naturalHeight)
+  {
+    auto _klass = cast(GtkCellRendererClass*)_vfuncClass;
+    if (!_klass.getPreferredHeightForWidth)
+      return;
+
+    _klass.getPreferredHeightForWidth(cast(GtkCellRenderer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
+  }
+
+  /**
+      Retreives a renderer’s natural size when rendered to widget.
+  
+      Params:
+        widget = the #GtkWidget this cell will be rendering to
+        minimumSize = location to store the minimum size, or null
+        naturalSize = location to store the natural size, or null
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetPreferredWidth` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncGetPreferredWidth(gid.gtk3.widget.Widget widget, out int minimumSize, out int naturalSize)
+  {
+    auto _klass = cast(GtkCellRendererClass*)_vfuncClass;
+    if (!_klass.getPreferredWidth)
+      return;
+
+    _klass.getPreferredWidth(cast(GtkCellRenderer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cast(int*)&minimumSize, cast(int*)&naturalSize);
+  }
+
+  /**
+      Retreives a cell renderers’s minimum and natural width if it were rendered to
+      widget with the specified height.
+  
+      Params:
+        widget = the #GtkWidget this cell will be rendering to
+        height = the size which is available for allocation
+        minimumWidth = location for storing the minimum size, or null
+        naturalWidth = location for storing the preferred size, or null
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetPreferredWidthForHeight` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncGetPreferredWidthForHeight(gid.gtk3.widget.Widget widget, int height, out int minimumWidth, out int naturalWidth)
+  {
+    auto _klass = cast(GtkCellRendererClass*)_vfuncClass;
+    if (!_klass.getPreferredWidthForHeight)
+      return;
+
+    _klass.getPreferredWidthForHeight(cast(GtkCellRenderer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, height, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
+  }
+
+  /**
+      Gets whether the cell renderer prefers a height-for-width layout
+      or a width-for-height layout.
+      Returns: The #GtkSizeRequestMode preferred by this renderer.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetRequestMode` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gtk3.types.SizeRequestMode vfuncGetRequestMode()
+  {
+    auto _klass = cast(GtkCellRendererClass*)_vfuncClass;
+    if (!_klass.getRequestMode)
+      return typeof(return).init;
+
+    GtkSizeRequestMode _cretval;
+    _cretval = _klass.getRequestMode(cast(GtkCellRenderer*)this._cPtr);
+    gid.gtk3.types.SizeRequestMode _retval = cast(gid.gtk3.types.SizeRequestMode)_cretval;
+    return _retval;
+  }
+
+  /**
+      Obtains the width and height needed to render the cell. Used by view
+      widgets to determine the appropriate size for the cell_area passed to
+      [gid.gtk3.cell_renderer.CellRenderer.render].  If cell_area is not null, fills in the
+      x and y offsets (if set) of the cell relative to this location.
+      
+      Please note that the values set in width and height, as well as those
+      in x_offset and y_offset are inclusive of the xpad and ypad properties.
+  
+      Params:
+        widget = the widget the renderer is rendering to
+        cellArea = The area a cell will be allocated, or null
+        xOffset = location to return x offset of cell relative to cell_area, or null
+        yOffset = location to return y offset of cell relative to cell_area, or null
+        width = location to return width needed to render a cell, or null
+        height = location to return height needed to render a cell, or null
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetSize` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use [gid.gtk4.cell_renderer.CellRenderer.getPreferredSize] instead.
+  */
+  protected void vfuncGetSize(gid.gtk3.widget.Widget widget, gid.gdk3.rectangle.Rectangle* cellArea, out int xOffset, out int yOffset, out int width, out int height)
+  {
+    auto _klass = cast(GtkCellRendererClass*)_vfuncClass;
+    if (!_klass.getSize)
+      return;
+
+    _klass.getSize(cast(GtkCellRenderer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)cellArea, cast(int*)&xOffset, cast(int*)&yOffset, cast(int*)&width, cast(int*)&height);
+  }
+
+  /**
+      Invokes the virtual render function of the #GtkCellRenderer. The three
+      passed-in rectangles are areas in cr. Most renderers will draw within
+      cell_area; the xalign, yalign, xpad, and ypad fields of the #GtkCellRenderer
+      should be honored with respect to cell_area. background_area includes the
+      blank space around the cell, and also the area containing the tree expander;
+      so the background_area rectangles for all cells tile to cover the entire
+      window.
+  
+      Params:
+        cr = a cairo context to draw to (modified in place, changes are seen by the caller)
+        widget = the widget owning window
+        backgroundArea = entire cell area (including tree expanders and maybe
+             padding on the sides)
+        cellArea = area normally rendered by a cell renderer
+        flags = flags that affect rendering
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRender` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncRender(gid.cairo1.context.Context cr, gid.gtk3.widget.Widget widget, gid.gdk3.rectangle.Rectangle backgroundArea, gid.gdk3.rectangle.Rectangle cellArea, gid.gtk3.types.CellRendererState flags)
+  {
+    auto _klass = cast(GtkCellRendererClass*)_vfuncClass;
+    if (!_klass.render)
+      return;
+
+    _klass.render(cast(GtkCellRenderer*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, cast(const(GdkRectangle)*)&backgroundArea, cast(const(GdkRectangle)*)&cellArea, flags);
+  }
+
+  /**
+      Starts editing the contents of this cell, through a new #GtkCellEditable
+      widget created by the #GtkCellRendererClass.start_editing virtual function.
+  
+      Params:
+        event = a #GdkEvent (modified in place, changes are seen by the caller)
+        widget = widget that received the event
+        path = widget-dependent string representation of the event location;
+             e.g. for #GtkTreeView, a string representation of #GtkTreePath
+        backgroundArea = background area as passed to [gid.gtk3.cell_renderer.CellRenderer.render]
+        cellArea = cell area as passed to [gid.gtk3.cell_renderer.CellRenderer.render]
+        flags = render flags
+      Returns: A new #GtkCellEditable for editing this
+          cell, or null if editing is not possible
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStartEditing` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gtk3.cell_editable.CellEditable vfuncStartEditing(gid.gdk3.event.Event event, gid.gtk3.widget.Widget widget, string path, gid.gdk3.rectangle.Rectangle backgroundArea, gid.gdk3.rectangle.Rectangle cellArea, gid.gtk3.types.CellRendererState flags)
+  {
+    auto _klass = cast(GtkCellRendererClass*)_vfuncClass;
+    if (!_klass.startEditing)
+      return typeof(return).init;
+
+    GtkCellEditable* _cretval;
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    _cretval = _klass.startEditing(cast(GtkCellRenderer*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _path, cast(const(GdkRectangle)*)&backgroundArea, cast(const(GdkRectangle)*)&cellArea, flags);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.cell_editable.CellEditable)(cast(GtkCellEditable*)_cretval, No.Take);
+    return _retval;
   }
 
   /**
@@ -678,6 +982,7 @@ class CellRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -756,6 +1061,7 @@ class CellRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -781,6 +1087,470 @@ class CellRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("editing-started", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from CellRenderer
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.cell_renderer.CellRenderer), T.stringof ~ " is not derived from gid.gtk3.cell_renderer.CellRenderer");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivate", true)[0]) == gid.gtk3.cell_renderer.CellRenderer))
+      _installVfunc(klass, "activate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEditingCanceled", true)[0]) == gid.gtk3.cell_renderer.CellRenderer))
+      _installVfunc(klass, "editing_canceled");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEditingStarted", true)[0]) == gid.gtk3.cell_renderer.CellRenderer))
+      _installVfunc(klass, "editing_started");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetAlignedArea", true)[0]) == gid.gtk3.cell_renderer.CellRenderer))
+      _installVfunc(klass, "get_aligned_area");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetPreferredHeight", true)[0]) == gid.gtk3.cell_renderer.CellRenderer))
+      _installVfunc(klass, "get_preferred_height");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetPreferredHeightForWidth", true)[0]) == gid.gtk3.cell_renderer.CellRenderer))
+      _installVfunc(klass, "get_preferred_height_for_width");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetPreferredWidth", true)[0]) == gid.gtk3.cell_renderer.CellRenderer))
+      _installVfunc(klass, "get_preferred_width");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetPreferredWidthForHeight", true)[0]) == gid.gtk3.cell_renderer.CellRenderer))
+      _installVfunc(klass, "get_preferred_width_for_height");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetRequestMode", true)[0]) == gid.gtk3.cell_renderer.CellRenderer))
+      _installVfunc(klass, "get_request_mode");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetSize", true)[0]) == gid.gtk3.cell_renderer.CellRenderer))
+      _installVfunc(klass, "get_size");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRender", true)[0]) == gid.gtk3.cell_renderer.CellRenderer))
+      _installVfunc(klass, "render");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStartEditing", true)[0]) == gid.gtk3.cell_renderer.CellRenderer))
+      _installVfunc(klass, "start_editing");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkCellRendererClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate":
+      {
+        static extern(C) gboolean _vfuncActivateTramp(GtkCellRenderer* cell, GdkEvent* event, GtkWidget* widget, const(char)* path, const(GdkRectangle)* backgroundArea, const(GdkRectangle)* cellArea, GtkCellRendererState flags) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
+            if (_klass.activate)
+              return (cast(typeof(&_vfuncActivateTramp))_klass.activate)(cell, event, widget, path, backgroundArea, cellArea, flags);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event.Event(cast(void*)event, Yes.Take)._cBorrow : null;
+          string _path = path.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncActivate(_event, gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)widget, No.Take), _path, *cast(gid.gdk3.rectangle.Rectangle*)backgroundArea, *cast(gid.gdk3.rectangle.Rectangle*)cellArea, flags);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_renderer.CellRenderer.vfuncActivate");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_event)
+            _event._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.activate = cast(typeof(_klass.activate))&_vfuncActivateTramp;
+        break;
+      }
+      case "editing_canceled":
+      {
+        static extern(C) void _vfuncEditingCanceledTramp(GtkCellRenderer* cell) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
+            if (_klass.editingCanceled)
+              return (cast(typeof(&_vfuncEditingCanceledTramp))_klass.editingCanceled)(cell);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncEditingCanceled();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_renderer.CellRenderer.vfuncEditingCanceled");
+          }
+        }
+
+        _klass.editingCanceled = cast(typeof(_klass.editingCanceled))&_vfuncEditingCanceledTramp;
+        break;
+      }
+      case "editing_started":
+      {
+        static extern(C) void _vfuncEditingStartedTramp(GtkCellRenderer* cell, GtkCellEditable* editable, const(char)* path) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
+            if (_klass.editingStarted)
+              return (cast(typeof(&_vfuncEditingStartedTramp))_klass.editingStarted)(cell, editable, path);
+            return;
+          }
+
+          string _path = path.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncEditingStarted(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.cell_editable.CellEditable)(cast(void*)editable, No.Take), _path);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_renderer.CellRenderer.vfuncEditingStarted");
+          }
+        }
+
+        _klass.editingStarted = cast(typeof(_klass.editingStarted))&_vfuncEditingStartedTramp;
+        break;
+      }
+      case "get_aligned_area":
+      {
+        static extern(C) void _vfuncGetAlignedAreaTramp(GtkCellRenderer* cell, GtkWidget* widget, GtkCellRendererState flags, const(GdkRectangle)* cellArea, GdkRectangle* alignedArea) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
+            if (_klass.getAlignedArea)
+              return (cast(typeof(&_vfuncGetAlignedAreaTramp))_klass.getAlignedArea)(cell, widget, flags, cellArea, alignedArea);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncGetAlignedArea(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)widget, No.Take), flags, *cast(gid.gdk3.rectangle.Rectangle*)cellArea, *cast(gid.gdk3.rectangle.Rectangle*)alignedArea);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_renderer.CellRenderer.vfuncGetAlignedArea");
+          }
+        }
+
+        _klass.getAlignedArea = cast(typeof(_klass.getAlignedArea))&_vfuncGetAlignedAreaTramp;
+        break;
+      }
+      case "get_preferred_height":
+      {
+        static extern(C) void _vfuncGetPreferredHeightTramp(GtkCellRenderer* cell, GtkWidget* widget, int* minimumSize, int* naturalSize) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
+            if (_klass.getPreferredHeight)
+              return (cast(typeof(&_vfuncGetPreferredHeightTramp))_klass.getPreferredHeight)(cell, widget, minimumSize, naturalSize);
+            return;
+          }
+
+          typeof(*minimumSize) _minimumSizeNull;
+          if (!minimumSize)
+            minimumSize = &_minimumSizeNull;
+
+          typeof(*naturalSize) _naturalSizeNull;
+          if (!naturalSize)
+            naturalSize = &_naturalSizeNull;
+
+          try
+          {
+            _obj.vfuncGetPreferredHeight(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)widget, No.Take), *minimumSize, *naturalSize);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_renderer.CellRenderer.vfuncGetPreferredHeight");
+          }
+        }
+
+        _klass.getPreferredHeight = cast(typeof(_klass.getPreferredHeight))&_vfuncGetPreferredHeightTramp;
+        break;
+      }
+      case "get_preferred_height_for_width":
+      {
+        static extern(C) void _vfuncGetPreferredHeightForWidthTramp(GtkCellRenderer* cell, GtkWidget* widget, int width, int* minimumHeight, int* naturalHeight) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
+            if (_klass.getPreferredHeightForWidth)
+              return (cast(typeof(&_vfuncGetPreferredHeightForWidthTramp))_klass.getPreferredHeightForWidth)(cell, widget, width, minimumHeight, naturalHeight);
+            return;
+          }
+
+          typeof(*minimumHeight) _minimumHeightNull;
+          if (!minimumHeight)
+            minimumHeight = &_minimumHeightNull;
+
+          typeof(*naturalHeight) _naturalHeightNull;
+          if (!naturalHeight)
+            naturalHeight = &_naturalHeightNull;
+
+          try
+          {
+            _obj.vfuncGetPreferredHeightForWidth(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)widget, No.Take), width, *minimumHeight, *naturalHeight);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_renderer.CellRenderer.vfuncGetPreferredHeightForWidth");
+          }
+        }
+
+        _klass.getPreferredHeightForWidth = cast(typeof(_klass.getPreferredHeightForWidth))&_vfuncGetPreferredHeightForWidthTramp;
+        break;
+      }
+      case "get_preferred_width":
+      {
+        static extern(C) void _vfuncGetPreferredWidthTramp(GtkCellRenderer* cell, GtkWidget* widget, int* minimumSize, int* naturalSize) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
+            if (_klass.getPreferredWidth)
+              return (cast(typeof(&_vfuncGetPreferredWidthTramp))_klass.getPreferredWidth)(cell, widget, minimumSize, naturalSize);
+            return;
+          }
+
+          typeof(*minimumSize) _minimumSizeNull;
+          if (!minimumSize)
+            minimumSize = &_minimumSizeNull;
+
+          typeof(*naturalSize) _naturalSizeNull;
+          if (!naturalSize)
+            naturalSize = &_naturalSizeNull;
+
+          try
+          {
+            _obj.vfuncGetPreferredWidth(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)widget, No.Take), *minimumSize, *naturalSize);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_renderer.CellRenderer.vfuncGetPreferredWidth");
+          }
+        }
+
+        _klass.getPreferredWidth = cast(typeof(_klass.getPreferredWidth))&_vfuncGetPreferredWidthTramp;
+        break;
+      }
+      case "get_preferred_width_for_height":
+      {
+        static extern(C) void _vfuncGetPreferredWidthForHeightTramp(GtkCellRenderer* cell, GtkWidget* widget, int height, int* minimumWidth, int* naturalWidth) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
+            if (_klass.getPreferredWidthForHeight)
+              return (cast(typeof(&_vfuncGetPreferredWidthForHeightTramp))_klass.getPreferredWidthForHeight)(cell, widget, height, minimumWidth, naturalWidth);
+            return;
+          }
+
+          typeof(*minimumWidth) _minimumWidthNull;
+          if (!minimumWidth)
+            minimumWidth = &_minimumWidthNull;
+
+          typeof(*naturalWidth) _naturalWidthNull;
+          if (!naturalWidth)
+            naturalWidth = &_naturalWidthNull;
+
+          try
+          {
+            _obj.vfuncGetPreferredWidthForHeight(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)widget, No.Take), height, *minimumWidth, *naturalWidth);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_renderer.CellRenderer.vfuncGetPreferredWidthForHeight");
+          }
+        }
+
+        _klass.getPreferredWidthForHeight = cast(typeof(_klass.getPreferredWidthForHeight))&_vfuncGetPreferredWidthForHeightTramp;
+        break;
+      }
+      case "get_request_mode":
+      {
+        static extern(C) GtkSizeRequestMode _vfuncGetRequestModeTramp(GtkCellRenderer* cell) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
+            if (_klass.getRequestMode)
+              return (cast(typeof(&_vfuncGetRequestModeTramp))_klass.getRequestMode)(cell);
+            return typeof(return).init;
+          }
+
+          gid.gtk3.types.SizeRequestMode _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetRequestMode();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_renderer.CellRenderer.vfuncGetRequestMode");
+          }
+          auto _retval = cast(GtkSizeRequestMode)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getRequestMode = cast(typeof(_klass.getRequestMode))&_vfuncGetRequestModeTramp;
+        break;
+      }
+      case "get_size":
+      {
+        static extern(C) void _vfuncGetSizeTramp(GtkCellRenderer* cell, GtkWidget* widget, const(GdkRectangle)* cellArea, int* xOffset, int* yOffset, int* width, int* height) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
+            if (_klass.getSize)
+              return (cast(typeof(&_vfuncGetSizeTramp))_klass.getSize)(cell, widget, cellArea, xOffset, yOffset, width, height);
+            return;
+          }
+
+          typeof(*xOffset) _xOffsetNull;
+          if (!xOffset)
+            xOffset = &_xOffsetNull;
+
+          typeof(*yOffset) _yOffsetNull;
+          if (!yOffset)
+            yOffset = &_yOffsetNull;
+
+          typeof(*width) _widthNull;
+          if (!width)
+            width = &_widthNull;
+
+          typeof(*height) _heightNull;
+          if (!height)
+            height = &_heightNull;
+
+          try
+          {
+            _obj.vfuncGetSize(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)widget, No.Take), cast(gid.gdk3.rectangle.Rectangle*)cellArea, *xOffset, *yOffset, *width, *height);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_renderer.CellRenderer.vfuncGetSize");
+          }
+        }
+
+        _klass.getSize = cast(typeof(_klass.getSize))&_vfuncGetSizeTramp;
+        break;
+      }
+      case "render":
+      {
+        static extern(C) void _vfuncRenderTramp(GtkCellRenderer* cell, cairo_t* cr, GtkWidget* widget, const(GdkRectangle)* backgroundArea, const(GdkRectangle)* cellArea, GtkCellRendererState flags) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
+            if (_klass.render)
+              return (cast(typeof(&_vfuncRenderTramp))_klass.render)(cell, cr, widget, backgroundArea, cellArea, flags);
+            return;
+          }
+
+          auto _cr = cr ? new gid.cairo1.context.Context(cast(void*)cr, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncRender(_cr, gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)widget, No.Take), *cast(gid.gdk3.rectangle.Rectangle*)backgroundArea, *cast(gid.gdk3.rectangle.Rectangle*)cellArea, flags);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_renderer.CellRenderer.vfuncRender");
+          }
+          if (_cr)
+            _cr._cUnborrow;
+
+        }
+
+        _klass.render = cast(typeof(_klass.render))&_vfuncRenderTramp;
+        break;
+      }
+      case "start_editing":
+      {
+        static extern(C) GtkCellEditable* _vfuncStartEditingTramp(GtkCellRenderer* cell, GdkEvent* event, GtkWidget* widget, const(char)* path, const(GdkRectangle)* backgroundArea, const(GdkRectangle)* cellArea, GtkCellRendererState flags) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.cell_renderer.CellRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cell);
+            if (_klass.startEditing)
+              return (cast(typeof(&_vfuncStartEditingTramp))_klass.startEditing)(cell, event, widget, path, backgroundArea, cellArea, flags);
+            return typeof(return).init;
+          }
+
+          gid.gtk3.cell_editable.CellEditable _dretval;
+          auto _event = event ? new gid.gdk3.event.Event(cast(void*)event, Yes.Take)._cBorrow : null;
+          string _path = path.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncStartEditing(_event, gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)widget, No.Take), _path, *cast(gid.gdk3.rectangle.Rectangle*)backgroundArea, *cast(gid.gdk3.rectangle.Rectangle*)cellArea, flags);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_renderer.CellRenderer.vfuncStartEditing");
+          }
+          auto _retval = _dretval ? cast(GtkCellEditable*)(cast(gid.gobject2.object.ObjectWrap)_dretval)._cPtr(No.Dup) : null;
+          if (_event)
+            _event._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.startEditing = cast(typeof(_klass.startEditing))&_vfuncStartEditingTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

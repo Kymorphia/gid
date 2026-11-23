@@ -77,6 +77,7 @@ class Thread : gid.gobject2.boxed.BoxedWrap!(g_thread_get_type)
   {
     extern(C) void* _funcCallback(void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       void* _retval;
       auto _dlg = cast(gid.glib2.types.ThreadFunc*)data;
@@ -116,6 +117,7 @@ class Thread : gid.gobject2.boxed.BoxedWrap!(g_thread_get_type)
   {
     extern(C) void* _funcCallback(void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       void* _retval;
       auto _dlg = cast(gid.glib2.types.ThreadFunc*)data;

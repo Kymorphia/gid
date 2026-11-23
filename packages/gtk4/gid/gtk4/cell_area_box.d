@@ -110,9 +110,16 @@ class CellAreaBox : gid.gtk4.cell_area.CellArea, gid.gtk4.orientable.Orientable
   */
   this() nothrow
   {
-    GtkCellArea* _cretval;
-    _cretval = gtk_cell_area_box_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkCellArea* _cretval;
+      _cretval = gtk_cell_area_box_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**

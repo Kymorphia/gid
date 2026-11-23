@@ -326,6 +326,7 @@ class Expression : ReffedWrap!(GtkExpression*, gtk_expression_ref, gtk_expressio
   {
     extern(C) void _notifyCallback(void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk4.types.ExpressionNotify*)userData;
 
       try

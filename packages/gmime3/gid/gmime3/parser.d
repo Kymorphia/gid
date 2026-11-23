@@ -65,9 +65,16 @@ class Parser : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GMimeParser* _cretval;
-    _cretval = g_mime_parser_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GMimeParser* _cretval;
+      _cretval = g_mime_parser_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

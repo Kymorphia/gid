@@ -202,9 +202,36 @@ class Dock : gid.gtk4.widget.Widget
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = panel_dock_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = panel_dock_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncPanelDragBegin(gid.panel1.widget.Widget widget)
+  {
+    auto _klass = cast(PanelDockClass*)_vfuncClass;
+    if (!_klass.panelDragBegin)
+      return;
+
+    _klass.panelDragBegin(cast(PanelDock*)this._cPtr, widget ? cast(PanelWidget*)widget._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncPanelDragEnd(gid.panel1.widget.Widget widget)
+  {
+    auto _klass = cast(PanelDockClass*)_vfuncClass;
+    if (!_klass.panelDragEnd)
+      return;
+
+    _klass.panelDragEnd(cast(PanelDock*)this._cPtr, widget ? cast(PanelWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -217,6 +244,7 @@ class Dock : gid.gtk4.widget.Widget
   {
     extern(C) void _callbackCallback(PanelFrame* frame, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.panel1.types.FrameCallback*)userData;
 
       try
@@ -499,6 +527,7 @@ class Dock : gid.gtk4.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -553,6 +582,7 @@ class Dock : gid.gtk4.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -606,6 +636,7 @@ class Dock : gid.gtk4.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -657,6 +688,7 @@ class Dock : gid.gtk4.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -679,6 +711,92 @@ class Dock : gid.gtk4.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("panel-drag-end", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Dock
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.panel1.dock.Dock), T.stringof ~ " is not derived from gid.panel1.dock.Dock");
+
+    gid.gtk4.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPanelDragBegin", true)[0]) == gid.panel1.dock.Dock))
+      _installVfunc(klass, "panel_drag_begin");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPanelDragEnd", true)[0]) == gid.panel1.dock.Dock))
+      _installVfunc(klass, "panel_drag_end");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(PanelDockClass*)klass;
+
+    switch (vfunc)
+    {
+      case "panel_drag_begin":
+      {
+        static extern(C) void _vfuncPanelDragBeginTramp(PanelDock* self, PanelWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.panel1.dock.Dock)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(PanelDockClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.panelDragBegin)
+              return (cast(typeof(&_vfuncPanelDragBeginTramp))_klass.panelDragBegin)(self, widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPanelDragBegin(gid.gobject2.object.ObjectWrap._getDObject!(gid.panel1.widget.Widget)(cast(void*)widget, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.panel1.dock.Dock.vfuncPanelDragBegin");
+          }
+        }
+
+        _klass.panelDragBegin = cast(typeof(_klass.panelDragBegin))&_vfuncPanelDragBeginTramp;
+        break;
+      }
+      case "panel_drag_end":
+      {
+        static extern(C) void _vfuncPanelDragEndTramp(PanelDock* self, PanelWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.panel1.dock.Dock)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(PanelDockClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.panelDragEnd)
+              return (cast(typeof(&_vfuncPanelDragEndTramp))_klass.panelDragEnd)(self, widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPanelDragEnd(gid.gobject2.object.ObjectWrap._getDObject!(gid.panel1.widget.Widget)(cast(void*)widget, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.panel1.dock.Dock.vfuncPanelDragEnd");
+          }
+        }
+
+        _klass.panelDragEnd = cast(typeof(_klass.panelDragEnd))&_vfuncPanelDragEndTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

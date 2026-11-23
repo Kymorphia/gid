@@ -173,9 +173,48 @@ class Toolbar : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable, gi
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_toolbar_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_toolbar_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncOrientationChanged(gid.gtk3.types.Orientation orientation)
+  {
+    auto _klass = cast(GtkToolbarClass*)_vfuncClass;
+    if (!_klass.orientationChanged)
+      return;
+
+    _klass.orientationChanged(cast(GtkToolbar*)this._cPtr, orientation);
+  }
+
+  /** */
+  protected bool vfuncPopupContextMenu(int x, int y, int buttonNumber)
+  {
+    auto _klass = cast(GtkToolbarClass*)_vfuncClass;
+    if (!_klass.popupContextMenu)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.popupContextMenu(cast(GtkToolbar*)this._cPtr, x, y, buttonNumber);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncStyleChanged(gid.gtk3.types.ToolbarStyle style)
+  {
+    auto _klass = cast(GtkToolbarClass*)_vfuncClass;
+    if (!_klass.styleChanged)
+      return;
+
+    _klass.styleChanged(cast(GtkToolbar*)this._cPtr, style);
   }
 
   /**
@@ -420,6 +459,7 @@ class Toolbar : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable, gi
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -473,6 +513,7 @@ class Toolbar : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable, gi
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -537,6 +578,7 @@ class Toolbar : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable, gi
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -596,6 +638,7 @@ class Toolbar : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable, gi
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -618,6 +661,127 @@ class Toolbar : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable, gi
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("style-changed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Toolbar
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.toolbar.Toolbar), T.stringof ~ " is not derived from gid.gtk3.toolbar.Toolbar");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncOrientationChanged", true)[0]) == gid.gtk3.toolbar.Toolbar))
+      _installVfunc(klass, "orientation_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPopupContextMenu", true)[0]) == gid.gtk3.toolbar.Toolbar))
+      _installVfunc(klass, "popup_context_menu");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStyleChanged", true)[0]) == gid.gtk3.toolbar.Toolbar))
+      _installVfunc(klass, "style_changed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkToolbarClass*)klass;
+
+    switch (vfunc)
+    {
+      case "orientation_changed":
+      {
+        static extern(C) void _vfuncOrientationChangedTramp(GtkToolbar* toolbar, GtkOrientation orientation) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.toolbar.Toolbar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)toolbar);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkToolbarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)toolbar);
+            if (_klass.orientationChanged)
+              return (cast(typeof(&_vfuncOrientationChangedTramp))_klass.orientationChanged)(toolbar, orientation);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncOrientationChanged(orientation);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.toolbar.Toolbar.vfuncOrientationChanged");
+          }
+        }
+
+        _klass.orientationChanged = cast(typeof(_klass.orientationChanged))&_vfuncOrientationChangedTramp;
+        break;
+      }
+      case "popup_context_menu":
+      {
+        static extern(C) gboolean _vfuncPopupContextMenuTramp(GtkToolbar* toolbar, int x, int y, int buttonNumber) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.toolbar.Toolbar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)toolbar);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkToolbarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)toolbar);
+            if (_klass.popupContextMenu)
+              return (cast(typeof(&_vfuncPopupContextMenuTramp))_klass.popupContextMenu)(toolbar, x, y, buttonNumber);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncPopupContextMenu(x, y, buttonNumber);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.toolbar.Toolbar.vfuncPopupContextMenu");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.popupContextMenu = cast(typeof(_klass.popupContextMenu))&_vfuncPopupContextMenuTramp;
+        break;
+      }
+      case "style_changed":
+      {
+        static extern(C) void _vfuncStyleChangedTramp(GtkToolbar* toolbar, GtkToolbarStyle style) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.toolbar.Toolbar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)toolbar);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkToolbarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)toolbar);
+            if (_klass.styleChanged)
+              return (cast(typeof(&_vfuncStyleChangedTramp))_klass.styleChanged)(toolbar, style);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncStyleChanged(style);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.toolbar.Toolbar.vfuncStyleChanged");
+          }
+        }
+
+        _klass.styleChanged = cast(typeof(_klass.styleChanged))&_vfuncStyleChangedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

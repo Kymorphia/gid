@@ -120,10 +120,17 @@ class ShortcutsSection : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.Lis
   */
   this(string title = null) nothrow
   {
-    AdwShortcutsSection* _cretval;
-    const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = adw_shortcuts_section_new(_title);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, title !is null), Yes.Take);
+    }
+    else
+    {
+      AdwShortcutsSection* _cretval;
+      const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = adw_shortcuts_section_new(_title);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

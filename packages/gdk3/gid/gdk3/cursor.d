@@ -24,6 +24,15 @@ class Cursor : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -84,9 +93,16 @@ class Cursor : gid.gobject2.object.ObjectWrap
   */
   this(gid.gdk3.types.CursorType cursorType) nothrow
   {
-    GdkCursor* _cretval;
-    _cretval = gdk_cursor_new(cursorType);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GdkCursor* _cretval;
+      _cretval = gdk_cursor_new(cursorType);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

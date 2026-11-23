@@ -75,9 +75,16 @@ class PrintSettings : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GtkPrintSettings* _cretval;
-    _cretval = gtk_print_settings_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkPrintSettings* _cretval;
+      _cretval = gtk_print_settings_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -172,6 +179,7 @@ class PrintSettings : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _funcCallback(const(char)* key, const(char)* value, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk4.types.PrintSettingsFunc*)userData;
       string _key = key.fromCString!(No.Free);
       string _value = value.fromCString!(No.Free);

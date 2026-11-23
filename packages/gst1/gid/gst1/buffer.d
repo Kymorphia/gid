@@ -384,6 +384,7 @@ class Buffer : gid.gobject2.boxed.BoxedWrap!(gst_buffer_get_type)
   {
     extern(C) void _notifyCallback(void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.glib2.types.DestroyNotify*)data;
 
@@ -710,6 +711,7 @@ class Buffer : gid.gobject2.boxed.BoxedWrap!(gst_buffer_get_type)
   {
     extern(C) gboolean _funcCallback(GstBuffer* buffer, GstMeta** meta, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.BufferForeachMetaFunc*)userData;
       auto _buffer = buffer ? new gid.gst1.buffer.Buffer(cast(void*)buffer, No.Take) : null;

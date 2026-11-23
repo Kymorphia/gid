@@ -21,6 +21,15 @@ class FilterFrom : gid.gmime3.filter.Filter
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -73,9 +82,16 @@ class FilterFrom : gid.gmime3.filter.Filter
   */
   this(gid.gmime3.types.FilterFromMode mode) nothrow
   {
-    GMimeFilter* _cretval;
-    _cretval = g_mime_filter_from_new(mode);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GMimeFilter* _cretval;
+      _cretval = g_mime_filter_from_new(mode);
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

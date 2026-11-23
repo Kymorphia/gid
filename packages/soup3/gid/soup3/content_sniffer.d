@@ -74,9 +74,16 @@ class ContentSniffer : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature
   */
   this() nothrow
   {
-    SoupContentSniffer* _cretval;
-    _cretval = soup_content_sniffer_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      SoupContentSniffer* _cretval;
+      _cretval = soup_content_sniffer_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

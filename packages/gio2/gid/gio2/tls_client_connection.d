@@ -187,6 +187,7 @@ interface TlsClientConnection : GidWrap
     return _retval;
   }
 
+
   /**
       Possibly copies session state from one connection to another, for use
       in TLS session resumption. This is not normally needed, but may be

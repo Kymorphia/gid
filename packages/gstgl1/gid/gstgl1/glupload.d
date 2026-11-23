@@ -28,6 +28,15 @@ class GLUpload : gid.gst1.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -65,9 +74,16 @@ class GLUpload : gid.gst1.object.ObjectWrap
   /** */
   this(gid.gstgl1.glcontext.GLContext context) nothrow
   {
-    GstGLUpload* _cretval;
-    _cretval = gst_gl_upload_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GstGLUpload* _cretval;
+      _cretval = gst_gl_upload_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /** */

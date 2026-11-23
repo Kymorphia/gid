@@ -22,6 +22,15 @@ class CallbackAnimationTarget : gid.adw1.animation_target.AnimationTarget
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -66,25 +75,33 @@ class CallbackAnimationTarget : gid.adw1.animation_target.AnimationTarget
   */
   this(gid.adw1.types.AnimationTargetFunc callback) nothrow
   {
-    extern(C) void _callbackCallback(double value, void* userData) nothrow
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
     {
-      auto _dlg = cast(gid.adw1.types.AnimationTargetFunc*)userData;
-
-      try
-      {
-        (*_dlg)(value);
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "gid.adw1.types.AnimationTargetFunc");
-      }
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }
-    auto _callbackCB = callback ? &_callbackCallback : null;
-    AdwAnimationTarget* _cretval;
-    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
-    _cretval = adw_callback_animation_target_new(_callbackCB, _callback, _callbackDestroyCB);
-    this(_cretval, Yes.Take);
+    else
+    {
+      extern(C) void _callbackCallback(double value, void* userData) nothrow
+      {
+        gidAttachThread();
+        auto _dlg = cast(gid.adw1.types.AnimationTargetFunc*)userData;
+
+        try
+        {
+          (*_dlg)(value);
+        }
+        catch (Exception e)
+        {
+          gidInvokeCallbackExceptionHandler(e, "gid.adw1.types.AnimationTargetFunc");
+        }
+      }
+      auto _callbackCB = callback ? &_callbackCallback : null;
+      AdwAnimationTarget* _cretval;
+      auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+      GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
+      _cretval = adw_callback_animation_target_new(_callbackCB, _callback, _callbackDestroyCB);
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

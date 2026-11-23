@@ -27,6 +27,15 @@ class RadioAction : gid.gtk3.toggle_action.ToggleAction
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -137,13 +146,30 @@ class RadioAction : gid.gtk3.toggle_action.ToggleAction
   */
   this(string name, string label, string tooltip, string stockId, int value) nothrow
   {
-    GtkRadioAction* _cretval;
-    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
-    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
-    const(char)* _tooltip = tooltip.toCString!(No.Malloc, Yes.Nullable);
-    const(char)* _stockId = stockId.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gtk_radio_action_new(_name, _label, _tooltip, _stockId, value);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkRadioAction* _cretval;
+      const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+      const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
+      const(char)* _tooltip = tooltip.toCString!(No.Malloc, Yes.Nullable);
+      const(char)* _stockId = stockId.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gtk_radio_action_new(_name, _label, _tooltip, _stockId, value);
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncChanged(gid.gtk3.radio_action.RadioAction current)
+  {
+    auto _klass = cast(GtkRadioActionClass*)_vfuncClass;
+    if (!_klass.changed)
+      return;
+
+    _klass.changed(cast(GtkRadioAction*)this._cPtr, current ? cast(GtkRadioAction*)current._cPtr(No.Dup) : null);
   }
 
   /**
@@ -268,6 +294,7 @@ class RadioAction : gid.gtk3.toggle_action.ToggleAction
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -290,6 +317,62 @@ class RadioAction : gid.gtk3.toggle_action.ToggleAction
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from RadioAction
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.radio_action.RadioAction), T.stringof ~ " is not derived from gid.gtk3.radio_action.RadioAction");
+
+    gid.gtk3.toggle_action.ToggleAction._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChanged", true)[0]) == gid.gtk3.radio_action.RadioAction))
+      _installVfunc(klass, "changed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkRadioActionClass*)klass;
+
+    switch (vfunc)
+    {
+      case "changed":
+      {
+        static extern(C) void _vfuncChangedTramp(GtkRadioAction* action, GtkRadioAction* current) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.radio_action.RadioAction)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)action);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkRadioActionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)action);
+            if (_klass.changed)
+              return (cast(typeof(&_vfuncChangedTramp))_klass.changed)(action, current);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncChanged(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.radio_action.RadioAction)(cast(void*)current, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.radio_action.RadioAction.vfuncChanged");
+          }
+        }
+
+        _klass.changed = cast(typeof(_klass.changed))&_vfuncChangedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

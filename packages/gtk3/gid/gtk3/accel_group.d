@@ -91,9 +91,16 @@ class AccelGroup : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GtkAccelGroup* _cretval;
-    _cretval = gtk_accel_group_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkAccelGroup* _cretval;
+      _cretval = gtk_accel_group_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -111,6 +118,28 @@ class AccelGroup : gid.gobject2.object.ObjectWrap
     _cretval = gtk_accel_group_from_accel_closure(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.Take);
     return _retval;
+  }
+
+  /**
+      Signal emitted when an entry is added to or removed
+         from the accel group.
+  
+      Params:
+        keyval = 
+        modifier = 
+        accelClosure =  (modified in place, changes are seen by the caller)
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncAccelChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncAccelChanged(uint keyval, gid.gdk3.types.ModifierType modifier, gid.gobject2.closure.Closure accelClosure)
+  {
+    auto _klass = cast(GtkAccelGroupClass*)_vfuncClass;
+    if (!_klass.accelChanged)
+      return;
+
+    _klass.accelChanged(cast(GtkAccelGroup*)this._cPtr, keyval, modifier, accelClosure ? cast(GClosure*)accelClosure._cPtr(No.Dup) : null);
   }
 
   /**
@@ -228,6 +257,7 @@ class AccelGroup : gid.gobject2.object.ObjectWrap
   {
     extern(C) gboolean _findFuncCallback(GtkAccelKey* key, GClosure* closure, void* data) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gtk3.types.AccelGroupFindFunc*)data;
       auto _closure = closure ? new gid.gobject2.closure.Closure(cast(void*)closure, Yes.Take)._cBorrow : null;
@@ -341,6 +371,7 @@ class AccelGroup : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -412,6 +443,7 @@ class AccelGroup : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -440,6 +472,67 @@ class AccelGroup : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("accel-changed"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from AccelGroup
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.accel_group.AccelGroup), T.stringof ~ " is not derived from gid.gtk3.accel_group.AccelGroup");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAccelChanged", true)[0]) == gid.gtk3.accel_group.AccelGroup))
+      _installVfunc(klass, "accel_changed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkAccelGroupClass*)klass;
+
+    switch (vfunc)
+    {
+      case "accel_changed":
+      {
+        static extern(C) void _vfuncAccelChangedTramp(GtkAccelGroup* accelGroup, uint keyval, GdkModifierType modifier, GClosure* accelClosure) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.accel_group.AccelGroup)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accelGroup);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkAccelGroupClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accelGroup);
+            if (_klass.accelChanged)
+              return (cast(typeof(&_vfuncAccelChangedTramp))_klass.accelChanged)(accelGroup, keyval, modifier, accelClosure);
+            return;
+          }
+
+          auto _accelClosure = accelClosure ? new gid.gobject2.closure.Closure(cast(void*)accelClosure, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncAccelChanged(keyval, modifier, _accelClosure);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.accel_group.AccelGroup.vfuncAccelChanged");
+          }
+          if (_accelClosure)
+            _accelClosure._cUnborrow;
+
+        }
+
+        _klass.accelChanged = cast(typeof(_klass.accelChanged))&_vfuncAccelChangedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

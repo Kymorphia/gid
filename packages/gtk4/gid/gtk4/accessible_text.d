@@ -30,6 +30,16 @@ interface AccessibleText : gid.gtk4.accessible.Accessible
     return cast(void function())gtk_accessible_text_get_type != &gidSymbolNotFound ? gtk_accessible_text_get_type() : cast(GType)0;
   }
 
+
+
+
+
+
+
+
+
+
+
   /**
       Updates the position of the caret.
       

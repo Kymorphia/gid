@@ -328,9 +328,36 @@ class Popover : gid.gtk4.widget.Widget, gid.gtk4.native.Native, gid.gtk4.shortcu
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_popover_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_popover_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncActivateDefault()
+  {
+    auto _klass = cast(GtkPopoverClass*)_vfuncClass;
+    if (!_klass.activateDefault)
+      return;
+
+    _klass.activateDefault(cast(GtkPopover*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncClosed()
+  {
+    auto _klass = cast(GtkPopoverClass*)_vfuncClass;
+    if (!_klass.closed)
+      return;
+
+    _klass.closed(cast(GtkPopover*)this._cPtr);
   }
 
   /**
@@ -627,6 +654,7 @@ class Popover : gid.gtk4.widget.Widget, gid.gtk4.native.Native, gid.gtk4.shortcu
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -671,6 +699,7 @@ class Popover : gid.gtk4.widget.Widget, gid.gtk4.native.Native, gid.gtk4.shortcu
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -690,6 +719,92 @@ class Popover : gid.gtk4.widget.Widget, gid.gtk4.native.Native, gid.gtk4.shortcu
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("closed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Popover
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.popover.Popover), T.stringof ~ " is not derived from gid.gtk4.popover.Popover");
+
+    gid.gtk4.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivateDefault", true)[0]) == gid.gtk4.popover.Popover))
+      _installVfunc(klass, "activate_default");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncClosed", true)[0]) == gid.gtk4.popover.Popover))
+      _installVfunc(klass, "closed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkPopoverClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate_default":
+      {
+        static extern(C) void _vfuncActivateDefaultTramp(GtkPopover* popover) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.popover.Popover)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)popover);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkPopoverClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)popover);
+            if (_klass.activateDefault)
+              return (cast(typeof(&_vfuncActivateDefaultTramp))_klass.activateDefault)(popover);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncActivateDefault();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.popover.Popover.vfuncActivateDefault");
+          }
+        }
+
+        _klass.activateDefault = cast(typeof(_klass.activateDefault))&_vfuncActivateDefaultTramp;
+        break;
+      }
+      case "closed":
+      {
+        static extern(C) void _vfuncClosedTramp(GtkPopover* popover) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.popover.Popover)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)popover);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkPopoverClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)popover);
+            if (_klass.closed)
+              return (cast(typeof(&_vfuncClosedTramp))_klass.closed)(popover);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncClosed();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.popover.Popover.vfuncClosed");
+          }
+        }
+
+        _klass.closed = cast(typeof(_klass.closed))&_vfuncClosedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

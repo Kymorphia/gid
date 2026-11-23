@@ -1136,10 +1136,41 @@ class TextTag : gid.gobject2.object.ObjectWrap
   */
   this(string name = null) nothrow
   {
-    GtkTextTag* _cretval;
-    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gtk_text_tag_new(_name);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, name !is null), Yes.Take);
+    }
+    else
+    {
+      GtkTextTag* _cretval;
+      const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gtk_text_tag_new(_name);
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /**
+      Emits the “event” signal on the #GtkTextTag.
+  
+      Params:
+        eventObject = object that received the event, such as a widget
+        event = the event (modified in place, changes are seen by the caller)
+        iter = location where the event was received
+      Returns: result of signal emission (whether the event was handled)
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncEvent(gid.gobject2.object.ObjectWrap eventObject, gid.gdk3.event.Event event, gid.gtk3.text_iter.TextIter iter)
+  {
+    auto _klass = cast(GtkTextTagClass*)_vfuncClass;
+    if (!_klass.event)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.event(cast(GtkTextTag*)this._cPtr, eventObject ? cast(GObject*)eventObject._cPtr(No.Dup) : null, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null);
+    return _retval;
   }
 
   /**
@@ -1240,6 +1271,7 @@ class TextTag : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1271,6 +1303,70 @@ class TextTag : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("event", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from TextTag
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.text_tag.TextTag), T.stringof ~ " is not derived from gid.gtk3.text_tag.TextTag");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEvent", true)[0]) == gid.gtk3.text_tag.TextTag))
+      _installVfunc(klass, "event");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkTextTagClass*)klass;
+
+    switch (vfunc)
+    {
+      case "event":
+      {
+        static extern(C) gboolean _vfuncEventTramp(GtkTextTag* tag, GObject* eventObject, GdkEvent* event, const(GtkTextIter)* iter) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.text_tag.TextTag)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)tag);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextTagClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)tag);
+            if (_klass.event)
+              return (cast(typeof(&_vfuncEventTramp))_klass.event)(tag, eventObject, event, iter);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event.Event(cast(void*)event, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncEvent(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)eventObject, No.Take), _event, iter ? new gid.gtk3.text_iter.TextIter(cast(void*)iter, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.text_tag.TextTag.vfuncEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_event)
+            _event._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.event = cast(typeof(_klass.event))&_vfuncEventTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

@@ -1088,9 +1088,16 @@ class Entry : gid.gtk4.widget.Widget, gid.gtk4.cell_editable.CellEditable, gid.g
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_entry_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_entry_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -1106,6 +1113,23 @@ class Entry : gid.gtk4.widget.Widget, gid.gtk4.cell_editable.CellEditable, gid.g
     _cretval = gtk_entry_new_with_buffer(buffer ? cast(GtkEntryBuffer*)buffer._cPtr(No.Dup) : null);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.entry.Entry)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+
+  /**
+      Class handler for the `GtkEntry::activate` signal. The default
+        implementation activates the gtk.activate-default action.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncActivate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncActivate()
+  {
+    auto _klass = cast(GtkEntryClass*)_vfuncClass;
+    if (!_klass.activate)
+      return;
+
+    _klass.activate(cast(GtkEntry*)this._cPtr);
   }
 
   /**
@@ -2047,6 +2071,7 @@ class Entry : gid.gtk4.widget.Widget, gid.gtk4.cell_editable.CellEditable, gid.g
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2094,6 +2119,7 @@ class Entry : gid.gtk4.widget.Widget, gid.gtk4.cell_editable.CellEditable, gid.g
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2145,6 +2171,7 @@ class Entry : gid.gtk4.widget.Widget, gid.gtk4.cell_editable.CellEditable, gid.g
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2167,6 +2194,62 @@ class Entry : gid.gtk4.widget.Widget, gid.gtk4.cell_editable.CellEditable, gid.g
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("icon-release", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Entry
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.entry.Entry), T.stringof ~ " is not derived from gid.gtk4.entry.Entry");
+
+    gid.gtk4.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivate", true)[0]) == gid.gtk4.entry.Entry))
+      _installVfunc(klass, "activate");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkEntryClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate":
+      {
+        static extern(C) void _vfuncActivateTramp(GtkEntry* entry) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.entry.Entry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);
+            if (_klass.activate)
+              return (cast(typeof(&_vfuncActivateTramp))_klass.activate)(entry);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncActivate();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.entry.Entry.vfuncActivate");
+          }
+        }
+
+        _klass.activate = cast(typeof(_klass.activate))&_vfuncActivateTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

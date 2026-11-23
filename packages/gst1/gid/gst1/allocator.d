@@ -34,6 +34,15 @@ class Allocator : gid.gst1.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -120,6 +129,63 @@ class Allocator : gid.gst1.object.ObjectWrap
         size = size of the visible memory area
         params = optional parameters
       Returns: a new #GstMemory.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncAlloc` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.memory.Memory vfuncAlloc(size_t size, gid.gst1.allocation_params.AllocationParams* params = null)
+  {
+    auto _klass = cast(GstAllocatorClass*)_vfuncClass;
+    if (!_klass.alloc)
+      return typeof(return).init;
+
+    GstMemory* _cretval;
+    _cretval = _klass.alloc(cast(GstAllocator*)this._cPtr, size, cast(GstAllocationParams*)params);
+    auto _retval = _cretval ? new gid.gst1.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Free memory that was previously allocated with [gid.gst1.allocator.Allocator.alloc].
+  
+      Params:
+        memory = the memory to free
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncFree` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncFree(gid.gst1.memory.Memory memory)
+  {
+    auto _klass = cast(GstAllocatorClass*)_vfuncClass;
+    if (!_klass.free)
+      return;
+
+    _klass.free(cast(GstAllocator*)this._cPtr, memory ? cast(GstMemory*)memory._cPtr(Yes.Dup) : null);
+  }
+
+  /**
+      Use allocator to allocate a new memory block with memory that is at least
+      size big.
+      
+      The optional params can specify the prefix and padding for the memory. If
+      null is passed, no flags, no extra prefix/padding and a default alignment is
+      used.
+      
+      The prefix/padding will be filled with 0 if flags contains
+      #GST_MEMORY_FLAG_ZERO_PREFIXED and #GST_MEMORY_FLAG_ZERO_PADDED respectively.
+      
+      When allocator is null, the default allocator will be used.
+      
+      The alignment in params is given as a bitmask so that align + 1 equals
+      the amount of bytes to align to. For example, to align to 8 bytes,
+      use an alignment of 7.
+  
+      Params:
+        size = size of the visible memory area
+        params = optional parameters
+      Returns: a new #GstMemory.
   */
   gid.gst1.memory.Memory alloc(size_t size, gid.gst1.allocation_params.AllocationParams* params = null) nothrow
   {
@@ -135,6 +201,97 @@ class Allocator : gid.gst1.object.ObjectWrap
   void setDefault() nothrow
   {
     gst_allocator_set_default(cast(GstAllocator*)this._cPtr(Yes.Dup));
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Allocator
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gst1.allocator.Allocator), T.stringof ~ " is not derived from gid.gst1.allocator.Allocator");
+
+    gid.gst1.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAlloc", true)[0]) == gid.gst1.allocator.Allocator))
+      _installVfunc(klass, "alloc");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFree", true)[0]) == gid.gst1.allocator.Allocator))
+      _installVfunc(klass, "free");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstAllocatorClass*)klass;
+
+    switch (vfunc)
+    {
+      case "alloc":
+      {
+        static extern(C) GstMemory* _vfuncAllocTramp(GstAllocator* allocator, size_t size, GstAllocationParams* params) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.allocator.Allocator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)allocator);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAllocatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)allocator);
+            if (_klass.alloc)
+              return (cast(typeof(&_vfuncAllocTramp))_klass.alloc)(allocator, size, params);
+            return typeof(return).init;
+          }
+
+          gid.gst1.memory.Memory _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncAlloc(size, cast(gid.gst1.allocation_params.AllocationParams*)params);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.allocator.Allocator.vfuncAlloc");
+          }
+          auto _retval = _dretval ? cast(GstMemory*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.alloc = cast(typeof(_klass.alloc))&_vfuncAllocTramp;
+        break;
+      }
+      case "free":
+      {
+        static extern(C) void _vfuncFreeTramp(GstAllocator* allocator, GstMemory* memory) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.allocator.Allocator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)allocator);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAllocatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)allocator);
+            if (_klass.free)
+              return (cast(typeof(&_vfuncFreeTramp))_klass.free)(allocator, memory);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncFree(memory ? new gid.gst1.memory.Memory(cast(void*)memory, Yes.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.allocator.Allocator.vfuncFree");
+          }
+        }
+
+        _klass.free = cast(typeof(_klass.free))&_vfuncFreeTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

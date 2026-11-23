@@ -56,6 +56,15 @@ class MenuShell : gid.gtk3.container.Container
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -111,6 +120,136 @@ class MenuShell : gid.gtk3.container.Container
   @property void takeFocus(bool propval) nothrow
   {
     setTakeFocus(propval);
+  }
+
+  /** */
+  protected void vfuncActivateCurrent(bool forceHide)
+  {
+    auto _klass = cast(GtkMenuShellClass*)_vfuncClass;
+    if (!_klass.activateCurrent)
+      return;
+
+    _klass.activateCurrent(cast(GtkMenuShell*)this._cPtr, forceHide);
+  }
+
+  /**
+      Cancels the selection within the menu shell.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCancel` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncCancel()
+  {
+    auto _klass = cast(GtkMenuShellClass*)_vfuncClass;
+    if (!_klass.cancel)
+      return;
+
+    _klass.cancel(cast(GtkMenuShell*)this._cPtr);
+  }
+
+  /**
+      Deactivates the menu shell.
+      
+      Typically this results in the menu shell being erased
+      from the screen.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDeactivate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDeactivate()
+  {
+    auto _klass = cast(GtkMenuShellClass*)_vfuncClass;
+    if (!_klass.deactivate)
+      return;
+
+    _klass.deactivate(cast(GtkMenuShell*)this._cPtr);
+  }
+
+  /** */
+  protected int vfuncGetPopupDelay()
+  {
+    auto _klass = cast(GtkMenuShellClass*)_vfuncClass;
+    if (!_klass.getPopupDelay)
+      return typeof(return).init;
+
+    int _retval;
+    _retval = _klass.getPopupDelay(cast(GtkMenuShell*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Adds a new #GtkMenuItem to the menu shell’s item list
+      at the position indicated by position.
+  
+      Params:
+        child = The #GtkMenuItem to add
+        position = The position in the item list where child
+              is added. Positions are numbered from 0 to n-1
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncInsert` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncInsert(gid.gtk3.widget.Widget child, int position)
+  {
+    auto _klass = cast(GtkMenuShellClass*)_vfuncClass;
+    if (!_klass.insert)
+      return;
+
+    _klass.insert(cast(GtkMenuShell*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, position);
+  }
+
+  /** */
+  protected void vfuncMoveCurrent(gid.gtk3.types.MenuDirectionType direction)
+  {
+    auto _klass = cast(GtkMenuShellClass*)_vfuncClass;
+    if (!_klass.moveCurrent)
+      return;
+
+    _klass.moveCurrent(cast(GtkMenuShell*)this._cPtr, direction);
+  }
+
+  /** */
+  protected bool vfuncMoveSelected(int distance)
+  {
+    auto _klass = cast(GtkMenuShellClass*)_vfuncClass;
+    if (!_klass.moveSelected)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.moveSelected(cast(GtkMenuShell*)this._cPtr, distance);
+    return _retval;
+  }
+
+  /**
+      Selects the menu item from the menu shell.
+  
+      Params:
+        menuItem = The #GtkMenuItem to select
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSelectItem` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSelectItem(gid.gtk3.widget.Widget menuItem)
+  {
+    auto _klass = cast(GtkMenuShellClass*)_vfuncClass;
+    if (!_klass.selectItem)
+      return;
+
+    _klass.selectItem(cast(GtkMenuShell*)this._cPtr, menuItem ? cast(GtkWidget*)menuItem._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncSelectionDone()
+  {
+    auto _klass = cast(GtkMenuShellClass*)_vfuncClass;
+    if (!_klass.selectionDone)
+      return;
+
+    _klass.selectionDone(cast(GtkMenuShell*)this._cPtr);
   }
 
   /**
@@ -370,6 +509,7 @@ class MenuShell : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -418,6 +558,7 @@ class MenuShell : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -466,6 +607,7 @@ class MenuShell : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -513,6 +655,7 @@ class MenuShell : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -568,6 +711,7 @@ class MenuShell : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -622,6 +766,7 @@ class MenuShell : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -674,6 +819,7 @@ class MenuShell : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -725,6 +871,7 @@ class MenuShell : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -744,6 +891,310 @@ class MenuShell : gid.gtk3.container.Container
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("selection-done", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from MenuShell
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.menu_shell.MenuShell), T.stringof ~ " is not derived from gid.gtk3.menu_shell.MenuShell");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivateCurrent", true)[0]) == gid.gtk3.menu_shell.MenuShell))
+      _installVfunc(klass, "activate_current");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCancel", true)[0]) == gid.gtk3.menu_shell.MenuShell))
+      _installVfunc(klass, "cancel");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDeactivate", true)[0]) == gid.gtk3.menu_shell.MenuShell))
+      _installVfunc(klass, "deactivate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetPopupDelay", true)[0]) == gid.gtk3.menu_shell.MenuShell))
+      _installVfunc(klass, "get_popup_delay");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncInsert", true)[0]) == gid.gtk3.menu_shell.MenuShell))
+      _installVfunc(klass, "insert");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMoveCurrent", true)[0]) == gid.gtk3.menu_shell.MenuShell))
+      _installVfunc(klass, "move_current");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMoveSelected", true)[0]) == gid.gtk3.menu_shell.MenuShell))
+      _installVfunc(klass, "move_selected");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSelectItem", true)[0]) == gid.gtk3.menu_shell.MenuShell))
+      _installVfunc(klass, "select_item");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSelectionDone", true)[0]) == gid.gtk3.menu_shell.MenuShell))
+      _installVfunc(klass, "selection_done");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkMenuShellClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate_current":
+      {
+        static extern(C) void _vfuncActivateCurrentTramp(GtkMenuShell* menuShell, gboolean forceHide) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.menu_shell.MenuShell)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuShell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMenuShellClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuShell);
+            if (_klass.activateCurrent)
+              return (cast(typeof(&_vfuncActivateCurrentTramp))_klass.activateCurrent)(menuShell, forceHide);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncActivateCurrent(cast(bool)forceHide);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.menu_shell.MenuShell.vfuncActivateCurrent");
+          }
+        }
+
+        _klass.activateCurrent = cast(typeof(_klass.activateCurrent))&_vfuncActivateCurrentTramp;
+        break;
+      }
+      case "cancel":
+      {
+        static extern(C) void _vfuncCancelTramp(GtkMenuShell* menuShell) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.menu_shell.MenuShell)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuShell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMenuShellClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuShell);
+            if (_klass.cancel)
+              return (cast(typeof(&_vfuncCancelTramp))_klass.cancel)(menuShell);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncCancel();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.menu_shell.MenuShell.vfuncCancel");
+          }
+        }
+
+        _klass.cancel = cast(typeof(_klass.cancel))&_vfuncCancelTramp;
+        break;
+      }
+      case "deactivate":
+      {
+        static extern(C) void _vfuncDeactivateTramp(GtkMenuShell* menuShell) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.menu_shell.MenuShell)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuShell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMenuShellClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuShell);
+            if (_klass.deactivate)
+              return (cast(typeof(&_vfuncDeactivateTramp))_klass.deactivate)(menuShell);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDeactivate();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.menu_shell.MenuShell.vfuncDeactivate");
+          }
+        }
+
+        _klass.deactivate = cast(typeof(_klass.deactivate))&_vfuncDeactivateTramp;
+        break;
+      }
+      case "get_popup_delay":
+      {
+        static extern(C) int _vfuncGetPopupDelayTramp(GtkMenuShell* menuShell) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.menu_shell.MenuShell)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuShell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMenuShellClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuShell);
+            if (_klass.getPopupDelay)
+              return (cast(typeof(&_vfuncGetPopupDelayTramp))_klass.getPopupDelay)(menuShell);
+            return typeof(return).init;
+          }
+
+          int _retval;
+
+          try
+          {
+            _retval = _obj.vfuncGetPopupDelay();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.menu_shell.MenuShell.vfuncGetPopupDelay");
+          }
+          return _retval;
+        }
+
+        _klass.getPopupDelay = cast(typeof(_klass.getPopupDelay))&_vfuncGetPopupDelayTramp;
+        break;
+      }
+      case "insert":
+      {
+        static extern(C) void _vfuncInsertTramp(GtkMenuShell* menuShell, GtkWidget* child, int position) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.menu_shell.MenuShell)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuShell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMenuShellClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuShell);
+            if (_klass.insert)
+              return (cast(typeof(&_vfuncInsertTramp))_klass.insert)(menuShell, child, position);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncInsert(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)child, No.Take), position);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.menu_shell.MenuShell.vfuncInsert");
+          }
+        }
+
+        _klass.insert = cast(typeof(_klass.insert))&_vfuncInsertTramp;
+        break;
+      }
+      case "move_current":
+      {
+        static extern(C) void _vfuncMoveCurrentTramp(GtkMenuShell* menuShell, GtkMenuDirectionType direction) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.menu_shell.MenuShell)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuShell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMenuShellClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuShell);
+            if (_klass.moveCurrent)
+              return (cast(typeof(&_vfuncMoveCurrentTramp))_klass.moveCurrent)(menuShell, direction);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMoveCurrent(direction);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.menu_shell.MenuShell.vfuncMoveCurrent");
+          }
+        }
+
+        _klass.moveCurrent = cast(typeof(_klass.moveCurrent))&_vfuncMoveCurrentTramp;
+        break;
+      }
+      case "move_selected":
+      {
+        static extern(C) gboolean _vfuncMoveSelectedTramp(GtkMenuShell* menuShell, int distance) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.menu_shell.MenuShell)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuShell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMenuShellClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuShell);
+            if (_klass.moveSelected)
+              return (cast(typeof(&_vfuncMoveSelectedTramp))_klass.moveSelected)(menuShell, distance);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncMoveSelected(distance);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.menu_shell.MenuShell.vfuncMoveSelected");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.moveSelected = cast(typeof(_klass.moveSelected))&_vfuncMoveSelectedTramp;
+        break;
+      }
+      case "select_item":
+      {
+        static extern(C) void _vfuncSelectItemTramp(GtkMenuShell* menuShell, GtkWidget* menuItem) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.menu_shell.MenuShell)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuShell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMenuShellClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuShell);
+            if (_klass.selectItem)
+              return (cast(typeof(&_vfuncSelectItemTramp))_klass.selectItem)(menuShell, menuItem);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSelectItem(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)menuItem, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.menu_shell.MenuShell.vfuncSelectItem");
+          }
+        }
+
+        _klass.selectItem = cast(typeof(_klass.selectItem))&_vfuncSelectItemTramp;
+        break;
+      }
+      case "selection_done":
+      {
+        static extern(C) void _vfuncSelectionDoneTramp(GtkMenuShell* menuShell) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.menu_shell.MenuShell)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuShell);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMenuShellClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuShell);
+            if (_klass.selectionDone)
+              return (cast(typeof(&_vfuncSelectionDoneTramp))_klass.selectionDone)(menuShell);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSelectionDone();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.menu_shell.MenuShell.vfuncSelectionDone");
+          }
+        }
+
+        _klass.selectionDone = cast(typeof(_klass.selectionDone))&_vfuncSelectionDoneTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

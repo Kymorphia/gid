@@ -188,9 +188,26 @@ class DrawingArea : gid.gtk4.widget.Widget
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_drawing_area_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_drawing_area_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncResize(int width, int height)
+  {
+    auto _klass = cast(GtkDrawingAreaClass*)_vfuncClass;
+    if (!_klass.resize)
+      return;
+
+    _klass.resize(cast(GtkDrawingArea*)this._cPtr, width, height);
   }
 
   /**
@@ -275,6 +292,7 @@ class DrawingArea : gid.gtk4.widget.Widget
   {
     extern(C) void _drawFuncCallback(GtkDrawingArea* drawingArea, cairo_t* cr, int width, int height, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk4.types.DrawingAreaDrawFunc*)userData;
       auto _cr = cr ? new gid.cairo1.context.Context(cast(void*)cr, Yes.Take)._cBorrow : null;
 
@@ -329,6 +347,7 @@ class DrawingArea : gid.gtk4.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -354,6 +373,62 @@ class DrawingArea : gid.gtk4.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("resize", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from DrawingArea
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.drawing_area.DrawingArea), T.stringof ~ " is not derived from gid.gtk4.drawing_area.DrawingArea");
+
+    gid.gtk4.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncResize", true)[0]) == gid.gtk4.drawing_area.DrawingArea))
+      _installVfunc(klass, "resize");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkDrawingAreaClass*)klass;
+
+    switch (vfunc)
+    {
+      case "resize":
+      {
+        static extern(C) void _vfuncResizeTramp(GtkDrawingArea* area, int width, int height) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.drawing_area.DrawingArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkDrawingAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);
+            if (_klass.resize)
+              return (cast(typeof(&_vfuncResizeTramp))_klass.resize)(area, width, height);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncResize(width, height);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.drawing_area.DrawingArea.vfuncResize");
+          }
+        }
+
+        _klass.resize = cast(typeof(_klass.resize))&_vfuncResizeTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

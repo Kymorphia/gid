@@ -50,6 +50,15 @@ class Table : gid.gtk3.container.Container
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -162,9 +171,16 @@ class Table : gid.gtk3.container.Container
   */
   this(uint rows, uint columns, bool homogeneous) nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_table_new(rows, columns, homogeneous);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_table_new(rows, columns, homogeneous);
+      this(_cretval, No.Take);
+    }
   }
 
   /**

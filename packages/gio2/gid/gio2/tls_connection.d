@@ -35,6 +35,15 @@ class TlsConnection : gid.gio2.iostream.IOStream
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -336,6 +345,207 @@ class TlsConnection : gid.gio2.iostream.IOStream
   }
 
   /**
+      Check whether to accept a certificate.
+  
+      Params:
+        peerCert = 
+        errors = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncAcceptCertificate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncAcceptCertificate(gid.gio2.tls_certificate.TlsCertificate peerCert, gid.gio2.types.TlsCertificateFlags errors)
+  {
+    auto _klass = cast(GTlsConnectionClass*)_vfuncClass;
+    if (!_klass.acceptCertificate)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.acceptCertificate(cast(GTlsConnection*)this._cPtr, peerCert ? cast(GTlsCertificate*)peerCert._cPtr(No.Dup) : null, errors);
+    return _retval;
+  }
+
+  /**
+      Retrieve TLS channel binding data (Since: 2.66)
+  
+      Params:
+        type = 
+        data = 
+      Returns: 
+      Throws: [ErrorWrap]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetBindingData` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncGetBindingData(gid.gio2.types.TlsChannelBindingType type, ubyte[] data)
+  {
+    auto _klass = cast(GTlsConnectionClass*)_vfuncClass;
+    if (!_klass.getBindingData)
+      return typeof(return).init;
+
+    bool _retval;
+    auto _data = gByteArrayFromD(data);
+    scope(exit) containerFree!(GByteArray*, ubyte, GidOwnership.None)(_data);
+    GError *_err;
+    _retval = cast(bool)_klass.getBindingData(cast(GTlsConnection*)this._cPtr, type, _data, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the name of the application-layer protocol negotiated during
+      the handshake.
+      
+      If the peer did not use the ALPN extension, or did not advertise a
+      protocol that matched one of conn's protocols, or the TLS backend
+      does not support ALPN, then this will be null. See
+      [gid.gio2.tls_connection.TlsConnection.setAdvertisedProtocols].
+      Returns: the negotiated protocol, or null
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetNegotiatedProtocol` to chain up from an override.
+      Overriding it from D is not supported (callback string return value with transfer none is not supported).
+  */
+  protected string vfuncGetNegotiatedProtocol()
+  {
+    auto _klass = cast(GTlsConnectionClass*)_vfuncClass;
+    if (!_klass.getNegotiatedProtocol)
+      return typeof(return).init;
+
+    const(char)* _cretval;
+    _cretval = _klass.getNegotiatedProtocol(cast(GTlsConnection*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Attempts a TLS handshake on conn.
+      
+      On the client side, it is never necessary to call this method;
+      although the connection needs to perform a handshake after
+      connecting (or after sending a "STARTTLS"-type command),
+      #GTlsConnection will handle this for you automatically when you try
+      to send or receive data on the connection. You can call
+      [gid.gio2.tls_connection.TlsConnection.handshake] manually if you want to know whether
+      the initial handshake succeeded or failed (as opposed to just
+      immediately trying to use conn to read or write, in which case,
+      if it fails, it may not be possible to tell if it failed before or
+      after completing the handshake), but beware that servers may reject
+      client authentication after the handshake has completed, so a
+      successful handshake does not indicate the connection will be usable.
+      
+      Likewise, on the server side, although a handshake is necessary at
+      the beginning of the communication, you do not need to call this
+      function explicitly unless you want clearer error reporting.
+      
+      Previously, calling [gid.gio2.tls_connection.TlsConnection.handshake] after the initial
+      handshake would trigger a rehandshake; however, this usage was
+      deprecated in GLib 2.60 because rehandshaking was removed from the
+      TLS protocol in TLS 1.3. Since GLib 2.64, calling this function after
+      the initial handshake will no longer do anything.
+      
+      When using a #GTlsConnection created by #GSocketClient, the
+      #GSocketClient performs the initial handshake, so calling this
+      function manually is not recommended.
+      
+      #GTlsConnection::accept_certificate may be emitted during the
+      handshake.
+  
+      Params:
+        cancellable = a #GCancellable, or null
+      Returns: success or failure
+      Throws: [ErrorWrap]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncHandshake` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncHandshake(gid.gio2.cancellable.Cancellable cancellable = null)
+  {
+    auto _klass = cast(GTlsConnectionClass*)_vfuncClass;
+    if (!_klass.handshake)
+      return typeof(return).init;
+
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)_klass.handshake(cast(GTlsConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Asynchronously performs a TLS handshake on conn. See
+      [gid.gio2.tls_connection.TlsConnection.handshake] for more information.
+  
+      Params:
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
+        cancellable = a #GCancellable, or null
+        callback = callback to call when the handshake is complete
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncHandshakeAsync` to chain up from an override.
+      Overriding it from D is not supported (parameter 'callback' of kind 'Callback' is not supported).
+  */
+  protected void vfuncHandshakeAsync(int ioPriority, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null)
+  {
+    auto _klass = cast(GTlsConnectionClass*)_vfuncClass;
+    if (!_klass.handshakeAsync)
+      return;
+
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      gidAttachThread();
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    _klass.handshakeAsync(cast(GTlsConnection*)this._cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Finish an asynchronous TLS handshake operation. See
+      [gid.gio2.tls_connection.TlsConnection.handshake] for more information.
+  
+      Params:
+        result = a #GAsyncResult.
+      Returns: true on success, false on failure, in which
+        case error will be set.
+      Throws: [ErrorWrap]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncHandshakeFinish` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncHandshakeFinish(gid.gio2.async_result.AsyncResult result)
+  {
+    auto _klass = cast(GTlsConnectionClass*)_vfuncClass;
+    if (!_klass.handshakeFinish)
+      return typeof(return).init;
+
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)_klass.handshakeFinish(cast(GTlsConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
       Used by #GTlsConnection implementations to emit the
       #GTlsConnection::accept-certificate signal.
   
@@ -615,6 +825,7 @@ class TlsConnection : gid.gio2.iostream.IOStream
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -889,6 +1100,7 @@ class TlsConnection : gid.gio2.iostream.IOStream
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -917,6 +1129,179 @@ class TlsConnection : gid.gio2.iostream.IOStream
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("accept-certificate", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from TlsConnection
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.tls_connection.TlsConnection), T.stringof ~ " is not derived from gid.gio2.tls_connection.TlsConnection");
+
+    gid.gio2.iostream.IOStream._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAcceptCertificate", true)[0]) == gid.gio2.tls_connection.TlsConnection))
+      _installVfunc(klass, "accept_certificate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetBindingData", true)[0]) == gid.gio2.tls_connection.TlsConnection))
+      _installVfunc(klass, "get_binding_data");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetNegotiatedProtocol", true)[0]) == gid.gio2.tls_connection.TlsConnection))
+      static assert(0, "Overriding gid.gio2.tls_connection.TlsConnection.vfuncGetNegotiatedProtocol is not supported: callback string return value with transfer none is not supported");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHandshake", true)[0]) == gid.gio2.tls_connection.TlsConnection))
+      _installVfunc(klass, "handshake");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHandshakeAsync", true)[0]) == gid.gio2.tls_connection.TlsConnection))
+      static assert(0, "Overriding gid.gio2.tls_connection.TlsConnection.vfuncHandshakeAsync is not supported: parameter 'callback' of kind 'Callback' is not supported");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHandshakeFinish", true)[0]) == gid.gio2.tls_connection.TlsConnection))
+      _installVfunc(klass, "handshake_finish");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GTlsConnectionClass*)klass;
+
+    switch (vfunc)
+    {
+      case "accept_certificate":
+      {
+        static extern(C) gboolean _vfuncAcceptCertificateTramp(GTlsConnection* connection, GTlsCertificate* peerCert, GTlsCertificateFlags errors) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.tls_connection.TlsConnection)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)connection);
+          if (!_obj)
+          {
+            auto _klass = cast(GTlsConnectionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)connection);
+            if (_klass.acceptCertificate)
+              return (cast(typeof(&_vfuncAcceptCertificateTramp))_klass.acceptCertificate)(connection, peerCert, errors);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncAcceptCertificate(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.tls_certificate.TlsCertificate)(cast(void*)peerCert, No.Take), errors);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.tls_connection.TlsConnection.vfuncAcceptCertificate");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.acceptCertificate = cast(typeof(_klass.acceptCertificate))&_vfuncAcceptCertificateTramp;
+        break;
+      }
+      case "get_binding_data":
+      {
+        static extern(C) gboolean _vfuncGetBindingDataTramp(GTlsConnection* conn, GTlsChannelBindingType type, GByteArray* data, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.tls_connection.TlsConnection)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)conn);
+          if (!_obj)
+          {
+            auto _klass = cast(GTlsConnectionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)conn);
+            if (_klass.getBindingData)
+              return (cast(typeof(&_vfuncGetBindingDataTramp))_klass.getBindingData)(conn, type, data, _err);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _data = gByteArrayToD!(GidOwnership.None)(data);
+
+          try
+          {
+            _dretval = _obj.vfuncGetBindingData(type, _data);
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getBindingData = cast(typeof(_klass.getBindingData))&_vfuncGetBindingDataTramp;
+        break;
+      }
+      case "handshake":
+      {
+        static extern(C) gboolean _vfuncHandshakeTramp(GTlsConnection* conn, GCancellable* cancellable, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.tls_connection.TlsConnection)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)conn);
+          if (!_obj)
+          {
+            auto _klass = cast(GTlsConnectionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)conn);
+            if (_klass.handshake)
+              return (cast(typeof(&_vfuncHandshakeTramp))_klass.handshake)(conn, cancellable, _err);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncHandshake(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.handshake = cast(typeof(_klass.handshake))&_vfuncHandshakeTramp;
+        break;
+      }
+      case "handshake_finish":
+      {
+        static extern(C) gboolean _vfuncHandshakeFinishTramp(GTlsConnection* conn, GAsyncResult* result, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.tls_connection.TlsConnection)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)conn);
+          if (!_obj)
+          {
+            auto _klass = cast(GTlsConnectionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)conn);
+            if (_klass.handshakeFinish)
+              return (cast(typeof(&_vfuncHandshakeFinishTramp))_klass.handshakeFinish)(conn, result, _err);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncHandshakeFinish(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)result, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.handshakeFinish = cast(typeof(_klass.handshakeFinish))&_vfuncHandshakeFinishTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

@@ -31,6 +31,15 @@ class CellAreaContext : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -116,6 +125,132 @@ class CellAreaContext : gid.gobject2.object.ObjectWrap
   @property int naturalWidth() nothrow
   {
     return gid.gobject2.object.ObjectWrap.getProperty!(int)("natural-width");
+  }
+
+  /**
+      Allocates a width and/or a height for all rows which are to be
+      rendered with context.
+      
+      Usually allocation is performed only horizontally or sometimes
+      vertically since a group of rows are usually rendered side by
+      side vertically or horizontally and share either the same width
+      or the same height. Sometimes they are allocated in both horizontal
+      and vertical orientations producing a homogeneous effect of the
+      rows. This is generally the case for #GtkTreeView when
+      #GtkTreeView:fixed-height-mode is enabled.
+      
+      Since 3.0
+  
+      Params:
+        width = the allocated width for all #GtkTreeModel rows rendered
+              with context, or -1.
+        height = the allocated height for all #GtkTreeModel rows rendered
+              with context, or -1.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncAllocate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncAllocate(int width, int height)
+  {
+    auto _klass = cast(GtkCellAreaContextClass*)_vfuncClass;
+    if (!_klass.allocate)
+      return;
+
+    _klass.allocate(cast(GtkCellAreaContext*)this._cPtr, width, height);
+  }
+
+  /**
+      Gets the accumulative preferred height for width for all rows
+      which have been requested for the same said width with this context.
+      
+      After [gid.gtk4.cell_area_context.CellAreaContext.reset] is called and/or before ever
+      requesting the size of a #GtkCellArea, the returned values are -1.
+  
+      Params:
+        width = a proposed width for allocation
+        minimumHeight = location to store the minimum height,
+              or null
+        naturalHeight = location to store the natural height,
+              or null
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetPreferredHeightForWidth` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncGetPreferredHeightForWidth(int width, out int minimumHeight, out int naturalHeight)
+  {
+    auto _klass = cast(GtkCellAreaContextClass*)_vfuncClass;
+    if (!_klass.getPreferredHeightForWidth)
+      return;
+
+    _klass.getPreferredHeightForWidth(cast(GtkCellAreaContext*)this._cPtr, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
+  }
+
+  /**
+      Gets the accumulative preferred width for height for all rows which
+      have been requested for the same said height with this context.
+      
+      After [gid.gtk4.cell_area_context.CellAreaContext.reset] is called and/or before ever
+      requesting the size of a #GtkCellArea, the returned values are -1.
+  
+      Params:
+        height = a proposed height for allocation
+        minimumWidth = location to store the minimum width,
+              or null
+        naturalWidth = location to store the natural width,
+              or null
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetPreferredWidthForHeight` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncGetPreferredWidthForHeight(int height, out int minimumWidth, out int naturalWidth)
+  {
+    auto _klass = cast(GtkCellAreaContextClass*)_vfuncClass;
+    if (!_klass.getPreferredWidthForHeight)
+      return;
+
+    _klass.getPreferredWidthForHeight(cast(GtkCellAreaContext*)this._cPtr, height, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
+  }
+
+  /**
+      Resets any previously cached request and allocation
+      data.
+      
+      When underlying #GtkTreeModel data changes its
+      important to reset the context if the content
+      size is allowed to shrink. If the content size
+      is only allowed to grow (this is usually an option
+      for views rendering large data stores as a measure
+      of optimization), then only the row that changed
+      or was inserted needs to be (re)requested with
+      [gid.gtk4.cell_area.CellArea.getPreferredWidth].
+      
+      When the new overall size of the context requires
+      that the allocated size changes (or whenever this
+      allocation changes at all), the variable row
+      sizes need to be re-requested for every row.
+      
+      For instance, if the rows are displayed all with
+      the same width from top to bottom then a change
+      in the allocated width necessitates a recalculation
+      of all the displayed row heights using
+      [gid.gtk4.cell_area.CellArea.getPreferredHeightForWidth].
+      
+      Since 3.0
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncReset` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncReset()
+  {
+    auto _klass = cast(GtkCellAreaContextClass*)_vfuncClass;
+    if (!_klass.reset)
+      return;
+
+    _klass.reset(cast(GtkCellAreaContext*)this._cPtr);
   }
 
   /**
@@ -319,6 +454,168 @@ class CellAreaContext : gid.gobject2.object.ObjectWrap
   void reset() nothrow
   {
     gtk_cell_area_context_reset(cast(GtkCellAreaContext*)this._cPtr);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from CellAreaContext
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.cell_area_context.CellAreaContext), T.stringof ~ " is not derived from gid.gtk3.cell_area_context.CellAreaContext");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAllocate", true)[0]) == gid.gtk3.cell_area_context.CellAreaContext))
+      _installVfunc(klass, "allocate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetPreferredHeightForWidth", true)[0]) == gid.gtk3.cell_area_context.CellAreaContext))
+      _installVfunc(klass, "get_preferred_height_for_width");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetPreferredWidthForHeight", true)[0]) == gid.gtk3.cell_area_context.CellAreaContext))
+      _installVfunc(klass, "get_preferred_width_for_height");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncReset", true)[0]) == gid.gtk3.cell_area_context.CellAreaContext))
+      _installVfunc(klass, "reset");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkCellAreaContextClass*)klass;
+
+    switch (vfunc)
+    {
+      case "allocate":
+      {
+        static extern(C) void _vfuncAllocateTramp(GtkCellAreaContext* context, int width, int height) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.cell_area_context.CellAreaContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellAreaContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.allocate)
+              return (cast(typeof(&_vfuncAllocateTramp))_klass.allocate)(context, width, height);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncAllocate(width, height);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_area_context.CellAreaContext.vfuncAllocate");
+          }
+        }
+
+        _klass.allocate = cast(typeof(_klass.allocate))&_vfuncAllocateTramp;
+        break;
+      }
+      case "get_preferred_height_for_width":
+      {
+        static extern(C) void _vfuncGetPreferredHeightForWidthTramp(GtkCellAreaContext* context, int width, int* minimumHeight, int* naturalHeight) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.cell_area_context.CellAreaContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellAreaContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.getPreferredHeightForWidth)
+              return (cast(typeof(&_vfuncGetPreferredHeightForWidthTramp))_klass.getPreferredHeightForWidth)(context, width, minimumHeight, naturalHeight);
+            return;
+          }
+
+          typeof(*minimumHeight) _minimumHeightNull;
+          if (!minimumHeight)
+            minimumHeight = &_minimumHeightNull;
+
+          typeof(*naturalHeight) _naturalHeightNull;
+          if (!naturalHeight)
+            naturalHeight = &_naturalHeightNull;
+
+          try
+          {
+            _obj.vfuncGetPreferredHeightForWidth(width, *minimumHeight, *naturalHeight);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_area_context.CellAreaContext.vfuncGetPreferredHeightForWidth");
+          }
+        }
+
+        _klass.getPreferredHeightForWidth = cast(typeof(_klass.getPreferredHeightForWidth))&_vfuncGetPreferredHeightForWidthTramp;
+        break;
+      }
+      case "get_preferred_width_for_height":
+      {
+        static extern(C) void _vfuncGetPreferredWidthForHeightTramp(GtkCellAreaContext* context, int height, int* minimumWidth, int* naturalWidth) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.cell_area_context.CellAreaContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellAreaContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.getPreferredWidthForHeight)
+              return (cast(typeof(&_vfuncGetPreferredWidthForHeightTramp))_klass.getPreferredWidthForHeight)(context, height, minimumWidth, naturalWidth);
+            return;
+          }
+
+          typeof(*minimumWidth) _minimumWidthNull;
+          if (!minimumWidth)
+            minimumWidth = &_minimumWidthNull;
+
+          typeof(*naturalWidth) _naturalWidthNull;
+          if (!naturalWidth)
+            naturalWidth = &_naturalWidthNull;
+
+          try
+          {
+            _obj.vfuncGetPreferredWidthForHeight(height, *minimumWidth, *naturalWidth);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_area_context.CellAreaContext.vfuncGetPreferredWidthForHeight");
+          }
+        }
+
+        _klass.getPreferredWidthForHeight = cast(typeof(_klass.getPreferredWidthForHeight))&_vfuncGetPreferredWidthForHeightTramp;
+        break;
+      }
+      case "reset":
+      {
+        static extern(C) void _vfuncResetTramp(GtkCellAreaContext* context) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.cell_area_context.CellAreaContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellAreaContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.reset)
+              return (cast(typeof(&_vfuncResetTramp))_klass.reset)(context);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncReset();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_area_context.CellAreaContext.vfuncReset");
+          }
+        }
+
+        _klass.reset = cast(typeof(_klass.reset))&_vfuncResetTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

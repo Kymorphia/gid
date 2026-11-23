@@ -61,6 +61,7 @@ class RenderNode : ReffedWrap!(GskRenderNode*, gsk_render_node_ref, gsk_render_n
   {
     extern(C) void _errorFuncCallback(const(GskParseLocation)* start, const(GskParseLocation)* end, const(GError)* error, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gsk4.types.ParseErrorFunc*)userData;
 
       try

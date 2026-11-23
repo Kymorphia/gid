@@ -28,6 +28,7 @@ interface HyperlinkImpl : GidWrap
     return cast(void function())atk_hyperlink_impl_get_type != &gidSymbolNotFound ? atk_hyperlink_impl_get_type() : cast(GType)0;
   }
 
+
   /**
       Gets the hyperlink associated with this object.
       Returns: an AtkHyperlink object which points to this

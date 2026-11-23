@@ -69,9 +69,128 @@ class AppLaunchContext : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GAppLaunchContext* _cretval;
-    _cretval = g_app_launch_context_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GAppLaunchContext* _cretval;
+      _cretval = g_app_launch_context_new();
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /**
+      Gets the display string for the context. This is used to ensure new
+      applications are started on the same display as the launching
+      application, by setting the `DISPLAY` environment variable.
+  
+      Params:
+        info = the app info
+        files = a list of [gid.gio2.file.File] objects
+      Returns: a display string for the display.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetDisplay` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected string vfuncGetDisplay(gid.gio2.app_info.AppInfo info, gid.gio2.file.File[] files)
+  {
+    auto _klass = cast(GAppLaunchContextClass*)_vfuncClass;
+    if (!_klass.getDisplay)
+      return typeof(return).init;
+
+    char* _cretval;
+    auto _files = gListFromD!(gid.gio2.file.File)(files);
+    scope(exit) containerFree!(GList*, gid.gio2.file.File, GidOwnership.None)(_files);
+    _cretval = _klass.getDisplay(cast(GAppLaunchContext*)this._cPtr, info ? cast(GAppInfo*)(cast(gid.gobject2.object.ObjectWrap)info)._cPtr(No.Dup) : null, _files);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Initiates startup notification for the application and returns the
+      `XDG_ACTIVATION_TOKEN` or `DESKTOP_STARTUP_ID` for the launched operation,
+      if supported.
+      
+      The returned token may be referred to equivalently as an ‘activation token’
+      (using Wayland terminology) or a ‘startup sequence ID’ (using X11 terminology).
+      The two [are interoperable](https://gitlab.freedesktop.org/wayland/wayland-protocols/-/blob/main/staging/xdg-activation/x11-interoperation.rst).
+      
+      Activation tokens are defined in the [XDG Activation Protocol](https://wayland.app/protocols/xdg-activation-v1),
+      and startup notification IDs are defined in the
+      [freedesktop.org Startup Notification Protocol](http://standards.freedesktop.org/startup-notification-spec/startup-notification-latest.txt).
+      
+      Support for the XDG Activation Protocol was added in GLib 2.76.
+      Since GLib 2.82 info and files can be `NULL`. If that’s not supported by the backend,
+      the returned token will be `NULL`.
+  
+      Params:
+        info = the app info
+        files = a list of [gid.gio2.file.File] objects
+      Returns: a startup notification ID for the application, or `NULL` if
+          not supported.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetStartupNotifyId` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected string vfuncGetStartupNotifyId(gid.gio2.app_info.AppInfo info = null, gid.gio2.file.File[] files = null)
+  {
+    auto _klass = cast(GAppLaunchContextClass*)_vfuncClass;
+    if (!_klass.getStartupNotifyId)
+      return typeof(return).init;
+
+    char* _cretval;
+    auto _files = gListFromD!(gid.gio2.file.File)(files);
+    scope(exit) containerFree!(GList*, gid.gio2.file.File, GidOwnership.None)(_files);
+    _cretval = _klass.getStartupNotifyId(cast(GAppLaunchContext*)this._cPtr, info ? cast(GAppInfo*)(cast(gid.gobject2.object.ObjectWrap)info)._cPtr(No.Dup) : null, _files);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Called when an application has failed to launch, so that it can cancel
+      the application startup notification started in
+      [gid.gio2.app_launch_context.AppLaunchContext.getStartupNotifyId].
+  
+      Params:
+        startupNotifyId = the startup notification id that was returned by
+            [gid.gio2.app_launch_context.AppLaunchContext.getStartupNotifyId].
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncLaunchFailed` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncLaunchFailed(string startupNotifyId)
+  {
+    auto _klass = cast(GAppLaunchContextClass*)_vfuncClass;
+    if (!_klass.launchFailed)
+      return;
+
+    const(char)* _startupNotifyId = startupNotifyId.toCString!(No.Malloc, No.Nullable);
+    _klass.launchFailed(cast(GAppLaunchContext*)this._cPtr, _startupNotifyId);
+  }
+
+  /** */
+  protected void vfuncLaunchStarted(gid.gio2.app_info.AppInfo info, gid.glib2.variant.Variant platformData)
+  {
+    auto _klass = cast(GAppLaunchContextClass*)_vfuncClass;
+    if (!_klass.launchStarted)
+      return;
+
+    _klass.launchStarted(cast(GAppLaunchContext*)this._cPtr, info ? cast(GAppInfo*)(cast(gid.gobject2.object.ObjectWrap)info)._cPtr(No.Dup) : null, platformData ? cast(GVariant*)platformData._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncLaunched(gid.gio2.app_info.AppInfo info, gid.glib2.variant.Variant platformData)
+  {
+    auto _klass = cast(GAppLaunchContextClass*)_vfuncClass;
+    if (!_klass.launched)
+      return;
+
+    _klass.launched(cast(GAppLaunchContext*)this._cPtr, info ? cast(GAppInfo*)(cast(gid.gobject2.object.ObjectWrap)info)._cPtr(No.Dup) : null, platformData ? cast(GVariant*)platformData._cPtr(No.Dup) : null);
   }
 
   /**
@@ -228,6 +347,7 @@ class AppLaunchContext : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -299,6 +419,7 @@ class AppLaunchContext : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -375,6 +496,7 @@ class AppLaunchContext : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -400,6 +522,196 @@ class AppLaunchContext : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("launched", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from AppLaunchContext
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.app_launch_context.AppLaunchContext), T.stringof ~ " is not derived from gid.gio2.app_launch_context.AppLaunchContext");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetDisplay", true)[0]) == gid.gio2.app_launch_context.AppLaunchContext))
+      _installVfunc(klass, "get_display");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetStartupNotifyId", true)[0]) == gid.gio2.app_launch_context.AppLaunchContext))
+      _installVfunc(klass, "get_startup_notify_id");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncLaunchFailed", true)[0]) == gid.gio2.app_launch_context.AppLaunchContext))
+      _installVfunc(klass, "launch_failed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncLaunchStarted", true)[0]) == gid.gio2.app_launch_context.AppLaunchContext))
+      _installVfunc(klass, "launch_started");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncLaunched", true)[0]) == gid.gio2.app_launch_context.AppLaunchContext))
+      _installVfunc(klass, "launched");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GAppLaunchContextClass*)klass;
+
+    switch (vfunc)
+    {
+      case "get_display":
+      {
+        static extern(C) char* _vfuncGetDisplayTramp(GAppLaunchContext* context, GAppInfo* info, GList* files) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.app_launch_context.AppLaunchContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GAppLaunchContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.getDisplay)
+              return (cast(typeof(&_vfuncGetDisplayTramp))_klass.getDisplay)(context, info, files);
+            return typeof(return).init;
+          }
+
+          string _dretval;
+          auto _files = gListToD!(gid.gio2.file.File, GidOwnership.None)(files);
+
+          try
+          {
+            _dretval = _obj.vfuncGetDisplay(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.app_info.AppInfo)(cast(void*)info, No.Take), _files);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.app_launch_context.AppLaunchContext.vfuncGetDisplay");
+          }
+          auto _retval = toCString!(Yes.Malloc, Yes.Nullable)(_dretval);
+
+          return _retval;
+        }
+
+        _klass.getDisplay = cast(typeof(_klass.getDisplay))&_vfuncGetDisplayTramp;
+        break;
+      }
+      case "get_startup_notify_id":
+      {
+        static extern(C) char* _vfuncGetStartupNotifyIdTramp(GAppLaunchContext* context, GAppInfo* info, GList* files) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.app_launch_context.AppLaunchContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GAppLaunchContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.getStartupNotifyId)
+              return (cast(typeof(&_vfuncGetStartupNotifyIdTramp))_klass.getStartupNotifyId)(context, info, files);
+            return typeof(return).init;
+          }
+
+          string _dretval;
+          auto _files = gListToD!(gid.gio2.file.File, GidOwnership.None)(files);
+
+          try
+          {
+            _dretval = _obj.vfuncGetStartupNotifyId(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.app_info.AppInfo)(cast(void*)info, No.Take), _files);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.app_launch_context.AppLaunchContext.vfuncGetStartupNotifyId");
+          }
+          auto _retval = toCString!(Yes.Malloc, Yes.Nullable)(_dretval);
+
+          return _retval;
+        }
+
+        _klass.getStartupNotifyId = cast(typeof(_klass.getStartupNotifyId))&_vfuncGetStartupNotifyIdTramp;
+        break;
+      }
+      case "launch_failed":
+      {
+        static extern(C) void _vfuncLaunchFailedTramp(GAppLaunchContext* context, const(char)* startupNotifyId) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.app_launch_context.AppLaunchContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GAppLaunchContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.launchFailed)
+              return (cast(typeof(&_vfuncLaunchFailedTramp))_klass.launchFailed)(context, startupNotifyId);
+            return;
+          }
+
+          string _startupNotifyId = startupNotifyId.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncLaunchFailed(_startupNotifyId);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.app_launch_context.AppLaunchContext.vfuncLaunchFailed");
+          }
+        }
+
+        _klass.launchFailed = cast(typeof(_klass.launchFailed))&_vfuncLaunchFailedTramp;
+        break;
+      }
+      case "launch_started":
+      {
+        static extern(C) void _vfuncLaunchStartedTramp(GAppLaunchContext* context, GAppInfo* info, GVariant* platformData) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.app_launch_context.AppLaunchContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GAppLaunchContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.launchStarted)
+              return (cast(typeof(&_vfuncLaunchStartedTramp))_klass.launchStarted)(context, info, platformData);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncLaunchStarted(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.app_info.AppInfo)(cast(void*)info, No.Take), platformData ? new gid.glib2.variant.Variant(cast(void*)platformData, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.app_launch_context.AppLaunchContext.vfuncLaunchStarted");
+          }
+        }
+
+        _klass.launchStarted = cast(typeof(_klass.launchStarted))&_vfuncLaunchStartedTramp;
+        break;
+      }
+      case "launched":
+      {
+        static extern(C) void _vfuncLaunchedTramp(GAppLaunchContext* context, GAppInfo* info, GVariant* platformData) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.app_launch_context.AppLaunchContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GAppLaunchContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.launched)
+              return (cast(typeof(&_vfuncLaunchedTramp))_klass.launched)(context, info, platformData);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncLaunched(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.app_info.AppInfo)(cast(void*)info, No.Take), platformData ? new gid.glib2.variant.Variant(cast(void*)platformData, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.app_launch_context.AppLaunchContext.vfuncLaunched");
+          }
+        }
+
+        _klass.launched = cast(typeof(_klass.launched))&_vfuncLaunchedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

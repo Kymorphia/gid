@@ -233,6 +233,16 @@ interface DtlsConnection : gid.gio2.datagram_based.DatagramBased
   */
   @property void requireCloseNotify(bool propval) nothrow;
 
+
+
+
+
+
+
+
+
+
+
   /**
       Close the DTLS connection. This is equivalent to calling
       [gid.gio2.dtls_connection.DtlsConnection.shutdown] to shut down both sides of the connection.
@@ -716,6 +726,7 @@ interface DtlsConnection : gid.gio2.datagram_based.DatagramBased
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

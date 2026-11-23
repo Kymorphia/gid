@@ -446,6 +446,15 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -1267,6 +1276,577 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   }
 
   /**
+      Tests if a given point is contained in the widget.
+      
+      The coordinates for (x, y) must be in widget coordinates, so
+      (0, 0) is assumed to be the top left of widget's content area.
+  
+      Params:
+        x = X coordinate to test, relative to widget's origin
+        y = Y coordinate to test, relative to widget's origin
+      Returns: true if widget contains the point (x, y)
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncContains` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncContains(double x, double y)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.contains)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.contains(cast(GtkWidget*)this._cPtr, x, y);
+    return _retval;
+  }
+
+  /**
+      Vfunc called when the CSS used by widget was changed. Widgets
+        should then discard their caches that depend on CSS and queue resizes or
+        redraws accordingly. The default implementation will take care of this for
+        all the default CSS properties, so implementations must chain up.
+  
+      Params:
+        change = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCssChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncCssChanged(gid.gtk4.types.CssStyleChange change)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.cssChanged)
+      return;
+
+    _klass.cssChanged(cast(GtkWidget*)this._cPtr, change);
+  }
+
+  /**
+      Signal emitted when the text direction of a
+        widget changes.
+  
+      Params:
+        previousDirection = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDirectionChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDirectionChanged(gid.gtk4.types.TextDirection previousDirection)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.directionChanged)
+      return;
+
+    _klass.directionChanged(cast(GtkWidget*)this._cPtr, previousDirection);
+  }
+
+  /**
+      Vfunc for [gid.gtk4.widget.Widget.childFocus]
+  
+      Params:
+        direction = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncFocus` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncFocus(gid.gtk4.types.DirectionType direction)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.focus)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.focus(cast(GtkWidget*)this._cPtr, direction);
+    return _retval;
+  }
+
+  /**
+      Gets whether the widget prefers a height-for-width layout
+      or a width-for-height layout.
+      
+      Single-child widgets generally propagate the preference of
+      their child, more complex widgets need to request something
+      either in context of their children or in context of their
+      allocation capabilities.
+      Returns: The [gid.gtk4.types.SizeRequestMode] preferred by widget.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetRequestMode` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gtk4.types.SizeRequestMode vfuncGetRequestMode()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.getRequestMode)
+      return typeof(return).init;
+
+    GtkSizeRequestMode _cretval;
+    _cretval = _klass.getRequestMode(cast(GtkWidget*)this._cPtr);
+    gid.gtk4.types.SizeRequestMode _retval = cast(gid.gtk4.types.SizeRequestMode)_cretval;
+    return _retval;
+  }
+
+  /**
+      Causes widget to have the keyboard focus for the window
+      that it belongs to.
+      
+      If widget is not focusable, or its `vfuncGtk.Widget.grab_focus`
+      implementation cannot transfer the focus to a descendant of widget
+      that is focusable, it will not take focus and false will be returned.
+      
+      Calling [gid.gtk4.widget.Widget.grabFocus] on an already focused widget
+      is allowed, should not have an effect, and return true.
+      Returns: true if focus is now inside widget
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGrabFocus` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncGrabFocus()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.grabFocus)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.grabFocus(cast(GtkWidget*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Reverses the effects of [method.Gtk.Widget.show].
+      
+      This is causing the widget to be hidden (invisible to the user).
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncHide` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use [gid.gtk4.widget.Widget.setVisible] instead
+  */
+  protected void vfuncHide()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.hide)
+      return;
+
+    _klass.hide(cast(GtkWidget*)this._cPtr);
+  }
+
+  /**
+      Emits the [gid.gtk4.widget.Widget.keynavFailed] signal on the widget.
+      
+      This function should be called whenever keyboard navigation
+      within a single widget hits a boundary.
+      
+      The return value of this function should be interpreted
+      in a way similar to the return value of
+      [gid.gtk4.widget.Widget.childFocus]. When true is returned,
+      stay in the widget, the failed keyboard navigation is ok
+      and/or there is nowhere we can/should move the focus to.
+      When false is returned, the caller should continue with
+      keyboard navigation outside the widget, e.g. by calling
+      [gid.gtk4.widget.Widget.childFocus] on the widget’s toplevel.
+      
+      The default [gid.gtk4.widget.Widget.keynavFailed] handler returns
+      false for `enumGtk.DirectionType.tab-forward` and
+      `enumGtk.DirectionType.tab-backward`. For the other values
+      of [gid.gtk4.types.DirectionType] it returns true.
+      
+      Whenever the default handler returns true, it also calls
+      [gid.gtk4.widget.Widget.errorBell] to notify the user of the
+      failed keyboard navigation.
+      
+      A use case for providing an own implementation of `::keynav-failed`
+      (either by connecting to it or by overriding it) would be a row of
+      [gid.gtk4.entry.Entry] widgets where the user should be able to navigate
+      the entire row with the cursor keys, as e.g. known from user
+      interfaces that require entering license keys.
+  
+      Params:
+        direction = direction of focus movement
+      Returns: true if stopping keyboard navigation is fine, false
+          if the emitting widget should try to handle the keyboard
+          navigation attempt in its parent widget
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncKeynavFailed` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncKeynavFailed(gid.gtk4.types.DirectionType direction)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.keynavFailed)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.keynavFailed(cast(GtkWidget*)this._cPtr, direction);
+    return _retval;
+  }
+
+  /**
+      Causes a widget to be mapped if it isn’t already.
+      
+      This function is only for use in widget implementations.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncMap` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncMap()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.map)
+      return;
+
+    _klass.map(cast(GtkWidget*)this._cPtr);
+  }
+
+  /**
+      Measures widget in the orientation orientation and for the given for_size.
+      
+      As an example, if orientation is [gid.gtk4.types.Orientation.Horizontal] and for_size
+      is 300, this functions will compute the minimum and natural width of widget
+      if it is allocated at a height of 300 pixels.
+      
+      See [GtkWidget’s geometry management section](class.Widget.html#height-for-width-geometry-management) for
+      a more details on implementing `GtkWidgetClass.measure()`.
+  
+      Params:
+        orientation = the orientation to measure
+        forSize = Size for the opposite of orientation, i.e.
+            if orientation is [gid.gtk4.types.Orientation.Horizontal], this is
+            the height the widget should be measured with. The [gid.gtk4.types.Orientation.Vertical]
+            case is analogous. This way, both height-for-width and width-for-height
+            requests can be implemented. If no size is known, -1 can be passed.
+        minimum = location to store the minimum size
+        natural = location to store the natural size
+        minimumBaseline = location to store the baseline
+            position for the minimum size, or -1 to report no baseline
+        naturalBaseline = location to store the baseline
+            position for the natural size, or -1 to report no baseline
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncMeasure` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncMeasure(gid.gtk4.types.Orientation orientation, int forSize, out int minimum, out int natural, out int minimumBaseline, out int naturalBaseline)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.measure)
+      return;
+
+    _klass.measure(cast(GtkWidget*)this._cPtr, orientation, forSize, cast(int*)&minimum, cast(int*)&natural, cast(int*)&minimumBaseline, cast(int*)&naturalBaseline);
+  }
+
+  /**
+      Emits the [gid.gtk4.widget.Widget.mnemonicActivate] signal.
+  
+      Params:
+        groupCycling = true if there are other widgets with the same mnemonic
+      Returns: true if the signal has been handled
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncMnemonicActivate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncMnemonicActivate(bool groupCycling)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.mnemonicActivate)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.mnemonicActivate(cast(GtkWidget*)this._cPtr, groupCycling);
+    return _retval;
+  }
+
+  /**
+      Signal emitted when a change of focus is requested
+  
+      Params:
+        direction = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncMoveFocus` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncMoveFocus(gid.gtk4.types.DirectionType direction)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.moveFocus)
+      return;
+
+    _klass.moveFocus(cast(GtkWidget*)this._cPtr, direction);
+  }
+
+  /**
+      Signal emitted when “has-tooltip” is true and the
+        hover timeout has expired with the cursor hovering “above”
+        widget; or emitted when widget got focus in keyboard mode.
+  
+      Params:
+        x = 
+        y = 
+        keyboardTooltip = 
+        tooltip = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncQueryTooltip` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncQueryTooltip(int x, int y, bool keyboardTooltip, gid.gtk4.tooltip.Tooltip tooltip)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.queryTooltip)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.queryTooltip(cast(GtkWidget*)this._cPtr, x, y, keyboardTooltip, tooltip ? cast(GtkTooltip*)tooltip._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Creates the GDK resources associated with a widget.
+      
+      Normally realization happens implicitly; if you show a widget
+      and all its parent containers, then the widget will be realized
+      and mapped automatically.
+      
+      Realizing a widget requires all the widget’s parent widgets to be
+      realized; calling this function realizes the widget’s parents
+      in addition to widget itself. If a widget is not yet inside a
+      toplevel window when you realize it, bad things will happen.
+      
+      This function is primarily used in widget implementations, and
+      isn’t very useful otherwise. Many times when you think you might
+      need it, a better approach is to connect to a signal that will be
+      called after the widget is realized automatically, such as
+      [gid.gtk4.widget.Widget.realize].
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRealize` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncRealize()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.realize)
+      return;
+
+    _klass.realize(cast(GtkWidget*)this._cPtr);
+  }
+
+  /**
+      Called when the widget gets added to a [gid.gtk4.root.Root] widget. Must
+        chain up
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRoot` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncRoot()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.root)
+      return;
+
+    _klass.root(cast(GtkWidget*)this._cPtr);
+  }
+
+  /**
+      Set the focus child of the widget.
+      
+      This function is only suitable for widget implementations.
+      If you want a certain widget to get the input focus, call
+      [gid.gtk4.widget.Widget.grabFocus] on it.
+  
+      Params:
+        child = a direct child widget of widget
+            or `NULL` to unset the focus child
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetFocusChild` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSetFocusChild(gid.gtk4.widget.Widget child = null)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.setFocusChild)
+      return;
+
+    _klass.setFocusChild(cast(GtkWidget*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Flags a widget to be displayed.
+      
+      Any widget that isn’t shown will not appear on the screen.
+      
+      Remember that you have to show the containers containing a widget,
+      in addition to the widget itself, before it will appear onscreen.
+      
+      When a toplevel widget is shown, it is immediately realized and
+      mapped; other shown widgets are realized and mapped when their
+      toplevel widget is realized and mapped.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncShow` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use [gid.gtk4.widget.Widget.setVisible] instead
+  */
+  protected void vfuncShow()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.show)
+      return;
+
+    _klass.show(cast(GtkWidget*)this._cPtr);
+  }
+
+  /**
+      Called to set the allocation, if the widget does
+        not have a layout manager.
+  
+      Params:
+        width = 
+        height = 
+        baseline = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSizeAllocate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSizeAllocate(int width, int height, int baseline)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.sizeAllocate)
+      return;
+
+    _klass.sizeAllocate(cast(GtkWidget*)this._cPtr, width, height, baseline);
+  }
+
+  /**
+      Vfunc called when a new snapshot of the widget has to be taken.
+  
+      Params:
+        snapshot = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSnapshot` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSnapshot(gid.gtk4.snapshot.Snapshot snapshot)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.snapshot)
+      return;
+
+    _klass.snapshot(cast(GtkWidget*)this._cPtr, snapshot ? cast(GtkSnapshot*)snapshot._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Signal emitted when the widget state changes,
+        see [gid.gtk4.widget.Widget.getStateFlags].
+  
+      Params:
+        previousStateFlags = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStateFlagsChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncStateFlagsChanged(gid.gtk4.types.StateFlags previousStateFlags)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.stateFlagsChanged)
+      return;
+
+    _klass.stateFlagsChanged(cast(GtkWidget*)this._cPtr, previousStateFlags);
+  }
+
+  /**
+      Emitted when a system setting was changed. Must chain up.
+  
+      Params:
+        settings = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSystemSettingChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSystemSettingChanged(gid.gtk4.types.SystemSetting settings)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.systemSettingChanged)
+      return;
+
+    _klass.systemSettingChanged(cast(GtkWidget*)this._cPtr, settings);
+  }
+
+  /**
+      Causes a widget to be unmapped if it’s currently mapped.
+      
+      This function is only for use in widget implementations.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncUnmap` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncUnmap()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.unmap)
+      return;
+
+    _klass.unmap(cast(GtkWidget*)this._cPtr);
+  }
+
+  /**
+      Causes a widget to be unrealized.
+      
+      This frees all GDK resources associated with the widget.
+      
+      This function is only useful in widget implementations.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncUnrealize` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncUnrealize()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.unrealize)
+      return;
+
+    _klass.unrealize(cast(GtkWidget*)this._cPtr);
+  }
+
+  /**
+      Called when the widget is about to be removed from its
+        [gid.gtk4.root.Root] widget. Must chain up
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncUnroot` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncUnroot()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.unroot)
+      return;
+
+    _klass.unroot(cast(GtkWidget*)this._cPtr);
+  }
+
+  /**
       Enables or disables an action installed with
       [gid.gtk4.widget_class.WidgetClass.installAction].
   
@@ -1432,6 +2012,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   {
     extern(C) gboolean _callbackCallback(GtkWidget* widget, GdkFrameClock* frameClock, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gtk4.types.TickCallback*)userData;
 
@@ -4279,6 +4860,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4326,6 +4908,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4373,6 +4956,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4425,6 +5009,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4483,6 +5068,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4535,6 +5121,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4593,6 +5180,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4665,6 +5253,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4727,6 +5316,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4771,6 +5361,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4820,6 +5411,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4873,6 +5465,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4920,6 +5513,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -4939,6 +5533,803 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4.accessi
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unrealize", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Widget
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.widget.Widget), T.stringof ~ " is not derived from gid.gtk4.widget.Widget");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncContains", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "contains");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCssChanged", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "css_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDirectionChanged", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "direction_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFocus", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "focus");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetRequestMode", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "get_request_mode");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGrabFocus", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "grab_focus");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHide", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "hide");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncKeynavFailed", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "keynav_failed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMap", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "map");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMeasure", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "measure");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMnemonicActivate", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "mnemonic_activate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMoveFocus", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "move_focus");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncQueryTooltip", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "query_tooltip");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRealize", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "realize");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRoot", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "root");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetFocusChild", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "set_focus_child");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncShow", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "show");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSizeAllocate", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "size_allocate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSnapshot", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "snapshot");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStateFlagsChanged", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "state_flags_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSystemSettingChanged", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "system_setting_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUnmap", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "unmap");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUnrealize", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "unrealize");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUnroot", true)[0]) == gid.gtk4.widget.Widget))
+      _installVfunc(klass, "unroot");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkWidgetClass*)klass;
+
+    switch (vfunc)
+    {
+      case "contains":
+      {
+        static extern(C) gboolean _vfuncContainsTramp(GtkWidget* widget, double x, double y) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.contains)
+              return (cast(typeof(&_vfuncContainsTramp))_klass.contains)(widget, x, y);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncContains(x, y);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncContains");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.contains = cast(typeof(_klass.contains))&_vfuncContainsTramp;
+        break;
+      }
+      case "css_changed":
+      {
+        static extern(C) void _vfuncCssChangedTramp(GtkWidget* widget, GtkCssStyleChange* change) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.cssChanged)
+              return (cast(typeof(&_vfuncCssChangedTramp))_klass.cssChanged)(widget, change);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncCssChanged(change);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncCssChanged");
+          }
+        }
+
+        _klass.cssChanged = cast(typeof(_klass.cssChanged))&_vfuncCssChangedTramp;
+        break;
+      }
+      case "direction_changed":
+      {
+        static extern(C) void _vfuncDirectionChangedTramp(GtkWidget* widget, GtkTextDirection previousDirection) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.directionChanged)
+              return (cast(typeof(&_vfuncDirectionChangedTramp))_klass.directionChanged)(widget, previousDirection);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDirectionChanged(previousDirection);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncDirectionChanged");
+          }
+        }
+
+        _klass.directionChanged = cast(typeof(_klass.directionChanged))&_vfuncDirectionChangedTramp;
+        break;
+      }
+      case "focus":
+      {
+        static extern(C) gboolean _vfuncFocusTramp(GtkWidget* widget, GtkDirectionType direction) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.focus)
+              return (cast(typeof(&_vfuncFocusTramp))_klass.focus)(widget, direction);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncFocus(direction);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncFocus");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.focus = cast(typeof(_klass.focus))&_vfuncFocusTramp;
+        break;
+      }
+      case "get_request_mode":
+      {
+        static extern(C) GtkSizeRequestMode _vfuncGetRequestModeTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.getRequestMode)
+              return (cast(typeof(&_vfuncGetRequestModeTramp))_klass.getRequestMode)(widget);
+            return typeof(return).init;
+          }
+
+          gid.gtk4.types.SizeRequestMode _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetRequestMode();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncGetRequestMode");
+          }
+          auto _retval = cast(GtkSizeRequestMode)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getRequestMode = cast(typeof(_klass.getRequestMode))&_vfuncGetRequestModeTramp;
+        break;
+      }
+      case "grab_focus":
+      {
+        static extern(C) gboolean _vfuncGrabFocusTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.grabFocus)
+              return (cast(typeof(&_vfuncGrabFocusTramp))_klass.grabFocus)(widget);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGrabFocus();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncGrabFocus");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.grabFocus = cast(typeof(_klass.grabFocus))&_vfuncGrabFocusTramp;
+        break;
+      }
+      case "hide":
+      {
+        static extern(C) void _vfuncHideTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.hide)
+              return (cast(typeof(&_vfuncHideTramp))_klass.hide)(widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncHide();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncHide");
+          }
+        }
+
+        _klass.hide = cast(typeof(_klass.hide))&_vfuncHideTramp;
+        break;
+      }
+      case "keynav_failed":
+      {
+        static extern(C) gboolean _vfuncKeynavFailedTramp(GtkWidget* widget, GtkDirectionType direction) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.keynavFailed)
+              return (cast(typeof(&_vfuncKeynavFailedTramp))_klass.keynavFailed)(widget, direction);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncKeynavFailed(direction);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncKeynavFailed");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.keynavFailed = cast(typeof(_klass.keynavFailed))&_vfuncKeynavFailedTramp;
+        break;
+      }
+      case "map":
+      {
+        static extern(C) void _vfuncMapTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.map)
+              return (cast(typeof(&_vfuncMapTramp))_klass.map)(widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMap();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncMap");
+          }
+        }
+
+        _klass.map = cast(typeof(_klass.map))&_vfuncMapTramp;
+        break;
+      }
+      case "measure":
+      {
+        static extern(C) void _vfuncMeasureTramp(GtkWidget* widget, GtkOrientation orientation, int forSize, int* minimum, int* natural, int* minimumBaseline, int* naturalBaseline) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.measure)
+              return (cast(typeof(&_vfuncMeasureTramp))_klass.measure)(widget, orientation, forSize, minimum, natural, minimumBaseline, naturalBaseline);
+            return;
+          }
+
+          typeof(*minimum) _minimumNull;
+          if (!minimum)
+            minimum = &_minimumNull;
+
+          typeof(*natural) _naturalNull;
+          if (!natural)
+            natural = &_naturalNull;
+
+          typeof(*minimumBaseline) _minimumBaselineNull;
+          if (!minimumBaseline)
+            minimumBaseline = &_minimumBaselineNull;
+
+          typeof(*naturalBaseline) _naturalBaselineNull;
+          if (!naturalBaseline)
+            naturalBaseline = &_naturalBaselineNull;
+
+          try
+          {
+            _obj.vfuncMeasure(orientation, forSize, *minimum, *natural, *minimumBaseline, *naturalBaseline);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncMeasure");
+          }
+        }
+
+        _klass.measure = cast(typeof(_klass.measure))&_vfuncMeasureTramp;
+        break;
+      }
+      case "mnemonic_activate":
+      {
+        static extern(C) gboolean _vfuncMnemonicActivateTramp(GtkWidget* widget, gboolean groupCycling) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.mnemonicActivate)
+              return (cast(typeof(&_vfuncMnemonicActivateTramp))_klass.mnemonicActivate)(widget, groupCycling);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncMnemonicActivate(cast(bool)groupCycling);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncMnemonicActivate");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.mnemonicActivate = cast(typeof(_klass.mnemonicActivate))&_vfuncMnemonicActivateTramp;
+        break;
+      }
+      case "move_focus":
+      {
+        static extern(C) void _vfuncMoveFocusTramp(GtkWidget* widget, GtkDirectionType direction) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.moveFocus)
+              return (cast(typeof(&_vfuncMoveFocusTramp))_klass.moveFocus)(widget, direction);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMoveFocus(direction);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncMoveFocus");
+          }
+        }
+
+        _klass.moveFocus = cast(typeof(_klass.moveFocus))&_vfuncMoveFocusTramp;
+        break;
+      }
+      case "query_tooltip":
+      {
+        static extern(C) gboolean _vfuncQueryTooltipTramp(GtkWidget* widget, int x, int y, gboolean keyboardTooltip, GtkTooltip* tooltip) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.queryTooltip)
+              return (cast(typeof(&_vfuncQueryTooltipTramp))_klass.queryTooltip)(widget, x, y, keyboardTooltip, tooltip);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncQueryTooltip(x, y, cast(bool)keyboardTooltip, gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.tooltip.Tooltip)(cast(void*)tooltip, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncQueryTooltip");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.queryTooltip = cast(typeof(_klass.queryTooltip))&_vfuncQueryTooltipTramp;
+        break;
+      }
+      case "realize":
+      {
+        static extern(C) void _vfuncRealizeTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.realize)
+              return (cast(typeof(&_vfuncRealizeTramp))_klass.realize)(widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRealize();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncRealize");
+          }
+        }
+
+        _klass.realize = cast(typeof(_klass.realize))&_vfuncRealizeTramp;
+        break;
+      }
+      case "root":
+      {
+        static extern(C) void _vfuncRootTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.root)
+              return (cast(typeof(&_vfuncRootTramp))_klass.root)(widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRoot();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncRoot");
+          }
+        }
+
+        _klass.root = cast(typeof(_klass.root))&_vfuncRootTramp;
+        break;
+      }
+      case "set_focus_child":
+      {
+        static extern(C) void _vfuncSetFocusChildTramp(GtkWidget* widget, GtkWidget* child) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.setFocusChild)
+              return (cast(typeof(&_vfuncSetFocusChildTramp))_klass.setFocusChild)(widget, child);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSetFocusChild(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(void*)child, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncSetFocusChild");
+          }
+        }
+
+        _klass.setFocusChild = cast(typeof(_klass.setFocusChild))&_vfuncSetFocusChildTramp;
+        break;
+      }
+      case "show":
+      {
+        static extern(C) void _vfuncShowTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.show)
+              return (cast(typeof(&_vfuncShowTramp))_klass.show)(widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncShow();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncShow");
+          }
+        }
+
+        _klass.show = cast(typeof(_klass.show))&_vfuncShowTramp;
+        break;
+      }
+      case "size_allocate":
+      {
+        static extern(C) void _vfuncSizeAllocateTramp(GtkWidget* widget, int width, int height, int baseline) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.sizeAllocate)
+              return (cast(typeof(&_vfuncSizeAllocateTramp))_klass.sizeAllocate)(widget, width, height, baseline);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSizeAllocate(width, height, baseline);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncSizeAllocate");
+          }
+        }
+
+        _klass.sizeAllocate = cast(typeof(_klass.sizeAllocate))&_vfuncSizeAllocateTramp;
+        break;
+      }
+      case "snapshot":
+      {
+        static extern(C) void _vfuncSnapshotTramp(GtkWidget* widget, GtkSnapshot* snapshot) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.snapshot)
+              return (cast(typeof(&_vfuncSnapshotTramp))_klass.snapshot)(widget, snapshot);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSnapshot(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.snapshot.Snapshot)(cast(void*)snapshot, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncSnapshot");
+          }
+        }
+
+        _klass.snapshot = cast(typeof(_klass.snapshot))&_vfuncSnapshotTramp;
+        break;
+      }
+      case "state_flags_changed":
+      {
+        static extern(C) void _vfuncStateFlagsChangedTramp(GtkWidget* widget, GtkStateFlags previousStateFlags) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.stateFlagsChanged)
+              return (cast(typeof(&_vfuncStateFlagsChangedTramp))_klass.stateFlagsChanged)(widget, previousStateFlags);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncStateFlagsChanged(previousStateFlags);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncStateFlagsChanged");
+          }
+        }
+
+        _klass.stateFlagsChanged = cast(typeof(_klass.stateFlagsChanged))&_vfuncStateFlagsChangedTramp;
+        break;
+      }
+      case "system_setting_changed":
+      {
+        static extern(C) void _vfuncSystemSettingChangedTramp(GtkWidget* widget, GtkSystemSetting settings) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.systemSettingChanged)
+              return (cast(typeof(&_vfuncSystemSettingChangedTramp))_klass.systemSettingChanged)(widget, settings);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSystemSettingChanged(settings);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncSystemSettingChanged");
+          }
+        }
+
+        _klass.systemSettingChanged = cast(typeof(_klass.systemSettingChanged))&_vfuncSystemSettingChangedTramp;
+        break;
+      }
+      case "unmap":
+      {
+        static extern(C) void _vfuncUnmapTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.unmap)
+              return (cast(typeof(&_vfuncUnmapTramp))_klass.unmap)(widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncUnmap();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncUnmap");
+          }
+        }
+
+        _klass.unmap = cast(typeof(_klass.unmap))&_vfuncUnmapTramp;
+        break;
+      }
+      case "unrealize":
+      {
+        static extern(C) void _vfuncUnrealizeTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.unrealize)
+              return (cast(typeof(&_vfuncUnrealizeTramp))_klass.unrealize)(widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncUnrealize();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncUnrealize");
+          }
+        }
+
+        _klass.unrealize = cast(typeof(_klass.unrealize))&_vfuncUnrealizeTramp;
+        break;
+      }
+      case "unroot":
+      {
+        static extern(C) void _vfuncUnrootTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.unroot)
+              return (cast(typeof(&_vfuncUnrootTramp))_klass.unroot)(widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncUnroot();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.widget.Widget.vfuncUnroot");
+          }
+        }
+
+        _klass.unroot = cast(typeof(_klass.unroot))&_vfuncUnrootTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

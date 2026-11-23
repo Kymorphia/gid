@@ -67,10 +67,17 @@ class GLDisplayWayland : gid.gstgl1.gldisplay.GLDisplay
   */
   this(string name = null) nothrow
   {
-    GstGLDisplayWayland* _cretval;
-    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gst_gl_display_wayland_new(_name);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, name !is null), Yes.Take);
+    }
+    else
+    {
+      GstGLDisplayWayland* _cretval;
+      const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gst_gl_display_wayland_new(_name);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

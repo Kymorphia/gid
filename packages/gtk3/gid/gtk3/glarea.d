@@ -311,9 +311,58 @@ class GLArea : gid.gtk3.widget.Widget
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_gl_area_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_gl_area_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /**
+      class closure for the #GtkGLArea::render signal
+  
+      Params:
+        context = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRender` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncRender(gid.gdk3.glcontext.GLContext context)
+  {
+    auto _klass = cast(GtkGLAreaClass*)_vfuncClass;
+    if (!_klass.render)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.render(cast(GtkGLArea*)this._cPtr, context ? cast(GdkGLContext*)context._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      class closeure for the #GtkGLArea::resize signal
+  
+      Params:
+        width = 
+        height = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncResize` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncResize(int width, int height)
+  {
+    auto _klass = cast(GtkGLAreaClass*)_vfuncClass;
+    if (!_klass.resize)
+      return;
+
+    _klass.resize(cast(GtkGLArea*)this._cPtr, width, height);
   }
 
   /**
@@ -586,6 +635,7 @@ class GLArea : gid.gtk3.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -642,6 +692,7 @@ class GLArea : gid.gtk3.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -706,6 +757,7 @@ class GLArea : gid.gtk3.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -731,6 +783,97 @@ class GLArea : gid.gtk3.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("resize", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from GLArea
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.glarea.GLArea), T.stringof ~ " is not derived from gid.gtk3.glarea.GLArea");
+
+    gid.gtk3.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRender", true)[0]) == gid.gtk3.glarea.GLArea))
+      _installVfunc(klass, "render");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncResize", true)[0]) == gid.gtk3.glarea.GLArea))
+      _installVfunc(klass, "resize");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkGLAreaClass*)klass;
+
+    switch (vfunc)
+    {
+      case "render":
+      {
+        static extern(C) gboolean _vfuncRenderTramp(GtkGLArea* area, GdkGLContext* context) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.glarea.GLArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkGLAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);
+            if (_klass.render)
+              return (cast(typeof(&_vfuncRenderTramp))_klass.render)(area, context);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncRender(gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk3.glcontext.GLContext)(cast(void*)context, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.glarea.GLArea.vfuncRender");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.render = cast(typeof(_klass.render))&_vfuncRenderTramp;
+        break;
+      }
+      case "resize":
+      {
+        static extern(C) void _vfuncResizeTramp(GtkGLArea* area, int width, int height) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.glarea.GLArea)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)area);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkGLAreaClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)area);
+            if (_klass.resize)
+              return (cast(typeof(&_vfuncResizeTramp))_klass.resize)(area, width, height);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncResize(width, height);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.glarea.GLArea.vfuncResize");
+          }
+        }
+
+        _klass.resize = cast(typeof(_klass.resize))&_vfuncResizeTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

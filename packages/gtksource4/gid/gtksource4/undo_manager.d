@@ -22,6 +22,14 @@ interface UndoManager : GidWrap
     return cast(void function())gtk_source_undo_manager_get_type != &gidSymbolNotFound ? gtk_source_undo_manager_get_type() : cast(GType)0;
   }
 
+
+
+
+
+
+
+
+
   /**
       Begin a not undoable action on the buffer. All changes between this call
       and the call to [gid.gtksource4.undo_manager.UndoManager.endNotUndoableAction] cannot
@@ -93,6 +101,7 @@ interface UndoManager : GidWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -137,6 +146,7 @@ interface UndoManager : GidWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

@@ -42,6 +42,15 @@ class UnixSocketAddress : gid.gio2.socket_address.SocketAddress
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -119,10 +128,17 @@ class UnixSocketAddress : gid.gio2.socket_address.SocketAddress
   */
   this(string path) nothrow
   {
-    GSocketAddress* _cretval;
-    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
-    _cretval = g_unix_socket_address_new(_path);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GSocketAddress* _cretval;
+      const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+      _cretval = g_unix_socket_address_new(_path);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

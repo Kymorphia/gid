@@ -4,6 +4,8 @@ module gid.gstvideo1.video_overlay_mixin;
 public import gid.core.basictypes;
 public import gid.gstvideo1.video_overlay_iface_proxy;
 public import gid.core.utils;
+public import gid.gobject2.c.functions;
+public import gid.gobject2.c.types;
 public import gid.gobject2.gid_builder;
 public import gid.gobject2.object;
 public import gid.gobject2.value;
@@ -278,6 +280,98 @@ template VideoOverlayT()
   /**
       Tell an overlay that it has been exposed. This will redraw the current frame
       in the drawable even if the pipeline is PAUSED.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncExpose`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncExpose()
+  {
+    auto _klass = cast(GstVideoOverlayInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gstvideo1.video_overlay.VideoOverlay._getGType);
+    if (!_klass || !_klass.expose)
+      return;
+
+    _klass.expose(cast(GstVideoOverlay*)this._cPtr);
+  }
+
+  /**
+      Tell an overlay that it should handle events from the window system. These
+      events are forwarded upstream as navigation events. In some window system,
+      events are not propagated in the window hierarchy if a client is listening
+      for them. This method allows you to disable events handling completely
+      from the #GstVideoOverlay.
+  
+      Params:
+        handleEvents = a #gboolean indicating if events should be handled or not.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncHandleEvents`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncHandleEvents(bool handleEvents)
+  {
+    auto _klass = cast(GstVideoOverlayInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gstvideo1.video_overlay.VideoOverlay._getGType);
+    if (!_klass || !_klass.handleEvents)
+      return;
+
+    _klass.handleEvents(cast(GstVideoOverlay*)this._cPtr, handleEvents);
+  }
+
+  /**
+      virtual method to set the render rectangle
+  
+      Params:
+        x = 
+        y = 
+        width = 
+        height = 
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSetRenderRectangle`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncSetRenderRectangle(int x, int y, int width, int height)
+  {
+    auto _klass = cast(GstVideoOverlayInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gstvideo1.video_overlay.VideoOverlay._getGType);
+    if (!_klass || !_klass.setRenderRectangle)
+      return;
+
+    _klass.setRenderRectangle(cast(GstVideoOverlay*)this._cPtr, x, y, width, height);
+  }
+
+  /**
+      This will call the video overlay's set_window_handle method. You
+      should use this method to tell to an overlay to display video output to a
+      specific window (e.g. an XWindow on X11). Passing 0 as the  handle will
+      tell the overlay to stop using that window and create an internal one.
+  
+      Params:
+        handle = a handle referencing the window.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSetWindowHandle`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncSetWindowHandle(size_t handle)
+  {
+    auto _klass = cast(GstVideoOverlayInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gstvideo1.video_overlay.VideoOverlay._getGType);
+    if (!_klass || !_klass.setWindowHandle)
+      return;
+
+    _klass.setWindowHandle(cast(GstVideoOverlay*)this._cPtr, handle);
+  }
+
+  /**
+      Tell an overlay that it has been exposed. This will redraw the current frame
+      in the drawable even if the pipeline is PAUSED.
   */
   override void expose() nothrow
   {
@@ -363,6 +457,148 @@ template VideoOverlayT()
   override void setWindowHandle(size_t handle) nothrow
   {
     gst_video_overlay_set_window_handle(cast(GstVideoOverlay*)this._cPtr, handle);
+  }
+
+  /// True if the D class T overrides any vfunc method of gid.gstvideo1.video_overlay.VideoOverlay (DiG)
+  enum bool _ifaceVfuncsOverridden_gid_gstvideo1_video_overlay_VideoOverlay(T) = !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncExpose", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncHandleEvents", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetRenderRectangle", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetWindowHandle", true)[0], gid.gobject2.object.GidIfaceVfunc);
+
+  /**
+      Install the C trampolines of the gid.gstvideo1.video_overlay.VideoOverlay vfunc methods which a D class overrides into the interface
+      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      trampoline is a compile error.
+      Params:
+        T = D class
+        iface = Interface structure of the GType registered for T
+  */
+  static void _installIfaceVfuncs_gid_gstvideo1_video_overlay_VideoOverlay(T)(void* iface) nothrow
+  {
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncExpose", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gstvideo1_video_overlay_VideoOverlay(iface, "expose");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncHandleEvents", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gstvideo1_video_overlay_VideoOverlay(iface, "handle_events");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetRenderRectangle", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gstvideo1_video_overlay_VideoOverlay(iface, "set_render_rectangle");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetWindowHandle", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gstvideo1_video_overlay_VideoOverlay(iface, "set_window_handle");
+  }
+
+  private static void _installIfaceVfunc_gid_gstvideo1_video_overlay_VideoOverlay(void* iface, string vfunc) nothrow
+  {
+    auto _klass = cast(GstVideoOverlayInterface*)iface;
+
+    switch (vfunc)
+    {
+      case "expose":
+      {
+        static extern(C) void _vfuncExposeTramp(GstVideoOverlay* overlay) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)overlay);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoOverlayInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)overlay), gid.gstvideo1.video_overlay.VideoOverlay._getGType);
+            if (_klass && _klass.expose)
+              return (cast(typeof(&_vfuncExposeTramp))_klass.expose)(overlay);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncExpose();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_overlay.VideoOverlay.vfuncExpose");
+          }
+        }
+
+        _klass.expose = cast(typeof(_klass.expose))&_vfuncExposeTramp;
+        break;
+      }
+      case "handle_events":
+      {
+        static extern(C) void _vfuncHandleEventsTramp(GstVideoOverlay* overlay, gboolean handleEvents) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)overlay);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoOverlayInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)overlay), gid.gstvideo1.video_overlay.VideoOverlay._getGType);
+            if (_klass && _klass.handleEvents)
+              return (cast(typeof(&_vfuncHandleEventsTramp))_klass.handleEvents)(overlay, handleEvents);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncHandleEvents(cast(bool)handleEvents);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_overlay.VideoOverlay.vfuncHandleEvents");
+          }
+        }
+
+        _klass.handleEvents = cast(typeof(_klass.handleEvents))&_vfuncHandleEventsTramp;
+        break;
+      }
+      case "set_render_rectangle":
+      {
+        static extern(C) void _vfuncSetRenderRectangleTramp(GstVideoOverlay* overlay, int x, int y, int width, int height) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)overlay);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoOverlayInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)overlay), gid.gstvideo1.video_overlay.VideoOverlay._getGType);
+            if (_klass && _klass.setRenderRectangle)
+              return (cast(typeof(&_vfuncSetRenderRectangleTramp))_klass.setRenderRectangle)(overlay, x, y, width, height);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSetRenderRectangle(x, y, width, height);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_overlay.VideoOverlay.vfuncSetRenderRectangle");
+          }
+        }
+
+        _klass.setRenderRectangle = cast(typeof(_klass.setRenderRectangle))&_vfuncSetRenderRectangleTramp;
+        break;
+      }
+      case "set_window_handle":
+      {
+        static extern(C) void _vfuncSetWindowHandleTramp(GstVideoOverlay* overlay, size_t handle) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)overlay);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoOverlayInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)overlay), gid.gstvideo1.video_overlay.VideoOverlay._getGType);
+            if (_klass && _klass.setWindowHandle)
+              return (cast(typeof(&_vfuncSetWindowHandleTramp))_klass.setWindowHandle)(overlay, handle);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSetWindowHandle(handle);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_overlay.VideoOverlay.vfuncSetWindowHandle");
+          }
+        }
+
+        _klass.setWindowHandle = cast(typeof(_klass.setWindowHandle))&_vfuncSetWindowHandleTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

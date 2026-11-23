@@ -63,9 +63,16 @@ class FdAllocator : gid.gst1.allocator.Allocator
   */
   this() nothrow
   {
-    GstAllocator* _cretval;
-    _cretval = gst_fd_allocator_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GstAllocator* _cretval;
+      _cretval = gst_fd_allocator_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

@@ -145,9 +145,16 @@ class StringSorter : gid.gtk4.sorter.Sorter
   */
   this(gid.gtk4.expression.Expression expression = null) nothrow
   {
-    GtkStringSorter* _cretval;
-    _cretval = gtk_string_sorter_new(expression ? cast(GtkExpression*)expression._cPtr(Yes.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, expression !is null), Yes.Take);
+    }
+    else
+    {
+      GtkStringSorter* _cretval;
+      _cretval = gtk_string_sorter_new(expression ? cast(GtkExpression*)expression._cPtr(Yes.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

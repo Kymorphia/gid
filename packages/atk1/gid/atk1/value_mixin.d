@@ -8,8 +8,11 @@ public import gid.atk1.c.types;
 public import gid.atk1.range;
 public import gid.atk1.types;
 public import gid.core.utils;
+public import gid.gobject2.c.functions;
+public import gid.gobject2.c.types;
 public import gid.gobject2.dclosure;
 public import gid.gobject2.gid_builder;
+public import gid.gobject2.object;
 public import gid.gobject2.value;
 
 /**
@@ -158,6 +161,270 @@ public import gid.gobject2.value;
 */
 template ValueT()
 {
+
+  /**
+      Gets the value of this object.
+  
+      Params:
+        value = a #GValue representing the current accessible value
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetCurrentValue`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Since 2.12. Use [gid.atk1.value.Value.getValueAndText]
+        instead.
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncGetCurrentValue(out gid.gobject2.value.Value value)
+  {
+    auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.atk1.value.Value._getGType);
+    if (!_klass || !_klass.getCurrentValue)
+      return;
+
+    auto _value = boxedNew!GValue(gid.gobject2.value.Value._getGType);
+    _klass.getCurrentValue(cast(AtkValue*)this._cPtr, _value);
+    value = new gid.gobject2.value.Value(cast(void*)_value, Yes.Take);
+  }
+
+  /**
+      Gets the minimum increment by which the value of this object may be
+      changed.  If zero, the minimum increment is undefined, which may
+      mean that it is limited only by the floating point precision of the
+      platform.
+      Returns: the minimum increment by which the value of this
+        object may be changed. zero if undefined.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetIncrement`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected double vfuncGetIncrement()
+  {
+    auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.atk1.value.Value._getGType);
+    if (!_klass || !_klass.getIncrement)
+      return typeof(return).init;
+
+    double _retval;
+    _retval = _klass.getIncrement(cast(AtkValue*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the maximum value of this object.
+  
+      Params:
+        value = a #GValue representing the maximum accessible value
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetMaximumValue`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Since 2.12. Use [gid.atk1.value.Value.getRange] instead.
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncGetMaximumValue(out gid.gobject2.value.Value value)
+  {
+    auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.atk1.value.Value._getGType);
+    if (!_klass || !_klass.getMaximumValue)
+      return;
+
+    auto _value = boxedNew!GValue(gid.gobject2.value.Value._getGType);
+    _klass.getMaximumValue(cast(AtkValue*)this._cPtr, _value);
+    value = new gid.gobject2.value.Value(cast(void*)_value, Yes.Take);
+  }
+
+  /**
+      Gets the minimum increment by which the value of this object may be changed.  If zero,
+      the minimum increment is undefined, which may mean that it is limited only by the
+      floating point precision of the platform.
+  
+      Params:
+        value = a #GValue representing the minimum increment by which the accessible value may be changed
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetMinimumIncrement`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Since 2.12. Use [gid.atk1.value.Value.getIncrement] instead.
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncGetMinimumIncrement(out gid.gobject2.value.Value value)
+  {
+    auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.atk1.value.Value._getGType);
+    if (!_klass || !_klass.getMinimumIncrement)
+      return;
+
+    auto _value = boxedNew!GValue(gid.gobject2.value.Value._getGType);
+    _klass.getMinimumIncrement(cast(AtkValue*)this._cPtr, _value);
+    value = new gid.gobject2.value.Value(cast(void*)_value, Yes.Take);
+  }
+
+  /**
+      Gets the minimum value of this object.
+  
+      Params:
+        value = a #GValue representing the minimum accessible value
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetMinimumValue`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Since 2.12. Use [gid.atk1.value.Value.getRange] instead.
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncGetMinimumValue(out gid.gobject2.value.Value value)
+  {
+    auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.atk1.value.Value._getGType);
+    if (!_klass || !_klass.getMinimumValue)
+      return;
+
+    auto _value = boxedNew!GValue(gid.gobject2.value.Value._getGType);
+    _klass.getMinimumValue(cast(AtkValue*)this._cPtr, _value);
+    value = new gid.gobject2.value.Value(cast(void*)_value, Yes.Take);
+  }
+
+  /**
+      Gets the range of this object.
+      Returns: a newly allocated #AtkRange
+        that represents the minimum, maximum and descriptor (if available)
+        of obj. NULL if that range is not defined.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetRange`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected gid.atk1.range.Range vfuncGetRange()
+  {
+    auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.atk1.value.Value._getGType);
+    if (!_klass || !_klass.getRange)
+      return typeof(return).init;
+
+    AtkRange* _cretval;
+    _cretval = _klass.getRange(cast(AtkValue*)this._cPtr);
+    auto _retval = _cretval ? new gid.atk1.range.Range(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Gets the list of subranges defined for this object. See #AtkValue
+      introduction for examples of subranges and when to expose them.
+      Returns: an #GSList of
+        #AtkRange which each of the subranges defined for this object. Free
+        the returns list with [gid.glib2.slist.SList.free].
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetSubRanges`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected gid.atk1.range.Range[] vfuncGetSubRanges()
+  {
+    auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.atk1.value.Value._getGType);
+    if (!_klass || !_klass.getSubRanges)
+      return typeof(return).init;
+
+    GSList* _cretval;
+    _cretval = _klass.getSubRanges(cast(AtkValue*)this._cPtr);
+    auto _retval = gSListToD!(gid.atk1.range.Range, GidOwnership.Full)(cast(GSList*)_cretval);
+    return _retval;
+  }
+
+  /**
+      Gets the current value and the human readable text alternative of
+      obj. text is a newly created string, that must be freed by the
+      caller. Can be NULL if no descriptor is available.
+  
+      Params:
+        value = address of #gdouble to put the current value of obj
+        text = address of #gchar to put the human
+          readable text alternative for value
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetValueAndText`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncGetValueAndText(out double value, out string text)
+  {
+    auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.atk1.value.Value._getGType);
+    if (!_klass || !_klass.getValueAndText)
+      return;
+
+    char* _text;
+    _klass.getValueAndText(cast(AtkValue*)this._cPtr, cast(double*)&value, &_text);
+    text = _text.fromCString!(Yes.Free);
+  }
+
+  /**
+      Sets the value of this object.
+  
+      Params:
+        value = a #GValue which is the desired new accessible value.
+      Returns: true if new value is successfully set, false otherwise.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSetCurrentValue`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Since 2.12. Use [gid.atk1.value.Value.setValue] instead.
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncSetCurrentValue(gid.gobject2.value.Value value)
+  {
+    auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.atk1.value.Value._getGType);
+    if (!_klass || !_klass.setCurrentValue)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.setCurrentValue(cast(AtkValue*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Sets the value of this object.
+      
+      This method is intended to provide a way to change the value of the
+      object. In any case, it is possible that the value can't be
+      modified (ie: a read-only component). If the value changes due this
+      call, it is possible that the text could change, and will trigger
+      an #AtkValue::value-changed signal emission.
+      
+      Note for implementors: the deprecated [gid.atk1.value.Value.setCurrentValue]
+      method returned TRUE or FALSE depending if the value was assigned
+      or not. In the practice several implementors were not able to
+      decide it, and returned TRUE in any case. For that reason it is not
+      required anymore to return if the value was properly assigned or
+      not.
+  
+      Params:
+        newValue = a double which is the desired new accessible value.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSetValue`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncSetValue(double newValue)
+  {
+    auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.atk1.value.Value._getGType);
+    if (!_klass || !_klass.setValue)
+      return;
+
+    _klass.setValue(cast(AtkValue*)this._cPtr, newValue);
+  }
 
   /**
       Gets the value of this object.
@@ -364,6 +631,7 @@ template ValueT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -389,6 +657,384 @@ template ValueT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("value-changed", closure, after);
+  }
+
+  /// True if the D class T overrides any vfunc method of gid.atk1.value.Value (DiG)
+  enum bool _ifaceVfuncsOverridden_gid_atk1_value_Value(T) = !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetCurrentValue", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetIncrement", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetMaximumValue", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetMinimumIncrement", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetMinimumValue", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetRange", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetSubRanges", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetValueAndText", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetCurrentValue", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetValue", true)[0], gid.gobject2.object.GidIfaceVfunc);
+
+  /**
+      Install the C trampolines of the gid.atk1.value.Value vfunc methods which a D class overrides into the interface
+      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      trampoline is a compile error.
+      Params:
+        T = D class
+        iface = Interface structure of the GType registered for T
+  */
+  static void _installIfaceVfuncs_gid_atk1_value_Value(T)(void* iface) nothrow
+  {
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetCurrentValue", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_atk1_value_Value(iface, "get_current_value");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetIncrement", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_atk1_value_Value(iface, "get_increment");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetMaximumValue", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_atk1_value_Value(iface, "get_maximum_value");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetMinimumIncrement", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_atk1_value_Value(iface, "get_minimum_increment");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetMinimumValue", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_atk1_value_Value(iface, "get_minimum_value");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetRange", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_atk1_value_Value(iface, "get_range");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetSubRanges", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_atk1_value_Value(iface, "get_sub_ranges");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetValueAndText", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_atk1_value_Value(iface, "get_value_and_text");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetCurrentValue", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_atk1_value_Value(iface, "set_current_value");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetValue", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_atk1_value_Value(iface, "set_value");
+  }
+
+  private static void _installIfaceVfunc_gid_atk1_value_Value(void* iface, string vfunc) nothrow
+  {
+    auto _klass = cast(AtkValueIface*)iface;
+
+    switch (vfunc)
+    {
+      case "get_current_value":
+      {
+        static extern(C) void _vfuncGetCurrentValueTramp(AtkValue* obj, GValue* value) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj), gid.atk1.value.Value._getGType);
+            if (_klass && _klass.getCurrentValue)
+              return (cast(typeof(&_vfuncGetCurrentValueTramp))_klass.getCurrentValue)(obj, value);
+            return;
+          }
+
+          gid.gobject2.value.Value _value;
+
+          try
+          {
+            _obj.vfuncGetCurrentValue(_value);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.value.Value.vfuncGetCurrentValue");
+          }
+          if (_value)
+          {
+            auto p_ = _value._cPtr(Yes.Dup);
+            *value = *cast(GValue*)p_;
+            gFree(p_);
+          }
+
+        }
+
+        _klass.getCurrentValue = cast(typeof(_klass.getCurrentValue))&_vfuncGetCurrentValueTramp;
+        break;
+      }
+      case "get_increment":
+      {
+        static extern(C) double _vfuncGetIncrementTramp(AtkValue* obj) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj), gid.atk1.value.Value._getGType);
+            if (_klass && _klass.getIncrement)
+              return (cast(typeof(&_vfuncGetIncrementTramp))_klass.getIncrement)(obj);
+            return typeof(return).init;
+          }
+
+          double _retval;
+
+          try
+          {
+            _retval = _obj.vfuncGetIncrement();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.value.Value.vfuncGetIncrement");
+          }
+          return _retval;
+        }
+
+        _klass.getIncrement = cast(typeof(_klass.getIncrement))&_vfuncGetIncrementTramp;
+        break;
+      }
+      case "get_maximum_value":
+      {
+        static extern(C) void _vfuncGetMaximumValueTramp(AtkValue* obj, GValue* value) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj), gid.atk1.value.Value._getGType);
+            if (_klass && _klass.getMaximumValue)
+              return (cast(typeof(&_vfuncGetMaximumValueTramp))_klass.getMaximumValue)(obj, value);
+            return;
+          }
+
+          gid.gobject2.value.Value _value;
+
+          try
+          {
+            _obj.vfuncGetMaximumValue(_value);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.value.Value.vfuncGetMaximumValue");
+          }
+          if (_value)
+          {
+            auto p_ = _value._cPtr(Yes.Dup);
+            *value = *cast(GValue*)p_;
+            gFree(p_);
+          }
+
+        }
+
+        _klass.getMaximumValue = cast(typeof(_klass.getMaximumValue))&_vfuncGetMaximumValueTramp;
+        break;
+      }
+      case "get_minimum_increment":
+      {
+        static extern(C) void _vfuncGetMinimumIncrementTramp(AtkValue* obj, GValue* value) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj), gid.atk1.value.Value._getGType);
+            if (_klass && _klass.getMinimumIncrement)
+              return (cast(typeof(&_vfuncGetMinimumIncrementTramp))_klass.getMinimumIncrement)(obj, value);
+            return;
+          }
+
+          gid.gobject2.value.Value _value;
+
+          try
+          {
+            _obj.vfuncGetMinimumIncrement(_value);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.value.Value.vfuncGetMinimumIncrement");
+          }
+          if (_value)
+          {
+            auto p_ = _value._cPtr(Yes.Dup);
+            *value = *cast(GValue*)p_;
+            gFree(p_);
+          }
+
+        }
+
+        _klass.getMinimumIncrement = cast(typeof(_klass.getMinimumIncrement))&_vfuncGetMinimumIncrementTramp;
+        break;
+      }
+      case "get_minimum_value":
+      {
+        static extern(C) void _vfuncGetMinimumValueTramp(AtkValue* obj, GValue* value) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj), gid.atk1.value.Value._getGType);
+            if (_klass && _klass.getMinimumValue)
+              return (cast(typeof(&_vfuncGetMinimumValueTramp))_klass.getMinimumValue)(obj, value);
+            return;
+          }
+
+          gid.gobject2.value.Value _value;
+
+          try
+          {
+            _obj.vfuncGetMinimumValue(_value);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.value.Value.vfuncGetMinimumValue");
+          }
+          if (_value)
+          {
+            auto p_ = _value._cPtr(Yes.Dup);
+            *value = *cast(GValue*)p_;
+            gFree(p_);
+          }
+
+        }
+
+        _klass.getMinimumValue = cast(typeof(_klass.getMinimumValue))&_vfuncGetMinimumValueTramp;
+        break;
+      }
+      case "get_range":
+      {
+        static extern(C) AtkRange* _vfuncGetRangeTramp(AtkValue* obj) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj), gid.atk1.value.Value._getGType);
+            if (_klass && _klass.getRange)
+              return (cast(typeof(&_vfuncGetRangeTramp))_klass.getRange)(obj);
+            return typeof(return).init;
+          }
+
+          gid.atk1.range.Range _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetRange();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.value.Value.vfuncGetRange");
+          }
+          auto _retval = _dretval ? cast(AtkRange*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getRange = cast(typeof(_klass.getRange))&_vfuncGetRangeTramp;
+        break;
+      }
+      case "get_sub_ranges":
+      {
+        static extern(C) GSList* _vfuncGetSubRangesTramp(AtkValue* obj) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj), gid.atk1.value.Value._getGType);
+            if (_klass && _klass.getSubRanges)
+              return (cast(typeof(&_vfuncGetSubRangesTramp))_klass.getSubRanges)(obj);
+            return typeof(return).init;
+          }
+
+          gid.atk1.range.Range[] _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetSubRanges();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.value.Value.vfuncGetSubRanges");
+          }
+          auto _retval = gSListFromD!(gid.atk1.range.Range)(_dretval);
+
+          return _retval;
+        }
+
+        _klass.getSubRanges = cast(typeof(_klass.getSubRanges))&_vfuncGetSubRangesTramp;
+        break;
+      }
+      case "get_value_and_text":
+      {
+        static extern(C) void _vfuncGetValueAndTextTramp(AtkValue* obj, double* value, char** text) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj), gid.atk1.value.Value._getGType);
+            if (_klass && _klass.getValueAndText)
+              return (cast(typeof(&_vfuncGetValueAndTextTramp))_klass.getValueAndText)(obj, value, text);
+            return;
+          }
+
+          typeof(*text) _textNull;
+          if (!text)
+            text = &_textNull;
+
+          string _text;
+
+          try
+          {
+            _obj.vfuncGetValueAndText(*value, _text);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.value.Value.vfuncGetValueAndText");
+          }
+          *text = _text.toCString!(Yes.Malloc, No.Nullable);
+
+        }
+
+        _klass.getValueAndText = cast(typeof(_klass.getValueAndText))&_vfuncGetValueAndTextTramp;
+        break;
+      }
+      case "set_current_value":
+      {
+        static extern(C) gboolean _vfuncSetCurrentValueTramp(AtkValue* obj, const(GValue)* value) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj), gid.atk1.value.Value._getGType);
+            if (_klass && _klass.setCurrentValue)
+              return (cast(typeof(&_vfuncSetCurrentValueTramp))_klass.setCurrentValue)(obj, value);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncSetCurrentValue(value ? new gid.gobject2.value.Value(cast(void*)value, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.value.Value.vfuncSetCurrentValue");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.setCurrentValue = cast(typeof(_klass.setCurrentValue))&_vfuncSetCurrentValueTramp;
+        break;
+      }
+      case "set_value":
+      {
+        static extern(C) void _vfuncSetValueTramp(AtkValue* obj, double newValue) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)obj);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkValueIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)obj), gid.atk1.value.Value._getGType);
+            if (_klass && _klass.setValue)
+              return (cast(typeof(&_vfuncSetValueTramp))_klass.setValue)(obj, newValue);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSetValue(newValue);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.value.Value.vfuncSetValue");
+          }
+        }
+
+        _klass.setValue = cast(typeof(_klass.setValue))&_vfuncSetValueTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

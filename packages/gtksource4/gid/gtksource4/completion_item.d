@@ -199,9 +199,16 @@ class CompletionItem : gid.gobject2.object.ObjectWrap, gid.gtksource4.completion
   */
   this() nothrow
   {
-    GtkSourceCompletionItem* _cretval;
-    _cretval = gtk_source_completion_item_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkSourceCompletionItem* _cretval;
+      _cretval = gtk_source_completion_item_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /** */

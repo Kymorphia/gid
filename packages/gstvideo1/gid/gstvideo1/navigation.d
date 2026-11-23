@@ -784,6 +784,8 @@ interface Navigation : GidWrap
     gst_navigation_query_set_commandsv(query ? cast(GstQuery*)query._cPtr(No.Dup) : null, _nCmds, _cmds);
   }
 
+
+
   /**
       Sends the indicated command to the navigation interface.
   

@@ -15,6 +15,7 @@ import gid.gtk3.buildable;
 import gid.gtk3.buildable_mixin;
 import gid.gtk3.c.functions;
 import gid.gtk3.c.types;
+import gid.gtk3.container;
 import gid.gtk3.orientable;
 import gid.gtk3.orientable_mixin;
 import gid.gtk3.types;
@@ -147,9 +148,16 @@ class ColorSelection : gid.gtk3.box.Box
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_color_selection_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_color_selection_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -193,6 +201,16 @@ class ColorSelection : gid.gtk3.box.Box
     _cretval = gtk_color_selection_palette_to_string(_colors, _nColors);
     string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
     return _retval;
+  }
+
+  /** */
+  protected void vfuncColorChanged()
+  {
+    auto _klass = cast(GtkColorSelectionClass*)_vfuncClass;
+    if (!_klass.colorChanged)
+      return;
+
+    _klass.colorChanged(cast(GtkColorSelection*)this._cPtr);
   }
 
   /**
@@ -438,6 +456,7 @@ class ColorSelection : gid.gtk3.box.Box
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -457,6 +476,62 @@ class ColorSelection : gid.gtk3.box.Box
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("color-changed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from ColorSelection
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.color_selection.ColorSelection), T.stringof ~ " is not derived from gid.gtk3.color_selection.ColorSelection");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncColorChanged", true)[0]) == gid.gtk3.color_selection.ColorSelection))
+      _installVfunc(klass, "color_changed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkColorSelectionClass*)klass;
+
+    switch (vfunc)
+    {
+      case "color_changed":
+      {
+        static extern(C) void _vfuncColorChangedTramp(GtkColorSelection* colorSelection) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.color_selection.ColorSelection)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)colorSelection);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkColorSelectionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)colorSelection);
+            if (_klass.colorChanged)
+              return (cast(typeof(&_vfuncColorChangedTramp))_klass.colorChanged)(colorSelection);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncColorChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.color_selection.ColorSelection.vfuncColorChanged");
+          }
+        }
+
+        _klass.colorChanged = cast(typeof(_klass.colorChanged))&_vfuncColorChangedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

@@ -124,9 +124,16 @@ class GLViewConvert : gid.gst1.object.ObjectWrap
   /** */
   this() nothrow
   {
-    GstGLViewConvert* _cretval;
-    _cretval = gst_gl_view_convert_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GstGLViewConvert* _cretval;
+      _cretval = gst_gl_view_convert_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

@@ -82,9 +82,16 @@ class RecentChooserWidget : gid.gtk3.box.Box, gid.gtk3.recent_chooser.RecentChoo
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_recent_chooser_widget_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_recent_chooser_widget_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**

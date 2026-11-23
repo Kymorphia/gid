@@ -29,6 +29,8 @@ interface PermissionRequest : GidWrap
     return cast(void function())webkit_permission_request_get_type != &gidSymbolNotFound ? webkit_permission_request_get_type() : cast(GType)0;
   }
 
+
+
   /**
       Allow the action which triggered this request.
   */

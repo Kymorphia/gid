@@ -110,6 +110,7 @@ class Promise : gid.gobject2.boxed.BoxedWrap!(gst_promise_get_type)
   {
     extern(C) void _funcCallback(GstPromise* promise, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gst1.types.PromiseChangeFunc*)userData;
       auto _promise = promise ? new gid.gst1.promise.Promise(cast(void*)promise, Yes.Take)._cBorrow : null;
 

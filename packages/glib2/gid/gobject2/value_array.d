@@ -221,6 +221,7 @@ class ValueArray : gid.gobject2.boxed.BoxedWrap!(g_value_array_get_type)
   {
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.glib2.types.CompareDataFunc*)userData;
 

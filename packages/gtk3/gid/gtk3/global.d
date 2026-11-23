@@ -1832,6 +1832,7 @@ void printRunPageSetupDialogAsync(gid.gtk3.window.Window parent, gid.gtk3.page_s
 {
   extern(C) void _doneCbCallback(GtkPageSetup* pageSetup, void* data) nothrow
   {
+    gidAttachThread();
     ptrThawGC(data);
     auto _dlg = cast(gid.gtk3.types.PageSetupDoneFunc*)data;
 
@@ -2991,6 +2992,7 @@ void stockSetTranslateFunc(string domain, gid.gtk3.types.TranslateFunc func) not
 {
   extern(C) char* _funcCallback(const(char)* path, void* funcData) nothrow
   {
+    gidAttachThread();
     string _dretval;
     auto _dlg = cast(gid.gtk3.types.TranslateFunc*)funcData;
     string _path = path.fromCString!(No.Free);

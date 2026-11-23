@@ -33,6 +33,15 @@ class InputStream : gid.gio2.input_stream.InputStream, gid.gio2.pollable_input_s
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -111,9 +120,16 @@ class InputStream : gid.gio2.input_stream.InputStream, gid.gio2.pollable_input_s
   */
   this(int fd, bool closeFd) nothrow
   {
-    GInputStream* _cretval;
-    _cretval = g_unix_input_stream_new(fd, closeFd);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GInputStream* _cretval;
+      _cretval = g_unix_input_stream_new(fd, closeFd);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

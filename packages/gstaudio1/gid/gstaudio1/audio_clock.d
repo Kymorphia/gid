@@ -27,6 +27,15 @@ class AudioClock : gid.gst1.system_clock.SystemClock
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -73,30 +82,38 @@ class AudioClock : gid.gst1.system_clock.SystemClock
   */
   this(string name, gid.gstaudio1.types.AudioClockGetTimeFunc func) nothrow
   {
-    extern(C) GstClockTime _funcCallback(GstClock* clock, void* userData) nothrow
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
     {
-      gid.gst1.types.ClockTime _dretval;
-      auto _dlg = cast(gid.gstaudio1.types.AudioClockGetTimeFunc*)userData;
-
-      try
-      {
-        _dretval = (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.clock.Clock)(cast(void*)clock, No.Take));
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "gid.gstaudio1.types.AudioClockGetTimeFunc");
-      }
-      auto _retval = cast(GstClockTime)_dretval;
-
-      return _retval;
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }
-    auto _funcCB = func ? &_funcCallback : null;
-    GstClock* _cretval;
-    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
-    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
-    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    _cretval = gst_audio_clock_new(_name, _funcCB, _func, _funcDestroyCB);
-    this(_cretval, Yes.Take);
+    else
+    {
+      extern(C) GstClockTime _funcCallback(GstClock* clock, void* userData) nothrow
+      {
+        gidAttachThread();
+        gid.gst1.types.ClockTime _dretval;
+        auto _dlg = cast(gid.gstaudio1.types.AudioClockGetTimeFunc*)userData;
+
+        try
+        {
+          _dretval = (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.clock.Clock)(cast(void*)clock, No.Take));
+        }
+        catch (Exception e)
+        {
+          gidInvokeCallbackExceptionHandler(e, "gid.gstaudio1.types.AudioClockGetTimeFunc");
+        }
+        auto _retval = cast(GstClockTime)_dretval;
+
+        return _retval;
+      }
+      auto _funcCB = func ? &_funcCallback : null;
+      GstClock* _cretval;
+      const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+      auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+      GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+      _cretval = gst_audio_clock_new(_name, _funcCB, _func, _funcDestroyCB);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

@@ -61,9 +61,16 @@ class NoneAnimationTarget : gid.adw1.animation_target.AnimationTarget
   */
   this() nothrow
   {
-    AdwAnimationTarget* _cretval;
-    _cretval = adw_none_animation_target_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      AdwAnimationTarget* _cretval;
+      _cretval = adw_none_animation_target_new();
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

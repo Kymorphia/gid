@@ -37,6 +37,15 @@ class GhostPad : gid.gst1.proxy_pad.ProxyPad
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -85,10 +94,17 @@ class GhostPad : gid.gst1.proxy_pad.ProxyPad
   */
   this(string name, gid.gst1.pad.Pad target) nothrow
   {
-    GstPad* _cretval;
-    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gst_ghost_pad_new(_name, target ? cast(GstPad*)target._cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GstPad* _cretval;
+      const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gst_ghost_pad_new(_name, target ? cast(GstPad*)target._cPtr(No.Dup) : null);
+      this(_cretval, No.Take);
+    }
   }
 
   /**

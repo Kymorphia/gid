@@ -98,9 +98,16 @@ class MediaControls : gid.gtk4.widget.Widget
   */
   this(gid.gtk4.media_stream.MediaStream stream = null) nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_media_controls_new(stream ? cast(GtkMediaStream*)stream._cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, stream !is null), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_media_controls_new(stream ? cast(GtkMediaStream*)stream._cPtr(No.Dup) : null);
+      this(_cretval, No.Take);
+    }
   }
 
   /**

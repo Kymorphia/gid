@@ -171,9 +171,16 @@ class GridLayout : gid.gtk4.layout_manager.LayoutManager
   */
   this() nothrow
   {
-    GtkLayoutManager* _cretval;
-    _cretval = gtk_grid_layout_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkLayoutManager* _cretval;
+      _cretval = gtk_grid_layout_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

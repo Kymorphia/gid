@@ -191,6 +191,7 @@ class HookList : StructWrap!(GHookList)
   {
     extern(C) void _marshallerCallback(GHook* hook, void* marshalData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.glib2.types.HookMarshaller*)marshalData;
       auto _hook = hook ? new gid.glib2.hook.Hook(cast(void*)hook, null) : null;
 
@@ -222,6 +223,7 @@ class HookList : StructWrap!(GHookList)
   {
     extern(C) gboolean _marshallerCallback(GHook* hook, void* marshalData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.glib2.types.HookCheckMarshaller*)marshalData;
       auto _hook = hook ? new gid.glib2.hook.Hook(cast(void*)hook, null) : null;

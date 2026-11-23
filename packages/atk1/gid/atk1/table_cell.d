@@ -30,6 +30,13 @@ interface TableCell : GidWrap
     return cast(void function())atk_table_cell_get_type != &gidSymbolNotFound ? atk_table_cell_get_type() : cast(GType)0;
   }
 
+
+
+
+
+
+
+
   /**
       Returns the column headers as an array of cell accessibles.
       Returns: a GPtrArray of AtkObjects

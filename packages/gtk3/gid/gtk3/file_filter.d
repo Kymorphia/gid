@@ -115,9 +115,16 @@ class FileFilter : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk3.bui
   */
   this() nothrow
   {
-    GtkFileFilter* _cretval;
-    _cretval = gtk_file_filter_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkFileFilter* _cretval;
+      _cretval = gtk_file_filter_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -153,6 +160,7 @@ class FileFilter : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk3.bui
   {
     extern(C) gboolean _funcCallback(const(GtkFileFilterInfo)* filterInfo, void* data) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gtk3.types.FileFilterFunc*)data;
       auto _filterInfo = filterInfo ? new gid.gtk3.file_filter_info.FileFilterInfo(cast(void*)filterInfo, null) : null;

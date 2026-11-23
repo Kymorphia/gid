@@ -76,9 +76,16 @@ class Cancellable : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GCancellable* _cretval;
-    _cretval = g_cancellable_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GCancellable* _cretval;
+      _cretval = g_cancellable_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -92,6 +99,16 @@ class Cancellable : gid.gobject2.object.ObjectWrap
     _cretval = g_cancellable_get_current();
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
     return _retval;
+  }
+
+  /** */
+  protected void vfuncCancelled()
+  {
+    auto _klass = cast(GCancellableClass*)_vfuncClass;
+    if (!_klass.cancelled)
+      return;
+
+    _klass.cancelled(cast(GCancellable*)this._cPtr);
   }
 
   /**
@@ -166,6 +183,7 @@ class Cancellable : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GCancellable* cancellable, void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gio2.types.CancellableConnectFunc*)data;
 
       try
@@ -459,6 +477,7 @@ class Cancellable : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -478,6 +497,62 @@ class Cancellable : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("cancelled", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Cancellable
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.cancellable.Cancellable), T.stringof ~ " is not derived from gid.gio2.cancellable.Cancellable");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCancelled", true)[0]) == gid.gio2.cancellable.Cancellable))
+      _installVfunc(klass, "cancelled");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GCancellableClass*)klass;
+
+    switch (vfunc)
+    {
+      case "cancelled":
+      {
+        static extern(C) void _vfuncCancelledTramp(GCancellable* cancellable) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.cancellable.Cancellable)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cancellable);
+          if (!_obj)
+          {
+            auto _klass = cast(GCancellableClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cancellable);
+            if (_klass.cancelled)
+              return (cast(typeof(&_vfuncCancelledTramp))_klass.cancelled)(cancellable);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncCancelled();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.cancellable.Cancellable.vfuncCancelled");
+          }
+        }
+
+        _klass.cancelled = cast(typeof(_klass.cancelled))&_vfuncCancelledTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

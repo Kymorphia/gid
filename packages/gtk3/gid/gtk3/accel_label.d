@@ -88,6 +88,15 @@ class AccelLabel : gid.gtk3.label.Label
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -155,10 +164,17 @@ class AccelLabel : gid.gtk3.label.Label
   */
   this(string string_) nothrow
   {
-    GtkWidget* _cretval;
-    const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
-    _cretval = gtk_accel_label_new(_string_);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      const(char)* _string_ = string_.toCString!(No.Malloc, No.Nullable);
+      _cretval = gtk_accel_label_new(_string_);
+      this(_cretval, No.Take);
+    }
   }
 
   /**

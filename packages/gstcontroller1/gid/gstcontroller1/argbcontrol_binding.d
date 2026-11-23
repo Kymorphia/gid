@@ -26,6 +26,15 @@ class ARGBControlBinding : gid.gst1.control_binding.ControlBinding
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -123,10 +132,17 @@ class ARGBControlBinding : gid.gst1.control_binding.ControlBinding
   */
   this(gid.gst1.object.ObjectWrap object, string propertyName, gid.gst1.control_source.ControlSource csA, gid.gst1.control_source.ControlSource csR, gid.gst1.control_source.ControlSource csG, gid.gst1.control_source.ControlSource csB) nothrow
   {
-    GstControlBinding* _cretval;
-    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
-    _cretval = gst_argb_control_binding_new(object ? cast(GstObject*)object._cPtr(No.Dup) : null, _propertyName, csA ? cast(GstControlSource*)csA._cPtr(No.Dup) : null, csR ? cast(GstControlSource*)csR._cPtr(No.Dup) : null, csG ? cast(GstControlSource*)csG._cPtr(No.Dup) : null, csB ? cast(GstControlSource*)csB._cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GstControlBinding* _cretval;
+      const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
+      _cretval = gst_argb_control_binding_new(object ? cast(GstObject*)object._cPtr(No.Dup) : null, _propertyName, csA ? cast(GstControlSource*)csA._cPtr(No.Dup) : null, csR ? cast(GstControlSource*)csR._cPtr(No.Dup) : null, csG ? cast(GstControlSource*)csG._cPtr(No.Dup) : null, csB ? cast(GstControlSource*)csB._cPtr(No.Dup) : null);
+      this(_cretval, No.Take);
+    }
   }
 }
 

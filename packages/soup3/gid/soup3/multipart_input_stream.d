@@ -41,6 +41,15 @@ class MultipartInputStream : gid.gio2.filter_input_stream.FilterInputStream, gid
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -101,9 +110,16 @@ class MultipartInputStream : gid.gio2.filter_input_stream.FilterInputStream, gid
   */
   this(gid.soup3.message.Message msg, gid.gio2.input_stream.InputStream baseStream) nothrow
   {
-    SoupMultipartInputStream* _cretval;
-    _cretval = soup_multipart_input_stream_new(msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, baseStream ? cast(GInputStream*)baseStream._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      SoupMultipartInputStream* _cretval;
+      _cretval = soup_multipart_input_stream_new(msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, baseStream ? cast(GInputStream*)baseStream._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -175,6 +191,7 @@ class MultipartInputStream : gid.gio2.filter_input_stream.FilterInputStream, gid
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 

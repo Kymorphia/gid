@@ -107,9 +107,16 @@ class FontChooserWidget : gid.gtk4.widget.Widget, gid.gtk4.font_chooser.FontChoo
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_font_chooser_widget_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_font_chooser_widget_new();
+      this(_cretval, No.Take);
+    }
   }
 }
 

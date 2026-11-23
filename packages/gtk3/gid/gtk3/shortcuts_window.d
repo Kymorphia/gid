@@ -66,6 +66,15 @@ class ShortcutsWindow : gid.gtk3.window.Window
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -154,6 +163,26 @@ class ShortcutsWindow : gid.gtk3.window.Window
     gid.gobject2.object.ObjectWrap.setProperty!(string)("view-name", propval);
   }
 
+  /** */
+  protected void vfuncClose()
+  {
+    auto _klass = cast(GtkShortcutsWindowClass*)_vfuncClass;
+    if (!_klass.close)
+      return;
+
+    _klass.close(cast(GtkShortcutsWindow*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncSearch()
+  {
+    auto _klass = cast(GtkShortcutsWindowClass*)_vfuncClass;
+    if (!_klass.search)
+      return;
+
+    _klass.search(cast(GtkShortcutsWindow*)this._cPtr);
+  }
+
   /**
       Connect to `Close` signal.
   
@@ -182,6 +211,7 @@ class ShortcutsWindow : gid.gtk3.window.Window
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -230,6 +260,7 @@ class ShortcutsWindow : gid.gtk3.window.Window
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -249,6 +280,92 @@ class ShortcutsWindow : gid.gtk3.window.Window
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("search", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from ShortcutsWindow
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.shortcuts_window.ShortcutsWindow), T.stringof ~ " is not derived from gid.gtk3.shortcuts_window.ShortcutsWindow");
+
+    gid.gtk3.window.Window._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncClose", true)[0]) == gid.gtk3.shortcuts_window.ShortcutsWindow))
+      _installVfunc(klass, "close");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSearch", true)[0]) == gid.gtk3.shortcuts_window.ShortcutsWindow))
+      _installVfunc(klass, "search");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkShortcutsWindowClass*)klass;
+
+    switch (vfunc)
+    {
+      case "close":
+      {
+        static extern(C) void _vfuncCloseTramp(GtkShortcutsWindow* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.shortcuts_window.ShortcutsWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkShortcutsWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.close)
+              return (cast(typeof(&_vfuncCloseTramp))_klass.close)(self);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncClose();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.shortcuts_window.ShortcutsWindow.vfuncClose");
+          }
+        }
+
+        _klass.close = cast(typeof(_klass.close))&_vfuncCloseTramp;
+        break;
+      }
+      case "search":
+      {
+        static extern(C) void _vfuncSearchTramp(GtkShortcutsWindow* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.shortcuts_window.ShortcutsWindow)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkShortcutsWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.search)
+              return (cast(typeof(&_vfuncSearchTramp))_klass.search)(self);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSearch();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.shortcuts_window.ShortcutsWindow.vfuncSearch");
+          }
+        }
+
+        _klass.search = cast(typeof(_klass.search))&_vfuncSearchTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

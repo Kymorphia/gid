@@ -4,6 +4,8 @@ module gid.gtk3.tree_model_mixin;
 public import gid.core.basictypes;
 public import gid.gtk3.tree_model_iface_proxy;
 public import gid.core.utils;
+public import gid.gobject2.c.functions;
+public import gid.gobject2.c.types;
 public import gid.gobject2.dclosure;
 public import gid.gobject2.gid_builder;
 public import gid.gobject2.object;
@@ -215,6 +217,530 @@ template TreeModelT()
 {
 
   /**
+      Returns the type of the column.
+  
+      Params:
+        index = the column index
+      Returns: the type of the column
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetColumnType`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected gid.gobject2.types.GType vfuncGetColumnType(int index)
+  {
+    auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.tree_model.TreeModel._getGType);
+    if (!_klass || !_klass.getColumnType)
+      return typeof(return).init;
+
+    gid.gobject2.types.GType _retval;
+    _retval = _klass.getColumnType(cast(GtkTreeModel*)this._cPtr, index);
+    return _retval;
+  }
+
+  /**
+      Returns a set of flags supported by this interface.
+      
+      The flags are a bitwise combination of #GtkTreeModelFlags.
+      The flags supported should not change during the lifetime
+      of the tree_model.
+      Returns: the flags supported by this interface
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetFlags`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected gid.gtk3.types.TreeModelFlags vfuncGetFlags()
+  {
+    auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.tree_model.TreeModel._getGType);
+    if (!_klass || !_klass.getFlags)
+      return typeof(return).init;
+
+    GtkTreeModelFlags _cretval;
+    _cretval = _klass.getFlags(cast(GtkTreeModel*)this._cPtr);
+    gid.gtk3.types.TreeModelFlags _retval = cast(gid.gtk3.types.TreeModelFlags)_cretval;
+    return _retval;
+  }
+
+  /**
+      Sets iter to a valid iterator pointing to path.  If path does
+      not exist, iter is set to an invalid iterator and false is returned.
+  
+      Params:
+        iter = the uninitialized #GtkTreeIter-struct
+        path = the #GtkTreePath-struct (modified in place, changes are seen by the caller)
+      Returns: true, if iter was set
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetIter`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncGetIter(out gid.gtk3.tree_iter.TreeIter iter, gid.gtk3.tree_path.TreePath path)
+  {
+    auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.tree_model.TreeModel._getGType);
+    if (!_klass || !_klass.getIter)
+      return typeof(return).init;
+
+    bool _retval;
+    auto _iter = boxedNew!GtkTreeIter(gid.gtk3.tree_iter.TreeIter._getGType);
+    _retval = cast(bool)_klass.getIter(cast(GtkTreeModel*)this._cPtr, _iter, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
+    iter = new gid.gtk3.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Returns the number of columns supported by tree_model.
+      Returns: the number of columns
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetNColumns`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected int vfuncGetNColumns()
+  {
+    auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.tree_model.TreeModel._getGType);
+    if (!_klass || !_klass.getNColumns)
+      return typeof(return).init;
+
+    int _retval;
+    _retval = _klass.getNColumns(cast(GtkTreeModel*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Returns a newly-created #GtkTreePath-struct referenced by iter.
+      
+      This path should be freed with [gid.gtk4.tree_path.TreePath.free].
+  
+      Params:
+        iter = the #GtkTreeIter-struct (modified in place, changes are seen by the caller)
+      Returns: a newly-created #GtkTreePath-struct
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetPath`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected gid.gtk3.tree_path.TreePath vfuncGetPath(gid.gtk3.tree_iter.TreeIter iter)
+  {
+    auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.tree_model.TreeModel._getGType);
+    if (!_klass || !_klass.getPath)
+      return typeof(return).init;
+
+    GtkTreePath* _cretval;
+    _cretval = _klass.getPath(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gid.gtk3.tree_path.TreePath(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Initializes and sets value to that at column.
+      
+      When done with value, [gid.gobject2.value.Value.unset] needs to be called
+      to free any allocated memory.
+  
+      Params:
+        iter = the #GtkTreeIter-struct (modified in place, changes are seen by the caller)
+        column = the column to lookup the value at
+        value = an empty #GValue to set
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetValue`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncGetValue(gid.gtk3.tree_iter.TreeIter iter, int column, out gid.gobject2.value.Value value)
+  {
+    auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.tree_model.TreeModel._getGType);
+    if (!_klass || !_klass.getValue)
+      return;
+
+    auto _value = boxedNew!GValue(gid.gobject2.value.Value._getGType);
+    _klass.getValue(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, column, _value);
+    value = new gid.gobject2.value.Value(cast(void*)_value, Yes.Take);
+  }
+
+  /**
+      Sets iter to point to the first child of parent.
+      
+      If parent has no children, false is returned and iter is
+      set to be invalid. parent will remain a valid node after this
+      function has been called.
+      
+      If parent is null returns the first node, equivalent to
+      `gtk_tree_model_get_iter_first (tree_model, iter);`
+  
+      Params:
+        iter = the new #GtkTreeIter-struct to be set to the child
+        parent = the #GtkTreeIter-struct, or null (modified in place, changes are seen by the caller)
+      Returns: true, if iter has been set to the first child
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncIterChildren`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncIterChildren(out gid.gtk3.tree_iter.TreeIter iter, gid.gtk3.tree_iter.TreeIter parent = null)
+  {
+    auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.tree_model.TreeModel._getGType);
+    if (!_klass || !_klass.iterChildren)
+      return typeof(return).init;
+
+    bool _retval;
+    auto _iter = boxedNew!GtkTreeIter(gid.gtk3.tree_iter.TreeIter._getGType);
+    _retval = cast(bool)_klass.iterChildren(cast(GtkTreeModel*)this._cPtr, _iter, parent ? cast(GtkTreeIter*)parent._cPtr(No.Dup) : null);
+    iter = new gid.gtk3.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Returns true if iter has children, false otherwise.
+  
+      Params:
+        iter = the #GtkTreeIter-struct to test for children (modified in place, changes are seen by the caller)
+      Returns: true if iter has children
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncIterHasChild`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncIterHasChild(gid.gtk3.tree_iter.TreeIter iter)
+  {
+    auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.tree_model.TreeModel._getGType);
+    if (!_klass || !_klass.iterHasChild)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.iterHasChild(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Returns the number of children that iter has.
+      
+      As a special case, if iter is null, then the number
+      of toplevel nodes is returned.
+  
+      Params:
+        iter = the #GtkTreeIter-struct, or null (modified in place, changes are seen by the caller)
+      Returns: the number of children of iter
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncIterNChildren`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected int vfuncIterNChildren(gid.gtk3.tree_iter.TreeIter iter = null)
+  {
+    auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.tree_model.TreeModel._getGType);
+    if (!_klass || !_klass.iterNChildren)
+      return typeof(return).init;
+
+    int _retval;
+    _retval = _klass.iterNChildren(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Sets iter to point to the node following it at the current level.
+      
+      If there is no next iter, false is returned and iter is set
+      to be invalid.
+  
+      Params:
+        iter = the #GtkTreeIter-struct (modified in place, changes are seen by the caller)
+      Returns: true if iter has been changed to the next node
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncIterNext`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncIterNext(gid.gtk3.tree_iter.TreeIter iter)
+  {
+    auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.tree_model.TreeModel._getGType);
+    if (!_klass || !_klass.iterNext)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.iterNext(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Sets iter to be the child of parent, using the given index.
+      
+      The first index is 0. If `n` is too big, or parent has no children,
+      iter is set to an invalid iterator and false is returned. parent
+      will remain a valid node after this function has been called. As a
+      special case, if parent is null, then the `n`-th root node
+      is set.
+  
+      Params:
+        iter = the #GtkTreeIter-struct to set to the nth child
+        parent = the #GtkTreeIter-struct to get the child from, or null. (modified in place, changes are seen by the caller)
+        n = the index of the desired child
+      Returns: true, if parent has an `n`-th child
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncIterNthChild`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncIterNthChild(out gid.gtk3.tree_iter.TreeIter iter, gid.gtk3.tree_iter.TreeIter parent, int n)
+  {
+    auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.tree_model.TreeModel._getGType);
+    if (!_klass || !_klass.iterNthChild)
+      return typeof(return).init;
+
+    bool _retval;
+    auto _iter = boxedNew!GtkTreeIter(gid.gtk3.tree_iter.TreeIter._getGType);
+    _retval = cast(bool)_klass.iterNthChild(cast(GtkTreeModel*)this._cPtr, _iter, parent ? cast(GtkTreeIter*)parent._cPtr(No.Dup) : null, n);
+    iter = new gid.gtk3.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Sets iter to be the parent of child.
+      
+      If child is at the toplevel, and doesn’t have a parent, then
+      iter is set to an invalid iterator and false is returned.
+      child will remain a valid node after this function has been
+      called.
+      
+      iter will be initialized before the lookup is performed, so child
+      and iter cannot point to the same memory location.
+  
+      Params:
+        iter = the new #GtkTreeIter-struct to set to the parent
+        child = the #GtkTreeIter-struct (modified in place, changes are seen by the caller)
+      Returns: true, if iter is set to the parent of child
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncIterParent`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncIterParent(out gid.gtk3.tree_iter.TreeIter iter, gid.gtk3.tree_iter.TreeIter child)
+  {
+    auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.tree_model.TreeModel._getGType);
+    if (!_klass || !_klass.iterParent)
+      return typeof(return).init;
+
+    bool _retval;
+    auto _iter = boxedNew!GtkTreeIter(gid.gtk3.tree_iter.TreeIter._getGType);
+    _retval = cast(bool)_klass.iterParent(cast(GtkTreeModel*)this._cPtr, _iter, child ? cast(GtkTreeIter*)child._cPtr(No.Dup) : null);
+    iter = new gid.gtk3.tree_iter.TreeIter(cast(void*)_iter, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Sets iter to point to the previous node at the current level.
+      
+      If there is no previous iter, false is returned and iter is
+      set to be invalid.
+  
+      Params:
+        iter = the #GtkTreeIter-struct (modified in place, changes are seen by the caller)
+      Returns: true if iter has been changed to the previous node
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncIterPrevious`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncIterPrevious(gid.gtk3.tree_iter.TreeIter iter)
+  {
+    auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.tree_model.TreeModel._getGType);
+    if (!_klass || !_klass.iterPrevious)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.iterPrevious(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Lets the tree ref the node.
+      
+      This is an optional method for models to implement.
+      To be more specific, models may ignore this call as it exists
+      primarily for performance reasons.
+      
+      This function is primarily meant as a way for views to let
+      caching models know when nodes are being displayed (and hence,
+      whether or not to cache that node). Being displayed means a node
+      is in an expanded branch, regardless of whether the node is currently
+      visible in the viewport. For example, a file-system based model
+      would not want to keep the entire file-hierarchy in memory,
+      just the sections that are currently being displayed by
+      every current view.
+      
+      A model should be expected to be able to get an iter independent
+      of its reffed state.
+  
+      Params:
+        iter = the #GtkTreeIter-struct (modified in place, changes are seen by the caller)
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncRefNode`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncRefNode(gid.gtk3.tree_iter.TreeIter iter)
+  {
+    auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.tree_model.TreeModel._getGType);
+    if (!_klass || !_klass.refNode)
+      return;
+
+    _klass.refNode(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Emits the #GtkTreeModel::row-changed signal on tree_model.
+  
+      Params:
+        path = a #GtkTreePath-struct pointing to the changed row (modified in place, changes are seen by the caller)
+        iter = a valid #GtkTreeIter-struct pointing to the changed row (modified in place, changes are seen by the caller)
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncRowChanged`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncRowChanged(gid.gtk3.tree_path.TreePath path, gid.gtk3.tree_iter.TreeIter iter)
+  {
+    auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.tree_model.TreeModel._getGType);
+    if (!_klass || !_klass.rowChanged)
+      return;
+
+    _klass.rowChanged(cast(GtkTreeModel*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Emits the #GtkTreeModel::row-deleted signal on tree_model.
+      
+      This should be called by models after a row has been removed.
+      The location pointed to by path should be the location that
+      the row previously was at. It may not be a valid location anymore.
+      
+      Nodes that are deleted are not unreffed, this means that any
+      outstanding references on the deleted node should not be released.
+  
+      Params:
+        path = a #GtkTreePath-struct pointing to the previous location of
+              the deleted row (modified in place, changes are seen by the caller)
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncRowDeleted`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncRowDeleted(gid.gtk3.tree_path.TreePath path)
+  {
+    auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.tree_model.TreeModel._getGType);
+    if (!_klass || !_klass.rowDeleted)
+      return;
+
+    _klass.rowDeleted(cast(GtkTreeModel*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Emits the #GtkTreeModel::row-has-child-toggled signal on
+      tree_model. This should be called by models after the child
+      state of a node changes.
+  
+      Params:
+        path = a #GtkTreePath-struct pointing to the changed row (modified in place, changes are seen by the caller)
+        iter = a valid #GtkTreeIter-struct pointing to the changed row (modified in place, changes are seen by the caller)
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncRowHasChildToggled`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncRowHasChildToggled(gid.gtk3.tree_path.TreePath path, gid.gtk3.tree_iter.TreeIter iter)
+  {
+    auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.tree_model.TreeModel._getGType);
+    if (!_klass || !_klass.rowHasChildToggled)
+      return;
+
+    _klass.rowHasChildToggled(cast(GtkTreeModel*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Emits the #GtkTreeModel::row-inserted signal on tree_model.
+  
+      Params:
+        path = a #GtkTreePath-struct pointing to the inserted row (modified in place, changes are seen by the caller)
+        iter = a valid #GtkTreeIter-struct pointing to the inserted row (modified in place, changes are seen by the caller)
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncRowInserted`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncRowInserted(gid.gtk3.tree_path.TreePath path, gid.gtk3.tree_iter.TreeIter iter)
+  {
+    auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.tree_model.TreeModel._getGType);
+    if (!_klass || !_klass.rowInserted)
+      return;
+
+    _klass.rowInserted(cast(GtkTreeModel*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Lets the tree unref the node.
+      
+      This is an optional method for models to implement.
+      To be more specific, models may ignore this call as it exists
+      primarily for performance reasons. For more information on what
+      this means, see [gid.gtk4.tree_model.TreeModel.refNode].
+      
+      Please note that nodes that are deleted are not unreffed.
+  
+      Params:
+        iter = the #GtkTreeIter-struct (modified in place, changes are seen by the caller)
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncUnrefNode`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncUnrefNode(gid.gtk3.tree_iter.TreeIter iter)
+  {
+    auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.tree_model.TreeModel._getGType);
+    if (!_klass || !_klass.unrefNode)
+      return;
+
+    _klass.unrefNode(cast(GtkTreeModel*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+  }
+
+  /**
       Creates a new #GtkTreeModel, with child_model as the child_model
       and root as the virtual root.
   
@@ -243,6 +769,7 @@ template TreeModelT()
   {
     extern(C) gboolean _funcCallback(GtkTreeModel* model, GtkTreePath* path, GtkTreeIter* iter, void* data) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gtk3.types.TreeModelForeachFunc*)data;
       auto _path = path ? new gid.gtk3.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
@@ -716,6 +1243,7 @@ template TreeModelT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -776,6 +1304,7 @@ template TreeModelT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -830,6 +1359,7 @@ template TreeModelT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -891,6 +1421,7 @@ template TreeModelT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -916,6 +1447,746 @@ template TreeModelT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("row-inserted", closure, after);
+  }
+
+  /// True if the D class T overrides any vfunc method of gid.gtk3.tree_model.TreeModel (DiG)
+  enum bool _ifaceVfuncsOverridden_gid_gtk3_tree_model_TreeModel(T) = !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetColumnType", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetFlags", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetIter", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetNColumns", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetPath", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetValue", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncIterChildren", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncIterHasChild", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncIterNChildren", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncIterNext", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncIterNthChild", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncIterParent", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncIterPrevious", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncRefNode", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncRowChanged", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncRowDeleted", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncRowHasChildToggled", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncRowInserted", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncUnrefNode", true)[0], gid.gobject2.object.GidIfaceVfunc);
+
+  /**
+      Install the C trampolines of the gid.gtk3.tree_model.TreeModel vfunc methods which a D class overrides into the interface
+      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      trampoline is a compile error.
+      Params:
+        T = D class
+        iface = Interface structure of the GType registered for T
+  */
+  static void _installIfaceVfuncs_gid_gtk3_tree_model_TreeModel(T)(void* iface) nothrow
+  {
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetColumnType", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_tree_model_TreeModel(iface, "get_column_type");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetFlags", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_tree_model_TreeModel(iface, "get_flags");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetIter", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_tree_model_TreeModel(iface, "get_iter");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetNColumns", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_tree_model_TreeModel(iface, "get_n_columns");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetPath", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_tree_model_TreeModel(iface, "get_path");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetValue", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_tree_model_TreeModel(iface, "get_value");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncIterChildren", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_tree_model_TreeModel(iface, "iter_children");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncIterHasChild", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_tree_model_TreeModel(iface, "iter_has_child");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncIterNChildren", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_tree_model_TreeModel(iface, "iter_n_children");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncIterNext", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_tree_model_TreeModel(iface, "iter_next");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncIterNthChild", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_tree_model_TreeModel(iface, "iter_nth_child");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncIterParent", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_tree_model_TreeModel(iface, "iter_parent");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncIterPrevious", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_tree_model_TreeModel(iface, "iter_previous");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncRefNode", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_tree_model_TreeModel(iface, "ref_node");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncRowChanged", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_tree_model_TreeModel(iface, "row_changed");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncRowDeleted", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_tree_model_TreeModel(iface, "row_deleted");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncRowHasChildToggled", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_tree_model_TreeModel(iface, "row_has_child_toggled");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncRowInserted", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_tree_model_TreeModel(iface, "row_inserted");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncUnrefNode", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_tree_model_TreeModel(iface, "unref_node");
+  }
+
+  private static void _installIfaceVfunc_gid_gtk3_tree_model_TreeModel(void* iface, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkTreeModelIface*)iface;
+
+    switch (vfunc)
+    {
+      case "get_column_type":
+      {
+        static extern(C) GType _vfuncGetColumnTypeTramp(GtkTreeModel* treeModel, int index) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
+            if (_klass && _klass.getColumnType)
+              return (cast(typeof(&_vfuncGetColumnTypeTramp))_klass.getColumnType)(treeModel, index);
+            return typeof(return).init;
+          }
+
+          gid.gobject2.types.GType _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetColumnType(index);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model.TreeModel.vfuncGetColumnType");
+          }
+          auto _retval = cast(GType)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getColumnType = cast(typeof(_klass.getColumnType))&_vfuncGetColumnTypeTramp;
+        break;
+      }
+      case "get_flags":
+      {
+        static extern(C) GtkTreeModelFlags _vfuncGetFlagsTramp(GtkTreeModel* treeModel) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
+            if (_klass && _klass.getFlags)
+              return (cast(typeof(&_vfuncGetFlagsTramp))_klass.getFlags)(treeModel);
+            return typeof(return).init;
+          }
+
+          gid.gtk3.types.TreeModelFlags _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetFlags();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model.TreeModel.vfuncGetFlags");
+          }
+          auto _retval = cast(GtkTreeModelFlags)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getFlags = cast(typeof(_klass.getFlags))&_vfuncGetFlagsTramp;
+        break;
+      }
+      case "get_iter":
+      {
+        static extern(C) gboolean _vfuncGetIterTramp(GtkTreeModel* treeModel, GtkTreeIter* iter, GtkTreePath* path) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
+            if (_klass && _klass.getIter)
+              return (cast(typeof(&_vfuncGetIterTramp))_klass.getIter)(treeModel, iter, path);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          gid.gtk3.tree_iter.TreeIter _iter;
+          auto _path = path ? new gid.gtk3.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncGetIter(_iter, _path);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model.TreeModel.vfuncGetIter");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_iter)
+          {
+            auto p_ = _iter._cPtr(Yes.Dup);
+            *iter = *cast(GtkTreeIter*)p_;
+            gFree(p_);
+          }
+          if (_path)
+            _path._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.getIter = cast(typeof(_klass.getIter))&_vfuncGetIterTramp;
+        break;
+      }
+      case "get_n_columns":
+      {
+        static extern(C) int _vfuncGetNColumnsTramp(GtkTreeModel* treeModel) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
+            if (_klass && _klass.getNColumns)
+              return (cast(typeof(&_vfuncGetNColumnsTramp))_klass.getNColumns)(treeModel);
+            return typeof(return).init;
+          }
+
+          int _retval;
+
+          try
+          {
+            _retval = _obj.vfuncGetNColumns();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model.TreeModel.vfuncGetNColumns");
+          }
+          return _retval;
+        }
+
+        _klass.getNColumns = cast(typeof(_klass.getNColumns))&_vfuncGetNColumnsTramp;
+        break;
+      }
+      case "get_path":
+      {
+        static extern(C) GtkTreePath* _vfuncGetPathTramp(GtkTreeModel* treeModel, GtkTreeIter* iter) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
+            if (_klass && _klass.getPath)
+              return (cast(typeof(&_vfuncGetPathTramp))_klass.getPath)(treeModel, iter);
+            return typeof(return).init;
+          }
+
+          gid.gtk3.tree_path.TreePath _dretval;
+          auto _iter = iter ? new gid.gtk3.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncGetPath(_iter);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model.TreeModel.vfuncGetPath");
+          }
+          auto _retval = _dretval ? cast(GtkTreePath*)_dretval._cPtr(Yes.Dup) : null;
+          if (_iter)
+            _iter._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.getPath = cast(typeof(_klass.getPath))&_vfuncGetPathTramp;
+        break;
+      }
+      case "get_value":
+      {
+        static extern(C) void _vfuncGetValueTramp(GtkTreeModel* treeModel, GtkTreeIter* iter, int column, GValue* value) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
+            if (_klass && _klass.getValue)
+              return (cast(typeof(&_vfuncGetValueTramp))_klass.getValue)(treeModel, iter, column, value);
+            return;
+          }
+
+          auto _iter = iter ? new gid.gtk3.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+          gid.gobject2.value.Value _value;
+
+          try
+          {
+            _obj.vfuncGetValue(_iter, column, _value);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model.TreeModel.vfuncGetValue");
+          }
+          if (_iter)
+            _iter._cUnborrow;
+          if (_value)
+          {
+            auto p_ = _value._cPtr(Yes.Dup);
+            *value = *cast(GValue*)p_;
+            gFree(p_);
+          }
+
+        }
+
+        _klass.getValue = cast(typeof(_klass.getValue))&_vfuncGetValueTramp;
+        break;
+      }
+      case "iter_children":
+      {
+        static extern(C) gboolean _vfuncIterChildrenTramp(GtkTreeModel* treeModel, GtkTreeIter* iter, GtkTreeIter* parent) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
+            if (_klass && _klass.iterChildren)
+              return (cast(typeof(&_vfuncIterChildrenTramp))_klass.iterChildren)(treeModel, iter, parent);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          gid.gtk3.tree_iter.TreeIter _iter;
+          auto _parent = parent ? new gid.gtk3.tree_iter.TreeIter(cast(void*)parent, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncIterChildren(_iter, _parent);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model.TreeModel.vfuncIterChildren");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_iter)
+          {
+            auto p_ = _iter._cPtr(Yes.Dup);
+            *iter = *cast(GtkTreeIter*)p_;
+            gFree(p_);
+          }
+          if (_parent)
+            _parent._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.iterChildren = cast(typeof(_klass.iterChildren))&_vfuncIterChildrenTramp;
+        break;
+      }
+      case "iter_has_child":
+      {
+        static extern(C) gboolean _vfuncIterHasChildTramp(GtkTreeModel* treeModel, GtkTreeIter* iter) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
+            if (_klass && _klass.iterHasChild)
+              return (cast(typeof(&_vfuncIterHasChildTramp))_klass.iterHasChild)(treeModel, iter);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _iter = iter ? new gid.gtk3.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncIterHasChild(_iter);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model.TreeModel.vfuncIterHasChild");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_iter)
+            _iter._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.iterHasChild = cast(typeof(_klass.iterHasChild))&_vfuncIterHasChildTramp;
+        break;
+      }
+      case "iter_n_children":
+      {
+        static extern(C) int _vfuncIterNChildrenTramp(GtkTreeModel* treeModel, GtkTreeIter* iter) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
+            if (_klass && _klass.iterNChildren)
+              return (cast(typeof(&_vfuncIterNChildrenTramp))_klass.iterNChildren)(treeModel, iter);
+            return typeof(return).init;
+          }
+
+          int _retval;
+          auto _iter = iter ? new gid.gtk3.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _retval = _obj.vfuncIterNChildren(_iter);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model.TreeModel.vfuncIterNChildren");
+          }
+          if (_iter)
+            _iter._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.iterNChildren = cast(typeof(_klass.iterNChildren))&_vfuncIterNChildrenTramp;
+        break;
+      }
+      case "iter_next":
+      {
+        static extern(C) gboolean _vfuncIterNextTramp(GtkTreeModel* treeModel, GtkTreeIter* iter) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
+            if (_klass && _klass.iterNext)
+              return (cast(typeof(&_vfuncIterNextTramp))_klass.iterNext)(treeModel, iter);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _iter = iter ? new gid.gtk3.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncIterNext(_iter);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model.TreeModel.vfuncIterNext");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_iter)
+            _iter._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.iterNext = cast(typeof(_klass.iterNext))&_vfuncIterNextTramp;
+        break;
+      }
+      case "iter_nth_child":
+      {
+        static extern(C) gboolean _vfuncIterNthChildTramp(GtkTreeModel* treeModel, GtkTreeIter* iter, GtkTreeIter* parent, int n) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
+            if (_klass && _klass.iterNthChild)
+              return (cast(typeof(&_vfuncIterNthChildTramp))_klass.iterNthChild)(treeModel, iter, parent, n);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          gid.gtk3.tree_iter.TreeIter _iter;
+          auto _parent = parent ? new gid.gtk3.tree_iter.TreeIter(cast(void*)parent, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncIterNthChild(_iter, _parent, n);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model.TreeModel.vfuncIterNthChild");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_iter)
+          {
+            auto p_ = _iter._cPtr(Yes.Dup);
+            *iter = *cast(GtkTreeIter*)p_;
+            gFree(p_);
+          }
+          if (_parent)
+            _parent._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.iterNthChild = cast(typeof(_klass.iterNthChild))&_vfuncIterNthChildTramp;
+        break;
+      }
+      case "iter_parent":
+      {
+        static extern(C) gboolean _vfuncIterParentTramp(GtkTreeModel* treeModel, GtkTreeIter* iter, GtkTreeIter* child) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
+            if (_klass && _klass.iterParent)
+              return (cast(typeof(&_vfuncIterParentTramp))_klass.iterParent)(treeModel, iter, child);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          gid.gtk3.tree_iter.TreeIter _iter;
+          auto _child = child ? new gid.gtk3.tree_iter.TreeIter(cast(void*)child, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncIterParent(_iter, _child);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model.TreeModel.vfuncIterParent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_iter)
+          {
+            auto p_ = _iter._cPtr(Yes.Dup);
+            *iter = *cast(GtkTreeIter*)p_;
+            gFree(p_);
+          }
+          if (_child)
+            _child._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.iterParent = cast(typeof(_klass.iterParent))&_vfuncIterParentTramp;
+        break;
+      }
+      case "iter_previous":
+      {
+        static extern(C) gboolean _vfuncIterPreviousTramp(GtkTreeModel* treeModel, GtkTreeIter* iter) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
+            if (_klass && _klass.iterPrevious)
+              return (cast(typeof(&_vfuncIterPreviousTramp))_klass.iterPrevious)(treeModel, iter);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _iter = iter ? new gid.gtk3.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncIterPrevious(_iter);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model.TreeModel.vfuncIterPrevious");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_iter)
+            _iter._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.iterPrevious = cast(typeof(_klass.iterPrevious))&_vfuncIterPreviousTramp;
+        break;
+      }
+      case "ref_node":
+      {
+        static extern(C) void _vfuncRefNodeTramp(GtkTreeModel* treeModel, GtkTreeIter* iter) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
+            if (_klass && _klass.refNode)
+              return (cast(typeof(&_vfuncRefNodeTramp))_klass.refNode)(treeModel, iter);
+            return;
+          }
+
+          auto _iter = iter ? new gid.gtk3.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncRefNode(_iter);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model.TreeModel.vfuncRefNode");
+          }
+          if (_iter)
+            _iter._cUnborrow;
+
+        }
+
+        _klass.refNode = cast(typeof(_klass.refNode))&_vfuncRefNodeTramp;
+        break;
+      }
+      case "row_changed":
+      {
+        static extern(C) void _vfuncRowChangedTramp(GtkTreeModel* treeModel, GtkTreePath* path, GtkTreeIter* iter) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
+            if (_klass && _klass.rowChanged)
+              return (cast(typeof(&_vfuncRowChangedTramp))_klass.rowChanged)(treeModel, path, iter);
+            return;
+          }
+
+          auto _path = path ? new gid.gtk3.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
+          auto _iter = iter ? new gid.gtk3.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncRowChanged(_path, _iter);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model.TreeModel.vfuncRowChanged");
+          }
+          if (_path)
+            _path._cUnborrow;
+          if (_iter)
+            _iter._cUnborrow;
+
+        }
+
+        _klass.rowChanged = cast(typeof(_klass.rowChanged))&_vfuncRowChangedTramp;
+        break;
+      }
+      case "row_deleted":
+      {
+        static extern(C) void _vfuncRowDeletedTramp(GtkTreeModel* treeModel, GtkTreePath* path) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
+            if (_klass && _klass.rowDeleted)
+              return (cast(typeof(&_vfuncRowDeletedTramp))_klass.rowDeleted)(treeModel, path);
+            return;
+          }
+
+          auto _path = path ? new gid.gtk3.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncRowDeleted(_path);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model.TreeModel.vfuncRowDeleted");
+          }
+          if (_path)
+            _path._cUnborrow;
+
+        }
+
+        _klass.rowDeleted = cast(typeof(_klass.rowDeleted))&_vfuncRowDeletedTramp;
+        break;
+      }
+      case "row_has_child_toggled":
+      {
+        static extern(C) void _vfuncRowHasChildToggledTramp(GtkTreeModel* treeModel, GtkTreePath* path, GtkTreeIter* iter) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
+            if (_klass && _klass.rowHasChildToggled)
+              return (cast(typeof(&_vfuncRowHasChildToggledTramp))_klass.rowHasChildToggled)(treeModel, path, iter);
+            return;
+          }
+
+          auto _path = path ? new gid.gtk3.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
+          auto _iter = iter ? new gid.gtk3.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncRowHasChildToggled(_path, _iter);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model.TreeModel.vfuncRowHasChildToggled");
+          }
+          if (_path)
+            _path._cUnborrow;
+          if (_iter)
+            _iter._cUnborrow;
+
+        }
+
+        _klass.rowHasChildToggled = cast(typeof(_klass.rowHasChildToggled))&_vfuncRowHasChildToggledTramp;
+        break;
+      }
+      case "row_inserted":
+      {
+        static extern(C) void _vfuncRowInsertedTramp(GtkTreeModel* treeModel, GtkTreePath* path, GtkTreeIter* iter) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
+            if (_klass && _klass.rowInserted)
+              return (cast(typeof(&_vfuncRowInsertedTramp))_klass.rowInserted)(treeModel, path, iter);
+            return;
+          }
+
+          auto _path = path ? new gid.gtk3.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
+          auto _iter = iter ? new gid.gtk3.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncRowInserted(_path, _iter);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model.TreeModel.vfuncRowInserted");
+          }
+          if (_path)
+            _path._cUnborrow;
+          if (_iter)
+            _iter._cUnborrow;
+
+        }
+
+        _klass.rowInserted = cast(typeof(_klass.rowInserted))&_vfuncRowInsertedTramp;
+        break;
+      }
+      case "unref_node":
+      {
+        static extern(C) void _vfuncUnrefNodeTramp(GtkTreeModel* treeModel, GtkTreeIter* iter) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeModel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeModel), gid.gtk3.tree_model.TreeModel._getGType);
+            if (_klass && _klass.unrefNode)
+              return (cast(typeof(&_vfuncUnrefNodeTramp))_klass.unrefNode)(treeModel, iter);
+            return;
+          }
+
+          auto _iter = iter ? new gid.gtk3.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncUnrefNode(_iter);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model.TreeModel.vfuncUnrefNode");
+          }
+          if (_iter)
+            _iter._cUnborrow;
+
+        }
+
+        _klass.unrefNode = cast(typeof(_klass.unrefNode))&_vfuncUnrefNodeTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

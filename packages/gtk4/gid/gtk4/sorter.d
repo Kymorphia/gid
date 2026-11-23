@@ -41,6 +41,15 @@ class Sorter : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -73,6 +82,68 @@ class Sorter : gid.gobject2.object.ObjectWrap
   static SorterGidBuilder builder() nothrow
   {
     return new SorterGidBuilder;
+  }
+
+  /**
+      Compares two given items according to the sort order implemented
+      by the sorter.
+      
+      Sorters implement a partial order:
+      
+      * It is reflexive, ie a = a
+      * It is antisymmetric, ie if a < b and b < a, then a = b
+      * It is transitive, ie given any 3 items with a ≤ b and b ≤ c,
+        then a ≤ c
+      
+      The sorter may signal it conforms to additional constraints
+      via the return value of [gid.gtk4.sorter.Sorter.getOrder].
+  
+      Params:
+        item1 = first item to compare
+        item2 = second item to compare
+      Returns: [gid.gtk4.types.Ordering.Equal] if item1 == item2,
+          [gid.gtk4.types.Ordering.Smaller] if item1 < item2,
+          [gid.gtk4.types.Ordering.Larger] if item1 > item2
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCompare` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gtk4.types.Ordering vfuncCompare(gid.gobject2.object.ObjectWrap item1 = null, gid.gobject2.object.ObjectWrap item2 = null)
+  {
+    auto _klass = cast(GtkSorterClass*)_vfuncClass;
+    if (!_klass.compare)
+      return typeof(return).init;
+
+    GtkOrdering _cretval;
+    _cretval = _klass.compare(cast(GtkSorter*)this._cPtr, item1 ? cast(GObject*)item1._cPtr(No.Dup) : null, item2 ? cast(GObject*)item2._cPtr(No.Dup) : null);
+    gid.gtk4.types.Ordering _retval = cast(gid.gtk4.types.Ordering)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the order that self conforms to.
+      
+      See [gid.gtk4.types.SorterOrder] for details
+      of the possible return values.
+      
+      This function is intended to allow optimizations.
+      Returns: The order
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetOrder` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gtk4.types.SorterOrder vfuncGetOrder()
+  {
+    auto _klass = cast(GtkSorterClass*)_vfuncClass;
+    if (!_klass.getOrder)
+      return typeof(return).init;
+
+    GtkSorterOrder _cretval;
+    _cretval = _klass.getOrder(cast(GtkSorter*)this._cPtr);
+    gid.gtk4.types.SorterOrder _retval = cast(gid.gtk4.types.SorterOrder)_cretval;
+    return _retval;
   }
 
   /**
@@ -178,6 +249,7 @@ class Sorter : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -200,6 +272,102 @@ class Sorter : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Sorter
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.sorter.Sorter), T.stringof ~ " is not derived from gid.gtk4.sorter.Sorter");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCompare", true)[0]) == gid.gtk4.sorter.Sorter))
+      _installVfunc(klass, "compare");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetOrder", true)[0]) == gid.gtk4.sorter.Sorter))
+      _installVfunc(klass, "get_order");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkSorterClass*)klass;
+
+    switch (vfunc)
+    {
+      case "compare":
+      {
+        static extern(C) GtkOrdering _vfuncCompareTramp(GtkSorter* self, GObject* item1, GObject* item2) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.sorter.Sorter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSorterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.compare)
+              return (cast(typeof(&_vfuncCompareTramp))_klass.compare)(self, item1, item2);
+            return typeof(return).init;
+          }
+
+          gid.gtk4.types.Ordering _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCompare(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)item1, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)item2, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.sorter.Sorter.vfuncCompare");
+          }
+          auto _retval = cast(GtkOrdering)_dretval;
+
+          return _retval;
+        }
+
+        _klass.compare = cast(typeof(_klass.compare))&_vfuncCompareTramp;
+        break;
+      }
+      case "get_order":
+      {
+        static extern(C) GtkSorterOrder _vfuncGetOrderTramp(GtkSorter* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.sorter.Sorter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSorterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.getOrder)
+              return (cast(typeof(&_vfuncGetOrderTramp))_klass.getOrder)(self);
+            return typeof(return).init;
+          }
+
+          gid.gtk4.types.SorterOrder _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetOrder();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.sorter.Sorter.vfuncGetOrder");
+          }
+          auto _retval = cast(GtkSorterOrder)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getOrder = cast(typeof(_klass.getOrder))&_vfuncGetOrderTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

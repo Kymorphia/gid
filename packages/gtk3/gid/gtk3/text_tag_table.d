@@ -87,9 +87,46 @@ class TextTagTable : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildabl
   */
   this() nothrow
   {
-    GtkTextTagTable* _cretval;
-    _cretval = gtk_text_tag_table_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkTextTagTable* _cretval;
+      _cretval = gtk_text_tag_table_new();
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncTagAdded(gid.gtk3.text_tag.TextTag tag)
+  {
+    auto _klass = cast(GtkTextTagTableClass*)_vfuncClass;
+    if (!_klass.tagAdded)
+      return;
+
+    _klass.tagAdded(cast(GtkTextTagTable*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncTagChanged(gid.gtk3.text_tag.TextTag tag, bool sizeChanged)
+  {
+    auto _klass = cast(GtkTextTagTableClass*)_vfuncClass;
+    if (!_klass.tagChanged)
+      return;
+
+    _klass.tagChanged(cast(GtkTextTagTable*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null, sizeChanged);
+  }
+
+  /** */
+  protected void vfuncTagRemoved(gid.gtk3.text_tag.TextTag tag)
+  {
+    auto _klass = cast(GtkTextTagTableClass*)_vfuncClass;
+    if (!_klass.tagRemoved)
+      return;
+
+    _klass.tagRemoved(cast(GtkTextTagTable*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
   }
 
   /**
@@ -122,6 +159,7 @@ class TextTagTable : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildabl
   {
     extern(C) void _funcCallback(GtkTextTag* tag, void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk3.types.TextTagTableForeach*)data;
 
       try
@@ -206,6 +244,7 @@ class TextTagTable : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildabl
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -259,6 +298,7 @@ class TextTagTable : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildabl
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -312,6 +352,7 @@ class TextTagTable : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildabl
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -334,6 +375,122 @@ class TextTagTable : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildabl
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("tag-removed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from TextTagTable
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.text_tag_table.TextTagTable), T.stringof ~ " is not derived from gid.gtk3.text_tag_table.TextTagTable");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncTagAdded", true)[0]) == gid.gtk3.text_tag_table.TextTagTable))
+      _installVfunc(klass, "tag_added");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncTagChanged", true)[0]) == gid.gtk3.text_tag_table.TextTagTable))
+      _installVfunc(klass, "tag_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncTagRemoved", true)[0]) == gid.gtk3.text_tag_table.TextTagTable))
+      _installVfunc(klass, "tag_removed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkTextTagTableClass*)klass;
+
+    switch (vfunc)
+    {
+      case "tag_added":
+      {
+        static extern(C) void _vfuncTagAddedTramp(GtkTextTagTable* table, GtkTextTag* tag) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.text_tag_table.TextTagTable)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextTagTableClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table);
+            if (_klass.tagAdded)
+              return (cast(typeof(&_vfuncTagAddedTramp))_klass.tagAdded)(table, tag);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncTagAdded(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.text_tag.TextTag)(cast(void*)tag, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.text_tag_table.TextTagTable.vfuncTagAdded");
+          }
+        }
+
+        _klass.tagAdded = cast(typeof(_klass.tagAdded))&_vfuncTagAddedTramp;
+        break;
+      }
+      case "tag_changed":
+      {
+        static extern(C) void _vfuncTagChangedTramp(GtkTextTagTable* table, GtkTextTag* tag, gboolean sizeChanged) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.text_tag_table.TextTagTable)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextTagTableClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table);
+            if (_klass.tagChanged)
+              return (cast(typeof(&_vfuncTagChangedTramp))_klass.tagChanged)(table, tag, sizeChanged);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncTagChanged(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.text_tag.TextTag)(cast(void*)tag, No.Take), cast(bool)sizeChanged);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.text_tag_table.TextTagTable.vfuncTagChanged");
+          }
+        }
+
+        _klass.tagChanged = cast(typeof(_klass.tagChanged))&_vfuncTagChangedTramp;
+        break;
+      }
+      case "tag_removed":
+      {
+        static extern(C) void _vfuncTagRemovedTramp(GtkTextTagTable* table, GtkTextTag* tag) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.text_tag_table.TextTagTable)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)table);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextTagTableClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)table);
+            if (_klass.tagRemoved)
+              return (cast(typeof(&_vfuncTagRemovedTramp))_klass.tagRemoved)(table, tag);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncTagRemoved(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.text_tag.TextTag)(cast(void*)tag, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.text_tag_table.TextTagTable.vfuncTagRemoved");
+          }
+        }
+
+        _klass.tagRemoved = cast(typeof(_klass.tagRemoved))&_vfuncTagRemovedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

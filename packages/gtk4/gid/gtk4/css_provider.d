@@ -248,9 +248,16 @@ class CssProvider : gid.gobject2.object.ObjectWrap, gid.gtk4.style_provider.Styl
   */
   this() nothrow
   {
-    GtkCssProvider* _cretval;
-    _cretval = gtk_css_provider_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkCssProvider* _cretval;
+      _cretval = gtk_css_provider_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -429,6 +436,7 @@ class CssProvider : gid.gobject2.object.ObjectWrap, gid.gtk4.style_provider.Styl
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

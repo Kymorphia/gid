@@ -39,6 +39,15 @@ class SocketAddressEnumerator : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -94,6 +103,121 @@ class SocketAddressEnumerator : gid.gobject2.object.ObjectWrap
             error (in which case `*error` will be set) or if there are no
             more addresses.
       Throws: [ErrorWrap]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncNext` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gio2.socket_address.SocketAddress vfuncNext(gid.gio2.cancellable.Cancellable cancellable = null)
+  {
+    auto _klass = cast(GSocketAddressEnumeratorClass*)_vfuncClass;
+    if (!_klass.next)
+      return typeof(return).init;
+
+    GSocketAddress* _cretval;
+    GError *_err;
+    _cretval = _klass.next(cast(GSocketAddressEnumerator*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Asynchronously retrieves the next #GSocketAddress from enumerator
+      and then calls callback, which must call
+      [gid.gio2.socket_address_enumerator.SocketAddressEnumerator.nextFinish] to get the result.
+      
+      It is an error to call this multiple times before the previous callback has finished.
+  
+      Params:
+        cancellable = optional #GCancellable object, null to ignore.
+        callback = a #GAsyncReadyCallback to call
+            when the request is satisfied
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncNextAsync` to chain up from an override.
+      Overriding it from D is not supported (parameter 'callback' of kind 'Callback' is not supported).
+  */
+  protected void vfuncNextAsync(gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null)
+  {
+    auto _klass = cast(GSocketAddressEnumeratorClass*)_vfuncClass;
+    if (!_klass.nextAsync)
+      return;
+
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      gidAttachThread();
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    _klass.nextAsync(cast(GSocketAddressEnumerator*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Retrieves the result of a completed call to
+      [gid.gio2.socket_address_enumerator.SocketAddressEnumerator.nextAsync]. See
+      [gid.gio2.socket_address_enumerator.SocketAddressEnumerator.next] for more information about
+      error handling.
+  
+      Params:
+        result = a #GAsyncResult
+      Returns: a #GSocketAddress (owned by the caller), or null on
+            error (in which case `*error` will be set) or if there are no
+            more addresses.
+      Throws: [ErrorWrap]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncNextFinish` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gio2.socket_address.SocketAddress vfuncNextFinish(gid.gio2.async_result.AsyncResult result)
+  {
+    auto _klass = cast(GSocketAddressEnumeratorClass*)_vfuncClass;
+    if (!_klass.nextFinish)
+      return typeof(return).init;
+
+    GSocketAddress* _cretval;
+    GError *_err;
+    _cretval = _klass.nextFinish(cast(GSocketAddressEnumerator*)this._cPtr, result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Retrieves the next #GSocketAddress from enumerator. Note that this
+      may block for some amount of time. (Eg, a #GNetworkAddress may need
+      to do a DNS lookup before it can return an address.) Use
+      [gid.gio2.socket_address_enumerator.SocketAddressEnumerator.nextAsync] if you need to avoid
+      blocking.
+      
+      If enumerator is expected to yield addresses, but for some reason
+      is unable to (eg, because of a DNS error), then the first call to
+      [gid.gio2.socket_address_enumerator.SocketAddressEnumerator.next] will return an appropriate error
+      in `*error`. However, if the first call to
+      [gid.gio2.socket_address_enumerator.SocketAddressEnumerator.next] succeeds, then any further
+      internal errors (other than cancellable being triggered) will be
+      ignored.
+  
+      Params:
+        cancellable = optional #GCancellable object, null to ignore.
+      Returns: a #GSocketAddress (owned by the caller), or null on
+            error (in which case `*error` will be set) or if there are no
+            more addresses.
+      Throws: [ErrorWrap]
   */
   gid.gio2.socket_address.SocketAddress next(gid.gio2.cancellable.Cancellable cancellable = null)
   {
@@ -122,6 +246,7 @@ class SocketAddressEnumerator : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -161,6 +286,105 @@ class SocketAddressEnumerator : gid.gobject2.object.ObjectWrap
       throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from SocketAddressEnumerator
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.socket_address_enumerator.SocketAddressEnumerator), T.stringof ~ " is not derived from gid.gio2.socket_address_enumerator.SocketAddressEnumerator");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncNext", true)[0]) == gid.gio2.socket_address_enumerator.SocketAddressEnumerator))
+      _installVfunc(klass, "next");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncNextAsync", true)[0]) == gid.gio2.socket_address_enumerator.SocketAddressEnumerator))
+      static assert(0, "Overriding gid.gio2.socket_address_enumerator.SocketAddressEnumerator.vfuncNextAsync is not supported: parameter 'callback' of kind 'Callback' is not supported");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncNextFinish", true)[0]) == gid.gio2.socket_address_enumerator.SocketAddressEnumerator))
+      _installVfunc(klass, "next_finish");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GSocketAddressEnumeratorClass*)klass;
+
+    switch (vfunc)
+    {
+      case "next":
+      {
+        static extern(C) GSocketAddress* _vfuncNextTramp(GSocketAddressEnumerator* enumerator, GCancellable* cancellable, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.socket_address_enumerator.SocketAddressEnumerator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)enumerator);
+          if (!_obj)
+          {
+            auto _klass = cast(GSocketAddressEnumeratorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)enumerator);
+            if (_klass.next)
+              return (cast(typeof(&_vfuncNextTramp))_klass.next)(enumerator, cancellable, _err);
+            return typeof(return).init;
+          }
+
+          gid.gio2.socket_address.SocketAddress _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncNext(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = _dretval ? cast(GSocketAddress*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.next = cast(typeof(_klass.next))&_vfuncNextTramp;
+        break;
+      }
+      case "next_finish":
+      {
+        static extern(C) GSocketAddress* _vfuncNextFinishTramp(GSocketAddressEnumerator* enumerator, GAsyncResult* result, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.socket_address_enumerator.SocketAddressEnumerator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)enumerator);
+          if (!_obj)
+          {
+            auto _klass = cast(GSocketAddressEnumeratorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)enumerator);
+            if (_klass.nextFinish)
+              return (cast(typeof(&_vfuncNextFinishTramp))_klass.nextFinish)(enumerator, result, _err);
+            return typeof(return).init;
+          }
+
+          gid.gio2.socket_address.SocketAddress _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncNextFinish(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)result, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = _dretval ? cast(GSocketAddress*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.nextFinish = cast(typeof(_klass.nextFinish))&_vfuncNextFinishTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

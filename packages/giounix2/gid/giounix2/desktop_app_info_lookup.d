@@ -28,6 +28,7 @@ interface DesktopAppInfoLookup : GidWrap
     return cast(void function())g_desktop_app_info_lookup_get_type != &gidSymbolNotFound ? g_desktop_app_info_lookup_get_type() : cast(GType)0;
   }
 
+
   /**
       Gets the default application for launching applications
       using this URI scheme for a particular [gid.giounix2.desktop_app_info_lookup.DesktopAppInfoLookup]

@@ -169,6 +169,7 @@ class AsyncQueue : OpaqueWrap!(GAsyncQueue*, g_async_queue_unref, g_async_queue_
   {
     extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.glib2.types.CompareDataFunc*)userData;
 
@@ -212,6 +213,7 @@ class AsyncQueue : OpaqueWrap!(GAsyncQueue*, g_async_queue_unref, g_async_queue_
   {
     extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.glib2.types.CompareDataFunc*)userData;
 
@@ -318,6 +320,7 @@ class AsyncQueue : OpaqueWrap!(GAsyncQueue*, g_async_queue_unref, g_async_queue_
   {
     extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.glib2.types.CompareDataFunc*)userData;
 
@@ -354,6 +357,7 @@ class AsyncQueue : OpaqueWrap!(GAsyncQueue*, g_async_queue_unref, g_async_queue_
   {
     extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.glib2.types.CompareDataFunc*)userData;
 

@@ -246,6 +246,7 @@ class ParserOptions : gid.gobject2.boxed.BoxedWrap!(g_mime_parser_options_get_ty
   {
     extern(C) void _warningCbCallback(long offset, GMimeParserWarning errcode, const(char)* item, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gmime3.types.ParserWarningFunc*)userData;
       string _item = item.fromCString!(No.Free);
 

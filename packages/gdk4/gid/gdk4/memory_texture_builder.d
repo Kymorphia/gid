@@ -233,9 +233,16 @@ class MemoryTextureBuilder : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GdkMemoryTextureBuilder* _cretval;
-    _cretval = gdk_memory_texture_builder_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GdkMemoryTextureBuilder* _cretval;
+      _cretval = gdk_memory_texture_builder_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

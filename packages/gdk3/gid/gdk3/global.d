@@ -1924,6 +1924,7 @@ uint threadsAddIdle(int priority, gid.glib2.types.SourceFunc function_) nothrow
 {
   extern(C) gboolean _function_Callback(void* userData) nothrow
   {
+    gidAttachThread();
     bool _dretval;
     auto _dlg = cast(gid.glib2.types.SourceFunc*)userData;
 
@@ -2004,6 +2005,7 @@ uint threadsAddTimeout(int priority, uint interval, gid.glib2.types.SourceFunc f
 {
   extern(C) gboolean _function_Callback(void* userData) nothrow
   {
+    gidAttachThread();
     bool _dretval;
     auto _dlg = cast(gid.glib2.types.SourceFunc*)userData;
 
@@ -2043,6 +2045,7 @@ uint threadsAddTimeoutSeconds(int priority, uint interval, gid.glib2.types.Sourc
 {
   extern(C) gboolean _function_Callback(void* userData) nothrow
   {
+    gidAttachThread();
     bool _dretval;
     auto _dlg = cast(gid.glib2.types.SourceFunc*)userData;
 

@@ -38,6 +38,9 @@ interface HoverProvider : GidWrap
     return cast(void function())gtk_source_hover_provider_get_type != &gidSymbolNotFound ? gtk_source_hover_provider_get_type() : cast(GType)0;
   }
 
+
+
+
   /** */
   void populateAsync(gid.gtksource5.hover_context.HoverContext context, gid.gtksource5.hover_display.HoverDisplay display, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null);
 

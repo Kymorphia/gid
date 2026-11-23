@@ -66,9 +66,16 @@ class NoOpObjectFactory : gid.atk1.object_factory.ObjectFactory
   */
   this() nothrow
   {
-    AtkObjectFactory* _cretval;
-    _cretval = atk_no_op_object_factory_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      AtkObjectFactory* _cretval;
+      _cretval = atk_no_op_object_factory_new();
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

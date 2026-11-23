@@ -68,9 +68,16 @@ class Part : gid.gmime3.object.ObjectWrap
   */
   this() nothrow
   {
-    GMimePart* _cretval;
-    _cretval = g_mime_part_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GMimePart* _cretval;
+      _cretval = g_mime_part_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -89,6 +96,25 @@ class Part : gid.gmime3.object.ObjectWrap
     _cretval = g_mime_part_new_with_type(_type, _subtype);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gmime3.part.Part)(cast(GMimePart*)_cretval, Yes.Take);
     return _retval;
+  }
+
+  /**
+      Sets the content on the mime part.
+  
+      Params:
+        content = a #GMimeDataWrapper content object
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetContent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSetContent(gid.gmime3.data_wrapper.DataWrapper content)
+  {
+    auto _klass = cast(GMimePartClass*)_vfuncClass;
+    if (!_klass.setContent)
+      return;
+
+    _klass.setContent(cast(GMimePart*)this._cPtr, content ? cast(GMimeDataWrapper*)content._cPtr(No.Dup) : null);
   }
 
   /**
@@ -419,6 +445,62 @@ class Part : gid.gmime3.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)g_mime_part_verify_content_md5(cast(GMimePart*)this._cPtr);
     return _retval;
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Part
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gmime3.part.Part), T.stringof ~ " is not derived from gid.gmime3.part.Part");
+
+    gid.gmime3.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetContent", true)[0]) == gid.gmime3.part.Part))
+      _installVfunc(klass, "set_content");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GMimePartClass*)klass;
+
+    switch (vfunc)
+    {
+      case "set_content":
+      {
+        static extern(C) void _vfuncSetContentTramp(GMimePart* mimePart, GMimeDataWrapper* content) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gmime3.part.Part)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)mimePart);
+          if (!_obj)
+          {
+            auto _klass = cast(GMimePartClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)mimePart);
+            if (_klass.setContent)
+              return (cast(typeof(&_vfuncSetContentTramp))_klass.setContent)(mimePart, content);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSetContent(gid.gobject2.object.ObjectWrap._getDObject!(gid.gmime3.data_wrapper.DataWrapper)(cast(void*)content, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gmime3.part.Part.vfuncSetContent");
+          }
+        }
+
+        _klass.setContent = cast(typeof(_klass.setContent))&_vfuncSetContentTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

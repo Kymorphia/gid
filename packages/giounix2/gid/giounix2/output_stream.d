@@ -33,6 +33,15 @@ class OutputStream : gid.gio2.output_stream.OutputStream, gid.gio2.pollable_outp
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -111,9 +120,16 @@ class OutputStream : gid.gio2.output_stream.OutputStream, gid.gio2.pollable_outp
   */
   this(int fd, bool closeFd) nothrow
   {
-    GOutputStream* _cretval;
-    _cretval = g_unix_output_stream_new(fd, closeFd);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GOutputStream* _cretval;
+      _cretval = g_unix_output_stream_new(fd, closeFd);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

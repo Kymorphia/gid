@@ -97,9 +97,16 @@ class Credentials : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GCredentials* _cretval;
-    _cretval = g_credentials_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GCredentials* _cretval;
+      _cretval = g_credentials_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

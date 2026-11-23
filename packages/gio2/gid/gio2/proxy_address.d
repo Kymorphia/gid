@@ -25,6 +25,15 @@ class ProxyAddress : gid.gio2.inet_socket_address.InetSocketAddress
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -146,13 +155,20 @@ class ProxyAddress : gid.gio2.inet_socket_address.InetSocketAddress
   */
   this(gid.gio2.inet_address.InetAddress inetaddr, ushort port, string protocol, string destHostname, ushort destPort, string username = null, string password = null) nothrow
   {
-    GSocketAddress* _cretval;
-    const(char)* _protocol = protocol.toCString!(No.Malloc, No.Nullable);
-    const(char)* _destHostname = destHostname.toCString!(No.Malloc, No.Nullable);
-    const(char)* _username = username.toCString!(No.Malloc, Yes.Nullable);
-    const(char)* _password = password.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = g_proxy_address_new(inetaddr ? cast(GInetAddress*)inetaddr._cPtr(No.Dup) : null, port, _protocol, _destHostname, destPort, _username, _password);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GSocketAddress* _cretval;
+      const(char)* _protocol = protocol.toCString!(No.Malloc, No.Nullable);
+      const(char)* _destHostname = destHostname.toCString!(No.Malloc, No.Nullable);
+      const(char)* _username = username.toCString!(No.Malloc, Yes.Nullable);
+      const(char)* _password = password.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = g_proxy_address_new(inetaddr ? cast(GInetAddress*)inetaddr._cPtr(No.Dup) : null, port, _protocol, _destHostname, destPort, _username, _password);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

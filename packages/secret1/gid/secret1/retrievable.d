@@ -78,6 +78,8 @@ interface Retrievable : GidWrap
   */
   @property void modified(ulong propval) nothrow;
 
+
+
   /**
       Get the attributes of this object.
       

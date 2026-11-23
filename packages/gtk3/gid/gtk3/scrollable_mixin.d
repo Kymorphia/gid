@@ -4,6 +4,8 @@ module gid.gtk3.scrollable_mixin;
 public import gid.core.basictypes;
 public import gid.gtk3.scrollable_iface_proxy;
 public import gid.core.utils;
+public import gid.gobject2.c.functions;
+public import gid.gobject2.c.types;
 public import gid.gobject2.gid_builder;
 public import gid.gobject2.object;
 public import gid.gtk3.adjustment;
@@ -138,6 +140,34 @@ template ScrollableT()
       Params:
         border = return location for the results
       Returns: true if border has been set
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetBorder`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncGetBorder(out gid.gtk3.border.Border border)
+  {
+    auto _klass = cast(GtkScrollableInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.scrollable.Scrollable._getGType);
+    if (!_klass || !_klass.getBorder)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.getBorder(cast(GtkScrollable*)this._cPtr, cast(GtkBorder*)&border);
+    return _retval;
+  }
+
+  /**
+      Returns the size of a non-scrolling border around the
+      outside of the scrollable. An example for this would
+      be treeview headers. GTK+ can use this information to
+      display overlayed graphics, like the overshoot indication,
+      at the right position.
+  
+      Params:
+        border = return location for the results
+      Returns: true if border has been set
   */
   override bool getBorder(out gid.gtk3.border.Border border) nothrow
   {
@@ -240,6 +270,66 @@ template ScrollableT()
   override void setVscrollPolicy(gid.gtk3.types.ScrollablePolicy policy) nothrow
   {
     gtk_scrollable_set_vscroll_policy(cast(GtkScrollable*)this._cPtr, policy);
+  }
+
+  /// True if the D class T overrides any vfunc method of gid.gtk3.scrollable.Scrollable (DiG)
+  enum bool _ifaceVfuncsOverridden_gid_gtk3_scrollable_Scrollable(T) = !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetBorder", true)[0], gid.gobject2.object.GidIfaceVfunc);
+
+  /**
+      Install the C trampolines of the gid.gtk3.scrollable.Scrollable vfunc methods which a D class overrides into the interface
+      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      trampoline is a compile error.
+      Params:
+        T = D class
+        iface = Interface structure of the GType registered for T
+  */
+  static void _installIfaceVfuncs_gid_gtk3_scrollable_Scrollable(T)(void* iface) nothrow
+  {
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetBorder", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_scrollable_Scrollable(iface, "get_border");
+  }
+
+  private static void _installIfaceVfunc_gid_gtk3_scrollable_Scrollable(void* iface, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkScrollableInterface*)iface;
+
+    switch (vfunc)
+    {
+      case "get_border":
+      {
+        static extern(C) gboolean _vfuncGetBorderTramp(GtkScrollable* scrollable, GtkBorder* border) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)scrollable);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkScrollableInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)scrollable), gid.gtk3.scrollable.Scrollable._getGType);
+            if (_klass && _klass.getBorder)
+              return (cast(typeof(&_vfuncGetBorderTramp))_klass.getBorder)(scrollable, border);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetBorder(*cast(gid.gtk3.border.Border*)border);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.scrollable.Scrollable.vfuncGetBorder");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getBorder = cast(typeof(_klass.getBorder))&_vfuncGetBorderTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

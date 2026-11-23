@@ -26,6 +26,9 @@ interface AccessibleHypertext : gid.gtk4.accessible.Accessible
     import gid.core.loader : gidSymbolNotFound;
     return cast(void function())gtk_accessible_hypertext_get_type != &gidSymbolNotFound ? gtk_accessible_hypertext_get_type() : cast(GType)0;
   }
+
+
+
 }
 
 /// Fluent builder implementation template for [gid.gtk4.accessible_hypertext.AccessibleHypertext]

@@ -59,9 +59,16 @@ class Session : gid.gobject2.object.ObjectWrap
   /** */
   this() nothrow
   {
-    PanelSession* _cretval;
-    _cretval = panel_session_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      PanelSession* _cretval;
+      _cretval = panel_session_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

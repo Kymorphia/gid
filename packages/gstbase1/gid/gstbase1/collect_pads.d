@@ -105,9 +105,16 @@ class CollectPads : gid.gst1.object.ObjectWrap
   */
   this() nothrow
   {
-    GstCollectPads* _cretval;
-    _cretval = gst_collect_pads_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GstCollectPads* _cretval;
+      _cretval = gst_collect_pads_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -310,6 +317,7 @@ class CollectPads : gid.gst1.object.ObjectWrap
   {
     extern(C) GstFlowReturn _funcCallback(GstCollectPads* pads, GstCollectData* data, GstBuffer* buffer, void* userData) nothrow
     {
+      gidAttachThread();
       gid.gst1.types.FlowReturn _dretval;
       auto _dlg = cast(gid.gstbase1.types.CollectPadsBufferFunction*)userData;
       auto _data = data ? new gid.gstbase1.collect_data.CollectData(cast(void*)data, null) : null;
@@ -342,6 +350,7 @@ class CollectPads : gid.gst1.object.ObjectWrap
   {
     extern(C) GstFlowReturn _clipfuncCallback(GstCollectPads* pads, GstCollectData* data, GstBuffer* inbuffer, GstBuffer** outbuffer, void* userData) nothrow
     {
+      gidAttachThread();
       gid.gst1.types.FlowReturn _dretval;
       auto _dlg = cast(gid.gstbase1.types.CollectPadsClipFunction*)userData;
       auto _data = data ? new gid.gstbase1.collect_data.CollectData(cast(void*)data, null) : null;
@@ -377,6 +386,7 @@ class CollectPads : gid.gst1.object.ObjectWrap
   {
     extern(C) int _funcCallback(GstCollectPads* pads, GstCollectData* data1, GstClockTime timestamp1, GstCollectData* data2, GstClockTime timestamp2, void* userData) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.gstbase1.types.CollectPadsCompareFunction*)userData;
       auto _data1 = data1 ? new gid.gstbase1.collect_data.CollectData(cast(void*)data1, null) : null;
@@ -414,6 +424,7 @@ class CollectPads : gid.gst1.object.ObjectWrap
   {
     extern(C) gboolean _funcCallback(GstCollectPads* pads, GstCollectData* pad, GstEvent* event, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gstbase1.types.CollectPadsEventFunction*)userData;
       auto _pad = pad ? new gid.gstbase1.collect_data.CollectData(cast(void*)pad, null) : null;
@@ -450,6 +461,7 @@ class CollectPads : gid.gst1.object.ObjectWrap
   {
     extern(C) void _funcCallback(GstCollectPads* pads, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gstbase1.types.CollectPadsFlushFunction*)userData;
 
       try
@@ -503,6 +515,7 @@ class CollectPads : gid.gst1.object.ObjectWrap
   {
     extern(C) GstFlowReturn _funcCallback(GstCollectPads* pads, void* userData) nothrow
     {
+      gidAttachThread();
       gid.gst1.types.FlowReturn _dretval;
       auto _dlg = cast(gid.gstbase1.types.CollectPadsFunction*)userData;
 
@@ -540,6 +553,7 @@ class CollectPads : gid.gst1.object.ObjectWrap
   {
     extern(C) gboolean _funcCallback(GstCollectPads* pads, GstCollectData* pad, GstQuery* query, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gstbase1.types.CollectPadsQueryFunction*)userData;
       auto _pad = pad ? new gid.gstbase1.collect_data.CollectData(cast(void*)pad, null) : null;

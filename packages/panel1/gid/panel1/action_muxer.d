@@ -60,9 +60,16 @@ class ActionMuxer : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   /** */
   this() nothrow
   {
-    PanelActionMuxer* _cretval;
-    _cretval = panel_action_muxer_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      PanelActionMuxer* _cretval;
+      _cretval = panel_action_muxer_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

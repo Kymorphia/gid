@@ -13,6 +13,7 @@ import gid.gtk3.buildable;
 import gid.gtk3.buildable_mixin;
 import gid.gtk3.c.functions;
 import gid.gtk3.c.types;
+import gid.gtk3.container;
 import gid.gtk3.types;
 import gid.gtk3.widget;
 
@@ -148,9 +149,56 @@ class HandleBox : gid.gtk3.bin.Bin
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_handle_box_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_handle_box_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /**
+      Signal emitted when the contents of the handlebox
+         are reattached to the main window. Deprecated: 3.4.
+  
+      Params:
+        child = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncChildAttached` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncChildAttached(gid.gtk3.widget.Widget child)
+  {
+    auto _klass = cast(GtkHandleBoxClass*)_vfuncClass;
+    if (!_klass.childAttached)
+      return;
+
+    _klass.childAttached(cast(GtkHandleBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Signal emitted when the contents of the handlebox
+         are detached from the main window. Deprecated: 3.4.
+  
+      Params:
+        child = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncChildDetached` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncChildDetached(gid.gtk3.widget.Widget child)
+  {
+    auto _klass = cast(GtkHandleBoxClass*)_vfuncClass;
+    if (!_klass.childDetached)
+      return;
+
+    _klass.childDetached(cast(GtkHandleBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -298,6 +346,7 @@ class HandleBox : gid.gtk3.bin.Bin
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -353,6 +402,7 @@ class HandleBox : gid.gtk3.bin.Bin
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -375,6 +425,92 @@ class HandleBox : gid.gtk3.bin.Bin
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("child-detached", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from HandleBox
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.handle_box.HandleBox), T.stringof ~ " is not derived from gid.gtk3.handle_box.HandleBox");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChildAttached", true)[0]) == gid.gtk3.handle_box.HandleBox))
+      _installVfunc(klass, "child_attached");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChildDetached", true)[0]) == gid.gtk3.handle_box.HandleBox))
+      _installVfunc(klass, "child_detached");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkHandleBoxClass*)klass;
+
+    switch (vfunc)
+    {
+      case "child_attached":
+      {
+        static extern(C) void _vfuncChildAttachedTramp(GtkHandleBox* handleBox, GtkWidget* child) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.handle_box.HandleBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)handleBox);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkHandleBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)handleBox);
+            if (_klass.childAttached)
+              return (cast(typeof(&_vfuncChildAttachedTramp))_klass.childAttached)(handleBox, child);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncChildAttached(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)child, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.handle_box.HandleBox.vfuncChildAttached");
+          }
+        }
+
+        _klass.childAttached = cast(typeof(_klass.childAttached))&_vfuncChildAttachedTramp;
+        break;
+      }
+      case "child_detached":
+      {
+        static extern(C) void _vfuncChildDetachedTramp(GtkHandleBox* handleBox, GtkWidget* child) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.handle_box.HandleBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)handleBox);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkHandleBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)handleBox);
+            if (_klass.childDetached)
+              return (cast(typeof(&_vfuncChildDetachedTramp))_klass.childDetached)(handleBox, child);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncChildDetached(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)child, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.handle_box.HandleBox.vfuncChildDetached");
+          }
+        }
+
+        _klass.childDetached = cast(typeof(_klass.childDetached))&_vfuncChildDetachedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

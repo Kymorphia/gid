@@ -305,6 +305,7 @@ gid.gst1.caps.Caps typeFindHelperGetRange(gid.gst1.object.ObjectWrap obj, gid.gs
 
   extern(C) GstFlowReturn _funcCallback(GstObject* obj, GstObject* parent, ulong offset, uint length, GstBuffer** buffer) nothrow
   {
+    gidAttachThread();
     gid.gst1.types.FlowReturn _dretval;
     gid.gst1.buffer.Buffer _buffer;
 
@@ -364,6 +365,7 @@ gid.gst1.types.FlowReturn typeFindHelperGetRangeFull(gid.gst1.object.ObjectWrap 
 
   extern(C) GstFlowReturn _funcCallback(GstObject* obj, GstObject* parent, ulong offset, uint length, GstBuffer** buffer) nothrow
   {
+    gidAttachThread();
     gid.gst1.types.FlowReturn _dretval;
     gid.gst1.buffer.Buffer _buffer;
 

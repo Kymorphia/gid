@@ -829,6 +829,7 @@ class Event : gid.gobject2.boxed.BoxedWrap!(gdk_event_get_type)
   {
     extern(C) void _funcCallback(GdkEvent* event, void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gdk3.types.EventFunc*)data;
       auto _event = event ? new gid.gdk3.event.Event(cast(void*)event, Yes.Take)._cBorrow : null;
 

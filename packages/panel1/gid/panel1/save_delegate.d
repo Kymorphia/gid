@@ -212,9 +212,90 @@ class SaveDelegate : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    PanelSaveDelegate* _cretval;
-    _cretval = panel_save_delegate_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      PanelSaveDelegate* _cretval;
+      _cretval = panel_save_delegate_new();
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncClose()
+  {
+    auto _klass = cast(PanelSaveDelegateClass*)_vfuncClass;
+    if (!_klass.close)
+      return;
+
+    _klass.close(cast(PanelSaveDelegate*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncDiscard()
+  {
+    auto _klass = cast(PanelSaveDelegateClass*)_vfuncClass;
+    if (!_klass.discard)
+      return;
+
+    _klass.discard(cast(PanelSaveDelegate*)this._cPtr);
+  }
+
+  /** */
+  protected bool vfuncSave(gid.gio2.task.Task task)
+  {
+    auto _klass = cast(PanelSaveDelegateClass*)_vfuncClass;
+    if (!_klass.save)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.save(cast(PanelSaveDelegate*)this._cPtr, task ? cast(GTask*)task._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncSaveAsync(gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null)
+  {
+    auto _klass = cast(PanelSaveDelegateClass*)_vfuncClass;
+    if (!_klass.saveAsync)
+      return;
+
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      gidAttachThread();
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    _klass.saveAsync(cast(PanelSaveDelegate*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /** */
+  protected bool vfuncSaveFinish(gid.gio2.async_result.AsyncResult result)
+  {
+    auto _klass = cast(PanelSaveDelegateClass*)_vfuncClass;
+    if (!_klass.saveFinish)
+      return typeof(return).init;
+
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)_klass.saveFinish(cast(PanelSaveDelegate*)this._cPtr, result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
   }
 
   /** */
@@ -298,6 +379,7 @@ class SaveDelegate : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -414,6 +496,7 @@ class SaveDelegate : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -463,6 +546,7 @@ class SaveDelegate : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -517,6 +601,7 @@ class SaveDelegate : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -542,6 +627,165 @@ class SaveDelegate : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("save", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from SaveDelegate
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.panel1.save_delegate.SaveDelegate), T.stringof ~ " is not derived from gid.panel1.save_delegate.SaveDelegate");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncClose", true)[0]) == gid.panel1.save_delegate.SaveDelegate))
+      _installVfunc(klass, "close");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDiscard", true)[0]) == gid.panel1.save_delegate.SaveDelegate))
+      _installVfunc(klass, "discard");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSave", true)[0]) == gid.panel1.save_delegate.SaveDelegate))
+      _installVfunc(klass, "save");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSaveAsync", true)[0]) == gid.panel1.save_delegate.SaveDelegate))
+      static assert(0, "Overriding gid.panel1.save_delegate.SaveDelegate.vfuncSaveAsync is not supported: parameter 'callback' of kind 'Callback' is not supported");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSaveFinish", true)[0]) == gid.panel1.save_delegate.SaveDelegate))
+      _installVfunc(klass, "save_finish");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(PanelSaveDelegateClass*)klass;
+
+    switch (vfunc)
+    {
+      case "close":
+      {
+        static extern(C) void _vfuncCloseTramp(PanelSaveDelegate* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.panel1.save_delegate.SaveDelegate)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(PanelSaveDelegateClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.close)
+              return (cast(typeof(&_vfuncCloseTramp))_klass.close)(self);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncClose();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.panel1.save_delegate.SaveDelegate.vfuncClose");
+          }
+        }
+
+        _klass.close = cast(typeof(_klass.close))&_vfuncCloseTramp;
+        break;
+      }
+      case "discard":
+      {
+        static extern(C) void _vfuncDiscardTramp(PanelSaveDelegate* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.panel1.save_delegate.SaveDelegate)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(PanelSaveDelegateClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.discard)
+              return (cast(typeof(&_vfuncDiscardTramp))_klass.discard)(self);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDiscard();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.panel1.save_delegate.SaveDelegate.vfuncDiscard");
+          }
+        }
+
+        _klass.discard = cast(typeof(_klass.discard))&_vfuncDiscardTramp;
+        break;
+      }
+      case "save":
+      {
+        static extern(C) gboolean _vfuncSaveTramp(PanelSaveDelegate* self, GTask* task) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.panel1.save_delegate.SaveDelegate)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(PanelSaveDelegateClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.save)
+              return (cast(typeof(&_vfuncSaveTramp))_klass.save)(self, task);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncSave(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.task.Task)(cast(void*)task, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.panel1.save_delegate.SaveDelegate.vfuncSave");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.save = cast(typeof(_klass.save))&_vfuncSaveTramp;
+        break;
+      }
+      case "save_finish":
+      {
+        static extern(C) gboolean _vfuncSaveFinishTramp(PanelSaveDelegate* self, GAsyncResult* result, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.panel1.save_delegate.SaveDelegate)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(PanelSaveDelegateClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.saveFinish)
+              return (cast(typeof(&_vfuncSaveFinishTramp))_klass.saveFinish)(self, result, _err);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncSaveFinish(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)result, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.saveFinish = cast(typeof(_klass.saveFinish))&_vfuncSaveFinishTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

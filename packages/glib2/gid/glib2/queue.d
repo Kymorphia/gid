@@ -46,6 +46,7 @@ class Queue : OpaqueWrap!(GQueue*, g_queue_free, void)
   {
     extern(C) void _freeFuncCallback(void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.glib2.types.DestroyNotify*)data;
 
       try
@@ -75,6 +76,7 @@ class Queue : OpaqueWrap!(GQueue*, g_queue_free, void)
   {
     extern(C) void _funcCallback(void* data, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.glib2.types.Func*)userData;
 
       try
@@ -105,6 +107,7 @@ class Queue : OpaqueWrap!(GQueue*, g_queue_free, void)
   {
     extern(C) void _freeFuncCallback(void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.glib2.types.DestroyNotify*)data;
 
       try
@@ -172,6 +175,7 @@ class Queue : OpaqueWrap!(GQueue*, g_queue_free, void)
   {
     extern(C) int _funcCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.glib2.types.CompareDataFunc*)userData;
 
@@ -357,6 +361,7 @@ class Queue : OpaqueWrap!(GQueue*, g_queue_free, void)
   {
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.glib2.types.CompareDataFunc*)userData;
 

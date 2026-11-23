@@ -111,9 +111,16 @@ class Builder : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    JsonBuilder* _cretval;
-    _cretval = json_builder_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      JsonBuilder* _cretval;
+      _cretval = json_builder_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

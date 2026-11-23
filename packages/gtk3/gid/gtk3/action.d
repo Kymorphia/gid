@@ -75,6 +75,15 @@ class Action : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -572,13 +581,134 @@ class Action : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   */
   this(string name, string label = null, string tooltip = null, string stockId = null) nothrow
   {
-    GtkAction* _cretval;
-    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
-    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
-    const(char)* _tooltip = tooltip.toCString!(No.Malloc, Yes.Nullable);
-    const(char)* _stockId = stockId.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gtk_action_new(_name, _label, _tooltip, _stockId);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkAction* _cretval;
+      const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+      const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
+      const(char)* _tooltip = tooltip.toCString!(No.Malloc, Yes.Nullable);
+      const(char)* _stockId = stockId.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gtk_action_new(_name, _label, _tooltip, _stockId);
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /**
+      Emits the “activate” signal on the specified action, if it isn't
+      insensitive. This gets called by the proxy widgets when they get
+      activated.
+      
+      It can also be used to manually activate an action.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncActivate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use [gid.gio2.action_group.ActionGroup.activateAction] on a #GAction instead
+  */
+  protected void vfuncActivate()
+  {
+    auto _klass = cast(GtkActionClass*)_vfuncClass;
+    if (!_klass.activate)
+      return;
+
+    _klass.activate(cast(GtkAction*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncConnectProxy(gid.gtk3.widget.Widget proxy)
+  {
+    auto _klass = cast(GtkActionClass*)_vfuncClass;
+    if (!_klass.connectProxy)
+      return;
+
+    _klass.connectProxy(cast(GtkAction*)this._cPtr, proxy ? cast(GtkWidget*)proxy._cPtr(No.Dup) : null);
+  }
+
+  /**
+      If action provides a #GtkMenu widget as a submenu for the menu
+      item or the toolbar item it creates, this function returns an
+      instance of that menu.
+      Returns: the menu item provided by the
+                      action, or null.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCreateMenu` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use #GAction and #GMenuModel instead, and create a
+        #GtkMenu with [gid.gtk3.menu.Menu.newFromModel]
+  */
+  protected gid.gtk3.widget.Widget vfuncCreateMenu()
+  {
+    auto _klass = cast(GtkActionClass*)_vfuncClass;
+    if (!_klass.createMenu)
+      return typeof(return).init;
+
+    GtkWidget* _cretval;
+    _cretval = _klass.createMenu(cast(GtkAction*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Creates a menu item widget that proxies for the given action.
+      Returns: a menu item connected to the action.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCreateMenuItem` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use [gid.gio2.menu_item.MenuItem.new_] and associate it with a #GAction
+        instead.
+  */
+  protected gid.gtk3.widget.Widget vfuncCreateMenuItem()
+  {
+    auto _klass = cast(GtkActionClass*)_vfuncClass;
+    if (!_klass.createMenuItem)
+      return typeof(return).init;
+
+    GtkWidget* _cretval;
+    _cretval = _klass.createMenuItem(cast(GtkAction*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Creates a toolbar item widget that proxies for the given action.
+      Returns: a toolbar item connected to the action.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCreateToolItem` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use a #GtkToolItem and associate it with a #GAction using
+        [gid.gtk4.actionable.Actionable.setActionName] instead
+  */
+  protected gid.gtk3.widget.Widget vfuncCreateToolItem()
+  {
+    auto _klass = cast(GtkActionClass*)_vfuncClass;
+    if (!_klass.createToolItem)
+      return typeof(return).init;
+
+    GtkWidget* _cretval;
+    _cretval = _klass.createToolItem(cast(GtkAction*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncDisconnectProxy(gid.gtk3.widget.Widget proxy)
+  {
+    auto _klass = cast(GtkActionClass*)_vfuncClass;
+    if (!_klass.disconnectProxy)
+      return;
+
+    _klass.disconnectProxy(cast(GtkAction*)this._cPtr, proxy ? cast(GtkWidget*)proxy._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1243,6 +1373,7 @@ class Action : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1262,6 +1393,227 @@ class Action : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Action
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.action.Action), T.stringof ~ " is not derived from gid.gtk3.action.Action");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivate", true)[0]) == gid.gtk3.action.Action))
+      _installVfunc(klass, "activate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncConnectProxy", true)[0]) == gid.gtk3.action.Action))
+      _installVfunc(klass, "connect_proxy");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCreateMenu", true)[0]) == gid.gtk3.action.Action))
+      _installVfunc(klass, "create_menu");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCreateMenuItem", true)[0]) == gid.gtk3.action.Action))
+      _installVfunc(klass, "create_menu_item");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCreateToolItem", true)[0]) == gid.gtk3.action.Action))
+      _installVfunc(klass, "create_tool_item");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDisconnectProxy", true)[0]) == gid.gtk3.action.Action))
+      _installVfunc(klass, "disconnect_proxy");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkActionClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate":
+      {
+        static extern(C) void _vfuncActivateTramp(GtkAction* action) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.action.Action)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)action);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkActionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)action);
+            if (_klass.activate)
+              return (cast(typeof(&_vfuncActivateTramp))_klass.activate)(action);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncActivate();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.action.Action.vfuncActivate");
+          }
+        }
+
+        _klass.activate = cast(typeof(_klass.activate))&_vfuncActivateTramp;
+        break;
+      }
+      case "connect_proxy":
+      {
+        static extern(C) void _vfuncConnectProxyTramp(GtkAction* action, GtkWidget* proxy) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.action.Action)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)action);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkActionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)action);
+            if (_klass.connectProxy)
+              return (cast(typeof(&_vfuncConnectProxyTramp))_klass.connectProxy)(action, proxy);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncConnectProxy(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)proxy, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.action.Action.vfuncConnectProxy");
+          }
+        }
+
+        _klass.connectProxy = cast(typeof(_klass.connectProxy))&_vfuncConnectProxyTramp;
+        break;
+      }
+      case "create_menu":
+      {
+        static extern(C) GtkWidget* _vfuncCreateMenuTramp(GtkAction* action) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.action.Action)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)action);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkActionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)action);
+            if (_klass.createMenu)
+              return (cast(typeof(&_vfuncCreateMenuTramp))_klass.createMenu)(action);
+            return typeof(return).init;
+          }
+
+          gid.gtk3.widget.Widget _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCreateMenu();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.action.Action.vfuncCreateMenu");
+          }
+          auto _retval = _dretval ? cast(GtkWidget*)_dretval._cPtr(No.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.createMenu = cast(typeof(_klass.createMenu))&_vfuncCreateMenuTramp;
+        break;
+      }
+      case "create_menu_item":
+      {
+        static extern(C) GtkWidget* _vfuncCreateMenuItemTramp(GtkAction* action) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.action.Action)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)action);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkActionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)action);
+            if (_klass.createMenuItem)
+              return (cast(typeof(&_vfuncCreateMenuItemTramp))_klass.createMenuItem)(action);
+            return typeof(return).init;
+          }
+
+          gid.gtk3.widget.Widget _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCreateMenuItem();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.action.Action.vfuncCreateMenuItem");
+          }
+          auto _retval = _dretval ? cast(GtkWidget*)_dretval._cPtr(No.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.createMenuItem = cast(typeof(_klass.createMenuItem))&_vfuncCreateMenuItemTramp;
+        break;
+      }
+      case "create_tool_item":
+      {
+        static extern(C) GtkWidget* _vfuncCreateToolItemTramp(GtkAction* action) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.action.Action)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)action);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkActionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)action);
+            if (_klass.createToolItem)
+              return (cast(typeof(&_vfuncCreateToolItemTramp))_klass.createToolItem)(action);
+            return typeof(return).init;
+          }
+
+          gid.gtk3.widget.Widget _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCreateToolItem();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.action.Action.vfuncCreateToolItem");
+          }
+          auto _retval = _dretval ? cast(GtkWidget*)_dretval._cPtr(No.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.createToolItem = cast(typeof(_klass.createToolItem))&_vfuncCreateToolItemTramp;
+        break;
+      }
+      case "disconnect_proxy":
+      {
+        static extern(C) void _vfuncDisconnectProxyTramp(GtkAction* action, GtkWidget* proxy) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.action.Action)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)action);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkActionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)action);
+            if (_klass.disconnectProxy)
+              return (cast(typeof(&_vfuncDisconnectProxyTramp))_klass.disconnectProxy)(action, proxy);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDisconnectProxy(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)proxy, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.action.Action.vfuncDisconnectProxy");
+          }
+        }
+
+        _klass.disconnectProxy = cast(typeof(_klass.disconnectProxy))&_vfuncDisconnectProxyTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

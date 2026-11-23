@@ -73,6 +73,15 @@ class ApplicationWindow : gid.gtk4.application_window.ApplicationWindow
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -201,9 +210,16 @@ class ApplicationWindow : gid.gtk4.application_window.ApplicationWindow
   */
   this(gid.gtk4.application.Application app) nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = adw_application_window_new(app ? cast(GtkApplication*)app._cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = adw_application_window_new(app ? cast(GtkApplication*)app._cPtr(No.Dup) : null);
+      this(_cretval, No.Take);
+    }
   }
 
   /**

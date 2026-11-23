@@ -147,9 +147,16 @@ class DrawingArea : gid.gtk3.widget.Widget
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_drawing_area_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_drawing_area_new();
+      this(_cretval, No.Take);
+    }
   }
 }
 

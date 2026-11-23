@@ -414,6 +414,7 @@ void enumeratePrinters(gid.gtk4.types.PrinterFunc func, bool wait) nothrow
 {
   extern(C) gboolean _funcCallback(GtkPrinter* printer, void* data) nothrow
   {
+    gidAttachThread();
     bool _dretval;
     auto _dlg = cast(gid.gtk4.types.PrinterFunc*)data;
 
@@ -737,6 +738,7 @@ void printRunPageSetupDialogAsync(gid.gtk4.window.Window parent, gid.gtk4.page_s
 {
   extern(C) void _doneCbCallback(GtkPageSetup* pageSetup, void* data) nothrow
   {
+    gidAttachThread();
     ptrThawGC(data);
     auto _dlg = cast(gid.gtk4.types.PageSetupDoneFunc*)data;
 
@@ -1064,6 +1066,7 @@ void showUriFull(gid.gtk4.window.Window parent, string uri, uint timestamp, gid.
 {
   extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
   {
+    gidAttachThread();
     ptrThawGC(data);
     auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 

@@ -52,6 +52,15 @@ class TreeSelection : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -301,6 +310,7 @@ class TreeSelection : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _funcCallback(GtkTreeModel* model, GtkTreePath* path, GtkTreeIter* iter, void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk4.types.TreeSelectionForeachFunc*)data;
       auto _path = path ? new gid.gtk4.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
       auto _iter = iter ? new gid.gtk4.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
@@ -356,6 +366,7 @@ class TreeSelection : gid.gobject2.object.ObjectWrap
   {
     extern(C) gboolean _funcCallback(GtkTreeSelection* selection, GtkTreeModel* model, GtkTreePath* path, gboolean pathCurrentlySelected, void* data) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gtk4.types.TreeSelectionFunc*)data;
       auto _path = path ? new gid.gtk4.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
@@ -457,6 +468,7 @@ class TreeSelection : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

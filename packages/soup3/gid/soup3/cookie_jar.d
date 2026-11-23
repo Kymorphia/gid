@@ -107,9 +107,55 @@ class CookieJar : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.Sess
   */
   this() nothrow
   {
-    SoupCookieJar* _cretval;
-    _cretval = soup_cookie_jar_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      SoupCookieJar* _cretval;
+      _cretval = soup_cookie_jar_new();
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncChanged(gid.soup3.cookie.Cookie oldCookie, gid.soup3.cookie.Cookie newCookie)
+  {
+    auto _klass = cast(SoupCookieJarClass*)_vfuncClass;
+    if (!_klass.changed)
+      return;
+
+    _klass.changed(cast(SoupCookieJar*)this._cPtr, oldCookie ? cast(SoupCookie*)oldCookie._cPtr(No.Dup) : null, newCookie ? cast(SoupCookie*)newCookie._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Gets whether jar stores cookies persistenly.
+      Returns: true if jar storage is persistent or false otherwise.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncIsPersistent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncIsPersistent()
+  {
+    auto _klass = cast(SoupCookieJarClass*)_vfuncClass;
+    if (!_klass.isPersistent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.isPersistent(cast(SoupCookieJar*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncSave()
+  {
+    auto _klass = cast(SoupCookieJarClass*)_vfuncClass;
+    if (!_klass.save)
+      return;
+
+    _klass.save(cast(SoupCookieJar*)this._cPtr);
   }
 
   /**
@@ -401,6 +447,7 @@ class CookieJar : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.Sess
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -426,6 +473,135 @@ class CookieJar : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.Sess
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("changed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from CookieJar
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.soup3.cookie_jar.CookieJar), T.stringof ~ " is not derived from gid.soup3.cookie_jar.CookieJar");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChanged", true)[0]) == gid.soup3.cookie_jar.CookieJar))
+      _installVfunc(klass, "changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncIsPersistent", true)[0]) == gid.soup3.cookie_jar.CookieJar))
+      _installVfunc(klass, "is_persistent");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSave", true)[0]) == gid.soup3.cookie_jar.CookieJar))
+      _installVfunc(klass, "save");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(SoupCookieJarClass*)klass;
+
+    switch (vfunc)
+    {
+      case "changed":
+      {
+        static extern(C) void _vfuncChangedTramp(SoupCookieJar* jar, SoupCookie* oldCookie, SoupCookie* newCookie) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.soup3.cookie_jar.CookieJar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)jar);
+          if (!_obj)
+          {
+            auto _klass = cast(SoupCookieJarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)jar);
+            if (_klass.changed)
+              return (cast(typeof(&_vfuncChangedTramp))_klass.changed)(jar, oldCookie, newCookie);
+            return;
+          }
+
+          auto _oldCookie = oldCookie ? new gid.soup3.cookie.Cookie(cast(void*)oldCookie, Yes.Take)._cBorrow : null;
+          auto _newCookie = newCookie ? new gid.soup3.cookie.Cookie(cast(void*)newCookie, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncChanged(_oldCookie, _newCookie);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.soup3.cookie_jar.CookieJar.vfuncChanged");
+          }
+          if (_oldCookie)
+            _oldCookie._cUnborrow;
+          if (_newCookie)
+            _newCookie._cUnborrow;
+
+        }
+
+        _klass.changed = cast(typeof(_klass.changed))&_vfuncChangedTramp;
+        break;
+      }
+      case "is_persistent":
+      {
+        static extern(C) gboolean _vfuncIsPersistentTramp(SoupCookieJar* jar) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.soup3.cookie_jar.CookieJar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)jar);
+          if (!_obj)
+          {
+            auto _klass = cast(SoupCookieJarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)jar);
+            if (_klass.isPersistent)
+              return (cast(typeof(&_vfuncIsPersistentTramp))_klass.isPersistent)(jar);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncIsPersistent();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.soup3.cookie_jar.CookieJar.vfuncIsPersistent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.isPersistent = cast(typeof(_klass.isPersistent))&_vfuncIsPersistentTramp;
+        break;
+      }
+      case "save":
+      {
+        static extern(C) void _vfuncSaveTramp(SoupCookieJar* jar) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.soup3.cookie_jar.CookieJar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)jar);
+          if (!_obj)
+          {
+            auto _klass = cast(SoupCookieJarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)jar);
+            if (_klass.save)
+              return (cast(typeof(&_vfuncSaveTramp))_klass.save)(jar);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSave();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.soup3.cookie_jar.CookieJar.vfuncSave");
+          }
+        }
+
+        _klass.save = cast(typeof(_klass.save))&_vfuncSaveTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

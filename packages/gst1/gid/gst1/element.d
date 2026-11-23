@@ -87,6 +87,15 @@ class Element : gid.gst1.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -228,6 +237,421 @@ class Element : gid.gst1.object.ObjectWrap
   }
 
   /**
+      Perform transition on element.
+      
+      This function must be called with STATE_LOCK held and is mainly used
+      internally.
+  
+      Params:
+        transition = the requested transition
+      Returns: the #GstStateChangeReturn of the state transition.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncChangeState` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.StateChangeReturn vfuncChangeState(gid.gst1.types.StateChange transition)
+  {
+    auto _klass = cast(GstElementClass*)_vfuncClass;
+    if (!_klass.changeState)
+      return typeof(return).init;
+
+    GstStateChangeReturn _cretval;
+    _cretval = _klass.changeState(cast(GstElement*)this._cPtr, transition);
+    gid.gst1.types.StateChangeReturn _retval = cast(gid.gst1.types.StateChangeReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the state of the element.
+      
+      For elements that performed an ASYNC state change, as reported by
+      [gid.gst1.element.Element.setState], this function will block up to the
+      specified timeout value for the state change to complete.
+      If the element completes the state change or goes into
+      an error, this function returns immediately with a return value of
+      [gid.gst1.types.StateChangeReturn.Success] or [gid.gst1.types.StateChangeReturn.Failure] respectively.
+      
+      For elements that did not return [gid.gst1.types.StateChangeReturn.Async], this function
+      returns the current and pending state immediately.
+      
+      This function returns [gid.gst1.types.StateChangeReturn.NoPreroll] if the element
+      successfully changed its state but is not able to provide data yet.
+      This mostly happens for live sources that only produce data in
+      [gid.gst1.types.State.Playing]. While the state change return is equivalent to
+      [gid.gst1.types.StateChangeReturn.Success], it is returned to the application to signal that
+      some sink elements might not be able to complete their state change because
+      an element is not producing data to complete the preroll. When setting the
+      element to playing, the preroll will complete and playback will start.
+  
+      Params:
+        state = a pointer to #GstState to hold the state.
+              Can be null.
+        pending = a pointer to #GstState to hold the pending
+              state. Can be null.
+        timeout = a #GstClockTime to specify the timeout for an async
+                    state change or [gid.gst1.types.CLOCK_TIME_NONE] for infinite timeout.
+      Returns: [gid.gst1.types.StateChangeReturn.Success] if the element has no more pending state
+                 and the last state change succeeded, [gid.gst1.types.StateChangeReturn.Async] if the
+                 element is still performing a state change or
+                 [gid.gst1.types.StateChangeReturn.Failure] if the last state change failed.
+        
+        MT safe.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetState` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.StateChangeReturn vfuncGetState(out gid.gst1.types.State state, out gid.gst1.types.State pending, gid.gst1.types.ClockTime timeout)
+  {
+    auto _klass = cast(GstElementClass*)_vfuncClass;
+    if (!_klass.getState)
+      return typeof(return).init;
+
+    GstStateChangeReturn _cretval;
+    _cretval = _klass.getState(cast(GstElement*)this._cPtr, &state, &pending, timeout);
+    gid.gst1.types.StateChangeReturn _retval = cast(gid.gst1.types.StateChangeReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      Use this function to signal that the element does not expect any more pads
+      to show up in the current pipeline. This function should be called whenever
+      pads have been added by the element itself. Elements with #GST_PAD_SOMETIMES
+      pad templates use this in combination with autopluggers to figure out that
+      the element is done initializing its pads.
+      
+      This function emits the #GstElement::no-more-pads signal.
+      
+      MT safe.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncNoMorePads` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncNoMorePads()
+  {
+    auto _klass = cast(GstElementClass*)_vfuncClass;
+    if (!_klass.noMorePads)
+      return;
+
+    _klass.noMorePads(cast(GstElement*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncPadAdded(gid.gst1.pad.Pad pad)
+  {
+    auto _klass = cast(GstElementClass*)_vfuncClass;
+    if (!_klass.padAdded)
+      return;
+
+    _klass.padAdded(cast(GstElement*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncPadRemoved(gid.gst1.pad.Pad pad)
+  {
+    auto _klass = cast(GstElementClass*)_vfuncClass;
+    if (!_klass.padRemoved)
+      return;
+
+    _klass.padRemoved(cast(GstElement*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Post a message on the element's #GstBus. This function takes ownership of the
+      message; if you want to access the message after this call, you should add an
+      additional reference before calling.
+  
+      Params:
+        message = a #GstMessage to post
+      Returns: true if the message was successfully posted. The function returns
+        false if the element did not have a bus.
+        
+        MT safe.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPostMessage` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncPostMessage(gid.gst1.message.Message message)
+  {
+    auto _klass = cast(GstElementClass*)_vfuncClass;
+    if (!_klass.postMessage)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.postMessage(cast(GstElement*)this._cPtr, message ? cast(GstMessage*)message._cPtr(Yes.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Get the clock provided by the given element.
+      > An element is only required to provide a clock in the PAUSED
+      > state. Some elements can provide a clock in other states.
+      Returns: the GstClock provided by the
+        element or null if no clock could be provided.  Unref after usage.
+        
+        MT safe.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncProvideClock` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.clock.Clock vfuncProvideClock()
+  {
+    auto _klass = cast(GstElementClass*)_vfuncClass;
+    if (!_klass.provideClock)
+      return typeof(return).init;
+
+    GstClock* _cretval;
+    _cretval = _klass.provideClock(cast(GstElement*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Performs a query on the given element.
+      
+      For elements that don't implement a query handler, this function
+      forwards the query to a random srcpad or to the peer of a
+      random linked sinkpad of this element.
+      
+      Please note that some queries might need a running pipeline to work.
+  
+      Params:
+        query = the #GstQuery. (modified in place, changes are seen by the caller)
+      Returns: true if the query could be performed.
+        
+        MT safe.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncQuery` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncQuery(gid.gst1.query.Query query)
+  {
+    auto _klass = cast(GstElementClass*)_vfuncClass;
+    if (!_klass.query)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.query(cast(GstElement*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      called when a request pad is to be released
+  
+      Params:
+        pad = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncReleasePad` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncReleasePad(gid.gst1.pad.Pad pad)
+  {
+    auto _klass = cast(GstElementClass*)_vfuncClass;
+    if (!_klass.releasePad)
+      return;
+
+    _klass.releasePad(cast(GstElement*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Retrieves a request pad from the element according to the provided template.
+      Pad templates can be looked up using
+      [gid.gst1.element_factory.ElementFactory.getStaticPadTemplates].
+      
+      The pad should be released with [gid.gst1.element.Element.releaseRequestPad].
+  
+      Params:
+        templ = a #GstPadTemplate of which we want a pad of.
+        name = the name of the request #GstPad
+          to retrieve. Can be null.
+        caps = the caps of the pad we want to
+          request. Can be null.
+      Returns: requested #GstPad if found,
+            otherwise null.  Release after usage.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRequestNewPad` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.pad.Pad vfuncRequestNewPad(gid.gst1.pad_template.PadTemplate templ, string name = null, gid.gst1.caps.Caps caps = null)
+  {
+    auto _klass = cast(GstElementClass*)_vfuncClass;
+    if (!_klass.requestNewPad)
+      return typeof(return).init;
+
+    GstPad* _cretval;
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+    _cretval = _klass.requestNewPad(cast(GstElement*)this._cPtr, templ ? cast(GstPadTemplate*)templ._cPtr(No.Dup) : null, _name, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Sends an event to an element. If the element doesn't implement an
+      event handler, the event will be pushed on a random linked sink pad for
+      downstream events or a random linked source pad for upstream events.
+      
+      This function takes ownership of the provided event so you should
+      [gid.gst1.event.Event.ref_] it if you want to reuse the event after this call.
+      
+      MT safe.
+  
+      Params:
+        event = the #GstEvent to send to the element.
+      Returns: true if the event was handled. Events that trigger a preroll (such
+        as flushing seeks and steps) will emit [gid.gst1.types.MessageType.AsyncDone].
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSendEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncSendEvent(gid.gst1.event.Event event)
+  {
+    auto _klass = cast(GstElementClass*)_vfuncClass;
+    if (!_klass.sendEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.sendEvent(cast(GstElement*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Sets the bus of the element. Increases the refcount on the bus.
+      For internal use only, unless you're testing elements.
+      
+      MT safe.
+  
+      Params:
+        bus = the #GstBus to set.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetBus` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSetBus(gid.gst1.bus.Bus bus = null)
+  {
+    auto _klass = cast(GstElementClass*)_vfuncClass;
+    if (!_klass.setBus)
+      return;
+
+    _klass.setBus(cast(GstElement*)this._cPtr, bus ? cast(GstBus*)bus._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the clock for the element. This function increases the
+      refcount on the clock. Any previously set clock on the object
+      is unreffed.
+  
+      Params:
+        clock = the #GstClock to set for the element.
+      Returns: true if the element accepted the clock. An element can refuse a
+        clock when it, for example, is not able to slave its internal clock to the
+        clock or when it requires a specific clock to operate.
+        
+        MT safe.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetClock` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncSetClock(gid.gst1.clock.Clock clock = null)
+  {
+    auto _klass = cast(GstElementClass*)_vfuncClass;
+    if (!_klass.setClock)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.setClock(cast(GstElement*)this._cPtr, clock ? cast(GstClock*)clock._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Sets the context of the element. Increases the refcount of the context.
+      
+      MT safe.
+  
+      Params:
+        context = the #GstContext to set. (modified in place, changes are seen by the caller)
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetContext` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSetContext(gid.gst1.context.Context context)
+  {
+    auto _klass = cast(GstElementClass*)_vfuncClass;
+    if (!_klass.setContext)
+      return;
+
+    _klass.setContext(cast(GstElement*)this._cPtr, context ? cast(GstContext*)context._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the state of the element. This function will try to set the
+      requested state by going through all the intermediary states and calling
+      the class's state change function for each.
+      
+      This function can return #GST_STATE_CHANGE_ASYNC, in which case the
+      element will perform the remainder of the state change asynchronously in
+      another thread.
+      An application can use [gid.gst1.element.Element.getState] to wait for the completion
+      of the state change or it can wait for a [gid.gst1.types.MessageType.AsyncDone] or
+      [gid.gst1.types.MessageType.StateChanged] on the bus.
+      
+      State changes to [gid.gst1.types.State.Ready] or [gid.gst1.types.State.Null] never return
+      #GST_STATE_CHANGE_ASYNC.
+  
+      Params:
+        state = the element's new #GstState.
+      Returns: Result of the state change using #GstStateChangeReturn.
+        
+        MT safe.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetState` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.StateChangeReturn vfuncSetState(gid.gst1.types.State state)
+  {
+    auto _klass = cast(GstElementClass*)_vfuncClass;
+    if (!_klass.setState)
+      return typeof(return).init;
+
+    GstStateChangeReturn _cretval;
+    _cretval = _klass.setState(cast(GstElement*)this._cPtr, state);
+    gid.gst1.types.StateChangeReturn _retval = cast(gid.gst1.types.StateChangeReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      called immediately after a new state was set.
+  
+      Params:
+        oldstate = 
+        newstate = 
+        pending = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStateChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncStateChanged(gid.gst1.types.State oldstate, gid.gst1.types.State newstate, gid.gst1.types.State pending)
+  {
+    auto _klass = cast(GstElementClass*)_vfuncClass;
+    if (!_klass.stateChanged)
+      return;
+
+    _klass.stateChanged(cast(GstElement*)this._cPtr, oldstate, newstate, pending);
+  }
+
+  /**
       Abort the state change of the element. This function is used
       by elements that do asynchronous state changes and find out
       something is wrong.
@@ -308,6 +732,7 @@ class Element : gid.gst1.object.ObjectWrap
   {
     extern(C) void _funcCallback(GstElement* element, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gst1.types.ElementCallAsyncFunc*)userData;
 
       try
@@ -427,6 +852,7 @@ class Element : gid.gst1.object.ObjectWrap
   {
     extern(C) gboolean _funcCallback(GstElement* element, GstPad* pad, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.ElementForeachPadFunc*)userData;
 
@@ -466,6 +892,7 @@ class Element : gid.gst1.object.ObjectWrap
   {
     extern(C) gboolean _funcCallback(GstElement* element, GstPad* pad, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.ElementForeachPadFunc*)userData;
 
@@ -505,6 +932,7 @@ class Element : gid.gst1.object.ObjectWrap
   {
     extern(C) gboolean _funcCallback(GstElement* element, GstPad* pad, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.ElementForeachPadFunc*)userData;
 
@@ -1665,6 +2093,7 @@ class Element : gid.gst1.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1716,6 +2145,7 @@ class Element : gid.gst1.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1766,6 +2196,7 @@ class Element : gid.gst1.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1788,6 +2219,574 @@ class Element : gid.gst1.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("pad-removed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Element
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gst1.element.Element), T.stringof ~ " is not derived from gid.gst1.element.Element");
+
+    gid.gst1.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChangeState", true)[0]) == gid.gst1.element.Element))
+      _installVfunc(klass, "change_state");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetState", true)[0]) == gid.gst1.element.Element))
+      _installVfunc(klass, "get_state");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncNoMorePads", true)[0]) == gid.gst1.element.Element))
+      _installVfunc(klass, "no_more_pads");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPadAdded", true)[0]) == gid.gst1.element.Element))
+      _installVfunc(klass, "pad_added");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPadRemoved", true)[0]) == gid.gst1.element.Element))
+      _installVfunc(klass, "pad_removed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPostMessage", true)[0]) == gid.gst1.element.Element))
+      _installVfunc(klass, "post_message");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncProvideClock", true)[0]) == gid.gst1.element.Element))
+      _installVfunc(klass, "provide_clock");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncQuery", true)[0]) == gid.gst1.element.Element))
+      _installVfunc(klass, "query");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncReleasePad", true)[0]) == gid.gst1.element.Element))
+      _installVfunc(klass, "release_pad");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRequestNewPad", true)[0]) == gid.gst1.element.Element))
+      _installVfunc(klass, "request_new_pad");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSendEvent", true)[0]) == gid.gst1.element.Element))
+      _installVfunc(klass, "send_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetBus", true)[0]) == gid.gst1.element.Element))
+      _installVfunc(klass, "set_bus");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetClock", true)[0]) == gid.gst1.element.Element))
+      _installVfunc(klass, "set_clock");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetContext", true)[0]) == gid.gst1.element.Element))
+      _installVfunc(klass, "set_context");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetState", true)[0]) == gid.gst1.element.Element))
+      _installVfunc(klass, "set_state");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStateChanged", true)[0]) == gid.gst1.element.Element))
+      _installVfunc(klass, "state_changed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstElementClass*)klass;
+
+    switch (vfunc)
+    {
+      case "change_state":
+      {
+        static extern(C) GstStateChangeReturn _vfuncChangeStateTramp(GstElement* element, GstStateChange transition) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          if (!_obj)
+          {
+            auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
+            if (_klass.changeState)
+              return (cast(typeof(&_vfuncChangeStateTramp))_klass.changeState)(element, transition);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.StateChangeReturn _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncChangeState(transition);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.element.Element.vfuncChangeState");
+          }
+          auto _retval = cast(GstStateChangeReturn)_dretval;
+
+          return _retval;
+        }
+
+        _klass.changeState = cast(typeof(_klass.changeState))&_vfuncChangeStateTramp;
+        break;
+      }
+      case "get_state":
+      {
+        static extern(C) GstStateChangeReturn _vfuncGetStateTramp(GstElement* element, GstState* state, GstState* pending, GstClockTime timeout) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          if (!_obj)
+          {
+            auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
+            if (_klass.getState)
+              return (cast(typeof(&_vfuncGetStateTramp))_klass.getState)(element, state, pending, timeout);
+            return typeof(return).init;
+          }
+
+          typeof(*state) _stateNull;
+          if (!state)
+            state = &_stateNull;
+
+          typeof(*pending) _pendingNull;
+          if (!pending)
+            pending = &_pendingNull;
+
+          gid.gst1.types.StateChangeReturn _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetState(*state, *pending, timeout);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.element.Element.vfuncGetState");
+          }
+          auto _retval = cast(GstStateChangeReturn)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getState = cast(typeof(_klass.getState))&_vfuncGetStateTramp;
+        break;
+      }
+      case "no_more_pads":
+      {
+        static extern(C) void _vfuncNoMorePadsTramp(GstElement* element) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          if (!_obj)
+          {
+            auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
+            if (_klass.noMorePads)
+              return (cast(typeof(&_vfuncNoMorePadsTramp))_klass.noMorePads)(element);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncNoMorePads();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.element.Element.vfuncNoMorePads");
+          }
+        }
+
+        _klass.noMorePads = cast(typeof(_klass.noMorePads))&_vfuncNoMorePadsTramp;
+        break;
+      }
+      case "pad_added":
+      {
+        static extern(C) void _vfuncPadAddedTramp(GstElement* element, GstPad* pad) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          if (!_obj)
+          {
+            auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
+            if (_klass.padAdded)
+              return (cast(typeof(&_vfuncPadAddedTramp))_klass.padAdded)(element, pad);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPadAdded(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.pad.Pad)(cast(void*)pad, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.element.Element.vfuncPadAdded");
+          }
+        }
+
+        _klass.padAdded = cast(typeof(_klass.padAdded))&_vfuncPadAddedTramp;
+        break;
+      }
+      case "pad_removed":
+      {
+        static extern(C) void _vfuncPadRemovedTramp(GstElement* element, GstPad* pad) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          if (!_obj)
+          {
+            auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
+            if (_klass.padRemoved)
+              return (cast(typeof(&_vfuncPadRemovedTramp))_klass.padRemoved)(element, pad);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPadRemoved(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.pad.Pad)(cast(void*)pad, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.element.Element.vfuncPadRemoved");
+          }
+        }
+
+        _klass.padRemoved = cast(typeof(_klass.padRemoved))&_vfuncPadRemovedTramp;
+        break;
+      }
+      case "post_message":
+      {
+        static extern(C) gboolean _vfuncPostMessageTramp(GstElement* element, GstMessage* message) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          if (!_obj)
+          {
+            auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
+            if (_klass.postMessage)
+              return (cast(typeof(&_vfuncPostMessageTramp))_klass.postMessage)(element, message);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncPostMessage(message ? new gid.gst1.message.Message(cast(void*)message, Yes.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.element.Element.vfuncPostMessage");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.postMessage = cast(typeof(_klass.postMessage))&_vfuncPostMessageTramp;
+        break;
+      }
+      case "provide_clock":
+      {
+        static extern(C) GstClock* _vfuncProvideClockTramp(GstElement* element) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          if (!_obj)
+          {
+            auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
+            if (_klass.provideClock)
+              return (cast(typeof(&_vfuncProvideClockTramp))_klass.provideClock)(element);
+            return typeof(return).init;
+          }
+
+          gid.gst1.clock.Clock _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncProvideClock();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.element.Element.vfuncProvideClock");
+          }
+          auto _retval = _dretval ? cast(GstClock*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.provideClock = cast(typeof(_klass.provideClock))&_vfuncProvideClockTramp;
+        break;
+      }
+      case "query":
+      {
+        static extern(C) gboolean _vfuncQueryTramp(GstElement* element, GstQuery* query) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          if (!_obj)
+          {
+            auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
+            if (_klass.query)
+              return (cast(typeof(&_vfuncQueryTramp))_klass.query)(element, query);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _query = query ? new gid.gst1.query.Query(cast(void*)query, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncQuery(_query);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.element.Element.vfuncQuery");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_query)
+            _query._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.query = cast(typeof(_klass.query))&_vfuncQueryTramp;
+        break;
+      }
+      case "release_pad":
+      {
+        static extern(C) void _vfuncReleasePadTramp(GstElement* element, GstPad* pad) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          if (!_obj)
+          {
+            auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
+            if (_klass.releasePad)
+              return (cast(typeof(&_vfuncReleasePadTramp))_klass.releasePad)(element, pad);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncReleasePad(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.pad.Pad)(cast(void*)pad, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.element.Element.vfuncReleasePad");
+          }
+        }
+
+        _klass.releasePad = cast(typeof(_klass.releasePad))&_vfuncReleasePadTramp;
+        break;
+      }
+      case "request_new_pad":
+      {
+        static extern(C) GstPad* _vfuncRequestNewPadTramp(GstElement* element, GstPadTemplate* templ, const(char)* name, const(GstCaps)* caps) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          if (!_obj)
+          {
+            auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
+            if (_klass.requestNewPad)
+              return (cast(typeof(&_vfuncRequestNewPadTramp))_klass.requestNewPad)(element, templ, name, caps);
+            return typeof(return).init;
+          }
+
+          gid.gst1.pad.Pad _dretval;
+          string _name = name.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncRequestNewPad(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.pad_template.PadTemplate)(cast(void*)templ, No.Take), _name, caps ? new gid.gst1.caps.Caps(cast(void*)caps, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.element.Element.vfuncRequestNewPad");
+          }
+          auto _retval = _dretval ? cast(GstPad*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.requestNewPad = cast(typeof(_klass.requestNewPad))&_vfuncRequestNewPadTramp;
+        break;
+      }
+      case "send_event":
+      {
+        static extern(C) gboolean _vfuncSendEventTramp(GstElement* element, GstEvent* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          if (!_obj)
+          {
+            auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
+            if (_klass.sendEvent)
+              return (cast(typeof(&_vfuncSendEventTramp))_klass.sendEvent)(element, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncSendEvent(event ? new gid.gst1.event.Event(cast(void*)event, Yes.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.element.Element.vfuncSendEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.sendEvent = cast(typeof(_klass.sendEvent))&_vfuncSendEventTramp;
+        break;
+      }
+      case "set_bus":
+      {
+        static extern(C) void _vfuncSetBusTramp(GstElement* element, GstBus* bus) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          if (!_obj)
+          {
+            auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
+            if (_klass.setBus)
+              return (cast(typeof(&_vfuncSetBusTramp))_klass.setBus)(element, bus);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSetBus(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.bus.Bus)(cast(void*)bus, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.element.Element.vfuncSetBus");
+          }
+        }
+
+        _klass.setBus = cast(typeof(_klass.setBus))&_vfuncSetBusTramp;
+        break;
+      }
+      case "set_clock":
+      {
+        static extern(C) gboolean _vfuncSetClockTramp(GstElement* element, GstClock* clock) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          if (!_obj)
+          {
+            auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
+            if (_klass.setClock)
+              return (cast(typeof(&_vfuncSetClockTramp))_klass.setClock)(element, clock);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncSetClock(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.clock.Clock)(cast(void*)clock, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.element.Element.vfuncSetClock");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.setClock = cast(typeof(_klass.setClock))&_vfuncSetClockTramp;
+        break;
+      }
+      case "set_context":
+      {
+        static extern(C) void _vfuncSetContextTramp(GstElement* element, GstContext* context) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          if (!_obj)
+          {
+            auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
+            if (_klass.setContext)
+              return (cast(typeof(&_vfuncSetContextTramp))_klass.setContext)(element, context);
+            return;
+          }
+
+          auto _context = context ? new gid.gst1.context.Context(cast(void*)context, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncSetContext(_context);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.element.Element.vfuncSetContext");
+          }
+          if (_context)
+            _context._cUnborrow;
+
+        }
+
+        _klass.setContext = cast(typeof(_klass.setContext))&_vfuncSetContextTramp;
+        break;
+      }
+      case "set_state":
+      {
+        static extern(C) GstStateChangeReturn _vfuncSetStateTramp(GstElement* element, GstState state) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          if (!_obj)
+          {
+            auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
+            if (_klass.setState)
+              return (cast(typeof(&_vfuncSetStateTramp))_klass.setState)(element, state);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.StateChangeReturn _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncSetState(state);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.element.Element.vfuncSetState");
+          }
+          auto _retval = cast(GstStateChangeReturn)_dretval;
+
+          return _retval;
+        }
+
+        _klass.setState = cast(typeof(_klass.setState))&_vfuncSetStateTramp;
+        break;
+      }
+      case "state_changed":
+      {
+        static extern(C) void _vfuncStateChangedTramp(GstElement* element, GstState oldstate, GstState newstate, GstState pending) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.element.Element)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)element);
+          if (!_obj)
+          {
+            auto _klass = cast(GstElementClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)element);
+            if (_klass.stateChanged)
+              return (cast(typeof(&_vfuncStateChangedTramp))_klass.stateChanged)(element, oldstate, newstate, pending);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncStateChanged(oldstate, newstate, pending);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.element.Element.vfuncStateChanged");
+          }
+        }
+
+        _klass.stateChanged = cast(typeof(_klass.stateChanged))&_vfuncStateChangedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

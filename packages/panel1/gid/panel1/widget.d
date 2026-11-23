@@ -288,9 +288,51 @@ class Widget : gid.gtk4.widget.Widget
   */
   this() nothrow
   {
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = panel_widget_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /**
+      Discovers the widget that should be focused as the default widget
+      for the #PanelWidget.
+      
+      For example, if you want to focus a text editor by default, you might
+      return the #GtkTextView inside your widgetry.
+      Returns: the default widget to focus within
+          the #PanelWidget.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetDefaultFocus` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gtk4.widget.Widget vfuncGetDefaultFocus()
+  {
+    auto _klass = cast(PanelWidgetClass*)_vfuncClass;
+    if (!_klass.getDefaultFocus)
+      return typeof(return).init;
+
     GtkWidget* _cretval;
-    _cretval = panel_widget_new();
-    this(_cretval, No.Take);
+    _cretval = _klass.getDefaultFocus(cast(PanelWidget*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncPresented()
+  {
+    auto _klass = cast(PanelWidgetClass*)_vfuncClass;
+    if (!_klass.presented)
+      return;
+
+    _klass.presented(cast(PanelWidget*)this._cPtr);
   }
 
   /** */
@@ -713,6 +755,7 @@ class Widget : gid.gtk4.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -761,6 +804,7 @@ class Widget : gid.gtk4.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -780,6 +824,97 @@ class Widget : gid.gtk4.widget.Widget
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("presented", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Widget
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.panel1.widget.Widget), T.stringof ~ " is not derived from gid.panel1.widget.Widget");
+
+    gid.gtk4.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetDefaultFocus", true)[0]) == gid.panel1.widget.Widget))
+      _installVfunc(klass, "get_default_focus");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPresented", true)[0]) == gid.panel1.widget.Widget))
+      _installVfunc(klass, "presented");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(PanelWidgetClass*)klass;
+
+    switch (vfunc)
+    {
+      case "get_default_focus":
+      {
+        static extern(C) GtkWidget* _vfuncGetDefaultFocusTramp(PanelWidget* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.panel1.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(PanelWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.getDefaultFocus)
+              return (cast(typeof(&_vfuncGetDefaultFocusTramp))_klass.getDefaultFocus)(self);
+            return typeof(return).init;
+          }
+
+          gid.gtk4.widget.Widget _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetDefaultFocus();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.panel1.widget.Widget.vfuncGetDefaultFocus");
+          }
+          auto _retval = _dretval ? cast(GtkWidget*)_dretval._cPtr(No.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getDefaultFocus = cast(typeof(_klass.getDefaultFocus))&_vfuncGetDefaultFocusTramp;
+        break;
+      }
+      case "presented":
+      {
+        static extern(C) void _vfuncPresentedTramp(PanelWidget* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.panel1.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(PanelWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.presented)
+              return (cast(typeof(&_vfuncPresentedTramp))_klass.presented)(self);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPresented();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.panel1.widget.Widget.vfuncPresented");
+          }
+        }
+
+        _klass.presented = cast(typeof(_klass.presented))&_vfuncPresentedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

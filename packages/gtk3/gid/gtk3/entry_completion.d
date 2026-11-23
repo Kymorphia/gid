@@ -283,9 +283,16 @@ class EntryCompletion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Build
   */
   this() nothrow
   {
-    GtkEntryCompletion* _cretval;
-    _cretval = gtk_entry_completion_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkEntryCompletion* _cretval;
+      _cretval = gtk_entry_completion_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -303,6 +310,63 @@ class EntryCompletion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Build
     _cretval = gtk_entry_completion_new_with_area(area ? cast(GtkCellArea*)area._cPtr(No.Dup) : null);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.entry_completion.EntryCompletion)(cast(GtkEntryCompletion*)_cretval, Yes.Take);
     return _retval;
+  }
+
+  /** */
+  protected void vfuncActionActivated(int index)
+  {
+    auto _klass = cast(GtkEntryCompletionClass*)_vfuncClass;
+    if (!_klass.actionActivated)
+      return;
+
+    _klass.actionActivated(cast(GtkEntryCompletion*)this._cPtr, index);
+  }
+
+  /** */
+  protected bool vfuncCursorOnMatch(gid.gtk3.tree_model.TreeModel model, gid.gtk3.tree_iter.TreeIter iter)
+  {
+    auto _klass = cast(GtkEntryCompletionClass*)_vfuncClass;
+    if (!_klass.cursorOnMatch)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.cursorOnMatch(cast(GtkEntryCompletion*)this._cPtr, model ? cast(GtkTreeModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncInsertPrefix(string prefix)
+  {
+    auto _klass = cast(GtkEntryCompletionClass*)_vfuncClass;
+    if (!_klass.insertPrefix)
+      return typeof(return).init;
+
+    bool _retval;
+    const(char)* _prefix = prefix.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)_klass.insertPrefix(cast(GtkEntryCompletion*)this._cPtr, _prefix);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncMatchSelected(gid.gtk3.tree_model.TreeModel model, gid.gtk3.tree_iter.TreeIter iter)
+  {
+    auto _klass = cast(GtkEntryCompletionClass*)_vfuncClass;
+    if (!_klass.matchSelected)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.matchSelected(cast(GtkEntryCompletion*)this._cPtr, model ? cast(GtkTreeModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncNoMatches()
+  {
+    auto _klass = cast(GtkEntryCompletionClass*)_vfuncClass;
+    if (!_klass.noMatches)
+      return;
+
+    _klass.noMatches(cast(GtkEntryCompletion*)this._cPtr);
   }
 
   /**
@@ -546,6 +610,7 @@ class EntryCompletion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Build
   {
     extern(C) gboolean _funcCallback(GtkEntryCompletion* completion, const(char)* key, GtkTreeIter* iter, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gtk3.types.EntryCompletionMatchFunc*)userData;
       string _key = key.fromCString!(No.Free);
@@ -680,6 +745,7 @@ class EntryCompletion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Build
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -740,6 +806,7 @@ class EntryCompletion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Build
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -804,6 +871,7 @@ class EntryCompletion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Build
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -867,6 +935,7 @@ class EntryCompletion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Build
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -923,6 +992,7 @@ class EntryCompletion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Build
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -942,6 +1012,204 @@ class EntryCompletion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Build
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("no-matches", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from EntryCompletion
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.entry_completion.EntryCompletion), T.stringof ~ " is not derived from gid.gtk3.entry_completion.EntryCompletion");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActionActivated", true)[0]) == gid.gtk3.entry_completion.EntryCompletion))
+      _installVfunc(klass, "action_activated");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCursorOnMatch", true)[0]) == gid.gtk3.entry_completion.EntryCompletion))
+      _installVfunc(klass, "cursor_on_match");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncInsertPrefix", true)[0]) == gid.gtk3.entry_completion.EntryCompletion))
+      _installVfunc(klass, "insert_prefix");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMatchSelected", true)[0]) == gid.gtk3.entry_completion.EntryCompletion))
+      _installVfunc(klass, "match_selected");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncNoMatches", true)[0]) == gid.gtk3.entry_completion.EntryCompletion))
+      _installVfunc(klass, "no_matches");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkEntryCompletionClass*)klass;
+
+    switch (vfunc)
+    {
+      case "action_activated":
+      {
+        static extern(C) void _vfuncActionActivatedTramp(GtkEntryCompletion* completion, int index) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.entry_completion.EntryCompletion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEntryCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
+            if (_klass.actionActivated)
+              return (cast(typeof(&_vfuncActionActivatedTramp))_klass.actionActivated)(completion, index);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncActionActivated(index);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.entry_completion.EntryCompletion.vfuncActionActivated");
+          }
+        }
+
+        _klass.actionActivated = cast(typeof(_klass.actionActivated))&_vfuncActionActivatedTramp;
+        break;
+      }
+      case "cursor_on_match":
+      {
+        static extern(C) gboolean _vfuncCursorOnMatchTramp(GtkEntryCompletion* completion, GtkTreeModel* model, GtkTreeIter* iter) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.entry_completion.EntryCompletion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEntryCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
+            if (_klass.cursorOnMatch)
+              return (cast(typeof(&_vfuncCursorOnMatchTramp))_klass.cursorOnMatch)(completion, model, iter);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _iter = iter ? new gid.gtk3.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncCursorOnMatch(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.tree_model.TreeModel)(cast(void*)model, No.Take), _iter);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.entry_completion.EntryCompletion.vfuncCursorOnMatch");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_iter)
+            _iter._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.cursorOnMatch = cast(typeof(_klass.cursorOnMatch))&_vfuncCursorOnMatchTramp;
+        break;
+      }
+      case "insert_prefix":
+      {
+        static extern(C) gboolean _vfuncInsertPrefixTramp(GtkEntryCompletion* completion, const(char)* prefix) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.entry_completion.EntryCompletion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEntryCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
+            if (_klass.insertPrefix)
+              return (cast(typeof(&_vfuncInsertPrefixTramp))_klass.insertPrefix)(completion, prefix);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          string _prefix = prefix.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncInsertPrefix(_prefix);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.entry_completion.EntryCompletion.vfuncInsertPrefix");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.insertPrefix = cast(typeof(_klass.insertPrefix))&_vfuncInsertPrefixTramp;
+        break;
+      }
+      case "match_selected":
+      {
+        static extern(C) gboolean _vfuncMatchSelectedTramp(GtkEntryCompletion* completion, GtkTreeModel* model, GtkTreeIter* iter) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.entry_completion.EntryCompletion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEntryCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
+            if (_klass.matchSelected)
+              return (cast(typeof(&_vfuncMatchSelectedTramp))_klass.matchSelected)(completion, model, iter);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _iter = iter ? new gid.gtk3.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncMatchSelected(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.tree_model.TreeModel)(cast(void*)model, No.Take), _iter);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.entry_completion.EntryCompletion.vfuncMatchSelected");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_iter)
+            _iter._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.matchSelected = cast(typeof(_klass.matchSelected))&_vfuncMatchSelectedTramp;
+        break;
+      }
+      case "no_matches":
+      {
+        static extern(C) void _vfuncNoMatchesTramp(GtkEntryCompletion* completion) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.entry_completion.EntryCompletion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEntryCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
+            if (_klass.noMatches)
+              return (cast(typeof(&_vfuncNoMatchesTramp))_klass.noMatches)(completion);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncNoMatches();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.entry_completion.EntryCompletion.vfuncNoMatches");
+          }
+        }
+
+        _klass.noMatches = cast(typeof(_klass.noMatches))&_vfuncNoMatchesTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

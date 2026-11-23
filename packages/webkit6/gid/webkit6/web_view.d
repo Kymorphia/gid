@@ -472,9 +472,322 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = webkit_web_view_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = webkit_web_view_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected bool vfuncAuthenticate(gid.webkit6.authentication_request.AuthenticationRequest request)
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.authenticate)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.authenticate(cast(WebKitWebView*)this._cPtr, request ? cast(WebKitAuthenticationRequest*)request._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncClose()
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.close)
+      return;
+
+    _klass.close(cast(WebKitWebView*)this._cPtr);
+  }
+
+  /** */
+  protected bool vfuncContextMenu(gid.webkit6.context_menu.ContextMenu contextMenu, gid.webkit6.hit_test_result.HitTestResult hitTestResult)
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.contextMenu)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.contextMenu(cast(WebKitWebView*)this._cPtr, contextMenu ? cast(WebKitContextMenu*)contextMenu._cPtr(No.Dup) : null, hitTestResult ? cast(WebKitHitTestResult*)hitTestResult._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncContextMenuDismissed()
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.contextMenuDismissed)
+      return;
+
+    _klass.contextMenuDismissed(cast(WebKitWebView*)this._cPtr);
+  }
+
+  /** */
+  protected bool vfuncDecidePolicy(gid.webkit6.policy_decision.PolicyDecision decision, gid.webkit6.types.PolicyDecisionType type)
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.decidePolicy)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.decidePolicy(cast(WebKitWebView*)this._cPtr, decision ? cast(WebKitPolicyDecision*)decision._cPtr(No.Dup) : null, type);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncEnterFullscreen()
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.enterFullscreen)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.enterFullscreen(cast(WebKitWebView*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncInsecureContentDetected(gid.webkit6.types.InsecureContentEvent event)
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.insecureContentDetected)
+      return;
+
+    _klass.insecureContentDetected(cast(WebKitWebView*)this._cPtr, event);
+  }
+
+  /** */
+  protected bool vfuncLeaveFullscreen()
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.leaveFullscreen)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.leaveFullscreen(cast(WebKitWebView*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncLoadChanged(gid.webkit6.types.LoadEvent loadEvent)
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.loadChanged)
+      return;
+
+    _klass.loadChanged(cast(WebKitWebView*)this._cPtr, loadEvent);
+  }
+
+  /** */
+  protected bool vfuncLoadFailed(gid.webkit6.types.LoadEvent loadEvent, string failingUri, gid.glib2.error.ErrorWrap error)
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.loadFailed)
+      return typeof(return).init;
+
+    bool _retval;
+    const(char)* _failingUri = failingUri.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)_klass.loadFailed(cast(WebKitWebView*)this._cPtr, loadEvent, _failingUri, error ? cast(GError*)error._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncLoadFailedWithTlsErrors(string failingUri, gid.gio2.tls_certificate.TlsCertificate certificate, gid.gio2.types.TlsCertificateFlags errors)
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.loadFailedWithTlsErrors)
+      return typeof(return).init;
+
+    bool _retval;
+    const(char)* _failingUri = failingUri.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)_klass.loadFailedWithTlsErrors(cast(WebKitWebView*)this._cPtr, _failingUri, certificate ? cast(GTlsCertificate*)certificate._cPtr(No.Dup) : null, errors);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncMouseTargetChanged(gid.webkit6.hit_test_result.HitTestResult hitTestResult, uint modifiers)
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.mouseTargetChanged)
+      return;
+
+    _klass.mouseTargetChanged(cast(WebKitWebView*)this._cPtr, hitTestResult ? cast(WebKitHitTestResult*)hitTestResult._cPtr(No.Dup) : null, modifiers);
+  }
+
+  /** */
+  protected bool vfuncPermissionRequest(gid.webkit6.permission_request.PermissionRequest permissionRequest)
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.permissionRequest)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.permissionRequest(cast(WebKitWebView*)this._cPtr, permissionRequest ? cast(WebKitPermissionRequest*)(cast(gid.gobject2.object.ObjectWrap)permissionRequest)._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncPrint(gid.webkit6.print_operation.PrintOperation printOperation)
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.print)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.print(cast(WebKitWebView*)this._cPtr, printOperation ? cast(WebKitPrintOperation*)printOperation._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncQueryPermissionState(gid.webkit6.permission_state_query.PermissionStateQuery query)
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.queryPermissionState)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.queryPermissionState(cast(WebKitWebView*)this._cPtr, query ? cast(WebKitPermissionStateQuery*)query._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncReadyToShow()
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.readyToShow)
+      return;
+
+    _klass.readyToShow(cast(WebKitWebView*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncResourceLoadStarted(gid.webkit6.web_resource.WebResource resource, gid.webkit6.urirequest.URIRequest request)
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.resourceLoadStarted)
+      return;
+
+    _klass.resourceLoadStarted(cast(WebKitWebView*)this._cPtr, resource ? cast(WebKitWebResource*)resource._cPtr(No.Dup) : null, request ? cast(WebKitURIRequest*)request._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncRunAsModal()
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.runAsModal)
+      return;
+
+    _klass.runAsModal(cast(WebKitWebView*)this._cPtr);
+  }
+
+  /** */
+  protected bool vfuncRunColorChooser(gid.webkit6.color_chooser_request.ColorChooserRequest request)
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.runColorChooser)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.runColorChooser(cast(WebKitWebView*)this._cPtr, request ? cast(WebKitColorChooserRequest*)request._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncRunFileChooser(gid.webkit6.file_chooser_request.FileChooserRequest request)
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.runFileChooser)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.runFileChooser(cast(WebKitWebView*)this._cPtr, request ? cast(WebKitFileChooserRequest*)request._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncScriptDialog(gid.webkit6.script_dialog.ScriptDialog dialog)
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.scriptDialog)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.scriptDialog(cast(WebKitWebView*)this._cPtr, dialog ? cast(WebKitScriptDialog*)dialog._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncShowNotification(gid.webkit6.notification.Notification notification)
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.showNotification)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.showNotification(cast(WebKitWebView*)this._cPtr, notification ? cast(WebKitNotification*)notification._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncShowOptionMenu(gid.webkit6.option_menu.OptionMenu menu, gid.gdk4.rectangle.Rectangle rectangle)
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.showOptionMenu)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.showOptionMenu(cast(WebKitWebView*)this._cPtr, menu ? cast(WebKitOptionMenu*)menu._cPtr(No.Dup) : null, cast(GdkRectangle*)&rectangle);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncSubmitForm(gid.webkit6.form_submission_request.FormSubmissionRequest request)
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.submitForm)
+      return;
+
+    _klass.submitForm(cast(WebKitWebView*)this._cPtr, request ? cast(WebKitFormSubmissionRequest*)request._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected bool vfuncUserMessageReceived(gid.webkit6.user_message.UserMessage message)
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.userMessageReceived)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.userMessageReceived(cast(WebKitWebView*)this._cPtr, message ? cast(WebKitUserMessage*)message._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncWebProcessCrashed()
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.webProcessCrashed)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.webProcessCrashed(cast(WebKitWebView*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncWebProcessTerminated(gid.webkit6.types.WebProcessTerminationReason reason)
+  {
+    auto _klass = cast(WebKitWebViewClass*)_vfuncClass;
+    if (!_klass.webProcessTerminated)
+      return;
+
+    _klass.webProcessTerminated(cast(WebKitWebView*)this._cPtr, reason);
   }
 
   /**
@@ -549,6 +862,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -608,6 +922,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -765,6 +1080,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -1162,6 +1478,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -1689,6 +2006,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -1747,6 +2065,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -1799,6 +2118,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -2095,6 +2415,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2149,6 +2470,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2233,6 +2555,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2287,6 +2610,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2350,6 +2674,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2448,6 +2773,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2510,6 +2836,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2562,6 +2889,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2614,6 +2942,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2707,6 +3036,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2774,6 +3104,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2849,6 +3180,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2918,6 +3250,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3018,6 +3351,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3081,6 +3415,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3141,6 +3476,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3196,6 +3532,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3249,6 +3586,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3305,6 +3643,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3366,6 +3705,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3431,6 +3771,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3512,6 +3853,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3571,6 +3913,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3636,6 +3979,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3702,6 +4046,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3760,6 +4105,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3814,6 +4160,7 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3836,6 +4183,935 @@ class WebView : gid.webkit6.web_view_base.WebViewBase
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("web-process-terminated", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from WebView
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.webkit6.web_view.WebView), T.stringof ~ " is not derived from gid.webkit6.web_view.WebView");
+
+    gid.gtk4.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAuthenticate", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "authenticate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncClose", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "close");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncContextMenu", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "context_menu");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncContextMenuDismissed", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "context_menu_dismissed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDecidePolicy", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "decide_policy");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEnterFullscreen", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "enter_fullscreen");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncInsecureContentDetected", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "insecure_content_detected");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncLeaveFullscreen", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "leave_fullscreen");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncLoadChanged", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "load_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncLoadFailed", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "load_failed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncLoadFailedWithTlsErrors", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "load_failed_with_tls_errors");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMouseTargetChanged", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "mouse_target_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPermissionRequest", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "permission_request");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPrint", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "print");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncQueryPermissionState", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "query_permission_state");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncReadyToShow", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "ready_to_show");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncResourceLoadStarted", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "resource_load_started");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRunAsModal", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "run_as_modal");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRunColorChooser", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "run_color_chooser");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRunFileChooser", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "run_file_chooser");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncScriptDialog", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "script_dialog");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncShowNotification", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "show_notification");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncShowOptionMenu", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "show_option_menu");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSubmitForm", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "submit_form");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUserMessageReceived", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "user_message_received");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncWebProcessCrashed", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "web_process_crashed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncWebProcessTerminated", true)[0]) == gid.webkit6.web_view.WebView))
+      _installVfunc(klass, "web_process_terminated");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(WebKitWebViewClass*)klass;
+
+    switch (vfunc)
+    {
+      case "authenticate":
+      {
+        static extern(C) gboolean _vfuncAuthenticateTramp(WebKitWebView* webView, WebKitAuthenticationRequest* request) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.authenticate)
+              return (cast(typeof(&_vfuncAuthenticateTramp))_klass.authenticate)(webView, request);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncAuthenticate(gid.gobject2.object.ObjectWrap._getDObject!(gid.webkit6.authentication_request.AuthenticationRequest)(cast(void*)request, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncAuthenticate");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.authenticate = cast(typeof(_klass.authenticate))&_vfuncAuthenticateTramp;
+        break;
+      }
+      case "close":
+      {
+        static extern(C) void _vfuncCloseTramp(WebKitWebView* webView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.close)
+              return (cast(typeof(&_vfuncCloseTramp))_klass.close)(webView);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncClose();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncClose");
+          }
+        }
+
+        _klass.close = cast(typeof(_klass.close))&_vfuncCloseTramp;
+        break;
+      }
+      case "context_menu":
+      {
+        static extern(C) gboolean _vfuncContextMenuTramp(WebKitWebView* webView, WebKitContextMenu* contextMenu, WebKitHitTestResult* hitTestResult) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.contextMenu)
+              return (cast(typeof(&_vfuncContextMenuTramp))_klass.contextMenu)(webView, contextMenu, hitTestResult);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncContextMenu(gid.gobject2.object.ObjectWrap._getDObject!(gid.webkit6.context_menu.ContextMenu)(cast(void*)contextMenu, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.webkit6.hit_test_result.HitTestResult)(cast(void*)hitTestResult, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncContextMenu");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.contextMenu = cast(typeof(_klass.contextMenu))&_vfuncContextMenuTramp;
+        break;
+      }
+      case "context_menu_dismissed":
+      {
+        static extern(C) void _vfuncContextMenuDismissedTramp(WebKitWebView* webView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.contextMenuDismissed)
+              return (cast(typeof(&_vfuncContextMenuDismissedTramp))_klass.contextMenuDismissed)(webView);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncContextMenuDismissed();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncContextMenuDismissed");
+          }
+        }
+
+        _klass.contextMenuDismissed = cast(typeof(_klass.contextMenuDismissed))&_vfuncContextMenuDismissedTramp;
+        break;
+      }
+      case "decide_policy":
+      {
+        static extern(C) gboolean _vfuncDecidePolicyTramp(WebKitWebView* webView, WebKitPolicyDecision* decision, WebKitPolicyDecisionType type) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.decidePolicy)
+              return (cast(typeof(&_vfuncDecidePolicyTramp))_klass.decidePolicy)(webView, decision, type);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncDecidePolicy(gid.gobject2.object.ObjectWrap._getDObject!(gid.webkit6.policy_decision.PolicyDecision)(cast(void*)decision, No.Take), type);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncDecidePolicy");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.decidePolicy = cast(typeof(_klass.decidePolicy))&_vfuncDecidePolicyTramp;
+        break;
+      }
+      case "enter_fullscreen":
+      {
+        static extern(C) gboolean _vfuncEnterFullscreenTramp(WebKitWebView* webView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.enterFullscreen)
+              return (cast(typeof(&_vfuncEnterFullscreenTramp))_klass.enterFullscreen)(webView);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncEnterFullscreen();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncEnterFullscreen");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.enterFullscreen = cast(typeof(_klass.enterFullscreen))&_vfuncEnterFullscreenTramp;
+        break;
+      }
+      case "insecure_content_detected":
+      {
+        static extern(C) void _vfuncInsecureContentDetectedTramp(WebKitWebView* webView, WebKitInsecureContentEvent event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.insecureContentDetected)
+              return (cast(typeof(&_vfuncInsecureContentDetectedTramp))_klass.insecureContentDetected)(webView, event);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncInsecureContentDetected(event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncInsecureContentDetected");
+          }
+        }
+
+        _klass.insecureContentDetected = cast(typeof(_klass.insecureContentDetected))&_vfuncInsecureContentDetectedTramp;
+        break;
+      }
+      case "leave_fullscreen":
+      {
+        static extern(C) gboolean _vfuncLeaveFullscreenTramp(WebKitWebView* webView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.leaveFullscreen)
+              return (cast(typeof(&_vfuncLeaveFullscreenTramp))_klass.leaveFullscreen)(webView);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncLeaveFullscreen();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncLeaveFullscreen");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.leaveFullscreen = cast(typeof(_klass.leaveFullscreen))&_vfuncLeaveFullscreenTramp;
+        break;
+      }
+      case "load_changed":
+      {
+        static extern(C) void _vfuncLoadChangedTramp(WebKitWebView* webView, WebKitLoadEvent loadEvent) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.loadChanged)
+              return (cast(typeof(&_vfuncLoadChangedTramp))_klass.loadChanged)(webView, loadEvent);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncLoadChanged(loadEvent);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncLoadChanged");
+          }
+        }
+
+        _klass.loadChanged = cast(typeof(_klass.loadChanged))&_vfuncLoadChangedTramp;
+        break;
+      }
+      case "load_failed":
+      {
+        static extern(C) gboolean _vfuncLoadFailedTramp(WebKitWebView* webView, WebKitLoadEvent loadEvent, const(char)* failingUri, GError* error) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.loadFailed)
+              return (cast(typeof(&_vfuncLoadFailedTramp))_klass.loadFailed)(webView, loadEvent, failingUri, error);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          string _failingUri = failingUri.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncLoadFailed(loadEvent, _failingUri, error ? new gid.glib2.error.ErrorWrap(cast(void*)error, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncLoadFailed");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.loadFailed = cast(typeof(_klass.loadFailed))&_vfuncLoadFailedTramp;
+        break;
+      }
+      case "load_failed_with_tls_errors":
+      {
+        static extern(C) gboolean _vfuncLoadFailedWithTlsErrorsTramp(WebKitWebView* webView, const(char)* failingUri, GTlsCertificate* certificate, GTlsCertificateFlags errors) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.loadFailedWithTlsErrors)
+              return (cast(typeof(&_vfuncLoadFailedWithTlsErrorsTramp))_klass.loadFailedWithTlsErrors)(webView, failingUri, certificate, errors);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          string _failingUri = failingUri.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncLoadFailedWithTlsErrors(_failingUri, gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.tls_certificate.TlsCertificate)(cast(void*)certificate, No.Take), errors);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncLoadFailedWithTlsErrors");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.loadFailedWithTlsErrors = cast(typeof(_klass.loadFailedWithTlsErrors))&_vfuncLoadFailedWithTlsErrorsTramp;
+        break;
+      }
+      case "mouse_target_changed":
+      {
+        static extern(C) void _vfuncMouseTargetChangedTramp(WebKitWebView* webView, WebKitHitTestResult* hitTestResult, uint modifiers) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.mouseTargetChanged)
+              return (cast(typeof(&_vfuncMouseTargetChangedTramp))_klass.mouseTargetChanged)(webView, hitTestResult, modifiers);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMouseTargetChanged(gid.gobject2.object.ObjectWrap._getDObject!(gid.webkit6.hit_test_result.HitTestResult)(cast(void*)hitTestResult, No.Take), modifiers);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncMouseTargetChanged");
+          }
+        }
+
+        _klass.mouseTargetChanged = cast(typeof(_klass.mouseTargetChanged))&_vfuncMouseTargetChangedTramp;
+        break;
+      }
+      case "permission_request":
+      {
+        static extern(C) gboolean _vfuncPermissionRequestTramp(WebKitWebView* webView, WebKitPermissionRequest* permissionRequest) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.permissionRequest)
+              return (cast(typeof(&_vfuncPermissionRequestTramp))_klass.permissionRequest)(webView, permissionRequest);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncPermissionRequest(gid.gobject2.object.ObjectWrap._getDObject!(gid.webkit6.permission_request.PermissionRequest)(cast(void*)permissionRequest, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncPermissionRequest");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.permissionRequest = cast(typeof(_klass.permissionRequest))&_vfuncPermissionRequestTramp;
+        break;
+      }
+      case "print":
+      {
+        static extern(C) gboolean _vfuncPrintTramp(WebKitWebView* webView, WebKitPrintOperation* printOperation) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.print)
+              return (cast(typeof(&_vfuncPrintTramp))_klass.print)(webView, printOperation);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncPrint(gid.gobject2.object.ObjectWrap._getDObject!(gid.webkit6.print_operation.PrintOperation)(cast(void*)printOperation, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncPrint");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.print = cast(typeof(_klass.print))&_vfuncPrintTramp;
+        break;
+      }
+      case "query_permission_state":
+      {
+        static extern(C) gboolean _vfuncQueryPermissionStateTramp(WebKitWebView* webView, WebKitPermissionStateQuery* query) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.queryPermissionState)
+              return (cast(typeof(&_vfuncQueryPermissionStateTramp))_klass.queryPermissionState)(webView, query);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _query = query ? new gid.webkit6.permission_state_query.PermissionStateQuery(cast(void*)query, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncQueryPermissionState(_query);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncQueryPermissionState");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_query)
+            _query._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.queryPermissionState = cast(typeof(_klass.queryPermissionState))&_vfuncQueryPermissionStateTramp;
+        break;
+      }
+      case "ready_to_show":
+      {
+        static extern(C) void _vfuncReadyToShowTramp(WebKitWebView* webView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.readyToShow)
+              return (cast(typeof(&_vfuncReadyToShowTramp))_klass.readyToShow)(webView);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncReadyToShow();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncReadyToShow");
+          }
+        }
+
+        _klass.readyToShow = cast(typeof(_klass.readyToShow))&_vfuncReadyToShowTramp;
+        break;
+      }
+      case "resource_load_started":
+      {
+        static extern(C) void _vfuncResourceLoadStartedTramp(WebKitWebView* webView, WebKitWebResource* resource, WebKitURIRequest* request) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.resourceLoadStarted)
+              return (cast(typeof(&_vfuncResourceLoadStartedTramp))_klass.resourceLoadStarted)(webView, resource, request);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncResourceLoadStarted(gid.gobject2.object.ObjectWrap._getDObject!(gid.webkit6.web_resource.WebResource)(cast(void*)resource, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.webkit6.urirequest.URIRequest)(cast(void*)request, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncResourceLoadStarted");
+          }
+        }
+
+        _klass.resourceLoadStarted = cast(typeof(_klass.resourceLoadStarted))&_vfuncResourceLoadStartedTramp;
+        break;
+      }
+      case "run_as_modal":
+      {
+        static extern(C) void _vfuncRunAsModalTramp(WebKitWebView* webView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.runAsModal)
+              return (cast(typeof(&_vfuncRunAsModalTramp))_klass.runAsModal)(webView);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRunAsModal();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncRunAsModal");
+          }
+        }
+
+        _klass.runAsModal = cast(typeof(_klass.runAsModal))&_vfuncRunAsModalTramp;
+        break;
+      }
+      case "run_color_chooser":
+      {
+        static extern(C) gboolean _vfuncRunColorChooserTramp(WebKitWebView* webView, WebKitColorChooserRequest* request) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.runColorChooser)
+              return (cast(typeof(&_vfuncRunColorChooserTramp))_klass.runColorChooser)(webView, request);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncRunColorChooser(gid.gobject2.object.ObjectWrap._getDObject!(gid.webkit6.color_chooser_request.ColorChooserRequest)(cast(void*)request, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncRunColorChooser");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.runColorChooser = cast(typeof(_klass.runColorChooser))&_vfuncRunColorChooserTramp;
+        break;
+      }
+      case "run_file_chooser":
+      {
+        static extern(C) gboolean _vfuncRunFileChooserTramp(WebKitWebView* webView, WebKitFileChooserRequest* request) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.runFileChooser)
+              return (cast(typeof(&_vfuncRunFileChooserTramp))_klass.runFileChooser)(webView, request);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncRunFileChooser(gid.gobject2.object.ObjectWrap._getDObject!(gid.webkit6.file_chooser_request.FileChooserRequest)(cast(void*)request, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncRunFileChooser");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.runFileChooser = cast(typeof(_klass.runFileChooser))&_vfuncRunFileChooserTramp;
+        break;
+      }
+      case "script_dialog":
+      {
+        static extern(C) gboolean _vfuncScriptDialogTramp(WebKitWebView* webView, WebKitScriptDialog* dialog) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.scriptDialog)
+              return (cast(typeof(&_vfuncScriptDialogTramp))_klass.scriptDialog)(webView, dialog);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _dialog = dialog ? new gid.webkit6.script_dialog.ScriptDialog(cast(void*)dialog, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncScriptDialog(_dialog);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncScriptDialog");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_dialog)
+            _dialog._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.scriptDialog = cast(typeof(_klass.scriptDialog))&_vfuncScriptDialogTramp;
+        break;
+      }
+      case "show_notification":
+      {
+        static extern(C) gboolean _vfuncShowNotificationTramp(WebKitWebView* webView, WebKitNotification* notification) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.showNotification)
+              return (cast(typeof(&_vfuncShowNotificationTramp))_klass.showNotification)(webView, notification);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncShowNotification(gid.gobject2.object.ObjectWrap._getDObject!(gid.webkit6.notification.Notification)(cast(void*)notification, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncShowNotification");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.showNotification = cast(typeof(_klass.showNotification))&_vfuncShowNotificationTramp;
+        break;
+      }
+      case "show_option_menu":
+      {
+        static extern(C) gboolean _vfuncShowOptionMenuTramp(WebKitWebView* webView, WebKitOptionMenu* menu, GdkRectangle* rectangle) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.showOptionMenu)
+              return (cast(typeof(&_vfuncShowOptionMenuTramp))_klass.showOptionMenu)(webView, menu, rectangle);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncShowOptionMenu(gid.gobject2.object.ObjectWrap._getDObject!(gid.webkit6.option_menu.OptionMenu)(cast(void*)menu, No.Take), *cast(gid.gdk4.rectangle.Rectangle*)rectangle);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncShowOptionMenu");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.showOptionMenu = cast(typeof(_klass.showOptionMenu))&_vfuncShowOptionMenuTramp;
+        break;
+      }
+      case "submit_form":
+      {
+        static extern(C) void _vfuncSubmitFormTramp(WebKitWebView* webView, WebKitFormSubmissionRequest* request) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.submitForm)
+              return (cast(typeof(&_vfuncSubmitFormTramp))_klass.submitForm)(webView, request);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSubmitForm(gid.gobject2.object.ObjectWrap._getDObject!(gid.webkit6.form_submission_request.FormSubmissionRequest)(cast(void*)request, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncSubmitForm");
+          }
+        }
+
+        _klass.submitForm = cast(typeof(_klass.submitForm))&_vfuncSubmitFormTramp;
+        break;
+      }
+      case "user_message_received":
+      {
+        static extern(C) gboolean _vfuncUserMessageReceivedTramp(WebKitWebView* webView, WebKitUserMessage* message) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.userMessageReceived)
+              return (cast(typeof(&_vfuncUserMessageReceivedTramp))_klass.userMessageReceived)(webView, message);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncUserMessageReceived(gid.gobject2.object.ObjectWrap._getDObject!(gid.webkit6.user_message.UserMessage)(cast(void*)message, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncUserMessageReceived");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.userMessageReceived = cast(typeof(_klass.userMessageReceived))&_vfuncUserMessageReceivedTramp;
+        break;
+      }
+      case "web_process_crashed":
+      {
+        static extern(C) gboolean _vfuncWebProcessCrashedTramp(WebKitWebView* webView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.webProcessCrashed)
+              return (cast(typeof(&_vfuncWebProcessCrashedTramp))_klass.webProcessCrashed)(webView);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncWebProcessCrashed();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncWebProcessCrashed");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.webProcessCrashed = cast(typeof(_klass.webProcessCrashed))&_vfuncWebProcessCrashedTramp;
+        break;
+      }
+      case "web_process_terminated":
+      {
+        static extern(C) void _vfuncWebProcessTerminatedTramp(WebKitWebView* webView, WebKitWebProcessTerminationReason reason) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.webkit6.web_view.WebView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)webView);
+          if (!_obj)
+          {
+            auto _klass = cast(WebKitWebViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)webView);
+            if (_klass.webProcessTerminated)
+              return (cast(typeof(&_vfuncWebProcessTerminatedTramp))_klass.webProcessTerminated)(webView, reason);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncWebProcessTerminated(reason);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.webkit6.web_view.WebView.vfuncWebProcessTerminated");
+          }
+        }
+
+        _klass.webProcessTerminated = cast(typeof(_klass.webProcessTerminated))&_vfuncWebProcessTerminatedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

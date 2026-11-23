@@ -69,6 +69,15 @@ class LayoutManager : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -101,6 +110,151 @@ class LayoutManager : gid.gobject2.object.ObjectWrap
   static LayoutManagerGidBuilder builder() nothrow
   {
     return new LayoutManagerGidBuilder;
+  }
+
+  /**
+      Assigns the given width, height, and baseline to
+      a widget, and computes the position and sizes of the children of
+      the widget using the layout management policy of manager.
+  
+      Params:
+        widget = the [gid.gtk4.widget.Widget] using manager
+        width = the new width of the widget
+        height = the new height of the widget
+        baseline = the baseline position of the widget, or -1
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncAllocate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncAllocate(gid.gtk4.widget.Widget widget, int width, int height, int baseline)
+  {
+    auto _klass = cast(GtkLayoutManagerClass*)_vfuncClass;
+    if (!_klass.allocate)
+      return;
+
+    _klass.allocate(cast(GtkLayoutManager*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, width, height, baseline);
+  }
+
+  /**
+      Create a [gid.gtk4.layout_child.LayoutChild] instance for the given for_child widget.
+  
+      Params:
+        widget = the widget using the manager
+        forChild = the child of widget
+      Returns: a [gid.gtk4.layout_child.LayoutChild]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCreateLayoutChild` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gtk4.layout_child.LayoutChild vfuncCreateLayoutChild(gid.gtk4.widget.Widget widget, gid.gtk4.widget.Widget forChild)
+  {
+    auto _klass = cast(GtkLayoutManagerClass*)_vfuncClass;
+    if (!_klass.createLayoutChild)
+      return typeof(return).init;
+
+    GtkLayoutChild* _cretval;
+    _cretval = _klass.createLayoutChild(cast(GtkLayoutManager*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, forChild ? cast(GtkWidget*)forChild._cPtr(No.Dup) : null);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.layout_child.LayoutChild)(cast(GtkLayoutChild*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      a virtual function, used to return the preferred
+        request mode for the layout manager; for instance, "width for height"
+        or "height for width"; see [gid.gtk4.types.SizeRequestMode]
+  
+      Params:
+        widget = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetRequestMode` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gtk4.types.SizeRequestMode vfuncGetRequestMode(gid.gtk4.widget.Widget widget)
+  {
+    auto _klass = cast(GtkLayoutManagerClass*)_vfuncClass;
+    if (!_klass.getRequestMode)
+      return typeof(return).init;
+
+    GtkSizeRequestMode _cretval;
+    _cretval = _klass.getRequestMode(cast(GtkLayoutManager*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+    gid.gtk4.types.SizeRequestMode _retval = cast(gid.gtk4.types.SizeRequestMode)_cretval;
+    return _retval;
+  }
+
+  /**
+      Measures the size of the widget using manager, for the
+      given orientation and size.
+      
+      See the [gid.gtk4.widget.Widget] documentation on layout management for
+      more details.
+  
+      Params:
+        widget = the [gid.gtk4.widget.Widget] using manager
+        orientation = the orientation to measure
+        forSize = Size for the opposite of orientation; for instance, if
+            the orientation is [gid.gtk4.types.Orientation.Horizontal], this is the height
+            of the widget; if the orientation is [gid.gtk4.types.Orientation.Vertical], this
+            is the width of the widget. This allows to measure the height for the
+            given width, and the width for the given height. Use -1 if the size
+            is not known
+        minimum = the minimum size for the given size and
+            orientation
+        natural = the natural, or preferred size for the
+            given size and orientation
+        minimumBaseline = the baseline position for the
+            minimum size
+        naturalBaseline = the baseline position for the
+            natural size
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncMeasure` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncMeasure(gid.gtk4.widget.Widget widget, gid.gtk4.types.Orientation orientation, int forSize, out int minimum, out int natural, out int minimumBaseline, out int naturalBaseline)
+  {
+    auto _klass = cast(GtkLayoutManagerClass*)_vfuncClass;
+    if (!_klass.measure)
+      return;
+
+    _klass.measure(cast(GtkLayoutManager*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, orientation, forSize, cast(int*)&minimum, cast(int*)&natural, cast(int*)&minimumBaseline, cast(int*)&naturalBaseline);
+  }
+
+  /**
+      a virtual function, called when the widget using the layout
+        manager is attached to a [gid.gtk4.root.Root]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRoot` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncRoot()
+  {
+    auto _klass = cast(GtkLayoutManagerClass*)_vfuncClass;
+    if (!_klass.root)
+      return;
+
+    _klass.root(cast(GtkLayoutManager*)this._cPtr);
+  }
+
+  /**
+      a virtual function, called when the widget using the layout
+        manager is detached from a [gid.gtk4.root.Root]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncUnroot` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncUnroot()
+  {
+    auto _klass = cast(GtkLayoutManagerClass*)_vfuncClass;
+    if (!_klass.unroot)
+      return;
+
+    _klass.unroot(cast(GtkLayoutManager*)this._cPtr);
   }
 
   /**
@@ -204,6 +358,238 @@ class LayoutManager : gid.gobject2.object.ObjectWrap
   void measure(gid.gtk4.widget.Widget widget, gid.gtk4.types.Orientation orientation, int forSize, out int minimum, out int natural, out int minimumBaseline, out int naturalBaseline) nothrow
   {
     gtk_layout_manager_measure(cast(GtkLayoutManager*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, orientation, forSize, cast(int*)&minimum, cast(int*)&natural, cast(int*)&minimumBaseline, cast(int*)&naturalBaseline);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from LayoutManager
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.layout_manager.LayoutManager), T.stringof ~ " is not derived from gid.gtk4.layout_manager.LayoutManager");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAllocate", true)[0]) == gid.gtk4.layout_manager.LayoutManager))
+      _installVfunc(klass, "allocate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCreateLayoutChild", true)[0]) == gid.gtk4.layout_manager.LayoutManager))
+      _installVfunc(klass, "create_layout_child");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetRequestMode", true)[0]) == gid.gtk4.layout_manager.LayoutManager))
+      _installVfunc(klass, "get_request_mode");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMeasure", true)[0]) == gid.gtk4.layout_manager.LayoutManager))
+      _installVfunc(klass, "measure");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRoot", true)[0]) == gid.gtk4.layout_manager.LayoutManager))
+      _installVfunc(klass, "root");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUnroot", true)[0]) == gid.gtk4.layout_manager.LayoutManager))
+      _installVfunc(klass, "unroot");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkLayoutManagerClass*)klass;
+
+    switch (vfunc)
+    {
+      case "allocate":
+      {
+        static extern(C) void _vfuncAllocateTramp(GtkLayoutManager* manager, GtkWidget* widget, int width, int height, int baseline) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.layout_manager.LayoutManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkLayoutManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
+            if (_klass.allocate)
+              return (cast(typeof(&_vfuncAllocateTramp))_klass.allocate)(manager, widget, width, height, baseline);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncAllocate(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(void*)widget, No.Take), width, height, baseline);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.layout_manager.LayoutManager.vfuncAllocate");
+          }
+        }
+
+        _klass.allocate = cast(typeof(_klass.allocate))&_vfuncAllocateTramp;
+        break;
+      }
+      case "create_layout_child":
+      {
+        static extern(C) GtkLayoutChild* _vfuncCreateLayoutChildTramp(GtkLayoutManager* manager, GtkWidget* widget, GtkWidget* forChild) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.layout_manager.LayoutManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkLayoutManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
+            if (_klass.createLayoutChild)
+              return (cast(typeof(&_vfuncCreateLayoutChildTramp))_klass.createLayoutChild)(manager, widget, forChild);
+            return typeof(return).init;
+          }
+
+          gid.gtk4.layout_child.LayoutChild _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCreateLayoutChild(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(void*)widget, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(void*)forChild, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.layout_manager.LayoutManager.vfuncCreateLayoutChild");
+          }
+          auto _retval = _dretval ? cast(GtkLayoutChild*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.createLayoutChild = cast(typeof(_klass.createLayoutChild))&_vfuncCreateLayoutChildTramp;
+        break;
+      }
+      case "get_request_mode":
+      {
+        static extern(C) GtkSizeRequestMode _vfuncGetRequestModeTramp(GtkLayoutManager* manager, GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.layout_manager.LayoutManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkLayoutManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
+            if (_klass.getRequestMode)
+              return (cast(typeof(&_vfuncGetRequestModeTramp))_klass.getRequestMode)(manager, widget);
+            return typeof(return).init;
+          }
+
+          gid.gtk4.types.SizeRequestMode _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetRequestMode(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(void*)widget, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.layout_manager.LayoutManager.vfuncGetRequestMode");
+          }
+          auto _retval = cast(GtkSizeRequestMode)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getRequestMode = cast(typeof(_klass.getRequestMode))&_vfuncGetRequestModeTramp;
+        break;
+      }
+      case "measure":
+      {
+        static extern(C) void _vfuncMeasureTramp(GtkLayoutManager* manager, GtkWidget* widget, GtkOrientation orientation, int forSize, int* minimum, int* natural, int* minimumBaseline, int* naturalBaseline) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.layout_manager.LayoutManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkLayoutManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
+            if (_klass.measure)
+              return (cast(typeof(&_vfuncMeasureTramp))_klass.measure)(manager, widget, orientation, forSize, minimum, natural, minimumBaseline, naturalBaseline);
+            return;
+          }
+
+          typeof(*minimum) _minimumNull;
+          if (!minimum)
+            minimum = &_minimumNull;
+
+          typeof(*natural) _naturalNull;
+          if (!natural)
+            natural = &_naturalNull;
+
+          typeof(*minimumBaseline) _minimumBaselineNull;
+          if (!minimumBaseline)
+            minimumBaseline = &_minimumBaselineNull;
+
+          typeof(*naturalBaseline) _naturalBaselineNull;
+          if (!naturalBaseline)
+            naturalBaseline = &_naturalBaselineNull;
+
+          try
+          {
+            _obj.vfuncMeasure(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.widget.Widget)(cast(void*)widget, No.Take), orientation, forSize, *minimum, *natural, *minimumBaseline, *naturalBaseline);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.layout_manager.LayoutManager.vfuncMeasure");
+          }
+        }
+
+        _klass.measure = cast(typeof(_klass.measure))&_vfuncMeasureTramp;
+        break;
+      }
+      case "root":
+      {
+        static extern(C) void _vfuncRootTramp(GtkLayoutManager* manager) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.layout_manager.LayoutManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkLayoutManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
+            if (_klass.root)
+              return (cast(typeof(&_vfuncRootTramp))_klass.root)(manager);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRoot();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.layout_manager.LayoutManager.vfuncRoot");
+          }
+        }
+
+        _klass.root = cast(typeof(_klass.root))&_vfuncRootTramp;
+        break;
+      }
+      case "unroot":
+      {
+        static extern(C) void _vfuncUnrootTramp(GtkLayoutManager* manager) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.layout_manager.LayoutManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkLayoutManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
+            if (_klass.unroot)
+              return (cast(typeof(&_vfuncUnrootTramp))_klass.unroot)(manager);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncUnroot();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.layout_manager.LayoutManager.vfuncUnroot");
+          }
+        }
+
+        _klass.unroot = cast(typeof(_klass.unroot))&_vfuncUnrootTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

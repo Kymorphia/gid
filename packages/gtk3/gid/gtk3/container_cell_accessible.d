@@ -62,9 +62,16 @@ class ContainerCellAccessible : gid.gtk3.cell_accessible.CellAccessible
   /** */
   this() nothrow
   {
-    GtkContainerCellAccessible* _cretval;
-    _cretval = gtk_container_cell_accessible_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkContainerCellAccessible* _cretval;
+      _cretval = gtk_container_cell_accessible_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /** */

@@ -5,6 +5,7 @@ public import gid.core.basictypes;
 import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;
+import gid.gst1.buffer;
 import gid.gst1.caps;
 import gid.gstaudio1.audio_aggregator_pad;
 import gid.gstaudio1.c.functions;
@@ -67,6 +68,15 @@ class AudioAggregator : gid.gstbase1.aggregator.Aggregator
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
   }
 
   /** */
@@ -204,10 +214,165 @@ class AudioAggregator : gid.gstbase1.aggregator.Aggregator
   }
 
 
+  /**
+      Aggregates one input buffer to the output
+       buffer.  The in_offset and out_offset are in "frames", which is
+       the size of a sample times the number of channels. Returns TRUE if
+       any non-silence was added to the buffer
+  
+      Params:
+        pad = 
+        inbuf =  (modified in place, changes are seen by the caller)
+        inOffset = 
+        outbuf =  (modified in place, changes are seen by the caller)
+        outOffset = 
+        numFrames = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncAggregateOneBuffer` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncAggregateOneBuffer(gid.gstaudio1.audio_aggregator_pad.AudioAggregatorPad pad, gid.gst1.buffer.Buffer inbuf, uint inOffset, gid.gst1.buffer.Buffer outbuf, uint outOffset, uint numFrames)
+  {
+    auto _klass = cast(GstAudioAggregatorClass*)_vfuncClass;
+    if (!_klass.aggregateOneBuffer)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.aggregateOneBuffer(cast(GstAudioAggregator*)this._cPtr, pad ? cast(GstAudioAggregatorPad*)pad._cPtr(No.Dup) : null, inbuf ? cast(GstBuffer*)inbuf._cPtr(No.Dup) : null, inOffset, outbuf ? cast(GstBuffer*)outbuf._cPtr(No.Dup) : null, outOffset, numFrames);
+    return _retval;
+  }
+
+  /**
+      Create a new output buffer contains num_frames frames.
+  
+      Params:
+        numFrames = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCreateOutputBuffer` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.buffer.Buffer vfuncCreateOutputBuffer(uint numFrames)
+  {
+    auto _klass = cast(GstAudioAggregatorClass*)_vfuncClass;
+    if (!_klass.createOutputBuffer)
+      return typeof(return).init;
+
+    GstBuffer* _cretval;
+    _cretval = _klass.createOutputBuffer(cast(GstAudioAggregator*)this._cPtr, numFrames);
+    auto _retval = _cretval ? new gid.gst1.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
   /** */
   void setSinkCaps(gid.gstaudio1.audio_aggregator_pad.AudioAggregatorPad pad, gid.gst1.caps.Caps caps) nothrow
   {
     gst_audio_aggregator_set_sink_caps(cast(GstAudioAggregator*)this._cPtr, pad ? cast(GstAudioAggregatorPad*)pad._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from AudioAggregator
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gstaudio1.audio_aggregator.AudioAggregator), T.stringof ~ " is not derived from gid.gstaudio1.audio_aggregator.AudioAggregator");
+
+    gid.gstbase1.aggregator.Aggregator._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAggregateOneBuffer", true)[0]) == gid.gstaudio1.audio_aggregator.AudioAggregator))
+      _installVfunc(klass, "aggregate_one_buffer");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCreateOutputBuffer", true)[0]) == gid.gstaudio1.audio_aggregator.AudioAggregator))
+      _installVfunc(klass, "create_output_buffer");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstAudioAggregatorClass*)klass;
+
+    switch (vfunc)
+    {
+      case "aggregate_one_buffer":
+      {
+        static extern(C) gboolean _vfuncAggregateOneBufferTramp(GstAudioAggregator* aagg, GstAudioAggregatorPad* pad, GstBuffer* inbuf, uint inOffset, GstBuffer* outbuf, uint outOffset, uint numFrames) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstaudio1.audio_aggregator.AudioAggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aagg);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAudioAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aagg);
+            if (_klass.aggregateOneBuffer)
+              return (cast(typeof(&_vfuncAggregateOneBufferTramp))_klass.aggregateOneBuffer)(aagg, pad, inbuf, inOffset, outbuf, outOffset, numFrames);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _inbuf = inbuf ? new gid.gst1.buffer.Buffer(cast(void*)inbuf, Yes.Take)._cBorrow : null;
+          auto _outbuf = outbuf ? new gid.gst1.buffer.Buffer(cast(void*)outbuf, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncAggregateOneBuffer(gid.gobject2.object.ObjectWrap._getDObject!(gid.gstaudio1.audio_aggregator_pad.AudioAggregatorPad)(cast(void*)pad, No.Take), _inbuf, inOffset, _outbuf, outOffset, numFrames);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstaudio1.audio_aggregator.AudioAggregator.vfuncAggregateOneBuffer");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_inbuf)
+            _inbuf._cUnborrow;
+          if (_outbuf)
+            _outbuf._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.aggregateOneBuffer = cast(typeof(_klass.aggregateOneBuffer))&_vfuncAggregateOneBufferTramp;
+        break;
+      }
+      case "create_output_buffer":
+      {
+        static extern(C) GstBuffer* _vfuncCreateOutputBufferTramp(GstAudioAggregator* aagg, uint numFrames) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstaudio1.audio_aggregator.AudioAggregator)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)aagg);
+          if (!_obj)
+          {
+            auto _klass = cast(GstAudioAggregatorClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)aagg);
+            if (_klass.createOutputBuffer)
+              return (cast(typeof(&_vfuncCreateOutputBufferTramp))_klass.createOutputBuffer)(aagg, numFrames);
+            return typeof(return).init;
+          }
+
+          gid.gst1.buffer.Buffer _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCreateOutputBuffer(numFrames);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstaudio1.audio_aggregator.AudioAggregator.vfuncCreateOutputBuffer");
+          }
+          auto _retval = _dretval ? cast(GstBuffer*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.createOutputBuffer = cast(typeof(_klass.createOutputBuffer))&_vfuncCreateOutputBufferTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

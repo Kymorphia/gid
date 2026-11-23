@@ -64,9 +64,26 @@ class FilenameCompleter : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GFilenameCompleter* _cretval;
-    _cretval = g_filename_completer_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GFilenameCompleter* _cretval;
+      _cretval = g_filename_completer_new();
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncGotCompletionData()
+  {
+    auto _klass = cast(GFilenameCompleterClass*)_vfuncClass;
+    if (!_klass.gotCompletionData)
+      return;
+
+    _klass.gotCompletionData(cast(GFilenameCompleter*)this._cPtr);
   }
 
   /**
@@ -155,6 +172,7 @@ class FilenameCompleter : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -174,6 +192,62 @@ class FilenameCompleter : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("got-completion-data", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from FilenameCompleter
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.filename_completer.FilenameCompleter), T.stringof ~ " is not derived from gid.gio2.filename_completer.FilenameCompleter");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGotCompletionData", true)[0]) == gid.gio2.filename_completer.FilenameCompleter))
+      _installVfunc(klass, "got_completion_data");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GFilenameCompleterClass*)klass;
+
+    switch (vfunc)
+    {
+      case "got_completion_data":
+      {
+        static extern(C) void _vfuncGotCompletionDataTramp(GFilenameCompleter* filenameCompleter) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.filename_completer.FilenameCompleter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)filenameCompleter);
+          if (!_obj)
+          {
+            auto _klass = cast(GFilenameCompleterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)filenameCompleter);
+            if (_klass.gotCompletionData)
+              return (cast(typeof(&_vfuncGotCompletionDataTramp))_klass.gotCompletionData)(filenameCompleter);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncGotCompletionData();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.filename_completer.FilenameCompleter.vfuncGotCompletionData");
+          }
+        }
+
+        _klass.gotCompletionData = cast(typeof(_klass.gotCompletionData))&_vfuncGotCompletionDataTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

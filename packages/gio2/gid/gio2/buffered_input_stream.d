@@ -40,6 +40,15 @@ class BufferedInputStream : gid.gio2.filter_input_stream.FilterInputStream, gid.
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -105,9 +114,16 @@ class BufferedInputStream : gid.gio2.filter_input_stream.FilterInputStream, gid.
   */
   this(gid.gio2.input_stream.InputStream baseStream) nothrow
   {
-    GInputStream* _cretval;
-    _cretval = g_buffered_input_stream_new(baseStream ? cast(GInputStream*)baseStream._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GInputStream* _cretval;
+      _cretval = g_buffered_input_stream_new(baseStream ? cast(GInputStream*)baseStream._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -124,6 +140,128 @@ class BufferedInputStream : gid.gio2.filter_input_stream.FilterInputStream, gid.
     GInputStream* _cretval;
     _cretval = g_buffered_input_stream_new_sized(baseStream ? cast(GInputStream*)baseStream._cPtr(No.Dup) : null, size);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.buffered_input_stream.BufferedInputStream)(cast(GInputStream*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Tries to read count bytes from the stream into the buffer.
+      Will block during this read.
+      
+      If count is zero, returns zero and does nothing. A value of count
+      larger than `G_MAXSSIZE` will cause a
+      `errorGio.IOErrorEnum.INVALID_ARGUMENT` error.
+      
+      On success, the number of bytes read into the buffer is returned.
+      It is not an error if this is not the same as the requested size, as it
+      can happen e.g. near the end of a file. Zero is returned on end of file
+      (or if count is zero),  but never otherwise.
+      
+      If count is -1 then the attempted read size is equal to the number of
+      bytes that are required to fill the buffer.
+      
+      If cancellable is not `NULL`, then the operation can be cancelled by
+      triggering the cancellable object from another thread. If the operation
+      was cancelled, the error `errorGio.IOErrorEnum.CANCELLED` will be returned.
+      If an operation was partially finished when the operation was cancelled the
+      partial result will be returned, without an error.
+      
+      On error `-1` is returned and error is set accordingly.
+      
+      For the asynchronous, non-blocking, version of this function, see
+      [gid.gio2.buffered_input_stream.BufferedInputStream.fillAsync].
+  
+      Params:
+        count = the number of bytes that will be read from the stream
+        cancellable = optional [gid.gio2.cancellable.Cancellable] object, `NULL` to ignore
+      Returns: the number of bytes read into stream's buffer, up to count,
+            or `-1` on error.
+      Throws: [ErrorWrap]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncFill` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected ptrdiff_t vfuncFill(ptrdiff_t count, gid.gio2.cancellable.Cancellable cancellable = null)
+  {
+    auto _klass = cast(GBufferedInputStreamClass*)_vfuncClass;
+    if (!_klass.fill)
+      return typeof(return).init;
+
+    ptrdiff_t _retval;
+    GError *_err;
+    _retval = _klass.fill(cast(GBufferedInputStream*)this._cPtr, count, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Reads data into stream's buffer asynchronously, up to count size.
+      io_priority can be used to prioritize reads. For the synchronous
+      version of this function, see [gid.gio2.buffered_input_stream.BufferedInputStream.fill].
+      
+      If count is `-1` then the attempted read size is equal to the number
+      of bytes that are required to fill the buffer.
+  
+      Params:
+        count = the number of bytes that will be read from the stream
+        ioPriority = the [I/O priority](iface.AsyncResult.html#io-priority) of the request
+        cancellable = optional [gid.gio2.cancellable.Cancellable] object
+        callback = a [gid.gio2.types.AsyncReadyCallback]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncFillAsync` to chain up from an override.
+      Overriding it from D is not supported (parameter 'callback' of kind 'Callback' is not supported).
+  */
+  protected void vfuncFillAsync(ptrdiff_t count, int ioPriority, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null)
+  {
+    auto _klass = cast(GBufferedInputStreamClass*)_vfuncClass;
+    if (!_klass.fillAsync)
+      return;
+
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      gidAttachThread();
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    _klass.fillAsync(cast(GBufferedInputStream*)this._cPtr, count, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Finishes an asynchronous read.
+  
+      Params:
+        result = a [gid.gio2.async_result.AsyncResult]
+      Returns: a #gssize of the read stream, or `-1` on an error.
+      Throws: [ErrorWrap]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncFillFinish` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected ptrdiff_t vfuncFillFinish(gid.gio2.async_result.AsyncResult result)
+  {
+    auto _klass = cast(GBufferedInputStreamClass*)_vfuncClass;
+    if (!_klass.fillFinish)
+      return typeof(return).init;
+
+    ptrdiff_t _retval;
+    GError *_err;
+    _retval = _klass.fillFinish(cast(GBufferedInputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
     return _retval;
   }
 
@@ -189,6 +327,7 @@ class BufferedInputStream : gid.gio2.filter_input_stream.FilterInputStream, gid.
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -330,6 +469,101 @@ class BufferedInputStream : gid.gio2.filter_input_stream.FilterInputStream, gid.
   void setBufferSize(size_t size) nothrow
   {
     g_buffered_input_stream_set_buffer_size(cast(GBufferedInputStream*)this._cPtr, size);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from BufferedInputStream
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.buffered_input_stream.BufferedInputStream), T.stringof ~ " is not derived from gid.gio2.buffered_input_stream.BufferedInputStream");
+
+    gid.gio2.input_stream.InputStream._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFill", true)[0]) == gid.gio2.buffered_input_stream.BufferedInputStream))
+      _installVfunc(klass, "fill");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFillAsync", true)[0]) == gid.gio2.buffered_input_stream.BufferedInputStream))
+      static assert(0, "Overriding gid.gio2.buffered_input_stream.BufferedInputStream.vfuncFillAsync is not supported: parameter 'callback' of kind 'Callback' is not supported");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFillFinish", true)[0]) == gid.gio2.buffered_input_stream.BufferedInputStream))
+      _installVfunc(klass, "fill_finish");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GBufferedInputStreamClass*)klass;
+
+    switch (vfunc)
+    {
+      case "fill":
+      {
+        static extern(C) ptrdiff_t _vfuncFillTramp(GBufferedInputStream* stream, ptrdiff_t count, GCancellable* cancellable, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.buffered_input_stream.BufferedInputStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          if (!_obj)
+          {
+            auto _klass = cast(GBufferedInputStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
+            if (_klass.fill)
+              return (cast(typeof(&_vfuncFillTramp))_klass.fill)(stream, count, cancellable, _err);
+            return typeof(return).init;
+          }
+
+          ptrdiff_t _retval;
+
+          try
+          {
+            _retval = _obj.vfuncFill(count, gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          return _retval;
+        }
+
+        _klass.fill = cast(typeof(_klass.fill))&_vfuncFillTramp;
+        break;
+      }
+      case "fill_finish":
+      {
+        static extern(C) ptrdiff_t _vfuncFillFinishTramp(GBufferedInputStream* stream, GAsyncResult* result, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.buffered_input_stream.BufferedInputStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          if (!_obj)
+          {
+            auto _klass = cast(GBufferedInputStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
+            if (_klass.fillFinish)
+              return (cast(typeof(&_vfuncFillFinishTramp))_klass.fillFinish)(stream, result, _err);
+            return typeof(return).init;
+          }
+
+          ptrdiff_t _retval;
+
+          try
+          {
+            _retval = _obj.vfuncFillFinish(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)result, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          return _retval;
+        }
+
+        _klass.fillFinish = cast(typeof(_klass.fillFinish))&_vfuncFillFinishTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

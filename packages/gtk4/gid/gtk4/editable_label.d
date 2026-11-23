@@ -73,6 +73,15 @@ class EditableLabel : gid.gtk4.widget.Widget, gid.gtk4.editable.Editable
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -137,10 +146,17 @@ class EditableLabel : gid.gtk4.widget.Widget, gid.gtk4.editable.Editable
   */
   this(string str) nothrow
   {
-    GtkWidget* _cretval;
-    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
-    _cretval = gtk_editable_label_new(_str);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
+      _cretval = gtk_editable_label_new(_str);
+      this(_cretval, No.Take);
+    }
   }
 
   /**

@@ -38,6 +38,11 @@ interface Seekable : GidWrap
     return cast(void function())g_seekable_get_type != &gidSymbolNotFound ? g_seekable_get_type() : cast(GType)0;
   }
 
+
+
+
+
+
   /**
       Tests if the stream supports the #GSeekableIface.
       Returns: true if seekable can be seeked. false otherwise.

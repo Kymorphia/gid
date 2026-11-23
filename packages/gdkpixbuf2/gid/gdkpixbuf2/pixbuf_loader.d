@@ -111,9 +111,16 @@ class PixbufLoader : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GdkPixbufLoader* _cretval;
-    _cretval = gdk_pixbuf_loader_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GdkPixbufLoader* _cretval;
+      _cretval = gdk_pixbuf_loader_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -181,6 +188,46 @@ class PixbufLoader : gid.gobject2.object.ObjectWrap
       throw new ErrorWrap(_err, Yes.Take);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gdkpixbuf2.pixbuf_loader.PixbufLoader)(cast(GdkPixbufLoader*)_cretval, Yes.Take);
     return _retval;
+  }
+
+  /** */
+  protected void vfuncAreaPrepared()
+  {
+    auto _klass = cast(GdkPixbufLoaderClass*)_vfuncClass;
+    if (!_klass.areaPrepared)
+      return;
+
+    _klass.areaPrepared(cast(GdkPixbufLoader*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncAreaUpdated(int x, int y, int width, int height)
+  {
+    auto _klass = cast(GdkPixbufLoaderClass*)_vfuncClass;
+    if (!_klass.areaUpdated)
+      return;
+
+    _klass.areaUpdated(cast(GdkPixbufLoader*)this._cPtr, x, y, width, height);
+  }
+
+  /** */
+  protected void vfuncClosed()
+  {
+    auto _klass = cast(GdkPixbufLoaderClass*)_vfuncClass;
+    if (!_klass.closed)
+      return;
+
+    _klass.closed(cast(GdkPixbufLoader*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncSizePrepared(int width, int height)
+  {
+    auto _klass = cast(GdkPixbufLoaderClass*)_vfuncClass;
+    if (!_klass.sizePrepared)
+      return;
+
+    _klass.sizePrepared(cast(GdkPixbufLoader*)this._cPtr, width, height);
   }
 
   /**
@@ -363,6 +410,7 @@ class PixbufLoader : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -426,6 +474,7 @@ class PixbufLoader : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -486,6 +535,7 @@ class PixbufLoader : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -542,6 +592,7 @@ class PixbufLoader : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -567,6 +618,152 @@ class PixbufLoader : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("size-prepared", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from PixbufLoader
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gdkpixbuf2.pixbuf_loader.PixbufLoader), T.stringof ~ " is not derived from gid.gdkpixbuf2.pixbuf_loader.PixbufLoader");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAreaPrepared", true)[0]) == gid.gdkpixbuf2.pixbuf_loader.PixbufLoader))
+      _installVfunc(klass, "area_prepared");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAreaUpdated", true)[0]) == gid.gdkpixbuf2.pixbuf_loader.PixbufLoader))
+      _installVfunc(klass, "area_updated");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncClosed", true)[0]) == gid.gdkpixbuf2.pixbuf_loader.PixbufLoader))
+      _installVfunc(klass, "closed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSizePrepared", true)[0]) == gid.gdkpixbuf2.pixbuf_loader.PixbufLoader))
+      _installVfunc(klass, "size_prepared");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GdkPixbufLoaderClass*)klass;
+
+    switch (vfunc)
+    {
+      case "area_prepared":
+      {
+        static extern(C) void _vfuncAreaPreparedTramp(GdkPixbufLoader* loader) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gdkpixbuf2.pixbuf_loader.PixbufLoader)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)loader);
+          if (!_obj)
+          {
+            auto _klass = cast(GdkPixbufLoaderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)loader);
+            if (_klass.areaPrepared)
+              return (cast(typeof(&_vfuncAreaPreparedTramp))_klass.areaPrepared)(loader);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncAreaPrepared();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gdkpixbuf2.pixbuf_loader.PixbufLoader.vfuncAreaPrepared");
+          }
+        }
+
+        _klass.areaPrepared = cast(typeof(_klass.areaPrepared))&_vfuncAreaPreparedTramp;
+        break;
+      }
+      case "area_updated":
+      {
+        static extern(C) void _vfuncAreaUpdatedTramp(GdkPixbufLoader* loader, int x, int y, int width, int height) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gdkpixbuf2.pixbuf_loader.PixbufLoader)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)loader);
+          if (!_obj)
+          {
+            auto _klass = cast(GdkPixbufLoaderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)loader);
+            if (_klass.areaUpdated)
+              return (cast(typeof(&_vfuncAreaUpdatedTramp))_klass.areaUpdated)(loader, x, y, width, height);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncAreaUpdated(x, y, width, height);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gdkpixbuf2.pixbuf_loader.PixbufLoader.vfuncAreaUpdated");
+          }
+        }
+
+        _klass.areaUpdated = cast(typeof(_klass.areaUpdated))&_vfuncAreaUpdatedTramp;
+        break;
+      }
+      case "closed":
+      {
+        static extern(C) void _vfuncClosedTramp(GdkPixbufLoader* loader) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gdkpixbuf2.pixbuf_loader.PixbufLoader)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)loader);
+          if (!_obj)
+          {
+            auto _klass = cast(GdkPixbufLoaderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)loader);
+            if (_klass.closed)
+              return (cast(typeof(&_vfuncClosedTramp))_klass.closed)(loader);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncClosed();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gdkpixbuf2.pixbuf_loader.PixbufLoader.vfuncClosed");
+          }
+        }
+
+        _klass.closed = cast(typeof(_klass.closed))&_vfuncClosedTramp;
+        break;
+      }
+      case "size_prepared":
+      {
+        static extern(C) void _vfuncSizePreparedTramp(GdkPixbufLoader* loader, int width, int height) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gdkpixbuf2.pixbuf_loader.PixbufLoader)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)loader);
+          if (!_obj)
+          {
+            auto _klass = cast(GdkPixbufLoaderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)loader);
+            if (_klass.sizePrepared)
+              return (cast(typeof(&_vfuncSizePreparedTramp))_klass.sizePrepared)(loader, width, height);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSizePrepared(width, height);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gdkpixbuf2.pixbuf_loader.PixbufLoader.vfuncSizePrepared");
+          }
+        }
+
+        _klass.sizePrepared = cast(typeof(_klass.sizePrepared))&_vfuncSizePreparedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

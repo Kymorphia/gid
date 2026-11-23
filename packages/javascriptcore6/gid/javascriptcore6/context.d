@@ -313,9 +313,16 @@ class Context : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    JSCContext* _cretval;
-    _cretval = jsc_context_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      JSCContext* _cretval;
+      _cretval = jsc_context_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -540,6 +547,7 @@ class Context : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _handlerCallback(JSCContext* context, JSCException* exception, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.javascriptcore6.types.ExceptionHandler*)userData;
 
       try

@@ -85,11 +85,18 @@ class NetworkSession : gid.gobject2.object.ObjectWrap
   */
   this(string dataDirectory = null, string cacheDirectory = null) nothrow
   {
-    WebKitNetworkSession* _cretval;
-    const(char)* _dataDirectory = dataDirectory.toCString!(No.Malloc, Yes.Nullable);
-    const(char)* _cacheDirectory = cacheDirectory.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = webkit_network_session_new(_dataDirectory, _cacheDirectory);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, dataDirectory !is null || cacheDirectory !is null), Yes.Take);
+    }
+    else
+    {
+      WebKitNetworkSession* _cretval;
+      const(char)* _dataDirectory = dataDirectory.toCString!(No.Malloc, Yes.Nullable);
+      const(char)* _cacheDirectory = cacheDirectory.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = webkit_network_session_new(_dataDirectory, _cacheDirectory);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -217,6 +224,7 @@ class NetworkSession : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -406,6 +414,7 @@ class NetworkSession : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

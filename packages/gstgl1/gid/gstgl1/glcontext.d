@@ -45,6 +45,15 @@ class GLContext : gid.gst1.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -88,9 +97,16 @@ class GLContext : gid.gst1.object.ObjectWrap
   */
   this(gid.gstgl1.gldisplay.GLDisplay display) nothrow
   {
-    GstGLContext* _cretval;
-    _cretval = gst_gl_context_new(display ? cast(GstGLDisplay*)display._cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GstGLContext* _cretval;
+      _cretval = gst_gl_context_new(display ? cast(GstGLDisplay*)display._cPtr(No.Dup) : null);
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -193,6 +209,282 @@ class GLContext : gid.gst1.object.ObjectWrap
     const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
     auto _retval = gst_gl_context_get_proc_address_with_platform(contextType, glApi, _name);
     return _retval;
+  }
+
+  /**
+      (De)activate the OpenGL context represented by this context.
+      
+      In OpenGL terms, calls eglMakeCurrent or similar with this context and the
+      currently set window.  See [gid.gstgl1.glcontext.GLContext.setWindow] for details.
+  
+      Params:
+        activate = true to activate, false to deactivate
+      Returns: Whether the activation succeeded
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncActivate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncActivate(bool activate)
+  {
+    auto _klass = cast(GstGLContextClass*)_vfuncClass;
+    if (!_klass.activate)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.activate(cast(GstGLContext*)this._cPtr, activate);
+    return _retval;
+  }
+
+  /**
+      Check for an OpenGL feature being supported.
+      
+      Note: Most features require that the context be created before it is
+      possible to determine their existence and so will fail if that is not the
+      case.
+  
+      Params:
+        feature = a platform specific feature
+      Returns: Whether feature is supported by context
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCheckFeature` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncCheckFeature(string feature)
+  {
+    auto _klass = cast(GstGLContextClass*)_vfuncClass;
+    if (!_klass.checkFeature)
+      return typeof(return).init;
+
+    bool _retval;
+    const(char)* _feature = feature.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)_klass.checkFeature(cast(GstGLContext*)this._cPtr, _feature);
+    return _retval;
+  }
+
+  /**
+      choose a format for the framebuffer
+      Returns: 
+      Throws: [ErrorWrap]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncChooseFormat` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncChooseFormat()
+  {
+    auto _klass = cast(GstGLContextClass*)_vfuncClass;
+    if (!_klass.chooseFormat)
+      return typeof(return).init;
+
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)_klass.chooseFormat(cast(GstGLContext*)this._cPtr, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      create the OpenGL context
+  
+      Params:
+        glApi = 
+        otherContext = 
+      Returns: 
+      Throws: [ErrorWrap]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCreateContext` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncCreateContext(gid.gstgl1.types.GLAPI glApi, gid.gstgl1.glcontext.GLContext otherContext)
+  {
+    auto _klass = cast(GstGLContextClass*)_vfuncClass;
+    if (!_klass.createContext)
+      return typeof(return).init;
+
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)_klass.createContext(cast(GstGLContext*)this._cPtr, glApi, otherContext ? cast(GstGLContext*)otherContext._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      destroy the OpenGL context
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDestroyContext` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDestroyContext()
+  {
+    auto _klass = cast(GstGLContextClass*)_vfuncClass;
+    if (!_klass.destroyContext)
+      return;
+
+    _klass.destroyContext(cast(GstGLContext*)this._cPtr);
+  }
+
+  /**
+      Retrieve the OpenGL configuration for this context.  The context must
+      have been successfully created for this function to return a valid value.
+      
+      Not all implementations currently support retrieving the config and will
+      return null when not supported.
+      Returns: the configuration chosen for this OpenGL context.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetConfig` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.structure.Structure vfuncGetConfig()
+  {
+    auto _klass = cast(GstGLContextClass*)_vfuncClass;
+    if (!_klass.getConfig)
+      return typeof(return).init;
+
+    GstStructure* _cretval;
+    _cretval = _klass.getConfig(cast(GstGLContext*)this._cPtr);
+    auto _retval = _cretval ? new gid.gst1.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Get the currently enabled OpenGL api.
+      
+      The currently available API may be limited by the #GstGLDisplay in use and/or
+      the #GstGLWindow chosen.
+      Returns: the available OpenGL api
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetGlApi` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gstgl1.types.GLAPI vfuncGetGlApi()
+  {
+    auto _klass = cast(GstGLContextClass*)_vfuncClass;
+    if (!_klass.getGlApi)
+      return typeof(return).init;
+
+    GstGLAPI _cretval;
+    _cretval = _klass.getGlApi(cast(GstGLContext*)this._cPtr);
+    gid.gstgl1.types.GLAPI _retval = cast(gid.gstgl1.types.GLAPI)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the backing OpenGL context used by context.
+      Returns: The platform specific backing OpenGL context
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetGlContext` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected size_t vfuncGetGlContext()
+  {
+    auto _klass = cast(GstGLContextClass*)_vfuncClass;
+    if (!_klass.getGlContext)
+      return typeof(return).init;
+
+    size_t _retval;
+    _retval = _klass.getGlContext(cast(GstGLContext*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the OpenGL platform that used by context.
+      Returns: The platform specific backing OpenGL context
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetGlPlatform` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gstgl1.types.GLPlatform vfuncGetGlPlatform()
+  {
+    auto _klass = cast(GstGLContextClass*)_vfuncClass;
+    if (!_klass.getGlPlatform)
+      return typeof(return).init;
+
+    GstGLPlatform _cretval;
+    _cretval = _klass.getGlPlatform(cast(GstGLContext*)this._cPtr);
+    gid.gstgl1.types.GLPlatform _retval = cast(gid.gstgl1.types.GLPlatform)_cretval;
+    return _retval;
+  }
+
+  /**
+      Get the version of the OpenGL platform (GLX, EGL, etc) used.  Only valid
+      after a call to [gid.gstgl1.glcontext.GLContext.create].
+  
+      Params:
+        major = return for the major version
+        minor = return for the minor version
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetGlPlatformVersion` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncGetGlPlatformVersion(out int major, out int minor)
+  {
+    auto _klass = cast(GstGLContextClass*)_vfuncClass;
+    if (!_klass.getGlPlatformVersion)
+      return;
+
+    _klass.getGlPlatformVersion(cast(GstGLContext*)this._cPtr, cast(int*)&major, cast(int*)&minor);
+  }
+
+  /**
+      Set the OpenGL configuration for this context.  The context must not
+      have been created for this function to succeed.  Setting a null
+      config has the affect of removing any specific configuration request.
+      
+      Not all implementations currently support retrieving the config and this
+      function will return FALSE when not supported.
+      
+      Note that calling this function may cause a subsequent
+      [gid.gstgl1.glcontext.GLContext.create] to fail if config could not be matched with
+      the platform-specific configuration.
+      
+      Note that the actual config used may be differ from the requested values.
+  
+      Params:
+        glConfig = a configuration structure for
+                      configuring the OpenGL context
+      Returns: whether gl_config could be successfully set on context
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRequestConfig` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncRequestConfig(gid.gst1.structure.Structure glConfig = null)
+  {
+    auto _klass = cast(GstGLContextClass*)_vfuncClass;
+    if (!_klass.requestConfig)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.requestConfig(cast(GstGLContext*)this._cPtr, glConfig ? cast(GstStructure*)glConfig._cPtr(Yes.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Swap the front and back buffers on the window attached to context.
+      This will display the frame on the next refresh cycle.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSwapBuffers` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSwapBuffers()
+  {
+    auto _klass = cast(GstGLContextClass*)_vfuncClass;
+    if (!_klass.swapBuffers)
+      return;
+
+    _klass.swapBuffers(cast(GstGLContext*)this._cPtr);
   }
 
   /**
@@ -597,6 +889,7 @@ class GLContext : gid.gst1.object.ObjectWrap
   {
     extern(C) void _funcCallback(GstGLContext* context, void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gstgl1.types.GLContextThreadFunc*)data;
 
       try
@@ -611,6 +904,436 @@ class GLContext : gid.gst1.object.ObjectWrap
     auto _funcCB = func ? &_funcCallback : null;
     auto _func = func ? cast(void*)&(func) : null;
     gst_gl_context_thread_add(cast(GstGLContext*)this._cPtr, _funcCB, _func);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from GLContext
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gstgl1.glcontext.GLContext), T.stringof ~ " is not derived from gid.gstgl1.glcontext.GLContext");
+
+    gid.gst1.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivate", true)[0]) == gid.gstgl1.glcontext.GLContext))
+      _installVfunc(klass, "activate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCheckFeature", true)[0]) == gid.gstgl1.glcontext.GLContext))
+      _installVfunc(klass, "check_feature");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChooseFormat", true)[0]) == gid.gstgl1.glcontext.GLContext))
+      _installVfunc(klass, "choose_format");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCreateContext", true)[0]) == gid.gstgl1.glcontext.GLContext))
+      _installVfunc(klass, "create_context");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDestroyContext", true)[0]) == gid.gstgl1.glcontext.GLContext))
+      _installVfunc(klass, "destroy_context");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetConfig", true)[0]) == gid.gstgl1.glcontext.GLContext))
+      _installVfunc(klass, "get_config");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetGlApi", true)[0]) == gid.gstgl1.glcontext.GLContext))
+      _installVfunc(klass, "get_gl_api");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetGlContext", true)[0]) == gid.gstgl1.glcontext.GLContext))
+      _installVfunc(klass, "get_gl_context");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetGlPlatform", true)[0]) == gid.gstgl1.glcontext.GLContext))
+      _installVfunc(klass, "get_gl_platform");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetGlPlatformVersion", true)[0]) == gid.gstgl1.glcontext.GLContext))
+      _installVfunc(klass, "get_gl_platform_version");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRequestConfig", true)[0]) == gid.gstgl1.glcontext.GLContext))
+      _installVfunc(klass, "request_config");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSwapBuffers", true)[0]) == gid.gstgl1.glcontext.GLContext))
+      _installVfunc(klass, "swap_buffers");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstGLContextClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate":
+      {
+        static extern(C) gboolean _vfuncActivateTramp(GstGLContext* context, gboolean activate) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.activate)
+              return (cast(typeof(&_vfuncActivateTramp))_klass.activate)(context, activate);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncActivate(cast(bool)activate);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.glcontext.GLContext.vfuncActivate");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.activate = cast(typeof(_klass.activate))&_vfuncActivateTramp;
+        break;
+      }
+      case "check_feature":
+      {
+        static extern(C) gboolean _vfuncCheckFeatureTramp(GstGLContext* context, const(char)* feature) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.checkFeature)
+              return (cast(typeof(&_vfuncCheckFeatureTramp))_klass.checkFeature)(context, feature);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          string _feature = feature.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncCheckFeature(_feature);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.glcontext.GLContext.vfuncCheckFeature");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.checkFeature = cast(typeof(_klass.checkFeature))&_vfuncCheckFeatureTramp;
+        break;
+      }
+      case "choose_format":
+      {
+        static extern(C) gboolean _vfuncChooseFormatTramp(GstGLContext* context, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.chooseFormat)
+              return (cast(typeof(&_vfuncChooseFormatTramp))_klass.chooseFormat)(context, _err);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncChooseFormat();
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.chooseFormat = cast(typeof(_klass.chooseFormat))&_vfuncChooseFormatTramp;
+        break;
+      }
+      case "create_context":
+      {
+        static extern(C) gboolean _vfuncCreateContextTramp(GstGLContext* context, GstGLAPI glApi, GstGLContext* otherContext, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.createContext)
+              return (cast(typeof(&_vfuncCreateContextTramp))_klass.createContext)(context, glApi, otherContext, _err);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCreateContext(glApi, gid.gobject2.object.ObjectWrap._getDObject!(gid.gstgl1.glcontext.GLContext)(cast(void*)otherContext, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.createContext = cast(typeof(_klass.createContext))&_vfuncCreateContextTramp;
+        break;
+      }
+      case "destroy_context":
+      {
+        static extern(C) void _vfuncDestroyContextTramp(GstGLContext* context) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.destroyContext)
+              return (cast(typeof(&_vfuncDestroyContextTramp))_klass.destroyContext)(context);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDestroyContext();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.glcontext.GLContext.vfuncDestroyContext");
+          }
+        }
+
+        _klass.destroyContext = cast(typeof(_klass.destroyContext))&_vfuncDestroyContextTramp;
+        break;
+      }
+      case "get_config":
+      {
+        static extern(C) GstStructure* _vfuncGetConfigTramp(GstGLContext* context) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.getConfig)
+              return (cast(typeof(&_vfuncGetConfigTramp))_klass.getConfig)(context);
+            return typeof(return).init;
+          }
+
+          gid.gst1.structure.Structure _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetConfig();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.glcontext.GLContext.vfuncGetConfig");
+          }
+          auto _retval = _dretval ? cast(GstStructure*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getConfig = cast(typeof(_klass.getConfig))&_vfuncGetConfigTramp;
+        break;
+      }
+      case "get_gl_api":
+      {
+        static extern(C) GstGLAPI _vfuncGetGlApiTramp(GstGLContext* context) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.getGlApi)
+              return (cast(typeof(&_vfuncGetGlApiTramp))_klass.getGlApi)(context);
+            return typeof(return).init;
+          }
+
+          gid.gstgl1.types.GLAPI _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetGlApi();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.glcontext.GLContext.vfuncGetGlApi");
+          }
+          auto _retval = cast(GstGLAPI)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getGlApi = cast(typeof(_klass.getGlApi))&_vfuncGetGlApiTramp;
+        break;
+      }
+      case "get_gl_context":
+      {
+        static extern(C) size_t _vfuncGetGlContextTramp(GstGLContext* context) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.getGlContext)
+              return (cast(typeof(&_vfuncGetGlContextTramp))_klass.getGlContext)(context);
+            return typeof(return).init;
+          }
+
+          size_t _retval;
+
+          try
+          {
+            _retval = _obj.vfuncGetGlContext();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.glcontext.GLContext.vfuncGetGlContext");
+          }
+          return _retval;
+        }
+
+        _klass.getGlContext = cast(typeof(_klass.getGlContext))&_vfuncGetGlContextTramp;
+        break;
+      }
+      case "get_gl_platform":
+      {
+        static extern(C) GstGLPlatform _vfuncGetGlPlatformTramp(GstGLContext* context) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.getGlPlatform)
+              return (cast(typeof(&_vfuncGetGlPlatformTramp))_klass.getGlPlatform)(context);
+            return typeof(return).init;
+          }
+
+          gid.gstgl1.types.GLPlatform _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetGlPlatform();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.glcontext.GLContext.vfuncGetGlPlatform");
+          }
+          auto _retval = cast(GstGLPlatform)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getGlPlatform = cast(typeof(_klass.getGlPlatform))&_vfuncGetGlPlatformTramp;
+        break;
+      }
+      case "get_gl_platform_version":
+      {
+        static extern(C) void _vfuncGetGlPlatformVersionTramp(GstGLContext* context, int* major, int* minor) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.getGlPlatformVersion)
+              return (cast(typeof(&_vfuncGetGlPlatformVersionTramp))_klass.getGlPlatformVersion)(context, major, minor);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncGetGlPlatformVersion(*major, *minor);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.glcontext.GLContext.vfuncGetGlPlatformVersion");
+          }
+        }
+
+        _klass.getGlPlatformVersion = cast(typeof(_klass.getGlPlatformVersion))&_vfuncGetGlPlatformVersionTramp;
+        break;
+      }
+      case "request_config":
+      {
+        static extern(C) gboolean _vfuncRequestConfigTramp(GstGLContext* context, GstStructure* glConfig) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.requestConfig)
+              return (cast(typeof(&_vfuncRequestConfigTramp))_klass.requestConfig)(context, glConfig);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncRequestConfig(glConfig ? new gid.gst1.structure.Structure(cast(void*)glConfig, Yes.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.glcontext.GLContext.vfuncRequestConfig");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.requestConfig = cast(typeof(_klass.requestConfig))&_vfuncRequestConfigTramp;
+        break;
+      }
+      case "swap_buffers":
+      {
+        static extern(C) void _vfuncSwapBuffersTramp(GstGLContext* context) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstgl1.glcontext.GLContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GstGLContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.swapBuffers)
+              return (cast(typeof(&_vfuncSwapBuffersTramp))_klass.swapBuffers)(context);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSwapBuffers();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.glcontext.GLContext.vfuncSwapBuffers");
+          }
+        }
+
+        _klass.swapBuffers = cast(typeof(_klass.swapBuffers))&_vfuncSwapBuffersTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

@@ -66,9 +66,16 @@ class SharedTaskPool : gid.gst1.task_pool.TaskPool
   */
   this() nothrow
   {
-    GstTaskPool* _cretval;
-    _cretval = gst_shared_task_pool_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GstTaskPool* _cretval;
+      _cretval = gst_shared_task_pool_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /** */

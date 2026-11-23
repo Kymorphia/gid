@@ -493,9 +493,16 @@ class Builder : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GtkBuilder* _cretval;
-    _cretval = gtk_builder_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkBuilder* _cretval;
+      _cretval = gtk_builder_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

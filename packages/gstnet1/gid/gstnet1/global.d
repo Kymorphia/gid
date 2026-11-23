@@ -195,6 +195,7 @@ gulong ptpStatisticsCallbackAdd(gid.gstnet1.types.PtpStatisticsCallback callback
 {
   extern(C) gboolean _callbackCallback(ubyte domain, const(GstStructure)* stats, void* userData) nothrow
   {
+    gidAttachThread();
     bool _dretval;
     auto _dlg = cast(gid.gstnet1.types.PtpStatisticsCallback*)userData;
 

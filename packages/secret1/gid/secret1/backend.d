@@ -55,6 +55,7 @@ interface Backend : gid.gio2.async_initable.AsyncInitable
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -91,6 +92,11 @@ interface Backend : gid.gio2.async_initable.AsyncInitable
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.secret1.backend.Backend)(cast(SecretBackend*)_cretval, Yes.Take);
     return _retval;
   }
+
+
+
+
+
 }
 
 /// Fluent builder implementation template for [gid.secret1.backend.Backend]

@@ -140,11 +140,18 @@ class Snippet : gid.gobject2.object.ObjectWrap
   */
   this(string trigger = null, string languageId = null) nothrow
   {
-    GtkSourceSnippet* _cretval;
-    const(char)* _trigger = trigger.toCString!(No.Malloc, Yes.Nullable);
-    const(char)* _languageId = languageId.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gtk_source_snippet_new(_trigger, _languageId);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, trigger !is null || languageId !is null), Yes.Take);
+    }
+    else
+    {
+      GtkSourceSnippet* _cretval;
+      const(char)* _trigger = trigger.toCString!(No.Malloc, Yes.Nullable);
+      const(char)* _languageId = languageId.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gtk_source_snippet_new(_trigger, _languageId);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

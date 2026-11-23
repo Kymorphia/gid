@@ -62,6 +62,15 @@ class Task : gid.gst1.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -119,25 +128,33 @@ class Task : gid.gst1.object.ObjectWrap
   */
   this(gid.gst1.types.TaskFunction func) nothrow
   {
-    extern(C) void _funcCallback(void* userData) nothrow
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
     {
-      auto _dlg = cast(gid.gst1.types.TaskFunction*)userData;
-
-      try
-      {
-        (*_dlg)();
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "gid.gst1.types.TaskFunction");
-      }
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }
-    auto _funcCB = func ? &_funcCallback : null;
-    GstTask* _cretval;
-    auto _func = func ? freezeDelegate(cast(void*)&func) : null;
-    GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    _cretval = gst_task_new(_funcCB, _func, _funcDestroyCB);
-    this(_cretval, Yes.Take);
+    else
+    {
+      extern(C) void _funcCallback(void* userData) nothrow
+      {
+        gidAttachThread();
+        auto _dlg = cast(gid.gst1.types.TaskFunction*)userData;
+
+        try
+        {
+          (*_dlg)();
+        }
+        catch (Exception e)
+        {
+          gidInvokeCallbackExceptionHandler(e, "gid.gst1.types.TaskFunction");
+        }
+      }
+      auto _funcCB = func ? &_funcCallback : null;
+      GstTask* _cretval;
+      auto _func = func ? freezeDelegate(cast(void*)&func) : null;
+      GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
+      _cretval = gst_task_new(_funcCB, _func, _funcDestroyCB);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -243,6 +260,7 @@ class Task : gid.gst1.object.ObjectWrap
   {
     extern(C) void _enterFuncCallback(GstTask* task, GThread* thread, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gst1.types.TaskThreadFunc*)userData;
       auto _thread = thread ? new gid.glib2.thread.Thread(cast(void*)thread, Yes.Take)._cBorrow : null;
 
@@ -276,6 +294,7 @@ class Task : gid.gst1.object.ObjectWrap
   {
     extern(C) void _leaveFuncCallback(GstTask* task, GThread* thread, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gst1.types.TaskThreadFunc*)userData;
       auto _thread = thread ? new gid.glib2.thread.Thread(cast(void*)thread, Yes.Take)._cBorrow : null;
 

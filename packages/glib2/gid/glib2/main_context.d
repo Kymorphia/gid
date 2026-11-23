@@ -230,6 +230,7 @@ class MainContext : gid.gobject2.boxed.BoxedWrap!(g_main_context_get_type)
   {
     extern(C) gboolean _function_Callback(void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.glib2.types.SourceFunc*)userData;
 

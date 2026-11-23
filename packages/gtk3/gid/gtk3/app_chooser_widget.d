@@ -8,6 +8,7 @@ import gid.core.utils;
 import gid.gio2.app_info;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;
+import gid.gobject2.object;
 import gid.gtk3.app_chooser;
 import gid.gtk3.app_chooser_mixin;
 import gid.gtk3.box;
@@ -15,6 +16,7 @@ import gid.gtk3.buildable;
 import gid.gtk3.buildable_mixin;
 import gid.gtk3.c.functions;
 import gid.gtk3.c.types;
+import gid.gtk3.container;
 import gid.gtk3.menu;
 import gid.gtk3.orientable;
 import gid.gtk3.orientable_mixin;
@@ -51,6 +53,15 @@ class AppChooserWidget : gid.gtk3.box.Box, gid.gtk3.app_chooser.AppChooser
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
   }
 
   /** */
@@ -247,10 +258,78 @@ class AppChooserWidget : gid.gtk3.box.Box, gid.gtk3.app_chooser.AppChooser
   */
   this(string contentType) nothrow
   {
-    GtkWidget* _cretval;
-    const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
-    _cretval = gtk_app_chooser_widget_new(_contentType);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
+      _cretval = gtk_app_chooser_widget_new(_contentType);
+      this(_cretval, No.Take);
+    }
+  }
+
+  /**
+      Signal emitted when an application item is
+         activated from the widget’s list.
+  
+      Params:
+        appInfo = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncApplicationActivated` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncApplicationActivated(gid.gio2.app_info.AppInfo appInfo)
+  {
+    auto _klass = cast(GtkAppChooserWidgetClass*)_vfuncClass;
+    if (!_klass.applicationActivated)
+      return;
+
+    _klass.applicationActivated(cast(GtkAppChooserWidget*)this._cPtr, appInfo ? cast(GAppInfo*)(cast(gid.gobject2.object.ObjectWrap)appInfo)._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Signal emitted when an application item is
+         selected from the widget’s list.
+  
+      Params:
+        appInfo = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncApplicationSelected` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncApplicationSelected(gid.gio2.app_info.AppInfo appInfo)
+  {
+    auto _klass = cast(GtkAppChooserWidgetClass*)_vfuncClass;
+    if (!_klass.applicationSelected)
+      return;
+
+    _klass.applicationSelected(cast(GtkAppChooserWidget*)this._cPtr, appInfo ? cast(GAppInfo*)(cast(gid.gobject2.object.ObjectWrap)appInfo)._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Signal emitted when a context menu is about to
+         popup over an application item.
+  
+      Params:
+        menu = 
+        appInfo = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPopulatePopup` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncPopulatePopup(gid.gtk3.menu.Menu menu, gid.gio2.app_info.AppInfo appInfo)
+  {
+    auto _klass = cast(GtkAppChooserWidgetClass*)_vfuncClass;
+    if (!_klass.populatePopup)
+      return;
+
+    _klass.populatePopup(cast(GtkAppChooserWidget*)this._cPtr, menu ? cast(GtkMenu*)menu._cPtr(No.Dup) : null, appInfo ? cast(GAppInfo*)(cast(gid.gobject2.object.ObjectWrap)appInfo)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -429,6 +508,7 @@ class AppChooserWidget : gid.gtk3.box.Box, gid.gtk3.app_chooser.AppChooser
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -479,6 +559,7 @@ class AppChooserWidget : gid.gtk3.box.Box, gid.gtk3.app_chooser.AppChooser
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -535,6 +616,7 @@ class AppChooserWidget : gid.gtk3.box.Box, gid.gtk3.app_chooser.AppChooser
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -560,6 +642,122 @@ class AppChooserWidget : gid.gtk3.box.Box, gid.gtk3.app_chooser.AppChooser
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("populate-popup", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from AppChooserWidget
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.app_chooser_widget.AppChooserWidget), T.stringof ~ " is not derived from gid.gtk3.app_chooser_widget.AppChooserWidget");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncApplicationActivated", true)[0]) == gid.gtk3.app_chooser_widget.AppChooserWidget))
+      _installVfunc(klass, "application_activated");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncApplicationSelected", true)[0]) == gid.gtk3.app_chooser_widget.AppChooserWidget))
+      _installVfunc(klass, "application_selected");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPopulatePopup", true)[0]) == gid.gtk3.app_chooser_widget.AppChooserWidget))
+      _installVfunc(klass, "populate_popup");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkAppChooserWidgetClass*)klass;
+
+    switch (vfunc)
+    {
+      case "application_activated":
+      {
+        static extern(C) void _vfuncApplicationActivatedTramp(GtkAppChooserWidget* self, GAppInfo* appInfo) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.app_chooser_widget.AppChooserWidget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkAppChooserWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.applicationActivated)
+              return (cast(typeof(&_vfuncApplicationActivatedTramp))_klass.applicationActivated)(self, appInfo);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncApplicationActivated(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.app_info.AppInfo)(cast(void*)appInfo, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.app_chooser_widget.AppChooserWidget.vfuncApplicationActivated");
+          }
+        }
+
+        _klass.applicationActivated = cast(typeof(_klass.applicationActivated))&_vfuncApplicationActivatedTramp;
+        break;
+      }
+      case "application_selected":
+      {
+        static extern(C) void _vfuncApplicationSelectedTramp(GtkAppChooserWidget* self, GAppInfo* appInfo) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.app_chooser_widget.AppChooserWidget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkAppChooserWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.applicationSelected)
+              return (cast(typeof(&_vfuncApplicationSelectedTramp))_klass.applicationSelected)(self, appInfo);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncApplicationSelected(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.app_info.AppInfo)(cast(void*)appInfo, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.app_chooser_widget.AppChooserWidget.vfuncApplicationSelected");
+          }
+        }
+
+        _klass.applicationSelected = cast(typeof(_klass.applicationSelected))&_vfuncApplicationSelectedTramp;
+        break;
+      }
+      case "populate_popup":
+      {
+        static extern(C) void _vfuncPopulatePopupTramp(GtkAppChooserWidget* self, GtkMenu* menu, GAppInfo* appInfo) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.app_chooser_widget.AppChooserWidget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkAppChooserWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.populatePopup)
+              return (cast(typeof(&_vfuncPopulatePopupTramp))_klass.populatePopup)(self, menu, appInfo);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPopulatePopup(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.menu.Menu)(cast(void*)menu, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.app_info.AppInfo)(cast(void*)appInfo, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.app_chooser_widget.AppChooserWidget.vfuncPopulatePopup");
+          }
+        }
+
+        _klass.populatePopup = cast(typeof(_klass.populatePopup))&_vfuncPopulatePopupTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

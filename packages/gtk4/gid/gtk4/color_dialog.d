@@ -140,9 +140,16 @@ class ColorDialog : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GtkColorDialog* _cretval;
-    _cretval = gtk_color_dialog_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkColorDialog* _cretval;
+      _cretval = gtk_color_dialog_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -159,6 +166,7 @@ class ColorDialog : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 

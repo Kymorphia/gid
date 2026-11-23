@@ -10,6 +10,7 @@ import gid.gmime3.c.types;
 import gid.gmime3.content_disposition;
 import gid.gmime3.content_type;
 import gid.gmime3.format_options;
+import gid.gmime3.header;
 import gid.gmime3.header_list;
 import gid.gmime3.internet_address_list;
 import gid.gmime3.parser_options;
@@ -29,6 +30,15 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
   }
 
   /** */
@@ -82,9 +92,16 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
   */
   this(gid.gmime3.parser_options.ParserOptions options, gid.gmime3.content_type.ContentType contentType) nothrow
   {
-    GMimeObject* _cretval;
-    _cretval = g_mime_object_new(options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null, contentType ? cast(GMimeContentType*)contentType._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GMimeObject* _cretval;
+      _cretval = g_mime_object_new(options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null, contentType ? cast(GMimeContentType*)contentType._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -141,6 +158,125 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
   static void typeRegistryShutdown() nothrow
   {
     g_mime_object_type_registry_shutdown();
+  }
+
+  /**
+      Calculates and sets the most efficient Content-Transfer-Encoding
+      for this #GMimeObject and all child parts based on the constraint
+      provided.
+  
+      Params:
+        constraint = a #GMimeEncodingConstraint
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncEncode` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncEncode(gid.gmime3.types.EncodingConstraint constraint)
+  {
+    auto _klass = cast(GMimeObjectClass*)_vfuncClass;
+    if (!_klass.encode)
+      return;
+
+    _klass.encode(cast(GMimeObject*)this._cPtr, constraint);
+  }
+
+  /**
+      Allocates a string buffer containing all of the MIME object's raw
+      headers.
+  
+      Params:
+        options = a #GMimeFormatOptions or null (modified in place, changes are seen by the caller)
+      Returns: an allocated string containing all of the raw MIME headers.
+        
+        Note: The returned string will not be suitable for display.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetHeaders` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected string vfuncGetHeaders(gid.gmime3.format_options.FormatOptions options = null)
+  {
+    auto _klass = cast(GMimeObjectClass*)_vfuncClass;
+    if (!_klass.getHeaders)
+      return typeof(return).init;
+
+    char* _cretval;
+    _cretval = _klass.getHeaders(cast(GMimeObject*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncHeaderAdded(gid.gmime3.header.Header header)
+  {
+    auto _klass = cast(GMimeObjectClass*)_vfuncClass;
+    if (!_klass.headerAdded)
+      return;
+
+    _klass.headerAdded(cast(GMimeObject*)this._cPtr, header ? cast(GMimeHeader*)header._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncHeaderChanged(gid.gmime3.header.Header header)
+  {
+    auto _klass = cast(GMimeObjectClass*)_vfuncClass;
+    if (!_klass.headerChanged)
+      return;
+
+    _klass.headerChanged(cast(GMimeObject*)this._cPtr, header ? cast(GMimeHeader*)header._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncHeaderRemoved(gid.gmime3.header.Header header)
+  {
+    auto _klass = cast(GMimeObjectClass*)_vfuncClass;
+    if (!_klass.headerRemoved)
+      return;
+
+    _klass.headerRemoved(cast(GMimeObject*)this._cPtr, header ? cast(GMimeHeader*)header._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncHeadersCleared()
+  {
+    auto _klass = cast(GMimeObjectClass*)_vfuncClass;
+    if (!_klass.headersCleared)
+      return;
+
+    _klass.headersCleared(cast(GMimeObject*)this._cPtr);
+  }
+
+  /**
+      Sets the content-type for the specified MIME object and then
+      serializes it to the Content-Type header field.
+  
+      Params:
+        contentType = a #GMimeContentType object
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetContentType` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSetContentType(gid.gmime3.content_type.ContentType contentType)
+  {
+    auto _klass = cast(GMimeObjectClass*)_vfuncClass;
+    if (!_klass.setContentType)
+      return;
+
+    _klass.setContentType(cast(GMimeObject*)this._cPtr, contentType ? cast(GMimeContentType*)contentType._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected ptrdiff_t vfuncWriteToStream(gid.gmime3.format_options.FormatOptions options, bool contentOnly, gid.gmime3.stream.Stream stream)
+  {
+    auto _klass = cast(GMimeObjectClass*)_vfuncClass;
+    if (!_klass.writeToStream)
+      return typeof(return).init;
+
+    ptrdiff_t _retval;
+    _retval = _klass.writeToStream(cast(GMimeObject*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, contentOnly, stream ? cast(GMimeStream*)stream._cPtr(No.Dup) : null);
+    return _retval;
   }
 
   /**
@@ -535,6 +671,287 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
     ptrdiff_t _retval;
     _retval = g_mime_object_write_to_stream(cast(GMimeObject*)this._cPtr, options ? cast(GMimeFormatOptions*)options._cPtr(No.Dup) : null, stream ? cast(GMimeStream*)stream._cPtr(No.Dup) : null);
     return _retval;
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from ObjectWrap
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gmime3.object.ObjectWrap), T.stringof ~ " is not derived from gid.gmime3.object.ObjectWrap");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEncode", true)[0]) == gid.gmime3.object.ObjectWrap))
+      _installVfunc(klass, "encode");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetHeaders", true)[0]) == gid.gmime3.object.ObjectWrap))
+      _installVfunc(klass, "get_headers");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHeaderAdded", true)[0]) == gid.gmime3.object.ObjectWrap))
+      _installVfunc(klass, "header_added");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHeaderChanged", true)[0]) == gid.gmime3.object.ObjectWrap))
+      _installVfunc(klass, "header_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHeaderRemoved", true)[0]) == gid.gmime3.object.ObjectWrap))
+      _installVfunc(klass, "header_removed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHeadersCleared", true)[0]) == gid.gmime3.object.ObjectWrap))
+      _installVfunc(klass, "headers_cleared");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetContentType", true)[0]) == gid.gmime3.object.ObjectWrap))
+      _installVfunc(klass, "set_content_type");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncWriteToStream", true)[0]) == gid.gmime3.object.ObjectWrap))
+      _installVfunc(klass, "write_to_stream");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GMimeObjectClass*)klass;
+
+    switch (vfunc)
+    {
+      case "encode":
+      {
+        static extern(C) void _vfuncEncodeTramp(GMimeObject* object, GMimeEncodingConstraint constraint) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gmime3.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          if (!_obj)
+          {
+            auto _klass = cast(GMimeObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);
+            if (_klass.encode)
+              return (cast(typeof(&_vfuncEncodeTramp))_klass.encode)(object, constraint);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncEncode(constraint);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gmime3.object.ObjectWrap.vfuncEncode");
+          }
+        }
+
+        _klass.encode = cast(typeof(_klass.encode))&_vfuncEncodeTramp;
+        break;
+      }
+      case "get_headers":
+      {
+        static extern(C) char* _vfuncGetHeadersTramp(GMimeObject* object, GMimeFormatOptions* options) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gmime3.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          if (!_obj)
+          {
+            auto _klass = cast(GMimeObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);
+            if (_klass.getHeaders)
+              return (cast(typeof(&_vfuncGetHeadersTramp))_klass.getHeaders)(object, options);
+            return typeof(return).init;
+          }
+
+          string _dretval;
+          auto _options = options ? new gid.gmime3.format_options.FormatOptions(cast(void*)options, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncGetHeaders(_options);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gmime3.object.ObjectWrap.vfuncGetHeaders");
+          }
+          auto _retval = toCString!(Yes.Malloc, No.Nullable)(_dretval);
+          if (_options)
+            _options._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.getHeaders = cast(typeof(_klass.getHeaders))&_vfuncGetHeadersTramp;
+        break;
+      }
+      case "header_added":
+      {
+        static extern(C) void _vfuncHeaderAddedTramp(GMimeObject* object, GMimeHeader* header) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gmime3.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          if (!_obj)
+          {
+            auto _klass = cast(GMimeObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);
+            if (_klass.headerAdded)
+              return (cast(typeof(&_vfuncHeaderAddedTramp))_klass.headerAdded)(object, header);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncHeaderAdded(gid.gobject2.object.ObjectWrap._getDObject!(gid.gmime3.header.Header)(cast(void*)header, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gmime3.object.ObjectWrap.vfuncHeaderAdded");
+          }
+        }
+
+        _klass.headerAdded = cast(typeof(_klass.headerAdded))&_vfuncHeaderAddedTramp;
+        break;
+      }
+      case "header_changed":
+      {
+        static extern(C) void _vfuncHeaderChangedTramp(GMimeObject* object, GMimeHeader* header) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gmime3.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          if (!_obj)
+          {
+            auto _klass = cast(GMimeObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);
+            if (_klass.headerChanged)
+              return (cast(typeof(&_vfuncHeaderChangedTramp))_klass.headerChanged)(object, header);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncHeaderChanged(gid.gobject2.object.ObjectWrap._getDObject!(gid.gmime3.header.Header)(cast(void*)header, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gmime3.object.ObjectWrap.vfuncHeaderChanged");
+          }
+        }
+
+        _klass.headerChanged = cast(typeof(_klass.headerChanged))&_vfuncHeaderChangedTramp;
+        break;
+      }
+      case "header_removed":
+      {
+        static extern(C) void _vfuncHeaderRemovedTramp(GMimeObject* object, GMimeHeader* header) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gmime3.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          if (!_obj)
+          {
+            auto _klass = cast(GMimeObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);
+            if (_klass.headerRemoved)
+              return (cast(typeof(&_vfuncHeaderRemovedTramp))_klass.headerRemoved)(object, header);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncHeaderRemoved(gid.gobject2.object.ObjectWrap._getDObject!(gid.gmime3.header.Header)(cast(void*)header, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gmime3.object.ObjectWrap.vfuncHeaderRemoved");
+          }
+        }
+
+        _klass.headerRemoved = cast(typeof(_klass.headerRemoved))&_vfuncHeaderRemovedTramp;
+        break;
+      }
+      case "headers_cleared":
+      {
+        static extern(C) void _vfuncHeadersClearedTramp(GMimeObject* object) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gmime3.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          if (!_obj)
+          {
+            auto _klass = cast(GMimeObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);
+            if (_klass.headersCleared)
+              return (cast(typeof(&_vfuncHeadersClearedTramp))_klass.headersCleared)(object);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncHeadersCleared();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gmime3.object.ObjectWrap.vfuncHeadersCleared");
+          }
+        }
+
+        _klass.headersCleared = cast(typeof(_klass.headersCleared))&_vfuncHeadersClearedTramp;
+        break;
+      }
+      case "set_content_type":
+      {
+        static extern(C) void _vfuncSetContentTypeTramp(GMimeObject* object, GMimeContentType* contentType) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gmime3.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          if (!_obj)
+          {
+            auto _klass = cast(GMimeObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);
+            if (_klass.setContentType)
+              return (cast(typeof(&_vfuncSetContentTypeTramp))_klass.setContentType)(object, contentType);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSetContentType(gid.gobject2.object.ObjectWrap._getDObject!(gid.gmime3.content_type.ContentType)(cast(void*)contentType, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gmime3.object.ObjectWrap.vfuncSetContentType");
+          }
+        }
+
+        _klass.setContentType = cast(typeof(_klass.setContentType))&_vfuncSetContentTypeTramp;
+        break;
+      }
+      case "write_to_stream":
+      {
+        static extern(C) ptrdiff_t _vfuncWriteToStreamTramp(GMimeObject* object, GMimeFormatOptions* options, gboolean contentOnly, GMimeStream* stream) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gmime3.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          if (!_obj)
+          {
+            auto _klass = cast(GMimeObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);
+            if (_klass.writeToStream)
+              return (cast(typeof(&_vfuncWriteToStreamTramp))_klass.writeToStream)(object, options, contentOnly, stream);
+            return typeof(return).init;
+          }
+
+          ptrdiff_t _retval;
+          auto _options = options ? new gid.gmime3.format_options.FormatOptions(cast(void*)options, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _retval = _obj.vfuncWriteToStream(_options, cast(bool)contentOnly, gid.gobject2.object.ObjectWrap._getDObject!(gid.gmime3.stream.Stream)(cast(void*)stream, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gmime3.object.ObjectWrap.vfuncWriteToStream");
+          }
+          if (_options)
+            _options._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.writeToStream = cast(typeof(_klass.writeToStream))&_vfuncWriteToStreamTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

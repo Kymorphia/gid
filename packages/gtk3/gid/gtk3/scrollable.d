@@ -111,6 +111,7 @@ interface Scrollable : GidWrap
   */
   @property void vscrollPolicy(gid.gtk3.types.ScrollablePolicy propval) nothrow;
 
+
   /**
       Returns the size of a non-scrolling border around the
       outside of the scrollable. An example for this would

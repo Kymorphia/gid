@@ -37,6 +37,7 @@ void callAsync(gid.gst1.types.CallAsyncFunc func) nothrow
 {
   extern(C) void _funcCallback(void* userData) nothrow
   {
+    gidAttachThread();
     ptrThawGC(userData);
     auto _dlg = cast(gid.gst1.types.CallAsyncFunc*)userData;
 
@@ -181,6 +182,7 @@ void debugAddLogFunction(gid.gst1.types.LogFunction func) nothrow
 {
   extern(C) void _funcCallback(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, GstDebugMessage* message, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.gst1.types.LogFunction*)userData;
     auto _category = category ? new gid.gst1.debug_category.DebugCategory(cast(void*)category, null) : null;
     string _file = file.fromCString!(No.Free);
@@ -592,6 +594,7 @@ uint debugRemoveLogFunction(gid.gst1.types.LogFunction func = null) nothrow
 {
   extern(C) void _funcCallback(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, GstDebugMessage* message, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.gst1.types.LogFunction*)userData;
     auto _category = category ? new gid.gst1.debug_category.DebugCategory(cast(void*)category, null) : null;
     string _file = file.fromCString!(No.Free);
@@ -1588,6 +1591,7 @@ void* utilArrayBinarySearch(void* array, uint numElements, size_t elementSize, g
 {
   extern(C) int _searchFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
   {
+    gidAttachThread();
     int _retval;
     auto _dlg = cast(gid.glib2.types.CompareDataFunc*)userData;
 

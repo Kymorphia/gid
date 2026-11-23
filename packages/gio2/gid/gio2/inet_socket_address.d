@@ -29,6 +29,15 @@ class InetSocketAddress : gid.gio2.socket_address.SocketAddress
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -113,9 +122,16 @@ class InetSocketAddress : gid.gio2.socket_address.SocketAddress
   */
   this(gid.gio2.inet_address.InetAddress address, ushort port) nothrow
   {
-    GSocketAddress* _cretval;
-    _cretval = g_inet_socket_address_new(address ? cast(GInetAddress*)address._cPtr(No.Dup) : null, port);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GSocketAddress* _cretval;
+      _cretval = g_inet_socket_address_new(address ? cast(GInetAddress*)address._cPtr(No.Dup) : null, port);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

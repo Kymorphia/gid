@@ -34,6 +34,15 @@ class RecentAction : gid.gtk3.action.Action, gid.gtk3.recent_chooser.RecentChoos
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -105,13 +114,20 @@ class RecentAction : gid.gtk3.action.Action, gid.gtk3.recent_chooser.RecentChoos
   */
   this(string name, string label = null, string tooltip = null, string stockId = null) nothrow
   {
-    GtkAction* _cretval;
-    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
-    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
-    const(char)* _tooltip = tooltip.toCString!(No.Malloc, Yes.Nullable);
-    const(char)* _stockId = stockId.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gtk_recent_action_new(_name, _label, _tooltip, _stockId);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkAction* _cretval;
+      const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+      const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
+      const(char)* _tooltip = tooltip.toCString!(No.Malloc, Yes.Nullable);
+      const(char)* _stockId = stockId.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gtk_recent_action_new(_name, _label, _tooltip, _stockId);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

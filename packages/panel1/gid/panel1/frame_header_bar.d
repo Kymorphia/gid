@@ -96,9 +96,16 @@ class FrameHeaderBar : gid.gtk4.widget.Widget, gid.panel1.frame_header.FrameHead
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = panel_frame_header_bar_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = panel_frame_header_bar_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**

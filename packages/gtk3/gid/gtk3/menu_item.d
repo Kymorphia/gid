@@ -17,6 +17,7 @@ import gid.gtk3.buildable;
 import gid.gtk3.buildable_mixin;
 import gid.gtk3.c.functions;
 import gid.gtk3.c.types;
+import gid.gtk3.container;
 import gid.gtk3.menu;
 import gid.gtk3.types;
 import gid.gtk3.widget;
@@ -224,9 +225,16 @@ class MenuItem : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.acti
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_menu_item_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_menu_item_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -263,6 +271,150 @@ class MenuItem : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.acti
     _cretval = gtk_menu_item_new_with_mnemonic(_label);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.menu_item.MenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+
+  /**
+      Emits the #GtkMenuItem::activate signal on the given item
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncActivate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncActivate()
+  {
+    auto _klass = cast(GtkMenuItemClass*)_vfuncClass;
+    if (!_klass.activate)
+      return;
+
+    _klass.activate(cast(GtkMenuItem*)this._cPtr);
+  }
+
+  /**
+      Signal emitted when the item is activated, but also
+         if the menu item has a submenu.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncActivateItem` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncActivateItem()
+  {
+    auto _klass = cast(GtkMenuItemClass*)_vfuncClass;
+    if (!_klass.activateItem)
+      return;
+
+    _klass.activateItem(cast(GtkMenuItem*)this._cPtr);
+  }
+
+  /**
+      Emits the #GtkMenuItem::deselect signal on the given item.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDeselect` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDeselect()
+  {
+    auto _klass = cast(GtkMenuItemClass*)_vfuncClass;
+    if (!_klass.deselect)
+      return;
+
+    _klass.deselect(cast(GtkMenuItem*)this._cPtr);
+  }
+
+  /**
+      Sets text on the menu_item label
+      Returns: The text in the menu_item label. This is the internal
+          string used by the label, and must not be modified.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetLabel` to chain up from an override.
+      Overriding it from D is not supported (callback string return value with transfer none is not supported).
+  */
+  protected string vfuncGetLabel()
+  {
+    auto _klass = cast(GtkMenuItemClass*)_vfuncClass;
+    if (!_klass.getLabel)
+      return typeof(return).init;
+
+    const(char)* _cretval;
+    _cretval = _klass.getLabel(cast(GtkMenuItem*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Emits the #GtkMenuItem::select signal on the given item.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSelect` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSelect()
+  {
+    auto _klass = cast(GtkMenuItemClass*)_vfuncClass;
+    if (!_klass.select)
+      return;
+
+    _klass.select(cast(GtkMenuItem*)this._cPtr);
+  }
+
+  /**
+      Sets text on the menu_item label
+  
+      Params:
+        label = the text you want to set
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetLabel` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSetLabel(string label)
+  {
+    auto _klass = cast(GtkMenuItemClass*)_vfuncClass;
+    if (!_klass.setLabel)
+      return;
+
+    const(char)* _label = label.toCString!(No.Malloc, No.Nullable);
+    _klass.setLabel(cast(GtkMenuItem*)this._cPtr, _label);
+  }
+
+  /**
+      Emits the #GtkMenuItem::toggle-size-allocate signal on the given item.
+  
+      Params:
+        allocation = the allocation to use as signal data.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncToggleSizeAllocate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncToggleSizeAllocate(int allocation)
+  {
+    auto _klass = cast(GtkMenuItemClass*)_vfuncClass;
+    if (!_klass.toggleSizeAllocate)
+      return;
+
+    _klass.toggleSizeAllocate(cast(GtkMenuItem*)this._cPtr, allocation);
+  }
+
+  /**
+      Emits the #GtkMenuItem::toggle-size-request signal on the given item.
+  
+      Params:
+        requisition = the requisition to use as signal data.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncToggleSizeRequest` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncToggleSizeRequest(ref int requisition)
+  {
+    auto _klass = cast(GtkMenuItemClass*)_vfuncClass;
+    if (!_klass.toggleSizeRequest)
+      return;
+
+    _klass.toggleSizeRequest(cast(GtkMenuItem*)this._cPtr, cast(int*)&requisition);
   }
 
   alias activate = gid.gtk3.widget.Widget.activate;
@@ -523,6 +675,7 @@ class MenuItem : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.acti
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -569,6 +722,7 @@ class MenuItem : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.acti
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -613,6 +767,7 @@ class MenuItem : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.acti
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -657,6 +812,7 @@ class MenuItem : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.acti
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -704,6 +860,7 @@ class MenuItem : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.acti
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -754,6 +911,7 @@ class MenuItem : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.acti
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -776,6 +934,247 @@ class MenuItem : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.acti
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggle-size-request", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from MenuItem
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.menu_item.MenuItem), T.stringof ~ " is not derived from gid.gtk3.menu_item.MenuItem");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivate", true)[0]) == gid.gtk3.menu_item.MenuItem))
+      _installVfunc(klass, "activate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivateItem", true)[0]) == gid.gtk3.menu_item.MenuItem))
+      _installVfunc(klass, "activate_item");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDeselect", true)[0]) == gid.gtk3.menu_item.MenuItem))
+      _installVfunc(klass, "deselect");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetLabel", true)[0]) == gid.gtk3.menu_item.MenuItem))
+      static assert(0, "Overriding gid.gtk3.menu_item.MenuItem.vfuncGetLabel is not supported: callback string return value with transfer none is not supported");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSelect", true)[0]) == gid.gtk3.menu_item.MenuItem))
+      _installVfunc(klass, "select");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetLabel", true)[0]) == gid.gtk3.menu_item.MenuItem))
+      _installVfunc(klass, "set_label");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncToggleSizeAllocate", true)[0]) == gid.gtk3.menu_item.MenuItem))
+      _installVfunc(klass, "toggle_size_allocate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncToggleSizeRequest", true)[0]) == gid.gtk3.menu_item.MenuItem))
+      _installVfunc(klass, "toggle_size_request");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkMenuItemClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate":
+      {
+        static extern(C) void _vfuncActivateTramp(GtkMenuItem* menuItem) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.menu_item.MenuItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuItem);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMenuItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuItem);
+            if (_klass.activate)
+              return (cast(typeof(&_vfuncActivateTramp))_klass.activate)(menuItem);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncActivate();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.menu_item.MenuItem.vfuncActivate");
+          }
+        }
+
+        _klass.activate = cast(typeof(_klass.activate))&_vfuncActivateTramp;
+        break;
+      }
+      case "activate_item":
+      {
+        static extern(C) void _vfuncActivateItemTramp(GtkMenuItem* menuItem) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.menu_item.MenuItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuItem);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMenuItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuItem);
+            if (_klass.activateItem)
+              return (cast(typeof(&_vfuncActivateItemTramp))_klass.activateItem)(menuItem);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncActivateItem();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.menu_item.MenuItem.vfuncActivateItem");
+          }
+        }
+
+        _klass.activateItem = cast(typeof(_klass.activateItem))&_vfuncActivateItemTramp;
+        break;
+      }
+      case "deselect":
+      {
+        static extern(C) void _vfuncDeselectTramp(GtkMenuItem* menuItem) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.menu_item.MenuItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuItem);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMenuItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuItem);
+            if (_klass.deselect)
+              return (cast(typeof(&_vfuncDeselectTramp))_klass.deselect)(menuItem);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDeselect();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.menu_item.MenuItem.vfuncDeselect");
+          }
+        }
+
+        _klass.deselect = cast(typeof(_klass.deselect))&_vfuncDeselectTramp;
+        break;
+      }
+      case "select":
+      {
+        static extern(C) void _vfuncSelectTramp(GtkMenuItem* menuItem) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.menu_item.MenuItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuItem);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMenuItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuItem);
+            if (_klass.select)
+              return (cast(typeof(&_vfuncSelectTramp))_klass.select)(menuItem);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSelect();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.menu_item.MenuItem.vfuncSelect");
+          }
+        }
+
+        _klass.select = cast(typeof(_klass.select))&_vfuncSelectTramp;
+        break;
+      }
+      case "set_label":
+      {
+        static extern(C) void _vfuncSetLabelTramp(GtkMenuItem* menuItem, const(char)* label) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.menu_item.MenuItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuItem);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMenuItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuItem);
+            if (_klass.setLabel)
+              return (cast(typeof(&_vfuncSetLabelTramp))_klass.setLabel)(menuItem, label);
+            return;
+          }
+
+          string _label = label.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncSetLabel(_label);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.menu_item.MenuItem.vfuncSetLabel");
+          }
+        }
+
+        _klass.setLabel = cast(typeof(_klass.setLabel))&_vfuncSetLabelTramp;
+        break;
+      }
+      case "toggle_size_allocate":
+      {
+        static extern(C) void _vfuncToggleSizeAllocateTramp(GtkMenuItem* menuItem, int allocation) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.menu_item.MenuItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuItem);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMenuItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuItem);
+            if (_klass.toggleSizeAllocate)
+              return (cast(typeof(&_vfuncToggleSizeAllocateTramp))_klass.toggleSizeAllocate)(menuItem, allocation);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncToggleSizeAllocate(allocation);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.menu_item.MenuItem.vfuncToggleSizeAllocate");
+          }
+        }
+
+        _klass.toggleSizeAllocate = cast(typeof(_klass.toggleSizeAllocate))&_vfuncToggleSizeAllocateTramp;
+        break;
+      }
+      case "toggle_size_request":
+      {
+        static extern(C) void _vfuncToggleSizeRequestTramp(GtkMenuItem* menuItem, int* requisition) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.menu_item.MenuItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)menuItem);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMenuItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)menuItem);
+            if (_klass.toggleSizeRequest)
+              return (cast(typeof(&_vfuncToggleSizeRequestTramp))_klass.toggleSizeRequest)(menuItem, requisition);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncToggleSizeRequest(*requisition);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.menu_item.MenuItem.vfuncToggleSizeRequest");
+          }
+        }
+
+        _klass.toggleSizeRequest = cast(typeof(_klass.toggleSizeRequest))&_vfuncToggleSizeRequestTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

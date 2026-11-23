@@ -30,6 +30,15 @@ class ObjectFactory : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -62,6 +71,26 @@ class ObjectFactory : gid.gobject2.object.ObjectWrap
   static ObjectFactoryGidBuilder builder() nothrow
   {
     return new ObjectFactoryGidBuilder;
+  }
+
+  /**
+      Inform factory that it is no longer being used to create
+      accessibles. When called, factory may need to inform
+      #AtkObjects which it has created that they need to be re-instantiated.
+      Note: primarily used for runtime replacement of #AtkObjectFactorys
+      in object registries.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncInvalidate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncInvalidate()
+  {
+    auto _klass = cast(AtkObjectFactoryClass*)_vfuncClass;
+    if (!_klass.invalidate)
+      return;
+
+    _klass.invalidate(cast(AtkObjectFactory*)this._cPtr);
   }
 
   /**
@@ -103,6 +132,62 @@ class ObjectFactory : gid.gobject2.object.ObjectWrap
   void invalidate() nothrow
   {
     atk_object_factory_invalidate(cast(AtkObjectFactory*)this._cPtr);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from ObjectFactory
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.atk1.object_factory.ObjectFactory), T.stringof ~ " is not derived from gid.atk1.object_factory.ObjectFactory");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncInvalidate", true)[0]) == gid.atk1.object_factory.ObjectFactory))
+      _installVfunc(klass, "invalidate");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(AtkObjectFactoryClass*)klass;
+
+    switch (vfunc)
+    {
+      case "invalidate":
+      {
+        static extern(C) void _vfuncInvalidateTramp(AtkObjectFactory* factory) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.atk1.object_factory.ObjectFactory)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)factory);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkObjectFactoryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)factory);
+            if (_klass.invalidate)
+              return (cast(typeof(&_vfuncInvalidateTramp))_klass.invalidate)(factory);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncInvalidate();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.object_factory.ObjectFactory.vfuncInvalidate");
+          }
+        }
+
+        _klass.invalidate = cast(typeof(_klass.invalidate))&_vfuncInvalidateTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

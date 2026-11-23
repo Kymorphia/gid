@@ -76,6 +76,15 @@ class PropertyAction : gid.gobject2.object.ObjectWrap, gid.gio2.action.Action
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -192,11 +201,18 @@ class PropertyAction : gid.gobject2.object.ObjectWrap, gid.gio2.action.Action
   */
   this(string name, gid.gobject2.object.ObjectWrap object, string propertyName) nothrow
   {
-    GPropertyAction* _cretval;
-    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
-    const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
-    _cretval = g_property_action_new(_name, object ? cast(GObject*)object._cPtr(No.Dup) : null, _propertyName);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GPropertyAction* _cretval;
+      const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+      const(char)* _propertyName = propertyName.toCString!(No.Malloc, No.Nullable);
+      _cretval = g_property_action_new(_name, object ? cast(GObject*)object._cPtr(No.Dup) : null, _propertyName);
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

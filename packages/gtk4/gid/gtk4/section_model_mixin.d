@@ -4,8 +4,11 @@ module gid.gtk4.section_model_mixin;
 public import gid.core.basictypes;
 public import gid.gtk4.section_model_iface_proxy;
 public import gid.core.utils;
+public import gid.gobject2.c.functions;
+public import gid.gobject2.c.types;
 public import gid.gobject2.dclosure;
 public import gid.gobject2.gid_builder;
+public import gid.gobject2.object;
 public import gid.gtk4.c.functions;
 public import gid.gtk4.c.types;
 public import gid.gtk4.types;
@@ -29,6 +32,34 @@ public import gid.gtk4.types;
 */
 template SectionModelT()
 {
+
+  /**
+      Query the section that covers the given position. The number of
+      items in the section can be computed by `out_end - out_start`.
+      
+      If the position is larger than the number of items, a single
+      range from n_items to G_MAXUINT will be returned.
+  
+      Params:
+        position = the position of the item to query
+        outStart = the position of the first item in the section
+        outEnd = the position of the first item not part of the section
+            anymore.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetSection`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncGetSection(uint position, out uint outStart, out uint outEnd)
+  {
+    auto _klass = cast(GtkSectionModelInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk4.section_model.SectionModel._getGType);
+    if (!_klass || !_klass.getSection)
+      return;
+
+    _klass.getSection(cast(GtkSectionModel*)this._cPtr, position, cast(uint*)&outStart, cast(uint*)&outEnd);
+  }
 
   /**
       Query the section that covers the given position. The number of
@@ -112,6 +143,7 @@ template SectionModelT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -137,6 +169,61 @@ template SectionModelT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("sections-changed", closure, after);
+  }
+
+  /// True if the D class T overrides any vfunc method of gid.gtk4.section_model.SectionModel (DiG)
+  enum bool _ifaceVfuncsOverridden_gid_gtk4_section_model_SectionModel(T) = !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetSection", true)[0], gid.gobject2.object.GidIfaceVfunc);
+
+  /**
+      Install the C trampolines of the gid.gtk4.section_model.SectionModel vfunc methods which a D class overrides into the interface
+      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      trampoline is a compile error.
+      Params:
+        T = D class
+        iface = Interface structure of the GType registered for T
+  */
+  static void _installIfaceVfuncs_gid_gtk4_section_model_SectionModel(T)(void* iface) nothrow
+  {
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetSection", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk4_section_model_SectionModel(iface, "get_section");
+  }
+
+  private static void _installIfaceVfunc_gid_gtk4_section_model_SectionModel(void* iface, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkSectionModelInterface*)iface;
+
+    switch (vfunc)
+    {
+      case "get_section":
+      {
+        static extern(C) void _vfuncGetSectionTramp(GtkSectionModel* self, uint position, uint* outStart, uint* outEnd) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSectionModelInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.section_model.SectionModel._getGType);
+            if (_klass && _klass.getSection)
+              return (cast(typeof(&_vfuncGetSectionTramp))_klass.getSection)(self, position, outStart, outEnd);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncGetSection(position, *outStart, *outEnd);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.section_model.SectionModel.vfuncGetSection");
+          }
+        }
+
+        _klass.getSection = cast(typeof(_klass.getSection))&_vfuncGetSectionTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

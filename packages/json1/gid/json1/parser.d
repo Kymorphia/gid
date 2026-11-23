@@ -142,9 +142,16 @@ class Parser : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    JsonParser* _cretval;
-    _cretval = json_parser_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      JsonParser* _cretval;
+      _cretval = json_parser_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -158,6 +165,168 @@ class Parser : gid.gobject2.object.ObjectWrap
     _cretval = json_parser_new_immutable();
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.json1.parser.Parser)(cast(JsonParser*)_cretval, Yes.Take);
     return _retval;
+  }
+
+  /**
+      class handler for the JsonParser::array-element signal
+  
+      Params:
+        array =  (modified in place, changes are seen by the caller)
+        index = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncArrayElement` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncArrayElement(gid.json1.array.Array array, int index)
+  {
+    auto _klass = cast(JsonParserClass*)_vfuncClass;
+    if (!_klass.arrayElement)
+      return;
+
+    _klass.arrayElement(cast(JsonParser*)this._cPtr, array ? cast(JsonArray*)array._cPtr(No.Dup) : null, index);
+  }
+
+  /**
+      class handler for the JsonParser::array-end signal
+  
+      Params:
+        array =  (modified in place, changes are seen by the caller)
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncArrayEnd` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncArrayEnd(gid.json1.array.Array array)
+  {
+    auto _klass = cast(JsonParserClass*)_vfuncClass;
+    if (!_klass.arrayEnd)
+      return;
+
+    _klass.arrayEnd(cast(JsonParser*)this._cPtr, array ? cast(JsonArray*)array._cPtr(No.Dup) : null);
+  }
+
+  /**
+      class handler for the JsonParser::array-start signal
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncArrayStart` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncArrayStart()
+  {
+    auto _klass = cast(JsonParserClass*)_vfuncClass;
+    if (!_klass.arrayStart)
+      return;
+
+    _klass.arrayStart(cast(JsonParser*)this._cPtr);
+  }
+
+  /**
+      class handler for the JsonParser::error signal
+  
+      Params:
+        error = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncError` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncError(gid.glib2.error.ErrorWrap error)
+  {
+    auto _klass = cast(JsonParserClass*)_vfuncClass;
+    if (!_klass.error)
+      return;
+
+    _klass.error(cast(JsonParser*)this._cPtr, error ? cast(const(GError)*)error._cPtr(No.Dup) : null);
+  }
+
+  /**
+      class handler for the JsonParser::object-end signal
+  
+      Params:
+        object =  (modified in place, changes are seen by the caller)
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncObjectEnd` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncObjectEnd(gid.json1.object.ObjectWrap object)
+  {
+    auto _klass = cast(JsonParserClass*)_vfuncClass;
+    if (!_klass.objectEnd)
+      return;
+
+    _klass.objectEnd(cast(JsonParser*)this._cPtr, object ? cast(JsonObject*)object._cPtr(No.Dup) : null);
+  }
+
+  /**
+      class handler for the JsonParser::object-member signal
+  
+      Params:
+        object =  (modified in place, changes are seen by the caller)
+        memberName = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncObjectMember` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncObjectMember(gid.json1.object.ObjectWrap object, string memberName)
+  {
+    auto _klass = cast(JsonParserClass*)_vfuncClass;
+    if (!_klass.objectMember)
+      return;
+
+    const(char)* _memberName = memberName.toCString!(No.Malloc, No.Nullable);
+    _klass.objectMember(cast(JsonParser*)this._cPtr, object ? cast(JsonObject*)object._cPtr(No.Dup) : null, _memberName);
+  }
+
+  /**
+      class handler for the JsonParser::object-start signal
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncObjectStart` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncObjectStart()
+  {
+    auto _klass = cast(JsonParserClass*)_vfuncClass;
+    if (!_klass.objectStart)
+      return;
+
+    _klass.objectStart(cast(JsonParser*)this._cPtr);
+  }
+
+  /**
+      class handler for the JsonParser::parse-end signal
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncParseEnd` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncParseEnd()
+  {
+    auto _klass = cast(JsonParserClass*)_vfuncClass;
+    if (!_klass.parseEnd)
+      return;
+
+    _klass.parseEnd(cast(JsonParser*)this._cPtr);
+  }
+
+  /**
+      class handler for the JsonParser::parse-start signal
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncParseStart` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncParseStart()
+  {
+    auto _klass = cast(JsonParserClass*)_vfuncClass;
+    if (!_klass.parseStart)
+      return;
+
+    _klass.parseStart(cast(JsonParser*)this._cPtr);
   }
 
   /**
@@ -365,6 +534,7 @@ class Parser : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -467,6 +637,7 @@ class Parser : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -524,6 +695,7 @@ class Parser : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -575,6 +747,7 @@ class Parser : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -626,6 +799,7 @@ class Parser : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -680,6 +854,7 @@ class Parser : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -737,6 +912,7 @@ class Parser : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -790,6 +966,7 @@ class Parser : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -838,6 +1015,7 @@ class Parser : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -885,6 +1063,7 @@ class Parser : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -904,6 +1083,323 @@ class Parser : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("parse-start", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Parser
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.json1.parser.Parser), T.stringof ~ " is not derived from gid.json1.parser.Parser");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncArrayElement", true)[0]) == gid.json1.parser.Parser))
+      _installVfunc(klass, "array_element");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncArrayEnd", true)[0]) == gid.json1.parser.Parser))
+      _installVfunc(klass, "array_end");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncArrayStart", true)[0]) == gid.json1.parser.Parser))
+      _installVfunc(klass, "array_start");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncError", true)[0]) == gid.json1.parser.Parser))
+      _installVfunc(klass, "error");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncObjectEnd", true)[0]) == gid.json1.parser.Parser))
+      _installVfunc(klass, "object_end");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncObjectMember", true)[0]) == gid.json1.parser.Parser))
+      _installVfunc(klass, "object_member");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncObjectStart", true)[0]) == gid.json1.parser.Parser))
+      _installVfunc(klass, "object_start");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncParseEnd", true)[0]) == gid.json1.parser.Parser))
+      _installVfunc(klass, "parse_end");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncParseStart", true)[0]) == gid.json1.parser.Parser))
+      _installVfunc(klass, "parse_start");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(JsonParserClass*)klass;
+
+    switch (vfunc)
+    {
+      case "array_element":
+      {
+        static extern(C) void _vfuncArrayElementTramp(JsonParser* parser, JsonArray* array, int index) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.json1.parser.Parser)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parser);
+          if (!_obj)
+          {
+            auto _klass = cast(JsonParserClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parser);
+            if (_klass.arrayElement)
+              return (cast(typeof(&_vfuncArrayElementTramp))_klass.arrayElement)(parser, array, index);
+            return;
+          }
+
+          auto _array = array ? new gid.json1.array.Array(cast(void*)array, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncArrayElement(_array, index);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.json1.parser.Parser.vfuncArrayElement");
+          }
+          if (_array)
+            _array._cUnborrow;
+
+        }
+
+        _klass.arrayElement = cast(typeof(_klass.arrayElement))&_vfuncArrayElementTramp;
+        break;
+      }
+      case "array_end":
+      {
+        static extern(C) void _vfuncArrayEndTramp(JsonParser* parser, JsonArray* array) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.json1.parser.Parser)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parser);
+          if (!_obj)
+          {
+            auto _klass = cast(JsonParserClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parser);
+            if (_klass.arrayEnd)
+              return (cast(typeof(&_vfuncArrayEndTramp))_klass.arrayEnd)(parser, array);
+            return;
+          }
+
+          auto _array = array ? new gid.json1.array.Array(cast(void*)array, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncArrayEnd(_array);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.json1.parser.Parser.vfuncArrayEnd");
+          }
+          if (_array)
+            _array._cUnborrow;
+
+        }
+
+        _klass.arrayEnd = cast(typeof(_klass.arrayEnd))&_vfuncArrayEndTramp;
+        break;
+      }
+      case "array_start":
+      {
+        static extern(C) void _vfuncArrayStartTramp(JsonParser* parser) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.json1.parser.Parser)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parser);
+          if (!_obj)
+          {
+            auto _klass = cast(JsonParserClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parser);
+            if (_klass.arrayStart)
+              return (cast(typeof(&_vfuncArrayStartTramp))_klass.arrayStart)(parser);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncArrayStart();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.json1.parser.Parser.vfuncArrayStart");
+          }
+        }
+
+        _klass.arrayStart = cast(typeof(_klass.arrayStart))&_vfuncArrayStartTramp;
+        break;
+      }
+      case "error":
+      {
+        static extern(C) void _vfuncErrorTramp(JsonParser* parser, const(GError)* error) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.json1.parser.Parser)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parser);
+          if (!_obj)
+          {
+            auto _klass = cast(JsonParserClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parser);
+            if (_klass.error)
+              return (cast(typeof(&_vfuncErrorTramp))_klass.error)(parser, error);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncError(error ? new gid.glib2.error.ErrorWrap(cast(void*)error, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.json1.parser.Parser.vfuncError");
+          }
+        }
+
+        _klass.error = cast(typeof(_klass.error))&_vfuncErrorTramp;
+        break;
+      }
+      case "object_end":
+      {
+        static extern(C) void _vfuncObjectEndTramp(JsonParser* parser, JsonObject* object) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.json1.parser.Parser)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parser);
+          if (!_obj)
+          {
+            auto _klass = cast(JsonParserClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parser);
+            if (_klass.objectEnd)
+              return (cast(typeof(&_vfuncObjectEndTramp))_klass.objectEnd)(parser, object);
+            return;
+          }
+
+          auto _object = object ? new gid.json1.object.ObjectWrap(cast(void*)object, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncObjectEnd(_object);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.json1.parser.Parser.vfuncObjectEnd");
+          }
+          if (_object)
+            _object._cUnborrow;
+
+        }
+
+        _klass.objectEnd = cast(typeof(_klass.objectEnd))&_vfuncObjectEndTramp;
+        break;
+      }
+      case "object_member":
+      {
+        static extern(C) void _vfuncObjectMemberTramp(JsonParser* parser, JsonObject* object, const(char)* memberName) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.json1.parser.Parser)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parser);
+          if (!_obj)
+          {
+            auto _klass = cast(JsonParserClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parser);
+            if (_klass.objectMember)
+              return (cast(typeof(&_vfuncObjectMemberTramp))_klass.objectMember)(parser, object, memberName);
+            return;
+          }
+
+          auto _object = object ? new gid.json1.object.ObjectWrap(cast(void*)object, Yes.Take)._cBorrow : null;
+          string _memberName = memberName.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncObjectMember(_object, _memberName);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.json1.parser.Parser.vfuncObjectMember");
+          }
+          if (_object)
+            _object._cUnborrow;
+
+        }
+
+        _klass.objectMember = cast(typeof(_klass.objectMember))&_vfuncObjectMemberTramp;
+        break;
+      }
+      case "object_start":
+      {
+        static extern(C) void _vfuncObjectStartTramp(JsonParser* parser) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.json1.parser.Parser)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parser);
+          if (!_obj)
+          {
+            auto _klass = cast(JsonParserClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parser);
+            if (_klass.objectStart)
+              return (cast(typeof(&_vfuncObjectStartTramp))_klass.objectStart)(parser);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncObjectStart();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.json1.parser.Parser.vfuncObjectStart");
+          }
+        }
+
+        _klass.objectStart = cast(typeof(_klass.objectStart))&_vfuncObjectStartTramp;
+        break;
+      }
+      case "parse_end":
+      {
+        static extern(C) void _vfuncParseEndTramp(JsonParser* parser) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.json1.parser.Parser)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parser);
+          if (!_obj)
+          {
+            auto _klass = cast(JsonParserClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parser);
+            if (_klass.parseEnd)
+              return (cast(typeof(&_vfuncParseEndTramp))_klass.parseEnd)(parser);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncParseEnd();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.json1.parser.Parser.vfuncParseEnd");
+          }
+        }
+
+        _klass.parseEnd = cast(typeof(_klass.parseEnd))&_vfuncParseEndTramp;
+        break;
+      }
+      case "parse_start":
+      {
+        static extern(C) void _vfuncParseStartTramp(JsonParser* parser) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.json1.parser.Parser)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parser);
+          if (!_obj)
+          {
+            auto _klass = cast(JsonParserClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parser);
+            if (_klass.parseStart)
+              return (cast(typeof(&_vfuncParseStartTramp))_klass.parseStart)(parser);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncParseStart();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.json1.parser.Parser.vfuncParseStart");
+          }
+        }
+
+        _klass.parseStart = cast(typeof(_klass.parseStart))&_vfuncParseStartTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

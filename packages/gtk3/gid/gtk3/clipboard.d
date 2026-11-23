@@ -85,6 +85,15 @@ class Clipboard : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -266,6 +275,7 @@ class Clipboard : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GtkClipboard* clipboard, GtkSelectionData* selectionData, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gtk3.types.ClipboardReceivedFunc*)data;
       auto _selectionData = selectionData ? new gid.gtk3.selection_data.SelectionData(cast(void*)selectionData, Yes.Take)._cBorrow : null;
@@ -306,6 +316,7 @@ class Clipboard : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GtkClipboard* clipboard, GdkPixbuf* pixbuf, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gtk3.types.ClipboardImageReceivedFunc*)data;
 
@@ -342,6 +353,7 @@ class Clipboard : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GtkClipboard* clipboard, GdkAtom format, const(char)* text, size_t length, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gtk3.types.ClipboardRichTextReceivedFunc*)data;
       char[] _text;
@@ -378,6 +390,7 @@ class Clipboard : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GtkClipboard* clipboard, GdkAtom* atoms, int nAtoms, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gtk3.types.ClipboardTargetsReceivedFunc*)data;
       gid.gdk3.atom.Atom[] _atoms;
@@ -417,6 +430,7 @@ class Clipboard : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GtkClipboard* clipboard, const(char)* text, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gtk3.types.ClipboardTextReceivedFunc*)data;
       string _text = text.fromCString!(No.Free);
@@ -452,6 +466,7 @@ class Clipboard : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GtkClipboard* clipboard, char** uris, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gtk3.types.ClipboardURIReceivedFunc*)data;
       string[] _uris;
@@ -825,6 +840,7 @@ class Clipboard : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

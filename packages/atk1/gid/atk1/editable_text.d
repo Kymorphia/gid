@@ -32,6 +32,11 @@ interface EditableText : GidWrap
     return cast(void function())atk_editable_text_get_type != &gidSymbolNotFound ? atk_editable_text_get_type() : cast(GType)0;
   }
 
+
+
+
+
+
   /**
       Copy text from start_pos up to, but not including end_pos
       to the clipboard.

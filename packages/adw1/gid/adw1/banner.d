@@ -57,6 +57,15 @@ class Banner : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -233,10 +242,17 @@ class Banner : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
   */
   this(string title) nothrow
   {
-    GtkWidget* _cretval;
-    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
-    _cretval = adw_banner_new(_title);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
+      _cretval = adw_banner_new(_title);
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -397,6 +413,7 @@ class Banner : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

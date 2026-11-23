@@ -458,9 +458,16 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_tree_view_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_tree_view_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -477,6 +484,188 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
     GtkWidget* _cretval;
     _cretval = gtk_tree_view_new_with_model(model ? cast(GtkTreeModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(No.Dup) : null);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.tree_view.TreeView)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncColumnsChanged()
+  {
+    auto _klass = cast(GtkTreeViewClass*)_vfuncClass;
+    if (!_klass.columnsChanged)
+      return;
+
+    _klass.columnsChanged(cast(GtkTreeView*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncCursorChanged()
+  {
+    auto _klass = cast(GtkTreeViewClass*)_vfuncClass;
+    if (!_klass.cursorChanged)
+      return;
+
+    _klass.cursorChanged(cast(GtkTreeView*)this._cPtr);
+  }
+
+  /** */
+  protected bool vfuncExpandCollapseCursorRow(bool logical, bool expand, bool openAll)
+  {
+    auto _klass = cast(GtkTreeViewClass*)_vfuncClass;
+    if (!_klass.expandCollapseCursorRow)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.expandCollapseCursorRow(cast(GtkTreeView*)this._cPtr, logical, expand, openAll);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncMoveCursor(gid.gtk4.types.MovementStep step, int count, bool extend, bool modify)
+  {
+    auto _klass = cast(GtkTreeViewClass*)_vfuncClass;
+    if (!_klass.moveCursor)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.moveCursor(cast(GtkTreeView*)this._cPtr, step, count, extend, modify);
+    return _retval;
+  }
+
+  /**
+      Activates the cell determined by path and column.
+  
+      Params:
+        path = The [gid.gtk4.tree_path.TreePath] to be activated. (modified in place, changes are seen by the caller)
+        column = The [gid.gtk4.tree_view_column.TreeViewColumn] to be activated.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRowActivated` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use [gid.gtk4.list_view.ListView] or [gid.gtk4.column_view.ColumnView] instead
+  */
+  protected void vfuncRowActivated(gid.gtk4.tree_path.TreePath path, gid.gtk4.tree_view_column.TreeViewColumn column = null)
+  {
+    auto _klass = cast(GtkTreeViewClass*)_vfuncClass;
+    if (!_klass.rowActivated)
+      return;
+
+    _klass.rowActivated(cast(GtkTreeView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, column ? cast(GtkTreeViewColumn*)column._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncRowCollapsed(gid.gtk4.tree_iter.TreeIter iter, gid.gtk4.tree_path.TreePath path)
+  {
+    auto _klass = cast(GtkTreeViewClass*)_vfuncClass;
+    if (!_klass.rowCollapsed)
+      return;
+
+    _klass.rowCollapsed(cast(GtkTreeView*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncRowExpanded(gid.gtk4.tree_iter.TreeIter iter, gid.gtk4.tree_path.TreePath path)
+  {
+    auto _klass = cast(GtkTreeViewClass*)_vfuncClass;
+    if (!_klass.rowExpanded)
+      return;
+
+    _klass.rowExpanded(cast(GtkTreeView*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected bool vfuncSelectAll()
+  {
+    auto _klass = cast(GtkTreeViewClass*)_vfuncClass;
+    if (!_klass.selectAll)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.selectAll(cast(GtkTreeView*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncSelectCursorParent()
+  {
+    auto _klass = cast(GtkTreeViewClass*)_vfuncClass;
+    if (!_klass.selectCursorParent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.selectCursorParent(cast(GtkTreeView*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncSelectCursorRow(bool startEditing)
+  {
+    auto _klass = cast(GtkTreeViewClass*)_vfuncClass;
+    if (!_klass.selectCursorRow)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.selectCursorRow(cast(GtkTreeView*)this._cPtr, startEditing);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncStartInteractiveSearch()
+  {
+    auto _klass = cast(GtkTreeViewClass*)_vfuncClass;
+    if (!_klass.startInteractiveSearch)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.startInteractiveSearch(cast(GtkTreeView*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncTestCollapseRow(gid.gtk4.tree_iter.TreeIter iter, gid.gtk4.tree_path.TreePath path)
+  {
+    auto _klass = cast(GtkTreeViewClass*)_vfuncClass;
+    if (!_klass.testCollapseRow)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.testCollapseRow(cast(GtkTreeView*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncTestExpandRow(gid.gtk4.tree_iter.TreeIter iter, gid.gtk4.tree_path.TreePath path)
+  {
+    auto _klass = cast(GtkTreeViewClass*)_vfuncClass;
+    if (!_klass.testExpandRow)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.testExpandRow(cast(GtkTreeView*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncToggleCursorRow()
+  {
+    auto _klass = cast(GtkTreeViewClass*)_vfuncClass;
+    if (!_klass.toggleCursorRow)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.toggleCursorRow(cast(GtkTreeView*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncUnselectAll()
+  {
+    auto _klass = cast(GtkTreeViewClass*)_vfuncClass;
+    if (!_klass.unselectAll)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.unselectAll(cast(GtkTreeView*)this._cPtr);
     return _retval;
   }
 
@@ -1328,6 +1517,7 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   {
     extern(C) void _funcCallback(GtkTreeViewColumn* treeColumn, GtkCellRenderer* cell, GtkTreeModel* treeModel, GtkTreeIter* iter, void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk4.types.TreeCellDataFunc*)data;
       auto _iter = iter ? new gid.gtk4.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
 
@@ -1426,6 +1616,7 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   {
     extern(C) void _funcCallback(GtkTreeView* treeView, GtkTreePath* path, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk4.types.TreeViewMappingFunc*)userData;
       auto _path = path ? new gid.gtk4.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
 
@@ -1593,6 +1784,7 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   {
     extern(C) gboolean _funcCallback(GtkTreeView* treeView, GtkTreeViewColumn* column, GtkTreeViewColumn* prevColumn, GtkTreeViewColumn* nextColumn, void* data) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gtk4.types.TreeViewColumnDropFunc*)data;
 
@@ -1894,6 +2086,7 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   {
     extern(C) gboolean _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gtk4.types.TreeViewRowSeparatorFunc*)data;
       auto _iter = iter ? new gid.gtk4.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
@@ -1985,6 +2178,7 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   {
     extern(C) gboolean _searchEqualFuncCallback(GtkTreeModel* model, int column, const(char)* key, GtkTreeIter* iter, void* searchData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gtk4.types.TreeViewSearchEqualFunc*)searchData;
       string _key = key.fromCString!(No.Free);
@@ -2140,6 +2334,7 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2184,6 +2379,7 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2238,6 +2434,7 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2321,6 +2518,7 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2399,6 +2597,7 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2455,6 +2654,7 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2511,6 +2711,7 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2562,6 +2763,7 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2610,6 +2812,7 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2661,6 +2864,7 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2712,6 +2916,7 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2767,6 +2972,7 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2828,6 +3034,7 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2882,6 +3089,7 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2930,6 +3138,7 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2952,6 +3161,565 @@ class TreeView : gid.gtk4.widget.Widget, gid.gtk4.scrollable.Scrollable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unselect-all", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from TreeView
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.tree_view.TreeView), T.stringof ~ " is not derived from gid.gtk4.tree_view.TreeView");
+
+    gid.gtk4.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncColumnsChanged", true)[0]) == gid.gtk4.tree_view.TreeView))
+      _installVfunc(klass, "columns_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCursorChanged", true)[0]) == gid.gtk4.tree_view.TreeView))
+      _installVfunc(klass, "cursor_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncExpandCollapseCursorRow", true)[0]) == gid.gtk4.tree_view.TreeView))
+      _installVfunc(klass, "expand_collapse_cursor_row");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMoveCursor", true)[0]) == gid.gtk4.tree_view.TreeView))
+      _installVfunc(klass, "move_cursor");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRowActivated", true)[0]) == gid.gtk4.tree_view.TreeView))
+      _installVfunc(klass, "row_activated");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRowCollapsed", true)[0]) == gid.gtk4.tree_view.TreeView))
+      _installVfunc(klass, "row_collapsed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRowExpanded", true)[0]) == gid.gtk4.tree_view.TreeView))
+      _installVfunc(klass, "row_expanded");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSelectAll", true)[0]) == gid.gtk4.tree_view.TreeView))
+      _installVfunc(klass, "select_all");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSelectCursorParent", true)[0]) == gid.gtk4.tree_view.TreeView))
+      _installVfunc(klass, "select_cursor_parent");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSelectCursorRow", true)[0]) == gid.gtk4.tree_view.TreeView))
+      _installVfunc(klass, "select_cursor_row");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStartInteractiveSearch", true)[0]) == gid.gtk4.tree_view.TreeView))
+      _installVfunc(klass, "start_interactive_search");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncTestCollapseRow", true)[0]) == gid.gtk4.tree_view.TreeView))
+      _installVfunc(klass, "test_collapse_row");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncTestExpandRow", true)[0]) == gid.gtk4.tree_view.TreeView))
+      _installVfunc(klass, "test_expand_row");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncToggleCursorRow", true)[0]) == gid.gtk4.tree_view.TreeView))
+      _installVfunc(klass, "toggle_cursor_row");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUnselectAll", true)[0]) == gid.gtk4.tree_view.TreeView))
+      _installVfunc(klass, "unselect_all");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkTreeViewClass*)klass;
+
+    switch (vfunc)
+    {
+      case "columns_changed":
+      {
+        static extern(C) void _vfuncColumnsChangedTramp(GtkTreeView* treeView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
+            if (_klass.columnsChanged)
+              return (cast(typeof(&_vfuncColumnsChangedTramp))_klass.columnsChanged)(treeView);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncColumnsChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.tree_view.TreeView.vfuncColumnsChanged");
+          }
+        }
+
+        _klass.columnsChanged = cast(typeof(_klass.columnsChanged))&_vfuncColumnsChangedTramp;
+        break;
+      }
+      case "cursor_changed":
+      {
+        static extern(C) void _vfuncCursorChangedTramp(GtkTreeView* treeView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
+            if (_klass.cursorChanged)
+              return (cast(typeof(&_vfuncCursorChangedTramp))_klass.cursorChanged)(treeView);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncCursorChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.tree_view.TreeView.vfuncCursorChanged");
+          }
+        }
+
+        _klass.cursorChanged = cast(typeof(_klass.cursorChanged))&_vfuncCursorChangedTramp;
+        break;
+      }
+      case "expand_collapse_cursor_row":
+      {
+        static extern(C) gboolean _vfuncExpandCollapseCursorRowTramp(GtkTreeView* treeView, gboolean logical, gboolean expand, gboolean openAll) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
+            if (_klass.expandCollapseCursorRow)
+              return (cast(typeof(&_vfuncExpandCollapseCursorRowTramp))_klass.expandCollapseCursorRow)(treeView, logical, expand, openAll);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncExpandCollapseCursorRow(cast(bool)logical, cast(bool)expand, cast(bool)openAll);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.tree_view.TreeView.vfuncExpandCollapseCursorRow");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.expandCollapseCursorRow = cast(typeof(_klass.expandCollapseCursorRow))&_vfuncExpandCollapseCursorRowTramp;
+        break;
+      }
+      case "move_cursor":
+      {
+        static extern(C) gboolean _vfuncMoveCursorTramp(GtkTreeView* treeView, GtkMovementStep step, int count, gboolean extend, gboolean modify) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
+            if (_klass.moveCursor)
+              return (cast(typeof(&_vfuncMoveCursorTramp))_klass.moveCursor)(treeView, step, count, extend, modify);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncMoveCursor(step, count, cast(bool)extend, cast(bool)modify);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.tree_view.TreeView.vfuncMoveCursor");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.moveCursor = cast(typeof(_klass.moveCursor))&_vfuncMoveCursorTramp;
+        break;
+      }
+      case "row_activated":
+      {
+        static extern(C) void _vfuncRowActivatedTramp(GtkTreeView* treeView, GtkTreePath* path, GtkTreeViewColumn* column) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
+            if (_klass.rowActivated)
+              return (cast(typeof(&_vfuncRowActivatedTramp))_klass.rowActivated)(treeView, path, column);
+            return;
+          }
+
+          auto _path = path ? new gid.gtk4.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncRowActivated(_path, gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.tree_view_column.TreeViewColumn)(cast(void*)column, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.tree_view.TreeView.vfuncRowActivated");
+          }
+          if (_path)
+            _path._cUnborrow;
+
+        }
+
+        _klass.rowActivated = cast(typeof(_klass.rowActivated))&_vfuncRowActivatedTramp;
+        break;
+      }
+      case "row_collapsed":
+      {
+        static extern(C) void _vfuncRowCollapsedTramp(GtkTreeView* treeView, GtkTreeIter* iter, GtkTreePath* path) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
+            if (_klass.rowCollapsed)
+              return (cast(typeof(&_vfuncRowCollapsedTramp))_klass.rowCollapsed)(treeView, iter, path);
+            return;
+          }
+
+          auto _iter = iter ? new gid.gtk4.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+          auto _path = path ? new gid.gtk4.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncRowCollapsed(_iter, _path);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.tree_view.TreeView.vfuncRowCollapsed");
+          }
+          if (_iter)
+            _iter._cUnborrow;
+          if (_path)
+            _path._cUnborrow;
+
+        }
+
+        _klass.rowCollapsed = cast(typeof(_klass.rowCollapsed))&_vfuncRowCollapsedTramp;
+        break;
+      }
+      case "row_expanded":
+      {
+        static extern(C) void _vfuncRowExpandedTramp(GtkTreeView* treeView, GtkTreeIter* iter, GtkTreePath* path) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
+            if (_klass.rowExpanded)
+              return (cast(typeof(&_vfuncRowExpandedTramp))_klass.rowExpanded)(treeView, iter, path);
+            return;
+          }
+
+          auto _iter = iter ? new gid.gtk4.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+          auto _path = path ? new gid.gtk4.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncRowExpanded(_iter, _path);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.tree_view.TreeView.vfuncRowExpanded");
+          }
+          if (_iter)
+            _iter._cUnborrow;
+          if (_path)
+            _path._cUnborrow;
+
+        }
+
+        _klass.rowExpanded = cast(typeof(_klass.rowExpanded))&_vfuncRowExpandedTramp;
+        break;
+      }
+      case "select_all":
+      {
+        static extern(C) gboolean _vfuncSelectAllTramp(GtkTreeView* treeView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
+            if (_klass.selectAll)
+              return (cast(typeof(&_vfuncSelectAllTramp))_klass.selectAll)(treeView);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncSelectAll();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.tree_view.TreeView.vfuncSelectAll");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.selectAll = cast(typeof(_klass.selectAll))&_vfuncSelectAllTramp;
+        break;
+      }
+      case "select_cursor_parent":
+      {
+        static extern(C) gboolean _vfuncSelectCursorParentTramp(GtkTreeView* treeView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
+            if (_klass.selectCursorParent)
+              return (cast(typeof(&_vfuncSelectCursorParentTramp))_klass.selectCursorParent)(treeView);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncSelectCursorParent();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.tree_view.TreeView.vfuncSelectCursorParent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.selectCursorParent = cast(typeof(_klass.selectCursorParent))&_vfuncSelectCursorParentTramp;
+        break;
+      }
+      case "select_cursor_row":
+      {
+        static extern(C) gboolean _vfuncSelectCursorRowTramp(GtkTreeView* treeView, gboolean startEditing) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
+            if (_klass.selectCursorRow)
+              return (cast(typeof(&_vfuncSelectCursorRowTramp))_klass.selectCursorRow)(treeView, startEditing);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncSelectCursorRow(cast(bool)startEditing);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.tree_view.TreeView.vfuncSelectCursorRow");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.selectCursorRow = cast(typeof(_klass.selectCursorRow))&_vfuncSelectCursorRowTramp;
+        break;
+      }
+      case "start_interactive_search":
+      {
+        static extern(C) gboolean _vfuncStartInteractiveSearchTramp(GtkTreeView* treeView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
+            if (_klass.startInteractiveSearch)
+              return (cast(typeof(&_vfuncStartInteractiveSearchTramp))_klass.startInteractiveSearch)(treeView);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncStartInteractiveSearch();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.tree_view.TreeView.vfuncStartInteractiveSearch");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.startInteractiveSearch = cast(typeof(_klass.startInteractiveSearch))&_vfuncStartInteractiveSearchTramp;
+        break;
+      }
+      case "test_collapse_row":
+      {
+        static extern(C) gboolean _vfuncTestCollapseRowTramp(GtkTreeView* treeView, GtkTreeIter* iter, GtkTreePath* path) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
+            if (_klass.testCollapseRow)
+              return (cast(typeof(&_vfuncTestCollapseRowTramp))_klass.testCollapseRow)(treeView, iter, path);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _iter = iter ? new gid.gtk4.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+          auto _path = path ? new gid.gtk4.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncTestCollapseRow(_iter, _path);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.tree_view.TreeView.vfuncTestCollapseRow");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_iter)
+            _iter._cUnborrow;
+          if (_path)
+            _path._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.testCollapseRow = cast(typeof(_klass.testCollapseRow))&_vfuncTestCollapseRowTramp;
+        break;
+      }
+      case "test_expand_row":
+      {
+        static extern(C) gboolean _vfuncTestExpandRowTramp(GtkTreeView* treeView, GtkTreeIter* iter, GtkTreePath* path) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
+            if (_klass.testExpandRow)
+              return (cast(typeof(&_vfuncTestExpandRowTramp))_klass.testExpandRow)(treeView, iter, path);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _iter = iter ? new gid.gtk4.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+          auto _path = path ? new gid.gtk4.tree_path.TreePath(cast(void*)path, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncTestExpandRow(_iter, _path);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.tree_view.TreeView.vfuncTestExpandRow");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_iter)
+            _iter._cUnborrow;
+          if (_path)
+            _path._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.testExpandRow = cast(typeof(_klass.testExpandRow))&_vfuncTestExpandRowTramp;
+        break;
+      }
+      case "toggle_cursor_row":
+      {
+        static extern(C) gboolean _vfuncToggleCursorRowTramp(GtkTreeView* treeView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
+            if (_klass.toggleCursorRow)
+              return (cast(typeof(&_vfuncToggleCursorRowTramp))_klass.toggleCursorRow)(treeView);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncToggleCursorRow();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.tree_view.TreeView.vfuncToggleCursorRow");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.toggleCursorRow = cast(typeof(_klass.toggleCursorRow))&_vfuncToggleCursorRowTramp;
+        break;
+      }
+      case "unselect_all":
+      {
+        static extern(C) gboolean _vfuncUnselectAllTramp(GtkTreeView* treeView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.tree_view.TreeView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)treeView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)treeView);
+            if (_klass.unselectAll)
+              return (cast(typeof(&_vfuncUnselectAllTramp))_klass.unselectAll)(treeView);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncUnselectAll();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.tree_view.TreeView.vfuncUnselectAll");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.unselectAll = cast(typeof(_klass.unselectAll))&_vfuncUnselectAllTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

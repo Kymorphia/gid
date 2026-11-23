@@ -70,6 +70,7 @@ void optionsForeach(gid.javascriptcore6.types.OptionsFunc function_) nothrow
 {
   extern(C) gboolean _function_Callback(const(char)* option, JSCOptionType type, const(char)* description, void* userData) nothrow
   {
+    gidAttachThread();
     bool _dretval;
     auto _dlg = cast(gid.javascriptcore6.types.OptionsFunc*)userData;
     string _option = option.fromCString!(No.Free);

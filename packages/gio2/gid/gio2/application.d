@@ -18,6 +18,8 @@ import gid.gio2.types;
 import gid.glib2.error;
 import gid.glib2.option_group;
 import gid.glib2.types;
+import gid.glib2.variant;
+import gid.glib2.variant_builder;
 import gid.glib2.variant_dict;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;
@@ -155,6 +157,15 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
   }
 
   /** */
@@ -347,10 +358,17 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   */
   this(string applicationId, gid.gio2.types.ApplicationFlags flags) nothrow
   {
-    GApplication* _cretval;
-    const(char)* _applicationId = applicationId.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = g_application_new(_applicationId, flags);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GApplication* _cretval;
+      const(char)* _applicationId = applicationId.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = g_application_new(_applicationId, flags);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -428,6 +446,368 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
     const(char)* _applicationId = applicationId.toCString!(No.Malloc, No.Nullable);
     _retval = cast(bool)g_application_id_is_valid(_applicationId);
     return _retval;
+  }
+
+  /**
+      Activates the application.
+      
+      In essence, this results in the #GApplication::activate signal being
+      emitted in the primary instance.
+      
+      The application must be registered before calling this function.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncActivate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncActivate()
+  {
+    auto _klass = cast(GApplicationClass*)_vfuncClass;
+    if (!_klass.activate)
+      return;
+
+    _klass.activate(cast(GApplication*)this._cPtr);
+  }
+
+  /**
+      invoked (locally) to add 'platform data' to be sent to
+          the primary instance when activating, opening or invoking actions. Must chain up
+  
+      Params:
+        builder =  (modified in place, changes are seen by the caller)
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncAddPlatformData` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncAddPlatformData(gid.glib2.variant_builder.VariantBuilder builder)
+  {
+    auto _klass = cast(GApplicationClass*)_vfuncClass;
+    if (!_klass.addPlatformData)
+      return;
+
+    _klass.addPlatformData(cast(GApplication*)this._cPtr, builder ? cast(GVariantBuilder*)builder._cPtr(No.Dup) : null);
+  }
+
+  /**
+      invoked on the primary instance after 'activate', 'open',
+          'command-line' or any action invocation, gets the 'platform data' from
+          the calling instance. Must chain up
+  
+      Params:
+        platformData = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncAfterEmit` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncAfterEmit(gid.glib2.variant.Variant platformData)
+  {
+    auto _klass = cast(GApplicationClass*)_vfuncClass;
+    if (!_klass.afterEmit)
+      return;
+
+    _klass.afterEmit(cast(GApplication*)this._cPtr, platformData ? cast(GVariant*)platformData._cPtr(No.Dup) : null);
+  }
+
+  /**
+      invoked on the primary instance before 'activate', 'open',
+          'command-line' or any action invocation, gets the 'platform data' from
+          the calling instance. Must chain up
+  
+      Params:
+        platformData = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncBeforeEmit` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncBeforeEmit(gid.glib2.variant.Variant platformData)
+  {
+    auto _klass = cast(GApplicationClass*)_vfuncClass;
+    if (!_klass.beforeEmit)
+      return;
+
+    _klass.beforeEmit(cast(GApplication*)this._cPtr, platformData ? cast(GVariant*)platformData._cPtr(No.Dup) : null);
+  }
+
+  /**
+      invoked on the primary instance when a command-line is
+        not handled locally
+  
+      Params:
+        commandLine = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCommandLine` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected int vfuncCommandLine(gid.gio2.application_command_line.ApplicationCommandLine commandLine)
+  {
+    auto _klass = cast(GApplicationClass*)_vfuncClass;
+    if (!_klass.commandLine)
+      return typeof(return).init;
+
+    int _retval;
+    _retval = _klass.commandLine(cast(GApplication*)this._cPtr, commandLine ? cast(GApplicationCommandLine*)commandLine._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      invoked locally during registration, if the application is
+          using its D-Bus backend. You can use this to export extra objects on the
+          bus, that need to exist before the application tries to own the bus name.
+          The function is passed the #GDBusConnection to to session bus, and the
+          object path that #GApplication will use to export its D-Bus API.
+          If this function returns true, registration will proceed; otherwise
+          registration will abort. Since: 2.34
+  
+      Params:
+        connection = 
+        objectPath = 
+      Returns: 
+      Throws: [ErrorWrap]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDbusRegister` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncDbusRegister(gid.gio2.dbus_connection.DBusConnection connection, string objectPath)
+  {
+    auto _klass = cast(GApplicationClass*)_vfuncClass;
+    if (!_klass.dbusRegister)
+      return typeof(return).init;
+
+    bool _retval;
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
+    GError *_err;
+    _retval = cast(bool)_klass.dbusRegister(cast(GApplication*)this._cPtr, connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, _objectPath, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      invoked locally during unregistration, if the application
+          is using its D-Bus backend. Use this to undo anything done by
+          the dbus_register vfunc. Since: 2.34
+  
+      Params:
+        connection = 
+        objectPath = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDbusUnregister` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDbusUnregister(gid.gio2.dbus_connection.DBusConnection connection, string objectPath)
+  {
+    auto _klass = cast(GApplicationClass*)_vfuncClass;
+    if (!_klass.dbusUnregister)
+      return;
+
+    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
+    _klass.dbusUnregister(cast(GApplication*)this._cPtr, connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, _objectPath);
+  }
+
+  /**
+      invoked locally after the parsing of the commandline
+       options has occurred. Since: 2.40
+  
+      Params:
+        options =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncHandleLocalOptions` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected int vfuncHandleLocalOptions(gid.glib2.variant_dict.VariantDict options)
+  {
+    auto _klass = cast(GApplicationClass*)_vfuncClass;
+    if (!_klass.handleLocalOptions)
+      return typeof(return).init;
+
+    int _retval;
+    _retval = _klass.handleLocalOptions(cast(GApplication*)this._cPtr, options ? cast(GVariantDict*)options._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      This virtual function is always invoked in the local instance. It
+      gets passed a pointer to a null-terminated copy of argv and is
+      expected to remove arguments that it handled (shifting up remaining
+      arguments).
+      
+      The last argument to local_command_line() is a pointer to the status
+      variable which can used to set the exit status that is returned from
+      [gid.gio2.application.Application.run].
+      
+      See [gid.gio2.application.Application.run] for more details on #GApplication startup.
+  
+      Params:
+        arguments = array of command line arguments
+        exitStatus = exit status to fill after processing the command line.
+      Returns: true if the commandline has been completely handled
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncLocalCommandLine` to chain up from an override.
+      Overriding it from D is not supported (InOut array parameter 'arguments' in callback with ownership 'Full' is not supported).
+  */
+  protected bool vfuncLocalCommandLine(ref string[] arguments, out int exitStatus)
+  {
+    auto _klass = cast(GApplicationClass*)_vfuncClass;
+    if (!_klass.localCommandLine)
+      return typeof(return).init;
+
+    bool _retval;
+    auto _arguments = cast(char**)gMalloc((arguments.length + 1) * (char*).sizeof);
+    foreach (i, s; arguments) _arguments[i] = s.toCString!(Yes.Malloc);
+    _retval = cast(bool)_klass.localCommandLine(cast(GApplication*)this._cPtr, &_arguments, cast(int*)&exitStatus);
+    uint _lenarguments;
+    if (_arguments)
+    {
+      for (; _arguments[_lenarguments] !is null; _lenarguments++)
+      {
+      }
+    }
+
+    arguments.length = _lenarguments;
+    foreach (i; 0 .. _lenarguments)
+      arguments[i] = _arguments[i].fromCString!(Yes.Free);
+    gFree(cast(void*)_arguments);
+    return _retval;
+  }
+
+  /**
+      invoked when another instance is taking over the name. Since: 2.60
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncNameLost` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncNameLost()
+  {
+    auto _klass = cast(GApplicationClass*)_vfuncClass;
+    if (!_klass.nameLost)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.nameLost(cast(GApplication*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Opens the given files.
+      
+      In essence, this results in the #GApplication::open signal being emitted
+      in the primary instance.
+      
+      n_files must be greater than zero.
+      
+      hint is simply passed through to the ::open signal.  It is
+      intended to be used by applications that have multiple modes for
+      opening files (eg: "view" vs "edit", etc).  Unless you have a need
+      for this functionality, you should use "".
+      
+      The application must be registered before calling this function
+      and it must have the [gid.gio2.types.ApplicationFlags.HandlesOpen] flag set.
+  
+      Params:
+        files = an array of #GFiles to open
+        hint = a hint (or ""), but never null
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncOpen` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncOpen(gid.gio2.file.File[] files, string hint)
+  {
+    auto _klass = cast(GApplicationClass*)_vfuncClass;
+    if (!_klass.open)
+      return;
+
+    int _nFiles;
+    if (files)
+      _nFiles = cast(int)files.length;
+
+    auto _files_arr = new GFile*[](files.length);
+    auto _files = _files_arr.ptr;
+    foreach (i, obj; files) _files[i] = obj ? cast(GFile*)(cast(gid.gobject2.object.ObjectWrap)obj)._cPtr(No.Dup): null;
+    const(char)* _hint = hint.toCString!(No.Malloc, No.Nullable);
+    _klass.open(cast(GApplication*)this._cPtr, _files, _nFiles, _hint);
+  }
+
+  /**
+      Used to be invoked on the primary instance when the use
+          count of the application drops to zero (and after any inactivity
+          timeout, if requested). Not used anymore since 2.32
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncQuitMainloop` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncQuitMainloop()
+  {
+    auto _klass = cast(GApplicationClass*)_vfuncClass;
+    if (!_klass.quitMainloop)
+      return;
+
+    _klass.quitMainloop(cast(GApplication*)this._cPtr);
+  }
+
+  /**
+      Used to be invoked on the primary instance from
+          [gid.gio2.application.Application.run] if the use-count is non-zero. Since 2.32,
+          GApplication is iterating the main context directly and is not
+          using run_mainloop anymore
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRunMainloop` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncRunMainloop()
+  {
+    auto _klass = cast(GApplicationClass*)_vfuncClass;
+    if (!_klass.runMainloop)
+      return;
+
+    _klass.runMainloop(cast(GApplication*)this._cPtr);
+  }
+
+  /**
+      invoked only on the registered primary instance immediately
+           after the main loop terminates
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncShutdown` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncShutdown()
+  {
+    auto _klass = cast(GApplicationClass*)_vfuncClass;
+    if (!_klass.shutdown)
+      return;
+
+    _klass.shutdown(cast(GApplication*)this._cPtr);
+  }
+
+  /**
+      invoked on the primary instance immediately after registration
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStartup` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncStartup()
+  {
+    auto _klass = cast(GApplicationClass*)_vfuncClass;
+    if (!_klass.startup)
+      return;
+
+    _klass.startup(cast(GApplication*)this._cPtr);
   }
 
   /**
@@ -1308,6 +1688,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1360,6 +1741,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1457,6 +1839,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1512,6 +1895,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1566,6 +1950,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1624,6 +2009,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1669,6 +2055,7 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1688,6 +2075,489 @@ class Application : gid.gobject2.object.ObjectWrap, gid.gio2.action_group.Action
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("startup", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Application
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.application.Application), T.stringof ~ " is not derived from gid.gio2.application.Application");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivate", true)[0]) == gid.gio2.application.Application))
+      _installVfunc(klass, "activate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAddPlatformData", true)[0]) == gid.gio2.application.Application))
+      _installVfunc(klass, "add_platform_data");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAfterEmit", true)[0]) == gid.gio2.application.Application))
+      _installVfunc(klass, "after_emit");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncBeforeEmit", true)[0]) == gid.gio2.application.Application))
+      _installVfunc(klass, "before_emit");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCommandLine", true)[0]) == gid.gio2.application.Application))
+      _installVfunc(klass, "command_line");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDbusRegister", true)[0]) == gid.gio2.application.Application))
+      _installVfunc(klass, "dbus_register");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDbusUnregister", true)[0]) == gid.gio2.application.Application))
+      _installVfunc(klass, "dbus_unregister");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHandleLocalOptions", true)[0]) == gid.gio2.application.Application))
+      _installVfunc(klass, "handle_local_options");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncLocalCommandLine", true)[0]) == gid.gio2.application.Application))
+      static assert(0, "Overriding gid.gio2.application.Application.vfuncLocalCommandLine is not supported: InOut array parameter 'arguments' in callback with ownership 'Full' is not supported");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncNameLost", true)[0]) == gid.gio2.application.Application))
+      _installVfunc(klass, "name_lost");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncOpen", true)[0]) == gid.gio2.application.Application))
+      _installVfunc(klass, "open");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncQuitMainloop", true)[0]) == gid.gio2.application.Application))
+      _installVfunc(klass, "quit_mainloop");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRunMainloop", true)[0]) == gid.gio2.application.Application))
+      _installVfunc(klass, "run_mainloop");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncShutdown", true)[0]) == gid.gio2.application.Application))
+      _installVfunc(klass, "shutdown");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStartup", true)[0]) == gid.gio2.application.Application))
+      _installVfunc(klass, "startup");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GApplicationClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate":
+      {
+        static extern(C) void _vfuncActivateTramp(GApplication* application) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          if (!_obj)
+          {
+            auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
+            if (_klass.activate)
+              return (cast(typeof(&_vfuncActivateTramp))_klass.activate)(application);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncActivate();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.application.Application.vfuncActivate");
+          }
+        }
+
+        _klass.activate = cast(typeof(_klass.activate))&_vfuncActivateTramp;
+        break;
+      }
+      case "add_platform_data":
+      {
+        static extern(C) void _vfuncAddPlatformDataTramp(GApplication* application, GVariantBuilder* builder) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          if (!_obj)
+          {
+            auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
+            if (_klass.addPlatformData)
+              return (cast(typeof(&_vfuncAddPlatformDataTramp))_klass.addPlatformData)(application, builder);
+            return;
+          }
+
+          auto _builder = builder ? new gid.glib2.variant_builder.VariantBuilder(cast(void*)builder, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncAddPlatformData(_builder);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.application.Application.vfuncAddPlatformData");
+          }
+          if (_builder)
+            _builder._cUnborrow;
+
+        }
+
+        _klass.addPlatformData = cast(typeof(_klass.addPlatformData))&_vfuncAddPlatformDataTramp;
+        break;
+      }
+      case "after_emit":
+      {
+        static extern(C) void _vfuncAfterEmitTramp(GApplication* application, GVariant* platformData) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          if (!_obj)
+          {
+            auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
+            if (_klass.afterEmit)
+              return (cast(typeof(&_vfuncAfterEmitTramp))_klass.afterEmit)(application, platformData);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncAfterEmit(platformData ? new gid.glib2.variant.Variant(cast(void*)platformData, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.application.Application.vfuncAfterEmit");
+          }
+        }
+
+        _klass.afterEmit = cast(typeof(_klass.afterEmit))&_vfuncAfterEmitTramp;
+        break;
+      }
+      case "before_emit":
+      {
+        static extern(C) void _vfuncBeforeEmitTramp(GApplication* application, GVariant* platformData) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          if (!_obj)
+          {
+            auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
+            if (_klass.beforeEmit)
+              return (cast(typeof(&_vfuncBeforeEmitTramp))_klass.beforeEmit)(application, platformData);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncBeforeEmit(platformData ? new gid.glib2.variant.Variant(cast(void*)platformData, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.application.Application.vfuncBeforeEmit");
+          }
+        }
+
+        _klass.beforeEmit = cast(typeof(_klass.beforeEmit))&_vfuncBeforeEmitTramp;
+        break;
+      }
+      case "command_line":
+      {
+        static extern(C) int _vfuncCommandLineTramp(GApplication* application, GApplicationCommandLine* commandLine) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          if (!_obj)
+          {
+            auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
+            if (_klass.commandLine)
+              return (cast(typeof(&_vfuncCommandLineTramp))_klass.commandLine)(application, commandLine);
+            return typeof(return).init;
+          }
+
+          int _retval;
+
+          try
+          {
+            _retval = _obj.vfuncCommandLine(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.application_command_line.ApplicationCommandLine)(cast(void*)commandLine, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.application.Application.vfuncCommandLine");
+          }
+          return _retval;
+        }
+
+        _klass.commandLine = cast(typeof(_klass.commandLine))&_vfuncCommandLineTramp;
+        break;
+      }
+      case "dbus_register":
+      {
+        static extern(C) gboolean _vfuncDbusRegisterTramp(GApplication* application, GDBusConnection* connection, const(char)* objectPath, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          if (!_obj)
+          {
+            auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
+            if (_klass.dbusRegister)
+              return (cast(typeof(&_vfuncDbusRegisterTramp))_klass.dbusRegister)(application, connection, objectPath, _err);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          string _objectPath = objectPath.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncDbusRegister(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.dbus_connection.DBusConnection)(cast(void*)connection, No.Take), _objectPath);
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.dbusRegister = cast(typeof(_klass.dbusRegister))&_vfuncDbusRegisterTramp;
+        break;
+      }
+      case "dbus_unregister":
+      {
+        static extern(C) void _vfuncDbusUnregisterTramp(GApplication* application, GDBusConnection* connection, const(char)* objectPath) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          if (!_obj)
+          {
+            auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
+            if (_klass.dbusUnregister)
+              return (cast(typeof(&_vfuncDbusUnregisterTramp))_klass.dbusUnregister)(application, connection, objectPath);
+            return;
+          }
+
+          string _objectPath = objectPath.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncDbusUnregister(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.dbus_connection.DBusConnection)(cast(void*)connection, No.Take), _objectPath);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.application.Application.vfuncDbusUnregister");
+          }
+        }
+
+        _klass.dbusUnregister = cast(typeof(_klass.dbusUnregister))&_vfuncDbusUnregisterTramp;
+        break;
+      }
+      case "handle_local_options":
+      {
+        static extern(C) int _vfuncHandleLocalOptionsTramp(GApplication* application, GVariantDict* options) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          if (!_obj)
+          {
+            auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
+            if (_klass.handleLocalOptions)
+              return (cast(typeof(&_vfuncHandleLocalOptionsTramp))_klass.handleLocalOptions)(application, options);
+            return typeof(return).init;
+          }
+
+          int _retval;
+          auto _options = options ? new gid.glib2.variant_dict.VariantDict(cast(void*)options, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _retval = _obj.vfuncHandleLocalOptions(_options);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.application.Application.vfuncHandleLocalOptions");
+          }
+          if (_options)
+            _options._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.handleLocalOptions = cast(typeof(_klass.handleLocalOptions))&_vfuncHandleLocalOptionsTramp;
+        break;
+      }
+      case "name_lost":
+      {
+        static extern(C) gboolean _vfuncNameLostTramp(GApplication* application) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          if (!_obj)
+          {
+            auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
+            if (_klass.nameLost)
+              return (cast(typeof(&_vfuncNameLostTramp))_klass.nameLost)(application);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncNameLost();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.application.Application.vfuncNameLost");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.nameLost = cast(typeof(_klass.nameLost))&_vfuncNameLostTramp;
+        break;
+      }
+      case "open":
+      {
+        static extern(C) void _vfuncOpenTramp(GApplication* application, GFile** files, int nFiles, const(char)* hint) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          if (!_obj)
+          {
+            auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
+            if (_klass.open)
+              return (cast(typeof(&_vfuncOpenTramp))_klass.open)(application, files, nFiles, hint);
+            return;
+          }
+
+          gid.gio2.file.File[] _files;
+          _files.length = nFiles;
+          foreach (i; 0 .. nFiles)
+            _files[i] = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.file.File)(files[i], No.Take);
+          string _hint = hint.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncOpen(_files, _hint);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.application.Application.vfuncOpen");
+          }
+        }
+
+        _klass.open = cast(typeof(_klass.open))&_vfuncOpenTramp;
+        break;
+      }
+      case "quit_mainloop":
+      {
+        static extern(C) void _vfuncQuitMainloopTramp(GApplication* application) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          if (!_obj)
+          {
+            auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
+            if (_klass.quitMainloop)
+              return (cast(typeof(&_vfuncQuitMainloopTramp))_klass.quitMainloop)(application);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncQuitMainloop();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.application.Application.vfuncQuitMainloop");
+          }
+        }
+
+        _klass.quitMainloop = cast(typeof(_klass.quitMainloop))&_vfuncQuitMainloopTramp;
+        break;
+      }
+      case "run_mainloop":
+      {
+        static extern(C) void _vfuncRunMainloopTramp(GApplication* application) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          if (!_obj)
+          {
+            auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
+            if (_klass.runMainloop)
+              return (cast(typeof(&_vfuncRunMainloopTramp))_klass.runMainloop)(application);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRunMainloop();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.application.Application.vfuncRunMainloop");
+          }
+        }
+
+        _klass.runMainloop = cast(typeof(_klass.runMainloop))&_vfuncRunMainloopTramp;
+        break;
+      }
+      case "shutdown":
+      {
+        static extern(C) void _vfuncShutdownTramp(GApplication* application) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          if (!_obj)
+          {
+            auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
+            if (_klass.shutdown)
+              return (cast(typeof(&_vfuncShutdownTramp))_klass.shutdown)(application);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncShutdown();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.application.Application.vfuncShutdown");
+          }
+        }
+
+        _klass.shutdown = cast(typeof(_klass.shutdown))&_vfuncShutdownTramp;
+        break;
+      }
+      case "startup":
+      {
+        static extern(C) void _vfuncStartupTramp(GApplication* application) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          if (!_obj)
+          {
+            auto _klass = cast(GApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
+            if (_klass.startup)
+              return (cast(typeof(&_vfuncStartupTramp))_klass.startup)(application);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncStartup();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.application.Application.vfuncStartup");
+          }
+        }
+
+        _klass.startup = cast(typeof(_klass.startup))&_vfuncStartupTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

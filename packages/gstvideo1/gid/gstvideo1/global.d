@@ -697,6 +697,7 @@ void videoConvertSampleAsync(gid.gst1.sample.Sample sample, gid.gst1.caps.Caps t
 {
   extern(C) void _callbackCallback(GstSample* sample, GError* error, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.gstvideo1.types.VideoConvertSampleCallback*)userData;
     auto _sample = sample ? new gid.gst1.sample.Sample(cast(void*)sample, Yes.Take)._cBorrow : null;
 

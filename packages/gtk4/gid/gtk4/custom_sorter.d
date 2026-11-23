@@ -21,6 +21,15 @@ class CustomSorter : gid.gtk4.sorter.Sorter
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -71,6 +80,7 @@ class CustomSorter : gid.gtk4.sorter.Sorter
   {
     extern(C) int _sortFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(CustomSortDelegate*)userData;
       auto aObj = cast(GObject*)a;
       auto bObj = cast(GObject*)b;
@@ -107,6 +117,7 @@ class CustomSorter : gid.gtk4.sorter.Sorter
   {
     extern(C) int _sortFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(CustomSortDelegate*)userData;
       auto aObj = cast(GObject*)a;
       auto bObj = cast(GObject*)b;

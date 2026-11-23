@@ -132,9 +132,154 @@ class ListBox : gid.gtk3.container.Container
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_list_box_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_list_box_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /**
+      Class handler for the #GtkListBox::activate-cursor-row signal
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncActivateCursorRow` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncActivateCursorRow()
+  {
+    auto _klass = cast(GtkListBoxClass*)_vfuncClass;
+    if (!_klass.activateCursorRow)
+      return;
+
+    _klass.activateCursorRow(cast(GtkListBox*)this._cPtr);
+  }
+
+  /**
+      Class handler for the #GtkListBox::move-cursor signal
+  
+      Params:
+        step = 
+        count = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncMoveCursor` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncMoveCursor(gid.gtk3.types.MovementStep step, int count)
+  {
+    auto _klass = cast(GtkListBoxClass*)_vfuncClass;
+    if (!_klass.moveCursor)
+      return;
+
+    _klass.moveCursor(cast(GtkListBox*)this._cPtr, step, count);
+  }
+
+  /**
+      Class handler for the #GtkListBox::row-activated signal
+  
+      Params:
+        row = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRowActivated` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncRowActivated(gid.gtk3.list_box_row.ListBoxRow row)
+  {
+    auto _klass = cast(GtkListBoxClass*)_vfuncClass;
+    if (!_klass.rowActivated)
+      return;
+
+    _klass.rowActivated(cast(GtkListBox*)this._cPtr, row ? cast(GtkListBoxRow*)row._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Class handler for the #GtkListBox::row-selected signal
+  
+      Params:
+        row = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRowSelected` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncRowSelected(gid.gtk3.list_box_row.ListBoxRow row)
+  {
+    auto _klass = cast(GtkListBoxClass*)_vfuncClass;
+    if (!_klass.rowSelected)
+      return;
+
+    _klass.rowSelected(cast(GtkListBox*)this._cPtr, row ? cast(GtkListBoxRow*)row._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Select all children of box, if the selection mode allows it.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSelectAll` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSelectAll()
+  {
+    auto _klass = cast(GtkListBoxClass*)_vfuncClass;
+    if (!_klass.selectAll)
+      return;
+
+    _klass.selectAll(cast(GtkListBox*)this._cPtr);
+  }
+
+  /**
+      Class handler for the #GtkListBox::selected-rows-changed signal
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSelectedRowsChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSelectedRowsChanged()
+  {
+    auto _klass = cast(GtkListBoxClass*)_vfuncClass;
+    if (!_klass.selectedRowsChanged)
+      return;
+
+    _klass.selectedRowsChanged(cast(GtkListBox*)this._cPtr);
+  }
+
+  /**
+      Class handler for the #GtkListBox::toggle-cursor-row signal
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncToggleCursorRow` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncToggleCursorRow()
+  {
+    auto _klass = cast(GtkListBoxClass*)_vfuncClass;
+    if (!_klass.toggleCursorRow)
+      return;
+
+    _klass.toggleCursorRow(cast(GtkListBox*)this._cPtr);
+  }
+
+  /**
+      Unselect all children of box, if the selection mode allows it.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncUnselectAll` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncUnselectAll()
+  {
+    auto _klass = cast(GtkListBoxClass*)_vfuncClass;
+    if (!_klass.unselectAll)
+      return;
+
+    _klass.unselectAll(cast(GtkListBox*)this._cPtr);
   }
 
   /**
@@ -164,6 +309,7 @@ class ListBox : gid.gtk3.container.Container
   {
     extern(C) GtkWidget* _createWidgetFuncCallback(GObject* item, void* userData) nothrow
     {
+      gidAttachThread();
       gid.gtk3.widget.Widget _dretval;
       auto _dlg = cast(gid.gtk3.types.ListBoxCreateWidgetFunc*)userData;
 
@@ -401,6 +547,7 @@ class ListBox : gid.gtk3.container.Container
   {
     extern(C) void _funcCallback(GtkListBox* box, GtkListBoxRow* row, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk3.types.ListBoxForeachFunc*)userData;
 
       try
@@ -466,6 +613,7 @@ class ListBox : gid.gtk3.container.Container
   {
     extern(C) gboolean _filterFuncCallback(GtkListBoxRow* row, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gtk3.types.ListBoxFilterFunc*)userData;
 
@@ -514,6 +662,7 @@ class ListBox : gid.gtk3.container.Container
   {
     extern(C) void _updateHeaderCallback(GtkListBoxRow* row, GtkListBoxRow* before, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk3.types.ListBoxUpdateHeaderFunc*)userData;
 
       try
@@ -573,6 +722,7 @@ class ListBox : gid.gtk3.container.Container
   {
     extern(C) int _sortFuncCallback(GtkListBoxRow* row1, GtkListBoxRow* row2, void* userData) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.gtk3.types.ListBoxSortFunc*)userData;
 
@@ -634,6 +784,7 @@ class ListBox : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -684,6 +835,7 @@ class ListBox : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -737,6 +889,7 @@ class ListBox : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -792,6 +945,7 @@ class ListBox : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -843,6 +997,7 @@ class ListBox : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -888,6 +1043,7 @@ class ListBox : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -932,6 +1088,7 @@ class ListBox : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -980,6 +1137,7 @@ class ListBox : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -999,6 +1157,272 @@ class ListBox : gid.gtk3.container.Container
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unselect-all", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from ListBox
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.list_box.ListBox), T.stringof ~ " is not derived from gid.gtk3.list_box.ListBox");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivateCursorRow", true)[0]) == gid.gtk3.list_box.ListBox))
+      _installVfunc(klass, "activate_cursor_row");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMoveCursor", true)[0]) == gid.gtk3.list_box.ListBox))
+      _installVfunc(klass, "move_cursor");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRowActivated", true)[0]) == gid.gtk3.list_box.ListBox))
+      _installVfunc(klass, "row_activated");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRowSelected", true)[0]) == gid.gtk3.list_box.ListBox))
+      _installVfunc(klass, "row_selected");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSelectAll", true)[0]) == gid.gtk3.list_box.ListBox))
+      _installVfunc(klass, "select_all");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSelectedRowsChanged", true)[0]) == gid.gtk3.list_box.ListBox))
+      _installVfunc(klass, "selected_rows_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncToggleCursorRow", true)[0]) == gid.gtk3.list_box.ListBox))
+      _installVfunc(klass, "toggle_cursor_row");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUnselectAll", true)[0]) == gid.gtk3.list_box.ListBox))
+      _installVfunc(klass, "unselect_all");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkListBoxClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate_cursor_row":
+      {
+        static extern(C) void _vfuncActivateCursorRowTramp(GtkListBox* box) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.list_box.ListBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkListBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
+            if (_klass.activateCursorRow)
+              return (cast(typeof(&_vfuncActivateCursorRowTramp))_klass.activateCursorRow)(box);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncActivateCursorRow();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.list_box.ListBox.vfuncActivateCursorRow");
+          }
+        }
+
+        _klass.activateCursorRow = cast(typeof(_klass.activateCursorRow))&_vfuncActivateCursorRowTramp;
+        break;
+      }
+      case "move_cursor":
+      {
+        static extern(C) void _vfuncMoveCursorTramp(GtkListBox* box, GtkMovementStep step, int count) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.list_box.ListBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkListBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
+            if (_klass.moveCursor)
+              return (cast(typeof(&_vfuncMoveCursorTramp))_klass.moveCursor)(box, step, count);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMoveCursor(step, count);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.list_box.ListBox.vfuncMoveCursor");
+          }
+        }
+
+        _klass.moveCursor = cast(typeof(_klass.moveCursor))&_vfuncMoveCursorTramp;
+        break;
+      }
+      case "row_activated":
+      {
+        static extern(C) void _vfuncRowActivatedTramp(GtkListBox* box, GtkListBoxRow* row) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.list_box.ListBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkListBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
+            if (_klass.rowActivated)
+              return (cast(typeof(&_vfuncRowActivatedTramp))_klass.rowActivated)(box, row);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRowActivated(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.list_box_row.ListBoxRow)(cast(void*)row, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.list_box.ListBox.vfuncRowActivated");
+          }
+        }
+
+        _klass.rowActivated = cast(typeof(_klass.rowActivated))&_vfuncRowActivatedTramp;
+        break;
+      }
+      case "row_selected":
+      {
+        static extern(C) void _vfuncRowSelectedTramp(GtkListBox* box, GtkListBoxRow* row) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.list_box.ListBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkListBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
+            if (_klass.rowSelected)
+              return (cast(typeof(&_vfuncRowSelectedTramp))_klass.rowSelected)(box, row);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRowSelected(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.list_box_row.ListBoxRow)(cast(void*)row, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.list_box.ListBox.vfuncRowSelected");
+          }
+        }
+
+        _klass.rowSelected = cast(typeof(_klass.rowSelected))&_vfuncRowSelectedTramp;
+        break;
+      }
+      case "select_all":
+      {
+        static extern(C) void _vfuncSelectAllTramp(GtkListBox* box) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.list_box.ListBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkListBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
+            if (_klass.selectAll)
+              return (cast(typeof(&_vfuncSelectAllTramp))_klass.selectAll)(box);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSelectAll();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.list_box.ListBox.vfuncSelectAll");
+          }
+        }
+
+        _klass.selectAll = cast(typeof(_klass.selectAll))&_vfuncSelectAllTramp;
+        break;
+      }
+      case "selected_rows_changed":
+      {
+        static extern(C) void _vfuncSelectedRowsChangedTramp(GtkListBox* box) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.list_box.ListBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkListBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
+            if (_klass.selectedRowsChanged)
+              return (cast(typeof(&_vfuncSelectedRowsChangedTramp))_klass.selectedRowsChanged)(box);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSelectedRowsChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.list_box.ListBox.vfuncSelectedRowsChanged");
+          }
+        }
+
+        _klass.selectedRowsChanged = cast(typeof(_klass.selectedRowsChanged))&_vfuncSelectedRowsChangedTramp;
+        break;
+      }
+      case "toggle_cursor_row":
+      {
+        static extern(C) void _vfuncToggleCursorRowTramp(GtkListBox* box) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.list_box.ListBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkListBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
+            if (_klass.toggleCursorRow)
+              return (cast(typeof(&_vfuncToggleCursorRowTramp))_klass.toggleCursorRow)(box);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncToggleCursorRow();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.list_box.ListBox.vfuncToggleCursorRow");
+          }
+        }
+
+        _klass.toggleCursorRow = cast(typeof(_klass.toggleCursorRow))&_vfuncToggleCursorRowTramp;
+        break;
+      }
+      case "unselect_all":
+      {
+        static extern(C) void _vfuncUnselectAllTramp(GtkListBox* box) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.list_box.ListBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkListBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
+            if (_klass.unselectAll)
+              return (cast(typeof(&_vfuncUnselectAllTramp))_klass.unselectAll)(box);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncUnselectAll();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.list_box.ListBox.vfuncUnselectAll");
+          }
+        }
+
+        _klass.unselectAll = cast(typeof(_klass.unselectAll))&_vfuncUnselectAllTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

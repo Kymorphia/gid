@@ -124,6 +124,7 @@ size_t schedulerAdd(gid.gtksource5.types.SchedulerCallback callback) nothrow
 {
   extern(C) gboolean _callbackCallback(long deadline, void* userData) nothrow
   {
+    gidAttachThread();
     bool _dretval;
     auto _dlg = cast(gid.gtksource5.types.SchedulerCallback*)userData;
 

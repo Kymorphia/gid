@@ -7,6 +7,8 @@ public import gid.core.utils;
 public import gid.gio2.c.functions;
 public import gid.gio2.c.types;
 public import gid.gio2.types;
+public import gid.gobject2.c.functions;
+public import gid.gobject2.c.types;
 public import gid.gobject2.dclosure;
 public import gid.gobject2.gid_builder;
 public import gid.gobject2.object;
@@ -66,6 +68,28 @@ template MemoryMonitorT()
 
 
   /**
+      the virtual function pointer for the
+       #GMemoryMonitor::low-memory-warning signal.
+  
+      Params:
+        level = 
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncLowMemoryWarning`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncLowMemoryWarning(gid.gio2.types.MemoryMonitorWarningLevel level)
+  {
+    auto _klass = cast(GMemoryMonitorInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gio2.memory_monitor.MemoryMonitor._getGType);
+    if (!_klass || !_klass.lowMemoryWarning)
+      return;
+
+    _klass.lowMemoryWarning(cast(GMemoryMonitor*)this._cPtr, level);
+  }
+
+  /**
       Connect to `LowMemoryWarning` signal.
   
       Emitted when the system is running low on free memory.
@@ -100,6 +124,7 @@ template MemoryMonitorT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -122,6 +147,61 @@ template MemoryMonitorT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("low-memory-warning", closure, after);
+  }
+
+  /// True if the D class T overrides any vfunc method of gid.gio2.memory_monitor.MemoryMonitor (DiG)
+  enum bool _ifaceVfuncsOverridden_gid_gio2_memory_monitor_MemoryMonitor(T) = !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncLowMemoryWarning", true)[0], gid.gobject2.object.GidIfaceVfunc);
+
+  /**
+      Install the C trampolines of the gid.gio2.memory_monitor.MemoryMonitor vfunc methods which a D class overrides into the interface
+      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      trampoline is a compile error.
+      Params:
+        T = D class
+        iface = Interface structure of the GType registered for T
+  */
+  static void _installIfaceVfuncs_gid_gio2_memory_monitor_MemoryMonitor(T)(void* iface) nothrow
+  {
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncLowMemoryWarning", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gio2_memory_monitor_MemoryMonitor(iface, "low_memory_warning");
+  }
+
+  private static void _installIfaceVfunc_gid_gio2_memory_monitor_MemoryMonitor(void* iface, string vfunc) nothrow
+  {
+    auto _klass = cast(GMemoryMonitorInterface*)iface;
+
+    switch (vfunc)
+    {
+      case "low_memory_warning":
+      {
+        static extern(C) void _vfuncLowMemoryWarningTramp(GMemoryMonitor* monitor, GMemoryMonitorWarningLevel level) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)monitor);
+          if (!_obj)
+          {
+            auto _klass = cast(GMemoryMonitorInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)monitor), gid.gio2.memory_monitor.MemoryMonitor._getGType);
+            if (_klass && _klass.lowMemoryWarning)
+              return (cast(typeof(&_vfuncLowMemoryWarningTramp))_klass.lowMemoryWarning)(monitor, level);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncLowMemoryWarning(level);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.memory_monitor.MemoryMonitor.vfuncLowMemoryWarning");
+          }
+        }
+
+        _klass.lowMemoryWarning = cast(typeof(_klass.lowMemoryWarning))&_vfuncLowMemoryWarningTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

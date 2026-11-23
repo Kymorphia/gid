@@ -638,25 +638,33 @@ class Task : gid.gobject2.object.ObjectWrap, gid.gio2.async_result.AsyncResult
   */
   this(gid.gobject2.object.ObjectWrap sourceObject = null, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null) nothrow
   {
-    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
     {
-      ptrThawGC(data);
-      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
-
-      try
-      {
-        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
-      }
+      this(_newDSubclassGObject(_dSubclassGType, sourceObject !is null || cancellable !is null || callback !is null), Yes.Take);
     }
-    auto _callbackCB = callback ? &_callbackCallback : null;
-    GTask* _cretval;
-    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    _cretval = g_task_new(sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
-    this(_cretval, Yes.Take);
+    else
+    {
+      extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+      {
+        gidAttachThread();
+        ptrThawGC(data);
+        auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+        try
+        {
+          (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+        }
+        catch (Exception e)
+        {
+          gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+        }
+      }
+      auto _callbackCB = callback ? &_callbackCallback : null;
+      GTask* _cretval;
+      auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+      _cretval = g_task_new(sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -699,6 +707,7 @@ class Task : gid.gobject2.object.ObjectWrap, gid.gio2.async_result.AsyncResult
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 

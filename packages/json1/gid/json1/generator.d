@@ -157,9 +157,16 @@ class Generator : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    JsonGenerator* _cretval;
-    _cretval = json_generator_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      JsonGenerator* _cretval;
+      _cretval = json_generator_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

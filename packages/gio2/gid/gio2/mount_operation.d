@@ -273,9 +273,123 @@ class MountOperation : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GMountOperation* _cretval;
-    _cretval = g_mount_operation_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GMountOperation* _cretval;
+      _cretval = g_mount_operation_new();
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncAborted()
+  {
+    auto _klass = cast(GMountOperationClass*)_vfuncClass;
+    if (!_klass.aborted)
+      return;
+
+    _klass.aborted(cast(GMountOperation*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncAskPassword(string message, string defaultUser, string defaultDomain, gid.gio2.types.AskPasswordFlags flags)
+  {
+    auto _klass = cast(GMountOperationClass*)_vfuncClass;
+    if (!_klass.askPassword)
+      return;
+
+    const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
+    const(char)* _defaultUser = defaultUser.toCString!(No.Malloc, No.Nullable);
+    const(char)* _defaultDomain = defaultDomain.toCString!(No.Malloc, No.Nullable);
+    _klass.askPassword(cast(GMountOperation*)this._cPtr, _message, _defaultUser, _defaultDomain, flags);
+  }
+
+  /**
+      Virtual implementation of #GMountOperation::ask-question.
+  
+      Params:
+        message = string containing a message to display to the user
+        choices = an array of
+             strings for each possible choice
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncAskQuestion` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncAskQuestion(string message, string[] choices)
+  {
+    auto _klass = cast(GMountOperationClass*)_vfuncClass;
+    if (!_klass.askQuestion)
+      return;
+
+    const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
+    auto _choices_arr = new char*[](choices.length + 1);
+    auto _choices = cast(char**)_choices_arr.ptr;
+    foreach (i, s; choices) _choices[i] = s.toCString!(No.Malloc);
+    _klass.askQuestion(cast(GMountOperation*)this._cPtr, _message, _choices);
+  }
+
+  /**
+      Emits the #GMountOperation::reply signal.
+  
+      Params:
+        result = a #GMountOperationResult
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncReply` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncReply(gid.gio2.types.MountOperationResult result)
+  {
+    auto _klass = cast(GMountOperationClass*)_vfuncClass;
+    if (!_klass.reply)
+      return;
+
+    _klass.reply(cast(GMountOperation*)this._cPtr, result);
+  }
+
+  /**
+      Virtual implementation of #GMountOperation::show-processes.
+  
+      Params:
+        message = string containing a message to display to the user
+        processes = an array of #GPid for processes blocking
+             the operation
+        choices = an array of
+             strings for each possible choice
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncShowProcesses` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncShowProcesses(string message, gid.glib2.types.Pid[] processes, string[] choices)
+  {
+    auto _klass = cast(GMountOperationClass*)_vfuncClass;
+    if (!_klass.showProcesses)
+      return;
+
+    const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
+    auto _processes = gArrayFromD!(gid.glib2.types.Pid, false)(processes);
+    scope(exit) containerFree!(GArray*, gid.glib2.types.Pid, GidOwnership.None)(_processes);
+    auto _choices_arr = new char*[](choices.length + 1);
+    auto _choices = cast(char**)_choices_arr.ptr;
+    foreach (i, s; choices) _choices[i] = s.toCString!(No.Malloc);
+    _klass.showProcesses(cast(GMountOperation*)this._cPtr, _message, _processes, _choices);
+  }
+
+  /** */
+  protected void vfuncShowUnmountProgress(string message, long timeLeft, long bytesLeft)
+  {
+    auto _klass = cast(GMountOperationClass*)_vfuncClass;
+    if (!_klass.showUnmountProgress)
+      return;
+
+    const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
+    _klass.showUnmountProgress(cast(GMountOperation*)this._cPtr, _message, timeLeft, bytesLeft);
   }
 
   /**
@@ -525,6 +639,7 @@ class MountOperation : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -585,6 +700,7 @@ class MountOperation : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -652,6 +768,7 @@ class MountOperation : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -705,6 +822,7 @@ class MountOperation : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -773,6 +891,7 @@ class MountOperation : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -853,6 +972,7 @@ class MountOperation : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -881,6 +1001,247 @@ class MountOperation : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("show-unmount-progress", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from MountOperation
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.mount_operation.MountOperation), T.stringof ~ " is not derived from gid.gio2.mount_operation.MountOperation");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAborted", true)[0]) == gid.gio2.mount_operation.MountOperation))
+      _installVfunc(klass, "aborted");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAskPassword", true)[0]) == gid.gio2.mount_operation.MountOperation))
+      _installVfunc(klass, "ask_password");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAskQuestion", true)[0]) == gid.gio2.mount_operation.MountOperation))
+      _installVfunc(klass, "ask_question");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncReply", true)[0]) == gid.gio2.mount_operation.MountOperation))
+      _installVfunc(klass, "reply");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncShowProcesses", true)[0]) == gid.gio2.mount_operation.MountOperation))
+      _installVfunc(klass, "show_processes");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncShowUnmountProgress", true)[0]) == gid.gio2.mount_operation.MountOperation))
+      _installVfunc(klass, "show_unmount_progress");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GMountOperationClass*)klass;
+
+    switch (vfunc)
+    {
+      case "aborted":
+      {
+        static extern(C) void _vfuncAbortedTramp(GMountOperation* op) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.mount_operation.MountOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)op);
+          if (!_obj)
+          {
+            auto _klass = cast(GMountOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)op);
+            if (_klass.aborted)
+              return (cast(typeof(&_vfuncAbortedTramp))_klass.aborted)(op);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncAborted();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.mount_operation.MountOperation.vfuncAborted");
+          }
+        }
+
+        _klass.aborted = cast(typeof(_klass.aborted))&_vfuncAbortedTramp;
+        break;
+      }
+      case "ask_password":
+      {
+        static extern(C) void _vfuncAskPasswordTramp(GMountOperation* op, const(char)* message, const(char)* defaultUser, const(char)* defaultDomain, GAskPasswordFlags flags) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.mount_operation.MountOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)op);
+          if (!_obj)
+          {
+            auto _klass = cast(GMountOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)op);
+            if (_klass.askPassword)
+              return (cast(typeof(&_vfuncAskPasswordTramp))_klass.askPassword)(op, message, defaultUser, defaultDomain, flags);
+            return;
+          }
+
+          string _message = message.fromCString!(No.Free);
+          string _defaultUser = defaultUser.fromCString!(No.Free);
+          string _defaultDomain = defaultDomain.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncAskPassword(_message, _defaultUser, _defaultDomain, flags);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.mount_operation.MountOperation.vfuncAskPassword");
+          }
+        }
+
+        _klass.askPassword = cast(typeof(_klass.askPassword))&_vfuncAskPasswordTramp;
+        break;
+      }
+      case "ask_question":
+      {
+        static extern(C) void _vfuncAskQuestionTramp(GMountOperation* op, const(char)* message, const(char*)* choices) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.mount_operation.MountOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)op);
+          if (!_obj)
+          {
+            auto _klass = cast(GMountOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)op);
+            if (_klass.askQuestion)
+              return (cast(typeof(&_vfuncAskQuestionTramp))_klass.askQuestion)(op, message, choices);
+            return;
+          }
+
+          string _message = message.fromCString!(No.Free);
+          string[] _choices;
+          uint _lenchoices;
+          if (choices)
+          {
+            for (; choices[_lenchoices] !is null; _lenchoices++)
+            {
+            }
+          }
+
+          _choices.length = _lenchoices;
+          foreach (i; 0 .. _lenchoices)
+            _choices[i] = choices[i].fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncAskQuestion(_message, _choices);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.mount_operation.MountOperation.vfuncAskQuestion");
+          }
+        }
+
+        _klass.askQuestion = cast(typeof(_klass.askQuestion))&_vfuncAskQuestionTramp;
+        break;
+      }
+      case "reply":
+      {
+        static extern(C) void _vfuncReplyTramp(GMountOperation* op, GMountOperationResult result) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.mount_operation.MountOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)op);
+          if (!_obj)
+          {
+            auto _klass = cast(GMountOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)op);
+            if (_klass.reply)
+              return (cast(typeof(&_vfuncReplyTramp))_klass.reply)(op, result);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncReply(result);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.mount_operation.MountOperation.vfuncReply");
+          }
+        }
+
+        _klass.reply = cast(typeof(_klass.reply))&_vfuncReplyTramp;
+        break;
+      }
+      case "show_processes":
+      {
+        static extern(C) void _vfuncShowProcessesTramp(GMountOperation* op, const(char)* message, GArray* processes, const(char*)* choices) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.mount_operation.MountOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)op);
+          if (!_obj)
+          {
+            auto _klass = cast(GMountOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)op);
+            if (_klass.showProcesses)
+              return (cast(typeof(&_vfuncShowProcessesTramp))_klass.showProcesses)(op, message, processes, choices);
+            return;
+          }
+
+          string _message = message.fromCString!(No.Free);
+          auto _processes = gArrayToD!(gid.glib2.types.Pid, GidOwnership.None)(processes);
+          string[] _choices;
+          uint _lenchoices;
+          if (choices)
+          {
+            for (; choices[_lenchoices] !is null; _lenchoices++)
+            {
+            }
+          }
+
+          _choices.length = _lenchoices;
+          foreach (i; 0 .. _lenchoices)
+            _choices[i] = choices[i].fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncShowProcesses(_message, _processes, _choices);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.mount_operation.MountOperation.vfuncShowProcesses");
+          }
+        }
+
+        _klass.showProcesses = cast(typeof(_klass.showProcesses))&_vfuncShowProcessesTramp;
+        break;
+      }
+      case "show_unmount_progress":
+      {
+        static extern(C) void _vfuncShowUnmountProgressTramp(GMountOperation* op, const(char)* message, long timeLeft, long bytesLeft) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.mount_operation.MountOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)op);
+          if (!_obj)
+          {
+            auto _klass = cast(GMountOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)op);
+            if (_klass.showUnmountProgress)
+              return (cast(typeof(&_vfuncShowUnmountProgressTramp))_klass.showUnmountProgress)(op, message, timeLeft, bytesLeft);
+            return;
+          }
+
+          string _message = message.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncShowUnmountProgress(_message, timeLeft, bytesLeft);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.mount_operation.MountOperation.vfuncShowUnmountProgress");
+          }
+        }
+
+        _klass.showUnmountProgress = cast(typeof(_klass.showUnmountProgress))&_vfuncShowUnmountProgressTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

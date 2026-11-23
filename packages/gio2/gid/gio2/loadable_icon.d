@@ -29,6 +29,9 @@ interface LoadableIcon : gid.gio2.icon.Icon
     return cast(void function())g_loadable_icon_get_type != &gidSymbolNotFound ? g_loadable_icon_get_type() : cast(GType)0;
   }
 
+
+
+
   /**
       Loads a loadable icon. For the asynchronous version of this function,
       see [gid.gio2.loadable_icon.LoadableIcon.loadAsync].

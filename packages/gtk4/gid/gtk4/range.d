@@ -12,6 +12,7 @@ import gid.gtk4.accessible_mixin;
 import gid.gtk4.accessible_range;
 import gid.gtk4.accessible_range_mixin;
 import gid.gtk4.adjustment;
+import gid.gtk4.border;
 import gid.gtk4.buildable;
 import gid.gtk4.buildable_mixin;
 import gid.gtk4.c.functions;
@@ -46,6 +47,15 @@ class Range : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRange,
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
   }
 
   /** */
@@ -208,6 +218,58 @@ class Range : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRange,
 
   mixin AccessibleRangeT!();
   mixin OrientableT!();
+
+  /** */
+  protected void vfuncAdjustBounds(double newValue)
+  {
+    auto _klass = cast(GtkRangeClass*)_vfuncClass;
+    if (!_klass.adjustBounds)
+      return;
+
+    _klass.adjustBounds(cast(GtkRange*)this._cPtr, newValue);
+  }
+
+  /** */
+  protected bool vfuncChangeValue(gid.gtk4.types.ScrollType scroll, double newValue)
+  {
+    auto _klass = cast(GtkRangeClass*)_vfuncClass;
+    if (!_klass.changeValue)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.changeValue(cast(GtkRange*)this._cPtr, scroll, newValue);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncGetRangeBorder(gid.gtk4.border.Border border)
+  {
+    auto _klass = cast(GtkRangeClass*)_vfuncClass;
+    if (!_klass.getRangeBorder)
+      return;
+
+    _klass.getRangeBorder(cast(GtkRange*)this._cPtr, cast(GtkBorder*)&border);
+  }
+
+  /** */
+  protected void vfuncMoveSlider(gid.gtk4.types.ScrollType scroll)
+  {
+    auto _klass = cast(GtkRangeClass*)_vfuncClass;
+    if (!_klass.moveSlider)
+      return;
+
+    _klass.moveSlider(cast(GtkRange*)this._cPtr, scroll);
+  }
+
+  /** */
+  protected void vfuncValueChanged()
+  {
+    auto _klass = cast(GtkRangeClass*)_vfuncClass;
+    if (!_klass.valueChanged)
+      return;
+
+    _klass.valueChanged(cast(GtkRange*)this._cPtr);
+  }
 
   /**
       Get the adjustment which is the “model” object for [gid.gtk4.range.Range].
@@ -555,6 +617,7 @@ class Range : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRange,
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -621,6 +684,7 @@ class Range : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRange,
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -679,6 +743,7 @@ class Range : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRange,
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -726,6 +791,7 @@ class Range : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRange,
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -745,6 +811,187 @@ class Range : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRange,
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("value-changed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Range
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.range.Range), T.stringof ~ " is not derived from gid.gtk4.range.Range");
+
+    gid.gtk4.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAdjustBounds", true)[0]) == gid.gtk4.range.Range))
+      _installVfunc(klass, "adjust_bounds");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChangeValue", true)[0]) == gid.gtk4.range.Range))
+      _installVfunc(klass, "change_value");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetRangeBorder", true)[0]) == gid.gtk4.range.Range))
+      _installVfunc(klass, "get_range_border");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMoveSlider", true)[0]) == gid.gtk4.range.Range))
+      _installVfunc(klass, "move_slider");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncValueChanged", true)[0]) == gid.gtk4.range.Range))
+      _installVfunc(klass, "value_changed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkRangeClass*)klass;
+
+    switch (vfunc)
+    {
+      case "adjust_bounds":
+      {
+        static extern(C) void _vfuncAdjustBoundsTramp(GtkRange* range, double newValue) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.range.Range)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)range);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkRangeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)range);
+            if (_klass.adjustBounds)
+              return (cast(typeof(&_vfuncAdjustBoundsTramp))_klass.adjustBounds)(range, newValue);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncAdjustBounds(newValue);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.range.Range.vfuncAdjustBounds");
+          }
+        }
+
+        _klass.adjustBounds = cast(typeof(_klass.adjustBounds))&_vfuncAdjustBoundsTramp;
+        break;
+      }
+      case "change_value":
+      {
+        static extern(C) gboolean _vfuncChangeValueTramp(GtkRange* range, GtkScrollType scroll, double newValue) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.range.Range)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)range);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkRangeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)range);
+            if (_klass.changeValue)
+              return (cast(typeof(&_vfuncChangeValueTramp))_klass.changeValue)(range, scroll, newValue);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncChangeValue(scroll, newValue);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.range.Range.vfuncChangeValue");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.changeValue = cast(typeof(_klass.changeValue))&_vfuncChangeValueTramp;
+        break;
+      }
+      case "get_range_border":
+      {
+        static extern(C) void _vfuncGetRangeBorderTramp(GtkRange* range, GtkBorder* border) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.range.Range)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)range);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkRangeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)range);
+            if (_klass.getRangeBorder)
+              return (cast(typeof(&_vfuncGetRangeBorderTramp))_klass.getRangeBorder)(range, border);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncGetRangeBorder(*cast(gid.gtk4.border.Border*)border);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.range.Range.vfuncGetRangeBorder");
+          }
+        }
+
+        _klass.getRangeBorder = cast(typeof(_klass.getRangeBorder))&_vfuncGetRangeBorderTramp;
+        break;
+      }
+      case "move_slider":
+      {
+        static extern(C) void _vfuncMoveSliderTramp(GtkRange* range, GtkScrollType scroll) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.range.Range)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)range);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkRangeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)range);
+            if (_klass.moveSlider)
+              return (cast(typeof(&_vfuncMoveSliderTramp))_klass.moveSlider)(range, scroll);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMoveSlider(scroll);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.range.Range.vfuncMoveSlider");
+          }
+        }
+
+        _klass.moveSlider = cast(typeof(_klass.moveSlider))&_vfuncMoveSliderTramp;
+        break;
+      }
+      case "value_changed":
+      {
+        static extern(C) void _vfuncValueChangedTramp(GtkRange* range) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.range.Range)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)range);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkRangeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)range);
+            if (_klass.valueChanged)
+              return (cast(typeof(&_vfuncValueChangedTramp))_klass.valueChanged)(range);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncValueChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.range.Range.vfuncValueChanged");
+          }
+        }
+
+        _klass.valueChanged = cast(typeof(_klass.valueChanged))&_vfuncValueChangedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

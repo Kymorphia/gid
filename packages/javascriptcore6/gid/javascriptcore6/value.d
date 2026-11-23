@@ -34,6 +34,15 @@ class Value : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -188,6 +197,7 @@ class Value : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _destroyNotifyCallback(void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.glib2.types.DestroyNotify*)data;
 
@@ -347,6 +357,7 @@ class Value : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _executorCallback(JSCValue* resolve, JSCValue* reject, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.javascriptcore6.types.Executor*)userData;
 
       try

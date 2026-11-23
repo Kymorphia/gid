@@ -21,6 +21,15 @@ class StreamBuffer : gid.gmime3.stream.Stream
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -65,9 +74,16 @@ class StreamBuffer : gid.gmime3.stream.Stream
   */
   this(gid.gmime3.stream.Stream source, gid.gmime3.types.StreamBufferMode mode) nothrow
   {
-    GMimeStream* _cretval;
-    _cretval = g_mime_stream_buffer_new(source ? cast(GMimeStream*)source._cPtr(No.Dup) : null, mode);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GMimeStream* _cretval;
+      _cretval = g_mime_stream_buffer_new(source ? cast(GMimeStream*)source._cPtr(No.Dup) : null, mode);
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

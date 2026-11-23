@@ -432,11 +432,42 @@ class MessageDialog : gid.gtk4.window.Window
   */
   this(gid.gtk4.window.Window parent = null, string heading = null, string body_ = null) nothrow
   {
-    GtkWidget* _cretval;
-    const(char)* _heading = heading.toCString!(No.Malloc, Yes.Nullable);
-    const(char)* _body_ = body_.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = adw_message_dialog_new(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, _heading, _body_);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, parent !is null || heading !is null || body_ !is null), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      const(char)* _heading = heading.toCString!(No.Malloc, Yes.Nullable);
+      const(char)* _body_ = body_.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = adw_message_dialog_new(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, _heading, _body_);
+      this(_cretval, No.Take);
+    }
+  }
+
+  /**
+      Emits the [gid.adw1.message_dialog.MessageDialog.response] signal with the given response ID.
+      
+      Used to indicate that the user has responded to the dialog in some way.
+  
+      Params:
+        response = response ID
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncResponse` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use [gid.adw1.alert_dialog.AlertDialog].
+  */
+  protected void vfuncResponse(string response)
+  {
+    auto _klass = cast(AdwMessageDialogClass*)_vfuncClass;
+    if (!_klass.response)
+      return;
+
+    const(char)* _response = response.toCString!(No.Malloc, No.Nullable);
+    _klass.response(cast(AdwMessageDialog*)this._cPtr, _response);
   }
 
   /**
@@ -483,6 +514,7 @@ class MessageDialog : gid.gtk4.window.Window
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -947,6 +979,7 @@ class MessageDialog : gid.gtk4.window.Window
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -969,6 +1002,64 @@ class MessageDialog : gid.gtk4.window.Window
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("response"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from MessageDialog
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.adw1.message_dialog.MessageDialog), T.stringof ~ " is not derived from gid.adw1.message_dialog.MessageDialog");
+
+    gid.gtk4.window.Window._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncResponse", true)[0]) == gid.adw1.message_dialog.MessageDialog))
+      _installVfunc(klass, "response");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(AdwMessageDialogClass*)klass;
+
+    switch (vfunc)
+    {
+      case "response":
+      {
+        static extern(C) void _vfuncResponseTramp(AdwMessageDialog* self, const(char)* response) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.adw1.message_dialog.MessageDialog)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(AdwMessageDialogClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.response)
+              return (cast(typeof(&_vfuncResponseTramp))_klass.response)(self, response);
+            return;
+          }
+
+          string _response = response.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncResponse(_response);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.adw1.message_dialog.MessageDialog.vfuncResponse");
+          }
+        }
+
+        _klass.response = cast(typeof(_klass.response))&_vfuncResponseTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

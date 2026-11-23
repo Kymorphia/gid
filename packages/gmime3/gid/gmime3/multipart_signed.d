@@ -66,9 +66,16 @@ class MultipartSigned : gid.gmime3.multipart.Multipart
   */
   this() nothrow
   {
-    GMimeMultipartSigned* _cretval;
-    _cretval = g_mime_multipart_signed_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GMimeMultipartSigned* _cretval;
+      _cretval = g_mime_multipart_signed_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

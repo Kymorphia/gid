@@ -28,6 +28,7 @@ import gid.gdk3.event_property;
 import gid.gdk3.event_proximity;
 import gid.gdk3.event_scroll;
 import gid.gdk3.event_selection;
+import gid.gdk3.event_touch;
 import gid.gdk3.event_visibility;
 import gid.gdk3.event_window_state;
 import gid.gdk3.frame_clock;
@@ -464,6 +465,15 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
   }
 
   /** */
@@ -1285,6 +1295,1728 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   }
 
   /**
+      Signal will be emitted when a button
+        (typically from a mouse) is pressed.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncButtonPressEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncButtonPressEvent(gid.gdk3.event_button.EventButton event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.buttonPressEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.buttonPressEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventButton*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Signal will be emitted when a button
+        (typically from a mouse) is released.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncButtonReleaseEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncButtonReleaseEvent(gid.gdk3.event_button.EventButton event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.buttonReleaseEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.buttonReleaseEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventButton*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Determines whether an accelerator that activates the signal
+      identified by signal_id can currently be activated.
+      This is done by emitting the #GtkWidget::can-activate-accel
+      signal on widget; if the signal isn’t overridden by a
+      handler or in a derived widget, then the default check is
+      that the widget must be sensitive, and the widget and all
+      its ancestors mapped.
+  
+      Params:
+        signalId = the ID of a signal installed on widget
+      Returns: true if the accelerator can be activated.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCanActivateAccel` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncCanActivateAccel(uint signalId)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.canActivateAccel)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.canActivateAccel(cast(GtkWidget*)this._cPtr, signalId);
+    return _retval;
+  }
+
+  /**
+      Emits a #GtkWidget::child-notify signal for the
+      [child property][child-properties] child_property
+      on widget.
+      
+      This is the analogue of [gid.gobject2.object.ObjectWrap.notify] for child properties.
+      
+      Also see [gid.gtk3.container.Container.childNotify].
+  
+      Params:
+        childProperty = the name of a child property installed on the
+                           class of widget’s parent
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncChildNotify` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncChildNotify(gid.gobject2.param_spec.ParamSpec childProperty)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.childNotify)
+      return;
+
+    _klass.childNotify(cast(GtkWidget*)this._cPtr, childProperty ? cast(GParamSpec*)childProperty._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Signal emitted when the composited status of
+        widgets screen changes. See [gid.gdk3.screen.Screen.isComposited].
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCompositedChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncCompositedChanged()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.compositedChanged)
+      return;
+
+    _klass.compositedChanged(cast(GtkWidget*)this._cPtr);
+  }
+
+  /**
+      Signal will be emitted when the size, position or
+        stacking of the widget’s window has changed.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncConfigureEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncConfigureEvent(gid.gdk3.event_configure.EventConfigure event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.configureEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.configureEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventConfigure*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Signal emitted when a redirected window belonging to
+        widget gets drawn into.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDamageEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncDamageEvent(gid.gdk3.event_expose.EventExpose event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.damageEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.damageEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventExpose*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Signal emitted if a user requests that a toplevel
+        window is closed.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDeleteEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncDeleteEvent(gid.gdk3.event_any.EventAny event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.deleteEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.deleteEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventAny*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Destroys a widget.
+      
+      When a widget is destroyed all references it holds on other objects
+      will be released:
+      
+       - if the widget is inside a container, it will be removed from its
+       parent
+       - if the widget is a container, all its children will be destroyed,
+       recursively
+       - if the widget is a top level, it will be removed from the list
+       of top level widgets that GTK+ maintains internally
+      
+      It's expected that all references held on the widget will also
+      be released; you should connect to the #GtkWidget::destroy signal
+      if you hold a reference to widget and you wish to remove it when
+      this function is called. It is not necessary to do so if you are
+      implementing a #GtkContainer, as you'll be able to use the
+      #GtkContainerClass.remove() virtual function for that.
+      
+      It's important to notice that [gid.gtk3.widget.Widget.destroy] will only cause
+      the widget to be finalized if no additional references, acquired
+      using [gid.gobject2.object.ObjectWrap.ref_], are held on it. In case additional references
+      are in place, the widget will be in an "inert" state after calling
+      this function; widget will still point to valid memory, allowing you
+      to release the references you hold, but you may not query the widget's
+      own state.
+      
+      You should typically call this function on top level widgets, and
+      rarely on child widgets.
+      
+      See also: [gid.gtk3.container.Container.remove]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDestroy` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDestroy()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.destroy)
+      return;
+
+    _klass.destroy(cast(GtkWidget*)this._cPtr);
+  }
+
+  /**
+      Signal is emitted when a #GdkWindow is destroyed.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDestroyEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncDestroyEvent(gid.gdk3.event_any.EventAny event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.destroyEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.destroyEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventAny*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Signal emitted when the text direction of a
+        widget changes.
+  
+      Params:
+        previousDirection = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDirectionChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDirectionChanged(gid.gtk3.types.TextDirection previousDirection)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.directionChanged)
+      return;
+
+    _klass.directionChanged(cast(GtkWidget*)this._cPtr, previousDirection);
+  }
+
+  /**
+      Signal emitted on the drag source when a drag is
+        started.
+  
+      Params:
+        context = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDragBegin` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDragBegin(gid.gdk3.drag_context.DragContext context)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.dragBegin)
+      return;
+
+    _klass.dragBegin(cast(GtkWidget*)this._cPtr, context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Signal emitted on the drag source when a drag
+        with the action [gid.gdk4.types.DragAction.Move] is successfully completed.
+  
+      Params:
+        context = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDragDataDelete` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDragDataDelete(gid.gdk3.drag_context.DragContext context)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.dragDataDelete)
+      return;
+
+    _klass.dragDataDelete(cast(GtkWidget*)this._cPtr, context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Signal emitted on the drag source when the drop
+        site requests the data which is dragged.
+  
+      Params:
+        context = 
+        selectionData =  (modified in place, changes are seen by the caller)
+        info = 
+        time = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDragDataGet` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDragDataGet(gid.gdk3.drag_context.DragContext context, gid.gtk3.selection_data.SelectionData selectionData, uint info, uint time)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.dragDataGet)
+      return;
+
+    _klass.dragDataGet(cast(GtkWidget*)this._cPtr, context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, selectionData ? cast(GtkSelectionData*)selectionData._cPtr(No.Dup) : null, info, time);
+  }
+
+  /**
+      Signal emitted on the drop site when the
+        dragged data has been received.
+  
+      Params:
+        context = 
+        x = 
+        y = 
+        selectionData =  (modified in place, changes are seen by the caller)
+        info = 
+        time = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDragDataReceived` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDragDataReceived(gid.gdk3.drag_context.DragContext context, int x, int y, gid.gtk3.selection_data.SelectionData selectionData, uint info, uint time)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.dragDataReceived)
+      return;
+
+    _klass.dragDataReceived(cast(GtkWidget*)this._cPtr, context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, x, y, selectionData ? cast(GtkSelectionData*)selectionData._cPtr(No.Dup) : null, info, time);
+  }
+
+  /**
+      Signal emitted on the drop site when the user drops the
+        data onto the widget.
+  
+      Params:
+        context = 
+        x = 
+        y = 
+        time = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDragDrop` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncDragDrop(gid.gdk3.drag_context.DragContext context, int x, int y, uint time)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.dragDrop)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.dragDrop(cast(GtkWidget*)this._cPtr, context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, x, y, time);
+    return _retval;
+  }
+
+  /**
+      Signal emitted on the drag source when a drag is
+        finished.
+  
+      Params:
+        context = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDragEnd` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDragEnd(gid.gdk3.drag_context.DragContext context)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.dragEnd)
+      return;
+
+    _klass.dragEnd(cast(GtkWidget*)this._cPtr, context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Signal emitted on the drag source when a drag has
+        failed.
+  
+      Params:
+        context = 
+        result = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDragFailed` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncDragFailed(gid.gdk3.drag_context.DragContext context, gid.gtk3.types.DragResult result)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.dragFailed)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.dragFailed(cast(GtkWidget*)this._cPtr, context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, result);
+    return _retval;
+  }
+
+  /**
+      Signal emitted on the drop site when the cursor leaves
+        the widget.
+  
+      Params:
+        context = 
+        time = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDragLeave` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDragLeave(gid.gdk3.drag_context.DragContext context, uint time)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.dragLeave)
+      return;
+
+    _klass.dragLeave(cast(GtkWidget*)this._cPtr, context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, time);
+  }
+
+  /**
+      signal emitted on the drop site when the user moves
+        the cursor over the widget during a drag.
+  
+      Params:
+        context = 
+        x = 
+        y = 
+        time = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDragMotion` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncDragMotion(gid.gdk3.drag_context.DragContext context, int x, int y, uint time)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.dragMotion)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.dragMotion(cast(GtkWidget*)this._cPtr, context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, x, y, time);
+    return _retval;
+  }
+
+  /**
+      Signal emitted when a widget is supposed to render itself.
+  
+      Params:
+        cr =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDraw` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncDraw(gid.cairo1.context.Context cr)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.draw)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.draw(cast(GtkWidget*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Signal event will be emitted when the pointer
+        enters the widget’s window.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncEnterNotifyEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncEnterNotifyEvent(gid.gdk3.event_crossing.EventCrossing event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.enterNotifyEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.enterNotifyEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventCrossing*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Rarely-used function. This function is used to emit
+      the event signals on a widget (those signals should never
+      be emitted without using this function to do so).
+      If you want to synthesize an event though, don’t use this function;
+      instead, use [gid.gtk3.global.mainDoEvent] so the event will behave as if
+      it were in the event queue. Don’t synthesize expose events; instead,
+      use [gid.gdk3.window.Window.invalidateRect] to invalidate a region of the
+      window.
+  
+      Params:
+        event = a #GdkEvent (modified in place, changes are seen by the caller)
+      Returns: return from the event signal emission (true if
+                      the event was handled)
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncEvent(gid.gdk3.event.Event event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.event)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.event(cast(GtkWidget*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncFocus(gid.gtk3.types.DirectionType direction)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.focus)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.focus(cast(GtkWidget*)this._cPtr, direction);
+    return _retval;
+  }
+
+  /**
+      Signal emitted when the keyboard focus enters the
+      widget’s window.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncFocusInEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncFocusInEvent(gid.gdk3.event_focus.EventFocus event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.focusInEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.focusInEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventFocus*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Signal emitted when the keyboard focus leaves the
+      widget’s window.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncFocusOutEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncFocusOutEvent(gid.gdk3.event_focus.EventFocus event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.focusOutEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.focusOutEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventFocus*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Returns the accessible object that describes the widget to an
+      assistive technology.
+      
+      If accessibility support is not available, this #AtkObject
+      instance may be a no-op. Likewise, if no class-specific #AtkObject
+      implementation is available for the widget instance in question,
+      it will inherit an #AtkObject implementation from the first ancestor
+      class for which such an implementation is defined.
+      
+      The documentation of the
+      [ATK](http://developer.gnome.org/atk/stable/)
+      library contains more information about accessible objects and their uses.
+      Returns: the #AtkObject associated with widget
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetAccessible` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.atk1.object.ObjectWrap vfuncGetAccessible()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.getAccessible)
+      return typeof(return).init;
+
+    AtkObject* _cretval;
+    _cretval = _klass.getAccessible(cast(GtkWidget*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.atk1.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Retrieves a widget’s initial minimum and natural height.
+      
+      This call is specific to width-for-height requests.
+      
+      The returned request will be modified by the
+      GtkWidgetClass::adjust_size_request virtual method and by any
+      #GtkSizeGroups that have been applied. That is, the returned request
+      is the one that should be used for layout, not necessarily the one
+      returned by the widget itself.
+  
+      Params:
+        minimumHeight = location to store the minimum height, or null
+        naturalHeight = location to store the natural height, or null
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetPreferredHeight` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncGetPreferredHeight(out int minimumHeight, out int naturalHeight)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.getPreferredHeight)
+      return;
+
+    _klass.getPreferredHeight(cast(GtkWidget*)this._cPtr, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
+  }
+
+  /**
+      Retrieves a widget’s minimum and natural height and the corresponding baselines if it would be given
+      the specified width, or the default height if width is -1. The baselines may be -1 which means
+      that no baseline is requested for this widget.
+      
+      The returned request will be modified by the
+      GtkWidgetClass::adjust_size_request and GtkWidgetClass::adjust_baseline_request virtual methods
+      and by any #GtkSizeGroups that have been applied. That is, the returned request
+      is the one that should be used for layout, not necessarily the one
+      returned by the widget itself.
+  
+      Params:
+        width = the width which is available for allocation, or -1 if none
+        minimumHeight = location for storing the minimum height, or null
+        naturalHeight = location for storing the natural height, or null
+        minimumBaseline = location for storing the baseline for the minimum height, or null
+        naturalBaseline = location for storing the baseline for the natural height, or null
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetPreferredHeightAndBaselineForWidth` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncGetPreferredHeightAndBaselineForWidth(int width, out int minimumHeight, out int naturalHeight, out int minimumBaseline, out int naturalBaseline)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.getPreferredHeightAndBaselineForWidth)
+      return;
+
+    _klass.getPreferredHeightAndBaselineForWidth(cast(GtkWidget*)this._cPtr, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight, cast(int*)&minimumBaseline, cast(int*)&naturalBaseline);
+  }
+
+  /**
+      Retrieves a widget’s minimum and natural height if it would be given
+      the specified width.
+      
+      The returned request will be modified by the
+      GtkWidgetClass::adjust_size_request virtual method and by any
+      #GtkSizeGroups that have been applied. That is, the returned request
+      is the one that should be used for layout, not necessarily the one
+      returned by the widget itself.
+  
+      Params:
+        width = the width which is available for allocation
+        minimumHeight = location for storing the minimum height, or null
+        naturalHeight = location for storing the natural height, or null
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetPreferredHeightForWidth` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncGetPreferredHeightForWidth(int width, out int minimumHeight, out int naturalHeight)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.getPreferredHeightForWidth)
+      return;
+
+    _klass.getPreferredHeightForWidth(cast(GtkWidget*)this._cPtr, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
+  }
+
+  /**
+      Retrieves a widget’s initial minimum and natural width.
+      
+      This call is specific to height-for-width requests.
+      
+      The returned request will be modified by the
+      GtkWidgetClass::adjust_size_request virtual method and by any
+      #GtkSizeGroups that have been applied. That is, the returned request
+      is the one that should be used for layout, not necessarily the one
+      returned by the widget itself.
+  
+      Params:
+        minimumWidth = location to store the minimum width, or null
+        naturalWidth = location to store the natural width, or null
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetPreferredWidth` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncGetPreferredWidth(out int minimumWidth, out int naturalWidth)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.getPreferredWidth)
+      return;
+
+    _klass.getPreferredWidth(cast(GtkWidget*)this._cPtr, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
+  }
+
+  /**
+      Retrieves a widget’s minimum and natural width if it would be given
+      the specified height.
+      
+      The returned request will be modified by the
+      GtkWidgetClass::adjust_size_request virtual method and by any
+      #GtkSizeGroups that have been applied. That is, the returned request
+      is the one that should be used for layout, not necessarily the one
+      returned by the widget itself.
+  
+      Params:
+        height = the height which is available for allocation
+        minimumWidth = location for storing the minimum width, or null
+        naturalWidth = location for storing the natural width, or null
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetPreferredWidthForHeight` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncGetPreferredWidthForHeight(int height, out int minimumWidth, out int naturalWidth)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.getPreferredWidthForHeight)
+      return;
+
+    _klass.getPreferredWidthForHeight(cast(GtkWidget*)this._cPtr, height, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
+  }
+
+  /**
+      Gets whether the widget prefers a height-for-width layout
+      or a width-for-height layout.
+      
+      #GtkBin widgets generally propagate the preference of
+      their child, container widgets need to request something either in
+      context of their children or in context of their allocation
+      capabilities.
+      Returns: The #GtkSizeRequestMode preferred by widget.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetRequestMode` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gtk3.types.SizeRequestMode vfuncGetRequestMode()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.getRequestMode)
+      return typeof(return).init;
+
+    GtkSizeRequestMode _cretval;
+    _cretval = _klass.getRequestMode(cast(GtkWidget*)this._cPtr);
+    gid.gtk3.types.SizeRequestMode _retval = cast(gid.gtk3.types.SizeRequestMode)_cretval;
+    return _retval;
+  }
+
+  /**
+      Signal emitted when a pointer or keyboard grab
+        on a window belonging to widget gets broken.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGrabBrokenEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncGrabBrokenEvent(gid.gdk3.event_grab_broken.EventGrabBroken event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.grabBrokenEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.grabBrokenEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventGrabBroken*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Causes widget to have the keyboard focus for the #GtkWindow it's
+      inside. widget must be a focusable widget, such as a #GtkEntry;
+      something like #GtkFrame won’t work.
+      
+      More precisely, it must have the `GTK_CAN_FOCUS` flag set. Use
+      [gid.gtk4.widget.Widget.setCanFocus] to modify that flag.
+      
+      The widget also needs to be realized and mapped. This is indicated by the
+      related signals. Grabbing the focus immediately after creating the widget
+      will likely fail and cause critical warnings.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGrabFocus` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncGrabFocus()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.grabFocus)
+      return;
+
+    _klass.grabFocus(cast(GtkWidget*)this._cPtr);
+  }
+
+  /**
+      Signal emitted when a widget becomes shadowed by a
+        GTK+ grab (not a pointer or keyboard grab) on another widget, or
+        when it becomes unshadowed due to a grab being removed.
+  
+      Params:
+        wasGrabbed = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGrabNotify` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncGrabNotify(bool wasGrabbed)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.grabNotify)
+      return;
+
+    _klass.grabNotify(cast(GtkWidget*)this._cPtr, wasGrabbed);
+  }
+
+  /**
+      Reverses the effects of [gid.gtk4.widget.Widget.show], causing the widget to be
+      hidden (invisible to the user).
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncHide` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncHide()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.hide)
+      return;
+
+    _klass.hide(cast(GtkWidget*)this._cPtr);
+  }
+
+  /**
+      Signal emitted when the anchored state of a
+        widget changes.
+  
+      Params:
+        previousToplevel = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncHierarchyChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncHierarchyChanged(gid.gtk3.widget.Widget previousToplevel)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.hierarchyChanged)
+      return;
+
+    _klass.hierarchyChanged(cast(GtkWidget*)this._cPtr, previousToplevel ? cast(GtkWidget*)previousToplevel._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Signal emitted when a key is pressed.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncKeyPressEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncKeyPressEvent(gid.gdk3.event_key.EventKey event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.keyPressEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.keyPressEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Signal is emitted when a key is released.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncKeyReleaseEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncKeyReleaseEvent(gid.gdk3.event_key.EventKey event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.keyReleaseEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.keyReleaseEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      This function should be called whenever keyboard navigation within
+      a single widget hits a boundary. The function emits the
+      #GtkWidget::keynav-failed signal on the widget and its return
+      value should be interpreted in a way similar to the return value of
+      [gid.gtk4.widget.Widget.childFocus]:
+      
+      When true is returned, stay in the widget, the failed keyboard
+      navigation is OK and/or there is nowhere we can/should move the
+      focus to.
+      
+      When false is returned, the caller should continue with keyboard
+      navigation outside the widget, e.g. by calling
+      [gid.gtk4.widget.Widget.childFocus] on the widget’s toplevel.
+      
+      The default ::keynav-failed handler returns false for
+      [gid.gtk4.types.DirectionType.TabForward] and [gid.gtk4.types.DirectionType.TabBackward]. For the other
+      values of #GtkDirectionType it returns true.
+      
+      Whenever the default handler returns true, it also calls
+      [gid.gtk4.widget.Widget.errorBell] to notify the user of the failed keyboard
+      navigation.
+      
+      A use case for providing an own implementation of ::keynav-failed
+      (either by connecting to it or by overriding it) would be a row of
+      #GtkEntry widgets where the user should be able to navigate the
+      entire row with the cursor keys, as e.g. known from user interfaces
+      that require entering license keys.
+  
+      Params:
+        direction = direction of focus movement
+      Returns: true if stopping keyboard navigation is fine, false
+                      if the emitting widget should try to handle the keyboard
+                      navigation attempt in its parent container(s).
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncKeynavFailed` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncKeynavFailed(gid.gtk3.types.DirectionType direction)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.keynavFailed)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.keynavFailed(cast(GtkWidget*)this._cPtr, direction);
+    return _retval;
+  }
+
+  /**
+      Will be emitted when the pointer leaves the
+        widget’s window.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncLeaveNotifyEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncLeaveNotifyEvent(gid.gdk3.event_crossing.EventCrossing event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.leaveNotifyEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.leaveNotifyEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventCrossing*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      This function is only for use in widget implementations. Causes
+      a widget to be mapped if it isn’t already.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncMap` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncMap()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.map)
+      return;
+
+    _klass.map(cast(GtkWidget*)this._cPtr);
+  }
+
+  /**
+      Signal emitted when the widget’s window is mapped.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncMapEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncMapEvent(gid.gdk3.event_any.EventAny event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.mapEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.mapEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventAny*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Emits the #GtkWidget::mnemonic-activate signal.
+  
+      Params:
+        groupCycling = true if there are other widgets with the same mnemonic
+      Returns: true if the signal has been handled
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncMnemonicActivate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncMnemonicActivate(bool groupCycling)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.mnemonicActivate)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.mnemonicActivate(cast(GtkWidget*)this._cPtr, groupCycling);
+    return _retval;
+  }
+
+  /**
+      Signal emitted when the pointer moves over
+        the widget’s #GdkWindow.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncMotionNotifyEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncMotionNotifyEvent(gid.gdk3.event_motion.EventMotion event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.motionNotifyEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.motionNotifyEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventMotion*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Signal emitted when a change of focus is requested
+  
+      Params:
+        direction = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncMoveFocus` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncMoveFocus(gid.gtk3.types.DirectionType direction)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.moveFocus)
+      return;
+
+    _klass.moveFocus(cast(GtkWidget*)this._cPtr, direction);
+  }
+
+  /**
+      Signal emitted when a new parent has been set on a
+        widget.
+  
+      Params:
+        previousParent = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncParentSet` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncParentSet(gid.gtk3.widget.Widget previousParent)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.parentSet)
+      return;
+
+    _klass.parentSet(cast(GtkWidget*)this._cPtr, previousParent ? cast(GtkWidget*)previousParent._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Signal emitted whenever a widget should pop up a
+        context menu.
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPopupMenu` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncPopupMenu()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.popupMenu)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.popupMenu(cast(GtkWidget*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Signal will be emitted when a property on
+        the widget’s window has been changed or deleted.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPropertyNotifyEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncPropertyNotifyEvent(gid.gdk3.event_property.EventProperty event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.propertyNotifyEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.propertyNotifyEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventProperty*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncProximityInEvent(gid.gdk3.event_proximity.EventProximity event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.proximityInEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.proximityInEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventProximity*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncProximityOutEvent(gid.gdk3.event_proximity.EventProximity event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.proximityOutEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.proximityOutEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventProximity*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Signal emitted when “has-tooltip” is true and the
+        hover timeout has expired with the cursor hovering “above”
+        widget; or emitted when widget got focus in keyboard mode.
+  
+      Params:
+        x = 
+        y = 
+        keyboardTooltip = 
+        tooltip = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncQueryTooltip` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncQueryTooltip(int x, int y, bool keyboardTooltip, gid.gtk3.tooltip.Tooltip tooltip)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.queryTooltip)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.queryTooltip(cast(GtkWidget*)this._cPtr, x, y, keyboardTooltip, tooltip ? cast(GtkTooltip*)tooltip._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Invalidates the area of widget defined by region by calling
+      [gid.gdk3.window.Window.invalidateRegion] on the widget’s window and all its
+      child windows. Once the main loop becomes idle (after the current
+      batch of events has been processed, roughly), the window will
+      receive expose events for the union of all regions that have been
+      invalidated.
+      
+      Normally you would only use this function in widget
+      implementations. You might also use it to schedule a redraw of a
+      #GtkDrawingArea or some portion thereof.
+  
+      Params:
+        region = region to draw
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncQueueDrawRegion` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncQueueDrawRegion(gid.cairo1.region.Region region)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.queueDrawRegion)
+      return;
+
+    _klass.queueDrawRegion(cast(GtkWidget*)this._cPtr, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Creates the GDK (windowing system) resources associated with a
+      widget.  For example, widget->window will be created when a widget
+      is realized.  Normally realization happens implicitly; if you show
+      a widget and all its parent containers, then the widget will be
+      realized and mapped automatically.
+      
+      Realizing a widget requires all
+      the widget’s parent widgets to be realized; calling
+      [gid.gtk4.widget.Widget.realize] realizes the widget’s parents in addition to
+      widget itself. If a widget is not yet inside a toplevel window
+      when you realize it, bad things will happen.
+      
+      This function is primarily used in widget implementations, and
+      isn’t very useful otherwise. Many times when you think you might
+      need it, a better approach is to connect to a signal that will be
+      called after the widget is realized automatically, such as
+      #GtkWidget::draw. Or simply g_signal_connect () to the
+      #GtkWidget::realize signal.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRealize` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncRealize()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.realize)
+      return;
+
+    _klass.realize(cast(GtkWidget*)this._cPtr);
+  }
+
+  /**
+      Signal emitted when the screen of a widget has
+        changed.
+  
+      Params:
+        previousScreen = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncScreenChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncScreenChanged(gid.gdk3.screen.Screen previousScreen)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.screenChanged)
+      return;
+
+    _klass.screenChanged(cast(GtkWidget*)this._cPtr, previousScreen ? cast(GdkScreen*)previousScreen._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Signal emitted when a button in the 4 to 7 range is
+        pressed.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncScrollEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncScrollEvent(gid.gdk3.event_scroll.EventScroll event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.scrollEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.scrollEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventScroll*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Signal will be emitted when the the
+        widget’s window has lost ownership of a selection.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSelectionClearEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncSelectionClearEvent(gid.gdk3.event_selection.EventSelection event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.selectionClearEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.selectionClearEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventSelection*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncSelectionGet(gid.gtk3.selection_data.SelectionData selectionData, uint info, uint time)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.selectionGet)
+      return;
+
+    _klass.selectionGet(cast(GtkWidget*)this._cPtr, selectionData ? cast(GtkSelectionData*)selectionData._cPtr(No.Dup) : null, info, time);
+  }
+
+  /** */
+  protected bool vfuncSelectionNotifyEvent(gid.gdk3.event_selection.EventSelection event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.selectionNotifyEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.selectionNotifyEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventSelection*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncSelectionReceived(gid.gtk3.selection_data.SelectionData selectionData, uint time)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.selectionReceived)
+      return;
+
+    _klass.selectionReceived(cast(GtkWidget*)this._cPtr, selectionData ? cast(GtkSelectionData*)selectionData._cPtr(No.Dup) : null, time);
+  }
+
+  /**
+      Signal will be emitted when another
+        client requests ownership of the selection owned by the widget's
+        window.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSelectionRequestEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncSelectionRequestEvent(gid.gdk3.event_selection.EventSelection event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.selectionRequestEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.selectionRequestEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventSelection*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Flags a widget to be displayed. Any widget that isn’t shown will
+      not appear on the screen. If you want to show all the widgets in a
+      container, it’s easier to call [gid.gtk3.widget.Widget.showAll] on the
+      container, instead of individually showing the widgets.
+      
+      Remember that you have to show the containers containing a widget,
+      in addition to the widget itself, before it will appear onscreen.
+      
+      When a toplevel container is shown, it is immediately realized and
+      mapped; other shown widgets are realized and mapped when their
+      toplevel container is realized and mapped.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncShow` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncShow()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.show)
+      return;
+
+    _klass.show(cast(GtkWidget*)this._cPtr);
+  }
+
+  /**
+      Recursively shows a widget, and any child widgets (if the widget is
+      a container).
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncShowAll` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncShowAll()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.showAll)
+      return;
+
+    _klass.showAll(cast(GtkWidget*)this._cPtr);
+  }
+
+  /** */
+  protected bool vfuncShowHelp(gid.gtk3.types.WidgetHelpType helpType)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.showHelp)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.showHelp(cast(GtkWidget*)this._cPtr, helpType);
+    return _retval;
+  }
+
+  /**
+      This function is only used by #GtkContainer subclasses, to assign a size
+      and position to their child widgets.
+      
+      In this function, the allocation may be adjusted. It will be forced
+      to a 1x1 minimum size, and the adjust_size_allocation virtual
+      method on the child will be used to adjust the allocation. Standard
+      adjustments include removing the widget’s margins, and applying the
+      widget’s #GtkWidget:halign and #GtkWidget:valign properties.
+      
+      For baseline support in containers you need to use [gid.gtk3.widget.Widget.sizeAllocateWithBaseline]
+      instead.
+  
+      Params:
+        allocation = position and size to be allocated to widget
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSizeAllocate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSizeAllocate(gid.gtk3.types.Allocation allocation)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.sizeAllocate)
+      return;
+
+    _klass.sizeAllocate(cast(GtkWidget*)this._cPtr, cast(GtkAllocation*)&allocation);
+  }
+
+  /**
+      Signal emitted when the widget state
+        changes. Deprecated: 3.0
+  
+      Params:
+        previousState = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStateChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncStateChanged(gid.gtk3.types.StateType previousState)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.stateChanged)
+      return;
+
+    _klass.stateChanged(cast(GtkWidget*)this._cPtr, previousState);
+  }
+
+  /**
+      Signal emitted when the widget state changes,
+        see [gid.gtk4.widget.Widget.getStateFlags].
+  
+      Params:
+        previousStateFlags = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStateFlagsChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncStateFlagsChanged(gid.gtk3.types.StateFlags previousStateFlags)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.stateFlagsChanged)
+      return;
+
+    _klass.stateFlagsChanged(cast(GtkWidget*)this._cPtr, previousStateFlags);
+  }
+
+  /**
+      Signal emitted when a new style has been set on a
+      widget. Deprecated: 3.0
+  
+      Params:
+        previousStyle = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStyleSet` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncStyleSet(gid.gtk3.style.Style previousStyle)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.styleSet)
+      return;
+
+    _klass.styleSet(cast(GtkWidget*)this._cPtr, previousStyle ? cast(GtkStyle*)previousStyle._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Signal emitted when the GtkStyleContext of a widget
+        is changed.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStyleUpdated` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncStyleUpdated()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.styleUpdated)
+      return;
+
+    _klass.styleUpdated(cast(GtkWidget*)this._cPtr);
+  }
+
+  /**
+      Signal emitted when a touch event happens
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncTouchEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncTouchEvent(gid.gdk3.event_touch.EventTouch event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.touchEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.touchEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventTouch*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      This function is only for use in widget implementations. Causes
+      a widget to be unmapped if it’s currently mapped.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncUnmap` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncUnmap()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.unmap)
+      return;
+
+    _klass.unmap(cast(GtkWidget*)this._cPtr);
+  }
+
+  /**
+      Signal will be emitted when the widget’s window is
+        unmapped.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncUnmapEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncUnmapEvent(gid.gdk3.event_any.EventAny event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.unmapEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.unmapEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventAny*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      This function is only useful in widget implementations.
+      Causes a widget to be unrealized (frees all GDK resources
+      associated with the widget, such as widget->window).
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncUnrealize` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncUnrealize()
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.unrealize)
+      return;
+
+    _klass.unrealize(cast(GtkWidget*)this._cPtr);
+  }
+
+  /**
+      Signal emitted when the widget’s window is
+        obscured or unobscured.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncVisibilityNotifyEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncVisibilityNotifyEvent(gid.gdk3.event_visibility.EventVisibility event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.visibilityNotifyEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.visibilityNotifyEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventVisibility*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Signal emitted when the state of the toplevel
+        window associated to the widget changes.
+  
+      Params:
+        event =  (borrowed, only valid during the callback, use `_dup` to keep a copy)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncWindowStateEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncWindowStateEvent(gid.gdk3.event_window_state.EventWindowState event)
+  {
+    auto _klass = cast(GtkWidgetClass*)_vfuncClass;
+    if (!_klass.windowStateEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.windowStateEvent(cast(GtkWidget*)this._cPtr, event ? cast(GdkEventWindowState*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
       For widgets that can be “activated” (buttons, menu items, etc.)
       this function activates them. Activation is what happens when you
       press Enter on a widget during key navigation. If widget isn't
@@ -1394,6 +3126,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) gboolean _callbackCallback(GtkWidget* widget, GdkFrameClock* frameClock, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gtk3.types.TickCallback*)userData;
 
@@ -6009,6 +7742,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -6065,6 +7799,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -6130,6 +7865,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -6191,6 +7927,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -6247,6 +7984,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -6298,6 +8036,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -6353,6 +8092,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -6413,6 +8153,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -6475,6 +8216,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -6529,6 +8271,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -6585,6 +8328,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -6639,6 +8383,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -6695,6 +8440,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -6748,6 +8494,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -6812,6 +8559,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -6946,6 +8694,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 7, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -7030,6 +8779,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -7094,6 +8844,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -7152,6 +8903,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -7219,6 +8971,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -7367,6 +9120,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -7447,6 +9201,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -7509,6 +9264,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -7574,6 +9330,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -7629,6 +9386,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -7680,6 +9438,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -7740,6 +9499,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -7803,6 +9563,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -7866,6 +9627,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -7919,6 +9681,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -7974,6 +9737,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -8022,6 +9786,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -8074,6 +9839,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -8132,6 +9898,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -8195,6 +9962,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -8255,6 +10023,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -8317,6 +10086,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -8378,6 +10148,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -8432,6 +10203,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -8491,6 +10263,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -8553,6 +10326,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -8609,6 +10383,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -8661,6 +10436,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -8715,6 +10491,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -8772,6 +10549,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -8834,6 +10612,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -8896,6 +10675,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -8975,6 +10755,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -9036,6 +10817,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -9085,6 +10867,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -9145,6 +10928,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -9205,6 +10989,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -9267,6 +11052,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -9324,6 +11110,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -9383,6 +11170,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -9441,6 +11229,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -9495,6 +11284,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -9544,6 +11334,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -9598,6 +11389,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -9651,6 +11443,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -9702,6 +11495,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -9761,6 +11555,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -9813,6 +11608,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -9861,6 +11657,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -9916,6 +11713,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -9970,6 +11768,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -10026,6 +11825,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -10085,6 +11885,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -10149,6 +11950,7 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -10177,6 +11979,2612 @@ class Widget : gid.gobject2.initially_unowned.InitiallyUnowned, gid.atk1.impleme
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("window-state-event", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Widget
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.widget.Widget), T.stringof ~ " is not derived from gid.gtk3.widget.Widget");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncButtonPressEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "button_press_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncButtonReleaseEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "button_release_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCanActivateAccel", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "can_activate_accel");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChildNotify", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "child_notify");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCompositedChanged", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "composited_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncConfigureEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "configure_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDamageEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "damage_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDeleteEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "delete_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDestroy", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "destroy");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDestroyEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "destroy_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDirectionChanged", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "direction_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDragBegin", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "drag_begin");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDragDataDelete", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "drag_data_delete");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDragDataGet", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "drag_data_get");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDragDataReceived", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "drag_data_received");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDragDrop", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "drag_drop");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDragEnd", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "drag_end");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDragFailed", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "drag_failed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDragLeave", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "drag_leave");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDragMotion", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "drag_motion");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDraw", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "draw");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEnterNotifyEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "enter_notify_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFocus", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "focus");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFocusInEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "focus_in_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFocusOutEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "focus_out_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetAccessible", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "get_accessible");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetPreferredHeight", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "get_preferred_height");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetPreferredHeightAndBaselineForWidth", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "get_preferred_height_and_baseline_for_width");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetPreferredHeightForWidth", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "get_preferred_height_for_width");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetPreferredWidth", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "get_preferred_width");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetPreferredWidthForHeight", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "get_preferred_width_for_height");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetRequestMode", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "get_request_mode");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGrabBrokenEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "grab_broken_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGrabFocus", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "grab_focus");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGrabNotify", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "grab_notify");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHide", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "hide");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHierarchyChanged", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "hierarchy_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncKeyPressEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "key_press_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncKeyReleaseEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "key_release_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncKeynavFailed", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "keynav_failed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncLeaveNotifyEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "leave_notify_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMap", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "map");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMapEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "map_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMnemonicActivate", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "mnemonic_activate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMotionNotifyEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "motion_notify_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMoveFocus", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "move_focus");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncParentSet", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "parent_set");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPopupMenu", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "popup_menu");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPropertyNotifyEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "property_notify_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncProximityInEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "proximity_in_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncProximityOutEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "proximity_out_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncQueryTooltip", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "query_tooltip");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncQueueDrawRegion", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "queue_draw_region");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRealize", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "realize");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncScreenChanged", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "screen_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncScrollEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "scroll_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSelectionClearEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "selection_clear_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSelectionGet", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "selection_get");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSelectionNotifyEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "selection_notify_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSelectionReceived", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "selection_received");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSelectionRequestEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "selection_request_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncShow", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "show");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncShowAll", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "show_all");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncShowHelp", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "show_help");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSizeAllocate", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "size_allocate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStateChanged", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "state_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStateFlagsChanged", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "state_flags_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStyleSet", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "style_set");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStyleUpdated", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "style_updated");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncTouchEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "touch_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUnmap", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "unmap");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUnmapEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "unmap_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUnrealize", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "unrealize");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncVisibilityNotifyEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "visibility_notify_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncWindowStateEvent", true)[0]) == gid.gtk3.widget.Widget))
+      _installVfunc(klass, "window_state_event");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkWidgetClass*)klass;
+
+    switch (vfunc)
+    {
+      case "button_press_event":
+      {
+        static extern(C) gboolean _vfuncButtonPressEventTramp(GtkWidget* widget, GdkEventButton* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.buttonPressEvent)
+              return (cast(typeof(&_vfuncButtonPressEventTramp))_klass.buttonPressEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_button.EventButton(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncButtonPressEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncButtonPressEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.buttonPressEvent = cast(typeof(_klass.buttonPressEvent))&_vfuncButtonPressEventTramp;
+        break;
+      }
+      case "button_release_event":
+      {
+        static extern(C) gboolean _vfuncButtonReleaseEventTramp(GtkWidget* widget, GdkEventButton* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.buttonReleaseEvent)
+              return (cast(typeof(&_vfuncButtonReleaseEventTramp))_klass.buttonReleaseEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_button.EventButton(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncButtonReleaseEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncButtonReleaseEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.buttonReleaseEvent = cast(typeof(_klass.buttonReleaseEvent))&_vfuncButtonReleaseEventTramp;
+        break;
+      }
+      case "can_activate_accel":
+      {
+        static extern(C) gboolean _vfuncCanActivateAccelTramp(GtkWidget* widget, uint signalId) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.canActivateAccel)
+              return (cast(typeof(&_vfuncCanActivateAccelTramp))_klass.canActivateAccel)(widget, signalId);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCanActivateAccel(signalId);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncCanActivateAccel");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.canActivateAccel = cast(typeof(_klass.canActivateAccel))&_vfuncCanActivateAccelTramp;
+        break;
+      }
+      case "child_notify":
+      {
+        static extern(C) void _vfuncChildNotifyTramp(GtkWidget* widget, GParamSpec* childProperty) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.childNotify)
+              return (cast(typeof(&_vfuncChildNotifyTramp))_klass.childNotify)(widget, childProperty);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncChildNotify(childProperty ? new gid.gobject2.param_spec.ParamSpec(cast(void*)childProperty, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncChildNotify");
+          }
+        }
+
+        _klass.childNotify = cast(typeof(_klass.childNotify))&_vfuncChildNotifyTramp;
+        break;
+      }
+      case "composited_changed":
+      {
+        static extern(C) void _vfuncCompositedChangedTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.compositedChanged)
+              return (cast(typeof(&_vfuncCompositedChangedTramp))_klass.compositedChanged)(widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncCompositedChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncCompositedChanged");
+          }
+        }
+
+        _klass.compositedChanged = cast(typeof(_klass.compositedChanged))&_vfuncCompositedChangedTramp;
+        break;
+      }
+      case "configure_event":
+      {
+        static extern(C) gboolean _vfuncConfigureEventTramp(GtkWidget* widget, GdkEventConfigure* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.configureEvent)
+              return (cast(typeof(&_vfuncConfigureEventTramp))_klass.configureEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_configure.EventConfigure(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncConfigureEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncConfigureEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.configureEvent = cast(typeof(_klass.configureEvent))&_vfuncConfigureEventTramp;
+        break;
+      }
+      case "damage_event":
+      {
+        static extern(C) gboolean _vfuncDamageEventTramp(GtkWidget* widget, GdkEventExpose* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.damageEvent)
+              return (cast(typeof(&_vfuncDamageEventTramp))_klass.damageEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_expose.EventExpose(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncDamageEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncDamageEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.damageEvent = cast(typeof(_klass.damageEvent))&_vfuncDamageEventTramp;
+        break;
+      }
+      case "delete_event":
+      {
+        static extern(C) gboolean _vfuncDeleteEventTramp(GtkWidget* widget, GdkEventAny* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.deleteEvent)
+              return (cast(typeof(&_vfuncDeleteEventTramp))_klass.deleteEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_any.EventAny(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncDeleteEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncDeleteEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.deleteEvent = cast(typeof(_klass.deleteEvent))&_vfuncDeleteEventTramp;
+        break;
+      }
+      case "destroy":
+      {
+        static extern(C) void _vfuncDestroyTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.destroy)
+              return (cast(typeof(&_vfuncDestroyTramp))_klass.destroy)(widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDestroy();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncDestroy");
+          }
+        }
+
+        _klass.destroy = cast(typeof(_klass.destroy))&_vfuncDestroyTramp;
+        break;
+      }
+      case "destroy_event":
+      {
+        static extern(C) gboolean _vfuncDestroyEventTramp(GtkWidget* widget, GdkEventAny* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.destroyEvent)
+              return (cast(typeof(&_vfuncDestroyEventTramp))_klass.destroyEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_any.EventAny(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncDestroyEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncDestroyEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.destroyEvent = cast(typeof(_klass.destroyEvent))&_vfuncDestroyEventTramp;
+        break;
+      }
+      case "direction_changed":
+      {
+        static extern(C) void _vfuncDirectionChangedTramp(GtkWidget* widget, GtkTextDirection previousDirection) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.directionChanged)
+              return (cast(typeof(&_vfuncDirectionChangedTramp))_klass.directionChanged)(widget, previousDirection);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDirectionChanged(previousDirection);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncDirectionChanged");
+          }
+        }
+
+        _klass.directionChanged = cast(typeof(_klass.directionChanged))&_vfuncDirectionChangedTramp;
+        break;
+      }
+      case "drag_begin":
+      {
+        static extern(C) void _vfuncDragBeginTramp(GtkWidget* widget, GdkDragContext* context) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.dragBegin)
+              return (cast(typeof(&_vfuncDragBeginTramp))_klass.dragBegin)(widget, context);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDragBegin(gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk3.drag_context.DragContext)(cast(void*)context, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncDragBegin");
+          }
+        }
+
+        _klass.dragBegin = cast(typeof(_klass.dragBegin))&_vfuncDragBeginTramp;
+        break;
+      }
+      case "drag_data_delete":
+      {
+        static extern(C) void _vfuncDragDataDeleteTramp(GtkWidget* widget, GdkDragContext* context) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.dragDataDelete)
+              return (cast(typeof(&_vfuncDragDataDeleteTramp))_klass.dragDataDelete)(widget, context);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDragDataDelete(gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk3.drag_context.DragContext)(cast(void*)context, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncDragDataDelete");
+          }
+        }
+
+        _klass.dragDataDelete = cast(typeof(_klass.dragDataDelete))&_vfuncDragDataDeleteTramp;
+        break;
+      }
+      case "drag_data_get":
+      {
+        static extern(C) void _vfuncDragDataGetTramp(GtkWidget* widget, GdkDragContext* context, GtkSelectionData* selectionData, uint info, uint time) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.dragDataGet)
+              return (cast(typeof(&_vfuncDragDataGetTramp))_klass.dragDataGet)(widget, context, selectionData, info, time);
+            return;
+          }
+
+          auto _selectionData = selectionData ? new gid.gtk3.selection_data.SelectionData(cast(void*)selectionData, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncDragDataGet(gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk3.drag_context.DragContext)(cast(void*)context, No.Take), _selectionData, info, time);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncDragDataGet");
+          }
+          if (_selectionData)
+            _selectionData._cUnborrow;
+
+        }
+
+        _klass.dragDataGet = cast(typeof(_klass.dragDataGet))&_vfuncDragDataGetTramp;
+        break;
+      }
+      case "drag_data_received":
+      {
+        static extern(C) void _vfuncDragDataReceivedTramp(GtkWidget* widget, GdkDragContext* context, int x, int y, GtkSelectionData* selectionData, uint info, uint time) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.dragDataReceived)
+              return (cast(typeof(&_vfuncDragDataReceivedTramp))_klass.dragDataReceived)(widget, context, x, y, selectionData, info, time);
+            return;
+          }
+
+          auto _selectionData = selectionData ? new gid.gtk3.selection_data.SelectionData(cast(void*)selectionData, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncDragDataReceived(gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk3.drag_context.DragContext)(cast(void*)context, No.Take), x, y, _selectionData, info, time);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncDragDataReceived");
+          }
+          if (_selectionData)
+            _selectionData._cUnborrow;
+
+        }
+
+        _klass.dragDataReceived = cast(typeof(_klass.dragDataReceived))&_vfuncDragDataReceivedTramp;
+        break;
+      }
+      case "drag_drop":
+      {
+        static extern(C) gboolean _vfuncDragDropTramp(GtkWidget* widget, GdkDragContext* context, int x, int y, uint time) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.dragDrop)
+              return (cast(typeof(&_vfuncDragDropTramp))_klass.dragDrop)(widget, context, x, y, time);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncDragDrop(gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk3.drag_context.DragContext)(cast(void*)context, No.Take), x, y, time);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncDragDrop");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.dragDrop = cast(typeof(_klass.dragDrop))&_vfuncDragDropTramp;
+        break;
+      }
+      case "drag_end":
+      {
+        static extern(C) void _vfuncDragEndTramp(GtkWidget* widget, GdkDragContext* context) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.dragEnd)
+              return (cast(typeof(&_vfuncDragEndTramp))_klass.dragEnd)(widget, context);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDragEnd(gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk3.drag_context.DragContext)(cast(void*)context, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncDragEnd");
+          }
+        }
+
+        _klass.dragEnd = cast(typeof(_klass.dragEnd))&_vfuncDragEndTramp;
+        break;
+      }
+      case "drag_failed":
+      {
+        static extern(C) gboolean _vfuncDragFailedTramp(GtkWidget* widget, GdkDragContext* context, GtkDragResult result) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.dragFailed)
+              return (cast(typeof(&_vfuncDragFailedTramp))_klass.dragFailed)(widget, context, result);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncDragFailed(gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk3.drag_context.DragContext)(cast(void*)context, No.Take), result);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncDragFailed");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.dragFailed = cast(typeof(_klass.dragFailed))&_vfuncDragFailedTramp;
+        break;
+      }
+      case "drag_leave":
+      {
+        static extern(C) void _vfuncDragLeaveTramp(GtkWidget* widget, GdkDragContext* context, uint time) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.dragLeave)
+              return (cast(typeof(&_vfuncDragLeaveTramp))_klass.dragLeave)(widget, context, time);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDragLeave(gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk3.drag_context.DragContext)(cast(void*)context, No.Take), time);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncDragLeave");
+          }
+        }
+
+        _klass.dragLeave = cast(typeof(_klass.dragLeave))&_vfuncDragLeaveTramp;
+        break;
+      }
+      case "drag_motion":
+      {
+        static extern(C) gboolean _vfuncDragMotionTramp(GtkWidget* widget, GdkDragContext* context, int x, int y, uint time) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.dragMotion)
+              return (cast(typeof(&_vfuncDragMotionTramp))_klass.dragMotion)(widget, context, x, y, time);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncDragMotion(gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk3.drag_context.DragContext)(cast(void*)context, No.Take), x, y, time);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncDragMotion");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.dragMotion = cast(typeof(_klass.dragMotion))&_vfuncDragMotionTramp;
+        break;
+      }
+      case "draw":
+      {
+        static extern(C) gboolean _vfuncDrawTramp(GtkWidget* widget, cairo_t* cr) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.draw)
+              return (cast(typeof(&_vfuncDrawTramp))_klass.draw)(widget, cr);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _cr = cr ? new gid.cairo1.context.Context(cast(void*)cr, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncDraw(_cr);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncDraw");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_cr)
+            _cr._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.draw = cast(typeof(_klass.draw))&_vfuncDrawTramp;
+        break;
+      }
+      case "enter_notify_event":
+      {
+        static extern(C) gboolean _vfuncEnterNotifyEventTramp(GtkWidget* widget, GdkEventCrossing* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.enterNotifyEvent)
+              return (cast(typeof(&_vfuncEnterNotifyEventTramp))_klass.enterNotifyEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_crossing.EventCrossing(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncEnterNotifyEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncEnterNotifyEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.enterNotifyEvent = cast(typeof(_klass.enterNotifyEvent))&_vfuncEnterNotifyEventTramp;
+        break;
+      }
+      case "event":
+      {
+        static extern(C) gboolean _vfuncEventTramp(GtkWidget* widget, GdkEvent* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.event)
+              return (cast(typeof(&_vfuncEventTramp))_klass.event)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event.Event(cast(void*)event, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_event)
+            _event._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.event = cast(typeof(_klass.event))&_vfuncEventTramp;
+        break;
+      }
+      case "focus":
+      {
+        static extern(C) gboolean _vfuncFocusTramp(GtkWidget* widget, GtkDirectionType direction) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.focus)
+              return (cast(typeof(&_vfuncFocusTramp))_klass.focus)(widget, direction);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncFocus(direction);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncFocus");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.focus = cast(typeof(_klass.focus))&_vfuncFocusTramp;
+        break;
+      }
+      case "focus_in_event":
+      {
+        static extern(C) gboolean _vfuncFocusInEventTramp(GtkWidget* widget, GdkEventFocus* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.focusInEvent)
+              return (cast(typeof(&_vfuncFocusInEventTramp))_klass.focusInEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_focus.EventFocus(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncFocusInEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncFocusInEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.focusInEvent = cast(typeof(_klass.focusInEvent))&_vfuncFocusInEventTramp;
+        break;
+      }
+      case "focus_out_event":
+      {
+        static extern(C) gboolean _vfuncFocusOutEventTramp(GtkWidget* widget, GdkEventFocus* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.focusOutEvent)
+              return (cast(typeof(&_vfuncFocusOutEventTramp))_klass.focusOutEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_focus.EventFocus(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncFocusOutEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncFocusOutEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.focusOutEvent = cast(typeof(_klass.focusOutEvent))&_vfuncFocusOutEventTramp;
+        break;
+      }
+      case "get_accessible":
+      {
+        static extern(C) AtkObject* _vfuncGetAccessibleTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.getAccessible)
+              return (cast(typeof(&_vfuncGetAccessibleTramp))_klass.getAccessible)(widget);
+            return typeof(return).init;
+          }
+
+          gid.atk1.object.ObjectWrap _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetAccessible();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncGetAccessible");
+          }
+          auto _retval = _dretval ? cast(AtkObject*)_dretval._cPtr(No.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getAccessible = cast(typeof(_klass.getAccessible))&_vfuncGetAccessibleTramp;
+        break;
+      }
+      case "get_preferred_height":
+      {
+        static extern(C) void _vfuncGetPreferredHeightTramp(GtkWidget* widget, int* minimumHeight, int* naturalHeight) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.getPreferredHeight)
+              return (cast(typeof(&_vfuncGetPreferredHeightTramp))_klass.getPreferredHeight)(widget, minimumHeight, naturalHeight);
+            return;
+          }
+
+          typeof(*minimumHeight) _minimumHeightNull;
+          if (!minimumHeight)
+            minimumHeight = &_minimumHeightNull;
+
+          typeof(*naturalHeight) _naturalHeightNull;
+          if (!naturalHeight)
+            naturalHeight = &_naturalHeightNull;
+
+          try
+          {
+            _obj.vfuncGetPreferredHeight(*minimumHeight, *naturalHeight);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncGetPreferredHeight");
+          }
+        }
+
+        _klass.getPreferredHeight = cast(typeof(_klass.getPreferredHeight))&_vfuncGetPreferredHeightTramp;
+        break;
+      }
+      case "get_preferred_height_and_baseline_for_width":
+      {
+        static extern(C) void _vfuncGetPreferredHeightAndBaselineForWidthTramp(GtkWidget* widget, int width, int* minimumHeight, int* naturalHeight, int* minimumBaseline, int* naturalBaseline) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.getPreferredHeightAndBaselineForWidth)
+              return (cast(typeof(&_vfuncGetPreferredHeightAndBaselineForWidthTramp))_klass.getPreferredHeightAndBaselineForWidth)(widget, width, minimumHeight, naturalHeight, minimumBaseline, naturalBaseline);
+            return;
+          }
+
+          typeof(*minimumHeight) _minimumHeightNull;
+          if (!minimumHeight)
+            minimumHeight = &_minimumHeightNull;
+
+          typeof(*naturalHeight) _naturalHeightNull;
+          if (!naturalHeight)
+            naturalHeight = &_naturalHeightNull;
+
+          typeof(*minimumBaseline) _minimumBaselineNull;
+          if (!minimumBaseline)
+            minimumBaseline = &_minimumBaselineNull;
+
+          typeof(*naturalBaseline) _naturalBaselineNull;
+          if (!naturalBaseline)
+            naturalBaseline = &_naturalBaselineNull;
+
+          try
+          {
+            _obj.vfuncGetPreferredHeightAndBaselineForWidth(width, *minimumHeight, *naturalHeight, *minimumBaseline, *naturalBaseline);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncGetPreferredHeightAndBaselineForWidth");
+          }
+        }
+
+        _klass.getPreferredHeightAndBaselineForWidth = cast(typeof(_klass.getPreferredHeightAndBaselineForWidth))&_vfuncGetPreferredHeightAndBaselineForWidthTramp;
+        break;
+      }
+      case "get_preferred_height_for_width":
+      {
+        static extern(C) void _vfuncGetPreferredHeightForWidthTramp(GtkWidget* widget, int width, int* minimumHeight, int* naturalHeight) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.getPreferredHeightForWidth)
+              return (cast(typeof(&_vfuncGetPreferredHeightForWidthTramp))_klass.getPreferredHeightForWidth)(widget, width, minimumHeight, naturalHeight);
+            return;
+          }
+
+          typeof(*minimumHeight) _minimumHeightNull;
+          if (!minimumHeight)
+            minimumHeight = &_minimumHeightNull;
+
+          typeof(*naturalHeight) _naturalHeightNull;
+          if (!naturalHeight)
+            naturalHeight = &_naturalHeightNull;
+
+          try
+          {
+            _obj.vfuncGetPreferredHeightForWidth(width, *minimumHeight, *naturalHeight);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncGetPreferredHeightForWidth");
+          }
+        }
+
+        _klass.getPreferredHeightForWidth = cast(typeof(_klass.getPreferredHeightForWidth))&_vfuncGetPreferredHeightForWidthTramp;
+        break;
+      }
+      case "get_preferred_width":
+      {
+        static extern(C) void _vfuncGetPreferredWidthTramp(GtkWidget* widget, int* minimumWidth, int* naturalWidth) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.getPreferredWidth)
+              return (cast(typeof(&_vfuncGetPreferredWidthTramp))_klass.getPreferredWidth)(widget, minimumWidth, naturalWidth);
+            return;
+          }
+
+          typeof(*minimumWidth) _minimumWidthNull;
+          if (!minimumWidth)
+            minimumWidth = &_minimumWidthNull;
+
+          typeof(*naturalWidth) _naturalWidthNull;
+          if (!naturalWidth)
+            naturalWidth = &_naturalWidthNull;
+
+          try
+          {
+            _obj.vfuncGetPreferredWidth(*minimumWidth, *naturalWidth);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncGetPreferredWidth");
+          }
+        }
+
+        _klass.getPreferredWidth = cast(typeof(_klass.getPreferredWidth))&_vfuncGetPreferredWidthTramp;
+        break;
+      }
+      case "get_preferred_width_for_height":
+      {
+        static extern(C) void _vfuncGetPreferredWidthForHeightTramp(GtkWidget* widget, int height, int* minimumWidth, int* naturalWidth) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.getPreferredWidthForHeight)
+              return (cast(typeof(&_vfuncGetPreferredWidthForHeightTramp))_klass.getPreferredWidthForHeight)(widget, height, minimumWidth, naturalWidth);
+            return;
+          }
+
+          typeof(*minimumWidth) _minimumWidthNull;
+          if (!minimumWidth)
+            minimumWidth = &_minimumWidthNull;
+
+          typeof(*naturalWidth) _naturalWidthNull;
+          if (!naturalWidth)
+            naturalWidth = &_naturalWidthNull;
+
+          try
+          {
+            _obj.vfuncGetPreferredWidthForHeight(height, *minimumWidth, *naturalWidth);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncGetPreferredWidthForHeight");
+          }
+        }
+
+        _klass.getPreferredWidthForHeight = cast(typeof(_klass.getPreferredWidthForHeight))&_vfuncGetPreferredWidthForHeightTramp;
+        break;
+      }
+      case "get_request_mode":
+      {
+        static extern(C) GtkSizeRequestMode _vfuncGetRequestModeTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.getRequestMode)
+              return (cast(typeof(&_vfuncGetRequestModeTramp))_klass.getRequestMode)(widget);
+            return typeof(return).init;
+          }
+
+          gid.gtk3.types.SizeRequestMode _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetRequestMode();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncGetRequestMode");
+          }
+          auto _retval = cast(GtkSizeRequestMode)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getRequestMode = cast(typeof(_klass.getRequestMode))&_vfuncGetRequestModeTramp;
+        break;
+      }
+      case "grab_broken_event":
+      {
+        static extern(C) gboolean _vfuncGrabBrokenEventTramp(GtkWidget* widget, GdkEventGrabBroken* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.grabBrokenEvent)
+              return (cast(typeof(&_vfuncGrabBrokenEventTramp))_klass.grabBrokenEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_grab_broken.EventGrabBroken(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncGrabBrokenEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncGrabBrokenEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.grabBrokenEvent = cast(typeof(_klass.grabBrokenEvent))&_vfuncGrabBrokenEventTramp;
+        break;
+      }
+      case "grab_focus":
+      {
+        static extern(C) void _vfuncGrabFocusTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.grabFocus)
+              return (cast(typeof(&_vfuncGrabFocusTramp))_klass.grabFocus)(widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncGrabFocus();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncGrabFocus");
+          }
+        }
+
+        _klass.grabFocus = cast(typeof(_klass.grabFocus))&_vfuncGrabFocusTramp;
+        break;
+      }
+      case "grab_notify":
+      {
+        static extern(C) void _vfuncGrabNotifyTramp(GtkWidget* widget, gboolean wasGrabbed) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.grabNotify)
+              return (cast(typeof(&_vfuncGrabNotifyTramp))_klass.grabNotify)(widget, wasGrabbed);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncGrabNotify(cast(bool)wasGrabbed);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncGrabNotify");
+          }
+        }
+
+        _klass.grabNotify = cast(typeof(_klass.grabNotify))&_vfuncGrabNotifyTramp;
+        break;
+      }
+      case "hide":
+      {
+        static extern(C) void _vfuncHideTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.hide)
+              return (cast(typeof(&_vfuncHideTramp))_klass.hide)(widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncHide();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncHide");
+          }
+        }
+
+        _klass.hide = cast(typeof(_klass.hide))&_vfuncHideTramp;
+        break;
+      }
+      case "hierarchy_changed":
+      {
+        static extern(C) void _vfuncHierarchyChangedTramp(GtkWidget* widget, GtkWidget* previousToplevel) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.hierarchyChanged)
+              return (cast(typeof(&_vfuncHierarchyChangedTramp))_klass.hierarchyChanged)(widget, previousToplevel);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncHierarchyChanged(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)previousToplevel, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncHierarchyChanged");
+          }
+        }
+
+        _klass.hierarchyChanged = cast(typeof(_klass.hierarchyChanged))&_vfuncHierarchyChangedTramp;
+        break;
+      }
+      case "key_press_event":
+      {
+        static extern(C) gboolean _vfuncKeyPressEventTramp(GtkWidget* widget, GdkEventKey* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.keyPressEvent)
+              return (cast(typeof(&_vfuncKeyPressEventTramp))_klass.keyPressEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_key.EventKey(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncKeyPressEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncKeyPressEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.keyPressEvent = cast(typeof(_klass.keyPressEvent))&_vfuncKeyPressEventTramp;
+        break;
+      }
+      case "key_release_event":
+      {
+        static extern(C) gboolean _vfuncKeyReleaseEventTramp(GtkWidget* widget, GdkEventKey* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.keyReleaseEvent)
+              return (cast(typeof(&_vfuncKeyReleaseEventTramp))_klass.keyReleaseEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_key.EventKey(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncKeyReleaseEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncKeyReleaseEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.keyReleaseEvent = cast(typeof(_klass.keyReleaseEvent))&_vfuncKeyReleaseEventTramp;
+        break;
+      }
+      case "keynav_failed":
+      {
+        static extern(C) gboolean _vfuncKeynavFailedTramp(GtkWidget* widget, GtkDirectionType direction) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.keynavFailed)
+              return (cast(typeof(&_vfuncKeynavFailedTramp))_klass.keynavFailed)(widget, direction);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncKeynavFailed(direction);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncKeynavFailed");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.keynavFailed = cast(typeof(_klass.keynavFailed))&_vfuncKeynavFailedTramp;
+        break;
+      }
+      case "leave_notify_event":
+      {
+        static extern(C) gboolean _vfuncLeaveNotifyEventTramp(GtkWidget* widget, GdkEventCrossing* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.leaveNotifyEvent)
+              return (cast(typeof(&_vfuncLeaveNotifyEventTramp))_klass.leaveNotifyEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_crossing.EventCrossing(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncLeaveNotifyEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncLeaveNotifyEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.leaveNotifyEvent = cast(typeof(_klass.leaveNotifyEvent))&_vfuncLeaveNotifyEventTramp;
+        break;
+      }
+      case "map":
+      {
+        static extern(C) void _vfuncMapTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.map)
+              return (cast(typeof(&_vfuncMapTramp))_klass.map)(widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMap();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncMap");
+          }
+        }
+
+        _klass.map = cast(typeof(_klass.map))&_vfuncMapTramp;
+        break;
+      }
+      case "map_event":
+      {
+        static extern(C) gboolean _vfuncMapEventTramp(GtkWidget* widget, GdkEventAny* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.mapEvent)
+              return (cast(typeof(&_vfuncMapEventTramp))_klass.mapEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_any.EventAny(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncMapEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncMapEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.mapEvent = cast(typeof(_klass.mapEvent))&_vfuncMapEventTramp;
+        break;
+      }
+      case "mnemonic_activate":
+      {
+        static extern(C) gboolean _vfuncMnemonicActivateTramp(GtkWidget* widget, gboolean groupCycling) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.mnemonicActivate)
+              return (cast(typeof(&_vfuncMnemonicActivateTramp))_klass.mnemonicActivate)(widget, groupCycling);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncMnemonicActivate(cast(bool)groupCycling);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncMnemonicActivate");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.mnemonicActivate = cast(typeof(_klass.mnemonicActivate))&_vfuncMnemonicActivateTramp;
+        break;
+      }
+      case "motion_notify_event":
+      {
+        static extern(C) gboolean _vfuncMotionNotifyEventTramp(GtkWidget* widget, GdkEventMotion* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.motionNotifyEvent)
+              return (cast(typeof(&_vfuncMotionNotifyEventTramp))_klass.motionNotifyEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_motion.EventMotion(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncMotionNotifyEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncMotionNotifyEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.motionNotifyEvent = cast(typeof(_klass.motionNotifyEvent))&_vfuncMotionNotifyEventTramp;
+        break;
+      }
+      case "move_focus":
+      {
+        static extern(C) void _vfuncMoveFocusTramp(GtkWidget* widget, GtkDirectionType direction) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.moveFocus)
+              return (cast(typeof(&_vfuncMoveFocusTramp))_klass.moveFocus)(widget, direction);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMoveFocus(direction);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncMoveFocus");
+          }
+        }
+
+        _klass.moveFocus = cast(typeof(_klass.moveFocus))&_vfuncMoveFocusTramp;
+        break;
+      }
+      case "parent_set":
+      {
+        static extern(C) void _vfuncParentSetTramp(GtkWidget* widget, GtkWidget* previousParent) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.parentSet)
+              return (cast(typeof(&_vfuncParentSetTramp))_klass.parentSet)(widget, previousParent);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncParentSet(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)previousParent, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncParentSet");
+          }
+        }
+
+        _klass.parentSet = cast(typeof(_klass.parentSet))&_vfuncParentSetTramp;
+        break;
+      }
+      case "popup_menu":
+      {
+        static extern(C) gboolean _vfuncPopupMenuTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.popupMenu)
+              return (cast(typeof(&_vfuncPopupMenuTramp))_klass.popupMenu)(widget);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncPopupMenu();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncPopupMenu");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.popupMenu = cast(typeof(_klass.popupMenu))&_vfuncPopupMenuTramp;
+        break;
+      }
+      case "property_notify_event":
+      {
+        static extern(C) gboolean _vfuncPropertyNotifyEventTramp(GtkWidget* widget, GdkEventProperty* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.propertyNotifyEvent)
+              return (cast(typeof(&_vfuncPropertyNotifyEventTramp))_klass.propertyNotifyEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_property.EventProperty(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncPropertyNotifyEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncPropertyNotifyEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.propertyNotifyEvent = cast(typeof(_klass.propertyNotifyEvent))&_vfuncPropertyNotifyEventTramp;
+        break;
+      }
+      case "proximity_in_event":
+      {
+        static extern(C) gboolean _vfuncProximityInEventTramp(GtkWidget* widget, GdkEventProximity* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.proximityInEvent)
+              return (cast(typeof(&_vfuncProximityInEventTramp))_klass.proximityInEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_proximity.EventProximity(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncProximityInEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncProximityInEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.proximityInEvent = cast(typeof(_klass.proximityInEvent))&_vfuncProximityInEventTramp;
+        break;
+      }
+      case "proximity_out_event":
+      {
+        static extern(C) gboolean _vfuncProximityOutEventTramp(GtkWidget* widget, GdkEventProximity* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.proximityOutEvent)
+              return (cast(typeof(&_vfuncProximityOutEventTramp))_klass.proximityOutEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_proximity.EventProximity(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncProximityOutEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncProximityOutEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.proximityOutEvent = cast(typeof(_klass.proximityOutEvent))&_vfuncProximityOutEventTramp;
+        break;
+      }
+      case "query_tooltip":
+      {
+        static extern(C) gboolean _vfuncQueryTooltipTramp(GtkWidget* widget, int x, int y, gboolean keyboardTooltip, GtkTooltip* tooltip) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.queryTooltip)
+              return (cast(typeof(&_vfuncQueryTooltipTramp))_klass.queryTooltip)(widget, x, y, keyboardTooltip, tooltip);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncQueryTooltip(x, y, cast(bool)keyboardTooltip, gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.tooltip.Tooltip)(cast(void*)tooltip, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncQueryTooltip");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.queryTooltip = cast(typeof(_klass.queryTooltip))&_vfuncQueryTooltipTramp;
+        break;
+      }
+      case "queue_draw_region":
+      {
+        static extern(C) void _vfuncQueueDrawRegionTramp(GtkWidget* widget, const(cairo_region_t)* region) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.queueDrawRegion)
+              return (cast(typeof(&_vfuncQueueDrawRegionTramp))_klass.queueDrawRegion)(widget, region);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncQueueDrawRegion(region ? new gid.cairo1.region.Region(cast(void*)region, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncQueueDrawRegion");
+          }
+        }
+
+        _klass.queueDrawRegion = cast(typeof(_klass.queueDrawRegion))&_vfuncQueueDrawRegionTramp;
+        break;
+      }
+      case "realize":
+      {
+        static extern(C) void _vfuncRealizeTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.realize)
+              return (cast(typeof(&_vfuncRealizeTramp))_klass.realize)(widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRealize();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncRealize");
+          }
+        }
+
+        _klass.realize = cast(typeof(_klass.realize))&_vfuncRealizeTramp;
+        break;
+      }
+      case "screen_changed":
+      {
+        static extern(C) void _vfuncScreenChangedTramp(GtkWidget* widget, GdkScreen* previousScreen) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.screenChanged)
+              return (cast(typeof(&_vfuncScreenChangedTramp))_klass.screenChanged)(widget, previousScreen);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncScreenChanged(gid.gobject2.object.ObjectWrap._getDObject!(gid.gdk3.screen.Screen)(cast(void*)previousScreen, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncScreenChanged");
+          }
+        }
+
+        _klass.screenChanged = cast(typeof(_klass.screenChanged))&_vfuncScreenChangedTramp;
+        break;
+      }
+      case "scroll_event":
+      {
+        static extern(C) gboolean _vfuncScrollEventTramp(GtkWidget* widget, GdkEventScroll* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.scrollEvent)
+              return (cast(typeof(&_vfuncScrollEventTramp))_klass.scrollEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_scroll.EventScroll(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncScrollEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncScrollEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.scrollEvent = cast(typeof(_klass.scrollEvent))&_vfuncScrollEventTramp;
+        break;
+      }
+      case "selection_clear_event":
+      {
+        static extern(C) gboolean _vfuncSelectionClearEventTramp(GtkWidget* widget, GdkEventSelection* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.selectionClearEvent)
+              return (cast(typeof(&_vfuncSelectionClearEventTramp))_klass.selectionClearEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_selection.EventSelection(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncSelectionClearEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncSelectionClearEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.selectionClearEvent = cast(typeof(_klass.selectionClearEvent))&_vfuncSelectionClearEventTramp;
+        break;
+      }
+      case "selection_get":
+      {
+        static extern(C) void _vfuncSelectionGetTramp(GtkWidget* widget, GtkSelectionData* selectionData, uint info, uint time) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.selectionGet)
+              return (cast(typeof(&_vfuncSelectionGetTramp))_klass.selectionGet)(widget, selectionData, info, time);
+            return;
+          }
+
+          auto _selectionData = selectionData ? new gid.gtk3.selection_data.SelectionData(cast(void*)selectionData, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncSelectionGet(_selectionData, info, time);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncSelectionGet");
+          }
+          if (_selectionData)
+            _selectionData._cUnborrow;
+
+        }
+
+        _klass.selectionGet = cast(typeof(_klass.selectionGet))&_vfuncSelectionGetTramp;
+        break;
+      }
+      case "selection_notify_event":
+      {
+        static extern(C) gboolean _vfuncSelectionNotifyEventTramp(GtkWidget* widget, GdkEventSelection* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.selectionNotifyEvent)
+              return (cast(typeof(&_vfuncSelectionNotifyEventTramp))_klass.selectionNotifyEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_selection.EventSelection(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncSelectionNotifyEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncSelectionNotifyEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.selectionNotifyEvent = cast(typeof(_klass.selectionNotifyEvent))&_vfuncSelectionNotifyEventTramp;
+        break;
+      }
+      case "selection_received":
+      {
+        static extern(C) void _vfuncSelectionReceivedTramp(GtkWidget* widget, GtkSelectionData* selectionData, uint time) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.selectionReceived)
+              return (cast(typeof(&_vfuncSelectionReceivedTramp))_klass.selectionReceived)(widget, selectionData, time);
+            return;
+          }
+
+          auto _selectionData = selectionData ? new gid.gtk3.selection_data.SelectionData(cast(void*)selectionData, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncSelectionReceived(_selectionData, time);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncSelectionReceived");
+          }
+          if (_selectionData)
+            _selectionData._cUnborrow;
+
+        }
+
+        _klass.selectionReceived = cast(typeof(_klass.selectionReceived))&_vfuncSelectionReceivedTramp;
+        break;
+      }
+      case "selection_request_event":
+      {
+        static extern(C) gboolean _vfuncSelectionRequestEventTramp(GtkWidget* widget, GdkEventSelection* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.selectionRequestEvent)
+              return (cast(typeof(&_vfuncSelectionRequestEventTramp))_klass.selectionRequestEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_selection.EventSelection(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncSelectionRequestEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncSelectionRequestEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.selectionRequestEvent = cast(typeof(_klass.selectionRequestEvent))&_vfuncSelectionRequestEventTramp;
+        break;
+      }
+      case "show":
+      {
+        static extern(C) void _vfuncShowTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.show)
+              return (cast(typeof(&_vfuncShowTramp))_klass.show)(widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncShow();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncShow");
+          }
+        }
+
+        _klass.show = cast(typeof(_klass.show))&_vfuncShowTramp;
+        break;
+      }
+      case "show_all":
+      {
+        static extern(C) void _vfuncShowAllTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.showAll)
+              return (cast(typeof(&_vfuncShowAllTramp))_klass.showAll)(widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncShowAll();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncShowAll");
+          }
+        }
+
+        _klass.showAll = cast(typeof(_klass.showAll))&_vfuncShowAllTramp;
+        break;
+      }
+      case "show_help":
+      {
+        static extern(C) gboolean _vfuncShowHelpTramp(GtkWidget* widget, GtkWidgetHelpType helpType) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.showHelp)
+              return (cast(typeof(&_vfuncShowHelpTramp))_klass.showHelp)(widget, helpType);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncShowHelp(helpType);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncShowHelp");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.showHelp = cast(typeof(_klass.showHelp))&_vfuncShowHelpTramp;
+        break;
+      }
+      case "size_allocate":
+      {
+        static extern(C) void _vfuncSizeAllocateTramp(GtkWidget* widget, GtkAllocation* allocation) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.sizeAllocate)
+              return (cast(typeof(&_vfuncSizeAllocateTramp))_klass.sizeAllocate)(widget, allocation);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSizeAllocate(*cast(gid.gtk3.types.Allocation*)allocation);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncSizeAllocate");
+          }
+        }
+
+        _klass.sizeAllocate = cast(typeof(_klass.sizeAllocate))&_vfuncSizeAllocateTramp;
+        break;
+      }
+      case "state_changed":
+      {
+        static extern(C) void _vfuncStateChangedTramp(GtkWidget* widget, GtkStateType previousState) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.stateChanged)
+              return (cast(typeof(&_vfuncStateChangedTramp))_klass.stateChanged)(widget, previousState);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncStateChanged(previousState);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncStateChanged");
+          }
+        }
+
+        _klass.stateChanged = cast(typeof(_klass.stateChanged))&_vfuncStateChangedTramp;
+        break;
+      }
+      case "state_flags_changed":
+      {
+        static extern(C) void _vfuncStateFlagsChangedTramp(GtkWidget* widget, GtkStateFlags previousStateFlags) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.stateFlagsChanged)
+              return (cast(typeof(&_vfuncStateFlagsChangedTramp))_klass.stateFlagsChanged)(widget, previousStateFlags);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncStateFlagsChanged(previousStateFlags);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncStateFlagsChanged");
+          }
+        }
+
+        _klass.stateFlagsChanged = cast(typeof(_klass.stateFlagsChanged))&_vfuncStateFlagsChangedTramp;
+        break;
+      }
+      case "style_set":
+      {
+        static extern(C) void _vfuncStyleSetTramp(GtkWidget* widget, GtkStyle* previousStyle) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.styleSet)
+              return (cast(typeof(&_vfuncStyleSetTramp))_klass.styleSet)(widget, previousStyle);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncStyleSet(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.style.Style)(cast(void*)previousStyle, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncStyleSet");
+          }
+        }
+
+        _klass.styleSet = cast(typeof(_klass.styleSet))&_vfuncStyleSetTramp;
+        break;
+      }
+      case "style_updated":
+      {
+        static extern(C) void _vfuncStyleUpdatedTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.styleUpdated)
+              return (cast(typeof(&_vfuncStyleUpdatedTramp))_klass.styleUpdated)(widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncStyleUpdated();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncStyleUpdated");
+          }
+        }
+
+        _klass.styleUpdated = cast(typeof(_klass.styleUpdated))&_vfuncStyleUpdatedTramp;
+        break;
+      }
+      case "touch_event":
+      {
+        static extern(C) gboolean _vfuncTouchEventTramp(GtkWidget* widget, GdkEventTouch* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.touchEvent)
+              return (cast(typeof(&_vfuncTouchEventTramp))_klass.touchEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_touch.EventTouch(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncTouchEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncTouchEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.touchEvent = cast(typeof(_klass.touchEvent))&_vfuncTouchEventTramp;
+        break;
+      }
+      case "unmap":
+      {
+        static extern(C) void _vfuncUnmapTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.unmap)
+              return (cast(typeof(&_vfuncUnmapTramp))_klass.unmap)(widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncUnmap();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncUnmap");
+          }
+        }
+
+        _klass.unmap = cast(typeof(_klass.unmap))&_vfuncUnmapTramp;
+        break;
+      }
+      case "unmap_event":
+      {
+        static extern(C) gboolean _vfuncUnmapEventTramp(GtkWidget* widget, GdkEventAny* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.unmapEvent)
+              return (cast(typeof(&_vfuncUnmapEventTramp))_klass.unmapEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_any.EventAny(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncUnmapEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncUnmapEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.unmapEvent = cast(typeof(_klass.unmapEvent))&_vfuncUnmapEventTramp;
+        break;
+      }
+      case "unrealize":
+      {
+        static extern(C) void _vfuncUnrealizeTramp(GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.unrealize)
+              return (cast(typeof(&_vfuncUnrealizeTramp))_klass.unrealize)(widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncUnrealize();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncUnrealize");
+          }
+        }
+
+        _klass.unrealize = cast(typeof(_klass.unrealize))&_vfuncUnrealizeTramp;
+        break;
+      }
+      case "visibility_notify_event":
+      {
+        static extern(C) gboolean _vfuncVisibilityNotifyEventTramp(GtkWidget* widget, GdkEventVisibility* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.visibilityNotifyEvent)
+              return (cast(typeof(&_vfuncVisibilityNotifyEventTramp))_klass.visibilityNotifyEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_visibility.EventVisibility(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncVisibilityNotifyEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncVisibilityNotifyEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.visibilityNotifyEvent = cast(typeof(_klass.visibilityNotifyEvent))&_vfuncVisibilityNotifyEventTramp;
+        break;
+      }
+      case "window_state_event":
+      {
+        static extern(C) gboolean _vfuncWindowStateEventTramp(GtkWidget* widget, GdkEventWindowState* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.widget.Widget)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)widget);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWidgetClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)widget);
+            if (_klass.windowStateEvent)
+              return (cast(typeof(&_vfuncWindowStateEventTramp))_klass.windowStateEvent)(widget, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_window_state.EventWindowState(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncWindowStateEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.widget.Widget.vfuncWindowStateEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.windowStateEvent = cast(typeof(_klass.windowStateEvent))&_vfuncWindowStateEventTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

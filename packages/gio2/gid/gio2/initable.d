@@ -85,6 +85,7 @@ interface Initable : GidWrap
     return _retval;
   }
 
+
   /**
       Initializes the object implementing the interface.
       

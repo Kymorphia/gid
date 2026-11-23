@@ -26,6 +26,15 @@ interface ToolShell : GidWrap
     return cast(void function())gtk_tool_shell_get_type != &gidSymbolNotFound ? gtk_tool_shell_get_type() : cast(GType)0;
   }
 
+
+
+
+
+
+
+
+
+
   /**
       Retrieves the current ellipsize mode for the tool shell. Tool items must not
       call this function directly, but rely on [gid.gtk3.tool_item.ToolItem.getEllipsizeMode]

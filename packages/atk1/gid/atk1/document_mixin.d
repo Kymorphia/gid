@@ -8,8 +8,11 @@ public import gid.atk1.c.types;
 public import gid.atk1.text_selection;
 public import gid.atk1.types;
 public import gid.core.utils;
+public import gid.gobject2.c.functions;
+public import gid.gobject2.c.types;
 public import gid.gobject2.dclosure;
 public import gid.gobject2.gid_builder;
+public import gid.gobject2.object;
 
 /**
     The ATK interface which represents the toplevel
@@ -25,6 +28,221 @@ public import gid.gobject2.gid_builder;
 */
 template DocumentT()
 {
+
+  /**
+      Retrieves the current page number inside document.
+      Returns: the current page number inside document, or -1 if
+          not implemented, not know by the implementor, or irrelevant.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetCurrentPageNumber`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected int vfuncGetCurrentPageNumber()
+  {
+    auto _klass = cast(AtkDocumentIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.atk1.document.Document._getGType);
+    if (!_klass || !_klass.getCurrentPageNumber)
+      return typeof(return).init;
+
+    int _retval;
+    _retval = _klass.getCurrentPageNumber(cast(AtkDocument*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets a [gid.xlib2.types.void*] that points to an instance of the DOM.  It is
+      up to the caller to check atk_document_get_type to determine
+      how to cast this pointer.
+      Returns: a [gid.xlib2.types.void*] that points to an instance of the DOM.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetDocument`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Since 2.12. document is already a representation of
+        the document. Use it directly, or one of its children, as an
+        instance of the DOM.
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void* vfuncGetDocument()
+  {
+    auto _klass = cast(AtkDocumentIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.atk1.document.Document._getGType);
+    if (!_klass || !_klass.getDocument)
+      return typeof(return).init;
+
+    auto _retval = _klass.getDocument(cast(AtkDocument*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Retrieves the value of the given attribute_name inside document.
+  
+      Params:
+        attributeName = a character string representing the name of the attribute
+            whose value is being queried.
+      Returns: a string value associated with the named
+           attribute for this document, or null if a value for
+           attribute_name has not been specified for this document.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetDocumentAttributeValue`
+      to chain up from an override.
+      Overriding it from D is not supported (callback string return value with transfer none is not supported).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected string vfuncGetDocumentAttributeValue(string attributeName)
+  {
+    auto _klass = cast(AtkDocumentIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.atk1.document.Document._getGType);
+    if (!_klass || !_klass.getDocumentAttributeValue)
+      return typeof(return).init;
+
+    const(char)* _cretval;
+    const(char)* _attributeName = attributeName.toCString!(No.Malloc, No.Nullable);
+    _cretval = _klass.getDocumentAttributeValue(cast(AtkDocument*)this._cPtr, _attributeName);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets a UTF-8 string indicating the POSIX-style LC_MESSAGES locale
+               of the content of this document instance.  Individual
+               text substrings or images within this document may have
+               a different locale, see atk_text_get_attributes and
+               atk_image_get_image_locale.
+      Returns: a UTF-8 string indicating the POSIX-style LC_MESSAGES
+                 locale of the document content as a whole, or NULL if
+                 the document content does not specify a locale.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetDocumentLocale`
+      to chain up from an override.
+      Overriding it from D is not supported (callback string return value with transfer none is not supported).
+  
+      Deprecated: Please use [gid.atk1.object.ObjectWrap.getObjectLocale] instead.
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected string vfuncGetDocumentLocale()
+  {
+    auto _klass = cast(AtkDocumentIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.atk1.document.Document._getGType);
+    if (!_klass || !_klass.getDocumentLocale)
+      return typeof(return).init;
+
+    const(char)* _cretval;
+    _cretval = _klass.getDocumentLocale(cast(AtkDocument*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets a string indicating the document type.
+      Returns: a string indicating the document type
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetDocumentType`
+      to chain up from an override.
+      Overriding it from D is not supported (callback string return value with transfer none is not supported).
+  
+      Deprecated: Since 2.12. Please use [gid.atk1.document.Document.getAttributes] to
+        ask for the document type if it applies.
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected string vfuncGetDocumentType()
+  {
+    auto _klass = cast(AtkDocumentIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.atk1.document.Document._getGType);
+    if (!_klass || !_klass.getDocumentType)
+      return typeof(return).init;
+
+    const(char)* _cretval;
+    _cretval = _klass.getDocumentType(cast(AtkDocument*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Retrieves the total number of pages inside document.
+      Returns: total page count of document, or -1 if not implemented,
+          not know by the implementor or irrelevant.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetPageCount`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected int vfuncGetPageCount()
+  {
+    auto _klass = cast(AtkDocumentIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.atk1.document.Document._getGType);
+    if (!_klass || !_klass.getPageCount)
+      return typeof(return).init;
+
+    int _retval;
+    _retval = _klass.getPageCount(cast(AtkDocument*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Sets the value for the given attribute_name inside document.
+  
+      Params:
+        attributeName = a character string representing the name of the attribute
+            whose value is being set.
+        attributeValue = a string value to be associated with attribute_name.
+      Returns: true if attribute_value is successfully associated
+          with attribute_name for this document, and false if if the
+          document does not allow the attribute to be modified
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSetDocumentAttribute`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncSetDocumentAttribute(string attributeName, string attributeValue)
+  {
+    auto _klass = cast(AtkDocumentIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.atk1.document.Document._getGType);
+    if (!_klass || !_klass.setDocumentAttribute)
+      return typeof(return).init;
+
+    bool _retval;
+    const(char)* _attributeName = attributeName.toCString!(No.Malloc, No.Nullable);
+    const(char)* _attributeValue = attributeValue.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)_klass.setDocumentAttribute(cast(AtkDocument*)this._cPtr, _attributeName, _attributeValue);
+    return _retval;
+  }
+
+  /**
+      Makes 1 or more selections within this document denoted by the given
+      array of AtkTextSelections. Any existing physical selection (inside or
+      outside this document) is replaced by the new selections. All objects within
+      the given selection ranges must be descendants of this document. Otherwise
+      FALSE will be returned.
+  
+      Params:
+        selections = a GArray of AtkTextSelections
+                       to be selected.
+      Returns: TRUE if the selection was made successfully; FALSE otherwise.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSetTextSelections`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncSetTextSelections(gid.atk1.text_selection.TextSelection[] selections)
+  {
+    auto _klass = cast(AtkDocumentIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.atk1.document.Document._getGType);
+    if (!_klass || !_klass.setTextSelections)
+      return typeof(return).init;
+
+    bool _retval;
+    auto _selections = gArrayFromD!(gid.atk1.text_selection.TextSelection, false)(selections);
+    scope(exit) containerFree!(GArray*, gid.atk1.text_selection.TextSelection, GidOwnership.None)(_selections);
+    _retval = cast(bool)_klass.setTextSelections(cast(AtkDocument*)this._cPtr, _selections);
+    return _retval;
+  }
 
   /**
       Retrieves the value of the given attribute_name inside document.
@@ -193,6 +411,7 @@ template DocumentT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -251,6 +470,7 @@ template DocumentT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -300,6 +520,7 @@ template DocumentT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -350,6 +571,7 @@ template DocumentT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -401,6 +623,7 @@ template DocumentT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -420,6 +643,205 @@ template DocumentT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("reload", closure, after);
+  }
+
+  /// True if the D class T overrides any vfunc method of gid.atk1.document.Document (DiG)
+  enum bool _ifaceVfuncsOverridden_gid_atk1_document_Document(T) = !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetCurrentPageNumber", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetDocument", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetDocumentAttributeValue", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetDocumentLocale", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetDocumentType", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetPageCount", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetDocumentAttribute", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetTextSelections", true)[0], gid.gobject2.object.GidIfaceVfunc);
+
+  /**
+      Install the C trampolines of the gid.atk1.document.Document vfunc methods which a D class overrides into the interface
+      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      trampoline is a compile error.
+      Params:
+        T = D class
+        iface = Interface structure of the GType registered for T
+  */
+  static void _installIfaceVfuncs_gid_atk1_document_Document(T)(void* iface) nothrow
+  {
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetCurrentPageNumber", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_atk1_document_Document(iface, "get_current_page_number");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetDocument", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_atk1_document_Document(iface, "get_document");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetDocumentAttributeValue", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      static assert(0, "Overriding gid.atk1.document.Document.vfuncGetDocumentAttributeValue is not supported: callback string return value with transfer none is not supported");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetDocumentLocale", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      static assert(0, "Overriding gid.atk1.document.Document.vfuncGetDocumentLocale is not supported: callback string return value with transfer none is not supported");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetDocumentType", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      static assert(0, "Overriding gid.atk1.document.Document.vfuncGetDocumentType is not supported: callback string return value with transfer none is not supported");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetPageCount", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_atk1_document_Document(iface, "get_page_count");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetDocumentAttribute", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_atk1_document_Document(iface, "set_document_attribute");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetTextSelections", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_atk1_document_Document(iface, "set_text_selections");
+  }
+
+  private static void _installIfaceVfunc_gid_atk1_document_Document(void* iface, string vfunc) nothrow
+  {
+    auto _klass = cast(AtkDocumentIface*)iface;
+
+    switch (vfunc)
+    {
+      case "get_current_page_number":
+      {
+        static extern(C) int _vfuncGetCurrentPageNumberTramp(AtkDocument* document) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)document);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkDocumentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)document), gid.atk1.document.Document._getGType);
+            if (_klass && _klass.getCurrentPageNumber)
+              return (cast(typeof(&_vfuncGetCurrentPageNumberTramp))_klass.getCurrentPageNumber)(document);
+            return typeof(return).init;
+          }
+
+          int _retval;
+
+          try
+          {
+            _retval = _obj.vfuncGetCurrentPageNumber();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.document.Document.vfuncGetCurrentPageNumber");
+          }
+          return _retval;
+        }
+
+        _klass.getCurrentPageNumber = cast(typeof(_klass.getCurrentPageNumber))&_vfuncGetCurrentPageNumberTramp;
+        break;
+      }
+      case "get_document":
+      {
+        static extern(C) void* _vfuncGetDocumentTramp(AtkDocument* document) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)document);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkDocumentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)document), gid.atk1.document.Document._getGType);
+            if (_klass && _klass.getDocument)
+              return (cast(typeof(&_vfuncGetDocumentTramp))_klass.getDocument)(document);
+            return typeof(return).init;
+          }
+
+          void* _retval;
+
+          try
+          {
+            _retval = _obj.vfuncGetDocument();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.document.Document.vfuncGetDocument");
+          }
+          return _retval;
+        }
+
+        _klass.getDocument = cast(typeof(_klass.getDocument))&_vfuncGetDocumentTramp;
+        break;
+      }
+      case "get_page_count":
+      {
+        static extern(C) int _vfuncGetPageCountTramp(AtkDocument* document) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)document);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkDocumentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)document), gid.atk1.document.Document._getGType);
+            if (_klass && _klass.getPageCount)
+              return (cast(typeof(&_vfuncGetPageCountTramp))_klass.getPageCount)(document);
+            return typeof(return).init;
+          }
+
+          int _retval;
+
+          try
+          {
+            _retval = _obj.vfuncGetPageCount();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.document.Document.vfuncGetPageCount");
+          }
+          return _retval;
+        }
+
+        _klass.getPageCount = cast(typeof(_klass.getPageCount))&_vfuncGetPageCountTramp;
+        break;
+      }
+      case "set_document_attribute":
+      {
+        static extern(C) gboolean _vfuncSetDocumentAttributeTramp(AtkDocument* document, const(char)* attributeName, const(char)* attributeValue) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)document);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkDocumentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)document), gid.atk1.document.Document._getGType);
+            if (_klass && _klass.setDocumentAttribute)
+              return (cast(typeof(&_vfuncSetDocumentAttributeTramp))_klass.setDocumentAttribute)(document, attributeName, attributeValue);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          string _attributeName = attributeName.fromCString!(No.Free);
+          string _attributeValue = attributeValue.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncSetDocumentAttribute(_attributeName, _attributeValue);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.document.Document.vfuncSetDocumentAttribute");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.setDocumentAttribute = cast(typeof(_klass.setDocumentAttribute))&_vfuncSetDocumentAttributeTramp;
+        break;
+      }
+      case "set_text_selections":
+      {
+        static extern(C) gboolean _vfuncSetTextSelectionsTramp(AtkDocument* document, GArray* selections) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)document);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkDocumentIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)document), gid.atk1.document.Document._getGType);
+            if (_klass && _klass.setTextSelections)
+              return (cast(typeof(&_vfuncSetTextSelectionsTramp))_klass.setTextSelections)(document, selections);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _selections = gArrayToD!(gid.atk1.text_selection.TextSelection, GidOwnership.None)(selections);
+
+          try
+          {
+            _dretval = _obj.vfuncSetTextSelections(_selections);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.document.Document.vfuncSetTextSelections");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.setTextSelections = cast(typeof(_klass.setTextSelections))&_vfuncSetTextSelectionsTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

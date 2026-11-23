@@ -334,9 +334,140 @@ class UIManager : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   */
   this() nothrow
   {
-    GtkUIManager* _cretval;
-    _cretval = gtk_ui_manager_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkUIManager* _cretval;
+      _cretval = gtk_ui_manager_new();
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncActionsChanged()
+  {
+    auto _klass = cast(GtkUIManagerClass*)_vfuncClass;
+    if (!_klass.actionsChanged)
+      return;
+
+    _klass.actionsChanged(cast(GtkUIManager*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncAddWidget(gid.gtk3.widget.Widget widget)
+  {
+    auto _klass = cast(GtkUIManagerClass*)_vfuncClass;
+    if (!_klass.addWidget)
+      return;
+
+    _klass.addWidget(cast(GtkUIManager*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncConnectProxy(gid.gtk3.action.Action action, gid.gtk3.widget.Widget proxy)
+  {
+    auto _klass = cast(GtkUIManagerClass*)_vfuncClass;
+    if (!_klass.connectProxy)
+      return;
+
+    _klass.connectProxy(cast(GtkUIManager*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null, proxy ? cast(GtkWidget*)proxy._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncDisconnectProxy(gid.gtk3.action.Action action, gid.gtk3.widget.Widget proxy)
+  {
+    auto _klass = cast(GtkUIManagerClass*)_vfuncClass;
+    if (!_klass.disconnectProxy)
+      return;
+
+    _klass.disconnectProxy(cast(GtkUIManager*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null, proxy ? cast(GtkWidget*)proxy._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Looks up an action by following a path. See [gid.gtk3.uimanager.UIManager.getWidget]
+      for more information about paths.
+  
+      Params:
+        path = a path
+      Returns: the action whose proxy widget is found by following the path,
+            or null if no widget was found.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetAction` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gtk3.action.Action vfuncGetAction(string path)
+  {
+    auto _klass = cast(GtkUIManagerClass*)_vfuncClass;
+    if (!_klass.getAction)
+      return typeof(return).init;
+
+    GtkAction* _cretval;
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    _cretval = _klass.getAction(cast(GtkUIManager*)this._cPtr, _path);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.action.Action)(cast(GtkAction*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Looks up a widget by following a path.
+      The path consists of the names specified in the XML description of the UI.
+      separated by “/”. Elements which don’t have a name or action attribute in
+      the XML (e.g. `<popup>`) can be addressed by their XML element name
+      (e.g. "popup"). The root element ("/ui") can be omitted in the path.
+      
+      Note that the widget found by following a path that ends in a `<menu>`;
+      element is the menuitem to which the menu is attached, not the menu it
+      manages.
+      
+      Also note that the widgets constructed by a ui manager are not tied to
+      the lifecycle of the ui manager. If you add the widgets returned by this
+      function to some container or explicitly ref them, they will survive the
+      destruction of the ui manager.
+  
+      Params:
+        path = a path
+      Returns: the widget found by following the path,
+            or null if no widget was found
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetWidget` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gtk3.widget.Widget vfuncGetWidget(string path)
+  {
+    auto _klass = cast(GtkUIManagerClass*)_vfuncClass;
+    if (!_klass.getWidget)
+      return typeof(return).init;
+
+    GtkWidget* _cretval;
+    const(char)* _path = path.toCString!(No.Malloc, No.Nullable);
+    _cretval = _klass.getWidget(cast(GtkUIManager*)this._cPtr, _path);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncPostActivate(gid.gtk3.action.Action action)
+  {
+    auto _klass = cast(GtkUIManagerClass*)_vfuncClass;
+    if (!_klass.postActivate)
+      return;
+
+    _klass.postActivate(cast(GtkUIManager*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncPreActivate(gid.gtk3.action.Action action)
+  {
+    auto _klass = cast(GtkUIManagerClass*)_vfuncClass;
+    if (!_klass.preActivate)
+      return;
+
+    _klass.preActivate(cast(GtkUIManager*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null);
   }
 
   /**
@@ -675,6 +806,7 @@ class UIManager : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -724,6 +856,7 @@ class UIManager : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -782,6 +915,7 @@ class UIManager : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -839,6 +973,7 @@ class UIManager : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -896,6 +1031,7 @@ class UIManager : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -950,6 +1086,7 @@ class UIManager : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -972,6 +1109,284 @@ class UIManager : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("pre-activate", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from UIManager
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.uimanager.UIManager), T.stringof ~ " is not derived from gid.gtk3.uimanager.UIManager");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActionsChanged", true)[0]) == gid.gtk3.uimanager.UIManager))
+      _installVfunc(klass, "actions_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAddWidget", true)[0]) == gid.gtk3.uimanager.UIManager))
+      _installVfunc(klass, "add_widget");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncConnectProxy", true)[0]) == gid.gtk3.uimanager.UIManager))
+      _installVfunc(klass, "connect_proxy");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDisconnectProxy", true)[0]) == gid.gtk3.uimanager.UIManager))
+      _installVfunc(klass, "disconnect_proxy");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetAction", true)[0]) == gid.gtk3.uimanager.UIManager))
+      _installVfunc(klass, "get_action");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetWidget", true)[0]) == gid.gtk3.uimanager.UIManager))
+      _installVfunc(klass, "get_widget");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPostActivate", true)[0]) == gid.gtk3.uimanager.UIManager))
+      _installVfunc(klass, "post_activate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPreActivate", true)[0]) == gid.gtk3.uimanager.UIManager))
+      _installVfunc(klass, "pre_activate");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkUIManagerClass*)klass;
+
+    switch (vfunc)
+    {
+      case "actions_changed":
+      {
+        static extern(C) void _vfuncActionsChangedTramp(GtkUIManager* manager) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.uimanager.UIManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkUIManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
+            if (_klass.actionsChanged)
+              return (cast(typeof(&_vfuncActionsChangedTramp))_klass.actionsChanged)(manager);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncActionsChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.uimanager.UIManager.vfuncActionsChanged");
+          }
+        }
+
+        _klass.actionsChanged = cast(typeof(_klass.actionsChanged))&_vfuncActionsChangedTramp;
+        break;
+      }
+      case "add_widget":
+      {
+        static extern(C) void _vfuncAddWidgetTramp(GtkUIManager* manager, GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.uimanager.UIManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkUIManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
+            if (_klass.addWidget)
+              return (cast(typeof(&_vfuncAddWidgetTramp))_klass.addWidget)(manager, widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncAddWidget(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)widget, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.uimanager.UIManager.vfuncAddWidget");
+          }
+        }
+
+        _klass.addWidget = cast(typeof(_klass.addWidget))&_vfuncAddWidgetTramp;
+        break;
+      }
+      case "connect_proxy":
+      {
+        static extern(C) void _vfuncConnectProxyTramp(GtkUIManager* manager, GtkAction* action, GtkWidget* proxy) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.uimanager.UIManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkUIManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
+            if (_klass.connectProxy)
+              return (cast(typeof(&_vfuncConnectProxyTramp))_klass.connectProxy)(manager, action, proxy);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncConnectProxy(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.action.Action)(cast(void*)action, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)proxy, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.uimanager.UIManager.vfuncConnectProxy");
+          }
+        }
+
+        _klass.connectProxy = cast(typeof(_klass.connectProxy))&_vfuncConnectProxyTramp;
+        break;
+      }
+      case "disconnect_proxy":
+      {
+        static extern(C) void _vfuncDisconnectProxyTramp(GtkUIManager* manager, GtkAction* action, GtkWidget* proxy) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.uimanager.UIManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkUIManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
+            if (_klass.disconnectProxy)
+              return (cast(typeof(&_vfuncDisconnectProxyTramp))_klass.disconnectProxy)(manager, action, proxy);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDisconnectProxy(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.action.Action)(cast(void*)action, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)proxy, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.uimanager.UIManager.vfuncDisconnectProxy");
+          }
+        }
+
+        _klass.disconnectProxy = cast(typeof(_klass.disconnectProxy))&_vfuncDisconnectProxyTramp;
+        break;
+      }
+      case "get_action":
+      {
+        static extern(C) GtkAction* _vfuncGetActionTramp(GtkUIManager* manager, const(char)* path) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.uimanager.UIManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkUIManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
+            if (_klass.getAction)
+              return (cast(typeof(&_vfuncGetActionTramp))_klass.getAction)(manager, path);
+            return typeof(return).init;
+          }
+
+          gid.gtk3.action.Action _dretval;
+          string _path = path.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncGetAction(_path);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.uimanager.UIManager.vfuncGetAction");
+          }
+          auto _retval = _dretval ? cast(GtkAction*)_dretval._cPtr(No.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getAction = cast(typeof(_klass.getAction))&_vfuncGetActionTramp;
+        break;
+      }
+      case "get_widget":
+      {
+        static extern(C) GtkWidget* _vfuncGetWidgetTramp(GtkUIManager* manager, const(char)* path) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.uimanager.UIManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkUIManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
+            if (_klass.getWidget)
+              return (cast(typeof(&_vfuncGetWidgetTramp))_klass.getWidget)(manager, path);
+            return typeof(return).init;
+          }
+
+          gid.gtk3.widget.Widget _dretval;
+          string _path = path.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncGetWidget(_path);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.uimanager.UIManager.vfuncGetWidget");
+          }
+          auto _retval = _dretval ? cast(GtkWidget*)_dretval._cPtr(No.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getWidget = cast(typeof(_klass.getWidget))&_vfuncGetWidgetTramp;
+        break;
+      }
+      case "post_activate":
+      {
+        static extern(C) void _vfuncPostActivateTramp(GtkUIManager* manager, GtkAction* action) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.uimanager.UIManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkUIManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
+            if (_klass.postActivate)
+              return (cast(typeof(&_vfuncPostActivateTramp))_klass.postActivate)(manager, action);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPostActivate(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.action.Action)(cast(void*)action, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.uimanager.UIManager.vfuncPostActivate");
+          }
+        }
+
+        _klass.postActivate = cast(typeof(_klass.postActivate))&_vfuncPostActivateTramp;
+        break;
+      }
+      case "pre_activate":
+      {
+        static extern(C) void _vfuncPreActivateTramp(GtkUIManager* manager, GtkAction* action) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.uimanager.UIManager)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)manager);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkUIManagerClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)manager);
+            if (_klass.preActivate)
+              return (cast(typeof(&_vfuncPreActivateTramp))_klass.preActivate)(manager, action);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPreActivate(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.action.Action)(cast(void*)action, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.uimanager.UIManager.vfuncPreActivate");
+          }
+        }
+
+        _klass.preActivate = cast(typeof(_klass.preActivate))&_vfuncPreActivateTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

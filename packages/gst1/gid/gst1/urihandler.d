@@ -30,6 +30,8 @@ interface URIHandler : GidWrap
     return cast(void function())gst_uri_handler_get_type != &gidSymbolNotFound ? gst_uri_handler_get_type() : cast(GType)0;
   }
 
+
+
   /**
       Gets the list of protocols supported by handler. This list may not be
       modified.

@@ -31,6 +31,15 @@ class Device : gid.gst1.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -87,6 +96,61 @@ class Device : gid.gst1.object.ObjectWrap
   @property gid.gst1.structure.Structure properties() nothrow
   {
     return getProperties();
+  }
+
+  /**
+      Creates the element with all of the required parameters set to use
+      this device.
+  
+      Params:
+        name = name of new element, or null to automatically
+          create a unique name.
+      Returns: a new #GstElement configured to use
+        this device
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCreateElement` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.element.Element vfuncCreateElement(string name = null)
+  {
+    auto _klass = cast(GstDeviceClass*)_vfuncClass;
+    if (!_klass.createElement)
+      return typeof(return).init;
+
+    GstElement* _cretval;
+    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+    _cretval = _klass.createElement(cast(GstDevice*)this._cPtr, _name);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.element.Element)(cast(GstElement*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Tries to reconfigure an existing element to use the device. If this
+      function fails, then one must destroy the element and create a new one
+      using [gid.gst1.device.Device.createElement].
+      
+      Note: This should only be implemented for elements can change their
+      device in the PLAYING state.
+  
+      Params:
+        element = a #GstElement
+      Returns: true if the element could be reconfigured to use this device,
+        false otherwise.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncReconfigureElement` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncReconfigureElement(gid.gst1.element.Element element)
+  {
+    auto _klass = cast(GstDeviceClass*)_vfuncClass;
+    if (!_klass.reconfigureElement)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.reconfigureElement(cast(GstDevice*)this._cPtr, element ? cast(GstElement*)element._cPtr(No.Dup) : null);
+    return _retval;
   }
 
   /**
@@ -237,6 +301,7 @@ class Device : gid.gst1.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -256,6 +321,103 @@ class Device : gid.gst1.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("removed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Device
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gst1.device.Device), T.stringof ~ " is not derived from gid.gst1.device.Device");
+
+    gid.gst1.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCreateElement", true)[0]) == gid.gst1.device.Device))
+      _installVfunc(klass, "create_element");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncReconfigureElement", true)[0]) == gid.gst1.device.Device))
+      _installVfunc(klass, "reconfigure_element");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstDeviceClass*)klass;
+
+    switch (vfunc)
+    {
+      case "create_element":
+      {
+        static extern(C) GstElement* _vfuncCreateElementTramp(GstDevice* device, const(char)* name) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.device.Device)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)device);
+          if (!_obj)
+          {
+            auto _klass = cast(GstDeviceClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)device);
+            if (_klass.createElement)
+              return (cast(typeof(&_vfuncCreateElementTramp))_klass.createElement)(device, name);
+            return typeof(return).init;
+          }
+
+          gid.gst1.element.Element _dretval;
+          string _name = name.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncCreateElement(_name);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.device.Device.vfuncCreateElement");
+          }
+          auto _retval = _dretval ? cast(GstElement*)_dretval._cPtr(No.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.createElement = cast(typeof(_klass.createElement))&_vfuncCreateElementTramp;
+        break;
+      }
+      case "reconfigure_element":
+      {
+        static extern(C) gboolean _vfuncReconfigureElementTramp(GstDevice* device, GstElement* element) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.device.Device)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)device);
+          if (!_obj)
+          {
+            auto _klass = cast(GstDeviceClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)device);
+            if (_klass.reconfigureElement)
+              return (cast(typeof(&_vfuncReconfigureElementTramp))_klass.reconfigureElement)(device, element);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncReconfigureElement(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.element.Element)(cast(void*)element, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.device.Device.vfuncReconfigureElement");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.reconfigureElement = cast(typeof(_klass.reconfigureElement))&_vfuncReconfigureElementTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

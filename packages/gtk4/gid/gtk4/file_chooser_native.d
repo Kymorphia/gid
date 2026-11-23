@@ -171,6 +171,15 @@ class FileChooserNative : gid.gtk4.native_dialog.NativeDialog, gid.gtk4.file_cho
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -264,12 +273,19 @@ class FileChooserNative : gid.gtk4.native_dialog.NativeDialog, gid.gtk4.file_cho
   */
   this(string title, gid.gtk4.window.Window parent, gid.gtk4.types.FileChooserAction action, string acceptLabel = null, string cancelLabel = null) nothrow
   {
-    GtkFileChooserNative* _cretval;
-    const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
-    const(char)* _acceptLabel = acceptLabel.toCString!(No.Malloc, Yes.Nullable);
-    const(char)* _cancelLabel = cancelLabel.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gtk_file_chooser_native_new(_title, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, action, _acceptLabel, _cancelLabel);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkFileChooserNative* _cretval;
+      const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
+      const(char)* _acceptLabel = acceptLabel.toCString!(No.Malloc, Yes.Nullable);
+      const(char)* _cancelLabel = cancelLabel.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gtk_file_chooser_native_new(_title, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, action, _acceptLabel, _cancelLabel);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

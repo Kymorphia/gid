@@ -27,6 +27,15 @@ class RendererCellAccessible : gid.gtk3.cell_accessible.CellAccessible
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -70,9 +79,16 @@ class RendererCellAccessible : gid.gtk3.cell_accessible.CellAccessible
   /** */
   this(gid.gtk3.cell_renderer.CellRenderer renderer) nothrow
   {
-    AtkObject* _cretval;
-    _cretval = gtk_renderer_cell_accessible_new(renderer ? cast(GtkCellRenderer*)renderer._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      AtkObject* _cretval;
+      _cretval = gtk_renderer_cell_accessible_new(renderer ? cast(GtkCellRenderer*)renderer._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

@@ -55,6 +55,7 @@ class AppSrcSimpleCallbacks : gid.gobject2.boxed.BoxedWrap!(gst_app_src_simple_c
   {
     extern(C) void _enoughDataCbCallback(GstAppSrc* appsrc, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gstapp1.types.AppSrcEnoughDataCallback*)userData;
 
       try
@@ -85,6 +86,7 @@ class AppSrcSimpleCallbacks : gid.gobject2.boxed.BoxedWrap!(gst_app_src_simple_c
   {
     extern(C) void _needDataCbCallback(GstAppSrc* appsrc, uint length, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gstapp1.types.AppSrcNeedDataCallback*)userData;
 
       try
@@ -115,6 +117,7 @@ class AppSrcSimpleCallbacks : gid.gobject2.boxed.BoxedWrap!(gst_app_src_simple_c
   {
     extern(C) gboolean _seekDataCbCallback(GstAppSrc* appsrc, ulong offset, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gstapp1.types.AppSrcSeekDataCallback*)userData;
 

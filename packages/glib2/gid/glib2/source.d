@@ -548,6 +548,7 @@ class Source : gid.gobject2.boxed.BoxedWrap!(g_source_get_type)
   {
     extern(C) gboolean _funcCallback(void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.glib2.types.SourceFunc*)userData;
 

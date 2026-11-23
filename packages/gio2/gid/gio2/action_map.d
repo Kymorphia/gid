@@ -35,6 +35,9 @@ interface ActionMap : GidWrap
     return cast(void function())g_action_map_get_type != &gidSymbolNotFound ? g_action_map_get_type() : cast(GType)0;
   }
 
+
+
+
   /**
       Adds an action to the action_map.
       

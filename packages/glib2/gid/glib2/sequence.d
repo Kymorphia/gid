@@ -53,6 +53,7 @@ class Sequence : OpaqueWrap!(GSequence*, g_sequence_free, void)
   {
     extern(C) void _funcCallback(void* data, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.glib2.types.Func*)userData;
 
       try
@@ -145,6 +146,7 @@ class Sequence : OpaqueWrap!(GSequence*, g_sequence_free, void)
   {
     extern(C) int _cmpFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.glib2.types.CompareDataFunc*)userData;
 
@@ -189,6 +191,7 @@ class Sequence : OpaqueWrap!(GSequence*, g_sequence_free, void)
   {
     extern(C) int _iterCmpCallback(GSequenceIter* a, GSequenceIter* b, void* data) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.glib2.types.SequenceIterCompareFunc*)data;
 
@@ -251,6 +254,7 @@ class Sequence : OpaqueWrap!(GSequence*, g_sequence_free, void)
   {
     extern(C) int _cmpFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.glib2.types.CompareDataFunc*)userData;
 
@@ -295,6 +299,7 @@ class Sequence : OpaqueWrap!(GSequence*, g_sequence_free, void)
   {
     extern(C) int _iterCmpCallback(GSequenceIter* a, GSequenceIter* b, void* data) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.glib2.types.SequenceIterCompareFunc*)data;
 
@@ -356,6 +361,7 @@ class Sequence : OpaqueWrap!(GSequence*, g_sequence_free, void)
   {
     extern(C) int _cmpFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.glib2.types.CompareDataFunc*)userData;
 
@@ -403,6 +409,7 @@ class Sequence : OpaqueWrap!(GSequence*, g_sequence_free, void)
   {
     extern(C) int _iterCmpCallback(GSequenceIter* a, GSequenceIter* b, void* data) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.glib2.types.SequenceIterCompareFunc*)data;
 
@@ -439,6 +446,7 @@ class Sequence : OpaqueWrap!(GSequence*, g_sequence_free, void)
   {
     extern(C) int _cmpFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.glib2.types.CompareDataFunc*)userData;
 
@@ -473,6 +481,7 @@ class Sequence : OpaqueWrap!(GSequence*, g_sequence_free, void)
   {
     extern(C) int _cmpFuncCallback(GSequenceIter* a, GSequenceIter* b, void* data) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.glib2.types.SequenceIterCompareFunc*)data;
 
@@ -505,6 +514,7 @@ class Sequence : OpaqueWrap!(GSequence*, g_sequence_free, void)
   {
     extern(C) void _funcCallback(void* data, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.glib2.types.Func*)userData;
 
       try
@@ -672,6 +682,7 @@ class Sequence : OpaqueWrap!(GSequence*, g_sequence_free, void)
   {
     extern(C) int _cmpFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.glib2.types.CompareDataFunc*)userData;
 
@@ -709,6 +720,7 @@ class Sequence : OpaqueWrap!(GSequence*, g_sequence_free, void)
   {
     extern(C) int _iterCmpCallback(GSequenceIter* a, GSequenceIter* b, void* data) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.glib2.types.SequenceIterCompareFunc*)data;
 

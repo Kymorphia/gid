@@ -47,6 +47,15 @@ class WebsocketConnection : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -245,12 +254,19 @@ class WebsocketConnection : gid.gobject2.object.ObjectWrap
   */
   this(gid.gio2.iostream.IOStream stream, gid.glib2.uri.Uri uri, gid.soup3.types.WebsocketConnectionType type, string origin, string protocol, gid.soup3.websocket_extension.WebsocketExtension[] extensions) nothrow
   {
-    SoupWebsocketConnection* _cretval;
-    const(char)* _origin = origin.toCString!(No.Malloc, Yes.Nullable);
-    const(char)* _protocol = protocol.toCString!(No.Malloc, Yes.Nullable);
-    auto _extensions = gListFromD!(gid.soup3.websocket_extension.WebsocketExtension)(extensions);
-    _cretval = soup_websocket_connection_new(stream ? cast(GIOStream*)stream._cPtr(No.Dup) : null, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, type, _origin, _protocol, _extensions);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      SoupWebsocketConnection* _cretval;
+      const(char)* _origin = origin.toCString!(No.Malloc, Yes.Nullable);
+      const(char)* _protocol = protocol.toCString!(No.Malloc, Yes.Nullable);
+      auto _extensions = gListFromD!(gid.soup3.websocket_extension.WebsocketExtension)(extensions);
+      _cretval = soup_websocket_connection_new(stream ? cast(GIOStream*)stream._cPtr(No.Dup) : null, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, type, _origin, _protocol, _extensions);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -552,6 +568,7 @@ class WebsocketConnection : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -596,6 +613,7 @@ class WebsocketConnection : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -646,6 +664,7 @@ class WebsocketConnection : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -703,6 +722,7 @@ class WebsocketConnection : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -761,6 +781,7 @@ class WebsocketConnection : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

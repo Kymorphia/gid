@@ -64,9 +64,16 @@ class GridColumn : gid.gtk4.widget.Widget
   /** */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = panel_grid_column_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = panel_grid_column_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -79,6 +86,7 @@ class GridColumn : gid.gtk4.widget.Widget
   {
     extern(C) void _callbackCallback(PanelFrame* frame, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.panel1.types.FrameCallback*)userData;
 
       try

@@ -5,8 +5,13 @@ public import gid.core.basictypes;
 import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;
+import gid.gst1.buffer;
+import gid.gst1.buffer_list;
+import gid.gst1.caps;
 import gid.gst1.element;
+import gid.gst1.event;
 import gid.gst1.mini_object;
+import gid.gst1.query;
 import gid.gst1.sample;
 import gid.gst1.structure;
 import gid.gst1.types;
@@ -136,6 +141,15 @@ class BaseSink : gid.gst1.element.Element
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
   }
 
   /** */
@@ -415,6 +429,413 @@ class BaseSink : gid.gst1.element.Element
   @property void tsOffset(long propval) nothrow
   {
     gid.gobject2.object.ObjectWrap.setProperty!(long)("ts-offset", propval);
+  }
+
+  /**
+      Subclasses should override this when they can provide an
+          alternate method of spawning a thread to drive the pipeline in pull mode.
+          Should start or stop the pulling thread, depending on the value of the
+          "active" argument. Called after actually activating the sink pad in pull
+          mode. The default implementation starts a task on the sink pad.
+  
+      Params:
+        active = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncActivatePull` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncActivatePull(bool active)
+  {
+    auto _klass = cast(GstBaseSinkClass*)_vfuncClass;
+    if (!_klass.activatePull)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.activatePull(cast(GstBaseSink*)this._cPtr, active);
+    return _retval;
+  }
+
+  /**
+      Override this to handle events arriving on the sink pad
+  
+      Params:
+        event =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncEvent(gid.gst1.event.Event event)
+  {
+    auto _klass = cast(GstBaseSinkClass*)_vfuncClass;
+    if (!_klass.event)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.event(cast(GstBaseSink*)this._cPtr, event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Only useful in pull mode. Implement if you have
+          ideas about what should be the default values for the caps you support.
+  
+      Params:
+        caps =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncFixate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.caps.Caps vfuncFixate(gid.gst1.caps.Caps caps)
+  {
+    auto _klass = cast(GstBaseSinkClass*)_vfuncClass;
+    if (!_klass.fixate)
+      return typeof(return).init;
+
+    GstCaps* _cretval;
+    _cretval = _klass.fixate(cast(GstBaseSink*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gid.gst1.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Called to get sink pad caps from the subclass.
+  
+      Params:
+        filter =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetCaps` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.caps.Caps vfuncGetCaps(gid.gst1.caps.Caps filter = null)
+  {
+    auto _klass = cast(GstBaseSinkClass*)_vfuncClass;
+    if (!_klass.getCaps)
+      return typeof(return).init;
+
+    GstCaps* _cretval;
+    _cretval = _klass.getCaps(cast(GstBaseSink*)this._cPtr, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gid.gst1.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Get the start and end times for syncing on this buffer.
+  
+      Params:
+        buffer =  (modified in place, changes are seen by the caller)
+        start = the start #GstClockTime
+        end = the end #GstClockTime
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetTimes` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncGetTimes(gid.gst1.buffer.Buffer buffer, out gid.gst1.types.ClockTime start, out gid.gst1.types.ClockTime end)
+  {
+    auto _klass = cast(GstBaseSinkClass*)_vfuncClass;
+    if (!_klass.getTimes)
+      return;
+
+    _klass.getTimes(cast(GstBaseSink*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, cast(GstClockTime*)&start, cast(GstClockTime*)&end);
+  }
+
+  /**
+      Called to prepare the buffer for render and preroll. This
+          function is called before synchronisation is performed.
+  
+      Params:
+        buffer =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPrepare` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.FlowReturn vfuncPrepare(gid.gst1.buffer.Buffer buffer)
+  {
+    auto _klass = cast(GstBaseSinkClass*)_vfuncClass;
+    if (!_klass.prepare)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    _cretval = _klass.prepare(cast(GstBaseSink*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      Called to prepare the buffer list for render_list. This
+          function is called before synchronisation is performed.
+  
+      Params:
+        bufferList =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPrepareList` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.FlowReturn vfuncPrepareList(gid.gst1.buffer_list.BufferList bufferList)
+  {
+    auto _klass = cast(GstBaseSinkClass*)_vfuncClass;
+    if (!_klass.prepareList)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    _cretval = _klass.prepareList(cast(GstBaseSink*)this._cPtr, bufferList ? cast(GstBufferList*)bufferList._cPtr(No.Dup) : null);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      Called to present the preroll buffer if desired.
+  
+      Params:
+        buffer =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPreroll` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.FlowReturn vfuncPreroll(gid.gst1.buffer.Buffer buffer)
+  {
+    auto _klass = cast(GstBaseSinkClass*)_vfuncClass;
+    if (!_klass.preroll)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    _cretval = _klass.preroll(cast(GstBaseSink*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      configure the allocation query
+  
+      Params:
+        query =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncProposeAllocation` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncProposeAllocation(gid.gst1.query.Query query)
+  {
+    auto _klass = cast(GstBaseSinkClass*)_vfuncClass;
+    if (!_klass.proposeAllocation)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.proposeAllocation(cast(GstBaseSink*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      perform a #GstQuery on the element.
+  
+      Params:
+        query =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncQuery` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  override protected bool vfuncQuery(gid.gst1.query.Query query)
+  {
+    auto _klass = cast(GstBaseSinkClass*)_vfuncClass;
+    if (!_klass.query)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.query(cast(GstBaseSink*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Called when a buffer should be presented or output, at the
+          correct moment if the #GstBaseSink has been set to sync to the clock.
+  
+      Params:
+        buffer =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRender` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.FlowReturn vfuncRender(gid.gst1.buffer.Buffer buffer)
+  {
+    auto _klass = cast(GstBaseSinkClass*)_vfuncClass;
+    if (!_klass.render)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    _cretval = _klass.render(cast(GstBaseSink*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      Same as render but used with buffer lists instead of
+          buffers.
+  
+      Params:
+        bufferList =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRenderList` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.FlowReturn vfuncRenderList(gid.gst1.buffer_list.BufferList bufferList)
+  {
+    auto _klass = cast(GstBaseSinkClass*)_vfuncClass;
+    if (!_klass.renderList)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    _cretval = _klass.renderList(cast(GstBaseSink*)this._cPtr, bufferList ? cast(GstBufferList*)bufferList._cPtr(No.Dup) : null);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      Notify subclass of changed caps
+  
+      Params:
+        caps =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetCaps` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncSetCaps(gid.gst1.caps.Caps caps)
+  {
+    auto _klass = cast(GstBaseSinkClass*)_vfuncClass;
+    if (!_klass.setCaps)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.setCaps(cast(GstBaseSink*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Start processing. Ideal for opening resources in the subclass
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStart` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncStart()
+  {
+    auto _klass = cast(GstBaseSinkClass*)_vfuncClass;
+    if (!_klass.start)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.start(cast(GstBaseSink*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Stop processing. Subclasses should use this to close resources.
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStop` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncStop()
+  {
+    auto _klass = cast(GstBaseSinkClass*)_vfuncClass;
+    if (!_klass.stop)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.stop(cast(GstBaseSink*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Unlock any pending access to the resource. Subclasses should
+          unblock any blocked function ASAP and call [gid.gstbase1.base_sink.BaseSink.waitPreroll]
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncUnlock` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncUnlock()
+  {
+    auto _klass = cast(GstBaseSinkClass*)_vfuncClass;
+    if (!_klass.unlock)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.unlock(cast(GstBaseSink*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Clear the previous unlock request. Subclasses should clear
+          any state they set during #GstBaseSinkClass::unlock, and be ready to
+          continue where they left off after [gid.gstbase1.base_sink.BaseSink.waitPreroll],
+          [gid.gstbase1.base_sink.BaseSink.wait] or gst_wait_sink_wait_clock() return or
+          #GstBaseSinkClass::render is called again.
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncUnlockStop` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncUnlockStop()
+  {
+    auto _klass = cast(GstBaseSinkClass*)_vfuncClass;
+    if (!_klass.unlockStop)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.unlockStop(cast(GstBaseSink*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Override this to implement custom logic to wait for the event
+          time (for events like EOS and GAP). Subclasses should always first
+          chain up to the default implementation.
+  
+      Params:
+        event =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncWaitEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.FlowReturn vfuncWaitEvent(gid.gst1.event.Event event)
+  {
+    auto _klass = cast(GstBaseSinkClass*)_vfuncClass;
+    if (!_klass.waitEvent)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    _cretval = _klass.waitEvent(cast(GstBaseSink*)this._cPtr, event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    return _retval;
   }
 
   /**
@@ -907,6 +1328,698 @@ class BaseSink : gid.gst1.element.Element
     _cretval = gst_base_sink_wait_preroll(cast(GstBaseSink*)this._cPtr);
     gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
     return _retval;
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from BaseSink
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gstbase1.base_sink.BaseSink), T.stringof ~ " is not derived from gid.gstbase1.base_sink.BaseSink");
+
+    gid.gst1.element.Element._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivatePull", true)[0]) == gid.gstbase1.base_sink.BaseSink))
+      _installVfunc(klass, "activate_pull");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEvent", true)[0]) == gid.gstbase1.base_sink.BaseSink))
+      _installVfunc(klass, "event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFixate", true)[0]) == gid.gstbase1.base_sink.BaseSink))
+      _installVfunc(klass, "fixate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetCaps", true)[0]) == gid.gstbase1.base_sink.BaseSink))
+      _installVfunc(klass, "get_caps");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetTimes", true)[0]) == gid.gstbase1.base_sink.BaseSink))
+      _installVfunc(klass, "get_times");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPrepare", true)[0]) == gid.gstbase1.base_sink.BaseSink))
+      _installVfunc(klass, "prepare");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPrepareList", true)[0]) == gid.gstbase1.base_sink.BaseSink))
+      _installVfunc(klass, "prepare_list");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPreroll", true)[0]) == gid.gstbase1.base_sink.BaseSink))
+      _installVfunc(klass, "preroll");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncProposeAllocation", true)[0]) == gid.gstbase1.base_sink.BaseSink))
+      _installVfunc(klass, "propose_allocation");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncQuery", true)[0]) == gid.gstbase1.base_sink.BaseSink))
+      _installVfunc(klass, "query");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRender", true)[0]) == gid.gstbase1.base_sink.BaseSink))
+      _installVfunc(klass, "render");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRenderList", true)[0]) == gid.gstbase1.base_sink.BaseSink))
+      _installVfunc(klass, "render_list");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetCaps", true)[0]) == gid.gstbase1.base_sink.BaseSink))
+      _installVfunc(klass, "set_caps");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStart", true)[0]) == gid.gstbase1.base_sink.BaseSink))
+      _installVfunc(klass, "start");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStop", true)[0]) == gid.gstbase1.base_sink.BaseSink))
+      _installVfunc(klass, "stop");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUnlock", true)[0]) == gid.gstbase1.base_sink.BaseSink))
+      _installVfunc(klass, "unlock");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUnlockStop", true)[0]) == gid.gstbase1.base_sink.BaseSink))
+      _installVfunc(klass, "unlock_stop");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncWaitEvent", true)[0]) == gid.gstbase1.base_sink.BaseSink))
+      _installVfunc(klass, "wait_event");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstBaseSinkClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate_pull":
+      {
+        static extern(C) gboolean _vfuncActivatePullTramp(GstBaseSink* sink, gboolean active) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_sink.BaseSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
+            if (_klass.activatePull)
+              return (cast(typeof(&_vfuncActivatePullTramp))_klass.activatePull)(sink, active);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncActivatePull(cast(bool)active);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_sink.BaseSink.vfuncActivatePull");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.activatePull = cast(typeof(_klass.activatePull))&_vfuncActivatePullTramp;
+        break;
+      }
+      case "event":
+      {
+        static extern(C) gboolean _vfuncEventTramp(GstBaseSink* sink, GstEvent* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_sink.BaseSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
+            if (_klass.event)
+              return (cast(typeof(&_vfuncEventTramp))_klass.event)(sink, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gst1.event.Event(cast(void*)event, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_sink.BaseSink.vfuncEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_event)
+            _event._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.event = cast(typeof(_klass.event))&_vfuncEventTramp;
+        break;
+      }
+      case "fixate":
+      {
+        static extern(C) GstCaps* _vfuncFixateTramp(GstBaseSink* sink, GstCaps* caps) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_sink.BaseSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
+            if (_klass.fixate)
+              return (cast(typeof(&_vfuncFixateTramp))_klass.fixate)(sink, caps);
+            return typeof(return).init;
+          }
+
+          gid.gst1.caps.Caps _dretval;
+          auto _caps = caps ? new gid.gst1.caps.Caps(cast(void*)caps, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncFixate(_caps);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_sink.BaseSink.vfuncFixate");
+          }
+          auto _retval = _dretval ? cast(GstCaps*)_dretval._cPtr(Yes.Dup) : null;
+          if (_caps)
+            _caps._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.fixate = cast(typeof(_klass.fixate))&_vfuncFixateTramp;
+        break;
+      }
+      case "get_caps":
+      {
+        static extern(C) GstCaps* _vfuncGetCapsTramp(GstBaseSink* sink, GstCaps* filter) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_sink.BaseSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
+            if (_klass.getCaps)
+              return (cast(typeof(&_vfuncGetCapsTramp))_klass.getCaps)(sink, filter);
+            return typeof(return).init;
+          }
+
+          gid.gst1.caps.Caps _dretval;
+          auto _filter = filter ? new gid.gst1.caps.Caps(cast(void*)filter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncGetCaps(_filter);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_sink.BaseSink.vfuncGetCaps");
+          }
+          auto _retval = _dretval ? cast(GstCaps*)_dretval._cPtr(Yes.Dup) : null;
+          if (_filter)
+            _filter._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.getCaps = cast(typeof(_klass.getCaps))&_vfuncGetCapsTramp;
+        break;
+      }
+      case "get_times":
+      {
+        static extern(C) void _vfuncGetTimesTramp(GstBaseSink* sink, GstBuffer* buffer, GstClockTime* start, GstClockTime* end) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_sink.BaseSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
+            if (_klass.getTimes)
+              return (cast(typeof(&_vfuncGetTimesTramp))_klass.getTimes)(sink, buffer, start, end);
+            return;
+          }
+
+          auto _buffer = buffer ? new gid.gst1.buffer.Buffer(cast(void*)buffer, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncGetTimes(_buffer, *start, *end);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_sink.BaseSink.vfuncGetTimes");
+          }
+          if (_buffer)
+            _buffer._cUnborrow;
+
+        }
+
+        _klass.getTimes = cast(typeof(_klass.getTimes))&_vfuncGetTimesTramp;
+        break;
+      }
+      case "prepare":
+      {
+        static extern(C) GstFlowReturn _vfuncPrepareTramp(GstBaseSink* sink, GstBuffer* buffer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_sink.BaseSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
+            if (_klass.prepare)
+              return (cast(typeof(&_vfuncPrepareTramp))_klass.prepare)(sink, buffer);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.FlowReturn _dretval;
+          auto _buffer = buffer ? new gid.gst1.buffer.Buffer(cast(void*)buffer, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncPrepare(_buffer);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_sink.BaseSink.vfuncPrepare");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+          if (_buffer)
+            _buffer._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.prepare = cast(typeof(_klass.prepare))&_vfuncPrepareTramp;
+        break;
+      }
+      case "prepare_list":
+      {
+        static extern(C) GstFlowReturn _vfuncPrepareListTramp(GstBaseSink* sink, GstBufferList* bufferList) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_sink.BaseSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
+            if (_klass.prepareList)
+              return (cast(typeof(&_vfuncPrepareListTramp))_klass.prepareList)(sink, bufferList);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.FlowReturn _dretval;
+          auto _bufferList = bufferList ? new gid.gst1.buffer_list.BufferList(cast(void*)bufferList, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncPrepareList(_bufferList);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_sink.BaseSink.vfuncPrepareList");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+          if (_bufferList)
+            _bufferList._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.prepareList = cast(typeof(_klass.prepareList))&_vfuncPrepareListTramp;
+        break;
+      }
+      case "preroll":
+      {
+        static extern(C) GstFlowReturn _vfuncPrerollTramp(GstBaseSink* sink, GstBuffer* buffer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_sink.BaseSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
+            if (_klass.preroll)
+              return (cast(typeof(&_vfuncPrerollTramp))_klass.preroll)(sink, buffer);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.FlowReturn _dretval;
+          auto _buffer = buffer ? new gid.gst1.buffer.Buffer(cast(void*)buffer, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncPreroll(_buffer);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_sink.BaseSink.vfuncPreroll");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+          if (_buffer)
+            _buffer._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.preroll = cast(typeof(_klass.preroll))&_vfuncPrerollTramp;
+        break;
+      }
+      case "propose_allocation":
+      {
+        static extern(C) gboolean _vfuncProposeAllocationTramp(GstBaseSink* sink, GstQuery* query) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_sink.BaseSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
+            if (_klass.proposeAllocation)
+              return (cast(typeof(&_vfuncProposeAllocationTramp))_klass.proposeAllocation)(sink, query);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _query = query ? new gid.gst1.query.Query(cast(void*)query, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncProposeAllocation(_query);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_sink.BaseSink.vfuncProposeAllocation");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_query)
+            _query._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.proposeAllocation = cast(typeof(_klass.proposeAllocation))&_vfuncProposeAllocationTramp;
+        break;
+      }
+      case "query":
+      {
+        static extern(C) gboolean _vfuncQueryTramp(GstBaseSink* sink, GstQuery* query) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_sink.BaseSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
+            if (_klass.query)
+              return (cast(typeof(&_vfuncQueryTramp))_klass.query)(sink, query);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _query = query ? new gid.gst1.query.Query(cast(void*)query, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncQuery(_query);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_sink.BaseSink.vfuncQuery");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_query)
+            _query._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.query = cast(typeof(_klass.query))&_vfuncQueryTramp;
+        break;
+      }
+      case "render":
+      {
+        static extern(C) GstFlowReturn _vfuncRenderTramp(GstBaseSink* sink, GstBuffer* buffer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_sink.BaseSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
+            if (_klass.render)
+              return (cast(typeof(&_vfuncRenderTramp))_klass.render)(sink, buffer);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.FlowReturn _dretval;
+          auto _buffer = buffer ? new gid.gst1.buffer.Buffer(cast(void*)buffer, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncRender(_buffer);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_sink.BaseSink.vfuncRender");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+          if (_buffer)
+            _buffer._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.render = cast(typeof(_klass.render))&_vfuncRenderTramp;
+        break;
+      }
+      case "render_list":
+      {
+        static extern(C) GstFlowReturn _vfuncRenderListTramp(GstBaseSink* sink, GstBufferList* bufferList) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_sink.BaseSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
+            if (_klass.renderList)
+              return (cast(typeof(&_vfuncRenderListTramp))_klass.renderList)(sink, bufferList);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.FlowReturn _dretval;
+          auto _bufferList = bufferList ? new gid.gst1.buffer_list.BufferList(cast(void*)bufferList, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncRenderList(_bufferList);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_sink.BaseSink.vfuncRenderList");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+          if (_bufferList)
+            _bufferList._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.renderList = cast(typeof(_klass.renderList))&_vfuncRenderListTramp;
+        break;
+      }
+      case "set_caps":
+      {
+        static extern(C) gboolean _vfuncSetCapsTramp(GstBaseSink* sink, GstCaps* caps) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_sink.BaseSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
+            if (_klass.setCaps)
+              return (cast(typeof(&_vfuncSetCapsTramp))_klass.setCaps)(sink, caps);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _caps = caps ? new gid.gst1.caps.Caps(cast(void*)caps, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncSetCaps(_caps);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_sink.BaseSink.vfuncSetCaps");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_caps)
+            _caps._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.setCaps = cast(typeof(_klass.setCaps))&_vfuncSetCapsTramp;
+        break;
+      }
+      case "start":
+      {
+        static extern(C) gboolean _vfuncStartTramp(GstBaseSink* sink) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_sink.BaseSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
+            if (_klass.start)
+              return (cast(typeof(&_vfuncStartTramp))_klass.start)(sink);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncStart();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_sink.BaseSink.vfuncStart");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.start = cast(typeof(_klass.start))&_vfuncStartTramp;
+        break;
+      }
+      case "stop":
+      {
+        static extern(C) gboolean _vfuncStopTramp(GstBaseSink* sink) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_sink.BaseSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
+            if (_klass.stop)
+              return (cast(typeof(&_vfuncStopTramp))_klass.stop)(sink);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncStop();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_sink.BaseSink.vfuncStop");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.stop = cast(typeof(_klass.stop))&_vfuncStopTramp;
+        break;
+      }
+      case "unlock":
+      {
+        static extern(C) gboolean _vfuncUnlockTramp(GstBaseSink* sink) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_sink.BaseSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
+            if (_klass.unlock)
+              return (cast(typeof(&_vfuncUnlockTramp))_klass.unlock)(sink);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncUnlock();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_sink.BaseSink.vfuncUnlock");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.unlock = cast(typeof(_klass.unlock))&_vfuncUnlockTramp;
+        break;
+      }
+      case "unlock_stop":
+      {
+        static extern(C) gboolean _vfuncUnlockStopTramp(GstBaseSink* sink) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_sink.BaseSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
+            if (_klass.unlockStop)
+              return (cast(typeof(&_vfuncUnlockStopTramp))_klass.unlockStop)(sink);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncUnlockStop();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_sink.BaseSink.vfuncUnlockStop");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.unlockStop = cast(typeof(_klass.unlockStop))&_vfuncUnlockStopTramp;
+        break;
+      }
+      case "wait_event":
+      {
+        static extern(C) GstFlowReturn _vfuncWaitEventTramp(GstBaseSink* sink, GstEvent* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_sink.BaseSink)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)sink);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseSinkClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)sink);
+            if (_klass.waitEvent)
+              return (cast(typeof(&_vfuncWaitEventTramp))_klass.waitEvent)(sink, event);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.FlowReturn _dretval;
+          auto _event = event ? new gid.gst1.event.Event(cast(void*)event, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncWaitEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_sink.BaseSink.vfuncWaitEvent");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+          if (_event)
+            _event._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.waitEvent = cast(typeof(_klass.waitEvent))&_vfuncWaitEventTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

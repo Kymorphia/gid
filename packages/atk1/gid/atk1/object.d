@@ -46,6 +46,15 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -342,6 +351,428 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
   @property void accessibleValue(double propval) nothrow
   {
     gid.gobject2.object.ObjectWrap.setProperty!(double)("accessible-value", propval);
+  }
+
+  /** */
+  protected void vfuncChildrenChanged(uint changeIndex, void* changedChild = null)
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.childrenChanged)
+      return;
+
+    _klass.childrenChanged(cast(AtkObject*)this._cPtr, changeIndex, changedChild);
+  }
+
+  /**
+      The signal handler which is executed when there is a
+        focus event for an object. This virtual function is deprecated
+        since 2.9.4 and it should not be overriden. Use
+        the #AtkObject::state-change "focused" signal instead.
+  
+      Params:
+        focusIn = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncFocusEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncFocusEvent(bool focusIn)
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.focusEvent)
+      return;
+
+    _klass.focusEvent(cast(AtkObject*)this._cPtr, focusIn);
+  }
+
+  /**
+      Gets the accessible description of the accessible.
+      Returns: a character string representing the accessible description
+        of the accessible.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetDescription` to chain up from an override.
+      Overriding it from D is not supported (callback string return value with transfer none is not supported).
+  */
+  protected string vfuncGetDescription()
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.getDescription)
+      return typeof(return).init;
+
+    const(char)* _cretval;
+    _cretval = _klass.getDescription(cast(AtkObject*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the 0-based index of this accessible in its parent; returns -1 if the
+      accessible does not have an accessible parent.
+      Returns: an integer which is the index of the accessible in its parent
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetIndexInParent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected int vfuncGetIndexInParent()
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.getIndexInParent)
+      return typeof(return).init;
+
+    int _retval;
+    _retval = _klass.getIndexInParent(cast(AtkObject*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the layer of the accessible.
+      Returns: an #AtkLayer which is the layer of the accessible
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetLayer` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use atk_component_get_layer instead.
+  */
+  protected gid.atk1.types.Layer vfuncGetLayer()
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.getLayer)
+      return typeof(return).init;
+
+    AtkLayer _cretval;
+    _cretval = _klass.getLayer(cast(AtkObject*)this._cPtr);
+    gid.atk1.types.Layer _retval = cast(gid.atk1.types.Layer)_cretval;
+    return _retval;
+  }
+
+  /**
+      Gets the zorder of the accessible. The value G_MININT will be returned
+      if the layer of the accessible is not ATK_LAYER_MDI.
+      Returns: a gint which is the zorder of the accessible, i.e. the depth at
+        which the component is shown in relation to other components in the same
+        container.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetMdiZorder` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use atk_component_get_mdi_zorder instead.
+  */
+  protected int vfuncGetMdiZorder()
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.getMdiZorder)
+      return typeof(return).init;
+
+    int _retval;
+    _retval = _klass.getMdiZorder(cast(AtkObject*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  protected int vfuncGetNChildren()
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.getNChildren)
+      return typeof(return).init;
+
+    int _retval;
+    _retval = _klass.getNChildren(cast(AtkObject*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the accessible name of the accessible.
+      Returns: a character string representing the accessible name of the object.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetName` to chain up from an override.
+      Overriding it from D is not supported (callback string return value with transfer none is not supported).
+  */
+  protected string vfuncGetName()
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.getName)
+      return typeof(return).init;
+
+    const(char)* _cretval;
+    _cretval = _klass.getName(cast(AtkObject*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets a UTF-8 string indicating the POSIX-style LC_MESSAGES locale
+      of accessible.
+      Returns: a UTF-8 string indicating the POSIX-style LC_MESSAGES
+                 locale of accessible.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetObjectLocale` to chain up from an override.
+      Overriding it from D is not supported (callback string return value with transfer none is not supported).
+  */
+  protected string vfuncGetObjectLocale()
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.getObjectLocale)
+      return typeof(return).init;
+
+    const(char)* _cretval;
+    _cretval = _klass.getObjectLocale(cast(AtkObject*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Gets the accessible parent of the accessible. By default this is
+      the one assigned with [gid.atk1.object.ObjectWrap.setParent], but it is assumed
+      that ATK implementors have ways to get the parent of the object
+      without the need of assigning it manually with
+      [gid.atk1.object.ObjectWrap.setParent], and will return it with this method.
+      
+      If you are only interested on the parent assigned with
+      [gid.atk1.object.ObjectWrap.setParent], use [gid.atk1.object.ObjectWrap.peekParent].
+      Returns: an #AtkObject representing the accessible
+        parent of the accessible
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetParent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.atk1.object.ObjectWrap vfuncGetParent()
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.getParent)
+      return typeof(return).init;
+
+    AtkObject* _cretval;
+    _cretval = _klass.getParent(cast(AtkObject*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.atk1.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the role of the accessible.
+      Returns: an #AtkRole which is the role of the accessible
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetRole` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.atk1.types.Role vfuncGetRole()
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.getRole)
+      return typeof(return).init;
+
+    AtkRole _cretval;
+    _cretval = _klass.getRole(cast(AtkObject*)this._cPtr);
+    gid.atk1.types.Role _retval = cast(gid.atk1.types.Role)_cretval;
+    return _retval;
+  }
+
+  /**
+      This function is called when implementing subclasses of #AtkObject.
+      It does initialization required for the new object. It is intended
+      that this function should called only in the ..._new() functions used
+      to create an instance of a subclass of #AtkObject
+  
+      Params:
+        data = a #gpointer which identifies the object for which the AtkObject was created.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncInitialize` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncInitialize(void* data = null)
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.initialize)
+      return;
+
+    _klass.initialize(cast(AtkObject*)this._cPtr, data);
+  }
+
+  /** */
+  protected void vfuncPropertyChange(gid.atk1.property_values.PropertyValues values)
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.propertyChange)
+      return;
+
+    _klass.propertyChange(cast(AtkObject*)this._cPtr, values ? cast(AtkPropertyValues*)values._cPtr : null);
+  }
+
+  /**
+      Gets the #AtkRelationSet associated with the object.
+      Returns: an #AtkRelationSet representing the relation set
+        of the object.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRefRelationSet` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.atk1.relation_set.RelationSet vfuncRefRelationSet()
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.refRelationSet)
+      return typeof(return).init;
+
+    AtkRelationSet* _cretval;
+    _cretval = _klass.refRelationSet(cast(AtkObject*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.atk1.relation_set.RelationSet)(cast(AtkRelationSet*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets a reference to the state set of the accessible; the caller must
+      unreference it when it is no longer needed.
+      Returns: a reference to an #AtkStateSet which is the state
+        set of the accessible
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRefStateSet` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.atk1.state_set.StateSet vfuncRefStateSet()
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.refStateSet)
+      return typeof(return).init;
+
+    AtkStateSet* _cretval;
+    _cretval = _klass.refStateSet(cast(AtkObject*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.atk1.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Removes a property change handler.
+  
+      Params:
+        handlerId = a guint which identifies the handler to be removed.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRemovePropertyChangeHandler` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: See [gid.atk1.object.ObjectWrap.connectPropertyChangeHandler]
+  */
+  protected void vfuncRemovePropertyChangeHandler(uint handlerId)
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.removePropertyChangeHandler)
+      return;
+
+    _klass.removePropertyChangeHandler(cast(AtkObject*)this._cPtr, handlerId);
+  }
+
+  /**
+      Sets the accessible description of the accessible. You can't set
+      the description to NULL. This is reserved for the initial value. In
+      this aspect NULL is similar to ATK_ROLE_UNKNOWN. If you want to set
+      the name to a empty value you can use "".
+  
+      Params:
+        description = a character string to be set as the accessible description
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetDescription` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSetDescription(string description)
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.setDescription)
+      return;
+
+    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
+    _klass.setDescription(cast(AtkObject*)this._cPtr, _description);
+  }
+
+  /**
+      Sets the accessible name of the accessible. You can't set the name
+      to NULL. This is reserved for the initial value. In this aspect
+      NULL is similar to ATK_ROLE_UNKNOWN. If you want to set the name to
+      a empty value you can use "".
+  
+      Params:
+        name = a character string to be set as the accessible name
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetName` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSetName(string name)
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.setName)
+      return;
+
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    _klass.setName(cast(AtkObject*)this._cPtr, _name);
+  }
+
+  /**
+      Sets the accessible parent of the accessible. parent can be NULL.
+  
+      Params:
+        parent = an #AtkObject to be set as the accessible parent
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetParent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSetParent(gid.atk1.object.ObjectWrap parent)
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.setParent)
+      return;
+
+    _klass.setParent(cast(AtkObject*)this._cPtr, parent ? cast(AtkObject*)parent._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the role of the accessible.
+  
+      Params:
+        role = an #AtkRole to be set as the role
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetRole` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSetRole(gid.atk1.types.Role role)
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.setRole)
+      return;
+
+    _klass.setRole(cast(AtkObject*)this._cPtr, role);
+  }
+
+  /** */
+  protected void vfuncStateChange(string name, bool stateSet)
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.stateChange)
+      return;
+
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    _klass.stateChange(cast(AtkObject*)this._cPtr, _name, stateSet);
+  }
+
+  /** */
+  protected void vfuncVisibleDataChanged()
+  {
+    auto _klass = cast(AtkObjectClass*)_vfuncClass;
+    if (!_klass.visibleDataChanged)
+      return;
+
+    _klass.visibleDataChanged(cast(AtkObject*)this._cPtr);
   }
 
   /**
@@ -745,6 +1176,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -798,6 +1230,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -853,6 +1286,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -917,6 +1351,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -974,6 +1409,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1029,6 +1465,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1096,6 +1533,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1155,6 +1593,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1206,6 +1645,7 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1225,6 +1665,653 @@ class ObjectWrap : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("visible-data-changed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from ObjectWrap
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.atk1.object.ObjectWrap), T.stringof ~ " is not derived from gid.atk1.object.ObjectWrap");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChildrenChanged", true)[0]) == gid.atk1.object.ObjectWrap))
+      _installVfunc(klass, "children_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFocusEvent", true)[0]) == gid.atk1.object.ObjectWrap))
+      _installVfunc(klass, "focus_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetDescription", true)[0]) == gid.atk1.object.ObjectWrap))
+      static assert(0, "Overriding gid.atk1.object.ObjectWrap.vfuncGetDescription is not supported: callback string return value with transfer none is not supported");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetIndexInParent", true)[0]) == gid.atk1.object.ObjectWrap))
+      _installVfunc(klass, "get_index_in_parent");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetLayer", true)[0]) == gid.atk1.object.ObjectWrap))
+      _installVfunc(klass, "get_layer");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetMdiZorder", true)[0]) == gid.atk1.object.ObjectWrap))
+      _installVfunc(klass, "get_mdi_zorder");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetNChildren", true)[0]) == gid.atk1.object.ObjectWrap))
+      _installVfunc(klass, "get_n_children");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetName", true)[0]) == gid.atk1.object.ObjectWrap))
+      static assert(0, "Overriding gid.atk1.object.ObjectWrap.vfuncGetName is not supported: callback string return value with transfer none is not supported");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetObjectLocale", true)[0]) == gid.atk1.object.ObjectWrap))
+      static assert(0, "Overriding gid.atk1.object.ObjectWrap.vfuncGetObjectLocale is not supported: callback string return value with transfer none is not supported");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetParent", true)[0]) == gid.atk1.object.ObjectWrap))
+      _installVfunc(klass, "get_parent");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetRole", true)[0]) == gid.atk1.object.ObjectWrap))
+      _installVfunc(klass, "get_role");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncInitialize", true)[0]) == gid.atk1.object.ObjectWrap))
+      _installVfunc(klass, "initialize");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPropertyChange", true)[0]) == gid.atk1.object.ObjectWrap))
+      _installVfunc(klass, "property_change");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRefRelationSet", true)[0]) == gid.atk1.object.ObjectWrap))
+      _installVfunc(klass, "ref_relation_set");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRefStateSet", true)[0]) == gid.atk1.object.ObjectWrap))
+      _installVfunc(klass, "ref_state_set");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRemovePropertyChangeHandler", true)[0]) == gid.atk1.object.ObjectWrap))
+      _installVfunc(klass, "remove_property_change_handler");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetDescription", true)[0]) == gid.atk1.object.ObjectWrap))
+      _installVfunc(klass, "set_description");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetName", true)[0]) == gid.atk1.object.ObjectWrap))
+      _installVfunc(klass, "set_name");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetParent", true)[0]) == gid.atk1.object.ObjectWrap))
+      _installVfunc(klass, "set_parent");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetRole", true)[0]) == gid.atk1.object.ObjectWrap))
+      _installVfunc(klass, "set_role");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStateChange", true)[0]) == gid.atk1.object.ObjectWrap))
+      _installVfunc(klass, "state_change");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncVisibleDataChanged", true)[0]) == gid.atk1.object.ObjectWrap))
+      _installVfunc(klass, "visible_data_changed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(AtkObjectClass*)klass;
+
+    switch (vfunc)
+    {
+      case "children_changed":
+      {
+        static extern(C) void _vfuncChildrenChangedTramp(AtkObject* accessible, uint changeIndex, void* changedChild) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
+            if (_klass.childrenChanged)
+              return (cast(typeof(&_vfuncChildrenChangedTramp))_klass.childrenChanged)(accessible, changeIndex, changedChild);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncChildrenChanged(changeIndex, changedChild);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.object.ObjectWrap.vfuncChildrenChanged");
+          }
+        }
+
+        _klass.childrenChanged = cast(typeof(_klass.childrenChanged))&_vfuncChildrenChangedTramp;
+        break;
+      }
+      case "focus_event":
+      {
+        static extern(C) void _vfuncFocusEventTramp(AtkObject* accessible, gboolean focusIn) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
+            if (_klass.focusEvent)
+              return (cast(typeof(&_vfuncFocusEventTramp))_klass.focusEvent)(accessible, focusIn);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncFocusEvent(cast(bool)focusIn);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.object.ObjectWrap.vfuncFocusEvent");
+          }
+        }
+
+        _klass.focusEvent = cast(typeof(_klass.focusEvent))&_vfuncFocusEventTramp;
+        break;
+      }
+      case "get_index_in_parent":
+      {
+        static extern(C) int _vfuncGetIndexInParentTramp(AtkObject* accessible) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
+            if (_klass.getIndexInParent)
+              return (cast(typeof(&_vfuncGetIndexInParentTramp))_klass.getIndexInParent)(accessible);
+            return typeof(return).init;
+          }
+
+          int _retval;
+
+          try
+          {
+            _retval = _obj.vfuncGetIndexInParent();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.object.ObjectWrap.vfuncGetIndexInParent");
+          }
+          return _retval;
+        }
+
+        _klass.getIndexInParent = cast(typeof(_klass.getIndexInParent))&_vfuncGetIndexInParentTramp;
+        break;
+      }
+      case "get_layer":
+      {
+        static extern(C) AtkLayer _vfuncGetLayerTramp(AtkObject* accessible) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
+            if (_klass.getLayer)
+              return (cast(typeof(&_vfuncGetLayerTramp))_klass.getLayer)(accessible);
+            return typeof(return).init;
+          }
+
+          gid.atk1.types.Layer _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetLayer();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.object.ObjectWrap.vfuncGetLayer");
+          }
+          auto _retval = cast(AtkLayer)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getLayer = cast(typeof(_klass.getLayer))&_vfuncGetLayerTramp;
+        break;
+      }
+      case "get_mdi_zorder":
+      {
+        static extern(C) int _vfuncGetMdiZorderTramp(AtkObject* accessible) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
+            if (_klass.getMdiZorder)
+              return (cast(typeof(&_vfuncGetMdiZorderTramp))_klass.getMdiZorder)(accessible);
+            return typeof(return).init;
+          }
+
+          int _retval;
+
+          try
+          {
+            _retval = _obj.vfuncGetMdiZorder();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.object.ObjectWrap.vfuncGetMdiZorder");
+          }
+          return _retval;
+        }
+
+        _klass.getMdiZorder = cast(typeof(_klass.getMdiZorder))&_vfuncGetMdiZorderTramp;
+        break;
+      }
+      case "get_n_children":
+      {
+        static extern(C) int _vfuncGetNChildrenTramp(AtkObject* accessible) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
+            if (_klass.getNChildren)
+              return (cast(typeof(&_vfuncGetNChildrenTramp))_klass.getNChildren)(accessible);
+            return typeof(return).init;
+          }
+
+          int _retval;
+
+          try
+          {
+            _retval = _obj.vfuncGetNChildren();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.object.ObjectWrap.vfuncGetNChildren");
+          }
+          return _retval;
+        }
+
+        _klass.getNChildren = cast(typeof(_klass.getNChildren))&_vfuncGetNChildrenTramp;
+        break;
+      }
+      case "get_parent":
+      {
+        static extern(C) AtkObject* _vfuncGetParentTramp(AtkObject* accessible) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
+            if (_klass.getParent)
+              return (cast(typeof(&_vfuncGetParentTramp))_klass.getParent)(accessible);
+            return typeof(return).init;
+          }
+
+          gid.atk1.object.ObjectWrap _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetParent();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.object.ObjectWrap.vfuncGetParent");
+          }
+          auto _retval = _dretval ? cast(AtkObject*)_dretval._cPtr(No.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getParent = cast(typeof(_klass.getParent))&_vfuncGetParentTramp;
+        break;
+      }
+      case "get_role":
+      {
+        static extern(C) AtkRole _vfuncGetRoleTramp(AtkObject* accessible) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
+            if (_klass.getRole)
+              return (cast(typeof(&_vfuncGetRoleTramp))_klass.getRole)(accessible);
+            return typeof(return).init;
+          }
+
+          gid.atk1.types.Role _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetRole();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.object.ObjectWrap.vfuncGetRole");
+          }
+          auto _retval = cast(AtkRole)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getRole = cast(typeof(_klass.getRole))&_vfuncGetRoleTramp;
+        break;
+      }
+      case "initialize":
+      {
+        static extern(C) void _vfuncInitializeTramp(AtkObject* accessible, void* data) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
+            if (_klass.initialize)
+              return (cast(typeof(&_vfuncInitializeTramp))_klass.initialize)(accessible, data);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncInitialize(data);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.object.ObjectWrap.vfuncInitialize");
+          }
+        }
+
+        _klass.initialize = cast(typeof(_klass.initialize))&_vfuncInitializeTramp;
+        break;
+      }
+      case "property_change":
+      {
+        static extern(C) void _vfuncPropertyChangeTramp(AtkObject* accessible, AtkPropertyValues* values) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
+            if (_klass.propertyChange)
+              return (cast(typeof(&_vfuncPropertyChangeTramp))_klass.propertyChange)(accessible, values);
+            return;
+          }
+
+          auto _values = values ? new gid.atk1.property_values.PropertyValues(cast(void*)values, null) : null;
+
+          try
+          {
+            _obj.vfuncPropertyChange(_values);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.object.ObjectWrap.vfuncPropertyChange");
+          }
+        }
+
+        _klass.propertyChange = cast(typeof(_klass.propertyChange))&_vfuncPropertyChangeTramp;
+        break;
+      }
+      case "ref_relation_set":
+      {
+        static extern(C) AtkRelationSet* _vfuncRefRelationSetTramp(AtkObject* accessible) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
+            if (_klass.refRelationSet)
+              return (cast(typeof(&_vfuncRefRelationSetTramp))_klass.refRelationSet)(accessible);
+            return typeof(return).init;
+          }
+
+          gid.atk1.relation_set.RelationSet _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncRefRelationSet();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.object.ObjectWrap.vfuncRefRelationSet");
+          }
+          auto _retval = _dretval ? cast(AtkRelationSet*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.refRelationSet = cast(typeof(_klass.refRelationSet))&_vfuncRefRelationSetTramp;
+        break;
+      }
+      case "ref_state_set":
+      {
+        static extern(C) AtkStateSet* _vfuncRefStateSetTramp(AtkObject* accessible) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
+            if (_klass.refStateSet)
+              return (cast(typeof(&_vfuncRefStateSetTramp))_klass.refStateSet)(accessible);
+            return typeof(return).init;
+          }
+
+          gid.atk1.state_set.StateSet _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncRefStateSet();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.object.ObjectWrap.vfuncRefStateSet");
+          }
+          auto _retval = _dretval ? cast(AtkStateSet*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.refStateSet = cast(typeof(_klass.refStateSet))&_vfuncRefStateSetTramp;
+        break;
+      }
+      case "remove_property_change_handler":
+      {
+        static extern(C) void _vfuncRemovePropertyChangeHandlerTramp(AtkObject* accessible, uint handlerId) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
+            if (_klass.removePropertyChangeHandler)
+              return (cast(typeof(&_vfuncRemovePropertyChangeHandlerTramp))_klass.removePropertyChangeHandler)(accessible, handlerId);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRemovePropertyChangeHandler(handlerId);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.object.ObjectWrap.vfuncRemovePropertyChangeHandler");
+          }
+        }
+
+        _klass.removePropertyChangeHandler = cast(typeof(_klass.removePropertyChangeHandler))&_vfuncRemovePropertyChangeHandlerTramp;
+        break;
+      }
+      case "set_description":
+      {
+        static extern(C) void _vfuncSetDescriptionTramp(AtkObject* accessible, const(char)* description) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
+            if (_klass.setDescription)
+              return (cast(typeof(&_vfuncSetDescriptionTramp))_klass.setDescription)(accessible, description);
+            return;
+          }
+
+          string _description = description.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncSetDescription(_description);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.object.ObjectWrap.vfuncSetDescription");
+          }
+        }
+
+        _klass.setDescription = cast(typeof(_klass.setDescription))&_vfuncSetDescriptionTramp;
+        break;
+      }
+      case "set_name":
+      {
+        static extern(C) void _vfuncSetNameTramp(AtkObject* accessible, const(char)* name) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
+            if (_klass.setName)
+              return (cast(typeof(&_vfuncSetNameTramp))_klass.setName)(accessible, name);
+            return;
+          }
+
+          string _name = name.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncSetName(_name);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.object.ObjectWrap.vfuncSetName");
+          }
+        }
+
+        _klass.setName = cast(typeof(_klass.setName))&_vfuncSetNameTramp;
+        break;
+      }
+      case "set_parent":
+      {
+        static extern(C) void _vfuncSetParentTramp(AtkObject* accessible, AtkObject* parent) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
+            if (_klass.setParent)
+              return (cast(typeof(&_vfuncSetParentTramp))_klass.setParent)(accessible, parent);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSetParent(gid.gobject2.object.ObjectWrap._getDObject!(gid.atk1.object.ObjectWrap)(cast(void*)parent, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.object.ObjectWrap.vfuncSetParent");
+          }
+        }
+
+        _klass.setParent = cast(typeof(_klass.setParent))&_vfuncSetParentTramp;
+        break;
+      }
+      case "set_role":
+      {
+        static extern(C) void _vfuncSetRoleTramp(AtkObject* accessible, AtkRole role) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
+            if (_klass.setRole)
+              return (cast(typeof(&_vfuncSetRoleTramp))_klass.setRole)(accessible, role);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSetRole(role);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.object.ObjectWrap.vfuncSetRole");
+          }
+        }
+
+        _klass.setRole = cast(typeof(_klass.setRole))&_vfuncSetRoleTramp;
+        break;
+      }
+      case "state_change":
+      {
+        static extern(C) void _vfuncStateChangeTramp(AtkObject* accessible, const(char)* name, gboolean stateSet) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
+            if (_klass.stateChange)
+              return (cast(typeof(&_vfuncStateChangeTramp))_klass.stateChange)(accessible, name, stateSet);
+            return;
+          }
+
+          string _name = name.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncStateChange(_name, cast(bool)stateSet);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.object.ObjectWrap.vfuncStateChange");
+          }
+        }
+
+        _klass.stateChange = cast(typeof(_klass.stateChange))&_vfuncStateChangeTramp;
+        break;
+      }
+      case "visible_data_changed":
+      {
+        static extern(C) void _vfuncVisibleDataChangedTramp(AtkObject* accessible) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.atk1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accessible);
+          if (!_obj)
+          {
+            auto _klass = cast(AtkObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accessible);
+            if (_klass.visibleDataChanged)
+              return (cast(typeof(&_vfuncVisibleDataChangedTramp))_klass.visibleDataChanged)(accessible);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncVisibleDataChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.atk1.object.ObjectWrap.vfuncVisibleDataChanged");
+          }
+        }
+
+        _klass.visibleDataChanged = cast(typeof(_klass.visibleDataChanged))&_vfuncVisibleDataChangedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

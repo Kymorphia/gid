@@ -118,9 +118,38 @@ class Frame : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = panel_frame_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = panel_frame_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected bool vfuncAdoptWidget(gid.panel1.widget.Widget widget)
+  {
+    auto _klass = cast(PanelFrameClass*)_vfuncClass;
+    if (!_klass.adoptWidget)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.adoptWidget(cast(PanelFrame*)this._cPtr, widget ? cast(PanelWidget*)widget._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncPageClosed(gid.panel1.widget.Widget widget)
+  {
+    auto _klass = cast(PanelFrameClass*)_vfuncClass;
+    if (!_klass.pageClosed)
+      return;
+
+    _klass.pageClosed(cast(PanelFrame*)this._cPtr, widget ? cast(PanelWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -365,6 +394,7 @@ class Frame : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -418,6 +448,7 @@ class Frame : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -440,6 +471,97 @@ class Frame : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("page-closed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Frame
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.panel1.frame.Frame), T.stringof ~ " is not derived from gid.panel1.frame.Frame");
+
+    gid.gtk4.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAdoptWidget", true)[0]) == gid.panel1.frame.Frame))
+      _installVfunc(klass, "adopt_widget");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPageClosed", true)[0]) == gid.panel1.frame.Frame))
+      _installVfunc(klass, "page_closed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(PanelFrameClass*)klass;
+
+    switch (vfunc)
+    {
+      case "adopt_widget":
+      {
+        static extern(C) gboolean _vfuncAdoptWidgetTramp(PanelFrame* self, PanelWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.panel1.frame.Frame)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(PanelFrameClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.adoptWidget)
+              return (cast(typeof(&_vfuncAdoptWidgetTramp))_klass.adoptWidget)(self, widget);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncAdoptWidget(gid.gobject2.object.ObjectWrap._getDObject!(gid.panel1.widget.Widget)(cast(void*)widget, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.panel1.frame.Frame.vfuncAdoptWidget");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.adoptWidget = cast(typeof(_klass.adoptWidget))&_vfuncAdoptWidgetTramp;
+        break;
+      }
+      case "page_closed":
+      {
+        static extern(C) void _vfuncPageClosedTramp(PanelFrame* self, PanelWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.panel1.frame.Frame)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(PanelFrameClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.pageClosed)
+              return (cast(typeof(&_vfuncPageClosedTramp))_klass.pageClosed)(self, widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPageClosed(gid.gobject2.object.ObjectWrap._getDObject!(gid.panel1.widget.Widget)(cast(void*)widget, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.panel1.frame.Frame.vfuncPageClosed");
+          }
+        }
+
+        _klass.pageClosed = cast(typeof(_klass.pageClosed))&_vfuncPageClosedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

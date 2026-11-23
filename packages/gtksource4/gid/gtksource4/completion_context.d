@@ -25,6 +25,15 @@ class CompletionContext : gid.gobject2.initially_unowned.InitiallyUnowned
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -106,6 +115,16 @@ class CompletionContext : gid.gobject2.initially_unowned.InitiallyUnowned
     gid.gobject2.object.ObjectWrap.setProperty!(gid.gtk3.text_iter.TextIter)("iter", propval);
   }
 
+  /** */
+  protected void vfuncCancelled()
+  {
+    auto _klass = cast(GtkSourceCompletionContextClass*)_vfuncClass;
+    if (!_klass.cancelled)
+      return;
+
+    _klass.cancelled(cast(GtkSourceCompletionContext*)this._cPtr);
+  }
+
   /**
       Providers can use this function to add proposals to the completion. They
       can do so asynchronously by means of the finished argument. Providers must
@@ -180,6 +199,7 @@ class CompletionContext : gid.gobject2.initially_unowned.InitiallyUnowned
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -199,6 +219,62 @@ class CompletionContext : gid.gobject2.initially_unowned.InitiallyUnowned
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("cancelled", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from CompletionContext
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtksource4.completion_context.CompletionContext), T.stringof ~ " is not derived from gid.gtksource4.completion_context.CompletionContext");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCancelled", true)[0]) == gid.gtksource4.completion_context.CompletionContext))
+      _installVfunc(klass, "cancelled");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkSourceCompletionContextClass*)klass;
+
+    switch (vfunc)
+    {
+      case "cancelled":
+      {
+        static extern(C) void _vfuncCancelledTramp(GtkSourceCompletionContext* context) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource4.completion_context.CompletionContext)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)context);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceCompletionContextClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)context);
+            if (_klass.cancelled)
+              return (cast(typeof(&_vfuncCancelledTramp))_klass.cancelled)(context);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncCancelled();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource4.completion_context.CompletionContext.vfuncCancelled");
+          }
+        }
+
+        _klass.cancelled = cast(typeof(_klass.cancelled))&_vfuncCancelledTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

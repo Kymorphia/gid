@@ -127,6 +127,7 @@ class GLVideoAllocationParams : gid.gobject2.boxed.BoxedWrap!(gst_gl_video_alloc
   {
     extern(C) void _notifyCallback(void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.glib2.types.DestroyNotify*)data;
 
@@ -168,6 +169,7 @@ class GLVideoAllocationParams : gid.gobject2.boxed.BoxedWrap!(gst_gl_video_alloc
   {
     extern(C) void _notifyCallback(void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.glib2.types.DestroyNotify*)data;
 
@@ -193,6 +195,7 @@ class GLVideoAllocationParams : gid.gobject2.boxed.BoxedWrap!(gst_gl_video_alloc
   {
     extern(C) void _notifyCallback(void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.glib2.types.DestroyNotify*)data;
 

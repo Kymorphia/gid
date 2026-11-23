@@ -303,9 +303,16 @@ class FlowBox : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_flow_box_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_flow_box_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -350,6 +357,7 @@ class FlowBox : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
   {
     extern(C) GtkWidget* _createWidgetFuncCallback(GObject* item, void* userData) nothrow
     {
+      gidAttachThread();
       gid.gtk4.widget.Widget _dretval;
       auto _dlg = cast(gid.gtk4.types.FlowBoxCreateWidgetFunc*)userData;
 
@@ -614,6 +622,7 @@ class FlowBox : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
   {
     extern(C) void _funcCallback(GtkFlowBox* box, GtkFlowBoxChild* child, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk4.types.FlowBoxForeachFunc*)userData;
 
       try
@@ -676,6 +685,7 @@ class FlowBox : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
   {
     extern(C) gboolean _filterFuncCallback(GtkFlowBoxChild* child, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gtk4.types.FlowBoxFilterFunc*)userData;
 
@@ -802,6 +812,7 @@ class FlowBox : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
   {
     extern(C) int _sortFuncCallback(GtkFlowBoxChild* child1, GtkFlowBoxChild* child2, void* userData) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.gtk4.types.FlowBoxSortFunc*)userData;
 
@@ -889,6 +900,7 @@ class FlowBox : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -936,6 +948,7 @@ class FlowBox : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1012,6 +1025,7 @@ class FlowBox : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1076,6 +1090,7 @@ class FlowBox : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1124,6 +1139,7 @@ class FlowBox : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1172,6 +1188,7 @@ class FlowBox : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1221,6 +1238,7 @@ class FlowBox : gid.gtk4.widget.Widget, gid.gtk4.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

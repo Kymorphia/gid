@@ -583,9 +583,223 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
   */
   this() nothrow
   {
-    GtkPrintOperation* _cretval;
-    _cretval = gtk_print_operation_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkPrintOperation* _cretval;
+      _cretval = gtk_print_operation_new();
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /**
+      Signal emitted after the user has finished changing
+         print settings in the dialog, before the actual rendering starts.
+  
+      Params:
+        context = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncBeginPrint` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncBeginPrint(gid.gtk3.print_context.PrintContext context)
+  {
+    auto _klass = cast(GtkPrintOperationClass*)_vfuncClass;
+    if (!_klass.beginPrint)
+      return;
+
+    _klass.beginPrint(cast(GtkPrintOperation*)this._cPtr, context ? cast(GtkPrintContext*)context._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Signal emitted right before “begin-print” if
+         you added a custom widget in the “create-custom-widget” handler.
+  
+      Params:
+        widget = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCustomWidgetApply` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncCustomWidgetApply(gid.gtk3.widget.Widget widget)
+  {
+    auto _klass = cast(GtkPrintOperationClass*)_vfuncClass;
+    if (!_klass.customWidgetApply)
+      return;
+
+    _klass.customWidgetApply(cast(GtkPrintOperation*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Signal emitted when the print operation run has finished
+         doing everything required for printing.
+  
+      Params:
+        result = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDone` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDone(gid.gtk3.types.PrintOperationResult result)
+  {
+    auto _klass = cast(GtkPrintOperationClass*)_vfuncClass;
+    if (!_klass.done)
+      return;
+
+    _klass.done(cast(GtkPrintOperation*)this._cPtr, result);
+  }
+
+  /**
+      Signal emitted for every page that is printed.
+  
+      Params:
+        context = 
+        pageNr = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDrawPage` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDrawPage(gid.gtk3.print_context.PrintContext context, int pageNr)
+  {
+    auto _klass = cast(GtkPrintOperationClass*)_vfuncClass;
+    if (!_klass.drawPage)
+      return;
+
+    _klass.drawPage(cast(GtkPrintOperation*)this._cPtr, context ? cast(GtkPrintContext*)context._cPtr(No.Dup) : null, pageNr);
+  }
+
+  /**
+      Signal emitted after all pages have been rendered.
+  
+      Params:
+        context = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncEndPrint` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncEndPrint(gid.gtk3.print_context.PrintContext context)
+  {
+    auto _klass = cast(GtkPrintOperationClass*)_vfuncClass;
+    if (!_klass.endPrint)
+      return;
+
+    _klass.endPrint(cast(GtkPrintOperation*)this._cPtr, context ? cast(GtkPrintContext*)context._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Signal emitted after the “begin-print” signal, but
+         before the actual rendering starts.
+  
+      Params:
+        context = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPaginate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncPaginate(gid.gtk3.print_context.PrintContext context)
+  {
+    auto _klass = cast(GtkPrintOperationClass*)_vfuncClass;
+    if (!_klass.paginate)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.paginate(cast(GtkPrintOperation*)this._cPtr, context ? cast(GtkPrintContext*)context._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Signal emitted when a preview is requested from the
+         native dialog.
+  
+      Params:
+        preview = 
+        context = 
+        parent = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPreview` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncPreview(gid.gtk3.print_operation_preview.PrintOperationPreview preview, gid.gtk3.print_context.PrintContext context, gid.gtk3.window.Window parent)
+  {
+    auto _klass = cast(GtkPrintOperationClass*)_vfuncClass;
+    if (!_klass.preview)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.preview(cast(GtkPrintOperation*)this._cPtr, preview ? cast(GtkPrintOperationPreview*)(cast(gid.gobject2.object.ObjectWrap)preview)._cPtr(No.Dup) : null, context ? cast(GtkPrintContext*)context._cPtr(No.Dup) : null, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Emitted once for every page that is printed,
+         to give the application a chance to modify the page setup.
+  
+      Params:
+        context = 
+        pageNr = 
+        setup = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRequestPageSetup` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncRequestPageSetup(gid.gtk3.print_context.PrintContext context, int pageNr, gid.gtk3.page_setup.PageSetup setup)
+  {
+    auto _klass = cast(GtkPrintOperationClass*)_vfuncClass;
+    if (!_klass.requestPageSetup)
+      return;
+
+    _klass.requestPageSetup(cast(GtkPrintOperation*)this._cPtr, context ? cast(GtkPrintContext*)context._cPtr(No.Dup) : null, pageNr, setup ? cast(GtkPageSetup*)setup._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Emitted at between the various phases of the print
+         operation.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStatusChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncStatusChanged()
+  {
+    auto _klass = cast(GtkPrintOperationClass*)_vfuncClass;
+    if (!_klass.statusChanged)
+      return;
+
+    _klass.statusChanged(cast(GtkPrintOperation*)this._cPtr);
+  }
+
+  /**
+      Emitted after change of selected printer.
+  
+      Params:
+        widget = 
+        setup = 
+        settings = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncUpdateCustomWidget` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncUpdateCustomWidget(gid.gtk3.widget.Widget widget, gid.gtk3.page_setup.PageSetup setup, gid.gtk3.print_settings.PrintSettings settings)
+  {
+    auto _klass = cast(GtkPrintOperationClass*)_vfuncClass;
+    if (!_klass.updateCustomWidget)
+      return;
+
+    _klass.updateCustomWidget(cast(GtkPrintOperation*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, setup ? cast(GtkPageSetup*)setup._cPtr(No.Dup) : null, settings ? cast(GtkPrintSettings*)settings._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1103,6 +1317,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1161,6 +1376,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1215,6 +1431,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1274,6 +1491,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1374,6 +1592,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1429,6 +1648,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1492,6 +1712,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1567,6 +1788,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1634,6 +1856,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1690,6 +1913,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1745,6 +1969,7 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1773,6 +1998,342 @@ class PrintOperation : gid.gobject2.object.ObjectWrap, gid.gtk3.print_operation_
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("update-custom-widget", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from PrintOperation
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.print_operation.PrintOperation), T.stringof ~ " is not derived from gid.gtk3.print_operation.PrintOperation");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncBeginPrint", true)[0]) == gid.gtk3.print_operation.PrintOperation))
+      _installVfunc(klass, "begin_print");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCustomWidgetApply", true)[0]) == gid.gtk3.print_operation.PrintOperation))
+      _installVfunc(klass, "custom_widget_apply");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDone", true)[0]) == gid.gtk3.print_operation.PrintOperation))
+      _installVfunc(klass, "done");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDrawPage", true)[0]) == gid.gtk3.print_operation.PrintOperation))
+      _installVfunc(klass, "draw_page");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEndPrint", true)[0]) == gid.gtk3.print_operation.PrintOperation))
+      _installVfunc(klass, "end_print");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPaginate", true)[0]) == gid.gtk3.print_operation.PrintOperation))
+      _installVfunc(klass, "paginate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPreview", true)[0]) == gid.gtk3.print_operation.PrintOperation))
+      _installVfunc(klass, "preview");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRequestPageSetup", true)[0]) == gid.gtk3.print_operation.PrintOperation))
+      _installVfunc(klass, "request_page_setup");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStatusChanged", true)[0]) == gid.gtk3.print_operation.PrintOperation))
+      _installVfunc(klass, "status_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUpdateCustomWidget", true)[0]) == gid.gtk3.print_operation.PrintOperation))
+      _installVfunc(klass, "update_custom_widget");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkPrintOperationClass*)klass;
+
+    switch (vfunc)
+    {
+      case "begin_print":
+      {
+        static extern(C) void _vfuncBeginPrintTramp(GtkPrintOperation* operation, GtkPrintContext* context) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.print_operation.PrintOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)operation);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkPrintOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)operation);
+            if (_klass.beginPrint)
+              return (cast(typeof(&_vfuncBeginPrintTramp))_klass.beginPrint)(operation, context);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncBeginPrint(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.print_context.PrintContext)(cast(void*)context, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.print_operation.PrintOperation.vfuncBeginPrint");
+          }
+        }
+
+        _klass.beginPrint = cast(typeof(_klass.beginPrint))&_vfuncBeginPrintTramp;
+        break;
+      }
+      case "custom_widget_apply":
+      {
+        static extern(C) void _vfuncCustomWidgetApplyTramp(GtkPrintOperation* operation, GtkWidget* widget) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.print_operation.PrintOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)operation);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkPrintOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)operation);
+            if (_klass.customWidgetApply)
+              return (cast(typeof(&_vfuncCustomWidgetApplyTramp))_klass.customWidgetApply)(operation, widget);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncCustomWidgetApply(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)widget, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.print_operation.PrintOperation.vfuncCustomWidgetApply");
+          }
+        }
+
+        _klass.customWidgetApply = cast(typeof(_klass.customWidgetApply))&_vfuncCustomWidgetApplyTramp;
+        break;
+      }
+      case "done":
+      {
+        static extern(C) void _vfuncDoneTramp(GtkPrintOperation* operation, GtkPrintOperationResult result) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.print_operation.PrintOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)operation);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkPrintOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)operation);
+            if (_klass.done)
+              return (cast(typeof(&_vfuncDoneTramp))_klass.done)(operation, result);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDone(result);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.print_operation.PrintOperation.vfuncDone");
+          }
+        }
+
+        _klass.done = cast(typeof(_klass.done))&_vfuncDoneTramp;
+        break;
+      }
+      case "draw_page":
+      {
+        static extern(C) void _vfuncDrawPageTramp(GtkPrintOperation* operation, GtkPrintContext* context, int pageNr) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.print_operation.PrintOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)operation);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkPrintOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)operation);
+            if (_klass.drawPage)
+              return (cast(typeof(&_vfuncDrawPageTramp))_klass.drawPage)(operation, context, pageNr);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDrawPage(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.print_context.PrintContext)(cast(void*)context, No.Take), pageNr);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.print_operation.PrintOperation.vfuncDrawPage");
+          }
+        }
+
+        _klass.drawPage = cast(typeof(_klass.drawPage))&_vfuncDrawPageTramp;
+        break;
+      }
+      case "end_print":
+      {
+        static extern(C) void _vfuncEndPrintTramp(GtkPrintOperation* operation, GtkPrintContext* context) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.print_operation.PrintOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)operation);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkPrintOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)operation);
+            if (_klass.endPrint)
+              return (cast(typeof(&_vfuncEndPrintTramp))_klass.endPrint)(operation, context);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncEndPrint(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.print_context.PrintContext)(cast(void*)context, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.print_operation.PrintOperation.vfuncEndPrint");
+          }
+        }
+
+        _klass.endPrint = cast(typeof(_klass.endPrint))&_vfuncEndPrintTramp;
+        break;
+      }
+      case "paginate":
+      {
+        static extern(C) gboolean _vfuncPaginateTramp(GtkPrintOperation* operation, GtkPrintContext* context) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.print_operation.PrintOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)operation);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkPrintOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)operation);
+            if (_klass.paginate)
+              return (cast(typeof(&_vfuncPaginateTramp))_klass.paginate)(operation, context);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncPaginate(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.print_context.PrintContext)(cast(void*)context, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.print_operation.PrintOperation.vfuncPaginate");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.paginate = cast(typeof(_klass.paginate))&_vfuncPaginateTramp;
+        break;
+      }
+      case "preview":
+      {
+        static extern(C) gboolean _vfuncPreviewTramp(GtkPrintOperation* operation, GtkPrintOperationPreview* preview, GtkPrintContext* context, GtkWindow* parent) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.print_operation.PrintOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)operation);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkPrintOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)operation);
+            if (_klass.preview)
+              return (cast(typeof(&_vfuncPreviewTramp))_klass.preview)(operation, preview, context, parent);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncPreview(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.print_operation_preview.PrintOperationPreview)(cast(void*)preview, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.print_context.PrintContext)(cast(void*)context, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.window.Window)(cast(void*)parent, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.print_operation.PrintOperation.vfuncPreview");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.preview = cast(typeof(_klass.preview))&_vfuncPreviewTramp;
+        break;
+      }
+      case "request_page_setup":
+      {
+        static extern(C) void _vfuncRequestPageSetupTramp(GtkPrintOperation* operation, GtkPrintContext* context, int pageNr, GtkPageSetup* setup) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.print_operation.PrintOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)operation);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkPrintOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)operation);
+            if (_klass.requestPageSetup)
+              return (cast(typeof(&_vfuncRequestPageSetupTramp))_klass.requestPageSetup)(operation, context, pageNr, setup);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRequestPageSetup(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.print_context.PrintContext)(cast(void*)context, No.Take), pageNr, gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.page_setup.PageSetup)(cast(void*)setup, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.print_operation.PrintOperation.vfuncRequestPageSetup");
+          }
+        }
+
+        _klass.requestPageSetup = cast(typeof(_klass.requestPageSetup))&_vfuncRequestPageSetupTramp;
+        break;
+      }
+      case "status_changed":
+      {
+        static extern(C) void _vfuncStatusChangedTramp(GtkPrintOperation* operation) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.print_operation.PrintOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)operation);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkPrintOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)operation);
+            if (_klass.statusChanged)
+              return (cast(typeof(&_vfuncStatusChangedTramp))_klass.statusChanged)(operation);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncStatusChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.print_operation.PrintOperation.vfuncStatusChanged");
+          }
+        }
+
+        _klass.statusChanged = cast(typeof(_klass.statusChanged))&_vfuncStatusChangedTramp;
+        break;
+      }
+      case "update_custom_widget":
+      {
+        static extern(C) void _vfuncUpdateCustomWidgetTramp(GtkPrintOperation* operation, GtkWidget* widget, GtkPageSetup* setup, GtkPrintSettings* settings) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.print_operation.PrintOperation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)operation);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkPrintOperationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)operation);
+            if (_klass.updateCustomWidget)
+              return (cast(typeof(&_vfuncUpdateCustomWidgetTramp))_klass.updateCustomWidget)(operation, widget, setup, settings);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncUpdateCustomWidget(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)widget, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.page_setup.PageSetup)(cast(void*)setup, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.print_settings.PrintSettings)(cast(void*)settings, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.print_operation.PrintOperation.vfuncUpdateCustomWidget");
+          }
+        }
+
+        _klass.updateCustomWidget = cast(typeof(_klass.updateCustomWidget))&_vfuncUpdateCustomWidgetTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

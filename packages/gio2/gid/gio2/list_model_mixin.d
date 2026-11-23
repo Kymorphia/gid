@@ -7,6 +7,8 @@ public import gid.core.utils;
 public import gid.gio2.c.functions;
 public import gid.gio2.c.types;
 public import gid.gio2.types;
+public import gid.gobject2.c.functions;
+public import gid.gobject2.c.types;
 public import gid.gobject2.dclosure;
 public import gid.gobject2.gid_builder;
 public import gid.gobject2.object;
@@ -106,6 +108,90 @@ template ListModelT()
 
 
 
+
+  /**
+      Get the item at position. If position is greater than the number of
+      items in list, null is returned.
+      
+      null is never returned for an index that is smaller than the length
+      of the list.  See [gid.gio2.list_model.ListModel.getNItems].
+      
+      The same #GObject instance may not appear more than once in a #GListModel.
+  
+      Params:
+        position = the position of the item to fetch
+      Returns: the object at position.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetItem`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected gid.gobject2.object.ObjectWrap vfuncGetItem(uint position)
+  {
+    auto _klass = cast(GListModelInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gio2.list_model.ListModel._getGType);
+    if (!_klass || !_klass.getItem)
+      return typeof(return).init;
+
+    GObject* _cretval;
+    _cretval = _klass.getItem(cast(GListModel*)this._cPtr, position);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the type of the items in list.
+      
+      All items returned from [gid.gio2.list_model.ListModel.getItem] are of the type
+      returned by this function, or a subtype, or if the type is an
+      interface, they are an implementation of that interface.
+      
+      The item type of a #GListModel can not change during the life of the
+      model.
+      Returns: the #GType of the items contained in list.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetItemType`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected gid.gobject2.types.GType vfuncGetItemType()
+  {
+    auto _klass = cast(GListModelInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gio2.list_model.ListModel._getGType);
+    if (!_klass || !_klass.getItemType)
+      return typeof(return).init;
+
+    gid.gobject2.types.GType _retval;
+    _retval = _klass.getItemType(cast(GListModel*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the number of items in list.
+      
+      Depending on the model implementation, calling this function may be
+      less efficient than iterating the list with increasing values for
+      position until [gid.gio2.list_model.ListModel.getItem] returns null.
+      Returns: the number of items in list.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetNItems`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected uint vfuncGetNItems()
+  {
+    auto _klass = cast(GListModelInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gio2.list_model.ListModel._getGType);
+    if (!_klass || !_klass.getNItems)
+      return typeof(return).init;
+
+    uint _retval;
+    _retval = _klass.getNItems(cast(GListModel*)this._cPtr);
+    return _retval;
+  }
 
   /**
       Gets the type of the items in list.
@@ -235,6 +321,7 @@ template ListModelT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -263,6 +350,132 @@ template ListModelT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("items-changed", closure, after);
+  }
+
+  /// True if the D class T overrides any vfunc method of gid.gio2.list_model.ListModel (DiG)
+  enum bool _ifaceVfuncsOverridden_gid_gio2_list_model_ListModel(T) = !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetItem", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetItemType", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetNItems", true)[0], gid.gobject2.object.GidIfaceVfunc);
+
+  /**
+      Install the C trampolines of the gid.gio2.list_model.ListModel vfunc methods which a D class overrides into the interface
+      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      trampoline is a compile error.
+      Params:
+        T = D class
+        iface = Interface structure of the GType registered for T
+  */
+  static void _installIfaceVfuncs_gid_gio2_list_model_ListModel(T)(void* iface) nothrow
+  {
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetItem", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gio2_list_model_ListModel(iface, "get_item");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetItemType", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gio2_list_model_ListModel(iface, "get_item_type");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetNItems", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gio2_list_model_ListModel(iface, "get_n_items");
+  }
+
+  private static void _installIfaceVfunc_gid_gio2_list_model_ListModel(void* iface, string vfunc) nothrow
+  {
+    auto _klass = cast(GListModelInterface*)iface;
+
+    switch (vfunc)
+    {
+      case "get_item":
+      {
+        static extern(C) GObject* _vfuncGetItemTramp(GListModel* list, uint position) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)list);
+          if (!_obj)
+          {
+            auto _klass = cast(GListModelInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)list), gid.gio2.list_model.ListModel._getGType);
+            if (_klass && _klass.getItem)
+              return (cast(typeof(&_vfuncGetItemTramp))_klass.getItem)(list, position);
+            return typeof(return).init;
+          }
+
+          gid.gobject2.object.ObjectWrap _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetItem(position);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.list_model.ListModel.vfuncGetItem");
+          }
+          auto _retval = _dretval ? cast(GObject*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getItem = cast(typeof(_klass.getItem))&_vfuncGetItemTramp;
+        break;
+      }
+      case "get_item_type":
+      {
+        static extern(C) GType _vfuncGetItemTypeTramp(GListModel* list) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)list);
+          if (!_obj)
+          {
+            auto _klass = cast(GListModelInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)list), gid.gio2.list_model.ListModel._getGType);
+            if (_klass && _klass.getItemType)
+              return (cast(typeof(&_vfuncGetItemTypeTramp))_klass.getItemType)(list);
+            return typeof(return).init;
+          }
+
+          gid.gobject2.types.GType _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetItemType();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.list_model.ListModel.vfuncGetItemType");
+          }
+          auto _retval = cast(GType)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getItemType = cast(typeof(_klass.getItemType))&_vfuncGetItemTypeTramp;
+        break;
+      }
+      case "get_n_items":
+      {
+        static extern(C) uint _vfuncGetNItemsTramp(GListModel* list) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)list);
+          if (!_obj)
+          {
+            auto _klass = cast(GListModelInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)list), gid.gio2.list_model.ListModel._getGType);
+            if (_klass && _klass.getNItems)
+              return (cast(typeof(&_vfuncGetNItemsTramp))_klass.getNItems)(list);
+            return typeof(return).init;
+          }
+
+          uint _retval;
+
+          try
+          {
+            _retval = _obj.vfuncGetNItems();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.list_model.ListModel.vfuncGetNItems");
+          }
+          return _retval;
+        }
+
+        _klass.getNItems = cast(typeof(_klass.getNItems))&_vfuncGetNItemsTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

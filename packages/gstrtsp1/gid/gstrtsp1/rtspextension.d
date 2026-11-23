@@ -31,6 +31,15 @@ interface RTSPExtension : GidWrap
     return cast(void function())gst_rtsp_extension_get_type != &gidSymbolNotFound ? gst_rtsp_extension_get_type() : cast(GType)0;
   }
 
+
+
+
+
+
+
+
+
+
   /** */
   gid.gstrtsp1.types.RTSPResult afterSend(gid.gstrtsp1.rtspmessage.RTSPMessage req, gid.gstrtsp1.rtspmessage.RTSPMessage resp);
 
@@ -91,6 +100,7 @@ interface RTSPExtension : GidWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

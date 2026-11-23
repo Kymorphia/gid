@@ -64,9 +64,16 @@ class PasswordEntryBuffer : gid.gtk4.entry_buffer.EntryBuffer
   */
   this() nothrow
   {
-    GtkEntryBuffer* _cretval;
-    _cretval = gtk_password_entry_buffer_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkEntryBuffer* _cretval;
+      _cretval = gtk_password_entry_buffer_new();
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

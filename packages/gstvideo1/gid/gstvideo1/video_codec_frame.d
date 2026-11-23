@@ -263,6 +263,7 @@ class VideoCodecFrame : gid.gobject2.boxed.BoxedWrap!(gst_video_codec_frame_get_
   {
     extern(C) void _notifyCallback(void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.glib2.types.DestroyNotify*)data;
 

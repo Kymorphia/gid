@@ -95,6 +95,7 @@ void passwordClear(gid.secret1.schema.Schema schema, string[string] attributes, 
 {
   extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
   {
+    gidAttachThread();
     ptrThawGC(data);
     auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -181,6 +182,7 @@ void passwordLookup(gid.secret1.schema.Schema schema, string[string] attributes,
 {
   extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
   {
+    gidAttachThread();
     ptrThawGC(data);
     auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -268,6 +270,7 @@ void passwordSearch(gid.secret1.schema.Schema schema, string[string] attributes,
 {
   extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
   {
+    gidAttachThread();
     ptrThawGC(data);
     auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -364,6 +367,7 @@ void passwordStore(gid.secret1.schema.Schema schema, string[string] attributes, 
 {
   extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
   {
+    gidAttachThread();
     ptrThawGC(data);
     auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -407,6 +411,7 @@ void passwordStoreBinary(gid.secret1.schema.Schema schema, string[string] attrib
 {
   extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
   {
+    gidAttachThread();
     ptrThawGC(data);
     auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 

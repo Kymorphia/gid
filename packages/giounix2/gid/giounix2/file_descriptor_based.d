@@ -29,6 +29,7 @@ interface FileDescriptorBased : GidWrap
     return cast(void function())g_file_descriptor_based_get_type != &gidSymbolNotFound ? g_file_descriptor_based_get_type() : cast(GType)0;
   }
 
+
   /**
       Gets the underlying file descriptor.
       Returns: The file descriptor

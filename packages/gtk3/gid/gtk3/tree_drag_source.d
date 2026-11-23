@@ -22,6 +22,9 @@ interface TreeDragSource : GidWrap
     return cast(void function())gtk_tree_drag_source_get_type != &gidSymbolNotFound ? gtk_tree_drag_source_get_type() : cast(GType)0;
   }
 
+
+
+
   /**
       Asks the #GtkTreeDragSource to delete the row at path, because
       it was moved somewhere else via drag-and-drop. Returns false

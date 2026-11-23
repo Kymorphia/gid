@@ -379,10 +379,17 @@ class Inscription : gid.gtk4.widget.Widget, gid.gtk4.accessible_text.AccessibleT
   */
   this(string text = null) nothrow
   {
-    GtkWidget* _cretval;
-    const(char)* _text = text.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gtk_inscription_new(_text);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, text !is null), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      const(char)* _text = text.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gtk_inscription_new(_text);
+      this(_cretval, No.Take);
+    }
   }
 
   /**

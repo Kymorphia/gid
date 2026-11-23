@@ -75,9 +75,16 @@ class SeparatorMenuItem : gid.gtk3.menu_item.MenuItem
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_separator_menu_item_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_separator_menu_item_new();
+      this(_cretval, No.Take);
+    }
   }
 }
 

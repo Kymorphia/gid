@@ -233,9 +233,16 @@ class TestClock : gid.gst1.clock.Clock
   */
   this() nothrow
   {
-    GstClock* _cretval;
-    _cretval = gst_test_clock_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GstClock* _cretval;
+      _cretval = gst_test_clock_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

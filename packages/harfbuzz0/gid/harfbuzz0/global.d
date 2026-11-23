@@ -1367,6 +1367,7 @@ void bufferSetMessageFunc(gid.harfbuzz0.buffer.Buffer buffer, gid.harfbuzz0.type
 {
   extern(C) hb_bool_t _funcCallback(hb_buffer_t* buffer, hb_font_t* font, const(char)* message, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Bool _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.BufferMessageFunc*)userData;
     auto _buffer = buffer ? new gid.harfbuzz0.buffer.Buffer(cast(void*)buffer, Yes.Take)._cBorrow : null;
@@ -1756,6 +1757,7 @@ void drawFuncsSetClosePathFunc(gid.harfbuzz0.draw_funcs.DrawFuncs dfuncs, gid.ha
 {
   extern(C) void _funcCallback(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_state_t* st, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.harfbuzz0.types.DrawClosePathFunc*)userData;
     auto _dfuncs = dfuncs ? new gid.harfbuzz0.draw_funcs.DrawFuncs(cast(void*)dfuncs, Yes.Take)._cBorrow : null;
     auto _st = st ? new gid.harfbuzz0.draw_state.DrawState(cast(void*)st, Yes.Take)._cBorrow : null;
@@ -1791,6 +1793,7 @@ void drawFuncsSetCubicToFunc(gid.harfbuzz0.draw_funcs.DrawFuncs dfuncs, gid.harf
 {
   extern(C) void _funcCallback(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_state_t* st, float control1X, float control1Y, float control2X, float control2Y, float toX, float toY, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.harfbuzz0.types.DrawCubicToFunc*)userData;
     auto _dfuncs = dfuncs ? new gid.harfbuzz0.draw_funcs.DrawFuncs(cast(void*)dfuncs, Yes.Take)._cBorrow : null;
     auto _st = st ? new gid.harfbuzz0.draw_state.DrawState(cast(void*)st, Yes.Take)._cBorrow : null;
@@ -1826,6 +1829,7 @@ void drawFuncsSetLineToFunc(gid.harfbuzz0.draw_funcs.DrawFuncs dfuncs, gid.harfb
 {
   extern(C) void _funcCallback(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_state_t* st, float toX, float toY, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.harfbuzz0.types.DrawLineToFunc*)userData;
     auto _dfuncs = dfuncs ? new gid.harfbuzz0.draw_funcs.DrawFuncs(cast(void*)dfuncs, Yes.Take)._cBorrow : null;
     auto _st = st ? new gid.harfbuzz0.draw_state.DrawState(cast(void*)st, Yes.Take)._cBorrow : null;
@@ -1861,6 +1865,7 @@ void drawFuncsSetMoveToFunc(gid.harfbuzz0.draw_funcs.DrawFuncs dfuncs, gid.harfb
 {
   extern(C) void _funcCallback(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_state_t* st, float toX, float toY, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.harfbuzz0.types.DrawMoveToFunc*)userData;
     auto _dfuncs = dfuncs ? new gid.harfbuzz0.draw_funcs.DrawFuncs(cast(void*)dfuncs, Yes.Take)._cBorrow : null;
     auto _st = st ? new gid.harfbuzz0.draw_state.DrawState(cast(void*)st, Yes.Take)._cBorrow : null;
@@ -1896,6 +1901,7 @@ void drawFuncsSetQuadraticToFunc(gid.harfbuzz0.draw_funcs.DrawFuncs dfuncs, gid.
 {
   extern(C) void _funcCallback(hb_draw_funcs_t* dfuncs, void* drawData, hb_draw_state_t* st, float controlX, float controlY, float toX, float toY, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.harfbuzz0.types.DrawQuadraticToFunc*)userData;
     auto _dfuncs = dfuncs ? new gid.harfbuzz0.draw_funcs.DrawFuncs(cast(void*)dfuncs, Yes.Take)._cBorrow : null;
     auto _st = st ? new gid.harfbuzz0.draw_state.DrawState(cast(void*)st, Yes.Take)._cBorrow : null;
@@ -2130,6 +2136,7 @@ gid.harfbuzz0.face.Face faceCreateForTables(gid.harfbuzz0.types.ReferenceTableFu
 {
   extern(C) hb_blob_t* _referenceTableFuncCallback(hb_face_t* face, hb_tag_t tag, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.blob.Blob _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.ReferenceTableFunc*)userData;
     auto _face = face ? new gid.harfbuzz0.face.Face(cast(void*)face, Yes.Take)._cBorrow : null;
@@ -2705,6 +2712,7 @@ void fontFuncsSetDrawGlyphFunc(gid.harfbuzz0.font_funcs.FontFuncs ffuncs, gid.ha
 {
   extern(C) void _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_draw_funcs_t* drawFuncs, void* drawData, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.harfbuzz0.types.FontDrawGlyphFunc*)userData;
     auto _font = font ? new gid.harfbuzz0.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
     auto _drawFuncs = drawFuncs ? new gid.harfbuzz0.draw_funcs.DrawFuncs(cast(void*)drawFuncs, Yes.Take)._cBorrow : null;
@@ -2740,6 +2748,7 @@ void fontFuncsSetDrawGlyphOrFailFunc(gid.harfbuzz0.font_funcs.FontFuncs ffuncs, 
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_draw_funcs_t* drawFuncs, void* drawData, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Bool _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.FontDrawGlyphOrFailFunc*)userData;
     auto _font = font ? new gid.harfbuzz0.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
@@ -2778,6 +2787,7 @@ void fontFuncsSetFontHExtentsFunc(gid.harfbuzz0.font_funcs.FontFuncs ffuncs, gid
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_font_extents_t* extents, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Bool _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.FontGetFontHExtentsFunc*)userData;
     auto _font = font ? new gid.harfbuzz0.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
@@ -2813,6 +2823,7 @@ void fontFuncsSetFontVExtentsFunc(gid.harfbuzz0.font_funcs.FontFuncs ffuncs, gid
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_font_extents_t* extents, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Bool _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.FontGetFontVExtentsFunc*)userData;
     auto _font = font ? new gid.harfbuzz0.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
@@ -2848,6 +2859,7 @@ void fontFuncsSetGlyphContourPointFunc(gid.harfbuzz0.font_funcs.FontFuncs ffuncs
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, uint pointIndex, hb_position_t* x, hb_position_t* y, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Bool _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.FontGetGlyphContourPointFunc*)userData;
     auto _font = font ? new gid.harfbuzz0.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
@@ -2883,6 +2895,7 @@ void fontFuncsSetGlyphExtentsFunc(gid.harfbuzz0.font_funcs.FontFuncs ffuncs, gid
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_glyph_extents_t* extents, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Bool _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.FontGetGlyphExtentsFunc*)userData;
     auto _font = font ? new gid.harfbuzz0.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
@@ -2918,6 +2931,7 @@ void fontFuncsSetGlyphFromNameFunc(gid.harfbuzz0.font_funcs.FontFuncs ffuncs, gi
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, const(char)* name, int len, hb_codepoint_t* glyph, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Bool _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.FontGetGlyphFromNameFunc*)userData;
     auto _font = font ? new gid.harfbuzz0.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
@@ -2957,6 +2971,7 @@ void fontFuncsSetGlyphFunc(gid.harfbuzz0.font_funcs.FontFuncs ffuncs, gid.harfbu
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t unicode, hb_codepoint_t variationSelector, hb_codepoint_t* glyph, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Bool _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.FontGetGlyphFunc*)userData;
     auto _font = font ? new gid.harfbuzz0.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
@@ -2992,6 +3007,7 @@ void fontFuncsSetGlyphHAdvanceFunc(gid.harfbuzz0.font_funcs.FontFuncs ffuncs, gi
 {
   extern(C) hb_position_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Position _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.FontGetGlyphHAdvanceFunc*)userData;
     auto _font = font ? new gid.harfbuzz0.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
@@ -3027,6 +3043,7 @@ void fontFuncsSetGlyphHKerningFunc(gid.harfbuzz0.font_funcs.FontFuncs ffuncs, gi
 {
   extern(C) hb_position_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t firstGlyph, hb_codepoint_t secondGlyph, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Position _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.FontGetGlyphHKerningFunc*)userData;
     auto _font = font ? new gid.harfbuzz0.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
@@ -3062,6 +3079,7 @@ void fontFuncsSetGlyphHOriginFunc(gid.harfbuzz0.font_funcs.FontFuncs ffuncs, gid
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_position_t* x, hb_position_t* y, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Bool _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.FontGetGlyphHOriginFunc*)userData;
     auto _font = font ? new gid.harfbuzz0.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
@@ -3100,6 +3118,7 @@ void fontFuncsSetGlyphShapeFunc(gid.harfbuzz0.font_funcs.FontFuncs ffuncs, gid.h
 {
   extern(C) void _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_draw_funcs_t* drawFuncs, void* drawData, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.harfbuzz0.types.FontGetGlyphShapeFunc*)userData;
     auto _font = font ? new gid.harfbuzz0.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
     auto _drawFuncs = drawFuncs ? new gid.harfbuzz0.draw_funcs.DrawFuncs(cast(void*)drawFuncs, Yes.Take)._cBorrow : null;
@@ -3135,6 +3154,7 @@ void fontFuncsSetGlyphVAdvanceFunc(gid.harfbuzz0.font_funcs.FontFuncs ffuncs, gi
 {
   extern(C) hb_position_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Position _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.FontGetGlyphVAdvanceFunc*)userData;
     auto _font = font ? new gid.harfbuzz0.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
@@ -3170,6 +3190,7 @@ void fontFuncsSetGlyphVKerningFunc(gid.harfbuzz0.font_funcs.FontFuncs ffuncs, gi
 {
   extern(C) hb_position_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t firstGlyph, hb_codepoint_t secondGlyph, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Position _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.FontGetGlyphVKerningFunc*)userData;
     auto _font = font ? new gid.harfbuzz0.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
@@ -3205,6 +3226,7 @@ void fontFuncsSetGlyphVOriginFunc(gid.harfbuzz0.font_funcs.FontFuncs ffuncs, gid
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_position_t* x, hb_position_t* y, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Bool _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.FontGetGlyphVOriginFunc*)userData;
     auto _font = font ? new gid.harfbuzz0.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
@@ -3240,6 +3262,7 @@ void fontFuncsSetNominalGlyphFunc(gid.harfbuzz0.font_funcs.FontFuncs ffuncs, gid
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t unicode, hb_codepoint_t* glyph, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Bool _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.FontGetNominalGlyphFunc*)userData;
     auto _font = font ? new gid.harfbuzz0.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
@@ -3277,6 +3300,7 @@ void fontFuncsSetPaintGlyphFunc(gid.harfbuzz0.font_funcs.FontFuncs ffuncs, gid.h
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_paint_funcs_t* paintFuncs, void* paintData, uint paletteIndex, hb_color_t foreground, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Bool _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.FontPaintGlyphFunc*)userData;
     auto _font = font ? new gid.harfbuzz0.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
@@ -3315,6 +3339,7 @@ void fontFuncsSetPaintGlyphOrFailFunc(gid.harfbuzz0.font_funcs.FontFuncs ffuncs,
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t glyph, hb_paint_funcs_t* paintFuncs, void* paintData, uint paletteIndex, hb_color_t foreground, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Bool _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.FontPaintGlyphOrFailFunc*)userData;
     auto _font = font ? new gid.harfbuzz0.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
@@ -3353,6 +3378,7 @@ void fontFuncsSetVariationGlyphFunc(gid.harfbuzz0.font_funcs.FontFuncs ffuncs, g
 {
   extern(C) hb_bool_t _funcCallback(hb_font_t* font, void* fontData, hb_codepoint_t unicode, hb_codepoint_t variationSelector, hb_codepoint_t* glyph, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Bool _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.FontGetVariationGlyphFunc*)userData;
     auto _font = font ? new gid.harfbuzz0.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
@@ -7153,6 +7179,7 @@ void paintFuncsSetColorFunc(gid.harfbuzz0.paint_funcs.PaintFuncs funcs, gid.harf
 {
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_bool_t isForeground, hb_color_t color, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.harfbuzz0.types.PaintColorFunc*)userData;
     auto _funcs = funcs ? new gid.harfbuzz0.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
 
@@ -7185,6 +7212,7 @@ void paintFuncsSetColorGlyphFunc(gid.harfbuzz0.paint_funcs.PaintFuncs funcs, gid
 {
   extern(C) hb_bool_t _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_codepoint_t glyph, hb_font_t* font, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Bool _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.PaintColorGlyphFunc*)userData;
     auto _funcs = funcs ? new gid.harfbuzz0.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
@@ -7223,6 +7251,7 @@ void paintFuncsSetCustomPaletteColorFunc(gid.harfbuzz0.paint_funcs.PaintFuncs fu
 {
   extern(C) hb_bool_t _funcCallback(hb_paint_funcs_t* funcs, void* paintData, uint colorIndex, hb_color_t* color, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Bool _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.PaintCustomPaletteColorFunc*)userData;
     auto _funcs = funcs ? new gid.harfbuzz0.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
@@ -7258,6 +7287,7 @@ void paintFuncsSetImageFunc(gid.harfbuzz0.paint_funcs.PaintFuncs funcs, gid.harf
 {
   extern(C) hb_bool_t _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_blob_t* image, uint width, uint height, hb_tag_t format, float slant, hb_glyph_extents_t* extents, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Bool _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.PaintImageFunc*)userData;
     auto _funcs = funcs ? new gid.harfbuzz0.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
@@ -7296,6 +7326,7 @@ void paintFuncsSetLinearGradientFunc(gid.harfbuzz0.paint_funcs.PaintFuncs funcs,
 {
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_color_line_t* colorLine, float x0, float y0, float x1, float y1, float x2, float y2, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.harfbuzz0.types.PaintLinearGradientFunc*)userData;
     auto _funcs = funcs ? new gid.harfbuzz0.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
     auto _colorLine = colorLine ? new gid.harfbuzz0.color_line.ColorLine(cast(void*)colorLine, Yes.Take)._cBorrow : null;
@@ -7331,6 +7362,7 @@ void paintFuncsSetPopClipFunc(gid.harfbuzz0.paint_funcs.PaintFuncs funcs, gid.ha
 {
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.harfbuzz0.types.PaintPopClipFunc*)userData;
     auto _funcs = funcs ? new gid.harfbuzz0.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
 
@@ -7363,6 +7395,7 @@ void paintFuncsSetPopGroupFunc(gid.harfbuzz0.paint_funcs.PaintFuncs funcs, gid.h
 {
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_paint_composite_mode_t mode, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.harfbuzz0.types.PaintPopGroupFunc*)userData;
     auto _funcs = funcs ? new gid.harfbuzz0.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
 
@@ -7395,6 +7428,7 @@ void paintFuncsSetPopTransformFunc(gid.harfbuzz0.paint_funcs.PaintFuncs funcs, g
 {
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.harfbuzz0.types.PaintPopTransformFunc*)userData;
     auto _funcs = funcs ? new gid.harfbuzz0.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
 
@@ -7427,6 +7461,7 @@ void paintFuncsSetPushClipGlyphFunc(gid.harfbuzz0.paint_funcs.PaintFuncs funcs, 
 {
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_codepoint_t glyph, hb_font_t* font, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.harfbuzz0.types.PaintPushClipGlyphFunc*)userData;
     auto _funcs = funcs ? new gid.harfbuzz0.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
     auto _font = font ? new gid.harfbuzz0.font.Font(cast(void*)font, Yes.Take)._cBorrow : null;
@@ -7462,6 +7497,7 @@ void paintFuncsSetPushClipRectangleFunc(gid.harfbuzz0.paint_funcs.PaintFuncs fun
 {
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, float xmin, float ymin, float xmax, float ymax, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.harfbuzz0.types.PaintPushClipRectangleFunc*)userData;
     auto _funcs = funcs ? new gid.harfbuzz0.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
 
@@ -7494,6 +7530,7 @@ void paintFuncsSetPushGroupFunc(gid.harfbuzz0.paint_funcs.PaintFuncs funcs, gid.
 {
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.harfbuzz0.types.PaintPushGroupFunc*)userData;
     auto _funcs = funcs ? new gid.harfbuzz0.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
 
@@ -7526,6 +7563,7 @@ void paintFuncsSetPushTransformFunc(gid.harfbuzz0.paint_funcs.PaintFuncs funcs, 
 {
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, float xx, float yx, float xy, float yy, float dx, float dy, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.harfbuzz0.types.PaintPushTransformFunc*)userData;
     auto _funcs = funcs ? new gid.harfbuzz0.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
 
@@ -7558,6 +7596,7 @@ void paintFuncsSetRadialGradientFunc(gid.harfbuzz0.paint_funcs.PaintFuncs funcs,
 {
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_color_line_t* colorLine, float x0, float y0, float r0, float x1, float y1, float r1, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.harfbuzz0.types.PaintRadialGradientFunc*)userData;
     auto _funcs = funcs ? new gid.harfbuzz0.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
     auto _colorLine = colorLine ? new gid.harfbuzz0.color_line.ColorLine(cast(void*)colorLine, Yes.Take)._cBorrow : null;
@@ -7593,6 +7632,7 @@ void paintFuncsSetSweepGradientFunc(gid.harfbuzz0.paint_funcs.PaintFuncs funcs, 
 {
   extern(C) void _funcCallback(hb_paint_funcs_t* funcs, void* paintData, hb_color_line_t* colorLine, float x0, float y0, float startAngle, float endAngle, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.harfbuzz0.types.PaintSweepGradientFunc*)userData;
     auto _funcs = funcs ? new gid.harfbuzz0.paint_funcs.PaintFuncs(cast(void*)funcs, Yes.Take)._cBorrow : null;
     auto _colorLine = colorLine ? new gid.harfbuzz0.color_line.ColorLine(cast(void*)colorLine, Yes.Take)._cBorrow : null;
@@ -8868,6 +8908,7 @@ void unicodeFuncsSetCombiningClassFunc(gid.harfbuzz0.unicode_funcs.UnicodeFuncs 
 {
   extern(C) hb_unicode_combining_class_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t unicode, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.UnicodeCombiningClass _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.UnicodeCombiningClassFunc*)userData;
     auto _ufuncs = ufuncs ? new gid.harfbuzz0.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, Yes.Take)._cBorrow : null;
@@ -8903,6 +8944,7 @@ void unicodeFuncsSetComposeFunc(gid.harfbuzz0.unicode_funcs.UnicodeFuncs ufuncs,
 {
   extern(C) hb_bool_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t a, hb_codepoint_t b, hb_codepoint_t* ab, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Bool _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.UnicodeComposeFunc*)userData;
     auto _ufuncs = ufuncs ? new gid.harfbuzz0.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, Yes.Take)._cBorrow : null;
@@ -8938,6 +8980,7 @@ void unicodeFuncsSetDecomposeFunc(gid.harfbuzz0.unicode_funcs.UnicodeFuncs ufunc
 {
   extern(C) hb_bool_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t ab, hb_codepoint_t* a, hb_codepoint_t* b, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Bool _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.UnicodeDecomposeFunc*)userData;
     auto _ufuncs = ufuncs ? new gid.harfbuzz0.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, Yes.Take)._cBorrow : null;
@@ -8973,6 +9016,7 @@ void unicodeFuncsSetEastasianWidthFunc(gid.harfbuzz0.unicode_funcs.UnicodeFuncs 
 {
   extern(C) uint _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t unicode, void* userData) nothrow
   {
+    gidAttachThread();
     uint _retval;
     auto _dlg = cast(gid.harfbuzz0.types.UnicodeEastasianWidthFunc*)userData;
     auto _ufuncs = ufuncs ? new gid.harfbuzz0.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, Yes.Take)._cBorrow : null;
@@ -9007,6 +9051,7 @@ void unicodeFuncsSetGeneralCategoryFunc(gid.harfbuzz0.unicode_funcs.UnicodeFuncs
 {
   extern(C) hb_unicode_general_category_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t unicode, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.UnicodeGeneralCategory _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.UnicodeGeneralCategoryFunc*)userData;
     auto _ufuncs = ufuncs ? new gid.harfbuzz0.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, Yes.Take)._cBorrow : null;
@@ -9042,6 +9087,7 @@ void unicodeFuncsSetMirroringFunc(gid.harfbuzz0.unicode_funcs.UnicodeFuncs ufunc
 {
   extern(C) hb_codepoint_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t unicode, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Codepoint _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.UnicodeMirroringFunc*)userData;
     auto _ufuncs = ufuncs ? new gid.harfbuzz0.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, Yes.Take)._cBorrow : null;
@@ -9077,6 +9123,7 @@ void unicodeFuncsSetScriptFunc(gid.harfbuzz0.unicode_funcs.UnicodeFuncs ufuncs, 
 {
   extern(C) hb_script_t _funcCallback(hb_unicode_funcs_t* ufuncs, hb_codepoint_t unicode, void* userData) nothrow
   {
+    gidAttachThread();
     gid.harfbuzz0.types.Script _dretval;
     auto _dlg = cast(gid.harfbuzz0.types.UnicodeScriptFunc*)userData;
     auto _ufuncs = ufuncs ? new gid.harfbuzz0.unicode_funcs.UnicodeFuncs(cast(void*)ufuncs, Yes.Take)._cBorrow : null;

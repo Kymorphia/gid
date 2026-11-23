@@ -62,6 +62,15 @@ interface SelectionModel : gid.gio2.list_model.ListModel
     return cast(void function())gtk_selection_model_get_type != &gidSymbolNotFound ? gtk_selection_model_get_type() : cast(GType)0;
   }
 
+
+
+
+
+
+
+
+
+
   /**
       Gets the set containing all currently selected items in the model.
       
@@ -249,6 +258,7 @@ interface SelectionModel : gid.gio2.list_model.ListModel
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

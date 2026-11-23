@@ -26,6 +26,15 @@ class Pty : gid.gobject2.object.ObjectWrap, gid.gio2.initable.Initable
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -257,6 +266,7 @@ class Pty : gid.gobject2.object.ObjectWrap, gid.gio2.initable.Initable
   {
     extern(C) void _childSetupCallback(void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.glib2.types.SpawnChildSetupFunc*)data;
 
       try
@@ -271,6 +281,7 @@ class Pty : gid.gobject2.object.ObjectWrap, gid.gio2.initable.Initable
     auto _childSetupCB = childSetup ? &_childSetupCallback : null;
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -359,6 +370,7 @@ class Pty : gid.gobject2.object.ObjectWrap, gid.gio2.initable.Initable
   {
     extern(C) void _childSetupCallback(void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.glib2.types.SpawnChildSetupFunc*)data;
 
       try
@@ -373,6 +385,7 @@ class Pty : gid.gobject2.object.ObjectWrap, gid.gio2.initable.Initable
     auto _childSetupCB = childSetup ? &_childSetupCallback : null;
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 

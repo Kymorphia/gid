@@ -91,6 +91,15 @@ class DBusConnection : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.A
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -396,6 +405,7 @@ class DBusConnection : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.A
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -449,6 +459,7 @@ class DBusConnection : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.A
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -505,6 +516,7 @@ class DBusConnection : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.A
   {
     extern(C) GDBusMessage* _filterFunctionCallback(GDBusConnection* connection, GDBusMessage* message, gboolean incoming, void* userData) nothrow
     {
+      gidAttachThread();
       gid.gio2.dbus_message.DBusMessage _dretval;
       auto _dlg = cast(gid.gio2.types.DBusMessageFilterFunction*)userData;
 
@@ -597,6 +609,7 @@ class DBusConnection : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.A
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -747,6 +760,7 @@ class DBusConnection : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.A
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -881,6 +895,7 @@ class DBusConnection : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.A
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -1072,6 +1087,7 @@ class DBusConnection : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.A
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -1438,6 +1454,7 @@ class DBusConnection : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.A
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -1633,6 +1650,7 @@ class DBusConnection : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.A
   {
     extern(C) void _callbackCallback(GDBusConnection* connection, const(char)* senderName, const(char)* objectPath, const(char)* interfaceName, const(char)* signalName, GVariant* parameters, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gio2.types.DBusSignalCallback*)userData;
       string _senderName = senderName.fromCString!(No.Free);
       string _objectPath = objectPath.fromCString!(No.Free);
@@ -1802,6 +1820,7 @@ class DBusConnection : gid.gobject2.object.ObjectWrap, gid.gio2.async_initable.A
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

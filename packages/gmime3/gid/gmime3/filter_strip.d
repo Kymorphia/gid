@@ -62,9 +62,16 @@ class FilterStrip : gid.gmime3.filter.Filter
   */
   this() nothrow
   {
-    GMimeFilter* _cretval;
-    _cretval = g_mime_filter_strip_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GMimeFilter* _cretval;
+      _cretval = g_mime_filter_strip_new();
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

@@ -1059,6 +1059,7 @@ gulong signalAddEmissionHook(uint signalId, gid.glib2.types.Quark detail, gid.go
 {
   extern(C) gboolean _hookFuncCallback(GSignalInvocationHint* ihint, uint nParamValues, const(GValue)* paramValues, void* data) nothrow
   {
+    gidAttachThread();
     bool _dretval;
     auto _dlg = cast(gid.gobject2.types.SignalEmissionHook*)data;
     gid.gobject2.value.Value[] _paramValues;

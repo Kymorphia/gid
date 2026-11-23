@@ -81,9 +81,16 @@ class HScale : gid.gtk3.scale.Scale
   */
   this(gid.gtk3.adjustment.Adjustment adjustment = null) nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_hscale_new(adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, adjustment !is null), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_hscale_new(adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
+      this(_cretval, No.Take);
+    }
   }
 
   /**

@@ -151,11 +151,18 @@ class BookmarkList : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListMod
   */
   this(string filename = null, string attributes = null) nothrow
   {
-    GtkBookmarkList* _cretval;
-    const(char)* _filename = filename.toCString!(No.Malloc, Yes.Nullable);
-    const(char)* _attributes = attributes.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gtk_bookmark_list_new(_filename, _attributes);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, filename !is null || attributes !is null), Yes.Take);
+    }
+    else
+    {
+      GtkBookmarkList* _cretval;
+      const(char)* _filename = filename.toCString!(No.Malloc, Yes.Nullable);
+      const(char)* _attributes = attributes.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gtk_bookmark_list_new(_filename, _attributes);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

@@ -46,6 +46,15 @@ class NetClientClock : gid.gst1.system_clock.SystemClock
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -179,11 +188,18 @@ class NetClientClock : gid.gst1.system_clock.SystemClock
   */
   this(string name, string remoteAddress, int remotePort, gid.gst1.types.ClockTime baseTime) nothrow
   {
-    GstClock* _cretval;
-    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
-    const(char)* _remoteAddress = remoteAddress.toCString!(No.Malloc, No.Nullable);
-    _cretval = gst_net_client_clock_new(_name, _remoteAddress, remotePort, baseTime);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GstClock* _cretval;
+      const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+      const(char)* _remoteAddress = remoteAddress.toCString!(No.Malloc, No.Nullable);
+      _cretval = gst_net_client_clock_new(_name, _remoteAddress, remotePort, baseTime);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

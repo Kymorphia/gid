@@ -60,9 +60,16 @@ class VideoBufferPool : gid.gst1.buffer_pool.BufferPool
   */
   this() nothrow
   {
-    GstBufferPool* _cretval;
-    _cretval = gst_video_buffer_pool_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GstBufferPool* _cretval;
+      _cretval = gst_video_buffer_pool_new();
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

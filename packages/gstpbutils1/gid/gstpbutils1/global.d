@@ -879,6 +879,7 @@ gid.gstpbutils1.types.InstallPluginsReturn installPluginsAsync(string[] details,
 {
   extern(C) void _funcCallback(GstInstallPluginsReturn result, void* userData) nothrow
   {
+    gidAttachThread();
     ptrThawGC(userData);
     auto _dlg = cast(gid.gstpbutils1.types.InstallPluginsResultFunc*)userData;
 

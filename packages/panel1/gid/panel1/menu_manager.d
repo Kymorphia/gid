@@ -78,9 +78,16 @@ class MenuManager : gid.gobject2.object.ObjectWrap
   /** */
   this() nothrow
   {
-    PanelMenuManager* _cretval;
-    _cretval = panel_menu_manager_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      PanelMenuManager* _cretval;
+      _cretval = panel_menu_manager_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /** */

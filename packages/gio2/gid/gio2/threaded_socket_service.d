@@ -39,6 +39,15 @@ class ThreadedSocketService : gid.gio2.socket_service.SocketService
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -93,9 +102,28 @@ class ThreadedSocketService : gid.gio2.socket_service.SocketService
   */
   this(int maxThreads) nothrow
   {
-    GSocketService* _cretval;
-    _cretval = g_threaded_socket_service_new(maxThreads);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GSocketService* _cretval;
+      _cretval = g_threaded_socket_service_new(maxThreads);
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /** */
+  protected bool vfuncRun(gid.gio2.socket_connection.SocketConnection connection, gid.gobject2.object.ObjectWrap sourceObject)
+  {
+    auto _klass = cast(GThreadedSocketServiceClass*)_vfuncClass;
+    if (!_klass.run)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.run(cast(GThreadedSocketService*)this._cPtr, connection ? cast(GSocketConnection*)connection._cPtr(No.Dup) : null, sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null);
+    return _retval;
   }
 
   /**
@@ -131,6 +159,7 @@ class ThreadedSocketService : gid.gio2.socket_service.SocketService
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -159,6 +188,67 @@ class ThreadedSocketService : gid.gio2.socket_service.SocketService
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("run", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from ThreadedSocketService
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.threaded_socket_service.ThreadedSocketService), T.stringof ~ " is not derived from gid.gio2.threaded_socket_service.ThreadedSocketService");
+
+    gid.gio2.socket_service.SocketService._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRun", true)[0]) == gid.gio2.threaded_socket_service.ThreadedSocketService))
+      _installVfunc(klass, "run");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GThreadedSocketServiceClass*)klass;
+
+    switch (vfunc)
+    {
+      case "run":
+      {
+        static extern(C) gboolean _vfuncRunTramp(GThreadedSocketService* service, GSocketConnection* connection, GObject* sourceObject) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.threaded_socket_service.ThreadedSocketService)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)service);
+          if (!_obj)
+          {
+            auto _klass = cast(GThreadedSocketServiceClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)service);
+            if (_klass.run)
+              return (cast(typeof(&_vfuncRunTramp))_klass.run)(service, connection, sourceObject);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncRun(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.socket_connection.SocketConnection)(cast(void*)connection, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.threaded_socket_service.ThreadedSocketService.vfuncRun");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.run = cast(typeof(_klass.run))&_vfuncRunTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

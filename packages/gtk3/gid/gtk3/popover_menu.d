@@ -149,9 +149,16 @@ class PopoverMenu : gid.gtk3.popover.Popover
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_popover_menu_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_popover_menu_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**

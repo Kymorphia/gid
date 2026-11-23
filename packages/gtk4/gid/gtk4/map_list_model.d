@@ -138,29 +138,37 @@ class MapListModel : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListMod
   */
   this(gid.gio2.list_model.ListModel model = null, gid.gtk4.types.MapListModelMapFunc mapFunc = null) nothrow
   {
-    extern(C) GObject* _mapFuncCallback(GObject* item, void* userData) nothrow
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
     {
-      gid.gobject2.object.ObjectWrap _dretval;
-      auto _dlg = cast(gid.gtk4.types.MapListModelMapFunc*)userData;
-
-      try
-      {
-        _dretval = (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)item, Yes.Take));
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "gid.gtk4.types.MapListModelMapFunc");
-      }
-      auto _retval = _dretval ? cast(GObject*)_dretval._cPtr(Yes.Dup) : null;
-
-      return _retval;
+      this(_newDSubclassGObject(_dSubclassGType, model !is null || mapFunc !is null), Yes.Take);
     }
-    auto _mapFuncCB = mapFunc ? &_mapFuncCallback : null;
-    GtkMapListModel* _cretval;
-    auto _mapFunc = mapFunc ? freezeDelegate(cast(void*)&mapFunc) : null;
-    GDestroyNotify _mapFuncDestroyCB = mapFunc ? &thawDelegate : null;
-    _cretval = gtk_map_list_model_new(model ? cast(GListModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(Yes.Dup) : null, _mapFuncCB, _mapFunc, _mapFuncDestroyCB);
-    this(_cretval, Yes.Take);
+    else
+    {
+      extern(C) GObject* _mapFuncCallback(GObject* item, void* userData) nothrow
+      {
+        gidAttachThread();
+        gid.gobject2.object.ObjectWrap _dretval;
+        auto _dlg = cast(gid.gtk4.types.MapListModelMapFunc*)userData;
+
+        try
+        {
+          _dretval = (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)item, Yes.Take));
+        }
+        catch (Exception e)
+        {
+          gidInvokeCallbackExceptionHandler(e, "gid.gtk4.types.MapListModelMapFunc");
+        }
+        auto _retval = _dretval ? cast(GObject*)_dretval._cPtr(Yes.Dup) : null;
+
+        return _retval;
+      }
+      auto _mapFuncCB = mapFunc ? &_mapFuncCallback : null;
+      GtkMapListModel* _cretval;
+      auto _mapFunc = mapFunc ? freezeDelegate(cast(void*)&mapFunc) : null;
+      GDestroyNotify _mapFuncDestroyCB = mapFunc ? &thawDelegate : null;
+      _cretval = gtk_map_list_model_new(model ? cast(GListModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(Yes.Dup) : null, _mapFuncCB, _mapFunc, _mapFuncDestroyCB);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -206,6 +214,7 @@ class MapListModel : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListMod
   {
     extern(C) GObject* _mapFuncCallback(GObject* item, void* userData) nothrow
     {
+      gidAttachThread();
       gid.gobject2.object.ObjectWrap _dretval;
       auto _dlg = cast(gid.gtk4.types.MapListModelMapFunc*)userData;
 

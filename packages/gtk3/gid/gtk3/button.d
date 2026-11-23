@@ -18,6 +18,7 @@ import gid.gtk3.buildable;
 import gid.gtk3.buildable_mixin;
 import gid.gtk3.c.functions;
 import gid.gtk3.c.types;
+import gid.gtk3.container;
 import gid.gtk3.types;
 import gid.gtk3.widget;
 
@@ -269,9 +270,16 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_button_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_button_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -360,6 +368,112 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
     _cretval = gtk_button_new_with_mnemonic(_label);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+
+  /**
+      Signal that causes the button to animate press then
+         release. Applications should never connect to this signal, but use
+         the clicked signal.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncActivate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncActivate()
+  {
+    auto _klass = cast(GtkButtonClass*)_vfuncClass;
+    if (!_klass.activate)
+      return;
+
+    _klass.activate(cast(GtkButton*)this._cPtr);
+  }
+
+  /**
+      Emits a #GtkButton::clicked signal to the given #GtkButton.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncClicked` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncClicked()
+  {
+    auto _klass = cast(GtkButtonClass*)_vfuncClass;
+    if (!_klass.clicked)
+      return;
+
+    _klass.clicked(cast(GtkButton*)this._cPtr);
+  }
+
+  /**
+      Emits a #GtkButton::enter signal to the given #GtkButton.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncEnter` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use the #GtkWidget::enter-notify-event signal.
+  */
+  protected void vfuncEnter()
+  {
+    auto _klass = cast(GtkButtonClass*)_vfuncClass;
+    if (!_klass.enter)
+      return;
+
+    _klass.enter(cast(GtkButton*)this._cPtr);
+  }
+
+  /**
+      Emits a #GtkButton::leave signal to the given #GtkButton.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncLeave` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use the #GtkWidget::leave-notify-event signal.
+  */
+  protected void vfuncLeave()
+  {
+    auto _klass = cast(GtkButtonClass*)_vfuncClass;
+    if (!_klass.leave)
+      return;
+
+    _klass.leave(cast(GtkButton*)this._cPtr);
+  }
+
+  /**
+      Emits a #GtkButton::pressed signal to the given #GtkButton.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPressed` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use the #GtkWidget::button-press-event signal.
+  */
+  protected void vfuncPressed()
+  {
+    auto _klass = cast(GtkButtonClass*)_vfuncClass;
+    if (!_klass.pressed)
+      return;
+
+    _klass.pressed(cast(GtkButton*)this._cPtr);
+  }
+
+  /**
+      Emits a #GtkButton::released signal to the given #GtkButton.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncReleased` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use the #GtkWidget::button-release-event signal.
+  */
+  protected void vfuncReleased()
+  {
+    auto _klass = cast(GtkButtonClass*)_vfuncClass;
+    if (!_klass.released)
+      return;
+
+    _klass.released(cast(GtkButton*)this._cPtr);
   }
 
   /**
@@ -704,6 +818,7 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -748,6 +863,7 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -794,6 +910,7 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -840,6 +957,7 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -886,6 +1004,7 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -932,6 +1051,7 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -951,6 +1071,212 @@ class Button : gid.gtk3.bin.Bin, gid.gtk3.actionable.Actionable, gid.gtk3.activa
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("released", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Button
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.button.Button), T.stringof ~ " is not derived from gid.gtk3.button.Button");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivate", true)[0]) == gid.gtk3.button.Button))
+      _installVfunc(klass, "activate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncClicked", true)[0]) == gid.gtk3.button.Button))
+      _installVfunc(klass, "clicked");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEnter", true)[0]) == gid.gtk3.button.Button))
+      _installVfunc(klass, "enter");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncLeave", true)[0]) == gid.gtk3.button.Button))
+      _installVfunc(klass, "leave");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPressed", true)[0]) == gid.gtk3.button.Button))
+      _installVfunc(klass, "pressed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncReleased", true)[0]) == gid.gtk3.button.Button))
+      _installVfunc(klass, "released");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkButtonClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate":
+      {
+        static extern(C) void _vfuncActivateTramp(GtkButton* button) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.button.Button)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);
+            if (_klass.activate)
+              return (cast(typeof(&_vfuncActivateTramp))_klass.activate)(button);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncActivate();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.button.Button.vfuncActivate");
+          }
+        }
+
+        _klass.activate = cast(typeof(_klass.activate))&_vfuncActivateTramp;
+        break;
+      }
+      case "clicked":
+      {
+        static extern(C) void _vfuncClickedTramp(GtkButton* button) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.button.Button)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);
+            if (_klass.clicked)
+              return (cast(typeof(&_vfuncClickedTramp))_klass.clicked)(button);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncClicked();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.button.Button.vfuncClicked");
+          }
+        }
+
+        _klass.clicked = cast(typeof(_klass.clicked))&_vfuncClickedTramp;
+        break;
+      }
+      case "enter":
+      {
+        static extern(C) void _vfuncEnterTramp(GtkButton* button) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.button.Button)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);
+            if (_klass.enter)
+              return (cast(typeof(&_vfuncEnterTramp))_klass.enter)(button);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncEnter();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.button.Button.vfuncEnter");
+          }
+        }
+
+        _klass.enter = cast(typeof(_klass.enter))&_vfuncEnterTramp;
+        break;
+      }
+      case "leave":
+      {
+        static extern(C) void _vfuncLeaveTramp(GtkButton* button) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.button.Button)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);
+            if (_klass.leave)
+              return (cast(typeof(&_vfuncLeaveTramp))_klass.leave)(button);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncLeave();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.button.Button.vfuncLeave");
+          }
+        }
+
+        _klass.leave = cast(typeof(_klass.leave))&_vfuncLeaveTramp;
+        break;
+      }
+      case "pressed":
+      {
+        static extern(C) void _vfuncPressedTramp(GtkButton* button) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.button.Button)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);
+            if (_klass.pressed)
+              return (cast(typeof(&_vfuncPressedTramp))_klass.pressed)(button);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPressed();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.button.Button.vfuncPressed");
+          }
+        }
+
+        _klass.pressed = cast(typeof(_klass.pressed))&_vfuncPressedTramp;
+        break;
+      }
+      case "released":
+      {
+        static extern(C) void _vfuncReleasedTramp(GtkButton* button) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.button.Button)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);
+            if (_klass.released)
+              return (cast(typeof(&_vfuncReleasedTramp))_klass.released)(button);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncReleased();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.button.Button.vfuncReleased");
+          }
+        }
+
+        _klass.released = cast(typeof(_klass.released))&_vfuncReleasedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

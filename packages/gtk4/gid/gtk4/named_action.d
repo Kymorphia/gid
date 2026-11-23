@@ -25,6 +25,15 @@ class NamedAction : gid.gtk4.shortcut_action.ShortcutAction
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -83,10 +92,17 @@ class NamedAction : gid.gtk4.shortcut_action.ShortcutAction
   */
   this(string name) nothrow
   {
-    GtkShortcutAction* _cretval;
-    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
-    _cretval = gtk_named_action_new(_name);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkShortcutAction* _cretval;
+      const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+      _cretval = gtk_named_action_new(_name);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

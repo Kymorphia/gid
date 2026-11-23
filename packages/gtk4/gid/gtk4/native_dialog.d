@@ -39,6 +39,15 @@ class NativeDialog : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -147,6 +156,69 @@ class NativeDialog : gid.gobject2.object.ObjectWrap
   @property void visible(bool propval) nothrow
   {
     gid.gobject2.object.ObjectWrap.setProperty!(bool)("visible", propval);
+  }
+
+  /**
+      Hides the dialog if it is visible, aborting any interaction.
+      
+      Once this is called the [gid.gtk4.native_dialog.NativeDialog.response] signal
+      will *not* be emitted until after the next call to
+      [gid.gtk4.native_dialog.NativeDialog.show].
+      
+      If the dialog is not visible this does nothing.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncHide` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncHide()
+  {
+    auto _klass = cast(GtkNativeDialogClass*)_vfuncClass;
+    if (!_klass.hide)
+      return;
+
+    _klass.hide(cast(GtkNativeDialog*)this._cPtr);
+  }
+
+  /**
+      class handler for the `GtkNativeDialog::response` signal
+  
+      Params:
+        responseId = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncResponse` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncResponse(int responseId)
+  {
+    auto _klass = cast(GtkNativeDialogClass*)_vfuncClass;
+    if (!_klass.response)
+      return;
+
+    _klass.response(cast(GtkNativeDialog*)this._cPtr, responseId);
+  }
+
+  /**
+      Shows the dialog on the display.
+      
+      When the user accepts the state of the dialog the dialog will
+      be automatically hidden and the [gid.gtk4.native_dialog.NativeDialog.response]
+      signal will be emitted.
+      
+      Multiple calls while the dialog is visible will be ignored.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncShow` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncShow()
+  {
+    auto _klass = cast(GtkNativeDialogClass*)_vfuncClass;
+    if (!_klass.show)
+      return;
+
+    _klass.show(cast(GtkNativeDialog*)this._cPtr);
   }
 
   /**
@@ -321,6 +393,7 @@ class NativeDialog : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -343,6 +416,122 @@ class NativeDialog : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("response", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from NativeDialog
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.native_dialog.NativeDialog), T.stringof ~ " is not derived from gid.gtk4.native_dialog.NativeDialog");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHide", true)[0]) == gid.gtk4.native_dialog.NativeDialog))
+      _installVfunc(klass, "hide");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncResponse", true)[0]) == gid.gtk4.native_dialog.NativeDialog))
+      _installVfunc(klass, "response");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncShow", true)[0]) == gid.gtk4.native_dialog.NativeDialog))
+      _installVfunc(klass, "show");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkNativeDialogClass*)klass;
+
+    switch (vfunc)
+    {
+      case "hide":
+      {
+        static extern(C) void _vfuncHideTramp(GtkNativeDialog* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.native_dialog.NativeDialog)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkNativeDialogClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.hide)
+              return (cast(typeof(&_vfuncHideTramp))_klass.hide)(self);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncHide();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.native_dialog.NativeDialog.vfuncHide");
+          }
+        }
+
+        _klass.hide = cast(typeof(_klass.hide))&_vfuncHideTramp;
+        break;
+      }
+      case "response":
+      {
+        static extern(C) void _vfuncResponseTramp(GtkNativeDialog* self, int responseId) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.native_dialog.NativeDialog)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkNativeDialogClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.response)
+              return (cast(typeof(&_vfuncResponseTramp))_klass.response)(self, responseId);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncResponse(responseId);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.native_dialog.NativeDialog.vfuncResponse");
+          }
+        }
+
+        _klass.response = cast(typeof(_klass.response))&_vfuncResponseTramp;
+        break;
+      }
+      case "show":
+      {
+        static extern(C) void _vfuncShowTramp(GtkNativeDialog* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.native_dialog.NativeDialog)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkNativeDialogClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.show)
+              return (cast(typeof(&_vfuncShowTramp))_klass.show)(self);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncShow();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.native_dialog.NativeDialog.vfuncShow");
+          }
+        }
+
+        _klass.show = cast(typeof(_klass.show))&_vfuncShowTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

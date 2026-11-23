@@ -279,6 +279,7 @@ class Harness : StructWrap!(GstHarness)
   {
     extern(C) GstPadProbeReturn _callbackCallback(GstPad* pad, GstPadProbeInfo* info, void* userData) nothrow
     {
+      gidAttachThread();
       gid.gst1.types.PadProbeReturn _dretval;
       auto _dlg = cast(gid.gst1.types.PadProbeCallback*)userData;
       auto _info = info ? new gid.gst1.pad_probe_info.PadProbeInfo(cast(void*)info, null) : null;

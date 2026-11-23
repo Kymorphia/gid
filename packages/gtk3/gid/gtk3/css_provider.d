@@ -91,9 +91,16 @@ class CssProvider : gid.gobject2.object.ObjectWrap, gid.gtk3.style_provider.Styl
   */
   this() nothrow
   {
-    GtkCssProvider* _cretval;
-    _cretval = gtk_css_provider_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkCssProvider* _cretval;
+      _cretval = gtk_css_provider_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -130,6 +137,16 @@ class CssProvider : gid.gobject2.object.ObjectWrap, gid.gtk3.style_provider.Styl
     _cretval = gtk_css_provider_get_named(_name, _variant);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.css_provider.CssProvider)(cast(GtkCssProvider*)_cretval, No.Take);
     return _retval;
+  }
+
+  /** */
+  protected void vfuncParsingError(gid.gtk3.css_section.CssSection section, gid.glib2.error.ErrorWrap error)
+  {
+    auto _klass = cast(GtkCssProviderClass*)_vfuncClass;
+    if (!_klass.parsingError)
+      return;
+
+    _klass.parsingError(cast(GtkCssProvider*)this._cPtr, section ? cast(GtkCssSection*)section._cPtr(No.Dup) : null, error ? cast(const(GError)*)error._cPtr(No.Dup) : null);
   }
 
   /**
@@ -277,6 +294,7 @@ class CssProvider : gid.gobject2.object.ObjectWrap, gid.gtk3.style_provider.Styl
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -302,6 +320,67 @@ class CssProvider : gid.gobject2.object.ObjectWrap, gid.gtk3.style_provider.Styl
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("parsing-error", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from CssProvider
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.css_provider.CssProvider), T.stringof ~ " is not derived from gid.gtk3.css_provider.CssProvider");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncParsingError", true)[0]) == gid.gtk3.css_provider.CssProvider))
+      _installVfunc(klass, "parsing_error");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkCssProviderClass*)klass;
+
+    switch (vfunc)
+    {
+      case "parsing_error":
+      {
+        static extern(C) void _vfuncParsingErrorTramp(GtkCssProvider* provider, GtkCssSection* section, const(GError)* error) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.css_provider.CssProvider)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)provider);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCssProviderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)provider);
+            if (_klass.parsingError)
+              return (cast(typeof(&_vfuncParsingErrorTramp))_klass.parsingError)(provider, section, error);
+            return;
+          }
+
+          auto _section = section ? new gid.gtk3.css_section.CssSection(cast(void*)section, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncParsingError(_section, error ? new gid.glib2.error.ErrorWrap(cast(void*)error, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.css_provider.CssProvider.vfuncParsingError");
+          }
+          if (_section)
+            _section._cUnborrow;
+
+        }
+
+        _klass.parsingError = cast(typeof(_klass.parsingError))&_vfuncParsingErrorTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

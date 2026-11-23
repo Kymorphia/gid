@@ -184,10 +184,17 @@ class Pipeline : gid.gst1.bin.Bin
   */
   this(string name = null) nothrow
   {
-    GstElement* _cretval;
-    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gst_pipeline_new(_name);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, name !is null), Yes.Take);
+    }
+    else
+    {
+      GstElement* _cretval;
+      const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gst_pipeline_new(_name);
+      this(_cretval, No.Take);
+    }
   }
 
   /**

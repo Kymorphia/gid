@@ -22,6 +22,15 @@ class TlsPassword : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -123,10 +132,68 @@ class TlsPassword : gid.gobject2.object.ObjectWrap
   */
   this(gid.gio2.types.TlsPasswordFlags flags, string description) nothrow
   {
-    GTlsPassword* _cretval;
-    const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
-    _cretval = g_tls_password_new(flags, _description);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GTlsPassword* _cretval;
+      const(char)* _description = description.toCString!(No.Malloc, No.Nullable);
+      _cretval = g_tls_password_new(flags, _description);
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /**
+      virtual method for [gid.gio2.tls_password.TlsPassword.getWarning] if no
+       value has been set using [gid.gio2.tls_password.TlsPassword.setWarning]
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetDefaultWarning` to chain up from an override.
+      Overriding it from D is not supported (callback string return value with transfer none is not supported).
+  */
+  protected string vfuncGetDefaultWarning()
+  {
+    auto _klass = cast(GTlsPasswordClass*)_vfuncClass;
+    if (!_klass.getDefaultWarning)
+      return typeof(return).init;
+
+    const(char)* _cretval;
+    _cretval = _klass.getDefaultWarning(cast(GTlsPassword*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(No.Free);
+    return _retval;
+  }
+
+  /**
+      Get the password value. If length is not null then it will be
+      filled in with the length of the password value. (Note that the
+      password value is not nul-terminated, so you can only pass null
+      for length in contexts where you know the password will have a
+      certain fixed length.)
+      Returns: The password value (owned by the password object).
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetValue` to chain up from an override.
+      Overriding it from D is not supported (callback return container type 'Array' ownership 'None' is not supported).
+  */
+  protected ubyte[] vfuncGetValue()
+  {
+    auto _klass = cast(GTlsPasswordClass*)_vfuncClass;
+    if (!_klass.getValue)
+      return typeof(return).init;
+
+    const(ubyte)* _cretval;
+    size_t _cretlength;
+    _cretval = _klass.getValue(cast(GTlsPassword*)this._cPtr, &_cretlength);
+    ubyte[] _retval;
+
+    if (_cretval)
+    {
+      _retval = cast(ubyte[])_cretval[0 .. _cretlength].dup;
+    }
+    return _retval;
   }
 
   /**
@@ -246,6 +313,38 @@ class TlsPassword : gid.gobject2.object.ObjectWrap
   {
     const(char)* _warning = warning.toCString!(No.Malloc, No.Nullable);
     g_tls_password_set_warning(cast(GTlsPassword*)this._cPtr, _warning);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from TlsPassword
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.tls_password.TlsPassword), T.stringof ~ " is not derived from gid.gio2.tls_password.TlsPassword");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetDefaultWarning", true)[0]) == gid.gio2.tls_password.TlsPassword))
+      static assert(0, "Overriding gid.gio2.tls_password.TlsPassword.vfuncGetDefaultWarning is not supported: callback string return value with transfer none is not supported");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetValue", true)[0]) == gid.gio2.tls_password.TlsPassword))
+      static assert(0, "Overriding gid.gio2.tls_password.TlsPassword.vfuncGetValue is not supported: callback return container type 'Array' ownership 'None' is not supported");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GTlsPasswordClass*)klass;
+
+    switch (vfunc)
+    {
+      default:
+      break;
+    }
   }
 }
 

@@ -288,10 +288,17 @@ class ColumnViewColumn : gid.gobject2.object.ObjectWrap
   */
   this(string title = null, gid.gtk4.list_item_factory.ListItemFactory factory = null) nothrow
   {
-    GtkColumnViewColumn* _cretval;
-    const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gtk_column_view_column_new(_title, factory ? cast(GtkListItemFactory*)factory._cPtr(Yes.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, title !is null || factory !is null), Yes.Take);
+    }
+    else
+    {
+      GtkColumnViewColumn* _cretval;
+      const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gtk_column_view_column_new(_title, factory ? cast(GtkListItemFactory*)factory._cPtr(Yes.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

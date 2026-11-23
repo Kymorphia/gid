@@ -26,6 +26,15 @@ class AuthDomainDigest : gid.soup3.auth_domain.AuthDomain
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -133,6 +142,7 @@ class AuthDomainDigest : gid.soup3.auth_domain.AuthDomain
   {
     extern(C) char* _callbackCallback(SoupAuthDomain* domain, SoupServerMessage* msg, const(char)* username, void* userData) nothrow
     {
+      gidAttachThread();
       string _dretval;
       auto _dlg = cast(gid.soup3.types.AuthDomainDigestAuthCallback*)userData;
       string _username = username.fromCString!(No.Free);

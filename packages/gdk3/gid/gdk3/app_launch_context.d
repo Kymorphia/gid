@@ -92,9 +92,16 @@ class AppLaunchContext : gid.gio2.app_launch_context.AppLaunchContext
   */
   this() nothrow
   {
-    GdkAppLaunchContext* _cretval;
-    _cretval = gdk_app_launch_context_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GdkAppLaunchContext* _cretval;
+      _cretval = gdk_app_launch_context_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

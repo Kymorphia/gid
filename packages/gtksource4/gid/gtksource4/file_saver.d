@@ -27,6 +27,15 @@ class FileSaver : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -181,9 +190,16 @@ class FileSaver : gid.gobject2.object.ObjectWrap
   */
   this(gid.gtksource4.buffer.Buffer buffer, gid.gtksource4.file.File file) nothrow
   {
-    GtkSourceFileSaver* _cretval;
-    _cretval = gtk_source_file_saver_new(buffer ? cast(GtkSourceBuffer*)buffer._cPtr(No.Dup) : null, file ? cast(GtkSourceFile*)file._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkSourceFileSaver* _cretval;
+      _cretval = gtk_source_file_saver_new(buffer ? cast(GtkSourceBuffer*)buffer._cPtr(No.Dup) : null, file ? cast(GtkSourceFile*)file._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -289,6 +305,7 @@ class FileSaver : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _progressCallbackCallback(long currentNumBytes, long totalNumBytes, void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gio2.types.FileProgressCallback*)data;
 
       try
@@ -303,6 +320,7 @@ class FileSaver : gid.gobject2.object.ObjectWrap
     auto _progressCallbackCB = progressCallback ? &_progressCallbackCallback : null;
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 

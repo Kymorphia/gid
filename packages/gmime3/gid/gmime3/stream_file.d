@@ -69,9 +69,16 @@ class StreamFile : gid.gmime3.stream.Stream
   */
   this(void* fp = null) nothrow
   {
-    GMimeStream* _cretval;
-    _cretval = g_mime_stream_file_new(fp);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, fp !is null), Yes.Take);
+    }
+    else
+    {
+      GMimeStream* _cretval;
+      _cretval = g_mime_stream_file_new(fp);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

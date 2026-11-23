@@ -150,9 +150,16 @@ class FileFilter : gid.gtk4.filter.Filter, gid.gtk4.buildable.Buildable
   */
   this() nothrow
   {
-    GtkFileFilter* _cretval;
-    _cretval = gtk_file_filter_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkFileFilter* _cretval;
+      _cretval = gtk_file_filter_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

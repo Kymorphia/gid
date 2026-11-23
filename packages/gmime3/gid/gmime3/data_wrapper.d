@@ -62,9 +62,16 @@ class DataWrapper : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GMimeDataWrapper* _cretval;
-    _cretval = g_mime_data_wrapper_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GMimeDataWrapper* _cretval;
+      _cretval = g_mime_data_wrapper_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -82,6 +89,28 @@ class DataWrapper : gid.gobject2.object.ObjectWrap
     GMimeDataWrapper* _cretval;
     _cretval = g_mime_data_wrapper_new_with_stream(stream ? cast(GMimeStream*)stream._cPtr(No.Dup) : null, encoding);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gmime3.data_wrapper.DataWrapper)(cast(GMimeDataWrapper*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Writes the raw (decoded) data to the output stream.
+  
+      Params:
+        stream = output stream
+      Returns: the number of bytes written or %-1 on failure.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncWriteToStream` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected ptrdiff_t vfuncWriteToStream(gid.gmime3.stream.Stream stream)
+  {
+    auto _klass = cast(GMimeDataWrapperClass*)_vfuncClass;
+    if (!_klass.writeToStream)
+      return typeof(return).init;
+
+    ptrdiff_t _retval;
+    _retval = _klass.writeToStream(cast(GMimeDataWrapper*)this._cPtr, stream ? cast(GMimeStream*)stream._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -148,6 +177,65 @@ class DataWrapper : gid.gobject2.object.ObjectWrap
     ptrdiff_t _retval;
     _retval = g_mime_data_wrapper_write_to_stream(cast(GMimeDataWrapper*)this._cPtr, stream ? cast(GMimeStream*)stream._cPtr(No.Dup) : null);
     return _retval;
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from DataWrapper
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gmime3.data_wrapper.DataWrapper), T.stringof ~ " is not derived from gid.gmime3.data_wrapper.DataWrapper");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncWriteToStream", true)[0]) == gid.gmime3.data_wrapper.DataWrapper))
+      _installVfunc(klass, "write_to_stream");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GMimeDataWrapperClass*)klass;
+
+    switch (vfunc)
+    {
+      case "write_to_stream":
+      {
+        static extern(C) ptrdiff_t _vfuncWriteToStreamTramp(GMimeDataWrapper* wrapper, GMimeStream* stream) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gmime3.data_wrapper.DataWrapper)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)wrapper);
+          if (!_obj)
+          {
+            auto _klass = cast(GMimeDataWrapperClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)wrapper);
+            if (_klass.writeToStream)
+              return (cast(typeof(&_vfuncWriteToStreamTramp))_klass.writeToStream)(wrapper, stream);
+            return typeof(return).init;
+          }
+
+          ptrdiff_t _retval;
+
+          try
+          {
+            _retval = _obj.vfuncWriteToStream(gid.gobject2.object.ObjectWrap._getDObject!(gid.gmime3.stream.Stream)(cast(void*)stream, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gmime3.data_wrapper.DataWrapper.vfuncWriteToStream");
+          }
+          return _retval;
+        }
+
+        _klass.writeToStream = cast(typeof(_klass.writeToStream))&_vfuncWriteToStreamTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

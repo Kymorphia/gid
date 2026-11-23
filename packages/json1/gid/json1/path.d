@@ -192,9 +192,16 @@ class Path : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    JsonPath* _cretval;
-    _cretval = json_path_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      JsonPath* _cretval;
+      _cretval = json_path_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

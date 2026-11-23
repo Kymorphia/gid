@@ -29,6 +29,15 @@ class GLTexture : gid.gdk4.texture.Texture
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -85,25 +94,33 @@ class GLTexture : gid.gdk4.texture.Texture
   */
   this(gid.gdk4.glcontext.GLContext context, uint id, int width, int height, gid.glib2.types.DestroyNotify destroy) nothrow
   {
-    extern(C) void _destroyCallback(void* data) nothrow
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
     {
-      ptrThawGC(data);
-      auto _dlg = cast(gid.glib2.types.DestroyNotify*)data;
-
-      try
-      {
-        (*_dlg)();
-      }
-      catch (Exception e)
-      {
-        gidInvokeCallbackExceptionHandler(e, "gid.glib2.types.DestroyNotify");
-      }
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
     }
-    auto _destroyCB = destroy ? &_destroyCallback : null;
-    GdkTexture* _cretval;
-    auto _destroy = destroy ? freezeDelegate(cast(void*)&destroy) : null;
-    _cretval = gdk_gl_texture_new(context ? cast(GdkGLContext*)context._cPtr(No.Dup) : null, id, width, height, _destroyCB, _destroy);
-    this(_cretval, Yes.Take);
+    else
+    {
+      extern(C) void _destroyCallback(void* data) nothrow
+      {
+        gidAttachThread();
+        ptrThawGC(data);
+        auto _dlg = cast(gid.glib2.types.DestroyNotify*)data;
+
+        try
+        {
+          (*_dlg)();
+        }
+        catch (Exception e)
+        {
+          gidInvokeCallbackExceptionHandler(e, "gid.glib2.types.DestroyNotify");
+        }
+      }
+      auto _destroyCB = destroy ? &_destroyCallback : null;
+      GdkTexture* _cretval;
+      auto _destroy = destroy ? freezeDelegate(cast(void*)&destroy) : null;
+      _cretval = gdk_gl_texture_new(context ? cast(GdkGLContext*)context._cPtr(No.Dup) : null, id, width, height, _destroyCB, _destroy);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

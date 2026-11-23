@@ -30,6 +30,15 @@ class DBusObjectSkeleton : gid.gobject2.object.ObjectWrap, gid.gio2.dbus_object.
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -94,10 +103,40 @@ class DBusObjectSkeleton : gid.gobject2.object.ObjectWrap, gid.gio2.dbus_object.
   */
   this(string objectPath) nothrow
   {
-    GDBusObjectSkeleton* _cretval;
-    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
-    _cretval = g_dbus_object_skeleton_new(_objectPath);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GDBusObjectSkeleton* _cretval;
+      const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
+      _cretval = g_dbus_object_skeleton_new(_objectPath);
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /**
+      Signal class handler for the #GDBusObjectSkeleton::authorize-method signal.
+  
+      Params:
+        interface_ = 
+        invocation = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncAuthorizeMethod` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncAuthorizeMethod(gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton interface_, gid.gio2.dbus_method_invocation.DBusMethodInvocation invocation)
+  {
+    auto _klass = cast(GDBusObjectSkeletonClass*)_vfuncClass;
+    if (!_klass.authorizeMethod)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.authorizeMethod(cast(GDBusObjectSkeleton*)this._cPtr, interface_ ? cast(GDBusInterfaceSkeleton*)interface_._cPtr(No.Dup) : null, invocation ? cast(GDBusMethodInvocation*)invocation._cPtr(No.Dup) : null);
+    return _retval;
   }
 
   /**
@@ -202,6 +241,7 @@ class DBusObjectSkeleton : gid.gobject2.object.ObjectWrap, gid.gio2.dbus_object.
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -230,6 +270,67 @@ class DBusObjectSkeleton : gid.gobject2.object.ObjectWrap, gid.gio2.dbus_object.
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("authorize-method", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from DBusObjectSkeleton
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.dbus_object_skeleton.DBusObjectSkeleton), T.stringof ~ " is not derived from gid.gio2.dbus_object_skeleton.DBusObjectSkeleton");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAuthorizeMethod", true)[0]) == gid.gio2.dbus_object_skeleton.DBusObjectSkeleton))
+      _installVfunc(klass, "authorize_method");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GDBusObjectSkeletonClass*)klass;
+
+    switch (vfunc)
+    {
+      case "authorize_method":
+      {
+        static extern(C) gboolean _vfuncAuthorizeMethodTramp(GDBusObjectSkeleton* object, GDBusInterfaceSkeleton* interface_, GDBusMethodInvocation* invocation) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.dbus_object_skeleton.DBusObjectSkeleton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          if (!_obj)
+          {
+            auto _klass = cast(GDBusObjectSkeletonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);
+            if (_klass.authorizeMethod)
+              return (cast(typeof(&_vfuncAuthorizeMethodTramp))_klass.authorizeMethod)(object, interface_, invocation);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncAuthorizeMethod(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.dbus_interface_skeleton.DBusInterfaceSkeleton)(cast(void*)interface_, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.dbus_method_invocation.DBusMethodInvocation)(cast(void*)invocation, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.dbus_object_skeleton.DBusObjectSkeleton.vfuncAuthorizeMethod");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.authorizeMethod = cast(typeof(_klass.authorizeMethod))&_vfuncAuthorizeMethodTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

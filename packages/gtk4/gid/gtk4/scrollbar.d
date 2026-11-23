@@ -77,6 +77,15 @@ class Scrollbar : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRa
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -144,9 +153,16 @@ class Scrollbar : gid.gtk4.widget.Widget, gid.gtk4.accessible_range.AccessibleRa
   */
   this(gid.gtk4.types.Orientation orientation, gid.gtk4.adjustment.Adjustment adjustment = null) nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_scrollbar_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_scrollbar_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
+      this(_cretval, No.Take);
+    }
   }
 
   /**

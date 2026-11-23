@@ -37,6 +37,15 @@ interface Buildable : GidWrap
     return cast(void function())gtk_buildable_get_type != &gidSymbolNotFound ? gtk_buildable_get_type() : cast(GType)0;
   }
 
+
+
+
+
+
+
+
+
+
   /**
       Adds a child to buildable. type is an optional string
       describing how the child should be added.

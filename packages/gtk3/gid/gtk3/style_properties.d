@@ -84,9 +84,16 @@ class StyleProperties : gid.gobject2.object.ObjectWrap, gid.gtk3.style_provider.
   */
   this() nothrow
   {
-    GtkStyleProperties* _cretval;
-    _cretval = gtk_style_properties_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkStyleProperties* _cretval;
+      _cretval = gtk_style_properties_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

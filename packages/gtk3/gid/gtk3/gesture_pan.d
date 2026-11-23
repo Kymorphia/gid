@@ -36,6 +36,15 @@ class GesturePan : gid.gtk3.gesture_drag.GestureDrag
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -99,9 +108,16 @@ class GesturePan : gid.gtk3.gesture_drag.GestureDrag
   */
   this(gid.gtk3.widget.Widget widget, gid.gtk3.types.Orientation orientation) nothrow
   {
-    GtkGesture* _cretval;
-    _cretval = gtk_gesture_pan_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, orientation);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkGesture* _cretval;
+      _cretval = gtk_gesture_pan_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, orientation);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -157,6 +173,7 @@ class GesturePan : gid.gtk3.gesture_drag.GestureDrag
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

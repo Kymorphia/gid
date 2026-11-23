@@ -5,6 +5,8 @@ public import gid.core.basictypes;
 public import gid.gtk3.cell_editable_iface_proxy;
 public import gid.core.utils;
 public import gid.gdk3.event;
+public import gid.gobject2.c.functions;
+public import gid.gobject2.c.types;
 public import gid.gobject2.dclosure;
 public import gid.gobject2.gid_builder;
 public import gid.gobject2.object;
@@ -37,6 +39,73 @@ template CellEditableT()
   @property void editingCanceled(bool propval) nothrow
   {
     gid.gobject2.object.ObjectWrap.setProperty!(bool)("editing-canceled", propval);
+  }
+
+  /**
+      Emits the #GtkCellEditable::editing-done signal.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncEditingDone`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncEditingDone()
+  {
+    auto _klass = cast(GtkCellEditableIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.cell_editable.CellEditable._getGType);
+    if (!_klass || !_klass.editingDone)
+      return;
+
+    _klass.editingDone(cast(GtkCellEditable*)this._cPtr);
+  }
+
+  /**
+      Emits the #GtkCellEditable::remove-widget signal.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncRemoveWidget`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncRemoveWidget()
+  {
+    auto _klass = cast(GtkCellEditableIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.cell_editable.CellEditable._getGType);
+    if (!_klass || !_klass.removeWidget)
+      return;
+
+    _klass.removeWidget(cast(GtkCellEditable*)this._cPtr);
+  }
+
+  /**
+      Begins editing on a cell_editable.
+      
+      The #GtkCellRenderer for the cell creates and returns a #GtkCellEditable from
+      [gid.gtk4.cell_renderer.CellRenderer.startEditing], configured for the #GtkCellRenderer type.
+      
+      [gid.gtk4.cell_editable.CellEditable.startEditing] can then set up cell_editable suitably for
+      editing a cell, e.g. making the Esc key emit #GtkCellEditable::editing-done.
+      
+      Note that the cell_editable is created on-demand for the current edit; its
+      lifetime is temporary and does not persist across other edits and/or cells.
+  
+      Params:
+        event = The #GdkEvent that began the editing process, or
+            null if editing was initiated programmatically (modified in place, changes are seen by the caller)
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncStartEditing`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncStartEditing(gid.gdk3.event.Event event = null)
+  {
+    auto _klass = cast(GtkCellEditableIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.cell_editable.CellEditable._getGType);
+    if (!_klass || !_klass.startEditing)
+      return;
+
+    _klass.startEditing(cast(GtkCellEditable*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
   }
 
   /**
@@ -109,6 +178,7 @@ template CellEditableT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -164,6 +234,7 @@ template CellEditableT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -183,6 +254,124 @@ template CellEditableT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("remove-widget", closure, after);
+  }
+
+  /// True if the D class T overrides any vfunc method of gid.gtk3.cell_editable.CellEditable (DiG)
+  enum bool _ifaceVfuncsOverridden_gid_gtk3_cell_editable_CellEditable(T) = !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncEditingDone", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncRemoveWidget", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncStartEditing", true)[0], gid.gobject2.object.GidIfaceVfunc);
+
+  /**
+      Install the C trampolines of the gid.gtk3.cell_editable.CellEditable vfunc methods which a D class overrides into the interface
+      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      trampoline is a compile error.
+      Params:
+        T = D class
+        iface = Interface structure of the GType registered for T
+  */
+  static void _installIfaceVfuncs_gid_gtk3_cell_editable_CellEditable(T)(void* iface) nothrow
+  {
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncEditingDone", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_cell_editable_CellEditable(iface, "editing_done");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncRemoveWidget", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_cell_editable_CellEditable(iface, "remove_widget");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncStartEditing", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_cell_editable_CellEditable(iface, "start_editing");
+  }
+
+  private static void _installIfaceVfunc_gid_gtk3_cell_editable_CellEditable(void* iface, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkCellEditableIface*)iface;
+
+    switch (vfunc)
+    {
+      case "editing_done":
+      {
+        static extern(C) void _vfuncEditingDoneTramp(GtkCellEditable* cellEditable) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cellEditable);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellEditableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cellEditable), gid.gtk3.cell_editable.CellEditable._getGType);
+            if (_klass && _klass.editingDone)
+              return (cast(typeof(&_vfuncEditingDoneTramp))_klass.editingDone)(cellEditable);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncEditingDone();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_editable.CellEditable.vfuncEditingDone");
+          }
+        }
+
+        _klass.editingDone = cast(typeof(_klass.editingDone))&_vfuncEditingDoneTramp;
+        break;
+      }
+      case "remove_widget":
+      {
+        static extern(C) void _vfuncRemoveWidgetTramp(GtkCellEditable* cellEditable) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cellEditable);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellEditableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cellEditable), gid.gtk3.cell_editable.CellEditable._getGType);
+            if (_klass && _klass.removeWidget)
+              return (cast(typeof(&_vfuncRemoveWidgetTramp))_klass.removeWidget)(cellEditable);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncRemoveWidget();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_editable.CellEditable.vfuncRemoveWidget");
+          }
+        }
+
+        _klass.removeWidget = cast(typeof(_klass.removeWidget))&_vfuncRemoveWidgetTramp;
+        break;
+      }
+      case "start_editing":
+      {
+        static extern(C) void _vfuncStartEditingTramp(GtkCellEditable* cellEditable, GdkEvent* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cellEditable);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellEditableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cellEditable), gid.gtk3.cell_editable.CellEditable._getGType);
+            if (_klass && _klass.startEditing)
+              return (cast(typeof(&_vfuncStartEditingTramp))_klass.startEditing)(cellEditable, event);
+            return;
+          }
+
+          auto _event = event ? new gid.gdk3.event.Event(cast(void*)event, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncStartEditing(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_editable.CellEditable.vfuncStartEditing");
+          }
+          if (_event)
+            _event._cUnborrow;
+
+        }
+
+        _klass.startEditing = cast(typeof(_klass.startEditing))&_vfuncStartEditingTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

@@ -37,6 +37,9 @@ interface BuilderScope : GidWrap
     import gid.core.loader : gidSymbolNotFound;
     return cast(void function())gtk_builder_scope_get_type != &gidSymbolNotFound ? gtk_builder_scope_get_type() : cast(GType)0;
   }
+
+
+
 }
 
 /// Fluent builder implementation template for [gid.gtk4.builder_scope.BuilderScope]

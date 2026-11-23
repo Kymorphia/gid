@@ -5,6 +5,8 @@ public import gid.core.basictypes;
 public import gid.gtk4.color_chooser_iface_proxy;
 public import gid.core.utils;
 public import gid.gdk4.rgba;
+public import gid.gobject2.c.functions;
+public import gid.gobject2.c.types;
 public import gid.gobject2.dclosure;
 public import gid.gobject2.gid_builder;
 public import gid.gobject2.object;
@@ -96,6 +98,110 @@ template ColorChooserT()
   @property void useAlpha(bool propval) nothrow
   {
     setUseAlpha(propval);
+  }
+
+  /**
+      Adds a palette to the color chooser.
+      
+      If orientation is horizontal, the colors are grouped in rows,
+      with colors_per_line colors in each row. If horizontal is false,
+      the colors are grouped in columns instead.
+      
+      The default color palette of [gid.gtk4.color_chooser_widget.ColorChooserWidget] has
+      45 colors, organized in columns of 5 colors (this includes some
+      grays).
+      
+      The layout of the color chooser widget works best when the
+      palettes have 9-10 columns.
+      
+      Calling this function for the first time has the side effect
+      of removing the default color palette from the color chooser.
+      
+      If colors is null, removes all previously added palettes.
+  
+      Params:
+        orientation = [gid.gtk4.types.Orientation.Horizontal] if the palette should
+            be displayed in rows, [gid.gtk4.types.Orientation.Vertical] for columns
+        colorsPerLine = the number of colors to show in each row/column
+        colors = the colors of the palette
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncAddPalette`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use [gid.gtk4.color_dialog.ColorDialog] instead
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncAddPalette(gid.gtk4.types.Orientation orientation, int colorsPerLine, gid.gdk4.rgba.RGBA[] colors = null)
+  {
+    auto _klass = cast(GtkColorChooserInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk4.color_chooser.ColorChooser._getGType);
+    if (!_klass || !_klass.addPalette)
+      return;
+
+    int _nColors;
+    if (colors)
+      _nColors = cast(int)colors.length;
+
+    auto _colors = cast(GdkRGBA*)colors.ptr;
+    _klass.addPalette(cast(GtkColorChooser*)this._cPtr, orientation, colorsPerLine, _nColors, _colors);
+  }
+
+  /** */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncColorActivated(gid.gdk4.rgba.RGBA color)
+  {
+    auto _klass = cast(GtkColorChooserInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk4.color_chooser.ColorChooser._getGType);
+    if (!_klass || !_klass.colorActivated)
+      return;
+
+    _klass.colorActivated(cast(GtkColorChooser*)this._cPtr, cast(const(GdkRGBA)*)&color);
+  }
+
+  /**
+      Gets the currently-selected color.
+  
+      Params:
+        color = a [gid.gdk4.rgba.RGBA] to fill in with the current color
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetRgba`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use [gid.gtk4.color_dialog.ColorDialog] instead
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncGetRgba(out gid.gdk4.rgba.RGBA color)
+  {
+    auto _klass = cast(GtkColorChooserInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk4.color_chooser.ColorChooser._getGType);
+    if (!_klass || !_klass.getRgba)
+      return;
+
+    _klass.getRgba(cast(GtkColorChooser*)this._cPtr, cast(GdkRGBA*)&color);
+  }
+
+  /**
+      Sets the color.
+  
+      Params:
+        color = the new color
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSetRgba`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use [gid.gtk4.color_dialog.ColorDialog] instead
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncSetRgba(gid.gdk4.rgba.RGBA color)
+  {
+    auto _klass = cast(GtkColorChooserInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk4.color_chooser.ColorChooser._getGType);
+    if (!_klass || !_klass.setRgba)
+      return;
+
+    _klass.setRgba(cast(GtkColorChooser*)this._cPtr, cast(const(GdkRGBA)*)&color);
   }
 
   /**
@@ -221,6 +327,7 @@ template ColorChooserT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -243,6 +350,152 @@ template ColorChooserT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("color-activated", closure, after);
+  }
+
+  /// True if the D class T overrides any vfunc method of gid.gtk4.color_chooser.ColorChooser (DiG)
+  enum bool _ifaceVfuncsOverridden_gid_gtk4_color_chooser_ColorChooser(T) = !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncAddPalette", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncColorActivated", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetRgba", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetRgba", true)[0], gid.gobject2.object.GidIfaceVfunc);
+
+  /**
+      Install the C trampolines of the gid.gtk4.color_chooser.ColorChooser vfunc methods which a D class overrides into the interface
+      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      trampoline is a compile error.
+      Params:
+        T = D class
+        iface = Interface structure of the GType registered for T
+  */
+  static void _installIfaceVfuncs_gid_gtk4_color_chooser_ColorChooser(T)(void* iface) nothrow
+  {
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncAddPalette", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk4_color_chooser_ColorChooser(iface, "add_palette");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncColorActivated", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk4_color_chooser_ColorChooser(iface, "color_activated");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetRgba", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk4_color_chooser_ColorChooser(iface, "get_rgba");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetRgba", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk4_color_chooser_ColorChooser(iface, "set_rgba");
+  }
+
+  private static void _installIfaceVfunc_gid_gtk4_color_chooser_ColorChooser(void* iface, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkColorChooserInterface*)iface;
+
+    switch (vfunc)
+    {
+      case "add_palette":
+      {
+        static extern(C) void _vfuncAddPaletteTramp(GtkColorChooser* chooser, GtkOrientation orientation, int colorsPerLine, int nColors, GdkRGBA* colors) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkColorChooserInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk4.color_chooser.ColorChooser._getGType);
+            if (_klass && _klass.addPalette)
+              return (cast(typeof(&_vfuncAddPaletteTramp))_klass.addPalette)(chooser, orientation, colorsPerLine, nColors, colors);
+            return;
+          }
+
+          gid.gdk4.rgba.RGBA[] _colors;
+          _colors.length = nColors;
+          _colors[0 .. nColors] = (cast(gid.gdk4.rgba.RGBA*)colors)[0 .. nColors];
+
+          try
+          {
+            _obj.vfuncAddPalette(orientation, colorsPerLine, _colors);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.color_chooser.ColorChooser.vfuncAddPalette");
+          }
+        }
+
+        _klass.addPalette = cast(typeof(_klass.addPalette))&_vfuncAddPaletteTramp;
+        break;
+      }
+      case "color_activated":
+      {
+        static extern(C) void _vfuncColorActivatedTramp(GtkColorChooser* chooser, const(GdkRGBA)* color) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkColorChooserInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk4.color_chooser.ColorChooser._getGType);
+            if (_klass && _klass.colorActivated)
+              return (cast(typeof(&_vfuncColorActivatedTramp))_klass.colorActivated)(chooser, color);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncColorActivated(*cast(gid.gdk4.rgba.RGBA*)color);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.color_chooser.ColorChooser.vfuncColorActivated");
+          }
+        }
+
+        _klass.colorActivated = cast(typeof(_klass.colorActivated))&_vfuncColorActivatedTramp;
+        break;
+      }
+      case "get_rgba":
+      {
+        static extern(C) void _vfuncGetRgbaTramp(GtkColorChooser* chooser, GdkRGBA* color) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkColorChooserInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk4.color_chooser.ColorChooser._getGType);
+            if (_klass && _klass.getRgba)
+              return (cast(typeof(&_vfuncGetRgbaTramp))_klass.getRgba)(chooser, color);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncGetRgba(*cast(gid.gdk4.rgba.RGBA*)color);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.color_chooser.ColorChooser.vfuncGetRgba");
+          }
+        }
+
+        _klass.getRgba = cast(typeof(_klass.getRgba))&_vfuncGetRgbaTramp;
+        break;
+      }
+      case "set_rgba":
+      {
+        static extern(C) void _vfuncSetRgbaTramp(GtkColorChooser* chooser, const(GdkRGBA)* color) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkColorChooserInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk4.color_chooser.ColorChooser._getGType);
+            if (_klass && _klass.setRgba)
+              return (cast(typeof(&_vfuncSetRgbaTramp))_klass.setRgba)(chooser, color);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSetRgba(*cast(gid.gdk4.rgba.RGBA*)color);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.color_chooser.ColorChooser.vfuncSetRgba");
+          }
+        }
+
+        _klass.setRgba = cast(typeof(_klass.setRgba))&_vfuncSetRgbaTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

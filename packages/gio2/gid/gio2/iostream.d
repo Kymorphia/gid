@@ -73,6 +73,15 @@ class IOStream : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -149,6 +158,139 @@ class IOStream : gid.gobject2.object.ObjectWrap
     _retval = cast(bool)g_io_stream_splice_finish(result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Requests an asynchronous close of the stream, releasing resources
+      related to it. When the operation is finished callback will be
+      called. You can then call [gid.gio2.iostream.IOStream.closeFinish] to get
+      the result of the operation.
+      
+      For behaviour details see [gid.gio2.iostream.IOStream.close].
+      
+      The asynchronous methods have a default fallback that uses threads
+      to implement asynchronicity, so they are optional for inheriting
+      classes. However, if you override one you must override all.
+  
+      Params:
+        ioPriority = the io priority of the request
+        cancellable = optional cancellable object
+        callback = a #GAsyncReadyCallback
+            to call when the request is satisfied
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCloseAsync` to chain up from an override.
+      Overriding it from D is not supported (parameter 'callback' of kind 'Callback' is not supported).
+  */
+  protected void vfuncCloseAsync(int ioPriority, gid.gio2.cancellable.Cancellable cancellable = null, gid.gio2.types.AsyncReadyCallback callback = null)
+  {
+    auto _klass = cast(GIOStreamClass*)_vfuncClass;
+    if (!_klass.closeAsync)
+      return;
+
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
+    {
+      gidAttachThread();
+      ptrThawGC(data);
+      auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
+
+      try
+      {
+        (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.gobject2.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)res, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gio2.types.AsyncReadyCallback");
+      }
+    }
+    auto _callbackCB = callback ? &_callbackCallback : null;
+    auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
+    _klass.closeAsync(cast(GIOStream*)this._cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Closes a stream.
+  
+      Params:
+        result = a #GAsyncResult
+      Returns: true if stream was successfully closed, false otherwise.
+      Throws: [ErrorWrap]
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCloseFinish` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncCloseFinish(gid.gio2.async_result.AsyncResult result)
+  {
+    auto _klass = cast(GIOStreamClass*)_vfuncClass;
+    if (!_klass.closeFinish)
+      return typeof(return).init;
+
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)_klass.closeFinish(cast(GIOStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gid.gobject2.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncCloseFn(gid.gio2.cancellable.Cancellable cancellable = null)
+  {
+    auto _klass = cast(GIOStreamClass*)_vfuncClass;
+    if (!_klass.closeFn)
+      return typeof(return).init;
+
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)_klass.closeFn(cast(GIOStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the input stream for this object. This is used
+      for reading.
+      Returns: a #GInputStream, owned by the #GIOStream.
+        Do not free.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetInputStream` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gio2.input_stream.InputStream vfuncGetInputStream()
+  {
+    auto _klass = cast(GIOStreamClass*)_vfuncClass;
+    if (!_klass.getInputStream)
+      return typeof(return).init;
+
+    GInputStream* _cretval;
+    _cretval = _klass.getInputStream(cast(GIOStream*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the output stream for this object. This is used for
+      writing.
+      Returns: a #GOutputStream, owned by the #GIOStream.
+        Do not free.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetOutputStream` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gio2.output_stream.OutputStream vfuncGetOutputStream()
+  {
+    auto _klass = cast(GIOStreamClass*)_vfuncClass;
+    if (!_klass.getOutputStream)
+      return typeof(return).init;
+
+    GOutputStream* _cretval;
+    _cretval = _klass.getOutputStream(cast(GIOStream*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -232,6 +374,7 @@ class IOStream : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -355,6 +498,7 @@ class IOStream : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -370,6 +514,175 @@ class IOStream : gid.gobject2.object.ObjectWrap
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     g_io_stream_splice_async(cast(GIOStream*)this._cPtr, stream2 ? cast(GIOStream*)stream2._cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from IOStream
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.iostream.IOStream), T.stringof ~ " is not derived from gid.gio2.iostream.IOStream");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCloseAsync", true)[0]) == gid.gio2.iostream.IOStream))
+      static assert(0, "Overriding gid.gio2.iostream.IOStream.vfuncCloseAsync is not supported: parameter 'callback' of kind 'Callback' is not supported");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCloseFinish", true)[0]) == gid.gio2.iostream.IOStream))
+      _installVfunc(klass, "close_finish");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCloseFn", true)[0]) == gid.gio2.iostream.IOStream))
+      _installVfunc(klass, "close_fn");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetInputStream", true)[0]) == gid.gio2.iostream.IOStream))
+      _installVfunc(klass, "get_input_stream");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetOutputStream", true)[0]) == gid.gio2.iostream.IOStream))
+      _installVfunc(klass, "get_output_stream");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GIOStreamClass*)klass;
+
+    switch (vfunc)
+    {
+      case "close_finish":
+      {
+        static extern(C) gboolean _vfuncCloseFinishTramp(GIOStream* stream, GAsyncResult* result, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.iostream.IOStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          if (!_obj)
+          {
+            auto _klass = cast(GIOStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
+            if (_klass.closeFinish)
+              return (cast(typeof(&_vfuncCloseFinishTramp))_klass.closeFinish)(stream, result, _err);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCloseFinish(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.async_result.AsyncResult)(cast(void*)result, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.closeFinish = cast(typeof(_klass.closeFinish))&_vfuncCloseFinishTramp;
+        break;
+      }
+      case "close_fn":
+      {
+        static extern(C) gboolean _vfuncCloseFnTramp(GIOStream* stream, GCancellable* cancellable, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.iostream.IOStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          if (!_obj)
+          {
+            auto _klass = cast(GIOStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
+            if (_klass.closeFn)
+              return (cast(typeof(&_vfuncCloseFnTramp))_klass.closeFn)(stream, cancellable, _err);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCloseFn(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.closeFn = cast(typeof(_klass.closeFn))&_vfuncCloseFnTramp;
+        break;
+      }
+      case "get_input_stream":
+      {
+        static extern(C) GInputStream* _vfuncGetInputStreamTramp(GIOStream* stream) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.iostream.IOStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          if (!_obj)
+          {
+            auto _klass = cast(GIOStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
+            if (_klass.getInputStream)
+              return (cast(typeof(&_vfuncGetInputStreamTramp))_klass.getInputStream)(stream);
+            return typeof(return).init;
+          }
+
+          gid.gio2.input_stream.InputStream _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetInputStream();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.iostream.IOStream.vfuncGetInputStream");
+          }
+          auto _retval = _dretval ? cast(GInputStream*)_dretval._cPtr(No.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getInputStream = cast(typeof(_klass.getInputStream))&_vfuncGetInputStreamTramp;
+        break;
+      }
+      case "get_output_stream":
+      {
+        static extern(C) GOutputStream* _vfuncGetOutputStreamTramp(GIOStream* stream) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.iostream.IOStream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          if (!_obj)
+          {
+            auto _klass = cast(GIOStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
+            if (_klass.getOutputStream)
+              return (cast(typeof(&_vfuncGetOutputStreamTramp))_klass.getOutputStream)(stream);
+            return typeof(return).init;
+          }
+
+          gid.gio2.output_stream.OutputStream _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetOutputStream();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.iostream.IOStream.vfuncGetOutputStream");
+          }
+          auto _retval = _dretval ? cast(GOutputStream*)_dretval._cPtr(No.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getOutputStream = cast(typeof(_klass.getOutputStream))&_vfuncGetOutputStreamTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

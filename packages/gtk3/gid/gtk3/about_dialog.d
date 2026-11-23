@@ -459,9 +459,29 @@ class AboutDialog : gid.gtk3.dialog.Dialog
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_about_dialog_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_about_dialog_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected bool vfuncActivateLink(string uri)
+  {
+    auto _klass = cast(GtkAboutDialogClass*)_vfuncClass;
+    if (!_klass.activateLink)
+      return typeof(return).init;
+
+    bool _retval;
+    const(char)* _uri = uri.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)_klass.activateLink(cast(GtkAboutDialog*)this._cPtr, _uri);
+    return _retval;
   }
 
   /**
@@ -956,6 +976,7 @@ class AboutDialog : gid.gtk3.dialog.Dialog
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -981,6 +1002,68 @@ class AboutDialog : gid.gtk3.dialog.Dialog
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("activate-link", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from AboutDialog
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.about_dialog.AboutDialog), T.stringof ~ " is not derived from gid.gtk3.about_dialog.AboutDialog");
+
+    gid.gtk3.dialog.Dialog._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivateLink", true)[0]) == gid.gtk3.about_dialog.AboutDialog))
+      _installVfunc(klass, "activate_link");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkAboutDialogClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate_link":
+      {
+        static extern(C) gboolean _vfuncActivateLinkTramp(GtkAboutDialog* dialog, const(char)* uri) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.about_dialog.AboutDialog)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dialog);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkAboutDialogClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dialog);
+            if (_klass.activateLink)
+              return (cast(typeof(&_vfuncActivateLinkTramp))_klass.activateLink)(dialog, uri);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          string _uri = uri.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncActivateLink(_uri);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.about_dialog.AboutDialog.vfuncActivateLink");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.activateLink = cast(typeof(_klass.activateLink))&_vfuncActivateLinkTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

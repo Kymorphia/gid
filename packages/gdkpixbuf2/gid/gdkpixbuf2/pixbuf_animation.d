@@ -43,6 +43,15 @@ class PixbufAnimation : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -208,6 +217,7 @@ class PixbufAnimation : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -223,6 +233,122 @@ class PixbufAnimation : gid.gobject2.object.ObjectWrap
     auto _callbackCB = callback ? &_callbackCallback : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     gdk_pixbuf_animation_new_from_stream_async(stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
+  }
+
+  /**
+      Get an iterator for displaying an animation.
+      
+      The iterator provides the frames that should be displayed at a
+      given time.
+      
+      start_time would normally come from [gid.glib2.global.getCurrentTime], and marks
+      the beginning of animation playback. After creating an iterator, you
+      should immediately display the pixbuf returned by
+      [gid.gdkpixbuf2.pixbuf_animation_iter.PixbufAnimationIter.getPixbuf]. Then, you should install
+      a timeout (with [gid.glib2.global.timeoutAdd]) or by some other mechanism ensure
+      that you'll update the image after
+      [gid.gdkpixbuf2.pixbuf_animation_iter.PixbufAnimationIter.getDelayTime] milliseconds. Each time
+      the image is updated, you should reinstall the timeout with the new,
+      possibly-changed delay time.
+      
+      As a shortcut, if start_time is `NULL`, the result of
+      [gid.glib2.global.getCurrentTime] will be used automatically.
+      
+      To update the image (i.e. possibly change the result of
+      [gid.gdkpixbuf2.pixbuf_animation_iter.PixbufAnimationIter.getPixbuf] to a new frame of the animation),
+      call [gid.gdkpixbuf2.pixbuf_animation_iter.PixbufAnimationIter.advance].
+      
+      If you're using #GdkPixbufLoader, in addition to updating the image
+      after the delay time, you should also update it whenever you
+      receive the area_updated signal and
+      [gid.gdkpixbuf2.pixbuf_animation_iter.PixbufAnimationIter.onCurrentlyLoadingFrame] returns
+      `TRUE`. In this case, the frame currently being fed into the loader
+      has received new data, so needs to be refreshed. The delay time for
+      a frame may also be modified after an area_updated signal, for
+      example if the delay time for a frame is encoded in the data after
+      the frame itself. So your timeout should be reinstalled after any
+      area_updated signal.
+      
+      A delay time of -1 is possible, indicating "infinite".
+  
+      Params:
+        startTime = time when the animation starts playing
+      Returns: an iterator to move over the animation
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetIter` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use a different image loading library for animatable assets
+  */
+  protected gid.gdkpixbuf2.pixbuf_animation_iter.PixbufAnimationIter vfuncGetIter(gid.glib2.time_val.TimeVal* startTime = null)
+  {
+    auto _klass = cast(GdkPixbufAnimationClass*)_vfuncClass;
+    if (!_klass.getIter)
+      return typeof(return).init;
+
+    GdkPixbufAnimationIter* _cretval;
+    _cretval = _klass.getIter(cast(GdkPixbufAnimation*)this._cPtr, cast(const(GTimeVal)*)startTime);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gdkpixbuf2.pixbuf_animation_iter.PixbufAnimationIter)(cast(GdkPixbufAnimationIter*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Retrieves a static image for the animation.
+      
+      If an animation is really just a plain image (has only one frame),
+      this function returns that image.
+      
+      If the animation is an animation, this function returns a reasonable
+      image to use as a static unanimated image, which might be the first
+      frame, or something more sophisticated depending on the file format.
+      
+      If an animation hasn't loaded any frames yet, this function will
+      return `NULL`.
+      Returns: unanimated image representing the animation
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetStaticImage` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use a different image loading library for animatable assets
+  */
+  protected gid.gdkpixbuf2.pixbuf.Pixbuf vfuncGetStaticImage()
+  {
+    auto _klass = cast(GdkPixbufAnimationClass*)_vfuncClass;
+    if (!_klass.getStaticImage)
+      return typeof(return).init;
+
+    GdkPixbuf* _cretval;
+    _cretval = _klass.getStaticImage(cast(GdkPixbufAnimation*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gdkpixbuf2.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Checks whether the animation is a static image.
+      
+      If you load a file with [gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation.newFromFile] and it
+      turns out to be a plain, unanimated image, then this function will
+      return `TRUE`. Use [gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation.getStaticImage] to retrieve
+      the image.
+      Returns: `TRUE` if the "animation" was really just an image
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncIsStaticImage` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use a different image loading library for animatable assets
+  */
+  protected bool vfuncIsStaticImage()
+  {
+    auto _klass = cast(GdkPixbufAnimationClass*)_vfuncClass;
+    if (!_klass.isStaticImage)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.isStaticImage(cast(GdkPixbufAnimation*)this._cPtr);
+    return _retval;
   }
 
   /**
@@ -341,6 +467,137 @@ class PixbufAnimation : gid.gobject2.object.ObjectWrap
     bool _retval;
     _retval = cast(bool)gdk_pixbuf_animation_is_static_image(cast(GdkPixbufAnimation*)this._cPtr);
     return _retval;
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from PixbufAnimation
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation), T.stringof ~ " is not derived from gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetIter", true)[0]) == gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation))
+      _installVfunc(klass, "get_iter");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetStaticImage", true)[0]) == gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation))
+      _installVfunc(klass, "get_static_image");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncIsStaticImage", true)[0]) == gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation))
+      _installVfunc(klass, "is_static_image");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GdkPixbufAnimationClass*)klass;
+
+    switch (vfunc)
+    {
+      case "get_iter":
+      {
+        static extern(C) GdkPixbufAnimationIter* _vfuncGetIterTramp(GdkPixbufAnimation* animation, const(GTimeVal)* startTime) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)animation);
+          if (!_obj)
+          {
+            auto _klass = cast(GdkPixbufAnimationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)animation);
+            if (_klass.getIter)
+              return (cast(typeof(&_vfuncGetIterTramp))_klass.getIter)(animation, startTime);
+            return typeof(return).init;
+          }
+
+          gid.gdkpixbuf2.pixbuf_animation_iter.PixbufAnimationIter _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetIter(cast(gid.glib2.time_val.TimeVal*)startTime);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation.vfuncGetIter");
+          }
+          auto _retval = _dretval ? cast(GdkPixbufAnimationIter*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getIter = cast(typeof(_klass.getIter))&_vfuncGetIterTramp;
+        break;
+      }
+      case "get_static_image":
+      {
+        static extern(C) GdkPixbuf* _vfuncGetStaticImageTramp(GdkPixbufAnimation* animation) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)animation);
+          if (!_obj)
+          {
+            auto _klass = cast(GdkPixbufAnimationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)animation);
+            if (_klass.getStaticImage)
+              return (cast(typeof(&_vfuncGetStaticImageTramp))_klass.getStaticImage)(animation);
+            return typeof(return).init;
+          }
+
+          gid.gdkpixbuf2.pixbuf.Pixbuf _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetStaticImage();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation.vfuncGetStaticImage");
+          }
+          auto _retval = _dretval ? cast(GdkPixbuf*)_dretval._cPtr(No.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getStaticImage = cast(typeof(_klass.getStaticImage))&_vfuncGetStaticImageTramp;
+        break;
+      }
+      case "is_static_image":
+      {
+        static extern(C) gboolean _vfuncIsStaticImageTramp(GdkPixbufAnimation* animation) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)animation);
+          if (!_obj)
+          {
+            auto _klass = cast(GdkPixbufAnimationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)animation);
+            if (_klass.isStaticImage)
+              return (cast(typeof(&_vfuncIsStaticImageTramp))_klass.isStaticImage)(animation);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncIsStaticImage();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gdkpixbuf2.pixbuf_animation.PixbufAnimation.vfuncIsStaticImage");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.isStaticImage = cast(typeof(_klass.isStaticImage))&_vfuncIsStaticImageTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

@@ -24,6 +24,15 @@ class MnemonicTrigger : gid.gtk4.shortcut_trigger.ShortcutTrigger
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -80,9 +89,16 @@ class MnemonicTrigger : gid.gtk4.shortcut_trigger.ShortcutTrigger
   */
   this(uint keyval) nothrow
   {
-    GtkShortcutTrigger* _cretval;
-    _cretval = gtk_mnemonic_trigger_new(keyval);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkShortcutTrigger* _cretval;
+      _cretval = gtk_mnemonic_trigger_new(keyval);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

@@ -26,6 +26,15 @@ class ApplicationPkcs7Mime : gid.gmime3.part.Part
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -69,9 +78,16 @@ class ApplicationPkcs7Mime : gid.gmime3.part.Part
   */
   this(gid.gmime3.types.SecureMimeType type) nothrow
   {
-    GMimeApplicationPkcs7Mime* _cretval;
-    _cretval = g_mime_application_pkcs7_mime_new(type);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GMimeApplicationPkcs7Mime* _cretval;
+      _cretval = g_mime_application_pkcs7_mime_new(type);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

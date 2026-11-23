@@ -104,9 +104,54 @@ class Bus : gid.gst1.object.ObjectWrap
   */
   this() nothrow
   {
-    GstBus* _cretval;
-    _cretval = gst_bus_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GstBus* _cretval;
+      _cretval = gst_bus_new();
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /**
+      A message has been posted on the bus.
+  
+      Params:
+        message = the message that has been posted asynchronously (modified in place, changes are seen by the caller)
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncMessage` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncMessage(gid.gst1.message.Message message)
+  {
+    auto _klass = cast(GstBusClass*)_vfuncClass;
+    if (!_klass.message)
+      return;
+
+    _klass.message(cast(GstBus*)this._cPtr, message ? cast(GstMessage*)message._cPtr(No.Dup) : null);
+  }
+
+  /**
+      A message has been posted on the bus.
+  
+      Params:
+        message = the message that has been posted synchronously (modified in place, changes are seen by the caller)
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSyncMessage` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSyncMessage(gid.gst1.message.Message message)
+  {
+    auto _klass = cast(GstBusClass*)_vfuncClass;
+    if (!_klass.syncMessage)
+      return;
+
+    _klass.syncMessage(cast(GstBus*)this._cPtr, message ? cast(GstMessage*)message._cPtr(No.Dup) : null);
   }
 
   /**
@@ -185,6 +230,7 @@ class Bus : gid.gst1.object.ObjectWrap
   {
     extern(C) gboolean _funcCallback(GstBus* bus, GstMessage* message, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.BusFunc*)userData;
       auto _message = message ? new gid.gst1.message.Message(cast(void*)message, Yes.Take)._cBorrow : null;
@@ -477,6 +523,7 @@ class Bus : gid.gst1.object.ObjectWrap
   {
     extern(C) GstBusSyncReply _funcCallback(GstBus* bus, GstMessage* message, void* userData) nothrow
     {
+      gidAttachThread();
       gid.gst1.types.BusSyncReply _dretval;
       auto _dlg = cast(gid.gst1.types.BusSyncHandler*)userData;
       auto _message = message ? new gid.gst1.message.Message(cast(void*)message, Yes.Take)._cBorrow : null;
@@ -592,6 +639,7 @@ class Bus : gid.gst1.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -647,6 +695,7 @@ class Bus : gid.gst1.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -669,6 +718,102 @@ class Bus : gid.gst1.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("sync-message"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Bus
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gst1.bus.Bus), T.stringof ~ " is not derived from gid.gst1.bus.Bus");
+
+    gid.gst1.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMessage", true)[0]) == gid.gst1.bus.Bus))
+      _installVfunc(klass, "message");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSyncMessage", true)[0]) == gid.gst1.bus.Bus))
+      _installVfunc(klass, "sync_message");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstBusClass*)klass;
+
+    switch (vfunc)
+    {
+      case "message":
+      {
+        static extern(C) void _vfuncMessageTramp(GstBus* bus, GstMessage* message) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.bus.Bus)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)bus);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBusClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)bus);
+            if (_klass.message)
+              return (cast(typeof(&_vfuncMessageTramp))_klass.message)(bus, message);
+            return;
+          }
+
+          auto _message = message ? new gid.gst1.message.Message(cast(void*)message, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncMessage(_message);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.bus.Bus.vfuncMessage");
+          }
+          if (_message)
+            _message._cUnborrow;
+
+        }
+
+        _klass.message = cast(typeof(_klass.message))&_vfuncMessageTramp;
+        break;
+      }
+      case "sync_message":
+      {
+        static extern(C) void _vfuncSyncMessageTramp(GstBus* bus, GstMessage* message) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.bus.Bus)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)bus);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBusClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)bus);
+            if (_klass.syncMessage)
+              return (cast(typeof(&_vfuncSyncMessageTramp))_klass.syncMessage)(bus, message);
+            return;
+          }
+
+          auto _message = message ? new gid.gst1.message.Message(cast(void*)message, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncSyncMessage(_message);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.bus.Bus.vfuncSyncMessage");
+          }
+          if (_message)
+            _message._cUnborrow;
+
+        }
+
+        _klass.syncMessage = cast(typeof(_klass.syncMessage))&_vfuncSyncMessageTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

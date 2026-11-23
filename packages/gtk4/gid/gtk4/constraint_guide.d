@@ -229,9 +229,16 @@ class ConstraintGuide : gid.gobject2.object.ObjectWrap, gid.gtk4.constraint_targ
   */
   this() nothrow
   {
-    GtkConstraintGuide* _cretval;
-    _cretval = gtk_constraint_guide_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkConstraintGuide* _cretval;
+      _cretval = gtk_constraint_guide_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

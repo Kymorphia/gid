@@ -100,9 +100,16 @@ class BufferPool : gid.gst1.object.ObjectWrap
   */
   this() nothrow
   {
-    GstBufferPool* _cretval;
-    _cretval = gst_buffer_pool_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GstBufferPool* _cretval;
+      _cretval = gst_buffer_pool_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -285,6 +292,284 @@ class BufferPool : gid.gst1.object.ObjectWrap
         params = parameters.
       Returns: a #GstFlowReturn such as [gid.gst1.types.FlowReturn.Flushing] when the pool is
         inactive.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncAcquireBuffer` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.FlowReturn vfuncAcquireBuffer(out gid.gst1.buffer.Buffer buffer, gid.gst1.types.BufferPoolAcquireParams* params = null)
+  {
+    auto _klass = cast(GstBufferPoolClass*)_vfuncClass;
+    if (!_klass.acquireBuffer)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    GstBuffer* _buffer;
+    _cretval = _klass.acquireBuffer(cast(GstBufferPool*)this._cPtr, &_buffer, cast(GstBufferPoolAcquireParams*)params);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    if (_buffer)
+      buffer = new gid.gst1.buffer.Buffer(cast(void*)_buffer, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Allocate a buffer. the default implementation allocates
+      buffers from the configured memory allocator and with the configured
+      parameters. All metadata that is present on the allocated buffer will
+      be marked as #GST_META_FLAG_POOLED and #GST_META_FLAG_LOCKED and will
+      not be removed from the buffer in #GstBufferPoolClass::reset_buffer.
+      The buffer should have the #GST_BUFFER_FLAG_TAG_MEMORY cleared.
+  
+      Params:
+        buffer = a location for a #GstBuffer
+        params = parameters.
+      Returns: a #GstFlowReturn to indicate whether the allocation was
+        successful.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncAllocBuffer` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.FlowReturn vfuncAllocBuffer(out gid.gst1.buffer.Buffer buffer, gid.gst1.types.BufferPoolAcquireParams* params = null)
+  {
+    auto _klass = cast(GstBufferPoolClass*)_vfuncClass;
+    if (!_klass.allocBuffer)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    GstBuffer* _buffer;
+    _cretval = _klass.allocBuffer(cast(GstBufferPool*)this._cPtr, &_buffer, cast(GstBufferPoolAcquireParams*)params);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    if (_buffer)
+      buffer = new gid.gst1.buffer.Buffer(cast(void*)_buffer, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Enter the flushing state.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncFlushStart` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncFlushStart()
+  {
+    auto _klass = cast(GstBufferPoolClass*)_vfuncClass;
+    if (!_klass.flushStart)
+      return;
+
+    _klass.flushStart(cast(GstBufferPool*)this._cPtr);
+  }
+
+  /**
+      Leave the flushing state.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncFlushStop` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncFlushStop()
+  {
+    auto _klass = cast(GstBufferPoolClass*)_vfuncClass;
+    if (!_klass.flushStop)
+      return;
+
+    _klass.flushStop(cast(GstBufferPool*)this._cPtr);
+  }
+
+  /**
+      Free a buffer. The default implementation unrefs the buffer.
+  
+      Params:
+        buffer = the #GstBuffer to free (modified in place, changes are seen by the caller)
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncFreeBuffer` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncFreeBuffer(gid.gst1.buffer.Buffer buffer)
+  {
+    auto _klass = cast(GstBufferPoolClass*)_vfuncClass;
+    if (!_klass.freeBuffer)
+      return;
+
+    _klass.freeBuffer(cast(GstBufferPool*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Gets a null terminated array of string with supported bufferpool options for
+      pool. An option would typically be enabled with
+      [gid.gst1.buffer_pool.BufferPool.configAddOption].
+      Returns: a null terminated array
+                 of strings.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetOptions` to chain up from an override.
+      Overriding it from D is not supported (callback return container type 'Array' ownership 'None' is not supported).
+  */
+  protected string[] vfuncGetOptions()
+  {
+    auto _klass = cast(GstBufferPoolClass*)_vfuncClass;
+    if (!_klass.getOptions)
+      return typeof(return).init;
+
+    const(char*)* _cretval;
+    _cretval = _klass.getOptions(cast(GstBufferPool*)this._cPtr);
+    string[] _retval;
+
+    if (_cretval)
+    {
+      uint _cretlength;
+      while (_cretval[_cretlength] !is null)
+        _cretlength++;
+      _retval = new string[_cretlength];
+      foreach (i; 0 .. _cretlength)
+        _retval[i] = _cretval[i].fromCString!(No.Free);
+    }
+    return _retval;
+  }
+
+  /**
+      Releases buffer to pool. buffer should have previously been allocated from
+      pool with [gid.gst1.buffer_pool.BufferPool.acquireBuffer].
+      
+      This function is usually called automatically when the last ref on buffer
+      disappears.
+  
+      Params:
+        buffer = a #GstBuffer
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncReleaseBuffer` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncReleaseBuffer(gid.gst1.buffer.Buffer buffer)
+  {
+    auto _klass = cast(GstBufferPoolClass*)_vfuncClass;
+    if (!_klass.releaseBuffer)
+      return;
+
+    _klass.releaseBuffer(cast(GstBufferPool*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null);
+  }
+
+  /**
+      Reset the buffer to its state when it was freshly allocated.
+      The default implementation will clear the flags, timestamps and
+      will remove the metadata without the #GST_META_FLAG_POOLED flag (even
+      the metadata with #GST_META_FLAG_LOCKED). If the
+      #GST_BUFFER_FLAG_TAG_MEMORY was set, this function can also try to
+      restore the memory and clear the #GST_BUFFER_FLAG_TAG_MEMORY again.
+  
+      Params:
+        buffer = the #GstBuffer to reset (modified in place, changes are seen by the caller)
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncResetBuffer` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncResetBuffer(gid.gst1.buffer.Buffer buffer)
+  {
+    auto _klass = cast(GstBufferPoolClass*)_vfuncClass;
+    if (!_klass.resetBuffer)
+      return;
+
+    _klass.resetBuffer(cast(GstBufferPool*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Sets the configuration of the pool. If the pool is already configured, and
+      the configuration hasn't changed, this function will return true. If the
+      pool is active, this method will return false and active configuration
+      will remain. Buffers allocated from this pool must be returned or else this
+      function will do nothing and return false.
+      
+      config is a #GstStructure that contains the configuration parameters for
+      the pool. A default and mandatory set of parameters can be configured with
+      [gid.gst1.buffer_pool.BufferPool.configSetParams], [gid.gst1.buffer_pool.BufferPool.configSetAllocator]
+      and [gid.gst1.buffer_pool.BufferPool.configAddOption].
+      
+      If the parameters in config can not be set exactly, this function returns
+      false and will try to update as much state as possible. The new state can
+      then be retrieved and refined with [gid.gst1.buffer_pool.BufferPool.getConfig].
+      
+      This function takes ownership of config.
+  
+      Params:
+        config = a #GstStructure
+      Returns: true when the configuration could be set.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetConfig` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncSetConfig(gid.gst1.structure.Structure config)
+  {
+    auto _klass = cast(GstBufferPoolClass*)_vfuncClass;
+    if (!_klass.setConfig)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.setConfig(cast(GstBufferPool*)this._cPtr, config ? cast(GstStructure*)config._cPtr(Yes.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Start the bufferpool. The default implementation will preallocate
+      min-buffers buffers and put them in the queue.
+      
+      Subclasses do not need to chain up to the parent's default implementation
+      if they don't want min-buffers based preallocation.
+      Returns: whether the pool could be started.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStart` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncStart()
+  {
+    auto _klass = cast(GstBufferPoolClass*)_vfuncClass;
+    if (!_klass.start)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.start(cast(GstBufferPool*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Stop the bufferpool. the default implementation will free the
+      preallocated buffers. This function is called when all the buffers are
+      returned to the pool.
+      Returns: whether the pool could be stopped.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStop` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncStop()
+  {
+    auto _klass = cast(GstBufferPoolClass*)_vfuncClass;
+    if (!_klass.stop)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.stop(cast(GstBufferPool*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Acquires a buffer from pool. buffer should point to a memory location that
+      can hold a pointer to the new buffer. When the pool is empty, this function
+      will by default block until a buffer is released into the pool again or when
+      the pool is set to flushing or deactivated.
+      
+      params can contain optional parameters to influence the allocation.
+  
+      Params:
+        buffer = a location for a #GstBuffer
+        params = parameters.
+      Returns: a #GstFlowReturn such as [gid.gst1.types.FlowReturn.Flushing] when the pool is
+        inactive.
   */
   gid.gst1.types.FlowReturn acquireBuffer(out gid.gst1.buffer.Buffer buffer, gid.gst1.types.BufferPoolAcquireParams* params = null) nothrow
   {
@@ -439,6 +724,382 @@ class BufferPool : gid.gst1.object.ObjectWrap
   void setFlushing(bool flushing) nothrow
   {
     gst_buffer_pool_set_flushing(cast(GstBufferPool*)this._cPtr, flushing);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from BufferPool
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gst1.buffer_pool.BufferPool), T.stringof ~ " is not derived from gid.gst1.buffer_pool.BufferPool");
+
+    gid.gst1.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAcquireBuffer", true)[0]) == gid.gst1.buffer_pool.BufferPool))
+      _installVfunc(klass, "acquire_buffer");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAllocBuffer", true)[0]) == gid.gst1.buffer_pool.BufferPool))
+      _installVfunc(klass, "alloc_buffer");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFlushStart", true)[0]) == gid.gst1.buffer_pool.BufferPool))
+      _installVfunc(klass, "flush_start");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFlushStop", true)[0]) == gid.gst1.buffer_pool.BufferPool))
+      _installVfunc(klass, "flush_stop");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFreeBuffer", true)[0]) == gid.gst1.buffer_pool.BufferPool))
+      _installVfunc(klass, "free_buffer");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetOptions", true)[0]) == gid.gst1.buffer_pool.BufferPool))
+      static assert(0, "Overriding gid.gst1.buffer_pool.BufferPool.vfuncGetOptions is not supported: callback return container type 'Array' ownership 'None' is not supported");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncReleaseBuffer", true)[0]) == gid.gst1.buffer_pool.BufferPool))
+      _installVfunc(klass, "release_buffer");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncResetBuffer", true)[0]) == gid.gst1.buffer_pool.BufferPool))
+      _installVfunc(klass, "reset_buffer");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetConfig", true)[0]) == gid.gst1.buffer_pool.BufferPool))
+      _installVfunc(klass, "set_config");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStart", true)[0]) == gid.gst1.buffer_pool.BufferPool))
+      _installVfunc(klass, "start");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStop", true)[0]) == gid.gst1.buffer_pool.BufferPool))
+      _installVfunc(klass, "stop");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstBufferPoolClass*)klass;
+
+    switch (vfunc)
+    {
+      case "acquire_buffer":
+      {
+        static extern(C) GstFlowReturn _vfuncAcquireBufferTramp(GstBufferPool* pool, GstBuffer** buffer, GstBufferPoolAcquireParams* params) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.buffer_pool.BufferPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBufferPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
+            if (_klass.acquireBuffer)
+              return (cast(typeof(&_vfuncAcquireBufferTramp))_klass.acquireBuffer)(pool, buffer, params);
+            return typeof(return).init;
+          }
+
+          typeof(*buffer) _bufferNull;
+          if (!buffer)
+            buffer = &_bufferNull;
+
+          gid.gst1.types.FlowReturn _dretval;
+          gid.gst1.buffer.Buffer _buffer;
+
+          try
+          {
+            _dretval = _obj.vfuncAcquireBuffer(_buffer, cast(gid.gst1.types.BufferPoolAcquireParams*)params);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.buffer_pool.BufferPool.vfuncAcquireBuffer");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+          *buffer = _buffer ? cast(GstBuffer*)_buffer._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.acquireBuffer = cast(typeof(_klass.acquireBuffer))&_vfuncAcquireBufferTramp;
+        break;
+      }
+      case "alloc_buffer":
+      {
+        static extern(C) GstFlowReturn _vfuncAllocBufferTramp(GstBufferPool* pool, GstBuffer** buffer, GstBufferPoolAcquireParams* params) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.buffer_pool.BufferPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBufferPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
+            if (_klass.allocBuffer)
+              return (cast(typeof(&_vfuncAllocBufferTramp))_klass.allocBuffer)(pool, buffer, params);
+            return typeof(return).init;
+          }
+
+          typeof(*buffer) _bufferNull;
+          if (!buffer)
+            buffer = &_bufferNull;
+
+          gid.gst1.types.FlowReturn _dretval;
+          gid.gst1.buffer.Buffer _buffer;
+
+          try
+          {
+            _dretval = _obj.vfuncAllocBuffer(_buffer, cast(gid.gst1.types.BufferPoolAcquireParams*)params);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.buffer_pool.BufferPool.vfuncAllocBuffer");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+          *buffer = _buffer ? cast(GstBuffer*)_buffer._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.allocBuffer = cast(typeof(_klass.allocBuffer))&_vfuncAllocBufferTramp;
+        break;
+      }
+      case "flush_start":
+      {
+        static extern(C) void _vfuncFlushStartTramp(GstBufferPool* pool) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.buffer_pool.BufferPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBufferPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
+            if (_klass.flushStart)
+              return (cast(typeof(&_vfuncFlushStartTramp))_klass.flushStart)(pool);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncFlushStart();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.buffer_pool.BufferPool.vfuncFlushStart");
+          }
+        }
+
+        _klass.flushStart = cast(typeof(_klass.flushStart))&_vfuncFlushStartTramp;
+        break;
+      }
+      case "flush_stop":
+      {
+        static extern(C) void _vfuncFlushStopTramp(GstBufferPool* pool) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.buffer_pool.BufferPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBufferPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
+            if (_klass.flushStop)
+              return (cast(typeof(&_vfuncFlushStopTramp))_klass.flushStop)(pool);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncFlushStop();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.buffer_pool.BufferPool.vfuncFlushStop");
+          }
+        }
+
+        _klass.flushStop = cast(typeof(_klass.flushStop))&_vfuncFlushStopTramp;
+        break;
+      }
+      case "free_buffer":
+      {
+        static extern(C) void _vfuncFreeBufferTramp(GstBufferPool* pool, GstBuffer* buffer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.buffer_pool.BufferPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBufferPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
+            if (_klass.freeBuffer)
+              return (cast(typeof(&_vfuncFreeBufferTramp))_klass.freeBuffer)(pool, buffer);
+            return;
+          }
+
+          auto _buffer = buffer ? new gid.gst1.buffer.Buffer(cast(void*)buffer, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncFreeBuffer(_buffer);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.buffer_pool.BufferPool.vfuncFreeBuffer");
+          }
+          if (_buffer)
+            _buffer._cUnborrow;
+
+        }
+
+        _klass.freeBuffer = cast(typeof(_klass.freeBuffer))&_vfuncFreeBufferTramp;
+        break;
+      }
+      case "release_buffer":
+      {
+        static extern(C) void _vfuncReleaseBufferTramp(GstBufferPool* pool, GstBuffer* buffer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.buffer_pool.BufferPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBufferPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
+            if (_klass.releaseBuffer)
+              return (cast(typeof(&_vfuncReleaseBufferTramp))_klass.releaseBuffer)(pool, buffer);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncReleaseBuffer(buffer ? new gid.gst1.buffer.Buffer(cast(void*)buffer, Yes.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.buffer_pool.BufferPool.vfuncReleaseBuffer");
+          }
+        }
+
+        _klass.releaseBuffer = cast(typeof(_klass.releaseBuffer))&_vfuncReleaseBufferTramp;
+        break;
+      }
+      case "reset_buffer":
+      {
+        static extern(C) void _vfuncResetBufferTramp(GstBufferPool* pool, GstBuffer* buffer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.buffer_pool.BufferPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBufferPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
+            if (_klass.resetBuffer)
+              return (cast(typeof(&_vfuncResetBufferTramp))_klass.resetBuffer)(pool, buffer);
+            return;
+          }
+
+          auto _buffer = buffer ? new gid.gst1.buffer.Buffer(cast(void*)buffer, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncResetBuffer(_buffer);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.buffer_pool.BufferPool.vfuncResetBuffer");
+          }
+          if (_buffer)
+            _buffer._cUnborrow;
+
+        }
+
+        _klass.resetBuffer = cast(typeof(_klass.resetBuffer))&_vfuncResetBufferTramp;
+        break;
+      }
+      case "set_config":
+      {
+        static extern(C) gboolean _vfuncSetConfigTramp(GstBufferPool* pool, GstStructure* config) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.buffer_pool.BufferPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBufferPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
+            if (_klass.setConfig)
+              return (cast(typeof(&_vfuncSetConfigTramp))_klass.setConfig)(pool, config);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncSetConfig(config ? new gid.gst1.structure.Structure(cast(void*)config, Yes.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.buffer_pool.BufferPool.vfuncSetConfig");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.setConfig = cast(typeof(_klass.setConfig))&_vfuncSetConfigTramp;
+        break;
+      }
+      case "start":
+      {
+        static extern(C) gboolean _vfuncStartTramp(GstBufferPool* pool) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.buffer_pool.BufferPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBufferPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
+            if (_klass.start)
+              return (cast(typeof(&_vfuncStartTramp))_klass.start)(pool);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncStart();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.buffer_pool.BufferPool.vfuncStart");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.start = cast(typeof(_klass.start))&_vfuncStartTramp;
+        break;
+      }
+      case "stop":
+      {
+        static extern(C) gboolean _vfuncStopTramp(GstBufferPool* pool) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.buffer_pool.BufferPool)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)pool);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBufferPoolClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)pool);
+            if (_klass.stop)
+              return (cast(typeof(&_vfuncStopTramp))_klass.stop)(pool);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncStop();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.buffer_pool.BufferPool.vfuncStop");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.stop = cast(typeof(_klass.stop))&_vfuncStopTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

@@ -63,9 +63,16 @@ class GLRenderer : gid.gsk4.renderer.Renderer
   */
   this() nothrow
   {
-    GskRenderer* _cretval;
-    _cretval = gsk_gl_renderer_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GskRenderer* _cretval;
+      _cretval = gsk_gl_renderer_new();
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

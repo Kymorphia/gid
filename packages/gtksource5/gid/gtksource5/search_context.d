@@ -81,6 +81,15 @@ class SearchContext : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -211,9 +220,16 @@ class SearchContext : gid.gobject2.object.ObjectWrap
   */
   this(gid.gtksource5.buffer.Buffer buffer, gid.gtksource5.search_settings.SearchSettings settings = null) nothrow
   {
-    GtkSourceSearchContext* _cretval;
-    _cretval = gtk_source_search_context_new(buffer ? cast(GtkSourceBuffer*)buffer._cPtr(No.Dup) : null, settings ? cast(GtkSourceSearchSettings*)settings._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkSourceSearchContext* _cretval;
+      _cretval = gtk_source_search_context_new(buffer ? cast(GtkSourceBuffer*)buffer._cPtr(No.Dup) : null, settings ? cast(GtkSourceSearchSettings*)settings._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -268,6 +284,7 @@ class SearchContext : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -373,6 +390,7 @@ class SearchContext : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 

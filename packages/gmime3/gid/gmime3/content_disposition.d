@@ -64,9 +64,16 @@ class ContentDisposition : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GMimeContentDisposition* _cretval;
-    _cretval = g_mime_content_disposition_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GMimeContentDisposition* _cretval;
+      _cretval = g_mime_content_disposition_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

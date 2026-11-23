@@ -60,9 +60,16 @@ class IMMulticontext : gid.gtk3.imcontext.IMContext
   */
   this() nothrow
   {
-    GtkIMContext* _cretval;
-    _cretval = gtk_im_multicontext_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkIMContext* _cretval;
+      _cretval = gtk_im_multicontext_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

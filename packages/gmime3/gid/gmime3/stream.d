@@ -21,6 +21,15 @@ class Stream : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -53,6 +62,233 @@ class Stream : gid.gobject2.object.ObjectWrap
   static StreamGidBuilder builder() nothrow
   {
     return new StreamGidBuilder;
+  }
+
+  /**
+      Closes the stream.
+      Returns: `0` on success or %-1 on fail.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncClose` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected int vfuncClose()
+  {
+    auto _klass = cast(GMimeStreamClass*)_vfuncClass;
+    if (!_klass.close)
+      return typeof(return).init;
+
+    int _retval;
+    _retval = _klass.close(cast(GMimeStream*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Tests the end-of-stream indicator for stream.
+      Returns: true on EOS or false otherwise.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncEos` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncEos()
+  {
+    auto _klass = cast(GMimeStreamClass*)_vfuncClass;
+    if (!_klass.eos)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.eos(cast(GMimeStream*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Sync's the stream to disk.
+      Returns: `0` on success or %-1 on fail.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncFlush` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected int vfuncFlush()
+  {
+    auto _klass = cast(GMimeStreamClass*)_vfuncClass;
+    if (!_klass.flush)
+      return typeof(return).init;
+
+    int _retval;
+    _retval = _klass.flush(cast(GMimeStream*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Gets the length of the stream.
+      Returns: the length of the stream or %-1 if unknown.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncLength` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected long vfuncLength()
+  {
+    auto _klass = cast(GMimeStreamClass*)_vfuncClass;
+    if (!_klass.length)
+      return typeof(return).init;
+
+    long _retval;
+    _retval = _klass.length(cast(GMimeStream*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Attempts to read up to len bytes from stream into buf.
+  
+      Params:
+        buf = buffer
+      Returns: the number of bytes read or %-1 on fail.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRead` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected ptrdiff_t vfuncRead(ubyte[] buf)
+  {
+    auto _klass = cast(GMimeStreamClass*)_vfuncClass;
+    if (!_klass.read)
+      return typeof(return).init;
+
+    ptrdiff_t _retval;
+    size_t _len;
+    if (buf)
+      _len = cast(size_t)buf.length;
+
+    auto _buf = cast(ubyte*)buf.ptr;
+    _retval = _klass.read(cast(GMimeStream*)this._cPtr, _buf, _len);
+    return _retval;
+  }
+
+  /**
+      Resets the stream.
+      Returns: `0` on success or %-1 on fail.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncReset` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected int vfuncReset()
+  {
+    auto _klass = cast(GMimeStreamClass*)_vfuncClass;
+    if (!_klass.reset)
+      return typeof(return).init;
+
+    int _retval;
+    _retval = _klass.reset(cast(GMimeStream*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Repositions the offset of the stream stream to
+      the argument offset according to the
+      directive whence as follows:
+      
+          #GMIME_STREAM_SEEK_SET: Seek offset bytes relative to
+          the beginning (bound_start) of the stream.
+      
+          #GMIME_STREAM_SEEK_CUR: Seek offset bytes relative to the
+          current offset of the stream.
+      
+          #GMIME_STREAM_SEEK_END: Seek offset bytes relative to the
+          end of the stream (bound_end if non-negative).
+  
+      Params:
+        offset = positional offset
+        whence = seek directive
+      Returns: the resultant position on success or %-1 on fail.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSeek` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected long vfuncSeek(long offset, gid.gmime3.types.SeekWhence whence)
+  {
+    auto _klass = cast(GMimeStreamClass*)_vfuncClass;
+    if (!_klass.seek)
+      return typeof(return).init;
+
+    long _retval;
+    _retval = _klass.seek(cast(GMimeStream*)this._cPtr, offset, whence);
+    return _retval;
+  }
+
+  /**
+      Creates a new substream of stream with bounds start and end.
+  
+      Params:
+        start = start boundary
+        end = end boundary
+      Returns: a substream of stream with bounds start
+        and end.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSubstream` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gmime3.stream.Stream vfuncSubstream(long start, long end)
+  {
+    auto _klass = cast(GMimeStreamClass*)_vfuncClass;
+    if (!_klass.substream)
+      return typeof(return).init;
+
+    GMimeStream* _cretval;
+    _cretval = _klass.substream(cast(GMimeStream*)this._cPtr, start, end);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gmime3.stream.Stream)(cast(GMimeStream*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the current offset within the stream.
+      Returns: the current position within the stream or %-1 on fail.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncTell` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected long vfuncTell()
+  {
+    auto _klass = cast(GMimeStreamClass*)_vfuncClass;
+    if (!_klass.tell)
+      return typeof(return).init;
+
+    long _retval;
+    _retval = _klass.tell(cast(GMimeStream*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Attempts to write up to len bytes of buf to stream.
+  
+      Params:
+        buf = buffer
+      Returns: the number of bytes written or %-1 on fail.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncWrite` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected ptrdiff_t vfuncWrite(ubyte[] buf)
+  {
+    auto _klass = cast(GMimeStreamClass*)_vfuncClass;
+    if (!_klass.write)
+      return typeof(return).init;
+
+    ptrdiff_t _retval;
+    size_t _len;
+    if (buf)
+      _len = cast(size_t)buf.length;
+
+    auto _buf = cast(ubyte*)buf.ptr;
+    _retval = _klass.write(cast(GMimeStream*)this._cPtr, _buf, _len);
+    return _retval;
   }
 
   /**
@@ -309,6 +545,372 @@ class Stream : gid.gobject2.object.ObjectWrap
     auto _vector = cast(GMimeStreamIOVector*)vector.ptr;
     _retval = g_mime_stream_writev(cast(GMimeStream*)this._cPtr, _vector, _count);
     return _retval;
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Stream
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gmime3.stream.Stream), T.stringof ~ " is not derived from gid.gmime3.stream.Stream");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncClose", true)[0]) == gid.gmime3.stream.Stream))
+      _installVfunc(klass, "close");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEos", true)[0]) == gid.gmime3.stream.Stream))
+      _installVfunc(klass, "eos");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFlush", true)[0]) == gid.gmime3.stream.Stream))
+      _installVfunc(klass, "flush");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncLength", true)[0]) == gid.gmime3.stream.Stream))
+      _installVfunc(klass, "length");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRead", true)[0]) == gid.gmime3.stream.Stream))
+      _installVfunc(klass, "read");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncReset", true)[0]) == gid.gmime3.stream.Stream))
+      _installVfunc(klass, "reset");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSeek", true)[0]) == gid.gmime3.stream.Stream))
+      _installVfunc(klass, "seek");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSubstream", true)[0]) == gid.gmime3.stream.Stream))
+      _installVfunc(klass, "substream");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncTell", true)[0]) == gid.gmime3.stream.Stream))
+      _installVfunc(klass, "tell");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncWrite", true)[0]) == gid.gmime3.stream.Stream))
+      _installVfunc(klass, "write");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GMimeStreamClass*)klass;
+
+    switch (vfunc)
+    {
+      case "close":
+      {
+        static extern(C) int _vfuncCloseTramp(GMimeStream* stream) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gmime3.stream.Stream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          if (!_obj)
+          {
+            auto _klass = cast(GMimeStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
+            if (_klass.close)
+              return (cast(typeof(&_vfuncCloseTramp))_klass.close)(stream);
+            return typeof(return).init;
+          }
+
+          int _retval;
+
+          try
+          {
+            _retval = _obj.vfuncClose();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gmime3.stream.Stream.vfuncClose");
+          }
+          return _retval;
+        }
+
+        _klass.close = cast(typeof(_klass.close))&_vfuncCloseTramp;
+        break;
+      }
+      case "eos":
+      {
+        static extern(C) gboolean _vfuncEosTramp(GMimeStream* stream) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gmime3.stream.Stream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          if (!_obj)
+          {
+            auto _klass = cast(GMimeStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
+            if (_klass.eos)
+              return (cast(typeof(&_vfuncEosTramp))_klass.eos)(stream);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncEos();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gmime3.stream.Stream.vfuncEos");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.eos = cast(typeof(_klass.eos))&_vfuncEosTramp;
+        break;
+      }
+      case "flush":
+      {
+        static extern(C) int _vfuncFlushTramp(GMimeStream* stream) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gmime3.stream.Stream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          if (!_obj)
+          {
+            auto _klass = cast(GMimeStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
+            if (_klass.flush)
+              return (cast(typeof(&_vfuncFlushTramp))_klass.flush)(stream);
+            return typeof(return).init;
+          }
+
+          int _retval;
+
+          try
+          {
+            _retval = _obj.vfuncFlush();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gmime3.stream.Stream.vfuncFlush");
+          }
+          return _retval;
+        }
+
+        _klass.flush = cast(typeof(_klass.flush))&_vfuncFlushTramp;
+        break;
+      }
+      case "length":
+      {
+        static extern(C) long _vfuncLengthTramp(GMimeStream* stream) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gmime3.stream.Stream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          if (!_obj)
+          {
+            auto _klass = cast(GMimeStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
+            if (_klass.length)
+              return (cast(typeof(&_vfuncLengthTramp))_klass.length)(stream);
+            return typeof(return).init;
+          }
+
+          long _retval;
+
+          try
+          {
+            _retval = _obj.vfuncLength();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gmime3.stream.Stream.vfuncLength");
+          }
+          return _retval;
+        }
+
+        _klass.length = cast(typeof(_klass.length))&_vfuncLengthTramp;
+        break;
+      }
+      case "read":
+      {
+        static extern(C) ptrdiff_t _vfuncReadTramp(GMimeStream* stream, ubyte* buf, size_t len) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gmime3.stream.Stream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          if (!_obj)
+          {
+            auto _klass = cast(GMimeStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
+            if (_klass.read)
+              return (cast(typeof(&_vfuncReadTramp))_klass.read)(stream, buf, len);
+            return typeof(return).init;
+          }
+
+          ptrdiff_t _retval;
+          ubyte[] _buf;
+          _buf.length = len;
+          _buf[0 .. len] = buf[0 .. len];
+
+          try
+          {
+            _retval = _obj.vfuncRead(_buf);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gmime3.stream.Stream.vfuncRead");
+          }
+          return _retval;
+        }
+
+        _klass.read = cast(typeof(_klass.read))&_vfuncReadTramp;
+        break;
+      }
+      case "reset":
+      {
+        static extern(C) int _vfuncResetTramp(GMimeStream* stream) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gmime3.stream.Stream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          if (!_obj)
+          {
+            auto _klass = cast(GMimeStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
+            if (_klass.reset)
+              return (cast(typeof(&_vfuncResetTramp))_klass.reset)(stream);
+            return typeof(return).init;
+          }
+
+          int _retval;
+
+          try
+          {
+            _retval = _obj.vfuncReset();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gmime3.stream.Stream.vfuncReset");
+          }
+          return _retval;
+        }
+
+        _klass.reset = cast(typeof(_klass.reset))&_vfuncResetTramp;
+        break;
+      }
+      case "seek":
+      {
+        static extern(C) long _vfuncSeekTramp(GMimeStream* stream, long offset, GMimeSeekWhence whence) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gmime3.stream.Stream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          if (!_obj)
+          {
+            auto _klass = cast(GMimeStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
+            if (_klass.seek)
+              return (cast(typeof(&_vfuncSeekTramp))_klass.seek)(stream, offset, whence);
+            return typeof(return).init;
+          }
+
+          long _retval;
+
+          try
+          {
+            _retval = _obj.vfuncSeek(offset, whence);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gmime3.stream.Stream.vfuncSeek");
+          }
+          return _retval;
+        }
+
+        _klass.seek = cast(typeof(_klass.seek))&_vfuncSeekTramp;
+        break;
+      }
+      case "substream":
+      {
+        static extern(C) GMimeStream* _vfuncSubstreamTramp(GMimeStream* stream, long start, long end) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gmime3.stream.Stream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          if (!_obj)
+          {
+            auto _klass = cast(GMimeStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
+            if (_klass.substream)
+              return (cast(typeof(&_vfuncSubstreamTramp))_klass.substream)(stream, start, end);
+            return typeof(return).init;
+          }
+
+          gid.gmime3.stream.Stream _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncSubstream(start, end);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gmime3.stream.Stream.vfuncSubstream");
+          }
+          auto _retval = _dretval ? cast(GMimeStream*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.substream = cast(typeof(_klass.substream))&_vfuncSubstreamTramp;
+        break;
+      }
+      case "tell":
+      {
+        static extern(C) long _vfuncTellTramp(GMimeStream* stream) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gmime3.stream.Stream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          if (!_obj)
+          {
+            auto _klass = cast(GMimeStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
+            if (_klass.tell)
+              return (cast(typeof(&_vfuncTellTramp))_klass.tell)(stream);
+            return typeof(return).init;
+          }
+
+          long _retval;
+
+          try
+          {
+            _retval = _obj.vfuncTell();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gmime3.stream.Stream.vfuncTell");
+          }
+          return _retval;
+        }
+
+        _klass.tell = cast(typeof(_klass.tell))&_vfuncTellTramp;
+        break;
+      }
+      case "write":
+      {
+        static extern(C) ptrdiff_t _vfuncWriteTramp(GMimeStream* stream, const(ubyte)* buf, size_t len) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gmime3.stream.Stream)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)stream);
+          if (!_obj)
+          {
+            auto _klass = cast(GMimeStreamClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)stream);
+            if (_klass.write)
+              return (cast(typeof(&_vfuncWriteTramp))_klass.write)(stream, buf, len);
+            return typeof(return).init;
+          }
+
+          ptrdiff_t _retval;
+          ubyte[] _buf;
+          _buf.length = len;
+          _buf[0 .. len] = buf[0 .. len];
+
+          try
+          {
+            _retval = _obj.vfuncWrite(_buf);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gmime3.stream.Stream.vfuncWrite");
+          }
+          return _retval;
+        }
+
+        _klass.write = cast(typeof(_klass.write))&_vfuncWriteTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

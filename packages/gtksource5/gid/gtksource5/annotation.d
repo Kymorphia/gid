@@ -27,6 +27,15 @@ class Annotation : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -102,10 +111,17 @@ class Annotation : gid.gobject2.object.ObjectWrap
   /** */
   this(string description, gid.gio2.icon.Icon icon, int line, gid.gtksource5.types.AnnotationStyle style) nothrow
   {
-    GtkSourceAnnotation* _cretval;
-    const(char)* _description = description.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gtk_source_annotation_new(_description, icon ? cast(GIcon*)(cast(gid.gobject2.object.ObjectWrap)icon)._cPtr(No.Dup) : null, line, style);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkSourceAnnotation* _cretval;
+      const(char)* _description = description.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gtk_source_annotation_new(_description, icon ? cast(GIcon*)(cast(gid.gobject2.object.ObjectWrap)icon)._cPtr(No.Dup) : null, line, style);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /** */

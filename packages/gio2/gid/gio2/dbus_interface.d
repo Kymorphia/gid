@@ -29,6 +29,9 @@ interface DBusInterface : GidWrap
     return cast(void function())g_dbus_interface_get_type != &gidSymbolNotFound ? g_dbus_interface_get_type() : cast(GType)0;
   }
 
+
+
+
   /**
       Gets the #GDBusObject that interface_ belongs to, if any.
       Returns: A #GDBusObject or null. The returned

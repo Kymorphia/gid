@@ -119,11 +119,18 @@ class RadioMenuItem : gid.gtk3.check_menu_item.CheckMenuItem
   */
   this(gid.gtk3.radio_menu_item.RadioMenuItem[] group = null) nothrow
   {
-    GtkWidget* _cretval;
-    auto _group = gSListFromD!(gid.gtk3.radio_menu_item.RadioMenuItem)(group);
-    scope(exit) containerFree!(GSList*, gid.gtk3.radio_menu_item.RadioMenuItem, GidOwnership.None)(_group);
-    _cretval = gtk_radio_menu_item_new(_group);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, group !is null), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      auto _group = gSListFromD!(gid.gtk3.radio_menu_item.RadioMenuItem)(group);
+      scope(exit) containerFree!(GSList*, gid.gtk3.radio_menu_item.RadioMenuItem, GidOwnership.None)(_group);
+      _cretval = gtk_radio_menu_item_new(_group);
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -222,6 +229,16 @@ class RadioMenuItem : gid.gtk3.check_menu_item.CheckMenuItem
     return _retval;
   }
 
+  /** */
+  protected void vfuncGroupChanged()
+  {
+    auto _klass = cast(GtkRadioMenuItemClass*)_vfuncClass;
+    if (!_klass.groupChanged)
+      return;
+
+    _klass.groupChanged(cast(GtkRadioMenuItem*)this._cPtr);
+  }
+
   /**
       Returns the group to which the radio menu item belongs, as a #GList of
       #GtkRadioMenuItem. The list belongs to GTK+ and should not be freed.
@@ -306,6 +323,7 @@ class RadioMenuItem : gid.gtk3.check_menu_item.CheckMenuItem
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -325,6 +343,62 @@ class RadioMenuItem : gid.gtk3.check_menu_item.CheckMenuItem
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("group-changed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from RadioMenuItem
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.radio_menu_item.RadioMenuItem), T.stringof ~ " is not derived from gid.gtk3.radio_menu_item.RadioMenuItem");
+
+    gid.gtk3.check_menu_item.CheckMenuItem._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGroupChanged", true)[0]) == gid.gtk3.radio_menu_item.RadioMenuItem))
+      _installVfunc(klass, "group_changed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkRadioMenuItemClass*)klass;
+
+    switch (vfunc)
+    {
+      case "group_changed":
+      {
+        static extern(C) void _vfuncGroupChangedTramp(GtkRadioMenuItem* radioMenuItem) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.radio_menu_item.RadioMenuItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)radioMenuItem);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkRadioMenuItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)radioMenuItem);
+            if (_klass.groupChanged)
+              return (cast(typeof(&_vfuncGroupChangedTramp))_klass.groupChanged)(radioMenuItem);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncGroupChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.radio_menu_item.RadioMenuItem.vfuncGroupChanged");
+          }
+        }
+
+        _klass.groupChanged = cast(typeof(_klass.groupChanged))&_vfuncGroupChangedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

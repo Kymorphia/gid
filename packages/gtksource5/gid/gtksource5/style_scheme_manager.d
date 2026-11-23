@@ -83,9 +83,16 @@ class StyleSchemeManager : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GtkSourceStyleSchemeManager* _cretval;
-    _cretval = gtk_source_style_scheme_manager_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkSourceStyleSchemeManager* _cretval;
+      _cretval = gtk_source_style_scheme_manager_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

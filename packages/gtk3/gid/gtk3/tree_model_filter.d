@@ -93,6 +93,15 @@ class TreeModelFilter : gid.gobject2.object.ObjectWrap, gid.gtk3.tree_drag_sourc
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -141,6 +150,28 @@ class TreeModelFilter : gid.gobject2.object.ObjectWrap, gid.gtk3.tree_drag_sourc
 
   mixin TreeDragSourceT!();
   mixin TreeModelT!();
+
+  /** */
+  protected void vfuncModify(gid.gtk3.tree_model.TreeModel childModel, gid.gtk3.tree_iter.TreeIter iter, gid.gobject2.value.Value value, int column)
+  {
+    auto _klass = cast(GtkTreeModelFilterClass*)_vfuncClass;
+    if (!_klass.modify)
+      return;
+
+    _klass.modify(cast(GtkTreeModelFilter*)this._cPtr, childModel ? cast(GtkTreeModel*)(cast(gid.gobject2.object.ObjectWrap)childModel)._cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, value ? cast(GValue*)value._cPtr(No.Dup) : null, column);
+  }
+
+  /** */
+  protected bool vfuncVisible(gid.gtk3.tree_model.TreeModel childModel, gid.gtk3.tree_iter.TreeIter iter)
+  {
+    auto _klass = cast(GtkTreeModelFilterClass*)_vfuncClass;
+    if (!_klass.visible)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.visible(cast(GtkTreeModelFilter*)this._cPtr, childModel ? cast(GtkTreeModel*)(cast(gid.gobject2.object.ObjectWrap)childModel)._cPtr(No.Dup) : null, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
+    return _retval;
+  }
 
   /**
       This function should almost never be called. It clears the filter
@@ -267,6 +298,7 @@ class TreeModelFilter : gid.gobject2.object.ObjectWrap, gid.gtk3.tree_drag_sourc
   {
     extern(C) void _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, GValue* value, int column, void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk3.types.TreeModelFilterModifyFunc*)data;
       auto _iter = iter ? new gid.gtk3.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
       gid.gobject2.value.Value _value;
@@ -362,6 +394,7 @@ class TreeModelFilter : gid.gobject2.object.ObjectWrap, gid.gtk3.tree_drag_sourc
   {
     extern(C) gboolean _funcCallback(GtkTreeModel* model, GtkTreeIter* iter, void* data) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gtk3.types.TreeModelFilterVisibleFunc*)data;
       auto _iter = iter ? new gid.gtk3.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
@@ -384,6 +417,108 @@ class TreeModelFilter : gid.gobject2.object.ObjectWrap, gid.gtk3.tree_drag_sourc
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
     gtk_tree_model_filter_set_visible_func(cast(GtkTreeModelFilter*)this._cPtr, _funcCB, _func, _funcDestroyCB);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from TreeModelFilter
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.tree_model_filter.TreeModelFilter), T.stringof ~ " is not derived from gid.gtk3.tree_model_filter.TreeModelFilter");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncModify", true)[0]) == gid.gtk3.tree_model_filter.TreeModelFilter))
+      _installVfunc(klass, "modify");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncVisible", true)[0]) == gid.gtk3.tree_model_filter.TreeModelFilter))
+      _installVfunc(klass, "visible");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkTreeModelFilterClass*)klass;
+
+    switch (vfunc)
+    {
+      case "modify":
+      {
+        static extern(C) void _vfuncModifyTramp(GtkTreeModelFilter* self, GtkTreeModel* childModel, GtkTreeIter* iter, GValue* value, int column) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.tree_model_filter.TreeModelFilter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.modify)
+              return (cast(typeof(&_vfuncModifyTramp))_klass.modify)(self, childModel, iter, value, column);
+            return;
+          }
+
+          auto _iter = iter ? new gid.gtk3.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+          auto _value = value ? new gid.gobject2.value.Value(cast(void*)value, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncModify(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.tree_model.TreeModel)(cast(void*)childModel, No.Take), _iter, _value, column);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model_filter.TreeModelFilter.vfuncModify");
+          }
+          if (_iter)
+            _iter._cUnborrow;
+          if (_value)
+            _value._cUnborrow;
+
+        }
+
+        _klass.modify = cast(typeof(_klass.modify))&_vfuncModifyTramp;
+        break;
+      }
+      case "visible":
+      {
+        static extern(C) gboolean _vfuncVisibleTramp(GtkTreeModelFilter* self, GtkTreeModel* childModel, GtkTreeIter* iter) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.tree_model_filter.TreeModelFilter)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTreeModelFilterClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.visible)
+              return (cast(typeof(&_vfuncVisibleTramp))_klass.visible)(self, childModel, iter);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _iter = iter ? new gid.gtk3.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncVisible(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.tree_model.TreeModel)(cast(void*)childModel, No.Take), _iter);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tree_model_filter.TreeModelFilter.vfuncVisible");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_iter)
+            _iter._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.visible = cast(typeof(_klass.visible))&_vfuncVisibleTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

@@ -266,9 +266,102 @@ class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_flow_box_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_flow_box_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncActivateCursorChild()
+  {
+    auto _klass = cast(GtkFlowBoxClass*)_vfuncClass;
+    if (!_klass.activateCursorChild)
+      return;
+
+    _klass.activateCursorChild(cast(GtkFlowBox*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncChildActivated(gid.gtk3.flow_box_child.FlowBoxChild child)
+  {
+    auto _klass = cast(GtkFlowBoxClass*)_vfuncClass;
+    if (!_klass.childActivated)
+      return;
+
+    _klass.childActivated(cast(GtkFlowBox*)this._cPtr, child ? cast(GtkFlowBoxChild*)child._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected bool vfuncMoveCursor(gid.gtk3.types.MovementStep step, int count)
+  {
+    auto _klass = cast(GtkFlowBoxClass*)_vfuncClass;
+    if (!_klass.moveCursor)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.moveCursor(cast(GtkFlowBox*)this._cPtr, step, count);
+    return _retval;
+  }
+
+  /**
+      Select all children of box, if the selection
+      mode allows it.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSelectAll` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSelectAll()
+  {
+    auto _klass = cast(GtkFlowBoxClass*)_vfuncClass;
+    if (!_klass.selectAll)
+      return;
+
+    _klass.selectAll(cast(GtkFlowBox*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncSelectedChildrenChanged()
+  {
+    auto _klass = cast(GtkFlowBoxClass*)_vfuncClass;
+    if (!_klass.selectedChildrenChanged)
+      return;
+
+    _klass.selectedChildrenChanged(cast(GtkFlowBox*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncToggleCursorChild()
+  {
+    auto _klass = cast(GtkFlowBoxClass*)_vfuncClass;
+    if (!_klass.toggleCursorChild)
+      return;
+
+    _klass.toggleCursorChild(cast(GtkFlowBox*)this._cPtr);
+  }
+
+  /**
+      Unselect all children of box, if the selection
+      mode allows it.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncUnselectAll` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncUnselectAll()
+  {
+    auto _klass = cast(GtkFlowBoxClass*)_vfuncClass;
+    if (!_klass.unselectAll)
+      return;
+
+    _klass.unselectAll(cast(GtkFlowBox*)this._cPtr);
   }
 
   /**
@@ -297,6 +390,7 @@ class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
   {
     extern(C) GtkWidget* _createWidgetFuncCallback(GObject* item, void* userData) nothrow
     {
+      gidAttachThread();
       gid.gtk3.widget.Widget _dretval;
       auto _dlg = cast(gid.gtk3.types.FlowBoxCreateWidgetFunc*)userData;
 
@@ -524,6 +618,7 @@ class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
   {
     extern(C) void _funcCallback(GtkFlowBox* box, GtkFlowBoxChild* child, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk3.types.FlowBoxForeachFunc*)userData;
 
       try
@@ -585,6 +680,7 @@ class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
   {
     extern(C) gboolean _filterFuncCallback(GtkFlowBoxChild* child, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gtk3.types.FlowBoxFilterFunc*)userData;
 
@@ -713,6 +809,7 @@ class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
   {
     extern(C) int _sortFuncCallback(GtkFlowBoxChild* child1, GtkFlowBoxChild* child2, void* userData) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _dlg = cast(gid.gtk3.types.FlowBoxSortFunc*)userData;
 
@@ -799,6 +896,7 @@ class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -847,6 +945,7 @@ class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -916,6 +1015,7 @@ class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -974,6 +1074,7 @@ class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1023,6 +1124,7 @@ class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1071,6 +1173,7 @@ class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1120,6 +1223,7 @@ class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1139,6 +1243,247 @@ class FlowBox : gid.gtk3.container.Container, gid.gtk3.orientable.Orientable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("unselect-all", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from FlowBox
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.flow_box.FlowBox), T.stringof ~ " is not derived from gid.gtk3.flow_box.FlowBox");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivateCursorChild", true)[0]) == gid.gtk3.flow_box.FlowBox))
+      _installVfunc(klass, "activate_cursor_child");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChildActivated", true)[0]) == gid.gtk3.flow_box.FlowBox))
+      _installVfunc(klass, "child_activated");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMoveCursor", true)[0]) == gid.gtk3.flow_box.FlowBox))
+      _installVfunc(klass, "move_cursor");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSelectAll", true)[0]) == gid.gtk3.flow_box.FlowBox))
+      _installVfunc(klass, "select_all");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSelectedChildrenChanged", true)[0]) == gid.gtk3.flow_box.FlowBox))
+      _installVfunc(klass, "selected_children_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncToggleCursorChild", true)[0]) == gid.gtk3.flow_box.FlowBox))
+      _installVfunc(klass, "toggle_cursor_child");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUnselectAll", true)[0]) == gid.gtk3.flow_box.FlowBox))
+      _installVfunc(klass, "unselect_all");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkFlowBoxClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate_cursor_child":
+      {
+        static extern(C) void _vfuncActivateCursorChildTramp(GtkFlowBox* box) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.flow_box.FlowBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkFlowBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
+            if (_klass.activateCursorChild)
+              return (cast(typeof(&_vfuncActivateCursorChildTramp))_klass.activateCursorChild)(box);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncActivateCursorChild();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.flow_box.FlowBox.vfuncActivateCursorChild");
+          }
+        }
+
+        _klass.activateCursorChild = cast(typeof(_klass.activateCursorChild))&_vfuncActivateCursorChildTramp;
+        break;
+      }
+      case "child_activated":
+      {
+        static extern(C) void _vfuncChildActivatedTramp(GtkFlowBox* box, GtkFlowBoxChild* child) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.flow_box.FlowBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkFlowBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
+            if (_klass.childActivated)
+              return (cast(typeof(&_vfuncChildActivatedTramp))_klass.childActivated)(box, child);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncChildActivated(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.flow_box.FlowBox.vfuncChildActivated");
+          }
+        }
+
+        _klass.childActivated = cast(typeof(_klass.childActivated))&_vfuncChildActivatedTramp;
+        break;
+      }
+      case "move_cursor":
+      {
+        static extern(C) gboolean _vfuncMoveCursorTramp(GtkFlowBox* box, GtkMovementStep step, int count) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.flow_box.FlowBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkFlowBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
+            if (_klass.moveCursor)
+              return (cast(typeof(&_vfuncMoveCursorTramp))_klass.moveCursor)(box, step, count);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncMoveCursor(step, count);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.flow_box.FlowBox.vfuncMoveCursor");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.moveCursor = cast(typeof(_klass.moveCursor))&_vfuncMoveCursorTramp;
+        break;
+      }
+      case "select_all":
+      {
+        static extern(C) void _vfuncSelectAllTramp(GtkFlowBox* box) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.flow_box.FlowBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkFlowBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
+            if (_klass.selectAll)
+              return (cast(typeof(&_vfuncSelectAllTramp))_klass.selectAll)(box);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSelectAll();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.flow_box.FlowBox.vfuncSelectAll");
+          }
+        }
+
+        _klass.selectAll = cast(typeof(_klass.selectAll))&_vfuncSelectAllTramp;
+        break;
+      }
+      case "selected_children_changed":
+      {
+        static extern(C) void _vfuncSelectedChildrenChangedTramp(GtkFlowBox* box) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.flow_box.FlowBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkFlowBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
+            if (_klass.selectedChildrenChanged)
+              return (cast(typeof(&_vfuncSelectedChildrenChangedTramp))_klass.selectedChildrenChanged)(box);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSelectedChildrenChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.flow_box.FlowBox.vfuncSelectedChildrenChanged");
+          }
+        }
+
+        _klass.selectedChildrenChanged = cast(typeof(_klass.selectedChildrenChanged))&_vfuncSelectedChildrenChangedTramp;
+        break;
+      }
+      case "toggle_cursor_child":
+      {
+        static extern(C) void _vfuncToggleCursorChildTramp(GtkFlowBox* box) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.flow_box.FlowBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkFlowBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
+            if (_klass.toggleCursorChild)
+              return (cast(typeof(&_vfuncToggleCursorChildTramp))_klass.toggleCursorChild)(box);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncToggleCursorChild();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.flow_box.FlowBox.vfuncToggleCursorChild");
+          }
+        }
+
+        _klass.toggleCursorChild = cast(typeof(_klass.toggleCursorChild))&_vfuncToggleCursorChildTramp;
+        break;
+      }
+      case "unselect_all":
+      {
+        static extern(C) void _vfuncUnselectAllTramp(GtkFlowBox* box) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.flow_box.FlowBox)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)box);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkFlowBoxClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)box);
+            if (_klass.unselectAll)
+              return (cast(typeof(&_vfuncUnselectAllTramp))_klass.unselectAll)(box);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncUnselectAll();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.flow_box.FlowBox.vfuncUnselectAll");
+          }
+        }
+
+        _klass.unselectAll = cast(typeof(_klass.unselectAll))&_vfuncUnselectAllTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

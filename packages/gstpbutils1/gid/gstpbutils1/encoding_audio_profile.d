@@ -22,6 +22,15 @@ class EncodingAudioProfile : gid.gstpbutils1.encoding_profile.EncodingProfile
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -73,10 +82,17 @@ class EncodingAudioProfile : gid.gstpbutils1.encoding_profile.EncodingProfile
   */
   this(gid.gst1.caps.Caps format, string preset, gid.gst1.caps.Caps restriction, uint presence) nothrow
   {
-    GstEncodingAudioProfile* _cretval;
-    const(char)* _preset = preset.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gst_encoding_audio_profile_new(format ? cast(GstCaps*)format._cPtr(No.Dup) : null, _preset, restriction ? cast(GstCaps*)restriction._cPtr(No.Dup) : null, presence);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GstEncodingAudioProfile* _cretval;
+      const(char)* _preset = preset.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gst_encoding_audio_profile_new(format ? cast(GstCaps*)format._cPtr(No.Dup) : null, _preset, restriction ? cast(GstCaps*)restriction._cPtr(No.Dup) : null, presence);
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

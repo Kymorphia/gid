@@ -75,6 +75,14 @@ interface Preset : GidWrap
     return _retval;
   }
 
+
+
+
+
+
+
+
+
   /**
       Delete the given preset.
   

@@ -115,9 +115,16 @@ class MediaFile : gid.gtk4.media_stream.MediaStream
   */
   this() nothrow
   {
-    GtkMediaStream* _cretval;
-    _cretval = gtk_media_file_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkMediaStream* _cretval;
+      _cretval = gtk_media_file_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -189,6 +196,26 @@ class MediaFile : gid.gtk4.media_stream.MediaStream
     _cretval = gtk_media_file_new_for_resource(_resourcePath);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.media_file.MediaFile)(cast(GtkMediaStream*)_cretval, Yes.Take);
     return _retval;
+  }
+
+  /** */
+  protected void vfuncClose()
+  {
+    auto _klass = cast(GtkMediaFileClass*)_vfuncClass;
+    if (!_klass.close)
+      return;
+
+    _klass.close(cast(GtkMediaFile*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncOpen()
+  {
+    auto _klass = cast(GtkMediaFileClass*)_vfuncClass;
+    if (!_klass.open)
+      return;
+
+    _klass.open(cast(GtkMediaFile*)this._cPtr);
   }
 
   /**
@@ -286,6 +313,92 @@ class MediaFile : gid.gtk4.media_stream.MediaStream
   {
     const(char)* _resourcePath = resourcePath.toCString!(No.Malloc, Yes.Nullable);
     gtk_media_file_set_resource(cast(GtkMediaFile*)this._cPtr, _resourcePath);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from MediaFile
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.media_file.MediaFile), T.stringof ~ " is not derived from gid.gtk4.media_file.MediaFile");
+
+    gid.gtk4.media_stream.MediaStream._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncClose", true)[0]) == gid.gtk4.media_file.MediaFile))
+      _installVfunc(klass, "close");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncOpen", true)[0]) == gid.gtk4.media_file.MediaFile))
+      _installVfunc(klass, "open");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkMediaFileClass*)klass;
+
+    switch (vfunc)
+    {
+      case "close":
+      {
+        static extern(C) void _vfuncCloseTramp(GtkMediaFile* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.media_file.MediaFile)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMediaFileClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.close)
+              return (cast(typeof(&_vfuncCloseTramp))_klass.close)(self);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncClose();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.media_file.MediaFile.vfuncClose");
+          }
+        }
+
+        _klass.close = cast(typeof(_klass.close))&_vfuncCloseTramp;
+        break;
+      }
+      case "open":
+      {
+        static extern(C) void _vfuncOpenTramp(GtkMediaFile* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.media_file.MediaFile)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkMediaFileClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self);
+            if (_klass.open)
+              return (cast(typeof(&_vfuncOpenTramp))_klass.open)(self);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncOpen();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.media_file.MediaFile.vfuncOpen");
+          }
+        }
+
+        _klass.open = cast(typeof(_klass.open))&_vfuncOpenTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

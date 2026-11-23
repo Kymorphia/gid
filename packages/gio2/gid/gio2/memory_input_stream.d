@@ -74,9 +74,16 @@ class MemoryInputStream : gid.gio2.input_stream.InputStream, gid.gio2.pollable_i
   */
   this() nothrow
   {
-    GInputStream* _cretval;
-    _cretval = g_memory_input_stream_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GInputStream* _cretval;
+      _cretval = g_memory_input_stream_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

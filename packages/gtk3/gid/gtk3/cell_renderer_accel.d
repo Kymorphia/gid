@@ -162,9 +162,38 @@ class CellRendererAccel : gid.gtk3.cell_renderer_text.CellRendererText
   */
   this() nothrow
   {
-    GtkCellRenderer* _cretval;
-    _cretval = gtk_cell_renderer_accel_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkCellRenderer* _cretval;
+      _cretval = gtk_cell_renderer_accel_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncAccelCleared(string pathString)
+  {
+    auto _klass = cast(GtkCellRendererAccelClass*)_vfuncClass;
+    if (!_klass.accelCleared)
+      return;
+
+    const(char)* _pathString = pathString.toCString!(No.Malloc, No.Nullable);
+    _klass.accelCleared(cast(GtkCellRendererAccel*)this._cPtr, _pathString);
+  }
+
+  /** */
+  protected void vfuncAccelEdited(string pathString, uint accelKey, gid.gdk3.types.ModifierType accelMods, uint hardwareKeycode)
+  {
+    auto _klass = cast(GtkCellRendererAccelClass*)_vfuncClass;
+    if (!_klass.accelEdited)
+      return;
+
+    const(char)* _pathString = pathString.toCString!(No.Malloc, No.Nullable);
+    _klass.accelEdited(cast(GtkCellRendererAccel*)this._cPtr, _pathString, accelKey, accelMods, hardwareKeycode);
   }
 
   /**
@@ -193,6 +222,7 @@ class CellRendererAccel : gid.gtk3.cell_renderer_text.CellRendererText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -252,6 +282,7 @@ class CellRendererAccel : gid.gtk3.cell_renderer_text.CellRendererText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -283,6 +314,96 @@ class CellRendererAccel : gid.gtk3.cell_renderer_text.CellRendererText
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("accel-edited", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from CellRendererAccel
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.cell_renderer_accel.CellRendererAccel), T.stringof ~ " is not derived from gid.gtk3.cell_renderer_accel.CellRendererAccel");
+
+    gid.gtk3.cell_renderer_text.CellRendererText._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAccelCleared", true)[0]) == gid.gtk3.cell_renderer_accel.CellRendererAccel))
+      _installVfunc(klass, "accel_cleared");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAccelEdited", true)[0]) == gid.gtk3.cell_renderer_accel.CellRendererAccel))
+      _installVfunc(klass, "accel_edited");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkCellRendererAccelClass*)klass;
+
+    switch (vfunc)
+    {
+      case "accel_cleared":
+      {
+        static extern(C) void _vfuncAccelClearedTramp(GtkCellRendererAccel* accel, const(char)* pathString) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.cell_renderer_accel.CellRendererAccel)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellRendererAccelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accel);
+            if (_klass.accelCleared)
+              return (cast(typeof(&_vfuncAccelClearedTramp))_klass.accelCleared)(accel, pathString);
+            return;
+          }
+
+          string _pathString = pathString.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncAccelCleared(_pathString);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_renderer_accel.CellRendererAccel.vfuncAccelCleared");
+          }
+        }
+
+        _klass.accelCleared = cast(typeof(_klass.accelCleared))&_vfuncAccelClearedTramp;
+        break;
+      }
+      case "accel_edited":
+      {
+        static extern(C) void _vfuncAccelEditedTramp(GtkCellRendererAccel* accel, const(char)* pathString, uint accelKey, GdkModifierType accelMods, uint hardwareKeycode) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.cell_renderer_accel.CellRendererAccel)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)accel);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkCellRendererAccelClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)accel);
+            if (_klass.accelEdited)
+              return (cast(typeof(&_vfuncAccelEditedTramp))_klass.accelEdited)(accel, pathString, accelKey, accelMods, hardwareKeycode);
+            return;
+          }
+
+          string _pathString = pathString.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncAccelEdited(_pathString, accelKey, accelMods, hardwareKeycode);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.cell_renderer_accel.CellRendererAccel.vfuncAccelEdited");
+          }
+        }
+
+        _klass.accelEdited = cast(typeof(_klass.accelEdited))&_vfuncAccelEditedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

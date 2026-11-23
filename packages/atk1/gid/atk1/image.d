@@ -37,6 +37,11 @@ interface Image : GidWrap
     return cast(void function())atk_image_get_type != &gidSymbolNotFound ? atk_image_get_type() : cast(GType)0;
   }
 
+
+
+
+
+
   /**
       Get a textual description of this image.
       Returns: a string representing the image description

@@ -122,9 +122,16 @@ class GutterRendererPixbuf : gid.gtksource5.gutter_renderer.GutterRenderer
   */
   this() nothrow
   {
-    GtkSourceGutterRenderer* _cretval;
-    _cretval = gtk_source_gutter_renderer_pixbuf_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkSourceGutterRenderer* _cretval;
+      _cretval = gtk_source_gutter_renderer_pixbuf_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

@@ -32,6 +32,15 @@ class DesktopAppInfo : gid.gobject2.object.ObjectWrap, gid.gio2.app_info.AppInfo
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -132,10 +141,17 @@ class DesktopAppInfo : gid.gobject2.object.ObjectWrap, gid.gio2.app_info.AppInfo
   */
   this(string desktopId) nothrow
   {
-    GDesktopAppInfo* _cretval;
-    const(char)* _desktopId = desktopId.toCString!(No.Malloc, No.Nullable);
-    _cretval = g_desktop_app_info_new(_desktopId);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GDesktopAppInfo* _cretval;
+      const(char)* _desktopId = desktopId.toCString!(No.Malloc, No.Nullable);
+      _cretval = g_desktop_app_info_new(_desktopId);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -534,6 +550,7 @@ class DesktopAppInfo : gid.gobject2.object.ObjectWrap, gid.gio2.app_info.AppInfo
   {
     extern(C) void _userSetupCallback(void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.glib2.types.SpawnChildSetupFunc*)data;
 
@@ -549,6 +566,7 @@ class DesktopAppInfo : gid.gobject2.object.ObjectWrap, gid.gio2.app_info.AppInfo
     auto _userSetupCB = userSetup ? &_userSetupCallback : null;
     extern(C) void _pidCallbackCallback(GDesktopAppInfo* appinfo, GPid pid, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.giounix2.types.DesktopAppLaunchCallback*)userData;
 
       try
@@ -598,6 +616,7 @@ class DesktopAppInfo : gid.gobject2.object.ObjectWrap, gid.gio2.app_info.AppInfo
   {
     extern(C) void _userSetupCallback(void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.glib2.types.SpawnChildSetupFunc*)data;
 
@@ -613,6 +632,7 @@ class DesktopAppInfo : gid.gobject2.object.ObjectWrap, gid.gio2.app_info.AppInfo
     auto _userSetupCB = userSetup ? &_userSetupCallback : null;
     extern(C) void _pidCallbackCallback(GDesktopAppInfo* appinfo, GPid pid, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.giounix2.types.DesktopAppLaunchCallback*)userData;
 
       try

@@ -167,9 +167,16 @@ class ShortcutController : gid.gtk4.event_controller.EventController, gid.gio2.l
   */
   this() nothrow
   {
-    GtkEventController* _cretval;
-    _cretval = gtk_shortcut_controller_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkEventController* _cretval;
+      _cretval = gtk_shortcut_controller_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

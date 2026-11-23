@@ -171,9 +171,16 @@ class PreferencesRow : gid.gtk4.list_box_row.ListBoxRow
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = adw_preferences_row_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = adw_preferences_row_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**

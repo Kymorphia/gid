@@ -77,9 +77,16 @@ class Grid : gid.gtk4.widget.Widget
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = panel_grid_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = panel_grid_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -104,6 +111,7 @@ class Grid : gid.gtk4.widget.Widget
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -142,6 +150,7 @@ class Grid : gid.gtk4.widget.Widget
   {
     extern(C) void _callbackCallback(PanelFrame* frame, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.panel1.types.FrameCallback*)userData;
 
       try
@@ -247,6 +256,7 @@ class Grid : gid.gtk4.widget.Widget
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

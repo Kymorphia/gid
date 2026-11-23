@@ -108,6 +108,9 @@ interface AsyncResult : GidWrap
     return cast(void function())g_async_result_get_type != &gidSymbolNotFound ? g_async_result_get_type() : cast(GType)0;
   }
 
+
+
+
   /**
       Gets the source object from a [gid.gio2.async_result.AsyncResult].
       Returns: a new reference to the source

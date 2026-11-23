@@ -14,6 +14,7 @@ import gid.gtk3.buildable_mixin;
 import gid.gtk3.button;
 import gid.gtk3.c.functions;
 import gid.gtk3.c.types;
+import gid.gtk3.container;
 import gid.gtk3.orientable;
 import gid.gtk3.orientable_mixin;
 import gid.gtk3.types;
@@ -194,9 +195,45 @@ class InfoBar : gid.gtk3.box.Box
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_info_bar_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_info_bar_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncClose()
+  {
+    auto _klass = cast(GtkInfoBarClass*)_vfuncClass;
+    if (!_klass.close)
+      return;
+
+    _klass.close(cast(GtkInfoBar*)this._cPtr);
+  }
+
+  /**
+      Emits the “response” signal with the given response_id.
+  
+      Params:
+        responseId = a response ID
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncResponse` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncResponse(int responseId)
+  {
+    auto _klass = cast(GtkInfoBarClass*)_vfuncClass;
+    if (!_klass.response)
+      return;
+
+    _klass.response(cast(GtkInfoBar*)this._cPtr, responseId);
   }
 
   /**
@@ -400,6 +437,7 @@ class InfoBar : gid.gtk3.box.Box
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -449,6 +487,7 @@ class InfoBar : gid.gtk3.box.Box
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -471,6 +510,92 @@ class InfoBar : gid.gtk3.box.Box
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("response", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from InfoBar
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.info_bar.InfoBar), T.stringof ~ " is not derived from gid.gtk3.info_bar.InfoBar");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncClose", true)[0]) == gid.gtk3.info_bar.InfoBar))
+      _installVfunc(klass, "close");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncResponse", true)[0]) == gid.gtk3.info_bar.InfoBar))
+      _installVfunc(klass, "response");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkInfoBarClass*)klass;
+
+    switch (vfunc)
+    {
+      case "close":
+      {
+        static extern(C) void _vfuncCloseTramp(GtkInfoBar* infoBar) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.info_bar.InfoBar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)infoBar);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkInfoBarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)infoBar);
+            if (_klass.close)
+              return (cast(typeof(&_vfuncCloseTramp))_klass.close)(infoBar);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncClose();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.info_bar.InfoBar.vfuncClose");
+          }
+        }
+
+        _klass.close = cast(typeof(_klass.close))&_vfuncCloseTramp;
+        break;
+      }
+      case "response":
+      {
+        static extern(C) void _vfuncResponseTramp(GtkInfoBar* infoBar, int responseId) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.info_bar.InfoBar)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)infoBar);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkInfoBarClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)infoBar);
+            if (_klass.response)
+              return (cast(typeof(&_vfuncResponseTramp))_klass.response)(infoBar, responseId);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncResponse(responseId);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.info_bar.InfoBar.vfuncResponse");
+          }
+        }
+
+        _klass.response = cast(typeof(_klass.response))&_vfuncResponseTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

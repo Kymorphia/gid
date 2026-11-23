@@ -127,10 +127,17 @@ class CompletionWords : gid.gobject2.object.ObjectWrap, gid.gtksource5.completio
   /** */
   this(string title = null) nothrow
   {
-    GtkSourceCompletionWords* _cretval;
-    const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gtk_source_completion_words_new(_title);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, title !is null), Yes.Take);
+    }
+    else
+    {
+      GtkSourceCompletionWords* _cretval;
+      const(char)* _title = title.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gtk_source_completion_words_new(_title);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

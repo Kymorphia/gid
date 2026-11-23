@@ -39,6 +39,10 @@ interface FrameHeader : GidWrap
   */
   @property void frame(gid.panel1.frame.Frame propval) nothrow;
 
+
+
+
+
   /**
       Add a widget into a the prefix area with a priority. The highest
       the priority the closest to the start.

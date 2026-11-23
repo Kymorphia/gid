@@ -75,6 +75,15 @@ class ObjectWrap : gid.gobject2.initially_unowned.InitiallyUnowned
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -221,6 +230,26 @@ class ObjectWrap : gid.gobject2.initially_unowned.InitiallyUnowned
   }
 
   /**
+      default signal handler
+  
+      Params:
+        orig = 
+        pspec = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDeepNotify` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDeepNotify(gid.gst1.object.ObjectWrap orig, gid.gobject2.param_spec.ParamSpec pspec)
+  {
+    auto _klass = cast(GstObjectClass*)_vfuncClass;
+    if (!_klass.deepNotify)
+      return;
+
+    _klass.deepNotify(cast(GstObject*)this._cPtr, orig ? cast(GstObject*)orig._cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
+  }
+
+  /**
       Attach the #GstControlBinding to the object. If there already was a
       #GstControlBinding for this property it will be replaced.
       
@@ -250,6 +279,7 @@ class ObjectWrap : gid.gobject2.initially_unowned.InitiallyUnowned
   {
     extern(C) void _funcCallback(GstObject* object, void* userData) nothrow
     {
+      gidAttachThread();
       ptrThawGC(userData);
       auto _dlg = cast(gid.gst1.types.ObjectCallAsyncFunc*)userData;
 
@@ -681,6 +711,7 @@ class ObjectWrap : gid.gobject2.initially_unowned.InitiallyUnowned
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -706,6 +737,62 @@ class ObjectWrap : gid.gobject2.initially_unowned.InitiallyUnowned
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("deep-notify"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from ObjectWrap
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gst1.object.ObjectWrap), T.stringof ~ " is not derived from gid.gst1.object.ObjectWrap");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDeepNotify", true)[0]) == gid.gst1.object.ObjectWrap))
+      _installVfunc(klass, "deep_notify");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstObjectClass*)klass;
+
+    switch (vfunc)
+    {
+      case "deep_notify":
+      {
+        static extern(C) void _vfuncDeepNotifyTramp(GstObject* object, GstObject* orig, GParamSpec* pspec) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.object.ObjectWrap)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)object);
+          if (!_obj)
+          {
+            auto _klass = cast(GstObjectClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)object);
+            if (_klass.deepNotify)
+              return (cast(typeof(&_vfuncDeepNotifyTramp))_klass.deepNotify)(object, orig, pspec);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDeepNotify(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.object.ObjectWrap)(cast(void*)orig, No.Take), pspec ? new gid.gobject2.param_spec.ParamSpec(cast(void*)pspec, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.object.ObjectWrap.vfuncDeepNotify");
+          }
+        }
+
+        _klass.deepNotify = cast(typeof(_klass.deepNotify))&_vfuncDeepNotifyTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

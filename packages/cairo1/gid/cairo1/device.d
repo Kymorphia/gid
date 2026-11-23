@@ -194,6 +194,7 @@ class Device : gid.gobject2.boxed.BoxedWrap!(cairo_gobject_device_get_type)
   {
     extern(C) cairo_status_t _writeFuncCallback(void* closure, const(ubyte)* data, uint length) nothrow
     {
+      gidAttachThread();
       gid.cairo1.types.Status _dretval;
       auto _dlg = cast(gid.cairo1.types.WriteFunc*)closure;
       ubyte[] _data;

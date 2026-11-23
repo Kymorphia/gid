@@ -222,9 +222,16 @@ class ColorButton : gid.gtk3.button.Button, gid.gtk3.color_chooser.ColorChooser
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_color_button_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_color_button_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -257,6 +264,16 @@ class ColorButton : gid.gtk3.button.Button, gid.gtk3.color_chooser.ColorChooser
     _cretval = gtk_color_button_new_with_rgba(cast(const(GdkRGBA)*)&rgba);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.color_button.ColorButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+
+  /** */
+  protected void vfuncColorSet()
+  {
+    auto _klass = cast(GtkColorButtonClass*)_vfuncClass;
+    if (!_klass.colorSet)
+      return;
+
+    _klass.colorSet(cast(GtkColorButton*)this._cPtr);
   }
 
   /**
@@ -390,6 +407,7 @@ class ColorButton : gid.gtk3.button.Button, gid.gtk3.color_chooser.ColorChooser
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -409,6 +427,62 @@ class ColorButton : gid.gtk3.button.Button, gid.gtk3.color_chooser.ColorChooser
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("color-set", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from ColorButton
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.color_button.ColorButton), T.stringof ~ " is not derived from gid.gtk3.color_button.ColorButton");
+
+    gid.gtk3.button.Button._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncColorSet", true)[0]) == gid.gtk3.color_button.ColorButton))
+      _installVfunc(klass, "color_set");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkColorButtonClass*)klass;
+
+    switch (vfunc)
+    {
+      case "color_set":
+      {
+        static extern(C) void _vfuncColorSetTramp(GtkColorButton* cp) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.color_button.ColorButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cp);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkColorButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cp);
+            if (_klass.colorSet)
+              return (cast(typeof(&_vfuncColorSetTramp))_klass.colorSet)(cp);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncColorSet();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.color_button.ColorButton.vfuncColorSet");
+          }
+        }
+
+        _klass.colorSet = cast(typeof(_klass.colorSet))&_vfuncColorSetTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

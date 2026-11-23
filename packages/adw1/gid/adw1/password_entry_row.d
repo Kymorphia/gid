@@ -89,9 +89,16 @@ class PasswordEntryRow : gid.adw1.entry_row.EntryRow
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = adw_password_entry_row_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = adw_password_entry_row_new();
+      this(_cretval, No.Take);
+    }
   }
 }
 

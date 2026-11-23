@@ -40,6 +40,14 @@ interface VideoOrientation : GidWrap
     return _retval;
   }
 
+
+
+
+
+
+
+
+
   /**
       Get the horizontal centering offset from the given object.
   

@@ -46,6 +46,7 @@ interface AccessibleRange : gid.gtk4.accessible.Accessible
     import gid.core.loader : gidSymbolNotFound;
     return cast(void function())gtk_accessible_range_get_type != &gidSymbolNotFound ? gtk_accessible_range_get_type() : cast(GType)0;
   }
+
 }
 
 /// Fluent builder implementation template for [gid.gtk4.accessible_range.AccessibleRange]

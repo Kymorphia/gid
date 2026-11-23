@@ -371,9 +371,16 @@ class StatusIcon : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GtkStatusIcon* _cretval;
-    _cretval = gtk_status_icon_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkStatusIcon* _cretval;
+      _cretval = gtk_status_icon_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -503,6 +510,86 @@ class StatusIcon : gid.gobject2.object.ObjectWrap
     gboolean _pushIn;
     gtk_status_icon_position_menu(menu ? cast(GtkMenu*)menu._cPtr(No.Dup) : null, cast(int*)&x, cast(int*)&y, &_pushIn, userData ? cast(GtkStatusIcon*)userData._cPtr(No.Dup) : null);
     pushIn = cast(bool)_pushIn;
+  }
+
+  /** */
+  protected void vfuncActivate()
+  {
+    auto _klass = cast(GtkStatusIconClass*)_vfuncClass;
+    if (!_klass.activate)
+      return;
+
+    _klass.activate(cast(GtkStatusIcon*)this._cPtr);
+  }
+
+  /** */
+  protected bool vfuncButtonPressEvent(gid.gdk3.event_button.EventButton event)
+  {
+    auto _klass = cast(GtkStatusIconClass*)_vfuncClass;
+    if (!_klass.buttonPressEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.buttonPressEvent(cast(GtkStatusIcon*)this._cPtr, event ? cast(GdkEventButton*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncButtonReleaseEvent(gid.gdk3.event_button.EventButton event)
+  {
+    auto _klass = cast(GtkStatusIconClass*)_vfuncClass;
+    if (!_klass.buttonReleaseEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.buttonReleaseEvent(cast(GtkStatusIcon*)this._cPtr, event ? cast(GdkEventButton*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncPopupMenu(uint button, uint activateTime)
+  {
+    auto _klass = cast(GtkStatusIconClass*)_vfuncClass;
+    if (!_klass.popupMenu)
+      return;
+
+    _klass.popupMenu(cast(GtkStatusIcon*)this._cPtr, button, activateTime);
+  }
+
+  /** */
+  protected bool vfuncQueryTooltip(int x, int y, bool keyboardMode, gid.gtk3.tooltip.Tooltip tooltip)
+  {
+    auto _klass = cast(GtkStatusIconClass*)_vfuncClass;
+    if (!_klass.queryTooltip)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.queryTooltip(cast(GtkStatusIcon*)this._cPtr, x, y, keyboardMode, tooltip ? cast(GtkTooltip*)tooltip._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncScrollEvent(gid.gdk3.event_scroll.EventScroll event)
+  {
+    auto _klass = cast(GtkStatusIconClass*)_vfuncClass;
+    if (!_klass.scrollEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.scrollEvent(cast(GtkStatusIcon*)this._cPtr, event ? cast(GdkEventScroll*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncSizeChanged(int size)
+  {
+    auto _klass = cast(GtkStatusIconClass*)_vfuncClass;
+    if (!_klass.sizeChanged)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.sizeChanged(cast(GtkStatusIcon*)this._cPtr, size);
+    return _retval;
   }
 
   /**
@@ -1056,6 +1143,7 @@ class StatusIcon : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1110,6 +1198,7 @@ class StatusIcon : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1173,6 +1262,7 @@ class StatusIcon : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1242,6 +1332,7 @@ class StatusIcon : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1321,6 +1412,7 @@ class StatusIcon : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1390,6 +1482,7 @@ class StatusIcon : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1449,6 +1542,7 @@ class StatusIcon : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1474,6 +1568,270 @@ class StatusIcon : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("size-changed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from StatusIcon
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.status_icon.StatusIcon), T.stringof ~ " is not derived from gid.gtk3.status_icon.StatusIcon");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivate", true)[0]) == gid.gtk3.status_icon.StatusIcon))
+      _installVfunc(klass, "activate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncButtonPressEvent", true)[0]) == gid.gtk3.status_icon.StatusIcon))
+      _installVfunc(klass, "button_press_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncButtonReleaseEvent", true)[0]) == gid.gtk3.status_icon.StatusIcon))
+      _installVfunc(klass, "button_release_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPopupMenu", true)[0]) == gid.gtk3.status_icon.StatusIcon))
+      _installVfunc(klass, "popup_menu");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncQueryTooltip", true)[0]) == gid.gtk3.status_icon.StatusIcon))
+      _installVfunc(klass, "query_tooltip");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncScrollEvent", true)[0]) == gid.gtk3.status_icon.StatusIcon))
+      _installVfunc(klass, "scroll_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSizeChanged", true)[0]) == gid.gtk3.status_icon.StatusIcon))
+      _installVfunc(klass, "size_changed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkStatusIconClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate":
+      {
+        static extern(C) void _vfuncActivateTramp(GtkStatusIcon* statusIcon) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.status_icon.StatusIcon)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)statusIcon);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkStatusIconClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)statusIcon);
+            if (_klass.activate)
+              return (cast(typeof(&_vfuncActivateTramp))_klass.activate)(statusIcon);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncActivate();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.status_icon.StatusIcon.vfuncActivate");
+          }
+        }
+
+        _klass.activate = cast(typeof(_klass.activate))&_vfuncActivateTramp;
+        break;
+      }
+      case "button_press_event":
+      {
+        static extern(C) gboolean _vfuncButtonPressEventTramp(GtkStatusIcon* statusIcon, GdkEventButton* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.status_icon.StatusIcon)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)statusIcon);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkStatusIconClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)statusIcon);
+            if (_klass.buttonPressEvent)
+              return (cast(typeof(&_vfuncButtonPressEventTramp))_klass.buttonPressEvent)(statusIcon, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_button.EventButton(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncButtonPressEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.status_icon.StatusIcon.vfuncButtonPressEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.buttonPressEvent = cast(typeof(_klass.buttonPressEvent))&_vfuncButtonPressEventTramp;
+        break;
+      }
+      case "button_release_event":
+      {
+        static extern(C) gboolean _vfuncButtonReleaseEventTramp(GtkStatusIcon* statusIcon, GdkEventButton* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.status_icon.StatusIcon)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)statusIcon);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkStatusIconClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)statusIcon);
+            if (_klass.buttonReleaseEvent)
+              return (cast(typeof(&_vfuncButtonReleaseEventTramp))_klass.buttonReleaseEvent)(statusIcon, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_button.EventButton(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncButtonReleaseEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.status_icon.StatusIcon.vfuncButtonReleaseEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.buttonReleaseEvent = cast(typeof(_klass.buttonReleaseEvent))&_vfuncButtonReleaseEventTramp;
+        break;
+      }
+      case "popup_menu":
+      {
+        static extern(C) void _vfuncPopupMenuTramp(GtkStatusIcon* statusIcon, uint button, uint activateTime) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.status_icon.StatusIcon)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)statusIcon);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkStatusIconClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)statusIcon);
+            if (_klass.popupMenu)
+              return (cast(typeof(&_vfuncPopupMenuTramp))_klass.popupMenu)(statusIcon, button, activateTime);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPopupMenu(button, activateTime);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.status_icon.StatusIcon.vfuncPopupMenu");
+          }
+        }
+
+        _klass.popupMenu = cast(typeof(_klass.popupMenu))&_vfuncPopupMenuTramp;
+        break;
+      }
+      case "query_tooltip":
+      {
+        static extern(C) gboolean _vfuncQueryTooltipTramp(GtkStatusIcon* statusIcon, int x, int y, gboolean keyboardMode, GtkTooltip* tooltip) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.status_icon.StatusIcon)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)statusIcon);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkStatusIconClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)statusIcon);
+            if (_klass.queryTooltip)
+              return (cast(typeof(&_vfuncQueryTooltipTramp))_klass.queryTooltip)(statusIcon, x, y, keyboardMode, tooltip);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncQueryTooltip(x, y, cast(bool)keyboardMode, gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.tooltip.Tooltip)(cast(void*)tooltip, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.status_icon.StatusIcon.vfuncQueryTooltip");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.queryTooltip = cast(typeof(_klass.queryTooltip))&_vfuncQueryTooltipTramp;
+        break;
+      }
+      case "scroll_event":
+      {
+        static extern(C) gboolean _vfuncScrollEventTramp(GtkStatusIcon* statusIcon, GdkEventScroll* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.status_icon.StatusIcon)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)statusIcon);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkStatusIconClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)statusIcon);
+            if (_klass.scrollEvent)
+              return (cast(typeof(&_vfuncScrollEventTramp))_klass.scrollEvent)(statusIcon, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gdk3.event_scroll.EventScroll(cast(void*)event, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncScrollEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.status_icon.StatusIcon.vfuncScrollEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.scrollEvent = cast(typeof(_klass.scrollEvent))&_vfuncScrollEventTramp;
+        break;
+      }
+      case "size_changed":
+      {
+        static extern(C) gboolean _vfuncSizeChangedTramp(GtkStatusIcon* statusIcon, int size) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.status_icon.StatusIcon)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)statusIcon);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkStatusIconClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)statusIcon);
+            if (_klass.sizeChanged)
+              return (cast(typeof(&_vfuncSizeChangedTramp))_klass.sizeChanged)(statusIcon, size);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncSizeChanged(size);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.status_icon.StatusIcon.vfuncSizeChanged");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.sizeChanged = cast(typeof(_klass.sizeChanged))&_vfuncSizeChangedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

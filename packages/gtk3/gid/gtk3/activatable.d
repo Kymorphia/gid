@@ -309,6 +309,8 @@ interface Activatable : GidWrap
   */
   @property void useActionAppearance(bool propval) nothrow;
 
+
+
   /**
       This is a utility function for #GtkActivatable implementors.
       

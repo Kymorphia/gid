@@ -27,6 +27,15 @@ class FontsetSimple : gid.pango1.fontset.Fontset
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -70,9 +79,16 @@ class FontsetSimple : gid.pango1.fontset.Fontset
   */
   this(gid.pango1.language.Language language) nothrow
   {
-    PangoFontsetSimple* _cretval;
-    _cretval = pango_fontset_simple_new(language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      PangoFontsetSimple* _cretval;
+      _cretval = pango_fontset_simple_new(language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

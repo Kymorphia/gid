@@ -99,9 +99,16 @@ class TreeListRowSorter : gid.gtk4.sorter.Sorter
   */
   this(gid.gtk4.sorter.Sorter sorter = null) nothrow
   {
-    GtkTreeListRowSorter* _cretval;
-    _cretval = gtk_tree_list_row_sorter_new(sorter ? cast(GtkSorter*)sorter._cPtr(Yes.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, sorter !is null), Yes.Take);
+    }
+    else
+    {
+      GtkTreeListRowSorter* _cretval;
+      _cretval = gtk_tree_list_row_sorter_new(sorter ? cast(GtkSorter*)sorter._cPtr(Yes.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

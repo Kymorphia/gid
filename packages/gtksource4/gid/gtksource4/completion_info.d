@@ -62,9 +62,16 @@ class CompletionInfo : gid.gtk3.window.Window
   /** */
   this() nothrow
   {
-    GtkSourceCompletionInfo* _cretval;
-    _cretval = gtk_source_completion_info_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkSourceCompletionInfo* _cretval;
+      _cretval = gtk_source_completion_info_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**

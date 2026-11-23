@@ -31,6 +31,15 @@ class UserMessage : gid.gobject2.initially_unowned.InitiallyUnowned
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -104,10 +113,17 @@ class UserMessage : gid.gobject2.initially_unowned.InitiallyUnowned
   */
   this(string name, gid.glib2.variant.Variant parameters = null) nothrow
   {
-    WebKitUserMessage* _cretval;
-    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
-    _cretval = webkit_user_message_new(_name, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      WebKitUserMessage* _cretval;
+      const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+      _cretval = webkit_user_message_new(_name, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null);
+      this(_cretval, No.Take);
+    }
   }
 
   /**

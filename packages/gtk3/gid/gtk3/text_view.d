@@ -4,6 +4,7 @@ module gid.gtk3.text_view;
 public import gid.core.basictypes;
 import gid.atk1.implementor_iface;
 import gid.atk1.implementor_iface_mixin;
+import gid.cairo1.context;
 import gid.core.utils;
 import gid.gdk3.event_key;
 import gid.gdk3.rectangle;
@@ -491,9 +492,16 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_text_view_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_text_view_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -514,6 +522,254 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
     _cretval = gtk_text_view_new_with_buffer(buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.text_view.TextView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+
+  /**
+      The class handler for the #GtkTextView::backspace
+        keybinding signal.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncBackspace` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncBackspace()
+  {
+    auto _klass = cast(GtkTextViewClass*)_vfuncClass;
+    if (!_klass.backspace)
+      return;
+
+    _klass.backspace(cast(GtkTextView*)this._cPtr);
+  }
+
+  /**
+      The class handler for the #GtkTextview::copy-clipboard
+        keybinding signal.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCopyClipboard` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncCopyClipboard()
+  {
+    auto _klass = cast(GtkTextViewClass*)_vfuncClass;
+    if (!_klass.copyClipboard)
+      return;
+
+    _klass.copyClipboard(cast(GtkTextView*)this._cPtr);
+  }
+
+  /**
+      The class handler for the #GtkTextView::cut-clipboard
+        keybinding signal
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCutClipboard` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncCutClipboard()
+  {
+    auto _klass = cast(GtkTextViewClass*)_vfuncClass;
+    if (!_klass.cutClipboard)
+      return;
+
+    _klass.cutClipboard(cast(GtkTextView*)this._cPtr);
+  }
+
+  /**
+      The class handler for the #GtkTextView::delete-from-cursor
+        keybinding signal.
+  
+      Params:
+        type = 
+        count = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDeleteFromCursor` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDeleteFromCursor(gid.gtk3.types.DeleteType type, int count)
+  {
+    auto _klass = cast(GtkTextViewClass*)_vfuncClass;
+    if (!_klass.deleteFromCursor)
+      return;
+
+    _klass.deleteFromCursor(cast(GtkTextView*)this._cPtr, type, count);
+  }
+
+  /**
+      The draw_layer vfunc is called before and after the text
+        view is drawing its own text. Applications can override this vfunc
+        in a subclass to draw customized content underneath or above the
+        text. In the [gid.gtk4.types.TextViewLayer.BelowText] and [gid.gtk4.types.TextViewLayer.AboveText]
+        the drawing is done in the buffer coordinate space, but the older (deprecated)
+        layers [gid.gtk3.types.TextViewLayer.Below] and [gid.gtk3.types.TextViewLayer.Above] work in viewport
+        coordinates, which makes them unnecessarily hard to use. Since: 3.14
+  
+      Params:
+        layer = 
+        cr =  (modified in place, changes are seen by the caller)
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDrawLayer` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDrawLayer(gid.gtk3.types.TextViewLayer layer, gid.cairo1.context.Context cr)
+  {
+    auto _klass = cast(GtkTextViewClass*)_vfuncClass;
+    if (!_klass.drawLayer)
+      return;
+
+    _klass.drawLayer(cast(GtkTextView*)this._cPtr, layer, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null);
+  }
+
+  /**
+      The class handler for the #GtkTextView::extend-selection
+        signal. Since 3.16
+  
+      Params:
+        granularity = 
+        location = 
+        start =  (modified in place, changes are seen by the caller)
+        end =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncExtendSelection` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncExtendSelection(gid.gtk3.types.TextExtendSelection granularity, gid.gtk3.text_iter.TextIter location, gid.gtk3.text_iter.TextIter start, gid.gtk3.text_iter.TextIter end)
+  {
+    auto _klass = cast(GtkTextViewClass*)_vfuncClass;
+    if (!_klass.extendSelection)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.extendSelection(cast(GtkTextView*)this._cPtr, granularity, location ? cast(const(GtkTextIter)*)location._cPtr(No.Dup) : null, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      The class handler for the #GtkTextView::insert-at-cursor
+        keybinding signal.
+  
+      Params:
+        str = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncInsertAtCursor` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncInsertAtCursor(string str)
+  {
+    auto _klass = cast(GtkTextViewClass*)_vfuncClass;
+    if (!_klass.insertAtCursor)
+      return;
+
+    const(char)* _str = str.toCString!(No.Malloc, No.Nullable);
+    _klass.insertAtCursor(cast(GtkTextView*)this._cPtr, _str);
+  }
+
+  /** */
+  protected void vfuncInsertEmoji()
+  {
+    auto _klass = cast(GtkTextViewClass*)_vfuncClass;
+    if (!_klass.insertEmoji)
+      return;
+
+    _klass.insertEmoji(cast(GtkTextView*)this._cPtr);
+  }
+
+  /**
+      The class handler for the #GtkTextView::move-cursor
+        keybinding signal.
+  
+      Params:
+        step = 
+        count = 
+        extendSelection = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncMoveCursor` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncMoveCursor(gid.gtk3.types.MovementStep step, int count, bool extendSelection)
+  {
+    auto _klass = cast(GtkTextViewClass*)_vfuncClass;
+    if (!_klass.moveCursor)
+      return;
+
+    _klass.moveCursor(cast(GtkTextView*)this._cPtr, step, count, extendSelection);
+  }
+
+  /**
+      The class handler for the #GtkTextView::paste-clipboard
+        keybinding signal.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPasteClipboard` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncPasteClipboard()
+  {
+    auto _klass = cast(GtkTextViewClass*)_vfuncClass;
+    if (!_klass.pasteClipboard)
+      return;
+
+    _klass.pasteClipboard(cast(GtkTextView*)this._cPtr);
+  }
+
+  /**
+      The class handler for the #GtkTextView::populate-popup
+        signal.
+  
+      Params:
+        popup = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPopulatePopup` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncPopulatePopup(gid.gtk3.widget.Widget popup)
+  {
+    auto _klass = cast(GtkTextViewClass*)_vfuncClass;
+    if (!_klass.populatePopup)
+      return;
+
+    _klass.populatePopup(cast(GtkTextView*)this._cPtr, popup ? cast(GtkWidget*)popup._cPtr(No.Dup) : null);
+  }
+
+  /**
+      The class handler for the #GtkTextView::set-anchor
+        keybinding signal.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetAnchor` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSetAnchor()
+  {
+    auto _klass = cast(GtkTextViewClass*)_vfuncClass;
+    if (!_klass.setAnchor)
+      return;
+
+    _klass.setAnchor(cast(GtkTextView*)this._cPtr);
+  }
+
+  /**
+      The class handler for the #GtkTextView::toggle-overwrite
+        keybinding signal.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncToggleOverwrite` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncToggleOverwrite()
+  {
+    auto _klass = cast(GtkTextViewClass*)_vfuncClass;
+    if (!_klass.toggleOverwrite)
+      return;
+
+    _klass.toggleOverwrite(cast(GtkTextView*)this._cPtr);
   }
 
   /**
@@ -1671,6 +1927,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1720,6 +1977,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1769,6 +2027,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1830,6 +2089,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1895,6 +2155,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1962,6 +2223,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2013,6 +2275,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2084,6 +2347,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2149,6 +2413,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2205,6 +2470,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2265,6 +2531,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2320,6 +2587,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2376,6 +2644,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2429,6 +2698,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2478,6 +2748,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2526,6 +2797,7 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2545,6 +2817,440 @@ class TextView : gid.gtk3.container.Container, gid.gtk3.scrollable.Scrollable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toggle-overwrite", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from TextView
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.text_view.TextView), T.stringof ~ " is not derived from gid.gtk3.text_view.TextView");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncBackspace", true)[0]) == gid.gtk3.text_view.TextView))
+      _installVfunc(klass, "backspace");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCopyClipboard", true)[0]) == gid.gtk3.text_view.TextView))
+      _installVfunc(klass, "copy_clipboard");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCutClipboard", true)[0]) == gid.gtk3.text_view.TextView))
+      _installVfunc(klass, "cut_clipboard");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDeleteFromCursor", true)[0]) == gid.gtk3.text_view.TextView))
+      _installVfunc(klass, "delete_from_cursor");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDrawLayer", true)[0]) == gid.gtk3.text_view.TextView))
+      _installVfunc(klass, "draw_layer");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncExtendSelection", true)[0]) == gid.gtk3.text_view.TextView))
+      _installVfunc(klass, "extend_selection");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncInsertAtCursor", true)[0]) == gid.gtk3.text_view.TextView))
+      _installVfunc(klass, "insert_at_cursor");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncInsertEmoji", true)[0]) == gid.gtk3.text_view.TextView))
+      _installVfunc(klass, "insert_emoji");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMoveCursor", true)[0]) == gid.gtk3.text_view.TextView))
+      _installVfunc(klass, "move_cursor");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPasteClipboard", true)[0]) == gid.gtk3.text_view.TextView))
+      _installVfunc(klass, "paste_clipboard");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPopulatePopup", true)[0]) == gid.gtk3.text_view.TextView))
+      _installVfunc(klass, "populate_popup");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetAnchor", true)[0]) == gid.gtk3.text_view.TextView))
+      _installVfunc(klass, "set_anchor");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncToggleOverwrite", true)[0]) == gid.gtk3.text_view.TextView))
+      _installVfunc(klass, "toggle_overwrite");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkTextViewClass*)klass;
+
+    switch (vfunc)
+    {
+      case "backspace":
+      {
+        static extern(C) void _vfuncBackspaceTramp(GtkTextView* textView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
+            if (_klass.backspace)
+              return (cast(typeof(&_vfuncBackspaceTramp))_klass.backspace)(textView);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncBackspace();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.text_view.TextView.vfuncBackspace");
+          }
+        }
+
+        _klass.backspace = cast(typeof(_klass.backspace))&_vfuncBackspaceTramp;
+        break;
+      }
+      case "copy_clipboard":
+      {
+        static extern(C) void _vfuncCopyClipboardTramp(GtkTextView* textView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
+            if (_klass.copyClipboard)
+              return (cast(typeof(&_vfuncCopyClipboardTramp))_klass.copyClipboard)(textView);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncCopyClipboard();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.text_view.TextView.vfuncCopyClipboard");
+          }
+        }
+
+        _klass.copyClipboard = cast(typeof(_klass.copyClipboard))&_vfuncCopyClipboardTramp;
+        break;
+      }
+      case "cut_clipboard":
+      {
+        static extern(C) void _vfuncCutClipboardTramp(GtkTextView* textView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
+            if (_klass.cutClipboard)
+              return (cast(typeof(&_vfuncCutClipboardTramp))_klass.cutClipboard)(textView);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncCutClipboard();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.text_view.TextView.vfuncCutClipboard");
+          }
+        }
+
+        _klass.cutClipboard = cast(typeof(_klass.cutClipboard))&_vfuncCutClipboardTramp;
+        break;
+      }
+      case "delete_from_cursor":
+      {
+        static extern(C) void _vfuncDeleteFromCursorTramp(GtkTextView* textView, GtkDeleteType type, int count) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
+            if (_klass.deleteFromCursor)
+              return (cast(typeof(&_vfuncDeleteFromCursorTramp))_klass.deleteFromCursor)(textView, type, count);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDeleteFromCursor(type, count);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.text_view.TextView.vfuncDeleteFromCursor");
+          }
+        }
+
+        _klass.deleteFromCursor = cast(typeof(_klass.deleteFromCursor))&_vfuncDeleteFromCursorTramp;
+        break;
+      }
+      case "draw_layer":
+      {
+        static extern(C) void _vfuncDrawLayerTramp(GtkTextView* textView, GtkTextViewLayer layer, cairo_t* cr) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
+            if (_klass.drawLayer)
+              return (cast(typeof(&_vfuncDrawLayerTramp))_klass.drawLayer)(textView, layer, cr);
+            return;
+          }
+
+          auto _cr = cr ? new gid.cairo1.context.Context(cast(void*)cr, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncDrawLayer(layer, _cr);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.text_view.TextView.vfuncDrawLayer");
+          }
+          if (_cr)
+            _cr._cUnborrow;
+
+        }
+
+        _klass.drawLayer = cast(typeof(_klass.drawLayer))&_vfuncDrawLayerTramp;
+        break;
+      }
+      case "extend_selection":
+      {
+        static extern(C) gboolean _vfuncExtendSelectionTramp(GtkTextView* textView, GtkTextExtendSelection granularity, const(GtkTextIter)* location, GtkTextIter* start, GtkTextIter* end) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
+            if (_klass.extendSelection)
+              return (cast(typeof(&_vfuncExtendSelectionTramp))_klass.extendSelection)(textView, granularity, location, start, end);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _start = start ? new gid.gtk3.text_iter.TextIter(cast(void*)start, Yes.Take)._cBorrow : null;
+          auto _end = end ? new gid.gtk3.text_iter.TextIter(cast(void*)end, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncExtendSelection(granularity, location ? new gid.gtk3.text_iter.TextIter(cast(void*)location, No.Take) : null, _start, _end);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.text_view.TextView.vfuncExtendSelection");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_start)
+            _start._cUnborrow;
+          if (_end)
+            _end._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.extendSelection = cast(typeof(_klass.extendSelection))&_vfuncExtendSelectionTramp;
+        break;
+      }
+      case "insert_at_cursor":
+      {
+        static extern(C) void _vfuncInsertAtCursorTramp(GtkTextView* textView, const(char)* str) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
+            if (_klass.insertAtCursor)
+              return (cast(typeof(&_vfuncInsertAtCursorTramp))_klass.insertAtCursor)(textView, str);
+            return;
+          }
+
+          string _str = str.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncInsertAtCursor(_str);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.text_view.TextView.vfuncInsertAtCursor");
+          }
+        }
+
+        _klass.insertAtCursor = cast(typeof(_klass.insertAtCursor))&_vfuncInsertAtCursorTramp;
+        break;
+      }
+      case "insert_emoji":
+      {
+        static extern(C) void _vfuncInsertEmojiTramp(GtkTextView* textView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
+            if (_klass.insertEmoji)
+              return (cast(typeof(&_vfuncInsertEmojiTramp))_klass.insertEmoji)(textView);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncInsertEmoji();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.text_view.TextView.vfuncInsertEmoji");
+          }
+        }
+
+        _klass.insertEmoji = cast(typeof(_klass.insertEmoji))&_vfuncInsertEmojiTramp;
+        break;
+      }
+      case "move_cursor":
+      {
+        static extern(C) void _vfuncMoveCursorTramp(GtkTextView* textView, GtkMovementStep step, int count, gboolean extendSelection) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
+            if (_klass.moveCursor)
+              return (cast(typeof(&_vfuncMoveCursorTramp))_klass.moveCursor)(textView, step, count, extendSelection);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMoveCursor(step, count, cast(bool)extendSelection);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.text_view.TextView.vfuncMoveCursor");
+          }
+        }
+
+        _klass.moveCursor = cast(typeof(_klass.moveCursor))&_vfuncMoveCursorTramp;
+        break;
+      }
+      case "paste_clipboard":
+      {
+        static extern(C) void _vfuncPasteClipboardTramp(GtkTextView* textView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
+            if (_klass.pasteClipboard)
+              return (cast(typeof(&_vfuncPasteClipboardTramp))_klass.pasteClipboard)(textView);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPasteClipboard();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.text_view.TextView.vfuncPasteClipboard");
+          }
+        }
+
+        _klass.pasteClipboard = cast(typeof(_klass.pasteClipboard))&_vfuncPasteClipboardTramp;
+        break;
+      }
+      case "populate_popup":
+      {
+        static extern(C) void _vfuncPopulatePopupTramp(GtkTextView* textView, GtkWidget* popup) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
+            if (_klass.populatePopup)
+              return (cast(typeof(&_vfuncPopulatePopupTramp))_klass.populatePopup)(textView, popup);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPopulatePopup(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)popup, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.text_view.TextView.vfuncPopulatePopup");
+          }
+        }
+
+        _klass.populatePopup = cast(typeof(_klass.populatePopup))&_vfuncPopulatePopupTramp;
+        break;
+      }
+      case "set_anchor":
+      {
+        static extern(C) void _vfuncSetAnchorTramp(GtkTextView* textView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
+            if (_klass.setAnchor)
+              return (cast(typeof(&_vfuncSetAnchorTramp))_klass.setAnchor)(textView);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSetAnchor();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.text_view.TextView.vfuncSetAnchor");
+          }
+        }
+
+        _klass.setAnchor = cast(typeof(_klass.setAnchor))&_vfuncSetAnchorTramp;
+        break;
+      }
+      case "toggle_overwrite":
+      {
+        static extern(C) void _vfuncToggleOverwriteTramp(GtkTextView* textView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.text_view.TextView)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)textView);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkTextViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)textView);
+            if (_klass.toggleOverwrite)
+              return (cast(typeof(&_vfuncToggleOverwriteTramp))_klass.toggleOverwrite)(textView);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncToggleOverwrite();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.text_view.TextView.vfuncToggleOverwrite");
+          }
+        }
+
+        _klass.toggleOverwrite = cast(typeof(_klass.toggleOverwrite))&_vfuncToggleOverwriteTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

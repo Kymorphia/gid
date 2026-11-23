@@ -81,6 +81,15 @@ class Logger : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.Session
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -172,9 +181,16 @@ class Logger : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.Session
   */
   this(gid.soup3.types.LoggerLogLevel level) nothrow
   {
-    SoupLogger* _cretval;
-    _cretval = soup_logger_new(level);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      SoupLogger* _cretval;
+      _cretval = soup_logger_new(level);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -210,6 +226,7 @@ class Logger : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.Session
   {
     extern(C) void _printerCallback(SoupLogger* logger, SoupLoggerLogLevel level, char direction, const(char)* data, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.soup3.types.LoggerPrinter*)userData;
       string _data = data.fromCString!(No.Free);
 
@@ -243,6 +260,7 @@ class Logger : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.Session
   {
     extern(C) SoupLoggerLogLevel _requestFilterCallback(SoupLogger* logger, SoupMessage* msg, void* userData) nothrow
     {
+      gidAttachThread();
       gid.soup3.types.LoggerLogLevel _dretval;
       auto _dlg = cast(gid.soup3.types.LoggerFilter*)userData;
 
@@ -279,6 +297,7 @@ class Logger : gid.gobject2.object.ObjectWrap, gid.soup3.session_feature.Session
   {
     extern(C) SoupLoggerLogLevel _responseFilterCallback(SoupLogger* logger, SoupMessage* msg, void* userData) nothrow
     {
+      gidAttachThread();
       gid.soup3.types.LoggerLogLevel _dretval;
       auto _dlg = cast(gid.soup3.types.LoggerFilter*)userData;
 

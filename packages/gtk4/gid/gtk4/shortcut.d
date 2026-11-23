@@ -141,9 +141,16 @@ class Shortcut : gid.gobject2.object.ObjectWrap
   */
   this(gid.gtk4.shortcut_trigger.ShortcutTrigger trigger = null, gid.gtk4.shortcut_action.ShortcutAction action = null) nothrow
   {
-    GtkShortcut* _cretval;
-    _cretval = gtk_shortcut_new(trigger ? cast(GtkShortcutTrigger*)trigger._cPtr(Yes.Dup) : null, action ? cast(GtkShortcutAction*)action._cPtr(Yes.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, trigger !is null || action !is null), Yes.Take);
+    }
+    else
+    {
+      GtkShortcut* _cretval;
+      _cretval = gtk_shortcut_new(trigger ? cast(GtkShortcutTrigger*)trigger._cPtr(Yes.Dup) : null, action ? cast(GtkShortcutAction*)action._cPtr(Yes.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

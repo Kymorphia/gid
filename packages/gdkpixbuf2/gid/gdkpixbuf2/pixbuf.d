@@ -164,6 +164,15 @@ class Pixbuf : gid.gobject2.object.ObjectWrap, gid.gio2.icon.Icon, gid.gio2.load
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -307,9 +316,16 @@ class Pixbuf : gid.gobject2.object.ObjectWrap, gid.gio2.icon.Icon, gid.gio2.load
   */
   this(gid.gdkpixbuf2.types.Colorspace colorspace, bool hasAlpha, int bitsPerSample, int width, int height) nothrow
   {
-    GdkPixbuf* _cretval;
-    _cretval = gdk_pixbuf_new(colorspace, hasAlpha, bitsPerSample, width, height);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GdkPixbuf* _cretval;
+      _cretval = gdk_pixbuf_new(colorspace, hasAlpha, bitsPerSample, width, height);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -754,6 +770,7 @@ class Pixbuf : gid.gobject2.object.ObjectWrap, gid.gio2.icon.Icon, gid.gio2.load
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -859,6 +876,7 @@ class Pixbuf : gid.gobject2.object.ObjectWrap, gid.gio2.icon.Icon, gid.gio2.load
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -897,6 +915,7 @@ class Pixbuf : gid.gobject2.object.ObjectWrap, gid.gio2.icon.Icon, gid.gio2.load
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -1505,6 +1524,7 @@ class Pixbuf : gid.gobject2.object.ObjectWrap, gid.gio2.icon.Icon, gid.gio2.load
   {
     extern(C) gboolean _saveFuncCallback(const(ubyte)* buf, size_t count, GError** error, void* data) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gdkpixbuf2.types.PixbufSaveFunc*)data;
       ubyte[] _buf;
@@ -1600,6 +1620,7 @@ class Pixbuf : gid.gobject2.object.ObjectWrap, gid.gio2.icon.Icon, gid.gio2.load
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 

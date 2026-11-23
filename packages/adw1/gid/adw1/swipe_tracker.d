@@ -35,6 +35,15 @@ class SwipeTracker : gid.gobject2.object.ObjectWrap, gid.gtk4.orientable.Orienta
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -244,9 +253,16 @@ class SwipeTracker : gid.gobject2.object.ObjectWrap, gid.gtk4.orientable.Orienta
   */
   this(gid.adw1.swipeable.Swipeable swipeable) nothrow
   {
-    AdwSwipeTracker* _cretval;
-    _cretval = adw_swipe_tracker_new(swipeable ? cast(AdwSwipeable*)(cast(gid.gobject2.object.ObjectWrap)swipeable)._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      AdwSwipeTracker* _cretval;
+      _cretval = adw_swipe_tracker_new(swipeable ? cast(AdwSwipeable*)(cast(gid.gobject2.object.ObjectWrap)swipeable)._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -464,6 +480,7 @@ class SwipeTracker : gid.gobject2.object.ObjectWrap, gid.gtk4.orientable.Orienta
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -519,6 +536,7 @@ class SwipeTracker : gid.gobject2.object.ObjectWrap, gid.gtk4.orientable.Orienta
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -575,6 +593,7 @@ class SwipeTracker : gid.gobject2.object.ObjectWrap, gid.gtk4.orientable.Orienta
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -625,6 +644,7 @@ class SwipeTracker : gid.gobject2.object.ObjectWrap, gid.gtk4.orientable.Orienta
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

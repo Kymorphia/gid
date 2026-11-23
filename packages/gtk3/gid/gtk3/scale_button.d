@@ -45,6 +45,15 @@ class ScaleButton : gid.gtk3.button.Button, gid.gtk3.orientable.Orientable
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -181,12 +190,29 @@ class ScaleButton : gid.gtk3.button.Button, gid.gtk3.orientable.Orientable
   */
   this(gid.gtk3.types.IconSize size, double min, double max, double step, string[] icons = null) nothrow
   {
-    GtkWidget* _cretval;
-    auto _icons_arr = new char*[](icons.length + 1);
-    auto _icons = cast(char**)_icons_arr.ptr;
-    foreach (i, s; icons) _icons[i] = s.toCString!(No.Malloc);
-    _cretval = gtk_scale_button_new(size, min, max, step, _icons);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      auto _icons_arr = new char*[](icons.length + 1);
+      auto _icons = cast(char**)_icons_arr.ptr;
+      foreach (i, s; icons) _icons[i] = s.toCString!(No.Malloc);
+      _cretval = gtk_scale_button_new(size, min, max, step, _icons);
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncValueChanged(double value)
+  {
+    auto _klass = cast(GtkScaleButtonClass*)_vfuncClass;
+    if (!_klass.valueChanged)
+      return;
+
+    _klass.valueChanged(cast(GtkScaleButton*)this._cPtr, value);
   }
 
   /**
@@ -318,6 +344,7 @@ class ScaleButton : gid.gtk3.button.Button, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -366,6 +393,7 @@ class ScaleButton : gid.gtk3.button.Button, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -414,6 +442,7 @@ class ScaleButton : gid.gtk3.button.Button, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -436,6 +465,62 @@ class ScaleButton : gid.gtk3.button.Button, gid.gtk3.orientable.Orientable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("value-changed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from ScaleButton
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.scale_button.ScaleButton), T.stringof ~ " is not derived from gid.gtk3.scale_button.ScaleButton");
+
+    gid.gtk3.button.Button._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncValueChanged", true)[0]) == gid.gtk3.scale_button.ScaleButton))
+      _installVfunc(klass, "value_changed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkScaleButtonClass*)klass;
+
+    switch (vfunc)
+    {
+      case "value_changed":
+      {
+        static extern(C) void _vfuncValueChangedTramp(GtkScaleButton* button, double value) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.scale_button.ScaleButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkScaleButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);
+            if (_klass.valueChanged)
+              return (cast(typeof(&_vfuncValueChangedTramp))_klass.valueChanged)(button, value);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncValueChanged(value);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.scale_button.ScaleButton.vfuncValueChanged");
+          }
+        }
+
+        _klass.valueChanged = cast(typeof(_klass.valueChanged))&_vfuncValueChangedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

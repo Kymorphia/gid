@@ -38,6 +38,15 @@ class TimedAnimation : gid.adw1.animation.Animation
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -265,9 +274,16 @@ class TimedAnimation : gid.adw1.animation.Animation
   */
   this(gid.gtk4.widget.Widget widget, double from, double to, uint duration, gid.adw1.animation_target.AnimationTarget target) nothrow
   {
-    AdwAnimation* _cretval;
-    _cretval = adw_timed_animation_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, from, to, duration, target ? cast(AdwAnimationTarget*)target._cPtr(Yes.Dup) : null);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      AdwAnimation* _cretval;
+      _cretval = adw_timed_animation_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, from, to, duration, target ? cast(AdwAnimationTarget*)target._cPtr(Yes.Dup) : null);
+      this(_cretval, No.Take);
+    }
   }
 
   /**

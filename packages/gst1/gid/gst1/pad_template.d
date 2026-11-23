@@ -86,6 +86,15 @@ class PadTemplate : gid.gst1.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -178,10 +187,17 @@ class PadTemplate : gid.gst1.object.ObjectWrap
   */
   this(string nameTemplate, gid.gst1.types.PadDirection direction, gid.gst1.types.PadPresence presence, gid.gst1.caps.Caps caps) nothrow
   {
-    GstPadTemplate* _cretval;
-    const(char)* _nameTemplate = nameTemplate.toCString!(No.Malloc, No.Nullable);
-    _cretval = gst_pad_template_new(_nameTemplate, direction, presence, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GstPadTemplate* _cretval;
+      const(char)* _nameTemplate = nameTemplate.toCString!(No.Malloc, No.Nullable);
+      _cretval = gst_pad_template_new(_nameTemplate, direction, presence, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -219,6 +235,25 @@ class PadTemplate : gid.gst1.object.ObjectWrap
     _cretval = gst_pad_template_new_with_gtype(_nameTemplate, direction, presence, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, padType);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
     return _retval;
+  }
+
+  /**
+      Emit the pad-created signal for this template when created by this pad.
+  
+      Params:
+        pad = the #GstPad that created it
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPadCreated` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncPadCreated(gid.gst1.pad.Pad pad)
+  {
+    auto _klass = cast(GstPadTemplateClass*)_vfuncClass;
+    if (!_klass.padCreated)
+      return;
+
+    _klass.padCreated(cast(GstPadTemplate*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
   }
 
   /**
@@ -298,6 +333,7 @@ class PadTemplate : gid.gst1.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -320,6 +356,62 @@ class PadTemplate : gid.gst1.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("pad-created", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from PadTemplate
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gst1.pad_template.PadTemplate), T.stringof ~ " is not derived from gid.gst1.pad_template.PadTemplate");
+
+    gid.gst1.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPadCreated", true)[0]) == gid.gst1.pad_template.PadTemplate))
+      _installVfunc(klass, "pad_created");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstPadTemplateClass*)klass;
+
+    switch (vfunc)
+    {
+      case "pad_created":
+      {
+        static extern(C) void _vfuncPadCreatedTramp(GstPadTemplate* templ, GstPad* pad) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.pad_template.PadTemplate)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)templ);
+          if (!_obj)
+          {
+            auto _klass = cast(GstPadTemplateClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)templ);
+            if (_klass.padCreated)
+              return (cast(typeof(&_vfuncPadCreatedTramp))_klass.padCreated)(templ, pad);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPadCreated(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.pad.Pad)(cast(void*)pad, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.pad_template.PadTemplate.vfuncPadCreated");
+          }
+        }
+
+        _klass.padCreated = cast(typeof(_klass.padCreated))&_vfuncPadCreatedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

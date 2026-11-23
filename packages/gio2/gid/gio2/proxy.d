@@ -51,6 +51,10 @@ interface Proxy : GidWrap
     return _retval;
   }
 
+
+
+
+
   /**
       Given connection to communicate with a proxy (eg, a
       #GSocketConnection that is connected to the proxy server), this

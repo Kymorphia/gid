@@ -52,6 +52,8 @@ interface Indenter : GidWrap
     return cast(void function())gtk_source_indenter_get_type != &gidSymbolNotFound ? gtk_source_indenter_get_type() : cast(GType)0;
   }
 
+
+
   /**
       This function should be implemented to alter the indentation of text
       within the view.

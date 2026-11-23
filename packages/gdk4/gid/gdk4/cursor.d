@@ -55,6 +55,15 @@ class Cursor : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -154,6 +163,7 @@ class Cursor : gid.gobject2.object.ObjectWrap
   {
     extern(C) GdkTexture* _callbackCallback(GdkCursor* cursor, int cursorSize, double scale, int* width, int* height, int* hotspotX, int* hotspotY, void* data) nothrow
     {
+      gidAttachThread();
       gid.gdk4.texture.Texture _dretval;
       auto _dlg = cast(gid.gdk4.types.CursorGetTextureCallback*)data;
 

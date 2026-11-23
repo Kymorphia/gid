@@ -40,6 +40,10 @@ interface StreamableContent : GidWrap
     return cast(void function())atk_streamable_content_get_type != &gidSymbolNotFound ? atk_streamable_content_get_type() : cast(GType)0;
   }
 
+
+
+
+
   /**
       Gets the character string of the specified mime type. The first mime
       type is at position 0, the second at position 1, and so on.

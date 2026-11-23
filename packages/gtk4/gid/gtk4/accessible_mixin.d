@@ -4,6 +4,8 @@ module gid.gtk4.accessible_mixin;
 public import gid.core.basictypes;
 public import gid.gtk4.accessible_iface_proxy;
 public import gid.core.utils;
+public import gid.gobject2.c.functions;
+public import gid.gobject2.c.types;
 public import gid.gobject2.gid_builder;
 public import gid.gobject2.object;
 public import gid.gobject2.value;
@@ -68,6 +70,183 @@ template AccessibleT()
   @property void accessibleRole(gid.gtk4.types.AccessibleRole propval) nothrow
   {
     gid.gobject2.object.ObjectWrap.setProperty!(gid.gtk4.types.AccessibleRole)("accessible-role", propval);
+  }
+
+  /**
+      Retrieves the accessible identifier for the accessible object.
+      
+      This functionality can be overridden by [gid.gtk4.accessible.Accessible]
+      implementations.
+      
+      It is left to the accessible implementation to define the scope
+      and uniqueness of the identifier.
+      Returns: the accessible identifier
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetAccessibleId`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected string vfuncGetAccessibleId()
+  {
+    auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk4.accessible.Accessible._getGType);
+    if (!_klass || !_klass.getAccessibleId)
+      return typeof(return).init;
+
+    char* _cretval;
+    _cretval = _klass.getAccessibleId(cast(GtkAccessible*)this._cPtr);
+    string _retval = (cast(const(char)*)_cretval).fromCString!(Yes.Free);
+    return _retval;
+  }
+
+  /**
+      Retrieves the accessible parent for an accessible object.
+      
+      This function returns `NULL` for top level widgets.
+      Returns: the accessible parent
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetAccessibleParent`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected gid.gtk4.accessible.Accessible vfuncGetAccessibleParent()
+  {
+    auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk4.accessible.Accessible._getGType);
+    if (!_klass || !_klass.getAccessibleParent)
+      return typeof(return).init;
+
+    GtkAccessible* _cretval;
+    _cretval = _klass.getAccessibleParent(cast(GtkAccessible*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.accessible.Accessible)(cast(GtkAccessible*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Retrieves the implementation for the given accessible object.
+      Returns: the accessible implementation object
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetAtContext`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected gid.gtk4.atcontext.ATContext vfuncGetAtContext()
+  {
+    auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk4.accessible.Accessible._getGType);
+    if (!_klass || !_klass.getAtContext)
+      return typeof(return).init;
+
+    GtkATContext* _cretval;
+    _cretval = _klass.getAtContext(cast(GtkAccessible*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.atcontext.ATContext)(cast(GtkATContext*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Queries the coordinates and dimensions of this accessible
+      
+      This functionality can be overridden by [gid.gtk4.accessible.Accessible]
+      implementations, e.g. to get the bounds from an ignored
+      child widget.
+  
+      Params:
+        x = the x coordinate of the top left corner of the accessible
+        y = the y coordinate of the top left corner of the widget
+        width = the width of the accessible object
+        height = the height of the accessible object
+      Returns: true if the bounds are valid, and false otherwise
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetBounds`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncGetBounds(out int x, out int y, out int width, out int height)
+  {
+    auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk4.accessible.Accessible._getGType);
+    if (!_klass || !_klass.getBounds)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.getBounds(cast(GtkAccessible*)this._cPtr, cast(int*)&x, cast(int*)&y, cast(int*)&width, cast(int*)&height);
+    return _retval;
+  }
+
+  /**
+      Retrieves the first accessible child of an accessible object.
+      Returns: the first accessible child
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetFirstAccessibleChild`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected gid.gtk4.accessible.Accessible vfuncGetFirstAccessibleChild()
+  {
+    auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk4.accessible.Accessible._getGType);
+    if (!_klass || !_klass.getFirstAccessibleChild)
+      return typeof(return).init;
+
+    GtkAccessible* _cretval;
+    _cretval = _klass.getFirstAccessibleChild(cast(GtkAccessible*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.accessible.Accessible)(cast(GtkAccessible*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Retrieves the next accessible sibling of an accessible object
+      Returns: the next accessible sibling
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetNextAccessibleSibling`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected gid.gtk4.accessible.Accessible vfuncGetNextAccessibleSibling()
+  {
+    auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk4.accessible.Accessible._getGType);
+    if (!_klass || !_klass.getNextAccessibleSibling)
+      return typeof(return).init;
+
+    GtkAccessible* _cretval;
+    _cretval = _klass.getNextAccessibleSibling(cast(GtkAccessible*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.accessible.Accessible)(cast(GtkAccessible*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Queries a platform state, such as focus.
+      
+      This functionality can be overridden by [gid.gtk4.accessible.Accessible]
+      implementations, e.g. to get platform state from an ignored
+      child widget, as is the case for [gid.gtk4.text.Text] wrappers.
+  
+      Params:
+        state = platform state to query
+      Returns: the value of state for the accessible
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetPlatformState`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncGetPlatformState(gid.gtk4.types.AccessiblePlatformState state)
+  {
+    auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk4.accessible.Accessible._getGType);
+    if (!_klass || !_klass.getPlatformState)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.getPlatformState(cast(GtkAccessible*)this._cPtr, state);
+    return _retval;
   }
 
   /**
@@ -374,6 +553,270 @@ template AccessibleT()
     auto _values = _values_arr.ptr;
     foreach (i, obj; values) _values[i] = obj ? *cast(GValue*)obj._cPtr(No.Dup) : GValue.init;
     gtk_accessible_update_state_value(cast(GtkAccessible*)this._cPtr, _nStates, _states, _values);
+  }
+
+  /// True if the D class T overrides any vfunc method of gid.gtk4.accessible.Accessible (DiG)
+  enum bool _ifaceVfuncsOverridden_gid_gtk4_accessible_Accessible(T) = !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetAccessibleId", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetAccessibleParent", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetAtContext", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetBounds", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetFirstAccessibleChild", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetNextAccessibleSibling", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetPlatformState", true)[0], gid.gobject2.object.GidIfaceVfunc);
+
+  /**
+      Install the C trampolines of the gid.gtk4.accessible.Accessible vfunc methods which a D class overrides into the interface
+      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      trampoline is a compile error.
+      Params:
+        T = D class
+        iface = Interface structure of the GType registered for T
+  */
+  static void _installIfaceVfuncs_gid_gtk4_accessible_Accessible(T)(void* iface) nothrow
+  {
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetAccessibleId", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk4_accessible_Accessible(iface, "get_accessible_id");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetAccessibleParent", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk4_accessible_Accessible(iface, "get_accessible_parent");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetAtContext", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk4_accessible_Accessible(iface, "get_at_context");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetBounds", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk4_accessible_Accessible(iface, "get_bounds");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetFirstAccessibleChild", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk4_accessible_Accessible(iface, "get_first_accessible_child");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetNextAccessibleSibling", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk4_accessible_Accessible(iface, "get_next_accessible_sibling");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetPlatformState", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk4_accessible_Accessible(iface, "get_platform_state");
+  }
+
+  private static void _installIfaceVfunc_gid_gtk4_accessible_Accessible(void* iface, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkAccessibleInterface*)iface;
+
+    switch (vfunc)
+    {
+      case "get_accessible_id":
+      {
+        static extern(C) char* _vfuncGetAccessibleIdTramp(GtkAccessible* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible.Accessible._getGType);
+            if (_klass && _klass.getAccessibleId)
+              return (cast(typeof(&_vfuncGetAccessibleIdTramp))_klass.getAccessibleId)(self);
+            return typeof(return).init;
+          }
+
+          string _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetAccessibleId();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.accessible.Accessible.vfuncGetAccessibleId");
+          }
+          auto _retval = toCString!(Yes.Malloc, Yes.Nullable)(_dretval);
+
+          return _retval;
+        }
+
+        _klass.getAccessibleId = cast(typeof(_klass.getAccessibleId))&_vfuncGetAccessibleIdTramp;
+        break;
+      }
+      case "get_accessible_parent":
+      {
+        static extern(C) GtkAccessible* _vfuncGetAccessibleParentTramp(GtkAccessible* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible.Accessible._getGType);
+            if (_klass && _klass.getAccessibleParent)
+              return (cast(typeof(&_vfuncGetAccessibleParentTramp))_klass.getAccessibleParent)(self);
+            return typeof(return).init;
+          }
+
+          gid.gtk4.accessible.Accessible _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetAccessibleParent();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.accessible.Accessible.vfuncGetAccessibleParent");
+          }
+          auto _retval = _dretval ? cast(GtkAccessible*)(cast(gid.gobject2.object.ObjectWrap)_dretval)._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getAccessibleParent = cast(typeof(_klass.getAccessibleParent))&_vfuncGetAccessibleParentTramp;
+        break;
+      }
+      case "get_at_context":
+      {
+        static extern(C) GtkATContext* _vfuncGetAtContextTramp(GtkAccessible* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible.Accessible._getGType);
+            if (_klass && _klass.getAtContext)
+              return (cast(typeof(&_vfuncGetAtContextTramp))_klass.getAtContext)(self);
+            return typeof(return).init;
+          }
+
+          gid.gtk4.atcontext.ATContext _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetAtContext();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.accessible.Accessible.vfuncGetAtContext");
+          }
+          auto _retval = _dretval ? cast(GtkATContext*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getAtContext = cast(typeof(_klass.getAtContext))&_vfuncGetAtContextTramp;
+        break;
+      }
+      case "get_bounds":
+      {
+        static extern(C) gboolean _vfuncGetBoundsTramp(GtkAccessible* self, int* x, int* y, int* width, int* height) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible.Accessible._getGType);
+            if (_klass && _klass.getBounds)
+              return (cast(typeof(&_vfuncGetBoundsTramp))_klass.getBounds)(self, x, y, width, height);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetBounds(*x, *y, *width, *height);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.accessible.Accessible.vfuncGetBounds");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getBounds = cast(typeof(_klass.getBounds))&_vfuncGetBoundsTramp;
+        break;
+      }
+      case "get_first_accessible_child":
+      {
+        static extern(C) GtkAccessible* _vfuncGetFirstAccessibleChildTramp(GtkAccessible* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible.Accessible._getGType);
+            if (_klass && _klass.getFirstAccessibleChild)
+              return (cast(typeof(&_vfuncGetFirstAccessibleChildTramp))_klass.getFirstAccessibleChild)(self);
+            return typeof(return).init;
+          }
+
+          gid.gtk4.accessible.Accessible _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetFirstAccessibleChild();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.accessible.Accessible.vfuncGetFirstAccessibleChild");
+          }
+          auto _retval = _dretval ? cast(GtkAccessible*)(cast(gid.gobject2.object.ObjectWrap)_dretval)._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getFirstAccessibleChild = cast(typeof(_klass.getFirstAccessibleChild))&_vfuncGetFirstAccessibleChildTramp;
+        break;
+      }
+      case "get_next_accessible_sibling":
+      {
+        static extern(C) GtkAccessible* _vfuncGetNextAccessibleSiblingTramp(GtkAccessible* self) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible.Accessible._getGType);
+            if (_klass && _klass.getNextAccessibleSibling)
+              return (cast(typeof(&_vfuncGetNextAccessibleSiblingTramp))_klass.getNextAccessibleSibling)(self);
+            return typeof(return).init;
+          }
+
+          gid.gtk4.accessible.Accessible _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetNextAccessibleSibling();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.accessible.Accessible.vfuncGetNextAccessibleSibling");
+          }
+          auto _retval = _dretval ? cast(GtkAccessible*)(cast(gid.gobject2.object.ObjectWrap)_dretval)._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getNextAccessibleSibling = cast(typeof(_klass.getNextAccessibleSibling))&_vfuncGetNextAccessibleSiblingTramp;
+        break;
+      }
+      case "get_platform_state":
+      {
+        static extern(C) gboolean _vfuncGetPlatformStateTramp(GtkAccessible* self, GtkAccessiblePlatformState state) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)self);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkAccessibleInterface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)self), gid.gtk4.accessible.Accessible._getGType);
+            if (_klass && _klass.getPlatformState)
+              return (cast(typeof(&_vfuncGetPlatformStateTramp))_klass.getPlatformState)(self, state);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetPlatformState(state);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.accessible.Accessible.vfuncGetPlatformState");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getPlatformState = cast(typeof(_klass.getPlatformState))&_vfuncGetPlatformStateTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

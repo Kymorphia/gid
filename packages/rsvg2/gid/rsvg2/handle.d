@@ -429,9 +429,16 @@ class Handle : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    RsvgHandle* _cretval;
-    _cretval = rsvg_handle_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      RsvgHandle* _cretval;
+      _cretval = rsvg_handle_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -1457,6 +1464,7 @@ class Handle : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _sizeFuncCallback(int* width, int* height, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.rsvg2.types.SizeFunc*)userData;
 
       try

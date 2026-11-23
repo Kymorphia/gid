@@ -5,7 +5,11 @@ public import gid.core.basictypes;
 import gid.core.utils;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;
+import gid.gst1.buffer;
+import gid.gst1.caps;
 import gid.gst1.element;
+import gid.gst1.event;
+import gid.gst1.query;
 import gid.gst1.tag_list;
 import gid.gst1.types;
 import gid.gstbase1.base_parse_frame;
@@ -159,6 +163,15 @@ class BaseParse : gid.gst1.element.Element
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -239,6 +252,280 @@ class BaseParse : gid.gst1.element.Element
   @property void disablePassthrough(bool propval) nothrow
   {
     gid.gobject2.object.ObjectWrap.setProperty!(bool)("disable-passthrough", propval);
+  }
+
+  /**
+      Optional.
+                        Called until it doesn't return GST_FLOW_OK anymore for
+                        the first buffers. Can be used by the subclass to detect
+                        the stream format.
+  
+      Params:
+        buffer =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDetect` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.FlowReturn vfuncDetect(gid.gst1.buffer.Buffer buffer)
+  {
+    auto _klass = cast(GstBaseParseClass*)_vfuncClass;
+    if (!_klass.detect)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    _cretval = _klass.detect(cast(GstBaseParse*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      Optional.
+                       Allows the subclass to do its own sink get caps if needed.
+  
+      Params:
+        filter =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetSinkCaps` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.caps.Caps vfuncGetSinkCaps(gid.gst1.caps.Caps filter)
+  {
+    auto _klass = cast(GstBaseParseClass*)_vfuncClass;
+    if (!_klass.getSinkCaps)
+      return typeof(return).init;
+
+    GstCaps* _cretval;
+    _cretval = _klass.getSinkCaps(cast(GstBaseParse*)this._cPtr, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gid.gst1.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Parses the input data into valid frames as defined by subclass
+      which should be passed to [gid.gstbase1.base_parse.BaseParse.finishFrame].
+      The frame's input buffer is guaranteed writable,
+      whereas the input frame ownership is held by caller
+      (so subclass should make a copy if it needs to hang on).
+      Input buffer (data) is provided by baseclass with as much
+      metadata set as possible by baseclass according to upstream
+      information and/or subclass settings,
+      though subclass may still set buffer timestamp and duration
+      if desired.
+  
+      Params:
+        frame =  (modified in place, changes are seen by the caller)
+        skipsize = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncHandleFrame` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.FlowReturn vfuncHandleFrame(gid.gstbase1.base_parse_frame.BaseParseFrame frame, out int skipsize)
+  {
+    auto _klass = cast(GstBaseParseClass*)_vfuncClass;
+    if (!_klass.handleFrame)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    _cretval = _klass.handleFrame(cast(GstBaseParse*)this._cPtr, frame ? cast(GstBaseParseFrame*)frame._cPtr(No.Dup) : null, cast(int*)&skipsize);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      Optional.
+                        Called just prior to pushing a frame (after any pending
+                        events have been sent) to give subclass a chance to perform
+                        additional actions at this time (e.g. tag sending) or to
+                        decide whether this buffer should be dropped or not
+                        (e.g. custom segment clipping).
+  
+      Params:
+        frame =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPrePushFrame` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.FlowReturn vfuncPrePushFrame(gid.gstbase1.base_parse_frame.BaseParseFrame frame)
+  {
+    auto _klass = cast(GstBaseParseClass*)_vfuncClass;
+    if (!_klass.prePushFrame)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    _cretval = _klass.prePushFrame(cast(GstBaseParse*)this._cPtr, frame ? cast(GstBaseParseFrame*)frame._cPtr(No.Dup) : null);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      Optional.
+                       Allows the subclass to be notified of the actual caps set.
+  
+      Params:
+        caps =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetSinkCaps` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncSetSinkCaps(gid.gst1.caps.Caps caps)
+  {
+    auto _klass = cast(GstBaseParseClass*)_vfuncClass;
+    if (!_klass.setSinkCaps)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.setSinkCaps(cast(GstBaseParse*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Optional.
+                       Event handler on the sink pad. This function should chain
+                       up to the parent implementation to let the default handler
+                       run.
+  
+      Params:
+        event =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSinkEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncSinkEvent(gid.gst1.event.Event event)
+  {
+    auto _klass = cast(GstBaseParseClass*)_vfuncClass;
+    if (!_klass.sinkEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.sinkEvent(cast(GstBaseParse*)this._cPtr, event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Optional.
+                        Query handler on the sink pad. This function should chain
+                        up to the parent implementation to let the default handler
+                        run (Since: 1.2)
+  
+      Params:
+        query =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSinkQuery` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncSinkQuery(gid.gst1.query.Query query)
+  {
+    auto _klass = cast(GstBaseParseClass*)_vfuncClass;
+    if (!_klass.sinkQuery)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.sinkQuery(cast(GstBaseParse*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Optional.
+                       Event handler on the source pad. Should chain up to the
+                       parent to let the default handler run.
+  
+      Params:
+        event =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSrcEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncSrcEvent(gid.gst1.event.Event event)
+  {
+    auto _klass = cast(GstBaseParseClass*)_vfuncClass;
+    if (!_klass.srcEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.srcEvent(cast(GstBaseParse*)this._cPtr, event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Optional.
+                        Query handler on the source pad. Should chain up to the
+                        parent to let the default handler run (Since: 1.2)
+  
+      Params:
+        query =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSrcQuery` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncSrcQuery(gid.gst1.query.Query query)
+  {
+    auto _klass = cast(GstBaseParseClass*)_vfuncClass;
+    if (!_klass.srcQuery)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.srcQuery(cast(GstBaseParse*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Optional.
+                       Called when the element starts processing.
+                       Allows opening external resources.
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStart` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncStart()
+  {
+    auto _klass = cast(GstBaseParseClass*)_vfuncClass;
+    if (!_klass.start)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.start(cast(GstBaseParse*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Optional.
+                       Called when the element stops processing.
+                       Allows closing external resources.
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStop` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncStop()
+  {
+    auto _klass = cast(GstBaseParseClass*)_vfuncClass;
+    if (!_klass.stop)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.stop(cast(GstBaseParse*)this._cPtr);
+    return _retval;
   }
 
   /**
@@ -524,6 +811,444 @@ class BaseParse : gid.gst1.element.Element
   void setTsAtOffset(size_t offset) nothrow
   {
     gst_base_parse_set_ts_at_offset(cast(GstBaseParse*)this._cPtr, offset);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from BaseParse
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gstbase1.base_parse.BaseParse), T.stringof ~ " is not derived from gid.gstbase1.base_parse.BaseParse");
+
+    gid.gst1.element.Element._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDetect", true)[0]) == gid.gstbase1.base_parse.BaseParse))
+      _installVfunc(klass, "detect");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetSinkCaps", true)[0]) == gid.gstbase1.base_parse.BaseParse))
+      _installVfunc(klass, "get_sink_caps");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHandleFrame", true)[0]) == gid.gstbase1.base_parse.BaseParse))
+      _installVfunc(klass, "handle_frame");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPrePushFrame", true)[0]) == gid.gstbase1.base_parse.BaseParse))
+      _installVfunc(klass, "pre_push_frame");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetSinkCaps", true)[0]) == gid.gstbase1.base_parse.BaseParse))
+      _installVfunc(klass, "set_sink_caps");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSinkEvent", true)[0]) == gid.gstbase1.base_parse.BaseParse))
+      _installVfunc(klass, "sink_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSinkQuery", true)[0]) == gid.gstbase1.base_parse.BaseParse))
+      _installVfunc(klass, "sink_query");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSrcEvent", true)[0]) == gid.gstbase1.base_parse.BaseParse))
+      _installVfunc(klass, "src_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSrcQuery", true)[0]) == gid.gstbase1.base_parse.BaseParse))
+      _installVfunc(klass, "src_query");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStart", true)[0]) == gid.gstbase1.base_parse.BaseParse))
+      _installVfunc(klass, "start");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStop", true)[0]) == gid.gstbase1.base_parse.BaseParse))
+      _installVfunc(klass, "stop");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstBaseParseClass*)klass;
+
+    switch (vfunc)
+    {
+      case "detect":
+      {
+        static extern(C) GstFlowReturn _vfuncDetectTramp(GstBaseParse* parse, GstBuffer* buffer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
+            if (_klass.detect)
+              return (cast(typeof(&_vfuncDetectTramp))_klass.detect)(parse, buffer);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.FlowReturn _dretval;
+          auto _buffer = buffer ? new gid.gst1.buffer.Buffer(cast(void*)buffer, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncDetect(_buffer);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_parse.BaseParse.vfuncDetect");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+          if (_buffer)
+            _buffer._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.detect = cast(typeof(_klass.detect))&_vfuncDetectTramp;
+        break;
+      }
+      case "get_sink_caps":
+      {
+        static extern(C) GstCaps* _vfuncGetSinkCapsTramp(GstBaseParse* parse, GstCaps* filter) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
+            if (_klass.getSinkCaps)
+              return (cast(typeof(&_vfuncGetSinkCapsTramp))_klass.getSinkCaps)(parse, filter);
+            return typeof(return).init;
+          }
+
+          gid.gst1.caps.Caps _dretval;
+          auto _filter = filter ? new gid.gst1.caps.Caps(cast(void*)filter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncGetSinkCaps(_filter);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_parse.BaseParse.vfuncGetSinkCaps");
+          }
+          auto _retval = _dretval ? cast(GstCaps*)_dretval._cPtr(Yes.Dup) : null;
+          if (_filter)
+            _filter._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.getSinkCaps = cast(typeof(_klass.getSinkCaps))&_vfuncGetSinkCapsTramp;
+        break;
+      }
+      case "handle_frame":
+      {
+        static extern(C) GstFlowReturn _vfuncHandleFrameTramp(GstBaseParse* parse, GstBaseParseFrame* frame, int* skipsize) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
+            if (_klass.handleFrame)
+              return (cast(typeof(&_vfuncHandleFrameTramp))_klass.handleFrame)(parse, frame, skipsize);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.FlowReturn _dretval;
+          auto _frame = frame ? new gid.gstbase1.base_parse_frame.BaseParseFrame(cast(void*)frame, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncHandleFrame(_frame, *skipsize);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_parse.BaseParse.vfuncHandleFrame");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+          if (_frame)
+            _frame._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.handleFrame = cast(typeof(_klass.handleFrame))&_vfuncHandleFrameTramp;
+        break;
+      }
+      case "pre_push_frame":
+      {
+        static extern(C) GstFlowReturn _vfuncPrePushFrameTramp(GstBaseParse* parse, GstBaseParseFrame* frame) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
+            if (_klass.prePushFrame)
+              return (cast(typeof(&_vfuncPrePushFrameTramp))_klass.prePushFrame)(parse, frame);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.FlowReturn _dretval;
+          auto _frame = frame ? new gid.gstbase1.base_parse_frame.BaseParseFrame(cast(void*)frame, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncPrePushFrame(_frame);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_parse.BaseParse.vfuncPrePushFrame");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+          if (_frame)
+            _frame._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.prePushFrame = cast(typeof(_klass.prePushFrame))&_vfuncPrePushFrameTramp;
+        break;
+      }
+      case "set_sink_caps":
+      {
+        static extern(C) gboolean _vfuncSetSinkCapsTramp(GstBaseParse* parse, GstCaps* caps) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
+            if (_klass.setSinkCaps)
+              return (cast(typeof(&_vfuncSetSinkCapsTramp))_klass.setSinkCaps)(parse, caps);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _caps = caps ? new gid.gst1.caps.Caps(cast(void*)caps, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncSetSinkCaps(_caps);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_parse.BaseParse.vfuncSetSinkCaps");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_caps)
+            _caps._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.setSinkCaps = cast(typeof(_klass.setSinkCaps))&_vfuncSetSinkCapsTramp;
+        break;
+      }
+      case "sink_event":
+      {
+        static extern(C) gboolean _vfuncSinkEventTramp(GstBaseParse* parse, GstEvent* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
+            if (_klass.sinkEvent)
+              return (cast(typeof(&_vfuncSinkEventTramp))_klass.sinkEvent)(parse, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gst1.event.Event(cast(void*)event, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncSinkEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_parse.BaseParse.vfuncSinkEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_event)
+            _event._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.sinkEvent = cast(typeof(_klass.sinkEvent))&_vfuncSinkEventTramp;
+        break;
+      }
+      case "sink_query":
+      {
+        static extern(C) gboolean _vfuncSinkQueryTramp(GstBaseParse* parse, GstQuery* query) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
+            if (_klass.sinkQuery)
+              return (cast(typeof(&_vfuncSinkQueryTramp))_klass.sinkQuery)(parse, query);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _query = query ? new gid.gst1.query.Query(cast(void*)query, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncSinkQuery(_query);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_parse.BaseParse.vfuncSinkQuery");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_query)
+            _query._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.sinkQuery = cast(typeof(_klass.sinkQuery))&_vfuncSinkQueryTramp;
+        break;
+      }
+      case "src_event":
+      {
+        static extern(C) gboolean _vfuncSrcEventTramp(GstBaseParse* parse, GstEvent* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
+            if (_klass.srcEvent)
+              return (cast(typeof(&_vfuncSrcEventTramp))_klass.srcEvent)(parse, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gst1.event.Event(cast(void*)event, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncSrcEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_parse.BaseParse.vfuncSrcEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_event)
+            _event._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.srcEvent = cast(typeof(_klass.srcEvent))&_vfuncSrcEventTramp;
+        break;
+      }
+      case "src_query":
+      {
+        static extern(C) gboolean _vfuncSrcQueryTramp(GstBaseParse* parse, GstQuery* query) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
+            if (_klass.srcQuery)
+              return (cast(typeof(&_vfuncSrcQueryTramp))_klass.srcQuery)(parse, query);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _query = query ? new gid.gst1.query.Query(cast(void*)query, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncSrcQuery(_query);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_parse.BaseParse.vfuncSrcQuery");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_query)
+            _query._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.srcQuery = cast(typeof(_klass.srcQuery))&_vfuncSrcQueryTramp;
+        break;
+      }
+      case "start":
+      {
+        static extern(C) gboolean _vfuncStartTramp(GstBaseParse* parse) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
+            if (_klass.start)
+              return (cast(typeof(&_vfuncStartTramp))_klass.start)(parse);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncStart();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_parse.BaseParse.vfuncStart");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.start = cast(typeof(_klass.start))&_vfuncStartTramp;
+        break;
+      }
+      case "stop":
+      {
+        static extern(C) gboolean _vfuncStopTramp(GstBaseParse* parse) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstbase1.base_parse.BaseParse)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)parse);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBaseParseClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)parse);
+            if (_klass.stop)
+              return (cast(typeof(&_vfuncStopTramp))_klass.stop)(parse);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncStop();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstbase1.base_parse.BaseParse.vfuncStop");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.stop = cast(typeof(_klass.stop))&_vfuncStopTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

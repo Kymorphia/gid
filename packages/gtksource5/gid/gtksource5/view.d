@@ -451,9 +451,16 @@ class View : gid.gtk4.text_view.TextView
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_source_view_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_source_view_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -471,6 +478,70 @@ class View : gid.gtk4.text_view.TextView
     _cretval = gtk_source_view_new_with_buffer(buffer ? cast(GtkSourceBuffer*)buffer._cPtr(No.Dup) : null);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtksource5.view.View)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+
+  /** */
+  protected void vfuncLineMarkActivated(gid.gtk4.text_iter.TextIter iter, uint button, gid.gdk4.types.ModifierType state, int nPresses)
+  {
+    auto _klass = cast(GtkSourceViewClass*)_vfuncClass;
+    if (!_klass.lineMarkActivated)
+      return;
+
+    _klass.lineMarkActivated(cast(GtkSourceView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, button, state, nPresses);
+  }
+
+  /** */
+  protected void vfuncMoveLines(bool down)
+  {
+    auto _klass = cast(GtkSourceViewClass*)_vfuncClass;
+    if (!_klass.moveLines)
+      return;
+
+    _klass.moveLines(cast(GtkSourceView*)this._cPtr, down);
+  }
+
+  /** */
+  protected void vfuncMoveWords(int step)
+  {
+    auto _klass = cast(GtkSourceViewClass*)_vfuncClass;
+    if (!_klass.moveWords)
+      return;
+
+    _klass.moveWords(cast(GtkSourceView*)this._cPtr, step);
+  }
+
+  /**
+      Inserts a new snippet at location
+      
+      If another snippet was already active, it will be paused and the new
+      snippet will become active. Once the focus positions of snippet have
+      been exhausted, editing will return to the previous snippet.
+  
+      Params:
+        snippet = a #GtkSourceSnippet
+        location = a #GtkTextIter or null for the cursor position (modified in place, changes are seen by the caller)
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPushSnippet` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncPushSnippet(gid.gtksource5.snippet.Snippet snippet, gid.gtk4.text_iter.TextIter location = null)
+  {
+    auto _klass = cast(GtkSourceViewClass*)_vfuncClass;
+    if (!_klass.pushSnippet)
+      return;
+
+    _klass.pushSnippet(cast(GtkSourceView*)this._cPtr, snippet ? cast(GtkSourceSnippet*)snippet._cPtr(No.Dup) : null, location ? cast(GtkTextIter*)location._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected void vfuncShowCompletion()
+  {
+    auto _klass = cast(GtkSourceViewClass*)_vfuncClass;
+    if (!_klass.showCompletion)
+      return;
+
+    _klass.showCompletion(cast(GtkSourceView*)this._cPtr);
   }
 
   /**
@@ -1059,6 +1130,7 @@ class View : gid.gtk4.text_view.TextView
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1109,6 +1181,7 @@ class View : gid.gtk4.text_view.TextView
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1156,6 +1229,7 @@ class View : gid.gtk4.text_view.TextView
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1215,6 +1289,7 @@ class View : gid.gtk4.text_view.TextView
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 5, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1277,6 +1352,7 @@ class View : gid.gtk4.text_view.TextView
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1327,6 +1403,7 @@ class View : gid.gtk4.text_view.TextView
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1380,6 +1457,7 @@ class View : gid.gtk4.text_view.TextView
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1437,6 +1515,7 @@ class View : gid.gtk4.text_view.TextView
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1505,6 +1584,7 @@ class View : gid.gtk4.text_view.TextView
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1560,6 +1640,7 @@ class View : gid.gtk4.text_view.TextView
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1585,6 +1666,187 @@ class View : gid.gtk4.text_view.TextView
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("smart-home-end", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from View
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtksource5.view.View), T.stringof ~ " is not derived from gid.gtksource5.view.View");
+
+    gid.gtk4.text_view.TextView._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncLineMarkActivated", true)[0]) == gid.gtksource5.view.View))
+      _installVfunc(klass, "line_mark_activated");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMoveLines", true)[0]) == gid.gtksource5.view.View))
+      _installVfunc(klass, "move_lines");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMoveWords", true)[0]) == gid.gtksource5.view.View))
+      _installVfunc(klass, "move_words");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPushSnippet", true)[0]) == gid.gtksource5.view.View))
+      _installVfunc(klass, "push_snippet");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncShowCompletion", true)[0]) == gid.gtksource5.view.View))
+      _installVfunc(klass, "show_completion");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkSourceViewClass*)klass;
+
+    switch (vfunc)
+    {
+      case "line_mark_activated":
+      {
+        static extern(C) void _vfuncLineMarkActivatedTramp(GtkSourceView* view, const(GtkTextIter)* iter, uint button, GdkModifierType state, int nPresses) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource5.view.View)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)view);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)view);
+            if (_klass.lineMarkActivated)
+              return (cast(typeof(&_vfuncLineMarkActivatedTramp))_klass.lineMarkActivated)(view, iter, button, state, nPresses);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncLineMarkActivated(iter ? new gid.gtk4.text_iter.TextIter(cast(void*)iter, No.Take) : null, button, state, nPresses);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource5.view.View.vfuncLineMarkActivated");
+          }
+        }
+
+        _klass.lineMarkActivated = cast(typeof(_klass.lineMarkActivated))&_vfuncLineMarkActivatedTramp;
+        break;
+      }
+      case "move_lines":
+      {
+        static extern(C) void _vfuncMoveLinesTramp(GtkSourceView* view, gboolean down) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource5.view.View)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)view);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)view);
+            if (_klass.moveLines)
+              return (cast(typeof(&_vfuncMoveLinesTramp))_klass.moveLines)(view, down);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMoveLines(cast(bool)down);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource5.view.View.vfuncMoveLines");
+          }
+        }
+
+        _klass.moveLines = cast(typeof(_klass.moveLines))&_vfuncMoveLinesTramp;
+        break;
+      }
+      case "move_words":
+      {
+        static extern(C) void _vfuncMoveWordsTramp(GtkSourceView* view, int step) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource5.view.View)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)view);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)view);
+            if (_klass.moveWords)
+              return (cast(typeof(&_vfuncMoveWordsTramp))_klass.moveWords)(view, step);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMoveWords(step);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource5.view.View.vfuncMoveWords");
+          }
+        }
+
+        _klass.moveWords = cast(typeof(_klass.moveWords))&_vfuncMoveWordsTramp;
+        break;
+      }
+      case "push_snippet":
+      {
+        static extern(C) void _vfuncPushSnippetTramp(GtkSourceView* view, GtkSourceSnippet* snippet, GtkTextIter* location) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource5.view.View)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)view);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)view);
+            if (_klass.pushSnippet)
+              return (cast(typeof(&_vfuncPushSnippetTramp))_klass.pushSnippet)(view, snippet, location);
+            return;
+          }
+
+          auto _location = location ? new gid.gtk4.text_iter.TextIter(cast(void*)location, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncPushSnippet(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtksource5.snippet.Snippet)(cast(void*)snippet, No.Take), _location);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource5.view.View.vfuncPushSnippet");
+          }
+          if (_location)
+            _location._cUnborrow;
+
+        }
+
+        _klass.pushSnippet = cast(typeof(_klass.pushSnippet))&_vfuncPushSnippetTramp;
+        break;
+      }
+      case "show_completion":
+      {
+        static extern(C) void _vfuncShowCompletionTramp(GtkSourceView* view) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource5.view.View)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)view);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceViewClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)view);
+            if (_klass.showCompletion)
+              return (cast(typeof(&_vfuncShowCompletionTramp))_klass.showCompletion)(view);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncShowCompletion();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource5.view.View.vfuncShowCompletion");
+          }
+        }
+
+        _klass.showCompletion = cast(typeof(_klass.showCompletion))&_vfuncShowCompletionTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

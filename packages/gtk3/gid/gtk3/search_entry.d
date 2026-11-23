@@ -8,6 +8,7 @@ import gid.core.utils;
 import gid.gdk3.event;
 import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;
+import gid.gobject2.object;
 import gid.gtk3.buildable;
 import gid.gtk3.buildable_mixin;
 import gid.gtk3.c.functions;
@@ -95,9 +96,56 @@ class SearchEntry : gid.gtk3.entry.Entry
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_search_entry_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_search_entry_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncNextMatch()
+  {
+    auto _klass = cast(GtkSearchEntryClass*)_vfuncClass;
+    if (!_klass.nextMatch)
+      return;
+
+    _klass.nextMatch(cast(GtkSearchEntry*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncPreviousMatch()
+  {
+    auto _klass = cast(GtkSearchEntryClass*)_vfuncClass;
+    if (!_klass.previousMatch)
+      return;
+
+    _klass.previousMatch(cast(GtkSearchEntry*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncSearchChanged()
+  {
+    auto _klass = cast(GtkSearchEntryClass*)_vfuncClass;
+    if (!_klass.searchChanged)
+      return;
+
+    _klass.searchChanged(cast(GtkSearchEntry*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncStopSearch()
+  {
+    auto _klass = cast(GtkSearchEntryClass*)_vfuncClass;
+    if (!_klass.stopSearch)
+      return;
+
+    _klass.stopSearch(cast(GtkSearchEntry*)this._cPtr);
   }
 
   /**
@@ -156,6 +204,7 @@ class SearchEntry : gid.gtk3.entry.Entry
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -207,6 +256,7 @@ class SearchEntry : gid.gtk3.entry.Entry
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -252,6 +302,7 @@ class SearchEntry : gid.gtk3.entry.Entry
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -302,6 +353,7 @@ class SearchEntry : gid.gtk3.entry.Entry
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -321,6 +373,152 @@ class SearchEntry : gid.gtk3.entry.Entry
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("stop-search", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from SearchEntry
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.search_entry.SearchEntry), T.stringof ~ " is not derived from gid.gtk3.search_entry.SearchEntry");
+
+    gid.gtk3.entry.Entry._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncNextMatch", true)[0]) == gid.gtk3.search_entry.SearchEntry))
+      _installVfunc(klass, "next_match");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPreviousMatch", true)[0]) == gid.gtk3.search_entry.SearchEntry))
+      _installVfunc(klass, "previous_match");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSearchChanged", true)[0]) == gid.gtk3.search_entry.SearchEntry))
+      _installVfunc(klass, "search_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStopSearch", true)[0]) == gid.gtk3.search_entry.SearchEntry))
+      _installVfunc(klass, "stop_search");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkSearchEntryClass*)klass;
+
+    switch (vfunc)
+    {
+      case "next_match":
+      {
+        static extern(C) void _vfuncNextMatchTramp(GtkSearchEntry* entry) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.search_entry.SearchEntry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSearchEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);
+            if (_klass.nextMatch)
+              return (cast(typeof(&_vfuncNextMatchTramp))_klass.nextMatch)(entry);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncNextMatch();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.search_entry.SearchEntry.vfuncNextMatch");
+          }
+        }
+
+        _klass.nextMatch = cast(typeof(_klass.nextMatch))&_vfuncNextMatchTramp;
+        break;
+      }
+      case "previous_match":
+      {
+        static extern(C) void _vfuncPreviousMatchTramp(GtkSearchEntry* entry) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.search_entry.SearchEntry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSearchEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);
+            if (_klass.previousMatch)
+              return (cast(typeof(&_vfuncPreviousMatchTramp))_klass.previousMatch)(entry);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPreviousMatch();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.search_entry.SearchEntry.vfuncPreviousMatch");
+          }
+        }
+
+        _klass.previousMatch = cast(typeof(_klass.previousMatch))&_vfuncPreviousMatchTramp;
+        break;
+      }
+      case "search_changed":
+      {
+        static extern(C) void _vfuncSearchChangedTramp(GtkSearchEntry* entry) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.search_entry.SearchEntry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSearchEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);
+            if (_klass.searchChanged)
+              return (cast(typeof(&_vfuncSearchChangedTramp))_klass.searchChanged)(entry);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSearchChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.search_entry.SearchEntry.vfuncSearchChanged");
+          }
+        }
+
+        _klass.searchChanged = cast(typeof(_klass.searchChanged))&_vfuncSearchChangedTramp;
+        break;
+      }
+      case "stop_search":
+      {
+        static extern(C) void _vfuncStopSearchTramp(GtkSearchEntry* entry) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.search_entry.SearchEntry)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)entry);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSearchEntryClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)entry);
+            if (_klass.stopSearch)
+              return (cast(typeof(&_vfuncStopSearchTramp))_klass.stopSearch)(entry);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncStopSearch();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.search_entry.SearchEntry.vfuncStopSearch");
+          }
+        }
+
+        _klass.stopSearch = cast(typeof(_klass.stopSearch))&_vfuncStopSearchTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

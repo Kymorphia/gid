@@ -129,6 +129,7 @@ class TextIter : gid.gobject2.boxed.BoxedWrap!(gtk_text_iter_get_type)
   {
     extern(C) gboolean _predCallback(dchar ch, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gtk3.types.TextCharPredicate*)userData;
 
@@ -658,6 +659,7 @@ class TextIter : gid.gobject2.boxed.BoxedWrap!(gtk_text_iter_get_type)
   {
     extern(C) gboolean _predCallback(dchar ch, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gtk3.types.TextCharPredicate*)userData;
 

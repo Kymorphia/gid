@@ -9,6 +9,8 @@ public import gid.gio2.c.types;
 public import gid.gio2.cancellable;
 public import gid.gio2.types;
 public import gid.glib2.error;
+public import gid.gobject2.c.functions;
+public import gid.gobject2.c.types;
 public import gid.gobject2.gid_builder;
 public import gid.gobject2.object;
 public import gid.gobject2.parameter;
@@ -89,6 +91,72 @@ template InitableT()
       Returns: true if successful. If an error has occurred, this function will
             return false and set error appropriately if present.
       Throws: [ErrorWrap]
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncInit`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected bool vfuncInit(gid.gio2.cancellable.Cancellable cancellable = null)
+  {
+    auto _klass = cast(GInitableIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gio2.initable.Initable._getGType);
+    if (!_klass || !_klass.init_)
+      return typeof(return).init;
+
+    bool _retval;
+    GError *_err;
+    _retval = cast(bool)_klass.init_(cast(GInitable*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
+    if (_err)
+      throw new ErrorWrap(_err, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Initializes the object implementing the interface.
+      
+      This method is intended for language bindings. If writing in C,
+      [gid.gio2.initable.Initable.new_] should typically be used instead.
+      
+      The object must be initialized before any real use after initial
+      construction, either with this function or [gid.gio2.async_initable.AsyncInitable.initAsync].
+      
+      Implementations may also support cancellation. If cancellable is not null,
+      then initialization can be cancelled by triggering the cancellable object
+      from another thread. If the operation was cancelled, the error
+      [gid.gio2.types.IOErrorEnum.Cancelled] will be returned. If cancellable is not null and
+      the object doesn't support cancellable initialization the error
+      [gid.gio2.types.IOErrorEnum.NotSupported] will be returned.
+      
+      If the object is not initialized, or initialization returns with an
+      error, then all operations on the object except [gid.gobject2.object.ObjectWrap.ref_] and
+      [gid.gobject2.object.ObjectWrap.unref] are considered to be invalid, and have undefined
+      behaviour. See the [description][gid.gio2.initable.Initable] for more details.
+      
+      Callers should not assume that a class which implements #GInitable can be
+      initialized multiple times, unless the class explicitly documents itself as
+      supporting this. Generally, a class’ implementation of init() can assume
+      (and assert) that it will only be called once. Previously, this documentation
+      recommended all #GInitable implementations should be idempotent; that
+      recommendation was relaxed in GLib 2.54.
+      
+      If a class explicitly supports being initialized multiple times, it is
+      recommended that the method is idempotent: multiple calls with the same
+      arguments should return the same results. Only the first call initializes
+      the object; further calls return the result of the first call.
+      
+      One reason why a class might need to support idempotent initialization is if
+      it is designed to be used via the singleton pattern, with a
+      #GObjectClass.constructor that sometimes returns an existing instance.
+      In this pattern, a caller would expect to be able to call [gid.gio2.initable.Initable.init_]
+      on the result of [gid.gobject2.object.ObjectWrap.new_], regardless of whether it is in fact a new
+      instance.
+  
+      Params:
+        cancellable = optional #GCancellable object, null to ignore.
+      Returns: true if successful. If an error has occurred, this function will
+            return false and set error appropriately if present.
+      Throws: [ErrorWrap]
   */
   override bool init_(gid.gio2.cancellable.Cancellable cancellable = null)
   {
@@ -98,6 +166,66 @@ template InitableT()
     if (_err)
       throw new ErrorWrap(_err, Yes.Take);
     return _retval;
+  }
+
+  /// True if the D class T overrides any vfunc method of gid.gio2.initable.Initable (DiG)
+  enum bool _ifaceVfuncsOverridden_gid_gio2_initable_Initable(T) = !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncInit", true)[0], gid.gobject2.object.GidIfaceVfunc);
+
+  /**
+      Install the C trampolines of the gid.gio2.initable.Initable vfunc methods which a D class overrides into the interface
+      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      trampoline is a compile error.
+      Params:
+        T = D class
+        iface = Interface structure of the GType registered for T
+  */
+  static void _installIfaceVfuncs_gid_gio2_initable_Initable(T)(void* iface) nothrow
+  {
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncInit", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gio2_initable_Initable(iface, "init");
+  }
+
+  private static void _installIfaceVfunc_gid_gio2_initable_Initable(void* iface, string vfunc) nothrow
+  {
+    auto _klass = cast(GInitableIface*)iface;
+
+    switch (vfunc)
+    {
+      case "init":
+      {
+        static extern(C) gboolean _vfuncInitTramp(GInitable* initable, GCancellable* cancellable, GError** _err) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)initable);
+          if (!_obj)
+          {
+            auto _klass = cast(GInitableIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)initable), gid.gio2.initable.Initable._getGType);
+            if (_klass && _klass.init_)
+              return (cast(typeof(&_vfuncInitTramp))_klass.init_)(initable, cancellable, _err);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncInit(gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidExceptionToGError(e, _err);
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.init_ = cast(typeof(_klass.init_))&_vfuncInitTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

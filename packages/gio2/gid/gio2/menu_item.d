@@ -77,11 +77,18 @@ class MenuItem : gid.gobject2.object.ObjectWrap
   */
   this(string label = null, string detailedAction = null) nothrow
   {
-    GMenuItem* _cretval;
-    const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
-    const(char)* _detailedAction = detailedAction.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = g_menu_item_new(_label, _detailedAction);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, label !is null || detailedAction !is null), Yes.Take);
+    }
+    else
+    {
+      GMenuItem* _cretval;
+      const(char)* _label = label.toCString!(No.Malloc, Yes.Nullable);
+      const(char)* _detailedAction = detailedAction.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = g_menu_item_new(_label, _detailedAction);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

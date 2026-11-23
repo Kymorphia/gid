@@ -86,6 +86,7 @@ class Cache : OpaqueWrap!(GCache*, void, void)
   {
     extern(C) void _funcCallback(void* key, void* value, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.glib2.types.HFunc*)userData;
 
       try
@@ -130,6 +131,7 @@ class Cache : OpaqueWrap!(GCache*, void, void)
   {
     extern(C) void _funcCallback(void* key, void* value, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.glib2.types.HFunc*)userData;
 
       try

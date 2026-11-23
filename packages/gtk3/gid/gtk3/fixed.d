@@ -105,9 +105,16 @@ class Fixed : gid.gtk3.container.Container
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_fixed_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_fixed_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**

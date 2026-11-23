@@ -261,6 +261,7 @@ class Caps : gid.gobject2.boxed.BoxedWrap!(gst_caps_get_type)
   {
     extern(C) gboolean _funcCallback(GstCapsFeatures* features, GstStructure* structure, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.CapsFilterMapFunc*)userData;
       auto _features = features ? new gid.gst1.caps_features.CapsFeatures(cast(void*)features, Yes.Take)._cBorrow : null;
@@ -325,6 +326,7 @@ class Caps : gid.gobject2.boxed.BoxedWrap!(gst_caps_get_type)
   {
     extern(C) gboolean _funcCallback(GstCapsFeatures* features, GstStructure* structure, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.CapsForeachFunc*)userData;
       auto _features = features ? new gid.gst1.caps_features.CapsFeatures(cast(void*)features, Yes.Take)._cBorrow : null;
@@ -650,6 +652,7 @@ class Caps : gid.gobject2.boxed.BoxedWrap!(gst_caps_get_type)
   {
     extern(C) gboolean _funcCallback(GstCapsFeatures* features, GstStructure* structure, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.CapsMapFunc*)userData;
       auto _features = features ? new gid.gst1.caps_features.CapsFeatures(cast(void*)features, Yes.Take)._cBorrow : null;

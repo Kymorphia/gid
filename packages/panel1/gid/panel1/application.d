@@ -24,6 +24,15 @@ class Application : gid.adw1.application.Application
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -61,10 +70,17 @@ class Application : gid.adw1.application.Application
   /** */
   this(string applicationId, gid.gio2.types.ApplicationFlags flags) nothrow
   {
-    PanelApplication* _cretval;
-    const(char)* _applicationId = applicationId.toCString!(No.Malloc, No.Nullable);
-    _cretval = panel_application_new(_applicationId, flags);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      PanelApplication* _cretval;
+      const(char)* _applicationId = applicationId.toCString!(No.Malloc, No.Nullable);
+      _cretval = panel_application_new(_applicationId, flags);
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

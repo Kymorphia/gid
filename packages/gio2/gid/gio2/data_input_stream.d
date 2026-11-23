@@ -29,6 +29,15 @@ class DataInputStream : gid.gio2.buffered_input_stream.BufferedInputStream
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -116,9 +125,16 @@ class DataInputStream : gid.gio2.buffered_input_stream.BufferedInputStream
   */
   this(gid.gio2.input_stream.InputStream baseStream) nothrow
   {
-    GDataInputStream* _cretval;
-    _cretval = g_data_input_stream_new(baseStream ? cast(GInputStream*)baseStream._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GDataInputStream* _cretval;
+      _cretval = g_data_input_stream_new(baseStream ? cast(GInputStream*)baseStream._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -294,6 +310,7 @@ class DataInputStream : gid.gio2.buffered_input_stream.BufferedInputStream
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -545,6 +562,7 @@ class DataInputStream : gid.gio2.buffered_input_stream.BufferedInputStream
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -656,6 +674,7 @@ class DataInputStream : gid.gio2.buffered_input_stream.BufferedInputStream
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 

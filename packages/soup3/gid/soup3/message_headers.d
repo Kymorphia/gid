@@ -102,6 +102,7 @@ class MessageHeaders : gid.gobject2.boxed.BoxedWrap!(soup_message_headers_get_ty
   {
     extern(C) void _funcCallback(const(char)* name, const(char)* value, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.soup3.types.MessageHeadersForeachFunc*)userData;
       string _name = name.fromCString!(No.Free);
       string _value = value.fromCString!(No.Free);

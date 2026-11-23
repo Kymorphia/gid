@@ -80,6 +80,9 @@ interface SocketConnectable : GidWrap
     return cast(void function())g_socket_connectable_get_type != &gidSymbolNotFound ? g_socket_connectable_get_type() : cast(GType)0;
   }
 
+
+
+
   /**
       Creates a #GSocketAddressEnumerator for connectable.
       Returns: a new #GSocketAddressEnumerator.

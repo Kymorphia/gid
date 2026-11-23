@@ -637,6 +637,7 @@ class Regex : gid.gobject2.boxed.BoxedWrap!(g_regex_get_type)
   {
     extern(C) gboolean _evalCallback(const(GMatchInfo)* matchInfo, GString* result, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.glib2.types.RegexEvalCallback*)userData;
       auto _result = result ? new gid.glib2.string_.String(cast(void*)result, Yes.Take)._cBorrow : null;

@@ -192,6 +192,15 @@ class ApplicationCommandLine : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -233,6 +242,113 @@ class ApplicationCommandLine : gid.gobject2.object.ObjectWrap
   @property bool isRemote() nothrow
   {
     return getIsRemote();
+  }
+
+  /**
+      Signals that command line processing is completed.
+      
+      For remote invocation, it causes the invoking process to terminate.
+      
+      For local invocation, it does nothing.
+      
+      This method should be called in the [gid.gio2.application.Application.commandLine]
+      handler, after the exit status is set and all messages are printed.
+      
+      After this call, [gid.gio2.application_command_line.ApplicationCommandLine.setExitStatus] has no effect.
+      Subsequent calls to this method are no-ops.
+      
+      This method is automatically called when the #GApplicationCommandLine
+      object is disposed — so you can omit the call in non-garbage collected
+      languages.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDone` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDone()
+  {
+    auto _klass = cast(GApplicationCommandLineClass*)_vfuncClass;
+    if (!_klass.done)
+      return;
+
+    _klass.done(cast(GApplicationCommandLine*)this._cPtr);
+  }
+
+  /**
+      Gets the stdin of the invoking process.
+      
+      The #GInputStream can be used to read data passed to the standard
+      input of the invoking process.
+      This doesn't work on all platforms.  Presently, it is only available
+      on UNIX when using a D-Bus daemon capable of passing file descriptors.
+      If stdin is not available then null will be returned.  In the
+      future, support may be expanded to other platforms.
+      
+      You must only call this function once per commandline invocation.
+      Returns: a #GInputStream for stdin
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetStdin` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gio2.input_stream.InputStream vfuncGetStdin()
+  {
+    auto _klass = cast(GApplicationCommandLineClass*)_vfuncClass;
+    if (!_klass.getStdin)
+      return typeof(return).init;
+
+    GInputStream* _cretval;
+    _cretval = _klass.getStdin(cast(GApplicationCommandLine*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      Prints a message using the stdout print handler in the invoking process.
+      
+      Unlike [gid.gio2.application_command_line.ApplicationCommandLine.print], message is not a `printf()`-style
+      format string. Use this function if message contains text you don't have
+      control over, that could include `printf()` escape sequences.
+  
+      Params:
+        message = the message
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPrintLiteral` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncPrintLiteral(string message)
+  {
+    auto _klass = cast(GApplicationCommandLineClass*)_vfuncClass;
+    if (!_klass.printLiteral)
+      return;
+
+    const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
+    _klass.printLiteral(cast(GApplicationCommandLine*)this._cPtr, _message);
+  }
+
+  /**
+      Prints a message using the stderr print handler in the invoking process.
+      
+      Unlike [gid.gio2.application_command_line.ApplicationCommandLine.printerr], message is not
+      a `printf()`-style format string. Use this function if message contains text
+      you don't have control over, that could include `printf()` escape sequences.
+  
+      Params:
+        message = the message
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPrinterrLiteral` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncPrinterrLiteral(string message)
+  {
+    auto _klass = cast(GApplicationCommandLineClass*)_vfuncClass;
+    if (!_klass.printerrLiteral)
+      return;
+
+    const(char)* _message = message.toCString!(No.Malloc, No.Nullable);
+    _klass.printerrLiteral(cast(GApplicationCommandLine*)this._cPtr, _message);
   }
 
   /**
@@ -543,6 +659,161 @@ class ApplicationCommandLine : gid.gobject2.object.ObjectWrap
   void setExitStatus(int exitStatus) nothrow
   {
     g_application_command_line_set_exit_status(cast(GApplicationCommandLine*)this._cPtr, exitStatus);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from ApplicationCommandLine
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.application_command_line.ApplicationCommandLine), T.stringof ~ " is not derived from gid.gio2.application_command_line.ApplicationCommandLine");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDone", true)[0]) == gid.gio2.application_command_line.ApplicationCommandLine))
+      _installVfunc(klass, "done");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetStdin", true)[0]) == gid.gio2.application_command_line.ApplicationCommandLine))
+      _installVfunc(klass, "get_stdin");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPrintLiteral", true)[0]) == gid.gio2.application_command_line.ApplicationCommandLine))
+      _installVfunc(klass, "print_literal");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPrinterrLiteral", true)[0]) == gid.gio2.application_command_line.ApplicationCommandLine))
+      _installVfunc(klass, "printerr_literal");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GApplicationCommandLineClass*)klass;
+
+    switch (vfunc)
+    {
+      case "done":
+      {
+        static extern(C) void _vfuncDoneTramp(GApplicationCommandLine* cmdline) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.application_command_line.ApplicationCommandLine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cmdline);
+          if (!_obj)
+          {
+            auto _klass = cast(GApplicationCommandLineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cmdline);
+            if (_klass.done)
+              return (cast(typeof(&_vfuncDoneTramp))_klass.done)(cmdline);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDone();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.application_command_line.ApplicationCommandLine.vfuncDone");
+          }
+        }
+
+        _klass.done = cast(typeof(_klass.done))&_vfuncDoneTramp;
+        break;
+      }
+      case "get_stdin":
+      {
+        static extern(C) GInputStream* _vfuncGetStdinTramp(GApplicationCommandLine* cmdline) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.application_command_line.ApplicationCommandLine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cmdline);
+          if (!_obj)
+          {
+            auto _klass = cast(GApplicationCommandLineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cmdline);
+            if (_klass.getStdin)
+              return (cast(typeof(&_vfuncGetStdinTramp))_klass.getStdin)(cmdline);
+            return typeof(return).init;
+          }
+
+          gid.gio2.input_stream.InputStream _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetStdin();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.application_command_line.ApplicationCommandLine.vfuncGetStdin");
+          }
+          auto _retval = _dretval ? cast(GInputStream*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getStdin = cast(typeof(_klass.getStdin))&_vfuncGetStdinTramp;
+        break;
+      }
+      case "print_literal":
+      {
+        static extern(C) void _vfuncPrintLiteralTramp(GApplicationCommandLine* cmdline, const(char)* message) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.application_command_line.ApplicationCommandLine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cmdline);
+          if (!_obj)
+          {
+            auto _klass = cast(GApplicationCommandLineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cmdline);
+            if (_klass.printLiteral)
+              return (cast(typeof(&_vfuncPrintLiteralTramp))_klass.printLiteral)(cmdline, message);
+            return;
+          }
+
+          string _message = message.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncPrintLiteral(_message);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.application_command_line.ApplicationCommandLine.vfuncPrintLiteral");
+          }
+        }
+
+        _klass.printLiteral = cast(typeof(_klass.printLiteral))&_vfuncPrintLiteralTramp;
+        break;
+      }
+      case "printerr_literal":
+      {
+        static extern(C) void _vfuncPrinterrLiteralTramp(GApplicationCommandLine* cmdline, const(char)* message) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.application_command_line.ApplicationCommandLine)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)cmdline);
+          if (!_obj)
+          {
+            auto _klass = cast(GApplicationCommandLineClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)cmdline);
+            if (_klass.printerrLiteral)
+              return (cast(typeof(&_vfuncPrinterrLiteralTramp))_klass.printerrLiteral)(cmdline, message);
+            return;
+          }
+
+          string _message = message.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncPrinterrLiteral(_message);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.application_command_line.ApplicationCommandLine.vfuncPrinterrLiteral");
+          }
+        }
+
+        _klass.printerrLiteral = cast(typeof(_klass.printerrLiteral))&_vfuncPrinterrLiteralTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

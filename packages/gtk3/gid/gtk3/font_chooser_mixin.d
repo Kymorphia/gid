@@ -4,6 +4,8 @@ module gid.gtk3.font_chooser_mixin;
 public import gid.core.basictypes;
 public import gid.gtk3.font_chooser_iface_proxy;
 public import gid.core.utils;
+public import gid.gobject2.c.functions;
+public import gid.gobject2.c.types;
 public import gid.gobject2.dclosure;
 public import gid.gobject2.gid_builder;
 public import gid.gobject2.object;
@@ -151,6 +153,204 @@ template FontChooserT()
   @property void showPreviewEntry(bool propval) nothrow
   {
     setShowPreviewEntry(propval);
+  }
+
+  /** */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncFontActivated(string fontname)
+  {
+    auto _klass = cast(GtkFontChooserIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.font_chooser.FontChooser._getGType);
+    if (!_klass || !_klass.fontActivated)
+      return;
+
+    const(char)* _fontname = fontname.toCString!(No.Malloc, No.Nullable);
+    _klass.fontActivated(cast(GtkFontChooser*)this._cPtr, _fontname);
+  }
+
+  /**
+      Gets the #PangoFontFace representing the selected font group
+      details (i.e. family, slant, weight, width, etc).
+      
+      If the selected font is not installed, returns null.
+      Returns: A #PangoFontFace representing the
+            selected font group details, or null. The returned object is owned by
+            fontchooser and must not be modified or freed.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetFontFace`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected gid.pango1.font_face.FontFace vfuncGetFontFace()
+  {
+    auto _klass = cast(GtkFontChooserIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.font_chooser.FontChooser._getGType);
+    if (!_klass || !_klass.getFontFace)
+      return typeof(return).init;
+
+    PangoFontFace* _cretval;
+    _cretval = _klass.getFontFace(cast(GtkFontChooser*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.pango1.font_face.FontFace)(cast(PangoFontFace*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the #PangoFontFamily representing the selected font family.
+      Font families are a collection of font faces.
+      
+      If the selected font is not installed, returns null.
+      Returns: A #PangoFontFamily representing the
+            selected font family, or null. The returned object is owned by fontchooser
+            and must not be modified or freed.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetFontFamily`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected gid.pango1.font_family.FontFamily vfuncGetFontFamily()
+  {
+    auto _klass = cast(GtkFontChooserIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.font_chooser.FontChooser._getGType);
+    if (!_klass || !_klass.getFontFamily)
+      return typeof(return).init;
+
+    PangoFontFamily* _cretval;
+    _cretval = _klass.getFontFamily(cast(GtkFontChooser*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.pango1.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, No.Take);
+    return _retval;
+  }
+
+  /**
+      Gets the custom font map of this font chooser widget,
+      or null if it does not have one.
+      Returns: a #PangoFontMap, or null
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetFontMap`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected gid.pango1.font_map.FontMap vfuncGetFontMap()
+  {
+    auto _klass = cast(GtkFontChooserIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.font_chooser.FontChooser._getGType);
+    if (!_klass || !_klass.getFontMap)
+      return typeof(return).init;
+
+    PangoFontMap* _cretval;
+    _cretval = _klass.getFontMap(cast(GtkFontChooser*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.pango1.font_map.FontMap)(cast(PangoFontMap*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      The selected font size.
+      Returns: A n integer representing the selected font size,
+            or -1 if no font size is selected.
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncGetFontSize`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected int vfuncGetFontSize()
+  {
+    auto _klass = cast(GtkFontChooserIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.font_chooser.FontChooser._getGType);
+    if (!_klass || !_klass.getFontSize)
+      return typeof(return).init;
+
+    int _retval;
+    _retval = _klass.getFontSize(cast(GtkFontChooser*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Adds a filter function that decides which fonts to display
+      in the font chooser.
+  
+      Params:
+        filter = a #GtkFontFilterFunc, or null
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSetFilterFunc`
+      to chain up from an override.
+      Overriding it from D is not supported (parameter 'filter' of kind 'Callback' is not supported).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncSetFilterFunc(gid.gtk3.types.FontFilterFunc filter = null)
+  {
+    auto _klass = cast(GtkFontChooserIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.font_chooser.FontChooser._getGType);
+    if (!_klass || !_klass.setFilterFunc)
+      return;
+
+    extern(C) gboolean _filterCallback(const(PangoFontFamily)* family, const(PangoFontFace)* face, void* data) nothrow
+    {
+      gidAttachThread();
+      bool _dretval;
+      auto _dlg = cast(gid.gtk3.types.FontFilterFunc*)data;
+
+      try
+      {
+        _dretval = (*_dlg)(gid.gobject2.object.ObjectWrap._getDObject!(gid.pango1.font_family.FontFamily)(cast(void*)family, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.pango1.font_face.FontFace)(cast(void*)face, No.Take));
+      }
+      catch (Exception e)
+      {
+        gidInvokeCallbackExceptionHandler(e, "gid.gtk3.types.FontFilterFunc");
+      }
+      auto _retval = cast(gboolean)_dretval;
+
+      return _retval;
+    }
+    auto _filterCB = filter ? &_filterCallback : null;
+    auto _filter = filter ? freezeDelegate(cast(void*)&filter) : null;
+    GDestroyNotify _filterDestroyCB = filter ? &thawDelegate : null;
+    _klass.setFilterFunc(cast(GtkFontChooser*)this._cPtr, _filterCB, _filter, _filterDestroyCB);
+  }
+
+  /**
+      Sets a custom font map to use for this font chooser widget.
+      A custom font map can be used to present application-specific
+      fonts instead of or in addition to the normal system fonts.
+      
+      ```c
+      FcConfig *config;
+      PangoFontMap *fontmap;
+      
+      config = FcInitLoadConfigAndFonts ();
+      FcConfigAppFontAddFile (config, my_app_font_file);
+      
+      fontmap = pango_cairo_font_map_new_for_font_type (CAIRO_FONT_TYPE_FT);
+      pango_fc_font_map_set_config (PANGO_FC_FONT_MAP (fontmap), config);
+      
+      gtk_font_chooser_set_font_map (font_chooser, fontmap);
+      ```
+      
+      Note that other GTK+ widgets will only be able to use the application-specific
+      font if it is present in the font map they use:
+      
+      ```
+      context = gtk_widget_get_pango_context (label);
+      pango_context_set_font_map (context, fontmap);
+      ```
+  
+      Params:
+        fontmap = a #PangoFontMap
+  
+      Interface virtual method: calls the C implementation of the interface of the object's class (or of the
+      nearest C ancestor class of a D subclass type, a no-op if it does not implement the interface), use `super.vfuncSetFontMap`
+      to chain up from an override.
+      Overrides are installed in the interface structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  @(gid.gobject2.object.GidIfaceVfunc)
+  protected void vfuncSetFontMap(gid.pango1.font_map.FontMap fontmap = null)
+  {
+    auto _klass = cast(GtkFontChooserIface*)g_type_interface_peek(cast(GTypeClass*)_vfuncClass, gid.gtk3.font_chooser.FontChooser._getGType);
+    if (!_klass || !_klass.setFontMap)
+      return;
+
+    _klass.setFontMap(cast(GtkFontChooser*)this._cPtr, fontmap ? cast(PangoFontMap*)fontmap._cPtr(No.Dup) : null);
   }
 
   /**
@@ -329,6 +529,7 @@ template FontChooserT()
   {
     extern(C) gboolean _filterCallback(const(PangoFontFamily)* family, const(PangoFontFace)* face, void* data) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gtk3.types.FontFilterFunc*)data;
 
@@ -483,6 +684,7 @@ template FontChooserT()
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -505,6 +707,228 @@ template FontChooserT()
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("font-activated", closure, after);
+  }
+
+  /// True if the D class T overrides any vfunc method of gid.gtk3.font_chooser.FontChooser (DiG)
+  enum bool _ifaceVfuncsOverridden_gid_gtk3_font_chooser_FontChooser(T) = !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncFontActivated", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetFontFace", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetFontFamily", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetFontMap", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetFontSize", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetFilterFunc", true)[0], gid.gobject2.object.GidIfaceVfunc) || !imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetFontMap", true)[0], gid.gobject2.object.GidIfaceVfunc);
+
+  /**
+      Install the C trampolines of the gid.gtk3.font_chooser.FontChooser vfunc methods which a D class overrides into the interface
+      structure of its GType (DiG, see gobject.object.GObjectSubclass). Overriding a vfunc method which has no
+      trampoline is a compile error.
+      Params:
+        T = D class
+        iface = Interface structure of the GType registered for T
+  */
+  static void _installIfaceVfuncs_gid_gtk3_font_chooser_FontChooser(T)(void* iface) nothrow
+  {
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncFontActivated", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_font_chooser_FontChooser(iface, "font_activated");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetFontFace", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_font_chooser_FontChooser(iface, "get_font_face");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetFontFamily", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_font_chooser_FontChooser(iface, "get_font_family");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetFontMap", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_font_chooser_FontChooser(iface, "get_font_map");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncGetFontSize", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_font_chooser_FontChooser(iface, "get_font_size");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetFilterFunc", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      static assert(0, "Overriding gid.gtk3.font_chooser.FontChooser.vfuncSetFilterFunc is not supported: parameter 'filter' of kind 'Callback' is not supported");
+    static if (!imported!"std.traits".hasUDA!(__traits(getOverloads, T, "vfuncSetFontMap", true)[0], gid.gobject2.object.GidIfaceVfunc))
+      _installIfaceVfunc_gid_gtk3_font_chooser_FontChooser(iface, "set_font_map");
+  }
+
+  private static void _installIfaceVfunc_gid_gtk3_font_chooser_FontChooser(void* iface, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkFontChooserIface*)iface;
+
+    switch (vfunc)
+    {
+      case "font_activated":
+      {
+        static extern(C) void _vfuncFontActivatedTramp(GtkFontChooser* chooser, const(char)* fontname) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)chooser);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkFontChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)chooser), gid.gtk3.font_chooser.FontChooser._getGType);
+            if (_klass && _klass.fontActivated)
+              return (cast(typeof(&_vfuncFontActivatedTramp))_klass.fontActivated)(chooser, fontname);
+            return;
+          }
+
+          string _fontname = fontname.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncFontActivated(_fontname);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.font_chooser.FontChooser.vfuncFontActivated");
+          }
+        }
+
+        _klass.fontActivated = cast(typeof(_klass.fontActivated))&_vfuncFontActivatedTramp;
+        break;
+      }
+      case "get_font_face":
+      {
+        static extern(C) PangoFontFace* _vfuncGetFontFaceTramp(GtkFontChooser* fontchooser) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fontchooser);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkFontChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fontchooser), gid.gtk3.font_chooser.FontChooser._getGType);
+            if (_klass && _klass.getFontFace)
+              return (cast(typeof(&_vfuncGetFontFaceTramp))_klass.getFontFace)(fontchooser);
+            return typeof(return).init;
+          }
+
+          gid.pango1.font_face.FontFace _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetFontFace();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.font_chooser.FontChooser.vfuncGetFontFace");
+          }
+          auto _retval = _dretval ? cast(PangoFontFace*)_dretval._cPtr(No.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getFontFace = cast(typeof(_klass.getFontFace))&_vfuncGetFontFaceTramp;
+        break;
+      }
+      case "get_font_family":
+      {
+        static extern(C) PangoFontFamily* _vfuncGetFontFamilyTramp(GtkFontChooser* fontchooser) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fontchooser);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkFontChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fontchooser), gid.gtk3.font_chooser.FontChooser._getGType);
+            if (_klass && _klass.getFontFamily)
+              return (cast(typeof(&_vfuncGetFontFamilyTramp))_klass.getFontFamily)(fontchooser);
+            return typeof(return).init;
+          }
+
+          gid.pango1.font_family.FontFamily _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetFontFamily();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.font_chooser.FontChooser.vfuncGetFontFamily");
+          }
+          auto _retval = _dretval ? cast(PangoFontFamily*)_dretval._cPtr(No.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getFontFamily = cast(typeof(_klass.getFontFamily))&_vfuncGetFontFamilyTramp;
+        break;
+      }
+      case "get_font_map":
+      {
+        static extern(C) PangoFontMap* _vfuncGetFontMapTramp(GtkFontChooser* fontchooser) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fontchooser);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkFontChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fontchooser), gid.gtk3.font_chooser.FontChooser._getGType);
+            if (_klass && _klass.getFontMap)
+              return (cast(typeof(&_vfuncGetFontMapTramp))_klass.getFontMap)(fontchooser);
+            return typeof(return).init;
+          }
+
+          gid.pango1.font_map.FontMap _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncGetFontMap();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.font_chooser.FontChooser.vfuncGetFontMap");
+          }
+          auto _retval = _dretval ? cast(PangoFontMap*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.getFontMap = cast(typeof(_klass.getFontMap))&_vfuncGetFontMapTramp;
+        break;
+      }
+      case "get_font_size":
+      {
+        static extern(C) int _vfuncGetFontSizeTramp(GtkFontChooser* fontchooser) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fontchooser);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkFontChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fontchooser), gid.gtk3.font_chooser.FontChooser._getGType);
+            if (_klass && _klass.getFontSize)
+              return (cast(typeof(&_vfuncGetFontSizeTramp))_klass.getFontSize)(fontchooser);
+            return typeof(return).init;
+          }
+
+          int _retval;
+
+          try
+          {
+            _retval = _obj.vfuncGetFontSize();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.font_chooser.FontChooser.vfuncGetFontSize");
+          }
+          return _retval;
+        }
+
+        _klass.getFontSize = cast(typeof(_klass.getFontSize))&_vfuncGetFontSizeTramp;
+        break;
+      }
+      case "set_font_map":
+      {
+        static extern(C) void _vfuncSetFontMapTramp(GtkFontChooser* fontchooser, PangoFontMap* fontmap) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(typeof(this))gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)fontchooser);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkFontChooserIface*)g_type_interface_peek(cast(GTypeClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)fontchooser), gid.gtk3.font_chooser.FontChooser._getGType);
+            if (_klass && _klass.setFontMap)
+              return (cast(typeof(&_vfuncSetFontMapTramp))_klass.setFontMap)(fontchooser, fontmap);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSetFontMap(gid.gobject2.object.ObjectWrap._getDObject!(gid.pango1.font_map.FontMap)(cast(void*)fontmap, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.font_chooser.FontChooser.vfuncSetFontMap");
+          }
+        }
+
+        _klass.setFontMap = cast(typeof(_klass.setFontMap))&_vfuncSetFontMapTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

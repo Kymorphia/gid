@@ -114,6 +114,9 @@ interface ListModel : GidWrap
 
 
 
+
+
+
   /**
       Gets the type of the items in list.
       
@@ -223,6 +226,7 @@ interface ListModel : GidWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

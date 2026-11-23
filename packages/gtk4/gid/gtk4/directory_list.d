@@ -208,10 +208,17 @@ class DirectoryList : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListMo
   */
   this(string attributes = null, gid.gio2.file.File file = null) nothrow
   {
-    GtkDirectoryList* _cretval;
-    const(char)* _attributes = attributes.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gtk_directory_list_new(_attributes, file ? cast(GFile*)(cast(gid.gobject2.object.ObjectWrap)file)._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, attributes !is null || file !is null), Yes.Take);
+    }
+    else
+    {
+      GtkDirectoryList* _cretval;
+      const(char)* _attributes = attributes.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gtk_directory_list_new(_attributes, file ? cast(GFile*)(cast(gid.gobject2.object.ObjectWrap)file)._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

@@ -1352,6 +1352,7 @@ void atomicRcBoxReleaseFull(void* memBlock, gid.glib2.types.DestroyNotify clearF
 {
   extern(C) void _clearFuncCallback(void* data) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.glib2.types.DestroyNotify*)data;
 
     try
@@ -1845,6 +1846,7 @@ uint childWatchAdd(int priority, gid.glib2.types.Pid pid, gid.glib2.types.ChildW
 {
   extern(C) void _function_Callback(GPid pid, int waitStatus, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.glib2.types.ChildWatchFunc*)userData;
 
     try
@@ -2351,6 +2353,7 @@ void datasetForeach(const(void)* datasetLocation, gid.glib2.types.DataForeachFun
 {
   extern(C) void _funcCallback(GQuark keyId, void* data, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.glib2.types.DataForeachFunc*)userData;
 
     try
@@ -4509,6 +4512,7 @@ uint idleAdd(int priority, gid.glib2.types.SourceFunc function_) nothrow
 {
   extern(C) gboolean _function_Callback(void* userData) nothrow
   {
+    gidAttachThread();
     bool _dretval;
     auto _dlg = cast(gid.glib2.types.SourceFunc*)userData;
 
@@ -4709,6 +4713,7 @@ uint ioAddWatch(gid.glib2.iochannel.IOChannel channel, int priority, gid.glib2.t
 {
   extern(C) gboolean _funcCallback(GIOChannel* source, GIOCondition condition, void* data) nothrow
   {
+    gidAttachThread();
     bool _dretval;
     auto _dlg = cast(gid.glib2.types.IOFunc*)data;
     auto _source = source ? new gid.glib2.iochannel.IOChannel(cast(void*)source, Yes.Take)._cBorrow : null;
@@ -5119,6 +5124,7 @@ uint logSetHandler(string logDomain, gid.glib2.types.LogLevelFlags logLevels, gi
 {
   extern(C) void _logFuncCallback(const(char)* logDomain, GLogLevelFlags logLevel, const(char)* message, void* userData) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.glib2.types.LogFunc*)userData;
     string _logDomain = logDomain.fromCString!(No.Free);
     string _message = message.fromCString!(No.Free);
@@ -5161,6 +5167,7 @@ void logSetWriterFunc(gid.glib2.types.LogWriterFunc func) nothrow
 {
   extern(C) GLogWriterOutput _funcCallback(GLogLevelFlags logLevel, const(GLogField)* fields, size_t nFields, void* userData) nothrow
   {
+    gidAttachThread();
     gid.glib2.types.LogWriterOutput _dretval;
     auto _dlg = cast(gid.glib2.types.LogWriterFunc*)userData;
     gid.glib2.log_field.LogField[] _fields;
@@ -6451,6 +6458,7 @@ void qsortWithData(const(void)* pbase, int totalElems, size_t size, gid.glib2.ty
 {
   extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
   {
+    gidAttachThread();
     int _retval;
     auto _dlg = cast(gid.glib2.types.CompareDataFunc*)userData;
 
@@ -6741,6 +6749,7 @@ void rcBoxReleaseFull(void* memBlock, gid.glib2.types.DestroyNotify clearFunc) n
 {
   extern(C) void _clearFuncCallback(void* data) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.glib2.types.DestroyNotify*)data;
 
     try
@@ -7489,6 +7498,7 @@ bool spawnAsync(string workingDirectory, string[] argv, string[] envp, gid.glib2
 {
   extern(C) void _childSetupCallback(void* data) nothrow
   {
+    gidAttachThread();
     ptrThawGC(data);
     auto _dlg = cast(gid.glib2.types.SpawnChildSetupFunc*)data;
 
@@ -7543,6 +7553,7 @@ bool spawnAsyncWithFds(string workingDirectory, string[] argv, string[] envp, gi
 {
   extern(C) void _childSetupCallback(void* data) nothrow
   {
+    gidAttachThread();
     ptrThawGC(data);
     auto _dlg = cast(gid.glib2.types.SpawnChildSetupFunc*)data;
 
@@ -7597,6 +7608,7 @@ bool spawnAsyncWithPipes(string workingDirectory, string[] argv, string[] envp, 
 {
   extern(C) void _childSetupCallback(void* data) nothrow
   {
+    gidAttachThread();
     ptrThawGC(data);
     auto _dlg = cast(gid.glib2.types.SpawnChildSetupFunc*)data;
 
@@ -7850,6 +7862,7 @@ bool spawnAsyncWithPipesAndFds(string workingDirectory, string[] argv, string[] 
 {
   extern(C) void _childSetupCallback(void* data) nothrow
   {
+    gidAttachThread();
     ptrThawGC(data);
     auto _dlg = cast(gid.glib2.types.SpawnChildSetupFunc*)data;
 
@@ -8128,6 +8141,7 @@ bool spawnSync(string workingDirectory, string[] argv, string[] envp, gid.glib2.
 {
   extern(C) void _childSetupCallback(void* data) nothrow
   {
+    gidAttachThread();
     auto _dlg = cast(gid.glib2.types.SpawnChildSetupFunc*)data;
 
     try
@@ -9956,6 +9970,7 @@ uint timeoutAdd(int priority, uint interval, gid.glib2.types.SourceFunc function
 {
   extern(C) gboolean _function_Callback(void* userData) nothrow
   {
+    gidAttachThread();
     bool _dretval;
     auto _dlg = cast(gid.glib2.types.SourceFunc*)userData;
 
@@ -10033,6 +10048,7 @@ uint timeoutAddSeconds(int priority, uint interval, gid.glib2.types.SourceFunc f
 {
   extern(C) gboolean _function_Callback(void* userData) nothrow
   {
+    gidAttachThread();
     bool _dretval;
     auto _dlg = cast(gid.glib2.types.SourceFunc*)userData;
 

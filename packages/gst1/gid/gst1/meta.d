@@ -297,6 +297,7 @@ class Meta : StructWrap!(GstMeta)
   {
     extern(C) gboolean _transformFuncCallback(GstBuffer* transbuf, GstCustomMeta* meta, GstBuffer* buffer, GQuark type, void* data, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.CustomMetaTransformFunction*)userData;
       auto _transbuf = transbuf ? new gid.gst1.buffer.Buffer(cast(void*)transbuf, Yes.Take)._cBorrow : null;

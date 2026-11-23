@@ -10,8 +10,11 @@ import gid.gst1.allocator;
 import gid.gst1.buffer;
 import gid.gst1.caps;
 import gid.gst1.element;
+import gid.gst1.event;
+import gid.gst1.meta;
 import gid.gst1.preset;
 import gid.gst1.preset_mixin;
+import gid.gst1.query;
 import gid.gst1.tag_list;
 import gid.gst1.types;
 import gid.gstvideo1.c.functions;
@@ -89,6 +92,15 @@ class VideoEncoder : gid.gst1.element.Element, gid.gst1.preset.Preset
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -157,6 +169,464 @@ class VideoEncoder : gid.gst1.element.Element, gid.gst1.preset.Preset
   }
 
   mixin PresetT!();
+
+  /**
+      Optional.
+                       Called when the element changes to GST_STATE_NULL.
+                       Allows closing external resources.
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncClose` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncClose()
+  {
+    auto _klass = cast(GstVideoEncoderClass*)_vfuncClass;
+    if (!_klass.close)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.close(cast(GstVideoEncoder*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Optional.
+                          Setup the allocation parameters for allocating output
+                          buffers. The passed in query contains the result of the
+                          downstream allocation query.
+                          Subclasses should chain up to the parent implementation to
+                          invoke the default handler.
+  
+      Params:
+        query =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDecideAllocation` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncDecideAllocation(gid.gst1.query.Query query)
+  {
+    auto _klass = cast(GstVideoEncoderClass*)_vfuncClass;
+    if (!_klass.decideAllocation)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.decideAllocation(cast(GstVideoEncoder*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Optional.
+                       Called to request subclass to dispatch any pending remaining
+                       data (e.g. at EOS).
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncFinish` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.FlowReturn vfuncFinish()
+  {
+    auto _klass = cast(GstVideoEncoderClass*)_vfuncClass;
+    if (!_klass.finish)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    _cretval = _klass.finish(cast(GstVideoEncoder*)this._cPtr);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      Optional.
+                           Flush all remaining data from the encoder without
+                           pushing it downstream. Since: 1.2
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncFlush` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncFlush()
+  {
+    auto _klass = cast(GstVideoEncoderClass*)_vfuncClass;
+    if (!_klass.flush)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.flush(cast(GstVideoEncoder*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Optional.
+                       Allows for a custom sink getcaps implementation (e.g.
+                       for multichannel input specification).  If not implemented,
+                       default returns gst_video_encoder_proxy_getcaps
+                       applied to sink template caps.
+  
+      Params:
+        filter =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetcaps` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.caps.Caps vfuncGetcaps(gid.gst1.caps.Caps filter)
+  {
+    auto _klass = cast(GstVideoEncoderClass*)_vfuncClass;
+    if (!_klass.getcaps)
+      return typeof(return).init;
+
+    GstCaps* _cretval;
+    _cretval = _klass.getcaps(cast(GstVideoEncoder*)this._cPtr, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gid.gst1.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      Provides input frame to subclass.
+  
+      Params:
+        frame =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncHandleFrame` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.FlowReturn vfuncHandleFrame(gid.gstvideo1.video_codec_frame.VideoCodecFrame frame)
+  {
+    auto _klass = cast(GstVideoEncoderClass*)_vfuncClass;
+    if (!_klass.handleFrame)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    _cretval = _klass.handleFrame(cast(GstVideoEncoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(No.Dup) : null);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      Negotiate with downstream elements to currently configured #GstVideoCodecState.
+      Unmark GST_PAD_FLAG_NEED_RECONFIGURE in any case. But mark it again if
+      negotiate fails.
+      Returns: true if the negotiation succeeded, else false.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncNegotiate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncNegotiate()
+  {
+    auto _klass = cast(GstVideoEncoderClass*)_vfuncClass;
+    if (!_klass.negotiate)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.negotiate(cast(GstVideoEncoder*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Optional.
+                       Called when the element changes to GST_STATE_READY.
+                       Allows opening external resources.
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncOpen` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncOpen()
+  {
+    auto _klass = cast(GstVideoEncoderClass*)_vfuncClass;
+    if (!_klass.open)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.open(cast(GstVideoEncoder*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Optional.
+                       Allows subclass to push frame downstream in whatever
+                       shape or form it deems appropriate.  If not provided,
+                       provided encoded frame data is simply pushed downstream.
+  
+      Params:
+        frame =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncPrePush` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.gst1.types.FlowReturn vfuncPrePush(gid.gstvideo1.video_codec_frame.VideoCodecFrame frame)
+  {
+    auto _klass = cast(GstVideoEncoderClass*)_vfuncClass;
+    if (!_klass.prePush)
+      return typeof(return).init;
+
+    GstFlowReturn _cretval;
+    _cretval = _klass.prePush(cast(GstVideoEncoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(No.Dup) : null);
+    gid.gst1.types.FlowReturn _retval = cast(gid.gst1.types.FlowReturn)_cretval;
+    return _retval;
+  }
+
+  /**
+      Optional.
+                           Propose buffer allocation parameters for upstream elements.
+                           Subclasses should chain up to the parent implementation to
+                           invoke the default handler.
+  
+      Params:
+        query =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncProposeAllocation` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncProposeAllocation(gid.gst1.query.Query query)
+  {
+    auto _klass = cast(GstVideoEncoderClass*)_vfuncClass;
+    if (!_klass.proposeAllocation)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.proposeAllocation(cast(GstVideoEncoder*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Optional.
+                       Allows subclass (encoder) to perform post-seek semantics reset.
+                       Deprecated.
+  
+      Params:
+        hard = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncReset` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncReset(bool hard)
+  {
+    auto _klass = cast(GstVideoEncoderClass*)_vfuncClass;
+    if (!_klass.reset)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.reset(cast(GstVideoEncoder*)this._cPtr, hard);
+    return _retval;
+  }
+
+  /**
+      Optional.
+                       Notifies subclass of incoming data format.
+                       GstVideoCodecState fields have already been
+                       set according to provided caps.
+  
+      Params:
+        state =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetFormat` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncSetFormat(gid.gstvideo1.video_codec_state.VideoCodecState state)
+  {
+    auto _klass = cast(GstVideoEncoderClass*)_vfuncClass;
+    if (!_klass.setFormat)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.setFormat(cast(GstVideoEncoder*)this._cPtr, state ? cast(GstVideoCodecState*)state._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Optional.
+                       Event handler on the sink pad. This function should return
+                       TRUE if the event was handled and should be discarded
+                       (i.e. not unref'ed).
+                       Subclasses should chain up to the parent implementation to
+                       invoke the default handler.
+  
+      Params:
+        event =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSinkEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncSinkEvent(gid.gst1.event.Event event)
+  {
+    auto _klass = cast(GstVideoEncoderClass*)_vfuncClass;
+    if (!_klass.sinkEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.sinkEvent(cast(GstVideoEncoder*)this._cPtr, event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Optional.
+                       Query handler on the sink pad. This function should
+                       return TRUE if the query could be performed. Subclasses
+                       should chain up to the parent implementation to invoke the
+                       default handler. Since: 1.4
+  
+      Params:
+        query =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSinkQuery` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncSinkQuery(gid.gst1.query.Query query)
+  {
+    auto _klass = cast(GstVideoEncoderClass*)_vfuncClass;
+    if (!_klass.sinkQuery)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.sinkQuery(cast(GstVideoEncoder*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Optional.
+                       Event handler on the source pad. This function should return
+                       TRUE if the event was handled and should be discarded
+                       (i.e. not unref'ed).
+                       Subclasses should chain up to the parent implementation to
+                       invoke the default handler.
+  
+      Params:
+        event =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSrcEvent` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncSrcEvent(gid.gst1.event.Event event)
+  {
+    auto _klass = cast(GstVideoEncoderClass*)_vfuncClass;
+    if (!_klass.srcEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.srcEvent(cast(GstVideoEncoder*)this._cPtr, event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Optional.
+                       Query handler on the source pad. This function should
+                       return TRUE if the query could be performed. Subclasses
+                       should chain up to the parent implementation to invoke the
+                       default handler. Since: 1.4
+  
+      Params:
+        query =  (modified in place, changes are seen by the caller)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSrcQuery` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncSrcQuery(gid.gst1.query.Query query)
+  {
+    auto _klass = cast(GstVideoEncoderClass*)_vfuncClass;
+    if (!_klass.srcQuery)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.srcQuery(cast(GstVideoEncoder*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Optional.
+                       Called when the element starts processing.
+                       Allows opening external resources.
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStart` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncStart()
+  {
+    auto _klass = cast(GstVideoEncoderClass*)_vfuncClass;
+    if (!_klass.start)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.start(cast(GstVideoEncoder*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Optional.
+                       Called when the element stops processing.
+                       Allows closing external resources.
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncStop` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncStop()
+  {
+    auto _klass = cast(GstVideoEncoderClass*)_vfuncClass;
+    if (!_klass.stop)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.stop(cast(GstVideoEncoder*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Optional. Transform the metadata on the input buffer to the
+                       output buffer. By default this method is copies all meta without
+                       tags and meta with only the "video" tag. subclasses can
+                       implement this method and return true if the metadata is to be
+                       copied. Since: 1.6
+  
+      Params:
+        frame =  (modified in place, changes are seen by the caller)
+        meta =  (borrowed, only valid during the callback)
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncTransformMeta` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncTransformMeta(gid.gstvideo1.video_codec_frame.VideoCodecFrame frame, gid.gst1.meta.Meta meta)
+  {
+    auto _klass = cast(GstVideoEncoderClass*)_vfuncClass;
+    if (!_klass.transformMeta)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.transformMeta(cast(GstVideoEncoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(No.Dup) : null, meta ? cast(GstMeta*)meta._cPtr : null);
+    return _retval;
+  }
 
   /**
       Helper function that allocates a buffer to hold an encoded video frame
@@ -550,6 +1020,731 @@ class VideoEncoder : gid.gst1.element.Element, gid.gst1.preset.Preset
   void setQosEnabled(bool enabled) nothrow
   {
     gst_video_encoder_set_qos_enabled(cast(GstVideoEncoder*)this._cPtr, enabled);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from VideoEncoder
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gstvideo1.video_encoder.VideoEncoder), T.stringof ~ " is not derived from gid.gstvideo1.video_encoder.VideoEncoder");
+
+    gid.gst1.element.Element._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncClose", true)[0]) == gid.gstvideo1.video_encoder.VideoEncoder))
+      _installVfunc(klass, "close");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDecideAllocation", true)[0]) == gid.gstvideo1.video_encoder.VideoEncoder))
+      _installVfunc(klass, "decide_allocation");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFinish", true)[0]) == gid.gstvideo1.video_encoder.VideoEncoder))
+      _installVfunc(klass, "finish");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFlush", true)[0]) == gid.gstvideo1.video_encoder.VideoEncoder))
+      _installVfunc(klass, "flush");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetcaps", true)[0]) == gid.gstvideo1.video_encoder.VideoEncoder))
+      _installVfunc(klass, "getcaps");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHandleFrame", true)[0]) == gid.gstvideo1.video_encoder.VideoEncoder))
+      _installVfunc(klass, "handle_frame");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncNegotiate", true)[0]) == gid.gstvideo1.video_encoder.VideoEncoder))
+      _installVfunc(klass, "negotiate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncOpen", true)[0]) == gid.gstvideo1.video_encoder.VideoEncoder))
+      _installVfunc(klass, "open");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPrePush", true)[0]) == gid.gstvideo1.video_encoder.VideoEncoder))
+      _installVfunc(klass, "pre_push");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncProposeAllocation", true)[0]) == gid.gstvideo1.video_encoder.VideoEncoder))
+      _installVfunc(klass, "propose_allocation");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncReset", true)[0]) == gid.gstvideo1.video_encoder.VideoEncoder))
+      _installVfunc(klass, "reset");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetFormat", true)[0]) == gid.gstvideo1.video_encoder.VideoEncoder))
+      _installVfunc(klass, "set_format");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSinkEvent", true)[0]) == gid.gstvideo1.video_encoder.VideoEncoder))
+      _installVfunc(klass, "sink_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSinkQuery", true)[0]) == gid.gstvideo1.video_encoder.VideoEncoder))
+      _installVfunc(klass, "sink_query");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSrcEvent", true)[0]) == gid.gstvideo1.video_encoder.VideoEncoder))
+      _installVfunc(klass, "src_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSrcQuery", true)[0]) == gid.gstvideo1.video_encoder.VideoEncoder))
+      _installVfunc(klass, "src_query");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStart", true)[0]) == gid.gstvideo1.video_encoder.VideoEncoder))
+      _installVfunc(klass, "start");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncStop", true)[0]) == gid.gstvideo1.video_encoder.VideoEncoder))
+      _installVfunc(klass, "stop");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncTransformMeta", true)[0]) == gid.gstvideo1.video_encoder.VideoEncoder))
+      _installVfunc(klass, "transform_meta");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstVideoEncoderClass*)klass;
+
+    switch (vfunc)
+    {
+      case "close":
+      {
+        static extern(C) gboolean _vfuncCloseTramp(GstVideoEncoder* encoder) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstvideo1.video_encoder.VideoEncoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)encoder);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoEncoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)encoder);
+            if (_klass.close)
+              return (cast(typeof(&_vfuncCloseTramp))_klass.close)(encoder);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncClose();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_encoder.VideoEncoder.vfuncClose");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.close = cast(typeof(_klass.close))&_vfuncCloseTramp;
+        break;
+      }
+      case "decide_allocation":
+      {
+        static extern(C) gboolean _vfuncDecideAllocationTramp(GstVideoEncoder* encoder, GstQuery* query) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstvideo1.video_encoder.VideoEncoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)encoder);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoEncoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)encoder);
+            if (_klass.decideAllocation)
+              return (cast(typeof(&_vfuncDecideAllocationTramp))_klass.decideAllocation)(encoder, query);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _query = query ? new gid.gst1.query.Query(cast(void*)query, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncDecideAllocation(_query);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_encoder.VideoEncoder.vfuncDecideAllocation");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_query)
+            _query._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.decideAllocation = cast(typeof(_klass.decideAllocation))&_vfuncDecideAllocationTramp;
+        break;
+      }
+      case "finish":
+      {
+        static extern(C) GstFlowReturn _vfuncFinishTramp(GstVideoEncoder* encoder) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstvideo1.video_encoder.VideoEncoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)encoder);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoEncoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)encoder);
+            if (_klass.finish)
+              return (cast(typeof(&_vfuncFinishTramp))_klass.finish)(encoder);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.FlowReturn _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncFinish();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_encoder.VideoEncoder.vfuncFinish");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+
+          return _retval;
+        }
+
+        _klass.finish = cast(typeof(_klass.finish))&_vfuncFinishTramp;
+        break;
+      }
+      case "flush":
+      {
+        static extern(C) gboolean _vfuncFlushTramp(GstVideoEncoder* encoder) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstvideo1.video_encoder.VideoEncoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)encoder);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoEncoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)encoder);
+            if (_klass.flush)
+              return (cast(typeof(&_vfuncFlushTramp))_klass.flush)(encoder);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncFlush();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_encoder.VideoEncoder.vfuncFlush");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.flush = cast(typeof(_klass.flush))&_vfuncFlushTramp;
+        break;
+      }
+      case "getcaps":
+      {
+        static extern(C) GstCaps* _vfuncGetcapsTramp(GstVideoEncoder* enc, GstCaps* filter) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstvideo1.video_encoder.VideoEncoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)enc);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoEncoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)enc);
+            if (_klass.getcaps)
+              return (cast(typeof(&_vfuncGetcapsTramp))_klass.getcaps)(enc, filter);
+            return typeof(return).init;
+          }
+
+          gid.gst1.caps.Caps _dretval;
+          auto _filter = filter ? new gid.gst1.caps.Caps(cast(void*)filter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncGetcaps(_filter);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_encoder.VideoEncoder.vfuncGetcaps");
+          }
+          auto _retval = _dretval ? cast(GstCaps*)_dretval._cPtr(Yes.Dup) : null;
+          if (_filter)
+            _filter._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.getcaps = cast(typeof(_klass.getcaps))&_vfuncGetcapsTramp;
+        break;
+      }
+      case "handle_frame":
+      {
+        static extern(C) GstFlowReturn _vfuncHandleFrameTramp(GstVideoEncoder* encoder, GstVideoCodecFrame* frame) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstvideo1.video_encoder.VideoEncoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)encoder);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoEncoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)encoder);
+            if (_klass.handleFrame)
+              return (cast(typeof(&_vfuncHandleFrameTramp))_klass.handleFrame)(encoder, frame);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.FlowReturn _dretval;
+          auto _frame = frame ? new gid.gstvideo1.video_codec_frame.VideoCodecFrame(cast(void*)frame, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncHandleFrame(_frame);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_encoder.VideoEncoder.vfuncHandleFrame");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+          if (_frame)
+            _frame._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.handleFrame = cast(typeof(_klass.handleFrame))&_vfuncHandleFrameTramp;
+        break;
+      }
+      case "negotiate":
+      {
+        static extern(C) gboolean _vfuncNegotiateTramp(GstVideoEncoder* encoder) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstvideo1.video_encoder.VideoEncoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)encoder);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoEncoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)encoder);
+            if (_klass.negotiate)
+              return (cast(typeof(&_vfuncNegotiateTramp))_klass.negotiate)(encoder);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncNegotiate();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_encoder.VideoEncoder.vfuncNegotiate");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.negotiate = cast(typeof(_klass.negotiate))&_vfuncNegotiateTramp;
+        break;
+      }
+      case "open":
+      {
+        static extern(C) gboolean _vfuncOpenTramp(GstVideoEncoder* encoder) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstvideo1.video_encoder.VideoEncoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)encoder);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoEncoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)encoder);
+            if (_klass.open)
+              return (cast(typeof(&_vfuncOpenTramp))_klass.open)(encoder);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncOpen();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_encoder.VideoEncoder.vfuncOpen");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.open = cast(typeof(_klass.open))&_vfuncOpenTramp;
+        break;
+      }
+      case "pre_push":
+      {
+        static extern(C) GstFlowReturn _vfuncPrePushTramp(GstVideoEncoder* encoder, GstVideoCodecFrame* frame) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstvideo1.video_encoder.VideoEncoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)encoder);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoEncoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)encoder);
+            if (_klass.prePush)
+              return (cast(typeof(&_vfuncPrePushTramp))_klass.prePush)(encoder, frame);
+            return typeof(return).init;
+          }
+
+          gid.gst1.types.FlowReturn _dretval;
+          auto _frame = frame ? new gid.gstvideo1.video_codec_frame.VideoCodecFrame(cast(void*)frame, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncPrePush(_frame);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_encoder.VideoEncoder.vfuncPrePush");
+          }
+          auto _retval = cast(GstFlowReturn)_dretval;
+          if (_frame)
+            _frame._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.prePush = cast(typeof(_klass.prePush))&_vfuncPrePushTramp;
+        break;
+      }
+      case "propose_allocation":
+      {
+        static extern(C) gboolean _vfuncProposeAllocationTramp(GstVideoEncoder* encoder, GstQuery* query) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstvideo1.video_encoder.VideoEncoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)encoder);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoEncoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)encoder);
+            if (_klass.proposeAllocation)
+              return (cast(typeof(&_vfuncProposeAllocationTramp))_klass.proposeAllocation)(encoder, query);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _query = query ? new gid.gst1.query.Query(cast(void*)query, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncProposeAllocation(_query);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_encoder.VideoEncoder.vfuncProposeAllocation");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_query)
+            _query._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.proposeAllocation = cast(typeof(_klass.proposeAllocation))&_vfuncProposeAllocationTramp;
+        break;
+      }
+      case "reset":
+      {
+        static extern(C) gboolean _vfuncResetTramp(GstVideoEncoder* encoder, gboolean hard) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstvideo1.video_encoder.VideoEncoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)encoder);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoEncoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)encoder);
+            if (_klass.reset)
+              return (cast(typeof(&_vfuncResetTramp))_klass.reset)(encoder, hard);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncReset(cast(bool)hard);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_encoder.VideoEncoder.vfuncReset");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.reset = cast(typeof(_klass.reset))&_vfuncResetTramp;
+        break;
+      }
+      case "set_format":
+      {
+        static extern(C) gboolean _vfuncSetFormatTramp(GstVideoEncoder* encoder, GstVideoCodecState* state) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstvideo1.video_encoder.VideoEncoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)encoder);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoEncoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)encoder);
+            if (_klass.setFormat)
+              return (cast(typeof(&_vfuncSetFormatTramp))_klass.setFormat)(encoder, state);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _state = state ? new gid.gstvideo1.video_codec_state.VideoCodecState(cast(void*)state, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncSetFormat(_state);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_encoder.VideoEncoder.vfuncSetFormat");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_state)
+            _state._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.setFormat = cast(typeof(_klass.setFormat))&_vfuncSetFormatTramp;
+        break;
+      }
+      case "sink_event":
+      {
+        static extern(C) gboolean _vfuncSinkEventTramp(GstVideoEncoder* encoder, GstEvent* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstvideo1.video_encoder.VideoEncoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)encoder);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoEncoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)encoder);
+            if (_klass.sinkEvent)
+              return (cast(typeof(&_vfuncSinkEventTramp))_klass.sinkEvent)(encoder, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gst1.event.Event(cast(void*)event, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncSinkEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_encoder.VideoEncoder.vfuncSinkEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_event)
+            _event._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.sinkEvent = cast(typeof(_klass.sinkEvent))&_vfuncSinkEventTramp;
+        break;
+      }
+      case "sink_query":
+      {
+        static extern(C) gboolean _vfuncSinkQueryTramp(GstVideoEncoder* encoder, GstQuery* query) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstvideo1.video_encoder.VideoEncoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)encoder);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoEncoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)encoder);
+            if (_klass.sinkQuery)
+              return (cast(typeof(&_vfuncSinkQueryTramp))_klass.sinkQuery)(encoder, query);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _query = query ? new gid.gst1.query.Query(cast(void*)query, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncSinkQuery(_query);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_encoder.VideoEncoder.vfuncSinkQuery");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_query)
+            _query._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.sinkQuery = cast(typeof(_klass.sinkQuery))&_vfuncSinkQueryTramp;
+        break;
+      }
+      case "src_event":
+      {
+        static extern(C) gboolean _vfuncSrcEventTramp(GstVideoEncoder* encoder, GstEvent* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstvideo1.video_encoder.VideoEncoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)encoder);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoEncoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)encoder);
+            if (_klass.srcEvent)
+              return (cast(typeof(&_vfuncSrcEventTramp))_klass.srcEvent)(encoder, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _event = event ? new gid.gst1.event.Event(cast(void*)event, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncSrcEvent(_event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_encoder.VideoEncoder.vfuncSrcEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_event)
+            _event._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.srcEvent = cast(typeof(_klass.srcEvent))&_vfuncSrcEventTramp;
+        break;
+      }
+      case "src_query":
+      {
+        static extern(C) gboolean _vfuncSrcQueryTramp(GstVideoEncoder* encoder, GstQuery* query) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstvideo1.video_encoder.VideoEncoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)encoder);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoEncoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)encoder);
+            if (_klass.srcQuery)
+              return (cast(typeof(&_vfuncSrcQueryTramp))_klass.srcQuery)(encoder, query);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _query = query ? new gid.gst1.query.Query(cast(void*)query, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncSrcQuery(_query);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_encoder.VideoEncoder.vfuncSrcQuery");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_query)
+            _query._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.srcQuery = cast(typeof(_klass.srcQuery))&_vfuncSrcQueryTramp;
+        break;
+      }
+      case "start":
+      {
+        static extern(C) gboolean _vfuncStartTramp(GstVideoEncoder* encoder) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstvideo1.video_encoder.VideoEncoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)encoder);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoEncoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)encoder);
+            if (_klass.start)
+              return (cast(typeof(&_vfuncStartTramp))_klass.start)(encoder);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncStart();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_encoder.VideoEncoder.vfuncStart");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.start = cast(typeof(_klass.start))&_vfuncStartTramp;
+        break;
+      }
+      case "stop":
+      {
+        static extern(C) gboolean _vfuncStopTramp(GstVideoEncoder* encoder) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstvideo1.video_encoder.VideoEncoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)encoder);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoEncoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)encoder);
+            if (_klass.stop)
+              return (cast(typeof(&_vfuncStopTramp))_klass.stop)(encoder);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncStop();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_encoder.VideoEncoder.vfuncStop");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.stop = cast(typeof(_klass.stop))&_vfuncStopTramp;
+        break;
+      }
+      case "transform_meta":
+      {
+        static extern(C) gboolean _vfuncTransformMetaTramp(GstVideoEncoder* encoder, GstVideoCodecFrame* frame, GstMeta* meta) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstvideo1.video_encoder.VideoEncoder)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)encoder);
+          if (!_obj)
+          {
+            auto _klass = cast(GstVideoEncoderClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)encoder);
+            if (_klass.transformMeta)
+              return (cast(typeof(&_vfuncTransformMetaTramp))_klass.transformMeta)(encoder, frame, meta);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _frame = frame ? new gid.gstvideo1.video_codec_frame.VideoCodecFrame(cast(void*)frame, Yes.Take)._cBorrow : null;
+          auto _meta = meta ? new gid.gst1.meta.Meta(cast(void*)meta, null) : null;
+
+          try
+          {
+            _dretval = _obj.vfuncTransformMeta(_frame, _meta);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstvideo1.video_encoder.VideoEncoder.vfuncTransformMeta");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_frame)
+            _frame._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.transformMeta = cast(typeof(_klass.transformMeta))&_vfuncTransformMetaTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

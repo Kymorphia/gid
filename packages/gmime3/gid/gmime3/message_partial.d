@@ -23,6 +23,15 @@ class MessagePartial : gid.gmime3.part.Part
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -68,10 +77,17 @@ class MessagePartial : gid.gmime3.part.Part
   */
   this(string id, int number, int total) nothrow
   {
-    GMimeMessagePartial* _cretval;
-    const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
-    _cretval = g_mime_message_partial_new(_id, number, total);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GMimeMessagePartial* _cretval;
+      const(char)* _id = id.toCString!(No.Malloc, No.Nullable);
+      _cretval = g_mime_message_partial_new(_id, number, total);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

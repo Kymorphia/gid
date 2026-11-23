@@ -32,6 +32,8 @@ interface Converter : GidWrap
     return cast(void function())g_converter_get_type != &gidSymbolNotFound ? g_converter_get_type() : cast(GType)0;
   }
 
+
+
   /**
       This is the main operation used when converting data. It is to be called
       multiple times in a loop, and each time it will do some work, i.e.

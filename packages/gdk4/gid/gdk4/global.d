@@ -30,6 +30,7 @@ import gid.gdk4.content_serializer;
 
 private extern(C) void _contentSerializeCallback(GdkContentSerializer* serializer) nothrow
 {
+  gidAttachThread();
   auto _dlg = cast(gid.gdk4.types.ContentSerializeFunc*)gdk_content_serializer_get_user_data(serializer);
 
   try
@@ -44,6 +45,7 @@ private extern(C) void _contentSerializeCallback(GdkContentSerializer* serialize
 
 private extern(C) void _contentDeserializeCallback(GdkContentDeserializer* deserializer) nothrow
 {
+  gidAttachThread();
   auto _dlg = cast(gid.gdk4.types.ContentDeserializeFunc*)gdk_content_deserializer_get_user_data(deserializer);
 
   try
@@ -245,6 +247,7 @@ void contentDeserializeAsync(gid.gio2.input_stream.InputStream stream, string mi
 {
   extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
   {
+    gidAttachThread();
     ptrThawGC(data);
     auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -307,6 +310,7 @@ void contentSerializeAsync(gid.gio2.output_stream.OutputStream stream, string mi
 {
   extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
   {
+    gidAttachThread();
     ptrThawGC(data);
     auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 

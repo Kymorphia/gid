@@ -149,9 +149,16 @@ class IconFactory : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   */
   this() nothrow
   {
-    GtkIconFactory* _cretval;
-    _cretval = gtk_icon_factory_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkIconFactory* _cretval;
+      _cretval = gtk_icon_factory_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

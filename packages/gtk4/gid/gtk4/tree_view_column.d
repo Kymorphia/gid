@@ -314,9 +314,16 @@ class TreeViewColumn : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4
   */
   this() nothrow
   {
-    GtkTreeViewColumn* _cretval;
-    _cretval = gtk_tree_view_column_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkTreeViewColumn* _cretval;
+      _cretval = gtk_tree_view_column_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -839,6 +846,7 @@ class TreeViewColumn : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4
   {
     extern(C) void _funcCallback(GtkTreeViewColumn* treeColumn, GtkCellRenderer* cell, GtkTreeModel* treeModel, GtkTreeIter* iter, void* data) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk4.types.TreeCellDataFunc*)data;
       auto _iter = iter ? new gid.gtk4.tree_iter.TreeIter(cast(void*)iter, Yes.Take)._cBorrow : null;
 
@@ -1123,6 +1131,7 @@ class TreeViewColumn : gid.gobject2.initially_unowned.InitiallyUnowned, gid.gtk4
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

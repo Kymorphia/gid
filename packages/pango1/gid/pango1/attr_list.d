@@ -125,6 +125,7 @@ class AttrList : gid.gobject2.boxed.BoxedWrap!(pango_attr_list_get_type)
   {
     extern(C) gboolean _funcCallback(PangoAttribute* attribute, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.pango1.types.AttrFilterFunc*)userData;
       auto _attribute = attribute ? new gid.pango1.attribute.Attribute(cast(void*)attribute, Yes.Take)._cBorrow : null;

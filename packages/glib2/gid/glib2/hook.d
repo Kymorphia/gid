@@ -200,6 +200,7 @@ class Hook : StructWrap!(GHook)
 
     extern(C) int _funcCallback(GHook* newHook, GHook* sibling) nothrow
     {
+      gidAttachThread();
       int _retval;
       auto _newHook = newHook ? new gid.glib2.hook.Hook(cast(void*)newHook, null) : null;
       auto _sibling = sibling ? new gid.glib2.hook.Hook(cast(void*)sibling, null) : null;

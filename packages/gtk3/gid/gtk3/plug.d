@@ -47,6 +47,15 @@ class Plug : gid.gtk3.window.Window
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -110,9 +119,16 @@ class Plug : gid.gtk3.window.Window
   */
   this(gid.xlib2.types.Window socketId) nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_plug_new(socketId);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_plug_new(socketId);
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -129,6 +145,16 @@ class Plug : gid.gtk3.window.Window
     _cretval = gtk_plug_new_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, socketId);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.plug.Plug)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+
+  /** */
+  protected void vfuncEmbedded()
+  {
+    auto _klass = cast(GtkPlugClass*)_vfuncClass;
+    if (!_klass.embedded)
+      return;
+
+    _klass.embedded(cast(GtkPlug*)this._cPtr);
   }
 
   /**
@@ -217,6 +243,7 @@ class Plug : gid.gtk3.window.Window
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -236,6 +263,62 @@ class Plug : gid.gtk3.window.Window
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("embedded", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Plug
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.plug.Plug), T.stringof ~ " is not derived from gid.gtk3.plug.Plug");
+
+    gid.gtk3.window.Window._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEmbedded", true)[0]) == gid.gtk3.plug.Plug))
+      _installVfunc(klass, "embedded");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkPlugClass*)klass;
+
+    switch (vfunc)
+    {
+      case "embedded":
+      {
+        static extern(C) void _vfuncEmbeddedTramp(GtkPlug* plug) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.plug.Plug)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)plug);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkPlugClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)plug);
+            if (_klass.embedded)
+              return (cast(typeof(&_vfuncEmbeddedTramp))_klass.embedded)(plug);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncEmbedded();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.plug.Plug.vfuncEmbedded");
+          }
+        }
+
+        _klass.embedded = cast(typeof(_klass.embedded))&_vfuncEmbeddedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

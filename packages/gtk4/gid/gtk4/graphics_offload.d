@@ -162,9 +162,16 @@ class GraphicsOffload : gid.gtk4.widget.Widget
   */
   this(gid.gtk4.widget.Widget child = null) nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_graphics_offload_new(child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, child !is null), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_graphics_offload_new(child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+      this(_cretval, No.Take);
+    }
   }
 
   /**

@@ -103,9 +103,16 @@ class Snapshot : gid.gdk4.snapshot.Snapshot
   */
   this() nothrow
   {
-    GtkSnapshot* _cretval;
-    _cretval = gtk_snapshot_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkSnapshot* _cretval;
+      _cretval = gtk_snapshot_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

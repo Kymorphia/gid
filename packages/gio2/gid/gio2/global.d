@@ -46,6 +46,7 @@ void busGet(gid.gio2.types.BusType busType, gid.gio2.cancellable.Cancellable can
 {
   extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
   {
+    gidAttachThread();
     ptrThawGC(data);
     auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -678,6 +679,7 @@ void dbusAddressGetStream(string address, gid.gio2.cancellable.Cancellable cance
 {
   extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
   {
+    gidAttachThread();
     ptrThawGC(data);
     auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 
@@ -1209,6 +1211,7 @@ void ioSchedulerPushJob(gid.gio2.types.IOSchedulerJobFunc jobFunc, int ioPriorit
 {
   extern(C) gboolean _jobFuncCallback(GIOSchedulerJob* job, GCancellable* cancellable, void* data) nothrow
   {
+    gidAttachThread();
     bool _dretval;
     auto _dlg = cast(gid.gio2.types.IOSchedulerJobFunc*)data;
 
@@ -1680,6 +1683,7 @@ void simpleAsyncReportGerrorInIdle(gid.gobject2.object.ObjectWrap object, gid.gi
 {
   extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
   {
+    gidAttachThread();
     ptrThawGC(data);
     auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 

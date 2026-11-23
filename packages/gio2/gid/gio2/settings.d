@@ -408,6 +408,15 @@ class Settings : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -548,10 +557,17 @@ class Settings : gid.gobject2.object.ObjectWrap
   */
   this(string schemaId) nothrow
   {
-    GSettings* _cretval;
-    const(char)* _schemaId = schemaId.toCString!(No.Malloc, No.Nullable);
-    _cretval = g_settings_new(_schemaId);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GSettings* _cretval;
+      const(char)* _schemaId = schemaId.toCString!(No.Malloc, No.Nullable);
+      _cretval = g_settings_new(_schemaId);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -758,6 +774,40 @@ class Settings : gid.gobject2.object.ObjectWrap
   {
     const(char)* _property = property.toCString!(No.Malloc, No.Nullable);
     g_settings_unbind(object ? cast(GObject*)object._cPtr(No.Dup) : null, _property);
+  }
+
+  /** */
+  protected void vfuncChanged(string key)
+  {
+    auto _klass = cast(GSettingsClass*)_vfuncClass;
+    if (!_klass.changed)
+      return;
+
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    _klass.changed(cast(GSettings*)this._cPtr, _key);
+  }
+
+  /** */
+  protected bool vfuncWritableChangeEvent(gid.glib2.types.Quark key)
+  {
+    auto _klass = cast(GSettingsClass*)_vfuncClass;
+    if (!_klass.writableChangeEvent)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.writableChangeEvent(cast(GSettings*)this._cPtr, key);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncWritableChanged(string key)
+  {
+    auto _klass = cast(GSettingsClass*)_vfuncClass;
+    if (!_klass.writableChanged)
+      return;
+
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    _klass.writableChanged(cast(GSettings*)this._cPtr, _key);
   }
 
   /**
@@ -1149,6 +1199,7 @@ class Settings : gid.gobject2.object.ObjectWrap
   {
     extern(C) gboolean _mappingCallback(GVariant* value, void** result, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gio2.types.SettingsGetMapping*)userData;
 
@@ -1768,6 +1819,7 @@ class Settings : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1838,6 +1890,7 @@ class Settings : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1908,6 +1961,7 @@ class Settings : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1969,6 +2023,7 @@ class Settings : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1991,6 +2046,131 @@ class Settings : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("writable-changed"~ (detail.length ? "::" ~ detail : ""), closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Settings
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.settings.Settings), T.stringof ~ " is not derived from gid.gio2.settings.Settings");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChanged", true)[0]) == gid.gio2.settings.Settings))
+      _installVfunc(klass, "changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncWritableChangeEvent", true)[0]) == gid.gio2.settings.Settings))
+      _installVfunc(klass, "writable_change_event");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncWritableChanged", true)[0]) == gid.gio2.settings.Settings))
+      _installVfunc(klass, "writable_changed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GSettingsClass*)klass;
+
+    switch (vfunc)
+    {
+      case "changed":
+      {
+        static extern(C) void _vfuncChangedTramp(GSettings* settings, const(char)* key) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.settings.Settings)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)settings);
+          if (!_obj)
+          {
+            auto _klass = cast(GSettingsClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)settings);
+            if (_klass.changed)
+              return (cast(typeof(&_vfuncChangedTramp))_klass.changed)(settings, key);
+            return;
+          }
+
+          string _key = key.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncChanged(_key);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.settings.Settings.vfuncChanged");
+          }
+        }
+
+        _klass.changed = cast(typeof(_klass.changed))&_vfuncChangedTramp;
+        break;
+      }
+      case "writable_change_event":
+      {
+        static extern(C) gboolean _vfuncWritableChangeEventTramp(GSettings* settings, GQuark key) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.settings.Settings)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)settings);
+          if (!_obj)
+          {
+            auto _klass = cast(GSettingsClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)settings);
+            if (_klass.writableChangeEvent)
+              return (cast(typeof(&_vfuncWritableChangeEventTramp))_klass.writableChangeEvent)(settings, key);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncWritableChangeEvent(key);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.settings.Settings.vfuncWritableChangeEvent");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.writableChangeEvent = cast(typeof(_klass.writableChangeEvent))&_vfuncWritableChangeEventTramp;
+        break;
+      }
+      case "writable_changed":
+      {
+        static extern(C) void _vfuncWritableChangedTramp(GSettings* settings, const(char)* key) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.settings.Settings)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)settings);
+          if (!_obj)
+          {
+            auto _klass = cast(GSettingsClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)settings);
+            if (_klass.writableChanged)
+              return (cast(typeof(&_vfuncWritableChangedTramp))_klass.writableChanged)(settings, key);
+            return;
+          }
+
+          string _key = key.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncWritableChanged(_key);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.settings.Settings.vfuncWritableChanged");
+          }
+        }
+
+        _klass.writableChanged = cast(typeof(_klass.writableChanged))&_vfuncWritableChangedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

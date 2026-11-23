@@ -96,9 +96,16 @@ class MultiSorter : gid.gtk4.sorter.Sorter, gid.gio2.list_model.ListModel, gid.g
   */
   this() nothrow
   {
-    GtkMultiSorter* _cretval;
-    _cretval = gtk_multi_sorter_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkMultiSorter* _cretval;
+      _cretval = gtk_multi_sorter_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

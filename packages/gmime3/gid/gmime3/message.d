@@ -27,6 +27,15 @@ class Message : gid.gmime3.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -73,9 +82,16 @@ class Message : gid.gmime3.object.ObjectWrap
   */
   this(bool prettyHeaders) nothrow
   {
-    GMimeMessage* _cretval;
-    _cretval = g_mime_message_new(prettyHeaders);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GMimeMessage* _cretval;
+      _cretval = g_mime_message_new(prettyHeaders);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -106,6 +122,7 @@ class Message : gid.gmime3.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GMimeObject* parent, GMimeObject* part, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gmime3.types.ObjectForeachFunc*)userData;
 
       try

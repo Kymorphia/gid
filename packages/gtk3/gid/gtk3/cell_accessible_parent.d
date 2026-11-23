@@ -25,6 +25,18 @@ interface CellAccessibleParent : GidWrap
     return cast(void function())gtk_cell_accessible_parent_get_type != &gidSymbolNotFound ? gtk_cell_accessible_parent_get_type() : cast(GType)0;
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
   /** */
   void activate(gid.gtk3.cell_accessible.CellAccessible cell);
 

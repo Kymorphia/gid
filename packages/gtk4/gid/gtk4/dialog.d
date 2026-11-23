@@ -237,9 +237,55 @@ class Dialog : gid.gtk4.window.Window
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_dialog_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_dialog_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /**
+      Signal emitted when the user uses a keybinding to close the dialog.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncClose` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncClose()
+  {
+    auto _klass = cast(GtkDialogClass*)_vfuncClass;
+    if (!_klass.close)
+      return;
+
+    _klass.close(cast(GtkDialog*)this._cPtr);
+  }
+
+  /**
+      Emits the ::response signal with the given response ID.
+      
+      Used to indicate that the user has responded to the dialog in some way.
+  
+      Params:
+        responseId = response ID
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncResponse` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  
+      Deprecated: Use [gid.gtk4.window.Window] instead
+  */
+  protected void vfuncResponse(int responseId)
+  {
+    auto _klass = cast(GtkDialogClass*)_vfuncClass;
+    if (!_klass.response)
+      return;
+
+    _klass.response(cast(GtkDialog*)this._cPtr, responseId);
   }
 
   /**
@@ -432,6 +478,7 @@ class Dialog : gid.gtk4.window.Window
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -486,6 +533,7 @@ class Dialog : gid.gtk4.window.Window
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -508,6 +556,92 @@ class Dialog : gid.gtk4.window.Window
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("response", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Dialog
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.dialog.Dialog), T.stringof ~ " is not derived from gid.gtk4.dialog.Dialog");
+
+    gid.gtk4.window.Window._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncClose", true)[0]) == gid.gtk4.dialog.Dialog))
+      _installVfunc(klass, "close");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncResponse", true)[0]) == gid.gtk4.dialog.Dialog))
+      _installVfunc(klass, "response");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkDialogClass*)klass;
+
+    switch (vfunc)
+    {
+      case "close":
+      {
+        static extern(C) void _vfuncCloseTramp(GtkDialog* dialog) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.dialog.Dialog)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dialog);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkDialogClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dialog);
+            if (_klass.close)
+              return (cast(typeof(&_vfuncCloseTramp))_klass.close)(dialog);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncClose();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.dialog.Dialog.vfuncClose");
+          }
+        }
+
+        _klass.close = cast(typeof(_klass.close))&_vfuncCloseTramp;
+        break;
+      }
+      case "response":
+      {
+        static extern(C) void _vfuncResponseTramp(GtkDialog* dialog, int responseId) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.dialog.Dialog)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dialog);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkDialogClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dialog);
+            if (_klass.response)
+              return (cast(typeof(&_vfuncResponseTramp))_klass.response)(dialog, responseId);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncResponse(responseId);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.dialog.Dialog.vfuncResponse");
+          }
+        }
+
+        _klass.response = cast(typeof(_klass.response))&_vfuncResponseTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

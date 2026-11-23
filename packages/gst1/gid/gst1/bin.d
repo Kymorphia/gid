@@ -13,6 +13,7 @@ import gid.gst1.child_proxy;
 import gid.gst1.child_proxy_mixin;
 import gid.gst1.element;
 import gid.gst1.iterator;
+import gid.gst1.message;
 import gid.gst1.pad;
 import gid.gst1.types;
 
@@ -230,10 +231,170 @@ class Bin : gid.gst1.element.Element, gid.gst1.child_proxy.ChildProxy
   */
   this(string name = null) nothrow
   {
-    GstElement* _cretval;
-    const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gst_bin_new(_name);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, name !is null), Yes.Take);
+    }
+    else
+    {
+      GstElement* _cretval;
+      const(char)* _name = name.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gst_bin_new(_name);
+      this(_cretval, No.Take);
+    }
+  }
+
+  /**
+      Method to add an element to the bin.
+  
+      Params:
+        element = the element to be added
+      Returns: true if the element was added
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncAddElement` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncAddElement(gid.gst1.element.Element element)
+  {
+    auto _klass = cast(GstBinClass*)_vfuncClass;
+    if (!_klass.addElement)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.addElement(cast(GstBin*)this._cPtr, element ? cast(GstElement*)element._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Method called when an element was added somewhere in the bin hierarchy.
+  
+      Params:
+        subBin = the #GstBin to which the element was added
+        child = the element that was added
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDeepElementAdded` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDeepElementAdded(gid.gst1.bin.Bin subBin, gid.gst1.element.Element child)
+  {
+    auto _klass = cast(GstBinClass*)_vfuncClass;
+    if (!_klass.deepElementAdded)
+      return;
+
+    _klass.deepElementAdded(cast(GstBin*)this._cPtr, subBin ? cast(GstBin*)subBin._cPtr(No.Dup) : null, child ? cast(GstElement*)child._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Method called when an element was removed somewhere in the bin hierarchy.
+  
+      Params:
+        subBin = the #GstBin from which the element was removed
+        child = the element that was removed
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDeepElementRemoved` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDeepElementRemoved(gid.gst1.bin.Bin subBin, gid.gst1.element.Element child)
+  {
+    auto _klass = cast(GstBinClass*)_vfuncClass;
+    if (!_klass.deepElementRemoved)
+      return;
+
+    _klass.deepElementRemoved(cast(GstBin*)this._cPtr, subBin ? cast(GstBin*)subBin._cPtr(No.Dup) : null, child ? cast(GstElement*)child._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected bool vfuncDoLatency()
+  {
+    auto _klass = cast(GstBinClass*)_vfuncClass;
+    if (!_klass.doLatency)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.doLatency(cast(GstBin*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Method called when an element was added to the bin.
+  
+      Params:
+        child = the element that was added
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncElementAdded` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncElementAdded(gid.gst1.element.Element child)
+  {
+    auto _klass = cast(GstBinClass*)_vfuncClass;
+    if (!_klass.elementAdded)
+      return;
+
+    _klass.elementAdded(cast(GstBin*)this._cPtr, child ? cast(GstElement*)child._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Method called when an element was removed from the bin.
+  
+      Params:
+        child = the element that was removed
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncElementRemoved` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncElementRemoved(gid.gst1.element.Element child)
+  {
+    auto _klass = cast(GstBinClass*)_vfuncClass;
+    if (!_klass.elementRemoved)
+      return;
+
+    _klass.elementRemoved(cast(GstBin*)this._cPtr, child ? cast(GstElement*)child._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Method to handle a message from the children.
+  
+      Params:
+        message = the message to be handled
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncHandleMessage` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncHandleMessage(gid.gst1.message.Message message)
+  {
+    auto _klass = cast(GstBinClass*)_vfuncClass;
+    if (!_klass.handleMessage)
+      return;
+
+    _klass.handleMessage(cast(GstBin*)this._cPtr, message ? cast(GstMessage*)message._cPtr(Yes.Dup) : null);
+  }
+
+  /**
+      Method to remove an element from the bin.
+  
+      Params:
+        element = the element to be removed
+      Returns: true if the element was removed
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRemoveElement` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncRemoveElement(gid.gst1.element.Element element)
+  {
+    auto _klass = cast(GstBinClass*)_vfuncClass;
+    if (!_klass.removeElement)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.removeElement(cast(GstBin*)this._cPtr, element ? cast(GstElement*)element._cPtr(No.Dup) : null);
+    return _retval;
   }
 
   /**
@@ -549,6 +710,7 @@ class Bin : gid.gst1.element.Element, gid.gst1.child_proxy.ChildProxy
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -605,6 +767,7 @@ class Bin : gid.gst1.element.Element, gid.gst1.child_proxy.ChildProxy
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -666,6 +829,7 @@ class Bin : gid.gst1.element.Element, gid.gst1.child_proxy.ChildProxy
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -716,6 +880,7 @@ class Bin : gid.gst1.element.Element, gid.gst1.child_proxy.ChildProxy
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -766,6 +931,7 @@ class Bin : gid.gst1.element.Element, gid.gst1.child_proxy.ChildProxy
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -788,6 +954,287 @@ class Bin : gid.gst1.element.Element, gid.gst1.child_proxy.ChildProxy
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("element-removed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Bin
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gst1.bin.Bin), T.stringof ~ " is not derived from gid.gst1.bin.Bin");
+
+    gid.gst1.element.Element._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncAddElement", true)[0]) == gid.gst1.bin.Bin))
+      _installVfunc(klass, "add_element");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDeepElementAdded", true)[0]) == gid.gst1.bin.Bin))
+      _installVfunc(klass, "deep_element_added");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDeepElementRemoved", true)[0]) == gid.gst1.bin.Bin))
+      _installVfunc(klass, "deep_element_removed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDoLatency", true)[0]) == gid.gst1.bin.Bin))
+      _installVfunc(klass, "do_latency");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncElementAdded", true)[0]) == gid.gst1.bin.Bin))
+      _installVfunc(klass, "element_added");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncElementRemoved", true)[0]) == gid.gst1.bin.Bin))
+      _installVfunc(klass, "element_removed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHandleMessage", true)[0]) == gid.gst1.bin.Bin))
+      _installVfunc(klass, "handle_message");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRemoveElement", true)[0]) == gid.gst1.bin.Bin))
+      _installVfunc(klass, "remove_element");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstBinClass*)klass;
+
+    switch (vfunc)
+    {
+      case "add_element":
+      {
+        static extern(C) gboolean _vfuncAddElementTramp(GstBin* bin, GstElement* element) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.bin.Bin)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)bin);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBinClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)bin);
+            if (_klass.addElement)
+              return (cast(typeof(&_vfuncAddElementTramp))_klass.addElement)(bin, element);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncAddElement(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.element.Element)(cast(void*)element, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.bin.Bin.vfuncAddElement");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.addElement = cast(typeof(_klass.addElement))&_vfuncAddElementTramp;
+        break;
+      }
+      case "deep_element_added":
+      {
+        static extern(C) void _vfuncDeepElementAddedTramp(GstBin* bin, GstBin* subBin, GstElement* child) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.bin.Bin)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)bin);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBinClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)bin);
+            if (_klass.deepElementAdded)
+              return (cast(typeof(&_vfuncDeepElementAddedTramp))_klass.deepElementAdded)(bin, subBin, child);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDeepElementAdded(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.bin.Bin)(cast(void*)subBin, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.element.Element)(cast(void*)child, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.bin.Bin.vfuncDeepElementAdded");
+          }
+        }
+
+        _klass.deepElementAdded = cast(typeof(_klass.deepElementAdded))&_vfuncDeepElementAddedTramp;
+        break;
+      }
+      case "deep_element_removed":
+      {
+        static extern(C) void _vfuncDeepElementRemovedTramp(GstBin* bin, GstBin* subBin, GstElement* child) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.bin.Bin)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)bin);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBinClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)bin);
+            if (_klass.deepElementRemoved)
+              return (cast(typeof(&_vfuncDeepElementRemovedTramp))_klass.deepElementRemoved)(bin, subBin, child);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDeepElementRemoved(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.bin.Bin)(cast(void*)subBin, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.element.Element)(cast(void*)child, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.bin.Bin.vfuncDeepElementRemoved");
+          }
+        }
+
+        _klass.deepElementRemoved = cast(typeof(_klass.deepElementRemoved))&_vfuncDeepElementRemovedTramp;
+        break;
+      }
+      case "do_latency":
+      {
+        static extern(C) gboolean _vfuncDoLatencyTramp(GstBin* bin) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.bin.Bin)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)bin);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBinClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)bin);
+            if (_klass.doLatency)
+              return (cast(typeof(&_vfuncDoLatencyTramp))_klass.doLatency)(bin);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncDoLatency();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.bin.Bin.vfuncDoLatency");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.doLatency = cast(typeof(_klass.doLatency))&_vfuncDoLatencyTramp;
+        break;
+      }
+      case "element_added":
+      {
+        static extern(C) void _vfuncElementAddedTramp(GstBin* bin, GstElement* child) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.bin.Bin)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)bin);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBinClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)bin);
+            if (_klass.elementAdded)
+              return (cast(typeof(&_vfuncElementAddedTramp))_klass.elementAdded)(bin, child);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncElementAdded(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.element.Element)(cast(void*)child, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.bin.Bin.vfuncElementAdded");
+          }
+        }
+
+        _klass.elementAdded = cast(typeof(_klass.elementAdded))&_vfuncElementAddedTramp;
+        break;
+      }
+      case "element_removed":
+      {
+        static extern(C) void _vfuncElementRemovedTramp(GstBin* bin, GstElement* child) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.bin.Bin)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)bin);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBinClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)bin);
+            if (_klass.elementRemoved)
+              return (cast(typeof(&_vfuncElementRemovedTramp))_klass.elementRemoved)(bin, child);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncElementRemoved(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.element.Element)(cast(void*)child, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.bin.Bin.vfuncElementRemoved");
+          }
+        }
+
+        _klass.elementRemoved = cast(typeof(_klass.elementRemoved))&_vfuncElementRemovedTramp;
+        break;
+      }
+      case "handle_message":
+      {
+        static extern(C) void _vfuncHandleMessageTramp(GstBin* bin, GstMessage* message) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.bin.Bin)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)bin);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBinClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)bin);
+            if (_klass.handleMessage)
+              return (cast(typeof(&_vfuncHandleMessageTramp))_klass.handleMessage)(bin, message);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncHandleMessage(message ? new gid.gst1.message.Message(cast(void*)message, Yes.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.bin.Bin.vfuncHandleMessage");
+          }
+        }
+
+        _klass.handleMessage = cast(typeof(_klass.handleMessage))&_vfuncHandleMessageTramp;
+        break;
+      }
+      case "remove_element":
+      {
+        static extern(C) gboolean _vfuncRemoveElementTramp(GstBin* bin, GstElement* element) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gst1.bin.Bin)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)bin);
+          if (!_obj)
+          {
+            auto _klass = cast(GstBinClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)bin);
+            if (_klass.removeElement)
+              return (cast(typeof(&_vfuncRemoveElementTramp))_klass.removeElement)(bin, element);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncRemoveElement(gid.gobject2.object.ObjectWrap._getDObject!(gid.gst1.element.Element)(cast(void*)element, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gst1.bin.Bin.vfuncRemoveElement");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.removeElement = cast(typeof(_klass.removeElement))&_vfuncRemoveElementTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

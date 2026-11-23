@@ -44,6 +44,8 @@ interface RemoteActionGroup : gid.gio2.action_group.ActionGroup
     return cast(void function())g_remote_action_group_get_type != &gidSymbolNotFound ? g_remote_action_group_get_type() : cast(GType)0;
   }
 
+
+
   /**
       Activates the remote action.
       

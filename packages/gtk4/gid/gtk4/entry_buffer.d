@@ -123,14 +123,127 @@ class EntryBuffer : gid.gobject2.object.ObjectWrap
   */
   this(string initialChars = null) nothrow
   {
-    GtkEntryBuffer* _cretval;
-    int _nInitialChars;
-    if (initialChars)
-      _nInitialChars = cast(int)initialChars.length;
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, initialChars !is null), Yes.Take);
+    }
+    else
+    {
+      GtkEntryBuffer* _cretval;
+      int _nInitialChars;
+      if (initialChars)
+        _nInitialChars = cast(int)initialChars.length;
 
-    auto _initialChars = cast(char*)initialChars.ptr;
-    _cretval = gtk_entry_buffer_new(_initialChars, _nInitialChars);
-    this(_cretval, Yes.Take);
+      auto _initialChars = cast(char*)initialChars.ptr;
+      _cretval = gtk_entry_buffer_new(_initialChars, _nInitialChars);
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /**
+      Deletes a sequence of characters from the buffer.
+      
+      n_chars characters are deleted starting at position.
+      If n_chars is negative, then all characters until the
+      end of the text are deleted.
+      
+      If position or n_chars are out of bounds, then they
+      are coerced to sane values.
+      
+      Note that the positions are specified in characters,
+      not bytes.
+  
+      Params:
+        position = position at which to delete text
+        nChars = number of characters to delete
+      Returns: The number of characters deleted.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDeleteText` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected uint vfuncDeleteText(uint position, uint nChars)
+  {
+    auto _klass = cast(GtkEntryBufferClass*)_vfuncClass;
+    if (!_klass.deleteText)
+      return typeof(return).init;
+
+    uint _retval;
+    _retval = _klass.deleteText(cast(GtkEntryBuffer*)this._cPtr, position, nChars);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncDeletedText(uint position, uint nChars)
+  {
+    auto _klass = cast(GtkEntryBufferClass*)_vfuncClass;
+    if (!_klass.deletedText)
+      return;
+
+    _klass.deletedText(cast(GtkEntryBuffer*)this._cPtr, position, nChars);
+  }
+
+  /**
+      Retrieves the length in characters of the buffer.
+      Returns: The number of characters in the buffer.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetLength` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected uint vfuncGetLength()
+  {
+    auto _klass = cast(GtkEntryBufferClass*)_vfuncClass;
+    if (!_klass.getLength)
+      return typeof(return).init;
+
+    uint _retval;
+    _retval = _klass.getLength(cast(GtkEntryBuffer*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Inserts n_chars characters of chars into the contents of the
+      buffer, at position position.
+      
+      If n_chars is negative, then characters from chars will be inserted
+      until a null-terminator is found. If position or n_chars are out of
+      bounds, or the maximum buffer text length is exceeded, then they are
+      coerced to sane values.
+      
+      Note that the position and length are in characters, not in bytes.
+  
+      Params:
+        position = the position at which to insert text.
+        chars = the text to insert into the buffer.
+        nChars = the length of the text in characters, or -1
+      Returns: The number of characters actually inserted.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncInsertText` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected uint vfuncInsertText(uint position, string chars, uint nChars)
+  {
+    auto _klass = cast(GtkEntryBufferClass*)_vfuncClass;
+    if (!_klass.insertText)
+      return typeof(return).init;
+
+    uint _retval;
+    const(char)* _chars = chars.toCString!(No.Malloc, No.Nullable);
+    _retval = _klass.insertText(cast(GtkEntryBuffer*)this._cPtr, position, _chars, nChars);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncInsertedText(uint position, string chars, uint nChars)
+  {
+    auto _klass = cast(GtkEntryBufferClass*)_vfuncClass;
+    if (!_klass.insertedText)
+      return;
+
+    const(char)* _chars = chars.toCString!(No.Malloc, No.Nullable);
+    _klass.insertedText(cast(GtkEntryBuffer*)this._cPtr, position, _chars, nChars);
   }
 
   /**
@@ -338,6 +451,7 @@ class EntryBuffer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -394,6 +508,7 @@ class EntryBuffer : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -420,6 +535,194 @@ class EntryBuffer : gid.gobject2.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("inserted-text", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from EntryBuffer
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.entry_buffer.EntryBuffer), T.stringof ~ " is not derived from gid.gtk4.entry_buffer.EntryBuffer");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDeleteText", true)[0]) == gid.gtk4.entry_buffer.EntryBuffer))
+      _installVfunc(klass, "delete_text");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDeletedText", true)[0]) == gid.gtk4.entry_buffer.EntryBuffer))
+      _installVfunc(klass, "deleted_text");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetLength", true)[0]) == gid.gtk4.entry_buffer.EntryBuffer))
+      _installVfunc(klass, "get_length");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncInsertText", true)[0]) == gid.gtk4.entry_buffer.EntryBuffer))
+      _installVfunc(klass, "insert_text");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncInsertedText", true)[0]) == gid.gtk4.entry_buffer.EntryBuffer))
+      _installVfunc(klass, "inserted_text");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkEntryBufferClass*)klass;
+
+    switch (vfunc)
+    {
+      case "delete_text":
+      {
+        static extern(C) uint _vfuncDeleteTextTramp(GtkEntryBuffer* buffer, uint position, uint nChars) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.entry_buffer.EntryBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEntryBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.deleteText)
+              return (cast(typeof(&_vfuncDeleteTextTramp))_klass.deleteText)(buffer, position, nChars);
+            return typeof(return).init;
+          }
+
+          uint _retval;
+
+          try
+          {
+            _retval = _obj.vfuncDeleteText(position, nChars);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.entry_buffer.EntryBuffer.vfuncDeleteText");
+          }
+          return _retval;
+        }
+
+        _klass.deleteText = cast(typeof(_klass.deleteText))&_vfuncDeleteTextTramp;
+        break;
+      }
+      case "deleted_text":
+      {
+        static extern(C) void _vfuncDeletedTextTramp(GtkEntryBuffer* buffer, uint position, uint nChars) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.entry_buffer.EntryBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEntryBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.deletedText)
+              return (cast(typeof(&_vfuncDeletedTextTramp))_klass.deletedText)(buffer, position, nChars);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncDeletedText(position, nChars);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.entry_buffer.EntryBuffer.vfuncDeletedText");
+          }
+        }
+
+        _klass.deletedText = cast(typeof(_klass.deletedText))&_vfuncDeletedTextTramp;
+        break;
+      }
+      case "get_length":
+      {
+        static extern(C) uint _vfuncGetLengthTramp(GtkEntryBuffer* buffer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.entry_buffer.EntryBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEntryBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.getLength)
+              return (cast(typeof(&_vfuncGetLengthTramp))_klass.getLength)(buffer);
+            return typeof(return).init;
+          }
+
+          uint _retval;
+
+          try
+          {
+            _retval = _obj.vfuncGetLength();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.entry_buffer.EntryBuffer.vfuncGetLength");
+          }
+          return _retval;
+        }
+
+        _klass.getLength = cast(typeof(_klass.getLength))&_vfuncGetLengthTramp;
+        break;
+      }
+      case "insert_text":
+      {
+        static extern(C) uint _vfuncInsertTextTramp(GtkEntryBuffer* buffer, uint position, const(char)* chars, uint nChars) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.entry_buffer.EntryBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEntryBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.insertText)
+              return (cast(typeof(&_vfuncInsertTextTramp))_klass.insertText)(buffer, position, chars, nChars);
+            return typeof(return).init;
+          }
+
+          uint _retval;
+          string _chars = chars.fromCString!(No.Free);
+
+          try
+          {
+            _retval = _obj.vfuncInsertText(position, _chars, nChars);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.entry_buffer.EntryBuffer.vfuncInsertText");
+          }
+          return _retval;
+        }
+
+        _klass.insertText = cast(typeof(_klass.insertText))&_vfuncInsertTextTramp;
+        break;
+      }
+      case "inserted_text":
+      {
+        static extern(C) void _vfuncInsertedTextTramp(GtkEntryBuffer* buffer, uint position, const(char)* chars, uint nChars) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.entry_buffer.EntryBuffer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)buffer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkEntryBufferClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)buffer);
+            if (_klass.insertedText)
+              return (cast(typeof(&_vfuncInsertedTextTramp))_klass.insertedText)(buffer, position, chars, nChars);
+            return;
+          }
+
+          string _chars = chars.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncInsertedText(position, _chars, nChars);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.entry_buffer.EntryBuffer.vfuncInsertedText");
+          }
+        }
+
+        _klass.insertedText = cast(typeof(_klass.insertedText))&_vfuncInsertedTextTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

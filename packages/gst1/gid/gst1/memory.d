@@ -206,6 +206,7 @@ class Memory : gid.gobject2.boxed.BoxedWrap!(gst_memory_get_type)
   {
     extern(C) void _notifyCallback(void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.glib2.types.DestroyNotify*)data;
 

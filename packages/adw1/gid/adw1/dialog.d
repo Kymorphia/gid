@@ -374,9 +374,36 @@ class Dialog : gid.gtk4.widget.Widget, gid.gtk4.shortcut_manager.ShortcutManager
   */
   this() nothrow
   {
-    AdwDialog* _cretval;
-    _cretval = adw_dialog_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      AdwDialog* _cretval;
+      _cretval = adw_dialog_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected void vfuncCloseAttempt()
+  {
+    auto _klass = cast(AdwDialogClass*)_vfuncClass;
+    if (!_klass.closeAttempt)
+      return;
+
+    _klass.closeAttempt(cast(AdwDialog*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncClosed()
+  {
+    auto _klass = cast(AdwDialogClass*)_vfuncClass;
+    if (!_klass.closed)
+      return;
+
+    _klass.closed(cast(AdwDialog*)this._cPtr);
   }
 
   /**
@@ -712,6 +739,7 @@ class Dialog : gid.gtk4.widget.Widget, gid.gtk4.shortcut_manager.ShortcutManager
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -756,6 +784,7 @@ class Dialog : gid.gtk4.widget.Widget, gid.gtk4.shortcut_manager.ShortcutManager
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -775,6 +804,92 @@ class Dialog : gid.gtk4.widget.Widget, gid.gtk4.shortcut_manager.ShortcutManager
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("closed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Dialog
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.adw1.dialog.Dialog), T.stringof ~ " is not derived from gid.adw1.dialog.Dialog");
+
+    gid.gtk4.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCloseAttempt", true)[0]) == gid.adw1.dialog.Dialog))
+      _installVfunc(klass, "close_attempt");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncClosed", true)[0]) == gid.adw1.dialog.Dialog))
+      _installVfunc(klass, "closed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(AdwDialogClass*)klass;
+
+    switch (vfunc)
+    {
+      case "close_attempt":
+      {
+        static extern(C) void _vfuncCloseAttemptTramp(AdwDialog* dialog) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.adw1.dialog.Dialog)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dialog);
+          if (!_obj)
+          {
+            auto _klass = cast(AdwDialogClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dialog);
+            if (_klass.closeAttempt)
+              return (cast(typeof(&_vfuncCloseAttemptTramp))_klass.closeAttempt)(dialog);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncCloseAttempt();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.adw1.dialog.Dialog.vfuncCloseAttempt");
+          }
+        }
+
+        _klass.closeAttempt = cast(typeof(_klass.closeAttempt))&_vfuncCloseAttemptTramp;
+        break;
+      }
+      case "closed":
+      {
+        static extern(C) void _vfuncClosedTramp(AdwDialog* dialog) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.adw1.dialog.Dialog)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)dialog);
+          if (!_obj)
+          {
+            auto _klass = cast(AdwDialogClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)dialog);
+            if (_klass.closed)
+              return (cast(typeof(&_vfuncClosedTramp))_klass.closed)(dialog);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncClosed();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.adw1.dialog.Dialog.vfuncClosed");
+          }
+        }
+
+        _klass.closed = cast(typeof(_klass.closed))&_vfuncClosedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

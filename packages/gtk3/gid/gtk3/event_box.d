@@ -91,9 +91,16 @@ class EventBox : gid.gtk3.bin.Bin
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_event_box_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_event_box_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**

@@ -15,6 +15,7 @@ import gid.gtk3.buildable;
 import gid.gtk3.buildable_mixin;
 import gid.gtk3.c.functions;
 import gid.gtk3.c.types;
+import gid.gtk3.container;
 import gid.gtk3.size_group;
 import gid.gtk3.types;
 import gid.gtk3.widget;
@@ -119,9 +120,55 @@ class ToolItem : gid.gtk3.bin.Bin, gid.gtk3.activatable.Activatable
   */
   this() nothrow
   {
-    GtkToolItem* _cretval;
-    _cretval = gtk_tool_item_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkToolItem* _cretval;
+      _cretval = gtk_tool_item_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /**
+      Signal emitted when the toolbar needs
+         information from tool_item about whether the item should appear in
+         the toolbar overflow menu.
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncCreateMenuProxy` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncCreateMenuProxy()
+  {
+    auto _klass = cast(GtkToolItemClass*)_vfuncClass;
+    if (!_klass.createMenuProxy)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.createMenuProxy(cast(GtkToolItem*)this._cPtr);
+    return _retval;
+  }
+
+  /**
+      Emits the signal #GtkToolItem::toolbar_reconfigured on tool_item.
+      #GtkToolbar and other #GtkToolShell implementations use this function
+      to notify children, when some aspect of their configuration changes.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncToolbarReconfigured` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncToolbarReconfigured()
+  {
+    auto _klass = cast(GtkToolItemClass*)_vfuncClass;
+    if (!_klass.toolbarReconfigured)
+      return;
+
+    _klass.toolbarReconfigured(cast(GtkToolItem*)this._cPtr);
   }
 
   /**
@@ -556,6 +603,7 @@ class ToolItem : gid.gtk3.bin.Bin, gid.gtk3.activatable.Activatable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -611,6 +659,7 @@ class ToolItem : gid.gtk3.bin.Bin, gid.gtk3.activatable.Activatable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -630,6 +679,97 @@ class ToolItem : gid.gtk3.bin.Bin, gid.gtk3.activatable.Activatable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("toolbar-reconfigured", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from ToolItem
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.tool_item.ToolItem), T.stringof ~ " is not derived from gid.gtk3.tool_item.ToolItem");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCreateMenuProxy", true)[0]) == gid.gtk3.tool_item.ToolItem))
+      _installVfunc(klass, "create_menu_proxy");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncToolbarReconfigured", true)[0]) == gid.gtk3.tool_item.ToolItem))
+      _installVfunc(klass, "toolbar_reconfigured");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkToolItemClass*)klass;
+
+    switch (vfunc)
+    {
+      case "create_menu_proxy":
+      {
+        static extern(C) gboolean _vfuncCreateMenuProxyTramp(GtkToolItem* toolItem) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.tool_item.ToolItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)toolItem);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkToolItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)toolItem);
+            if (_klass.createMenuProxy)
+              return (cast(typeof(&_vfuncCreateMenuProxyTramp))_klass.createMenuProxy)(toolItem);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCreateMenuProxy();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tool_item.ToolItem.vfuncCreateMenuProxy");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.createMenuProxy = cast(typeof(_klass.createMenuProxy))&_vfuncCreateMenuProxyTramp;
+        break;
+      }
+      case "toolbar_reconfigured":
+      {
+        static extern(C) void _vfuncToolbarReconfiguredTramp(GtkToolItem* toolItem) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.tool_item.ToolItem)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)toolItem);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkToolItemClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)toolItem);
+            if (_klass.toolbarReconfigured)
+              return (cast(typeof(&_vfuncToolbarReconfiguredTramp))_klass.toolbarReconfigured)(toolItem);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncToolbarReconfigured();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.tool_item.ToolItem.vfuncToolbarReconfigured");
+          }
+        }
+
+        _klass.toolbarReconfigured = cast(typeof(_klass.toolbarReconfigured))&_vfuncToolbarReconfiguredTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

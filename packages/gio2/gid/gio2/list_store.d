@@ -28,6 +28,15 @@ class ListStore : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -103,6 +112,7 @@ class ListStore : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
 
     extern(C) gboolean _equalFuncCallback(const(void)* a, const(void)* b) nothrow
     {
+      gidAttachThread();
       gboolean _retval;
 
       try
@@ -141,6 +151,7 @@ class ListStore : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
 
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      gidAttachThread();
       int _retval;
 
       try
@@ -172,6 +183,7 @@ class ListStore : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
 
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData) nothrow
     {
+      gidAttachThread();
       int _retval;
 
       try
@@ -200,9 +212,16 @@ class ListStore : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListModel
   */
   this(gid.gobject2.types.GType itemType) nothrow
   {
-    GListStore* _cretval;
-    _cretval = g_list_store_new(itemType);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GListStore* _cretval;
+      _cretval = g_list_store_new(itemType);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

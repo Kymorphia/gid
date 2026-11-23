@@ -68,9 +68,16 @@ class GLDisplayEGL : gid.gstgl1.gldisplay.GLDisplay
   */
   this() nothrow
   {
-    GstGLDisplayEGL* _cretval;
-    _cretval = gst_gl_display_egl_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GstGLDisplayEGL* _cretval;
+      _cretval = gst_gl_display_egl_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

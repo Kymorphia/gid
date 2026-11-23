@@ -93,9 +93,16 @@ class ChangesDialog : gid.adw1.alert_dialog.AlertDialog
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = panel_changes_dialog_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = panel_changes_dialog_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /** */
@@ -117,6 +124,7 @@ class ChangesDialog : gid.adw1.alert_dialog.AlertDialog
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 

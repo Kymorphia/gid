@@ -73,9 +73,16 @@ class WebsitePolicies : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    WebKitWebsitePolicies* _cretval;
-    _cretval = webkit_website_policies_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      WebKitWebsitePolicies* _cretval;
+      _cretval = webkit_website_policies_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

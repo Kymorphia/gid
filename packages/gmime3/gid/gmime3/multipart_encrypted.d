@@ -66,9 +66,16 @@ class MultipartEncrypted : gid.gmime3.multipart.Multipart
   */
   this() nothrow
   {
-    GMimeMultipartEncrypted* _cretval;
-    _cretval = g_mime_multipart_encrypted_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GMimeMultipartEncrypted* _cretval;
+      _cretval = g_mime_multipart_encrypted_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

@@ -19,6 +19,7 @@ interface PhysMemoryAllocator : GidWrap
     import gid.core.loader : gidSymbolNotFound;
     return cast(void function())gst_phys_memory_allocator_get_type != &gidSymbolNotFound ? gst_phys_memory_allocator_get_type() : cast(GType)0;
   }
+
 }
 
 /// Fluent builder implementation template for [gid.gstallocators1.phys_memory_allocator.PhysMemoryAllocator]

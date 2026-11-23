@@ -83,9 +83,16 @@ class GLDisplay : gid.gst1.object.ObjectWrap
   /** */
   this() nothrow
   {
-    GstGLDisplay* _cretval;
-    _cretval = gst_gl_display_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GstGLDisplay* _cretval;
+      _cretval = gst_gl_display_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -104,6 +111,31 @@ class GLDisplay : gid.gst1.object.ObjectWrap
     GstGLDisplay* _cretval;
     _cretval = gst_gl_display_new_with_type(type);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gstgl1.gldisplay.GLDisplay)(cast(GstGLDisplay*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /** */
+  protected gid.gstgl1.glwindow.GLWindow vfuncCreateWindow()
+  {
+    auto _klass = cast(GstGLDisplayClass*)_vfuncClass;
+    if (!_klass.createWindow)
+      return typeof(return).init;
+
+    GstGLWindow* _cretval;
+    _cretval = _klass.createWindow(cast(GstGLDisplay*)this._cPtr);
+    auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gstgl1.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /** */
+  protected size_t vfuncGetHandle()
+  {
+    auto _klass = cast(GstGLDisplayClass*)_vfuncClass;
+    if (!_klass.getHandle)
+      return typeof(return).init;
+
+    size_t _retval;
+    _retval = _klass.getHandle(cast(GstGLDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -276,6 +308,7 @@ class GLDisplay : gid.gst1.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -301,6 +334,100 @@ class GLDisplay : gid.gst1.object.ObjectWrap
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("create-context", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from GLDisplay
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gstgl1.gldisplay.GLDisplay), T.stringof ~ " is not derived from gid.gstgl1.gldisplay.GLDisplay");
+
+    gid.gst1.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncCreateWindow", true)[0]) == gid.gstgl1.gldisplay.GLDisplay))
+      _installVfunc(klass, "create_window");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetHandle", true)[0]) == gid.gstgl1.gldisplay.GLDisplay))
+      _installVfunc(klass, "get_handle");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GstGLDisplayClass*)klass;
+
+    switch (vfunc)
+    {
+      case "create_window":
+      {
+        static extern(C) GstGLWindow* _vfuncCreateWindowTramp(GstGLDisplay* display) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstgl1.gldisplay.GLDisplay)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)display);
+          if (!_obj)
+          {
+            auto _klass = cast(GstGLDisplayClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)display);
+            if (_klass.createWindow)
+              return (cast(typeof(&_vfuncCreateWindowTramp))_klass.createWindow)(display);
+            return typeof(return).init;
+          }
+
+          gid.gstgl1.glwindow.GLWindow _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncCreateWindow();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.gldisplay.GLDisplay.vfuncCreateWindow");
+          }
+          auto _retval = _dretval ? cast(GstGLWindow*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.createWindow = cast(typeof(_klass.createWindow))&_vfuncCreateWindowTramp;
+        break;
+      }
+      case "get_handle":
+      {
+        static extern(C) size_t _vfuncGetHandleTramp(GstGLDisplay* display) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gstgl1.gldisplay.GLDisplay)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)display);
+          if (!_obj)
+          {
+            auto _klass = cast(GstGLDisplayClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)display);
+            if (_klass.getHandle)
+              return (cast(typeof(&_vfuncGetHandleTramp))_klass.getHandle)(display);
+            return typeof(return).init;
+          }
+
+          size_t _retval;
+
+          try
+          {
+            _retval = _obj.vfuncGetHandle();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gstgl1.gldisplay.GLDisplay.vfuncGetHandle");
+          }
+          return _retval;
+        }
+
+        _klass.getHandle = cast(typeof(_klass.getHandle))&_vfuncGetHandleTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

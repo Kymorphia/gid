@@ -26,6 +26,15 @@ class SimplePermission : gid.gio2.permission.Permission
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -70,9 +79,16 @@ class SimplePermission : gid.gio2.permission.Permission
   */
   this(bool allowed) nothrow
   {
-    GPermission* _cretval;
-    _cretval = g_simple_permission_new(allowed);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GPermission* _cretval;
+      _cretval = g_simple_permission_new(allowed);
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

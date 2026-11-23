@@ -30,6 +30,15 @@ class ConverterInputStream : gid.gio2.filter_input_stream.FilterInputStream, gid
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -85,9 +94,16 @@ class ConverterInputStream : gid.gio2.filter_input_stream.FilterInputStream, gid
   */
   this(gid.gio2.input_stream.InputStream baseStream, gid.gio2.converter.Converter converter) nothrow
   {
-    GInputStream* _cretval;
-    _cretval = g_converter_input_stream_new(baseStream ? cast(GInputStream*)baseStream._cPtr(No.Dup) : null, converter ? cast(GConverter*)(cast(gid.gobject2.object.ObjectWrap)converter)._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GInputStream* _cretval;
+      _cretval = g_converter_input_stream_new(baseStream ? cast(GInputStream*)baseStream._cPtr(No.Dup) : null, converter ? cast(GConverter*)(cast(gid.gobject2.object.ObjectWrap)converter)._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

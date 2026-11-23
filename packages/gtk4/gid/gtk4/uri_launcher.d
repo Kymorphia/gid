@@ -98,10 +98,17 @@ class UriLauncher : gid.gobject2.object.ObjectWrap
   */
   this(string uri = null) nothrow
   {
-    GtkUriLauncher* _cretval;
-    const(char)* _uri = uri.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gtk_uri_launcher_new(_uri);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, uri !is null), Yes.Take);
+    }
+    else
+    {
+      GtkUriLauncher* _cretval;
+      const(char)* _uri = uri.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gtk_uri_launcher_new(_uri);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -150,6 +157,7 @@ class UriLauncher : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data) nothrow
     {
+      gidAttachThread();
       ptrThawGC(data);
       auto _dlg = cast(gid.gio2.types.AsyncReadyCallback*)data;
 

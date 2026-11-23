@@ -65,9 +65,16 @@ class InternetAddressList : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GMimeInternetAddressList* _cretval;
-    _cretval = internet_address_list_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GMimeInternetAddressList* _cretval;
+      _cretval = internet_address_list_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

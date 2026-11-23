@@ -204,9 +204,16 @@ class SortListModel : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListMo
   */
   this(gid.gio2.list_model.ListModel model = null, gid.gtk4.sorter.Sorter sorter = null) nothrow
   {
-    GtkSortListModel* _cretval;
-    _cretval = gtk_sort_list_model_new(model ? cast(GListModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(Yes.Dup) : null, sorter ? cast(GtkSorter*)sorter._cPtr(Yes.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, model !is null || sorter !is null), Yes.Take);
+    }
+    else
+    {
+      GtkSortListModel* _cretval;
+      _cretval = gtk_sort_list_model_new(model ? cast(GListModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(Yes.Dup) : null, sorter ? cast(GtkSorter*)sorter._cPtr(Yes.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

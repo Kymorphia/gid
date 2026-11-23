@@ -140,6 +140,15 @@ class SpinButton : gid.gtk3.entry.Entry, gid.gtk3.orientable.Orientable
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -285,9 +294,16 @@ class SpinButton : gid.gtk3.entry.Entry, gid.gtk3.orientable.Orientable
   */
   this(gid.gtk3.adjustment.Adjustment adjustment, double climbRate, uint digits) nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_spin_button_new(adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null, climbRate, digits);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_spin_button_new(adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null, climbRate, digits);
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -313,6 +329,48 @@ class SpinButton : gid.gtk3.entry.Entry, gid.gtk3.orientable.Orientable
     _cretval = gtk_spin_button_new_with_range(min, max, step);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.spin_button.SpinButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+
+  /** */
+  protected void vfuncChangeValue(gid.gtk3.types.ScrollType scroll)
+  {
+    auto _klass = cast(GtkSpinButtonClass*)_vfuncClass;
+    if (!_klass.changeValue)
+      return;
+
+    _klass.changeValue(cast(GtkSpinButton*)this._cPtr, scroll);
+  }
+
+  /** */
+  protected int vfuncOutput()
+  {
+    auto _klass = cast(GtkSpinButtonClass*)_vfuncClass;
+    if (!_klass.output)
+      return typeof(return).init;
+
+    int _retval;
+    _retval = _klass.output(cast(GtkSpinButton*)this._cPtr);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncValueChanged()
+  {
+    auto _klass = cast(GtkSpinButtonClass*)_vfuncClass;
+    if (!_klass.valueChanged)
+      return;
+
+    _klass.valueChanged(cast(GtkSpinButton*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncWrapped()
+  {
+    auto _klass = cast(GtkSpinButtonClass*)_vfuncClass;
+    if (!_klass.wrapped)
+      return;
+
+    _klass.wrapped(cast(GtkSpinButton*)this._cPtr);
   }
 
   /**
@@ -618,6 +676,7 @@ class SpinButton : gid.gtk3.entry.Entry, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -675,6 +734,7 @@ class SpinButton : gid.gtk3.entry.Entry, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -749,6 +809,7 @@ class SpinButton : gid.gtk3.entry.Entry, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -797,6 +858,7 @@ class SpinButton : gid.gtk3.entry.Entry, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -842,6 +904,7 @@ class SpinButton : gid.gtk3.entry.Entry, gid.gtk3.orientable.Orientable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -861,6 +924,155 @@ class SpinButton : gid.gtk3.entry.Entry, gid.gtk3.orientable.Orientable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("wrapped", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from SpinButton
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.spin_button.SpinButton), T.stringof ~ " is not derived from gid.gtk3.spin_button.SpinButton");
+
+    gid.gtk3.entry.Entry._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChangeValue", true)[0]) == gid.gtk3.spin_button.SpinButton))
+      _installVfunc(klass, "change_value");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncOutput", true)[0]) == gid.gtk3.spin_button.SpinButton))
+      _installVfunc(klass, "output");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncValueChanged", true)[0]) == gid.gtk3.spin_button.SpinButton))
+      _installVfunc(klass, "value_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncWrapped", true)[0]) == gid.gtk3.spin_button.SpinButton))
+      _installVfunc(klass, "wrapped");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkSpinButtonClass*)klass;
+
+    switch (vfunc)
+    {
+      case "change_value":
+      {
+        static extern(C) void _vfuncChangeValueTramp(GtkSpinButton* spinButton, GtkScrollType scroll) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.spin_button.SpinButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)spinButton);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSpinButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)spinButton);
+            if (_klass.changeValue)
+              return (cast(typeof(&_vfuncChangeValueTramp))_klass.changeValue)(spinButton, scroll);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncChangeValue(scroll);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.spin_button.SpinButton.vfuncChangeValue");
+          }
+        }
+
+        _klass.changeValue = cast(typeof(_klass.changeValue))&_vfuncChangeValueTramp;
+        break;
+      }
+      case "output":
+      {
+        static extern(C) int _vfuncOutputTramp(GtkSpinButton* spinButton) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.spin_button.SpinButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)spinButton);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSpinButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)spinButton);
+            if (_klass.output)
+              return (cast(typeof(&_vfuncOutputTramp))_klass.output)(spinButton);
+            return typeof(return).init;
+          }
+
+          int _retval;
+
+          try
+          {
+            _retval = _obj.vfuncOutput();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.spin_button.SpinButton.vfuncOutput");
+          }
+          return _retval;
+        }
+
+        _klass.output = cast(typeof(_klass.output))&_vfuncOutputTramp;
+        break;
+      }
+      case "value_changed":
+      {
+        static extern(C) void _vfuncValueChangedTramp(GtkSpinButton* spinButton) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.spin_button.SpinButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)spinButton);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSpinButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)spinButton);
+            if (_klass.valueChanged)
+              return (cast(typeof(&_vfuncValueChangedTramp))_klass.valueChanged)(spinButton);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncValueChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.spin_button.SpinButton.vfuncValueChanged");
+          }
+        }
+
+        _klass.valueChanged = cast(typeof(_klass.valueChanged))&_vfuncValueChangedTramp;
+        break;
+      }
+      case "wrapped":
+      {
+        static extern(C) void _vfuncWrappedTramp(GtkSpinButton* spinButton) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.spin_button.SpinButton)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)spinButton);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSpinButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)spinButton);
+            if (_klass.wrapped)
+              return (cast(typeof(&_vfuncWrappedTramp))_klass.wrapped)(spinButton);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncWrapped();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.spin_button.SpinButton.vfuncWrapped");
+          }
+        }
+
+        _klass.wrapped = cast(typeof(_klass.wrapped))&_vfuncWrappedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

@@ -335,6 +335,7 @@ class Structure : gid.gobject2.boxed.BoxedWrap!(gst_structure_get_type)
   {
     extern(C) gboolean _funcCallback(GQuark fieldId, GValue* value, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.StructureFilterMapFunc*)userData;
       auto _value = value ? new gid.gobject2.value.Value(cast(void*)value, Yes.Take)._cBorrow : null;
@@ -372,6 +373,7 @@ class Structure : gid.gobject2.boxed.BoxedWrap!(gst_structure_get_type)
   {
     extern(C) gboolean _funcCallback(const(GstIdStr)* fieldname, GValue* value, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.StructureFilterMapIdStrFunc*)userData;
       auto _value = value ? new gid.gobject2.value.Value(cast(void*)value, Yes.Take)._cBorrow : null;
@@ -523,6 +525,7 @@ class Structure : gid.gobject2.boxed.BoxedWrap!(gst_structure_get_type)
   {
     extern(C) gboolean _funcCallback(GQuark fieldId, const(GValue)* value, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.StructureForeachFunc*)userData;
 
@@ -559,6 +562,7 @@ class Structure : gid.gobject2.boxed.BoxedWrap!(gst_structure_get_type)
   {
     extern(C) gboolean _funcCallback(const(GstIdStr)* fieldname, const(GValue)* value, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.StructureForeachIdStrFunc*)userData;
 
@@ -1346,6 +1350,7 @@ class Structure : gid.gobject2.boxed.BoxedWrap!(gst_structure_get_type)
   {
     extern(C) gboolean _funcCallback(GQuark fieldId, GValue* value, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.StructureMapFunc*)userData;
       auto _value = value ? new gid.gobject2.value.Value(cast(void*)value, Yes.Take)._cBorrow : null;
@@ -1385,6 +1390,7 @@ class Structure : gid.gobject2.boxed.BoxedWrap!(gst_structure_get_type)
   {
     extern(C) gboolean _funcCallback(const(GstIdStr)* fieldname, GValue* value, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.StructureMapIdStrFunc*)userData;
       auto _value = value ? new gid.gobject2.value.Value(cast(void*)value, Yes.Take)._cBorrow : null;

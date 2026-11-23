@@ -79,9 +79,16 @@ class WindowGroup : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GtkWindowGroup* _cretval;
-    _cretval = gtk_window_group_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWindowGroup* _cretval;
+      _cretval = gtk_window_group_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

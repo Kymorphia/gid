@@ -56,6 +56,15 @@ class Avatar : gid.gtk4.widget.Widget
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -214,10 +223,17 @@ class Avatar : gid.gtk4.widget.Widget
   */
   this(int size, string text, bool showInitials) nothrow
   {
-    GtkWidget* _cretval;
-    const(char)* _text = text.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = adw_avatar_new(size, _text, showInitials);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      const(char)* _text = text.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = adw_avatar_new(size, _text, showInitials);
+      this(_cretval, No.Take);
+    }
   }
 
   /**

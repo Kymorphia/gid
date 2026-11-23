@@ -123,6 +123,11 @@ interface DatagramBased : GidWrap
   }
 
 
+
+
+
+
+
   /**
       Checks on the readiness of datagram_based to perform operations. The
       operations specified in condition are checked for and masked against the

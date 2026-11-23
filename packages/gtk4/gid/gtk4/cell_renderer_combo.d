@@ -162,9 +162,16 @@ class CellRendererCombo : gid.gtk4.cell_renderer_text.CellRendererText
   */
   this() nothrow
   {
-    GtkCellRenderer* _cretval;
-    _cretval = gtk_cell_renderer_combo_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkCellRenderer* _cretval;
+      _cretval = gtk_cell_renderer_combo_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -208,6 +215,7 @@ class CellRendererCombo : gid.gtk4.cell_renderer_text.CellRendererText
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

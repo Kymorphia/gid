@@ -21,6 +21,7 @@ import gid.gtk3.buildable;
 import gid.gtk3.buildable_mixin;
 import gid.gtk3.c.functions;
 import gid.gtk3.c.types;
+import gid.gtk3.container;
 import gid.gtk3.types;
 import gid.gtk3.widget;
 import gid.gtk3.window_group;
@@ -90,6 +91,15 @@ class Window : gid.gtk3.bin.Bin
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
   }
 
   /** */
@@ -658,9 +668,16 @@ class Window : gid.gtk3.bin.Bin
   */
   this(gid.gtk3.types.WindowType type) nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_window_new(type);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_window_new(type);
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -806,6 +823,102 @@ class Window : gid.gtk3.bin.Bin
   static void setInteractiveDebugging(bool enable) nothrow
   {
     gtk_window_set_interactive_debugging(enable);
+  }
+
+  /**
+      Activates the default widget for the window.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncActivateDefault` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncActivateDefault()
+  {
+    auto _klass = cast(GtkWindowClass*)_vfuncClass;
+    if (!_klass.activateDefault)
+      return;
+
+    _klass.activateDefault(cast(GtkWindow*)this._cPtr);
+  }
+
+  /**
+      Activates the current focused widget within the window.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncActivateFocus` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncActivateFocus()
+  {
+    auto _klass = cast(GtkWindowClass*)_vfuncClass;
+    if (!_klass.activateFocus)
+      return;
+
+    _klass.activateFocus(cast(GtkWindow*)this._cPtr);
+  }
+
+  /**
+      Class handler for the #GtkWindow::enable-debugging
+        keybinding signal. Since: 3.14
+  
+      Params:
+        toggle = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncEnableDebugging` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncEnableDebugging(bool toggle)
+  {
+    auto _klass = cast(GtkWindowClass*)_vfuncClass;
+    if (!_klass.enableDebugging)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.enableDebugging(cast(GtkWindow*)this._cPtr, toggle);
+    return _retval;
+  }
+
+  /**
+      Signal gets emitted when the set of accelerators or
+        mnemonics that are associated with window changes.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncKeysChanged` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncKeysChanged()
+  {
+    auto _klass = cast(GtkWindowClass*)_vfuncClass;
+    if (!_klass.keysChanged)
+      return;
+
+    _klass.keysChanged(cast(GtkWindow*)this._cPtr);
+  }
+
+  /**
+      If focus is not the current focus widget, and is focusable, sets
+      it as the focus widget for the window. If focus is null, unsets
+      the focus widget for this window. To set the focus to a particular
+      widget in the toplevel, it is usually more convenient to use
+      [gid.gtk4.widget.Widget.grabFocus] instead of this function.
+  
+      Params:
+        focus = widget to be the new focus widget, or null to unset
+            any focus widget for the toplevel window.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSetFocus` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSetFocus(gid.gtk3.widget.Widget focus = null)
+  {
+    auto _klass = cast(GtkWindowClass*)_vfuncClass;
+    if (!_klass.setFocus)
+      return;
+
+    _klass.setFocus(cast(GtkWindow*)this._cPtr, focus ? cast(GtkWidget*)focus._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2831,6 +2944,7 @@ class Window : gid.gtk3.bin.Bin
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2878,6 +2992,7 @@ class Window : gid.gtk3.bin.Bin
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2933,6 +3048,7 @@ class Window : gid.gtk3.bin.Bin
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -2984,6 +3100,7 @@ class Window : gid.gtk3.bin.Bin
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3032,6 +3149,7 @@ class Window : gid.gtk3.bin.Bin
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -3054,6 +3172,187 @@ class Window : gid.gtk3.bin.Bin
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("set-focus", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Window
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.window.Window), T.stringof ~ " is not derived from gid.gtk3.window.Window");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivateDefault", true)[0]) == gid.gtk3.window.Window))
+      _installVfunc(klass, "activate_default");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivateFocus", true)[0]) == gid.gtk3.window.Window))
+      _installVfunc(klass, "activate_focus");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEnableDebugging", true)[0]) == gid.gtk3.window.Window))
+      _installVfunc(klass, "enable_debugging");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncKeysChanged", true)[0]) == gid.gtk3.window.Window))
+      _installVfunc(klass, "keys_changed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSetFocus", true)[0]) == gid.gtk3.window.Window))
+      _installVfunc(klass, "set_focus");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkWindowClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate_default":
+      {
+        static extern(C) void _vfuncActivateDefaultTramp(GtkWindow* window) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.window.Window)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
+            if (_klass.activateDefault)
+              return (cast(typeof(&_vfuncActivateDefaultTramp))_klass.activateDefault)(window);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncActivateDefault();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.window.Window.vfuncActivateDefault");
+          }
+        }
+
+        _klass.activateDefault = cast(typeof(_klass.activateDefault))&_vfuncActivateDefaultTramp;
+        break;
+      }
+      case "activate_focus":
+      {
+        static extern(C) void _vfuncActivateFocusTramp(GtkWindow* window) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.window.Window)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
+            if (_klass.activateFocus)
+              return (cast(typeof(&_vfuncActivateFocusTramp))_klass.activateFocus)(window);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncActivateFocus();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.window.Window.vfuncActivateFocus");
+          }
+        }
+
+        _klass.activateFocus = cast(typeof(_klass.activateFocus))&_vfuncActivateFocusTramp;
+        break;
+      }
+      case "enable_debugging":
+      {
+        static extern(C) gboolean _vfuncEnableDebuggingTramp(GtkWindow* window, gboolean toggle) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.window.Window)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
+            if (_klass.enableDebugging)
+              return (cast(typeof(&_vfuncEnableDebuggingTramp))_klass.enableDebugging)(window, toggle);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncEnableDebugging(cast(bool)toggle);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.window.Window.vfuncEnableDebugging");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.enableDebugging = cast(typeof(_klass.enableDebugging))&_vfuncEnableDebuggingTramp;
+        break;
+      }
+      case "keys_changed":
+      {
+        static extern(C) void _vfuncKeysChangedTramp(GtkWindow* window) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.window.Window)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
+            if (_klass.keysChanged)
+              return (cast(typeof(&_vfuncKeysChangedTramp))_klass.keysChanged)(window);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncKeysChanged();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.window.Window.vfuncKeysChanged");
+          }
+        }
+
+        _klass.keysChanged = cast(typeof(_klass.keysChanged))&_vfuncKeysChangedTramp;
+        break;
+      }
+      case "set_focus":
+      {
+        static extern(C) void _vfuncSetFocusTramp(GtkWindow* window, GtkWidget* focus) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.window.Window)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)window);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkWindowClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)window);
+            if (_klass.setFocus)
+              return (cast(typeof(&_vfuncSetFocusTramp))_klass.setFocus)(window, focus);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSetFocus(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)focus, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.window.Window.vfuncSetFocus");
+          }
+        }
+
+        _klass.setFocus = cast(typeof(_klass.setFocus))&_vfuncSetFocusTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

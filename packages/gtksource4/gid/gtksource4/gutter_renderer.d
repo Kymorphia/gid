@@ -11,6 +11,7 @@ import gid.gobject2.dclosure;
 import gid.gobject2.gid_builder;
 import gid.gobject2.initially_unowned;
 import gid.gobject2.object;
+import gid.gtk3.text_buffer;
 import gid.gtk3.text_iter;
 import gid.gtk3.text_view;
 import gid.gtk3.tooltip;
@@ -27,6 +28,15 @@ class GutterRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
   }
 
   /** */
@@ -244,6 +254,240 @@ class GutterRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
   @property void ypad(int propval) nothrow
   {
     gid.gobject2.object.ObjectWrap.setProperty!(int)("ypad", propval);
+  }
+
+  /**
+      Emits the #GtkSourceGutterRenderer::activate signal of the renderer. This is
+      called from #GtkSourceGutter and should never have to be called manually.
+  
+      Params:
+        iter = a #GtkTextIter at the start of the line where the renderer is activated (modified in place, changes are seen by the caller)
+        area = a #GdkRectangle of the cell area where the renderer is activated
+        event = the event that triggered the activation (modified in place, changes are seen by the caller)
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncActivate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncActivate(gid.gtk3.text_iter.TextIter iter, gid.gdk3.rectangle.Rectangle area, gid.gdk3.event.Event event)
+  {
+    auto _klass = cast(GtkSourceGutterRendererClass*)_vfuncClass;
+    if (!_klass.activate)
+      return;
+
+    _klass.activate(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, cast(GdkRectangle*)&area, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Called when drawing a region begins. The region to be drawn is indicated
+      by start and end. The purpose is to allow the implementation to precompute
+      some state before the draw method is called for each cell.
+  
+      Params:
+        cr = a #cairo_t (modified in place, changes are seen by the caller)
+        backgroundArea = a #GdkRectangle
+        cellArea = a #GdkRectangle
+        start = a #GtkTextIter (modified in place, changes are seen by the caller)
+        end = a #GtkTextIter (modified in place, changes are seen by the caller)
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncBegin` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncBegin(gid.cairo1.context.Context cr, gid.gdk3.rectangle.Rectangle backgroundArea, gid.gdk3.rectangle.Rectangle cellArea, gid.gtk3.text_iter.TextIter start, gid.gtk3.text_iter.TextIter end)
+  {
+    auto _klass = cast(GtkSourceGutterRendererClass*)_vfuncClass;
+    if (!_klass.begin)
+      return;
+
+    _klass.begin(cast(GtkSourceGutterRenderer*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(GdkRectangle*)&backgroundArea, cast(GdkRectangle*)&cellArea, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
+  }
+
+  /**
+      This is called when the text buffer changes for renderer.
+  
+      Params:
+        oldBuffer = the old #GtkTextBuffer.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncChangeBuffer` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncChangeBuffer(gid.gtk3.text_buffer.TextBuffer oldBuffer = null)
+  {
+    auto _klass = cast(GtkSourceGutterRendererClass*)_vfuncClass;
+    if (!_klass.changeBuffer)
+      return;
+
+    _klass.changeBuffer(cast(GtkSourceGutterRenderer*)this._cPtr, oldBuffer ? cast(GtkTextBuffer*)oldBuffer._cPtr(No.Dup) : null);
+  }
+
+  /**
+      This is called when the text view changes for renderer.
+  
+      Params:
+        oldView = the old #GtkTextView.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncChangeView` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncChangeView(gid.gtk3.text_view.TextView oldView = null)
+  {
+    auto _klass = cast(GtkSourceGutterRendererClass*)_vfuncClass;
+    if (!_klass.changeView)
+      return;
+
+    _klass.changeView(cast(GtkSourceGutterRenderer*)this._cPtr, oldView ? cast(GtkTextView*)oldView._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Main renderering method. Implementations should implement this method to draw
+      onto the cairo context. The background_area indicates the total area of the
+      cell to be drawn. The cell_area indicates the area where content can be
+      drawn (text, images, etc).
+      
+      The background_area is the cell_area plus the padding on each side (two
+      times the #GtkSourceGutterRenderer:xpad horizontally and two times the
+      #GtkSourceGutterRenderer:ypad vertically, so that the cell_area is centered
+      inside background_area).
+      
+      The state argument indicates the current state of the renderer and should
+      be taken into account to properly draw the different possible states
+      (cursor, prelit, selected) if appropriate.
+  
+      Params:
+        cr = the cairo render context (modified in place, changes are seen by the caller)
+        backgroundArea = a #GdkRectangle indicating the total area to be drawn
+        cellArea = a #GdkRectangle indicating the area to draw content
+        start = a #GtkTextIter (modified in place, changes are seen by the caller)
+        end = a #GtkTextIter (modified in place, changes are seen by the caller)
+        state = a #GtkSourceGutterRendererState
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncDraw` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncDraw(gid.cairo1.context.Context cr, gid.gdk3.rectangle.Rectangle backgroundArea, gid.gdk3.rectangle.Rectangle cellArea, gid.gtk3.text_iter.TextIter start, gid.gtk3.text_iter.TextIter end, gid.gtksource4.types.GutterRendererState state)
+  {
+    auto _klass = cast(GtkSourceGutterRendererClass*)_vfuncClass;
+    if (!_klass.draw)
+      return;
+
+    _klass.draw(cast(GtkSourceGutterRenderer*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, cast(GdkRectangle*)&backgroundArea, cast(GdkRectangle*)&cellArea, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null, state);
+  }
+
+  /**
+      Called when drawing a region of lines has ended.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncEnd` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncEnd()
+  {
+    auto _klass = cast(GtkSourceGutterRendererClass*)_vfuncClass;
+    if (!_klass.end)
+      return;
+
+    _klass.end(cast(GtkSourceGutterRenderer*)this._cPtr);
+  }
+
+  /**
+      Get whether the renderer is activatable at the location in event. This is
+      called from #GtkSourceGutter to determine whether a renderer is activatable
+      using the mouse pointer.
+  
+      Params:
+        iter = a #GtkTextIter at the start of the line to be activated (modified in place, changes are seen by the caller)
+        area = a #GdkRectangle of the cell area to be activated
+        event = the event that triggered the query (modified in place, changes are seen by the caller)
+      Returns: true if the renderer can be activated, false otherwise
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncQueryActivatable` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncQueryActivatable(gid.gtk3.text_iter.TextIter iter, gid.gdk3.rectangle.Rectangle area, gid.gdk3.event.Event event)
+  {
+    auto _klass = cast(GtkSourceGutterRendererClass*)_vfuncClass;
+    if (!_klass.queryActivatable)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.queryActivatable(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, cast(GdkRectangle*)&area, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Emit the #GtkSourceGutterRenderer::query-data signal. This function is called
+      to query for data just before rendering a cell. This is called from the
+      #GtkSourceGutter.  Implementations can override the default signal handler or
+      can connect a signal handler externally to the
+      #GtkSourceGutterRenderer::query-data signal.
+  
+      Params:
+        start = a #GtkTextIter. (modified in place, changes are seen by the caller)
+        end = a #GtkTextIter. (modified in place, changes are seen by the caller)
+        state = a #GtkSourceGutterRendererState.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncQueryData` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncQueryData(gid.gtk3.text_iter.TextIter start, gid.gtk3.text_iter.TextIter end, gid.gtksource4.types.GutterRendererState state)
+  {
+    auto _klass = cast(GtkSourceGutterRendererClass*)_vfuncClass;
+    if (!_klass.queryData)
+      return;
+
+    _klass.queryData(cast(GtkSourceGutterRenderer*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null, state);
+  }
+
+  /**
+      Emits the #GtkSourceGutterRenderer::query-tooltip signal. This function is
+      called from #GtkSourceGutter. Implementations can override the default signal
+      handler or can connect to the signal externally.
+  
+      Params:
+        iter = a #GtkTextIter. (modified in place, changes are seen by the caller)
+        area = a #GdkRectangle.
+        x = The x position of the tooltip.
+        y = The y position of the tooltip.
+        tooltip = a #GtkTooltip.
+      Returns: true if the tooltip has been set, false otherwise
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncQueryTooltip` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncQueryTooltip(gid.gtk3.text_iter.TextIter iter, gid.gdk3.rectangle.Rectangle area, int x, int y, gid.gtk3.tooltip.Tooltip tooltip)
+  {
+    auto _klass = cast(GtkSourceGutterRendererClass*)_vfuncClass;
+    if (!_klass.queryTooltip)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.queryTooltip(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, cast(GdkRectangle*)&area, x, y, tooltip ? cast(GtkTooltip*)tooltip._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /**
+      Emits the #GtkSourceGutterRenderer::queue-draw signal of the renderer. Call
+      this from an implementation to inform that the renderer has changed such that
+      it needs to redraw.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncQueueDraw` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncQueueDraw()
+  {
+    auto _klass = cast(GtkSourceGutterRendererClass*)_vfuncClass;
+    if (!_klass.queueDraw)
+      return;
+
+    _klass.queueDraw(cast(GtkSourceGutterRenderer*)this._cPtr);
   }
 
   /**
@@ -593,6 +837,7 @@ class GutterRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -657,6 +902,7 @@ class GutterRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -725,6 +971,7 @@ class GutterRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -795,6 +1042,7 @@ class GutterRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 6, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -860,6 +1108,7 @@ class GutterRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -879,6 +1128,389 @@ class GutterRenderer : gid.gobject2.initially_unowned.InitiallyUnowned
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("queue-draw", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from GutterRenderer
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtksource4.gutter_renderer.GutterRenderer), T.stringof ~ " is not derived from gid.gtksource4.gutter_renderer.GutterRenderer");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivate", true)[0]) == gid.gtksource4.gutter_renderer.GutterRenderer))
+      _installVfunc(klass, "activate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncBegin", true)[0]) == gid.gtksource4.gutter_renderer.GutterRenderer))
+      _installVfunc(klass, "begin");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChangeBuffer", true)[0]) == gid.gtksource4.gutter_renderer.GutterRenderer))
+      _installVfunc(klass, "change_buffer");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChangeView", true)[0]) == gid.gtksource4.gutter_renderer.GutterRenderer))
+      _installVfunc(klass, "change_view");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncDraw", true)[0]) == gid.gtksource4.gutter_renderer.GutterRenderer))
+      _installVfunc(klass, "draw");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncEnd", true)[0]) == gid.gtksource4.gutter_renderer.GutterRenderer))
+      _installVfunc(klass, "end");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncQueryActivatable", true)[0]) == gid.gtksource4.gutter_renderer.GutterRenderer))
+      _installVfunc(klass, "query_activatable");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncQueryData", true)[0]) == gid.gtksource4.gutter_renderer.GutterRenderer))
+      _installVfunc(klass, "query_data");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncQueryTooltip", true)[0]) == gid.gtksource4.gutter_renderer.GutterRenderer))
+      _installVfunc(klass, "query_tooltip");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncQueueDraw", true)[0]) == gid.gtksource4.gutter_renderer.GutterRenderer))
+      _installVfunc(klass, "queue_draw");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkSourceGutterRendererClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate":
+      {
+        static extern(C) void _vfuncActivateTramp(GtkSourceGutterRenderer* renderer, GtkTextIter* iter, GdkRectangle* area, GdkEvent* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource4.gutter_renderer.GutterRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceGutterRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
+            if (_klass.activate)
+              return (cast(typeof(&_vfuncActivateTramp))_klass.activate)(renderer, iter, area, event);
+            return;
+          }
+
+          auto _iter = iter ? new gid.gtk3.text_iter.TextIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+          auto _event = event ? new gid.gdk3.event.Event(cast(void*)event, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncActivate(_iter, *cast(gid.gdk3.rectangle.Rectangle*)area, _event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource4.gutter_renderer.GutterRenderer.vfuncActivate");
+          }
+          if (_iter)
+            _iter._cUnborrow;
+          if (_event)
+            _event._cUnborrow;
+
+        }
+
+        _klass.activate = cast(typeof(_klass.activate))&_vfuncActivateTramp;
+        break;
+      }
+      case "begin":
+      {
+        static extern(C) void _vfuncBeginTramp(GtkSourceGutterRenderer* renderer, cairo_t* cr, GdkRectangle* backgroundArea, GdkRectangle* cellArea, GtkTextIter* start, GtkTextIter* end) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource4.gutter_renderer.GutterRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceGutterRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
+            if (_klass.begin)
+              return (cast(typeof(&_vfuncBeginTramp))_klass.begin)(renderer, cr, backgroundArea, cellArea, start, end);
+            return;
+          }
+
+          auto _cr = cr ? new gid.cairo1.context.Context(cast(void*)cr, Yes.Take)._cBorrow : null;
+          auto _start = start ? new gid.gtk3.text_iter.TextIter(cast(void*)start, Yes.Take)._cBorrow : null;
+          auto _end = end ? new gid.gtk3.text_iter.TextIter(cast(void*)end, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncBegin(_cr, *cast(gid.gdk3.rectangle.Rectangle*)backgroundArea, *cast(gid.gdk3.rectangle.Rectangle*)cellArea, _start, _end);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource4.gutter_renderer.GutterRenderer.vfuncBegin");
+          }
+          if (_cr)
+            _cr._cUnborrow;
+          if (_start)
+            _start._cUnborrow;
+          if (_end)
+            _end._cUnborrow;
+
+        }
+
+        _klass.begin = cast(typeof(_klass.begin))&_vfuncBeginTramp;
+        break;
+      }
+      case "change_buffer":
+      {
+        static extern(C) void _vfuncChangeBufferTramp(GtkSourceGutterRenderer* renderer, GtkTextBuffer* oldBuffer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource4.gutter_renderer.GutterRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceGutterRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
+            if (_klass.changeBuffer)
+              return (cast(typeof(&_vfuncChangeBufferTramp))_klass.changeBuffer)(renderer, oldBuffer);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncChangeBuffer(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.text_buffer.TextBuffer)(cast(void*)oldBuffer, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource4.gutter_renderer.GutterRenderer.vfuncChangeBuffer");
+          }
+        }
+
+        _klass.changeBuffer = cast(typeof(_klass.changeBuffer))&_vfuncChangeBufferTramp;
+        break;
+      }
+      case "change_view":
+      {
+        static extern(C) void _vfuncChangeViewTramp(GtkSourceGutterRenderer* renderer, GtkTextView* oldView) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource4.gutter_renderer.GutterRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceGutterRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
+            if (_klass.changeView)
+              return (cast(typeof(&_vfuncChangeViewTramp))_klass.changeView)(renderer, oldView);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncChangeView(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.text_view.TextView)(cast(void*)oldView, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource4.gutter_renderer.GutterRenderer.vfuncChangeView");
+          }
+        }
+
+        _klass.changeView = cast(typeof(_klass.changeView))&_vfuncChangeViewTramp;
+        break;
+      }
+      case "draw":
+      {
+        static extern(C) void _vfuncDrawTramp(GtkSourceGutterRenderer* renderer, cairo_t* cr, GdkRectangle* backgroundArea, GdkRectangle* cellArea, GtkTextIter* start, GtkTextIter* end, GtkSourceGutterRendererState state) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource4.gutter_renderer.GutterRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceGutterRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
+            if (_klass.draw)
+              return (cast(typeof(&_vfuncDrawTramp))_klass.draw)(renderer, cr, backgroundArea, cellArea, start, end, state);
+            return;
+          }
+
+          auto _cr = cr ? new gid.cairo1.context.Context(cast(void*)cr, Yes.Take)._cBorrow : null;
+          auto _start = start ? new gid.gtk3.text_iter.TextIter(cast(void*)start, Yes.Take)._cBorrow : null;
+          auto _end = end ? new gid.gtk3.text_iter.TextIter(cast(void*)end, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncDraw(_cr, *cast(gid.gdk3.rectangle.Rectangle*)backgroundArea, *cast(gid.gdk3.rectangle.Rectangle*)cellArea, _start, _end, state);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource4.gutter_renderer.GutterRenderer.vfuncDraw");
+          }
+          if (_cr)
+            _cr._cUnborrow;
+          if (_start)
+            _start._cUnborrow;
+          if (_end)
+            _end._cUnborrow;
+
+        }
+
+        _klass.draw = cast(typeof(_klass.draw))&_vfuncDrawTramp;
+        break;
+      }
+      case "end":
+      {
+        static extern(C) void _vfuncEndTramp(GtkSourceGutterRenderer* renderer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource4.gutter_renderer.GutterRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceGutterRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
+            if (_klass.end)
+              return (cast(typeof(&_vfuncEndTramp))_klass.end)(renderer);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncEnd();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource4.gutter_renderer.GutterRenderer.vfuncEnd");
+          }
+        }
+
+        _klass.end = cast(typeof(_klass.end))&_vfuncEndTramp;
+        break;
+      }
+      case "query_activatable":
+      {
+        static extern(C) gboolean _vfuncQueryActivatableTramp(GtkSourceGutterRenderer* renderer, GtkTextIter* iter, GdkRectangle* area, GdkEvent* event) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource4.gutter_renderer.GutterRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceGutterRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
+            if (_klass.queryActivatable)
+              return (cast(typeof(&_vfuncQueryActivatableTramp))_klass.queryActivatable)(renderer, iter, area, event);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _iter = iter ? new gid.gtk3.text_iter.TextIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+          auto _event = event ? new gid.gdk3.event.Event(cast(void*)event, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncQueryActivatable(_iter, *cast(gid.gdk3.rectangle.Rectangle*)area, _event);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource4.gutter_renderer.GutterRenderer.vfuncQueryActivatable");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_iter)
+            _iter._cUnborrow;
+          if (_event)
+            _event._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.queryActivatable = cast(typeof(_klass.queryActivatable))&_vfuncQueryActivatableTramp;
+        break;
+      }
+      case "query_data":
+      {
+        static extern(C) void _vfuncQueryDataTramp(GtkSourceGutterRenderer* renderer, GtkTextIter* start, GtkTextIter* end, GtkSourceGutterRendererState state) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource4.gutter_renderer.GutterRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceGutterRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
+            if (_klass.queryData)
+              return (cast(typeof(&_vfuncQueryDataTramp))_klass.queryData)(renderer, start, end, state);
+            return;
+          }
+
+          auto _start = start ? new gid.gtk3.text_iter.TextIter(cast(void*)start, Yes.Take)._cBorrow : null;
+          auto _end = end ? new gid.gtk3.text_iter.TextIter(cast(void*)end, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _obj.vfuncQueryData(_start, _end, state);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource4.gutter_renderer.GutterRenderer.vfuncQueryData");
+          }
+          if (_start)
+            _start._cUnborrow;
+          if (_end)
+            _end._cUnborrow;
+
+        }
+
+        _klass.queryData = cast(typeof(_klass.queryData))&_vfuncQueryDataTramp;
+        break;
+      }
+      case "query_tooltip":
+      {
+        static extern(C) gboolean _vfuncQueryTooltipTramp(GtkSourceGutterRenderer* renderer, GtkTextIter* iter, GdkRectangle* area, int x, int y, GtkTooltip* tooltip) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource4.gutter_renderer.GutterRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceGutterRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
+            if (_klass.queryTooltip)
+              return (cast(typeof(&_vfuncQueryTooltipTramp))_klass.queryTooltip)(renderer, iter, area, x, y, tooltip);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          auto _iter = iter ? new gid.gtk3.text_iter.TextIter(cast(void*)iter, Yes.Take)._cBorrow : null;
+
+          try
+          {
+            _dretval = _obj.vfuncQueryTooltip(_iter, *cast(gid.gdk3.rectangle.Rectangle*)area, x, y, gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.tooltip.Tooltip)(cast(void*)tooltip, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource4.gutter_renderer.GutterRenderer.vfuncQueryTooltip");
+          }
+          auto _retval = cast(gboolean)_dretval;
+          if (_iter)
+            _iter._cUnborrow;
+
+          return _retval;
+        }
+
+        _klass.queryTooltip = cast(typeof(_klass.queryTooltip))&_vfuncQueryTooltipTramp;
+        break;
+      }
+      case "queue_draw":
+      {
+        static extern(C) void _vfuncQueueDrawTramp(GtkSourceGutterRenderer* renderer) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource4.gutter_renderer.GutterRenderer)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)renderer);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceGutterRendererClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)renderer);
+            if (_klass.queueDraw)
+              return (cast(typeof(&_vfuncQueueDrawTramp))_klass.queueDraw)(renderer);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncQueueDraw();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource4.gutter_renderer.GutterRenderer.vfuncQueueDraw");
+          }
+        }
+
+        _klass.queueDraw = cast(typeof(_klass.queueDraw))&_vfuncQueueDrawTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

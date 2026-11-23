@@ -29,6 +29,15 @@ class Relation : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -100,16 +109,23 @@ class Relation : gid.gobject2.object.ObjectWrap
   */
   this(gid.atk1.object.ObjectWrap[] targets, gid.atk1.types.RelationType relationship) nothrow
   {
-    AtkRelation* _cretval;
-    int _nTargets;
-    if (targets)
-      _nTargets = cast(int)targets.length;
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      AtkRelation* _cretval;
+      int _nTargets;
+      if (targets)
+        _nTargets = cast(int)targets.length;
 
-    auto _targets_arr = new AtkObject*[](targets.length);
-    auto _targets = cast(AtkObject**)_targets_arr.ptr;
-    foreach (i, obj; targets) _targets[i] = obj ? cast(AtkObject*)obj._cPtr(No.Dup) : null;
-    _cretval = atk_relation_new(_targets, _nTargets, relationship);
-    this(_cretval, Yes.Take);
+      auto _targets_arr = new AtkObject*[](targets.length);
+      auto _targets = cast(AtkObject**)_targets_arr.ptr;
+      foreach (i, obj; targets) _targets[i] = obj ? cast(AtkObject*)obj._cPtr(No.Dup) : null;
+      _cretval = atk_relation_new(_targets, _nTargets, relationship);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

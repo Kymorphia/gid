@@ -115,9 +115,16 @@ class File : gid.gobject2.object.ObjectWrap
   /** */
   this() nothrow
   {
-    GtkSourceFile* _cretval;
-    _cretval = gtk_source_file_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkSourceFile* _cretval;
+      _cretval = gtk_source_file_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

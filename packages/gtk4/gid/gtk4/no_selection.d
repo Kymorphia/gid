@@ -117,9 +117,16 @@ class NoSelection : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.ListMode
   */
   this(gid.gio2.list_model.ListModel model = null) nothrow
   {
-    GtkNoSelection* _cretval;
-    _cretval = gtk_no_selection_new(model ? cast(GListModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(Yes.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, model !is null), Yes.Take);
+    }
+    else
+    {
+      GtkNoSelection* _cretval;
+      _cretval = gtk_no_selection_new(model ? cast(GListModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(Yes.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

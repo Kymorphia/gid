@@ -239,9 +239,126 @@ class Notebook : gid.gtk3.container.Container
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_notebook_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_notebook_new();
+      this(_cretval, No.Take);
+    }
+  }
+
+  /** */
+  protected bool vfuncChangeCurrentPage(int offset)
+  {
+    auto _klass = cast(GtkNotebookClass*)_vfuncClass;
+    if (!_klass.changeCurrentPage)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.changeCurrentPage(cast(GtkNotebook*)this._cPtr, offset);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncFocusTab(gid.gtk3.types.NotebookTab type)
+  {
+    auto _klass = cast(GtkNotebookClass*)_vfuncClass;
+    if (!_klass.focusTab)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.focusTab(cast(GtkNotebook*)this._cPtr, type);
+    return _retval;
+  }
+
+  /** */
+  protected int vfuncInsertPage(gid.gtk3.widget.Widget child, gid.gtk3.widget.Widget tabLabel, gid.gtk3.widget.Widget menuLabel, int position)
+  {
+    auto _klass = cast(GtkNotebookClass*)_vfuncClass;
+    if (!_klass.insertPage)
+      return typeof(return).init;
+
+    int _retval;
+    _retval = _klass.insertPage(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel._cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel._cPtr(No.Dup) : null, position);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncMoveFocusOut(gid.gtk3.types.DirectionType direction)
+  {
+    auto _klass = cast(GtkNotebookClass*)_vfuncClass;
+    if (!_klass.moveFocusOut)
+      return;
+
+    _klass.moveFocusOut(cast(GtkNotebook*)this._cPtr, direction);
+  }
+
+  /** */
+  protected void vfuncPageAdded(gid.gtk3.widget.Widget child, uint pageNum)
+  {
+    auto _klass = cast(GtkNotebookClass*)_vfuncClass;
+    if (!_klass.pageAdded)
+      return;
+
+    _klass.pageAdded(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, pageNum);
+  }
+
+  /** */
+  protected void vfuncPageRemoved(gid.gtk3.widget.Widget child, uint pageNum)
+  {
+    auto _klass = cast(GtkNotebookClass*)_vfuncClass;
+    if (!_klass.pageRemoved)
+      return;
+
+    _klass.pageRemoved(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, pageNum);
+  }
+
+  /** */
+  protected void vfuncPageReordered(gid.gtk3.widget.Widget child, uint pageNum)
+  {
+    auto _klass = cast(GtkNotebookClass*)_vfuncClass;
+    if (!_klass.pageReordered)
+      return;
+
+    _klass.pageReordered(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, pageNum);
+  }
+
+  /** */
+  protected bool vfuncReorderTab(gid.gtk3.types.DirectionType direction, bool moveToLast)
+  {
+    auto _klass = cast(GtkNotebookClass*)_vfuncClass;
+    if (!_klass.reorderTab)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.reorderTab(cast(GtkNotebook*)this._cPtr, direction, moveToLast);
+    return _retval;
+  }
+
+  /** */
+  protected bool vfuncSelectPage(bool moveFocus)
+  {
+    auto _klass = cast(GtkNotebookClass*)_vfuncClass;
+    if (!_klass.selectPage)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.selectPage(cast(GtkNotebook*)this._cPtr, moveFocus);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncSwitchPage(gid.gtk3.widget.Widget page, uint pageNum)
+  {
+    auto _klass = cast(GtkNotebookClass*)_vfuncClass;
+    if (!_klass.switchPage)
+      return;
+
+    _klass.switchPage(cast(GtkNotebook*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null, pageNum);
   }
 
   /**
@@ -961,6 +1078,7 @@ class Notebook : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1029,6 +1147,7 @@ class Notebook : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 4, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1089,6 +1208,7 @@ class Notebook : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1142,6 +1262,7 @@ class Notebook : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1196,6 +1317,7 @@ class Notebook : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1253,6 +1375,7 @@ class Notebook : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1310,6 +1433,7 @@ class Notebook : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1367,6 +1491,7 @@ class Notebook : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1424,6 +1549,7 @@ class Notebook : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1480,6 +1606,7 @@ class Notebook : gid.gtk3.container.Container
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -1505,6 +1632,355 @@ class Notebook : gid.gtk3.container.Container
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("switch-page", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Notebook
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk3.notebook.Notebook), T.stringof ~ " is not derived from gid.gtk3.notebook.Notebook");
+
+    gid.gtk3.container.Container._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncChangeCurrentPage", true)[0]) == gid.gtk3.notebook.Notebook))
+      _installVfunc(klass, "change_current_page");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncFocusTab", true)[0]) == gid.gtk3.notebook.Notebook))
+      _installVfunc(klass, "focus_tab");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncInsertPage", true)[0]) == gid.gtk3.notebook.Notebook))
+      _installVfunc(klass, "insert_page");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMoveFocusOut", true)[0]) == gid.gtk3.notebook.Notebook))
+      _installVfunc(klass, "move_focus_out");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPageAdded", true)[0]) == gid.gtk3.notebook.Notebook))
+      _installVfunc(klass, "page_added");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPageRemoved", true)[0]) == gid.gtk3.notebook.Notebook))
+      _installVfunc(klass, "page_removed");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPageReordered", true)[0]) == gid.gtk3.notebook.Notebook))
+      _installVfunc(klass, "page_reordered");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncReorderTab", true)[0]) == gid.gtk3.notebook.Notebook))
+      _installVfunc(klass, "reorder_tab");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSelectPage", true)[0]) == gid.gtk3.notebook.Notebook))
+      _installVfunc(klass, "select_page");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSwitchPage", true)[0]) == gid.gtk3.notebook.Notebook))
+      _installVfunc(klass, "switch_page");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkNotebookClass*)klass;
+
+    switch (vfunc)
+    {
+      case "change_current_page":
+      {
+        static extern(C) gboolean _vfuncChangeCurrentPageTramp(GtkNotebook* notebook, int offset) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.notebook.Notebook)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)notebook);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkNotebookClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)notebook);
+            if (_klass.changeCurrentPage)
+              return (cast(typeof(&_vfuncChangeCurrentPageTramp))_klass.changeCurrentPage)(notebook, offset);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncChangeCurrentPage(offset);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.notebook.Notebook.vfuncChangeCurrentPage");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.changeCurrentPage = cast(typeof(_klass.changeCurrentPage))&_vfuncChangeCurrentPageTramp;
+        break;
+      }
+      case "focus_tab":
+      {
+        static extern(C) gboolean _vfuncFocusTabTramp(GtkNotebook* notebook, GtkNotebookTab type) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.notebook.Notebook)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)notebook);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkNotebookClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)notebook);
+            if (_klass.focusTab)
+              return (cast(typeof(&_vfuncFocusTabTramp))_klass.focusTab)(notebook, type);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncFocusTab(type);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.notebook.Notebook.vfuncFocusTab");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.focusTab = cast(typeof(_klass.focusTab))&_vfuncFocusTabTramp;
+        break;
+      }
+      case "insert_page":
+      {
+        static extern(C) int _vfuncInsertPageTramp(GtkNotebook* notebook, GtkWidget* child, GtkWidget* tabLabel, GtkWidget* menuLabel, int position) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.notebook.Notebook)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)notebook);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkNotebookClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)notebook);
+            if (_klass.insertPage)
+              return (cast(typeof(&_vfuncInsertPageTramp))_klass.insertPage)(notebook, child, tabLabel, menuLabel, position);
+            return typeof(return).init;
+          }
+
+          int _retval;
+
+          try
+          {
+            _retval = _obj.vfuncInsertPage(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)child, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)tabLabel, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)menuLabel, No.Take), position);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.notebook.Notebook.vfuncInsertPage");
+          }
+          return _retval;
+        }
+
+        _klass.insertPage = cast(typeof(_klass.insertPage))&_vfuncInsertPageTramp;
+        break;
+      }
+      case "move_focus_out":
+      {
+        static extern(C) void _vfuncMoveFocusOutTramp(GtkNotebook* notebook, GtkDirectionType direction) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.notebook.Notebook)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)notebook);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkNotebookClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)notebook);
+            if (_klass.moveFocusOut)
+              return (cast(typeof(&_vfuncMoveFocusOutTramp))_klass.moveFocusOut)(notebook, direction);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMoveFocusOut(direction);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.notebook.Notebook.vfuncMoveFocusOut");
+          }
+        }
+
+        _klass.moveFocusOut = cast(typeof(_klass.moveFocusOut))&_vfuncMoveFocusOutTramp;
+        break;
+      }
+      case "page_added":
+      {
+        static extern(C) void _vfuncPageAddedTramp(GtkNotebook* notebook, GtkWidget* child, uint pageNum) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.notebook.Notebook)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)notebook);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkNotebookClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)notebook);
+            if (_klass.pageAdded)
+              return (cast(typeof(&_vfuncPageAddedTramp))_klass.pageAdded)(notebook, child, pageNum);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPageAdded(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)child, No.Take), pageNum);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.notebook.Notebook.vfuncPageAdded");
+          }
+        }
+
+        _klass.pageAdded = cast(typeof(_klass.pageAdded))&_vfuncPageAddedTramp;
+        break;
+      }
+      case "page_removed":
+      {
+        static extern(C) void _vfuncPageRemovedTramp(GtkNotebook* notebook, GtkWidget* child, uint pageNum) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.notebook.Notebook)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)notebook);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkNotebookClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)notebook);
+            if (_klass.pageRemoved)
+              return (cast(typeof(&_vfuncPageRemovedTramp))_klass.pageRemoved)(notebook, child, pageNum);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPageRemoved(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)child, No.Take), pageNum);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.notebook.Notebook.vfuncPageRemoved");
+          }
+        }
+
+        _klass.pageRemoved = cast(typeof(_klass.pageRemoved))&_vfuncPageRemovedTramp;
+        break;
+      }
+      case "page_reordered":
+      {
+        static extern(C) void _vfuncPageReorderedTramp(GtkNotebook* notebook, GtkWidget* child, uint pageNum) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.notebook.Notebook)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)notebook);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkNotebookClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)notebook);
+            if (_klass.pageReordered)
+              return (cast(typeof(&_vfuncPageReorderedTramp))_klass.pageReordered)(notebook, child, pageNum);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPageReordered(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)child, No.Take), pageNum);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.notebook.Notebook.vfuncPageReordered");
+          }
+        }
+
+        _klass.pageReordered = cast(typeof(_klass.pageReordered))&_vfuncPageReorderedTramp;
+        break;
+      }
+      case "reorder_tab":
+      {
+        static extern(C) gboolean _vfuncReorderTabTramp(GtkNotebook* notebook, GtkDirectionType direction, gboolean moveToLast) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.notebook.Notebook)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)notebook);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkNotebookClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)notebook);
+            if (_klass.reorderTab)
+              return (cast(typeof(&_vfuncReorderTabTramp))_klass.reorderTab)(notebook, direction, moveToLast);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncReorderTab(direction, cast(bool)moveToLast);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.notebook.Notebook.vfuncReorderTab");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.reorderTab = cast(typeof(_klass.reorderTab))&_vfuncReorderTabTramp;
+        break;
+      }
+      case "select_page":
+      {
+        static extern(C) gboolean _vfuncSelectPageTramp(GtkNotebook* notebook, gboolean moveFocus) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.notebook.Notebook)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)notebook);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkNotebookClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)notebook);
+            if (_klass.selectPage)
+              return (cast(typeof(&_vfuncSelectPageTramp))_klass.selectPage)(notebook, moveFocus);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncSelectPage(cast(bool)moveFocus);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.notebook.Notebook.vfuncSelectPage");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.selectPage = cast(typeof(_klass.selectPage))&_vfuncSelectPageTramp;
+        break;
+      }
+      case "switch_page":
+      {
+        static extern(C) void _vfuncSwitchPageTramp(GtkNotebook* notebook, GtkWidget* page, uint pageNum) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk3.notebook.Notebook)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)notebook);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkNotebookClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)notebook);
+            if (_klass.switchPage)
+              return (cast(typeof(&_vfuncSwitchPageTramp))_klass.switchPage)(notebook, page, pageNum);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSwitchPage(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk3.widget.Widget)(cast(void*)page, No.Take), pageNum);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk3.notebook.Notebook.vfuncSwitchPage");
+          }
+        }
+
+        _klass.switchPage = cast(typeof(_klass.switchPage))&_vfuncSwitchPageTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

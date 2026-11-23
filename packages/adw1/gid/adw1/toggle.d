@@ -274,9 +274,16 @@ class Toggle : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    AdwToggle* _cretval;
-    _cretval = adw_toggle_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      AdwToggle* _cretval;
+      _cretval = adw_toggle_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

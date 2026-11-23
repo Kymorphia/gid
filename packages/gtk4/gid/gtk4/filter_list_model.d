@@ -187,9 +187,16 @@ class FilterListModel : gid.gobject2.object.ObjectWrap, gid.gio2.list_model.List
   */
   this(gid.gio2.list_model.ListModel model = null, gid.gtk4.filter.Filter filter = null) nothrow
   {
-    GtkFilterListModel* _cretval;
-    _cretval = gtk_filter_list_model_new(model ? cast(GListModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(Yes.Dup) : null, filter ? cast(GtkFilter*)filter._cPtr(Yes.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, model !is null || filter !is null), Yes.Take);
+    }
+    else
+    {
+      GtkFilterListModel* _cretval;
+      _cretval = gtk_filter_list_model_new(model ? cast(GListModel*)(cast(gid.gobject2.object.ObjectWrap)model)._cPtr(Yes.Dup) : null, filter ? cast(GtkFilter*)filter._cPtr(Yes.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

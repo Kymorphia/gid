@@ -57,6 +57,15 @@ class AppChooserWidget : gid.gtk4.widget.Widget, gid.gtk4.app_chooser.AppChooser
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -251,10 +260,17 @@ class AppChooserWidget : gid.gtk4.widget.Widget, gid.gtk4.app_chooser.AppChooser
   */
   this(string contentType) nothrow
   {
-    GtkWidget* _cretval;
-    const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
-    _cretval = gtk_app_chooser_widget_new(_contentType);
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      const(char)* _contentType = contentType.toCString!(No.Malloc, No.Nullable);
+      _cretval = gtk_app_chooser_widget_new(_contentType);
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -457,6 +473,7 @@ class AppChooserWidget : gid.gtk4.widget.Widget, gid.gtk4.app_chooser.AppChooser
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -507,6 +524,7 @@ class AppChooserWidget : gid.gtk4.widget.Widget, gid.gtk4.app_chooser.AppChooser
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

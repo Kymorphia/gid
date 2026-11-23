@@ -240,9 +240,16 @@ class Button : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
   */
   this() nothrow
   {
-    GtkWidget* _cretval;
-    _cretval = gtk_button_new();
-    this(_cretval, No.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GtkWidget* _cretval;
+      _cretval = gtk_button_new();
+      this(_cretval, No.Take);
+    }
   }
 
   /**
@@ -302,6 +309,40 @@ class Button : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
     _cretval = gtk_button_new_with_mnemonic(_label);
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
+  }
+
+  /**
+      Signal that causes the button to animate press then
+         release. Applications should never connect to this signal, but use
+         the clicked signal.
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncActivate` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncActivate()
+  {
+    auto _klass = cast(GtkButtonClass*)_vfuncClass;
+    if (!_klass.activate)
+      return;
+
+    _klass.activate(cast(GtkButton*)this._cPtr);
+  }
+
+  /**
+      Signal emitted when the button has been activated (pressed and released).
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncClicked` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncClicked()
+  {
+    auto _klass = cast(GtkButtonClass*)_vfuncClass;
+    if (!_klass.clicked)
+      return;
+
+    _klass.clicked(cast(GtkButton*)this._cPtr);
   }
 
   /**
@@ -504,6 +545,7 @@ class Button : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -548,6 +590,7 @@ class Button : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -567,6 +610,92 @@ class Button : gid.gtk4.widget.Widget, gid.gtk4.actionable.Actionable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("clicked", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Button
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.button.Button), T.stringof ~ " is not derived from gid.gtk4.button.Button");
+
+    gid.gtk4.widget.Widget._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivate", true)[0]) == gid.gtk4.button.Button))
+      _installVfunc(klass, "activate");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncClicked", true)[0]) == gid.gtk4.button.Button))
+      _installVfunc(klass, "clicked");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkButtonClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate":
+      {
+        static extern(C) void _vfuncActivateTramp(GtkButton* button) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.button.Button)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);
+            if (_klass.activate)
+              return (cast(typeof(&_vfuncActivateTramp))_klass.activate)(button);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncActivate();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.button.Button.vfuncActivate");
+          }
+        }
+
+        _klass.activate = cast(typeof(_klass.activate))&_vfuncActivateTramp;
+        break;
+      }
+      case "clicked":
+      {
+        static extern(C) void _vfuncClickedTramp(GtkButton* button) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.button.Button)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)button);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkButtonClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)button);
+            if (_klass.clicked)
+              return (cast(typeof(&_vfuncClickedTramp))_klass.clicked)(button);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncClicked();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.button.Button.vfuncClicked");
+          }
+        }
+
+        _klass.clicked = cast(typeof(_klass.clicked))&_vfuncClickedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

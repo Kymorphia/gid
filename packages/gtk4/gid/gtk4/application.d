@@ -122,6 +122,15 @@ class Application : gid.gio2.application.Application
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -255,10 +264,58 @@ class Application : gid.gio2.application.Application
   */
   this(string applicationId, gid.gio2.types.ApplicationFlags flags) nothrow
   {
-    GtkApplication* _cretval;
-    const(char)* _applicationId = applicationId.toCString!(No.Malloc, Yes.Nullable);
-    _cretval = gtk_application_new(_applicationId, flags);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkApplication* _cretval;
+      const(char)* _applicationId = applicationId.toCString!(No.Malloc, Yes.Nullable);
+      _cretval = gtk_application_new(_applicationId, flags);
+      this(_cretval, Yes.Take);
+    }
+  }
+
+  /**
+      Signal emitted when a [gid.gtk4.window.Window] is added to
+         application through [gid.gtk4.application.Application.addWindow].
+  
+      Params:
+        window = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncWindowAdded` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncWindowAdded(gid.gtk4.window.Window window)
+  {
+    auto _klass = cast(GtkApplicationClass*)_vfuncClass;
+    if (!_klass.windowAdded)
+      return;
+
+    _klass.windowAdded(cast(GtkApplication*)this._cPtr, window ? cast(GtkWindow*)window._cPtr(No.Dup) : null);
+  }
+
+  /**
+      Signal emitted when a [gid.gtk4.window.Window] is removed from
+         application, either as a side-effect of being destroyed or
+         explicitly through [gid.gtk4.application.Application.removeWindow].
+  
+      Params:
+        window = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncWindowRemoved` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncWindowRemoved(gid.gtk4.window.Window window)
+  {
+    auto _klass = cast(GtkApplicationClass*)_vfuncClass;
+    if (!_klass.windowRemoved)
+      return;
+
+    _klass.windowRemoved(cast(GtkApplication*)this._cPtr, window ? cast(GtkWindow*)window._cPtr(No.Dup) : null);
   }
 
   /**
@@ -631,6 +688,7 @@ class Application : gid.gio2.application.Application
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -680,6 +738,7 @@ class Application : gid.gio2.application.Application
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -733,6 +792,7 @@ class Application : gid.gio2.application.Application
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -755,6 +815,92 @@ class Application : gid.gio2.application.Application
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("window-removed", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Application
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtk4.application.Application), T.stringof ~ " is not derived from gid.gtk4.application.Application");
+
+    gid.gio2.application.Application._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncWindowAdded", true)[0]) == gid.gtk4.application.Application))
+      _installVfunc(klass, "window_added");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncWindowRemoved", true)[0]) == gid.gtk4.application.Application))
+      _installVfunc(klass, "window_removed");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkApplicationClass*)klass;
+
+    switch (vfunc)
+    {
+      case "window_added":
+      {
+        static extern(C) void _vfuncWindowAddedTramp(GtkApplication* application, GtkWindow* window) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
+            if (_klass.windowAdded)
+              return (cast(typeof(&_vfuncWindowAddedTramp))_klass.windowAdded)(application, window);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncWindowAdded(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.window.Window)(cast(void*)window, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.application.Application.vfuncWindowAdded");
+          }
+        }
+
+        _klass.windowAdded = cast(typeof(_klass.windowAdded))&_vfuncWindowAddedTramp;
+        break;
+      }
+      case "window_removed":
+      {
+        static extern(C) void _vfuncWindowRemovedTramp(GtkApplication* application, GtkWindow* window) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtk4.application.Application)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)application);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkApplicationClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)application);
+            if (_klass.windowRemoved)
+              return (cast(typeof(&_vfuncWindowRemovedTramp))_klass.windowRemoved)(application, window);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncWindowRemoved(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtk4.window.Window)(cast(void*)window, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtk4.application.Application.vfuncWindowRemoved");
+          }
+        }
+
+        _klass.windowRemoved = cast(typeof(_klass.windowRemoved))&_vfuncWindowRemovedTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

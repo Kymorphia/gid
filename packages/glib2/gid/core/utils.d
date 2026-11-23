@@ -7,6 +7,7 @@ public import std.typecons : Flag, No, Tuple, Yes;
 public import std.traits : isCallable, Parameters, ParameterStorageClass, ParameterStorageClassTuple, ReturnType;
 
 import core.memory : GC;
+version (Posix) import core.sys.posix.pthread;
 import core.stdc.string : strlen;
 public import core.stdc.string : memset;
 public import gid.core.wrap;
@@ -19,6 +20,164 @@ import gid.glib2.types : SOURCE_REMOVE;
 import gid.gobject2.boxed;
 import gid.gobject2.object;
 import gid.gobject2.c.functions;
+
+// D runtime initialization and foreign thread attachment for C to D entry points (DiG, see gidAttachThread)
+private __gshared bool gidRuntimeInitialized; // Set once the D runtime was initialized by gidInitRuntime()
+private __gshared bool gidRuntimeInitFailed; // Set if Runtime.initialize() failed in gidInitRuntime() (not retried)
+
+version (Posix)
+{
+  private __gshared pthread_mutex_t gidRuntimeMutex = PTHREAD_MUTEX_INITIALIZER;
+  private __gshared pthread_key_t gidDetachKey; // Thread key with a destructor detaching threads attached by gidAttachThread()
+  private __gshared bool gidDetachKeyCreated;
+
+  // Thread exit destructor of threads attached by gidAttachThread(): detach them from the D runtime, since a dead
+  // attached thread makes the next GC stop-the-world hang
+  private extern(C) void gidDetachThread(void* value) nothrow
+  {
+    import core.thread : thread_detachThis;
+    thread_detachThis();
+  }
+}
+else version (Windows)
+{ // Slim reader/writer lock (kernel32, Vista+), not declared by druntime. Statically initialized (SRWLOCK_INIT is
+  // all zeros), so it can be used before the D runtime is initialized.
+  private struct GidSrwLock
+  {
+    void* ptr;
+  }
+
+  private extern(Windows) void AcquireSRWLockExclusive(GidSrwLock* lock) nothrow @nogc;
+  private extern(Windows) void ReleaseSRWLockExclusive(GidSrwLock* lock) nothrow @nogc;
+
+  private __gshared GidSrwLock gidRuntimeSrwLock; // SRWLOCK_INIT
+}
+
+// Lock of the D runtime initialization and thread detach key creation. Statically initialized, usable before the D
+// runtime is initialized. Not recursive.
+private void gidRuntimeLock() nothrow @nogc
+{
+  version (Posix)
+  pthread_mutex_lock(&gidRuntimeMutex);
+  else version (Windows)
+  AcquireSRWLockExclusive(&gidRuntimeSrwLock);
+}
+
+// Unlock the lock locked by gidRuntimeLock()
+private void gidRuntimeUnlock() nothrow @nogc
+{
+  version (Posix)
+  pthread_mutex_unlock(&gidRuntimeMutex);
+  else version (Windows)
+  ReleaseSRWLockExclusive(&gidRuntimeSrwLock);
+}
+
+/**
+* Initialize the D runtime if this function didn't already (once, thread safe), for D shared libraries loaded by
+* non-D programs, such as libraries exporting GObject types (gid.gobject2.object.GObjectExport calls it from a library
+* constructor and its exported get_type function). The runtime is not terminated: D objects may be referenced from
+* C until the process exits, and libraries registering static GTypes can't be unloaded. If a D program already
+* initialized (or will initialize) the runtime, this only increments its init count, so it is not terminated when
+* main() returns either.
+*
+* If the initialization fails (Runtime.initialize() returns false or throws), a critical error is logged and the
+* runtime is not considered initialized. It is not retried by later calls: a failed rt_init may have run part of the
+* initialization (sections, GC, some module constructors), so running it again could repeat side effects, and every
+* exported get_type call would log the error again.
+*/
+void gidInitRuntime() nothrow
+{
+  import core.runtime : Runtime;
+  import core.atomic : atomicLoad, atomicStore;
+
+  if (atomicLoad(*cast(shared bool*)&gidRuntimeInitialized))
+    return;
+
+  gidRuntimeLock();
+  scope(exit) gidRuntimeUnlock();
+
+  if (gidRuntimeInitialized || gidRuntimeInitFailed)
+    return;
+
+  bool ok;
+
+  try
+  ok = Runtime.initialize();
+  catch (Throwable)
+  ok = false;
+
+  if (ok)
+    atomicStore(*cast(shared bool*)&gidRuntimeInitialized, true);
+  else
+  {
+    gidRuntimeInitFailed = true;
+
+    // Plain C calls only, the runtime (and the GLib function pointers linked by module constructors) may not be
+    // initialized
+    enum msg = "D runtime initialization failed (gid.gid.gidInitRuntime)";
+
+    if (g_log)
+      g_log("Gid", GLogLevelFlags.LevelCritical, "%s", msg.ptr);
+    else
+    {
+      import core.stdc.stdio : fprintf, stderr;
+      fprintf(stderr, "Gid-CRITICAL: %s\n", msg.ptr);
+    }
+  }
+}
+
+/**
+* Attach the calling thread to the D runtime if it isn't attached. Called at C to D entry points which can be
+* reached from threads created by C (virtual method, signal and callback trampolines, GType class, interface and
+* instance initialization, toggle reference notification, exported get_type functions). Threads attached here are
+* detached when they exit (pthread key destructor), since a dead attached thread makes the next GC stop-the-world
+* hang. The check for an attached thread is a thread local variable read. The D runtime must be initialized (by the
+* D program or gidInitRuntime()).
+*/
+void gidAttachThread() nothrow
+{
+  import core.thread : Thread;
+
+  if (Thread.getThis !is null) // Fast path: D thread or already attached
+    return;
+
+  gidAttachThreadSlow();
+}
+
+private void gidAttachThreadSlow() nothrow
+{
+  import core.thread : thread_attachThis;
+
+  version (Posix)
+  {
+    import core.atomic : atomicLoad, atomicStore;
+
+    bool keyCreated = atomicLoad(*cast(shared bool*)&gidDetachKeyCreated);
+
+    if (!keyCreated)
+    {
+      gidRuntimeLock();
+
+      keyCreated = gidDetachKeyCreated; // Only written under the lock
+      if (!keyCreated && pthread_key_create(&gidDetachKey, &gidDetachThread) == 0)
+      {
+        keyCreated = true;
+        atomicStore(*cast(shared bool*)&gidDetachKeyCreated, true);
+      }
+
+      gidRuntimeUnlock();
+    }
+  }
+
+  try
+  thread_attachThis();
+  catch (Throwable)
+  return;
+
+  version (Posix) // Windows: druntime detaches threads of D DLLs on DLL_THREAD_DETACH
+  if (keyCreated)
+    pthread_setspecific(gidDetachKey, cast(void*)1); // Non-null value to have the destructor called on thread exit
+}
 
 /// Container ownership
 enum GidOwnership
@@ -71,6 +230,7 @@ void ptrThawGC(const void* ptr) nothrow
 */
 extern(C) void ptrThawDestroyNotify(void* ptr) nothrow
 {
+  gidAttachThread();
   GC.removeRoot(ptr);
   GC.clrAttr(ptr, GC.BlkAttr.NO_MOVE);
 }
@@ -99,6 +259,7 @@ alias thawPtrDestroyFunc = thawDelegate;
 */
 extern(C) void thawDelegate(void* dlg) nothrow
 {
+  gidAttachThread();
   ptrThawGC(dlg);
 }
 

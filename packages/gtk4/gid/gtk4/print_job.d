@@ -36,6 +36,15 @@ class PrintJob : gid.gobject2.object.ObjectWrap
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -139,10 +148,17 @@ class PrintJob : gid.gobject2.object.ObjectWrap
   */
   this(string title, gid.gtk4.printer.Printer printer, gid.gtk4.print_settings.PrintSettings settings, gid.gtk4.page_setup.PageSetup pageSetup) nothrow
   {
-    GtkPrintJob* _cretval;
-    const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
-    _cretval = gtk_print_job_new(_title, printer ? cast(GtkPrinter*)printer._cPtr(No.Dup) : null, settings ? cast(GtkPrintSettings*)settings._cPtr(No.Dup) : null, pageSetup ? cast(GtkPageSetup*)pageSetup._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GtkPrintJob* _cretval;
+      const(char)* _title = title.toCString!(No.Malloc, No.Nullable);
+      _cretval = gtk_print_job_new(_title, printer ? cast(GtkPrinter*)printer._cPtr(No.Dup) : null, settings ? cast(GtkPrintSettings*)settings._cPtr(No.Dup) : null, pageSetup ? cast(GtkPageSetup*)pageSetup._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
@@ -357,6 +373,7 @@ class PrintJob : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _callbackCallback(GtkPrintJob* printJob, void* userData, const(GError)* error) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gtk4.types.PrintJobCompleteFunc*)userData;
 
       try
@@ -590,6 +607,7 @@ class PrintJob : gid.gobject2.object.ObjectWrap
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;

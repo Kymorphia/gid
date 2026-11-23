@@ -6,6 +6,8 @@ import gid.core.utils;
 import gid.gio2.c.functions;
 import gid.gio2.c.types;
 import gid.gio2.types;
+import gid.glib2.variant;
+import gid.glib2.variant_type;
 import gid.gobject2.gid_builder;
 import gid.gobject2.object;
 
@@ -41,6 +43,15 @@ class SettingsBackend : gid.gobject2.object.ObjectWrap
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
   }
 
   /** */
@@ -92,6 +103,182 @@ class SettingsBackend : gid.gobject2.object.ObjectWrap
     GSettingsBackend* _cretval;
     _cretval = g_settings_backend_get_default();
     auto _retval = gid.gobject2.object.ObjectWrap._getDObject!(gid.gio2.settings_backend.SettingsBackend)(cast(GSettingsBackend*)_cretval, Yes.Take);
+    return _retval;
+  }
+
+  /**
+      virtual method to get if a key is writable
+  
+      Params:
+        key = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncGetWritable` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncGetWritable(string key)
+  {
+    auto _klass = cast(GSettingsBackendClass*)_vfuncClass;
+    if (!_klass.getWritable)
+      return typeof(return).init;
+
+    bool _retval;
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)_klass.getWritable(cast(GSettingsBackend*)this._cPtr, _key);
+    return _retval;
+  }
+
+  /**
+      virtual method to read a key's value
+  
+      Params:
+        key = 
+        expectedType = 
+        defaultValue = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncRead` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.glib2.variant.Variant vfuncRead(string key, gid.glib2.variant_type.VariantType expectedType, bool defaultValue)
+  {
+    auto _klass = cast(GSettingsBackendClass*)_vfuncClass;
+    if (!_klass.read)
+      return typeof(return).init;
+
+    GVariant* _cretval;
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    _cretval = _klass.read(cast(GSettingsBackend*)this._cPtr, _key, expectedType ? cast(const(GVariantType)*)expectedType._cPtr(No.Dup) : null, defaultValue);
+    auto _retval = _cretval ? new gid.glib2.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      virtual method to read user's key value
+  
+      Params:
+        key = 
+        expectedType = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncReadUserValue` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected gid.glib2.variant.Variant vfuncReadUserValue(string key, gid.glib2.variant_type.VariantType expectedType)
+  {
+    auto _klass = cast(GSettingsBackendClass*)_vfuncClass;
+    if (!_klass.readUserValue)
+      return typeof(return).init;
+
+    GVariant* _cretval;
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    _cretval = _klass.readUserValue(cast(GSettingsBackend*)this._cPtr, _key, expectedType ? cast(const(GVariantType)*)expectedType._cPtr(No.Dup) : null);
+    auto _retval = _cretval ? new gid.glib2.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
+    return _retval;
+  }
+
+  /**
+      virtual method to reset state
+  
+      Params:
+        key = 
+        originTag = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncReset` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncReset(string key, void* originTag = null)
+  {
+    auto _klass = cast(GSettingsBackendClass*)_vfuncClass;
+    if (!_klass.reset)
+      return;
+
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    _klass.reset(cast(GSettingsBackend*)this._cPtr, _key, originTag);
+  }
+
+  /**
+      virtual method to subscribe to key changes
+  
+      Params:
+        name = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSubscribe` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSubscribe(string name)
+  {
+    auto _klass = cast(GSettingsBackendClass*)_vfuncClass;
+    if (!_klass.subscribe)
+      return;
+
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    _klass.subscribe(cast(GSettingsBackend*)this._cPtr, _name);
+  }
+
+  /**
+      virtual method to sync state
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncSync` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncSync()
+  {
+    auto _klass = cast(GSettingsBackendClass*)_vfuncClass;
+    if (!_klass.sync)
+      return;
+
+    _klass.sync(cast(GSettingsBackend*)this._cPtr);
+  }
+
+  /**
+      virtual method to unsubscribe to key changes
+  
+      Params:
+        name = 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncUnsubscribe` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncUnsubscribe(string name)
+  {
+    auto _klass = cast(GSettingsBackendClass*)_vfuncClass;
+    if (!_klass.unsubscribe)
+      return;
+
+    const(char)* _name = name.toCString!(No.Malloc, No.Nullable);
+    _klass.unsubscribe(cast(GSettingsBackend*)this._cPtr, _name);
+  }
+
+  /**
+      virtual method to change key's value
+  
+      Params:
+        key = 
+        value = 
+        originTag = 
+      Returns: 
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncWrite` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected bool vfuncWrite(string key, gid.glib2.variant.Variant value, void* originTag = null)
+  {
+    auto _klass = cast(GSettingsBackendClass*)_vfuncClass;
+    if (!_klass.write)
+      return typeof(return).init;
+
+    bool _retval;
+    const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
+    _retval = cast(bool)_klass.write(cast(GSettingsBackend*)this._cPtr, _key, value ? cast(GVariant*)value._cPtr(No.Dup) : null, originTag);
     return _retval;
   }
 
@@ -228,6 +415,302 @@ class SettingsBackend : gid.gobject2.object.ObjectWrap
   {
     const(char)* _key = key.toCString!(No.Malloc, No.Nullable);
     g_settings_backend_writable_changed(cast(GSettingsBackend*)this._cPtr, _key);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from SettingsBackend
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gio2.settings_backend.SettingsBackend), T.stringof ~ " is not derived from gid.gio2.settings_backend.SettingsBackend");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncGetWritable", true)[0]) == gid.gio2.settings_backend.SettingsBackend))
+      _installVfunc(klass, "get_writable");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncRead", true)[0]) == gid.gio2.settings_backend.SettingsBackend))
+      _installVfunc(klass, "read");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncReadUserValue", true)[0]) == gid.gio2.settings_backend.SettingsBackend))
+      _installVfunc(klass, "read_user_value");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncReset", true)[0]) == gid.gio2.settings_backend.SettingsBackend))
+      _installVfunc(klass, "reset");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSubscribe", true)[0]) == gid.gio2.settings_backend.SettingsBackend))
+      _installVfunc(klass, "subscribe");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncSync", true)[0]) == gid.gio2.settings_backend.SettingsBackend))
+      _installVfunc(klass, "sync");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncUnsubscribe", true)[0]) == gid.gio2.settings_backend.SettingsBackend))
+      _installVfunc(klass, "unsubscribe");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncWrite", true)[0]) == gid.gio2.settings_backend.SettingsBackend))
+      _installVfunc(klass, "write");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GSettingsBackendClass*)klass;
+
+    switch (vfunc)
+    {
+      case "get_writable":
+      {
+        static extern(C) gboolean _vfuncGetWritableTramp(GSettingsBackend* backend, const(char)* key) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.settings_backend.SettingsBackend)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)backend);
+          if (!_obj)
+          {
+            auto _klass = cast(GSettingsBackendClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)backend);
+            if (_klass.getWritable)
+              return (cast(typeof(&_vfuncGetWritableTramp))_klass.getWritable)(backend, key);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          string _key = key.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncGetWritable(_key);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.settings_backend.SettingsBackend.vfuncGetWritable");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.getWritable = cast(typeof(_klass.getWritable))&_vfuncGetWritableTramp;
+        break;
+      }
+      case "read":
+      {
+        static extern(C) GVariant* _vfuncReadTramp(GSettingsBackend* backend, const(char)* key, const(GVariantType)* expectedType, gboolean defaultValue) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.settings_backend.SettingsBackend)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)backend);
+          if (!_obj)
+          {
+            auto _klass = cast(GSettingsBackendClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)backend);
+            if (_klass.read)
+              return (cast(typeof(&_vfuncReadTramp))_klass.read)(backend, key, expectedType, defaultValue);
+            return typeof(return).init;
+          }
+
+          gid.glib2.variant.Variant _dretval;
+          string _key = key.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncRead(_key, expectedType ? new gid.glib2.variant_type.VariantType(cast(void*)expectedType, No.Take) : null, cast(bool)defaultValue);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.settings_backend.SettingsBackend.vfuncRead");
+          }
+          auto _retval = _dretval ? cast(GVariant*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.read = cast(typeof(_klass.read))&_vfuncReadTramp;
+        break;
+      }
+      case "read_user_value":
+      {
+        static extern(C) GVariant* _vfuncReadUserValueTramp(GSettingsBackend* backend, const(char)* key, const(GVariantType)* expectedType) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.settings_backend.SettingsBackend)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)backend);
+          if (!_obj)
+          {
+            auto _klass = cast(GSettingsBackendClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)backend);
+            if (_klass.readUserValue)
+              return (cast(typeof(&_vfuncReadUserValueTramp))_klass.readUserValue)(backend, key, expectedType);
+            return typeof(return).init;
+          }
+
+          gid.glib2.variant.Variant _dretval;
+          string _key = key.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncReadUserValue(_key, expectedType ? new gid.glib2.variant_type.VariantType(cast(void*)expectedType, No.Take) : null);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.settings_backend.SettingsBackend.vfuncReadUserValue");
+          }
+          auto _retval = _dretval ? cast(GVariant*)_dretval._cPtr(Yes.Dup) : null;
+
+          return _retval;
+        }
+
+        _klass.readUserValue = cast(typeof(_klass.readUserValue))&_vfuncReadUserValueTramp;
+        break;
+      }
+      case "reset":
+      {
+        static extern(C) void _vfuncResetTramp(GSettingsBackend* backend, const(char)* key, void* originTag) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.settings_backend.SettingsBackend)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)backend);
+          if (!_obj)
+          {
+            auto _klass = cast(GSettingsBackendClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)backend);
+            if (_klass.reset)
+              return (cast(typeof(&_vfuncResetTramp))_klass.reset)(backend, key, originTag);
+            return;
+          }
+
+          string _key = key.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncReset(_key, originTag);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.settings_backend.SettingsBackend.vfuncReset");
+          }
+        }
+
+        _klass.reset = cast(typeof(_klass.reset))&_vfuncResetTramp;
+        break;
+      }
+      case "subscribe":
+      {
+        static extern(C) void _vfuncSubscribeTramp(GSettingsBackend* backend, const(char)* name) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.settings_backend.SettingsBackend)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)backend);
+          if (!_obj)
+          {
+            auto _klass = cast(GSettingsBackendClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)backend);
+            if (_klass.subscribe)
+              return (cast(typeof(&_vfuncSubscribeTramp))_klass.subscribe)(backend, name);
+            return;
+          }
+
+          string _name = name.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncSubscribe(_name);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.settings_backend.SettingsBackend.vfuncSubscribe");
+          }
+        }
+
+        _klass.subscribe = cast(typeof(_klass.subscribe))&_vfuncSubscribeTramp;
+        break;
+      }
+      case "sync":
+      {
+        static extern(C) void _vfuncSyncTramp(GSettingsBackend* backend) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.settings_backend.SettingsBackend)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)backend);
+          if (!_obj)
+          {
+            auto _klass = cast(GSettingsBackendClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)backend);
+            if (_klass.sync)
+              return (cast(typeof(&_vfuncSyncTramp))_klass.sync)(backend);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncSync();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.settings_backend.SettingsBackend.vfuncSync");
+          }
+        }
+
+        _klass.sync = cast(typeof(_klass.sync))&_vfuncSyncTramp;
+        break;
+      }
+      case "unsubscribe":
+      {
+        static extern(C) void _vfuncUnsubscribeTramp(GSettingsBackend* backend, const(char)* name) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.settings_backend.SettingsBackend)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)backend);
+          if (!_obj)
+          {
+            auto _klass = cast(GSettingsBackendClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)backend);
+            if (_klass.unsubscribe)
+              return (cast(typeof(&_vfuncUnsubscribeTramp))_klass.unsubscribe)(backend, name);
+            return;
+          }
+
+          string _name = name.fromCString!(No.Free);
+
+          try
+          {
+            _obj.vfuncUnsubscribe(_name);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.settings_backend.SettingsBackend.vfuncUnsubscribe");
+          }
+        }
+
+        _klass.unsubscribe = cast(typeof(_klass.unsubscribe))&_vfuncUnsubscribeTramp;
+        break;
+      }
+      case "write":
+      {
+        static extern(C) gboolean _vfuncWriteTramp(GSettingsBackend* backend, const(char)* key, GVariant* value, void* originTag) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gio2.settings_backend.SettingsBackend)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)backend);
+          if (!_obj)
+          {
+            auto _klass = cast(GSettingsBackendClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)backend);
+            if (_klass.write)
+              return (cast(typeof(&_vfuncWriteTramp))_klass.write)(backend, key, value, originTag);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+          string _key = key.fromCString!(No.Free);
+
+          try
+          {
+            _dretval = _obj.vfuncWrite(_key, value ? new gid.glib2.variant.Variant(cast(void*)value, No.Take) : null, originTag);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gio2.settings_backend.SettingsBackend.vfuncWrite");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.write = cast(typeof(_klass.write))&_vfuncWriteTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

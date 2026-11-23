@@ -119,6 +119,7 @@ class Iterator : gid.gobject2.boxed.BoxedWrap!(gst_iterator_get_type)
 
     extern(C) int _funcCallback(const(void)* a, const(void)* b) nothrow
     {
+      gidAttachThread();
       int _retval;
 
       try
@@ -168,6 +169,7 @@ class Iterator : gid.gobject2.boxed.BoxedWrap!(gst_iterator_get_type)
   {
     extern(C) gboolean _funcCallback(const(GValue)* item, GValue* ret, void* userData) nothrow
     {
+      gidAttachThread();
       bool _dretval;
       auto _dlg = cast(gid.gst1.types.IteratorFoldFunction*)userData;
       auto _ret = ret ? new gid.gobject2.value.Value(cast(void*)ret, Yes.Take)._cBorrow : null;
@@ -209,6 +211,7 @@ class Iterator : gid.gobject2.boxed.BoxedWrap!(gst_iterator_get_type)
   {
     extern(C) void _funcCallback(const(GValue)* item, void* userData) nothrow
     {
+      gidAttachThread();
       auto _dlg = cast(gid.gst1.types.IteratorForeachFunction*)userData;
 
       try

@@ -220,9 +220,16 @@ class CicpParams : gid.gobject2.object.ObjectWrap
   */
   this() nothrow
   {
-    GdkCicpParams* _cretval;
-    _cretval = gdk_cicp_params_new();
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+    }
+    else
+    {
+      GdkCicpParams* _cretval;
+      _cretval = gdk_cicp_params_new();
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

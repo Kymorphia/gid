@@ -51,6 +51,15 @@ class NoOpObject : gid.atk1.object.ObjectWrap, gid.atk1.action.Action, gid.atk1.
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -111,9 +120,16 @@ class NoOpObject : gid.atk1.object.ObjectWrap, gid.atk1.action.Action, gid.atk1.
   */
   this(gid.gobject2.object.ObjectWrap obj) nothrow
   {
-    AtkObject* _cretval;
-    _cretval = atk_no_op_object_new(obj ? cast(GObject*)obj._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      AtkObject* _cretval;
+      _cretval = atk_no_op_object_new(obj ? cast(GObject*)obj._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 }
 

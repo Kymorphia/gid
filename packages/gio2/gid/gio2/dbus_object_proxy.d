@@ -27,6 +27,15 @@ class DBusObjectProxy : gid.gobject2.object.ObjectWrap, gid.gio2.dbus_object.DBu
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -92,10 +101,17 @@ class DBusObjectProxy : gid.gobject2.object.ObjectWrap, gid.gio2.dbus_object.DBu
   */
   this(gid.gio2.dbus_connection.DBusConnection connection, string objectPath) nothrow
   {
-    GDBusObjectProxy* _cretval;
-    const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
-    _cretval = g_dbus_object_proxy_new(connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, _objectPath);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GDBusObjectProxy* _cretval;
+      const(char)* _objectPath = objectPath.toCString!(No.Malloc, No.Nullable);
+      _cretval = g_dbus_object_proxy_new(connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, _objectPath);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

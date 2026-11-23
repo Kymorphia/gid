@@ -29,6 +29,15 @@ class TcpWrapperConnection : gid.gio2.tcp_connection.TcpConnection
     super(ptr, take);
   }
 
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
+  }
+
   /** */
   static GType _getGType() nothrow
   {
@@ -82,9 +91,16 @@ class TcpWrapperConnection : gid.gio2.tcp_connection.TcpConnection
   */
   this(gid.gio2.iostream.IOStream baseIoStream, gid.gio2.socket.Socket socket) nothrow
   {
-    GSocketConnection* _cretval;
-    _cretval = g_tcp_wrapper_connection_new(baseIoStream ? cast(GIOStream*)baseIoStream._cPtr(No.Dup) : null, socket ? cast(GSocket*)socket._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, true), Yes.Take);
+    }
+    else
+    {
+      GSocketConnection* _cretval;
+      _cretval = g_tcp_wrapper_connection_new(baseIoStream ? cast(GIOStream*)baseIoStream._cPtr(No.Dup) : null, socket ? cast(GSocket*)socket._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**

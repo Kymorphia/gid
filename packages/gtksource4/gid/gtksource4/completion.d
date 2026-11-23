@@ -15,6 +15,7 @@ import gid.gtksource4.c.functions;
 import gid.gtksource4.c.types;
 import gid.gtksource4.completion_context;
 import gid.gtksource4.completion_info;
+import gid.gtksource4.completion_proposal;
 import gid.gtksource4.completion_provider;
 import gid.gtksource4.types;
 import gid.gtksource4.view;
@@ -27,6 +28,15 @@ class Completion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   this(void* ptr, Flag!"Take" take) nothrow
   {
     super(ptr, take);
+  }
+
+  /**
+      Constructor for D subclasses, creates an instance of the GType of the D class (see
+      [gobject.object.GObjectSubclass]).
+  */
+  protected this() nothrow
+  {
+    this(_newDSubclassGObject(_dSubclassGType), Yes.Take);
   }
 
   /** */
@@ -258,6 +268,84 @@ class Completion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
 
   mixin BuildableT!();
 
+  /** */
+  protected void vfuncActivateProposal()
+  {
+    auto _klass = cast(GtkSourceCompletionClass*)_vfuncClass;
+    if (!_klass.activateProposal)
+      return;
+
+    _klass.activateProposal(cast(GtkSourceCompletion*)this._cPtr);
+  }
+
+  /**
+      Hides the completion if it is active (visible).
+  
+      Virtual method: calls the C implementation of the object's class (or of the nearest C ancestor class of a
+      D subclass type), use `super.vfuncHide` to chain up from an override.
+      Overrides are installed in the class structure of the D subclass GType (see `gobject.object.GObjectSubclass`).
+  */
+  protected void vfuncHide()
+  {
+    auto _klass = cast(GtkSourceCompletionClass*)_vfuncClass;
+    if (!_klass.hide)
+      return;
+
+    _klass.hide(cast(GtkSourceCompletion*)this._cPtr);
+  }
+
+  /** */
+  protected void vfuncMoveCursor(gid.gtk3.types.ScrollStep step, int num)
+  {
+    auto _klass = cast(GtkSourceCompletionClass*)_vfuncClass;
+    if (!_klass.moveCursor)
+      return;
+
+    _klass.moveCursor(cast(GtkSourceCompletion*)this._cPtr, step, num);
+  }
+
+  /** */
+  protected void vfuncMovePage(gid.gtk3.types.ScrollStep step, int num)
+  {
+    auto _klass = cast(GtkSourceCompletionClass*)_vfuncClass;
+    if (!_klass.movePage)
+      return;
+
+    _klass.movePage(cast(GtkSourceCompletion*)this._cPtr, step, num);
+  }
+
+  /** */
+  protected void vfuncPopulateContext(gid.gtksource4.completion_context.CompletionContext context)
+  {
+    auto _klass = cast(GtkSourceCompletionClass*)_vfuncClass;
+    if (!_klass.populateContext)
+      return;
+
+    _klass.populateContext(cast(GtkSourceCompletion*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null);
+  }
+
+  /** */
+  protected bool vfuncProposalActivated(gid.gtksource4.completion_provider.CompletionProvider provider, gid.gtksource4.completion_proposal.CompletionProposal proposal)
+  {
+    auto _klass = cast(GtkSourceCompletionClass*)_vfuncClass;
+    if (!_klass.proposalActivated)
+      return typeof(return).init;
+
+    bool _retval;
+    _retval = cast(bool)_klass.proposalActivated(cast(GtkSourceCompletion*)this._cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gid.gobject2.object.ObjectWrap)provider)._cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gid.gobject2.object.ObjectWrap)proposal)._cPtr(No.Dup) : null);
+    return _retval;
+  }
+
+  /** */
+  protected void vfuncShow()
+  {
+    auto _klass = cast(GtkSourceCompletionClass*)_vfuncClass;
+    if (!_klass.show)
+      return;
+
+    _klass.show(cast(GtkSourceCompletion*)this._cPtr);
+  }
+
   /**
       Add a new #GtkSourceCompletionProvider to the completion object. This will
       add a reference provider, so make sure to unref your own copy when you
@@ -447,6 +535,7 @@ class Completion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -492,6 +581,7 @@ class Completion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -557,6 +647,7 @@ class Completion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -631,6 +722,7 @@ class Completion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 3, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -685,6 +777,7 @@ class Completion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 2, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -733,6 +826,7 @@ class Completion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
   {
     extern(C) void _cmarshal(GClosure* _closure, GValue* _returnValue, uint _nParams, const(GValue)* _paramVals, void* _invocHint, void* _marshalData) nothrow
     {
+      gidAttachThread();
       assert(_nParams == 1, "Unexpected number of signal parameters");
       auto _dClosure = cast(DGClosure!T*)_closure;
       Tuple!(Parameters!T) _paramTuple;
@@ -752,6 +846,247 @@ class Completion : gid.gobject2.object.ObjectWrap, gid.gtk3.buildable.Buildable
 
     auto closure = new DClosure(callback, &_cmarshal);
     return connectSignalClosure("show", closure, after);
+  }
+
+  /**
+      Install the C virtual method trampolines of the vfunc methods which a D class overrides, in the class structure of
+      its GType (DiG, see gobject.object.GObjectSubclass). Overrides of ancestor class vfunc methods are also
+      installed. Overriding a vfunc method which has no trampoline is a compile error.
+      Params:
+        T = D class derived from Completion
+        klass = Class structure of the GType registered for T
+  */
+  static void _installVfuncs(T)(void* klass) nothrow
+  {
+    static assert(is(T : gid.gtksource4.completion.Completion), T.stringof ~ " is not derived from gid.gtksource4.completion.Completion");
+
+    gid.gobject2.object.ObjectWrap._installVfuncs!T(klass);
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncActivateProposal", true)[0]) == gid.gtksource4.completion.Completion))
+      _installVfunc(klass, "activate_proposal");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncHide", true)[0]) == gid.gtksource4.completion.Completion))
+      _installVfunc(klass, "hide");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMoveCursor", true)[0]) == gid.gtksource4.completion.Completion))
+      _installVfunc(klass, "move_cursor");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncMovePage", true)[0]) == gid.gtksource4.completion.Completion))
+      _installVfunc(klass, "move_page");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncPopulateContext", true)[0]) == gid.gtksource4.completion.Completion))
+      _installVfunc(klass, "populate_context");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncProposalActivated", true)[0]) == gid.gtksource4.completion.Completion))
+      _installVfunc(klass, "proposal_activated");
+
+    static if (!is(__traits(parent, __traits(getOverloads, T, "vfuncShow", true)[0]) == gid.gtksource4.completion.Completion))
+      _installVfunc(klass, "show");
+  }
+
+  private static void _installVfunc(void* klass, string vfunc) nothrow
+  {
+    auto _klass = cast(GtkSourceCompletionClass*)klass;
+
+    switch (vfunc)
+    {
+      case "activate_proposal":
+      {
+        static extern(C) void _vfuncActivateProposalTramp(GtkSourceCompletion* completion) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource4.completion.Completion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
+            if (_klass.activateProposal)
+              return (cast(typeof(&_vfuncActivateProposalTramp))_klass.activateProposal)(completion);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncActivateProposal();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource4.completion.Completion.vfuncActivateProposal");
+          }
+        }
+
+        _klass.activateProposal = cast(typeof(_klass.activateProposal))&_vfuncActivateProposalTramp;
+        break;
+      }
+      case "hide":
+      {
+        static extern(C) void _vfuncHideTramp(GtkSourceCompletion* completion) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource4.completion.Completion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
+            if (_klass.hide)
+              return (cast(typeof(&_vfuncHideTramp))_klass.hide)(completion);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncHide();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource4.completion.Completion.vfuncHide");
+          }
+        }
+
+        _klass.hide = cast(typeof(_klass.hide))&_vfuncHideTramp;
+        break;
+      }
+      case "move_cursor":
+      {
+        static extern(C) void _vfuncMoveCursorTramp(GtkSourceCompletion* completion, GtkScrollStep step, int num) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource4.completion.Completion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
+            if (_klass.moveCursor)
+              return (cast(typeof(&_vfuncMoveCursorTramp))_klass.moveCursor)(completion, step, num);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMoveCursor(step, num);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource4.completion.Completion.vfuncMoveCursor");
+          }
+        }
+
+        _klass.moveCursor = cast(typeof(_klass.moveCursor))&_vfuncMoveCursorTramp;
+        break;
+      }
+      case "move_page":
+      {
+        static extern(C) void _vfuncMovePageTramp(GtkSourceCompletion* completion, GtkScrollStep step, int num) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource4.completion.Completion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
+            if (_klass.movePage)
+              return (cast(typeof(&_vfuncMovePageTramp))_klass.movePage)(completion, step, num);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncMovePage(step, num);
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource4.completion.Completion.vfuncMovePage");
+          }
+        }
+
+        _klass.movePage = cast(typeof(_klass.movePage))&_vfuncMovePageTramp;
+        break;
+      }
+      case "populate_context":
+      {
+        static extern(C) void _vfuncPopulateContextTramp(GtkSourceCompletion* completion, GtkSourceCompletionContext* context) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource4.completion.Completion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
+            if (_klass.populateContext)
+              return (cast(typeof(&_vfuncPopulateContextTramp))_klass.populateContext)(completion, context);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncPopulateContext(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtksource4.completion_context.CompletionContext)(cast(void*)context, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource4.completion.Completion.vfuncPopulateContext");
+          }
+        }
+
+        _klass.populateContext = cast(typeof(_klass.populateContext))&_vfuncPopulateContextTramp;
+        break;
+      }
+      case "proposal_activated":
+      {
+        static extern(C) gboolean _vfuncProposalActivatedTramp(GtkSourceCompletion* completion, GtkSourceCompletionProvider* provider, GtkSourceCompletionProposal* proposal) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource4.completion.Completion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
+            if (_klass.proposalActivated)
+              return (cast(typeof(&_vfuncProposalActivatedTramp))_klass.proposalActivated)(completion, provider, proposal);
+            return typeof(return).init;
+          }
+
+          bool _dretval;
+
+          try
+          {
+            _dretval = _obj.vfuncProposalActivated(gid.gobject2.object.ObjectWrap._getDObject!(gid.gtksource4.completion_provider.CompletionProvider)(cast(void*)provider, No.Take), gid.gobject2.object.ObjectWrap._getDObject!(gid.gtksource4.completion_proposal.CompletionProposal)(cast(void*)proposal, No.Take));
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource4.completion.Completion.vfuncProposalActivated");
+          }
+          auto _retval = cast(gboolean)_dretval;
+
+          return _retval;
+        }
+
+        _klass.proposalActivated = cast(typeof(_klass.proposalActivated))&_vfuncProposalActivatedTramp;
+        break;
+      }
+      case "show":
+      {
+        static extern(C) void _vfuncShowTramp(GtkSourceCompletion* completion) nothrow
+        {
+          gidAttachThread();
+          auto _obj = cast(gid.gtksource4.completion.Completion)gid.gobject2.object.ObjectWrap._vfuncDObject(cast(void*)completion);
+          if (!_obj)
+          {
+            auto _klass = cast(GtkSourceCompletionClass*)gid.gobject2.object.ObjectWrap._vfuncClassOf(cast(void*)completion);
+            if (_klass.show)
+              return (cast(typeof(&_vfuncShowTramp))_klass.show)(completion);
+            return;
+          }
+
+          try
+          {
+            _obj.vfuncShow();
+          }
+          catch (Exception e)
+          {
+            gidInvokeCallbackExceptionHandler(e, "gid.gtksource4.completion.Completion.vfuncShow");
+          }
+        }
+
+        _klass.show = cast(typeof(_klass.show))&_vfuncShowTramp;
+        break;
+      }
+      default:
+      break;
+    }
   }
 }
 

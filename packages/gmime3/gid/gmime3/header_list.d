@@ -68,9 +68,16 @@ class HeaderList : gid.gobject2.object.ObjectWrap
   */
   this(gid.gmime3.parser_options.ParserOptions options = null) nothrow
   {
-    GMimeHeaderList* _cretval;
-    _cretval = g_mime_header_list_new(options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null);
-    this(_cretval, Yes.Take);
+    if (_usesDSubclassGType) // D subclass GType (see gobject.object.GObjectSubclass)
+    {
+      this(_newDSubclassGObject(_dSubclassGType, options !is null), Yes.Take);
+    }
+    else
+    {
+      GMimeHeaderList* _cretval;
+      _cretval = g_mime_header_list_new(options ? cast(GMimeParserOptions*)options._cPtr(No.Dup) : null);
+      this(_cretval, Yes.Take);
+    }
   }
 
   /**
