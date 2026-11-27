@@ -113,21 +113,33 @@ private static gProperty _gPropertyOf(alias member)() pure nothrow
   return gProperty.init;
 }
 
-// True if T declares a @gProperty field or function named mem
+// True if T declares a @gProperty field or function named mem, or D @property accessors exported by
+// GidExport.Properties
 private template _isDPropertyMember(T, string mem)
 {
   static if (mem == "this" || mem.length == 0)
     enum _isDPropertyMember = false;
+  else static if (_isDExplicitPropertyMember!(T, mem))
+  enum _isDPropertyMember = true;
+  else
+    enum _isDPropertyMember = imported!"gid.gobject2.dig_method"._dIsAutoPropertyMember!(T, mem);
+}
+
+// True if T declares a @gProperty field or function named mem
+private template _isDExplicitPropertyMember(T, string mem)
+{
+  static if (mem == "this" || mem.length == 0)
+    enum _isDExplicitPropertyMember = false;
   else static if (__traits(compiles, __traits(getOverloads, T, mem, true))
   && __traits(getOverloads, T, mem, true).length > 0)
-  enum _isDPropertyMember = _dOverloadHasPropertyUDA!(T, __traits(getOverloads, T, mem, true));
+  enum _isDExplicitPropertyMember = _dOverloadHasPropertyUDA!(T, __traits(getOverloads, T, mem, true));
   else static if (__traits(compiles, __traits(getMember, T, mem))
   && __traits(compiles, __traits(parent, __traits(getMember, T, mem)))
   && __traits(isSame, __traits(parent, __traits(getMember, T, mem)), T)
   && _hasGPropertyUDA!(__traits(getMember, T, mem)))
-  enum _isDPropertyMember = true;
+  enum _isDExplicitPropertyMember = true;
   else
-    enum _isDPropertyMember = false;
+    enum _isDExplicitPropertyMember = false;
 }
 
 // Combined @gProperty of a member (first annotated overload or the field)
