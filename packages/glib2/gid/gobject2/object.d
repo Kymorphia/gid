@@ -645,7 +645,7 @@ class ObjectWrap : GidWrap
       }
     }
 
-    static if (is(T == interface) && is(T._gidDInterfaceOf == T)) // D-defined interface (see GObjectInterface)
+    static if (is(T == interface) && is(T._gidDInterfaceOf == T)) // D-defined interface (see GInterfaceDef)
     {
       return cast(T)new imported!"gid.gobject2.dig_iface"._DIfaceProxy!T(cptr, take);
     }
