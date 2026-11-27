@@ -75,7 +75,7 @@ template _isDVirtualMember(T, string mem)
 }
 
 // The @gVirtual method
-private alias _dVirtualFn(T, string mem) = _dFirstVirtualFn!(__traits(getOverloads, T, mem, true));
+package alias _dVirtualFn(T, string mem) = _dFirstVirtualFn!(__traits(getOverloads, T, mem, true));
 
 /**
 * Argument types of a @gVirtual method

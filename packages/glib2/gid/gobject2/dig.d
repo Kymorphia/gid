@@ -15,6 +15,7 @@ public import gid.gobject2.dig_signal;
 public import gid.gobject2.dig_iface;
 public import gid.gobject2.dig_method;
 public import gid.gobject2.dig_vfunc;
+public import gid.gobject2.dig_gir;
 
 import core.atomic;
 import gid.glib2.c.functions;
@@ -339,17 +340,18 @@ mixin template GObjectExport(Options...)
 mixin template _GObjectExportNames(string ns, string name, string mixinName)
 {
   static if (ns.length > 0)
-    private enum string _gidExportNs = ns;
+    enum string _gidExportNs = ns; /// Namespace of the exported type
   else static if (__traits(compiles, _gidNamespace))
-  private enum string _gidExportNs = _gidNamespace;
+  enum string _gidExportNs = _gidNamespace; /// ditto
   else
-    private enum string _gidExportNs = null;
+    enum string _gidExportNs = null; /// ditto
 
   static assert(_gidExportNs.length > 0, mixinName ~ ": no namespace for " ~ typeof(this).stringof ~ ", declare it"
   ~ " at module scope with `mixin GObjectNamespace!(\"Mylib\");` or pass it: `mixin " ~ mixinName
   ~ "!(\"Mylib\");`");
 
-  private enum string _gidExportName = name.length > 0 ? name : __traits(identifier, typeof(this));
+  /// Type name without the namespace
+  enum string _gidExportName = name.length > 0 ? name : __traits(identifier, typeof(this));
 
   /// The exported type (not inherited: a subclass which isn't exported has the type of its parent here)
   alias _gidExportedAs = typeof(this);

@@ -263,7 +263,7 @@ struct _DExportMethod
 }
 
 // True if a symbol has the attribute U (`@U` or `@U(...)`)
-private enum bool _dHasUda(alias sym, U) = () {
+package enum bool _dHasUda(alias sym, U) = () {
 bool found;
 static foreach (a; __traits(getAttributes, sym))
 static if (is(a == U) || is(typeof(a) == U))
@@ -272,7 +272,7 @@ return found;
 }();
 
 // Value of the attribute U of a symbol (U.init for `@U` or no attribute)
-private enum U _dUdaValue(alias sym, U) = () {
+package enum U _dUdaValue(alias sym, U) = () {
 U v;
 static foreach (a; __traits(getAttributes, sym))
 static if (is(typeof(a) == U))
@@ -352,7 +352,7 @@ template _dIsAutoMethod(T, string mem, alias fn)
 }
 
 // Overload idx of the member mem of T
-private alias _dExportOverload(T, string mem, size_t idx) = AliasSeq!(__traits(getOverloads, T, mem))[idx];
+package alias _dExportOverload(T, string mem, size_t idx) = AliasSeq!(__traits(getOverloads, T, mem))[idx];
 
 /**
 * True if fn has @gMethod or @gConstructor
@@ -611,7 +611,7 @@ private template _dExportName(T, string mem, alias fn)
 }
 
 // Parameter types of fn, without qualifiers
-private template _dExportParams(alias fn)
+package template _dExportParams(alias fn)
 {
   static if (is(typeof(fn) P == __parameters))
     alias _dExportParams = staticMap!(Unqual, P);
@@ -624,7 +624,7 @@ private template _dExportParamUdas(alias fn, size_t i)
     alias _dExportParamUdas = __traits(getAttributes, P[i .. i + 1]);
 }
 
-private enum bool _dParamHas(alias fn, size_t i, U) = () {
+package enum bool _dParamHas(alias fn, size_t i, U) = () {
 bool found;
 static foreach (a; _dExportParamUdas!(fn, i))
 static if (is(a == U) || is(typeof(a) == U))
@@ -632,7 +632,7 @@ static if (is(a == U) || is(typeof(a) == U))
 return found;
 }();
 
-private template _dParamTransfer(alias fn, size_t i)
+package template _dParamTransfer(alias fn, size_t i)
 {
   enum GidOwnership _dParamTransfer = () {
   GidOwnership o = GidOwnership.Full;
@@ -644,14 +644,14 @@ private template _dParamTransfer(alias fn, size_t i)
 }
 
 // Direction of parameter i of fn: 0 in, 1 out, 2 ref (inout)
-private template _dParamDir(alias fn, size_t i)
+package template _dParamDir(alias fn, size_t i)
 {
   enum stc = ParameterStorageClassTuple!fn[i];
   enum int _dParamDir = (stc & ParameterStorageClass.out_) ? 1 : (stc & ParameterStorageClass.ref_) ? 2 : 0;
 }
 
 // Return type of an exported method (the class for a constructor)
-private template _dExportReturn(T, alias fn)
+package template _dExportReturn(T, alias fn)
 {
   static if (__traits(identifier, fn) == "__ctor")
     alias _dExportReturn = T;
@@ -659,8 +659,8 @@ private template _dExportReturn(T, alias fn)
     alias _dExportReturn = Unqual!(ReturnType!fn);
 }
 
-private enum bool _dIsBindingType(PT) = __traits(compiles, imported!"gid.gobject2.dig"._dGirType!PT.name);
-private enum bool _dIsExportedType(PT) = __traits(compiles, PT._gidExportedAs) && is(PT._gidExportedAs == PT);
+package enum bool _dIsBindingType(PT) = __traits(compiles, imported!"gid.gobject2.dig"._dGirType!PT.name);
+package enum bool _dIsExportedType(PT) = __traits(compiles, PT._gidExportedAs) && is(PT._gidExportedAs == PT);
 
 private enum bool _dIsScalar(PT) = is(PT == bool) || (isIntegral!PT && PT.sizeof <= 8) || is(PT == float)
 || is(PT == double);
